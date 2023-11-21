@@ -12,10 +12,11 @@ return [
     'clone'  					=> 'Копиране на актив',
     'deployable'  				=> 'Може да бъде предоставен',
     'deleted'  					=> 'Този актив беше изтрит.',
+    'delete_confirm'            => 'Сигурни ли сте, че желаете изтриване на актива?',
     'edit'  					=> 'Редакция на актив',
     'model_deleted'  			=> 'Този Модел на актив беше изтрит. Вие трябва да възстановите този модел преди да можете да възстановите актива.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Модела на този актив е невалиден.',
+    'model_invalid_fix'         => 'Актива трябва да бъде редактиран преди да можете да го заведете.',
     'requestable'               => 'Може да бъде изискван',
     'requested'				    => 'Изискан',
     'not_requestable'           => 'Не може да бъде изискан',
@@ -23,25 +24,27 @@ return [
     'restore'  					=> 'Възстановяване на актив',
     'pending'  					=> 'Предстоящ',
     'undeployable'  			=> 'Не може да бъде предоставян',
+    'undeployable_tooltip'  	=> 'Този актив е забранен за изписване и не може да се изпише в момента.',
     'view'  					=> 'Преглед на актив',
     'csv_error' => 'Имате грешка във вашият CSV файл:',
     'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+<p>
+    Качете CSV файл съдържащ историята на активите. Активите и потребителите ТРЯБВА да съществуват в системата, иначе ще бъдат презкочени. Съвпадението на активите се прави на база тяхното име. Съвпадението на потребителите се прави на база тяхното потребителско име и критерия избран по-долу. Ако не изберете критерии по-долу съвпадението на потребителите към потребителското име ще бъде направено на база конфигурацията в Админ &gt; Глобални настройки.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Полетата включени в CSV трябва да съвпадат с: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Всякакви допълнителни полета ще бъдат игнорирани. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Ако датата на вписване е празна или в бъдещето тя ще изпише актива от потребителя. Ако не се включи колона с дата на вписване, тя ще бъде създадена с днешна дата.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
+    'csv_import_match_f-l' => 'Опитайте се да съпоставите потребителите по формат име.фамилия (Иван.Иванов)',
+    'csv_import_match_initial_last' => 'Опитайте се да съпоставите потребителите по формат първа буква фамилия (ИИванов)',
+    'csv_import_match_first' => 'Опитайте се да съпоставите потребителите по малко име (Иван)',
+    'csv_import_match_email' => 'Опитайте се да съпоставите потребителите по е-майл, като потребителско име',
+    'csv_import_match_username' => 'Опитайте се да съпоставите потребителите, по потребителско име',
     'error_messages' => 'Съобщение за грешка:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'success_messages' => 'Успешно:',
+    'alert_details' => 'Детайли.',
+    'custom_export' => 'Персонализиран експорт',
+    'mfg_warranty_lookup' => ':manufacturer статус гаранция',
+    'user_department' => 'Отдел',
 ];

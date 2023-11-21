@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'O Artigo não foi restaurado, por favor tente novamente',
         'success' 		=> 'Artigo restaurado com sucesso.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Artigo restaurado com sucesso.',
+        'nothing_updated'   => 'Nenhum artigo foi selecionado, assim nada restaurado.', 
     ],
 
     'audit' => [
@@ -51,8 +51,9 @@ return [
         'success'               => 'O seu ficheiro foi importado',
         'file_delete_success'   => 'Ficheiro eliminado com sucesso',
         'file_delete_error'      => 'Não foi possível eliminar o ficheiro',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'The file selected is missing',
+        'header_row_has_malformed_characters' => 'Um ou mais atributos na linha do cabeçalho contém caracteres UTF-8 mal formados',
+        'content_row_has_malformed_characters' => 'Um ou mais atributos na primeira linha de conteúdo contém caracteres UTF-8 mal formados',
     ],
 
 

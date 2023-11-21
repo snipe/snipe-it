@@ -15,20 +15,20 @@ return [
 
     'more_info_title' => 'Подробнее',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Установка этого флажка приведет к изменению записи об активе с учетом нового местоположения. Если флажок не установлен, то местоположение будет просто отмечено в журнале аудита.<br><br>Обратите внимание, что если этот актив выписан, то он не изменит местоположение человека, актива или места, на которое он выписан.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Активы - это предметы, отслеживаемые по серийному номеру или тегу актива. Они обычно являются более ценными предметами для определения конкретного предмета.',
 
     'categories' => 'Категории помогут вам распределить ваше оборудование по группам. Такими категориями могут быть: &quot;Ноутбуки&quot;, &quot;Мобильные телефоны&quot;, &quot;Планшеты&quot; и так далее, но вы также можете использовать их по своему усмотрению.',
 
     'accessories' => 'Аксессуары — это периферийное оборудование, которое выдаётся пользователям, но не имеет серийного номера (или вам не требуется его учитывать индивидуально). Например, компьютерная мышь или клавиатура.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Компании могут использоваться как обычные индентификаторы, или, например, для ограничения видимости ресурсов, пользователей, и т. д., при условии, что данная функция включена в настройках.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Компоненты - это части активов, например HDD, RAM и прочее.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Расходные материалы это все приобретённые товары, которые израсходуются в процессе использования. Например, чернила для принтера или копировальная бумага.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Вы можете настроить амортизацию активов для амортизации активов по правилу линейной амортизации.',
 
 ];

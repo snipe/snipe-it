@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este activo ha sido borrado.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'El modelo de este activo ha sido borrado. Debe restaurar el modelo antes de restaurar o crear el activo.',
     'model_invalid'             => 'El modelo de este activo no es válido.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Puede Solicitarse',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'No solicitable',
-    'requestable_status_warning' => 'No cambie el esdo de solicitable',
+    'requestable_status_warning' => 'No cambiar el estado solicitable',
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Equipos Pendiente',
     'undeployable'  			=> 'No desplegable',
+    'undeployable_tooltip'  	=> 'Este activo tiene una etiqueta de estado que no es desplegable y no puede ser revisado en este momento.',
     'view'  					=> 'Ver Equipo',
     'csv_error' => 'Tiene un error en su archivo CSV:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Por favor vea abajo para más detalles.',
     'custom_export' => 'Exportación personalizada',
     'mfg_warranty_lookup' => 'Búsqueda del estado de Garantía para :manufacturer',
+    'user_department' => 'User Department',
 ];

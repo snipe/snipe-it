@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Clona Categorie',
     'create'  							=> 'Categorie noua',
     'edit'                              => 'Editare categorie',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Categoria EULA',
     'eula_text_help'					=> 'Acest câmp vă permite să personalizați acordul dvs. de licență pentru anumite tipuri de active. Dacă aveți doar o singură licență EULA pentru toate activele dvs., puteți bifa caseta de mai jos pentru a utiliza setarea implicită principală.',
     'name'                              => 'Numele categoriei',

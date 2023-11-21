@@ -328,7 +328,7 @@
                                             <i class="fas fa-users" aria-hidden="true"></i>
                                         @endif
 
-                                        <span class="hidden-xs">{{ Auth::user()->first_name }} <strong
+                                        <span class="hidden-xs">{{ Auth::user()->getFullNameAttribute() }} <strong
                                                     class="caret"></strong></span>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -849,9 +849,15 @@
                 </section>
 
             </div><!-- /.content-wrapper -->
-            <footer class="main-footer hidden-print">
+            <footer class="main-footer hidden-print" style="display:grid;flex-direction:column;">
 
-                <div class="pull-right hidden-xs">
+                <div class="1hidden-xs pull-left">
+                    <div class="pull-left" >
+                        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
+                        made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
+                                class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+                    </div>
+                    <div class="pull-right">
                     @if ($snipeSettings->version_footer!='off')
                         @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
                             &nbsp; <strong>Version</strong> {{ config('version.app_version') }} -
@@ -874,23 +880,15 @@
                            href="{{  $snipeSettings->privacy_policy_link }}"
                            target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
                     @endif
-
-
-                </div>
-                @if ($snipeSettings->footer_text!='')
-                    <div class="pull-right">
-                        {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
                     </div>
-                @endif
-
-
-                <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
-                made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
-                        class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+                    <br>
+                    @if ($snipeSettings->footer_text!='')
+                        <div class="pull-left">
+                            {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
+                        </div>
+                    @endif
+                </div>
             </footer>
-
-
-
         </div><!-- ./wrapper -->
 
 
@@ -947,6 +945,7 @@
 
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -960,6 +959,11 @@
 
         <script nonce="{{ csrf_token() }}">
 
+            var clipboard = new ClipboardJS('.js-copy-link');
+
+            clipboard.on('success', function(e) {
+                $('.js-copy-link').tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
+            });
 
             // ignore: 'input[type=hidden]' is required here to validate the select2 lists
             $.validate({
@@ -973,7 +977,12 @@
 
             $(function () {
 
-                $('[data-tooltip="true"]').tooltip();
+                // Invoke Bootstrap 3's tooltip
+                $('[data-tooltip="true"]').tooltip({
+                    container: 'body',
+                    animation: true,
+                });
+                
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');
@@ -1016,7 +1025,6 @@
         @include('partials.bpay')
 
         @livewireScripts
-
 
         </body>
 </html>

@@ -280,16 +280,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 Api\ConsumablesController::class, 
                 'getDataView'
             ]
-        )->name('api.consumables.showUsers');
+        )->name('api.consumables.show.users');
 
-
-        // This is LEGACY endpoint URL and should be removed in the next major release
-        Route::get('view/{id}/users',
-              [
-                  Api\ConsumablesController::class,
-                  'getDataView'
-              ]
-        )->name('api.consumables.showUsers');
 
         Route::post('{consumable}/checkout',
             [
@@ -606,6 +598,16 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     ); // end imports API routes
 
 
+        /**
+         * Labels API routes
+         */
+        Route::group(['prefix' => 'labels'], function() {
+            Route::get('{name}', [ Api\LabelsController::class, 'show'])
+                ->where('name', '.*')
+                ->name('api.labels.show');
+            Route::get('', [ Api\LabelsController::class, 'index'])
+                ->name('api.labels.index');
+        });
 
         /**
          * Licenses API routes
@@ -875,6 +877,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'checkIfDeployable'
                 ]
             )->name('api.statuslabels.deployable');
+
+            Route::get('selectlist',
+                [
+                    Api\StatuslabelsController::class,
+                    'selectlist'
+                ]
+            )->name('api.statuslabels.selectlist');
 
         }); 
     

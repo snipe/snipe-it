@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Kategoriyi Kopyala',
     'create'  							=> 'Kategori Oluştur',
     'edit'                              => 'Kategoriyi Düzenle',
+    'email_will_be_sent_due_to_global_eula' => 'Global EULA kullanıldığı için kullanıcıya bir e-posta gönderilecektir.',
+    'email_will_be_sent_due_to_category_eula' => 'Bu kategori için bir EULA ayarlandığından kullanıcıya bir e-posta gönderilecektir.',
     'eula_text'							=> 'Kategori Sözleşmeleri',
     'eula_text_help'					=> 'Bu alan özel tipteki demirbaşlarınız için Sözleşmesi\'ni özelleştirmeniz içindir. Eğer tüm demirbaşlarınız için sadece tek sözleşmeniz var ise yukarıdaki kutucuğu işaretlereyerek varsayılan yapabilirsiniz.',
     'name'                              => 'Kategori Adı',

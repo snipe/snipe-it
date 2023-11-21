@@ -63,7 +63,7 @@
                             @if (Helper::isDemoMode())
 								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:100%', 'disabled')) }}
                             @else
-                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:90%')) }}
+                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:100%')) }}
                             @endif
 
                             </div>
@@ -79,7 +79,7 @@
                                 {{ Form::label('webhook_endpoint', trans('admin/settings/general.webhook_endpoint',['app' => $webhook_name ])) }}
                             </div>
                             <div class="col-md-9 required">
-                                    <input type="text" wire:model="webhook_endpoint" class="form-control" placeholder="{{$webhook_placeholder}}" value="{{old('webhook_endpoint', $webhook_endpoint)}}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                    <input type="text" wire:model.lazy="webhook_endpoint" class="form-control" placeholder="{{$webhook_placeholder}}" value="{{old('webhook_endpoint', $webhook_endpoint)}}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
                                 {!! $errors->first('webhook_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                 {{ Form::label('webhook_channel', trans('admin/settings/general.webhook_channel',['app' => $webhook_name ])) }}
                             </div>
                             <div class="col-md-9 required">
-                                    <input type="text" wire:model="webhook_channel" class="form-control" placeholder="#IT-Ops" value="{{ old('webhook_channel', $webhook_channel) }}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                    <input type="text" wire:model.lazy="webhook_channel" class="form-control" placeholder="#IT-Ops" value="{{ old('webhook_channel', $webhook_channel) }}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
 
                                 {!! $errors->first('webhook_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -111,7 +111,7 @@
                                 {{ Form::label('webhook_botname', trans('admin/settings/general.webhook_botname',['app' => $webhook_name ])) }}
                             </div>
                             <div class="col-md-9">
-                                    <input type="text" wire:model="webhook_botname" class='form-control' placeholder="Snipe-Bot" {{ old('webhook_botname', $webhook_botname)}}{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                    <input type="text" wire:model.lazy="webhook_botname" class='form-control' placeholder="Snipe-Bot" {{ old('webhook_botname', $webhook_botname)}}{{ Helper::isDemoMode() ? ' disabled' : ''}}>
                                 {!! $errors->first('webhook_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div><!--col-md-10-->
                         </div>
@@ -121,7 +121,6 @@
                         @endif
 
                         <!--Webhook Integration Test-->
-                        @if($webhook_selected == 'slack')
                             @if($webhook_endpoint != null && $webhook_channel != null)
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-9">
@@ -138,7 +137,6 @@
                                     </div>
                                 </div>
                             @endif
-                        @endif
                     </div><!-- /.col-md-12 -->
                </div><!-- /.box-body -->
 

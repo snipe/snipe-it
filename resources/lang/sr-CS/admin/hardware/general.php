@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Kloniraj imovinu',
     'deployable'  				=> 'Može se razmestiti',
     'deleted'  					=> 'Imovina je obrisana.',
+    'delete_confirm'            => 'Da li ste sigurni da želite da obrišete ovaj resurs?',
     'edit'  					=> 'Uređivanje imovine',
     'model_deleted'  			=> 'Ovaj Model osnovnog sredstva je izbrisan. Morate da vratite model da bi ste mogli da vratite sredstvo.',
     'model_invalid'             => 'Model ove imovine je neispravan.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Može da se potražuje',
     'requested'				    => 'Zatraženo',
     'not_requestable'           => 'Ne može da se potražuje',
-    'requestable_status_warning' => 'Ne manjajte status potražuje se',
+    'requestable_status_warning' => 'Ne manjajte status mogućnosti potraživanja',
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
+    'undeployable_tooltip'  	=> 'Ova imovina ima oznaku statusa koja nije zaduživa i nije je moguće zadužiti u ovom trenutku.',
     'view'  					=> 'Prikaz imovine',
     'csv_error' => 'Postoji greška u tvojoj CSV datoteci:',
     'import_text' => '
@@ -37,4 +39,5 @@ Otpremite CSV koji sadrži istoriju osnovnog sredstva. Sredstva i korisnici MORA
     'alert_details' => 'Za detalje pogledajte ispod.',
     'custom_export' => 'Uobičajen izvoz',
     'mfg_warranty_lookup' => 'Pretraga statusa :manufacturer garancije',
+    'user_department' => 'Sektor korisnika',
 ];

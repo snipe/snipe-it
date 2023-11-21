@@ -4,7 +4,7 @@ return [
 
     'select_language' => '选择一种语言',
     'languages' => [
-        'en'=> 'English, US',
+        'en'=> '中文',
         'en-GB'=> 'English, UK',
         'af'=> 'Afrikaans',
         'ar'=> 'Arabic',
@@ -30,6 +30,7 @@ return [
         'ga-IE'=> 'Irish',
         'it'=> 'Italian',
         'ja'=> 'Japanese',
+        'km' => 'Khmer',
         'ko'=> 'Korean',
         'lv'=>'Latvian',
         'lt'=> 'Lithuanian',

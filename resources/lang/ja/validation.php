@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute は少なくとも :min 以上にして下さい。',
     ],
     'starts_with'          => ':attribute は、いずれかの値で始まる必要があります: :values.',
+    'ends_with'            => ':attribute は、以下のいずれかの :values で終了する必要があります。',
+
     'not_in'               => '選択された :attribute は不正です。',
     'numeric'              => ':attribute は数字にして下さい。',
     'present'              => ':attribute フィールドは必須です。',

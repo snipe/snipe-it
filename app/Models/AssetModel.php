@@ -29,6 +29,7 @@ class AssetModel extends SnipeModel
     protected $rules = [
         'name'              => 'required|min:1|max:255',
         'model_number'      => 'max:255|nullable',
+        'min_amt'           => 'integer|min:0|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'integer|exists:manufacturers,id|nullable',
         'eol'               => 'integer:min:0|max:240|nullable',
@@ -65,6 +66,7 @@ class AssetModel extends SnipeModel
         'fieldset_id',
         'image',
         'manufacturer_id',
+        'min_amt',
         'model_number',
         'name',
         'notes',
@@ -149,6 +151,11 @@ class AssetModel extends SnipeModel
     public function fieldset()
     {
         return $this->belongsTo(\App\Models\CustomFieldset::class, 'fieldset_id');
+    }
+   
+    public function customFields()
+    {
+       return $this->fieldset()->first()->fields(); 
     }
 
     /**
@@ -283,5 +290,10 @@ class AssetModel extends SnipeModel
     public function scopeOrderCategory($query, $order)
     {
         return $query->leftJoin('categories', 'models.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+    }
+
+    public function scopeOrderFieldset($query, $order)
+    {
+        return $query->leftJoin('custom_fieldsets', 'models.fieldset_id', '=', 'custom_fieldsets.id')->orderBy('custom_fieldsets.name', $order);
     }
 }

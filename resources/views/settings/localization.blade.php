@@ -38,40 +38,56 @@
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <div class="col-md-12">
 
                         <!-- Language -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-12">
                                 {{ Form::label('site_name', trans('admin/settings/general.default_language')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-5 col-xs-12">
                                 {!! Form::locales('locale', Request::old('locale', $setting->locale), 'select2') !!}
 
                                 {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
+                        <!-- name display format -->
+                        <div class="form-group {{ $errors->has('name_display_format') ? 'error' : '' }}">
+                            <div class="col-md-3 col-xs-12">
+                                {{ Form::label('name_display_format', trans('general.name_display_format')) }}
+                            </div>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::name_display_format('name_display_format', Request::old('name_display_format', $setting->name_display_format), 'select2') !!}
+
+                                {!! $errors->first('name_display_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
+
+
+
                         <!-- Date format -->
                         <div class="form-group {{ $errors->has('time_display_format') ? 'error' : '' }}">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-12">
                                 {{ Form::label('time_display_format', trans('general.time_and_date_display')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-5 col-xs-12">
                                 {!! Form::date_display_format('date_display_format', Request::old('date_display_format', $setting->date_display_format), 'select2') !!}
-
-                                {!! Form::time_display_format('time_display_format', Request::old('time_display_format', $setting->time_display_format), 'select2') !!}
-
-                                {!! $errors->first('time_display_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
+                            <div class="col-md-3 col-xs-12">
+                                {!! Form::time_display_format('time_display_format', Request::old('time_display_format', $setting->time_display_format), 'select2') !!}
+                            </div>
+                            
+                            {!! $errors->first('time_display_format', '<div class="col-md-9 col-md-offset-3"><span class="alert-msg" aria-hidden="true">:message</span> </div>') !!}
+
                         </div>
 
                         <!-- Currency -->
                         <div class="form-group {{ $errors->has('default_currency') ? 'error' : '' }}">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-12">
                                 {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-xs-12">
                                 {{ Form::text('default_currency', old('default_currency', $setting->default_currency), array('class' => 'form-control select2-container','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px; display: inline-block; ')) }}
 
                                 {!! Form::digit_separator('digit_separator', old('digit_separator', $setting->digit_separator), 'select2') !!}
@@ -79,9 +95,6 @@
                                 {!! $errors->first('default_currency', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
-
-
 
 
                     </div>

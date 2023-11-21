@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Tuhinga Kāwai',
     'create'  							=> 'Waihanga Hanga',
     'edit'                              => 'Whakatikahia te kāwai',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'EULA Utu',
     'eula_text_help'					=> 'Mā tēnei mara e āhei ki a koe te whakarite i ō EULA mō ētahi momo rawa. Mena kei a koe tetahi EULA mo o rawa katoa, ka taea e koe te tirotiro i te pouaka i raro nei hei whakamahi i te taunoa tuatahi.',
     'name'                              => 'Ingoa Kāwai',

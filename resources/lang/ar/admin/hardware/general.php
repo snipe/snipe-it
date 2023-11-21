@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'استنساخ الأصل',
     'deployable'  				=> 'قابل للتوزيع',
     'deleted'  					=> 'تم حذف هذا الأصل.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'تعديل الأصل',
     'model_deleted'  			=> 'تم حذف موديل الأصول هذا. يجب استعادة الموديل قبل أن تتمكن من استعادة الأصل.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'قابل للطلب',
     'requested'				    => 'تم الطلب',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'استعادة الأصل',
     'pending'  					=> 'قيد الانتظار',
     'undeployable'  			=> 'غير قابل للتوزيع',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'عرض الأصل',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

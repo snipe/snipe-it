@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponente konnte nicht herausgegeben werden. Bitte versuchen Sie es erneut',
         'success' 		=> 'Komponente wurde erfolgreich herausgegeben.',
-        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuchen Sie es noch einmal.'
+        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuchen Sie es noch einmal.',
+        'unavailable'      => 'Nicht genügend verbleibende Komponenten: :remaining verbleibend, :requested angefordert ',
     ),
 
     'checkin' => array(

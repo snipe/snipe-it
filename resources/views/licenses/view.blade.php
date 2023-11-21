@@ -125,7 +125,10 @@
                     </div>
                     <div class="col-md-9">
                       @can('viewKeys', $license)
-                        {!! nl2br(e($license->serial)) !!}
+                        <span class="js-copy">{!! nl2br(e($license->serial)) !!}</span>
+                          <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                            <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                          </i>
                       @else
                         ------------
                       @endcan
@@ -357,7 +360,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {!! nl2br(e($license->notes)) !!}
+                      {!! nl2br(Helper::parseEscapedMarkedownInline($license->notes)) !!}
                     </div>
                   </div>
                   @endif
@@ -474,10 +477,15 @@
                 </td>
                 <td>
                   @if ($file->filename)
-                    <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
+                    <a href="{{ route('show.licensefile', [$license->id, $file->id]) }}" class="btn btn-sm btn-default">
                       <i class="fas fa-download" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('general.download') }}</span>
                     </a>
+
+                    <a href="{{ route('show.licensefile', [$license->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </a>
+
                   @endif
                 </td>
                 <td>{{ $file->created_at }}</td>
@@ -577,17 +585,23 @@
     @endcan
 
     @can('checkin', $license)
-
-      @if (($license->seats - $license->availCount()->count()) > 0 )
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
-          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
-        </a>
-      @else
+  
+      @if (($license->seats - $license->availCount()->count()) <= 0 )
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
             <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
              {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
             </a>
-          </span>
+        </span>
+      @elseif (! $license->reassignable)
+        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip_reassignable') }}">
+            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+             {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+            </a>
+        </span>
+      @else
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+        </a>
       @endif
     @endcan
 

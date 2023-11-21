@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Categorie dupliceren',
     'create'  							=> 'Categorie aanmaken',
     'edit'                              => 'Categorie bewerken',
+    'email_will_be_sent_due_to_global_eula' => 'Er wordt een e-mail naar de gebruiker verzonden omdat er gebruik word gemaakt van een overeenkomst voor eindgebruikers.',
+    'email_will_be_sent_due_to_category_eula' => 'Er wordt een e-mail verzonden naar de gebruiker omdat er een gebruikersovereenkomst is ingesteld voor deze categorie.',
     'eula_text'							=> 'Categorie-gebruikersovereenkomst',
     'eula_text_help'					=> 'Dit veld geeft je de mogelijkheid om je gebruikersovereenkomsten aan te passen voor specifieke activa. Als je maar één gebruikersovereenkomst hebt voor al je activa, vink dan het vakje hieronder aan om de primaire als standaard in te stellen.',
     'name'                              => 'Categorienaam',

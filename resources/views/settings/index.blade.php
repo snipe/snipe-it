@@ -54,7 +54,7 @@
     }
   </style>
 
-
+  <div class="row">
     <!-- search filter list -->
     <div class="list clearfix">
 
@@ -239,6 +239,21 @@
         <div class="box box-default">
           <div class="box-body text-center">
             <h5>
+              <a href="{{ route('settings.google.index') }}" class="settings_button">
+                <i class="fa-brands fa-google fa-4x" aria-hidden="true"></i>
+                <br><br>
+                <span class="name">Google</span>
+              </a>
+            </h5>
+            <p class="help-block">{{ trans('admin/settings/general.google_login') }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+        <div class="box box-default">
+          <div class="box-body text-center">
+            <h5>
               <a href="{{ route('settings.saml.index') }}" class="settings_button">
                 <i class="fas fa-sign-in-alt fa-4x" aria-hidden="true"></i>
                 <br><br>
@@ -331,7 +346,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
 
 
@@ -343,19 +358,19 @@
         <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
-        <div class="container row-striped col-md-11">
+        <div class="container row row-striped" style="width:97%">
 
           <!-- row -->
           <div class="row">
             <div class="col-md-2">
-              <strong>{{ trans('admin/settings/general.snipe_version') }}</strong>
+              <strong>{{ trans('admin/settings/general.snipe_version') }}:</strong>
             </div>
             <div class="col-md-4">
             {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
             </div>
 
             <div class="col-md-2">
-              <strong>{{ trans('admin/settings/general.license') }}</strong>
+              <strong>{{ trans('admin/settings/general.license') }}:</strong>
             </div>
           <div class="col-md-4">
               <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3</a>
@@ -366,19 +381,68 @@
           <!-- row -->
           <div class="row">
             <div class="col-md-2">
-              <strong>{{ trans('admin/settings/general.php') }}</strong>
+              <strong>{{ trans('admin/settings/general.php') }}:</strong>
             </div>
             <div class="col-md-4">
               {{ phpversion() }}
             </div>
 
             <div class="col-md-2">
-              <strong>{{ trans('admin/settings/general.laravel') }}</strong>
+              <strong>{{ trans('admin/settings/general.laravel') }}:</strong>
             </div>
             <div class="col-md-4">
               {{ $snipeSettings->lar_ver() }}
             </div>
+          </div>
 
+          <!-- row -->
+          <div class="row">
+              <div class="col-md-2">
+                <strong>{{ trans('admin/settings/general.timezone') }}:</strong>
+              </div>
+              <div class="col-md-4">
+                {{ config('app.timezone') }}
+              </div>
+
+              <div class="col-md-2">
+                <strong>{{ trans('admin/settings/general.database_driver') }}:</strong>
+              </div>
+              <div class="col-md-4">
+                {{ config('database.default') }}
+              </div>
+          </div>
+
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.mail_from') }}:</strong>
+            </div>
+            <div class="col-md-4">
+              {{ config('mail.from.name') }}
+              <code>&lt;{{ config('mail.from.address') }}&gt;</code>
+            </div>
+
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.mail_reply_to') }}:</strong>
+            </div>
+            <div class="col-md-4">
+              {{ config('mail.reply_to.name') }}
+              <code>&lt;{{ config('mail.reply_to.address') }}&gt;</code>
+            </div>
+          </div>
+
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.bs_table_storage') }}:</strong>
+            </div>
+            <div class="col-md-10">
+              {{ config('session.bs_table_storage') }}
+            </div>
+
+          </div>
+
+        </div>
           </div>
           <!--/ row -->
         </div>
@@ -386,6 +450,9 @@
     </div> <!--/box-default-->
   </div><!--/col-md-8-->
 </div><!--/row-->
+
+
+
 
   @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">

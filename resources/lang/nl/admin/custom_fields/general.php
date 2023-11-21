@@ -27,9 +27,9 @@ return [
     'used_by_models'   		    => 'Gebruikt door modellen',
     'order'   		            => 'Bestelling',
     'create_fieldset'         => 'Nieuwe veldset',
-    'update_fieldset'         => 'Update Fieldset',
-    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
-    'fieldset_updated'         => 'Fieldset updated',
+    'update_fieldset'         => 'Veldverzameling bijwerken',
+    'fieldset_does_not_exist'   => 'Veldverzameling :id bestaat niet',
+    'fieldset_updated'         => 'Veldverzameling bijgewerkt',
     'create_fieldset_title' => 'Maak een nieuwe veldset aan',
     'create_field'            => 'Nieuw aangepast veld',
     'create_field_title' => 'Maak een nieuw aangepast veld',
@@ -49,4 +49,9 @@ return [
     'unique' => 'Uniek',
     'display_in_user_view' => 'Laat de uitgecheckte gebruiker deze waarden zien in de weergave van toegewezen bezittingen pagina',
     'display_in_user_view_table' => 'Zichtbaar voor gebruiker',
+    'auto_add_to_fieldsets' => 'Automatisch toevoegen aan elke nieuwe veldverzameling',
+    'add_to_preexisting_fieldsets' => 'Aan elk bestaande veldverzameling toevoegen',
+    'show_in_listview' => 'Standaard weergeven in lijstweergaven. Geautoriseerde gebruikers kunnen nog steeds weergeven/verbergen via de kolom instellingen.',
+    'show_in_listview_short' => 'Toon in lijsten',
+
 ];

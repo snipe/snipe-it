@@ -49,4 +49,9 @@ return [
     'unique' => '一意',
     'display_in_user_view' => 'チェックアウトされたユーザーが割り当てられたアセットを表示ページでこれらの値を表示できるようにします',
     'display_in_user_view_table' => 'ユーザーに表示',
+    'auto_add_to_fieldsets' => '新しいフィールドセットに自動的に追加する',
+    'add_to_preexisting_fieldsets' => '既存のフィールドセットに追加',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview_short' => 'Show in lists',
+
 ];

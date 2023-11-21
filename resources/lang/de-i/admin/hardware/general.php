@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Asset duplizieren',
     'deployable'  				=> 'Einsetzbar',
     'deleted'  					=> 'Dieses Asset wurde gelöscht.',
+    'delete_confirm'            => 'Bist du sicher, dass du dieses Asset löschen möchtest?',
     'edit'  					=> 'Asset bearbeiten',
     'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Du musst das Modell wiederherstellen, bevor Du das Asset wiederherstellen kannst.',
     'model_invalid'             => 'Das Modell dieses Assets ist ungültig.',
@@ -23,6 +24,7 @@ return [
     'restore'  					=> 'Asset wiederherstellen',
     'pending'  					=> 'Ausstehende',
     'undeployable'  			=> 'Nicht einsetzbar',
+    'undeployable_tooltip'  	=> 'Dieses Asset hat eine Statusbezeichnung, die nicht einsetzbar ist und zu diesem Zeitpunkt nicht ausgecheckt werden kann.',
     'view'  					=> 'Asset ansehen',
     'csv_error' => 'Es gibt einen Fehler in der CSV-Datei:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Siehe unten für Details.',
     'custom_export' => 'Benutzerdefinierter Export',
     'mfg_warranty_lookup' => ':manufacturer Garantiestatus Abfrage',
+    'user_department' => 'Abteilung des Benutzers',
 ];

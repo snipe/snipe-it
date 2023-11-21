@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Email za podršku',
     'support_phone'   		=> 'Telefon za podršku',
     'support_url'   		=> 'URL za podršku',
+    'warranty_lookup_url'   => 'Veza za pregled garancije',
     'update'				=> 'Ažuriraj proizvođača',
     'url'   				=> 'URL',
 

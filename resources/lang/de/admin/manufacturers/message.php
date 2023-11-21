@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Hersteller existiert nicht.',
     'assoc_users'	 => 'Dieser Hersteller ist bereits mit einem Model verknüpft und kann nicht gelöscht werden. Bitte trennen sie Ihre Modelle von diesem Hersteller und versuchen Sie es Erneut.',
 

@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'הצג משתמשים שנמחקו',
     'title' 				=> 'כותרת',
 	'to_restore_them'		=> 'כדי לשחזר אותם.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'עדכן משתמש',
     'username' 				=> 'שם משתמש',
 	'user_deleted_text' 	=> 'משתמש זה סומן כממחק.',

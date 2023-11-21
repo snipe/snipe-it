@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Ang Kumpanya ay hindi umiiral.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Ang kategoryang ito ay kasalukuyang naiugnay sa hindi bumaba sa isang modelo at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga modelo upang hindi na magreperens sa kumpanyang ito at paki-subok muli. ',
     'create' => [
         'error'   => 'Ang kumpanya ay hindi naisagawa, magyaring subukang muli.',

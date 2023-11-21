@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'O componente não foi atribuido, por favor tente de novo',
         'success' 		=> 'Componente atribuido com sucesso.',
-        'user_does_not_exist' => 'O utilizador é invalido. Por favor tente de novo.'
+        'user_does_not_exist' => 'O utilizador é invalido. Por favor tente de novo.',
+        'unavailable'      => 'Não há componentes suficientes restantes: :remaining remaining, :requested ',
     ),
 
     'checkin' => array(

@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klon tillgång',
     'deployable'  				=> 'Deployable',
     'deleted'  					=> 'Denna tillgång har tagits bort.',
+    'delete_confirm'            => 'Är du säker du vill radera denna tillgång?',
     'edit'  					=> 'Redigera tillgång',
     'model_deleted'  			=> 'Denna tillgångsmodell har tagits bort. Du måste återställa modellen innan du kan återställa tillgången.',
     'model_invalid'             => 'Modellen för denna tillgång är ogiltig.',
@@ -23,6 +24,7 @@ return [
     'restore'  					=> 'Återställ tillgången',
     'pending'  					=> 'Väntande',
     'undeployable'  			=> 'Undeployable',
+    'undeployable_tooltip'  	=> 'Denna tillgång har en statusetikett som inte går att distribuera och som inte kan checkas ut just nu.',
     'view'  					=> 'Visa tillgång',
     'csv_error' => 'Du har ett fel i din CSV-fil:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Se nedan för detaljer.',
     'custom_export' => 'Anpassad export',
     'mfg_warranty_lookup' => ':manufacturer Garantistatus Uppsök',
+    'user_department' => 'Användares avdelning',
 ];

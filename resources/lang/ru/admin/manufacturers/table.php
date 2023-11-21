@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Электронная почта поддержки',
     'support_phone'   		=> 'Телефон поддержки',
     'support_url'   		=> 'Страница поддержки',
+    'warranty_lookup_url'   => 'Ссылка на гарантию',
     'update'				=> 'Обновить производителя',
     'url'   				=> 'Адрес',
 

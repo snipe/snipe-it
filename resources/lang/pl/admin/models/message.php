@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Model nie istnieje.',
-    'no_association' => 'Żaden nie został przypisany.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'To zepsuje rzeczy w dziwny i straszny sposób. Edytuj teraz ten zasób, aby przypisać mu model.',
     'assoc_users'	 => 'Ten model jest przypisany do minim jednego aktywa i nie może być usunięty. Proszę usunąć aktywa, a następnie spróbować ponownie. ',
 

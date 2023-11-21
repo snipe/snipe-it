@@ -145,9 +145,14 @@
               <th data-sortable="true"><i class="fa fa-lock" aria-hidden="true"></i>
                 <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.encrypted') }}</span>
               </th>
-              <th data-visible="false" data-sortable="true"><i class="fa fa-eye" aria-hidden="true"><span class="sr-only">Visible to User</span></i></th>
-              <th data-sortable="true" data-searchable="true"><i class="fa fa-envelope" aria-hidden="true"><span class="sr-only">Show in Email</span></i></th>
-              <th data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
+              <th data-sortable="true" class="text-center"><i class="fa fa-list" aria-hidden="true"></i>
+                <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.show_in_listview_short') }}</span>
+              </th>
+              <th data-visible="false" data-sortable="true" class="text-center"><i class="fa fa-eye" aria-hidden="true"><span class="sr-only">Visible to User</span></i></th>
+              <th data-sortable="true" data-searchable="true" class="text-center"><i class="fa fa-envelope" aria-hidden="true"><span class="sr-only">{{ trans('admin/custom_fields/general.show_in_email_short') }}</span></i></th>
+              <th data-sortable="true" data-searchable="true" class="text-center"><i class="fa fa-laptop fa-fw" aria-hidden="true"><span class="sr-only">{{ trans('admin/custom_fields/general.show_in_requestable_list_short') }}</span></i></th>
+              <th data-sortable="true" data-searchable="true" class="text-center"><i class="fa-solid fa-fingerprint"><span class="sr-only">{{ trans('admin/custom_fields/general.unique') }}</span></i></th>
+              <th data-sortable="true" data-searchable="true" class="text-center">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
               <th>{{ trans('button.actions') }}</th>
             </tr>
@@ -158,7 +163,7 @@
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
 
-              <td class='text-center'>{!! ($field->is_unique=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!! ($field->is_unique=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)
@@ -167,9 +172,12 @@
                 @endif
               </td>
               <td>{{ $field->format }}</td>
-              <td>{!!  ($field->field_encrypted=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
-              <td>{!!  ($field->display_in_user_view=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
-              <td class='text-center'>{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!!  ($field->field_encrypted=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
+              <td class="text-center">{!!  ($field->show_in_listview=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
+              <td class="text-center">{!!  ($field->display_in_user_view=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
+              <td class="text-center">{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!! ($field->show_in_requestable_list=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!! ($field->is_unique=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)

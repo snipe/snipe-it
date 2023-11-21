@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'Потребителя прие актива',
+    'acceptance_asset_declined' => 'Потребителя отказа актива',
     'a_user_canceled' => 'Потребител е отменил заявка за елемент в уебсайта',
     'a_user_requested' => 'Потребител е направил заявка за елемент в уебсайта',
     'accessory_name' => 'Име на аксесоар:',
@@ -11,7 +11,7 @@ return [
     'asset' => 'Актив:',
     'asset_name' => 'Име на актив:',
     'asset_requested' => 'Заявка за актив',
-    'asset_tag' => 'Етикет на актив',
+    'asset_tag' => 'Инвентарен номер',
     'assigned_to' => 'Възложени на',
     'best_regards' => 'С най-добри пожелания.',
     'canceled' => 'Отменено:',
@@ -43,10 +43,10 @@ return [
     'login_first_admin' => 'Влезте в своята Snipe-IT инсталация използвайки данните по-долу:',
     'login' => 'Вход:',
     'Low_Inventory_Report' => 'Доклад за нисък запас',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Списък активи',
     'min_QTY' => 'Минимално количество',
     'name' => 'Име',
-    'new_item_checked' => 'Нов артикул беше изписан под вашете име, детайлите са отдолу.',
+    'new_item_checked' => 'Нов артикул беше изписан под вашето име, детайлите са отдолу.',
     'password' => 'Парола:',
     'password_reset' => 'Нулиране на паролата',
 
@@ -74,10 +74,11 @@ return [
     'your_credentials' => 'Вашите идентификационни данни за Snipe-IT',
     'Accessory_Checkin_Notification' => 'Аксесоарат е вписан',
     'Asset_Checkin_Notification' => 'Актива е вписан',
+    'Asset_Checkout_Notification' => 'Актива е изписан',
     'License_Checkin_Notification' => 'Лиценза е вписан',
     'Expected_Checkin_Report' => 'Очакван рапорт за вписване на актив',
     'Expected_Checkin_Notification' => 'Напомняне: :name крайната дата за вписване наближава',
     'Expected_Checkin_Date' => 'Наближава срока за връщане на актив който е заведен на Вас, трябва да се върна на :date',
     'your_assets' => 'Преглед на вашите активи',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Всички права запазени.',
 ];

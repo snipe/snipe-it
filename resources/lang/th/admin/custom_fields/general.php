@@ -49,4 +49,9 @@ return [
     'unique' => 'ไม่ซ้ำใคร',
     'display_in_user_view' => 'อนุญาตให้ผู้ใช้เข้าดูข้อมูลเหล่านี้ในหน้ากำหนดสินทรัพย์',
     'display_in_user_view_table' => 'เปิดเห็นผู้ใช้',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview_short' => 'Show in lists',
+
 ];

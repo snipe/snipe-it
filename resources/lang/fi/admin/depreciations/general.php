@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Laitteiden poistot',
     'create'  					            => 'Luo arvonalentumisia',
     'depreciation_name'  					=> 'Poiston nimi',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Vähittäispoistoarvo',
     'number_of_months'  					=> 'Kuukausien lukumäärä',
     'update'  					            => 'Päivitä poistot',
     'depreciation_min'                      => 'Minimiarvo poistojen jälkeen',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>Varoitus: </strong>
+                      Sinulla ei ole tällä hetkellä yhtään poistoa.
+                      Määritä vähintään yksi poisto, jotta voit tarkastella poistoraporttia.',
 ];

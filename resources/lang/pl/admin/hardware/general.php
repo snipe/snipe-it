@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klonuj zasób',
     'deployable'  				=> 'Gotowe do wdrożenia',
     'deleted'  					=> 'Ten zasób został usunięty.',
+    'delete_confirm'            => 'Czy na pewno chcesz usunąć?',
     'edit'  					=> 'Edytuj zasób',
     'model_deleted'  			=> 'Ten model zasobów został usunięty. Musisz przywrócić model zanim będziesz mógł przywrócić zasób.',
     'model_invalid'             => 'Model tego zasobu jest nieprawidłowy.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Żądane',
     'requested'				    => 'Zamówione',
     'not_requestable'           => 'Brak możliwości zarządzania',
-    'requestable_status_warning' => 'Nie zmieniaj statusu możliwości zarządzania',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Przywróć aktywa',
     'pending'  					=> 'Oczekuje',
     'undeployable'  			=> 'Niemożliwe do wdrożenia',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Wyświetl nabytki',
     'csv_error' => 'Wystąpił błąd w twoim pliku CSV:',
     'import_text' => '
@@ -43,4 +45,5 @@ return [
     'alert_details' => 'Więcej szczegółów znajduje się poniżej.',
     'custom_export' => 'Eksport niestandardowy',
     'mfg_warranty_lookup' => ':Producent Wyszukiwarka Statusu Gwarancji',
+    'user_department' => 'User Department',
 ];

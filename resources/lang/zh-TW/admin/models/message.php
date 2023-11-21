@@ -2,9 +2,10 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => '樣板不存在',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => '警告！此項目的資產型號無效或遺失！',
+    'no_association_fix' => '這將以奇怪和可怕的方式損壞事物。立即編輯此資產以分配型號。',
     'assoc_users'	 => '至少還有一個資產與此樣板關聯，目前不能被删除，請在刪除資產後重試。 ',
 
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> '沒有欄位被更改，因此沒有更新任何內容。',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> '成功更新型號。|成功更新 :model_count 個型號。',
+        'warn'          => '您即將更新以下型號的屬性：|您即將編輯以下 :model_count 個型號的屬性：',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => '沒有型號被選擇，因此沒有更新任何內容。',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => '已刪除型號！|已刪除 :success_count 個型號！',
         'success_partial' 	=> ':success_count 個型號被刪除, 但是 :fail_count 無法被刪除, 因為它們仍有與之關聯的資產。'
     ),
 

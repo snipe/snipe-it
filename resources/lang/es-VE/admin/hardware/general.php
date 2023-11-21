@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Clonar Activo',
     'deployable'  				=> 'Enviable',
     'deleted'  					=> 'Este activo fue eliminado.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Editar Activo',
     'model_deleted'  			=> 'Este Modelo de activo fue eliminado. Debes restaurar este modelo antes de poder restaurar el Activo.',
     'model_invalid'             => 'El modelo de este activo no es válido.',
@@ -23,6 +24,7 @@ return [
     'restore'  					=> 'Restaurar Activo',
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No enviable',
+    'undeployable_tooltip'  	=> 'Este activo tiene una etiqueta de estado que no es desplegable y no puede ser revisado en este momento.',
     'view'  					=> 'Ver Activo',
     'csv_error' => 'Tiene un error en su archivo CSV:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Por favor vea abajo para más detalles.',
     'custom_export' => 'Personalizar exportación',
     'mfg_warranty_lookup' => 'Búsqueda del estado de Garantía para :manufacturer',
+    'user_department' => 'User Department',
 ];

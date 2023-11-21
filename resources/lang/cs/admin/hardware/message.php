@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Majetek se nepodařilo obnovit, zkuste to prosím později',
         'success' 		=> 'Majetek byl v pořádku obnoven.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Majetek byl v pořádku obnoven.',
+        'nothing_updated'   => 'Nevybrali jste žádné položky, nic tedy nebylo obnoveno.', 
     ],
 
     'audit' => [
@@ -51,6 +51,7 @@ return [
         'success'               => 'Váš soubor byl importován',
         'file_delete_success'   => 'Váš soubor byl úspěšně odstraněn',
         'file_delete_error'      => 'Soubor nelze odstranit',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Jeden nebo více sloupců obsahuje v záhlaví poškozené UTF-8 znaky',
         'content_row_has_malformed_characters' => 'Jedna nebo více hodnot v prvním řádku obsahu obsahuje poškozené UTF-8 znaky',
     ],

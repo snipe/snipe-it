@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Potvrzení hromadného odstranění majetku',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Potvrzení hromadného obnovení majetku', 
   'bulk_delete_help'	=> 'Zkontrolujte seznam odstraňovaného majetku níže. Jakmile jej potvrdíte, nebude možné tento majetek obnovit a budou zrušeny i vazby na uživatele, kteří jej měli v držení.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Níže zkontrolujte majetek před jeho hromadnou obnovou. Po obnovení nebude majetek spojen s žádnými uživateli, kterým byl dříve přidělen.',
   'bulk_delete_warn'	=> 'Chystáte se odstranit :asset_count položek majetku.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Chystáte se obnovit :asset_count položek majetku.',
     'bulk_update'		=> 'Hromadná aktualizace majetku',
     'bulk_update_help'	=> 'Tento formulář umožňuje hromadnou editaci majetku. Vyplňte pouze položky, které chcete změnit. Jakékoliv prázné položky zůstanou nezměněny. ',
     'bulk_update_warn'	=> 'Chystáte se upravit vlastnosti 1 položky.|Chystáte se upravit vlastnosti :asset_count položek.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Vydané komu',
     'checkout_date'		=> 'Datum vydání',
     'checkin_date'		=> 'Datum převzetí',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Aktualizovat pouze výchozí umístění',
     'asset_not_deployable' => 'Tento majetek nelze vyskladnit.',
     'asset_deployable' => 'Tento majetek lze vyskladnit.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Zpracovávání... (S velkými soubory to může chvíli trvat)',
     'optional_infos'  => 'Volitelné informace',
     'order_details'   => 'Informace související s objednávkou'
 ];

@@ -14,11 +14,7 @@
 {{-- Page content --}}
 @section('content')
 
-    <style>
-        .checkbox label {
-            padding-right: 40px;
-        }
-    </style>
+
 
 
 
@@ -260,11 +256,13 @@
                                               trans('admin/settings/general.show_archived_in_list')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::checkbox('show_archived_in_list', '1', Request::old('show_archived_in_list', $setting->show_archived_in_list),array('class' => 'minimal')) }}
-                               {{ trans('admin/settings/general.show_archived_in_list_text') }}
-                               {!! $errors->first('show_archived_in_list', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
-                           </div>
+                                   <label class="form-control">
+                                       {{ Form::checkbox('show_archived_in_list', '1', old('show_archived_in_list', $setting->show_archived_in_list),array('aria-label'=>'show_archived_in_list')) }}
+                                       {{ trans('admin/settings/general.show_archived_in_list_text') }}
+                                   </label>
+                                   {!! $errors->first('show_archived_in_list', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                          </div>
                        </div>
 
                        <!-- Show assets assigned to user's assets -->
@@ -274,8 +272,10 @@
                                               trans('admin/settings/general.show_assigned_assets')) }}
                            </div>
                            <div class="col-md-9">
+                               <label class="form-control">
                                {{ Form::checkbox('show_assigned_assets', '1', Request::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
+                               </label>
                                <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
                                {!! $errors->first('show_assigned_assets', '<span class="alert-msg">:message</span>') !!}
                            </div>

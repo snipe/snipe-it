@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Vahvista laitteiden massapoisto',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Vahvista laitteiden massapalautus', 
   'bulk_delete_help'	=> 'Tarkasta alla olevat massapoistettavat laitteet. Kun nämä laitteet on poistettu, ne voidaan palauttaa, mutta niitä ei enää yhdistetä niihin käyttäjiin, joille ne on tällä hetkellä luovutettuna.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Tarkista massapalautettavat laitteet alla. Kun nämä laitteet on palautettu, niitä ei liitetä mihinkään käyttäjiin, joille ne on aiemmin osoitettu.',
   'bulk_delete_warn'	=> 'Olet poistamassa :asset_count laitetta.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Olet palauttamassa :asset_count laitetta.',
     'bulk_update'		=> 'Massapäivitä laitteita',
     'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
     'bulk_update_warn'	=> 'Olet muokkaamassa yhden laitteen ominaisuuksia.- Olet muokkaamassa :asset_count laitteen ominaisuuksia.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Luovutettuna',
     'checkout_date'		=> 'Luovutuspäivä',
     'checkin_date'		=> 'Palautuspäivä',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Päivitä vain oletussijainti',
     'asset_not_deployable' => 'Laite ei ole käyttöönotettavissa. Laitetta ei voida luovuttaa.',
     'asset_deployable' => 'Laite on käyttöönotettavissa. Laite voidaan luovuttaa.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Käsitellään... (Tämä saattaa kestää jonkin aikaa suurien tiedostojen kanssa)',
     'optional_infos'  => 'Valinnaiset tiedot',
     'order_details'   => 'Tilaukseen liityvät tiedot'
 ];

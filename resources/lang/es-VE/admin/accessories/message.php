@@ -24,7 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Equipo no ha sido retirado, inténtalo de nuevo',
         'success' 		=> 'El accesorio se ha retirado exitosamente.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'El accesorio no está disponible para su retirada. Compruebe la cantidad disponible',
         'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.'
     ),
 

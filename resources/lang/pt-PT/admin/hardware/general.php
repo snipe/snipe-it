@@ -6,42 +6,45 @@ return [
     'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Artigos em checktout',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Receber Artigos',
     'checkin'  					=> 'Devolver Ativo',
     'checkout'  				=> 'Ativo de compras',
     'clone'  					=> 'Clonar Ativo',
     'deployable'  				=> 'Implementável',
     'deleted'  					=> 'Este ativo foi excluído.',
+    'delete_confirm'            => 'Tem a certeza de que pretende eliminar este equipamento?',
     'edit'  					=> 'Editar artigo',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_deleted'  			=> 'Este modelo de artigo foi excluído. Deve restaurar o modelo antes de restaurar o artigo.',
+    'model_invalid'             => 'O modelo deste artigo é inválido.',
+    'model_invalid_fix'         => 'O artigo deve ser editado para corrigir isso antes de tentar recebe-lo ou entregá-lo.',
     'requestable'               => 'Solicitavel',
     'requested'				    => 'Requisitado',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Não solicitável',
+    'requestable_status_warning' => 'Não altere o estado solicitável',
     'restore'  					=> 'Restaurar ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
+    'undeployable_tooltip'  	=> 'Este artigo possui uma etiqueta de estado que não é implantável e não pode ser entregue no momento.',
     'view'  					=> 'Ver Artigo',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Tem um erro no ficheiro CSV:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Carregar um CSV que contém o histórico de ativos. Os artigos e utilizadores DEVEM já existir no sistema, ou serão ignorados. Artigos para a importação de histórico corresponde com a etiqueta de artigo. Tentaremos encontrar um utilizador correspondente com base no nome de utilizador que fornecer, e nos critérios que selecionar abaixo. Se não selecionar nenhum critério abaixo, o sistema vai simplesmente tentar combinar com o formato de nome de utilizador configurado nas Configurações Gerais de Administração &gt;.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>campos incluídos no CSV devem corresponder aos cabeçalhos: <strong>Etiqueta de Artigo, Nome, Data de Entrega, Data de Receção</strong>. Quaisquer campos adicionais serão ignorados. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Data de  Entrega: em branco ou datas futuras de entrega irão entregar os artigos o utilizador associado. Excluindo a coluna Data de Receção criará uma data de receção com a data de hoje.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
+    'csv_import_match_f-l' => 'Tente corresponder aos utilizadores pelo formato primeiro nome.último nome (fulano.sicrano)',
+    'csv_import_match_initial_last' => 'Tente combinar os utilizadores pelo formato primeira letra e sobrenome (fsicrano)',
+    'csv_import_match_first' => 'Tente combinar os utilizadores pelo formato de primeiro nome (fulano)',
+    'csv_import_match_email' => 'Tente combinar os utilizadores pelo endereço eletrónico como nome de utilizador',
+    'csv_import_match_username' => 'Tente corresponder aos utilizadores pelo nome de utilizador',
+    'error_messages' => 'Mensagens de erro:',
+    'success_messages' => 'Mensagens de sucesso:',
+    'alert_details' => 'Por favor, veja abaixo para detalhes.',
     'custom_export' => 'Exportação Personalizada',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'mfg_warranty_lookup' => ':fabricante busca por estado de garantia',
+    'user_department' => 'Departamento do Utilizador',
 ];

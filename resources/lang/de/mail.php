@@ -46,7 +46,7 @@ return [
     'inventory_report' => 'Bestandsbericht',
     'min_QTY' => 'Mindestmenge',
     'name' => 'Name',
-    'new_item_checked' => 'Ein neuer Gegenstand wurde unter Ihrem Namen ausgecheckt. Details folgen.',
+    'new_item_checked' => 'Ein neuer Gegenstand wurde unter Ihrem Namen ausgecheckt. Details finden Sie weiter unten.',
     'password' => 'Passwort:',
     'password_reset' => 'Passwort zurücksetzen',
 
@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Ihre Snipe-IT Anmeldedaten',
     'Accessory_Checkin_Notification' => 'Zubehör zurückgenommen',
     'Asset_Checkin_Notification' => 'Asset zurückgenommen',
+    'Asset_Checkout_Notification' => 'Asset herausgegeben',
     'License_Checkin_Notification' => 'Lizenz zurückgenommen',
     'Expected_Checkin_Report' => 'Bericht über erwartete Asset Rückgaben',
     'Expected_Checkin_Notification' => 'Erinnerung: :name Rückgabedatum nähert sich',

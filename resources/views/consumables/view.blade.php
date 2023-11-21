@@ -74,7 +74,7 @@
                         data-sort-name="name"
                         id="consumablesCheckedoutTable"
                         class="table table-striped snipe-table"
-                        data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                        data-url="{{route('api.consumables.show.users', $consumable->id)}}"
                         data-export-options='{
                 "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -155,14 +155,18 @@
 
                       <td>
                         @if ($file->note)
-                          {{ $file->note }}
+                          {!! nl2br(Helper::parseEscapedMarkedownInline($file->note)) !!}
                         @endif
                       </td>
                       <td>
                         @if ($file->filename)
-                          <a href="{{ route('show.consumablefile', [$consumable->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
+                          <a href="{{ route('show.consumablefile', [$consumable->id, $file->id]) }}" class="btn btn-sm btn-default">
                             <i class="fas fa-download" aria-hidden="true"></i>
                             <span class="sr-only">{{ trans('general.download') }}</span>
+                          </a>
+
+                          <a href="{{ route('show.consumablefile', [$consumable->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
                           </a>
                         @endif
                       </td>
@@ -275,7 +279,7 @@
       </strong>
               </div>
     <div class="col-md-12">
-      {!! nl2br(e($consumable->notes)) !!}
+      {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
             </div>
           </div>
   @endif

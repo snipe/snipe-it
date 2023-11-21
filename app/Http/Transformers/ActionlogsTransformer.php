@@ -3,8 +3,17 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Actionlog;
+use App\Models\Asset;
+use App\Models\CustomField;
 use App\Models\Setting;
+use App\Models\Company;
+use App\Models\Supplier;
+use App\Models\Location;
+use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Gate;
 
 class ActionlogsTransformer
 {
@@ -38,21 +47,80 @@ class ActionlogsTransformer
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
+        $custom_fields = CustomField::all();
+
         if ($actionlog->filename!='') {
-            $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+            $icon =  Helper::filetype_icon($actionlog->filename);
         }
 
         // This is necessary since we can't escape special characters within a JSON object
         if (($actionlog->log_meta) && ($actionlog->log_meta!='')) {
             $meta_array = json_decode($actionlog->log_meta);
 
+            $clean_meta = [];
+
             if ($meta_array) {
+
                 foreach ($meta_array as $fieldname => $fieldata) {
+
                     $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
                     $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
+
+                    // this is a custom field
+                    if (str_starts_with($fieldname, '_snipeit_')) {
+                        
+                        foreach ($custom_fields as $custom_field) {
+
+                            if ($custom_field->db_column == $fieldname) {
+
+                                if ($custom_field->field_encrypted == '1')  {
+
+                                    // Unset these fields. We need to decrypt them, since even if the decrypted value
+                                    // didn't change, their value in the DB will, so we have to compare the unencrypted version
+                                    // to see if the values actually did change
+                                    unset($clean_meta[$fieldname]);
+                                    unset($clean_meta[$fieldname]);
+
+                                    $enc_old = '';
+                                    $enc_new = '';
+
+                                    try  {
+                                        $enc_old = \Crypt::decryptString($this->clean_field($fieldata->old));
+                                    } catch (\Exception $e) {
+                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    }
+
+                                    try {
+                                        $enc_new = \Crypt::decryptString($this->clean_field($fieldata->new));
+                                    } catch (\Exception $e) {
+                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    }
+
+                                    if ($enc_old != $enc_new) {
+                                        \Log::debug('custom fields do not match');
+                                        $clean_meta[$fieldname]['old'] = "************";
+                                        $clean_meta[$fieldname]['new'] = "************";
+
+                                        // Display the changes if the user is an admin or superadmin
+                                        if (Gate::allows('admin')) {
+                                            $clean_meta[$fieldname]['old'] = ($enc_old) ? unserialize($enc_old): '';
+                                            $clean_meta[$fieldname]['new'] = ($enc_new) ? unserialize($enc_new): '';
+                                        }
+
+                                    }
+
+
+                                }
+
+                            }
+
+                        }
+                    }
+
                 }
 
             }
+            $clean_meta= $this->changedInfo($clean_meta);
         }
 
         $file_url = '';
@@ -110,14 +178,15 @@ class ActionlogsTransformer
                 'type' => e($actionlog->targetType()),
             ] : null,
 
-            'note'          => ($actionlog->note) ? e($actionlog->note): null,
+            'note'          => ($actionlog->note) ? Helper::parseEscapedMarkedownInline($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
-        //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
 
+//        \Log::info("Clean Meta is: ".print_r($clean_meta,true));
         //dd($array);
+
         return $array;
     }
 
@@ -131,6 +200,98 @@ class ActionlogsTransformer
             $array[] = (new UsersTransformer)->transformUser($user);
         }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+    /**
+     * This takes the ids of the changed attributes and returns the names instead for the history view of an Asset
+     *
+     * @param  array $clean_meta
+     * @return array
+     */
+
+    public function changedInfo(array $clean_meta)
+    {   $location = Location::withTrashed()->get();
+        $supplier = Supplier::withTrashed()->get();
+        $model = AssetModel::withTrashed()->get();
+        $company = Company::get();
+
+
+        if(array_key_exists('rtd_location_id',$clean_meta)) {
+
+            $oldRtd = $location->find($clean_meta['rtd_location_id']['old']);
+            $oldRtdName = $oldRtd ? e($oldRtd->name) : trans('general.deleted');
+
+            $newRtd = $location->find($clean_meta['rtd_location_id']['new']);
+            $newRtdName = $newRtd ? e($newRtd->name) : trans('general.deleted');
+
+            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $oldRtdName : '';
+            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $newRtdName : '';
+            $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
+            unset($clean_meta['rtd_location_id']);
+        }
+
+
+        if (array_key_exists('location_id', $clean_meta)) {
+
+            $oldLocation = $location->find($clean_meta['location_id']['old']);
+            $oldLocationName = $oldLocation ? e($oldLocation->name) : trans('general.deleted');
+
+            $newLocation = $location->find($clean_meta['location_id']['new']);
+            $newLocationName = $newLocation ? e($newLocation->name) : trans('general.deleted');
+
+
+            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ". $oldLocationName : '';
+            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ". $newLocationName : '';
+            $clean_meta['Current Location'] = $clean_meta['location_id'];
+            unset($clean_meta['location_id']);
+        }
+
+        if(array_key_exists('model_id', $clean_meta)) {
+
+            $oldModel = $model->find($clean_meta['model_id']['old']);
+            $oldModelName = $oldModel ? e($oldModel->name) : trans('admin/models/message.deleted');
+
+            $newModel = $model->find($clean_meta['model_id']['new']);
+            $newModelName = $newModel ? e($newModel->name) : trans('admin/models/message.deleted');
+
+            $clean_meta['model_id']['old'] = "[id: ".$clean_meta['model_id']['old']."] ".$oldModelName;
+            $clean_meta['model_id']['new'] = "[id: ".$clean_meta['model_id']['new']."] ".$newModelName; /** model is required at asset creation */
+
+            $clean_meta['Model'] = $clean_meta['model_id'];
+            unset($clean_meta['model_id']);
+        }
+        if(array_key_exists('company_id', $clean_meta)) {
+
+            $oldCompany = $company->find($clean_meta['company_id']['old']);
+            $oldCompanyName = $oldCompany ? e($oldCompany->name) : trans('admin/company/message.deleted');
+
+            $newCompany = $company->find($clean_meta['company_id']['new']);
+            $newCompanyName = $newCompany ? e($newCompany->name) : trans('admin/company/message.deleted');
+
+            $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."] ". $oldCompanyName : trans('general.unassigned');
+            $clean_meta['company_id']['new'] = $clean_meta['company_id']['new'] ? "[id: ".$clean_meta['company_id']['new']."] ". $newCompanyName : trans('general.unassigned');
+            $clean_meta['Company'] = $clean_meta['company_id'];
+            unset($clean_meta['company_id']);
+        }
+        if(array_key_exists('supplier_id', $clean_meta)) {
+
+            $oldSupplier = $supplier->find($clean_meta['supplier_id']['old']);
+            $oldSupplierName = $oldSupplier ? e($oldSupplier->name) : trans('admin/suppliers/message.deleted');
+
+            $newSupplier = $supplier->find($clean_meta['supplier_id']['new']);
+            $newSupplierName = $newSupplier ? e($newSupplier->name) : trans('admin/suppliers/message.deleted');
+
+            $clean_meta['supplier_id']['old'] = $clean_meta['supplier_id']['old'] ? "[id: ".$clean_meta['supplier_id']['old']."] ". $oldSupplierName : trans('general.unassigned');
+            $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ". $newSupplierName : trans('general.unassigned');
+            $clean_meta['Supplier'] = $clean_meta['supplier_id'];
+            unset($clean_meta['supplier_id']);
+        }
+        if(array_key_exists('asset_eol_date', $clean_meta)) {
+            $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
+            unset($clean_meta['asset_eol_date']);
+        }
+
+        return $clean_meta;
+
     }
 
 

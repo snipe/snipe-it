@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Snipe-IT クレデンシャル',
     'Accessory_Checkin_Notification' => '付属品をチェックインしました',
     'Asset_Checkin_Notification' => '資産をチェックインしました',
+    'Asset_Checkout_Notification' => '資産はチェックアウトされました',
     'License_Checkin_Notification' => 'ライセンスをチェックインしました',
     'Expected_Checkin_Report' => '予想される資産チェックインレポート',
     'Expected_Checkin_Notification' => 'リマインダー: :name のチェックイン期限が近づいています',

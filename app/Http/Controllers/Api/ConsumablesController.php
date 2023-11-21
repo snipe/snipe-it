@@ -45,11 +45,8 @@ class ConsumablesController extends Controller
                 'notes',
                 ];
 
-
-        $consumables = Company::scopeCompanyables(
-            Consumable::select('consumables.*')
-                ->with('company', 'location', 'category', 'users', 'manufacturer')
-        );
+        $consumables = Consumable::select('consumables.*')
+            ->with('company', 'location', 'category', 'users', 'manufacturer');
 
         if ($request->filled('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
@@ -89,7 +86,7 @@ class ConsumablesController extends Controller
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $allowed_columns = ['id', 'name', 'order_number', 'min_amt', 'purchase_date', 'purchase_cost', 'company', 'category', 'model_number', 'item_no', 'manufacturer', 'location', 'qty', 'image'];
@@ -268,6 +265,14 @@ class ConsumablesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable')));
             \Log::debug('No enough remaining');
         }
+
+        // Make sure there is a valid category
+        if (!$consumable->category){
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.invalid_item_category_single', ['type' => trans('general.consumable')])));
+
+            return redirect()->route('consumables.index')->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
+        }
+
 
         // Check if the user exists - @TODO:  this should probably be handled via validation, not here??
         if (!$user = User::find($request->input('assigned_to'))) {

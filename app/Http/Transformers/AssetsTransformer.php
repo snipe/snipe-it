@@ -7,7 +7,8 @@ use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
-
+use Carbon\Carbon;
+use Auth;
 
 class AssetsTransformer
 {
@@ -38,7 +39,7 @@ class AssetsTransformer
             'byod' => ($asset->byod ? true : false),
 
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
-            'eol' => ($asset->model->eol != '') ? $asset->model->eol : null,
+            'eol' => (($asset->asset_eol_date != '') && ($asset->purchase_date != '')) ? Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date).' months' : null,
             'asset_eol_date' => ($asset->asset_eol_date != '') ? Helper::getFormattedDateObject($asset->asset_eol_date, 'date') : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
@@ -58,7 +59,7 @@ class AssetsTransformer
                 'id' => (int) $asset->supplier->id,
                 'name'=> e($asset->supplier->name),
             ] : null,
-            'notes' => ($asset->notes) ? e($asset->notes) : null,
+            'notes' => ($asset->notes) ? Helper::parseEscapedMarkedownInline($asset->notes) : null,
             'order_number' => ($asset->order_number) ? e($asset->order_number) : null,
             'company' => ($asset->company) ? [
                 'id' => (int) $asset->company->id,
@@ -92,6 +93,7 @@ class AssetsTransformer
             'checkout_counter' => (int) $asset->checkout_counter,
             'requests_counter' => (int) $asset->requests_counter,
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
+            'book_value' => Helper::formatCurrencyOutput($asset->getLinearDepreciatedValue()),
         ];
 
 
@@ -101,10 +103,10 @@ class AssetsTransformer
             foreach ($asset->model->fieldset->fields as $field) {
                 if ($field->isFieldDecryptable($asset->{$field->db_column})) {
                     $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
-                    $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
+                    $value = (Gate::allows('assets.view.encrypted_custom_fields')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     if ($field->format == 'DATE'){
-                        if (Gate::allows('superadmin')){
+                        if (Gate::allows('assets.view.encrypted_custom_fields')){
                             $value = Helper::getFormattedDateObject($value, 'date', false);
                         } else {
                            $value = strtoupper(trans('admin/custom_fields/general.encrypted'));
@@ -229,6 +231,29 @@ class AssetsTransformer
             'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
             'assigned_to_self' => ($asset->assigned_to == \Auth::user()->id),
         ];
+
+        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
+            $fields_array = [];
+
+            foreach ($asset->model->fieldset->fields as $field) {
+
+                // Only display this if it's allowed via the custom field setting
+                if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1')) {
+
+                    $value = $asset->{$field->db_column};
+                    if (($field->format == 'DATE') && (!is_null($value)) && ($value != '')) {
+                        $value = Helper::getFormattedDateObject($value, 'date', false);
+                    }
+
+                    $fields_array[$field->db_column] = e($value);
+                }
+
+                $array['custom_fields'] = $fields_array;
+            }
+        } else {
+            $array['custom_fields'] = new \stdClass; // HACK to force generation of empty object instead of empty list
+        }
+
 
         $permissions_array['available_actions'] = [
             'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,

@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute måste innehålla minst :min saker.',
     ],
     'starts_with'          => ':attribute måste börja med något av följande: :values.',
+    'ends_with'            => ':attribute måste sluta med en eller flera av följande värden: :values.',
+
     'not_in'               => 'Det valda :attribute är ogiltigt.',
     'numeric'              => ':attribute måste vara ett nummer.',
     'present'              => ':attribute fältet måste finnas.',

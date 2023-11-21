@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Подвердите массовое удаление активов',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Подвердите массовое восстановление активов', 
   'bulk_delete_help'	=> 'Просмотрите активны, выбранные для удаления. После удаления активы могут быть восстановлены, но уже не будет привязаны к пользователям, к которым они привязаны сейчас.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Проверьте активы для массового восстановления. После восстановления эти активы не будут связаны с пользователями, с которыми они были ранее связаны.',
   'bulk_delete_warn'	=> 'Вы собираетесь удалить :asset_count активов.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Вы собираетесь восстановить :asset_count активов.',
     'bulk_update'		=> 'Редактировать выбранное',
     'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько объектов за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений. ',
     'bulk_update_warn'	=> 'Вы собираетесь отредактировать свойства одного ресурса.|Вы собираетесь отредактировать свойства :asset_count assets.',
+    'bulk_update_with_custom_field' => 'Обратите внимание: активы содержат :asset_model_count различных типов моделей.',
+    'bulk_update_model_prefix' => 'На моделях', 
+    'bulk_update_custom_field_unique' => 'Это уникальное поле и не может быть отредактированы через массовую обработку.',
     'checkedout_to'		=> 'Привязан к',
     'checkout_date'		=> 'Дата выдачи',
     'checkin_date'		=> 'Дата возврата',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Обновить только местоположение по умолчанию',
     'asset_not_deployable' => 'Этот статус актива не подлежит развертыванию. Этот актив не может быть проверен.',
     'asset_deployable' => 'Этот статус доступен для развертывания. Этот актив может быть привязан.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Обработка... (Это может занять некоторое время на больших файлах)',
     'optional_infos'  => 'Дополнительная информация',
     'order_details'   => 'Информация, связанная с заказом'
 ];

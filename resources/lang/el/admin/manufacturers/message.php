@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Κατασκευαστής δεν υπάρχει.',
     'assoc_users'	 => 'Αυτό κατασκευαστής σχετίζεται με τουλάχιστον ένα μοντέλο και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τα μοντέλα σας προκειμένου να μην αναφέρονται σε αυτόν τον κατασκευαστή και δοκιμάστε ξανά. ',
 

@@ -49,4 +49,9 @@ return [
     'unique' => 'Único',
     'display_in_user_view' => 'Permitir que o usuário selecionado veja estes valores em sua página de Ativos Atribuídos',
     'display_in_user_view_table' => 'Visível para o Usuário',
+    'auto_add_to_fieldsets' => 'Adicionar automaticamente para cada novo conjunto de campos',
+    'add_to_preexisting_fieldsets' => 'Adicionar para qualquer conjunto de campos existente',
+    'show_in_listview' => 'Mostrar nas visualizações de lista por padrão. Os usuários autorizados ainda poderão mostrar/ocultar através do seletor de colunas.',
+    'show_in_listview_short' => 'Mostrar nas listas',
+
 ];

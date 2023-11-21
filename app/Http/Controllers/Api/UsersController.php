@@ -75,14 +75,7 @@ class UsersController extends Controller
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
-        $users = Company::scopeCompanyables($users);
 
-
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -199,7 +192,7 @@ class UsersController extends Controller
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
 
@@ -272,6 +265,14 @@ class UsersController extends Controller
                 break;
         }
 
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
+        }
+
+        $users = Company::scopeCompanyables($users);
+        
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 
@@ -362,8 +363,12 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
-        $user->password = bcrypt($request->get('password', $tmp_pass));
+        // 
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->get('password'));
+        } else {
+            $user->password = $user->noPassword();
+        }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
         

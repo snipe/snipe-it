@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Silinen Kullanıcıları Göster',
     'title' 				=> 'Başlık',
 	'to_restore_them'		=> 'geri yüklemek için.',
+    'total_assets_cost'     => "Toplam demirbaş maaliyeti",
     'updateuser' 			=> 'Kullanıcıyı Güncelle',
     'username' 				=> 'Kullanıcı Adı',
 	'user_deleted_text' 	=> 'Bu kullanıcı silindi olarak işaretlenmiş.',

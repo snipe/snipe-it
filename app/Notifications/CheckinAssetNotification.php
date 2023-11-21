@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
@@ -65,6 +66,7 @@ class CheckinAssetNotification extends Notification
         $item = $this->item;
         $note = $this->note;
         $botname = ($this->settings->webhook_botname != '') ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
 
         $fields = [
             trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
@@ -75,6 +77,7 @@ class CheckinAssetNotification extends Notification
         return (new SlackMessage)
             ->content(':arrow_down: :computer: '.trans('mail.Asset_Checkin_Notification'))
             ->from($botname)
+            ->to($channel)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

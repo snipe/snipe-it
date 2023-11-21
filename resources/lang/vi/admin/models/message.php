@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Kiểu tài sản không tồn tại.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Tài sản này hiện tại đang liên kết với ít nhất một hoặc nhiều tài sản và không thể xóa. Xin vui lòng xóa tài sản, và cố gắng thử lại lần nữa. ',
 

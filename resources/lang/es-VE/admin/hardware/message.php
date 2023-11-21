@@ -22,8 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'El activo no fue restaurado, por favor, inténtalo de nuevo',
         'success' 		=> 'Activo restaurado correctamente.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Equipo restaurado correctamente.',
+        'nothing_updated'   => 'No se seleccionaron activos, por lo que no se restauró nada.', 
     ],
 
     'audit' => [
@@ -50,6 +50,7 @@ return [
         'success'               => 'Tu archivo ha sido importado',
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',
         'content_row_has_malformed_characters' => 'Uno o más atributos en la primera fila de contenido contienen caracteres UTF-8 mal formados',
     ],

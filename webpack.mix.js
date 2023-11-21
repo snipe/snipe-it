@@ -143,6 +143,7 @@ mix
     [
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
+     "./resources/assets/css/dragtable.css",
     ],
     "public/css/dist/bootstrap-table.css"
   )
@@ -170,6 +171,7 @@ mix.combine(
     "./resources/assets/js/signature_pad.js",
     "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js", //problem?
     "./node_modules/list.js/dist/list.js",
+    "./node_modules/clipboard/dist/clipboard.js",
   ],
   "public/js/build/vendor.js" // this file seems OK!
 );
@@ -180,10 +182,13 @@ mix.combine(
 mix
   .combine(
         [
+            "./resources/assets/js/dragtable.js",
             './node_modules/bootstrap-table/dist/bootstrap-table.js',
+            "./resources/assets/js/bootstrap-table-reorder-columns.js",
             './node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
+            './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
             './resources/assets/js/extensions/jquery.base64.js',
             './node_modules/tableexport.jquery.plugin/tableExport.min.js',
             './node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.umd.min.js',
@@ -199,6 +204,13 @@ mix
   .combine(
     ["./public/js/build/vendor.js", "./public/js/build/app.js"],
     "./public/js/dist/all.js"
+  )
+  .version();
+
+mix
+  .combine(
+    ['./node_modules/alpinejs/dist/cdn.js'],
+    './public/js/dist/all-defer.js'
   )
   .version();
 

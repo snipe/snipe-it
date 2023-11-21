@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Модель удалена',
     'does_not_exist' => 'Модель не существует.',
-    'no_association' => 'НЕТ СВЯЗАННОЙ МОДЕЛИ.',
+    'no_association' => 'ПРЕДУПРЕЖДЕНИЕ! Модель активов для этого элемента неверна или отсутствует!',
     'no_association_fix' => 'Это странно и ужасно сломает вещи. Отредактируйте этот актив сейчас, чтобы назначить ему модель.',
     'assoc_users'	 => 'Данная модель связана с одним или несколькими активами, и не может быть удалена. Удалите либо измените связанные активы. ',
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Никаких изменений нет, поэтому ничего не обновлено.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Модель успешно обновлена. |:model_count моделей успешно обновлено.',
+        'warn'          => 'Вы собираетесь обновить свойства следующей модели: |Вы собираетесь изменить свойства следующих моделей :model_count:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ни одна модель не выбрана, поэтому нечего удалить.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Модель удалена!|:success_count моделей удалено!',
         'success_partial' 	=> 'Удалено : success_count моделей(ль), однако: fail_count моделей не удалены, потому что они всё ещё имеют связанные с ними активы.'
     ),
 

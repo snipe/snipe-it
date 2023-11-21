@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Rodyti ištrintus naudotojus',
     'title' 				=> 'Antraštė',
 	'to_restore_them'		=> 'juos atkurti.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Atnaujinti naudotoją',
     'username' 				=> 'Vartotojo vardas',
 	'user_deleted_text' 	=> 'Šis naudotojas pažymėtas kaip ištrintas.',

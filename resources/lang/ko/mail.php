@@ -74,6 +74,7 @@ return [
     'your_credentials' => '당신의 Snipe-IT 인증들',
     'Accessory_Checkin_Notification' => '부속품 반입 됨',
     'Asset_Checkin_Notification' => '자산 반입 됨',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => '라이센스 확인 됨.',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',

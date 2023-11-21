@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'El componente no fue retirado, por favor, inténtalo de nuevo',
         'success' 		=> 'Componente retirado con éxito.',
-        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.'
+        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

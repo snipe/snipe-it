@@ -22,7 +22,7 @@ return [
     'restore' => [
         'error'   		=> 'Az eszköz nem állt helyre, kérjük, próbálkozzon újra',
         'success' 		=> 'Az eszköz sikeresen visszaállítva.',
-        'bulk_success' 		=> 'Asset restored successfully.',
+        'bulk_success' 		=> 'Az eszköz sikeresen visszaállítva.',
         'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
@@ -50,6 +50,7 @@ return [
         'success'               => 'A fájlt importálta',
         'file_delete_success'   => 'A fájlt sikeresen törölték',
         'file_delete_error'      => 'A fájlt nem sikerült törölni',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'A fejlécsorban egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
         'content_row_has_malformed_characters' => 'A tartalom első sorában egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
     ],

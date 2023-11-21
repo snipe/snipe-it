@@ -472,6 +472,12 @@ input[type=search] {
 .box-header.with-border {
   border-bottom: #000;
 }
+#upload-table tbody > tr.warning > td,
+#upload-table h3,
+#upload-table p {
+  background-color: #fcf8e3;
+  color: #000;
+}
 a {
   color: var(--link);
 }

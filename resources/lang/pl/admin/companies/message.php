@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Wskazana firma nie istnieje.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Wybrana kategoria jest obecnie powiązana z co najmniej jednym typem urządzenia i nie może zostać usunięta. Uaktualnij swoją listę modeli urządzeń by nie zwierała tej kategorii, a następnie spróbuj ponownie. ',
     'create' => [
         'error'   => 'Firma nie została utworzona, spróbuj ponownie.',

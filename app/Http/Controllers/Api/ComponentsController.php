@@ -13,6 +13,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Query\Builder;
 
 class ComponentsController extends Controller
 {
@@ -44,9 +45,8 @@ class ComponentsController extends Controller
                 'notes',
             ];
 
-
-        $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets', 'supplier'));
+        $components = Component::select('components.*')
+            ->with('company', 'location', 'category', 'assets', 'supplier');
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -77,7 +77,7 @@ class ComponentsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $components->count()) ? $components->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $components->count()) ? $components->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -204,12 +204,29 @@ class ComponentsController extends Controller
         $this->authorize('view', \App\Models\Asset::class);
         
         $component = Component::findOrFail($id);
-        $assets = $component->assets();
-
+        
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
-        $total = $assets->count();
-        $assets = $assets->skip($offset)->take($limit)->get();
+        
+        if ($request->filled('search')) {
+            $assets = $component->assets()
+                                ->where(function ($query) use ($request) {
+                                    $search_str = '%' . $request->input('search') . '%';
+                                    $query->where('name', 'like', $search_str)
+                                            ->orWhereIn('model_id', function (Builder $query) use ($request) {
+                                                $search_str = '%' . $request->input('search') . '%';
+                                                $query->selectRaw('id')->from('models')->where('name', 'like', $search_str);
+                                            })
+                                            ->orWhere('asset_tag', 'like', $search_str);
+                                         })
+                                         ->get();
+            $total = $assets->count();
+        } else {
+            $assets = $component->assets();
+            
+            $total = $assets->count();
+            $assets = $assets->skip($offset)->take($limit)->get();
+        }
 
         return (new ComponentsTransformer)->transformCheckedoutComponents($assets, $total);
     }
@@ -236,7 +253,7 @@ class ComponentsController extends Controller
         $this->authorize('checkout', $component);
 
         $validator = Validator::make($request->all(), [
-            'asset_id'          => 'required|exists:assets,id',
+            'assigned_to'          => 'required|exists:assets,id',
             'assigned_qty'      => "required|numeric|min:1|digits_between:1,".$component->numRemaining(),
         ]);
 
@@ -246,7 +263,7 @@ class ComponentsController extends Controller
         }
 
         // Make sure there is at least one available to checkout
-        if ($component->numRemaining() <= $request->get('assigned_qty')) {
+        if ($component->numRemaining() < $request->get('assigned_qty')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
         }
 

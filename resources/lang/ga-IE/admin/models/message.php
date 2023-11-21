@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Níl múnla ann.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Tá an tsamhail seo bainteach le sócmhainní amháin nó níos mó faoi láthair agus ní féidir é a scriosadh. Scrios na sócmhainní, agus ansin déan iarracht a scriosadh arís.',
 

@@ -49,4 +49,9 @@ return [
     'unique' => 'ייחודי',
     'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
     'display_in_user_view_table' => 'Visible to User',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
+    'show_in_listview' => 'הצגה בתצוגות רשימה כברירת מחדל. משתמשים מורשים עדיין יוכלו להציג/להסתיר את בורר העמודות.',
+    'show_in_listview_short' => 'הצגה ברשימות',
+
 ];

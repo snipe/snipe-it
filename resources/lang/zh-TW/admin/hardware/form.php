@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> '確認批次刪除資產',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => '確認批次還原資產', 
   'bulk_delete_help'	=> '請再次確認批次刪除的資產。刪除後資產可以恢復，但將會失去當前的用戶關聯資訊。',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> '請再次確認批次還原的資產。還原後，這些資產將不再與它們先前分配的任何使用者相關聯。',
   'bulk_delete_warn'	=> '即將刪除 :asset_count 項資產',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> '您即將還原 :asset_count 項資產。',
     'bulk_update'		=> '批次更新資產',
     'bulk_update_help'	=> '此表格允許您同時修改多項資產。請僅填寫需要修改的欄位，留空的欄位不會做任何修改。',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> '您即將編輯單一資產的屬性。|您即將編輯 :asset_count 項資產的屬性。',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> '借出至',
     'checkout_date'		=> '借出日期',
     'checkin_date'		=> '繳回日期',
@@ -46,9 +49,9 @@ return [
     'asset_location' => '更新資產位置',
     'asset_location_update_default_current' => '更新預設位置和實際位置',
     'asset_location_update_default' => '只更新預設位置',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'asset_not_deployable' => '該資產狀態無法部署。此資產無法被借出。',
+    'asset_deployable' => '該狀態可部署。此資產可以被借出。',
+    'processing_spinner' => '處理中... (大型檔案可能需要一些時間)',
+    'optional_infos'  => '選填資訊',
+    'order_details'   => '訂單相關資訊'
 ];

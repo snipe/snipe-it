@@ -2,9 +2,10 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Malli ei löydy.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association_fix' => 'Tämä tulee rikkomaam asioita oudoilla ja kauhistuttavilla tavoilla. Muokkaa tätä laitetta nyt määrittääksesi sille mallin.',
     'assoc_users'	 => 'Tämä malli on käytössä yhdellä tai useammalla laitteella joten sitä ei voida poistaa. Poista malli käytöstä kaikilta laitteilta ja yritä uudelleen. ',
 
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Mitään kentistä ei ollut muutettu, joten mitään ei päivitetty.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Malli päivitetty onnistuneesti. |:model_count mallia päivitetty onnistuneesti.',
+        'warn'          => 'Olet päivittämässä seuraavan mallin ominaisuuksia: | Olet päivittämässä seuraavien :model_count mallin ominaisuuksia:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ei malleja valittuna, mitään ei poistettu.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Malli poistettu!|:success_count mallia poistettu!',
         'success_partial' 	=> ':success_count malli(a) poistettiin, mutta :fail_count ei voitu poistaa, koska niillä on vielä niihin liittyviä laitteita.'
     ),
 

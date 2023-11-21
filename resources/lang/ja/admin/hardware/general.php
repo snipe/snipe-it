@@ -12,6 +12,7 @@ return [
     'clone'  					=> '資産を複製',
     'deployable'  				=> '配備可能',
     'deleted'  					=> 'この資産は削除されました。',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> '資産を編集',
     'model_deleted'  			=> 'この資産モデルは削除されました。資産を復元する前に、モデルを復元する必要があります。',
     'model_invalid'             => 'この資産のモデルは無効です。',
@@ -19,10 +20,11 @@ return [
     'requestable'               => '要求可能',
     'requested'				    => '要求済',
     'not_requestable'           => '要求可能ではありません',
-    'requestable_status_warning' => '要求可能な状態を変更しないでください',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> '資産を復元',
     'pending'  					=> 'ペンディング',
     'undeployable'  			=> '配備不可',
+    'undeployable_tooltip'  	=> 'この資産にはデプロイできないステータスラベルがあります。現時点ではチェックアウトできません。',
     'view'  					=> '資産を表示',
     'csv_error' => 'CSVファイルにエラーがあります:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => '詳細は以下を確認してください。',
     'custom_export' => 'カスタムエクスポート',
     'mfg_warranty_lookup' => ':manufacturer 保証書の発行状況を検索',
+    'user_department' => 'User Department',
 ];

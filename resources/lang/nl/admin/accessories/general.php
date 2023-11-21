@@ -16,6 +16,7 @@ return array(
     'update'  							=> 'Accessoire bijwerken',
     'use_default_eula'					=> 'Gebruik de <a href="#" data-toggle="modal" data-target="#eulaModal"> standaard gebruikersovereenkomst</a>.',
     'use_default_eula_disabled'			=> '<del>Gebruik de standaard gebruikersovereenkomst.</del> Geen standaard gebruikersovereenkomst ingesteld. Ga naar Instellingen en voeg er één toe.',
-    'clone'                             => 'Clone Accessory',
+    'clone'                             => 'Accessoire dupliceren',
+    'delete_disabled'                   => 'Deze accessoire kan niet verwijderd worden! Er zijn er nog objecten uitgecheckt.',
 
 );

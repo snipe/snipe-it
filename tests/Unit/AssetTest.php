@@ -12,23 +12,130 @@ class AssetTest extends TestCase
 {
     use InteractsWithSettings;
 
-    // public function testAutoIncrementMixed()
-    // {
-    //     $expected = '123411';
-    //     $next = Asset::nextAutoIncrement(
-    //         collect([
-    //             ['asset_tag' => '0012345'],
-    //             ['asset_tag' => 'WTF00134'],
-    //             ['asset_tag' => 'WTF-745'],
-    //             ['asset_tag' => '0012346'],
-    //             ['asset_tag' => '00123410'],
-    //             ['asset_tag' => 'U8T7597h77'],
-    //         ])
-    //     );
+    public function testAutoIncrement()
+    {
+        $this->settings->enableAutoIncrement();
 
-    //     \Log::debug('Next: '.$next);
-    //     $this->assertEquals($expected, $next);
-    // }
+        $a = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset() ]);
+        $b = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset() ]);
+
+        $this->assertModelExists($a);
+        $this->assertModelExists($b);
+
+    }
+    public function testAutoIncrementCollision()
+    {
+        $this->settings->enableAutoIncrement();
+
+        // we have to do this by hand to 'simulate' two web pages being open at the same time
+        $a = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset() ]);
+        $b = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset() ]);
+
+        $this->assertTrue($a->save());
+        $this->assertFalse($b->save());
+    }
+
+    public function testAutoIncrementDouble()
+    {
+        // make one asset with the autoincrement *ONE* higher than the next auto-increment
+        // make sure you can then still make another
+        $this->settings->enableAutoIncrement();
+
+        $gap_number = Asset::autoincrement_asset(1);
+        $final_number = Asset::autoincrement_asset(2);
+        $a = Asset::factory()->make(['asset_tag' => $gap_number]); //make an asset with an ID that is one *over* the next increment
+        $b = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset()]); //but also make one with one that is *at* the next increment
+        $this->assertTrue($a->save());
+        $this->assertTrue($b->save());
+
+        //and ensure a final asset ends up at *two* over what would've been the next increment at the start
+        $c = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset()]);
+        $this->assertTrue($c->save());
+        $this->assertEquals($c->asset_tag, $final_number);
+    }
+
+    public function testAutoIncrementGapAndBackfill()
+    {
+        // make one asset 3 higher than the next auto-increment
+        // manually make one that's 1 lower than that
+        // make sure the next one is one higher than the 3 higher one.
+        $this->settings->enableAutoIncrement();
+
+        $big_gap = Asset::autoincrement_asset(3);
+        $final_result = Asset::autoincrement_asset(4);
+        $backfill_one = Asset::autoincrement_asset(0);
+        $backfill_two = Asset::autoincrement_asset(1);
+        $backfill_three = Asset::autoincrement_asset(2);
+        $a = Asset::factory()->create(['asset_tag' => $big_gap]);
+        $this->assertModelExists($a);
+
+        $b = Asset::factory()->create(['asset_tag' => $backfill_one]);
+        $this->assertModelExists($b);
+
+        $c = Asset::factory()->create(['asset_tag' => $backfill_two]);
+        $this->assertModelExists($c);
+
+        $d = Asset::factory()->create(['asset_tag' => $backfill_three]);
+        $this->assertModelExists($d);
+
+        $final = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset()]);
+        $this->assertModelExists($final);
+        $this->assertEquals($final->asset_tag, $final_result);
+    }
+
+    public function testPrefixlessAutoincrementBackfill()
+    {
+        // TODO: COPYPASTA FROM above, is there a way to still run this test but not have it be so duplicative?
+        $this->settings->enableAutoIncrement()->set(['auto_increment_prefix' => '']);
+
+        $big_gap = Asset::autoincrement_asset(3);
+        $final_result = Asset::autoincrement_asset(4);
+        $backfill_one = Asset::autoincrement_asset(0);
+        $backfill_two = Asset::autoincrement_asset(1);
+        $backfill_three = Asset::autoincrement_asset(2);
+        $a = Asset::factory()->create(['asset_tag' => $big_gap]);
+        $this->assertModelExists($a);
+
+        $b = Asset::factory()->create(['asset_tag' => $backfill_one]);
+        $this->assertModelExists($b);
+
+        $c = Asset::factory()->create(['asset_tag' => $backfill_two]);
+        $this->assertModelExists($c);
+
+        $d = Asset::factory()->create(['asset_tag' => $backfill_three]);
+        $this->assertModelExists($d);
+
+        $final = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset()]);
+        $this->assertModelExists($final);
+        $this->assertEquals($final->asset_tag, $final_result);
+    }
+
+    public function testUnzerofilledPrefixlessAutoincrementBackfill()
+    {
+        // TODO: COPYPASTA FROM above (AGAIN), is there a way to still run this test but not have it be so duplicative?
+        $this->settings->enableAutoIncrement()->set(['auto_increment_prefix' => '','zerofill_count' => 0]);
+
+        $big_gap = Asset::autoincrement_asset(3);
+        $final_result = Asset::autoincrement_asset(4);
+        $backfill_one = Asset::autoincrement_asset(0);
+        $backfill_two = Asset::autoincrement_asset(1);
+        $backfill_three = Asset::autoincrement_asset(2);
+        $a = Asset::factory()->create(['asset_tag' => $big_gap]);
+        $this->assertModelExists($a);
+
+        $b = Asset::factory()->create(['asset_tag' => $backfill_one]);
+        $this->assertModelExists($b);
+
+        $c = Asset::factory()->create(['asset_tag' => $backfill_two]);
+        $this->assertModelExists($c);
+
+        $d = Asset::factory()->create(['asset_tag' => $backfill_three]);
+        $this->assertModelExists($d);
+
+        $final = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset()]);
+        $this->assertModelExists($final);
+        $this->assertEquals($final->asset_tag, $final_result);
+    }
 
     public function testWarrantyExpiresAttribute()
     {

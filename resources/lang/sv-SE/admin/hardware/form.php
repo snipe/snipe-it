@@ -10,6 +10,9 @@ return [
     'bulk_update'		=> 'Bulk Update Assets',
     'bulk_update_help'	=> 'I det här formuläret kan du uppdatera flera tillgångar på en gång. Fyll bara i de fält du behöver ändra. Alla fält som lämnas tomma kommer att förbli oförändrade.',
     'bulk_update_warn'	=> 'Du håller på att redigera egenskaperna för en enda tillgång.|Du håller på att redigera egenskaperna för :asset_count tillgångar.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Utcheckad till',
     'checkout_date'		=> 'Utcheckningsdatum',
     'checkin_date'		=> 'Incheckningsdatum',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Uppdatera endast standardplats',
     'asset_not_deployable' => 'Denna tillgångs status kan inte distribueras. Denna tillgång kan inte checkas ut.',
     'asset_deployable' => 'Denna status är distribuerbar. Denna tillgång kan checkas ut.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Bearbetar... (Detta kan ta lite tid på stora filer)',
     'optional_infos'  => 'Valfri information',
     'order_details'   => 'Beställningsrelaterad information'
 ];

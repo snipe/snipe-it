@@ -37,6 +37,8 @@ class LocationsController extends Controller
             'locations.city',
             'locations.state',
             'locations.zip',
+            'locations.phone',
+            'locations.fax',
             'locations.country',
             'locations.parent_id',
             'locations.manager_id',
@@ -79,7 +81,7 @@ class LocationsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -251,8 +253,12 @@ class LocationsController extends Controller
      */
     public function selectlist(Request $request)
     {
-
-        $this->authorize('view.selectlists');
+        // If a user is in the process of editing their profile, as determined by the referrer,
+        // then we check that they have permission to edit their own location.
+        // Otherwise, we do our normal check that they can view select lists.
+        $request->headers->get('referer') === route('profile')
+            ? $this->authorize('self.edit_location')
+            : $this->authorize('view.selectlists');
 
         $locations = Location::select([
             'locations.id',

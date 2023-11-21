@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\AssetModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
@@ -76,6 +77,7 @@ class AssetModelsController extends Controller
         $model->depreciation_id = $request->input('depreciation_id');
         $model->name = $request->input('name');
         $model->model_number = $request->input('model_number');
+        $model->min_amt = $request->input('min_amt');
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
@@ -153,6 +155,7 @@ class AssetModelsController extends Controller
         $model->eol = $request->input('eol');
         $model->name = $request->input('name');
         $model->model_number = $request->input('model_number');
+        $model->min_amt = $request->input('min_amt');
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
@@ -171,8 +174,20 @@ class AssetModelsController extends Controller
                 }
             }
         }
-
+       
+      
+       
         if ($model->save()) {
+            if ($model->wasChanged('eol')) {
+                    if ($model->eol > 0) {
+                        $newEol = $model->eol; 
+                        $model->assets()->whereNotNull('purchase_date')->where('eol_explicit', false)
+                            ->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL ' . $newEol . ' MONTH)')]);
+                        } elseif ($model->eol == 0) {
+    						$model->assets()->whereNotNull('purchase_date')->where('eol_explicit', false)
+    							->update(['asset_eol_date' => DB::raw('null')]);
+					}
+                }
             return redirect()->route('models.index')->with('success', trans('admin/models/message.update.success'));
         }
 
@@ -286,6 +301,7 @@ class AssetModelsController extends Controller
         return view('models/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('item', $model)
+            ->with('model_id', $model_to_clone->id)
             ->with('clone_model', $model_to_clone);
     }
 

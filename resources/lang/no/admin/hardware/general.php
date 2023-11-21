@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klon eiendel',
     'deployable'  				=> 'Utleverbar',
     'deleted'  					=> 'Denne eiendelen har blitt slettet.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Rediger eiendel',
     'model_deleted'  			=> 'Denne eiendelsmodellen er slettet. Du må gjenopprette modellen før du kan gjenopprette eiendelen.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Forespørrbar',
     'requested'				    => 'Forespurt',
     'not_requestable'           => 'Ikke mulig å spørre etter',
-    'requestable_status_warning' => 'Ikke endre forespørselsstatus',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Gjenopprett eiendel',
     'pending'  					=> 'Under arbeid',
     'undeployable'  			=> 'Ikke utleverbar',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vis eiendel',
     'csv_error' => 'Du har en feil i din CSV-fil:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Vennligst se nedenfor for detaljer.',
     'custom_export' => 'Egendefinert eksport',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

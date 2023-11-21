@@ -30,15 +30,17 @@ class LicenseCheckoutController extends Controller
         // Check that the license is valid
         if ($license = License::find($licenseId)) {
 
+            $this->authorize('checkout', $license);
             // If the license is valid, check that there is an available seat
             if ($license->avail_seats_count < 1) {
                 return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
             }
+            return view('licenses/checkout', compact('license'));
         }
 
-        $this->authorize('checkout', $license);
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
 
-        return view('licenses/checkout', compact('license'));
+
     }
 
     /**
@@ -61,6 +63,7 @@ class LicenseCheckoutController extends Controller
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
+        $licenseSeat->notes = $request->input('notes');
         
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
@@ -102,7 +105,7 @@ class LicenseCheckoutController extends Controller
             $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
 
             return true;
         }
@@ -119,7 +122,7 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
 
             return true;
         }

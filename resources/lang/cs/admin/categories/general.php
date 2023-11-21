@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Klonovat Kategorii',
     'create'  							=> 'Vytvořit kategorii',
     'edit'                              => 'Upravit Kategorii',
+    'email_will_be_sent_due_to_global_eula' => 'Protože se používá globální EULA, bude uživateli zaslán e-mail.',
+    'email_will_be_sent_due_to_category_eula' => 'Pro tuto kategorii je v platnosti EULA, uživateli bude zaslán e-mail.',
     'eula_text'							=> 'EULA Kategorie',
     'eula_text_help'					=> 'Toto pole umožňuje upravit EULA pro různé druhy majetku. Pokud máte pouze jeden typ pro všechen majetek, můžete zaškrtnout položku níže pro použití jako výchozí.',
     'name'                              => 'Název kategorie',

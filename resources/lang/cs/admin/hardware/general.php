@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klonovat majetek',
     'deployable'  				=> 'Připraveno k nasazení',
     'deleted'  					=> 'Tento majetek byl odstraněn.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Upravit majetek',
     'model_deleted'  			=> 'Tento model majetku byl odstraněn. Před obnovením majetku musíte model obnovit.',
     'model_invalid'             => 'Model tohoto majetku je neplatný.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Lze vyžádat',
     'requested'				    => 'Požadováno',
     'not_requestable'           => 'Nelze vyžádat',
-    'requestable_status_warning' => 'Neměnit požadovaný stav',
+    'requestable_status_warning' => 'Neměnit stav K vyžádání',
     'restore'  					=> 'Obnovit zařízení',
     'pending'  					=> 'Čekající',
     'undeployable'  			=> 'Nelze vyskladnit',
+    'undeployable_tooltip'  	=> 'Tento majetek je ve stavu, který neumožňuje nasazení, a nemůže tak být vydán.',
     'view'  					=> 'Zobrazit majetek',
     'csv_error' => 'Máte chybu v souboru CSV:',
     'import_text' => '
@@ -43,5 +45,6 @@ return [
     'success_messages' => 'Úspěšné zprávy:',
     'alert_details' => 'Podrobnosti naleznete níže.',
     'custom_export' => 'Uživatelsky definovaný export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'mfg_warranty_lookup' => 'Vyhledávání stavu záruky :manufacturer',
+    'user_department' => 'Oddělení',
 ];

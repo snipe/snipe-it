@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.'
+        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.',
+         'unavailable'      => 'Nema dovoljno potrošnog materijala za ovo zaduženje. Molim vas proverite preostalu količinu. ',
     ),
 
     'checkin' => array(

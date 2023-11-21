@@ -53,7 +53,7 @@
 
 
                 @else
-                    @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
+                    @if (($field->field_encrypted=='0') || (Gate::allows('assets.view.encrypted_custom_fields')))
                     <input type="text" value="{{ Request::old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
                         @else
                             <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
@@ -85,3 +85,12 @@
     </div>
   @endforeach
 @endif
+
+
+<script nonce="{{ csrf_token() }}">
+    // We have to re-call the tooltip since this is pulled in after the DOM has loaded
+    $('[data-tooltip="true"]').tooltip({
+        container: 'body',
+        animation: true,
+    });
+</script>

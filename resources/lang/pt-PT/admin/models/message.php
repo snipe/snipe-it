@@ -2,9 +2,10 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'O Modelo não existe.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'AVISO! O modelo de artigo para este item é inválido ou está em falta!',
+    'no_association_fix' => 'Isto estragará as coisas de maneiras estranhas e horríveis. Edite este artigo agora para lhe atribuir um modelo.',
     'assoc_users'	 => 'Este modelo está atualmente associado com pelo menos um artigo e não pode ser removido. Por favor, remova os artigos e depois tente novamente. ',
 
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Nenhum campo foi alterado, portanto, nada foi atualizado.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Modelo foi atualizado com sucesso. |:model_count modelos atualizados com sucesso.',
+        'warn'          => 'Está prestes a atualizar as propriedades do seguinte modelo: |Está prestes a editar as propriedades dos seguintes :model_count models:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nenhum modelo selecionado, por isso nenhum modelo foi eliminado.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Modelo apagado!|:success_count modelos apagados!',
         'success_partial' 	=> ':sucess_count modelo(s) eliminados, no entanto :fail_count não foram eliminados, porque ainda têm artigos associados.'
     ),
 

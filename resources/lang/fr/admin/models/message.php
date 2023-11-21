@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Le modèle n\'existe pas.',
-    'no_association' => 'AUCUN MODELE ASSOCIÉ.',
+    'no_association' => 'ATTENTION ! Le modèle d\'actif pour cet objet est invalide ou manquant !',
     'no_association_fix' => 'Cela va casser les choses de manière bizarre et horrible. Modifiez cette ressource maintenant pour lui assigner un modèle.',
     'assoc_users'	 => 'Ce modèle est actuellement associé à au moins un actif et ne peut pas être supprimé. Veuillez supprimer les actifs associés et essayer à nouveau. ',
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Aucun champ n\'a été changé, donc rien n\'a été mis à jour.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Modèle mis à jour avec succès. |:model_count modèles mis à jour avec succès.',
+        'warn'          => 'Vous êtes sur le point de mettre à jour les propriétés du modèle suivant : |Vous êtes sur le point de modifier les propriétés des :model_count modèles suivants :',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Aucun modèle n\'a été sélectionné, donc rien n\'a été supprimé.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Modèle supprimé !|:success_count modèles supprimés !',
         'success_partial' 	=> ': les modèles success_count ont été supprimés, cependant : fail_count n\'a pas pu être supprimé car ils ont toujours des ressources associées.'
     ),
 

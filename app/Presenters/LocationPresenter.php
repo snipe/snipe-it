@@ -106,7 +106,7 @@ class LocationPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.address'),
+                'title' =>  trans('admin/locations/table.address2'),
                 'visible' => false,
             ],
             [
@@ -140,6 +140,24 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('admin/locations/table.country'),
                 'visible' => false,
+            ],
+            [
+                'field' => 'phone',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/users/table.phone'),
+                'visible' => false,
+                'formatter'    => 'phoneFormatter',
+            ],
+            [
+                'field' => 'fax',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.fax'),
+                'visible' => false,
+                'formatter'    => 'phoneFormatter',
             ],
             [
                 'field' => 'ldap_ou',

@@ -49,4 +49,9 @@ return [
     'unique' => 'Único',
     'display_in_user_view' => 'Permitir al usuario asignado ver estos valores en su página Ver Recursos asignados',
     'display_in_user_view_table' => 'Visible al Usuario',
+    'auto_add_to_fieldsets' => 'Añadir automáticamente a cada nuevo conjunto de campos',
+    'add_to_preexisting_fieldsets' => 'Añadir a cualquier conjunto de campos existente',
+    'show_in_listview' => 'Mostrar por defecto en las vistas de lista. Los usuarios autorizados aún podrán mostrar/ocultar a través del selector de columnas.',
+    'show_in_listview_short' => 'Mostrar en listas',
+
 ];

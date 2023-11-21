@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponenttia ei luovutettu, yritä uudelleen',
         'success' 		=> 'Komponentin luovutus onnistui.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
+        'unavailable'      => 'Ei riittävästi komponentteja: :remaining jäljellä, :requested pyydetty ',
     ),
 
     'checkin' => array(

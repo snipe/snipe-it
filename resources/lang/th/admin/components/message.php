@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'ตรวจสอบคอมโพเนนต์แล้วโปรดลองอีกครั้ง',
         'success' 		=> 'ตรวจสอบคอมโพเนนต์เรียบร้อยแล้ว',
-        'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.'
+        'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

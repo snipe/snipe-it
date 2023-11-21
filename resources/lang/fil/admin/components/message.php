@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ang komponent ay hindi nai-check out, mangyaring subukang muli',
         'success' 		=> 'Ang komponent ay matagukpay nang nai-check out.',
-        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.'
+        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

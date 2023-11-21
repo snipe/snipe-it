@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Nhân đôi tài sản',
     'deployable'  				=> 'Cho phép cấp phát',
     'deleted'  					=> 'Tài sản này đã bị xóa.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Sửa tài sản',
     'model_deleted'  			=> 'Model tài sản này đã bị xóa. Vui lòng khôi phục lại model trước khi khôi phục tài sản.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Cho phép đề xuất',
     'requested'				    => 'Yêu cầu',
     'not_requestable'           => 'Không cho phép đề xuất',
-    'requestable_status_warning' => 'Không đổi trạng thái yêu cầu được',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Phục hồi tài sản',
     'pending'  					=> 'Đang chờ',
     'undeployable'  			=> 'Không cho phép cấp phát',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Xem tài sản',
     'csv_error' => 'Có lỗi trong file CSV của bạn:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Xem bên dưới để biết thêm chi tiết.',
     'custom_export' => 'Lựa chọn xuất',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

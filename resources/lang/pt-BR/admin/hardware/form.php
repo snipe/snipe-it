@@ -10,6 +10,9 @@ return [
     'bulk_update'		=> 'Ativos da Atualização em Massa',
     'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez só. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado. ',
     'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de um único ativo.Você está prestes a editar as propriedades de :asset_count ativos.',
+    'bulk_update_with_custom_field' => 'Observe que os ativos são :asset_model_count diferentes tipos de modelos.',
+    'bulk_update_model_prefix' => 'Em Modelos', 
+    'bulk_update_custom_field_unique' => 'Este é um campo único e não pode ser editado em massa.',
     'checkedout_to'		=> 'Alocado para',
     'checkout_date'		=> 'Data de alocação',
     'checkin_date'		=> 'Data de devolução',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Atualizar somente local padrão',
     'asset_not_deployable' => 'Este status de ativo não é implantado. Este ativo não pode ser verificado.',
     'asset_deployable' => 'Este status pode ser implementado. Este ativo pode ser verificado.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Processando... (Isso pode levar algum tempo em arquivos grandes)',
     'optional_infos'  => 'Informação Opcional',
     'order_details'   => 'Informações do pedido relacionado'
 ];

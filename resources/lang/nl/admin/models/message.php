@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Verwijderd asset model',
     'does_not_exist' => 'Model bestaat niet.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association' => 'WAARSCHUWING! Het asset model voor dit item is ongeldig of ontbreekt!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Dit model is momenteel gekoppeld met één of meer assets en kan niet worden verwijderd. Verwijder de assets en probeer het opnieuw. ',
 

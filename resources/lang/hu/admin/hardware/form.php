@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'A tömeges törlési eszközök megerősítése',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Az eszközök tömeges helyreállításának megerősítése', 
   'bulk_delete_help'	=> 'Tömeges törléshez tekintse át az eszközöket. Ha törli az eszközöket, azok visszaállíthatók, de többé nem lesznek hozzárendelve a korábban hozzárendelt felhasználókhoz.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Tekintse át az alábbi eszközöket a tömeges helyreállításhoz. A visszaállítás után ezek az eszközök nem lesznek társítva a korábban hozzárendelt felhasználókhoz.',
   'bulk_delete_warn'	=> 'Le akarod törölni a :asset_count eszközt.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Vissza készül állítani :asset_count eszközt.',
     'bulk_update'		=> 'Tömeges eszköz frissítés',
     'bulk_update_help'	=> 'Ez az űrlap segít frissíteni több eszközt egyszerre. Csak töltsd ki a változtatni kívánt mezőket. Mindent amit üresen hagysz az változatlan marad. ',
     'bulk_update_warn'	=> 'Egyetlen eszköz tulajdonságait kívánja szerkeszteni.|:asset_count eszköz tulajdonságait kívánja szerkeszteni.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'Ezeken a modelleken', 
+    'bulk_update_custom_field_unique' => 'Ez egy egyedi mező és nem lehet tömegesen módosítani.',
     'checkedout_to'		=> 'Kiadva',
     'checkout_date'		=> 'Kiadási dátum',
     'checkin_date'		=> 'Visszavétel dátuma',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Csak az alapértelmezett helyszín frissítése',
     'asset_not_deployable' => 'Az eszköz még nem kiadásra kész, még nem kiadható.',
     'asset_deployable' => 'Az eszköz kiadásra kész, kiadható.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Feldolgozás folyamatban... (Nagyméretű fájlok esetében ez eltarthat egy darabig)',
     'optional_infos'  => 'Nem kötelező információk',
     'order_details'   => 'Megrendeléssel kapcsolatos információk'
 ];

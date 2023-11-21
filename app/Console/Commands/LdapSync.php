@@ -18,7 +18,7 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--filter=} {--summary} {--json_summary}';
+    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=*} {--base_dn=} {--filter=} {--summary} {--json_summary}';
 
     /**
      * The console command description.
@@ -83,7 +83,16 @@ class LdapSync extends Command
         $summary = [];
 
         try {
-            if ($this->option('base_dn') != '') {
+            if ( $this->option('location_id') != '') {
+
+                foreach($this->option('location_id') as $location_id){
+                    $location_ou= Location::where('id', '=', $location_id)->value('ldap_ou');
+                    $search_base = $location_ou;
+                    Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
+                 }
+            }
+
+            else if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
                 Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
@@ -106,17 +115,21 @@ class LdapSync extends Command
 
         /* Determine which location to assign users to by default. */
         $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
+            if ($this->option('location') != '') {
+                if ($location = Location::where('name', '=', $this->option('location'))->first()) {
+                    Log::debug('Location name ' . $this->option('location') . ' passed');
+                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+                }
 
-        if ($this->option('location') != '') {
-            $location = Location::where('name', '=', $this->option('location'))->first();
-            Log::debug('Location name '.$this->option('location').' passed');
-            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
-        } elseif ($this->option('location_id') != '') {
-            $location = Location::where('id', '=', $this->option('location_id'))->first();
-            Log::debug('Location ID '.$this->option('location_id').' passed');
-            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
+            } elseif ($this->option('location_id') != '') {
+                foreach($this->option('location_id') as $location_id) {
+                if ($location = Location::where('id', '=', $location_id)->first()) {
+                    Log::debug('Location ID ' . $location_id . ' passed');
+                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+                }
+
+            }
         }
-
         if (! isset($location)) {
             Log::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }
@@ -180,10 +193,6 @@ class LdapSync extends Command
             }
         }
 
-        /* Create user account entries in Snipe-IT */
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
-        $pass = bcrypt($tmp_pass);
-
         $manager_cache = [];
 
         if($ldap_default_group != null) {
@@ -212,9 +221,12 @@ class LdapSync extends Command
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
 
-                $location = Location::firstOrCreate([
-                    'name' => $item['location'],
-                ]);
+                // ONLY if you are using the "ldap_location" option *AND* you have an actual result
+                if ($ldap_result_location && $item['location']) {
+                        $location = Location::firstOrCreate([
+                                'name' => $item['location'],
+                        ]);
+                }
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
@@ -226,22 +238,44 @@ class LdapSync extends Command
                 } else {
                     // Creating a new user.
                     $user = new User;
-                    $user->password = $pass;
+                    $user->password = $user->noPassword();
                     $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item['createorupdate'] = 'created';
                 }
 
-                $user->first_name = $item['firstname'];
-                $user->last_name = $item['lastname'];
+            //If a sync option is not filled in on the LDAP settings don't populate the user field
+            if($ldap_result_username  != null){
                 $user->username = $item['username'];
-                $user->email = $item['email'];
+            }
+            if($ldap_result_last_name != null){
+                $user->last_name = $item['lastname'];
+            }
+            if($ldap_result_first_name != null){
+                $user->first_name = $item['firstname'];
+            }
+            if($ldap_result_emp_num  != null){
                 $user->employee_num = e($item['employee_number']);
+            }
+            if($ldap_result_email != null){
+                $user->email = $item['email'];
+            }
+            if($ldap_result_phone != null){
                 $user->phone = $item['telephone'];
+            }
+            if($ldap_result_jobtitle != null){
                 $user->jobtitle = $item['jobtitle'];
+            }
+            if($ldap_result_country != null){
                 $user->country = $item['country'];
+            }
+            if($ldap_result_dept  != null){
                 $user->department_id = $department->id;
-                $user->location_id = $location->id;
+            }
+            if($ldap_result_location != null){
+                $user->location_id = $location ? $location->id : null;
+            }
 
+            if($ldap_result_manager != null){
                 if($item['manager'] != null) {
                     // Check Cache first
                     if (isset($manager_cache[$item['manager']])) {
@@ -281,6 +315,7 @@ class LdapSync extends Command
 
                     }
                 }
+            }
 
                 // Sync activated state for Active Directory.
                 if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....

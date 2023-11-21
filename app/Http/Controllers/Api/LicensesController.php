@@ -26,8 +26,8 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
+        $licenses = License::with('company', 'manufacturer', 'supplier','category')->withCount('freeSeats as free_seats_count');
 
         if ($request->filled('company_id')) {
             $licenses->where('company_id', '=', $request->input('company_id'));
@@ -95,7 +95,7 @@ class LicensesController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $licenses->count()) ? $licenses->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $licenses->count()) ? $licenses->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';

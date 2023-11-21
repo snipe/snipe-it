@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'Pengguna telah menerima',
+    'acceptance_asset_declined' => 'Pengguna telah menolak',
     'a_user_canceled' => 'Pengguna telah membatalkan permintaan item di situs web',
     'a_user_requested' => 'Pengguna telah meminta item di situs web',
     'accessory_name' => 'Nama Aksesori:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Login ke instalasi Snipe-IT baru Anda dengan menggunakan kredensial di bawah ini:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Laporan Inventaris Rendah',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Laporan Inventori',
     'min_QTY' => 'Min QTY',
     'name' => 'Nama',
     'new_item_checked' => 'Item baru telah diperiksa berdasarkan nama Anda, rinciannya ada di bawah.',
@@ -74,10 +74,11 @@ return [
     'your_credentials' => 'Kredensial Snipe-IT Anda',
     'Accessory_Checkin_Notification' => 'Aksesoris Kembali',
     'Asset_Checkin_Notification' => 'Aset Kembali',
+    'Asset_Checkout_Notification' => 'Kembali-kan aset',
     'License_Checkin_Notification' => 'Lisensi Kembali',
     'Expected_Checkin_Report' => 'Laporan check-in aset yang diharapkan',
     'Expected_Checkin_Notification' => 'Pengingat: :name mendekati batas waktu check-in [Dikembalikan]',
     'Expected_Checkin_Date' => 'Aset yang check out untuk Anda akan check in kembali pada :date',
     'your_assets' => 'Lihat Aset Anda',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Hak cipta di lindungi undang-undang.',
 ];

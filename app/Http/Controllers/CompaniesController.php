@@ -60,6 +60,9 @@ final class CompaniesController extends Controller
 
         $company = new Company;
         $company->name = $request->input('name');
+        $company->phone = $request->input('phone');
+        $company->fax = $request->input('fax');
+        $company->email = $request->input('email');
 
         $company = $request->handleImages($company);
 
@@ -111,6 +114,9 @@ final class CompaniesController extends Controller
         $this->authorize('update', $company);
 
         $company->name = $request->input('name');
+        $company->phone = $request->input('phone');
+        $company->fax = $request->input('fax');
+        $company->email = $request->input('email');
 
         $company = $request->handleImages($company);
 
@@ -119,8 +125,7 @@ final class CompaniesController extends Controller
                 ->with('success', trans('admin/companies/message.update.success'));
         }
 
-        return redirect()->route('companies.edit', ['company' => $companyId])
-            ->with('error', trans('admin/companies/message.update.error'));
+        return redirect()->back()->withInput()->withErrors($company->getErrors());
     }
 
     /**

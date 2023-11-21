@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponen belum tertanda keluar, silahkan mencoba lagi',
         'success' 		=> 'Komponen telah sukses tertanda keluar.',
-        'user_does_not_exist' => 'Pengguna tidak terdaftar. Silahkan coba kembali.'
+        'user_does_not_exist' => 'Pengguna tidak terdaftar. Silahkan coba kembali.',
+        'unavailable'      => 'Tidak ada sisa komponen: :sisa sisa, :diminta diminta ',
     ),
 
     'checkin' => array(

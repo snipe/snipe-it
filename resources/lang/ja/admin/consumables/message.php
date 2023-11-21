@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> '消耗品はチェックアウトできませんでした。もう一度試して下さい。',
         'success' 		=> '消耗品はチェックアウトに成功しました。',
-        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。',
+         'unavailable'      => 'このチェックアウトに十分な消耗品がありません。残りの数量を確認してください。 ',
     ),
 
     'checkin' => array(

@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Törölt eszköz modell',
     'does_not_exist' => 'Modell nem létezik.',
-    'no_association' => 'Nincs modell hozzárendelve.',
+    'no_association' => 'FIGYELEM! Az eszköz modell hiányzik, vagy nem érvényes!',
     'no_association_fix' => 'Ez furcsa és szörnyű módokon fogja szétzúzni a dolgokat. Szerkeszd ezt az eszközt most, és rendeld hozzá egy modellhez.',
     'assoc_users'	 => 'Ez a modell jelenleg társított egy vagy több eszközhöz, és nem törölhető. Legyen szíves törölje az eszközt, és próbálja meg ismét a modell törlését. ',
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Eszköz modell sikeresen frissítve. Összesen |:model_count eszköz frissítve.',
+        'warn'          => 'A következő modellek tulajdonságait kell frissítenie: |A következő modellek tulajdonságait fogja szerkeszteni :model_count :',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nem voltak eszközök kiválasztva, így semmi sem lett törölve.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Eszköz modell törölve! Összesen |:success_count eszköz törölve!',
         'success_partial' 	=> ': success_count modell(ek) törlésre kerültek, azonban ennyit nem sikerült törölni: a fail_count , mert még hozzárendelt eszközökkel rendelkeznek.'
     ),
 

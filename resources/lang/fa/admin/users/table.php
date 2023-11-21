@@ -30,6 +30,7 @@ return array(
     'show_deleted'          => 'نمایش کاربران حذف شده',
     'title' 				=> 'عنوان',
 	'to_restore_them'		=> 'برای بازگرداندن آنها.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'به روز رسانی کاربر',
     'username' 				=> 'نام کاربری',
 	'user_deleted_text' 	=> 'این کاربر به عنوان حذف شده است.',

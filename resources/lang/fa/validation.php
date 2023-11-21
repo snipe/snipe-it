@@ -67,6 +67,8 @@ return [
         'array'   => 'ویژگی: باید دارای حداقل موارد: min باشد.',
     ],
     'starts_with'          => 'ویژگی : باید با یکی از موارد زیر شروع شود: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'ویژگی انتخاب شده نامعتبر است.',
     'numeric'              => 'ویژگی باید عدد باشد.',
     'present'              => 'فیلد attribute باید باشد.',

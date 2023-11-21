@@ -49,4 +49,9 @@ return [
     'unique' => '唯一的',
     'display_in_user_view' => '允许借出的用户在他们的“查看已分配的资产”页面中查看这些值',
     'display_in_user_view_table' => '对用户可见',
+    'auto_add_to_fieldsets' => '自动将此添加到每个新字段集',
+    'add_to_preexisting_fieldsets' => '添加到任何现有的字段集',
+    'show_in_listview' => '默认情况下在列表视图中显示。授权用户仍然可以通过列选择器显示或隐藏。',
+    'show_in_listview_short' => '在列表中显示',
+
 ];

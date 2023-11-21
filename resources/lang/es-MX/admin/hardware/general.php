@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este activo ha sido eliminado.',
+    'delete_confirm'            => '¿Está seguro de que desea eliminar este recurso?',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'Este modelo de equipo fue eliminado. Debes restaurar el moldelo antes de restaurar el activo.',
     'model_invalid'             => 'El Modelo de este Activo no es válido.',
@@ -23,6 +24,7 @@ return [
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No desplegable',
+    'undeployable_tooltip'  	=> 'Este activo tiene una etiqueta de estado que no es desplegable y no puede ser asignado en este momento.',
     'view'  					=> 'Ver Equipo',
     'csv_error' => 'Hay un error en su archivo CSV:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Por favor, vea abajo para más detalles.',
     'custom_export' => 'Exportación personalizada',
     'mfg_warranty_lookup' => 'Búsqueda del estado de Garantía para :manufacturer',
+    'user_department' => 'Departamento',
 ];

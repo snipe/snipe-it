@@ -49,4 +49,9 @@ return [
     'unique' => 'Unikāls',
     'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
     'display_in_user_view_table' => 'Visible to User',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview_short' => 'Show in lists',
+
 ];

@@ -49,4 +49,9 @@ return [
     'unique' => 'Unique',
     'display_in_user_view' => 'Permettre à l\'utilisateur de vérifier ces valeurs dans sa page Voir Ressources Affectées',
     'display_in_user_view_table' => 'Visible par l\'utilisateur',
+    'auto_add_to_fieldsets' => 'Ajouter ceci automatiquement à tous les nouveaux fieldsets',
+    'add_to_preexisting_fieldsets' => 'Ajouter à tous les fieldsets existants',
+    'show_in_listview' => 'Afficher par défaut. Les utilisateurs·trices autorisé·es pourront toujours afficher/masquer la colonne à l\'aide du sélecteur.',
+    'show_in_listview_short' => 'Afficher dans les listes',
+
 ];

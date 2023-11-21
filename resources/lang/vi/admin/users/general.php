@@ -44,7 +44,7 @@ return [
     'not_remote_label' => 'This is not a remote user',
     'vip_label' => 'VIP user',
     'vip_help' => 'This can be helpful to mark important people in your org if you would like to handle them in special ways.',
-    'create_user' => 'Create a user',
+    'create_user' => 'Tạo người dùng',
     'create_user_page_explanation' => 'This is the account information you will use to access the site for the first time.',
     'email_credentials' => 'Email credentials',
     'email_credentials_text' => 'Email my credentials to the email address above',

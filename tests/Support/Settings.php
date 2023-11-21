@@ -18,9 +18,24 @@ class Settings
         return new self();
     }
 
+    public function enableAlertEmail(string $email = 'notifications@afcrichmond.com'): Settings
+    {
+        return $this->update(['alert_email' => $email]);
+    }
+
+    public function disableAlertEmail(): Settings
+    {
+        return $this->update(['alert_email' => null]);
+    }
+
     public function enableMultipleFullCompanySupport(): Settings
     {
         return $this->update(['full_multiple_companies_support' => 1]);
+    }
+
+    public function disableMultipleFullCompanySupport(): Settings
+    {
+        return $this->update(['full_multiple_companies_support' => 0]);
     }
 
     public function enableWebhook(): Settings
@@ -39,6 +54,17 @@ class Settings
             'webhook_endpoint' => '',
             'webhook_channel' => '',
         ]);
+    }
+
+    public function enableAutoIncrement(): Settings
+    {
+        return $this->update([
+            'auto_increment_assets' => 1,
+            'auto_increment_prefix' => 'ABCD',
+            'next_auto_tag_base' => '123',
+            'zerofill_count' => 5
+        ]);
+
     }
 
     /**

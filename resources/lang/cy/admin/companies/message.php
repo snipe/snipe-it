@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Nid ywr cwmni\'n bodoli.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Mae\'r cwmni yma wedi perthnasu i oleiaf un model a nid yw\'n bosib dileu. Diweddarwch eich modelau i beidio cyfeirio at y cwmni yma ac yna ceisiwch eto. ',
     'create' => [
         'error'   => 'Ni crewyd y cwmni, ceisiwch eto o. g. y. dd.',

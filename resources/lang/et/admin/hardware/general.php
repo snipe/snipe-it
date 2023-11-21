@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klooni vahend',
     'deployable'  				=> 'Käivitatav',
     'deleted'  					=> 'See vara on kustutatud.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Muuda vahendit',
     'model_deleted'  			=> 'See vara mudel on kustutatud. Enne vara taastamist peab taastama mudeli.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Taotletav',
     'requested'				    => 'Taotletud',
     'not_requestable'           => 'Mittetaotletav',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Taasta vara',
     'pending'  					=> 'Ootel',
     'undeployable'  			=> 'Kasutuselevõtmatu',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vaata vahendit',
     'csv_error' => 'Sul on viga CSV failis:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Palun vaata allolevaid üksikasju.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

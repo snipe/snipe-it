@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Dina Snipe-IT användaruppgifter',
     'Accessory_Checkin_Notification' => 'Tillbehöret har checkats in',
     'Asset_Checkin_Notification' => 'Tillgången har checkats in',
+    'Asset_Checkout_Notification' => 'Tillgång utcheckad',
     'License_Checkin_Notification' => 'Licensen har checkats in',
     'Expected_Checkin_Report' => 'Förväntad incheckningsrapport för tillgång',
     'Expected_Checkin_Notification' => 'Påminnelse: :name sluttiden för incheckning närmar sig',

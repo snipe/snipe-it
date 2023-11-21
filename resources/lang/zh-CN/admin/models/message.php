@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => '已删除资产型号',
     'does_not_exist' => '模板不存在',
-    'no_association' => '没有关联的型号。',
+    'no_association' => '警告！此物品的资产型号无效或丢失！',
     'no_association_fix' => '这将以怪异且可怕的方式破坏一切。立即编辑此资产并为其指定一个型号。',
     'assoc_users'	 => '本模板下目前还有相关的资产，不能被删除，请删除资产以后，再重试。',
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> '没有字段被更改，因此没有更新任何内容。',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> '型号已成功更新|:model_count 个型号已成功更新。',
+        'warn'          => '您将要更新以下型号的属性：|您将要编辑 :model_count 个型号的属性：',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => '没有型号被选中，所以没有删除任何东西。',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => '型号已删除！|:succes_count 个型号已删除！',
         'success_partial' 	=> ':success_count 个已删除, 但是 :fail_count 个因为还有关联资产所以没办法删除。'
     ),
 

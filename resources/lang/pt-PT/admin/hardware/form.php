@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Confirmar Apagar artigos seleccionados',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Confirmar Restaurar em massa os artigos', 
   'bulk_delete_help'	=> 'Reveja os ativos para apagar abaixo. Depois de apagados, estes ativos podem ser restaurados, mas não estarão associados aos utilizadores.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Reveja os artigos para restauro em massa abaixo. Uma vez restaurados, estes artigos não serão associados a quaisquer utilizadores aos quais foram atribuídos anteriormente.',
   'bulk_delete_warn'	=> 'Vai apagar :asset_count ativos.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Está prestes a restaurar :asset_count artigos.',
     'bulk_update'		=> 'Atualização de ativos em massa',
     'bulk_update_help'	=> 'Este formulário permite a atualização em massa de ativos. Preencha apenas os atributos que precisam de alteração. Qualquer atributo deixado em branco permanecerá inalterado. ',
     'bulk_update_warn'	=> 'Está prestes a editar as propriedades de um único ativo.|Está prestes a editar as propriedades de :asset_count ativos.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Alocado a',
     'checkout_date'		=> 'Data de alocação',
     'checkin_date'		=> 'Data de devolução',
@@ -46,9 +49,9 @@ return [
     'asset_location' => 'Atualizar a localização do artigo',
     'asset_location_update_default_current' => 'Atualizar a localização por defeito E localização atual',
     'asset_location_update_default' => 'Atualizar apenas a localização por defeito',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'asset_not_deployable' => 'Este estado de artigo não é implementável. Este artigo não pode ser verificado.',
+    'asset_deployable' => 'Este estado é implementável. Este ativo pode ser entregue.',
+    'processing_spinner' => 'A processar... (Isto pode levar algum tempo em ficheiros grandes)',
     'optional_infos'  => 'Informação opcional',
-    'order_details'   => 'Order Related Information'
+    'order_details'   => 'Informação de estado da encomenda'
 ];

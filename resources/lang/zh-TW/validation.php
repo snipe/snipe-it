@@ -43,14 +43,14 @@ return [
     'file'                 => ':attribute 必須是檔案',
     'filled'               => ':attribute 欄位必須有值。',
     'image'                => ':attribute 必須是圖片格式',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => ':fieldname 的值不能為空。',
     'in'                   => '選擇的 :attribute 無效',
     'in_array'             => ':attribute 屬性欄位不存在 :other。',
     'integer'              => ':attribute 必須是整數',
     'ip'                   => ':attribute 必須是有效 IP',
     'ipv4'                 => ':attribute 必須是有效的 IPv4 位址',
     'ipv6'                 => ':attribute 必須是有效的 IPv6 位址',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute 必須對此公司位置具有唯一性',
     'json'                 => ':attribute 必須是有效的 JSON 字串',
     'max'                  => [
         'numeric' => ':attribute 不可大於 :max',
@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute 最少要有 :min 個項目',
     ],
     'starts_with'          => ':attribute 必須以下列之一做為開頭: :values.',
+    'ends_with'            => ':attribute 必須以以下之一做為結尾: :values。',
+
     'not_in'               => '選擇的 :attribute 無效',
     'numeric'              => ':attribute 必須是數字',
     'present'              => '：屬性字段必須存在。',
@@ -124,13 +126,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
+        'last_audit_date.date_format'   =>  ':attribute 必須是 YYYY-MM-DD hh:mm:ss 格式的有效日期',
+        'expiration_date.date_format'   =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
+        'termination_date.date_format'  =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
+        'expected_checkin.date_format'  =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
+        'start_date.date_format'        =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
+        'end_date.date_format'          =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
 
     ],
 

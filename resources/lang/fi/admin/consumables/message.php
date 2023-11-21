@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Kulutustarviketta ei luovutettu, yritä uudelleen',
         'success' 		=> 'Kulutustarvike luovutettiin.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
+         'unavailable'      => 'Ei riittävästi kulutustarvikkeita tätä lainausta varten. Tarkista jäljellä oleva määrä. ',
     ),
 
     'checkin' => array(

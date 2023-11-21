@@ -10,6 +10,9 @@ return [
     'bulk_update'		=> 'Aggiornamento quantità beni',
     'bulk_update_help'	=> 'Questo modulo consente di aggiornare più risorse in una sola volta. Riempire solo i campi che è necessario cambiare. Tutti i campi lasciati vuoti rimarranno invariati. ',
     'bulk_update_warn'	=> 'Stai per modificare le proprietà di un singolo asset.<unk> Stai per modificare le proprietà di :asset_count asset.',
+    'bulk_update_with_custom_field' => 'Nota che i beni sono di :asset_model_count modelli differenti.',
+    'bulk_update_model_prefix' => 'Sui Modelli', 
+    'bulk_update_custom_field_unique' => 'Questo è un campo unico e non può essere modificato massivamente.',
     'checkedout_to'		=> 'Assegnato a',
     'checkout_date'		=> 'Data del check-out',
     'checkin_date'		=> 'Data di entrata',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Aggiorna solo la posizione predefinita',
     'asset_not_deployable' => 'Lo stato del bene è "Non Assegnabile". Non puoi fare il check-out di questo bene.',
     'asset_deployable' => 'Lo stato del bene è "Assegnabile". Puoi fare il check-out di questo bene.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Elaborazione... (Può volerci un po\' su file di grandi dimensioni)',
     'optional_infos'  => 'Informazioni Opzionali',
     'order_details'   => 'Informazioni relative all\'ordine'
 ];

@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => '삭제된 사용자들 보기',
     'title' 				=> '직함',
 	'to_restore_them'		=> '그것들을 복구하기.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> '사용자 갱신',
     'username' 				=> '사용자명',
 	'user_deleted_text' 	=> '이 사용자는 삭제 된 것으로 표시되어 있습니다.',

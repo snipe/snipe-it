@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Potwierdź zbiorcze usuwanie aktywów',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Potwierdzenie masowego przywracania zasobów', 
   'bulk_delete_help'	=> 'Przejrzyj usuwanie zbiorcze aktywów poniżej. Po usunięciu tych aktywów będą one mogły zostać przywrócone, ale nie będą one skojarzone z żadnym z użytkowników, do których są aktualnie przypisane.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Przejrzyj poniższą listę zasobów masowego przywracania. Po przywrócenie zasoby nie będą powiązane z użytkownikami, do których były wcześniej przypisane.',
   'bulk_delete_warn'	=> 'Zamierzasz usunąć :asset_count aktywów.',
   'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Zbiorcza aktualizacja aktywów',
     'bulk_update_help'	=> 'Ten formularz umożliwia zbiorczą aktualizację wielu aktywów na raz. Wypełnij tylko te pola, które chcesz zmienić. Puste pola pozostaną niezmienione. ',
     'bulk_update_warn'	=> 'Zamierzasz edytować właściwości pojedynczego zasobu.|Zamierzasz edytować właściwości :asset_count zasobów.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Wypożyczony do',
     'checkout_date'		=> 'Data przypisania',
     'checkin_date'		=> 'Data przypisania',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Zaktualizuj tylko domyślną lokalizację',
     'asset_not_deployable' => 'Ten status oznacza brak możliwości wdrożenia. Ten zasób nie może zostać przypisany.',
     'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Przetwarzanie... (To może zająć trochę czasu dla dużych plików)',
     'optional_infos'  => 'Informacje opcjonalne',
     'order_details'   => 'Informacje związane z zamówieniem'
 ];

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Du har afvist dette aktiv.',
     'bulk_manager_warn'	        => 'Dine brugere er blevet opdateret, men din administratorindgang blev ikke gemt, fordi den valgte leder også var på brugerlisten, der skulle redigeres, og brugerne er måske ikke deres egen administrator. Vælg venligst dine brugere igen, undtagen manager.',
     'user_exists'               => 'Bruger eksistere allerede!',
-    'user_not_found'            => 'Bruger [: id] findes ikke.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Login-feltet er påkrævet',
     'user_password_required'    => 'Adgangskoden er påkrævet.',
     'insufficient_permissions'  => 'Utilstrækkelige tilladelser.',

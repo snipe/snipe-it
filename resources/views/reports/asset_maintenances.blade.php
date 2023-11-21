@@ -48,6 +48,7 @@
                     <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.cost') }}</th>
                     <th data-sortable="true" data-field="location" data-formatter="deployedLocationFormatter" data-visible="false">{{ trans('general.location') }}</th>
                     <th data-sortable="true" data-field="rtd_location" data-formatter="deployedLocationFormatter" data-visible="false">{{ trans('admin/hardware/form.default_location') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="is_warranty" data-formatter="trueFalseFormatter">{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
                 </tr>

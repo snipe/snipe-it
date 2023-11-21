@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Inkampani ayikho.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Le nkampani okwamanje ihlotshaniswa okungenani oyisibonelo esisodwa futhi ayikwazi ukususwa. Sicela ubuyekeze amamodeli akho ukuthi angasaphinde abhekisele kule nkampani futhi uzame futhi.',
     'create' => [
         'error'   => 'Inkampani ayidalwanga, sicela uzame futhi.',

@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Attention: </strong> Ce bien a été marqué non déployable.
                         Si ce statut a changé, veuillez l\'actualiser.',
     'does_not_exist' 	=> 'Ce bien n\'existe pas.',
-    'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peut pas être réquisitionné.',
+    'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peut pas être demandé.',
     'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
 
     'create' => [
@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'L\'actif n\'a pas été restauré, veuillez réessayer',
         'success' 		=> 'Actif restauré correctement.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Actif restauré avec succès.',
+        'nothing_updated'   => 'Aucun actif n\'a été sélectionné, donc rien n\'a été restauré.', 
     ],
 
     'audit' => [
@@ -51,6 +51,7 @@ return [
         'success'               => 'Votre fichier a bien été importé',
         'file_delete_success'   => 'Votre fichier a été correctement supprimé',
         'file_delete_error'      => 'Le fichier n’a pas pu être supprimé',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la ligne d\'en-tête contiennent des caractères UTF-8 invalides',
         'content_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la première ligne de contenu contiennent des caractères UTF-8 invalides',
     ],
@@ -80,9 +81,9 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Le bien n\'a pas été demandé, merci d\'essayer à nouveau',
-        'success' 		=> 'Le bien a été demandé correctement.',
-        'canceled'      => 'La demande de paiement a été annulée',
+        'error'   		=> 'L\'actif n\'a pas été demandé, merci d\'essayer à nouveau',
+        'success' 		=> 'L\'actif a été demandé avec succès.',
+        'canceled'      => 'La demande d\'association a été annulée avec succès',
     ],
 
 ];

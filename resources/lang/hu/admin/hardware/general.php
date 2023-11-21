@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Eszköz klónozása',
     'deployable'  				=> 'Kiadható',
     'deleted'  					=> 'Az eszköz törölve lett.',
+    'delete_confirm'            => 'Biztosan törölni akarja ezt az eszközt?',
     'edit'  					=> 'Eszköz módosítása',
     'model_deleted'  			=> 'Ennek az eszköznek a modellje törölve lett. Elösszőr a modellt vissza kell állítani, utánna lehet csak az eszközt visszaállítani.',
     'model_invalid'             => 'Ennek az eszköznek a modellje érvénytelen.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'lehívási',
     'requested'				    => 'Kérve',
     'not_requestable'           => 'Nem kérhető',
-    'requestable_status_warning' => 'Ne változtassa meg a kérelmezhető státuszt',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Visszaállítás eszköz',
     'pending'  					=> 'Függőben',
     'undeployable'  			=> 'Nem telepíthető',
+    'undeployable_tooltip'  	=> 'Az eszköz jelenleg az állapotcímkéje szerint nem helyezhezhető üzembe és nem adható ki.',
     'view'  					=> 'Eszköz megtekintése',
     'csv_error' => 'Hiba van a CSV fájlban:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'A részleteket lásd alább.',
     'custom_export' => 'Egyéni export',
     'mfg_warranty_lookup' => ':manufacturer jótállási információk ellenőrzése',
+    'user_department' => 'User Department',
 ];

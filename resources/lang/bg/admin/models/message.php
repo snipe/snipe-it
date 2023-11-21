@@ -2,9 +2,10 @@
 
 return array(
 
+    'deleted' => 'Изтрит модел',
     'does_not_exist' => 'Моделът не съществува.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'ВНИМАНИЕ! Модела за този актив е неправилен или липсва!',
+    'no_association_fix' => 'Това ще счупи нещата по много лош начин. Редактирайте артикула сега и го зачислете към модел.',
     'assoc_users'	 => 'Този модел е асоцииран с един или повече активи и не може да бъде изтрит. Моля изтрийте активите и опитайте отново.',
 
 
@@ -32,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Няма полета, който да са се променили, така че нищо не е осъвременено.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Модела е обновен успешно. |:model_count модела са обновени успешно.',
+        'warn'          => 'Вие ще обновите характиристиките на следния модел: |Вие ще редактирате характеристиките на следните :model_count модела:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Няма избрани модели, така че нищо не бе изтрито.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Модела е изтрит!|:success_count модела бяха изтрити!',
         'success_partial' 	=> ':success_count модела бяха изтрити, но :fail_count не бяха, тъй като към тях има асоциирани активи.'
     ),
 

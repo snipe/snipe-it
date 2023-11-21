@@ -16,6 +16,7 @@ return array(
     'update'  							=> 'Atualizar acessório',
     'use_default_eula'					=> 'Em vez disso, utilize o <a href="#" data-toggle="modal" data-target="#eulaModal">EULA padrão</a>.',
     'use_default_eula_disabled'			=> '<del>Em vez disso, utilize o EULA padrão</del> Nenhum foi definido. Adicione um nas Configurações.',
-    'clone'                             => 'Clone Accessory',
+    'clone'                             => 'Clonar Acessório',
+    'delete_disabled'                   => 'Este acessório não pode ser excluído ainda, porque alguns itens ainda em saída.',
 
 );

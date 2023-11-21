@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 use App\Models\Accessory;
+use App\Models\Asset;
+use App\Models\AssetModel;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
@@ -33,6 +35,16 @@ class Helper
         }
     }
 
+    public static function parseEscapedMarkedownInline($str = null)
+    {
+        $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
+
+        if ($str) {
+            return $Parsedown->line($str);
+        }
+    }
+
     /**
      * The importer has formatted number strings since v3,
      * so the value might be a string, or an integer.
@@ -61,10 +73,14 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return array
+     * @return string
      */
-    public static function defaultChartColors($index = 0)
+    public static function defaultChartColors(int $index = 0)
     {
+        if ($index < 0) {
+            $index = 0;
+        }
+
         $colors = [
             '#008941',
             '#FF4A46',
@@ -337,7 +353,19 @@ class Helper
         $total_colors = count($colors);
 
         if ($index >= $total_colors) {
-            $index = $index - $total_colors;
+
+            \Log::error('Status label count is '.$index.' and exceeds the allowed count of 266.');
+            //patch fix for array key overflow (color count starts at 1, array starts at 0)
+            $index = $index - $total_colors - 1;
+
+            //constraints to keep result in 0-265 range. This should never be needed, but if something happens
+            //to create this many status labels and it DOES happen, this will keep it from failing at least.
+            if($index < 0) {
+                $index = 0;
+            }
+            elseif($index >($total_colors - 1)) {
+                $index = $total_colors - 1;
+            }
         }
 
         return $colors[$index];
@@ -543,8 +571,8 @@ class Helper
             'license' => trans('general.license'),
         ];
 
-        if($selection != null){
-            return $category_types[$selection];
+        if ($selection != null){
+            return $category_types[strtolower($selection)];
         }
         else
         return $category_types;
@@ -633,6 +661,7 @@ class Helper
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
         $components = Component::whereNotNull('min_amt')->get();
+        $asset_models = AssetModel::where('min_amt', '>', 0)->get();
 
         $avail_consumables = 0;
         $items_array = [];
@@ -691,6 +720,28 @@ class Helper
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
                 $items_array[$all_count]['min_amt'] = $component->min_amt;
+                $all_count++;
+            }
+        }
+
+        foreach ($asset_models as $asset_model){
+
+            $asset = new Asset();
+            $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
+            $avail = $asset->where('model_id', '=', $asset_model->id)->whereNull('assigned_to')->count();
+
+            if ($avail < ($asset_model->min_amt)+ \App\Models\Setting::getSettings()->alert_threshold) {
+                if ($avail > 0) {
+                    $percent = number_format((($avail / $total_owned) * 100), 0);
+                } else {
+                    $percent = 100;
+                }
+                $items_array[$all_count]['id'] = $asset_model->id;
+                $items_array[$all_count]['name'] = $asset_model->name;
+                $items_array[$all_count]['type'] = 'models';
+                $items_array[$all_count]['percent'] = $percent;
+                $items_array[$all_count]['remaining'] = $avail;
+                $items_array[$all_count]['min_amt'] = $asset_model->min_amt;
                 $all_count++;
             }
         }
@@ -1210,8 +1261,58 @@ class Helper
             return true;
             \Log::debug('app locked!');
         }
-
+        
         return false;
+    }
+
+  
+    /**
+     * Conversion between units of measurement
+     *
+     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
+     * @since 5.0
+     * @param float  $value    Measurement value to convert
+     * @param string $srcUnit  Source unit of measurement
+     * @param string $dstUnit  Destination unit of measurement
+     * @param int    $round    Round the result to decimals (Default false - No rounding)
+     * @return float
+     */
+    public static function convertUnit($value, $srcUnit, $dstUnit, $round=false) {
+        $srcFactor = static::getUnitConversionFactor($srcUnit);
+        $dstFactor = static::getUnitConversionFactor($dstUnit);
+        $output = $value * $srcFactor / $dstFactor;
+        return ($round !== false) ? round($output, $round) : $output;
+    }
+  
+    /**
+     * Get conversion factor from unit of measurement to mm
+     *
+     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
+     * @since 5.0
+     * @param string $unit  Unit of measurement
+     * @return float
+     */
+    public static function getUnitConversionFactor($unit) {
+        switch (strtolower($unit)) {
+            case 'mm':
+                return 1.0;
+            case 'cm':
+                return 10.0;
+            case 'm':
+                return 1000.0;
+            case 'in':
+                return 25.4;
+            case 'ft':
+                return 12 * static::getUnitConversionFactor('in');
+            case 'yd':
+                return 3 * static::getUnitConversionFactor('ft');
+            case 'pt':
+                return (1 / 72) * static::getUnitConversionFactor('in');
+            default:
+                throw new \InvalidArgumentException('Unit: \'' . $unit . '\' is not supported');
+
+                return false;
+        }
     }
 
 

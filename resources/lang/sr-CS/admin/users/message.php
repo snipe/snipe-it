@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Uspješno ste odbili ovaj resurs.',
     'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Korisnik već postoji!',
-    'user_not_found'            => 'Korisnik [:id] ne postoji.',
+    'user_not_found'            => 'Korisnik ne postoji.',
     'user_login_required'       => 'Polje za prijavu je obavezno',
     'user_password_required'    => 'Lozinka je obavezna.',
     'insufficient_permissions'  => 'Insufficient Permissions.',

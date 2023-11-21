@@ -43,14 +43,14 @@ return [
     'file'                 => 'Атрибутът: трябва да е файл.',
     'filled'               => 'Полето на атрибута: трябва да има стойност.',
     'image'                => ':attribute трябва да бъде изображение.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'Стойността за :fieldname не може да бъде празна.',
     'in'                   => 'Избраният :attribute е невалиден.',
     'in_array'             => 'Полето: atribut не съществува в: други.',
     'integer'              => ':attribute трябва да бъде целочислен.',
     'ip'                   => ':attribute трябва да бъде валиден IP адрес.',
     'ipv4'                 => 'Атрибутът: трябва да е валиден IPv4 адрес.',
     'ipv6'                 => 'Атрибутът: трябва да е валиден IPv6 адрес.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute трябва да бъде уникален за тази локация на фирмата.',
     'json'                 => 'Атрибутът: трябва да е валиден низ на JSON.',
     'max'                  => [
         'numeric' => ':attribute не може да бъде по-дълъг от :max.',
@@ -66,7 +66,9 @@ return [
         'string'  => ':attribute трябва да бъде минимум :min символа.',
         'array'   => 'Атрибутът: трябва да има поне: min елементи.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute трябва да започва с една от следните стойности: :values',
+    'ends_with'            => ':attribute трябва да завършва с една от следните стойности: :values',
+
     'not_in'               => 'Избраният :attribute е невалиден.',
     'numeric'              => ':attribute трябва да бъде число.',
     'present'              => 'Полето на атрибута трябва да е налице.',
@@ -93,13 +95,13 @@ return [
     'url'                  => 'Форматът на :attribute е невалиден.',
     'unique_undeleted'     => ':attribute трябва да бъде уникален.',
     'non_circular'         => ':attribute не трябва да създава препрадка към себе си.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'Паролата не може да бъде същата, като потребителското име.',
+    'letters'              => 'Паролата трябва да съдържа поне една буква.',
+    'numbers'              => 'Паролата трябва да съдържа поне една цифра.',
+    'case_diff'            => 'Паролата трябва да съдържа главни и малки букви.',
+    'symbols'              => 'Паролата трябва да съдържа символи.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Стойността не може да бъде отрицателна'
     ],
 
 
@@ -124,13 +126,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => ':values трябва да бъде валидна дата в YYYY-MM-DD формат',
+        'last_audit_date.date_format'   =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD hh:mm:ss формат',
+        'expiration_date.date_format'   =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
+        'termination_date.date_format'  =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
+        'expected_checkin.date_format'  =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
+        'start_date.date_format'        =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
+        'end_date.date_format'          =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
 
     ],
 

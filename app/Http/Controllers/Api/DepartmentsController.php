@@ -27,16 +27,18 @@ class DepartmentsController extends Controller
         $this->authorize('view', Department::class);
         $allowed_columns = ['id', 'name', 'image', 'users_count'];
 
-        $departments = Company::scopeCompanyables(Department::select(
+        $departments = Department::select(
             'departments.id',
             'departments.name',
+            'departments.phone',
+            'departments.fax',
             'departments.location_id',
             'departments.company_id',
             'departments.manager_id',
             'departments.created_at',
             'departments.updated_at',
-            'departments.image'),
-             "company_id", "departments")->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
+            'departments.image'
+        )->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
@@ -59,7 +61,7 @@ class DepartmentsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';

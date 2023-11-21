@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Neizdevās izņemt patēriņu, lūdzu, mēģiniet vēlreiz',
         'success' 		=> 'Izlietojamie izrakstīti veiksmīgi.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

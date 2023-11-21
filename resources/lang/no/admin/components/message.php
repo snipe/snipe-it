@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponent ble ikke sjekket ut. Prøv igjen',
         'success' 		=> 'Vellykket utsjekk av komponent.',
-        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.'
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Confirma la Eliminación Masiva de Equipos',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Confirmar recuperación masiva de activos', 
   'bulk_delete_help'	=> 'Revisar los equipos para eliminación masiva. Una vez eliminados, esos equipos pueden ser restaurados, pero no volverán a estar asociados a ninguno de los usuarios a los que estén asignados actualmente.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Revisar los activos para la restauración en masa a continuación. Una vez restaurados, estos activos no estarán asociados con los usuarios a los que fueron asignados anteriormente.',
   'bulk_delete_warn'	=> 'Estás a punto de eliminar :asset_count equipos.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Está a punto de restaurar :asset_count activos.',
     'bulk_update'		=> 'Actualización masiva de Equipos',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples equipos simultáneamente. Solo debes completar los campos que quieres modificar. Todo campo en blanco permanecerá sin cambios. ',
     'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_date'		=> 'Fecha de asignación',
     'checkin_date'		=> 'Fecha de devolución',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
     'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
     'asset_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',
     'optional_infos'  => 'Información opcional',
     'order_details'   => 'Información relacionada con el pedido'
 ];

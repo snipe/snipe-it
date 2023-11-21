@@ -12,10 +12,11 @@ return [
     'clone'  					=> 'Monista laite',
     'deployable'  				=> 'Käyttöönotettavissa',
     'deleted'  					=> 'Tämä laite on poistettu.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Muokkaa laitetta',
     'model_deleted'  			=> 'Laitemalli on poistettu. Voit palauttaa laitteen kun olet ensin palauttanut poistetun laitemallin.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Tämän laitteen malli on virheellinen.',
+    'model_invalid_fix'         => 'Laitetta tulee muokata tilanteen korjaamiseksi, ennen kuin se yritetään lainata tai palauttaa.',
     'requestable'               => 'Pyydettävissä',
     'requested'				    => 'Pyydetty',
     'not_requestable'           => 'Ei pyydettävissä',
@@ -23,6 +24,7 @@ return [
     'restore'  					=> 'Palauta laite',
     'pending'  					=> 'Odottaa',
     'undeployable'  			=> 'Ei käytettävissä',
+    'undeployable_tooltip'  	=> 'Tällä laitteella on tilamerkintä joka ei mahdollista käyttöä, jonka takia laitetta ei voi lainata tällä hetkellä.',
     'view'  					=> 'Näytä laite',
     'csv_error' => 'Sinulla on virhe CSV tiedostossasi:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Tarkempia tietoja on alla.',
     'custom_export' => 'Mukautettu vienti',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

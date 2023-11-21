@@ -19,14 +19,22 @@ abstract class Importer
      * Id of User performing import
      * @var
      */
+    
     protected $user_id;
     /**
      * Are we updating items in the import
      * @var bool
      */
+
     protected $updating;
+
     /**
      * Default Map of item fields->csv names
+     *
+     * This has been moved into app/Http/Livewire/Importer.php to be more granular.
+     * This private variable is ONLY used for the cli-importer.
+     *
+     * @todo - find a way to make this less duplicative
      * @var array
      */
     private $defaultFieldMap = [
@@ -288,6 +296,8 @@ abstract class Importer
 
         $user_array = [
             'full_name' => $this->findCsvMatch($row, 'full_name'),
+            'first_name' => $this->findCsvMatch($row, 'first_name'),
+            'last_name' => $this->findCsvMatch($row, 'last_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
             'manager_id'=>  '',
             'department_id' =>  '',
@@ -295,7 +305,6 @@ abstract class Importer
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
-
 
         if ($type == 'manager') {
             $user_array['full_name'] = $this->findCsvMatch($row, 'manager');
@@ -312,8 +321,9 @@ abstract class Importer
 
 
         // If the full name and username is empty, bail out--we need this to extract first name (at the very least)
-        if ((empty($user_array['username'])) && (empty($user_array['full_name']))) {
-            $this->log('Insufficient user data provided (Full name or username is required) - skipping user creation.');
+        if ((empty($user_array['username'])) && (empty($user_array['full_name'])) && (empty($user_array['first_name']))) {
+            $this->log('Insufficient user data provided (Full name, first name or username is required) - skipping user creation.');
+            \Log::debug('User array: ');
             \Log::debug(print_r($user_array, true));
             \Log::debug(print_r($row, true));
             return false;
@@ -325,10 +335,14 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
-        // Get some fields for first name and last name based off of full name
+        // Get some variables for $user_formatted_array in case we need them later
         $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
-        $user_array['first_name'] = $user_formatted_array['first_name'];
-        $user_array['last_name'] = $user_formatted_array['last_name'];
+
+        if (empty($user_array['first_name'])) {
+            // Get some fields for first name and last name based off of full name
+            $user_array['first_name'] = $user_formatted_array['first_name'];
+            $user_array['last_name'] = $user_formatted_array['last_name'];
+        }
 
         if (empty($user_array['username'])) {
             $user_array['username'] = $user_formatted_array['username'];

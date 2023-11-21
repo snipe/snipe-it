@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Ettevõtet pole olemas.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Selle ettevõttega on seotud vähemalt üks mudel ja seda ei saa kustutada. Palun uuenda oma mudeleid, et need ei kasutaks seda ettevõtet ning seejärel proovi uuesti. ',
     'create' => [
         'error'   => 'Ettevõtet ei loodud, proovi uuesti.',

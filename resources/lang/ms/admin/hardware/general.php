@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Pendua Harta',
     'deployable'  				=> 'Deployable',
     'deleted'  					=> 'Aset ini telah dipadamkan.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Kemaskini Harta',
     'model_deleted'  			=> 'Model Aset ini telah dipadamkan. Anda mesti kembalikan model sebelum anda boleh kembalikan Aset.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'Diminta',
     'requested'				    => 'Diminta',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Pulihkan Asset',
     'pending'  					=> 'Menunggu',
     'undeployable'  			=> 'Tidak dapat dipisahkan',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Papar Harta',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

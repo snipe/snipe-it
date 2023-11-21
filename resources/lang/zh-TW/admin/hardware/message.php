@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>警告: </strong>此資產目前已標記為不可佈署，如果資產狀態已改變，請更新狀態。',
     'does_not_exist' 	=> '資產不存在',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => '該資產不存在或無法申請。',
     'assoc_users'	 	=> '此資產目前已借給某個使用者，不能被刪除，請檢查資產狀態，然後再嘗試刪除。',
 
     'create' => [
@@ -22,8 +22,8 @@ return [
     'restore' => [
         'error'   		=> '恢復資產失敗，請重試。',
         'success' 		=> '恢復資產成功。',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> '資產成功還原。',
+        'nothing_updated'   => '未選擇任何資產，因此未進行任何還原。', 
     ],
 
     'audit' => [
@@ -50,8 +50,9 @@ return [
         'success'               => '您的檔案已被匯入。',
         'file_delete_success'   => '您的檔案已成功刪除。',
         'file_delete_error'      => '您的檔案無法被刪除。',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'The file selected is missing',
+        'header_row_has_malformed_characters' => '標頭列中的一個或多個屬性包含異常的 UTF-8 字元',
+        'content_row_has_malformed_characters' => '內容的第一列中的一個或多個屬性包含異常的 UTF-8 字元',
     ],
 
 

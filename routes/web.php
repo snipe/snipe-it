@@ -10,6 +10,7 @@ use App\Http\Controllers\DepreciationsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\ImportsController;
+use App\Http\Controllers\LabelsController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
@@ -39,8 +40,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('categories', CategoriesController::class, [
         'parameters' => ['category' => 'category_id'],
     ]);
-
-
+  
+    /*
+    * Labels
+    */
+    Route::get(
+        'labels/{labelName}',
+        [LabelsController::class, 'show']
+    )->where('labelName', '.*')->name('labels.show');
 
     /*
      * Locations
@@ -66,9 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('locations', LocationsController::class, [
         'parameters' => ['location' => 'location_id'],
     ]);
-
-
-
 
 
     /*
@@ -192,6 +196,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     Route::get('oauth', [SettingsController::class, 'api'])->name('settings.oauth.index');
 
+    Route::get('google', [SettingsController::class, 'getGoogleLoginSettings'])->name('settings.google.index');
+    Route::post('google', [SettingsController::class, 'postGoogleLoginSettings'])->name('settings.google.save');
+
     Route::get('purge', [SettingsController::class, 'getPurge'])->name('settings.purge.index');
     Route::post('purge', [SettingsController::class, 'postPurge'])->name('settings.purge.save');
 
@@ -216,6 +223,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
         Route::post('/upload', 
             [SettingsController::class, 'postUploadBackup']
         )->name('settings.backups.upload');
+
+        // Handle redirect from after POST request from backup restore
+        Route::get('/restore/{filename?}', function () {
+            return redirect(route('settings.backups.index'));
+        });
 
         Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
@@ -278,7 +290,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     )->name('account/request-asset');
 
     Route::post(
-        'request/{itemType}/{itemId}',
+        'request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}',
         [ViewAssetsController::class, 'getRequestItem']
     )->name('account/request-item');
 
@@ -291,7 +303,8 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('accept/{id}', [Account\AcceptanceController::class, 'create'])
         ->name('account.accept.item');
 
-    Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
+    Route::post('accept/{id}', [Account\AcceptanceController::class, 'store'])
+        ->name('account.store-acceptance');
 
     Route::get(
         'print',
@@ -360,8 +373,8 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/unaccepted_assets/{deleted?}',
         [ReportsController::class, 'getAssetAcceptanceReport']
     )->name('reports/unaccepted_assets');
-    Route::get(
-        'reports/unaccepted_assets/{acceptanceId}/sent_reminder',
+    Route::post(
+        'reports/unaccepted_assets/sent_reminder',
         [ReportsController::class, 'sentAssetAcceptanceReminder']
     )->name('reports/unaccepted_assets_sent_reminder');
     Route::delete(
@@ -452,8 +465,6 @@ Route::group(['middleware' => 'web'], function () {
         [LoginController::class, 'postTwoFactorAuth']
     );
 
-
-
     Route::post(
         'password/email',
         [ForgotPasswordController::class, 'sendResetLinkEmail']
@@ -482,7 +493,9 @@ Route::group(['middleware' => 'web'], function () {
     )->name('password.email')->middleware('throttle:forgotten_password');
 
 
-
+     // Socialite Google login
+    Route::get('google', 'App\Http\Controllers\GoogleAuthController@redirectToGoogle')->name('google.redirect');
+    Route::get('google/callback', 'App\Http\Controllers\GoogleAuthController@handleGoogleCallback')->name('google.callback');
 
 
     Route::get(

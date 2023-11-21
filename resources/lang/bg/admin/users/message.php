@@ -6,16 +6,16 @@ return array(
     'declined'                  => 'Активът беше отказан.',
     'bulk_manager_warn'	        => 'Вашите потребителски профили бяха обновени успешно, обаче вашето управителско вписване не беше запазено, защото управителят, които сте избрали бе в списъка с потребителски профили за промяна и потребителите не могат да бъдат свои управители. Моля изберете вашите потребителски профили отново, с изключение на управителя.',
     'user_exists'               => 'Потребителят вече съществува!',
-    'user_not_found'            => 'Потребител [:id] не съществува.',
+    'user_not_found'            => 'Потребителят не съществува.',
     'user_login_required'       => 'Полето за вход е задължително',
     'user_password_required'    => 'Паролата е задължителна.',
     'insufficient_permissions'  => 'Нямате необходимите права.',
     'user_deleted_warning'      => 'Този потребител е изтрит. За да редактирате данните за него или да му зададете актив, трябва първо да възстановите потребителя.',
     'ldap_not_configured'        => 'Интеграцията с LDAP не е конфигурирана за тази инсталация.',
     'password_resets_sent'      => 'Избраните потребители, които са активирани и имат валиден е-майл адрес им беше изпратен линк за смяна на парола.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'password_reset_sent'       => 'Изпратена е връзка за въстановяване на паролата до :email!',
+    'user_has_no_email'         => 'Този потребител няма е-майл адрес в неговия профил.',
+    'user_has_no_assets_assigned'   => 'Този потребител няма никакви заведени активи',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Този потребител няма е-майл.',
+        'success' => 'Потребителя беше известен отностно текущите активи, които са му заведени.'
     )
 );

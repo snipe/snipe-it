@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.hello_name', array('name' => $user->present()->fullName())) }}
+{{ trans('general.hello_name', array('name' => $user->present()->getFullNameAttribute())) }}
 @parent
 @stop
 
@@ -388,7 +388,7 @@
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
-                          data-show-refresh="true"
+                          data-show-refresh="false"
                           data-sort-order="asc"
                           id="userAssets"
                           class="table table-striped snipe-table"
@@ -478,7 +478,7 @@
                       data-side-pagination="client"
                       data-show-columns="true"
                       data-show-export="true"
-                      data-show-refresh="true"
+                      data-show-refresh="false"
                       data-sort-order="asc"
                       id="userLicenses"
                       class="table table-striped snipe-table"
@@ -525,7 +525,7 @@
                       data-show-fullscreen="true"
                       data-show-export="true"
                       data-show-footer="true"
-                      data-show-refresh="true"
+                      data-show-refresh="false"
                       data-sort-order="asc"
                       data-sort-name="name"
                       class="table table-striped snipe-table table-hover"
@@ -576,7 +576,7 @@
                       data-show-fullscreen="true"
                       data-show-export="true"
                       data-show-footer="true"
-                      data-show-refresh="true"
+                      data-show-refresh="false"
                       data-sort-order="asc"
                       data-sort-name="name"
                       class="table table-striped snipe-table table-hover"

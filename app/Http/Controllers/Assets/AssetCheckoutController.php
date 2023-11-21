@@ -89,6 +89,15 @@ class AssetCheckoutController extends Controller
                 }
             }
 
+            $settings = \App\Models\Setting::getSettings();
+
+            // We have to check whether $target->company_id is null here since locations don't have a company yet
+            if (($settings->full_multiple_companies_support) && ((!is_null($target->company_id)) &&  (!is_null($asset->company_id)))) {
+                if ($target->company_id != $asset->company_id){
+                    return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
+                }
+            }
+            
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
                 return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }

@@ -7,7 +7,7 @@ return array(
     'assoc_items'	 => 'Diese Kategorie kann nicht gelöscht werden da sie bereits mit einem :asset_type verbunden ist. Bitte trennen Sie diese Kategorie von Ihrem :asset_type und versuchen Sie es erneut. ',
 
     'create' => array(
-        'error'   => 'Die Kategorie konnte nicht erstellt werden, bitte versuchen sie es erneut.',
+        'error'   => 'Die Kategorie konnte nicht erstellt werden, bitte versuchen Sie es erneut.',
         'success' => 'Die Kategorie wurde erfolgreich erstellt.'
     ),
 

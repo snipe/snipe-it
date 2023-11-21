@@ -29,16 +29,18 @@ return [
         'testing' => 'Тестирование подключения к LDAP, привязка & запрос ...',
         '500' => 'Ошибка в 500 сервере. Пожалуйста, проверьте журналы сервера для получения дополнительной информации.',
         'error' => 'Что-то пошло не так :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
+        'sync_success' => 'Пример 10 пользователей, полученных с заданного LDAP сервера:',
         'testing_authentication' => 'Тестирование LDAP аутентификации...',
         'authentication_success' => 'Пользователь успешно аутентифицирован с LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Отправка тестового сообщения в :app...',
+        'success' => 'Your :webhook_name Integration works!',
+        'success_pt1' => 'Успех! Проверьте ',
+        'success_pt2' => ' канал для вашего тестового сообщения и не забудьте нажать СОХРАНИТЬ ниже, чтобы сохранить ваши настройки.',
+        '500' => '500 Ошибка на сервера.',
+        'error' => 'Что-то пошло не так. :app ответил: :error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_misc' => 'Что-то пошло не так. :( ',
     ]
 ];

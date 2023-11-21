@@ -88,7 +88,7 @@
               }
               @endphp
             <div class="col-md-8 required">
-              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
+              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format', 'style' => 'width:100%;')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -118,8 +118,40 @@
               </div>
           </div>
 
-          <!-- Auto-Add to Future Fieldsets  -->
-          <div class="form-group {{ $errors->has('auto_add_to_fieldsets') ? ' has-error' : '' }}"  id="auto_add_to_fieldsets">
+         <!-- Set up checkbox form group -->
+         <div class="form-group">
+
+          <!-- Encrypted warning callout box -->
+          @if (($field->id) && ($field->field_encrypted=='1'))
+              <div class="col-md-9 col-md-offset-3">
+                      <div class="alert alert-warning fade in">
+                          <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+                          <strong>{{ trans('general.notification_warning') }}:</strong>
+                          {{ trans('admin/custom_fields/general.encrypted_options') }}
+                      </div>
+
+              </div>
+          @endif
+
+          @if (!$field->id)
+              <!-- Encrypted  -->
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.encrypt_field') }}
+                  </label>
+              </div>
+              <div class="col-md-9 col-md-offset-3" id="encrypt_warning" style="display:none;">
+                  <div class="callout callout-danger">
+                      <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
+                  </div>
+              </div>
+
+          @endif
+
+
+
+              <!-- Auto-Add to Future Fieldsets  -->
               <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
                       <input type="checkbox" name="auto_add_to_fieldsets" aria-label="auto_add_to_fieldsets" value="1"{{ (old('auto_add_to_fieldsets') || $field->auto_add_to_fieldsets) ? ' checked="checked"' : '' }}>
@@ -127,45 +159,51 @@
                   </label>
               </div>
 
-              @if (!$field->id)
-              <!-- Encrypted  -->
-                  <div class="col-md-9 col-md-offset-3">
-                      <label class="form-control">
-                          <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
-                          {{ trans('admin/custom_fields/general.encrypt_field') }}
-                      </label>
-                  </div>
+              <!-- Show in list view -->
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input type="checkbox" name="show_in_listview" aria-label="show_in_listview" value="1"{{ (old('show_in_listview') || $field->show_in_listview) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.show_in_listview') }}
+                  </label>
+              </div>
 
-                  <div class="col-md-9 col-md-offset-3" id="encrypt_warning" style="display:none;">
-                      <div class="callout callout-danger">
-                          <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
-                      </div>
-                  </div>
-              @endif
+
+              @if ((!$field->id) || ($field->field_encrypted=='0'))
+
+              <!-- Show in requestable list view -->
+              <div class="col-md-9 col-md-offset-3" id="show_in_requestable_list">
+                  <label class="form-control">
+                      <input type="checkbox" name="show_in_requestable_list" aria-label="show_in_requestable_list" value="1"{{ (old('show_in_requestable_list') || $field->show_in_requestable_list) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.show_in_requestable_list') }}
+                  </label>
+              </div>
 
               <!-- Show in Email  -->
-              <div class="col-md-9 col-md-offset-3">
+              <div class="col-md-9 col-md-offset-3" id="show_in_email">
                   <label class="form-control">
                       <input type="checkbox" name="show_in_email" aria-label="show_in_email" value="1"{{ (old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
                   </label>
               </div>
 
+              <!-- Value Must be Unique -->
+              <div class="col-md-9 col-md-offset-3" id="is_unique">
+                  <label class="form-control">
+                      <input type="checkbox" name="is_unique" aria-label="is_unique" value="1"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.is_unique') }}
+                  </label>
+              </div>
+              @endif
+
               <!-- Show in View All Assets profile view  -->
-              <div class="col-md-9 col-md-offset-3">
+              <div class="col-md-9 col-md-offset-3" id="display_in_user_view">
                   <label class="form-control">
                       <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" {{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.display_in_user_view') }}
                   </label>
               </div>
 
-              <!-- Value Must be Unique -->
-              <div class="col-md-9 col-md-offset-3">
-                  <label class="form-control">
-                      <input type="checkbox" name="is_unique" aria-label="is_unique" value="1"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
-                      {{ trans('admin/custom_fields/general.is_unique') }}
-                  </label>
-              </div>
+
 
           </div>
 
@@ -278,11 +316,13 @@
             $("#show_in_email").hide();
             $("#display_in_user_view").hide();
             $("#is_unique").hide();
+            $("#show_in_requestable_list").hide();
         } else {
             $("#encrypt_warning").hide();
             $("#show_in_email").show();
             $("#display_in_user_view").show();
             $("#is_unique").show();
+            $("#show_in_requestable_list").show();
         }
     });
 

@@ -75,6 +75,7 @@ return [
     'your_credentials' => 'Je Snipe-IT inloggegevens',
     'Accessory_Checkin_Notification' => 'Accessoire ingecheckt',
     'Asset_Checkin_Notification' => 'Asset ingecheckt',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Licentie ingecheckt',
     'Expected_Checkin_Report' => 'Verwachte asset check in rapport',
     'Expected_Checkin_Notification' => 'Herinnering: :name check in deadline nadert',

@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'נכס משוכפל',
     'deployable'  				=> 'ניתן לפריסה',
     'deleted'  					=> 'הנכס הזה נמחק.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'ערוך נכס',
     'model_deleted'  			=> 'המודל של הנכס נמחק. יש לשחזר את המודל לפני שניתן לשחזר את הנכס.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'ניתן לבקש',
     'requested'				    => 'מבוקש',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'שחזור נכס',
     'pending'  					=> 'ממתין ל',
     'undeployable'  			=> 'לא ניתן לפריסה',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'הצג נכס',
     'csv_error' => 'קיימת שגיאה בקובץ ה-CSV שלך:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'נא ראה הסבר בהמשך.',
     'custom_export' => 'יבוא מותאם',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'מחלקת משתמשים',
 ];

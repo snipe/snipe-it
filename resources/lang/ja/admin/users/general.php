@@ -43,7 +43,7 @@ return [
     'remote_help' => 'これは、物理的な場所に来たことがない、またはほとんど来なかったリモートユーザーによってフィルタリングする必要がある場合に便利です。',
     'not_remote_label' => 'これはリモートユーザーではありません',
     'vip_label' => 'VIP ユーザー',
-    'vip_help' => 'This can be helpful to mark important people in your org if you would like to handle them in special ways.',
+    'vip_help' => 'これは、組織内の重要な人物を特別な方法で扱いたい場合に役立ちます。',
     'create_user' => 'ユーザーを作成',
     'create_user_page_explanation' => '初めてサイトにアクセスする際に使用するアカウント情報です。',
     'email_credentials' => '電子メールの資格情報',

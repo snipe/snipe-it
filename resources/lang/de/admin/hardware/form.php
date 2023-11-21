@@ -10,6 +10,9 @@ return [
     'bulk_update'		=> 'Massenaktualisierung von Assets',
     'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehreren Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
     'bulk_update_warn'	=> 'Sie sind dabei, die Eigenschaften eines einzelnen Assets zu bearbeiten. |Sie sind dabei, die Eigenschaften von :asset_count Assets zu bearbeiten.',
+    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_model_prefix' => 'On Models', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Herausgegeben an',
     'checkout_date'		=> 'Herausgabedatum',
     'checkin_date'		=> 'Rücknahmedatum',
@@ -38,7 +41,7 @@ return [
     'select_statustype'	=> 'Status Typ auswählen',
     'serial'			=> 'Seriennummer',
     'status'			=> 'Status',
-    'tag'				=> 'Asset ID',
+    'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
     'warranty'			=> 'Garantie',
         'warranty_expires'		=> 'Garantie Ablaufdatum',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Nur den Standardort aktualisieren',
     'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
     'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Verarbeitung... (Dies kann bei großen Dateien etwas Zeit in Anspruch nehmen)',
     'optional_infos'  => 'Optionale Informationen',
     'order_details'   => 'Bestellinformationen'
 ];

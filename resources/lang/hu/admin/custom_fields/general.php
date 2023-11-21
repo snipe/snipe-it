@@ -49,4 +49,9 @@ return [
     'unique' => 'Egyedi',
     'display_in_user_view' => 'A hozzárendelt felhasználó megtekintheti ezeket az értékeket a "Hozzárendelt Eszközök Megtekintése" oldalon',
     'display_in_user_view_table' => 'Látható a felhasználó számára',
+    'auto_add_to_fieldsets' => 'Automatikusan add hozzá minden új mezőcsoporthoz',
+    'add_to_preexisting_fieldsets' => 'Hozzáadás egy meglévő listához',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview_short' => 'Megtekintés listában',
+
 ];

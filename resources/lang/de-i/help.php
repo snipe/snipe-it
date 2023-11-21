@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mehr Info',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Mit dem Aktivieren dieser Option wird der Asset-Datensatz an diesen neuen Ort angepasst. Wenn diese Option nicht aktiviert ist, wird der Ort nur im Audit-Log angezeigt.<br><br>Falls das Asset ausgecheckt ist, ändert sich der Ort der Person, des Assets oder des Orts, an dem es ausgecheckt ist, nicht.',
 
     'assets' => 'Assets sind Elemente, die mit Seriennummer oder einem Asset-Tag versehen sind. Sie sind meist höhere Werte, bei denen die Identifizierung eines bestimmten Gegenstands von Bedeutung ist.',
 

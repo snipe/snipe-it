@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Component is niet uitgecheckt, probeer het nogmaals',
         'success' 		=> 'Component succesvol uitgecheckt.',
-        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.',
+        'unavailable'      => 'Er zijn niet genoeg componenten over: :resterend, :requested gevraagd ',
     ),
 
     'checkin' => array(

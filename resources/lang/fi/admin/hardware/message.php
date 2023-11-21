@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Laitetta ei palautettu, ole hyvä ja yritä uudelleen',
         'success' 		=> 'Laite palautettiin onnistuneesti.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Laite palautettiin onnistuneesti.',
+        'nothing_updated'   => 'Laitetteita ei ollut valittuna, joten mitään ei palautettu.', 
     ],
 
     'audit' => [
@@ -51,8 +51,9 @@ return [
         'success'               => 'Tiedostosi on tuotu',
         'file_delete_success'   => 'Tiedosto on poistettu onnistuneesti',
         'file_delete_error'      => 'Tiedostoa ei voitu poistaa',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'The file selected is missing',
+        'header_row_has_malformed_characters' => 'Yksi tai useampi otsikkorivin attribuutti sisältää epämuodostuneita UTF-8 merkkejä',
+        'content_row_has_malformed_characters' => 'Yksi tai useampi ensimmäisen sisältörivin attribuutti sisältää epämuodostuneita UTF-8 merkkejä',
     ],
 
 

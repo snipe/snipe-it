@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Архивният файл беше изтрит успешно.',
         'generated'             => 'Нов архивен файл беше създаден успешно.',
         'file_not_found'        => 'Архивният файл не беше открит на сървъра.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Да, потвърди възстановяването. Това ще презапише цялата информация в датабазата и ще отпише всички вписани потребители включително вас.',
+        'restore_confirm'       => 'Сигурни ли сте че искате да възстановите датабазата от :filename?'
     ],
     'purge' => [
         'error'     => 'Възникна грешка при пречистване. ',
@@ -20,25 +20,27 @@ return [
         'success'               => 'Изтрити записи успешно премахнати.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Изпращане на тестов е-майл...',
+        'success' => 'Писмото е изпратено!',
+        'error' => 'Е-майла не може да се изпрати.',
+        'additional' => 'Няма допълнителна информация за грешка. Проверете е-майл настройките и логовете на програмата.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
+        'testing' => 'Тест на LDAP връзката...',
         '500' => 'Грешка 500. Моля проверете логовете на сървъра за повече информация.',
         'error' => 'Възникна грешка :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'sync_success' => 'Примерни 10 потребителя от LDAP сървъра базирани на вашите настройки:',
+        'testing_authentication' => 'Тест LDAP Автентификация...',
+        'authentication_success' => 'Потребителска Автентификация към LDAP успешна!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Изпращане :app тест съобщение...',
+        'success' => 'Your :webhook_name Integration works!',
+        'success_pt1' => 'Успешно! Проверете ',
+        'success_pt2' => ' канал за вашето тестово съобщение и натиснете бутона SAVE за да запазите вашите настройки.',
+        '500' => 'Грешка 500.',
+        'error' => 'Възникна грешка. :app върна грешка: :error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_misc' => 'Възникна грешка. :( ',
     ]
 ];

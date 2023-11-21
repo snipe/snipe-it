@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'คัดลอกแบบสินทรัพย์',
     'deployable'  				=> 'สามารถใช้งานได้',
     'deleted'  					=> 'สินทรัพย์นี้ถูกลบไปแล้ว',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'แก้ไขสินทรัพย์',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,10 +20,11 @@ return [
     'requestable'               => 'ร้องขอได้',
     'requested'				    => 'การขอใช้บริการ',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'กู้คืนสินทรัพย์',
     'pending'  					=> 'อยู่ระหว่างดำเนินการ',
     'undeployable'  			=> 'ไม่สามารถนำไปใช้งานได้',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'ดูสินทรัพย์',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '
@@ -44,4 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

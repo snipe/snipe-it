@@ -49,4 +49,9 @@ return [
     'unique' => 'Univoco',
     'display_in_user_view' => 'Permetti all\'utente di visualizzare questi valori nella pagina Visualizza Beni Assegnati',
     'display_in_user_view_table' => 'Visibile all\'utente',
+    'auto_add_to_fieldsets' => 'Aggiungi automaticamente a ogni nuovo campo',
+    'add_to_preexisting_fieldsets' => 'Aggiungi a tutti i campi esistenti',
+    'show_in_listview' => 'Mostra nelle viste elenco per default. Gli utenti autorizzati potranno comunque mostrare/nascondere con il selettore colonne.',
+    'show_in_listview_short' => 'Mostra nelle liste',
+
 ];

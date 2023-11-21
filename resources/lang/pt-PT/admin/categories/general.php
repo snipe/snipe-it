@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Clonar Categoria',
     'create'  							=> 'Criar Categoria',
     'edit'                              => 'Editar Categoria',
+    'email_will_be_sent_due_to_global_eula' => 'Um e-mail será enviado para o utilizador porque o EULA global está a ser usado.',
+    'email_will_be_sent_due_to_category_eula' => 'Um email será enviado para o utilizador porque um EULA foi definido para essa categoria.',
     'eula_text'							=> 'EULA da Categoria',
     'eula_text_help'					=> 'Este atributo permite-lhe personalizar os seus EULAs para tipos específicos de artigos. Se apenas tem um para todos os seus artigos, pode selecionar a caixa abaixo, para usar o EULA padrão.',
     'name'                              => 'Nome da Categoria',

@@ -67,6 +67,8 @@ return [
         'array'   => '：属性必须至少有：最小项。',
     ],
     'starts_with'          => ':attribute 必须以以下一个开始：:values',
+    'ends_with'            => ':attribute 必须以: :values 其中一个结尾。',
+
     'not_in'               => '选择的 :attribute 无效',
     'numeric'              => ':attribute 必须是数字',
     'present'              => '：属性字段必须存在。',
