@@ -46,43 +46,55 @@ class ValidationServiceProvider extends ServiceProvider
             return $validator->passes();
         });
 
-        // Unique only if undeleted
-        // This works around the use case where multiple deleted items have the same unique attribute.
-        // (I think this is a bug in Laravel's validator?)
-        // $parameters is the rule parameters, like `unique_undeleted:users,id` - $parameters[0] is users, $parameters[1] is id
-        // the UniqueUndeletedTrait prefills these so you can just use `unique_undeleted` in your rules (but this would only work directly in the model)
+
+        /**
+         * Unique only if undeleted.
+         *
+         * This works around the use case where multiple deleted items have the same unique attribute.
+         * (I think this is a bug in Laravel's validator?)
+         *
+         * $attribute is the FIELDNAME you're checking against
+         * $value is the VALUE of the item you're checking against the existing values in the fieldname
+         * $parameters[0] is the TABLE NAME you're querying
+         * $parameters[1] is the ID of the item you're querying - this makes it work on saving, checkout, etc,
+         *   since it defaults to 0 if there is no item created yet (new item), but populates the ID if editing
+         *
+         * The UniqueUndeletedTrait prefills these parameters, so you can just use
+         * `unique_undeleted:table,fieldname` in your rules out of the box
+         */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+
             if (count($parameters)) {
-                $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
+
+                // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable
+                if (($parameters[0]=='assets') && ($attribute == 'serial') && (Setting::getSettings()->unique_serial != '1')) {
+                    return true;
+                }
+
+                $count = DB::table($parameters[0])
+                    ->select('id')
+                    ->where($attribute, '=', $value)
+                    ->whereNull('deleted_at')
+                    ->where('id', '!=', $parameters[1])->count();
 
                 return $count < 1;
             }
         });
 
         // Unique if undeleted for two columns
-            // Same as unique_undeleted but taking the combination of two columns as unique constrain.
-            Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-                if (count($parameters)) {
-                    $count = DB::table($parameters[0])
-                             ->select('id')->where($attribute, '=', $value)
-                             ->whereNull('deleted_at')
-                             ->where('id', '!=', $parameters[1])
-                             ->where($parameters[2], $parameters[3])->count();
-
-                    return $count < 1;
-                }
-            });
-
-
-        Validator::extend('unique_serial', function ($attribute, $value, $parameters, $validator) {
-            if(Setting::getSettings()->unique_serial == '1') {
-                $count = DB::table('assets')->select('id')->where('serial', '=', $value)->whereNull('deleted_at')->count();
+        // Same as unique_undeleted but taking the combination of two columns as unique constrain.
+        Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+            if (count($parameters)) {
+                $count = DB::table($parameters[0])
+                         ->select('id')->where($attribute, '=', $value)
+                         ->whereNull('deleted_at')
+                         ->where('id', '!=', $parameters[1])
+                         ->where($parameters[2], $parameters[3])->count();
 
                 return $count < 1;
-            } else {
-                return true;
             }
         });
+
 
         // Prevent circular references
         //
