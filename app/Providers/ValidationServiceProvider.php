@@ -63,13 +63,7 @@ class ValidationServiceProvider extends ServiceProvider
          * `unique_undeleted:table,fieldname` in your rules out of the box
          */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-
-            \Log::debug('Parameters: ');
-            \Log::debug(print_r($parameters, true));
-
-            \Log::debug('Attribute: '. $attribute);
-            \Log::debug('Value: '. $value);
-
+            
             if (count($parameters)) {
 
                 // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable
