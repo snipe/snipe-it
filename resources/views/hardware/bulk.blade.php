@@ -14,6 +14,8 @@
 
 {{-- Page content --}}
 @section('content')
+  @livewire('modal-components', ['multiCompany' => $multiCompany])
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
@@ -202,6 +204,5 @@
 
 
 @stop
-@livewire('modal-components', ['multiCompany' => $multiCompany, 'modal' => true])
 
 

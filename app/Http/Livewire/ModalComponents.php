@@ -2,40 +2,41 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+
 
 class ModalComponents extends Component
 {
-    public $modal_change;
+    public $action;
     public $multiCompany;
 
-    protected $listeners = ['showModal' => 'showModal'];
+    protected $listeners = ['openModal'];
 
     public function mount($multiCompany) {
 
         $this->multiCompany = $multiCompany;
-        $this->emitSelf('showModal');
-//        if($multiCompany) {
-//            $this->dispatchBrowserEvent();
-//        }
+
+
 }
-    public function multiCompanyAcknowledge(Request $request, $action){
-        dd('hi',$action);
-        if ($action =='cancel') {
-            $this->modal_change = $request->session()->pull('company_uniq', 'null');
-            return redirect()->back();
-        }
-        if ($action =='accept') {
-            $this->modal_change = $request->session()->pull('company_uniq', 'null');
+    public function cancelEdit(){
+
+            return redirect()->to('hardware');
+    }
+    public function continueEdit(){
+            return true;
+    }
+
+    public function openModal(){
+        if($this->multiCompany) {
+            $this->emit('show');
         }
     }
-    public function showModal(){
-        return view('livewire.modal-components');
-    }
-    public function render()
-    {       $this->emitSelf($this->multiCompany);
+    public function render(){
+
             return view('livewire.modal-components');
+
     }
 }

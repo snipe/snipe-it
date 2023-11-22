@@ -1,6 +1,6 @@
  <div>
 <!-- Modal -->
-          <div class="modal fade" wire:model="modal" id="MultiCompanyAlert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal fade" wire:init="openModal" id="MultiCompanyAlert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -10,11 +10,13 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  You are about to edit multiple assets that do not all belong to the same company.
+                  You are about to edit multiple assets that do not all belong to the same company. <br>Are you sure you want to do this?
                 </div>
                 <div class="modal-footer">
-                  <button type="button" wire:click.prevent="multiCompanyAcknowledge({{'cancel'}})"  class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="button" wire:click.prevent="multiCompanyAcknowledge({{'accept'}})" class="btn btn-primary" data-dismiss="modal">Understood</button>
+                  <form wire:submit.prevent="submitcategory">
+                    <input type="button"  wire:click="cancelEdit()"  class="btn btn-secondary" value="Go Back" data-dismiss="modal"></input>
+                    <input type="button"  wire:click="continueEdit()" class="btn btn-primary" value="Continue" data-dismiss="modal"></input>
+                  </form>
                 </div>
               </div>
             </div>
@@ -22,16 +24,15 @@
 </div>
  @section('moar_scripts')
    @if($multiCompany)
-     {{--    <script>--}}
-     {{--      $(function() {--}}
-     {{--        $('#MultiCompanyAlert').modal('show');--}}
-     {{--      });--}}
-     {{--    </script>--}}
      <script>
-       window.addEventListener('tokenCreated', token => {
-         $('#tokenCreated').modal('hide');
-         $('#tokenCreated').modal('show');
-       })
+       $(document).ready(function () {
+         window.livewire.emit('show');
+       });
+
+       $(document).ready(function () {
+         window.livewire.on('show', () => {
+          $('#MultiCompanyAlert').modal('show');
+       })});
      </script>
    @endif
  @stop
