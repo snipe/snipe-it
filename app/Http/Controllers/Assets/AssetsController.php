@@ -813,7 +813,7 @@ class AssetsController extends Controller
                 // Redirect them to the deleted page if there are more, otherwise the section index
                 $deleted_assets = Asset::onlyTrashed()->count();
                 if ($deleted_assets > 0) {
-                    return redirect()->back()->with('success', trans('admin/hardware/message.success.restored'));
+                    return redirect()->back()->with('success', trans('admin/hardware/message.restore.success'));
                 }
                 return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
             }
