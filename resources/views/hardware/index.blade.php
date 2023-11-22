@@ -63,8 +63,8 @@
           <div class="row">
             <div class="col-md-12">
 
-                @include('partials.asset-bulk-actions', ['status' => Request::get('status'), 'MultipleCompanySupportEnabled' =>\App\Models\Company::isFullMultipleCompanySupportEnabled()])
-                   
+                @include('partials.asset-bulk-actions', ['status' => Request::get('status')])
+
               <table
                 data-advanced-search="true"
                 data-click-to-select="true"

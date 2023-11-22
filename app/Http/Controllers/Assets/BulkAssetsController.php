@@ -90,8 +90,6 @@ class BulkAssetsController extends Controller
 
                 case 'edit':
                     $company_check= Asset::findMany($asset_ids)->pluck('company_id')->unique();
-//                    $user_check= Asset::with('assignedTo')->select('company_id')->unique();
-//                    dd($company_check->count());
 
                     $this->authorize('update', Asset::class);
                     return view('hardware/bulk')
@@ -99,7 +97,8 @@ class BulkAssetsController extends Controller
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
                         ->with('models', $models->pluck(['model'])) 
-                        ->with('modelNames', $modelNames);
+                        ->with('modelNames', $modelNames)
+                        ->with('settings', Setting::getSettings());
             }
         }
 

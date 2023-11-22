@@ -14,7 +14,7 @@
 
 {{-- Page content --}}
 @section('content')
-@if(isset($MultipleCompanySupportEnabled) && ($MultipleCompanySupportEnabled))
+@if($settings->full_multiple_companies_support == 1)
   @livewire('modal-components', ['multiCompany' => $multiCompany])
 @endif
 <div class="row">
