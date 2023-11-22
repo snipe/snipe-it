@@ -146,7 +146,7 @@ return [
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
     'multi_company_alert' => 'Multiple Company Edit Alert',
     'multi_company_edit_warning_help_text' => 'Reminds users they are editing assets across multiple companies.',
-    'multi_company_alert_removal'  => 'Dont want to see this message anymore? disable it <a href=":url">here</a>',
+    'multi_company_alert_removal'  => 'Don\'t want to see this message anymore? Disable it <a href=":url">here.</a>',
     'show_in_model_list'   => 'Show in Model Dropdowns',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',

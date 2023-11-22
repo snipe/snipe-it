@@ -15,7 +15,7 @@
                   <br><br><br>
 
 
-                    {{$modal_removal_alert}}
+                    {!!$modal_removal_alert !!}
 
                 </div>
                 <div class="modal-footer">
