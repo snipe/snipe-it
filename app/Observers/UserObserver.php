@@ -22,23 +22,24 @@ class UserObserver
 
             if ($user->getRawOriginal()[$key] != $user->getAttributes()[$key]) {
 
+                $changed[$key]['old'] = $user->getRawOriginal()[$key];
+                $changed[$key]['new'] = $user->getAttributes()[$key];
+
                 // Do not store the hashed password in changes
-                if ($key!='password') {
-                    $changed[$key]['old'] = $user->getRawOriginal()[$key];
-                    $changed[$key]['new'] = $user->getAttributes()[$key];
-                } else {
-                    $changed[$key]['old'] = '*************';
-                    $changed[$key]['new'] = '*************';
+                if ($key == 'password') {
+                    $changed['password']['old'] = '*************';
+                    $changed['password']['new'] = '*************';
                 }
 
-                if ($key!='last_login') {
-                    unset($changed['last_login']['old']);
-                    unset($changed['last_login']['new']);
+                // Do not store last login in changes
+                if ($key == 'last_login') {
+                    unset($changed['last_login']);
+                    unset($changed['last_login']);
                 }
 
-                if ($key!='permissions') {
-                    unset($changed['permissions']['old']);
-                    unset($changed['permissions']['new']);
+                if ($key == 'permissions') {
+                    unset($changed['permissions']);
+                    unset($changed['permissions']);
                 }
             }
         }
@@ -46,6 +47,8 @@ class UserObserver
         $logAction = new Actionlog();
         $logAction->item_type = User::class;
         $logAction->item_id = $user->id;
+        $logAction->target_type = User::class; // can we instead say $logAction->item = $asset ?
+        $logAction->target_id = $user->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->log_meta = json_encode($changed);
@@ -81,6 +84,8 @@ class UserObserver
         $logAction = new Actionlog();
         $logAction->item_type = User::class;
         $logAction->item_id = $user->id;
+        $logAction->target_type = User::class; // can we instead say $logAction->item = $asset ?
+        $logAction->target_id = $user->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
@@ -97,6 +102,8 @@ class UserObserver
         $logAction = new Actionlog();
         $logAction->item_type = User::class;
         $logAction->item_id = $user->id;
+        $logAction->target_type = User::class; // can we instead say $logAction->item = $asset ?
+        $logAction->target_id = $user->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('restore');
