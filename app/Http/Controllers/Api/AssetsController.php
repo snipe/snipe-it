@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
-use App\Http\Requests\StoreAssetRequest;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -536,7 +535,7 @@ class AssetsController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-        return Gate::allows('create', new Asset);
+        $this->authorize('create', Asset::class);
         
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
@@ -547,8 +546,7 @@ class AssetsController extends Controller
         $asset->model_id                = $request->get('model_id');
         $asset->order_number            = $request->get('order_number');
         $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset()); //yup, problem :/
-        // NO IT IS NOT!!! This is never firing; we SHOW the asset_tag you're going to get, so it *will* be filled in!
+        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
