@@ -41,6 +41,11 @@ class UserObserver
                     unset($changed['permissions']);
                     unset($changed['permissions']);
                 }
+
+                if ($key == 'remember_token') {
+                    unset($changed['remember_token']);
+                    unset($changed['remember_token']);
+                }
             }
         }
 
