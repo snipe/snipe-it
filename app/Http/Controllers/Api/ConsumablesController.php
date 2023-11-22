@@ -263,14 +263,11 @@ class ConsumablesController extends Controller
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable')));
-            \Log::debug('No enough remaining');
         }
 
         // Make sure there is a valid category
         if (!$consumable->category){
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.invalid_item_category_single', ['type' => trans('general.consumable')])));
-
-            return redirect()->route('consumables.index')->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
         }
 
 
