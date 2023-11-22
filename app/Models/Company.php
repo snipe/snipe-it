@@ -69,7 +69,7 @@ final class Company extends SnipeModel
         'email',
     ];
 
-    private static function isFullMultipleCompanySupportEnabled()
+    public static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
 
