@@ -534,8 +534,10 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreAssetRequest $request)
+    public function store(ImageUploadRequest $request)
     {
+        return Gate::allows('create', new Asset);
+        
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
