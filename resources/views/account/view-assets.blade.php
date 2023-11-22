@@ -10,15 +10,17 @@
 @section('content')
 
 @if ($acceptances = \App\Models\CheckoutAcceptance::forUser(Auth::user())->pending()->count())
-  <div class="col-md-12">
-    <div class="alert alert alert-warning fade in">
-      <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert alert-warning fade in">
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
 
-      <strong>
-        <a href="{{ route('account.accept') }}" style="color: white;">
-          {{ trans('general.unaccepted_profile_warning', array('count' => $acceptances)) }}
-        </a>
-        </strong>
+        <strong>
+          <a href="{{ route('account.accept') }}" style="color: white;">
+            {{ trans('general.unaccepted_profile_warning', array('count' => $acceptances)) }}
+          </a>
+          </strong>
+      </div>
     </div>
   </div>
 @endif
