@@ -43,9 +43,8 @@ class AssetObserver
 	    if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
 	    && ($same_checkout_counter) && ($same_checkin_counter)
             && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
-            && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && ($restoring_or_deleting!=true))
+            && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && (!$restoring_or_deleting))
         {
-            \Log::debug('Log the update');
             $changed = [];
 
             foreach ($asset->getRawOriginal() as $key => $value) {
