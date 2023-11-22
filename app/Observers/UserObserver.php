@@ -9,7 +9,7 @@ use Auth;
 class UserObserver
 {
     /**
-     * Listen to the Asset updating event. This fires automatically every time an existing asset is saved.
+     * Listen to the User updating event. This fires automatically every time an existing asset is saved.
      *
      * @param  User  $user
      * @return void
@@ -56,7 +56,7 @@ class UserObserver
     }
 
     /**
-     * Listen to the Asset created event, and increment
+     * Listen to the User created event, and increment
      * the next_auto_tag_base value in the settings table when i
      * a new asset is created.
      *
