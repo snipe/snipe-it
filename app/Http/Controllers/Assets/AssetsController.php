@@ -803,13 +803,6 @@ class AssetsController extends Controller
             }
 
             if ($asset->restore()) {
-                $logaction = new Actionlog();
-                $logaction->item_type = Asset::class;
-                $logaction->item_id = $asset->id;
-                $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
-                $logaction->logaction('restored');
-
                 // Redirect them to the deleted page if there are more, otherwise the section index
                 $deleted_assets = Asset::onlyTrashed()->count();
                 if ($deleted_assets > 0) {

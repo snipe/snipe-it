@@ -187,7 +187,7 @@ class ManufacturersController extends Controller
                 $logaction->item_id = $manufacturer->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
                 $logaction->user_id = Auth::user()->id;
-                $logaction->logaction('restored');
+                $logaction->logaction('restore');
 
                 return response()->json(Helper::formatStandardApiResponse('success', trans('admin/manufacturers/message.restore.success')), 200);
             }

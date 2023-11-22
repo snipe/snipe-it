@@ -763,14 +763,6 @@ class AssetsController extends Controller
             }
 
             if ($asset->restore()) {
-
-                $logaction = new Actionlog();
-                $logaction->item_type = Asset::class;
-                $logaction->item_id = $asset->id;
-                $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
-                $logaction->logaction('restored');
-
                 return response()->json(Helper::formatStandardApiResponse('success', trans('admin/hardware/message.restore.success')), 200);
             }
 
