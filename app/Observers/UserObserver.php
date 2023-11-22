@@ -19,6 +19,7 @@ class UserObserver
 
         $changed = [];
         foreach ($user->getRawOriginal() as $key => $value) {
+
             if ($user->getRawOriginal()[$key] != $user->getAttributes()[$key]) {
 
                 // Do not store the hashed password in changes
@@ -28,6 +29,16 @@ class UserObserver
                 } else {
                     $changed[$key]['old'] = '*************';
                     $changed[$key]['new'] = '*************';
+                }
+
+                if ($key!='last_login') {
+                    unset($changed['last_login']['old']);
+                    unset($changed['last_login']['new']);
+                }
+
+                if ($key!='permissions') {
+                    unset($changed['permissions']['old']);
+                    unset($changed['permissions']['new']);
                 }
             }
         }
