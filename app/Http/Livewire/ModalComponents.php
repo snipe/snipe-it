@@ -11,12 +11,16 @@ class ModalComponents extends Component
     public $modal_change;
     public $multiCompany;
 
+    protected $listeners = ['showModal' => 'showModal'];
+
     public function mount($multiCompany) {
+
         $this->multiCompany = $multiCompany;
-        $this->dispatchBrowserEvent('show-modal');
+        $this->emitSelf('showModal');
+//        if($multiCompany) {
+//            $this->dispatchBrowserEvent();
+//        }
 }
-    public function checkSession(){
-    }
     public function multiCompanyAcknowledge(Request $request, $action){
         dd('hi',$action);
         if ($action =='cancel') {
@@ -31,7 +35,7 @@ class ModalComponents extends Component
         return view('livewire.modal-components');
     }
     public function render()
-    {
+    {       $this->emitSelf($this->multiCompany);
             return view('livewire.modal-components');
     }
 }

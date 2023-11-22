@@ -1,6 +1,5 @@
  <div>
-   @if($this->multiCompany)<!-- Modal -->
-
+<!-- Modal -->
           <div class="modal fade" wire:model="modal" id="MultiCompanyAlert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -20,5 +19,19 @@
               </div>
             </div>
           </div>
-     @endif
 </div>
+ @section('moar_scripts')
+   @if($multiCompany)
+     {{--    <script>--}}
+     {{--      $(function() {--}}
+     {{--        $('#MultiCompanyAlert').modal('show');--}}
+     {{--      });--}}
+     {{--    </script>--}}
+     <script>
+       window.addEventListener('tokenCreated', token => {
+         $('#tokenCreated').modal('hide');
+         $('#tokenCreated').modal('show');
+       })
+     </script>
+   @endif
+ @stop

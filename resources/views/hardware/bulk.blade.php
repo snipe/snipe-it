@@ -200,21 +200,8 @@
   </div> <!--/.col-md-8-->
 </div>
 
+
 @stop
 @livewire('modal-components', ['multiCompany' => $multiCompany, 'modal' => true])
 
 
-@section('moar_scripts')
- @if($multiCompany)
-{{--    <script>--}}
-{{--      $(function() {--}}
-{{--        $('#MultiCompanyAlert').modal('show');--}}
-{{--      });--}}
-{{--    </script>--}}
-<script>
-  window.addEventListener('show-modal', event => {
-    alert('we are here');
-  })
-</script>
- @endif
-@stop
