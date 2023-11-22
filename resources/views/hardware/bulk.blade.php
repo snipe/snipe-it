@@ -15,7 +15,9 @@
 {{-- Page content --}}
 @section('content')
 @if($settings->full_multiple_companies_support == 1)
+  @if($settings->multi_company_alert == 1)
   @livewire('modal-components', ['multiCompany' => $multiCompany])
+  @endif
 @endif
 <div class="row">
   <div class="col-md-8 col-md-offset-2">

@@ -52,6 +52,15 @@
                             <p class="help-block">
                                 {{ trans('admin/settings/general.full_multiple_companies_support_help_text') }}
                             </p>
+                            @if($setting->full_multiple_companies_support == 1)
+                            <label class="form-control">
+                                {{ Form::checkbox('multi_company_alert', '1', old('multi_company_alert', $setting->multi_company_alert),array('aria-label'=>'multi_company_alert')) }}
+                                {{ trans('admin/settings/general.multi_company_alert') }}
+                            </label>
+                            <p class="help-block">
+                            {{ trans('admin/settings/general.multi_company_edit_warning_help_text') }}
+                            </p>
+                            @endif
                         </div>
                     </div>
 

@@ -1,31 +1,33 @@
 <?php
 
 namespace App\Http\Livewire;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Log;
+use App\Models\Setting;
 use Livewire\Component;
 
 
 class ModalComponents extends Component
 {
-    public $action;
+    public $settings;
     public $multiCompany;
+    public $multi_company_alert;
+    public $modal_removal_alert;
 
     protected $listeners = ['openModal'];
 
     public function mount($multiCompany) {
-
+        $this->settings= Setting::getSettings();
+        $this->modal_removal_alert = trans('admin/settings/general.multi_company_alert_removal',['url' => route('settings.general.index')]);
         $this->multiCompany = $multiCompany;
+
 
 
 }
     public function cancelEdit(){
-
+            $this->save();
             return redirect()->to('hardware');
     }
     public function continueEdit(){
+            $this->save();
             return true;
     }
 
@@ -33,6 +35,9 @@ class ModalComponents extends Component
         if($this->multiCompany) {
             $this->emit('show');
         }
+    }
+    public function save(){
+        $this->settings->multi_company_alert =$this->multi_company_alert;
     }
     public function render(){
 
