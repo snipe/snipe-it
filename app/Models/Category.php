@@ -100,7 +100,8 @@ class Category extends SnipeModel
     {
 
         return Gate::allows('delete', $this)
-                && ($this->itemCount() == 0);
+                && ($this->itemCount() == 0)
+                && ($this->deleted_at == '');
     }
 
     /**

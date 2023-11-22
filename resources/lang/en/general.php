@@ -72,6 +72,8 @@ return [
     'consumable'			=> 'Consumable',
     'consumables'			=> 'Consumables',
     'country'  				=> 'Country',
+    'could_not_restore'     => 'Error restoring :item_type: :error',
+    'not_deleted'           => 'The :item_type is not deleted so it cannot be restored',
     'create'				=> 'Create New',
     'created'               => 'Item Created',
     'created_asset'			=> 'created asset',
