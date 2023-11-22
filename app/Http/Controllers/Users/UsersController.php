@@ -398,7 +398,7 @@ class UsersController extends Controller
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
                 $logaction->user_id = Auth::user()->id;
-                $logaction->logaction('restored');
+                $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index
                 $deleted_users = User::onlyTrashed()->count();
