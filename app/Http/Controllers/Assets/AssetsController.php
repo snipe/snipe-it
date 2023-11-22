@@ -205,8 +205,9 @@ class AssetsController extends Controller
         }
 
         if ($success) {
+            \Log::debug(e($asset->asset_tag));
             return redirect()->route('hardware.index')
-                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset->id), 'id', 'tag' => $asset->asset_tag]));
+                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset->id), 'id', 'tag' => e($asset->asset_tag)]));
                
       
         }
