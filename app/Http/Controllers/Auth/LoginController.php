@@ -56,7 +56,6 @@ class LoginController extends Controller
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
-        // $this->ldap = $ldap;
         $this->saml = $saml;
     }
 
@@ -82,7 +81,6 @@ class LoginController extends Controller
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
-            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
