@@ -754,34 +754,24 @@ class AssetsController extends Controller
      */
     public function restore(Request $request, $assetId = null)
     {
-        // Get asset information
-        $asset = Asset::withTrashed()->find($assetId);
-        $this->authorize('delete', $asset);
 
-        if (isset($asset->id)) {
+        if ($asset = Asset::withTrashed()->find($assetId)) {
+            $this->authorize('delete', $asset);
 
-            if ($asset->deleted_at=='') {
-               $message = 'Asset was not deleted. No data was changed.';
-
-            } else {
-
-                $message = trans('admin/hardware/message.restore.success');
-                // Restore the asset
-                Asset::withTrashed()->where('id', $assetId)->restore();
-
-                $logaction = new Actionlog();
-                $logaction->item_type = Asset::class;
-                $logaction->item_id = $asset->id;
-                $logaction->created_at =  date("Y-m-d H:i:s");
-                $logaction->user_id = Auth::user()->id;
-                $logaction->logaction('restored');
+            if ($asset->deleted_at == '') {
+                return response()->json(Helper::formatStandardApiResponse('error', trans('general.not_deleted', ['item_type' => trans('general.asset')])), 200);
             }
 
-            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset, $request), $message));
-        
+            if ($asset->restore()) {
+                return response()->json(Helper::formatStandardApiResponse('success', trans('admin/hardware/message.restore.success')), 200);
+            }
 
+            // Check validation to make sure we're not restoring an asset with the same asset tag (or unique attribute) as an existing asset
+            return response()->json(Helper::formatStandardApiResponse('error', trans('general.could_not_restore', ['item_type' => trans('general.asset'), 'error' => $asset->getErrors()->first()])), 200);
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+
     }
 
     /**
