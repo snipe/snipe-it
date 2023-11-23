@@ -390,7 +390,6 @@
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
-                          data-show-refresh="false"
                           data-sort-order="asc"
                           id="userAssets"
                           class="table table-striped snipe-table"
