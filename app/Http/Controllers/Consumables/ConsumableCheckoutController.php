@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Consumables;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Http\Controllers\Controller;
+use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,30 +19,38 @@ class ConsumableCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see ConsumableCheckoutController::store() method that stores the data.
      * @since [v1.0]
-     * @param int $consumableId
+     * @param int $id
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($consumableId)
+    public function create($id)
     {
 
-        if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        if ($consumable = Consumable::with('users')->find($id)) {
+
+            $this->authorize('checkout', $consumable);
+
+            // Make sure the category is valid
+            if ($consumable->category) {
+
+                // Make sure there is at least one available to checkout
+                if ($consumable->numRemaining() <= 0){
+                    return redirect()->route('consumables.index')
+                        ->with('error', trans('admin/consumables/message.checkout.unavailable'));
+                }
+
+                // Return the checkout view
+                return view('consumables/checkout', compact('consumable'));
+            }
+
+            // Invalid category
+            return redirect()->route('consumables.edit', ['consumable' => $consumable->id])
+                ->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
         }
 
-        // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0){
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
-        }
+        // Not found
+        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
 
-        // Make sure there is a valid category
-        if (!$consumable->category){
-            return redirect()->route('consumables.edit', ['consumable' => $consumable->id])->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
-        }
-
-        $this->authorize('checkout', $consumable);
-
-        return view('consumables/checkout', compact('consumable'));
     }
 
     /**
