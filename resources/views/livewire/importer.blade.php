@@ -235,7 +235,7 @@
                                                                                     ])
                                                                                 }}
                                                                             </div>
-									                                    @if ($activeFile->first_row)
+									                                    @if (($activeFile->first_row) && (array_key_exists($index, $activeFile->first_row)))
                                                                             <div class="col-md-5">
                                                                                 <p class="form-control-static">{{ str_limit($activeFile->first_row[$index], 50, '...') }}</p>
                                                                             </div>
