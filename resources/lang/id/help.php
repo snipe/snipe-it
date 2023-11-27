@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Barang Habis Pakai adalah segala sesuatu yang dibeli dan nantinya akan habis terpakai. Sebagai contoh, tinta printer atau kertas untuk mesin fotokopi.',
 
     'depreciations' => 'Anda dapat mengatur penyusutan aset dengan perhitungan penyusutan garis lurus.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

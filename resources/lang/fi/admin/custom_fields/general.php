@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Uusi mukautettu kenttä',
     'create_field_title' => 'Luo uusi mukautettu kenttä',
     'value_encrypted'      	        => 'Kentän arvo salataan tietokannassa. Vain järjestelmänvalvojat voivat tarkastella purettua arvoa',
-    'show_in_email'     => 'Käytetäänkö kentän arvoa käyttäjälle lähetettävissä luovutus-sähköposteissa? Salattuja kenttiä ei voi lisätä sähköposteihin.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Aputeksti',
     'help_text_description' => 'Tämä on valinnainen teksti joka ilmestyy lomakekentän alapuolelle laitetta muokatessa tarjotakseen kontekstia kentälle.',
     'about_custom_fields_title' => 'Mukautetuista kentistä',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Näkyvä käyttäjälle',
     'auto_add_to_fieldsets' => 'Lisää tämä automaattisesti kaikkiin uusiin kenttäkokoelmiin',
     'add_to_preexisting_fieldsets' => 'Lisää olemassaoleviin kenttäkokoelmiin',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

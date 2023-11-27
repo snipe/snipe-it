@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ar hyn o bryd mae\'r trwydded yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr trwyddedyn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
     'select_asset_or_person' => 'Rhaid i chi ddewis ased neu defnyddiwr ond nid y ddau.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Nid oedd yn bosib nodi\'r trwydded allan. Ceisiwch eto o. g. y. dd.',
-        'success' => 'Trwydded wedi nodi allan yn llwyddiannus'
+        'success' => 'Trwydded wedi nodi allan yn llwyddiannus',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

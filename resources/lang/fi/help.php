@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Kulutustarvikkeet ovat kohteita jotka kuluvat ajan myötä. Esimerkiksi tulostimen muste tai kopiopaperi.',
 
     'depreciations' => 'Voit määrittää laitteille poistoja poistaaksesi omaisuuden arvoa suoraviivaisesti laskien.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

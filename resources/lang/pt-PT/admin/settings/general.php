@@ -360,6 +360,6 @@ return [
     'mail_from' => 'Mail From Address',
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
-    'timezone' => 'Timezone',
+    'timezone' => 'Fuso horário',
 
 ];

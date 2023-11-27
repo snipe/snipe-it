@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Този лиценз понастоящем е изписан на потребител и не може да бъде изтрит. Моля, първо впишете лиценза и тогава опитайте отново да го изтриете. ',
     'select_asset_or_person' => 'Трябва да изберете актив или потребител, но не и двете.',
     'not_found' => 'Лиценът не е намерен',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Възникна проблем при изписването на лиценза. Моля, опитайте отново.',
-        'success' => 'Лицензът е изписан'
+        'success' => 'Лицензът е изписан',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Gebruiker bestaan ​​reeds!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Die aanmeldingsveld is nodig',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Die wagwoord is nodig.',
     'insufficient_permissions'  => 'Onvoldoende Toestemmings.',
     'user_deleted_warning'      => 'Hierdie gebruiker is verwyder. Jy sal hierdie gebruiker moet herstel om hulle te wysig of nuwe bates toe te ken.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

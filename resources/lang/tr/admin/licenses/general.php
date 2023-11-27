@@ -23,24 +23,24 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Tüm koltukları ayır',
-                'modal'             => 'This will action checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
-                'enabled_tooltip'   => 'Checkin ALL seats for this license from both users and assets',
-                'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
-                'success'           => 'License successfully checked in! | All licenses were successfully checked in!',
-                'log_msg'           => 'Checked in via bulk license checkout in license GUI',
+                'modal'             => 'Bu, bir koltukta kontrol işlemini gerçekleştirecektir. | Bu işlem, bu lisans için tüm :checkedout_seats_count koltukları kontrol edecektir.',
+                'enabled_tooltip'   => 'Bu lisans için hem kullanıcılardan hem de varlıklardan TÜM lisansları kontrol edin',
+                'disabled_tooltip'  => 'Şu anda teslim alınmış koltuk olmadığından bu devre dışı bırakıldı',
+                'disabled_tooltip_reassignable'  => 'Lisans yeniden atanamadığı için bu devre dışı bırakıldı',
+                'success'           => 'Lisans başarıyla kontrol edildi! | Tüm lisanslar başarıyla kontrol edildi!',
+                'log_msg'           => 'Lisans GUI\'sinde toplu lisans ödemesi yoluyla giriş yapıldı',
             ],
 
             'checkout_all'              => [
                 'button'                => 'Tüm koltukları incele',
-                'modal'                 => 'This action will checkout one seat to the first available user. | This action will checkout all :available_seats_count seats to the first available users. A user is considered available for this seat if they do not already have this license checked out to them, and the Auto-Assign License property is enabled on their user account.',
-                'enabled_tooltip'   => 'Checkout ALL seats (or as many as are available) to ALL users',
+                'modal'                 => 'Bu işlem, müsait olan ilk kullanıcıya bir koltuğun ödemesini yapacaktır. | Bu işlem, tüm :available_seats_count koltukları ilk müsait kullanıcılara teslim edecektir. Bir kullanıcı, bu lisansı henüz kendisine teslim etmemişse ve kullanıcı hesabında Otomatik Lisans Atama özelliği etkinleştirilmişse, bu koltuk için uygun kabul edilir.',
+                'enabled_tooltip'   => 'TÜM kullanıcılara TÜM koltukları (veya mevcut olan sayıda) ödeme yapın',
                 'disabled_tooltip'  => 'Ulaşılabilir koltruk olmadığı için bu devre dışı bırakıldı',
-                'success'           => 'License successfully checked out! | :count licenses were successfully checked out!',
-                'error_no_seats'    => 'There are no remaining seats left for this license.',
-                'warn_not_enough_seats'    => ':count users were assigned this license, but we ran out of available license seats.',
-                'warn_no_avail_users'    => 'Nothing to do. There are no users who do not already have this license assigned to them.',
-                'log_msg'           => 'Checked out via bulk license checkout in license GUI',
+                'success'           => 'Lisans başarıyla kontrol edildi! | :count lisansları başarıyla teslim alındı!',
+                'error_no_seats'    => 'Bu lisans için kalan koltuk kalmadı.',
+                'warn_not_enough_seats'    => ':count kullanıcılara bu lisans atandı, ancak mevcut lisans koltuklarımız tükendi.',
+                'warn_no_avail_users'    => 'Yapacak bir şey yok. Henüz kendisine bu lisans atanmamış kullanıcı yok.',
+                'log_msg'           => 'Lisans GUI\'sinde toplu lisans ödemesi yoluyla teslim alındı',
 
 
             ],

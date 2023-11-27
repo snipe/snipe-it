@@ -35,12 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'Отправка тестового сообщения в :app...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'Ваша интеграция :webhook_name работает!',
         'success_pt1' => 'Успех! Проверьте ',
         'success_pt2' => ' канал для вашего тестового сообщения и не забудьте нажать СОХРАНИТЬ ниже, чтобы сохранить ваши настройки.',
         '500' => '500 Ошибка на сервера.',
         'error' => 'Что-то пошло не так. :app ответил: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'ОШИБКА: 301/302 :endpoint возвращает редирект. По соображениям безопасности мы не переходим по редиректам. Пожалуйста, используйте фактическую конечную точку.',
         'error_misc' => 'Что-то пошло не так. :( ',
     ]
 ];

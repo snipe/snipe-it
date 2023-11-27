@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Uživatel již existuje!',
     'user_not_found'            => 'Uživatel neexistuje.',
     'user_login_required'       => 'Přihlašovací pole je povinné',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Je vyžadováno heslo.',
     'insufficient_permissions'  => 'Nedostatečná oprávnění.',
     'user_deleted_warning'      => 'Tento uživatel byl smazán. Budete muset uživatele obnovit, aby jste ho mohli upravil nebo přidělil nové majetky.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
     'password_reset_sent'       => 'Odkaz pro obnovení hesla byl odeslán na :email!',
     'user_has_no_email'         => 'Tento uživatel nemá e-mailovou adresu ve svém profilu.',
-    'user_has_no_assets_assigned'   => 'Tento uživatel nemá přiřazené žádné položky',
+    'log_record_not_found'        => 'Pro tohoto uživatele se nepodařilo nalézt odpovídající záznam z logu.',
 
 
     'success' => array(

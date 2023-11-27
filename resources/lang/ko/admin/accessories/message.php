@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => '해당 악세사리 [:id] 가 존재하지 않습니다.',
+    'not_found' => '액세서리를 찾을 수 없습니다.',
     'assoc_users'	 => '이 부속품은 현재 사용자에게 :count 개가 반출 되었습니다. 이 부속품을 반입하고 다시 시도해 주세요. ',
 
     'create' => array(

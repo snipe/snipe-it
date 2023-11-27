@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Drukuj wszystkie przypisane',
     'name'                      => 'Nazwa Lokalizacji',
     'address'                   => 'Adres',
+    'address2'                   => 'Druga linia adresu',
     'zip'                       => 'Kod Pocztowy',
     'locations'                 => 'Lokalizacje',
     'parent'                    => 'Rodzic',

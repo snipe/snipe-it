@@ -6,16 +6,17 @@ return array(
     'declined'                  => 'Bạn đã từ chối tài sản này thành công.',
     'bulk_manager_warn'	        => 'Người dùng của bạn đã được cập nhật thành công, tuy nhiên mục nhập của người quản lý của bạn không được lưu bởi vì người quản lý bạn đã chọn cũng nằm trong danh sách người dùng cần chỉnh sửa, và người dùng không phải là người quản lý của họ. Vui lòng chọn người dùng của bạn một lần nữa, ngoại trừ người quản lý.',
     'user_exists'               => 'Người dùng thật sự tồn tại!',
-    'user_not_found'            => 'User does not exist.',
+    'user_not_found'            => 'Người dùng không tồn tại.',
     'user_login_required'       => 'Trường đăng nhập thì bắt buộc',
+    'user_has_no_assets_assigned' => 'Hiện không có tài sản nào được gán cho người dùng.',
     'user_password_required'    => 'Mật khẩu thì bắt buộc.',
     'insufficient_permissions'  => 'Không có đủ quyền.',
     'user_deleted_warning'      => 'Người dùng này đã bị xóa. Bạn sẽ phải phục hồi người dùng này để chỉnh sửa nó hoặc khởi gán nó đến tài sản mới.',
     'ldap_not_configured'        => 'Tích hợp LDAP thì chưa được cấu hình cho cài đặt này.',
     'password_resets_sent'      => 'Những người dùng với trạng thái kích hoạt đã chọn và có địa chỉ email hợp lệ sẽ nhận được liên kết đặt lại mật khẩu.',
     'password_reset_sent'       => 'Đường đẫn khôi phục mật khẩu được gửi đến :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'Người dùng này không có địa chỉ email trong hồ sơ của họ.',
+    'log_record_not_found'        => 'Không thể tìm thấy bản ghi nhật ký phù hợp cho người dùng này.',
 
 
     'success' => array(
@@ -61,7 +62,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Người dùng này chưa thiết lập email nào.',
+        'success' => 'Người dùng đã được thông báo về tồn kho hiện tại của họ.'
     )
 );

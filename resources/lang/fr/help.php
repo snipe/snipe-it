@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Les consommables sont tout ce qui est acheté et qui sera utilisé au fil du temps. Par exemple, l\'encre de l\'imprimante ou le papier de copieur.',
 
     'depreciations' => 'Vous pouvez mettre en place des amortissements d’actifs pour déprécier les matériels en fonction de la dépréciation linéaire.',
-
+    
+    'empty_file'    => 'L\'importateur détecte que ce fichier est vide.'
 ];

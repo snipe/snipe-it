@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Uporabnik že obstaja!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Polje za prijavo je obvezno',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Geslo je obvezno.',
     'insufficient_permissions'  => 'Nezadostna dovoljenja.',
     'user_deleted_warning'      => 'Ta uporabnik je bil izbrisan. Tega uporabnika boste morali obnoviti, da ga uredite ali dodelite nova sredstva.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Izbranim aktiviranim uporabnikom z veljavnim e-poštnim računom je bila poslana povezava za ponastavitev gesla.',
     'password_reset_sent'       => 'Povezava za ponastavitev gesla je bila poslana na :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

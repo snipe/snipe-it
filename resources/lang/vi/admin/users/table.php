@@ -29,7 +29,7 @@ return array(
     'show_deleted'          => 'Hiển thị người dùng đã xóa',
     'title' 				=> 'Tiêu đề',
 	'to_restore_them'		=> 'để khôi phục lại chúng.',
-    'total_assets_cost'     => "Total Assets Cost",
+    'total_assets_cost'     => "Tổng giá trị tài sản",
     'updateuser' 			=> 'Cập nhật người dùng',
     'username' 				=> 'Tên đăng nhập',
 	'user_deleted_text' 	=> 'Người dùng này đã bị đánh dấu là đã bị xóa.',

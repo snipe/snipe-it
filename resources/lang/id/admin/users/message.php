@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Pengguna sudah ada!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Kolom login wajib di-isi',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Kata sandi wajib di-isi.',
     'insufficient_permissions'  => 'Tidak ada hak akses.',
     'user_deleted_warning'      => 'Pengguna ini telah di hapus. Anda harus kembalikan dahulu pengguna ini jika ingin menyunting atau di berikan hak kelola aset.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Pengguna terpilih yang diaktifkan dan memiliki alamat email yang valid telah dikirimi tautan pengaturan ulang kata sandi.',
     'password_reset_sent'       => 'Tautan reset kata sandi telah dikirim ke :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

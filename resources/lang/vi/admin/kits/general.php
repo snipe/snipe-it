@@ -24,7 +24,7 @@ return [
     'license_error'                     => 'License already attached to kit',
     'license_added_success'             => 'License added successfully',
     'license_updated'                   => 'License was successfully updated',
-    'license_none'                      => 'License does not exist',
+    'license_none'                      => 'Bản quyền không tồn tại',
     'license_detached'                  => 'License was successfully detached',
     'consumable_added_success'          => 'Consumable added successfully',
     'consumable_updated'                => 'Consumable was successfully updated',

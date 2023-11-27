@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Tulosta kaikki luovutetut',
     'name'                      => 'Sijainnin nimi',
     'address'                   => 'Osoite',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Postinumero',
     'locations'                 => 'Sijainnit',
     'parent'                    => 'Ylempi',

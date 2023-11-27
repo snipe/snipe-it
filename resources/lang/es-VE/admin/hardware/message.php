@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'El activo no ha sido creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Activo creado con éxito. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

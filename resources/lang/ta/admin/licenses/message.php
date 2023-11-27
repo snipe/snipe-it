@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'இந்த உரிமம் தற்போது ஒரு பயனர் வெளியே சோதிக்கப்பட்டது மற்றும் நீக்க முடியாது. முதலில் உரிமம் சரிபார்க்கவும், பின்னர் மீண்டும் நீக்கி முயற்சிக்கவும்.',
     'select_asset_or_person' => 'நீங்கள் ஒரு சொத்து அல்லது ஒரு பயனர் தேர்ந்தெடுக்க வேண்டும், ஆனால் இருவரும் அல்ல.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'உரிமத்தை சரிபார்க்க ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
-        'success' => 'உரிமம் வெற்றிகரமாக சரிபார்க்கப்பட்டது'
+        'success' => 'உரிமம் வெற்றிகரமாக சரிபார்க்கப்பட்டது',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

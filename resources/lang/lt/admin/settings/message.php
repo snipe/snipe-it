@@ -21,8 +21,8 @@ return [
     ],
     'mail' => [
         'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
+        'success' => 'El. laiškas išsiųstas!',
+        'error' => 'El. laiško išsiųsti nepavyko.',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],
     'ldap' => [
@@ -36,11 +36,11 @@ return [
     'webhook' => [
         'sending' => 'Sending :app test message...',
         'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
+        'success_pt1' => 'Sėkmė! Patikrink ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
+        '500' => '500 serverio klaida.',
         'error' => 'Something went wrong. :app responded with: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'error_misc' => 'Kažkas nepavyko. :( ',
     ]
 ];

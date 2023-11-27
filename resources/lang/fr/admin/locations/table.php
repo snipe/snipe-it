@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Imprimer tous les actifs attribués',
     'name'                      => 'Nom du lieu',
     'address'                   => 'Adresse',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Code postal',
     'locations'                 => 'Lieux',
     'parent'                    => 'Parent',

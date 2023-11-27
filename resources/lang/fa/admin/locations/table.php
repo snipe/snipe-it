@@ -16,6 +16,7 @@ return [
     'print_all_assigned'        => 'چاپ همه موارد واگذار شده',
     'name'                      => 'نام منطقه مکانی',
     'address'                   => 'آدرس',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'کد پستی',
     'locations'                 => 'مکانها',
     'parent'                    => 'مجموعه پدر',

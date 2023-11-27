@@ -49,6 +49,7 @@ return [
     'asset_location' => '資産の場所を更新',
     'asset_location_update_default_current' => '既定の場所と実際の場所を更新',
     'asset_location_update_default' => 'デフォルトの場所のみ更新',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'その資産ステータスは配備可能ではありません。この資産はチェックアウトできません。',
     'asset_deployable' => 'その資産ステータスは配備可能です。この資産はチェックアウトできます。',
     'processing_spinner' => '処理中です... (これは大きなファイルで少し時間がかかる可能性があります)',

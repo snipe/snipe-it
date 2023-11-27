@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie. ',
     'select_asset_or_person' => 'Musisz wybrać składnik aktywów lub użytkownika, ale nie oba.',
     'not_found' => 'Licencja nie została znaleziona',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
-        'success' => 'Licencja poprawna'
+        'success' => 'Licencja poprawna',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

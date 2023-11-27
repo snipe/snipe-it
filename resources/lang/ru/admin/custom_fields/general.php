@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Новое настраиваемое поле',
     'create_field_title' => 'Создайте новое настраиваемое поле',
     'value_encrypted'      	        => 'Значение этого поля зашифровано в базе данных. Только администраторам будет доступно для просмотра расшифрованное значение',
-    'show_in_email'     => 'Включить значение этого поля в письма, которое будет отправлено пользователю? Зашифрованные поля не могут быть включены в сообщения электронной почты.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Текст справки',
     'help_text_description' => 'Это необязательный текст, который будет отображаться под элементами формы при редактировании ресурса для предоставления контекста в поле.',
     'about_custom_fields_title' => 'О пользовательских полях',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Видимый для пользователя',
     'auto_add_to_fieldsets' => 'Автоматически добавлять это к каждому новому набору полей',
     'add_to_preexisting_fieldsets' => 'Добавить в любые существующие наборы полей',
-    'show_in_listview' => 'Показывать в списках по умолчанию. Авторизованные пользователи по-прежнему смогут показывать/скрывать через селектор столбцов.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Показать в списках',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

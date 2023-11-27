@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'このライセンスは利用者にチェックアウトされているため削除できません。ライセンスをチェックイン後、もう一度、やり直して下さい。 ',
     'select_asset_or_person' => 'アセットまたはユーザーを選択する必要がありますが、両方を選択する必要はありません。',
     'not_found' => 'ライセンスが見つかりません',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'ライセンスのチェックを外す際に問題が発生しました。もう一度、やり直して下さい。',
-        'success' => 'ライセンスのチェックを外しました。'
+        'success' => 'ライセンスのチェックを外しました。',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

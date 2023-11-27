@@ -6,5 +6,12 @@ return [
     'send_reminder' => 'Envoyer un rappel',
     'reminder_sent' => 'Rappel envoyé',
     'acceptance_deleted' => 'Demande d\'acceptation supprimée',
-    'acceptance_request' => 'Demande d\'acceptation'
+    'acceptance_request' => 'Demande d\'acceptation',
+    'custom_export' => [
+        'user_address' => 'Adresse utilisateur',
+        'user_city' => 'Ville Utilisateur',
+        'user_state' => 'État Utilisateur',
+        'user_country' => 'Pays Utilisateur',
+        'user_zip' => 'Code Postal Utilisateur'
+    ]
 ];

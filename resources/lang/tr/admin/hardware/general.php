@@ -20,11 +20,11 @@ return [
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Talep edildi',
     'not_requestable'           => 'Talep Edilemez',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'requestable_status_warning' => 'Talep edilebilir durumu değiştirme',
     'restore'  					=> 'Demirbaşı Geri Getir',
     'pending'  					=> 'Bekliyor',
     'undeployable'  			=> 'Dağtılamaz',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable_tooltip'  	=> 'Bu varlığın konuşlandırılamayan ve şu anda teslim alınamayan bir durum etiketi var.',
     'view'  					=> 'Demirbaşı Görüntüle',
     'csv_error' => 'CSV dosyanızda bir hata var:',
     'import_text' => '
@@ -45,5 +45,5 @@ return [
     'alert_details' => 'Detaylar için aşağıyı okuyun.',
     'custom_export' => 'Özel Dışarı Aktar',
     'mfg_warranty_lookup' => ':Üretici garantisinin durumuna bakma',
-    'user_department' => 'User Department',
+    'user_department' => 'Kullanıcı Departmanı',
 ];

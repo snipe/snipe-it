@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Asukoha nimi',
     'address'                   => 'Aadress',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Postiindeks',
     'locations'                 => 'Asukohad',
     'parent'                    => 'Vanem',

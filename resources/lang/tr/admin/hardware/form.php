@@ -49,9 +49,10 @@ return [
     'asset_location' => 'Varlık konumunu güncelle',
     'asset_location_update_default_current' => 'Varsayılan konumu ve gerçek konumu güncelle',
     'asset_location_update_default' => 'Sadece varsayılan konumu güncelle',
+    'asset_location_update_actual' => 'Sadece geçerli konumu güncelle',
     'asset_not_deployable' => 'Bu demirbaş dağıtılabilir durumda değil. Çıkışı yapılamaz.',
     'asset_deployable' => 'Bu demirbaş dağıtılabilir durumda. Çıkışı yapılabilir.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'İşleniyor... (Büyük dosyalarda bu işlem biraz zaman alabilir)',
     'optional_infos'  => 'Opsiyonel Bilgi',
     'order_details'   => 'Sipariş Bilgileri'
 ];

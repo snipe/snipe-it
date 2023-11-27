@@ -6,8 +6,9 @@ return array(
     'declined'                  => 'Bu varlığı başarıyla reddettiniz.',
     'bulk_manager_warn'	        => 'Kullanıcılarınızın başarıyla güncelleştirildi, ancak kaydedilmedi Yöneticisi giriş Yöneticisi\'ni seçtiğiniz çünkü aynı zamanda düzenlenecek kullanıcı listesinde oldu ve kullanıcıların kendi yöneticisi olmayabilir. Yine, yönetici hariç olmak üzere, kullanıcılarınızı seçiniz.',
     'user_exists'               => 'Kullanıcı zaten var!',
-    'user_not_found'            => 'User does not exist.',
+    'user_not_found'            => 'Kullanıcı yok.',
     'user_login_required'       => 'Oturum açma alanı gerekli',
+    'user_has_no_assets_assigned' => 'Kullanıcıya zimmetlenmiş bir şey yok.',
     'user_password_required'    => 'Şifre Gerekli.',
     'insufficient_permissions'  => 'Yetersiz izinler.',
     'user_deleted_warning'      => 'Bu kullanıcı silindi. Bunları düzenlemek veya onları yeni varlıklar atamak için bu kullanıcı geri yüklemek gerekir.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Etkinleştirilmiş ve geçerli bir e-posta adresine sahip seçilen kullanıcılara şifre sıfırlama bağlantısı gönderildi.',
     'password_reset_sent'       => ':email! adresine bir şifre sıfırlama bağlantısı gönderildi!',
     'user_has_no_email'         => 'Bu kullanıcının profilinde bir e-posta adresi yok.',
-    'user_has_no_assets_assigned'   => 'Bu kullanıcının atanmış herhangi bir varlığı yok',
+    'log_record_not_found'        => 'Bu kullanıcı için herhangi bir kayıt bulunamadı.',
 
 
     'success' => array(

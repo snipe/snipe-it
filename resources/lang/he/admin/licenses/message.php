@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'רישיון זה נבדק כעת למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הרישיון ולאחר מכן נסה למחוק שוב.',
     'select_asset_or_person' => 'עליך לבחור נכס או משתמש, אך לא את שניהם.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'היתה בעיה לבדוק את הרישיון. בבקשה נסה שוב.',
-        'success' => 'הרשיון נבדק בהצלחה'
+        'success' => 'הרשיון נבדק בהצלחה',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

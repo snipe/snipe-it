@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Questo bene è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo. ',
     'select_asset_or_person' => 'È necessario selezionare un\'attività o un utente, ma non entrambi.',
     'not_found' => 'Licenza non trovata',
+    'seats_available' => ':seat_count copie disponibili',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'C\'è stato un problema nell\'estrazione della licenza. Riprova.',
-        'success' => 'La licenza è stata estratta con successo'
+        'success' => 'La licenza è stata estratta con successo',
+        'not_enough_seats' => 'Non ci sono abbastanza copie della licenza disponibili per l\'assegnazione',
     ),
 
     'checkin' => array(

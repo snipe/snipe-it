@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuchen Sie es erneut. :(',
         'success' 		=> 'Asset wurde erfolgreich erstellt. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

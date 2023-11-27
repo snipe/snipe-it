@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ši licenzija šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite licenziją ir tik tuomet bandykite vėl ištrinti. ',
     'select_asset_or_person' => 'Turite pasirinkti turtą arba naudotoją, bet ne abu.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Nepavyko išduoti licenzijos. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai išduota'
+        'success' => 'Licenzija sėkmingai išduota',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

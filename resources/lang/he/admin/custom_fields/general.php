@@ -34,7 +34,8 @@ return [
     'create_field'            => 'שדה מותאם אישית חדש',
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'הערך של שדה זה מוצפן במסד הנתונים. רק משתמשי מנהל יוכלו להציג את הערך המפוענח',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Visible to User',
     'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'הצגה בתצוגות רשימה כברירת מחדל. משתמשים מורשים עדיין יוכלו להציג/להסתיר את בורר העמודות.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'הצגה ברשימות',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

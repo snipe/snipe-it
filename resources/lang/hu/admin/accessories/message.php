@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'A tartozék [:id] nem létezik.',
+    'not_found' => 'A tartozék nem található.',
     'assoc_users'	 => 'Ebből a tartozékból jelenleg :count db van kiadva felhasználóknak. Kérem vegyen vissza tartozékot és próbálja újra! ',
 
     'create' => array(

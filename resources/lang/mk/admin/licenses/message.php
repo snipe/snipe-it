@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Оваа лиценца е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да ја избришете. ',
     'select_asset_or_person' => 'Мора да изберете основно средство или корисник, но не и двете.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Имаше проблем со задолжување на лиценцата. Обидете се повторно.',
-        'success' => 'Лиценцата беше успешно задолжена'
+        'success' => 'Лиценцата беше успешно задолжена',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

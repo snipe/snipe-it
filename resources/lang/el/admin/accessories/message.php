@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Το εξάρτημα δεν υπάρχει.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Αυτό το εξάρτημα διαθέτει: τα στοιχεία καταμέτρησης που ελέγχθηκαν στους χρήστες. Ελέγξτε τα εξαρτήματα και δοκιμάστε ξανά.',
 
     'create' => array(

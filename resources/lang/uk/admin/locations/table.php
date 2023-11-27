@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Назва розташування',
     'address'                   => 'Адреса',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Поштовий код',
     'locations'                 => 'Розташування',
     'parent'                    => 'Батьківський',

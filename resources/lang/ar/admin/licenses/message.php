@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'هذا الترخيص حاليا مخرج لمستخدم ولا يمكن حذفه. يرجى التحقق من الترخيص في البداية، ثم محاولة الحذف مرة أخرى. ',
     'select_asset_or_person' => 'يجب تحديد أصل أو مستخدم، وليس كليهما.',
     'not_found' => 'لم يتم العثور على الترخيص',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'حدثت مشكلة أثناء اخراج الترخيص. يرجى إعادة المحاولة.',
-        'success' => 'تم اخراج الترخيص بنجاح'
+        'success' => 'تم اخراج الترخيص بنجاح',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

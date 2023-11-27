@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ingoa Tauwāhi',
     'address'                   => 'Wāhitau',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Waehere Pouaka',
     'locations'                 => 'Tauranga',
     'parent'                    => 'Matua',

@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ainm Suíomh',
     'address'                   => 'Seoladh',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Cód Poist',
     'locations'                 => 'Suímh',
     'parent'                    => 'Tuismitheoir',

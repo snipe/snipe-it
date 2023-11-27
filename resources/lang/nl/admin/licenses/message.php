@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Deze licentie is momenteel uitgecheckt aan een gebruiker en kan daarom niet worden verwijderd. Controleer je licentie eerst en probeer het later nog eens. ',
     'select_asset_or_person' => 'U moet een asset of een gebruiker selecteren, maar niet beide.',
     'not_found' => 'Licentie niet gevonden',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Er was een probleem met het uitchecken van deze licentie. Probeer het opnieuw.',
-        'success' => 'De licentie is met succes uitgecheckt'
+        'success' => 'De licentie is met succes uitgecheckt',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

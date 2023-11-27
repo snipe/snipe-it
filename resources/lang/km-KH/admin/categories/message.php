@@ -2,25 +2,25 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'ប្រភេទមិនមានទេ។',
+    'assoc_models'	 => 'ប្រភេទនេះត្រូវបានភ្ជាប់ជាមួយយ៉ាងហោចណាស់គំរូមួយ ហើយមិនអាចលុបបានទេ។ សូម​ធ្វើ​បច្ចុប្បន្នភាព​ម៉ូដែល​របស់​អ្នក​ដើម្បី​លែង​យោង​ប្រភេទ​នេះ​ទៀត​ហើយ​ព្យាយាម​ម្ដង​ទៀត។ ',
+    'assoc_items'	 => 'ប្រភេទនេះត្រូវបានភ្ជាប់ជាមួយយ៉ាងហោចណាស់មួយ៖ asset_type ហើយមិនអាចលុបបានទេ។ សូមអាប់ដេត៖ asset_type របស់អ្នកដើម្បីកុំឱ្យយោងទៅលើប្រភេទនេះទៀត ហើយព្យាយាមម្តងទៀត។ ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'ប្រភេទមិនត្រូវបានបង្កើតទេ សូមព្យាយាមម្តងទៀត។',
+        'success' => 'ប្រភេទត្រូវបានបង្កើតដោយជោគជ័យ។'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'error'   => 'ប្រភេទមិនត្រូវបានអាប់ដេតទេ សូមព្យាយាមម្តងទៀត',
+        'success' => 'បានធ្វើបច្ចុប្បន្នភាពប្រភេទដោយជោគជ័យ។',
+        'cannot_change_category_type'   => 'អ្នក​មិន​អាច​ផ្លាស់ប្ដូរ​ប្រភេទ​ប្រភេទ​បាន​ទេ​នៅ​ពេល​ដែល​វា​ត្រូវ​បាន​បង្កើត​ឡើង',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'តើអ្នកប្រាកដថាចង់លុបប្រភេទនេះទេ?',
+        'error'   => 'មានបញ្ហាក្នុងការលុបប្រភេទ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'success' => 'ប្រភេទត្រូវបានលុបដោយជោគជ័យ។'
     )
 
 );

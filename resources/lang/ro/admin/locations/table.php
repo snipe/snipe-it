@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Tipărește toate activele atribuite',
     'name'                      => 'Nume locatie',
     'address'                   => 'Adresa',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Cod postal',
     'locations'                 => 'Locatii',
     'parent'                    => 'Mamă',

@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Αυτήν τη στιγμή, αυτή η άδεια χρήσης αποστέλλεται στον χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα την άδεια χρήσης και δοκιμάστε ξανά τη διαγραφή.',
     'select_asset_or_person' => 'Πρέπει να επιλέξετε ένα στοιχείο ή έναν χρήστη, αλλά όχι και τα δύο.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Παρουσιάστηκε πρόβλημα κατά την εξακρίβωση της άδειας. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
-        'success' => 'Η άδεια εκτυπώθηκε με επιτυχία'
+        'success' => 'Η άδεια εκτυπώθηκε με επιτυχία',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

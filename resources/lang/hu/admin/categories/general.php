@@ -9,7 +9,7 @@ return array(
     'create'  							=> 'Kategória létrehozása',
     'edit'                              => 'Kategória szerkesztése',
     'email_will_be_sent_due_to_global_eula' => 'A globális EULA használata miatt a felhasználó számára email került kiküldésre.',
-    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
+    'email_will_be_sent_due_to_category_eula' => 'A felhasználó emailt kap, mivel EULA van beállítva a kategóriára.',
     'eula_text'							=> 'Felhasználói engedély Kategória',
     'eula_text_help'					=> 'Ezzel a mezővel testre szabhatja a különböző eszközök EULA-ját. Ha csak egy EULA van az összes eszközhöz, akkor jelölje be a négyzetet lent, hogy az alapértelmezettet használja.',
     'name'                              => 'Kategória neve',

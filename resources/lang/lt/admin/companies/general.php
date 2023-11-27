@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Pasirinkite kompaniją',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'Apie įmones',
+    'about_companies_description' => '        Galite naudoti įmones kaip informacinį laukelį arba galite apriboti konkrečios įmonės įrangos matomumą ar pasiekiamumą naudotojams įjungdami Pilną įmonės palaikymą Administratoriaus nustatymuose.',
 ];

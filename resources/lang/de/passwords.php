@@ -5,4 +5,5 @@ return [
     'user'			=> 'Wenn ein passender Benutzer mit einer gültigen E-Mail-Adresse in unserem System existiert, wurde eine E-Mail zur Wiederherstellung des Passworts gesendet.',
     'token'         => 'Dieser Token zum Zurücksetzen des Passworts ist ungültig oder abgelaufen oder entspricht nicht dem angegebenen Benutzernamen.',
     'reset'         => 'Ihr Passwort wurde zurückgesetzt!',
+    'password_change'  => 'Your password has been updated!',
 ];

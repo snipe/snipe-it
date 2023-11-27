@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Ni crewyd yr ased, ceisiwch eto o. g. y. dd. :(',
         'success' 		=> 'Ased wedi creu yn llwyddiannus. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
