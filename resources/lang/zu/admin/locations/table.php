@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Igama lendawo',
     'address'                   => 'Ikheli',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'I-Postal Code',
     'locations'                 => 'Izindawo',
     'parent'                    => 'Umzali',

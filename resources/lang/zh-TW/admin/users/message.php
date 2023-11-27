@@ -8,6 +8,7 @@ return array(
     'user_exists'               => '使用者已存在！',
     'user_not_found'            => '找不到使用者。',
     'user_login_required'       => '登入欄位是必需的',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => '密碼欄位是必需的',
     'insufficient_permissions'  => '權限不足',
     'user_deleted_warning'      => '此使用者已被刪除。您必須先還原此使用者才能進行編輯或分配新的資產。',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => '已向選定的已啟動且擁有有效電子郵件地址的使用者傳送了密碼重設連結。',
     'password_reset_sent'       => '密碼重置連結已傳送至 :email',
     'user_has_no_email'         => '該使用者的個人資料尚未填寫電子郵件。',
-    'user_has_no_assets_assigned'   => '該用戶未擁有已分配資產',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

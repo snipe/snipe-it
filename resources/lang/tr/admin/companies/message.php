@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Firma yok.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Firmayı Sil',
     'assoc_users'    => 'Bu firma şu anda en az bir model ile ilişkili ve silinemez. Lütfen ilişkili modelden bu firmayı kaldırarak tekrar deneyin. ',
     'create' => [
         'error'   => 'Firma oluşturulamadı, lütfen tekrar deneyin.',

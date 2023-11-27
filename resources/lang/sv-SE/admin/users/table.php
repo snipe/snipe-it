@@ -29,7 +29,7 @@ return array(
     'show_deleted'          => 'Visa borttagna användare',
     'title' 				=> 'Titel',
 	'to_restore_them'		=> 'att återställa dem.',
-    'total_assets_cost'     => "Total Assets Cost",
+    'total_assets_cost'     => "Totala Tillgångar Kostnad",
     'updateuser' 			=> 'Uppdatera användaren',
     'username' 				=> 'Användarnamn',
 	'user_deleted_text' 	=> 'Den här användaren har markerats som borttagen.',

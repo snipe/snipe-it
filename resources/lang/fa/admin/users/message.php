@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'کاربر "{0}" در حال حاضر وجود دارد.',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'فیلد ورود الزامی است.',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'کلمه عبور ضروری است.',
     'insufficient_permissions'  => 'دسترسی محدود',
     'user_deleted_warning'      => 'این کاربر حذف شده است.شما باید این کاربر را بازگردانی و آنها را ویرایش و دارایی به آنها اختصاص دهید.',
@@ -18,7 +19,7 @@ return array(
 ',
     'user_has_no_email'         => 'این کاربر آدرس ایمیلی در نمایه خود ندارد.
 ',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

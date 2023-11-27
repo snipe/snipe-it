@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Förbrukningsvaror är allt som köps som kommer att användas med tiden. Till exempel skrivarbläck eller kopieringspapper.',
 
     'depreciations' => 'Du kan ställa in tillgångsavskrivningar för att avskriva tillgångar baserat på rak linjär avskrivning.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

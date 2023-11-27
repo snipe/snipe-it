@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Actualizar ubicación del Activo',
     'asset_location_update_default_current' => 'Actualizar ubicación predeterminada y ubicación actual',
     'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'El activo no está listo para desplegar. Por lo que por el momento no puede ser asignado.',
     'asset_deployable' => 'El activo no está listo para desplegar. Por lo que, por el momento, no puede ser asignado.',
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',

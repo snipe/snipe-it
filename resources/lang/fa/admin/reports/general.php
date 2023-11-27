@@ -8,5 +8,12 @@ return [
 ',
     'acceptance_deleted' => 'درخواست پذیرش حذف شد
 ',
-    'acceptance_request' => 'قبول درخواست'
+    'acceptance_request' => 'قبول درخواست',
+    'custom_export' => [
+        'user_address' => 'User Address',
+        'user_city' => 'User City',
+        'user_state' => 'User State',
+        'user_country' => 'User Country',
+        'user_zip' => 'User Zip'
+    ]
 ];

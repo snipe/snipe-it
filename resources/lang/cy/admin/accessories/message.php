@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Nid yw\'r ategolyn [:id] yn bodoli.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Mae\'r ategolyn yma hefo :count eitem wedi nodi allan i defnyddwyr. Nodwch yr ategolion yn ol i fewn ac yna ceisiwch eto. ',
 
     'create' => array(

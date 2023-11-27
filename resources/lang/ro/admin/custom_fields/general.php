@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Noul câmp personalizat',
     'create_field_title' => 'Creați un nou câmp personalizat',
     'value_encrypted'      	        => 'Valoarea acestui câmp este criptată în baza de date. Numai utilizatorii de administrare vor putea vizualiza valoarea decriptată',
-    'show_in_email'     => 'Includeți valoarea acestui câmp în e-mailurile trimise utilizatorului? Căsuțele criptate nu pot fi incluse în e-mailuri.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Text de ajutor',
     'help_text_description' => 'Acesta este un text opțional care va apărea mai jos de elementele formularului în timp ce editezi un activ pentru a oferi informații contextuale pentru fiecare câmp.',
     'about_custom_fields_title' => 'Despre câmpuri personalizate',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Visible to User',
     'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

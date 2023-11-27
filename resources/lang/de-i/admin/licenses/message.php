@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Diese Lizenz ist derzeit einem Benutzer zugeordnet und kann nicht gelöscht werden. Bitte nimm die Lizenz zurück und versuche anschließend erneut, diese zu löschen. ',
     'select_asset_or_person' => 'Du musst ein Asset oder einen Benutzer auswählen, aber nicht beides.',
     'not_found' => 'Lizenz nicht gefunden',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Lizenz wurde nicht herausgegeben, bitte versuche es erneut.',
-        'success' => 'Lizenz wurde erfolgreich herausgegeben'
+        'success' => 'Lizenz wurde erfolgreich herausgegeben',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

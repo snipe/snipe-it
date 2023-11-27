@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'להדפיס את כל ההקצאות',
     'name'                      => 'שם מיקום',
     'address'                   => 'כתובת',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'מיקוד',
     'locations'                 => 'מיקומים',
     'parent'                    => 'הוֹרֶה',

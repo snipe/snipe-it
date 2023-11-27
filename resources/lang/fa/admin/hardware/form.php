@@ -63,6 +63,7 @@ return [
     'asset_location' => 'بروزرسانی مکان دارایی',
     'asset_location_update_default_current' => 'بروزرسانی مکان پیش‌فرض AND مکان فعلی',
     'asset_location_update_default' => 'فقط بروزرسانی مکان پیش‌فرض',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'این وضعیت دارایی قابل استقرار نیست. این دارایی قابل پذیرش نیست.',
     'asset_deployable' => 'این وضعیت دارایی قابل استقرار است. این دارایی قابل پذیرش است.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',

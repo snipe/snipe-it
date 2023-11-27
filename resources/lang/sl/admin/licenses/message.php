@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ta licenca je trenutno izdana uporabniku in je ni mogoče izbrisati. Najprej preverite licenco in poskusite znova izbrisati. ',
     'select_asset_or_person' => 'Izbrati morate sredstvo ali uporabnika, vendar ne obojega.',
     'not_found' => 'Licenca ni najdena',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Prišlo je do težave pri izdji licence. Prosim poskusite ponovno.',
-        'success' => 'Licenca je uspešno izdana'
+        'success' => 'Licenca je uspešno izdana',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Esta licença está correntemente alocada a um utilizador e não pode ser removida. Por favor devolva a licença e de seguida tente remover novamente. ',
     'select_asset_or_person' => 'Você deve selecionar um recurso ou um usuário, mas não ambos.',
     'not_found' => 'Licença não encontrada',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Ocorreu um problema ao atribuir esta licença. Por favor, tente novamente.',
-        'success' => 'A licença foi alocada com sucesso'
+        'success' => 'A licença foi alocada com sucesso',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

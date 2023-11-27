@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Bedriften eksisterer ikke.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Slett firma',
     'assoc_users'    => 'Denne bedriften er tilknyttet minst en modell og kan ikke slettes. Oppdater modellene dine til å ikke refere til denne bedriften og prøv igjen. ',
     'create' => [
         'error'   => 'Bedriften ble ikke opprette. Prøv igjen.',

@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Bản quyền này hiện tại đã được checkout đến một người dùng và có thể đã bị xóa. Xin vui lòng kiểm tra lại bản quyền đầu tiên, và kế đến có gắng xóa thêm lần nữa. ',
     'select_asset_or_person' => 'Bạn phải chọn một nội dung hoặc người dùng, nhưng không phải cả hai.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Có vấn đề xảy ra khi checkout bản quyền. Xin vui lòng thử lại.',
-        'success' => 'Bản quyền đã được checkout thành công'
+        'success' => 'Bản quyền đã được checkout thành công',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => '[:id] numaralı aksesuar bulunmuyor.',
+    'not_found' => 'O aksesuar bulunamadı.',
     'assoc_users'	 => 'Bu aksesuardan :count adet kullanıcılara çıkış yapıldı. Lütfen aksesuar girişi yapınız ve tekrar deneyin.',
 
     'create' => array(

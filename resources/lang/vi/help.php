@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Vật phẩm tiêu hao là bất cứ thứ gì đã mua sẽ được sử dụng hết theo thời gian. Ví dụ: mực máy in hoặc giấy máy photocopy.',
 
     'depreciations' => 'Bạn có thể thiết lập khấu hao tài sản để khấu hao tài sản dựa trên khấu hao đường thẳng.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

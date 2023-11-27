@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Įrangos sukurti nepavyko, prašome bandykite dar kartą. :(',
         'success' 		=> 'Įranga sėkminga sukurta. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
@@ -50,8 +51,8 @@ return [
         'success'               => 'Jūsų failas importuotas',
         'file_delete_success'   => 'Jūsų failas buvo sėkmingai ištrintas',
         'file_delete_error'      => 'Nepavyko ištrinti failo',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'file_missing' => 'Pažymėtas failas nerastas',
+        'header_row_has_malformed_characters' => 'Vienas ar daugiau atributų antraštės eilutėje turi netinkąmą UTF-8 simbolį',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 

@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> '新增資產失敗，請重試。',
         'success' 		=> '新增資產成功。',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

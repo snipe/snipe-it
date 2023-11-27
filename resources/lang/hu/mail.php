@@ -74,7 +74,7 @@ return [
     'your_credentials' => 'A Snipe-IT hitelesítő adatai',
     'Accessory_Checkin_Notification' => 'Tartozék kiadva',
     'Asset_Checkin_Notification' => 'Eszköz kiadva',
-    'Asset_Checkout_Notification' => 'Asset checked out',
+    'Asset_Checkout_Notification' => 'Eszköz kiadva',
     'License_Checkin_Notification' => 'Licensz kiadva',
     'Expected_Checkin_Report' => 'Várható eszköz kiadásának jelentése',
     'Expected_Checkin_Notification' => 'Emlékeztető: :name kiadásának idejéhez közelít',

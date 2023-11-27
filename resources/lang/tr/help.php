@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Daha Fazla Bilgi',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Bu kutunun işaretlenmesi varlık kaydını bu yeni konumu yansıtacak şekilde düzenler. İşaretlenmeden bırakılırsa, denetim günlüğündeki konumun not edilmesi yeterlidir.<br><br>Bu varlığın teslim alınması durumunda, teslim alındığı kişinin, varlığın veya konumun konumunu değiştirmeyeceğini unutmayın.',
 
     'assets' => 'Varlıklar seri numaraları veya varlık etiketleri ile takip edilir. Bunlar bir öğeyi belirlemek için daha yüksek öneme sahip olma eğilimindedir.',
 
@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Sarf malzemeleri satın alınan ve zamanla tüketilen ürünlerdir. Örneğin yazıcı kartuşu, fotokopi kağıdı vs.',
 
     'depreciations' => 'Demirbaş amortismanını sabit bir oran ile düşecek şekilde ayarlayabilirsiniz.',
-
+    
+    'empty_file'    => 'İthalatçı bu dosyanın boş olduğunu tespit eder.'
 ];

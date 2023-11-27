@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
         'success' 		=> 'L\'asset è stato creato con successo. :)',
+        'success_linked' => 'Bene creato con tag :tag . <strong><a href=":link" style="color: white;">Clicca per vedere</a></strong>.',
     ],
 
     'update' => [

@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'In tất cả tài sản đã cấp phát',
     'name'                      => 'Tên địa phương',
     'address'                   => 'Địa chỉ',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Mã bưu điện',
     'locations'                 => 'Địa phương',
     'parent'                    => 'Parent',

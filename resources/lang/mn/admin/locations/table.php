@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Байршил нэр',
     'address'                   => 'Хаяг',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Шуудангийн код',
     'locations'                 => 'Байршил',
     'parent'                    => 'Эцэг эх',

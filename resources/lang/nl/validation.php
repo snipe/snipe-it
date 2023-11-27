@@ -67,7 +67,7 @@ return [
         'array'   => ':attribute moet minimaal :min items bevatten.',
     ],
     'starts_with'          => ':attribute moet met één van de volgende waarden eindigen: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'ends_with'            => ':attribute moet met één van de volgende waarden eindigen: :values.',
 
     'not_in'               => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'numeric'              => ':attribute moet een getal zijn.',
@@ -90,11 +90,14 @@ return [
     ],
     'string'               => ':attribute moet een string zijn.',
     'timezone'             => ':attribute moet een geldige zone zijn.',
+    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
     'unique'               => 'Het veld :attribute is reeds in gebruik.',
     'uploaded'             => 'Uploaden van :attribute is mislukt.',
     'url'                  => 'Het formaat van :attribute is ongeldig.',
     'unique_undeleted'     => 'De :attribute moet uniek zijn. ',
     'non_circular'         => ':attribute mag geen circulaire referentie aanmaken.',
+    'not_array'            => ':attribute veld kan geen array zijn.',
+    'unique_serial'        => 'The :attribute must be unique.',
     'disallow_same_pwd_as_user_fields' => 'Wachtwoord kan niet hetzelfde zijn als de gebruikersnaam.',
     'letters'              => 'Wachtwoord moet ten minste één letter bevatten.',
     'numbers'              => 'Wachtwoord moet ten minste één cijfer bevatten.',
@@ -126,13 +129,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'last_audit_date.date_format'   =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD uu:mm:ss formaat',
+        'expiration_date.date_format'   =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'termination_date.date_format'  =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'expected_checkin.date_format'  =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'start_date.date_format'        =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'end_date.date_format'          =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
 
     ],
 

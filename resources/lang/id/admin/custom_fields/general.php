@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Tambah Kolom Ubahan',
     'create_field_title' => 'Buat field kustom',
     'value_encrypted'      	        => 'Nilai dari kolom ini di database dienkripsi. hanya pengguna admin yang bisa melihat nilai deskripsinya',
-    'show_in_email'     => 'Sertakan nilai bidang ini dalam email checkout yang dikirim kepada pengguna? Bidang terenkripsi tidak dapat dimasukkan dalam email.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Teks bantuan',
     'help_text_description' => 'Ini adalah teks opsional yang akan muncul di bawah elemen formulir saat mengedit aset untuk memberikan konteks pada field.',
     'about_custom_fields_title' => 'Lihat field kustom',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Visible to User',
     'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

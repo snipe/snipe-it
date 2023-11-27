@@ -43,14 +43,14 @@ return [
     'file'                 => 'Attributtet :attribute må være en fil.',
     'filled'               => 'Den :attribute må ha en verdi.',
     'image'                => 'Attributtet :attribute må være et bilde.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'Verdien for :fieldname kan ikke være null.',
     'in'                   => 'Det valgte attributtet :attribute er ugyldig.',
     'in_array'             => 'Attributtfeltet finnes ikke i: andre.',
     'integer'              => 'Attributtet :attribute må være et heltall.',
     'ip'                   => 'Attributtet :attribute må være en gyldig IP-adresse.',
     'ipv4'                 => 'Attributtet :attribute må være en gyldig IPv4-adresse.',
     'ipv6'                 => 'Attributtet :attribute må være en gyldig IPv6-adresse.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => 'Attributtet :attribute må være unikt for denne bedriftslokasjonen',
     'json'                 => 'Attributtet: må være en gyldig JSON-streng.',
     'max'                  => [
         'numeric' => 'Attributtet :attribute må ikke være større enn :max.',
@@ -67,7 +67,7 @@ return [
         'array'   => 'Attributtet må ha minst: min elementer.',
     ],
     'starts_with'          => ':attribute må starte med en av følgende: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'ends_with'            => ':attribute må avsluttes med en av følgende: :values.',
 
     'not_in'               => 'Attributtet :attribute er ugyldig.',
     'numeric'              => 'Attributtet :attribute må være et nummer.',
@@ -90,18 +90,21 @@ return [
     ],
     'string'               => 'Attributtet :attribute må være en tekst.',
     'timezone'             => 'Attributtet må være en gyldig sone.',
+    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
     'unique'               => 'Attributtet :attribute er allerede tatt.',
     'uploaded'             => 'Atribbutet :attribute kunne ikke lastes opp.',
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
     'unique_undeleted'     => ':attribute må være unikt.',
     'non_circular'         => 'Attributtet :attribute kan ikke opprette en sirkulær referanse.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'not_array'            => ':attribute feltet kan ikke være en liste.',
+    'unique_serial'        => 'The :attribute must be unique.',
+    'disallow_same_pwd_as_user_fields' => 'Passordet kan ikke være det samme som brukernavnet.',
+    'letters'              => 'Passordet må inneholde minst en bokstav.',
+    'numbers'              => 'Passordet må inneholde minst ett tall.',
+    'case_diff'            => 'Passordet må innehode store og små bokstaver.',
+    'symbols'              => 'Passordet må inneholde symboler.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Verdi kan ikke være negativ'
     ],
 
 
@@ -126,13 +129,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => ':attribute må være en gyldig dato i YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  ':attribute må være en gyldig dato i YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
+        'termination_date.date_format'  =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
+        'start_date.date_format'        =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
+        'end_date.date_format'          =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
 
     ],
 

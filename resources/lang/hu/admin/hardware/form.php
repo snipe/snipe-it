@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Eszköz helyszín frissítése',
     'asset_location_update_default_current' => 'Alapértelmezett helyszín és aktuális helyszín frissítése',
     'asset_location_update_default' => 'Csak az alapértelmezett helyszín frissítése',
+    'asset_location_update_actual' => 'Csak az aktuális helyszín frissítése',
     'asset_not_deployable' => 'Az eszköz még nem kiadásra kész, még nem kiadható.',
     'asset_deployable' => 'Az eszköz kiadásra kész, kiadható.',
     'processing_spinner' => 'Feldolgozás folyamatban... (Nagyméretű fájlok esetében ez eltarthat egy darabig)',

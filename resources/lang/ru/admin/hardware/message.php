@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Актив не был создан, пожалуйста попробуйте снова. :(',
         'success' 		=> 'Актив успешно создан. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
@@ -51,7 +52,7 @@ return [
         'success'               => 'Ваш файл был импортирован',
         'file_delete_success'   => 'Ваш файл был успешно удален',
         'file_delete_error'      => 'Невозможно удалить файл',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Выбранный файл отсутствует',
         'header_row_has_malformed_characters' => 'Один или несколько атрибутов в строке заголовка содержат неправильно сформированные символы UTF-8',
         'content_row_has_malformed_characters' => 'Один или несколько атрибутов в первой строке содержимого содержат неправильно сформированные символы UTF-8',
     ],

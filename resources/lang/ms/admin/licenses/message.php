@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Lesen ini telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak lesen terlebih dahulu, dan cuba hapus semula.  ',
     'select_asset_or_person' => 'Anda mesti memilih aset atau pengguna, tetapi tidak kedua-duanya.',
     'not_found' => 'Lesen tidak ditemui',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Ada isu semasa agihan lesen. Sila cuba lagi.',
-        'success' => 'Lesen berjaya diagihkan'
+        'success' => 'Lesen berjaya diagihkan',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

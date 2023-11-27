@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'En bruker har godtatt et element',
+    'acceptance_asset_declined' => 'En bruker har avvist et element',
     'a_user_canceled' => 'Brukeren har avbrutt en element-forespørsel på webområdet',
     'a_user_requested' => 'En bruker har bedt om et element på webområdet',
     'accessory_name' => 'Navn tilbehør:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Logg inn på din nye Snipe-IT-installasjon ved å bruke kontoen nedenfor:',
     'login' => 'Logg inn:',
     'Low_Inventory_Report' => 'Rapport lav lagerbeholdning',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Lagerbeholdnings rapport',
     'min_QTY' => 'Min. antall',
     'name' => 'Navn',
     'new_item_checked' => 'En ny enhet har blitt sjekket ut under ditt navn, detaljer nedenfor.',
@@ -74,11 +74,11 @@ return [
     'your_credentials' => 'Din Snipe-IT konto',
     'Accessory_Checkin_Notification' => 'Tilbehør sjekket inn',
     'Asset_Checkin_Notification' => 'Eiendel sjekket inn',
-    'Asset_Checkout_Notification' => 'Asset checked out',
+    'Asset_Checkout_Notification' => 'Ressurs sjekket ut',
     'License_Checkin_Notification' => 'Lisens sjekket inn',
     'Expected_Checkin_Report' => 'Rapport over forventet innsjekking av eiendeler',
     'Expected_Checkin_Notification' => 'Påminnelse: Innsjekkingsfrist for :name nærmer seg',
     'Expected_Checkin_Date' => 'En enhet som er sjekket ut til deg skal leveres tilbake den :date',
     'your_assets' => 'Vis dine eiendeler',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Alle rettigheter forbeholdt.',
 ];

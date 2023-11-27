@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'See litsents on kasutaja jaoks praegu välja jäetud ja seda ei saa kustutada. Kontrollige kõigepealt litsentsi ja seejärel proovige uuesti kustutada.',
     'select_asset_or_person' => 'Peate valima vara või kasutaja, kuid mitte mõlemad.',
     'not_found' => 'Litsentsi ei leitud',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Litsentsi kontrollides oli küsimus. Palun proovi uuesti.',
-        'success' => 'Litsents oli edukalt välja võetud'
+        'success' => 'Litsents oli edukalt välja võetud',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

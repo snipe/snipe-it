@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> '资产创建失败，请重试。:(',
         'success' 		=> '资产创建成功。 :)',
+        'success_linked' => '带有 :tag 标签的资产已成功创建。<strong><a href=":link" style="color: white;">点击此处查看</a></strong>。',
     ],
 
     'update' => [

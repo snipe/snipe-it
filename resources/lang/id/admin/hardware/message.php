@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Aset gagal di buat, silahkan coba kembali',
         'success' 		=> 'Sukses membuat aset',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

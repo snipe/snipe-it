@@ -2,13 +2,14 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Lisensen finnes ikke, eller du har ikke tillatelse til å se den.',
     'user_does_not_exist' => 'Bruker eksisterer ikke.',
     'asset_does_not_exist' 	=> 'Eiendelen du prøver å koble til denne lisensen eksisterer ikke.',
     'owner_doesnt_match_asset' => 'Eiendelen du prøver å koble til denne lisensen er eid av noen andre enn personen du har valgt i tildelt til-nedtrekkslista.',
     'assoc_users'	 => 'Denne lisensen er sjekket ut til en bruker og kan ikke slettes. Vennligst sjekk inn lisensen først, og forsøk sletting på nytt. ',
     'select_asset_or_person' => 'Du må velge en ressurs eller en bruker, men ikke begge.',
     'not_found' => 'Lisens ikke funnet',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Det oppstod et problem under utsjekk av lisens. Vennligst prøv igjen.',
-        'success' => 'Vellykket utsjekk av lisens'
+        'success' => 'Vellykket utsjekk av lisens',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

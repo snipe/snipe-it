@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada.',
     'select_asset_or_person' => 'Debe seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Equipo no asignado, intentalo de nuevo',
-        'success' => 'Equipo asignado.'
+        'success' => 'Equipo asignado.',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

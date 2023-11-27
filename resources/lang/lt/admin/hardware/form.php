@@ -48,10 +48,11 @@ return [
     'years'				=> 'metai',
     'asset_location' => 'Update Asset Location',
     'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
+    'asset_location_update_default' => 'Atnaujinti tik standartinę lokaciją',
+    'asset_location_update_actual' => 'Atnaujinti tik aktualią lokaciją',
     'asset_not_deployable' => 'Ši įranga negali būti išduodama.',
     'asset_deployable' => 'Ši įranga gali būti išduodama.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'processing_spinner' => 'Apdorojama...(Dideliems failams gali šiek tiek užtrukti)',
+    'optional_infos'  => 'Papildoma informacija',
+    'order_details'   => 'Susijusi užsakymo informacija'
 ];

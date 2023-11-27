@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Actualizar ubicación del activo',
     'asset_location_update_default_current' => 'Actualizar ubicación predeterminada y ubicación actual',
     'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
     'asset_deployable' => 'Ese estado es desplegable. Este activo puede ser revisado.',
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',

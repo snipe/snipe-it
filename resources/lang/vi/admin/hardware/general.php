@@ -12,30 +12,29 @@ return [
     'clone'  					=> 'Nhân đôi tài sản',
     'deployable'  				=> 'Cho phép cấp phát',
     'deleted'  					=> 'Tài sản này đã bị xóa.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => 'Bạn có chắc chắn muốn xóa tài sản này không?',
     'edit'  					=> 'Sửa tài sản',
     'model_deleted'  			=> 'Model tài sản này đã bị xóa. Vui lòng khôi phục lại model trước khi khôi phục tài sản.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Model của tài sản này không hợp lệ.',
+    'model_invalid_fix'         => 'Tài sản phải được chỉnh sửa để sửa lỗi này trước khi cố gắng kiểm tra vào hoặc ra.',
     'requestable'               => 'Cho phép đề xuất',
     'requested'				    => 'Yêu cầu',
     'not_requestable'           => 'Không cho phép đề xuất',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'requestable_status_warning' => 'Không thay đổi trạng thái yêu cầu',
     'restore'  					=> 'Phục hồi tài sản',
     'pending'  					=> 'Đang chờ',
     'undeployable'  			=> 'Không cho phép cấp phát',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable_tooltip'  	=> 'Tài sản này có nhãn trạng thái không thể triển khai và không thể kiểm tra vào lúc này.',
     'view'  					=> 'Xem tài sản',
     'csv_error' => 'Có lỗi trong file CSV của bạn:',
     'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
-    </p>
+<p>
+     Tải lên CSV chứa lịch sử tài sản. Tài sản và người dùng PHẢI tồn tại trong hệ thống, nếu không chúng sẽ bị bỏ qua. Việc khớp tài sản để nhập lịch sử sẽ diễn ra dựa trên thẻ tài sản. Chúng tôi sẽ cố gắng tìm người dùng phù hợp dựa trên tên người dùng bạn cung cấp và tiêu chí bạn chọn bên dưới. Nếu bạn không chọn bất kỳ tiêu chí nào bên dưới, tiêu chí đó sẽ chỉ cố gắng khớp với định dạng tên người dùng mà bạn đã định cấu hình trong Quản trị &gt; Cài đặt chung.
+     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+     <p>Các trường có trong CSV phải khớp với tiêu đề: <strong>Thẻ Tài sản, Tên, Ngày đăng ký ra, Ngày đăng ký vào</strong>. Mọi trường bổ sung sẽ bị bỏ qua. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
-    ',
+     <p>Ngày đăng ký vào: ngày đăng ký vào để trống hoặc trong thời gian tới sẽ kiểm tra các mục cho người dùng được liên kết. Việc loại trừ cột Ngày đăng ký vào sẽ tạo ra ngày đăng ký vào có ngày hôm nay.</p>    ',
     'csv_import_match_f-l' => 'Kết hợp người dùng dưới dạng tên.họ (trí.nguyễn)',
     'csv_import_match_initial_last' => 'Kết hợp người dùng dưới dạng họ (nguyễn)',
     'csv_import_match_first' => 'Kế hợp người dùng dưới dạng tên (trí)',
@@ -45,6 +44,6 @@ return [
     'success_messages' => 'Thông báo thành công:',
     'alert_details' => 'Xem bên dưới để biết thêm chi tiết.',
     'custom_export' => 'Lựa chọn xuất',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
-    'user_department' => 'User Department',
+    'mfg_warranty_lookup' => ':manufacturer Tra cứu tình trạng bảo hành',
+    'user_department' => 'Bộ phận người dùng',
 ];

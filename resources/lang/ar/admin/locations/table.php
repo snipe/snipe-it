@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'طباعة كل المعين',
     'name'                      => 'إسم الموقع',
     'address'                   => 'العنوان',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'الرمز البريدي',
     'locations'                 => 'المواقع',
     'parent'                    => 'الأبوين',

@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'لم يتم إنشاء الأصل، يرجى إعادة المحاولة. :(',
         'success' 		=> 'تم إنشاء الأصل بنجاح. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

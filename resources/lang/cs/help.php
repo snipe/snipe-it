@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Spotřební materiál jsou takové položky, které jsou v čase spotřebovávány, jako např. toner, inkoust či papír do tiskáren.',
 
     'depreciations' => 'Můžete nastavit amortizaci majetku pro jeho rovnoměrné odepisování.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

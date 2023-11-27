@@ -14,7 +14,7 @@ return array(
     */
 
     'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'password' => 'Mật khẩu được cung cấp không chính xác.',
+    'throttle' => 'Quá nhiều lần thử đăng nhập. Vui lòng thử lại sau :second giây.',
 
 );

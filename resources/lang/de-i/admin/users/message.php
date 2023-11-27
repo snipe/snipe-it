@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Benutzer existiert bereits!',
     'user_not_found'            => 'Benutzer existiert nicht.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Das Passswortfeld ist erforderlich.',
     'insufficient_permissions'  => 'Unzureichende Berechtigungen.',
     'user_deleted_warning'      => 'Dieser Benutzer wurde gelöscht. Du musst ihn wiederherstellen, um ihn zu bearbeiten, oder neue Assets zuzuweisen.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Den ausgewählten Benutzern, die aktiviert sind und eine gültige E-Mail-Adresse haben, wurde ein Link zum Zurücksetzen des Passworts gesendet.',
     'password_reset_sent'       => 'Der Link zum Zurücksetzen des Passworts wurde an :email gesendet!',
     'user_has_no_email'         => 'Dieser Benutzer hat keine E-Mail-Adresse in seinem Profil.',
-    'user_has_no_assets_assigned'   => 'Dieser Benutzer hat keine zugewiesenen Assets',
+    'log_record_not_found'        => 'Ein passender Logeintrag für diesen Benutzer konnte nicht gefunden werden.',
 
 
     'success' => array(

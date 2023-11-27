@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Gjenstår',
     'total' 			                 => 'Total',
     'update'                            => 'Oppdater komponent',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Antall sjekket inn må være lik eller mindre enn :assigned_qty'
 );

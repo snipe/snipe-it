@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Dit model is verwijderd.',
     'bulk_delete'               => 'In bulk verwijderen van assetmodellen',
     'bulk_delete_help'               => 'Gebruik de selectievakjes hieronder om het verwijderen van de geselecteerde assetmodellen te bevestigen. Assetmodellen waarbij assets gekoppeld zijn, kunnen niet verwijderd worden totdat de assets gekoppeld zijn aan een ander model.',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'Je staat op het punt één asset model te verwijderen.|Je staat op het punt om :model_count asset modellen te verwijderen.',
     'restore'                   => 'Herstel model',
     'requestable'               => 'Gebruikers mogen dit model aanvragen',
 	'show_mac_address'			      => 'Toon MAC-adresveld in de assets van dit model',

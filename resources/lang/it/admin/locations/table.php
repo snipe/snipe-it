@@ -2,7 +2,7 @@
 
 return [
     'about_locations_title'     => 'Informazioni sulle posizioni',
-    'about_locations'           => 'Le posizioni sono usate per tracciare la poszione degli utenti, degli asset, e di altri oggetti',
+    'about_locations'           => 'Le posizioni sono usate per tracciare la posizione degli utenti, dei beni e di altri oggetti',
     'assets_rtd'                => 'Beni', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Beni Assegnati',
     'id'                        => 'ID',
@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Stampa tutte le assegnazioni',
     'name'                      => 'Nome Posizione',
     'address'                   => 'Indirizzo',
+    'address2'                   => 'Indirizzo, riga 2',
     'zip'                       => 'Codice Postale',
     'locations'                 => 'Posizioni',
     'parent'                    => 'Genitore',

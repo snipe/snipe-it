@@ -2,9 +2,9 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Silinen varlık modeli',
     'does_not_exist' => 'Model mevcut değil.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association' => 'UYARI! Bu öğeye ilişkin varlık modeli geçersiz veya eksik!',
     'no_association_fix' => 'Bu değişiklik bazı şeylerin garip ve tuhaf bir şekilde bozulmasına yol açabilir. Bu varlığı bir modelle ilişkilendirmek için düzeltin.',
     'assoc_users'	 => 'Model bir ya da daha çok demirbaş ile ilişkili ve silinemez. Lütfen demirbaşları silin ve tekrar deneyin. ',
 
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Hiçbir alan değiştirilmedi, dolayısıyla hiç bir alan güncellenmedi.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Model başarıyla güncellendi. |:model_count modelleri başarıyla güncellendi.',
+        'warn'          => 'Aşağıdaki modelin özelliklerini güncellemek üzeresiniz: |Aşağıdaki :model_count modellerinin özelliklerini düzenlemek üzeresiniz:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Hiçbir model seçilmedi, bu nedenle hiçbir şey silinmedi.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Model silindi!|:success_count modelleri silindi!',
         'success_partial' 	=> ':success_count adet model(ler) silindi, ancak :fail_count adet için silme işlemini tamamlayamadık, çünkü bunlar halâ varlıklarla ilişkilendirilmiş durumda.'
     ),
 

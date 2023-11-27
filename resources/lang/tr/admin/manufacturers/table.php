@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Destek Maili',
     'support_phone'   		=> 'Destek telefonu',
     'support_url'   		=> 'Destek URL\'si',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'Garanti Arama URL\'si',
     'update'				=> 'Üretici Güncelle',
     'url'   				=> 'URL',
 

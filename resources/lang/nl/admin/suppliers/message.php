@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Verwijderde leverancier',
     'does_not_exist' => 'De leverancier bestaat niet.',
 
 

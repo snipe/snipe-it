@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'ไม่ได้สร้างเนื้อหาโปรดลองอีกครั้ง :(',
         'success' 		=> 'สร้างเนื้อหาสำเร็จแล้ว :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
