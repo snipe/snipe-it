@@ -29,7 +29,7 @@
               @can('update', $custom_fieldset)
               <th class="col-md-1"><span class="sr-only">{{ trans('admin/custom_fields/general.reorder') }}</span></th>
               @endcan
-              <th class="col-md-1">{{ trans('admin/custom_fields/general.order') }}</th>
+              <th class="col-md-1" style="display: none;">{{ trans('admin/custom_fields/general.order') }}</th>
               <th class="col-md-3">{{ trans('admin/custom_fields/general.field_name') }}</th>
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_element') }}</th>
@@ -51,7 +51,7 @@
                 </span>
               </td>
               @endcan
-              <td class="index">{{$field->pivot->order + 1}}</td>
+              <td class="index" style="display: none;">{{$field->pivot->order + 1}}</td> {{--this +1 needs to exist to keep the first row from reverting to 0 if you edit/delete fields in/from a fielset--}}
               <td>{{$field->name}}</td>
               <td>{{$field->format}}</td>
               <td>{{$field->element}}</td>
@@ -110,7 +110,7 @@
                   </label>
 
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" style="display: none;">
 
                   {{ Form::text('order', $maxid, array('class' => 'form-control col-sm-1 col-md-1', 'style'=> 'width: 80px; padding-;right: 10px;', 'aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
                   <label for="order">{{ trans('admin/custom_fields/general.order') }}</label>
