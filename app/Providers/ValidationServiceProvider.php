@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Department;
+use App\Models\Setting;
 use DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
@@ -45,32 +46,87 @@ class ValidationServiceProvider extends ServiceProvider
             return $validator->passes();
         });
 
-        // Unique only if undeleted
-        // This works around the use case where multiple deleted items have the same unique attribute.
-        // (I think this is a bug in Laravel's validator?)
-        // $parameters is the rule parameters, like `unique_undeleted:users,id` - $parameters[0] is users, $parameters[1] is id
-        // the UniqueUndeletedTrait prefills these so you can just use `unique_undeleted` in your rules (but this would only work directly in the model)
+
+        /**
+         * Unique only if undeleted.
+         *
+         * This works around the use case where multiple deleted items have the same unique attribute.
+         * (I think this is a bug in Laravel's validator?)
+         *
+         * $attribute is the FIELDNAME you're checking against
+         * $value is the VALUE of the item you're checking against the existing values in the fieldname
+         * $parameters[0] is the TABLE NAME you're querying
+         * $parameters[1] is the ID of the item you're querying - this makes it work on saving, checkout, etc,
+         *   since it defaults to 0 if there is no item created yet (new item), but populates the ID if editing
+         *
+         * The UniqueUndeletedTrait prefills these parameters, so you can just use
+         * `unique_undeleted:table,fieldname` in your rules out of the box
+         */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+
             if (count($parameters)) {
-                $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
+
+                // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable
+                if (($parameters[0]=='assets') && ($attribute == 'serial') && (Setting::getSettings()->unique_serial != '1')) {
+                    return true;
+                }
+
+                $count = DB::table($parameters[0])
+                    ->select('id')
+                    ->where($attribute, '=', $value)
+                    ->whereNull('deleted_at')
+                    ->where('id', '!=', $parameters[1])->count();
+
+                return $count < 1;
+            }
+        });
+        
+        /**
+         * Unique if undeleted for two columns
+         *
+         * Same as unique_undeleted but taking the combination of two columns as unique constrain.
+         * This uses the Validator::replacer('two_column_unique_undeleted') below for nicer translations.
+         *
+         * $parameters[0] - the name of the first table we're looking at
+         * $parameters[1] - the ID (this will be 0 on new creations)
+         * $parameters[2] - the name of the second table we're looking at
+         * $parameters[3] - the value that the request is passing for the second table we're
+         *                  checking for uniqueness across
+         *
+         */
+        Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+            if (count($parameters)) {
+                $count = DB::table($parameters[0])
+                         ->select('id')->where($attribute, '=', $value)
+                         ->whereNull('deleted_at')
+                         ->where('id', '!=', $parameters[1])
+                         ->where($parameters[2], $parameters[3])->count();
 
                 return $count < 1;
             }
         });
 
-        // Unique if undeleted for two columns
-            // Same as unique_undeleted but taking the combination of two columns as unique constrain.
-            Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-                if (count($parameters)) {
-                    $count = DB::table($parameters[0])
-                             ->select('id')->where($attribute, '=', $value)
-                             ->whereNull('deleted_at')
-                             ->where('id', '!=', $parameters[1])
-                             ->where($parameters[2], $parameters[3])->count();
 
-                    return $count < 1;
-                }
-            });
+        /**
+         * This is the validator replace static method that allows us to pass the $parameters of the table names
+         * into the translation string in validation.two_column_unique_undeleted for two_column_unique_undeleted
+         * validation messages.
+         *
+         * This is invoked automatically by Validator::extend('two_column_unique_undeleted') above and
+         * produces a translation like: "The name value must be unique across categories and category type."
+         *
+         * The $parameters passed coincide with the ones the two_column_unique_undeleted custom validator above
+         * uses, so $parameter[0] is the first table and so $parameter[2] is the second table.
+         */
+        Validator::replacer('two_column_unique_undeleted', function($message, $attribute, $rule, $parameters) {
+            $message = str_replace(':table1', $parameters[0], $message);
+            $message = str_replace(':table2', $parameters[2], $message);
+
+            // Change underscores to spaces for a friendlier display
+            $message = str_replace('_', ' ', $message);
+            return $message;
+        });
+
 
         // Prevent circular references
         //

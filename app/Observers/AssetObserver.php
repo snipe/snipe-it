@@ -22,6 +22,13 @@ class AssetObserver
         $attributesOriginal = $asset->getRawOriginal();
         $same_checkout_counter = false;
         $same_checkin_counter = false;
+        $restoring_or_deleting = false;
+
+
+        // This is a gross hack to prevent the double logging when restoring an asset
+        if (array_key_exists('deleted_at', $attributes)  && array_key_exists('deleted_at', $attributesOriginal)){
+            $restoring_or_deleting = (($attributes['deleted_at'] != $attributesOriginal['deleted_at']));
+        }
 
         if (array_key_exists('checkout_counter', $attributes) && array_key_exists('checkout_counter', $attributesOriginal)){
             $same_checkout_counter = (($attributes['checkout_counter'] == $attributesOriginal['checkout_counter']));
@@ -33,10 +40,10 @@ class AssetObserver
 
         // If the asset isn't being checked out or audited, log the update.
         // (Those other actions already create log entries.)
-	if (($attributes['assigned_to'] == $attributesOriginal['assigned_to']) 
+	    if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
 	    && ($same_checkout_counter) && ($same_checkin_counter)
             && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
-            && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']))
+            && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && (!$restoring_or_deleting))
         {
             $changed = [];
 
@@ -119,6 +126,22 @@ class AssetObserver
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
+    }
+
+    /**
+     * Listen to the Asset deleting event.
+     *
+     * @param  Asset  $asset
+     * @return void
+     */
+    public function restoring(Asset $asset)
+    {
+        $logAction = new Actionlog();
+        $logAction->item_type = Asset::class;
+        $logAction->item_id = $asset->id;
+        $logAction->created_at = date('Y-m-d H:i:s');
+        $logAction->user_id = Auth::id();
+        $logAction->logaction('restore');
     }
 
     /**
