@@ -3,6 +3,7 @@
 use App\Models\Asset;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -50,7 +51,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
             ->whereNotNull('model_id')
             ->join('models', 'assets.model_id', '=', 'models.id')
             ->update([
-                'asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL ' . DB::getTablePrefix() . 'models.eol MONTH)')
+                'asset_eol_date' => $this->eolUpdateExpression(),
             ]);
     }
 
@@ -65,5 +66,19 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
         Schema::table('assets', function (Blueprint $table) {
                 $table->dropColumn('eol_explicit');
         });
+    }
+
+    /**
+     * This method returns the correct database express for either
+     * mysql or sqlite depending on the driver being used.
+     */
+    private function eolUpdateExpression(): Expression
+    {
+        if (DB::getDriverName() === 'sqlite') {
+            return DB::raw("DATE(purchase_date, '+' || (SELECT eol FROM models WHERE models.id = assets.model_id) || ' months')");
+        }
+
+        // Default to MySQL's method
+        return DB::raw('DATE_ADD(purchase_date, INTERVAL ' . DB::getTablePrefix() . 'models.eol MONTH)');
     }
 }
