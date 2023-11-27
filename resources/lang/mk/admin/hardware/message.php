@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Основното средство не е креирано, обидете се повторно. :(',
         'success' 		=> 'Основното средство е успешно креирано. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

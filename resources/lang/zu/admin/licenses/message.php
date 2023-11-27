@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Leli layisensi okwamanje lihlolwe kumsebenzisi futhi alikwazi ukususwa. Sicela uhlole ilayisensi ekuqaleni, bese uzama ukususa futhi.',
     'select_asset_or_person' => 'Kumele ukhethe ifa noma umsebenzisi, kodwa hhayi kokubili.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Kube nenkinga yokuhlola ilayisense. Ngicela uzame futhi.',
-        'success' => 'Ilayisensi yahlolwa ngokuphumelelayo'
+        'success' => 'Ilayisensi yahlolwa ngokuphumelelayo',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

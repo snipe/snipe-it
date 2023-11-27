@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Společnost nebyla založena.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Odstraněné společnosti',
     'assoc_users'    => 'Tato společnost je právě přiřazena alespoň k jednomu modelu majetku a nemůže tak být odstraněna. Odeberte její vazbu z patřičných modelů a akci opakujte. ',
     'create' => [
         'error'   => 'Společnost nebyla založena, zkuste to znovu.',

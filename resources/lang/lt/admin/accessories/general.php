@@ -16,7 +16,7 @@ return array(
     'update'  							=> 'Atnaujinti įrangą',
     'use_default_eula'					=> 'Naudoti  <a href="#" data-toggle="modal" data-target="#eulaModal"> pirminę EULA </a>  vietoje to.',
     'use_default_eula_disabled'			=> '<del>Naudoti pirminę numatytąją EULA.</del> Nėra nustatytos pirminės numatytosios EULA. Prašome pridėkite ją nustatymuose.',
-    'clone'                             => 'Clone Accessory',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'clone'                             => 'Klonuoti priedus',
+    'delete_disabled'                   => 'Šis priedas kol kas negali būti ištrintas, nes kai kurie daiktai dar registruojami.',
 
 );

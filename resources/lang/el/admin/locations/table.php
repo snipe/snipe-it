@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Όνομα τοποθεσίας',
     'address'                   => 'Διεύθυνση',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Ταχυδρομικός Κώδικας',
     'locations'                 => 'Τοποθεσίες',
     'parent'                    => 'Μητρική εταιρεία',

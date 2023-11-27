@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Tilbehøret [:id] finnes ikke.',
+    'not_found' => 'Finner ikke dette tilbehøret.',
     'assoc_users'	 => 'Dette tilbehøret har for øyeblikket :count enheter utsjekket til brukere. Sjekk inn tilbehøret og prøv igjen. ',
 
     'create' => array(
@@ -24,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Tilbehør ble ikke sjekket ut. Prøv igjen',
         'success' 		=> 'Vellykket utsjekking av tilbehør.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Tilbehør er ikke tilgjengelig for utsjekk. Sjekk antall tilgjengelig',
         'user_does_not_exist' => 'Denne brukeren er ugyldig. Prøv igjen.'
     ),
 

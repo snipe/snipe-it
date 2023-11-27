@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Tài sản chưa được tạo, xin vui lòng thử lại. :(',
         'success' 		=> 'Tài sản được tạo thành công. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
@@ -23,8 +24,8 @@ return [
     'restore' => [
         'error'   		=> 'Tài sản không được khôi phục, bạn hãy thử lại',
         'success' 		=> 'Tài sản được khôi phục thành công.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Đã khôi phục thành công tài sản.',
+        'nothing_updated'   => 'Không có tài sản nào được chọn nên không có tài sản nào được khôi phục.', 
     ],
 
     'audit' => [
@@ -51,9 +52,9 @@ return [
         'success'               => 'Tệp của bạn đã được nhập',
         'file_delete_success'   => 'Tập tin của bạn đã được xóa thành công',
         'file_delete_error'      => 'Không thể xóa tệp',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Tệp đã chọn bị thiếu',
+        'header_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính trong hàng tiêu đề chứa các ký tự không đúng định dạng UTF-8',
+        'content_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính ở hàng đầu tiên của nội dung chứa ký tự không đúng định dạng UTF-8',
     ],
 
 

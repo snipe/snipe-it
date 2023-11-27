@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print alles wat toegewezen is',
     'name'                      => 'Locatie naam',
     'address'                   => 'Adres',
+    'address2'                   => 'Adresregel 2',
     'zip'                       => 'Postcode',
     'locations'                 => 'Locaties',
     'parent'                    => 'Bovenliggend',

@@ -2,23 +2,23 @@
 
 return [
 
-    'does_not_exist' => 'Status label bestaat niet.',
-    'assoc_assets'	 => 'Dit status label is tenminste met één asset gekoppeld en kan niet verwijderd worden. Zorg ervoor dat assets geen gebruik maken van dit statuslabel en probeer het nogmaals. ',
+    'does_not_exist' => 'Statuslabel bestaat niet.',
+    'assoc_assets'	 => 'Dit statuslabel is tenminste met één asset gekoppeld en kan niet verwijderd worden. Zorg ervoor dat assets geen gebruik maken van dit statuslabel en probeer het nogmaals. ',
 
     'create' => [
-        'error'   => 'Status label is niet aangemaakt, probeer het nogmaals.',
-        'success' => 'Status label succesvol aangemaakt.',
+        'error'   => 'Statuslabel is niet aangemaakt, probeer het nogmaals.',
+        'success' => 'Statuslabel succesvol aangemaakt.',
     ],
 
     'update' => [
-        'error'   => 'Status label is niet bijgewerkt, probeer het nogmaals',
-        'success' => 'Status label succesvol bijgewerkt.',
+        'error'   => 'Statuslabel is niet bijgewerkt, probeer het nogmaals',
+        'success' => 'Statuslabel succesvol bijgewerkt.',
     ],
 
     'delete' => [
-        'confirm'   => 'Weet je zeker dat je dit status label wil verwijderen?',
-        'error'   => 'Er is iets mis gegaan tijdens het verwijderen van het status label, probeer het nogmaals.',
-        'success' => 'Het status label is succesvol verwijderd.',
+        'confirm'   => 'Weet je zeker dat je dit statuslabel wil verwijderen?',
+        'error'   => 'Er is iets mis gegaan tijdens het verwijderen van het statuslabel, probeer het nogmaals.',
+        'success' => 'Het statuslabel is succesvol verwijderd.',
     ],
 
     'help' => [

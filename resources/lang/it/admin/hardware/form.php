@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Aggiorna Posizione Bene',
     'asset_location_update_default_current' => 'Aggiorna sia la posizione predefinita che quella attuale',
     'asset_location_update_default' => 'Aggiorna solo la posizione predefinita',
+    'asset_location_update_actual' => 'Aggiorna solo la posizione effettiva',
     'asset_not_deployable' => 'Lo stato del bene è "Non Assegnabile". Non puoi fare il check-out di questo bene.',
     'asset_deployable' => 'Lo stato del bene è "Assegnabile". Puoi fare il check-out di questo bene.',
     'processing_spinner' => 'Elaborazione... (Può volerci un po\' su file di grandi dimensioni)',

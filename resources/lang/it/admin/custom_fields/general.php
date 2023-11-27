@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Nuovo campo personalizzato',
     'create_field_title' => 'Crea un nuovo campo personalizzato',
     'value_encrypted'      	        => 'Il valore di questo campo viene crittografato nel database. Solo gli utenti amministratori saranno in grado di visualizzare il valore decrittografato',
-    'show_in_email'     => 'Includere il valore di questo campo nelle e-mail di checkout inviate all\'utente? I campi crittografati non possono essere inclusi nelle e-mail.',
+    'show_in_email'     => 'Includere il valore di questo campo nelle e-mail di assegnazione inviate all\'utente? I campi crittografati non possono essere inclusi nelle e-mail',
+    'show_in_email_short'     => 'Includi nelle email.',
     'help_text' => 'Testo guida',
     'help_text_description' => 'Questo è un testo facoltativo che apparirà sotto gli elementi del modulo durante la modifica di una risorsa per fornire il contesto sul campo.',
     'about_custom_fields_title' => 'Informazioni sui campi personalizzati',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Visibile all\'utente',
     'auto_add_to_fieldsets' => 'Aggiungi automaticamente a ogni nuovo campo',
     'add_to_preexisting_fieldsets' => 'Aggiungi a tutti i campi esistenti',
-    'show_in_listview' => 'Mostra nelle viste elenco per default. Gli utenti autorizzati potranno comunque mostrare/nascondere con il selettore colonne.',
+    'show_in_listview' => 'Mostra nelle viste elenco per default. Gli utenti autorizzati potranno comunque mostrare/nascondere con il selettore colonne',
     'show_in_listview_short' => 'Mostra nelle liste',
+    'show_in_requestable_list_short' => 'Mostra nella lista beni richiedibili',
+    'show_in_requestable_list' => 'Mostra nella lista dei beni richiedibili. I valori criptati non verranno mostrati',
+    'encrypted_options' => 'Questo campo è criptato, quindi alcune opzioni di visualizzazione non saranno disponibili.',
 
 ];

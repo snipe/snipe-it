@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Šobrīd šī licence tiek izrakstīta lietotājam un to nevar izdzēst. Vispirms pārbaudiet licenci un pēc tam mēģiniet dzēst vēlreiz.',
     'select_asset_or_person' => 'Jums jāizvēlas aktīvs vai lietotājs, bet ne abi.',
     'not_found' => 'Licence nav atrasta',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Pārbaudot licenci, radās problēma. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi pārbaudīta'
+        'success' => 'Licence tika veiksmīgi pārbaudīta',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

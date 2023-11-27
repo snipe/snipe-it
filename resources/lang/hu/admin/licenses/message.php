@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ez a licenc jelenleg ki van adva a felhasználónak, és nem törölhető. Kérjük, először ellenőrizze az engedélyt, majd próbálja meg újra törölni.',
     'select_asset_or_person' => 'Válasszon egy eszközt vagy egy felhasználót, de nem mindkettőt.',
     'not_found' => 'Licensz nem található',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Hiba történt az engedély megvizsgálásakor. Kérlek próbáld újra.',
-        'success' => 'Az engedélyt sikeresen kiállították'
+        'success' => 'Az engedélyt sikeresen kiállították',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

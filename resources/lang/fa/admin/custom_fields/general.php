@@ -37,8 +37,8 @@ return [
     'create_field_title' => 'یک فیلد سفارشی جدید ایجاد کنید
 ',
     'value_encrypted'      	        => 'ارزش این فیلد در پایگاه داده رمزگذاری شده است. فقط کاربران مدیریت قادر به مشاهده مقدار رمزگشایی خواهند شد',
-    'show_in_email'     => 'ارزش این فیلد را در ایمیل‌های تسویه‌حساب ارسالی به کاربر لحاظ کنید؟ فیلدهای رمزگذاری شده را نمی توان در ایمیل ها گنجاند.
-',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'متن راهنما',
     'help_text_description' => 'این متن اختیاری است که هنگام ویرایش یک دارایی برای ارائه زمینه در فیلد در زیر عناصر فرم ظاهر می شود.
 ',
@@ -65,7 +65,10 @@ return [
     'display_in_user_view_table' => 'Visible to User',
     'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
     'select_asset_or_person' => '애셋이나 사용자 중 하나만 선택해야하며 둘 다 선택할 수는 없습니다.',
     'not_found' => '라이센스를 찾을 수 없음',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => '라이선스 반출 중 문제가 발생했습니다. 다시 시도해 주세요.',
-        'success' => '라이선스가 반출 되었습니다.'
+        'success' => '라이선스가 반출 되었습니다.',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

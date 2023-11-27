@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'L\'accessoire [:id] n\'existe pas.',
+    'not_found' => 'Cet accessoire n\'a pas été trouvé.',
     'assoc_users'	 => 'Cet accessoire à présentement des items d\'attribué à des utilisateurs. S\'il vous plaît vérifier l\'accessoire et veuillez réessayer. ',
 
     'create' => array(

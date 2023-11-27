@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ang lisensyang ito ay kasalukuyang nai-check out sa isang user at hindi maaaring mai-delete. Mangyaring suriin muna na naka in ang lisensya, at pagkatapos subukang i-delete muli. ',
     'select_asset_or_person' => 'Dapat kang pumili ng isang asset o isang user, pero hindi ang dalawa.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Mayroong isyu sa pag-check out ng lisensya. Mangyaring subukang muli.',
-        'success' => 'Matagumpay na nai-check out ang lisensya'
+        'success' => 'Matagumpay na nai-check out ang lisensya',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

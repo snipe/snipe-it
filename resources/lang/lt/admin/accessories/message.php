@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Priedas [:id] neegzistuoja.',
+    'not_found' => 'Priedas nerastas.',
     'assoc_users'	 => 'Vartotojams šiuo metu išduotų šio priedo vienetų skaičius - :count. Susigrąžinkite išduotus priedus ir bandykite dar kartą. ',
 
     'create' => array(

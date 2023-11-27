@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Aceasta licenta este momentan predata catre un utilizator si nu poate fi stearsa. Va rugam verificati licenta mai intai si dupa incercati s-o stergeti iar. ',
     'select_asset_or_person' => 'Trebuie să selectați un material sau un utilizator, dar nu ambele.',
     'not_found' => 'Licența nu a fost găsită',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'A aparut o problema la predarea licentei. Va rugam incercati iar.',
-        'success' => 'Licenta a fost predata'
+        'success' => 'Licenta a fost predata',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

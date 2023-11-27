@@ -34,13 +34,13 @@ return [
         'authentication_success' => 'LDAP kullanıcı kimliği başarıyla doğrulandı!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
+        'sending' => ':app test mesajı gönderiliyor...',
         'success' => ':webhook_name entegrasyonunuz çalışıyor!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
+        'success_pt1' => 'Başarılı! Kontrol edin ',
+        'success_pt2' => ' test mesajınız için kanala gidin ve ayarlarınızı kaydetmek için aşağıdaki KAYDET\'i tıklamayı unutmayın.',
+        '500' => '500 Sunucu Hatası.',
+        'error' => 'Bir şeyler yanlış gitti. :app bu şekilde yanıt verdi: :error_message',
         'error_redirect' => 'HATA: 301/302: bağlantı başka bir yere yönlendiriyor. Güvenlik nedeniyle yönlendirmeleri takip etmiyoruz. Lütfen direk adresi kullanın.',
-        'error_misc' => 'Something went wrong. :( ',
+        'error_misc' => 'Bir şeyler yanlış gitti. :( ',
     ]
 ];

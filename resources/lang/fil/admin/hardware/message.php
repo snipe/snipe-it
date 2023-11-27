@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Ang asset ay hindi naisagawa, mangyaring subukang muli. :(',
         'success' 		=> 'Ang asset ay matagumpay na naisagawa. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => '此许可证已经分配给某个用户，目前不能被删除，请检查资产信息，然后再尝试删除。',
     'select_asset_or_person' => '您必须选择资产或用户，但不能同时选择两者。',
     'not_found' => '找不到许可证',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => '分配（借出）许可证的过程中出现了一些问题，请重试。',
-        'success' => '许可证已经成功借出'
+        'success' => '许可证已经成功借出',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Oštampaj sve zaduženo',
     'name'                      => 'Naziv lokacije',
     'address'                   => 'Adresa',
+    'address2'                   => 'Adresa 2',
     'zip'                       => 'Poštanski broj',
     'locations'                 => 'Lokacije',
     'parent'                    => 'Parent',

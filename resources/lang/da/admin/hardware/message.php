@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Akten blev ikke oprettet, prøv igen. :(',
         'success' 		=> 'Aktivet blev oprettet med succes. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

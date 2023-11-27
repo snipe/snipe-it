@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Imprimir todos los asignados',
     'name'                      => 'Nombre de Ubicación',
     'address'                   => 'Dirección',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Código Postal',
     'locations'                 => 'Ubicaciones',
     'parent'                    => 'Padre',

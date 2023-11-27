@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Alles zugewiesene drucken',
     'name'                      => 'Standortname',
     'address'                   => 'Adresse',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Postleitzahl',
     'locations'                 => 'Standorte',
     'parent'                    => 'Übergeordneter Standort',

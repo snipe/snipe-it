@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Kaore i hangaia te tahua, tēnā whakamātau anō. :(',
         'success' 		=> 'Kua waihangatia te tahua. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

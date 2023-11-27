@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'O usuário já existe!',
     'user_not_found'            => 'O usuário não existe.',
     'user_login_required'       => 'O campo de login é requerido',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'A senha é requerida.',
     'insufficient_permissions'  => 'Permissões Insuficientes.',
     'user_deleted_warning'      => 'Este usuário foi deletado. Você terá que restaurar este usuário para editá-los ou atribui-lós novos bens.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Os usuários selecionados que são ativados e têm um endereço de e-mail válido receberam um link de redefinição de senha.',
     'password_reset_sent'       => 'Um link de redefinição de senha foi enviado para :email!',
     'user_has_no_email'         => 'Esse usuário não tem um endereço de e-mail no seu perfil.',
-    'user_has_no_assets_assigned'   => 'Este usuário não tem nenhum ativo atribuído',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

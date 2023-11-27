@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Új egyéni mező',
     'create_field_title' => 'Új egyéni mező létrehozása',
     'value_encrypted'      	        => 'A mező értéke titkosítva van az adatbázisban. Csak az adminisztrátor felhasználók láthatják a dekódolt értéket',
-    'show_in_email'     => 'Szerepeljen ez a mező az eszköz kiadásakor a felhasználónak küldött emailben? A titkosított mezők nem szerepelhetnek az emailekben.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Szerepeljen az emailekben.',
     'help_text' => 'Súgó szöveg',
     'help_text_description' => 'Ez egy opcionális szöveg, amely az űrlapelemek alatt jelenik meg az eszköz szerkesztése közben, hogy kontextust adjon a mezőhöz.',
     'about_custom_fields_title' => 'Az egyéni mezőkről',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Látható a felhasználó számára',
     'auto_add_to_fieldsets' => 'Automatikusan add hozzá minden új mezőcsoporthoz',
     'add_to_preexisting_fieldsets' => 'Hozzáadás egy meglévő listához',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Megtekintés listában',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

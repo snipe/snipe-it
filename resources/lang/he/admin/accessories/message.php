@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'האביזר [:id] לא קיים.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'קיימות :count יחידות מונפקות מאבזר זה אצל משתמשים. אנא החזר את האבזרים ונסה שנית. ',
 
     'create' => array(

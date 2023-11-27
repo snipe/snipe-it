@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Īpašums netika izveidots, lūdzu, mēģiniet vēlreiz. :(',
         'success' 		=> 'Īpašums veiksmīgi izveidots. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Felhasználó már létezik!',
     'user_not_found'            => 'Felhasználó nem létezik.',
     'user_login_required'       => 'A bejelentkezési mező kötelező',
+    'user_has_no_assets_assigned' => 'A felhasználóhoz jelenleg nincs hozzárendelve eszköz.',
     'user_password_required'    => 'A jelszó szükséges.',
     'insufficient_permissions'  => 'Nem megfelelő engedélyek.',
     'user_deleted_warning'      => 'Ezt a felhasználót törölték. Ezt a felhasználót vissza kell állítania, hogy szerkeszteni tudja őket, vagy hozzárendelhessen új eszközökhöz.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'A kiválasztott felhasználók számára, akik aktívak és van nekik érvényes email cím, elküldésre került egy jelszó visszaállítási link.',
     'password_reset_sent'       => 'A jelszó visszaállítási link elküldésre került a :email címre!',
     'user_has_no_email'         => 'Ez a felhasználó nem rendelkezik e-mail címmel a profiljában.',
-    'user_has_no_assets_assigned'   => 'Ehhez a felhasználóhoz nincsenek eszközök rendelve',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Forbrugsvarer er noget der købes og bruges op over tid. For eksempel printer blæk eller kopimaskine papir.',
 
     'depreciations' => 'Du kan sætte aktivafskrivninger til at afskrive aktiver som lineære afskrivninger.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

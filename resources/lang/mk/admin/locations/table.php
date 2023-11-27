@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Име на локација',
     'address'                   => 'Адреса',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Поштенски код',
     'locations'                 => 'Локации',
     'parent'                    => 'Родител',

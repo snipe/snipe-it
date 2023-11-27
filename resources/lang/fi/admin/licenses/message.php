@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Lisenssin on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssin ensin käyttäjältä, ja yritä sitten uudelleen. ',
     'select_asset_or_person' => 'Sinun on valittava laite tai käyttäjä, mutta ei molempia.',
     'not_found' => 'Lisenssiä ei löydy',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Lisenssin luovutuksessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi luovutettiin onnistuneesti'
+        'success' => 'Lisenssi luovutettiin onnistuneesti',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

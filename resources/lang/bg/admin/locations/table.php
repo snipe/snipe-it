@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Печат на всички отдадени',
     'name'                      => 'Местоположение',
     'address'                   => 'Aдрес',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Пощенски код',
     'locations'                 => 'Местоположения',
     'parent'                    => 'Присъединено към',

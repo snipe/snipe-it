@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Az összes hozzárendelt nyomtatása',
     'name'                      => 'Helyszín neve',
     'address'                   => 'Cím',
+    'address2'                   => 'Cím sor 2',
     'zip'                       => 'Irányítószám',
     'locations'                 => 'Helyek',
     'parent'                    => 'Szülő',

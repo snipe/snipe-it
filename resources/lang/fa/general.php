@@ -75,6 +75,8 @@ return [
     'consumable'			=> 'قابل مصرف',
     'consumables'			=> 'اقلام قابل مصرف',
     'country'  				=> 'كشور',
+    'could_not_restore'     => 'Error restoring :item_type: :error',
+    'not_deleted'           => 'The :item_type is not deleted so it cannot be restored',
     'create'				=> 'ایجاد مورد جدید',
     'created'               => 'مورد ایجاد شده',
     'created_asset'			=> 'دارایی ایجاد شده',
@@ -410,8 +412,8 @@ return [
 ',
     'license_serial'        => 'کلید سریال/محصول
 ',
-    'invalid_category'      => 'دسته نامعتبر
-',
+    'invalid_category'      => 'Invalid or missing category',
+    'invalid_item_category_single' => 'Invalid or missing :type category. Please update the category of this :type to include a valid category before checking out.',
     'dashboard_info'        => 'این داشبورد شماست. مانند آن زیاد است، اما این یکی مال شماست.
 ',
     '60_percent_warning'    => '60% کامل شد  (هشدار)
@@ -439,7 +441,7 @@ return [
 ',
     'licenses_count'        => 'تعداد مجوزها
 ',
-    'notification_error'    => 'خطا:',
+    'notification_error'    => 'Error',
     'notification_error_hint' => 'لطفاً فرم زیر را برای وجود خطا بررسی کنید
 ',
     'notification_bulk_error_hint' => 'The following fields had validation errors and were not edited:',
@@ -574,7 +576,7 @@ return [
     ],
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'upload_error' => 'Error uploading file. Please check that there are no empty rows and that no column names are duplicated.',
     'copy_to_clipboard' => 'Copy to Clipboard',
     'copied' => 'Copied!',
 

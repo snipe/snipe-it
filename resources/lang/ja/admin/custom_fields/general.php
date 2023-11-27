@@ -34,7 +34,8 @@ return [
     'create_field'            => '新しいユーザー設定フィールド',
     'create_field_title' => '新しいカスタムフィールドを作成',
     'value_encrypted'      	        => 'このフィールドの値は、データベースで暗号化されます。管理者ユーザーのみが復号化された値を表示することができます。',
-    'show_in_email'     => 'このフィールドの値を、ユーザーに送信されるチェックアウト メールに含めますか？（暗号化されたフィールドの値はメールに含めることはできません。）',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'ヘルプ テキスト',
     'help_text_description' => 'このテキストは、資産の編集中にフォーム要素の下に表示されるオプションのテキストです。',
     'about_custom_fields_title' => 'カスタムフィールドについて',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'ユーザーに表示',
     'auto_add_to_fieldsets' => '新しいフィールドセットに自動的に追加する',
     'add_to_preexisting_fieldsets' => '既存のフィールドセットに追加',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

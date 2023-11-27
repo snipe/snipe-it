@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Aksesori [:id] tidak ada.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Aksesori ini saat ini memiliki: count item yang dikeluarkan ke pengguna. Silakan periksa di aksesoris dan dan coba lagi. . Silakan periksa di aksesoris dan dan coba lagi. ',
 
     'create' => array(

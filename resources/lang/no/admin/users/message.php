@@ -6,16 +6,17 @@ return array(
     'declined'                  => 'Du har avvist eiendelen.',
     'bulk_manager_warn'	        => 'Brukerne er oppdatert, men lederen ble ikke lagret fordi lederen du valgte også i brukerlisten for redigering og brukere kan ikke være sin egen leder. Velg brukerne igjen, unntatt lederen.',
     'user_exists'               => 'Bruker finnes allerede!',
-    'user_not_found'            => 'User does not exist.',
+    'user_not_found'            => 'Brukeren finnes ikke.',
     'user_login_required'       => 'Login-feltet er påkrevd',
+    'user_has_no_assets_assigned' => 'Ingen eiendeler er tilordnet brukeren for øyeblikket.',
     'user_password_required'    => 'Passord er påkrevd.',
     'insufficient_permissions'  => 'Utilstrekkelige rettigheter.',
     'user_deleted_warning'      => 'Denne brukeren er slettet. Du vil må gjenopprette denne brukeren for å redigere, eller tildele nye eiendeler.',
     'ldap_not_configured'        => 'LDAP integrasjonen er ikke konfigurert i denne installasjonen.',
     'password_resets_sent'      => 'De valgte brukerne som er aktivert og har en gyldig e-postadresse har blitt sendt en tilbakestillingslenke.',
     'password_reset_sent'       => 'En lenke for tilbakestilling av passord har blitt sendt til :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'Denne brukeren har ingen e-postadresse i sin profil.',
+    'log_record_not_found'        => 'Finner ikke et samsvarende loggelement for denne brukeren.',
 
 
     'success' => array(
@@ -61,7 +62,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Denne brukeren har ingen e-post.',
+        'success' => 'Brukeren har blitt varslet om det gjeldende inventaret.'
     )
 );

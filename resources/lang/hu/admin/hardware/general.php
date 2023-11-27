@@ -20,7 +20,7 @@ return [
     'requestable'               => 'lehívási',
     'requested'				    => 'Kérve',
     'not_requestable'           => 'Nem kérhető',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'requestable_status_warning' => 'Ne változtassa meg az igényelhető státuszt',
     'restore'  					=> 'Visszaállítás eszköz',
     'pending'  					=> 'Függőben',
     'undeployable'  			=> 'Nem telepíthető',
@@ -46,5 +46,5 @@ return [
     'alert_details' => 'A részleteket lásd alább.',
     'custom_export' => 'Egyéni export',
     'mfg_warranty_lookup' => ':manufacturer jótállási információk ellenőrzése',
-    'user_department' => 'User Department',
+    'user_department' => 'Felhasználó osztálya',
 ];

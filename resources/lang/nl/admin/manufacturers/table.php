@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Ondersteuning E-mail',
     'support_phone'   		=> 'Ondersteuning telefoonnummer',
     'support_url'   		=> 'Ondersteuning URL',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'Garantie opzoek URL',
     'update'				=> 'Wijzig Fabrikant',
     'url'   				=> 'URL',
 

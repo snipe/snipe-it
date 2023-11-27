@@ -8,7 +8,7 @@ return [
     'change' 		=> 'Be/ki',
     'checkout_date' => 'Kiadási dátum',
     'checkoutto' 	=> 'Kiadva',
-    'components_cost' => 'Total Components Cost',
+    'components_cost' => 'Alkatrészek összköltsége',
     'current_value' => 'Jelenlegi érték',
     'diff' 			=> 'Eltérés',
     'dl_csv' 		=> 'Cvs letöltése',

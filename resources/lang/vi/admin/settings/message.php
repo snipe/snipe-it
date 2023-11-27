@@ -20,8 +20,8 @@ return [
         'success'               => 'Đã xoá thành công hồ sơ thành công.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
+        'sending' => 'Đang gửi email kiểm tra...',
+        'success' => 'Đã gửi thư!',
         'error' => 'Không thể gửi được thư.',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],
