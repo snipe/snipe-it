@@ -69,7 +69,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
     }
 
     /**
-     * This method returns the correct database express for either
+     * This method returns the correct database expression for either
      * mysql or sqlite depending on the driver being used.
      */
     private function eolUpdateExpression(): Expression
