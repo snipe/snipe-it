@@ -106,11 +106,11 @@ class Asset extends Depreciable
         'supplier_id'     => 'exists:suppliers,id|nullable',
         'asset_eol_date'  => 'date|nullable',
         'eol_explicit'    => 'boolean|nullable',
-        'byod'            => 'boolean',
-        'order_number'    => 'max:255|nullable',
-        'notes'           => 'max:65535|nullable',
-        'assigned_to'     => 'nullable|integer|exists:users,id',
-        'requestable'     => 'boolean',
+        'byod'            => 'nullable|boolean',
+        'order_number'    => 'string|max:191|nullable',
+        'notes'           => 'string|max:65535|nullable',
+        'assigned_to'     => 'integer|exists:users,id|nullable',
+        'requestable'     => 'boolean|nullable',
     ];
 
 
