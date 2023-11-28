@@ -120,8 +120,8 @@ class BulkAssetsController extends Controller
 
        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
 
-//        \Log::debug('ALL Custom fields columns - these may or may not apply: ');
-//        \Log::debug(print_r($custom_field_columns, true));
+        \Log::debug('ALL Custom fields columns - these may or may not apply: ');
+        \Log::debug(print_r($custom_field_columns, true));
      
         if (! $request->filled('ids') || count($request->input('ids')) == 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
@@ -139,14 +139,14 @@ class BulkAssetsController extends Controller
         }
 
 
-        // We should tighten checks here - burpsuite could punch through this I'd pull the custom fields for new and old here
-        if ($request->anyFilled($custom_field_columns)) {
-           $custom_fields_present = true;
-         } else {
-           $custom_fields_present = false;
-         }
+        /**
+         * If ANY of these are filled, prepare to update the values on the assets.
+         *
+         * Additional checks will be needed for some of them to make sure the values
+         * make sense (for example, changing the status ID to something incompatible with
+         * its checkout status.
+         */
 
-        // If ANY of these are filled, prepare to update the values on the assets
         if (($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
@@ -170,14 +170,17 @@ class BulkAssetsController extends Controller
 
                 $this->update_array = [];
 
-                // Leave out model_id and sttaus here because we do math on that later. We have to d some extra
-                // validation and checks on those two
+                /**
+                 * Leave out model_id and status here because we do math on that later. We have to do some extra
+                 * validation and checks on those two.
+                 *
+                 * It's tempting to make these match the request check above, but some of these values require
+                 * extra work to make sure the data makes sense.
+                 */
                 $this->conditionallyAddItem('purchase_date')
                     ->conditionallyAddItem('expected_checkin')
                     ->conditionallyAddItem('order_number')
                     ->conditionallyAddItem('requestable')
-                    ->conditionallyAddItem('model_id')
-                    ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
                     ->conditionallyAddItem('next_audit_date');
@@ -211,6 +214,53 @@ class BulkAssetsController extends Controller
                     }
                 }
 
+                /**
+                 * We're trying to change the model ID - we need to do some extra checks here to make sure
+                 * the custom field values work for the custom fieldset rules around this asset. Uniqueness
+                 * and requiredness across the fieldset is particularly important, since those are
+                 * fieldset-specific attributes.
+                 */
+                if ($request->filled('model_id')) {
+                    \Log::debug('Change the model ID!');
+                    $asset->model_id = Model::find($request->input('model_id'))->id;
+                    \Log::debug('New model ID is:'.$asset->model_id);
+                }
+
+                /**
+                 * We're trying to change the status ID - we need to do some extra checks here to
+                 * make sure the status label type is one that makes sense for the state of the asset,
+                 * for example, we shouldn't be able to make an asset archived if it's currently assigned
+                 * to someone/something.
+                 */
+                if ($request->filled('status_id')) {
+                    \Log::debug('Change the status ID!');
+                    $updated_status = Statuslabel::find($request->input('status_id'));
+                    \Log::debug('New status ID is:'.$updated_status->id);
+                    \Log::debug('Status label type is: '.$updated_status->getStatuslabelType());
+
+                    // We cannot assign a non-deployable status type if the asset is already assigned.
+                    // This could probably be added to a form request.
+                    // If the asset isn't assigned, we don't care what the status is.
+                    // Otherwise we need to make sure the status type is still a deployable one.
+                    if (
+                        ($asset->assigned_to == '')
+                        || ($updated_status->deployable == '1') && ($asset->assetstatus->deployable == '1')
+                    ) {
+                        $asset->status_id = $updated_status->id;
+                    }
+
+                }
+
+                /**
+                 * We're changing the location ID - figure out which location we should apply
+                 * this change to:
+                 *
+                 * 0 - RTD location only
+                 * 1 - location ID and RTD location ID
+                 * 2 - location ID only
+                 *
+                 * Note: this is kinda dumb and we should just use human-readable values IMHO. - snipe
+                 */
                 if ($request->filled('rtd_location_id')) {
 
                     if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '0')) {
@@ -229,70 +279,74 @@ class BulkAssetsController extends Controller
                 }
 
 
-                // Anything that happens past this WILL NOT BE logged in the edit log
+                /**
+                 * ------------------------------------------------------------------------------
+                 * ANYTHING that happens past this foreach
+                 * WILL NOT BE logged in the edit log_meta data
+                 *  ------------------------------------------------------------------------------
+                 */
                 $changed = [];
 
                 foreach ($this->update_array as $key => $value) {
+
                     if ($this->update_array[$key] != $asset->{$key}) {
                         $changed[$key]['old'] = $asset->{$key};
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
+
                 }
 
                 \Log::debug('What changed?');
                 \Log::debug(print_r($changed, true));
                 
 
-                /** Start all the custom fields shenanigans */
-                if ($custom_fields_present) {
+                /**
+                 * Start all the custom fields shenanigans
+                 */
 
-                    // Make sure this model is valid
-                    // ALISON - FIX THIS BEFORE PUSHING
-                    $assetCustomFields = ($request->input('model_id')) ? $request->input('model_id')->fieldset : null;
+                // Does the model have a fieldset?
+                if ($asset->model->fieldset) {
+                    foreach ($asset->model->fieldset->fields as $field) {
 
-                    if ($assetCustomFields && $assetCustomFields->fields) {
+                        if ((array_key_exists($field->db_column, $this->update_array)) && ($field->field_encrypted == '1')) {
+                            $decrypted_old = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
 
-                            foreach ($assetCustomFields->fields as $field) {
-
-                                if ((array_key_exists($field->db_column, $this->update_array)) && ($field->field_encrypted=='1')) {
-                                    $decrypted_old = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
-
-                                    /*
-                                     * Check if the decrypted existing value is different from one we just submitted
-                                     * and if not, pull it out of the object since it shouldn't really be updating at all.
-                                     * If we don't do this, it will try to re-encrypt it, and the same value encrypted two
-                                     * different times will have different values, so it will *look* like it was updated
-                                     * but it wasn't.
-                                     */
-                                    if ($decrypted_old != $this->update_array[$field->db_column]) {
-                                        $asset->{$field->db_column} = \Crypt::encrypt($this->update_array[$field->db_column]);
-                                    } else {
-                                        /*
-                                         * Remove the encrypted custom field from the update_array, since nothing changed
-                                         */
-                                        unset($this->update_array[$field->db_column]);
-                                        unset($asset->{$field->db_column});
-                                    }
-
+                            /*
+                             * Check if the decrypted existing value is different from one we just submitted
+                             * and if not, pull it out of the object since it shouldn't really be updating at all.
+                             * If we don't do this, it will try to re-encrypt it, and the same value encrypted two
+                             * different times will have different values, so it will *look* like it was updated
+                             * but it wasn't.
+                             */
+                            if ($decrypted_old != $this->update_array[$field->db_column]) {
+                                $asset->{$field->db_column} = \Crypt::encrypt($this->update_array[$field->db_column]);
+                            } else {
                                 /*
-                                 * These custom fields aren't encrypted, just carry on as usual
+                                 * Remove the encrypted custom field from the update_array, since nothing changed
                                  */
+                                unset($this->update_array[$field->db_column]);
+                                unset($asset->{$field->db_column});
+                            }
+
+                            /*
+                             * These custom fields aren't encrypted, just carry on as usual
+                             */
+                        } else {
+
+                            if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
+
+                                // Check if this is an array, and if so, flatten it
+                                if (is_array($this->update_array[$field->db_column])) {
+                                    $asset->{$field->db_column} = implode(', ', $this->update_array[$field->db_column]);
                                 } else {
-
-                                    if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
-
-                                        // Check if this is an array, and if so, flatten it
-                                        if (is_array($this->update_array[$field->db_column])) {
-                                            $asset->{$field->db_column} = implode(', ', $this->update_array[$field->db_column]);
-                                        } else {
-                                            $asset->{$field->db_column} = $this->update_array[$field->db_column];
-                                        }
-                                    }
+                                    $asset->{$field->db_column} = $this->update_array[$field->db_column];
                                 }
+                            }
+                        }
 
-                            } // endforeach
-                    } // end custom field check
-                } // end custom fields handler
+                    } // endforeach
+                }
+
 
 
 

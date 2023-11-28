@@ -21,15 +21,16 @@
 
 
 
-    <div class="callout callout-warning">
-      <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
-    </div>
-
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
       {{ csrf_field() }}
 
       <div class="box box-default">
         <div class="box-body">
+
+          <div class="callout callout-warning">
+            <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
+          </div>
+
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
@@ -75,6 +76,7 @@
             </label>
             <div class="col-md-7">
               {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'status_id')) }}
+              <p class="help-block">If assets are already assigned, they cannot be changed to a non-deployable status type and this value change will be skipped.</p>
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
