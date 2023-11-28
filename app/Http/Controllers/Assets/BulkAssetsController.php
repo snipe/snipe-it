@@ -42,6 +42,9 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
 
+        /**
+         * No asset IDs were passed
+         */
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -49,6 +52,7 @@ class BulkAssetsController extends Controller
         // Figure out where we need to send the user after the update is complete, and store that in the session
         $bulk_back_url = request()->headers->get('referer');
         session(['bulk_back_url' => $bulk_back_url]);
+
 
         $asset_ids = $request->input('ids');
         $assets = Asset::with('assignedTo', 'location', 'model')->find($asset_ids);
@@ -92,9 +96,9 @@ class BulkAssetsController extends Controller
 
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
+                        ->with('statuslabel_list', Helper::statusLabelList())
                         ->with('models', $models->pluck(['model']))
-                        ->with('modelNames', $modelNames)
-                        ->with('statuslabel_list', Helper::statusLabelList());
+                        ->with('modelNames', $modelNames);
             }
         }
 
