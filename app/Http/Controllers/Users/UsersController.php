@@ -566,12 +566,14 @@ class UsersController extends Controller
                         trans('general.accessories'),
                         trans('general.consumables'),
                         trans('general.groups'),
+                        trans('general.permission_level'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
                     ];
 
                     //add if else for admin permissions. the admin permissions will allow a user to see permissions a user has in the export
+                    //
 
                     fputcsv($handle, $headers);
 
@@ -599,6 +601,7 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
+                            $user->permissions,
                             $user->notes,
                             ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,

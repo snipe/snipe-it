@@ -142,6 +142,7 @@ return [
     'generate_labels'       => 'Generate Labels',
     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Groups',
+    'permission_level'      => 'Permission Level',
     'gravatar_email'        => 'Gravatar Email Address',
     'gravatar_url'          => '<a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.',
     'history'  			    => 'History',
