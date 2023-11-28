@@ -41,7 +41,7 @@ class BulkAssetsController extends Controller
     public function edit(Request $request)
     {
         $this->authorize('view', Asset::class);
-        
+
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -52,6 +52,17 @@ class BulkAssetsController extends Controller
 
         $asset_ids = $request->input('ids');
         $assets = Asset::with('assignedTo', 'location', 'model')->find($asset_ids);
+
+        //custom fields logic
+        $asset_custom_field = Asset::with(['model.fieldset.fields', 'model'])->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
+            return $query->where('fieldset_id', '!=', null);
+        })->get();
+
+        $models = $asset_custom_field->unique('model_id');
+        $modelNames = [];
+        foreach($models as $model) {
+            $modelNames[] = $model->model->name;
+        }
 
         if ($request->filled('bulk_actions')) {
 
@@ -86,6 +97,8 @@ class BulkAssetsController extends Controller
 
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
+                        ->with('models', $models->pluck(['model']))
+                        ->with('modelNames', $modelNames)
                         ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
