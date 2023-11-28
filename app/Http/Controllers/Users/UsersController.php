@@ -565,11 +565,13 @@ class UsersController extends Controller
                         trans('general.licenses'),
                         trans('general.accessories'),
                         trans('general.consumables'),
-                        trans('admin/users/table.groups'),
+                        trans('general.groups'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
                     ];
+
+                    //add if else for admin permissions. the admin permissions will allow a user to see permissions a user has in the export
 
                     fputcsv($handle, $headers);
 
