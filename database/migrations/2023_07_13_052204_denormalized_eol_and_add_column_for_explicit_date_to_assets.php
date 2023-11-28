@@ -75,7 +75,11 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
     private function eolUpdateExpression(): Expression
     {
         if (DB::getDriverName() === 'sqlite') {
-            return DB::raw("DATE(purchase_date, '+' || (SELECT eol FROM " . DB::getTablePrefix() ."models WHERE models.id = assets.model_id) || ' months')");
+            return DB::raw("DATE(purchase_date, '+' || (SELECT eol FROM " . DB::getTablePrefix() . "models WHERE models.id = assets.model_id) || ' months')");
+        }
+
+        if (DB::getDriverName() === 'pgsql') {
+            return DB::raw("date(purchase_date + interval '1 month' * (SELECT eol FROM " . DB::getTablePrefix() . "models WHERE models.id = assets.model_id))");
         }
 
         // Default to MySQL's method
