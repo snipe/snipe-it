@@ -197,7 +197,6 @@ class AssetStoreTest extends TestCase
                 'asset_tag' => $asset_tag,
                 'model_id' => $model->id,
                 'status_id' => $status->id,
-                'deleted_at' => null,
             ])
             ->assertOk()
             ->assertStatusMessageIs('success');
@@ -207,7 +206,6 @@ class AssetStoreTest extends TestCase
                 'asset_tag' => $asset_tag,
                 'model_id' => $model->id,
                 'status_id' => $status->id,
-                'deleted_at' => null,
             ])
             ->assertOk()
             ->assertStatusMessageIs('error');
