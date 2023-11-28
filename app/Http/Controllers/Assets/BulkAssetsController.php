@@ -53,12 +53,7 @@ class BulkAssetsController extends Controller
         $asset_ids = $request->input('ids');
         $assets = Asset::with('assignedTo', 'location', 'model')->find($asset_ids);
 
-        //custom fields logic
-        $asset_custom_field = Asset::with(['model.fieldset.fields', 'model'])->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
-            return $query->where('fieldset_id', '!=', null);
-        })->get();
-
-        $models = $asset_custom_field->unique('model_id');
+        $models = $assets->unique('model_id');
         $modelNames = [];
         foreach($models as $model) {
             $modelNames[] = $model->model->name;
