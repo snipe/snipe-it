@@ -86,6 +86,7 @@ class BulkAssetsController extends Controller
                    
                 case 'restore':
                     $this->authorize('update', Asset::class);
+                    $assets = Asset::withTrashed()->find($asset_ids);
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
                     });
