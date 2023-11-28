@@ -491,5 +491,6 @@ return [
     'upload_error' => 'Error uploading file. Please check that there are no empty rows and that no column names are duplicated.',
     'copy_to_clipboard' => 'Copy to Clipboard',
     'copied' => 'Copied!',
+    'status_compatibility' => 'If assets are already assigned, they cannot be changed to a non-deployable status type and this value change will be skipped.',
 
 ];
