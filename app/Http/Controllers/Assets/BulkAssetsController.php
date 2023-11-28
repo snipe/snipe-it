@@ -41,9 +41,7 @@ class BulkAssetsController extends Controller
     public function edit(Request $request)
     {
         $this->authorize('view', Asset::class);
-
-        \Log::debug('Bulk action was triggered: '.$request->input('bulk_actions'));
-
+        
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -77,7 +75,6 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk-delete')->with('assets', $assets);
                    
                 case 'restore':
-                    \Log::debug('We seem to be bulk restoring');
                     $this->authorize('update', Asset::class);
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
@@ -86,7 +83,6 @@ class BulkAssetsController extends Controller
 
                 case 'edit':
                     $this->authorize('update', Asset::class);
-                    \Log::debug('We seem to be bulk editing');
 
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
@@ -120,23 +116,14 @@ class BulkAssetsController extends Controller
 
        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
 
-        \Log::debug('ALL Custom fields columns - these may or may not apply: ');
-        \Log::debug(print_r($custom_field_columns, true));
      
         if (! $request->filled('ids') || count($request->input('ids')) == 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
-        // $assetsIds = array_keys($request->input('ids'));
-        \Log::debug('Request IDs:');
-        \Log::debug(print_r(array_keys($request->input('ids')), true));
 
         $assets = Asset::whereIn('id', array_keys($request->input('ids')))->get();
 
-        \Log::debug('Affected asset list: ');
-        foreach ($assets as $log_asset) {
-            \Log::debug(' - Asset affected: '.$log_asset->asset_tag);
-        }
 
 
         /**
@@ -221,9 +208,7 @@ class BulkAssetsController extends Controller
                  * fieldset-specific attributes.
                  */
                 if ($request->filled('model_id')) {
-                    \Log::debug('Change the model ID!');
-                    $asset->model_id = Model::find($request->input('model_id'))->id;
-                    \Log::debug('New model ID is:'.$asset->model_id);
+                    $asset->model_id = AssetModel::find($request->input('model_id'))->id;
                 }
 
                 /**
@@ -233,10 +218,7 @@ class BulkAssetsController extends Controller
                  * to someone/something.
                  */
                 if ($request->filled('status_id')) {
-                    \Log::debug('Change the status ID!');
                     $updated_status = Statuslabel::find($request->input('status_id'));
-                    \Log::debug('New status ID is:'.$updated_status->id);
-                    \Log::debug('Status label type is: '.$updated_status->getStatuslabelType());
 
                     // We cannot assign a non-deployable status type if the asset is already assigned.
                     // This could probably be added to a form request.
@@ -296,10 +278,6 @@ class BulkAssetsController extends Controller
 
                 }
 
-                \Log::debug('What changed?');
-                \Log::debug(print_r($changed, true));
-                
-
                 /**
                  * Start all the custom fields shenanigans
                  */
@@ -348,9 +326,6 @@ class BulkAssetsController extends Controller
                 }
 
 
-
-
-                \Log::debug(print_r($this->update_array, true));
                 // Check if it passes validation, and then try to save
                 if (!$asset->update($this->update_array)) {
 
