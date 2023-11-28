@@ -136,13 +136,6 @@ class RotateAppKey extends Command
      */
     protected function writeNewEnvironmentFileWith($key)
     {
-        \Log::debug("here is the key replacement pattern which seems to not be firing: ".$this->keyReplacementPattern());
-        \Log::debug("Here's your current env vile: ".file_get_contents($this->laravel->environmentFilePath()));
-        \Log::debug("And here it is being replaced: ".preg_replace(
-                $this->keyReplacementPattern(),
-                'APP_KEY="'.$key.'"',
-                file_get_contents($this->laravel->environmentFilePath())
-            ));
         file_put_contents($this->laravel->environmentFilePath(), preg_replace(
             $this->keyReplacementPattern(),
             'APP_KEY="'.$key.'"',
