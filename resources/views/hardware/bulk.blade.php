@@ -29,6 +29,10 @@
 
           <div class="callout callout-warning">
             <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
+
+            @if (count($models) > 0)
+              {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }}
+            @endif
           </div>
 
           <!-- Purchase Date -->
@@ -76,7 +80,7 @@
             </label>
             <div class="col-md-7">
               {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'status_id')) }}
-              <p class="help-block">If assets are already assigned, they cannot be changed to a non-deployable status type and this value change will be skipped.</p>
+              <p class="help-block">{{ trans('general.status_compatibility') }}</p>
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -190,8 +194,8 @@
             </div>
           </div>
 
+          @include("models/custom_fields_form_bulk_edit",["models" => $models])
 
-      
           @foreach ($assets as $key => $value)
             <input type="hidden" name="ids[{{ $value }}]" value="1">
           @endforeach
