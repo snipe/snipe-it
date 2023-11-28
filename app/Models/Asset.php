@@ -92,7 +92,7 @@ class Asset extends Depreciable
         'name'            => 'max:255|nullable',
         'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
         'status_id'       => 'required|integer|exists:status_labels,id',
-        'company_id'      => 'integer|nullable',
+        'company_id'      => 'integer|nullable|exists:companies,id',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
         'last_checkout'    => 'date_format:Y-m-d H:i:s|nullable',
@@ -107,6 +107,10 @@ class Asset extends Depreciable
         'asset_eol_date'  => 'date|nullable',
         'eol_explicit'    => 'boolean|nullable',
         'byod'            => 'boolean',
+        'order_number'    => 'max:255|nullable',
+        'notes'           => 'max:65535|nullable',
+        'assigned_to'     => 'nullable|integer|exists:users,id',
+        'requestable'     => 'boolean',
     ];
 
 

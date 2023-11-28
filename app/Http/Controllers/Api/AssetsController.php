@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Http\Requests\StoreAssetRequest;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\DepreciationReportTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -20,11 +20,12 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use Auth;
+use \Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Log;
 use Input;
 use Paginator;
 use Slack;
@@ -533,35 +534,17 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ImageUploadRequest $request)
+    public function store(StoreAssetRequest $request)
     {
-        $this->authorize('create', Asset::class);
-        
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
-        $asset->name                    = $request->get('name');
-        $asset->serial                  = $request->get('serial');
-        $asset->company_id              = Company::getIdForCurrentUser($request->get('company_id'));
-        $asset->model_id                = $request->get('model_id');
-        $asset->order_number            = $request->get('order_number');
-        $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
+        $asset->fill($request->validated());
+
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
         $asset->depreciate              = '0';
-        $asset->status_id               = $request->get('status_id', 0);
-        $asset->warranty_months         = $request->get('warranty_months', null);
-        $asset->purchase_cost           = $request->get('purchase_cost');
-        $asset->asset_eol_date          = $request->get('asset_eol_date', $asset->present()->eol_date());
-        $asset->purchase_date           = $request->get('purchase_date', null);
-        $asset->assigned_to             = $request->get('assigned_to', null);
-        $asset->supplier_id             = $request->get('supplier_id');
-        $asset->requestable             = $request->get('requestable', 0);
-        $asset->rtd_location_id         = $request->get('rtd_location_id', null);
-        $asset->location_id             = $request->get('rtd_location_id', null);
-
 
         /**
         * this is here just legacy reasons. Api\AssetController
@@ -585,22 +568,22 @@ class AssetsController extends Controller
 
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
-                    \Log::debug('Field value for '.$field->db_column.' is null');
+                    Log::debug('Field value for '.$field->db_column.' is null');
                     $field_val = $field->defaultValue($request->get('model_id'));
-                    \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
+                    Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
 
                 // if the field is set to encrypted, make sure we encrypt the value
                 if ($field->field_encrypted == '1') {
-                    \Log::debug('This model field is encrypted in this fieldset.');
+                    Log::debug('This model field is encrypted in this fieldset.');
 
                     if (Gate::allows('admin')) {
 
                         // If input value is null, use custom field's default value
                         if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
+                            $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
                         } else {
-                            $field_val = \Crypt::encrypt($request->input($field->db_column));
+                            $field_val = Crypt::encrypt($request->input($field->db_column));
                         }
                     }
                 }
