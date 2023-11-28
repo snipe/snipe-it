@@ -221,7 +221,7 @@ class BulkAssetsController extends Controller
                  * fieldset-specific attributes.
                  */
                 if ($request->filled('model_id')) {
-                    $asset->model_id = AssetModel::find($request->input('model_id'))->id;
+                    $this->update_array['model_id'] = AssetModel::find($request->input('model_id'))->id;
                 }
 
                 /**
@@ -241,7 +241,7 @@ class BulkAssetsController extends Controller
                         ($asset->assigned_to == '')
                         || ($updated_status->deployable == '1') && ($asset->assetstatus->deployable == '1')
                     ) {
-                        $asset->status_id = $updated_status->id;
+                        $this->update_array['status_id'] = $updated_status->id;
                     }
 
                 }
