@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
@@ -534,17 +535,17 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreAssetRequest $request)
+    public function store(StoreAssetRequest $request): JsonResponse
     {
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
         $asset->fill($request->validated());
 
-        $asset->user_id                 = Auth::id();
-        $asset->archived                = '0';
-        $asset->physical                = '1';
-        $asset->depreciate              = '0';
+        $asset->user_id    = Auth::id();
+        $asset->archived   = '0';
+        $asset->physical   = '1';
+        $asset->depreciate = '0';
 
         /**
         * this is here just legacy reasons. Api\AssetController

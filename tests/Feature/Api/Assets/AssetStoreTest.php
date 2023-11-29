@@ -240,4 +240,30 @@ class AssetStoreTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('success');
     }
+
+    public function testAnAssetCanBeCheckedOutToUserOnStore()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+        $user = User::factory()->createAssets()->create();
+        $userAssigned = User::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi($user)
+            ->postJson(route('api.assets.store'), [
+                'assigned_user' => $userAssigned->id,
+                'assigned_to' => $userAssigned->id, // why are both of these needed? documentation says only assigned_user
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertTrue($asset->adminuser->is($user));
+        $this->assertTrue($asset->assignedTo->is($userAssigned));
+    }
 }
