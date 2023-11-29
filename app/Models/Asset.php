@@ -266,7 +266,7 @@ class Asset extends Depreciable
 
     /**
      * Determines if an asset is available for checkout.
-     * This checks to see if the it's checked out to an invalid (deleted) user
+     * This checks to see if it's checked out to an invalid (deleted) user
      * OR if the assigned_to and deleted_at fields on the asset are empty AND
      * that the status is deployable
      *
@@ -753,7 +753,7 @@ class Asset extends Depreciable
     }
 
     /**
-     * Establishes the asset -> status relationship
+     * Establishes the asset -> license seats relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
