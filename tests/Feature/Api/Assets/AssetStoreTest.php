@@ -72,7 +72,7 @@ class AssetStoreTest extends TestCase
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
         $this->assertEquals('random_string', $asset->asset_tag);
         // @todo: This isn't in the docs but it's in the controller (should it be removed?)
-        $this->assertEquals($userAssigned->id, $asset->assigned_to);
+        $this->assertEquals($userAssigned->id, $asset->assigned_to); //todo: figure this out
         // @todo: This is not in the docs but it's in the controller
         $this->assertTrue($asset->company->is($company));
         // @todo: this is explicitly set 0 in the controller but they docs say they are customizable
