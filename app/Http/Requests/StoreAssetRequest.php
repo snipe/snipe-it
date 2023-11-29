@@ -20,9 +20,18 @@ class StoreAssetRequest extends ImageUploadRequest
 
     public function prepareForValidation(): void
     {
+        if ($this->has('assigned_user')) {
+            $assigned_to = $this->assigned_user;
+        } elseif ($this->has('assigned_location')) {
+            $assigned_to = $this->assigned_location;
+        } elseif ($this->has('assigned_asset')) {
+            $assigned_to = $this->assigned_asset;
+        }
+
         $this->merge([
             'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
             'company_id' => Company::getIdForCurrentUser($this->company_id),
+            'assigned_to' => $assigned_to ?? null,
         ]);
     }
 

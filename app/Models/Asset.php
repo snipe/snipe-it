@@ -109,7 +109,7 @@ class Asset extends Depreciable
         'byod'            => 'nullable|boolean',
         'order_number'    => 'nullable|string|max:191',
         'notes'           => 'nullable|string|max:65535',
-        'assigned_to'     => 'nullable|integer|exists:users,id',
+        'assigned_to'     => 'nullable|integer',
         'requestable'     => 'nullable|boolean',
     ];
 
