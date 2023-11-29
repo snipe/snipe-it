@@ -95,6 +95,66 @@ class AssetStoreTest extends TestCase
         $this->assertEquals(10, $asset->warranty_months);
     }
 
+    public function testAssetEolDateIsCalculatedIfPurchaseDateSet()
+    {
+        $model = AssetModel::factory()->mbp13Model()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'purchase_date' => '2021-01-01',
+                'status_id' => $status->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::first();
+        $this->assertEquals('2024-01-01', $asset->asset_eol_date);
+    }
+
+    public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet()
+    {
+        $model = AssetModel::factory()->mbp13Model()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::first();
+        $this->assertNull($asset->asset_eol_date);
+    }
+
+    public function testAssetEolExplicitIsSetIfAssetEolDateIsSet()
+    {
+        $model = AssetModel::factory()->mbp13Model()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'asset_eol_date' => '2025-01-01',
+                'status_id' => $status->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::first();
+        $this->assertEquals('2025-01-01', $asset->asset_eol_date);
+        $this->assertTrue($asset->eol_explicit);
+    }
+
     public function testAssetGetsAssetTagWithAutoIncrement()
     {
         $model = AssetModel::factory()->create();
