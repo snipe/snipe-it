@@ -95,7 +95,36 @@ class Ldap extends Model
         $connection = self::connectToLdap();
         $ldap_username_field = $settings->ldap_username_field;
         $baseDn = $settings->ldap_basedn;
-        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
+
+        $filterQuery = $settings->ldap_auth_filter_query.$username;
+        $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
+        $filterQuery = "({$filter}({$filterQuery}))";
+
+        \Log::debug('Filter query: '.$filterQuery);
+
+        // With classic LDAP login, we rely on a search query to find the
+        // proper user DN and then bind, rather than handcrafting the userDn.
+        // Therefore we need to do this search early, before calling ldap_bind.
+        // This allows the basedn for the search to be more flexible as people
+        // belonging to different organizational units under the same basedn
+        // will all be found.  The reverse side of this is that the
+        // ldap_auth_filter_query is expected to be unique from there.
+        //
+        // This is also useful for the AD part, as a call to ldap_search is
+        // also needed.
+        if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
+            throw new Exception('Could not search LDAP: ');
+        }
+
+        if (! $info = ldap_get_entries($connection, $results)) {
+            return false;
+        }
+
+        if (! $info["count"] > 1) {
+            throw new Exception('Multiple user founds in LDAP, this is not normal.');
+        }
+
+        $user = $info[0];
 
         if ($settings->is_ad == '1') {
             // Check if they are using the userprincipalname for the username field.
@@ -111,13 +140,9 @@ class Ldap extends Model
                 // Hopefully that should handle all of our use cases, but if not we can backport our old logic.
                 $userDn = ($settings->ad_domain != '') ? $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
             }
+        } else {
+            $userDn = $user["dn"];
         }
-
-        $filterQuery = $settings->ldap_auth_filter_query.$username;
-        $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
-        $filterQuery = "({$filter}({$filterQuery}))";
-
-        \Log::debug('Filter query: '.$filterQuery);
 
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
             \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
@@ -138,18 +163,6 @@ class Ldap extends Model
                 \Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
                 return false;
             }
-        }
-
-        if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
-            throw new Exception('Could not search LDAP: ');
-        }
-
-        if (! $entry = ldap_first_entry($connection, $results)) {
-            return false;
-        }
-
-        if (! $user = ldap_get_attributes($connection, $entry)) {
-            return false;
         }
 
         return array_change_key_case($user);
