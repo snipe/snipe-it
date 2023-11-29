@@ -313,6 +313,6 @@ class AssetStoreTest extends TestCase
         $apiAsset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($apiAsset->adminuser->is($user));
-        $this->assertTrue($apiAsset->assignedAssets()->is($asset)); //todo: figure this out
+        $this->assertTrue($asset->assignedAssets()->first()->is($apiAsset));
     }
 }
