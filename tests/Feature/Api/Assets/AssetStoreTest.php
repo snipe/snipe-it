@@ -40,7 +40,7 @@ class AssetStoreTest extends TestCase
                 'archived' => true,
                 'asset_eol_date' => '2024-06-02',
                 'asset_tag' => 'random_string',
-                'assigned_to' => $userAssigned->id,
+                'assigned_user' => $userAssigned->id, // assigned_to is set in the request, assigned_to isn't set through the api request
                 'company_id' => $company->id,
                 'depreciate' => true,
                 'last_audit_date' => '2023-09-03',
@@ -72,7 +72,7 @@ class AssetStoreTest extends TestCase
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
         $this->assertEquals('random_string', $asset->asset_tag);
         // @todo: This isn't in the docs but it's in the controller (should it be removed?)
-        $this->assertEquals($userAssigned->id, $asset->assigned_to); //todo: figure this out
+        $this->assertEquals($userAssigned->id, $asset->assigned_to);
         // @todo: This is not in the docs but it's in the controller
         $this->assertTrue($asset->company->is($company));
         // @todo: this is explicitly set 0 in the controller but they docs say they are customizable
@@ -313,6 +313,7 @@ class AssetStoreTest extends TestCase
         $apiAsset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($apiAsset->adminuser->is($user));
+        // I think this makes sense, but open to a sanity check
         $this->assertTrue($asset->assignedAssets()->first()->is($apiAsset));
     }
 }
