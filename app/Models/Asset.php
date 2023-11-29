@@ -922,6 +922,27 @@ class Asset extends Depreciable
     }
 
     /**
+     * -----------------------------------------------
+     * BEGIN MUTATORS
+     * -----------------------------------------------
+     **/
+
+    /**
+     * This sets the requestable to a boolean 0 or 1. This accounts for forms or API calls that
+     * explicitly pass the requestable field but it has a null or empty value.
+     *
+     * This will also correctly parse a 1/0 if "true"/"false" is passed.
+     *
+     * @param $value
+     * @return void
+     */
+    public function setRequestableAttribute($value)
+    {
+        $this->attributes['requestable'] = (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+
+    /**
     * -----------------------------------------------
     * BEGIN QUERY SCOPES
     * -----------------------------------------------
