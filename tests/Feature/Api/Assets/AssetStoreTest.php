@@ -102,16 +102,17 @@ class AssetStoreTest extends TestCase
 
         $this->settings->enableAutoIncrement();
 
-        $this->actingAsForApi(User::factory()->superuser()->create())
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'model_id' => $model->id,
                 'purchase_date' => '2021-01-01',
                 'status_id' => $status->id,
             ])
             ->assertOk()
-            ->assertStatusMessageIs('success');
+            ->assertStatusMessageIs('success')
+            ->json();
 
-        $asset = Asset::first();
+        $asset = Asset::find($response['payload']['id']);
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
     }
 
@@ -122,15 +123,16 @@ class AssetStoreTest extends TestCase
 
         $this->settings->enableAutoIncrement();
 
-        $this->actingAsForApi(User::factory()->superuser()->create())
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'model_id' => $model->id,
                 'status_id' => $status->id,
             ])
             ->assertOk()
-            ->assertStatusMessageIs('success');
+            ->assertStatusMessageIs('success')
+            ->json();
 
-        $asset = Asset::first();
+        $asset = Asset::find($response['payload']['id']);
         $this->assertNull($asset->asset_eol_date);
     }
 
@@ -141,16 +143,17 @@ class AssetStoreTest extends TestCase
 
         $this->settings->enableAutoIncrement();
 
-        $this->actingAsForApi(User::factory()->superuser()->create())
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'model_id' => $model->id,
                 'asset_eol_date' => '2025-01-01',
                 'status_id' => $status->id,
             ])
             ->assertOk()
-            ->assertStatusMessageIs('success');
+            ->assertStatusMessageIs('success')
+            ->json();
 
-        $asset = Asset::first();
+        $asset = Asset::find($response['payload']['id']);
         $this->assertEquals('2025-01-01', $asset->asset_eol_date);
         $this->assertTrue($asset->eol_explicit);
     }
@@ -374,6 +377,6 @@ class AssetStoreTest extends TestCase
 
         $this->assertTrue($apiAsset->adminuser->is($user));
         // I think this makes sense, but open to a sanity check
-        $this->assertTrue($asset->assignedAssets()->first()->is($apiAsset));
+        $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));
     }
 }
