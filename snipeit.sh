@@ -233,6 +233,9 @@ install_snipeit () {
   echo -e "\n\n* Cloning Snipe-IT from github to the web directory."
   log "git clone https://github.com/snipe/snipe-it $APP_PATH" & pid=$!
   progress
+  pushd $APP_PATH
+  git checkout jerm/snipeit-sh
+  popd
 
   echo "* Configuring .env file."
   cp "$APP_PATH/.env.example" "$APP_PATH/.env"
@@ -544,12 +547,17 @@ case $distro in
         set_dbpass
         tzone=$(cat /etc/timezone)
 
+	echo "* Set up Ondrej PHP repository"
+	echo "# Odrej PHP repo for ability to choose non-distro PHP versions" > /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+        
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -584,12 +592,16 @@ case $distro in
         set_dbpass
         tzone=$(cat /etc/timezone)
 
+	echo "* Set up Ondrej PHP repository"
+	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.28.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -641,13 +653,15 @@ Package: *
 Pin: release n=buster
 Pin-Priority: 750
 EOL
+	echo "* Set up Ondrej PHP repository"
+	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
 
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.2 php7.2 php7.2-mcrypt php7.2-curl php7.2-mysql php7.2-gd php7.2-ldap php7.2-zip php7.2-mbstring php7.2-xml php7.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -918,8 +932,8 @@ echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
 echo ""
 echo "* Cleaning up..."
-rm -f snipeit.sh
-rm -f install.sh
+# rm -f snipeit.sh
+# rm -f install.sh
 echo "* Installation log located in $APP_LOG."
 echo "* Finished!"
 sleep 1
