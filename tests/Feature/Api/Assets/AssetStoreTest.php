@@ -39,9 +39,8 @@ class AssetStoreTest extends TestCase
             ->postJson(route('api.assets.store'), [
                 'asset_eol_date' => '2024-06-02',
                 'asset_tag' => 'random_string',
-                'assigned_user' => $userAssigned->id, // assigned_to is set in the request, assigned_to isn't set through the api request
+                'assigned_user' => $userAssigned->id,
                 'company_id' => $company->id,
-                //'depreciate' => true, // set explicitly in controller
                 'last_audit_date' => '2023-09-03',
                 'location_id' => $location->id,
                 'model_id' => $model->id,
@@ -56,7 +55,6 @@ class AssetStoreTest extends TestCase
                 'status_id' => $status->id,
                 'supplier_id' => $supplier->id,
                 'warranty_months' => 10,
-                //'physical' => true, // set explicitly in controller
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -66,17 +64,13 @@ class AssetStoreTest extends TestCase
 
         $this->assertTrue($asset->adminuser->is($user));
 
-        // @todo: This isn't in the docs but it's in the controller
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
         $this->assertEquals('random_string', $asset->asset_tag);
-        // @todo: This isn't in the docs but it's in the controller (should it be removed?)
         $this->assertEquals($userAssigned->id, $asset->assigned_to);
-        // @todo: This is not in the docs but it's in the controller (company_id)
         $this->assertTrue($asset->company->is($company));
-        // @todo: this is in the docs but not the controller
+        // I don't see this on the GUI side either, but it's in the docs so I'm guessing that's a mistake? It wasn't in the controller.
         // $this->assertEquals('2023-09-03', $asset->last_audit_date);
-        // @todo: this is set to rtd_location_id in the controller but customizable in the docs
-        // $this->assertTrue($asset->location->is($location));
+        $this->assertTrue($asset->location->is($location));
         $this->assertTrue($asset->model->is($model));
         $this->assertEquals('A New Asset', $asset->name);
         $this->assertEquals('Some notes', $asset->notes);
