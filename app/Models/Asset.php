@@ -70,6 +70,8 @@ class Asset extends Depreciable
     protected $injectUniqueIdentifier = true;
 
     protected $casts = [
+        'archived' => 'boolean',
+        'physical' => 'boolean',
         'purchase_date' => 'date',
         'eol_explicit' => 'boolean',
         'last_checkout' => 'datetime',
@@ -94,7 +96,7 @@ class Asset extends Depreciable
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'nullable|integer|exists:companies,id',
         'warranty_months' => 'nullable|numeric|digits_between:0,240',
-        'physical'        => 'nullable|numeric|max:1',
+        'physical'        => 'nullable|boolean',
         'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
         'expected_checkin' => 'nullable|date',
         'location_id'     => 'nullable|exists:locations,id',
@@ -469,6 +471,16 @@ class Asset extends Depreciable
     public function checkedOutToUser()
     {
       return $this->assignedType() === self::USER;
+    }
+
+    public function checkedOutToLocation()
+    {
+      return $this->assignedType() === self::LOCATION;
+    }
+
+    public function checkedOutToAsset()
+    {
+      return $this->assignedType() === self::ASSET;
     }
 
     /**

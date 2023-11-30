@@ -533,7 +533,6 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreAssetRequest $request): JsonResponse
     {
@@ -546,7 +545,7 @@ class AssetsController extends Controller
         // @todo: verify eol is working as expected - move to request? or do I want this at all?
         // might just remove this and then use the method from here https://github.com/snipe/snipe-it/pull/13846
         $asset->asset_eol_date = $request->validated()['asset_eol_date'] ?? $asset->present()->eol_date(); // so this isn't really necessary, because it's happening on the observer - but that might change?
-        $asset->archived       = '0';
+        $asset->archived       = false;
         $asset->physical       = '1';
         $asset->depreciate     = '0';
 

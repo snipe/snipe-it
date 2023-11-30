@@ -37,12 +37,12 @@ class AssetStoreTest extends TestCase
 
         $response = $this->actingAsForApi($user)
             ->postJson(route('api.assets.store'), [
-                'archived' => true,
+                'archived' => false, // set explicitly in controller
                 'asset_eol_date' => '2024-06-02',
                 'asset_tag' => 'random_string',
                 'assigned_user' => $userAssigned->id, // assigned_to is set in the request, assigned_to isn't set through the api request
                 'company_id' => $company->id,
-                'depreciate' => true,
+                //'depreciate' => true, // set explicitly in controller
                 'last_audit_date' => '2023-09-03',
                 'location_id' => $location->id,
                 'model_id' => $model->id,
@@ -57,6 +57,7 @@ class AssetStoreTest extends TestCase
                 'status_id' => $status->id,
                 'supplier_id' => $supplier->id,
                 'warranty_months' => 10,
+                //'physical' => true, // set explicitly in controller
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -67,13 +68,14 @@ class AssetStoreTest extends TestCase
         $this->assertTrue($asset->adminuser->is($user));
 
         // @todo: this is explicitly set 0 in the controller but they docs say they are customizable
-        // $this->assertTrue($asset->archived);
+        $this->assertFalse($asset->archived);
+        $this->assertTrue($asset->physical);
         // @todo: This isn't in the docs but it's in the controller
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
         $this->assertEquals('random_string', $asset->asset_tag);
         // @todo: This isn't in the docs but it's in the controller (should it be removed?)
         $this->assertEquals($userAssigned->id, $asset->assigned_to);
-        // @todo: This is not in the docs but it's in the controller
+        // @todo: This is not in the docs but it's in the controller (company_id)
         $this->assertTrue($asset->company->is($company));
         // @todo: this is explicitly set 0 in the controller but they docs say they are customizable
         // $this->assertTrue($asset->depreciate);
@@ -136,7 +138,7 @@ class AssetStoreTest extends TestCase
         $this->assertNull($asset->asset_eol_date);
     }
 
-    public function testAssetEolExplicitIsSetIfAssetEolDateIsSet()
+    public function testAssetEolExplicitIsSetIfAssetEolDateIsExplicitlySet()
     {
         $model = AssetModel::factory()->mbp13Model()->create();
         $status = Statuslabel::factory()->create();
@@ -164,14 +166,17 @@ class AssetStoreTest extends TestCase
         $status = Statuslabel::factory()->create();
 
         $this->settings->enableAutoIncrement();
+
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'model_id' => $model->id,
                 'status_id' => $status->id,
             ])
             ->assertOk()
-            ->assertStatusMessageIs('success');
-        $asset = Asset::find($response->json()['payload']['id']);
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $asset = Asset::find($response['payload']['id']);
         $this->assertNotNull($asset->asset_tag);
     }
 
@@ -326,6 +331,7 @@ class AssetStoreTest extends TestCase
         $asset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($asset->adminuser->is($user));
+        $this->assertTrue($asset->checkedOutToUser());
         $this->assertTrue($asset->assignedTo->is($userAssigned));
     }
 
@@ -351,6 +357,7 @@ class AssetStoreTest extends TestCase
         $asset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($asset->adminuser->is($user));
+        $this->assertTrue($asset->checkedOutToLocation());
         $this->assertTrue($asset->location->is($location));
     }
 
@@ -376,6 +383,7 @@ class AssetStoreTest extends TestCase
         $apiAsset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($apiAsset->adminuser->is($user));
+        $this->assertTrue($apiAsset->checkedOutToAsset());
         // I think this makes sense, but open to a sanity check
         $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));
     }
