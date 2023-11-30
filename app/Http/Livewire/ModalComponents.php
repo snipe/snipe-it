@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 use App\Models\Setting;
 use Livewire\Component;
+use App\Http\Requests\Request;
 
 
 class ModalComponents extends Component
@@ -29,6 +30,11 @@ class ModalComponents extends Component
     public function continueEdit(){
             $this->save();
             return true;
+    }
+    public function multiCompanyAlert() {
+        if($this->multiCompany) {
+            return session()->flash('warning', "NOTE: One or more of the assets you are editing belong to different companies.");
+        }
     }
 
     public function openModal(){
