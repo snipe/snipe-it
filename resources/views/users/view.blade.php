@@ -727,7 +727,7 @@
               <thead>
                 <tr>
                   <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th>{{ trans('admin/hardware/form.serial') }}</th>
+                  <th>{{ trans('admin/licenses/form.license_key') }}</th>
                   <th data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th>{{ trans('admin/licenses/form.purchase_order') }}</th>
                   <th>{{ trans('general.order_number') }}</th>
