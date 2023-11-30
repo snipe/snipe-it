@@ -73,8 +73,6 @@ class AssetStoreTest extends TestCase
         $this->assertEquals($userAssigned->id, $asset->assigned_to);
         // @todo: This is not in the docs but it's in the controller (company_id)
         $this->assertTrue($asset->company->is($company));
-        // @todo: this is explicitly set 0 in the controller but they docs say they are customizable
-        // $this->assertTrue($asset->depreciate);
         // @todo: this is in the docs but not the controller
         // $this->assertEquals('2023-09-03', $asset->last_audit_date);
         // @todo: this is set to rtd_location_id in the controller but customizable in the docs
