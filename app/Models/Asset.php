@@ -466,19 +466,18 @@ class Asset extends Depreciable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return bool
      */
-    public function checkedOutToUser()
+    public function checkedOutToUser(): bool
     {
       return $this->assignedType() === self::USER;
     }
 
-    public function checkedOutToLocation()
+    public function checkedOutToLocation(): bool
     {
       return $this->assignedType() === self::LOCATION;
     }
 
-    public function checkedOutToAsset()
+    public function checkedOutToAsset(): bool
     {
       return $this->assignedType() === self::ASSET;
     }
