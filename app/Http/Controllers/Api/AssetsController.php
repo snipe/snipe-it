@@ -540,11 +540,7 @@ class AssetsController extends Controller
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
         $asset->fill($request->validated());
-
         $asset->user_id    = Auth::id();
-        // @todo: verify eol is working as expected - move to request? or do I want this at all?
-        // might just remove this and then use the method from here https://github.com/snipe/snipe-it/pull/13846
-        $asset->asset_eol_date = $request->validated()['asset_eol_date'] ?? $asset->present()->eol_date(); // so this isn't really necessary, because it's happening on the observer - but that might change?
 
         /**
         * this is here just legacy reasons. Api\AssetController
