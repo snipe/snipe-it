@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Upravit umístění',
     'asset_location_update_default_current' => 'Aktualizovat výchozí umístění A aktuální umístění',
     'asset_location_update_default' => 'Aktualizovat pouze výchozí umístění',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Tento majetek nelze vyskladnit.',
     'asset_deployable' => 'Tento majetek lze vyskladnit.',
     'processing_spinner' => 'Zpracovávání... (S velkými soubory to může chvíli trvat)',

@@ -7,6 +7,6 @@ return array(
     'api_base_url' => 'Il tuo URL di base API è:',
     'api_base_url_endpoint' => '/&lt;endpoint&gt;',
     'api_token_expiration_time' => 'I token API scadranno fra:',
-    'api_reference' => 'Controlla il <a href="https://snipe-it.readme.io/reference" target="_blank">riferimento API</a> per
+    'api_reference' => 'Controlla la <a href="https://snipe-it.readme.io/reference" target="_blank">Guida di Riferimento delle API</a> per
                     trovare gli endpoint API specifici e documentazione aggiuntiva.',
 );

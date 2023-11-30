@@ -11,6 +11,6 @@
         'calibration'        => 'Kalibrasyon',
         'software_support'   => 'Yazılım Desteği',
         'hardware_support'   => 'Donanım Desteği',
-        'configuration_change'   => 'Configuration Change',
+        'configuration_change'   => 'Yapılandırma Değişikliği',
         'pat_test'           => 'PAT Test',
     ];

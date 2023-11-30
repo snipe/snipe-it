@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'Kullanıcı bir öğeyi kabul etti',
+    'acceptance_asset_declined' => 'Kullanıcı bir öğeyi reddetti',
     'a_user_canceled' => 'Bir kullanıcı web sitede öğe talebinden vazgeçti',
     'a_user_requested' => 'Bir kullanıcı websitede bir öğe talebinde bulundu',
     'accessory_name' => 'Aksesuar Adı:',
@@ -75,7 +75,7 @@ return [
     'your_credentials' => 'Snipe-IT Bilgileriniz',
     'Accessory_Checkin_Notification' => 'Aksesuar Zimmet Kabul',
     'Asset_Checkin_Notification' => 'Varlık Zimmet Kabul',
-    'Asset_Checkout_Notification' => 'Asset checked out',
+    'Asset_Checkout_Notification' => 'Varlık teslim alındı',
     'License_Checkin_Notification' => 'Lisans Zimmet Kabul',
     'Expected_Checkin_Report' => 'Beklenen varlık iade raporu',
     'Expected_Checkin_Notification' => 'Hatırlatma ::name Son seçim zamanı yaklaşıyor',

@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Tillgången skapades inte, försök igen. :(',
         'success' 		=> 'Asset skapades framgångsrikt. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
@@ -50,7 +51,7 @@ return [
         'success'               => 'Din fil har importerats',
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Den valda filen saknas',
         'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
         'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
     ],

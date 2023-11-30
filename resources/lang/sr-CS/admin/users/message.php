@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Korisnik već postoji!',
     'user_not_found'            => 'Korisnik ne postoji.',
     'user_login_required'       => 'Polje za prijavu je obavezno',
+    'user_has_no_assets_assigned' => 'Trenutno nema imovine zadužene korisniku.',
     'user_password_required'    => 'Lozinka je obavezna.',
     'insufficient_permissions'  => 'Insufficient Permissions.',
     'user_deleted_warning'      => 'Ovaj je korisnik izbrisan. Morate vratiti tog korisnika da biste ga uredili ili mu dodeliti novi resurs.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Odabranim korisnicima koji su aktivirani i imaju važeće adrese e-pošte poslat je link za resetovanje lozinke.',
     'password_reset_sent'       => 'Link za resetovanje lozinke je poslat na :email!',
     'user_has_no_email'         => 'Ovaj korisnik nema adresu e-pošte u svom profilu.',
-    'user_has_no_assets_assigned'   => 'Ovaj korisnik nema nijednu zaduženu imovinu',
+    'log_record_not_found'        => 'Nije bilo moguće pronaći odgovarajući zapis u dnevniku za ovog korisnika.',
 
 
     'success' => array(

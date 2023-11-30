@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Varlık Bakım Türü',
         'title'                  => 'Başlık',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Başlangıç Tarihi',
+        'completion_date'        => 'Bitiş tarihi',
         'cost'                   => 'Ücret',
         'is_warranty'            => 'Garanti İyileştirme',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Demirbaş Bakım Zamanı (gün)',
         'notes'                  => 'Notlar',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Varlık Bakımını Güncelle',
+        'create'                 => 'Varlık Bakımı Oluştur'
     ];

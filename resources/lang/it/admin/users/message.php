@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Utente già esistente!',
     'user_not_found'            => 'L\'utente non esiste.',
     'user_login_required'       => 'È necessario il campo login',
+    'user_has_no_assets_assigned' => 'Nessun bene assegnato all\'utente.',
     'user_password_required'    => 'È richiesta la password.',
     'insufficient_permissions'  => 'Permessi Insufficienti.',
     'user_deleted_warning'      => 'Questo utente è stato eliminato. Si dovrà ripristinare questo utente per modificare o assegnare nuovi beni.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'È stato inviato un link agli utenti selezionati che sono attivati e hanno un indirizzo email valido, per reimpostare la password.',
     'password_reset_sent'       => 'Un link per reimpostare la password è stato inviato a :email!',
     'user_has_no_email'         => 'Questo utente non ha un indirizzo email nel suo profilo.',
-    'user_has_no_assets_assigned'   => 'Questo utente non ha nessun bene assegnato',
+    'log_record_not_found'        => 'Non ho trovato nessun log per questo utente.',
 
 
     'success' => array(

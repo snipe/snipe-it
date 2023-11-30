@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Izmeni lokaciju imovine',
     'asset_location_update_default_current' => 'Izmeni predefinisanu i stvarnu lokaciju',
     'asset_location_update_default' => 'Izmeni samo predefinisanu lokaciju',
+    'asset_location_update_actual' => 'Izmeni samo stvarnu lokaciju',
     'asset_not_deployable' => 'Status imovine je nezaduživo. Ova imovina se ne može zadužiti.',
     'asset_deployable' => 'Status imovine je zaduživo. Ova imovina se može zadužiti.',
     'processing_spinner' => 'Obrađivanje... (Ovo bi moglo da potraje u slučaju velikih datoteka)',

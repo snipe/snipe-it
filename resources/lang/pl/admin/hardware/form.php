@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Zaktualizuj lokalizację aktywa',
     'asset_location_update_default_current' => 'Zaktualizuj domyślną i aktualną lokalizację',
     'asset_location_update_default' => 'Zaktualizuj tylko domyślną lokalizację',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Ten status oznacza brak możliwości wdrożenia. Ten zasób nie może zostać przypisany.',
     'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
     'processing_spinner' => 'Przetwarzanie... (To może zająć trochę czasu dla dużych plików)',

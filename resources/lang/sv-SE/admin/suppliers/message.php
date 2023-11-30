@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Tog bort leverantör',
     'does_not_exist' => 'Leverantören finns inte.',
 
 

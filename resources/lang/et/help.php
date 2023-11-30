@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
 
     'depreciations' => 'Sa saad seadistada vahendite amortisatsiooni, et neid amortiseeritakse lineaarse amortisatsiooni alusel.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

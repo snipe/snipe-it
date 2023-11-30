@@ -3,7 +3,7 @@
 return [
 
     'update' => [
-        'error'                 => 'An error has occurred while updating. ',
+        'error'                 => 'កំហុសបានកើតឡើងខណៈពេលកំពុងធ្វើបច្ចុប្បន្នភាព។ ',
         'success'               => 'Settings updated successfully.',
     ],
     'backup' => [

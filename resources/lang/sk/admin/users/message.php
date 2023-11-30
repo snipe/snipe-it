@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Používateľ už existuje!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Prihlasovacie meno je povinné',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Heslo je povinné.',
     'insufficient_permissions'  => 'Nedostatočné oprávnenia.',
     'user_deleted_warning'      => 'Tento používateľ bol odstránený. Používateľa musíte obnoviť, ak ho chcete upraviť alebo mu priradiť majetok.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Vybraní používatelia sú aktivovaný. Na ich adresu bola zaslaný okaz na resetovanie hesla.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

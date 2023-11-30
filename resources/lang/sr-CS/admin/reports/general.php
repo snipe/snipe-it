@@ -6,5 +6,12 @@ return [
     'send_reminder' => 'Pošalji podsetnik',
     'reminder_sent' => 'Podsetnik je poslat',
     'acceptance_deleted' => 'Zahtev za prihvatanje je izbrisan',
-    'acceptance_request' => 'Zahtev za prihvatanje'
+    'acceptance_request' => 'Zahtev za prihvatanje',
+    'custom_export' => [
+        'user_address' => 'Adresa korisnika',
+        'user_city' => 'Grad korisnika',
+        'user_state' => 'Pokrajina korisnika',
+        'user_country' => 'Država korisnika',
+        'user_zip' => 'Poštanski broj korisnika'
+    ]
 ];

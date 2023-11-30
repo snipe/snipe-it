@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Imovina, resurs nije kreiran, pokušajte ponovo. :(',
         'success' 		=> 'Imovina, resurs uspešno kreiran. :)',
+        'success_linked' => 'Imovina sa oznakom :tag je uspešno napravljena. <strong><a href=":link" style="color: white;">Kliknite ovde za pregled</a></strong>.',
     ],
 
     'update' => [

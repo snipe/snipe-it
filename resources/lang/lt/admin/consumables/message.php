@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Ši suvartojama įranga nebuvo išimta, prašome bandykite dar kartą',
         'success' 		=> 'Suvartojam įranga sėkminga išimta.',
         'user_does_not_exist' => 'Šis vartotojas neteisingas. Prašome bandykite dar kartą.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Nepakanka nenaudojamos įrangos šiai registracijai. Patikrinkite likučius. ',
     ),
 
     'checkin' => array(

@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Majetok nebol vytvorený, prosím skúste znovu. :(',
         'success' 		=> 'Majetok bol úspešne vytvorený. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

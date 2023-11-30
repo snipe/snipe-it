@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Materiały eksploatacyjne są przedmiotami jednorazowego użytku, które będą wykorzystane w miarę upływu czasu. Przykładem będzie tusz do drukarki lub papier do kopiarek.',
 
     'depreciations' => 'Możesz ustawić amortyzację środków trwałych na podstawie amortyzacji aktywów w oparciu o metodę liniową.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

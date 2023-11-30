@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Příslušenství [:id] neexistuje.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
     'create' => array(
@@ -24,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
         'success' 		=> 'Příslušenství úspěšně předáno.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Příslušenství nelze vydat. Zkontrolujte skladové zásoby.',
         'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.'
     ),
 

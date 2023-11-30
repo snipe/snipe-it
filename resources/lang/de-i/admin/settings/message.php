@@ -35,12 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => ':app Testnachricht wird gesendet ...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'Deine :webhook_name Integration funktioniert!',
         'success_pt1' => 'Erfolgreich! Überprüfe den ',
         'success_pt2' => ' Kanal für deine Testnachricht und klicke unten auf SPEICHERN, um die Einstellungen zu sichern.',
         '500' => '500 Server Fehler.',
         'error' => 'Etwas ist schiefgelaufen. :app antwortete mit: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'FEHLER: 301/302 :endpoint gibt eine Umleitung zurück. Aus Sicherheitsgründen folgen wir keine Umleitungen. Bitte verwende den aktuellen Endpunkt.',
         'error_misc' => 'Etwas ist schiefgelaufen! :( ',
     ]
 ];

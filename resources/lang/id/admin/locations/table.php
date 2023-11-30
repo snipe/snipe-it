@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Cetak Semua Ditugaskan',
     'name'                      => 'Nama lokasi',
     'address'                   => 'Alamat',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Kode Pos',
     'locations'                 => 'Lokasi',
     'parent'                    => 'Induk',

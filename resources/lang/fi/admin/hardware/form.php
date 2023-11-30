@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Päivitä sijainti',
     'asset_location_update_default_current' => 'Päivitä oletussijainti ja todellinen sijainti',
     'asset_location_update_default' => 'Päivitä vain oletussijainti',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Laite ei ole käyttöönotettavissa. Laitetta ei voida luovuttaa.',
     'asset_deployable' => 'Laite on käyttöönotettavissa. Laite voidaan luovuttaa.',
     'processing_spinner' => 'Käsitellään... (Tämä saattaa kestää jonkin aikaa suurien tiedostojen kanssa)',

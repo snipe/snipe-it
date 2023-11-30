@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'ஒப்படைக்கப்பட்ட அனைத்தையும் அச்சிடு',
     'name'                      => 'இருப்பிடம் பெயர்',
     'address'                   => 'முகவரி',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'அஞ்சல் குறியீடு',
     'locations'                 => 'இடங்கள்',
     'parent'                    => 'பெற்றோர்',

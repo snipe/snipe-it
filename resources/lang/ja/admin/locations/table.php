@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => '割り当て先をすべて印刷',
     'name'                      => 'ロケーション名',
     'address'                   => '住所',
+    'address2'                   => 'Address Line 2',
     'zip'                       => '郵便番号',
     'locations'                 => 'ロケーション',
     'parent'                    => '上位',

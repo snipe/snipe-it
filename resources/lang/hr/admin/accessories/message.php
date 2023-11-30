@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Dodatna oprema [:id] ne postoji.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Ovaj pribor trenutačno ima: brojčanu stavku označenu korisnicima. Provjerite pribor i pokušajte ponovo.',
 
     'create' => array(

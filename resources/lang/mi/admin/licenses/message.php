@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Kei te tirohia tenei raihana ki tetahi kaiwhakamahi me te kore e taea te muku. Titirohia te raihana i te tuatahi, ka ngana ki te muku ano.',
     'select_asset_or_person' => 'Me whiriwhiri koe i tetahi rawa, i tetahi kaiwhakamahi ranei, engari ehara i te mea e rua.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'I puta he take hei tirotiro i te raihana. Tena ngana ano.',
-        'success' => 'I tohua te raihana'
+        'success' => 'I tohua te raihana',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

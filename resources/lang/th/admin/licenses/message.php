@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'ขณะนี้ใบอนุญาตนี้ออกให้แก่ผู้ใช้แล้วและไม่สามารถลบได้ โปรดตรวจสอบใบอนุญาตเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
     'select_asset_or_person' => 'คุณต้องเลือกเนื้อหาหรือผู้ใช้ แต่ไม่ใช่ทั้งสองอย่าง',
     'not_found' => 'ไม่พบใบอนุญาต',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'มีปัญหาในการตรวจสอบใบอนุญาต กรุณาลองอีกครั้ง.',
-        'success' => 'ออกใบอนุญาตแล้ว'
+        'success' => 'ออกใบอนุญาตแล้ว',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

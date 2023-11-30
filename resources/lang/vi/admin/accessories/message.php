@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Phụ kiện [:id] Không tồn tại.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Phụ kiện này hiện có :count cái đã giao cho người dùng. Bạn hãy nhập lại vào trong phần phụ kiện và thử lại lần nữa. ',
 
     'create' => array(

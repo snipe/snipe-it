@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Användaren existerar redan!',
     'user_not_found'            => 'Användaren finns inte.',
     'user_login_required'       => 'Inloggningsfältet krävs',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Lösenordet krävs.',
     'insufficient_permissions'  => 'Otillräckliga tillstånd.',
     'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera dem eller tilldela dem nya tillgångar.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
     'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
     'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
-    'user_has_no_assets_assigned'   => 'Den här användaren har inga tilldelade tillgångar',
+    'log_record_not_found'        => 'Det gick inte att hitta en matchande loggpost för den här användaren.',
 
 
     'success' => array(

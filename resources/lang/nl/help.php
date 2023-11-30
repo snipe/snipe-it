@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Meer Info',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Als u dit selectievakje aanvinkt, wordt het asset record bewerkt om deze nieuwe locatie te weerspiegelen. Als u het uitgevinkt laat staan ziet u de locatie in het audit logboek.<br><br>Let op dat als dit asset is uitgecheckt, dan zal de locatie van de persoon, product of locatie waar het uitgecheckt is niet veranderen.',
 
     'assets' => 'Assets bestaan uit items die met een serienummer of identificatiesticker geregistreerd zijn. Dit zijn over het algemeen de objecten met een hogere waarde waarbij identificatie belangrijk is.',
 
@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Verbruiksartikelen zijn alles wat gekocht is en wat na verloop van tijd opraakt. Bijvoorbeeld printer inkt of kopieer papier.',
 
     'depreciations' => 'Je kunt de asset-afschrijving instellen om assets af te schrijven op basis van lineaire afschrijving.',
-
+    
+    'empty_file'    => 'De importeur detecteert dat dit bestand leeg is.'
 ];

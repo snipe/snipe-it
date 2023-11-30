@@ -10,6 +10,7 @@ return array(
     'assoc_users'	 => 'این مجوز در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا مجوز در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
     'select_asset_or_person' => 'شما باید دارایی یا یک کاربر را انتخاب کنید، اما نه هر دو.',
     'not_found' => 'فایل یافت نشد',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -42,7 +43,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'بود یک موضوع چک کردن مجوز وجود دارد. لطفا دوباره تلاش کنید.',
-        'success' => 'مجوز خارج بررسی شد موفقیت'
+        'success' => 'مجوز خارج بررسی شد موفقیت',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

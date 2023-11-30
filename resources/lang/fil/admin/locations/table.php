@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ang Pangalan ng Lokasyon',
     'address'                   => 'Ang Address',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Ang Postal Code',
     'locations'                 => 'Ang mga Lokasyon',
     'parent'                    => 'Ang Pinagmulan',

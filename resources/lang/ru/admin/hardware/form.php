@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Обновить местоположение актива',
     'asset_location_update_default_current' => 'Обновить местоположение по умолчанию и фактическое местоположение',
     'asset_location_update_default' => 'Обновить только местоположение по умолчанию',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Этот статус актива не подлежит развертыванию. Этот актив не может быть проверен.',
     'asset_deployable' => 'Этот статус доступен для развертывания. Этот актив может быть привязан.',
     'processing_spinner' => 'Обработка... (Это может занять некоторое время на больших файлах)',

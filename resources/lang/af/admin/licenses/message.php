@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Hierdie lisensie word tans na \'n gebruiker nagegaan en kan nie uitgevee word nie. Gaan asseblief die lisensie eers in, en probeer dan weer uitvee.',
     'select_asset_or_person' => 'Jy moet \'n bate of \'n gebruiker kies, maar nie albei nie.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Daar was \'n probleem om die lisensie te kontroleer. Probeer asseblief weer.',
-        'success' => 'Die lisensie is suksesvol nagegaan'
+        'success' => 'Die lisensie is suksesvol nagegaan',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

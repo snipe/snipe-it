@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Uuenda vahendi asukohta',
     'asset_location_update_default_current' => 'Uuenda vaikimisi asukohta ja tegelikku asukohta',
     'asset_location_update_default' => 'Uuenda ainult vaikimisi asukohta',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Selle vahendi olek ei luba seda väljastada.',
     'asset_deployable' => 'Selle vahendi olek lubab seda väljastada.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',

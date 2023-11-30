@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Enw Lleoliad',
     'address'                   => 'Cyfeiriad',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Côd Post',
     'locations'                 => 'Lleoliadau',
     'parent'                    => 'Rhiant',

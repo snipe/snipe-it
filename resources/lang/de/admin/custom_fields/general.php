@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Neues benutzerdefiniertes Feld',
     'create_field_title' => 'Neues benutzerdefiniertes Feld erstellen',
     'value_encrypted'      	        => 'Der Wert dieses Feldes ist in der Datenbank verschlüsselt. Nur Benutzer mit Administratorrechten können den entschlüsselten Wert anzeigen',
-    'show_in_email'     => 'Feld miteinbeziehen bei Herausgabe-Emails an die Benutzer? Verschlüsselte Felder können nicht miteinbezogen werden.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'In E-Mails mit einbeziehen.',
     'help_text' => 'Hilfetext',
     'help_text_description' => 'Dies ist ein optionaler Text, der unter den Formularelementen erscheint, während eine Datei bearbeitet wird, um Kontext für das Feld bereitzustellen.',
     'about_custom_fields_title' => 'Über benutzerdefinierte Felder',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Für Benutzer sichtbar',
     'auto_add_to_fieldsets' => 'Automatisch zu jedem neuen Feldsatz hinzufügen',
     'add_to_preexisting_fieldsets' => 'Zu allen existierenden Feldsätzen hinzufügen',
-    'show_in_listview' => 'Standardmäßig in Listenansichten anzeigen. Berechtigte Benutzer können weiterhin über die Spaltenauswahl ein-/ausblenden.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'In Listen anzeigen',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

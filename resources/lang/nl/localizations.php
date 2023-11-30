@@ -257,7 +257,7 @@ return [
         'UK'=>'Schotland',
         'SB'=>'Solomon eilanden',
         'SC'=>'Seychellen',
-        'SS'=>'South Sudan',
+        'SS'=>'Zuid-Soedan',
         'SD'=>'Soedan',
         'SE'=>'Zweden',
         'SG'=>'Singapour',

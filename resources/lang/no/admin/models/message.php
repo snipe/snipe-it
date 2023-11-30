@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Slettet ressursmodell',
     'does_not_exist' => 'Modell eksisterer ikke.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'ADVARSEL! Ressursmodellen for dette elementet er ugyldig eller mangler!',
+    'no_association_fix' => 'Dette vil ødelegge ting på merkelige og forferdelige måte. Rediger denne ressursen nå for å tildele den en modell.',
     'assoc_users'	 => 'Denne modellen er tilknyttet en eller flere eiendeler og kan ikke slettes. Slett eiendelene, og prøv å slette modellen igjen. ',
 
 
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ingen felt ble endret, så ingenting ble oppdatert.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Modelloppdatering vellyket.| :model_count modeller oppdatert.',
+        'warn'          => 'Du er i ferd med å oppdatere egenskapene til følgende modell: Du er i ferd med å redigere egenskapene for de følgende modellene for :model_count :',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ingen modeller ble valgt, så ingenting ble slettet.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Modellen ble slettet!g_:success_count modeller slettet!',
         'success_partial' 	=> ':Success_count-modell(ene) ble slettet, men fail_count kunne ikke slettes fordi de fortsatt har eiendeler knyttet til dem.'
     ),
 

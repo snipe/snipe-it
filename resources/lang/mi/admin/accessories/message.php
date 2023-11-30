@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Ko tenei taputapu i tenei wa: ko nga nama kua taatatia ki nga kaiwhakamahi. Titiro koa ki nga taputapu me te ngana ano.',
 
     'create' => array(

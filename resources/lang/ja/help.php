@@ -30,5 +30,6 @@ return [
     'consumables'   => '消耗品は、時間の経過とともに使用されるものです。例えば、プリンタインクやコピー用紙など。',
 
     'depreciations' => '定額法に基づいて資産の減価償却を設定することができます。',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

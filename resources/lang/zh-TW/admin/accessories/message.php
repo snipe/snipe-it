@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => '配件 [:id] 不存在',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => '使用者目前已借出 :count 組配件。請在繳回配件後重試。 ',
 
     'create' => array(

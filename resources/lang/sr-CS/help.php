@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Potrošni materijal je sve što će se vremenom istrošiti. Na primer, toner za štampač ili papir za štampanje.',
 
     'depreciations' => 'Možete postaviti amortizaciju imovine na osnovu linearne amortizacije.',
-
+    
+    'empty_file'    => 'Uvoznik je utvrdio da je ova datoteka prazna.'
 ];

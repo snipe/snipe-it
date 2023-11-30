@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Lisaseade [:id] ei eksisteeri.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'See lisavarustus on praegu: kasutajate poolt kontrollitud arvude arv. Palun kontrollige tarvikuid ja proovige uuesti.',
 
     'create' => array(

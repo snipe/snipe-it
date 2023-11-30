@@ -34,7 +34,8 @@ return [
     'create_field'            => 'ฟิลด์ที่กำหนดเองใหม่',
     'create_field_title' => 'สร้างฟิลด์ที่กำหนดเองใหม่',
     'value_encrypted'      	        => 'ค่าของฟิลด์นี้ถูกเข้ารหัสในฐานข้อมูล เฉพาะผู้ดูแลระบบเท่านั้นที่สามารถดูค่าที่ถอดรหัสได้',
-    'show_in_email'     => 'ใส่ค่าของฟิลด์นี้ลงในอีเมลเช็คเอาต์ที่ส่งถึงผู้ใช้หรือไม่? ฟิลด์ที่เข้ารหัสไม่สามารถรวมอยู่ในอีเมลได้',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'ช่วยเหลือ',
     'help_text_description' => 'ข้อความนี้จะปรากฏขึ้นมาด้านล่างในขณะแก้แบบฟอร์มของเนื้อหาสินทรัพย์',
     'about_custom_fields_title' => 'เกี่ยวกับการกำหนดฟิลด์',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'เปิดเห็นผู้ใช้',
     'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

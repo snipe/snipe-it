@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Käyttäjä on jo luotu!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Salasana vaaditaan.',
     'insufficient_permissions'  => 'Riittämättömät oikeudet.',
     'user_deleted_warning'      => 'Käyttäjä on jo poistettu. Mikäli haluat muokata tai luovuttaa laitteita hänelle sinun tulee palauttaa käyttäjä.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Salasanan resetointilinkki on lähetetty niille käyttäjille, joille on määritetty voimassa oleva sähköpostiosoite.',
     'password_reset_sent'       => 'Salasanan palautuslinkki on lähetetty osoitteeseen :email!',
     'user_has_no_email'         => 'Tällä käyttäjällä ei ole sähköpostiosoitetta heidän profiilissaan.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Model tài sản đã xóa',
     'does_not_exist' => 'Kiểu tài sản không tồn tại.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'CẢNH BÁO! Model tài sản cho cho thiết bị này không hợp lệ hoặc bị thiếu!',
+    'no_association_fix' => 'Điều này sẽ phá vỡ mọi thứ theo những cách kỳ lạ và khủng khiếp. Hãy chỉnh sửa tài sản này ngay bây giờ để gán cho nó một model.',
     'assoc_users'	 => 'Tài sản này hiện tại đang liên kết với ít nhất một hoặc nhiều tài sản và không thể xóa. Xin vui lòng xóa tài sản, và cố gắng thử lại lần nữa. ',
 
 
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Không có trường nào được thay đổi, vì vậy không có gì được cập nhật.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Model đã được cập nhật thành công. |:model_count models đã được cập nhật thành công.',
+        'warn'          => 'Bạn sắp cập nhật các thuộc tính của model sau: |Bạn sắp chỉnh sửa các thuộc tính của các model :model_count sau:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Không có mục nào được chọn, nên không có gì bị xóa cả.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Model đã xóa!|:success_count model đã xóa!',
         'success_partial' 	=> ':success_count model(s) kiểu tài sản đã được xóa, tuy nhiên có :fail_count loại không cho phép xóa vì chúng vẫn còn gắn liên kết đết tài sản.'
     ),
 

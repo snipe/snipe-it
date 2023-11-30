@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'دارایی ساخته نشده است، لطفا دوباره تلاش کنید.',
         'success' 		=> 'دارایی موفقیت ایجاد شده است. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
