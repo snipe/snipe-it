@@ -542,7 +542,7 @@ case $distro in
   ;;
   Ubuntu)
     if [ "${version//./}" -ge "2304" ]; then
-        # Install for Ubuntu 22.04
+        # Install for Ubuntu 23.04 and 23.10
         set_fqdn
         set_dbpass
         tzone=$(cat /etc/timezone)
