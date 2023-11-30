@@ -14,17 +14,18 @@
 
 {{-- Page content --}}
 @section('content')
-@if($settings->full_multiple_companies_support == 1)
-  @if($settings->multi_company_alert == 1)
-  @livewire('modal-components', ['multiCompany' => $multiCompany])
-  @endif
-@endif
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
     <div class="callout callout-warning">
+      @if($settings->full_multiple_companies_support == 1)
+        @if($settings->multi_company_alert == 1)
+          @livewire('modal-components', ['multiCompany' => $multiCompany])
+        @endif
+      @endif
+
       <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
         @if (count($models) > 0)
             {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }} 

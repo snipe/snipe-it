@@ -10,7 +10,7 @@ class ModalComponents extends Component
 {
     public $settings;
     public $multiCompany;
-    public $multi_company_alert;
+    public $show_alert;
     public $modal_removal_alert;
 
     protected $listeners = ['openModal'];
@@ -19,6 +19,7 @@ class ModalComponents extends Component
         $this->settings= Setting::getSettings();
         $this->modal_removal_alert = trans('admin/settings/general.multi_company_alert_removal',['url' => route('settings.general.index')]);
         $this->multiCompany = $multiCompany;
+
 
 
 
@@ -33,8 +34,11 @@ class ModalComponents extends Component
     }
     public function multiCompanyAlert() {
         if($this->multiCompany) {
-            return session()->flash('warning', "NOTE: One or more of the assets you are editing belong to different companies.");
+            if($this->settings->multi_company_alert ) {
+                return session()->flash('warning',trans('admin/settings/general.multi_company_edit_warning_help_text'));
+            }
         }
+        return null;
     }
 
     public function openModal(){
@@ -47,6 +51,7 @@ class ModalComponents extends Component
     }
     public function render(){
 
+            $this->multiCompanyAlert();
             return view('livewire.modal-components');
 
     }
