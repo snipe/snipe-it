@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => 'ទីតាំងត្រូវបានលុបដោយជោគជ័យ។',
+    'about_locations'           => 'ទីតាំងត្រូវបានលុបដោយជោគជ័យ។',
     'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Assets Assigned',
     'id'                        => 'ID',
@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Location Name',
     'address'                   => 'Address',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Postal Code',
     'locations'                 => 'Locations',
     'parent'                    => 'Parent',

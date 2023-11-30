@@ -356,10 +356,10 @@ return [
     'google_login'      => 'Paramètres de connexion via Google Workspace',
     'enable_google_login'  => 'Permettre aux utilisateurs·trices de se connecter avec Google Workspace',
     'enable_google_login_help'  => 'Les utilisateurs·trices ne seront pas créé·es automatiquement. Iels doivent avoir un compte existant ici ET dans Google Workspace, et leur nom d\'utilisateur·trice doit correspondre à leur adresse e-mail Google Workspace. ',
-    'mail_reply_to' => 'Mail Reply-To Address',
-    'mail_from' => 'Mail From Address',
-    'database_driver' => 'Database Driver',
+    'mail_reply_to' => 'Adresse "Répondre à"',
+    'mail_from' => 'Adresse "Expéditeur·trice"',
+    'database_driver' => 'Pilote de base de données',
     'bs_table_storage' => 'Table Storage',
-    'timezone' => 'Timezone',
+    'timezone' => 'Fuseau horaire',
 
 ];

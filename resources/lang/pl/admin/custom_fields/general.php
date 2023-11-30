@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Nowe pole niestandardowe',
     'create_field_title' => 'Utwórz pole niestandardowe',
     'value_encrypted'      	        => 'Wartość tego pola jest zaszyfrowana w bazie danych. Tylko admini będą mogli wyświetlić rozszyfrowaną wartość',
-    'show_in_email'     => 'Czy podać wartość tego pola w e-mailach z przypisaniem, wysłanych do użytkownika? Zaszyfrowane pola nie mogą być zawarte w wiadomościach e-mail.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Tekst pomocniczy',
     'help_text_description' => 'Jest to tekst opcjonalny, który pojawi się pod elementami formularza podczas edycji zasobu w celu zapewnienia kontekstu.',
     'about_custom_fields_title' => 'O polach niestandardowych',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Widoczne dla użytkownika',
     'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
+    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
+    'show_in_requestable_list_short' => 'Show in requestable assets list',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];

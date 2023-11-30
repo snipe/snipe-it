@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Rekstrarvörur er allt það sem eyðist eða rýrist við notkun, til dæmis blek í prentara eða ljósritunarpappír.',
 
     'depreciations' => 'Þú getur búið til mismunandi fyrningarflokka til að afskrifa eignir eftir línulegu afskriftarferli.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

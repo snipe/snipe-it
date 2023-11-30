@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Verbrauchsmaterialien sind alle gekauften Dinge, die mit der Zeit aufgebraucht werden. Zum Beispiel Druckerpatronen oder Kopierpapier.',
 
     'depreciations' => 'Du kannst Asset-Abschreibungen einrichten, um Assets linear abzuschreiben.',
-
+    
+    'empty_file'    => 'Der Importer hat festgestellt, dass diese Datei leer ist.'
 ];

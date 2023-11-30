@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'พิมพ์ งานที่มอบหมาย ทั้งหมด',
     'name'                      => 'ชื่อสถานที่',
     'address'                   => 'ที่อยู่',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'รหัสไปรษณีย์',
     'locations'                 => 'สถานที่',
     'parent'                    => 'หมวดแม่',

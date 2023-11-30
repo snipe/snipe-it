@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Komponentas nebuvo išregistruotas, bandykite dar kartą',
         'success' 		=> 'Komponentas sėkmingai patikrintas.',
         'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Nepakankamai komponentų: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

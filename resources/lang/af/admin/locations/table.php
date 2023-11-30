@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Pleknaam',
     'address'                   => 'adres',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Poskode',
     'locations'                 => 'plekke',
     'parent'                    => 'Ouer',

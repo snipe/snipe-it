@@ -274,63 +274,136 @@
 </div> <!--/row-->
 <div class="row">
     <div class="col-md-6">
-         <!-- Locations -->
-         <div class="box box-default">
-            <div class="box-header with-border">
-                <h2 class="box-title">{{ trans('general.asset') }} {{ trans('general.locations') }}</h2>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fas fa-minus" aria-hidden="true"></i>
-                        <span class="sr-only">{{ trans('general.collapse') }}</span>
-                    </button>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                        <table
-                                data-cookie-id-table="dashLocationSummary"
-                                data-height="400"
-                                data-pagination="true"
-                                data-side-pagination="server"
-                                data-sort-order="desc"
-                                data-sort-field="assets_count"
-                                id="dashLocationSummary"
-                                class="table table-striped snipe-table"
-                                data-url="{{ route('api.locations.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
 
-                            <thead>
-                            <tr>
-                                <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="locationsLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
-                                
-                                <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                    <i class="fas fa-barcode" aria-hidden="true"></i>
-                                    <span class="sr-only">{{ trans('general.asset_count') }}</span>
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
-                                    
-                                    {{ trans('general.assigned') }}
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
-                                    <i class="fas fa-users" aria-hidden="true"></i>
-                                    <span class="sr-only">{{ trans('general.people') }}</span>
-                                    
-                                </th>
-                                
-                            </tr>
-                            </thead>
-                        </table>
-                        </div>
-                    </div> <!-- /.col -->
-                    <div class="text-center col-md-12" style="padding-top: 10px;">
-                        <a href="{{ route('locations.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
-                    </div>
-                </div> <!-- /.row -->
+		@if ($snipeSettings->full_multiple_companies_support=='1')
+			 <!-- Companies -->	
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h2 class="box-title">{{ trans('general.companies') }}</h2>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse">
+							<i class="fas fa-minus" aria-hidden="true"></i>
+							<span class="sr-only">{{ trans('general.collapse') }}</span>
+						</button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+							<table
+									data-cookie-id-table="dashCompanySummary"
+									data-height="400"
+									data-pagination="true"
+									data-side-pagination="server"
+									data-sort-order="desc"
+									data-sort-field="assets_count"
+									id="dashCompanySummary"
+									class="table table-striped snipe-table"
+									data-url="{{ route('api.companies.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
 
-            </div><!-- /.box-body -->
-        </div> <!-- /.box -->
+								<thead>
+								<tr>
+									<th class="col-sm-3" data-visible="true" data-field="name" data-formatter="companiesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
+									<th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
+										<i class="fas fa-users" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.people') }}</span>
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
+										<i class="fas fa-barcode" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.asset_count') }}</span>
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true">
+										<i class="far fa-keyboard" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.accessories_count') }}</span>
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true">
+										<i class="fas fa-tint" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.consumables_count') }}</span>
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true">
+										<i class="far fa-hdd" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.components_count') }}</span>
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true">
+										<i class="far fa-save" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.licenses_count') }}</span>
+									</th>
+								</tr>
+								</thead>
+							</table>
+							</div>
+						</div> <!-- /.col -->
+						<div class="text-center col-md-12" style="padding-top: 10px;">
+							<a href="{{ route('companies.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
+						</div>
+					</div> <!-- /.row -->
+
+				</div><!-- /.box-body -->
+			</div> <!-- /.box -->
+		
+		@else
+			 <!-- Locations -->
+			 <div class="box box-default">
+				<div class="box-header with-border">
+					<h2 class="box-title">{{ trans('general.locations') }}</h2>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse">
+							<i class="fas fa-minus" aria-hidden="true"></i>
+							<span class="sr-only">{{ trans('general.collapse') }}</span>
+						</button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+							<table
+									data-cookie-id-table="dashLocationSummary"
+									data-height="400"
+									data-pagination="true"
+									data-side-pagination="server"
+									data-sort-order="desc"
+									data-sort-field="assets_count"
+									id="dashLocationSummary"
+									class="table table-striped snipe-table"
+									data-url="{{ route('api.locations.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
+
+								<thead>
+								<tr>
+									<th class="col-sm-3" data-visible="true" data-field="name" data-formatter="locationsLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
+									
+									<th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
+										<i class="fas fa-barcode" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.asset_count') }}</span>
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
+										
+										{{ trans('general.assigned') }}
+									</th>
+									<th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
+										<i class="fas fa-users" aria-hidden="true"></i>
+										<span class="sr-only">{{ trans('general.people') }}</span>
+										
+									</th>
+									
+								</tr>
+								</thead>
+							</table>
+							</div>
+						</div> <!-- /.col -->
+						<div class="text-center col-md-12" style="padding-top: 10px;">
+							<a href="{{ route('locations.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
+						</div>
+					</div> <!-- /.row -->
+
+				</div><!-- /.box-body -->
+			</div> <!-- /.box -->
+
+		@endif
+			
     </div>
     <div class="col-md-6">
 

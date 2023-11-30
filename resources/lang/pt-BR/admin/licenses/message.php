@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Esta licença é atualmente check-out para um usuário e não pode ser excluído. Por favor, atualize seu bem para que não referencie mais este usuário e, em seguida, tente apagar novamente. ',
     'select_asset_or_person' => 'Você deve selecionar um ativo ou um usuário, mas não ambos.',
     'not_found' => 'Licença não encontrada',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Houve um problema de registro na licença. Favor tentar novamente.',
-        'success' => 'A licença foi registrada com sucesso'
+        'success' => 'A licença foi registrada com sucesso',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

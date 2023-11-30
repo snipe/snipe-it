@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Pribor [:Id] ne postoji.',
+    'not_found' => 'Ta dodatna oprema nije pronađena.',
     'assoc_users'	 => 'Ovaj pribor trenutno ima :count stavku označenu korisnicima. Proverite pribor i pokušajte ponovo. ',
 
     'create' => array(

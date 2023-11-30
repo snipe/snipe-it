@@ -49,6 +49,7 @@ return [
     'asset_location' => 'تحديث موقع الأصل',
     'asset_location_update_default_current' => 'تحديث الموقع الافتراضي والموقع الفعلي',
     'asset_location_update_default' => 'تحديث الموقع الافتراضي فقط',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'حالة الأصول هذه غير قابلة للنشر. لا يمكن التحقق من هذه الأصول.',
     'asset_deployable' => 'حالة تلك الأصول قابلة للنشر. هذا الأصل يمكن إخراجه.',
     'processing_spinner' => 'معالجة... (قد يستغرق هذا بعض الوقت على ملفات كبيرة)',

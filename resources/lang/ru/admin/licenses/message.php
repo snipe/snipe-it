@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Эта лицензия выдана пользователю и не может быть удалена. Перед удалением необходимо сначала списать лицензию на склад. ',
     'select_asset_or_person' => 'Вы должны выбрать актив или пользователя, но не оба.',
     'not_found' => 'Лицензия не найдена',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'При выдаче лицензии произошла ошибка. Повторите попытку.',
-        'success' => 'Лицензия успешно назначена'
+        'success' => 'Лицензия успешно назначена',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

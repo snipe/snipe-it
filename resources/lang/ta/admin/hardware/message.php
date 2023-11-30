@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'சொத்து உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும். :(',
         'success' 		=> 'சொத்து வெற்றிகரமாக உருவாக்கப்பட்டது. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

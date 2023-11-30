@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'User already exists!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'The login field is required',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'The password is required.',
     'insufficient_permissions'  => 'Insufficient Permissions.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',

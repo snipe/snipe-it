@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Atjaunināt pamatlīdzekļa atrašanās vietu',
     'asset_location_update_default_current' => 'Atjaunināt noklusējuma KĀ ARĪ tekošo atrašanās vietu',
     'asset_location_update_default' => 'Atjaunināt tikai noklusēja atrašanās vietu',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Šis statuss nav izmantojams. Pamatlīdzeklis nevar tikt izrakstīts.',
     'asset_deployable' => 'Šis statuss ir izmantojams. Pamatlīdzeklis ir pieejams izrakstīšanai.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',

@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'Hạng mục chưa được cập nhật. Bạn hãy thử lại',
         'success' => 'Hạng mục được cập nhật thành công.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Bạn không thể thay đổi loại danh mục một khi nó đã được tạo',
     ),
 
     'delete' => array(

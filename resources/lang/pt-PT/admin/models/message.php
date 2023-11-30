@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Modelo de ativo apagado',
     'does_not_exist' => 'O Modelo não existe.',
     'no_association' => 'AVISO! O modelo de artigo para este item é inválido ou está em falta!',
     'no_association_fix' => 'Isto estragará as coisas de maneiras estranhas e horríveis. Edite este artigo agora para lhe atribuir um modelo.',

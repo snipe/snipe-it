@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'துணைக்கருவி [:id] இல்லை.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'தற்போது இந்த இணைப்பு உள்ளது: பயனர்களை சோதிக்கப்படும் எண்ணைக் கணக்கிடு. ஆபரணங்களை சரிபார்த்து மீண்டும் முயற்சிக்கவும்.',
 
     'create' => array(

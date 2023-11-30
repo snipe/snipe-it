@@ -21,21 +21,29 @@
 
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ $license->name }}</h2>
+                    <h2 class="box-title"> {{ $license->name }} ({{ trans('admin/licenses/message.seats_available', ['seat_count' => $license->availCount()->count()]) }})</h2>
                 </div>
                 <div class="box-body">
+
 
                     <!-- Asset name -->
                     <div class="form-group">
                         <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <p class="form-control-static">{{ $license->name }}</p>
+                        </div>
+                    </div>
+                    <!-- Category -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ trans('general.category') }}</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">{{ $license->category->name }}</p>
                         </div>
                     </div>
 
                     <!-- Serial -->
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>
+                        <label class="col-sm-3 control-label">{{ trans('admin/licenses/form.license_key') }}</label>
                         <div class="col-md-9">
                             <p class="form-control-static" style="word-wrap: break-word;">
                                 @can('viewKeys', $license)
@@ -57,8 +65,8 @@
                     <!-- Note -->
                     <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
                         <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
-                        <div class="col-md-7">
-                            <textarea class="col-md-6 form-control" id="notes" name="notes">{{ old('note') }}</textarea>
+                        <div class="col-md-8">
+                            <textarea class="col-md-6 form-control" id="notes" name="notes" style="width: 100%">{{ old('note') }}</textarea>
                             {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>

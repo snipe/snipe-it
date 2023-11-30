@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Активът не беше създаден. Моля опитайте отново.',
         'success' 		=> 'Активът създаден успешно.',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

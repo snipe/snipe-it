@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Modèle d\'actif supprimé',
     'does_not_exist' => 'Le modèle n\'existe pas.',
     'no_association' => 'ATTENTION ! Le modèle d\'actif pour cet objet est invalide ou manquant !',
     'no_association_fix' => 'Cela va casser les choses de manière bizarre et horrible. Modifiez cette ressource maintenant pour lui assigner un modèle.',

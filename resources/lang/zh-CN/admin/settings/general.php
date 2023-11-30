@@ -358,8 +358,8 @@ return [
     'enable_google_login_help'  => '这些用户将不会被自动配置。 他们必须拥有一个已存在的账户以及 一个 Google Workspace 账户，并且已存在账户的用户名必须与 Google Workspace 账户的电子邮件地址相匹配。 ',
     'mail_reply_to' => '邮件回复地址',
     'mail_from' => '发件人地址',
-    'database_driver' => 'Database Driver',
-    'bs_table_storage' => 'Table Storage',
+    'database_driver' => '数据库驱动程序',
+    'bs_table_storage' => '表存储',
     'timezone' => '时区',
 
 ];

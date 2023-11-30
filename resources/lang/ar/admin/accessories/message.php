@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'الملحق [:id] غير موجود.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'تم إخراج :count عنصر من هذا الملحق للمستخدمين، الرجاء ادخال بعض الملحقات ثم حاول مرة أخرى. ',
 
     'create' => array(

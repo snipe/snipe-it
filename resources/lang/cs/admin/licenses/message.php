@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Licence je předána svému uživateli a nelze ji odstranit. Před odstraněním ji nejprve převezměte. ',
     'select_asset_or_person' => 'Musíte vybrat aktivum nebo uživatele, ale ne obojí.',
     'not_found' => 'Licence nenalezena',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Vyskytl se problém při výdeji licence. Zkuste to znovu prosím.',
-        'success' => 'Licence byla úspěšně vydána'
+        'success' => 'Licence byla úspěšně vydána',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Потребителят вече съществува!',
     'user_not_found'            => 'Потребителят не съществува.',
     'user_login_required'       => 'Полето за вход е задължително',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Паролата е задължителна.',
     'insufficient_permissions'  => 'Нямате необходимите права.',
     'user_deleted_warning'      => 'Този потребител е изтрит. За да редактирате данните за него или да му зададете актив, трябва първо да възстановите потребителя.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Избраните потребители, които са активирани и имат валиден е-майл адрес им беше изпратен линк за смяна на парола.',
     'password_reset_sent'       => 'Изпратена е връзка за въстановяване на паролата до :email!',
     'user_has_no_email'         => 'Този потребител няма е-майл адрес в неговия профил.',
-    'user_has_no_assets_assigned'   => 'Този потребител няма никакви заведени активи',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

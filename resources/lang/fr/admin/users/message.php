@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'L\'utilisateur existe déjà !',
     'user_not_found'            => 'L\'utilisateur·trice n\'existe pas.',
     'user_login_required'       => 'Le champ identifiant est obligatoire',
+    'user_has_no_assets_assigned' => 'Aucun actif actuellement assigné à l\'utilisateur·trice.',
     'user_password_required'    => 'Le mot de passe est obligatoire.',
     'insufficient_permissions'  => 'Droits insuffisants.',
     'user_deleted_warning'      => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
     'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
     'user_has_no_email'         => 'Cet utilisateur n\'a pas renseigné d\'adresse e-mail dans son profil.',
-    'user_has_no_assets_assigned'   => 'Cet utilisateur n\'a aucune ressource affectée',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

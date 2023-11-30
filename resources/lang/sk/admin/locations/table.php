@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Vytlačiť všetky priradené',
     'name'                      => 'Názov lokality',
     'address'                   => 'Adresa',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'PSČ',
     'locations'                 => 'Lokality',
     'parent'                    => 'Nadradené',

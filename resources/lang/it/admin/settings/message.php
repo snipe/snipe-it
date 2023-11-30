@@ -3,7 +3,7 @@
 return [
 
     'update' => [
-        'error'                 => 'Si è verificato un errore durante l\'aggiornamento. ',
+        'error'                 => 'Errore durante l\'aggiornamento. ',
         'success'               => 'Impostazioni aggiornate correttamente.',
     ],
     'backup' => [
@@ -40,7 +40,7 @@ return [
         'success_pt2' => ' con il messaggio di prova, e assicurati di fare clic su SALVA qui sotto per memorizzare le impostazioni.',
         '500' => 'Errore del server 500.',
         'error' => 'Qualcosa è andato storto. :app ha risposto con: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'ERROR: 301/302 :endpoint restituisce un reindirizzamento. Per motivi di sicurezza, non seguiamo reindirizzamenti. Si prega di utilizzare l\'endpoint attuale.',
         'error_misc' => 'Qualcosa è andato storto. :( ',
     ]
 ];

@@ -8,7 +8,7 @@ return [
     'delete'  	                => 'Ištrinti',
     'edit'    	                => 'Keisti',
     'restore' 	                => 'Atstatyti',
-    'remove'                    => 'Remove',
+    'remove'                    => 'Pašalinti',
     'request'                   => 'Užklausti',
     'submit'  	                => 'Išsaugoti',
     'upload'                    => 'Įkelti',
@@ -20,5 +20,5 @@ return [
     'bulk_actions'              => 'Bulk Actions',
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
-    'new'                       => 'New',
+    'new'                       => 'Naujas',
 ];

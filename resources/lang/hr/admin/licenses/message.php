@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Ova je licenca trenutno provjerena korisniku i ne može se izbrisati. Najprije provjerite licencu, a zatim pokušajte ponovno brisati.',
     'select_asset_or_person' => 'Morate odabrati neku vrstu imovine ili korisnika, ali ne oboje.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Došlo je do problema prilikom provjere licence. Molim te pokušaj ponovno.',
-        'success' => 'Licenca je uspješno provjerena'
+        'success' => 'Licenca je uspješno provjerena',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

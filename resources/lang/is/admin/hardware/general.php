@@ -46,5 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
-    'user_department' => 'deild notenda',
+    'user_department' => 'Deild notenda',
 ];

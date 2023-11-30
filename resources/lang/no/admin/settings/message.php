@@ -34,13 +34,13 @@ return [
         'authentication_success' => 'Brukeren ble autentisert mot LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Sender :app test melding...',
+        'success' => 'Ditt :webhook_name integrasjon fungerer!',
+        'success_pt1' => 'Suksess! Sjekk ',
+        'success_pt2' => ' kanalen din for testmelding, og sørg for å klikke på SAVE nedenfor for å lagre innstillingene.',
+        '500' => '500 Tjenerfeil.',
+        'error' => 'Noe gikk galt. :app svarte med: :error_message',
+        'error_redirect' => 'FEIL: 301/302 :endpoint returnerer en omaddressering. Av sikkerhetsgrunner følger vi ikke omadressering. Vennligst bruk det faktiske endepunktet.',
+        'error_misc' => 'Noe gikk galt. :( ',
     ]
 ];

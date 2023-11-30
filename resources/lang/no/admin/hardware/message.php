@@ -11,20 +11,21 @@ return [
     'create' => [
         'error'   		=> 'Eiendelen ble ikke opprettet, prøv igjen :(',
         'success' 		=> 'Eiendelen ble opprettet :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
         'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 			=> 'Oppdatering av eiendel vellykket.',
         'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Ingen felter er valgt, så ingenting ble endret.',
     ],
 
     'restore' => [
         'error'   		=> 'Eiendel ble ikke gjenopprettet. Prøv igjen',
         'success' 		=> 'Vellykket gjenoppretting av eiendel.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Ressursen ble gjenopprettet.',
+        'nothing_updated'   => 'Inger ressurser ble valgt, så ingenting ble gjenoprettet.', 
     ],
 
     'audit' => [
@@ -51,9 +52,9 @@ return [
         'success'               => 'Filen har blitt importert',
         'file_delete_success'   => 'Filen har blitt slettet',
         'file_delete_error'      => 'Filen kunne ikke bli slettet',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Valgt fil mangler (fant ikke filen)',
+        'header_row_has_malformed_characters' => 'En eller flere attributter i overskriftsraden inneholder feilformede UTF-8 tegn',
+        'content_row_has_malformed_characters' => 'En eller flere attributter i første rad i inneholdet inneholder feilformet UTF-8 tegn',
     ],
 
 

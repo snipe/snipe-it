@@ -14,6 +14,14 @@ class FieldOption {
 
     public function getValue(Asset $asset) {
         $dataPath = collect(explode('.', $this->dataSource));
+
+        // assignedTo directly on the asset is a special case where
+        // we want to avoid returning the property directly
+        // and instead return the entity's presented name.
+        if ($dataPath[0] === 'assignedTo'){
+            return $asset->assignedTo ?  $asset->assignedTo->present()->fullName() : null;
+        }
+        
         return $dataPath->reduce(function ($myValue, $path) {
             try { return $myValue ? $myValue->{$path} : ${$myValue}; }
             catch (\Exception $e) { return $myValue; }

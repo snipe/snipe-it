@@ -11,6 +11,7 @@ use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\License;
@@ -192,7 +193,7 @@ class UsersController extends Controller
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
 
@@ -688,17 +689,31 @@ class UsersController extends Controller
      */
     public function restore($userId = null)
     {
-        // Get asset information
-        $user = User::withTrashed()->find($userId);
-        $this->authorize('delete', $user);
-        if (isset($user->id)) {
-            // Restore the user
-            User::withTrashed()->where('id', $userId)->restore();
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')));
+        if ($user = User::withTrashed()->find($userId)) {
+            $this->authorize('delete', $user);
+
+            if ($user->deleted_at == '') {
+                return response()->json(Helper::formatStandardApiResponse('error', trans('general.not_deleted', ['item_type' => trans('general.user')])), 200);
+            }
+
+            if ($user->restore()) {
+
+                $logaction = new Actionlog();
+                $logaction->item_type = User::class;
+                $logaction->item_id = $user->id;
+                $logaction->created_at = date('Y-m-d H:i:s');
+                $logaction->user_id = Auth::user()->id;
+                $logaction->logaction('restore');
+
+                return response()->json(Helper::formatStandardApiResponse('success', trans('admin/users/message.restore.success')), 200);
+            }
+
+            // Check validation to make sure we're not restoring a user with the same username as an existing user
+            return response()->json(Helper::formatStandardApiResponse('error', trans('general.could_not_restore', ['item_type' => trans('general.user'), 'error' => $user->getErrors()->first()])), 200);
         }
-        
-        $id = $userId;
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))), 200);
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')), 200);
+
     }
 }

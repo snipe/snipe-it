@@ -16,7 +16,7 @@ return array(
     'update'  							=> 'Cập nhật Phụ Kiện',
     'use_default_eula'					=> 'Dùng <a href="#" data-toggle="modal" data-target="#eulaModal"> điều khoản sử dụng mặc định.',
     'use_default_eula_disabled'			=> '<del>Dùng điều khoản sử dụng mặc định.<del> Điều khoản sử dụng chưa được thiết lập. Hãy thêm một cái vào trong phần Settings.',
-    'clone'                             => 'Clone Accessory',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'clone'                             => 'Nhân bản phụ kiện',
+    'delete_disabled'                   => 'Không thể xóa phụ kiện này vì một số thiết bị đã được kiểm tra đưa ra.',
 
 );

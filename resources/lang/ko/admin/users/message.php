@@ -8,6 +8,7 @@ return array(
     'user_exists'               => '사용자가 이미 존재합니다!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => '로그인 항목을 입력해 주세요.',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => '비밀번호를 입력해 주세요.',
     'insufficient_permissions'  => '승인 불충분.',
     'user_deleted_warning'      => '이 사용자는 삭제되었습니다. 그것들을 수정하려면 이 사용자를 복원하던가 새 자산들을 생성하세요.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => ':email 로 패스워드 재설정 링크가 발송되었습니다.',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

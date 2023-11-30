@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Nabytek nie został utworzony, proszę spróbować ponownie. :(',
         'success' 		=> 'Nowy nabytek został utworzony. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

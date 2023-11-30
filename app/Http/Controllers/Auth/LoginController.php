@@ -56,7 +56,6 @@ class LoginController extends Controller
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
-        // $this->ldap = $ldap;
         $this->saml = $saml;
     }
 
@@ -82,7 +81,6 @@ class LoginController extends Controller
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
-            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -123,7 +121,7 @@ class LoginController extends Controller
 
                 if ($user = Auth::user()) {
                     $user->last_login = \Carbon::now();
-                    $user->save();
+                    $user->saveQuietly();
                 }
                 
             } catch (\Exception $e) {
@@ -199,7 +197,7 @@ class LoginController extends Controller
             $user->email = $ldap_attr['email'];
             $user->first_name = $ldap_attr['firstname'];
             $user->last_name = $ldap_attr['lastname']; //FIXME (or TODO?) - do we need to map additional fields that we now support? E.g. country, phone, etc.
-            $user->save();
+            $user->saveQuietly();
         } // End if(!user)
         return $user;
     }
@@ -319,7 +317,7 @@ class LoginController extends Controller
         if ($user = Auth::user()) {
             $user->last_login = \Carbon::now();
             $user->activated = 1;
-            $user->save();
+            $user->saveQuietly();
         }
         // Redirect to the users page
         return redirect()->intended()->with('success', trans('auth/message.signin.success'));
@@ -371,7 +369,7 @@ class LoginController extends Controller
                 [-2, -2, -2, -2]
             );
 
-        $user->save(); // make sure to save *AFTER* displaying the barcode, or else we might save a two_factor_secret that we never actually displayed to the user if the barcode fails
+        $user->saveQuietly(); // make sure to save *AFTER* displaying the barcode, or else we might save a two_factor_secret that we never actually displayed to the user if the barcode fails
 
         return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
     }
@@ -426,7 +424,7 @@ class LoginController extends Controller
 
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
-            $user->save();
+            $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 
             return redirect()->route('home')->with('success', 'You are logged in!');

@@ -18,7 +18,7 @@ return array(
     'software_licenses'  		=> 'Szoftverlicencek',
     'user'  					=> 'használó',
     'view'  					=> 'Licenc megtekintése',
-    'delete_disabled'           => 'This license cannot be deleted yet because some seats are still checked out.',
+    'delete_disabled'           => 'Ez a licensz nem törölhető még, mert vannak belőle kiadott példányok.',
     'bulk'                      =>
         [
             'checkin_all'           => [

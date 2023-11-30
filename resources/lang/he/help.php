@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
 
     'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

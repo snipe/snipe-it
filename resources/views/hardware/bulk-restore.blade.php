@@ -30,7 +30,7 @@
               <tr>
                 <td></td>
                 <td>{{ trans('admin/hardware/table.id') }}</td>
-                <td>{{ trans('admin/hardware/table.name') }}</td>
+                <td>{{ trans('admin/hardware/form.name') }}</td>
                 <td>{{ trans('admin/hardware/table.location')}}</td>
               </tr>
             </thead>

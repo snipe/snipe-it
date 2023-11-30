@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Activul nu a fost creat, va rugam incercati iar. :(',
         'success' 		=> 'Activul a fost creat. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

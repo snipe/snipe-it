@@ -125,10 +125,26 @@ class BulkUsersController extends Controller
             ];
         }
 
+        /**
+         * Check to see if the user wants to actually blank out the values vs skip them
+         */
         if ($request->input('null_location_id')=='1') {
             $this->update_array['location_id'] = null;
         }
 
+        if ($request->input('null_department_id')=='1') {
+            $this->update_array['department_id'] = null;
+        }
+
+        if ($request->input('null_manager_id')=='1') {
+            $this->update_array['manager_id'] = null;
+        }
+
+        if ($request->input('null_company_id')=='1') {
+            $this->update_array['company_id'] = null;
+        }
+
+        
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }

@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Perbarui Lokasi Aset',
     'asset_location_update_default_current' => 'Perbarui lokasi default DAN lokasi sebenarnya',
     'asset_location_update_default' => 'Perbarui hanya lokasi default',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Status aset tersebut tidak dapat ditetapkan. Aset ini tidak dapat digunakan.',
     'asset_deployable' => 'Status aset dapat ditetapkan. Aset ini dapat digunakan.',
     'processing_spinner' => 'Memproses... (Mungkin memerlukan sedikit waktu untuk file besar)',

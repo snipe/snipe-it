@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Atrašanās vietas nosaukums',
     'address'                   => 'Adrese',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'Pasta indekss',
     'locations'                 => 'Atrašanās vietas',
     'parent'                    => 'Vecāks',

@@ -49,6 +49,7 @@ return [
     'asset_location' => 'Atualizar Local do Ativo',
     'asset_location_update_default_current' => 'Atualizar a localização padrão e local real',
     'asset_location_update_default' => 'Atualizar somente local padrão',
+    'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Este status de ativo não é implantado. Este ativo não pode ser verificado.',
     'asset_deployable' => 'Este status pode ser implementado. Este ativo pode ser verificado.',
     'processing_spinner' => 'Processando... (Isso pode levar algum tempo em arquivos grandes)',

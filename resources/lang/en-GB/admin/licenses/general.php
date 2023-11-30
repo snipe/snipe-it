@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'This will action check in one seat. | This action will check in all :checkedout_seats_count seats for this licence.',
                 'enabled_tooltip'   => 'Check in ALL seats for this licence from both users and assets',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'This is disabled because the Licence is not re-assignable',
                 'success'           => 'Licence successfully checked in! | All licences were successfully checked in!',
                 'log_msg'           => 'Checked in via bulk licence checkout in licence GUI',
             ],

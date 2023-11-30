@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
+use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -137,7 +138,7 @@ class AssetsController extends Controller
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = request('purchase_cost');
             $asset->purchase_date           = request('purchase_date', null);
-            $asset->asset_eol_date          = request('asset_eol_date', $asset->present()->eol_date());
+            $asset->asset_eol_date          = request('asset_eol_date', null);
             $asset->assigned_to             = request('assigned_to', null);
             $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
@@ -204,12 +205,9 @@ class AssetsController extends Controller
         }
 
         if ($success) {
-            // Redirect to the asset listing page
-            $minutes = 518400;
-            // dd( $_POST['options']);
-            // Cookie::queue(Cookie::make('optional_info', json_decode($_POST['options']), $minutes));
+            \Log::debug(e($asset->asset_tag));
             return redirect()->route('hardware.index')
-                ->with('success', trans('admin/hardware/message.create.success'));
+                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset->id), 'id', 'tag' => e($asset->asset_tag)]));
                
       
         }
@@ -309,14 +307,15 @@ class AssetsController extends Controller
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
         $asset->purchase_date = $request->input('purchase_date', null); 
-        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && $asset->model->eol) {
+        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
             $asset->purchase_date = $request->input('purchase_date', null); 
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+            $asset->eol_explicit = false;
         } elseif ($request->filled('asset_eol_date')) {
            $asset->asset_eol_date = $request->input('asset_eol_date', null);
            $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
            if($asset->model->eol) {
-               if($months != $asset->model->eol) {
+               if($months != $asset->model->eol > 0) {
                    $asset->eol_explicit = true;
                } else {
                    $asset->eol_explicit = false;
@@ -324,6 +323,9 @@ class AssetsController extends Controller
            } else {
                $asset->eol_explicit = true;
            }
+        } elseif (!$request->filled('asset_eol_date') && (($asset->model->eol) == 0)) {
+           $asset->asset_eol_date = null;
+		   $asset->eol_explicit = false;
         }
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
@@ -794,21 +796,24 @@ class AssetsController extends Controller
      */
     public function getRestore($assetId = null)
     {
-        // Get asset information
-        $asset = Asset::withTrashed()->find($assetId);
-        $this->authorize('delete', $asset);
-        if (isset($asset->id)) {
-            // Restore the asset
-            Asset::withTrashed()->where('id', $assetId)->restore();
+        if ($asset = Asset::withTrashed()->find($assetId)) {
+            $this->authorize('delete', $asset);
 
-            $logaction = new Actionlog();
-            $logaction->item_type = Asset::class;
-            $logaction->item_id = $asset->id;
-            $logaction->created_at = date('Y-m-d H:i:s');
-            $logaction->user_id = Auth::user()->id;
-            $logaction->logaction('restored');
+            if ($asset->deleted_at == '') {
+                return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.asset')]));
+            }
 
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
+            if ($asset->restore()) {
+                // Redirect them to the deleted page if there are more, otherwise the section index
+                $deleted_assets = Asset::onlyTrashed()->count();
+                if ($deleted_assets > 0) {
+                    return redirect()->back()->with('success', trans('admin/hardware/message.restore.success'));
+                }
+                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
+            }
+
+            // Check validation to make sure we're not restoring an asset with the same asset tag (or unique attribute) as an existing asset
+            return redirect()->back()->with('error', trans('general.could_not_restore', ['item_type' => trans('general.asset'), 'error' => $asset->getErrors()->first()]));
         }
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));

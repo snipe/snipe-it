@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Atananların Tümünü Yazdır',
     'name'                      => 'Konum Adı',
     'address'                   => 'Adres',
+    'address2'                   => 'Adres Satırı 2',
     'zip'                       => 'Posta kodu',
     'locations'                 => 'Konumlar',
     'parent'                    => 'Üst',

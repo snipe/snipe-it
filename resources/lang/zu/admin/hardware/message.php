@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Impahla ayidalwanga, sicela uzame futhi. :(',
         'success' 		=> 'Ifa lidalwe ngempumelelo. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [

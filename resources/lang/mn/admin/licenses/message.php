@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Энэ лицензийг одоогоор хэрэглэгчид шалгаж, устгах боломжгүй байна. Лицензийг эхлээд шалгаад дахин устгахыг оролдоно уу.',
     'select_asset_or_person' => 'Та хөрөнгө эсвэл хэрэглэгчийг сонгох ёстой, гэхдээ хоёулаа биш.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Лицензийг шалгах асуудал гарлаа. Дахин оролдоно уу.',
-        'success' => 'Лицензийг амжилттай шалгасан'
+        'success' => 'Лицензийг амжилттай шалгасан',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

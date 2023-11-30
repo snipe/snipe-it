@@ -30,5 +30,6 @@ return [
     'consumables'   => 'Potrošni materiali so na primer karrtuše ali kopirni papir.',
 
     'depreciations' => 'Za amortizacijo sredstev lahko določite amortizacijo sredstev, ki temelji na enakomerni amortizaciji.',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

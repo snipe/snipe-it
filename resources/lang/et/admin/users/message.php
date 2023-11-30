@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Kasutaja on juba olemas!',
     'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Login väli on kohustuslik',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Parooli väli on kohustuslik.',
     'insufficient_permissions'  => 'Ebapiisavad õigused.',
     'user_deleted_warning'      => 'See kasutaja on kustutatud. Et kasutajat muuta või talle uusi vahendeid anda, pead ta esmalt taastama.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Parooli taastamise link on saadetud valitud aktiivsetele kasutajatele kellel on õige emaili aadress.',
     'password_reset_sent'       => 'Parooli taastamise aadress on saadetud :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

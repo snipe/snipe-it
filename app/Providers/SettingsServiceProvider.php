@@ -38,13 +38,26 @@ class SettingsServiceProvider extends ServiceProvider
             if ((abs($int_limit) > 0) && ($int_limit <= config('app.max_results'))) {
                 $limit = abs($int_limit);
             }
-            \Log::debug('Max in env: '.config('app.max_results'));
-            \Log::debug('Original requested limit: '.request('limit'));
-            \Log::debug('Int limit: '.$int_limit);
-            \Log::debug('Modified limit: '.$limit);
-            \Log::debug('------------------------------');
+
+//            \Log::debug('Max in env: '.config('app.max_results'));
+//            \Log::debug('Original requested limit: '.request('limit'));
+//            \Log::debug('Int limit: '.$int_limit);
+//            \Log::debug('Modified limit: '.$limit);
+//            \Log::debug('------------------------------');
+
 
             return $limit;
+        });
+
+        // Make sure the offset is actually set and is an integer
+        \App::singleton('api_offset_value', function () {
+            $offset = intval(request('offset'));
+//            \Log::debug('Original requested offset: '.request('offset'));
+//            \Log::debug('Modified offset: '.$offset);
+//            \Log::debug('------------------------------');
+
+
+            return $offset;
         });
 
 

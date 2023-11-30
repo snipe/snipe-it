@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'Kategorien ble ikke opprettet, vennligst prøv igjen',
         'success' => 'Kategorien ble oppdatert.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Du kan ikke endre kategori typen når den har blitt opprettet',
     ),
 
     'delete' => array(

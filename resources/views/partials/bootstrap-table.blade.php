@@ -279,7 +279,11 @@
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
                     + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span></a>&nbsp;';
             } else {
-                actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a></span>&nbsp;';
+                // Do not show the delete button on things that are already deleted
+                if ((row.available_actions) && (row.available_actions.restore != true)) {
+                    actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a></span>&nbsp;';
+                }
+
             }
 
 
@@ -530,13 +534,35 @@
 
 
     function changeLogFormatter(value) {
+
         var result = '';
+        var pretty_index = '';
+
             for (var index in value) {
-                result += index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+
+
+                // Check if it's a custom field
+                if (index.startsWith('_snipeit_')) {
+                    pretty_index = index.replace("_snipeit_", "Custom:_");
+                } else {
+                    pretty_index = index;
+                }
+
+                extra_pretty_index = prettyLog(pretty_index);
+
+                result += extra_pretty_index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
             }
 
         return result;
 
+    }
+
+    function prettyLog(str) {
+        let frags = str.split('_');
+        for (let i = 0; i < frags.length; i++) {
+            frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+        }
+        return frags.join(' ');
     }
 
 

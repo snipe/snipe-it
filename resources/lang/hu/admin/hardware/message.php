@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Az eszköz nem jött létre, próbálkozzon újra. :(',
         'success' 		=> 'Az eszköz sikeresen létrehozva. :)',
+        'success_linked' => 'Eszköz a :tag azonosítóval sikeresen létrehozva. <strong><a href=":link" style="color: white;">Kattintson ide a megtekintéshez</a></strong>.',
     ],
 
     'update' => [
@@ -23,7 +24,7 @@ return [
         'error'   		=> 'Az eszköz nem állt helyre, kérjük, próbálkozzon újra',
         'success' 		=> 'Az eszköz sikeresen visszaállítva.',
         'bulk_success' 		=> 'Az eszköz sikeresen visszaállítva.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Nem voltak eszközök kiválasztva, így semmi sem lett visszállítva.', 
     ],
 
     'audit' => [
@@ -50,7 +51,7 @@ return [
         'success'               => 'A fájlt importálta',
         'file_delete_success'   => 'A fájlt sikeresen törölték',
         'file_delete_error'      => 'A fájlt nem sikerült törölni',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'A kijelölt fájl nem található',
         'header_row_has_malformed_characters' => 'A fejlécsorban egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
         'content_row_has_malformed_characters' => 'A tartalom első sorában egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
     ],
