@@ -34,4 +34,18 @@ class SavedReportTest extends TestCase
 
         $this->assertEquals('', (new SavedReport)->textValue('is_a_text_value'));
     }
+
+    public function testParsingSelectValues()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testSelectValuesDoNotIncludeDeletedModels()
+    {
+        $this->markTestIncomplete();
+
+        // report saved with select option for a company (or whatever)
+        // company is deleted
+        // ensure company's id is not returned
+    }
 }
