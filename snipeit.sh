@@ -421,8 +421,8 @@ set_dbpass () {
 
 case $distro in
   Debian)
-    if [[ "$version" =~ ^11 ]]; then
-        # Install for Debian 11.x
+    if [[ "$version" =~ ^12 ]]; then
+        # Install for Debian 12.x
         set_fqdn
         set_dbpass
         tzone=$(cat /etc/timezone)
