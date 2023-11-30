@@ -541,16 +541,52 @@ case $distro in
     fi
   ;;
   Ubuntu)
-    if [ "${version//./}" -ge "2204" ]; then
+    if [ "${version//./}" -ge "2304" ]; then
         # Install for Ubuntu 22.04
         set_fqdn
         set_dbpass
         tzone=$(cat /etc/timezone)
 
-	echo "* Set up Ondrej PHP repository"
-	echo "# Odrej PHP repo for ability to choose non-distro PHP versions" > /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
-	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
-	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+        echo -n "* Updating installed packages."
+        log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+        log "a2ensite $APP_NAME.conf"
+        rename_default_vhost
+
+        set_hosts
+
+        echo "* Starting MariaDB."
+        log "systemctl start mariadb.service"
+
+        install_snipeit
+
+        echo "* Restarting Apache httpd."
+        log "systemctl restart apache2"
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+    elif [ "${version//./}" -eq "2204" ]; then
+        # Install for Ubuntu 22.04
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
+
+        echo "* Set up Ondrej PHP repository"
+        echo "# Odrej PHP repo for ability to choose non-distro PHP versions" > /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+        echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
 
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
