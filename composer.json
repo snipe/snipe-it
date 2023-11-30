@@ -74,6 +74,9 @@
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^6.1"
   },
+  "suggest": {
+    "ext-ldap": "*"
+  },
   "require-dev": {
     "brianium/paratest": "^6.6",
     "fakerphp/faker": "^1.16",

@@ -79,6 +79,28 @@ class Settings
         ]);
     }
 
+    public function enableAnonymousLdap(): Settings
+    {
+        return $this->update([
+            'ldap_enabled' => 1,
+            'ldap_server' => 'ldaps://ldap.example.com',
+//            'ldap_uname' => 'fake_username',
+            'ldap_pword' => Crypt::encrypt("fake_password"),
+            'ldap_basedn' => 'CN=Users,DC=ad,DC=example,Dc=com'
+        ]);
+    }
+
+    public function enableBadPasswordLdap(): Settings
+    {
+        return $this->update([
+            'ldap_enabled' => 1,
+            'ldap_server' => 'ldaps://ldap.example.com',
+            'ldap_uname' => 'fake_username',
+            'ldap_pword' => "badly_encrypted_password!",
+            'ldap_basedn' => 'CN=Users,DC=ad,DC=example,Dc=com'
+        ]);
+    }
+
     /**
      * @param array $attributes Attributes to modify in the application's settings.
      */
