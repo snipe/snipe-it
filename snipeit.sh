@@ -215,8 +215,8 @@ install_composer () {
   fi
 
   if [[ "$distro" == "Debian" ]]; then
-    run_as_app_user "php $COMPOSER_PATH/composer-setup.php"
-    run_as_app_user "rm $COMPOSER_PATH/composer-setup.php"
+    run_as_app_user php $COMPOSER_PATH/composer-setup.php
+    run_as_app_user rm $COMPOSER_PATH/composer-setup.php
   else
     run_as_app_user php composer-setup.php
     run_as_app_user rm composer-setup.php
@@ -262,7 +262,7 @@ install_snipeit () {
   echo "* Running composer."
   # We specify the path to composer because CentOS lacks /usr/local/bin in $PATH when using sudo
   if [[ "$distro" == "Debian" ]]; then
-    run_as_app_user "/usr/local/bin/composer install --no-dev --prefer-source --working-dir "$APP_PATH""
+    run_as_app_user /usr/local/bin/composer install --no-dev --prefer-source --working-dir "$APP_PATH"
   else
     echo "* This can take 5 minutes or more. Tail $APP_LOG for more full command output." & pid=$!
     progress
@@ -455,7 +455,7 @@ case $distro in
 
         echo "* Clearing cache and setting final permissions."
         chmod 777 -R $APP_PATH/storage/framework/cache/
-        run_as_app_user "php $APP_PATH/artisan cache:clear"
+        run_as_app_user php $APP_PATH/artisan cache:clear
         chmod 775 -R $APP_PATH/storage/
 
     elif [[ "$version" =~ ^11 ]]; then
@@ -492,7 +492,7 @@ case $distro in
 
         echo "* Clearing cache and setting final permissions."
         chmod 777 -R $APP_PATH/storage/framework/cache/
-        run_as_app_user "php $APP_PATH/artisan cache:clear"
+        run_as_app_user php $APP_PATH/artisan cache:clear
         chmod 775 -R $APP_PATH/storage/
 
     elif [[ "$version" =~ ^10 ]]; then
@@ -529,7 +529,7 @@ case $distro in
 
         echo "* Clearing cache and setting final permissions."
         chmod 777 -R $APP_PATH/storage/framework/cache/
-        run_as_app_user "php $APP_PATH/artisan cache:clear"
+        run_as_app_user php $APP_PATH/artisan cache:clear
         chmod 775 -R $APP_PATH/storage/
 
     elif [[ "$version" =~ ^9 ]]; then
@@ -551,7 +551,7 @@ case $distro in
 	echo "# Odrej PHP repo for ability to choose non-distro PHP versions" > /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
 	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
-        
+
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
         progress
