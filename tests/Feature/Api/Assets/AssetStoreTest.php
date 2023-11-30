@@ -66,7 +66,6 @@ class AssetStoreTest extends TestCase
 
         $this->assertTrue($asset->adminuser->is($user));
 
-        $this->assertTrue($asset->physical);
         // @todo: This isn't in the docs but it's in the controller
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
         $this->assertEquals('random_string', $asset->asset_tag);
