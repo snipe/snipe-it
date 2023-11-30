@@ -70,7 +70,6 @@ class Asset extends Depreciable
     protected $injectUniqueIdentifier = true;
 
     protected $casts = [
-        'archived' => 'boolean',
         'physical' => 'boolean',
         'purchase_date' => 'date',
         'eol_explicit' => 'boolean',
@@ -743,7 +742,7 @@ class Asset extends Depreciable
     {
         $days = (is_null($days)) ? 30 : $days;
 
-        return self::where('archived', '=', '0')
+        return self::where('archived', '=', '0') // this can stay for right now, as `archived` defaults to 0 at the db level, but should probably be replaced with assetstatus->archived?
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')

@@ -37,7 +37,6 @@ class AssetStoreTest extends TestCase
 
         $response = $this->actingAsForApi($user)
             ->postJson(route('api.assets.store'), [
-                'archived' => false, // set explicitly in controller
                 'asset_eol_date' => '2024-06-02',
                 'asset_tag' => 'random_string',
                 'assigned_user' => $userAssigned->id, // assigned_to is set in the request, assigned_to isn't set through the api request
@@ -67,8 +66,6 @@ class AssetStoreTest extends TestCase
 
         $this->assertTrue($asset->adminuser->is($user));
 
-        // @todo: this is explicitly set 0 in the controller but they docs say they are customizable
-        $this->assertFalse($asset->archived);
         $this->assertTrue($asset->physical);
         // @todo: This isn't in the docs but it's in the controller
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
