@@ -5,7 +5,7 @@ namespace App\Models\Labels\Tapes\Dymo;
 
 class LabelWriter_30252 extends LabelWriter
 {
-	private const BARCODE_SIZE   =   3.20;
+    private const BARCODE_SIZE   =   3.20;
     private const BARCODE_MARGIN =   1.80;
     private const TAG_SIZE       =   2.80;
     private const TITLE_SIZE     =   2.80;
