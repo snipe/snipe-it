@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SavedReport;
 use Illuminate\Http\Request;
 
 class SavedReportsController extends Controller
 {
-    //a method to the madness
     public function store(Request $request)
     {
+        // @todo: make this dynamic
+        $savedReport = SavedReport::first();
 
+        $savedReport->options = $request->except('_token');
 
-    dd($request->all());
+        $savedReport->save();
 
+        // @todo: redirect back with the saved report pre-populated?
+        return redirect()->back();
     }
-
 }

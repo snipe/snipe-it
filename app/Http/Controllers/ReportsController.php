@@ -394,7 +394,13 @@ class ReportsController extends Controller
         $customfields = CustomField::get();
         $saved_reports = SavedReport::get();
 
-        return view('reports/custom')->with('customfields', $customfields)->with('saved_reports', $saved_reports);
+        return view('reports/custom', [
+            'customfields' => $customfields,
+            'saved_reports' => $saved_reports,
+            // @todo: temporary
+            'savedReport' => $saved_reports->first(),
+            // 'savedReport' => new SavedReport,
+        ]);
     }
 
     /**
@@ -407,6 +413,7 @@ class ReportsController extends Controller
      */
     public function postCustom(Request $request)
     {
+        dd('postCustom', $request->all());
         ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
         $this->authorize('reports.view');
 
