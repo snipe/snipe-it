@@ -5,6 +5,7 @@ namespace App\Models\Labels\Tapes\Dymo;
 
 class LabelWriter_30252 extends LabelWriter
 {
+	private const BARCODE_SIZE   =   3.20;
     private const BARCODE_MARGIN =   1.80;
     private const TAG_SIZE       =   2.80;
     private const TITLE_SIZE     =   2.80;
@@ -35,6 +36,13 @@ class LabelWriter_30252 extends LabelWriter
         $usableWidth = $pa->w;
 
         $barcodeSize = $pa->h - self::TAG_SIZE;
+
+        if ($record->has('barcode1d')) {
+            static::write1DBarcode(
+                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
+                $barcodeSize + self::BARCODE_MARGIN + self::LABEL_SIZE, $pa->h, $pa->w - $barcodeSize, self::BARCODE_SIZE
+            );
+        }
 
         if ($record->has('barcode2d')) {
             static::writeText(
