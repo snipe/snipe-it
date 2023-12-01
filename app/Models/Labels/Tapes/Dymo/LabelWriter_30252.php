@@ -37,13 +37,6 @@ class LabelWriter_30252 extends LabelWriter
 
         $barcodeSize = $pa->h - self::TAG_SIZE;
 
-        if ($record->has('barcode1d')) {
-            static::write1DBarcode(
-                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
-                $barcodeSize + self::BARCODE_MARGIN + self::LABEL_SIZE, $pa->h, $pa->w - $barcodeSize, self::BARCODE_SIZE
-            );
-        }
-
         if ($record->has('barcode2d')) {
             static::writeText(
                 $pdf, $record->get('tag'),
@@ -93,6 +86,13 @@ class LabelWriter_30252 extends LabelWriter
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.3
             );
             $currentY += self::FIELD_SIZE + self::FIELD_MARGIN;
+        }
+
+        if ($record->has('barcode1d')) {
+            static::write1DBarcode(
+                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
+				$currentX, $barcodeSize + self::BARCODE_MARGIN, $usableWidth - self::TAG_SIZE, self::TAG_SIZE
+            );
         }
     }
 }
