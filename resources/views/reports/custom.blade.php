@@ -276,9 +276,9 @@
             <div class="form-group purchase-range">
               <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="form-control" name="created_start" aria-label="created_start">
+                <input type="text" class="form-control" name="created_start" aria-label="created_start" value="{{ $savedReport->textValue('created_start') }}">
                 <span class="input-group-addon">to</span>
-                <input type="text" class="form-control" name="created_end" aria-label="created_end">
+                <input type="text" class="form-control" name="created_end" aria-label="created_end" value="{{ $savedReport->textValue('created_end') }}">
               </div>
             </div>
 
@@ -286,9 +286,9 @@
           <div class="form-group checkout-range">
               <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                  <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start">
+                  <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start" value="{{ $savedReport->textValue('checkout_date_start') }}">
                   <span class="input-group-addon">to</span>
-                  <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end">
+                  <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end" value="{{ $savedReport->textValue('checkout_date_end') }}">
               </div>
           </div>
 
@@ -296,9 +296,9 @@
             <div class="form-group expected_checkin-range">
               <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="form-control" name="expected_checkin_start" aria-label="expected_checkin_start">
+                <input type="text" class="form-control" name="expected_checkin_start" aria-label="expected_checkin_start" value="{{ $savedReport->textValue('expected_checkin_start') }}">
                 <span class="input-group-addon">to</span>
-                <input type="text" class="form-control" name="expected_checkin_end" aria-label="expected_checkin_end">
+                <input type="text" class="form-control" name="expected_checkin_end" aria-label="expected_checkin_end" value="{{ $savedReport->textValue('expected_checkin_end') }}">
               </div>
             </div>
 
@@ -306,9 +306,9 @@
               <div class="form-group last_audit-range">
                   <label for="last_audit_start" class="col-md-3 control-label">{{ trans('general.last_audit') }}</label>
                   <div class="input-daterange input-group col-md-6" id="datepicker">
-                      <input type="text" class="form-control" name="last_audit_start" aria-label="last_audit_start">
+                      <input type="text" class="form-control" name="last_audit_start" aria-label="last_audit_start" value="{{ $savedReport->textValue('last_audit_start') }}">
                       <span class="input-group-addon">to</span>
-                      <input type="text" class="form-control" name="last_audit_end" aria-label="last_audit_end">
+                      <input type="text" class="form-control" name="last_audit_end" aria-label="last_audit_end" value="{{ $savedReport->textValue('last_audit_end') }}">
                   </div>
               </div>
 
@@ -316,9 +316,9 @@
               <div class="form-group next_audit-range">
                   <label for="next_audit_start" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
                   <div class="input-daterange input-group col-md-6" id="datepicker">
-                      <input type="text" class="form-control" name="next_audit_start" aria-label="nex_audit_start">
+                      <input type="text" class="form-control" name="next_audit_start" aria-label="nex_audit_start" value="{{ $savedReport->textValue('next_audit_start') }}">
                       <span class="input-group-addon">to</span>
-                      <input type="text" class="form-control" name="next_audit_end" aria-label="next_audit_end">
+                      <input type="text" class="form-control" name="next_audit_end" aria-label="next_audit_end" value="{{ $savedReport->textValue('next_audit_end') }}">
                   </div>
               </div>
 
