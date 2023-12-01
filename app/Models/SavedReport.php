@@ -24,7 +24,7 @@ class SavedReport extends Model
         'options',
     ];
 
-    public function checkmarkValue($property)
+    public function checkmarkValue($property): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.
@@ -37,7 +37,25 @@ class SavedReport extends Model
         return $this->options[$property] ?? '0';
     }
 
-    public function textValue($property)
+    public function selectValue($property)
+    {
+        return $this->options[$property] ?? null;
+    }
+
+    public function selectValues($property)
+    {
+        if (!isset($this->options[$property])) {
+            return null;
+        }
+
+        if ($this->options[$property] === [null]) {
+            return null;
+        }
+
+        return $this->options[$property];
+    }
+
+    public function textValue($property): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.

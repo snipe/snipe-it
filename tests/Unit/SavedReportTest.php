@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class SavedReportTest extends TestCase
 {
-    public function testParsingCheckmarkValues()
+    public function testParsingCheckmarkValue()
     {
         $savedReport = SavedReport::factory()->create([
             'options' => [
@@ -21,7 +21,7 @@ class SavedReportTest extends TestCase
         $this->assertEquals('1', (new SavedReport)->checkmarkValue('is_a_checkbox_value'));
     }
 
-    public function testParsingTextValues()
+    public function testParsingTextValue()
     {
         $savedReport = SavedReport::factory()->create([
             'options' => [
@@ -35,17 +35,52 @@ class SavedReportTest extends TestCase
         $this->assertEquals('', (new SavedReport)->textValue('is_a_text_value'));
     }
 
-    public function testParsingSelectValues()
+    public function testParsingSelectValue()
     {
-        $this->markTestIncomplete();
+        $savedReport = SavedReport::factory()->create([
+            'options' => [
+                'is_a_text_value_as_well' => '4',
+                'contains_a_null_value' => null,
+            ],
+        ]);
+
+        $this->assertEquals('4', $savedReport->selectValue('is_a_text_value_as_well'));
+        $this->assertEquals('', $savedReport->selectValue('non_existent_key'));
+        $this->assertNull($savedReport->selectValue('contains_a_null_value'));
     }
 
-    public function testSelectValuesDoNotIncludeDeletedModels()
+    public function testParsingSelectValues()
+    {
+        $savedReport = SavedReport::factory()->create([
+            'options' => [
+                'is_an_array' => ['2', '3', '4'],
+                'is_an_array_containing_null' => [null],
+            ],
+        ]);
+
+        $this->assertEquals(['2', '3', '4'], $savedReport->selectValues('is_an_array'));
+        $this->assertEquals(null, $savedReport->selectValues('non_existent_key'));
+        $this->assertNull($savedReport->selectValues('is_an_array_containing_null'));
+    }
+
+    public function testSelectValueDoesNotIncludeDeletedOrNonExistentModels()
+    {
+        $this->markTestIncomplete();
+
+        // @todo: maybe it should optionally include deleted values?
+    }
+
+    public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()
     {
         $this->markTestIncomplete();
 
         // report saved with select option for a company (or whatever)
         // company is deleted
         // ensure company's id is not returned
+    }
+
+    public function testDeletedCustomFieldsDoNotCauseAnIssue()
+    {
+        $this->markTestIncomplete();
     }
 }
