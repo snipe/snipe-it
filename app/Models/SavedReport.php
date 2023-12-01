@@ -37,6 +37,17 @@ class SavedReport extends Model
         return $this->options[$property] ?? '0';
     }
 
+    public function radioValue($property, $value, $return)
+    {
+        // @todo: this method feels more like "radioShouldBeChecked" or something...
+
+        if (array_has($this->options, $property) && $this->options[$property] === $value) {
+            return $return;
+        }
+
+        return null;
+    }
+
     public function selectValue($property)
     {
         return $this->options[$property] ?? null;

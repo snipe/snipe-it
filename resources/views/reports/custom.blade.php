@@ -336,17 +336,16 @@
             </div>
 
               <div class="col-md-9 col-md-offset-3">
-
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', '', true, ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_exclude_deleted'])}}
+                    {{ Form::radio('deleted_assets', '', $savedReport->radioValue('deleted_assets', null, true), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_exclude_deleted'])}}
                     {{ trans('general.exclude_deleted') }}
                   </label>
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', '1', old('deleted_assets'), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_include_deleted']) }}
+                    {{ Form::radio('deleted_assets', '1', $savedReport->radioValue('deleted_assets', '1', '1'), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_include_deleted']) }}
                     {{ trans('general.include_deleted') }}
                   </label>
                   <label class="form-control">
-                  {{ Form::radio('deleted_assets', '0', old('deleted_assets'), ['aria-label'=>'deleted_assets','id'=>'deleted_assets_only_deleted']) }}
+                  {{ Form::radio('deleted_assets', '0', $savedReport->radioValue('deleted_assets', '0', '1'), ['aria-label'=>'deleted_assets','id'=>'deleted_assets_only_deleted']) }}
                     {{ trans('general.only_deleted') }}
                   </label>
               </div>

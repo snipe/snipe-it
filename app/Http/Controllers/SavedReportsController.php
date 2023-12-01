@@ -9,13 +9,14 @@ class SavedReportsController extends Controller
 {
     public function store(Request $request)
     {
+        // @todo: make this dynamic
         $savedReport = SavedReport::first();
 
         $savedReport->options = $request->except('_token');
 
         $savedReport->save();
 
-        // @todo: should this redirect elsewhere?
+        // @todo: redirect back with the saved report pre-populated?
         return redirect()->back();
     }
 }
