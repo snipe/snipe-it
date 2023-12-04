@@ -491,7 +491,7 @@
                 <thead>
                 <tr>
                   <th class="col-md-4">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('admin/hardware/form.serial') }}</th>
+                  <th class="col-md-4">{{ trans('admin/licenses/form.license_key') }}</th>
                   <th class="col-md-4">{{ trans('general.category') }}</th>
                 </tr>
                 </thead>
