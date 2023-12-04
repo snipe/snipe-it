@@ -275,7 +275,7 @@ class AssetStoreTest extends TestCase
 
         $this->settings->disableAutoIncrement();
 
-        $response1 = $this->actingAsForApi(User::factory()->superuser()->create())
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'asset_tag' => $asset_tag,
                 'model_id' => $model->id,
@@ -285,9 +285,9 @@ class AssetStoreTest extends TestCase
             ->assertStatusMessageIs('success')
             ->json();
 
-       $asset1 = Asset::find($response1['payload']['id'])->delete();
+       Asset::find($response['payload']['id'])->delete();
 
-        $response2 = $this->actingAsForApi(User::factory()->superuser()->create())
+        $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'asset_tag' => $asset_tag,
                 'model_id' => $model->id,
