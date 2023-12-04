@@ -982,7 +982,6 @@
                     $(inputElement).closest('.help-block').remove();
                 },
                 onfocusout: function(element) {
-                    // console.log($(element).valid());
                     return $(element).valid();
                 },
             });
