@@ -490,11 +490,11 @@
                     }'>
                 <thead>
                 <tr>
-                  <th class="col-md-1">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('admin/licenses/form.license_key') }}</th>
-                  <th class="col-md-3">{{ trans('admin/licenses/form.to_name') }}</th>
-                  <th class="col-md-3">{{ trans('admin/licenses/form.to_email') }}</th>
-                  <th class="col-md-1">{{ trans('general.category') }}</th>
+                  <th>{{ trans('general.name') }}</th>
+                  <th>{{ trans('admin/licenses/form.license_key') }}</th>
+                  <th>{{ trans('admin/licenses/form.to_name') }}</th>
+                  <th>{{ trans('admin/licenses/form.to_email') }}</th>
+                  <th>{{ trans('general.category') }}</th>
 
                 </tr>
                 </thead>
