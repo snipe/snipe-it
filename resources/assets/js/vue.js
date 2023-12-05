@@ -21,10 +21,11 @@ Vue.component(
     require('./components/passport/AuthorizedClients.vue').default
 );
 
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
-);
+// This component has been removed and replaced with a Livewire implementation
+// Vue.component(
+//     'passport-personal-access-tokens',
+//     require('./components/passport/PersonalAccessTokens.vue').default
+// );
 
 // This component has been removed and replaced with a Livewire implementation
 // Vue.component(
