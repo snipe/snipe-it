@@ -421,6 +421,7 @@ class SettingsController extends Controller
         // Only allow the site name and CSS to be changed if lock_passwords is false
         // Because public demos make people act like dicks
         if (! config('app.lock_passwords')) {
+            $request->validate(['site_name' => 'required']);
             $setting->site_name = $request->input('site_name');
             $setting->custom_css = $request->input('custom_css');
         }
