@@ -492,5 +492,6 @@ return [
     'copy_to_clipboard' => 'Copy to Clipboard',
     'copied' => 'Copied!',
     'status_compatibility' => 'If assets are already assigned, they cannot be changed to a non-deployable status type and this value change will be skipped.',
+    'rtd_location_help' => 'This is the location of the asset when it is not checked out',
 
 ];
