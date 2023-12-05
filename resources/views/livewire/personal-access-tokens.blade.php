@@ -102,34 +102,9 @@
                                        autofocus
                                 >
                             </div>
-
                         </div>
-
-                        <!-- Scopes -->
-                        {{-- Seems like scopes was never working, I couldn't figure out how to enable the feature if it was --}}
-                        {{--                    <div class="form-group"--}}
-                        {{--                         v-if="scopes.length > 0"--}}
-                        {{--                    >--}}
-                        {{--                        <label class="col-md-4 control-label">Scopes</label>--}}
-
-                        {{--                        <div class="col-md-6">--}}
-                        {{--                            <div--}}
-                        {{--                                    v-for="scope in scopes"--}}
-                        {{--                            >--}}
-                        {{--                                <div class="checkbox">--}}
-                        {{--                                    <label>--}}
-                        {{--                                        <input type="checkbox"--}}
-                        {{--                                               @click="toggleScope(scope.id)"--}}
-                        {{--                                               :checked="scopeIsAssigned(scope.id)"--}}
-                        {{--                                        >--}}
-
-                        {{--                                        {{ scope.id }}--}}
-                        {{--                                    </label>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-                        {{--                    </div>--}}
                     </form>
+
                 </div>
 
                 <!-- Modal Actions -->
