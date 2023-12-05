@@ -295,8 +295,8 @@ class ActionlogsTransformer
             $newStatus = $status->find($clean_meta['status_id']['new']);
             $newStatusName = $newStatus ? e($newStatus->name) : trans('admin/statuslabels/message.deleted_label');
 
-            $clean_meta['status_id']['old'] = $clean_meta['status_id']['old'] ?  $oldStatusName : trans('general.unassigned');
-            $clean_meta['status_id']['new'] = $clean_meta['status_id']['new'] ?  $newStatusName : trans('general.unassigned');
+            $clean_meta['status_id']['old'] = $clean_meta['status_id']['old'] ? "[id: ".$clean_meta['status_id']['old']."] ". $oldStatusName : trans('general.unassigned');
+            $clean_meta['status_id']['new'] = $clean_meta['status_id']['new'] ? "[id: ".$clean_meta['status_id']['new']."] ". $newStatusName : trans('general.unassigned');
             $clean_meta['Status'] = $clean_meta['status_id'];
             unset($clean_meta['status_id']);
         }
