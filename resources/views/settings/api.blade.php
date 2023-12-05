@@ -15,7 +15,7 @@
     @if (!config('app.lock_passwords'))
         <div id="app">
             <livewire:oauth-clients />
-            <passport-clients clients-url="{{ url('oauth/clients') }}"></passport-clients>
+{{--            <passport-clients clients-url="{{ url('oauth/clients') }}"></passport-clients>--}}
             <passport-authorized-clients clients-url="{{ url('oauth/clients') }}" tokens-url="{{ url('oauth/tokens') }}"></passport-authorized-clients>
         </div>
     @else

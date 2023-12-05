@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\Client;
 use Laravel\Passport\ClientRepository;
 use Livewire\Component;
 
@@ -29,11 +29,12 @@ class OauthClients extends Component
 
         //$newClient = ;
 
-        $this->dispatchBrowserEvent('clientCreated', $newClient->accessToken);
+        //$this->dispatchBrowserEvent('clientCreated', $newClient->accessToken);
     }
 
-    public function deleteClient($clientId): void
+    public function deleteClient(Client $clientId): void
     {
-        Auth::user()->clients()->find($clientId)->delete();
+        //->delete must be of type Client - thus the model binding
+        app(ClientRepository::class)->delete($clientId);
     }
 }
