@@ -6,8 +6,8 @@
                     (Livewire) OAuth Clients
                 </h2>
 
-                <a class="action-link"
-{{--                       @click="showCreateClientForm"--}}
+                <a class="button button-small"
+                        wire:click="$emit('openModal')"
                 >
                     Create New Client
                 </a>
@@ -55,7 +55,7 @@
                                 <!-- Edit Button -->
                                 <td style="vertical-align: middle;">
                                     <a class="action-link"
-                                       @click="edit(client)"
+                                       wire:click="editClient('{{ $client->id }}')"
                                     >
                                         Edit
                                     </a>
@@ -76,7 +76,7 @@
     </div>
 
     <!-- Create Client Modal -->
-    <div class="modal fade" id="modal-create-client" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal-create-client" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,19 +89,20 @@
 
                 <div class="modal-body">
                     <!-- Form Errors -->
-                    <div class="alert alert-danger"
-{{--                             v-if="createForm.errors.length > 0"--}}
-                    >
-                        <p><strong>Whoops!</strong> Something went wrong!</p>
-                        <br>
-                        <ul>
-                            <li
-{{--                                        v-for="error in createForm.errors"--}}
-                            >
-{{--                                    {{ error }}--}}
-                            </li>
-                        </ul>
-                    </div>
+                    @if($errors->has('name') || $errors->has('redirect'))
+                        <div class="alert alert-danger">
+                            <p><strong>Whoops!</strong> Something went wrong!</p>
+                            <br>
+                            <ul>
+                                @if($errors->has('name'))
+                                    <li>{{ $errors->first('name') }}</li>
+                                @endif
+                                @if($errors->has('redirect'))
+                                    <li>{{ $errors->first('redirect') }}</li>
+                                @endif
+                            </ul>
+                        </div>
+                    @endif
 
                     <!-- Create Client Form -->
                     <form class="form-horizontal" role="form">
@@ -110,9 +111,11 @@
                             <label class="col-md-3 control-label" for="create-client-name">Name</label>
 
                             <div class="col-md-7">
-                                <input id="create-client-name" type="text" aria-label="create-client-name" class="form-control"
-{{--                                           @keyup.enter="store" --}}
-{{--                                           v-model="createForm.name"--}}
+                                <input id="create-client-name"
+                                       type="text"
+                                       aria-label="create-client-name"
+                                       class="form-control"
+                                       wire:model="name"
                                 >
 
                                 <span class="help-block">
@@ -126,9 +129,11 @@
                             <label class="col-md-3 control-label" for="redirect">Redirect URL</label>
 
                             <div class="col-md-7">
-                                <input type="text" class="form-control" aria-label="redirect" name="redirect"
-{{--                                           @keyup.enter="store" --}}
-{{--                                           v-model="createForm.redirect"--}}
+                                <input type="text"
+                                       class="form-control"
+                                       aria-label="redirect"
+                                       name="redirect"
+                                       wire:model="redirect"
                                 >
 
                                 <span class="help-block">
@@ -142,9 +147,9 @@
                 <!-- Modal Actions -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                    <button type="button" class="btn btn-primary"
-{{--                                @click="store"--}}
+                    <button type="button"
+                            class="btn btn-primary"
+                            wire:click="createClient"
                     >
                         Create
                     </button>
@@ -154,7 +159,7 @@
     </div>
 
     <!-- Edit Client Modal -->
-    <div class="modal fade" id="modal-edit-client" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal-edit-client" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,32 +170,36 @@
                     </h4>
                 </div>
 
+
                 <div class="modal-body">
-                    <!-- Form Errors -->
-                    <div class="alert alert-danger"
-{{--                             v-if="editForm.errors.length > 0"--}}
-                    >
-                        <p><strong>Whoops!</strong> Something went wrong!</p>
-                        <br>
-                        <ul>
-                            <li
-{{--                                        v-for="error in editForm.errors"--}}
-                            >
-{{--                                    {{ error }}--}}
-                            </li>
-                        </ul>
-                    </div>
+                    @if($errors->has('newName') || $errors->has('newRedirect'))
+                        <div class="alert alert-danger">
+                            <p><strong>Whoops!</strong> Something went wrong!</p>
+                            <br>
+                            <ul>
+                                @if($errors->has('newName'))
+                                    <li>{{ $errors->first('newName') }}</li>
+                                @endif
+                                @if($errors->has('newRedirect'))
+                                    <li>{{ $errors->first('newRedirect') }}</li>
+                                @endif
+                            </ul>
+                        </div>
+                    @endif
 
                     <!-- Edit Client Form -->
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal">
                         <!-- Name -->
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="edit-client-name">Name</label>
 
                             <div class="col-md-7">
-                                <input id="edit-client-name" type="text" aria-label="edit-client-name" class="form-control"
-{{--                                           @keyup.enter="update" --}}
-{{--                                           v-model="editForm.name"--}}
+                                <input
+                                        id="edit-client-name"
+                                        type="text"
+                                        aria-label="edit-client-name"
+                                        class="form-control"
+                                        wire:model="editName"
                                 >
 
                                 <span class="help-block">
@@ -204,9 +213,12 @@
                             <label class="col-md-3 control-label" for="redirect">Redirect URL</label>
 
                             <div class="col-md-7">
-                                <input type="text" class="form-control" name="redirect" aria-label="redirect"
-{{--                                           @keyup.enter="update" --}}
-{{--                                           v-model="editForm.redirect"--}}
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        name="redirect"
+                                        aria-label="redirect"
+                                        wire:model="editRedirect"
                                 >
 
                                 <span class="help-block">
@@ -221,16 +233,29 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-                    <button type="button" class="btn btn-primary"
-{{--                                @click="update"--}}
+                    <button type="button"
+                            class="btn btn-primary"
+                            wire:click="updateClient('{{ $editClientId }}')"
                     >
-                        Save Changes
+                        Update Client
                     </button>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            window.livewire.on('openModal', () => {
+                $('#modal-create-client').modal('show');
+            });
+        });
+        window.addEventListener('clientCreated', event => {
+            $('#modal-create-client').modal('hide');
+        });
+        window.addEventListener('editClient', event => {
+            $('#modal-edit-client').modal('show');
+        });
+
 
     </script>
 </div>
