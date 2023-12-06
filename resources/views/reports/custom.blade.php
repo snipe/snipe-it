@@ -366,20 +366,27 @@
 
     <div class="col-md-2">
         <div style=padding-bottom:5px>
-            <a href="#" class="btn btn-primary">
-               {{ trans('admin/reports/general.apply_and_generate') }}</a>
+            <button type="submit" class="btn btn-success" style="width: 100%">
+                <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                {{ trans('general.generate') }}
+            </button>
+        </div>
+        <div style=padding-bottom:5px>
+            <a href="#" class="btn btn-primary" style="width: 100%">
+                {{ trans('admin/reports/general.apply_and_generate') }}</a>
         </div>
         <div style=padding-bottom:5px>
             <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                 @csrf
-                    <input type="hidden" id="savetemplateoptions" name="options">
-                    <button class = "btn btn-primary">
+                    <input type="hidden" id="savetemplateform" name="options">
+                    {{--   this will be a box to name the report? --}}
+                    <button class = "btn btn-primary" style="width: 100%">
                         {{ trans('admin/reports/general.save_template') }}
                     </button>
             </form>
         </div>
         <div style=padding-bottom:5px>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" >
+            <a href="#" class="js-data-ajax" data-toggle="dropdown" tabindex="-1" data-placeholder="{{ trans('admin/reports/general.saved_reports')}}" style="width:100%">
                 {{ trans('admin/reports/general.select_template') }}
             <strong class="caret"></strong>
             </a>
@@ -391,22 +398,6 @@
                 @endforeach
             </ul>
         </div>
-
-
-        {{ $fieldname = $report->name }}
-        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('admin/reports/general.select_template') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
-            @if ($report->name!='')
-                <option value="{{ $fieldname }}" selected="selected" role="option" aria-selected="true"  role="option">
-                    @foreach($saved_reports as $report)
-                        <li>
-                            {{ $report->name }}
-                        </li>
-                    @endforeach
-                </option>
-            @else
-                <option value=""  role="option">{{ trans('admin/reports/general.select_template') }}</option>
-            @endif
-        </select>
     </div>
 </div>
 
