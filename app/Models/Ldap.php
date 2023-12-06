@@ -119,9 +119,9 @@ class Ldap extends Model
 
         \Log::debug('Filter query: '.$filterQuery);
 
-        if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
+        if ( $ldapbind = @ldap_bind($connection, $userDn, $password)) {
             \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
-            if (! $ldapbind = self::bindAdminToLdap($connection)) {
+            if ( $ldapbind = self::bindAdminToLdap($connection)) {
                 /*
                  * TODO PLEASE:
                  *
