@@ -9,7 +9,7 @@
     <title>{{ config('app.name') }} - Authorization</title>
 
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ url(mix('css/all.css')) }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
     <style>
         .passport-authorize .container {
             margin-top: 30px;

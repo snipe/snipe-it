@@ -80,6 +80,55 @@
                 </table>
             @endif
         </div>
+        <div>
+            @if ($authorized_tokens->count() > 0)
+                <div>
+                    <div class="panel panel-default">
+                        <h2 class="panel-heading">(Livewire) Authorized Applications</h2>
+
+                        <div class="panel-body">
+                            <!-- Authorized Tokens -->
+                            <table class="table table-borderless m-b-none">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Scopes</th>
+                                    <th><span class="sr-only">Delete</span></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($authorized_tokens as $token)
+                                    <tr>
+                                        <!-- Client Name -->
+                                        <td style="vertical-align: middle;">
+                                            {{ $token->client->name }}
+                                        </td>
+
+                                        <!-- Scopes -->
+                                        <td style="vertical-align: middle;">
+                                            @if(!$token->scopes)
+                                                <span class="label label-default">No Scopes</span>
+                                            @endif
+                                        </td>
+
+                                        <!-- Revoke Button -->
+                                        <td style="vertical-align: middle;">
+                                            <a class="btn btn-sm btn-danger"
+                                                wire:click="deleteToken('{{ $token->id }}')"
+                                            >
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
     </div>
 
     <!-- Create Client Modal -->

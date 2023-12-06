@@ -15,7 +15,6 @@
     @if (!config('app.lock_passwords'))
         <div id="app">
             <livewire:oauth-clients />
-            <passport-authorized-clients clients-url="{{ url('oauth/clients') }}" tokens-url="{{ url('oauth/tokens') }}"></passport-authorized-clients>
         </div>
     @else
         <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Client;
 use Laravel\Passport\ClientRepository;
+use Laravel\Passport\TokenRepository;
 use Livewire\Component;
 
 class OauthClients extends Component
@@ -18,10 +20,12 @@ class OauthClients extends Component
     public $authorizationError;
 
     protected $clientRepository;
+    protected $tokenRepository;
 
     public function __construct()
     {
         $this->clientRepository = app(ClientRepository::class);
+        $this->tokenRepository = app(TokenRepository::class);
         parent::__construct();
     }
 
@@ -29,6 +33,7 @@ class OauthClients extends Component
     {
         return view('livewire.oauth-clients', [
             'clients' => $this->clientRepository->activeForUser(auth()->user()->id),
+            'authorized_tokens' => $this->tokenRepository->forUser(auth()->user()->id)->where('revoked', false),
         ]);
     }
 
@@ -57,6 +62,17 @@ class OauthClients extends Component
         } else {
             Log::warning('User ' . auth()->user()->id . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->user_id);
             $this->authorizationError = 'You are not authorized to delete this client.';
+        }
+    }
+
+    public function deleteToken($tokenId): void
+    {
+        $token = $this->tokenRepository->find($tokenId);
+        if ($token->user_id == auth()->user()->id) {
+            $this->tokenRepository->revokeAccessToken($tokenId);
+        } else {
+            Log::warning('User ' . auth()->user()->id . ' attempted to delete token ' . $tokenId . ' which belongs to user ' . $token->user_id);
+            $this->authorizationError = 'You are not authorized to delete this token.';
         }
     }
 
