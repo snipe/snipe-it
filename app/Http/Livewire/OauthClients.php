@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Client;
 use Laravel\Passport\ClientRepository;
-use Laravel\Passport\Passport;
 use Livewire\Component;
 
 class OauthClients extends Component
@@ -14,6 +14,8 @@ class OauthClients extends Component
     public $editClientId;
     public $editName;
     public $editRedirect;
+
+    public $authorizationError;
 
     protected $clientRepository;
 
@@ -58,6 +60,8 @@ class OauthClients extends Component
         $this->editName = $editClientId->name;
         $this->editRedirect = $editClientId->redirect;
 
+        $this->editClientId = $editClientId->id;
+
         $this->dispatchBrowserEvent('editClient');
     }
 
@@ -74,7 +78,8 @@ class OauthClients extends Component
             $client->redirect = $this->editRedirect;
             $client->save();
         } else {
-            // throw error
+            Log::warning('User ' . auth()->user()->id . ' attempted to edit client ' . $editClientId->id . ' which belongs to user ' . $client->user_id);
+            $this->authorizationError = 'You are not authorized to edit this client.';
         }
 
         $this->dispatchBrowserEvent('clientUpdated');

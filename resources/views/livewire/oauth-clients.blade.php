@@ -183,6 +183,9 @@
                                 @if($errors->has('newRedirect'))
                                     <li>{{ $errors->first('newRedirect') }}</li>
                                 @endif
+                                @if($authCodeError)
+                                    <li>{{ $authorizationError }}</li>
+                                @endif
                             </ul>
                         </div>
                     @endif
@@ -233,7 +236,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-                    <button type="button"
+                    <button
                             class="btn btn-primary"
                             wire:click="updateClient('{{ $editClientId }}')"
                     >
@@ -244,17 +247,21 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             window.livewire.on('openModal', () => {
                 $('#modal-create-client').modal('show');
             });
         });
-        window.addEventListener('clientCreated', event => {
+        window.addEventListener('clientCreated', function() {
             $('#modal-create-client').modal('hide');
         });
-        window.addEventListener('editClient', event => {
+        window.addEventListener('editClient', function() {
             $('#modal-edit-client').modal('show');
         });
+        window.addEventListener('clientUpdated', function() {
+            $('#modal-edit-client').modal('hide');
+        });
+
 
 
     </script>
