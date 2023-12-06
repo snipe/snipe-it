@@ -52,7 +52,12 @@ class OauthClients extends Component
     {
         // test for safety
         // ->delete must be of type Client - thus the model binding
-        $this->clientRepository->delete($clientId);
+        if ($clientId->user_id == auth()->user()->id) {
+            $this->clientRepository->delete($clientId);
+        } else {
+            Log::warning('User ' . auth()->user()->id . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->user_id);
+            $this->authorizationError = 'You are not authorized to delete this client.';
+        }
     }
 
     public function editClient(Client $editClientId): void

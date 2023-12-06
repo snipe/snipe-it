@@ -5,6 +5,13 @@
                 <h2>
                     (Livewire) OAuth Clients
                 </h2>
+                @if($authorizationError)
+                    <div class="alert alert-danger">
+                        <p><strong>Whoops!</strong> Something went wrong!</p>
+                        <br>
+                        {{ $authorizationError }}
+                    </div>
+                @endif
 
                 <a class="button button-small"
                         wire:click="$emit('openModal')"
@@ -183,7 +190,7 @@
                                 @if($errors->has('newRedirect'))
                                     <li>{{ $errors->first('newRedirect') }}</li>
                                 @endif
-                                @if($authCodeError)
+                                @if($authorizationError)
                                     <li>{{ $authorizationError }}</li>
                                 @endif
                             </ul>
