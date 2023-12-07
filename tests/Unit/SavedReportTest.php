@@ -92,6 +92,16 @@ class SavedReportTest extends TestCase
         // ensure company's id is not returned
     }
 
+    public function testGracefullyHandlesSingleSelectBecomingMultiSelect()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testGracefullyHandlesMultiSelectBecomingSingleSelect()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testDeletedCustomFieldsDoNotCauseAnIssue()
     {
         $this->markTestIncomplete();
