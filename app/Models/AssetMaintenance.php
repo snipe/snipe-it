@@ -49,7 +49,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_maintenance_type',
         'is_warranty',
         'start_date',
-        'completed_date',
+        'completion_date',
         'asset_maintenance_time',
         'notes',
         'cost',
