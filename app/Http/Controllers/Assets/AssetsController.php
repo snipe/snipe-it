@@ -311,23 +311,6 @@ class AssetsController extends Controller
         $asset->purchase_cost = $request->input('purchase_cost', null);
         $asset->purchase_date = $request->input('purchase_date', null); 
 	$asset->eol_explicit = $request->filled('eol_explicit');
-	if ($request->filled('eol_explicit')) {
-            if ($request->filled('asset_eol_date')) {
-                $asset->asset_eol_date = $request->input('asset_eol_date', null);
-            } elseif ($request->filled('purchase_date') && ($asset->model->eol > 0)) {
-                $asset->eol_explicit = false;
-                $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
-            } else {
-                $asset->eol_explicit = false;
-                $asset->asset_eol_date = null;
-            }
-	} else {
-            if ($request->filled('purchase_date') && ($asset->model->eol > 0)) {
-                $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
-            } else {
-                $asset->asset_eol_date = null;
-            }
-	}
 	$asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
 
@@ -394,7 +377,26 @@ class AssetsController extends Controller
                 }
             }
         }
-
+		
+	// Update EOL date
+	// Validation for this field is on the base eol_explicit, purchase_date and model_eol fields
+	if ($request->filled('eol_explicit')) {
+		if ($request->filled('asset_eol_date')) {
+			$asset->asset_eol_date = $request->input('asset_eol_date', null);
+		} elseif ($request->filled('purchase_date') && ($asset->model->eol > 0)) {
+			$asset->eol_explicit = false;
+			$asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+		} else {
+			$asset->eol_explicit = false;
+			$asset->asset_eol_date = null;
+		}
+	} else {
+		if ($request->filled('purchase_date') && ($asset->model->eol > 0)) {
+			$asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+		} else {
+			$asset->asset_eol_date = null;
+		}
+	}
 
         if ($asset->save()) {
             return redirect()->route('hardware.show', $assetId)
