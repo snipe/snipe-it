@@ -27,7 +27,7 @@ class SavedReport extends Model
     //we will need a bit to catch and store the name of the report.
     //for now the blip above is creating the name, but can be confusing if multiple are made at once
 
-    public function checkmarkValue($property): string
+    public function checkmarkValue(string $property): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.
@@ -40,9 +40,10 @@ class SavedReport extends Model
         return $this->options[$property] ?? '0';
     }
 
-    public function radioValue($property, $value, $return)
+    public function radioValue(string $property, $value, $return)
     {
         // @todo: this method feels more like "radioShouldBeChecked" or something...
+        // @todo: improve the variable names...
 
 //            if (array_has($this->options, $property) && $this->options[$property] === $value) {
 //                return $return;
@@ -52,12 +53,12 @@ class SavedReport extends Model
         return null;
     }
 
-    public function selectValue($property)
+    public function selectValue(string $property)
     {
         return $this->options[$property] ?? null;
     }
 
-    public function selectValues($property)
+    public function selectValues(string $property)
     {
         if (!isset($this->options[$property])) {
             return null;
@@ -70,7 +71,7 @@ class SavedReport extends Model
         return $this->options[$property];
     }
 
-    public function textValue($property): string
+    public function textValue(string $property): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.
