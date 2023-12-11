@@ -386,17 +386,18 @@
             </form>
         </div>
         <div style=padding-bottom:5px>
-            <a href="#" class="js-data-ajax" data-toggle="dropdown" tabindex="-1" data-placeholder="{{ trans('admin/reports/general.saved_reports')}}" style="width:100%">
-                {{ trans('admin/reports/general.select_template') }}
-            <strong class="caret"></strong>
-            </a>
-            <ul class="dropdown-menu">
+{{--            <a href="#" class="js-data-ajax" data-toggle="dropdown" tabindex="-1" data-placeholder="{{ trans('admin/reports/general.saved_reports')}}" style="width:100%">--}}
+{{--                {{ trans('admin/reports/general.select_template') }}--}}
+{{--            <strong class="caret"></strong>--}}
+{{--            </a>--}}
+{{--            {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}--}}
+            <select class="form-control select2">
                 @foreach($saved_reports as $report)
-                    <li>
+                    <option>
                         {{ $report->name }}
-                    </li>
+                    </option>
                 @endforeach
-            </ul>
+            </select>
         </div>
     </div>
 </div>

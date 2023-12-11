@@ -388,7 +388,7 @@ class ReportsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\Response
     */
-    public function getCustomReport()
+    public function getCustomReport(Request $request)
     {
         $this->authorize('reports.view');
         $customfields = CustomField::get();
@@ -398,7 +398,7 @@ class ReportsController extends Controller
             'customfields' => $customfields,
             'saved_reports' => $saved_reports,
             // @todo: temporary
-            'savedReport' => $saved_reports->first(),
+            'savedReport' => $saved_reports->find($request->input('report')),
             // 'savedReport' => new SavedReport,
         ]);
     }
