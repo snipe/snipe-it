@@ -49,4 +49,22 @@ class SavedReportsTest extends TestCase
     {
         $this->markTestIncomplete();
     }
+
+    public function testSavingReportRequiresValidFields()
+    {
+        $this->markTestIncomplete();
+
+        $this->actingAs(User::factory()->canViewReports()->create())
+            ->post(route('savedreports/store'), [
+                //
+            ])
+            ->assertSessionHasErrors('report_name');
+    }
+
+    public function testSavingReportRequiresCorrectPermission()
+    {
+        $this->actingAs(User::factory()->create())
+            ->post(route('savedreports/store'))
+            ->assertForbidden();
+    }
 }

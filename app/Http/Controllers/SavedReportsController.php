@@ -8,6 +8,8 @@ class SavedReportsController extends Controller
 {
     public function store(Request $request)
     {
+        $this->authorize('reports.view');
+
         $report = $request->user()->savedReports()->create([
             'name' => $request->get('report_name'),
             'options' => $request->except(['_token', 'report_name']),

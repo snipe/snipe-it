@@ -357,6 +357,7 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
+    // @todo: change to saved-template?
     Route::post('reports/savedtemplate', [SavedReportsController::class, 'store'])->name('savedreports/store');
 
     Route::get(
