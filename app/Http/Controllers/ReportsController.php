@@ -397,9 +397,7 @@ class ReportsController extends Controller
         return view('reports/custom', [
             'customfields' => $customfields,
             'saved_reports' => $saved_reports,
-            // @todo: temporary
-            'savedReport' => $saved_reports->find($request->input('report')),
-            // 'savedReport' => new SavedReport,
+            'savedReport' => $saved_reports->find($request->input('report')) ?? new SavedReport,
         ]);
     }
 

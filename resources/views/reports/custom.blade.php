@@ -372,13 +372,10 @@
             </button>
         </div>
         <div style=padding-bottom:5px>
-            <a href="#" class="btn btn-primary" style="width: 100%">
-                {{ trans('admin/reports/general.apply_and_generate') }}</a>
-        </div>
-        <div style=padding-bottom:5px>
             <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                 @csrf
                     <input type="hidden" id="savetemplateform" name="options">
+                    <input type="text" id="report_name" name="report_name">
                     {{--   this will be a box to name the report? --}}
                     <button class = "btn btn-primary" style="width: 100%">
                         {{ trans('admin/reports/general.save_template') }}
@@ -391,13 +388,30 @@
 {{--            <strong class="caret"></strong>--}}
 {{--            </a>--}}
 {{--            {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}--}}
-            <select class="form-control select2">
+            <select
+                id="saved_report_select"
+                class="form-control select2"
+                data-placeholder="Load Saved Report"
+                data-allow-clear="true"
+            >
+                <option></option>
                 @foreach($saved_reports as $report)
-                    <option>
+                    <option value="{{ $report->id }}" @if (request()->input('report') == $report->id) selected @endif>
                         {{ $report->name }}
                     </option>
                 @endforeach
             </select>
+            @push('js')
+                <script>
+                    $('#saved_report_select')
+                        .on('select2:select', function (event) {
+                            window.location.href = '{{ route('reports/custom') }}?report=' + event.params.data.id;
+                        })
+                        .on('select2:clearing', function (event) {
+                            window.location.href = '{{ route('reports/custom') }}';
+                        });
+                </script>
+            @endpush
         </div>
     </div>
 </div>
@@ -445,7 +459,17 @@
 
       $("#savetemplateform").submit(function(e) {
           e.preventDefault(e);
-          $('#custom-report-form').attr('action', '/reports/savedtemplate').submit()
+
+          let form = $('#custom-report-form');
+
+          $('<input>').attr({
+              type: 'hidden',
+              name: 'report_name',
+              value: $('#report_name').val(),
+          }).appendTo(form);
+
+          form.attr('action', '/reports/savedtemplate').submit();
+
           // let elements = Array.from(document.getElementById("custom-report-form").elements).map(item=>item.name);
           // console.log(elements);
           //

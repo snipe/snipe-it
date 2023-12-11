@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SavedReport;
 use Illuminate\Http\Request;
 
 class SavedReportsController extends Controller
 {
     public function store(Request $request)
     {
-        // @todo: make this dynamic
-        $savedReport = SavedReport::first();
+        $report = $request->user()->savedReports()->create([
+            'name' => $request->get('report_name'),
+            'options' => $request->except(['_token', 'report_name']),
+        ]);
 
-        $savedReport->options = $request->except('_token');
-
-        $savedReport->save();
-
-        // @todo: redirect back with the saved report pre-populated?
-        return redirect()->back();
+        return redirect()->route('reports/custom', ['report' => $report->id]);
     }
 }

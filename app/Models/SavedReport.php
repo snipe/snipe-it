@@ -24,6 +24,8 @@ class SavedReport extends Model
         'options',
     ];
 
+    // @todo: add $rules
+
     //we will need a bit to catch and store the name of the report.
     //for now the blip above is creating the name, but can be confusing if multiple are made at once
 

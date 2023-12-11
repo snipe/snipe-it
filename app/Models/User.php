@@ -14,6 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
@@ -327,6 +328,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function licenses()
     {
         return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
+    }
+
+    public function savedReports(): HasMany
+    {
+        return $this->hasMany(SavedReport::class);
     }
 
     /**
