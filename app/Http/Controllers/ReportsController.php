@@ -386,7 +386,7 @@ class ReportsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ReportsController::postCustomReport() method that generates the CSV
     * @since [v1.0]
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Contracts\View\View
     */
     public function getCustomReport(Request $request)
     {
