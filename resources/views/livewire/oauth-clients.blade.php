@@ -64,6 +64,7 @@
                                 <td style="vertical-align: middle;">
                                     <a class="action-link"
                                        wire:click="editClient('{{ $client->id }}')"
+                                        onclick="$('#modal-edit-client').modal('show');"
                                     >
                                         Edit
                                     </a>
@@ -263,6 +264,7 @@
                                         aria-label="edit-client-name"
                                         class="form-control"
                                         wire:model="editName"
+                                        wire:keydown.enter="updateClient('{{ $editClientId }}')"
                                 >
 
                                 <span class="help-block">
@@ -282,6 +284,7 @@
                                         name="redirect"
                                         aria-label="redirect"
                                         wire:model="editRedirect"
+                                        wire:keydown.enter="updateClient('{{ $editClientId }}')"
                                 >
 
                                 <span class="help-block">
