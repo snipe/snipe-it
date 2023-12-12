@@ -50,7 +50,7 @@ mix
 mix
   .js(
     [
-      "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
+      "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS - require()s bootstrap.js
       "./resources/assets/js/snipeit_modals.js",
     ],
     "./public/js/build/app.js" //because of compiling - this does not work very well :(
