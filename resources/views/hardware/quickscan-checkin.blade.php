@@ -81,6 +81,8 @@
                         <thead>
                         <tr>
                             <th>{{ trans('general.asset_tag') }}</th>
+                            <th>{{ trans('general.asset_model') }}</th>
+                            <th>{{ trans('general.model_no') }}</th>
                             <th>{{ trans('general.quickscan_checkin_status') }}</th>
                             <th></th>
                         </tr>
@@ -126,7 +128,7 @@
                 data : formData,
                 success : function (data) {
                     if (data.status == 'success') {
-                        $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+                        $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.payload.model + "</td><td>" + data.payload.model_number + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
                         incrementOnSuccess();
                     } else {
                         handlecheckinFail(data);
@@ -146,17 +148,21 @@
         });
 
         function handlecheckinFail (data) {
-            if (data.payload.asset) {
-                var asset = data.payload.asset;
+            if (data.payload.asset_tag) {
+                var asset_tag = data.payload.asset_tag;
+                var model = data.payload.model;
+                var model_number = data.payload.model_number;
             } else {
-                var asset = '';
+                var asset_tag = '';
+                var model = '';
+                var model_number = '';
             }
             if (data.messages) {
                 var messages = data.messages;
             } else {
                 var messages = '';
             }
-            $('#checkedin tbody').prepend("<tr class='danger'><td>" + asset + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
+            $('#checkedin tbody').prepend("<tr class='danger'><td>" + asset_tag + "</td><td>" + model + "</td><td>" + model_number + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
         }
 
         function incrementOnSuccess() {
