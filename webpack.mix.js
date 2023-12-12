@@ -55,7 +55,6 @@ mix
     ],
     "./public/js/build/app.js" //because of compiling - this does not work very well :(
   )
-  .vue();
 
 // Convert the skins to CSS
 mix.less(
