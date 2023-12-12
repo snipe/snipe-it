@@ -375,7 +375,7 @@
             <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                 @csrf
                     <input type="hidden" id="savetemplateform" name="options">
-                    <input type="text" id="name" name="name">
+                    <input type="text" id="name" name="name" value="{{ $savedReport->name }}">
                     {{--   this will be a box to name the report? --}}
                     <button class = "btn btn-primary" style="width: 100%">
                         {{ trans('admin/reports/general.save_template') }}
