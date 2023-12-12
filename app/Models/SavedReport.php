@@ -53,9 +53,9 @@ class SavedReport extends Model
         // @todo: this method feels more like "radioShouldBeChecked" or something...
         // @todo: improve the variable names...
 
-//            if (array_has($this->options, $property) && $this->options[$property] === $value) {
-//                return $return;
-//            }
+            if (array_has($this->options, $property) && $this->options[$property] === $value) {
+                return $return;
+            }
         // this is currently throwing an error. $property is coming through as a string and it needs to be an array
 
         return null;

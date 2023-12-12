@@ -366,22 +366,16 @@
 
     <div class="col-md-2">
         <div style=padding-bottom:5px>
-            <button type="submit" class="btn btn-success" style="width: 100%">
-                <i class="fas fa-download icon-white" aria-hidden="true"></i>
-                {{ trans('general.generate') }}
-            </button>
-        </div>
-        <div style=padding-bottom:5px>
             <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                 @csrf
                     <input type="hidden" id="savetemplateform" name="options">
                     <input type="text" id="name" name="name" value="{{ $savedReport->name }}">
-                    {{--   this will be a box to name the report? --}}
-                    <button class = "btn btn-primary" style="width: 100%">
+                    <button class="btn btn-primary" style="width: 100%">
                         {{ trans('admin/reports/general.save_template') }}
                     </button>
             </form>
         </div>
+
         <div style=padding-bottom:5px>
 {{--            <a href="#" class="js-data-ajax" data-toggle="dropdown" tabindex="-1" data-placeholder="{{ trans('admin/reports/general.saved_reports')}}" style="width:100%">--}}
 {{--                {{ trans('admin/reports/general.select_template') }}--}}
@@ -391,7 +385,7 @@
             <select
                 id="saved_report_select"
                 class="form-control select2"
-                data-placeholder="Load Saved Report"
+                data-placeholder="Load Saved Report" {{-- needs translation --}}
                 data-allow-clear="true"
             >
                 <option></option>
@@ -401,6 +395,19 @@
                     </option>
                 @endforeach
             </select>
+
+            @if($saved_reports->first()!="")
+                <button class = "btn btn-success" style="width: 32%">
+                    <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                </button>
+                <button class = "btn btn-primary" style="width: 32%">
+                    {{ "update"}}
+                </button>
+                <button class = "btn btn-warning" style="width: 32%">
+                    {{ "delete" }}
+                </button>
+            @endif
+
             @push('js')
                 <script>
                     $('#saved_report_select')
@@ -461,7 +468,8 @@
           e.preventDefault(e);
 
           let form = $('#custom-report-form');
-
+          {{-- handle null? --}}
+          {{-- handle duplicate name? --}}
           $('<input>').attr({
               type: 'hidden',
               name: 'name',
