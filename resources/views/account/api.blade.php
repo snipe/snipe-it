@@ -34,9 +34,4 @@
 @stop
 
 @section('moar_scripts')
-<script nonce="{{ csrf_token() }}">
-    new Vue({
-        el: "#app",
-    });
-</script>
 @endsection

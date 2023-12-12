@@ -50,7 +50,6 @@ mix
 mix
   .js(
     [
-      "./resources/assets/js/vue.js", // require()s vue, and require()s bootstrap.js
       "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
       "./resources/assets/js/snipeit_modals.js",
     ],
