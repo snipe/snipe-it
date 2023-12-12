@@ -353,6 +353,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->created_by = Auth::user()->id;
 
         if ($request->has('permissions')) {
             $permissions_array = $request->input('permissions');
