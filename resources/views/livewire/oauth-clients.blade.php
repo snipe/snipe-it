@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h2>
-                    (Livewire) OAuth Clients
+                    OAuth Clients
                 </h2>
                 @if($authorizationError)
                     <div class="alert alert-danger">
@@ -14,7 +14,8 @@
                 @endif
 
                 <a class="button button-small"
-                        wire:click="$emit('openModal')"
+                   wire:click="$emit('openModal')"
+                   onclick="$('#modal-create-client').modal('show');"
                 >
                     Create New Client
                 </a>
@@ -84,7 +85,7 @@
             @if ($authorized_tokens->count() > 0)
                 <div>
                     <div class="panel panel-default">
-                        <h2 class="panel-heading">(Livewire) Authorized Applications</h2>
+                        <h2 class="panel-heading">Authorized Applications</h2>
 
                         <div class="panel-body">
                             <!-- Authorized Tokens -->
@@ -172,6 +173,8 @@
                                        aria-label="create-client-name"
                                        class="form-control"
                                        wire:model="name"
+                                       wire:keydown.enter="createClient"
+                                       autofocus
                                 >
 
                                 <span class="help-block">
@@ -190,6 +193,7 @@
                                        aria-label="redirect"
                                        name="redirect"
                                        wire:model="redirect"
+                                       wire:keydown.enter="createClient"
                                 >
 
                                 <span class="help-block">
@@ -305,7 +309,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.livewire.on('openModal', () => {
-                $('#modal-create-client').modal('show');
+                $('#modal-create-client').modal('show').on('shown.bs.modal', function() {
+                    $(this).find('[autofocus]').focus();
+                });
             });
         });
         window.addEventListener('clientCreated', function() {
