@@ -62,7 +62,7 @@
 
                                 <!-- Edit Button -->
                                 <td style="vertical-align: middle;">
-                                    <a class="action-link"
+                                    <a class="action-link btn"
                                        wire:click="editClient('{{ $client->id }}')"
                                         onclick="$('#modal-edit-client').modal('show');"
                                     >
