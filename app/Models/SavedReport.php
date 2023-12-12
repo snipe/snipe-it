@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 class SavedReport extends Model
 {
     use HasFactory;
+    use ValidatingTrait;
 
     /**
      * The attributes that should be cast.
@@ -25,6 +27,10 @@ class SavedReport extends Model
     ];
 
     // @todo: add $rules
+    protected $rules = [
+        'name' => 'required|unique:saved_reports,name',
+        'options' => 'array',
+    ];
 
     //we will need a bit to catch and store the name of the report.
     //for now the blip above is creating the name, but can be confusing if multiple are made at once

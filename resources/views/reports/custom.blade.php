@@ -375,7 +375,7 @@
             <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                 @csrf
                     <input type="hidden" id="savetemplateform" name="options">
-                    <input type="text" id="report_name" name="report_name">
+                    <input type="text" id="name" name="name">
                     {{--   this will be a box to name the report? --}}
                     <button class = "btn btn-primary" style="width: 100%">
                         {{ trans('admin/reports/general.save_template') }}
@@ -464,8 +464,8 @@
 
           $('<input>').attr({
               type: 'hidden',
-              name: 'report_name',
-              value: $('#report_name').val(),
+              name: 'name',
+              value: $('#name').val(),
           }).appendTo(form);
 
           form.attr('action', '/reports/savedtemplate').submit();

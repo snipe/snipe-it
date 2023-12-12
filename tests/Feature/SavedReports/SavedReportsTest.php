@@ -36,15 +36,6 @@ class SavedReportsTest extends TestCase
             }]);
     }
 
-    public function testCanOnlySeeOwnSavedCustomReports()
-    {
-        $this->markTestIncomplete('potentially...');
-
-        // create saved reports for two users
-        // load the route('reports/custom')
-        // ensure the view only has the current users reports ($saved_reports)
-    }
-
     public function testCanSaveACustomReport()
     {
         $this->markTestIncomplete();
@@ -52,13 +43,11 @@ class SavedReportsTest extends TestCase
 
     public function testSavingReportRequiresValidFields()
     {
-        $this->markTestIncomplete();
-
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post(route('savedreports/store'), [
                 //
             ])
-            ->assertSessionHasErrors('report_name');
+            ->assertSessionHasErrors('name');
     }
 
     public function testSavingReportRequiresCorrectPermission()
