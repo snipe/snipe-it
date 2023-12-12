@@ -38,7 +38,23 @@ class SavedReportsTest extends TestCase
 
     public function testCanSaveACustomReport()
     {
-        $this->markTestIncomplete();
+        $user = User::factory()->canViewReports()->create();
+
+        $this->actingAs($user)
+            ->post(route('savedreports/store'), [
+                'name' => 'My Awesome Report',
+                'company' => '1',
+                'by_company_id' => ['1', '2'],
+            ])
+            ->assertRedirect();
+
+        $report = $user->savedReports->first(function ($report) {
+            return $report->name === 'My Awesome Report';
+        });
+
+        $this->assertNotNull($report);
+        $this->assertEquals('1', $report->options['company']);
+        $this->assertEquals(['1', '2'], $report->options['by_company_id']);
     }
 
     public function testSavingReportRequiresValidFields()
