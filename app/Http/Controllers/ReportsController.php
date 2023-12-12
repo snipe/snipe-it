@@ -392,7 +392,7 @@ class ReportsController extends Controller
     {
         $this->authorize('reports.view');
         $customfields = CustomField::get();
-        $saved_reports = SavedReport::get();
+        $saved_reports = SavedReport::orderBy('name')->get();
 
         return view('reports/custom', [
             'customfields' => $customfields,
