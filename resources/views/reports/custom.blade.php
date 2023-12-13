@@ -400,9 +400,14 @@
                 <button type="submit" class="btn btn-success" style="width: 32%">
                     <i class="fas fa-download icon-white" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-primary" style="width: 32%">
-                    {{ "update"}}
-                </button>
+                <form method="post" id="savetemplateform" action="{{ route("savedreports/update") }}">
+                    @csrf
+                    <input type="hidden" id="savetemplateform" name="options">
+                    <input type="hidden" id="name" name="name" value="{{ $savedReport->name }},1git ">
+                    <button class="btn btn-primary" style="width: 32%">
+                        {{ "update" }}
+                    </button>
+                </form>
                 <button class="btn btn-warning" style="width: 32%">
                     {{ "delete" }}
                 </button>
