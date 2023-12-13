@@ -99,7 +99,7 @@ class CustomFieldFactory extends Factory
             return [
                 'name' => 'Test Checkbox',
                 'help_text' => 'This is a sample checkbox.',
-                'field_values' => "One\nTwo\nThree",
+                'field_values' => "One\r\nTwo\r\nThree",
                 'element'   => 'checkbox',
             ];
         });
