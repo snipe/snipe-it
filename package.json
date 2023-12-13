@@ -18,10 +18,7 @@
         "jquery": "<3.6.0",
         "laravel-mix": "^6.0.49",
         "lodash": "^4.17.20",
-        "postcss": "^8.4.5",
-        "vue": "2.4.4",
-        "vue-loader": "^15.9.7",
-        "vue-template-compiler": "2.4.4"
+        "postcss": "^8.4.5"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.2",
@@ -56,7 +53,6 @@
         "sheetjs": "^2.0.0",
         "tableexport.jquery.plugin": "1.28.0",
         "tether": "^1.4.0",
-        "vue-resource": "^1.5.2",
         "webpack": "^5.89.0"
     }
 }
