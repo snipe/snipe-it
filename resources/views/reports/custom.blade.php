@@ -361,7 +361,7 @@
           </button>
         </div>
       </div> <!--/.box.box-default-->
-    {{ Form::close() }}
+    {{ Form::close() }}  {{--does this need to be at the bottom of all our new stuff?--}}
   </div>
 
     <div class="col-md-2">
@@ -369,7 +369,7 @@
             <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                 @csrf
                     <input type="hidden" id="savetemplateform" name="options">
-                    <input type="text" id="name" name="name" value="{{ $savedReport->name }}">
+                    <input type="text" id="name" name="name" value="{{ $savedReport->name }}"> {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
                     <button class="btn btn-primary" style="width: 100%">
                         {{ trans('admin/reports/general.save_template') }}
                     </button>
@@ -397,13 +397,13 @@
             </select>
 
             @if($saved_reports->first()!="")
-                <button class = "btn btn-success" style="width: 32%">
+                <button type="submit" class="btn btn-success" style="width: 32%">
                     <i class="fas fa-download icon-white" aria-hidden="true"></i>
                 </button>
-                <button class = "btn btn-primary" style="width: 32%">
+                <button class="btn btn-primary" style="width: 32%">
                     {{ "update"}}
                 </button>
-                <button class = "btn btn-warning" style="width: 32%">
+                <button class="btn btn-warning" style="width: 32%">
                     {{ "delete" }}
                 </button>
             @endif
