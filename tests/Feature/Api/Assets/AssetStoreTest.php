@@ -85,6 +85,56 @@ class AssetStoreTest extends TestCase
         $this->assertEquals(10, $asset->warranty_months);
     }
 
+    public function testArchivedDepreciateAndPhysicalCanBeNull()
+    {
+        $model = AssetModel::factory()->ipadModel()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                'archive' => null,
+                'depreciate' => null,
+                'physical' => null
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $asset = Asset::find($response['payload']['id']);
+        $this->assertEquals(0, $asset->archived);
+        $this->assertEquals(1, $asset->physical);
+        $this->assertEquals(0, $asset->depreciate);
+    }
+
+    public function testArchivedDepreciateAndPhysicalCanBeEmpty()
+    {
+        $model = AssetModel::factory()->ipadModel()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                'archive' => '',
+                'depreciate' => '',
+                'physical' => ''
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $asset = Asset::find($response['payload']['id']);
+        $this->assertEquals(0, $asset->archived);
+        $this->assertEquals(1, $asset->physical);
+        $this->assertEquals(0, $asset->depreciate);
+    }
+
     public function testAssetEolDateIsCalculatedIfPurchaseDateSet()
     {
         $model = AssetModel::factory()->mbp13Model()->create();
