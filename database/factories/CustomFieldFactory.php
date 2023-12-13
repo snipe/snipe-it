@@ -105,4 +105,16 @@ class CustomFieldFactory extends Factory
         });
     }
 
+    public function testRadio()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Test Radio',
+                'help_text' => 'This is a sample radio.',
+                'field_values' => "One\r\nTwo\r\nThree",
+                'element'   => 'radio',
+            ];
+        });
+    }
+
 }
