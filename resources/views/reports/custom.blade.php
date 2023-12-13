@@ -27,7 +27,13 @@
     <!-- Horizontal Form -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h2 class="box-title">{{  trans('general.customize_report') }}</h2>
+            <h2 class="box-title">
+                @if ($savedReport->name)
+                    Saved Template: {{ $savedReport->name }}
+                @else
+                    {{ trans('general.customize_report') }}
+                @endif
+            </h2>
         </div><!-- /.box-header -->
 
         <div class="box-body">
