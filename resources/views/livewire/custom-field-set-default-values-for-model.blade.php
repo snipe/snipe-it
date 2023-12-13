@@ -63,6 +63,7 @@
                                     @foreach(explode("\r\n", $field->field_values) as $field_value)
                                     <label class="col-md-3 form-control" for="{{ str_slug($field_value) }}">
                                         <input id="{{ str_slug($field_value) }}" aria-label="{{ str_slug($field->name) }}"  type='radio' name="default_values[{{ $field->id }}]" value="{{$field_value}}" {{ $field->defaultValue($model_id) == $field_value ? 'checked="checked"': '' }} />{{ $field_value }}
+                                    </label>
                                     @endforeach
 
                                 @elseif($field->element == "checkbox")
