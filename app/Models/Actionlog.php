@@ -25,7 +25,17 @@ class Actionlog extends SnipeModel
 
     protected $table = 'action_logs';
     public $timestamps = true;
-    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type', 'stored_eula'];
+    protected $fillable = [
+        'created_at',
+        'item_type',
+        'user_id',
+        'item_id',
+        'action_type',
+        'note',
+        'target_id',
+        'target_type',
+        'stored_eula'
+    ];
 
     use Searchable;
 
@@ -34,7 +44,15 @@ class Actionlog extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['action_type', 'note', 'log_meta','user_id'];
+    protected $searchableAttributes = [
+        'action_type',
+        'note',
+        'log_meta',
+        'user_id',
+        'remote_ip',
+        'user_agent',
+        'action_source'
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
