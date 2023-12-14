@@ -5,6 +5,29 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use ZipArchive;
 
+class SQLStreamer {
+    private stream $input;
+    private ?stream $output;
+    // embed the prefix here?
+
+    public function __construct(stream $input, ?stream $output)
+    {
+        // Iknow, I know, I'm getting there! Don't yell at me :(
+        $this->$input = $input;
+        $this->$output = $output;
+    }
+
+    public function parse_sql() {
+
+    }
+
+    public static function guess_prefix() {
+
+    }
+}
+
+
+
 class RestoreFromBackup extends Command
 {
     /**
@@ -43,7 +66,7 @@ class RestoreFromBackup extends Command
 
     public static function parse_sql(string $line,bool $should_guess = false): string
     {
-        static $is_permitted = false;
+        static $is_permitted = false; // this 'static' is a code-smell.
         // 'continuation' lines for a permitted statement are PERMITTED.
         if($is_permitted && $line[0] === ' ') {
             return $line;
@@ -94,7 +117,11 @@ class RestoreFromBackup extends Command
         // should probably turn this into an instance method? Not sure.
         // something where we can run this, pipe output to /dev/null? Dunno.
         $bytes_read = 0;
-        $reading_beginning_of_line = true;
+        $reading_beginning_of_line = true; //this is weird, because I kinda think it needs to 'leak'
+        // Like, if $reading_beginning_of_line is FALSE, we should be continuing whatever was happening before?
+        // e.g. you did a big giant chunk of INSERT statements -
+        // and it turned into *TWO* fgets's. That's fine, right?
+        // The *second* fgets should be treated how the *first* fgets was.
 
         while (($buffer = fgets($stream, self::$buffer_size)) !== false) { // FIXME this is copied, can we re-use?
             $bytes_read += strlen($buffer);
@@ -163,6 +190,8 @@ class RestoreFromBackup extends Command
             // for 'sanitize-only' - do we have to do something weird here, piping stuff around to stdin and stdout?
             print "FINAL PREFIX IS: ".self::$prefix."\n";
             return true;
+            // so this, to me, feels like *one* mode of the whatever-streamer we have here.
+            // we run *this* one with the guess first, then the 'real' one, and hand STDOUT over.
         }
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
@@ -376,6 +405,8 @@ class RestoreFromBackup extends Command
         $bytes_read = 0;
         $reading_beginning_of_line = true;
 
+        // so this whole bit seems like a dupe - but it's similar as the one that guesses tyings.
+        // The difference is our out-stream is now the pipe to mysql
         try {
             while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
                 $bytes_read += strlen($buffer);
