@@ -359,7 +359,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
     // @todo: change to saved-template?
     Route::post('reports/savedtemplate', [SavedReportsController::class, 'store'])->name('savedreports/store');
-    Route::post('report/savedtemplate', [SavedReportsController::class, 'update'])->name('savedreports/update');
+    // @todo: starting the process of adding "-" to saved-template...
+    Route::get('reports/saved-templates/{reportId}/edit', [SavedReportsController::class, 'edit'])->name('saved-templates.edit');
+    Route::put('report/savedtemplate', [SavedReportsController::class, 'update'])->name('savedreports/update');
 
     Route::get(
         'reports/activity',

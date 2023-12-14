@@ -28,12 +28,52 @@
       <div class="box box-default">
         <div class="box-header with-border">
             <h2 class="box-title">
-                @if ($savedReport->name)
+                @if ($savedReport->exists && request()->routeIs('saved-templates.edit'))
+                    Updating: {{ $savedReport->name }}
+                @elseif($savedReport->exists)
                     Saved Template: {{ $savedReport->name }}
                 @else
                     {{ trans('general.customize_report') }}
                 @endif
             </h2>
+            @if ($savedReport->exists && request()->routeIs('saved-templates.edit'))
+                <div class="box-tools pull-right">
+                    {{-- todo --}}
+                    <form id="savetemplateform" action="{{ route("savedreports/update") }}">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" id="savetemplateform" name="options">
+                        <input type="hidden" id="name" name="name" value="{{ $savedReport->name }},1git ">
+                        <button class="btn btn-primary" style="width: 32%">
+                            {{ "update" }}
+                        </button>
+                    </form>
+                </div>
+            @elseif ($savedReport->exists)
+                <div class="box-tools pull-right">
+                    <a
+                        href="{{ route('saved-templates.edit', $savedReport) }}"
+                        class="btn btn-sm btn-warning"
+                        data-tooltip="true"
+                        title="Update"
+                    >
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                        <span class="sr-only">Update</span>
+                    </a>
+                    {{-- these were pulled from hardware.index and the one below doesn't work...--}}
+                    <a
+                        href="#"
+                        class="actions btn btn-danger btn-sm delete-asset"
+                        data-tooltip="true"
+                        data-toggle="modal"
+                        data-content="Are you sure you wish to delete 1260505622?"
+                        data-title="Delete"
+                        onclick="return false;"
+                    >
+                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span>
+                    </a>
+                </div>
+            @endif
         </div><!-- /.box-header -->
 
         <div class="box-body">
@@ -371,66 +411,68 @@
   </div>
 
     <div class="col-md-2">
-        <div style=padding-bottom:5px>
-            <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
-                @csrf
-                    <input type="hidden" id="savetemplateform" name="options">
-                    <input type="text" id="name" name="name" value="{{ $savedReport->name }}"> {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
-                    <button class="btn btn-primary" style="width: 100%">
-                        {{ trans('admin/reports/general.save_template') }}
-                    </button>
-            </form>
-        </div>
-
-        <div style=padding-bottom:5px>
-{{--            <a href="#" class="js-data-ajax" data-toggle="dropdown" tabindex="-1" data-placeholder="{{ trans('admin/reports/general.saved_reports')}}" style="width:100%">--}}
-{{--                {{ trans('admin/reports/general.select_template') }}--}}
-{{--            <strong class="caret"></strong>--}}
-{{--            </a>--}}
-{{--            {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}--}}
-            <select
-                id="saved_report_select"
-                class="form-control select2"
-                data-placeholder="Load Saved Report" {{-- needs translation --}}
-                data-allow-clear="true"
-            >
-                <option></option>
-                @foreach($saved_reports as $report)
-                    <option value="{{ $report->id }}" @if (request()->input('report') == $report->id) selected @endif>
-                        {{ $report->name }}
-                    </option>
-                @endforeach
-            </select>
-
-            @if($saved_reports->first()!="")
-                <button type="submit" class="btn btn-success" style="width: 32%">
-                    <i class="fas fa-download icon-white" aria-hidden="true"></i>
-                </button>
-                <form method="post" id="savetemplateform" action="{{ route("savedreports/update") }}">
+        @if (! request()->routeIs('saved-templates.edit'))
+            <div style=padding-bottom:5px>
+                <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
                     @csrf
-                    <input type="hidden" id="savetemplateform" name="options">
-                    <input type="hidden" id="name" name="name" value="{{ $savedReport->name }},1git ">
-                    <button class="btn btn-primary" style="width: 32%">
-                        {{ "update" }}
-                    </button>
+                        <input type="hidden" id="savetemplateform" name="options">
+                        <input type="text" id="name" name="name" value="{{ $savedReport->name }}"> {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
+                        <button class="btn btn-primary" style="width: 100%">
+                            {{ trans('admin/reports/general.save_template') }}
+                        </button>
                 </form>
-                <button class="btn btn-warning" style="width: 32%">
-                    {{ "delete" }}
-                </button>
-            @endif
+            </div>
 
-            @push('js')
-                <script>
-                    $('#saved_report_select')
-                        .on('select2:select', function (event) {
-                            window.location.href = '{{ route('reports/custom') }}?report=' + event.params.data.id;
-                        })
-                        .on('select2:clearing', function (event) {
-                            window.location.href = '{{ route('reports/custom') }}';
-                        });
-                </script>
-            @endpush
-        </div>
+            <div style=padding-bottom:5px>
+    {{--            <a href="#" class="js-data-ajax" data-toggle="dropdown" tabindex="-1" data-placeholder="{{ trans('admin/reports/general.saved_reports')}}" style="width:100%">--}}
+    {{--                {{ trans('admin/reports/general.select_template') }}--}}
+    {{--            <strong class="caret"></strong>--}}
+    {{--            </a>--}}
+    {{--            {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}--}}
+                <select
+                    id="saved_report_select"
+                    class="form-control select2"
+                    data-placeholder="Load Saved Report" {{-- needs translation --}}
+                    data-allow-clear="true"
+                >
+                    <option></option>
+                    @foreach($saved_reports as $report)
+                        <option value="{{ $report->id }}" @if (request()->input('report') == $report->id) selected @endif>
+                            {{ $report->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+{{--                @if($saved_reports->first()!="")--}}
+{{--                    <button type="submit" class="btn btn-success" style="width: 32%">--}}
+{{--                        <i class="fas fa-download icon-white" aria-hidden="true"></i>--}}
+{{--                    </button>--}}
+{{--                    <form method="post" id="savetemplateform" action="{{ route("savedreports/update") }}">--}}
+{{--                        @csrf--}}
+{{--                        <input type="hidden" id="savetemplateform" name="options">--}}
+{{--                        <input type="hidden" id="name" name="name" value="{{ $savedReport->name }},1git ">--}}
+{{--                        <button class="btn btn-primary" style="width: 32%">--}}
+{{--                            {{ "update" }}--}}
+{{--                        </button>--}}
+{{--                    </form>--}}
+{{--                    <button class="btn btn-warning" style="width: 32%">--}}
+{{--                        {{ "delete" }}--}}
+{{--                    </button>--}}
+{{--                @endif--}}
+
+                @push('js')
+                    <script>
+                        $('#saved_report_select')
+                            .on('select2:select', function (event) {
+                                window.location.href = '{{ route('reports/custom') }}?report=' + event.params.data.id;
+                            })
+                            .on('select2:clearing', function (event) {
+                                window.location.href = '{{ route('reports/custom') }}';
+                            });
+                    </script>
+                @endpush
+            </div>
+        @endif
     </div>
 </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomField;
 use App\Models\SavedReport;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,16 @@ class SavedReportsController extends Controller
         ]);
 
         return redirect()->route('reports/custom', ['report' => $report->id]);
+    }
+
+    public function edit(Request $request, $reportId)
+    {
+        $report = SavedReport::findOrFail($reportId);
+
+        return view('reports/custom', [
+            'customfields' => CustomField::get(),
+            'savedReport' => $report,
+        ]);
     }
 
     public function update(Request $request)
