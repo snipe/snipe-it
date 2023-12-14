@@ -1003,8 +1003,8 @@
                   @endif
                   <th data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
                   <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                  <th class="col-sm-2" data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
-                  <th class="col-sm-2" data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
+                  <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
+                  <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
                   <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
 
               </tr>
