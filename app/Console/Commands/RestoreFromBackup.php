@@ -14,8 +14,10 @@ class RestoreFromBackup extends Command
      */
     protected $signature = 'snipeit:restore 
                                             {--force : Skip the danger prompt; assuming you enter "y"} 
-                                            {filename : The zip file to be migrated}
-                                            {--no-progress : Don\'t show a progress bar}';
+                                            {filename? : The zip file to be migrated}
+                                            {--no-progress : Don\'t show a progress bar}
+                                            {--sanitize-only : Sanitize and return SQL from STDIN}
+                                            {--prefix= : Don\'t guess DB table prefix; use the passed-in one (or none if just \'--prefix=\' is passed) }';
 
     /**
      * The console command description.
@@ -35,6 +37,113 @@ class RestoreFromBackup extends Command
     }
 
     public static $buffer_size = 1024 * 1024;  // use a 1MB buffer, ought to work fine for most cases?
+    public static $prefix = null;
+    public static $tablenames = [];
+
+
+    public static function parse_sql(string $line,bool $should_guess = false): string
+    {
+        static $is_permitted = false;
+        // 'continuation' lines for a permitted statement are PERMITTED.
+        if($is_permitted && $line[0] === ' ') {
+            return $line;
+        }
+
+        $table_regex = '`?([a-zA-Z0-9_]+)`?';
+        $allowed_statements = [
+            "/^(DROP TABLE (?:IF EXISTS )?)`$table_regex(.*)$/" => false,
+            "/^(CREATE TABLE )$table_regex(.*)$/" => true, //sets up 'continuation'
+            "/^(LOCK TABLES )$table_regex(.*)$/" => false,
+            "/^(INSERT INTO )$table_regex(.*)$/" => false,
+            "/^UNLOCK TABLES/" => false,
+            "/^\\) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;/" => false, // FIXME not sure what to do here?
+            // ^^^^^^ that bit should *exit* the 'perimitted' black
+        ];
+
+        foreach($allowed_statements as $statement => $statechange) {
+//            $this->info("Checking regex: $statement...\n");
+            $matches = [];
+            if (preg_match($statement,$line,$matches)) {
+                $is_permitted = $statechange;
+                // matches are: 1 => first part of the statement, 2 => tablename, 3 => rest of statement
+                // (with of course 0 being "the whole match")
+                if (@$matches[2]) {
+                    print "Found a tablename! It's: ".$matches[2]."\n";
+                    if ($should_guess) {
+                        @self::$tablenames[$matches[2]] += 1;
+                        continue; //oh? FIXME
+                    } else {
+                        $cleaned_tablename = \DB::getTablePrefix().preg_replace('/^'.self::$prefix,'',$matches[2]);
+                        $line = preg_replace($statement,'$1`'.$cleaned_tablename.'`$3' , $line);
+                    }
+                } else {
+                    // no explicit tablename in this one, leave the line alone
+                }
+                //how do we *replace* the tablename?
+                print "RETURNING LINE: $line";
+                return $line;
+            }
+        }
+        // all that is not allowed is denied.
+        return "";
+    }
+
+    public function guess_prefix($stream) //FIXME - oustream? I dunno
+    {
+        // try to determine prefix, I guess?
+        // should probably turn this into an instance method? Not sure.
+        // something where we can run this, pipe output to /dev/null? Dunno.
+        $bytes_read = 0;
+        $reading_beginning_of_line = true;
+
+        while (($buffer = fgets($stream, self::$buffer_size)) !== false) { // FIXME this is copied, can we re-use?
+            $bytes_read += strlen($buffer);
+            if ($reading_beginning_of_line) {
+                $cleaned_buffer = self::parse_sql($buffer,true); //this isn't quite right?
+                fputs(STDOUT,$cleaned_buffer);
+            }
+            // if we got a newline at the end of this, then the _next_ read is the beginning of a line
+            if($buffer[strlen($buffer)-1] === "\n") {
+                $reading_beginning_of_line = true;
+            } else {
+                $reading_beginning_of_line = false;
+            }
+
+        }
+        print_r(self::$tablenames);
+
+        $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */];
+        //can't use 'users' because the 'accessories_users' table?
+        // can't use 'assets' because 'ver1_components_assets'
+        foreach($check_tables as $check_table => $_ignore) {
+            foreach (self::$tablenames as $tablename => $_count) {
+//                print "Comparing $tablename to $check_table\n";
+                if (str_ends_with($tablename,$check_table)) {
+//                    print "Found one!\n";
+                    $check_tables[$check_table] = substr($tablename,0,-strlen($check_table));
+                }
+            }
+        }
+        $guessed_prefix = null;
+        foreach ($check_tables as $clean_table => $prefix_guess) {
+            if(is_null($prefix_guess)) {
+                print("Couldn't find table $clean_table\n");
+                die();
+            }
+            if(is_null($guessed_prefix)) {
+                $guessed_prefix = $prefix_guess;
+            } else {
+                if ($guessed_prefix != $prefix_guess) {
+                    print("Prefix mismatch! Had guessed $guessed_prefix but got $prefix_guess\n");
+                    die();
+                }
+            }
+        }
+        print "CALCULATED PREFIX: $guessed_prefix\n";
+        self::$prefix = $guessed_prefix;
+        print_r($check_tables);
+
+    }
 
     /**
      * Execute the console command.
@@ -43,6 +152,18 @@ class RestoreFromBackup extends Command
      */
     public function handle()
     {
+        if ( $this->option('prefix') ) {
+            self::$prefix = $this->option('prefix');
+        }
+
+        if ($this->option('sanitize-only')) {
+            if ( !self::$prefix) {
+                $this->guess_prefix(STDIN);
+            }
+            // for 'sanitize-only' - do we have to do something weird here, piping stuff around to stdin and stdout?
+            print "FINAL PREFIX IS: ".self::$prefix."\n";
+            return true;
+        }
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
             \Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
@@ -240,7 +361,7 @@ class RestoreFromBackup extends Command
 
         $sql_stat = $za->statIndex($sqlfile_indices[0]);
         //$this->info("SQL Stat is: ".print_r($sql_stat,true));
-        $sql_contents = $za->getStream($sql_stat['name']);
+        $sql_contents = $za->getStream($sql_stat['name']); /// duplicate this?
         if ($sql_contents === false) {
             $stdout = fgets($pipes[1]);
             $this->info($stdout);
@@ -249,17 +370,31 @@ class RestoreFromBackup extends Command
 
             return false;
         }
+        $sql_prefix_sniff = $za->getStream($sql_stat['name']); /// duplicate this?
+        self::guess_prefix($sql_prefix_sniff);
+
         $bytes_read = 0;
+        $reading_beginning_of_line = true;
 
         try {
             while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
                 $bytes_read += strlen($buffer);
-                // \Log::debug("Buffer is: '$buffer'");
+                if ($reading_beginning_of_line) {
+                    //check allowlist?
+                    // \Log::debug("Buffer is: '$buffer'");
                     $bytes_written = fwrite($pipes[0], $buffer);
 
-                if ($bytes_written === false) {
-                    throw new Exception("Unable to write to pipe");
+                    if ($bytes_written === false) {
+                        throw new Exception("Unable to write to pipe");
+                    }
                 }
+                // if we got a newline at the end of this, then the _next_ read is the beginning of a line
+                if($buffer[strlen($buffer)-1] === "\n") {
+                    $reading_beginning_of_line = true;
+                } else {
+                    $reading_beginning_of_line = false;
+                }
+
             }
         } catch (\Exception $e) {
             \Log::error("Error during restore!!!! ".$e->getMessage());
