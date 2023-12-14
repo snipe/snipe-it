@@ -334,6 +334,13 @@ class Actionlog extends SnipeModel
                  ->get();
     }
 
+    /**
+     * Determines what the type of request is so we can log it to the action_log
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.3.0
+     * @return string
+     */
     public function determineActionSource() {
 
         // This is an API call
