@@ -66,6 +66,7 @@ class LdapSync extends Command
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
+        $search_base = Setting::getSettings()->ldap_base_dn;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -83,26 +84,35 @@ class LdapSync extends Command
         $summary = [];
 
         try {
+
+            /**
+             * if a location ID has been specified, use that OU
+             */
             if ( $this->option('location_id') != '') {
 
                 foreach($this->option('location_id') as $location_id){
-                    $location_ou= Location::where('id', '=', $location_id)->value('ldap_ou');
+                    $location_ou = Location::where('id', '=', $location_id)->value('ldap_ou');
                     $search_base = $location_ou;
                     Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
                  }
-            }
 
-            else if ($this->option('base_dn') != '') {
+            /**
+             * Otherwise if a manual base DN has been specified, use that
+             */
+            } elseif ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
                 Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
-            } else {
-                $search_base = null;
             }
+
+            /**
+             * If a filter has been specified, use that
+             */
             if ($this->option('filter') != '') {
                 $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
             } else {
                 $results = Ldap::findLdapUsers($search_base);
             }
+            
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
