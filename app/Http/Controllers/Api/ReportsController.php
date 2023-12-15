@@ -40,6 +40,14 @@ class ReportsController extends Controller
             $actionlogs = $actionlogs->where('action_type', '=', $request->input('action_type'))->orderBy('created_at', 'desc');
         }
 
+        if ($request->filled('action_source')) {
+            $actionlogs = $actionlogs->where('action_source', '=', $request->input('action_source'))->orderBy('created_at', 'desc');
+        }
+
+        if ($request->filled('remote_ip')) {
+            $actionlogs = $actionlogs->where('remote_ip', '=', $request->input('remote_ip'))->orderBy('created_at', 'desc');
+        }
+
         if ($request->filled('uploads')) {
             $actionlogs = $actionlogs->whereNotNull('filename')->orderBy('created_at', 'desc');
         }
@@ -52,6 +60,9 @@ class ReportsController extends Controller
             'accept_signature',
             'action_type',
             'note',
+            'remote_ip',
+            'user_agent',
+            'action_source',
         ];
 
 
