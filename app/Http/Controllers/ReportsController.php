@@ -252,6 +252,9 @@ class ReportsController extends Controller
                 trans('general.model_no'),
                 'To',
                 trans('general.notes'),
+                trans('admin/settings/general.login_ip'),
+                trans('admin/settings/general.login_user_agent'),
+                trans('general.action_source'),
                 'Changed',
 
             ];
@@ -298,6 +301,9 @@ class ReportsController extends Controller
                         $target_name,
                         ($actionlog->note) ? e($actionlog->note) : '',
                         $actionlog->log_meta,
+                        $actionlog->remote_ip,
+                        $actionlog->user_agent,
+                        $actionlog->action_source,
                     ];
                     fputcsv($handle, $row);
                 }
