@@ -298,16 +298,26 @@ class UsersController extends Controller
 
 
         if (Gate::allows('users.permissions', $user)) {
+            \Log::debug('This user can edit permissions');
+
             if ($request->has('permissions')) {
+
+                \Log::debug('The permissions array is present');
                 $permissions_array = $request->input('permissions');
 
                 // Strip out the superuser permission if the API user isn't a superadmin
                 if (!Auth::user()->isSuperUser()) {
+                    \Log::debug('The user is a superuser');
                     unset($permissions_array['superuser']);
                 }
                 $user->permissions = $permissions_array;
+                \Log::debug(print_r($permissions_array, true));
             }
+        } else {
+            \Log::debug('nope');
         }
+
+        \Log::debug(print_r($user->permissions, true));
 
         // Handle uploaded avatar
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
