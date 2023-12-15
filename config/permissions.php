@@ -340,6 +340,12 @@ return [
             'display'    => true,
         ],
         [
+            'permission' => 'users.permissions',
+            'label'      => 'User Permissions',
+            'note'       => 'Manage individual User permissions. (Only superusers can edit group memberships)',
+            'display'    => true,
+        ],
+        [
             'permission' => 'users.delete',
             'label'      => 'Delete Users',
             'note'       => '',

@@ -17,6 +17,7 @@ use App\Notifications\WelcomeNotification;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Input;
 use Redirect;
@@ -122,13 +123,20 @@ class UsersController extends Controller
         $user->end_date = $request->input('end_date', null);
         $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
 
-        // Strip out the superuser permission if the user isn't a superadmin
-        $permissions_array = $request->input('permission');
 
-        if (! Auth::user()->isSuperUser()) {
-            unset($permissions_array['superuser']);
+        if (Gate::allows('users.permissions', $user)) {
+            \Log::debug('This user can edit permissions');
+
+            $permissions_array = $request->input('permission');
+            // Strip out the superuser permission if the user isn't a superadmin
+            if (!Auth::user()->isSuperUser()) {
+                unset($permissions_array['superuser']);
+            }
+            $user->permissions = json_encode($permissions_array);
+        } else {
+            \Log::debug('This user can not edit permissions');
         }
-        $user->permissions = json_encode($permissions_array);
+
 
         // we have to invoke the
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
@@ -240,6 +248,7 @@ class UsersController extends Controller
             }
         }
 
+
         // Only save groups if the user is a super user
         if (Auth::user()->isSuperUser()) {
             $user->groups()->sync($request->input('groups'));
@@ -287,15 +296,18 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
-        $permissions_array = $request->input('permission');
 
-        // Strip out the superuser permission if the user isn't a superadmin
-        if (! Auth::user()->isSuperUser()) {
-            unset($permissions_array['superuser']);
-            $permissions_array['superuser'] = $orig_superuser;
+        if (Gate::allows('users.permissions', $user)) {
+            if ($request->has('permissions')) {
+                $permissions_array = $request->input('permissions');
+
+                // Strip out the superuser permission if the API user isn't a superadmin
+                if (!Auth::user()->isSuperUser()) {
+                    unset($permissions_array['superuser']);
+                }
+                $user->permissions = $permissions_array;
+            }
         }
-
-        $user->permissions = json_encode($permissions_array);
 
         // Handle uploaded avatar
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');

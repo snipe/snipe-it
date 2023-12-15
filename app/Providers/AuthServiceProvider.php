@@ -152,6 +152,12 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        Gate::define('users.permissions', function ($user) {
+            if ($user->hasAccess('users.permissions')) {
+                return true;
+            }
+        });
+
         // -----------------------------------------
         // Reports
         // -----------------------------------------
