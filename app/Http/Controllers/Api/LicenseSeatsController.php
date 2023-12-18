@@ -27,7 +27,7 @@ class LicenseSeatsController extends Controller
         if ($license = License::find($licenseId)) {
             $this->authorize('view', $license);
 
-            $seats = LicenseSeat::with('license', 'user', 'asset', 'user.department')
+            $seats = LicenseSeat::with('license', 'user', 'email', 'asset', 'user.department')
                 ->where('license_seats.license_id', $licenseId);
 
             $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
