@@ -9,20 +9,34 @@ class SQLStreamer {
     private stream $input;
     private ?stream $output;
     // embed the prefix here?
+    public string $prefix; //maybe make it reach-able-into-able?
+    // another thing to note - 'wrapping' this prefix value into the object doesn't really help us - as STDIN and STDOUT
+    // (and ZIP streams) can't be rewound, I don't think (well, ZIP ones can't, for sure)
+    //
 
-    public function __construct(stream $input, ?stream $output)
+    private bool $at_start_of_line = true;
+
+    public function __construct(stream $input, ?stream $output, string $prefix = null) // should we have a prefix here in the constructor?
     {
         // Iknow, I know, I'm getting there! Don't yell at me :(
         $this->$input = $input;
         $this->$output = $output;
+        $this->$prefix = $prefix;
     }
 
-    public function parse_sql() {
-
+    public function parse_sql(string $line): string {
+        // take into account the 'start of line or not' setting as an instance variable?
+        return "";
     }
 
-    public static function guess_prefix() {
-
+    //this is used in exactly *TWO* places, and in both cases should return a prefix I think?
+    // first - if you do the --sanitize-only one (which is mostly for testing/development)
+    // next - when you run *without* a guessed prefix, this is run first to figure out the prefix
+    // I think we have to *duplicate* the call to be able to run it again?
+    public static function guess_prefix(stream $input):string {
+        // does *this* go and change the instance settings to assign a prefix?
+        // spin up a new instance of my own class, and run the parse_sql thing with the guess option?
+        // (or maybe set the guess option directly?)
     }
 }
 
@@ -378,6 +392,7 @@ class RestoreFromBackup extends Command
             return $this->error('Unable to invoke mysql via CLI');
         }
 
+        // I'm not sure about these?
         stream_set_blocking($pipes[1], false); // use non-blocking reads for stdout
         stream_set_blocking($pipes[2], false); // use non-blocking reads for stderr
 
