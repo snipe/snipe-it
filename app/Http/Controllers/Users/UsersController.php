@@ -221,7 +221,13 @@ class UsersController extends Controller
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', []);
-        app('request')->request->set('permissions', $permissions);
+
+        \Log::debug('Page loaded permissions:');
+        \Log::debug(print_r($permissions, true));
+        app('request')->request->set('permission', $permissions);
+
+        \Log::debug('After App:');
+        \Log::debug(print_r($request->input('permission'), true));
 
         // This is a janky hack to prevent people from changing admin demo user data on the public demo.
         // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
@@ -239,8 +245,13 @@ class UsersController extends Controller
         }
 
         $this->authorize('update', $user);
+
         // Figure out of this user was an admin before this edit
         $orig_permissions_array = $user->decodePermissions();
+
+        \Log::debug('Original User Permissions from the user object:');
+        \Log::debug(print_r($orig_permissions_array, true));
+
         $orig_superuser = '0';
         if (is_array($orig_permissions_array)) {
             if (array_key_exists('superuser', $orig_permissions_array)) {
@@ -258,6 +269,7 @@ class UsersController extends Controller
         if ($request->filled('username')) {
             $user->username = trim($request->input('username'));
         }
+
         $user->email = trim($request->input('email'));
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -297,13 +309,17 @@ class UsersController extends Controller
         }
 
 
-        if (Gate::allows('users.permissions', $user)) {
             \Log::debug('This user can edit permissions');
 
-            if ($request->has('permissions')) {
+            if ($request->has('permission')) {
 
                 \Log::debug('The permissions array is present');
-                $permissions_array = $request->input('permissions');
+                \Log::debug('New Permissions via Request:');
+                \Log::debug(print_r($request->input('permission'), true));
+
+                $permissions_array = $request->input('permission');
+                \Log::debug('Processed Permissions');
+                \Log::debug(print_r($permissions_array, true));
 
                 // Strip out the superuser permission if the API user isn't a superadmin
                 if (!Auth::user()->isSuperUser()) {
@@ -311,18 +327,14 @@ class UsersController extends Controller
                     unset($permissions_array['superuser']);
                 }
                 $user->permissions = $permissions_array;
-                \Log::debug(print_r($permissions_array, true));
             }
-        } else {
-            \Log::debug('nope');
-        }
 
+
+        \Log::debug('New Permissions we think we are sending: ');
         \Log::debug(print_r($user->permissions, true));
 
         // Handle uploaded avatar
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
-
-        //\Log::debug(print_r($user, true));
 
         // Was the user updated?
         if ($user->save()) {

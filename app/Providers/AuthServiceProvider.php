@@ -152,8 +152,8 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define('users.permissions', function ($user) {
-            if ($user->hasAccess('users.permissions')) {
+        Gate::define('users.manage_permissions', function ($user) {
+            if ($user->hasAccess('users.manage_permissions')) {
                 return true;
             }
         });

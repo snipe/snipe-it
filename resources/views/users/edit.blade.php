@@ -76,7 +76,7 @@
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#info" data-toggle="tab">{{ trans('general.information') }} </a></li>
-            @can('users.permissions')
+            @can('users.manage_permissions')
             <li><a href="#permissions" data-toggle="tab">{{ trans('general.permissions') }} </a></li>
             @endcan
         </ul>
@@ -570,7 +570,7 @@
               </div> <!--/col-md-12-->
             </div>
           </div><!-- /.tab-pane -->
-          @can('users.permissions')
+          @can('users.manage_permissions')
           <div class="tab-pane" id="permissions">
             <div class="col-md-12">
               @if (!Auth::user()->isSuperUser())
