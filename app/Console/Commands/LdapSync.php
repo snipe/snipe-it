@@ -216,7 +216,6 @@ class LdapSync extends Command
 
         }
 
-
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
                 $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
