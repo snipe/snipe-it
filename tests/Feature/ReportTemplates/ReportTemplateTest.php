@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\SavedReports;
+namespace Tests\Feature\ReportTemplates;
 
-use App\Models\SavedReport;
+use App\Models\ReportTemplate;
 use App\Models\User;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class SavedReportsTest extends TestCase
+class ReportTemplateTest extends TestCase
 {
     use InteractsWithSettings;
 
@@ -16,7 +16,7 @@ class SavedReportsTest extends TestCase
         $this->actingAs(User::factory()->canViewReports()->create())
             ->get(route('reports/custom'))
             ->assertOk()
-            ->assertViewHas(['savedReport' => function (SavedReport $report) {
+            ->assertViewHas(['reportTemplate' => function (ReportTemplate $report) {
                 // the view should have an empty report by default
                 return $report->exists() === false;
             }]);
@@ -25,14 +25,14 @@ class SavedReportsTest extends TestCase
     public function testCanLoadASavedCustomReport()
     {
         $user = User::factory()->canViewReports()->create();
-        $savedReport = SavedReport::factory()->make(['name' => 'My Awesome Report']);
-        $user->savedReports()->save($savedReport);
+        $reportTemplate = ReportTemplate::factory()->make(['name' => 'My Awesome Report']);
+        $user->reportTemplates()->save($reportTemplate);
 
         $this->actingAs($user)
-            ->get(route('reports/custom', ['report' => $savedReport->id]))
+            ->get(route('reports/custom', ['report' => $reportTemplate->id]))
             ->assertOk()
-            ->assertViewHas(['savedReport' => function (SavedReport $viewReport) use ($savedReport) {
-                return $viewReport->is($savedReport);
+            ->assertViewHas(['reportTemplate' => function (ReportTemplate $viewReport) use ($reportTemplate) {
+                return $viewReport->is($reportTemplate);
             }]);
     }
 
@@ -41,26 +41,26 @@ class SavedReportsTest extends TestCase
         $user = User::factory()->canViewReports()->create();
 
         $this->actingAs($user)
-            ->post(route('savedreports/store'), [
+            ->post(route('report-templates.store'), [
                 'name' => 'My Awesome Report',
                 'company' => '1',
                 'by_company_id' => ['1', '2'],
             ])
             ->assertRedirect();
 
-        $report = $user->savedReports->first(function ($report) {
+        $template = $user->reportTemplates->first(function ($report) {
             return $report->name === 'My Awesome Report';
         });
 
-        $this->assertNotNull($report);
-        $this->assertEquals('1', $report->options['company']);
-        $this->assertEquals(['1', '2'], $report->options['by_company_id']);
+        $this->assertNotNull($template);
+        $this->assertEquals('1', $template->options['company']);
+        $this->assertEquals(['1', '2'], $template->options['by_company_id']);
     }
 
     public function testSavingReportRequiresValidFields()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
-            ->post(route('savedreports/store'), [
+            ->post(route('report-templates.store'), [
                 //
             ])
             ->assertSessionHasErrors('name');
@@ -69,7 +69,7 @@ class SavedReportsTest extends TestCase
     public function testSavingReportRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
-            ->post(route('savedreports/store'))
+            ->post(route('report-templates.store'))
             ->assertForbidden();
     }
 }

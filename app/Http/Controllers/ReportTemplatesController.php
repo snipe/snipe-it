@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomField;
-use App\Models\SavedReport;
+use App\Models\ReportTemplate;
 use Illuminate\Http\Request;
 
-class SavedReportsController extends Controller
+class ReportTemplatesController extends Controller
 {
     public function store(Request $request)
     {
         $this->authorize('reports.view');
 
-        $request->validate((new SavedReport)->getRules());
+        $request->validate((new ReportTemplate)->getRules());
 
-        $report = $request->user()->savedReports()->create([
+        $report = $request->user()->reportTemplates()->create([
             'name' => $request->get('name'),
             'options' => $request->except(['_token', 'name']),
         ]);
@@ -24,19 +24,19 @@ class SavedReportsController extends Controller
 
     public function edit(Request $request, $reportId)
     {
-        $report = SavedReport::findOrFail($reportId);
+        $report = ReportTemplate::findOrFail($reportId);
 
         return view('reports/custom', [
             'customfields' => CustomField::get(),
-            'savedReport' => $report,
+            'reportTemplate' => $report,
         ]);
     }
 
     public function update(Request $request)
     {
-        $this->authorize('update',SavedReport::class);
+        $this->authorize('update',ReportTemplate::class);
 
-        if(is_null($reportid = SavedReport::find($request)))
+        if(is_null($reportid = ReportTemplate::find($request)))
         {
             return redirect()->route('reports/custom');
         }
@@ -44,7 +44,7 @@ class SavedReportsController extends Controller
         $request->validate()->report->id->getRules();
 
 
-        $report = $request->user()->savedReports()->edit([
+        $report = $request->user()->reportTemplates()->edit([
             'name' => $request->get('name'),
             'options' => $request->except(['token','name']),
         ]);

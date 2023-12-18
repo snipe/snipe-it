@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSavedReportsTable extends Migration
+class CreateReportTemplatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSavedReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('saved_reports', function (Blueprint $table) {
+        Schema::create('report_templates', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('name');
@@ -30,6 +30,6 @@ class CreateSavedReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saved_reports');
+        Schema::dropIfExists('report_templates');
     }
 }

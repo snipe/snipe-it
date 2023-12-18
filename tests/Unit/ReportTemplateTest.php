@@ -2,14 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\Models\SavedReport;
+use App\Models\ReportTemplate;
 use Tests\TestCase;
 
-class SavedReportTest extends TestCase
+class ReportTemplateTest extends TestCase
 {
     public function testParsingCheckmarkValue()
     {
-        $savedReport = SavedReport::factory()->create([
+        $savedReport = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_checkbox_field' => '1',
             ],
@@ -18,12 +18,12 @@ class SavedReportTest extends TestCase
         $this->assertEquals('1', $savedReport->checkmarkValue('is_a_checkbox_field'));
         $this->assertEquals('0', $savedReport->checkmarkValue('non_existent_key'));
 
-        $this->assertEquals('1', (new SavedReport)->checkmarkValue('is_a_checkbox_field'));
+        $this->assertEquals('1', (new ReportTemplate)->checkmarkValue('is_a_checkbox_field'));
     }
 
     public function testParsingTextValue()
     {
-        $savedReport = SavedReport::factory()->create([
+        $savedReport = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_text_field' => 'some text',
             ],
@@ -32,12 +32,12 @@ class SavedReportTest extends TestCase
         $this->assertEquals('some text', $savedReport->textValue('is_a_text_field'));
         $this->assertEquals('', $savedReport->textValue('non_existent_key'));
 
-        $this->assertEquals('', (new SavedReport)->textValue('is_a_text_field'));
+        $this->assertEquals('', (new ReportTemplate)->textValue('is_a_text_field'));
     }
 
     public function testParsingRadioValue()
     {
-        $savedReport = SavedReport::factory()->create([
+        $savedReport = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_radio_field' => null,
             ],
@@ -50,7 +50,7 @@ class SavedReportTest extends TestCase
 
     public function testParsingSelectValue()
     {
-        $savedReport = SavedReport::factory()->create([
+        $savedReport = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_text_field_as_well' => '4',
                 'contains_a_null_value' => null,
@@ -64,7 +64,7 @@ class SavedReportTest extends TestCase
 
     public function testParsingSelectValues()
     {
-        $savedReport = SavedReport::factory()->create([
+        $savedReport = ReportTemplate::factory()->create([
             'options' => [
                 'is_an_array' => ['2', '3', '4'],
                 'is_an_array_containing_null' => [null],

@@ -16,7 +16,7 @@ use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\SavedReportsController;
+use App\Http\Controllers\ReportTemplatesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
@@ -357,11 +357,9 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
-    // @todo: change to saved-template?
-    Route::post('reports/savedtemplate', [SavedReportsController::class, 'store'])->name('savedreports/store');
-    // @todo: starting the process of adding "-" to saved-template...
-    Route::get('reports/saved-templates/{reportId}/edit', [SavedReportsController::class, 'edit'])->name('saved-templates.edit');
-    Route::put('report/savedtemplate', [SavedReportsController::class, 'update'])->name('savedreports/update');
+    Route::post('reports/saved-templates', [ReportTemplatesController::class, 'store'])->name('report-templates.store');
+    Route::get('reports/saved-templates/{reportId}/edit', [ReportTemplatesController::class, 'edit'])->name('report-templates.edit');
+    Route::post('report/saved-templates/{reportId}', [ReportTemplatesController::class, 'update'])->name('report-templates.update');
 
     Route::get(
         'reports/activity',

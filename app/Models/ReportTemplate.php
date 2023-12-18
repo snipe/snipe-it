@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
-class SavedReport extends Model
+class ReportTemplate extends Model
 {
     use HasFactory;
     use ValidatingTrait;
@@ -28,7 +28,7 @@ class SavedReport extends Model
 
     // @todo: add $rules
     protected $rules = [
-        'name' => 'required|unique:saved_reports,name',
+        'name' => 'required|unique:report_templates,name',
         'options' => 'array',
     ];
 
