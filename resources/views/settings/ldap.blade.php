@@ -431,10 +431,23 @@
                                 @endif
                             </div>
                         </div>
-                        <!-- LDAP Manager -->
-                        <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
+                        <!-- LDAP company -->
+                        <div class="form-group {{ $errors->has('ldap_company') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_manager')) }}
+                                {{ Form::label('ldap_company', trans('admin/settings/general.ldap_company')) }}
+                            </div>
+                            <div class="col-md-8">
+                                {{ Form::text('ldap_company', Request::old('ldap_company', $setting->ldap_company), ['class' => 'form-control','placeholder' => trans('general.example') .'department', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_dept', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- LDAP Manager -->
+                        <div class="form-group {{ $errors->has('ldap_manager') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_manager', trans('admin/settings/general.ldap_manager')) }}
                             </div>
                             <div class="col-md-8">
                                 {{ Form::text('ldap_manager', Request::old('ldap_manager', $setting->ldap_manager), ['class' => 'form-control','placeholder' => trans('general.example') .'manager', $setting->demoMode]) }}
