@@ -42,6 +42,19 @@ class FixLanguageDirs extends Migration
      */
     public function down()
     {
-        //
+        $settings = Setting::getSettings();
+        if (($settings) && ($settings->locale != '')) {
+            DB::table('settings')->update(['locale' => Helper::mapBackToLegacyLocale($settings->locale)]);
+        }
+
+        /**
+         * Update the users table
+         */
+        $users = User::whereNotNull('locale')->whereNull('deleted_at')->get();
+        // Skip the model in case the validation rules have changed
+        foreach ($users as $user) {
+            DB::table('users')->where('id', $user->id)->update(['locale' => Helper::mapBackToLegacyLocale($user->locale)]);
+        }
+
     }
 }
