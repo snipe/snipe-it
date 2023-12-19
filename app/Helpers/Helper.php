@@ -1342,6 +1342,57 @@ class Helper
      * @param $language_code
      * @return string []
      */
+
+    public static $language_map =  ['af' => 'af-ZA', // Afrikaans
+        'am' => 'am-ET', // Amharic
+        'ar' => 'ar-SA', // Arabic
+        'bg' => 'bg-BG', // Bulgarian
+        'ca' => 'ca-ES', // Catalan
+        'cs' => 'cs-CZ', // Czech
+        'cy' => 'cy-GB', // Welsh
+        'da' => 'da-DK', // Danish
+        'de-i' => 'de-if', // German informal
+        'de' => 'de-DE', // German
+        'el' => 'el-GR', // Greek
+        'en' => 'en-US', // English
+        'et' => 'et-EE', // Estonian
+        'fa' => 'fa-IR', // Persian
+        'fi' => 'fi-FI', // Finnish
+        'fil' => 'fil-PH', // Filipino
+        'fr' => 'fr-FR', // French
+        'he' => 'he-IL', // Hebrew
+        'hr' => 'hr-HR', // Croatian
+        'hu' => 'hu-HU', // Hungarian
+        'id' => 'id-ID', // Indonesian
+        'is' => 'is-IS', // Icelandic
+        'it' => 'it-IT', // Italian
+        'iu' => 'iu-NU', // Inuktitut
+        'ja' => 'ja-JP', // Japanese
+        'ko' => 'ko-KR', // Korean
+        'lt' => 'lt-LT', // Lithuanian
+        'lv' => 'lv-LV', // Latvian
+        'mi' => 'mi-NZ', // Maori
+        'mk' => 'mk-MK', // Macedonian
+        'mn' => 'mn-MN', // Mongolian
+        'ms' => 'ms-MY', // Malay
+        'nl' => 'nl-NL', // Dutch
+        'no' => 'no-NO', // Norwegian
+        'pl' => 'pl-PL', // Polish
+        'ro' => 'ro-RO', // Romanian
+        'ru' => 'ru-RU', // Russian
+        'sk' => 'sk-SK', // Slovak
+        'sl' => 'sl-SI', // Slovenian
+        'so' => 'so-SO', // Somali
+        'ta' => 'ta-IN', // Tamil
+        'th' => 'th-TH', // Thai
+        'tl' => 'tl-PH', // Tagalog
+        'tr' => 'tr-TR', // Turkish
+        'uk' => 'uk-UA', // Ukrainian
+        'vi' => 'vi-VN', // Vietnamese
+        'zu' => 'zu-ZA', // Zulu
+    ];
+
+
     public static function mapLegacyLocale($language_code = null)
     {
 
@@ -1349,62 +1400,25 @@ class Helper
             return $language_code;
         }
 
-        $languages = [
-            'af' => 'af-ZA', // Afrikaans
-            'am' => 'am-ET', // Amharic
-            'ar' => 'ar-SA', // Arabic
-            'bg' => 'bg-BG', // Bulgarian
-            'ca' => 'ca-ES', // Catalan
-            'cs' => 'cs-CZ', // Czech
-            'cy' => 'cy-GB', // Welsh
-            'da' => 'da-DK', // Danish
-            'de-i' => 'de-if', // German informal
-            'de' => 'de-DE', // German
-            'el' => 'el-GR', // Greek
-            'en' => 'en-US', // English
-            'et' => 'et-EE', // Estonian
-            'fa' => 'fa-IR', // Persian
-            'fi' => 'fi-FI', // Finnish
-            'fil' => 'fil-PH', // Filipino
-            'fr' => 'fr-FR', // French
-            'he' => 'he-IL', // Hebrew
-            'hr' => 'hr-HR', // Croatian
-            'hu' => 'hu-HU', // Hungarian
-            'id' => 'id-ID', // Indonesian
-            'is' => 'is-IS', // Icelandic
-            'it' => 'it-IT', // Italian
-            'iu' => 'iu-NU', // Inuktitut
-            'ja' => 'ja-JP', // Japanese
-            'ko' => 'ko-KR', // Korean
-            'lt' => 'lt-LT', // Lithuanian
-            'lv' => 'lv-LV', // Latvian
-            'mi' => 'mi-NZ', // Maori
-            'mk' => 'mk-MK', // Macedonian
-            'mn' => 'mn-MN', // Mongolian
-            'ms' => 'ms-MY', // Malay
-            'nl' => 'nl-NL', // Dutch
-            'no' => 'no-NO', // Norwegian
-            'pl' => 'pl-PL', // Polish
-            'ro' => 'ro-RO', // Romanian
-            'ru' => 'ru-RU', // Russian
-            'sk' => 'sk-SK', // Slovak
-            'sl' => 'sl-SI', // Slovenian
-            'so' => 'so-SO', // Somali
-            'ta' => 'ta-IN', // Tamil
-            'th' => 'th-TH', // Thai
-            'tl' => 'tl-PH', // Tagalog
-            'tr' => 'tr-TR', // Turkish
-            'uk' => 'uk-UA', // Ukrainian
-            'vi' => 'vi-VN', // Vietnamese
-            'zu' => 'zu-ZA', // Zulu
-        ];
-
-        foreach ($languages as $legacy => $new) {
+        foreach (self::$language_map as $legacy => $new) {
             if ($language_code == $legacy) {
                 \Log::debug('Current language is '.$legacy.', using '.$new.' instead');
                 return $new;
             }
         }
+    }
+
+    public static function mapBackToLegacyLocale($new_locale = null)
+    {
+        if (strlen($new_locale) <= 4) {
+            return $new_locale; //"new locale" apparently wasn't quite so new
+        }
+        $legacy_locale = array_search($new_locale,self::$language_map);
+
+        if($legacy_locale !== false) {
+            return $legacy_locale;
+        }
+        return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
 }
