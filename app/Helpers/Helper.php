@@ -1406,6 +1406,9 @@ class Helper
                 \Log::debug('Current language is '.$legacy.', using '.$new.' instead');
                 return $new;
             }
+
+            // Return US english if we don't have a match
+            return 'en-US';
         }
     }
 
