@@ -696,16 +696,15 @@
          * Build the results html table
          */
         function buildLdapTestResults(results) {
-            let html = '<table id="ldap_test_table">'
-                html += '<ul style="list-style: none;padding-left: 5px;">'
+            let html = '<ul style="list-style: none;padding-left: 5px;">'
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
             html += '</ul>'
             html += '<div>{{ trans('admin/settings/message.ldap.sync_success') }}</div>'
-            html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
+            html += '<table class="table table-bordered table-condensed" style=" table-layout:fixed; width:100%; background-color: #fff">'
             html += buildLdapResultsTableHeader()
             html += buildLdapResultsTableBody(results.user_sync.users)
-            html += '</table>'
+            html += '<table>'
             return html;
         }
 
@@ -730,7 +729,7 @@
         {
             let body = '<tbody>'
             for (var i in users) {
-                body += '<tr><td>' + users[i].employee_number + '</td><td>' + users[i].username + '</td><td>' + users[i].firstname + '</td><td>' + users[i].lastname + '</td><td>' + users[i].email + '</td></tr>'
+                body += '<tr><td style="overflow:hidden;">' + users[i].employee_number + '</td><td style="overflow:hidden;">' + users[i].username + '</td><td style="overflow:hidden;">' + users[i].firstname + '</td><td style="overflow:hidden;">' + users[i].lastname + '</td><td style="overflow:hidden;">' + users[i].email + '</td></tr>'
             }
             body += "</tbody>"
             return body;
