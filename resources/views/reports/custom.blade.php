@@ -44,8 +44,8 @@
                         @method('PUT')
                         <input type="hidden" id="savetemplateform" name="options">
                         <input type="hidden" id="name" name="name" value="{{ $reportTemplate->name }},1git ">
-                        <button class="btn btn-primary" style="width: 32%">
-                            {{ "update" }}
+                        <button class="btn btn-primary" style="width: 100%">
+                            {{ trans('general.save') }}
                         </button>
                     </form>
                 </div>
@@ -58,19 +58,27 @@
                         title="Update"
                     >
                         <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                        <span class="sr-only">Update</span>
+                        <span class="sr-only">{{ trans('general.update') }}</span>
                     </a>
+
+{{--                     This is from the license.view page--
+                           See line 1077 in routes.api for example of routing
+{{--                    <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">--}}
+{{--                    <i class="fas fa-trash icon-white" aria-hidden="true"></i>--}}
+{{--                    <span class="sr-only">{{ trans('general.delete') }}</span>--}}
+{{--                  </a>--}}
+
                     {{-- these were pulled from hardware.index and the one below doesn't work...--}}
                     <a
                         href="#"
-                        class="actions btn btn-danger btn-sm delete-asset"
+                        class="actions btn btn-danger btn-sm delete-report" {{--This was delete-asset as a class. We'd need to make a delete-report class--}}
                         data-tooltip="true"
                         data-toggle="modal"
                         data-content="Are you sure you wish to delete 1260505622?"
                         data-title="Delete"
                         onclick="return false;"
                     >
-                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span>
+                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
                     </a>
                 </div>
             @endif
@@ -407,7 +415,7 @@
           </button>
         </div>
       </div> <!--/.box.box-default-->
-    {{ Form::close() }}  {{--does this need to be at the bottom of all our new stuff?--}}
+    {{ Form::close() }}
   </div>
 
     <div class="col-md-2">
@@ -416,7 +424,7 @@
                 <form method="post" id="savetemplateform" action="{{ route("report-templates.store") }}">
                     @csrf
                         <input type="hidden" id="savetemplateform" name="options">
-                        <input type="text" id="name" name="name" value="{{ $reportTemplate->name }}"> {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
+                        <input type="text" id="name" name="name" value="{{ $reportTemplate->name }}" style="width: 100%; margin-bottom: 5px; height: 34px"> {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
                         <button class="btn btn-primary" style="width: 100%">
                             {{ trans('admin/reports/general.save_template') }}
                         </button>
@@ -427,7 +435,7 @@
                 <select
                     id="saved_report_select"
                     class="form-control select2"
-                    data-placeholder="Load Saved Report" {{-- needs translation --}}
+                    data-placeholder={{ trans('admin/reports/general.saved_reports') }}
                     data-allow-clear="true"
                 >
                     <option></option>
@@ -437,23 +445,6 @@
                         </option>
                     @endforeach
                 </select>
-
-{{--                @if($saved_reports->first()!="")--}}
-{{--                    <button type="submit" class="btn btn-success" style="width: 32%">--}}
-{{--                        <i class="fas fa-download icon-white" aria-hidden="true"></i>--}}
-{{--                    </button>--}}
-{{--                    <form method="post" id="savetemplateform" action="{{ route("report-templates.update") }}">--}}
-{{--                        @csrf--}}
-{{--                        <input type="hidden" id="savetemplateform" name="options">--}}
-{{--                        <input type="hidden" id="name" name="name" value="{{ $reportTemplate->name }},1git ">--}}
-{{--                        <button class="btn btn-primary" style="width: 32%">--}}
-{{--                            {{ "update" }}--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
-{{--                    <button class="btn btn-warning" style="width: 32%">--}}
-{{--                        {{ "delete" }}--}}
-{{--                    </button>--}}
-{{--                @endif--}}
 
                 @push('js')
                     <script>

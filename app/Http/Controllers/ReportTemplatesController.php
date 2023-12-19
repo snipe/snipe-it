@@ -18,6 +18,13 @@ class ReportTemplatesController extends Controller
             'name' => $request->get('name'),
             'options' => $request->except(['_token', 'name']),
         ]);
+//        This is for error handling in creation. This probably is the wrong spot, and syntax is off, but i don't wanna forget
+//        if(is_null($report->name)) {
+//            return redirect()->route('reports/custom')->with('error', trans('reports/message.create.needs_title'));
+//        }
+//        elseif(exists($report->name)) {
+//            return redirect()->route('reports/custom')->with('error', trans('reports/message.create.duplicate'));
+//        }
 
         return redirect()->route('reports/custom', ['report' => $report->id]);
     }
