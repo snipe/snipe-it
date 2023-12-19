@@ -20,7 +20,7 @@ class FixLanguageDirs extends Migration
          * Update the settings table
          */
         $settings = Setting::getSettings();
-        if ($settings->locale != '') {
+        if (($settings) && ($settings->locale != '')) {
             DB::table('settings')->update(['locale' => Helper::mapLegacyLocale($settings->locale)]);
         }
 
