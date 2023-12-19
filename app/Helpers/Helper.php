@@ -1343,7 +1343,8 @@ class Helper
      * @return string []
      */
 
-    public static $language_map =  ['af' => 'af-ZA', // Afrikaans
+    public static $language_map =  [
+        'af' => 'af-ZA', // Afrikaans
         'am' => 'am-ET', // Amharic
         'ar' => 'ar-SA', // Arabic
         'bg' => 'bg-BG', // Bulgarian
@@ -1413,7 +1414,9 @@ class Helper
         if (strlen($new_locale) <= 4) {
             return $new_locale; //"new locale" apparently wasn't quite so new
         }
-        $legacy_locale = array_search($new_locale,self::$language_map);
+
+        // This does a *reverse* search against our new language map array - given the value, find the *key* for it
+        $legacy_locale = array_search($new_locale, self::$language_map);
 
         if($legacy_locale !== false) {
             return $legacy_locale;
