@@ -696,7 +696,8 @@
          * Build the results html table
          */
         function buildLdapTestResults(results) {
-            let html = '<ul style="list-style: none;padding-left: 5px;">'
+            let html = '<table id="ldap_test_table">'
+                html += '<ul style="list-style: none;padding-left: 5px;">'
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
             html += '</ul>'
@@ -704,7 +705,7 @@
             html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
             html += buildLdapResultsTableHeader()
             html += buildLdapResultsTableBody(results.user_sync.users)
-            html += '<table>'
+            html += '</table>'
             return html;
         }
 
