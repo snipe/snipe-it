@@ -30,7 +30,7 @@ return [
         'ga-IE'=> 'Irlandés',
         'it'=> 'Italiano',
         'ja'=> 'Japonés',
-        'km' => 'Khmer',
+        'km-KH'=>'Khmer',
         'ko'=> 'Coreano',
         'lv'=>'Letón',
         'lt'=> 'Lituano',

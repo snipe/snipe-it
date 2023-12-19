@@ -1,0 +1,46 @@
+<?php
+
+return [
+
+    'update' => [
+        'error'                 => 'Ocorreu um erro ao atualizar. ',
+        'success'               => 'Configurações atualizadas com sucesso.',
+    ],
+    'backup' => [
+        'delete_confirm'        => 'Tem a certeza que pretende eliminar o ficheiro de backup? Não poderá reverter a acção. ',
+        'file_deleted'          => 'Ficheiro de backup eliminado com sucesso. ',
+        'generated'             => 'Ficheiro de backup criado com sucesso.',
+        'file_not_found'        => 'O ficheiro de backup não foi encontrado no servidor.',
+        'restore_warning'       => 'Sim, restaurar. Eu reconheço que isso irá substituir quaisquer dados existentes atualmente na base de dados. Isto também irá desligar todos os utilizadores existentes (incluindo você).',
+        'restore_confirm'       => 'Tem a certeza que deseja restaurar a sua base de dados a partir de :filename?'
+    ],
+    'purge' => [
+        'error'     => 'Ocorreu um erro ao eliminar os dados. ',
+        'validation_failed'     => 'A confirmação para limpar os dados correu mal. Digite a palavra "Apagar" na caixa de confirmação.',
+        'success'               => 'Os dados foram apagados com sucesso.',
+    ],
+    'mail' => [
+        'sending' => 'Enviar e-mail de teste...',
+        'success' => 'E-mail enviado!',
+        'error' => 'O e-mail não pode ser enviado.',
+        'additional' => 'Nenhuma mensagem de erro adicional foi fornecida. Verifique as suas configurações de e-mail e o log do aplicativo.'
+    ],
+    'ldap' => [
+        'testing' => 'Testando a conexão LDAP, ligação e pesquisa ...',
+        '500' => '500 Erro de Servidor. Por favor, verifique os logs do servidor para mais informações.',
+        'error' => 'Ocorreu um erro :(',
+        'sync_success' => 'Uma amostra de 10 utilizadores retornaram do servidor LDAP com base nas suas configurações:',
+        'testing_authentication' => 'Testando Autenticação LDAP...',
+        'authentication_success' => 'Utilizador autenticado no LDAP com sucesso!'
+    ],
+    'webhook' => [
+        'sending' => 'A enviar mensagem :app de teste...',
+        'success' => 'Your :webhook_name Integration works!',
+        'success_pt1' => 'Sucesso! Verifique o ',
+        'success_pt2' => ' canal para a sua mensagem de teste, e certifique-se de clicar em SALVAR abaixo para guardar as suas configurações.',
+        '500' => '500 Erro de Servidor.',
+        'error' => 'Algo deu erro. :app respondeu com: :error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_misc' => 'Algo deu erro. :( ',
+    ]
+];

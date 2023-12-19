@@ -1,0 +1,32 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> '资产标签',
+    'asset_model'       => '型号',
+    'book_value'  	=> '当前值',
+    'change' 		=> '进/出',
+    'checkout_date' => '借出日期',
+    'checkoutto' 	=> '已借出',
+    'components_cost' => '组件总成本',
+    'current_value' => '当前值',
+    'diff' 			=> '差价',
+    'dl_csv' 		=> '下载CSV格式',
+    'eol' 			=> '寿命',
+    'id'      		=> '编号',
+    'last_checkin_date' => '上次归还日期',
+    'location' 		=> '位置',
+    'purchase_cost'	=> '花费',
+    'purchase_date'	=> '已购买',
+    'serial'   		=> '序列号',
+    'status'   		=> '状态',
+    'title'      	=> '资产',
+    'image'		    => '设备图片',
+    'days_without_acceptance' => '过期天数',
+    'monthly_depreciation' => '每月折旧率',
+    'assigned_to'    => '已分配给',
+    'requesting_user' => '申领中的用户',
+    'requested_date' => '请求日期',
+    'changed'       => '已修改',
+    'icon' => '图标',
+];
