@@ -29,6 +29,7 @@ class LicenseSeatsTransformer
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
                 'name'=> e($seat->user->present()->fullName),
+                'email' => e($seat->user->email),
                 'department'=> ($seat->user->department) ?
                         [
                             'id' => (int) $seat->user->department->id,

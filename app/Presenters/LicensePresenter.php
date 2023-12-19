@@ -229,7 +229,7 @@ class LicensePresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'usersLinkObjFormatter',
             ], [
-                'field' => 'email',
+                'field' => 'assigned_user.email',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
