@@ -574,8 +574,8 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
+        // Sometimes people send arrays to this. They shouldn't, but they do, so we use "first()" to get the first match
+        $model = AssetModel::where('id', '=', $request->get('model_id'))->first();
 
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
