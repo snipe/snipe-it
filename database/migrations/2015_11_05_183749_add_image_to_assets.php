@@ -38,10 +38,8 @@ class AddImageToAssets extends Migration
     public function down()
     {
 
-        Schema::table('assets', function ($table) {
-            if (Schema::hasColumn('assets', 'image')) {
-                $table->dropColumn('image');
-            }
-        });
+       /**
+        * I'm leaving this one out, since it could destroy data that was already long-existing. 
+        */
     }
 }
