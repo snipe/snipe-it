@@ -20,6 +20,18 @@
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
 
+    <div class="callout callout-warning">
+      @if($settings->full_multiple_companies_support == 1)
+        @if($settings->multi_company_alert == 1)
+          @livewire('modal-components', ['multiCompany' => $multiCompany])
+        @endif
+      @endif
+
+      <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
+        @if (count($models) > 0)
+            {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }} 
+        @endif 
+    </div>
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
       {{ csrf_field() }}
@@ -208,4 +220,8 @@
     </form>
   </div> <!--/.col-md-8-->
 </div>
+
+
 @stop
+
+

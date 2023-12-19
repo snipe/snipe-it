@@ -64,7 +64,7 @@
             <div class="col-md-12">
 
                 @include('partials.asset-bulk-actions', ['status' => Request::get('status')])
-                   
+
               <table
                 data-advanced-search="true"
                 data-click-to-select="true"
@@ -107,6 +107,6 @@
 @stop
 
 @section('moar_scripts')
-@include('partials.bootstrap-table')
 
+  @include('partials.bootstrap-table')
 @stop

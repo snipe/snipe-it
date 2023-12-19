@@ -93,11 +93,14 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk-restore')->with('assets', $assets);
 
                 case 'edit':
+                    $company_check= Asset::findMany($asset_ids)->pluck('company_id')->unique();
+
                     $this->authorize('update', Asset::class);
 
                     return view('hardware/bulk')
+                        ->with('multiCompany', $company_check->count()>1)
                         ->with('assets', $asset_ids)
-                        ->with('statuslabel_list', Helper::statusLabelList())
+
                         ->with('models', $models->pluck(['model']))
                         ->with('modelNames', $modelNames);
             }
