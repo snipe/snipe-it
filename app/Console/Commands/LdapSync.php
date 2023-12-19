@@ -246,7 +246,7 @@ class LdapSync extends Command
                     'name' => $item['company'],
             ]);
 
-                $user = User::where('username', $item['username'])->first();
+            $user = User::where('username', $item['username'])->first();
                 if ($user) {
                     // Updating an existing user.
                     $item['createorupdate'] = 'updated';
@@ -284,6 +284,7 @@ class LdapSync extends Command
                 $user->country = $item['country'];
             }
             if($ldap_result_dept  != null){
+
                 $user->department_id = $department->id;
             }
             if($ldap_result_location != null){

@@ -340,7 +340,6 @@ class Ldap extends Model
                 $cookie = '';
             }
             // Empty cookie means last page
-        
             // Get results from page
             $results = ldap_get_entries($ldapconn, $search_results);
             if (! $results) {
