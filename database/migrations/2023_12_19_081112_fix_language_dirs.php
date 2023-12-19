@@ -27,7 +27,7 @@ class FixLanguageDirs extends Migration
         /**
          * Update the users table
          */
-        $users = User::whereNotNull('locale')->whereNull('deleted_at')->get();
+        $users = User::whereNotNull('locale')->get();
         // Skip the model in case the validation rules have changed
         foreach ($users as $user) {
             DB::table('users')->where('id', $user->id)->update(['locale' => Helper::mapLegacyLocale($user->locale)]);
