@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Setting;
 use Closure;
+use \App\Helpers\Helper;
 
 class CheckLocale
 {
@@ -18,22 +19,24 @@ class CheckLocale
      */
     public function handle($request, Closure $next, $guard = null)
     {
+
+        // Default app settings from config
+        $language = config('app.locale');
+
         if ($settings = Setting::getSettings()) {
+
             // User's preference
             if (($request->user()) && ($request->user()->locale)) {
-                \App::setLocale($request->user()->locale);
+                $language = $request->user()->locale;
 
             // App setting preference
             } elseif ($settings->locale != '') {
-                \App::setLocale($settings->locale);
-
-            // Default app setting
-            } else {
-                \App::setLocale(config('app.locale'));
+                $language = $settings->locale;
             }
-        }
-        \App::setLocale(config('app.locale'));
 
+        }
+
+        \App::setLocale(Helper::mapLegacyLocale($language));
         return $next($request);
     }
 }
