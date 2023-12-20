@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'You have successfully declined this asset.',
     'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'User already exists!',
-    'user_not_found'            => 'User does not exist.',
+    'user_not_found'            => 'អ្នកប្រើប្រាស់មិនមានទេ។',
     'user_login_required'       => 'The login field is required',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'The password is required.',
@@ -50,15 +50,15 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'ឯកសារមិនត្រូវបានលុបទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'success' => 'ឯកសារត្រូវបានលុបដោយជោគជ័យ។',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
+        'error'   => 'ឯកសារ (ច្រើន) មិនត្រូវបានផ្ទុកឡើងទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'success' => 'ឯកសារ (ច្រើន) ដែលបានបង្ហោះដោយជោគជ័យ។',
         'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'invalidfiles' => 'ឯកសារមួយ ឬច្រើនរបស់អ្នកមានទំហំធំពេក ឬជាប្រភេទឯកសារដែលមិនត្រូវបានអនុញ្ញាត។ ប្រភេទឯកសារដែលបានអនុញ្ញាតគឺ png, gif, jpg, doc, docx, pdf, និង txt ។',
     ),
 
     'inventorynotification' => array(

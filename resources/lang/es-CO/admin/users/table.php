@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Jefe Inmediato',
     'managed_locations'     => 'Ubicaciones gestionadas',
     'name' 					=> 'Nombre',
+    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Notas',
     'password_confirm' 		=> 'Confirmar contraseña',
     'password' 				=> 'Contraseña',

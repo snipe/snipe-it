@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Você pode configurar depreciações para depreciar ativos baseados na depreciação linear.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'O importador detectou que este arquivo está vazio.'
 ];

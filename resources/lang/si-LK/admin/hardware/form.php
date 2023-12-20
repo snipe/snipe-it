@@ -34,7 +34,7 @@ return [
     'model'				=> 'Model',
     'months'			=> 'months',
     'name'				=> 'Asset Name',
-    'notes'				=> 'Notes',
+    'notes'				=> 'සටහන්',
     'order'				=> 'Order Number',
     'qr'				=> 'QR Code',
     'requestable'		=> 'Users may request this asset',

@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => ':attribute mora biti jedinstven.',
     'non_circular'         => ':attribute ne sme da kreira cirkularnu referencu.',
     'not_array'            => ':attribute polje ne može biti niz.',
-    'unique_serial'        => ':attribute mora biti jedinstven.',
     'disallow_same_pwd_as_user_fields' => 'Lozinka ne može biti ista kao korisničko ime.',
     'letters'              => 'Lozinka mora da sadrži barem jedno slovo.',
     'numbers'              => 'Lozinka mora da sadrži barem jednu cifru.',

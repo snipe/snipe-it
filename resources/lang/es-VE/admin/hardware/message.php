@@ -23,7 +23,7 @@ return [
     'restore' => [
         'error'   		=> 'El activo no fue restaurado, por favor, inténtalo de nuevo',
         'success' 		=> 'Activo restaurado correctamente.',
-        'bulk_success' 		=> 'Equipo restaurado correctamente.',
+        'bulk_success' 		=> 'Activo restaurado correctamente.',
         'nothing_updated'   => 'No se seleccionaron activos, por lo que no se restauró nada.', 
     ],
 

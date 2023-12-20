@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => 'O :atribute deve ser único.',
     'non_circular'         => 'O :attribute não deve criar uma referência circular.',
     'not_array'            => 'The :attribute field cannot be an array.',
-    'unique_serial'        => 'The :attribute must be unique.',
     'disallow_same_pwd_as_user_fields' => 'A senha não pode ser igual ao nome de utilizador.',
     'letters'              => 'A senha deve conter no mínimo uma letra.',
     'numbers'              => 'A senha deve conter no mínimo um símbolo.',

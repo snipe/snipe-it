@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => ':attribute haruslah unik.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
     'not_array'            => ':atribute harus array.',
-    'unique_serial'        => 'The :attribute must be unique.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',

@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Gerenciador',
     'managed_locations'     => 'Gerenciar locações',
     'name' 					=> 'Nome',
+    'nogroup'               => 'Nenhum grupo foi criado ainda. Para criar um, visite: ',
     'notes'                 => 'Notas',
     'password_confirm' 		=> 'Confirmar Senha',
     'password' 				=> 'Senha',

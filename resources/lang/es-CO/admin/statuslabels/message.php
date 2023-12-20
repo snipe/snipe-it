@@ -3,6 +3,7 @@
 return [
 
     'does_not_exist' => 'Etiqueta de Estado inexistente.',
+    'deleted_label' => 'Deleted Status Label',
     'assoc_assets'	 => 'Esta etiqueta de estado está asociada con al menos un equipo actualmente, por lo que no puede ser eliminada. Por favor actualiza tus equipos para que no hagan uso de esta etiqueta, e inténtalo de nuevo. ',
 
     'create' => [
@@ -23,7 +24,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Estos equipos no pueden ser asignados.',
-        'deployable'   => 'Estos activos pueden ser retirados. Una vez asignados, asumirán un estado meta de <i class="fas fa-circle text-blue"></i> <strong>Desplegado</strong>.',
+        'deployable'   => 'Estos equipos pueden ser asignados. Una vez estén asignados, asumirán el meta estado de <i class="fas fa-circle text-blue"></i> <strong>Asignado</strong>.',
         'archived'   => 'Estos equipos no pueden ser asignados, y solo se mostrarán en la vista de Archivados. Esto es útil para retener información sobre equipos por razones de presupuesto/revisión histórica, mientras están fuera de la lista de equipos del día a día.',
         'pending'   => 'Estos equipos no pueden ser asignados, suele usarse para ítems que están en reparación, o que se espera que regresen a circulación eventualmente.',
     ],

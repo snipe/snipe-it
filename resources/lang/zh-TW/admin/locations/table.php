@@ -15,7 +15,7 @@ return [
     'print_all_assigned'        => '列印所有已分配的',
     'name'                      => '位置名稱',
     'address'                   => '地址',
-    'address2'                   => 'Address Line 2',
+    'address2'                   => '地址第二行',
     'zip'                       => '郵遞區號',
     'locations'                 => '位置',
     'parent'                    => '父項目',

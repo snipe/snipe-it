@@ -156,6 +156,7 @@ return [
     'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'Import',
+    'import_this_file'      => 'Map fields and process this file',
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
     'import-history'        => 'Import History',
@@ -491,5 +492,12 @@ return [
     'upload_error' => 'Error uploading file. Please check that there are no empty rows and that no column names are duplicated.',
     'copy_to_clipboard' => 'Copy to Clipboard',
     'copied' => 'Copied!',
+    'status_compatibility' => 'If assets are already assigned, they cannot be changed to a non-deployable status type and this value change will be skipped.',
+    'rtd_location_help' => 'This is the location of the asset when it is not checked out',
+    'item_not_found' => ':item_type ID :id does not exist or has been deleted',
+    'action_permission_denied' => 'You do not have permission to :action :item_type ID :id',
+    'action_permission_generic' => 'You do not have permission to :action this :item_type',
+    'edit' => 'edit',
+    'action_source' => 'Action Source',
 
 ];

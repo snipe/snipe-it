@@ -3,7 +3,7 @@
 return array(
 
     'asset'             => 'Equipo',
-    'checkin'           => 'Quita',
+    'checkin'           => 'Entrada',
     'create'            => 'Nueva Licencia',
     'expiration'        => 'Fecha de vencimiento',
     'license_key'       => 'Clave de producto',

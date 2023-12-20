@@ -11,7 +11,7 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
+        'success'               => 'Anda sudah berhasil masuk.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
     ),

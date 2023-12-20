@@ -156,6 +156,7 @@ return [
     'image_filetypes_help'  => 'Prihvatljivi tipovi datoteka su jpg, webp, png, gif i svg. Maksimalna veličina datoteke je :size.',
     'unaccepted_image_type'  => 'Datoteka slike nije čitljiva. Prihvatljivi tipovi datoteka su jpg, webp, png, gif i svg. Mimetip ove datoteke je: :mimetype.',
     'import'         	    => 'Import',
+    'import_this_file'      => 'Mapiraj polja i obradi ovu datoteku',
     'importing'         	=> 'Uvoženje',
     'importing_help'        => 'Možete uvesti imovinu, opremu, licence, komponente, potrošnu robu i korisnike uz pomoć CSV datoteke. <br><br>Podaci u CSV datoteci trebaju biti odvojeni zarezom i formatirani sa zaglavljima koji se poklapaju sa <a href="https://snipe-it.readme.io/docs/importing" target="_new">primerima CSV-a u dokumentaciji</a>.',
     'import-history'        => 'Import History',
@@ -491,5 +492,12 @@ return [
     'upload_error' => 'Greška tokom slanja datoteke. Molim vas potvrdite da nema praznih redova i da nazivi kolona nisu duplirani.',
     'copy_to_clipboard' => 'Kopiraj u beležnicu',
     'copied' => 'Kopirano!',
+    'status_compatibility' => 'Ako je imovina već zadužena, ne može biti promenjena u nezaduživi status i promena ove vrednosti će biti preskočena.',
+    'rtd_location_help' => 'Ovo je lokacija imovine kada nije zadužena',
+    'item_not_found' => ':item_type ID :id ne postoji ili je obrisan',
+    'action_permission_denied' => 'Nemate ovlašćenje da :action :item_type ID :id',
+    'action_permission_generic' => 'Nemate ovlašćenje da :action ovu :item_type',
+    'edit' => 'uredi',
+    'action_source' => 'Izvor aktivnosti',
 
 ];

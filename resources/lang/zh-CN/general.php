@@ -156,6 +156,7 @@ return [
     'image_filetypes_help'  => '接受jpg，png，gif和svg类型的文件。文件大小应小于 :size。',
     'unaccepted_image_type'  => '此图像文件不可读。可接受的文件类型为jpg、webp、png、gif和svg。此文件的 mimetype 类型为：:mimetype。',
     'import'         	    => '导入',
+    'import_this_file'      => '映射字段并处理此文件',
     'importing'         	=> '正在导入…',
     'importing_help'        => '您可以通过CSV文件导入资产、配件、许可证、组件、消耗品和用户。 <br><br>CSV 应以逗号分隔和格式化，并且在文档</a> 中与 <a href="https://snipe-it.readme.io/docs/importing" target="_new">样本CSV中的标头匹配。',
     'import-history'        => '导入历史记录',
@@ -491,5 +492,12 @@ return [
     'upload_error' => '上传文件时出错。请检查是否没有空行，并且没有重复的列名。',
     'copy_to_clipboard' => '复制到剪贴板',
     'copied' => '已复制！',
+    'status_compatibility' => '如果资产已经分配，它们不能被更改为不可部署的状态类型，并且这个值的变化将被跳过。',
+    'rtd_location_help' => '这是当资产未被借出时的位置',
+    'item_not_found' => ':item_type ID :id 不存在或已被删除',
+    'action_permission_denied' => '您没有 :action :item_type ID :id 的权限',
+    'action_permission_generic' => '您没有 :action 此 :item_type 的权限',
+    'edit' => '编辑',
+    'action_source' => 'Action Source',
 
 ];

@@ -9,6 +9,7 @@ return [
     'ad_append_domain_help'     => 'No se requiere que el usuario escriba "username@dominio.empresa", ellos podrán, simplemente digitar su nombre de usuario "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
+    'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'Este es un servidor de Directorio Activo',
     'alerts'                	=> 'Alertas',
     'alert_title'               => 'Actualizar ajustes de notificación',

@@ -35,7 +35,7 @@ return [
     'create_field'            => 'Kostum field baru',
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Nilai field ini dienkripsi dalam database. Hanya pengguna admin yang bisa melihat nilai dekripsi',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
+    'show_in_email'     => 'Sertakan nilai bidang ini dalam semua email keluar yang dikirim ke pengguna? Bidang yang terenkripsi tidak dapat disertakan dalam email',
     'show_in_email_short'     => 'Include in emails.',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',

@@ -4,14 +4,14 @@ return array(
 
     'assigned_to'   	=> 'Assigned To',
     'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
+    'id'      			=> 'លេខសម្គាល់',
     'license_email'   	=> 'License Email',
     'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
+    'purchase_date'   	=> 'កាលបរិច្ឆេទទិញ',
     'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'seats'   			=> 'កៅអី',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'title'      		=> 'អាជ្ញាប័ណ្ណ',
 
 );

@@ -9,6 +9,7 @@ return [
     'ad_append_domain_help'     => 'Od korisnika se ne traži da piše „korisničko ime@domain.local“, može samo da unese „korisničko ime“.',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Ako želite da pošaljete kopiju mejlova za prijavu/odjavu koji se šalju korisnicima na dodatni nalog e-pošte, unesite je ovde. U suprotnom ostavite ovo polje praznim.',
+    'admin_settings'            => 'Administratorska podešavanja',
     'is_ad'				        => 'Ovo je Active Directory server',
     'alerts'                	=> 'Upozorenja',
     'alert_title'               => 'Podešavanja obaveštenja o nadogradnji',
