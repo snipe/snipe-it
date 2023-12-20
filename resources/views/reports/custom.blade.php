@@ -421,21 +421,10 @@
     <div class="col-md-2">
         @if (! request()->routeIs('report-templates.edit'))
             <div style=padding-bottom:5px>
-                <form method="post" id="savetemplateform" action="{{ route("report-templates.store") }}">
-                    @csrf
-                        <input type="hidden" id="savetemplateform" name="options">
-                        <input type="text" id="name" name="name" value="{{ $reportTemplate->name }}" style="width: 100%; margin-bottom: 5px; height: 34px"> {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
-                        <button class="btn btn-primary" style="width: 100%">
-                            {{ trans('admin/reports/general.save_template') }}
-                        </button>
-                </form>
-            </div>
-
-            <div style=padding-bottom:5px>
                 <select
                     id="saved_report_select"
                     class="form-control select2"
-                    data-placeholder={{ trans('admin/reports/general.saved_reports') }}
+                    data-placeholder="{{ trans('admin/reports/general.saved_reports') }}"
                     data-allow-clear="true"
                 >
                     <option></option>
@@ -457,6 +446,21 @@
                             });
                     </script>
                 @endpush
+            </div>
+            <div style=padding-bottom:5px>
+                <form method="post" id="savetemplateform" action="{{ route("report-templates.store") }}">
+                    @csrf
+                    <input type="hidden" id="savetemplateform" name="options">
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
+                        <label for="name">Name</label>
+                        <input class="form-control" placeholder="" name="name" type="text" id="name" value="{{ $reportTemplate->name }}">
+                        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%">
+                        {{ trans('admin/reports/general.save_template') }}
+                    </button>
+                </form>
             </div>
         @endif
     </div>
