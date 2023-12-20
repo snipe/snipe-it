@@ -29,6 +29,27 @@ class ReportTemplatesController extends Controller
         return redirect()->route('reports/custom', ['report' => $report->id]);
     }
 
+    public function show(Request $request, $reportId)
+    {
+        $this->authorize('reports.view');
+
+        $reportTemplate = ReportTemplate::find($reportId);
+
+        if (!$reportTemplate) {
+            return redirect()->route('reports/custom')
+                ->with('error', 'Template does not exist or you do not have permission to view it.');
+        }
+
+        $customfields = CustomField::get();
+        $report_templates = ReportTemplate::orderBy('name')->get();
+
+        return view('reports/custom', [
+            'customfields' => $customfields,
+            'report_templates' => $report_templates,
+            'reportTemplate' => $reportTemplate,
+        ]);
+    }
+
     public function edit(Request $request, $reportId)
     {
         $report = ReportTemplate::findOrFail($reportId);

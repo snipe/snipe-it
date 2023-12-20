@@ -429,7 +429,7 @@
                 >
                     <option></option>
                     @foreach($report_templates as $template)
-                        <option value="{{ $template->id }}" @if (request()->input('report') == $template->id) selected @endif>
+                        <option value="{{ $template->id }}" @if (request()->route()->parameter('reportId') == $template->id) selected @endif>
                             {{ $template->name }}
                         </option>
                     @endforeach
@@ -439,7 +439,7 @@
                     <script>
                         $('#saved_report_select')
                             .on('select2:select', function (event) {
-                                window.location.href = '{{ route('reports/custom') }}?report=' + event.params.data.id;
+                                window.location.href = '/reports/saved-templates/' + event.params.data.id;
                             })
                             .on('select2:clearing', function (event) {
                                 window.location.href = '{{ route('reports/custom') }}';

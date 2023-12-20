@@ -397,7 +397,7 @@ class ReportsController extends Controller
         return view('reports/custom', [
             'customfields' => $customfields,
             'report_templates' => $report_templates,
-            'reportTemplate' => $report_templates->find($request->input('report')) ?? new ReportTemplate,
+            'reportTemplate' => new ReportTemplate,
         ]);
     }
 
