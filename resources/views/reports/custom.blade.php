@@ -20,7 +20,7 @@
         'method' => 'post',
         'class' => 'form-horizontal',
         'id' => 'custom-report-form',
-        'url' => '/reports/custom',
+        'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $reportTemplate) : '/reports/custom',
     ]) }}
     {{csrf_field()}}
 
@@ -36,20 +36,7 @@
                     {{ trans('general.customize_report') }}
                 @endif
             </h2>
-            @if ($reportTemplate->exists && request()->routeIs('report-templates.edit'))
-                <div class="box-tools pull-right">
-                    {{-- todo --}}
-                    <form id="savetemplateform" action="{{ route("report-templates.update", $reportTemplate->id) }}">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" id="savetemplateform" name="options">
-                        <input type="hidden" id="name" name="name" value="{{ $reportTemplate->name }},1git ">
-                        <button class="btn btn-primary" style="width: 100%">
-                            {{ trans('general.save') }}
-                        </button>
-                    </form>
-                </div>
-            @elseif ($reportTemplate->exists)
+            @if ($reportTemplate->exists)
                 <div class="box-tools pull-right">
                     <a
                         href="{{ route('report-templates.edit', $reportTemplate) }}"
@@ -409,10 +396,17 @@
 
         </div> <!-- /.box-body-->
         <div class="box-footer text-right">
-          <button type="submit" class="btn btn-success">
-            <i class="fas fa-download icon-white" aria-hidden="true"></i>
-            {{ trans('general.generate') }}
-          </button>
+            @if (request()->routeIs('report-templates.edit'))
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                    Update Template
+                </button>
+            @else
+              <button type="submit" class="btn btn-success">
+                <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                {{ trans('general.generate') }}
+              </button>
+            @endif
         </div>
       </div> <!--/.box.box-default-->
     {{ Form::close() }}

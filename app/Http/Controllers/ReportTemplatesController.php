@@ -26,7 +26,7 @@ class ReportTemplatesController extends Controller
 //            return redirect()->route('reports/custom')->with('error', trans('reports/message.create.duplicate'));
 //        }
 
-        return redirect()->route('reports/custom', ['report' => $report->id]);
+        return redirect()->route('report-templates.show', $report->id);
     }
 
     public function show(Request $request, $reportId)
@@ -60,24 +60,20 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $reportId)
     {
-        $this->authorize('update',ReportTemplate::class);
+        $this->authorize('reports.view');
 
-        if(is_null($reportid = ReportTemplate::find($request)))
-        {
+        $reportTemplate = ReportTemplate::find($reportId);
+
+        if (!$reportTemplate) {
+            // @todo: what is the behavior we want?
             return redirect()->route('reports/custom');
         }
 
-        $request->validate()->report->id->getRules();
+        $reportTemplate->options = $request->except(['_token', 'name']);
+        $reportTemplate->save();
 
-
-        $report = $request->user()->reportTemplates()->edit([
-            'name' => $request->get('name'),
-            'options' => $request->except(['token','name']),
-        ]);
-
-        return redirect()->route('reports/custom', ['report' => $report->id]);
-
+        return redirect()->route('report-templates.show', $reportTemplate->id);
     }
 }
