@@ -420,7 +420,7 @@
 
     <div class="col-md-2">
         @if (! request()->routeIs('report-templates.edit'))
-            <div style=padding-bottom:5px>
+            <div class="form-group">
                 <select
                     id="saved_report_select"
                     class="form-control select2"
@@ -447,7 +447,7 @@
                     </script>
                 @endpush
             </div>
-            <div style=padding-bottom:5px>
+            <div class="form-group">
                 <form method="post" id="savetemplateform" action="{{ route("report-templates.store") }}">
                     @csrf
                     <input type="hidden" id="savetemplateform" name="options">
