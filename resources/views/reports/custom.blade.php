@@ -447,6 +447,8 @@
                     </script>
                 @endpush
             </div>
+        @endif
+        @if (request()->routeIs('reports/custom'))
             <div class="form-group">
                 <form method="post" id="savetemplateform" action="{{ route("report-templates.store") }}">
                     @csrf
