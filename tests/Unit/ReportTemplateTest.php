@@ -23,71 +23,71 @@ class ReportTemplateTest extends TestCase
 
     public function testParsingCheckmarkValue()
     {
-        $savedReport = ReportTemplate::factory()->create([
+        $template = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_checkbox_field' => '1',
             ],
         ]);
 
-        $this->assertEquals('1', $savedReport->checkmarkValue('is_a_checkbox_field'));
-        $this->assertEquals('0', $savedReport->checkmarkValue('non_existent_key'));
+        $this->assertEquals('1', $template->checkmarkValue('is_a_checkbox_field'));
+        $this->assertEquals('0', $template->checkmarkValue('non_existent_key'));
 
         $this->assertEquals('1', (new ReportTemplate)->checkmarkValue('is_a_checkbox_field'));
     }
 
     public function testParsingTextValue()
     {
-        $savedReport = ReportTemplate::factory()->create([
+        $template = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_text_field' => 'some text',
             ],
         ]);
 
-        $this->assertEquals('some text', $savedReport->textValue('is_a_text_field'));
-        $this->assertEquals('', $savedReport->textValue('non_existent_key'));
+        $this->assertEquals('some text', $template->textValue('is_a_text_field'));
+        $this->assertEquals('', $template->textValue('non_existent_key'));
 
         $this->assertEquals('', (new ReportTemplate)->textValue('is_a_text_field'));
     }
 
     public function testParsingRadioValue()
     {
-        $savedReport = ReportTemplate::factory()->create([
+        $template = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_radio_field' => null,
             ],
         ]);
 
-        $this->assertEquals('return_value', $savedReport->radioValue('is_a_radio_field', null, 'return_value'));
-        $this->assertEquals(null, $savedReport->radioValue('is_a_radio_field', 'another_value', 'return_value'));
-        $this->assertNull($savedReport->radioValue('non_existent_key', '1', true));
+        $this->assertEquals('return_value', $template->radioValue('is_a_radio_field', null, 'return_value'));
+        $this->assertEquals(null, $template->radioValue('is_a_radio_field', 'another_value', 'return_value'));
+        $this->assertNull($template->radioValue('non_existent_key', '1', true));
     }
 
     public function testParsingSelectValue()
     {
-        $savedReport = ReportTemplate::factory()->create([
+        $template = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_text_field_as_well' => '4',
                 'contains_a_null_value' => null,
             ],
         ]);
 
-        $this->assertEquals('4', $savedReport->selectValue('is_a_text_field_as_well'));
-        $this->assertEquals('', $savedReport->selectValue('non_existent_key'));
-        $this->assertNull($savedReport->selectValue('contains_a_null_value'));
+        $this->assertEquals('4', $template->selectValue('is_a_text_field_as_well'));
+        $this->assertEquals('', $template->selectValue('non_existent_key'));
+        $this->assertNull($template->selectValue('contains_a_null_value'));
     }
 
     public function testParsingSelectValues()
     {
-        $savedReport = ReportTemplate::factory()->create([
+        $template = ReportTemplate::factory()->create([
             'options' => [
                 'is_an_array' => ['2', '3', '4'],
                 'is_an_array_containing_null' => [null],
             ],
         ]);
 
-        $this->assertEquals(['2', '3', '4'], $savedReport->selectValues('is_an_array'));
-        $this->assertEquals(null, $savedReport->selectValues('non_existent_key'));
-        $this->assertNull($savedReport->selectValues('is_an_array_containing_null'));
+        $this->assertEquals(['2', '3', '4'], $template->selectValues('is_an_array'));
+        $this->assertEquals(null, $template->selectValues('non_existent_key'));
+        $this->assertNull($template->selectValues('is_an_array_containing_null'));
     }
 
     public function testSelectValueDoesNotIncludeDeletedOrNonExistentModels()
@@ -123,7 +123,7 @@ class ReportTemplateTest extends TestCase
         [$locationA, $locationB] = Location::factory()->count(2)->create();
         $invalidId = 10000;
 
-        $savedReport = ReportTemplate::factory()->create([
+        $template = ReportTemplate::factory()->create([
             'options' => [
                 'array_of_ids' => [
                     $locationA->id,
@@ -135,7 +135,7 @@ class ReportTemplateTest extends TestCase
 
         $locationB->delete();
 
-        $parsedValues = $savedReport->selectValues('array_of_ids', Location::class);
+        $parsedValues = $template->selectValues('array_of_ids', Location::class);
 
         $this->assertContains($locationA->id, $parsedValues);
         $this->assertNotContains($locationB->id, $parsedValues);
@@ -169,12 +169,12 @@ class ReportTemplateTest extends TestCase
         // I'm not sure how helpful that is, and it would probably be a future feature if implemented.
     }
 
-    public function testSavedReportHasDefaultValuesSet()
+    public function testReportTemplateHasDefaultValuesSet()
     {
         $this->markTestIncomplete();
 
         // Quick thought: I think deleted_assets should be set to null so that
-        // "Exclude Deleted Assets" is selected when using a new'd up SavedReport.
+        // "Exclude Deleted Assets" is selected when using a new'd up ReportTemplate.
     }
 
     public function testOldValuesStillWorkAfterTheseChanges()
