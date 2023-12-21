@@ -411,7 +411,6 @@ class ReportsController extends Controller
      */
     public function postCustom(Request $request)
     {
-       // dd('postCustom', $request->all());
         ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
         $this->authorize('reports.view');
 

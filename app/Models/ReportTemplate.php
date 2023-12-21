@@ -26,7 +26,6 @@ class ReportTemplate extends Model
         'options',
     ];
 
-    // @todo: add $rules
     protected $rules = [
         'name' => 'required|unique:report_templates,name',
         'options' => 'array',
