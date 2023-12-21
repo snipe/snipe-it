@@ -436,17 +436,17 @@
 
         </div> <!-- /.box-body-->
         <div class="box-footer text-right">
-            @if (request()->routeIs('report-templates.edit'))
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-check icon-white" aria-hidden="true"></i>
-                {{ trans('general.save') }}
-              </button>
-            @else
-              <button type="submit" class="btn btn-success">
-                <i class="fas fa-download icon-white" aria-hidden="true"></i>
-                {{ trans('general.generate') }}
-              </button>
-            @endif
+          @if (request()->routeIs('report-templates.edit'))
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-check icon-white" aria-hidden="true"></i>
+              {{ trans('general.save') }}
+            </button>
+          @else
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-download icon-white" aria-hidden="true"></i>
+              {{ trans('general.generate') }}
+            </button>
+          @endif
         </div>
       </div> <!--/.box.box-default-->
     {{ Form::close() }}
