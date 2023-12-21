@@ -27,38 +27,38 @@
     <!-- Horizontal Form -->
       <div class="box box-default">
         <div class="box-header with-border">
-            <h2 class="box-title">
-                @if (request()->routeIs('report-templates.edit'))
-                    Updating: {{ $reportTemplate->name }}
-                @elseif(request()->routeIs('report-templates.show'))
-                    Saved Template: {{ $reportTemplate->name }}
-                @else
-                    {{ trans('general.customize_report') }}
-                @endif
-            </h2>
-            @if (request()->routeIs('report-templates.show') || request()->routeIs('report-templates.edit'))
-                <div class="box-tools pull-right">
-                    <a
-                        href="{{ route('report-templates.edit', $reportTemplate) }}"
-                        class="btn btn-sm btn-warning"
-                        data-tooltip="true"
-                        title="Update"
-                    >
-                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                        <span class="sr-only">{{ trans('general.update') }}</span>
-                    </a>
-                    <button
-                        class="btn btn-sm btn-danger delete-asset"
-                        data-toggle="modal"
-                        data-title="{{ trans('general.delete') }}"
-                        data-content="{{ trans('general.delete_confirm', ['item' => $reportTemplate->name]) }}"
-                        data-target="#dataConfirmModal"
-                        type="button"
-                    >
-                        <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
-                    </button>
-                </div>
+          <h2 class="box-title">
+            @if (request()->routeIs('report-templates.edit'))
+              Updating: {{ $reportTemplate->name }}
+            @elseif(request()->routeIs('report-templates.show'))
+              Saved Template: {{ $reportTemplate->name }}
+            @else
+              {{ trans('general.customize_report') }}
             @endif
+          </h2>
+          @if (request()->routeIs('report-templates.show') || request()->routeIs('report-templates.edit'))
+            <div class="box-tools pull-right">
+              <a
+                href="{{ route('report-templates.edit', $reportTemplate) }}"
+                class="btn btn-sm btn-warning"
+                data-tooltip="true"
+                title="Update"
+              >
+                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                <span class="sr-only">{{ trans('general.update') }}</span>
+              </a>
+              <button
+                class="btn btn-sm btn-danger delete-asset"
+                data-toggle="modal"
+                data-title="{{ trans('general.delete') }}"
+                data-content="{{ trans('general.delete_confirm', ['item' => $reportTemplate->name]) }}"
+                data-target="#dataConfirmModal"
+                type="button"
+              >
+                <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
+              </button>
+            </div>
+          @endif
         </div><!-- /.box-header -->
 
         <div class="box-body">
