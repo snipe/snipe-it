@@ -28,15 +28,15 @@
       <div class="box box-default">
         <div class="box-header with-border">
             <h2 class="box-title">
-                @if ($reportTemplate->exists && request()->routeIs('report-templates.edit'))
+                @if (request()->routeIs('report-templates.edit'))
                     Updating: {{ $reportTemplate->name }}
-                @elseif($reportTemplate->exists)
+                @elseif(request()->routeIs('report-templates.show'))
                     Saved Template: {{ $reportTemplate->name }}
                 @else
                     {{ trans('general.customize_report') }}
                 @endif
             </h2>
-            @if ($reportTemplate->exists)
+            @if (request()->routeIs('report-templates.show') || request()->routeIs('report-templates.edit'))
                 <div class="box-tools pull-right">
                     <a
                         href="{{ route('report-templates.edit', $reportTemplate) }}"
