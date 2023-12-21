@@ -360,7 +360,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('reports/saved-templates', [ReportTemplatesController::class, 'store'])->name('report-templates.store');
     Route::get('reports/saved-templates/{reportId}', [ReportTemplatesController::class, 'show'])->name('report-templates.show');
     Route::get('reports/saved-templates/{reportId}/edit', [ReportTemplatesController::class, 'edit'])->name('report-templates.edit');
-    Route::post('report/saved-templates/{reportId}', [ReportTemplatesController::class, 'update'])->name('report-templates.update');
+    Route::post('reports/saved-templates/{reportId}', [ReportTemplatesController::class, 'update'])->name('report-templates.update');
+    Route::delete('reports/saved-templates/{reportId}', [ReportTemplatesController::class, 'destroy'])->name('report-templates.destroy');
 
     Route::get(
         'reports/activity',

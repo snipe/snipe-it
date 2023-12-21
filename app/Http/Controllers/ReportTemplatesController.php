@@ -76,4 +76,22 @@ class ReportTemplatesController extends Controller
 
         return redirect()->route('report-templates.show', $reportTemplate->id);
     }
+
+    public function destroy($reportId)
+    {
+        $this->authorize('reports.view');
+
+        $reportTemplate = ReportTemplate::find($reportId);
+
+        if (!$reportTemplate) {
+            // @todo: what is the behavior we want?
+            return redirect()->route('reports/custom')
+                ->with('error', 'Template does not exist or you do not have permission to delete it.');
+        }
+
+        $reportTemplate->delete();
+
+        return redirect()->route('reports/custom')
+            ->with('success', 'Template deleted.');
+    }
 }

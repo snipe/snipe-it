@@ -47,26 +47,16 @@
                         <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                         <span class="sr-only">{{ trans('general.update') }}</span>
                     </a>
-
-{{--                     This is from the license.view page--
-                           See line 1077 in routes.api for example of routing
-{{--                    <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">--}}
-{{--                    <i class="fas fa-trash icon-white" aria-hidden="true"></i>--}}
-{{--                    <span class="sr-only">{{ trans('general.delete') }}</span>--}}
-{{--                  </a>--}}
-
-                    {{-- these were pulled from hardware.index and the one below doesn't work...--}}
-                    <a
-                        href="#"
-                        class="actions btn btn-danger btn-sm delete-report" {{--This was delete-asset as a class. We'd need to make a delete-report class--}}
-                        data-tooltip="true"
+                    <button
+                        class="btn btn-sm btn-danger delete-asset"
                         data-toggle="modal"
-                        data-content="Are you sure you wish to delete 1260505622?"
-                        data-title="Delete"
-                        onclick="return false;"
+                        data-title="{{ trans('general.delete') }}"
+                        data-content="{{ trans('general.delete_confirm', ['item' => $reportTemplate->name]) }}"
+                        data-target="#dataConfirmModal"
+                        type="button"
                     >
-                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
-                    </a>
+                        <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
+                    </button>
                 </div>
             @endif
         </div><!-- /.box-header -->
@@ -516,6 +506,13 @@
           }).appendTo(form);
 
           form.attr('action', '{{ route('report-templates.store') }}').submit();
+      });
+
+      $('#dataConfirmModal').on('show.bs.modal', function (event) {
+          var content = $(event.relatedTarget).data('content');
+          var title = $(event.relatedTarget).data('title');
+          $(this).find(".modal-body").text(content);
+          $(this).find(".modal-header").text(title);
       });
 
   </script>
