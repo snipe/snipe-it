@@ -36,7 +36,7 @@
               {{ trans('general.customize_report') }}
             @endif
           </h2>
-          @if (request()->routeIs('report-templates.show') || request()->routeIs('report-templates.edit'))
+          @if (request()->routeIs('report-templates.show'))
             <div class="box-tools pull-right">
               <a
                 href="{{ route('report-templates.edit', $reportTemplate) }}"
