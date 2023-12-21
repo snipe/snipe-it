@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Location;
 use App\Models\ReportTemplate;
 use Tests\TestCase;
 
@@ -85,11 +86,34 @@ class ReportTemplateTest extends TestCase
 
     public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()
     {
-        $this->markTestIncomplete();
+        [$locationA, $locationB] = Location::factory()->count(2)->create();
 
-        // report saved with select option for a company (or whatever)
-        // company is deleted
-        // ensure company's id is not returned
+        $savedReport = ReportTemplate::factory()->create([
+            'options' => [
+                'by_location_id' => [
+                    $locationA->id,
+                    $locationB->id,
+                    10000
+                ],
+            ],
+        ]);
+
+        $locationB->delete();
+
+        $this->assertContains(
+            $locationA->id,
+            $savedReport->selectValues('by_location_id', Location::class)
+        );
+
+        $this->assertNotContains(
+            $locationB->id,
+            $savedReport->selectValues('by_location_id', Location::class)
+        );
+
+        $this->assertNotContains(
+            10000,
+            $savedReport->selectValues('by_location_id', Location::class)
+        );
     }
 
     public function testGracefullyHandlesSingleSelectBecomingMultiSelect()

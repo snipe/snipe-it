@@ -287,14 +287,14 @@
                 'multiple' => 'true',
                 'fieldname' => 'by_location_id[]',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValues('by_location_id')
+                'selected' => $reportTemplate->selectValues('by_location_id', \App\Models\Location::class)
             ])
             @include ('partials.forms.edit.location-select', [
                 'translated_name' => trans('admin/hardware/form.default_location'),
                 'multiple' => 'true',
                 'fieldname' => 'by_rtd_location_id[]',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValues('by_rtd_location_id')
+                'selected' => $reportTemplate->selectValues('by_rtd_location_id', \App\Models\Location::class)
              ])
             @include ('partials.forms.edit.department-select', [
                 'translated_name' => trans('general.department'),

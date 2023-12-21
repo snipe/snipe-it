@@ -65,7 +65,7 @@ class ReportTemplate extends Model
         return $this->options[$property] ?? null;
     }
 
-    public function selectValues(string $property)
+    public function selectValues(string $property, string $model = null)
     {
         if (!isset($this->options[$property])) {
             return null;
@@ -73,6 +73,12 @@ class ReportTemplate extends Model
 
         if ($this->options[$property] === [null]) {
             return null;
+        }
+
+        // If a model is provided then we should ensure we only return
+        // the ids of models that exist and are not deleted.
+        if ($model) {
+            return $model::findMany($this->options[$property])->pluck('id');
         }
 
         return $this->options[$property];
