@@ -434,8 +434,6 @@
               </div>
           </div>
 
-
-
         </div> <!-- /.box-body-->
         <div class="box-footer text-right">
             @if (request()->routeIs('report-templates.edit'))
