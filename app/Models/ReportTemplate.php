@@ -82,6 +82,8 @@ class ReportTemplate extends Model
             return null;
         }
 
+        // @todo: I think this was added to support the null object pattern
+        // @todo: Check if this is still needed and if so, add a test for it.
         if ($this->options[$property] === [null]) {
             return null;
         }
