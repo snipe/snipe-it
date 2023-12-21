@@ -18,18 +18,11 @@ class ReportTemplatesController extends Controller
             'name' => $request->get('name'),
             'options' => $request->except(['_token', 'name']),
         ]);
-//        This is for error handling in creation. This probably is the wrong spot, and syntax is off, but i don't wanna forget
-//        if(is_null($report->name)) {
-//            return redirect()->route('reports/custom')->with('error', trans('reports/message.create.needs_title'));
-//        }
-//        elseif(exists($report->name)) {
-//            return redirect()->route('reports/custom')->with('error', trans('reports/message.create.duplicate'));
-//        }
 
         return redirect()->route('report-templates.show', $report->id);
     }
 
-    public function show(Request $request, $reportId)
+    public function show($reportId)
     {
         $this->authorize('reports.view');
 
@@ -50,13 +43,11 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function edit(Request $request, $reportId)
+    public function edit($reportId)
     {
-        $report = ReportTemplate::findOrFail($reportId);
-
         return view('reports/custom', [
             'customfields' => CustomField::get(),
-            'reportTemplate' => $report,
+            'reportTemplate' => ReportTemplate::findOrFail($reportId),
         ]);
     }
 
@@ -67,8 +58,8 @@ class ReportTemplatesController extends Controller
         $reportTemplate = ReportTemplate::find($reportId);
 
         if (!$reportTemplate) {
-            // @todo: what is the behavior we want?
-            return redirect()->route('reports/custom');
+            return redirect()->route('reports/custom')
+                ->with('error', 'Template does not exist or you do not have permission to view it.');
         }
 
         $reportTemplate->options = $request->except(['_token', 'name']);
@@ -84,7 +75,6 @@ class ReportTemplatesController extends Controller
         $reportTemplate = ReportTemplate::find($reportId);
 
         if (!$reportTemplate) {
-            // @todo: what is the behavior we want?
             return redirect()->route('reports/custom')
                 ->with('error', 'Template does not exist or you do not have permission to delete it.');
         }

@@ -497,8 +497,6 @@
           e.preventDefault(e);
 
           let form = $('#custom-report-form');
-          {{-- handle null? --}}
-          {{-- handle duplicate name? --}}
           $('<input>').attr({
               type: 'hidden',
               name: 'name',
@@ -514,6 +512,5 @@
           $(this).find(".modal-body").text(content);
           $(this).find(".modal-header").text(title);
       });
-
   </script>
 @stop
