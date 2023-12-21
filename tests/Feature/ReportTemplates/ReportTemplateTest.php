@@ -22,34 +22,34 @@ class ReportTemplateTest extends TestCase
             }]);
     }
 
-    public function testCanLoadASavedCustomReport()
+    public function testCanLoadASavedReportTemplate()
     {
         $user = User::factory()->canViewReports()->create();
-        $reportTemplate = ReportTemplate::factory()->make(['name' => 'My Awesome Report']);
+        $reportTemplate = ReportTemplate::factory()->make(['name' => 'My Awesome Template']);
         $user->reportTemplates()->save($reportTemplate);
 
         $this->actingAs($user)
-            ->get(route('reports/custom', ['report' => $reportTemplate->id]))
+            ->get(route('report-templates.show', $reportTemplate))
             ->assertOk()
             ->assertViewHas(['reportTemplate' => function (ReportTemplate $viewReport) use ($reportTemplate) {
                 return $viewReport->is($reportTemplate);
             }]);
     }
 
-    public function testCanSaveACustomReport()
+    public function testCanSaveAReportTemplate()
     {
         $user = User::factory()->canViewReports()->create();
 
         $this->actingAs($user)
             ->post(route('report-templates.store'), [
-                'name' => 'My Awesome Report',
+                'name' => 'My Awesome Template',
                 'company' => '1',
                 'by_company_id' => ['1', '2'],
             ])
             ->assertRedirect();
 
         $template = $user->reportTemplates->first(function ($report) {
-            return $report->name === 'My Awesome Report';
+            return $report->name === 'My Awesome Template';
         });
 
         $this->assertNotNull($template);
@@ -57,7 +57,7 @@ class ReportTemplateTest extends TestCase
         $this->assertEquals(['1', '2'], $template->options['by_company_id']);
     }
 
-    public function testSavingReportRequiresValidFields()
+    public function testReportTemplateRequiresValidFields()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post(route('report-templates.store'), [
@@ -66,7 +66,7 @@ class ReportTemplateTest extends TestCase
             ->assertSessionHasErrors('name');
     }
 
-    public function testSavingReportRequiresCorrectPermission()
+    public function testSavingReportTemplateRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('report-templates.store'))
