@@ -275,15 +275,67 @@
 
               <br>
 
-            @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' => 'true', 'fieldname' => 'by_company_id[]', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValues('by_company_id')])
-            @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'multiple' => 'true', 'fieldname' => 'by_location_id[]', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValues('by_location_id')])
-            @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'multiple' => 'true', 'fieldname' => 'by_rtd_location_id[]', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValues('by_rtd_location_id')])
-            @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'by_dept_id', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValue('by_dept_id')])
-            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id[]', 'multiple' => 'true', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValues('by_supplier_id')])
-            @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id[]', 'multiple' => 'true', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValues('by_model_id')])
-            @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'by_manufacturer_id', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValue('by_manufacturer_id')])
-            @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'by_category_id', 'hide_new' => 'true', 'category_type' => 'asset', 'selected' => $reportTemplate->selectValue('by_category_id')])
-            @include ('partials.forms.edit.status-select', ['translated_name' => trans('admin/hardware/form.status'), 'fieldname' => 'by_status_id[]', 'multiple' => 'true', 'hide_new' => 'true', 'selected' => $reportTemplate->selectValues('by_status_id')])
+            @include ('partials.forms.edit.company-select', [
+                'translated_name' => trans('general.company'),
+                'multiple' => 'true',
+                'fieldname' => 'by_company_id[]',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValues('by_company_id')
+            ])
+            @include ('partials.forms.edit.location-select', [
+                'translated_name' => trans('general.location'),
+                'multiple' => 'true',
+                'fieldname' => 'by_location_id[]',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValues('by_location_id')
+            ])
+            @include ('partials.forms.edit.location-select', [
+                'translated_name' => trans('admin/hardware/form.default_location'),
+                'multiple' => 'true',
+                'fieldname' => 'by_rtd_location_id[]',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValues('by_rtd_location_id')
+             ])
+            @include ('partials.forms.edit.department-select', [
+                'translated_name' => trans('general.department'),
+                'fieldname' => 'by_dept_id',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValue('by_dept_id')
+            ])
+            @include ('partials.forms.edit.supplier-select', [
+                'translated_name' => trans('general.supplier'),
+                'fieldname' => 'by_supplier_id[]',
+                'multiple' => 'true',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValues('by_supplier_id')
+            ])
+            @include ('partials.forms.edit.model-select', [
+                'translated_name' => trans('general.asset_model'),
+                'fieldname' => 'by_model_id[]',
+                'multiple' => 'true',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValues('by_model_id')
+            ])
+            @include ('partials.forms.edit.manufacturer-select', [
+                'translated_name' => trans('general.manufacturer'),
+                'fieldname' => 'by_manufacturer_id',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValue('by_manufacturer_id')
+             ])
+            @include ('partials.forms.edit.category-select', [
+                'translated_name' => trans('general.category'),
+                'fieldname' => 'by_category_id',
+                'hide_new' => 'true',
+                'category_type' => 'asset',
+                'selected' => $reportTemplate->selectValue('by_category_id')
+            ])
+            @include ('partials.forms.edit.status-select', [
+                'translated_name' => trans('admin/hardware/form.status'),
+                'fieldname' => 'by_status_id[]',
+                'multiple' => 'true',
+                'hide_new' => 'true',
+                'selected' => $reportTemplate->selectValues('by_status_id')
+            ])
 
             <!-- Order Number -->
             <div class="form-group">
