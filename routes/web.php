@@ -357,11 +357,12 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
-    Route::post('reports/saved-templates', [ReportTemplatesController::class, 'store'])->name('report-templates.store');
-    Route::get('reports/saved-templates/{reportId}', [ReportTemplatesController::class, 'show'])->name('report-templates.show');
-    Route::get('reports/saved-templates/{reportId}/edit', [ReportTemplatesController::class, 'edit'])->name('report-templates.edit');
-    Route::post('reports/saved-templates/{reportId}', [ReportTemplatesController::class, 'update'])->name('report-templates.update');
-    Route::delete('reports/saved-templates/{reportId}', [ReportTemplatesController::class, 'destroy'])->name('report-templates.destroy');
+
+    Route::post('reports/templates', [ReportTemplatesController::class, 'store'])->name('report-templates.store');
+    Route::get('reports/templates/{reportId}', [ReportTemplatesController::class, 'show'])->name('report-templates.show');
+    Route::get('reports/templates/{reportId}/edit', [ReportTemplatesController::class, 'edit'])->name('report-templates.edit');
+    Route::post('reports/templates/{reportId}', [ReportTemplatesController::class, 'update'])->name('report-templates.update');
+    Route::delete('reports/templates/{reportId}', [ReportTemplatesController::class, 'destroy'])->name('report-templates.destroy');
 
     Route::get(
         'reports/activity',

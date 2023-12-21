@@ -423,7 +423,7 @@
                     <script>
                         $('#saved_report_select')
                             .on('select2:select', function (event) {
-                                window.location.href = '/reports/saved-templates/' + event.params.data.id;
+                                window.location.href = '/reports/templates/' + event.params.data.id;
                             })
                             .on('select2:clearing', function (event) {
                                 window.location.href = '{{ route('reports/custom') }}';
