@@ -91,7 +91,7 @@ class ReportTemplateTest extends TestCase
 
         $savedReport = ReportTemplate::factory()->create([
             'options' => [
-                'by_location_id' => [
+                'array_of_ids' => [
                     $locationA->id,
                     $locationB->id,
                     $invalidId,
@@ -101,7 +101,7 @@ class ReportTemplateTest extends TestCase
 
         $locationB->delete();
 
-        $parsedValues = $savedReport->selectValues('by_location_id', Location::class);
+        $parsedValues = $savedReport->selectValues('array_of_ids', Location::class);
 
         $this->assertContains($locationA->id, $parsedValues);
         $this->assertNotContains($locationB->id, $parsedValues);
