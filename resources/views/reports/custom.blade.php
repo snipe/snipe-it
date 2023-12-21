@@ -280,7 +280,7 @@
                 'multiple' => 'true',
                 'fieldname' => 'by_company_id[]',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValues('by_company_id')
+                'selected' => $reportTemplate->selectValues('by_company_id', \App\Models\Company::class)
             ])
             @include ('partials.forms.edit.location-select', [
                 'translated_name' => trans('general.location'),
@@ -307,34 +307,34 @@
                 'fieldname' => 'by_supplier_id[]',
                 'multiple' => 'true',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValues('by_supplier_id')
+                'selected' => $reportTemplate->selectValues('by_supplier_id', \App\Models\Supplier::class)
             ])
             @include ('partials.forms.edit.model-select', [
                 'translated_name' => trans('general.asset_model'),
                 'fieldname' => 'by_model_id[]',
                 'multiple' => 'true',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValues('by_model_id')
+                'selected' => $reportTemplate->selectValues('by_model_id', \App\Models\AssetModel::class)
             ])
             @include ('partials.forms.edit.manufacturer-select', [
                 'translated_name' => trans('general.manufacturer'),
                 'fieldname' => 'by_manufacturer_id',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValue('by_manufacturer_id')
+                'selected' => $reportTemplate->selectValue('by_manufacturer_id', \App\Models\Manufacturer::class)
              ])
             @include ('partials.forms.edit.category-select', [
                 'translated_name' => trans('general.category'),
                 'fieldname' => 'by_category_id',
                 'hide_new' => 'true',
                 'category_type' => 'asset',
-                'selected' => $reportTemplate->selectValue('by_category_id')
+                'selected' => $reportTemplate->selectValue('by_category_id', \App\Models\Category::class)
             ])
             @include ('partials.forms.edit.status-select', [
                 'translated_name' => trans('admin/hardware/form.status'),
                 'fieldname' => 'by_status_id[]',
                 'multiple' => 'true',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValues('by_status_id')
+                'selected' => $reportTemplate->selectValues('by_status_id', \App\Models\Statuslabel::class)
             ])
 
             <!-- Order Number -->
