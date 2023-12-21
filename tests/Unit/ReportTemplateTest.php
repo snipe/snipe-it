@@ -8,6 +8,19 @@ use Tests\TestCase;
 
 class ReportTemplateTest extends TestCase
 {
+    public function testParsingValuesOnNonExistentReportTemplate()
+    {
+        $this->markTestIncomplete();
+
+        $unsavedTemplate = new ReportTemplate;
+
+        // checkmarkValue()
+        // radioValue()
+        $this->assertNull($unsavedTemplate->selectValue('value_on_unsaved_template'));
+        // selectValues()
+        // textValue()
+    }
+
     public function testParsingCheckmarkValue()
     {
         $savedReport = ReportTemplate::factory()->create([
@@ -61,7 +74,6 @@ class ReportTemplateTest extends TestCase
         $this->assertEquals('4', $savedReport->selectValue('is_a_text_field_as_well'));
         $this->assertEquals('', $savedReport->selectValue('non_existent_key'));
         $this->assertNull($savedReport->selectValue('contains_a_null_value'));
-        $this->assertNull((new ReportTemplate)->selectValue('value_on_unsaved_template'));
     }
 
     public function testParsingSelectValues()
