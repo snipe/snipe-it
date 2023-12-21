@@ -300,7 +300,7 @@
                 'translated_name' => trans('general.department'),
                 'fieldname' => 'by_dept_id',
                 'hide_new' => 'true',
-                'selected' => $reportTemplate->selectValue('by_dept_id')
+                'selected' => $reportTemplate->selectValue('by_dept_id', \App\Models\Department::class)
             ])
             @include ('partials.forms.edit.supplier-select', [
                 'translated_name' => trans('general.supplier'),

@@ -79,9 +79,29 @@ class ReportTemplateTest extends TestCase
 
     public function testSelectValueDoesNotIncludeDeletedOrNonExistentModels()
     {
-        $this->markTestIncomplete();
+        [$locationA, $locationB] = Location::factory()->count(2)->create();
+        $invalidId = 10000;
 
-        // @todo: maybe it should optionally include deleted values?
+        $templateWithValidId = ReportTemplate::factory()->create([
+            'options' => ['single_value' => $locationA->id],
+        ]);
+
+        $templateWithDeletedId = ReportTemplate::factory()->create([
+            'options' => ['single_value' => $locationB->id],
+        ]);
+        $locationB->delete();
+
+        $templateWithInvalidId = ReportTemplate::factory()->create([
+            'options' => ['single_value' => $invalidId],
+        ]);
+
+        $this->assertEquals(
+            $locationA->id,
+            $templateWithValidId->selectValue('single_value', Location::class)
+        );
+
+        $this->assertNull($templateWithDeletedId->selectValue('single_value', Location::class));
+        $this->assertNull($templateWithInvalidId->selectValue('single_value', Location::class));
     }
 
     public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()
