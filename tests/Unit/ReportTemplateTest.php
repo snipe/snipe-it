@@ -61,6 +61,7 @@ class ReportTemplateTest extends TestCase
         $this->assertEquals('4', $savedReport->selectValue('is_a_text_field_as_well'));
         $this->assertEquals('', $savedReport->selectValue('non_existent_key'));
         $this->assertNull($savedReport->selectValue('contains_a_null_value'));
+        $this->assertNull((new ReportTemplate)->selectValue('value_on_unsaved_template'));
     }
 
     public function testParsingSelectValues()
@@ -102,6 +103,7 @@ class ReportTemplateTest extends TestCase
 
         $this->assertNull($templateWithDeletedId->selectValue('single_value', Location::class));
         $this->assertNull($templateWithInvalidId->selectValue('single_value', Location::class));
+        $this->assertNull((new ReportTemplate)->selectValue('value_on_unsaved_template', Location::class));
     }
 
     public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()

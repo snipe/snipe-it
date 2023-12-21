@@ -62,6 +62,10 @@ class ReportTemplate extends Model
 
     public function selectValue(string $property, string $model = null)
     {
+        if (!isset($this->options[$property])) {
+            return null;
+        }
+
         // If a model is provided then we should ensure we only return
         // the value if the model still exists.
         if ($model) {
