@@ -21,7 +21,7 @@
 # * Added support for CentOS/Rocky 9                 #
 # * Fixed CentOS 7 repository for PHP 7.4            #
 # * Removed support for CentOS 6                     #
-# * Removed support for Ubuntu < 18.04               #
+# * Removed support for Ubuntu < 20.04               #
 # * Removed support for Ubuntu 21 (EOL)              #
 # * Removed support for Debian < 9 (EOL)             #
 # * Fixed permissions issue with Laravel cache       #
@@ -228,7 +228,7 @@ install_composer () {
 install_snipeit () {
   create_user
   echo "* Creating MariaDB Database/User."
-  mysql -u root --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+  mysql -u root --execute="CREATE DATABASE snipeit_dbuser;CREATE USER snipeit_dbuser@localhost IDENTIFIED BY '$mysqluserpw'; GRANT ALL PRIVILEGES ON snipeit.* TO snipeit_dbuser@localhost;"
 
   echo -e "\n\n* Cloning Snipe-IT from github to the web directory."
   log "git clone https://github.com/snipe/snipe-it $APP_PATH" & pid=$!
@@ -245,7 +245,7 @@ install_snipeit () {
   sed -i "s|^\\(APP_TIMEZONE=\\).*|\\1$tzone|" "$APP_PATH/.env"
   sed -i "s|^\\(DB_HOST=\\).*|\\1localhost|" "$APP_PATH/.env"
   sed -i "s|^\\(DB_DATABASE=\\).*|\\1snipeit|" "$APP_PATH/.env"
-  sed -i "s|^\\(DB_USERNAME=\\).*|\\1snipeit|" "$APP_PATH/.env"
+  sed -i "s|^\\(DB_USERNAME=\\).*|\\1snipeit_dbuser|" "$APP_PATH/.env"
   sed -i "s|^\\(DB_PASSWORD=\\).*|\\1'$mysqluserpw'|" "$APP_PATH/.env"
   sed -i "s|^\\(APP_URL=\\).*|\\1http://$fqdn|" "$APP_PATH/.env"
 
@@ -728,6 +728,42 @@ EOL
     if [[ "$version" =~ ^6 ]]; then
         eol
         exit 1
+    elif [[ "$version" =~ ^2 || "$distro" == "amzn" ]]; then
+        # Install for amazon linux 2
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
+
+        amazon-linux-extras install -y php8.2
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+
+        set_hosts
+
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
+
+        install_snipeit
+
+        set_firewall
+
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+
+        set_selinux
+
     elif [[ "$version" =~ ^7 ]]; then
         # Install for CentOS/Redhat 7
         set_fqdn
@@ -813,13 +849,17 @@ EOL
         set_selinux
 
     elif [[ "$version" =~ ^9 ]]; then
-        # Install for CentOS/Redhat 9
+        # Install for CentOS/Alma/Redhat 9
         set_fqdn
         set_dbpass
         tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
 
         echo "* Adding EPEL-release repository."
         log "dnf -y install wget epel-release" & pid=$!
+        log "yum -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm" & pid=$
+        progress
+        log "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el8"
+        log "dnf -y module enable php:remi-8.2" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB, and other requirements."
