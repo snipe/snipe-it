@@ -16,10 +16,21 @@ class ReportTemplateTest extends TestCase
         $unsavedTemplate = new ReportTemplate;
 
         // checkmarkValue()
+        $this->assertEquals('1', $unsavedTemplate->checkmarkValue('is_a_checkbox_field'));
+
+        // @todo:
         // radioValue()
+
+        // selectValue()
         $this->assertNull($unsavedTemplate->selectValue('value_on_unsaved_template'));
+        $this->assertNull($unsavedTemplate->selectValue('value_on_unsaved_template'), Location::class);
+
         // selectValues()
+        $this->assertEmpty($unsavedTemplate->selectValues('value_on_unsaved_template'));
+        $this->assertEmpty($unsavedTemplate->selectValues('value_on_unsaved_template'), Location::class);
+
         // textValue()
+        $this->assertEquals('', $unsavedTemplate->selectValue('value_on_unsaved_template'));
     }
 
     public function testParsingCheckmarkValue()
@@ -32,8 +43,6 @@ class ReportTemplateTest extends TestCase
 
         $this->assertEquals('1', $template->checkmarkValue('is_a_checkbox_field'));
         $this->assertEquals('0', $template->checkmarkValue('non_existent_key'));
-
-        $this->assertEquals('1', (new ReportTemplate)->checkmarkValue('is_a_checkbox_field'));
     }
 
     public function testParsingTextValue()
