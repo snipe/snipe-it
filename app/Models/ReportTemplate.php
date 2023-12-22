@@ -76,17 +76,17 @@ class ReportTemplate extends Model
         return $this->options[$property] ?? null;
     }
 
-    public function selectValues(string $property, string $model = null)
+    public function selectValues(string $property, string $model = null): iterable
     {
         if (!isset($this->options[$property])) {
-            return null;
+            return [];
         }
 
         // @todo: I think this was added to support the null object pattern
-        // @todo: Check if this is still needed and if so, add a test for it.
-        if ($this->options[$property] === [null]) {
-            return null;
-        }
+        // @todo: Check if this is still needed and if so, add a test for it (testParsingSelectValues()).
+//        if ($this->options[$property] === [null]) {
+//            return null;
+//        }
 
         // If a model is provided then we should ensure we only return
         // the ids of models that exist and are not deleted.

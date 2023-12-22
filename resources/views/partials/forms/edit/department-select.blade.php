@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <select class="js-data-ajax" data-endpoint="departments" data-placeholder="{{ trans('general.select_department') }}" name="{{ $fieldname }}" style="width: 100%" id="department_select" aria-label="{{ $fieldname }}"{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @isset ($selected)
-                @if (!is_array($selected))
+                @if (!is_iterable($selected))
                     @php
                         $selected = [$selected];
                     @endphp

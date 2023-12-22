@@ -80,14 +80,17 @@ class ReportTemplateTest extends TestCase
     {
         $template = ReportTemplate::factory()->create([
             'options' => [
-                'is_an_array' => ['2', '3', '4'],
-                'is_an_array_containing_null' => [null],
+                'an_array' => ['2', '3', '4'],
+                'an_empty_array'=> [],
+                'an_array_containing_null' => [null],
             ],
         ]);
 
-        $this->assertEquals(['2', '3', '4'], $template->selectValues('is_an_array'));
-        $this->assertEquals(null, $template->selectValues('non_existent_key'));
-        $this->assertNull($template->selectValues('is_an_array_containing_null'));
+        $this->assertEquals(['2', '3', '4'], $template->selectValues('an_array'));
+        $this->assertEquals([], $template->selectValues('an_empty_array'));
+        // @todo: should this actually be []?
+        $this->assertEquals([null], $template->selectValues('an_array_containing_null'));
+        $this->assertEquals([], $template->selectValues('non_existent_key'));
     }
 
     public function testSelectValueDoesNotIncludeDeletedOrNonExistentModels()
