@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Department;
 use App\Models\Location;
 use App\Models\ReportTemplate;
 use Tests\TestCase;
@@ -81,7 +82,7 @@ class ReportTemplateTest extends TestCase
         $template = ReportTemplate::factory()->create([
             'options' => [
                 'an_array' => ['2', '3', '4'],
-                'an_empty_array'=> [],
+                'an_empty_array' => [],
                 'an_array_containing_null' => [null],
             ],
         ]);
@@ -147,12 +148,37 @@ class ReportTemplateTest extends TestCase
 
     public function testGracefullyHandlesSingleSelectBecomingMultiSelect()
     {
-        $this->markTestIncomplete();
+        $department = Department::factory()->create();
+
+        // Given a report template saved with a property that is a string value
+        $templateWithValue = ReportTemplate::factory()->create([
+            'options' => ['single_value' => 'a string'],
+        ]);
+
+        $templateWithModelId = ReportTemplate::factory()->create([
+            'options' => ['by_dept_id' => $department->id],
+        ]);
+
+        $this->assertEquals(['a string'], $templateWithValue->selectValues('single_value'));
+        $this->assertContains($department->id, $templateWithModelId->selectValues('by_dept_id', Department::class));
     }
 
     public function testGracefullyHandlesMultiSelectBecomingSingleSelect()
     {
-        $this->markTestIncomplete();
+        // $this->markTestIncomplete();
+
+        [$departmentA, $departmentB] = Department::factory()->count(2)->create();
+
+        // Given a report template saved with a property that is an array of values
+        $templateWithValuesInArray = ReportTemplate::factory()->create([
+            'options' => ['array_of_values' => [1, 'a string']],
+        ]);
+
+        $templateWithModelIdsInArray = ReportTemplate::factory()->create([
+            'options' => ['model_ids' => [$departmentA->id, $departmentB->id]],
+        ]);
+
+        // @todo: Determine behavior...shoudl we return the first value?
     }
 
     public function testDeletedCustomFieldsDoNotCauseAnIssue()

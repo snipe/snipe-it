@@ -31,8 +31,8 @@ class ReportTemplate extends Model
         'options' => 'array',
     ];
 
-    //we will need a bit to catch and store the name of the report.
-    //for now the blip above is creating the name, but can be confusing if multiple are made at once
+    // we will need a bit to catch and store the name of the report.
+    // for now the blip above is creating the name, but can be confusing if multiple are made at once
 
     public function checkmarkValue(string $property): string
     {
@@ -84,14 +84,19 @@ class ReportTemplate extends Model
 
         // @todo: I think this was added to support the null object pattern
         // @todo: Check if this is still needed and if so, add a test for it (testParsingSelectValues()).
-//        if ($this->options[$property] === [null]) {
-//            return null;
-//        }
+       // if ($this->options[$property] === [null]) {
+       //     return null;
+       // }
 
         // If a model is provided then we should ensure we only return
         // the ids of models that exist and are not deleted.
         if ($model) {
             return $model::findMany($this->options[$property])->pluck('id');
+        }
+
+        // Wrap the value in an array if needed.
+        if (!is_array($this->options[$property])) {
+            return [$this->options[$property]];
         }
 
         return $this->options[$property];
