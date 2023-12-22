@@ -181,11 +181,6 @@ class ReportTemplateTest extends TestCase
         // @todo: Determine behavior...shoudl we return the first value?
     }
 
-    public function testDeletedCustomFieldsDoNotCauseAnIssue()
-    {
-        $this->markTestIncomplete();
-    }
-
     public function testDateRangesAreNotStored()
     {
         $this->markTestIncomplete();
