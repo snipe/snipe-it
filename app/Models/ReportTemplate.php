@@ -31,9 +31,6 @@ class ReportTemplate extends Model
         'options' => 'array',
     ];
 
-    // we will need a bit to catch and store the name of the report.
-    // for now the blip above is creating the name, but can be confusing if multiple are made at once
-
     public function checkmarkValue(string $property): string
     {
         // Assuming we're using the null object pattern,
@@ -55,7 +52,6 @@ class ReportTemplate extends Model
         if (array_has($this->options, $property) && $this->options[$property] === $value) {
             return $return;
         }
-        // this is currently throwing an error. $property is coming through as a string and it needs to be an array
 
         return null;
     }
