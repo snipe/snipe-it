@@ -44,16 +44,22 @@ class ReportTemplate extends Model
         return $this->options[$property] ?? '0';
     }
 
-    public function radioValue(string $property, $value, $return)
+    public function radioValue(string $property, $value, $isDefault = false): bool
     {
         // @todo: this method feels more like "radioShouldBeChecked" or something...
         // @todo: improve the variable names...
 
-        if (array_has($this->options, $property) && $this->options[$property] === $value) {
-            return $return;
+        $propertyExists = array_has($this->options, $property);
+
+        if (!$propertyExists && $isDefault) {
+            return true;
         }
 
-        return null;
+        if ($propertyExists && $this->options[$property] === $value) {
+            return true;
+        }
+
+        return false;
     }
 
     public function selectValue(string $property, string $model = null)
@@ -80,9 +86,9 @@ class ReportTemplate extends Model
 
         // @todo: I think this was added to support the null object pattern
         // @todo: Check if this is still needed and if so, add a test for it (testParsingSelectValues()).
-       // if ($this->options[$property] === [null]) {
-       //     return null;
-       // }
+        // if ($this->options[$property] === [null]) {
+        //     return null;
+        // }
 
         // If a model is provided then we should ensure we only return
         // the ids of models that exist and are not deleted.

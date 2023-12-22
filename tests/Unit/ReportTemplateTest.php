@@ -11,15 +11,16 @@ class ReportTemplateTest extends TestCase
 {
     public function testParsingValuesOnNonExistentReportTemplate()
     {
-        $this->markTestIncomplete();
+        // $this->markTestIncomplete();
 
         $unsavedTemplate = new ReportTemplate;
 
         // checkmarkValue()
         $this->assertEquals('1', $unsavedTemplate->checkmarkValue('is_a_checkbox_field'));
 
-        // @todo:
         // radioValue()
+        $this->assertFalse($unsavedTemplate->radioValue('value_on_unsaved_template', 'can_be_anything'));
+        $this->assertTrue($unsavedTemplate->radioValue('value_on_unsaved_template', 'can_be_anything', true));
 
         // selectValue()
         $this->assertNull($unsavedTemplate->selectValue('value_on_unsaved_template'));
@@ -62,14 +63,16 @@ class ReportTemplateTest extends TestCase
     public function testParsingRadioValue()
     {
         $template = ReportTemplate::factory()->create([
-            'options' => [
-                'is_a_radio_field' => null,
-            ],
+            'options' => ['property_that_exists' => '1'],
         ]);
 
-        $this->assertEquals('return_value', $template->radioValue('is_a_radio_field', null, 'return_value'));
-        $this->assertEquals(null, $template->radioValue('is_a_radio_field', 'another_value', 'return_value'));
-        $this->assertNull($template->radioValue('non_existent_key', '1', true));
+        $this->assertTrue($template->radioValue('property_that_exists', '1'));
+
+        // check non-existent key returns false
+        $this->assertFalse($template->radioValue('non_existent_property', 'doesnt_matter'));
+
+        // check default returns true
+        $this->assertTrue($template->radioValue('non_existent_property', 'doesnt_matter', true));
     }
 
     public function testParsingSelectValue()
