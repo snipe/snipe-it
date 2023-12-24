@@ -63,7 +63,7 @@ class ResetDemoSettings extends Command
         $settings->date_display_format = 'D M d, Y';
         $settings->time_display_format = 'g:iA';
         $settings->thumbnail_max_h = '30';
-        $settings->locale = 'en';
+        $settings->locale = 'en-US';
         $settings->version_footer = 'on';
         $settings->support_footer = null;
         $settings->saml_enabled = '0';
