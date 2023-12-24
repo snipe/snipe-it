@@ -20,6 +20,11 @@ class Helper
 {
 
 
+    /**
+     * This is only used for reversing the migration that updates the locale to the 5-6 letter codes from two
+     * letter codes. The normal dropdowns use the autoglossonyms in the language files located
+     * in resources/en-US/localizations.php.
+     */
     public static $language_map =  [
         'af' => 'af-ZA', // Afrikaans
         'am' => 'am-ET', // Amharic

@@ -78,7 +78,7 @@ class ResetDemoSettings extends Command
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {
-            $user->locale = 'en';
+            $user->locale = 'en-US';
             $user->save();
         }
 
