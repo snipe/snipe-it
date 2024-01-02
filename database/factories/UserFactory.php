@@ -27,17 +27,17 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'jobtitle' => $this->faker->jobTitle(),
             'last_name' => $this->faker->lastName(),
-            'locale' => 'en',
+            'locale' => 'en-US',
             'notes' => 'Created by DB seeder',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'permissions' => '{}',
             'phone' => $this->faker->phoneNumber(),
             'state' => $this->faker->stateAbbr(),
-            'username' => $this->faker->username(),
+            'username' => $this->faker->unique()->username(),
             'zip' => $this->faker->postcode(),
         ];
     }
-    
+
     public function firstAdmin()
     {
         return $this->state(function () {

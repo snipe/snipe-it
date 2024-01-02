@@ -1,5 +1,5 @@
 @extends('layouts/setup')
-{{ trans('admin/users/table.createuser') }}
+
 @section('title')
 {{ trans('admin/users/general.create_user') }} ::
 @parent
@@ -30,7 +30,7 @@
     <!-- Language -->
     <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'default_language')) ? ' required' : '' }} {{$errors->has('default_language') ? 'error' : ''}}">
       {{ Form::label('locale', trans('admin/settings/general.default_language')) }}
-      {!! Form::locales('locale', Request::old('locale', "en"), 'select2') !!}
+      {!! Form::locales('locale', Request::old('locale', "en-US"), 'select2') !!}
 
       {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
@@ -48,23 +48,19 @@
   <div class="row">
 
     <div class="form-group col-lg-6">
-      <label>{{trans('admin/settings/general.auto_increment_assets')}}</label>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="1" name="auto_increment_assets">{{trans('admin/settings/general.auto_increment_assets')}}
-        </label>
-      </div>
+
+      <label class="form-control form-control">
+        <input type="checkbox" value="1" name="auto_increment_assets">{{trans('admin/settings/general.auto_increment_assets')}}
+      </label>
+
     </div>
 
     <!-- Multi Company Support -->
     <div class="form-group col-lg-6">
-            {{ Form::label('full_multiple_companies_support', trans('admin/settings/general.full_multiple_companies_support_text')) }}
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="1" name="full_multiple_companies_support">  {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
-            </label>
-          </div>
-        </div>
+      <label class="form-control form-control">
+        <input type="checkbox" value="1" name="full_multiple_companies_support">  {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
+      </label>
+    </div>
 
 
   </div>
@@ -156,12 +152,9 @@
 
     <!-- Email credentials -->
     <div class="form-group col-lg-12">
-      <label>{{ trans('admin/users/general.email_credentials') }}</label>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="1" name="email_creds">{{ trans('admin/users/general.email_credentials_text') }}
-        </label>
-      </div>
+      <label class="form-control form-control">
+        <input type="checkbox" value="1" name="email_creds">{{ trans('admin/users/general.email_credentials_text') }}
+      </label>
     </div>
   </div> <!--/.COL-LG-12-->
 @stop

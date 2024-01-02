@@ -6,8 +6,9 @@ return array(
     'declined'                  => 'Has rechazado este activo con éxito.',
     'bulk_manager_warn'	        => 'Tus usuarios han sido actualizados con éxito, sin embargo tu entrada de administrador no fue guardada debido que el administrador que seleccionaste también era un usuario de la lista que iba a ser editada, y los usuarios no pueden editar a su propio administrador. Por favor selecciona a tus usuarios de nuevo, excluyendo al administrador.',
     'user_exists'               => '¡El usuario ya existe!',
-    'user_not_found'            => 'Usuario inexistente.',
+    'user_not_found'            => 'El usuario no existe.',
     'user_login_required'       => 'El campo de usuario es obligatorio',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'La contraseña es obligatoria.',
     'insufficient_permissions'  => 'Permisos insuficientes.',
     'user_deleted_warning'      => 'Este usuario ha sido eliminado. Deberás restaurar este usuario para editarlo o asignarle nuevos activos.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'A los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida se les ha enviado un enlace de restablecimiento de contraseña.',
     'password_reset_sent'       => '¡Se ha enviado un enlace de restablecimiento de contraseña a :email!',
     'user_has_no_email'         => 'Este usuario no tiene una dirección de correo electrónico en su perfil.',
-    'user_has_no_assets_assigned'   => 'Este usuario no tiene ningún activo asignado',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

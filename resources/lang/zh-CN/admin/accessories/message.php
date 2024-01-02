@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => '配件[:id] 不存在。',
+    'not_found' => '找不到该配件。',
     'assoc_users'	 => '配件目前状态：可用数量不足，请检查改配件再重试。',
 
     'create' => array(

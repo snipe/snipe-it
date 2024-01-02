@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
+    'not_found' => 'That accessory was not found.',
     'assoc_users'	 => 'Tá an accessory seo faoi láthair: cuntais a sheiceáil le húsáideoirí. Seiceáil na gabhálais agus déan iarracht arís.',
 
     'create' => array(

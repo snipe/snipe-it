@@ -140,7 +140,7 @@ class ConsumablesFilesController extends Controller
             $this->authorize('view', $consumable);
             $this->authorize('consumables.files', $consumable);
 
-            if (! $log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $consumable->id)->find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }

@@ -26,6 +26,7 @@ return array(
                 'modal'             => 'Esta ação irá realizar a verificação de uma única vaga. | Esta ação verificará todos os :checkedout_seats_count vagas para esta licença.',
                 'enabled_tooltip'   => 'Check-in de TODOS as vagas para esta licença de usuários e ativos',
                 'disabled_tooltip'  => 'Isto está desativado porque não há vagas desbloqueadas no momento',
+                'disabled_tooltip_reassignable'  => 'Isto está desativado porque a licença não é transferível',
                 'success'           => 'Licença desbloqueada com sucesso! | Todas as licenças foram verificadas com sucesso!',
                 'log_msg'           => 'Check-in feito através do checkout em massa da licença GUI',
             ],

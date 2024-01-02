@@ -3,6 +3,7 @@
 return [
 
     'does_not_exist' => 'Status Label existerar inte.',
+    'deleted_label' => 'Deleted Status Label',
     'assoc_assets'	 => 'Denna statusetikett är för närvarande associerad med minst en tillgång och kan inte raderas. Uppdatera dina tillgångar för att inte längre referera till denna status och försök igen.',
 
     'create' => [

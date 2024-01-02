@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> '下載CSV檔',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> '位置',
     'purchase_cost'	=> '成本',
     'purchase_date'	=> '已購買',

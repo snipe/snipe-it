@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => '此授權已分配給某個使用者，目前不能被刪除，請檢查後重試。',
     'select_asset_or_person' => '您必須選擇資產或用戶，但不能同時選擇兩者。',
     'not_found' => '找不到授權',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => '借出授權時發生問題，請重試。',
-        'success' => '借出授權成功。'
+        'success' => '借出授權成功。',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

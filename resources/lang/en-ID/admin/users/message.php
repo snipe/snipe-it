@@ -6,8 +6,9 @@ return array(
     'declined'                  => 'Anda sudah berhasil menolak aset ini.',
     'bulk_manager_warn'	        => 'Pengguna anda sudah berhasil diperbarui, namun entri manajer anda tidak disimpan karena manajer yang anda pilih juga berada dalam daftar pengguna untuk disunting, dan pengguna mungkin bukan manajer mereka sendiri. Silahkan pilih pengguna anda lagi, tidak termasuk manajernya.',
     'user_exists'               => 'Pengguna sudah ada!',
-    'user_not_found'            => 'User does not exist.',
+    'user_not_found'            => 'Pengguna tidak ada.',
     'user_login_required'       => 'Bidang masuk diperlukan',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Kata sandi diperlukan.',
     'insufficient_permissions'  => 'Izin tidak cukup.',
     'user_deleted_warning'      => 'Pengguna ini sudah dihapus. Anda harus mengembalikan pengguna ini untuk menyuntingnya atau memberikannya aset baru.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Pengguna terpilih yang diaktifkan dan memiliki sebuah alamat email yang valid telah dikirimkan sebuah tautan pengaturan ulang kata sandi.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(

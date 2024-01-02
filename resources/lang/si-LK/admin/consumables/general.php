@@ -6,6 +6,6 @@ return array(
     'create'                            => 'Create Consumable',
     'item_no'                           => 'Item No.',
     'remaining' 			            => 'Remaining',
-    'total' 			                => 'Total',
+    'total' 			                => 'එකතුව',
     'update'                            => 'Update Consumable',
 );

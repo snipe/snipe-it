@@ -136,6 +136,11 @@ class UserFilesController extends Controller
      */
     public function show($userId = null, $fileId = null)
     {
+
+        if (empty($fileId)) {
+            return redirect()->route('users.show')->with('error', 'Invalid file request');
+        }
+
         $user = User::find($userId);
 
         // the license is valid
@@ -143,18 +148,20 @@ class UserFilesController extends Controller
 
             $this->authorize('view', $user);
 
-            $log = Actionlog::find($fileId);
+            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
 
-            // Display the file inline
-            if (request('inline') == 'true') {
-                $headers = [
-                    'Content-Disposition' => 'inline',
-                ];
-                return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
+                // Display the file inline
+                if (request('inline') == 'true') {
+                    $headers = [
+                        'Content-Disposition' => 'inline',
+                    ];
+                    return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
+                }
+
+                return Storage::download('private_uploads/users/'.$log->filename);
             }
 
-            return Storage::download('private_uploads/users/'.$log->filename);
-
+            return redirect()->route('users.index')->with('error',  trans('admin/users/message.log_record_not_found'));
         }
 
         // Redirect to the user management page if the user doesn't exist

@@ -34,7 +34,7 @@ class AccessoryImporter extends ItemImporter
             }
 
             $this->log('Updating Accessory');
-            $this->item['model_number'] = $this->findCsvMatch($row, "model_number");
+            $this->item['model_number'] = trim($this->findCsvMatch($row, "model_number"));
             $accessory->update($this->sanitizeItemForUpdating($accessory));
             $accessory->save();
 

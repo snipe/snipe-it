@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Níor cruthaíodh sócmhainn, déan iarracht arís. :(',
         'success' 		=> 'Cruthaíodh sócmhainn go rathúil. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
@@ -22,7 +23,7 @@ return [
     'restore' => [
         'error'   		=> 'Níor cuireadh an tsócmhainn ar ais, déan iarracht arís',
         'success' 		=> 'Aisghabháil sócmhainne go rathúil.',
-        'bulk_success' 		=> 'Asset restored successfully.',
+        'bulk_success' 		=> 'Aisghabháil sócmhainne go rathúil.',
         'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
@@ -50,6 +51,7 @@ return [
         'success'               => 'Tá do chomhad iompórtáilte',
         'file_delete_success'   => 'Tá do chomhad scriosta go rathúil',
         'file_delete_error'      => 'Níorbh fhéidir an comhad a scriosadh',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

@@ -1,0 +1,32 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Ετικέτα πόρων',
+    'asset_model'       => 'Μοντέλο',
+    'book_value'  	=> 'Current Value',
+    'change' 		=> 'Εισερχόμενα/Εξερχόμενα',
+    'checkout_date' => 'Ημερομηνία αποχώρησης',
+    'checkoutto' 	=> 'Checked Out',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Current Value',
+    'diff' 			=> 'Diff',
+    'dl_csv' 		=> 'Κατεβάστε το CSV',
+    'eol' 			=> 'EOL',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
+    'location' 		=> 'Τοποθεσία',
+    'purchase_cost'	=> 'Κόστος',
+    'purchase_date'	=> 'Αγοράστηκε',
+    'serial'   		=> 'Σειριακός',
+    'status'   		=> 'Κατάσταση',
+    'title'      	=> 'Πάγιο ',
+    'image'		    => 'Φωτογραφία συσκευής',
+    'days_without_acceptance' => 'Ημέρες χωρίς αποδοχή',
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Ανατέθηκε στον',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

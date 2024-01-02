@@ -146,9 +146,8 @@ class AccessoriesFilesController extends Controller
             $this->authorize('view', $accessory);
             $this->authorize('accessories.files', $accessory);
 
-            if (! $log = Actionlog::find($fileId)) {
-                return response('No matching record for that asset/file', 500)
-                    ->header('Content-Type', 'text/plain');
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $accessory->id)->find($fileId)) {
+                return redirect()->route('accessories.index')->with('error',  trans('admin/users/message.log_record_not_found'));
             }
 
             $file = 'private_uploads/accessories/'.$log->filename;

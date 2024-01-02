@@ -3,6 +3,7 @@
 return [
 
     'does_not_exist' => 'Rótulo de estado não existe.',
+    'deleted_label' => 'Deleted Status Label',
     'assoc_assets'	 => 'Este rótulo de estado está associado com pelo menos um Asset e não pode ser removido. Por favor atualize seus assets para não referenciarem este rótulo e tente novamente. ',
 
     'create' => [

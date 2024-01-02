@@ -69,7 +69,6 @@ class LogListener
             $logaction->item()->associate($event->acceptance->checkoutable->license);
         }
 
-        \Log::debug('New onCheckoutAccepted Listener fired. logaction: '.print_r($logaction, true));
         $logaction->save();
     }
 

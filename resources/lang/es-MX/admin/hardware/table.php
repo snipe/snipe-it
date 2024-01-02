@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Descargar CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Localización',
     'purchase_cost'	=> 'Costo',
     'purchase_date'	=> 'Comprado',

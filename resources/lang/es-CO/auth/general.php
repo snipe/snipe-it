@@ -5,7 +5,7 @@ return [
     'email_reset_password'			=> 'Restaurar contraseña email',
     'reset_password'			    => 'Restablecer Contraseña',
     'saml_login'                    => 'Iniciar sesión a través de SAML',
-    'login'                         => 'Iniciar Sesión',
+    'login'                         => 'Entrar',
     'login_prompt'                  => 'Por favor, inicia sesión',
     'forgot_password'               => 'He olvidado mi contraseña',
     'ldap_reset_password'           => 'Haga clic aquí para restablecer su contraseña LDAP',

@@ -55,18 +55,19 @@ class LicenseImporter extends ItemImporter
             $this->log('No Matching License, Creating a new one');
             $license = new License;
         }
-        $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
+        $asset_tag = $this->item['asset_tag'] = trim($this->findCsvMatch($row, 'asset_tag')); // used for checkout out to an asset.
 
         $this->item["expiration_date"] = null;
         if ($this->findCsvMatch($row, "expiration_date")!='') {
-            $this->item["expiration_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "expiration_date")));
+            $this->item["expiration_date"] = date("Y-m-d 00:00:01", strtotime(trim($this->findCsvMatch($row, "expiration_date"))));
         }
-        $this->item['license_email'] = $this->findCsvMatch($row, 'license_email');
-        $this->item['license_name'] = $this->findCsvMatch($row, 'license_name');
-        $this->item['maintained'] = $this->findCsvMatch($row, 'maintained');
-        $this->item['purchase_order'] = $this->findCsvMatch($row, 'purchase_order');
-        $this->item['reassignable'] = $this->findCsvMatch($row, 'reassignable');
-        $this->item['manufacturer'] = $this->createOrFetchManufacturer($this->findCsvMatch($row, 'manufacturer'));
+        $this->item['license_email'] = trim($this->findCsvMatch($row, 'license_email'));
+        $this->item['license_name'] = trim($this->findCsvMatch($row, 'license_name'));
+        $this->item['maintained'] = trim($this->findCsvMatch($row, 'maintained'));
+        $this->item['purchase_order'] = trim($this->findCsvMatch($row, 'purchase_order'));
+        $this->item['order_number'] = trim($this->findCsvMatch($row, 'order_number'));
+        $this->item['reassignable'] = trim($this->findCsvMatch($row, 'reassignable'));
+        $this->item['manufacturer'] = $this->createOrFetchManufacturer(trim($this->findCsvMatch($row, 'manufacturer')));
 
         if($this->item['reassignable'] == "")
         {

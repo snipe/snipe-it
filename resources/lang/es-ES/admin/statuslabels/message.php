@@ -3,6 +3,7 @@
 return [
 
     'does_not_exist' => 'Etiqueta de estado no existe.',
+    'deleted_label' => 'Deleted Status Label',
     'assoc_assets'	 => 'Esta etiqueta de estado esta actualmente asociado con al menos un activo y no se puede eliminar. Por favor actualice sus activos para ya no hacer referencia a este estado y vuelva a intentarlo. ',
 
     'create' => [

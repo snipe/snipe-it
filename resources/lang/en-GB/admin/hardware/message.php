@@ -11,6 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Asset was not created, please try again. :(',
         'success' 		=> 'Asset created successfully. :)',
+        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
     ],
 
     'update' => [
@@ -51,6 +52,7 @@ return [
         'success'               => 'Your file has been imported',
         'file_delete_success'   => 'Your file has been been successfully deleted',
         'file_delete_error'      => 'The file was unable to be deleted',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

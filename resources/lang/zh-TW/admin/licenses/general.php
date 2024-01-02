@@ -27,6 +27,7 @@ return array(
                 'modal'             => '此操作將歸還一個名額。| 此操作將歸還所有 :checkedout_seats_count 名額的此授權。',
                 'enabled_tooltip'   => '從使用者和資產中歸還此授權的所有名額',
                 'disabled_tooltip'  => '此功能已停用，因為目前沒有名額在借出中',
+                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => '授權成功歸還！| 所有授權都成功歸還！',
                 'log_msg'           => '透過授權 GUI 的大量歸還功能歸還',
             ],

@@ -26,6 +26,7 @@ return array(
                 'modal'             => '此操作将归还一个席位。| 此操作将归还此许可证的所有 :checkedout_seas_count 个座位。',
                 'enabled_tooltip'   => '从用户和资产中归还此许可证的所有席位',
                 'disabled_tooltip'  => '此功能已禁用，因为当前没有借出的席位',
+                'disabled_tooltip_reassignable'  => '此功能已禁用，因为许可证不可重新分配。',
                 'success'           => '许可证归还成功！| 所有许可证都已归还成功！',
                 'log_msg'           => 'Checked in via bulk license checkout in license GUI',
             ],
