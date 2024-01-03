@@ -66,6 +66,16 @@ class ReportTemplateTest extends TestCase
             ->assertSessionHasErrors('name');
     }
 
+    public function testRedirectingAfterValidationErrorRestoresInputs()
+    {
+        $this->markTestIncomplete();
+
+        // We might not implement this test case, but we want to ensure
+        // that selecting fields in the UI, then getting redirected
+        // back after hitting the "Save Template" button without
+        // a name set restores the previously selected values.
+    }
+
     public function testSavingReportTemplateRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
