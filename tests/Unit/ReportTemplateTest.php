@@ -11,8 +11,6 @@ class ReportTemplateTest extends TestCase
 {
     public function testParsingValuesOnNonExistentReportTemplate()
     {
-        // $this->markTestIncomplete();
-
         $unsavedTemplate = new ReportTemplate;
 
         // checkmarkValue()
@@ -203,14 +201,6 @@ class ReportTemplateTest extends TestCase
         // Maybe it's better to leave those off so users are gently prompted to enter the ranges for each run?
         // Another option would be to have checkbox that asks the user if they would like to save the dates?
         // I'm not sure how helpful that is, and it would probably be a future feature if implemented.
-    }
-
-    public function testReportTemplateHasDefaultValuesSet()
-    {
-        $this->markTestIncomplete();
-
-        // Quick thought: I think deleted_assets should be set to null so that
-        // "Exclude Deleted Assets" is selected when using a new'd up ReportTemplate.
     }
 
     public function testOldValuesStillWorkAfterTheseChanges()
