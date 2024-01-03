@@ -1,4 +1,4 @@
-name: Tests
+name: Tests in SQLite
 
 on:
   push:
