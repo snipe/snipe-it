@@ -191,18 +191,6 @@ class ReportTemplateTest extends TestCase
         // @todo: Determine behavior...shoudl we return the first value?
     }
 
-    public function testDateRangesAreNotStored()
-    {
-        $this->markTestIncomplete();
-
-        // This might not be a test we implement, but it's a place to ask a question:
-        // Should we be saving and restoring date ranges?
-        // A use-case I can see is running a report at the end of the month for the date ranges for that month.
-        // Maybe it's better to leave those off so users are gently prompted to enter the ranges for each run?
-        // Another option would be to have checkbox that asks the user if they would like to save the dates?
-        // I'm not sure how helpful that is, and it would probably be a future feature if implemented.
-    }
-
     public function testOldValuesStillWorkAfterTheseChanges()
     {
         $this->markTestIncomplete();
