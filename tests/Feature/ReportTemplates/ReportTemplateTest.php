@@ -74,6 +74,8 @@ class ReportTemplateTest extends TestCase
         // that selecting fields in the UI, then getting redirected
         // back after hitting the "Save Template" button without
         // a name set restores the previously selected values.
+
+        // Note: This functionality is implemented in getCustomReport().
     }
 
     public function testSavingReportTemplateRequiresCorrectPermission()
