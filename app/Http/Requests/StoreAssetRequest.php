@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Asset;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Company;
 use Illuminate\Support\Facades\Gate;
 
 class StoreAssetRequest extends ImageUploadRequest
@@ -20,7 +20,11 @@ class StoreAssetRequest extends ImageUploadRequest
 
     public function prepareForValidation(): void
     {
-        //
+        $this->merge([
+            'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
+            'company_id' => Company::getIdForCurrentUser($this->company_id),
+            'assigned_to' => $assigned_to ?? null,
+        ]);
     }
 
     /**

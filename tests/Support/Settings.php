@@ -62,10 +62,29 @@ class Settings
         return $this->update([
             'auto_increment_assets' => 1,
             'auto_increment_prefix' => 'ABCD',
-            'next_auto_tag_base' => '123',
+            'next_auto_tag_base' => 123,
             'zerofill_count' => 5
         ]);
+    }
 
+    public function disableAutoIncrement(): Settings
+    {
+        return $this->update([
+            'auto_increment_assets' => 0,
+            'auto_increment_prefix' => 0,
+            'next_auto_tag_base' => 0,
+            'zerofill_count' => 0
+        ]);
+    }
+
+    public function enableUniqueSerialNumbers(): Settings
+    {
+        return $this->update(['unique_serial' => 1]);
+    }
+
+    public function disableUniqueSerialNumbers(): Settings
+    {
+        return $this->update(['unique_serial' => 0]);
     }
 
     public function enableLdap(): Settings

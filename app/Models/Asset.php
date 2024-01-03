@@ -89,24 +89,27 @@ class Asset extends Depreciable
     ];
 
     protected $rules = [
-        'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
-        'status_id'       => 'required|integer|exists:status_labels,id',
-        'company_id'      => 'integer|nullable',
-        'warranty_months' => 'numeric|nullable|digits_between:0,240',
-        'physical'        => 'numeric|max:1|nullable',
-        'last_checkout'    => 'date_format:Y-m-d H:i:s|nullable',
-        'expected_checkin' => 'date|nullable',
-        'location_id'     => 'exists:locations,id|nullable',
-        'rtd_location_id' => 'exists:locations,id|nullable',
-        'asset_tag'       => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
-        'purchase_date'   => 'date|date_format:Y-m-d|nullable',
-        'serial'          => 'unique_undeleted:assets,serial|nullable',
-        'purchase_cost'   => 'numeric|nullable|gte:0',
-        'supplier_id'     => 'exists:suppliers,id|nullable',
-        'asset_eol_date'  => 'date|nullable',
-        'eol_explicit'    => 'boolean|nullable',
-        'byod'            => 'boolean',
+        'model_id'         => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
+        'status_id'        => 'required|integer|exists:status_labels,id',
+        'asset_tag'        => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
+        'name'             => 'nullable|max:255',
+        'company_id'       => 'nullable|integer|exists:companies,id',
+        'warranty_months'  => 'nullable|numeric|digits_between:0,240',
+        'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
+        'expected_checkin' => 'nullable|date',
+        'location_id'      => 'nullable|exists:locations,id',
+        'rtd_location_id'  => 'nullable|exists:locations,id',
+        'purchase_date'    => 'nullable|date|date_format:Y-m-d',
+        'serial'           => 'nullable|unique_undeleted:assets,serial',
+        'purchase_cost'    => 'nullable|numeric|gte:0',
+        'supplier_id'      => 'nullable|exists:suppliers,id',
+        'asset_eol_date'   => 'nullable|date',
+        'eol_explicit'     => 'nullable|boolean',
+        'byod'             => 'nullable|boolean',
+        'order_number'     => 'nullable|string|max:191',
+        'notes'            => 'nullable|string|max:65535',
+        'assigned_to'      => 'nullable|integer',
+        'requestable'      => 'nullable|boolean',
     ];
 
 
@@ -460,11 +463,20 @@ class Asset extends Depreciable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return bool
      */
-    public function checkedOutToUser()
+    public function checkedOutToUser(): bool
     {
       return $this->assignedType() === self::USER;
+    }
+
+    public function checkedOutToLocation(): bool
+    {
+      return $this->assignedType() === self::LOCATION;
+    }
+
+    public function checkedOutToAsset(): bool
+    {
+      return $this->assignedType() === self::ASSET;
     }
 
     /**
@@ -728,7 +740,7 @@ class Asset extends Depreciable
     {
         $days = (is_null($days)) ? 30 : $days;
 
-        return self::where('archived', '=', '0')
+        return self::where('archived', '=', '0') // this can stay for right now, as `archived` defaults to 0 at the db level, but should probably be replaced with assetstatus->archived?
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')

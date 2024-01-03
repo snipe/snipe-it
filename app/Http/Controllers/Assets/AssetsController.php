@@ -131,9 +131,6 @@ class AssetsController extends Controller
             $asset->order_number            = $request->input('order_number');
             $asset->notes                   = $request->input('notes');
             $asset->user_id                 = Auth::id();
-            $asset->archived                = '0';
-            $asset->physical                = '1';
-            $asset->depreciate              = '0';
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = request('purchase_cost');
@@ -365,7 +362,6 @@ class AssetsController extends Controller
         $asset->order_number = $request->input('order_number');
         $asset->asset_tag = $asset_tag[1];
         $asset->notes = $request->input('notes');
-        $asset->physical = '1';
 
         $asset = $request->handleImages($asset);
 
