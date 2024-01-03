@@ -16,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
     'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
     'user_has_no_email'         => 'Cet utilisateur n\'a pas renseigné d\'adresse e-mail dans son profil.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'log_record_not_found'        => 'Impossible de trouver un enregistrement de log correspondant à cet utilisateur.',
 
 
     'success' => array(

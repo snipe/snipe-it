@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Komponent blev ikke tjekket ud, prøv igen',
         'success' 		=> 'Komponent tjekket ud med succes.',
         'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Ikke nok komponenter tilbage: :remaining remaining :requested requested ',
     ),
 
     'checkin' => array(

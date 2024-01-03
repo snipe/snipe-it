@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'الملحق [:id] غير موجود.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'لم يتم العثور على هذا الملحق.',
     'assoc_users'	 => 'تم إخراج :count عنصر من هذا الملحق للمستخدمين، الرجاء ادخال بعض الملحقات ثم حاول مرة أخرى. ',
 
     'create' => array(
@@ -25,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'لم يتم إخراج الملحق، الرجاء المحاولة مرة أخرى',
         'success' 		=> 'تم إخراج الملحق بنجاح.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'الملحق غير متوفر لعملية الدفع. تحقق من الكمية المتاحة',
         'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
     ),
 

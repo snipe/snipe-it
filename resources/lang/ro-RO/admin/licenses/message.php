@@ -2,14 +2,14 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Licența nu există sau nu aveți permisiunea de a o vizualiza.',
     'user_does_not_exist' => 'Utilizatorul nu exista.',
     'asset_does_not_exist' 	=> 'Activul pe care incercati sa-l asociati cu aceasta licenta nu exista.',
     'owner_doesnt_match_asset' => 'Activul pe care incercati sa-l asociati cu aceasta licenta apartine unei alte persoane decat cea selectata.',
     'assoc_users'	 => 'Aceasta licenta este momentan predata catre un utilizator si nu poate fi stearsa. Va rugam verificati licenta mai intai si dupa incercati s-o stergeti iar. ',
     'select_asset_or_person' => 'Trebuie să selectați un material sau un utilizator, dar nu ambele.',
     'not_found' => 'Licența nu a fost găsită',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count locuri disponibile',
 
 
     'create' => array(
@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'A aparut o problema la predarea licentei. Va rugam incercati iar.',
         'success' => 'Licenta a fost predata',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Nu sunt disponibile suficiente locuri de licență pentru checkout',
     ),
 
     'checkin' => array(

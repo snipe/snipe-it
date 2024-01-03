@@ -8,18 +8,18 @@ return array(
 
     'create' => array(
         'error'   => 'Категорія не була створена, будь ласка, спробуйте ще раз.',
-        'success' => 'Category created successfully.'
+        'success' => 'Розділ успішно створено.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
+        'error'   => 'Категорія не була оновлена, будь ласка, спробуйте ще раз',
         'success' => 'Категорія успішно оновлена.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Ви не можете змінити тип категорії після створення',
     ),
 
     'delete' => array(
         'confirm'   => 'Ви впевнені що бажаєте видалити цю категорію?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
+        'error'   => 'Виникла проблема з видаленням категорії. Будь ласка, спробуйте ще раз.',
         'success' => 'Категорія успішно видалена.'
     )
 

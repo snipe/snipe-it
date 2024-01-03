@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mere information',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Afkrydsning af dette felt vil redigere aktivposten for at afspejle denne nye placering. Hvis det ikke er markeret, vil det blot notere placeringen i revisionsloggen.<br><br>Bemærk, at hvis dette aktiv er tjekket ud, det vil ikke ændre placeringen af personen, aktivet eller placeringen, det er tjekket ud til.',
 
     'assets' => 'Aktiver er elementer sporet efter serienummer eller aktiv tag. De har tendens til at være elementer af højere værdi, hvor identificering af en bestemt genstand betyder noget.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Du kan sætte aktivafskrivninger til at afskrive aktiver som lineære afskrivninger.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Importøren registrerer, at denne fil er tom.'
 ];

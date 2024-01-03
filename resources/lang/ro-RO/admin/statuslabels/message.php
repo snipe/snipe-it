@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Eticheta de stare nu există.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Etichetă de stare ştearsă',
     'assoc_assets'	 => 'Această etichetă de stare este în prezent asociată cu cel puțin un singur activ și nu poate fi ștearsă. Actualizați-vă activele astfel încât să nu mai faceți referire la această stare și încercați din nou.',
 
     'create' => [

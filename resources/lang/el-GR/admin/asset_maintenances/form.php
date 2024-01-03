@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Είδος Συντήρησης Παγίου',
         'title'                  => 'Τίτλος',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Ημερομηνία Έναρξης',
+        'completion_date'        => 'Ημερομηνία Ολοκλήρωσης',
         'cost'                   => 'Κόστος',
         'is_warranty'            => 'Βελτίωση της εγγύησης',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Χρόνος Συντήρησης Παγίου (σε ημέρες)',
         'notes'                  => 'Σημειώσεις',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Ενημέρωση Συντήρησης Παγίου',
+        'create'                 => 'Δημιουργία Συντήρησης Παγίου'
     ];

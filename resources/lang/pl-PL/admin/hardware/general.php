@@ -20,11 +20,11 @@ return [
     'requestable'               => 'Żądane',
     'requested'				    => 'Zamówione',
     'not_requestable'           => 'Brak możliwości zarządzania',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'requestable_status_warning' => 'Nie zmieniaj statusu żądanego',
     'restore'  					=> 'Przywróć aktywa',
     'pending'  					=> 'Oczekuje',
     'undeployable'  			=> 'Niemożliwe do wdrożenia',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable_tooltip'  	=> 'Ten zasób ma etykietę statusu, która nie może być uruchomiona i nie może zostać zablokowana w tym czasie.',
     'view'  					=> 'Wyświetl nabytki',
     'csv_error' => 'Wystąpił błąd w twoim pliku CSV:',
     'import_text' => '

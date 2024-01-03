@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Αποσβέσεις περιουσιακών στοιχείων',
     'create'  					            => 'Δημιουργία αποσβέσεων',
     'depreciation_name'  					=> 'Όνομα απόσβεσης',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Τιμή δάπεδο της απόσβεσης',
     'number_of_months'  					=> 'Αριθμός των μηνών',
     'update'  					            => 'Ενημέρωση αποσβέσεων',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'depreciation_min'                      => 'Ελάχιστη τιμή μετά την απόσβεση',
+    'no_depreciations_warning'               => '<strong>Προειδοποίηση: </strong>
+                      Αυτή τη στιγμή δεν έχετε κάποια απόσβεση ρυθμισμένη.
+                      Παρακαλείστε να ορίσετε τουλάχιστον μία απόσβεση για να δείτε την έκθεση απόσβεσης.',
 ];

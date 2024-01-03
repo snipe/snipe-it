@@ -2,14 +2,14 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Η άδεια δεν υπάρχει ή δεν έχετε άδεια για να την δείτε.',
     'user_does_not_exist' => 'Ο χρήστης δεν υπάρχει.',
     'asset_does_not_exist' 	=> 'Το πάγιο που προσπαθείτε να συσχετίσετε με αυτήν την άδεια δεν υπάρχει.',
     'owner_doesnt_match_asset' => 'Το περιουσιακό στοιχείο που προσπαθείτε να συσχετίσετε με αυτήν την άδεια ανήκει σε κάποιον άλλον εκτός από το άτομο που επιλέχθηκε στο αναπτυσσόμενο μενού.',
     'assoc_users'	 => 'Αυτήν τη στιγμή, αυτή η άδεια χρήσης αποστέλλεται στον χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα την άδεια χρήσης και δοκιμάστε ξανά τη διαγραφή.',
     'select_asset_or_person' => 'Πρέπει να επιλέξετε ένα στοιχείο ή έναν χρήστη, αλλά όχι και τα δύο.',
-    'not_found' => 'License not found',
-    'seats_available' => ':seat_count seats available',
+    'not_found' => 'Η άδεια δεν βρέθηκε',
+    'seats_available' => ':seat_count διαθέσιμες θέσεις',
 
 
     'create' => array(
@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Παρουσιάστηκε πρόβλημα κατά την εξακρίβωση της άδειας. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
         'success' => 'Η άδεια εκτυπώθηκε με επιτυχία',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Δεν υπάρχουν αρκετές θέσεις άδειας χρήσης για ολοκλήρωση της παραγγελίας',
     ),
 
     'checkin' => array(

@@ -9,7 +9,7 @@ return array(
     'assoc_users'	 => 'Cette catégorie est associée au moins à un modèle et ne peut être supprimée. Veuillez actualiser vos modèles pour ne plus référencer cette catégorie et réessayer.',
     'select_asset_or_person' => 'Vous devez sélectionner un actif ou un utilisateur, mais pas les deux.',
     'not_found' => 'Licence introuvable',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count sièges disponibles',
 
 
     'create' => array(
@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Un problème a eu lieu pendant l\'association de la licence. Veuillez essayer à nouveau.',
         'success' => 'La licence a été associée avec succès',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Pas assez de sièges de licence disponibles pour le paiement',
     ),
 
     'checkin' => array(

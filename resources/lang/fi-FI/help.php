@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Lisätietoa',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Tämän laatikon valitseminen muokkaa sisältötietuetta heijastamaan tätä uutta sijaintia. Jos sitä ei ole valittu, huomaa yksinkertaisesti tilintarkastuslokiin sisältyvän sijainnin.<br><br>Huomaa, että jos tämä laite on tarkistettu, se ei muuta henkilön, omaisuuden tai sijainnin se on tarkistettu.',
 
     'assets' => 'Laitteet ovat nimmeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen  yksilöllisesti on tärkeää.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Voit määrittää laitteille poistoja poistaaksesi omaisuuden arvoa suoraviivaisesti laskien.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Maahantuoja havaitsee, että tämä tiedosto on tyhjä.'
 ];

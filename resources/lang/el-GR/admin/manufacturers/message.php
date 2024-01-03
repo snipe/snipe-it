@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Μεταβλητές <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, και <code>{MODEL_NAME}</code> μπορεί να χρησιμοποιηθεί στο URL σας για να έχετε αυτές τις τιμές αυτόματο γέμισμα κατά την προβολή στοιχείων - για παράδειγμα https://support. pple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Κατασκευαστής δεν υπάρχει.',
     'assoc_users'	 => 'Αυτό κατασκευαστής σχετίζεται με τουλάχιστον ένα μοντέλο και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τα μοντέλα σας προκειμένου να μην αναφέρονται σε αυτόν τον κατασκευαστή και δοκιμάστε ξανά. ',
 

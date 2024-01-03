@@ -3,52 +3,52 @@
 return array(
 
     'does_not_exist' => 'La licencia no existe o no tiene permiso para verla.',
-    'user_does_not_exist' => 'Usuario inexistente.',
-    'asset_does_not_exist' 	=> 'El equipo que intentas asignar a esta licencia no existe.',
-    'owner_doesnt_match_asset' => 'El equipo al que estas intentando asignar esta licenciam, está asignado a un usuario diferente que el de la licencia.',
-    'assoc_users'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada.',
+    'user_does_not_exist' => 'El usuario no existe.',
+    'asset_does_not_exist' 	=> 'El activo que está intentando asociar con esta licencia no existe.',
+    'owner_doesnt_match_asset' => 'El activo que está intentando asociar con esta licencia es propiedad de alguien que no sea la persona seleccionada en el desplegable asignado.',
+    'assoc_users'	 => 'Esta licencia está actualmente reservada a un usuario y no puede ser eliminada. Por favor, compruebe la licencia en primer lugar y vuelva a intentarlo. ',
     'select_asset_or_person' => 'Debe seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count plazas disponibles',
 
 
     'create' => array(
-        'error'   => 'La categoría no se ha creado, intentalo de nuevo.',
-        'success' => 'Categoría creada correctamente.'
+        'error'   => 'La licencia no fue creada, por favor inténtalo de nuevo.',
+        'success' => 'Licencia creada con éxito.'
     ),
 
     'deletefile' => array(
-        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
+        'error'   => 'Archivo no eliminado. Vuelve a intentarlo.',
         'success' => 'Archivo eliminado correctamente.',
     ),
 
     'upload' => array(
-        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
-        'success' => 'Archivo(s) cargado correctamente.',
-        'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
-        'invalidfiles' => 'Uno o más de tus ficheros son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
+        'error'   => 'Archivo(s) no cargados. Por favor, inténtelo de nuevo.',
+        'success' => 'Archivo(s) cargados correctamente.',
+        'nofiles' => 'No has seleccionado ningún archivo para subir, o el archivo que estás intentando subir es demasiado grande',
+        'invalidfiles' => 'Uno o más de sus archivos es demasiado grande o es un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
     ),
 
     'update' => array(
-        'error'   => 'La categoría no se ha actualizado, intentalo de nuevo.',
-        'success' => 'Categoría actualizada correctamente.'
+        'error'   => 'La licencia no fue actualizada, por favor inténtalo de nuevo',
+        'success' => 'Licencia actualizada correctamente.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de eliminar esta categoría?',
-        'error'   => 'Ha habido un problema eliminando la categoría. Intentalo de nuevo.',
-        'success' => 'Categoría eliminada.'
+        'confirm'   => '¿Está seguro que desea eliminar esta licencia?',
+        'error'   => 'Hubo un problema al eliminar la licencia. Por favor, inténtalo de nuevo.',
+        'success' => 'La licencia se ha eliminado correctamente.'
     ),
 
     'checkout' => array(
-        'error'   => 'Equipo no asignado, intentalo de nuevo',
-        'success' => 'Equipo asignado.',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'error'   => 'Hubo un problema al revisar la licencia. Por favor, inténtalo de nuevo.',
+        'success' => 'La licencia fue retirada con éxito',
+        'not_enough_seats' => 'No hay suficientes asientos de licencia disponibles para la compra',
     ),
 
     'checkin' => array(
-        'error'   => 'No se ha quitado el equipo. Intentalo de nuevo.',
-        'success' => 'Equipo quitado correctamente.'
+        'error'   => 'Se ha producido un error al comprobar la licencia. Por favor, inténtalo de nuevo.',
+        'success' => 'La licencia fue registrada con éxito'
     ),
 
 );

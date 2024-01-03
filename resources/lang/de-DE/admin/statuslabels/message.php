@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Diese Statusbezeichnung existiert nicht.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Gelöschte Statusbezeichnung',
     'assoc_assets'	 => 'Auf diese Statusbezeichnung bezieht sich momentan mindestens ein Asset und kann daher nicht gelöscht werden. Bitte sorgen Sie dafür, dass sich kein Asset mehr auf diese Statusbezeichnung bezieht und versuchen Sie es erneut. ',
 
     'create' => [

@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Accessory was successfully detached',
     'accessory_error'                   => 'Tarvik on juba komplektiga liidetud',
     'accessory_deleted'                 => 'Delete was successful',
-    'accessory_none'                    => 'Accessory does not exist',
+    'accessory_none'                    => 'Tarvikut pole olemas',
     'checkout_success'                  => 'Väljastamine õnnestus',
     'checkout_error'                    => 'Väljastamise viga',
     'kit_none'                          => 'Komplekti ei eksisteeri',

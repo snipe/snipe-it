@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Warning: </strong> Το περιουσιακό αυτό στοιχείο έχει επισημανθεί ως επί του παρόντος undeployable.
                         Εάν αυτή η κατάσταση έχει αλλάξει, παρακαλούμε να ενημερώσετε την κατάσταση των περιουσιακών στοιχείων.',
     'does_not_exist' 	=> 'To πάγιο δεν υπάρχει.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Αυτό το στοιχείο δεν υπάρχει ή δεν απαιτείται.',
     'assoc_users'	 	=> 'Αυτό το στοιχείο είναι συνήθως αποσυνδεδεμένο από έναν χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα το στοιχείο και, στη συνέχεια, δοκιμάστε ξανά τη διαγραφή.',
 
     'create' => [
@@ -18,14 +18,14 @@ return [
         'error'   			=> 'Το πάγιο δεν ενημερώθηκε, παρακαλώ προσπαθήστε ξανά',
         'success' 			=> 'Τα περιουσιακά στοιχεία ενημερώθηκαν επιτυχώς.',
         'nothing_updated'	=>  'Δεν επιλέχθηκαν πεδία, επομένως τίποτα δεν ενημερώθηκε.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Δεν επιλέχθηκαν στοιχεία ενεργητικού, επομένως τίποτα δεν ενημερώθηκε.',
     ],
 
     'restore' => [
         'error'   		=> 'Το ενεργητικό δεν έχει αποκατασταθεί, δοκιμάστε ξανά',
         'success' 		=> 'Τα πάγια επαναφέρθηκαν επιτυχώς.',
         'bulk_success' 		=> 'Τα πάγια επαναφέρθηκαν επιτυχώς.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Δεν επιλέχθηκαν στοιχεία ενεργητικού, οπότε τίποτα δεν αποκαταστάθηκε.', 
     ],
 
     'audit' => [
@@ -52,9 +52,9 @@ return [
         'success'               => 'Το αρχείο σας έχει εισαχθεί',
         'file_delete_success'   => 'Το αρχείο σας έχει διαγραφεί με επιτυχία',
         'file_delete_error'      => 'Το αρχείο δεν μπόρεσε να διαγραφεί',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Λείπει το επιλεγμένο αρχείο',
+        'header_row_has_malformed_characters' => 'Ένα ή περισσότερα χαρακτηριστικά στη σειρά κεφαλίδας περιέχουν κακοσχηματισμένους UTF-8 χαρακτήρες',
+        'content_row_has_malformed_characters' => 'Ένα ή περισσότερα χαρακτηριστικά στην πρώτη σειρά περιεχομένου περιέχουν κακοσχηματισμένους UTF-8 χαρακτήρες',
     ],
 
 

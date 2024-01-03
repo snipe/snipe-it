@@ -8,7 +8,7 @@ return array(
     'user_exists'               => 'Käyttäjä on jo luotu!',
     'user_not_found'            => 'Käyttäjää ei löydy.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Käyttäjälle ei tällä hetkellä ole määritetty omaisuutta.',
     'user_password_required'    => 'Salasana vaaditaan.',
     'insufficient_permissions'  => 'Riittämättömät oikeudet.',
     'user_deleted_warning'      => 'Käyttäjä on jo poistettu. Mikäli haluat muokata tai luovuttaa laitteita hänelle sinun tulee palauttaa käyttäjä.',
@@ -16,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Salasanan resetointilinkki on lähetetty niille käyttäjille, joille on määritetty voimassa oleva sähköpostiosoite.',
     'password_reset_sent'       => 'Salasanan palautuslinkki on lähetetty osoitteeseen :email!',
     'user_has_no_email'         => 'Tällä käyttäjällä ei ole sähköpostiosoitetta heidän profiilissaan.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'log_record_not_found'        => 'Tälle käyttäjälle ei löytynyt vastaavaa lokitietuetta.',
 
 
     'success' => array(
@@ -62,7 +62,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Tällä käyttäjällä ei ole sähköpostia.',
+        'success' => 'Käyttäjälle on ilmoitettu heidän nykyisestä tavaraluettelostaan.'
     )
 );

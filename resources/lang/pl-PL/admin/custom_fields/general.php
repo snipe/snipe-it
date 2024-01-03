@@ -45,7 +45,7 @@ return [
     'make_required' => 'Opcjonalnie - kliknij, aby ustawić jako wymagane',
     'reorder' => 'Zmień kolejność',
     'db_field' => 'Pole bazy danych',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => 'UWAGA. To pole znajduje się w tabeli pól niestandardowych jako <code>:db_column</code> , ale powinno być <code>:expected</code>.',
     'is_unique' => 'Ta wartość musi być unikalna dla wszystkich aktywów',
     'unique' => 'Unikalny',
     'display_in_user_view' => 'Zezwalaj zaznaczonemu użytkownikowi na wyświetlanie tych wartości na stronie Widok Przypisanych Zasobów',
@@ -54,8 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => 'Dodaj do dowolnego istniejącego zestawu pól',
     'show_in_listview' => 'Domyślnie pokazuj w widokach list. Autoryzowani użytkownicy nadal będą mogli pokazywać/ukrywać za pomocą selektora kolumn',
     'show_in_listview_short' => 'Pokaż na listach',
-    'show_in_requestable_list_short' => 'Show in requestable assets list',
-    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'show_in_requestable_list_short' => 'Pokaż na liście żądanych zasobów',
+    'show_in_requestable_list' => 'Pokaż wartość w żądanej liście zasobów. Zaszyfrowane pola nie będą wyświetlane',
     'encrypted_options' => 'To pole jest zaszyfrowane, więc niektóre opcje wyświetlania nie będą dostępne.',
 
 ];

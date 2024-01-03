@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Status-etiketten finnes ikke.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Slettet statusmerke',
     'assoc_assets'	 => 'Denne status-etiketten er for øyeblikket i bruk på minst en eiendel, og kan ikke slettes. Vennligst endre dine eiendeler til å ikke bruke denne statusen, og prøv igjen. ',
 
     'create' => [

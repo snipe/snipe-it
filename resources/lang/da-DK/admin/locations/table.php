@@ -15,7 +15,7 @@ return [
     'print_all_assigned'        => 'Udskriv alle tildelte',
     'name'                      => 'Navn på sted',
     'address'                   => 'Adresse',
-    'address2'                   => 'Address Line 2',
+    'address2'                   => 'Adresselinje 2',
     'zip'                       => 'Postnummer',
     'locations'                 => 'Placeringer',
     'parent'                    => 'Forældre',

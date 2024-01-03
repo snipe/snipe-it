@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'Käyttäjä on hyväksynyt kohteen',
+    'acceptance_asset_declined' => 'Käyttäjä on hylännyt kohteen',
     'a_user_canceled' => 'Käyttäjä on peruuttanut nimikkeen pyynnön sivustolla',
     'a_user_requested' => 'Käyttäjä on pyytänyt nimikettä sivustolla',
     'accessory_name' => 'Oheistarvikkeen nimi:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Kirjaudu sisään uuteen Snipe-IT asennukseen käyttäen alla olevia tunnistetietoja:',
     'login' => 'Kirjaudu sisään:',
     'Low_Inventory_Report' => 'Alhainen määrä raportti',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Varaston Raportti',
     'min_QTY' => 'Minimi määrä',
     'name' => 'Nimi',
     'new_item_checked' => 'Uusi nimike on luovutettu sinulle, yksityiskohdat ovat alla.',
@@ -62,7 +62,7 @@ return [
     'test_mail_text' => 'Tämä on testi Snipe-IT Asset Management -järjestelmästä. Jos saat tämän, sähköposti toimii :)',
     'the_following_item' => 'Seuraava kohde on palautettu: ',
     'low_inventory_alert' => ':count nimikkeen saldomäärä on alle minimirajan tai kohta alhainen.|:count nimikkeen saldomäärä on alle minimirajan tai kohta alhainen.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a guarantee expiring in the next :threshold days .- There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => ':count lisenssiä vanhenee :threshold päivän sisällä.|:count lisenssiä vanhenee :threshold päivän sisällä.',
     'to_reset' => 'Voit palauttaa :web salasanasi täyttämällä tämän lomakkeen:',
     'type' => 'Tyyppi',
@@ -74,11 +74,11 @@ return [
     'your_credentials' => 'Snipe-IT - kirjautumistietosi',
     'Accessory_Checkin_Notification' => 'Oheistarvike palautettu',
     'Asset_Checkin_Notification' => 'Laite palautettu',
-    'Asset_Checkout_Notification' => 'Asset checked out',
+    'Asset_Checkout_Notification' => 'Laite tarkistettu',
     'License_Checkin_Notification' => 'Lisenssi palautettu',
     'Expected_Checkin_Report' => 'Odotettujen palautuspäivien raportti',
     'Expected_Checkin_Notification' => 'Muistutus: :name palautuspäivä lähestyy',
     'Expected_Checkin_Date' => 'Sinulle luovutettu laite on määrä palauttaa takaisin :date',
     'your_assets' => 'Omat laitteesi',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Kaikki oikeudet pidätetään.',
 ];

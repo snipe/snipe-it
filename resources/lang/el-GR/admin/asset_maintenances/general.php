@@ -9,8 +9,8 @@
         'maintenance'        => 'Συντήρηση',
         'upgrade'            => 'Αναβάθμιση',
         'calibration'        => 'Διαμέτρηση',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'software_support'   => 'Υποστήριξη Λογισμικού',
+        'hardware_support'   => 'Υποστήριξη Υλικού',
+        'configuration_change'   => 'Αλλαγή Ρυθμίσεων',
+        'pat_test'           => 'Δοκιμή PAT',
     ];

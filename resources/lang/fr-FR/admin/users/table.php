@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Responsable',
     'managed_locations'     => 'Emplacements gérés',
     'name' 					=> 'Nom',
-    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+    'nogroup'               => 'Aucun groupe n\'a encore été créé. Pour en ajouter un, visitez : ',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Confirmer le mot de passe',
     'password' 				=> 'Mot de passe',

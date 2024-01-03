@@ -6,6 +6,6 @@ return [
     'months'   => 'Μήνες',
     'term'   => 'Όρος',
     'title'      => 'Όνομα ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Τιμή Δαπέδου',
 
 ];

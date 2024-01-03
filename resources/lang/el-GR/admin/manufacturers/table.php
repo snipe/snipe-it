@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Υποστήριξη ηλεκτρονικού ταχυδρομείου',
     'support_phone'   		=> 'Υποστήριξη τηλεφώνου',
     'support_url'   		=> 'URL υποστήριξης',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'URL Αναζήτησης Εγγύησης',
     'update'				=> 'Ενημέρωση Κατασκευαστή',
     'url'   				=> 'URL',
 

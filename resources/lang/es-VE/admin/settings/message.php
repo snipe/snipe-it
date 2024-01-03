@@ -20,7 +20,7 @@ return [
         'success'               => 'Registros de borrado purgados correctamente.',
     ],
     'mail' => [
-        'sending' => 'Enviando correo electrónico...',
+        'sending' => 'Enviando correo electrónico de prueba...',
         'success' => '¡Correo enviado!',
         'error' => 'El correo no pudo ser enviado.',
         'additional' => 'Ningún mensaje de error adicional proporcionado. Comprueba la configuración de tu correo y el registro de tu aplicación.'
@@ -34,13 +34,13 @@ return [
         'authentication_success' => 'Usuario autenticado contra LDAP con éxito!'
     ],
     'webhook' => [
-        'sending' => 'Enviando mensaje de prueba de :app...',
-        'success' => 'Your :webhook_name Integration works!',
+        'sending' => 'Enviando mensaje de prueba :app...',
+        'success' => '¡Su Integración :webhook_name funciona!',
         'success_pt1' => '¡Éxito! Comprueba el ',
         'success_pt2' => ' para su mensaje de prueba, y asegúrese de hacer clic en GUARDAR abajo para guardar su configuración.',
         '500' => 'Error 500 del servidor.',
         'error' => 'Algo salió mal. :app respondió con: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'ERROR: 301/302 :endpoint devuelve una redirección. Por razones de seguridad, no seguimos redirecciones. Por favor, utilice el punto final actual.',
         'error_misc' => 'Algo salió mal. :( ',
     ]
 ];

@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Overordnet',
     'managed_locations'     => 'Administrere plasseringer',
     'name' 					=> 'Navn',
-    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+    'nogroup'               => 'Ingen grupper er opprettet ennå. For å legge til en, besøk: ',
     'notes'                 => 'Notater',
     'password_confirm' 		=> 'Bekreft passord',
     'password' 				=> 'Passord',

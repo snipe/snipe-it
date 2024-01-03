@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Więcej informacji',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Zaznaczenie tego pola spowoduje edycję rekordu aktywów, aby odzwierciedlić tę nową lokalizację. Pozostawienie go niezaznaczone spowoduje po prostu odnotowanie lokalizacji w dzienniku audytu.<br><br>Zauważ, że jeśli ten zasób jest zablokowany, nie zmieni lokalizacji osoby, składnika aktywów lub miejsca, w którym jest ona kontrolowana.',
 
     'assets' => 'Aktywa są to elementy identyfikowane przez numer seryjny lub etykietę.  Są to przedmioty o większej wartości, gdzie liczy się identyfikacja określonego elementu.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Możesz ustawić amortyzację środków trwałych na podstawie amortyzacji aktywów w oparciu o metodę liniową.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Importer wykryje, że ten plik jest pusty.'
 ];

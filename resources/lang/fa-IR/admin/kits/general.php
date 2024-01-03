@@ -70,8 +70,7 @@ return [
 ',
     'accessory_deleted'                 => 'حذف با موفقیت انجام شد
 ',
-    'accessory_none'                    => 'لوازم جانبی وجود ندارد
-',
+    'accessory_none'                    => 'The accessory does not exist',
     'checkout_success'                  => 'بررسی با موفقیت انجام شد',
     'checkout_error'                    => 'خطا در بررسی',
     'kit_none'                          => 'کیت وجود ندارد

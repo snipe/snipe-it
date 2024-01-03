@@ -96,7 +96,7 @@ return [
     'url'                  => 'Форматот на :attribute не е валиден.',
     'unique_undeleted'     => ':attribute мора да биде уникатен.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => 'The :attribute field cannot be an array.',
+    'not_array'            => ':atribute harus array.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',

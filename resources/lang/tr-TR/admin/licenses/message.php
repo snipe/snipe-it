@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Lisans çıkışı yapılırken hata oluştu. Lütfen tekrar deneyin.',
         'success' => 'Lisans çıkışı yapıldı.',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Ödeme için yeterli sayıda lisans yeri yok',
     ),
 
     'checkin' => array(

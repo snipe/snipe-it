@@ -16,20 +16,20 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Ви впевнені що хочете видалити цей витратний матеріал?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'error'   => 'Виникла проблема при видаленні витратного файлу. Будь ласка, спробуйте ще раз.',
+        'success' => 'Витяг успішно видалено.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
+        'error'   		=> 'Витратний матеріал не було перевірено, спробуйте ще раз',
+        'success' 		=> 'Витратний матеріал успішно видано.',
         'user_does_not_exist' => 'Невірний користувач. Спробуйте ще раз.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Немає достатньо витратних елементів для цього замовлення. Будь ласка, перевірте кількість залишилось. ',
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
+        'error'   		=> 'Витратний матеріал не було перевірено, спробуйте ще раз',
+        'success' 		=> 'Витратний матеріал успішно перевірено.',
         'user_does_not_exist' => 'Вказаного користувача не існує. Спробуйте ще раз.'
     )
 

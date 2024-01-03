@@ -43,14 +43,14 @@ return [
     'file'                 => 'Το χαρακτηριστικό πρέπει να είναι ένα αρχείο.',
     'filled'               => 'Το πεδίο ιδιοτήτων πρέπει να έχει τιμή.',
     'image'                => 'Το: χαρακτηριστικό πρέπει να είναι μια εικόνα.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'Η τιμή για :fieldname δεν μπορεί να είναι μηδενική.',
     'in'                   => 'Το χαρακτηριστικό επιλεγμένο: δεν είναι έγκυρο.',
     'in_array'             => 'Το πεδίο ιδιοτήτων: δεν υπάρχει σε: άλλο.',
     'integer'              => 'Το χαρακτηριστικό: πρέπει να είναι ένας ακέραιος αριθμός.',
     'ip'                   => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη διεύθυνση IP.',
     'ipv4'                 => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη διεύθυνση IPv4.',
     'ipv6'                 => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη διεύθυνση IPv6.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => 'Το :attribute πρέπει να είναι μοναδικό σε αυτή την Τοποθεσία Εταιρείας',
     'json'                 => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη συμβολοσειρά JSON.',
     'max'                  => [
         'numeric' => 'Η ιδιότητα: δεν μπορεί να είναι μεγαλύτερη από: max.',
@@ -66,8 +66,8 @@ return [
         'string'  => 'Το χαρακτηριστικό: πρέπει να είναι τουλάχιστον: min χαρακτήρες.',
         'array'   => 'Το χαρακτηριστικό: πρέπει να έχει τουλάχιστον: λεπτά στοιχεία.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'starts_with'          => 'Το :attribute πρέπει να ξεκινά με ένα από τα εξής: :values.',
+    'ends_with'            => 'Το :attribute πρέπει να τελειώνει με ένα από τα εξής: :values.',
 
     'not_in'               => 'Το επιλεγμένο: χαρακτηριστικό δεν είναι έγκυρο.',
     'numeric'              => 'Το χαρακτηριστικό πρέπει να είναι ένας αριθμός.',
@@ -90,20 +90,20 @@ return [
     ],
     'string'               => 'Το χαρακτηριστικό πρέπει να είναι μια συμβολοσειρά.',
     'timezone'             => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη ζώνη.',
-    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
+    'two_column_unique_undeleted' => 'Το :attribute πρέπει να είναι μοναδικό σε :table1 και :table2. ',
     'unique'               => 'Το χαρακτηριστικό: έχει ήδη ληφθεί.',
     'uploaded'             => 'Το χαρακτηριστικό:: απέτυχε να μεταφορτωθεί.',
     'url'                  => 'Η μορφή του χαρακτηριστικού είναι μη έγκυρη.',
     'unique_undeleted'     => 'Το :χαρακτηριστικό πρέπει να είναι μοναδικό.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => 'The :attribute field cannot be an array.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'non_circular'         => 'Το χαρακτηριστικό: δεν πρέπει να δημιουργήσει μια κυκλική αναφορά.',
+    'not_array'            => ':atribute harus array.',
+    'disallow_same_pwd_as_user_fields' => 'Ο κωδικός πρόσβασης δεν μπορεί να είναι ο ίδιος με το όνομα χρήστη.',
+    'letters'              => 'Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον ένα γράμμα.',
+    'numbers'              => 'Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον έναν αριθμό.',
+    'case_diff'            => 'Ο κωδικός πρόσβασης πρέπει να χρησιμοποιεί κεφαλαία μικτά.',
+    'symbols'              => 'Ο κωδικός πρόσβασης πρέπει να περιέχει σύμβολα.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Η τιμή δεν μπορεί να είναι αρνητική'
     ],
 
 
@@ -128,13 +128,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => 'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
+        'last_audit_date.date_format'   =>  'Το :attribute πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
+        'termination_date.date_format'  =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
+        'expected_checkin.date_format'  =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
+        'start_date.date_format'        =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
+        'end_date.date_format'          =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
 
     ],
 

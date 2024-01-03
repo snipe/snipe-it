@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Διαγραμμένος προμηθευτής',
     'does_not_exist' => 'Προμηθευτής δεν υπάρχει.',
 
 
@@ -21,8 +21,8 @@ return array(
         'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας τον προμηθευτή. Παρακαλώ δοκιμάστε ξανά.',
         'success' => 'Ο προμηθευτής διαγράφηκε επιτυχώς.',
         'assoc_assets'	 => 'Αυτός ο προμηθευτής συσχετίζεται με τουλάχιστον ένα asset και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τα asset σας να μην αναφέρονται σε αυτόν τον προμηθευτή και δοκιμάστε ξανά. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'Αυτός ο προμηθευτής συσχετίζεται επί του παρόντος με :licenses_count άδειες(ες) και δεν μπορεί να διαγραφεί. Ενημερώστε τις άδειες χρήσης σας ώστε να μην αναφέρονται πλέον σε αυτόν τον προμηθευτή και προσπαθήστε ξανά. ',
+        'assoc_maintenances'	 => 'Αυτός ο προμηθευτής συσχετίζεται επί του παρόντος με :asset_maintenances_count συντήρηση στοιχείων ενεργητικού και δεν μπορεί να διαγραφεί. Παρακαλούμε ενημερώστε τις συντηρήσεις στοιχείων σας ώστε να μην αναφέρονται πλέον σε αυτόν τον προμηθευτή και προσπαθήστε ξανά. ',
     )
 
 );

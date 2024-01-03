@@ -16,7 +16,7 @@ return array(
     'update'  							=> 'Ενημέρωση αξεσουάρ',
     'use_default_eula'					=> 'Χρησιμοποιήστε την προεπιλεγμένη <a href="#" data-toggle="modal" data-target="#eulaModal">primary EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Χρησιμοποιήστε την κύρια προεπιλεγμένη EULA instead.</del> καμία κύρια προεπιλεγμένη άδεια χρήσης τελικού χρήστη δεν έχει οριστεί. Παρακαλείσθε να προσθέσετε μία στις ρυθμίσεις.',
-    'clone'                             => 'Clone Accessory',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'clone'                             => 'Κλώνος Αξεσουάρ',
+    'delete_disabled'                   => 'Αυτό το εξάρτημα δεν μπορεί να διαγραφεί ακόμα, επειδή κάποια στοιχεία εξακολουθούν να εκκρεμούν.',
 
 );

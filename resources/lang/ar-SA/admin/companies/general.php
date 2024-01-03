@@ -3,5 +3,5 @@
 return [
     'select_company' => 'اختر الشركة',
     'about_companies' => 'حول الشركات',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies_description' => '        يمكنك استخدام الشركات كمجال إعلامي بسيط، أو يمكنك استخدامها لتقييد رؤية الأصول وإتاحتها للمستخدمين مع شركة محددة عن طريق تمكين دعم الشركة الكامل في إعدادات المدير الخاص بك.',
 ];

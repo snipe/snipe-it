@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Grupul exista deja!',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => 'ID-ul grupului :id nu există.',
     'group_name_required' => 'Campul "Nume" este obligatoriu',
 
     'success' => array(

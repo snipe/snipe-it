@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Manager',
     'managed_locations'     => 'Beheerde locaties',
     'name' 					=> 'Naam',
-    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+    'nogroup'               => 'Er zijn nog geen groepen aangemaakt. Om er een toe te voegen, bezoek: ',
     'notes'                 => 'Notities',
     'password_confirm' 		=> 'Bevestig uw wachtwoord',
     'password' 				=> 'Wachtwoord',

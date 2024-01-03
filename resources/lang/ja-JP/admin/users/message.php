@@ -8,7 +8,7 @@ return array(
     'user_exists'               => '利用者が既に存在しています!',
     'user_not_found'            => 'ユーザーが存在しません。',
     'user_login_required'       => 'ログインフィールドが必要です。',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'ユーザーに割り当てられているアセットはありません。',
     'user_password_required'    => 'パスワードが必要です。',
     'insufficient_permissions'  => '権限が不足しています。',
     'user_deleted_warning'      => '利用者が削除されました。これらを編集するにはユーザーを復旧するか、新しい資産を割り当てなければなりません。',
@@ -16,7 +16,7 @@ return array(
     'password_resets_sent'      => '有効なメールアドレスを持っている選択されたユーザーにパスワードリセットのリンクが送信されました。',
     'password_reset_sent'       => 'パスワードリセットのURLが:emailに送信されました。',
     'user_has_no_email'         => 'このユーザーのプロフィールにはメールアドレスがありません。',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'log_record_not_found'        => 'このユーザーに一致するログレコードが見つかりませんでした。',
 
 
     'success' => array(

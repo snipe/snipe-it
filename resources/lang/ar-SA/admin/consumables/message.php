@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'لم يتم إخراج المادة الإستهلاكية، الرجاء المحاولة مرة اخرى',
         'success' 		=> 'تم إخراج المادة الإستهلاكية بنجاح.',
         'user_does_not_exist' => 'هذا المستخدم غير صحيح. الرجاء المحاولة مرة أخرى.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'لا يوجد ما يكفي من المواد الاستهلاكية لهذا الدفع. الرجاء التحقق من الكمية المتبقية. ',
     ),
 
     'checkin' => array(

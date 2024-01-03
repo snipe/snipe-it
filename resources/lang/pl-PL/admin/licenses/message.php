@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
         'success' => 'Licencja poprawna',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Za mało dostępnych miejsc do zamówienia',
     ),
 
     'checkin' => array(

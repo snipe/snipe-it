@@ -8,7 +8,7 @@ return array(
     'user_exists'               => 'Uživatel již existuje!',
     'user_not_found'            => 'Uživatel neexistuje.',
     'user_login_required'       => 'Přihlašovací pole je povinné',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Momentálně nejsou uživateli přiřazeny žádné položky.',
     'user_password_required'    => 'Je vyžadováno heslo.',
     'insufficient_permissions'  => 'Nedostatečná oprávnění.',
     'user_deleted_warning'      => 'Tento uživatel byl smazán. Budete muset uživatele obnovit, aby jste ho mohli upravil nebo přidělil nové majetky.',

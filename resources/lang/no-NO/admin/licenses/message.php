@@ -9,7 +9,7 @@ return array(
     'assoc_users'	 => 'Denne lisensen er sjekket ut til en bruker og kan ikke slettes. Vennligst sjekk inn lisensen først, og forsøk sletting på nytt. ',
     'select_asset_or_person' => 'Du må velge en ressurs eller en bruker, men ikke begge.',
     'not_found' => 'Lisens ikke funnet',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count seter tilgjengelige',
 
 
     'create' => array(
@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Det oppstod et problem under utsjekk av lisens. Vennligst prøv igjen.',
         'success' => 'Vellykket utsjekk av lisens',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Ikke nok lisensseter tilgjengelige for utsjekking',
     ),
 
     'checkin' => array(

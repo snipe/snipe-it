@@ -2,36 +2,36 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
-    'not_found' => 'That accessory was not found.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Аксесуар [:id] не існує.',
+    'not_found' => 'Цей аксесуар не знайдено.',
+    'assoc_users'	 => 'Наразі цей аксесуар має :count елементів відмічено користувачам. Будь ласка, перевірте аксесуари і спробуйте ще раз. ',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
+        'error'   => 'Аксесуар не створено, будь ласка, спробуйте ще раз.',
         'success' => 'Аксесуар успішно створено.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Аксесуар не було оновлено, будь ласка, спробуйте ще раз',
+        'success' => 'Аксесуар було успішно оновлено.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'confirm'   => 'Ви впевнені, що хочете видалити цей аксесуар?',
+        'error'   => 'Виникла проблема при видаленні аксесуару. Будь ласка, спробуйте ще раз.',
         'success' => 'Аксесуар успішно видалено.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
+        'error'   		=> 'Аксесуар не був відмічений, будь ласка, спробуйте ще раз',
         'success' 		=> 'Аксесуар успішно видано.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Аксесуар недоступний для оформлення замовлення. Перевірте кількість доступних',
         'user_does_not_exist' => 'Невірний користувач. Спробуйте ще раз.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
+        'error'   		=> 'Аксесуар не було перевірено, будь ласка, спробуйте ще раз',
+        'success' 		=> 'Аксесуар успішно перевірено.',
         'user_does_not_exist' => 'Вказаного користувача не існує. Спробуйте ще раз.'
     )
 

@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Компонент не було видано, спробуйте ще раз',
         'success' 		=> 'Копонент успішно видано.',
         'user_does_not_exist' => 'Невірний користувач. Спробуйте ще раз.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Недостатньо компонентів, що залишилось: :remaining залишилось, :requested ',
     ),
 
     'checkin' => array(

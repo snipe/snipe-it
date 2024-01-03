@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Yritystä ei ole.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Yritys poistettu',
     'assoc_users'    => 'Yritys on liitettynä vähintään yhteen malliin, eikä sitä voida poistaa. Poista malleista viittaus kyseiseen yritykseen ja yritä uudelleen. ',
     'create' => [
         'error'   => 'Yritystä ei luotu, yritä uudelleen.',

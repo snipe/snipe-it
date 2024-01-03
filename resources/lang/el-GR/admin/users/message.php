@@ -8,15 +8,15 @@ return array(
     'user_exists'               => 'Ο χρήστης υπάρχει ήδη!',
     'user_not_found'            => 'Ο χρήστης δεν υπάρχει.',
     'user_login_required'       => 'Το πεδίο εισόδου είναι υποχρεωτικό',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Δεν έχουν εκχωρηθεί στοιχεία ενεργητικού στο χρήστη.',
     'user_password_required'    => 'Ο κωδικός είναι απαραίτητος.',
     'insufficient_permissions'  => 'Δεν έχετε επαρκή δικαιώματα.',
     'user_deleted_warning'      => 'Αυτός ο χρήστης έχει διαγραφεί. Θα πρέπει να επαναφέρετε αυτό το χρήστη για να τον επεξεργαστείτε ή να του εκχωρήσετε νέα πάγια.',
     'ldap_not_configured'        => 'Η ενσωμάτωση LDAP δεν έχει ρυθμιστεί για αυτήν την εγκατάσταση.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'password_resets_sent'      => 'Οι επιλεγμένοι χρήστες που είναι ενεργοποιημένοι και έχουν μια έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου έχουν σταλεί ένα σύνδεσμο επαναφοράς κωδικού πρόσβασης.',
+    'password_reset_sent'       => 'Ένας σύνδεσμος επαναφοράς κωδικού πρόσβασης έχει σταλεί στο :email!',
+    'user_has_no_email'         => 'Αυτός ο χρήστης δεν έχει μια διεύθυνση ηλεκτρονικού ταχυδρομείου στο προφίλ του.',
+    'log_record_not_found'        => 'Δεν ήταν δυνατή η εύρεση μιας εγγραφής καταγραφής που να ταιριάζει με αυτόν το χρήστη.',
 
 
     'success' => array(
@@ -62,7 +62,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Αυτός ο χρήστης δεν έχει ορίσει email.',
+        'success' => 'Ο χρήστης έχει ενημερωθεί για το τρέχον απόθεμά του.'
     )
 );

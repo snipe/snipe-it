@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Το εξάρτημα δεν υπάρχει.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Αυτό το δευτερεύον στοιχείο δεν βρέθηκε.',
     'assoc_users'	 => 'Αυτό το εξάρτημα διαθέτει: τα στοιχεία καταμέτρησης που ελέγχθηκαν στους χρήστες. Ελέγξτε τα εξαρτήματα και δοκιμάστε ξανά.',
 
     'create' => array(
@@ -25,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Το αξεσουάρ δεν έχει ελεγχθεί, δοκιμάστε ξανά',
         'success' 		=> 'Το αξεσουάρ ολοκληρώθηκε με επιτυχία.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Το αξεσουάρ δεν είναι διαθέσιμο για ολοκλήρωση της παραγγελίας. Ελέγξτε την διαθέσιμη ποσότητα',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     ),
 

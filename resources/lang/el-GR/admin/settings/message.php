@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Το αντίγραφο ασφαλείας διαγράφηκε επιτυχώς. ',
         'generated'             => 'Δημιουργήθηκε με επιτυχία ένα νέο αρχείο δημιουργίας αντιγράφων ασφαλείας.',
         'file_not_found'        => 'Αυτό το αρχείο αντιγράφων ασφαλείας δεν βρέθηκε στο διακομιστή.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Ναι, να το αποκαταστήσω, αναγνωρίζω ότι αυτό θα αντικαταστήσει όλα τα υπάρχοντα δεδομένα που υπάρχουν αυτή τη στιγμή στη βάση δεδομένων. Αυτό θα αποσυνδεθεί επίσης από όλους τους υπάρχοντες χρήστες (συμπεριλαμβανομένων και εσείς).',
+        'restore_confirm'       => 'Είστε βέβαιοι ότι θέλετε να επαναφέρετε τη βάση δεδομένων σας από :filename?'
     ],
     'purge' => [
         'error'     => 'Παρουσιάστηκε ένα σφάλμα κατά την εκκαθάριση. ',
@@ -20,27 +20,27 @@ return [
         'success'               => 'Οι διαγραμμένες εγγραφές καθαρίστηκαν με επιτυχία.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Αποστολή Δοκιμής Email...',
+        'success' => 'Η αλληλογραφία στάλθηκε!',
+        'error' => 'Δεν ήταν δυνατή η αποστολή του ταχυδρομείου.',
+        'additional' => 'Δεν δόθηκε κανένα πρόσθετο μήνυμα σφάλματος. Ελέγξτε τις ρυθμίσεις αλληλογραφίας και το αρχείο καταγραφής της εφαρμογής σας.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Δοκιμή Σύνδεσης Ldap, Δεσμεύσεων & Ερωτήματος...',
+        '500' => '500 Σφάλμα διακομιστή. Παρακαλώ ελέγξτε τα αρχεία καταγραφής του διακομιστή σας για περισσότερες πληροφορίες.',
+        'error' => 'Κάτι πήγε στραβά :(',
+        'sync_success' => 'Ένα δείγμα 10 χρηστών που επιστρέφονται από το διακομιστή LDAP με βάση τις ρυθμίσεις σας:',
+        'testing_authentication' => 'Δοκιμή Πιστοποίησης Ldap...',
+        'authentication_success' => 'Ο χρήστης πιστοποιήθηκε με επιτυχία στο LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Αποστολή δοκιμαστικού μηνύματος :app...',
+        'success' => 'Το :webhook_name σας λειτουργεί!',
+        'success_pt1' => 'Επιτυχία! Ελέγξτε το ',
+        'success_pt2' => ' κανάλι για το δοκιμαστικό μήνυμά σας και βεβαιωθείτε ότι κάνετε κλικ στο SAVE παρακάτω για να αποθηκεύσετε τις ρυθμίσεις σας.',
+        '500' => '500 Σφάλμα Διακομιστή.',
+        'error' => 'Κάτι πήγε στραβά. :app απάντησε με: :error_message',
+        'error_redirect' => 'ΣΦΑΛΜΑ: 301/302:endpoint επιστρέφει μια ανακατεύθυνση. Για λόγους ασφαλείας, δεν ακολουθούμε ανακατευθύνσεις. Παρακαλούμε χρησιμοποιήστε το πραγματικό τελικό σημείο.',
+        'error_misc' => 'Κάτι πήγε στραβά. :( ',
     ]
 ];

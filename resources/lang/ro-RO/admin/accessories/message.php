@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Accesoriul [:id] nu există.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Acel accesoriu nu a fost găsit.',
     'assoc_users'	 => 'Acest accesoriu are în prezent : count elemente predate la utilizatori. Vă rugăm să verificaţi accesoriile și încercați din nou. ',
 
     'create' => array(
@@ -25,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Accesoriu nu a fost predat, vă rugăm să încercaţi din nou',
         'success' 		=> 'Accesoriu a fost predat.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Accesoriul nu este disponibil pentru checkout. Verificați cantitatea disponibilă',
         'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.'
     ),
 

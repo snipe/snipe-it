@@ -31,5 +31,5 @@ return [
 
     'depreciations' => '定額法に基づいて資産の減価償却を設定することができます。',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'インポーターはこのファイルが空であることを検出します。'
 ];

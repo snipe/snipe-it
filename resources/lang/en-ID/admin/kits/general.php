@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Accessory was successfully detached',
     'accessory_error'                   => 'Accessory already attached to kit',
     'accessory_deleted'                 => 'Delete was successful',
-    'accessory_none'                    => 'Aksesori tidak ditemukan',
+    'accessory_none'                    => 'The accessory does not exist',
     'checkout_success'                  => 'Checkout was successful',
     'checkout_error'                    => 'Checkout error',
     'kit_none'                          => 'Kit does not exist',

@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'المزيد من المعلومات',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'التحقق من هذا المربع سيؤدي إلى تعديل سجل الأصول لعكس هذا الموقع الجديد. تركه غير محدد سيلاحظ ببساطة الموقع في سجل المراجعة.<br><br>لاحظ أنه إذا تم التحقق من هذا الأصل، فهو لن يغير موقع الشخص أو الأصل أو الموقع الذي يتم التحقق منه إليه.',
 
     'assets' => 'الأصول هي العناصر التي يتم تتبعها بواسطة الرقم التسلسلي أو ترميز الأصل. وهي تميل إلى أن تكون ممتلكات ذات قيمة أعلى حيث انه من المهم توثيقها.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'يمكنك إعداد استهلاك الأصول لاستهلاك الأصول بناء على الاستهلاك الثابت للقيمة.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'يكتشف المستورد أن هذا الملف فارغ.'
 ];

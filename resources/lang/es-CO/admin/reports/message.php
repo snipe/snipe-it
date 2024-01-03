@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'error'   => 'Debes seleccionar al menos UNA opción.'
+    'error'   => 'Debe seleccionar al menos UNA opción.'
 );

@@ -2,5 +2,5 @@
 
 return array(
     'created'   => 'Створено',
-    'size' => 'Size',
+    'size' => 'Розмір',
 );

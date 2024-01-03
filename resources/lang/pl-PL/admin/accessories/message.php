@@ -25,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
         'success' 		=> 'Akcesoria przypisany pomyślnie.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Akcesoria nie są dostępne do zakupu. Sprawdź ilość dostępną',
         'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
     ),
 

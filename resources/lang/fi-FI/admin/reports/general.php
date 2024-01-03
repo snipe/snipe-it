@@ -8,10 +8,10 @@ return [
     'acceptance_deleted' => 'Käyttöoikeuspyyntö poistettu',
     'acceptance_request' => 'Käyttöoikeuspyyntö',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'Käyttäjän Osoite',
+        'user_city' => 'Käyttäjän Kaupunki',
+        'user_state' => 'Käyttäjän Tila',
+        'user_country' => 'Käyttäjän Maa',
+        'user_zip' => 'Käyttäjän Zip'
     ]
 ];

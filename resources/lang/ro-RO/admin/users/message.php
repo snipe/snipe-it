@@ -8,15 +8,15 @@ return array(
     'user_exists'               => 'Utilizatorul exista deja!',
     'user_not_found'            => 'Utilizatorul nu exista.',
     'user_login_required'       => 'Campul de login este necesar',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Nici un activ alocat utilizatorului în prezent.',
     'user_password_required'    => 'Este necesara parola.',
     'insufficient_permissions'  => 'Nu aveti permisiuni suficiente.',
     'user_deleted_warning'      => 'Acest utilizator a fost sters. Trebuie sa restaurati utilizator ca sa-l editati sau sa-i desemnati active noi.',
     'ldap_not_configured'        => 'Integrarea LDAP nu a fost configurată pentru această instalare.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'password_resets_sent'      => 'Utilizatorii selectați care sunt activați și au o adresă de e-mail validă au primit un link de resetare a parolei.',
+    'password_reset_sent'       => 'Un link de resetare a parolei a fost trimis la :email!',
+    'user_has_no_email'         => 'Acest utilizator nu are o adresă de e-mail în profilul său.',
+    'log_record_not_found'        => 'Nu s-a putut găsi o înregistrare de identificare pentru acest utilizator.',
 
 
     'success' => array(
@@ -62,7 +62,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Acest utilizator nu are nici un set de e-mail.',
+        'success' => 'Utilizatorul a fost notificat despre inventarul său curent.'
     )
 );

@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Email підтримки',
     'support_phone'   		=> 'Телефон підтримки',
     'support_url'   		=> 'URL підтримки',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'URL-адреса фільтрування гарантії',
     'update'				=> 'Оновити виробника',
     'url'   				=> 'URL',
 

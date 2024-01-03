@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'Tímto převezmete jednu licenci. | Tímto převezmete všech :checkedout_seats_count licencí.',
                 'enabled_tooltip'   => 'Převzít všechny licence vydané jak uživatelům, tak i zařízením',
                 'disabled_tooltip'  => 'To nelze provést, neboť není vydaná žádná licence',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'Toto je zakázáno, protože licence není znovu přiřazitelná',
                 'success'           => 'Lincece úspěšně převzata! | Licence úspěšně převzaty!',
                 'log_msg'           => 'Převzato pomocí hromadného zpracování licencí',
             ],

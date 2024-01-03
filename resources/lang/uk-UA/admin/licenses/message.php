@@ -2,53 +2,53 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
-    'select_asset_or_person' => 'You must select an asset or a user, but not both.',
-    'not_found' => 'License not found',
-    'seats_available' => ':seat_count seats available',
+    'does_not_exist' => 'Ліцензія не існує або у вас немає дозволу на її перегляд.',
+    'user_does_not_exist' => 'Користувач не існує.',
+    'asset_does_not_exist' 	=> 'Актив, який ви намагаєтеся пов\'язати з цією ліцензією, не існує.',
+    'owner_doesnt_match_asset' => 'Актив, який ви намагаєтеся пов\'язати з цією ліцензією, належить жодній особі, яка була обрана в призначеному для розірвання.',
+    'assoc_users'	 => 'Ця ліцензія на даний час перевірена з користувачем і не може бути видалена. Будь ласка, спочатку перевірте ліцензію, і повторіть спробу. ',
+    'select_asset_or_person' => 'Ви повинні вибрати актив або користувача, але не обох.',
+    'not_found' => 'Ліцензію не знайдено',
+    'seats_available' => 'Доступно :seat_count місць',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Ліцензію не створено, будь ласка, спробуйте ще раз.',
+        'success' => 'Ліцензію успішно створено.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
+        'error'   => 'Файл не видалено. Будь ласка, спробуйте ще раз.',
         'success' => 'Файл успішно видалено.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Файл(и) не завантажено. Повторіть спробу.',
+        'success' => 'Файл(и) успішно завантажено.',
+        'nofiles' => 'Ви не обрали жодного файлу для завантаження, або завеликий файл',
+        'invalidfiles' => 'Один або кілька ваших файлів завеликий або є файловим типом, який не допускається. Дозволені типи файлів - png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rtf, rtf, xml, і lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Ліцензія не була оновлена, будь ласка, спробуйте ще раз',
+        'success' => 'Ліцензію успішно оновлено.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Ви дійсно бажаєте видалити цю ліцензію?',
+        'error'   => 'Виникла проблема при видаленні ліцензії. Будь ласка, спробуйте ще раз.',
+        'success' => 'Ліцензію успішно видалено.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'error'   => 'Виникла проблема з перевіркою ліцензії. Спробуйте ще раз.',
+        'success' => 'Ліцензію успішно перевірено',
+        'not_enough_seats' => 'Недостатньо вільних ліцензійних місць для оформлення замовлення',
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Виникла помилка перевірки ліцензії. Будь ласка, спробуйте ще раз.',
+        'success' => 'Ліцензія успішно перевірена'
     ),
 
 );

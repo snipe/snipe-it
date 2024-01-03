@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Yönetici',
     'managed_locations'     => 'Yönetilen Mekanlar',
     'name' 					=> 'Adı',
-    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+    'nogroup'               => 'Henüz hiçbir grup oluşturulmadı. Bir tane eklemek için şu adresi ziyaret edin:',
     'notes'                 => 'Notlar',
     'password_confirm' 		=> 'Şifreyi Doğrula',
     'password' 				=> 'Şifre',

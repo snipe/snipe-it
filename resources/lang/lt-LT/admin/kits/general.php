@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Priedas atskirtas sėkmingai',
     'accessory_error'                   => 'Priedas jau pridėtas į rinkinį',
     'accessory_deleted'                 => 'Sėkmingai ištrinta',
-    'accessory_none'                    => 'Priedas neegzistuoja',
+    'accessory_none'                    => 'The accessory does not exist',
     'checkout_success'                  => 'Išdavimas sėkmingas',
     'checkout_error'                    => 'Išdavimo klaida',
     'kit_none'                          => 'Rinkinys neegzistuoja',

@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Etiqueta de estado não existe.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Rótulo de estado excluído',
     'assoc_assets'	 => 'Esta etiqueta de estado está associada a pelo menos um Asset e não pode ser apagada. Atualize os seus Assets para que não sejam usados novamente como referência a estes estado e tente novamente. ',
 
     'create' => [

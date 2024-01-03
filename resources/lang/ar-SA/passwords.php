@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
-    'password_change'  => 'Your password has been updated!',
+    'sent'	        => 'إذا كان هناك مستخدم مطابق له عنوان بريد إلكتروني صالح في نظامنا، تم إرسال بريد إلكتروني لاسترداد كلمة المرور.',
+    'user'			=> 'إذا كان هناك مستخدم مطابق له عنوان بريد إلكتروني صالح في نظامنا، تم إرسال بريد إلكتروني لاسترداد كلمة المرور.',
+    'token'         => 'رمز إعادة تعيين كلمة المرور هذا غير صالح أو انتهت صلاحيته، أو لا يتطابق مع اسم المستخدم المقدم.',
+    'reset'         => 'تم إعادة تعيين كلمة المرور الخاصة بك!',
+    'password_change'  => 'تم تحديث كلمة المرور الخاصة بك!',
 ];

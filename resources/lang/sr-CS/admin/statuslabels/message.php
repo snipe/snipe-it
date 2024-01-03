@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Oznaka statusa ne postoji.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Nalepnica obrisanog statusa',
     'assoc_assets'	 => 'Oznaka statusa je trenutno povezana s barem jednim resursom i ne može se izbrisati. Ažurirajte resurs da se više ne referencira na tu oznaku statusa i pokušajte ponovno. ',
 
     'create' => [

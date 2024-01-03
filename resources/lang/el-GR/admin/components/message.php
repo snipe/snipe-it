@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Το στοιχείο δεν έχει ελεγχθεί, δοκιμάστε ξανά',
         'success' 		=> 'Η συνιστώσα ολοκληρώθηκε με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Δεν υπάρχουν αρκετά στοιχεία που απομένουν: :remaining απομένουν, :requested requested ',
     ),
 
     'checkin' => array(

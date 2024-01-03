@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Statuslabel eksisterer ikke.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Slettede Status Label',
     'assoc_assets'	 => 'Dette statusmærke er i øjeblikket forbundet med mindst én aktiv og kan ikke slettes. Opdater dine aktiver for ikke længere at henvise til denne status, og prøv igen.',
 
     'create' => [

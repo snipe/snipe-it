@@ -11,6 +11,6 @@
         'calibration'        => 'المعايره',
         'software_support'   => 'دعم البرامج',
         'hardware_support'   => 'دعم الأجهزة',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'configuration_change'   => 'تغيير التكوين',
+        'pat_test'           => 'اختبار بايت',
     ];

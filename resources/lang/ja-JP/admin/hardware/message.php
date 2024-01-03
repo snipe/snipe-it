@@ -11,7 +11,7 @@ return [
     'create' => [
         'error'   		=> '資産は作成されませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は作成されました。',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => ':tag を持つアセットは正常に作成されました。 <strong><a href=":link" style="color: white;"></a></strong> を表示するにはここをクリックしてください。',
     ],
 
     'update' => [
@@ -52,7 +52,7 @@ return [
         'success'               => 'ファイルはインポートされました。',
         'file_delete_success'   => 'ファイルを削除しました。',
         'file_delete_error'      => 'ファイルが削除出来ませんでした。',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => '選択されたファイルがありません',
         'header_row_has_malformed_characters' => 'ヘッダー行の1つ以上の属性に不正な形式のUTF-8文字が含まれています',
         'content_row_has_malformed_characters' => 'コンテンツの最初の行の1つまたは複数の属性に不正な形式のUTF-8文字が含まれています',
     ],

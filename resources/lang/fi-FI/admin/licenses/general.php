@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'Tämä toiminto palauttaa yhden paikan. - Tämä toiminto palauttaa :checkedout_seats_count paikkaa tälle lisenssille.',
                 'enabled_tooltip'   => 'Palauttaa KAIKKI paikat tälle lisenssille sekä käyttäjiltä että laitteilta',
                 'disabled_tooltip'  => 'Tämä ei ole käytössä, koska paikkoja ei ole tällä hetkellä luovutettuina',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'Tämä ei ole käytössä, koska lisenssi ei ole uudelleenosoitettavissa',
                 'success'           => 'Lisenssi onnistuneesti palautettu! - Kaikki lisenssit palautettiin onnistuneesti!',
                 'log_msg'           => 'Palautettu lisenssien massalainauskäyttöliittymän kautta',
             ],

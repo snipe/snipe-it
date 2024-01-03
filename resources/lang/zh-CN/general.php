@@ -498,6 +498,6 @@ return [
     'action_permission_denied' => '您没有 :action :item_type ID :id 的权限',
     'action_permission_generic' => '您没有 :action 此 :item_type 的权限',
     'edit' => '编辑',
-    'action_source' => 'Action Source',
+    'action_source' => '动作来源',
 
 ];

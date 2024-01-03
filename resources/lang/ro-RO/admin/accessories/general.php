@@ -16,7 +16,7 @@ return array(
     'update'  							=> 'Actualizare Accesoriu',
     'use_default_eula'					=> 'Foloseste <a href="#" data-toggle="modal" data-target="#eulaModal">EULA general implicita</a> in loc.',
     'use_default_eula_disabled'			=> '<del>Foloseste EULA general implicita.</del> EULA implicita nu a fost gasita. A se crea una in Setari.',
-    'clone'                             => 'Clone Accessory',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'clone'                             => 'Clonează accesoriul',
+    'delete_disabled'                   => 'Acest accesoriu nu poate fi șters încă pentru că unele elemente sunt încă verificate.',
 
 );

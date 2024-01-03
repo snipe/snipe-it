@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'Η κατηγορία δεν ενημερώθηκε, παρακαλώ δοκιμάστε ξανά',
         'success' => 'Η κατηγορία ενημερώθηκε με επιτυχία.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Δεν μπορείτε να αλλάξετε τον τύπο κατηγορίας μόλις δημιουργηθεί',
     ),
 
     'delete' => array(

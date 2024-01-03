@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Crear un nuevo campo personalizado',
     'value_encrypted'      	        => 'El valor de este campo está encriptado en la base de datos. Solo los administradores pueden ver el valor desencriptado',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short'     => 'Incluye en correos electrónicos.',
     'help_text' => 'Texto de ayuda',
     'help_text_description' => 'Esto es un texto opcional que se mostrará debajo de los elementos del formulario cuando se este editando un activo para proporcionar contexto adicional del campo.',
     'about_custom_fields_title' => 'Acerca de los Campos Personalizados',
@@ -54,8 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => 'Añadir a cualquier conjunto de campos existente',
     'show_in_listview' => 'Mostrar por defecto en las vistas de lista. Los usuarios autorizados aún podrán mostrar/ocultar a través del selector de columnas',
     'show_in_listview_short' => 'Mostrar en listas',
-    'show_in_requestable_list_short' => 'Show in requestable assets list',
-    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
-    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'show_in_requestable_list_short' => 'Mostrar en la lista de activos solicitables',
+    'show_in_requestable_list' => 'Mostrar el valor en la lista de activos solicitables. Los campos cifrados no se mostrarán',
+    'encrypted_options' => 'Este campo está cifrado, por lo que algunas opciones de visualización no estarán disponibles.',
 
 ];

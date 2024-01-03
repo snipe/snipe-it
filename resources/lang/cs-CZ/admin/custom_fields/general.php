@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Vytvořít vlastní fieldset',
     'value_encrypted'      	        => 'Hodnota tohoto pole je zašifrována v databázi. Pouze administrátoři budou moci zobrazit dešifrovanou hodnotu',
     'show_in_email'     => 'Zahrnout hodnotu této kolonky do e-mailu o vyskladnění pro uživatele? Šifrované kolonky nemohou být součástí e-mailů',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short'     => 'Zahrnout do e-mailů.',
     'help_text' => 'Text nápovědy',
     'help_text_description' => 'Toto je volitelný text, který se zobrazí pod formulářovými prvky při úpravách aktiva pro poskytnutí kontextu v poli.',
     'about_custom_fields_title' => 'O vlastních polích',
@@ -54,8 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => 'Přidat do všech stávajících sad polí',
     'show_in_listview' => 'Zobrazovat v seznamech. Autorizovaní uživatelé si hodnotu i nadále budou moci skrýt skrze výběr sloupců',
     'show_in_listview_short' => 'Zobrazovat v seznamech',
-    'show_in_requestable_list_short' => 'Show in requestable assets list',
-    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
-    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'show_in_requestable_list_short' => 'Zobrazit v seznamu požadovaných položek',
+    'show_in_requestable_list' => 'Zobrazit hodnotu v seznamu požadovaných aktiv. Šifrovaná pole nebudou zobrazena',
+    'encrypted_options' => 'Toto pole je šifrované, takže některé možnosti zobrazení nebudou k dispozici.',
 
 ];

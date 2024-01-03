@@ -8,10 +8,10 @@ return [
     'acceptance_deleted' => 'Žádost o přijetí byla smazána',
     'acceptance_request' => 'Žádost o přijetí',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'Uživatelská adresa',
+        'user_city' => 'Město uživatele',
+        'user_state' => 'Stav uživatele',
+        'user_country' => 'Země uživatele',
+        'user_zip' => 'PSČ uživatele'
     ]
 ];

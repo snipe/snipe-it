@@ -2,31 +2,31 @@
 
 return [
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'deleted_label' => 'Deleted Status Label',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Мітка статусу не існує.',
+    'deleted_label' => 'Видалено мітку статусу',
+    'assoc_assets'	 => 'Ця мітка статусу пов\'язана принаймні з одним активом і не може бути видалена. Будь ласка, оновіть ваші медіафайли, щоб більше не посилатися на цей статус і спробувати ще раз. ',
 
     'create' => [
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.',
+        'error'   => 'Мітка стану не створена, будь ласка, спробуйте ще раз.',
+        'success' => 'Мітка статусу успішно створена.',
     ],
 
     'update' => [
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.',
+        'error'   => 'Мітка статусу не була оновлена, спробуйте ще раз',
+        'success' => 'Мітку статусу успішно оновлено.',
     ],
 
     'delete' => [
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.',
+        'confirm'   => 'Ви впевнені, що хочете видалити цю мітку?',
+        'error'   => 'Виникла проблема при видаленні мітки статусу. Будь ласка, спробуйте ще раз.',
+        'success' => 'Мітку статусу успішно видалено.',
     ],
 
     'help' => [
-        'undeployable'   => 'These assets cannot be assigned to anyone.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
-        'archived'   => 'These assets cannot be checked out, and will only show up in the Archived view. This is useful for retaining information about assets for budgeting/historic purposes but keeping them out of the day-to-day asset list.',
-        'pending'   => 'These assets can not yet be assigned to anyone, often used for items that are out for repair, but are expected to return to circulation.',
+        'undeployable'   => 'Ці активи не можуть бути призначені нікому.',
+        'deployable'   => 'Ці активи можна видати. Після призначення вони отримають метастатус <i class="fas fa-circle text-blue"></i> <strong>Розгорнуто</strong>.',
+        'archived'   => 'Ці активи не можуть бути відмічені, і з\'являться тільки в перегляді Архівування. Це корисно для збереження інформації про активи для бюджету/історичних цілей, але не видаляє їх зі списку додаткових активів.',
+        'pending'   => 'Ці активи ще не можуть бути призначені нікому, часто використовуються для товарів, які мають ремонт, але очікується, що вони повернуться в обіг.',
     ],
 
 ];

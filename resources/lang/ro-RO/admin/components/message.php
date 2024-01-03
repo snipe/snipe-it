@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Componenta nu a fost verificată, încercați din nou',
         'success' 		=> 'Componenta verificată cu succes.',
         'user_does_not_exist' => 'Acest utilizator este nevalid. Vă rugăm să încercați din nou.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Nu au mai rămas suficiente componente: :rămase :solicitat ',
     ),
 
     'checkin' => array(

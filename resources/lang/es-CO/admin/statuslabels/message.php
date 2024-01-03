@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Etiqueta de Estado inexistente.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Etiqueta de estado borrado',
     'assoc_assets'	 => 'Esta etiqueta de estado está asociada con al menos un equipo actualmente, por lo que no puede ser eliminada. Por favor actualiza tus equipos para que no hagan uso de esta etiqueta, e inténtalo de nuevo. ',
 
     'create' => [

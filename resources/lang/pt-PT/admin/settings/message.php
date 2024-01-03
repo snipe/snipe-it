@@ -35,12 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'A enviar mensagem :app de teste...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'Sua integração com :webhook_name funciona!',
         'success_pt1' => 'Sucesso! Verifique o ',
         'success_pt2' => ' canal para a sua mensagem de teste, e certifique-se de clicar em SALVAR abaixo para guardar as suas configurações.',
         '500' => '500 Erro de Servidor.',
         'error' => 'Algo deu erro. :app respondeu com: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'ERRO: 301/302 :endpoint retorna um redirecionamento. Por razões de segurança, não seguimos redirecionamentos. Por favor, use o ponto de extremidade atual.',
         'error_misc' => 'Algo deu erro. :( ',
     ]
 ];

@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'このアクションは、1つのシートをチェックインします。 | このアクションは、このライセンスのすべての :checkedout_seats_count シートをチェックインします。',
                 'enabled_tooltip'   => 'ユーザーとアセットの両方から、このライセンスのすべてのシートをチェックインします',
                 'disabled_tooltip'  => '現在チェックアウトされているシートがないため、これは無効です',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'ライセンスが再割り当てできないため、これは無効です',
                 'success'           => 'ライセンスのチェックインに成功しました! | すべてのライセンスは正常にチェックインされました!',
                 'log_msg'           => 'ライセンスGUIで一括ライセンスチェックアウトを行いました',
             ],

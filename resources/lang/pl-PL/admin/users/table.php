@@ -30,7 +30,7 @@ return array(
     'show_deleted'          => 'Pokaż usuniętych użytkowników',
     'title' 				=> 'Tytuł',
 	'to_restore_them'		=> 'aby je przywrócić.',
-    'total_assets_cost'     => "Total Assets Cost",
+    'total_assets_cost'     => "Całkowity koszt aktywów",
     'updateuser' 			=> 'Zaktualizuj użytkownika',
     'username' 				=> 'Nazwa użytkownika',
 	'user_deleted_text' 	=> 'Ten użytkownik został oznaczony jako usunięty.',

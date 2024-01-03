@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Μοντέλο διαγραμμένων στοιχείων ενεργητικού',
     'does_not_exist' => 'Το μοντέλο δεν υπάρχει.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'ΠΡΟΣΟΧΗ! Το μοντέλο στοιχείων ενεργητικού για αυτό το στοιχείο δεν είναι έγκυρο ή λείπει!',
+    'no_association_fix' => 'Αυτό θα σπάσει τα πράγματα με περίεργους και φρικτούς τρόπους. Επεξεργαστείτε αυτό το στοιχείο τώρα για να το αντιστοιχίσετε ένα μοντέλο.',
     'assoc_users'	 => 'Αυτό το μοντέλο συσχετίζεται επί του παρόντος με ένα ή περισσότερα στοιχεία και δεν μπορεί να διαγραφεί. Διαγράψτε τα στοιχεία και, στη συνέχεια, δοκιμάστε ξανά τη διαγραφή.',
 
 
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Δεν άλλαξαν πεδία, επομένως τίποτα δεν ενημερώθηκε.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Το μοντέλο ενημερώθηκε επιτυχώς. ":model_count μοντέλα ενημερώθηκαν επιτυχώς.',
+        'warn'          => 'Πρόκειται να ενημερώσετε τις ιδιότητες του ακόλουθου μοντέλου: "Πρόκειται να επεξεργαστείτε τις ιδιότητες των παρακάτω :model_count:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Δεν επιλέχθηκαν πεδία, επομένως τίποτα δεν διαγράφηκε.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Το μοντέλο διαγράφηκε! :success_count μοντέλα διαγράφηκε!',
         'success_partial' 	=> ':success_count model(s) μοντέλα διαγράφηκαν, ωστόσο το :fail_count δεν μπόρεσε να διαγραφεί επειδή εξακολουθούν να έχουν στοιχεία που σχετίζονται με αυτά.'
     ),
 

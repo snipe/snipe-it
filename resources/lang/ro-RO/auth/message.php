@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Acest utilizator nu a fost activat.',
     'account_suspended'      => 'Acest utilizator este suspendat.',
     'account_banned'         => 'Acest utilizator este banat.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Prea multe încercări de conectare nereușite. Vă rugăm să încercați din nou în :minute minute.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
+        'already_enrolled'      => 'Dispozitivul dumneavoastră este deja înscris.',
         'success'               => 'V-ati logat cu succes.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'code_required'         => 'Codul doi factori este necesar.',
+        'invalid_code'          => 'Codul doi factori este invalid.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'A apărut o problemă în timp ce încercați să vă deconectați, încercați din nou.',
+        'success' => 'V-ați deconectat cu succes.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'A aparut o problema in timp ce se crea un cod de resetare parola, va rugam incercati iar.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Dacă această adresă de e-mail există în sistemul nostru, a fost trimis un e-mail de recuperare a parolei.',
     ),
 
     'forgot-password-confirm' => array(

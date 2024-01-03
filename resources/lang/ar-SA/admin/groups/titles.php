@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> 'مدير المجموعة',
     'allow' 	 			=> 'سماح',
     'deny' 	 				=> 'منع',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => 'الصلاحية',
+    'grant'                 => 'منح',
+    'no_permissions'        => 'هذه المجموعة ليس لديها أذونات.'
 ];

@@ -8,15 +8,15 @@ return array(
     'user_exists'               => 'المستخدم موجود مسبقاً!',
     'user_not_found'            => 'المستخدم غير موجود.',
     'user_login_required'       => 'حقل تسجيل الدخول اجباري',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'لا توجد أصول مخصصة حاليا للمستخدم.',
     'user_password_required'    => 'كلمة المرور اجبارية.',
     'insufficient_permissions'  => 'صلاحيات غير كافية.',
     'user_deleted_warning'      => 'تم حذف المستخدم. سيكون عليك استعادة هذا المستخدم اذا ارت التعديل عليه او تسليمه اجهزة جديدة.',
     'ldap_not_configured'        => 'لم يتم تكوين دمج لداب لهذا التثبيت.',
     'password_resets_sent'      => 'تم إرسال رابط إعادة تعيين كلمة المرور للمستخدمين المحددين الذين تم تفعيلهم ولديهم عناوين بريد إلكتروني صالحة.',
     'password_reset_sent'       => 'تم إرسال رابط إعادة تعيين كلمة المرور إلى البريد الإلكتروني!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'user_has_no_email'         => 'هذا المستخدم ليس لديه عنوان بريد إلكتروني في ملفه الشخصي.',
+    'log_record_not_found'        => 'تعذر العثور على سجل مطابق لهذا المستخدم.',
 
 
     'success' => array(
@@ -62,7 +62,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'لم يتم تعيين البريد الإلكتروني لهذا المستخدم.',
+        'success' => 'تم إخطار المستخدم بالمخزون الحالي الخاص به.'
     )
 );

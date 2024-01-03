@@ -8,10 +8,10 @@ return [
     'acceptance_deleted' => '承認リクエストが削除されました',
     'acceptance_request' => 'リクエストを承認',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'ユーザーアドレス',
+        'user_city' => 'ユーザー市区町村名',
+        'user_state' => 'ユーザーの状態',
+        'user_country' => 'ユーザーの国',
+        'user_zip' => 'ユーザー郵便番号'
     ]
 ];

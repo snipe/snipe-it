@@ -8,7 +8,7 @@ return array(
     'user_exists'               => 'Bruger eksistere allerede!',
     'user_not_found'            => 'Bruger eksisterer ikke.',
     'user_login_required'       => 'Login-feltet er påkrævet',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Ingen aktiver i øjeblikket tildelt brugeren.',
     'user_password_required'    => 'Adgangskoden er påkrævet.',
     'insufficient_permissions'  => 'Utilstrækkelige tilladelser.',
     'user_deleted_warning'      => 'Denne bruger er blevet slettet. Du skal gendanne denne bruger for at redigere dem eller tildele dem nye aktiver.',
@@ -16,7 +16,7 @@ return array(
     'password_resets_sent'      => 'De valgte brugere, der er aktiveret og har en gyldig e-mail-adresser, har fået tilsendt et link til nulstilling af adgangskode.',
     'password_reset_sent'       => 'Et link til nulstilling af adgangskode er blevet sendt til :email!',
     'user_has_no_email'         => 'Denne bruger har ikke en email-adresse i deres profil.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'log_record_not_found'        => 'En matchende log post for denne bruger kunne ikke findes.',
 
 
     'success' => array(

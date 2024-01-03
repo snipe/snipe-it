@@ -17,6 +17,6 @@ return array(
     'use_default_eula'					=> 'قم باستعمال <a href="#" data-toggle="modal" data-target="#eulaModal">اتفاقية ترخيص المستخدم الافتراضية الاساسية</a>.',
     'use_default_eula_disabled'			=> '<del>استخدام (اتفاقية ترخيص المستخدم) الافتراضية الأساسية بدلا من ذلك.</del> لم يتم تحديد (اتفاقية ترخيص المستخدم) الافتراضية الأساسية. الرجاء إضافتها في الإعدادات.',
     'clone'                             => 'استنساخ الملحق',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'delete_disabled'                   => 'لا يمكن حذف هذا الملحق حتى الآن لأن بعض العناصر لا تزال قيد الخروج.',
 
 );
