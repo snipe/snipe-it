@@ -2,7 +2,7 @@
 
 "files": [
   {
-    "source" : "/resources/lang/en/**/*.php",
+    "source" : "/resources/lang/en-US/**/*.php",
     # https://developer.crowdin.com/configuration-file/#placeholders
     "translation" : "/resources/lang/%locale%/**/%original_file_name%"
   }
