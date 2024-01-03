@@ -9,7 +9,7 @@ return [
     'ad_append_domain_help'     => 'Kullanıcı "kullanıcıadı@alan.adı" yazmak zorunda değil, bunun yerine "kullanıcıadı" yazabilir.',
     'admin_cc_email'            => 'CC e-Posta',
     'admin_cc_email_help'       => 'Kullanıcılar bir ek e-posta hesabına gönderilen iade etme/kullanıma alma e-posta bir kopyasını göndermek isterseniz, buraya girin. Aksi takdirde bu alanı boş bırakın.',
-    'admin_settings'            => 'Admin Settings',
+    'admin_settings'            => 'Yönetici Ayarları',
     'is_ad'				        => 'Active Directory sunucusudur',
     'alerts'                	=> 'Uyarı',
     'alert_title'               => 'Günceleme Uyarı Ayarları',

@@ -26,21 +26,21 @@ return [
         'additional' => 'Nu a fost furnizat nici un mesaj de eroare suplimentar. Verificați setările de email și logurile aplicației.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Testare conexiune LDAP, îmbinare și interogare...',
+        '500' => 'Eroare 500 Server. Vă rugăm să verificaţi jurnalele serverului pentru mai multe informaţii.',
+        'error' => 'Ceva a mers prost :(',
+        'sync_success' => 'Un eșantion de 10 utilizatori returnați de pe serverul LDAP, în funcție de setările dvs.:',
+        'testing_authentication' => 'Testare autentificare LDAP...',
+        'authentication_success' => 'Utilizatorul s-a autentificat cu succes împotriva LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Se trimite mesajul de testare :app...',
+        'success' => 'Integrarea ta :webhook_name funcționează!',
+        'success_pt1' => 'Succes! Verifică ',
+        'success_pt2' => ' canalul pentru mesajul de testare şi asiguraţi-vă că faceţi clic pe ECONOMISEŞTE mai jos pentru a stoca setările.',
+        '500' => 'Eroare 500 Server',
+        'error' => 'Ceva nu a funcționat. :app a răspuns cu: :error_message',
+        'error_redirect' => 'EROARE: 301/302 :endpoint returnează o redirecționare. Din motive de securitate, nu urmărim redirecționările. Vă rugăm să folosiți obiectivul final.',
+        'error_misc' => 'Ceva nu a mers bine. :( ',
     ]
 ];

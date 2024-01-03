@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Упаковуючий постачальник видалено',
     'does_not_exist' => 'Постачальник не існує.',
 
 
@@ -18,11 +18,11 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Ви дійсно хочете видалити цього постачальника?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
+        'error'   => 'Виникла проблема при видаленні постачальника. Будь ласка, спробуйте ще раз.',
         'success' => 'Постачальника успішно видалено.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'Цей постачальник наразі асоціюється з :asset_count медіафайлів і не може бути видалений. Будь ласка, оновіть ваші активи, щоб більше не посилалися на цього постачальника і повторіть спробу. ',
+        'assoc_licenses'	 => 'Цей постачальник наразі асоціюється з :licenses_count ліцензіями і не може бути видалений. Оновіть свої ліцензії, щоб більше не посилатися на цього постачальника і повторіть спробу. ',
+        'assoc_maintenances'	 => 'Цей постачальник наразі асоціюється з :asset_maintenances_count asset і не може бути видалений. Будь ласка, оновіть технічне обслуговування активів, щоб більше не посилатись на цього постачальника і спробувати ще раз. ',
     )
 
 );

@@ -6,7 +6,7 @@ return [
     'asset_depreciations'  					=> 'Depreciación de Equipos',
     'create'  					            => 'Crear Depreciación',
     'depreciation_name'  					=> 'Nombre de Depreciación',
-    'depreciation_min'                      => 'Valor mínimo de amortización',
+    'depreciation_min'                      => 'Valor del piso de la depreciación',
     'number_of_months'  					=> 'Número de Meses',
     'update'  					            => 'Actualizar Depreciación',
     'depreciation_min'                      => 'Valor mínimo después de depreciación',

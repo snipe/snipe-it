@@ -2,9 +2,9 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Slettede asset-model',
     'does_not_exist' => 'Model findes ikke.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association' => 'ADVARSEL! Aktivmodellen for dette element er ugyldig eller mangler!',
     'no_association_fix' => 'Dette vil ødelægge ting på underlige og forfærdelige måder. Rediger dette aktiv nu for at tildele det en model.',
     'assoc_users'	 => 'Denne model er knyttet til en eller flere aktiver og ikke kan slettes. Slet venligst aktiver, og prøv derefter at slette igen. ',
 
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ingen felter blev ændret, så intet er blevet opdateret.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Modellen blev opdateret. opdateret: model_count modeller blev opdateret.',
+        'warn'          => 'Du er ved at opdatere properierne i følgende model: ● Du er ved at redigere egenskaberne for følgende :model_count modeller:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ingen modeller blev valgt, så intet blev slettet.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Model slettet! :success_count modeller slettet!',
         'success_partial' 	=> ':success_count model(ler) blev slettet; men :fail_count kunne ikke slettes fordi de stadig har aktiver knyttet til sig.'
     ),
 

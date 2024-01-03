@@ -12,39 +12,39 @@ return [
     'clone'  					=> 'استنساخ الأصل',
     'deployable'  				=> 'قابل للتوزيع',
     'deleted'  					=> 'تم حذف هذا الأصل.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => 'هل أنت متأكد من أنك تريد حذف هذا الأصل؟',
     'edit'  					=> 'تعديل الأصل',
     'model_deleted'  			=> 'تم حذف موديل الأصول هذا. يجب استعادة الموديل قبل أن تتمكن من استعادة الأصل.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'نموذج هذا الأصل غير صالح.',
+    'model_invalid_fix'         => 'يجب تحرير الأصل لتصحيح هذا قبل محاولة التحقق منه أو الخروج منه.',
     'requestable'               => 'قابل للطلب',
     'requested'				    => 'تم الطلب',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'not_requestable'           => 'غير مطلوب',
+    'requestable_status_warning' => 'لا تقم بتغيير حالة الطلب',
     'restore'  					=> 'استعادة الأصل',
     'pending'  					=> 'قيد الانتظار',
     'undeployable'  			=> 'غير قابل للتوزيع',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable_tooltip'  	=> 'هذا الأصل لديه علامة حالة غير قابلة للنشر ولا يمكن التحقق منها في هذا الوقت.',
     'view'  					=> 'عرض الأصل',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'لديك خطأ في ملف CSV الخاص بك:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    رفع CSV الذي يحتوي على سجل الأصول. الأصول والمستخدمون موجودون بالفعل في النظام، أو سيتم تخطيتهم. تتم مطابقة استيراد الأصول للتاريخ مقابل علامة الأصول. سوف نحاول العثور على مستخدم مطابق استنادًا إلى اسم المستخدم الذي تقدمه، والمعايير التي تحددها أدناه. إذا لم تقم بتحديد أي معايير أدناه، سيحاول ببساطة أن يتطابق مع تنسيق اسم المستخدم الذي قمت بتكوينه في الإعدادات العامة للمدير &gt; .
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>يجب أن تتطابق الحقول المدرجة في CSV مع الرأس: <strong>علامة الأصول, الاسم، تاريخ الدفع، تاريخ تسجيل الدخول</strong>. سيتم تجاهل أي حقول إضافية. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>تاريخ تسجيل الدخول: تواريخ تسجيل الدخول فارغة أو مستقبلية سيتم دفع العناصر للمستخدم المقترن. باستثناء عمود تاريخ تسجيل الدخول سينشئ تاريخ تسجيل الدخول مع تاريخ التاريخ.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
-    'user_department' => 'User Department',
+    'csv_import_match_f-l' => 'حاول مطابقة المستخدمين بتنسيق firstname.lastname (jane.smith)',
+    'csv_import_match_initial_last' => 'حاول مطابقة المستخدمين عن طريق تنسيق الاسم الأخير الأول (jsmith)',
+    'csv_import_match_first' => 'حاول مطابقة المستخدمين عن طريق تنسيق الاسم الأول (يان)',
+    'csv_import_match_email' => 'حاول مطابقة المستخدمين عن طريق البريد الإلكتروني كاسم مستخدم',
+    'csv_import_match_username' => 'حاول مطابقة المستخدمين حسب اسم المستخدم',
+    'error_messages' => 'رسائل الخطأ:',
+    'success_messages' => 'رسائل النجاح',
+    'alert_details' => 'يرجى الرجوع أدناه للحصول على التفاصيل.',
+    'custom_export' => 'تصدير مخصص',
+    'mfg_warranty_lookup' => ':manufacturer حالة ضمان البحث',
+    'user_department' => 'قسم المستخدم',
 ];

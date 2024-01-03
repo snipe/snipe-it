@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Залишилось',
     'total' 			                 => 'Загалом',
     'update'                            => 'Оновити компонент',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Відзначена сума повинна бути рівною або меншою за :assigned_qty'
 );

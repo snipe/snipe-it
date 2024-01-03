@@ -498,6 +498,6 @@ return [
     'action_permission_denied' => 'Sie haben keine Berechtigung für :action :item_type ID :id',
     'action_permission_generic' => 'Sie haben keine Berechtigung für :action :item_type Id :id',
     'edit' => 'bearbeiten',
-    'action_source' => 'Action Source',
+    'action_source' => 'Aktionsquelle',
 
 ];

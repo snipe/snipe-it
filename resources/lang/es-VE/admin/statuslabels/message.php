@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Etiqueta de estado no existe.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Etiqueta de estado borrado',
     'assoc_assets'	 => 'Esta etiqueta de estado está actualmente asociado con al menos un Activo y no puede ser borrada. Por favor, actualiza tus activos para no referenciar más este estado e inténtalo de nuevo. ',
 
     'create' => [

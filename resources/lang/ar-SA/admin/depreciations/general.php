@@ -6,7 +6,7 @@ return [
     'asset_depreciations'  					=> 'استهلاك الأصول',
     'create'  					            => 'إنشاء الاستهلاك',
     'depreciation_name'  					=> 'اسم الاستهلاك',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'القيمة الأرضية للاستهلاك',
     'number_of_months'  					=> 'عدد الأشهر',
     'update'  					            => 'تحديث الاستهلاك',
     'depreciation_min'                      => 'الحد الأدنى للقيمة بعد الاستهلاك',

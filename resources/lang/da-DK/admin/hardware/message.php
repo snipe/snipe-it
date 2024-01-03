@@ -4,27 +4,27 @@ return [
 
     'undeployable' 		=> '<strong>Advarsel: </strong> Dette aktiv er blevet markeret som uudnytteligt. Hvis denne status er ændret, skal du opdatere aktivstatus.',
     'does_not_exist' 	=> 'Asset eksisterer ikke.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Dette aktiv findes ikke eller er ikke påkrævet.',
     'assoc_users'	 	=> 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
 
     'create' => [
         'error'   		=> 'Akten blev ikke oprettet, prøv igen. :(',
         'success' 		=> 'Aktivet blev oprettet med succes. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Aktiv med tag :tag blev oprettet. <strong><a href=":link" style="color: white;">Klik her for at se</a></strong>.',
     ],
 
     'update' => [
         'error'   			=> 'Akten blev ikke opdateret, prøv igen',
         'success' 			=> 'Asset opdateret med succes.',
         'nothing_updated'	=>  'Ingen felter blev valgt, så intet blev opdateret.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Ingen aktiver blev valgt, så intet blev opdateret.',
     ],
 
     'restore' => [
         'error'   		=> 'Akten blev ikke gendannet, prøv igen',
         'success' 		=> 'Asset restaureret med succes.',
         'bulk_success' 		=> 'Asset restaureret med succes.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Ingen aktiver blev valgt, så intet blev gendannet.', 
     ],
 
     'audit' => [
@@ -51,9 +51,9 @@ return [
         'success'               => 'Din fil er blevet importeret',
         'file_delete_success'   => 'Din fil er blevet slettet korrekt',
         'file_delete_error'      => 'Filen kunne ikke slettes',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Den valgte fil mangler',
+        'header_row_has_malformed_characters' => 'En eller flere attributter i overskriftsrækken indeholder misdannede UTF-8 tegn',
+        'content_row_has_malformed_characters' => 'En eller flere attributter i den første række indhold indeholder misdannede UTF-8 tegn',
     ],
 
 

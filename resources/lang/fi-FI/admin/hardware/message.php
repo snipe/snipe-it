@@ -11,7 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Laitetta ei luotu, yritä uudelleen. :(',
         'success' 		=> 'Laite luotiin onnistuneesti. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Laite tunnisteella :tag luotiin onnistuneesti. <strong><a href=":link" style="color: white;">Klikkaa tästä nähdäksesi</a></strong>.',
     ],
 
     'update' => [
@@ -52,7 +52,7 @@ return [
         'success'               => 'Tiedostosi on tuotu',
         'file_delete_success'   => 'Tiedosto on poistettu onnistuneesti',
         'file_delete_error'      => 'Tiedostoa ei voitu poistaa',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Valittu tiedosto puuttuu',
         'header_row_has_malformed_characters' => 'Yksi tai useampi otsikkorivin attribuutti sisältää epämuodostuneita UTF-8 merkkejä',
         'content_row_has_malformed_characters' => 'Yksi tai useampi ensimmäisen sisältörivin attribuutti sisältää epämuodostuneita UTF-8 merkkejä',
     ],

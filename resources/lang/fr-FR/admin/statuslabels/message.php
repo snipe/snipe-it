@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'L\'étiquette de statut n\'existe pas.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Étiquette de statut supprimée',
     'assoc_assets'	 => 'Cette étiquette de statut est actuellement associée avec au moins un bien et ne peut être supprimée. Merci de mettre à jour vos biens pour ne plus référencer ce statut et essayez à nouveau. ',
 
     'create' => [

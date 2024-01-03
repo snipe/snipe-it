@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Tilamerkintää ei löydy.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Poistettu Tilamerkintä',
     'assoc_assets'	 => 'Tilamerkintä on määritetty käyttöön yhdelle tai useammalle laitteelle joten sitä ei voida poistaa. Poista tilamerkintä käytöstä kaikilta laitteilta ja yritä uudelleen. ',
 
     'create' => [

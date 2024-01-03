@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'تم حذف ملف النسخ الاحتياطي بنجاح.',
         'generated'             => 'تم إنشاء ملف نسخ احتياطي جديد بنجاح.',
         'file_not_found'        => 'تعذر العثور على ملف النسخ الاحتياطي هذا على الملقم.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'نعم، استعادة. أقر بأن هذا سوف يستبدل أي بيانات موجودة حاليا في قاعدة البيانات. سيؤدي هذا أيضا إلى تسجيل جميع المستخدمين الحاليين (بما في ذلك أنت).',
+        'restore_confirm'       => 'هل أنت متأكد من رغبتك في استعادة قاعدة البيانات الخاصة بك من :filename؟'
     ],
     'purge' => [
         'error'     => 'حدث خطأ أثناء التطهير.',
@@ -20,27 +20,27 @@ return [
         'success'               => 'تمت إزالة السجلات المحذوفة بنجاح.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'جارٍ إرسال بريد إلكتروني تجريبي...',
+        'success' => 'تم إرسال البريد!',
+        'error' => 'تعذر إرسال البريد.',
+        'additional' => 'لم يتم توفير أي رسالة خطأ إضافية. تحقق من إعدادات البريد الخاص بك وسجل التطبيقات الخاص بك.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'اختبار اتصال LDAP ، ربط واستعلام ...',
+        '500' => '500 خطأ في الخادم. الرجاء التحقق من سجلات الخادم للحصول على مزيد من المعلومات.',
+        'error' => 'حدث خطأ ما :(',
+        'sync_success' => 'عينة من 10 مستخدمين عادت من خادم LDAP بناء على الإعدادات الخاصة بك:',
+        'testing_authentication' => 'اختبار مصادقة LDAP...',
+        'authentication_success' => 'تمت المصادقة على المستخدم ضد LDAP بنجاح!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'إرسال رسالة اختبار :app ...',
+        'success' => 'يعمل تكامل :webhook_name الخاص بك!',
+        'success_pt1' => 'نجاح! تحقق من ',
+        'success_pt2' => ' قناة لرسالة الاختبار الخاصة بك، وتأكد من النقر فوق SAVE أدناه لتخزين الإعدادات الخاصة بك.',
+        '500' => '500 خطأ في الخادم.',
+        'error' => 'حدث خطأ ما. استجاب :app :error_message',
+        'error_redirect' => 'خطأ: 301/302 :endpoint يرجع إعادة توجيه. لأسباب أمنية، نحن لا نتابع إعادة التوجيه. الرجاء استخدام نقطة النهاية الفعلية.',
+        'error_misc' => 'حدث خطأ ما. :( ',
     ]
 ];

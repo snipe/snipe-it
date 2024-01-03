@@ -3,55 +3,55 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Це поле не існує.',
+        'already_added'   => 'Поле вже додане',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Поле не створено, будь ласка, спробуйте ще раз.',
+            'success' => 'Поле успішно створено.',
+            'assoc_success' => 'Поле успішно додано до поля.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Поле не було оновлено, будь ласка, спробуйте ще раз',
+            'success' => 'Поле успішно оновлено.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Ви впевнені, що хочете видалити це поле?',
+            'error'   => 'Виникла проблема при видаленні поля. Будь ласка, спробуйте знову.',
+            'success' => 'Поле було успішно видалено.',
+            'in_use'   => 'Поле все ще використовується.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Набір полів не існує',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Набір полів не створено, будь ласка, спробуйте ще раз.',
+            'success' => 'Набір полів успішно створено.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Набір полів не було оновлено, будь ласка, спробуйте ще раз',
+            'success' => 'Набір полів успішно оновлено.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Ви впевнені, що хочете видалити цей набір полів?',
+            'error'   => 'Виникла проблема при видаленні поля. Будь ласка, спробуйте знову.',
+            'success' => 'Поля успішно видалені.',
+            'in_use'   => 'Набір полів все ще використовується.',
         )
 
     ),
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error validating default fieldset values.',
+        'error' => 'Помилка перевірки значень по замовчуванню полів.',
 
     ),
 

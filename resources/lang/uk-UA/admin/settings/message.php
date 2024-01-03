@@ -3,44 +3,44 @@
 return [
 
     'update' => [
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.',
+        'error'                 => 'При оновленні сталася помилка. ',
+        'success'               => 'Налаштування успішно оновлено.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'delete_confirm'        => 'Ви впевнені, що хочете видалити цей файл резервної копії? Цю дію неможливо скасувати. ',
+        'file_deleted'          => 'Файл резервної копії успішно видалений. ',
+        'generated'             => 'Новий файл резервної копії успішно створено.',
+        'file_not_found'        => 'Цей файл резервної копії не знайдено на сервері.',
+        'restore_warning'       => 'Так, відновити її. Я підтверджую, що це перезапише будь-які наявні дані в базі даних. Це також закриє всіх існуючих користувачів (включаючи вас).',
+        'restore_confirm'       => 'Ви дійсно бажаєте відновити базу даних з :filename?'
     ],
     'purge' => [
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.',
+        'error'     => 'Під час очищення сталася помилка. ',
+        'validation_failed'     => 'Ваша чистка підтвердження неправильна. Будь ласка, введіть слово "DELETE" у полі підтвердження.',
+        'success'               => 'Видалені записи успішно очищені.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Надсилання тестового листа...',
+        'success' => 'Повідомлення відправлено!',
+        'error' => 'Повідомлення не може бути надіслано.',
+        'additional' => 'Немає додаткового повідомлення про помилку. Перевірте налаштування пошти та журнал програми.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Тестування LDAP-підключення, Пов\'язування та запиту ...',
+        '500' => '500 помилок сервера. Будь ласка, перевірте ваші журнали сервера для отримання додаткової інформації.',
+        'error' => 'Щось пішло не так :(',
+        'sync_success' => 'Приклад 10 користувачів, які повернулися з сервера LDAP на основі ваших налаштувань:',
+        'testing_authentication' => 'Тестування авторизації LDAP...',
+        'authentication_success' => 'Користувач успішно пройшов перевірку на зв\'язку з LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Відправка :app тестове повідомлення...',
+        'success' => 'Ваша функція з інтеграцією :webhook_name!',
+        'success_pt1' => 'Успіх! Перевірте ',
+        'success_pt2' => ' канал для вашого тестового повідомлення, і будьте впевнені, що натисніть SAVE нижче, щоб зберегти свої налаштування.',
+        '500' => 'Помилка 500 сервера.',
+        'error' => 'Щось пішло не так. :app відповів(-ла) з: :error_message',
+        'error_redirect' => 'ПОМИЛКА: 301/302 :endpoint повертає редиректор. З міркувань безпеки ми не слідуємо перенаправленням. Будь ласка, використовуйте фактичну кінцеву точку.',
+        'error_misc' => 'Щось пішло не так. :( ',
     ]
 ];

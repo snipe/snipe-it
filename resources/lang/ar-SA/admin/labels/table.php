@@ -2,7 +2,7 @@
 
 return [
 
-    'labels_per_page'    => 'Labels',
+    'labels_per_page'    => 'التسميات',
     'support_fields'     => 'حقول',
     'support_asset_tag'  => 'الترميز',
     'support_1d_barcode' => '1D',

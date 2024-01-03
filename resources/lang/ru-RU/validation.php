@@ -96,7 +96,7 @@ return [
     'url'                  => 'Неправильный формат :attribute.',
     'unique_undeleted'     => 'Свойство :attribute должно быть уникальным.',
     'non_circular'         => ':attribute не должен создавать циклическую ссылку.',
-    'not_array'            => ':Attribute не может быть массивом.',
+    'not_array'            => ':atribute harus array.',
     'disallow_same_pwd_as_user_fields' => 'Пароль не может совпадать с именем пользователя.',
     'letters'              => 'Пароль должен содержать хотя бы одну букву.',
     'numbers'              => 'Пароль должен содержать хотя бы одну цифру.',

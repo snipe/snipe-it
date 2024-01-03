@@ -2,9 +2,9 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Poistettu assettimalli',
     'does_not_exist' => 'Malli ei löydy.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association' => 'VAROITUS! Omaisuusmalli tälle tuotteelle on virheellinen tai puuttuu!',
     'no_association_fix' => 'Tämä tulee rikkomaam asioita oudoilla ja kauhistuttavilla tavoilla. Muokkaa tätä laitetta nyt määrittääksesi sille mallin.',
     'assoc_users'	 => 'Tämä malli on käytössä yhdellä tai useammalla laitteella joten sitä ei voida poistaa. Poista malli käytöstä kaikilta laitteilta ja yritä uudelleen. ',
 

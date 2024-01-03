@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Příslušenství [:id] neexistuje.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Toto příslušenství nebylo nalezeno.',
     'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
     'create' => array(

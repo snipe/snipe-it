@@ -8,7 +8,7 @@ return array(
     'user_exists'               => 'Użytkownik już istnieje!',
     'user_not_found'            => 'Użytkownik nie istnieje.',
     'user_login_required'       => 'Pole login jest wymagane',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Brak aktywów aktualnie przypisanych do użytkownika.',
     'user_password_required'    => 'Pole hasło jest wymagane.',
     'insufficient_permissions'  => 'Brak uprawnień.',
     'user_deleted_warning'      => 'Ten użytkownik został usunięty. Musisz przywrócić tego użytkownika aby je wyedytować lub przypisać je do nowych aktywów.',

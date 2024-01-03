@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Το αναλώσιμο δεν έχει ελεγχθεί, δοκιμάστε ξανά',
         'success' 		=> 'Το αναλώσιμο ελεγχόταν με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Δεν υπάρχουν αρκετά αναλώσιμα για αυτήν την παραγγελία. Παρακαλώ ελέγξτε την ποσότητα που απομένει. ',
     ),
 
     'checkin' => array(

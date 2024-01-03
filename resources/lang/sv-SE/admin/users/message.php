@@ -8,7 +8,7 @@ return array(
     'user_exists'               => 'Användaren existerar redan!',
     'user_not_found'            => 'Användaren finns inte.',
     'user_login_required'       => 'Inloggningsfältet krävs',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Inga tillgångar som för närvarande tilldelats användaren.',
     'user_password_required'    => 'Lösenordet krävs.',
     'insufficient_permissions'  => 'Otillräckliga tillstånd.',
     'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera dem eller tilldela dem nya tillgångar.',

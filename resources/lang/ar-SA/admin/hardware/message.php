@@ -10,7 +10,7 @@ return [
     'create' => [
         'error'   		=> 'لم يتم إنشاء الأصل، يرجى إعادة المحاولة. :(',
         'success' 		=> 'تم إنشاء الأصل بنجاح. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'تم إنشاء الأصل مع العلامة :tag بنجاح. <strong><a href=":link" style="color: white;">انقر هنا لعرض</a></strong>.',
     ],
 
     'update' => [
@@ -51,9 +51,9 @@ return [
         'success'               => 'تم استيراد الملف الخاص بك',
         'file_delete_success'   => 'تم حذف ملفك بنجاح',
         'file_delete_error'      => 'تعذر حذف الملف',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'الملف المحدد مفقود',
+        'header_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الترويجي تحتوي على أحرف UTF-8 سيئة',
+        'content_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الأول من المحتوى تحتوي على أحرف UTF-8 سيئة',
     ],
 
 

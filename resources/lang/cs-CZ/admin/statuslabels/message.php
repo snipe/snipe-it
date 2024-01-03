@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Stavový štítek neexistuje.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Odstraněný název stavu',
     'assoc_assets'	 => 'Tento stavový štítek je právě přiřazena alespoň k jednomu modelu majetku a nemůže tak být odstraněn. Odeberte jeho vazbu z patřičných modelů a akci opakujte. ',
 
     'create' => [

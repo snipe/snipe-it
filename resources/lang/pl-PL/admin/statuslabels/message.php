@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Status etykiety nie istnieje.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Usunięta etykieta statusu',
     'assoc_assets'	 => 'Status etykiety jest skojarzony z minimum jednym aktywem i nie może być usunięty. Uaktualnij aktywa tak aby nie było relacji z tym statusem i spróbuj ponownie. ',
 
     'create' => [

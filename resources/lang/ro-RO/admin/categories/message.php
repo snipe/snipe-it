@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'Categoria nu a fost actualizata, va rugam incercati iar',
         'success' => 'Categoria a fost actualizata.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Nu puteți schimba tipul categoriei odată ce a fost creat',
     ),
 
     'delete' => array(

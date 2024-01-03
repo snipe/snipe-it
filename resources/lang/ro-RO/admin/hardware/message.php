@@ -10,21 +10,21 @@ return [
     'create' => [
         'error'   		=> 'Activul nu a fost creat, va rugam incercati iar. :(',
         'success' 		=> 'Activul a fost creat. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Activul cu tag-ul :tag a fost creat cu succes. <strong><a href=":link" style="color: white;">Click aici pentru a vizualiza</a></strong>.',
     ],
 
     'update' => [
         'error'   			=> 'Activul nu a fost actualizat, va rugam incercati iar',
         'success' 			=> 'Activul a fost actualizat.',
         'nothing_updated'	=>  'Nu au fost selectate câmpuri, deci nimic nu a fost actualizat.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Nu au fost selectate active, deci nimic nu a fost actualizat.',
     ],
 
     'restore' => [
         'error'   		=> 'Asset nu a fost restaurat, încercați din nou',
         'success' 		=> 'Activul a fost restaurat cu succes.',
         'bulk_success' 		=> 'Activul a fost restaurat cu succes.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Nu au fost selectate active, deci nimic nu a fost restaurat.', 
     ],
 
     'audit' => [
@@ -51,9 +51,9 @@ return [
         'success'               => 'Fișierul dvs. a fost importat',
         'file_delete_success'   => 'Fișierul dvs. a fost șters cu succes',
         'file_delete_error'      => 'Fișierul nu a putut fi șters',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Fișierul selectat lipsește',
+        'header_row_has_malformed_characters' => 'Unul sau mai multe atribute din rândul de antet conțin caractere UTF-8 incorecte',
+        'content_row_has_malformed_characters' => 'Unul sau mai multe atribute din primul rând de conținut conțin caractere UTF-8 formatate incorect',
     ],
 
 

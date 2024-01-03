@@ -2,89 +2,89 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Попередження: </strong> цей актив позначено як такий, що наразі неможливо розгорнути.
+                         Якщо цей статус змінився, оновіть статус активу.',
+    'does_not_exist' 	=> 'Медіафайл не існує.',
+    'does_not_exist_or_not_requestable' => 'Цей актив не існує або його не можна запитувати.',
+    'assoc_users'	 	=> 'Цей актив в даний час відмічений користувачу і не може бути видалений. Спочатку перевірте активи, а потім спробуйте видалити знову. ',
 
     'create' => [
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'error'   		=> 'Актив не був створений, будь ласка, спробуйте ще раз :(',
+        'success' 		=> 'Актив успішно створений. :)',
+        'success_linked' => 'Активу з тегом :tag було успішно створено. <strong><a href=":link" style="color: white;">Натисніть тут, щоб переглянути</a></strong>.',
     ],
 
     'update' => [
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'error'   			=> 'Актив не був оновлений, будь ласка, спробуйте ще раз',
+        'success' 			=> 'Актив успішно оновлено.',
+        'nothing_updated'	=>  'Не було обрано жодного поля, тому нічого не було оновлено.',
+        'no_assets_selected'  =>  'Не було обрано медіафайли, тому нічого не було змінено.',
     ],
 
     'restore' => [
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'error'   		=> 'Актив не був відновлений, будь ласка, спробуйте ще раз',
+        'success' 		=> 'Актив успішно відновлено.',
+        'bulk_success' 		=> 'Актив успішно відновлено.',
+        'nothing_updated'   => 'Медіафайли не були вибрані, тому нічого не було відновлено.', 
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.',
+        'error'   		=> 'Помилка аудиту активу. Будь ласка, спробуйте ще раз.',
+        'success' 		=> 'Активу успішно зараховано журнал.',
     ],
 
 
     'deletefile' => [
-        'error'   => 'File not deleted. Please try again.',
+        'error'   => 'Файл не видалено. Будь ласка, спробуйте ще раз.',
         'success' => 'Файл успішно видалено.',
     ],
 
     'upload' => [
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Файл(и) не завантажено. Повторіть спробу.',
+        'success' => 'Файл(и) успішно завантажено.',
+        'nofiles' => 'Ви не обрали жодного файлу для завантаження, або завеликий файл',
+        'invalidfiles' => 'Один або кілька ваших файлів завеликий або є файловим типом, який не допускається. Дозволені типи файлів - png, gif, jpg, doc, docx, pdf, і txt.',
     ],
 
     'import' => [
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => 'Your file has been imported',
-        'file_delete_success'   => 'Your file has been been successfully deleted',
-        'file_delete_error'      => 'The file was unable to be deleted',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'error'                 => 'Деякі елементи не імпортовано належним чином.',
+        'errorDetail'           => 'Наступні елементи не були імпортовані через помилки.',
+        'success'               => 'Ваш файл імпортовано',
+        'file_delete_success'   => 'Ваш файл успішно вилучено',
+        'file_delete_error'      => 'Файл не може бути видалений',
+        'file_missing' => 'Відсутній файл',
+        'header_row_has_malformed_characters' => 'Один або кілька атрибутів у рядку заголовка містять невірні символи UTF-8',
+        'content_row_has_malformed_characters' => 'Один або кілька атрибутів у першому рядку вмісту містять неправильні символи UTF-8',
     ],
 
 
     'delete' => [
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.',
+        'confirm'   	=> 'Ви впевнені, що хочете видалити цей медіафайл?',
+        'error'   		=> 'Виникла проблема при видаленні активу. Будь ласка, спробуйте ще раз.',
+        'nothing_updated'   => 'Активи не були вибрані, тому нічого не було видалено.',
+        'success' 		=> 'Актив успішно видалений.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
+        'error'   		=> 'Актив не був перевірений, будь ласка, спробуйте ще раз',
+        'success' 		=> 'Актив успішно перевірено.',
         'user_does_not_exist' => 'Невірний користувач. Спробуйте ще раз.',
-        'not_available' => 'That asset is not available for checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list',
+        'not_available' => 'Цей актив недоступний для оформлення!',
+        'no_assets_selected' => 'Ви повинні вибрати хоча б один медіафайл зі списку',
     ],
 
     'checkin' => [
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
+        'error'   		=> 'Актив не був перевірений, будь ласка, спробуйте ще раз',
+        'success' 		=> 'Актив успішно перевірено.',
         'user_does_not_exist' => 'Вказаного користувача не існує. Спробуйте ще раз.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Цей актив вже перевіряється.',
 
     ],
 
     'requests' => [
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled',
+        'error'   		=> 'Актив не був запитаний, будь ласка, спробуйте ще раз',
+        'success' 		=> 'Актив успішно запитаний.',
+        'canceled'      => 'Запит на оформлення замовлення успішно скасовано',
     ],
 
 ];

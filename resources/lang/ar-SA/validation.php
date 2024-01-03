@@ -43,14 +43,14 @@ return [
     'file'                 => 'يجب أن تكون :attribute ملف.',
     'filled'               => 'يجب أن يحتوي :attribute على قيمة.',
     'image'                => 'يجب أن تكون :attribute صورة.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'لا يمكن أن تكون قيمة :fieldname فارغة.',
     'in'                   => ':attribute المحدد غير صالح.',
     'in_array'             => ':attribute غير موجود في :other.',
     'integer'              => 'يجب أن تكون :attribute عدد صحيح.',
     'ip'                   => 'يجب أن تكون :attribute عنوان IP صالحا.',
     'ipv4'                 => 'يجب أن تكون :attribute عنوان IPv4 صالحا.',
     'ipv6'                 => 'يجب أن تكون :attribute عنوان IPv6 صالح.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => 'يجب أن يكون :attribute فريداً في موقع الشركة هذا',
     'json'                 => 'يجب أن يكون :attribute نص جسون JSON صالح.',
     'max'                  => [
         'numeric' => 'يجب ان يكون :attribute أكبر من :max.',
@@ -66,8 +66,8 @@ return [
         'string'  => 'يجب أن يكون :attribute على الأقل :min من الاحرف.',
         'array'   => 'يجب أن تحتوي :attribute على الأقل :min من العناصر.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'starts_with'          => 'يجب أن تبدأ خانة :attribute بواحد مما يلي: :values.',
+    'ends_with'            => 'يجب أن تنتهي خانة :attribute بواحد مما يلي: :values.',
 
     'not_in'               => ':attribute المحدد غير صالح.',
     'numeric'              => 'يجب أن يكون :attribute رقما.',
@@ -90,20 +90,20 @@ return [
     ],
     'string'               => 'يجب أن يكون :attribute عبارة عن سلسلة نصية.',
     'timezone'             => 'يجب أن يكون :attribute منطقة صالحة.',
-    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
+    'two_column_unique_undeleted' => ':attribute يجب أن يكون فريداً عبر :table1 و :table2. ',
     'unique'               => 'لقد تم أخذ :attribute مسبقا.',
     'uploaded'             => 'لقد فشل تحميل :attribute.',
     'url'                  => 'ان تنسيق :attribute غير صالح.',
     'unique_undeleted'     => ':attribute يجب ان تكون فريدة.',
     'non_circular'         => 'يجب ألا تنشئ السمة مرجعًا دائريًا.',
-    'not_array'            => 'The :attribute field cannot be an array.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'not_array'            => ':atribute harus array.',
+    'disallow_same_pwd_as_user_fields' => 'كلمة المرور لا يمكن أن تكون نفس اسم المستخدم.',
+    'letters'              => 'يجب أن تحتوي كلمة المرور على حرف واحد على الأقل.',
+    'numbers'              => 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.',
+    'case_diff'            => 'كلمة المرور يجب أن تستخدم حالة مختلطة.',
+    'symbols'              => 'يجب أن تحتوي كلمة المرور على رموز.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'لا يمكن أن تكون القيمة سالبة'
     ],
 
 
@@ -128,13 +128,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => 'يجب أن يكون :attribute تاريخ صالح بتنسيق YYY-MM-DD',
+        'last_audit_date.date_format'   =>  'يجب أن يكون :attribute تاريخًا صحيحًا في تنسيق YYY-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  'يجب أن يكون :attribute تاريخ صالح بتنسيق YYY-MM-DD',
+        'termination_date.date_format'  =>  'يجب أن يكون :attribute تاريخ صالح بتنسيق YYY-MM-DD',
+        'expected_checkin.date_format'  =>  'يجب أن يكون :attribute تاريخ صالح بتنسيق YYY-MM-DD',
+        'start_date.date_format'        =>  'يجب أن يكون :attribute تاريخ صالح بتنسيق YYY-MM-DD',
+        'end_date.date_format'          =>  'يجب أن يكون :attribute تاريخ صالح بتنسيق YYY-MM-DD',
 
     ],
 

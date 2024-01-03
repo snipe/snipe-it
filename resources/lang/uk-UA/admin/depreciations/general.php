@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create'  					            => 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'about_asset_depreciations'  			=> 'Про амортизації активів',
+    'about_depreciations'  					=> 'Ви можете встановити амортизацію активів для знецінення активів, заснованих на амортизації прямої лінії.',
+    'asset_depreciations'  					=> 'Амортизація Активу',
+    'create'  					            => 'Створити амортизацію',
+    'depreciation_name'  					=> 'Назва амортизації',
+    'depreciation_min'                      => 'Поверхне значення амортизації',
     'number_of_months'  					=> 'Кількість місяців',
-    'update'  					            => 'Update Depreciation',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'update'  					            => 'Оновити амортизацію',
+    'depreciation_min'                      => 'Мінімальне значення після амортизації',
+    'no_depreciations_warning'               => '<strong>Попередження: </strong>
+                       Наразі у вас не налаштовано амортизацію.
+                       Налаштуйте принаймні одну амортизацію, щоб переглянути звіт про амортизацію.',
 ];

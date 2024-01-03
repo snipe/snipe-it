@@ -15,7 +15,7 @@ return array(
 
     "password" => "Parolele trebuie sa fie de cel putin 6 caractere si sa fie la fel ca si confirmarea.",
     "user"     => "Utilizator sau e-mail gresit",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Acest token de resetare a parolei este invalid sau expirat sau nu se potrivește cu numele de utilizator furnizat.',
+    'sent'	   => 'Dacă în sistemul nostru există un utilizator care se potrivește cu o adresă de e-mail validă, a fost trimis un e-mail de recuperare a parolei.',
 
 );

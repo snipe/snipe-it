@@ -9,7 +9,7 @@ return array(
     'deny'  				=> 'បដិសេធ',
     'email'      			=> 'Email',
     'employee_num'      	=> 'Employee No.',
-    'first_name' 			=> 'First Name',
+    'first_name' 			=> 'នាមខ្លួន',
     'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
@@ -35,6 +35,6 @@ return array(
     'username' 				=> 'Username',
 	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
-    'cloneuser'             => 'Clone User',
+    'cloneuser'             => 'ក្លូន អ្នកប្រើប្រាស់',
     'viewusers' 			=> 'View Users',
 );

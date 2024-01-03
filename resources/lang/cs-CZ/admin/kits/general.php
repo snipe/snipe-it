@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Příslušenství úspěšně odpojeno',
     'accessory_error'                   => 'Příslušenství již je připojené k sadě',
     'accessory_deleted'                 => 'Smazání bylo úspěšné',
-    'accessory_none'                    => 'Příslušenství neexistuje',
+    'accessory_none'                    => 'Doplněk neexistuje',
     'checkout_success'                  => 'Vydání proběhlo úspěšně',
     'checkout_error'                    => 'Chyba vydání',
     'kit_none'                          => 'Kit neexistuje',

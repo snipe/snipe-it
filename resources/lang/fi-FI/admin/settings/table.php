@@ -2,5 +2,5 @@
 
 return array(
     'created'   => 'Luontiaika',
-    'size' => 'Size',
+    'size' => 'Koko',
 );

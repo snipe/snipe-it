@@ -2,5 +2,5 @@
 
 return array(
     'created'   => 'Creat la',
-    'size' => 'Size',
+    'size' => 'Dimensiune',
 );

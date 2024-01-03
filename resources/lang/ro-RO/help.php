@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mai multe',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Bifând această casetă va edita înregistrarea activului pentru a reflecta această nouă locație. Dacă nu bifați această căsuță, pur și simplu rețineți locația în jurnalul de audit.<br><br>Reţineţi că în cazul în care acest element este bifat, nu va schimba locația persoanei, a activului sau a locației în care este verificată.',
 
     'assets' => 'Activele sunt elemente urmărite prin numărul de serie sau eticheta de activ. Ele tind să fie elemente de valoare mai mare în cazul în care identificarea unui anumit element contează.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Poti sa setezi deprecierea activelor bazat pe depreciere in linie.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Importatorul detectează că acest fișier este gol.'
 ];

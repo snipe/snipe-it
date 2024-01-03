@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'personal_api_keys' => 'Personal API Keys',
-    'api_key_warning' => 'When generating an API token, be sure to copy it down immediately as they
-                    will not be visible to you again.',
-    'api_base_url' => 'Your API base url is located at:',
+    'personal_api_keys' => 'Chei API personale',
+    'api_key_warning' => 'La generarea unui token API, asigurați-vă că îl copiați imediat deoarece
+                    nu va mai fi vizibil pentru dvs. din nou.',
+    'api_base_url' => 'URL-ul de bază API este localizat la:',
     'api_base_url_endpoint' => '/&lt;endpoint&gt;',
-    'api_token_expiration_time' => 'API tokens are set to expire in:',
-    'api_reference' => 'Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to
-                    find specific API endpoints and additional API documentation.',
+    'api_token_expiration_time' => 'Token-urile API sunt setate să expire în:',
+    'api_reference' => 'Vă rugăm să verificați <a href="https://snipe-it.readme.io/reference" target="_blank">referința API</a> la
+                    pentru a găsi criterii specifice API și documentație API adițională.',
 );

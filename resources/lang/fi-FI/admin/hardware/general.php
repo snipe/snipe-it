@@ -12,7 +12,7 @@ return [
     'clone'  					=> 'Monista laite',
     'deployable'  				=> 'Käyttöönotettavissa',
     'deleted'  					=> 'Tämä laite on poistettu.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => 'Oletko varma, että haluat poistaa tämän laitteen?',
     'edit'  					=> 'Muokkaa laitetta',
     'model_deleted'  			=> 'Laitemalli on poistettu. Voit palauttaa laitteen kun olet ensin palauttanut poistetun laitemallin.',
     'model_invalid'             => 'Tämän laitteen malli on virheellinen.',
@@ -45,6 +45,6 @@ return [
     'success_messages' => 'Onnistuneet:',
     'alert_details' => 'Tarkempia tietoja on alla.',
     'custom_export' => 'Mukautettu vienti',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
-    'user_department' => 'User Department',
+    'mfg_warranty_lookup' => ':manufacturer Takuu Status Lookup',
+    'user_department' => 'Käyttäjän Osasto',
 ];

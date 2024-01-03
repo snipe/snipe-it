@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Statuslabel bestaat niet.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Verwijderd status label',
     'assoc_assets'	 => 'Dit statuslabel is tenminste met één asset gekoppeld en kan niet verwijderd worden. Zorg ervoor dat assets geen gebruik maken van dit statuslabel en probeer het nogmaals. ',
 
     'create' => [

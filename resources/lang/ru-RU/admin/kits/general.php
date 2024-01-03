@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Аксессуар успешно отсоединен',
     'accessory_error'                   => 'Аксессуар уже прикреплен к комплекту',
     'accessory_deleted'                 => 'Удаление прошло успешно',
-    'accessory_none'                    => 'Аксессуар не существует',
+    'accessory_none'                    => 'Аксесуар не существует',
     'checkout_success'                  => 'Выдача успешна',
     'checkout_error'                    => 'Ошибка выдачи',
     'kit_none'                          => 'Комплекта не существует',

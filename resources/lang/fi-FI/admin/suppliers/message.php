@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Poistettu toimittaja',
     'does_not_exist' => 'Toimittajaa ei löydy.',
 
 

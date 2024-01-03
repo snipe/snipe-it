@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'ステータス ラベルは存在しません。',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'ステータスラベルを削除しました',
     'assoc_assets'	 => 'このステータスラベルは少なくとも一つの資産に関連付けされているため、削除できません。資産の関連付けを削除し、もう一度試して下さい。 ',
 
     'create' => [

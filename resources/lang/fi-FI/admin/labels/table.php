@@ -2,7 +2,7 @@
 
 return [
 
-    'labels_per_page'    => 'Labels',
+    'labels_per_page'    => 'Tunnisteet',
     'support_fields'     => 'Kentät',
     'support_asset_tag'  => 'Tunniste',
     'support_1d_barcode' => '1D',

@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => '削除されたサプライヤー',
     'does_not_exist' => '仕入先が存在していません。',
 
 

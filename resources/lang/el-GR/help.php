@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Περισσότερες Πληροφορίες',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Ενεργοποιώντας αυτό το πλαίσιο θα επεξεργαστείτε την εγγραφή στοιχείων για να αντικατοπτρίζετε αυτή τη νέα θέση. Αν αφήσετε ανεξέλεγκτη θα σημειώσετε απλά την τοποθεσία στο αρχείο καταγραφής ελέγχων.<br><br>Σημειώστε ότι αν αυτό το στοιχείο έχει ελεγχθεί, δεν θα αλλάξει τη θέση του προσώπου, του περιουσιακού στοιχείου ή της τοποθεσίας στο οποίο έχει ελεγχθεί.',
 
     'assets' => 'Τα στοιχεία ενεργητικού είναι στοιχεία που παρακολουθούνται με αύξοντα αριθμό ή ετικέτα στοιχείων. Έχουν την τάση να είναι στοιχεία υψηλότερης αξίας, όπου ο εντοπισμός ενός συγκεκριμένου στοιχείου έχει σημασία.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Μπορείτε να ορίσετε αποσβέσεις του περιουσιακού στοιχείου προκειμένου να γίνει απόσβεση περιουσιακών στοιχείων βάσει σταθερής απόσβεσης.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Ο εισαγωγέας ανιχνεύει ότι αυτό το αρχείο είναι κενό.'
 ];

@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Цей обліковий запис не активовано.',
     'account_suspended'      => 'Дію цього аккаунта призупинено.',
     'account_banned'         => 'Цей аккаунт заблоковано.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Занадто багато невдалих спроб входу в систему. Будь ласка, спробуйте ще раз через :minutes хвилин.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
+        'already_enrolled'      => 'Пристрій вже зареєстровано.',
         'success'               => 'Ви успішно увійшли в систему.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'code_required'         => 'Необхідно вказати двофакторний код.',
+        'invalid_code'          => 'Двофакторний код невірний.',
     ),
 
     'signin' => array(
@@ -22,7 +22,7 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'error'   => 'Під час спроби виходу з облікового запису сталася помилка. Будь ласка, спробуйте ще раз.',
         'success' => 'Ви успішно вийшли з системи.',
     ),
 
@@ -32,12 +32,12 @@ return array(
     ),
 
     'forgot-password' => array(
-        'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'error'   => 'Сталася помилка під час спроби отримати код для скидання паролю. Будь ласка, спробуйте ще раз.',
+        'success' => 'Якщо ця адреса електронної пошти існує в нашій системі, то лист з відновлення пароля було надіслано.',
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'There was a problem while trying to reset your password, please try again.',
+        'error'   => 'Виникла проблема при зміні пароля, будь ласка, спробуйте ще раз.',
         'success' => 'Ваш пароль успішно скинуто.',
     ),
 

@@ -34,13 +34,13 @@ return [
         'authentication_success' => 'Uživatel byl úspěšně ověřen přes LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
+        'sending' => 'Odesílání testovací zprávy :app...',
+        'success' => 'Vaše integrace :webhook_name funguje!',
         'success_pt1' => 'Úspěšně! Zkontrolujte ',
         'success_pt2' => ' kanál pro vaši testovací zprávu a ujistěte se, že klepněte na tlačítko ULOŽIT pro uložení nastavení.',
         '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error' => 'Něco se pokazilo. :app odpověděla v: :error_message',
+        'error_redirect' => 'CHYBA: 301/302 :endpoint vrací přesměrování. Z bezpečnostních důvodů nesledujeme přesměrování. Použijte prosím skutečný koncový bod.',
         'error_misc' => 'Něco se nepovedlo.',
     ]
 ];

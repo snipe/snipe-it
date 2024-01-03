@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Oheistarviketta [:id] ei ole.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Tätä lisävarustetta ei löytynyt.',
     'assoc_users'	 => 'Oheistarviketta on tällä hetkellä luovutettuna :count nimikettä käyttäjille. Tarkista oheistarvikkeiden tila ja yritä uudelleen. ',
 
     'create' => array(

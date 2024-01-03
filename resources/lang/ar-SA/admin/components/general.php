@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'المتبقية',
     'total' 			                 => 'المجموع',
     'update'                            => 'تحديث مكون',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'يجب أن يكون المبلغ المدخل مساوياً أو أقل من :assigned_Qty'
 );

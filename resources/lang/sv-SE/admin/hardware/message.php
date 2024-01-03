@@ -10,7 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Tillgången skapades inte, försök igen. :(',
         'success' 		=> 'Asset skapades framgångsrikt. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Tillgången med taggen :tag har skapats. <strong><a href=":link" style="color: white;">Klicka här för att se</a></strong>.',
     ],
 
     'update' => [

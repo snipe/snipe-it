@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Compania nu există.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Firmă ștearsă',
     'assoc_users'    => 'Această companie este în prezent asociată cu cel puțin un model și nu poate fi ștearsă. Actualizați-vă modelele pentru a nu mai referi această companie și încercați din nou.',
     'create' => [
         'error'   => 'Compania nu a fost creată, încercați din nou.',

@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Oheistarvike poistettu',
     'accessory_error'                   => 'Oheistarvike on jo sarjassa',
     'accessory_deleted'                 => 'Poisto oli onnistunut',
-    'accessory_none'                    => 'Oheistarviketta ei ole olemassa',
+    'accessory_none'                    => 'Lisävarustetta ei ole olemassa',
     'checkout_success'                  => 'Luovutus onnistui',
     'checkout_error'                    => 'Virhe luovuttamisessa',
     'kit_none'                          => 'Sarjaa ei ole olemassa',

@@ -156,7 +156,7 @@ return [
     'image_filetypes_help'  => 'Os tipos de arquivo aceitos são jpg, webp, png, gif e svg. O tamanho máximo de upload permitido é :tamanho.',
     'unaccepted_image_type'  => 'Este arquivo de imagem não é legível. Tipos de arquivos aceitos são jpg, webp, png, gif e svg. O mimetype deste arquivo é: :mimetype.',
     'import'         	    => 'Importar',
-    'import_this_file'      => 'Map fields and process this file',
+    'import_this_file'      => 'Mapear os campos e processar este arquivo',
     'importing'         	=> 'Importando',
     'importing_help'        => 'Você pode importar ativos, acessórios, licenças, componentes, consumíveis e usuários via arquivo CSV. <br><br>O CSV deve ser delimitado por vírgula e formatado com cabeçalhos que correspondem aos dos <a href="https://snipe-it.readme.io/docs/importing" target="_new">CSVs de amostra na documentação</a>.',
     'import-history'        => 'Importar Histórico',
@@ -499,6 +499,6 @@ Resultados da Sincronização',
     'action_permission_denied' => 'Você não tem permissão para :action :item_type ID :id',
     'action_permission_generic' => 'Você não tem permissão para :action este :item_type',
     'edit' => 'editar',
-    'action_source' => 'Action Source',
+    'action_source' => 'Fonte da Ação',
 
 ];

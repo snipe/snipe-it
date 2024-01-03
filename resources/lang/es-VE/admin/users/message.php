@@ -8,15 +8,15 @@ return array(
     'user_exists'               => '¡El usuario ya existe!',
     'user_not_found'            => 'El usuario no existe.',
     'user_login_required'       => 'El campo de usuario es obligatorio',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'No hay activos asignados al usuario.',
     'user_password_required'    => 'La contraseña es obligatoria.',
     'insufficient_permissions'  => 'Permisos insuficientes.',
     'user_deleted_warning'      => 'Este usuario ha sido eliminado. Deberás restaurar este usuario para editarlo o asignarle nuevos activos.',
     'ldap_not_configured'        => 'La integración LDAP no ha sido configurada para esta instalación.',
-    'password_resets_sent'      => 'A los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida se les ha enviado un enlace de restablecimiento de contraseña.',
-    'password_reset_sent'       => '¡Se ha enviado un enlace de restablecimiento de contraseña a :email!',
+    'password_resets_sent'      => 'Los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida han sido enviados un enlace de restablecimiento de contraseña.',
+    'password_reset_sent'       => 'Un enlace para restablecer la contraseña ha sido enviado a :email!',
     'user_has_no_email'         => 'Este usuario no tiene una dirección de correo electrónico en su perfil.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'log_record_not_found'        => 'No se pudo encontrar un registro de registro coincidente para este usuario.',
 
 
     'success' => array(

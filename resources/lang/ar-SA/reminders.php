@@ -15,7 +15,7 @@ return array(
 
     "password" => "كلمة المرور يجب أن تتكون من ستة خانات وتكون متطابقة مع خانة التأكيد.",
     "user"     => "إسم المستخدم أو كلمة المرور غير صحيحة",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'رمز إعادة تعيين كلمة المرور هذا غير صالح أو انتهت صلاحيته، أو لا يتطابق مع اسم المستخدم المقدم.',
+    'sent'	   => 'إذا كان هناك مستخدم مطابق له عنوان بريد إلكتروني صالح في نظامنا، تم إرسال بريد إلكتروني لاسترداد كلمة المرور.',
 
 );

@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Η ομάδα υπάρχει ήδη!',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => 'Αναγνωριστικό ομάδας: id δεν υπάρχει.',
     'group_name_required' => 'Το όνομα του πεδίου είναι απαραίτητο',
 
     'success' => array(

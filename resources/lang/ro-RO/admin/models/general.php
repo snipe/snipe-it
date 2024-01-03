@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Acest model a fost șters.',
     'bulk_delete'               => 'Stergere in masa a modelelor de echipamente',
     'bulk_delete_help'               => 'Utilizați casetele de selectare de mai jos pentru a confirma ștergerea modelelor de echipamente selectate. Modelele care au echipamente asociate cu acestea nu pot fi șterse până când activele nu sunt asociate cu un alt model.',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'Sunteți pe cale să ștergeți un model de activ.<unk> Urmează să ștergeți modelele de active :model_count',
     'restore'                   => 'Restaurare model',
     'requestable'               => 'Utilizatorii pot solicita acest model',
 	'show_mac_address'			      => 'Arata campul Adresa MAC in acest model',

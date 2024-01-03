@@ -35,12 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => ':app テストメッセージを送信しています...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'あなたの:webhook_name連携は動作します！',
         'success_pt1' => 'チェックに成功 ',
         'success_pt2' => ' テストメッセージのチャンネルで、設定を保存するには以下の「SAVE」をクリックしてください。',
         '500' => '500 Server Error.',
         'error' => '問題が発生しました。:app 応答: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'エラー: 301/302 :endpoint はリダイレクトを返します。セキュリティ上の理由から、リダイレクトには従いません。実際のエンドポイントを使用してください。',
         'error_misc' => '問題が発生しました。:( ',
     ]
 ];

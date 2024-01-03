@@ -9,7 +9,7 @@ return array(
     'assoc_users'	 => 'Esta licencia está actualmente asignada a un usuario y no puede ser borrada. Por favor, revisa la licencia primero y luego intenta borrarla. ',
     'select_asset_or_person' => 'Debes seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count plazas disponibles',
 
 
     'create' => array(
@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Hubo un problema asignando la licencia. Por favor, inténtelo de nuevo.',
         'success' => 'La licencia fue asignada con éxito',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'No hay suficientes asientos de licencia disponibles para la compra',
     ),
 
     'checkin' => array(

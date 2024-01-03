@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Email de suport',
     'support_phone'   		=> 'Telefon suport',
     'support_url'   		=> 'URL de asistență',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'Căutare URL garant',
     'update'				=> 'Actualizeaza producator',
     'url'   				=> 'URL-',
 

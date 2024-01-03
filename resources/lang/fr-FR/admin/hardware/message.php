@@ -11,7 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Ce bien n\'a pas été créé, veuillez réessayer. :(',
         'success' 		=> 'Bien créé correctement. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'L\'actif avec le tag :tag a été créé avec succès. <strong><a href=":link" style="color: white;">Cliquez ici pour voir</a></strong>.',
     ],
 
     'update' => [

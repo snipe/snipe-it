@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Více informací',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Zaškrtnutím tohoto políčka upravíte záznam majetku tak, aby odrážel toto nové umístění. Ponecháním nezaškrtnutého políčka bude jednoduše zaznamenána umístění v protokolu auditu.<br><br>Všimněte si, že pokud je tento majetek odzkoušen, nezmění umístění osoby, majetku nebo umístění, na které je odeslán.',
 
     'assets' => 'Majetky jsou položky sledované sériovým nebo inventárním čísle,. Bývají u položek, které mají vyšší hodnotu a kde je důležitá identifikace.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Můžete nastavit amortizaci majetku pro jeho rovnoměrné odepisování.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Dovozce zjistí, že tento soubor je prázdný.'
 ];

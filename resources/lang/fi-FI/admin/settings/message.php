@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Varmuuskopiotiedosto on poistettu onnistuneesti.',
         'generated'             => 'Uusi varmuuskopiotiedosto luotiin onnistuneesti.',
         'file_not_found'        => 'Tätä varmuuskopiotiedostoa ei löytynyt palvelimelta.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Kyllä, palauttaa sen. Ymmärrän, että tämä korvaa kaikki olemassa olevat tiedot tietokannassa. Tämä myös kirjautuu ulos kaikista nykyisistä käyttäjistä (mukaan lukien sinä).',
+        'restore_confirm'       => 'Oletko varma, että haluat palauttaa tietokannan :filename?'
     ],
     'purge' => [
         'error'     => 'Virhe on ilmennyt puhdistuksen aikana.',
@@ -20,27 +20,27 @@ return [
         'success'               => 'Poistetut tietueet puhdistettu onnistuneesti.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Lähetetään Testiviestiä...',
+        'success' => 'Sähköposti lähetetty!',
+        'error' => 'Sähköpostia ei voitu lähettää.',
+        'additional' => 'Lisävirheilmoitusta ei annettu. Tarkista sähköpostiasetuksesi ja sovelluslokisi.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Testataan Ldap-yhteyttä, Sidotetaan & Kysely...',
+        '500' => 'Palvelimen virhe. Tarkista palvelimen lokitiedot saadaksesi lisätietoja.',
+        'error' => 'Jokin meni pieleen :(',
+        'sync_success' => 'Näyte 10 käyttäjää palasi LDAP palvelimelta perusteella asetukset:',
+        'testing_authentication' => 'Testataan Ldap Todennusta...',
+        'authentication_success' => 'Käyttäjä tunnistettu LDAP vastaan!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'sending' => 'Lähetetään :app testiviestiä...',
+        'success' => 'Sinun :webhook_name Integraatio toimii!',
+        'success_pt1' => 'Onnistui! Tarkista ',
+        'success_pt2' => ' kanava testiviestillesi ja varmista, että klikkaat Tallenna alla olevat asetukset tallentaaksesi.',
+        '500' => '500 Palvelimen Virhe.',
+        'error' => 'Jokin meni pieleen. :app vastasi: :error_message',
+        'error_redirect' => 'VIRHE: 301/302 :endpoint palauttaa uudelleenohjauksen. Turvallisuussyistä emme seuraa uudelleenohjauksia. Käytä todellista päätepistettä.',
+        'error_misc' => 'Jokin meni pieleen. :( ',
     ]
 ];

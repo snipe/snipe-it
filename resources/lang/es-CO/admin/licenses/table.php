@@ -5,13 +5,13 @@ return array(
     'assigned_to'   	=> 'Asignado a',
     'checkout'   		=> 'Entrada/Salida',
     'id'      			=> 'ID',
-    'license_email'   	=> 'Email',
+    'license_email'   	=> 'Email de licencia',
     'license_name'   	=> 'Licenciado a',
     'purchase_date'   	=> 'Fecha de Compra',
     'purchased'   		=> 'Comprado',
-    'seats'   			=> 'Instalaciones',
-    'hardware'   		=> 'Equipo',
+    'seats'   			=> 'Asientos',
+    'hardware'   		=> 'Hardware',
     'serial'   			=> 'Número de serie',
-    'title'      		=> 'Categoría de equipo',
+    'title'      		=> 'Licencia',
 
 );

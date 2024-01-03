@@ -12,7 +12,7 @@ return [
     'clone'  					=> 'Klonovat majetek',
     'deployable'  				=> 'Připraveno k nasazení',
     'deleted'  					=> 'Tento majetek byl odstraněn.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => 'Opravdu chcete odstranit tuto položku?',
     'edit'  					=> 'Upravit majetek',
     'model_deleted'  			=> 'Tento model majetku byl odstraněn. Před obnovením majetku musíte model obnovit.',
     'model_invalid'             => 'Model tohoto majetku je neplatný.',

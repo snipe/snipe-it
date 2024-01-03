@@ -2,49 +2,49 @@
 
 return [
     'about_assets_title'           => 'Про активи',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_text'            => 'Активи це елементи відстежувані серійним номером або тегом активів. Вони зазвичай є вищими значеннями, де визначається конкретний товар.',
     'archived'  				=> 'Архівний',
     'asset'  					=> 'Актив',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Видати активи',
     'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Прийняти актив',
     'checkout'  				=> 'Видати актив',
     'clone'  					=> 'Клонувати актив',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'deployable'  				=> 'Розгортання',
+    'deleted'  					=> 'Цей медіафайл видалений.',
+    'delete_confirm'            => 'Ви впевнені, що хочете видалити цей медіафайл?',
     'edit'  					=> 'Редагувати актив',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
-    'requestable'               => 'Requestable',
+    'model_deleted'  			=> 'Ця модель активів була видалена. Ви повинні відновити модель, перш ніж ви зможете відновити Ця модель.',
+    'model_invalid'             => 'Модель цього майна недійсна.',
+    'model_invalid_fix'         => 'Актив повинен бути відредагований, щоб виправити це, перш ніж намагатися перевірити його в або поза ним.',
+    'requestable'               => 'Доступно для запиту',
     'requested'				    => 'Запрошено користувачем',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'not_requestable'           => 'Ви не можете запросити',
+    'requestable_status_warning' => 'Не змінювати статус запиту',
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'Очікуєтся',
-    'undeployable'  			=> 'Undeployable',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable'  			=> 'Непридатний для зберігання',
+    'undeployable_tooltip'  	=> 'Цей медіафайл має марку стану, який не можна розгорнути, і цей час не може бути перевірений.',
     'view'  					=> 'Переглянути актив',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'У вас є помилка у файлі CSV:',
     'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
-    </p>
+     <p>
+     Завантажте файл CSV, який містить історію активів. Активи та користувачі ПОВИННІ вже існувати в системі, інакше їх буде пропущено. Зіставлення активів для імпорту історії відбувається за тегом активу. Ми спробуємо знайти відповідного користувача на основі наданого вами імені користувача та критеріїв, які ви виберете нижче. Якщо ви не виберете жодного критерію нижче, ми просто спробуємо знайти співпадіння по формату імені користувача, який ви налаштували в розділі адміністратора &gt; Загальні налаштування.
+     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+     <p>Поля, включені до CSV, мають відповідати заголовкам: <strong>Тег Активу, Ім\'я, Дата Видачі, Дата Повернення</strong>. Будь-які додаткові поля ігноруватимуться. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+     <p>Дата Повернення: порожня або майбутня дата видачі призведе до видачі активів пов’язаному користувачеві. Якщо виключити стовпець "Дата Повернення", дата повернення буде мати сьогоднішню дату.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
-    'user_department' => 'User Department',
+    'csv_import_match_f-l' => 'Спробуйте співпадати з користувачами формату firstname.lastname (jane.smith)',
+    'csv_import_match_initial_last' => 'Спробуйте співставити користувачів з першим початковим ім\'ям (jsmith) форматі',
+    'csv_import_match_first' => 'Спробуйте співставити користувачів за першим ім\'ям (Жанр) форматі',
+    'csv_import_match_email' => 'Спробуйте співпадати з користувачами за електронною поштою',
+    'csv_import_match_username' => 'Спробуйте співпадати користувачам за ім\'ям користувача',
+    'error_messages' => 'Повідомлення про помилки:',
+    'success_messages' => 'Повідомлення про успіх:',
+    'alert_details' => 'Будь ласка, подивіться нижче для деталей.',
+    'custom_export' => 'Користувальницькі експорту',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status ookup',
+    'user_department' => 'Відділ користувача',
 ];

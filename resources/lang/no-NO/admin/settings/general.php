@@ -9,7 +9,7 @@ return [
     'ad_append_domain_help'     => 'Bruker kreves ikke å skrive "brukernavn@domene.local", de kan bare skrive "brukernavn".',
     'admin_cc_email'            => 'CC e-post',
     'admin_cc_email_help'       => 'Hvis du vil sende en kopi av innsjekk-/utsjekkeposter som sendes til brukere til en ekstra epostadresse, skriv den inn her. La ellers feltet stå tomt.',
-    'admin_settings'            => 'Admin Settings',
+    'admin_settings'            => 'Admin innstillinger',
     'is_ad'				        => 'Dette er en Active Directory server',
     'alerts'                	=> 'Varsler',
     'alert_title'               => 'Oppdater varslingsinnstillinger',

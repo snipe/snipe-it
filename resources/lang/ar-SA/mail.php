@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'قام مستخدم بقبول عنصر',
+    'acceptance_asset_declined' => 'قام مستخدم برفض عنصر',
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',
     'accessory_name' => 'اسم الملحق:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'قم بتسجيل الدخول إلى التثبيت الجديد من Snipe-IT باستخدام البيانات أدناه:',
     'login' => 'تسجيل الدخول:',
     'Low_Inventory_Report' => 'تقرير المخزون المنخفض',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'تقرير المخزون',
     'min_QTY' => 'دقيقة الكمية',
     'name' => 'اسم',
     'new_item_checked' => 'تم فحص عنصر جديد تحت اسمك، التفاصيل أدناه.',
@@ -62,7 +62,7 @@ return [
     'test_mail_text' => 'يعتبر هذا اختبارا من نظام إدارة الأصول Snipe-IT. إذا كنت حصلت على هذا، فان البريد يعمل :)',
     'the_following_item' => 'تم ادخال العنصر التالي: ',
     'low_inventory_alert' => 'هنالك :count عناصر أقل من الحد الأدنى للمخزون أول سوف تصبح أقل منه قريباً.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'هناك :count أصل مع ضمان تنتهي صلاحيته في :threshold أيام.<unk> هناك :count أصول مع ضمانات تنتهي صلاحيتها في :threshold أيام.',
     'license_expiring_alert' => 'هنالك :count رخص سوف تنتهي في الأيام :threshold القادمة.',
     'to_reset' => 'لإعادة تعيين كلمة مرور على :web، رجاءا أكمل هذا النموذج:',
     'type' => 'اكتب',
@@ -74,11 +74,11 @@ return [
     'your_credentials' => 'أوراق اعتماد قنص-إيت الخاص بك',
     'Accessory_Checkin_Notification' => 'تم تسحيل الملحق',
     'Asset_Checkin_Notification' => 'تم تسجيل الأصل',
-    'Asset_Checkout_Notification' => 'Asset checked out',
+    'Asset_Checkout_Notification' => 'تم إخراج الأصل',
     'License_Checkin_Notification' => 'تم تسجيل الرخصة',
     'Expected_Checkin_Report' => 'تقرير تسجيل الأصول المتوقع',
     'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',
     'Expected_Checkin_Date' => 'من المقرر أن يتم التحقق من الأصول التي تم إخراجها إليك في :date',
     'your_assets' => 'عرض الأصول الخاصة بك',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'جميع الحقوق محفوظة.format@@0',
 ];

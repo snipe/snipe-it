@@ -353,7 +353,7 @@ return [
     'help_default_will_use' => '<code>:default</code> 将使用 <code>:setting_name</code>的值。 <br>请注意，条码的值必须符合相应的条码规范才能成功生成。请参阅 <a href="https://snipe-it.readme.io/docs/barcodes">文档 <i class="fa fa-external-link"></i></a> 了解更多详细信息。 ',
     'default'               => '默认',
     'none'                  => '无',
-    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_callback_help' => '这应该作为回调URL输入在您的组织内的 Google OAuth 应用程序设置。&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google 开发者控制台 <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>',
     'google_login'      => 'Google Workspace 登录设置',
     'enable_google_login'  => '允许用户使用 Google Workspace 登录',
     'enable_google_login_help'  => '这些用户将不会被自动配置。 他们必须拥有一个已存在的账户以及 一个 Google Workspace 账户，并且已存在账户的用户名必须与 Google Workspace 账户的电子邮件地址相匹配。 ',

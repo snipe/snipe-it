@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Tuen sähköposti',
     'support_phone'   		=> 'Tuen puhelin',
     'support_url'   		=> 'Tuen URL',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'Takuu Haku URL',
     'update'				=> 'Päivitä valmistaja',
     'url'   				=> 'URL',
 

@@ -12,7 +12,7 @@ return [
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este activo fue eliminado.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => '¿Está seguro de que desea eliminar este recurso?',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'Este Modelo de activo fue eliminado. Debes restaurar este modelo antes de poder restaurar el Activo.',
     'model_invalid'             => 'El modelo de este activo no es válido.',
@@ -46,5 +46,5 @@ return [
     'alert_details' => 'Por favor vea abajo para más detalles.',
     'custom_export' => 'Personalizar exportación',
     'mfg_warranty_lookup' => 'Búsqueda del estado de Garantía para :manufacturer',
-    'user_department' => 'User Department',
+    'user_department' => 'Departamento de Usuario',
 ];

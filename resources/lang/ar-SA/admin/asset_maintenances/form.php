@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'وقت صيانة الاصل (بالايام)',
         'notes'                  => 'مُلاحظات',
         'update'                 => 'تعديل صيانة الأصل',
-        'create'                 => 'Create Asset Maintenance'
+        'create'                 => 'إنشاء صيانة الأصول'
     ];

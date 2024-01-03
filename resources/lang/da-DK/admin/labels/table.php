@@ -2,7 +2,7 @@
 
 return [
 
-    'labels_per_page'    => 'Labels',
+    'labels_per_page'    => 'Etiketter',
     'support_fields'     => 'Felter',
     'support_asset_tag'  => 'Mærkat',
     'support_1d_barcode' => '1D',

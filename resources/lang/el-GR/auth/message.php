@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Αυτός ο λογαριασμός χρήστη δεν είναι ενεργοποιημένος.',
     'account_suspended'      => 'Αυτός ο λογαριασμός χρήστη έχει ανασταλεί.',
     'account_banned'         => 'Αυτός ο λογαριασμός χρήστη έχει απαγορευτεί.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Πάρα πολλές αποτυχημένες προσπάθειες σύνδεσης. Παρακαλώ δοκιμάστε ξανά σε :minutes λεπτά.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
+        'already_enrolled'      => 'Η συσκευή σας έχει ήδη εγγραφεί.',
         'success'               => 'Έχετε συνδεθεί επιτυχώς.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'code_required'         => 'Απαιτείται διψήφιος κωδικός.',
+        'invalid_code'          => 'Ο κωδικός δύο παραγόντων δεν είναι έγκυρος.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Παρουσιάστηκε πρόβλημα κατά την προσπάθεια αποσύνδεσης σας, παρακαλώ προσπαθήστε ξανά.',
+        'success' => 'Έχετε αποσυνδεθεί επιτυχώς.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Παρουσιάστηκε πρόβλημα κατά την προσπάθεια λήψης νέου κωδικού πρόσβασης κωδικού πρόσβασης, δοκιμάστε ξανά.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Αν αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου υπάρχει στο σύστημά μας, έχει σταλεί ένα email ανάκτησης κωδικού πρόσβασης.',
     ),
 
     'forgot-password-confirm' => array(

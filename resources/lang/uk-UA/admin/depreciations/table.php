@@ -4,8 +4,8 @@ return [
 
     'id'      => 'ID',
     'months'   => 'міс.',
-    'term'   => 'Term',
+    'term'   => 'Термін',
     'title'      => 'Назва ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Поверхове значення',
 
 ];

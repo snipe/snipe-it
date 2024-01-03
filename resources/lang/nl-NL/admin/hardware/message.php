@@ -11,7 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Asset is niet aangemaakt, probeer het opnieuw :(',
         'success' 		=> 'Asset is succesvol aangemaakt. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Asset met tag :tag is succesvol gemaakt. <strong><a href=":link" style="color: white;">Klik hier om te bekijken</a></strong>.',
     ],
 
     'update' => [

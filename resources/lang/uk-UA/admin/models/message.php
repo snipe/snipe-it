@@ -2,46 +2,46 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Видалена модель медіафайла',
     'does_not_exist' => 'Модель не існує.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'no_association' => 'УВАГА! Модель активу для цього елемента невірна або відсутня!',
+    'no_association_fix' => 'Це може порушити речі дивним і жахливим способом. Відредагуйте цей актив щоб призначити йому модель.',
+    'assoc_users'	 => 'Ця модель пов\'язана в даний час з одним або більше активами і не може бути видалена. Будь ласка, видаліть активи, а потім спробуйте видалити їх. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
+        'error'   => 'Модель не було створено, спробуйте ще раз.',
         'success' => 'Модель успішно створено.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Модель активу з такою назвою, виробника та номер моделі вже існує.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.',
+        'error'   => 'Модель не була оновлена, спробуйте ще раз',
+        'success' => 'Модель успішно оновлено.',
     ),
 
     'delete' => array(
         'confirm'   => 'Ви впевнені, що хочете видалити цю модель?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
+        'error'   => 'Виникла проблема видалення моделі. Будь ласка, спробуйте ще раз.',
         'success' => 'Модель успішно видалено.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
+        'error'   		=> 'Модель не було відновлено, будь ласка, спробуйте ще раз',
         'success' 		=> 'Модель успішно відновлена.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'error'   		=> 'Немає змінених полів, тому нічого не було оновлено.',
+        'success' 		=> 'Модель успішно оновлено. |:model_count моделей успішно оновлено.',
+        'warn'          => 'Ви збираєтеся оновити властивості наступної моделі: |Ви збираєтеся редагувати властивості наступних :model_count моделей:',
 
     ),
 
     'bulkdelete' => array(
-        'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'error'   		    => 'Жодного зразка не було вибрано, тому нічого не було вилучено.',
+        'success' 		    => 'Модель видалена!|:success_count моделей видалено!',
+        'success_partial' 	=> ':success_count моделей було видалено, проте :fail_count не може бути видалено, оскільки вони все ще мають активи, пов\'язані з ними.'
     ),
 
 );

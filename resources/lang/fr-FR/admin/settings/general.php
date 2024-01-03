@@ -9,7 +9,7 @@ return [
     'ad_append_domain_help'     => 'L\'utilisateur n\'est pas obligé d\'écrire "username@domain.local", il peut juste taper "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Si vous souhaitez envoyer une copie des courriels d\'association/dissociation qui sont envoyés aux utilisateurs à un compte de messagerie supplémentaire, entrez-le ici. Sinon, laissez ce champ vide.',
-    'admin_settings'            => 'Admin Settings',
+    'admin_settings'            => 'Paramètres de l\'administrateur',
     'is_ad'				        => 'C\'est un serveur Active Directory',
     'alerts'                	=> 'Alertes',
     'alert_title'               => 'Mettre à jour les paramètres de notification',
@@ -360,7 +360,7 @@ return [
     'mail_reply_to' => 'Adresse "Répondre à"',
     'mail_from' => 'Adresse "Expéditeur·trice"',
     'database_driver' => 'Pilote de base de données',
-    'bs_table_storage' => 'Table Storage',
+    'bs_table_storage' => 'Stockage de la table',
     'timezone' => 'Fuseau horaire',
 
 ];

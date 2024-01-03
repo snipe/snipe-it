@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Gruppen eksisterer allerede!',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => 'Gruppe ID :id eksisterer ikke.',
     'group_name_required' => 'Navnefeltet er påkrævet',
 
     'success' => array(

@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Durum etiket yok.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Silinmiş Durum Etiketi',
     'assoc_assets'	 => 'Bu durum etiketi şu anda en az bir varlık ile ilişkili ve silinemez. Lütfen artık bu durum başvuru ve yeniden denemek için sabit kıymetleri güncelleştirin. ',
 
     'create' => [

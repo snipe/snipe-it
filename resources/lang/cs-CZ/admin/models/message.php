@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Model aktiva byl smazán',
     'does_not_exist' => 'Model neexistuje.',
     'no_association' => 'VAROVÁNÍ! Model majetku pro tuto položku je neplatný, nebo chybí!',
     'no_association_fix' => 'Tento stav může způsobit nedozírné problémy. Přiřaďte dotyčnému majetku správný model.',

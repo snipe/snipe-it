@@ -9,7 +9,7 @@ return [
     'ad_append_domain_help'     => 'Gebruiker is niet verplicht om "username@domain.local" te schrijven, deze kan alleen "username" typen.',
     'admin_cc_email'            => 'CC e-mail',
     'admin_cc_email_help'       => 'Als u een kopie van de checkout/checkin e-mail die aan de gebruikers worden verzonden wilt verzenden naar een extra e-mailaccount, vul dan hier het e-mailadres in. Laat anders dit veld leeg.',
-    'admin_settings'            => 'Admin Settings',
+    'admin_settings'            => 'Beheerder Instellingen',
     'is_ad'				        => 'Dit is een Active Directory server',
     'alerts'                	=> 'Waarschuwingen',
     'alert_title'               => 'Meldingsinstellingen aanpassen',

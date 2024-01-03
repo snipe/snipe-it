@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'المورد المحذوف',
     'does_not_exist' => 'المورد غير مجود.',
 
 

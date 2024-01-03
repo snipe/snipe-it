@@ -11,40 +11,40 @@ return [
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klonaktiver',
     'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'deleted'  					=> 'Dette aktiv er blevet slettet.',
+    'delete_confirm'            => 'Er du sikker på, at du vil slette dette aktiv?',
     'edit'  					=> 'Rediger aktiv',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_deleted'  			=> 'Denne aktivmodel er blevet slettet. Du skal gendanne modellen, før du kan gendanne aktivet.',
+    'model_invalid'             => 'Modellen af dette aktiv er ugyldig.',
+    'model_invalid_fix'         => 'Aktivet skal redigeres for at korrigere dette, før du forsøger at tjekke det ind eller ud.',
     'requestable'               => 'kan anmodes',
     'requested'				    => 'Anmodet',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'not_requestable'           => 'Ikke Anmodet',
+    'requestable_status_warning' => 'Ændr ikke status for anfordring',
     'restore'  					=> 'Gendan aktiv',
     'pending'  					=> 'Verserende',
     'undeployable'  			=> 'Undeployable',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable_tooltip'  	=> 'Dette aktiv har en status etiket, der ikke kan installeres og kan ikke tjekkes ud på dette tidspunkt.',
     'view'  					=> 'Se aktiv',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Du har en fejl i din CSV-fil:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Upload en CSV, der indeholder aktivhistorik. Aktiver og brugere SKAL allerede findes i systemet, eller de vil blive sprunget over. Matchende aktiver for historik import sker mod asset tag. Vi vil forsøge at finde en matchende bruger baseret på den brugers navn, du giver, og de kriterier, du vælger nedenfor. Hvis du ikke vælger nogen kriterier nedenfor, det vil blot forsøge at matche på det brugernavn format, du har konfigureret i Admin &gt; Generelle indstillinger.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Felter inkluderet i CSV skal matche overskrifterne: <strong>Asset Tag, Navn, Checkout Dato, Checkin Dato</strong>. Eventuelle yderligere felter vil blive ignoreret. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Checkin Dato: blank eller fremtidige checkin datoer vil checkout elementer til tilknyttet bruger. Eksklusive Checkin Date kolonnen vil oprette en checkin dato med dagens dato.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
-    'user_department' => 'User Department',
+    'csv_import_match_f-l' => 'Prøv at matche brugere med fornavn.Efternavn (jane.smith) format',
+    'csv_import_match_initial_last' => 'Prøv at matche brugere med det første efternavn (jsmith) format',
+    'csv_import_match_first' => 'Prøv at matche brugere efter fornavn (jane) format',
+    'csv_import_match_email' => 'Prøv at matche brugere via e-mail som brugernavn',
+    'csv_import_match_username' => 'Prøv at matche brugere med brugernavn',
+    'error_messages' => 'Fejlmeddelelser:',
+    'success_messages' => 'Beskeder med succes:',
+    'alert_details' => 'Se venligst nedenfor for detaljer.',
+    'custom_export' => 'Brugerdefineret Eksport',
+    'mfg_warranty_lookup' => ':manufacturer Garanti Status Opslag',
+    'user_department' => 'Bruger Afdeling',
 ];

@@ -3,20 +3,20 @@
 return array(
 
     'does_not_exist' => 'Розташування не існує.',
-    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'department_already_exists' => 'Відділ з такою назвою вже існує. Або виберіть більш конкретну назву для цього відділу. ',
+    'assoc_users'	 => 'Цей відділ асоціюється принаймні з одним користувачем та не може бути видалений. Оновіть ваших користувачів, щоб більше не посилатися на цей відділ та повторіть спробу. ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
+        'error'   => 'Відділ не створений, будь ласка, спробуйте ще раз.',
         'success' => 'Розташування успішно створено.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Відділ не був оновлений, будь ласка, спробуйте ще раз',
+        'success' => 'Відділ успішно оновлено.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Ви впевнені, що хочете видалити цей відділ?',
+        'error'   => 'Виникла проблема при видаленні відділу. Будь ласка, спробуйте ще раз.',
+        'success' => 'Відділ був успішно видалений.'
     )
 
 );
