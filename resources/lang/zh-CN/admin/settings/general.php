@@ -9,6 +9,7 @@ return [
     'ad_append_domain_help'     => '不要求用户输入“"username@domain.local"，他们只需输入“username”。',
     'admin_cc_email'            => '邮件抄送',
     'admin_cc_email_help'       => '如果你想给用户额外的邮件账户发送签入/签出副本，请在此输入邮箱地址，否则请留空。',
+    'admin_settings'            => '管理员设置',
     'is_ad'				        => '这是AD域服务器',
     'alerts'                	=> '警报',
     'alert_title'               => '更新通知设置',

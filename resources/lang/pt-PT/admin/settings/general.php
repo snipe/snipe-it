@@ -9,6 +9,7 @@ return [
     'ad_append_domain_help'     => 'O utilizador não tem que escrever "username@domain.local", pode apenas digitar "username".',
     'admin_cc_email'            => 'E-mail em CC',
     'admin_cc_email_help'       => 'Se prefere que seja enviada uma cópia do e-mail de checkin/checktout que é enviado aos utilizadores para uma conta de e-mail adicional, introduza o endereço de e-mail aqui. Caso contrário, deixe este campo em branco.',
+    'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'Isto é um servidor do Active Directoriy',
     'alerts'                	=> 'Alertas',
     'alert_title'               => 'Atualizar configurações de notificação',

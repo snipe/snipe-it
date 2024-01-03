@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Menadžer',
     'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Ime',
+    'nogroup'               => 'Nijedna grupa još uvek nije napravljena. Da je dodate, posetite: ',
     'notes'                 => 'Zabeleške',
     'password_confirm' 		=> 'Potvrdi lozinku',
     'password' 				=> 'Lozinka',

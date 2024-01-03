@@ -24,7 +24,7 @@ return [
     'image'		    => 'Íomhá Gléas',
     'days_without_acceptance' => 'Laethanta Gan Glactha',
     'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Assigned To',
+    'assigned_to'    => 'Sannadh Chun',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',

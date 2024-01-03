@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => ':attribute måste vara unikt.',
     'non_circular'         => ':attribute får inte skapa en cirkulär referens.',
     'not_array'            => 'The :attribute field cannot be an array.',
-    'unique_serial'        => 'The :attribute must be unique.',
     'disallow_same_pwd_as_user_fields' => 'Lösenordet kan inte vara samma som användarnamnet.',
     'letters'              => 'Lösenord måste innehålla minst en bokstav.',
     'numbers'              => 'Lösenord måste innehålla minst en siffra.',

@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => ':attribute 必須是唯一值',
     'non_circular'         => ':attribule 屬性不能建立一個循環參考',
     'not_array'            => 'The :attribute field cannot be an array.',
-    'unique_serial'        => 'The :attribute must be unique.',
     'disallow_same_pwd_as_user_fields' => '密碼不可以和使用者名稱相同',
     'letters'              => '密碼至少必須包含 1 個字母。',
     'numbers'              => '密碼至少必須包含 1 個數字。',

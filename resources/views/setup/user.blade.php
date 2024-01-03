@@ -30,7 +30,7 @@
     <!-- Language -->
     <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'default_language')) ? ' required' : '' }} {{$errors->has('default_language') ? 'error' : ''}}">
       {{ Form::label('locale', trans('admin/settings/general.default_language')) }}
-      {!! Form::locales('locale', Request::old('locale', "en"), 'select2') !!}
+      {!! Form::locales('locale', Request::old('locale', "en-US"), 'select2') !!}
 
       {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>

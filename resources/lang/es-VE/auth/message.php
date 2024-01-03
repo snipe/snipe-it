@@ -11,7 +11,7 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Su dispositivo ya está inscrito.',
-        'success'               => 'Usted inició sesión correctamente.',
+        'success'               => 'Has iniciado sesión con éxito.',
         'code_required'         => 'Se requiere el código de 2FA(Autenticación en dos pasos) .',
         'invalid_code'          => 'El código de doble factor es inválido.',
     ),

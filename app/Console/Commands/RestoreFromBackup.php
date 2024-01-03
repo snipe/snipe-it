@@ -84,35 +84,36 @@ class RestoreFromBackup extends Command
 
 
         $private_dirs = [
+            'storage/private_uploads/accessories',
+            'storage/private_uploads/assetmodels',
             'storage/private_uploads/assets', // these are asset _files_, not the pictures.
             'storage/private_uploads/audits',
+            'storage/private_uploads/components',
+            'storage/private_uploads/consumables',
+            'storage/private_uploads/eula-pdfs',
             'storage/private_uploads/imports',
-            'storage/private_uploads/assetmodels',
-            'storage/private_uploads/users',
             'storage/private_uploads/licenses',
             'storage/private_uploads/signatures',
+            'storage/private_uploads/users',
         ];
         $private_files = [
             'storage/oauth-private.key',
             'storage/oauth-public.key',
         ];
         $public_dirs = [
+            'public/uploads/accessories',
+            'public/uploads/assets', // these are asset _pictures_, not asset files
+            'public/uploads/avatars',
+            //'public/uploads/barcodes', // we don't want this, let the barcodes be regenerated
+            'public/uploads/categories',
             'public/uploads/companies',
             'public/uploads/components',
-            'public/uploads/categories',
-            'public/uploads/manufacturers',
-            //'public/uploads/barcodes', // we don't want this, let the barcodes be regenerated
             'public/uploads/consumables',
             'public/uploads/departments',
-            'public/uploads/avatars',
-            'public/uploads/suppliers',
-            'public/uploads/assets', // these are asset _pictures_, not asset files
             'public/uploads/locations',
-            'public/uploads/accessories',
-            'public/uploads/models',
-            'public/uploads/categories',
-            'public/uploads/avatars',
             'public/uploads/manufacturers',
+            'public/uploads/models',
+            'public/uploads/suppliers',
         ];
 
         $public_files = [

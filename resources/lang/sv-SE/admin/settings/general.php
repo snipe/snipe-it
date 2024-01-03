@@ -9,6 +9,7 @@ return [
     'ad_append_domain_help'     => 'Användaren behöver inte skriva "username@domain.local", det räcker att skriva "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Om du vill skicka en kopia av checkin / checkout-e-postmeddelanden som skickas till användare till ett extra e-postkonto, skriv det här. Annars lämnar du fältet tomt.',
+    'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'Detta är en Active Directory-server',
     'alerts'                	=> 'Varningar',
     'alert_title'               => 'Uppdatera aviseringsinställningar',

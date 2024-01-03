@@ -553,7 +553,7 @@
                             </div>
                                  @endif
                            @else
-                               <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
+                                      <p>{{ trans('admin/users/table.nogroup') }} <code>{{ trans('admin/settings/general.admin_settings') }} <i class="fa fa-cogs"></i> > {{ trans('general.groups') }} <i class="fas fa-user-friends"></i></code> </p>
                            @endif
 
                               </div>

@@ -18,6 +18,63 @@ use Carbon\Carbon;
 
 class Helper
 {
+
+
+    /**
+     * This is only used for reversing the migration that updates the locale to the 5-6 letter codes from two
+     * letter codes. The normal dropdowns use the autoglossonyms in the language files located
+     * in resources/en-US/localizations.php.
+     */
+    public static $language_map =  [
+        'af' => 'af-ZA', // Afrikaans
+        'am' => 'am-ET', // Amharic
+        'ar' => 'ar-SA', // Arabic
+        'bg' => 'bg-BG', // Bulgarian
+        'ca' => 'ca-ES', // Catalan
+        'cs' => 'cs-CZ', // Czech
+        'cy' => 'cy-GB', // Welsh
+        'da' => 'da-DK', // Danish
+        'de-i' => 'de-if', // German informal
+        'de' => 'de-DE', // German
+        'el' => 'el-GR', // Greek
+        'en' => 'en-US', // English
+        'et' => 'et-EE', // Estonian
+        'fa' => 'fa-IR', // Persian
+        'fi' => 'fi-FI', // Finnish
+        'fil' => 'fil-PH', // Filipino
+        'fr' => 'fr-FR', // French
+        'he' => 'he-IL', // Hebrew
+        'hr' => 'hr-HR', // Croatian
+        'hu' => 'hu-HU', // Hungarian
+        'id' => 'id-ID', // Indonesian
+        'is' => 'is-IS', // Icelandic
+        'it' => 'it-IT', // Italian
+        'iu' => 'iu-NU', // Inuktitut
+        'ja' => 'ja-JP', // Japanese
+        'ko' => 'ko-KR', // Korean
+        'lt' => 'lt-LT', // Lithuanian
+        'lv' => 'lv-LV', // Latvian
+        'mi' => 'mi-NZ', // Maori
+        'mk' => 'mk-MK', // Macedonian
+        'mn' => 'mn-MN', // Mongolian
+        'ms' => 'ms-MY', // Malay
+        'nl' => 'nl-NL', // Dutch
+        'no' => 'no-NO', // Norwegian
+        'pl' => 'pl-PL', // Polish
+        'ro' => 'ro-RO', // Romanian
+        'ru' => 'ru-RU', // Russian
+        'sk' => 'sk-SK', // Slovak
+        'sl' => 'sl-SI', // Slovenian
+        'so' => 'so-SO', // Somali
+        'ta' => 'ta-IN', // Tamil
+        'th' => 'th-TH', // Thai
+        'tl' => 'tl-PH', // Tagalog
+        'tr' => 'tr-TR', // Turkish
+        'uk' => 'uk-UA', // Ukrainian
+        'vi' => 'vi-VN', // Vietnamese
+        'zu' => 'zu-ZA', // Zulu
+    ];
+
     /**
      * Simple helper to invoke the markdown parser
      *
@@ -354,7 +411,7 @@ class Helper
 
         if ($index >= $total_colors) {
 
-            \Log::error('Status label count is '.$index.' and exceeds the allowed count of 266.');
+            \Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
             //patch fix for array key overflow (color count starts at 1, array starts at 0)
             $index = $index - $total_colors - 1;
 
@@ -1317,7 +1374,7 @@ class Helper
 
 
     /*
-     * I know it's gauche  to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
+     * I know it's gauche to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
      * it seemed pretty safe to do here. Don't you judge me.
      */
     public static function showDemoModeFieldWarning() {
@@ -1325,4 +1382,55 @@ class Helper
             return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
         }
     }
+
+
+    /**
+     * Ah, legacy code.
+     *
+     * This corrects the original mistakes from 2013 where we used the wrong locale codes. Hopefully we
+     * can get rid of this in a future version, but this should at least give us the belt and suspenders we need
+     * to be sure this change is not too disruptive.
+     *
+     * In this array, we ONLY include the older languages where we weren't using the correct locale codes.
+     *
+     * @see public static $language_map in this file
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 6.3.0
+     *
+     * @param $language_code
+     * @return string []
+     */
+    public static function mapLegacyLocale($language_code = null)
+    {
+
+        if (strlen($language_code) > 4) {
+            return $language_code;
+        }
+
+        foreach (self::$language_map as $legacy => $new) {
+            if ($language_code == $legacy) {
+                \Log::debug('Current language is '.$legacy.', using '.$new.' instead');
+                return $new;
+            }
+        }
+
+        // Return US english if we don't have a match
+        return 'en-US';
+    }
+
+    public static function mapBackToLegacyLocale($new_locale = null)
+    {
+        if (strlen($new_locale) <= 4) {
+            return $new_locale; //"new locale" apparently wasn't quite so new
+        }
+
+        // This does a *reverse* search against our new language map array - given the value, find the *key* for it
+        $legacy_locale = array_search($new_locale, self::$language_map);
+
+        if($legacy_locale !== false) {
+            return $legacy_locale;
+        }
+        return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
+    }
+
 }

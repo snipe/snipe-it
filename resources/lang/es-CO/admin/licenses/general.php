@@ -10,7 +10,7 @@ return array(
     'filetype_info'				=> 'Tipos de archivos permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
     'clone'  					=> 'Clonar Usuario',
     'history_for'  				=> 'Historial para ',
-    'in_out'  					=> 'Quita/Asigna',
+    'in_out'  					=> 'Entrada/Salida',
     'info'  					=> 'Info Licencia',
     'license_seats'  			=> 'Num. Instalaciones',
     'seat'  					=> 'Instalación',

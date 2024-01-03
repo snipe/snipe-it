@@ -23,7 +23,7 @@ return [
     'restore' => [
         'error'   		=> 'Aset tidak dikembalikan, coba lagi',
         'success' 		=> 'Aset Berhasil dikembalikan.',
-        'bulk_success' 		=> 'Asset restored successfully.',
+        'bulk_success' 		=> 'Aset Berhasil dikembalikan.',
         'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 

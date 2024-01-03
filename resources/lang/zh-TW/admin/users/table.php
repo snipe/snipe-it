@@ -21,6 +21,7 @@ return array(
     'manager' 				=> '主管',
     'managed_locations'     => '管理位置',
     'name' 					=> '名字',
+    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => '備註',
     'password_confirm' 		=> '確認密碼',
     'password' 				=> '密碼',

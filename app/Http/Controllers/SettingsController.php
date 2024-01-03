@@ -186,7 +186,7 @@ class SettingsController extends Controller
         $settings->alerts_enabled = 1;
         $settings->pwd_secure_min = 10;
         $settings->brand = 1;
-        $settings->locale = $request->input('locale', 'en');
+        $settings->locale = $request->input('locale', 'en-US');
         $settings->default_currency = $request->input('default_currency', 'USD');
         $settings->user_id = 1;
         $settings->email_domain = $request->input('email_domain');
@@ -585,7 +585,7 @@ class SettingsController extends Controller
         }
 
         if (! config('app.lock_passwords')) {
-            $setting->locale = $request->input('locale', 'en');
+            $setting->locale = $request->input('locale', 'en-US');
         }
         $setting->default_currency = $request->input('default_currency', '$');
         $setting->date_display_format = $request->input('date_display_format');

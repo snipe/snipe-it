@@ -553,10 +553,11 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
+        $model = AssetModel::find($request->input('model_id'));
 
-        if (($model) && ($model->fieldset)) {
+        // Check that it's an object and not a collection
+        // (Sometimes people send arrays here and they shouldn't
+        if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
 
                 // Set the field value based on what was sent in the request
@@ -864,13 +865,17 @@ class AssetsController extends Controller
     public function checkin(Request $request, $asset_id)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::findOrFail($asset_id);
+        $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
 
 
         $target = $asset->assignedTo;
         if (is_null($target)) {
-            return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.already_checked_in')));
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> e($asset->asset_tag),
+                'model' => e($asset->model->name),
+                'model_number' => e($asset->model->model_number)
+            ], trans('admin/hardware/message.checkin.already_checked_in')));
         }
 
         $asset->expected_checkin = null;
@@ -904,7 +909,11 @@ class AssetsController extends Controller
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
 
-            return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', [
+                'asset_tag'=> e($asset->asset_tag),
+                'model' => e($asset->model->name),
+                'model_number' => e($asset->model->model_number)
+            ], trans('admin/hardware/message.checkin.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));

@@ -15,10 +15,10 @@ return [
     'select_file'				=> 'Roghnaigh Comhad ...',
     'select_files'				=> 'Select Files...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-    'send_password_link'        => 'Send Password Reset Link',
+    'send_password_link'        => 'Seol Nasc Athshocraigh Pasfhocal',
     'go'                        => 'Go',
     'bulk_actions'              => 'Bulk Actions',
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
-    'new'                       => 'New',
+    'new'                       => 'Nua',
 ];

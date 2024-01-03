@@ -16,7 +16,7 @@ return [
     'id'      		=> 'ID',
     'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
+    'purchase_cost'	=> 'පිරිවැය',
     'purchase_date'	=> 'Purchased',
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Has rechazado este activo con éxito.',
     'bulk_manager_warn'	        => 'Tus usuarios han sido actualizados con éxito, sin embargo tu entrada de administrador no fue guardada debido que el administrador que seleccionaste también era un usuario de la lista que iba a ser editada, y los usuarios no pueden editar a su propio administrador. Por favor selecciona a tus usuarios de nuevo, excluyendo al administrador.',
     'user_exists'               => '¡El usuario ya existe!',
-    'user_not_found'            => 'Usuario inexistente.',
+    'user_not_found'            => 'El usuario no existe.',
     'user_login_required'       => 'El campo de usuario es obligatorio',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'La contraseña es obligatoria.',

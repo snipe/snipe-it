@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Chef',
     'managed_locations'     => 'Hanterade platser',
     'name' 					=> 'namn',
+    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'anteckningar',
     'password_confirm' 		=> 'Bekräfta lösenord',
     'password' 				=> 'Lösenord',

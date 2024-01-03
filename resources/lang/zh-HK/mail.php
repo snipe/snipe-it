@@ -36,7 +36,7 @@ return [
     'hello' => 'Hello',
     'hi' => 'Hi',
     'i_have_read' => 'I have read and agree to the terms of use, and have received this item.',
-    'item' => 'Item:',
+    'item' => '項目:',
     'Item_Request_Canceled' => 'Item Request Canceled',
     'Item_Requested' => 'Item Requested',
     'link_to_update_password' => 'Please click on the following link to update your :web password:',

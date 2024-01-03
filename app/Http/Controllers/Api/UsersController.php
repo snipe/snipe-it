@@ -353,6 +353,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->created_by = Auth::user()->id;
 
         if ($request->has('permissions')) {
             $permissions_array = $request->input('permissions');
@@ -706,11 +707,11 @@ class UsersController extends Controller
                 $logaction->user_id = Auth::user()->id;
                 $logaction->logaction('restore');
 
-                return response()->json(Helper::formatStandardApiResponse('success', trans('admin/users/message.restore.success')), 200);
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);
             }
 
             // Check validation to make sure we're not restoring a user with the same username as an existing user
-            return response()->json(Helper::formatStandardApiResponse('error', trans('general.could_not_restore', ['item_type' => trans('general.user'), 'error' => $user->getErrors()->first()])), 200);
+            return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')), 200);

@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => 'El :atrribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
     'not_array'            => 'The :attribute field cannot be an array.',
-    'unique_serial'        => 'The :attribute must be unique.',
     'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el nombre de usuario.',
     'letters'              => 'La contraseña debe contener al menos una letra.',
     'numbers'              => 'La contraseña debe contener al menos un número.',
