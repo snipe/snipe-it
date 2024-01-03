@@ -61,21 +61,25 @@ class ReportTemplateTest extends TestCase
     {
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post(route('report-templates.store'), [
-                //
+                'name' => '',
             ])
             ->assertSessionHasErrors('name');
     }
 
     public function testRedirectingAfterValidationErrorRestoresInputs()
     {
-        $this->markTestIncomplete();
-
-        // We might not implement this test case, but we want to ensure
-        // that selecting fields in the UI, then getting redirected
-        // back after hitting the "Save Template" button without
-        // a name set restores the previously selected values.
-
-        // Note: This functionality is implemented in getCustomReport().
+        $this->actingAs(User::factory()->canViewReports()->create())
+            // start on the custom report page
+            ->from(route('reports/custom'))
+            ->followingRedirects()
+            ->post(route('report-templates.store'), [
+                'name' => '',
+                // set some values to ensure they are still present
+                // when returning to the custom report page.
+                'by_company_id' => [2, 3]
+            ])->assertViewHas(['reportTemplate' => function (ReportTemplate $reportTemplate) {
+                return data_get($reportTemplate, 'options.by_company_id') === [2, 3];
+            }]);
     }
 
     public function testSavingReportTemplateRequiresCorrectPermission()
