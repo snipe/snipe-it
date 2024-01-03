@@ -468,18 +468,6 @@
                         </option>
                     @endforeach
                 </select>
-
-                @push('js')
-                    <script>
-                        $('#saved_report_select')
-                            .on('select2:select', function (event) {
-                                window.location.href = '/reports/templates/' + event.params.data.id;
-                            })
-                            .on('select2:clearing', function (event) {
-                                window.location.href = '{{ route('reports/custom') }}';
-                            });
-                    </script>
-                @endpush
             </div>
         @endif
         @if (request()->routeIs('reports/custom'))
@@ -555,6 +543,14 @@
 
           form.attr('action', '{{ route('report-templates.store') }}').submit();
       });
+
+      $('#saved_report_select')
+        .on('select2:select', function (event) {
+            window.location.href = '/reports/templates/' + event.params.data.id;
+        })
+        .on('select2:clearing', function (event) {
+            window.location.href = '{{ route('reports/custom') }}';
+        });
 
       $('#dataConfirmModal').on('show.bs.modal', function (event) {
           var content = $(event.relatedTarget).data('content');
