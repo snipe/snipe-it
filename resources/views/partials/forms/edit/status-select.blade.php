@@ -9,14 +9,14 @@
                 @if($multiple)
                     @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($status_id)) ? \App\Models\Category::find($status_id)->name : '' }}
+                            {{ (\App\Models\Statuslabel::find($status_id)) ? \App\Models\Statuslabel::find($status_id)->name : '' }}
                         </option>
                     @endif
                 @endif
                 @if(!$multiple)
                     @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($status_id)) ? \App\Models\Category::find($status_id)->name : '' }}
+                            {{ (\App\Models\Statuslabel::find($status_id)) ? \App\Models\Statuslabel::find($status_id)->name : '' }}
                         </option>
                     @else
                         <option value="">{{ trans('general.select_statuslabel') }}</option>

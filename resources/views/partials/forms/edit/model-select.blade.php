@@ -9,14 +9,14 @@
                 @if($multiple)
                     @if($model_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $model_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($model_id)) ? \App\Models\Category::find($model_id)->name : '' }}
+                            {{ (\App\Models\AssetModel::find($model_id)) ? \App\Models\AssetModel::find($model_id)->name : '' }}
                         </option>
                     @endif
                 @endif
                 @if(!$multiple)
                     @if($model_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $model_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($model_id)) ? \App\Models\Category::find($model_id)->name : '' }}
+                            {{ (\App\Models\AssetModel::find($model_id)) ? \App\Models\AssetModel::find($model_id)->name : '' }}
                         </option>
                     @else
                         <option value="">{{ trans('general.select_model') }}</option>

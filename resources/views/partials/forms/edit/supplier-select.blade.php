@@ -8,14 +8,14 @@
                 @if($multiple)
                     @if($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($supplier_id)) ? \App\Models\Category::find($supplier_id)->name : '' }}
+                            {{ (\App\Models\Supplier::find($supplier_id)) ? \App\Models\Supplier::find($supplier_id)->name : '' }}
                         </option>
                     @endif
                 @endif
                 @if(!$multiple)
                     @if($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($supplier_id)) ? \App\Models\Category::find($supplier_id)->name : '' }}
+                            {{ (\App\Models\Supplier::find($supplier_id)) ? \App\Models\Supplier::find($supplier_id)->name : '' }}
                         </option>
                     @else
                         <option value="">{{ trans('general.select_supplier') }}</option>

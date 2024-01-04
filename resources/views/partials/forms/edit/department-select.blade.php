@@ -8,14 +8,14 @@
                 @if($multiple)
                     @if($department_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($department_id)) ? \App\Models\Category::find($cdepartment_id)->name : '' }}
+                            {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($cdepartment_id)->name : '' }}
                         </option>
                     @endif
                 @endif
                 @if(!$multiple)
                     @if($department_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($department_id)) ? \App\Models\Category::find($department_id)->name : '' }}
+                            {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
                         </option>
                     @else
                         <option value="">{{ trans('general.select_department') }}</option>

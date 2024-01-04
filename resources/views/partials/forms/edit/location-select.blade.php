@@ -8,14 +8,14 @@
                 @if($multiple)
                     @if($location_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $location_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($location_id)) ? \App\Models\Category::find($location_id)->name : '' }}
+                            {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
                         </option>
                     @endif
                 @endif
                 @if(!$multiple)
                     @if($location_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                         <option value="{{ $location_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                            {{ (\App\Models\Category::find($location_id)) ? \App\Models\Category::find($location_id)->name : '' }}
+                            {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
                         </option>
                     @else
                         <option value="">{{ trans('general.select_location') }}</option>
