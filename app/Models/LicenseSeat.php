@@ -127,7 +127,6 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
         return $query->leftJoin('users as license_seat_users', 'license_seats.assigned_to', '=', 'license_seat_users.id')
             ->leftJoin('departments as license_user_dept', 'license_user_dept.id', '=', 'license_seat_users.department_id')
             ->whereNotNull('license_seats.assigned_to')
-            ->whereNotNull('license_user_dept.id')
             ->orderBy('license_user_dept.name', $order);
     }
 }
