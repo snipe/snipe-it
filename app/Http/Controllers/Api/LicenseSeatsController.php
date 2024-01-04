@@ -52,7 +52,7 @@ class LicenseSeatsController extends Controller
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
-                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total, $page);
+                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total,$offset,$page);
             }
         }
 

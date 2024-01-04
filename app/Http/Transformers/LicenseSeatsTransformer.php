@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class LicenseSeatsTransformer
 {
-    public function transformLicenseSeats(Collection $seats, $total, $page)
+    public function transformLicenseSeats(Collection $seats, $total, $offset, $page)
     {
         $array = [];
-        $seat_count = 0;
+        $seat_count = 0 +($offset *($page + 1));
         foreach ($seats as $seat) {
             $seat_count++;
             $array[] = self::transformLicenseSeat($seat, $seat_count);
