@@ -36,10 +36,12 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                     }
                     if ($asset->model->eol) {
                         if ($months != $asset->model->eol) {
-                            $asset->update(['eol_explicit' => true]);
+                            DB::table('assets')->where('id', $asset->id)->update(['eol_explicit' => true]);
                         }
-                    } else {
-                        $asset->update(['eol_explicit' => true]);
+                    }
+                    // if there is NO model eol, but there is a purchase date and an asset_eol_date (which is what is left over) the asset_eol_date has still been explicitly set
+                    else {
+                        DB::table('assets')->where('id', $asset->id)->update(['eol_explicit' => true]);
                     }
                 }
             }
