@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class LicenseSeatsTransformer
 {
-    public function transformLicenseSeats(Collection $seats, $total)
+    public function transformLicenseSeats(Collection $seats, $total, $page)
     {
         $array = [];
         $seat_count = 0;
