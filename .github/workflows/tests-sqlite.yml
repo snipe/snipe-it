@@ -1,4 +1,4 @@
-name: Tests
+name: Tests in SQLite
 
 on:
   push:
@@ -11,22 +11,10 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: snipeit
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     strategy:
       fail-fast: false
       matrix:
         php-version:
-          - "7.4"
-          - "8.0"
           - "8.1.1"
 
     name: PHP ${{ matrix.php-version }}
@@ -66,8 +54,5 @@ jobs:
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
-          DB_CONNECTION: mysql
-          DB_DATABASE: snipeit
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
-          DB_USERNAME: root
+          DB_CONNECTION: sqlite_testing
         run: php artisan test --parallel

@@ -136,7 +136,7 @@ class AssetsController extends Controller
 
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
-            if ($request->filled($field->db_column_name())) {
+            if ($request->filled($field->db_column_name()) && $field->db_column_name()) {
                 $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
             }
         }
