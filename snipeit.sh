@@ -149,16 +149,6 @@ install_packages () {
         fi
       done;
       ;;
-    Fedora)
-      for p in $PACKAGES; do
-        if dnf list installed "$p" >/dev/null 2>&1; then
-          echo "  * $p already installed"
-        else
-          echo "  * Installing $p"
-          log "dnf -y install $p"
-        fi
-      done;
-      ;;
   esac
 }
 
@@ -342,7 +332,7 @@ echo '
 '
 
 echo ""
-echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Rocky, Fedora, Debian, and Ubuntu!"
+echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Rocky, Debian, and Ubuntu!"
 echo ""
 echo "  Installation log located: $APP_LOG"
 echo ""
@@ -366,17 +356,15 @@ case $distro in
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
-  *centos*|*redhat*|*ol*|*rhel*|*rocky*)
+  *amzn*|*redhat*|*alma*|*rhel*|*rocky*)
     echo "  The installer has detected $distro version $version."
     distro=Centos
     apache_group=apache
     apachefile=/etc/httpd/conf.d/$APP_NAME.conf
     ;;
   *fedora*)
-    echo "  The installer has detected $distro version $version."
-    distro=Fedora
-    apache_group=apache
-    apachefile=/etc/httpd/conf.d/$APP_NAME.conf
+    echo "  The installer does not support Fedora"
+    exit 1
     ;;
   *)
     echo "   The installer was unable to determine your OS. Exiting for safety. Exiting for safety."
@@ -897,50 +885,6 @@ EOL
 
     else
         echo "Unsupported CentOS version. Version found: $version"
-        exit 1
-    fi
-  ;;
-  Fedora)
-    if [[ "$version" =~ ^36 ]]; then
-        # Install for Fedora 36+
-        set_fqdn
-        set_dbpass
-        tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
-
-        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="wget httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-cli php-common php-embedded php-gd php-mbstring php-mcrypt php-ldap php-simplexml php-process php-sodium php-pecl-zip php-fpm"
-        install_packages
-
-        echo "* Configuring Apache."
-        create_virtualhost
-
-        set_hosts
-
-        echo "* Setting MariaDB to start on boot and starting MariaDB."
-        log "systemctl enable mariadb.service"
-        log "systemctl start mariadb.service"
-
-        install_snipeit
-
-        set_firewall & pid=$!
-        progress
-
-        echo "* Setting Apache httpd to start on boot and starting service."
-        log "systemctl enable httpd.service"
-        log "systemctl restart httpd.service"
-
-        echo "* Setting php-fpm to start on boot and starting service."
-        log "systemctl enable php-fpm.service"
-        log "systemctl restart php-fpm.service"
-
-        echo "* Clearing cache and setting final permissions."
-        chmod 777 -R $APP_PATH/storage/framework/cache/
-        log "run_as_app_user php $APP_PATH/artisan cache:clear"
-        chmod 775 -R $APP_PATH/storage/
-
-        set_selinux
-    else
-        echo "Unsupported Fedora version. Version found: $version"
         exit 1
     fi
   ;;
