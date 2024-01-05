@@ -18,6 +18,9 @@
 #         Updated Snipe-IT Install Script            #
 #          Update created by Aaron Myers             #
 # Change log                                         #
+# * add support for php8.2, awslinux2, alma 8/9      #
+# * fix rocky8/9 support
+# * remove Fedora support because short timelines    #
 # * Added support for CentOS/Rocky 9                 #
 # * Fixed CentOS 7 repository for PHP 7.4            #
 # * Removed support for CentOS 6                     #
