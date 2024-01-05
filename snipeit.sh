@@ -844,7 +844,8 @@ EOL
 
         echo "* Adding EPEL-release repository."
         log "dnf -y install wget epel-release" & pid=$!
-        log "yum -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm" & pid=$
+        progress
+        log "yum -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm" & pid=$!
         progress
         log "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el9"
         log "dnf -y module enable php:remi-8.2" & pid=$!
