@@ -218,7 +218,7 @@ install_composer () {
 install_snipeit () {
   create_user
   echo "* Creating MariaDB Database/User."
-  mysql -u root --execute="CREATE DATABASE snipeit_dbuser;CREATE USER snipeit_dbuser@localhost IDENTIFIED BY '$mysqluserpw'; GRANT ALL PRIVILEGES ON snipeit.* TO snipeit_dbuser@localhost;"
+  mysql -u root --execute="CREATE DATABASE snipeit;CREATE USER snipeit_dbuser@localhost IDENTIFIED BY '$mysqluserpw'; GRANT ALL PRIVILEGES ON snipeit.* TO snipeit_dbuser@localhost;"
 
   echo -e "\n\n* Cloning Snipe-IT from github to the web directory."
   log "git clone https://github.com/snipe/snipe-it $APP_PATH" & pid=$!
@@ -725,7 +725,7 @@ EOL
         amazon-linux-extras install -y php8.2
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip  php-sodium"
         install_packages
 
         echo "* Configuring Apache."
