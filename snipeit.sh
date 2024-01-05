@@ -619,9 +619,9 @@ case $distro in
         set_dbpass
         tzone=$(cat /etc/timezone)
 
-	echo "* Set up Ondrej PHP repository"
-	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
-	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+        echo "* Set up Ondrej PHP repository"
+        echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
 
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
@@ -680,8 +680,8 @@ Package: *
 Pin: release n=buster
 Pin-Priority: 750
 EOL
-	echo "* Set up Ondrej PHP repository"
-	echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
+        echo "* Set up Ondrej PHP repository"
+        echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$codename.list
 
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
