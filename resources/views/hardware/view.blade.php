@@ -31,9 +31,6 @@
 
         <div class="col-md-12">
 
-
-
-
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -81,7 +78,6 @@
                         </a>
                     </li>
 
-                
                     <li>
                         <a href="#history" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -126,7 +122,6 @@
                     </a>
                     </li>
 
-                   
                     @can('update', \App\Models\Asset::class)
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
@@ -136,9 +131,8 @@
                         </li>
                     @endcan
 
-
                 </ul>
-                
+
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="details">
                         <div class="row">
@@ -158,8 +152,6 @@
                                             </div>
                                         </div>
                                     @endif
-
-
 
                                     @if ($asset->assetstatus)
 
@@ -447,7 +439,6 @@
                                         @endforeach
                                     @endif
 
-
                                     @if ($asset->purchase_date)
                                         <div class="row">
                                             <div class="col-md-2">
@@ -520,7 +511,6 @@
                                                     @endif
                                                     {{ Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
 
-                                                
                                             </div>
                                         </div>
                                     @endif
@@ -555,7 +545,6 @@
                                             </div>
                                         </div>
                                     @endif
-
 
                                     @if ($asset->warranty_months)
                                         <div class="row">
@@ -651,7 +640,7 @@
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_date') }}
                                                     @if ($asset->purchase_date)
-														{!! $asset->asset_eol_date < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+                                                        {!! $asset->asset_eol_date < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
                                                     @endif
                                                 </strong>
                                             </div>
@@ -776,8 +765,6 @@
                                         </div>
                                      @endif
 
-
-
                                     <div class="row">
                                         <div class="col-md-2">
                                             <strong>
@@ -789,7 +776,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="row">
                                         <div class="col-md-2">
                                             <strong>
@@ -800,7 +786,6 @@
                                             {{ ($asset->checkins) ? (int) $asset->checkins->count() : '0' }}
                                         </div>
                                     </div>
-
 
                                     <div class="row">
                                         <div class="col-md-2">
@@ -869,7 +854,6 @@
                                             @endcan
                                         @endif
                                     @endif
-
 
                                     @can('update', $asset)
                                         <div class="col-md-12" style="padding-top: 5px;">
@@ -988,6 +972,7 @@
                                         <tr>
                                             <th class="col-md-4">{{ trans('general.name') }}</th>
                                             <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
+                                            <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.expiration') }}</th>
                                             <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
                                         </tr>
                                         </thead>
@@ -1002,6 +987,9 @@
                                                         @else
                                                             ------------
                                                         @endcan
+                                                    </td>
+                                                    <td>
+                                                        {{ Helper::getFormattedDateObject($seat->license->expiration_date, 'date', false) }}
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
@@ -1040,7 +1028,6 @@
                                         <?php $totalCost = 0; ?>
                                         @foreach ($asset->components as $component)
 
-
                                             @if (is_null($component->deleted_at))
                                                 <tr>
                                                     <td>
@@ -1077,13 +1064,11 @@
                         </div>
                     </div> <!-- /.tab-pane components -->
 
-
                     <div class="tab-pane fade" id="assets">
                         <div class="row">
                             <div class="col-md-12">
 
                                 @if ($asset->assignedAssets->count() > 0)
-
 
                                     {{ Form::open([
                                               'method' => 'POST',
@@ -1125,7 +1110,6 @@
 
                                         </table>
 
-
                                         {{ Form::close() }}
                                     </div>
 
@@ -1137,11 +1121,9 @@
                                     </div>
                                 @endif
 
-
                             </div><!-- /col -->
                         </div> <!-- row -->
                     </div> <!-- /.tab-pane software -->
-
 
                     <div class="tab-pane fade" id="maintenances">
                         <div class="row">
