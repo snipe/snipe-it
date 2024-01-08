@@ -1,6 +1,8 @@
 {
   "projectName": "snipe-it",
   "projectOwner": "snipe",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
