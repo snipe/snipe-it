@@ -8,6 +8,7 @@
   ],
   "imageSize": 110,
   "commit": true,
+  "commitConvention": "angular"
   "contributors": [
     {
       "login": "snipe",
