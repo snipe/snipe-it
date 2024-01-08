@@ -1,6 +1,9 @@
 {
     "private": true,
     "scripts": {
+        "contributors:add": "all-contributors add",
+        "contributors:check": "all-contributors check",
+        "contributors:generate": "all-contributors generate",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
