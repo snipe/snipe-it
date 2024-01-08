@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'Detta kommer att checka in en plats.|Denna åtgärd kommer att checka in alla :checkedout_seats_count platser för denna licens.',
                 'enabled_tooltip'   => 'Checka in ALLA platser för denna licens från både användare och tillgångar',
                 'disabled_tooltip'  => 'Detta är inaktiverat eftersom det för närvarande inte finns några platser utcheckade',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'Detta är inaktiverat eftersom licensen inte är omtilldelbar',
                 'success'           => 'Licensen har checkats in! | Alla licenser har checkats in!',
                 'log_msg'           => 'Incheckad via bulk licens checkout i licens GUI',
             ],

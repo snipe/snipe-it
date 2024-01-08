@@ -35,12 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'Skickar :app testmeddelande...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'Din :webhook_name Integration fungerar!',
         'success_pt1' => 'Klart! Kontrollera ',
         'success_pt2' => ' kanal för ditt testmeddelande, och se till att klicka på SPARA nedan för att lagra dina inställningar.',
         '500' => '500 Server fel.',
         'error' => 'Något gick fel. :app svarade med: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'FEL: 301/302 :endpoint returnerar en omdirigering. Av säkerhetsskäl följer vi inte omdirigeringar. Använd själva slutpunkten.',
         'error_misc' => 'Någonting gick fel. :( ',
     ]
 ];

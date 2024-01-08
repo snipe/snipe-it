@@ -20,10 +20,9 @@ class AssetMaintenance extends Model implements ICompanyableChild
     use SoftDeletes;
     use CompanyableChildTrait;
     use ValidatingTrait;
-    protected $casts = [
-        'start_date' => 'datetime',
-        'completion_date' => 'datetime',
-    ];
+
+
+
     protected $table = 'asset_maintenances';
     protected $rules = [
         'asset_id'               => 'required|integer',
@@ -31,10 +30,29 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
-        'start_date'             => 'required|date',
-        'completion_date'        => 'nullable|date',
+        'start_date'             => 'required|date_format:Y-m-d',
+        'completion_date'        => 'date_format:Y-m-d|nullable',
         'notes'                  => 'string|nullable',
         'cost'                   => 'numeric|nullable',
+    ];
+
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'asset_id',
+        'supplier_id',
+        'asset_maintenance_type',
+        'is_warranty',
+        'start_date',
+        'completion_date',
+        'asset_maintenance_time',
+        'notes',
+        'cost',
     ];
 
     use Searchable;

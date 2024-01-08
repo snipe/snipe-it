@@ -399,7 +399,7 @@ img.navbar-brand-img, .navbar-brand>img {
 }
 
 .icon-med {
-  font-size: 20px;
+  font-size: 14px;
   color: #889195;
 }
 
@@ -860,3 +860,31 @@ input[type="radio"]:checked::before {
 /** --------------------------------------- **/
 /** End checkbox styles to replace iCheck   **/
 /** --------------------------------------- **/
+
+/**
+/** Separator styles with text in the middle. Currently only used by the login page but
+/** could be used elsewhere.
+ */
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+  color: #959495;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #959495;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
+}

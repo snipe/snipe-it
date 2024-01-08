@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Skriv ut alla tilldelade',
     'name'                      => 'Platsnamn',
     'address'                   => 'Adress',
+    'address2'                   => 'Adressrad 2',
     'zip'                       => 'postnummer',
     'locations'                 => 'platser',
     'parent'                    => 'Förälder',

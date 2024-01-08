@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'Esta ação irá realizar a verificação de um único lugar. | Esta ação verificará todos os :checkedout_seats_count lugares para esta licença.',
                 'enabled_tooltip'   => 'Entrega de TODOS os lugares para esta licença de utilizadores e ativos',
                 'disabled_tooltip'  => 'Isto está desativado porque não há lugares recebidos no momento',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'Isso está desativado porque a licença não é reatribuível',
                 'success'           => 'Licença entregue com sucesso! Todas as licenças foram entregues com sucesso!',
                 'log_msg'           => 'Entrega feita através da entrega em massa da licença',
             ],

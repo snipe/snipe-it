@@ -2,28 +2,28 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
+    'does_not_exist' => 'ទីតាំងមិនមានទេ។',
+    'assoc_users'	 => 'បច្ចុប្បន្នទីតាំងនេះត្រូវបានភ្ជាប់ជាមួយអ្នកប្រើប្រាស់យ៉ាងហោចណាស់ម្នាក់ ហើយមិនអាចលុបបានទេ។ សូមអាប់ដេតអ្នកប្រើប្រាស់របស់អ្នក ដើម្បីកុំឱ្យយោងទីតាំងនេះតទៅទៀត ហើយព្យាយាមម្តងទៀត។ ',
+    'assoc_assets'	 => 'បច្ចុប្បន្នទីតាំងនេះត្រូវបានភ្ជាប់ជាមួយទ្រព្យសកម្មយ៉ាងហោចណាស់មួយ ហើយមិនអាចលុបបានទេ។ សូមអាប់ដេតទ្រព្យសកម្មរបស់អ្នក ដើម្បីកុំឱ្យយោងទីតាំងនេះតទៅទៀត ហើយព្យាយាមម្តងទៀត។ ',
     'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
-    'assigned_assets' => 'Assigned Assets',
-    'current_location' => 'Current Location',
+    'assigned_assets' => 'ទ្រព្យសកម្មដែលបានចាត់តាំង',
+    'current_location' => 'ទីតាំង​បច្ចុប្បន្',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'ទីតាំងមិនត្រូវបានបង្កើតទេ សូមព្យាយាមម្តងទៀត។',
+        'success' => 'ទីតាំងត្រូវបានបង្កើតដោយជោគជ័យ។'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'ទីតាំងមិនត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ សូមព្យាយាមម្តងទៀត',
+        'success' => 'បានធ្វើបច្ចុប្បន្នភាពទីតាំងដោយជោគជ័យ។'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'តើអ្នកប្រាកដថាចង់លុបទីតាំងនេះទេ?',
+        'error'   => 'មានបញ្ហាក្នុងការលុបទីតាំង។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'success' => 'ទីតាំងត្រូវបានលុបដោយជោគជ័យ។'
     )
 
 );

@@ -74,7 +74,7 @@ return [
     'your_credentials' => 'Tus credenciales de Snipe-IT',
     'Accessory_Checkin_Notification' => 'Accesorio devuelto',
     'Asset_Checkin_Notification' => 'Activo devuelto',
-    'Asset_Checkout_Notification' => 'Activo asignado',
+    'Asset_Checkout_Notification' => 'Recurso reservado',
     'License_Checkin_Notification' => 'Licencia devuelta',
     'Expected_Checkin_Report' => 'Informe de devolución de activo esperado',
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',

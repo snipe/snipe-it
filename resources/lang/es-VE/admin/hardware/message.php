@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'El activo no ha sido creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Activo creado con éxito. :)',
+        'success_linked' => 'Activo con etiqueta :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
     ],
 
     'update' => [
@@ -22,7 +23,7 @@ return [
     'restore' => [
         'error'   		=> 'El activo no fue restaurado, por favor, inténtalo de nuevo',
         'success' 		=> 'Activo restaurado correctamente.',
-        'bulk_success' 		=> 'Equipo restaurado correctamente.',
+        'bulk_success' 		=> 'Activo restaurado correctamente.',
         'nothing_updated'   => 'No se seleccionaron activos, por lo que no se restauró nada.', 
     ],
 
@@ -50,7 +51,7 @@ return [
         'success'               => 'Tu archivo ha sido importado',
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Falta el archivo seleccionado',
         'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',
         'content_row_has_malformed_characters' => 'Uno o más atributos en la primera fila de contenido contienen caracteres UTF-8 mal formados',
     ],

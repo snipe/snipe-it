@@ -13,22 +13,23 @@ return [
     |
     */
 
-    'more_info_title' => 'More Info',
+    'more_info_title' => 'Tuilleadh eolais',
 
     'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Déantar míreanna a rianú trí shraithuimhir nó ar chlib sócmhainne. Is iondúil go n-éireoidh siad le hítimí ar luach níos airde a bhaineann le hábhair shonracha a aithint.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Cuidíonn catagóirí leat do chuid míreanna a eagrú. D\'fhéadfadh roinnt catagóirí samplaí a bheith &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mócaí Póca&quot;, &quot;Tablets&quot;, agus mar sin de, ach is féidir leat catagóirí a úsáid ar bhealach ar bith a dhéanann ciall duit.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Is éard atá i gceist le hábhair a eiseoidh tú d\'úsáideoirí ach nach bhfuil sraithuimhir acu (nó nach bhfuil cúram ort faoi iad a rianú uathúil). Mar shampla, lucha ríomhaire nó méarchláir.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Is féidir cuideachtaí a úsáid mar réimse simplí aitheantóra, nó is féidir iad a úsáid chun infheictheacht na sócmhainní, na n-úsáideoirí, srl a theorannú má tá tacaíocht iomlán na cuideachta cumasaithe i do shocruithe Riaracháin.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Is iad na comhpháirteanna míreanna atá mar chuid de shócmhainn, mar shampla HDD, RAM, etc.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Déantar aon ní a cheannach a úsáidfear le himeacht ama. Mar shampla, dúch printéir nó páipéar cóipeála.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-
+    'depreciations' => 'Is féidir leat dímheasanna sócmhainní a bhunú chun sócmhainní a dhímheas bunaithe ar dhímheas díreach líne.',
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

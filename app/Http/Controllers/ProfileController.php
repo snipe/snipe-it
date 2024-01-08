@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $user->phone = $request->input('phone');
 
         if (! config('app.lock_passwords')) {
-            $user->locale = $request->input('locale', 'en');
+            $user->locale = $request->input('locale', 'en-US');
         }
 
         if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled == '1') && (! config('app.lock_passwords')))) {

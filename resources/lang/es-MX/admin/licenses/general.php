@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'Esto activará la desasignación de un asiento. | Esta acción desasignará todos los asientos :checkedout_seats_count para esta licencia.',
                 'enabled_tooltip'   => 'Desasignar TODOS los asientos para esta licencia tanto de usuarios como de activos',
                 'disabled_tooltip'  => 'Esto está deshabilitado porque no hay asientos asignados actualmente',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'Esto está desactivado porque la licencia no es reasignable',
                 'success'           => '¡Licencia asignada con éxito! | ¡Todas las licencias fueron asignadas con éxito!',
                 'log_msg'           => 'Asignación a través de asignación masiva en la interfaz de licencia',
             ],

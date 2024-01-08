@@ -195,11 +195,6 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
-        $limit = app('api_limit_value');
-
-
         switch ($request->input('sort')) {
             case 'manager':
                 $users = $users->OrderManager($order);
@@ -276,7 +271,17 @@ class UsersController extends Controller
         }
 
         $users = Company::scopeCompanyables($users);
-        
+
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
+        \Log::debug('Requested offset: '. $request->input('offset'));
+        \Log::debug('App offset: '. app('api_offset_value'));
+        \Log::debug('Actual offset: '. $offset);
+        \Log::debug('Limit: '. $limit);
+
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 
@@ -356,6 +361,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->created_by = Auth::user()->id;
 
         if ($request->has('permissions')) {
             $permissions_array = $request->input('permissions');
@@ -709,11 +715,11 @@ class UsersController extends Controller
                 $logaction->user_id = Auth::user()->id;
                 $logaction->logaction('restore');
 
-                return response()->json(Helper::formatStandardApiResponse('success', trans('admin/users/message.restore.success')), 200);
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);
             }
 
             // Check validation to make sure we're not restoring a user with the same username as an existing user
-            return response()->json(Helper::formatStandardApiResponse('error', trans('general.could_not_restore', ['item_type' => trans('general.user'), 'error' => $user->getErrors()->first()])), 200);
+            return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')), 200);

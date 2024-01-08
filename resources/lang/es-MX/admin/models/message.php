@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Modelo del activo eliminado',
+    'deleted' => 'Modelo de recurso eliminado',
     'does_not_exist' => 'Modelo inexistente.',
     'no_association' => '¡ADVERTENCIA! ¡El modelo de activo para este artículo no es válido o no se encuentra!',
     'no_association_fix' => 'Esto causará problemas raros y horribles. Edita este activo para asignarlo a un modelo.',

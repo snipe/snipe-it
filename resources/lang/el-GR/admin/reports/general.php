@@ -1,0 +1,17 @@
+<?php
+
+return [
+    'info'   => 'Επιλέξτε τις επιλογές που θέλετε για την αναφορά των παγίων σας.',
+    'deleted_user' => 'Διαγραφή χρήστη',
+    'send_reminder' => 'Αποστολή υπενθύμισης',
+    'reminder_sent' => 'Υπενθύμιση εστάλη',
+    'acceptance_deleted' => 'Η αίτηση αποδοχής διαγράφηκε',
+    'acceptance_request' => 'Αίτημα αποδοχής',
+    'custom_export' => [
+        'user_address' => 'Διεύθυνση Χρήστη',
+        'user_city' => 'Πόλη Χρήστη',
+        'user_state' => 'Κατάσταση Χρήστη',
+        'user_country' => 'Χώρα Χρήστη',
+        'user_zip' => 'Zip Χρήστη'
+    ]
+];

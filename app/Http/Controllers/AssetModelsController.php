@@ -88,7 +88,7 @@ class AssetModelsController extends Controller
         $model->requestable = Request::has('requestable');
 
         if ($request->input('fieldset_id') != '') {
-            $model->fieldset_id = e($request->input('fieldset_id'));
+            $model->fieldset_id = $request->input('fieldset_id');
         }
 
         $model = $request->handleImages($model);
@@ -101,7 +101,6 @@ class AssetModelsController extends Controller
                 }
             }
 
-            // Redirect to the new model  page
             return redirect()->route('models.index')->with('success', trans('admin/models/message.create.success'));
         }
 
@@ -166,17 +165,14 @@ class AssetModelsController extends Controller
 
         $this->removeCustomFieldsDefaultValues($model);
 
-        if ($request->input('fieldset_id') == '') {
-            $model->fieldset_id = null;
-        } else {
-            $model->fieldset_id = $request->input('fieldset_id');
+        $model->fieldset_id = $request->input('fieldset_id');
 
-            if ($this->shouldAddDefaultValues($request->input())) {
-                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
-                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
-                }
+        if ($this->shouldAddDefaultValues($request->input())) {
+            if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
             }
         }
+
        
       
        

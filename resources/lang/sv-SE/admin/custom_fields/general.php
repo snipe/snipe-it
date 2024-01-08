@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Nytt anpassat fält',
     'create_field_title' => 'Skapa ett nytt anpassat fält',
     'value_encrypted'      	        => 'Värdet på det här fältet är krypterat i databasen. Endast adminanvändare kan se det dekrypterade värdet',
-    'show_in_email'     => 'Inkludera värdet på det här fältet i utcheckning mailen som skickas till användarna? Krypterade fält kan inte inkluderas i e-postmeddelanden.',
+    'show_in_email'     => 'Inkludera värdet på det här fältet i utcheckning mailen som skickas till användarna? Krypterade fält kan inte inkluderas i e-postmeddelanden',
+    'show_in_email_short'     => 'Inkludera i e-post.',
     'help_text' => 'Hjälptext',
     'help_text_description' => 'Detta är valfri text som visas under formulärelementen medan du redigerar en tillgång för att ge sammanhang på fältet.',
     'about_custom_fields_title' => 'Om anpassade fält',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Synlig för användare',
     'auto_add_to_fieldsets' => 'Lägg automatiskt till detta i varje nytt fält',
     'add_to_preexisting_fieldsets' => 'Lägg till en befintlig lista',
-    'show_in_listview' => 'Visa i listvyer som standard. Auktoriserade användare kommer fortfarande att kunna visa/dölja via kolumnväljaren.',
+    'show_in_listview' => 'Visa i listvyer som standard. Auktoriserade användare kommer fortfarande att kunna visa/dölja via kolumnväljaren',
     'show_in_listview_short' => 'Visa i listor',
+    'show_in_requestable_list_short' => 'Visa i listan med begärbara tillgångar',
+    'show_in_requestable_list' => 'Visa värde i listan med begärbara tillgångar. Krypterade fält kommer inte att visas',
+    'encrypted_options' => 'Detta fält är krypterat, så vissa visningsalternativ kommer inte att vara tillgängliga.',
 
 ];

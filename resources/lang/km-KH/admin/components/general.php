@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'component_name'                  => 'Component Name',
+    'component_name'                  => 'ឈ្មោះសមាសធាតុ',
     'checkin'                             => 'Checkin Component',
     'checkout'                             => 'Checkout Component',
-    'cost'				=> 'Purchase Cost',
+    'cost'				=> 'ការចំណាយលើការទិញ',
     'create'                             => 'Create Component',
     'edit'                             => 'Edit Component',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
+    'date'					=> 'កាលបរិច្ឆេទទិញ',
+    'order'					=> 'លេខបញ្ជាទិញ',
     'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
+    'total' 			                 => 'សរុប',
     'update'                            => 'Update Component',
     'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

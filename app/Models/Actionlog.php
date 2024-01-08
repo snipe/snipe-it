@@ -25,7 +25,17 @@ class Actionlog extends SnipeModel
 
     protected $table = 'action_logs';
     public $timestamps = true;
-    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type', 'stored_eula'];
+    protected $fillable = [
+        'created_at',
+        'item_type',
+        'user_id',
+        'item_id',
+        'action_type',
+        'note',
+        'target_id',
+        'target_type',
+        'stored_eula'
+    ];
 
     use Searchable;
 
@@ -34,7 +44,15 @@ class Actionlog extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['action_type', 'note', 'log_meta','user_id'];
+    protected $searchableAttributes = [
+        'action_type',
+        'note',
+        'log_meta',
+        'user_id',
+        'remote_ip',
+        'user_agent',
+        'action_source'
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -248,6 +266,9 @@ class Actionlog extends SnipeModel
     public function logaction($actiontype)
     {
         $this->action_type = $actiontype;
+        $this->remote_ip =  request()->ip();
+        $this->user_agent = request()->header('User-Agent');
+        $this->action_source = $this->determineActionSource();
 
         if ($this->save()) {
             return true;
@@ -311,5 +332,30 @@ class Actionlog extends SnipeModel
                  ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
+    }
+
+    /**
+     * Determines what the type of request is so we can log it to the action_log
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.3.0
+     * @return string
+     */
+    public function determineActionSource() {
+
+        // This is an API call
+        if (((request()->header('content-type') && (request()->header('accept'))=='application/json'))
+            && (starts_with(request()->header('authorization'), 'Bearer '))) {
+            return 'api';
+        }
+
+       // This is probably NOT an API call
+        if (request()->filled('_token')) {
+            return 'gui';
+        }
+
+        // We're not sure, probably cli
+        return 'cli/unknown';
+
     }
 }

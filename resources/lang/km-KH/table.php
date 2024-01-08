@@ -3,8 +3,8 @@
 return array(
 
     'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
+    'action' 		=> 'សកម្មភាព',
     'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'item' 			=> 'ធាតុ',
 
 );

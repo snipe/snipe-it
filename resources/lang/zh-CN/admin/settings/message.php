@@ -35,12 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => '正在发送 :app 测试消息...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => '您的 :webhook_name 集成工作！',
         'success_pt1' => '成功！请检查 ',
         'success_pt2' => ' 测试消息的频道，并且一定要点击下面的“保存”来存储您的设置。',
         '500' => '500 服务器错误。',
         'error' => '出错了。:app响应：:error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => '错误：301/302 :endpoint 返回重定向。出于安全原因，我们不跟随重定向。请使用实际端点。',
         'error_misc' => '出错了:( ',
     ]
 ];

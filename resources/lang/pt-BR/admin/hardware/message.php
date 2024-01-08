@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'O ativo não foi criado, tente novamente. :(',
         'success' 		=> 'Ativo criado com sucesso. :)',
+        'success_linked' => 'O ativo com a tag :tag foi criado com sucesso. <strong><a href=":link" style="color: white;">clique aqui para ver</a></strong>.',
     ],
 
     'update' => [
