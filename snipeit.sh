@@ -955,9 +955,6 @@ echo ""
 echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
 echo ""
-echo "* Cleaning up..."
-# rm -f snipeit.sh
-# rm -f install.sh
 echo "* Installation log located in $APP_LOG."
 echo "* Finished!"
 sleep 1
