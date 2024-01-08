@@ -40,19 +40,20 @@ class AssetObserver
 
         // If the asset isn't being checked out or audited, log the update.
         // (Those other actions already create log entries.)
-	    if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
-	    && ($same_checkout_counter) && ($same_checkin_counter)
-            && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
-            && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && (!$restoring_or_deleting))
-        {
-            $changed = [];
+        if(array_key_exists('assigned_to', $attributesOriginal)) { // Api/AssetsController store method to work - doesn't make a ton of sense as it's not an update
+            if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
+            && ($same_checkout_counter) && ($same_checkin_counter)
+                && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
+                && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && (!$restoring_or_deleting)) {
+                $changed = [];
 
-            foreach ($asset->getRawOriginal() as $key => $value) {
-                if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
-                    $changed[$key]['old'] = $asset->getRawOriginal()[$key];
-                    $changed[$key]['new'] = $asset->getAttributes()[$key];
+                foreach ($asset->getRawOriginal() as $key => $value) {
+                    if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
+                        $changed[$key]['old'] = $asset->getRawOriginal()[$key];
+                        $changed[$key]['new'] = $asset->getAttributes()[$key];
+                    }
                 }
-	    }
+        }
 
 	    if (empty($changed)){
 	        return;
@@ -162,7 +163,7 @@ class AssetObserver
         // determine if calculated eol and then calculate it - this should only happen on a new asset
         if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model->eol > 0)){
             $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
-            $asset->eol_explicit = false; 
+            $asset->eol_explicit = false;
         } 
 
        // determine if explicit and set eol_explicit to true
