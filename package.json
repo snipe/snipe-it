@@ -13,6 +13,7 @@
         "node": ">=0.12"
     },
     "devDependencies": {
+        "all-contributors-cli": "^6.26.1",
         "axios": "^0.27.2",
         "babel-preset-latest": "^6.24.1",
         "jquery": "<3.6.0",
