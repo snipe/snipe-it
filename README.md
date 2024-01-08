@@ -82,12 +82,11 @@ As these were created by third-parties, Snipe-IT cannot provide support for thes
 
 Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing-overview).
 
-[Here is a list](CONTRIBUTORS.md) of the wonderful people that have contributed to the Snipe-IT.
-
-
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 The ERD is available [online here](https://drawsql.app/templates/snipe-it).
+
+[Here is a list](CONTRIBUTORS.md) of the wonderful people that have contributed to the Snipe-IT.
 
 -----
 
