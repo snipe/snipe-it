@@ -1,11 +1,14 @@
 {
   "projectName": "snipe-it",
   "projectOwner": "snipe",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 110,
   "commit": true,
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "snipe",
