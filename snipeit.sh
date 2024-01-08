@@ -227,7 +227,7 @@ install_snipeit () {
   log "git clone https://github.com/snipe/snipe-it $APP_PATH" & pid=$!
   progress
   pushd $APP_PATH
-  git checkout jerm/snipeit-sh
+  git checkout master
   popd
 
   echo "* Configuring .env file."
