@@ -40,7 +40,7 @@ class AssetObserver
 
         // If the asset isn't being checked out or audited, log the update.
         // (Those other actions already create log entries.)
-        if(array_key_exists('assigned_to', $attributesOriginal)) { // Api/AssetsController store method to work - doesn't make a ton of sense as it's not an update
+        if(array_key_exists('assigned_to', $attributesOriginal)) { //  to get Api/AssetsController store method to work - this is because the checkout action happens after the create, and it's an update
             if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
             && ($same_checkout_counter) && ($same_checkin_counter)
                 && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
