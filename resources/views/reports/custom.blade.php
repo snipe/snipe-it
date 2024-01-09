@@ -477,7 +477,7 @@
                     <input type="hidden" id="savetemplateform" name="options">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
-                        <label for="name">Name</label>
+                        <label for="name">{{ trans('admin/reports/general.report_name') }}</label>
                         <input class="form-control" placeholder="" name="name" type="text" id="name" value="{{ $reportTemplate->name }}">
                         {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                     </div>

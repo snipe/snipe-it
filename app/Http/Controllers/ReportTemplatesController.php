@@ -30,7 +30,7 @@ class ReportTemplatesController extends Controller
 
         if (!$reportTemplate) {
             return redirect()->route('reports/custom')
-                ->with('error', 'Template does not exist or you do not have permission to view it.');
+                ->with('error', 'Template does not exist or you do not have permission to view it.'); //needs translation
         }
 
         $customfields = CustomField::get();

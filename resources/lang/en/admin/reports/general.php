@@ -12,4 +12,5 @@ return [
     'apply_template' => 'Apply Template',
     'generate_template' => 'Generate Template',
     'apply_and_generate' => 'Apply and Generate',
+    'report_name' => 'Report Name',
 ];

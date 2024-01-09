@@ -10,4 +10,6 @@ return array(
         ],
 
     'delete' => 'Are you sure you want to delete this report?',
+    'no_report_permission' => 'Template does not exist or you do not have permission to view it.',
+
 );
