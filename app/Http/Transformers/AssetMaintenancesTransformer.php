@@ -45,7 +45,7 @@ class AssetMaintenancesTransformer
                 'name'=> e($assetmaintenance->asset->location->name),
 
             ] : null,
-            'rtd_location' => ($assetmaintenance->asset->defaultLoc) ? [
+            'rtd_location' => (($assetmaintenance->asset) && ($assetmaintenance->asset->defaultLoc)) ? [
                 'id' => (int) $assetmaintenance->asset->defaultLoc->id,
                 'name'=> e($assetmaintenance->asset->defaultLoc->name),
             ] : null,
