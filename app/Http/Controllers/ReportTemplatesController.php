@@ -30,7 +30,7 @@ class ReportTemplatesController extends Controller
 
         if (!$reportTemplate) {
             return redirect()->route('reports/custom')
-                ->with('error', 'Template does not exist or you do not have permission to view it.'); //needs translation
+                ->with('error', trans('admin/reports/message.no_report_permission'));
         }
 
         $customfields = CustomField::get();
@@ -59,7 +59,7 @@ class ReportTemplatesController extends Controller
 
         if (!$reportTemplate) {
             return redirect()->route('reports/custom')
-                ->with('error', 'Template does not exist or you do not have permission to view it.');
+                ->with('error', trans('admin/reports/message.no_report_permission'));
         }
 
         $reportTemplate->options = $request->except(['_token', 'name']);
@@ -76,12 +76,12 @@ class ReportTemplatesController extends Controller
 
         if (!$reportTemplate) {
             return redirect()->route('reports/custom')
-                ->with('error', 'Template does not exist or you do not have permission to delete it.');
+                ->with('error', trans('admin/reports/message.delete.no_delete_permission'));
         }
 
         $reportTemplate->delete();
 
         return redirect()->route('reports/custom')
-            ->with('success', 'Template deleted.');
+            ->with('success', trans('admin/reports/message.delete.delete_confirm'));
     }
 }
