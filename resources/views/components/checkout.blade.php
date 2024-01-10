@@ -11,7 +11,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <form class="form-horizontal" method="post" action="" autocomplete="off">
+    <form class="form-horizontal" id="checkout_form" method="post" action="" autocomplete="off">
       <!-- CSRF Token -->
       {{ csrf_field() }}
 
@@ -56,7 +56,7 @@
         </div> <!-- .BOX-BODY-->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+          <button type="submit" id="submit_button" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div> <!-- .box-default-->
     </form>
