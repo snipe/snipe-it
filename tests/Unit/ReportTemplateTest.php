@@ -132,6 +132,11 @@ class ReportTemplateTest extends TestCase
         $this->assertNull((new ReportTemplate)->selectValue('value_on_unsaved_template', Location::class));
     }
 
+    public function testSelectValueDoesNotIncludeModelUserDoesNotHaveAccessTo()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()
     {
         [$locationA, $locationB] = Location::factory()->count(2)->create();
@@ -154,6 +159,11 @@ class ReportTemplateTest extends TestCase
         $this->assertContains($locationA->id, $parsedValues);
         $this->assertNotContains($locationB->id, $parsedValues);
         $this->assertNotContains($invalidId, $parsedValues);
+    }
+
+    public function testSelectValuesDoesNotIncludeModelUserDoesNotHaveAccessTo()
+    {
+        $this->markTestIncomplete();
     }
 
     public function testGracefullyHandlesSingleSelectBecomingMultiSelect()
