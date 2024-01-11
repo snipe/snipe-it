@@ -455,6 +455,7 @@
     <div class="col-md-2">
         @if (! request()->routeIs('report-templates.edit'))
             <div class="form-group">
+                <label for="saved_report_select">{{ trans('admin/reports/general.saved_reports') }}</label>
                 <select
                     id="saved_report_select"
                     class="form-control select2"
@@ -471,6 +472,7 @@
             </div>
         @endif
         @if (request()->routeIs('reports/custom'))
+            <hr>
             <div class="form-group">
                 <form method="post" id="savetemplateform" action="{{ route("report-templates.store") }}">
                     @csrf
@@ -486,16 +488,15 @@
                     </button>
                 </form>
             </div>
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h4>{{ trans('admin/reports/message.about_reports') }}</h4>
+              </div>
+              <div class="box-body">
+                <p>{!!  trans('admin/reports/message.saving_reports_description')  !!}</p>
+              </div>
+            </div>
         @endif
-        <br>
-        <div class="box box-success">
-          <div class="box-header with-border">
-            <h4>{{ trans('admin/reports/message.about_reports') }}</h4>
-          </div>
-          <div class="box-body">
-            <p>{!!  trans('admin/reports/message.saving_reports_description')  !!}</p>
-          </div>
-        </div>
     </div>
 </div>
 
