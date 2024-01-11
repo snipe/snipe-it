@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
@@ -30,6 +31,14 @@ class ReportTemplate extends Model
         'name' => 'required|unique:report_templates,name',
         'options' => 'array',
     ];
+
+    protected static function booted()
+    {
+        // Scope to current user
+        static::addGlobalScope('current_user', function (Builder $builder) {
+            $builder->where('user_id', auth()->id());
+        });
+    }
 
     public function checkmarkValue(string $property): string
     {
