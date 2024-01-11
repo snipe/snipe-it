@@ -488,9 +488,10 @@
             </div>
         @endif
         <br>
-        <h4>{{ trans('admin/reports/message.about_reports') }}</h4>
         <div class="box box-success">
-            <div class="box-body">
+          <div class="box-header with-border">
+            <h4>{{ trans('admin/reports/message.about_reports') }}</h4>
+          <div class="box-body">
                 <p>{!!  trans('admin/reports/message.saving_reports_description')  !!}</p>
             </div>
         </div>
