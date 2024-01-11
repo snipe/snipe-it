@@ -68,14 +68,21 @@ class ReportTemplate extends Model
             return null;
         }
 
+        $value = $this->options[$property];
+
+        if (is_array($value)) {
+            $value = $value[0];
+        }
+
         // If a model is provided then we should ensure we only return
         // the value if the model still exists.
         if ($model) {
-            $foundModel = $model::find($this->options[$property]);
+            $foundModel = $model::find($value);
 
             return $foundModel ? $foundModel->id : null;
         }
-        return $this->options[$property] ?? null;
+
+        return $value;
     }
 
     public function selectValues(string $property, string $model = null): iterable

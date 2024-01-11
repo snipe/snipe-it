@@ -173,22 +173,24 @@ class ReportTemplateTest extends TestCase
         $this->assertContains($department->id, $templateWithModelId->selectValues('by_dept_id', Department::class));
     }
 
-    public function testGracefullyHandlesMultiSelectBecomingSingleSelect()
+    public function testGracefullyHandlesMultiSelectBecomingSingleSelectBySelectingTheFirstValue()
     {
-        $this->markTestIncomplete();
-
         [$departmentA, $departmentB] = Department::factory()->count(2)->create();
 
-        // Given a report template saved with a property that is an array of values
+        // Given report templates saved with a property that is an array of values
         $templateWithValuesInArray = ReportTemplate::factory()->create([
-            'options' => ['array_of_values' => [1, 'a string']],
+            'options' => ['array_of_values' => [3, 'a string']],
         ]);
 
         $templateWithModelIdsInArray = ReportTemplate::factory()->create([
-            'options' => ['model_ids' => [$departmentA->id, $departmentB->id]],
+            'options' => ['array_of_model_ids' => [$departmentA->id, $departmentB->id]],
         ]);
 
-        // @todo: Determine behavior...shoudl we return the first value?
+        $this->assertEquals(3, $templateWithValuesInArray->selectValue('array_of_values'));
+        $this->assertEquals(
+            $departmentA->id,
+            $templateWithModelIdsInArray->selectValue('array_of_model_ids', Department::class)
+        );
     }
 
     public function testOldValuesStillWorkAfterTheseChanges()
