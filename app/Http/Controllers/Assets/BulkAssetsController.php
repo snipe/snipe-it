@@ -55,7 +55,9 @@ class BulkAssetsController extends Controller
 
 
         $asset_ids = $request->input('ids');
-        $assets = Asset::with('assignedTo', 'location', 'model')->find($asset_ids);
+        // Using the 'short-ternary' A/K/A "Elvis operator" '?:' here because ->input() might return an empty string
+        list($sortname,$sortdir) = explode(" ",$request->input('sort') ?: 'id ASC');
+        $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('id', $asset_ids)->orderBy($sortname, $sortdir)->get();
 
         $models = $assets->unique('model_id');
         $modelNames = [];
