@@ -452,16 +452,16 @@
     {{ Form::close() }}
   </div>
 
+    <!-- Saved Reports right column -->
     <div class="col-md-2">
         @if (! request()->routeIs('report-templates.edit'))
             <div class="form-group">
-                <label for="saved_report_select">{{ trans('admin/reports/general.saved_reports') }}</label>
+                <label for="saved_report_select">{{ trans('admin/reports/general.saved_templates') }}</label>
                 <select
                     id="saved_report_select"
                     class="form-control select2"
-                    data-placeholder="{{ trans('admin/reports/general.saved_reports') }}"
-                    data-allow-clear="true"
-                >
+                    data-placeholder="{{ trans('admin/reports/general.saved_templates') }}"
+                    data-allow-clear="true">
                     <option></option>
                     @foreach($report_templates as $template)
                         <option value="{{ $template->id }}" @if (request()->route()->parameter('reportId') == $template->id) selected @endif>
@@ -478,8 +478,7 @@
                     @csrf
                     <input type="hidden" id="savetemplateform" name="options">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        {{--this means that the name of a loaded report is in the input box. could lead to confusion with update--}}
-                        <label for="name">{{ trans('admin/reports/general.report_name') }}</label>
+                        <label for="name">{{ trans('admin/reports/general.template_name') }}</label>
                         <input class="form-control" placeholder="" name="name" type="text" id="name" value="{{ $reportTemplate->name }}">
                         {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                     </div>
@@ -490,10 +489,10 @@
             </div>
             <div class="box box-success">
               <div class="box-header with-border">
-                <h4>{{ trans('admin/reports/message.about_reports') }}</h4>
+                <h4>{{ trans('admin/reports/message.about_templates') }}</h4>
               </div>
               <div class="box-body">
-                <p>{!!  trans('admin/reports/message.saving_reports_description')  !!}</p>
+                <p>{!!  trans('admin/reports/message.saving_templates_description')  !!}</p>
               </div>
             </div>
         @endif

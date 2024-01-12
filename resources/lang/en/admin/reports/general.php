@@ -7,10 +7,10 @@ return [
     'reminder_sent' => 'Reminder sent',
     'acceptance_deleted' => 'Acceptance request deleted',
     'acceptance_request' => 'Acceptance request',
-    'saved_reports' => 'Saved Reports',
+    'saved_templates' => 'Saved Templates',
     'save_template' =>  'Save Template',
     'apply_template' => 'Apply Template',
     'generate_template' => 'Generate Template',
     'apply_and_generate' => 'Apply and Generate',
-    'report_name' => 'Enter Report Name',
+    'template_name' => 'Enter Template Name',
 ];
