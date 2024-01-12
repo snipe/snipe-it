@@ -55,6 +55,12 @@ echo "--------------------------------------------------------\n\n";
 
 // Check the .env looks ok
 $env = file('.env');
+if (! $env){
+    echo "\n!!!!!!!!!!!!!!!!!!!!!!!!!! .ENV FILE ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+    echo "Your .env file doesn't seem to exist in this directory or isn't readable! Please look into that.\n";
+    exit(1);
+}
+
 $env_good = '';
 $env_bad = '';
 
