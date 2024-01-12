@@ -1,8 +1,24 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
-$php_min_works = '7.4.0';
-$php_max_wontwork = '8.2.0';
+$app_environment = 'develop';
+
+// Check if a branch or tag was passed in the command line,
+// otherwise just use master
+(array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
+
+
+// Fetching most current upgrade requirements from github. Read more here: https://github.com/snipe/snipe-it/pull/14127
+$remote_requirements_file = "https://raw.githubusercontent.com/snipe/snipe-it/$branch/.upgrade_requirements.json";
+$upgrade_requirements = json_decode(file_get_contents($remote_requirements_file), true);
+
+if (! $upgrade_requirements) {
+    die("\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\nExiting.\n\n");
+}
+
+$php_min_works = $upgrade_requirements['php_min_version'];
+$php_max_wontwork = $upgrade_requirements['php_max_wontwork'];
+// done fetching requirements
 
 
 if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
@@ -16,12 +32,6 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 	}
 }
 
-
-$app_environment = 'develop';
-
-// Check if a branch or tag was passed in the command line,
-// otherwise just use master
-(array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
 echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
