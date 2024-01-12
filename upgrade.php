@@ -149,7 +149,7 @@ if ($env_bad !='') {
     echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
     echo "Please correct the issues above in ".getcwd()."/.env and try again.\n";
     echo "--------------------------------------------------------\n";
-    exit;
+    exit(1);
 }
 
 
@@ -168,7 +168,7 @@ if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(ph
     echo "Snipe-IT requires PHP versions between ".$php_min_works." and ".$php_max_wontwork.".\n";
     echo "Please install a compatible version of PHP and re-run this script again. \n";
     echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
-    exit;
+    exit(1);
 }
 
 echo "Checking Required PHP extensions... \n\n";
@@ -256,7 +256,7 @@ if ($ext_missing!='') {
     echo "ABORTING THE INSTALLER  \n";
     echo "Please install the extensions above and re-run this script.\n";
     echo "--------------------------------------------------------\n";
-    exit;
+    exit(1);
 } else {
     echo $ext_installed."\n";
 
@@ -311,6 +311,7 @@ if ($dirs_not_writable!='') {
     echo "--------------------- !! ERROR !! ----------------------\n";
     echo "Please check the permissions on the directories above and re-run this script.\n";
     echo "------------------------- :( ---------------------------\n\n";
+    exit(1);
 }
 
 
