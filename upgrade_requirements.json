@@ -1,10 +1,4 @@
 {
-    "v6": {
-        "php_min_version": "7.4.0",
-        "php_max_major": "8.1"
-    },
-    "v7": {
-        "php_min_version": "8.1.0",
-        "php_max_major": "8.2"
-    }
+    "php_min_version": "8.1.0",
+    "php_max_major": "8.2"
 }
