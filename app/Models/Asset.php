@@ -109,6 +109,7 @@ class Asset extends Depreciable
         'order_number'     => 'nullable|string|max:191',
         'notes'            => 'nullable|string|max:65535',
         'assigned_to'      => 'nullable|integer',
+        'assigned_type'    => 'required_if:assigned_to!null', //figure out this syntax -- i know that's not right, just placeholder
         'requestable'      => 'nullable|boolean',
     ];
 
