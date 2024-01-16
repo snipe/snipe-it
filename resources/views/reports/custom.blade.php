@@ -14,206 +14,206 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-1">
+    <div class="col-md-8 col-md-offset-1">
 
-    {{ Form::open([
-        'method' => 'post',
-        'class' => 'form-horizontal',
-        'id' => 'custom-report-form',
-        'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $reportTemplate) : '/reports/custom',
-    ]) }}
+        {{ Form::open([
+            'method' => 'post',
+            'class' => 'form-horizontal',
+            'id' => 'custom-report-form',
+            'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $reportTemplate) : '/reports/custom',
+        ]) }}
     {{csrf_field()}}
 
     <!-- Horizontal Form -->
-      <div class="box box-default">
-        <div class="box-header with-border">
-          <h2 class="box-title">
-            @if (request()->routeIs('report-templates.edit'))
-              Updating: {{ $reportTemplate->name }}
-            @elseif(request()->routeIs('report-templates.show'))
-              Saved Template: {{ $reportTemplate->name }}
-            @else
-              {{ trans('general.customize_report') }}
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title">
+                    @if (request()->routeIs('report-templates.edit'))
+                        Updating: {{ $reportTemplate->name }}
+                    @elseif(request()->routeIs('report-templates.show'))
+                        Saved Template: {{ $reportTemplate->name }}
+                    @else
+                        {{ trans('general.customize_report') }}
+                    @endif
+                </h2>
+            @if (request()->routeIs('report-templates.show'))
+                <div class="box-tools pull-right">
+                    <a
+                        href="{{ route('report-templates.edit', $reportTemplate) }}"
+                        class="btn btn-sm btn-warning"
+                        data-tooltip="true"
+                        title="Update"
+                    >
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.update') }}</span>
+                    </a>
+                    <button
+                        class="btn btn-sm btn-danger delete-asset"
+                        data-toggle="modal"
+                        data-title="{{ trans('general.delete') }}"
+                        data-content="{{ trans('general.delete_confirm', ['item' => $reportTemplate->name]) }}"
+                        data-target="#dataConfirmModal"
+                        type="button"
+                    >
+                        <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
+                    </button>
+                </div>
             @endif
-          </h2>
-          @if (request()->routeIs('report-templates.show'))
-            <div class="box-tools pull-right">
-              <a
-                href="{{ route('report-templates.edit', $reportTemplate) }}"
-                class="btn btn-sm btn-warning"
-                data-tooltip="true"
-                title="Update"
-              >
-                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                <span class="sr-only">{{ trans('general.update') }}</span>
-              </a>
-              <button
-                class="btn btn-sm btn-danger delete-asset"
-                data-toggle="modal"
-                data-title="{{ trans('general.delete') }}"
-                data-content="{{ trans('general.delete_confirm', ['item' => $reportTemplate->name]) }}"
-                data-target="#dataConfirmModal"
-                type="button"
-              >
-                <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
-              </button>
-            </div>
-          @endif
         </div><!-- /.box-header -->
 
         <div class="box-body">
 
             <div class="col-md-4">
 
-              <label class="form-control">
-                <input type="checkbox" id="checkAll" checked="checked">
-               {{ trans('general.select_all') }}
-              </label>
+                <label class="form-control">
+                    <input type="checkbox" id="checkAll" checked="checked">
+                    {{ trans('general.select_all') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('id', '1', $reportTemplate->checkmarkValue('id')) }}
-                {{ trans('general.id') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('id', '1', $reportTemplate->checkmarkValue('id')) }}
+                    {{ trans('general.id') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('company', '1', $reportTemplate->checkmarkValue('company')) }}
-                {{ trans('general.company') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('company', '1', $reportTemplate->checkmarkValue('company')) }}
+                    {{ trans('general.company') }}
+                </label>
 
-              <label class="form-control">
-              {{ Form::checkbox('asset_tag', '1', $reportTemplate->checkmarkValue('asset_tag')) }}
-                {{ trans('general.asset_tag') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('asset_tag', '1', $reportTemplate->checkmarkValue('asset_tag')) }}
+                    {{ trans('general.asset_tag') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('asset_name', '1', $reportTemplate->checkmarkValue('asset_name')) }}
-                {{ trans('admin/hardware/form.name') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('asset_name', '1', $reportTemplate->checkmarkValue('asset_name')) }}
+                    {{ trans('admin/hardware/form.name') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('manufacturer', '1', $reportTemplate->checkmarkValue('manufacturer')) }}
-                {{ trans('general.manufacturer') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('manufacturer', '1', $reportTemplate->checkmarkValue('manufacturer')) }}
+                    {{ trans('general.manufacturer') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('model', '1', $reportTemplate->checkmarkValue('model')) }}
-                {{ trans('general.asset_models') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('model', '1', $reportTemplate->checkmarkValue('model')) }}
+                    {{ trans('general.asset_models') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('category', '1', $reportTemplate->checkmarkValue('category')) }}
-                {{ trans('general.category') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('category', '1', $reportTemplate->checkmarkValue('category')) }}
+                    {{ trans('general.category') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('serial', '1', $reportTemplate->checkmarkValue('serial')) }}
-                {{ trans('admin/hardware/table.serial') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('serial', '1', $reportTemplate->checkmarkValue('serial')) }}
+                    {{ trans('admin/hardware/table.serial') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('purchase_date', '1', $reportTemplate->checkmarkValue('purchase_date')) }}
-                {{ trans('admin/licenses/table.purchase_date') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('purchase_date', '1', $reportTemplate->checkmarkValue('purchase_date')) }}
+                    {{ trans('admin/licenses/table.purchase_date') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('purchase_cost', '1', $reportTemplate->checkmarkValue('purchase_cost')) }}
-                {{ trans('admin/hardware/form.cost') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('purchase_cost', '1', $reportTemplate->checkmarkValue('purchase_cost')) }}
+                    {{ trans('admin/hardware/form.cost') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('eol', '1', $reportTemplate->checkmarkValue('eol')) }}
-                {{ trans('admin/hardware/table.eol') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('eol', '1', $reportTemplate->checkmarkValue('eol')) }}
+                    {{ trans('admin/hardware/table.eol') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('order', '1', $reportTemplate->checkmarkValue('order')) }}
-                {{ trans('admin/hardware/form.order') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('order', '1', $reportTemplate->checkmarkValue('order')) }}
+                    {{ trans('admin/hardware/form.order') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('supplier', '1', $reportTemplate->checkmarkValue('supplier')) }}
-                {{ trans('general.suppliers') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('supplier', '1', $reportTemplate->checkmarkValue('supplier')) }}
+                    {{ trans('general.suppliers') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('location', '1', $reportTemplate->checkmarkValue('location')) }}
-                {{ trans('general.location') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('location', '1', $reportTemplate->checkmarkValue('location')) }}
+                    {{ trans('general.location') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('location_address', '1', $reportTemplate->checkmarkValue('location_address')) }}
-                - {{ trans('general.address') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('location_address', '1', $reportTemplate->checkmarkValue('location_address')) }}
+                    - {{ trans('general.address') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('rtd_location', '1', $reportTemplate->checkmarkValue('rtd_location')) }}
-                {{ trans('admin/hardware/form.default_location') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('rtd_location', '1', $reportTemplate->checkmarkValue('rtd_location')) }}
+                    {{ trans('admin/hardware/form.default_location') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('rtd_location_address', '1', $reportTemplate->checkmarkValue('rtd_location_address')) }}
-                - {{ trans('general.address') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('rtd_location_address', '1', $reportTemplate->checkmarkValue('rtd_location_address')) }}
+                    - {{ trans('general.address') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('status', '1', $reportTemplate->checkmarkValue('status')) }}
-                {{ trans('general.status') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('status', '1', $reportTemplate->checkmarkValue('status')) }}
+                    {{ trans('general.status') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('warranty', '1', $reportTemplate->checkmarkValue('warranty')) }}
-                {{ trans('admin/hardware/form.warranty') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('warranty', '1', $reportTemplate->checkmarkValue('warranty')) }}
+                    {{ trans('admin/hardware/form.warranty') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('depreciation', '1', $reportTemplate->checkmarkValue('depreciation')) }}
-                {{ trans('general.depreciation') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('depreciation', '1', $reportTemplate->checkmarkValue('depreciation')) }}
+                    {{ trans('general.depreciation') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('checkout_date', '1', $reportTemplate->checkmarkValue('checkout_date')) }}
-                {{ trans('admin/hardware/table.checkout_date') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('checkout_date', '1', $reportTemplate->checkmarkValue('checkout_date')) }}
+                    {{ trans('admin/hardware/table.checkout_date') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('expected_checkin', '1', $reportTemplate->checkmarkValue('expected_checkin')) }}
-                {{ trans('admin/hardware/form.expected_checkin') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('expected_checkin', '1', $reportTemplate->checkmarkValue('expected_checkin')) }}
+                    {{ trans('admin/hardware/form.expected_checkin') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('created_at', '1', $reportTemplate->checkmarkValue('created_at')) }}
-                {{ trans('general.created_at') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('created_at', '1', $reportTemplate->checkmarkValue('created_at')) }}
+                    {{ trans('general.created_at') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('updated_at', '1', $reportTemplate->checkmarkValue('updated_at')) }}
-                {{ trans('general.updated_at') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('updated_at', '1', $reportTemplate->checkmarkValue('updated_at')) }}
+                    {{ trans('general.updated_at') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('deleted_at', '1', $reportTemplate->checkmarkValue('deleted_at')) }}
-                {{ trans('general.deleted') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('deleted_at', '1', $reportTemplate->checkmarkValue('deleted_at')) }}
+                    {{ trans('general.deleted') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('last_audit_date', '1', $reportTemplate->checkmarkValue('last_audit_date')) }}
-                {{ trans('general.last_audit') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('last_audit_date', '1', $reportTemplate->checkmarkValue('last_audit_date')) }}
+                    {{ trans('general.last_audit') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('next_audit_date', '1', $reportTemplate->checkmarkValue('next_audit_date')) }}
-                {{ trans('general.next_audit_date') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('next_audit_date', '1', $reportTemplate->checkmarkValue('next_audit_date')) }}
+                    {{ trans('general.next_audit_date') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('notes', '1', $reportTemplate->checkmarkValue('notes')) }}
-                {{ trans('general.notes') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('notes', '1', $reportTemplate->checkmarkValue('notes')) }}
+                    {{ trans('general.notes') }}
+                </label>
 
-              <label class="form-control">
-                {{ Form::checkbox('url', '1', $reportTemplate->checkmarkValue('url')) }}
-                - {{ trans('admin/manufacturers/table.url') }}
-              </label>
+                <label class="form-control">
+                    {{ Form::checkbox('url', '1', $reportTemplate->checkmarkValue('url')) }}
+                    - {{ trans('admin/manufacturers/table.url') }}
+                </label>
 
 
             <!-- User fields -->
@@ -435,22 +435,22 @@
           </div>
 
         </div> <!-- /.box-body-->
-        <div class="box-footer text-right">
-          @if (request()->routeIs('report-templates.edit'))
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-check icon-white" aria-hidden="true"></i>
-              {{ trans('general.save') }}
-            </button>
-          @else
-            <button type="submit" class="btn btn-success">
-              <i class="fas fa-download icon-white" aria-hidden="true"></i>
-              {{ trans('general.generate') }}
-            </button>
-          @endif
-        </div>
-      </div> <!--/.box.box-default-->
+            <div class="box-footer text-right">
+                @if (request()->routeIs('report-templates.edit'))
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                        {{ trans('general.save') }}
+                    </button>
+                @else
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                        {{ trans('general.generate') }}
+                    </button>
+                @endif
+            </div>
+        </div> <!--/.box.box-default-->
     {{ Form::close() }}
-  </div>
+    </div>
 
     <!-- Saved Reports right column -->
     <div class="col-md-2">
@@ -488,12 +488,12 @@
                 </form>
             </div>
             <div class="box box-success">
-              <div class="box-header with-border">
-                <h4>{{ trans('admin/reports/message.about_templates') }}</h4>
-              </div>
-              <div class="box-body">
-                <p>{!!  trans('admin/reports/message.saving_templates_description')  !!}</p>
-              </div>
+                <div class="box-header with-border">
+                    <h4>{{ trans('admin/reports/message.about_templates') }}</h4>
+                </div>
+                <div class="box-body">
+                    <p>{!!  trans('admin/reports/message.saving_templates_description')  !!}</p>
+                </div>
             </div>
         @endif
     </div>
@@ -537,7 +537,7 @@
       });
 
       $("#checkAll").change(function () {
-        $("input:checkbox").prop('checked', $(this).prop("checked"));
+          $("input:checkbox").prop('checked', $(this).prop("checked"));
       });
 
       $("#savetemplateform").submit(function(e) {
@@ -554,12 +554,12 @@
       });
 
       $('#saved_report_select')
-        .on('select2:select', function (event) {
-            window.location.href = '/reports/templates/' + event.params.data.id;
-        })
-        .on('select2:clearing', function (event) {
-            window.location.href = '{{ route('reports/custom') }}';
-        });
+          .on('select2:select', function (event) {
+              window.location.href = '/reports/templates/' + event.params.data.id;
+          })
+          .on('select2:clearing', function (event) {
+              window.location.href = '{{ route('reports/custom') }}';
+          });
 
       $('#dataConfirmModal').on('show.bs.modal', function (event) {
           var content = $(event.relatedTarget).data('content');

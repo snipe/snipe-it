@@ -99,7 +99,6 @@ class ReportTemplateTest extends TestCase
 
         $this->assertEquals(['2', '3', '4'], $template->selectValues('an_array'));
         $this->assertEquals([], $template->selectValues('an_empty_array'));
-        // @todo: should this actually be []?
         $this->assertEquals([null], $template->selectValues('an_array_containing_null'));
         $this->assertEquals([], $template->selectValues('non_existent_key'));
     }
