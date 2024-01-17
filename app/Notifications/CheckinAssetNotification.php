@@ -84,6 +84,46 @@ class CheckinAssetNotification extends Notification
                     ->content($note);
             });
     }
+    public function toMsTeams()
+    {
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        $fields = [
+            trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+            trans('general.status') => $item->assetstatus->name,
+            trans('general.location') => ($item->location) ? $item->location->name : '',
+        ];
+
+        $payload = json_encode(
+       [
+        "@type"=> "MessageCard",
+        "@context"=> "http://schema.org/extensions",
+        "themeColor"=> "0076D7",
+        "summary"=> trans('mail.Asset_Checkin_Notification'),
+        "sections"=> [
+            "activityTitle"=> "Larry Bryant created a new task",
+            "activitySubtitle"=> "On Project Tango",
+            "activityImage"=> "https://adaptivecards.io/content/cats/3.png",
+            "facts"=> [
+                ["name"=> "Assigned to",
+                "value"=> "Unassigned"
+                    ]
+            ,
+                ["name"=> "Due date",
+                "value"=> "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
+                    ]
+            ,
+                ["name"=> "Status",
+                "value"=> "Not started"
+                    ]
+            ],
+            "markdown"=> true
+        ]]
+       );
+
+    }
 
     /**
      * Get the mail representation of the notification.

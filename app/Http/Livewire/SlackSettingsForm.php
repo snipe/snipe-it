@@ -48,6 +48,12 @@ class SlackSettingsForm extends Component
                 "placeholder" => "",
                 "link" => "",
             ),
+            "ms_teams" => array(
+                "name" => trans('admin/settings/general.ms_teams'),
+                "icon" => "fa-brands fa-microsoft",
+                "placeholder" => "https://abcd.webhook.office.com/webhookb2/XXXXXXX",
+                "link" => "",
+            ),
         ];
 
         $this->setting = Setting::getSettings();
@@ -178,4 +184,60 @@ class SlackSettingsForm extends Component
         }
 
     }
+     public function msTeamTestWebhook(){
+         $webhook = new Client([
+             'base_url' => e($this->webhook_endpoint),
+             'defaults' => [
+                 'exceptions' => false,
+             ],
+             'allow_redirects' => false,
+         ]);
+
+         $payload = json_encode(
+             [
+                 "@type"=> "MessageCard",
+                 "@context"=> "http://schema.org/extensions",
+                 "themeColor"=> "0076D7",
+                 "summary"=> trans('mail.Asset_Checkin_Notification'),
+                 "sections"=> [
+                     "activityTitle"=> "Larry Bryant created a new task",
+                     "activitySubtitle"=> "On Project Tango",
+                     "activityImage"=> "https://adaptivecards.io/content/cats/3.png",
+                     "facts"=> [
+                         ["name"=> "Assigned to",
+                             "value"=> "Unassigned"
+                         ]
+                         ,
+                         ["name"=> "Due date",
+                             "value"=> "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
+                         ]
+                         ,
+                         ["name"=> "Status",
+                             "value"=> "Not started"
+                         ]
+                     ],
+                     "markdown"=> true
+                 ]]
+         );
+         try {
+             $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
+
+             if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
+                 return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
+             }
+             $this->isDisabled='';
+             $this->save_button = trans('general.save');
+             return session()->flash('success' , trans('admin/settings/message.webhook.success', ['webhook_name' => $this->webhook_name]));
+
+         } catch (\Exception $e) {
+
+             $this->isDisabled='disabled';
+             $this->save_button = trans('admin/settings/general.webhook_presave');
+             return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage(), 'app' => $this->webhook_name]));
+         }
+
+         return session()->flash('error' , trans('admin/settings/message.webhook.error_misc'));
+
+
+     }
 }

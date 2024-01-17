@@ -61,9 +61,9 @@
                             <div class="col-md-9 required" wire:ignore>
 
                             @if (Helper::isDemoMode())
-								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:100%', 'disabled')) }}
+								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'), 'ms_teams' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:100%', 'disabled')) }}
                             @else
-                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:100%')) }}
+                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'), 'ms_teams' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:100%')) }}
                             @endif
 
                             </div>
@@ -124,7 +124,11 @@
                             @if($webhook_endpoint != null && $webhook_channel != null)
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-9">
+                                        @if($webhook_selected == "ms_teams")
                                         <a href="#" wire:click.prevent="testWebhook"
+                                        @else
+                                            <a href="#" wire:click.prevent="testWebhook"
+                                        @endif
                                            class="btn btn-default btn-sm pull-left">
                                             <i class="{{$webhook_icon}}" aria-hidden="true"></i>
                                                 {!! trans('admin/settings/general.webhook_test',['app' => ucwords($webhook_selected) ]) !!}
