@@ -9,6 +9,7 @@ return [
     'acceptance_request' => 'Acceptance request',
     'saved_templates' => 'Saved Templates',
     'save_template' =>  'Save Template',
+    'select_a_template' => 'Select a Template',
     'apply_template' => 'Apply Template',
     'generate_template' => 'Generate Template',
     'apply_and_generate' => 'Apply and Generate',

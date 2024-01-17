@@ -460,8 +460,9 @@
                 <select
                     id="saved_report_select"
                     class="form-control select2"
-                    data-placeholder="{{ trans('admin/reports/general.saved_templates') }}"
-                    data-allow-clear="true">
+                    data-placeholder="{{ trans('admin/reports/general.select_a_template') }}"
+                    data-allow-clear="true"
+                >
                     <option></option>
                     @foreach($report_templates as $template)
                         <option value="{{ $template->id }}" @if (request()->route()->parameter('reportId') == $template->id) selected @endif>
