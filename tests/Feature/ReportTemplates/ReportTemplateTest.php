@@ -17,9 +17,9 @@ class ReportTemplateTest extends TestCase
         $this->actingAs(User::factory()->canViewReports()->create())
             ->get(route('reports/custom'))
             ->assertOk()
-            ->assertViewHas(['reportTemplate' => function (ReportTemplate $report) {
+            ->assertViewHas(['template' => function (ReportTemplate $template) {
                 // the view should have an empty report by default
-                return $report->exists() === false;
+                return $template->exists() === false;
             }]);
     }
 
@@ -50,8 +50,8 @@ class ReportTemplateTest extends TestCase
         $this->actingAs($user)
             ->get(route('report-templates.show', $reportTemplate))
             ->assertOk()
-            ->assertViewHas(['reportTemplate' => function (ReportTemplate $viewReport) use ($reportTemplate) {
-                return $viewReport->is($reportTemplate);
+            ->assertViewHas(['template' => function (ReportTemplate $templatePassedToView) use ($reportTemplate) {
+                return $templatePassedToView->is($reportTemplate);
             }]);
     }
 
@@ -76,13 +76,28 @@ class ReportTemplateTest extends TestCase
         $this->assertEquals(['1', '2'], $template->options['by_company_id']);
     }
 
-    public function testReportTemplateRequiresValidFields()
+    public function testSavingReportTemplateRequiresValidFields()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post(route('report-templates.store'), [
                 'name' => '',
             ])
             ->assertSessionHasErrors('name');
+    }
+
+    public function testCanUpdateAReportTemplate()
+    {
+        $this->markTestIncomplete();
+
+        $user = User::factory()->canViewReports()->create();
+
+        $reportTemplate = ReportTemplate::factory()->for($user)->create();
+
+        $this->actingAs($user)
+            ->get(route('report-templates.edit', $reportTemplate))
+            ->assertOk();
+
+        // @todo:
     }
 
     public function testRedirectingAfterValidationErrorRestoresInputs()
@@ -96,9 +111,14 @@ class ReportTemplateTest extends TestCase
                 // set some values to ensure they are still present
                 // when returning to the custom report page.
                 'by_company_id' => [2, 3]
-            ])->assertViewHas(['reportTemplate' => function (ReportTemplate $reportTemplate) {
+            ])->assertViewHas(['template' => function (ReportTemplate $reportTemplate) {
                 return data_get($reportTemplate, 'options.by_company_id') === [2, 3];
             }]);
+    }
+
+    public function testUpdatingReportTemplateRequiresValidFields()
+    {
+        $this->markTestIncomplete();
     }
 
     public function testSavingReportTemplateRequiresCorrectPermission()
@@ -106,5 +126,20 @@ class ReportTemplateTest extends TestCase
         $this->actingAs(User::factory()->create())
             ->post(route('report-templates.store'))
             ->assertForbidden();
+    }
+
+    public function testUpdatingReportTemplateRequiresCorrectPermission()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCanDeleteAReportTemplate()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testDeletingReportTemplateRequiresCorrectPermission()
+    {
+        $this->markTestIncomplete();
     }
 }

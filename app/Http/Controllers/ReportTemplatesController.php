@@ -39,7 +39,7 @@ class ReportTemplatesController extends Controller
         return view('reports/custom', [
             'customfields' => $customfields,
             'report_templates' => $report_templates,
-            'reportTemplate' => $reportTemplate,
+            'template' => $reportTemplate,
         ]);
     }
 
@@ -47,7 +47,7 @@ class ReportTemplatesController extends Controller
     {
         return view('reports/custom', [
             'customfields' => CustomField::get(),
-            'reportTemplate' => ReportTemplate::findOrFail($reportId),
+            'template' => ReportTemplate::findOrFail($reportId),
         ]);
     }
 

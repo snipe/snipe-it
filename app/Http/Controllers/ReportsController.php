@@ -404,7 +404,7 @@ class ReportsController extends Controller
         return view('reports/custom', [
             'customfields' => $customfields,
             'report_templates' => $report_templates,
-            'reportTemplate' => $template,
+            'template' => $template,
         ]);
     }
 
