@@ -36,7 +36,9 @@ class ReportTemplate extends Model
     {
         // Scope to current user
         static::addGlobalScope('current_user', function (Builder $builder) {
-            $builder->where('user_id', auth()->id());
+            if (auth()->check()) {
+                $builder->where('user_id', auth()->id());
+            }
         });
     }
 
