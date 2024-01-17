@@ -131,11 +131,6 @@ class ReportTemplateTest extends TestCase
         $this->assertNull((new ReportTemplate)->selectValue('value_on_unsaved_template', Location::class));
     }
 
-    public function testSelectValueDoesNotIncludeModelUserDoesNotHaveAccessTo()
-    {
-        $this->markTestIncomplete();
-    }
-
     public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()
     {
         [$locationA, $locationB] = Location::factory()->count(2)->create();
@@ -160,16 +155,10 @@ class ReportTemplateTest extends TestCase
         $this->assertNotContains($invalidId, $parsedValues);
     }
 
-    public function testSelectValuesDoesNotIncludeModelUserDoesNotHaveAccessTo()
-    {
-        $this->markTestIncomplete();
-    }
-
     public function testGracefullyHandlesSingleSelectBecomingMultiSelect()
     {
         $department = Department::factory()->create();
 
-        // Given a report template saved with a property that is a string value
         $templateWithValue = ReportTemplate::factory()->create([
             'options' => ['single_value' => 'a string'],
         ]);
@@ -178,8 +167,15 @@ class ReportTemplateTest extends TestCase
             'options' => ['by_dept_id' => $department->id],
         ]);
 
+        // If nothing is selected for a single select then it is stored
+        // as null and should be returned as an empty array.
+        $templateWithNull = ReportTemplate::factory()->create([
+            'options' => ['by_dept_id' => null],
+        ]);
+
         $this->assertEquals(['a string'], $templateWithValue->selectValues('single_value'));
         $this->assertContains($department->id, $templateWithModelId->selectValues('by_dept_id', Department::class));
+        $this->assertEquals([], $templateWithNull->selectValues('by_dept_id'));
     }
 
     public function testGracefullyHandlesMultiSelectBecomingSingleSelectBySelectingTheFirstValue()
