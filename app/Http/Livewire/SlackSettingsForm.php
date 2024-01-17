@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use App\Models\Setting;
 use App\Helpers\Helper;
@@ -48,7 +49,7 @@ class SlackSettingsForm extends Component
                 "placeholder" => "",
                 "link" => "",
             ),
-            "ms_teams" => array(
+            "microsoft" => array(
                 "name" => trans('admin/settings/general.ms_teams'),
                 "icon" => "fa-brands fa-microsoft",
                 "placeholder" => "https://abcd.webhook.office.com/webhookb2/XXXXXXX",
@@ -83,6 +84,7 @@ class SlackSettingsForm extends Component
         $this->webhook_name = $this->webhook_text[$this->webhook_selected]['name'];
         $this->webhook_icon = $this->webhook_text[$this->webhook_selected]["icon"]; ;
         $this->webhook_placeholder = $this->webhook_text[$this->webhook_selected]["placeholder"];
+        $this->webhook_endpoint = null;
         $this->webhook_link = $this->webhook_text[$this->webhook_selected]["link"];
         if($this->webhook_selected != 'slack'){
             $this->isDisabled= '';
@@ -185,44 +187,24 @@ class SlackSettingsForm extends Component
 
     }
      public function msTeamTestWebhook(){
-         $webhook = new Client([
-             'base_url' => e($this->webhook_endpoint),
-             'defaults' => [
-                 'exceptions' => false,
-             ],
-             'allow_redirects' => false,
-         ]);
 
-         $payload = json_encode(
-             [
-                 "@type"=> "MessageCard",
-                 "@context"=> "http://schema.org/extensions",
-                 "themeColor"=> "0076D7",
-                 "summary"=> trans('mail.Asset_Checkin_Notification'),
-                 "sections"=> [
-                     "activityTitle"=> "Larry Bryant created a new task",
-                     "activitySubtitle"=> "On Project Tango",
-                     "activityImage"=> "https://adaptivecards.io/content/cats/3.png",
-                     "facts"=> [
-                         ["name"=> "Assigned to",
-                             "value"=> "Unassigned"
-                         ]
-                         ,
-                         ["name"=> "Due date",
-                             "value"=> "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
-                         ]
-                         ,
-                         ["name"=> "Status",
-                             "value"=> "Not started"
-                         ]
-                     ],
-                     "markdown"=> true
-                 ]]
-         );
+         $payload =
+                 [
+                     "@type" => "MessageCard",
+                    "@context" => "http://schema.org/extensions",
+                     "summary" => "Announcement Summary",
+                    "title" => "Snipe-IT Integration Test",
+                     'text' => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
+                     ];
+
          try {
-             $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
+             $response = Http::withHeaders([
+                 'content-type' => 'applications/json',
+             ])->post($this->webhook_endpoint,
+                $payload)->throw();
 
-             if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
+
+             if(($response->getStatusCode() == 302)||($response->getStatusCode() == 301)){
                  return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
              }
              $this->isDisabled='';
