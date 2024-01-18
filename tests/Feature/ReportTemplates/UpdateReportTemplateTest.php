@@ -28,25 +28,15 @@ class UpdateReportTemplateTest extends TestCase
             ->assertOk();
     }
 
-    public function testUpdatingReportTemplateRequiresValidFields()
-    {
-        $this->markTestIncomplete();
-
-        $this->actingAs(User::factory()->canViewReports()->create())
-            ->post(route('report-templates.update', ReportTemplate::factory()->create()))
-            // @todo: name isn't being passed in this case
-            ->assertSessionHasErrors('name');
-    }
-
     public function testCanUpdateAReportTemplate()
     {
-        $this->markTestIncomplete();
-
         $user = User::factory()->canViewReports()->create();
 
         $reportTemplate = ReportTemplate::factory()->for($user)->create([
             'options' => [
                 'id' => 1,
+                'category' => 1,
+                'by_category_id' => 2,
                 'company' => 1,
                 'by_company_id' => [1, 2],
             ],
@@ -55,12 +45,15 @@ class UpdateReportTemplateTest extends TestCase
         $this->actingAs($user)
             ->post(route('report-templates.update', $reportTemplate), [
                 'id' => 1,
+                'company' => 1,
                 'by_company_id' => [3],
-            ])
-            ->assertOk();
+            ]);
 
-        // @todo:
-        $reportTemplate->fresh();
-        dd($reportTemplate->options);
+        $reportTemplate->refresh();
+        $this->assertEquals(1, $reportTemplate->checkmarkValue('id'));
+        $this->assertEquals(0, $reportTemplate->checkmarkValue('category'));
+        $this->assertEquals([], $reportTemplate->selectValues('by_category_id'));
+        $this->assertEquals(1, $reportTemplate->checkmarkValue('company'));
+        $this->assertEquals([3], $reportTemplate->selectValues('by_company_id'));
     }
 }
