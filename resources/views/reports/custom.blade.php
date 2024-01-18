@@ -407,13 +407,13 @@
 
             <div class="col-md-9 col-md-offset-3">
             <label class="form-control">
-              {{ Form::checkbox('exclude_archived', '1', $template->checkmarkValue('exclude_archived')) }}
+              {{ Form::checkbox('exclude_archived', '1', $template->checkmarkValue('exclude_archived', '0')) }}
               {{ trans('general.exclude_archived') }}
             </label>
             </div>
             <div class="col-md-9 col-md-offset-3">
               <label class="form-control">
-                {{ Form::checkbox('use_bom', '1', $template->checkmarkValue('use_bom')) }}
+                {{ Form::checkbox('use_bom', '1', $template->checkmarkValue('use_bom', '0')) }}
                 {{ trans('general.bom_remark') }}
               </label>
             </div>

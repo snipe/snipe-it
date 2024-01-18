@@ -69,6 +69,7 @@ class ReportTemplateTest extends TestCase
         $this->assertEquals('1', $template->checkmarkValue('is_a_checkbox_field'));
         $this->assertEquals('0', $template->checkmarkValue('non_existent_key'));
         $this->assertEquals('0', $template->checkmarkValue('is_checkbox_field_with_zero'));
+        $this->assertEquals('0', (new ReportTemplate)->checkmarkValue('non_existent_key', '0'));
     }
 
     public function testParsingTextValue()

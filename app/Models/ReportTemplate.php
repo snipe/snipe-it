@@ -48,13 +48,13 @@ class ReportTemplate extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function checkmarkValue(string $fieldName): string
+    public function checkmarkValue(string $fieldName, string $fallbackValue = '1'): string
     {
         // Assuming we're using the null object pattern, and an empty model
         // was passed to the view when showing the default report page,
-        // return 1 so that checkboxes are checked by default.
+        // return the fallback value so that checkboxes are checked by default.
         if (is_null($this->id)) {
-            return '1';
+            return $fallbackValue;
         }
 
         // Return the field's value if it exists and return 0
