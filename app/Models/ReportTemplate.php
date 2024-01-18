@@ -48,31 +48,32 @@ class ReportTemplate extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function checkmarkValue(string $property): string
+    public function checkmarkValue(string $fieldName): string
     {
-        // Assuming we're using the null object pattern,
-        // return the default value if the object is not saved yet.
+        // Assuming we're using the null object pattern, and an empty model
+        // was passed to the view when showing the default report page,
+        // return 1 so that checkboxes are checked by default.
         if (is_null($this->id)) {
             return '1';
         }
 
-        // Return the property's value if it exists
-        // and return the default value if not.
-        return $this->options[$property] ?? '0';
+        // Return the field's value if it exists and return 0
+        // if not so that checkboxes are unchecked by default.
+        return $this->options[$fieldName] ?? '0';
     }
 
-    public function radioValue(string $property, string $value, bool $isDefault = false): bool
+    public function radioValue(string $fieldName, string $value, bool $isDefault = false): bool
     {
-        $propertyExists = array_has($this->options, $property);
+        $fieldExists = array_has($this->options, $fieldName);
 
-        // If the property doesn't exist but the radio input
+        // If the field doesn't exist but the radio input
         // being checked is the default then return true.
-        if (!$propertyExists && $isDefault) {
+        if (!$fieldExists && $isDefault) {
             return true;
         }
 
-        // If the property exists and matches what we're checking then return true.
-        if ($propertyExists && $this->options[$property] === $value) {
+        // If the field exists and matches what we're checking then return true.
+        if ($fieldExists && $this->options[$fieldName] === $value) {
             return true;
         }
 
@@ -80,14 +81,14 @@ class ReportTemplate extends Model
         return false;
     }
 
-    public function selectValue(string $property, string $model = null)
+    public function selectValue(string $fieldName, string $model = null)
     {
-        // If the property does not exist then return null.
-        if (!isset($this->options[$property])) {
+        // If the field does not exist then return null.
+        if (!isset($this->options[$fieldName])) {
             return null;
         }
 
-        $value = $this->options[$property];
+        $value = $this->options[$fieldName];
 
         // If the value was stored as an array, most likely
         // due to a previously being a multi-select,
@@ -108,30 +109,30 @@ class ReportTemplate extends Model
         return $value;
     }
 
-    public function selectValues(string $property, string $model = null): iterable
+    public function selectValues(string $fieldName, string $model = null): iterable
     {
-        // If the property does not exist then return an empty array.
-        if (!isset($this->options[$property])) {
+        // If the field does not exist then return an empty array.
+        if (!isset($this->options[$fieldName])) {
             return [];
         }
 
         // If a model is provided then we should ensure we only return
         // the ids of models that exist and are not deleted.
         if ($model) {
-            return $model::findMany($this->options[$property])->pluck('id');
+            return $model::findMany($this->options[$fieldName])->pluck('id');
         }
 
         // Wrap the value in an array if needed. This is to ensure
         // values previously stored as a single value,
         // most likely from a single select, are returned as an array.
-        if (!is_array($this->options[$property])) {
-            return [$this->options[$property]];
+        if (!is_array($this->options[$fieldName])) {
+            return [$this->options[$fieldName]];
         }
 
-        return $this->options[$property];
+        return $this->options[$fieldName];
     }
 
-    public function textValue(string $property): string
+    public function textValue(string $fieldName): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.
@@ -139,8 +140,8 @@ class ReportTemplate extends Model
             return '';
         }
 
-        // Return the property's value if it exists
+        // Return the field's value if it exists
         // and return the default value if not.
-        return $this->options[$property] ?? '';
+        return $this->options[$fieldName] ?? '';
     }
 }
