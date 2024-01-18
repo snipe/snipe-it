@@ -43,11 +43,24 @@ class ReportTemplate extends Model
         });
     }
 
+    /**
+     * Establishes the report template -> creator relationship.
+     *
+     * @since [v6.2.4]
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the value of a checkbox field for the given field name.
+     *
+     * @param string $fieldName
+     * @param string $fallbackValue The value to return if the report template is not saved yet.
+     *
+     * @since [v6.2.4]
+     */
     public function checkmarkValue(string $fieldName, string $fallbackValue = '1'): string
     {
         // Assuming we're using the null object pattern, and an empty model
@@ -62,6 +75,15 @@ class ReportTemplate extends Model
         return $this->options[$fieldName] ?? '0';
     }
 
+    /**
+     * Get the value of a radio field for the given field name.
+     *
+     * @param string $fieldName
+     * @param string $value The value to check against.
+     * @param bool $isDefault Whether the radio input being checked is the default.
+     *
+     * @since [v6.2.4]
+     */
     public function radioValue(string $fieldName, string $value, bool $isDefault = false): bool
     {
         $fieldExists = array_has($this->options, $fieldName);
@@ -81,6 +103,16 @@ class ReportTemplate extends Model
         return false;
     }
 
+    /**
+     * Get the value of a select field for the given field name.
+     *
+     * @param string $fieldName
+     * @param string|null $model The Eloquent model to check against.
+     *
+     * @return mixed|null
+     *
+     * @since [v6.2.4]
+     */
     public function selectValue(string $fieldName, string $model = null)
     {
         // If the field does not exist then return null.
@@ -109,6 +141,16 @@ class ReportTemplate extends Model
         return $value;
     }
 
+    /**
+     * Get the values of a multi-select field for the given field name.
+     *
+     * @param string $fieldName
+     * @param string|null $model The Eloquent model to check against.
+     *
+     * @return iterable
+     *
+     * @since [v6.2.4]
+     */
     public function selectValues(string $fieldName, string $model = null): iterable
     {
         // If the field does not exist then return an empty array.
@@ -132,6 +174,15 @@ class ReportTemplate extends Model
         return $this->options[$fieldName];
     }
 
+    /**
+     * Get the value of a text field for the given field name.
+     *
+     * @param string $fieldName
+     *
+     * @return string
+     *
+     * @since [v6.2.4]
+     */
     public function textValue(string $fieldName): string
     {
         // Assuming we're using the null object pattern,

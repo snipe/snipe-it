@@ -330,6 +330,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
     }
 
+    /**
+     * Establishes the user -> reportTemplates relationship
+     *
+     * @since [v6.2.4]
+     */
     public function reportTemplates(): HasMany
     {
         return $this->hasMany(ReportTemplate::class);
