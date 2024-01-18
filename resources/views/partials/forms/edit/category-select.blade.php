@@ -6,7 +6,7 @@
     <div class="col-md-7{{  (isset($item) && (Helper::checkIfRequired($item, $fieldname))) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="categories/{{ (isset($category_type)) ? $category_type : 'assets' }}" data-placeholder="{{ trans('general.select_category') }}" name="{{ $fieldname }}" style="width: 100%" id="category_select_id" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @isset ($selected)
-                @if (!is_array($selected))
+                @if (!is_iterable($selected))
                     @php
                         $selected = [$selected];
                     @endphp

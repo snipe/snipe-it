@@ -6,7 +6,7 @@
     <div class="col-md-7{{  ((isset($field_req)) || ((isset($required) && ($required =='true')))) ?  ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="models" data-placeholder="{{ trans('general.select_model') }}" name="{{ $fieldname }}" style="width: 100%" id="model_select_id" aria-label="{{ $fieldname }}"{!!  (isset($field_req) ? ' data-validation="required" required' : '') !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @isset ($selected)
-                @if (!is_array($selected))
+                @if (!is_iterable($selected))
                     @php
                         $selected = [$selected];
                     @endphp
