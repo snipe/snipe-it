@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\ReportTemplates;
+namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;

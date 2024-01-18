@@ -15,7 +15,9 @@ class ReportTemplateFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'options' => [],
+            'options' => [
+                'id' => '1',
+            ],
         ];
     }
 }
