@@ -97,30 +97,26 @@ class CheckinAssetNotification extends Notification
         ];
 
         $payload = json_encode(
-       [
-        "@type"=> "MessageCard",
-        "@context"=> "http://schema.org/extensions",
-        "themeColor"=> "0076D7",
-        "summary"=> trans('mail.Asset_Checkin_Notification'),
-        "sections"=> [
-            "activityTitle"=> "Larry Bryant created a new task",
-            "activitySubtitle"=> "On Project Tango",
-            "activityImage"=> "https://adaptivecards.io/content/cats/3.png",
-            "facts"=> [
-                ["name"=> "Assigned to",
-                "value"=> "Unassigned"
+            [
+                "type" => "message",
+                "attachments" => [
+                    [
+                        "contentType" => "application/vnd.microsoft.card.adaptive",
+                        "contentUrl" => null,
+                        "content" => [
+                            "schema" => "http://adaptivecards.io/schemas/adaptive-card.json",
+                            "type" => "AdaptiveCard",
+                            "version" => "1.2",
+                            "body" => [
+                                [
+                                    "type" => "TextBlock",
+                                    "text" => "For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)"
+                                ]
+                            ]
+                        ]
                     ]
-            ,
-                ["name"=> "Due date",
-                "value"=> "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
-                    ]
-            ,
-                ["name"=> "Status",
-                "value"=> "Not started"
-                    ]
-            ],
-            "markdown"=> true
-        ]]
+                ]
+            ]
        );
 
     }
