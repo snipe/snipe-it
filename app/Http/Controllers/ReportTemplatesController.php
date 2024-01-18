@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomField;
 use App\Models\ReportTemplate;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ReportTemplatesController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->authorize('reports.view');
 
@@ -43,7 +45,7 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function edit($reportId)
+    public function edit($reportId): View
     {
         return view('reports/custom', [
             'customfields' => CustomField::get(),
@@ -51,7 +53,7 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function update(Request $request, $reportId)
+    public function update(Request $request, $reportId): RedirectResponse
     {
         $this->authorize('reports.view');
 
@@ -68,7 +70,7 @@ class ReportTemplatesController extends Controller
         return redirect()->route('report-templates.show', $reportTemplate->id);
     }
 
-    public function destroy($reportId)
+    public function destroy($reportId): RedirectResponse
     {
         $this->authorize('reports.view');
 
