@@ -10,6 +10,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckinAssetNotification extends Notification
 {
@@ -42,7 +44,10 @@ class CheckinAssetNotification extends Notification
      * @return array
      */
     public function via()
-    {
+    {   if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            return [MicrosoftTeamsChannel::class];
+        }
         $notifyBy = [];
         if (Setting::getSettings()->webhook_endpoint != '') {
             \Log::debug('use webhook');
@@ -84,40 +89,27 @@ class CheckinAssetNotification extends Notification
                     ->content($note);
             });
     }
-    public function toMsTeams()
+    public function toMicrosoftTeams()
     {
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-
-        $fields = [
+        $button = [
             trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
             trans('general.status') => $item->assetstatus->name,
             trans('general.location') => ($item->location) ? $item->location->name : '',
         ];
 
-        $payload = json_encode(
-            [
-                "type" => "message",
-                "attachments" => [
-                    [
-                        "contentType" => "application/vnd.microsoft.card.adaptive",
-                        "contentUrl" => null,
-                        "content" => [
-                            "schema" => "http://adaptivecards.io/schemas/adaptive-card.json",
-                            "type" => "AdaptiveCard",
-                            "version" => "1.2",
-                            "body" => [
-                                [
-                                    "type" => "TextBlock",
-                                    "text" => "For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)"
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-       );
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->title("Asset Checked in")
+            ->fact($item->present()->name, '')
+            ->fact('Checked into ', $item->location->name)
+            ->fact(trans('mail.Asset_Checkin_Notification')." by ", $admin->present()->fullName())
+            ->fact('Asset Status', $item->assetstatus->name);
+
+
 
     }
 
