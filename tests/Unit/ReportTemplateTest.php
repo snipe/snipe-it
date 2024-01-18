@@ -60,11 +60,15 @@ class ReportTemplateTest extends TestCase
         $template = ReportTemplate::factory()->create([
             'options' => [
                 'is_a_checkbox_field' => '1',
+                // This shouldn't happen since unchecked inputs are
+                // not submitted, but we should handle it anyway
+                'is_checkbox_field_with_zero' => '0',
             ],
         ]);
 
         $this->assertEquals('1', $template->checkmarkValue('is_a_checkbox_field'));
         $this->assertEquals('0', $template->checkmarkValue('non_existent_key'));
+        $this->assertEquals('0', $template->checkmarkValue('is_checkbox_field_with_zero'));
     }
 
     public function testParsingTextValue()

@@ -61,38 +61,44 @@ class ReportTemplate extends Model
         return $this->options[$property] ?? '0';
     }
 
-    public function radioValue(string $property, $value, $isDefault = false): bool
+    public function radioValue(string $property, string $value, bool $isDefault = false): bool
     {
-        // @todo: this method feels more like "radioShouldBeChecked" or something...
-        // @todo: improve the variable names...
-
         $propertyExists = array_has($this->options, $property);
 
+        // If the property doesn't exist but the radio input
+        // being checked is the default then return true.
         if (!$propertyExists && $isDefault) {
             return true;
         }
 
+        // If the property exists and matches what we're checking then return true.
         if ($propertyExists && $this->options[$property] === $value) {
             return true;
         }
 
+        // Otherwise return false.
         return false;
     }
 
     public function selectValue(string $property, string $model = null)
     {
+        // If the property does not exist then return null.
         if (!isset($this->options[$property])) {
             return null;
         }
 
         $value = $this->options[$property];
 
+        // If the value was stored as an array, most likely
+        // due to a previously being a multi-select,
+        // then return the first value.
         if (is_array($value)) {
             $value = $value[0];
         }
 
         // If a model is provided then we should ensure we only return
         // the value if the model still exists.
+        // Note: It is possible $value is an id that no longer exists and this will return null.
         if ($model) {
             $foundModel = $model::find($value);
 
@@ -104,15 +110,10 @@ class ReportTemplate extends Model
 
     public function selectValues(string $property, string $model = null): iterable
     {
+        // If the property does not exist then return an empty array.
         if (!isset($this->options[$property])) {
             return [];
         }
-
-        // @todo: I think this was added to support the null object pattern
-        // @todo: Check if this is still needed and if so, add a test for it (testParsingSelectValues()).
-        // if ($this->options[$property] === [null]) {
-        //     return null;
-        // }
 
         // If a model is provided then we should ensure we only return
         // the ids of models that exist and are not deleted.
@@ -120,7 +121,9 @@ class ReportTemplate extends Model
             return $model::findMany($this->options[$property])->pluck('id');
         }
 
-        // Wrap the value in an array if needed.
+        // Wrap the value in an array if needed. This is to ensure
+        // values previously stored as a single value,
+        // most likely from a single select, are returned as an array.
         if (!is_array($this->options[$property])) {
             return [$this->options[$property]];
         }
