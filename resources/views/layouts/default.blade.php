@@ -167,7 +167,8 @@
                                 </li>
                             @endcan
                             @can('index', \App\Models\Consumable::class)
-                                <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
+                                <li aria-hidden="true"
+                                    {!! (Request::is('consumables*') ? ' class="active"' : '') !!} tabindex="-1">
                                     <a href="{{ url('consumables') }}" accesskey="4" tabindex="-1">
                                         <i class="fas fa-tint fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.consumables') }}</span>
@@ -175,10 +176,20 @@
                                 </li>
                             @endcan
                             @can('view', \App\Models\Component::class)
-                                <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
+                                <li aria-hidden="true"
+                                    {!! (Request::is('components*') ? ' class="active"' : '') !!} tabindex="-1">
                                     <a href="{{ route('components.index') }}" accesskey="5" tabindex="-1">
                                         <i class="far fa-hdd fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.components') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('view', \App\Models\Company::class)
+                                <li aria-hidden="true"
+                                    {!! (Request::is('companies*') ? ' class="active"' : '') !!} tabindex="-1">
+                                    <a href="{{ route('companies.index') }}" accesskey="6" tabindex="-1">
+                                        <i class="far fa-building fa-fw"></i>
+                                        <span class="sr-only">{{ trans('general.companies') }}</span>
                                     </a>
                                 </li>
                             @endcan
@@ -233,7 +244,8 @@
                                             <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
                                                 <a href="{{ route('accessories.create') }}" tabindex="-1">
                                                     <i class="far fa-keyboard fa-fw" aria-hidden="true"></i>
-                                                    {{ trans('general.accessory') }}</a>
+                                                    {{ trans('general.accessory') }}
+                                                </a>
                                             </li>
                                         @endcan
                                         @can('create', \App\Models\Consumable::class)
@@ -257,6 +269,14 @@
                                                 <a href="{{ route('users.create') }}" tabindex="-1">
                                                     <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                                                     {{ trans('general.user') }}
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('create', \App\Models\Company::class)
+                                            <li {!! (Request::is('companies/create') ? 'class="active"' : '') !!}>
+                                                <a href="{{ route('companies.create') }}" tabindex="-1">
+                                                    <i class="fas fa-building fa-fw" aria-hidden="true"></i>
+                                                    {{ trans('general.company') }}
                                                 </a>
                                             </li>
                                         @endcan
@@ -982,7 +1002,7 @@
                     container: 'body',
                     animation: true,
                 });
-                
+
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');
