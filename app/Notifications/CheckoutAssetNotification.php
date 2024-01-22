@@ -10,6 +10,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckoutAssetNotification extends Notification
 {
@@ -51,6 +53,10 @@ class CheckoutAssetNotification extends Notification
      */
     public function via()
     {
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            return [MicrosoftTeamsChannel::class];
+        }
         $notifyBy = [];
 
         if ((Setting::getSettings()) && (Setting::getSettings()->webhook_endpoint != '')) {
@@ -116,6 +122,24 @@ class CheckoutAssetNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->addStartGroupToSection('activityTitle')
+            ->title("Asset Checked Out")
+            ->addStartGroupToSection('activityText')
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
+            ->fact('Checked out from ', $item->location->name)
+            ->fact(trans('mail.Asset_Checkout_Notification')." by ", $admin->present()->fullName())
+            ->fact('Asset Status', $item->assetstatus->name)
+            ->fact('Notes', $note ?: 'No notes');
     }
 
     /**

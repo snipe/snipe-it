@@ -44,7 +44,8 @@ class CheckinAssetNotification extends Notification
      * @return array
      */
     public function via()
-    {   if (Setting::getSettings()->webhook_selected == 'microsoft'){
+    {
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
 
             return [MicrosoftTeamsChannel::class];
         }
@@ -94,27 +95,18 @@ class CheckinAssetNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $button = [
-            trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-            trans('general.status') => $item->assetstatus->name,
-            trans('general.location') => ($item->location) ? $item->location->name : '',
-        ];
 
         return MicrosoftTeamsMessage::create()
             ->to($this->settings->webhook_endpoint)
             ->type('success')
-            ->addStartGroupToSection('header')
+            ->addStartGroupToSection('activityTitle')
             ->title("Asset Checked in")
+            ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
             ->fact('Checked into ', $item->location->name)
             ->fact(trans('mail.Asset_Checkin_Notification')." by ", $admin->present()->fullName())
             ->fact('Asset Status', $item->assetstatus->name)
             ->fact('Notes', $note ?: 'No notes');
-//            ->image($item->getImageUrl(), $item->model()->name, 'header');
-
-
-
-
     }
 
     /**
