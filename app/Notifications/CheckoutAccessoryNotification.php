@@ -9,6 +9,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckoutAccessoryNotification extends Notification
 {
@@ -37,7 +39,13 @@ class CheckoutAccessoryNotification extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+//            return [MicrosoftTeamsChannel::class];
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
+
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             $notifyBy[] = 'slack';
         }
 
@@ -95,6 +103,24 @@ class CheckoutAccessoryNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->addStartGroupToSection('activityTitle')
+            ->title("Accessory Checked Out")
+            ->addStartGroupToSection('activityText')
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
+            ->fact('Checked out from ', $item->location->name)
+            ->fact(trans('mail.Accessory_Checkout_Notification')." by ", $admin->present()->fullName())
+            ->fact('Number Remaining', $item->numRemaining())
+            ->fact('Notes', $note ?: 'No notes');
     }
 
     /**

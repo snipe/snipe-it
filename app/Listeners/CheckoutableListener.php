@@ -58,8 +58,13 @@ class CheckoutableListener
             }
 
             if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckoutNotification($event));
+
+            //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
+              if(Setting::getSettings()->webhook_selected =='slack') {
+
+                  Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                      ->notify($this->getCheckoutNotification($event));
+              }
             }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout notification: " . $e->getMessage());
