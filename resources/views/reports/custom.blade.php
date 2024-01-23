@@ -24,7 +24,7 @@
             'id' => 'custom-report-form',
             'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom',
         ]) }}
-    {{csrf_field()}}
+        {{csrf_field()}}
 
     <!-- Horizontal Form -->
         <div class="box box-default">
