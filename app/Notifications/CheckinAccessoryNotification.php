@@ -26,7 +26,6 @@ class CheckinAccessoryNotification extends Notification
         $this->admin = $checkedInby;
         $this->note = $note;
         $this->settings = Setting::getSettings();
-        \Log::debug('Constructor for notification fired');
     }
 
     /**

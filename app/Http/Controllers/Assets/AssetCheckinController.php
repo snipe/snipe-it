@@ -68,6 +68,7 @@ class AssetCheckinController extends Controller
 
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
+        $asset->last_checkin = now();
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->assigned_type = null;
@@ -108,8 +109,11 @@ class AssetCheckinController extends Controller
             }
         }
 
+        $originalValues = $asset->getRawOriginal();
+
         $checkin_at = date('Y-m-d H:i:s');
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+            $originalValues['action_date'] = $checkin_at;
             $checkin_at = $request->get('checkin_at');
         }
 
@@ -132,7 +136,7 @@ class AssetCheckinController extends Controller
 
         // Was the asset updated?
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
 
             if ((isset($user)) && ($backto == 'user')) {
                 return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));

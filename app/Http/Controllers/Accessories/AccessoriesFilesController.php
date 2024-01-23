@@ -146,9 +146,8 @@ class AccessoriesFilesController extends Controller
             $this->authorize('view', $accessory);
             $this->authorize('accessories.files', $accessory);
 
-            if (! $log = Actionlog::find($fileId)) {
-                return response('No matching record for that asset/file', 500)
-                    ->header('Content-Type', 'text/plain');
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $accessory->id)->find($fileId)) {
+                return redirect()->route('accessories.index')->with('error',  trans('admin/users/message.log_record_not_found'));
             }
 
             $file = 'private_uploads/accessories/'.$log->filename;
@@ -161,22 +160,19 @@ class AccessoriesFilesController extends Controller
                     ->header('Content-Type', 'text/plain');
             } else {
 
+                // Display the file inline
+                if (request('inline') == 'true') {
+                    $headers = [
+                        'Content-Disposition' => 'inline',
+                    ];
+                    return Storage::download($file, $log->filename, $headers);
+                }
+
+
                 // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
                 // won't work, as they're not accessible via the web
                 if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
                     return StorageHelper::downloader($file);
-                } else {
-                    if ($download != 'true') {
-                        \Log::debug('display the file');
-                        if ($contents = file_get_contents(Storage::url($file))) { // TODO - this will fail on private S3 files or large public ones
-                            return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
-                        }
-
-                        return JsonResponse::create(['error' => 'Failed validation: '], 500);
-                    }
-
-                    return StorageHelper::downloader($file);
-
                 }
             }
         }

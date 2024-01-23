@@ -47,6 +47,7 @@ class AssetModelsTransformer
             ] : null,
             'image' => ($assetmodel->image != '') ? Storage::disk('public')->url('models/'.e($assetmodel->image)) : null,
             'model_number' => e($assetmodel->model_number),
+            'min_amt'   => ($assetmodel->min_amt) ? (int) $assetmodel->min_amt : null,
             'depreciation' => ($assetmodel->depreciation) ? [
                 'id' => (int) $assetmodel->depreciation->id,
                 'name'=> e($assetmodel->depreciation->name),
@@ -72,7 +73,7 @@ class AssetModelsTransformer
 
         $permissions_array['available_actions'] = [
             'update' => (Gate::allows('update', AssetModel::class) && ($assetmodel->deleted_at == '')),
-            'delete' => (Gate::allows('delete', AssetModel::class) && ($assetmodel->assets_count == 0)),
+            'delete' => $assetmodel->isDeletable(),
             'clone' => (Gate::allows('create', AssetModel::class) && ($assetmodel->deleted_at == '')),
             'restore' => (Gate::allows('create', AssetModel::class) && ($assetmodel->deleted_at != '')),
         ];

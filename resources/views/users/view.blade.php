@@ -638,12 +638,31 @@
 
                     </div>
                     @endif
+                   @if($user->getUserTotalCost()->total_user_cost > 0)
+                   <div class="row">
+                       <div class="col-md-3">
+                           {{ trans('admin/users/table.total_assets_cost') }}
+                       </div>
+                       <div class="col-md-9">
+                           {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
+                           <a id="optional_info" class="text-primary">
+                               <i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i>
+                               <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
+                           </a>
+                       </div>
+                           <div id="optional_details" class="col-md-12" style="display:none">
+                               <div class="col-md-3" style="border-top:none;"></div>
+                               <div class="col-md-9" style="border-top:none;">
+                               {{trans('general.assets').': '. Helper::formatCurrencyOutput($user->getUserTotalCost()->asset_cost)}}<br>
+                               {{trans('general.licenses').': '. Helper::formatCurrencyOutput($user->getUserTotalCost()->license_cost)}}<br>
+                               {{trans('general.accessories').': '.Helper::formatCurrencyOutput($user->getUserTotalCost()->accessory_cost)}}<br>
+                               </div>
+                           </div>
+                   </div><!--/.row-->
+                   @endif
                   </div> <!--/end striped container-->
                 </div> <!-- end col-md-9 -->
-   
-            
-            
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
 
@@ -708,7 +727,7 @@
               <thead>
                 <tr>
                   <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th>{{ trans('admin/hardware/form.serial') }}</th>
+                  <th>{{ trans('admin/licenses/form.license_key') }}</th>
                   <th data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th>{{ trans('admin/licenses/form.purchase_order') }}</th>
                   <th>{{ trans('general.order_number') }}</th>
@@ -892,7 +911,7 @@
                             <td>
                                 @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
                                    @if (Helper::checkUploadIsImage($file->get_src('users')))
-                                        <a href="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                                     @else
                                         {{ trans('general.preview_not_available') }}
                                     @endif
@@ -916,9 +935,13 @@
                             <td>
                                 @if ($file->filename)
                                     @if (Storage::exists('private_uploads/users/'.$file->filename))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-sm btn-default">
                                             <i class="fas fa-download" aria-hidden="true"></i>
                                             <span class="sr-only">{{ trans('general.download') }}</span>
+                                        </a>
+
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
                                         </a>
                                     @endif
                                 @endif
@@ -980,7 +1003,9 @@
                   @endif
                   <th data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
                   <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-
+                  <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
+                  <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
+                  <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
 
               </tr>
               </thead>
@@ -1108,6 +1133,12 @@ $(function () {
 
 
         }
+    });
+    $("#optional_info").on("click",function(){
+        $('#optional_details').fadeToggle(100);
+        $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
+        var optional_info_open = $('#optional_info_icon').hasClass('fa-caret-down');
+        document.cookie = "optional_info_open="+optional_info_open+'; path=/';
     });
 });
 </script>

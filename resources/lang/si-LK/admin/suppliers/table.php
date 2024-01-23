@@ -14,7 +14,7 @@ return array(
     'id'                    => 'ID',
     'licenses'              => 'Licenses',
     'name'                  => 'Supplier Name',
-    'notes'                 => 'Notes',
+    'notes'                 => 'සටහන්',
     'phone'                 => 'Phone',
     'state'                 => 'State',
     'suppliers'             => 'Suppliers',

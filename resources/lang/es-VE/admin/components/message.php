@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'El componente no se ha retirado, inténtelo de nuevo',
         'success' 		=> 'El componente se ha retirado con éxito.',
         'user_does_not_exist' => 'El usuario es inválido. Por favor, inténtelo de nuevo.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'No quedan suficientes componentes: :remaining resting, :requested ',
     ),
 
     'checkin' => array(

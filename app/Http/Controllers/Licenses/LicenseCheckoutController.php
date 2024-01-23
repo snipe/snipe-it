@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Licenses;
 use App\Events\CheckoutableCheckedOut;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
+use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -21,23 +22,35 @@ class LicenseCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param $licenseId
+     * @param $id
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($licenseId)
+    public function create($id)
     {
-        // Check that the license is valid
-        if ($license = License::find($licenseId)) {
+
+        if ($license = License::find($id)) {
 
             $this->authorize('checkout', $license);
-            // If the license is valid, check that there is an available seat
-            if ($license->avail_seats_count < 1) {
-                return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+
+            if ($license->category) {
+
+                // Make sure there is at least one available to checkout
+                if ($license->availCount()->count() < 1){
+                    return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.not_enough_seats'));
+                }
+
+                // Return the checkout view
+                return view('licenses/checkout', compact('license'));
             }
-            return view('licenses/checkout', compact('license'));
+
+            // Invalid category
+            return redirect()->route('licenses.edit', ['license' => $license->id])
+                ->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.license')]));
+
         }
 
+        // Not found
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
 
 
@@ -63,6 +76,7 @@ class LicenseCheckoutController extends Controller
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
+        $licenseSeat->notes = $request->input('notes');
         
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
@@ -104,7 +118,7 @@ class LicenseCheckoutController extends Controller
             $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
 
             return true;
         }
@@ -121,7 +135,7 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
 
             return true;
         }

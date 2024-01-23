@@ -6,7 +6,6 @@ use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
-use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
@@ -32,7 +31,7 @@ class Asset extends Depreciable
     protected $presenter = \App\Presenters\AssetPresenter::class;
 
     use CompanyableTrait;
-    use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+    use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
     public const LOCATION = 'location';
     public const ASSET = 'asset';
@@ -72,7 +71,9 @@ class Asset extends Depreciable
 
     protected $casts = [
         'purchase_date' => 'date',
+        'eol_explicit' => 'boolean',
         'last_checkout' => 'datetime',
+        'last_checkin' => 'datetime',
         'expected_checkin' => 'date',
         'last_audit_date' => 'datetime',
         'next_audit_date' => 'date',
@@ -82,30 +83,35 @@ class Asset extends Depreciable
         'location_id'    => 'integer',
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
-        'byod'           => 'boolean',
         'created_at'     => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'  => 'datetime',
     ];
 
     protected $rules = [
-        'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL',
-        'status_id'       => 'required|integer|exists:status_labels,id',
-        'company_id'      => 'integer|nullable',
-        'warranty_months' => 'numeric|nullable|digits_between:0,240',
-        'physical'        => 'numeric|max:1|nullable',
-        'last_checkout'    => 'date_format:Y-m-d H:i:s|nullable',
-        'expected_checkin' => 'date|nullable',
-        'location_id'     => 'exists:locations,id|nullable',
-        'rtd_location_id' => 'exists:locations,id|nullable',
-        'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
-        'purchase_date'   => 'date|date_format:Y-m-d|nullable',
-        'serial'          => 'unique_serial|nullable',
-        'purchase_cost'   => 'numeric|nullable|gte:0',
-        'supplier_id'     => 'exists:suppliers,id|nullable',
-        'asset_eol_date'  => 'date|max:10|min:10|nullable',
+        'model_id'         => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
+        'status_id'        => 'required|integer|exists:status_labels,id',
+        'asset_tag'        => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
+        'name'             => 'nullable|max:255',
+        'company_id'       => 'nullable|integer|exists:companies,id',
+        'warranty_months'  => 'nullable|numeric|digits_between:0,240',
+        'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
+        'expected_checkin' => 'nullable|date',
+        'location_id'      => 'nullable|exists:locations,id',
+        'rtd_location_id'  => 'nullable|exists:locations,id',
+        'purchase_date'    => 'nullable|date|date_format:Y-m-d',
+        'serial'           => 'nullable|unique_undeleted:assets,serial',
+        'purchase_cost'    => 'nullable|numeric|gte:0',
+        'supplier_id'      => 'nullable|exists:suppliers,id',
+        'asset_eol_date'   => 'nullable|date',
+        'eol_explicit'     => 'nullable|boolean',
+        'byod'             => 'nullable|boolean',
+        'order_number'     => 'nullable|string|max:191',
+        'notes'            => 'nullable|string|max:65535',
+        'assigned_to'      => 'nullable|integer',
+        'requestable'      => 'nullable|boolean',
     ];
+
 
   /**
    * The attributes that are mass assignable.
@@ -135,8 +141,10 @@ class Asset extends Depreciable
         'expected_checkin',
         'byod',
         'asset_eol_date',
+        'eol_explicit', 
         'last_audit_date',
         'next_audit_date',
+        'asset_eol_date',
     ];
 
     use Searchable;
@@ -207,15 +215,15 @@ class Asset extends Depreciable
 
                 $this->rules += $model->fieldset->validation_rules();
 
-                foreach ($this->model->fieldset->fields as $field){
-                    if($field->format == 'BOOLEAN'){
-                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                if ($this->model->fieldset){
+                    foreach ($this->model->fieldset->fields as $field){
+                        if($field->format == 'BOOLEAN'){
+                            $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                        }
                     }
                 }
             }
         }
-
-
 
         return parent::save($params);
     }
@@ -261,7 +269,7 @@ class Asset extends Depreciable
 
     /**
      * Determines if an asset is available for checkout.
-     * This checks to see if the it's checked out to an invalid (deleted) user
+     * This checks to see if it's checked out to an invalid (deleted) user
      * OR if the assigned_to and deleted_at fields on the asset are empty AND
      * that the status is deployable
      *
@@ -332,6 +340,13 @@ class Asset extends Depreciable
             }
         }
 
+        $originalValues = $this->getRawOriginal();
+
+        // attempt to detect change in value if different from today's date
+        if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
+            $originalValues['action_date'] = date('Y-m-d H:i:s');
+        }
+
         if ($this->save()) {
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
@@ -340,7 +355,7 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = Auth::user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
 
             $this->increment('checkout_counter', 1);
 
@@ -448,11 +463,20 @@ class Asset extends Depreciable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return bool
      */
-    public function checkedOutToUser()
+    public function checkedOutToUser(): bool
     {
       return $this->assignedType() === self::USER;
+    }
+
+    public function checkedOutToLocation(): bool
+    {
+      return $this->assignedType() === self::LOCATION;
+    }
+
+    public function checkedOutToAsset(): bool
+    {
+      return $this->assignedType() === self::ASSET;
     }
 
     /**
@@ -716,7 +740,7 @@ class Asset extends Depreciable
     {
         $days = (is_null($days)) ? 30 : $days;
 
-        return self::where('archived', '=', '0')
+        return self::where('archived', '=', '0') // this can stay for right now, as `archived` defaults to 0 at the db level, but should probably be replaced with assetstatus->archived?
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')
@@ -741,7 +765,7 @@ class Asset extends Depreciable
     }
 
     /**
-     * Establishes the asset -> status relationship
+     * Establishes the asset -> license seats relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
@@ -775,7 +799,6 @@ class Asset extends Depreciable
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
-
 
 
     /**
@@ -911,6 +934,27 @@ class Asset extends Depreciable
     }
 
     /**
+     * -----------------------------------------------
+     * BEGIN MUTATORS
+     * -----------------------------------------------
+     **/
+
+    /**
+     * This sets the requestable to a boolean 0 or 1. This accounts for forms or API calls that
+     * explicitly pass the requestable field but it has a null or empty value.
+     *
+     * This will also correctly parse a 1/0 if "true"/"false" is passed.
+     *
+     * @param $value
+     * @return void
+     */
+    public function setRequestableAttribute($value)
+    {
+        $this->attributes['requestable'] = (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+
+    /**
     * -----------------------------------------------
     * BEGIN QUERY SCOPES
     * -----------------------------------------------
@@ -940,6 +984,7 @@ class Asset extends Depreciable
                 ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
+                ->orWhere('assets_users.employee_num', 'LIKE', '%'.$term.'%')
                 ->orWhereMultipleColumns([
                     'assets_users.first_name',
                     'assets_users.last_name',
@@ -1429,6 +1474,12 @@ class Asset extends Depreciable
 
                 if ($fieldname == 'location') {
                     $query->whereHas('location', function ($query) use ($search_val) {
+                        $query->where('locations.name', 'LIKE', '%'.$search_val.'%');
+                    });
+                }
+
+                if ($fieldname == 'rtd_location') {
+                    $query->whereHas('defaultLoc', function ($query) use ($search_val) {
                         $query->where('locations.name', 'LIKE', '%'.$search_val.'%');
                     });
                 }

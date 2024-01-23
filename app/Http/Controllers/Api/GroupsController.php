@@ -36,7 +36,7 @@ class GroupsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $groups->count()) ? $groups->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $groups->count()) ? $groups->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -63,7 +63,7 @@ class GroupsController extends Controller
         $group = new Group;
 
         $group->name = $request->input('name');
-        $group->permissions = $request->input('permissions'); // Todo - some JSON validation stuff here
+        $group->permissions = json_encode($request->input('permissions')); // Todo - some JSON validation stuff here
 
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $group, trans('admin/groups/message.create.success')));

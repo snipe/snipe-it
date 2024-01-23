@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Använd <code>{LOCALE}</code> och <code>{SERIAL}</code> i din URL som variabler för att få dessa värden automatiskt fyllda när du visar tillgångar.',
+    'support_url_help' => 'Variabler <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, och <code>{MODEL_NAME}</code> kan användas i din URL för att få dessa värden automatiskt fyllda när du visar tillgångar - till exempel https://support. pple<unk>{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Tillverkaren existerar inte.',
     'assoc_users'	 => 'Tillverkaren är för tillfället associerad med en modell och kan inte tas bort. Vänligen uppdatera dina modeller till att inte vara associerade med denna tillverkare och försök igen. ',
 

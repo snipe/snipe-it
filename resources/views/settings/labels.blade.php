@@ -106,7 +106,7 @@
                                 <div class="col-md-3 text-right">
                                     {{ Form::label('label2_title', trans('admin/settings/general.label2_title'), ['class'=>'control-label']) }}
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     {{ Form::text('label2_title', old('label2_title', $setting->label2_title), [ 'class'=>'form-control', 'placeholder'=>$setting->qr_text, 'aria-label'=>'label2_title' ]) }}
                                     {!! $errors->first('label2_title', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">{!! trans('admin/settings/general.label2_title_help') !!}</p>
@@ -128,7 +128,7 @@
 
                                     <label class="form-control">
                                         <input type="checkbox" value="1" name="label2_asset_logo"{{ ((old('label2_asset_logo') == '1') || ($setting->label2_asset_logo) == '1') ? ' checked="checked"' : '' }} aria-label="label2_asset_logo">
-                                        {{ trans('general.yes') }}
+                                        {{ Form::label('label2_asset_logo', trans('admin/settings/general.label2_asset_logo')) }}
                                     </label>
                                     <p class="help-block">
                                         {!! trans('admin/settings/general.label2_asset_logo_help', ['setting_name' => trans('admin/settings/general.brand').' &gt; '.trans('admin/settings/general.label_logo')]) !!}
@@ -142,7 +142,7 @@
                                 <div class="col-md-3 text-right">
                                     {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     @php
                                         $select1DValues = [
                                             'default' => trans('admin/settings/general.default').' [ '.$setting->alt_barcode.' ]',
@@ -174,7 +174,7 @@
                                 <div class="col-md-3 text-right">
                                     {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     @php
                                         $select2DValues = [
                                             'default'    => trans('admin/settings/general.default').' [ '.$setting->barcode_type.' ]',
@@ -216,7 +216,7 @@
                                     {{ Form::label('label2_fields', trans('admin/settings/general.label2_fields')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields) ])
+                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields), 'customFields' => $customFields ])
                                     {!! $errors->first('label2_fields', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">{{ trans('admin/settings/general.label2_fields_help') }}</p>
                                 </div>

@@ -1,24 +1,15 @@
 @push('css')
-<link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
-
+    <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
 @endpush
 
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+
 <script nonce="{{ csrf_token() }}">
     $(function () {
+
         var locale = '{{ config('app.locale') }}';
-
-        var stickyHeaderOffsetY = 0;
-
-        if ( $('.navbar-fixed-top').css('height') ) {
-            stickyHeaderOffsetY = +$('.navbar-fixed-top').css('height').replace('px','');
-        }
-        if ( $('.navbar-fixed-top').css('margin-bottom') ) {
-            stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
-        }
-
         var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
 
         var keyBlocked = function(key) {
@@ -31,6 +22,7 @@
         }
 
         $('.snipe-table').bootstrapTable('destroy').each(function () {
+
             data_export_options = $(this).attr('data-export-options');
             export_options = data_export_options ? JSON.parse(data_export_options) : {};
             export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
@@ -50,9 +42,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             },
+            // reorderableColumns: true,
             stickyHeader: true,
+            stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
+            stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
             locale: locale,
-            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
@@ -99,6 +93,7 @@
             }
 
             });
+
         });
     });
 
@@ -166,6 +161,38 @@
 
     });
 
+    // Initialize sort-order for bulk actions (label-generation) for snipe-tables
+    $('.snipe-table').each(function (i, table) {
+        table_cookie_segment = $(table).data('cookie-id-table');
+        name = '';
+        direction = '';
+        cookies = document.cookie.split(";");
+        for(i in cookies) {
+            cookiedef = cookies[i].split("=", 2);
+            cookiedef[0] = cookiedef[0].trim();
+            if (cookiedef[0] == table_cookie_segment + ".bs.table.sortOrder") {
+                direction = cookiedef[1];
+            }
+            if (cookiedef[0] == table_cookie_segment + ".bs.table.sortName") {
+                name = cookiedef[1];
+            }
+        }
+        if (name && direction) {
+            domnode = $($(this).data('bulk-form-id')).get(0);
+            if ( domnode && domnode.elements && domnode.elements.sort ) {
+                domnode.elements.sort.value = name + " " + direction;
+            }
+        }
+    });
+
+    // If sort order changes, update the sort-order for bulk-actions (for label-generation)
+    $('.snipe-table').on('sort.bs.table', function (event, name, order) {
+       domnode = $($(this).data('bulk-form-id')).get(0);
+       // make safe in case there isn't a bulk-form-id, or it's not found, or has no 'sort' element
+       if ( domnode && domnode.elements && domnode.elements.sort ) {
+           domnode.elements.sort.value = name + " " + order;
+       }
+    });
 
 
     
@@ -284,7 +311,11 @@
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
                     + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span></a>&nbsp;';
             } else {
-                actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a></span>&nbsp;';
+                // Do not show the delete button on things that are already deleted
+                if ((row.available_actions) && (row.available_actions.restore != true)) {
+                    actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a></span>&nbsp;';
+                }
+
             }
 
 
@@ -535,13 +566,35 @@
 
 
     function changeLogFormatter(value) {
+
         var result = '';
+        var pretty_index = '';
+
             for (var index in value) {
-                result += index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+
+
+                // Check if it's a custom field
+                if (index.startsWith('_snipeit_')) {
+                    pretty_index = index.replace("_snipeit_", "Custom:_");
+                } else {
+                    pretty_index = index;
+                }
+
+                extra_pretty_index = prettyLog(pretty_index);
+
+                result += extra_pretty_index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
             }
 
         return result;
 
+    }
+
+    function prettyLog(str) {
+        let frags = str.split('_');
+        for (let i = 0; i < frags.length; i++) {
+            frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+        }
+        return frags.join(' ');
     }
 
 
@@ -576,7 +629,7 @@
 
     function departmentNameLinkFormatter(value, row) {
         if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
-            return '<a href="{{ config('app.url') }}/department/' + row.assigned_user.department.id + '">' + row.assigned_user.department.name + '</a>';
+            return '<a href="{{ config('app.url') }}/departments/' + row.assigned_user.department.id + '">' + row.assigned_user.department.name + '</a>';
         }
 
     }

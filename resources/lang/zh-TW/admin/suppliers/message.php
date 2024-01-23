@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted supplier',
     'does_not_exist' => '供應商不存在',
 
 

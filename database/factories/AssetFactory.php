@@ -8,6 +8,8 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AssetFactory extends Factory
@@ -39,7 +41,7 @@ class AssetFactory extends Factory
             'notes'   => 'Created by DB seeder',
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
             'purchase_cost' => $this->faker->randomFloat(2, '299.99', '2999.99'),
-            'order_number' => $this->faker->numberBetween(1000000, 50000000),
+            'order_number' => (string) $this->faker->numberBetween(1000000, 50000000),
             'supplier_id' => Supplier::factory(),
             'requestable' => $this->faker->boolean(),
             'assigned_to' => null,
@@ -47,6 +49,18 @@ class AssetFactory extends Factory
             'next_audit_date' => null,
             'last_checkout' => null,
         ];
+    }
+   
+    
+    public function configure()
+    {
+        return $this->afterMaking(function (Asset $asset) {
+            // calculates the EOL date most of the time, but sometimes sets a random date so we have some explicits
+            // the explicit boolean gets set in the saving() method on the observer 
+            $asset->asset_eol_date = $this->faker->boolean(5) 
+                ? CarbonImmutable::parse($asset->purchase_date)->addMonths(rand(0, 20))->format('Y-m-d')
+                : CarbonImmutable::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+        });
     }
 
     public function laptopMbp()

@@ -32,6 +32,7 @@ class License extends Depreciable
     protected $guarded = 'id';
     protected $table = 'licenses';
 
+
     protected $casts = [
         'purchase_date' => 'date',
         'expiration_date' => 'date',
@@ -323,7 +324,10 @@ class License extends Depreciable
      */
     public function checkin_email()
     {
-        return $this->category->checkin_email;
+        if ($this->category) {
+            return $this->category->checkin_email;
+        }
+        return false;
     }
 
     /**
@@ -335,7 +339,11 @@ class License extends Depreciable
      */
     public function requireAcceptance()
     {
-        return $this->category->require_acceptance;
+        if ($this->category) {
+            return $this->category->require_acceptance;
+        }
+
+        return false;
     }
 
     /**
@@ -348,14 +356,16 @@ class License extends Depreciable
      */
     public function getEula()
     {
-
-        if ($this->category->eula_text) {
-            return Helper::parseEscapedMarkedown($this->category->eula_text);
-        } elseif ($this->category->use_default_eula == '1') {
-            return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
-        } else {
-            return false;
+        if ($this->category){
+            if ($this->category->eula_text) {
+                return Helper::parseEscapedMarkedown($this->category->eula_text);
+            } elseif ($this->category->use_default_eula == '1') {
+                return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
+            } 
         }
+
+        return false;
+        
     }
 
     /**

@@ -124,11 +124,11 @@ a {
   --button-primary: darken(@black, 25%);
   --button-hover: darken(@black, 30%);
   --header: @black; /* Use same as Header picker */
-  --text-main: #BBB;
+  --text-main: #fff;
   --text-sub: #9b9b9b;
-  --link: #AAA; /* Use same as Header picker, lighten by 70% */
-  --visited-link: lighten(@black, 40%); /* Use same as Header picker, lighten by 70% */
-  --hover-link: lighten(@black, 45%); /* Use same as Header picker, lighten by 70% */
+  --link: #fff; /* Use same as Header picker, lighten by 70% */
+  --visited-link: #fff; /* Use same as Header picker, lighten by 70% */
+  --hover-link: #949494; /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -191,18 +191,6 @@ h2.task_menu{
 .modal-content {
   background-color: var(--back-main);
   color: var(--text-main);
-}
-
-a:link {
-  color: var(--link);
-}
-
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
 }
 
 .btn-primary.hover {
@@ -318,8 +306,11 @@ input[type=text], input[type=search] {
   background-color: var(--back-sub);
   color: var(--text-main);
 }
+.search-highlight, .search-highlight:hover{
+  background-color: var(--back-sub) !important;
+}
 .input-group, .input-group-addon {
-  background-color: var(--back-sub)!important;
+  background-color: var(--back-sub);
   color: var(--text-main);
 }
 #licensesTable>tbody>tr>td>nobr>a>i.fa {
@@ -363,11 +354,11 @@ input[type=text], input[type=search] {
 }
 .select2-container--default .select2-results__option[aria-selected=true], .select2-container--default .select2-results__option[aria-selected=true]:hover {
   background-color: var(--back-sub);
-  color: var(--header);
+  color: var(--nav-link);
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: var(--header);
-  color: var(--back-main);
+  background-color: var(--back-sub);
+  color: var(--visited-link);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: var(--text-main);
@@ -426,9 +417,6 @@ a {
     color: var(--hover-link);
     text-decoration: underline;
   }
-  &:visited {
-    color: var(--visited-link)
-  }
 }
 
 .row-striped {
@@ -463,4 +451,7 @@ a {
 }
 div.container.row-new-striped{
   background-color:  var(--back-sub);
+}
+.table > thead > tr > td.danger, .table > tbody > tr > td.danger, .table > tfoot > tr > td.danger, .table > thead > tr > th.danger, .table > tbody > tr > th.danger, .table > tfoot > tr > th.danger, .table > thead > tr.danger > td, .table > tbody > tr.danger > td, .table > tfoot > tr.danger > td, .table > thead > tr.danger > th, .table > tbody > tr.danger > th, .table > tfoot > tr.danger > th {
+  background-color: var(--back-sub);
 }

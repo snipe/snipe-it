@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.hello_name', array('name' => $user->present()->fullName())) }}
+{{ trans('general.hello_name', array('name' => $user->present()->getFullNameAttribute())) }}
 @parent
 @stop
 
@@ -10,15 +10,17 @@
 @section('content')
 
 @if ($acceptances = \App\Models\CheckoutAcceptance::forUser(Auth::user())->pending()->count())
-  <div class="col-md-12">
-    <div class="alert alert alert-warning fade in">
-      <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert alert-warning fade in">
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
 
-      <strong>
-        <a href="{{ route('account.accept') }}" style="color: white;">
-          {{ trans('general.unaccepted_profile_warning', array('count' => $acceptances)) }}
-        </a>
-        </strong>
+        <strong>
+          <a href="{{ route('account.accept') }}" style="color: white;">
+            {{ trans('general.unaccepted_profile_warning', array('count' => $acceptances)) }}
+          </a>
+          </strong>
+      </div>
     </div>
   </div>
 @endif
@@ -388,7 +390,6 @@
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
-                          data-show-refresh="true"
                           data-sort-order="asc"
                           id="userAssets"
                           class="table table-striped snipe-table"
@@ -405,6 +406,7 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">{{ trans('admin/hardware/form.default_location') }}</th>
                       @can('self.view_purchase_cost')
                         <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                       @endcan
@@ -442,7 +444,7 @@
                           @endif
                         </td>
                         <td>{{ $asset->serial }}</td>
-
+                        <td>{{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}</td>
                         @can('self.view_purchase_cost')
                         <td>
                           {!! Helper::formatCurrencyOutput($asset->purchase_cost) !!}
@@ -478,7 +480,7 @@
                       data-side-pagination="client"
                       data-show-columns="true"
                       data-show-export="true"
-                      data-show-refresh="true"
+                      data-show-refresh="false"
                       data-sort-order="asc"
                       id="userLicenses"
                       class="table table-striped snipe-table"
@@ -488,9 +490,12 @@
                     }'>
                 <thead>
                 <tr>
-                  <th class="col-md-4">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('admin/hardware/form.serial') }}</th>
-                  <th class="col-md-4">{{ trans('general.category') }}</th>
+                  <th>{{ trans('general.name') }}</th>
+                  <th>{{ trans('admin/licenses/form.license_key') }}</th>
+                  <th>{{ trans('admin/licenses/form.to_name') }}</th>
+                  <th>{{ trans('admin/licenses/form.to_email') }}</th>
+                  <th>{{ trans('general.category') }}</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -504,6 +509,18 @@
                         ------------
                       @endcan
                     </td>
+                    <td>
+                      @can('viewKeys', $license)
+                        {{ $license->license_name }}
+                      @else
+                        ------------
+                      @endcan
+                    </td>
+                    @can('viewKeys', $license)
+                    <td>{{$license->license_email}}</td>
+                    @else
+                      ------------
+                    @endcan
                     <td>{{ $license->category->name }}</td>
                   </tr>
                 @endforeach
@@ -525,7 +542,7 @@
                       data-show-fullscreen="true"
                       data-show-export="true"
                       data-show-footer="true"
-                      data-show-refresh="true"
+                      data-show-refresh="false"
                       data-sort-order="asc"
                       data-sort-name="name"
                       class="table table-striped snipe-table table-hover"
@@ -576,7 +593,7 @@
                       data-show-fullscreen="true"
                       data-show-export="true"
                       data-show-footer="true"
-                      data-show-refresh="true"
+                      data-show-refresh="false"
                       data-sort-order="asc"
                       data-sort-name="name"
                       class="table table-striped snipe-table table-hover"

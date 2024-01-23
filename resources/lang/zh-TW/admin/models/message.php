@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => '樣板不存在',
     'no_association' => '警告！此項目的資產型號無效或遺失！',
     'no_association_fix' => '這將以奇怪和可怕的方式損壞事物。立即編輯此資產以分配型號。',

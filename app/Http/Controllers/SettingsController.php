@@ -7,6 +7,7 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Models\CustomField;
 use App\Models\Group;
 use App\Models\Setting;
 use App\Models\Asset;
@@ -26,7 +27,7 @@ use Response;
 use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This controller handles all actions related to Settings for
@@ -185,7 +186,7 @@ class SettingsController extends Controller
         $settings->alerts_enabled = 1;
         $settings->pwd_secure_min = 10;
         $settings->brand = 1;
-        $settings->locale = $request->input('locale', 'en');
+        $settings->locale = $request->input('locale', 'en-US');
         $settings->default_currency = $request->input('default_currency', 'USD');
         $settings->user_id = 1;
         $settings->email_domain = $request->input('email_domain');
@@ -584,12 +585,13 @@ class SettingsController extends Controller
         }
 
         if (! config('app.lock_passwords')) {
-            $setting->locale = $request->input('locale', 'en');
+            $setting->locale = $request->input('locale', 'en-US');
         }
         $setting->default_currency = $request->input('default_currency', '$');
         $setting->date_display_format = $request->input('date_display_format');
         $setting->time_display_format = $request->input('time_display_format');
         $setting->digit_separator = $request->input('digit_separator');
+        $setting->name_display_format = $request->input('name_display_format');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -808,9 +810,10 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
-        $setting = Setting::getSettings();
-
-        return view('settings.labels', compact('setting'));
+        return view('settings.labels', [
+            'setting' => Setting::getSettings(),
+            'customFields' => CustomField::all(),
+        ]);
     }
 
     /**
@@ -1247,13 +1250,11 @@ class SettingsController extends Controller
             if (!$request->hasFile('file')) {
                 return redirect()->route('settings.backups.index')->with('error', 'No file uploaded');
             } else {
+
                 $max_file_size = Helper::file_upload_max_size();
-
-                $rules = [
+                $validator = Validator::make($request->all(), [
                     'file' => 'required|mimes:zip|max:'.$max_file_size,
-                ];
-
-                $validator = \Validator::make($request->all(), $rules);
+                ]);
 
                 if ($validator->passes()) {
 
@@ -1264,7 +1265,7 @@ class SettingsController extends Controller
                         return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
                 }
 
-                return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+                return redirect()->route('settings.backups.index')->withErrors($validator);
 
             }
 

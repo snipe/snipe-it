@@ -38,7 +38,7 @@ class ActionlogFactory extends Factory
     {
         return $this->state(function () {
             $target = User::inRandomOrder()->first();
-            $asset = Asset::RTD()->inRandomOrder()->first();
+            $asset = Asset::inRandomOrder()->RTD()->first();
 
             $asset->update(
                     [

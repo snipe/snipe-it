@@ -1,11 +1,14 @@
 {
   "projectName": "snipe-it",
   "projectOwner": "snipe",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 110,
   "commit": true,
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "snipe",
@@ -2958,6 +2961,60 @@
       "name": "Grant Le Roux",
       "avatar_url": "https://avatars.githubusercontent.com/u/5396871?v=4",
       "profile": "https://github.com/cram42",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Singrity",
+      "name": "Bogdan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58479551?v=4",
+      "profile": "http://@singrity",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mmanjos",
+      "name": "mmanjos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3483684?v=4",
+      "profile": "https://github.com/mmanjos",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Azooz2014",
+      "name": "Abdelaziz Faki",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7429229?v=4",
+      "profile": "https://azooz2014.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bilias",
+      "name": "bilias",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47315739?v=4",
+      "profile": "https://github.com/bilias",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "coach1988",
+      "name": "coach1988",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2565989?v=4",
+      "profile": "https://github.com/coach1988",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mauro-miatello",
+      "name": "MrM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11910225?v=4",
+      "profile": "https://github.com/mauro-miatello",
       "contributions": [
         "code"
       ]

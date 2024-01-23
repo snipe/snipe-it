@@ -116,41 +116,17 @@ class AssetMaintenancesController extends Controller
     {
         $this->authorize('update', Asset::class);
         // create a new model instance
-        $assetMaintenance = new AssetMaintenance();
-        $assetMaintenance->supplier_id = $request->input('supplier_id');
-        $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost =  $request->input('cost');
-        $assetMaintenance->notes = e($request->input('notes'));
-        $asset = Asset::find(e($request->input('asset_id')));
-
-        if (! Company::isCurrentUserHasAccess($asset)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot add a maintenance for that asset'));
-        }
-
-        // Save the asset maintenance data
-        $assetMaintenance->asset_id = $request->input('asset_id');
-        $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
-        $assetMaintenance->title = $request->input('title');
-        $assetMaintenance->start_date = $request->input('start_date');
-        $assetMaintenance->completion_date = $request->input('completion_date');
-        $assetMaintenance->user_id = Auth::id();
-
-        if (($assetMaintenance->completion_date !== null)
-            && ($assetMaintenance->start_date !== '')
-            && ($assetMaintenance->start_date !== '0000-00-00')
-        ) {
-            $startDate = Carbon::parse($assetMaintenance->start_date);
-            $completionDate = Carbon::parse($assetMaintenance->completion_date);
-            $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
-        }
+        $maintenance = new AssetMaintenance();
+        $maintenance->fill($request->all());
+        $maintenance->user_id = Auth::id();
 
         // Was the asset maintenance created?
-        if ($assetMaintenance->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.create.success')));
+        if ($maintenance->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $maintenance, trans('admin/asset_maintenances/message.create.success')));
 
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
+        return response()->json(Helper::formatStandardApiResponse('error', null, $maintenance->getErrors()));
 
     }
 
@@ -158,65 +134,39 @@ class AssetMaintenancesController extends Controller
      *  Validates and stores an update to an asset maintenance
      *
      * @author  A. Gianotto <snipe@snipe.net>
-     * @param int $assetMaintenanceId
+     * @param int $id
      * @param int $request
      * @version v1.0
      * @since [v4.0]
      * @return string JSON
      */
-    public function update(Request $request, $assetMaintenanceId = null)
+    public function update(Request $request, $id)
     {
         $this->authorize('update', Asset::class);
-        // Check if the asset maintenance exists
-        $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
-        if (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot edit a maintenance for that asset'));
-        }
+        if ($maintenance = AssetMaintenance::with('asset')->find($id)) {
 
-        $assetMaintenance->supplier_id = e($request->input('supplier_id'));
-        $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        $assetMaintenance->cost =  $request->input('cost');
-        $assetMaintenance->notes = e($request->input('notes'));
-
-        $asset = Asset::find(request('asset_id'));
-
-        if (! Company::isCurrentUserHasAccess($asset)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot edit a maintenance for that asset'));
-        }
-
-        // Save the asset maintenance data
-        $assetMaintenance->asset_id = $request->input('asset_id');
-        $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
-        $assetMaintenance->title = $request->input('title');
-        $assetMaintenance->start_date = $request->input('start_date');
-        $assetMaintenance->completion_date = $request->input('completion_date');
-
-        if (($assetMaintenance->completion_date == null)
-        ) {
-            if (($assetMaintenance->asset_maintenance_time !== 0)
-                || (! is_null($assetMaintenance->asset_maintenance_time))
-            ) {
-                $assetMaintenance->asset_maintenance_time = null;
+            // Can this user manage this asset?
+            if (! Company::isCurrentUserHasAccess($maintenance->asset)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.action_permission_denied', ['item_type' => trans('admin/asset_maintenances/general.maintenance'), 'id' => $id, 'action' => trans('general.edit')])));
             }
+
+            // The asset this miantenance is attached to is not valid or has been deleted
+            if (!$maintenance->asset) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.item_not_found', ['item_type' => trans('general.asset'), 'id' => $id])));
+            }
+
+            $maintenance->fill($request->all());
+
+            if ($maintenance->save()) {
+                return response()->json(Helper::formatStandardApiResponse('success', $maintenance, trans('admin/asset_maintenances/message.edit.success')));
+            }
+
+            return response()->json(Helper::formatStandardApiResponse('error', null, $maintenance->getErrors()));
         }
 
-        if (($assetMaintenance->completion_date !== null)
-            && ($assetMaintenance->start_date !== '')
-            && ($assetMaintenance->start_date !== '0000-00-00')
-        ) {
-            $startDate = Carbon::parse($assetMaintenance->start_date);
-            $completionDate = Carbon::parse($assetMaintenance->completion_date);
-            $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
-        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.item_not_found', ['item_type' => trans('admin/asset_maintenances/general.maintenance'), 'id' => $id])));
 
-        // Was the asset maintenance created?
-        if ($assetMaintenance->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.edit.success')));
-
-        }
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
     }
 
     /**

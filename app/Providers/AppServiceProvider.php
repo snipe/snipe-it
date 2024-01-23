@@ -7,10 +7,12 @@ use App\Models\Asset;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\License;
+use App\Models\User;
 use App\Models\Setting;
 use App\Models\SnipeSCIMConfig;
 use App\Observers\AccessoryObserver;
 use App\Observers\AssetObserver;
+use App\Observers\UserObserver;
 use App\Observers\ComponentObserver;
 use App\Observers\ConsumableObserver;
 use App\Observers\LicenseObserver;
@@ -58,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         Asset::observe(AssetObserver::class);
+        User::observe(UserObserver::class);
         Accessory::observe(AccessoryObserver::class);
         Component::observe(ComponentObserver::class);
         Consumable::observe(ConsumableObserver::class);
@@ -75,12 +78,7 @@ class AppServiceProvider extends ServiceProvider
         // Only load rollbar if there is a rollbar key and the app is in production
         if (($this->app->environment('production')) && (config('logging.channels.rollbar.access_token'))) {
             $this->app->register(\Rollbar\Laravel\RollbarServiceProvider::class);
-        } 
-
-        // Only load dusk's service provider if the app is in local or develop mode
-        if ($this->app->environment(['local', 'develop'])) {
-            $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
-        } 
+        }
 
         $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\SCIMConfig', SnipeSCIMConfig::class); // this overrides the default SCIM configuration with our own
     

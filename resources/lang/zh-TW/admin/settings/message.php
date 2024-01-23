@@ -35,10 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => '正在傳送 :app 測試訊息...',
+        'success' => 'Your :webhook_name Integration works!',
         'success_pt1' => '成功！請檢查 ',
         'success_pt2' => ' 頻道中的測試訊息，並確定在下面點選儲存以儲存你的設定。',
         '500' => '500 伺服器錯誤。',
         'error' => '發生了一些錯誤。:app 回應：:error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => '發生了一些錯誤。 :( ',
     ]
 ];

@@ -225,6 +225,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
             [SettingsController::class, 'postUploadBackup']
         )->name('settings.backups.upload');
 
+        // Handle redirect from after POST request from backup restore
+        Route::get('/restore/{filename?}', function () {
+            return redirect(route('settings.backups.index'));
+        });
+
         Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
 
@@ -375,8 +380,8 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/unaccepted_assets/{deleted?}',
         [ReportsController::class, 'getAssetAcceptanceReport']
     )->name('reports/unaccepted_assets');
-    Route::get(
-        'reports/unaccepted_assets/{acceptanceId}/sent_reminder',
+    Route::post(
+        'reports/unaccepted_assets/sent_reminder',
         [ReportsController::class, 'sentAssetAcceptanceReminder']
     )->name('reports/unaccepted_assets_sent_reminder');
     Route::delete(

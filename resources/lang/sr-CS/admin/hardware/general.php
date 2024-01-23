@@ -20,11 +20,11 @@ return [
     'requestable'               => 'Može da se potražuje',
     'requested'				    => 'Zatraženo',
     'not_requestable'           => 'Ne može da se potražuje',
-    'requestable_status_warning' => 'Do not change requestable status',
+    'requestable_status_warning' => 'Ne manjajte status mogućnosti potraživanja',
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
-    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
+    'undeployable_tooltip'  	=> 'Ova imovina ima oznaku statusa koja nije zaduživa i nije je moguće zadužiti u ovom trenutku.',
     'view'  					=> 'Prikaz imovine',
     'csv_error' => 'Postoji greška u tvojoj CSV datoteci:',
     'import_text' => '
@@ -39,5 +39,5 @@ Otpremite CSV koji sadrži istoriju osnovnog sredstva. Sredstva i korisnici MORA
     'alert_details' => 'Za detalje pogledajte ispod.',
     'custom_export' => 'Uobičajen izvoz',
     'mfg_warranty_lookup' => 'Pretraga statusa :manufacturer garancije',
-    'user_department' => 'User Department',
+    'user_department' => 'Sektor korisnika',
 ];

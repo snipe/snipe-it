@@ -21,7 +21,7 @@ class LabelPresenter extends Presenter
             ], [
                 'field' => 'name',
                 'searchable' => true,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('general.name'),
                 'visible' => true,
@@ -44,14 +44,14 @@ class LabelPresenter extends Presenter
             ], [
                 'field' => 'support_fields',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_fields'),
                 'visible' => true
             ], [
                 'field' => 'support_asset_tag',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_asset_tag'),
                 'visible' => true,
@@ -59,7 +59,7 @@ class LabelPresenter extends Presenter
             ], [
                 'field' => 'support_1d_barcode',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_1d_barcode'),
                 'visible' => true,
@@ -67,7 +67,7 @@ class LabelPresenter extends Presenter
             ], [
                 'field' => 'support_2d_barcode',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_2d_barcode'),
                 'visible' => true,
@@ -75,7 +75,7 @@ class LabelPresenter extends Presenter
             ], [
                 'field' => 'support_logo',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_logo'),
                 'visible' => true,
@@ -83,7 +83,7 @@ class LabelPresenter extends Presenter
             ], [
                 'field' => 'support_title',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_title'),
                 'visible' => true,

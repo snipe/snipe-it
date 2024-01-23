@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
@@ -135,22 +136,36 @@ class UserFilesController extends Controller
      */
     public function show($userId = null, $fileId = null)
     {
+
+        if (empty($fileId)) {
+            return redirect()->route('users.show')->with('error', 'Invalid file request');
+        }
+
         $user = User::find($userId);
 
         // the license is valid
         if (isset($user->id)) {
+
             $this->authorize('view', $user);
 
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src('users');
+            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
 
-            return Response::download($file); //FIXME this doesn't use the new StorageHelper yet, but it's complicated...
+                // Display the file inline
+                if (request('inline') == 'true') {
+                    $headers = [
+                        'Content-Disposition' => 'inline',
+                    ];
+                    return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
+                }
+
+                return Storage::download('private_uploads/users/'.$log->filename);
+            }
+
+            return redirect()->route('users.index')->with('error',  trans('admin/users/message.log_record_not_found'));
         }
-        // Prepare the error message
-        $error = trans('admin/users/message.user_not_found', ['id' => $userId]);
 
-        // Redirect to the licence management page
-        return redirect()->route('users.index')->with('error', $error);
+        // Redirect to the user management page if the user doesn't exist
+        return redirect()->route('users.index')->with('error',  trans('admin/users/message.user_not_found', ['id' => $userId]));
     }
 
 }

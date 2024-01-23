@@ -69,7 +69,7 @@ class AcceptanceController extends Controller
         }
 
         if (! Company::isCurrentUserHasAccess($acceptance->checkoutable)) {
-            return redirect()->route('account.accept')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('account.accept')->with('error', trans('general.error_user_company'));
         }
 
         return view('account/accept.create', compact('acceptance'));
@@ -245,6 +245,36 @@ class AcceptanceController extends Controller
             $return_msg = trans('admin/users/message.accepted');
 
         } else {
+
+            /**
+             * Check for the eula-pdfs directory
+             */
+            if (! Storage::exists('private_uploads/eula-pdfs')) {
+                Storage::makeDirectory('private_uploads/eula-pdfs', 775);
+            }
+
+            if (Setting::getSettings()->require_accept_signature == '1') {
+                
+                // Check if the signature directory exists, if not create it
+                if (!Storage::exists('private_uploads/signatures')) {
+                    Storage::makeDirectory('private_uploads/signatures', 775);
+                }
+
+                // The item was accepted, check for a signature
+                if ($request->filled('signature_output')) {
+                    $sig_filename = 'siglog-' . Str::uuid() . '-' . date('Y-m-d-his') . '.png';
+                    $data_uri = $request->input('signature_output');
+                    $encoded_image = explode(',', $data_uri);
+                    $decoded_image = base64_decode($encoded_image[1]);
+                    Storage::put('private_uploads/signatures/' . $sig_filename, (string)$decoded_image);
+
+                    // No image data is present, kick them back.
+                    // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
+                } else {
+                    return redirect()->back()->with('error', trans('general.shitty_browser'));
+                }
+            }
+            
             // Format the data to send the declined notification
             $branding_settings = SettingsController::getPDFBranding();
 
@@ -281,10 +311,17 @@ class AcceptanceController extends Controller
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
                 'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
+                'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
                 'assigned_to' => $assigned_to,
                 'company_name' => $branding_settings->site_name,
                 'date_settings' => $branding_settings->date_display_format,
             ];
+
+            if ($pdf_view_route!='') {
+                \Log::debug($pdf_filename.' is the filename, and the route was specified.');
+                $pdf = Pdf::loadView($pdf_view_route, $data);
+                Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
+            }
 
             $acceptance->decline($sig_filename);
             $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));

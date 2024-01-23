@@ -9,6 +9,7 @@ return array(
     'assoc_users'	 => 'Lisensi ini saat ini diperiksa oleh pengguna dan tidak dapat dihapus. Mohon periksa dulu lisensinya, lalu coba hapus lagi. ',
     'select_asset_or_person' => 'Anda harus memilih aset atau pengguna, namun tidak keduanya.',
     'not_found' => 'License not found',
+    'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
@@ -41,7 +42,8 @@ return array(
 
     'checkout' => array(
         'error'   => 'Terjadi masalah saat menghapus lisensi. Silahkan coba lagi.',
-        'success' => 'Lisensi berhasil diperiksa'
+        'success' => 'Lisensi berhasil diperiksa',
+        'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(

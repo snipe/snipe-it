@@ -10,6 +10,7 @@ return [
     'create' => [
         'error'   		=> 'O ativo não foi criado, tente novamente. :(',
         'success' 		=> 'Ativo criado com sucesso. :)',
+        'success_linked' => 'O ativo com a tag :tag foi criado com sucesso. <strong><a href=":link" style="color: white;">clique aqui para ver</a></strong>.',
     ],
 
     'update' => [
@@ -50,6 +51,7 @@ return [
         'success'               => 'O seu arquivo foi importado',
         'file_delete_success'   => 'O arquivo foi excluído com sucesso',
         'file_delete_error'      => 'Não foi possível excluir o arquivo',
+        'file_missing' => 'O arquivo selecionado está faltando',
         'header_row_has_malformed_characters' => 'Um ou mais atributos na linha do cabeçalho contém caracteres UTF-8 malformados',
         'content_row_has_malformed_characters' => 'Um ou mais atributos na primeira linha de conteúdo contém caracteres UTF-8 malformados',
     ],

@@ -36,6 +36,13 @@ return [
             'files' => [
 
                 /*
+                * This path is used to make directories in resulting zip-file relative
+                * Set to false to include complete absolute path
+                * Example: base_path()
+                */
+                'relative_path' => base_path(),
+
+                /*
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => $included_dirs,

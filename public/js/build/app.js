@@ -1295,12 +1295,16 @@ $(document).ready(function () {
         $('#assigned_user').hide();
         $('#assigned_location').hide();
         $('.notification-callout').fadeOut();
+        $('[name="assigned_location"]').val('').trigger('change.select2');
+        $('[name="assigned_user"]').val('').trigger('change.select2');
       } else if (assignto_type == 'location') {
         $('#current_assets_box').fadeOut();
         $('#assigned_asset').hide();
         $('#assigned_user').hide();
         $('#assigned_location').show();
         $('.notification-callout').fadeOut();
+        $('[name="assigned_asset"]').val('').trigger('change.select2');
+        $('[name="assigned_user"]').val('').trigger('change.select2');
       } else {
         $('#assigned_asset').hide();
         $('#assigned_user').show();
@@ -1311,6 +1315,8 @@ $(document).ready(function () {
         }
 
         $('.notification-callout').fadeIn();
+        $('[name="assigned_asset"]').val('').trigger('change.select2');
+        $('[name="assigned_location"]').val('').trigger('change.select2');
       }
     });
   }); // ------------------------------------------------
@@ -1496,7 +1502,9 @@ $(function () {
     select = link.data("select");
     refreshSelector = link.data("refresh");
     $('#createModal').load(link.attr('href'), function () {
-      //do we need to re-select2 this, after load? Probably.
+      // this sets the focus to be the name field
+      $('#modal-name').focus(); //do we need to re-select2 this, after load? Probably.
+
       $('#createModal').find('select.select2').select2(); // Initialize the ajaxy select2 with images.
       // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
 

@@ -41,7 +41,7 @@ class SuppliersController extends Controller
         ];
         
         $suppliers = Supplier::select(
-                ['id', 'name', 'address', 'address2', 'city', 'state', 'country', 'fax', 'phone', 'email', 'contact', 'created_at', 'updated_at', 'deleted_at', 'image', 'notes'])
+                ['id', 'name', 'address', 'address2', 'city', 'state', 'country', 'fax', 'phone', 'email', 'contact', 'created_at', 'updated_at', 'deleted_at', 'image', 'notes', 'url'])
                     ->withCount('assets as assets_count')
                     ->withCount('licenses as licenses_count')
                     ->withCount('accessories as accessories_count')
@@ -94,7 +94,7 @@ class SuppliersController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $suppliers->count()) ? $suppliers->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $suppliers->count()) ? $suppliers->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';

@@ -168,9 +168,14 @@
                                             </td>
                                             <td>
                                                 @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
-                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-default">
+                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-sm btn-default">
                                                         <i class="fas fa-download" aria-hidden="true"></i>
                                                     </a>
+
+                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                    </a>
+
                                                 @endif
                                             </td>
                                             <td>
@@ -228,6 +233,12 @@
                     @if ($model->category)
                         <li>{{ trans('general.category') }}:
                             <a href="{{ route('categories.show', $model->category->id) }}">{{ $model->category->name }}</a>
+                        </li>
+                    @endif
+
+                    @if ($model->min_amt)
+                        <li>{{ trans('general.min_amt') }}:
+                           {{$model->min_amt }}
                         </li>
                     @endif
 
@@ -334,12 +345,12 @@
                 @if ($model->assets->count() > 0)
 
                     <div class="col-md-12" style="padding-bottom: 5px;">
-                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print disabled">{{ trans('general.delete') }}</a>
+                        <button class="btn btn-block btn-sm btn-danger hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">{{ trans('general.delete') }}</button>
                     </div>
                 @else
-
                     <div class="col-md-12" style="padding-bottom: 10px;">
-                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('general.delete') }}</a>
+                        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $model->name]) }}" data-target="#dataConfirmModal" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}">{{ trans('general.delete') }} </button>
+                        <span class="sr-only">{{ trans('general.delete') }}</span>
                     </div>
                 @endif
            @endcan
@@ -352,6 +363,16 @@
 @stop
 
 @section('moar_scripts')
+
+        <script>
+            $('#dataConfirmModal').on('show.bs.modal', function (event) {
+                var content = $(event.relatedTarget).data('content');
+                var title = $(event.relatedTarget).data('title');
+                $(this).find(".modal-body").text(content);
+                $(this).find(".modal-header").text(title);
+            });
+        </script>
+
     @include ('partials.bootstrap-table', ['exportFile' => 'manufacturer' . $model->name . '-export', 'search' => false])
 
 @stop

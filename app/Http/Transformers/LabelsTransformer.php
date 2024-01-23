@@ -26,8 +26,8 @@ class LabelsTransformer
             'name' => $label->getName(),
             'unit' => $label->getUnit(),
 
-            'width'  => $label->getWidth(),
-            'height' => $label->getHeight(),
+            'width'  => number_format($label->getWidth(), 2),
+            'height' => number_format($label->getHeight(), 2),
 
             'margin_top'    => $label->getMarginTop(),
             'margin_bottom' => $label->getMarginBottom(),

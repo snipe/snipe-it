@@ -26,8 +26,9 @@ return array(
                 'modal'             => '此操作将归还一个席位。| 此操作将归还此许可证的所有 :checkedout_seas_count 个座位。',
                 'enabled_tooltip'   => '从用户和资产中归还此许可证的所有席位',
                 'disabled_tooltip'  => '此功能已禁用，因为当前没有借出的席位',
+                'disabled_tooltip_reassignable'  => '此功能已禁用，因为许可证不可重新分配。',
                 'success'           => '许可证归还成功！| 所有许可证都已归还成功！',
-                'log_msg'           => 'Checked in via bulk license checkout in license GUI',
+                'log_msg'           => '通过批量许可证签出在许可证GUI中签入',
             ],
 
             'checkout_all'              => [
@@ -39,7 +40,7 @@ return array(
                 'error_no_seats'    => '此许可证已无剩余席位。',
                 'warn_not_enough_seats'    => ':count 个用户被分配了此许可证，但我们没有可用的许可证席位。',
                 'warn_no_avail_users'    => '没有什么要做的。没有尚未分配此许可证的用户。',
-                'log_msg'           => 'Checked out via bulk license checkout in license GUI',
+                'log_msg'           => '在许可证GUI中通过批量许可证结帐签出',
 
 
             ],

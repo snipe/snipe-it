@@ -1,0 +1,32 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Инвентарен номер',
+    'asset_model'       => 'Модел',
+    'book_value'  	=> 'Текуща стойност',
+    'change' 		=> 'Предоставяне',
+    'checkout_date' => 'Дата на изписване',
+    'checkoutto' 	=> 'Изписан',
+    'components_cost' => 'Обща стойност на компонентите',
+    'current_value' => 'Текуща стойност',
+    'diff' 			=> 'Разлика',
+    'dl_csv' 		=> 'Сваляне на CSV',
+    'eol' 			=> 'EOL',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Дата на вписване',
+    'location' 		=> 'Местоположение',
+    'purchase_cost'	=> 'Стойност',
+    'purchase_date'	=> 'Закупен',
+    'serial'   		=> 'Сериен номер',
+    'status'   		=> 'Статус',
+    'title'      	=> 'Актив ',
+    'image'		    => 'Изображение на устройството',
+    'days_without_acceptance' => 'Дни без да е предаден',
+    'monthly_depreciation' => 'Месечна Амортизация',
+    'assigned_to'    => 'Предоставен на',
+    'requesting_user' => 'Изискан от',
+    'requested_date' => 'Дата на заявката',
+    'changed'       => 'Променен',
+    'icon' => 'Икона',
+];

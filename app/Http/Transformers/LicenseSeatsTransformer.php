@@ -45,6 +45,7 @@ class LicenseSeatsTransformer
                 'name'=> e($seat->location()->name),
             ] : null,
             'reassignable' => (bool) $seat->license->reassignable,
+            'notes' => e($seat->notes),
             'user_can_checkout' => (($seat->assigned_to == '') && ($seat->asset_id == '')),
         ];
 

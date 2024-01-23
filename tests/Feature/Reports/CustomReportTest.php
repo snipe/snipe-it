@@ -11,6 +11,7 @@ use PHPUnit\Framework\Assert;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+
 class CustomReportTest extends TestCase
 {
     use InteractsWithSettings;
@@ -106,5 +107,30 @@ class CustomReportTest extends TestCase
             ->post('reports/custom', ['asset_name' => '1', 'asset_tag' => '1', 'serial' => '1'])
             ->assertDontSeeTextInStreamedResponse('Asset A')
             ->assertSeeTextInStreamedResponse('Asset B');
+    }
+
+    public function testCanLimitAssetsByLastCheckIn()
+    {
+        Asset::factory()->create(['name' => 'Asset A', 'last_checkin' => '2023-08-01']);
+        Asset::factory()->create(['name' => 'Asset B', 'last_checkin' => '2023-08-02']);
+        Asset::factory()->create(['name' => 'Asset C', 'last_checkin' => '2023-08-03']);
+        Asset::factory()->create(['name' => 'Asset D', 'last_checkin' => '2023-08-04']);
+        Asset::factory()->create(['name' => 'Asset E', 'last_checkin' => '2023-08-05']);
+
+        $this->actingAs(User::factory()->canViewReports()->create())
+            ->post('reports/custom', [
+                'asset_name' => '1',
+                'asset_tag' => '1',
+                'serial' => '1',
+                'checkin_date' => '1',
+                'checkin_date_start' => '2023-08-02',
+                'checkin_date_end' => '2023-08-04',
+            ])->assertOk()
+            ->assertHeader('content-type', 'text/csv; charset=UTF-8')
+            ->assertDontSeeTextInStreamedResponse('Asset A')
+            ->assertSeeTextInStreamedResponse('Asset B')
+            ->assertSeeTextInStreamedResponse('Asset C')
+            ->assertSeeTextInStreamedResponse('Asset D')
+            ->assertDontSeeTextInStreamedResponse('Asset E');
     }
 }

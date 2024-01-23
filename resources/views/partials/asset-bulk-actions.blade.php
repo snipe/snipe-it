@@ -6,7 +6,8 @@
       'id' => (isset($id_formname)) ? $id_formname : 'assetsBulkForm',
  ]) }}
 
-
+    {{-- The 'id ASC' will only be used if the cookie is actually empty (like on first-use) --}}
+    <input name="sort" type="hidden" value="id ASC">
     <label for="bulk_actions">
         <span class="sr-only">
             {{ trans('button.bulk_actions') }}

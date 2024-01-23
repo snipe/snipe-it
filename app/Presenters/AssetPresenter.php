@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Models\CustomField;
+use Carbon\CarbonImmutable;
 use DateTime;
 
 /**
@@ -142,8 +143,8 @@ class AssetPresenter extends Presenter
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'age',
-                'searchable' => true,
-                'sortable' => true,
+                'searchable' => false,
+                'sortable' => false,
                 'visible' => false,
                 'title' => trans('general.age'),
             ], [
@@ -172,7 +173,7 @@ class AssetPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => false,
-                'title' => trans('general.eol'),
+                'title' => trans('admin/hardware/form.eol_rate'),
             ],
             [
                 'field' => 'asset_eol_date',
@@ -429,10 +430,7 @@ class AssetPresenter extends Presenter
     public function eol_date()
     {
         if (($this->purchase_date) && ($this->model->model) && ($this->model->model->eol)) {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->model->eol.' months'));
-
-            return date_format($date, 'Y-m-d');
+            return CarbonImmutable::parse($this->purchase_date)->addMonths($this->model->model->eol)->format('Y-m-d');
         }
     }
 
@@ -548,8 +546,10 @@ class AssetPresenter extends Presenter
     public function dynamicWarrantyUrl()
     {
         $warranty_lookup_url = $this->model->model->manufacturer->warranty_lookup_url;
-        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale,$warranty_lookup_url));
-        $url = (str_replace('{SERIAL}',$this->model->serial,$url));
+        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $warranty_lookup_url));
+        $url = (str_replace('{SERIAL}', urlencode($this->model->serial), $url));
+        $url = (str_replace('{MODEL_NAME}', urlencode($this->model->model->name), $url));
+        $url = (str_replace('{MODEL_NUMBER}', urlencode($this->model->model->model_number), $url));
         return $url;
     }
 

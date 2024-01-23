@@ -34,7 +34,8 @@ return [
     'create_field'            => '新增字段',
     'create_field_title' => '创建一个新自定义字段',
     'value_encrypted'      	        => '此字段的值已被加密。只有管理员用户能够查看已解密的值',
-    'show_in_email'     => '是否在发送给用户的Email中包含此字段的值？邮件中不能包含加密的值。',
+    'show_in_email'     => '是否在发送给用户的借出通知邮件中包含此字段？邮件中不包含加密字段。',
+    'show_in_email_short'     => '包含在电子邮件中。',
     'help_text' => '帮助文本',
     'help_text_description' => '这是可选文本，在编辑一个资产以提供字段上下文时将显示在表单元素下方。',
     'about_custom_fields_title' => '关于自定义字段',
@@ -53,5 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => '添加到任何现有的字段集',
     'show_in_listview' => '默认情况下在列表视图中显示。授权用户仍然可以通过列选择器显示或隐藏。',
     'show_in_listview_short' => '在列表中显示',
+    'show_in_requestable_list_short' => '在可申领资产列表中显示',
+    'show_in_requestable_list' => '在可申领资产列表中显示值。加密字段将不会显示',
+    'encrypted_options' => '此字段已加密，因此一些显示选项将不可用。',
 
 ];

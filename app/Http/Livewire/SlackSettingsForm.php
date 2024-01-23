@@ -12,7 +12,7 @@ class SlackSettingsForm extends Component
     public $webhook_endpoint;
     public $webhook_channel;
     public $webhook_botname;
-    public $isDisabled ='' ;
+    public $isDisabled ='disabled' ;
     public $webhook_name;
     public $webhook_link;
     public $webhook_placeholder;
@@ -22,10 +22,16 @@ class SlackSettingsForm extends Component
 
     public Setting $setting;
 
+    public $webhook_endpoint_rules;
+
+
     protected $rules = [
-        'webhook_endpoint'                      => 'url|required_with:webhook_channel|starts_with:https://hooks.slack.com/services|nullable',
+        'webhook_endpoint'                      => 'required_with:webhook_channel|starts_with:http://,https://,ftp://,irc://,https://hooks.slack.com/services/|url|nullable',
         'webhook_channel'                       => 'required_with:webhook_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
+    ];
+    public $messages = [
+        'webhook_endpoint.starts_with'          => 'your webhook endpoint should begin with http://, https:// or other protocol.',
     ];
 
     public function mount() {
@@ -55,9 +61,7 @@ class SlackSettingsForm extends Component
         $this->webhook_botname = $this->setting->webhook_botname;
         $this->webhook_options = $this->setting->webhook_selected;
 
-        if($this->setting->webhook_selected == 'general'){
-            $this->isDisabled='';
-        }
+
         if($this->setting->webhook_endpoint != null && $this->setting->webhook_channel != null){
             $this->isDisabled= '';
         }
@@ -65,9 +69,8 @@ class SlackSettingsForm extends Component
     }
     public function updated($field) {
 
-        if($this->webhook_selected != 'general') {
             $this->validateOnly($field, $this->rules);
-        }
+
     }
 
     public function updatedWebhookSelected() {
@@ -82,7 +85,6 @@ class SlackSettingsForm extends Component
     }
 
     private function isButtonDisabled() {
-        if($this->webhook_selected == 'slack') {
             if (empty($this->webhook_endpoint)) {
                 $this->isDisabled = 'disabled';
                 $this->save_button = trans('admin/settings/general.webhook_presave');
@@ -91,8 +93,6 @@ class SlackSettingsForm extends Component
                 $this->isDisabled = 'disabled';
                 $this->save_button = trans('admin/settings/general.webhook_presave');
             }
-        }
-
     }
 
     public function render()
@@ -108,6 +108,7 @@ class SlackSettingsForm extends Component
             'defaults' => [
                 'exceptions' => false,
             ],
+            'allow_redirects' => false,
         ]);
 
         $payload = json_encode(
@@ -116,18 +117,23 @@ class SlackSettingsForm extends Component
                 'text'       => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
                 'username'    => e($this->webhook_botname),
                 'icon_emoji' => ':heart:',
+
             ]);
 
         try {
+            $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
 
-            $webhook->post($this->webhook_endpoint, ['body' => $payload]);
+            if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
+                return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
+            }
             $this->isDisabled='';
             $this->save_button = trans('general.save');
-            return session()->flash('success' , 'Your '.$this->webhook_name.' Integration works!');
+            return session()->flash('success' , trans('admin/settings/message.webhook.success', ['webhook_name' => $this->webhook_name]));
 
         } catch (\Exception $e) {
 
-            $this->isDisabled= 'disabled';
+            $this->isDisabled='disabled';
+            $this->save_button = trans('admin/settings/general.webhook_presave');
             return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage(), 'app' => $this->webhook_name]));
         }
 
@@ -158,9 +164,7 @@ class SlackSettingsForm extends Component
         if (Helper::isDemoMode()) {
             session()->flash('error',trans('general.feature_disabled'));
         } else {
-            if ($this->webhook_selected != 'general') {
-                $this->validate($this->rules);
-            }
+            $this->validate($this->rules);
 
             $this->setting->webhook_selected = $this->webhook_selected;
             $this->setting->webhook_endpoint = $this->webhook_endpoint;

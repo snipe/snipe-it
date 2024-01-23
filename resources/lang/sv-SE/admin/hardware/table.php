@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Hämta CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Incheckningsdatum',
     'location' 		=> 'Plats',
     'purchase_cost'	=> 'Kosta',
     'purchase_date'	=> 'Köpt',

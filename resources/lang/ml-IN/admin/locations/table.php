@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'സ്ഥലത്തിന്റെ പേര്',
     'address'                   => 'വിലാസം',
+    'address2'                   => 'Address Line 2',
     'zip'                       => 'സിപ് / പോസ്റ്റൽ കോഡ്',
     'locations'                 => 'സ്ഥലങ്ങൾ',
     'parent'                    => 'Parent',

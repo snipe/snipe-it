@@ -7,8 +7,10 @@ use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Labels\Label;
+use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Setting;
+use App\Models\Supplier;
 use App\Models\User;
 use App\View\Label as LabelView;
 use Illuminate\Support\Facades\Storage;
@@ -30,21 +32,23 @@ class LabelsController extends Controller
         $exampleAsset = new Asset();
 
         $exampleAsset->id = 999999;
-        $exampleAsset->name = 'AST-AB-CD-1234';
-        $exampleAsset->asset_tag = 'TCA-00001';
+        $exampleAsset->name = 'JEN-867-5309';
+        $exampleAsset->asset_tag = '100001';
         $exampleAsset->serial = 'SN9876543210';
+        $exampleAsset->asset_eol_date = '2025-01-01';
+        $exampleAsset->order_number = '12345';
+        $exampleAsset->purchase_date = '2023-01-01';
+        $exampleAsset->status_id = 1;
 
-        $exampleAsset->company = new Company();
-        $exampleAsset->company->id = 999999;
-        $exampleAsset->company->name = 'Test Company Limited';
-        $exampleAsset->company->image = 'company-image-test.png';
+        $exampleAsset->company = new Company([
+            'name' => 'Test Company Limited',
+            'phone' => '1-555-555-5555',
+            'email' => 'company@example.com',
+        ]);
 
-        $exampleAsset->assignedto = new User();
-        $exampleAsset->assignedto->id = 999999;
-        $exampleAsset->assignedto->first_name = 'Test';
-        $exampleAsset->assignedto->last_name = 'Person';
-        $exampleAsset->assignedto->username = 'Test.Person';
-        $exampleAsset->assignedto->employee_num = '0123456789';
+        $exampleAsset->setRelation('assignedTo', new User(['first_name' => 'Luke', 'last_name' => 'Skywalker']));
+        $exampleAsset->defaultLoc = new Location(['name' => 'Building 1', 'phone' => '1-555-555-5555']);
+        $exampleAsset->location = new Location(['name' => 'Building 2', 'phone' => '1-555-555-5555']);
 
         $exampleAsset->model = new AssetModel();
         $exampleAsset->model->id = 999999;
@@ -53,6 +57,10 @@ class LabelsController extends Controller
         $exampleAsset->model->manufacturer = new Manufacturer();
         $exampleAsset->model->manufacturer->id = 999999;
         $exampleAsset->model->manufacturer->name = 'Test Manufacturing Inc.';
+        $exampleAsset->model->manufacturer->support_email = 'support@test.com';
+        $exampleAsset->model->manufacturer->support_phone = '1-555-555-5555';
+        $exampleAsset->model->manufacturer->support_url = 'https://example.com';
+        $exampleAsset->supplier = new Supplier(['name' => 'Test Company Limited']);
         $exampleAsset->model->category = new Category();
         $exampleAsset->model->category->id = 999999;
         $exampleAsset->model->category->name = 'Test Category';

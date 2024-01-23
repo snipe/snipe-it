@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Modelo de recurso eliminado',
     'does_not_exist' => 'Modelo inexistente.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association' => '¡ATENCIÓN! ¡El modelo de activo para este artículo no es válido o falta!',
     'no_association_fix' => 'Esto romperá cosas de formas extrañas y horribles. Edite este activo ahora para asignarle un modelo.',
     'assoc_users'	 => 'Este modelo está asociado a uno o más equipos actualmente, por lo que no puede ser eliminado. Por favor elimina los equipos asociados, e inténtalo de nuevo. ',
 

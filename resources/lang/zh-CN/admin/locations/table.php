@@ -15,6 +15,7 @@ return [
     'print_all_assigned'        => '打印所有已分配资产',
     'name'                      => '地理位置名称',
     'address'                   => '地址',
+    'address2'                   => '地址行2',
     'zip'                       => '邮政编码',
     'locations'                 => '地理位置',
     'parent'                    => '上级节点',

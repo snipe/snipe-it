@@ -331,7 +331,7 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessory_user->user_id), $request->input('note'));
+        $logaction = $accessory->logCheckin(User::find($accessory_user->assigned_to), $request->input('note'));
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {

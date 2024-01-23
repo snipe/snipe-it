@@ -9,6 +9,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Department extends SnipeModel
 {
+    use CompanyableTrait;
     use HasFactory;
 
     /**

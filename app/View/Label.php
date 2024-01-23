@@ -39,7 +39,7 @@ class Label implements View
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
         $template = $this->data->get('template');
-        
+
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable) && (!$template)) {
             return view('hardware/labels')
@@ -49,8 +49,12 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
-        if (empty($template)) $template = LabelModel::find($settings->label2_template);
-        elseif (is_string($template)) $template = LabelModel::find($template);
+        // If a specific template was set, use it, otherwise fall back to default
+        if (empty($template)) {
+            $template = LabelModel::find($settings->label2_template);
+        } elseif (is_string($template)) {
+            $template = LabelModel::find($template);
+        }
 
         $template->validate();
 
@@ -87,25 +91,29 @@ class Label implements View
                 $assetData->put('tag', $asset->asset_tag);
 
                 if ($template->getSupportTitle()) {
-                    $title = !empty($settings->label2_title) ?
-                        str_ireplace('{COMPANY}', $asset->company->name, $settings->label2_title) :
+
+                    if ($asset->company && !empty($settings->label2_title)) {
+                        $title = str_replace('{COMPANY}', $asset->company->name, $settings->label2_title);
                         $settings->qr_text;
-                    if (!empty($title)) $assetData->put('title', $title);
+                        $assetData->put('title', $title);
+                    }
                 }
 
                 if ($template->getSupportLogo()) {
-                    $logo = $settings->label2_asset_logo ?
-                        (
-                            !empty($asset->company->image) ? 
-                                Storage::disk('public')->path('companies/'.e($asset->company->image)) :
-                                null
-                        ) :
-                        (
-                            !empty($settings->label_logo) ?
-                                Storage::disk('public')->path(''.e($settings->label_logo)) :
-                                null
-                        );
-                    if (!empty($logo)) $assetData->put('logo', $logo);
+
+                    $logo = null;
+
+                    // Should we use the assets assigned company logo? (A.K.A. "Is `Labels > Use Asset Logo` enabled?"), and do we have a company logo?
+                    if ($settings->label2_asset_logo && $asset->company && $asset->company->image!='') {
+                        $logo = Storage::disk('public')->path('companies/'.e($asset->company->image));
+                    } elseif (!empty($settings->label_logo)) {
+                        // Use the general site label logo, if available
+                        $logo = Storage::disk('public')->path('/'.e($settings->label_logo));
+                    }
+
+                    if (!empty($logo)) {
+                        $assetData->put('logo', $logo);
+                    }
                 }
 
                 if ($template->getSupport1DBarcode()) {
