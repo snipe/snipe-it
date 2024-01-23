@@ -9,6 +9,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckinLicenseSeatNotification extends Notification
 {
@@ -40,6 +42,11 @@ class CheckinLicenseSeatNotification extends Notification
     public function via()
     {
         $notifyBy = [];
+
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
 
         if (Setting::getSettings()->webhook_endpoint != '') {
             $notifyBy[] = 'slack';
@@ -86,6 +93,25 @@ class CheckinLicenseSeatNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->addStartGroupToSection('activityTitle')
+            ->title("License Checked in")
+            ->addStartGroupToSection('activityText')
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
+            ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'ClI tool')
+            ->fact('Checked in from', $target->present()->fullName())
+            ->fact('Seats Remaining', $item->availCount()->count())
+            ->fact('Notes', $note ?: 'No notes');
     }
 
     /**
