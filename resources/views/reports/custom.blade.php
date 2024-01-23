@@ -380,7 +380,7 @@
             <div class="form-group">
               <label for="by_order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
               <div class="col-md-7">
-                <input class="form-control" type="text" name="by_order_number" value="" aria-label="by_order_number">
+                <input class="form-control" type="text" name="by_order_number" value="{{ $template->textValue('by_order_number') }}" aria-label="by_order_number">
               </div>
             </div>
 
