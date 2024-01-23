@@ -9,6 +9,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckoutConsumableNotification extends Notification
 {
@@ -42,6 +44,11 @@ class CheckoutConsumableNotification extends Notification
     public function via()
     {
         $notifyBy = [];
+
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
 
         if (Setting::getSettings()->webhook_endpoint != '') {
             $notifyBy[] = 'slack';
@@ -101,6 +108,25 @@ class CheckoutConsumableNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->addStartGroupToSection('activityTitle')
+            ->title("Consumable Checked Out")
+            ->addStartGroupToSection('activityText')
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
+            ->fact(trans('mail.Consumable_checkout_notification')." by ", $admin->present()->fullName())
+            ->fact('Checked out to', $target->present()->fullName())
+            ->fact('Number Remaining', $item->numRemaining())
+            ->fact('Notes', $note ?: 'No notes');
     }
 
     /**
