@@ -26,7 +26,6 @@ class CheckoutAccessoryNotification extends Notification
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
-
         $this->settings = Setting::getSettings();
     }
 
