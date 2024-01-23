@@ -116,7 +116,7 @@ class CheckoutAccessoryNotification extends Notification
             ->title("Accessory Checked Out")
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-            ->fact('Checked out from ', $item->location->name)
+            ->fact('Checked out from ', $item->location->name ? $item->location->name : '')
             ->fact(trans('mail.Accessory_Checkout_Notification')." by ", $admin->present()->fullName())
             ->fact('Number Remaining', $item->numRemaining())
             ->fact('Notes', $note ?: 'No notes');

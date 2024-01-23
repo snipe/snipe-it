@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
@@ -129,17 +130,23 @@ class CheckoutAssetNotification extends Notification
         $item = $this->item;
         $note = $this->note;
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->addStartGroupToSection('activityTitle')
-            ->title("Asset Checked Out")
-            ->addStartGroupToSection('activityText')
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-            ->fact('Checked out from ', $item->location->name)
-            ->fact(trans('mail.Asset_Checkout_Notification')." by ", $admin->present()->fullName())
-            ->fact('Asset Status', $item->assetstatus->name)
-            ->fact('Notes', $note ?: 'No notes');
+        try {
+
+            return MicrosoftTeamsMessage::create()
+                ->to($this->settings->webhook_endpoint)
+                ->type('success')
+                ->title("Asset Checked Out")
+                ->addStartGroupToSection('activityText')
+                ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
+                ->fact('Checked out from ', $item->location ? $item->location->name : '')
+                ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
+                ->fact('Asset Status', $item->assetstatus->name)
+                ->fact('Notes', $note ?: 'No notes');
+        }
+        catch(Exception $e) {
+            dd($e);
+
+        }
     }
 
     /**

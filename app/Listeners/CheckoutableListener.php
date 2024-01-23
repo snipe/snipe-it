@@ -225,8 +225,9 @@ class CheckoutableListener
                 break;    
             case LicenseSeat::class:
                 $notificationClass = CheckoutLicenseSeatNotification::class;
-                break;                
+                break;
         }
+
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
     }
