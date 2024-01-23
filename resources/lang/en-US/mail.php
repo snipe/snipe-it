@@ -12,6 +12,7 @@ return [
     'Confirm_asset_delivery' => 'Asset delivery confirmation',
     'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
     'Confirm_license_delivery' => 'License delivery confirmation',
+    'Consumable_checkout_notification' => 'Consumable checked out',
     'Days' => 'Days',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
