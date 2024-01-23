@@ -102,7 +102,7 @@ class CheckinAssetNotification extends Notification
             ->title("Asset Checked in")
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
-            ->fact('Checked into ', $item->location->name ? $item->location->name : '')
+            ->fact('Checked into ', $item->location->name ? $item->location->name : $item->defaultLoc()->name)
             ->fact(trans('mail.Asset_Checkin_Notification')." by ", $admin->present()->fullName())
             ->fact('Asset Status', $item->assetstatus->name)
             ->fact('Notes', $note ?: 'No notes');

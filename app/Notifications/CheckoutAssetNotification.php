@@ -138,7 +138,7 @@ class CheckoutAssetNotification extends Notification
                 ->title("Asset Checked Out")
                 ->addStartGroupToSection('activityText')
                 ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
-                ->fact('Checked out from ', $item->location ? $item->location->name : '')
+                ->fact('Checked out from ', $item->location ? $item->location->name : $item->assetLoc()->name)
                 ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
                 ->fact('Asset Status', $item->assetstatus->name)
                 ->fact('Notes', $note ?: 'No notes');
