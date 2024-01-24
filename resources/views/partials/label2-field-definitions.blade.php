@@ -322,7 +322,7 @@
                                 <option value="model.manufacturer.name">{{trans('admin/hardware/form.manufacturer')}}</option>
                                 <option value="model.manufacturer.support_email">{{trans('admin/manufacturers/table.support_email')}}</option>
                                 <option value="model.manufacturer.support_phone">{{trans('admin/manufacturers/table.support_phone')}}</option>
-                                <option value="model.manufacturer.support_url">{{trans('admin/manufacturers/table.url')}}</option>
+                                <option value="model.manufacturer.support_url">{{trans('general.url')}}</option>
                             </optgroup>
                             <optgroup label="Category">
                                 <option value="model.category.name">{{trans('admin/categories/general.category_name')}}</option>
