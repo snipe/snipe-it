@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Etiqueta de Recurs',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Assigned To',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Checkout Date',

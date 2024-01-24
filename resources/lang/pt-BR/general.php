@@ -500,5 +500,7 @@ Resultados da Sincronização',
     'action_permission_generic' => 'Você não tem permissão para :action este :item_type',
     'edit' => 'editar',
     'action_source' => 'Fonte da Ação',
+    'or' => 'ou',
+    'url'                   => 'URL',
 
 ];

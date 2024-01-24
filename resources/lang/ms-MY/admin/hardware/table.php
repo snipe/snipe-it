@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Tag Harta',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Ditugaskan untuk',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Masuk/Keluar',
     'checkout_date' => 'Tarikh Agihan',

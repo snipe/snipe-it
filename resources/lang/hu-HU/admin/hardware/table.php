@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Eszköz cimke',
     'asset_model'       => 'Modell',
+    'assigned_to'   => 'Felelős',
     'book_value'  	=> 'Jelenlegi érték',
     'change' 		=> 'Be/ki',
     'checkout_date' => 'Kiadási dátum',

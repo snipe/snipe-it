@@ -96,7 +96,7 @@ return [
     'url'                  => 'El formato :attribute es inválido.',
     'unique_undeleted'     => 'El :atrribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute no puede ser una matriz.',
     'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el nombre de usuario.',
     'letters'              => 'La contraseña debe contener al menos una letra.',
     'numbers'              => 'La contraseña debe contener al menos un número.',

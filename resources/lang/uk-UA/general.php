@@ -91,7 +91,7 @@ return [
     'days_to_next_audit'    => 'Дні до наступного аудиту',
     'date'					=> 'Дата',
     'debug_warning'         => 'Попередження!',
-    'debug_warning_text'    => 'This application is running in production mode with debugging enabled. This can expose sensitive data if your application is accessible to the outside world. Disable debug mode by setting the <code>APP_DEBUG</code> value in your <code>.env</code> file to <code>false</code>.',
+    'debug_warning_text'    => 'Ця програма працює в робочому режимі з увімкненим відлагодженням. Це може призвести до розкриття конфіденційних даних, якщо ваша програма доступна зовнішньому світу. Вимкніть режим налагодження, установивши для значення <code>APP_DEBUG</code> у вашому файлі <code>.env</code> значення <code>false</code>.',
     'delete'  				=> 'Видалити',
     'delete_confirm'  		=> 'Ви впевнені, що бажаєте видалити :item?',
     'delete_confirm_no_undo' => 'Ви впевнені, що бажаєте видалити :item? Це незворотня дія.',
@@ -143,7 +143,7 @@ return [
     'github_markdown'      => 'Це поле приймає <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Групи',
     'gravatar_email'        => 'Електронна адреса Gravatar',
-    'gravatar_url'          => '<a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.',
+    'gravatar_url'          => '<a href="http://gravatar.com"><small>Змініть свій аватар на Gravatar.com</small></a>.',
     'history'  			    => 'Історія',
     'history_for'  			=> 'Історія для',
     'id'  					=> 'ID',
@@ -158,7 +158,7 @@ return [
     'import'         	    => 'Імпорт',
     'import_this_file'      => 'Поля карти і обробка цього файлу',
     'importing'         	=> 'Імпортування',
-    'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
+    'importing_help'        => 'Ви можете імпортувати активи, аксесуари, ліцензії, компоненти, витратні матеріали та користувачів за допомогою файлу CSV. <br><br>CSV має бути розділений комами та відформатований із заголовками, які відповідають заголовкам у <a href="https://snipe-it.readme.io/docs/importing" target="_new"> зразка CSV у документації</a>.',
     'import-history'        => 'Історія імпорту',
     'asset_maintenance'        => 'Обслуговування активів',
     'asset_maintenance_report' => 'Звіт про обслуговування активів',
@@ -342,8 +342,8 @@ return [
     'reminder_checked_out_items' => 'Нагадування про предмети, які зараз перевірені для вас. Якщо ви відчуваєте, що цей список є неточним (чогось бракує, або ви вважаєте що ви ніколи не отримаєте), напишіть на :reply_to_name на :reply_to_address що-небудь.',
     'changed'               => 'Змінено',
     'to'                    => 'На',
-    'report_fields_info'    => '<p>Select the fields you would like to include in your custom report, and click Generate. The file (custom-asset-report-YYYY-mm-dd.csv) will download automatically, and you can open it in Excel.</p>
-            <p>If you would like to export only certain assets, use the options below to fine-tune your results.</p>',
+    'report_fields_info'    => '<p>Виберіть поля, які ви бажаєте включити у свій спеціальний звіт, і натисніть «Створити». Файл (custom-asset-report-YYYY-mm-dd.csv) завантажиться автоматично, і ви зможете відкрити його в Excel.</p>
+             <p>Якщо ви хочете експортувати лише певні ресурси, скористайтеся наведеними нижче параметрами, щоб налаштувати результати.</p>',
     'range'                 => 'Range',
     'bom_remark'            => 'Додати BOM (марку порядку байтів) до цього CSV',
     'improvements'          => 'Вдосконалення',
@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'У вас немає дозволу на :action : item_type',
     'edit' => 'редагувати',
     'action_source' => 'Джерело дії',
+    'or' => 'або',
+    'url'                   => 'URL',
 
 ];

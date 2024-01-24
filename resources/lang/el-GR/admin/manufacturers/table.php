@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'URL υποστήριξης',
     'warranty_lookup_url'   => 'URL Αναζήτησης Εγγύησης',
     'update'				=> 'Ενημέρωση Κατασκευαστή',
-    'url'   				=> 'URL',
 
 );

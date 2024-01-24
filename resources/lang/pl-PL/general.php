@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Nie masz uprawnień do :action this :item_type',
     'edit' => 'edycja',
     'action_source' => 'Źródło akcji',
+    'or' => 'lub',
+    'url'                   => 'Adres WWW',
 
 ];

@@ -19,7 +19,6 @@ return array(
     'state'                 => 'State',
     'suppliers'             => 'Kaihoko',
     'update'                => 'Kaiwhakarato Whakahōu',
-    'url'                   => 'URL',
     'view'                  => 'Tirohia te Kaiwhakarato',
     'view_assets_for'       => 'Tirohia nga Taonga mo',
     'zip'                   => 'Waehere Pouaka',

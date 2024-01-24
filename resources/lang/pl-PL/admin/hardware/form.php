@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Deprecjacja',
     'depreciates_on'	=> 'Amortyzacja włączona',
     'default_location'	=> 'Domyślna lokalizacja',
+    'default_location_phone' => 'Domyślny telefon lokalizacji',
     'eol_date'			=> 'Data końca licencji',
     'eol_rate'			=> 'Szacowany koniec licencji',
     'expected_checkin'  => 'Przewidywana data przyjęcia',

@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Sokongan URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Kemaskini Pengeluar',
-    'url'   				=> 'URL',
 
 );

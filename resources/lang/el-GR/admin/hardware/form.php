@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Υποτίμηση',
     'depreciates_on'	=> 'Αποσβέσεις σε',
     'default_location'	=> 'Προεπιλεγμένη τοποθεσία',
+    'default_location_phone' => 'Προεπιλεγμένο Τηλέφωνο Τοποθεσίας',
     'eol_date'			=> 'EOL ημερομηνία',
     'eol_rate'			=> 'EOL δείκτης',
     'expected_checkin'  => 'Αναμενώμενη ημέρα άφιξης',

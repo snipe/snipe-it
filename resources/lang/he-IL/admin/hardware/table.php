@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'תג נכס',
     'asset_model'       => 'דֶגֶם',
+    'assigned_to'   => 'שוייך ל',
     'book_value'  	=> 'הערך הנוכחי',
     'change' 		=> 'בפנים בחוץ',
     'checkout_date' => 'תבדוק את התאריך',

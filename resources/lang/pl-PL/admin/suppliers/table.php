@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Województwo',
     'suppliers'             => 'Dostawcy',
     'update'                => 'Zaktualizuj Dostawcę',
-    'url'                   => 'Adres www',
     'view'                  => 'Podgląd dostawcy',
     'view_assets_for'       => 'Podgląd aktywa dla',
     'zip'                   => 'Kod Pocztowy',

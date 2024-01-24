@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute formatet er ugyldigt.',
     'unique_undeleted'     => ':attribute skal være unik.',
     'non_circular'         => ':attribute må ikke oprette en cirkulær reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute kan ikke være et array.',
     'disallow_same_pwd_as_user_fields' => 'Adgangskoden må ikke være det samme som brugernavnet.',
     'letters'              => 'Adgangskoden skal indeholde mindst ét bogstav.',
     'numbers'              => 'Adgangskoden skal indeholde mindst ét tal.',

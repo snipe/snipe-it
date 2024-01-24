@@ -96,7 +96,7 @@ return [
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
     'unique_undeleted'     => ':attribute må være unikt.',
     'non_circular'         => 'Attributtet :attribute kan ikke opprette en sirkulær referanse.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute kan ikke være en matrise.',
     'disallow_same_pwd_as_user_fields' => 'Passordet kan ikke være det samme som brukernavnet.',
     'letters'              => 'Passordet må inneholde minst en bokstav.',
     'numbers'              => 'Passordet må inneholde minst ett tall.',

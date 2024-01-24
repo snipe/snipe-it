@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Te whakahekenga moni',
     'depreciates_on'	=> 'Whakapaihia ana i runga',
     'default_location'	=> 'Tauwāhi Taunoa',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL Rā',
     'eol_rate'			=> 'EOL Tau',
     'expected_checkin'  => 'Ko te Whakataunga Whakataunga Whakaaro',

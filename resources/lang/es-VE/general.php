@@ -342,8 +342,8 @@ return [
     'reminder_checked_out_items' => 'Este es un recordatorio de los elementos que se te han comprobado actualmente. Si usted siente que esta lista es incorrecta (falta algo o algo que usted cree que nunca ha recibido), por favor envíe un correo electrónico a :reply_to_name a :reply_to_address.',
     'changed'               => 'Cambiado',
     'to'                    => 'A',
-    'report_fields_info'    => '<p>Seleccione los campos que desea incluir en su informe personalizado y haga clic en Generar. El archivo (custom-asset-report-YYYY-mm-dd.csv) se descargará automáticamente, y puede abrirlo en Excel.</p>
-            <p>Si desea exportar sólo ciertos activos, utilice las siguientes opciones para afinar sus resultados.</p>',
+    'report_fields_info'    => '<p>Selecciona los campos que deseas incluir en tu informe personalizado y haz clic en Generar. El archivo (custom-asset-report-YYYY-mm-dd.csv) se descargará automáticamente, y puede abrirlo en Excel.</p>
+            <p>Si sólo deseas exportar algunos activos específicos, utiliza las siguientes opciones para filtrar tus resultados.</p>',
     'range'                 => 'Range',
     'bom_remark'            => 'Añadir un BOM (signo de orden de byte) a este CSV',
     'improvements'          => 'Mejoras',
@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'No tiene permiso para :action this :item_type',
     'edit' => 'editar',
     'action_source' => 'Fuente de acción',
+    'or' => 'o',
+    'url'                   => 'URL',
 
 ];

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Susut nilai',
     'depreciates_on'	=> 'Susut Nilai Pada',
     'default_location'	=> 'Lokasi Asal',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Tarikh EOL',
     'eol_rate'			=> 'Kadar EOL',
     'expected_checkin'  => 'Tarikh Periksa Yang Diharapkan',

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Fyrningarflokkur',
     'depreciates_on'	=> 'Afskriftir á',
     'default_location'	=> 'Sjálfgefin staðsetning',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL Dags',
     'eol_rate'			=> 'EOL Rate',
     'expected_checkin'  => 'Áætluð skiladagsetning',

@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'ஆதரவு URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'உற்பத்தியாளர் புதுப்பிக்கவும்',
-    'url'   				=> 'URL ஐ',
 
 );

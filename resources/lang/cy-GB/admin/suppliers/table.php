@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Talaith',
     'suppliers'             => 'Cyflenwyr',
     'update'                => 'Diweddaru Cyflenwr',
-    'url'                   => 'URL',
     'view'                  => 'Gweld Cyflenwr',
     'view_assets_for'       => 'Gweld asedau ar gyfer',
     'zip'                   => 'Côd Post',

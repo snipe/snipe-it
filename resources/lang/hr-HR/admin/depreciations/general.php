@@ -9,8 +9,8 @@ return [
     'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'Broj mjeseci',
     'update'  					            => 'Ažuriraj amortizaciju',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'depreciation_min'                      => 'Minimalna vrijednost nakon amortizacije',
+    'no_depreciations_warning'               => '<strong>Upozorenje</strong>
+                      Trenutno nemate postavljene stope amortizacije za svoju imovinu.
+                      Molimo vas da postavite barem jednu stopu amortizacije kako bi mogli vidjeti izvještaj o amortizaciji.',
 ];

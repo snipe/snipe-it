@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Luovutettu',
     'asset_expected_checkin'    => 'Odotettu palautus',
     'date'                      => 'Päivä:',
+    'phone'                     => 'Sijainnin Puhelin',
     'signed_by_asset_auditor'   => 'Allekirjoittaja (Laitteen tarkastaja):',
     'signed_by_finance_auditor' => 'Allekirjoittaja (rahoitustarkastaja):',
     'signed_by_location_manager' => 'Allekirjoittanut (Sijaintipäällikkö):',

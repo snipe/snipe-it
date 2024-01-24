@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'You do not have permission to :action this :item_type',
     'edit' => 'breyta',
     'action_source' => 'Action Source',
+    'or' => 'eða',
+    'url'                   => 'URL',
 
 ];

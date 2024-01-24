@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Δεν έχετε άδεια για :action αυτό το :item_type',
     'edit' => 'επεξεργασία',
     'action_source' => 'Πηγή Ενέργειας',
+    'or' => 'ή',
+    'url'                   => 'URL',
 
 ];

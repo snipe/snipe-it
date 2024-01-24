@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'амортизация',
     'depreciates_on'	=> 'Амортизира се на',
     'default_location'	=> 'Местоположение по подразбиране',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL дата',
     'eol_rate'			=> 'EOL съотношение',
     'expected_checkin'  => 'Очаквана дата на вписване',

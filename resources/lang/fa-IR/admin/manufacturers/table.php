@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'URL پشتیبانی',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'به روز رسانی تولیدکننده',
-    'url'   				=> 'نشانی اینترنتی',
 
 );

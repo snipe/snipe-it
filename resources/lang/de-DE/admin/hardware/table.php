@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modell',
+    'assigned_to'   => 'Zugewiesen an',
     'book_value'  	=> 'Aktueller Wert',
     'change' 		=> 'Zurücknehmen/Herausgeben',
     'checkout_date' => 'Herausgabedatum',

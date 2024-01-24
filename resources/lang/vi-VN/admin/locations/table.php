@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Bàn giao',
     'asset_expected_checkin'    => 'Ngày mong muốn Thu hồi',
     'date'                      => 'Ngày:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Được ký bởi (Quản lý kiểm kê):',
     'signed_by_finance_auditor' => 'Được ký bởi (Quản lý tài chính):',
     'signed_by_location_manager' => 'Được ký bởi (Quản lý khu vực):',

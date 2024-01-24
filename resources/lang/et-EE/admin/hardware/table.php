@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Vahendi silt',
     'asset_model'       => 'Mudel',
+    'assigned_to'   => 'Väljastatud kasutajale',
     'book_value'  	=> 'Arvestuslik väärtus',
     'change' 		=> 'Sees väljas',
     'checkout_date' => 'Väljastamise kuupäev',

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Nusidėvėjimas',
     'depreciates_on'	=> 'Nusidėvėjimo data',
     'default_location'	=> 'Numatytoji vietovė',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Irangos naudojimo pabaigos data',
     'eol_rate'			=> 'Įrangos naudojimo pabaigos likutis',
     'expected_checkin'  => 'Tikėtina priėmimo data',

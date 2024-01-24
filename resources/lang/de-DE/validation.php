@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute Format ist ungültig.',
     'unique_undeleted'     => 'Die Variable :attribute muss eindeutig sein.',
     'non_circular'         => 'Das :attribute darf keinen Zirkelbezug ergeben.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute darf kein Array sein.',
     'disallow_same_pwd_as_user_fields' => 'Das Passwort muss sich vom Nutzernamen unterscheiden.',
     'letters'              => 'Das Passwort muss mindestens einen Buchstaben beinhalten.',
     'numbers'              => 'Das Passwort muss mindestens eine Zahl beinhalten.',

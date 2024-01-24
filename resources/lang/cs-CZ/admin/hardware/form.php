@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Amortizace',
     'depreciates_on'	=> 'Odepisuje se',
     'default_location'	=> 'Výchozí umístění',
+    'default_location_phone' => 'Výchozí telefon',
     'eol_date'			=> 'Konec životnosti',
     'eol_rate'			=> 'Míra ukončení životnosti',
     'expected_checkin'  => 'Očekávané datum převzetí',

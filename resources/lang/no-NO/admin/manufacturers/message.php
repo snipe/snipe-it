@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Variabler <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>og <code>{MODEL_NAME}</code> kan brukes i din URL for å få disse verdiene auto-populere når du ser ressurser - for eksempel https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Variabler <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>og <code>{MODEL_NAME}</code> kan brukes i din URL for å få disse verdiene auto-populere når du ser ressurser - for eksempel https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Produsent eksisterer ikke.',
     'assoc_users'	 => 'Denne produsenten er tilknyttet minst en modell og kan ikke slettes. Oppdatèr modellen(e) til ikke å bruke denne produsenten, og prøv igjen. ',
 

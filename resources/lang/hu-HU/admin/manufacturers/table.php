@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Támogatási URL',
     'warranty_lookup_url'   => 'Jótállást ellenőrző link',
     'update'				=> 'Gyártó frissítése',
-    'url'   				=> 'URL',
 
 );

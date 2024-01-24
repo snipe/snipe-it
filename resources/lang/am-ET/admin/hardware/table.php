@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'የንብረት መለያ',
     'asset_model'       => 'ሞዴል',
+    'assigned_to'   => 'Assigned To',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Checkout Date',

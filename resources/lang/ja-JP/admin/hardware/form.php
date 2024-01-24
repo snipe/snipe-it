@@ -23,6 +23,7 @@ return [
     'depreciation'	    => '減価償却費',
     'depreciates_on'	=> '原価償却対象',
     'default_location'	=> '既定の設置場所',
+    'default_location_phone' => '既定の位置情報電話',
     'eol_date'			=> 'EOL日付',
     'eol_rate'			=> 'EOL率',
     'expected_checkin'  => '希望するチェックイン日',

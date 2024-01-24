@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Vydané',
     'asset_expected_checkin'    => 'Očekávané datum vrácení',
     'date'                      => 'Datum:',
+    'phone'                     => 'Telefon polohy',
     'signed_by_asset_auditor'   => 'Podepsáno (auditor majetku):',
     'signed_by_finance_auditor' => 'Podepsáno (Finanční auditor):',
     'signed_by_location_manager' => 'Podepsáno (Manager):',

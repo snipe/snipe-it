@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Depreciación',
     'depreciates_on'	=> 'Se deprecia en',
     'default_location'	=> 'Ubicación Predeterminada',
+    'default_location_phone' => 'Teléfono de ubicación por defecto',
     'eol_date'			=> 'Fecha Fin Vida Útil',
     'eol_rate'			=> 'Vita Útil',
     'expected_checkin'  => 'Fecha Esperada de Devolución',

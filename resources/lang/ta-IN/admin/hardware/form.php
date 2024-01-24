@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'தேய்மானம்',
     'depreciates_on'	=> 'நிக்காது',
     'default_location'	=> 'இயல்புநிலை இருப்பிடம்',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL தேதி',
     'eol_rate'			=> 'EOL விகிதம்',
     'expected_checkin'  => 'எதிர்பார்த்த செக்கின் தேதி',

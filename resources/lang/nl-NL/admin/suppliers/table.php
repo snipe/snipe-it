@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Staat/provincie',
     'suppliers'             => 'Leveranciers',
     'update'                => 'Wijzig leverancier',
-    'url'                   => 'URL',
     'view'                  => 'Bekijk leverancier',
     'view_assets_for'       => 'Activa bekijken',
     'zip'                   => 'Postcode',

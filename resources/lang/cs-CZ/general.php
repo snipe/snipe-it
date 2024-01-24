@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Nemáte oprávnění k :action tohoto :item_type',
     'edit' => 'upravit',
     'action_source' => 'Zdroj akcí',
+    'or' => 'nebo',
+    'url'                   => 'URL',
 
 ];

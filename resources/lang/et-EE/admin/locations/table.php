@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Väljastatud',
     'asset_expected_checkin'    => 'Eeldatav tagastus',
     'date'                      => 'Kuupäev:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Allkiri (varaaudiitor):',
     'signed_by_finance_auditor' => 'Allkiri (finantsaudiitor):',
     'signed_by_location_manager' => 'Allkiri (asukohahaldur):',

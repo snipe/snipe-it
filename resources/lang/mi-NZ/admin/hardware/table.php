@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Tae Taonga',
     'asset_model'       => 'Tauira',
+    'assigned_to'   => 'Tohua Ki To',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'Rā Rārangi',

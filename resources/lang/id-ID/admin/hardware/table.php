@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Tag Aset',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Diberikan kepada',
     'book_value'  	=> 'Nilai sekarang',
     'change' 		=> 'Masuk/Keluar',
     'checkout_date' => 'Tanggal Pemberian',
@@ -24,7 +25,7 @@ return [
     'image'		    => 'Gambar Perangkat',
     'days_without_acceptance' => 'Tanda Terima',
     'monthly_depreciation' => 'Penyusutan Bulanan',
-    'assigned_to'    => 'Diberikan kepada',
+    'assigned_to'    => 'Ditugaskan untuk',
     'requesting_user' => 'Meminta Pengguna',
     'requested_date' => 'Tanggal yang diminta',
     'changed'       => 'Diubah',

@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute Formatet är ogiltigt.',
     'unique_undeleted'     => ':attribute måste vara unikt.',
     'non_circular'         => ':attribute får inte skapa en cirkulär referens.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute kan inte vara en array.',
     'disallow_same_pwd_as_user_fields' => 'Lösenordet kan inte vara samma som användarnamnet.',
     'letters'              => 'Lösenord måste innehålla minst en bokstav.',
     'numbers'              => 'Lösenord måste innehålla minst en siffra.',
