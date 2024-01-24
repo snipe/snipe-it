@@ -126,7 +126,7 @@
                             @if($webhook_endpoint != null && $webhook_channel != null)
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-9">
-                                        <a href="#" wire:click.prevent="testWebhook"
+                                        <a href="#" wire:click.prevent="{{$webhook_test}}"
                                            class="btn btn-default btn-sm pull-left">
                                             <i class="{{$webhook_icon}}" aria-hidden="true"></i>
                                                 {!! trans('admin/settings/general.webhook_test',['app' => ucwords($webhook_selected) ]) !!}

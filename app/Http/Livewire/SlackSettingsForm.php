@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use App\Models\Setting;
 use App\Helpers\Helper;
@@ -42,21 +43,21 @@ class SlackSettingsForm extends Component
             "icon" => 'fab fa-slack',
             "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
             "link" => 'https://api.slack.com/messaging/webhooks',
-            "test" => 'testWebhook'
+            "test" => "testWebhook"
         ),
             "general" => array(
                 "name" => trans('admin/settings/general.general_webhook'),
                 "icon" => "fab fa-hashtag",
                 "placeholder" => "",
                 "link" => "",
-                "test" => 'testWebhook'
+                "test" => "testWebhook"
             ),
             "google" => array(
                 "name" => trans('admin/settings/general.google_workspaces'),
                 "icon" => "fa-brands fa-google",
                 "placeholder" => "https://chat.googleapis.com/v1/spaces/xxxxxxxx/messages?key=xxxxxx",
                 "link" => "https://developers.google.com/chat/how-tos/webhooks#register_the_incoming_webhook",
-                "test" => 'googleWebhookTest'
+                "test" => "googleWebhookTest"
             ),
         ];
 
@@ -70,6 +71,7 @@ class SlackSettingsForm extends Component
         $this->webhook_channel = $this->setting->webhook_channel;
         $this->webhook_botname = $this->setting->webhook_botname;
         $this->webhook_options = $this->setting->webhook_selected;
+        $this->webhook_test = $this->webhook_text[$this->setting->webhook_selected]["test"];
 
 
         if($this->setting->webhook_endpoint != null && $this->setting->webhook_channel != null){
@@ -151,7 +153,29 @@ class SlackSettingsForm extends Component
 
     }
     public function googleWebhookTest(){
+       $url = $this->webhook_endpoint;
+       $data = [ 'text' => trans('general.webhook_test_msg', ['app' => $this->webhook_name])];
+       $headers = [
+           'Authorization' => 'Bearer'. 'AIzaSyBu-61gEOhYGfrmT3fHQj6vS8TDWpo1B5U',
+           'Content-Type'  => 'application/json',
+       ];
+        $client = new Client();
 
+            try {
+                $response = $client->post($url,[
+                    'headers' => $headers,
+                    'json' => $data,
+                ]);
+
+                if (($response->getStatusCode() == 302) || ($response->getStatusCode() == 301)) {
+                    return session()->flash('error', trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
+                }
+            } catch (\Exception $e) {
+
+                $this->isDisabled='disabled';
+                $this->save_button = trans('admin/settings/general.webhook_presave');
+                return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage(), 'app' => $this->webhook_name]));
+            }
     }
 
     public function clearSettings(){
