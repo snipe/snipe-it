@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Bundesland',
     'suppliers'             => 'Lieferanten',
     'update'                => 'Lieferanten aktualisieren',
-    'url'                   => 'URL',
     'view'                  => 'Lieferanten ansehen',
     'view_assets_for'       => 'Assets anschauen von',
     'zip'                   => 'Postleitzahl',

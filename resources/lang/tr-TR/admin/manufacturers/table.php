@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Destek URL\'si',
     'warranty_lookup_url'   => 'Garanti Arama URL\'si',
     'update'				=> 'Üretici Güncelle',
-    'url'   				=> 'URL',
 
 );

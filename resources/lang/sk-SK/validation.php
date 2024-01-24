@@ -96,7 +96,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
     'unique_undeleted'     => 'The :attribute must be unique.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Heslo nemôže byť rovnaké ako užívateľské meno.',
     'letters'              => 'Heslo musí obsahovať najmenej jedno písmeno.',
     'numbers'              => 'Heslo musí obsahovať najmenej jednu číslicu.',

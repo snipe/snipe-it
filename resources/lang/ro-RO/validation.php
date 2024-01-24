@@ -96,7 +96,7 @@ return [
     'url'                  => 'Formatul :attribute nu este valid.',
     'unique_undeleted'     => 'Atributul: trebuie să fie unic.',
     'non_circular'         => ':attribute nu trebuie să creeze o referință circulară.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute nu poate fi un array.',
     'disallow_same_pwd_as_user_fields' => 'Parola nu poate fi identică cu numele de utilizator.',
     'letters'              => 'Parola trebuie să conțină cel puțin o literă.',
     'numbers'              => 'Parola trebuie să conțină cel puțin un număr.',

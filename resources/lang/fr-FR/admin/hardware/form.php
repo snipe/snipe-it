@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Dépréciation',
     'depreciates_on'	=> 'Amortit sur',
     'default_location'	=> 'Emplacement par défaut',
+    'default_location_phone' => 'Téléphone de localisation par défaut',
     'eol_date'			=> 'Date de fin de vie',
     'eol_rate'			=> 'Taux de EOL',
     'expected_checkin'  => 'Date de dissociation prévue',

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Afskrivninger',
     'depreciates_on'	=> 'Afskrives Den',
     'default_location'	=> 'Standardplacering',
+    'default_location_phone' => 'Standard Lokationstelefon',
     'eol_date'			=> 'EOL Dato',
     'eol_rate'			=> 'EOL Rate',
     'expected_checkin'  => 'Forventet indtjekningsdato',

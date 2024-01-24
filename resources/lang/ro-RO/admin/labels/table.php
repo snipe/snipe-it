@@ -1,7 +1,13 @@
 <?php
 
 return [
-
+    'example_company'    => 'Test Company Limited',
+    'example_defaultloc' => 'Clădire 1',
+    'example_category'   => 'Categorie de test',
+    'example_location'   => 'Clădire 2',
+    'example_manufacturer'  => 'Testează fabricația Inc.',
+    'example_model'      => 'Modelul de test',
+    'example_supplier'   => 'Test Company Limited',
     'labels_per_page'    => 'Etichete',
     'support_fields'     => 'Câmpuri',
     'support_asset_tag'  => 'Etichetă',

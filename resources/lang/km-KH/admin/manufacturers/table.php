@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'គាំទ្រ URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'ធ្វើបច្ចុប្បន្នភាពក្រុមហ៊ុនផលិត',
-    'url'   				=> 'URL',
 
 );

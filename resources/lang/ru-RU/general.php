@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'У вас нет прав на :action this :item_type',
     'edit' => 'редактировать',
     'action_source' => 'Источник действия',
+    'or' => 'или',
+    'url'                   => 'Адрес',
 
 ];

@@ -8,14 +8,14 @@ return array(
     'user_exists'               => 'Korisnik već postoji!',
     'user_not_found'            => 'Korisnik ne postoji.',
     'user_login_required'       => 'Potrebno je polje za prijavu',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Niti jedno sredstvo trenutno nije dodjeljeno korisniku.',
     'user_password_required'    => 'Zaporka je potrebna.',
     'insufficient_permissions'  => 'Nedovoljna dozvola.',
     'user_deleted_warning'      => 'Ovaj je korisnik izbrisan. Morat ćete vratiti tog korisnika da biste ih uredili ili dodijelili novu imovinu.',
     'ldap_not_configured'        => 'LDAP integracija nije konfigurirana za ovu instalaciju.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'password_resets_sent'      => 'Označenim korisnicima koji su aktivni i imaju važeće email adrese je poslan link za ponovno postavljanje vjerodajnica.',
+    'password_reset_sent'       => 'Link za resetiranje vjerodajnica poslan je na :email!',
+    'user_has_no_email'         => 'Ovaj korisnik ne posjeduje email adresu na njihovom profilu.',
     'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 

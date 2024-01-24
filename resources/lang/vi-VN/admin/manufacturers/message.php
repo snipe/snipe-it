@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Hãng sản xuất không tồn tại.',
     'assoc_users'	 => 'Nhà sản xuất này hiện tại đang được liên kết với ít nhất một kiểu tài sản và không thể xóa. Xin vui lòng cập nhật kiểu tài sản của bạn để không liên kết đến nhà sản xuất này và thử lại. ',
 

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'การเสื่อมราคา',
     'depreciates_on'	=> 'คิดค่าเสื่อมราคา',
     'default_location'	=> 'ตำแหน่งพื้นฐาน',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'วันที่ EOL',
     'eol_rate'			=> 'เรท EOL',
     'expected_checkin'  => 'วันที่เช็คอินที่คาดหวังไว้',

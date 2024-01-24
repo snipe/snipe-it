@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Проверено',
     'asset_expected_checkin'    => 'Ожидаемая проверка',
     'date'                      => 'Дата:',
+    'phone'                     => 'Телефон местоположения',
     'signed_by_asset_auditor'   => 'Подписано (Аудитором активов):',
     'signed_by_finance_auditor' => 'Подписано (Аудитором активов):',
     'signed_by_location_manager' => 'Подписано (Менеджер по местоположению):',

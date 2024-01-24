@@ -96,7 +96,7 @@ return [
     'url'                  => 'شکل ویژگی نامعتبر است.',
     'unique_undeleted'     => ': attribute باید منحصر به فرد باشد.',
     'non_circular'         => 'ویژگی : نباید یک مرجع دایره ای ایجاد کند',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'رمز عبور نمی تواند همان آدرس ایمیل باشد.',
     'letters'              => 'گذرواژه باید دارای حداقل یک رقم باشد.',
     'numbers'              => 'گذرواژه باید دارای حداقل یک رقم باشد.',

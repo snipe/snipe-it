@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Ammortamento',
     'depreciates_on'	=> 'Deprezza Si',
     'default_location'	=> 'Posizione predefinita',
+    'default_location_phone' => 'Telefono Posizione Predefinita',
     'eol_date'			=> 'Data EOL',
     'eol_rate'			=> 'Tasso EOL',
     'expected_checkin'  => 'Richiesta Data di entrata',

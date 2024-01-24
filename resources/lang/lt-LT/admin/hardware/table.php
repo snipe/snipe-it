@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Įrangos kortelė',
     'asset_model'       => 'Modelis',
+    'assigned_to'   => 'Priskirta',
     'book_value'  	=> 'Dabartinė vertė',
     'change' 		=> 'Priimta/Išduota',
     'checkout_date' => 'Išdavimo data',

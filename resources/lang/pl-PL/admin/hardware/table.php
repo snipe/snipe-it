@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Kod',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Przypisany do',
     'book_value'  	=> 'Aktualna Wartość',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Data przypisania',

@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Tautoko URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Whakahōu Kaihanga',
-    'url'   				=> 'URL',
 
 );

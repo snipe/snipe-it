@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Accesorio fue separado con éxito',
     'accessory_error'                   => 'El accesorio ya está conectado al kit',
     'accessory_deleted'                 => 'El borrado fue exitoso',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'El accesorio no existe',
     'checkout_success'                  => 'El pago fue exitoso',
     'checkout_error'                    => 'Error de pago',
     'kit_none'                          => 'El kit no existe',

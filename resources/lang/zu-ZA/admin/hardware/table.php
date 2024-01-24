@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Ithegi lefa',
     'asset_model'       => 'Isibonelo',
+    'assigned_to'   => 'Kwabiwa Ku',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'Usuku lokuhlola',

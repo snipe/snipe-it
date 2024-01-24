@@ -96,7 +96,7 @@ return [
     'url'                  => 'Формат поля :attribute неправильний.',
     'unique_undeleted'     => 'Поле :attribute має бути унікальним.',
     'non_circular'         => 'Поле :attribute не повинне створювати круглие посилання.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute не може бути масивом.',
     'disallow_same_pwd_as_user_fields' => 'Пароль не може бути таким же, як ім\'я користувача.',
     'letters'              => 'Пароль має містити принаймні одну букву.',
     'numbers'              => 'Пароль має містити принаймні одну цифру.',

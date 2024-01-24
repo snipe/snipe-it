@@ -502,5 +502,7 @@ Context | Request Context
     'action_permission_generic' => ':action veya :item_type izniniz yok',
     'edit' => 'düzenle',
     'action_source' => 'Eylem Kaynağı',
+    'or' => 'or',
+    'url'                   => 'Link',
 
 ];

@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'この:item_type:actionへの権限がありません',
     'edit' => '編集',
     'action_source' => 'アクションソース',
+    'or' => 'または',
+    'url'                   => 'URL',
 
 ];

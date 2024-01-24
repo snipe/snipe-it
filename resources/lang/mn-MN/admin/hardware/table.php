@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Хөрөнгийн шошго',
     'asset_model'       => 'Загвар',
+    'assigned_to'   => 'Томилогдсон',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Гадуур нь',
     'checkout_date' => 'Тооцоо хийх өдөр',

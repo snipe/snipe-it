@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Etiqueta de equipo',
     'asset_model'       => 'Modelo',
+    'assigned_to'   => 'Asignado a',
     'book_value'  	=> 'Valor actual',
     'change' 		=> 'Entrada/Salida',
     'checkout_date' => 'Fecha de devolución',

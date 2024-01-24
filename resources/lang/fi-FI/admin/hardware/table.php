@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Laitetunniste',
     'asset_model'       => 'Malli',
+    'assigned_to'   => 'Luovutettu',
     'book_value'  	=> 'Nykyinen arvo',
     'change' 		=> 'Toiminto',
     'checkout_date' => 'Luovutuspäivä',
@@ -24,7 +25,7 @@ return [
     'image'		    => 'Laitteen kuva',
     'days_without_acceptance' => 'Päiviä ilman hyväksymistä',
     'monthly_depreciation' => 'Kuukautinen poisto',
-    'assigned_to'    => 'Luovutettu',
+    'assigned_to'    => 'Osoitettu',
     'requesting_user' => 'Pyytävä käyttäjä',
     'requested_date' => 'Pyynnön päivämäärä',
     'changed'       => 'Muutettu',

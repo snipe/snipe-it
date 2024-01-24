@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Judet',
     'suppliers'             => 'Furnizori',
     'update'                => 'Actualizeaza furnizor',
-    'url'                   => 'URL',
     'view'                  => 'Vezi furnizor',
     'view_assets_for'       => 'Vezi active pentru',
     'zip'                   => 'Cod postal',

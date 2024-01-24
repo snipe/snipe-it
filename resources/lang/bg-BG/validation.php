@@ -96,7 +96,7 @@ return [
     'url'                  => 'Форматът на :attribute е невалиден.',
     'unique_undeleted'     => ':attribute трябва да бъде уникален.',
     'non_circular'         => ':attribute не трябва да създава препрадка към себе си.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Паролата не може да бъде същата, като потребителското име.',
     'letters'              => 'Паролата трябва да съдържа поне една буква.',
     'numbers'              => 'Паролата трябва да съдържа поне една цифра.',

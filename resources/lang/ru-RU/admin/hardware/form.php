@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'обесценивание',
     'depreciates_on'	=> 'Обесценивается на',
     'default_location'	=> 'Текущее расположение',
+    'default_location_phone' => 'Телефон местоположения по умолчанию',
     'eol_date'			=> 'Срок эксплуатации',
     'eol_rate'			=> 'EOL величина',
     'expected_checkin'  => 'Ожидаемая дата возврата',

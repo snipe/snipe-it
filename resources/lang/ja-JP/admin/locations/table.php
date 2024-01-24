@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'チェックアウト',
     'asset_expected_checkin'    => 'チェックイン予定',
     'date'                      => '日付:',
+    'phone'                     => '位置情報電話',
     'signed_by_asset_auditor'   => '署名済み(資産監査役):',
     'signed_by_finance_auditor' => '署名済み(会計監査人):',
     'signed_by_location_manager' => '署名済み (ロケーションマネージャー):',

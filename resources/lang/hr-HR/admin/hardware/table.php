@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Oznaka imovine',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Dodijeljena',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'Datum kupnje',

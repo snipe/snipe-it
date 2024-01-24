@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Provinsi',
     'suppliers'             => 'Pemasok',
     'update'                => 'Perbarui Pemasok',
-    'url'                   => 'URL',
     'view'                  => 'Tampilkan Pemasok',
     'view_assets_for'       => 'Tampilkan Aset untuk',
     'zip'                   => 'Kode Pos',

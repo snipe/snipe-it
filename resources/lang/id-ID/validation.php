@@ -96,7 +96,7 @@ return [
     'url'                  => 'Format :attribute tidak benar.',
     'unique_undeleted'     => ':attribute harus unik.',
     'non_circular'         => ':attribute tidak boleh membuat referensi melingkar.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',

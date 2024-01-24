@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Wefan cefnogaeth',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Diweddaru Gwneuthyrwr',
-    'url'   				=> 'URL',
 
 );

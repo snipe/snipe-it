@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Du har ikke tilladelse til at :action denne :item_type',
     'edit' => 'rediger',
     'action_source' => 'Handling Kilde',
+    'or' => 'eller',
+    'url'                   => 'URL',
 
 ];

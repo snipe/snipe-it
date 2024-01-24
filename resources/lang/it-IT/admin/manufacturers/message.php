@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Le variabili <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code> e <code>{MODEL_NAME}</code> possono essere utilizzati nell\'URL per riempire dinamicamente i campi - per esempio https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Le variabili <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code> e <code>{MODEL_NAME}</code> possono essere utilizzate nell\'URL per riempire i campi dinamicamente - ad esempio https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Il produttore non esiste.',
     'assoc_users'	 => 'Questo produttore è attualmente associato con almeno un modello e non può essere eliminato. Si prega di aggiornare i modelli di riferimento e riprovare. ',
 

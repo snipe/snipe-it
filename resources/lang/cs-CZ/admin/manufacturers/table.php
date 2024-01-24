@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'URL podpory',
     'warranty_lookup_url'   => 'Adresa URL pro vyhledání záruky',
     'update'				=> 'Upravit Výrobce',
-    'url'   				=> 'URL',
 
 );
