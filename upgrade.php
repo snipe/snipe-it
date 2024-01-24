@@ -1,8 +1,24 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
-$php_min_works = '7.4.0';
-$php_max_wontwork = '8.2.0';
+$app_environment = 'develop';
+
+// Check if a branch or tag was passed in the command line,
+// otherwise just use master
+(array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
+
+
+// Fetching most current upgrade requirements from github. Read more here: https://github.com/snipe/snipe-it/pull/14127
+$remote_requirements_file = "https://raw.githubusercontent.com/snipe/snipe-it/$branch/.upgrade_requirements.json";
+$upgrade_requirements = json_decode(file_get_contents($remote_requirements_file), true);
+
+if (! $upgrade_requirements) {
+    die("\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\nExiting.\n\n");
+}
+
+$php_min_works = $upgrade_requirements['php_min_version'];
+$php_max_wontwork = $upgrade_requirements['php_max_wontwork'];
+// done fetching requirements
 
 
 if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
@@ -16,12 +32,6 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 	}
 }
 
-
-$app_environment = 'develop';
-
-// Check if a branch or tag was passed in the command line,
-// otherwise just use master
-(array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
 echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
@@ -45,6 +55,12 @@ echo "--------------------------------------------------------\n\n";
 
 // Check the .env looks ok
 $env = file('.env');
+if (! $env){
+    echo "\n!!!!!!!!!!!!!!!!!!!!!!!!!! .ENV FILE ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+    echo "Your .env file doesn't seem to exist in this directory or isn't readable! Please look into that.\n";
+    exit(1);
+}
+
 $env_good = '';
 $env_bad = '';
 
@@ -133,7 +149,7 @@ if ($env_bad !='') {
     echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
     echo "Please correct the issues above in ".getcwd()."/.env and try again.\n";
     echo "--------------------------------------------------------\n";
-    exit;
+    exit(1);
 }
 
 
@@ -152,7 +168,7 @@ if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(ph
     echo "Snipe-IT requires PHP versions between ".$php_min_works." and ".$php_max_wontwork.".\n";
     echo "Please install a compatible version of PHP and re-run this script again. \n";
     echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
-    exit;
+    exit(1);
 }
 
 echo "Checking Required PHP extensions... \n\n";
@@ -240,7 +256,7 @@ if ($ext_missing!='') {
     echo "ABORTING THE INSTALLER  \n";
     echo "Please install the extensions above and re-run this script.\n";
     echo "--------------------------------------------------------\n";
-    exit;
+    exit(1);
 } else {
     echo $ext_installed."\n";
 
@@ -295,6 +311,7 @@ if ($dirs_not_writable!='') {
     echo "--------------------- !! ERROR !! ----------------------\n";
     echo "Please check the permissions on the directories above and re-run this script.\n";
     echo "------------------------- :( ---------------------------\n\n";
+    exit(1);
 }
 
 
