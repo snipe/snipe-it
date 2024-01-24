@@ -128,7 +128,6 @@ class BulkAssetsController extends Controller
                 break;
         }
 
-        \Log::debug($assets->toSql());
         $assets = $assets->get();
 
         $models = $assets->unique('model_id');
