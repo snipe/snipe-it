@@ -48,7 +48,7 @@ class CheckinLicenseSeatNotification extends Notification
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             $notifyBy[] = 'slack';
         }
 
@@ -108,10 +108,10 @@ class CheckinLicenseSeatNotification extends Notification
             ->title(trans('mail.License_Checkin_Notification'))
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
-            ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'ClI tool')
+            ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'CLI tool')
             ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
             ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
-            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
+            ->fact(trans('mail.notes'), $note ?: '');
     }
 
     /**

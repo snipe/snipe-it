@@ -51,7 +51,7 @@ class CheckoutLicenseSeatNotification extends Notification
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             $notifyBy[] = 'slack';
         }
 
@@ -127,7 +127,7 @@ class CheckoutLicenseSeatNotification extends Notification
             ->fact(trans('mail.License_Checkout_Notification')." by ", $admin->present()->fullName())
             ->fact(trans('mail.assigned_to'), $target->present()->fullName())
             ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
-            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
+            ->fact(trans('mail.notes'), $note ?: '');
     }
 
     /**

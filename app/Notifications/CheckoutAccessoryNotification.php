@@ -120,7 +120,7 @@ class CheckoutAccessoryNotification extends Notification
                 ->fact(trans('mail.checkedout_from'), $item->location->name ? $item->location->name : '')
                 ->fact(trans('mail.Accessory_Checkout_Notification') . " by ", $admin->present()->fullName())
                 ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-                ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
+                ->fact(trans('mail.notes'), $note ?: '');
 
     }
 

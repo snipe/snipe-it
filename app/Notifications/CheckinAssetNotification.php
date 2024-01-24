@@ -51,7 +51,7 @@ class CheckinAssetNotification extends Notification
 
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             \Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
@@ -106,7 +106,7 @@ class CheckinAssetNotification extends Notification
             ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
             ->fact(trans('mail.Asset_Checkin_Notification')." by ", $admin->present()->fullName())
             ->fact(trans('admin/hardware/form.status'), $item->assetstatus->name)
-            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
+            ->fact(trans('mail.notes'), $note ?: '');
     }
 
     /**

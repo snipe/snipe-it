@@ -35,7 +35,6 @@ return [
     'months'			=> 'months',
     'name'				=> 'Asset Name',
     'notes'				=> 'Notes',
-    'no_notes'          => 'No Notes',
     'order'				=> 'Order Number',
     'qr'				=> 'QR Code',
     'requestable'		=> 'Users may request this asset',

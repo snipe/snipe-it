@@ -44,7 +44,7 @@ class CheckinAccessoryNotification extends Notification
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             $notifyBy[] = 'slack';
         }
 
@@ -130,7 +130,7 @@ class CheckinAccessoryNotification extends Notification
             ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
             ->fact(trans('mail.Accessory_Checkin_Notification')." by ", $admin->present()->fullName())
             ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-            ->fact(trans('mail.notes'), $note ?: 'No notes');
+            ->fact(trans('mail.notes'), $note ?: '');
     }
 
     /**

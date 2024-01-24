@@ -60,7 +60,7 @@ class CheckoutAssetNotification extends Notification
         }
         $notifyBy = [];
 
-        if ((Setting::getSettings()) && (Setting::getSettings()->webhook_endpoint != '')) {
+        if ((Setting::getSettings()) && (Setting::getSettings()->webhook_selected == 'slack')) {
             \Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
@@ -139,7 +139,7 @@ class CheckoutAssetNotification extends Notification
             ->fact(trans('mail.assigned_to'), $target->present()->name)
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
             ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
-            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
+            ->fact(trans('mail.notes'), $note ?: '');
 
 
     }

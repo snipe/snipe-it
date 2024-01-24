@@ -50,7 +50,7 @@ class CheckoutConsumableNotification extends Notification
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             $notifyBy[] = 'slack';
         }
 
@@ -126,7 +126,7 @@ class CheckoutConsumableNotification extends Notification
             ->fact(trans('mail.Consumable_checkout_notification')." by ", $admin->present()->fullName())
             ->fact(trans('mail.assigned_to'), $target->present()->fullName())
             ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
+            ->fact(trans('mail.notes'), $note ?: '');
     }
 
     /**
