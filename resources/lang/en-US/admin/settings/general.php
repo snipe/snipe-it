@@ -204,6 +204,7 @@ return [
     'integrations'               => 'Integrations',
     'slack'                     => 'Slack',
     'general_webhook'           => 'General Webhook',
+    'google_workspaces'         => 'Google Workspaces',
     'webhook'                   => ':app',
     'webhook_presave'           => 'Test to Save',
     'webhook_title'               => 'Update Webhook Settings',

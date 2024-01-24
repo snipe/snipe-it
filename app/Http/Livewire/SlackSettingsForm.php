@@ -42,9 +42,15 @@ class SlackSettingsForm extends Component
             "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
             "link" => 'https://api.slack.com/messaging/webhooks',
         ),
-            "general"=> array(
+            "general" => array(
                 "name" => trans('admin/settings/general.general_webhook'),
                 "icon" => "fab fa-hashtag",
+                "placeholder" => "",
+                "link" => "",
+            ),
+            "google" => array(
+                "name" => trans('admin/settings/general.google_workspaces'),
+                "icon" => "fa-brands fa-google",
                 "placeholder" => "",
                 "link" => "",
             ),
