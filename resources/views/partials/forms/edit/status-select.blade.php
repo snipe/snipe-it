@@ -7,7 +7,7 @@
         <select class="js-data-ajax" data-endpoint="statuslabels" data-placeholder="{{ trans('general.select_statuslabel') }}" name="{{ $fieldname }}" style="width: 100%" id="status_select_id" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             {{  ((isset($multiple)) && ($multiple=='true')) ? " multiple='multiple'" : '' }}
                 @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                    <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true">
                         {{ (\App\Models\Statuslabel::find($status_id)) ? \App\Models\Statuslabel::find($status_id)->name : '' }}
                     </option>
             @endisset

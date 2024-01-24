@@ -7,7 +7,7 @@
             <select class="js-data-ajax" disabled="true" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}"{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
                 {{  ((isset($multiple)) && ($multiple=='true')) ? " multiple='multiple'" : '' }}
                     @if($company_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                        <option value="{{ $company_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                        <option value="{{ $company_id }}" selected="selected" role="option" aria-selected="true">
                             {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
                         </option>
                 @endisset
