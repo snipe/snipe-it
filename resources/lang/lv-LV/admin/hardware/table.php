@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modelis',
+    'assigned_to'   => 'Piešķirts',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Iekšā ārā',
     'checkout_date' => 'Izrakstīšanās datums',

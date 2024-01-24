@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Амортизационен план',
     'depreciates_on'	=> 'Се амортизира на',
     'default_location'	=> 'Стандардна локација',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL Дата',
     'eol_rate'			=> 'ЕОЛ стапка',
     'expected_checkin'  => 'Очекуван датум на раздолжување',

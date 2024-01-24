@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Herausgegeben',
     'asset_expected_checkin'    => 'Erwartete Rückgabe',
     'date'                      => 'Datum:',
+    'phone'                     => 'Standort Telefon',
     'signed_by_asset_auditor'   => 'Unterschrieben von (Assetprüfer):',
     'signed_by_finance_auditor' => 'Unterschrieben von (Finanzprüfer):',
     'signed_by_location_manager' => 'Unterschrieben von (Standortmanager):',

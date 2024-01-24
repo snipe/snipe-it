@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'URL du support',
     'warranty_lookup_url'   => 'URL de vérification de la garantie',
     'update'				=> 'Mettre à jour le fabricant',
-    'url'   				=> 'URL',
 
 );

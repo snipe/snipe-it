@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'פְּחָת',
     'depreciates_on'	=> 'פוחתת ב',
     'default_location'	=> 'מיקום ברירת המחדל',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'תאריך EOL',
     'eol_rate'			=> 'שער EOL',
     'expected_checkin'  => 'תאריך הצ\'קין הצפוי',

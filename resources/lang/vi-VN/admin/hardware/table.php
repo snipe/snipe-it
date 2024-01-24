@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Thẻ tài sản',
     'asset_model'       => 'Loại',
+    'assigned_to'   => 'Bàn giao cho',
     'book_value'  	=> 'Giá trị hiện tại',
     'change' 		=> 'Vào/Ra',
     'checkout_date' => 'Ngày checkout',

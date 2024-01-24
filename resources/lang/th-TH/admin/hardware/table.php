@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'แท็กเนื้อหา',
     'asset_model'       => 'แบบ',
+    'assigned_to'   => 'ได้รับมอบหมายให้',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'ชำระเงินวันที่',

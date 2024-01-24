@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Išduota',
     'asset_expected_checkin'    => 'Numatoma priėmimo data',
     'date'                      => 'Data:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Pasirašė (Turto auditorius):',
     'signed_by_finance_auditor' => 'Pasirašė (Finansų auditorius):',
     'signed_by_location_manager' => 'Pasirašė (Vietovės auditorius):',

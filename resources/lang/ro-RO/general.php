@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Nu ai permisiunea să :action acest :item_type',
     'edit' => 'editeaza',
     'action_source' => 'Sursa Acțiune',
+    'or' => 'sau',
+    'url'                   => 'URL-',
 
 ];

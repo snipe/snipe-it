@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Nolietojums',
     'depreciates_on'	=> 'Atbalstīts ieslēgts',
     'default_location'	=> 'Noklusējuma atrašanās vieta',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL datums',
     'eol_rate'			=> 'EOL likme',
     'expected_checkin'  => 'Paredzamais reģistrēšanās datums',

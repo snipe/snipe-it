@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Provincia',
     'suppliers'             => 'Proveedores',
     'update'                => 'Actualizar Proveedor',
-    'url'                   => 'URL',
     'view'                  => 'Ver Proveedor',
     'view_assets_for'       => 'Ver Equipos para',
     'zip'                   => 'Código Postal',

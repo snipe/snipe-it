@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Agihan Keluar',
     'asset_expected_checkin'    => 'Tarikh Agihan Masuk Yang Dijangka',
     'date'                      => 'Tarikh:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Ditandatangan oleh (Pengaudit Aset):',
     'signed_by_finance_auditor' => 'Ditandatangan oleh (Pengaudit Kewangan):',
     'signed_by_location_manager' => 'Ditandatangan oleh (Pengurus Lokasi):',

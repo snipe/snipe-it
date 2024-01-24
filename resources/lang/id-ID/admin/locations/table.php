@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Dipakai',
     'asset_expected_checkin'    => 'Tanggal Pengembalian',
     'date'                      => 'Tanggal:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Ditandatangani Oleh (Aset Auditor):',
     'signed_by_finance_auditor' => 'Ditandatangani Oleh (Auditor Keuangan):',
     'signed_by_location_manager' => 'Ditandatangani Oleh (Penanggung Jawab):',

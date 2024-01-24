@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Checked Out',
     'asset_expected_checkin'    => 'Αναμενόμενη Checkin',
     'date'                      => 'Ημερομηνία:',
+    'phone'                     => 'Τηλέφωνο Τοποθεσίας',
     'signed_by_asset_auditor'   => 'Υπογράφηκε Από (Asset Auditor):',
     'signed_by_finance_auditor' => 'Υπογράφηκε Από (Ελεγκτή Χρηματοδότησης):',
     'signed_by_location_manager' => 'Υπογράφηκε Από (Location Manager):',

@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Bate-tag',
     'asset_model'       => 'model',
+    'assigned_to'   => 'Toevertrou aan',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In uit',
     'checkout_date' => 'Checkout Datum',

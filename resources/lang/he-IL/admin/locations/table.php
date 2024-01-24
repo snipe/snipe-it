@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'הנכס שוייך',
     'asset_expected_checkin'    => 'תאריך חזרה למלאי',
     'date'                      => 'תאריך:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'אושר על ידי (מפקח הציוד):',
     'signed_by_finance_auditor' => 'אושר על ידי (מפקח הכספים):',
     'signed_by_location_manager' => 'אושר על ידי (מנהל המיקום):',

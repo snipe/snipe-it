@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'No tiene permiso para :action this :item_type',
     'edit' => 'editar',
     'action_source' => 'Fuente de acción',
+    'or' => 'o',
+    'url'                   => 'URL',
 
 ];

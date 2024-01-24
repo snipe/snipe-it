@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> '资产标签',
     'asset_model'       => '型号',
+    'assigned_to'   => '已分配给',
     'book_value'  	=> '当前值',
     'change' 		=> '进/出',
     'checkout_date' => '借出日期',

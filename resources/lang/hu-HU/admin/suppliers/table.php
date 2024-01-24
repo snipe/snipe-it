@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Állam',
     'suppliers'             => 'Beszállítók',
     'update'                => 'Beszállítók frissítése',
-    'url'                   => 'URL',
     'view'                  => 'Beszállító megtekintése',
     'view_assets_for'       => 'Eszközök megtekintése',
     'zip'                   => 'Irányítószám',

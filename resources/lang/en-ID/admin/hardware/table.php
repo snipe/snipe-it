@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Tag Aset',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Ditetapkan untuk',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Masuk/keluar',
     'checkout_date' => 'Tanggal Check out',

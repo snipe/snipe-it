@@ -48,7 +48,7 @@ return [
         'ro-RO'=> 'Román',
         'ru-RU'=> 'Orosz',
         'sr-CS' => 'Szerb (latin betűs)',
-        'sk-SK'=> 'Slovak',
+        'sk-SK'=> 'szlovák',
         'sl-SI'=> 'Szlovèn',
         'es-ES'=> 'Spanyol',
         'es-CO'=> 'Spanyol, Kolumbia',

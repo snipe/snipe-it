@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Accesoriul a fost detașat cu succes',
     'accessory_error'                   => 'Accesoriu deja atașat kit-ului',
     'accessory_deleted'                 => 'Ștergerea a fost reușită',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'Accesoriul nu există',
     'checkout_success'                  => 'Finalizarea comenzii a avut succes',
     'checkout_error'                    => 'Eroare la plată',
     'kit_none'                          => 'Kit nu există',

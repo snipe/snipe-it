@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Eiendelsmerke',
     'asset_model'       => 'Modell',
+    'assigned_to'   => 'Tilordnet til',
     'book_value'  	=> 'Gjeldende verdi',
     'change' 		=> 'Inne/ute',
     'checkout_date' => 'Utsjekkdato',

@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Nincs jogosultsága a következő művelethez: :action a következőn: :item_type',
     'edit' => 'szerkesztés',
     'action_source' => 'Action Source',
+    'or' => 'vagy',
+    'url'                   => 'URL',
 
 ];

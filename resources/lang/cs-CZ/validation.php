@@ -96,7 +96,7 @@ return [
     'url'                  => 'Formát :attribute je neplatný.',
     'unique_undeleted'     => 'Je třeba, aby se :attribute neopakoval.',
     'non_circular'         => ':attribute nesmí vytvořit kruhový odkaz.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute nemůže být pole.',
     'disallow_same_pwd_as_user_fields' => 'Heslo nemůže být stejné jako uživatelské jméno.',
     'letters'              => 'Heslo musí obsahovat nejméně jedno písmeno.',
     'numbers'              => 'Heslo musí obsahovat alespoň jednu číslici.',

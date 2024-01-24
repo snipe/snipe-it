@@ -19,7 +19,6 @@ return array(
     'state'                 => 'מדינה',
     'suppliers'             => 'ספקים',
     'update'                => 'עדכון הספק',
-    'url'                   => 'כתובת אתר',
     'view'                  => 'הצג את הספק',
     'view_assets_for'       => 'הצג נכסים עבור',
     'zip'                   => 'מיקוד',

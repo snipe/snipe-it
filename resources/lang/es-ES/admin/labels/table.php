@@ -1,7 +1,13 @@
 <?php
 
 return [
-
+    'example_company'    => 'Compañía de prueba limitada',
+    'example_defaultloc' => 'Construcción 1',
+    'example_category'   => 'Probar categoría',
+    'example_location'   => 'Edificio 2',
+    'example_manufacturer'  => 'Test Manufacturing Inc.',
+    'example_model'      => 'Modelo de prueba',
+    'example_supplier'   => 'Compañía de prueba limitada',
     'labels_per_page'    => 'Etiquetas',
     'support_fields'     => 'Campos',
     'support_asset_tag'  => 'Etiqueta',

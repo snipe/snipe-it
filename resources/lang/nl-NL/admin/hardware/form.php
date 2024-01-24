@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Afschrijving',
     'depreciates_on'	=> 'Afschrijving op',
     'default_location'	=> 'Standaardlocatie',
+    'default_location_phone' => 'Standaard Locatie Telefoon',
     'eol_date'			=> 'EOL datum',
     'eol_rate'			=> 'Duur EOL',
     'expected_checkin'  => 'Verwachte incheck datum',

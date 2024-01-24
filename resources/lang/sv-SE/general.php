@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Du har inte behörighet att :action denna :item_type',
     'edit' => 'ändra',
     'action_source' => 'Åtgärd Källa',
+    'or' => 'eller',
+    'url'                   => 'URL',
 
 ];

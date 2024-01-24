@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Stat',
     'suppliers'             => 'Leverandører',
     'update'                => 'Oppdater leverandør',
-    'url'                   => 'URL',
     'view'                  => 'Vis leverandør',
     'view_assets_for'       => 'Vis eiendeler for',
     'zip'                   => 'Postnummer',

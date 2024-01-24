@@ -96,7 +96,7 @@ return [
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
     'unique_undeleted'     => 'Thuộc tính: phải là duy nhất.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Mật khẩu không thể giống với tên người dùng.',
     'letters'              => 'Mật khẩu phải chứa ít nhất một chữ cái.',
     'numbers'              => 'Mật khẩu phải chứa ít nhất một chữ số.',

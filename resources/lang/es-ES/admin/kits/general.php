@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Accesorio desvinculado correctamente',
     'accessory_error'                   => 'El accesorio ya vinculado al kit',
     'accessory_deleted'                 => 'Eliminado correctamente',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'El accesorio no existe',
     'checkout_success'                  => 'Asignación correcta',
     'checkout_error'                    => 'Error al asignar',
     'kit_none'                          => 'El Kit no existe',

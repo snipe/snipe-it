@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'ஒப்படைக்கப்பட்டது',
     'asset_expected_checkin'    => 'திரும்பப் பெற்றுக்கொள்ள எதிர்பார்க்கப்படும் தேதி',
     'date'                      => 'தேதி:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
     'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
     'signed_by_location_manager' => 'Signed By (Location Manager):',

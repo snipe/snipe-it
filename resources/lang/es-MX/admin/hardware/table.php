@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Etiqueta',
     'asset_model'       => 'Modelo',
+    'assigned_to'   => 'Asignado a',
     'book_value'  	=> 'Valor Actual',
     'change' 		=> 'Operación',
     'checkout_date' => 'Fecha de asignación',

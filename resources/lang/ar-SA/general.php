@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'ليس لديك الإذن لـ :action هذا :item_type',
     'edit' => 'تعديل',
     'action_source' => 'مصدر العمل',
+    'or' => 'أو',
+    'url'                   => 'URL',
 
 ];

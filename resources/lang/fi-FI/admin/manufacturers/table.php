@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Tuen URL',
     'warranty_lookup_url'   => 'Takuu Haku URL',
     'update'				=> 'Päivitä valmistaja',
-    'url'   				=> 'URL',
 
 );

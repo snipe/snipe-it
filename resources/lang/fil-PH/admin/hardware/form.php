@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Ang Depresasyon',
     'depreciates_on'	=> 'Ma-depreciate Sa',
     'default_location'	=> 'I-default ang Lakasyon',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Ang Petsa ng EOL',
     'eol_rate'			=> 'Ang Halaga ng EOL',
     'expected_checkin'  => 'Ang Inaasahang Petsa ng Pag-checkin',
