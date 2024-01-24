@@ -183,7 +183,7 @@
 
               <label class="form-control">
                 {{ Form::checkbox('url', '1', '1') }}
-                - {{ trans('admin/manufacturers/table.url') }}
+                - {{ trans('general.url') }}
               </label>
 
 
