@@ -15,6 +15,7 @@ class SlackSettingsForm extends Component
     public $isDisabled ='disabled' ;
     public $webhook_name;
     public $webhook_link;
+    public $webhook_test;
     public $webhook_placeholder;
     public $webhook_icon;
     public $webhook_selected;
@@ -41,18 +42,21 @@ class SlackSettingsForm extends Component
             "icon" => 'fab fa-slack',
             "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
             "link" => 'https://api.slack.com/messaging/webhooks',
+            "test" => 'testWebhook'
         ),
             "general" => array(
                 "name" => trans('admin/settings/general.general_webhook'),
                 "icon" => "fab fa-hashtag",
                 "placeholder" => "",
                 "link" => "",
+                "test" => 'testWebhook'
             ),
             "google" => array(
                 "name" => trans('admin/settings/general.google_workspaces'),
                 "icon" => "fa-brands fa-google",
-                "placeholder" => "",
-                "link" => "",
+                "placeholder" => "https://chat.googleapis.com/v1/spaces/xxxxxxxx/messages?key=xxxxxx",
+                "link" => "https://developers.google.com/chat/how-tos/webhooks#register_the_incoming_webhook",
+                "test" => 'googleWebhookTest'
             ),
         ];
 
@@ -144,6 +148,9 @@ class SlackSettingsForm extends Component
         }
 
         return session()->flash('error' , trans('admin/settings/message.webhook.error_misc'));
+
+    }
+    public function googleWebhookTest(){
 
     }
 

@@ -106,15 +106,17 @@
                         @endif
 
                         <!-- Webhook botname -->
-                        <div class="form-group{{ $errors->has('webhook_botname') ? ' error' : '' }}">
-                            <div class="col-md-2">
-                                {{ Form::label('webhook_botname', trans('admin/settings/general.webhook_botname',['app' => $webhook_name ])) }}
+                        @if($webhook_selected != 'microsoft' && $webhook_selected != 'google')
+                            <div class="form-group{{ $errors->has('webhook_botname') ? ' error' : '' }}">
+                                <div class="col-md-2">
+                                    {{ Form::label('webhook_botname', trans('admin/settings/general.webhook_botname',['app' => $webhook_name ])) }}
+                                </div>
+                                <div class="col-md-9">
+                                        <input type="text" wire:model.lazy="webhook_botname" class='form-control' placeholder="Snipe-Bot" {{ old('webhook_botname', $webhook_botname)}}{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                    {!! $errors->first('webhook_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                </div><!--col-md-10-->
                             </div>
-                            <div class="col-md-9">
-                                    <input type="text" wire:model.lazy="webhook_botname" class='form-control' placeholder="Snipe-Bot" {{ old('webhook_botname', $webhook_botname)}}{{ Helper::isDemoMode() ? ' disabled' : ''}}>
-                                {!! $errors->first('webhook_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                            </div><!--col-md-10-->
-                        </div>
+                        @endif
 
                         @if (!Helper::isDemoMode())
                             @include('partials.forms.demo-mode')
