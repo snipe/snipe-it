@@ -120,13 +120,13 @@ class CheckoutConsumableNotification extends Notification
             ->to($this->settings->webhook_endpoint)
             ->type('success')
             ->addStartGroupToSection('activityTitle')
-            ->title("Consumable Checked Out")
+            ->title(trans('mail.Consumable_checkout_notification'))
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
             ->fact(trans('mail.Consumable_checkout_notification')." by ", $admin->present()->fullName())
-            ->fact('Checked out to', $target->present()->fullName())
-            ->fact('Number Remaining', $item->numRemaining())
-            ->fact('Notes', $note ?: 'No notes');
+            ->fact(trans('mail.assigned_to'), $target->present()->fullName())
+            ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
+            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
     }
 
     /**

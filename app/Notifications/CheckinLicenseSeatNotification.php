@@ -105,13 +105,13 @@ class CheckinLicenseSeatNotification extends Notification
             ->to($this->settings->webhook_endpoint)
             ->type('success')
             ->addStartGroupToSection('activityTitle')
-            ->title("License Checked in")
+            ->title(trans('mail.License_Checkin_Notification'))
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
             ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'ClI tool')
-            ->fact('Checked in from', $target->present()->fullName())
-            ->fact('Seats Remaining', $item->availCount()->count())
-            ->fact('Notes', $note ?: 'No notes');
+            ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
+            ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
+            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
     }
 
     /**

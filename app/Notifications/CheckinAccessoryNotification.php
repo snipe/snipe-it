@@ -37,11 +37,12 @@ class CheckinAccessoryNotification extends Notification
      */
     public function via()
     {
+        $notifyBy = [];
+
         if (Setting::getSettings()->webhook_selected == 'microsoft'){
 
-             return [MicrosoftTeamsChannel::class];
-         }
-        $notifyBy = [];
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
 
         if (Setting::getSettings()->webhook_endpoint != '') {
             $notifyBy[] = 'slack';
@@ -123,13 +124,13 @@ class CheckinAccessoryNotification extends Notification
             ->to($this->settings->webhook_endpoint)
             ->type('success')
             ->addStartGroupToSection('activityTitle')
-            ->title("Accessory Checked In")
+            ->title(trans('Accessory_Checkin_Notification'))
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-            ->fact('Checked into ', $item->location->name ? $item->location->name : '')
+            ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
             ->fact(trans('mail.Accessory_Checkin_Notification')." by ", $admin->present()->fullName())
-            ->fact('Number Remaining', $item->numRemaining())
-            ->fact('Notes', $note ?: 'No notes');
+            ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
+            ->fact(trans('mail.notes'), $note ?: 'No notes');
     }
 
     /**

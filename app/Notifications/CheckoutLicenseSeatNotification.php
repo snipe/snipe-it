@@ -121,13 +121,13 @@ class CheckoutLicenseSeatNotification extends Notification
             ->to($this->settings->webhook_endpoint)
             ->type('success')
             ->addStartGroupToSection('activityTitle')
-            ->title("License Checked Out")
+            ->title(trans('mail.License_Checkout_Notification'))
             ->addStartGroupToSection('activityText')
             ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
             ->fact(trans('mail.License_Checkout_Notification')." by ", $admin->present()->fullName())
-            ->fact('Checked out to', $target->present()->fullName())
-            ->fact('Seats Remaining', $item->availCount()->count())
-            ->fact('Notes', $note ?: 'No notes');
+            ->fact(trans('mail.assigned_to'), $target->present()->fullName())
+            ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
+            ->fact(trans('mail.notes'), $note ?: trans('mail.no_notes'));
     }
 
     /**

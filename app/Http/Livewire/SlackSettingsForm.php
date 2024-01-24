@@ -46,7 +46,7 @@ class SlackSettingsForm extends Component
             "general"=> array(
                 "name" => trans('admin/settings/general.general_webhook'),
                 "icon" => "fab fa-hashtag",
-                "placeholder" => "Insert URL",
+                "placeholder" => trans('general.url'),
                 "link" => "",
             ),
             "microsoft" => array(
@@ -193,8 +193,8 @@ class SlackSettingsForm extends Component
         [
             "@type" => "MessageCard",
             "@context" => "http://schema.org/extensions",
-            "summary" => "Snipe-IT Integration Test Summary",
-            "title" => "Snipe-IT Integration Test",
+            "summary" => trans('mail.snipe_webhook_summary'),
+            "title" => trans('mail.snipe_webhook_test'),
             "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
         ];
 
