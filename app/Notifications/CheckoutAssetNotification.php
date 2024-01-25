@@ -6,10 +6,13 @@ use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckoutAssetNotification extends Notification
 {
@@ -51,9 +54,13 @@ class CheckoutAssetNotification extends Notification
      */
     public function via()
     {
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            return [MicrosoftTeamsChannel::class];
+        }
         $notifyBy = [];
 
-        if ((Setting::getSettings()) && (Setting::getSettings()->webhook_endpoint != '')) {
+        if ((Setting::getSettings()) && (Setting::getSettings()->webhook_selected == 'slack')) {
             \Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
@@ -116,6 +123,25 @@ class CheckoutAssetNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->title(trans('mail.Asset_Checkout_Notification'))
+            ->addStartGroupToSection('activityText')
+            ->fact(trans('mail.assigned_to'), $target->present()->name)
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
+            ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
+            ->fact(trans('mail.notes'), $note ?: '');
+
+
     }
 
     /**

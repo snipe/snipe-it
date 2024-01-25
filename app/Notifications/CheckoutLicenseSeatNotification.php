@@ -9,6 +9,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckoutLicenseSeatNotification extends Notification
 {
@@ -41,9 +43,15 @@ class CheckoutLicenseSeatNotification extends Notification
      */
     public function via()
     {
+
         $notifyBy = [];
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
+
+        if (Setting::getSettings()->webhook_selected == 'slack') {
             $notifyBy[] = 'slack';
         }
 
@@ -101,6 +109,25 @@ class CheckoutLicenseSeatNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->addStartGroupToSection('activityTitle')
+            ->title(trans('mail.License_Checkout_Notification'))
+            ->addStartGroupToSection('activityText')
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
+            ->fact(trans('mail.License_Checkout_Notification')." by ", $admin->present()->fullName())
+            ->fact(trans('mail.assigned_to'), $target->present()->fullName())
+            ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
+            ->fact(trans('mail.notes'), $note ?: '');
     }
 
     /**
