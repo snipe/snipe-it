@@ -13,12 +13,14 @@ class CreateSamlNonceTable extends Migration
      */
     public function up()
     {
-        Schema::create('saml_nonces', function (Blueprint $table) {
-            $table->id();
-            $table->string('nonce')->index();
-            $table->datetime('not_valid_after')->index();
-            //$table->timestamps();
-        });
+        if (! Schema::hasTable('saml_nonces') ) {
+            Schema::create('saml_nonces', function (Blueprint $table) {
+                $table->id();
+                $table->string('nonce')->index();
+                $table->datetime('not_valid_after')->index();
+                //$table->timestamps();
+            });
+        }
     }
 
     /**

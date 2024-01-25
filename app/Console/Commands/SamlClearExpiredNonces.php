@@ -19,7 +19,7 @@ class SamlClearExpiredNonces extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Clears out expired SAML assertions from the saml_nonces table';
 
     /**
      * Create a new command instance.
