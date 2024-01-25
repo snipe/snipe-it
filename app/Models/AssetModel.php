@@ -46,15 +46,6 @@ class AssetModel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
-    public function setEolAttribute($value)
-    {
-        if ($value == '') {
-            $value = 0;
-        }
-
-        $this->attributes['eol'] = $value;
-    }
-
     /**
      * The attributes that are mass assignable.
      *
