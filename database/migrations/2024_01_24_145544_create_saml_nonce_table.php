@@ -18,7 +18,6 @@ class CreateSamlNonceTable extends Migration
                 $table->id();
                 $table->string('nonce')->index();
                 $table->datetime('not_valid_after')->index();
-                //$table->timestamps();
             });
         }
     }
