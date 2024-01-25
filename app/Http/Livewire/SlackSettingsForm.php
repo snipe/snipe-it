@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use App\Models\Setting;
 use App\Helpers\Helper;
@@ -45,17 +46,24 @@ class SlackSettingsForm extends Component
             "general"=> array(
                 "name" => trans('admin/settings/general.general_webhook'),
                 "icon" => "fab fa-hashtag",
-                "placeholder" => "",
+                "placeholder" => trans('general.url'),
                 "link" => "",
+            ),
+            "microsoft" => array(
+                "name" => trans('admin/settings/general.ms_teams'),
+                "icon" => "fa-brands fa-microsoft",
+                "placeholder" => "https://abcd.webhook.office.com/webhookb2/XXXXXXX",
+                "link" => "https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=dotnet#create-incoming-webhooks-1",
             ),
         ];
 
         $this->setting = Setting::getSettings();
         $this->save_button = trans('general.save');
         $this->webhook_selected = $this->setting->webhook_selected;
-        $this->webhook_placeholder = $this->webhook_text[$this->setting->webhook_selected]["placeholder"];
         $this->webhook_name = $this->webhook_text[$this->setting->webhook_selected]["name"];
         $this->webhook_icon = $this->webhook_text[$this->setting->webhook_selected]["icon"];
+        $this->webhook_placeholder = $this->webhook_text[$this->setting->webhook_selected]["placeholder"];
+        $this->webhook_link = $this->webhook_text[$this->setting->webhook_selected]["link"];
         $this->webhook_endpoint = $this->setting->webhook_endpoint;
         $this->webhook_channel = $this->setting->webhook_channel;
         $this->webhook_botname = $this->setting->webhook_botname;
@@ -77,11 +85,13 @@ class SlackSettingsForm extends Component
         $this->webhook_name = $this->webhook_text[$this->webhook_selected]['name'];
         $this->webhook_icon = $this->webhook_text[$this->webhook_selected]["icon"]; ;
         $this->webhook_placeholder = $this->webhook_text[$this->webhook_selected]["placeholder"];
+        $this->webhook_endpoint = null;
         $this->webhook_link = $this->webhook_text[$this->webhook_selected]["link"];
         if($this->webhook_selected != 'slack'){
             $this->isDisabled= '';
             $this->save_button = trans('general.save');
         }
+
     }
 
     private function isButtonDisabled() {
@@ -174,8 +184,40 @@ class SlackSettingsForm extends Component
             $this->setting->save();
 
             session()->flash('success',trans('admin/settings/message.update.success'));
-
         }
 
     }
+     public function msTeamTestWebhook(){
+
+     $payload =
+        [
+            "@type" => "MessageCard",
+            "@context" => "http://schema.org/extensions",
+            "summary" => trans('mail.snipe_webhook_summary'),
+            "title" => trans('mail.snipe_webhook_test'),
+            "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
+        ];
+
+         try {
+         $response = Http::withHeaders([
+             'content-type' => 'applications/json',
+         ])->post($this->webhook_endpoint,
+            $payload)->throw();
+
+         if(($response->getStatusCode() == 302)||($response->getStatusCode() == 301)){
+             return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
+         }
+         $this->isDisabled='';
+         $this->save_button = trans('general.save');
+         return session()->flash('success' , trans('admin/settings/message.webhook.success', ['webhook_name' => $this->webhook_name]));
+
+     } catch (\Exception $e) {
+
+         $this->isDisabled='disabled';
+         $this->save_button = trans('admin/settings/general.webhook_presave');
+         return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage(), 'app' => $this->webhook_name]));
+     }
+
+         return session()->flash('error' , trans('admin/settings/message.webhook.error_misc'));
+     }
 }
