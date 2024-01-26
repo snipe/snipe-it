@@ -38,6 +38,9 @@ class ConsumableObserver
         $logAction->item_id = $consumable->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        if($consumable->imported) {
+            $logAction->note = trans('general.importer.import_note');
+        }
         $logAction->logaction('create');
     }
 
