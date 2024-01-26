@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 trait Loggable
 {
-    public ?bool $imported = false; // Import note attribute
+    // an attribute for setting whether or not the item was imported
+    public ?bool $imported = false;
 
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
@@ -23,11 +24,6 @@ trait Loggable
     public function setImported(bool $bool): void
     {
         $this->imported = $bool;
-    }
-
-    public function getImported(): bool
-    {
-        return $this->imported;
     }
 
     /**

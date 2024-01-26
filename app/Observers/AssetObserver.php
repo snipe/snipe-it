@@ -109,9 +109,8 @@ class AssetObserver
         $logAction->item_id = $asset->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
-        $logAction->note = 'poop';
-        if($asset->getImported()) {
-            $logAction->note = "this asset was imported";
+        if($asset->imported) {
+            $logAction->note = trans('general.importer.import_note');
         }
         $logAction->logaction('create');
     }
