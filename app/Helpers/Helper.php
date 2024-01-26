@@ -13,6 +13,7 @@ use App\Models\Setting;
 use App\Models\Statuslabel;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Str;
 use Image;
 use Carbon\Carbon;
 
@@ -1433,4 +1434,45 @@ class Helper
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
+    public static function brady_trans_choice($key, $number, array $replace = [], $locale = null)
+    {
+        //return app('translator')->choice($key, $number, $replace, $locale); //works
+
+        $translator = app('translator');
+        //return $translator->choice($key, $number, $replace, $locale); //works!
+        // FIXME: we're replacing the passed-in Locale - is that a problem?
+        $locale = \App::getLocale(); //middleware has already fired; this should be good-to-go
+        $line = $translator->get(
+            $key, $replace, $locale
+        );
+
+        // If the given "number" is actually an array or countable we will simply count the
+        // number of elements in an instance. This allows developers to pass an array of
+        // items without having to count it on their end first which gives bad syntax.
+        if (is_array($number) || $number instanceof Countable) {
+            $number = count($number);
+        }
+
+        $replace['count'] = $number;
+
+        $underscored_locale = str_replace("-","_",$locale);
+
+
+        $interim_line = $translator->getSelector()->choose($line, $number, $underscored_locale);
+
+        //makeReplacements (protected)
+        if (empty($replace)) {
+            return $interim_line;
+        }
+
+        $shouldReplace = [];
+
+        foreach ($replace as $key => $value) {
+            $shouldReplace[':'.Str::ucfirst($key ?? '')] = Str::ucfirst($value ?? '');
+            $shouldReplace[':'.Str::upper($key ?? '')] = Str::upper($value ?? '');
+            $shouldReplace[':'.$key] = $value;
+        }
+
+        return strtr($interim_line, $shouldReplace);
+    }
 }

@@ -31,7 +31,6 @@
   <!--/ search filter box -->
 @stop
 
-
 {{-- Page content --}}
 @section('content')
 
@@ -348,10 +347,16 @@
   </div>
 </div>
 
+  <div>Brady's Choice <tt>Helper::brady_trans_choice()</tt>:</div>
+  <div> One: {{ Helper::brady_trans_choice('mail.upcoming-audits',1) }} </div>
+  <div> Two: {{ Helper::brady_trans_choice('mail.upcoming-audits',2) }}</div>
+  <hr>
+  <div>Default <tt>trans_choice()</tt></div>
+  <div> One: {{ trans_choice('mail.upcoming-audits',1) }} </div>
+  <div> Two: {{ trans_choice('mail.upcoming-audits',2) }}</div>
 
 
-
-<div class="row">
+  <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header">
