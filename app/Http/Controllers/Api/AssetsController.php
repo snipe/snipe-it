@@ -599,12 +599,7 @@ class AssetsController extends Controller
                 $target = Location::find(request('assigned_location'));
             }
             if (isset($target)) {
-                $asset->checkOut($target,
-                                Auth::user(),
-                                date('Y-m-d H:i:s'),
-                                '',
-                                'Checked out on asset creation',
-                                e($request->get('name')));
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
 
             if ($asset->image) {
