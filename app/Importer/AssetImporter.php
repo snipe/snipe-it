@@ -135,7 +135,7 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-        //this sets an attribute on the Loggable trait for the action log
+        // This sets an attribute on the Loggable trait for the action log
         $asset->setImported(true);
         if ($asset->save()) {
 
