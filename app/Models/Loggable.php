@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 trait Loggable
 {
+    public ?bool $imported = false; // Import note attribute
+
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
@@ -16,6 +18,16 @@ trait Loggable
     public function log()
     {
         return $this->morphMany(Actionlog::class, 'item');
+    }
+
+    public function setImported(bool $bool): void
+    {
+        $this->imported = $bool;
+    }
+
+    public function getImported(): bool
+    {
+        return $this->imported;
     }
 
     /**
