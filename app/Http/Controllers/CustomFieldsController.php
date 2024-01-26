@@ -103,7 +103,7 @@ class CustomFieldsController extends Controller
             "name" => trim($request->get("name")),
             "element" => $request->get("element"),
             "help_text" => $request->get("help_text"),
-            "field_values" => e($request->get("field_values")),
+            "field_values" => $request->get("field_values"),
             "field_encrypted" => $request->get("field_encrypted", 0),
             "show_in_email" => $show_in_email,
             "is_unique" => $request->get("is_unique", 0),
@@ -260,7 +260,7 @@ class CustomFieldsController extends Controller
         
         $field->name          = trim(e($request->get("name")));
         $field->element       = e($request->get("element"));
-        $field->field_values  = e($request->get("field_values"));
+        $field->field_values  = $request->get("field_values");
         $field->user_id       = Auth::id();
         $field->help_text     = $request->get("help_text");
         $field->show_in_email = $show_in_email;
