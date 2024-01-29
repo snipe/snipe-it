@@ -288,7 +288,7 @@ class AssetModelsController extends Controller
     public function show($modelId = null)
     {
         $this->authorize('view', AssetModel::class);
-        $model = AssetModel::withTrashed()->find($modelId);
+        $model = AssetModel::withTrashed()->withCount('assets')->find($modelId);
 
         if (isset($model->id)) {
             return view('models/view', compact('model'));
