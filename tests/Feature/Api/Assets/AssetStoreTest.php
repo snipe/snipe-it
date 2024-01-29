@@ -10,6 +10,7 @@ use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -424,5 +425,17 @@ class AssetStoreTest extends TestCase
         $this->assertTrue($apiAsset->checkedOutToAsset());
         // I think this makes sense, but open to a sanity check
         $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));
+    }
+
+    public function testCompanyIdNeedsToBeInteger()
+    {
+        $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'company_id' => [1],
+            ])
+            ->assertStatusMessageIs('error')
+            ->assertJson(function (AssertableJson $json) {
+                $json->has('messages.company_id')->etc();
+            });
     }
 }

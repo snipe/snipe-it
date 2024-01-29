@@ -1,11 +1,14 @@
 {
   "projectName": "snipe-it",
   "projectOwner": "snipe",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 110,
   "commit": true,
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "snipe",
@@ -3003,6 +3006,15 @@
       "name": "coach1988",
       "avatar_url": "https://avatars.githubusercontent.com/u/2565989?v=4",
       "profile": "https://github.com/coach1988",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mauro-miatello",
+      "name": "MrM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11910225?v=4",
+      "profile": "https://github.com/mauro-miatello",
       "contributions": [
         "code"
       ]

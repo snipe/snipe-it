@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Je bent niet gemachtigd om :action dit :item_type',
     'edit' => 'bewerk',
     'action_source' => 'Bron actie',
+    'or' => 'of',
+    'url'                   => 'URL',
 
 ];

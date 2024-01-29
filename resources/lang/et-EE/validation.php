@@ -96,7 +96,7 @@ return [
     'url'                  => 'Atribuudivorming on vale.',
     'unique_undeleted'     => ':attribute peab olema ainulaadne.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Parool ei saa sisaldada kasutajanime.',
     'letters'              => 'Parool peab sisaldama vähemalt ühte tähte.',
     'numbers'              => 'Parool peab sisaldama vähemalt ühte numbrit.',

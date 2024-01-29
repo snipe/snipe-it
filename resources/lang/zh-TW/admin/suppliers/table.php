@@ -19,7 +19,6 @@ return array(
     'state'                 => '省份',
     'suppliers'             => '供應商',
     'update'                => '更新供應商',
-    'url'                   => 'URL',
     'view'                  => '檢視供應商',
     'view_assets_for'       => '檢視資產關於',
     'zip'                   => '郵遞區號',

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Амортизація',
     'depreciates_on'	=> 'Дешевше',
     'default_location'	=> 'Місцезнаходження за замовчуванням',
+    'default_location_phone' => 'Телефон за замовчуванням',
     'eol_date'			=> 'Дата EOL',
     'eol_rate'			=> 'Оцінка EOL',
     'expected_checkin'  => 'Очікувана дата повернення',

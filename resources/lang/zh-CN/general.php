@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => '您没有 :action 此 :item_type 的权限',
     'edit' => '编辑',
     'action_source' => '动作来源',
+    'or' => '或',
+    'url'                   => 'URL',
 
 ];

@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Acessório separado com sucesso',
     'accessory_error'                   => 'Acessório já anexado ao kit',
     'accessory_deleted'                 => 'Apagado com sucesso',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'O acessório não existe',
     'checkout_success'                  => 'Entrega foi bem sucedida',
     'checkout_error'                    => 'Erro de Entrega',
     'kit_none'                          => 'Kit não existe',

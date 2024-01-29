@@ -500,5 +500,6 @@ return [
     'edit' => 'edit',
     'action_source' => 'Action Source',
     'or' => 'or',
+    'url'                   => 'URL',
 
 ];

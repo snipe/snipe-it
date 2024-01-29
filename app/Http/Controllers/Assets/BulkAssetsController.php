@@ -49,13 +49,86 @@ class BulkAssetsController extends Controller
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
+        $asset_ids = $request->input('ids');
+
         // Figure out where we need to send the user after the update is complete, and store that in the session
         $bulk_back_url = request()->headers->get('referer');
         session(['bulk_back_url' => $bulk_back_url]);
 
+        $allowed_columns = [
+            'id',
+            'name',
+            'asset_tag',
+            'serial',
+            'model_number',
+            'last_checkout',
+            'notes',
+            'expected_checkin',
+            'order_number',
+            'image',
+            'assigned_to',
+            'created_at',
+            'updated_at',
+            'purchase_date',
+            'purchase_cost',
+            'last_audit_date',
+            'next_audit_date',
+            'warranty_months',
+            'checkout_counter',
+            'checkin_counter',
+            'requests_counter',
+            'byod',
+            'asset_eol_date',
+        ];
 
-        $asset_ids = $request->input('ids');
-        $assets = Asset::with('assignedTo', 'location', 'model')->find($asset_ids);
+
+        /**
+         * Make sure the column is allowed, and if it's a custom field, make sure we strip the custom_fields. prefix
+         */
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort_override = str_replace('custom_fields.', '', $request->input('sort'));
+
+        // This handles all of the pivot sorting below (versus the assets.* fields in the allowed_columns array)
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.id';
+
+        $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('assets.id', $asset_ids);
+
+        switch ($sort_override) {
+            case 'model':
+                $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets->OrderModelNumber($order);
+                break;
+            case 'category':
+                $assets->OrderCategory($order);
+                break;
+            case 'manufacturer':
+                $assets->OrderManufacturer($order);
+                break;
+            case 'company':
+                $assets->OrderCompany($order);
+                break;
+            case 'location':
+                $assets->OrderLocation($order);
+            case 'rtd_location':
+                $assets->OrderRtdLocation($order);
+                break;
+            case 'status_label':
+                $assets->OrderStatus($order);
+                break;
+            case 'supplier':
+                $assets->OrderSupplier($order);
+                break;
+            case 'assigned_to':
+                $assets->OrderAssigned($order);
+                break;
+            default:
+                $assets->orderBy($column_sort, $order);
+                break;
+        }
+
+        $assets = $assets->get();
 
         $models = $assets->unique('model_id');
         $modelNames = [];

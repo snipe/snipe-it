@@ -1,6 +1,9 @@
 {
     "private": true,
     "scripts": {
+        "contributors:add": "all-contributors add",
+        "contributors:check": "all-contributors check",
+        "contributors:generate": "all-contributors generate",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
@@ -13,6 +16,7 @@
         "node": ">=0.12"
     },
     "devDependencies": {
+        "all-contributors-cli": "^6.26.1",
         "axios": "^0.27.2",
         "babel-preset-latest": "^6.24.1",
         "jquery": "<3.6.0",

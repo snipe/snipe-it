@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Depreciere',
     'depreciates_on'	=> 'Depreciere la',
     'default_location'	=> 'Locatie implicita',
+    'default_location_phone' => 'Telefon Locație Implicit',
     'eol_date'			=> 'Data EOL',
     'eol_rate'			=> 'Rata EOL',
     'expected_checkin'  => 'Data de așteptare așteptată',

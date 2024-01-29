@@ -96,7 +96,7 @@ return [
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
     'unique_undeleted'     => 'Wartość :attribute musi być unikalna.',
     'non_circular'         => ':attribute nie może tworzyć odwołań cyklicznych.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute nie może być tablicą.',
     'disallow_same_pwd_as_user_fields' => 'Hasło nie może być takie samo jak nazwa użytkownika.',
     'letters'              => 'Hasło musi zawierać co najmniej jedną literę.',
     'numbers'              => 'Hasło musi zawierać co najmniej jedną cyfrę.',

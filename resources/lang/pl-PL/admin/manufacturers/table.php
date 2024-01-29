@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Adres WWW wsparcia technicznego',
     'warranty_lookup_url'   => 'Adres URL wyszukiwania gwarancji',
     'update'				=> 'Zaktualizuj Producenta',
-    'url'   				=> 'Adres WWW',
 
 );

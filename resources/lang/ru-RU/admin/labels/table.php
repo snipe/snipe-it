@@ -1,7 +1,13 @@
 <?php
 
 return [
-
+    'example_company'    => 'Тестовая компания Ограниченная',
+    'example_defaultloc' => 'Здание 1',
+    'example_category'   => 'Категория теста',
+    'example_location'   => 'Здание 2',
+    'example_manufacturer'  => 'Тест Manufacturing Inc.',
+    'example_model'      => 'Тестовая модель',
+    'example_supplier'   => 'Тестовая компания Ограниченная',
     'labels_per_page'    => 'Этикетки',
     'support_fields'     => 'Поля',
     'support_asset_tag'  => 'Тег',

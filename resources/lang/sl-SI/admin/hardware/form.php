@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Amortizacija',
     'depreciates_on'	=> 'Amortizacija na',
     'default_location'	=> 'Privzeta lokacija',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL datum',
     'eol_rate'			=> 'EOL stopnja',
     'expected_checkin'  => 'Predviden datum dobave',

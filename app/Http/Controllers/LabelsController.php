@@ -41,29 +41,29 @@ class LabelsController extends Controller
         $exampleAsset->status_id = 1;
 
         $exampleAsset->company = new Company([
-            'name' => 'Test Company Limited',
+            'name' => trans('admin/labels/table.example_company'),
             'phone' => '1-555-555-5555',
             'email' => 'company@example.com',
         ]);
 
         $exampleAsset->setRelation('assignedTo', new User(['first_name' => 'Luke', 'last_name' => 'Skywalker']));
-        $exampleAsset->defaultLoc = new Location(['name' => 'Building 1', 'phone' => '1-555-555-5555']);
-        $exampleAsset->location = new Location(['name' => 'Building 2', 'phone' => '1-555-555-5555']);
+        $exampleAsset->defaultLoc = new Location(['name' => trans('admin/labels/table.example_defaultloc'), 'phone' => '1-555-555-5555']);
+        $exampleAsset->location = new Location(['name' => trans('admin/labels/table.example_location'), 'phone' => '1-555-555-5555']);
 
         $exampleAsset->model = new AssetModel();
         $exampleAsset->model->id = 999999;
-        $exampleAsset->model->name = 'Test Model';
+        $exampleAsset->model->name = trans('admin/labels/table.example_model');
         $exampleAsset->model->model_number = 'MDL5678';
         $exampleAsset->model->manufacturer = new Manufacturer();
         $exampleAsset->model->manufacturer->id = 999999;
-        $exampleAsset->model->manufacturer->name = 'Test Manufacturing Inc.';
+        $exampleAsset->model->manufacturer->name = trans('admin/labels/table.example_manufacturer');
         $exampleAsset->model->manufacturer->support_email = 'support@test.com';
         $exampleAsset->model->manufacturer->support_phone = '1-555-555-5555';
         $exampleAsset->model->manufacturer->support_url = 'https://example.com';
-        $exampleAsset->supplier = new Supplier(['name' => 'Test Company Limited']);
+        $exampleAsset->supplier = new Supplier(['name' => trans('admin/labels/table.example_company')]);
         $exampleAsset->model->category = new Category();
         $exampleAsset->model->category->id = 999999;
-        $exampleAsset->model->category->name = 'Test Category';
+        $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {

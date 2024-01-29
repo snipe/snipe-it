@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Oznaka imovine',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Zadužen',
     'book_value'  	=> 'Trenutna vrednost',
     'change' 		=> 'U/I',
     'checkout_date' => 'Datum odjave',

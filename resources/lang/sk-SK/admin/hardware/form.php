@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Odpisovanie',
     'depreciates_on'	=> 'Plne odpísaný',
     'default_location'	=> 'Povodná lokalita',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Dátum EOL',
     'eol_rate'			=> 'Miera EOL',
     'expected_checkin'  => 'Očakávaný dátum prijatia',

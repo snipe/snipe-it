@@ -590,5 +590,7 @@ return [
     'action_permission_generic' => 'You do not have permission to :action this :item_type',
     'edit' => 'ويرايش',
     'action_source' => 'Action Source',
+    'or' => 'or',
+    'url'                   => 'نشانی اینترنتی',
 
 ];

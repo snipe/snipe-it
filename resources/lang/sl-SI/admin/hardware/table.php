@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Oznaka sredstva',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Dodeljena',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Prejeto/Izdano',
     'checkout_date' => 'Datum Izdaje',

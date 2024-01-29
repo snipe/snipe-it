@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Rajonas',
     'suppliers'             => 'Tiekėjai',
     'update'                => 'Atnaujinti tiekėją',
-    'url'                   => 'Internetinis puslapis',
     'view'                  => 'Peržiūrėti tiekėją',
     'view_assets_for'       => 'Peržiūrėti įrangą šiam',
     'zip'                   => 'Pašto kodas',

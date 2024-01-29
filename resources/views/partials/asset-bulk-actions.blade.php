@@ -6,7 +6,9 @@
       'id' => (isset($id_formname)) ? $id_formname : 'assetsBulkForm',
  ]) }}
 
-
+    {{-- The sort and order will only be used if the cookie is actually empty (like on first-use) --}}
+    <input name="sort" type="hidden" value="assets.id">
+    <input name="order" type="hidden" value="asc">
     <label for="bulk_actions">
         <span class="sr-only">
             {{ trans('button.bulk_actions') }}

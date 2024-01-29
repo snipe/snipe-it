@@ -651,7 +651,7 @@
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_date') }}
                                                     @if ($asset->purchase_date)
-														{!! $asset->asset_eol_date < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+							{!! $asset->asset_eol_date < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
                                                     @endif
                                                 </strong>
                                             </div>
@@ -988,6 +988,7 @@
                                         <tr>
                                             <th class="col-md-4">{{ trans('general.name') }}</th>
                                             <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
+                                            <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.expiration') }}</th>
                                             <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
                                         </tr>
                                         </thead>
@@ -1002,6 +1003,9 @@
                                                         @else
                                                             ------------
                                                         @endcan
+                                                    </td>
+                                                    <td>
+                                                        {{ Helper::getFormattedDateObject($seat->license->expiration_date, 'date', false) }}
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>

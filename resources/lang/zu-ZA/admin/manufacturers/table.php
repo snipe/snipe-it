@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'I-URL yokusekela',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Buyekeza umkhiqizi',
-    'url'   				=> 'I-URL',
 
 );

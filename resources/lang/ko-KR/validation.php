@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute 형식이 부정확 합니다.',
     'unique_undeleted'     => ':attribute 는 고유의 값만 가져야 합니다.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',

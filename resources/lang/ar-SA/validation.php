@@ -96,7 +96,7 @@ return [
     'url'                  => 'ان تنسيق :attribute غير صالح.',
     'unique_undeleted'     => ':attribute يجب ان تكون فريدة.',
     'non_circular'         => 'يجب ألا تنشئ السمة مرجعًا دائريًا.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute لا يمكن أن يكون مصفوف.',
     'disallow_same_pwd_as_user_fields' => 'كلمة المرور لا يمكن أن تكون نفس اسم المستخدم.',
     'letters'              => 'يجب أن تحتوي كلمة المرور على حرف واحد على الأقل.',
     'numbers'              => 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.',

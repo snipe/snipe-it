@@ -12,7 +12,7 @@ return [
     'remember_me'                   => 'Kom ihåg mig',
     'username_help_top'                 => 'Ange ditt <strong>användarnamn</strong> för att få en länk för att återställa lösenordet.',
     'username_help_bottom'          => 'Ditt användarnamn och e-postadress <em>kan</em> vara samma, men kanske inte är beroende på din konfiguration. Om du inte kommer ihåg ditt användarnamn, kontakta din administratör. <br><br><strong>Användarnamn utan en associerad e-postadress kommer inte att få en länk för att återställa lösenordet.</strong> ',
-    'google_login'                  => 'Eller logga in med Google Workspace',
+    'google_login'                  => 'Logga in med Google Workspace',
     'google_login_failed'           => 'Google-inloggning misslyckades, försök igen.',
 
 ];

@@ -161,6 +161,40 @@
 
     });
 
+    // Initialize sort-order for bulk actions (label-generation) for snipe-tables
+    $('.snipe-table').each(function (i, table) {
+        table_cookie_segment = $(table).data('cookie-id-table');
+        sort = '';
+        order = '';
+        cookies = document.cookie.split(";");
+        for(i in cookies) {
+            cookiedef = cookies[i].split("=", 2);
+            cookiedef[0] = cookiedef[0].trim();
+            if (cookiedef[0] == table_cookie_segment + ".bs.table.sortOrder") {
+                order = cookiedef[1];
+            }
+            if (cookiedef[0] == table_cookie_segment + ".bs.table.sortName") {
+                sort = cookiedef[1];
+            }
+        }
+        if (sort && order) {
+            domnode = $($(this).data('bulk-form-id')).get(0);
+            if ( domnode && domnode.elements && domnode.elements.sort ) {
+                domnode.elements.sort.value = sort;
+                domnode.elements.order.value = order;
+            }
+        }
+    });
+
+    // If sort order changes, update the sort-order for bulk-actions (for label-generation)
+    $('.snipe-table').on('sort.bs.table', function (event, name, order) {
+       domnode = $($(this).data('bulk-form-id')).get(0);
+       // make safe in case there isn't a bulk-form-id, or it's not found, or has no 'sort' element
+       if ( domnode && domnode.elements && domnode.elements.sort ) {
+           domnode.elements.sort.value = name;
+           domnode.elements.order.value = order;
+       }
+    });
 
 
     

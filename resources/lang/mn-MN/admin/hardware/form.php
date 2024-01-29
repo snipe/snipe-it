@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Элэгдэл',
     'depreciates_on'	=> 'On',
     'default_location'	=> 'Анхдагч байршил',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL Огноо',
     'eol_rate'			=> 'EOL Rate',
     'expected_checkin'  => 'Хүлээгдэж буй хугацаа',

@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Stödadress',
     'warranty_lookup_url'   => 'Garanti Lookup URL',
     'update'				=> 'Uppdatera Tillverkare',
-    'url'   				=> 'URL',
 
 );

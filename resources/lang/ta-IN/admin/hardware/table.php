@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'சொத்து டேக்',
     'asset_model'       => 'மாதிரி',
+    'assigned_to'   => 'ஒதுக்கப்படும்',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'உள்ளே வெளியே',
     'checkout_date' => 'புதுப்பிப்பு தேதி',

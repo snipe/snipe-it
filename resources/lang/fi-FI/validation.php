@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute muotoilu on virheellinen.',
     'unique_undeleted'     => ':attribute on oltava ainutlaatuinen.',
     'non_circular'         => ':attribute ei saa luoda kehäviittausta.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute ei voi olla taulukko.',
     'disallow_same_pwd_as_user_fields' => 'Salasana ei voi olla sama kuin käyttäjätunnus.',
     'letters'              => 'Salasanan tulee sisältää vähintään yksi kirjain.',
     'numbers'              => 'Salasanan tulee sisältää vähintään yksi numero.',

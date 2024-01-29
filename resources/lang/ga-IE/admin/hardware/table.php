@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Clib Sócmhainní',
     'asset_model'       => 'Mionsamhail',
+    'assigned_to'   => 'Sannadh Chun',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Amach',
     'checkout_date' => 'Dáta Seiceáil',

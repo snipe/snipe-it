@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Видано',
     'asset_expected_checkin'    => 'Очікуваний чек',
     'date'                      => 'Дата:',
+    'phone'                     => 'Телефон місця розташування',
     'signed_by_asset_auditor'   => 'Підписано (Аудитор Активів):',
     'signed_by_finance_auditor' => 'Підписано (Фінансовий Аудитор):',
     'signed_by_location_manager' => 'Підписано (Менеджер Місцезнаходження):',

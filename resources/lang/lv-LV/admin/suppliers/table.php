@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Valsts',
     'suppliers'             => 'Piegādātāji',
     'update'                => 'Atjaunināt piegādātāju',
-    'url'                   => 'URL',
     'view'                  => 'Skatīt piegādātāju',
     'view_assets_for'       => 'Skatīt aktīvu par',
     'zip'                   => 'Pasta indekss',

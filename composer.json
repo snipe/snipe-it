@@ -39,6 +39,7 @@
     "intervention/image": "^2.5",
     "javiereguiluz/easyslugger": "^1.0",
     "laravel/framework": "^10.0",
+    "laravel-notification-channels/microsoft-teams": "^1.1",
     "laravel/helpers": "^1.4",
     "laravel/passport": "^11.0",
     "laravel/slack-notification-channel": "^2.3",

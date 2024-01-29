@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Nemate ovlašćenje da :action ovu :item_type',
     'edit' => 'uredi',
     'action_source' => 'Izvor aktivnosti',
+    'or' => 'ili',
+    'url'                   => 'URL',
 
 ];

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'الاستهلاك',
     'depreciates_on'	=> 'ينتهي الاستهلاك في',
     'default_location'	=> 'الموقع الافتراضي',
+    'default_location_phone' => 'هاتف الموقع الافتراضي',
     'eol_date'			=> 'تاريخ نهاية العمر',
     'eol_rate'			=> 'معدل انتهاء العمر',
     'expected_checkin'  => 'تاريخ الادخال المتوقع',

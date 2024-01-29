@@ -19,7 +19,6 @@ return array(
     'state'                 => 'സംസ്ഥാനം',
     'suppliers'             => 'Suppliers',
     'update'                => 'Update Supplier',
-    'url'                   => 'URL',
     'view'                  => 'View Supplier',
     'view_assets_for'       => 'View Assets for',
     'zip'                   => 'സിപ് / പോസ്റ്റൽ കോഡ്',

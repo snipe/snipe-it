@@ -499,5 +499,7 @@ return [
     'action_permission_generic' => 'Sinulla ei ole oikeuksia :action this :item_type',
     'edit' => 'muokkaa',
     'action_source' => 'Toiminnan Lähde',
+    'or' => 'tai',
+    'url'                   => 'URL',
 
 ];

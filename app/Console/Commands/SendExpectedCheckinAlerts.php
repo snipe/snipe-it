@@ -43,7 +43,7 @@ class SendExpectedCheckinAlerts extends Command
     public function handle()
     {
         $settings = Setting::getSettings();
-        $whenNotify = Carbon::now()->addDays(7);
+        $whenNotify = Carbon::now();
         $assets = Asset::with('assignedTo')->whereNotNull('assigned_to')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
 
         $this->info($whenNotify.' is deadline');

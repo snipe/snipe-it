@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Wydane',
     'asset_expected_checkin'    => 'Przewidywana data zwrotu',
     'date'                      => 'Data:',
+    'phone'                     => 'Telefon lokalizacji',
     'signed_by_asset_auditor'   => 'Podpisane przez (Audytor aktywów):',
     'signed_by_finance_auditor' => 'Podpisane przez (Audytor finansowy):',
     'signed_by_location_manager' => 'Podpisane przez (Audytor Lokalizacji):',
