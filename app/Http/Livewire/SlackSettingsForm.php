@@ -154,7 +154,7 @@ class SlackSettingsForm extends Component
     }
     public function googleWebhookTest(){
        $url = $this->webhook_endpoint;
-       $data = [ 'text' => trans('general.webhook_test_msg', ['app' => $this->webhook_name])];
+       $data = json_encode([ 'text' => trans('general.webhook_test_msg', ['app' => $this->webhook_name])]);
        $headers = [
            'Authorization' => 'Bearer'. 'AIzaSyBu-61gEOhYGfrmT3fHQj6vS8TDWpo1B5U',
            'Content-Type'  => 'application/json',
