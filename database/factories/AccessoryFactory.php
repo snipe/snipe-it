@@ -133,4 +133,11 @@ class AccessoryFactory extends Factory
             ]);
         });
     }
+
+    public function requiringAcceptance()
+    {
+        return $this->afterCreating(function ($accessory) {
+            $accessory->category->update(['require_acceptance' => 1]);
+        });
+    }
 }

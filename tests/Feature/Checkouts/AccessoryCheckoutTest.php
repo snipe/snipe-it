@@ -3,7 +3,10 @@
 namespace Tests\Feature\Checkouts;
 
 use App\Models\Accessory;
+use App\Models\Actionlog;
 use App\Models\User;
+use App\Notifications\CheckoutAccessoryNotification;
+use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -52,16 +55,41 @@ class AccessoryCheckoutTest extends TestCase
         $this->assertTrue($accessory->users->contains($user));
     }
 
-    public function testUserSentEulaUponCheckoutIfAcceptanceRequired()
+    public function testUserSentNotificationUponCheckout()
     {
-        $this->markTestIncomplete();
+        Notification::fake();
+
+        $accessory = Accessory::factory()->requiringAcceptance()->create();
+        $user = User::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAccessories()->create())
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_to' => $user->id,
+            ]);
+
+        Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
     }
 
     public function testActionLogCreatedUponCheckout()
     {
-        $this->markTestIncomplete();
+        $accessory = Accessory::factory()->create();
+        $actor = User::factory()->checkoutAccessories()->create();
+        $user = User::factory()->create();
 
-        // check 'note' is saved in action_logs
-        // check 'action_source' is saved in action_logs as gui
+        $this->actingAs($actor)
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_to' => $user->id,
+                'note' => 'oh hi there',
+            ]);
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkout',
+            'target_id' => $user->id,
+            'target_type' => User::class,
+            'item_id' => $accessory->id,
+            'item_type' => Accessory::class,
+            'user_id' => $actor->id,
+            'note' => 'oh hi there',
+        ]);
     }
 }
