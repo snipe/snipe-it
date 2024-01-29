@@ -3,7 +3,6 @@
 namespace Tests\Feature\Checkouts;
 
 use App\Models\Accessory;
-use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
