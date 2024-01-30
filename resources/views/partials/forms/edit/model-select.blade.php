@@ -5,12 +5,11 @@
 
     <div class="col-md-7{{  ((isset($field_req)) || ((isset($required) && ($required =='true')))) ?  ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="models" data-placeholder="{{ trans('general.select_model') }}" name="{{ $fieldname }}" style="width: 100%" id="model_select_id" aria-label="{{ $fieldname }}"{!!  (isset($field_req) ? ' data-validation="required" required' : '') !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
-            {{  ((isset($multiple)) && ($multiple=='true')) ? " multiple='multiple'" : '' }}
                 @if($model_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                     <option value="{{ $model_id }}" selected="selected" role="option" aria-selected="true">
                         {{ (\App\Models\AssetModel::find($model_id)) ? \App\Models\AssetModel::find($model_id)->name : '' }}
                     </option>
-            @endisset
+                @endif
         </select>
     </div>
     <div class="col-md-1 col-sm-1 text-left">
