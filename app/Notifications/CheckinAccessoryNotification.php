@@ -160,7 +160,6 @@ class CheckinAccessoryNotification extends Notification
                                 trans('mail.checked_into').': '.$item->location->name ? $item->location->name : '',
                                 trans('admin/consumables/general.remaining').': '.$item->numRemaining(),
                                 trans('admin/hardware/form.notes').": ".$note ?: '',
-
                             )
                                 ->onClick(route('accessories.show', $item->id))
                         )
