@@ -39,7 +39,7 @@ class ComponentObserver
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         if($component->imported) {
-            $logAction->note = trans('general.importer.import_note');
+            $logAction->setActionSource('importer');
         }
         $logAction->logaction('create');
     }
