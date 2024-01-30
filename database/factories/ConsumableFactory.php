@@ -109,4 +109,11 @@ class ConsumableFactory extends Factory
             ]);
         });
     }
+
+    public function requiringAcceptance()
+    {
+        return $this->afterCreating(function (Consumable $consumable) {
+            $consumable->category->update(['require_acceptance' => 1]);
+        });
+    }
 }
