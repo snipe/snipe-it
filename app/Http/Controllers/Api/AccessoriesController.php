@@ -278,7 +278,7 @@ class AccessoriesController extends Controller
     public function checkout(Request $request, $accessoryId)
     {
         // Check if the accessory exists
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
         }
 
