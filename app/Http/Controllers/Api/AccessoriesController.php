@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\AccessoriesTransformer;
@@ -302,7 +303,7 @@ class AccessoriesController extends Controller
                 'note' => $request->get('note'),
             ]);
 
-            $accessory->logCheckout($request->input('note'), $user);
+            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
         }
