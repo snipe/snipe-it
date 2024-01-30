@@ -636,8 +636,11 @@ class AssetsController extends Controller
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
             ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
+		$asset->location_id = $request->get('rtd_location_id') : null;
 
+
+            ($request->filled('assigned_to') && $request->filled('assigned_type')) ?
+		    $asset->assigned_type = $request->get('assigned_type') : $asset->assigned_type = 'App\Models\User';
             /**
             * this is here just legacy reasons. Api\AssetController
             * used image_source  once to allow encoded image uploads.
