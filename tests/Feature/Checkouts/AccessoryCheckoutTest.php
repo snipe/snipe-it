@@ -3,6 +3,7 @@
 namespace Tests\Feature\Checkouts;
 
 use App\Models\Accessory;
+use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
@@ -78,14 +79,18 @@ class AccessoryCheckoutTest extends TestCase
                 'note' => 'oh hi there',
             ]);
 
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkout',
-            'target_id' => $user->id,
-            'target_type' => User::class,
-            'item_id' => $accessory->id,
-            'item_type' => Accessory::class,
-            'user_id' => $actor->id,
-            'note' => 'oh hi there',
-        ]);
+        $this->assertEquals(
+            1,
+            Actionlog::where([
+                'action_type' => 'checkout',
+                'target_id' => $user->id,
+                'target_type' => User::class,
+                'item_id' => $accessory->id,
+                'item_type' => Accessory::class,
+                'user_id' => $actor->id,
+                'note' => 'oh hi there',
+            ])->count(),
+            'Log entry either does not exist or there are more than expected'
+        );
     }
 }
