@@ -37,11 +37,11 @@ class SlackSettingsForm extends Component
 
     public function mount() {
         $this->webhook_text= [
-            "slack" => array(
+             "slack" => array(
                 "name" => trans('admin/settings/general.slack') ,
-            "icon" => 'fab fa-slack',
-            "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
-            "link" => 'https://api.slack.com/messaging/webhooks',
+                "icon" => 'fab fa-slack',
+                "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
+                "link" => 'https://api.slack.com/messaging/webhooks',
                 "test" => "testWebhook"
         ),
             "general"=> array(

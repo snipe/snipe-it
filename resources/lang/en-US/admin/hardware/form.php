@@ -16,7 +16,7 @@ return [
     'checkedout_to'		=> 'Checked Out To',
     'checkout_date'		=> 'Checkout Date',
     'checkin_date'		=> 'Checkin Date',
-    'checkout_to'		=> 'Checkout to',
+    'checkout_to'		=> 'Checked out to',
     'cost'				=> 'Purchase Cost',
     'create'			=> 'Create Asset',
     'date'				=> 'Purchase Date',
