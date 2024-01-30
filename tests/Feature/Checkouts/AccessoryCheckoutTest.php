@@ -22,10 +22,8 @@ class AccessoryCheckoutTest extends TestCase
 
     public function testValidation()
     {
-        $accessory = Accessory::factory()->create();
-
         $this->actingAs(User::factory()->checkoutAccessories()->create())
-            ->post(route('accessories.checkout.store', $accessory), [
+            ->post(route('accessories.checkout.store', Accessory::factory()->create()), [
                 // missing assigned_to
             ])
             ->assertSessionHas('error');
@@ -43,7 +41,6 @@ class AccessoryCheckoutTest extends TestCase
     public function testAccessoryCanBeCheckedOut()
     {
         $accessory = Accessory::factory()->create();
-
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
