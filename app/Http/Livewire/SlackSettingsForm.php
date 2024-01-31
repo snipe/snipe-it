@@ -79,6 +79,9 @@ class SlackSettingsForm extends Component
         $this->webhook_channel = $this->setting->webhook_channel;
         $this->webhook_botname = $this->setting->webhook_botname;
         $this->webhook_options = $this->setting->webhook_selected;
+        if($this->webhook_selected == 'microsoft' ||$this->webhook_selected == 'google'){
+            $this->webhook_channel = 'NA';
+        }
 
 
         if($this->setting->webhook_endpoint != null && $this->setting->webhook_channel != null){
@@ -103,6 +106,10 @@ class SlackSettingsForm extends Component
             $this->isDisabled= '';
             $this->save_button = trans('general.save');
         }
+        if($this->webhook_selected == 'microsoft' ||$this->webhook_selected == 'google'){
+            $this->webhook_channel = 'NA';
+        }
+
     }
 
     private function isButtonDisabled() {
