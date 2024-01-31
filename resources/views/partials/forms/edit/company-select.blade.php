@@ -15,6 +15,7 @@
     </div>
 
 
+@else
     <!-- full company support is enabled or this user is a superadmin -->
     <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
