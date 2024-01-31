@@ -106,7 +106,7 @@ class SlackSettingsForm extends Component
             $this->isDisabled= '';
             $this->save_button = trans('general.save');
         }
-        if($this->webhook_selected == 'microsoft' ||$this->webhook_selected == 'google'){
+        if($this->webhook_selected == 'microsoft' || $this->webhook_selected == 'google'){
             $this->webhook_channel = 'NA';
         }
 
