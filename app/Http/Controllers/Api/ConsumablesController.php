@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ConsumablesTransformer;
@@ -11,6 +12,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ConsumablesController extends Controller
 {
@@ -290,17 +292,9 @@ class ConsumablesController extends Controller
                 ]
             );
 
-            // Log checkout event
-            $logaction = $consumable->logCheckout($request->input('note'), $user);
-            $data['log_id'] = $logaction->id;
-            $data['eula'] = $consumable->getEula();
-            $data['first_name'] = $user->first_name;
-            $data['item_name'] = $consumable->name;
-            $data['checkout_date'] = $logaction->created_at;
-            $data['note'] = $logaction->note;
-            $data['require_acceptance'] = $consumable->requireAcceptance();
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
 
     }
 
