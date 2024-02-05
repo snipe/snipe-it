@@ -356,6 +356,7 @@ class SettingsController extends Controller
         }
 
         $setting->default_eula_text = $request->input('default_eula_text');
+        $setting->load_remote = $request->input('load_remote', 0);
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
