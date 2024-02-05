@@ -35,7 +35,7 @@
                 </span>
                 <span class="hidden-xs hidden-sm">
                     {{ trans('general.assets') }}
-                    {!! (($supplier->assets) && ($supplier->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                    {!! ($supplier->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($supplier->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                </span>
 
             </a>
@@ -48,7 +48,7 @@
                     </span>
               <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
-                          {!! (($supplier->accessories) && ($supplier->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->accessories->count()).'</badge>' : '' !!}
+                          {!! ($supplier->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($supplier->accessories->count()).'</badge>' : '' !!}
                     </span>
             </a>
           </li>
@@ -60,7 +60,7 @@
                     </span>
               <span class="hidden-xs hidden-sm">
                           {{ trans('general.licenses') }}
-                          {!! (($supplier->licenses) && ($supplier->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->licenses->count()).'</badge>' : '' !!}
+                          {!! ($supplier->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($supplier->licenses->count()).'</badge>' : '' !!}
                     </span>
             </a>
           </li>
@@ -72,7 +72,7 @@
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
-                        {!! (($supplier->components) && ($supplier->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->components->count()).'</badge>' : '' !!}
+                        {!! ($supplier->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($supplier->components->count()).'</badge>' : '' !!}
                     </span>
                 </a>
             </li>
@@ -84,7 +84,7 @@
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
-                        {!! (($supplier->consumables) && ($supplier->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->consumables->count()).'</badge>' : '' !!}
+                        {!! ($supplier->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($supplier->consumables->count()).'</badge>' : '' !!}
                     </span>
                 </a>
             </li>
@@ -96,7 +96,7 @@
                     </span>
               <span class="hidden-xs hidden-sm">
                         {{ trans('admin/asset_maintenances/general.asset_maintenances') }}
-                        {!! (($supplier->asset_maintenances) && ($supplier->asset_maintenances->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->asset_maintenances->count()).'</badge>' : '' !!}
+                        {!! ($supplier->asset_maintenances->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($supplier->asset_maintenances->count()).'</badge>' : '' !!}
                     </span>
             </a>
           </li>
