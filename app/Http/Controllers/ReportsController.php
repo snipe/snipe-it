@@ -616,7 +616,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('url')) {
-                $header[] = trans('admin/manufacturers/table.url');
+                $header[] = trans('general.url');
             }
 
 
