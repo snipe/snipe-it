@@ -61,9 +61,9 @@
                             <div class="col-md-9 required" wire:ignore>
 
                             @if (Helper::isDemoMode())
-								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'), 'microsoft' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:100%', 'disabled')) }}
+								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:100%', 'disabled')) }}
                             @else
-                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'), 'microsoft' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:100%')) }}
+                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:100%')) }}
                             @endif
 
                             </div>
@@ -90,23 +90,25 @@
 
 
                         <!-- Webhook channel -->
-                        <div class="form-group{{ $errors->has('webhook_channel') ? ' error' : '' }}">
-                            <div class="col-md-2">
-                                {{ Form::label('webhook_channel', trans('admin/settings/general.webhook_channel',['app' => $webhook_name ])) }}
-                            </div>
-                            <div class="col-md-9 required">
-                                    <input type="text" wire:model.lazy="webhook_channel" class="form-control" placeholder="#IT-Ops" value="{{ old('webhook_channel', $webhook_channel) }}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                        @if($webhook_selected != 'microsoft' && $webhook_selected!= 'google')
+                            <div class="form-group{{ $errors->has('webhook_channel') ? ' error' : '' }}">
+                                <div class="col-md-2">
+                                    {{ Form::label('webhook_channel', trans('admin/settings/general.webhook_channel',['app' => $webhook_name ])) }}
+                                </div>
+                                <div class="col-md-9 required">
+                                        <input type="text" wire:model.lazy="webhook_channel" class="form-control" placeholder="#IT-Ops" value="{{ old('webhook_channel', $webhook_channel) }}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
 
-                                {!! $errors->first('webhook_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                    {!! $errors->first('webhook_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         @if (Helper::isDemoMode())
                             @include('partials.forms.demo-mode')
                         @endif
 
                         <!-- Webhook botname -->
-                        @if($webhook_selected != 'microsoft')
+                        @if($webhook_selected != 'microsoft' && $webhook_selected != 'google')
                             <div class="form-group{{ $errors->has('webhook_botname') ? ' error' : '' }}">
                                 <div class="col-md-2">
                                     {{ Form::label('webhook_botname', trans('admin/settings/general.webhook_botname',['app' => $webhook_name ])) }}
@@ -122,14 +124,11 @@
                         @endif
 
                         <!--Webhook Integration Test-->
+
                             @if($webhook_endpoint != null && $webhook_channel != null)
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-9">
-                                        @if($webhook_selected == "microsoft")
-                                        <a href="#" wire:click.prevent="msTeamTestWebhook"
-                                        @else
-                                            <a href="#" wire:click.prevent="testWebhook"
-                                        @endif
+                                        <a href="#" wire:click.prevent="{{$webhook_test}}"
                                            class="btn btn-default btn-sm pull-left">
                                             <i class="{{$webhook_icon}}" aria-hidden="true"></i>
                                                 {!! trans('admin/settings/general.webhook_test',['app' => ucwords($webhook_selected) ]) !!}
