@@ -352,7 +352,6 @@ class Setting extends Model
             'ldap_client_tls_cert',
             'ldap_default_group',
             'ldap_dept',
-            'ldap_emp_num',
             'ldap_phone_field',
             'ldap_jobtitle',
             'ldap_manager',
