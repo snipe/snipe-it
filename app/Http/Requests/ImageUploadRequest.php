@@ -109,10 +109,11 @@ class ImageUploadRequest extends Request
                     \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
 
                     try {
-                        $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
+                        $upload = Image::make($image->getRealPath())->setFileInfoFromPath($image->getRealPath())->resize(null, $w, function ($constraint) {
                             $constraint->aspectRatio();
                             $constraint->upsize();
-                        });
+                        })->orientate();
+
                     } catch(NotReadableException $e) {
                         \Log::debug($e);
                         $validator = \Validator::make([], []);
@@ -138,10 +139,8 @@ class ImageUploadRequest extends Request
                         $cleanSVG = $sanitizer->sanitize($dirtySVG);
 
                         try {
-                            \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
                             Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
                         } catch (\Exception $e) {
-                            \Log::debug('Upload no workie :( ');
                             \Log::debug($e);
                         }
                     }
