@@ -21,7 +21,7 @@ class AccessoryCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testValidation()
+    public function testValidationWhenCheckingOutAccessory()
     {
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()), [

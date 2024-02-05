@@ -9,6 +9,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\GoogleChat\Card;
+use NotificationChannels\GoogleChat\GoogleChatChannel;
+use NotificationChannels\GoogleChat\GoogleChatMessage;
+use NotificationChannels\GoogleChat\Section;
+use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
@@ -38,6 +43,10 @@ class CheckinAccessoryNotification extends Notification
     public function via()
     {
         $notifyBy = [];
+        if (Setting::getSettings()->webhook_selected == 'google'){
+
+            $notifyBy[] = GoogleChatChannel::class;
+        }
 
         if (Setting::getSettings()->webhook_selected == 'microsoft'){
 
@@ -131,6 +140,32 @@ class CheckinAccessoryNotification extends Notification
             ->fact(trans('mail.Accessory_Checkin_Notification')." by ", $admin->present()->fullName())
             ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
             ->fact(trans('mail.notes'), $note ?: '');
+    }
+    public function toGoogleChat()
+    {
+        $item = $this->item;
+        $note = $this->note;
+
+        return GoogleChatMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->card(
+                Card::create()
+                    ->header(
+                        '<strong>'.trans('mail.Accessory_Checkin_Notification').'</strong>' ?: '',
+                        htmlspecialchars_decode($item->present()->name) ?: '',
+                    )
+                    ->section(
+                        Section::create(
+                            KeyValue::create(
+                                trans('mail.checked_into').': '.$item->location->name ? $item->location->name : '',
+                                trans('admin/consumables/general.remaining').': '.$item->numRemaining(),
+                                trans('admin/hardware/form.notes').": ".$note ?: '',
+                            )
+                                ->onClick(route('accessories.show', $item->id))
+                        )
+                    )
+            );
+
     }
 
     /**

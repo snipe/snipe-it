@@ -42,6 +42,7 @@ return [
     'checkin_date' => 'Checkin Date:',
     'checkout_date' => 'Checkout Date:',
     'checkedout_from' => 'Checked out from',
+    'checkedin_from'  => 'Checked in from',
     'checked_into' => 'Checked into',
     'click_on_the_link_accessory' => 'Please click on the link at the bottom to confirm that you have received the accessory.',
     'click_on_the_link_asset' => 'Please click on the link at the bottom to confirm that you have received the asset.',

@@ -76,7 +76,6 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
         }
 
-
         $admin_user = Auth::user();
         $assigned_to = e($request->input('assigned_to'));
 

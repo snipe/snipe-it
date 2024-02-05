@@ -70,6 +70,7 @@ return [
     'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy',
     'general_settings_help'     => 'Default EULA and more',
     'generate_backup'			=> 'Generate Backup',
+    'google_workspaces'         => 'Google Workspaces',
     'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'label_logo'                => 'Label Logo',
