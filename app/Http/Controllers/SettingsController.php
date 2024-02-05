@@ -639,18 +639,18 @@ class SettingsController extends Controller
             // Be careful - this could be a negative number
             $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
             
-            // Grab all of the assets that have an existing next_audit_date
-            $assets = Asset::whereNotNull('next_audit_date')->get();
+            // Grab all assets that have an existing next_audit_date, chunking to handle very large datasets
+            Asset::whereNotNull('next_audit_date')->chunk(20, function ($assets) use ($audit_diff_months) {
 
-            // Update all of the assets' next_audit_date values
-            foreach ($assets as $asset) {
-
-                if ($asset->next_audit_date != '') {
-                    $old_next_audit = new \DateTime($asset->next_audit_date);
-                    $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
-                    $asset->forceSave();
+                // Update assets' next_audit_date values
+                foreach ($assets as $asset) {
+                    if ($asset->next_audit_date != '') {
+                        $old_next_audit = new \DateTime($asset->next_audit_date);
+                        $asset->next_audit_date = $old_next_audit->modify($audit_diff_months . ' month')->format('Y-m-d');
+                        $asset->forceSave();
+                    }
                 }
-            }
+            });
         }
 
         $alert_email = rtrim($request->input('alert_email'), ',');
