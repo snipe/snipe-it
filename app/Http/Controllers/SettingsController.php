@@ -640,7 +640,7 @@ class SettingsController extends Controller
             $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
             
             // Grab all assets that have an existing next_audit_date, chunking to handle very large datasets
-            Asset::whereNotNull('next_audit_date')->chunk(20, function ($assets) use ($audit_diff_months) {
+            Asset::whereNotNull('next_audit_date')->chunk(200, function ($assets) use ($audit_diff_months) {
 
                 // Update assets' next_audit_date values
                 foreach ($assets as $asset) {
