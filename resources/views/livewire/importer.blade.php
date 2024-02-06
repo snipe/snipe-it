@@ -135,8 +135,7 @@
                                                     </button>
                                                     <a href="#" wire:click="$set('activeFile',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
-                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span>
-                                                    </button>
+                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                                     </a>
                                     			</td>
                                     		</tr>
