@@ -113,6 +113,14 @@ final class Company extends SnipeModel
         }
     }
 
+    /**
+     * Get the company id for the current user taking into
+     * account the full multiple company support setting
+     * and if the current user is a super user.
+     *
+     * @param $unescaped_input
+     * @return int|mixed|string|null
+     */
     public static function getIdForCurrentUser($unescaped_input)
     {
         if (! static::isFullMultipleCompanySupportEnabled()) {
