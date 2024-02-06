@@ -646,7 +646,7 @@ class SettingsController extends Controller
             $affected = Asset::whereNotNull('next_audit_date')
                 ->whereNull('deleted_at')
                 ->update(
-                    ['next_audit_date' => DB::raw('DATE_ADD(`next_audit_date`, INTERVAL '.$audit_diff_months.' MONTH)')]
+                    ['next_audit_date' => DB::raw('DATE_ADD(next_audit_date, INTERVAL '.$audit_diff_months.' MONTH)')]
             );
 
             \Log::debug($affected .' assets affected by audit interval update');
