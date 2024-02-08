@@ -92,8 +92,11 @@ class CustomFieldset extends Model
 
             array_push($rule, $field->attributes['format']);
             $rules[$field->db_column_name()] = $rule;
-            //add not_array to rules for all fields
-            $rules[$field->db_column_name()][] = 'not_array';
+            // add not_array to rules for all fields
+            // condition added to fix issue with model default updates
+            if ($field->element != 'checkbox') {
+                $rules[$field->db_column_name()][] = 'not_array';
+            }
         }
 
         return $rules;

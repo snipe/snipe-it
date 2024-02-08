@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
@@ -513,9 +514,8 @@ class AssetModelsController extends Controller
 
         $validator = Validator::make($data, $rules);
 
-        // Okay, this is the problem. Seems to be failing every time, kind of makes sense because it looks like
-        // $rules is an empty array, but I need to wrap my head around this entire method a little more.
         if($validator->fails()){
+            Log::debug($validator->errors());
             return false;
         }
 
