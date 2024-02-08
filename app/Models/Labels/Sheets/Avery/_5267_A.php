@@ -43,7 +43,7 @@ class _5267_A extends _5267
             static::writeText(
                 $pdf, $record->get('title'),
                 $pa->x1, $pa->y1,
-                'freesans', '', self::TITLE_SIZE, 'L',
+                $this->variable_font, '', self::TITLE_SIZE, 'L',
                 $pa->w, self::TITLE_SIZE, true, 0
             );
         }
@@ -55,7 +55,7 @@ class _5267_A extends _5267
                 static::writeText(
                     $pdf, $field['value'],
                     $pa->x1, $fieldY,
-                    'freemono', 'B', self::FIELD_SIZE, 'C',
+                    $this->mono_font, 'B', self::FIELD_SIZE, 'C',
                     $pa->w, self::FIELD_SIZE, true, 0, 0.01
                 );
             }

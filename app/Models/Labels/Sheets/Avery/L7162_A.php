@@ -45,7 +45,7 @@ class L7162_A extends L7162
             static::writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $pa->y2 - self::TAG_SIZE,
-                'freemono', 'b', self::TAG_SIZE, 'C',
+                $this->mono_font, 'b', self::TAG_SIZE, 'C', //was 'freemono'
                 $barcodeSize, self::TAG_SIZE, true, 0
             );
             static::write2DBarcode(
@@ -59,7 +59,7 @@ class L7162_A extends L7162
             static::writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $pa->y1,
-                'freemono', 'b', self::TITLE_SIZE, 'L',
+                $this->mono_font, 'b', self::TITLE_SIZE, 'L', //was 'freemono'
                 $barcodeSize, self::TITLE_SIZE, true, 0
             );
             $titleShiftX = $barcodeSize;
@@ -69,17 +69,19 @@ class L7162_A extends L7162
             static::writeText(
                 $pdf, $record->get('title'),
                 $currentX + $titleShiftX, $currentY,
-                'freesans', '', self::TITLE_SIZE, 'L',
+                $this->variable_font, '', self::TITLE_SIZE, 'L', //was 'freesans'
                 $usableWidth, self::TITLE_SIZE, true, 0
             );
             $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
         }
 
+        // FONT FAMILY WORK:
+        // >>>>> WORKED'cid0cs', // 'unifont15104' // TOTAL DISASTER, // 'cid0cs', /* ALL FOUR!*/  // 'cid0ct', (3/4) // 'cid0cs'/* ALL FOUR!!!!! */,//'cid0jp' (3/4!), // 'cid0jp' (3/4!), //'cid0kr' (almost!), //'droidsansfallback', //  'couriernew', //'notosansmonocjkscvf', //'notosansmono', //'msungstdlight', // 'freeserif', // 'unifont15104', // 'robotomono', // $fontFamily,
         foreach ($record->get('fields') as $field) {
             static::writeText(
                 $pdf, $field['label'],
                 $currentX, $currentY,
-                'freesans', '', self::LABEL_SIZE, 'L',
+                $this->variable_font, '', self::LABEL_SIZE, 'L', // also was 'freesans'
                 $usableWidth, self::LABEL_SIZE, true, 0
             );
             $currentY += self::LABEL_SIZE + self::LABEL_MARGIN;
@@ -87,7 +89,7 @@ class L7162_A extends L7162
             static::writeText(
                 $pdf, $field['value'],
                 $currentX, $currentY,
-                'freemono', 'B', self::FIELD_SIZE, 'L',
+                $this->mono_font, 'B', self::FIELD_SIZE, 'L', // also was freemono?
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.3
             );
             $currentY += self::FIELD_SIZE + self::FIELD_MARGIN;

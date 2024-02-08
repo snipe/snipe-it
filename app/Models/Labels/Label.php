@@ -16,6 +16,9 @@ use TypeError;
  */
 abstract class Label
 {
+    public string $variable_font;
+    public string $mono_font;
+
     /**
      * Returns the unit of measure used
      * 'pt', 'mm', 'cm', 'in'

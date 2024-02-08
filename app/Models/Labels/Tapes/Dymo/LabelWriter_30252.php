@@ -40,7 +40,7 @@ class LabelWriter_30252 extends LabelWriter
             static::writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $pa->y2 - self::TAG_SIZE,
-                'freemono', 'b', self::TAG_SIZE, 'C',
+                $this->mono_font, 'b', self::TAG_SIZE, 'C',
                 $barcodeSize, self::TAG_SIZE, true, 0
             );
             static::write2DBarcode(
@@ -54,7 +54,7 @@ class LabelWriter_30252 extends LabelWriter
             static::writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $pa->y2 - self::TAG_SIZE,
-                'freemono', 'b', self::TAG_SIZE, 'R',
+                $this->mono_font, 'b', self::TAG_SIZE, 'R',
                 $usableWidth, self::TAG_SIZE, true, 0
             );
         }
@@ -63,7 +63,7 @@ class LabelWriter_30252 extends LabelWriter
             static::writeText(
                 $pdf, $record->get('title'),
                 $currentX, $currentY,
-                'freesans', '', self::TITLE_SIZE, 'L',
+                $this->variable_font, '', self::TITLE_SIZE, 'L',
                 $usableWidth, self::TITLE_SIZE, true, 0
             );
             $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
@@ -73,7 +73,7 @@ class LabelWriter_30252 extends LabelWriter
             static::writeText(
                 $pdf, $field['label'],
                 $currentX, $currentY,
-                'freesans', '', self::LABEL_SIZE, 'L',
+                $this->variable_font, '', self::LABEL_SIZE, 'L',
                 $usableWidth, self::LABEL_SIZE, true, 0, 0
             );
             $currentY += self::LABEL_SIZE + self::LABEL_MARGIN;
@@ -81,7 +81,7 @@ class LabelWriter_30252 extends LabelWriter
             static::writeText(
                 $pdf, $field['value'],
                 $currentX, $currentY,
-                'freemono', 'B', self::FIELD_SIZE, 'L',
+                $this->mono_font, 'B', self::FIELD_SIZE, 'L',
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.3
             );
             $currentY += self::FIELD_SIZE + self::FIELD_MARGIN;

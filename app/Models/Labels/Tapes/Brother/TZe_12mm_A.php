@@ -39,7 +39,7 @@ class TZe_12mm_A extends TZe_12mm
         static::writeText(
             $pdf, $record->get('tag'),
             $pa->x1, $currentY,
-            'freemono', 'b', $fontSize, 'L',
+            $this->mono_font, 'b', $fontSize, 'L',
             $tagWidth, $usableHeight, true, 0, 0
         );
         
@@ -47,7 +47,7 @@ class TZe_12mm_A extends TZe_12mm
             static::writeText(
                 $pdf, $record->get('fields')->values()->get(0)['value'],
                 $pa->x1 + ($tagWidth), $currentY,
-                'freemono', 'b', $fontSize, 'R',
+                $this->mono_font, 'b', $fontSize, 'R',
                 $fieldWidth, $usableHeight, true, 0, 0
             );
         }

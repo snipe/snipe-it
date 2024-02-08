@@ -35,7 +35,7 @@ class Label implements View
      */
     public function render(callable $callback = null)
     {
-        $settings = $this->data->get('settings');
+        $settings = $this->data->get('settings'); //this has *ALL* settings!!!
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
         $template = $this->data->get('template');
@@ -64,6 +64,9 @@ class Label implements View
             [ $template->getWidth(), $template->getHeight() ]
         );
 
+        // Required for CJK languages; otherwise the embedded font can get too massive
+        $pdf->SetFontSubsetting(true);
+
         // Reset parameters
         $pdf->SetPrintHeader(false);
         $pdf->SetPrintFooter(false);
@@ -74,6 +77,9 @@ class Label implements View
         $pdf->setCreator('Snipe-IT');
         $pdf->SetSubject('Asset Labels');
         $template->preparePDF($pdf);
+
+        $template->variable_font = $settings->label2_variable_font;
+        $template->mono_font = $settings->label2_mono_font;
 
         // Get fields from settings
         $fieldDefinitions = collect(explode(';', $settings->label2_fields))
@@ -96,6 +102,7 @@ class Label implements View
                         $title = str_replace('{COMPANY}', $asset->company->name, $settings->label2_title);
                         $settings->qr_text;
                         $assetData->put('title', $title);
+                        \Log::error("THE TITLE YOU ARE TRYING TO PUT IS: $title");
                     }
                 }
 
@@ -167,10 +174,13 @@ class Label implements View
         if ($template instanceof Sheet) {
             $template->setLabelIndexOffset($offset ?? 0);
         }
+        //\Log::error("DUMPING all of the 'data' - ".print_r($data,true));
         $template->writeAll($pdf, $data);
 
         $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
-        $pdf->Output($filename, 'I');
+        set_time_limit(0);                   // ignore php timeout
+
+        $pdf->Output($filename, 'I'); // KERPLOW - splodey splode.
     }
 
     /**

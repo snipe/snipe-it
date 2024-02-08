@@ -42,7 +42,7 @@ class _5520_A extends _5520
             static::writeText(
                 $pdf, $record->get('title'),
                 $pa->x1, $pa->y1,
-                'freesans', '', self::TITLE_SIZE, 'C',
+                $this->variable_font, '', self::TITLE_SIZE, 'C',
                 $pa->w, self::TITLE_SIZE, true, 0
             );
             $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
@@ -64,7 +64,7 @@ class _5520_A extends _5520
             static::writeText(
                 $pdf, $field['label'],
                 $currentX, $currentY,
-                'freesans', '', self::LABEL_SIZE, 'L',
+                $this->variable_font, '', self::LABEL_SIZE, 'L',
                 $usableWidth, self::LABEL_SIZE, true, 0
             );
             $currentY += self::LABEL_SIZE + self::LABEL_MARGIN;
@@ -72,7 +72,7 @@ class _5520_A extends _5520
             static::writeText(
                 $pdf, $field['value'],
                 $currentX, $currentY,
-                'freemono', 'B', self::FIELD_SIZE, 'L',
+                $this->mono_font, 'B', self::FIELD_SIZE, 'L',
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.01
             );
             $currentY += self::FIELD_SIZE + self::FIELD_MARGIN;
