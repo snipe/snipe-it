@@ -36,7 +36,7 @@
         {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
     <div class="col-md-4 col-md-offset-3" aria-hidden="true">
-        <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('partials/forms/general.alt_uploaded_image_thumbnail') }}">
+        <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('general.alt_uploaded_image_thumbnail') }}">
     </div>
 </div>
 
