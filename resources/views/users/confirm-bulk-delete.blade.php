@@ -131,14 +131,15 @@
 
 
   $(":submit").attr("disabled", "disabled");
-    $("[name='status_id']").on('select2:select', function (e) {
-        if (e.params.data.id != ""){
-            console.log(e.params.data.id);
-            $(":submit").removeAttr("disabled");
-        }
-        else {
-            $(":submit").attr("disabled", "disabled");
-        }
-    });
+  //The line below needs to be here because in mobile view the status_id select2 forgets its select2 so this makes it function properly.
+   $("[name='status_id']").select2();
+   $("[name='status_id']").on('select2:select', function (e) {
+     if (e.params.data.id != "") {
+       console.log(e.params.data.id);
+       $(":submit").removeAttr("disabled");
+     } else {
+       $(":submit").attr("disabled", "disabled");
+     }
+   });
 </script>
 @stop

@@ -60,7 +60,9 @@ class CheckoutableListener
             if ($this->shouldSendWebhookNotification()) {
 
             //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
-              if(Setting::getSettings()->webhook_selected !='microsoft') {
+
+              if(Setting::getSettings()->webhook_selected =='slack' || Setting::getSettings()->webhook_selected =='general') {
+
 
                   Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                       ->notify($this->getCheckoutNotification($event));

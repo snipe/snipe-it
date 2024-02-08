@@ -28,6 +28,7 @@ use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 /**
  * This controller handles all actions related to Settings for
@@ -356,6 +357,7 @@ class SettingsController extends Controller
         }
 
         $setting->default_eula_text = $request->input('default_eula_text');
+        $setting->load_remote = $request->input('load_remote', 0);
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
@@ -635,21 +637,21 @@ class SettingsController extends Controller
         // Check if the audit interval has changed - if it has, we want to update ALL of the assets audit dates
         if ($request->input('audit_interval') != $setting->audit_interval) {
 
-            // Be careful - this could be a negative number
+            // This could be a negative number if the user is trying to set the audit interval to a lower number than it was before
             $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
+
+            // Batch update the dates. We have to use this method to avoid time limit exceeded errors on very large datasets,
+            // but it DOES mean this change doesn't get logged in the action logs, since it skips the observer.
+            // @see https://stackoverflow.com/questions/54879160/laravel-observer-not-working-on-bulk-insert
+            $affected = Asset::whereNotNull('next_audit_date')
+                ->whereNull('deleted_at')
+                ->update(
+                    ['next_audit_date' => DB::raw('DATE_ADD(next_audit_date, INTERVAL '.$audit_diff_months.' MONTH)')]
+            );
+
+            \Log::debug($affected .' assets affected by audit interval update');
+
             
-            // Grab all of the assets that have an existing next_audit_date
-            $assets = Asset::whereNotNull('next_audit_date')->get();
-
-            // Update all of the assets' next_audit_date values
-            foreach ($assets as $asset) {
-
-                if ($asset->next_audit_date != '') {
-                    $old_next_audit = new \DateTime($asset->next_audit_date);
-                    $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
-                    $asset->forceSave();
-                }
-            }
         }
 
         $alert_email = rtrim($request->input('alert_email'), ',');

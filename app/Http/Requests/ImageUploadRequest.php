@@ -103,16 +103,35 @@ class ImageUploadRequest extends Request
                 \Log::info('File name will be: '.$file_name);
                 \Log::debug('File extension is: '.$ext);
 
-                if (($image->getClientOriginalExtension() !== 'webp') && ($image->getClientOriginalExtension() !== 'svg')) {
+                if ($image->getMimeType() == 'image/webp') {
+                    // If the file is a webp, we need to just move it since webp support
+                    // needs to be compiled into gd for resizing to be available
+
+                    \Log::debug('This is a webp, just move it');
+                    Storage::disk('public')->put($path.'/'.$file_name, file_get_contents($image));
+                } elseif($image->getMimeType() == 'image/svg+xml') {
+                    // If the file is an SVG, we need to clean it and NOT encode it
+                    \Log::debug('This is an SVG');
+                    $sanitizer = new Sanitizer();
+                    $dirtySVG = file_get_contents($image->getRealPath());
+                    $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                    try {
+                        Storage::disk('public')->put($path . '/' . $file_name, $cleanSVG);
+                    } catch (\Exception $e) {
+                        \Log::debug($e);
+                    }
+                } else {
 
                     \Log::debug('Not an SVG or webp - resize');
                     \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
 
                     try {
-                        $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
+                        $upload = Image::make($image->getRealPath())->setFileInfoFromPath($image->getRealPath())->resize(null, $w, function ($constraint) {
                             $constraint->aspectRatio();
                             $constraint->upsize();
-                        });
+                        })->orientate();
+
                     } catch(NotReadableException $e) {
                         \Log::debug($e);
                         $validator = \Validator::make([], []);
@@ -124,27 +143,6 @@ class ImageUploadRequest extends Request
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string) $upload->encode());
 
-                } else {
-                    // If the file is a webp, we need to just move it since webp support
-                    // needs to be compiled into gd for resizing to be available
-                    if ($image->getClientOriginalExtension() == 'webp') {
-                        \Log::debug('This is a webp, just move it');
-                        Storage::disk('public')->put($path.'/'.$file_name, file_get_contents($image));
-                    // If the file is an SVG, we need to clean it and NOT encode it
-                    } else {
-                        \Log::debug('This is an SVG');
-                        $sanitizer = new Sanitizer();
-                        $dirtySVG = file_get_contents($image->getRealPath());
-                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                        try {
-                            \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
-                            Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
-                        } catch (\Exception $e) {
-                            \Log::debug('Upload no workie :( ');
-                            \Log::debug($e);
-                        }
-                    }
                 }
 
                  // Remove Current image if exists

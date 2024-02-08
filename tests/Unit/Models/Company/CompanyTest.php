@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Unit;
+namespace Tests\Unit\Models\Company;
 
 use App\Models\Company;
 use App\Models\User;
