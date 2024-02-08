@@ -191,9 +191,6 @@ $(document).ready(function () {
      * Select2
      */
 
-
-        // Vue collision: Avoid overriding a vue select2 instance
-        // by checking to see if the item has already been select2'd.
         $('select.select2:not(".select2-hidden-accessible")').each(function (i,obj) {
             {
                 $(obj).select2();
