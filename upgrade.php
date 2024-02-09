@@ -32,10 +32,6 @@ if ($argc > 1){
                 $branch = $argv[$arg];
                 $branch_override = true;
                 break;
-            case '-h':
-            case '-H':
-            case '--help':
-
             default: // for legacy support from before we started using --branch
                 $branch = $argv[$arg];
                 $branch_override = true;
