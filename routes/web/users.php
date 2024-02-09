@@ -43,26 +43,10 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
     Route::post(
         '{userId}/clone',
         [
-            Users\UsersController::class,
+            Users\UsersController::class, 
             'postCreate'
         ]
     )->name('users.clone.store');
-
-    Route::get(
-        '{userId}/transfer',
-        [
-            Users\UsersController::class,
-            'getTransfer'
-        ]
-    )->name('users.transfer.show');
-
-    Route::post(
-        '{userId}/transfer',
-        [
-            Users\UsersController::class,
-            'postTransfer'
-        ]
-    )->name('users.transfer.store');
 
     Route::post(
         '{userId}/restore',
