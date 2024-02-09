@@ -218,12 +218,6 @@
                   @endif
                 @endcan
 
-                @can('update', $user)
-                    <div class="col-md-12" style="padding-top: 5px;">
-                        <a href="{{ route('users.transfer', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">Transfer Items</a>
-                    </div>
-                @endcan
-
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
                     <div class="col-md-12" style="padding-top: 30px;">
