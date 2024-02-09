@@ -1,37 +1,48 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
+// We define this because we can't reliable use file_get_contents because some
+// machines don't allow URL access via allow_url_fopen being set to off
+function url_get_contents ($Url) {
+    if (!function_exists('curl_init')){
+        die("cURL is not installed!\nThis is required for Snipe-IT as well as the upgrade script, so you will need to fix this before continuing.\nAborting upgrade...\n");
+    }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $Url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $output = curl_exec($ch);
+    curl_close($ch);
+    return $output;
+}
+
 $app_environment = 'develop';
+$skip_php_checks = false;
+$branch = 'master';
+$branch_override = false;
 
-// Check if a branch or tag was passed in the command line,
-// otherwise just use master
-(array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
+// Check for branch or other overrides
+if ($argc > 1){
+    for ($arg=1; $arg<$argc; $arg++){
+        switch ($argv[$arg]) {
+            case '--skip-php-compatibility-checks':
+                $skip_php_checks = true;
+                break;
+            case '--branch':
+                $arg++;
+                $branch = $argv[$arg];
+                $branch_override = true;
+                break;
+            case '-h':
+            case '-H':
+            case '--help':
 
-
-// Fetching most current upgrade requirements from github. Read more here: https://github.com/snipe/snipe-it/pull/14127
-$remote_requirements_file = "https://raw.githubusercontent.com/snipe/snipe-it/$branch/.upgrade_requirements.json";
-$upgrade_requirements = json_decode(file_get_contents($remote_requirements_file), true);
-
-if (! $upgrade_requirements) {
-    die("\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\nExiting.\n\n");
+            default: // for legacy support from before we started using --branch
+                $branch = $argv[$arg];
+                $branch_override = true;
+                break;
+        }
+    }
 }
-
-$php_min_works = $upgrade_requirements['php_min_version'];
-$php_max_wontwork = $upgrade_requirements['php_max_wontwork'];
-// done fetching requirements
-
-
-if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
-	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
-} else {
-	$pwu_data = posix_getpwuid(posix_geteuid());
-	$username = $pwu_data['name'];
-
-	if (($username=='root') || ($username=='admin')) {
-		die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
-	}
-}
-
 
 echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
@@ -44,6 +55,55 @@ echo "- do a git pull to bring you to the latest version \n";
 echo "- run composer install to get your vendors up to date \n";
 echo "- run migrations to get your schema up to date \n";
 echo "- clear out old cache settings\n\n";
+
+
+// Fetching most current upgrade requirements from github. Read more here: https://github.com/snipe/snipe-it/pull/14127
+$remote_requirements_file = "https://raw.githubusercontent.com/snipe/snipe-it/$branch/.upgrade_requirements.json";
+$upgrade_requirements = json_decode(url_get_contents($remote_requirements_file), true);
+
+if (! $upgrade_requirements) {
+    if(!$skip_php_checks){
+        echo "\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\n\n";
+        if ($branch_override){
+            echo "NOTE: You passed a custom branch: $branch\n";
+            echo "   If the above URL doesn't work, that may be why. Please check you branch spelling/extistance\n\n";
+        }
+        echo "We suggest correcting this, but if you can't,  please verify that your requirements conform to those at that url.\n\n";
+        echo " -- DANGER -- DO AT YOUR OWN RISK --\n";
+        echo "      IF YOU ARE SURE, re-run this script with --skip-php-compatibility-checks to skip this check.\n";
+        echo " -- DANGER -- THIS COULD BREAK YOUR INSTALLATION";
+        die("Exiting.\n\n");
+    }
+    echo "NOTICE: Unable to fetch upgrade requirements, but continuing because you passed --skip-php-compatibility-checks...\n";
+}
+
+echo "Launching using branch: $branch\n";
+
+if($upgrade_requirements){
+    $php_min_works = $upgrade_requirements['php_min_version'];
+    $php_max_wontwork = $upgrade_requirements['php_max_wontwork'];
+    echo "Found PHP requirements, will check for PHP > $php_min_works and < $php_max_wontwork\n";
+}
+// done fetching requirements
+$yesno = readline("\nProceed with upgrade? [Y/n]: ");
+if ($yesno == "yes" || $yesno == "YES" ||$yesno == "y" ||$yesno == "Y"){
+    # don't do anything
+} else {
+    die("Exiting.\n\n");
+}
+
+echo "\n";
+
+if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
+	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
+} else {
+	$pwu_data = posix_getpwuid(posix_geteuid());
+	$username = $pwu_data['name'];
+
+	if (($username=='root') || ($username=='admin')) {
+		die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
+	}
+}
 
 
 
@@ -153,24 +213,25 @@ if ($env_bad !='') {
 }
 
 
-echo "\n--------------------------------------------------------\n";
-echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.") \n";
-echo "--------------------------------------------------------\n\n";
+if(!$skip_php_checks){
+    echo "\n--------------------------------------------------------\n";
+    echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.") \n";
+    echo "--------------------------------------------------------\n\n";
 
-if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(phpversion(), $php_max_wontwork, '<'))) {
+    if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(phpversion(), $php_max_wontwork, '<'))) {
 
-    echo "√ Current PHP version: (" . phpversion() . ") is at least " . $php_min_works . " and less than ".$php_max_wontwork."! Continuing... \n";
-    echo sprintf("FYI: The php.ini used by this PHP is: %s\n\n", get_cfg_var('cfg_file_path'));
+        echo "√ Current PHP version: (" . phpversion() . ") is at least " . $php_min_works . " and less than ".$php_max_wontwork."! Continuing... \n";
+        echo sprintf("FYI: The php.ini used by this PHP is: %s\n\n", get_cfg_var('cfg_file_path'));
 
-} else {
-    echo "!!!!!!!!!!!!!!!!!!!!!!!!! PHP VERSION ERROR !!!!!!!!!!!!!!!!!!!!!!!!!\n";
-    echo "This version of PHP (".phpversion().") is NOT compatible with Snipe-IT.\n";
-    echo "Snipe-IT requires PHP versions between ".$php_min_works." and ".$php_max_wontwork.".\n";
-    echo "Please install a compatible version of PHP and re-run this script again. \n";
-    echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
-    exit(1);
+    } else {
+        echo "!!!!!!!!!!!!!!!!!!!!!!!!! PHP VERSION ERROR !!!!!!!!!!!!!!!!!!!!!!!!!\n";
+        echo "This version of PHP (".phpversion().") is NOT compatible with Snipe-IT.\n";
+        echo "Snipe-IT requires PHP versions between ".$php_min_works." and ".$php_max_wontwork.".\n";
+        echo "Please install a compatible version of PHP and re-run this script again. \n";
+        echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
+        exit(1);
+    }
 }
-
 echo "Checking Required PHP extensions... \n\n";
 
 // Get the list of installed extensions
@@ -319,14 +380,22 @@ if ($dirs_not_writable!='') {
 echo "--------------------------------------------------------\n";
 echo "STEP 4: Backing up database: \n";
 echo "--------------------------------------------------------\n\n";
-$backup = shell_exec('php artisan snipeit:backup');
-echo '-- '.$backup."\n\n";
+$backup = exec('php artisan snipeit:backup', $backup_results, $return_code);
+echo '-- ' . implode("\n", $backup_results) . "\n\n";
+if ($return_code > 0) {
+    die("Something went wrong with your backup. Aborting!\n\n");
+}
+unset($return_code);
 
 echo "--------------------------------------------------------\n";
 echo "STEP 5: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
-$down = shell_exec('php artisan down');
-echo '-- '.$down."\n";
+exec('php artisan down',  $down_results, $return_code);
+echo '-- ' . implode("\n", $down_results) . "\n";
+if ($return_code > 0) {
+    die("Something went wrong with downing you site. This can't be good. Please investigate the error. Aborting!n\n");
+}
+unset($return_code);
 
 
 echo "--------------------------------------------------------\n";
