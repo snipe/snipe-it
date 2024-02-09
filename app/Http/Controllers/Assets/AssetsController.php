@@ -521,7 +521,7 @@ class AssetsController extends Controller
     public function getBarCode($assetId = null)
     {
         $settings = Setting::getSettings();
-        $asset = Asset::find($assetId);
+        $asset = Asset::withTrashed()->find($assetId);
         $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
 
         if (isset($asset->id, $asset->asset_tag)) {
