@@ -109,6 +109,7 @@ return [
     'download_all'		    => 'Download All',
     'editprofile'  			=> 'Edit Your Profile',
     'eol'					=> 'EOL',
+    'eol_date_help'			=> 'This option allow to set manually EOL date. If checkbox is not enabled, EOL date is calculated by asset model EOL rate.',
     'email_domain'			=> 'Email Domain',
     'email_format'			=> 'Email Format',
     'employee_number'       => 'Employee Number',
