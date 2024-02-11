@@ -130,6 +130,14 @@
         "description": "Include your Google Maps API key here if you'd like Snipe-IT to load maps from Google on your locations and suppliers pages.",
         "required": false
       },
+      "GOOGLE_MAPS_MAP_TYPE_BASEMAP": {
+        "description": "Include the type of map of Google Maps API key here. The value can be roadmap, satellite, hybrid, and terrain. By default is roadmap. Applies to your locations and suppliers pages. Google Maps Key is mandatory",
+        "required": false
+      },
+      "GOOGLE_MAPS_MAP_ZOOM_LEVEL": {
+        "description": "Include the zoom map of Google Maps API key here. The value can be an integer number between 14 (less detail) - 21 (more detail). By default is roadmap. Applies to your locations and suppliers pages. Google Maps Key is mandatory",
+        "required": false
+      },
       "BACKUP_ENV": {
         "description": "Set this to true if you wish to backup your .env file in your Admin > Backups process.",
         "value": "true"
