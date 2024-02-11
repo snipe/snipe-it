@@ -167,6 +167,23 @@
     });
     @endif
 
+	// If the "eol_explicit" check box is checked, show then the ability to set eol_date
+	$(document).ready(function() {
+		$("#eol_explicit_active").change(function() {
+			if ((this.checked)) {
+				$("#eol_date_row").show();
+			} else {
+				$("#eol_date_row").hide();
+			}
+		});
+	
+		if({{ $item->eol_explicit ? 'true' : 'false' }}) {
+			$("#eol_date_row").show();
+		} else {
+			$("#eol_date_row").hide();
+		};
+	});
+
     var transformed_oldvals={};
 
     function fetchCustomFields() {
