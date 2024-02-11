@@ -52,6 +52,8 @@ return [
 
     'google' => [
         'maps_api_key' => env('GOOGLE_MAPS_API'),
+        'maps_type_basemap' => env('GOOGLE_MAPS_TYPE_BASEMAP'),
+        'maps_zoom_level' => env('GOOGLE_MAPS_ZOOM_LEVEL'),
     ],
 
 ];
