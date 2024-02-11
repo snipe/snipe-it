@@ -105,6 +105,7 @@ class AssetsController extends Controller
             'requests_counter',
             'byod',
             'asset_eol_date',
+            'eol_explicit',
         ];
 
         $filter = [];
@@ -542,6 +543,15 @@ class AssetsController extends Controller
         $asset->fill($request->validated());
         $asset->user_id    = Auth::id();
 
+		/**
+        * rule of set up EOL date and explicit status during create asset
+		*/
+		if ($request->has('asset_eol_date')) {
+			$asset->eol_explicit = true;
+		} elseif ($request->has('purchase_date') && ($asset->model->eol > 0)) {
+			$asset->asset_eol_date = Carbon::parse($request->get('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+		}
+
         /**
         * this is here just legacy reasons. Api\AssetController
         * used image_source  once to allow encoded image uploads.
@@ -637,6 +647,19 @@ class AssetsController extends Controller
 
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : null;
+
+			/**
+			* rule of set up EOL date and explicit status during update asset
+			*/
+			if ($request->filled('asset_eol_date')) {
+				$asset->eol_explicit = true;
+			} elseif (!($asset->eol_explicit) && ($request->filled('purchase_date') || $request->filled('model_id'))) {
+				if ($asset->model->eol > 0) {
+					$asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+				} else {
+					$asset->asset_eol_date = null;
+				}
+			}
 
             /**
             * this is here just legacy reasons. Api\AssetController
