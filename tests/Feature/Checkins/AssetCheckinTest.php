@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Assets;
+namespace Tests\Feature\Checkins;
 
 use App\Models\Asset;
 use App\Models\User;
@@ -10,6 +10,30 @@ use Tests\TestCase;
 class AssetCheckinTest extends TestCase
 {
     use InteractsWithSettings;
+
+    public function testCheckingInAssetRequiresCorrectPermission()
+    {
+        $this->actingAs(User::factory()->create())
+            ->post(route('hardware.checkin.store', [
+                'assetId' => Asset::factory()->assignedToUser()->create()->id,
+            ]))
+            ->assertForbidden();
+    }
+
+    public function testAssetCanBeCheckedIn()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCheckInEmailSentToUserIfSettingEnabled()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCheckInEmailNotSentToUserIfSettingDisabled()
+    {
+        $this->markTestIncomplete();
+    }
 
     public function testLastCheckInFieldIsSetOnCheckin()
     {
