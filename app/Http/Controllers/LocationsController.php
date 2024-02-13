@@ -168,7 +168,7 @@ class LocationsController extends Controller
     {
         $this->authorize('delete', Location::class);
         if (is_null($location = Location::find($locationId))) {
-            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
+            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         if ($location->users()->count() > 0) {
