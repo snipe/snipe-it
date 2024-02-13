@@ -2,8 +2,12 @@
 
 namespace Tests\Feature\Checkins;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\User;
+use App\Notifications\CheckinAssetNotification;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -22,17 +26,68 @@ class AssetCheckinTest extends TestCase
 
     public function testAssetCanBeCheckedIn()
     {
-        $this->markTestIncomplete();
+        Event::fake([CheckoutableCheckedIn::class]);
+
+        $admin = User::factory()->checkinAssets()->create();
+        $user = User::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create(['last_checkin' => null]);
+
+        $this->assertTrue($asset->assignedTo->is($user));
+
+        $this->actingAs($admin)
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]))
+            ->assertRedirect();
+
+        $this->assertNull($asset->fresh()->assignedTo);
+        Event::assertDispatched(CheckoutableCheckedIn::class, 1);
     }
 
     public function testCheckInEmailSentToUserIfSettingEnabled()
     {
-        $this->markTestIncomplete();
+        Notification::fake();
+
+        $user = User::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $asset->model->category->update(['checkin_email' => true]);
+
+        event(new CheckoutableCheckedIn(
+            $asset,
+            $user,
+            User::factory()->checkinAssets()->create(),
+            ''
+        ));
+
+        Notification::assertSentTo(
+            [$user],
+            function (CheckinAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            },
+        );
     }
 
     public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
-        $this->markTestIncomplete();
+        Notification::fake();
+
+        $user = User::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $asset->model->category->update(['checkin_email' => false]);
+
+        event(new CheckoutableCheckedIn(
+            $asset,
+            $user,
+            User::factory()->checkinAssets()->create(),
+            ''
+        ));
+
+        Notification::assertNotSentTo(
+            [$user],
+            function (CheckinAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            }
+        );
     }
 
     public function testLastCheckInFieldIsSetOnCheckin()
@@ -45,8 +100,7 @@ class AssetCheckinTest extends TestCase
         $this->actingAs($admin)
             ->post(route('hardware.checkin.store', [
                 'assetId' => $asset->id,
-            ]))
-            ->assertRedirect();
+            ]));
 
         $this->assertNotNull(
             $asset->fresh()->last_checkin,

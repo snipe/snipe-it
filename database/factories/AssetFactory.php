@@ -289,11 +289,11 @@ class AssetFactory extends Factory
         });
     }
 
-    public function assignedToUser()
+    public function assignedToUser(User $user = null)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($user) {
             return [
-                'assigned_to' => User::factory(),
+                'assigned_to' => $user->id ?? User::factory(),
                 'assigned_type' => User::class,
             ];
         });
