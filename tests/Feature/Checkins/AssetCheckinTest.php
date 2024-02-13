@@ -35,7 +35,7 @@ class AssetCheckinTest extends TestCase
         $this->markTestIncomplete();
     }
 
-    public function testAssetCheckedOutToUserCanBeCheckedIn()
+    public function testAssetCanBeCheckedIn()
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
@@ -72,14 +72,22 @@ class AssetCheckinTest extends TestCase
         $this->assertEquals($status->id, $asset->status_id);
     }
 
-    public function testAssetCheckedOutToAssetCanBeCheckedIn()
+    public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
-        $this->markTestIncomplete();
-    }
+        Event::fake();
 
-    public function testAssetCheckedOutToLocationCanBeCheckedIn()
-    {
-        $this->markTestIncomplete();
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route(
+                'hardware.checkin.store',
+                ['assetId' => Asset::factory()->assignedToUser()->create()->id]
+            ), [
+                'checkin_at' => '2023-01-02 12:45:56',
+                'note' => 'hello'
+            ]);
+
+        Event::assertDispatched(function (CheckoutableCheckedIn $event) {
+            return $event->action_date === '2023-01-02 12:45:56' && $event->note === 'hello';
+        }, 1);
     }
 
     public function testLastCheckInFieldIsSetOnCheckin()
