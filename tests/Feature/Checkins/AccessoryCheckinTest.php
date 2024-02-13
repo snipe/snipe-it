@@ -6,7 +6,6 @@ use App\Events\CheckoutableCheckedIn;
 use App\Models\Accessory;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
-use App\Notifications\CheckinAssetNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
