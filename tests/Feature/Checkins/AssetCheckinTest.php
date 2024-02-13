@@ -4,6 +4,7 @@ namespace Tests\Feature\Checkins;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Notifications\CheckinAssetNotification;
@@ -73,9 +74,7 @@ class AssetCheckinTest extends TestCase
     public function testLastCheckInFieldIsSetOnCheckin()
     {
         $admin = User::factory()->superuser()->create();
-        $asset = Asset::factory()->create(['last_checkin' => null]);
-
-        $asset->checkOut(User::factory()->create(), $admin, now());
+        $asset = Asset::factory()->assignedToUser()->create(['last_checkin' => null]);
 
         $this->actingAs($admin)
             ->post(route('hardware.checkin.store', [
@@ -90,7 +89,14 @@ class AssetCheckinTest extends TestCase
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
     {
-        $this->markTestIncomplete();
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $acceptance = CheckoutAcceptance::factory()->for($asset, 'checkoutable')->pending()->create();
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
+
+        $this->assertFalse($acceptance->exists(), 'Acceptance was not deleted');
     }
 
     public function testCheckinTimeAndActionLogNoteCanBeSet()
