@@ -694,12 +694,13 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('checkin_date_start'))) {
-                    $assets->whereBetween('last_checkin', [
-                        Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
+                $checkin_start = \Carbon::parse($request->input('checkin_date_start'))->startOfDay();
                         // use today's date is `checkin_date_end` is not provided
-                        Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
-                    ]);
+                $checkin_end = \Carbon::parse($request->input('checkin_date_end', now()))->endOfDay();
+
+                $assets->whereBetween('assets.last_checkin', [$checkin_start, $checkin_end ]);
             }
+            //last checkin is exporting, but currently is a date and not a datetime in the custom report ONLY.
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
                     $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
