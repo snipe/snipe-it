@@ -25,14 +25,12 @@ class AssetCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testCannotCheckInNonExistentAsset()
-    {
-        $this->markTestIncomplete();
-    }
-
     public function testCannotCheckInAssetThatIsNotCheckedOut()
     {
-        $this->markTestIncomplete();
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => Asset::factory()->create()->id]))
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.index'));
     }
 
     public function testAssetCanBeCheckedIn()
@@ -72,24 +70,6 @@ class AssetCheckinTest extends TestCase
         $this->assertEquals($status->id, $asset->status_id);
     }
 
-    public function testCheckinTimeAndActionLogNoteCanBeSet()
-    {
-        Event::fake();
-
-        $this->actingAs(User::factory()->checkinAssets()->create())
-            ->post(route(
-                'hardware.checkin.store',
-                ['assetId' => Asset::factory()->assignedToUser()->create()->id]
-            ), [
-                'checkin_at' => '2023-01-02 12:45:56',
-                'note' => 'hello'
-            ]);
-
-        Event::assertDispatched(function (CheckoutableCheckedIn $event) {
-            return $event->action_date === '2023-01-02 12:45:56' && $event->note === 'hello';
-        }, 1);
-    }
-
     public function testLastCheckInFieldIsSetOnCheckin()
     {
         $admin = User::factory()->superuser()->create();
@@ -111,6 +91,24 @@ class AssetCheckinTest extends TestCase
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
     {
         $this->markTestIncomplete();
+    }
+
+    public function testCheckinTimeAndActionLogNoteCanBeSet()
+    {
+        Event::fake();
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route(
+                'hardware.checkin.store',
+                ['assetId' => Asset::factory()->assignedToUser()->create()->id]
+            ), [
+                'checkin_at' => '2023-01-02 12:45:56',
+                'note' => 'hello'
+            ]);
+
+        Event::assertDispatched(function (CheckoutableCheckedIn $event) {
+            return $event->action_date === '2023-01-02 12:45:56' && $event->note === 'hello';
+        }, 1);
     }
 
     public function testCheckInEmailSentToUserIfSettingEnabled()
