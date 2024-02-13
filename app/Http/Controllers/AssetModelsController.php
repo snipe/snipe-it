@@ -11,7 +11,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
@@ -515,7 +514,6 @@ class AssetModelsController extends Controller
         $validator = Validator::make($data, $rules);
 
         if($validator->fails()){
-            Log::debug($validator->errors());
             return false;
         }
 
