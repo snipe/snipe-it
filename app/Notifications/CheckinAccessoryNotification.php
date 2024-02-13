@@ -63,10 +63,6 @@ class CheckinAccessoryNotification extends Notification
         if ($this->target instanceof User && $this->target->email != '') {
             \Log::debug('The target is a user');
 
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
             if ($this->item->checkin_email()) {
                 $notifyBy[] = 'mail';
             }
