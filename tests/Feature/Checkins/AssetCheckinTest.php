@@ -4,6 +4,7 @@ namespace Tests\Feature\Checkins;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
+use App\Models\Statuslabel;
 use App\Models\User;
 use App\Notifications\CheckinAssetNotification;
 use Illuminate\Support\Facades\Event;
@@ -34,6 +35,43 @@ class AssetCheckinTest extends TestCase
         $this->markTestIncomplete();
     }
 
+    public function testAssetCheckedOutToUserCanBeCheckedIn()
+    {
+        Event::fake([CheckoutableCheckedIn::class]);
+
+        $admin = User::factory()->checkinAssets()->create();
+        $user = User::factory()->create();
+        $status = Statuslabel::first() ?? Statuslabel::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create([
+            'expected_checkin' => now()->addDay(),
+            'last_checkin' => null,
+            'accepted' => 'accepted',
+        ]);
+
+        $this->assertTrue($asset->assignedTo->is($user));
+
+        $this->actingAs($admin)
+            ->post(
+                route('hardware.checkin.store', ['assetId' => $asset->id, 'backto' => 'user']),
+                [
+                    'name' => 'Changed Name',
+                    'status_id' => $status->id,
+                ],
+            )
+            ->assertRedirect(route('users.show', $user));
+
+        Event::assertDispatched(CheckoutableCheckedIn::class, 1);
+        $this->assertNull($asset->refresh()->assignedTo);
+        $this->assertNull($asset->expected_checkin);
+        $this->assertNull($asset->last_checkout);
+        $this->assertNotNull($asset->last_checkin);
+        $this->assertNull($asset->assignedTo);
+        $this->assertNull($asset->assigned_type);
+        $this->assertNull($asset->accepted);
+        $this->assertEquals('Changed Name', $asset->name);
+        $this->assertEquals($status->id, $asset->status_id);
+    }
+
     public function testAssetCheckedOutToAssetCanBeCheckedIn()
     {
         $this->markTestIncomplete();
@@ -42,24 +80,6 @@ class AssetCheckinTest extends TestCase
     public function testAssetCheckedOutToLocationCanBeCheckedIn()
     {
         $this->markTestIncomplete();
-    }
-
-    public function testAssetCheckedOutToUserCanBeCheckedIn()
-    {
-        Event::fake([CheckoutableCheckedIn::class]);
-
-        $admin = User::factory()->checkinAssets()->create();
-        $user = User::factory()->create();
-        $asset = Asset::factory()->assignedToUser($user)->create();
-
-        $this->assertTrue($asset->assignedTo->is($user));
-
-        $this->actingAs($admin)
-            ->post(route('hardware.checkin.store', ['assetId' => $asset->id, 'backto' => 'user']))
-            ->assertRedirect(route('users.show', $user));
-
-        $this->assertNull($asset->fresh()->assignedTo);
-        Event::assertDispatched(CheckoutableCheckedIn::class, 1);
     }
 
     public function testLastCheckInFieldIsSetOnCheckin()

@@ -295,6 +295,7 @@ class AssetFactory extends Factory
             return [
                 'assigned_to' => $user->id ?? User::factory(),
                 'assigned_type' => User::class,
+                'last_checkout' => now()->subDay(),
             ];
         });
     }
