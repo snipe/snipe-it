@@ -601,7 +601,8 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
-                            $user->permissions,
+                            $user->permissions, // ? $user->permissions->where('permissions', 'LIKE', '%"1"%') : '',
+                            //where json like '%"category":"Category Example"%
                             $user->notes,
                             ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,
