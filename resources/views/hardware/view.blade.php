@@ -775,6 +775,18 @@
                                             </div>
                                         </div>
                                      @endif
+                                     @if ($asset->last_checkin!='')
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <strong>
+                                                        {{ trans('admin/hardware/table.last_checkin_date') }}
+                                                    </strong>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ Helper::getFormattedDateObject($asset->last_checkin, 'datetime', false) }}
+                                                </div>
+                                            </div>
+                                     @endif
 
 
 
