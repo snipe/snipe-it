@@ -17,8 +17,10 @@ class AccessoryCheckinTest extends TestCase
 
     public function testCheckingInAccessoryRequiresCorrectPermission()
     {
+        $accessory = Accessory::factory()->checkedOutToUser()->create();
+
         $this->actingAs(User::factory()->create())
-            ->post(route('accessories.checkin.store', Accessory::factory()->checkedOutToUser()->create()))
+            ->post(route('accessories.checkin.store', $accessory->users->first()->pivot->id))
             ->assertForbidden();
     }
 
