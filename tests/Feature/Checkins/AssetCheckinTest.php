@@ -24,13 +24,23 @@ class AssetCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testAssetCanBeCheckedIn()
+    public function testAssetCheckedOutToAssetCanBeCheckedIn()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAssetCheckedOutToLocationCanBeCheckedIn()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAssetCheckedOutToUserCanBeCheckedIn()
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
         $admin = User::factory()->checkinAssets()->create();
         $user = User::factory()->create();
-        $asset = Asset::factory()->assignedToUser($user)->create(['last_checkin' => null]);
+        $asset = Asset::factory()->assignedToUser($user)->create();
 
         $this->assertTrue($asset->assignedTo->is($user));
 

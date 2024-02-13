@@ -11,6 +11,36 @@ class AssetCheckinTest extends TestCase
 {
     use InteractsWithSettings;
 
+    public function testCheckingInAssetRequiresCorrectPermission()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAssetCheckedOutToAssetCanBeCheckedIn()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAssetCheckedOutToLocationCanBeCheckedIn()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAssetCheckedOutToUserCanBeCheckedIn()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCheckInEmailSentToUserIfSettingEnabled()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCheckInEmailNotSentToUserIfSettingDisabled()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testLastCheckInFieldIsSetOnCheckin()
     {
         $admin = User::factory()->superuser()->create();
