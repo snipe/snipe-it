@@ -24,6 +24,16 @@ class AssetCheckinTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testCannotCheckInNonExistentAsset()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCannotCheckInAssetThatIsNotCheckedOut()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testAssetCheckedOutToAssetCanBeCheckedIn()
     {
         $this->markTestIncomplete();
@@ -45,11 +55,34 @@ class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->assignedTo->is($user));
 
         $this->actingAs($admin)
-            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]))
-            ->assertRedirect();
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id, 'backto' => 'user']))
+            ->assertRedirect(route('users.show', $user));
 
         $this->assertNull($asset->fresh()->assignedTo);
         Event::assertDispatched(CheckoutableCheckedIn::class, 1);
+    }
+
+    public function testLastCheckInFieldIsSetOnCheckin()
+    {
+        $admin = User::factory()->superuser()->create();
+        $asset = Asset::factory()->create(['last_checkin' => null]);
+
+        $asset->checkOut(User::factory()->create(), $admin, now());
+
+        $this->actingAs($admin)
+            ->post(route('hardware.checkin.store', [
+                'assetId' => $asset->id,
+            ]));
+
+        $this->assertNotNull(
+            $asset->fresh()->last_checkin,
+            'last_checkin field should be set on checkin'
+        );
+    }
+
+    public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
+    {
+        $this->markTestIncomplete();
     }
 
     public function testCheckInEmailSentToUserIfSettingEnabled()
@@ -97,24 +130,6 @@ class AssetCheckinTest extends TestCase
             function (CheckinAssetNotification $notification, $channels) {
                 return in_array('mail', $channels);
             }
-        );
-    }
-
-    public function testLastCheckInFieldIsSetOnCheckin()
-    {
-        $admin = User::factory()->superuser()->create();
-        $asset = Asset::factory()->create(['last_checkin' => null]);
-
-        $asset->checkOut(User::factory()->create(), $admin, now());
-
-        $this->actingAs($admin)
-            ->post(route('hardware.checkin.store', [
-                'assetId' => $asset->id,
-            ]));
-
-        $this->assertNotNull(
-            $asset->fresh()->last_checkin,
-            'last_checkin field should be set on checkin'
         );
     }
 }

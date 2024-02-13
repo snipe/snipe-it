@@ -16,6 +16,16 @@ class AssetCheckinTest extends TestCase
         $this->markTestIncomplete();
     }
 
+    public function testCannotCheckInNonExistentAsset()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCannotCheckInAssetThatIsNotCheckedOut()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testAssetCheckedOutToAssetCanBeCheckedIn()
     {
         $this->markTestIncomplete();
@@ -27,16 +37,6 @@ class AssetCheckinTest extends TestCase
     }
 
     public function testAssetCheckedOutToUserCanBeCheckedIn()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCheckInEmailSentToUserIfSettingEnabled()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
         $this->markTestIncomplete();
     }
@@ -56,5 +56,20 @@ class AssetCheckinTest extends TestCase
             $asset->fresh()->last_checkin,
             'last_checkin field should be set on checkin'
         );
+    }
+
+    public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCheckInEmailSentToUserIfSettingEnabled()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCheckInEmailNotSentToUserIfSettingDisabled()
+    {
+        $this->markTestIncomplete();
     }
 }
