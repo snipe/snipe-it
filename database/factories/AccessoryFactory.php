@@ -145,8 +145,6 @@ class AccessoryFactory extends Factory
     public function checkedOut(User $user = null)
     {
         return $this->afterCreating(function (Accessory $accessory) use ($user) {
-            $accessory->decrement('qty');
-
             $accessory->users()->attach($accessory->id, [
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
