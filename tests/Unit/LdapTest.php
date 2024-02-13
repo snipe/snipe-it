@@ -7,6 +7,9 @@ use Exception;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+/**
+ * @group ldap
+ */
 class LdapTest extends TestCase
 {
     use InteractsWithSettings;
