@@ -142,7 +142,7 @@ class AccessoryFactory extends Factory
         });
     }
 
-    public function checkedOut(User $user = null)
+    public function checkedOutToUser(User $user = null)
     {
         return $this->afterCreating(function (Accessory $accessory) use ($user) {
             $accessory->users()->attach($accessory->id, [

@@ -19,7 +19,7 @@ class AccessoryCheckinTest extends TestCase
     public function testCheckingInAccessoryRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
-            ->post(route('accessories.checkin.store', Accessory::factory()->checkedOut()->create()))
+            ->post(route('accessories.checkin.store', Accessory::factory()->checkedOutToUser()->create()))
             ->assertForbidden();
     }
 
@@ -28,7 +28,7 @@ class AccessoryCheckinTest extends TestCase
         Event::fake([CheckoutableCheckedIn::class]);
 
         $user = User::factory()->create();
-        $accessory = Accessory::factory()->checkedOut($user)->create();
+        $accessory = Accessory::factory()->checkedOutToUser($user)->create();
 
         $this->assertTrue($accessory->users->contains($user));
 
@@ -45,7 +45,7 @@ class AccessoryCheckinTest extends TestCase
         Notification::fake();
 
         $user = User::factory()->create();
-        $accessory = Accessory::factory()->checkedOut($user)->create();
+        $accessory = Accessory::factory()->checkedOutToUser($user)->create();
 
         $accessory->category->update(['checkin_email' => true]);
 
@@ -69,7 +69,7 @@ class AccessoryCheckinTest extends TestCase
         Notification::fake();
 
         $user = User::factory()->create();
-        $accessory = Accessory::factory()->checkedOut($user)->create();
+        $accessory = Accessory::factory()->checkedOutToUser($user)->create();
 
         $accessory->category->update(['checkin_email' => false]);
 
