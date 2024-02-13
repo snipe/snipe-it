@@ -214,12 +214,12 @@ class RestoreFromBackup extends Command
      */
     public function handle()
     {
-        if ( $this->option('prefix') ) {
+        if ( $this->option('prefix') !== null ) {
             self::$prefix = $this->option('prefix');
         }
 
         if ($this->option('sanitize-only')) {
-            if ( !self::$prefix) {
+            if ( self::$prefix === null) {
                 print "okay, no prefix declared, we're going to GUESS IT!!!!\n";
                 self::$prefix = SQLStreamer::guess_prefix(STDIN);
                 print "FINAL PREFIX IS: ".self::$prefix."\n";
@@ -446,8 +446,20 @@ class RestoreFromBackup extends Command
         }
 
         try {
-            $sql_importer = new SQLStreamer($sql_contents, $pipes[0], self::$prefix);
-            $bytes_read = $sql_importer->line_aware_piping();
+            if ( $this->option('no-sanitize')) {
+                while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
+                    $bytes_read += strlen($buffer);
+                    // \Log::debug("Buffer is: '$buffer'");
+                    $bytes_written = fwrite($pipes[0], $buffer);
+
+                    if ($bytes_written === false) {
+                        throw new Exception("Unable to write to pipe");
+                    }
+                }
+            } else {
+                $sql_importer = new SQLStreamer($sql_contents, $pipes[0], self::$prefix);
+                $bytes_read = $sql_importer->line_aware_piping();
+            }
         } catch (\Exception $e) {
             \Log::error("Error during restore!!!! ".$e->getMessage());
             // FIXME - put these back and/or put them in the right places?!
