@@ -1560,7 +1560,7 @@ class Asset extends Depreciable
              *
              * In short, this set of statements tells the query builder to ONLY query against an
              * actual field that's being passed if it doesn't meet known relational fields. This
-             * allows us to query custom fields directly in the assetsv table
+             * allows us to query custom fields directly in the assets table
              * (regardless of their name) and *skip* any fields that we already know can only be
              * searched through relational searches that we do earlier in this method.
              *
