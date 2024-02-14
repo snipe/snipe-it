@@ -116,13 +116,10 @@ class AssetCheckinTest extends TestCase
 
     public function testLastCheckInFieldIsSetOnCheckin()
     {
-        $admin = User::factory()->superuser()->create();
+        $admin = User::factory()->checkinAssets()->create();
         $asset = Asset::factory()->assignedToUser()->create(['last_checkin' => null]);
 
-        $this->actingAs($admin)
-            ->post(route('hardware.checkin.store', [
-                'assetId' => $asset->id,
-            ]));
+        $this->actingAs($admin)->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertNotNull(
             $asset->refresh()->last_checkin,
