@@ -298,15 +298,15 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
         Validator::extend('checkboxes', function ($attribute, $value, $parameters, $validator){
-            $options = CustomField::where('db_column', $attribute)->formatFieldValuesAsArray();
+            $options = CustomField::where('db_column', $attribute)->first()->formatFieldValuesAsArray();
+            // for legacy, allows users to submit a comma separated string of options
             if(!is_array($value)) {
                 $exploded = explode(',', $value);
-                $valid = array_intersect($exploded, $options);
-                if(array_count_values($valid) > 0) {
-                    return true;
+                $invalid = array_diff($exploded, $options);
+                if(count($invalid) > 0) {
+                    return false;
                 }
-            }
-            if(is_array($value)) {
+            } else {
                 $valid = array_intersect($value, $options);
                 if(array_count_values($valid) > 0) {
                     return true;

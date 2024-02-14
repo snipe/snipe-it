@@ -102,7 +102,7 @@ class CustomFieldset extends Model
             if ($field->element == 'checkbox') {
                 //Log::alert($field->formatFieldValuesAsArray());
                 $values = $field->formatFieldValuesAsArray();
-                //$rules[$field->db_column_name()] = 'checkboxes';
+                $rules[$field->db_column_name()] = 'checkboxes';
             }
         }
 
