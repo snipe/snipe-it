@@ -296,6 +296,10 @@
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
                 actions += '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '/edit" class="actions btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
+            } else {
+                if ((row.available_actions) && (row.available_actions.update != true)) {
+                    actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_edited') }}"><a class="btn btn-warning btn-sm disabled" onClick="return false;"><i class="fas fa-pencil-alt"></i></a></span>&nbsp;';
+                }
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
