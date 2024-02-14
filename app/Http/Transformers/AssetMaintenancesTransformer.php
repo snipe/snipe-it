@@ -72,7 +72,7 @@ class AssetMaintenancesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => Gate::allows('update', Asset::class),
+            'update' => (Gate::allows('update', Asset::class) && ($assetmaintenance->asset->deleted_at=='')) ? true : false,
             'delete' => Gate::allows('delete', Asset::class),
         ];
 
