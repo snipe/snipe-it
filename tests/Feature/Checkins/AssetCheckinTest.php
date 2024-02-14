@@ -125,7 +125,7 @@ class AssetCheckinTest extends TestCase
             ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertNull($asset->refresh()->rtd_location_id);
-        $this->assertNull($asset->location_id);
+        $this->assertEquals($asset->location_id, $asset->rtd_location_id);
     }
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
