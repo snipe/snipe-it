@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\Api\Assets;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
+use App\Models\Statuslabel;
 use App\Models\User;
+use Illuminate\Support\Facades\Event;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -34,7 +37,35 @@ class AssetCheckinTest extends TestCase
 
     public function testAssetCanBeCheckedIn()
     {
-        $this->markTestIncomplete();
+        Event::fake([CheckoutableCheckedIn::class]);
+
+        $user = User::factory()->create();
+        $status = Statuslabel::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create([
+            'expected_checkin' => now()->addDay(),
+            'last_checkin' => null,
+            'accepted' => 'accepted',
+        ]);
+
+        $this->assertTrue($asset->assignedTo->is($user));
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset->id), [
+                'name' => 'Changed Name',
+                'status_id' => $status->id,
+            ])
+            ->assertOk();
+
+        Event::assertDispatched(CheckoutableCheckedIn::class, 1);
+        $this->assertNull($asset->refresh()->assignedTo);
+        $this->assertNull($asset->expected_checkin);
+        $this->assertNull($asset->last_checkout);
+        $this->assertNotNull($asset->last_checkin);
+        $this->assertNull($asset->assignedTo);
+        $this->assertNull($asset->assigned_type);
+        $this->assertNull($asset->accepted);
+        $this->assertEquals('Changed Name', $asset->name);
+        $this->assertEquals($status->id, $asset->status_id);
     }
 
     public function testLastCheckInFieldIsSetOnCheckin()

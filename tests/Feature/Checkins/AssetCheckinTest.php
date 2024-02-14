@@ -40,7 +40,6 @@ class AssetCheckinTest extends TestCase
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
-        $admin = User::factory()->checkinAssets()->create();
         $user = User::factory()->create();
         $status = Statuslabel::first() ?? Statuslabel::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create([
@@ -51,7 +50,7 @@ class AssetCheckinTest extends TestCase
 
         $this->assertTrue($asset->assignedTo->is($user));
 
-        $this->actingAs($admin)
+        $this->actingAs(User::factory()->checkinAssets()->create())
             ->post(
                 route('hardware.checkin.store', ['assetId' => $asset->id, 'backto' => 'user']),
                 [
