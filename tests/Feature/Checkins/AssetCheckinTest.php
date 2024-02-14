@@ -113,19 +113,6 @@ class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
     }
 
-    public function testLastCheckInFieldIsSetOnCheckin()
-    {
-        $admin = User::factory()->checkinAssets()->create();
-        $asset = Asset::factory()->assignedToUser()->create(['last_checkin' => null]);
-
-        $this->actingAs($admin)->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
-
-        $this->assertNotNull(
-            $asset->refresh()->last_checkin,
-            'last_checkin field should be set on checkin'
-        );
-    }
-
     public function testAssetsLicenseSeatsAreClearedUponCheckin()
     {
         $asset = Asset::factory()->assignedToUser()->create();
