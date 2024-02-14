@@ -37,7 +37,7 @@ class AssetMaintenancesController extends Controller
         $this->authorize('view', Asset::class);
 
         $maintenances = AssetMaintenance::select('asset_maintenances.*')
-            ->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company', 'admin');
+            ->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company',  'asset.assetstatus', 'admin');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
@@ -75,7 +75,9 @@ class AssetMaintenancesController extends Controller
                                 'user_id',
                                 'supplier',
                                 'is_warranty',
+                                'status_label',
                             ];
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
@@ -93,8 +95,10 @@ class AssetMaintenancesController extends Controller
                 $maintenances = $maintenances->OrderByAssetName($order);
                 break;
             case 'serial':
-                \Log::debug('sort by serial');
                 $maintenances = $maintenances->OrderByAssetSerial($order);
+                break;
+            case 'status_label':
+                $maintenances = $maintenances->OrderStatusName($order);
                 break;
             default:
                 $maintenances = $maintenances->orderBy($sort, $order);
