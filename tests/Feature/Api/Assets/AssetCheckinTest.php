@@ -4,6 +4,7 @@ namespace Tests\Feature\Api\Assets;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
+use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
@@ -98,17 +99,38 @@ class AssetCheckinTest extends TestCase
 
     public function testDefaultLocationCanBeUpdatedUponCheckin()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete('Not currently in controller');
+
+        $location = Location::factory()->create();
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset), [
+                'location_id' => $location->id,
+                'update_default_location' => 0
+            ]);
+
+        $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
     }
 
     public function testAssetsLicenseSeatsAreClearedUponCheckin()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete('Not currently in controller');
+
+        $asset = Asset::factory()->assignedToUser()->create();
+        LicenseSeat::factory()->assignedToUser()->for($asset)->create();
+
+        $this->assertNotNull($asset->licenseseats->first()->assigned_to);
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset));
+
+        $this->assertNull($asset->refresh()->licenseseats->first()->assigned_to);
     }
 
     public function testLegacyLocationValuesSetToZeroAreUpdated()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete('Not currently in controller');
     }
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
@@ -118,6 +140,20 @@ class AssetCheckinTest extends TestCase
 
     public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete(
+            'checkin_at currently takes a date and applies a time which is not inline with what the web controller does.'
+        );
+
+        Event::fake();
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', Asset::factory()->assignedToUser()->create()), [
+                'checkin_at' => '2023-01-02 12:34:56',
+                'note' => 'hi there',
+            ]);
+
+        Event::assertDispatched(function (CheckoutableCheckedIn $event) {
+            return $event->action_date === '2023-01-02 12:34:56' && $event->note === 'hi there';
+        }, 1);
     }
 }

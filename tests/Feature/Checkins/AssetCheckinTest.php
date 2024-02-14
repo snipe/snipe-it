@@ -159,12 +159,12 @@ class AssetCheckinTest extends TestCase
                 'hardware.checkin.store',
                 ['assetId' => Asset::factory()->assignedToUser()->create()->id]
             ), [
-                'checkin_at' => '2023-01-02 12:45:56',
+                'checkin_at' => '2023-01-02 12:34:56',
                 'note' => 'hello'
             ]);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) {
-            return $event->action_date === '2023-01-02 12:45:56' && $event->note === 'hello';
+            return $event->action_date === '2023-01-02 12:34:56' && $event->note === 'hello';
         }, 1);
     }
 }
