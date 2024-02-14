@@ -584,6 +584,11 @@ class AssetsController extends Controller
                         }
                     }
                 }
+                if ($field->element == 'checkbox') {
+                    if(is_array($field_val)) {
+                        $field_val = implode(',', $field_val);
+                    }
+                }
 
 
                 $asset->{$field->db_column} = $field_val;
