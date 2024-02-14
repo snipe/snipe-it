@@ -314,7 +314,8 @@ class ValidationServiceProvider extends ServiceProvider
                 if(count($invalid) > 0) {
                     return false;
                 }
-            } else return true;
+            }
+            return true;
         });
     }
 
