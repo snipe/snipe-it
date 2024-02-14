@@ -120,14 +120,4 @@ class AssetCheckinTest extends TestCase
     {
         $this->markTestIncomplete();
     }
-
-    public function testCheckInEmailSentToUserIfSettingEnabled()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCheckInEmailNotSentToUserIfSettingDisabled()
-    {
-        $this->markTestIncomplete();
-    }
 }
