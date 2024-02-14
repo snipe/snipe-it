@@ -7,6 +7,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -169,6 +170,7 @@ class AssetModelsController extends Controller
 
         if ($this->shouldAddDefaultValues($request->input())) {
             if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                //TODO: this needs to return the actual validation errors, will come back to this before opening PR
                 return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
             }
         }
@@ -489,11 +491,11 @@ class AssetModelsController extends Controller
      * @param  array      $defaultValues
      * @return void
      */
-    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
+    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues): bool
     {
         $data = array();
         foreach ($defaultValues as $customFieldId => $defaultValue) {
-            $customField = \App\Models\CustomField::find($customFieldId);
+            $customField = CustomField::find($customFieldId);
 
             $data[$customField->db_column] = $defaultValue;
         }

@@ -297,23 +297,24 @@ class ValidationServiceProvider extends ServiceProvider
             return !is_array($value);
         });
 
+        // This is only used in Models/CustomFieldset.php - it does automatic validation for checkboxes by making sure
+        // that the submitted values actually exist in the options.
         Validator::extend('checkboxes', function ($attribute, $value, $parameters, $validator){
             $options = CustomField::where('db_column', $attribute)->first()->formatFieldValuesAsArray();
+            if(is_array($value)) {
+                $invalid = array_diff($value, $options);
+                if(count($invalid) > 0) {
+                    return false;
+                }
+            }
             // for legacy, allows users to submit a comma separated string of options
-            if(!is_array($value)) {
+            elseif(!is_array($value)) {
                 $exploded = explode(',', $value);
                 $invalid = array_diff($exploded, $options);
                 if(count($invalid) > 0) {
                     return false;
                 }
-            } else {
-                $valid = array_intersect($value, $options);
-                if(array_count_values($valid) > 0) {
-                    return true;
-                }
-            }
-
-
+            } else return true;
         });
     }
 
