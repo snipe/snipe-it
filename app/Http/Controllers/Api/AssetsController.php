@@ -864,10 +864,8 @@ class AssetsController extends Controller
      */
     public function checkin(Request $request, $asset_id)
     {
-        $this->authorize('checkin', Asset::class);
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
-
 
         $target = $asset->assignedTo;
         if (is_null($target)) {
