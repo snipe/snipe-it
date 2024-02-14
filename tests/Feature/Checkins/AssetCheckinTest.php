@@ -5,6 +5,8 @@ namespace Tests\Feature\Checkins;
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
+use App\Models\LicenseSeat;
+use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Notifications\CheckinAssetNotification;
@@ -71,6 +73,47 @@ class AssetCheckinTest extends TestCase
         $this->assertEquals($status->id, $asset->status_id);
     }
 
+    public function testLocationIsSetToRTDLocationByDefaultUponCheckin()
+    {
+        $rtdLocation = Location::factory()->create();
+        $asset = Asset::factory()->assignedToUser()->create([
+            'location_id' => Location::factory()->create()->id,
+            'rtd_location_id' => $rtdLocation->id,
+        ]);
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
+
+        $this->assertTrue($asset->refresh()->location()->is($rtdLocation));
+    }
+
+    public function testLocationCanBeSetUponCheckin()
+    {
+        $location = Location::factory()->create();
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]), [
+                'location_id' => $location->id,
+            ]);
+
+        $this->assertTrue($asset->refresh()->location()->is($location));
+    }
+
+    public function testDefaultLocationCanBeUpdatedUponCheckin()
+    {
+        $location = Location::factory()->create();
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]), [
+                'location_id' => $location->id,
+                'update_default_location' => 0
+            ]);
+
+        $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
+    }
+
     public function testLastCheckInFieldIsSetOnCheckin()
     {
         $admin = User::factory()->superuser()->create();
@@ -82,9 +125,36 @@ class AssetCheckinTest extends TestCase
             ]));
 
         $this->assertNotNull(
-            $asset->fresh()->last_checkin,
+            $asset->refresh()->last_checkin,
             'last_checkin field should be set on checkin'
         );
+    }
+
+    public function testAssetsLicenseSeatsAreClearedUponCheckin()
+    {
+        $asset = Asset::factory()->assignedToUser()->create();
+        LicenseSeat::factory()->assignedToUser()->for($asset)->create();
+
+        $this->assertNotNull($asset->licenseseats->first()->assigned_to);
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
+
+        $this->assertNull($asset->refresh()->licenseseats->first()->assigned_to);
+    }
+
+    public function testLegacyLocationValuesSetToZeroAreUpdated()
+    {
+        $asset = Asset::factory()->canBeInvalidUponCreation()->assignedToUser()->create([
+            'rtd_location_id' => 0,
+            'location_id' => 0,
+        ]);
+
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
+
+        $this->assertNull($asset->refresh()->rtd_location_id);
+        $this->assertNull($asset->location_id);
     }
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()

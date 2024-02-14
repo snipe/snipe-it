@@ -8,7 +8,6 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -352,5 +351,20 @@ class AssetFactory extends Factory
     public function nonrequestable()
     {
         return $this->state(['requestable' => false]);
+    }
+
+    /**
+     * This allows bypassing model level validation if you want to purposefully
+     * create an asset in an invalid state. Validation is turned back on
+     * after the model is created via the factory.
+     * @return AssetFactory
+     */
+    public function canBeInvalidUponCreation()
+    {
+        return $this->afterMaking(function (Asset $asset) {
+            $asset->setValidating(false);
+        })->afterCreating(function (Asset $asset) {
+            $asset->setValidating(true);
+        });
     }
 }
