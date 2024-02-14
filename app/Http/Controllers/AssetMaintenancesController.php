@@ -161,17 +161,6 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-        if ($assetMaintenance->completion_date == '0000-00-00') {
-            $assetMaintenance->completion_date = null;
-        }
-
-        if ($assetMaintenance->start_date == '0000-00-00') {
-            $assetMaintenance->start_date = null;
-        }
-
-        if ($assetMaintenance->cost == '0.00') {
-            $assetMaintenance->cost = null;
-        }
 
         // Prepare Improvement Type List
         $assetMaintenanceType = [
