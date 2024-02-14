@@ -309,7 +309,7 @@ class ValidationServiceProvider extends ServiceProvider
             }
             // for legacy, allows users to submit a comma separated string of options
             elseif(!is_array($value)) {
-                $exploded = explode(',', $value);
+                $exploded = array_map('trim', explode(',', $value));
                 $invalid = array_diff($exploded, $options);
                 if(count($invalid) > 0) {
                     return false;
