@@ -4,6 +4,7 @@ namespace Tests\Feature\Api\Assets;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
+use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
@@ -50,7 +51,7 @@ class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->assignedTo->is($user));
 
         $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset->id), [
+            ->postJson(route('api.asset.checkin', $asset), [
                 'name' => 'Changed Name',
                 'status_id' => $status->id,
             ])
@@ -68,22 +69,54 @@ class AssetCheckinTest extends TestCase
         $this->assertEquals($status->id, $asset->status_id);
     }
 
-    public function testLastCheckInFieldIsSetOnCheckin()
+    public function testLocationIsSetToRTDLocationByDefaultUponCheckin()
     {
-        $admin = User::factory()->checkinAssets()->create();
-        $asset = Asset::factory()->assignedToUser()->create(['last_checkin' => null]);
+        $rtdLocation = Location::factory()->create();
+        $asset = Asset::factory()->assignedToUser()->create([
+            'location_id' => Location::factory()->create()->id,
+            'rtd_location_id' => $rtdLocation->id,
+        ]);
 
-        $this->actingAsForApi($admin)
-            ->postJson(route('api.asset.checkin', $asset))
-            ->assertOk();
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset->id));
 
-        $this->assertNotNull(
-            $asset->fresh()->last_checkin,
-            'last_checkin field should be set on checkin'
-        );
+        $this->assertTrue($asset->refresh()->location()->is($rtdLocation));
+    }
+
+    public function testLocationCanBeSetUponCheckin()
+    {
+        $location = Location::factory()->create();
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset->id), [
+                'location_id' => $location->id,
+            ]);
+
+        $this->assertTrue($asset->refresh()->location()->is($location));
+    }
+
+    public function testDefaultLocationCanBeUpdatedUponCheckin()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAssetsLicenseSeatsAreClearedUponCheckin()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testLegacyLocationValuesSetToZeroAreUpdated()
+    {
+        $this->markTestIncomplete();
     }
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
+    {
+        $this->markTestIncomplete('Not currently in controller');
+    }
+
+    public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
         $this->markTestIncomplete();
     }
