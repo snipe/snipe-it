@@ -5,6 +5,8 @@ namespace App\Models;
 use Gate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
@@ -96,6 +98,11 @@ class CustomFieldset extends Model
             // temporary condition added to fix issue with model default updates in the gui
             if ($field->element != 'checkbox') {
                 $rules[$field->db_column_name()][] = 'not_array';
+            }
+            if ($field->element == 'checkbox') {
+                //Log::alert($field->formatFieldValuesAsArray());
+                $values = $field->formatFieldValuesAsArray();
+                //$rules[$field->db_column_name()] = 'checkboxes';
             }
         }
 

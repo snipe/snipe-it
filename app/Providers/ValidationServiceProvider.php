@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
 use DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
 use Validator;
@@ -293,6 +295,25 @@ class ValidationServiceProvider extends ServiceProvider
 
         Validator::extend('not_array', function ($attribute, $value, $parameters, $validator) {
             return !is_array($value);
+        });
+
+        Validator::extend('checkboxes', function ($attribute, $value, $parameters, $validator){
+            $options = CustomField::where('db_column', $attribute)->formatFieldValuesAsArray();
+            if(!is_array($value)) {
+                $exploded = explode(',', $value);
+                $valid = array_intersect($exploded, $options);
+                if(array_count_values($valid) > 0) {
+                    return true;
+                }
+            }
+            if(is_array($value)) {
+                $valid = array_intersect($value, $options);
+                if(array_count_values($valid) > 0) {
+                    return true;
+                }
+            }
+
+
         });
     }
 
