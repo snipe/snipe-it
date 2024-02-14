@@ -39,6 +39,7 @@ class AssetCheckinTest extends TestCase
         Event::fake([CheckoutableCheckedIn::class]);
 
         $user = User::factory()->create();
+        $location = Location::factory()->create();
         $status = Statuslabel::first() ?? Statuslabel::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create([
             'expected_checkin' => now()->addDay(),
@@ -54,6 +55,7 @@ class AssetCheckinTest extends TestCase
                 [
                     'name' => 'Changed Name',
                     'status_id' => $status->id,
+                    'location_id' => $location->id,
                 ],
             )
             ->assertRedirect(route('users.show', $user));
@@ -68,6 +70,7 @@ class AssetCheckinTest extends TestCase
         $this->assertNull($asset->accepted);
         $this->assertEquals('Changed Name', $asset->name);
         $this->assertEquals($status->id, $asset->status_id);
+        $this->assertTrue($asset->location()->is($location));
     }
 
     public function testLocationIsSetToRTDLocationByDefaultUponCheckin()
@@ -82,19 +85,6 @@ class AssetCheckinTest extends TestCase
             ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertTrue($asset->refresh()->location()->is($rtdLocation));
-    }
-
-    public function testLocationCanBeSetUponCheckin()
-    {
-        $location = Location::factory()->create();
-        $asset = Asset::factory()->assignedToUser()->create();
-
-        $this->actingAs(User::factory()->checkinAssets()->create())
-            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]), [
-                'location_id' => $location->id,
-            ]);
-
-        $this->assertTrue($asset->refresh()->location()->is($location));
     }
 
     public function testDefaultLocationCanBeUpdatedUponCheckin()
