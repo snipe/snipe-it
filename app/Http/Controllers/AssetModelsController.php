@@ -169,7 +169,7 @@ class AssetModelsController extends Controller
         $model->fieldset_id = $request->input('fieldset_id');
 
         if ($this->shouldAddDefaultValues($request->input())) {
-            if ($msg = !$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+            if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
                 return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
             }
         }
