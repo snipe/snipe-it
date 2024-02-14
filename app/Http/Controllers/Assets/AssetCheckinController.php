@@ -69,9 +69,7 @@ class AssetCheckinController extends Controller
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
         $asset->last_checkin = now();
-        $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
-        $asset->assigned_type = null;
         $asset->accepted = null;
         $asset->name = $request->get('name');
 
