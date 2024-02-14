@@ -296,6 +296,10 @@
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
                 actions += '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '/edit" class="actions btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
+            } else {
+                if ((row.available_actions) && (row.available_actions.update != true)) {
+                    actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_edited') }}"><a class="btn btn-warning btn-sm disabled" onClick="return false;"><i class="fas fa-pencil-alt"></i></a></span>&nbsp;';
+                }
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -623,6 +627,9 @@
 
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
+            if (row.asset.deleted_at!='') {
+                return '<span style="white-space: nowrap;"><i class="fas fa-times text-danger"></i><span class="sr-only">deleted</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.asset_tag + '</a></del></span>';
+            }
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
         }
         return '';
@@ -640,7 +647,17 @@
         if ((row.asset) && (row.asset.name)) {
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.name + '</a>';
         }
+    }
 
+    function assetSerialLinkFormatter(value, row) {
+
+        if ((row.asset) && (row.asset.serial)) {
+            if (row.asset.deleted_at!='') {
+                return '<span style="white-space: nowrap;"><i class="fas fa-times text-danger"></i><span class="sr-only">deleted</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.serial + '</a></del></span>';
+            }
+            return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.serial + '</a>';
+        }
+        return '';
     }
 
     function trueFalseFormatter(value) {
