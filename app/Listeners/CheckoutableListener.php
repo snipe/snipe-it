@@ -69,9 +69,9 @@ class CheckoutableListener
               }
             }
         } catch (ClientException $e) {
-            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
+            Log::info("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::error("Exception caught during checkout notification: " . $e->getMessage());
+            Log::info("Exception caught during checkout notification: " . $e->getMessage());
         }
     }
 
@@ -124,9 +124,9 @@ class CheckoutableListener
             }
 
         } catch (ClientException $e) {
-            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
+            Log::info("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::error("Exception caught during checkin notification: " . $e->getMessage());
+            Log::info("Exception caught during checkin notification: " . $e->getMessage());
         }
     }      
 
