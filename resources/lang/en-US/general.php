@@ -502,5 +502,6 @@ return [
     'action_source' => 'Action Source',
     'or' => 'or',
     'url'                   => 'URL',
+    'edit_fieldset' => 'Edit fieldset fields and options',
 
 ];
