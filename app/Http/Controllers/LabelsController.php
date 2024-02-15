@@ -26,20 +26,6 @@ class LabelsController extends Controller
      */
     public function show(string $labelName)
     {
-        $setting = Setting::getSettings();
-
-        //grabs the field selection selected and turns it into a multidimensional array
-        $data = explode(';', Setting::getSettings()->label2_fields);
-        $data = array_map(function($element) {
-            $a = explode('=', $element);
-            return [$a[0] => $a[1]];
-        }, $data);
-
-        //turns a multidimensional array into an associative array
-        $field_selections = collect($data)->mapWithKeys(function ($item) {
-            return $item;
-        })->toArray();
-
         $labelName = str_replace('/', '\\', $labelName);
         $template = Label::find($labelName);
 
@@ -79,9 +65,12 @@ class LabelsController extends Controller
             $exampleAsset->model->category->id = 999999;
             $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
 
-        foreach($field_selections as $key => $value) {
-            $exampleAsset->{$value} = "{{$key}}";
-        }
+        collect(explode(';', Setting::getSettings()->label2_fields))
+            ->each(function ($item)  use ($exampleAsset){
+                $pair = explode('=', $item);
+
+                $exampleAsset->{$pair[1]} = "{{$pair[0]}}";
+            });
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {
