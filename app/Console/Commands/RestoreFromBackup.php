@@ -82,7 +82,6 @@ class SQLStreamer {
         $parser = new self($input, null);
         $parser->should_guess = true;
         $parser->line_aware_piping(); // <----- THIS is doing the heavy lifting!
-        print_r($parser->tablenames);
 
         $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to statics?
         //can't use 'users' because the 'accessories_users' table?
@@ -111,9 +110,6 @@ class SQLStreamer {
                 }
             }
         }
-        print "CALCULATED PREFIX: $guessed_prefix\n";
-//        self::$prefix = $guessed_prefix;
-        print_r($check_tables);
 
         return $guessed_prefix;
 
@@ -123,50 +119,31 @@ class SQLStreamer {
     {
         $bytes_read = 0;
         if (! $this->input) {
-            print "Your input is all fucked up yo.\n";
-            die("you suck");
+            throw new \Exception("No Input available for line_aware_piping");
         }
-        // FIXME - fix the indentation
-//        try {
-            while (($buffer = fgets($this->input, self::$buffer_size)) !== false) {
-                $bytes_read += strlen($buffer);
-                if ($this->reading_beginning_of_line) {
-                    // \Log::debug("Buffer is: '$buffer'");
-                    $cleaned_buffer = $this->parse_sql($buffer);
-//                    print "CLEANED BUFFER IS: $cleaned_buffer\n";
-                    if ($this->output) {
-                        $bytes_written = fwrite($this->output, $cleaned_buffer);
 
-                        if ($bytes_written === false) {
-                            throw new \Exception("Unable to write to pipe");
-                        }
+        while (($buffer = fgets($this->input, SQLStreamer::$buffer_size)) !== false) {
+            $bytes_read += strlen($buffer);
+            if ($this->reading_beginning_of_line) {
+                // \Log::debug("Buffer is: '$buffer'");
+                $cleaned_buffer = $this->parse_sql($buffer);
+                if ($this->output) {
+                    $bytes_written = fwrite($this->output, $cleaned_buffer);
+
+                    if ($bytes_written === false) {
+                        throw new \Exception("Unable to write to pipe");
                     }
                 }
-                // if we got a newline at the end of this, then the _next_ read is the beginning of a line
-                if($buffer[strlen($buffer)-1] === "\n") {
-                    $this->reading_beginning_of_line = true;
-                } else {
-                    $this->reading_beginning_of_line = false;
-                }
-
             }
-            return $bytes_read;
-//        } catch (\Exception $e) { //FIXME - move this out? Dunno.
-//            print "Uhm, what?\n";
-//
-//            dd($e);
-//            print_r($e);
-//            die(-1);
-//            \Log::error("Error during restore!!!! ".$e->getMessage());
-//            // FIXME - put these back and/or put them in the right places?!
-////            $err_out = fgets($pipes[1]);
-////            $err_err = fgets($pipes[2]);
-////            \Log::error("Error OUTPUT: ".$err_out);
-////            $this->info($err_out);
-////            \Log::error("Error ERROR : ".$err_err);
-////            $this->error($err_err);
-////            throw $e;
-//        }
+            // if we got a newline at the end of this, then the _next_ read is the beginning of a line
+            if($buffer[strlen($buffer)-1] === "\n") {
+                $this->reading_beginning_of_line = true;
+            } else {
+                $this->reading_beginning_of_line = false;
+            }
+
+        }
+        return $bytes_read;
 
     }
 }
@@ -180,13 +157,13 @@ class RestoreFromBackup extends Command
      *
      * @var string
      */
+    // FIXME - , stripping prefixes and nonstandard SQL statements. Without --prefix, guess and return the correct prefix to strip
     protected $signature = 'snipeit:restore 
                                             {--force : Skip the danger prompt; assuming you enter "y"} 
-                                            {filename? : The zip file to be migrated}
+                                            {filename : The zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}
-                                            {--sanitize-only : Sanitize and return SQL from STDIN}
-                                            {--prefix= : Don\'t guess DB table prefix; use the passed-in one (or none if just \'--prefix=\' is passed) }
-                                            {--no-sanitize : Don\'t try to sanitize the SQL at all; pass it through unmodified}';
+                                            {--sanitize-guess-prefix : Guess and output the table-prefix needed to "sanitize" the SQL}
+                                            {--sanitize-with-prefix= : "Sanitize" the SQL, using the passed-in table prefix (can be learned from --sanitize-guess-prefix). Pass as just \'--sanitize-with-prefix=\' to use no prefix}';
 
     /**
      * The console command description.
@@ -205,8 +182,6 @@ class RestoreFromBackup extends Command
         parent::__construct();
     }
 
-    public static $prefix = null;
-
     /**
      * Execute the console command.
      *
@@ -214,24 +189,6 @@ class RestoreFromBackup extends Command
      */
     public function handle()
     {
-        if ( $this->option('prefix') !== null ) {
-            self::$prefix = $this->option('prefix');
-        }
-
-        if ($this->option('sanitize-only')) {
-            if ( self::$prefix === null) {
-                print "okay, no prefix declared, we're going to GUESS IT!!!!\n";
-                self::$prefix = SQLStreamer::guess_prefix(STDIN);
-                print "FINAL PREFIX IS: ".self::$prefix."\n";
-                return $this->info("Re-run this command with '--prefix=".self::$prefix."' to see an attempt to sanitze your SQL.");
-            } else {
-                // for 'sanitize-only' - do we have to do something weird here, piping stuff around to stdin and stdout?
-                $this->comment("OKIE DOKE!! Here we go to try and sanitize some bidness");
-                $stream = new SQLStreamer(STDIN, STDOUT, self::$prefix);
-                $stream->line_aware_piping();
-                return $this->info("WE ARE ALL DONE! YAY!!!!!!!!!");
-            }
-        }
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
             \Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
@@ -244,7 +201,7 @@ class RestoreFromBackup extends Command
             return $this->error('Missing required filename');
         }
 
-        if (! $this->option('force') && ! $this->confirm('Are you sure you wish to restore from the given backup file? This can lead to MASSIVE DATA LOSS!')) {
+        if (! $this->option('force') && ! $this->option('sanitize-guess-prefix') && ! $this->confirm('Are you sure you wish to restore from the given backup file? This can lead to MASSIVE DATA LOSS!')) {
             return $this->error('Data loss not confirmed');
         }
 
@@ -347,11 +304,11 @@ class RestoreFromBackup extends Command
             }
 
             foreach (array_merge($private_dirs, $public_dirs) as $dir) {
-                $last_pos = strrpos($raw_path, $dir.'/');
+                $last_pos = strrpos($raw_path, $dir . '/');
                 if ($last_pos !== false) {
                     //print("INTERESTING - last_pos is $last_pos when searching $raw_path for $dir - last_pos+strlen(\$dir) is: ".($last_pos+strlen($dir))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
                     //print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
-                    $interesting_files[$raw_path] = ['dest' =>$dir, 'index' => $i];
+                    $interesting_files[$raw_path] = ['dest' => $dir, 'index' => $i];
                     continue 2;
                     if ($last_pos + strlen($dir) + 1 == strlen($raw_path)) {
                         // we don't care about that; we just want files with the appropriate prefix
@@ -360,7 +317,7 @@ class RestoreFromBackup extends Command
                 }
             }
             $good_extensions = ['png', 'gif', 'jpg', 'svg', 'jpeg', 'doc', 'docx', 'pdf', 'txt',
-                                'zip', 'rar', 'xls', 'xlsx', 'lic', 'xml', 'rtf', 'webp', 'key', 'ico', ];
+                'zip', 'rar', 'xls', 'xlsx', 'lic', 'xml', 'rtf', 'webp', 'key', 'ico',];
             foreach (array_merge($private_files, $public_files) as $file) {
                 $has_wildcard = (strpos($file, '*') !== false);
                 if ($has_wildcard) {
@@ -369,8 +326,8 @@ class RestoreFromBackup extends Command
                 $last_pos = strrpos($raw_path, $file); // no trailing slash!
                 if ($last_pos !== false) {
                     $extension = strtolower(pathinfo($raw_path, PATHINFO_EXTENSION));
-                    if (! in_array($extension, $good_extensions)) {
-                        $this->warn('Potentially unsafe file '.$raw_path.' is being skipped');
+                    if (!in_array($extension, $good_extensions)) {
+                        $this->warn('Potentially unsafe file ' . $raw_path . ' is being skipped');
                         $boring_files[] = $raw_path;
                         continue 2;
                     }
@@ -385,7 +342,6 @@ class RestoreFromBackup extends Command
             }
             $boring_files[] = $raw_path; //if we've gotten to here and haven't continue'ed our way into the next iteration, we don't want this file
         } // end of pre-processing the ZIP file for-loop
-
         // print_r($interesting_files);exit(-1);
 
         if (count($sqlfiles) != 1) {
@@ -395,6 +351,17 @@ class RestoreFromBackup extends Command
         if (strpos($sqlfiles[0], 'db-dumps') === false) {
             //return $this->error("SQL backup file is missing 'db-dumps' component of full pathname: ".$sqlfiles[0]);
             //older Snipe-IT installs don't have the db-dumps subdirectory component
+        }
+
+        $sql_stat = $za->statIndex($sqlfile_indices[0]);
+        //$this->info("SQL Stat is: ".print_r($sql_stat,true));
+        $sql_contents = $za->getStream($sql_stat['name']); // maybe copy *THIS* thing?
+
+        // OKAY, now that we *found* the sql file if we're doing just the guess-prefix thing, we can do that *HERE* I think?
+        if ($this->option('sanitize-guess-prefix')) {
+            $prefix = SQLStreamer::guess_prefix($sql_contents);
+            $this->line($prefix);
+            return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitze your SQL.");
         }
 
         //how to invoke the restore?
@@ -428,9 +395,9 @@ class RestoreFromBackup extends Command
 
         //$sql_contents = fopen($sqlfiles[0], "r"); //NOPE! This isn't a real file yet, silly-billy!
 
-        $sql_stat = $za->statIndex($sqlfile_indices[0]);
-        //$this->info("SQL Stat is: ".print_r($sql_stat,true));
-        $sql_contents = $za->getStream($sql_stat['name']);
+        // FIXME - this feels like it wants to go somewhere else?
+        // and it doesn't seem 'right' - if you can't get a stream to the .sql file,
+        // why do we care what's happening with pipes and stdout and stderr?!
         if ($sql_contents === false) {
             $stdout = fgets($pipes[1]);
             $this->info($stdout);
@@ -439,15 +406,12 @@ class RestoreFromBackup extends Command
 
             return false;
         }
-        if (! self::$prefix ) {
-            $sql_prefix_sniffer = $za->getStream($sql_stat['name']);
-            self::$prefix = SQLStreamer::guess_prefix($sql_prefix_sniffer);
-            $this->info("Guessed prefix: '".self::$prefix."'");
-        }
 
         try {
-            if ( $this->option('no-sanitize')) {
-                while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
+            if ( $this->option('sanitize-with-prefix') === null) {
+                // "Legacy" direct-piping
+                $bytes_read = 0;
+                while (($buffer = fgets($sql_contents, SQLStreamer::$buffer_size)) !== false) {
                     $bytes_read += strlen($buffer);
                     // \Log::debug("Buffer is: '$buffer'");
                     $bytes_written = fwrite($pipes[0], $buffer);
@@ -457,7 +421,7 @@ class RestoreFromBackup extends Command
                     }
                 }
             } else {
-                $sql_importer = new SQLStreamer($sql_contents, $pipes[0], self::$prefix);
+                $sql_importer = new SQLStreamer($sql_contents, $pipes[0], $this->option('sanitize-with-prefix'));
                 $bytes_read = $sql_importer->line_aware_piping();
             }
         } catch (\Exception $e) {
@@ -502,7 +466,7 @@ class RestoreFromBackup extends Command
             $fp = $za->getStream($ugly_file_name);
             //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
             $migrated_file = fopen($file_details['dest'].'/'.basename($pretty_file_name), 'w');
-            while (($buffer = fgets($fp, self::$buffer_size)) !== false) {
+            while (($buffer = fgets($fp, SQLStreamer::$buffer_size)) !== false) {
                 fwrite($migrated_file, $buffer);
             }
             fclose($migrated_file);
