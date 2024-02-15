@@ -135,10 +135,10 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-       
+        // This sets an attribute on the Loggable trait for the action log
+        $asset->setImported(true);
         if ($asset->save()) {
 
-            $asset->logCreate(trans('general.importer.import_note'));
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // If we have a target to checkout to, lets do so.
