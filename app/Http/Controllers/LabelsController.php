@@ -74,15 +74,15 @@ class LabelsController extends Controller
             $exampleAsset->model->category->id = 999999;
             $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
         }
-        //turns a multidimensional array in an associative array for no double for looping
-        $result = array();
-        foreach ($data as $entry) {
-            $result[key($entry)] = reset($entry);
-        }
-        foreach($result as $key => $value) {
+
+        //turns a multidimensional array in an associative array
+        $field_selections = collect($data)->mapWithKeys(function ($item) {
+            return $item;
+        })->toArray();
+
+        foreach($field_selections as $key => $value) {
             $exampleAsset->{$value} = "{{$key}}";
         }
-
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {
