@@ -27,7 +27,7 @@ class LabelsController extends Controller
     public function show(string $labelName)
     {
         $setting = Setting::getSettings();
-        //This part allows for the custom selection label preview
+        //This part allows for the custom field selection to be visible in the label preview
         $data = explode(';', Setting::getSettings()->label2_fields);
         $data = array_map(function($element) {
             $a = explode('=', $element);
@@ -74,12 +74,15 @@ class LabelsController extends Controller
             $exampleAsset->model->category->id = 999999;
             $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
         }
-
-        foreach($data as $innerArray){
-            foreach($innerArray as $key => $value) {
-                $exampleAsset->{$value} = "{{$key}}";
-            }
+        //turns a multidimensional array in an associative array for no double for looping
+        $result = array();
+        foreach ($data as $entry) {
+            $result[key($entry)] = reset($entry);
         }
+        foreach($result as $key => $value) {
+            $exampleAsset->{$value} = "{{$key}}";
+        }
+
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {
