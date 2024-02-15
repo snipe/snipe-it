@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\CustomFieldset;
 use App\Models\Labels\Label;
 use App\Models\Location;
 use App\Models\Manufacturer;
@@ -26,6 +27,21 @@ class LabelsController extends Controller
      */
     public function show(string $labelName)
     {
+        $data = explode(';', Setting::getSettings()->label2_fields);
+        $fields = str_replace('=', ' ', $data);
+
+        $custom_fields= [];
+
+        foreach ($fields as $field) {
+
+            $parts = explode('_', $field, 2);
+
+            $key = trim($parts[0]);
+            $value = trim($parts[1]);
+
+            $custom_fields["_".$value] = $key ;
+        }
+//        dd($custom_fields);
         $labelName = str_replace('/', '\\', $labelName);
         $template = Label::find($labelName);
 
@@ -64,6 +80,11 @@ class LabelsController extends Controller
         $exampleAsset->model->category = new Category();
         $exampleAsset->model->category->id = 999999;
         $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
+
+
+        foreach($custom_fields as $key => $value){
+            $exampleAsset->{$key} = "{{$value}}" ;
+        }
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {
