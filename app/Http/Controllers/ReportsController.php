@@ -686,17 +686,27 @@ class ReportsController extends Controller
 
                 $assets->whereBetween('assets.created_at', [$created_start, $created_end]);
             }
+
+            //This should parse the action log, and not the hardware table.
+            //There can be multiple checkouts in a given time that we want to track.
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
                 $checkout_start = \Carbon::parse($request->input('checkout_date_start'))->startOfDay();
                 $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
 
                 $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
+                //$assets->whereBetween('action_logs.created_at', [$checkout_start, $checkout_end]);
+                //action_logs bit was returning an ERR_INVALID_RESPONSE so I probably missed something
+                //sql query? -> WHERE (`action_type` = 'checkout') AND (`item_type` LIKE '%Asset%')
+                // AND whereBetween('action_logs.created_at', [$checkout_start, $checkout_end]);
+                //    if ($action_logs->action_type == "checkout") {}
+
+
             }
 
             if (($request->filled('checkin_date_start'))) {
                     $assets->whereBetween('last_checkin', [
                         Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
-                        // use today's date is `checkin_date_end` is not provided
+                        // use today's date if `checkin_date_end` is not provided
                         Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
                     ]);
             }
