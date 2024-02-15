@@ -45,10 +45,10 @@ class ConsumableImporter extends ItemImporter
         $this->item['item_no'] = trim($this->findCsvMatch($row, 'item_number'));
         $this->item['min_amt'] = trim($this->findCsvMatch($row, "min_amt"));
         $consumable->fill($this->sanitizeItemForStoring($consumable));
-        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
-        $consumable->unsetEventDispatcher();
+
+        // This sets an attribute on the Loggable trait for the action log
+        $consumable->setImported(true);
         if ($consumable->save()) {
-            $consumable->logCreate('Imported using CSV Importer');
             $this->log('Consumable '.$this->item['name'].' was created');
 
             return;

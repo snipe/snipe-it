@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 trait Loggable
 {
+    // an attribute for setting whether or not the item was imported
+    public ?bool $imported = false;
+
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
@@ -16,6 +19,11 @@ trait Loggable
     public function log()
     {
         return $this->morphMany(Actionlog::class, 'item');
+    }
+
+    public function setImported(bool $bool): void
+    {
+        $this->imported = $bool;
     }
 
     /**
