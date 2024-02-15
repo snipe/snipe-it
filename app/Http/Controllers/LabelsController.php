@@ -75,7 +75,7 @@ class LabelsController extends Controller
             $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
         }
 
-        //turns a multidimensional array in an associative array
+        //turns a multidimensional array into an associative array
         $field_selections = collect($data)->mapWithKeys(function ($item) {
             return $item;
         })->toArray();
