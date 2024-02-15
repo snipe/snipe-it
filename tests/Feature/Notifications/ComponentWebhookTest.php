@@ -20,7 +20,7 @@ class ComponentWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
             Component::factory()->ramCrucial8()->create(),
@@ -36,7 +36,7 @@ class ComponentWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
             Component::factory()->ramCrucial8()->create(),

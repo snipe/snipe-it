@@ -22,7 +22,7 @@ class AccessoryWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
             Accessory::factory()->appleBtKeyboard()->create(),
@@ -60,7 +60,7 @@ class AccessoryWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
             Accessory::factory()->appleBtKeyboard()->create(),
