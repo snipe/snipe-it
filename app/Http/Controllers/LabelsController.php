@@ -43,7 +43,6 @@ class LabelsController extends Controller
         $labelName = str_replace('/', '\\', $labelName);
         $template = Label::find($labelName);
 
-        if($setting->label2_enable && ($setting->label2_template != 'DefaultLabel')) {
             $exampleAsset = new Asset();
 
             $exampleAsset->id = 999999;
@@ -79,7 +78,6 @@ class LabelsController extends Controller
             $exampleAsset->model->category = new Category();
             $exampleAsset->model->category->id = 999999;
             $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
-        }
 
         foreach($field_selections as $key => $value) {
             $exampleAsset->{$value} = "{{$key}}";
