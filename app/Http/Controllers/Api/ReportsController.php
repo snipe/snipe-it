@@ -33,7 +33,12 @@ class ReportsController extends Controller
 
         if (($request->filled('item_type')) && ($request->filled('item_id'))) {
             $actionlogs = $actionlogs->where('item_id', '=', $request->input('item_id'))
-                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
+                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')))
+                ->orWhere(function($query) use ($request)
+                {
+                    $query->where('target_id', '=', $request->input('item_id'))
+                    ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
+                });
         }
 
         if ($request->filled('action_type')) {
