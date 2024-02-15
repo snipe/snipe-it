@@ -27,12 +27,17 @@ class LabelsController extends Controller
     public function show(string $labelName)
     {
         $setting = Setting::getSettings();
-        //This part allows for the custom field selection to be visible in the label preview
+        //grabs the field selection selected and turns it into a multidimensional array
         $data = explode(';', Setting::getSettings()->label2_fields);
         $data = array_map(function($element) {
             $a = explode('=', $element);
             return [$a[0] => $a[1]];
         }, $data);
+
+        //turns a multidimensional array into an associative array
+        $field_selections = collect($data)->mapWithKeys(function ($item) {
+            return $item;
+        })->toArray();
 
         $labelName = str_replace('/', '\\', $labelName);
         $template = Label::find($labelName);
@@ -75,10 +80,7 @@ class LabelsController extends Controller
             $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
         }
 
-        //turns a multidimensional array into an associative array
-        $field_selections = collect($data)->mapWithKeys(function ($item) {
-            return $item;
-        })->toArray();
+
 
         foreach($field_selections as $key => $value) {
             $exampleAsset->{$value} = "{{$key}}";
