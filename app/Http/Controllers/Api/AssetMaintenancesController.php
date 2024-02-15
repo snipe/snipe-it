@@ -48,7 +48,7 @@ class AssetMaintenancesController extends Controller
         }
 
         if ($request->filled('supplier_id')) {
-            $maintenances->where('supplier_id', '=', $request->input('supplier_id'));
+            $maintenances->where('asset_maintenances.supplier_id', '=', $request->input('supplier_id'));
         }
 
         if ($request->filled('asset_maintenance_type')) {
