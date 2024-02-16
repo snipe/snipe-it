@@ -69,7 +69,7 @@ return [
     'component'			    => 'Συστατικό',
     'components'			=> 'Συστατικά',
     'complete'				=> 'Πλήρης',
-    'consumable'			=> 'Καταναλώσιμος',
+    'consumable'			=> 'Αναλώσιμο',
     'consumables'			=> 'Αναλώσιμα',
     'country'  				=> 'Χώρα',
     'could_not_restore'     => 'Σφάλμα επαναφοράς :item_type: :error',
