@@ -694,6 +694,14 @@ class ReportsController extends Controller
                 $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
 
                 $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
+
+                $actionlogassets = Actionlog::where('action_type','=', 'checkout')->
+                                              where('item_type' 'LIKE' '%Asset%',)
+                                              whereBetween('created_at',[$checkout_start, $checkout_end])
+                                                  ->pluck('item_id');
+
+                $assets->whereIn('id',$actionlogassets);
+
                 //$assets->whereBetween('action_logs.created_at', [$checkout_start, $checkout_end]);
                 //action_logs bit was returning an ERR_INVALID_RESPONSE so I probably missed something
                 //sql query? -> WHERE (`action_type` = 'checkout') AND (`item_type` LIKE '%Asset%')
