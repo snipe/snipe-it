@@ -691,13 +691,11 @@ class ReportsController extends Controller
             //There can be multiple checkouts in a given time that we want to track.
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
                 $checkout_start = \Carbon::parse($request->input('checkout_date_start'))->startOfDay();
-                $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
+                $checkout_end = \Carbon::parse($request->input('checkout_date_end',now()))->endOfDay();
 
-                $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
-
-                $actionlogassets = Actionlog::where('action_type','=', 'checkout')->
-                                              where('item_type' 'LIKE' '%Asset%',)
-                                              whereBetween('created_at',[$checkout_start, $checkout_end])
+                $actionlogassets = Actionlog::where('action_type','=', 'checkout')
+                                              ->where('item_type', 'LIKE', '%Asset%',)
+                                              ->whereBetween('action_date',[$checkout_start, $checkout_end])
                                                   ->pluck('item_id');
 
                 $assets->whereIn('id',$actionlogassets);
