@@ -23,6 +23,7 @@
           <table
                   data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
                   data-cookie-id-table="locationTable"
+                  data-click-to-select="true"
                   data-pagination="true"
                   data-id-table="locationTable"
                   data-search="true"

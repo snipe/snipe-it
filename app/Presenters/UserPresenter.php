@@ -22,8 +22,9 @@ class UserPresenter extends Presenter
     {
         $layout = [
             [
-                'field' => 'checkbox',
+                'field' => 'bulk_selectable',
                 'checkbox' => true,
+                'formatter' => 'checkboxEnabledFormatter',
             ],
             [
                 'field' => 'id',
