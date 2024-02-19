@@ -148,7 +148,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Redirect
+     * @return JsonResponse
      */
     public function ajaxTestEmail()
     {
@@ -170,7 +170,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0.0]
-     * @return Response
+     * @return JsonResponse
      */
     public function purgeBarcodes()
     {
@@ -211,7 +211,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * @return array | JsonResponse
      */
     public function showLoginAttempts(Request $request)
     {
