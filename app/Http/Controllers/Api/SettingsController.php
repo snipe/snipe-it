@@ -261,7 +261,6 @@ class SettingsController extends Controller
                     $count++;
                 }
 
-
             }
         }
 
@@ -271,6 +270,14 @@ class SettingsController extends Controller
     }
 
 
+    /**
+     * Downloads a backup file.
+     * We use response()->download() here instead of Storage::download() because Storage::download()
+     * exhausts memory on larger files.
+     *
+     * @author [A. Gianotto]
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function downloadBackup($file) {
 
         $path = storage_path('app/backups');
@@ -283,4 +290,36 @@ class SettingsController extends Controller
         }
 
     }
+
+    /**
+     * Determines and downloads the latest backup
+     *
+     * @author [A. Gianotto]
+     * @since [v6.3.1]
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadLatestBackup() {
+
+        $fileData = collect();
+        foreach (Storage::files('app/backups') as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) == 'zip') {
+                $fileData->push([
+                    'file' => $file,
+                    'date' => Storage::lastModified($file)
+                ]);
+            }
+        }
+
+        $newest = $fileData->sortByDesc('date')->first();
+        if (Storage::exists($newest['file'])) {
+            $headers = ['ContentType' => 'application/zip'];
+            return response()->download(storage_path($newest['file']), basename($newest['file']), $headers);
+        } else {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('general.file_not_found')), 404);
+        }
+
+
+    }
+
+
 }
