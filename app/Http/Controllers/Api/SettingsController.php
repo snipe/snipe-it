@@ -249,6 +249,7 @@ class SettingsController extends Controller
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
                         'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
+                        'backup_url' => config('app.url').'/settings/backups/download/'.basename($backup_files[$f]),
 
                     ];
                     $count++;
@@ -269,7 +270,7 @@ class SettingsController extends Controller
         $path = 'app/backups';
         if (Storage::exists($path.'/'.$file)) {
             $headers = ['ContentType' => 'application/zip'];
-            return Storage::download($path.'/'.$file, $file, $headers);
+            return response()->download($path.'/'.$file, $file, $headers);
         } else {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('general.file_not_found')));
         }
