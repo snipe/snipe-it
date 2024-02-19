@@ -102,7 +102,6 @@ class Label implements View
                         $title = str_replace('{COMPANY}', $asset->company->name, $settings->label2_title);
                         $settings->qr_text;
                         $assetData->put('title', $title);
-                        \Log::error("THE TITLE YOU ARE TRYING TO PUT IS: $title");
                     }
                 }
 
@@ -174,13 +173,11 @@ class Label implements View
         if ($template instanceof Sheet) {
             $template->setLabelIndexOffset($offset ?? 0);
         }
-        //\Log::error("DUMPING all of the 'data' - ".print_r($data,true));
         $template->writeAll($pdf, $data);
 
         $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
-        set_time_limit(0);                   // ignore php timeout
 
-        $pdf->Output($filename, 'I'); // KERPLOW - splodey splode.
+        $pdf->Output($filename, 'I');
     }
 
     /**

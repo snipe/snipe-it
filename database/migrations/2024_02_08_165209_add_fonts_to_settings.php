@@ -29,7 +29,7 @@ class AddFontsToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             //
-            $table->dropColumn(['label2_variable_font','label2_fixed_font']);
+            $table->dropColumn(['label2_variable_font','label2_mono_font']);
         });
     }
 }

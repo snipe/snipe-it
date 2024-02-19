@@ -75,8 +75,6 @@ class L7162_A extends L7162
             $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
         }
 
-        // FONT FAMILY WORK:
-        // >>>>> WORKED'cid0cs', // 'unifont15104' // TOTAL DISASTER, // 'cid0cs', /* ALL FOUR!*/  // 'cid0ct', (3/4) // 'cid0cs'/* ALL FOUR!!!!! */,//'cid0jp' (3/4!), // 'cid0jp' (3/4!), //'cid0kr' (almost!), //'droidsansfallback', //  'couriernew', //'notosansmonocjkscvf', //'notosansmono', //'msungstdlight', // 'freeserif', // 'unifont15104', // 'robotomono', // $fontFamily,
         foreach ($record->get('fields') as $field) {
             static::writeText(
                 $pdf, $field['label'],

@@ -125,27 +125,27 @@
                             <!-- fonts, variable -->
                             <div class="form-group">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_variable_font','Variable-width font', ['class' => 'control-label']) }}
+                                    {{ Form::label('label2_variable_font',trans('admin/settings/general.label2_variable_width_font'), ['class' => 'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::select('label2_variable_font', $fonts, old('label2_variable_font', $setting->label2_variable_font), [ 'class'=>'select2 col-md-3', 'aria-label'=>'label2_variable_font' ]) }}
-                                    "FreeSans" is the default
+                                    {{ trans('admin/settings/general.label2_variable_width_font_hint') }}
                                 </div>
                             </div>
 
                             <!-- fonts, fixed -->
                             <div class="form-group">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_mono_font','Fixed-width font', ['class' => 'control-label']) }}
+                                    {{ Form::label('label2_mono_font',trans('admin/settings/general.label2_fixed_width_font'), ['class' => 'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::select('label2_mono_font', $fonts, old('label2_mono_font', $setting->label2_mono_font), [ 'class'=>'select2 col-md-3', 'aria-label'=>'label2_mono_font' ]) }}
-                                    "FreeMono" is the default
+                                    {{ trans('admin/settings/general.label2_fixed_width_font_hint') }}
                                 </div>
                             </div>
 
 
-                        <!-- Use Asset Logo -->
+                            <!-- Use Asset Logo -->
                             <div class="form-group" {{ $errors->has('label2_asset_logo') ? 'error' : '' }}">
                                 <div class="col-md-7 col-md-offset-3">
 
