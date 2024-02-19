@@ -267,12 +267,13 @@ class SettingsController extends Controller
 
     public function downloadBackup($file) {
 
-        $path = 'app/backups';
-        if (Storage::exists($path.'/'.$file)) {
+        $path = storage_path('app/backups');
+        
+        if (Storage::exists('app/backups/'.$file)) {
             $headers = ['ContentType' => 'application/zip'];
             return response()->download($path.'/'.$file, $file, $headers);
         } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('general.file_not_found')));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('general.file_not_found')), 404);
         }
 
     }
