@@ -29,6 +29,7 @@ RUN  apk add --no-cache \
         php81-sodium \
         php81-redis \
         php81-pecl-memcached \
+        php81-exif \
         curl \
         wget \
         vim \
