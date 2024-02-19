@@ -229,6 +229,12 @@ class SettingsController extends Controller
     }
 
 
+    /**
+     * Lists backup files
+     *
+     * @author [A. Gianotto]
+     * @return array | JsonResponse
+     */
     public function listBackups() {
         $settings = Setting::getSettings();
         $path = 'app/backups';
