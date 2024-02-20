@@ -182,6 +182,7 @@ return [
     'lock_passwords'        => 'This field value will not be saved in a demo installation.',
     'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Location',
+    'location_plural'        => 'Location|Locations',
     'locations'				=> 'Locations',
     'logo_size'				=> 'Square logos look best with Logo + Text. Logo maximum display size is 50px high x 500px wide.  ',
     'logout'				=> 'Logout',
@@ -502,5 +503,15 @@ return [
     'or' => 'or',
     'url'                   => 'URL',
     'edit_fieldset' => 'Edit fieldset fields and options',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Delete :object_type',
+                'warn'   =>  'You are about to delete one :object_type|You are about to delete :count :object_type',
+                'success'   =>  ':object_type successfully deleted|Successfully deleted :count :object_type',
+                'error'   =>  'Could not delete :object_type',
+             ],
+
+    ],
 
 ];
