@@ -1,4 +1,4 @@
-@can('delete', \App\Models\User::class)
+@can('delete', \App\Models\Location::class)
     <div id="locationsBulkEditToolbar">
     {{ Form::open([
               'method' => 'POST',
