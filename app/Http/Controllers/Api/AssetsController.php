@@ -556,7 +556,7 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->input('model_id'));
 
         // Check that it's an object and not a collection
-        // (Sometimes people send arrays here and they shouldn't
+        // (Sometimes people send arrays here and they shouldn't, unless it's a checkbox)
         if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
 
@@ -657,18 +657,21 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
+                    $field_val = $request->input($field->db_column, null);
                     if ($request->has($field->db_column)) {
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                                $asset->{$field->db_column} = Crypt::encrypt($field_val);
                             }
-                        } else {
-                            if ($field->element == 'checkbox') {
-                                if(is_array($field_val)) {
-                                    $field_val = implode(',', $field_val);
-                                }
+                        }
+                        if ($field->element == 'checkbox') {
+                            if(is_array($field_val)) {
+                                $field_val = implode(',', $field_val);
+                                $asset->{$field->db_column} = $field_val;
                             }
-                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                        else {
+                            $asset->{$field->db_column} = $field_val;
                         }
                     }
                 }
