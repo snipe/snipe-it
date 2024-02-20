@@ -510,8 +510,9 @@ return [
                 'warn'   =>  'You are about to delete one :object_type|You are about to delete :count :object_type',
                 'success'   =>  ':object_type successfully deleted|Successfully deleted :count :object_type',
                 'error'   =>  'Could not delete :object_type',
+                'nothing_selected'   =>  'No :object_type selected - nothing to do',
+                'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
              ],
-
     ],
 
 ];
