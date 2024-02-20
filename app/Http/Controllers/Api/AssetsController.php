@@ -663,6 +663,11 @@ class AssetsController extends Controller
                                 $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                             }
                         } else {
+                            if ($field->element == 'checkbox') {
+                                if(is_array($field_val)) {
+                                    $field_val = implode(',', $field_val);
+                                }
+                            }
                             $asset->{$field->db_column} = $request->input($field->db_column);
                         }
                     }
