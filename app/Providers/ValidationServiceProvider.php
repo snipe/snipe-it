@@ -6,6 +6,7 @@ use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
 use DB;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
@@ -300,13 +301,22 @@ class ValidationServiceProvider extends ServiceProvider
         // This is only used in Models/CustomFieldset.php - it does automatic validation for checkboxes by making sure
         // that the submitted values actually exist in the options.
         Validator::extend('checkboxes', function ($attribute, $value, $parameters, $validator){
-            $options = CustomField::where('db_column', $attribute)->first()->formatFieldValuesAsArray();
+            $field = CustomField::where('db_column', $attribute)->first();
+            $options = $field->formatFieldValuesAsArray();
+
+            // temporarily decrypt for validation
+            if($field->field_encrypted) {
+                $value = Crypt::decrypt($value);
+            }
+            dump(is_array($value));
+
             if(is_array($value)) {
                 $invalid = array_diff($value, $options);
                 if(count($invalid) > 0) {
                     return false;
                 }
             }
+
             // for legacy, allows users to submit a comma separated string of options
             elseif(!is_array($value)) {
                 $exploded = array_map('trim', explode(',', $value));
@@ -315,6 +325,7 @@ class ValidationServiceProvider extends ServiceProvider
                     return false;
                 }
             }
+
             return true;
         });
     }
