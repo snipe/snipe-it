@@ -139,12 +139,12 @@
     });
 
 
-    // Handle whether or not the edit button should be disabled
+    // Handle whether the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
-
         var buttonName =  $(this).data('bulk-button-id');
 
         if ($(this).bootstrapTable('getSelections').length == 0) {
+
             $(buttonName).attr('disabled', 'disabled');
         }
     });
