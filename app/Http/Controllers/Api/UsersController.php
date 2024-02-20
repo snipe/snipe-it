@@ -274,11 +274,6 @@ class UsersController extends Controller
         $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
-        \Log::debug('Requested offset: '. $request->input('offset'));
-        \Log::debug('App offset: '. app('api_offset_value'));
-        \Log::debug('Actual offset: '. $offset);
-        \Log::debug('Limit: '. $limit);
-
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 
