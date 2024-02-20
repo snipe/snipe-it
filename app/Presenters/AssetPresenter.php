@@ -19,9 +19,8 @@ class AssetPresenter extends Presenter
     {
         $layout = [
             [
-                'field' => 'bulk_selectable',
+                'field' => 'checkbox',
                 'checkbox' => true,
-                'formatter' => 'checkboxEnabledFormatter',
             ], [
                 'field' => 'id',
                 'searchable' => false,

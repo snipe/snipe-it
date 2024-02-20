@@ -82,7 +82,6 @@ class UsersTransformer
             'delete' => $user->isDeletable(),
             'clone' => (Gate::allows('create', User::class) && ($user->deleted_at == '')),
             'restore' => (Gate::allows('create', User::class) && ($user->deleted_at != '')),
-            'selectable'  =>  $user->isDeletable(),
         ];
 
         $array += $permissions_array;
