@@ -39,7 +39,7 @@
                             @foreach ($locations as $location)
                                 <tr{!!  (($location->assets_count > 0 ) ? ' class="danger"' : '') !!}>
                                     <td>
-                                        <input type="checkbox" name="ids[]" class="{  (($location->assets_count == 0) ? '' : ' disabled') }}" value="{{ $location->id }}" {!!  (($location->assets_count == 0) ? ' checked="checked"' : ' disabled') !!}>
+                                        <input type="checkbox" name="ids[]" class="{  ($location->isDeletable() ? '' : ' disabled') }}" value="{{ $location->id }}" {!!  (($location->isDeletable()) ? ' checked="checked"' : ' disabled') !!}>
                                     </td>
                                     <td>{{ $location->name }}</td>
 
