@@ -139,12 +139,12 @@
     });
 
 
-    // Handle whether or not the edit button should be disabled
+    // Handle whether the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
-
         var buttonName =  $(this).data('bulk-button-id');
 
         if ($(this).bootstrapTable('getSelections').length == 0) {
+
             $(buttonName).attr('disabled', 'disabled');
         }
     });
@@ -398,8 +398,26 @@
     // Convert line breaks to <br>
     function notesFormatter(value) {
         if (value) {
-            return value.replace(/(?:\r\n|\r|\n)/g, '<br />');;
+            return value.replace(/(?:\r\n|\r|\n)/g, '<br />');
         }
+    }
+
+    // Check if checkbox should be selectable
+    // Selectability is determined by the API field "selectable" which is set at the Presenter/API Transformer
+    // However since different bulk actions have different requirements, we have to walk through the available_actions object
+    // to determine whether to disable it
+    function checkboxEnabledFormatter (value, row) {
+
+        // add some stuff to get the value of the select2 option here?
+
+        if ((row.available_actions) && (row.available_actions.bulk_selectable) && (row.available_actions.bulk_selectable.delete !== true)) {
+            console.log('value for ID ' + row.id + ' is NOT true:' + row.available_actions.bulk_selectable.delete);
+            return {
+                disabled:true,
+                //checked: false, <-- not sure this will work the way we want?
+            }
+        }
+        console.log('value for ID ' + row.id + ' IS true:' + row.available_actions.bulk_selectable.delete);
     }
 
 
@@ -408,7 +426,7 @@
 
     function licenseSeatInOutFormatter(value, row) {
         // The user is allowed to check the license seat out and it's available
-        if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
+        if ((row.available_actions.checkout === true) && (row.user_can_checkout === true) && ((!row.asset_id) && (!row.assigned_to))) {
             return '<a href="{{ config('app.url') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
         } else {
             return '<a href="{{ config('app.url') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';

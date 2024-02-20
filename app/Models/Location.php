@@ -106,6 +106,7 @@ class Location extends SnipeModel
         return Gate::allows('delete', $this)
                 && ($this->assignedAssets()->count() === 0)
                 && ($this->assets()->count() === 0)
+                && ($this->children()->count() === 0)
                 && ($this->users()->count() === 0);
     }
 
