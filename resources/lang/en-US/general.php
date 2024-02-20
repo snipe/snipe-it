@@ -443,7 +443,6 @@ return [
     'sample_value'              => 'Sample Value',
     'no_headers'                => 'No Columns Found',
     'error_in_import_file'      => 'There was an error reading the CSV file: :error',
-    'percent_complete'          => ':percent % Complete',
     'errors_importing'          => 'Some Errors occurred while importing: ',
     'warning'                   => 'WARNING: :warning',
     'success_redirecting'       => '"Success... Redirecting.',
