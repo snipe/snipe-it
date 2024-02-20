@@ -584,7 +584,7 @@ class UsersController extends Controller
                             $user_groups .= $user_group->name.', ';
                         }
 
-                        $userperm = User::where('permissions','LIKE','%admin%');
+                        $userperm = User::where('permissions','LIKE','%admin%')->pluck('permissions');
 
                         // Add a new row with data
                         $values = [
@@ -603,7 +603,7 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
-                            $userperm ? $user->permissions : '',
+                            $user->permissions ? $userperm : '',
                             //$user->permissions, // ? $user->permissions->where('permissions', 'LIKE', '%"1"%') : '',
                             //where json like '%"category":"Category Example"%
                             $user->notes,
