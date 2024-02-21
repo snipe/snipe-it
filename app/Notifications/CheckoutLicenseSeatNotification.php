@@ -9,6 +9,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\GoogleChat\Card;
+use NotificationChannels\GoogleChat\GoogleChatChannel;
+use NotificationChannels\GoogleChat\GoogleChatMessage;
+use NotificationChannels\GoogleChat\Section;
+use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
@@ -43,15 +48,18 @@ class CheckoutLicenseSeatNotification extends Notification
      */
     public function via()
     {
-
         $notifyBy = [];
 
+        if (Setting::getSettings()->webhook_selected == 'google'){
+
+            $notifyBy[] = GoogleChatChannel::class;
+        }
         if (Setting::getSettings()->webhook_selected == 'microsoft'){
 
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_selected == 'slack') {
+        if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
             $notifyBy[] = 'slack';
         }
 
@@ -128,6 +136,33 @@ class CheckoutLicenseSeatNotification extends Notification
             ->fact(trans('mail.assigned_to'), $target->present()->fullName())
             ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
             ->fact(trans('mail.notes'), $note ?: '');
+    }
+    public function toGoogleChat()
+    {
+        $target = $this->target;
+        $item = $this->item;
+        $note = $this->note;
+
+        return GoogleChatMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->card(
+                Card::create()
+                    ->header(
+                        '<strong>'.trans('mail.License_Checkout_Notification').'</strong>' ?: '',
+                        htmlspecialchars_decode($item->present()->name) ?: '',
+                    )
+                    ->section(
+                        Section::create(
+                            KeyValue::create(
+                                trans('mail.assigned_to') ?: '',
+                                $target->present()->name ?: '',
+                                trans('admin/consumables/general.remaining').': '.$item->availCount()->count(),
+                            )
+                                ->onClick(route('users.show', $target->id))
+                        )
+                    )
+            );
+
     }
 
     /**

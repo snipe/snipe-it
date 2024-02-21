@@ -43,7 +43,7 @@
                         </span>
                                     <span class="hidden-xs hidden-sm">
                             {{ trans('general.assets') }}
-                                        {!! (($model->assets_count) && ($model->assets_count > 0 )) ? '<badge class="badge badge-secondary">'.number_format($model->assets_count).'</badge>' : '' !!}
+                                        {!! ($model->assets_count > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets_count).'</badge>' : '' !!}
                         </span>
                     </a>
                 </li>
@@ -309,7 +309,7 @@
                     @if ($model->notes)
                         <li>
                             {{ trans('general.notes') }}:
-                            {{ $model->notes }}
+                            {!! nl2br(Helper::parseEscapedMarkedownInline($model->notes)) !!}
                         </li>
                     @endif
 

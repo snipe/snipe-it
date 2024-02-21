@@ -3,26 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\StorageHelper;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\AssetModel;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use enshrined\svgSanitize\Sanitizer;
 
 class AssetModelsFilesController extends Controller
 {
     /**
      * Upload a file to the server.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param AssetFileRequest $request
+     * @param UploadFileRequest $request
      * @param int $modelId
      * @return Redirect
-     * @since [v1.0]
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *@since [v1.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function store(AssetFileRequest $request, $modelId = null)
+    public function store(UploadFileRequest $request, $modelId = null)
     {
         if (! $model = AssetModel::find($modelId)) {
             return redirect()->route('models.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -37,27 +36,7 @@ class AssetModelsFilesController extends Controller
 
             foreach ($request->file('file') as $file) {
 
-                $extension = $file->getClientOriginalExtension();
-                $file_name = 'model-'.$model->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-                // Check for SVG and sanitize it
-                if ($extension=='svg') {
-                    \Log::debug('This is an SVG');
-
-                    $sanitizer = new Sanitizer();
-                    $dirtySVG = file_get_contents($file->getRealPath());
-                    $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                    try {
-                        Storage::put('private_uploads/assetmodels/'.$file_name, $cleanSVG);
-                    } catch (\Exception $e) {
-                        \Log::debug('Upload no workie :( ');
-                        \Log::debug($e);
-                    }
-                } else {
-                    Storage::put('private_uploads/assetmodels/'.$file_name, file_get_contents($file));
-                }
-
+                $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$model->id,$file);
 
                 $model->logUpload($file_name, e($request->get('notes')));
             }

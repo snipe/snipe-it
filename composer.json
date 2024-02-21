@@ -39,6 +39,7 @@
     "intervention/image": "^2.5",
     "javiereguiluz/easyslugger": "^1.0",
     "laravel/framework": "^10.0",
+    "laravel-notification-channels/google-chat": "^3.0",
     "laravel-notification-channels/microsoft-teams": "^1.1",
     "laravel/helpers": "^1.4",
     "laravel/passport": "^11.0",
@@ -69,7 +70,8 @@
     "watson/validating": "^8.1"
   },
   "suggest": {
-    "ext-ldap": "*"
+    "ext-ldap": "*",
+    "ext-zip": "*"
   },
   "require-dev": {
     "brianium/paratest": "^v6.4.4",

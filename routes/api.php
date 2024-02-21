@@ -828,6 +828,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.settings.backups.index');
 
+            Route::get('backups/download/latest',
+                [
+                    Api\SettingsController::class,
+                    'downloadLatestBackup'
+                ]
+            )->name('api.settings.backups.latest');
+
             Route::get('backups/download/{file}',
                 [
                     Api\SettingsController::class,

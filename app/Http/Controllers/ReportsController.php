@@ -295,9 +295,9 @@ class ReportsController extends Controller
                         $actionlog->present()->actionType(),
                         e($actionlog->itemType()),
                         ($actionlog->itemType() == 'user') ? $actionlog->filename : $item_name,
-                        ($actionlog->item->serial) ? $actionlog->item->serial : null,
-                        ($actionlog->item->model) ? htmlspecialchars($actionlog->item->model->name, ENT_NOQUOTES) : null,
-                        ($actionlog->item->model) ? $actionlog->item->model->model_number : null,
+                        ($actionlog->item) ? $actionlog->item->serial : null,
+                        (($actionlog->item) && ($actionlog->item->model)) ? htmlspecialchars($actionlog->item->model->name, ENT_NOQUOTES) : null,
+                        (($actionlog->item) && ($actionlog->item->model))  ? $actionlog->item->model->model_number : null,
                         $target_name,
                         ($actionlog->note) ? e($actionlog->note) : '',
                         $actionlog->log_meta,
@@ -616,7 +616,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('url')) {
-                $header[] = trans('admin/manufacturers/table.url');
+                $header[] = trans('general.url');
             }
 
 

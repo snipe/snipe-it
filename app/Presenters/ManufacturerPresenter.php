@@ -45,7 +45,7 @@ class ManufacturerPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => trans('admin/manufacturers/table.url'),
+                'title' => trans('general.url'),
                 'visible' => true,
                 'formatter' => 'externalLinkFormatter',
             ],

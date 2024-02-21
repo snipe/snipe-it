@@ -279,7 +279,7 @@
         </strong>
       </div>
       <div class="col-md-12">
-        {!! nl2br(e($component->notes)) !!}
+        {!! nl2br(Helper::parseEscapedMarkedownInline($component->notes)) !!}
       </div>
     </div>
     @endif

@@ -906,6 +906,13 @@ class AssetsController extends Controller
             $originalValues['action_date'] = $checkin_at;
         }
 
+        if(!empty($asset->licenseseats->all())){
+            foreach ($asset->licenseseats as $seat){
+                $seat->assigned_to = null;
+                $seat->save();
+            }
+        }
+
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
 

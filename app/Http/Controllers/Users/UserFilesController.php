@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Support\Facades\Storage;
 
 class UserFilesController extends Controller
@@ -19,14 +18,14 @@ class UserFilesController extends Controller
     /**
      * Return JSON response with a list of user details for the getIndex() view.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.6]
-     * @param AssetFileRequest $request
+     * @param UploadFileRequest $request
      * @param int $userId
      * @return string JSON
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *@author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.6]
      */
-    public function store(AssetFileRequest $request, $userId = null)
+    public function store(UploadFileRequest $request, $userId = null)
     {
         $user = User::find($userId);
         $destinationPath = config('app.private_uploads').'/users';
@@ -41,31 +40,7 @@ class UserFilesController extends Controller
                 return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
             }
             foreach ($files as $file) {
-                
-                $extension = $file->getClientOriginalExtension();
-                $file_name = 'user-'.$user->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-
-                    // Check for SVG and sanitize it
-                    if ($extension == 'svg') {
-                        \Log::debug('This is an SVG');
-                        \Log::debug($file_name);
-
-                            $sanitizer = new Sanitizer();
-
-                            $dirtySVG = file_get_contents($file->getRealPath());
-                            $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                            try {
-                                Storage::put('private_uploads/users/'.$file_name, $cleanSVG);
-                            } catch (\Exception $e) {
-                                \Log::debug('Upload no workie :( ');
-                                \Log::debug($e);
-                            }
-
-                    } else {
-                        Storage::put('private_uploads/users/'.$file_name, file_get_contents($file));
-                }
+                $file_name = $request->handleFile('private_uploads/users/', 'user-'.$user->id, $file);
 
                 //Log the uploaded file to the log
                 $logAction = new Actionlog();
