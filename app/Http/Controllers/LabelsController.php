@@ -69,6 +69,7 @@ class LabelsController extends Controller
         $customFieldColumns = CustomField::all()->pluck('db_column');
 
         collect(explode(';', Setting::getSettings()->label2_fields))
+            ->filter()
             ->each(function ($item) use ($customFieldColumns, $exampleAsset) {
                 $pair = explode('=', $item);
 
