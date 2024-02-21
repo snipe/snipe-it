@@ -105,8 +105,6 @@ class AssetCheckinTest extends TestCase
 
     public function testAssetsLicenseSeatsAreClearedUponCheckin()
     {
-        $this->markTestIncomplete('Not currently in controller');
-
         $asset = Asset::factory()->assignedToUser()->create();
         LicenseSeat::factory()->assignedToUser()->for($asset)->create();
 
