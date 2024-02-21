@@ -90,13 +90,9 @@ class Label implements View
                 $assetData->put('id', $asset->id);
                 $assetData->put('tag', $asset->asset_tag);
 
-                if ($template->getSupportTitle()) {
-
-                    if ($asset->company && !empty($settings->label2_title)) {
-                        $title = str_replace('{COMPANY}', $asset->company->name, $settings->label2_title);
-                        $settings->qr_text;
-                        $assetData->put('title', $title);
-                    }
+                if ($template->getSupportTitle() && !empty($settings->label2_title)) {
+                    $title = str_replace('{COMPANY}', data_get($asset, 'company.name'), $settings->label2_title);
+                    $assetData->put('title', $title);
                 }
 
                 if ($template->getSupportLogo()) {

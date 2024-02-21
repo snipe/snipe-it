@@ -182,6 +182,7 @@ return [
     'lock_passwords'        => 'This field value will not be saved in a demo installation.',
     'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Location',
+    'location_plural'        => 'Location|Locations',
     'locations'				=> 'Locations',
     'logo_size'				=> 'Square logos look best with Logo + Text. Logo maximum display size is 50px high x 500px wide.  ',
     'logout'				=> 'Logout',
@@ -443,7 +444,6 @@ return [
     'sample_value'              => 'Sample Value',
     'no_headers'                => 'No Columns Found',
     'error_in_import_file'      => 'There was an error reading the CSV file: :error',
-    'percent_complete'          => ':percent % Complete',
     'errors_importing'          => 'Some Errors occurred while importing: ',
     'warning'                   => 'WARNING: :warning',
     'success_redirecting'       => '"Success... Redirecting.',
@@ -459,6 +459,7 @@ return [
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
     'modal_confirm_generic'      => 'Are you sure?',
     'cannot_be_deleted'      => 'This item cannot be deleted',
+    'cannot_be_edited'      => 'This item cannot be edited.',
     'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Notes',
@@ -501,5 +502,17 @@ return [
     'action_source' => 'Action Source',
     'or' => 'or',
     'url'                   => 'URL',
+    'edit_fieldset' => 'Edit fieldset fields and options',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Delete :object_type',
+                'warn'   =>  'You are about to delete one :object_type|You are about to delete :count :object_type',
+                'success'   =>  ':object_type successfully deleted|Successfully deleted :count :object_type',
+                'error'   =>  'Could not delete :object_type',
+                'nothing_selected'   =>  'No :object_type selected - nothing to do',
+                'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
+             ],
+    ],
 
 ];

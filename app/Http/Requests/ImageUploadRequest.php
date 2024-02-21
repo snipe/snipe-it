@@ -97,7 +97,7 @@ class ImageUploadRequest extends Request
 
             if (!config('app.lock_passwords')) {
 
-                $ext = $image->getClientOriginalExtension();
+                $ext = $image->guessExtension();
                 $file_name = $type.'-'.$form_fieldname.'-'.$item->id.'-'.str_random(10).'.'.$ext;
 
                 \Log::info('File name will be: '.$file_name);

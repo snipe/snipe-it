@@ -25,9 +25,27 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = [
-            'id', 'name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'created_at',
-            'updated_at', 'manager_id', 'image',
-            'assigned_assets_count', 'users_count', 'assets_count','assigned_assets_count', 'assets_count', 'rtd_assets_count', 'currency', 'ldap_ou', ];
+            'id',
+            'name',
+            'address',
+            'address2',
+            'city',
+            'state',
+            'country',
+            'zip',
+            'created_at',
+            'updated_at',
+            'manager_id',
+            'image',
+            'assigned_assets_count',
+            'users_count',
+            'assets_count',
+            'assigned_assets_count',
+            'assets_count',
+            'rtd_assets_count',
+            'currency',
+            'ldap_ou',
+            ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
@@ -50,6 +68,7 @@ class LocationsController extends Controller
         ])->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
             ->withCount('rtd_assets as rtd_assets_count')
+            ->withCount('children as children_count')
             ->withCount('users as users_count');
 
         if ($request->filled('search')) {
@@ -78,6 +97,10 @@ class LocationsController extends Controller
 
         if ($request->filled('country')) {
             $locations->where('locations.country', '=', $request->input('country'));
+        }
+
+        if ($request->filled('manager_id')) {
+            $locations->where('locations.manager_id', '=', $request->input('manager_id'));
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits

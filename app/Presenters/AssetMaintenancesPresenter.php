@@ -42,6 +42,19 @@ class AssetMaintenancesPresenter extends Presenter
                 'title' => trans('admin/hardware/table.asset_tag'),
                 'formatter' => 'assetTagLinkFormatter',
             ], [
+                'field' => 'serial',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('admin/hardware/table.serial'),
+                'formatter' => 'assetSerialLinkFormatter',
+            ], [
+                'field' => 'status_label',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('admin/hardware/table.status'),
+                'visible' => true,
+                'formatter' => 'statuslabelsLinkObjFormatter',
+            ], [
                 'field' => 'model',
                 'searchable' => true,
                 'sortable' => true,
