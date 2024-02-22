@@ -9,6 +9,7 @@ use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
@@ -53,6 +54,8 @@ class AssetCheckinTest extends TestCase
 
         $this->assertTrue($asset->assignedTo->is($user));
 
+        $currentTimestamp = now();
+
         $this->actingAsForApi(User::factory()->checkinAssets()->create())
             ->postJson(route('api.asset.checkin', $asset), [
                 'name' => 'Changed Name',
@@ -61,7 +64,6 @@ class AssetCheckinTest extends TestCase
             ])
             ->assertOk();
 
-        Event::assertDispatched(CheckoutableCheckedIn::class, 1);
         $this->assertNull($asset->refresh()->assignedTo);
         $this->assertNull($asset->expected_checkin);
         $this->assertNull($asset->last_checkout);
@@ -72,6 +74,11 @@ class AssetCheckinTest extends TestCase
         $this->assertEquals('Changed Name', $asset->name);
         $this->assertEquals($status->id, $asset->status_id);
         $this->assertTrue($asset->location()->is($location));
+
+        Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($currentTimestamp) {
+            // this could be better mocked but is ok for now.
+            return Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp) < 2;
+        }, 1);
     }
 
     public function testLocationIsSetToRTDLocationByDefaultUponCheckin()
