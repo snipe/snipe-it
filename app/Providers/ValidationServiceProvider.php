@@ -305,6 +305,8 @@ class ValidationServiceProvider extends ServiceProvider
             $options = $field->formatFieldValuesAsArray();
 
             // temporarily decrypt for validation
+            // so, this is breaking patches, i don't really get why.
+            // is it not encrypted here on an update? need to do more testing. :(
             if($field->field_encrypted) {
                 $value = Crypt::decrypt($value);
             }
