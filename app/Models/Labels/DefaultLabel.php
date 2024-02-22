@@ -164,18 +164,17 @@ class DefaultLabel extends RectangleSheet
         $fieldsDone = 0;
 
         if ($settings->labels_display_name && $fieldsDone < $this->getSupportFields()) {
-        foreach($record->get('fields') as $field)
-            if ($asset->name) {
+            foreach ($record->get('fields') as $field){
                 static::writeText(
-                    $pdf, $field['label'][0].': '.$field['value'],
+                    $pdf, $field['label'][0] . ': ' . $field['value'],
                     $textX1, $textY,
                     'freesans', '', $this->textSize, 'L',
                     $textW, $this->textSize,
                     true, 0
                 );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
-            }
+             }
+            $textY += $this->textSize + self::TEXT_MARGIN;
+            $fieldsDone++;
         }
 //        if ($settings->labels_display_company_name && $fieldsDone < $this->getSupportFields()) {
 //            if ($asset->company) {
