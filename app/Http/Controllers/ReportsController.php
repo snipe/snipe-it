@@ -1156,16 +1156,20 @@ class ReportsController extends Controller
             $logItem = $logItem_res[0];
         }
 
-        if (!$assetItem->assignedTo->locale){
-            Notification::locale(Setting::getSettings()->locale)->send(
-                $assetItem->assignedTo,
-                new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
-            );
-        } else {
-            Notification::send(
-                $assetItem->assignedTo,
-                new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
-            );
+        // Only send notification if assigned
+        if ($assetItem->assignedTo) {
+
+            if (!$assetItem->assignedTo->locale) {
+                Notification::locale(Setting::getSettings()->locale)->send(
+                    $assetItem->assignedTo,
+                    new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
+                );
+            } else {
+                Notification::send(
+                    $assetItem->assignedTo,
+                    new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
+                );
+            }
         }
 
         return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));
