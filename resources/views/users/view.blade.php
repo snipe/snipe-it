@@ -431,19 +431,19 @@
                         {{ trans('admin/users/table.email') }}
                       </div>
                       <div class="col-md-9">
-                        <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                        <a href="mailto:{{ $user->email }}" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> {{ $user->email }}</a>
                       </div>
                     </div>
                     @endif
 
-                    @if ($user->phone)
+                    @if ($user->website)
                      <!-- website -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('general.website') }}
                       </div>
                       <div class="col-md-9">
-                          <a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a>
+                          <a href="{{ $user->website }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> {{ $user->website }}</a>
                       </div>
                     </div>
                     @endif
@@ -455,7 +455,7 @@
                           {{ trans('admin/users/table.phone') }}
                         </div>
                         <div class="col-md-9">
-                          <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
+                          <a href="tel:{{ $user->phone }}" data-tooltip="true" title="{{ trans('general.call') }}"><i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $user->phone }}</a>
                         </div>
                       </div>
                     @endif

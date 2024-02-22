@@ -409,7 +409,7 @@
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
-                                                    @if ($field->field_encrypted=='1')
+                                                    @if (($field->field_encrypted=='1') && ($asset->{$field->db_column_name()}!=''))
                                                         <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
 
@@ -950,7 +950,7 @@
                                             @endif
 
                                             @if (isset($asset->location))
-                                                <li>{{ $asset->location->name }}</li>
+                                                <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ $asset->location->name }}</li>
                                                 <li>{{ $asset->location->address }}
                                                     @if ($asset->location->address2!='')
                                                         {{ $asset->location->address2 }}

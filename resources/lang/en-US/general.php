@@ -438,6 +438,8 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generating auto-incrementing asset tags is disabled so all rows need to have the "Asset Tag" column populated.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Note: Generating auto-incrementing asset tags is enabled so assets will be created for rows that do not have "Asset Tag" populated. Rows that do have "Asset Tag" populated will be updated with the provided information.',
     'send_welcome_email_to_users'   => ' Send Welcome Email for new Users?',
+    'send_email'                => 'Send Email',
+    'call'                      => 'Call number',
     'back_before_importing'     => 'Backup before importing?',
     'csv_header_field'          => 'CSV Header Field',
     'import_field'              => 'Import Field',
