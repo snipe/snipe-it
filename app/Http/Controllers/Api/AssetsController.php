@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Traits\MigratesLegacyLocations;
+use App\Models\CheckoutAcceptance;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
@@ -918,6 +920,19 @@ class AssetsController extends Controller
                 $seat->save();
             }
         }
+
+        // Get all pending Acceptances for this asset and delete them
+        CheckoutAcceptance::pending()
+            ->whereHasMorph(
+                'checkoutable',
+                [Asset::class],
+                function (Builder $query) use ($asset) {
+                    $query->where('id', $asset->id);
+                })
+            ->get()
+            ->map(function ($acceptance) {
+                $acceptance->delete();
+            });
 
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));

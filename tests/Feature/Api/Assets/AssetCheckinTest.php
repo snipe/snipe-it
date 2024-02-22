@@ -4,6 +4,7 @@ namespace Tests\Feature\Api\Assets;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Statuslabel;
@@ -130,7 +131,14 @@ class AssetCheckinTest extends TestCase
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
     {
-        $this->markTestIncomplete('Not currently in controller');
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $acceptance = CheckoutAcceptance::factory()->for($asset, 'checkoutable')->pending()->create();
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset));
+
+        $this->assertFalse($acceptance->exists(), 'Acceptance was not deleted');
     }
 
     public function testCheckinTimeAndActionLogNoteCanBeSet()
