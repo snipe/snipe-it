@@ -235,7 +235,7 @@
                             {{ Form::hidden('label2_fields', old('label2_fields', $setting->label2_fields)) }}
                         @endif
 
-                        @if ($setting->label2_enable)
+                        @if ($setting->label2_enable && ($setting->label2_template != 'DefaultLabel'))
                             <!-- Hidden version of legacy settings -->
                             {{ Form::hidden('labels_per_page', old('labels_per_page', $setting->labels_per_page)) }}
                             {{ Form::hidden('labels_fontsize', old('labels_fontsize', $setting->labels_fontsize)) }}

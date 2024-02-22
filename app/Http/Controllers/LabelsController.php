@@ -27,7 +27,7 @@ class LabelsController extends Controller
     public function show(string $labelName)
     {
         $labelName = str_replace('/', '\\', $labelName);
-        $template = Label::find($labelName);//
+        $template = Label::find($labelName);
 
         $exampleAsset = new Asset();
 
