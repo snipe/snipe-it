@@ -70,7 +70,7 @@ class Importer extends Component
         $tmp = array();
         if ($this->activeFile) {
             $tmp = array_combine($this->activeFile->header_row, $this->field_map);
-            $tmp =array_filter($tmp);
+            $tmp = array_filter($tmp);
         }
         return json_encode($tmp);
 
