@@ -89,8 +89,6 @@ class AssetCheckinTest extends TestCase
 
     public function testDefaultLocationCanBeUpdatedUponCheckin()
     {
-        $this->markTestIncomplete('Not currently in controller');
-
         $location = Location::factory()->create();
         $asset = Asset::factory()->assignedToUser()->create();
 
