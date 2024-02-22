@@ -116,7 +116,16 @@ class AssetCheckinTest extends TestCase
 
     public function testLegacyLocationValuesSetToZeroAreUpdated()
     {
-        $this->markTestIncomplete('Not currently in controller');
+        $asset = Asset::factory()->canBeInvalidUponCreation()->assignedToUser()->create([
+            'rtd_location_id' => 0,
+            'location_id' => 0,
+        ]);
+
+        $this->actingAsForApi(User::factory()->checkinAssets()->create())
+            ->postJson(route('api.asset.checkin', $asset));
+
+        $this->assertNull($asset->refresh()->rtd_location_id);
+        $this->assertEquals($asset->location_id, $asset->rtd_location_id);
     }
 
     public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
