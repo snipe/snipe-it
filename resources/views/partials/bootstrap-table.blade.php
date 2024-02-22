@@ -548,9 +548,9 @@
                     if (row.custom_fields[field_column_plain].field_format=='URL') {
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
                     } else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
-                        return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />";
+                        return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green'>" : "<span class='fas fa-times-circle' style='color:red' />";
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
-                        return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
+                        return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '" style="white-space: nowrap" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> ' + row.custom_fields[field_column_plain].value + '</a>';
                     }
                 }
                 return row.custom_fields[field_column_plain].value;
@@ -570,7 +570,7 @@
 
         if (value) {
             if ((value.indexOf("{") === -1) || (value.indexOf("}") ===-1)) {
-                return '<nobr><a href="' + value + '" target="_blank" title="External link to ' + value + '" data-tooltip="true" ><i class="fa fa-external-link"></i> ' + value + '</a></nobr>';
+                return '<nobr><a href="' + value + '" target="_blank" title="External link to ' + value + '" data-tooltip="true"><i class="fa fa-external-link"></i> ' + value + '</a></nobr>';
             }
             return value;
         }
@@ -625,7 +625,7 @@
     // Create a linked phone number in the table list
     function phoneFormatter(value) {
         if (value) {
-            return  '<a href="tel:' + value + '">' + value + '</a>';
+            return  '<span style="white-space: nowrap;"><a href="tel:' + value + '" data-tooltip="true" title="{{ trans('general.call') }}"><i class="fa-solid fa-phone" aria-hidden="true"></i> ' + value + '</a></span>';
         }
     }
 
@@ -634,7 +634,7 @@
         if ((row) && (row!=undefined)) {
             return '<a href="{{ config('app.url') }}/locations/' + row.id + '">' + row.name + '</a>';
         } else if (value.rtd_location) {
-            return '<a href="{{ config('app.url') }}/locations/' + value.rtd_location.id + '" data-tooltip="true" title="Default Location">' + value.rtd_location.name + '</a>';
+            return '<a href="{{ config('app.url') }}/locations/' + value.rtd_location.id + '">' + value.rtd_location.name + '</a>';
         }
 
     }
@@ -646,7 +646,7 @@
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
             if (row.asset.deleted_at!='') {
-                return '<span style="white-space: nowrap;"><i class="fas fa-times text-danger"></i><span class="sr-only">deleted</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.asset_tag + '</a></del></span>';
+                return '<span style="white-space: nowrap;"><i class="fas fa-times text-danger"></i><span class="sr-only">{{ trans('admin/hardware/general.deleted') }}</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.asset_tag + '</a></del></span>';
             }
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
         }
@@ -700,7 +700,7 @@
 
     function emailFormatter(value) {
         if (value) {
-            return '<a href="mailto:' + value + '">' + value + '</a>';
+            return '<a href="mailto:' + value + '" style="white-space: nowrap" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> ' + value + '</a>';
         }
     }
 
