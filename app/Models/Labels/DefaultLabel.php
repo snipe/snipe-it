@@ -172,9 +172,9 @@ class DefaultLabel extends RectangleSheet
                     $textW, $this->textSize,
                     true, 0
                 );
-             }
             $textY += $this->textSize + self::TEXT_MARGIN;
             $fieldsDone++;
+             }
         }
 //        if ($settings->labels_display_company_name && $fieldsDone < $this->getSupportFields()) {
 //            if ($asset->company) {
