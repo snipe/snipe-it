@@ -70,6 +70,7 @@
                 data-click-to-select="true"
                 data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                 data-cookie-id-table="assetsListingTable"
+                data-cookie-path="/" {{-- this should make this cookie the same as all other assetsListingTable --}}
                 data-pagination="true"
                 data-id-table="assetsListingTable"
                 data-search="true"
