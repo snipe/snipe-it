@@ -123,6 +123,10 @@ class UsersController extends Controller
             $users = $users->where('users.country', '=', $request->input('country'));
         }
 
+        if ($request->filled('website')) {
+            $users = $users->where('users.website', '=', $request->input('website'));
+        }
+
         if ($request->filled('zip')) {
             $users = $users->where('users.zip', '=', $request->input('zip'));
         }
