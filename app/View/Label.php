@@ -37,6 +37,7 @@ class Label implements View
     {
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
+        dd($this->data);
         $offset = $this->data->get('offset');
         $template = $this->data->get('template');
 
