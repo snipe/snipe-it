@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\CustomField;
-use Illuminate\Http\JsonResponse;
 use Livewire\Component;
 
 use App\Models\Import;
@@ -64,7 +63,7 @@ class Importer extends Component
      * This is used in resources/views/livewire/importer.blade.php, and we kinda shouldn't need to check for
      * activeFile here, but there's some UI goofiness that allows this to crash out on some imports.
      *
-     * @return JsonResponse
+     * @return string
      */
     public function generate_field_map()
     {
