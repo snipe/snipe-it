@@ -182,9 +182,13 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      <a href="{{ route('suppliers.show', $license->supplier_id) }}">
-                        {{ $license->supplier->name }}
-                      </a>
+                      @if ($license->supplier)
+                        <a href="{{ route('suppliers.show', $license->supplier_id) }}">
+                          {{ $license->supplier->name }}
+                        </a>
+                      @else
+                      {{ trans('general.deleted') }}
+                      @endif
                     </div>
                   </div>
                 @endif
