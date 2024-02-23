@@ -149,7 +149,7 @@ class AssetCheckinTest extends TestCase
 
     public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
-        Event::fake();
+        Event::fake([CheckoutableCheckedIn::class]);
 
         $this->actingAs(User::factory()->checkinAssets()->create())
             ->post(route(
