@@ -544,7 +544,7 @@ class AssetsController extends Controller
         $asset->user_id    = Auth::id();
 
 		/**
-        * rule of set up EOL date and explicit status during create asset
+		* rule of set up EOL date and explicit status during create asset
 		*/
 		if ($request->has('asset_eol_date')) {
 			$asset->eol_explicit = true;
@@ -653,7 +653,7 @@ class AssetsController extends Controller
 			*/
 			if ($request->filled('asset_eol_date')) {
 				$asset->eol_explicit = true;
-			} elseif (!($asset->eol_explicit) && ($request->filled('purchase_date') || $request->filled('model_id'))) {
+			} elseif (($request->input('eol_explicit') == '0') || (!($asset->eol_explicit) && ($request->filled('purchase_date') || $request->filled('model_id')))) {
 				if ($asset->model->eol > 0) {
 					$asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
 				} else {
