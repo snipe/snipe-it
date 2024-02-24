@@ -88,7 +88,7 @@
 
               <label class="form-control">
                 {{ Form::checkbox('eol', '1', '1') }}
-                {{ trans('admin/hardware/table.eol') }}
+                {{ trans('admin/hardware/form.eol_date') }}
               </label>
 
               <label class="form-control">
@@ -384,6 +384,16 @@
 
             </div>
 
+              <!-- EoL Date -->
+              <div class="form-group asset_eol_date-range">
+                  <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
+                  <div class="input-daterange input-group col-md-6" id="datepicker">
+                      <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start">
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end">
+                  </div>
+              </div>
+
               <!-- Last Audit Date -->
               <div class="form-group last_audit-range{{ ($errors->has('last_audit_start') || $errors->has('last_audit_end')) ? ' has-error' : '' }}">
                   <label for="last_audit_start" class="col-md-3 control-label">{{ trans('general.last_audit') }}</label>
@@ -488,6 +498,12 @@
       });
 
       $('.expected_checkin-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          format: 'yyyy-mm-dd'
+      });
+
+      $('.asset_eol_date-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           format: 'yyyy-mm-dd'
