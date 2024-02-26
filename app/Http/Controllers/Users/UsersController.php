@@ -584,7 +584,7 @@ class UsersController extends Controller
                             $user_groups .= $user_group->name.', ';
                         }
 
-                        $userperm = User::where('permissions','LIKE','%admin%')->pluck('permissions');
+                        $userperm = User::where('permissions','LIKE','%1%')->pluck('id');
 
                         // Add a new row with data
                         $values = [
