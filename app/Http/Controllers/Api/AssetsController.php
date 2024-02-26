@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
@@ -621,13 +622,12 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(UpdateAssetRequest $request, Asset $id)
     {
-        $this->authorize('update', Asset::class);
-
         if ($asset = Asset::find($id)) {
-            $asset->fill($request->all());
+            $asset->fill($request->validated());
 
+            // TODO: how much of this should go to validator?
             ($request->filled('model_id')) ?
                 $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
             ($request->filled('rtd_location_id')) ?
@@ -691,6 +691,8 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
         }
 
+        // TODO: can this be moved up to ModelNotFound exception handler? would remove a couple lines here if we could use laravel's awesome route-model binding.
+        // (would also need to confirm that then _everything_ expects a 200 when a model isn't found)
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
