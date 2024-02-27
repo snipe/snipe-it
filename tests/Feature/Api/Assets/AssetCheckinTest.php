@@ -103,7 +103,7 @@ class AssetCheckinTest extends TestCase
         $this->actingAsForApi(User::factory()->checkinAssets()->create())
             ->postJson(route('api.asset.checkin', $asset), [
                 'location_id' => $location->id,
-                'update_default_location' => 0
+                'update_default_location' => true,
             ]);
 
         $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
