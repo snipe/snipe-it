@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 use App\Models\Asset;
 
-trait MigratesLegacyLocations
+trait MigratesLegacyAssetLocations
 {
     /**
      * This is just meant to correct legacy issues where some user data would have 0

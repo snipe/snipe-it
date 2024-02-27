@@ -6,7 +6,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckinRequest;
-use App\Http\Traits\MigratesLegacyLocations;
+use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\View;
 
 class AssetCheckinController extends Controller
 {
-    use MigratesLegacyLocations;
+    use MigratesLegacyAssetLocations;
 
     /**
      * Returns a view that presents a form to check an asset back into inventory.
