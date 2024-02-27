@@ -162,7 +162,7 @@ class DefaultLabel extends RectangleSheet
 
         // Fields
         $fieldsDone = 0;
-        if ($settings->labels_display_name && $fieldsDone < $this->getSupportFields()) {
+        if ($fieldsDone < $this->getSupportFields()) {
             foreach ($record->get('fields') as $field) {
                 static::writeText(
                     $pdf, $field['label'][0]. ': ' . $field['value'],
