@@ -9,6 +9,7 @@ use App\Http\Requests\AssetCheckinRequest;
 use App\Http\Traits\MigratesLegacyLocations;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
+use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -101,12 +102,9 @@ class AssetCheckinController extends Controller
             $checkin_at = $request->get('checkin_at');
         }
 
-        if(!empty($asset->licenseseats->all())){
-            foreach ($asset->licenseseats as $seat){
-                $seat->assigned_to = null;
-                $seat->save();
-            }
-        }
+        $asset->licenseseats->each(function (LicenseSeat $seat) {
+            $seat->update(['assigned_to' => null]);
+        });
 
         // Get all pending Acceptances for this asset and delete them
         $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',

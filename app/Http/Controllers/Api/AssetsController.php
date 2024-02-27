@@ -6,6 +6,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Traits\MigratesLegacyLocations;
 use App\Models\CheckoutAcceptance;
+use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
@@ -914,12 +915,9 @@ class AssetsController extends Controller
             $originalValues['action_date'] = $checkin_at;
         }
 
-        if(!empty($asset->licenseseats->all())){
-            foreach ($asset->licenseseats as $seat){
-                $seat->assigned_to = null;
-                $seat->save();
-            }
-        }
+        $asset->licenseseats->each(function (LicenseSeat $seat) {
+            $seat->update(['assigned_to' => null]);
+        });
 
         // Get all pending Acceptances for this asset and delete them
         CheckoutAcceptance::pending()
