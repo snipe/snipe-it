@@ -255,7 +255,6 @@
                             {{ Form::hidden('labels_display_model', old('labels_display_model', $setting->labels_display_model)) }}
                             {{ Form::hidden('labels_display_company_name', old('labels_display_company_name', $setting->labels_display_company_name)) }}
                         @else
-
                             <!-- Legacy settings -->
                             <div class="form-group{{ $errors->has('labels_per_page') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
@@ -378,8 +377,7 @@
                                     {!! $errors->first('labels_pageheight', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>
                             </div>
-                        @endif
-                        @if(!$setting->label2_enable)
+
                             <div class="form-group">
                                 <div class="col-md-3 text-right">
                                 {{ Form::label('labels_display', trans('admin/settings/general.label_fields'), ['class' => 'control-label']) }}
@@ -405,13 +403,9 @@
                                             {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}
                                             {{ trans('admin/companies/table.name') }}
                                         </label>
-
                                 </div> <!--/.col-md-9-->
                             </div> <!--/.form-group-->
-
                         @endif
-
-
                     </div>
 
                 </div> <!--/.box-body-->

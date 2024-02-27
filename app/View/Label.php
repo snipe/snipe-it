@@ -79,7 +79,6 @@ class Label implements View
         $fieldDefinitions = collect(explode(';', $settings->label2_fields))
             ->filter(fn($fieldString) => !empty($fieldString))
             ->map(fn($fieldString) => Field::fromString($fieldString));
-
         // Prepare data
         $data = $assets
             ->map(function ($asset) use ($template, $settings, $fieldDefinitions) {
@@ -154,7 +153,6 @@ class Label implements View
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
-                    
                 $assetData->put('fields', $fields->take($template->getSupportFields()));
 
                 return $assetData;
