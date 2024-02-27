@@ -150,20 +150,18 @@ class AssetCheckinTest extends TestCase
 
     public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
-        $this->markTestIncomplete(
-            'checkin_at currently takes a date and applies a time which is not inline with what the web controller does.'
-        );
-
         Event::fake();
 
         $this->actingAsForApi(User::factory()->checkinAssets()->create())
             ->postJson(route('api.asset.checkin', Asset::factory()->assignedToUser()->create()), [
-                'checkin_at' => '2023-01-02 12:34:56',
+                // time is appended to the provided date in controller
+                'checkin_at' => '2023-01-02',
                 'note' => 'hi there',
             ]);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) {
-            return $event->action_date === '2023-01-02 12:34:56' && $event->note === 'hi there';
+            return Carbon::parse('2023-01-02')->isSameDay(Carbon::parse($event->action_date))
+                && $event->note === 'hi there';
         }, 1);
     }
 }
