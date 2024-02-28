@@ -625,13 +625,9 @@
     function minAmtFormatter(row, value) {
 
         if ((row) && (row!=undefined)) {
-            console.log(row.free_seats_count);
-            console.log(row.min_amt);
-
             if (value.free_seats_count <= value.min_amt) {
                 return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}">' + value.min_amt + '</span>';
             }
-
             return value.min_amt
         }
 
