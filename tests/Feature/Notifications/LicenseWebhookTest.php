@@ -55,7 +55,7 @@ class LicenseWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->disableWebhook();
+        $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
             LicenseSeat::factory()->create(),
@@ -95,7 +95,7 @@ class LicenseWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->disableWebhook();
+        $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
             LicenseSeat::factory()->create(),

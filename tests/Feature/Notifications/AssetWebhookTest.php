@@ -56,7 +56,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->disableWebhook();
+        $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
             $this->createAsset(),
@@ -96,7 +96,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->disableWebhook();
+        $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
             $this->createAsset(),
