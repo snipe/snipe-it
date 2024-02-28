@@ -111,6 +111,7 @@ class AssetsController extends Controller
             'requests_counter',
             'byod',
             'asset_eol_date',
+            'requestable',
         ];
 
         $filter = [];
