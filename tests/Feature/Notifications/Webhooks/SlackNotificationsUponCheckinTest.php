@@ -168,6 +168,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
 
     private function assertNoSlackNotificationSent(string $notificationClass)
     {
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAccessoryNotification::class);
+        Notification::assertNotSentTo(new AnonymousNotifiable, $notificationClass);
     }
 }
