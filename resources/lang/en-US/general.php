@@ -516,5 +516,6 @@ return [
                 'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
              ],
     ],
+    'no_requestable' => 'There are no requestable assets or asset models.',
 
 ];
