@@ -19,16 +19,16 @@ class AssetSlackTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function targets(): array
+    public function assetCheckoutTargets(): array
     {
         return [
             'Asset checked out to user' => [fn() => User::factory()->create()],
-            'Asset checked out to asset' => [fn() => $this->createAsset()],
+            'Asset checked out to asset' => [fn() => Asset::factory()->laptopMbp()->create()],
             'Asset checked out to location' => [fn() => Location::factory()->create()],
         ];
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider assetCheckoutTargets */
     public function testAssetCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -36,7 +36,7 @@ class AssetSlackTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
-            $this->createAsset(),
+            Asset::factory()->laptopMbp()->create(),
             $checkoutTarget(),
             User::factory()->superuser()->create(),
             ''
@@ -51,7 +51,7 @@ class AssetSlackTest extends TestCase
         );
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider assetCheckoutTargets */
     public function testAssetCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
@@ -59,7 +59,7 @@ class AssetSlackTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
-            $this->createAsset(),
+            Asset::factory()->laptopMbp()->create(),
             $checkoutTarget(),
             User::factory()->superuser()->create(),
             ''
@@ -68,7 +68,7 @@ class AssetSlackTest extends TestCase
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAssetNotification::class);
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider assetCheckoutTargets */
     public function testAssetCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -76,7 +76,7 @@ class AssetSlackTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
-            $this->createAsset(),
+            Asset::factory()->laptopMbp()->create(),
             $checkoutTarget(),
             User::factory()->superuser()->create(),
             ''
@@ -91,7 +91,7 @@ class AssetSlackTest extends TestCase
         );
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider assetCheckoutTargets */
     public function testAssetCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
@@ -99,17 +99,12 @@ class AssetSlackTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
-            $this->createAsset(),
+            Asset::factory()->laptopMbp()->create(),
             $checkoutTarget(),
             User::factory()->superuser()->create(),
             ''
         ));
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAssetNotification::class);
-    }
-
-    private function createAsset()
-    {
-        return Asset::factory()->laptopMbp()->create();
     }
 }

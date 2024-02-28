@@ -19,7 +19,7 @@ class LicenseSlackTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function targets(): array
+    public function licenseCheckoutTargets(): array
     {
         return [
             'License checked out to user' => [fn() => User::factory()->create()],
@@ -27,7 +27,7 @@ class LicenseSlackTest extends TestCase
         ];
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider licenseCheckoutTargets */
     public function testLicenseCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -50,7 +50,7 @@ class LicenseSlackTest extends TestCase
         );
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider licenseCheckoutTargets */
     public function testLicenseCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
@@ -67,7 +67,7 @@ class LicenseSlackTest extends TestCase
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutLicenseSeatNotification::class);
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider licenseCheckoutTargets */
     public function testLicenseCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -90,7 +90,7 @@ class LicenseSlackTest extends TestCase
         );
     }
 
-    /** @dataProvider targets */
+    /** @dataProvider licenseCheckoutTargets */
     public function testLicenseCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
