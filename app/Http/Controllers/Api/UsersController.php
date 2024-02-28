@@ -358,7 +358,6 @@ class UsersController extends Controller
 
         if (Gate::allows('users.permissions', $user)) {
 
-            \Log::debug('This user can edit permissions');
             if ($request->has('permissions')) {
                 $permissions_array = $request->input('permissions');
 
