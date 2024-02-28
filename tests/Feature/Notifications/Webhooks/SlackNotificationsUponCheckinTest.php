@@ -22,6 +22,13 @@ class SlackNotificationsUponCheckinTest extends TestCase
 {
     use InteractsWithSettings;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Notification::fake();
+    }
+
     public function assetCheckoutTargets(): array
     {
         return [
@@ -41,8 +48,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
 
     public function testAccessoryCheckinSendsSlackNotificationWhenSettingEnabled()
     {
-        Notification::fake();
-
         $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
@@ -63,8 +68,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
 
     public function testAccessoryCheckinDoesNotSendSlackNotificationWhenSettingDisabled()
     {
-        Notification::fake();
-
         $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
@@ -80,8 +83,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
     /** @dataProvider assetCheckoutTargets */
     public function testAssetCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
-        Notification::fake();
-
         $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
@@ -103,8 +104,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
     /** @dataProvider assetCheckoutTargets */
     public function testAssetCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
-        Notification::fake();
-
         $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
@@ -119,8 +118,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
 
     public function testComponentCheckinDoesNotSendSlackNotification()
     {
-        Notification::fake();
-
         $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
@@ -146,8 +143,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
     /** @dataProvider licenseCheckoutTargets */
     public function testLicenseCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
-        Notification::fake();
-
         $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
@@ -169,8 +164,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
     /** @dataProvider licenseCheckoutTargets */
     public function testLicenseCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
-        Notification::fake();
-
         $this->settings->disableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
