@@ -1,20 +1,22 @@
 <?php
 
-namespace Tests\Feature\Notifications;
+namespace Tests\Feature\Notifications\Webhooks;
 
-use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
+use App\Models\Asset;
+use App\Models\Component;
+use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
-use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckoutAccessoryNotification;
+use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class AccessorySlackTest extends TestCase
+class SlackNotificationsUponCheckoutTest extends TestCase
 {
     use InteractsWithSettings;
 
@@ -56,14 +58,30 @@ class AccessorySlackTest extends TestCase
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAccessoryNotification::class);
     }
 
-    public function testAccessoryCheckinSendsSlackNotificationWhenSettingEnabled()
+    public function testComponentCheckoutDoesNotSendSlackNotification()
     {
         Notification::fake();
 
         $this->settings->enableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
-            Accessory::factory()->appleBtKeyboard()->create(),
+        event(new CheckoutableCheckedOut(
+            Component::factory()->ramCrucial8()->create(),
+            Asset::factory()->laptopMbp()->create(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertNothingSent();
+    }
+
+    public function testConsumableCheckoutSendsSlackNotificationWhenSettingEnabled()
+    {
+        Notification::fake();
+
+        $this->settings->enableSlackWebhook();
+
+        event(new CheckoutableCheckedOut(
+            Consumable::factory()->cardstock()->create(),
             User::factory()->create(),
             User::factory()->superuser()->create(),
             ''
@@ -71,26 +89,26 @@ class AccessorySlackTest extends TestCase
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
-            CheckinAccessoryNotification::class,
+            CheckoutConsumableNotification::class,
             function ($notification, $channels, $notifiable) {
                 return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
             }
         );
     }
 
-    public function testAccessoryCheckinDoesNotSendSlackNotificationWhenSettingDisabled()
+    public function testConsumableCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
     {
         Notification::fake();
 
         $this->settings->disableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
-            Accessory::factory()->appleBtKeyboard()->create(),
+        event(new CheckoutableCheckedOut(
+            Consumable::factory()->cardstock()->create(),
             User::factory()->create(),
             User::factory()->superuser()->create(),
             ''
         ));
 
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAccessoryNotification::class);
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutConsumableNotification::class);
     }
 }
