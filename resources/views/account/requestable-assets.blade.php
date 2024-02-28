@@ -102,7 +102,6 @@
                 <div class="tab-pane fade in {{ ($assets->count() == 0) ? 'active' : '' }}" id="models">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>{{ trans('general.requestable_models') }}</h2>
                                 <table
                                         name="requested-assets"
                                         data-toolbar="#toolbar"
