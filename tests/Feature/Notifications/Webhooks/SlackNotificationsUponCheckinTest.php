@@ -8,19 +8,19 @@ use App\Models\Asset;
 use App\Models\Component;
 use App\Models\LicenseSeat;
 use App\Models\Location;
-use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
+use Tests\Support\AssertsAgainstSlackNotifications;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class SlackNotificationsUponCheckinTest extends TestCase
 {
+    use AssertsAgainstSlackNotifications;
     use InteractsWithSettings;
 
     protected function setUp(): void
@@ -153,21 +153,5 @@ class SlackNotificationsUponCheckinTest extends TestCase
             User::factory()->superuser()->create(),
             ''
         ));
-    }
-
-    private function assertSlackNotificationSent(string $notificationClass)
-    {
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            $notificationClass,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
-    }
-
-    private function assertNoSlackNotificationSent(string $notificationClass)
-    {
-        Notification::assertNotSentTo(new AnonymousNotifiable, $notificationClass);
     }
 }
