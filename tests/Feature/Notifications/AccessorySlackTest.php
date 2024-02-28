@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class AccessoryWebhookTest extends TestCase
+class AccessorySlackTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function testAccessoryCheckoutSendsWebhookNotificationWhenSettingEnabled()
+    public function testAccessoryCheckoutSendsSlackNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
@@ -40,7 +40,7 @@ class AccessoryWebhookTest extends TestCase
         );
     }
 
-    public function testAccessoryCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled()
+    public function testAccessoryCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
     {
         Notification::fake();
 
@@ -56,7 +56,7 @@ class AccessoryWebhookTest extends TestCase
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAccessoryNotification::class);
     }
 
-    public function testAccessoryCheckinSendsWebhookNotificationWhenSettingEnabled()
+    public function testAccessoryCheckinSendsSlackNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
@@ -78,7 +78,7 @@ class AccessoryWebhookTest extends TestCase
         );
     }
 
-    public function testAccessoryCheckinDoesNotSendWebhookNotificationWhenSettingDisabled()
+    public function testAccessoryCheckinDoesNotSendSlackNotificationWhenSettingDisabled()
     {
         Notification::fake();
 

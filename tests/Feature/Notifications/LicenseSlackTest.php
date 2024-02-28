@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class LicenseWebhookTest extends TestCase
+class LicenseSlackTest extends TestCase
 {
     use InteractsWithSettings;
 
@@ -28,7 +28,7 @@ class LicenseWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testLicenseCheckoutSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
+    public function testLicenseCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -51,7 +51,7 @@ class LicenseWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testLicenseCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
+    public function testLicenseCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -68,7 +68,7 @@ class LicenseWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testLicenseCheckinSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
+    public function testLicenseCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -91,7 +91,7 @@ class LicenseWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testLicenseCheckinDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
+    public function testLicenseCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
 

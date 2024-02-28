@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class AssetWebhookTest extends TestCase
+class AssetSlackTest extends TestCase
 {
     use InteractsWithSettings;
 
@@ -29,7 +29,7 @@ class AssetWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testAssetCheckoutSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
+    public function testAssetCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -52,7 +52,7 @@ class AssetWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testAssetCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
+    public function testAssetCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -69,7 +69,7 @@ class AssetWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testAssetCheckinSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
+    public function testAssetCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -92,7 +92,7 @@ class AssetWebhookTest extends TestCase
     }
 
     /** @dataProvider targets */
-    public function testAssetCheckinDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
+    public function testAssetCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
 

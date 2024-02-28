@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class ComponentWebhookTest extends TestCase
+class ComponentSlackTest extends TestCase
 {
 
     use InteractsWithSettings;
 
-    public function testComponentCheckoutDoesNotSendWebhookNotification()
+    public function testComponentCheckoutDoesNotSendSlackNotification()
     {
         Notification::fake();
 
@@ -32,7 +32,7 @@ class ComponentWebhookTest extends TestCase
         Notification::assertNothingSent();
     }
 
-    public function testComponentCheckinDoesNotSendWebhookNotification()
+    public function testComponentCheckinDoesNotSendSlackNotification()
     {
         Notification::fake();
 

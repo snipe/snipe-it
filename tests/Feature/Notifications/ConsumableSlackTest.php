@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
-class ConsumableWebhookTest extends TestCase
+class ConsumableSlackTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function testConsumableCheckoutSendsWebhookNotificationWhenSettingEnabled()
+    public function testConsumableCheckoutSendsSlackNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
@@ -38,7 +38,7 @@ class ConsumableWebhookTest extends TestCase
         );
     }
 
-    public function testConsumableCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled()
+    public function testConsumableCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
     {
         Notification::fake();
 
