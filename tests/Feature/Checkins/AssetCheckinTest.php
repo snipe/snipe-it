@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\Assets;
+namespace Tests\Feature\Checkins;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
@@ -20,23 +20,19 @@ class AssetCheckinTest extends TestCase
 
     public function testCheckingInAssetRequiresCorrectPermission()
     {
-        $this->actingAsForApi(User::factory()->create())
-            ->postJson(route('api.asset.checkin', Asset::factory()->assignedToUser()->create()))
+        $this->actingAs(User::factory()->create())
+            ->post(route('hardware.checkin.store', [
+                'assetId' => Asset::factory()->assignedToUser()->create()->id,
+            ]))
             ->assertForbidden();
-    }
-
-    public function testCannotCheckInNonExistentAsset()
-    {
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', ['id' => 'does-not-exist']))
-            ->assertStatusMessageIs('error');
     }
 
     public function testCannotCheckInAssetThatIsNotCheckedOut()
     {
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', Asset::factory()->create()->id))
-            ->assertStatusMessageIs('error');
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => Asset::factory()->create()->id]))
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.index'));
     }
 
     public function testAssetCanBeCheckedIn()
@@ -45,7 +41,7 @@ class AssetCheckinTest extends TestCase
 
         $user = User::factory()->create();
         $location = Location::factory()->create();
-        $status = Statuslabel::factory()->create();
+        $status = Statuslabel::first() ?? Statuslabel::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create([
             'expected_checkin' => now()->addDay(),
             'last_checkin' => null,
@@ -56,13 +52,16 @@ class AssetCheckinTest extends TestCase
 
         $currentTimestamp = now();
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset), [
-                'name' => 'Changed Name',
-                'status_id' => $status->id,
-                'location_id' => $location->id,
-            ])
-            ->assertOk();
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(
+                route('hardware.checkin.store', ['assetId' => $asset->id, 'backto' => 'user']),
+                [
+                    'name' => 'Changed Name',
+                    'status_id' => $status->id,
+                    'location_id' => $location->id,
+                ],
+            )
+            ->assertRedirect(route('users.show', $user));
 
         $this->assertNull($asset->refresh()->assignedTo);
         $this->assertNull($asset->expected_checkin);
@@ -89,8 +88,8 @@ class AssetCheckinTest extends TestCase
             'rtd_location_id' => $rtdLocation->id,
         ]);
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset->id));
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertTrue($asset->refresh()->location()->is($rtdLocation));
     }
@@ -100,10 +99,10 @@ class AssetCheckinTest extends TestCase
         $location = Location::factory()->create();
         $asset = Asset::factory()->assignedToUser()->create();
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset), [
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]), [
                 'location_id' => $location->id,
-                'update_default_location' => true,
+                'update_default_location' => 0
             ]);
 
         $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
@@ -116,8 +115,8 @@ class AssetCheckinTest extends TestCase
 
         $this->assertNotNull($asset->licenseseats->first()->assigned_to);
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset));
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertNull($asset->refresh()->licenseseats->first()->assigned_to);
     }
@@ -129,8 +128,8 @@ class AssetCheckinTest extends TestCase
             'location_id' => 0,
         ]);
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset));
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertNull($asset->refresh()->rtd_location_id);
         $this->assertEquals($asset->location_id, $asset->rtd_location_id);
@@ -142,26 +141,27 @@ class AssetCheckinTest extends TestCase
 
         $acceptance = CheckoutAcceptance::factory()->for($asset, 'checkoutable')->pending()->create();
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', $asset));
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]));
 
         $this->assertFalse($acceptance->exists(), 'Acceptance was not deleted');
     }
 
     public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
-        Event::fake();
+        Event::fake([CheckoutableCheckedIn::class]);
 
-        $this->actingAsForApi(User::factory()->checkinAssets()->create())
-            ->postJson(route('api.asset.checkin', Asset::factory()->assignedToUser()->create()), [
-                // time is appended to the provided date in controller
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->post(route(
+                'hardware.checkin.store',
+                ['assetId' => Asset::factory()->assignedToUser()->create()->id]
+            ), [
                 'checkin_at' => '2023-01-02',
-                'note' => 'hi there',
+                'note' => 'hello'
             ]);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) {
-            return Carbon::parse('2023-01-02')->isSameDay(Carbon::parse($event->action_date))
-                && $event->note === 'hi there';
+            return $event->action_date === '2023-01-02' && $event->note === 'hello';
         }, 1);
     }
 }
