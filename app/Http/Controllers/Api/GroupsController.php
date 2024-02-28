@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\GroupsTransformer;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Auth;
 
 
 class GroupsController extends Controller
