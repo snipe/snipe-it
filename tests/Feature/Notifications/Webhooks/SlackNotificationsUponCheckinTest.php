@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
@@ -50,12 +51,10 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->enableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             Accessory::factory()->appleBtKeyboard()->create(),
             User::factory()->create(),
-            User::factory()->superuser()->create(),
-            ''
-        ));
+        );
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
@@ -70,12 +69,10 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->disableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             Accessory::factory()->appleBtKeyboard()->create(),
             User::factory()->create(),
-            User::factory()->superuser()->create(),
-            ''
-        ));
+        );
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAccessoryNotification::class);
     }
@@ -85,12 +82,10 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->enableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             Asset::factory()->laptopMbp()->create(),
             $checkoutTarget(),
-            User::factory()->superuser()->create(),
-            ''
-        ));
+        );
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
@@ -106,12 +101,10 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->disableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             Asset::factory()->laptopMbp()->create(),
             $checkoutTarget(),
-            User::factory()->superuser()->create(),
-            ''
-        ));
+        );
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAssetNotification::class);
     }
@@ -120,12 +113,10 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->enableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             Component::factory()->ramCrucial8()->create(),
             Asset::factory()->laptopMbp()->create(),
-            User::factory()->superuser()->create(),
-            ''
-        ));
+        );
 
         Notification::assertNothingSent();
     }
@@ -145,12 +136,10 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->enableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             LicenseSeat::factory()->create(),
             $checkoutTarget(),
-            User::factory()->superuser()->create(),
-            ''
-        ));
+        );
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
@@ -166,13 +155,21 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->disableSlackWebhook();
 
-        event(new CheckoutableCheckedIn(
+        $this->fireCheckInEvent(
             LicenseSeat::factory()->create(),
             $checkoutTarget(),
+        );
+
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinLicenseSeatNotification::class);
+    }
+
+    private function fireCheckInEvent(Model $checkoutable, Model $target)
+    {
+        event(new CheckoutableCheckedIn(
+            $checkoutable,
+            $target,
             User::factory()->superuser()->create(),
             ''
         ));
-
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinLicenseSeatNotification::class);
     }
 }
