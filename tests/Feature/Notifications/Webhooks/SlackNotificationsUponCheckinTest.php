@@ -52,7 +52,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckInEvent(
-            Accessory::factory()->appleBtKeyboard()->create(),
+            Accessory::factory()->create(),
             User::factory()->create(),
         );
 
@@ -64,7 +64,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         $this->fireCheckInEvent(
-            Accessory::factory()->appleBtKeyboard()->create(),
+            Accessory::factory()->create(),
             User::factory()->create(),
         );
 
