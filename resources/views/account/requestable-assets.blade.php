@@ -16,20 +16,37 @@
 <div class="row">
     <div class="col-md-12">
 
+
+        @if (($assets->count() < 1) && ($models->count() < 1))
+
+            <div class="col-md-12">
+                <div class="alert alert-info fade in">
+                    <i class="fas fa-info-circle faa-pulse animated"></i>
+                    <strong>{{ trans('general.notification_info') }}: </strong>
+                    {{ trans('general.no_requestable') }}
+                </div>
+            </div>
+
+        @else
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
+                @if ($assets->count() > 0)
                 <li class="active">
                     <a href="#assets" data-toggle="tab" title="{{ trans('general.assets') }}">{{ trans('general.assets') }}
                         <badge class="badge badge-secondary"> {{ $assets->count()}}</badge>
                     </a>               
                 </li>
+                @endif
+                @if ($models->count() > 0)
                 <li>
                     <a href="#models" data-toggle="tab" title="{{ trans('general.asset_models') }}">{{ trans('general.asset_models') }}
                         <badge class="badge badge-secondary"> {{ $models->count()}}</badge>
                     </a>                   
                 </li>
+                @endif
             </ul>
             <div class="tab-content">
+                @if ($assets->count() > 0)
                 <div class="tab-pane fade in active" id="assets">
                     <div class="row">
                         <div class="col-md-12">
@@ -76,15 +93,15 @@
                                         </thead>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                @endif
 
-                <div class="tab-pane fade" id="models">
+                @if ($models->count() > 0)
+                <div class="tab-pane fade in {{ ($assets->count() > 0) ? 'active' : '' }}" id="models">
                     <div class="row">
                         <div class="col-md-12">
-
-                            @if ($models->count() > 0)
                             <h2>{{ trans('general.requestable_models') }}</h2>
                                 <table
                                         name="requested-assets"
@@ -145,18 +162,15 @@
                                 </tbody>
                             </table>
 
-                            @else
-                                <div class="alert alert-info alert-block">
-                                    <i class="fas fa-info-circle"></i>
-                                    {{ trans('general.no_results') }}
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
+                @endif
 
             </div> <!-- .tab-content-->
         </div> <!-- .nav-tabs-custom -->
+
+        @endif
     </div> <!-- .col-md-12> -->
 </div> <!-- .row -->
 @stop
