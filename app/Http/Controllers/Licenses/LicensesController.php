@@ -245,12 +245,6 @@ class LicensesController extends Controller
         $available_seats_count = $license->availCount()->count();
         $checkedout_seats_count = ($total_seats_count - $available_seats_count);
 
-        \Log::debug('Total: '.$total_seats_count);
-        \Log::debug('Users: '.$users_count);
-        \Log::debug('Available: '.$available_seats_count);
-        \Log::debug('Checkedout: '.$checkedout_seats_count);
-
-
         $this->authorize('view', $license);
         return view('licenses.view', compact('license'))
             ->with('users_count', $users_count)
