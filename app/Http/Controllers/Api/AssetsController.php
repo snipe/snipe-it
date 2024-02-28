@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
+use App\Http\Traits\MigratesLegacyAssetLocations;
+use App\Models\CheckoutAcceptance;
+use App\Models\LicenseSeat;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
@@ -45,6 +49,8 @@ use Route;
  */
 class AssetsController extends Controller
 {
+    use MigratesLegacyAssetLocations;
+
     /**
      * Returns JSON listing of all assets
      *
@@ -105,6 +111,7 @@ class AssetsController extends Controller
             'requests_counter',
             'byod',
             'asset_eol_date',
+            'requestable',
         ];
 
         $filter = [];
@@ -864,10 +871,8 @@ class AssetsController extends Controller
      */
     public function checkin(Request $request, $asset_id)
     {
-        $this->authorize('checkin', Asset::class);
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
-
 
         $target = $asset->assignedTo;
         if (is_null($target)) {
@@ -881,7 +886,6 @@ class AssetsController extends Controller
         $asset->expected_checkin = null;
         //$asset->last_checkout = null;
         $asset->last_checkin = now();
-        $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
 
@@ -889,10 +893,16 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
         }
 
+        $this->migrateLegacyLocations($asset);
+
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
             $asset->location_id = $request->input('location_id');
+
+            if ($request->input('update_default_location')){
+                $asset->rtd_location_id = $request->input('location_id');
+            }
         }
 
         if ($request->has('status_id')) {
@@ -905,6 +915,23 @@ class AssetsController extends Controller
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
             $originalValues['action_date'] = $checkin_at;
         }
+
+        $asset->licenseseats->each(function (LicenseSeat $seat) {
+            $seat->update(['assigned_to' => null]);
+        });
+
+        // Get all pending Acceptances for this asset and delete them
+        CheckoutAcceptance::pending()
+            ->whereHasMorph(
+                'checkoutable',
+                [Asset::class],
+                function (Builder $query) use ($asset) {
+                    $query->where('id', $asset->id);
+                })
+            ->get()
+            ->map(function ($acceptance) {
+                $acceptance->delete();
+            });
 
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));

@@ -182,9 +182,13 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      <a href="{{ route('suppliers.show', $license->supplier_id) }}">
-                        {{ $license->supplier->name }}
-                      </a>
+                      @if ($license->supplier)
+                        <a href="{{ route('suppliers.show', $license->supplier_id) }}">
+                          {{ $license->supplier->name }}
+                        </a>
+                      @else
+                      {{ trans('general.deleted') }}
+                      @endif
                     </div>
                   </div>
                 @endif
@@ -333,11 +337,21 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
+
+                      @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
+                        <span data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold', ['remaining_count' => $license->remaincount(), 'min_amt' => $license->min_amt]) }}"><i class="fas fa-exclamation-triangle text-danger" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.warning') }}</span>
+                        </span>
+                      @endif
+
                       {{ $license->seats }}
+                        @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
+
+                        @endif
+
                     </div>
                   </div>
                   @endif
-
 
 
                   <div class="row">
@@ -534,6 +548,7 @@
                   <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
                   <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>

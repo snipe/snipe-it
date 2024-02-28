@@ -309,7 +309,7 @@
                     @if ($model->notes)
                         <li>
                             {{ trans('general.notes') }}:
-                            {{ $model->notes }}
+                            {!! nl2br(Helper::parseEscapedMarkedownInline($model->notes)) !!}
                         </li>
                     @endif
 

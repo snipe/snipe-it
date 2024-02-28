@@ -19,6 +19,9 @@ class Actionlog extends SnipeModel
 {
     use HasFactory;
 
+    // This is to manually set the source (via setActionSource()) for determineActionSource()
+    protected ?string $source = null;
+
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
     use Presentable;
@@ -341,7 +344,12 @@ class Actionlog extends SnipeModel
      * @since v6.3.0
      * @return string
      */
-    public function determineActionSource() {
+    public function determineActionSource(): string
+    {
+        // This is a manually set source
+        if($this->source) {
+            return $this->source;
+        }
 
         // This is an API call
         if (((request()->header('content-type') && (request()->header('accept'))=='application/json'))
@@ -357,5 +365,11 @@ class Actionlog extends SnipeModel
         // We're not sure, probably cli
         return 'cli/unknown';
 
+    }
+
+    // Manually sets $this->source for determineActionSource()
+    public function setActionSource($source = null): void
+    {
+        $this->source = $source;
     }
 }

@@ -20,7 +20,7 @@ class ConsumableWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
             Consumable::factory()->cardstock()->create(),

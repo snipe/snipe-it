@@ -425,65 +425,64 @@ class SettingsController extends Controller
         if (! config('app.lock_passwords')) {
             $setting->site_name = $request->input('site_name');
             $setting->custom_css = $request->input('custom_css');
-        }
+            $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
 
-        $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
-
-        if ('1' == $request->input('clear_logo')) {
+            if ('1' == $request->input('clear_logo')) {
                 Storage::disk('public')->delete($setting->logo);
-            $setting->logo = null;
+                $setting->logo = null;
                 $setting->brand = 1;
-        }
-
-
-        $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
-
-
-       if ('1' == $request->input('clear_email_logo')) {
-            Storage::disk('public')->delete($setting->email_logo);
-            $setting->email_logo = null;
-            // If they are uploading an image, validate it and upload it
-        }
-
-
-        $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
-
-
-        if ('1' == $request->input('clear_label_logo')) {
-            Storage::disk('public')->delete($setting->label_logo);
-            $setting->label_logo = null;
-        }
-
-
-        // If the user wants to clear the favicon...
-         if ($request->hasFile('favicon')) {
-            $favicon_image = $favicon_upload = $request->file('favicon');
-            $favicon_ext = $favicon_image->getClientOriginalExtension();
-            $setting->favicon = $favicon_file_name = 'favicon-uploaded.'.$favicon_ext;
-
-            if (($favicon_image->getClientOriginalExtension() != 'ico') && ($favicon_image->getClientOriginalExtension() != 'svg')) {
-                $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 36, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-
-                // This requires a string instead of an object, so we use ($string)
-                Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
-            } else {
-                Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
             }
 
 
-            // Remove Current image if exists
-            if (($setting->favicon) && (file_exists($favicon_file_name))) {
-                Storage::disk('public')->delete($favicon_file_name);
-            }
-        } elseif ('1' == $request->input('clear_favicon')) {
-             Storage::disk('public')->delete($setting->clear_favicon);
-            $setting->favicon = null;
+            $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
 
-             // If they are uploading an image, validate it and upload it
-         }
+
+            if ('1' == $request->input('clear_email_logo')) {
+                Storage::disk('public')->delete($setting->email_logo);
+                $setting->email_logo = null;
+                // If they are uploading an image, validate it and upload it
+            }
+
+
+
+            $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
+
+            if ('1' == $request->input('clear_label_logo')) {
+                Storage::disk('public')->delete($setting->label_logo);
+                $setting->label_logo = null;
+            }
+
+            
+            // If the user wants to clear the favicon...
+            if ($request->hasFile('favicon')) {
+                $favicon_image = $favicon_upload = $request->file('favicon');
+                $favicon_ext = $favicon_image->getClientOriginalExtension();
+                $setting->favicon = $favicon_file_name = 'favicon-uploaded.'.$favicon_ext;
+
+                if (($favicon_image->getClientOriginalExtension() != 'ico') && ($favicon_image->getClientOriginalExtension() != 'svg')) {
+                    $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 36, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+
+                    // This requires a string instead of an object, so we use ($string)
+                    Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
+                } else {
+                    Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
+                }
+
+
+                // Remove Current image if exists
+                if (($setting->favicon) && (file_exists($favicon_file_name))) {
+                    Storage::disk('public')->delete($favicon_file_name);
+                }
+            } elseif ('1' == $request->input('clear_favicon')) {
+                Storage::disk('public')->delete($setting->clear_favicon);
+                $setting->favicon = null;
+
+                // If they are uploading an image, validate it and upload it
+            }
+        }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

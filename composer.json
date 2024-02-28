@@ -77,7 +77,8 @@
     "watson/validating": "^6.1"
   },
   "suggest": {
-    "ext-ldap": "*"
+    "ext-ldap": "*",
+    "ext-zip": "*"
   },
   "require-dev": {
     "brianium/paratest": "^6.6",

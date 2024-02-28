@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Supplier;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AccessoryFactory extends Factory
@@ -138,6 +139,18 @@ class AccessoryFactory extends Factory
     {
         return $this->afterCreating(function ($accessory) {
             $accessory->category->update(['require_acceptance' => 1]);
+        });
+    }
+
+    public function checkedOutToUser(User $user = null)
+    {
+        return $this->afterCreating(function (Accessory $accessory) use ($user) {
+            $accessory->users()->attach($accessory->id, [
+                'accessory_id' => $accessory->id,
+                'created_at' => Carbon::now(),
+                'user_id' => 1,
+                'assigned_to' => $user->id ?? User::factory()->create()->id,
+            ]);
         });
     }
 }
