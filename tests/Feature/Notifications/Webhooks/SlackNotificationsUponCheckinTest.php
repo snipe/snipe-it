@@ -18,6 +18,9 @@ use Tests\Support\AssertsAgainstSlackNotifications;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+/**
+ * @group notifications
+ */
 class SlackNotificationsUponCheckinTest extends TestCase
 {
     use AssertsAgainstSlackNotifications;

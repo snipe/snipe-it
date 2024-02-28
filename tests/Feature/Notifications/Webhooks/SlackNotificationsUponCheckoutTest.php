@@ -20,6 +20,9 @@ use Tests\Support\AssertsAgainstSlackNotifications;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+/**
+ * @group notifications
+ */
 class SlackNotificationsUponCheckoutTest extends TestCase
 {
     use AssertsAgainstSlackNotifications;
