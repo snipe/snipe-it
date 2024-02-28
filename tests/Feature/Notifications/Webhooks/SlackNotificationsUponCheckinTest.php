@@ -77,7 +77,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckInEvent(
-            Asset::factory()->laptopMbp()->create(),
+            Asset::factory()->create(),
             $checkoutTarget(),
         );
 
@@ -90,7 +90,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         $this->fireCheckInEvent(
-            Asset::factory()->laptopMbp()->create(),
+            Asset::factory()->create(),
             $checkoutTarget(),
         );
 
@@ -102,7 +102,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckInEvent(
-            Component::factory()->ramCrucial8()->create(),
+            Component::factory()->create(),
             Asset::factory()->laptopMbp()->create(),
         );
 

@@ -54,7 +54,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Accessory::factory()->appleBtKeyboard()->create(),
+            Accessory::factory()->create(),
             User::factory()->create(),
         );
 
@@ -66,7 +66,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Accessory::factory()->appleBtKeyboard()->create(),
+            Accessory::factory()->create(),
             User::factory()->create(),
         );
 
@@ -79,7 +79,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Asset::factory()->laptopMbp()->create(),
+            Asset::factory()->create(),
             $checkoutTarget(),
         );
 
@@ -92,7 +92,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Asset::factory()->laptopMbp()->create(),
+            Asset::factory()->create(),
             $checkoutTarget(),
         );
 
@@ -104,7 +104,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Component::factory()->ramCrucial8()->create(),
+            Component::factory()->create(),
             Asset::factory()->laptopMbp()->create(),
         );
 
@@ -116,7 +116,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->enableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Consumable::factory()->cardstock()->create(),
+            Consumable::factory()->create(),
             User::factory()->create(),
         );
 
@@ -128,7 +128,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
         $this->settings->disableSlackWebhook();
 
         $this->fireCheckOutEvent(
-            Consumable::factory()->cardstock()->create(),
+            Consumable::factory()->create(),
             User::factory()->create(),
         );
 
