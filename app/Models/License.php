@@ -53,6 +53,7 @@ class License extends Depreciable
         'purchase_date'   => 'date_format:Y-m-d|nullable|max:10',
         'expiration_date'   => 'date_format:Y-m-d|nullable|max:10',
         'termination_date'   => 'date_format:Y-m-d|nullable|max:10',
+        'min_amt'   => 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -81,6 +82,7 @@ class License extends Depreciable
         'supplier_id',
         'termination_date',
         'user_id',
+        'min_amt',
     ];
 
     use Searchable;
