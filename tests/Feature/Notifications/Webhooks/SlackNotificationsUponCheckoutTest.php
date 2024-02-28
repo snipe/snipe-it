@@ -58,13 +58,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             User::factory()->create(),
         );
 
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutAccessoryNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
+        $this->assertSlackNotificationSent(CheckoutAccessoryNotification::class);
     }
 
     public function testAccessoryCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
@@ -76,7 +70,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             User::factory()->create(),
         );
 
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAccessoryNotification::class);
+        $this->assertNoSlackNotificationSent(CheckoutAccessoryNotification::class);
     }
 
     /** @dataProvider assetCheckoutTargets */
@@ -89,13 +83,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             $checkoutTarget(),
         );
 
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutAssetNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
+        $this->assertSlackNotificationSent(CheckoutAssetNotification::class);
     }
 
     /** @dataProvider assetCheckoutTargets */
@@ -108,7 +96,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             $checkoutTarget(),
         );
 
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAssetNotification::class);
+        $this->assertNoSlackNotificationSent(CheckoutAssetNotification::class);
     }
 
     public function testComponentCheckoutDoesNotSendSlackNotification()
@@ -132,13 +120,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             User::factory()->create(),
         );
 
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutConsumableNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
+        $this->assertSlackNotificationSent(CheckoutConsumableNotification::class);
     }
 
     public function testConsumableCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
@@ -150,7 +132,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             User::factory()->create(),
         );
 
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutConsumableNotification::class);
+        $this->assertNoSlackNotificationSent(CheckoutConsumableNotification::class);
     }
 
     /** @dataProvider licenseCheckoutTargets */
@@ -163,13 +145,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             $checkoutTarget(),
         );
 
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutLicenseSeatNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
+        $this->assertSlackNotificationSent(CheckoutLicenseSeatNotification::class);
     }
 
     /** @dataProvider licenseCheckoutTargets */
@@ -182,7 +158,7 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             $checkoutTarget(),
         );
 
-        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutLicenseSeatNotification::class);
+        $this->assertNoSlackNotificationSent(CheckoutLicenseSeatNotification::class);
     }
 
     private function fireCheckOutEvent(Model $checkoutable, Model $target)
@@ -193,5 +169,21 @@ class SlackNotificationsUponCheckoutTest extends TestCase
             User::factory()->superuser()->create(),
             '',
         ));
+    }
+
+    private function assertSlackNotificationSent(string $notificationClass)
+    {
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            $notificationClass,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
+            }
+        );
+    }
+
+    private function assertNoSlackNotificationSent(string $notificationClass)
+    {
+        Notification::assertNotSentTo(new AnonymousNotifiable, $notificationClass);
     }
 }
