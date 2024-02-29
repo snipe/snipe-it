@@ -19,22 +19,76 @@ abstract class Importer
      * Id of User performing import
      * @var
      */
+    
     protected $user_id;
     /**
      * Are we updating items in the import
      * @var bool
      */
+
     protected $updating;
+
     /**
      * Default Map of item fields->csv names
      *
-     * This has been moved into Livewire/Importer.php to be more granular.
-     * @todo - remove references to this property since we don't use it anymore.
+     * This has been moved into app/Http/Livewire/Importer.php to be more granular.
+     * This private variable is ONLY used for the cli-importer.
      *
+     * @todo - find a way to make this less duplicative
      * @var array
      */
     private $defaultFieldMap = [
-
+        'asset_tag' => 'asset tag',
+        'activated' => 'activated',
+        'category' => 'category',
+        'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
+        'checkout_location' => 'checkout location',
+        'company' => 'company',
+        'item_name' => 'item name',
+        'item_number' => 'item number',
+        'image' => 'image',
+        'expiration_date' => 'expiration date',
+        'location' => 'location',
+        'notes' => 'notes',
+        'license_email' => 'licensed to email',
+        'license_name' => 'licensed to name',
+        'maintained' => 'maintained',
+        'manufacturer' => 'manufacturer',
+        'asset_model' => 'model name',
+        'model_number' => 'model number',
+        'order_number' => 'order number',
+        'purchase_cost' => 'purchase cost',
+        'purchase_date' => 'purchase date',
+        'purchase_order' => 'purchase order',
+        'qty' => 'quantity',
+        'reassignable' => 'reassignable',
+        'requestable' => 'requestable',
+        'seats' => 'seats',
+        'serial' => 'serial number',
+        'status' => 'status',
+        'supplier' => 'supplier',
+        'termination_date' => 'termination date',
+        'warranty_months' => 'warranty',
+        'full_name' => 'full name',
+        'email' => 'email',
+        'username' => 'username',
+        'address' => 'address',
+        'address2' => 'address2',
+        'city' => 'city',
+        'state' => 'state',
+        'country' => 'country',
+        'zip' => 'zip',
+        'jobtitle' => 'job title',
+        'employee_num' => 'employee number',
+        'phone_number' => 'phone number',
+        'first_name' => 'first name',
+        'last_name' => 'last name',
+        'department' => 'department',
+        'manager_name' => 'manager full name',
+        'manager_username' => 'manager username',
+        'min_amt' => 'minimum quantity',
+        'remote' => 'remote',
+        'vip' => 'vip',
     ];
     /**
      * Map of item fields->csv names
@@ -281,9 +335,11 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
+        // Get some variables for $user_formatted_array in case we need them later
+        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
+
         if (empty($user_array['first_name'])) {
             // Get some fields for first name and last name based off of full name
-            $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
             $user_array['first_name'] = $user_formatted_array['first_name'];
             $user_array['last_name'] = $user_formatted_array['last_name'];
         }

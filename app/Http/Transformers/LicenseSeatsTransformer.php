@@ -29,6 +29,7 @@ class LicenseSeatsTransformer
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
                 'name'=> e($seat->user->present()->fullName),
+                'email' => e($seat->user->email),
                 'department'=> ($seat->user->department) ?
                         [
                             'id' => (int) $seat->user->department->id,
@@ -45,6 +46,7 @@ class LicenseSeatsTransformer
                 'name'=> e($seat->location()->name),
             ] : null,
             'reassignable' => (bool) $seat->license->reassignable,
+            'notes' => e($seat->notes),
             'user_can_checkout' => (($seat->assigned_to == '') && ($seat->asset_id == '')),
         ];
 

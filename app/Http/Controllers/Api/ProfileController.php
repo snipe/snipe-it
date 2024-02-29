@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Facades\Gate;
+use App\Models\CustomField;
 use DB;
 
 class ProfileController extends Controller
@@ -48,14 +49,23 @@ class ProfileController extends Controller
     {
         $checkoutRequests = CheckoutRequest::where('user_id', '=', Auth::user()->id)->get();
 
-        $results = [];
+        $results = array();
+        $show_field = array();
+        $showable_fields = array();
         $results['total'] = $checkoutRequests->count();
+
+        $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+        foreach ($all_custom_fields as $field) {
+            if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1')) {
+                $showable_fields[] = $field->db_column_name();
+            }
+        }
 
         foreach ($checkoutRequests as $checkoutRequest) {
 
             // Make sure the asset and request still exist
             if ($checkoutRequest && $checkoutRequest->itemRequested()) {
-                $results['rows'][] = [
+                $assets = [
                     'image' => e($checkoutRequest->itemRequested()->present()->getImageUrl()),
                     'name' => e($checkoutRequest->itemRequested()->present()->name()),
                     'type' => e($checkoutRequest->itemType()),
@@ -64,7 +74,16 @@ class ProfileController extends Controller
                     'expected_checkin' => Helper::getFormattedDateObject($checkoutRequest->itemRequested()->expected_checkin, 'datetime'),
                     'request_date' => Helper::getFormattedDateObject($checkoutRequest->created_at, 'datetime'),
                 ];
+
+                foreach ($showable_fields as $showable_field_name) {
+                    $show_field['custom_fields.'.$showable_field_name] =  $checkoutRequest->itemRequested()->{$showable_field_name};
+                }
+
+                // Merge the plain asset data and the custom fields data
+                $results['rows'][] = array_merge($assets, $show_field);
             }
+
+
         }
 
         return $results;

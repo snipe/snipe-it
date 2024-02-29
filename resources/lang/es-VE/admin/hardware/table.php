@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Etiqueta de Activo',
     'asset_model'       => 'Modelo',
+    'assigned_to'   => 'Asignado a',
     'book_value'  	=> 'Valor actual',
     'change' 		=> 'Registrado / Asignado',
     'checkout_date' => 'Fecha de Asignación',
@@ -14,6 +15,7 @@ return [
     'dl_csv' 		=> 'Descargar CSV',
     'eol' 			=> 'Fin de Vida',
     'id'      		=> 'Identificación',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Localización',
     'purchase_cost'	=> 'Costo',
     'purchase_date'	=> 'Comprado',

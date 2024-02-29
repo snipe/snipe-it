@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ConsumablesTransformer;
@@ -11,6 +12,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ConsumablesController extends Controller
 {
@@ -86,7 +88,7 @@ class ConsumablesController extends Controller
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $allowed_columns = ['id', 'name', 'order_number', 'min_amt', 'purchase_date', 'purchase_cost', 'company', 'category', 'model_number', 'item_no', 'manufacturer', 'location', 'qty', 'image'];
@@ -263,8 +265,13 @@ class ConsumablesController extends Controller
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable')));
-            \Log::debug('No enough remaining');
         }
+
+        // Make sure there is a valid category
+        if (!$consumable->category){
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.invalid_item_category_single', ['type' => trans('general.consumable')])));
+        }
+
 
         // Check if the user exists - @TODO:  this should probably be handled via validation, not here??
         if (!$user = User::find($request->input('assigned_to'))) {
@@ -285,17 +292,9 @@ class ConsumablesController extends Controller
                 ]
             );
 
-            // Log checkout event
-            $logaction = $consumable->logCheckout($request->input('note'), $user);
-            $data['log_id'] = $logaction->id;
-            $data['eula'] = $consumable->getEula();
-            $data['first_name'] = $user->first_name;
-            $data['item_name'] = $consumable->name;
-            $data['checkout_date'] = $logaction->created_at;
-            $data['note'] = $logaction->note;
-            $data['require_acceptance'] = $consumable->requireAcceptance();
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
 
     }
 

@@ -77,7 +77,8 @@ class Manufacturer extends SnipeModel
             && ($this->assets()->count() === 0)
             && ($this->licenses()->count() === 0)
             && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0);
+            && ($this->accessories()->count() === 0)
+            && ($this->deleted_at == '');
     }
 
     public function assets()

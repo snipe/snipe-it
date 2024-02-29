@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\HasApiTokens;
 use Watson\Validating\ValidatingTrait;
 
@@ -66,6 +67,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'gravatar',
         'vip',
         'autoassign_licenses',
+        'website',
     ];
 
     protected $casts = [
@@ -119,6 +121,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'phone',
         'jobtitle',
         'employee_num',
+        'website',
     ];
 
     /**
@@ -199,6 +202,23 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function isSuperUser()
     {
         return $this->checkPermissionSection('superuser');
+    }
+
+    /**
+     * Checks if the user is deletable
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.4]
+     * @return bool
+     */
+    public function isDeletable()
+    {
+        return Gate::allows('delete', $this)
+            && ($this->assets()->count() === 0)
+            && ($this->licenses()->count() === 0)
+            && ($this->consumables()->count() === 0)
+            && ($this->accessories()->count() === 0)
+            && ($this->deleted_at == '');
     }
 
 

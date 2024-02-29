@@ -59,12 +59,21 @@ class Importer extends Component
         'field_map' => 'array'
     ];
 
+    /**
+     * This is used in resources/views/livewire/importer.blade.php, and we kinda shouldn't need to check for
+     * activeFile here, but there's some UI goofiness that allows this to crash out on some imports.
+     *
+     * @return string
+     */
     public function generate_field_map()
     {
-        \Log::debug("header row is: ".print_r($this->activeFile->header_row,true));
-        \Log::debug("Field map is: ".print_r($this->field_map,true));
-        $tmp = array_combine($this->activeFile->header_row, $this->field_map);
-        return json_encode(array_filter($tmp));
+        $tmp = array();
+        if ($this->activeFile) {
+            $tmp = array_combine($this->activeFile->header_row, $this->field_map);
+            $tmp = array_filter($tmp);
+        }
+        return json_encode($tmp);
+
     }
 
 
@@ -275,6 +284,7 @@ class Importer extends Component
             'license_email' => trans('admin/licenses/form.to_email'),
             'license_name' => trans('admin/licenses/form.to_name'),
             'purchase_order' => trans('admin/licenses/form.purchase_order'),
+            'order_number' => trans('general.order_number'),
             'reassignable' => trans('admin/licenses/form.reassignable'),
             'seats' => trans('admin/licenses/form.seats'),
             'notes' => trans('general.notes'),
@@ -484,8 +494,17 @@ class Importer extends Component
 
     public function selectFile($id)
     {
+        $this->clearMessage();
 
         $this->activeFile = Import::find($id);
+
+        if (!$this->activeFile) {
+            $this->message = trans('admin/hardware/message.import.file_missing');
+            $this->message_type = 'danger';
+
+            return;
+        }
+
         $this->field_map = null;
         foreach($this->activeFile->header_row as $element) {
             if(isset($this->activeFile->field_map[$element])) {
@@ -518,6 +537,12 @@ class Importer extends Component
                 }
             }
         }
+    }
+
+    public function clearMessage()
+    {
+        $this->message = null;
+        $this->message_type = null;
     }
 
     public function render()

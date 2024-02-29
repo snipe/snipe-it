@@ -14,7 +14,11 @@ class LocationPresenter extends Presenter
     public static function dataTableLayout()
     {
         $layout = [
-
+            [
+                'field' => 'bulk_selectable',
+                'checkbox' => true,
+                'formatter' => 'checkboxEnabledFormatter',
+            ],
             [
                 'field' => 'id',
                 'searchable' => false,
@@ -106,7 +110,7 @@ class LocationPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.address'),
+                'title' =>  trans('admin/locations/table.address2'),
                 'visible' => false,
             ],
             [

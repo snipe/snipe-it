@@ -11,6 +11,7 @@ use PHPUnit\Framework\Assert;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+
 class CustomReportTest extends TestCase
 {
     use InteractsWithSettings;

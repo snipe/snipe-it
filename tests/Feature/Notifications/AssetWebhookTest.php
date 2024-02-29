@@ -33,7 +33,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedOut(
             $this->createAsset(),
@@ -73,7 +73,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        $this->settings->enableWebhook();
+        $this->settings->enableSlackWebhook();
 
         event(new CheckoutableCheckedIn(
             $this->createAsset(),
@@ -106,6 +106,54 @@ class AssetWebhookTest extends TestCase
         ));
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAssetNotification::class);
+    }
+
+    public function testCheckInEmailSentToUserIfSettingEnabled()
+    {
+        Notification::fake();
+
+        $user = User::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $asset->model->category->update(['checkin_email' => true]);
+
+        event(new CheckoutableCheckedIn(
+            $asset,
+            $user,
+            User::factory()->checkinAssets()->create(),
+            ''
+        ));
+
+        Notification::assertSentTo(
+            [$user],
+            function (CheckinAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            },
+        );
+    }
+
+    public function testCheckInEmailNotSentToUserIfSettingDisabled()
+    {
+        Notification::fake();
+
+        $user = User::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $asset->model->category->update(['checkin_email' => false]);
+
+        event(new CheckoutableCheckedIn(
+            $asset,
+            $user,
+            User::factory()->checkinAssets()->create(),
+            ''
+        ));
+
+        Notification::assertNotSentTo(
+            [$user],
+            function (CheckinAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            }
+        );
     }
 
     private function createAsset()

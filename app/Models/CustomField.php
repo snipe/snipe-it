@@ -53,6 +53,12 @@ class CustomField extends Model
         'field_encrypted' => 'nullable|boolean',
         'auto_add_to_fieldsets' => 'boolean',
         'show_in_listview' => 'boolean',
+        'show_in_requestable_list' => 'boolean',
+        'show_in_email' => 'boolean',
+    ];
+
+    protected $casts = [
+        'show_in_requestable_list'  => 'boolean',
     ];
 
     /**
@@ -72,7 +78,8 @@ class CustomField extends Model
         'display_in_user_view',
         'auto_add_to_fieldsets',
         'show_in_listview',
-
+        'show_in_email',
+        'show_in_requestable_list',
     ];
 
     /**
@@ -242,8 +249,6 @@ class CustomField extends Model
 
     /**
      * Gets the DB column name.
-     *
-     * @todo figure out if this is still needed? I don't know WTF it's for.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]

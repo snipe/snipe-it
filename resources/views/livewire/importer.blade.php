@@ -129,12 +129,14 @@
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
                                                 <td class="col-md-1 text-right" style="white-space: nowrap;">
-                                                    <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})">
-                                                        <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
+                                                    <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})" data-tooltip="true" title="{{ trans('general.import_this_file') }}">
+                                                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
+                                                    <a href="#" wire:click="$set('activeFile',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
+                                                    </a>
                                     			</td>
                                     		</tr>
 
@@ -235,9 +237,16 @@
                                                                                     ])
                                                                                 }}
                                                                             </div>
+									                                    @if (($activeFile->first_row) && (array_key_exists($index, $activeFile->first_row)))
                                                                             <div class="col-md-5">
                                                                                 <p class="form-control-static">{{ str_limit($activeFile->first_row[$index], 50, '...') }}</p>
                                                                             </div>
+                                                                        @else
+                                                                            @php
+                                                                            $statusText = trans('help.empty_file');
+                                                                            $statusType = 'info';
+                                                                            @endphp
+                                                                        @endif
                                                                         </div><!-- /div row -->
                                                                     @endforeach
                                                                 @else
@@ -303,6 +312,7 @@
                 };
                 data.process().done( function () {data.submit();});
                 @this.progress = 0;
+                @this.clearMessage();
             },
             progress: function(e, data) {
                 @this.progress = parseInt((data.loaded / data.total * 100, 10));

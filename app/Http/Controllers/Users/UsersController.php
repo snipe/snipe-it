@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserNotFoundException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
-use App\Models\Ldap;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
@@ -385,18 +385,35 @@ class UsersController extends Controller
      */
     public function getRestore($id = null)
     {
-        $this->authorize('update', User::class);
-        // Get user information
-        if (! User::onlyTrashed()->find($id)) {
-            return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
+        if ($user = User::withTrashed()->find($id)) {
+            $this->authorize('delete', $user);
+
+            if ($user->deleted_at == '') {
+                return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.user')]));
+            }
+
+            if ($user->restore()) {
+                $logaction = new Actionlog();
+                $logaction->item_type = User::class;
+                $logaction->item_id = $user->id;
+                $logaction->created_at = date('Y-m-d H:i:s');
+                $logaction->user_id = Auth::user()->id;
+                $logaction->logaction('restore');
+
+                // Redirect them to the deleted page if there are more, otherwise the section index
+                $deleted_users = User::onlyTrashed()->count();
+                if ($deleted_users > 0) {
+                    return redirect()->back()->with('success', trans('admin/users/message.success.restored'));
+                }
+                return redirect()->route('users.index')->with('success', trans('admin/users/message.success.restored'));
+
+            }
+
+            // Check validation to make sure we're not restoring a user with the same username as an existing user
+            return redirect()->back()->with('error', trans('general.could_not_restore', ['item_type' => trans('general.user'), 'error' => $user->getErrors()->first()]));
         }
 
-        // Restore the user
-        if (User::withTrashed()->where('id', $id)->restore()) {
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.restored'));
-        }
-
-        return redirect()->route('users.index')->with('error', 'User could not be restored.');
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.does_not_exist'));
     }
 
     /**

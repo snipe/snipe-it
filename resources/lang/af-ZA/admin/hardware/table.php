@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Bate-tag',
+    'asset_model'       => 'model',
+    'assigned_to'   => 'Toevertrou aan',
+    'book_value'  	=> 'Current Value',
+    'change' 		=> 'In uit',
+    'checkout_date' => 'Checkout Datum',
+    'checkoutto' 	=> 'Gekontroleer',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Current Value',
+    'diff' 			=> 'diff',
+    'dl_csv' 		=> 'Laai CSV af',
+    'eol' 			=> 'EOL',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
+    'location' 		=> 'plek',
+    'purchase_cost'	=> 'koste',
+    'purchase_date'	=> 'gekoop',
+    'serial'   		=> 'Serial',
+    'status'   		=> 'status',
+    'title'      	=> 'bate',
+    'image'		    => 'Toestelbeeld',
+    'days_without_acceptance' => 'Dae sonder aanvaarding',
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Toevertrou aan',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

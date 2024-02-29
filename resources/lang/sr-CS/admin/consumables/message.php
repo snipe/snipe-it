@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
         'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Nema dovoljno potrošnog materijala za ovo zaduženje. Molim vas proverite preostalu količinu. ',
     ),
 
     'checkin' => array(

@@ -40,7 +40,9 @@ class CompaniesController extends Controller
             'components_count',
         ];
 
-        $companies = Company::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
+        $companies = Company::withCount(['assets as assets_count'  => function ($query) {
+            $query->AssetsForShow();
+        }])->withCount('licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
 
         if ($request->filled('search')) {
             $companies->TextSearch($request->input('search'));
@@ -56,7 +58,7 @@ class CompaniesController extends Controller
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $companies->count()) ? $companies->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $companies->count()) ? $companies->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
 

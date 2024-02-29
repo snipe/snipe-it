@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LOCALE', 'en'),
+    'locale' =>  env('APP_LOCALE', 'en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +112,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'en-US',
 
     /*
     |--------------------------------------------------------------------------
@@ -239,7 +239,7 @@ return [
     |
     */
 
-    'min_php' => '7.2.5',
+    'min_php' => '7.4.0',
 
 
     /*
@@ -277,7 +277,8 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
+//        Illuminate\Translation\TranslationServiceProvider::class, //replaced on next line
+        App\Providers\SnipeTranslationServiceProvider::class, //we REPLACE the default Laravel translator with our own
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,

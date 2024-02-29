@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Proveedor eliminado',
     'does_not_exist' => 'Proveedor does not exist.',
 
 

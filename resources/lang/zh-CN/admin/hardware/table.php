@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> '资产标签',
     'asset_model'       => '型号',
+    'assigned_to'   => '已分配给',
     'book_value'  	=> '当前值',
     'change' 		=> '进/出',
     'checkout_date' => '借出日期',
@@ -14,6 +15,7 @@ return [
     'dl_csv' 		=> '下载CSV格式',
     'eol' 			=> '寿命',
     'id'      		=> '编号',
+    'last_checkin_date' => '上次归还日期',
     'location' 		=> '位置',
     'purchase_cost'	=> '花费',
     'purchase_date'	=> '已购买',

@@ -92,7 +92,7 @@ class CategoriesController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';

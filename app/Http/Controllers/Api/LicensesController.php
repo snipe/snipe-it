@@ -95,7 +95,7 @@ class LicensesController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $licenses->count()) ? $licenses->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $licenses->count()) ? $licenses->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -136,6 +136,7 @@ class LicensesController extends Controller
                         'seats',
                         'termination_date',
                         'depreciation_id',
+                        'min_amt',
                     ];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);

@@ -12,7 +12,7 @@ return [
     'clone'  					=> 'Clonar Ativo',
     'deployable'  				=> 'Implementável',
     'deleted'  					=> 'Este modelo foi excluído.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => 'Tem certeza de que deseja excluir este ativo?',
     'edit'  					=> 'Editar Ativo',
     'model_deleted'  			=> 'Este modelo de Ativos foi excluído. Você deve restaurar o modelo antes de restaurar o Ativo.',
     'model_invalid'             => 'O modelo deste ativo é inválido.',

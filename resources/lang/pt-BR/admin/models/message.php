@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Modelo de ativo excluído',
     'does_not_exist' => 'O modelo não existe.',
     'no_association' => 'ATENÇÃO! O modelo de ativo para este item é inválido ou está faltando!',
     'no_association_fix' => 'Isso quebrará as coisas de maneiras estranhas e horríveis. Edite este equipamento agora para atribuir um modelo a ele.',

@@ -18,6 +18,7 @@ use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Log;
@@ -41,14 +42,9 @@ class CheckoutableListener
         /**
          * Make a checkout acceptance and attach it in the notification
          */
-        $acceptance = $this->getCheckoutAcceptance($event);       
+        $acceptance = $this->getCheckoutAcceptance($event);
 
         try {
-            if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckoutNotification($event));
-            }
-
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
                     $this->getNotifiables($event),
@@ -60,8 +56,22 @@ class CheckoutableListener
                     $this->getCheckoutNotification($event, $acceptance)
                 );
             }
+
+            if ($this->shouldSendWebhookNotification()) {
+
+            //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
+
+              if(Setting::getSettings()->webhook_selected =='slack' || Setting::getSettings()->webhook_selected =='general') {
+
+
+                  Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                      ->notify($this->getCheckoutNotification($event));
+              }
+            }
+        } catch (ClientException $e) {
+            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::error("Exception caught during checkout notification: ".$e->getMessage());
+            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
         }
     }
 
@@ -92,11 +102,6 @@ class CheckoutableListener
         }
 
         try {
-            if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckinNotification($event));
-            }
-
             // Use default locale
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
@@ -109,8 +114,19 @@ class CheckoutableListener
                     $this->getCheckinNotification($event)
                 );
             }
+            //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
+            if(Setting::getSettings()->webhook_selected =='slack' || Setting::getSettings()->webhook_selected =='general') {
+
+                if ($this->shouldSendWebhookNotification()) {
+                    Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                        ->notify($this->getCheckinNotification($event));
+                }
+            }
+
+        } catch (ClientException $e) {
+            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::error("Exception caught during checkin notification: ".$e->getMessage());
+            Log::warning("Exception caught during checkin notification: " . $e->getMessage());
         }
     }      
 
@@ -211,8 +227,9 @@ class CheckoutableListener
                 break;    
             case LicenseSeat::class:
                 $notificationClass = CheckoutLicenseSeatNotification::class;
-                break;                
+                break;
         }
+
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
     }

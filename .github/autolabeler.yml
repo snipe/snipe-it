@@ -18,5 +18,5 @@ importer: ["/app/Importer/*","/app/Http/Livewire/Importer.php", "resources/views
 cli / artisan: ["/app/Console/*"]
 LDAP: ["*Ldap*", "/app/Console/Commands/Ldap*","/app/Models/Ldap.php"]
 docker: ["*docker/*", "Dockerfile", "Dockerfile.alpine", "Dockerfile.fpm-alpine", ".dockerignore", ".env.docker"]
-tests: ["/tests/*", "/stubs"]
+tests: ["/tests/*", "/database/factories/*", "/stubs"]
 config: .github

@@ -131,14 +131,13 @@
 
 
   $(":submit").attr("disabled", "disabled");
-    $("[name='status_id']").on('select2:select', function (e) {
-        if (e.params.data.id != ""){
-            console.log(e.params.data.id);
-            $(":submit").removeAttr("disabled");
-        }
-        else {
-            $(":submit").attr("disabled", "disabled");
-        }
-    });
+   $("[name='status_id']").on('select2:select', function (e) {
+     if (e.params.data.id != "") {
+       console.log(e.params.data.id);
+       $(":submit").removeAttr("disabled");
+     } else {
+       $(":submit").attr("disabled", "disabled");
+     }
+   });
 </script>
 @stop

@@ -25,7 +25,7 @@
                         </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.users') }}
-                          {!! (($location->users) && ($location->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
+                          {!! ($location->users->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
 
                       </span>
                   </a>
@@ -38,7 +38,7 @@
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('admin/locations/message.current_location') }}
-                          {!! (($location->assets) && ($location->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                          {!! ($location->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -51,7 +51,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/hardware/form.default_location') }}
-                          {!! (($location->rtd_assets) && ($location->rtd_assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                          {!! ($location->rtd_assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -63,7 +63,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/locations/message.assigned_assets') }}
-                          {!! (($location->rtd_assets) && ($location->assignedAssets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                          {!! ($location->assignedAssets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -76,7 +76,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
-                          {!! (($location->accessories) && ($location->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
+                          {!! ($location->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -88,7 +88,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
-                          {!! (($location->consumables) && ($location->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
+                          {!! ($location->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -100,7 +100,18 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
-                          {!! (($location->components) && ($location->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
+                          {!! ($location->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
+                    </span>
+                  </a>
+              </li>
+              
+              <li>
+                  <a href="#history" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="fas fa-hdd fa-2x" aria-hidden="true"></i>
+                    </span>
+                      <span class="hidden-xs hidden-sm">
+                          {{ trans('general.history') }}
                     </span>
                   </a>
               </li>
@@ -318,6 +329,51 @@
                           </table>
                       </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
+
+                <div class="tab-pane" id="history">
+                    <h2 class="box-title">{{ trans('general.history') }}</h2>
+                    <!-- checked out assets table -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table
+                                    class="table table-striped snipe-table"
+                                    id="assetHistory"
+                                    data-pagination="true"
+                                    data-id-table="assetHistory"
+                                    data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-fullscreen="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="desc"
+                                    data-sort-name="created_at"
+                                    data-show-export="true"
+                                    data-export-options='{
+                        "fileName": "export-location-asset-{{  $location->id }}-history",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'
+
+                    data-url="{{ route('api.activity.index', ['target_id' => $location->id, 'target_type' => 'location']) }}"
+                    data-cookie-id-table="assetHistory"
+                    data-cookie="true">
+                                <thead>
+                                    <tr>
+                                        <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
+                                        <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                                        <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                                        <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                                        <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                                        <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                                        <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
+                                        <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                                        <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                                        <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div> <!-- /.row -->
+                </div> <!-- /.tab-pane history -->
 
           </div><!--/.col-md-9-->
       </div><!--/.col-md-9-->

@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => '已删除资产型号',
     'does_not_exist' => '模板不存在',
     'no_association' => '警告！此物品的资产型号无效或丢失！',
     'no_association_fix' => '这将以怪异且可怕的方式破坏一切。立即编辑此资产并为其指定一个型号。',

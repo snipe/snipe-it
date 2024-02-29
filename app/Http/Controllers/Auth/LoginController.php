@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SamlNonce;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Ldap;
@@ -56,7 +57,6 @@ class LoginController extends Controller
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
-        // $this->ldap = $ldap;
         $this->saml = $saml;
     }
 
@@ -82,7 +82,6 @@ class LoginController extends Controller
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
-            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -111,7 +110,14 @@ class LoginController extends Controller
 
             try {
                 $user = $saml->samlLogin($samlData);
-
+                $notValidAfter = new \Carbon\Carbon(@$samlData['assertionNotOnOrAfter']);
+                if(\Carbon::now()->greaterThanOrEqualTo($notValidAfter)) {
+                    abort(400,"Expired SAML Assertion");
+                }
+                if(SamlNonce::where('nonce', @$samlData['nonce'])->count() > 0) {
+                    abort(400,"Assertion has already been used");
+                }
+                Log::debug("okay, fine, this is a new nonce then. Good for you.");
                 if (!is_null($user)) {
                     Auth::login($user);
                 } else {
@@ -123,12 +129,16 @@ class LoginController extends Controller
 
                 if ($user = Auth::user()) {
                     $user->last_login = \Carbon::now();
-                    $user->save();
+                    $user->saveQuietly();
                 }
-                
+                $s = new SamlNonce();
+                $s->nonce = @$samlData['nonce'];
+                $s->not_valid_after = $notValidAfter;
+                $s->save();
+
             } catch (\Exception $e) {
                 \Log::debug('There was an error authenticating the SAML user: '.$e->getMessage());
-                throw new \Exception($e->getMessage());
+                throw $e;
             }
 
         // Fallthrough with better logging
@@ -199,7 +209,7 @@ class LoginController extends Controller
             $user->email = $ldap_attr['email'];
             $user->first_name = $ldap_attr['firstname'];
             $user->last_name = $ldap_attr['lastname']; //FIXME (or TODO?) - do we need to map additional fields that we now support? E.g. country, phone, etc.
-            $user->save();
+            $user->saveQuietly();
         } // End if(!user)
         return $user;
     }
@@ -319,7 +329,7 @@ class LoginController extends Controller
         if ($user = Auth::user()) {
             $user->last_login = \Carbon::now();
             $user->activated = 1;
-            $user->save();
+            $user->saveQuietly();
         }
         // Redirect to the users page
         return redirect()->intended()->with('success', trans('auth/message.signin.success'));
@@ -371,7 +381,7 @@ class LoginController extends Controller
                 [-2, -2, -2, -2]
             );
 
-        $user->save(); // make sure to save *AFTER* displaying the barcode, or else we might save a two_factor_secret that we never actually displayed to the user if the barcode fails
+        $user->saveQuietly(); // make sure to save *AFTER* displaying the barcode, or else we might save a two_factor_secret that we never actually displayed to the user if the barcode fails
 
         return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
     }
@@ -426,7 +436,7 @@ class LoginController extends Controller
 
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
-            $user->save();
+            $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 
             return redirect()->route('home')->with('success', 'You are logged in!');

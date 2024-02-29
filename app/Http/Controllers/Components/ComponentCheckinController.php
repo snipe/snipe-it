@@ -56,10 +56,11 @@ class ComponentCheckinController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request, $component_asset_id)
+    public function store(Request $request, $component_asset_id, $backto = null)
     {
         if ($component_assets = DB::table('components_assets')->find($component_asset_id)) {
             if (is_null($component = Component::find($component_assets->component_id))) {
+
                 return redirect()->route('components.index')->with('error',
                     trans('admin/components/message.not_found'));
             }
@@ -95,6 +96,10 @@ class ComponentCheckinController extends Controller
             $asset = Asset::find($component_assets->asset_id);
 
             event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note'), Carbon::now()));
+            if ($backto == 'asset'){
+                return redirect()->route('hardware.show', $asset->id)->with('success',
+                    trans('admin/components/message.checkin.success'));
+            }
 
             return redirect()->route('components.index')->with('success',
                 trans('admin/components/message.checkin.success'));

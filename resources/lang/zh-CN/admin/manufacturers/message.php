@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => '在您的 URL 中使用 <code>{LOCALE}</code> 和 <code>{SERIAL}</code> 作为变量，以便在查看资产时自动填充这些值。',
+    'support_url_help' => '变量<code>{LOCALE}</code>、<code>{SERIAL}</code>、<code>{MODEL_NUMBER}</code>和<code>{MODEL_NAME}</code>可以在您的URL中使用，以便在查看资产时自动填充这些值——例如https://checkcoverage.apple.com/{LOCALE}{SERIAL}。',
     'does_not_exist' => '制造商不存在',
     'assoc_users'	 => '这个制造商下关联的还有其他资产，请确认后再重试。',
 

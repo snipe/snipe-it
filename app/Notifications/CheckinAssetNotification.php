@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
@@ -9,6 +10,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\GoogleChat\Card;
+use NotificationChannels\GoogleChat\GoogleChatChannel;
+use NotificationChannels\GoogleChat\GoogleChatMessage;
+use NotificationChannels\GoogleChat\Section;
+use NotificationChannels\GoogleChat\Widgets\KeyValue;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckinAssetNotification extends Notification
 {
@@ -43,7 +51,16 @@ class CheckinAssetNotification extends Notification
     public function via()
     {
         $notifyBy = [];
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->webhook_selected == 'google'){
+
+            $notifyBy[] = GoogleChatChannel::class;
+        }
+
+        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
+        if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
             \Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
@@ -82,6 +99,50 @@ class CheckinAssetNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+    }
+    public function toMicrosoftTeams()
+    {
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->title(trans('mail.Asset_Checkin_Notification'))
+            ->addStartGroupToSection('activityText')
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
+            ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
+            ->fact(trans('mail.Asset_Checkin_Notification')." by ", $admin->present()->fullName())
+            ->fact(trans('admin/hardware/form.status'), $item->assetstatus->name)
+            ->fact(trans('mail.notes'), $note ?: '');
+    }
+    public function toGoogleChat()
+    {
+        $target = $this->target;
+        $item = $this->item;
+        $note = $this->note;
+
+        return GoogleChatMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->card(
+                Card::create()
+                    ->header(
+                        '<strong>'.trans('mail.Asset_Checkin_Notification').'</strong>' ?: '',
+                        htmlspecialchars_decode($item->present()->name) ?: '',
+                    )
+                    ->section(
+                        Section::create(
+                            KeyValue::create(
+                                trans('mail.checked_into') ?: '',
+                                $item->location->name ? $item->location->name : '',
+                                trans('admin/hardware/form.status').": ".$item->assetstatus->name,
+                            )
+                                ->onClick(route('hardware.show', $item->id))
+                        )
+                    )
+            );
+
     }
 
     /**

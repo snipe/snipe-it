@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Utilice <code>{LOCALE}</code> y <code>{SERIAL}</code> en su URL como variables para que estos valores se rellenen automáticamente al ver los activos.',
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, y <code>{MODEL_NAME}</code> se puede utilizar en tu URL para que esos valores se llenen automáticamente al ver los activos - por ejemplo https://checkcoverage. pple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Fabricante inexistente.',
     'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
 

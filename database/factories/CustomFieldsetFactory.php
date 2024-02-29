@@ -22,7 +22,7 @@ class CustomFieldsetFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->catchPhrase(),
+            'name' => $this->faker->unique()->catchPhrase(),
         ];
     }
 

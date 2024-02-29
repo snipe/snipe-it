@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Oznaka sredstva',
+    'asset_model'       => 'Model',
+    'assigned_to'   => 'Dodeljena',
+    'book_value'  	=> 'Current Value',
+    'change' 		=> 'Prejeto/Izdano',
+    'checkout_date' => 'Datum Izdaje',
+    'checkoutto' 	=> 'Izdano',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Current Value',
+    'diff' 			=> 'Razlika',
+    'dl_csv' 		=> 'Prenesi CSV',
+    'eol' 			=> 'EOL',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
+    'location' 		=> 'Lokacija',
+    'purchase_cost'	=> 'Cena',
+    'purchase_date'	=> 'Kupljeno',
+    'serial'   		=> 'Serijska številka',
+    'status'   		=> 'Status',
+    'title'      	=> 'Sredstvo ',
+    'image'		    => 'Slika naprave',
+    'days_without_acceptance' => 'Dnevi brez sprejema',
+    'monthly_depreciation' => 'Mesečna amortizacija',
+    'assigned_to'    => 'Dodeljena',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

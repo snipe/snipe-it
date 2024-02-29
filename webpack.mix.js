@@ -17,7 +17,6 @@ mix
       "./node_modules/bootstrap/dist/css/bootstrap.css",
       "./node_modules/@fortawesome/fontawesome-free/css/all.css",
       "./public/css/build/AdminLTE.css",
-      "./node_modules/jquery-ui-bundle/jquery-ui.css",
       "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css",
       "./node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css",
       "./node_modules/blueimp-file-upload/css/jquery.fileupload.css",
@@ -26,7 +25,6 @@ mix
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./public/css/build/app.css",
       "./node_modules/select2/dist/css/select2.css",
-      "./resources/assets/css/dragtable.css",
       "./public/css/build/overrides.css",
     ],
     "./public/css/dist/all.css"
@@ -144,7 +142,7 @@ mix
     [
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
-      "./node_modules/dragtable/dragtable.css",
+     "./resources/assets/css/dragtable.css",
     ],
     "public/css/dist/bootstrap-table.css"
   )
@@ -160,7 +158,7 @@ mix.combine(
     "./node_modules/select2/dist/js/select2.full.min.js",
     "./node_modules/admin-lte/dist/js/adminlte.min.js",
     "./node_modules/tether/dist/js/tether.js",
-    "./node_modules/jquery-ui-bundle/jquery-ui.js",
+    "./node_modules/jquery-ui/dist/jquery-ui.js",
     "./node_modules/jquery-slimscroll/jquery.slimscroll.js",
     "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js",
     "./node_modules/blueimp-file-upload/js/jquery.fileupload.js",
@@ -172,6 +170,7 @@ mix.combine(
     "./resources/assets/js/signature_pad.js",
     "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js", //problem?
     "./node_modules/list.js/dist/list.js",
+    "./node_modules/clipboard/dist/clipboard.js",
   ],
   "public/js/build/vendor.js" // this file seems OK!
 );

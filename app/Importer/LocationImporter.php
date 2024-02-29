@@ -53,21 +53,21 @@ class LocationImporter extends ItemImporter
         }
 
         // Pull the records from the CSV to determine their values
-        $this->item['name'] = $this->findCsvMatch($row, 'name');
-        $this->item['address'] = $this->findCsvMatch($row, 'address');
-        $this->item['address2'] = $this->findCsvMatch($row, 'address2');
-        $this->item['city'] = $this->findCsvMatch($row, 'city');
-        $this->item['state'] = $this->findCsvMatch($row, 'state');
-        $this->item['country'] = $this->findCsvMatch($row, 'country');
-        $this->item['zip'] = $this->findCsvMatch($row, 'zip');
-        $this->item['currency'] = $this->findCsvMatch($row, 'currency');
-        $this->item['ldap_ou'] = $this->findCsvMatch($row, 'ldap_ou');
-        $this->item['manager'] = $this->findCsvMatch($row, 'manager');
-        $this->item['manager_username'] = $this->findCsvMatch($row, 'manager_username');
+        $this->item['name'] = trim($this->findCsvMatch($row, 'name'));
+        $this->item['address'] = trim($this->findCsvMatch($row, 'address'));
+        $this->item['address2'] = trim($this->findCsvMatch($row, 'address2'));
+        $this->item['city'] = trim($this->findCsvMatch($row, 'city'));
+        $this->item['state'] = trim($this->findCsvMatch($row, 'state'));
+        $this->item['country'] = trim($this->findCsvMatch($row, 'country'));
+        $this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
+        $this->item['currency'] = trim($this->findCsvMatch($row, 'currency'));
+        $this->item['ldap_ou'] = trim($this->findCsvMatch($row, 'ldap_ou'));
+        $this->item['manager'] = trim($this->findCsvMatch($row, 'manager'));
+        $this->item['manager_username'] = trim($this->findCsvMatch($row, 'manager_username'));
         $this->item['user_id'] = \Auth::user()->id;
 
         if ($this->findCsvMatch($row, 'parent_location')) {
-            $this->item['parent_id'] = $this->createOrFetchLocation($this->findCsvMatch($row, 'parent_location'));
+            $this->item['parent_id'] = $this->createOrFetchLocation(trim($this->findCsvMatch($row, 'parent_location')));
         }
 
         if (!empty($this->item['manager'])) {

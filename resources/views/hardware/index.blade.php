@@ -34,7 +34,7 @@
 {{ trans('general.assets') }}
 
   @if (Request::has('order_number'))
-    : Order #{{ Request::get('order_number') }}
+    : Order #{{ strval(Request::get('order_number')) }}
   @endif
 @stop
 
@@ -88,7 +88,7 @@
                 class="table table-striped snipe-table"
                 data-url="{{ route('api.assets.index',
                     array('status' => e(Request::get('status')),
-                    'order_number'=>e(Request::get('order_number')),
+                    'order_number'=>e(strval(Request::get('order_number'))),
                     'company_id'=>e(Request::get('company_id')),
                     'status_id'=>e(Request::get('status_id')))) }}"
                 data-export-options='{

@@ -74,7 +74,7 @@
                         data-sort-name="name"
                         id="consumablesCheckedoutTable"
                         class="table table-striped snipe-table"
-                        data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                        data-url="{{route('api.consumables.show.users', $consumable->id)}}"
                         data-export-options='{
                 "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]

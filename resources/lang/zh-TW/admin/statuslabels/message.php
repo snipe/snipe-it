@@ -3,6 +3,7 @@
 return [
 
     'does_not_exist' => '狀態標籤不存在',
+    'deleted_label' => 'Deleted Status Label',
     'assoc_assets'	 => '至少還有一個資產與此狀態標籤關聯，目前不能被删除，請確認後重試。 ',
 
     'create' => [

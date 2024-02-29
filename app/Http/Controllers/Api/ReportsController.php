@@ -33,11 +33,24 @@ class ReportsController extends Controller
 
         if (($request->filled('item_type')) && ($request->filled('item_id'))) {
             $actionlogs = $actionlogs->where('item_id', '=', $request->input('item_id'))
-                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
+                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')))
+                ->orWhere(function($query) use ($request)
+                {
+                    $query->where('target_id', '=', $request->input('item_id'))
+                    ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
+                });
         }
 
         if ($request->filled('action_type')) {
             $actionlogs = $actionlogs->where('action_type', '=', $request->input('action_type'))->orderBy('created_at', 'desc');
+        }
+
+        if ($request->filled('action_source')) {
+            $actionlogs = $actionlogs->where('action_source', '=', $request->input('action_source'))->orderBy('created_at', 'desc');
+        }
+
+        if ($request->filled('remote_ip')) {
+            $actionlogs = $actionlogs->where('remote_ip', '=', $request->input('remote_ip'))->orderBy('created_at', 'desc');
         }
 
         if ($request->filled('uploads')) {
@@ -52,11 +65,14 @@ class ReportsController extends Controller
             'accept_signature',
             'action_type',
             'note',
+            'remote_ip',
+            'user_agent',
+            'action_source',
         ];
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $actionlogs->count()) ? $actionlogs->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $actionlogs->count()) ? $actionlogs->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';

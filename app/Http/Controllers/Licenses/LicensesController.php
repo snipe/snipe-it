@@ -99,6 +99,7 @@ class LicensesController extends Controller
         $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
+        $license->min_amt           = $request->input('min_amt');
 
         if ($license->save()) {
             return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.create.success'));
@@ -176,6 +177,7 @@ class LicensesController extends Controller
         $license->manufacturer_id   =  $request->input('manufacturer_id');
         $license->supplier_id       = $request->input('supplier_id');
         $license->category_id       = $request->input('category_id');
+        $license->min_amt           = $request->input('min_amt');
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
@@ -244,12 +246,6 @@ class LicensesController extends Controller
         $total_seats_count = $license->totalSeatsByLicenseID();
         $available_seats_count = $license->availCount()->count();
         $checkedout_seats_count = ($total_seats_count - $available_seats_count);
-
-        \Log::debug('Total: '.$total_seats_count);
-        \Log::debug('Users: '.$users_count);
-        \Log::debug('Available: '.$available_seats_count);
-        \Log::debug('Checkedout: '.$checkedout_seats_count);
-
 
         $this->authorize('view', $license);
         return view('licenses.view', compact('license'))

@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Tog bort leverantör',
     'does_not_exist' => 'Leverantören finns inte.',
 
 

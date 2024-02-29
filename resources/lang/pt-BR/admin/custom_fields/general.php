@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Novo conjunto de campos personalizado',
     'create_field_title' => 'Criar um novo campo personalizado',
     'value_encrypted'      	        => 'O valor deste campo é encriptado no banco de dados. Somente usuários administradores podem ver o valor descriptografado',
-    'show_in_email'     => 'Incluir o valor desse campo nos e-mails enviados para o usuário? Campos criptografados não podem ser incluídos em emails.',
+    'show_in_email'     => 'Incluir o valor desse campo nos e-mails enviados para o usuário? Campos criptografados não podem ser incluídos em e-mails',
+    'show_in_email_short'     => 'Incluir nos e-mails.',
     'help_text' => 'Texto de ajuda',
     'help_text_description' => 'Este é um texto opcional que irá aparecer abaixo dos elementos de formulário ao editar um ativo para fornecer o contexto no campo.',
     'about_custom_fields_title' => 'Sobre os campos personalizados',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Visível para o Usuário',
     'auto_add_to_fieldsets' => 'Adicionar automaticamente para cada novo conjunto de campos',
     'add_to_preexisting_fieldsets' => 'Adicionar para qualquer conjunto de campos existente',
-    'show_in_listview' => 'Mostrar nas visualizações de lista por padrão. Os usuários autorizados ainda poderão mostrar/ocultar através do seletor de colunas.',
+    'show_in_listview' => 'Mostrar na lista visualizações por padrão. Usuários autorizados ainda serão capazes de mostrar/ocultar através do seletor de coluna',
     'show_in_listview_short' => 'Mostrar nas listas',
+    'show_in_requestable_list_short' => 'Mostrar na lista de ativos solicitáveis',
+    'show_in_requestable_list' => 'Mostrar valor na lista de ativos solicitáveis. Campos criptografados não serão exibidos',
+    'encrypted_options' => 'Este campo está criptografado, então algumas opções de exibição não estarão disponíveis.',
 
 ];

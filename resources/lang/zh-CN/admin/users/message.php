@@ -8,6 +8,7 @@ return array(
     'user_exists'               => '用户已经存在!',
     'user_not_found'            => '用户不存在。',
     'user_login_required'       => '登陆字段是必须的',
+    'user_has_no_assets_assigned' => '目前没有分配给用户的资产。',
     'user_password_required'    => '密码为必填项',
     'insufficient_permissions'  => '权限不足',
     'user_deleted_warning'      => '用户已经被删除，你需要恢复这个用户编辑他或者重新指定新资产。',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => '被选中的已激活并拥有有效电子邮件地址的用户已经收到了一个密码重置链接。',
     'password_reset_sent'       => '密码重置链接已发送至 :email!',
     'user_has_no_email'         => '此用户的个人资料中没有电子邮件地址。',
-    'user_has_no_assets_assigned'   => '此用户没有分配任何资产',
+    'log_record_not_found'        => '找不到该用户匹配的日志记录。',
 
 
     'success' => array(

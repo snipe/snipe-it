@@ -24,7 +24,7 @@
                   data-side-pagination="client"
                   data-show-columns="true"
                   data-show-export="true"
-                  data-show-refresh="true"
+                  data-show-refresh="false"
                   data-sort-order="asc"
                   id="pendingAcceptances"
                   class="table table-striped snipe-table"
