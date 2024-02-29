@@ -30,5 +30,9 @@
 
     @livewire('ldap-settings-form')
 
+
+    {{Form::close()}}
+
+
 @stop
 
