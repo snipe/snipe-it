@@ -714,9 +714,33 @@
                                             </div>
                                             <div class="col-md-6">
                                                 @can('superuser')
+                                             
                                                     <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
                                                         {{ $asset->location->name }}
                                                     </a>
+
+                                                   @php  $asset_current_location = $asset->location;
+                                                            $depth = 0;
+                                                            $max_depth = 10;
+                                                            $path_delimiter = "<";
+                                                            $ellipsis = "...";
+                                                   @endphp
+
+                                                    @while (($asset_current_location->parent_id != null))
+                                                        @if($depth >= $max_depth ){{$path_delimiter}}<a href="{{ route('locations.show', ['location' => $asset_current_location->parent_id]) }}">
+                                                        {{$ellipsis}}
+                                                        </a>
+                                                        @else
+                                                        {{$path_delimiter}}<a href="{{ route('locations.show', ['location' => $asset_current_location->parent_id]) }}">
+                                                        {{  $asset_current_location->parent->name }}
+                                                    </a>
+                                                        @endif
+                                                       @php  $asset_current_location = $asset_current_location->parent;
+                                                       $depth += 1;
+                                                       @endphp
+
+                                                    @endwhile
+                                                   
                                                 @else
                                                     {{ $asset->location->name }}
                                                 @endcan
@@ -733,9 +757,32 @@
                                             </div>
                                             <div class="col-md-6">
                                                 @can('superuser')
-                                                    <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
-                                                        {{ $asset->defaultLoc->name }}
+
+                                                <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
+                                                    {{ $asset->defaultLoc->name }}
+                                                </a>
+
+                                                @php  $asset_current_deflocation = $asset->defaultLoc;
+                                                    $depth = 0;
+                                                    $max_depth = 10;
+                                                    $path_delimiter = "<";
+                                                    $ellipsis = "...";
+                                                @endphp
+                                                
+                                                @while (($asset_current_deflocation->parent_id != null))
+                                                @if($depth >= $max_depth ){{$path_delimiter}}<a href="{{ route('locations.show', ['location' => $asset_current_deflocation->parent_id]) }}">
+                                                    {{$ellipsis}}
                                                     </a>
+                                                    @else
+                                                    {{$path_delimiter}}<a href="{{ route('locations.show', ['location' => $asset_current_deflocation->parent_id]) }}">
+                                                    {{  $asset_current_deflocation->parent->name }}
+                                                </a>
+                                                    @endif
+                                                    @php  $asset_current_deflocation = $asset_current_deflocation->parent;
+                                                    $depth += 1;
+                                                    @endphp
+                                                 @endwhile
+
                                                 @else
                                                     {{ $asset->defaultLoc->name }}
                                                 @endcan

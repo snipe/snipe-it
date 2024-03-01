@@ -411,9 +411,40 @@
             @if ($location->manager)
               <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
             @endif
+
             @if ($location->parent)
-              <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
+            @php  $current_location = $location;
+                  $indent = "";
+                  $loc_array = [];
+            @endphp
+               
+             @while ($current_location->parent_id != null)
+
+             @php $loc_array[] = $current_location->parent->present()->nameUrl();
+             
+                  $current_location = $current_location->parent;
+             @endphp
+
+             @endwhile
+
+             @php
+                  $loc_array_rev = array_reverse($loc_array);
+            @endphp 
+             @foreach ($loc_array_rev as $loc)
+               
+                @if ($loop->last)
+                {{$indent}}{!! $loc !!} ( {{ trans('admin/locations/table.parent')}} ) <br /> 
+                @else
+                {{$indent}} {!! $loc !!} <br /> 
+                @endif
+                @php  
+               // $indent =  substr_replace($indent ,"",-1);
+               $indent = $indent."-";
+                @endphp
+            @endforeach
+
             @endif
+
               @if ($location->ldap_ou)
                   <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
               @endif
