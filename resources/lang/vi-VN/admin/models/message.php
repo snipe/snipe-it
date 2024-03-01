@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Không có trường nào được thay đổi, vì vậy không có gì được cập nhật.',
         'success' 		=> 'Model đã được cập nhật thành công. |:model_count models đã được cập nhật thành công.',
-        'warn'          => 'Bạn sắp cập nhật các thuộc tính của model sau: |Bạn sắp chỉnh sửa các thuộc tính của các model :model_count sau:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

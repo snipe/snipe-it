@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'គ្មាន fields ត្រូវបានផ្លាស់ប្តូរ ដូច្នេះគ្មានអ្វីត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ។',
         'success' 		=> 'បានធ្វើបច្ចុប្បន្នភាពគំរូដោយជោគជ័យ។ |:model_count model បានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។',
-        'warn'          => 'អ្នក​រៀប​នឹង​ធ្វើ​បច្ចុប្បន្នភាព​លក្ខណៈ​សម្បត្តិ​នៃ​គំរូ​ដូច​ខាង​ក្រោម៖ |អ្នក​រៀប​នឹង​កែ​សម្រួល​លក្ខណៈ​សម្បត្តិ​ដូច​ខាង​ក្រោម៖model_count model៖',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

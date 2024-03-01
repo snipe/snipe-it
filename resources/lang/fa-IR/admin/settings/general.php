@@ -93,11 +93,11 @@ return [
     'footer_text_help'          => 'این متن در فوتر سمت راست ظاهر می شود. پیوندها با استفاده از <a href="https://help.github.com/articles/github-flavored-markdown/">نشان‌گذاری طعم‌دار Github</a> مجاز هستند. شکستگی خطوط، هدرها، تصاویر و غیره ممکن است منجر به نتایج غیر قابل پیش بینی شود.
 ',
     'general_settings'			=> 'تنظیمات عمومی',
-    'general_settings_keywords' => 'پشتیبانی شرکت، امضا، پذیرش، قالب ایمیل، فرمت نام کاربری، تصاویر، در هر صفحه، تصویر کوچک، eula، tos، داشبورد، حریم خصوصی
-',
+    'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
     'general_settings_help'     => 'EULA پیش فرض و موارد دیگر
 ',
     'generate_backup'			=> 'تولید پشتیبان گیری',
+    'google_workspaces'         => 'Google Workspaces',
     'header_color'              => 'رنگ هدر',
     'info'                      => 'این تنظیمات به شما اجازه سفارشی کردن جنبه های خاصی از نصب و راه اندازی خود را می دهد.',
     'label_logo'                => 'لوگوی برچسب
@@ -118,8 +118,6 @@ return [
     'ldap_integration'          => 'ادغام LDAP',
     'ldap_settings'             => 'تنظیمات LDAP',
     'ldap_client_tls_cert_help' => 'گواهی TLS سمت کلاینت و کلید برای اتصالات LDAP معمولاً فقط در پیکربندی‌های Google Workspace با « LDAP ایمن» مفید هستند. هر دو مورد نیاز است.
-',
-     'ldap_client_tls_key'       => 'کلید TLS سمت مشتری LDAP
 ',
     'ldap_location'             => 'LDAP Location',
 'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
@@ -165,9 +163,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote_text'          => 'اسکریپت از راه دور',
-    'load_remote_help_text'		=> 'این برنامه نصب می تواند اسکریپت ها را از دنیای خارج بارگذاری کند.
-',
+    'load_remote'               => 'Use Gravatar',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -300,6 +297,7 @@ return [
     'integrations'               => 'Integrations',
     'slack'                     => 'Slack',
     'general_webhook'           => 'General Webhook',
+    'ms_teams'                  => 'Microsoft Teams',
     'webhook'                   => ':app',
     'webhook_presave'           => 'Test to Save',
     'webhook_title'               => 'Update Webhook Settings',

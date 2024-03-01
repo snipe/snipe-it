@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => '此许可证仅剩:remaining_count个席位，且最小数量为:min_amt。你可能需要考虑购买更多座位。',
+    'below_threshold_short' => '该项低于最低要求数量。',
 );

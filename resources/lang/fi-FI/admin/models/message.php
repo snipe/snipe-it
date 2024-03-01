@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Mitään kentistä ei ollut muutettu, joten mitään ei päivitetty.',
         'success' 		=> 'Malli päivitetty onnistuneesti. |:model_count mallia päivitetty onnistuneesti.',
-        'warn'          => 'Olet päivittämässä seuraavan mallin ominaisuuksia: | Olet päivittämässä seuraavien :model_count mallin ominaisuuksia:',
+        'warn'          => 'Olet päivittämässä seuraavan mallin ominaisuuksia: Olet muokkaamassa seuraavien :model_count mallien ominaisuuksia:',
 
     ),
 

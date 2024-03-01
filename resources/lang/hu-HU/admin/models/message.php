@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
         'success' 		=> 'Eszköz modell sikeresen frissítve. Összesen |:model_count eszköz frissítve.',
-        'warn'          => 'A következő modellek tulajdonságait kell frissítenie: |A következő modellek tulajdonságait fogja szerkeszteni :model_count :',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 
