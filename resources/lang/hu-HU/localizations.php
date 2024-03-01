@@ -12,7 +12,7 @@ return [
         'bg-BG'=> 'Bolgár',
         'zh-CN'=> 'Egyszerűsített kínai',
         'zh-TW'=> 'Hagyományos kínai',
-        'ca-ES' => 'Catalan',
+        'ca-ES' => 'katalán',
         'hr-HR'=> 'Horvát',
         'cs-CZ'=> 'Cseh',
         'da-DK'=> 'Dán',

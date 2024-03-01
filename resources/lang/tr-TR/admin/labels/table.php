@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'example_company'    => 'Test Company Limited',
-    'example_defaultloc' => 'Building 1',
-    'example_category'   => 'Test Category',
-    'example_location'   => 'Building 2',
-    'example_manufacturer'  => 'Test Manufacturing Inc.',
-    'example_model'      => 'Test Model',
-    'example_supplier'   => 'Test Company Limited',
+    'example_company'    => 'Test Limited Şirketi',
+    'example_defaultloc' => 'Bina 1',
+    'example_category'   => 'Test Kategorisi',
+    'example_location'   => 'Bina 2',
+    'example_manufacturer'  => 'Test Üretim A. Ş.',
+    'example_model'      => 'Test Modeli',
+    'example_supplier'   => 'Test Limited Şirketi',
     'labels_per_page'    => 'Etiketler',
     'support_fields'     => 'Alanlar',
     'support_asset_tag'  => 'Etiket',

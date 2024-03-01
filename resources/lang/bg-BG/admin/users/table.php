@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Ръководител',
     'managed_locations'     => 'Управлявани места',
     'name' 					=> 'Име',
-    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+    'nogroup'               => 'Няма създадени групи все още. За да създадете една отидете на: ',
     'notes'                 => 'Бележки',
     'password_confirm' 		=> 'Потвърждение на паролата',
     'password' 				=> 'Парола',

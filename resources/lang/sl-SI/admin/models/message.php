@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Polja niso bila spremenjena, nič ni posodobljeno.',
         'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Walang nabagong mga field, kaya walang nai-update.',
         'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

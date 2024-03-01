@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Може да нагласите амортизация базирана на линеен метод.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Импортирането засече, че този файл е празен.'
 ];

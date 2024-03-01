@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Żadne pole nie zostało zmodyfikowane, więc nic nie zostało zaktualizowane.',
         'success' 		=> 'Model pomyślnie zaktualizowany. |:model_count modele pomyślnie zaktualizowane.',
-        'warn'          => 'Zamierzasz zaktualizować właściwości następującego modelu: |Zamierzasz edytować właściwości następujących modeli :model_count:',
+        'warn'          => 'Zamierzasz zaktualizować właściwości następującego modelu:|Zamierzasz edytować właściwości następujących modeli :model_count:',
 
     ),
 
