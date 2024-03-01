@@ -83,8 +83,8 @@ class SecurityHeaders
 
         if ((config('app.debug') != 'true') && (config('app.enable_csp') == 'true')) {
             $csp_policy[] = "default-src 'self'";
-            $csp_policy[] = "style-src 'self' 'unsafe-inline'";
-            $csp_policy[] = "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
+            $csp_policy[] = "style-src 'self'";
+            $csp_policy[] = "script-src 'self'";
             $csp_policy[] = "connect-src 'self'";
             $csp_policy[] = "object-src 'none'";
             $csp_policy[] = "font-src 'self' data:";
