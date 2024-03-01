@@ -240,6 +240,21 @@ class Location extends SnipeModel
     }
 
     /**
+     * Establishes the location -> maintenances relationship
+     *
+     * This would only be used to return maintenances that this user
+     * created.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assetmaintenances()
+    {
+        return $this->hasMany(\App\Models\AssetMaintenance::class, 'assigned_to')->where('assigned_type', 'App\Models\Location')->withTrashed();
+    }
+
+    /**
      * Establishes the asset -> location assignment relationship
      *
      * @author A. Gianotto <snipe@snipe.net>

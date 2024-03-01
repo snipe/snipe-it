@@ -117,14 +117,25 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->completion_date = $request->input('completion_date');
         $assetMaintenance->user_id = Auth::id();
 
-        if (($assetMaintenance->completion_date !== null)
-            && ($assetMaintenance->start_date !== '')
-            && ($assetMaintenance->start_date !== '0000-00-00')
-        ) {
-            $startDate = Carbon::parse($assetMaintenance->start_date);
-            $completionDate = Carbon::parse($assetMaintenance->completion_date);
-            $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
+        // This asset is checked out - let's see to whom
+        if ($asset->assigned_to) {
+
+            $assetMaintenance->assigned_to = $asset->assigned_to;
+            if ($asset->assignedType() == 'asset') {
+                $assetMaintenance->assigned_type = \App\Models\Asset::class;
+            } elseif ($asset->assignedType() == 'location') {
+                $assetMaintenance->assigned_type = \App\Models\Location::class;
+            } else {
+                $assetMaintenance->assigned_type = \App\Models\User::class;
+            }
+
         }
+
+
+        $startDate = Carbon::parse($assetMaintenance->start_date);
+        $completionDate = Carbon::parse($assetMaintenance->completion_date);
+        $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
+
 
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {

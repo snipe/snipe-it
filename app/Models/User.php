@@ -300,6 +300,21 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assetmaintenances()
     {
+        return $this->hasMany(\App\Models\AssetMaintenance::class, 'assigned_to')->where('assigned_type', 'App\Models\User')->withTrashed();
+    }
+
+    /**
+     * Establishes the user -> maintenances relationship
+     *
+     * This would only be used to return maintenances that this user
+     * created.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function admin()
+    {
         return $this->hasMany(\App\Models\AssetMaintenance::class, 'user_id')->withTrashed();
     }
 

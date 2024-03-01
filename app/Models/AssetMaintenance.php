@@ -53,6 +53,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_maintenance_time',
         'notes',
         'cost',
+        'assigned_type',
+        'assigned_to',
     ];
 
     use Searchable;

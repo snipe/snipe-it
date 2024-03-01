@@ -76,6 +76,8 @@ class AssetMaintenancesController extends Controller
                                 'supplier',
                                 'is_warranty',
                                 'status_label',
+                                'assigned_to',
+                                'assigned_type',
                             ];
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';

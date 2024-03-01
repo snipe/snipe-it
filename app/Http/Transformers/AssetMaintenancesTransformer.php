@@ -57,6 +57,11 @@ class AssetMaintenancesTransformer
                 'id' => (int) $assetmaintenance->asset->defaultLoc->id,
                 'name'=> e($assetmaintenance->asset->defaultLoc->name),
             ] : null,
+            'assigned_to' => (($assetmaintenance->asset) && ($assetmaintenance->asset->defaultLoc)) ? [
+                'id' => (int) $assetmaintenance->asset->defaultLoc->id,
+                'type'=> e($assetmaintenance->asset->defaultLoc->name),
+                'name'=> e($assetmaintenance->asset->defaultLoc->name),
+            ] : null,
             'notes'         => ($assetmaintenance->notes) ? Helper::parseEscapedMarkedownInline($assetmaintenance->notes) : null,
             'supplier'      => ($assetmaintenance->supplier) ? ['id' => $assetmaintenance->supplier->id, 'name'=> e($assetmaintenance->supplier->name)] : null,
             'cost'          => Helper::formatCurrencyOutput($assetmaintenance->cost),
