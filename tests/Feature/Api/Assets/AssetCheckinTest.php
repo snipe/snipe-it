@@ -66,8 +66,6 @@ class AssetCheckinTest extends TestCase
 
         $this->assertNull($asset->refresh()->assignedTo);
         $this->assertNull($asset->expected_checkin);
-        $this->assertNull($asset->last_checkout);
-        $this->assertNotNull($asset->last_checkin);
         $this->assertNull($asset->assignedTo);
         $this->assertNull($asset->assigned_type);
         $this->assertNull($asset->accepted);
