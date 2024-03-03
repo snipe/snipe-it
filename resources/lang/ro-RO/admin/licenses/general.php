@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Mai sunt doar :remaining_count seats pentru această licență cu o cantitate minimă de :min_amt. Poate doriți să luați în considerare achiziționarea mai multor locuri.',
+    'below_threshold_short' => 'Acest obiect este sub cantitatea minimă cerută.',
 );

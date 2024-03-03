@@ -59,6 +59,18 @@ class Group extends SnipeModel
     }
 
     /**
+     * Get the user that created the group
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function admin()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+    /**
      * Decode JSON permissions into array
      *
      * @author A. Gianotto <snipe@snipe.net>

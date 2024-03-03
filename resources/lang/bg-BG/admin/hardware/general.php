@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Този актив е забранен за изписване и не може да се изпише в момента.',
     'view'  					=> 'Преглед на актив',
     'csv_error' => 'Имате грешка във вашият CSV файл:',
-    'import_text' => '
-<p>
-    Качете CSV файл съдържащ историята на активите. Активите и потребителите ТРЯБВА да съществуват в системата, иначе ще бъдат презкочени. Съвпадението на активите се прави на база тяхното име. Съвпадението на потребителите се прави на база тяхното потребителско име и критерия избран по-долу. Ако не изберете критерии по-долу съвпадението на потребителите към потребителското име ще бъде направено на база конфигурацията в Админ &gt; Глобални настройки.
-    </p>
-
-    <p>Полетата включени в CSV трябва да съвпадат с: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Всякакви допълнителни полета ще бъдат игнорирани. </p>
-
-    <p>Ако датата на вписване е празна или в бъдещето тя ще изпише актива от потребителя. Ако не се включи колона с дата на вписване, тя ще бъде създадена с днешна дата.</p>
+    'import_text' => '<p>Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the <code>Admin &gt; General Settings</code>.</p><p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p><p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
     ',
-    'csv_import_match_f-l' => 'Опитайте се да съпоставите потребителите по формат име.фамилия (Иван.Иванов)',
-    'csv_import_match_initial_last' => 'Опитайте се да съпоставите потребителите по формат първа буква фамилия (ИИванов)',
-    'csv_import_match_first' => 'Опитайте се да съпоставите потребителите по малко име (Иван)',
-    'csv_import_match_email' => 'Опитайте се да съпоставите потребителите по е-майл, като потребителско име',
-    'csv_import_match_username' => 'Опитайте се да съпоставите потребителите, по потребителско име',
+    'csv_import_match_f-l' => 'Try to match users by <strong>firstname.lastname</strong> (<code>jane.smith</code>) format',
+    'csv_import_match_initial_last' => 'Try to match users by <strong>first initial last name</strong> (<code>jsmith</code>) format',
+    'csv_import_match_first' => 'Try to match users by <strong>first name</strong> (<code>jane</code>) format',
+    'csv_import_match_email' => 'Try to match users by <strong>email</strong> as username',
+    'csv_import_match_username' => 'Try to match users by <strong>username</strong>',
     'error_messages' => 'Съобщение за грешка:',
     'success_messages' => 'Успешно:',
     'alert_details' => 'Детайли.',

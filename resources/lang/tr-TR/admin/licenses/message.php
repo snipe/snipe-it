@@ -9,7 +9,7 @@ return array(
     'assoc_users'	 => 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
     'select_asset_or_person' => 'Bir varlık veya kullanıcı seçmelisiniz, ancak her ikisini birden değil.',
     'not_found' => 'Lisans bulunamadı',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count atama yapılabilir',
 
 
     'create' => array(

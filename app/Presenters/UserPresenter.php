@@ -123,6 +123,15 @@ class UserPresenter extends Presenter
                 'formatter'    => 'phoneFormatter',
             ],
             [
+                'field' => 'website',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.website'),
+                'visible' => false,
+                'formatter'    => 'externalLinkFormatter',
+            ],
+            [
                 'field' => 'address',
                 'searchable' => true,
                 'sortable' => true,

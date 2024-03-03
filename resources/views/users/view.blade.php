@@ -431,19 +431,19 @@
                         {{ trans('admin/users/table.email') }}
                       </div>
                       <div class="col-md-9">
-                        <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                        <a href="mailto:{{ $user->email }}" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> {{ $user->email }}</a>
                       </div>
                     </div>
                     @endif
 
-                    @if ($user->phone)
+                    @if ($user->website)
                      <!-- website -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('general.website') }}
                       </div>
                       <div class="col-md-9">
-                          <a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a>
+                          <a href="{{ $user->website }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> {{ $user->website }}</a>
                       </div>
                     </div>
                     @endif
@@ -455,7 +455,7 @@
                           {{ trans('admin/users/table.phone') }}
                         </div>
                         <div class="col-md-9">
-                          <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
+                          <a href="tel:{{ $user->phone }}" data-tooltip="true" title="{{ trans('general.call') }}"><i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $user->phone }}</a>
                         </div>
                       </div>
                     @endif
@@ -1015,23 +1015,36 @@
         </div><!-- /.tab-pane -->
 
         <div class="tab-pane" id="managed">
-          <div class="table-responsive">
-            <table class="table display table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-8">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($user->managedLocations as $location)
-                <tr>
-                  <td>{!! $location->present()->nameUrl() !!}</td>
-                  <td>{{ $location->created_at }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-          </table>
+
+            @include('partials.locations-bulk-actions')
+
+
+            <table
+                    data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
+                    data-cookie-id-table="locationTable"
+                    data-click-to-select="true"
+                    data-pagination="true"
+                    data-id-table="locationTable"
+                    data-toolbar="#locationsBulkEditToolbar"
+                    data-bulk-button-id="#bulkLocationsEditButton"
+                    data-bulk-form-id="#locationsBulkForm"
+                    data-search="true"
+                    data-show-footer="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-fullscreen="true"
+                    data-show-export="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    id="locationTable"
+                    class="table table-striped snipe-table"
+                    data-url="{{ route('api.locations.index', ['manager_id' => $user->id]) }}"
+                    data-export-options='{
+              "fileName": "export-locations-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+            </table>
+
           </div>
         </div><!-- /consumables-tab -->
       </div><!-- /.tab-content -->

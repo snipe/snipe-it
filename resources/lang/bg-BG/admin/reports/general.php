@@ -8,10 +8,10 @@ return [
     'acceptance_deleted' => 'Заявката за приемане е изтрита',
     'acceptance_request' => 'Заявка за приемане',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'Адрес на потребителя',
+        'user_city' => 'Град на потребителя',
+        'user_state' => 'Щат на потребителя',
+        'user_country' => 'Държава на потребителя',
+        'user_zip' => 'Пощенски код на потребителя'
     ]
 ];

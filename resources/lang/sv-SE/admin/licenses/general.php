@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Det finns bara :remaining_count platser kvar för denna licens med en minsta mängd :min_amt. Du kanske vill överväga att köpa fler platser.',
+    'below_threshold_short' => 'Detta objekt är under det minsta obligatoriska antalet.',
 );

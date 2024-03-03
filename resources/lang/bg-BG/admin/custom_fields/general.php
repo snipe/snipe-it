@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Създай ново персонализирано поле',
     'value_encrypted'      	        => 'Стойността на това поле е криптирана в базата данни. Само администратор потребители ще бъде в състояние да видят дешифрираната стойност',
     'show_in_email'     => 'Да се включи ли стойността на това поле в електронната поща, изпращана към потребителите? Криптираните полета не могат да бъдат включвани в изпращаните електронни пощи',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short'     => 'Включи в е-майлите.',
     'help_text' => 'Помощен текст',
     'help_text_description' => 'Това е допълнителен текст, който ще се появява под формата с елементите докато редактирате актив описващ значението на полето.',
     'about_custom_fields_title' => 'Отностно Персонализирани Полета',
@@ -54,8 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => 'Добави към всички съществуващи набор от полета',
     'show_in_listview' => 'Показвай по подразбиране, като списък. Потребителите, ще имат възможност да го скрият/покажа през избор на колона',
     'show_in_listview_short' => 'Преглед в списъка',
-    'show_in_requestable_list_short' => 'Show in requestable assets list',
-    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
-    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'show_in_requestable_list_short' => 'Покажи в списъка на изискуемите артикули',
+    'show_in_requestable_list' => 'Покажи стойноста в списъка на изискуемите артикули. Криптираните полета няма да се покажат',
+    'encrypted_options' => 'Това поле е криптирано, затова някой настройки няма да бъдат налични.',
 
 ];

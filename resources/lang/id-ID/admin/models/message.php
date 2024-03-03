@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Tidak ada bidang yang berubah, jadi tidak ada yang diperbarui.',
         'success' 		=> 'Model berhasil diperbarui. |:model_count model berhasil diperbarui.',
-        'warn'          => 'Anda akan memperbarui properti dari model berikut: |Anda akan mengedit properti dari :model_count model berikut:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

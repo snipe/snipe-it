@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Ci sono solo :remaining_count installazioni disponibili rimaste per questa licenza con una quantità minima di :min_amt. Si consiglia di acquistarne altre.',
+    'below_threshold_short' => 'Questo oggetto è in quantità inferiore alla soglia minima richiesta.',
 );

@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Polja nisu menjana, tako da ništa nije ažurirano.',
         'success' 		=> 'Model je uspešno izmenjen. |:model_count modela je uspešno izmenjeno.',
-        'warn'          => 'Spremate se da izmenite svojstva sledećeg modela: |Spremate se da izmenite svojstva sledećih :model_count modela:',
+        'warn'          => 'Spremate se da izmenite svojstva sledećeg modela:|Spremate se da izmenite svojstva sledećih :model_count modela:',
 
     ),
 

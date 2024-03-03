@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Er zijn nog :remaining_count zitplaatsen over voor deze licentie met een minimale hoeveelheid van :min_amt. Misschien wilt u overwegen om meer zitplaatsen te kopen.',
+    'below_threshold_short' => 'Dit artikel ligt onder de minimum vereiste hoeveelheid.',
 );

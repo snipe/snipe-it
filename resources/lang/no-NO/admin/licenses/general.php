@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Det er bare :remaining_count seter igjen for denne lisensen med et minimum av :min_amt. Du kan vurdere å kjøpe flere seter.',
+    'below_threshold_short' => 'Denne varen er under det minstekravene kreves.',
 );

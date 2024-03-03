@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Žádné pole nebyly změněny, takže nic nebylo aktualizováno.',
         'success' 		=> 'Model úspěšně upraven. |:model_count modelů bylo úspěšně upraveno.',
-        'warn'          => 'Chystáte se upravit vlastnosti následujícího modelu: |Chystáte se upravit vlastnosti následujících :model_count modelů:',
+        'warn'          => 'Chystáte se aktualizovat vlastnosti následujícího modelu:|Chystáte se upravit vlastnosti následujících :model_count modelů:',
 
     ),
 

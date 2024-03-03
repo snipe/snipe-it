@@ -73,6 +73,7 @@ class UsersController extends Controller
             'users.end_date',
             'users.vip',
             'users.autoassign_licenses',
+            'users.website',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -120,6 +121,10 @@ class UsersController extends Controller
 
         if ($request->filled('country')) {
             $users = $users->where('users.country', '=', $request->input('country'));
+        }
+
+        if ($request->filled('website')) {
+            $users = $users->where('users.website', '=', $request->input('website'));
         }
 
         if ($request->filled('zip')) {
@@ -254,6 +259,7 @@ class UsersController extends Controller
                         'start_date',
                         'end_date',
                         'autoassign_licenses',
+                        'website',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -273,11 +279,6 @@ class UsersController extends Controller
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
-        \Log::debug('Requested offset: '. $request->input('offset'));
-        \Log::debug('App offset: '. app('api_offset_value'));
-        \Log::debug('Actual offset: '. $offset);
-        \Log::debug('Limit: '. $limit);
 
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();

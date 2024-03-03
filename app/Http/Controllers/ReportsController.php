@@ -296,8 +296,8 @@ class ReportsController extends Controller
                         e($actionlog->itemType()),
                         ($actionlog->itemType() == 'user') ? $actionlog->filename : $item_name,
                         ($actionlog->item) ? $actionlog->item->serial : null,
-                        ($actionlog->item->model) ? htmlspecialchars($actionlog->item->model->name, ENT_NOQUOTES) : null,
-                        ($actionlog->item->model) ? $actionlog->item->model->model_number : null,
+                        (($actionlog->item) && ($actionlog->item->model)) ? htmlspecialchars($actionlog->item->model->name, ENT_NOQUOTES) : null,
+                        (($actionlog->item) && ($actionlog->item->model))  ? $actionlog->item->model->model_number : null,
                         $target_name,
                         ($actionlog->note) ? e($actionlog->note) : '',
                         $actionlog->log_meta,
@@ -686,17 +686,23 @@ class ReportsController extends Controller
 
                 $assets->whereBetween('assets.created_at', [$created_start, $created_end]);
             }
+
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
                 $checkout_start = \Carbon::parse($request->input('checkout_date_start'))->startOfDay();
-                $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
+                $checkout_end = \Carbon::parse($request->input('checkout_date_end',now()))->endOfDay();
 
-                $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
+                $actionlogassets = Actionlog::where('action_type','=', 'checkout')
+                                              ->where('item_type', 'LIKE', '%Asset%',)
+                                              ->whereBetween('action_date',[$checkout_start, $checkout_end])
+                                                  ->pluck('item_id');
+
+                $assets->whereIn('id',$actionlogassets);
             }
 
             if (($request->filled('checkin_date_start'))) {
                     $assets->whereBetween('last_checkin', [
                         Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
-                        // use today's date is `checkin_date_end` is not provided
+                        // use today's date if `checkin_date_end` is not provided
                         Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
                     ]);
             }
@@ -1156,16 +1162,20 @@ class ReportsController extends Controller
             $logItem = $logItem_res[0];
         }
 
-        if (!$assetItem->assignedTo->locale){
-            Notification::locale(Setting::getSettings()->locale)->send(
-                $assetItem->assignedTo,
-                new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
-            );
-        } else {
-            Notification::send(
-                $assetItem->assignedTo,
-                new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
-            );
+        // Only send notification if assigned
+        if ($assetItem->assignedTo) {
+
+            if (!$assetItem->assignedTo->locale) {
+                Notification::locale(Setting::getSettings()->locale)->send(
+                    $assetItem->assignedTo,
+                    new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
+                );
+            } else {
+                Notification::send(
+                    $assetItem->assignedTo,
+                    new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
+                );
+            }
         }
 
         return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));
