@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'example_company'    => 'Test Company Limited',
-    'example_defaultloc' => 'Building 1',
-    'example_category'   => 'Test Category',
-    'example_location'   => 'Building 2',
-    'example_manufacturer'  => 'Test Manufacturing Inc.',
-    'example_model'      => 'Test Model',
-    'example_supplier'   => 'Test Company Limited',
+    'example_company'    => 'Тест фирма',
+    'example_defaultloc' => 'Сграда 1',
+    'example_category'   => 'Тест категория',
+    'example_location'   => 'Сграда 2',
+    'example_manufacturer'  => 'Тест производител.',
+    'example_model'      => 'Тест модел',
+    'example_supplier'   => 'Тест фирма',
     'labels_per_page'    => 'Етикети',
     'support_fields'     => 'Полета',
     'support_asset_tag'  => 'Таг',

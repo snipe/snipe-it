@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Auth;
 
 /**
  * This controller handles all actions related to User Groups for
@@ -63,6 +64,7 @@ class GroupsController extends Controller
         $group = new Group();
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
+        $group->created_by = Auth::user()->id;
 
         if ($group->save()) {
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.create'));

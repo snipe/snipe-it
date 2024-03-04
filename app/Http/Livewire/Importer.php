@@ -59,12 +59,21 @@ class Importer extends Component
         'field_map' => 'array'
     ];
 
+    /**
+     * This is used in resources/views/livewire/importer.blade.php, and we kinda shouldn't need to check for
+     * activeFile here, but there's some UI goofiness that allows this to crash out on some imports.
+     *
+     * @return string
+     */
     public function generate_field_map()
     {
-        \Log::debug("header row is: ".print_r($this->activeFile->header_row,true));
-        \Log::debug("Field map is: ".print_r($this->field_map,true));
-        $tmp = array_combine($this->activeFile->header_row, $this->field_map);
-        return json_encode(array_filter($tmp));
+        $tmp = array();
+        if ($this->activeFile) {
+            $tmp = array_combine($this->activeFile->header_row, $this->field_map);
+            $tmp = array_filter($tmp);
+        }
+        return json_encode($tmp);
+
     }
 
 

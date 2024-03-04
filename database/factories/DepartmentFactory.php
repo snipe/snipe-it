@@ -24,7 +24,7 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word() . ' Department',
+            'name' => $this->faker->unique()->word() . ' Department',
             'user_id' => User::factory()->superuser(),
             'location_id' => Location::factory(),
         ];

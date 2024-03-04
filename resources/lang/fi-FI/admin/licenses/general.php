@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Tälle lisenssille jää vain :remaining_count istuimet ja vähimmäismäärä :min_amt. Voit halutessasi harkita useampien paikkojen ostamista.',
+    'below_threshold_short' => 'Tämä kohta on alle vaaditun vähimmäismäärän.',
 );

@@ -38,7 +38,7 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = $this->data->get('template');
+        $template = LabelModel::find($settings->label2_template);
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable) && (!$template)) {
@@ -47,13 +47,6 @@ class Label implements View
                 ->with('settings', $settings)
                 ->with('bulkedit', $this->data->get('bulkedit'))
                 ->with('count', $this->data->get('count'));
-        }
-
-        // If a specific template was set, use it, otherwise fall back to default
-        if (empty($template)) {
-            $template = LabelModel::find($settings->label2_template);
-        } elseif (is_string($template)) {
-            $template = LabelModel::find($template);
         }
 
         $template->validate();

@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\CustomField;
 use App\Models\Labels\Label;
 use App\Models\Location;
 use App\Models\Manufacturer;
@@ -64,6 +65,18 @@ class LabelsController extends Controller
         $exampleAsset->model->category = new Category();
         $exampleAsset->model->category->id = 999999;
         $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
+
+        $customFieldColumns = CustomField::all()->pluck('db_column');
+
+        collect(explode(';', Setting::getSettings()->label2_fields))
+            ->filter()
+            ->each(function ($item) use ($customFieldColumns, $exampleAsset) {
+                $pair = explode('=', $item);
+
+                if ($customFieldColumns->contains($pair[1])) {
+                    $exampleAsset->{$pair[1]} = "{{$pair[0]}}";
+                }
+            });
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {

@@ -67,6 +67,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'gravatar',
         'vip',
         'autoassign_licenses',
+        'website',
     ];
 
     protected $casts = [
@@ -120,6 +121,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'phone',
         'jobtitle',
         'employee_num',
+        'website',
     ];
 
     /**

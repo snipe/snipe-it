@@ -89,7 +89,14 @@ class LicensePresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('admin/accessories/general.remaining'),
-            ], [
+            ],
+            [
+                'field' => 'min_amt',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('mail.min_QTY'),
+                'formatter' => 'minAmtFormatter',
+            ],[
                 'field' => 'purchase_date',
                 'searchable' => true,
                 'sortable' => true,

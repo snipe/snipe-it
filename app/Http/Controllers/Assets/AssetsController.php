@@ -737,11 +737,11 @@ class AssetsController extends Controller
 
                         if ($isCheckinHeaderExplicit) {
 
-                            //if checkin date header exists, assume that empty or future date is still checked out
-                            //if checkin is before todays date, assume it's checked in and do not assign user ID, if checkin date is in the future or blank, this is the expected checkin date, items is checked out
+                            // if checkin date header exists, assume that empty or future date is still checked out
+                            // if checkin is before today's date, assume it's checked in and do not assign user ID, if checkin date is in the future or blank, this is the expected checkin date, items are checked out
 
-                            if ((strtotime($checkin_date) > strtotime(Carbon::now())) || (empty($checkin_date))
-                            ) {
+                            if ((strtotime($checkin_date) > strtotime(Carbon::now())) || (empty($checkin_date)))
+                            {
                                 //only do this if item is checked out
                                 $asset->assigned_to = $user->id;
                                 $asset->assigned_type = User::class;
