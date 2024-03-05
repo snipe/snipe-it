@@ -438,4 +438,70 @@ class AssetStoreTest extends TestCase
                 $json->has('messages.company_id')->etc();
             });
     }
+
+    public function testCustomFieldCheckboxPassesValidationForValidOptionsWithString()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                '_snipeit_test_checkbox_7' => 'One, Two, Three',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+    }
+
+    public function testCustomFieldCheckboxPassesValidationForValidOptionsWithArray()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                '_snipeit_test_checkbox_7' => ['One', 'Two', 'Three'],
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+    }
+
+    public function testCustomFieldCheckboxFailsValidationForInvalidOptionsWithString()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                '_snipeit_test_checkbox_7' => "One, Two, Four, Five",
+            ])
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testCustomFieldCheckboxFailsValidationForInvalidOptionsWithArray()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                '_snipeit_test_checkbox_7' => ['One', 'Two', 'Four', 'Five']
+            ])
+            ->assertStatusMessageIs('error');
+    }
 }
