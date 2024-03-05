@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Este activo tiene una etiqueta de estado que no es desplegable y no puede ser asignado en este momento.',
     'view'  					=> 'Ver Equipo',
     'csv_error' => 'Hay un error en su archivo CSV:',
-    'import_text' => '
-    <p>
-    Sube un CSV que contenga historial de activos. Los activos y los usuarios DEBEN existir en el sistema, o se omitirán. Los activos coincidentes para la importación del historial se buscan con la etiqueta de activos. Intentaremos encontrar un usuario que coincida con el nombre del usuario que proporcione y los criterios que seleccione a continuación. Si no selecciona ningún criterio a continuación, simplemente se intentará coincidir con el formato de nombre de usuario que configuraste en  Administrador &gt; Configuración General.
-    </p>
-
-    <p>Los campos incluidos en el CSV deben coincidir con los encabezados: <strong>Etiqueta de activos, Nombre, Fecha de salida, Fecha de comprobación</strong>. Cualquier campo adicional será ignorado. </p>
-
-    <p>Fecha de Registro: las fechas de registro en blanco o futuro comprobarán los elementos al usuario asociado. Excluyendo la columna Fecha de Registro creará una fecha de registro con la fecha de hoy.</p>
+    'import_text' => '<p>Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the <code>Admin &gt; General Settings</code>.</p><p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p><p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
     ',
-    'csv_import_match_f-l' => 'Intentar coincidir con los usuarios por el formato firstname.lastname (juan.perez)',
-    'csv_import_match_initial_last' => 'Intentar coincidir los usuarios con el formato inicial de nombre y primer apellido (jperez)',
-    'csv_import_match_first' => 'Intentar coincidir con los usuarios por el formato de nombre de usuario (juan)',
-    'csv_import_match_email' => 'Intentar coincidir con los usuarios por correo electrónico como nombre de usuario',
-    'csv_import_match_username' => 'Intentar coincidir usuarios por nombre de usuario',
+    'csv_import_match_f-l' => 'Intenta emparejar usuarios con formato <strong>nombre.lastname</strong> (<code>jane.smith</code>)',
+    'csv_import_match_initial_last' => 'Intentar emparejar a los usuarios con un formato <strong>primer apellido inicial</strong> (<code>jsmith</code>)',
+    'csv_import_match_first' => 'Intentar emparejar a los usuarios con formato <strong>primer nombre</strong> (<code>jane</code>)',
+    'csv_import_match_email' => 'Intenta emparejar a los usuarios por <strong>email</strong> como nombre de usuario',
+    'csv_import_match_username' => 'Try to match users by <strong>username</strong>',
     'error_messages' => 'Mensajes de error:',
     'success_messages' => 'Mensajes de éxito:',
     'alert_details' => 'Por favor, vea abajo para más detalles.',

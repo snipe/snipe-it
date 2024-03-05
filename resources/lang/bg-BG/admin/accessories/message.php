@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Аксесоарът [:id] не съществува.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Този аксесоар не е намерен.',
     'assoc_users'	 => 'От този аксесоар са предадени :count броя на потребителите. Моля впишете обратно нови или върнати и опитайте отново.',
 
     'create' => array(

@@ -76,12 +76,12 @@
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
                             {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</badge>' : '' !!}
-                            
+
                           </span>
                         </a>
                     </li>
 
-                
+
                     <li>
                         <a href="#history" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -126,7 +126,7 @@
                     </a>
                     </li>
 
-                   
+
                     @can('update', \App\Models\Asset::class)
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
@@ -138,7 +138,7 @@
 
 
                 </ul>
-                
+
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="details">
                         <div class="row">
@@ -238,11 +238,11 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} 
-                                                @if ($audit_log->user) 
+                                                {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }}
+                                                @if ($audit_log->user)
                                                     (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
-                                                @endif 
-                                                
+                                                @endif
+
                                             </div>
                                         </div>
                                     @endif
@@ -409,12 +409,13 @@
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
-                                                    @if ($field->field_encrypted=='1')
+                                                    @if (($field->field_encrypted=='1') && ($asset->{$field->db_column_name()}!=''))
                                                         <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
 
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
                                                         @can('assets.view.encrypted_custom_fields')
+							    <span class="js-copy-{{ $field->id }}">
                                                             @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                                 <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
                                                             @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
@@ -422,7 +423,11 @@
                                                             @else
                                                                 {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
                                                             @endif
-                                                        @else
+                                                            </span>
+                                                            <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                                <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                                                            </i>
+							@else
                                                             {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
                                                         @endcan
 
@@ -520,7 +525,7 @@
                                                     @endif
                                                     {{ Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
 
-                                                
+
                                             </div>
                                         </div>
                                     @endif
@@ -950,7 +955,7 @@
                                             @endif
 
                                             @if (isset($asset->location))
-                                                <li>{{ $asset->location->name }}</li>
+                                                <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ $asset->location->name }}</li>
                                                 <li>{{ $asset->location->address }}
                                                     @if ($asset->location->address2!='')
                                                         {{ $asset->location->address2 }}
@@ -1216,6 +1221,7 @@
                   <th data-visible="true" data-field="action_date" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                   <th data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th data-field="note">{{ trans('general.notes') }}</th>

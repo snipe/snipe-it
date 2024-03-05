@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Es wurden keine Felder geändert, daher wurde nichts aktualisiert.',
         'success' 		=> 'Modell erfolgreich aktualisiert. |:model_count Modelle erfolgreich aktualisiert.',
-        'warn'          => 'Sie sind dabei, die Eigenschaften des folgenden Modells zu aktualisieren: |Sie sind dabei, die Eigenschaften der folgenden :model_count Modelle zu bearbeiten:',
+        'warn'          => 'Sie sind dabei, die Eigenschaften des folgenden Modells zu aktualisieren:| Sie sind dabei, die Eigenschaften der folgenden :model_count Modelle zu bearbeiten:',
 
     ),
 

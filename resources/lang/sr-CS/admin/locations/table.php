@@ -34,7 +34,7 @@ return [
     'asset_checked_out'         => 'Zaduženo',
     'asset_expected_checkin'    => 'Očekivano razduživanje',
     'date'                      => 'Datum:',
-    'phone'                     => 'Location Phone',
+    'phone'                     => 'Telefon lokacije',
     'signed_by_asset_auditor'   => 'Odobrio:',
     'signed_by_finance_auditor' => 'Obodrio:',
     'signed_by_location_manager' => 'Odobio:',

@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Pro tuto licenci zbývá pouze :remaining_count míst s minimálním množstvím :min_amt. Můžete uvažovat o zakoupení více míst.',
+    'below_threshold_short' => 'Tato položka je nižší než minimální požadované množství.',
 );

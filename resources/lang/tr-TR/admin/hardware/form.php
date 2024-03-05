@@ -23,7 +23,7 @@ return [
     'depreciation'	    => 'Amortisman',
     'depreciates_on'	=> 'Amortisman',
     'default_location'	=> 'Varsayılan Konum',
-    'default_location_phone' => 'Default Location Phone',
+    'default_location_phone' => 'Varsayılan Konum Telefonu',
     'eol_date'			=> 'Ömür',
     'eol_rate'			=> 'Ömür Başarısı',
     'expected_checkin'  => 'Beklenen geri alma tarihi',

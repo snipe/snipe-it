@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => ':min_amt の最小数量とこのライセンスのために残されている唯一の :remaining_count シートがあります. あなたはより多くの席を購入することを検討したいかもしれません.',
+    'below_threshold_short' => 'この商品は最低限の必要量を下回っています。',
 );

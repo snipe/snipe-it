@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> '변경된 항목이 없어서, 갱신되지 않습니다.',
         'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

@@ -960,7 +960,13 @@
             var clipboard = new ClipboardJS('.js-copy-link');
 
             clipboard.on('success', function(e) {
-                $('.js-copy-link').tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
+                // Get the clicked element
+                var clickedElement = $(e.trigger);
+                // Get the target element selector from data attribute
+                var targetSelector = clickedElement.data('data-clipboard-target');
+                // Find the target element
+                var targetEl = $(targetSelector);
+                clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
             // Reference: https://jqueryvalidation.org/validate/

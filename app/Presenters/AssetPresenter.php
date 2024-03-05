@@ -196,6 +196,14 @@ class AssetPresenter extends Presenter
                 'title' => trans('admin/hardware/form.warranty_expires'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
+                'field' => 'requestable',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/general.requestable'),
+                'formatter' => 'trueFalseFormatter',
+
+            ], [
                 'field' => 'notes',
                 'searchable' => true,
                 'sortable' => true,

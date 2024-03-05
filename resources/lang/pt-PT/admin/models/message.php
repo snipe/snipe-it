@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Nenhum campo foi alterado, portanto, nada foi atualizado.',
         'success' 		=> 'Modelo foi atualizado com sucesso. |:model_count modelos atualizados com sucesso.',
-        'warn'          => 'Está prestes a atualizar as propriedades do seguinte modelo: |Está prestes a editar as propriedades dos seguintes :model_count models:',
+        'warn'          => 'Você está prestes a atualizar as propriedades do seguinte modelo: Você está prestes a editar as propriedades dos seguintes :model_count models:',
 
     ),
 
