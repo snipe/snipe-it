@@ -297,6 +297,7 @@
         }).change();
 
         // Only display the field element if the type is not text
+        // and don't display encryption option for checkbox or radio
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
                 if (($(this).attr("value")!="text") && ($(this).attr("value")!="textarea")){
@@ -310,12 +311,6 @@
                 }
             });
         }).change();
-        // $(".field_element").change(function(){
-        //     $(this).find("option:selected").each(function(){
-        //         if
-        //     })
-        // })
-
     });
 
 
