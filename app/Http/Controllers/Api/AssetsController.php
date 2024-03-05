@@ -622,10 +622,9 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateAssetRequest $request, Asset $id)
+    public function update(UpdateAssetRequest $request, Asset $asset)
     {
-        if ($asset = Asset::find($id)) {
-            $asset->fill($request->validated());
+            $asset->update($request->validated());
 
             // TODO: how much of this should go to validator?
             ($request->filled('model_id')) ?
@@ -689,11 +688,8 @@ class AssetsController extends Controller
             }
 
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
-        }
 
-        // TODO: can this be moved up to ModelNotFound exception handler? would remove a couple lines here if we could use laravel's awesome route-model binding.
-        // (would also need to confirm that then _everything_ expects a 200 when a model isn't found)
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+            // TODO: confirm that everything expects a _200_ model not found exception
     }
 
 

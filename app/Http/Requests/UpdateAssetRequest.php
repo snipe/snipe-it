@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Asset;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
 class UpdateAssetRequest extends ImageUploadRequest
@@ -20,6 +19,10 @@ class UpdateAssetRequest extends ImageUploadRequest
 
     public function prepareForValidation()
     {
+        dump($this->asset);
+        $asset = $this->route('asset');
+        dump($asset);
+        dump($this->route()->getName());
         // the following are 'required' attributes that may or may not be present on an patch request
         // so supplying them here instead of doing funky array modification to the rules
         if (!$this->has('asset_tag')) {
