@@ -1178,6 +1178,10 @@ class ReportsController extends Controller
             }
         }
 
+        if ($assetItem->assignedTo->email == ''){
+            return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.no_email'));
+        }
+
         return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));
     }
 
