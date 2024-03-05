@@ -153,7 +153,7 @@ class DefaultLabel extends RectangleSheet
             static::writeText(
                 $pdf, $record->get('title'),
                 $textX1, 0,
-                'freesans', 'b', $this->textSize, 'L',
+                $this->variable_font, 'b', $this->textSize, 'L',
                 $textW, $this->textSize,
                 true, 0
             );
@@ -167,7 +167,7 @@ class DefaultLabel extends RectangleSheet
                 static::writeText(
                     $pdf, 'N: '.$asset->name,
                     $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
+                    $this->variable_font, '', $this->textSize, 'L',
                     $textW, $this->textSize,
                     true, 0
                 );
@@ -180,7 +180,7 @@ class DefaultLabel extends RectangleSheet
                 static::writeText(
                     $pdf, 'C: '.$asset->company->name,
                     $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
+                    $this->variable_font, '', $this->textSize, 'L',
                     $textW, $this->textSize,
                     true, 0
                 );
@@ -193,7 +193,7 @@ class DefaultLabel extends RectangleSheet
                 static::writeText(
                     $pdf, 'T: '.$asset->asset_tag,
                     $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
+                    $this->variable_font, '', $this->textSize, 'L',
                     $textW, $this->textSize,
                     true, 0
                 );
@@ -206,7 +206,7 @@ class DefaultLabel extends RectangleSheet
                 static::writeText(
                     $pdf, 'S: '.$asset->serial,
                     $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
+                    $this->variable_font, '', $this->textSize, 'L',
                     $textW, $this->textSize,
                     true, 0
                 );
@@ -219,7 +219,7 @@ class DefaultLabel extends RectangleSheet
                 static::writeText(
                     $pdf, 'M: '.$asset->model->name,
                     $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
+                    $this->variable_font, '', $this->textSize, 'L',
                     $textW, $this->textSize,
                     true, 0
                 );

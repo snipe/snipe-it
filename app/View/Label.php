@@ -35,7 +35,7 @@ class Label implements View
      */
     public function render(callable $callback = null)
     {
-        $settings = $this->data->get('settings');
+        $settings = $this->data->get('settings'); //this has *ALL* settings!!!
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
         $template = LabelModel::find($settings->label2_template);
@@ -57,6 +57,9 @@ class Label implements View
             [ $template->getWidth(), $template->getHeight() ]
         );
 
+        // Required for CJK languages; otherwise the embedded font can get too massive
+        $pdf->SetFontSubsetting(true);
+
         // Reset parameters
         $pdf->SetPrintHeader(false);
         $pdf->SetPrintFooter(false);
@@ -67,6 +70,9 @@ class Label implements View
         $pdf->setCreator('Snipe-IT');
         $pdf->SetSubject('Asset Labels');
         $template->preparePDF($pdf);
+
+        $template->variable_font = $settings->label2_variable_font;
+        $template->mono_font = $settings->label2_mono_font;
 
         // Get fields from settings
         $fieldDefinitions = collect(explode(';', $settings->label2_fields))
@@ -159,6 +165,7 @@ class Label implements View
         $template->writeAll($pdf, $data);
 
         $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
+
         $pdf->Output($filename, 'I');
     }
 

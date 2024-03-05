@@ -29,6 +29,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use TCPDF_FONTS;
 
 /**
  * This controller handles all actions related to Settings for
@@ -790,9 +791,42 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
+        $fontlist = [];
+        // this is lifted pretty directly from TCPDF itself; unfortunately
+        // this method is not exposed, so I had to just steal it :(
+        if (($fontsdir = opendir(TCPDF_FONTS::_getfontpath())) !== false) {
+            while (($fontfile = readdir($fontsdir)) !== false) {
+                if (substr($fontfile, -4) == '.php') {
+                    // these are the variables that are going to get loaded up when we do require()
+                    $name='';
+                    $type='';
+                    $up=0;
+                    $ut=0;
+                    $dw=0;
+                    $diff='';
+                    $originalsize=0;
+                    $enc='';
+                    $file='';
+                    $ctg='';
+                    $desc=[];
+                    $cbbox='';
+                    // end require() variables
+                    require(TCPDF_FONTS::_getfontpath()."/".$fontfile); // YUCK!!!
+                    \Log::debug("name is: ".@$name." and ");
+                    if(!$name) {
+                        continue; //these are utility files; not real fonts?
+                    }
+                    $fontlist[strtolower(basename($fontfile, '.php'))] = $name;
+                }
+            }
+            closedir($fontsdir);
+        }
+        asort($fontlist, SORT_FLAG_CASE|SORT_STRING);
+
         return view('settings.labels', [
             'setting' => Setting::getSettings(),
             'customFields' => CustomField::all(),
+            'fonts' => $fontlist
         ]);
     }
 
@@ -818,6 +852,8 @@ class SettingsController extends Controller
         $setting->label2_2d_type = $request->input('label2_2d_type');
         $setting->label2_2d_target = $request->input('label2_2d_target');
         $setting->label2_fields = $request->input('label2_fields');
+        $setting->label2_mono_font = $request->input('label2_mono_font');
+        $setting->label2_variable_font = $request->input('label2_variable_font');
         $setting->labels_per_page = $request->input('labels_per_page');
         $setting->labels_width = $request->input('labels_width');
         $setting->labels_height = $request->input('labels_height');
