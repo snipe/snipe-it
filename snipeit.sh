@@ -922,9 +922,9 @@ case $setupmail in
     sed -i "s|^\\(MAIL_PASSWORD=\\).*|\\1$mailpassword|" "$APP_PATH/.env"
     echo ""
 
-    echo -n "  Encryption(null/TLS/SSL):"
-    read -r mailencryption
-    sed -i "s|^\\(MAIL_ENCRYPTION=\\).*|\\1$mailencryption|" "$APP_PATH/.env"
+    echo -n "  Verify TLS certificate on remote server? (true/false):"
+    read -r mailverifypeer
+    sed -i "s|^\\(MAIL_TLS_VERIFY_PEER=\\).*|\\1$mailverifypeer|" "$APP_PATH/.env"
 
     echo -n "  From address:"
     read -r mailfromaddr
