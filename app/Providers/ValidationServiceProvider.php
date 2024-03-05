@@ -304,14 +304,6 @@ class ValidationServiceProvider extends ServiceProvider
             $field = CustomField::where('db_column', $attribute)->first();
             $options = $field->formatFieldValuesAsArray();
 
-            // temporarily decrypt for validation
-            // so, this is breaking patches, i don't really get why.
-            // is it not encrypted here on an update? need to do more testing. :(
-            if($field->field_encrypted) {
-                $value = Crypt::decrypt($value);
-            }
-            dump(is_array($value));
-
             if(is_array($value)) {
                 $invalid = array_diff($value, $options);
                 if(count($invalid) > 0) {

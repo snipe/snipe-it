@@ -585,16 +585,6 @@ class AssetsController extends Controller
                     }
                 }
                 if ($field->element == 'checkbox') {
-                    if ($field->field_encrypted) {
-                        // to not break a bunch of stuff, we must decrypt + implode if the checkbox value is an array
-                        $field_val_decrypt = Crypt::decrypt($field_val);
-                        if (is_array($field_val_decrypt)) {
-                            $field_val_decrypt_imploded = implode(',', $field_val_decrypt);
-                            $field_val = Crypt::encrypt($field_val_decrypt_imploded);
-                        } else
-                            $field_val = Crypt::encrypt($field_val_decrypt);
-
-                    }
                     if(is_array($field_val)) {
                         $field_val = implode(',', $field_val);
                     }
@@ -670,24 +660,12 @@ class AssetsController extends Controller
                     $field_val = $request->input($field->db_column, null);
 
                     if ($request->has($field->db_column)) {
-                        //if ($field->field_encrypted) {
-                        //    // to not break a bunch of stuff, we must decrypt + implode if the checkbox value is an array
-                        //    $field_val_decrypt = Crypt::decrypt($field_val);
-                        //    if (is_array($field_val_decrypt)) {
-                        //        $field_val_decrypt_imploded = implode(',', $field_val_decrypt);
-                        //        $field_val = Crypt::encrypt($field_val_decrypt_imploded);
-                        //    } else
-                        //        $field_val = Crypt::encrypt($field_val_decrypt);
-                        //
-                        //}
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
                                 $asset->{$field->db_column} = Crypt::encrypt($field_val);
                             }
                         }
-
                         if ($field->element == 'checkbox') {
-
                             if(is_array($field_val)) {
                                 $field_val = implode(',', $field_val);
                                 $asset->{$field->db_column} = $field_val;
