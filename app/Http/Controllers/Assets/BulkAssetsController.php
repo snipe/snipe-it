@@ -92,6 +92,41 @@ class BulkAssetsController extends Controller
 
         $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('assets.id', $asset_ids);
 
+
+        switch ($sort_override) {
+            case 'model':
+                $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets->OrderModelNumber($order);
+                break;
+            case 'category':
+                $assets->OrderCategory($order);
+                break;
+            case 'manufacturer':
+                $assets->OrderManufacturer($order);
+                break;
+            case 'company':
+                $assets->OrderCompany($order);
+                break;
+            case 'location':
+                $assets->OrderLocation($order);
+            case 'rtd_location':
+                $assets->OrderRtdLocation($order);
+                break;
+            case 'status_label':
+                $assets->OrderStatus($order);
+                break;
+            case 'supplier':
+                $assets->OrderSupplier($order);
+                break;
+            case 'assigned_to':
+                $assets->OrderAssigned($order);
+                break;
+            default:
+                $assets->orderBy($column_sort, $order);
+                break;
+        }
         $assets = $assets->get();
 
         $models = $assets->unique('model_id');
@@ -99,6 +134,7 @@ class BulkAssetsController extends Controller
         foreach($models as $model) {
             $modelNames[] = $model->model->name;
         }
+
         if ($request->filled('bulk_actions')) {
 
             switch ($request->input('bulk_actions')) {
@@ -137,43 +173,6 @@ class BulkAssetsController extends Controller
                         ->with('modelNames', $modelNames);
             }
         }
-        switch ($sort_override) {
-            case 'model':
-                $assets->OrderModels($order);
-                break;
-            case 'model_number':
-                $assets->OrderModelNumber($order);
-                break;
-            case 'category':
-                $assets->OrderCategory($order);
-                break;
-            case 'manufacturer':
-                $assets->OrderManufacturer($order);
-                break;
-            case 'company':
-                $assets->OrderCompany($order);
-                break;
-            case 'location':
-                $assets->OrderLocation($order);
-            case 'rtd_location':
-                $assets->OrderRtdLocation($order);
-                break;
-            case 'status_label':
-                $assets->OrderStatus($order);
-                break;
-            case 'supplier':
-                $assets->OrderSupplier($order);
-                break;
-            case 'assigned_to':
-                $assets->OrderAssigned($order);
-                break;
-            default:
-                $assets->orderBy($column_sort, $order);
-                break;
-        }
-
-
-
 
         return redirect()->back()->with('error', 'No action selected');
     }
