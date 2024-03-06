@@ -105,8 +105,8 @@ class Label implements View
                     }
                 }
 
-                if ($template->getSupport1DBarcode()) {
-                    if ($settings->alt_barcode_enabled) {
+                if ($settings->alt_barcode_enabled) {
+                    if ($template->getSupport1DBarcode()) {
                         $barcode1DType = $settings->label2_1d_type;
                         $barcode1DType = ($barcode1DType == 'default') ?
                             (($settings->alt_barcode_enabled) ? $settings->alt_barcode : null) :
