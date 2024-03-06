@@ -127,7 +127,7 @@ class Label implements View
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
                             case 'hardware_id':
-                            default: $barcode2DTarget = route('hardware.show', $asset->id); break;
+                            default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
                         }
                         $assetData->put('barcode2d', (object)[
                             'type' => $barcode2DType,
