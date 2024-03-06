@@ -72,6 +72,7 @@ class Label implements View
         $fieldDefinitions = collect(explode(';', $settings->label2_fields))
             ->filter(fn($fieldString) => !empty($fieldString))
             ->map(fn($fieldString) => Field::fromString($fieldString));
+
         // Prepare data
         $data = $assets
             ->map(function ($asset) use ($template, $settings, $fieldDefinitions) {
@@ -126,7 +127,7 @@ class Label implements View
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
                             case 'hardware_id':
-                            default: $barcode2DTarget = route('hardware.show',['hardware' => $asset->id]); break;
+                            default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
                         }
                         $assetData->put('barcode2d', (object)[
                             'type' => $barcode2DType,
@@ -146,6 +147,7 @@ class Label implements View
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
+
                 $assetData->put('fields', $fields->take($template->getSupportFields()));
 
                 return $assetData;
