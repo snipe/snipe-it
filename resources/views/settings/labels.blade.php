@@ -377,7 +377,8 @@
                                     {!! $errors->first('labels_pageheight', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>
                             </div>
-
+                        @endif
+                        @if(!$setting->label2_enable)
                             <div class="form-group">
                                 <div class="col-md-3 text-right">
                                 {{ Form::label('labels_display', trans('admin/settings/general.label_fields'), ['class' => 'control-label']) }}
