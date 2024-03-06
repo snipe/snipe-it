@@ -17,16 +17,23 @@ else
 fi
 
 # create data directories
+# Note: Keep in sync with expected directories by the app
+# https://github.com/snipe/snipe-it/blob/master/app/Console/Commands/RestoreFromBackup.php#L232
 for dir in \
   'data/private_uploads' \
   'data/private_uploads/assets' \
+  'data/private_uploads/accessories' \
   'data/private_uploads/audits' \
+  'data/private_uploads/components' \
+  'data/private_uploads/consumables' \
+  'data/private_uploads/eula-pdfs' \
   'data/private_uploads/imports' \
   'data/private_uploads/assetmodels' \
   'data/private_uploads/users' \
   'data/private_uploads/licenses' \
   'data/private_uploads/signatures' \
   'data/uploads/accessories' \
+  'data/uploads/assets' \
   'data/uploads/avatars' \
   'data/uploads/barcodes' \
   'data/uploads/categories' \
