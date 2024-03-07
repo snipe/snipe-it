@@ -31,9 +31,7 @@ class SlackSettingsForm extends Component
         'webhook_channel'                       => 'required_with:webhook_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
     ];
-    public $messages = [
-        'webhook_endpoint.starts_with'          => 'your webhook endpoint should begin with http://, https:// or other protocol.',
-    ];
+    
 
     public function mount() {
         $this->webhook_text= [
