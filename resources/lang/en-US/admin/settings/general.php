@@ -363,5 +363,6 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'ldap_company' => 'LDAP Company',
 
 ];
