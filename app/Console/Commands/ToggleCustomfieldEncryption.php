@@ -22,7 +22,7 @@ class ToggleCustomfieldEncryption extends Command
      *
      * @var string
      */
-    protected $description = 'This command should be used to convert an unencypted custom field into a custom field and encrypt the associated data in the assets table for that column.';
+    protected $description = 'This command should be used to convert an unencrypted custom field into a custom field and encrypt the associated data in the assets table for that column.';
 
     /**
      * Create a new command instance.
@@ -44,7 +44,7 @@ class ToggleCustomfieldEncryption extends Command
         $fieldname = $this->argument('fieldname');
 
         if ($field = CustomField::where('db_column', $fieldname)->first()) {
-            
+
             // If the field is not encrypted, make it encrypted and encrypt the data in the assets table for the
             // corresponding field.
             if ($field->field_encrypted == 0) {
