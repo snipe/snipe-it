@@ -146,7 +146,7 @@ class Label implements View
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
-                    
+
                 $assetData->put('fields', $fields->take($template->getSupportFields()));
 
                 return $assetData;
