@@ -10,6 +10,7 @@ use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
 use Log;
+use App\Models\Company;
 
 class LdapSync extends Command
 {
@@ -67,6 +68,7 @@ class LdapSync extends Command
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
         $search_base = Setting::getSettings()->ldap_base_dn;
+        $ldap_result_company = Setting::getSettings()->ldap_company;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -232,6 +234,7 @@ class LdapSync extends Command
                 $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
+                $item['company'] = $results[$i][$ldap_result_company][0] ?? '';
 
                 // ONLY if you are using the "ldap_location" option *AND* you have an actual result
                 if ($ldap_result_location && $item['location']) {
@@ -241,6 +244,10 @@ class LdapSync extends Command
                 }
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
+                ]);
+
+                $company = Company::firstOrCreate([
+                    'name' => $item['company'],
                 ]);
 
                 $user = User::where('username', $item['username'])->first();
@@ -285,6 +292,9 @@ class LdapSync extends Command
             }
             if($ldap_result_location != null){
                 $user->location_id = $location ? $location->id : null;
+            }
+            if($ldap_result_company != null){
+                $user->company_id = $company->id ;
             }
 
             if($ldap_result_manager != null){
