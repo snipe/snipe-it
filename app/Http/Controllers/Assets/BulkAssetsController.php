@@ -14,6 +14,7 @@ use App\View\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\CustomField;
@@ -94,6 +95,11 @@ class BulkAssetsController extends Controller
         $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('assets.id', $asset_ids);
 
         $assets = $assets->get();
+
+        if ($assets->isEmpty()) {
+            Log::debug('No assets were found for the provided IDs', ['ids' => $asset_ids]);
+            return redirect()->back()->with('error', trans('admin/hardware/message.update.assets_do_not_exist_or_are_invalid'));
+        }
 
         $models = $assets->unique('model_id');
         $modelNames = [];
