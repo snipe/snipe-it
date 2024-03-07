@@ -41,7 +41,7 @@ class Label implements View
         $template = LabelModel::find($settings->label2_template);
 
         // If disabled, pass to legacy view
-        if ((!$settings->label2_enable) && (!$template)) {
+        if ((!$settings->label2_enable)) {
             return view('hardware/labels')
                 ->with('assets', $assets)
                 ->with('settings', $settings)
