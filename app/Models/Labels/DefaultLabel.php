@@ -163,17 +163,21 @@ class DefaultLabel extends RectangleSheet
         // Fields
         $fieldsDone = 0;
         if ($fieldsDone < $this->getSupportFields()) {
-//            dd($record->get('fields'));
+
             foreach ($record->get('fields') as $field) {
-                static::writeText(
-                    $pdf, $field['label'][0]. ': ' . $field['value'],
-                    $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
-                    $textW, $this->textSize,
-                    true, 0
-                );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
+                
+                if ((array_key_exists('label', $field)) && (is_array($field['label']))) {
+                    static::writeText(
+                        $pdf, $field['label'][0]. ': ' . $field['value'],
+                        $textX1, $textY,
+                        'freesans', '', $this->textSize, 'L',
+                        $textW, $this->textSize,
+                        true, 0
+                    );
+                    $textY += $this->textSize + self::TEXT_MARGIN;
+                    $fieldsDone++;
+                }
+
             }
         }
     }
