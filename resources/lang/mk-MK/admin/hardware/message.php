@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Основното средство е успешно ажурирано.',
         'nothing_updated'	=>  'Не беа избрани полиња, затоа ништо не беше ажурирано.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

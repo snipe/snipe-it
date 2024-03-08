@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Selanjutnya',
     'next_audit_date'		=> 'Tanggal Audit berikutnya',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Audit Terakhir',
     'new'					=> 'baru!',
     'no_depreciation'		=> 'Tidak ada penyusutan',

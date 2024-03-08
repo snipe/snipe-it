@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Jauna parole',
     'next'					=> 'Nākamais',
     'next_audit_date'		=> 'Nākamā audita datums',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Pēdējais audits',
     'new'					=> 'jauns!',
     'no_depreciation'		=> 'Nav nolietojuma',

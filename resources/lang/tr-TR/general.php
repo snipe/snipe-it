@@ -204,6 +204,7 @@ Context | Request Context
     'new_password'          => 'Yeni Şifre',
     'next'					=> 'Sonraki',
     'next_audit_date'		=> 'Sonraki Denetim Tarihi',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Son denetim',
     'new'					=> 'yeni!',
     'no_depreciation'		=> 'Değer kaybı yok',

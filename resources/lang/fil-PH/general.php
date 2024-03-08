@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Susunod',
     'next_audit_date'		=> 'Ang Susunod na Petsa ng Pag-audit',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Ang Huling Pag-audit',
     'new'					=> 'bago!',
     'no_depreciation'		=> 'Walang Depresasyon',

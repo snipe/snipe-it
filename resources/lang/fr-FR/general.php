@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nouveau mot de passe',
     'next'					=> 'Prochain',
     'next_audit_date'		=> 'Prochaine date de vérification',
+    'no_email'              => 'Aucune adresse e-mail associée à cet utilisateur',
     'last_audit'		    => 'Dernier audit',
     'new'					=> 'nouveau!',
     'no_depreciation'		=> 'Pas d\'amortissement',

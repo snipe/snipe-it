@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Дараачийн',
     'next_audit_date'		=> 'Дараагийн аудитын огноо',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Сүүлийн аудит',
     'new'					=> 'шинэ!',
     'no_depreciation'		=> 'Элэгдэлгүй',

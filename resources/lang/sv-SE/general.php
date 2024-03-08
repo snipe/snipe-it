@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nytt lösenord',
     'next'					=> 'Nästa',
     'next_audit_date'		=> 'Nästa inventeringsdatum',
+    'no_email'              => 'Ingen e-postadress kopplad till den här användaren',
     'last_audit'		    => 'Senaste inventeringen',
     'new'					=> 'ny!',
     'no_depreciation'		=> 'Ingen avskrivning',

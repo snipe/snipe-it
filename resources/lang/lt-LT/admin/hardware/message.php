@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Įranga sėkmingai atnaujinta.',
         'nothing_updated'	=>  'Nei vienas laukelis nepasirinktas, tad niekas nebuvo atnaujinta.',
         'no_assets_selected'  =>  'Nebuvo pasirinkta jokio turto, taigi niekas nebuvo pakeistas.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'volgende',
     'next_audit_date'		=> 'Volgende ouditdatum',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Laaste Oudit',
     'new'					=> 'nuwe!',
     'no_depreciation'		=> 'Geen Waardevermindering',

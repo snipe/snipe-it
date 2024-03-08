@@ -201,6 +201,7 @@ return [
     'new_password'          => '新密碼',
     'next'					=> '下一頁',
     'next_audit_date'		=> '下次稽核日期',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => '最後稽核日期',
     'new'					=> 'new!',
     'no_depreciation'		=> '永久',

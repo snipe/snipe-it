@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Majetek úspěšně aktualizován.',
         'nothing_updated'	=>  'Nebyla zvolena žádná pole, nic se tedy neupravilo.',
         'no_assets_selected'  =>  'Nebyl zvolen žádný majetek, nic se tedy neupravilo.',
+        'assets_do_not_exist_or_are_invalid' => 'Vybrané položky nelze aktualizovat.',
     ],
 
     'restore' => [

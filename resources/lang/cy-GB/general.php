@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Nesaf',
     'next_audit_date'		=> 'Dyddiad awdit nesaf',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Awdit diwethaf',
     'new'					=> 'newydd!',
     'no_depreciation'		=> 'Dim Dibrisiant',

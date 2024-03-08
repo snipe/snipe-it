@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'does_not_exist' => 'Company does not exist.',
-    'deleted'        => 'Deleted company',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Shirkaddu ma jirto.',
+    'deleted'        => 'Shirkadda la tirtiray',
+    'assoc_users'    => 'Shirkaddan hadda waxay ku xidhan tahay ugu yaraan hal nooc oo lama tirtiri karo. Fadlan cusboonaysii moodooyinkaaga si aanay u tixraacin shirkaddan oo isku day mar kale. ',
     'create' => [
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.',
+        'error'   => 'Shirkadda lama abuurin, fadlan isku day mar kale.',
+        'success' => 'Shirkadda si guul leh ayaa loo abuuray',
     ],
     'update' => [
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.',
+        'error'   => 'Shirkadda lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Shirkadda si guul leh ayaa loo cusboonaysiiyay',
     ],
     'delete' => [
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.',
+        'confirm' => 'Ma hubtaa inaad rabto inaad tirtirto shirkaddan?',
+        'error'   => 'Waxaa jirtay arrin la tirtiray shirkadda. Fadlan isku day mar kale',
+        'success' => 'Shirkadda si guul leh ayaa loo tirtiray',
     ],
 ];

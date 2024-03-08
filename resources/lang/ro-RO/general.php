@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Parolă nouă',
     'next'					=> 'Următor →',
     'next_audit_date'		=> 'Data următoarei auditări',
+    'no_email'              => 'Nicio adresă de e-mail asociată cu acest utilizator',
     'last_audit'		    => 'Ultimul audit',
     'new'					=> 'nou!',
     'no_depreciation'		=> 'Fara depreciere',

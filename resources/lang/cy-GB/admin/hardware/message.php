@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Ased wedi diweddaru\'n llwyddiannus.',
         'nothing_updated'	=>  'Dim newid mewn manylder, felly dim byd wedi\'i diweddaru.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

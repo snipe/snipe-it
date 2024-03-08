@@ -201,6 +201,7 @@ return [
     'new_password'          => 'crwdns6141:0crwdne6141:0',
     'next'					=> 'crwdns1275:0crwdne1275:0',
     'next_audit_date'		=> 'crwdns1919:0crwdne1919:0',
+    'no_email'              => 'crwdns12130:0crwdne12130:0',
     'last_audit'		    => 'crwdns1920:0crwdne1920:0',
     'new'					=> 'crwdns1668:0crwdne1668:0',
     'no_depreciation'		=> 'crwdns1073:0crwdne1073:0',

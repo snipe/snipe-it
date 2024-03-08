@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Majetok bol úspešne upravený.',
         'nothing_updated'	=>  'Neboli vybrané žiadne položky, preto nebolo nič upravené.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

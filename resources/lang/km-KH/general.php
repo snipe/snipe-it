@@ -201,6 +201,7 @@ return [
     'new_password'          => 'ពាក្យសម្ងាត់​ថ្មី',
     'next'					=> 'បន្ទាប់',
     'next_audit_date'		=> 'កាលបរិច្ឆេទសវនកម្មបន្ទាប់',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'សវនកម្មចុងក្រោយ',
     'new'					=> 'new!',
     'no_depreciation'		=> 'No Depreciation',
