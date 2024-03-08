@@ -411,13 +411,11 @@
         // add some stuff to get the value of the select2 option here?
 
         if ((row.available_actions) && (row.available_actions.bulk_selectable) && (row.available_actions.bulk_selectable.delete !== true)) {
-            console.log('value for ID ' + row.id + ' is NOT true:' + row.available_actions.bulk_selectable.delete);
             return {
                 disabled:true,
                 //checked: false, <-- not sure this will work the way we want?
             }
         }
-        console.log('value for ID ' + row.id + ' IS true:' + row.available_actions.bulk_selectable.delete);
     }
 
 
