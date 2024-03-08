@@ -201,6 +201,7 @@ return [
     'new_password'          => 'รหัสผ่านใหม่',
     'next'					=> 'ถัด​ไป',
     'next_audit_date'		=> 'วันที่ตรวจสอบถัดไป',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'การตรวจสอบครั้งล่าสุด',
     'new'					=> 'ใหม่!',
     'no_depreciation'		=> 'ไม่มีค่าเสื่อมราคา',

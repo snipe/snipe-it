@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Uus parool',
     'next'					=> 'Järgmine',
     'next_audit_date'		=> 'Järgmine auditi kuupäev',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Viimane audit',
     'new'					=> 'uus!',
     'no_depreciation'		=> 'Amortisatsioon puudub',

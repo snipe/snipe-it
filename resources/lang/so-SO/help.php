@@ -13,23 +13,23 @@ return [
     |
     */
 
-    'more_info_title' => 'More Info',
+    'more_info_title' => 'Macluumaad dheeraad ah',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Saxeexinta sanduuqan waxay wax ka beddeli doontaa diiwaanka hantida si ay u muujiso goobtan cusub. Ka tagista iyada oo aan la hubin waxay si fudud u ogaan doontaa meesha ku jirta diiwaanka hanti dhawrka.<br><',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Hantidu waa shay lagu raadraaco lambar taxane ah ama sumad hanti ah. Waxay u muuqdaan inay yihiin shay qiimo sare leh marka la aqoonsanayo shay gaar ah.',
 
     'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Qalabyada dheeriga ah waa shay kasta oo aad siiso isticmaaleyaasha laakiin aan lahayn lambar taxane ah (ama aanad dan ka lahayn inaad si gaar ah ula socoto). Tusaale ahaan, jiirarka kombiyuutarka ama kiiboodhka.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Shirkadaha waxaa loo isticmaali karaa sidii goob aqoonsi oo fudud, ama waxaa loo isticmaali karaa in lagu xaddido muuqaalka hantida, isticmaalayaasha, iwm haddii taageerada buuxda ee shirkadda laga furo goobaha maamulkaaga.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Qaybuhu waa shay ka mid ah hantida, tusaale ahaan HDD, RAM, iwm.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Waxyaalaha la istcimaalay waa shay kasta oo la soo iibsaday oo la isticmaali doono muddo ka dib. Tusaale ahaan, qalin daabacaha ama warqadda koobiyeeyaha.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Waxaad dejin kartaa qiimo dhimista hantida si aad u qiimayso hantida ku salaysan qiimo-dhaca khadka tooska ah.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Soodejiyehu wuxuu ogaadaa in faylkani madhan yahay.'
 ];

@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Activul a fost actualizat.',
         'nothing_updated'	=>  'Nu au fost selectate câmpuri, deci nimic nu a fost actualizat.',
         'no_assets_selected'  =>  'Nu au fost selectate active, deci nimic nu a fost actualizat.',
+        'assets_do_not_exist_or_are_invalid' => 'Activele selectate nu pot fi actualizate.',
     ],
 
     'restore' => [

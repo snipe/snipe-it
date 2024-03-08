@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'error'   => 'You must select at least ONE option.'
+    'error'   => 'Waa inaad doorataa ugu yaraan HAL doorasho.'
 );

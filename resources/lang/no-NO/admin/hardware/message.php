@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Oppdatering av eiendel vellykket.',
         'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
         'no_assets_selected'  =>  'Ingen felter er valgt, så ingenting ble endret.',
+        'assets_do_not_exist_or_are_invalid' => 'Valgte eiendeler kan ikke oppdateres.',
     ],
 
     'restore' => [

@@ -201,6 +201,7 @@ return [
     'new_password'          => 'סיסמה חדשה',
     'next'					=> 'הַבָּא',
     'next_audit_date'		=> 'תאריך הביקורת',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'ביקורת אחרונה',
     'new'					=> 'חָדָשׁ!',
     'no_depreciation'		=> 'לא פחת',

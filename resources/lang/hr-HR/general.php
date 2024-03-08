@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Sljedeći',
     'next_audit_date'		=> 'Sljedeći datum revizije',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Posljednja revizija',
     'new'					=> 'novi!',
     'no_depreciation'		=> 'Nema amortizacije',

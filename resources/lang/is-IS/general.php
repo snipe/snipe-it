@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nýtt lykilorð',
     'next'					=> 'Næst',
     'next_audit_date'		=> 'Dagsetning næstu úttektar',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Síðasta úttekt',
     'new'					=> 'Nýtt',
     'no_depreciation'		=> 'Engar afskriftir',

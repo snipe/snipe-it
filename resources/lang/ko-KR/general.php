@@ -201,6 +201,7 @@ return [
     'new_password'          => '새로운 비밀번호',
     'next'					=> '다음',
     'next_audit_date'		=> '다음 감사 일자',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => '최근 감사',
     'new'					=> '신규!',
     'no_depreciation'		=> '감가 상각 없음',

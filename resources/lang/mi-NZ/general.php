@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Tuhinga o mua',
     'next_audit_date'		=> 'Ko te Raa Whakakitea',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Whakamutunga whakamutunga',
     'new'					=> 'hou!',
     'no_depreciation'		=> 'Kaore he utu whakaheke',

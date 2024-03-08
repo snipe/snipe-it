@@ -201,6 +201,7 @@ return [
     'new_password'          => '新しいパスワード',
     'next'					=> '次へ',
     'next_audit_date'		=> '次の監査日',
+    'no_email'              => 'このユーザーに関連付けられているメールアドレスがありません',
     'last_audit'		    => '前回の監査日',
     'new'					=> '新規',
     'no_depreciation'		=> '非減価償却資産',

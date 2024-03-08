@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'assigned_to'   	=> 'Loo xilsaaray',
+    'checkout'   		=> 'Gudaha/kabaxsan',
+    'id'      			=> 'Aqoonsi',
+    'license_email'   	=> 'Iimayl shatiga',
+    'license_name'   	=> 'Ruqsad u haysta',
+    'purchase_date'   	=> 'Taariikhda Iibka',
+    'purchased'   		=> 'Iibsaday',
+    'seats'   			=> 'Kuraasta',
     'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'serial'   			=> 'Taxane',
+    'title'      		=> 'Shatiga',
 
 );

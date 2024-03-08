@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nové Heslo',
     'next'					=> 'Next',
     'next_audit_date'		=> 'Next Audit Date',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Last Audit',
     'new'					=> 'nový!',
     'no_depreciation'		=> 'No Depreciation',

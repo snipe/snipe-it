@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Consumable Name',
+    'title'      				=> 'Magaca la isticmaali karo',
 );

@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Naujas slaptažodis',
     'next'					=> 'Kitas',
     'next_audit_date'		=> 'Kito audito data',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Paskutinis auditas',
     'new'					=> 'naujas!',
     'no_depreciation'		=> 'Nėra nusidėvėjimo',
