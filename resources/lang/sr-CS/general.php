@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nova lozinka',
     'next'					=> 'Sledeći',
     'next_audit_date'		=> 'Sledeći datum revizije',
+    'no_email'              => 'Nijedna adresa e-pošte nije povezana sa ovim korisnikom',
     'last_audit'		    => 'Poslednja revizija',
     'new'					=> 'novi!',
     'no_depreciation'		=> 'Nema amortizacije',

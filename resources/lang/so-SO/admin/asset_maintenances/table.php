@@ -1,8 +1,8 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset Name',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV',
+        'title'         => 'Dayactirka hantida',
+        'asset_name'    => 'Magaca Hantida',
+        'is_warranty'   => 'Dammaanad',
+        'dl_csv'        => 'Soo deji CSV',
     ];

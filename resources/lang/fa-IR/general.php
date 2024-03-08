@@ -220,6 +220,7 @@ return [
     'new_password'          => 'رمز عبور جديد:',
     'next'					=> 'بعدی',
     'next_audit_date'		=> 'تاریخ تفتیش بعدی',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'آخرین حسابرسی',
     'new'					=> 'جدید!',
     'no_depreciation'		=> 'بدون استهلاک',

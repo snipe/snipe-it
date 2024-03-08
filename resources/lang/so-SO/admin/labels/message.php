@@ -2,10 +2,10 @@
 
 return [
 
-    'invalid_return_count' => 'Invalid count returned from :name. Expected :expected, got :actual.',
-    'invalid_return_type'  => 'Invalid type returned from :name. Expected :expected, got :actual.',
-    'invalid_return_value' => 'Invalid value returned from :name. Expected :expected, got :actual.',
+    'invalid_return_count' => 'Tiro aan sax ahayn ayaa laga soo celiyay :name. la filayo :expected, helay :actual.',
+    'invalid_return_type'  => 'Nooca aan sax ahayn ayaa laga soo celiyay :name. la filayo :expected, helay :actual.',
+    'invalid_return_value' => 'Qiimo aan sax ahayn ayaa laga soo celiyay :name. la filayo :expected, helay :actual.',
 
-    'does_not_exist' => 'Label does not exist',
+    'does_not_exist' => 'Calaamaduhu ma jiraan',
     
 ];

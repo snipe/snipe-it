@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Új jelszó',
     'next'					=> 'Tovább',
     'next_audit_date'		=> 'Következő ellenőrzési dátum',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Utolsó ellenőrzés',
     'new'					=> 'új!',
     'no_depreciation'		=> 'Nincs értékcsökkentés',

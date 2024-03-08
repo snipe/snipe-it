@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Kata Sandi Baru',
     'next'					=> 'Berikutnya',
     'next_audit_date'		=> 'Tanggal Audit berikutnya',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Audit terakhir',
     'new'					=> 'baru!',
     'no_depreciation'		=> 'Tidak ada penyusutan',

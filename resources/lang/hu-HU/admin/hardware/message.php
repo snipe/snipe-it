@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Az eszköz sikeresen frissült.',
         'nothing_updated'	=>  'Nem választottak ki mezőket, így semmi sem frissült.',
         'no_assets_selected'  =>  'Egyetlen eszköz sem volt kiválasztva, így semmi sem frissült.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

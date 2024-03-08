@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Aktualizacja poprawna.',
         'nothing_updated'	=>  'Żadne pole nie zostało wybrane, więc nic nie zostało zmienione.',
         'no_assets_selected'  =>  'Żadne aktywa nie zostały wybrane, więc nic nie zostało zmienione.',
+        'assets_do_not_exist_or_are_invalid' => 'Wybrane zasoby nie mogą zostać zaktualizowane.',
     ],
 
     'restore' => [

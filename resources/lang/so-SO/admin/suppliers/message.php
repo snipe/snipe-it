@@ -2,27 +2,27 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
-    'does_not_exist' => 'Supplier does not exist.',
+    'deleted' => 'Alaabta la tirtiray',
+    'does_not_exist' => 'Alaab-qeybiye ma jiro.',
 
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Iibiyaha lama abuurin, fadlan isku day mar kale.',
+        'success' => 'Iibiyaha si guul leh ayaa loo sameeyay'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Iibiyaha lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Iibiyaha si guul leh ayaa loo cusboonaysiiyay'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'confirm'   => 'Ma hubtaa inaad rabto inaad tirtirto alaab-qeybiyahan?',
+        'error'   => 'Waxaa jirtay arrin la tirtirayo alaab-qeybiyaha Fadlan isku day mar kale',
+        'success' => 'Iibiyaha si guul leh ayaa loo tirtiray',
+        'assoc_assets'	 => 'Alaab-qeybiyahan hadda waxa lala xidhiidhiyaa :asset_count hantida lamana tirtiri karo Fadlan cusboonaysii hantidaada si aanay mar dambe tixraac alaab-qeybiyahan oo isku day mar kale. ',
+        'assoc_licenses'	 => 'Iibiyahan hadda waxa lala xidhiidhiyaa :licenses_count shatiyada lamana tirtiri karo Fadlan cusboonaysii shatiyadaada si aadan mar dambe u tixraacin alaab-qeybiyaha oo isku day mar kale. ',
+        'assoc_maintenances'	 => 'Alaab-qeybiyahan waxa uu hadda ku xidhan yahay :asset_maintenances_count dayactirka(yada) hantida lamana tirtiri karo Fadlan cusboonaysii dayactirka hantidaada si aadan mar dambe tixraac alaab-qeybiyahan oo isku day mar kale. ',
     )
 
 );

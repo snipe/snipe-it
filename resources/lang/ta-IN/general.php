@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'அடுத்த',
     'next_audit_date'		=> 'அடுத்த கணக்காய்வு தேதி',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'கடைசி ஆடிட்',
     'new'					=> 'புதிய!',
     'no_depreciation'		=> 'தேய்மானம் இல்லை',

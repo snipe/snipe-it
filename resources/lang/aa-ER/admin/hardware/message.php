@@ -18,6 +18,7 @@ return [
         'success' 			=> 'crwdns745:0crwdne745:0',
         'nothing_updated'	=>  'crwdns1186:0crwdne1186:0',
         'no_assets_selected'  =>  'crwdns6810:0crwdne6810:0',
+        'assets_do_not_exist_or_are_invalid' => 'crwdns12132:0crwdne12132:0',
     ],
 
     'restore' => [

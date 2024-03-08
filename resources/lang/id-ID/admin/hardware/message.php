@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Sukses perbarui aset.',
         'nothing_updated'	=>  'Tidak ada kolom yang dipilih, jadi tidak ada yang diperbaharui.',
         'no_assets_selected'  =>  'Tidak ada aset yang dipilih, jadi tidak ada yang diperbarui.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

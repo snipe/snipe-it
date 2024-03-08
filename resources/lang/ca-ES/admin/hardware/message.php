@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Asset updated successfully.',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nytt passord',
     'next'					=> 'Neste',
     'next_audit_date'		=> 'Neste revisjon dato',
+    'no_email'              => 'Ingen e-postadresse tilknyttet denne brukeren',
     'last_audit'		    => 'Siste revisjon',
     'new'					=> 'ny!',
     'no_depreciation'		=> 'Ingen avskrivning',

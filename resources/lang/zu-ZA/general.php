@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Olandelayo',
     'next_audit_date'		=> 'Usuku Lolwazi Olulandelayo',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Ukucwaninga kokugcina',
     'new'					=> 'okusha!',
     'no_depreciation'		=> 'Akukho ukwehla',

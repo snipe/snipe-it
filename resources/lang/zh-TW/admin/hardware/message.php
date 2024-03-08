@@ -18,6 +18,7 @@ return [
         'success' 			=> '更新資產成功。',
         'nothing_updated'	=>  '沒有欄位被選擇，因此沒有更新任何內容。',
         'no_assets_selected'  =>  '沒有資產被選取，因此沒有更新任何內容。',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

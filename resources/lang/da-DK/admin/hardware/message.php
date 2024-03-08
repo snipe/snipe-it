@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Asset opdateret med succes.',
         'nothing_updated'	=>  'Ingen felter blev valgt, så intet blev opdateret.',
         'no_assets_selected'  =>  'Ingen aktiver blev valgt, så intet blev opdateret.',
+        'assets_do_not_exist_or_are_invalid' => 'Valgte aktiver kan ikke opdateres.',
     ],
 
     'restore' => [

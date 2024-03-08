@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Ar Aghaidh',
     'next_audit_date'		=> 'Ar Aghaidh Dáta Iniúchta',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'An Iniúchadh Deiridh',
     'new'					=> 'nua!',
     'no_depreciation'		=> 'Gan Dímheas',

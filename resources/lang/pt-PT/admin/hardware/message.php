@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Artigo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum atributo foi selecionado, portanto nada foi atualizado.',
         'no_assets_selected'  =>  'Nenhum ativo foi selecionado, por isso nada foi atualizado.',
+        'assets_do_not_exist_or_are_invalid' => 'Os arquivos selecionados não podem ser atualizados.',
     ],
 
     'restore' => [

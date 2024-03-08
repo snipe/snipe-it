@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Kua whakahoutia te tahua.',
         'nothing_updated'	=>  'Kaore i whiriwhiria he mahinga, na reira kaore i whakahoutia.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

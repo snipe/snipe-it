@@ -13,13 +13,13 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
+    'accepted'             => 'គុណលក្ខណៈ : ត្រូវតែទទួលយក។',
+    'active_url'           => ':attribute មិនមែនជា URL ត្រឹមត្រូវទេ។',
+    'after'                => ':attribute ត្រូវតែជាកាលបរិច្ឆេទបន្ទាប់ពី :date ។',
+    'after_or_equal'       => ':attribute ត្រូវតែជាកាលបរិច្ឆេទបន្ទាប់ពី ឬស្មើនឹង :date។',
+    'alpha'                => ':attribute អាចមានត្រឹមតែអក្សរប៉ុណ្ណោះ។',
+    'alpha_dash'           => ':attribute អាចមានតែអក្សរ លេខ និងសញ្ញាដាច់ៗប៉ុណ្ណោះ។',
+    'alpha_num'            => ':attribute អាចមានត្រឹមតែអក្សរ និងលេខប៉ុណ្ណោះ។',
     'array'                => 'The :attribute must be an array.',
     'before'               => 'The :attribute must be a date before :date.',
     'before_or_equal'      => 'The :attribute must be a date before or equal to :date.',

@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Uusi salasana',
     'next'					=> 'Seuraava',
     'next_audit_date'		=> 'Seuraava tarkastuspäivä',
+    'no_email'              => 'Tähän käyttäjään liittyvää sähköpostiosoitetta ei ole',
     'last_audit'		    => 'Viimeisin tarkastus',
     'new'					=> 'uusi!',
     'no_depreciation'		=> 'Ei poistoluokkaa',

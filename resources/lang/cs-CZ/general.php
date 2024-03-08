@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nové heslo',
     'next'					=> 'Další',
     'next_audit_date'		=> 'Další datum auditu',
+    'no_email'              => 'K tomuto uživateli není přiřazena žádná e-mailová adresa',
     'last_audit'		    => 'Poslední audit',
     'new'					=> 'nový!',
     'no_depreciation'		=> 'Žádná amortizace',

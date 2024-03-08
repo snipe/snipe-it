@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Laite päivitetty onnistuneesti.',
         'nothing_updated'	=>  'Mitään kenttiä ei valittu, joten mitään ei päivitetty.',
         'no_assets_selected'  =>  'Laitetta ei ollut valittuna, joten mitään ei muutettu.',
+        'assets_do_not_exist_or_are_invalid' => 'Valittuja sisältöjä ei voi päivittää.',
     ],
 
     'restore' => [

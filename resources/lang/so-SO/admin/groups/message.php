@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group ID :id does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Koox ayaa horay u jirtay!',
+    'group_not_found'     => 'Aqoonsiga kooxda :id ma jiro.',
+    'group_name_required' => 'Goobta magaca ayaa loo baahan yahay',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Kooxda si guul leh ayaa loo abuuray',
+        'update' => 'Kooxda si guul leh ayaa loo cusboonaysiiyay',
+        'delete' => 'Kooxda si guul leh ayaa loo tirtiray',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Ma hubtaa inaad doonayso inaad tirtirto kooxdan?',
+        'create' => 'Waxaa jirtay arin abuurista kooxda. Fadlan isku day mar kale',
+        'update' => 'Waxaa jirtay arrin la cusboonaysiiyay kooxda. Fadlan isku day mar kale',
+        'delete' => 'Waxaa jirtay arrin la tirtiray kooxda. Fadlan isku day mar kale',
     ),
 
 );

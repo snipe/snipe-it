@@ -201,6 +201,7 @@ return [
     'new_password'          => '新密码',
     'next'					=> '下一页',
     'next_audit_date'		=> '下一次盘点时间',
+    'no_email'              => '没有与此用户关联的电子邮件地址',
     'last_audit'		    => '上一次盘点',
     'new'					=> '新！',
     'no_depreciation'		=> '永久',

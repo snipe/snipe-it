@@ -2,9 +2,9 @@
 
 return array(
 	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'id'      					=> 'Aqoonsi',
+    'parent'   					=> 'Waalid',
+    'require_acceptance'      	=> 'Ogolaanshaha',
+    'title'      				=> 'Magaca Qaybta Hantida',
 
 );

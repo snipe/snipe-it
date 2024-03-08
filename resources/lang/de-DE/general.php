@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Neues Passwort',
     'next'					=> 'Nächste',
     'next_audit_date'		=> 'Nächstes Prüfungsdatum',
+    'no_email'              => 'Es ist keine E-Mail-Adresse mit diesem Benutzer verknüpft',
     'last_audit'		    => 'Letzte Prüfung',
     'new'					=> 'Neu!',
     'no_depreciation'		=> 'Nicht abschreiben',

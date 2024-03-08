@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Нова парола',
     'next'					=> 'Следващ',
     'next_audit_date'		=> 'Следваща дата на одита',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Последният одит',
     'new'					=> 'new!',
     'no_depreciation'		=> 'Без амортизация',

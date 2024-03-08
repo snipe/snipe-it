@@ -201,6 +201,7 @@ return [
     'new_password'          => 'Nova senha',
     'next'					=> 'Próximo',
     'next_audit_date'		=> 'Próxima Data de Auditoria',
+    'no_email'              => 'Nenhum endereço de e-mail associado a este usuário',
     'last_audit'		    => 'Última auditoria',
     'new'					=> 'novo!',
     'no_depreciation'		=> 'Sem Depreciação',

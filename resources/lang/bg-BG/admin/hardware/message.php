@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Активът обновен успешно.',
         'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
         'no_assets_selected'  =>  'Няма избрани активи, така че нищо не бе обновено.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
