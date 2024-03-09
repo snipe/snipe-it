@@ -38,7 +38,6 @@ class UpdateAssetRequest extends ImageUploadRequest
         $rules = array_merge(
             (new Asset())->getRules(),
             parent::rules(),
-        //['model_id' => 'required|integer|exists:models,id,deleted_at,NULL|not_array']
         );
 
         return $rules;

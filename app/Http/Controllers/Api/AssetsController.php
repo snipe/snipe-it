@@ -626,8 +626,10 @@ class AssetsController extends Controller
         $asset->fill($request->validated());
 
         // TODO: how much of this can go in the validator?
-        ($request->filled('model_id')) ?
-            $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
+        // this is _always_ filled now, see UpdateAssetRequest
+        // i'm leaving this here for now, but when would we ever want model_id to be `null`??
+        ($request->validated()['model_id']) ?
+            $asset->model()->associate(AssetModel::find($request->validated()['model_id'])) : null;
         ($request->filled('rtd_location_id')) ?
             $asset->location_id = $request->get('rtd_location_id') : '';
         ($request->filled('company_id')) ?
