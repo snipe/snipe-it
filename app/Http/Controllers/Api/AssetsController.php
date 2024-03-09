@@ -618,78 +618,77 @@ class AssetsController extends Controller
      * Accepts a POST request to update an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateAssetRequest $request, Asset $asset)
     {
-            $asset->update($request->validated());
+        $asset->fill($request->validated());
 
-            // TODO: how much of this should go to validator?
-            ($request->filled('model_id')) ?
-                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : '';
-            ($request->filled('company_id')) ?
-                $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
+        // TODO: how much of this can go in the validator?
+        ($request->filled('model_id')) ?
+            $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
+        ($request->filled('rtd_location_id')) ?
+            $asset->location_id = $request->get('rtd_location_id') : '';
+        ($request->filled('company_id')) ?
+            $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
+        ($request->filled('rtd_location_id')) ?
+            $asset->location_id = $request->get('rtd_location_id') : null;
 
-            /**
-            * this is here just legacy reasons. Api\AssetController
-            * used image_source  once to allow encoded image uploads.
-            */
-            if ($request->has('image_source')) {
-                $request->offsetSet('image', $request->offsetGet('image_source'));
-            }     
+        /**
+         * this is here just legacy reasons. Api\AssetController
+         * used image_source  once to allow encoded image uploads.
+         */
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
+        }
 
-            $asset = $request->handleImages($asset);
-            $model = AssetModel::find($asset->model_id);
-            
-            // Update custom fields
-            if (($model) && (isset($model->fieldset))) {
-                foreach ($model->fieldset->fields as $field) {
-                    if ($request->has($field->db_column)) {
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
-                            }
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
+        $asset = $request->handleImages($asset);
+        $model = AssetModel::find($asset->model_id);
+
+        // Update custom fields
+        if (($model) && (isset($model->fieldset))) {
+            foreach ($model->fieldset->fields as $field) {
+                if ($request->has($field->db_column)) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('admin')) {
+                            $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                         }
+                    } else {
+                        $asset->{$field->db_column} = $request->input($field->db_column);
                     }
                 }
             }
+        }
 
 
-            if ($asset->save()) {
-                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
-                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                    $location = $target->location_id;
+        if ($asset->save()) {
+            if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
+                $location = $target->location_id;
+            } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
+                $location = $target->location_id;
 
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
-                        ->update(['location_id' => $target->location_id]);
-                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                    $location = $target->id;
-                }
-
-                if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-                }
-
-                if ($asset->image) {
-                    $asset->image = $asset->getImageUrl();
-                }
-
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
+                    ->update(['location_id' => $target->location_id]);
+            } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
+                $location = $target->id;
             }
 
-            return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
+            if (isset($target)) {
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+            }
 
-            // TODO: confirm that everything expects a _200_ model not found exception
+            if ($asset->image) {
+                $asset->image = $asset->getImageUrl();
+            }
+
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
+
+        // TODO: confirm that everything expects a _200_ model not found exception
     }
 
 

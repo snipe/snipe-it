@@ -19,27 +19,12 @@ class UpdateAssetRequest extends ImageUploadRequest
 
     public function prepareForValidation()
     {
-        dump($this->asset);
-        $asset = $this->route('asset');
-        dump($asset);
-        dump($this->route()->getName());
         // the following are 'required' attributes that may or may not be present on an patch request
         // so supplying them here instead of doing funky array modification to the rules
-        if (!$this->has('asset_tag')) {
-            // TODO: not sure if i'll be able to use the route model binding here because of not-found return stuff, need to test
-            $asset_tag = $this->asset->asset_tag;
-        }
-        if (!$this->has('model_id')) {
-            $model_id = $this->asset->model_id;
-        }
-        if (!$this->has('status_id')) {
-            $status_id = $this->asset->status_id;
-        }
-
-        $this->merge([
-           'asset_tag' => $asset_tag,
-           'model_id'  => $model_id,
-           'status_id' => $status_id,
+        return $this->merge([
+            'asset_tag' => $this->asset_tag ?? $this->asset->asset_tag,
+            'model_id' => $this->model_id ?? $this->asset->model_id,
+            'status_id' => $this->status_id ?? $this->asset->status_id,
         ]);
     }
 
@@ -53,6 +38,7 @@ class UpdateAssetRequest extends ImageUploadRequest
         $rules = array_merge(
             (new Asset())->getRules(),
             parent::rules(),
+        //['model_id' => 'required|integer|exists:models,id,deleted_at,NULL|not_array']
         );
 
         return $rules;

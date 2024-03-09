@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api;
-// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -533,20 +532,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       });
 
-
-
-
+    // pulling this out of resource route group to begin normalizing
+    Route::patch('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.update');
 
         Route::resource('hardware', 
         Api\AssetsController::class,
         ['names' => [
                 'index' => 'api.assets.index',
                 'show' => 'api.assets.show',
-                'update' => 'api.assets.update',
                 'store' => 'api.assets.store',
                 'destroy' => 'api.assets.destroy',
             ],
-        'except' => ['create', 'edit'],
+            'except' => ['create', 'edit', 'update'],
         'parameters' => ['asset' => 'asset_id'],
         ]
         ); // end assets API routes
