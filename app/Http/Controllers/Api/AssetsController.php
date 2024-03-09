@@ -627,16 +627,16 @@ class AssetsController extends Controller
 
         // TODO: how much of this can go in the validator?
         // this is _always_ filled now, see UpdateAssetRequest
-        // i'm leaving this here for now, but when would we ever want model_id to be `null`??
+        // i'm leaving it like this for now, but when would we ever want model_id to be `null`??
+        // it actually breaks at the model validation if it gets to null...
         ($request->validated()['model_id']) ?
             $asset->model()->associate(AssetModel::find($request->validated()['model_id'])) : null;
-        ($request->filled('rtd_location_id')) ?
-            $asset->location_id = $request->get('rtd_location_id') : '';
-        ($request->filled('company_id')) ?
-            $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
-
-        ($request->filled('rtd_location_id')) ?
-            $asset->location_id = $request->get('rtd_location_id') : null;
+        ($request->validated()['rtd_location_id']) ?
+            $asset->location_id = $request->validated()['rtd_location_id'] : '';
+        ($request->validated()['company_id']) ?
+            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']) : '';
+        ($request->validated()['rtd_location_id']) ?
+            $asset->location_id = $request->validated()['rtd_location_id'] : null;
 
         /**
          * this is here just legacy reasons. Api\AssetController
@@ -647,7 +647,7 @@ class AssetsController extends Controller
         }
 
         $asset = $request->handleImages($asset);
-        $model = AssetModel::find($asset->model_id);
+        $model = $asset->model;
 
         // Update custom fields
         if (($model) && (isset($model->fieldset))) {
@@ -655,7 +655,7 @@ class AssetsController extends Controller
                 if ($request->has($field->db_column)) {
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
-                            $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
                         }
                     } else {
                         $asset->{$field->db_column} = $request->input($field->db_column);
