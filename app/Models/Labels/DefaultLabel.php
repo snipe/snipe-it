@@ -160,24 +160,31 @@ class DefaultLabel extends RectangleSheet
             $textY += $this->textSize + self::TEXT_MARGIN;
         }
 
-        // Fields
+        // Render the selected fields with their labels
         $fieldsDone = 0;
         if ($fieldsDone < $this->getSupportFields()) {
 
             foreach ($record->get('fields') as $field) {
-                
-                if ((array_key_exists('label', $field)) && (is_array($field['label']))) {
-                    static::writeText(
-                        $pdf, $field['label'][0]. ': ' . $field['value'],
-                        $textX1, $textY,
-                        'freesans', '', $this->textSize, 'L',
-                        $textW, $this->textSize,
-                        true, 0
-                    );
-                    $textY += $this->textSize + self::TEXT_MARGIN;
-                    $fieldsDone++;
+
+                $field_label = $field['label'];
+
+                // If the label field in the visible fields on the asset label is NOT blank,
+                // set the label to that value.
+                if ($field_label!='') {
+                    $field_label = $field_label.': ';
                 }
 
+                // Actually write the selected fields and their matching values
+                static::writeText(
+                    $pdf, $field_label . $field['value'],
+                    $textX1, $textY,
+                    'freesans', '', $this->textSize, 'L',
+                    $textW, $this->textSize,
+                    true, 0
+                );
+
+                $textY += $this->textSize + self::TEXT_MARGIN;
+                $fieldsDone++;
             }
         }
     }
