@@ -166,17 +166,9 @@ class DefaultLabel extends RectangleSheet
 
             foreach ($record->get('fields') as $field) {
 
-                $field_label = $field['label'];
-
-                // If the label field in the visible fields on the asset label is NOT blank,
-                // set the label to that value.
-                if ($field_label!='') {
-                    $field_label = $field_label.': ';
-                }
-
                 // Actually write the selected fields and their matching values
                 static::writeText(
-                    $pdf, $field_label . $field['value'],
+                    $pdf, (($field['label']) ? $field['label'].' ' : '') . $field['value'],
                     $textX1, $textY,
                     'freesans', '', $this->textSize, 'L',
                     $textW, $this->textSize,
