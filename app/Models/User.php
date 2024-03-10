@@ -337,7 +337,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function licenses()
     {
-        return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id', 'created_at');
+        return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id', 'created_at', 'updated_at');
     }
 
     /**
