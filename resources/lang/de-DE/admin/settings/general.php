@@ -363,5 +363,7 @@ return [
     'database_driver' => 'Datenbanktreiber',
     'bs_table_storage' => 'Tabellen Speicher',
     'timezone' => 'Zeitzone',
+    'checkin_notification_user' => 'Benachrichtigung Geräterückname Nutzer',
+    'checkin_notification_user_help' => 'Senden Sie eine E-Mail an den Benutzer, wenn die Rückgabe eines Gerätes ansteht oder überfällig ist.',
 
 ];
