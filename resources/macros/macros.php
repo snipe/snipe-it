@@ -37,7 +37,13 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
 
     // Pull the autoglossonym array from the localizations translation file
     foreach (trans('localizations.countries') as $abbr => $country) {
-        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected) == strtoupper($abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+
+        // We have to handle it this way to handle deprecication warnings since you can't strtoupper on null
+        if ($abbr!='') {
+            $abbr = strtoupper($abbr);
+        }
+
+        $select .= '<option value="'.$abbr.'"'.($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"'.'>'.$country.'</option> ';
     }
 
     $select .= '</select>';
