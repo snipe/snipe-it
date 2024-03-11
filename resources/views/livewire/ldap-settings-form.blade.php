@@ -500,6 +500,21 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <!-- LDAP Company -->
+                            <div class="form-group {{ $errors->has('ldap_company') ? 'error' : '' }}">
+                                <div class="col-md-3">
+                                    {{ Form::label('ldap_company', trans('admin/settings/general.ldap_company')) }}
+                                </div>
+                                <div class="col-md-8">
+                                    <input  wire:model.lazy="ldap_company" type="text" class="form-control" value="{{old('ldap_company', $ldap_company)}}" placeholder="{{trans('general.example') .'company'}}">
+                                    {!! $errors->first('ldap_company', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                    @if (config('app.lock_passwords')===true)
+                                        <input  wire:model.lazy="ldap_company" type="text" class="form-control" value="{{old('ldap_company', $ldap_company)}}" placeholder="{{trans('general.example') .'company'}}" disabled>
+                                        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                    @endif
+                                </div>
+                            </div>
                             @if ($setting->ldap_enabled)
 
                                 <form wire:submit.prevent="ldapsynctest">

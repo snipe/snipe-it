@@ -37,6 +37,7 @@ class LdapSettingsForm extends Component
       public        $ldap_client_tls_cert;
       public        $ldap_client_tls_key;
       public        $ldap_default_group;
+      public        $ldap_company;
       public        $ldap_phone_field;
       public        $groups;
       public        $ldaptest_user;
@@ -104,6 +105,7 @@ class LdapSettingsForm extends Component
         $this->ldap_client_tls_cert      = $this->setting->ldap_client_tls_cert;
         $this->ldap_client_tls_key       = $this->setting->ldap_client_tls_key;
         $this->custom_forgot_pass_url    = $this->setting->custom_forgot_pass_url;
+        $this->ldap_company              = $this->setting->ldap_company;
 
     }
 

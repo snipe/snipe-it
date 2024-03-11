@@ -215,6 +215,7 @@ class Ldap extends Model
         $ldap_result_location = Setting::getSettings()->ldap_location;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
+        $ldap_result_company = Setting::getSettings()->ldap_company;
         // Get LDAP user data
         $item = [];
         $item['username'] = $ldapattributes[$ldap_result_username][0] ?? '';
@@ -228,6 +229,7 @@ class Ldap extends Model
         $item['department'] = $ldapattributes[$ldap_result_dept][0] ?? '';
         $item['manager'] = $ldapattributes[$ldap_result_manager][0] ?? '';
         $item['location'] = $ldapattributes[$ldap_result_location][0] ?? '';
+        $item['company'] = $ldapattributes[$ldap_result_company][0] ?? '';
 
         return $item;
     }

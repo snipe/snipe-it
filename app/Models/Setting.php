@@ -357,6 +357,7 @@ class Setting extends Model
             'ldap_manager',
             'ldap_country',
             'ldap_location',
+            'ldap_company',
             ])->first()->getAttributes();
 
         return collect($ldapSettings);
