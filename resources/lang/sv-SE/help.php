@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Du kan ställa in tillgångsavskrivningar för att avskriva tillgångar baserat på rak linjär avskrivning.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Importören upptäcker att denna fil är tom.'
 ];

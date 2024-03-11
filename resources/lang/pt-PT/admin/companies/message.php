@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Empresa não existe.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Empresa excluída',
     'assoc_users'    => 'Esta empresa está associada a pelo menos um modelo e não pode ser eliminada. Actualize os seus modelos para que não referenciem esta empresa e tente novamente. ',
     'create' => [
         'error'   => 'Empresa não criada, por favor tente de novo.',

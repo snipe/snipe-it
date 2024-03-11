@@ -21,6 +21,7 @@ return array(
     'manager' 				=> '领导',
     'managed_locations'     => '管理位置',
     'name' 					=> '名字',
+    'nogroup'               => '尚未创建组。要添加一个组，请访问： ',
     'notes'                 => '笔记',
     'password_confirm' 		=> '确认密码',
     'password' 				=> '密码',

@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Clib Sócmhainní',
     'asset_model'       => 'Mionsamhail',
+    'assigned_to'   => 'Sannadh Chun',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Amach',
     'checkout_date' => 'Dáta Seiceáil',
@@ -24,7 +25,7 @@ return [
     'image'		    => 'Íomhá Gléas',
     'days_without_acceptance' => 'Laethanta Gan Glactha',
     'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Assigned To',
+    'assigned_to'    => 'Sannadh Chun',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',

@@ -18,12 +18,13 @@ return [
         'success' 			=> 'Nuashonraíodh sócmhainn go rathúil',
         'nothing_updated'	=>  'Níor roghnaíodh réimsí ar bith, mar sin níor nuashonraíodh aon rud.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Níor cuireadh an tsócmhainn ar ais, déan iarracht arís',
         'success' 		=> 'Aisghabháil sócmhainne go rathúil.',
-        'bulk_success' 		=> 'Asset restored successfully.',
+        'bulk_success' 		=> 'Aisghabháil sócmhainne go rathúil.',
         'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 

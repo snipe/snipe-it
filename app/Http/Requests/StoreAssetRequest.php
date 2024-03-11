@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Asset;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Company;
 use Illuminate\Support\Facades\Gate;
 
 class StoreAssetRequest extends ImageUploadRequest
@@ -20,7 +20,18 @@ class StoreAssetRequest extends ImageUploadRequest
 
     public function prepareForValidation(): void
     {
-        //
+        // Guard against users passing in an array for company_id instead of an integer.
+        // If the company_id is not an integer then we simply use what was
+        // provided to be caught by model level validation later.
+        $idForCurrentUser = is_int($this->company_id)
+            ? Company::getIdForCurrentUser($this->company_id)
+            : $this->company_id;
+
+        $this->merge([
+            'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
+            'company_id' => $idForCurrentUser,
+            'assigned_to' => $assigned_to ?? null,
+        ]);
     }
 
     /**

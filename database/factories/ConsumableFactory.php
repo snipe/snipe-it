@@ -91,4 +91,29 @@ class ConsumableFactory extends Factory
             ];
         });
     }
+
+    public function withoutItemsRemaining()
+    {
+        return $this->state(function () {
+            return [
+                'qty' => 1,
+            ];
+        })->afterCreating(function (Consumable $consumable) {
+            $user = User::factory()->create();
+
+            $consumable->users()->attach($consumable->id, [
+                'consumable_id' => $consumable->id,
+                'user_id' => $user->id,
+                'assigned_to' => $user->id,
+                'note' => '',
+            ]);
+        });
+    }
+
+    public function requiringAcceptance()
+    {
+        return $this->afterCreating(function (Consumable $consumable) {
+            $consumable->category->update(['require_acceptance' => 1]);
+        });
+    }
 }

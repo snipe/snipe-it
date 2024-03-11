@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Manajer',
     'managed_locations'     => 'Lokasi yang Dikelola',
     'name' 					=> 'Nama',
+    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Catatan',
     'password_confirm' 		=> 'Konfirmasi kata sandi',
     'password' 				=> 'Kata Sandi',

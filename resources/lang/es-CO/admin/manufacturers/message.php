@@ -2,29 +2,29 @@
 
 return array(
 
-    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, y <code>{MODEL_NAME}</code> se puede utilizar en tu URL para que esos valores se llenen automáticamente al ver los activos - por ejemplo https://checkcoverage. pple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'El fabricante no existe.',
-    'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
+    'assoc_users'	 => 'Este fabricante está actualmente asociado con al menos un modelo y no se puede eliminar. Por favor, actualice sus modelos para dejar de hacer referencia a este fabricante y vuelva a intentarlo. ',
 
     'create' => array(
-        'error'   => 'Fabricante no creado, Intentalo de nuevo.',
-        'success' => 'Fabricante creado.'
+        'error'   => 'El fabricante no ha sido creado, por favor inténtelo de nuevo.',
+        'success' => 'Fabricante creado con éxito.'
     ),
 
     'update' => array(
-        'error'   => 'Fabricante no actualizado, Intentalo de nuevo',
-        'success' => 'Fabricante actualizado.'
+        'error'   => 'El fabricante no ha sido actualizado, por favor inténtalo de nuevo',
+        'success' => 'El fabricante se ha actualizado correctamente.'
     ),
 
     'restore' => array(
-        'error'   => 'El fabricante no fue restaurado, intente de nuevo',
+        'error'   => 'El fabricante no ha sido restaurado, por favor inténtalo de nuevo',
         'success' => 'Fabricante restaurado con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro que quieres eliminar Fabricante?',
-        'error'   => 'Hubo un problema eliminando el fabricante. Por favor, inténtalo de nuevo.',
-        'success' => 'Fabricante Eliminado.'
+        'confirm'   => '¿Está seguro que desea eliminar este fabricante?',
+        'error'   => 'Hubo un problema al eliminar el fabricante. Por favor, inténtelo de nuevo.',
+        'success' => 'El fabricante se ha eliminado correctamente.'
     )
 
 );

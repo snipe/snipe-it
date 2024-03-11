@@ -288,7 +288,7 @@ class AssetModelsController extends Controller
     public function show($modelId = null)
     {
         $this->authorize('view', AssetModel::class);
-        $model = AssetModel::withTrashed()->find($modelId);
+        $model = AssetModel::withTrashed()->withCount('assets')->find($modelId);
 
         if (isset($model->id)) {
             return view('models/view', compact('model'));
@@ -442,7 +442,6 @@ class AssetModelsController extends Controller
             $del_count = 0;
 
             foreach ($models as $model) {
-                \Log::debug($model->id);
 
                 if ($model->assets_count > 0) {
                     $del_error_count++;
@@ -452,8 +451,6 @@ class AssetModelsController extends Controller
                 }
             }
 
-            \Log::debug($del_count);
-            \Log::debug($del_error_count);
 
             if ($del_error_count == 0) {
                 return redirect()->route('models.index')

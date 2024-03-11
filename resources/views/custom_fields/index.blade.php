@@ -73,7 +73,14 @@
                 <nobr>
 
                 @can('update', $fieldset)
-                  <a href="{{ route('fieldsets.edit', $fieldset->id) }}" class="btn btn-warning btn-sm">
+
+                  <a href="{{ route('fieldsets.show', ['fieldset' => $fieldset->id]) }}" data-tooltip="true" title="{{ trans('general.edit_fieldset') }}">
+                    <button type="submit" class="btn btn-info btn-sm">
+                      <i class="fa-regular fa-rectangle-list"></i>
+                    </button>
+                  </a>
+
+                  <a href="{{ route('fieldsets.edit', $fieldset->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     <span class="sr-only">{{ trans('button.edit') }}</span>
                   </a>
@@ -82,9 +89,9 @@
                 @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
                   @if($fieldset->models->count() > 0)
-                  <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
+                  <button type="submit" class="btn btn-danger btn-sm disabled" data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}" disabled><i class="fas fa-trash"></i></button>
                   @else
-                  <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                  <button type="submit" class="btn btn-danger btn-sm" data-tooltip="true" title="{{ trans('general.delete') }}"><i class="fas fa-trash"></i></button>
                   @endif
                 {{ Form::close() }}
                 @endcan
@@ -188,7 +195,7 @@
                 <nobr>
                   {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                   @can('update', $field)
-                    <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                       <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('button.edit') }}</span>
                     </a>
@@ -197,11 +204,11 @@
                 @can('delete', $field)
 
                   @if($field->fieldset->count()>0)
-                    <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
+                    <button type="submit" class="btn btn-danger btn-sm disabled" data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}" disabled>
                       <i class="fas fa-trash" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('button.delete') }}</span></button>
                   @else
-                    <button type="submit" class="btn btn-danger btn-sm">
+                    <button type="submit" class="btn btn-danger btn-sm" data-tooltip="true" title="{{ trans('general.delete') }}">
                       <i class="fas fa-trash" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('button.delete') }}</span>
                     </button>

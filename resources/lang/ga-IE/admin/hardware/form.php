@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Dímheas',
     'depreciates_on'	=> 'Dímheas Ar Ar',
     'default_location'	=> 'Suíomh Réamhshocraithe',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Dáta EOL',
     'eol_rate'			=> 'Ráta EOL',
     'expected_checkin'  => 'An Dáta Seiceála Ionchais',

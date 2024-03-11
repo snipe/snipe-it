@@ -490,9 +490,12 @@
                     }'>
                 <thead>
                 <tr>
-                  <th class="col-md-4">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('admin/licenses/form.license_key') }}</th>
-                  <th class="col-md-4">{{ trans('general.category') }}</th>
+                  <th>{{ trans('general.name') }}</th>
+                  <th>{{ trans('admin/licenses/form.license_key') }}</th>
+                  <th>{{ trans('admin/licenses/form.to_name') }}</th>
+                  <th>{{ trans('admin/licenses/form.to_email') }}</th>
+                  <th>{{ trans('general.category') }}</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -506,6 +509,18 @@
                         ------------
                       @endcan
                     </td>
+                    <td>
+                      @can('viewKeys', $license)
+                        {{ $license->license_name }}
+                      @else
+                        ------------
+                      @endcan
+                    </td>
+                    @can('viewKeys', $license)
+                    <td>{{$license->license_email}}</td>
+                    @else
+                      ------------
+                    @endcan
                     <td>{{ $license->category->name }}</td>
                   </tr>
                 @endforeach

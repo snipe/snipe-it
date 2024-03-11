@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Bainisteoir',
     'managed_locations'     => 'Láithreáin bhainistithe',
     'name' 					=> 'Ainm',
+    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Nótaí',
     'password_confirm' 		=> 'Deimhnigh Pasfhocal',
     'password' 				=> 'Pasfhocal',

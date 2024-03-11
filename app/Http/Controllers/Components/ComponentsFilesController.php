@@ -4,28 +4,27 @@ namespace App\Http\Controllers\Components;
 
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\Component;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use enshrined\svgSanitize\Sanitizer;
 
 class ComponentsFilesController extends Controller
 {
     /**
      * Validates and stores files associated with a component.
      *
-     * @todo Switch to using the AssetFileRequest form request validator.
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @param AssetFileRequest $request
+     * @param UploadFileRequest $request
      * @param int $componentId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *@author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @todo Switch to using the AssetFileRequest form request validator.
      */
-    public function store(AssetFileRequest $request, $componentId = null)
+    public function store(UploadFileRequest $request, $componentId = null)
     {
 
         if (config('app.lock_passwords')) {
@@ -43,30 +42,7 @@ class ComponentsFilesController extends Controller
                 }
 
                 foreach ($request->file('file') as $file) {
-
-                    $extension = $file->getClientOriginalExtension();
-                    $file_name = 'component-'.$component->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-
-                    // Check for SVG and sanitize it
-                    if ($extension == 'svg') {
-                        \Log::debug('This is an SVG');
-                        \Log::debug($file_name);
-
-                        $sanitizer = new Sanitizer();
-                        $dirtySVG = file_get_contents($file->getRealPath());
-                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                        try {
-                            Storage::put('private_uploads/components/'.$file_name, $cleanSVG);
-                        } catch (\Exception $e) {
-                            \Log::debug('Upload no workie :( ');
-                            \Log::debug($e);
-                        }
-
-                    } else {
-                        Storage::put('private_uploads/components/'.$file_name, file_get_contents($file));
-                    }
+                    $file_name = $request->handleFile('private_uploads/components/','component-'.$component->id, $file);
 
                     //Log the upload to the log
                     $component->logUpload($file_name, e($request->input('notes')));

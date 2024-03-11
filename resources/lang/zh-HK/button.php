@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'actions' 	                => 'Actions',
+    'actions' 	                => '操作',
     'add'    	                => 'Add New',
     'cancel'                    => 'Cancel',
     'checkin_and_delete'  	    => 'Checkin All / Delete User',

@@ -151,7 +151,7 @@
                             <i class="fa-lock" aria-hidden="true"></i> {{ str_repeat('x', 15) }}
                         @endcan
                     </td>
-                    <td>{{  $license->pivot->created_at }}</td>
+                    <td>{{  $license->pivot->updated_at }}</td>
                 </tr>
                 @php
                     $lcounter++

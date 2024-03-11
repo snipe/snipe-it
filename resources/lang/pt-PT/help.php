@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Pode configurar as depreciações dos equipamentos baseadas numa depreciação constante temporalmente.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'O importador detecta que este arquivo está vazio.'
 ];

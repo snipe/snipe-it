@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Más información',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Al marcar esta casilla se editará el registro de activos para reflejar esta nueva ubicación. Dejarla desmarcada simplemente se notará la ubicación en el registro de auditoría.<br><br>Tenga en cuenta que si este activo está desprotegido, no cambiará la ubicación de la persona, el activo o la ubicación en la que está verificado.',
 
     'assets' => 'Los activos son elementos con número de serie o etiqueta de activos.  Tienden a ser artículos de alto valor donde es importante identificar un elemento específico.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Puede configurar las depreciaciones de activos para depreciar activos basados en una depreciación lineal.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'El importador detecta que este archivo está vacío.'
 ];

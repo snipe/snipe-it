@@ -39,9 +39,10 @@ class Settings
         return $this->update(['full_multiple_companies_support' => 0]);
     }
 
-    public function enableWebhook(): Settings
+    public function enableSlackWebhook(): Settings
     {
         return $this->update([
+            'webhook_selected' => 'slack',
             'webhook_botname' => 'SnipeBot5000',
             'webhook_endpoint' => 'https://hooks.slack.com/services/NZ59/Q446/672N',
             'webhook_channel' => '#it',
@@ -51,6 +52,7 @@ class Settings
     public function disableWebhook(): Settings
     {
         return $this->update([
+            'webhook_selected' => '',
             'webhook_botname' => '',
             'webhook_endpoint' => '',
             'webhook_channel' => '',
@@ -62,10 +64,29 @@ class Settings
         return $this->update([
             'auto_increment_assets' => 1,
             'auto_increment_prefix' => 'ABCD',
-            'next_auto_tag_base' => '123',
+            'next_auto_tag_base' => 123,
             'zerofill_count' => 5
         ]);
+    }
 
+    public function disableAutoIncrement(): Settings
+    {
+        return $this->update([
+            'auto_increment_assets' => 0,
+            'auto_increment_prefix' => 0,
+            'next_auto_tag_base' => 0,
+            'zerofill_count' => 0
+        ]);
+    }
+
+    public function enableUniqueSerialNumbers(): Settings
+    {
+        return $this->update(['unique_serial' => 1]);
+    }
+
+    public function disableUniqueSerialNumbers(): Settings
+    {
+        return $this->update(['unique_serial' => 0]);
     }
 
     public function enableLdap(): Settings

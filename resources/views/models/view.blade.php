@@ -43,7 +43,7 @@
                         </span>
                                     <span class="hidden-xs hidden-sm">
                             {{ trans('general.assets') }}
-                                        {!! (($model->assets) && ($model->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($model->assets->count()).'</badge>' : '' !!}
+                                        {!! ($model->assets_count > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets_count).'</badge>' : '' !!}
                         </span>
                     </a>
                 </li>
@@ -309,7 +309,7 @@
                     @if ($model->notes)
                         <li>
                             {{ trans('general.notes') }}:
-                            {{ $model->notes }}
+                            {!! nl2br(Helper::parseEscapedMarkedownInline($model->notes)) !!}
                         </li>
                     @endif
 
@@ -342,7 +342,7 @@
             @endcan
 
             @can('delete', \App\Models\AssetModel::class)
-                @if ($model->assets->count() > 0)
+                @if ($model->assets_count > 0)
 
                     <div class="col-md-12" style="padding-bottom: 5px;">
                         <button class="btn btn-block btn-sm btn-danger hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">{{ trans('general.delete') }}</button>

@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Http\Requests\StoreAssetRequest;
+use App\Http\Traits\MigratesLegacyAssetLocations;
+use App\Models\CheckoutAcceptance;
+use App\Models\LicenseSeat;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\DepreciationReportTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -20,11 +25,12 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use Auth;
+use \Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Log;
 use Input;
 use Paginator;
 use Slack;
@@ -43,6 +49,8 @@ use Route;
  */
 class AssetsController extends Controller
 {
+    use MigratesLegacyAssetLocations;
+
     /**
      * Returns JSON listing of all assets
      *
@@ -103,6 +111,7 @@ class AssetsController extends Controller
             'requests_counter',
             'byod',
             'asset_eol_date',
+            'requestable',
         ];
 
         $filter = [];
@@ -134,7 +143,7 @@ class AssetsController extends Controller
 
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
-            if ($request->filled($field->db_column_name())) {
+            if ($request->filled($field->db_column_name()) && $field->db_column_name()) {
                 $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
             }
         }
@@ -531,37 +540,14 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ImageUploadRequest $request)
+    public function store(StoreAssetRequest $request): JsonResponse
     {
-        $this->authorize('create', Asset::class);
-        
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
-        $asset->name                    = $request->get('name');
-        $asset->serial                  = $request->get('serial');
-        $asset->company_id              = Company::getIdForCurrentUser($request->get('company_id'));
-        $asset->model_id                = $request->get('model_id');
-        $asset->order_number            = $request->get('order_number');
-        $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
-        $asset->user_id                 = Auth::id();
-        $asset->archived                = '0';
-        $asset->physical                = '1';
-        $asset->depreciate              = '0';
-        $asset->status_id               = $request->get('status_id', 0);
-        $asset->warranty_months         = $request->get('warranty_months', null);
-        $asset->purchase_cost           = $request->get('purchase_cost');
-        $asset->asset_eol_date          = $request->get('asset_eol_date', $asset->present()->eol_date());
-        $asset->purchase_date           = $request->get('purchase_date', null);
-        $asset->assigned_to             = $request->get('assigned_to', null);
-        $asset->supplier_id             = $request->get('supplier_id');
-        $asset->requestable             = $request->get('requestable', 0);
-        $asset->rtd_location_id         = $request->get('rtd_location_id', null);
-        $asset->location_id             = $request->get('rtd_location_id', null);
-
+        $asset->fill($request->validated());
+        $asset->user_id    = Auth::id();
 
         /**
         * this is here just legacy reasons. Api\AssetController
@@ -574,10 +560,11 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
+        $model = AssetModel::find($request->input('model_id'));
 
-        if (($model) && ($model->fieldset)) {
+        // Check that it's an object and not a collection
+        // (Sometimes people send arrays here and they shouldn't
+        if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
 
                 // Set the field value based on what was sent in the request
@@ -585,22 +572,22 @@ class AssetsController extends Controller
 
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
-                    \Log::debug('Field value for '.$field->db_column.' is null');
+                    Log::debug('Field value for '.$field->db_column.' is null');
                     $field_val = $field->defaultValue($request->get('model_id'));
-                    \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
+                    Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
 
                 // if the field is set to encrypted, make sure we encrypt the value
                 if ($field->field_encrypted == '1') {
-                    \Log::debug('This model field is encrypted in this fieldset.');
+                    Log::debug('This model field is encrypted in this fieldset.');
 
                     if (Gate::allows('admin')) {
 
                         // If input value is null, use custom field's default value
                         if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
+                            $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
                         } else {
-                            $field_val = \Crypt::encrypt($request->input($field->db_column));
+                            $field_val = Crypt::encrypt($request->input($field->db_column));
                         }
                     }
                 }
@@ -884,10 +871,8 @@ class AssetsController extends Controller
      */
     public function checkin(Request $request, $asset_id)
     {
-        $this->authorize('checkin', Asset::class);
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
-
 
         $target = $asset->assignedTo;
         if (is_null($target)) {
@@ -899,9 +884,8 @@ class AssetsController extends Controller
         }
 
         $asset->expected_checkin = null;
-        $asset->last_checkout = null;
+        //$asset->last_checkout = null;
         $asset->last_checkin = now();
-        $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
 
@@ -909,10 +893,16 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
         }
 
+        $this->migrateLegacyLocations($asset);
+
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
             $asset->location_id = $request->input('location_id');
+
+            if ($request->input('update_default_location')){
+                $asset->rtd_location_id = $request->input('location_id');
+            }
         }
 
         if ($request->has('status_id')) {
@@ -925,6 +915,23 @@ class AssetsController extends Controller
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
             $originalValues['action_date'] = $checkin_at;
         }
+
+        $asset->licenseseats->each(function (LicenseSeat $seat) {
+            $seat->update(['assigned_to' => null]);
+        });
+
+        // Get all pending Acceptances for this asset and delete them
+        CheckoutAcceptance::pending()
+            ->whereHasMorph(
+                'checkoutable',
+                [Asset::class],
+                function (Builder $query) use ($asset) {
+                    $query->where('id', $asset->id);
+                })
+            ->get()
+            ->map(function ($acceptance) {
+                $acceptance->delete();
+            });
 
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));

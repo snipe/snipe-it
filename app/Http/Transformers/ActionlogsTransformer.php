@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\Company;
 use App\Models\Supplier;
 use App\Models\Location;
@@ -215,6 +216,7 @@ class ActionlogsTransformer
     {   $location = Location::withTrashed()->get();
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
+        $status = Statuslabel::withTrashed()->get();
         $company = Company::get();
 
 
@@ -287,6 +289,19 @@ class ActionlogsTransformer
             $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ". $newSupplierName : trans('general.unassigned');
             $clean_meta['Supplier'] = $clean_meta['supplier_id'];
             unset($clean_meta['supplier_id']);
+        }
+        if(array_key_exists('status_id', $clean_meta)) {
+
+            $oldStatus = $status->find($clean_meta['status_id']['old']);
+            $oldStatusName = $oldStatus ? e($oldStatus->name) : trans('admin/statuslabels/message.deleted_label');
+
+            $newStatus = $status->find($clean_meta['status_id']['new']);
+            $newStatusName = $newStatus ? e($newStatus->name) : trans('admin/statuslabels/message.deleted_label');
+
+            $clean_meta['status_id']['old'] = $clean_meta['status_id']['old'] ? "[id: ".$clean_meta['status_id']['old']."] ". $oldStatusName : trans('general.unassigned');
+            $clean_meta['status_id']['new'] = $clean_meta['status_id']['new'] ? "[id: ".$clean_meta['status_id']['new']."] ". $newStatusName : trans('general.unassigned');
+            $clean_meta['Status'] = $clean_meta['status_id'];
+            unset($clean_meta['status_id']);
         }
         if(array_key_exists('asset_eol_date', $clean_meta)) {
             $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
