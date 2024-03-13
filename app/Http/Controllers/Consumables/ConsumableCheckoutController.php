@@ -71,8 +71,14 @@ class ConsumableCheckoutController extends Controller
 
         $this->authorize('checkout', $consumable);
 
+        // If the quantity is not present in the request or is not a positive integer, set it to 1
+        $quantity = $request->input('qty');
+        if (!isset($quantity) || !ctype_digit((string)$quantity) || $quantity <= 0) {
+            $quantity = 1;
+        }
+
         // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0) {
+        if ($consumable->numRemaining() <= 0 || $quantity > $consumable->numRemaining()) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
         }
 
@@ -88,13 +94,14 @@ class ConsumableCheckoutController extends Controller
         // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
 
+        for($i = 0; $i < $quantity; $i++){
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
             'note' => $request->input('note'),
         ]);
-
+        }
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new consumable page
