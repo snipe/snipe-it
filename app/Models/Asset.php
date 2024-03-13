@@ -244,8 +244,12 @@ class Asset extends Depreciable
                         $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
                     }
                 }
+                $this->rules = array_merge(
+                    $this->rules,
+                    $model->fieldset->validation_rules(),
+                );
 
-                $this->rules += $model->fieldset->validation_rules();
+                //$this->rules += $model->fieldset->validation_rules();
 
                 if ($this->model->fieldset){
                     foreach ($this->model->fieldset->fields as $field){
