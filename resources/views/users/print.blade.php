@@ -37,6 +37,11 @@
             max-height: 40px;
         }
 
+        h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
     </style>
 
     <script nonce="{{ csrf_token() }}">
@@ -75,55 +80,58 @@
             $counter = 1;
         @endphp
 
-        <div id="toolbar">
-            poots
+        <div id="assets-toolbar">
+            <h4>{{ trans('general.assets') }}</h4>
         </div>
 
         <table
                 class="snipe-table table table-striped inventory"
-                id="inventory"
-                data-pagination="true"
-                data-id-table="modelFileHistory"
-                data-search="true"
+                id="AssetsAssigned"
+                data-pagination="false"
+                data-id-table="AssetsAssigned"
+                data-search="false"
                 data-side-pagination="client"
-                data-sortable="true"
+                data-sortable="false"
+                data-toolbar="#assets-toolbar"
                 data-show-columns="true"
-                data-show-fullscreen="true"
-                data-show-refresh="true"
                 data-sort-order="desc"
                 data-sort-name="created_at"
-                data-show-export="true"
-                data-cookie-id-table="assetFileHistory">
+                data-show-columns-toggle-all="true"
+                data-cookie-id-table="AssetsAssigned">
             <thead>
-                <tr>
-                    <th colspan="8" id="assets">{{ trans('general.assets') }}</th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th id="assetsh1" data-field="id" data-sortable="true" data-searchable="true" data-visible="true">#</th>
-                    <th id="assetsh2" data-field="asset_tag" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                    <th id="assetsh3" data-field="name" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.name') }}</th>
-                    <th id="assetsh4" data-field="category" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.category') }}</th>
-                    <th id="assetsh5" data-field="model" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
-                    <th id="assetsh6" data-field="serial" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
-                    <th id="assetsh7" data-field="checkout_date" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                    <th id="assetsh8" data-field="signature" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.signature') }}</th>
-                </tr>
+
+                <th data-field="id" data-sortable="true" data-searchable="true" data-visible="true">#</th>
+                <th data-field="image" data-sortable="true" data-searchable="false" data-visible="true">{{ trans('general.image') }}</th>
+                <th data-field="asset_tag" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th data-field="name" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.name') }}</th>
+                <th data-field="category" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.category') }}</th>
+                <th data-field="model" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
+                <th data-field="location" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.location') }}</th>
+                <th data-field="serial" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
+                <th data-field="checkout_date" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th data-field="signature" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.signature') }}</th>
+
             </thead>
             <tbody>
             @foreach ($assets as $asset)
 
                 <tr>
-                    <td>{{ $counter }}</td>
+                    <td data-sortable="false">{{ $counter }}</td>
+                    <td>
+                        @if ($asset->getImageUrl())
+                            <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
+                        @endif
+                    </td>
                     <td>{{ $asset->asset_tag }}</td>
                     <td>{{ $asset->name }}</td>
                     <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
                     <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
+                    <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
+                    <td>{{ $asset->name }}</td>
                     <td>{{ $asset->serial }}</td>
                     <td>
                         {{ $asset->last_checkout }}</td>
-                    <td data-formatter="imageFormatter">
+                    <td>
                         @if (($asset->assetlog->first()) && ($asset->assetlog->first()->accept_signature!=''))
                             <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
                         @endif
@@ -137,9 +145,15 @@
 
                         <tr>
                             <td>{{ $counter }}.{{ $assignedCounter }}</td>
+                            <td data-formatter="imageFormatter">
+                                @if ($asset->getImageUrl())
+                                    <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
+                                @endif
+                            </td>
                             <td>{{ $asset->asset_tag }}</td>
                             <td>{{ $asset->name }}</td>
                             <td>{{ $asset->model->category->name }}</td>
+                            <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
                             <td>{{ $asset->model->name }}</td>
                             <td>{{ $asset->serial }}</td>
                             <td>{{ $asset->last_checkout }}</td>
@@ -159,13 +173,24 @@
     @endif
 
     @if ($licenses->count() > 0)
-        <br><br>
-        <table class="inventory">
-            <thead>
-            <tr>
-                <th colspan="4">{{ trans('general.licenses') }}</th>
-            </tr>
-            </thead>
+        <div id="licenses-toolbar">
+            <h4>{{ trans('general.licenses') }}</h4>
+        </div>
+
+        <table
+                class="snipe-table table table-striped inventory"
+                id="licensessAssigned"
+                data-toolbar="#licenses-toolbar"
+                data-pagination="false"
+                data-id-table="licensessAssigned"
+                data-search="false"
+                data-side-pagination="client"
+                data-sortable="false"
+                data-show-columns="true"
+                data-sort-order="desc"
+                data-sort-name="created_at"
+                data-show-columns-toggle-all="true"
+                data-cookie-id-table="licensessAssigned">
             <thead>
             <tr>
                 <th style="width: 20px;"></th>
@@ -201,13 +226,24 @@
 
 
     @if ($accessories->count() > 0)
-        <br><br>
-        <table class="inventory">
-            <thead>
-            <tr>
-                <th colspan="4">{{ trans('general.accessories') }}</th>
-            </tr>
-            </thead>
+        <div id="accessories-toolbar">
+            <h4>{{ $accessories->count() }} {{ trans('general.accessories') }}</h4>
+        </div>
+
+        <table
+                class="snipe-table table table-striped inventory"
+                id="accessoriesAssigned"
+                data-toolbar="#accessories-toolbar"
+                data-pagination="false"
+                data-id-table="accessoriesAssigned"
+                data-search="false"
+                data-side-pagination="client"
+                data-sortable="false"
+                data-show-columns="true"
+                data-sort-order="desc"
+                data-sort-name="created_at"
+                data-show-columns-toggle-all="true"
+                data-cookie-id-table="accessoriesAssigned">
             <thead>
             <tr>
                 <th style="width: 20px;"></th>
@@ -237,13 +273,24 @@
     @endif
 
     @if ($consumables->count() > 0)
-        <br><br>
-        <table class="inventory">
-            <thead>
-            <tr>
-                <th colspan="4">{{ trans('general.consumables') }}</th>
-            </tr>
-            </thead>
+        <div id="consumables-toolbar">
+            <h4>{{ $consumables->count() }} {{ trans('general.consumables') }}</h4>
+        </div>
+
+        <table
+                class="snipe-table table table-striped inventory"
+                id="consumablesAssigned"
+                data-pagination="false"
+                data-toolbar="#consumables-toolbar"
+                data-id-table="consumablesAssigned"
+                data-search="false"
+                data-side-pagination="client"
+                data-sortable="false"
+                data-show-columns="true"
+                data-sort-order="desc"
+                data-sort-name="created_at"
+                data-show-columns-toggle-all="true"
+                data-cookie-id-table="consumablesAssigned">
             <thead>
             <tr>
                 <th style="width: 20px;"></th>
@@ -306,7 +353,7 @@
 
 @push('js')
 
-    <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 
 <script>
     $('.snipe-table').bootstrapTable('destroy').each(function () {
@@ -335,7 +382,6 @@
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            locale: locale,
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
