@@ -112,16 +112,6 @@ class SlackNotificationsUponCheckinTest extends TestCase
         Notification::assertNothingSent();
     }
 
-    public function testConsumableCheckinSendSlackNotificationWhenSettingEnabled()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testConsumableCheckinDoesNotSendSlackNotificationWhenSettingDisabled()
-    {
-        $this->markTestIncomplete();
-    }
-
     /** @dataProvider licenseCheckInTargets */
     public function testLicenseCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
