@@ -631,12 +631,12 @@ class AssetsController extends Controller
         // it actually breaks at the model validation if it gets to null...
         ($request->validated()['model_id']) ?
             $asset->model()->associate(AssetModel::find($request->validated()['model_id'])) : null;
-        ($request->validated()['rtd_location_id']) ?
-            $asset->location_id = $request->validated()['rtd_location_id'] : '';
-        ($request->validated()['company_id']) ?
-            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']) : '';
-        ($request->validated()['rtd_location_id']) ?
-            $asset->location_id = $request->validated()['rtd_location_id'] : null;
+        //($request->validated()['rtd_location_id']) ?
+        //    $asset->location_id = $request->validated()['rtd_location_id'] : '';
+        //($request->validated()['company_id']) ?
+        //    $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']) : '';
+        //($request->validated()['rtd_location_id']) ?
+        //    $asset->location_id = $request->validated()['rtd_location_id'] : null;
 
         /**
          * this is here just legacy reasons. Api\AssetController

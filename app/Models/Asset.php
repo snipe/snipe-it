@@ -115,12 +115,15 @@ class Asset extends Depreciable
 
     public function getRulesAttribute()
     {
-        $rule = Rule::unique('assets')->ignore($this->id)->withoutTrashed();
-        $asset = $this->id;
         return [
             'model_id' => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
             'status_id' => 'required|integer|exists:status_labels,id',
-            'asset_tag' => ['required', 'min:1', 'max:255', Rule::unique('assets', 'asset_tag')->ignore($this->id, 'id')->withoutTrashed()],
+            'asset_tag' => [
+                'required',
+                'min:1',
+                'max:255',
+                Rule::unique('assets')->ignore(15)->withoutTrashed()
+            ],
             'name' => 'nullable|max:255',
             'company_id' => 'nullable|integer|exists:companies,id',
             'warranty_months' => 'nullable|numeric|digits_between:0,240',
