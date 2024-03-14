@@ -23,6 +23,7 @@ class AssetTest extends TestCase
         $this->assertModelExists($b);
 
     }
+
     public function testAutoIncrementCollision()
     {
         $this->settings->enableAutoIncrement();
