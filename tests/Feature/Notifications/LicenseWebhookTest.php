@@ -12,13 +12,10 @@ use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class LicenseWebhookTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function targets(): array
     {
         return [

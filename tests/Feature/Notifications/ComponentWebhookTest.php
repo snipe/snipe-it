@@ -8,14 +8,10 @@ use App\Models\Asset;
 use App\Models\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ComponentWebhookTest extends TestCase
 {
-
-    use InteractsWithSettings;
-
     public function testComponentCheckoutDoesNotSendWebhookNotification()
     {
         Notification::fake();

@@ -12,13 +12,10 @@ use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetWebhookTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function targets(): array
     {
         return [

@@ -5,13 +5,10 @@ namespace Tests\Feature\Api\Consumables;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ConsumablesIndexTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testConsumableIndexAdheresToCompanyScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();

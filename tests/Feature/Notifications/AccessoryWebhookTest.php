@@ -11,13 +11,10 @@ use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AccessoryWebhookTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testAccessoryCheckoutSendsWebhookNotificationWhenSettingEnabled()
     {
         Notification::fake();

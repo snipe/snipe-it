@@ -9,13 +9,10 @@ use App\Models\User;
 use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ConsumableWebhookTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testConsumableCheckoutSendsWebhookNotificationWhenSettingEnabled()
     {
         Notification::fake();

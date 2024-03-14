@@ -8,13 +8,10 @@ use App\Models\Group;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class UsersUpdateTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCanUpdateUserViaPatch()
     {
         $admin = User::factory()->superuser()->create();

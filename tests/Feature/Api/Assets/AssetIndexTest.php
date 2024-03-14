@@ -6,13 +6,10 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetIndexTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testAssetIndexReturnsExpectedAssets()
     {
         Asset::factory()->count(3)->create();

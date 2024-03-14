@@ -15,6 +15,7 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use CustomTestMacros;
     use InteractsWithAuthentication;
+    use InteractsWithSettings;
     use LazilyRefreshDatabase;
 
     private array $globallyDisabledMiddleware = [

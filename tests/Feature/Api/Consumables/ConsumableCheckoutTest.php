@@ -7,13 +7,10 @@ use App\Models\Consumable;
 use App\Models\User;
 use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ConsumableCheckoutTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCheckingOutConsumableRequiresCorrectPermission()
     {
         $this->actingAsForApi(User::factory()->create())
