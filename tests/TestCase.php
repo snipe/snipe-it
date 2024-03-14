@@ -32,10 +32,10 @@ abstract class TestCase extends BaseTestCase
 
         parent::setUp();
 
+        $this->registerCustomMacros();
+
         $this->withoutMiddleware($this->globallyDisabledMiddleware);
 
         $this->initializeSettings();
-
-        $this->registerCustomMacros();
     }
 }
