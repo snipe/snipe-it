@@ -17,24 +17,24 @@ class EmailNotificationsUponCheckinTest extends TestCase
 {
     use InteractsWithSettings;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Notification::fake();
+    }
+
     public function testCheckInEmailSentToUserIfSettingEnabled()
     {
-        Notification::fake();
-
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
         $asset->model->category->update(['checkin_email' => true]);
 
-        event(new CheckoutableCheckedIn(
-            $asset,
-            $user,
-            User::factory()->checkinAssets()->create(),
-            ''
-        ));
+        $this->fireCheckInEvent($asset, $user);
 
         Notification::assertSentTo(
-            [$user],
+            $user,
             function (CheckinAssetNotification $notification, $channels) {
                 return in_array('mail', $channels);
             },
@@ -43,25 +43,28 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
     public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
-        Notification::fake();
-
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
         $asset->model->category->update(['checkin_email' => false]);
 
+        $this->fireCheckInEvent($asset, $user);
+
+        Notification::assertNotSentTo(
+            $user,
+            function (CheckinAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            }
+        );
+    }
+
+    private function fireCheckInEvent($asset, $user): void
+    {
         event(new CheckoutableCheckedIn(
             $asset,
             $user,
             User::factory()->checkinAssets()->create(),
             ''
         ));
-
-        Notification::assertNotSentTo(
-            [$user],
-            function (CheckinAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            }
-        );
     }
 }
