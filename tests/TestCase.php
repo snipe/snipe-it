@@ -24,11 +24,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUp(): void
     {
-        if (!file_exists(realpath(__DIR__ . '/../') . '/.env.testing')) {
-            throw new RuntimeException(
-                '.env.testing file does not exist. Aborting to avoid wiping your local database'
-            );
-        }
+        $this->guardAgainstMissingEnv();
 
         parent::setUp();
 
@@ -37,5 +33,14 @@ abstract class TestCase extends BaseTestCase
         $this->withoutMiddleware($this->globallyDisabledMiddleware);
 
         $this->initializeSettings();
+    }
+
+    private function guardAgainstMissingEnv(): void
+    {
+        if (!file_exists(realpath(__DIR__ . '/../') . '/.env.testing')) {
+            throw new RuntimeException(
+                '.env.testing file does not exist. Aborting to avoid wiping your local database.'
+            );
+        }
     }
 }
