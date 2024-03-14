@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+/**
+ * @group notifications
+ */
 class EmailNotificationsUponCheckinTest extends TestCase
 {
     use InteractsWithSettings;
