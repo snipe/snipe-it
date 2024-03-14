@@ -10,7 +10,7 @@ return [
     'create' => [
         'error'   		=> 'Активът не беше създаден. Моля опитайте отново.',
         'success' 		=> 'Активът създаден успешно.',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Артикул с етикет :tag беше създаден успешно. <strong><a href=":link" style="color: white;">Щракнете тук за да го видите</a></strong>.',
     ],
 
     'update' => [
@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Активът обновен успешно.',
         'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
         'no_assets_selected'  =>  'Няма избрани активи, така че нищо не бе обновено.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -51,7 +52,7 @@ return [
         'success'               => 'Вашият файл беше въведен.',
         'file_delete_success'   => 'Вашият файл беше изтрит успешно.',
         'file_delete_error'      => 'Файлът не е в състояние да бъде изтрит',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Избраният файл липсва',
         'header_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
         'content_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
     ],

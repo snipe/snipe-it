@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Bien actualisé correctement.',
         'nothing_updated'	=>  'Aucun champ n\'a été sélectionné, rien n\'a été actualisé.',
         'no_assets_selected'  =>  'Aucune ressource n\'a été sélectionnée, rien n\'a donc été mis à jour.',
+        'assets_do_not_exist_or_are_invalid' => 'Les ressources sélectionnées ne peuvent pas être mises à jour.',
     ],
 
     'restore' => [

@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Tài sản được cập nhật thành công.',
         'nothing_updated'	=>  'Bạn đã không chọn trường nào vì thế đã không có gì được cập nhật.',
         'no_assets_selected'  =>  'Không có tài sản nào được chọn, vì vậy không có gì cập nhật.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

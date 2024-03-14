@@ -201,6 +201,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Next',
     'next_audit_date'		=> 'Next Audit Date',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Last Audit',
     'new'					=> 'new!',
     'no_depreciation'		=> 'No Depreciation',
@@ -516,5 +517,6 @@ return [
                 'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
              ],
     ],
+    'no_requestable' => 'There are no requestable assets or asset models.',
 
 ];

@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Ostalo je samo :remaining_count slobodnih mesta za ovu licencu sa minimalnom količinom :min_amt. Možda bi ste želeli da razmotrite nabavku nove količine.',
+    'below_threshold_short' => 'Ovaj predmet je ispod minimuma potrebne količine.',
 );

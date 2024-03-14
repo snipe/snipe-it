@@ -2,37 +2,37 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
-    'not_found' => 'That accessory was not found.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Qalabka [:id] ma jiro',
+    'not_found' => 'Qalabkaas lama helin.',
+    'assoc_users'	 => 'Qalabkan waxa uu hadda hayaa :count walxo la hubiyay isticmaalayaasha Fadlan iska hubi agabka oo isku day markale. ',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Qalabka lama abuurin, fadlan isku day mar kale.',
+        'success' => 'Qalabka si guul leh ayaa loo sameeyay'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Qalabka lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Qalabka si guul leh ayaa loo cusboonaysiiyay'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Ma hubtaa inaad rabto inaad tirtirto qalabkan?',
+        'error'   => 'Waxaa jiray arrin la tirtiray qalabyada Fadlan isku day mar kale',
+        'success' => 'Qalabka si guul leh ayaa loo tirtiray'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Agabka lama hubin, fadlan isku day mar kale',
+        'success' 		=> 'Qalabka si guul leh ayaa loo hubiyay',
+        'unavailable'   => 'Agabka looma hayo hubinta Hubi tirada la heli karo',
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Agabka lama hubin, fadlan isku day mar kale',
+        'success' 		=> 'Qalabka si guul leh ayaa loo hubiyay',
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale'
     )
 
 

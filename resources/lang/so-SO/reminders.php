@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
-    "user"     => "Username or email address is incorrect",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "password" => "Erayada sirdoonku waa inay ahaadaan lix xaraf oo waa inay la mid noqdaan xaqiijinta.",
+    "user"     => "Magaca isticmaale ama cinwaanka iimaylka waa khalad",
+    "token"    => 'Calaamaddan dib-u-dejinta sirta ah waa mid aan sax ahayn ama dhacay, ama kuma habboona magaca isticmaale ee la bixiyay.',
+    'sent'	   => 'Haddii isticmaale u dhigma oo wata ciwaanka iimaylka saxda ah uu ku jiro nidaamkayaga, iimaylka soo kabashada erayga sirta ah ayaa la soo diray.',
 
 );

@@ -18,6 +18,7 @@ return [
         'success' 			=> 'تم تحديث الأصل بنجاح.',
         'nothing_updated'	=>  'لم يتم اختيار أي حقول، لذلك لم يتم تحديث أي شيء.',
         'no_assets_selected'  =>  'لم يتم اختيار أي أصول، لذلك لم يتم تحديث أي شيء.',
+        'assets_do_not_exist_or_are_invalid' => 'لا يمكن تحديث الأصول المحددة.',
     ],
 
     'restore' => [

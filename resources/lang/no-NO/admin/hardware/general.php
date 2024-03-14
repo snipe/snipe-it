@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Denne ressursen har en statusetikett som ikke er distribuerbar og kan ikke sjekkes ut på dette tidspunktet.',
     'view'  					=> 'Vis eiendel',
     'csv_error' => 'Du har en feil i din CSV-fil:',
-    'import_text' => '
-<p>
-    Last opp en CSV-fil som inneholder eiendelshistorikk. Eiendeler og brukere i fila MÅ allerede finnes i systemet, hvis ikke blir de oversett. Eiendelene blir matchet mot Eiendelsmerke (Asset Tag). Vi vil forsøke å finne en matchende bruker basert på brukerens navn og de kriteriene du spesifiserer under. Hvis du ikke spesifiserer noen kriterier vil vi forsøke å matche brukere på brukernavn-formatet som er satt opp i Admin &gt; Generelle innstillinger
-</p>
-
-    <p>CSV-fila må inneholde headerne <strong>Asset Tag, Name, Checkout Data, Checkin Date</strong>. Ekstra felter blir oversett.</p>
-
-    <p>Checkin Date: Tomme eller datoer i fremtiden vil sjekke ut eiendelen til den tilknyttede brukeren. Manger Checkin Date-kolonnen vil det føre til at innsjekk blir dagens dato.</p>
+    'import_text' => '<p>Last opp en CSV som inneholder eiendeler. Eiendelene og brukerne MÅ allerede finnes i systemet, ellers vil de bli hoppet over. Samsvarende ressurser for tidligere import skjer mot eiendeler. Vi vil prøve å finne en matchende bruker basert på navnet du oppgiver, og kriteriene du velger nedenfor. Hvis du ikke velger noen av kriteriene nedenfor, det vil bare prøve å matche på brukernavnet formatet du konfigurert i <code>Admin &gt; Generelle innstillinger</code>.</p><p>Felter som er inkludert i CSV, må samsvare med overskriftene: <strong>Asset Tag, Navn, Kasse Dato, Innsjekkingsdato</strong>. Eventuelle ekstra felt vil bli ignorert. </p><p>Innsjekkingsdato: tomme eller fremtidige sjekkingsdatoer vil kassere elementer til tilhørende bruker. Ekskluder kolonnen Sjekkinn dato vil opprette en avmerkingsdato med dagens dato.</p>
     ',
-    'csv_import_match_f-l' => 'Prøv å matche brukere med formatet fornavn.etternavn (eli.nordmann)',
-    'csv_import_match_initial_last' => 'Prøv å matche brukere med formatet initial+etternavn (enordmann)',
-    'csv_import_match_first' => 'Prøv å matche brukere med formatet fornavn (eli)',
-    'csv_import_match_email' => 'Prøv å matche brukere med e-post som brukernavn',
-    'csv_import_match_username' => 'Prøv å matche brukere med brukernavn',
+    'csv_import_match_f-l' => 'Prøv å matche brukere av <strong>firstname.lastname</strong> (<code>jane.smith</code>) format',
+    'csv_import_match_initial_last' => 'Prøv å matche brukere med <strong>første første etternavn</strong> (<code>jsmith</code>) format',
+    'csv_import_match_first' => 'Prøv å matche brukere med <strong>fornavn</strong> (<code>jane</code>) format',
+    'csv_import_match_email' => 'Prøv å matche brukere med <strong>email</strong> som brukernavn',
+    'csv_import_match_username' => 'Prøv å matche brukere av <strong>brukernavn</strong>',
     'error_messages' => 'Feilmeldinger:',
     'success_messages' => 'Suksessmeldinger:',
     'alert_details' => 'Vennligst se nedenfor for detaljer.',

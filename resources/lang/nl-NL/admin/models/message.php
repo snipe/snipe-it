@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Er was geen veld geselecteerd dus is er niks gewijzigd.',
         'success' 		=> 'Model met succes geüpdatet |:model_count modellen succesvol bijgewerkt.',
-        'warn'          => 'U staat op het punt om de eigenschappen van het volgende model te bewerken: |u staat op het punt de eigenschappen van de volgende :model_count modellen te bewerken:',
+        'warn'          => 'U staat op het punt om de eigenschappen van het volgende model bij te werken: u staat op het punt de eigenschappen van de volgende :model_count modellen te bewerken:',
 
     ),
 

@@ -686,17 +686,23 @@ class ReportsController extends Controller
 
                 $assets->whereBetween('assets.created_at', [$created_start, $created_end]);
             }
+
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
                 $checkout_start = \Carbon::parse($request->input('checkout_date_start'))->startOfDay();
-                $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
+                $checkout_end = \Carbon::parse($request->input('checkout_date_end',now()))->endOfDay();
 
-                $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
+                $actionlogassets = Actionlog::where('action_type','=', 'checkout')
+                                              ->where('item_type', 'LIKE', '%Asset%',)
+                                              ->whereBetween('action_date',[$checkout_start, $checkout_end])
+                                                  ->pluck('item_id');
+
+                $assets->whereIn('id',$actionlogassets);
             }
 
             if (($request->filled('checkin_date_start'))) {
                     $assets->whereBetween('last_checkin', [
                         Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
-                        // use today's date is `checkin_date_end` is not provided
+                        // use today's date if `checkin_date_end` is not provided
                         Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
                     ]);
             }
@@ -1170,6 +1176,10 @@ class ReportsController extends Controller
                     new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
                 );
             }
+        }
+
+        if ($assetItem->assignedTo->email == ''){
+            return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.no_email'));
         }
 
         return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));

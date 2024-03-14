@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Bene aggiornato con successo.',
         'nothing_updated'	=>  'Non è stato selezionato nessun campo, nulla è stato aggiornato.',
         'no_assets_selected'  =>  'Nessun asset è stato selezionato, quindi niente è stato eliminato.',
+        'assets_do_not_exist_or_are_invalid' => 'Gli asset selezionati non possono essere aggiornati.',
     ],
 
     'restore' => [

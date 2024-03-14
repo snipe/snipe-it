@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Este ativo possui uma etiqueta de status que não é implantável e não pode ser check-out no momento.',
     'view'  					=> 'Ver Ativo',
     'csv_error' => 'Você tem um erro no seu arquivo CSV:',
-    'import_text' => '
-    <p>
-    Envie um CSV que contém o histórico de ativos. Os ativos e usuários DEVEM já existir no sistema, ou eles serão ignorados. Correspondendo mídias para a importação de histórico acontece com a tag de conteúdo. Tentaremos encontrar um usuário correspondente com base no nome de usuário que você fornece, e nos critérios que você selecionar abaixo. Se você não selecionar nenhum critério abaixo, ele vai simplesmente tentar combinar com o formato de nome de usuário configurado nas configurações de Administrador &gt; Geral.
-    </p>
-
-    <p>Campos incluídos no CSV devem corresponder os cabeçalhos: <strong>Marcador de Ativo, Nome, data de check-out, data</strong>. check-in. Quaisquer campos adicionais serão ignorados. </p>
-
-    <p>Data de Checkin: em branco ou em datas futuras de check-in fará check-in dos itens para o usuário associado. Excluindo a coluna Data de check-in criará uma data de check-in com a data de hoje.</p>
+    'import_text' => '<p>Upload de um CSV que contém o histórico de ativos. Os ativos e usuários já existem no sistema, ou serão ignorados. Correspondência de mídias para o histórico de importação acontece com a tag de conteúdo. Tentaremos encontrar um usuário correspondente com base no nome de usuário que você fornece, e nos critérios que você selecionar abaixo. Se você não selecionar nenhum critério abaixo, ele simplesmente tentará combinar com o formato de nome de usuário configurado na <code>Administração &gt; Configurações Gerais</code>.</p><p>Campos incluídos no CSV devem corresponder aos cabeçalhos: <strong>Marcador de Ativo, Nome, Data de Finalização, Data de Entrada</strong>. Quaisquer campos adicionais serão ignorados. </p><p>Data de check-in: em branco ou em datas futuras de check-in fará check-in dos itens para o usuário associado. Excluindo a coluna Data de check-in criará uma data de check-in com a data de hoje.</p>
     ',
-    'csv_import_match_f-l' => 'Tente corresponder aos usuários pelo formato firstname.lastname (jane.smith)',
-    'csv_import_match_initial_last' => 'Tente combinar os usuários pelo primeiro formato de sobrenome (jsmith)',
-    'csv_import_match_first' => 'Tente combinar os usuários pelo formato do primeiro nome (jane)',
-    'csv_import_match_email' => 'Tentar corresponder aos usuários por e-mail como nome de usuário',
-    'csv_import_match_username' => 'Tente corresponder aos usuários pelo nome de usuário',
+    'csv_import_match_f-l' => 'Tente corresponder aos usuários por <strong>firstname.lastname</strong> (<code>jane.smith</code>) formato',
+    'csv_import_match_initial_last' => 'Tente coincidir com os usuários do formato <strong>primeiro sobrenome</strong> (<code>jsmith</code>)',
+    'csv_import_match_first' => 'Tente corresponder aos usuários pelo formato <strong>primeiro nome</strong> (<code>jane</code>)',
+    'csv_import_match_email' => 'Tentar corresponder usuários por <strong>email</strong> como nome de usuário',
+    'csv_import_match_username' => 'Tente corresponder aos usuários do nome <strong>nome de usuário</strong>',
     'error_messages' => 'Mensagens de erro:',
     'success_messages' => 'Mensagens de sucesso:',
     'alert_details' => 'Por favor, veja abaixo para detalhes.',

@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Bate is suksesvol opgedateer.',
         'nothing_updated'	=>  'Geen velde is gekies nie, dus niks is opgedateer nie.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Ang asset ay matagumpay na nai-update.',
         'nothing_updated'	=>  'Walang napiling mga fields, kaya walang nai-update.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

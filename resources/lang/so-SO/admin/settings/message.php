@@ -3,25 +3,25 @@
 return [
 
     'update' => [
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.',
+        'error'                 => 'Khalad ayaa dhacay markii la cusboonaysiiyay ',
+        'success'               => 'Dejinta si guul leh ayaa loo cusboonaysiiyay',
     ],
     'backup' => [
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
+        'delete_confirm'        => 'Ma hubtaa inaad jeclaan lahayd inaad tirtirto faylka kaydka ah? Tallaabadan lama noqon karo. ',
+        'file_deleted'          => 'Faylka kaabta ayaa si guul leh loo tirtiray ',
+        'generated'             => 'Fayl cusub oo gurmad ah ayaa si guul leh loo abuuray',
+        'file_not_found'        => 'Faylkaas kaydka ah ayaa laga waayay seerfarka.',
+        'restore_warning'       => 'Haa, soo celi Waxaan qirayaa in tani ay dib u qori doonto xog kasta oo hadda ku jirta kaydka xogta. Tani waxay sidoo kale ka saari doontaa dhammaan isticmaalayaashaada jira (oo ay ku jirto adiga).',
         'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
     ],
     'purge' => [
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.',
+        'error'     => 'Khalad ayaa dhacay markii la nadiifinayo ',
+        'validation_failed'     => 'Xaqiijinta nadiifintaadu waa khalad. Fadlan ku qor kelmadda "DELETE" sanduuqa xaqiijinta.',
+        'success'               => 'Diiwaanada la tirtiray ayaa si guul leh loo nadiifiyay',
     ],
     'mail' => [
         'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
+        'success' => 'Boostada waa la soo diray!',
         'error' => 'Mail could not be sent.',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],

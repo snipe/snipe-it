@@ -45,4 +45,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Istnieją tylko :remaining_count miejsc dla tej licencji z minimalną ilością :min_amt. Możesz rozważyć zakup większej liczby miejsc.',
+    'below_threshold_short' => 'Ta pozycja jest poniżej minimalnej wymaganej ilości.',
 );

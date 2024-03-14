@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Ifa libuyekezwe ngempumelelo.',
         'nothing_updated'	=>  'Awekho amasimu akhethiwe, ngakho-ke akukho lutho olubuyekeziwe.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
