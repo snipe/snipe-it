@@ -8,14 +8,14 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use RuntimeException;
 use Tests\Support\CustomTestMacros;
 use Tests\Support\InteractsWithAuthentication;
-use Tests\Support\InteractsWithSettings;
+use Tests\Support\InitializesSettings;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
     use CustomTestMacros;
     use InteractsWithAuthentication;
-    use InteractsWithSettings;
+    use InitializesSettings;
     use LazilyRefreshDatabase;
 
     private array $globallyDisabledMiddleware = [
@@ -34,9 +34,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->withoutMiddleware($this->globallyDisabledMiddleware);
 
-        if (collect(class_uses_recursive($this))->contains(InteractsWithSettings::class)) {
-            $this->initializeSettings();
-        }
+        $this->initializeSettings();
 
         $this->registerCustomMacros();
     }
