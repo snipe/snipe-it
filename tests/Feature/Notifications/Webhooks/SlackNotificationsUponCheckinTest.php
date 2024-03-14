@@ -14,7 +14,6 @@ use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\AssertsAgainstSlackNotifications;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -23,7 +22,6 @@ use Tests\TestCase;
  */
 class SlackNotificationsUponCheckinTest extends TestCase
 {
-    use AssertsAgainstSlackNotifications;
     use InteractsWithSettings;
 
     protected function setUp(): void
