@@ -393,7 +393,7 @@ class LdapSync extends Command
                 }
                 $assets = Asset::whereColumn('assigned_to', '=', $user->id)->get();
                     foreach($assets as $asset){
-                        $asset->location = $user->location_id;
+                        $asset->location_id = $user->location_id;
                     }
 
                 $user->ldap_import = 1;
