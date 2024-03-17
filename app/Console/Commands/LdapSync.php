@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Asset;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
@@ -390,6 +391,10 @@ class LdapSync extends Command
                         $user->location_id = $location->id;
                     }
                 }
+                $assets = Asset::whereColumn('assigned_to', '=', $user->id)->get();
+                    foreach($assets as $asset){
+                        $asset->location = $user->location_id;
+                    }
 
                 $user->ldap_import = 1;
 
