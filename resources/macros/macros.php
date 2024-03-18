@@ -43,7 +43,7 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
             $abbr = strtoupper($abbr);
         }
 
-        $select .= '<option value="'.$abbr.'"'.($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"'.'>'.$country.'</option> ';
+        $select .= '<option value="'.$abbr.'"'.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
     }
 
     $select .= '</select>';
