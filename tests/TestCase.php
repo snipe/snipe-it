@@ -6,12 +6,14 @@ use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use RuntimeException;
+use Tests\Support\AssertsAgainstSlackNotifications;
 use Tests\Support\CustomTestMacros;
 use Tests\Support\InteractsWithAuthentication;
 use Tests\Support\InitializesSettings;
 
 abstract class TestCase extends BaseTestCase
 {
+    use AssertsAgainstSlackNotifications;
     use CreatesApplication;
     use CustomTestMacros;
     use InteractsWithAuthentication;

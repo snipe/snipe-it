@@ -57,34 +57,4 @@ class CategoryTest extends TestCase
         $this->assertCount(5, $category->models);
         $this->assertEquals(10, $category->itemCount());
     }
-
-
-    // public function testACategoryCanHaveAccessories()
-    // {
-    //     $category = Category::factory()->assetDesktopCategory()->create();
-    //     Accessory::factory()->count(5)->appleBtKeyboard()->create(
-    //         [
-    //             'category_id' => $category->id
-    //         ]
-    //     );
-
-    //     $this->assertCount(5, $category->accessories);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
-
-    // public function testACategoryCanHaveConsumables()
-    // {
-    //     $category = $this->createValidCategory('consumable-paper-category');
-    //     \App\Models\Consumable::factory()->count(5)->cardstock()->create(['category_id' => $category->id]);
-    //     $this->assertCount(5, $category->consumables);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
-
-    // public function testACategoryCanHaveComponents()
-    // {
-    //     $category = $this->createValidCategory('component-ram-category');
-    //     \App\Models\Component::factory()->count(5)->ramCrucial4()->create(['category_id' => $category->id]);
-    //     $this->assertCount(5, $category->components);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
 }

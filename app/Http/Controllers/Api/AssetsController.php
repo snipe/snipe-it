@@ -1062,8 +1062,7 @@ class AssetsController extends Controller
 
         $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests')
-            ->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests');
 
 
 
@@ -1071,7 +1070,7 @@ class AssetsController extends Controller
         if ($request->filled('search')) {
             $assets->TextSearch($request->input('search'));
         }
-
+        
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
             if ($request->filled($field->db_column_name())) {
@@ -1101,6 +1100,7 @@ class AssetsController extends Controller
                 break;
         }
 
+        $assets->requestableAssets();
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');
