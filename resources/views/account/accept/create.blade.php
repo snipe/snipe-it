@@ -103,6 +103,24 @@
 @section('moar_scripts')
 
     <script nonce="{{ csrf_token() }}">
+        $(document).ready(function(){
+            // Initially hide the div
+            $('#declined_msg').hide();
+            $('#declined_msg_label').hide();
+
+
+            $('input[id="declined"]').change(function(){
+
+                if($(this).is(':checked')){
+                    $('#declined_msg_label').show();
+                    $('#declined_msg').show();
+                }
+                else {
+                    $('#declined_msg_label').hide();
+                    $('#declined_msg').hide();
+                }
+            });
+        });
         var wrapper = document.getElementById("signature-pad"),
             clearButton = wrapper.querySelector("[data-action=clear]"),
             saveButton = wrapper.querySelector("[data-action=save]"),
@@ -139,24 +157,7 @@
                 $('#signature_output').val(signaturePad.toDataURL());
             }
         });
-        $(document).ready(function(){
-            // Initially hide the div
-            $('#declined_msg').hide();
-            $('#declined_msg_label').hide();
 
-
-            $('input[id="declined"]').change(function(){
-
-                if($(this).is(':checked')){
-                    $('#declined_msg_label').show();
-                    $('#declined_msg').show();
-                }
-                else {
-                    $('#declined_msg_label').hide();
-                    $('#declined_msg').hide();
-                }
-            });
-        });
 
     </script>
 @stop

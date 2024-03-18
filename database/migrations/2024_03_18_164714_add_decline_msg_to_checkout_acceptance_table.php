@@ -14,7 +14,7 @@ class AddDeclineMsgToCheckoutAcceptanceTable extends Migration
     public function up()
     {
         Schema::table('checkout_acceptances', function (Blueprint $table) {
-            $table->string('declined_msg')->after('signature_filename');
+            $table->string('declined_msg')->after('signature_filename')->nullable();
         });
     }
 
