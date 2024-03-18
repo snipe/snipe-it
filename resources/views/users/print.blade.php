@@ -85,7 +85,9 @@
         @endphp
 
         <div id="assets-toolbar">
-            <h4>{{ trans_choice('general.countable.assets', $assets->count(), ['count' => $assets->count()]) }}</h4>
+            <h4>{{ trans_choice('general.countable.assets', $assets->count(), ['count' => $assets->count()]) }}
+                <small><a href="#" id="asset-showhide" class="hidden-print">(hide in print)</a></small>
+            </h4>
         </div>
 
         <table
@@ -95,7 +97,7 @@
                 data-id-table="AssetsAssigned"
                 data-search="false"
                 data-side-pagination="client"
-                data-sortable="false"
+                data-sortable="true"
                 data-toolbar="#assets-toolbar"
                 data-show-columns="true"
                 data-sort-order="desc"
@@ -103,16 +105,16 @@
                 data-show-columns-toggle-all="true"
                 data-cookie-id-table="AssetsAssigned">
             <thead>
-                <th data-field="asset_id" data-sortable="true" data-searchable="true" data-visible="true">#</th>
-                <th data-field="asset_image" data-sortable="true" data-searchable="false" data-visible="true">{{ trans('general.image') }}</th>
-                <th data-field="asset_tag" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th data-field="asset_name" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.name') }}</th>
-                <th data-field="asset_category" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.category') }}</th>
-                <th data-field="asset_model" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
-                <th data-field="asset_location" data-sortable="true" data-searchable="true" data-visible="false">{{ trans('general.location') }}</th>
-                <th data-field="asset_serial" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
-                <th data-field="asset_checkout_date" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                <th data-field="signature" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.signature') }}</th>
+                <th data-field="asset_id" data-sortable="false" data-visible="true" data-switchable="false">#</th>
+                <th data-field="asset_image" data-sortable="true" data-visible="false" data-switchable="true">{{ trans('general.image') }}</th>
+                <th data-field="asset_tag" data-sortable="true" data-visible="true" data-switchable="false">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th data-field="asset_name" data-sortable="true" data-visible="true">{{ trans('general.name') }}</th>
+                <th data-field="asset_category" data-sortable="true" data-visible="true">{{ trans('general.category') }}</th>
+                <th data-field="asset_model" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
+                <th data-field="asset_location" data-sortable="true" data-visible="false">{{ trans('general.location') }}</th>
+                <th data-field="asset_serial" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
+                <th data-field="asset_checkout_date" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th data-field="signature" data-sortable="true" data-visible="true">{{ trans('general.signature') }}</th>
             </thead>
             <tbody>
             @foreach ($assets as $asset)
@@ -186,7 +188,7 @@
                 data-id-table="licensessAssigned"
                 data-search="false"
                 data-side-pagination="client"
-                data-sortable="false"
+                data-sortable="true"
                 data-show-columns="true"
                 data-sort-order="desc"
                 data-sort-name="created_at"
@@ -194,10 +196,10 @@
                 data-cookie-id-table="licensessAssigned">
             <thead>
             <tr>
-                <th style="width: 20px;"></th>
-                <th style="width: 40%;">{{ trans('general.name') }}</th>
-                <th style="width: 50%;">{{ trans('admin/licenses/form.license_key') }}</th>
-                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th style="width: 20px;" data-sortable="false" data-switchable="false">#</th>
+                <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th style="width: 50%;" data-sortable="true">{{ trans('admin/licenses/form.license_key') }}</th>
+                <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
             </tr>
             </thead>
             @php
@@ -239,7 +241,7 @@
                 data-id-table="accessoriesAssigned"
                 data-search="false"
                 data-side-pagination="client"
-                data-sortable="false"
+                data-sortable="true"
                 data-show-columns="true"
                 data-sort-order="desc"
                 data-sort-name="created_at"
@@ -247,11 +249,11 @@
                 data-cookie-id-table="accessoriesAssigned">
             <thead>
             <tr>
-                <th style="width: 20px;"></th>
-                <th data-field="accessory_image" data-sortable="true" data-searchable="false" data-visible="true">{{ trans('general.image') }}</th>
-                <th style="width: 40%;">{{ trans('general.name') }}</th>
-                <th style="width: 50%;">{{ trans('general.category') }}</th>
-                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th style="width: 20px;" data-sortable="false" data-switchable="false">#</th>
+                <th data-field="accessory_image" data-sortable="true"  data-visible="true">{{ trans('general.image') }}</th>
+                <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
+                <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
             </tr>
             </thead>
             @php
@@ -292,7 +294,7 @@
                 data-id-table="consumablesAssigned"
                 data-search="false"
                 data-side-pagination="client"
-                data-sortable="false"
+                data-sortable="true"
                 data-show-columns="true"
                 data-sort-order="desc"
                 data-sort-name="created_at"
@@ -300,10 +302,10 @@
                 data-cookie-id-table="consumablesAssigned">
             <thead>
             <tr>
-                <th style="width: 20px;"></th>
-                <th style="width: 40%;">{{ trans('general.name') }}</th>
-                <th style="width: 50%;">{{ trans('general.category') }}</th>
-                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th style="width: 20px;" data-sortable="false" data-switchable="false"></th>
+                <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
+                <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
             </tr>
             </thead>
             @php
