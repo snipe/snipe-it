@@ -325,7 +325,7 @@ class AcceptanceController extends Controller
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
 
-            $acceptance->decline($sig_filename);
+            $acceptance->decline($sig_filename, $request->input('declined_msg'));
             $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
             $return_msg = trans('admin/users/message.declined');

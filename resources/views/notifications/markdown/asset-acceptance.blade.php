@@ -14,7 +14,7 @@
 | **{{ ucfirst(trans('general.declined')) }}** | {{ $declined_date }} |
 @endif
 @if (isset($declined_msg))
-| **{{ trans('mail.declined_note') }}** | {{ $declined_msg }} |
+| **{{ trans('general.declined_note') }}** | {{ $declined_msg }} |
 @endif
 @if ((isset($item_tag)) && ($item_tag!=''))
 | **{{ trans('mail.asset_tag') }}** | {{ $item_tag }} |
