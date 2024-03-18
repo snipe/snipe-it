@@ -99,10 +99,10 @@ class CheckoutAcceptance extends Model
      *
      * @param  string $signature_filename
      */
-    public function decline($signature_filename, $declined_msg = null)
+    public function decline($signature_filename, $declined_message = null)
     {
         $this->declined_at = now();
-        $this->declined_msg = $declined_msg;
+        $this->declined_message = $declined_message;
         $this->signature_filename = $signature_filename;
         $this->save();
 

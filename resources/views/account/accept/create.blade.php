@@ -67,10 +67,10 @@
                         <div class="col-md-12">
                             <br>
                             <div class="col-md-12" style="display:block;">
-                                <label id="declined_msg_label" for="declined_msg" style="text-align:center;">{{trans('admin/settings/general.decline_msg')}}</label>
+                                <label id="declined_message_label" for="declined_message" style="text-align:center;" >{{trans('admin/settings/general.decline_message')}}</label>
                             </div>
                             <div class="col-md-12">
-                                <textarea id="declined_msg" name="declined_msg" rows="4" cols="50" value="decline_msg"></textarea>
+                                <textarea id="declined_message" name="declined_message" rows="4" cols="50" value="declined_message" ></textarea>
                             </div>
                         </div>
 
@@ -104,20 +104,20 @@
 
     <script nonce="{{ csrf_token() }}">
         $(document).ready(function(){
-            // Initially hide the div
-            $('#declined_msg').hide();
-            $('#declined_msg_label').hide();
+
+            $('#declined_message').hide();
+            $('#declined_message_label').hide();
 
 
             $('input[id="declined"]').change(function(){
 
                 if($(this).is(':checked')){
-                    $('#declined_msg_label').show();
-                    $('#declined_msg').show();
+                    $('#declined_message_label').show();
+                    $('#declined_message').show();
                 }
                 else {
-                    $('#declined_msg_label').hide();
-                    $('#declined_msg').hide();
+                    $('#declined_message_label').hide();
+                    $('#declined_message').hide();
                 }
             });
         });
