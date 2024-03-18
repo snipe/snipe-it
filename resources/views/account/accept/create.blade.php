@@ -64,12 +64,13 @@
                             </label>
 
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-3" style="display:block; text-align:center;">
-                                {{ Form::label('decline_msg', trans('admin/settings/general.decling_msg')) }}
+                        <div class="col-md-12">
+                            <br>
+                            <div class="col-md-12" style="display:block;">
+                                <label id="declined_msg_label" for="declined_msg" style="text-align:center;">{{trans('admin/settings/general.decline_msg')}}</label>
                             </div>
-                            <div class="col-md-8">
-                                <textarea id="decline_msg" name="decline_msg" rows="4" cols="50"></textarea>
+                            <div class="col-md-12">
+                                <textarea id="declined_msg" name="declined_msg" rows="4" cols="50" value="decline_msg"></textarea>
                             </div>
                         </div>
 
@@ -140,15 +141,19 @@
         });
         $(document).ready(function(){
             // Initially hide the div
-            $('#decline_msg').hide();
+            $('#declined_msg').hide();
+            $('#declined_msg_label').hide();
+
 
             $('input[id="declined"]').change(function(){
 
                 if($(this).is(':checked')){
-                    $('#decline_msg').show();
+                    $('#declined_msg_label').show();
+                    $('#declined_msg').show();
                 }
                 else {
-                    $('#decline_msg').hide();
+                    $('#declined_msg_label').hide();
+                    $('#declined_msg').hide();
                 }
             });
         });

@@ -293,6 +293,7 @@ return [
     'user'					=> 'User',
     'accepted'			    => 'accepted',
     'declined'			    => 'declined',
+    'declined_notes'        => 'Declined Notes',
     'unassigned'            => 'Unassigned',
     'unaccepted_asset_report' => 'Unaccepted Assets',
     'users'                 => 'Users',

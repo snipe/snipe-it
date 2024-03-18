@@ -306,10 +306,12 @@ class AcceptanceController extends Controller
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
             }
+
             $data = [
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
+                'declined_msg' => $request->input('declined_msg'),
                 'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
                 'assigned_to' => $assigned_to,
