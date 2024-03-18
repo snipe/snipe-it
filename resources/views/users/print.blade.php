@@ -23,9 +23,8 @@
             padding: 20px;
         }
         table.inventory {
-            border: solid #000;
-            border-width: 1px 1px 1px 1px;
             width: 100%;
+            border: 1px solid #d3d3d3;
         }
 
         @page {
@@ -41,6 +40,7 @@
             margin-top: 20px;
             margin-bottom: 10px;
         }
+
 
     </style>
 
@@ -99,24 +99,22 @@
                 data-show-columns-toggle-all="true"
                 data-cookie-id-table="AssetsAssigned">
             <thead>
-
-                <th data-field="id" data-sortable="true" data-searchable="true" data-visible="true">#</th>
-                <th data-field="image" data-sortable="true" data-searchable="false" data-visible="true">{{ trans('general.image') }}</th>
+                <th data-field="asset_id" data-sortable="true" data-searchable="true" data-visible="true">#</th>
+                <th data-field="asset_image" data-sortable="true" data-searchable="false" data-visible="true">{{ trans('general.image') }}</th>
                 <th data-field="asset_tag" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th data-field="name" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.name') }}</th>
-                <th data-field="category" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.category') }}</th>
-                <th data-field="model" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
-                <th data-field="location" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.location') }}</th>
-                <th data-field="serial" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
-                <th data-field="checkout_date" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th data-field="asset_name" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.name') }}</th>
+                <th data-field="asset_category" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.category') }}</th>
+                <th data-field="asset_model" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
+                <th data-field="asset_location" data-sortable="true" data-searchable="true" data-visible="false">{{ trans('general.location') }}</th>
+                <th data-field="asset_serial" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
+                <th data-field="asset_checkout_date" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
                 <th data-field="signature" data-sortable="true" data-searchable="true" data-visible="true">{{ trans('general.signature') }}</th>
-
             </thead>
             <tbody>
             @foreach ($assets as $asset)
 
                 <tr>
-                    <td data-sortable="false">{{ $counter }}</td>
+                    <td>{{ $counter }}</td>
                     <td>
                         @if ($asset->getImageUrl())
                             <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
@@ -127,10 +125,9 @@
                     <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
                     <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
                     <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
-                    <td>{{ $asset->name }}</td>
                     <td>{{ $asset->serial }}</td>
                     <td>
-                        {{ $asset->last_checkout }}</td>
+                        {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}</td>
                     <td>
                         @if (($asset->assetlog->first()) && ($asset->assetlog->first()->accept_signature!=''))
                             <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
