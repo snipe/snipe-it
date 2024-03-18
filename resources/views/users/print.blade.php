@@ -334,19 +334,34 @@
         </table>
     @endif
 
-    <table style="margin-top: 20px;">
-        <tr style="height: 100px;">
-            <td style="padding-right: 10px;">{{ trans('general.signed_off_by') }}:</td>
-            <td style="padding-right: 10px;">________________________________________________________</td>
-            <td style="padding-right: 10px;">{{ trans('general.date') }}:</td>
-            <td>________________________________________________________</td>
+    <table style="margin-top: 80px;">
+        <tr>
+            <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('general.signed_off_by') }}:</td>
+            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
+            <td>_____________________</td>
+        </tr>
+        <tr style="height: 80px;">
+            <td></td>
+            <td style="padding-right: 10px; vertical-align: top;">Name</td>
+            <td style="padding-right: 10px; vertical-align: top;">Signature</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('admin/users/table.manager') }}:</td>
+            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
+            <td>_____________________</td>
         </tr>
         <tr>
-            <td style="padding-right: 10px;">{{ trans('admin/users/table.manager') }}:</td>
-            <td style="padding-right: 10px;">________________________________________________________</td>
-            <td style="padding-right: 10px;">{{ trans('general.date') }}:</td>
-            <td>________________________________________________________</td>
+            <td></td>
+            <td style="padding-right: 10px; vertical-align: top;">Name</td>
+            <td style="padding-right: 10px; vertical-align: top;">Signature</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
+            <td></td>
         </tr>
+
     </table>
 
 {{-- Javascript files --}}
