@@ -58,7 +58,6 @@
     "league/flysystem-aws-s3-v3": "^1.0",
     "league/flysystem-cached-adapter": "^1.1",
     "livewire/livewire": "^2.4",
-    "mediconesystems/livewire-datatables": "^0.5.0",
     "neitanod/forceutf8": "^2.0",
     "nesbot/carbon": "^2.32",
     "nunomaduro/collision": "^5.4",
