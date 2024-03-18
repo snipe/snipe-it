@@ -64,6 +64,14 @@
                             </label>
 
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-3" style="display:block; text-align:center;">
+                                {{ Form::label('decline_msg', trans('admin/settings/general.decling_msg')) }}
+                            </div>
+                            <div class="col-md-8">
+                                <textarea id="decline_msg" name="decline_msg" rows="4" cols="50"></textarea>
+                            </div>
+                        </div>
 
                         @if ($snipeSettings->require_accept_signature=='1')
                             <div class="col-md-12">
@@ -129,6 +137,20 @@
             } else {
                 $('#signature_output').val(signaturePad.toDataURL());
             }
+        });
+        $(document).ready(function(){
+            // Initially hide the div
+            $('#decline_msg').hide();
+
+            $('input[id="declined"]').change(function(){
+
+                if($(this).is(':checked')){
+                    $('#decline_msg').show();
+                }
+                else {
+                    $('#decline_msg').hide();
+                }
+            });
         });
 
     </script>
