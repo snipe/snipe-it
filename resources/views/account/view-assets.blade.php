@@ -521,7 +521,7 @@
                     @else
                       ------------
                     @endcan
-                    <td>{{ $license->category->name }}</td>
+                    <td>{{ ($license->category) ? $license->category->name : trans('general.deleted') }}</td>
                   </tr>
                 @endforeach
                 </tbody>
