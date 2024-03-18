@@ -73,15 +73,19 @@
     @endif
 @endif
 
-<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
+<h3>
+    {{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}
+    {{ ($show_user->employee_num!='') ? ' (#'.$show_user->employee_num.') ' : '' }}
+    {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
 </h3>
+<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}</body>
     @if ($assets->count() > 0)
         @php
             $counter = 1;
         @endphp
 
         <div id="assets-toolbar">
-            <h4>{{ trans('general.assets') }}</h4>
+            <h4>{{ trans_choice('general.countable.assets', $assets->count(), ['count' => $assets->count()]) }}</h4>
         </div>
 
         <table
@@ -171,7 +175,7 @@
 
     @if ($licenses->count() > 0)
         <div id="licenses-toolbar">
-            <h4>{{ trans('general.licenses') }}</h4>
+            <h4>{{ trans_choice('general.countable.licenses', $licenses->count(), ['count' => $licenses->count()]) }}</h4>
         </div>
 
         <table
@@ -224,7 +228,7 @@
 
     @if ($accessories->count() > 0)
         <div id="accessories-toolbar">
-            <h4>{{ $accessories->count() }} {{ trans('general.accessories') }}</h4>
+            <h4>{{ trans_choice('general.countable.accessories', $accessories->count(), ['count' => $accessories->count()]) }}</h4>
         </div>
 
         <table
@@ -244,6 +248,7 @@
             <thead>
             <tr>
                 <th style="width: 20px;"></th>
+                <th data-field="accessory_image" data-sortable="true" data-searchable="false" data-visible="true">{{ trans('general.image') }}</th>
                 <th style="width: 40%;">{{ trans('general.name') }}</th>
                 <th style="width: 50%;">{{ trans('general.category') }}</th>
                 <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
@@ -257,6 +262,11 @@
                 @if ($accessory)
                     <tr>
                         <td>{{ $acounter }}</td>
+                        <td>
+                            @if ($accessory->getImageUrl())
+                                <img src="{{ $accessory->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
+                            @endif
+                        </td>
                         <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                         <td>{{ $accessory->category->name }}</td>
                         <td>{{ $accessory->pivot->created_at }}</td>
@@ -271,7 +281,7 @@
 
     @if ($consumables->count() > 0)
         <div id="consumables-toolbar">
-            <h4>{{ $consumables->count() }} {{ trans('general.consumables') }}</h4>
+            <h4>{{ trans_choice('general.countable.consumables', $consumables->count(), ['count' => $consumables->count()]) }}</h4>
         </div>
 
         <table
@@ -324,17 +334,17 @@
         </table>
     @endif
 
-    <br>
-    <br>
-    {{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
-    <br>
-    <br>
-    <table>
-        <tr>
-            <td>{{ trans('general.signed_off_by') }}:</td>
+    <table style="margin-top: 20px;">
+        <tr style="height: 100px;">
+            <td style="padding-right: 10px;">{{ trans('general.signed_off_by') }}:</td>
+            <td style="padding-right: 10px;">________________________________________________________</td>
+            <td style="padding-right: 10px;">{{ trans('general.date') }}:</td>
             <td>________________________________________________________</td>
-            <td></td>
-            <td>{{ trans('general.date') }}:</td>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px;">{{ trans('admin/users/table.manager') }}:</td>
+            <td style="padding-right: 10px;">________________________________________________________</td>
+            <td style="padding-right: 10px;">{{ trans('general.date') }}:</td>
             <td>________________________________________________________</td>
         </tr>
     </table>
