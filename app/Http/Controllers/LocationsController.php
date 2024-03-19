@@ -351,7 +351,7 @@ class LocationsController extends Controller
             if ($error_count > 0) {
                 return redirect()
                     ->route('locations.index')
-                    ->with('warning', trans('general.bulk.partial_success',
+                    ->with('warning', trans('general.bulk.partial',
                         ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')]
                     ));
                 }
