@@ -27,6 +27,16 @@ class AssetUpdateTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testGivenPermissionUpdateAssetIsAllower()
+
+    {
+        $asset = Asset::factory()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id))
+            ->assertOk();
+    }
+
     public function testAllAssetAttributesAreStored()
     {
         $asset = Asset::factory()->create();
@@ -89,29 +99,44 @@ class AssetUpdateTest extends TestCase
         $this->assertEquals(10, $updatedAsset->warranty_months);
     }
 
-    public function testArchivedDepreciateAndPhysicalCanBeNull()
+    public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated()
     {
-        $model = AssetModel::factory()->ipadModel()->create();
-        $status = Statuslabel::factory()->create();
+        $model = AssetModel::factory()->mbp13Model()->create();
         $asset = Asset::factory()->create();
 
         $this->settings->enableAutoIncrement();
 
-        $response = $this->actingAsForApi(User::factory()->superuser()->create())
-            ->patchJson(route('api.assets.update', $asset->id), [
-                'archive' => null,
-                'depreciate' => null,
-                'physical' => null
+        $response = $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson((route('api.assets.update', $asset->id)), [
+                'model_id' => $model->id,
+                'purchase_date' => '2021-01-01',
             ])
-            ->dd()
+            //->dd()
             ->assertOk()
             ->assertStatusMessageIs('success')
             ->json();
 
-        $asset = Asset::find($response['payload']['id']);
-        $this->assertEquals(0, $asset->archived);
-        $this->assertEquals(1, $asset->physical);
-        $this->assertEquals(0, $asset->depreciate);
+        $this->assertEquals('2024-01-01', $asset->asset_eol_date);
+    }
+
+    public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet()
+    {
+        $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'name' => 'test asset',
+                'asset_eol_date' => '2022-01-01'
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $asset->refresh();
+
+        $this->assertEquals('2022-01-01', $asset->asset_eol_date);
     }
 
 }

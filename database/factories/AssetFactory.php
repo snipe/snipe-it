@@ -48,6 +48,7 @@ class AssetFactory extends Factory
             'assigned_type' => null,
             'next_audit_date' => null,
             'last_checkout' => null,
+            'asset_eol_date' => null
         ];
     }
    
@@ -351,5 +352,15 @@ class AssetFactory extends Factory
     public function nonrequestable()
     {
         return $this->state(['requestable' => false]);
+    }
+
+    public function noPurchaseOrEolDate()
+    {
+        return $this->afterCreating(function (Asset $asset) {
+            $asset->update([
+                'purchase_date' => null,
+                'asset_eol_date' => null
+            ]);
+        });
     }
 }

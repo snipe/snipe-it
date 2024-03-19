@@ -153,7 +153,6 @@ class AssetStoreTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('success')
             ->json();
-        return $response;
 
         $asset = Asset::find($response['payload']['id']);
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
