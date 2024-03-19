@@ -16,7 +16,7 @@ class UpdateLegacyLocations extends Migration
         //
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('locale', 5)->nullable()->default(config('app.fallback_locale'))->change();
+            $table->string('locale', 10)->nullable()->default('en-US')->change();
         });
     }
 
