@@ -86,7 +86,6 @@
 
         <div id="assets-toolbar">
             <h4>{{ trans_choice('general.countable.assets', $assets->count(), ['count' => $assets->count()]) }}
-                <small><a href="#" id="asset-showhide" class="hidden-print">(hide in print)</a></small>
             </h4>
         </div>
 
