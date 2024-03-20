@@ -35,6 +35,7 @@ class ConsumablePresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => false,
                 'title' => trans('general.name'),
                 'visible' => true,
                 'formatter' => 'consumablesLinkFormatter',
