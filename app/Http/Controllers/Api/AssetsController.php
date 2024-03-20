@@ -629,14 +629,12 @@ class AssetsController extends Controller
         // this is _always_ filled now, see UpdateAssetRequest
         // i'm leaving it like this for now, but when would we ever want model_id to be `null`??
         // it actually breaks at the model validation if it gets to null...
-        ($request->validated()['model_id']) ?
+        ($request->has('model_id')) ?
             $asset->model()->associate(AssetModel::find($request->validated()['model_id'])) : null;
-        //($request->validated()['rtd_location_id']) ?
-        //    $asset->location_id = $request->validated()['rtd_location_id'] : '';
-        //($request->validated()['company_id']) ?
-        //    $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']) : '';
-        //($request->validated()['rtd_location_id']) ?
-        //    $asset->location_id = $request->validated()['rtd_location_id'] : null;
+        ($request->has('company_id')) ?
+            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']) : null;
+        ($request->has('rtd_location_id')) ?
+            $asset->location_id = $request->validated()['rtd_location_id'] : null;
 
         /**
          * this is here just legacy reasons. Api\AssetController

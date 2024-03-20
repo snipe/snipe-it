@@ -29,13 +29,15 @@ class AssetUpdateTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testGivenPermissionUpdateAssetIsAllower()
+    public function testGivenPermissionUpdateAssetIsAllowed()
 
     {
         $asset = Asset::factory()->create();
 
         $this->actingAsForApi(User::factory()->editAssets()->create())
-            ->patchJson(route('api.assets.update', $asset->id))
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'name' => 'test'
+            ])
             ->assertOk();
     }
 
@@ -103,20 +105,19 @@ class AssetUpdateTest extends TestCase
 
     public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated()
     {
-        $model = AssetModel::factory()->mbp13Model()->create();
-        $asset = Asset::factory()->create();
+        $asset = Asset::factory()->laptopMbp()->create();
 
         $this->settings->enableAutoIncrement();
 
         $response = $this->actingAsForApi(User::factory()->editAssets()->create())
             ->patchJson((route('api.assets.update', $asset->id)), [
-                'model_id' => $model->id,
                 'purchase_date' => '2021-01-01',
             ])
-            //->dd()
             ->assertOk()
             ->assertStatusMessageIs('success')
             ->json();
+
+        $asset->refresh();
 
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
     }
