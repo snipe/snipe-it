@@ -661,7 +661,7 @@ class UsersController extends Controller
                 $user = User::find($request->get('id'));
                 $user->two_factor_secret = null;
                 $user->two_factor_enrolled = 0;
-                $user->save();
+                $user->saveQuietly();
 
                 // Log the reset
                 $logaction = new Actionlog();
