@@ -362,6 +362,8 @@ class AssetFactory extends Factory
                 'purchase_date' => null,
                 'asset_eol_date' => null
             ]);
+        });
+    }
     /**
      * This allows bypassing model level validation if you want to purposefully
      * create an asset in an invalid state. Validation is turned back on
