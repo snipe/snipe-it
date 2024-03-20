@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'select_company' => 'Select Company',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'select_company' => 'Dooro Shirkad',
+    'about_companies' => 'Ku saabsan Shirkadaha',
+    'about_companies_description' => '        Waxaad u isticmaali kartaa shirkadaha sidii goob wargelineed oo fudud, ama waxaad u isticmaali kartaa si aad u xaddiddo muuqaalka hantida iyo helitaanka isticmaalayaasha shirkad gaar ah adiga oo awood u siinaya Taageerada Shirkadda Buuxa ee goobaha maamulkaaga.',
 ];

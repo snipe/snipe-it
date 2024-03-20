@@ -337,11 +337,21 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
+
+                      @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
+                        <span data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold', ['remaining_count' => $license->remaincount(), 'min_amt' => $license->min_amt]) }}"><i class="fas fa-exclamation-triangle text-danger" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.warning') }}</span>
+                        </span>
+                      @endif
+
                       {{ $license->seats }}
+                        @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
+
+                        @endif
+
                     </div>
                   </div>
                   @endif
-
 
 
                   <div class="row">

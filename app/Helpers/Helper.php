@@ -11,6 +11,7 @@ use App\Models\CustomFieldset;
 use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
+use App\Models\License;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Image;
@@ -715,18 +716,19 @@ class Helper
      */
     public static function checkLowInventory()
     {
+        $alert_threshold = \App\Models\Setting::getSettings()->alert_threshold;
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
         $components = Component::whereNotNull('min_amt')->get();
         $asset_models = AssetModel::where('min_amt', '>', 0)->get();
+        $licenses = License::where('min_amt', '>', 0)->get();
 
-        $avail_consumables = 0;
         $items_array = [];
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
             $avail = $consumable->numRemaining();
-            if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
+            if ($avail < ($consumable->min_amt) + $alert_threshold) {
                 if ($consumable->qty > 0) {
                     $percent = number_format((($avail / $consumable->qty) * 100), 0);
                 } else {
@@ -745,7 +747,7 @@ class Helper
 
         foreach ($accessories as $accessory) {
             $avail = $accessory->qty - $accessory->users_count;
-            if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
+            if ($avail < ($accessory->min_amt) + $alert_threshold) {
                 if ($accessory->qty > 0) {
                     $percent = number_format((($avail / $accessory->qty) * 100), 0);
                 } else {
@@ -764,7 +766,7 @@ class Helper
 
         foreach ($components as $component) {
             $avail = $component->numRemaining();
-            if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
+            if ($avail < ($component->min_amt) + $alert_threshold) {
                 if ($component->qty > 0) {
                     $percent = number_format((($avail / $component->qty) * 100), 0);
                 } else {
@@ -787,7 +789,7 @@ class Helper
             $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
             $avail = $asset->where('model_id', '=', $asset_model->id)->whereNull('assigned_to')->count();
 
-            if ($avail < ($asset_model->min_amt)+ \App\Models\Setting::getSettings()->alert_threshold) {
+            if ($avail < ($asset_model->min_amt) + $alert_threshold) {
                 if ($avail > 0) {
                     $percent = number_format((($avail / $total_owned) * 100), 0);
                 } else {
@@ -801,6 +803,26 @@ class Helper
                 $items_array[$all_count]['min_amt'] = $asset_model->min_amt;
                 $all_count++;
             }
+        }
+
+        foreach ($licenses as $license){
+            $avail = $license->remaincount();
+            if ($avail < ($license->min_amt) + $alert_threshold) {
+                if ($avail > 0) {
+                    $percent = number_format((($avail / $license->min_amt) * 100), 0);
+                } else {
+                    $percent = 100;
+                }
+
+                $items_array[$all_count]['id'] = $license->id;
+                $items_array[$all_count]['name'] = $license->name;
+                $items_array[$all_count]['type'] = 'licenses';
+                $items_array[$all_count]['percent'] = $percent;
+                $items_array[$all_count]['remaining'] = $avail;
+                $items_array[$all_count]['min_amt'] = $license->min_amt;
+                $all_count++;
+            }
+
         }
 
         return $items_array;
@@ -820,7 +842,7 @@ class Helper
         $filetype = @finfo_file($finfo, $file);
         finfo_close($finfo);
 
-        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif')) {
+        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif') || ($filetype == 'image/avif')) {
             return $filetype;
         }
 
@@ -1084,6 +1106,8 @@ class Helper
             'jpeg'   => 'far fa-image',
             'gif'   => 'far fa-image',
             'png'   => 'far fa-image',
+            'webp'   => 'far fa-image',
+            'avif'   => 'far fa-image',
             // word
             'doc'   => 'far fa-file-word',
             'docx'   => 'far fa-file-word',
@@ -1119,6 +1143,8 @@ class Helper
                 case 'jpeg':
                 case 'gif':
                 case 'png':
+                case 'webp':
+                case 'avif':
                     return true;
                     break;
                 default:

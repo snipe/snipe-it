@@ -14,6 +14,7 @@ use App\View\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\CustomField;
@@ -93,6 +94,59 @@ class BulkAssetsController extends Controller
 
         $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('assets.id', $asset_ids);
 
+        $assets = $assets->get();
+
+        if ($assets->isEmpty()) {
+            Log::debug('No assets were found for the provided IDs', ['ids' => $asset_ids]);
+            return redirect()->back()->with('error', trans('admin/hardware/message.update.assets_do_not_exist_or_are_invalid'));
+        }
+
+        $models = $assets->unique('model_id');
+        $modelNames = [];
+        foreach($models as $model) {
+            $modelNames[] = $model->model->name;
+        }
+
+        if ($request->filled('bulk_actions')) {
+
+
+            switch ($request->input('bulk_actions')) {
+                case 'labels':
+                    $this->authorize('view', Asset::class);
+
+                    return (new Label)
+                        ->with('assets', $assets)
+                        ->with('settings', Setting::getSettings())
+                        ->with('bulkedit', true)
+                        ->with('count', 0);
+
+                case 'delete':
+                    $this->authorize('delete', Asset::class);
+                    $assets->each(function ($assets) {
+                        $this->authorize('delete', $assets);
+                    });
+
+                    return view('hardware/bulk-delete')->with('assets', $assets);
+
+                case 'restore':
+                    $this->authorize('update', Asset::class);
+                    $assets = Asset::withTrashed()->find($asset_ids);
+                    $assets->each(function ($asset) {
+                        $this->authorize('delete', $asset);
+                    });
+                    return view('hardware/bulk-restore')->with('assets', $assets);
+
+                case 'edit':
+                    $this->authorize('update', Asset::class);
+
+                    return view('hardware/bulk')
+                        ->with('assets', $asset_ids)
+                        ->with('statuslabel_list', Helper::statusLabelList())
+                        ->with('models', $models->pluck(['model']))
+                        ->with('modelNames', $modelNames);
+            }
+        }
+
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -126,54 +180,6 @@ class BulkAssetsController extends Controller
             default:
                 $assets->orderBy($column_sort, $order);
                 break;
-        }
-
-        $assets = $assets->get();
-
-        $models = $assets->unique('model_id');
-        $modelNames = [];
-        foreach($models as $model) {
-            $modelNames[] = $model->model->name;
-        }
-
-        if ($request->filled('bulk_actions')) {
-
-
-            switch ($request->input('bulk_actions')) {
-                case 'labels':
-                    $this->authorize('view', Asset::class);
-
-                    return (new Label)
-                        ->with('assets', $assets)
-                        ->with('settings', Setting::getSettings())
-                        ->with('bulkedit', true)
-                        ->with('count', 0);
-
-                case 'delete':
-                    $this->authorize('delete', Asset::class);
-                    $assets->each(function ($assets) {
-                        $this->authorize('delete', $assets);
-                    });
-
-                    return view('hardware/bulk-delete')->with('assets', $assets);
-                   
-                case 'restore':
-                    $this->authorize('update', Asset::class);
-                    $assets = Asset::withTrashed()->find($asset_ids);
-                    $assets->each(function ($asset) {
-                        $this->authorize('delete', $asset);
-                    });
-                    return view('hardware/bulk-restore')->with('assets', $assets);
-
-                case 'edit':
-                    $this->authorize('update', Asset::class);
-
-                    return view('hardware/bulk')
-                        ->with('assets', $asset_ids)
-                        ->with('statuslabel_list', Helper::statusLabelList())
-                        ->with('models', $models->pluck(['model']))
-                        ->with('modelNames', $modelNames);
-            }
         }
 
         return redirect()->back()->with('error', 'No action selected');

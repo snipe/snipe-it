@@ -8,7 +8,6 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -290,12 +289,13 @@ class AssetFactory extends Factory
         });
     }
 
-    public function assignedToUser()
+    public function assignedToUser(User $user = null)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($user) {
             return [
-                'assigned_to' => User::factory(),
+                'assigned_to' => $user->id ?? User::factory(),
                 'assigned_type' => User::class,
+                'last_checkout' => now()->subDay(),
             ];
         });
     }
@@ -354,6 +354,7 @@ class AssetFactory extends Factory
         return $this->state(['requestable' => false]);
     }
 
+
     public function noPurchaseOrEolDate()
     {
         return $this->afterCreating(function (Asset $asset) {
@@ -361,6 +362,18 @@ class AssetFactory extends Factory
                 'purchase_date' => null,
                 'asset_eol_date' => null
             ]);
+    /**
+     * This allows bypassing model level validation if you want to purposefully
+     * create an asset in an invalid state. Validation is turned back on
+     * after the model is created via the factory.
+     * @return AssetFactory
+     */
+    public function canBeInvalidUponCreation()
+    {
+        return $this->afterMaking(function (Asset $asset) {
+            $asset->setValidating(false);
+        })->afterCreating(function (Asset $asset) {
+            $asset->setValidating(true);
         });
     }
 }

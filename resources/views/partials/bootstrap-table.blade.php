@@ -73,7 +73,7 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h2>';
             },
             icons: {
                 advancedSearchIcon: 'fas fa-search-plus',
@@ -86,7 +86,6 @@
                 clearSearch: 'fa-times'
             },
                 exportOptions: export_options,
-
             exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
@@ -411,13 +410,11 @@
         // add some stuff to get the value of the select2 option here?
 
         if ((row.available_actions) && (row.available_actions.bulk_selectable) && (row.available_actions.bulk_selectable.delete !== true)) {
-            console.log('value for ID ' + row.id + ' is NOT true:' + row.available_actions.bulk_selectable.delete);
             return {
                 disabled:true,
                 //checked: false, <-- not sure this will work the way we want?
             }
         }
-        console.log('value for ID ' + row.id + ' IS true:' + row.available_actions.bulk_selectable.delete);
     }
 
 
@@ -619,6 +616,18 @@
             frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
         }
         return frags.join(' ');
+    }
+
+    // Show the warning if below min qty
+    function minAmtFormatter(row, value) {
+
+        if ((row) && (row!=undefined)) {
+            if (value.free_seats_count <= value.min_amt) {
+                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}">' + value.min_amt + '</span>';
+            }
+            return value.min_amt
+        }
+
     }
 
 

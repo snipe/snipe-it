@@ -35,7 +35,7 @@ return [
     ],
     'webhook' => [
         'sending' => ':app tesztüzenet küldése...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'A :webhook_name integráció működik!',
         'success_pt1' => 'Siker! Ellenőrizze a ',
         'success_pt2' => ' csatornát a tesztüzenethez, és ne felejtsen el a MENTÉS gombra kattintani a beállítások tárolásához.',
         '500' => '500 Szerverhiba.',

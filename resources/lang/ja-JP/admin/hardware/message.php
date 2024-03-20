@@ -19,6 +19,7 @@ return [
         'success' 			=> '資産は正常に更新されました。',
         'nothing_updated'	=>  'フィールドが選択されていないため、更新されませんでした。',
         'no_assets_selected'  =>  '資産が選択されていないため、何も更新されませんでした。',
+        'assets_do_not_exist_or_are_invalid' => '選択したアセットは更新できません。',
     ],
 
     'restore' => [
