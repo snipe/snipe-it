@@ -631,7 +631,6 @@ class AssetsController extends Controller
     {
         $asset->fill($request->validated());
 
-
         if ($request->has('model_id')) {
             $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
         }
@@ -641,7 +640,6 @@ class AssetsController extends Controller
         if ($request->has('rtd_location_id') && !$request->has('location_id')) {
             $asset->location_id = $request->validated()['rtd_location_id'];
         }
-
 
         /**
          * this is here just legacy reasons. Api\AssetController
@@ -669,7 +667,6 @@ class AssetsController extends Controller
             }
         }
 
-
         if ($asset->save()) {
             if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
                 $location = $target->location_id;
@@ -689,10 +686,8 @@ class AssetsController extends Controller
             if ($asset->image) {
                 $asset->image = $asset->getImageUrl();
             }
-
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
