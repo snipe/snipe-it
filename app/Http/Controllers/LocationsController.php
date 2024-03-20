@@ -320,7 +320,12 @@ class LocationsController extends Controller
         $locations_raw_array = $request->input('ids');
 
         if ((is_array($locations_raw_array)) && (count($locations_raw_array) > 0)) {
-            $locations = Location::whereIn('id', $locations_raw_array)->get();
+            $locations = Location::whereIn('id', $locations_raw_array)
+                ->withCount('assignedAssets as assigned_assets_count')
+                ->withCount('assets as assets_count')
+                ->withCount('rtd_assets as rtd_assets_count')
+                ->withCount('children as children_count')
+                ->withCount('users as users_count')->get();
 
             $success_count = 0;
             $error_count = 0;
@@ -351,7 +356,7 @@ class LocationsController extends Controller
             if ($error_count > 0) {
                 return redirect()
                     ->route('locations.index')
-                    ->with('warning', trans('general.bulk.partial_success',
+                    ->with('warning', trans('general.bulk.delete.partial',
                         ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')]
                     ));
                 }

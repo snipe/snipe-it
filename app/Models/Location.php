@@ -106,6 +106,7 @@ class Location extends SnipeModel
      */
     public function isDeletable()
     {
+
         return Gate::allows('delete', $this)
                 && ($this->assets_count === 0)
                 && ($this->assigned_assets_count === 0)
