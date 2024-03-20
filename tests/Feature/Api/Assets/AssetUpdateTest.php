@@ -81,14 +81,14 @@ class AssetUpdateTest extends TestCase
         $updatedAsset = Asset::find($response['payload']['id']);
 
         // TODO: this isn't working, i assume `adminuser` is the user that created asset
+        // maybe i don't need to test this on an update???
         //$this->assertTrue($updatedAsset->adminuser->is($user));
 
         $this->assertEquals('2024-06-02', $updatedAsset->asset_eol_date);
         $this->assertEquals('random_string', $updatedAsset->asset_tag);
         $this->assertEquals($userAssigned->id, $updatedAsset->assigned_to);
         $this->assertTrue($updatedAsset->company->is($company));
-        // TODO: this doesn't work
-        //$this->assertTrue($updatedAsset->location->is($location));
+        $this->assertTrue($updatedAsset->location->is($location));
         $this->assertTrue($updatedAsset->model->is($model));
         $this->assertEquals('A New Asset', $updatedAsset->name);
         $this->assertEquals('Some notes', $updatedAsset->notes);
@@ -109,7 +109,7 @@ class AssetUpdateTest extends TestCase
 
         $this->settings->enableAutoIncrement();
 
-        $response = $this->actingAsForApi(User::factory()->editAssets()->create())
+        $this->actingAsForApi(User::factory()->editAssets()->create())
             ->patchJson((route('api.assets.update', $asset->id)), [
                 'purchase_date' => '2021-01-01',
             ])
@@ -119,6 +119,7 @@ class AssetUpdateTest extends TestCase
 
         $asset->refresh();
 
+        // what's the problem here? logic problem? might need to skip this for this PR
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
     }
 
