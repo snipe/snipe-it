@@ -34,8 +34,8 @@ class ImageUploadRequest extends Request
     {
        
             return [
-                'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
-                'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
+                'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp,avif',
+                'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp,avif',
             ];
     }
 
@@ -103,15 +103,13 @@ class ImageUploadRequest extends Request
                 \Log::info('File name will be: '.$file_name);
                 \Log::debug('File extension is: '.$ext);
 
-                if ($image->getMimeType() == 'image/webp') {
+                if (($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
                     // If the file is a webp, we need to just move it since webp support
                     // needs to be compiled into gd for resizing to be available
-
-                    \Log::debug('This is a webp, just move it');
                     Storage::disk('public')->put($path.'/'.$file_name, file_get_contents($image));
+
                 } elseif($image->getMimeType() == 'image/svg+xml') {
                     // If the file is an SVG, we need to clean it and NOT encode it
-                    \Log::debug('This is an SVG');
                     $sanitizer = new Sanitizer();
                     $dirtySVG = file_get_contents($image->getRealPath());
                     $cleanSVG = $sanitizer->sanitize($dirtySVG);
@@ -122,9 +120,6 @@ class ImageUploadRequest extends Request
                         \Log::debug($e);
                     }
                 } else {
-
-                    \Log::debug('Not an SVG or webp - resize');
-                    \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
 
                     try {
                         $upload = Image::make($image->getRealPath())->setFileInfoFromPath($image->getRealPath())->resize(null, $w, function ($constraint) {
@@ -147,10 +142,8 @@ class ImageUploadRequest extends Request
 
                  // Remove Current image if exists
                 if (($item->{$form_fieldname}!='') && (Storage::disk('public')->exists($path.'/'.$item->{$db_fieldname}))) {
-                    \Log::debug('A file already exists that we are replacing - we should delete the old one.');
                     try {
                          Storage::disk('public')->delete($path.'/'.$item->{$form_fieldname});
-                         \Log::debug('Old file '.$path.'/'.$file_name.' has been deleted.');
                     } catch (\Exception $e) {
                         \Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
                     }
