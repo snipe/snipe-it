@@ -23,9 +23,9 @@ class UpdateAssetRequest extends ImageUploadRequest
         // the following are 'required' attributes that may or may not be present on an patch request
         // so supplying them here instead of doing funky array modification to the rules
         return $this->merge([
-            'asset_tag' => $this->asset_tag ?? $this->asset->asset_tag,
-            'model_id' => $this->model_id ?? $this->asset->model_id,
-            'status_id' => $this->status_id ?? $this->asset->status_id,
+            //'asset_tag' => $this->asset_tag ?? $this->asset->asset_tag,
+            //'model_id' => $this->model_id ?? $this->asset->model_id,
+            //'status_id' => $this->status_id ?? $this->asset->status_id,
         ]);
     }
 
@@ -37,9 +37,9 @@ class UpdateAssetRequest extends ImageUploadRequest
     public function rules()
     {
         $rules = [
-            'model_id' => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
-            'status_id' => 'required|integer|exists:status_labels,id',
-            'asset_tag' => ['required', 'min:1', 'max:255', 'not_array', Rule::unique('assets', 'asset_tag')->ignore($this->asset)->withoutTrashed()],
+            'model_id' => 'integer|exists:models,id,deleted_at,NULL|not_array',
+            'status_id' => 'integer|exists:status_labels,id',
+            'asset_tag' => ['min:1', 'max:255', 'not_array', Rule::unique('assets', 'asset_tag')->ignore($this->asset)->withoutTrashed()],
             'name' => 'nullable|max:255',
             'company_id' => 'nullable|integer|exists:companies,id',
             'warranty_months' => 'nullable|numeric|digits_between:0,240',

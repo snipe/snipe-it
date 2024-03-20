@@ -11,6 +11,8 @@ use App\Models\Supplier;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Testing\Fluent\AssertableJson;
+
+// TODO: DELETE INTERACTSWITHSETTINGS BEFORE FINAL PR
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -125,7 +127,7 @@ class AssetUpdateTest extends TestCase
 
         $this->settings->enableAutoIncrement();
 
-        $response = $this->actingAsForApi(User::factory()->editAssets()->create())
+        $this->actingAsForApi(User::factory()->editAssets()->create())
             ->patchJson(route('api.assets.update', $asset->id), [
                 'name' => 'test asset',
                 'asset_eol_date' => '2022-01-01'
@@ -139,4 +141,93 @@ class AssetUpdateTest extends TestCase
         $this->assertEquals('2022-01-01', $asset->asset_eol_date);
     }
 
+    public function testAssetEolExplicitIsSetIfAssetEolDateIsExplicitlySet()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'asset_eol_date' => '2025-01-01',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $asset->refresh();
+
+        $this->assertEquals('2025-01-01', $asset->asset_eol_date);
+        $this->assertTrue($asset->eol_explicit);
+    }
+
+    public function testAssetTagCannotUpdateToNullValue()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'asset_tag' => null,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testAssetTagCannotUpdateToEmptyStringValue()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'asset_tag' => "",
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testModelIdCannotUpdateToNullValue()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'model_id' => null
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testModelIdCannotUpdateToEmptyStringValue()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'model_id' => ""
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testStatusIdCannotUpdateToNullValue()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'status_id' => null
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testStatusIdCannotUpdateToEmptyStringValue()
+    {
+        $asset = Asset::factory()->laptopMbp()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'status_id' => ""
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
 }
