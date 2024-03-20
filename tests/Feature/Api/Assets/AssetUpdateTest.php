@@ -85,10 +85,6 @@ class AssetUpdateTest extends TestCase
 
         $updatedAsset = Asset::find($response['payload']['id']);
 
-        // TODO: this isn't working, i assume `adminuser` is the user that created asset
-        // maybe i don't need to test this on an update???
-        //$this->assertTrue($updatedAsset->adminuser->is($user));
-
         $this->assertEquals('2024-06-02', $updatedAsset->asset_eol_date);
         $this->assertEquals('random_string', $updatedAsset->asset_tag);
         $this->assertEquals($userAssigned->id, $updatedAsset->assigned_to);

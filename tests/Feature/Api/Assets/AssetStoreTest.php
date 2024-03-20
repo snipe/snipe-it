@@ -149,7 +149,6 @@ class AssetStoreTest extends TestCase
                 'purchase_date' => '2021-01-01',
                 'status_id' => $status->id,
             ])
-            //->dd()
             ->assertOk()
             ->assertStatusMessageIs('success')
             ->json();

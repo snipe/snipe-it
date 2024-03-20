@@ -113,38 +113,6 @@ class Asset extends Depreciable
         'requestable' => 'nullable|boolean',
     ];
 
-    //public function getRulesAttribute()
-    //{
-    //    return [
-    //        'model_id' => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
-    //        'status_id' => 'required|integer|exists:status_labels,id',
-    //        'asset_tag' => [
-    //            'required',
-    //            'min:1',
-    //            'max:255',
-    //            Rule::unique('assets')->ignore(15)->withoutTrashed()
-    //        ],
-    //        'name' => 'nullable|max:255',
-    //        'company_id' => 'nullable|integer|exists:companies,id',
-    //        'warranty_months' => 'nullable|numeric|digits_between:0,240',
-    //        'last_checkout' => 'nullable|date_format:Y-m-d H:i:s',
-    //        'expected_checkin' => 'nullable|date',
-    //        'location_id' => 'nullable|exists:locations,id',
-    //        'rtd_location_id' => 'nullable|exists:locations,id',
-    //        'purchase_date' => 'nullable|date|date_format:Y-m-d',
-    //        'serial' => 'nullable|unique_undeleted:assets,serial',
-    //        'purchase_cost' => 'nullable|numeric|gte:0',
-    //        'supplier_id' => 'nullable|exists:suppliers,id',
-    //        'asset_eol_date' => 'nullable|date',
-    //        'eol_explicit' => 'nullable|boolean',
-    //        'byod' => 'nullable|boolean',
-    //        'order_number' => 'nullable|string|max:191',
-    //        'notes' => 'nullable|string|max:65535',
-    //        'assigned_to' => 'nullable|integer',
-    //        'requestable' => 'nullable|boolean',
-    //    ];
-    //}
-
   /**
    * The attributes that are mass assignable.
    *
@@ -244,12 +212,8 @@ class Asset extends Depreciable
                         $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
                     }
                 }
-                $this->rules = array_merge(
-                    $this->rules,
-                    $model->fieldset->validation_rules(),
-                );
 
-                //$this->rules += $model->fieldset->validation_rules();
+                $this->rules += $model->fieldset->validation_rules();
 
                 if ($this->model->fieldset){
                     foreach ($this->model->fieldset->fields as $field){

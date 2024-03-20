@@ -63,7 +63,6 @@ class ValidationServiceProvider extends ServiceProvider
          * `unique_undeleted:table,fieldname` in your rules out of the box
          */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-
             if (count($parameters)) {
 
                 // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable
@@ -79,21 +78,6 @@ class ValidationServiceProvider extends ServiceProvider
 
                 return $count < 1;
             }
-            //else {
-            //    if (($parameters[0] == 'assets') && ($attribute == 'serial') && (Setting::getSettings()->unique_serial != '1')) {
-            //        return true;
-            //    }
-            //
-            //    $count = DB::table($parameters[0])
-            //        ->select('id')
-            //        ->where($attribute, '=', $value)
-            //        ->whereNull('deleted_at')
-            //        ->where('id', '!=', $parameters[1])
-            //        ->where('id', '!=', $parameters[2])
-            //        ->count();
-            //
-            //    return $count < 1;
-            //}
         });
         
         /**
