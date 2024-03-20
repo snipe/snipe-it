@@ -499,18 +499,21 @@
                                   </div>
                               @endif
 
-                              <!-- Reset Two Factor -->
-                              <div class="form-group">
-                                  <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
-                                      <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
-                                      <span id="two_factor_reseticon"></span>
-                                      <span id="two_factor_resetresult"></span>
-                                      <span id="two_factor_resetstatus"></span>
+                              @if ((Auth::user()->isSuperUser()) && ($user->two_factor_active_and_enrolled()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
+                                  <!-- Reset Two Factor -->
+                                  <div class="form-group">
+                                      <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                                          <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
+                                          <span id="two_factor_reseticon"></span>
+                                          <span id="two_factor_resetresult"></span>
+                                          <span id="two_factor_resetstatus"></span>
+                                      </div>
+                                      <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                                          <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                                      </div>
                                   </div>
-                                  <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
-                                      <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
-                                  </div>
-                              </div>
+                              @endif
+
                           @endif
 
                           <!-- Groups -->
