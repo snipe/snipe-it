@@ -104,7 +104,7 @@ class ImageUploadRequest extends Request
                 \Log::debug('File extension is: '.$ext);
 
                 if (($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
-                    // If the file is a webp, we need to just move it since webp support
+                    // If the file is a webp or avif, we need to just move it since webp support
                     // needs to be compiled into gd for resizing to be available
                     Storage::disk('public')->put($path.'/'.$file_name, file_get_contents($image));
 
