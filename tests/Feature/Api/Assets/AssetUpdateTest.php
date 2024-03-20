@@ -105,9 +105,10 @@ class AssetUpdateTest extends TestCase
 
     public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated()
     {
-        $asset = Asset::factory()->laptopMbp()->create();
+        $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
 
         $this->settings->enableAutoIncrement();
+
 
         $this->actingAsForApi(User::factory()->editAssets()->create())
             ->patchJson((route('api.assets.update', $asset->id)), [
@@ -119,7 +120,6 @@ class AssetUpdateTest extends TestCase
 
         $asset->refresh();
 
-        // what's the problem here? logic problem? might need to skip this for this PR
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
     }
 
