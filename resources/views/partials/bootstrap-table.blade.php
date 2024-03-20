@@ -46,12 +46,14 @@
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            locale: locale,
+            locale: '{{ app()->getLocale() }}',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
             cookie: true,
             cookieExpire: '2y',
+            showColumnsToggleAll: true,
+            minimumCountColumns: 2,
             mobileResponsive: true,
             maintainSelected: true,
             trimOnSearch: false,
@@ -85,7 +87,7 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
-                exportOptions: export_options,
+            exportOptions: export_options,
             exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call

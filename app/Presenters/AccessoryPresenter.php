@@ -41,6 +41,7 @@ class AccessoryPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => false,
                 'title' => trans('general.name'),
                 'formatter' => 'accessoriesLinkFormatter',
             ], [
