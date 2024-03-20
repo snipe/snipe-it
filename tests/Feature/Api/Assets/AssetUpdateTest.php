@@ -20,6 +20,13 @@ class AssetUpdateTest extends TestCase
 {
     use InteractsWithSettings;
 
+    public function testThatANonExistentAssetIdReturnsError()
+    {
+        $this->actingAsForApi(User::factory()->editAssets()->createAssets()->create())
+            ->patchJson(route('api.assets.update', 123456789))
+            ->assertStatusMessageIs('error');
+    }
+
     public function testRequiresPermissionToUpdateAsset()
     {
         $asset = Asset::factory()->create();
