@@ -38,7 +38,7 @@ class UserPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
-                'title' => 'Avatar',
+                'title' => trans('general.importer.avatar'),
                 'visible' => false,
                 'formatter' => 'imageFormatter',
             ],
