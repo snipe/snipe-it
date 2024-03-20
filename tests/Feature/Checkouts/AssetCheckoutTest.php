@@ -35,13 +35,13 @@ class AssetCheckoutTest extends TestCase
 
     public function testAnAssetCanBeCheckedOutToAUser()
     {
-        $this->markTestIncomplete();
+        // $this->markTestIncomplete();
 
         Event::fake([CheckoutableCheckedOut::class]);
 
         $status = Statuslabel::factory()->readyToDeploy()->create();
         $asset = Asset::factory()->create();
-        $admin = User::factory()->create();
+        $admin = User::factory()->checkoutAssets()->create();
         $user = User::factory()->create();
 
         $this->actingAs($admin)
@@ -55,8 +55,14 @@ class AssetCheckoutTest extends TestCase
                 'note' => 'An awesome note',
             ]);
 
-        // @todo: assert CheckoutableCheckedOut dispatched with correct data
-        Event::assertDispatched(CheckoutableCheckedOut::class);
+        // @todo: ensure asset updated
+        
+        Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $user) {
+            return $event->checkoutable->is($asset)
+                && $event->checkedOutTo->is($user)
+                && $event->checkedOutBy->is($admin)
+                && $event->note === 'An awesome note';
+        });
 
         // @todo: assert action log entry created
     }
