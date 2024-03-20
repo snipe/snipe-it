@@ -35,6 +35,7 @@
                   data-show-footer="true"
                   data-side-pagination="server"
                   data-show-columns="true"
+                  data-show-columns-toggle-all="true"
                   data-show-fullscreen="true"
                   data-show-export="true"
                   data-show-refresh="true"

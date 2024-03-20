@@ -55,6 +55,7 @@ class AssetPresenter extends Presenter
                 'field' => 'asset_tag',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => false,
                 'title' => trans('admin/hardware/table.asset_tag'),
                 'visible' => true,
                 'formatter' => 'hardwareLinkFormatter',

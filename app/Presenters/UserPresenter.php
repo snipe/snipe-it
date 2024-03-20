@@ -175,7 +175,7 @@ class UserPresenter extends Presenter
                 'field' => 'username',
                 'searchable' => true,
                 'sortable' => true,
-                'switchable' => true,
+                'switchable' => false,
                 'title' => trans('admin/users/table.username'),
                 'visible' => true,
                 'formatter' => 'usersLinkFormatter',
