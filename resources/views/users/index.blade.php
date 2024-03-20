@@ -44,7 +44,6 @@
             <table
                     data-click-to-select="true"
                     data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
-                    data-show-columns-toggle-all="true"
                     data-cookie-id-table="usersTable"
                     data-pagination="true"
                     data-id-table="usersTable"
