@@ -9,8 +9,6 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-
-// TODO: DELETE INTERACTSWITHSETTINGS BEFORE FINAL PR
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -108,9 +106,6 @@ class AssetUpdateTest extends TestCase
     {
         $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
 
-        $this->settings->enableAutoIncrement();
-
-
         $this->actingAsForApi(User::factory()->editAssets()->create())
             ->patchJson((route('api.assets.update', $asset->id)), [
                 'purchase_date' => '2021-01-01',
@@ -127,8 +122,6 @@ class AssetUpdateTest extends TestCase
     public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet()
     {
         $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
-
-        $this->settings->enableAutoIncrement();
 
         $this->actingAsForApi(User::factory()->editAssets()->create())
             ->patchJson(route('api.assets.update', $asset->id), [
