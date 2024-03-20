@@ -626,23 +626,22 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateAssetRequest $request, Asset $asset)
+    public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
         $asset->fill($request->validated());
 
-        // TODO: how much of this can go in the validator?
-        // this is _always_ filled now, see UpdateAssetRequest
-        // i'm leaving it like this for now, but when would we ever want model_id to be `null`??
-        // it actually breaks at the model validation if it gets to null...
-        ($request->has('model_id')) ?
-            $asset->model()->associate(AssetModel::find($request->validated()['model_id'])) : null;
-        ($request->has('company_id')) ?
-            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']) : null;
-        // TODO: this seems like bad logic maybe? it means that if you submit an rtd_location_id and a location_id in the same request location_id is overwritten with rtd_location_id. seems wrong.
-        //($request->has('rtd_location_id')) ?
-        //    $asset->location_id = $request->validated()['rtd_location_id'] : null;
+
+        if ($request->has('model_id')) {
+            $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
+        }
+        if ($request->has('company_id')) {
+            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
+        }
+        if ($request->has('rtd_location_id') && !$request->has('location_id')) {
+            $asset->location_id = $request->validated()['rtd_location_id'];
+        }
+
 
         /**
          * this is here just legacy reasons. Api\AssetController
@@ -695,8 +694,6 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
-
-        // TODO: confirm that everything expects a _200_ model not found exception
     }
 
 

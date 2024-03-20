@@ -18,17 +18,6 @@ class UpdateAssetRequest extends ImageUploadRequest
         return Gate::allows('update', new Asset);
     }
 
-    public function prepareForValidation()
-    {
-        // the following are 'required' attributes that may or may not be present on an patch request
-        // so supplying them here instead of doing funky array modification to the rules
-        return $this->merge([
-            //'asset_tag' => $this->asset_tag ?? $this->asset->asset_tag,
-            //'model_id' => $this->model_id ?? $this->asset->model_id,
-            //'status_id' => $this->status_id ?? $this->asset->status_id,
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

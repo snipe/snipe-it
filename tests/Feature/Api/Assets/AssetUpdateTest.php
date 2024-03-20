@@ -9,8 +9,6 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Testing\Fluent\AssertableJson;
 
 // TODO: DELETE INTERACTSWITHSETTINGS BEFORE FINAL PR
 use Tests\Support\InteractsWithSettings;
@@ -238,5 +236,42 @@ class AssetUpdateTest extends TestCase
             ])
             ->assertOk()
             ->assertStatusMessageIs('error');
+    }
+
+    public function testIfRtdLocationIdIsSetWithoutLocationIdAssetReturnsToDefault()
+    {
+        $location = Location::factory()->create();
+        $asset = Asset::factory()->laptopMbp()->create([
+            'location_id' => $location->id
+        ]);
+        $rtdLocation = Location::factory()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'rtd_location_id' => $rtdLocation->id
+            ]);
+
+        $asset->refresh();
+
+        $this->assertTrue($asset->defaultLoc->is($rtdLocation));
+        $this->assertTrue($asset->location->is($rtdLocation));
+    }
+
+    public function testIfLocationAndRtdLocationAreSetLocationIdIsLocation()
+    {
+        $location = Location::factory()->create();
+        $asset = Asset::factory()->laptopMbp()->create();
+        $rtdLocation = Location::factory()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'rtd_location_id' => $rtdLocation->id,
+                'location_id' => $location->id
+            ]);
+
+        $asset->refresh();
+
+        $this->assertTrue($asset->defaultLoc->is($rtdLocation));
+        $this->assertTrue($asset->location->is($location));
     }
 }
