@@ -25,7 +25,7 @@ class UpdateAssetRequest extends ImageUploadRequest
      */
     public function rules()
     {
-        return [
+        $rules = array_merge([
             'model_id' => ['integer', 'exists:models,id,deleted_at,NULL', 'not_array'],
             'status_id' => ['integer', 'exists:status_labels,id'],
             'asset_tag' => ['min:1', 'max:255', 'not_array', Rule::unique('assets', 'asset_tag')->ignore($this->asset)->withoutTrashed()],
@@ -47,7 +47,9 @@ class UpdateAssetRequest extends ImageUploadRequest
             'notes' => ['nullable', 'string', 'max:65535'],
             'assigned_to' => ['nullable', 'integer'],
             'requestable' => ['nullable', 'boolean'],
-            parent::rules(),
-        ];
+        ],
+            parent::rules()
+        );
+        return $rules;
     }
 }

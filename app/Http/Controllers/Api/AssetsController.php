@@ -673,7 +673,7 @@ class AssetsController extends Controller
             } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
                 $location = $target->location_id;
 
-                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
+                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
                     ->update(['location_id' => $target->location_id]);
             } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                 $location = $target->id;
