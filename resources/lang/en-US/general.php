@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accessories',
     'activated'			    => 'Activated',
     'accepted_date'         => 'Date Accepted',
