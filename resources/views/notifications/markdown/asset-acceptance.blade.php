@@ -13,8 +13,8 @@
 @if (isset($declined_date))
 | **{{ ucfirst(trans('general.declined')) }}** | {{ $declined_date }} |
 @endif
-@if (isset($declined_msg))
-| **{{ trans('general.declined_note') }}** | {{ $declined_msg }} |
+@if (isset($note))
+| **{{ trans('general.declined_note') }}** | {{ $note }} |
 @endif
 @if ((isset($item_tag)) && ($item_tag!=''))
 | **{{ trans('mail.asset_tag') }}** | {{ $item_tag }} |

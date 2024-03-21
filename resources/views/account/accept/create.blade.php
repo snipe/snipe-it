@@ -67,10 +67,10 @@
                         <div class="col-md-12">
                             <br>
                             <div class="col-md-12" style="display:block;">
-                                <label id="declined_message_label" for="declined_message" style="text-align:center;" >{{trans('admin/settings/general.decline_message')}}</label>
+                                <label id="note_label" for="note" style="text-align:center;" >{{trans('admin/settings/general.decline_message')}}</label>
                             </div>
                             <div class="col-md-12">
-                                <textarea id="declined_message" name="declined_message" rows="4" cols="50" value="declined_message" ></textarea>
+                                <textarea id="note" name="note" rows="4" cols="50" value="note" style="width:100%" ></textarea>
                             </div>
                         </div>
 
@@ -105,19 +105,19 @@
     <script nonce="{{ csrf_token() }}">
         $(document).ready(function(){
 
-            $('#declined_message').hide();
-            $('#declined_message_label').hide();
+            $('#note').hide();
+            $('#note_label').hide();
 
 
             $('input[id="declined"]').change(function(){
 
                 if($(this).is(':checked')){
-                    $('#declined_message_label').show();
-                    $('#declined_message').show();
+                    $('#note_label').show();
+                    $('#note').show();
                 }
                 else {
-                    $('#declined_message_label').hide();
-                    $('#declined_message').hide();
+                    $('#note_label').hide();
+                    $('#note').hide();
                 }
             });
         });

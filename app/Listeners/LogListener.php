@@ -78,7 +78,7 @@ class LogListener
         $logaction->item()->associate($event->acceptance->checkoutable);
         $logaction->target()->associate($event->acceptance->assignedTo);
         $logaction->accept_signature = $event->acceptance->signature_filename;
-        $logaction->note = $event->acceptance->declined_message;
+        $logaction->note = $event->acceptance->note;
         $logaction->action_type = 'declined';
 
         // TODO: log the actual license seat that was checked out
