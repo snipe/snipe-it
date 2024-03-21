@@ -392,11 +392,7 @@ class LdapSync extends Command
                     }
                 }
                 //updates assets location based on user's location
-                $assets = Asset::where('assigned_to', '=', $user->id)->get();
-                    foreach($assets as $asset){
-                        $asset->location_id = $user->location_id;
-                        $asset->save();
-                    }
+                Asset::where('assigned_to', '=', $user->id)->update(['location_id' => $user->location_id]);
 
                 $user->ldap_import = 1;
 
