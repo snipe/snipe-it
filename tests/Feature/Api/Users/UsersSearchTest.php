@@ -5,13 +5,10 @@ namespace Tests\Feature\Api\Users;
 use App\Models\Company;
 use App\Models\User;
 use Laravel\Passport\Passport;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class UsersSearchTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCanSearchByUserFirstAndLastName()
     {
         User::factory()->create(['first_name' => 'Luke', 'last_name' => 'Skywalker']);

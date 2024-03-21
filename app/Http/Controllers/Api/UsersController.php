@@ -661,7 +661,17 @@ class UsersController extends Controller
                 $user = User::find($request->get('id'));
                 $user->two_factor_secret = null;
                 $user->two_factor_enrolled = 0;
-                $user->save();
+                $user->saveQuietly();
+
+                // Log the reset
+                $logaction = new Actionlog();
+                $logaction->target_type = User::class;
+                $logaction->target_id = $user->id;
+                $logaction->item_type = User::class;
+                $logaction->item_id = $user->id;
+                $logaction->created_at = date('Y-m-d H:i:s');
+                $logaction->user_id = Auth::user()->id;
+                $logaction->logaction('2FA reset');
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
             } catch (\Exception $e) {

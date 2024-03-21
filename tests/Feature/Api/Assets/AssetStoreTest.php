@@ -9,15 +9,11 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetStoreTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testRequiresPermissionToCreateAsset()
     {
         $this->actingAsForApi(User::factory()->create())

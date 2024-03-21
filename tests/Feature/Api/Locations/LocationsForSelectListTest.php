@@ -5,13 +5,10 @@ namespace Tests\Feature\Api\Locations;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class LocationsForSelectListTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testGettingLocationListRequiresProperPermission()
     {
         $this->actingAsForApi(User::factory()->create())

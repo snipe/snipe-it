@@ -499,18 +499,21 @@
                                   </div>
                               @endif
 
-                              <!-- Reset Two Factor -->
-                              <div class="form-group">
-                                  <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
-                                      <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
-                                      <span id="two_factor_reseticon"></span>
-                                      <span id="two_factor_resetresult"></span>
-                                      <span id="two_factor_resetstatus"></span>
+                              @if ((Auth::user()->isSuperUser()) && ($user->two_factor_active_and_enrolled()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
+                                  <!-- Reset Two Factor -->
+                                  <div class="form-group">
+                                      <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                                          <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
+                                          <span id="two_factor_reseticon"></span>
+                                          <span id="two_factor_resetresult"></span>
+                                          <span id="two_factor_resetstatus"></span>
+                                      </div>
+                                      <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                                          <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                                      </div>
                                   </div>
-                                  <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
-                                      <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
-                                  </div>
-                              </div>
+                              @endif
+
                           @endif
 
                           <!-- Groups -->
@@ -702,7 +705,7 @@ $(document).ready(function() {
         $("#two_factor_resetrow").removeClass('success');
         $("#two_factor_resetrow").removeClass('danger');
         $("#two_factor_resetstatus").html('');
-        $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i>');
+        $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i> ');
         $.ajax({
             url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
             type: 'POST',
@@ -715,13 +718,12 @@ $(document).ready(function() {
 
             success: function (data) {
                 $("#two_factor_reseticon").html('');
-                $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
+                $("#two_factor_resetstatus").html('<span class="text-success"><i class="fas fa-check"></i> ' + data.message + '</span>');
             },
 
             error: function (data) {
                 $("#two_factor_reseticon").html('');
-                $("#two_factor_reseticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
-                $('#two_factor_resetstatus').text(data.message);
+                $("#two_factor_resetstatus").html('<span class="text-danger"><i class="fas fa-exclamation-triangle text-danger"></i> ' + data.message + '</span>');
             }
 
 

@@ -4,13 +4,10 @@ namespace Tests\Feature\Api\Groups;
 
 use App\Models\Group;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class GroupStoreTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testStoringGroupRequiresSuperAdminPermission()
     {
         $this->actingAsForApi(User::factory()->create())

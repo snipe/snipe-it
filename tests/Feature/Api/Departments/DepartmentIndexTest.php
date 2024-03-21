@@ -5,15 +5,11 @@ namespace Tests\Feature\Api\Departments;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\User;
-use Illuminate\Routing\Route;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class DepartmentIndexTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testViewingDepartmentIndexRequiresAuthentication()
     {
         $this->getJson(route('api.departments.index'))->assertRedirect();
