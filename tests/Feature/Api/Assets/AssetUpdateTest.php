@@ -9,12 +9,10 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetUpdateTest extends TestCase
 {
-    use InteractsWithSettings;
 
     public function testThatANonExistentAssetIdReturnsError()
     {
