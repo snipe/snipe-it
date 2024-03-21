@@ -4,6 +4,7 @@ namespace Tests\Feature\Checkouts;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
+use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
@@ -102,9 +103,9 @@ class AssetCheckoutTest extends TestCase
         // @todo: ensure asset updated
         $asset->refresh();
         $this->assertTrue($asset->location->is($userLocation));
-        $this->assertEquals('2024-03-28 00:00:00', (string) $asset->expected_checkin);
+        $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
         $this->assertTrue($asset->assetstatus->is($updatedStatus));
-        
+
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $user) {
             return $event->checkoutable->is($asset)
                 && $event->checkedOutTo->is($user)
@@ -117,7 +118,19 @@ class AssetCheckoutTest extends TestCase
 
     public function testLicenseSeatsAreAssignedToUserUponCheckout()
     {
-        $this->markTestIncomplete();
+        $asset = Asset::factory()->create();
+        $seat = LicenseSeat::factory()->assignedToAsset($asset)->create();
+        $user = User::factory()->create();
+
+        $this->assertFalse($user->licenses->contains($seat->license));
+
+        $this->actingAs(User::factory()->checkoutAssets()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+            ]);
+
+        $this->assertTrue($user->fresh()->licenses->contains($seat->license));
     }
 
     public function testAnAssetCanBeCheckedOutToAnAsset()
