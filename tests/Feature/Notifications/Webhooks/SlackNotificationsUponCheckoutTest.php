@@ -16,7 +16,6 @@ use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 /**
@@ -24,8 +23,6 @@ use Tests\TestCase;
  */
 class SlackNotificationsUponCheckoutTest extends TestCase
 {
-    use InteractsWithSettings;
-
     protected function setUp(): void
     {
         parent::setUp();

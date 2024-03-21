@@ -5,13 +5,10 @@ namespace Tests\Feature\Api\Licenses;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class LicensesIndexTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testLicensesIndexAdheresToCompanyScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();

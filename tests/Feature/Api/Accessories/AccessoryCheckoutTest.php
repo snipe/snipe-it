@@ -7,13 +7,10 @@ use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AccessoryCheckoutTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCheckingOutAccessoryRequiresCorrectPermission()
     {
         $this->actingAsForApi(User::factory()->create())

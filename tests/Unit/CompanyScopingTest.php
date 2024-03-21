@@ -12,13 +12,10 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class CompanyScopingTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function models(): array
     {
         return [
