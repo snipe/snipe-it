@@ -563,6 +563,20 @@ class AssetPresenter extends Presenter
     }
 
     /**
+     * Used to take user created Support URL and dynamically fill in the needed values per asset
+     * @return string
+     */
+    public function dynamicSupportUrl()
+    {
+        $support_url = $this->model->model->manufacturer->support_url;
+        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $support_url));
+        $url = (str_replace('{SERIAL}', urlencode($this->model->serial), $url));
+        $url = (str_replace('{MODEL_NAME}', urlencode($this->model->model->name), $url));
+        $url = (str_replace('{MODEL_NUMBER}', urlencode($this->model->model->model_number), $url));
+        return $url;
+    }
+
+    /**
      * Url to view this item.
      * @return string
      */

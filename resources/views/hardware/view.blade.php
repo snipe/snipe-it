@@ -291,12 +291,12 @@
                                                         </li>
                                                     @endif
 
-                                                    @if (($asset->model) && ($asset->model->manufacturer->support_url))
+                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->support_url!=''))
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->model->manufacturer->support_url }}" target="_blank">
-                                                                {{ $asset->model->manufacturer->support_url }}
-                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            <a href="{{ $asset->present()->dynamicSupportUrl() }}" target="_blank">
+                                                                {{ $asset->present()->dynamicSupportUrl() }}
+                                                                <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only"></span></i>
                                                             </a>
                                                         </li>
                                                     @endif
