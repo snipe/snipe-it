@@ -284,8 +284,8 @@
                                                     @if (($asset->model->manufacturer) && ($asset->model->manufacturer->url!=''))
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->present()->dynamicUrl() }}" target="_blank">
-                                                                {{ $asset->present()->dynamicUrl() }}
+                                                            <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}" target="_blank">
+                                                                {{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only"></span></i>
                                                             </a>
                                                         </li>
@@ -294,8 +294,8 @@
                                                     @if (($asset->model->manufacturer) && ($asset->model->manufacturer->support_url!=''))
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->present()->dynamicSupportUrl() }}" target="_blank">
-                                                                {{ $asset->present()->dynamicSupportUrl() }}
+                                                            <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}" target="_blank">
+                                                                {{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only"></span></i>
                                                             </a>
                                                         </li>
@@ -304,8 +304,8 @@
                                                     @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                         <li>
                                                             <i class="far fa-wrench" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
-                                                                {{ $asset->present()->dynamicWarrantyUrl() }}
+                                                            <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
+                                                                {{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                             </a>
                                                         </li>
