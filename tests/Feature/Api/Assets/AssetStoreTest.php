@@ -113,6 +113,20 @@ class AssetStoreTest extends TestCase
         $this->assertNull($asset->last_audit_date);
     }
 
+    public function testNonDateUsedForLastAuditDateReturnsValidationError()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'last_audit_date' => 'this-is-not-valid',
+                'asset_tag' => '1234',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertStatusMessageIs('error');
+
+        $this->assertNotNull($response->json('messages.last_audit_date'));
+    }
+
     public function testArchivedDepreciateAndPhysicalCanBeNull()
     {
         $model = AssetModel::factory()->ipadModel()->create();
