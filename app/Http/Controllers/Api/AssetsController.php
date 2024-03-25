@@ -556,7 +556,7 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->input('model_id'));
 
         // Check that it's an object and not a collection
-        // (Sometimes people send arrays here and they shouldn't, unless it's a checkbox)
+        // (Sometimes people send arrays here and they shouldn't
         if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
 
