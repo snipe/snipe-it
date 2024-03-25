@@ -28,11 +28,16 @@ class StoreAssetRequest extends ImageUploadRequest
             ? Company::getIdForCurrentUser($this->company_id)
             : $this->company_id;
 
+        if ($this->input('last_audit_date')) {
+            $this->merge([
+                'last_audit_date' => Carbon::parse($this->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s'),
+            ]);
+        }
+
         $this->merge([
             'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
             'company_id' => $idForCurrentUser,
             'assigned_to' => $assigned_to ?? null,
-            'last_audit_date' => Carbon::parse($this->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s'),
         ]);
     }
 

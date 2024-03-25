@@ -97,6 +97,22 @@ class AssetStoreTest extends TestCase
         $this->assertEquals('00:00:00', $asset->last_audit_date->format('H:i:s'));
     }
 
+    public function testLastAuditDateCanBeNull()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                // 'last_audit_date' => '2023-09-03 12:23:45',
+                'asset_tag' => '1234',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+        $this->assertNull($asset->last_audit_date);
+    }
+
     public function testArchivedDepreciateAndPhysicalCanBeNull()
     {
         $model = AssetModel::factory()->ipadModel()->create();
