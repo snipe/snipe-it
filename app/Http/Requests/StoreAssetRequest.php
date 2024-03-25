@@ -38,6 +38,8 @@ class StoreAssetRequest extends ImageUploadRequest
                 ]);
             } catch (InvalidFormatException $e) {
                 // we don't need to do anything here...
+                // we'll keep the provided date in an
+                // invalid format so validation picks it up later
             }
         }
 
