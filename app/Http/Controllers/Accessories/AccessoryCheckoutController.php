@@ -85,17 +85,19 @@ class AccessoryCheckoutController extends Controller
         // Update the accessory data
         $accessory->assigned_to = e($request->input('assigned_to'));
 
-        $accessory->users()->attach($accessory->id, [
-            'accessory_id' => $accessory->id,
-            'created_at' => Carbon::now(),
-            'user_id' => Auth::id(),
-            'assigned_to' => $request->get('assigned_to'),
-            'note' => $request->input('note'),
-        ]);
+        for($qty=0;$qty< $request->input('assigned_qty'); $qty++) {
+            $accessory->users()->attach($accessory->id, [
+                'accessory_id' => $accessory->id,
+                'created_at' => Carbon::now(),
+                'user_id' => Auth::id(),
+                'assigned_to' => $request->get('assigned_to'),
+                'note' => $request->input('note'),
+            ]);
+            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
+        }
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
-        event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));
