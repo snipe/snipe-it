@@ -29,7 +29,7 @@ class StoreAssetRequest extends ImageUploadRequest
             ? Company::getIdForCurrentUser($this->company_id)
             : $this->company_id;
 
-        $this->formatLastAuditDate();
+        $this->parseLastAuditDate();
 
         $this->merge([
             'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
@@ -53,7 +53,7 @@ class StoreAssetRequest extends ImageUploadRequest
         return $rules;
     }
 
-    private function formatLastAuditDate(): void
+    private function parseLastAuditDate(): void
     {
         if ($this->input('last_audit_date')) {
             try {
