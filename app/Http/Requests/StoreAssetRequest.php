@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Asset;
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 
 class StoreAssetRequest extends ImageUploadRequest
@@ -31,6 +32,7 @@ class StoreAssetRequest extends ImageUploadRequest
             'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
             'company_id' => $idForCurrentUser,
             'assigned_to' => $assigned_to ?? null,
+            'last_audit_date' => Carbon::parse($this->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s'),
         ]);
     }
 
