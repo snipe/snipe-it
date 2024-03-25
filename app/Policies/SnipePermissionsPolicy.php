@@ -61,6 +61,11 @@ abstract class SnipePermissionsPolicy
         return $user->hasAccess($this->columnName().'.view');
     }
 
+    public function permissions(User $user, $item = null)
+    {
+        return $user->hasAccess($this->columnName().'.manage_permissions');
+    }
+
     public function files(User $user, $item = null)
     {
         return $user->hasAccess($this->columnName().'.files');

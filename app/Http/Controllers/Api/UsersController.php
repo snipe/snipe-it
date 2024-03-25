@@ -20,6 +20,7 @@ use App\Notifications\CurrentInventory;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -361,14 +362,17 @@ class UsersController extends Controller
         $user->fill($request->all());
         $user->created_by = Auth::user()->id;
 
-        if ($request->has('permissions')) {
-            $permissions_array = $request->input('permissions');
+        if (Gate::allows('users.permissions', $user)) {
 
-            // Strip out the superuser permission if the API user isn't a superadmin
-            if (! Auth::user()->isSuperUser()) {
-                unset($permissions_array['superuser']);
+            if ($request->has('permissions')) {
+                $permissions_array = $request->input('permissions');
+
+                // Strip out the superuser permission if the API user isn't a superadmin
+                if (!Auth::user()->isSuperUser()) {
+                    unset($permissions_array['superuser']);
+                }
+                $user->permissions = $permissions_array;
             }
-            $user->permissions = $permissions_array;
         }
 
         // 
@@ -452,16 +456,17 @@ class UsersController extends Controller
         // We need to use has()  instead of filled()
         // here because we need to overwrite permissions
         // if someone needs to null them out
-        if ($request->has('permissions')) {
-            $permissions_array = $request->input('permissions');
+        if (Gate::allows('users.permissions', Asset::class)) {
+            if ($request->has('permissions')) {
+                $permissions_array = $request->input('permissions');
 
-            // Strip out the superuser permission if the API user isn't a superadmin
-            if (! Auth::user()->isSuperUser()) {
-                unset($permissions_array['superuser']);
+                // Strip out the superuser permission if the API user isn't a superadmin
+                if (!Auth::user()->isSuperUser()) {
+                    unset($permissions_array['superuser']);
+                }
+                $user->permissions = $permissions_array;
             }
-            $user->permissions = $permissions_array;
         }
-
 
 
         // Update the location of any assets checked out to this user

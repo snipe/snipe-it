@@ -17,6 +17,7 @@ use App\Notifications\WelcomeNotification;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Input;
 use Redirect;
@@ -122,13 +123,17 @@ class UsersController extends Controller
         $user->end_date = $request->input('end_date', null);
         $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
 
-        // Strip out the superuser permission if the user isn't a superadmin
-        $permissions_array = $request->input('permission');
 
-        if (! Auth::user()->isSuperUser()) {
-            unset($permissions_array['superuser']);
+        if (Gate::allows('users.permissions', $user)) {
+
+            $permissions_array = $request->input('permission');
+            // Strip out the superuser permission if the user isn't a superadmin
+            if (!Auth::user()->isSuperUser()) {
+                unset($permissions_array['superuser']);
+            }
+            $user->permissions = json_encode($permissions_array);
         }
-        $user->permissions = json_encode($permissions_array);
+
 
         // we have to invoke the
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
@@ -213,7 +218,8 @@ class UsersController extends Controller
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', []);
-        app('request')->request->set('permissions', $permissions);
+
+        app('request')->request->set('permission', $permissions);
 
         // This is a janky hack to prevent people from changing admin demo user data on the public demo.
         // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
@@ -231,14 +237,17 @@ class UsersController extends Controller
         }
 
         $this->authorize('update', $user);
+
         // Figure out of this user was an admin before this edit
         $orig_permissions_array = $user->decodePermissions();
+
         $orig_superuser = '0';
         if (is_array($orig_permissions_array)) {
             if (array_key_exists('superuser', $orig_permissions_array)) {
                 $orig_superuser = $orig_permissions_array['superuser'];
             }
         }
+
 
         // Only save groups if the user is a super user
         if (Auth::user()->isSuperUser()) {
@@ -249,6 +258,7 @@ class UsersController extends Controller
         if ($request->filled('username')) {
             $user->username = trim($request->input('username'));
         }
+
         $user->email = trim($request->input('email'));
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -287,20 +297,20 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
-        $permissions_array = $request->input('permission');
+            if ($request->has('permission')) {
 
-        // Strip out the superuser permission if the user isn't a superadmin
-        if (! Auth::user()->isSuperUser()) {
-            unset($permissions_array['superuser']);
-            $permissions_array['superuser'] = $orig_superuser;
-        }
+                $permissions_array = $request->input('permission');
 
-        $user->permissions = json_encode($permissions_array);
+                // Strip out the superuser permission if the API user isn't a superadmin
+                if (!Auth::user()->isSuperUser()) {
+                    unset($permissions_array['superuser']);
+                }
 
+                $user->permissions = $permissions_array;
+            }
+            
         // Handle uploaded avatar
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
-
-        //\Log::debug(print_r($user, true));
 
         // Was the user updated?
         if ($user->save()) {
