@@ -65,8 +65,7 @@ class AssetStoreTest extends TestCase
         $this->assertEquals('random_string', $asset->asset_tag);
         $this->assertEquals($userAssigned->id, $asset->assigned_to);
         $this->assertTrue($asset->company->is($company));
-        // I don't see this on the GUI side either, but it's in the docs so I'm guessing that's a mistake? It wasn't in the controller.
-        // $this->assertEquals('2023-09-03', $asset->last_audit_date);
+        $this->assertEquals('2023-09-03 00:00:00', $asset->last_audit_date->format('Y-m-d H:i:s'));
         $this->assertTrue($asset->location->is($location));
         $this->assertTrue($asset->model->is($model));
         $this->assertEquals('A New Asset', $asset->name);
@@ -80,6 +79,38 @@ class AssetStoreTest extends TestCase
         $this->assertTrue($asset->assetstatus->is($status));
         $this->assertTrue($asset->supplier->is($supplier));
         $this->assertEquals(10, $asset->warranty_months);
+    }
+
+    public function testSetsLastAuditDateToMidnightOfProvidedDate()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'last_audit_date' => '2023-09-03 12:23:45',
+                'asset_tag' => '1234',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+        $this->assertEquals('00:00:00', $asset->last_audit_date->format('H:i:s'));
+    }
+
+    public function testLastAuditDateCanBeNull()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                // 'last_audit_date' => '2023-09-03 12:23:45',
+                'asset_tag' => '1234',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+        $this->assertNull($asset->last_audit_date);
     }
 
     public function testArchivedDepreciateAndPhysicalCanBeNull()
