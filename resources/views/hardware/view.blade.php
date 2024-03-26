@@ -904,26 +904,17 @@
                                     @endcan
 
                                     @can('delete', $asset)
-                                        @if ($asset->deleted_at=='')
-                                            <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
+                                        <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+                                            @if ($asset->deleted_at=='')
+                                                <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
                                                 <span class="sr-only">{{ trans('general.delete') }}</span>
-                                            </div>
-                                        @endif
+                                            @else
+                                                <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
+                                                    @csrf
+                                                    <button class="btn btn-sm btn-warning col-md-12">{{ trans('general.restore') }}</button>
+                                                </form>
+                                           @endif
                                     @endcan
-
-                                @if ($asset->deleted_at!='')
-                                    <div class="text-center col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                        <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
-                                        @csrf 
-                                        <button class="btn btn-danger col-md-12">{{ trans('general.restore') }}</button>
-                                        </form>
-                                    </div>
-                                @endif
-
-                                @if  ($snipeSettings->qr_code=='1')
-                                    <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
-                                @endif
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                     <div style="text-align: left">
@@ -982,6 +973,13 @@
                                     </div>
 
                                 @endif
+
+                                @if  ($snipeSettings->qr_code=='1')
+                                    <div class="col-md-12" style="padding-top: 15px;">
+                                        <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
+                                    </div>
+                                @endif
+
                             </div> <!-- div.col-md-4 -->
                         </div><!-- /row -->
                     </div><!-- /.tab-pane asset details -->
