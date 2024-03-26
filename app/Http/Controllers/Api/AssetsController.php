@@ -591,6 +591,11 @@ class AssetsController extends Controller
                         }
                     }
                 }
+                if ($field->element == 'checkbox') {
+                    if(is_array($field_val)) {
+                        $field_val = implode(',', $field_val);
+                    }
+                }
 
 
                 $asset->{$field->db_column} = $field_val;
@@ -659,13 +664,22 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
+                    $field_val = $request->input($field->db_column, null);
+
                     if ($request->has($field->db_column)) {
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                                $asset->{$field->db_column} = Crypt::encrypt($field_val);
                             }
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                        if ($field->element == 'checkbox') {
+                            if(is_array($field_val)) {
+                                $field_val = implode(',', $field_val);
+                                $asset->{$field->db_column} = $field_val;
+                            }
+                        }
+                        else {
+                            $asset->{$field->db_column} = $field_val;
                         }
                     }
                 }
