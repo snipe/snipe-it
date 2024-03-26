@@ -74,12 +74,11 @@
 
 
                         <!-- Common Passwords -->
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('pwd_secure_complexity.*') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('pwd_secure_complexity', trans('admin/settings/general.pwd_secure_complexity')) }}
                             </div>
                             <div class="col-md-9">
-
                                 <label class="form-control">
                                     <span class="sr-only">{{ trans('admin/settings/general.pwd_secure_uncommon') }}</span>
                                     {{ Form::checkbox('pwd_secure_uncommon', '1', old('pwd_secure_uncommon', $setting->pwd_secure_uncommon),array( 'aria-label'=>'pwd_secure_uncommon')) }}
@@ -106,6 +105,9 @@
                                     {{ trans('admin/settings/general.pwd_secure_complexity_case_diff') }}
                                 </label>
 
+                                @if ($errors->has('pwd_secure_complexity.*'))
+                                    <span class="alert-msg">Invalid value included in this field</span>
+                                @endif
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
                                 </p>
