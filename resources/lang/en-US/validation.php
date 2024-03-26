@@ -151,4 +151,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];
