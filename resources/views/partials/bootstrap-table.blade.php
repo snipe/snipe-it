@@ -58,6 +58,7 @@
             maintainSelected: true,
             trimOnSearch: false,
             showSearchClearButton: true,
+            addrbar: true, // deeplink search phrases, sorting, etc
             paginationFirstText: "{{ trans('general.first') }}",
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
