@@ -187,7 +187,7 @@
                         @else
                           {{ $license->supplier->name }}
                         @endcan
-                        
+
                           @if ($license->supplier->url)
                             <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->supplier->url }}" rel="noopener">{{ $license->supplier->url }}</a>
                           @endif
@@ -232,6 +232,8 @@
                         @endif
                       </div>
                     </div>
+                @else
+                    {{ trans('general.deleted') }}
                 @endif
 
 
