@@ -219,17 +219,7 @@
                           @if ($license->supplier->zip)
                             {{ $license->supplier->zip }}
                           @endif
-
-
-
-                        @if ($license->supplier->support_phone)
-                          <br><i class="fas fa-phone" aria-hidden="true"></i>
-                          <a href="tel:{{ $license->supplier->support_phone }}">{{ $license->supplier->support_phone }}</a>
-                        @endif
-
-                        @if ($license->supplier->support_email)
-                          <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->supplier->support_email }}">{{ $license->supplier->support_email }}</a>
-                        @endif
+                        
                       </div>
                     </div>
                 @else
