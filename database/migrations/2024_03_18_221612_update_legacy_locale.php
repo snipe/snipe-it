@@ -18,6 +18,13 @@ class UpdateLegacyLocale extends Migration
             //
             $table->string('locale', 10)->nullable()->default('en-US')->change();
         });
+
+        Schema::table('settings', function (Blueprint $table) {
+            //
+            $table->string('locale', 10)->nullable()->default('en-US')->change();
+        });
+
+
     }
 
     /**
@@ -29,6 +36,10 @@ class UpdateLegacyLocale extends Migration
     {
         //
         Schema::table('users', function (Blueprint $table) {
+            //
+            $table->string('locale', 10)->nullable()->default(config('app.locale'))->change();
+        });
+        Schema::table('settings', function (Blueprint $table) {
             //
             $table->string('locale', 10)->nullable()->default(config('app.locale'))->change();
         });
