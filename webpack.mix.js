@@ -183,7 +183,6 @@ mix
         [
             "./resources/assets/js/dragtable.js",
             './node_modules/bootstrap-table/dist/bootstrap-table.js',
-            "./resources/assets/js/bootstrap-table-reorder-columns.js",
             './node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
