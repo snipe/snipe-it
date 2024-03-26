@@ -275,9 +275,12 @@
                         <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                         <td>{{ $accessory->category->name }}</td>
                         <td>{{ $accessory->pivot->created_at }}</td>
-                        @if (($accessory->assetlog->first()) && ($accessory->assetlog->first()->accept_signature!=''))
-                        <td><img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->assetlog->first()->accept_signature }}"></td>
-                        @endif
+
+                        <td>
+                            @if (($accessory->assetlog->first()) && ($accessory->assetlog->first()->accept_signature!=''))
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->assetlog->first()->accept_signature }}">
+                            @endif
+                        </td>
                     </tr>
                     @php
                         $acounter++
