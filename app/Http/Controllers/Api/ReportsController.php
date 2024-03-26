@@ -45,6 +45,10 @@ class ReportsController extends Controller
             $actionlogs = $actionlogs->where('action_type', '=', $request->input('action_type'))->orderBy('created_at', 'desc');
         }
 
+        if ($request->filled('user_id')) {
+            $actionlogs = $actionlogs->where('user_id', '=', $request->input('user_id'));
+        }
+
         if ($request->filled('action_source')) {
             $actionlogs = $actionlogs->where('action_source', '=', $request->input('action_source'))->orderBy('created_at', 'desc');
         }
