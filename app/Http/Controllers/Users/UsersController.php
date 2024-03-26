@@ -280,7 +280,7 @@ class UsersController extends Controller
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)
-            ->update(['location_id' => $request->input('location_id', null)]);
+            ->update(['location_id' => $user->location_id]);
 
         // Do we want to update the user password?
         if ($request->filled('password')) {
