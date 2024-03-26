@@ -106,6 +106,7 @@ return [
         'numeric'          => 'Value cannot be negative'
     ],
     'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*

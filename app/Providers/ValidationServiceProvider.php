@@ -322,6 +322,14 @@ class ValidationServiceProvider extends ServiceProvider
 
             return true;
         });
+
+        // Validates that a radio button option exists
+        Validator::extend('radio_buttons', function ($attribute, $value) {
+            $field = CustomField::where('db_column', $attribute)->first();
+            $options = $field->formatFieldValuesAsArray();
+
+            return in_array($value, $options);
+        });
     }
 
     /**

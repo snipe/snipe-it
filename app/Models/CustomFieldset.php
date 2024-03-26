@@ -103,6 +103,10 @@ class CustomFieldset extends Model
             if ($field->element == 'checkbox') {
                 $rules[$field->db_column_name()][] = 'checkboxes';
             }
+
+            if ($field->element == 'radio') {
+                $rules[$field->db_column_name()][] = 'radio_buttons';
+            }
         }
 
         return $rules;
