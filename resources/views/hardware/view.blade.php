@@ -983,6 +983,7 @@
                             </div> <!-- div.col-md-4 -->
                         </div><!-- /row -->
                     </div><!-- /.tab-pane asset details -->
+                    </div>
 
                     <div class="tab-pane fade" id="software">
                         <div class="row">
