@@ -94,6 +94,7 @@ class AssetsController extends Controller
             'serial',
             'model_number',
             'last_checkout',
+            'last_checkin',
             'notes',
             'expected_checkin',
             'order_number',
