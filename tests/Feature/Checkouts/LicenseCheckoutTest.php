@@ -6,13 +6,10 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class LicenseCheckoutTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testNotesAreStoredInActionLogOnCheckoutToAsset()
     {
         $admin = User::factory()->superuser()->create();

@@ -592,6 +592,11 @@ class AssetsController extends Controller
                         }
                     }
                 }
+                if ($field->element == 'checkbox') {
+                    if(is_array($field_val)) {
+                        $field_val = implode(',', $field_val);
+                    }
+                }
 
 
                 $asset->{$field->db_column} = $field_val;
@@ -614,7 +619,7 @@ class AssetsController extends Controller
                 $asset->image = $asset->getImageUrl();
             }
 
-            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -642,26 +647,35 @@ class AssetsController extends Controller
         }
 
         /**
-         * this is here just legacy reasons. Api\AssetController
-         * used image_source  once to allow encoded image uploads.
-         */
+        * this is here just legacy reasons. Api\AssetController
+        * used image_source  once to allow encoded image uploads.
+        */
         if ($request->has('image_source')) {
             $request->offsetSet('image', $request->offsetGet('image_source'));
-        }
+        }     
 
         $asset = $request->handleImages($asset);
         $model = $asset->model;
-
+            
         // Update custom fields
         if (($model) && (isset($model->fieldset))) {
             foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column, null);
+
                 if ($request->has($field->db_column)) {
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            $asset->{$field->db_column} = Crypt::encrypt($field_val);
                         }
-                    } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
+                    }
+                    if ($field->element == 'checkbox') {
+                        if(is_array($field_val)) {
+                            $field_val = implode(',', $field_val);
+                            $asset->{$field->db_column} = $field_val;
+                        }
+                    }
+                    else {
+                        $asset->{$field->db_column} = $field_val;
                     }
                 }
             }
@@ -686,7 +700,7 @@ class AssetsController extends Controller
             if ($asset->image) {
                 $asset->image = $asset->getImageUrl();
             }
-            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }

@@ -110,6 +110,7 @@
                 <th data-field="asset_name" data-sortable="true" data-visible="true">{{ trans('general.name') }}</th>
                 <th data-field="asset_category" data-sortable="true" data-visible="true">{{ trans('general.category') }}</th>
                 <th data-field="asset_model" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
+                <th data-field="rtd_location" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.default_location') }}</th>
                 <th data-field="asset_location" data-sortable="true" data-visible="false">{{ trans('general.location') }}</th>
                 <th data-field="asset_serial" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
                 <th data-field="asset_checkout_date" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
@@ -129,6 +130,7 @@
                     <td>{{ $asset->name }}</td>
                     <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
                     <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
+                    <td>{{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}</td>
                     <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
                     <td>{{ $asset->serial }}</td>
                     <td>
@@ -155,6 +157,7 @@
                             <td>{{ $asset->asset_tag }}</td>
                             <td>{{ $asset->name }}</td>
                             <td>{{ $asset->model->category->name }}</td>
+                            <td>{{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}</td>
                             <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
                             <td>{{ $asset->model->name }}</td>
                             <td>{{ $asset->serial }}</td>
