@@ -115,7 +115,7 @@ class Asset extends Depreciable
     ];
 
 
-  /**
+    /**
    * The attributes that are mass assignable.
    *
    * @var array

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
@@ -629,90 +630,82 @@ class AssetsController extends Controller
      * Accepts a POST request to update an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
-        $this->authorize('update', Asset::class);
+        $asset->fill($request->validated());
 
-        if ($asset = Asset::find($id)) {
-            $asset->fill($request->all());
+        if ($request->has('model_id')) {
+            $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
+        }
+        if ($request->has('company_id')) {
+            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
+        }
+        if ($request->has('rtd_location_id') && !$request->has('location_id')) {
+            $asset->location_id = $request->validated()['rtd_location_id'];
+        }
+        if ($request->input('last_audit_date')) {
+            $asset->last_audit_date = Carbon::parse($request->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s');
+        }
 
-            ($request->filled('model_id')) ?
-                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : '';
-            ($request->filled('company_id')) ?
-                $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
+        /**
+        * this is here just legacy reasons. Api\AssetController
+        * used image_source  once to allow encoded image uploads.
+        */
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
+        }     
 
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
-
-            /**
-            * this is here just legacy reasons. Api\AssetController
-            * used image_source  once to allow encoded image uploads.
-            */
-            if ($request->has('image_source')) {
-                $request->offsetSet('image', $request->offsetGet('image_source'));
-            }     
-
-            $asset = $request->handleImages($asset);
-            $model = AssetModel::find($asset->model_id);
+        $asset = $request->handleImages($asset);
+        $model = $asset->model;
             
-            // Update custom fields
-            if (($model) && (isset($model->fieldset))) {
-                foreach ($model->fieldset->fields as $field) {
-                    $field_val = $request->input($field->db_column, null);
+        // Update custom fields
+        if (($model) && (isset($model->fieldset))) {
+            foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column, null);
 
-                    if ($request->has($field->db_column)) {
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = Crypt::encrypt($field_val);
-                            }
+                if ($request->has($field->db_column)) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('admin')) {
+                            $asset->{$field->db_column} = Crypt::encrypt($field_val);
                         }
-                        if ($field->element == 'checkbox') {
-                            if(is_array($field_val)) {
-                                $field_val = implode(',', $field_val);
-                                $asset->{$field->db_column} = $field_val;
-                            }
-                        }
-                        else {
+                    }
+                    if ($field->element == 'checkbox') {
+                        if(is_array($field_val)) {
+                            $field_val = implode(',', $field_val);
                             $asset->{$field->db_column} = $field_val;
                         }
                     }
+                    else {
+                        $asset->{$field->db_column} = $field_val;
+                    }
                 }
             }
-
-
-            if ($asset->save()) {
-                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
-                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                    $location = $target->location_id;
-
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
-                        ->update(['location_id' => $target->location_id]);
-                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                    $location = $target->id;
-                }
-
-                if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-                }
-
-                if ($asset->image) {
-                    $asset->image = $asset->getImageUrl();
-                }
-
-                return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
-            }
-
-            return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+        if ($asset->save()) {
+            if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
+                $location = $target->location_id;
+            } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
+                $location = $target->location_id;
+
+                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
+                    ->update(['location_id' => $target->location_id]);
+            } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
+                $location = $target->id;
+            }
+
+            if (isset($target)) {
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+            }
+
+            if ($asset->image) {
+                $asset->image = $asset->getImageUrl();
+            }
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
 
