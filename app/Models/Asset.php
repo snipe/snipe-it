@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
 /**
@@ -115,7 +114,8 @@ class Asset extends Depreciable
         'requestable'      => 'nullable|boolean',
     ];
 
-  /**
+
+    /**
    * The attributes that are mass assignable.
    *
    * @var array
