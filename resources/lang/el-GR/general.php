@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Αξεσουάρ',
     'activated'			    => 'Ενεργοποιήθηκε',
     'accepted_date'         => 'Ημερομηνία Αποδεκτής',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Δεν υπάρχουν απαιτούμενα στοιχεία ενεργητικού ή μοντέλα στοιχείων ενεργητικού.',
+
+    'countable' => [
+        'accessories'  => ':count Αξεσουάρ: Μετρήστε Αξεσουάρ',
+        'assets'  => ':count Ενεργητικό:count Περιουσιακών Στοιχείων',
+        'licenses'  => ':count Άδεια Χρήσης:count Άδειες',
+        'license_seats'  => ':count Άδεια Θέση:count Καθίσματα Άδειας',
+        'consumables'  => ':count Αναλώσιμα :count Αναλώσιμα',
+        'components'  => ':count Εξαρτήματα :count',
+    ]
 
 ];

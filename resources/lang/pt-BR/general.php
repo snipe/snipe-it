@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Acessórios',
     'activated'			    => 'Ativado',
     'accepted_date'         => 'Data de Aceite',
@@ -519,5 +520,14 @@ Resultados da Sincronização',
              ],
     ],
     'no_requestable' => 'Não há ativos solicitáveis ou modelos de ativos.',
+
+    'countable' => [
+        'accessories'  => ':count Acessório|:count Acessórios',
+        'assets'  => ':count Ativo',
+        'licenses'  => ':count Licenças|:count Licenças',
+        'license_seats'  => ':count licença assentonamed@@0:count licença de assentos',
+        'consumables'  => ':count Consumível|:count Consumíveis',
+        'components'  => ':count Componente|:count Componentes',
+    ]
 
 ];

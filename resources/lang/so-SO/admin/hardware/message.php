@@ -2,8 +2,8 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Digniin: </strong> Hantidan waxaa loo calaamadeeyay mid aan hadda la daabul karin.
+                        Haddii heerkan uu isbedelay, fadlan cusboonaysii heerka hantida.',
     'does_not_exist' 	=> 'Hantidu ma jirto.',
     'does_not_exist_or_not_requestable' => 'Hantidaas ma jirto ama lama codsan karo.',
     'assoc_users'	 	=> 'Hantidan hadda waa la hubiyay isticmaale lamana tirtiri karo Fadlan marka hore hubi hantida, ka dibna isku day mar kale in aad tirtirto. ',
@@ -11,7 +11,7 @@ return [
     'create' => [
         'error'   		=> 'Hantida lama abuurin, fadlan isku day mar kale. :(',
         'success' 		=> 'Hantida loo sameeyay si guul leh :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Hanti leh sumad :tag si guul leh ayaa loo abuuray. <strong><a href=":link" style="color: white;">Riix halkan si aad u aragto</a></strong>.',
     ],
 
     'update' => [
@@ -19,7 +19,7 @@ return [
         'success' 			=> 'Hantida si guul leh ayaa loo cusboonaysiiyay.',
         'nothing_updated'	=>  'Goobo lama dooran, markaa waxba lama cusboonaysiin.',
         'no_assets_selected'  =>  'Wax hanti ah lama dooran, markaa waxba lama cusboonaysiin.',
-        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Hantida la xushay lama cusboonaysiin karo.',
     ],
 
     'restore' => [

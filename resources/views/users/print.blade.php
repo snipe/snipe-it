@@ -256,6 +256,7 @@
                 <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
                 <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
                 <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
             </tr>
             </thead>
             @php
@@ -274,6 +275,12 @@
                         <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                         <td>{{ $accessory->category->name }}</td>
                         <td>{{ $accessory->pivot->created_at }}</td>
+
+                        <td>
+                            @if (($accessory->assetlog->first()) && ($accessory->assetlog->first()->accept_signature!=''))
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->assetlog->first()->accept_signature }}">
+                            @endif
+                        </td>
                     </tr>
                     @php
                         $acounter++
@@ -308,6 +315,8 @@
                 <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
                 <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
                 <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
+
             </tr>
             </thead>
             @php
@@ -329,6 +338,11 @@
                             </td>
                             <td>{{ ($consumable->category) ? $consumable->category->name : ' invalid/deleted category' }} </td>
                             <td>{{  $consumable->pivot->created_at }}</td>
+                            <td>
+                                @if (($consumable->assetlog->first()) && ($consumable->assetlog->first()->accept_signature!=''))
+                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $consumable->assetlog->first()->accept_signature }}">
+                                @endif
+                            </td>
                     </tr>
                     @php
                         $ccounter++

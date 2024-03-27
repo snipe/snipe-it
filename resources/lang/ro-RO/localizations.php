@@ -50,6 +50,7 @@ return [
         'sr-CS' => 'Serbian (Latin)',
         'sk-SK'=> 'Slovacă',
         'sl-SI'=> 'Slovenian',
+        'so-SO'=> 'Somali',
         'es-ES'=> 'Spaniolă',
         'es-CO'=> 'Spaniolă, Columbia',
         'es-MX'=> 'Spaniolă, Mexic',

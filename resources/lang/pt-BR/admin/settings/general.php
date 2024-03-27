@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Ativação de autenticação em dois passos',
     'two_factor_enabled_text'        => 'Ativar autenticação em dois passos',
     'two_factor_reset'        => 'Redefinir senha autenticação de pois passos',
-    'two_factor_reset_help'        => 'Isto irá forçar o usuário a registar o seu dispositivo com Google Authenticator novamente. Isso pode ser útil se seu dispositivo registrado for perdido ou roubado. ',
+    'two_factor_reset_help'        => 'Isso forçará o usuário a registar o dispositivo com seu aplicativo de autenticação novamente. Isso pode ser útil se seu dispositivo de matrícula for perdido ou roubado. ',
     'two_factor_reset_success'          => 'Dispositivo de autenticação de dois passos foi redefinido com sucesso',
     'two_factor_reset_error'          => 'Reset do dispositivo de autenticação de dois passos falhou',
     'two_factor_enabled_warning'        => 'Ao ativar a autenticação de dois passos se não estiver já ativado, você será forçado a autenticar com o Google Auth com um dispositivo registrado.',

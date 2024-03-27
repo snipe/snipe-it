@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> '付属品',
     'activated'			    => 'アクティベート',
     'accepted_date'         => '受理日',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => '要求可能な資産または資産モデルはありません。',
+
+    'countable' => [
+        'accessories'  => ':count アクセサリー',
+        'assets'  => ':count アセット',
+        'licenses'  => ':count ライセンス',
+        'license_seats'  => ':count個のライセンスシート',
+        'consumables'  => ':count 消耗品数',
+        'components'  => ':count コンポーネント',
+    ]
 
 ];

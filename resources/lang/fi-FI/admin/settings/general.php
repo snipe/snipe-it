@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Kaksivaiheisen tunnistautumisen käyttöönotto',
     'two_factor_enabled_text'        => 'Ota käyttöön kaksivaiheinen tunnistautuminen',
     'two_factor_reset'        => 'Nollaa MFA salaisuus',
-    'two_factor_reset_help'        => 'Tämä pakottaa käyttäjän rekisteröimään laitteen uudelleen Google Authenticator -palveluun. Tämä voi olla hyödyllistä, jos heille tällä hetkellä rekisteröidyt laitteet menetetään tai varastetaan. ',
+    'two_factor_reset_help'        => 'Tämä pakottaa käyttäjän rekisteröimään laitteensa uudelleen niiden todennussovelluksella. Tämä voi olla hyödyllistä, jos heidän tällä hetkellä ilmoittautunut laite katoaa tai varastetaan. ',
     'two_factor_reset_success'          => 'MFA laite onnistuneesti nollattu',
     'two_factor_reset_error'          => 'MFA laitteen nollaus epäonnistui',
     'two_factor_enabled_warning'        => 'Kaksivaiheisen tunnistautumisen ottaminen käyttöön,, pakottaa sinut autentikoimaan Google Auth - laitteella. Voit lisätä sellaisen, jos sellaista ei ole vielä käytössä.',

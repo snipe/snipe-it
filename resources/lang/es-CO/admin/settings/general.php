@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Inscripción en dos factores',
     'two_factor_enabled_text'        => 'Habilitar dos factores',
     'two_factor_reset'        => 'Restablecer secreto de dos factores',
-    'two_factor_reset_help'        => 'Esto obligará al usuario a inscribir su dispositivo con Google Authenticator de nuevo. Esto puede ser útil si su dispositivo actualmente inscrito es perdido o robado. ',
+    'two_factor_reset_help'        => 'Esto obligará al usuario a volver a inscribir su dispositivo en su aplicación de autenticación. Esto puede ser útil si su dispositivo actualmente inscrito es perdido o robado. ',
     'two_factor_reset_success'          => 'Dispositivo de doble factor restablecido con éxito',
     'two_factor_reset_error'          => 'Error al restablecer el dispositivo de doble factor',
     'two_factor_enabled_warning'        => 'Habilitar doble factor si no está habilitado inmediatamente le obligará a autenticarse con un dispositivo inscrito en Google Auth. Tendrás la posibilidad de inscribir tu dispositivo si uno no está actualmente inscrito.',
