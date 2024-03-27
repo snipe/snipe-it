@@ -96,6 +96,7 @@ class Asset extends Depreciable
         'company_id'       => 'nullable|integer|exists:companies,id',
         'warranty_months'  => 'nullable|numeric|digits_between:0,240',
         'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
+        'last_checkin'     => 'nullable|date_format:Y-m-d H:i:s',
         'expected_checkin' => 'nullable|date',
         'last_audit_date'  => 'nullable|date_format:Y-m-d H:i:s',
         'next_audit_date'  => 'nullable|date|after:last_audit_date',
@@ -169,6 +170,8 @@ class Asset extends Depreciable
       'expected_checkin', 
       'next_audit_date', 
       'last_audit_date',
+      'last_checkin',
+      'last_checkout',
       'asset_eol_date',
     ];
 
