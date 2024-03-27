@@ -60,7 +60,7 @@ class AssetUpdateTest extends TestCase
                 'asset_tag' => 'random_string',
                 'assigned_user' => $userAssigned->id,
                 'company_id' => $company->id,
-                'last_audit_date' => '2023-09-03',
+                'last_audit_date' => '2023-09-03 12:23:45',
                 'location_id' => $location->id,
                 'model_id' => $model->id,
                 'name' => 'A New Asset',
@@ -98,6 +98,7 @@ class AssetUpdateTest extends TestCase
         $this->assertTrue($updatedAsset->assetstatus->is($status));
         $this->assertTrue($updatedAsset->supplier->is($supplier));
         $this->assertEquals(10, $updatedAsset->warranty_months);
+        $this->assertEquals('2023-09-03 00:00:00', $updatedAsset->last_audit_date->format('Y-m-d H:i:s'));
     }
 
     public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated()
