@@ -34,6 +34,8 @@ class UpdateAssetRequest extends ImageUploadRequest
             'warranty_months' => ['nullable', 'numeric', 'digits_between:0,240'],
             'last_checkout' => ['nullable', 'date_format:Y-m-d H:i:s'],
             'expected_checkin' => ['nullable', 'date'],
+            'last_audit_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'next_audit_date' => 'nullable|date|after:last_audit_date',
             'location_id' => ['nullable', 'exists:locations,id'],
             'rtd_location_id' => ['nullable', 'exists:locations,id'],
             'purchase_date' => ['nullable', 'date', 'date_format:Y-m-d'],
