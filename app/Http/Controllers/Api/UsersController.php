@@ -560,7 +560,26 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
-        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
+        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
+
+
+        // Filter on category ID
+        if ($request->filled('category_id')) {
+            $assets = $assets->InCategory($request->input('category_id'));
+        }
+
+
+        // Filter on model ID
+        if ($request->filled('model_id')) {
+
+            $model_ids = $request->input('model_id');
+            if (!is_array($model_ids)) {
+                $model_ids = array($model_ids);
+            }
+            $assets = $assets->InModelList($model_ids);
+        }
+
+        $assets = $assets->get();
 
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
