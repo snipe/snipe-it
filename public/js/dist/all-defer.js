@@ -211,8 +211,8 @@
       });
     });
   }
-  function destroyTree(root) {
-    walk(root, (el) => {
+  function destroyTree(root, walker = walk) {
+    walker(root, (el) => {
       cleanupAttributes(el);
       cleanupElement(el);
     });
@@ -413,7 +413,7 @@
       if (name == Symbol.unscopables)
         return false;
       return objects.some(
-        (obj) => Object.prototype.hasOwnProperty.call(obj, name)
+        (obj) => Object.prototype.hasOwnProperty.call(obj, name) || Reflect.has(obj, name)
       );
     },
     get({ objects }, name, thisProxy) {
@@ -421,7 +421,7 @@
         return collapseProxies;
       return Reflect.get(
         objects.find(
-          (obj) => Object.prototype.hasOwnProperty.call(obj, name)
+          (obj) => Reflect.has(obj, name)
         ) || {},
         name,
         thisProxy
@@ -451,6 +451,8 @@
     let recurse = (obj, basePath = "") => {
       Object.entries(Object.getOwnPropertyDescriptors(obj)).forEach(([key, { value, enumerable }]) => {
         if (enumerable === false || value === void 0)
+          return;
+        if (typeof value === "object" && value !== null && value.__v_skip)
           return;
         let path = basePath === "" ? key : `${basePath}.${key}`;
         if (typeof value === "object" && value !== null && value._x_interceptor) {
@@ -1619,7 +1621,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     get raw() {
       return raw;
     },
-    version: "3.13.5",
+    version: "3.13.7",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -2423,12 +2425,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
   function getArrayOfRefObject(el) {
     let refObjects = [];
-    let currentEl = el;
-    while (currentEl) {
-      if (currentEl._x_refs)
-        refObjects.push(currentEl._x_refs);
-      currentEl = currentEl.parentNode;
-    }
+    findClosest(el, (i) => {
+      if (i._x_refs)
+        refObjects.push(i._x_refs);
+    });
     return refObjects;
   }
 
@@ -3088,13 +3088,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (isObject2(items)) {
         items = Object.entries(items).map(([key, value]) => {
           let scope2 = getIterationScopeVariables(iteratorNames, value, key, items);
-          evaluateKey((value2) => keys.push(value2), { scope: { index: key, ...scope2 } });
+          evaluateKey((value2) => {
+            if (keys.includes(value2))
+              warn("Duplicate key on x-for", el);
+            keys.push(value2);
+          }, { scope: { index: key, ...scope2 } });
           scopes.push(scope2);
         });
       } else {
         for (let i = 0; i < items.length; i++) {
           let scope2 = getIterationScopeVariables(iteratorNames, items[i], i, items);
-          evaluateKey((value) => keys.push(value), { scope: { index: i, ...scope2 } });
+          evaluateKey((value) => {
+            if (keys.includes(value))
+              warn("Duplicate key on x-for", el);
+            keys.push(value);
+          }, { scope: { index: i, ...scope2 } });
           scopes.push(scope2);
         }
       }
@@ -3142,7 +3150,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         let marker = document.createElement("div");
         mutateDom(() => {
           if (!elForSpot)
-            warn(`x-for ":key" is undefined or invalid`, templateEl);
+            warn(`x-for ":key" is undefined or invalid`, templateEl, keyForSpot, lookup);
           elForSpot.after(marker);
           elInSpot.after(elForSpot);
           elForSpot._x_currentIfEl && elForSpot.after(elForSpot._x_currentIfEl);
@@ -3169,7 +3177,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         };
         mutateDom(() => {
           lastEl.after(clone2);
-          initTree(clone2);
+          skipDuringClone(() => initTree(clone2))();
         });
         if (typeof key === "object") {
           warn("x-for key cannot be an object, it must be a string or an integer", templateEl);
@@ -3253,7 +3261,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       addScopeToNode(clone2, {}, el);
       mutateDom(() => {
         el.after(clone2);
-        initTree(clone2);
+        skipDuringClone(() => initTree(clone2))();
       });
       el._x_currentIfEl = clone2;
       el._x_undoIf = () => {
