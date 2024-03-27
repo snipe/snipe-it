@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Wartość nie może być ujemna'
     ],
+    'checkboxes'           => ':attribute zawiera nieprawidłowe opcje.',
+    'radio_buttons'        => ':attribute jest nieprawidłowy.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Nieprawidłowa wartość dołączona do tego pola',
 ];

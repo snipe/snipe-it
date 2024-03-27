@@ -35,7 +35,7 @@ return [
     'superadmin_permission_warning' => 'Kaliya superadmins ayaa siin kara isticmaale superadmin gelitaanka.',
     'admin_permission_warning' => 'Kaliya isticmaalayaasha leh xuquuqda admins ama ka weyn ayaa siin kara marin u helka isticmaalaha.',
     'remove_group_memberships' => 'Ka saar Xubinnimada Kooxda',
-    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
+    'warning_deletion_information' => 'Waxaad ku dhowdahay inaad iska hubiso DHAMMAAN walxaha :count isticmaalayaasha hoos ku taxan. Magacyada maamulka sare waxa lagu iftiimiyay casaan.',
     'update_user_assets_status' => 'Cusbooneysii dhammaan hantida isticmaalayaashan heerkan',
     'checkin_user_properties' => 'Hubi dhammaan guryaha la xidhiidha isticmaalayaashan',
     'remote_label'   => 'Kani waa isticmaale fog',

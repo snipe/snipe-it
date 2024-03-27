@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Zwei-Faktor Registrierung',
     'two_factor_enabled_text'        => 'Zwei-Faktor-Authentifizierung aktivieren',
     'two_factor_reset'        => 'Zwei-Faktor-Geheimnis zurücksetzen',
-    'two_factor_reset_help'        => 'Dies zwingt den Benutzer sein Gerät mit der Google Authenticator App erneut zu registrieren. Dies kann nützlich sein, wenn das aktuell registrierte Gerät verloren ging oder gestohlen wurde. ',
+    'two_factor_reset_help'        => 'Dies zwingt den Nutzer dazu, sein Gerät erneut mit seiner Authentifizierungs-App zu registrieren. Dies kann nützlich sein, falls das derzeit registrierte Gerät verloren gegangen oder gestohlen wurde. ',
     'two_factor_reset_success'          => 'Zwei-Faktor-Gerät erfolgreich zurückgesetzt',
     'two_factor_reset_error'          => 'Zwei-Faktor-Gerät zurücksetzen fehlgeschlagen',
     'two_factor_enabled_warning'        => 'Die Aktivierung der Zwei-Faktor-Authentifizierung bewirkt, dass Sie sich sofort mit einem bei der Google Authenticator App registrierten Gerät authentifizieren müssen. Sie haben die Möglichkeit ihr Gerät hinzuzufügen falls derzeit keines registriert ist.',

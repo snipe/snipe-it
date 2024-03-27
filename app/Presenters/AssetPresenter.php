@@ -254,6 +254,13 @@ class AssetPresenter extends Presenter
                 'title' => trans('admin/hardware/table.checkout_date'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
+                'field' => 'last_checkin',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/table.last_checkin_date'),
+                'formatter' => 'dateDisplayFormatter',
+            ], [
                 'field' => 'expected_checkin',
                 'searchable' => false,
                 'sortable' => true,

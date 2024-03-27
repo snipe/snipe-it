@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Dvo-stopni vpis',
     'two_factor_enabled_text'        => 'Omogoči dvostopenjsko avtentikacijo',
     'two_factor_reset'        => 'Ponastavi dvo-stopenjsko skrivnost',
-    'two_factor_reset_help'        => 'To bo prisililo uporabnika, da znova vnese svojo napravo z Google Authenticator. To je lahko uporabno, če je njihova trenutno vpisana naprava izgubljena ali ukradena. ',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Dvostopenjska naprava je bila uspešno ponastavljena',
     'two_factor_reset_error'          => 'Ponastavitev dvostopenjskih naprav ni uspela',
     'two_factor_enabled_warning'        => 'Omogočanje dvostopenjske avtentifikacije, če trenutno ni omogočeno, vas bo takoj prisililo, da se potrdite s storitvijo Google Auth. Imeli boste možnost vpisati svojo napravo, če niste včlanjeni.',

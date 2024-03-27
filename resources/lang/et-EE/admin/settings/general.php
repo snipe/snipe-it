@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Kahe faktori registreerimine',
     'two_factor_enabled_text'        => 'Luba kaks tegurit',
     'two_factor_reset'        => 'Lähtesta kahefaktori saladus',
-    'two_factor_reset_help'        => 'See sunnib kasutajat uuesti oma seadet Google Authenticatoriga registreerima. See võib olla kasulik, kui nende praegu registreeritav seade on kadunud või varastatud.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Kahe faktori seade on edukalt lähtestatud',
     'two_factor_reset_error'          => 'Kaks tegurit seadete lähtestamine nurjus',
     'two_factor_enabled_warning'        => 'Kaheteguri lubamine, kui see pole praegu lubatud, viib teid otsekohe Google Auth-seadmesse autentimiseks. Teil on võimalus oma seadet registreeruda, kui seda praegu ei ole.',

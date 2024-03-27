@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Đăng ký Hai nhân tố',
     'two_factor_enabled_text'        => 'Kích hoạt hai yếu tố',
     'two_factor_reset'        => 'Đặt lại Hai yếu tố bí mật',
-    'two_factor_reset_help'        => 'Thao tác này sẽ bắt buộc người dùng đăng ký lại thiết bị của họ bằng Google Authenticator. Điều này có thể hữu ích nếu thiết bị đang học của họ bị mất hoặc bị đánh cắp.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Thiết lập thành công hai yếu tố',
     'two_factor_reset_error'          => 'Thiết lập lại thiết bị hai yếu tố không thành công',
     'two_factor_enabled_warning'        => 'Bật hai yếu tố nếu hiện tại không được bật sẽ buộc bạn phải xác thực ngay lập tức bằng thiết bị được đăng ký Google Auth. Bạn sẽ có khả năng đăng ký thiết bị của bạn nếu một trong số đó hiện không đăng ký.',

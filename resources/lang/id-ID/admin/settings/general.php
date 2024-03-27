@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Pendaftaran Dua Faktor',
     'two_factor_enabled_text'        => 'Aktifkan Dua Faktor',
     'two_factor_reset'        => 'Reset Dua Faktor Rahasia',
-    'two_factor_reset_help'        => 'Ini akan memaksa pengguna untuk mendaftarkan perangkat mereka dengan Google Authenticator lagi. Ini bisa berguna jika perangkat mereka saat ini terdaftar hilang atau dicuri.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Dua perangkat faktor berhasil di-reset',
     'two_factor_reset_error'          => 'Dua faktor perangkat reset gagal',
     'two_factor_enabled_warning'        => 'Mengaktifkan dua faktor jika saat ini tidak diaktifkan akan segera memaksa Anda untuk melakukan otentikasi dengan perangkat yang terdaftar di Google Auth. Anda akan memiliki kemampuan untuk mendaftarkan perangkat Anda jika seseorang tidak terdaftar saat ini.',

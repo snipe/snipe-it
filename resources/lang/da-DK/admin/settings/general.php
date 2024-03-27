@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Two-Factor Enrollment',
     'two_factor_enabled_text'        => 'Aktivér to faktorer',
     'two_factor_reset'        => 'Reset 2-Factor Secret',
-    'two_factor_reset_help'        => 'Dette vil tvinge brugeren til at tilmelde deres enhed med Google Authenticator igen. Dette kan være nyttigt, hvis deres tilmeldte enhed er tabt eller stjålet.',
+    'two_factor_reset_help'        => 'Dette vil tvinge brugeren til at tilmelde deres enhed med deres autentificerings-app igen. Dette kan være nyttigt, hvis deres aktuelt tilmeldte enhed er tabt eller stjålet. ',
     'two_factor_reset_success'          => 'To faktor enhed nulstilles',
     'two_factor_reset_error'          => 'To-faktor enhed reset mislykkedes',
     'two_factor_enabled_warning'        => 'Aktivering af to-faktor, hvis den ikke er aktiveret, vil straks tvinge dig til at godkende med en Google Auth-indskrevet enhed. Du vil have mulighed for at tilmelde din enhed, hvis en ikke er indskrevet på nuværende tidspunkt.',

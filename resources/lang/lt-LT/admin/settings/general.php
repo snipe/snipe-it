@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Dviejų veiksnių registracija',
     'two_factor_enabled_text'        => 'Įgalinti du veiksnius',
     'two_factor_reset'        => 'Atstatyti dviejų veiksnių paslaptį',
-    'two_factor_reset_help'        => 'Tai privers naudotoją vėl įrašyti įrenginį "Google" autentifikavimo priemone. Tai gali būti naudinga, jei jų šiuo metu užregistruotas įrenginys yra pamestas ar pavogtas.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Dviejų veiksnių įrenginys sėkmingai iš naujo nustatomas',
     'two_factor_reset_error'          => 'Dviejų veiksnių įrenginio atstatymas nepavyko',
     'two_factor_enabled_warning'        => 'Įjungus dviejų faktorių, jei jis šiuo metu neįjungtas, iš karto privers jus patvirtinti autentifikavimu naudojant "Google" prijungtą įrenginį. Jūs turėsite galimybę įregistruoti savo įrenginį, jei jis šiuo metu nėra įtrauktas.',
