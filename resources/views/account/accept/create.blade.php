@@ -67,7 +67,7 @@
                         <div class="col-md-12">
                             <br>
                             <div class="col-md-12" style="display:block;">
-                                <label id="note_label" for="note" style="text-align:center;" >{{trans('admin/settings/general.decline_message')}}</label>
+                                <label id="note_label" for="note" style="text-align:center;" >{{trans('admin/settings/general.acceptance_note')}}</label>
                             </div>
                             <div class="col-md-12">
                                 <textarea id="note" name="note" rows="4" cols="50" value="note" style="width:100%" ></textarea>
@@ -103,24 +103,7 @@
 @section('moar_scripts')
 
     <script nonce="{{ csrf_token() }}">
-        $(document).ready(function(){
 
-            $('#note').hide();
-            $('#note_label').hide();
-
-
-            $('input[id="declined"]').change(function(){
-
-                if($(this).is(':checked')){
-                    $('#note_label').show();
-                    $('#note').show();
-                }
-                else {
-                    $('#note_label').hide();
-                    $('#note').hide();
-                }
-            });
-        });
         var wrapper = document.getElementById("signature-pad"),
             clearButton = wrapper.querySelector("[data-action=clear]"),
             saveButton = wrapper.querySelector("[data-action=save]"),
