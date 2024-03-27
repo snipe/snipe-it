@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Pendaftaran Dua Faktor',
     'two_factor_enabled_text'        => 'Dayakan Dua Faktor',
     'two_factor_reset'        => 'Menetapkan semula Rahsia Dua Faktor',
-    'two_factor_reset_help'        => 'Ini akan memaksa pengguna untuk mendaftarkan peranti mereka dengan Pengesah Google sekali lagi. Ini berguna jika peranti yang sedang didaftarkan sekarang hilang atau dicuri.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Peranti dua faktor berjaya diset semula',
     'two_factor_reset_error'          => 'Penetapan peranti dua faktor gagal',
     'two_factor_enabled_warning'        => 'Mengaktifkan dua faktor sekiranya ia tidak didayakan akan segera memaksa anda untuk mengesahkan dengan peranti Google Auth terdaftar. Anda akan mempunyai keupayaan untuk mendaftarkan peranti anda jika seseorang tidak mendaftar pada masa ini.',

@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Ymrestru dau factor',
     'two_factor_enabled_text'        => 'Alluogi dwy factor',
     'two_factor_reset'        => 'Ailosod cyfrinair dwy factor',
-    'two_factor_reset_help'        => 'Wneith hyn gorfodi defnyddiwr i ail ymrestru eu dyfais hefo Google Authenticator. Ellith hyn fod yn fuddiol os ydi\'r dyfais sydd wedi ymrestru yn cael ei ddwyn neu golli. ',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Dyfais dwy factor wedi\'i ail osod yn llwyddiannus',
     'two_factor_reset_error'          => 'Wedi methu ailosod dyfais dilysaint dau-factor',
     'two_factor_enabled_warning'        => 'Bydd galluogi dau ffactor os nad yw wedi\'i alluogi ar hyn o bryd yn eich gorfodi ar unwaith i ddilysu gyda dyfais sydd wedi\'i chofrestru gan Google Auth. Bydd gennych y gallu i gofrestru\'ch dyfais os nad yw un wedi\'i gofrestru ar hyn o bryd.',

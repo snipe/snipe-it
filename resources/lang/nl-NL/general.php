@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accessoires',
     'activated'			    => 'Geactiveerd',
     'accepted_date'         => 'Datum geaccepteerd',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Er zijn geen aanvraagbare activa of modellen voor activa.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory~:count accessoires',
+        'assets'  => ':count Asset×:count Assets',
+        'licenses'  => ':count licentie|:count licenties',
+        'license_seats'  => ':count Licentie Zater|:count Licentie zitplaatsen',
+        'consumables'  => ':count Verbruiksverbruiker|:count Verbruiksartikelen',
+        'components'  => ':count Component|:count componenten',
+    ]
 
 ];

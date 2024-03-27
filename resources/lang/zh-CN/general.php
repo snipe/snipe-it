@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA(双因素认证) 重置',
     'accessories'			=> '附属品',
     'activated'			    => '已激活',
     'accepted_date'         => '接受日期',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => '没有可申领的资产或资产型号。',
+
+    'countable' => [
+        'accessories'  => ':count 配件|:count 配件',
+        'assets'  => ':count 资产|:count 资产',
+        'licenses'  => ':count 许可证|:count 许可证',
+        'license_seats'  => ':count 许可证席位|:count 许可证席位',
+        'consumables'  => ':count 耗材|:count 耗材',
+        'components'  => ':count 组件|:count 组件',
+    ]
 
 ];

@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Twee factor uitrol',
     'two_factor_enabled_text'        => 'Twee factor inschakelen',
     'two_factor_reset'        => 'Twee factor geheim herstellen',
-    'two_factor_reset_help'        => 'Dit zal de gebruiker dwingen om zijn apparaat opnieuw met Google Authenticator te activeren. Dit kan handig zijn als het huidig geactiveerde apparaat gestolen of verloren is. ',
+    'two_factor_reset_help'        => 'Dit zal de gebruiker dwingen om zijn apparaat opnieuw met zijn authenticatie-app te activeren. Dit kan handig zijn als hun huidig ingeschreven apparaat verloren of gestolen is. ',
     'two_factor_reset_success'          => 'Twee factor apparaat succesvol opnieuw ingesteld',
     'two_factor_reset_error'          => 'Twee factor apparaat opnieuw instellen mislukt',
     'two_factor_enabled_warning'        => 'Het inschakelen van twee factor authenticatie zal direct vereisen dat je authenticeert met een Google Auth geactiveerd apparaat. Je krijgt de mogelijkheid om een apparaat te activeren als dat nog niet het geval is.',

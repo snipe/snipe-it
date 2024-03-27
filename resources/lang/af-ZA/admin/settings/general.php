@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Twee-faktorinskrywing',
     'two_factor_enabled_text'        => 'Aktiveer twee faktore',
     'two_factor_reset'        => 'Herstel twee-faktor geheim',
-    'two_factor_reset_help'        => 'Dit sal die gebruiker dwing om hul toestel weer met Google Authenticator in te skryf. Dit kan handig wees as hul toestel wat tans ingeskryf is, verlore of gesteel is.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Twee faktor toestel suksesvol herstel',
     'two_factor_reset_error'          => 'Twee faktor toestel herstel het misluk',
     'two_factor_enabled_warning'        => 'As jy twee faktore aktiveer as dit nie tans geaktiveer is nie, sal dit jou dadelik dwing om te verifieer met \'n Google Auth-ingeskrewe toestel. Jy sal die vermoë hê om jou toestel in te skryf as een nie tans ingeskryf is nie.',

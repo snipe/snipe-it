@@ -262,7 +262,7 @@ return [
     'two_factor_enrollment'        => '登記雙因素驗證',
     'two_factor_enabled_text'        => '啟用雙因素驗證',
     'two_factor_reset'        => '重設雙因素驗證',
-    'two_factor_reset_help'        => '此動作會強制使用者再次透過 Google Authenticator 登記行動裝置，此動作可解決原登記行動裝置遺失的問題。',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => '重設雙因素驗證裝置成功',
     'two_factor_reset_error'          => '重設雙因素驗證裝置失敗',
     'two_factor_enabled_warning'        => '啟用雙因素認證將需要您立即用登記的行動裝置驗證身份。如您尚未設置雙因素認證，您現在可以登記您的設備',

@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Înscrierea în doi factori',
     'two_factor_enabled_text'        => 'Activați doi factori',
     'two_factor_reset'        => 'Resetați secretul cu două factori',
-    'two_factor_reset_help'        => 'Acest lucru va obliga utilizatorul să-și înregistreze din nou dispozitivul cu Google Authenticator. Acest lucru poate fi util dacă dispozitivul înmatriculat în prezent este pierdut sau furat.',
+    'two_factor_reset_help'        => 'Acest lucru va forța utilizatorul să înregistreze din nou dispozitivul cu aplicația de autentificare. Acest lucru poate fi util dacă dispozitivul înscris în prezent este pierdut sau furat. ',
     'two_factor_reset_success'          => 'Aparatul cu două factori se resetează',
     'two_factor_reset_error'          => 'Restabilirea dispozitivului cu două factori a eșuat',
     'two_factor_enabled_warning'        => 'Dacă activați două factori dacă nu este activat în prezent, vă forțați imediat să vă autentificați cu un dispozitiv Google Auth înscris. Veți avea capacitatea de a vă înregistra dispozitivul dacă nu sunteți înscris în prezent.',
