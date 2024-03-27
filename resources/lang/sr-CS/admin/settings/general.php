@@ -261,11 +261,7 @@ return [
     'two_factor_enrollment'        => 'Dvofaktorska prijava',
     'two_factor_enabled_text'        => 'Omoguci dvofaktorsku proveru identiteta',
     'two_factor_reset'        => 'Resetuj dvofaktorski ključ',
-    'two_factor_reset_help'        => 'Ovo će primorati korisnika da ponovo registruje svoj uređaj u Google Authenticator. Ovo može biti korisno ako je njihov trenutno registrovan uređaj izgubljen ili ukraden.
-
-
- 
- ',
+    'two_factor_reset_help'        => 'Ovo će primorati korisnika da ponovo registruje svoj uređaj u aplikaciji za autentifikaciju. Ovo može biti korisno ako je njihov trenutno registrovan uređaj izgubljen ili ukraden. ',
     'two_factor_reset_success'          => 'Dvofaktorski uređaj je uspešno resetovan',
     'two_factor_reset_error'          => 'Resetovanje uređaja sa dva faktora nije uspelo',
     'two_factor_enabled_warning'        => 'Omogućavanje dvofaktorske autentifikacije, ako trenutno nije omogućeno, odmah će vas primorati da se autentifikujete pomoću uređaja koji je registrovan za Google Auth. Imaćete mogućnost da registrujete svoj uređaj ako trenutno nije prijavljen.',

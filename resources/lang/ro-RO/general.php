@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accesorii',
     'activated'			    => 'activat',
     'accepted_date'         => 'Data acceptării',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Nu există active sau modele de active solicitate.',
+
+    'countable' => [
+        'accessories'  => ':count Accesorii:count Accesorii',
+        'assets'  => ':count Active|:count Active',
+        'licenses'  => ':count Licență:count Licențe',
+        'license_seats'  => ':count Locul de licență:count Locuri de licență',
+        'consumables'  => ':count Consumabile|:count Consumabile',
+        'components'  => ':count Component|:count Componente',
+    ]
 
 ];

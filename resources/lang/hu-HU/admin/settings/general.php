@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Két faktoros beiratkozás',
     'two_factor_enabled_text'        => 'Engedélyezze a két tényezőt',
     'two_factor_reset'        => 'Törölje a két faktor titkát',
-    'two_factor_reset_help'        => 'Ez arra kényszeríti a felhasználót, hogy újból beiktassa eszközét a Google Hitelesítővel. Ez hasznos lehet, ha az éppen beiratkozott eszközüket elveszik vagy ellopják.',
+    'two_factor_reset_help'        => 'A felhasználónak újra fel kell vennie az eszközt a hitelesítő alkalmazásba. Ez hasznos lehet, ha az aktuálisan felvett eszközt elveszette vagy ellopták. ',
     'two_factor_reset_success'          => 'Két tényező eszköz sikeresen visszaáll',
     'two_factor_reset_error'          => 'Két faktoros eszköz visszaállítása sikertelen',
     'two_factor_enabled_warning'        => 'A két tényező bekapcsolása, ha nincs aktuálisan engedélyezve, azonnal kényszeríti Önt arra, hogy hitelesítést végezzen egy Google Auth által beiratkozott eszközzel. Lehetőséged lesz arra, hogy beírja a készüléket, ha nincs beiratkozva.',

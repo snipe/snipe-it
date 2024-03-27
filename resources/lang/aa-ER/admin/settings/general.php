@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'crwdns1778:0crwdne1778:0',
     'two_factor_enabled_text'        => 'crwdns1779:0crwdne1779:0',
     'two_factor_reset'        => 'crwdns1780:0crwdne1780:0',
-    'two_factor_reset_help'        => 'crwdns1781:0crwdne1781:0',
+    'two_factor_reset_help'        => 'crwdns12150:0crwdne12150:0',
     'two_factor_reset_success'          => 'crwdns1782:0crwdne1782:0',
     'two_factor_reset_error'          => 'crwdns1783:0crwdne1783:0',
     'two_factor_enabled_warning'        => 'crwdns1784:0crwdne1784:0',

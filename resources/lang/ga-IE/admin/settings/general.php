@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Rollú Dhá Fachtóir',
     'two_factor_enabled_text'        => 'Cumasaigh Dhá Fachtóir',
     'two_factor_reset'        => 'Athshocraigh Dhá-Rúnda Fachtóir',
-    'two_factor_reset_help'        => 'Cuirfidh sé seo ar an úsáideoir a n-gléas a chlárú le Google Authenticator arís. D\'fhéadfadh sé seo a bheith úsáideach má cailleadh nó goideadh an gléas atá cláraithe faoi láthair.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Athshocraigh dhá fheiste fachtóir go rathúil',
     'two_factor_reset_error'          => 'Theip ar dhá athshocrú feiste fachtóir',
     'two_factor_enabled_warning'        => 'Má chuirtear ar chumas dhá fhachtóir mura bhfuil sé á chumasú faoi láthair, cuirfidh tú i bhfeidhm láithreach le d\'fhíordheimhniú le gléas cláraithe Google Auth. Beidh an cumas agat do ghléas a chlárú mura bhfuil duine cláraithe faoi láthair.',

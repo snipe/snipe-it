@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => 'Resetovanje 2FA',
     'accessories'			=> 'Dodatna oprema',
     'activated'			    => 'Aktiviran',
     'accepted_date'         => 'Datum preuzimanja',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Nema imovine ili modela imovine koji se mogu zatražiti.',
+
+    'countable' => [
+        'accessories'  => ':count pribor|:count pribora',
+        'assets'  => ':count imovina|:count imovina',
+        'licenses'  => ':count licenca|:count licenci',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count potrošni materijal|:count potrošnih materijala',
+        'components'  => ':count komponenta|:count komponenti',
+    ]
 
 ];
