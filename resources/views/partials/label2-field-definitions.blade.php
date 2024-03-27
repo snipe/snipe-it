@@ -348,7 +348,9 @@
                             </optgroup>
                             <optgroup label="Custom Fields">
                                 @foreach($customFields as $customField)
+                                    @if($customField->field_encrypted != 1)
                                     <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
+                                    @endif
                                 @endforeach
                             </optgroup>
                         </select>

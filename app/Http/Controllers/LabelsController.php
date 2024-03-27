@@ -14,6 +14,7 @@ use App\Models\Setting;
 use App\Models\Supplier;
 use App\Models\User;
 use App\View\Label as LabelView;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LabelsController extends Controller
@@ -21,12 +22,13 @@ class LabelsController extends Controller
     /**
      * Returns the Label view with test data
      *
-     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
-     * @param  string  $labelName
+     * @param string $labelName
      * @return \Illuminate\Contracts\View\View
+     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
      */
     public function show(string $labelName)
     {
+        $this->clearEncryptedLabelOptions();
         $labelName = str_replace('/', '\\', $labelName);
         $template = Label::find($labelName);
 
@@ -95,4 +97,23 @@ class LabelsController extends Controller
 
         return redirect()->route('home')->with('error', trans('admin/labels/message.does_not_exist'));
     }
+
+    private function clearEncryptedLabelOptions()
+    {
+
+        $customfields = CustomField::where('field_encrypted', 1)->get();
+        $selected_label_options = Setting::getSettings()->label2_fields;
+        if($selected_label_options != '') {
+        }
+        collect(explode(';', Setting::getSettings()->label2_fields))
+            ->filter()
+            ->each(function ($item) use ($customfields, $selected_label_options) {
+                if (!str_contains($item, $customfields->db_column)) {
+                    $selected_label_options .= $item;
+                }
+                DB::table('Settings')->update(['label2_fields' => $selected_label_options]);
+            });
+
+    }
+
 }
