@@ -80,8 +80,8 @@ class Actionlog extends SnipeModel
     {
         parent::boot();
         static::creating(function (self $actionlog) {
-            // If the admin is a superadmin, let's see if the target instead has a company.
-            if (Auth::user() && Auth::user()->isSuperUser()) {
+            // If user has access to multiple companies, let's see if the target instead has a company.
+            if (Auth::user() && Auth::user()->hasAccess('multicompany')) {
                 if ($actionlog->target) {
                     $actionlog->company_id = $actionlog->target->company_id;
                 } elseif ($actionlog->item) {

@@ -1,5 +1,5 @@
 <!-- Company -->
-@if (($snipeSettings->full_multiple_companies_support=='1') && (!Auth::user()->isSuperUser()))
+@if (($snipeSettings->full_multiple_companies_support=='1') && (!Auth::user()->hasAccess('multicompany')))
     <!-- full company support is enabled and this user isn't a superadmin -->
     <div class="form-group">
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}

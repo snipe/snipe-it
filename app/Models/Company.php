@@ -128,8 +128,8 @@ final class Company extends SnipeModel
         } else {
             $current_user = Auth::user();
 
-            // Super users should be able to set a company to whatever they need
-            if ($current_user->isSuperUser()) {
+            // Users with multi-company access should be able to set a company to whatever they need
+            if ($current_user->hasAccess('multicompany')) {
                 return static::getIdFromInput($unescaped_input);
             } else {
                 if ($current_user->company_id != null) {
@@ -157,19 +157,19 @@ final class Company extends SnipeModel
                 $current_user_company_id = Auth::user()->company_id;
                 $companyable_company_id = $companyable->company_id;
 
-                return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
+                return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->hasAccess('multicompany');
             }
         }
     }
 
     public static function isCurrentUserAuthorized()
     {
-        return (! static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->isSuperUser());
+        return (! static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->hasAccess('multicompany'));
     }
 
     public static function canManageUsersCompanies()
     {
-        return ! static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser() ||
+        return ! static::isFullMultipleCompanySupportEnabled() || Auth::user()->hasAccess('multicompany') ||
                 Auth::user()->company_id == null;
     }
 
@@ -192,7 +192,7 @@ final class Company extends SnipeModel
 
     public static function getIdForUser($unescaped_input)
     {
-        if (! static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser()) {
+        if (! static::isFullMultipleCompanySupportEnabled() || Auth::user()->hasAccess('multicompany')) {
             return static::getIdFromInput($unescaped_input);
         } else {
             return static::getIdForCurrentUser($unescaped_input);
@@ -202,7 +202,7 @@ final class Company extends SnipeModel
     public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
     {
         // If not logged in and hitting this, assume we are on the command line and don't scope?'
-        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
+        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->hasAccess('multicompany')) || (! Auth::check())) {
             return $query;
         } else {
             return static::scopeCompanyablesDirectly($query, $column, $table_name);
@@ -213,7 +213,7 @@ final class Company extends SnipeModel
     {
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
-        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
+        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->hasAccess('multicompany'))) {
             return $query;
         } else {
             $f = function ($q) {

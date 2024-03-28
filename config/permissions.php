@@ -27,6 +27,15 @@ return [
         ],
     ],
 
+    'Multiple company access' => [
+        [
+            'permission' => 'multicompany',
+            'label'      => '',
+            'note'       => 'This will allow users to access for all companies.',
+            'display'    => true,
+        ]
+    ],
+
     'CSV Import' => [
         [
             'permission' => 'import',
