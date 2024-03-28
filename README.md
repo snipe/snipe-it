@@ -32,8 +32,9 @@ For help using Snipe-IT, check out the [user's manual](https://snipe-it.readme.i
 
 Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to open a bug report or see what open issues you can help with. Please search through existing issues (open *and* closed) to see if your question has already been answered before opening a new issue.
 
-**PLEASE see the [Getting Help Guidelines](https://snipe-it.readme.io/docs/getting-help) and [Common Issues](https://snipe-it.readme.io/docs/common-issues) before opening a ticket, and be sure to complete all of the questions in the Github Issue template to help us to help you as quickly as possible.**
-
+> [!IMPORTANT]  
+> **PLEASE see the [Getting Help Guidelines](https://snipe-it.readme.io/docs/getting-help) and [Common Issues](https://snipe-it.readme.io/docs/common-issues) before opening a ticket, and be sure to complete all of the questions in the Github Issue template to help us to help you as quickly as possible.**
+> 
 -----
 
 ### Upgrading
@@ -57,6 +58,9 @@ Please see the [translations documentation](https://snipe-it.readme.io/docs/tran
 
 Since the release of the JSON REST API, several third-party developers have been developing modules and libraries to work with Snipe-IT.  
 
+> [!NOTE]  
+> As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :)
+
 - [Python Module](https://github.com/jbloomer/SnipeIT-PythonAPI) by [@jbloomer](https://github.com/jbloomer)
 - [SnipeSharp - .NET module in C#](https://github.com/barrycarey/SnipeSharp) by [@barrycarey](https://github.com/barrycarey)
 - [InQRy -unmaintained-](https://github.com/Microsoft/InQRy) by [@Microsoft](https://github.com/Microsoft)
@@ -73,8 +77,6 @@ Since the release of the JSON REST API, several third-party developers have been
 - [UniFi to Snipe-IT](https://github.com/RodneyLeeBrands/UnifiSnipeSync) by [@karpadiem](https://github.com/karpadiem) - Python script that synchronizes UniFi devices with Snipe-IT.
 - [Kandji2Snipe](https://github.com/grokability/kandji2snipe) by [@briangoldstein](https://github.com/briangoldstein) - Python script that synchronizes Kandji with Snipe-IT.
 - [SnipeAgent](https://github.com/ReticentRobot/SnipeAgent) by @ReticentRobot - Windows agent for Snipe-IT
-                                                     
-As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :)
 
 -----
 
@@ -92,4 +94,5 @@ The ERD is available [online here](https://drawsql.app/templates/snipe-it).
 
 ### Security
 
-To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 
+> [!IMPORTANT]
+> **To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker.**
