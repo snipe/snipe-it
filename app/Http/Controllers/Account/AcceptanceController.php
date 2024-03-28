@@ -306,10 +306,12 @@ class AcceptanceController extends Controller
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
             }
+
             $data = [
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
+                'note' => $request->input('note'),
                 'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
                 'assigned_to' => $assigned_to,
@@ -323,7 +325,7 @@ class AcceptanceController extends Controller
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
 
-            $acceptance->decline($sig_filename);
+            $acceptance->decline($sig_filename, $request->input('note'));
             $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
             $return_msg = trans('admin/users/message.declined');
