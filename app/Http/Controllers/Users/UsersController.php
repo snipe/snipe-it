@@ -584,7 +584,9 @@ class UsersController extends Controller
                             $user_groups .= $user_group->name.', ';
                         }
 
-                        $userperm = User::whereJSONContains('permissions','admin')->get();
+                        $perm = $user->permissions;
+                        $userperm = json_decode($perm);
+                       // $user->permission->wherejsoncontains('permissions', 'LIKE', '%1%');
 
                         // Add a new row with data
                         $values = [
@@ -603,8 +605,8 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
-                            $user->permissions ? $user->permission->where('permissions', 'LIKE', '%1%') : '',
-                            //$user->permissions->where("json_data_column->>'admin'", '1'),
+                            //$user->permissions ? $user->permission->where('permissions', 'LIKE', '%1%') : '',
+                            $userperm,
                          // ? $user->permissions->where('permissions', 'LIKE', '%"1"%') : '',
                             //where json like '%"category":"Category Example"%
                             $user->notes,
