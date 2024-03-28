@@ -49,11 +49,13 @@ class SendExpectedCheckinAlerts extends Command
         $this->info($whenNotify.' is deadline');
         $this->info($assets->count().' assets');
 
-        foreach ($assets as $asset) {
-            if ($asset->assigned && $asset->checkedOutToUser()) {
-                Log::info('Sending ExpectedCheckinNotification to ' . $asset->assigned->email);
-                $asset->assigned->notify((new ExpectedCheckinNotification($asset)));
-            }
+        if (1 == $settings->checkin_notification_user) {
+            foreach ($assets as $asset) {
+                if ($asset->assigned && $asset->checkedOutToUser()) {
+                    Log::info('Sending ExpectedCheckinNotification to ' . $asset->assigned->email);
+                    $asset->assigned->notify((new ExpectedCheckinNotification($asset)));
+                }
+            }    
         }
 
         if (($assets) && ($assets->count() > 0) && ($settings->alert_email != '')) {

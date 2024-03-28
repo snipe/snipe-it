@@ -363,5 +363,7 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'checkin_notification_user' => 'Checkin Notification for User',
+    'checkin_notification_user_help' => 'Send an E-Mail to the User when an asset check-in is expected or overdue.',
 
 ];
