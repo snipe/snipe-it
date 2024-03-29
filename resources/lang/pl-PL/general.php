@@ -342,7 +342,7 @@ return [
     'last_checkout'         => 'Ostatnie zamówienie',
     'due_to_checkin'        => 'Następuje:liczba pozycji ma zostać wkrótce sprawdzona:',
     'expected_checkin'      => 'Przewidywana data zwrotu',
-    'reminder_checked_out_items' => 'To jest przypomnienie o aktualnie wydanych Tobie przedmiotach. Jeśli uważasz, że ta lista jest niedokładna (brakuje czegoś lub pojawia się tutaj coś, czego nigdy nie otrzymałeś), prosimy o e-mail :reply_to_name pod adresem: :reply_to_addresse.',
+    'reminder_checked_out_items' => 'To jest przypomnienie o aktualnie wydanych Tobie przedmiotach. Jeśli uważasz, że ta lista jest niedokładna (brakuje czegoś lub pojawia się tutaj coś, czego nigdy nie otrzymałeś), prosimy o e-mail :reply_to_name pod adresem: :reply_to_address.',
     'changed'               => 'Zmieniono',
     'to'                    => 'Do',
     'report_fields_info'    => '<p>Wybierz pola, które chcesz uwzględnić w raporcie niestandardowym, i kliknij Generuj. Plik (custom-asset-report-RRRR-mm-dd.csv) zostanie pobrany automatycznie i będzie można go otworzyć w programie Excel.</p>
