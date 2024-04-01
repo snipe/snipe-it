@@ -295,7 +295,7 @@
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}" target="_blank">
-                                                                {{$asset>present()>dynamicUrl($asset>model>manufacturer->support_url) }}
+                                                                {{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only"></span></i>
                                                             </a>
                                                         </li>
