@@ -559,7 +559,7 @@ class AssetPresenter extends Presenter
      * Used to take user created URL and dynamically fill in the needed values per asset
      * @return string
      */
-    public function dynamicWarrantyUrl($dynamic_url)
+    public function dynamicUrl($dynamic_url)
     {
         $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $dynamic_url));
         $url = (str_replace('{SERIAL}', urlencode($this->model->serial), $url));
