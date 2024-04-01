@@ -281,22 +281,22 @@
                                                         <li> {{ $asset->model->manufacturer->name }}</li>
                                                     @endcan
 
-                                                    @if (($asset->model) && ($asset->model->manufacturer->url))
+                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->url!=''))
                                                         <li>
                                                             <i class="fas fa-globe-americas" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->model->manufacturer->url }}" target="_blank">
-                                                                {{ $asset->model->manufacturer->url }}
-                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}" target="_blank">
+                                                                {{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}
+                                                                <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only"></span></i>
                                                             </a>
                                                         </li>
                                                     @endif
 
-                                                    @if (($asset->model) && ($asset->model->manufacturer->support_url))
+                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->support_url!=''))
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->model->manufacturer->support_url }}" target="_blank">
-                                                                {{ $asset->model->manufacturer->support_url }}
-                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}" target="_blank">
+                                                                {{$asset>present()>dynamicUrl($asset>model>manufacturer->support_url) }}
+                                                                <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only"></span></i>
                                                             </a>
                                                         </li>
                                                     @endif
@@ -304,8 +304,8 @@
                                                     @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                         <li>
                                                             <i class="far fa-wrench" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
-                                                                {{ $asset->present()->dynamicWarrantyUrl() }}
+                                                            <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
+                                                                {{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                             </a>
                                                         </li>
