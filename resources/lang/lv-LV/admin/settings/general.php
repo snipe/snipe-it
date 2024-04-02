@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Divu faktoru uzņemšana',
     'two_factor_enabled_text'        => 'Iespējot divus faktorus',
     'two_factor_reset'        => 'Atiestatīt divfaktora noslēpumu',
-    'two_factor_reset_help'        => 'Tas liks lietotājam vēlreiz reģistrēt savu ierīci, izmantojot Google autentifikatoru. Tas var būt noderīgi, ja to pašreizējā reģistrētā ierīce tiek nozaudēta vai nozagta.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Divu faktoru ierīce ir veiksmīgi atiestatīta',
     'two_factor_reset_error'          => 'Divu faktoru ierīces atiestatīšana neizdevās',
     'two_factor_enabled_warning'        => 'Iespējojot divu faktoru darbību, ja tas pašlaik nav iespējots, jūs nekavējoties piespiedīs autentificēt ar Google Auth reģistrēto ierīci. Jums būs iespēja ierakstīt savu ierīci, ja tā pašlaik nav reģistrēta.',

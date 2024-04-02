@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Dvojfaktorový zápis',
     'two_factor_enabled_text'        => 'Povolit Dvoufaktorové ověření',
     'two_factor_reset'        => 'Resetovat dvou faktorové tajemství',
-    'two_factor_reset_help'        => 'Tímto bude uživatel přinucen, aby znovu zaregistroval své zařízení pomocí aplikace Google Authenticator. To může být užitečné, pokud ztratil nebo mu bylo odcizeno jeho aktuálně zapsané zařízení. ',
+    'two_factor_reset_help'        => 'To uživatele donutí znovu zapsat své zařízení do svého autentizátoru aplikací. To může být užitečné, pokud je jejich aktuálně zapsané zařízení ztraceno nebo odcizeno. ',
     'two_factor_reset_success'          => 'Resetování dvoufaktorového zařízení bylo úspěšné',
     'two_factor_reset_error'          => 'Resetování dvoufaktorového zařízení selhalo',
     'two_factor_enabled_warning'        => 'Povolení dvoufaktorového zabezpečení, pokud již není v současné době povoleno vás okamžitě donutí k ověření pomocí zařízení zapsaného v Google Auth. Pokud není v současné době žádné registrován. Budete mít možnost zapsat svoje zařízení.',

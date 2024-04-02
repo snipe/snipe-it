@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'கருவிகள்',
     'activated'			    => 'இயக்கப்பட்டது',
     'accepted_date'         => 'Date Accepted',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'அடுத்த',
     'next_audit_date'		=> 'அடுத்த கணக்காய்வு தேதி',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'கடைசி ஆடிட்',
     'new'					=> 'புதிய!',
     'no_depreciation'		=> 'தேய்மானம் இல்லை',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

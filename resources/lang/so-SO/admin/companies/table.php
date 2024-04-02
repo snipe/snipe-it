@@ -1,11 +1,11 @@
 <?php
 return array(
-    'companies' => 'Companies',
-    'create'    => 'Create Company',
+    'companies' => 'Shirkadaha',
+    'create'    => 'Abuur Shirkad',
     'email'     => 'Company Email',
-    'title'     => 'Company',
+    'title'     => 'Shirkadda',
     'phone'     => 'Company Phone',
-    'update'    => 'Update Company',
-    'name'      => 'Company Name',
-    'id'        => 'ID',
+    'update'    => 'Shirkada Cusbooneysii',
+    'name'      => 'Magaca Shirkadda',
+    'id'        => 'Aqoonsi',
 );

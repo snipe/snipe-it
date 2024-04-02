@@ -964,8 +964,7 @@
                 var clickedElement = $(e.trigger);
                 // Get the target element selector from data attribute
                 var targetSelector = clickedElement.data('data-clipboard-target');
-                // Find the target element
-                var targetEl = $(targetSelector);
+                // Show the alert that the content was copied
                 clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
@@ -990,6 +989,23 @@
                 },
             });
 
+
+            function showHideEncValue(e) {
+                // Use element id to find the text element to hide / show
+                var targetElement = e.id+"-to-show";
+                var hiddenElement = e.id+"-to-hide";
+                if($(e).hasClass('fa-lock')) {
+                    $(e).removeClass('fa-lock').addClass('fa-unlock');
+                    // Show the encrypted custom value and hide the element with asterisks
+                    document.getElementById(targetElement).style.fontSize = "100%";
+                    document.getElementById(hiddenElement).style.display = "none";
+                } else {
+                    $(e).removeClass('fa-unlock').addClass('fa-lock');
+                    // ClipboardJS can't copy display:none elements so use a trick to hide the value
+                    document.getElementById(targetElement).style.fontSize = "0px";
+                    document.getElementById(hiddenElement).style.display = "";
+                 }
+             }
 
             $(function () {
 

@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => '2단계 등록',
     'two_factor_enabled_text'        => '2중 활성화',
     'two_factor_reset'        => '2중 보안 재설정',
-    'two_factor_reset_help'        => '이 기능은 강제로 사용자들을 구글 인증을 사용하여 각각의 장치에 다시 등록하게 합니다. 이 기능은 현재 등록한 장치들이 분실이나 도난 당했다면 유용할 것입니다. ',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => '2중 장치 재설정이 되었습니다',
     'two_factor_reset_error'          => '2중 장치 재설정이 실패했습니다',
     'two_factor_enabled_warning'        => '2중 활성화가 현재 활성화되지 않다면 구글 인증으로 등록된 장치를 즉시 강제로 인증하게 할 것입니다. 당신은 하나가 현재 등록되지 않았다면 당신의 장치를 등록할 수 있어야 합니다.',

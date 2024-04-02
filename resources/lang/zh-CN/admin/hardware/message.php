@@ -18,6 +18,7 @@ return [
         'success' 			=> '资产更新成功。',
         'nothing_updated'	=>  '一个也没有选，所以什么也不会更新。',
         'no_assets_selected'  =>  '没有选择任何资产，因此没有更新任何内容。',
+        'assets_do_not_exist_or_are_invalid' => '无法更新选定的资产。',
     ],
 
     'restore' => [

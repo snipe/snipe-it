@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Oheistarvikkeet',
     'activated'			    => 'Aktivoitu',
     'accepted_date'         => 'Hyväksytty, päiväys',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Uusi salasana',
     'next'					=> 'Seuraava',
     'next_audit_date'		=> 'Seuraava tarkastuspäivä',
+    'no_email'              => 'Tähän käyttäjään liittyvää sähköpostiosoitetta ei ole',
     'last_audit'		    => 'Viimeisin tarkastus',
     'new'					=> 'uusi!',
     'no_depreciation'		=> 'Ei poistoluokkaa',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Pyydettäviä omaisuuseriä tai omaisuusmalleja ei ole.',
+
+    'countable' => [
+        'accessories'  => ':count Lisävaruste :count Lisätarvikkeet',
+        'assets'  => ':count Varat :count Varat',
+        'licenses'  => ':count Lisenssi :count Lisenssit',
+        'license_seats'  => ':count Lisenssipaikka:count Lisenssi Istuimet',
+        'consumables'  => ':count Kulutustavara :count Kulutustavarat',
+        'components'  => ':count Komponentti :count Komponentit',
+    ]
 
 ];

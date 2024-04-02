@@ -264,7 +264,7 @@ return [
     'two_factor_enrollment'        => '二段階認証登録',
     'two_factor_enabled_text'        => '二段階認証を有効',
     'two_factor_reset'        => '二段階認証をリセット',
-    'two_factor_reset_help'        => 'ユーザーはGoogle Authenticatorでデバイスを再度登録する必要があります。これは、現在登録されているデバイスを紛失または盗難した場合に便利です。 ',
+    'two_factor_reset_help'        => 'これにより、ユーザーは認証アプリでデバイスを再度登録することが強制されます。 これは、現在登録されているデバイスを紛失または盗難された場合に便利です。 ',
     'two_factor_reset_success'          => '二段階認証は正常にリセットされました。',
     'two_factor_reset_error'          => '二段階認証のデバイスリセットに失敗しました。',
     'two_factor_enabled_warning'        => '二段階認証を有効にすると、Google Authenticatorでの認証が強制されます。あなたがお持ちのデバイスを登録することができます。',

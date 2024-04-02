@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Harta berjaya dikemaskini.',
         'nothing_updated'	=>  'Tiada medan dipilih, jadi tiada apa yang dikemas kini.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

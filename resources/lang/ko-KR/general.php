@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> '부속품들',
     'activated'			    => '활성화',
     'accepted_date'         => 'Date Accepted',
@@ -201,6 +202,7 @@ return [
     'new_password'          => '새로운 비밀번호',
     'next'					=> '다음',
     'next_audit_date'		=> '다음 감사 일자',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => '최근 감사',
     'new'					=> '신규!',
     'no_depreciation'		=> '감가 상각 없음',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

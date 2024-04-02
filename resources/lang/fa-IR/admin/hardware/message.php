@@ -20,6 +20,7 @@ return [
         'nothing_updated'	=>  'هیچ زمینه، انتخاب شدند تا هیچ چیز به روز شد.',
         'no_assets_selected'  =>  'هیچ دارایی انتخاب نشد، بنابراین چیزی به‌روزرسانی نشد.
 ',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

@@ -4,13 +4,10 @@ namespace Tests\Unit\Models\Company;
 
 use App\Models\Company;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class GetIdForCurrentUserTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testReturnsProvidedValueWhenFullCompanySupportDisabled()
     {
         $this->settings->disableMultipleFullCompanySupport();

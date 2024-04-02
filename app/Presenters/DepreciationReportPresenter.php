@@ -34,6 +34,7 @@ class DepreciationReportPresenter extends Presenter
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
+                'switchable' => false,
                 "title" => trans('admin/hardware/form.name'),
                 "visible" => false,
             ], [

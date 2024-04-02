@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Aksesoris',
     'activated'			    => 'Diaktifkan',
     'accepted_date'         => 'Tanggal Diterima',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Kata Sandi Baru',
     'next'					=> 'Berikutnya',
     'next_audit_date'		=> 'Tanggal Audit berikutnya',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Audit terakhir',
     'new'					=> 'baru!',
     'no_depreciation'		=> 'Tidak ada penyusutan',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

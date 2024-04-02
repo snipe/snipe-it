@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accesorii',
     'activated'			    => 'activat',
     'accepted_date'         => 'Data acceptării',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Parolă nouă',
     'next'					=> 'Următor →',
     'next_audit_date'		=> 'Data următoarei auditări',
+    'no_email'              => 'Nicio adresă de e-mail asociată cu acest utilizator',
     'last_audit'		    => 'Ultimul audit',
     'new'					=> 'nou!',
     'no_depreciation'		=> 'Fara depreciere',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Nu există active sau modele de active solicitate.',
+
+    'countable' => [
+        'accessories'  => ':count Accesorii:count Accesorii',
+        'assets'  => ':count Active|:count Active',
+        'licenses'  => ':count Licență:count Licențe',
+        'license_seats'  => ':count Locul de licență:count Locuri de licență',
+        'consumables'  => ':count Consumabile|:count Consumabile',
+        'components'  => ':count Component|:count Componente',
+    ]
 
 ];

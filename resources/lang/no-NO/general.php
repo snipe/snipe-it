@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Tilbehør',
     'activated'			    => 'Aktivert',
     'accepted_date'         => 'Akseptdato',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Nytt passord',
     'next'					=> 'Neste',
     'next_audit_date'		=> 'Neste revisjon dato',
+    'no_email'              => 'Ingen e-postadresse tilknyttet denne brukeren',
     'last_audit'		    => 'Siste revisjon',
     'new'					=> 'ny!',
     'no_depreciation'		=> 'Ingen avskrivning',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Det finnes ingen forespørselbare eiendeler eller modeller.',
+
+    'countable' => [
+        'accessories'  => ':count Tilbehør|:count tilbehør',
+        'assets'  => ':count Eiendeler|:count',
+        'licenses'  => ':count Lisens|:count lisenser',
+        'license_seats'  => ':count lisenssete|:count Lisensseter',
+        'consumables'  => ':count Forbruksvare|:count Forbruksvarer',
+        'components'  => ':count Komponenter|:count komponenter',
+    ]
 
 ];

@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'component_name'                  => 'Component Name',
-    'checkin'                             => 'Checkin Component',
-    'checkout'                             => 'Checkout Component',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Component',
-    'edit'                             => 'Edit Component',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
-    'update'                            => 'Update Component',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'component_name'                  => 'Magaca Qaybta',
+    'checkin'                             => 'Hubi Qaybta',
+    'checkout'                             => 'Qaybta hubinta',
+    'cost'				=> 'Qiimaha iibka',
+    'create'                             => 'Abuur Qayb',
+    'edit'                             => 'Wax ka beddel qaybta',
+    'date'					=> 'Taariikhda Iibka',
+    'order'					=> 'Nambarka dalbashada',
+    'remaining' 			             => 'Haraaga',
+    'total' 			                 => 'Wadarta',
+    'update'                            => 'Cusbooneysii Qaybta',
+    'checkin_limit'            => 'Qadarka la hubiyay waa in ay la mid tahay ama ka yar tahay :assigned_qty'
 );

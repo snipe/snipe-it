@@ -19,6 +19,7 @@ return [
         'success' 			=> 'Equipo actualizado correctamente.',
         'nothing_updated'	=>  'No se seleccionaron campos, por lo que no se actualizó nada.',
         'no_assets_selected'  =>  'Ningún recurso fue seleccionado, por lo que no se actualizó nada.',
+        'assets_do_not_exist_or_are_invalid' => 'Los activos seleccionados no se pueden actualizar.',
     ],
 
     'restore' => [

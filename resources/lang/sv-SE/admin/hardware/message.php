@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Asset uppdaterad framgångsrikt.',
         'nothing_updated'	=>  'Inga fält valdes, så ingenting uppdaterades.',
         'no_assets_selected'  =>  'Inga tillgångar valdes, så ingenting uppdaterades.',
+        'assets_do_not_exist_or_are_invalid' => 'Valda tillgångar kan inte uppdateras.',
     ],
 
     'restore' => [

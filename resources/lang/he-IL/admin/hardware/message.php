@@ -18,6 +18,7 @@ return [
         'success' 			=> 'הנכס עודכן בהצלחה.',
         'nothing_updated'	=>  'לא נבחרו שדות, ולכן דבר לא עודכן.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

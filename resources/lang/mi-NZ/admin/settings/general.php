@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Te whakaurunga e rua',
     'two_factor_enabled_text'        => 'Whakahohehia te Mea Tuarua',
     'two_factor_reset'        => 'Tautuhi anō i te Tino Tuarua',
-    'two_factor_reset_help'        => 'Ma tenei ka akiaki te kaiwhakamahi ki te whakauru i to raatau mahi ki a Google Authenticator. Ka taea e tenei te whai hua ki te ngaro, ki te tahaehia ranei to raanei.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'E rua tautuhinga pūrere e tautuhi ana',
     'two_factor_reset_error'          => 'I rahua nga tautuhinga tautuhi piti',
     'two_factor_enabled_warning'        => 'Ka taea e koe te whakauru i nga take e rua ki te kore e taea te mahi i tenei wa ka akiaki koe ki te whakauru ki te kaupapa a Google Auth. Ka taea e koe te whakauru i to raatau ki te kore tetahi e whakauruhia ana.',

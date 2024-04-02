@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA нулиране',
     'accessories'			=> 'Аксесоари',
     'activated'			    => 'Активирано',
     'accepted_date'         => 'Дата на приемане',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Нова парола',
     'next'					=> 'Следващ',
     'next_audit_date'		=> 'Следваща дата на одита',
+    'no_email'              => 'Няма е-майл адрес към този потребител',
     'last_audit'		    => 'Последният одит',
     'new'					=> 'new!',
     'no_depreciation'		=> 'Без амортизация',
@@ -516,6 +518,15 @@ return [
                 'partial'   =>  'Изтрити :success_count :object_type, но :error_count :object_type не можаха да се изтрият',
              ],
     ],
-    'no_requestable' => 'There are no requestable assets or asset models.',
+    'no_requestable' => 'Няма активи или модели, които могат да бъдат изисквани.',
+
+    'countable' => [
+        'accessories'  => ':count Аксесоар|:count Аксесоари',
+        'assets'  => ':count Актив|:count Активи',
+        'licenses'  => ':count Лиценз|:count Лицензи',
+        'license_seats'  => ':count Лицензно място|:count Лицензни места',
+        'consumables'  => ':count Консуматив|:count Консумативи',
+        'components'  => ':count Компонент|:count Компоненти',
+    ]
 
 ];

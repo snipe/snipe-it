@@ -160,75 +160,27 @@ class DefaultLabel extends RectangleSheet
             $textY += $this->textSize + self::TEXT_MARGIN;
         }
 
-        // Fields
+        // Render the selected fields with their labels
         $fieldsDone = 0;
-        if ($settings->labels_display_name && $fieldsDone < $this->getSupportFields()) {
-            if ($asset->name) {
-                static::writeText(
-                    $pdf, 'N: '.$asset->name,
-                    $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
-                    $textW, $this->textSize,
-                    true, 0
-                );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
-            }
-        }
-        if ($settings->labels_display_company_name && $fieldsDone < $this->getSupportFields()) {
-            if ($asset->company) {
-                static::writeText(
-                    $pdf, 'C: '.$asset->company->name,
-                    $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
-                    $textW, $this->textSize,
-                    true, 0
-                );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
-            }
-        }
-        if ($settings->labels_display_tag && $fieldsDone < $this->getSupportFields()) {
-            if ($asset->asset_tag) {
-                static::writeText(
-                    $pdf, 'T: '.$asset->asset_tag,
-                    $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
-                    $textW, $this->textSize,
-                    true, 0
-                );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
-            }
-        }
-        if ($settings->labels_display_serial && $fieldsDone < $this->getSupportFields()) {
-            if ($asset->serial) {
-                static::writeText(
-                    $pdf, 'S: '.$asset->serial,
-                    $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
-                    $textW, $this->textSize,
-                    true, 0
-                );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
-            }
-        }
-        if ($settings->labels_display_model && $fieldsDone < $this->getSupportFields()) {
-            if ($asset->model) {
-                static::writeText(
-                    $pdf, 'M: '.$asset->model->name,
-                    $textX1, $textY,
-                    'freesans', '', $this->textSize, 'L',
-                    $textW, $this->textSize,
-                    true, 0
-                );
-                $textY += $this->textSize + self::TEXT_MARGIN;
-                $fieldsDone++;
-            }
-        }
+        if ($fieldsDone < $this->getSupportFields()) {
 
+            foreach ($record->get('fields') as $field) {
+
+                // Actually write the selected fields and their matching values
+                static::writeText(
+                    $pdf, (($field['label']) ? $field['label'].' ' : '') . $field['value'],
+                    $textX1, $textY,
+                    'freesans', '', $this->textSize, 'L',
+                    $textW, $this->textSize,
+                    true, 0
+                );
+
+                $textY += $this->textSize + self::TEXT_MARGIN;
+                $fieldsDone++;
+            }
+        }
     }
+
 }
 
 ?>

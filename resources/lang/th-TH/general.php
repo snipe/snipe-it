@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'อุปกรณ์',
     'activated'			    => 'เปิดใช้งาน',
     'accepted_date'         => 'ข้อมูลที่ได้รับการยอมรับแล้ว',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'รหัสผ่านใหม่',
     'next'					=> 'ถัด​ไป',
     'next_audit_date'		=> 'วันที่ตรวจสอบถัดไป',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'การตรวจสอบครั้งล่าสุด',
     'new'					=> 'ใหม่!',
     'no_depreciation'		=> 'ไม่มีค่าเสื่อมราคา',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

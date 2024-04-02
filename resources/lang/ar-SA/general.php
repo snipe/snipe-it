@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'ملحقات',
     'activated'			    => 'مفعل',
     'accepted_date'         => 'تم تخزين التاريخ',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'كلمة المرور الجديدة',
     'next'					=> 'التالى',
     'next_audit_date'		=> 'تاريخ التدقيق التالي',
+    'no_email'              => 'لا يوجد عنوان بريد إلكتروني مرتبط بهذا المستخدم',
     'last_audit'		    => 'آخر مراجعة',
     'new'					=> 'الجديد!',
     'no_depreciation'		=> 'لا يوجد إستهلاك',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'لا توجد أصول أو نماذج للأصول التي يمكن طلبها.',
+
+    'countable' => [
+        'accessories'  => ':count ملحقات :count ملحقات',
+        'assets'  => ':count أصول :count أصول',
+        'licenses'  => ':count ترخيص :count تراخيص',
+        'license_seats'  => ':count مقاعد الرخصة<unk> :count مقاعد الرخص',
+        'consumables'  => ':count مستهلكة<unk> :count مستهلك',
+        'components'  => ':count مكون<unk> :count مكونات',
+    ]
 
 ];

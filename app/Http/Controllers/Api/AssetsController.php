@@ -94,6 +94,7 @@ class AssetsController extends Controller
             'serial',
             'model_number',
             'last_checkout',
+            'last_checkin',
             'notes',
             'expected_checkin',
             'order_number',
@@ -591,6 +592,11 @@ class AssetsController extends Controller
                         }
                     }
                 }
+                if ($field->element == 'checkbox') {
+                    if(is_array($field_val)) {
+                        $field_val = implode(',', $field_val);
+                    }
+                }
 
 
                 $asset->{$field->db_column} = $field_val;
@@ -614,6 +620,8 @@ class AssetsController extends Controller
             }
 
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
+
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -659,13 +667,22 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
+                    $field_val = $request->input($field->db_column, null);
+
                     if ($request->has($field->db_column)) {
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                                $asset->{$field->db_column} = Crypt::encrypt($field_val);
                             }
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                        if ($field->element == 'checkbox') {
+                            if(is_array($field_val)) {
+                                $field_val = implode(',', $field_val);
+                                $asset->{$field->db_column} = $field_val;
+                            }
+                        }
+                        else {
+                            $asset->{$field->db_column} = $field_val;
                         }
                     }
                 }
@@ -693,6 +710,7 @@ class AssetsController extends Controller
                 }
 
                 return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
             }
 
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -1062,8 +1080,7 @@ class AssetsController extends Controller
 
         $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests')
-            ->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests');
 
 
 
@@ -1071,7 +1088,7 @@ class AssetsController extends Controller
         if ($request->filled('search')) {
             $assets->TextSearch($request->input('search'));
         }
-
+        
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
             if ($request->filled($field->db_column_name())) {
@@ -1101,6 +1118,7 @@ class AssetsController extends Controller
                 break;
         }
 
+        $assets->requestableAssets();
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');

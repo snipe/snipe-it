@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> '配件',
     'activated'			    => '已啟用',
     'accepted_date'         => '接受日期',
@@ -201,6 +202,7 @@ return [
     'new_password'          => '新密碼',
     'next'					=> '下一頁',
     'next_audit_date'		=> '下次稽核日期',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => '最後稽核日期',
     'new'					=> 'new!',
     'no_depreciation'		=> '永久',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

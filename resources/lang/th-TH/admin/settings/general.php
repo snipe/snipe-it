@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'การลงทะเบียนสองปัจจัย',
     'two_factor_enabled_text'        => 'เปิดใช้งาน Two Factor',
     'two_factor_reset'        => 'รีเซ็ตความลับสองระดับ',
-    'two_factor_reset_help'        => 'การดำเนินการนี้จะบังคับให้ผู้ใช้ลงทะเบียนอุปกรณ์ด้วย Google Authenticator อีกครั้ง วิธีนี้มีประโยชน์หากอุปกรณ์ที่ลงทะเบียนเรียนในปัจจุบันสูญหายหรือถูกขโมย',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'รีเซ็ตเครื่องอุปกรณ์สองตัวเรียบร้อยแล้ว',
     'two_factor_reset_error'          => 'การรีเซ็ตอุปกรณ์สององค์ประกอบล้มเหลว',
     'two_factor_enabled_warning'        => 'การเปิดใช้งานสองปัจจัยหากไม่ได้เปิดใช้อยู่ในขณะนี้จะบังคับให้คุณตรวจสอบสิทธิ์ด้วยอุปกรณ์ที่ลงทะเบียนของ Google Auth คุณจะสามารถลงทะเบียนอุปกรณ์ของคุณหากยังไม่ได้ลงทะเบียนเรียน',

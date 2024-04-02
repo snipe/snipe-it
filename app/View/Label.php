@@ -41,7 +41,7 @@ class Label implements View
         $template = LabelModel::find($settings->label2_template);
 
         // If disabled, pass to legacy view
-        if ((!$settings->label2_enable) && (!$template)) {
+        if ((!$settings->label2_enable)) {
             return view('hardware/labels')
                 ->with('assets', $assets)
                 ->with('settings', $settings)
@@ -105,16 +105,15 @@ class Label implements View
                     }
                 }
 
-                if ($template->getSupport1DBarcode()) {
-                    $barcode1DType = $settings->label2_1d_type;
-                    $barcode1DType = ($barcode1DType == 'default') ? 
-                        (($settings->alt_barcode_enabled) ? $settings->alt_barcode : null) :
-                        $barcode1DType;
-                    if ($barcode1DType != 'none') {
-                        $assetData->put('barcode1d', (object)[
-                            'type' => $barcode1DType,
-                            'content' => $asset->asset_tag,
-                        ]);
+                if ($settings->alt_barcode_enabled) {
+                    if ($template->getSupport1DBarcode()) {
+                        $barcode1DType = $settings->alt_barcode;
+                        if ($barcode1DType != 'none') {
+                            $assetData->put('barcode1d', (object)[
+                                'type' => $barcode1DType,
+                                'content' => $asset->asset_tag,
+                            ]);
+                        }
                     }
                 }
 
@@ -127,7 +126,7 @@ class Label implements View
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
                             case 'hardware_id':
-                            default: $barcode2DTarget = route('hardware.show', $asset->id); break;
+                            default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
                         }
                         $assetData->put('barcode2d', (object)[
                             'type' => $barcode2DType,
@@ -147,7 +146,7 @@ class Label implements View
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
-                    
+
                 $assetData->put('fields', $fields->take($template->getSupportFields()));
 
                 return $assetData;

@@ -8,13 +8,10 @@ use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AccessoryCheckinTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCheckingInAccessoryRequiresCorrectPermission()
     {
         $accessory = Accessory::factory()->checkedOutToUser()->create();

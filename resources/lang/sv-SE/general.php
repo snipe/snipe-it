@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Tillbehör',
     'activated'			    => 'Aktiverad',
     'accepted_date'         => 'Datum Accepterat',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Nytt lösenord',
     'next'					=> 'Nästa',
     'next_audit_date'		=> 'Nästa inventeringsdatum',
+    'no_email'              => 'Ingen e-postadress kopplad till den här användaren',
     'last_audit'		    => 'Senaste inventeringen',
     'new'					=> 'ny!',
     'no_depreciation'		=> 'Ingen avskrivning',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Det finns inga begärbara tillgångar eller tillgångsmodeller.',
+
+    'countable' => [
+        'accessories'  => ':count Tillbehör :count Tillbehör',
+        'assets'  => ':count Tillgång:count Tillgångar',
+        'licenses'  => ':count License<unk> :count Licenser',
+        'license_seats'  => ':count License Seat<unk> :count License Seats',
+        'consumables'  => ':count Förbrukningsmedel<unk> :count Förbrukningsvaror',
+        'components'  => ':count Component|:count Komponenter',
+    ]
 
 ];

@@ -46,16 +46,19 @@
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            locale: locale,
+            locale: '{{ app()->getLocale() }}',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
             cookie: true,
             cookieExpire: '2y',
+            showColumnsToggleAll: true,
+            minimumCountColumns: 2,
             mobileResponsive: true,
             maintainSelected: true,
             trimOnSearch: false,
             showSearchClearButton: true,
+            addrbar: {{ (config('session.bs_table_addrbar') == 'true') ? 'true' : 'false'}}, // deeplink search phrases, sorting, etc
             paginationFirstText: "{{ trans('general.first') }}",
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
@@ -73,7 +76,7 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h2>';
             },
             icons: {
                 advancedSearchIcon: 'fas fa-search-plus',
@@ -85,8 +88,7 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
-                exportOptions: export_options,
-
+            exportOptions: export_options,
             exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
@@ -411,13 +413,11 @@
         // add some stuff to get the value of the select2 option here?
 
         if ((row.available_actions) && (row.available_actions.bulk_selectable) && (row.available_actions.bulk_selectable.delete !== true)) {
-            console.log('value for ID ' + row.id + ' is NOT true:' + row.available_actions.bulk_selectable.delete);
             return {
                 disabled:true,
                 //checked: false, <-- not sure this will work the way we want?
             }
         }
-        console.log('value for ID ' + row.id + ' IS true:' + row.available_actions.bulk_selectable.delete);
     }
 
 

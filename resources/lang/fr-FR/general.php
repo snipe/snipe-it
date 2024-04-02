@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accessoires',
     'activated'			    => 'Activé',
     'accepted_date'         => 'Date d\'acceptation',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'Nouveau mot de passe',
     'next'					=> 'Prochain',
     'next_audit_date'		=> 'Prochaine date de vérification',
+    'no_email'              => 'Aucune adresse e-mail associée à cet utilisateur',
     'last_audit'		    => 'Dernier audit',
     'new'					=> 'nouveau!',
     'no_depreciation'		=> 'Pas d\'amortissement',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Il n\'y a pas d\'actifs ou de modèles d\'actifs demandés.',
+
+    'countable' => [
+        'accessories'  => ':count Accessoire|:count Accessoires',
+        'assets'  => ':count Actif|:count Actifs',
+        'licenses'  => ':count Licence|:count Licences',
+        'license_seats'  => ':count Siège de licence|:count sièges de licence',
+        'consumables'  => ':count Consommable|:count Consommables',
+        'components'  => ':count Composant|:count Composants',
+    ]
 
 ];

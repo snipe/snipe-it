@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => 'Ponastavi 2FA',
     'accessories'			=> 'Dodatki',
     'activated'			    => 'Aktiviran',
     'accepted_date'         => 'Date Accepted',
@@ -12,7 +13,7 @@ return [
     'admin'					=> 'Administrator',
     'administrator'			=> 'Skrbnik',
     'add_seats'             => 'Dodani sedeži',
-    'age'                   => "Age",
+    'age'                   => "Starost",
     'all_assets'			=> 'Vsa sredstva',
     'all'       			=> 'Vse',
     'archived'              => 'Arhivirano',
@@ -22,7 +23,7 @@ return [
     'asset_report'          => 'Poročilo o sredstvih',
     'asset_tag'				=> 'Oznaka sredstva',
     'asset_tags'            => 'Asset Tags',
-    'assets_available'		=> 'Assets available',
+    'assets_available'		=> 'Razpoložljiva sredstva',
     'accept_assets'         => 'Accept Assets :name',
     'accept_assets_menu'    => 'Accept Assets',
     'audit'				    => 'Revizija',
@@ -31,7 +32,7 @@ return [
     'assets_audited'        => 'assets audited',
     'assets_checked_in_count'     => 'assets checked in',
     'assets_checked_out_count'     => 'assets checked out',
-    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'asset_deleted_warning'     => 'To sredstvo je bilo izbrisano. Pred ponovno uporabo ga morate obnoviti.',
     'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
     'assignee'              => 'Assigned to',
@@ -113,7 +114,7 @@ return [
     'email_format'			=> 'Format e-pošte',
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'To se uporablja za ustvarjanje e-poštnih naslovov pri uvozu',
-    'error'				    => 'Error',
+    'error'				    => 'Napaka',
     'exclude_archived'      => 'Exclude Archived Assets',
     'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
@@ -202,6 +203,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Naprej',
     'next_audit_date'		=> 'Naslednji datum revizije',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Zadnja revizija',
     'new'					=> 'novo!',
     'no_depreciation'		=> 'Brez amortizacije',
@@ -518,5 +520,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

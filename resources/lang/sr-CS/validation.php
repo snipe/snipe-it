@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Vrednost ne može biti negativna'
     ],
+    'checkboxes'           => ':attribute sadrži neispravne opcije.',
+    'radio_buttons'        => ':attribute je neispravan.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Neispravna vrednost je sadržana u ovom polju',
 ];

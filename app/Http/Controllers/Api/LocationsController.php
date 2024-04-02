@@ -235,7 +235,13 @@ class LocationsController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Location::class);
-        $location = Location::findOrFail($id);
+        $location = Location::withCount('assignedAssets as assigned_assets_count')
+            ->withCount('assets as assets_count')
+            ->withCount('rtd_assets as rtd_assets_count')
+            ->withCount('children as children_count')
+            ->withCount('users as users_count')
+            ->findOrFail($id);
+
         if (! $location->isDeletable()) {
             return response()
                     ->json(Helper::formatStandardApiResponse('error', null, trans('admin/companies/message.assoc_users')));

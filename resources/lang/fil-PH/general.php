@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Mga Aksesorya',
     'activated'			    => 'Pinagana',
     'accepted_date'         => 'Date Accepted',
@@ -201,6 +202,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Susunod',
     'next_audit_date'		=> 'Ang Susunod na Petsa ng Pag-audit',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Ang Huling Pag-audit',
     'new'					=> 'bago!',
     'no_depreciation'		=> 'Walang Depresasyon',
@@ -517,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

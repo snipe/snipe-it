@@ -20,6 +20,7 @@ use DB;
 use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Image;
 use Input;
 use Redirect;
@@ -500,6 +501,19 @@ class SettingsController extends Controller
      */
     public function postSecurity(Request $request)
     {
+        $this->validate($request, [
+            'pwd_secure_complexity' => 'array',
+            'pwd_secure_complexity.*' => [
+                Rule::in([
+                    'disallow_same_pwd_as_user_fields',
+                    'letters',
+                    'numbers',
+                    'symbols',
+                    'case_diff',
+                ])
+            ]
+        ]);
+
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
