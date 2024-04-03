@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Dva faktora upisa',
     'two_factor_enabled_text'        => 'Omogući dva faktora',
     'two_factor_reset'        => 'Poništi dvoznamenkasti faktor',
-    'two_factor_reset_help'        => 'To će prisiliti korisnika da ponovno registrira svoj uređaj s Googleovom autentifikatorom. To može biti korisno ako je izgubljen ili ukraden trenutačno upisani uređaj.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Uspješno resetira dva faktorska uređaja',
     'two_factor_reset_error'          => 'Dva faktora resetiranja uređaja nije uspjela',
     'two_factor_enabled_warning'        => 'Omogućivanje dva faktora ako trenutačno nije omogućeno odmah će vas prisiliti na provjeru autentičnosti pomoću uređaja za prijavu na Google Auth. Moći ćete upisati svoj uređaj ako ga trenutno niste upisali.',

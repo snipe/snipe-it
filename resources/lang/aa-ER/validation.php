@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'crwdns6796:0crwdne6796:0'
     ],
+    'checkboxes'           => 'crwdns12152:0crwdne12152:0',
+    'radio_buttons'        => 'crwdns12154:0crwdne12154:0',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'crwdns12156:0crwdne12156:0',
 ];

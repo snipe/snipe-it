@@ -262,7 +262,7 @@ return [
     'two_factor_enrollment'        => 'İki Aşamalı Kayıt',
     'two_factor_enabled_text'        => 'İki Aşamalı Şifrelemeyi Etkinleştir',
     'two_factor_reset'        => 'Gizli İki Aşamalı Şifrelemeyi Sıfırla',
-    'two_factor_reset_help'        => 'Bu işlem, kullanıcıyı cihazlarını Google Authenticator ile tekrar kayıt etmeye zorlar. Bu, kayıtlı cihazlarının kaybolması veya çalınması durumunda yararlı olabilir. ',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'İki aşamalı aygıt başarıyla sıfırlandı',
     'two_factor_reset_error'          => 'İki aşamalı aygıt sıfırlanamadı',
     'two_factor_enabled_warning'        => 'Halihazırda etkinleştirilmemişse iki aşamalı şifreleme etkinleştirilmesi sizi bir Google Auth kayıtlı cihazla yetkilendirmenizi zorlar. Şu an kayıtlı değilseniz, cihazınızı kaydetme olanağına sahip olacaksınız.',

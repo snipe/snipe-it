@@ -363,7 +363,7 @@ return [
     'two_factor_enrollment'        => 'ثبت نام دو عامل',
     'two_factor_enabled_text'        => 'فعال کردن دو عامل',
     'two_factor_reset'        => 'تنظیم مجدد دو راز فاکتور',
-    'two_factor_reset_help'        => 'این باعث می شود کاربر دوباره دستگاه خود را با Google Authenticator ثبت کند. این می تواند مفید باشد اگر دستگاه ثبت شده فعلی شما گم شده یا دزدیده شود.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'دستگاه دو عامل با موفقیت تنظیم مجدد',
     'two_factor_reset_error'          => 'تنظیم مجدد دستگاه دو عامل انجام نشد',
     'two_factor_enabled_warning'        => 'فعال کردن دو عامل اگر آن را در حال حاضر فعال نیست، بلافاصله شما را مجبور به تایید با یک دستگاه ثبت نام Google Auth. اگر کسی در حال حاضر ثبت نام نکند، می توانید دستگاه خود را ثبت نام کنید.',

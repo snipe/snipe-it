@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => '加入两步验证',
     'two_factor_enabled_text'        => '启用两步验证',
     'two_factor_reset'        => '重设两步验证密钥',
-    'two_factor_reset_help'        => '此操作会强制用户再次通过 Google Authenticator 登记设备，此操作可以解决上一部移动设备丢失的问题。',
+    'two_factor_reset_help'        => '这将迫使用户再次选用他们的身份验证器应用程序。 如果他们目前登记的设备丢失或被盗，这样做可能是有用的。 ',
     'two_factor_reset_success'          => '成功重设两步验证设备',
     'two_factor_reset_error'          => '两步验证设备重设失败',
     'two_factor_enabled_warning'        => '启用两步验证将需要您立即用登记的移动设备验证身份。如您尚未设置两步验证，您现在可以登记您的设备。',

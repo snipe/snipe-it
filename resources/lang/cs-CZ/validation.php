@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Hodnota nemůže být záporná'
     ],
+    'checkboxes'           => ':attribute obsahuje neplatné možnosti.',
+    'radio_buttons'        => ':attribute je neplatný.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Neplatná hodnota zahrnutá v tomto poli',
 ];

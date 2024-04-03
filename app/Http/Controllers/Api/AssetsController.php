@@ -95,6 +95,7 @@ class AssetsController extends Controller
             'serial',
             'model_number',
             'last_checkout',
+            'last_checkin',
             'notes',
             'expected_checkin',
             'order_number',
@@ -619,6 +620,8 @@ class AssetsController extends Controller
                 $asset->image = $asset->getImageUrl();
             }
 
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
+
             return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         }
 
@@ -696,8 +699,30 @@ class AssetsController extends Controller
                 $location = $target->id;
             }
 
-            if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+
+            if ($asset->save()) {
+                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
+                        $location = $target->location_id;
+                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
+                    $location = $target->location_id;
+
+                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
+                        ->update(['location_id' => $target->location_id]);
+                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
+                    $location = $target->id;
+                }
+
+                if (isset($target)) {
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+                }
+
+                if ($asset->image) {
+                    $asset->image = $asset->getImageUrl();
+                }
+
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                // commenting to make this clear, this was removed in favor of the above temporarily because it breaks jamf2snipe
+                // return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
             }
 
             if ($asset->image) {

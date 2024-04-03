@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Ang Two-Factor Enrollment',
     'two_factor_enabled_text'        => 'Paganahin ang Dalawang Factor',
     'two_factor_reset'        => 'I-reset ang Two-Factor na Sekreto',
-    'two_factor_reset_help'        => 'Ito ay maaaring magpilit sa mga gumagamit na mag-enroll muli sa kanilang device gamit ang Google Authenticator. Ito ay maaaring kapaki-pakinabang kung ang kanilang na-enroll na device ay nawala o ninakaw. ',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Ang dalawang factor na device ay matagumpay na nai-reset',
     'two_factor_reset_error'          => 'Ang pag-reset sa dalawang factor na device ay hindi nagtagumpay',
     'two_factor_enabled_warning'        => 'Paganahin ang dalawang factor kapag ito ay kasalukuyang hindi pinagana ay maaari itong maghatid ng madalian na pagpilit na mag-authenticate gamit ang Google Auth sa na-enroll na device. Ikaw ay mayroong abilidad na i-enroll ang iyong device kapag may isa na hindi pa kasalukuyang naka-enroll.',
