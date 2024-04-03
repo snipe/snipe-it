@@ -32,8 +32,6 @@
         <div class="col-md-12">
 
 
-
-
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -140,6 +138,7 @@
                 </ul>
 
                 <div class="tab-content">
+
                     <div class="tab-pane fade in active" id="details">
                         <div class="row">
                             <div class="col-md-8">
@@ -926,6 +925,7 @@
                                                     <button class="btn btn-sm btn-warning col-md-12">{{ trans('general.restore') }}</button>
                                                 </form>
                                            @endif
+                                        </div>
                                     @endcan
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
@@ -995,7 +995,7 @@
                             </div> <!-- div.col-md-4 -->
                         </div><!-- /row -->
                     </div><!-- /.tab-pane asset details -->
-                    </div>
+                 
 
                     <div class="tab-pane fade" id="software">
                         <div class="row">
