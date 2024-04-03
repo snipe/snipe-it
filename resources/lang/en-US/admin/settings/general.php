@@ -49,7 +49,7 @@ return [
     'default_eula_text'			=> 'Default EULA',
     'default_language'			=> 'Default Language',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
-    'decline_message'               => 'Add details to why you can\'t accept this (Optional)',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',
