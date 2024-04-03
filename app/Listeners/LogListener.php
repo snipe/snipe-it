@@ -62,6 +62,7 @@ class LogListener
         $logaction->target()->associate($event->acceptance->assignedTo);
         $logaction->accept_signature = $event->acceptance->signature_filename;
         $logaction->filename = $event->acceptance->stored_eula_file;
+        $logaction->note = $event->acceptance->note;
         $logaction->action_type = 'accepted';
 
         // TODO: log the actual license seat that was checked out
