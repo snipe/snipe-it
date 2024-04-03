@@ -544,12 +544,12 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         \Debugbar::disable();
         $response = new StreamedResponse(function () {
-        $user = Auth::user();
+            $user = Auth::user();
             $settings = Setting::getSettings();
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            if($settings->full_multiple_companies_support){
+            if($settings->full_multiple_companies_support && !$user->isSuperUser() ){
                 User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company')
                     ->where('company_id', '=', $user->company_id)
                     ->orderBy('created_at', 'DESC')
