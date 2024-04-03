@@ -716,7 +716,7 @@ class Helper
      */
     public static function checkLowInventory()
     {
-        $alert_threshold = \App\Models\Setting::getSettings()->alert_threshold;
+        $default_alert_threshold = \App\Models\Setting::getSettings()->alert_threshold;
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
         $components = Component::whereNotNull('min_amt')->get();
@@ -728,7 +728,11 @@ class Helper
 
         foreach ($consumables as $consumable) {
             $avail = $consumable->numRemaining();
-            if ($avail < ($consumable->min_amt) + $alert_threshold) {
+            $alert_threshold = $default_alert_threshold;
+            if($consumable->min_amt != 0){
+                $alert_threshold= $consumable->min_amt;
+            }
+            if ($avail < $alert_threshold) {
                 if ($consumable->qty > 0) {
                     $percent = number_format((($avail / $consumable->qty) * 100), 0);
                 } else {
@@ -747,7 +751,11 @@ class Helper
 
         foreach ($accessories as $accessory) {
             $avail = $accessory->qty - $accessory->users_count;
-            if ($avail < ($accessory->min_amt) + $alert_threshold) {
+            $alert_threshold = $default_alert_threshold;
+            if($accessory->min_amt != 0){
+                $alert_threshold= $accessory->min_amt;
+            }
+            if ($avail < $alert_threshold) {
                 if ($accessory->qty > 0) {
                     $percent = number_format((($avail / $accessory->qty) * 100), 0);
                 } else {
@@ -766,7 +774,11 @@ class Helper
 
         foreach ($components as $component) {
             $avail = $component->numRemaining();
-            if ($avail < ($component->min_amt) + $alert_threshold) {
+            $alert_threshold = $default_alert_threshold;
+            if($component->min_amt != 0){
+                $alert_threshold= $component->min_amt;
+            }
+            if ($avail < $alert_threshold) {
                 if ($component->qty > 0) {
                     $percent = number_format((($avail / $component->qty) * 100), 0);
                 } else {
@@ -788,8 +800,12 @@ class Helper
             $asset = new Asset();
             $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
             $avail = $asset->where('model_id', '=', $asset_model->id)->whereNull('assigned_to')->count();
+            $alert_threshold = $default_alert_threshold;
 
-            if ($avail < ($asset_model->min_amt) + $alert_threshold) {
+            if($asset_model->min_amt != 0){
+                $alert_threshold= $asset_model->min_amt;
+            }
+            if ($avail < $alert_threshold) {
                 if ($avail > 0) {
                     $percent = number_format((($avail / $total_owned) * 100), 0);
                 } else {
@@ -807,7 +823,12 @@ class Helper
 
         foreach ($licenses as $license){
             $avail = $license->remaincount();
-            if ($avail < ($license->min_amt) + $alert_threshold) {
+            $alert_threshold = $default_alert_threshold;
+
+            if($license->min_amt != 0){
+                $alert_threshold= $license->min_amt;
+            }
+            if ($avail < $alert_threshold) {
                 if ($avail > 0) {
                     $percent = number_format((($avail / $license->min_amt) * 100), 0);
                 } else {
