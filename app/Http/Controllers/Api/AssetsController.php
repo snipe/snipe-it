@@ -658,11 +658,11 @@ class AssetsController extends Controller
         */
         if ($request->has('image_source')) {
             $request->offsetSet('image', $request->offsetGet('image_source'));
-        }     
+        }
 
         $asset = $request->handleImages($asset);
         $model = $asset->model;
-            
+
         // Update custom fields
         if (($model) && (isset($model->fieldset))) {
             foreach ($model->fieldset->fields as $field) {
@@ -692,43 +692,24 @@ class AssetsController extends Controller
                 $location = $target->location_id;
             } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
                 $location = $target->location_id;
-
-                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
+                Asset::where('assigned_type', Asset::class)->where('assigned_to', $asset->id)
                     ->update(['location_id' => $target->location_id]);
             } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                 $location = $target->id;
             }
 
-
-            if ($asset->save()) {
-                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
-                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                    $location = $target->location_id;
-
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
-                        ->update(['location_id' => $target->location_id]);
-                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                    $location = $target->id;
-                }
-
-                if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-                }
-
-                if ($asset->image) {
-                    $asset->image = $asset->getImageUrl();
-                }
-
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
-                // commenting to make this clear, this was removed in favor of the above temporarily because it breaks jamf2snipe
-                // return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
+            if (isset($target)) {
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update',
+                    e($request->get('name')), $location);
             }
 
             if ($asset->image) {
                 $asset->image = $asset->getImageUrl();
             }
-            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
+
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+            // commenting to make this clear, this was removed in favor of the above temporarily because it breaks jamf2snipe
+            // return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
