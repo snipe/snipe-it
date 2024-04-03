@@ -238,7 +238,7 @@ class AcceptanceController extends Controller
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
 
-            $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename);
+            $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename, $request->input('note'));
             $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             event(new CheckoutAccepted($acceptance));
 

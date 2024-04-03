@@ -80,12 +80,13 @@ class CheckoutAcceptance extends Model
      *
      * @param  string $signature_filename
      */
-    public function accept($signature_filename, $eula = null, $filename = null)
+    public function accept($signature_filename, $eula = null, $filename = null, $note = null)
     {
         $this->accepted_at = now();
         $this->signature_filename = $signature_filename;
         $this->stored_eula = $eula;
         $this->stored_eula_file = $filename;
+        $this->note = $note;
         $this->save();
 
         /**
