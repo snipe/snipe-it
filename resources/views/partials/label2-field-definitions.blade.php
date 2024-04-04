@@ -313,6 +313,8 @@
                                 <option value="order_number">{{trans('admin/hardware/form.order')}}</option>
                                 <option value="purchase_date">{{trans('admin/hardware/table.purchase_date')}}</option>
                                 <option value="assignedTo">{{trans('admin/hardware/table.assigned_to')}}</option>
+                                <option value="last_audit_date">{{trans('general.last_audit')}}</option>
+                                <option value="next_audit_date">{{trans('general.next_audit_date')}}</option>
                             </optgroup>
                             <optgroup label="Asset Model">
                                 <option value="model.name">{{trans('admin/models/table.name')}}</option>
