@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Traits\MayContainCustomFields;
 use App\Models\Asset;
 use App\Models\Company;
 use Carbon\Carbon;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Gate;
 
 class StoreAssetRequest extends ImageUploadRequest
 {
+    use MayContainCustomFields;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,6 +38,8 @@ class StoreAssetRequest extends ImageUploadRequest
             'company_id' => $idForCurrentUser,
             'assigned_to' => $assigned_to ?? null,
         ]);
+
+        //$this->after();
     }
 
     /**
