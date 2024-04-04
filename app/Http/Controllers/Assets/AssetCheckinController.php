@@ -39,6 +39,12 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
+        // This asset is already checked in, redirect
+        
+        if (is_null($asset->assignedTo)) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+        }
+
         return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
     }
 
