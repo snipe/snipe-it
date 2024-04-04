@@ -33,8 +33,6 @@ use App\Notifications\CurrentInventory;
  */
 class UsersController extends Controller
 {
-    private $user;
-
     /**
      * Returns a view that invokes the ajax tables which actually contains
      * the content for the users listing, which is generated in getDatatable().
