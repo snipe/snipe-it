@@ -390,7 +390,7 @@ class LdapSync extends Command
                         $user->location_id = $location->id;
                     }
                 }
-
+                $location = null;
                 $user->ldap_import = 1;
 
                 $errors = '';
