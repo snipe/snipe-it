@@ -549,67 +549,69 @@ class UsersController extends Controller
 
 
             $query = User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company');
-                    if($settings->full_multiple_companies_support && !$user->isSuperUser() ) {
-                        $query->where('company_id', '=', $user->company_id);
+
+            if ($settings->full_multiple_companies_support && !$user->isSuperUser()) {
+                $query->where('company_id', '=', $user->company_id);
+            }
+
+            $query->orderBy('created_at', 'DESC')
+                ->chunk(500, function ($users) use ($handle) {
+                    $headers = [
+                        // strtolower to prevent Excel from trying to open it as a SYLK file
+                        strtolower(trans('general.id')),
+                        trans('admin/companies/table.title'),
+                        trans('admin/users/table.title'),
+                        trans('general.employee_number'),
+                        trans('admin/users/table.name'),
+                        trans('admin/users/table.username'),
+                        trans('admin/users/table.email'),
+                        trans('admin/users/table.manager'),
+                        trans('admin/users/table.location'),
+                        trans('general.department'),
+                        trans('general.assets'),
+                        trans('general.licenses'),
+                        trans('general.accessories'),
+                        trans('general.consumables'),
+                        trans('admin/users/table.groups'),
+                        trans('general.notes'),
+                        trans('admin/users/table.activated'),
+                        trans('general.created_at'),
+                    ];
+
+                    fputcsv($handle, $headers);
+
+                    foreach ($users as $user) {
+                        $user_groups = '';
+
+                        foreach ($user->groups as $user_group) {
+                            $user_groups .= $user_group->name . ', ';
                         }
-                    $query->orderBy('created_at', 'DESC')
-                    ->chunk(500, function ($users) use ($handle) {
-                        $headers = [
-                            // strtolower to prevent Excel from trying to open it as a SYLK file
-                            strtolower(trans('general.id')),
-                            trans('admin/companies/table.title'),
-                            trans('admin/users/table.title'),
-                            trans('general.employee_number'),
-                            trans('admin/users/table.name'),
-                            trans('admin/users/table.username'),
-                            trans('admin/users/table.email'),
-                            trans('admin/users/table.manager'),
-                            trans('admin/users/table.location'),
-                            trans('general.department'),
-                            trans('general.assets'),
-                            trans('general.licenses'),
-                            trans('general.accessories'),
-                            trans('general.consumables'),
-                            trans('admin/users/table.groups'),
-                            trans('general.notes'),
-                            trans('admin/users/table.activated'),
-                            trans('general.created_at'),
+
+                        // Add a new row with data
+                        $values = [
+                            $user->id,
+                            ($user->company) ? $user->company->name : '',
+                            $user->jobtitle,
+                            $user->employee_num,
+                            $user->present()->fullName(),
+                            $user->username,
+                            $user->email,
+                            ($user->manager) ? $user->manager->present()->fullName() : '',
+                            ($user->userloc) ? $user->userloc->name : '',
+                            ($user->department) ? $user->department->name : '',
+                            $user->assets->count(),
+                            $user->licenses->count(),
+                            $user->accessories->count(),
+                            $user->consumables->count(),
+                            $user_groups,
+                            $user->notes,
+                            ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
+                            $user->created_at,
                         ];
 
-                        fputcsv($handle, $headers);
-
-                        foreach ($users as $user) {
-                            $user_groups = '';
-
-                            foreach ($user->groups as $user_group) {
-                                $user_groups .= $user_group->name.', ';
-                            }
-
-                            // Add a new row with data
-                            $values = [
-                                $user->id,
-                                ($user->company) ? $user->company->name : '',
-                                $user->jobtitle,
-                                $user->employee_num,
-                                $user->present()->fullName(),
-                                $user->username,
-                                $user->email,
-                                ($user->manager) ? $user->manager->present()->fullName() : '',
-                                ($user->userloc) ? $user->userloc->name : '',
-                                ($user->department) ? $user->department->name : '',
-                                $user->assets->count(),
-                                $user->licenses->count(),
-                                $user->accessories->count(),
-                                $user->consumables->count(),
-                                $user_groups,
-                                $user->notes,
-                                ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
-                                $user->created_at,
-                            ];
-
-                            fputcsv($handle, $values);
-                        }
-                    });
+                        fputcsv($handle, $values);
+                    }
+                });
             // Close the output stream
             fclose($handle);
         }, 200, [
