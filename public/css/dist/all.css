@@ -22471,6 +22471,12 @@ th.css-accessory > .th-inner::before {
   .sidebar-menu {
     margin-top: 100px;
   }
+  .navbar-custom-menu > .navbar-nav > li.dropdown.user.user-menu {
+    float: right;
+  }
+  .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+    margin-right: -39px;
+  }
 }
 @media screen and (max-width: 1268px) and (min-width: 912px) {
   .sidebar-menu {
@@ -23737,6 +23743,12 @@ th.css-accessory > .th-inner::before {
 @media screen and (max-width: 912px) and (min-width: 512px) {
   .sidebar-menu {
     margin-top: 100px;
+  }
+  .navbar-custom-menu > .navbar-nav > li.dropdown.user.user-menu {
+    float: right;
+  }
+  .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+    margin-right: -39px;
   }
 }
 @media screen and (max-width: 1268px) and (min-width: 912px) {
