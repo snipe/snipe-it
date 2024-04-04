@@ -38,8 +38,6 @@ class StoreAssetRequest extends ImageUploadRequest
             'company_id' => $idForCurrentUser,
             'assigned_to' => $assigned_to ?? null,
         ]);
-
-        //$this->after();
     }
 
     /**
