@@ -696,7 +696,7 @@ class ReportsController extends Controller
                                               ->whereBetween('action_date',[$checkout_start, $checkout_end])
                                                   ->pluck('item_id');
 
-                $assets->whereIn('id',$actionlogassets);
+                $assets->whereIn('assets.id',$actionlogassets);
             }
 
             if (($request->filled('checkin_date_start'))) {
