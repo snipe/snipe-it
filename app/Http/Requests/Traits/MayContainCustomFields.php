@@ -3,31 +3,36 @@
 namespace App\Http\Requests\Traits;
 
 use App\Models\AssetModel;
+use App\Models\CustomField;
 
 trait MayContainCustomFields
 {
     // this gets called automatically on a form request
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
+        // find the model
+        if ($this->method() == 'POST') {
+            $asset_model = AssetModel::find($this->model_id);
+        }
+        if ($this->method() == 'PATCH' || $this->method() == 'PUT') {
+            // this is dependent on the asset update request PR
+            $asset_model = $this->asset;
+        }
+        // collect the custom fields in the request
+        $validator->after(function ($validator) use ($asset_model) {
             $request_fields = $this->collect()->keys()->filter(function ($attributes) {
                 return str_starts_with($attributes, '_snipeit_');
             });
+            // if there are custom fields, find the one's that don't exist on the model's fieldset and add an error to the validator's error bag
             if (count($request_fields) > 0) {
-                if ($this->method() == 'POST') {
-                    // refactor to eager load the fields???
-                    $request_fields->diff(AssetModel::find($this->model_id)->fieldset->fields->pluck('db_column'))
+                $request_fields->diff($asset_model->fieldset->fields->pluck('db_column'))
                         ->each(function ($request_field_name) use ($request_fields, $validator) {
-                            // i could probably add some more conditions here to determine whether or not the column exists but just not on this asset model
-                            // and then return a more helpful error message
-                            $validator->errors()->add($request_field_name, 'This field does not seem to exist (at least on this asset), please double check your custom field names.');
+                            if (CustomField::where('db_column', $request_field_name)->exists()) {
+                                $validator->errors()->add($request_field_name, 'This field seems to exist, but is not available on this Asset Model\'s fieldset.');
+                            } else {
+                                $validator->errors()->add($request_field_name, 'This field does not seem to exist, please double check your custom field names.');
+                            }
                         });
-                } elseif ($this->method() == 'PUT' || $this->method() == 'PATCH') {
-                    // need to know about other pr before I can go down this route
-                    // it should be more or less the same, just have to get the asset model differently
-                    // ($this->asset should work if the other PR is accepted)
-                    return;
-                }
             }
         });
     }
