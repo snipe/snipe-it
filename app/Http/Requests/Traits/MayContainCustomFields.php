@@ -28,9 +28,9 @@ trait MayContainCustomFields
                 $request_fields->diff($asset_model->fieldset->fields->pluck('db_column'))
                         ->each(function ($request_field_name) use ($request_fields, $validator) {
                             if (CustomField::where('db_column', $request_field_name)->exists()) {
-                                $validator->errors()->add($request_field_name, 'This field seems to exist, but is not available on this Asset Model\'s fieldset.');
+                                $validator->errors()->add($request_field_name, trans('validation.custom.custom_field_not_found_on_model'));
                             } else {
-                                $validator->errors()->add($request_field_name, 'This field does not seem to exist, please double check your custom field names.');
+                                $validator->errors()->add($request_field_name, trans('validation.custom.custom_field_not_found'));
                             }
                         });
             }
