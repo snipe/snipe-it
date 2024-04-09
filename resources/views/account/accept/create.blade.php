@@ -70,9 +70,10 @@
                                 <h3 style="padding-top: 20px">{{trans('general.sign_tos')}}</h3>
                                 <div id="signature-pad" class="m-signature-pad">
                                     <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                        <canvas></canvas>
+                                        <canvas style="width:100%;"></canvas>
                                         <input type="hidden" name="signature_output" id="signature_output">
                                     </div>
+                                    <button id="lock_button">Lock</button>
                                     <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
                                         <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">{{trans('general.clear_signature')}}</button>
                                     </div>
@@ -94,6 +95,25 @@
 @section('moar_scripts')
 
     <script nonce="{{ csrf_token() }}">
+
+        const rotate_btn = document.querySelector("#lock_button");
+        rotate_btn.addEventListener("click", () => {
+            log.textContent += `Lock pressed \n`;
+
+            const oppositeOrientation = screen.orientation.type.startsWith("portrait")
+                ? "landscape"
+                : "portrait";
+            screen.orientation
+                .lock(oppositeOrientation)
+                .then(() => {
+                    log.textContent = `Locked to ${oppositeOrientation}\n`;
+                })
+                .catch((error) => {
+                    log.textContent += `${error}\n`;
+
+                });
+        });
+
         var wrapper = document.getElementById("signature-pad"),
             clearButton = wrapper.querySelector("[data-action=clear]"),
             saveButton = wrapper.querySelector("[data-action=save]"),
