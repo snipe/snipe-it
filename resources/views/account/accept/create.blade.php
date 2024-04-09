@@ -73,7 +73,6 @@
                                         <canvas style="width:100%;"></canvas>
                                         <input type="hidden" name="signature_output" id="signature_output">
                                     </div>
-                                    <button id="lock_button">Lock</button>
                                     <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
                                         <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">{{trans('general.clear_signature')}}</button>
                                     </div>
@@ -96,24 +95,6 @@
 
     <script nonce="{{ csrf_token() }}">
 
-        const rotate_btn = document.querySelector("#lock_button");
-        rotate_btn.addEventListener("click", () => {
-            log.textContent += `Lock pressed \n`;
-
-            const oppositeOrientation = screen.orientation.type.startsWith("portrait")
-                ? "landscape"
-                : "portrait";
-            screen.orientation
-                .lock(oppositeOrientation)
-                .then(() => {
-                    log.textContent = `Locked to ${oppositeOrientation}\n`;
-                })
-                .catch((error) => {
-                    log.textContent += `${error}\n`;
-
-                });
-        });
-
         var wrapper = document.getElementById("signature-pad"),
             clearButton = wrapper.querySelector("[data-action=clear]"),
             saveButton = wrapper.querySelector("[data-action=save]"),
@@ -123,18 +104,19 @@
         // Adjust canvas coordinate space taking into account pixel ratio,
         // to make it look crisp on mobile devices.
         // This also causes canvas to be cleared.
-        function resizeCanvas() {
-            // When zoomed out to less than 100%, for some very strange reason,
-            // some browsers report devicePixelRatio as less than 1
-            // and only part of the canvas is cleared then.
-            var ratio =  Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            function resizeCanvas() {
+                // When zoomed out to less than 100%, for some very strange reason,
+                // some browsers report devicePixelRatio as less than 1
+                // and only part of the canvas is cleared then.
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+            }
+            window.onresize = resizeCanvas;
+            resizeCanvas();
         }
-
-        window.onresize = resizeCanvas;
-        resizeCanvas();
 
         signaturePad = new SignaturePad(canvas);
 
