@@ -39,7 +39,8 @@ class AssetCheckoutTest extends TestCase
                 'expected_checkin' => '2024-03-28',
                 'note' => 'An awesome note',
             ])
-            ->assertSessionHas('error');
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.index'));
 
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
@@ -60,7 +61,8 @@ class AssetCheckoutTest extends TestCase
                 'expected_checkin' => '2024-03-28',
                 'note' => 'An awesome note',
             ])
-            ->assertSessionHas('error');
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.index'));
 
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
