@@ -8,6 +8,7 @@ use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -177,6 +178,18 @@ class AssetCheckoutTest extends TestCase
 
     public function testLastCheckoutUsesCurrentDateIfNotProvided()
     {
-        $this->markTestIncomplete();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAssets()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => User::factory()->create()->id,
+            ]);
+
+        $asset->refresh();
+
+        // It's possible that this can be properly mocked in the future:
+        // https://laravel.com/docs/8.x/mocking#interacting-with-time
+        $this->assertTrue(Carbon::parse($asset->last_checkout)->diffInSeconds(now()) < 2);
     }
 }
