@@ -20,7 +20,7 @@ class LicenseSeatFactory extends Factory
     {
         return $this->state(function () use ($asset) {
             return [
-                'asset_id' => $asset->id,
+                'asset_id' => $asset->id ?? Asset::factory(),
             ];
         });
     }
