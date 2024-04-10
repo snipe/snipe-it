@@ -292,7 +292,7 @@ class LicensesController extends Controller
     }
 
     /**
-     * Exports users to CSV
+     * Exports Licenses to CSV
      *
      * @author [G. Martinez]
      * @since [v6.3]
