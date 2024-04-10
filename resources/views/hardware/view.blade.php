@@ -32,8 +32,6 @@
         <div class="col-md-12">
 
 
-
-
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -140,6 +138,7 @@
                 </ul>
 
                 <div class="tab-content">
+
                     <div class="tab-pane fade in active" id="details">
                         <div class="row">
                             <div class="col-md-8">
@@ -415,19 +414,24 @@
 
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
                                                         @can('assets.view.encrypted_custom_fields')
-                                                            <span id="text-{{ $field->id }}-to-hide">********</span>
-                                                            <span class="js-copy-{{ $field->id }}" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
-                                                            @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                                                <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
-                                                            @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
-                                                                {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
-                                                            @else
-                                                                {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
-                                                            @endif
-                                                            </span>
-                                                            <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
-                                                                <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
-                                                            </i>
+                                                            @php
+                                                                $fieldSize=strlen(Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()})) 
+                                                            @endphp
+                                                            @if ($fieldSize>0)
+                                                                <span id="text-{{ $field->id }}-to-hide">{{ str_repeat('*', $fieldSize) }}</span>
+                                                                <span class="js-copy-{{ $field->id }}" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
+                                                                @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                                    <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                                @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
+                                                                    {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
+                                                                @else
+                                                                    {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                                                @endif
+                                                                </span>
+                                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                                    <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                                                                </i>
+							    @endif
                                                         @else
                                                             {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
                                                         @endcan
@@ -781,6 +785,18 @@
                                             </div>
                                         </div>
                                      @endif
+                                     @if ($asset->last_checkin!='')
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <strong>
+                                                        {{ trans('admin/hardware/table.last_checkin_date') }}
+                                                    </strong>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ Helper::getFormattedDateObject($asset->last_checkin, 'datetime', false) }}
+                                                </div>
+                                            </div>
+                                     @endif
 
 
 
@@ -904,26 +920,18 @@
                                     @endcan
 
                                     @can('delete', $asset)
-                                        @if ($asset->deleted_at=='')
-                                            <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
+                                        <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+                                            @if ($asset->deleted_at=='')
+                                                <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
                                                 <span class="sr-only">{{ trans('general.delete') }}</span>
-                                            </div>
-                                        @endif
+                                            @else
+                                                <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
+                                                    @csrf
+                                                    <button class="btn btn-sm btn-warning col-md-12">{{ trans('general.restore') }}</button>
+                                                </form>
+                                           @endif
+                                        </div>
                                     @endcan
-
-                                @if ($asset->deleted_at!='')
-                                    <div class="text-center col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                        <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
-                                        @csrf 
-                                        <button class="btn btn-danger col-md-12">{{ trans('general.restore') }}</button>
-                                        </form>
-                                    </div>
-                                @endif
-
-                                @if  ($snipeSettings->qr_code=='1')
-                                    <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
-                                @endif
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                     <div style="text-align: left">
@@ -982,9 +990,17 @@
                                     </div>
 
                                 @endif
+
+                                @if  ($snipeSettings->qr_code=='1')
+                                    <div class="col-md-12" style="padding-top: 15px;">
+                                        <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
+                                    </div>
+                                @endif
+
                             </div> <!-- div.col-md-4 -->
                         </div><!-- /row -->
                     </div><!-- /.tab-pane asset details -->
+                 
 
                     <div class="tab-pane fade" id="software">
                         <div class="row">

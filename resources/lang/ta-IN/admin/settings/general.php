@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'இரண்டு காரணி பதிவு',
     'two_factor_enabled_text'        => 'இரு காரணி இயக்கு',
     'two_factor_reset'        => 'இரண்டு காரணி இரகசியத்தை மீட்டமை',
-    'two_factor_reset_help'        => 'இது மீண்டும் தங்கள் சாதனத்தை Google Authenticator உடன் பதிவு செய்யும்படி கட்டாயப்படுத்தும். அவர்கள் தற்போது பதிவுசெய்யப்பட்ட சாதனம் தொலைந்து அல்லது திருடப்பட்டால் இது பயனுள்ளதாக இருக்கும்.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'இரண்டு காரணி சாதனம் வெற்றிகரமாக மீட்டமைக்கப்பட்டது',
     'two_factor_reset_error'          => 'இரண்டு காரணி சாதன மீட்டமைப்பு தோல்வியடைந்தது',
     'two_factor_enabled_warning'        => 'தற்போது இயங்கவில்லையெனில் இரண்டு-காரணி செயல்படுத்துவதால், உடனடியாக Google Auth பதிவுசெய்யப்பட்ட சாதனத்துடன் அங்கீகரிக்கும்படி கட்டாயப்படுத்தும். ஒருவர் தற்போது பதிவுசெய்யப்படவில்லை என்றால், உங்கள் சாதனம் பதிவுசெய்யும் திறனை நீங்கள் பெறுவீர்கள்.',

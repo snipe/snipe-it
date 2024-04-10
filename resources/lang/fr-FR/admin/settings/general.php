@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Inscription à deux facteurs',
     'two_factor_enabled_text'        => 'Activer l\'authentification à deux facteurs',
     'two_factor_reset'        => 'Réinitialiser le Secret à deux facteurs',
-    'two_factor_reset_help'        => 'Ceci forcera l’utilisateur à inscrire de nouveau leur appareil avec Google Authenticator. Cela peut être utile si leur appareil actuellement inscrit est perdue ou volée. ',
+    'two_factor_reset_help'        => 'Ceci forcera l\'utilisateur à réinscrire son appareil avec son application d\'authentification. Cela peut être utile si leur appareil actuellement inscrit est perdu ou volé. ',
     'two_factor_reset_success'          => 'Dispositif à deux facteurs réinitialisées avec succès',
     'two_factor_reset_error'          => 'Échec de réinitialisation du dispositif à deux facteurs',
     'two_factor_enabled_warning'        => 'L\'activation à deux facteurs si elle n\'est pas actuellement activée vous obligera immédiatement à vous authentifier avec un appareil inscrit Google Auth. Vous aurez la possibilité d\'inscrire votre appareil si aucun n\'est inscrit actuellement.',

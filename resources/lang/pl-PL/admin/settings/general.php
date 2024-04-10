@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Rejestracja dwóch czynników',
     'two_factor_enabled_text'        => 'Włącz uwieżytelnianie dwuskładnikowe',
     'two_factor_reset'        => 'Zresetować dwuskładnikowy klucz',
-    'two_factor_reset_help'        => 'Spowoduje to zmuszenie użytkownika do ponownego zapisu swojego urządzenia w usłudze Google Authenticator. Może to być przydatne, jeśli ich aktualnie zapisane urządzenie zostanie utracone lub skradzione.',
+    'two_factor_reset_help'        => 'Spowoduje to zmuszenie użytkownika do zapisania urządzenia do aplikacji uwierzytelniającej. Może to być użyteczne w przypadku zagubienia lub kradzieży aktualnie zamontowanego urządzenia. ',
     'two_factor_reset_success'          => 'Dwa urządzenia współczynnikowe z powodzeniem zresetowane',
     'two_factor_reset_error'          => 'Nie udało się zresetować urządzenia',
     'two_factor_enabled_warning'        => 'Włączenie dwóch czynników, jeśli nie jest aktualnie włączone, natychmiast zmusi Cię do uwierzytelnienia przy użyciu urządzenia z certyfikatem Google Authentication. Będziesz mieć możliwość zapisania urządzenia, jeśli nie jest on aktualnie zapisany.',

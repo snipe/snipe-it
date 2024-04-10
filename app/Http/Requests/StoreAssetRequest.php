@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\Asset;
 use App\Models\Company;
+use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Facades\Gate;
 
 class StoreAssetRequest extends ImageUploadRequest
@@ -27,6 +29,8 @@ class StoreAssetRequest extends ImageUploadRequest
             ? Company::getIdForCurrentUser($this->company_id)
             : $this->company_id;
 
+        $this->parseLastAuditDate();
+
         $this->merge([
             'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
             'company_id' => $idForCurrentUser,
@@ -47,5 +51,22 @@ class StoreAssetRequest extends ImageUploadRequest
         );
 
         return $rules;
+    }
+
+    private function parseLastAuditDate(): void
+    {
+        if ($this->input('last_audit_date')) {
+            try {
+                $lastAuditDate = Carbon::parse($this->input('last_audit_date'));
+
+                $this->merge([
+                    'last_audit_date' => $lastAuditDate->startOfDay()->format('Y-m-d H:i:s'),
+                ]);
+            } catch (InvalidFormatException $e) {
+                // we don't need to do anything here...
+                // we'll keep the provided date in an
+                // invalid format so validation picks it up later
+            }
+        }
     }
 }

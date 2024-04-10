@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => 'crwdns12148:0crwdne12148:0',
     'accessories'			=> 'crwdns1200:0crwdne1200:0',
     'activated'			    => 'crwdns1540:0crwdne1540:0',
     'accepted_date'         => 'crwdns11295:0crwdne11295:0',
@@ -517,5 +518,14 @@ return [
              ],
     ],
     'no_requestable' => 'crwdns12128:0crwdne12128:0',
+
+    'countable' => [
+        'accessories'  => 'crwdns12136:0crwdne12136:0',
+        'assets'  => 'crwdns12138:0crwdne12138:0',
+        'licenses'  => 'crwdns12140:0crwdne12140:0',
+        'license_seats'  => 'crwdns12142:0crwdne12142:0',
+        'consumables'  => 'crwdns12144:0crwdne12144:0',
+        'components'  => 'crwdns12146:0crwdne12146:0',
+    ]
 
 ];

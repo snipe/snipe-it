@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Wax beero ah lama beddelin, markaa waxba lama cusboonaysiin.',
         'success' 		=> 'Qaabka si guul leh ayaa loo cusboonaysiiyay |:model_count moodooyinka si guul leh ayaa loo cusboonaysiiyay.',
-        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'Waxaad ku dhowdahay inaad cusboonaysiiso sifooyinka qaabkan soo socda:|Waxaad ku dhowdahay inaad wax ka beddesho sifooyinka soo socda: model_count models:',
 
     ),
 

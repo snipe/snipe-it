@@ -16,7 +16,7 @@ return [
     'accepted'             => ':attribute deve essere accettato.',
     'active_url'           => ':attribute non è un URL valido.',
     'after'                => ':attribute deve essere una data oltre il  :date.',
-    'after_or_equal'       => ':attribute deve essere una data successiva o uguale a :data .',
+    'after_or_equal'       => ':attribute deve essere una data successiva o uguale a :date .',
     'alpha'                => ':attribute può contenere solo lettere.',
     'alpha_dash'           => ':attribute può contenere solo lettere numeri e trattini.',
     'alpha_num'            => ':attribute può contenere solo lettere e numeri.',
@@ -30,7 +30,7 @@ return [
         'array'   => ':attribute deve avere tra: min e: max elementi.',
     ],
     'boolean'              => ':attribute deve essere o vero o falso.',
-    'confirmed'            => 'il :attribute non corrisponde.',
+    'confirmed'            => 'La conferma di :attribute non corrisponde.',
     'date'                 => ':attribute non è una data valida.',
     'date_format'          => 'il :attribute non corrisponde al :format.',
     'different'            => ':attribute e :other devono essere differenti.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Il valore non può essere negativo'
     ],
+    'checkboxes'           => ':attribute contiene opzioni non valide.',
+    'radio_buttons'        => ':attribute non è valido.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Valore non valido incluso in questo campo',
 ];

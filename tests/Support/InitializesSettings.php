@@ -4,7 +4,7 @@ namespace Tests\Support;
 
 use App\Models\Setting;
 
-trait InteractsWithSettings
+trait InitializesSettings
 {
     protected Settings $settings;
 

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Příslušenství',
     'activated'			    => 'Aktivováno',
     'accepted_date'         => 'Datum přijetí',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Neexistují žádné požadované položky nebo modely aktiv.',
+
+    'countable' => [
+        'accessories'  => ':count Příslušenství |:count Příslušenství',
+        'assets'  => ':count majetek|:count majetku',
+        'licenses'  => ':count licence|:count licence',
+        'license_seats'  => ':count sídlo licence|:count licenční místa',
+        'consumables'  => ':count Spotřební materiál|:count Spotřební materiál',
+        'components'  => ':count komponenta|:count komponenty',
+    ]
 
 ];

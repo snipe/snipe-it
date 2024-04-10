@@ -842,7 +842,7 @@ class Helper
         $filetype = @finfo_file($finfo, $file);
         finfo_close($finfo);
 
-        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif')) {
+        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif') || ($filetype == 'image/avif')) {
             return $filetype;
         }
 
@@ -1106,6 +1106,8 @@ class Helper
             'jpeg'   => 'far fa-image',
             'gif'   => 'far fa-image',
             'png'   => 'far fa-image',
+            'webp'   => 'far fa-image',
+            'avif'   => 'far fa-image',
             // word
             'doc'   => 'far fa-file-word',
             'docx'   => 'far fa-file-word',
@@ -1141,6 +1143,8 @@ class Helper
                 case 'jpeg':
                 case 'gif':
                 case 'png':
+                case 'webp':
+                case 'avif':
                     return true;
                     break;
                 default:

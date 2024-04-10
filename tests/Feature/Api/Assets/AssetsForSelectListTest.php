@@ -5,13 +5,10 @@ namespace Tests\Feature\Api\Assets;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetsForSelectListTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testAssetsCanBeSearchedForByAssetTag()
     {
         Asset::factory()->create(['asset_tag' => '0001']);

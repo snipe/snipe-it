@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Аксессуары',
     'activated'			    => 'Активно',
     'accepted_date'         => 'Дата принятия',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Нет требуемых активов или моделей активов.',
+
+    'countable' => [
+        'accessories'  => ':count Аксессуары|:count Аксессуаров',
+        'assets'  => ':count Актива|:count Активов',
+        'licenses'  => ':count лицензия|:count лицензий',
+        'license_seats'  => ':count лицензия на место|:count мест',
+        'consumables'  => ':count расходный материал|:count расходников',
+        'components'  => ':count компонент|:count компонентов',
+    ]
 
 ];

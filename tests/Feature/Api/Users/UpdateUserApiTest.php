@@ -3,13 +3,10 @@
 namespace Tests\Feature\Api\Users;
 
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class UpdateUserApiTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testApiUsersCanBeActivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();

@@ -7,7 +7,6 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\CheckinAssetNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 /**
@@ -15,8 +14,6 @@ use Tests\TestCase;
  */
 class EmailNotificationsUponCheckinTest extends TestCase
 {
-    use InteractsWithSettings;
-
     protected function setUp(): void
     {
         parent::setUp();

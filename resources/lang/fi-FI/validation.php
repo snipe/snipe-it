@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Arvo ei voi olla negatiivinen'
     ],
+    'checkboxes'           => ':attribute sisältää virheellisiä vaihtoehtoja.',
+    'radio_buttons'        => ':attribute on virheellinen.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Virheellinen arvo sisältyy tähän kenttään',
 ];

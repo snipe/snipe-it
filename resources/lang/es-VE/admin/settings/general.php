@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Inscripción de verificación en dos pasos',
     'two_factor_enabled_text'        => 'Activar la verificación en dos pasos',
     'two_factor_reset'        => 'Reiniciar Secreto de Verificación en dos Pasos',
-    'two_factor_reset_help'        => 'Esto forzará al usuario a inscribir sus dispositivos con el Autenticador de Google nuevamente. Esto puede ser útil si su dispositivo inscrito actualmente se pierde o es robado. ',
+    'two_factor_reset_help'        => 'Esto obligará al usuario a volver a inscribir su dispositivo en su aplicación de autenticación. Esto puede ser útil si su dispositivo actualmente inscrito es perdido o robado. ',
     'two_factor_reset_success'          => 'Verificación de dos pasos del dispositivo reiniciado exitosamente',
     'two_factor_reset_error'          => 'La verificación de dos pasos del dispositivo ha fallado',
     'two_factor_enabled_warning'        => 'Habilitar la verificación de dos factores si no está activado actualmente de inmediato te forzará a autenticarte con un dispositivo inscrito en Autenticación de Google. Tendrás la habilidad de inscribir tu dispositivo si uno no está actualmente inscrito.',

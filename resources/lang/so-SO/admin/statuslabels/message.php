@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Summada heerka ma jirto.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Summada heerka la tirtiray',
     'assoc_assets'	 => 'Summada heerkan hadda waxa lala xidhiidhiyaa ugu yaraan hal Hanti lamana tirtiri karo. Fadlan cusboonaysii hantidaada si aanay mar dambe tixraacin heerkan oo isku day mar kale. ',
 
     'create' => [

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accesorios',
     'activated'			    => 'Activado',
     'accepted_date'         => 'Fecha de aceptación',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'No hay activos o modelos de activos solicitables.',
+
+    'countable' => [
+        'accessories'  => ':count Accesorio|:count Accesorios',
+        'assets'  => ':count Activos|:count Activos',
+        'licenses'  => ':count Licencia|:count Licencias',
+        'license_seats'  => ':count Asiento de licencia|:count Asientos de licencia',
+        'consumables'  => ':count Consumible|:count Consumibles',
+        'components'  => ':count component|:count componentes',
+    ]
 
 ];

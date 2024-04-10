@@ -3,13 +3,10 @@
 namespace Tests\Feature\Users;
 
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testUsersCanBeActivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();

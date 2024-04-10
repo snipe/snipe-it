@@ -23,7 +23,7 @@ return [
     'depreciation'	    => 'Qiimo dhaca',
     'depreciates_on'	=> 'Qiimo dhaca On',
     'default_location'	=> 'Goobta ugu talagalka ah',
-    'default_location_phone' => 'Default Location Phone',
+    'default_location_phone' => 'Taleefanka Goobta ugu tala galay',
     'eol_date'			=> 'Taariikhda EOL',
     'eol_rate'			=> 'Heerka EOL',
     'expected_checkin'  => 'Taariikhda la filayo',

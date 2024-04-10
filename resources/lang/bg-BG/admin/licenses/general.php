@@ -46,6 +46,6 @@ return array(
             ],
     ],
 
-    'below_threshold' => 'There are only :remaining_count seats left for this license with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
-    'below_threshold_short' => 'This item is below the minimum required quantity.',
+    'below_threshold' => 'Има само :remaining_count лиценз(а) останали от този лиценз с минимално количество от :min_amt. Може да желаете да поръчате допълнително.',
+    'below_threshold_short' => 'Този артикул е под минималното необходимо количество.',
 );
