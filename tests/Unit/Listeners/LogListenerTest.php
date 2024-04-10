@@ -15,6 +15,8 @@ class LogListenerTest extends TestCase
         $asset = Asset::factory()->create();
         $checkedOutTo = User::factory()->create();
         $checkedOutBy = User::factory()->create();
+
+        // Simply to ensure `user_id` is set in the action log
         $this->actingAs($checkedOutBy);
 
         (new LogListener())->onCheckoutableCheckedOut(new CheckoutableCheckedOut(
