@@ -308,35 +308,36 @@ class LicensesController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            License::all()
-                ->orderBy('created_at', 'DESC')->get()
+            License::with('company','manufacturer','category', 'supplier', 'adminuser')
+                ->orderBy('created_at', 'DESC')
                 ->chunk(500, function ($licenses) use ($handle) {
                     $headers = [
                         // strtolower to prevent Excel from trying to open it as a SYLK file
                         strtolower(trans('general.id')),
-                        trans('admin/companies/table.title'),
-                        trans('admin/users/table.title'),
-                        trans('admin/users/table.name'),
-                        trans('admin/users/table.username'),
-                        trans('admin/users/table.email'),
-                        trans('admin/users/table.manager'),
-                        trans('admin/users/table.location'),
-                        trans('general.department'),
-                        trans('general.assets'),
-                        trans('general.licenses'),
-                        trans('general.accessories'),
-                        trans('general.consumables'),
-                        trans('admin/users/table.groups'),
+                        trans('general.company'),
+                        trans('general.name'),
+                        trans('general.serial_number'),
+                        trans('general.purchase_date'),
+                        trans('general.purchase_cost'),
+                        trans('general.order_number'),
+                        trans('admin/licenses/table.seats'),
+                        trans('admin/licenses/table.created_by'),
+                        trans('general.depreciation'),
+                        trans('admin/licenses/table.updated_at'),
+                        trans('admin/licenses/table.deleted_at'),
+                        trans('general.email'),
+                        trans('admin/hardware/form.fully_depreciated'),
+                        trans('general.supplier'),
+                        trans('admin/licenses/form.expiration'),
+                        trans('admin/licenses/form.purchase_order'),
+                        trans('admin/licenses/form.termination_date'),
+                        trans('admin/licenses/form.maintained'),
+                        trans('general.manufacturer'),
+                        trans('general.category'),
+                        trans('general.min_amt'),
+                        trans('admin/licenses/form.reassignable'),
                         trans('general.notes'),
-                        trans('admin/users/table.activated'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
-                        trans('general.created_at'),
+                        trans('general_created_at'),
                     ];
 
                     fputcsv($handle, $headers);
@@ -345,32 +346,29 @@ class LicensesController extends Controller
                         // Add a new row with data
                         $values = [
                             $license->id,
-                            $license->company->name,
+                            $license->company ? $license->company->name: '',
                             $license->name,
                             $license->serial,
                             $license->purchase_date,
                             $license->purchase_cost,
                             $license->order_number,
                             $license->seats,
-                            $license->notes,
-                            $license->user->id,
-                            $license->depreciation->name,
+                            $license->adminuser->present()->fullName(),
+                            $license->depreciation ? $license->depreciation->name: '',
                             $license->updated_at,
                             $license->deleted_at,
-                            $license->license_name,
                             $license->email,
-                            $license->depreciate,
-                            $license->supplier->name,
+                            ( $license->depreciate == '1') ? trans('general.yes') : trans('general.no'),
+                            ($license->supplier) ? $license->supplier->name: '',
                             $license->expiration_date,
                             $license->purchase_order,
                             $license->termination_date,
-                            $license->maintained,
-                            $license->reassignable,
-                            $license->manufacturer->name,
-                            $license->category->name,
+                            ( $license->maintained == '1') ? trans('general.yes') : trans('general.no'),
+                            $license->manufacturer ? $license->manufacturer->name: '',
+                            $license->category ? $license->category->name: '',
                             $license->min_amt,
-
                             ( $license->reassignable == '1') ? trans('general.yes') : trans('general.no'),
+                            $license->notes,
                             $license->created_at,
                         ];
 
@@ -382,7 +380,7 @@ class LicensesController extends Controller
             fclose($handle);
         }, 200, [
             'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="users-'.date('Y-m-d-his').'.csv"',
+            'Content-Disposition' => 'attachment; filename="licenses-'.date('Y-m-d-his').'.csv"',
         ]);
 
         return $response;
