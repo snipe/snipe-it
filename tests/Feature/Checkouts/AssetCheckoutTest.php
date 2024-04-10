@@ -68,9 +68,19 @@ class AssetCheckoutTest extends TestCase
     {
         $this->actingAs(User::factory()->create())
             ->post(route('hardware.checkout.store', Asset::factory()->create()), [
-                //
+                'status_id' => 'does-not-exist',
+                'checkout_at' => 'invalid-date',
+                'expected_checkin' => 'invalid-date',
             ])
-            ->assertSessionHasErrors();
+            ->assertSessionHasErrors([
+                'assigned_user',
+                'assigned_asset',
+                'assigned_location',
+                'status_id',
+                'checkout_to_type',
+                'checkout_at',
+                'expected_checkin',
+            ]);
     }
 
     public function checkoutTargets(): array

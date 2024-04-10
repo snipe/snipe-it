@@ -27,6 +27,14 @@ class AssetCheckoutRequest extends Request
             'assigned_location'     => 'required_without_all:assigned_user,assigned_asset',
             'status_id'             => 'exists:status_labels,id,deployable,1',
             'checkout_to_type'      => 'required|in:asset,location,user',
+            'checkout_at' => [
+                'nullable',
+                'date',
+            ],
+            'expected_checkin' => [
+                'nullable',
+                'date'
+            ],
         ];
 
         return $rules;
