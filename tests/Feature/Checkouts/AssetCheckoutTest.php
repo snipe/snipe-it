@@ -218,8 +218,6 @@ class AssetCheckoutTest extends TestCase
 
         $asset->refresh();
 
-        // It's possible that this can be properly mocked in the future:
-        // https://laravel.com/docs/8.x/mocking#interacting-with-time
         $this->assertTrue(Carbon::parse($asset->last_checkout)->diffInSeconds(now()) < 2);
     }
 }
