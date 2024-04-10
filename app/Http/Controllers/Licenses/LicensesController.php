@@ -337,7 +337,7 @@ class LicensesController extends Controller
                         trans('general.min_amt'),
                         trans('admin/licenses/form.reassignable'),
                         trans('general.notes'),
-                        trans('general_created_at'),
+                        trans('general.created_at'),
                     ];
 
                     fputcsv($handle, $headers);
