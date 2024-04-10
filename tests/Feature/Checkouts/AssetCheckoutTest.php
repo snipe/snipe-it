@@ -103,6 +103,7 @@ class AssetCheckoutTest extends TestCase
         $this->assertEquals('2024-03-18 00:00:00', $asset->last_checkout);
         $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
 
+        Event::assertDispatched(CheckoutableCheckedOut::class, 1);
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $user) {
             return $event->checkoutable->is($asset)
                 && $event->checkedOutTo->is($user)
