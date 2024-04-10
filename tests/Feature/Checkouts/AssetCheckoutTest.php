@@ -112,6 +112,16 @@ class AssetCheckoutTest extends TestCase
         });
     }
 
+    public function testAnAssetCanBeCheckedOutToAnAsset()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testAnAssetCanBeCheckedOutToALocation()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testLicenseSeatsAreAssignedToUserUponCheckout()
     {
         $asset = Asset::factory()->create();
@@ -127,16 +137,6 @@ class AssetCheckoutTest extends TestCase
             ]);
 
         $this->assertTrue($user->fresh()->licenses->contains($seat->license));
-    }
-
-    public function testAnAssetCanBeCheckedOutToAnAsset()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testAnAssetCanBeCheckedOutToALocation()
-    {
-        $this->markTestIncomplete();
     }
 
     public function testLastCheckoutUsesCurrentDateIfNotProvided()
