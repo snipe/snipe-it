@@ -9,13 +9,10 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetCheckoutTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCheckingOutAssetRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
@@ -77,8 +74,6 @@ class AssetCheckoutTest extends TestCase
 
     public function testAnAssetCanBeCheckedOutToAUser()
     {
-        $this->markTestIncomplete();
-
         Event::fake([CheckoutableCheckedOut::class]);
 
         $originalStatus = Statuslabel::factory()->readyToDeploy()->create();
@@ -100,11 +95,13 @@ class AssetCheckoutTest extends TestCase
                 'note' => 'An awesome note',
             ]);
 
-        // @todo: ensure asset updated
         $asset->refresh();
+        $this->assertTrue($asset->assignedTo()->is($user));
         $this->assertTrue($asset->location->is($userLocation));
-        $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
+        $this->assertEquals('Changed Name', $asset->name);
         $this->assertTrue($asset->assetstatus->is($updatedStatus));
+        $this->assertEquals('2024-03-18 00:00:00', $asset->last_checkout);
+        $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
 
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $user) {
             return $event->checkoutable->is($asset)
@@ -112,8 +109,6 @@ class AssetCheckoutTest extends TestCase
                 && $event->checkedOutBy->is($admin)
                 && $event->note === 'An awesome note';
         });
-
-        // @todo: assert action log entry created
     }
 
     public function testLicenseSeatsAreAssignedToUserUponCheckout()
