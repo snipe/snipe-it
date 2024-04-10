@@ -72,22 +72,68 @@ class AssetCheckoutTest extends TestCase
             ->assertSessionHasErrors();
     }
 
-    public function testAnAssetCanBeCheckedOutToAUser()
+    public function assetCheckoutTargets(): array
+    {
+        return [
+            'User' => [function () {
+                $userLocation = Location::factory()->create();
+                $user = User::factory()->for($userLocation)->create();
+
+                return [
+                    'checkout_type' => 'user',
+                    'target' => $user,
+                    'expected_location' => $userLocation,
+                ];
+            }],
+            'Asset without location set' => [function () {
+                $rtdLocation = Location::factory()->create();
+                $asset = Asset::factory()->for($rtdLocation, 'defaultLoc')->create(['location_id' => null]);
+
+                return [
+                    'checkout_type' => 'asset',
+                    'target' => $asset,
+                    'expected_location' => $rtdLocation,
+                ];
+            }],
+            'Asset with location set' => [function () {
+                $rtdLocation = Location::factory()->create();
+                $location = Location::factory()->create();
+                $asset = Asset::factory()->for($location)->for($rtdLocation, 'defaultLoc')->create();
+
+                return [
+                    'checkout_type' => 'asset',
+                    'target' => $asset,
+                    'expected_location' => $location,
+                ];
+            }],
+            'Location' => [function () {
+                $location = Location::factory()->create();
+
+                return [
+                    'checkout_type' => 'location',
+                    'target' => $location,
+                    'expected_location' => $location,
+                ];
+            }],
+        ];
+    }
+
+    /** @dataProvider assetCheckoutTargets */
+    public function testAnAssetCanBeCheckedOutToAUser($data)
     {
         Event::fake([CheckoutableCheckedOut::class]);
+
+        ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
         $originalStatus = Statuslabel::factory()->readyToDeploy()->create();
         $updatedStatus = Statuslabel::factory()->readyToDeploy()->create();
         $asset = Asset::factory()->create(['status_id' => $originalStatus->id]);
         $admin = User::factory()->checkoutAssets()->create();
-        $userLocation = Location::factory()->create();
-
-        $user = User::factory()->for($userLocation)->create();
 
         $this->actingAs($admin)
             ->post(route('hardware.checkout.store', $asset), [
-                'checkout_to_type' => 'user',
-                'assigned_user' => $user->id,
+                'checkout_to_type' => $type,
+                'assigned_' . $type => $target->id,
                 'name' => 'Changed Name',
                 'status_id' => $updatedStatus->id,
                 'checkout_at' => '2024-03-18',
@@ -96,30 +142,20 @@ class AssetCheckoutTest extends TestCase
             ]);
 
         $asset->refresh();
-        $this->assertTrue($asset->assignedTo()->is($user));
-        $this->assertTrue($asset->location->is($userLocation));
+        $this->assertTrue($asset->assignedTo()->is($target));
+        $this->assertTrue($asset->location->is($expectedLocation));
         $this->assertEquals('Changed Name', $asset->name);
         $this->assertTrue($asset->assetstatus->is($updatedStatus));
         $this->assertEquals('2024-03-18 00:00:00', $asset->last_checkout);
         $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
 
         Event::assertDispatched(CheckoutableCheckedOut::class, 1);
-        Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $user) {
+        Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $target) {
             return $event->checkoutable->is($asset)
-                && $event->checkedOutTo->is($user)
+                && $event->checkedOutTo->is($target)
                 && $event->checkedOutBy->is($admin)
                 && $event->note === 'An awesome note';
         });
-    }
-
-    public function testAnAssetCanBeCheckedOutToAnAsset()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testAnAssetCanBeCheckedOutToALocation()
-    {
-        $this->markTestIncomplete();
     }
 
     public function testLicenseSeatsAreAssignedToUserUponCheckout()

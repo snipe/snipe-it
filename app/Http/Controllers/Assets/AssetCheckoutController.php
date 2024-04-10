@@ -64,7 +64,6 @@ class AssetCheckoutController extends Controller
 
             $target = $this->determineCheckoutTarget($asset);
 
-            // this seems to be handled by the checkOut method
             $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date('Y-m-d H:i:s');
