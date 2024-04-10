@@ -15,6 +15,13 @@ use Tests\TestCase;
 
 class AssetCheckoutTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Event::fake([CheckoutableCheckedOut::class]);
+    }
+
     public function testCheckingOutAssetRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
@@ -23,12 +30,12 @@ class AssetCheckoutTest extends TestCase
                 'assigned_user' => User::factory()->create()->id,
             ])
             ->assertForbidden();
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function testNonExistentAssetCannotBeCheckedOut()
     {
-        Event::fake([CheckoutableCheckedOut::class]);
-
         $this->actingAs(User::factory()->checkoutAssets()->create())
             ->post(route('hardware.checkout.store', 1000), [
                 'checkout_to_type' => 'user',
@@ -47,8 +54,6 @@ class AssetCheckoutTest extends TestCase
 
     public function testAssetNotAvailableForCheckoutCannotBeCheckedOut()
     {
-        Event::fake([CheckoutableCheckedOut::class]);
-
         $asset = Asset::factory()->assignedToUser()->create();
 
         $this->actingAs(User::factory()->checkoutAssets()->create())
@@ -84,6 +89,28 @@ class AssetCheckoutTest extends TestCase
                 'checkout_at',
                 'expected_checkin',
             ]);
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
+    }
+
+    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $assetCompany = Company::factory()->create();
+        $userCompany = Company::factory()->create();
+
+        $user = User::factory()->for($userCompany)->create();
+        $asset = Asset::factory()->for($assetCompany)->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+            ])
+            ->assertRedirect(route('hardware.checkout.store', $asset));
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function checkoutTargets(): array
@@ -135,8 +162,6 @@ class AssetCheckoutTest extends TestCase
     /** @dataProvider checkoutTargets */
     public function testAnAssetCanBeCheckedOut($data)
     {
-        Event::fake([CheckoutableCheckedOut::class]);
-
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
         $originalStatus = Statuslabel::factory()->readyToDeploy()->create();
@@ -170,28 +195,6 @@ class AssetCheckoutTest extends TestCase
                 && $event->checkedOutBy->is($admin)
                 && $event->note === 'An awesome note';
         });
-    }
-
-    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled()
-    {
-        Event::fake([CheckoutableCheckedOut::class]);
-
-        $this->settings->enableMultipleFullCompanySupport();
-
-        $assetCompany = Company::factory()->create();
-        $userCompany = Company::factory()->create();
-
-        $user = User::factory()->for($userCompany)->create();
-        $asset = Asset::factory()->for($assetCompany)->create();
-
-        $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('hardware.checkout.store', $asset), [
-                'checkout_to_type' => 'user',
-                'assigned_user' => $user->id,
-            ])
-            ->assertRedirect(route('hardware.checkout.store', $asset));
-
-        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function testLicenseSeatsAreAssignedToUserUponCheckout()
