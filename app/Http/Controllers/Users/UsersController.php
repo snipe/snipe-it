@@ -182,7 +182,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if ($user = User::find($id)) {
+
+        if ($user = Company::scopeCompanyables(User::find($id))) {
             $this->authorize('update', $user);
             $permissions = config('permissions');
             $groups = Group::pluck('name', 'id');
@@ -427,15 +428,15 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-        if (! $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
+
+        if (! $user = Company::scopeCompanyables(User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId))) {
             // Redirect to the user management page
             return redirect()->route('users.index')
                 ->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
         }
+        $this->authorize('view', $user);
 
         $userlog = $user->userlog->load('item');
-
-        $this->authorize('view', $user);
 
         return view('users/view', compact('user', 'userlog'))
             ->with('settings', Setting::getSettings());
@@ -454,7 +455,7 @@ class UsersController extends Controller
     {
         try {
             // Get user information
-            $user = User::findOrFail($id);
+            $user = Company::scopeCompanyables(User::findOrFail($id));
             $this->authorize('update', $user);
 
             // Check if we are not trying to unsuspend ourselves
@@ -500,7 +501,7 @@ class UsersController extends Controller
 
         try {
             // Get the user information
-            $user_to_clone = User::withTrashed()->find($id);
+            $user_to_clone = Company::scopeCompanyables(User::withTrashed()->find($id));
             $user = clone $user_to_clone;
             $user->first_name = '';
             $user->last_name = '';
@@ -546,7 +547,7 @@ class UsersController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company')
+            Company::scopeCompanyables(User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company')
                 ->orderBy('created_at', 'DESC')
                 ->chunk(500, function ($users) use ($handle) {
                     $headers = [
@@ -565,7 +566,7 @@ class UsersController extends Controller
                         trans('general.licenses'),
                         trans('general.accessories'),
                         trans('general.consumables'),
-                        trans('admin/users/table.groups'),
+                        trans('general.groups'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
@@ -604,7 +605,7 @@ class UsersController extends Controller
 
                         fputcsv($handle, $values);
                     }
-                });
+                }));
 
             // Close the output stream
             fclose($handle);
@@ -626,7 +627,7 @@ class UsersController extends Controller
     public function printInventory($id)
     {
         $this->authorize('view', User::class);
-        $show_user = User::where('id', $id)->withTrashed()->first();
+        $show_user = Company::scopeCompanyables(User::where('id', $id)->withTrashed()->first());
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $accessories = $show_user->accessories()->get();
         $consumables = $show_user->consumables()->get();
@@ -651,7 +652,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        if (!$user = User::find($id)) {
+        if (!$user = Company::scopeCompanyables(User::find($id))) {
             return redirect()->back()
                 ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
         }
@@ -672,7 +673,7 @@ class UsersController extends Controller
      */
     public function sendPasswordReset($id)
     {
-        if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
+        if (($user = Company::scopeCompanyables(User::find($id))) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
             $credentials = ['email' => trim($user->email)];
 
             try {
