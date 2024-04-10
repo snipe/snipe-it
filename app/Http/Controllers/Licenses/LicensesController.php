@@ -294,8 +294,8 @@ class LicensesController extends Controller
     /**
      * Exports users to CSV
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.5]
+     * @author [G. Martinez]
+     * @since [v6.3]
      * @return StreamedResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
