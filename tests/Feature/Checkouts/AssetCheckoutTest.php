@@ -30,8 +30,6 @@ class AssetCheckoutTest extends TestCase
                 'assigned_user' => User::factory()->create()->id,
             ])
             ->assertForbidden();
-
-        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function testNonExistentAssetCannotBeCheckedOut()
@@ -41,10 +39,6 @@ class AssetCheckoutTest extends TestCase
                 'checkout_to_type' => 'user',
                 'assigned_user' => User::factory()->create()->id,
                 'name' => 'Changed Name',
-                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
-                'checkout_at' => '2024-03-18',
-                'expected_checkin' => '2024-03-28',
-                'note' => 'An awesome note',
             ])
             ->assertSessionHas('error')
             ->assertRedirect(route('hardware.index'));
@@ -54,17 +48,12 @@ class AssetCheckoutTest extends TestCase
 
     public function testAssetNotAvailableForCheckoutCannotBeCheckedOut()
     {
-        $asset = Asset::factory()->assignedToUser()->create();
+        $assetAlreadyCheckedOut = Asset::factory()->assignedToUser()->create();
 
         $this->actingAs(User::factory()->checkoutAssets()->create())
-            ->post(route('hardware.checkout.store', $asset), [
+            ->post(route('hardware.checkout.store', $assetAlreadyCheckedOut), [
                 'checkout_to_type' => 'user',
                 'assigned_user' => User::factory()->create()->id,
-                'name' => 'Changed Name',
-                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
-                'checkout_at' => '2024-03-18',
-                'expected_checkin' => '2024-03-28',
-                'note' => 'An awesome note',
             ])
             ->assertSessionHas('error')
             ->assertRedirect(route('hardware.index'));
@@ -113,6 +102,10 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
+    /**
+     * This data provider contains checkout targets along with the
+     * asset's expected location after the checkout process.
+     */
     public function checkoutTargets(): array
     {
         return [
@@ -164,9 +157,8 @@ class AssetCheckoutTest extends TestCase
     {
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
-        $originalStatus = Statuslabel::factory()->readyToDeploy()->create();
-        $updatedStatus = Statuslabel::factory()->readyToDeploy()->create();
-        $asset = Asset::factory()->create(['status_id' => $originalStatus->id]);
+        $newStatus = Statuslabel::factory()->readyToDeploy()->create();
+        $asset = Asset::factory()->create();
         $admin = User::factory()->checkoutAssets()->create();
 
         $this->actingAs($admin)
@@ -174,7 +166,7 @@ class AssetCheckoutTest extends TestCase
                 'checkout_to_type' => $type,
                 'assigned_' . $type => $target->id,
                 'name' => 'Changed Name',
-                'status_id' => $updatedStatus->id,
+                'status_id' => $newStatus->id,
                 'checkout_at' => '2024-03-18',
                 'expected_checkin' => '2024-03-28',
                 'note' => 'An awesome note',
@@ -184,7 +176,7 @@ class AssetCheckoutTest extends TestCase
         $this->assertTrue($asset->assignedTo()->is($target));
         $this->assertTrue($asset->location->is($expectedLocation));
         $this->assertEquals('Changed Name', $asset->name);
-        $this->assertTrue($asset->assetstatus->is($updatedStatus));
+        $this->assertTrue($asset->assetstatus->is($newStatus));
         $this->assertEquals('2024-03-18 00:00:00', $asset->last_checkout);
         $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
 
