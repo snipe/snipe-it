@@ -72,7 +72,7 @@ class AssetCheckoutTest extends TestCase
             ->assertSessionHasErrors();
     }
 
-    public function assetCheckoutTargets(): array
+    public function checkoutTargets(): array
     {
         return [
             'User' => [function () {
@@ -118,8 +118,8 @@ class AssetCheckoutTest extends TestCase
         ];
     }
 
-    /** @dataProvider assetCheckoutTargets */
-    public function testAnAssetCanBeCheckedOutToAUser($data)
+    /** @dataProvider checkoutTargets */
+    public function testAnAssetCanBeCheckedOut($data)
     {
         Event::fake([CheckoutableCheckedOut::class]);
 
