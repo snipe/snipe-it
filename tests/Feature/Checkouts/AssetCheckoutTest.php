@@ -4,6 +4,7 @@ namespace Tests\Feature\Checkouts;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
+use App\Models\Company;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Statuslabel;
@@ -167,6 +168,28 @@ class AssetCheckoutTest extends TestCase
                 && $event->checkedOutBy->is($admin)
                 && $event->note === 'An awesome note';
         });
+    }
+
+    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled()
+    {
+        Event::fake([CheckoutableCheckedOut::class]);
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $assetCompany = Company::factory()->create();
+        $userCompany = Company::factory()->create();
+
+        $user = User::factory()->for($userCompany)->create();
+        $asset = Asset::factory()->for($assetCompany)->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+            ])
+            ->assertRedirect(route('hardware.checkout.store', $asset));
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function testLicenseSeatsAreAssignedToUserUponCheckout()
