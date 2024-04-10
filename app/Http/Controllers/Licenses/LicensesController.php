@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * This controller handles all actions related to Licenses for
@@ -288,5 +289,102 @@ class LicensesController extends Controller
         ->with('depreciation_list', Helper::depreciationList())
         ->with('item', $license)
         ->with('maintained_list', $maintained_list);
+    }
+
+    /**
+     * Exports users to CSV
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.5]
+     * @return StreamedResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function getExportLicensesCsv()
+    {
+        $this->authorize('view', License::class);
+        \Debugbar::disable();
+
+        $response = new StreamedResponse(function () {
+            // Open output stream
+            $handle = fopen('php://output', 'w');
+
+            License::all()
+                ->orderBy('created_at', 'DESC')->get()
+                ->chunk(500, function ($licenses) use ($handle) {
+                    $headers = [
+                        // strtolower to prevent Excel from trying to open it as a SYLK file
+                        strtolower(trans('general.id')),
+                        trans('admin/companies/table.title'),
+                        trans('admin/users/table.title'),
+                        trans('admin/users/table.name'),
+                        trans('admin/users/table.username'),
+                        trans('admin/users/table.email'),
+                        trans('admin/users/table.manager'),
+                        trans('admin/users/table.location'),
+                        trans('general.department'),
+                        trans('general.assets'),
+                        trans('general.licenses'),
+                        trans('general.accessories'),
+                        trans('general.consumables'),
+                        trans('admin/users/table.groups'),
+                        trans('general.notes'),
+                        trans('admin/users/table.activated'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                        trans('general.created_at'),
+                    ];
+
+                    fputcsv($handle, $headers);
+
+                    foreach ($licenses as $license) {
+                        // Add a new row with data
+                        $values = [
+                            $license->id,
+                            $license->company->name,
+                            $license->name,
+                            $license->serial,
+                            $license->purchase_date,
+                            $license->purchase_cost,
+                            $license->order_number,
+                            $license->seats,
+                            $license->notes,
+                            $license->user->id,
+                            $license->depreciation->name,
+                            $license->updated_at,
+                            $license->deleted_at,
+                            $license->license_name,
+                            $license->email,
+                            $license->depreciate,
+                            $license->supplier->name,
+                            $license->expiration_date,
+                            $license->purchase_order,
+                            $license->termination_date,
+                            $license->maintained,
+                            $license->reassignable,
+                            $license->manufacturer->name,
+                            $license->category->name,
+                            $license->min_amt,
+
+                            ( $license->reassignable == '1') ? trans('general.yes') : trans('general.no'),
+                            $license->created_at,
+                        ];
+
+                        fputcsv($handle, $values);
+                    }
+                });
+
+            // Close the output stream
+            fclose($handle);
+        }, 200, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="users-'.date('Y-m-d-his').'.csv"',
+        ]);
+
+        return $response;
     }
 }
