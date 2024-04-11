@@ -331,12 +331,13 @@ class UsersController extends Controller
      */
     public function destroy($id = null)
     {
-        try {
-            // Get user information
-            $user = Company::scopeCompanyables(User::findOrFail($id));
-            // Authorize takes care of many of our logic checks now.
-            $this->authorize('delete', User::class);
 
+        $this->authorize('delete', User::class);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = Company::scopeCompanyables($user)->find($id);
+
+
+        if ($user) {
             // Check if we are not trying to delete ourselves
             if ($user->id === Auth::id()) {
                 // Redirect to the user management page
@@ -370,16 +371,12 @@ class UsersController extends Controller
 
             // Delete the user
             $user->delete();
-
-            // Prepare the success message
-            // Redirect to the user management page
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
-        } catch (ModelNotFoundException $e) {
-            // Prepare the error message
-            // Redirect to the user management page
-            return redirect()->route('users.index')
-                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
+
+        return redirect()->route('users.index')
+            ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+
     }
 
     /**
@@ -442,59 +439,15 @@ class UsersController extends Controller
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
         $user = Company::scopeCompanyables($user)->find($userId);
 
-        //dd($user);
-
         if ($user) {
-            \Log::debug('User '.$user->username.' is found - checking permission');
-
             $userlog = $user->userlog->load('item');
-
             return view('users/view', compact('user', 'userlog'))->with('settings', Setting::getSettings());
         }
 
-        return redirect()->route('users.index')
-            ->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
 
     }
 
-    /**
-     * Unsuspend a user.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @param  int $id
-     * @return Redirect
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function getUnsuspend($id = null)
-    {
-        try {
-            // Get user information
-            $user = Company::scopeCompanyables(User::findOrFail($id));
-            $this->authorize('update', $user);
-
-            // Check if we are not trying to unsuspend ourselves
-            if ($user->id === Auth::id()) {
-                // Prepare the error message
-                $error = trans('admin/users/message.error.unsuspend');
-                // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', $error);
-            }
-
-            // Do we have permission to unsuspend this user?
-            if ($user->isSuperUser() && ! Auth::user()->isSuperUser()) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'Insufficient permissions!');
-            }
-
-            // Redirect to the user management page
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.unsuspend'));
-        } catch (ModelNotFoundException $e) {
-            // Redirect to the user management page
-            return redirect()->route('users.index')
-                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
-        }
-    }
 
     /**
      * Return a view containing a pre-populated new user form,
@@ -509,22 +462,30 @@ class UsersController extends Controller
     public function getClone(Request $request, $id = null)
     {
         $this->authorize('create', User::class);
+
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
-        try {
-            // Get the user information
-            $user_to_clone = Company::scopeCompanyables(User::withTrashed()->find($id));
+
+        $user_to_clone = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user_to_clone = Company::scopeCompanyables($user_to_clone)->find($id);
+
+        if ($user_to_clone) {
+
+
             $user = clone $user_to_clone;
+
+            // Blank out some fields
             $user->first_name = '';
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos : 0);
             $user->id = null;
 
-            // Get this user groups
+            // Get this user's groups
             $userGroups = $user_to_clone->groups()->pluck('name', 'id');
+
             // Get all the available permissions
             $permissions = config('permissions');
             $clonedPermissions = $user_to_clone->decodePermissions();
@@ -533,16 +494,14 @@ class UsersController extends Controller
 
             // Show the page
             return view('users/edit', compact('permissions', 'userPermissions'))
-                            ->with('user', $user)
-                            ->with('groups', Group::pluck('name', 'id'))
-                            ->with('userGroups', $userGroups)
-                            ->with('clone_user', $user_to_clone);
-        } catch (ModelNotFoundException $e) {
-            // Prepare the error message
-            // Redirect to the user management page
-            return redirect()->route('users.index')
-                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+                ->with('user', $user)
+                ->with('groups', Group::pluck('name', 'id'))
+                ->with('userGroups', $userGroups)
+                ->with('clone_user', $user_to_clone);
         }
+
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
+
     }
 
     /**
