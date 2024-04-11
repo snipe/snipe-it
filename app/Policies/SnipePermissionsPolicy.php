@@ -36,7 +36,7 @@ abstract class SnipePermissionsPolicy
     public function before(User $user, $ability, $item)
     {
         /**
-         * If an admin, they can do all asset related tasks, but constrained by FMCSA company access.
+         * If an admin, they can do all item related tasks, but ARE constrained by FMCSA company access.
          * That scoping happens on the model level (except for the Users model) via the Companyable trait.
          *
          * This does lead to some inconsistencies in the responses, since attempting to edit assets,
