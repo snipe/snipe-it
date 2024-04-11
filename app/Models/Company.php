@@ -121,25 +121,49 @@ final class Company extends SnipeModel
         }
     }
 
+    /**
+     * Check to see if the current user should have access to the model.
+     * I hate this method and I think it should be refactored.
+     *
+     * @param $companyable
+     * @return bool|void
+     */
     public static function isCurrentUserHasAccess($companyable)
     {
+        // When would this even happen tho??
         if (is_null($companyable)) {
             return false;
-        } elseif (! static::isFullMultipleCompanySupportEnabled()) {
-            return true;
-        } elseif (!$companyable instanceof Company && !\Schema::hasColumn($companyable->getModel()->getTable(), 'company_id')) {
-            // This is primary for the gate:allows-check in location->isDeletable()
-            // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
-            // because this function is called by SnipePermissionsPolicy->before()
-            return true;
-        } else {
-            if (Auth::user()) {
-                $current_user_company_id = Auth::user()->company_id;
-                $companyable_company_id = $companyable->company_id;
+        }
 
-                return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
+        // If FMCS is not enabled, everyone has access, return true
+        if (! static::isFullMultipleCompanySupportEnabled()) {
+            return true;
+        }
+
+        // Again, where would this happen? But check that $companyable is not a string
+        if (!is_string($companyable)) {
+            $company_table = $companyable->getModel()->getTable();
+            try {
+                // This is primary for the gate:allows-check in location->isDeletable()
+                // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
+                // because this function is called by SnipePermissionsPolicy->before()
+                if (!$companyable instanceof Company && !\Schema::hasColumn($company_table, 'company_id')) {
+                    return true;
+                }
+
+            } catch (\Exception $e) {
+                \Log::warning($e);
             }
         }
+
+
+        if (Auth::user()) {
+            \Log::warning('Companyable is '.$companyable);
+            $current_user_company_id = Auth::user()->company_id;
+            $companyable_company_id = $companyable->company_id;
+            return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
+        }
+
     }
 
     public static function isCurrentUserAuthorized()
