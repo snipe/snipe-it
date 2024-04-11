@@ -55,7 +55,14 @@ class AssetCheckoutTest extends TestCase
 
     public function testAssetCannotBeCheckedOutToItself()
     {
-        $this->markTestIncomplete();
+        $asset = Asset::factory()->create();
+
+        $this->actingAsForApi(User::factory()->checkoutAssets()->create())
+            ->postJson(route('api.asset.checkout', $asset), [
+                'checkout_to_type' => 'asset',
+                'assigned_asset' => $asset->id,
+            ])
+            ->assertStatusMessageIs('error');
     }
 
     public function testValidationWhenCheckingOutAsset()
@@ -125,8 +132,6 @@ class AssetCheckoutTest extends TestCase
     /** @dataProvider checkoutTargets */
     public function testAssetCanBeCheckedOut($data)
     {
-        // $this->markTestIncomplete();
-
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
         $newStatus = Statuslabel::factory()->readyToDeploy()->create();
