@@ -273,6 +273,7 @@ class UsersController extends Controller
             $users = $users->withTrashed();
         }
 
+        // Apply companyable scope
         $users = Company::scopeCompanyables($users);
 
 
