@@ -155,10 +155,10 @@ class Label implements View
 
                                 // The end result of this will be in this format:
                                 // {labelOne} {valueOne} | {labelTwo} {valueTwo} | {labelThree} {valueThree}
-                                $carry['value'] = implode(' | ', [
+                                $carry['value'] = trim(implode(' | ', [
                                     implode(' ', [$carry['label'], $carry['value']]),
                                     implode(' ', [$item['label'], $item['value']]),
-                                ]);
+                                ]));
 
                                 // We'll set the label to an empty string since we
                                 // injected the label into the value field above.
