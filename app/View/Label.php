@@ -142,7 +142,30 @@ class Label implements View
                         // Remove Duplicates
                         $toAdd = $field
                             ->filter(fn($o) => !$myFields->contains('dataSource', $o['dataSource']))
-                            ->first();
+                            ->reduce(function ($carry, $item) {
+                                // On the first iteration we simply return the item.
+                                // If there is only one item to be processed for the row
+                                // then this effectively skips everything below this if block.
+                                if (is_null($carry)){
+                                    return $item;
+                                }
+
+                                // At this point we are dealing with a row with multiple items being displayed.
+
+
+                                // The end result of this will be in this format:
+                                // {labelOne} {valueOne} | {labelTwo} {valueTwo} | {labelThree} {valueThree}
+                                $carry['value'] = implode(' | ', [
+                                    implode(' ', [$carry['label'], $carry['value']]),
+                                    implode(' ', [$item['label'], $item['value']]),
+                                ]);
+
+                                // We'll set the label to an empty string since we
+                                // injected the label into the value field above.
+                                $carry['label'] = '';
+
+                                return $carry;
+                            });
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
