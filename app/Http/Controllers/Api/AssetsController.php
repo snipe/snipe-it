@@ -823,12 +823,15 @@ class AssetsController extends Controller
 
         // This item is checked out to a location
         if (request('checkout_to_type') == 'location') {
+            // @todo: test this
+            dd('asdfasdf');
             $target = Location::find(request('assigned_location'));
             $asset->location_id = ($target) ? $target->id : '';
             $error_payload['target_id'] = $request->input('assigned_location');
             $error_payload['target_type'] = 'location';
 
         } elseif (request('checkout_to_type') == 'asset') {
+            // @todo: test this
             $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
@@ -836,6 +839,7 @@ class AssetsController extends Controller
             $error_payload['target_type'] = 'asset';
 
         } elseif (request('checkout_to_type') == 'user') {
+            // @todo: test this
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
@@ -844,20 +848,26 @@ class AssetsController extends Controller
         }
 
         if ($request->filled('status_id')) {
+            // @todo: test this
             $asset->status_id = $request->get('status_id');
         }
 
 
         if (! isset($target)) {
+            // @todo: test this
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
 
 
 
+        // @todo: test this
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
+        // @todo: test this
         $expected_checkin = request('expected_checkin', null);
+        // @todo: test this
         $note = request('note', null);
         // Using `->has` preserves the asset name if the name parameter was not included in request.
+        // @todo: test this
         $asset_name = request()->has('name') ? request('name') : $asset->name;
 
         // Set the location ID to the RTD location id if there is one
