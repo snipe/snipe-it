@@ -35,16 +35,40 @@ abstract class SnipePermissionsPolicy
 
     public function before(User $user, $ability, $item)
     {
-        // Lets move all company related checks here.
-        if ($item instanceof \App\Models\SnipeModel && ! Company::isCurrentUserHasAccess($item)) {
-            return false;
-        }
-        // If an admin, they can do all asset related tasks.
+        /**
+         * If an admin, they can do all asset related tasks, but constrained by FMCSA company access.
+         * That scoping happens on the model level (except for the Users model) via the Companyable trait.
+         *
+         * This does lead to some inconsistencies in the responses, since attempting to edit assets,
+         * accessories, etc (anything other than users) will result in a Forbidden error, whereas the users
+         * area will redirect with "That user doesn't exist" since the scoping is handled directly on those queries.
+         *
+         * The *superuser* global permission gets handled in the AuthServiceProvider before() method.
+         *
+         * @see https://snipe-it.readme.io/docs/permissions
+         */
+
         if ($user->hasAccess('admin')) {
             return true;
         }
+
+        /**
+         * The Company::isCurrentUserHasAccess() method from the company model handles the check for FMCS already so we
+         * don't have to do that here.
+         */
+        if (!Company::isCurrentUserHasAccess($item)) {
+            return false;
+        }
+
     }
 
+
+    /**
+     * These methods handle the generic view/create/edit/delete permissions for the model.
+     *
+     * @param User $user
+     * @return bool
+     */
     public function index(User $user)
     {
         return $user->hasAccess($this->columnName().'.view');
