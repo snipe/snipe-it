@@ -507,6 +507,7 @@ return [
     'or' => 'or',
     'url'                   => 'URL',
     'edit_fieldset' => 'Edit fieldset fields and options',
+    'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'bulk' => [
             'delete' =>
                 [
