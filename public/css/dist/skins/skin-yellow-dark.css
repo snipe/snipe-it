@@ -423,8 +423,11 @@ input[type=search] {
 .skin-yellow-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
+.skin-yellow-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #000000;
+}
 tr th div.th-inner {
-  color: var(--text-main);
+  color: #FFFFFF;
 }
 .tab-content,
 .tab-pane {
