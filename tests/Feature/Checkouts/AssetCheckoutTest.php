@@ -61,6 +61,11 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
+    public function testAssetCannotBeCheckedOutToItself()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testValidationWhenCheckingOutAsset()
     {
         $this->actingAs(User::factory()->create())
@@ -208,7 +213,7 @@ class AssetCheckoutTest extends TestCase
 
     public function testLastCheckoutUsesCurrentDateIfNotProvided()
     {
-        $asset = Asset::factory()->create();
+        $asset = Asset::factory()->create(['last_checkout' => now()->subMonth()]);
 
         $this->actingAs(User::factory()->checkoutAssets()->create())
             ->post(route('hardware.checkout.store', $asset), [

@@ -823,15 +823,14 @@ class AssetsController extends Controller
 
         // This item is checked out to a location
         if (request('checkout_to_type') == 'location') {
-            // @todo: test this
-            dd('asdfasdf');
             $target = Location::find(request('assigned_location'));
+            // @todo: test the setting of ''
             $asset->location_id = ($target) ? $target->id : '';
             $error_payload['target_id'] = $request->input('assigned_location');
             $error_payload['target_type'] = 'location';
 
         } elseif (request('checkout_to_type') == 'asset') {
-            // @todo: test this
+            // @todo: test this code path
             $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
@@ -839,28 +838,25 @@ class AssetsController extends Controller
             $error_payload['target_type'] = 'asset';
 
         } elseif (request('checkout_to_type') == 'user') {
-            // @todo: test this
+            // @todo: test this code path
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
+            // @todo: test if this is needed or already handled in checkOut method
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_user');
             $error_payload['target_type'] = 'user';
         }
 
         if ($request->filled('status_id')) {
-            // @todo: test this
             $asset->status_id = $request->get('status_id');
         }
 
 
         if (! isset($target)) {
-            // @todo: test this
+            // @todo: test this code path
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
 
-
-
-        // @todo: test this
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
         // @todo: test this
         $expected_checkin = request('expected_checkin', null);
