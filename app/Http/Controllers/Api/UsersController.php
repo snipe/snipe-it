@@ -513,37 +513,42 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', User::class);
-        $user = User::findOrFail($id);
-        $this->authorize('delete', $user);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = Company::scopeCompanyables($user)->find($id);
 
-        if (($user->assets) && ($user->assets->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
-        }
+        if ($user) {
 
-        if (($user->licenses) && ($user->licenses->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->licenses->count().' license(s) associated with them and cannot be deleted.'));
-        }
-
-        if (($user->accessories) && ($user->accessories->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->accessories->count().' accessories associated with them.'));
-        }
-
-        if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->managedLocations()->count().' locations that they manage.'));
-        }
-
-        if ($user->delete()) {
-
-            // Remove the user's avatar if they have one
-            if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
-                try {
-                    Storage::disk('public')->delete('avatars/'.$user->avatar);
-                } catch (\Exception $e) {
-                    \Log::debug($e);
-                }
+            $this->authorize('delete', $user);
+            
+            if (($user->assets) && ($user->assets->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
             }
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
+            if (($user->licenses) && ($user->licenses->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
+            }
+
+            if (($user->accessories) && ($user->accessories->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
+            }
+
+            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
+            }
+
+            if ($user->delete()) {
+
+                // Remove the user's avatar if they have one
+                if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    try {
+                        Storage::disk('public')->delete('avatars/' . $user->avatar);
+                    } catch (\Exception $e) {
+                        \Log::debug($e);
+                    }
+                }
+
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
+            }
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
