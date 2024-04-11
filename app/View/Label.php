@@ -142,28 +142,29 @@ class Label implements View
                         // Remove Duplicates
                         $toAdd = $field
                             ->filter(fn($o) => !$myFields->contains('dataSource', $o['dataSource']))
-                            ->reduce(function ($carry, $item) {
+                            ->reduce(function ($previous, $current) {
                                 // On the first iteration we simply return the item.
                                 // If there is only one item to be processed for the row
                                 // then this effectively skips everything below this if block.
-                                if (is_null($carry)){
-                                    return $item;
+                                if (is_null($previous)) {
+                                    return $current;
                                 }
 
                                 // At this point we are dealing with a row with multiple items being displayed.
+                                // We need to combine the label and value of the current item with the previous item.
 
                                 // The end result of this will be in this format:
                                 // {labelOne} {valueOne} | {labelTwo} {valueTwo} | {labelThree} {valueThree}
-                                $carry['value'] = trim(implode(' | ', [
-                                    implode(' ', [$carry['label'], $carry['value']]),
-                                    implode(' ', [$item['label'], $item['value']]),
+                                $previous['value'] = trim(implode(' | ', [
+                                    implode(' ', [$previous['label'], $previous['value']]),
+                                    implode(' ', [$current['label'], $current['value']]),
                                 ]));
 
                                 // We'll set the label to an empty string since we
                                 // injected the label into the value field above.
-                                $carry['label'] = '';
+                                $previous['label'] = '';
 
-                                return $carry;
+                                return $previous;
                             });
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
