@@ -152,7 +152,6 @@ class Label implements View
 
                                 // At this point we are dealing with a row with multiple items being displayed.
 
-
                                 // The end result of this will be in this format:
                                 // {labelOne} {valueOne} | {labelTwo} {valueTwo} | {labelThree} {valueThree}
                                 $carry['value'] = trim(implode(' | ', [
