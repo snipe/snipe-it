@@ -142,6 +142,8 @@ class Label implements View
                         // Remove Duplicates
                         $toAdd = $field
                             ->filter(fn($o) => !$myFields->contains('dataSource', $o['dataSource']))
+                            // For fields that have multiple options, we need to combine them
+                            // into a single field so all values are displayed.
                             ->reduce(function ($previous, $current) {
                                 // On the first iteration we simply return the item.
                                 // If there is only one item to be processed for the row
