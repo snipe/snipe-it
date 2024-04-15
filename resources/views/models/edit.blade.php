@@ -15,17 +15,18 @@
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.depreciation')
-{{--@include ('partials.forms.edit.minimum_quantity')--}}
+
+<!-- Alert Threshold -->
 <div class="form-group{{ $errors->has('min_amt') ? ' has-error' : '' }}">
     <label for="min_amt" class="col-md-3 control-label">{{ trans('general.min_qty_increase') }}</label>
-    <div class="col-md-9{{  (Helper::checkIfRequired($item, 'min_amt')) ? ' required' : '' }}">
+    <div class="col-md-9">
         <div class="col-md-3" style="padding-left:0px">
             <input class="form-control col-md-3" type="text" name="min_amt" id="min_amt" aria-label="min_amt" value="{{ old('min_amt', $item->min_amt) }}" />
             <span>Standard Threshold: {{$setting->alert_threshold}}</span>
         </div>
         <div class="col-md-7" style="margin-left: -15px;">
             <a href="#" data-tooltip="true" title="{{ trans('general.min_threshold_help') }}"><i class="fas fa-info-circle" aria-hidden="true"></i>
-                <span class="sr-only">{{ trans('general.min_amt_help') }}</span>
+                <span class="sr-only">{{ trans('general.min_threshold_help') }}</span>
             </a>
 
         </div>
