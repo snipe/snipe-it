@@ -5,6 +5,8 @@ namespace Tests\Feature\Api\Assets;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
@@ -478,5 +480,37 @@ class AssetStoreTest extends TestCase
             ->assertJson(function (AssertableJson $json) {
                 $json->has('messages.company_id')->etc();
             });
+    }
+
+    public function testEncryptedCustomField()
+    {
+        $field = CustomField::factory()->testEncrypted()->create();
+        $asset = Asset::factory()->has_encrypted_custom_field()->create();
+        $superuser = User::factory()->superuser()->create();
+        $normal_user = User::factory()->editAssets()->create();
+
+        //first, test that an Admin user can save the encrypted custom field
+        $response = $this->actingAsForApi($superuser)
+            ->patchJson(route('api.assets.update', $asset->id), [
+                $field->db_column_name() => 'This is encrypted field'
+            ])
+            ->assertStatusMessageIs('success')
+            ->assertOk()
+            ->json();
+        $asset->refresh();
+        $this->assertEquals(\Crypt::decrypt($asset->{$field->db_column_name()}), 'This is encrypted field');
+
+        //next, test that a 'normal' user *cannot* change the encrypted custom field
+        $response = $this->actingAsForApi($normal_user)
+            ->patchJson(route('api.assets.update', $asset->id), [
+                $field->db_column_name() => 'Some Other Value Entirely!'
+            ])
+            ->assertStatusMessageIs('success')
+            ->assertOk()
+            ->assertMessagesAre('Asset updated successfully, but encrypted custom fields were not due to permissions')
+            ->json();
+        $asset->refresh();
+        $this->assertEquals(\Crypt::decrypt($asset->{$field->db_column_name()}), 'This is encrypted field');
+
     }
 }
