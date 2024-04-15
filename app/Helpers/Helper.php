@@ -740,7 +740,7 @@ class Helper
                 $items_array[$all_count]['type'] = 'consumables';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $consumable->min_amt;
+                $items_array[$all_count]['min_amt'] = ($consumable->min_amt) + $alert_threshold;
                 $all_count++;
             }
         }
@@ -759,7 +759,7 @@ class Helper
                 $items_array[$all_count]['type'] = 'accessories';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $accessory->min_amt;
+                $items_array[$all_count]['min_amt'] = ($accessory->min_amt) + $alert_threshold;
                 $all_count++;
             }
         }
@@ -778,7 +778,7 @@ class Helper
                 $items_array[$all_count]['type'] = 'components';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $component->min_amt;
+                $items_array[$all_count]['min_amt'] = ($component->min_amt) + $alert_threshold;
                 $all_count++;
             }
         }
@@ -800,7 +800,7 @@ class Helper
                 $items_array[$all_count]['type'] = 'models';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $asset_model->min_amt;
+                $items_array[$all_count]['min_amt'] = ($asset_model->min_amt) + $alert_threshold;
                 $all_count++;
             }
         }
@@ -819,7 +819,7 @@ class Helper
                 $items_array[$all_count]['type'] = 'licenses';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $license->min_amt;
+                $items_array[$all_count]['min_amt'] = ($license->min_amt) + $alert_threshold;
                 $all_count++;
             }
 
