@@ -195,7 +195,7 @@ return [
     'markdown'				=> 'This field allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'min_amt'				=> 'Min. QTY',
     'min_qty_increase'      => 'Increase Alert Threshold',
-    'min_threshold_help'    => 'This value is added to the standard threshold assigned in Notification settings giving you a higher threshold to be alerted to for low inventory.',
+    'min_threshold_help'    => 'This value is added to the standard threshold assigned in Notification settings. This gives you a higher threshold to be alerted to for low inventory.',
     'min_amt_help'          => 'Increase Minimum number of items that should be available before an alert gets triggered. Leave Min. QTY blank if you do not want to receive alerts for low inventory.',
     'model_no'				=> 'Model No.',
     'months'				=> 'months',
