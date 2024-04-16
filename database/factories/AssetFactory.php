@@ -355,7 +355,9 @@ class AssetFactory extends Factory
 
     public function hasEncryptedCustomField()
     {
-        return $this->state(['model_id' => AssetModel::where('name', 'asset with encrypted field')->first() ?? AssetModel::factory()->withEncryptedField()]);
+        return $this->afterMaking(function (Asset $asset) {
+            $asset->model_id = AssetModel::factory()->withEncryptedField()->create()->id;
+        });
     }
 
 
