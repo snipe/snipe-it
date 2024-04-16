@@ -3,15 +3,8 @@
 namespace Tests\Feature\Api\Assets;
 
 use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Company;
 use App\Models\CustomField;
-use App\Models\CustomFieldset;
-use App\Models\Location;
-use App\Models\Statuslabel;
-use App\Models\Supplier;
 use App\Models\User;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class AssetUpdateTest extends TestCase
