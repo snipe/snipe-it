@@ -498,7 +498,7 @@ class AssetStoreTest extends TestCase
             ->assertOk()
             ->json();
         $asset->refresh();
-        $this->assertEquals(\Crypt::decrypt($asset->{$field->db_column_name()}), 'This is encrypted field');
+        $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
 
         //next, test that a 'normal' user *cannot* change the encrypted custom field
         $response = $this->actingAsForApi($normal_user)
@@ -510,7 +510,7 @@ class AssetStoreTest extends TestCase
             ->assertMessagesAre('Asset updated successfully, but encrypted custom fields were not due to permissions')
             ->json();
         $asset->refresh();
-        $this->assertEquals(\Crypt::decrypt($asset->{$field->db_column_name()}), 'This is encrypted field');
+        $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
 
     }
 }

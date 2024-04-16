@@ -31,7 +31,7 @@ class AssetUpdateTest extends TestCase
             ->assertOk()
             ->json();
         $asset->refresh();
-        $this->assertEquals(\Crypt::decrypt($asset->{$field->db_column_name()}), 'This is encrypted field');
+        $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 
     public function testPermissionNeededToUpdateEncryptedField()
@@ -53,7 +53,7 @@ class AssetUpdateTest extends TestCase
             ->assertMessagesAre('Asset updated successfully, but encrypted custom fields were not due to permissions')
             ->json();
         $asset->refresh();
-        $this->assertEquals(\Crypt::decrypt($asset->{$field->db_column_name()}), "encrypted value should not change");
+        $this->assertEquals("encrypted value should not change", \Crypt::decrypt($asset->{$field->db_column_name()}));
 
     }
 }
