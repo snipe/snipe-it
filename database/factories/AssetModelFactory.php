@@ -431,7 +431,7 @@ class AssetModelFactory extends Factory
         });
     }
 
-    public function encrypted_field()
+    public function withEncryptedField()
     {
         return $this->state(function () {
             $field = CustomField::factory()->testEncrypted()->create(); // TODO - having to create and then 'find' the thing you just created is WEIRD

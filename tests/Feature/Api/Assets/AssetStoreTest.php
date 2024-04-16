@@ -485,7 +485,7 @@ class AssetStoreTest extends TestCase
     public function testEncryptedCustomField()
     {
         $field = CustomField::factory()->testEncrypted()->create();
-        $asset = Asset::factory()->has_encrypted_custom_field()->create();
+        $asset = Asset::factory()->hasEncryptedCustomField()->create();
         $superuser = User::factory()->superuser()->create();
         $normal_user = User::factory()->editAssets()->create();
 
