@@ -111,6 +111,13 @@ class AssetsController extends Controller
         // differently
         $asset_tags = $request->input('asset_tags');
 
+        foreach($asset_tags as $asset_tag) {
+            if ($asset_tag > PHP_INT_MAX) {
+                // Handle the case where the input value is out of range
+                return redirect()->back()->with('error', trans('general.asset_tag_range_error'));
+            }
+        }
+
         $settings = Setting::getSettings();
 
         $success = false;

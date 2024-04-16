@@ -23,6 +23,7 @@ return [
     'asset_report'          => 'Asset Report',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Asset Tags',
+    'asset_tag_range_error' => 'Asset Tag value is too large, choose a smaller value',
     'assets_available'		=> 'Assets available',
     'accept_assets'         => 'Accept Assets :name',
     'accept_assets_menu'    => 'Accept Assets',

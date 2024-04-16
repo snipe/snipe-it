@@ -817,7 +817,6 @@ class Asset extends Depreciable
     {
         $settings = \App\Models\Setting::getSettings();
 
-
         if ($settings->auto_increment_assets == '1') {
             if ($settings->zerofill_count > 0) {
                 return $settings->auto_increment_prefix.self::zerofill($settings->next_auto_tag_base + $additional_increment, $settings->zerofill_count);
