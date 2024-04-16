@@ -436,18 +436,6 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             $field = CustomField::factory()->testEncrypted()->create(); // TODO - having to create and then 'find' the thing you just created is WEIRD
             return [
-                'name' => 'asset with encrypted field',
-                'category_id' => function () {
-                    return Category::where('name', 'Mobile Phones')->first() ?? Category::factory()->assetMobileCategory();
-                },
-                'manufacturer_id' => function () {
-                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
-                },
-                'eol' => '12',
-                'depreciation_id' => function () {
-                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
-                },
-                'image' => 'iphone12.jpeg',
                 'fieldset_id' => function () use ($field) {
                     return CustomFieldset::where('name', 'Has Encrypted Custom Field')->first() ?? CustomFieldset::factory()->has_encrypted_custom_field()->hasAttached(CustomField::where('name', 'Test Encrypted')->first(), ['order' => 1, 'required' => 0], 'fields');
                 },
