@@ -431,16 +431,12 @@ class AssetModelFactory extends Factory
         });
     }
 
-    public function withEncryptedField()
+    public function hasEncryptedCustomField(CustomField $field = null)
     {
-        return $this->state(function () {
-            $field = CustomField::factory()->testEncrypted()->create(); // TODO - having to create and then 'find' the thing you just created is WEIRD
+        return $this->state(function () use ($field) {
             return [
-                'fieldset_id' => function () use ($field) {
-                    return CustomFieldset::where('name', 'Has Encrypted Custom Field')->first() ?? CustomFieldset::factory()->has_encrypted_custom_field()->hasAttached(CustomField::where('name', 'Test Encrypted')->first(), ['order' => 1, 'required' => 0], 'fields');
-                },
+                'fieldset_id' => CustomFieldset::factory()->hasEncryptedCustomField($field),
             ];
         });
     }
-
 }

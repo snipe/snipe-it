@@ -12,7 +12,7 @@ class AssetUpdateTest extends TestCase
     public function testEncryptedCustomFieldCanBeUpdated()
     {
         $field = CustomField::factory()->testEncrypted()->create();
-        $asset = Asset::factory()->hasEncryptedCustomField()->create();
+        $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $superuser = User::factory()->superuser()->create();
 
         //first, test that an Admin user can save the encrypted custom field
@@ -30,7 +30,7 @@ class AssetUpdateTest extends TestCase
     public function testPermissionNeededToUpdateEncryptedField()
     {
         $field = CustomField::factory()->testEncrypted()->create();
-        $asset = Asset::factory()->hasEncryptedCustomField()->create();
+        $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $normal_user = User::factory()->editAssets()->create();
 
         $asset->{$field->db_column_name()} = \Crypt::encrypt("encrypted value should not change");

@@ -485,7 +485,7 @@ class AssetStoreTest extends TestCase
     public function testEncryptedCustomFieldCanBeStored()
     {
         $field = CustomField::factory()->testEncrypted()->create();
-        $asset = Asset::factory()->hasEncryptedCustomField()->create();
+        $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $superuser = User::factory()->superuser()->create();
 
         //first, test that an Admin user can save the encrypted custom field
