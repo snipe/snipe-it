@@ -54,6 +54,5 @@ class AssetUpdateTest extends TestCase
             ->json();
         $asset->refresh();
         $this->assertEquals("encrypted value should not change", \Crypt::decrypt($asset->{$field->db_column_name()}));
-
     }
 }

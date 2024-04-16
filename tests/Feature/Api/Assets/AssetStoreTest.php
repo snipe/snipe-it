@@ -482,15 +482,15 @@ class AssetStoreTest extends TestCase
             });
     }
 
-    public function testEncryptedCustomField()
+    public function testEncryptedCustomFieldCanBeStored()
     {
         $field = CustomField::factory()->testEncrypted()->create();
         $asset = Asset::factory()->hasEncryptedCustomField()->create();
         $superuser = User::factory()->superuser()->create();
-        $normal_user = User::factory()->editAssets()->create();
 
         //first, test that an Admin user can save the encrypted custom field
         $response = $this->actingAsForApi($superuser)
+            // @todo: target store method
             ->patchJson(route('api.assets.update', $asset->id), [
                 $field->db_column_name() => 'This is encrypted field'
             ])
@@ -499,9 +499,17 @@ class AssetStoreTest extends TestCase
             ->json();
         $asset->refresh();
         $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
+    }
+
+    public function testPermissionNeededToStoreEncryptedField()
+    {
+        $field = CustomField::factory()->testEncrypted()->create();
+        $asset = Asset::factory()->hasEncryptedCustomField()->create();
+        $normal_user = User::factory()->editAssets()->create();
 
         //next, test that a 'normal' user *cannot* change the encrypted custom field
         $response = $this->actingAsForApi($normal_user)
+            // @todo: target store method
             ->patchJson(route('api.assets.update', $asset->id), [
                 $field->db_column_name() => 'Some Other Value Entirely!'
             ])
@@ -511,6 +519,5 @@ class AssetStoreTest extends TestCase
             ->json();
         $asset->refresh();
         $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
-
     }
 }
