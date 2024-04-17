@@ -82,6 +82,7 @@
           >
             {{ $permission['label'] }}
           </td>
+        <!-- grant -->
           <td class="col-md-1 permissions-item">
             <label class="sr-only" for="{{ 'permission['.$permission['permission'].']' }}">{{ 'permission['.$permission['permission'].']' }}</label>
 
@@ -91,6 +92,8 @@
               {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[ $permission['permission'] ] == '1', ["value"=>"grant",'class'=>'radiochecker-'.str_slug($area), 'aria-label' =>'permission['.$permission['permission'].']']) }}
             @endif
           </td>
+
+        <!-- deny -->
           <td class="col-md-1 permissions-item">
             @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
               {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny", 'disabled'=>'disabled', 'class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$permission['permission'].']']) }}
@@ -98,6 +101,8 @@
               {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny",'class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$permission['permission'].']']) }}
             @endif
           </td>
+
+        <!-- inherit -->
           <td class="col-md-1 permissions-item">
             @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
               {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'disabled'=>'disabled', 'class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$permission['permission'].']']) }}

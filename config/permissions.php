@@ -293,33 +293,6 @@ return [
 
     ],
 
-    'Kits' => [
-        [
-            'permission' => 'kits.view',
-            'label'      => 'View ',
-            'note'       => 'These are predefined kits that can be used to quickly checkout assets, licenses, etc.',
-            'display'    => true,
-        ],
-        [
-            'permission' => 'kits.create',
-            'label'      => 'Create ',
-            'note'       => '',
-            'display'    => true,
-        ],
-        [
-            'permission' => 'kits.edit',
-            'label'      => 'Edit  ',
-            'note'       => '',
-            'display'    => true,
-        ],
-        [
-            'permission' => 'kits.delete',
-            'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ],
-    ],
-
     'Users' => [
         [
             'permission' => 'users.view',
@@ -337,6 +310,12 @@ return [
             'permission' => 'users.edit',
             'label'      => 'Edit Users',
             'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'users.manage_permissions',
+            'label'      => 'Manager user Permissions',
+            'note'       => 'Manage individual User permissions. (Only superusers can edit group memberships)',
             'display'    => true,
         ],
         [
@@ -621,7 +600,32 @@ return [
     ],
 
 
-
+    'Kits' => [
+        [
+            'permission' => 'kits.view',
+            'label'      => 'View ',
+            'note'       => 'These are predefined kits that can be used to quickly checkout assets, licenses, etc.',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'kits.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'kits.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'kits.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ],
+    ],
 
     'Self' => [
         [

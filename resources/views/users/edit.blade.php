@@ -76,7 +76,9 @@
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#info" data-toggle="tab">{{ trans('general.information') }} </a></li>
-          <li><a href="#permissions" data-toggle="tab">{{ trans('general.permissions') }} </a></li>
+            @can('users.manage_permissions')
+            <li><a href="#permissions" data-toggle="tab">{{ trans('general.permissions') }} </a></li>
+            @endcan
         </ul>
 
         <div class="tab-content">
@@ -571,7 +573,7 @@
               </div> <!--/col-md-12-->
             </div>
           </div><!-- /.tab-pane -->
-
+          @can('users.manage_permissions')
           <div class="tab-pane" id="permissions">
             <div class="col-md-12">
               @if (!Auth::user()->isSuperUser())
@@ -595,6 +597,7 @@
                 @include('partials.forms.edit.permissions-base')
             </table>
           </div><!-- /.tab-pane -->
+          @endcan
         </div><!-- /.tab-content -->
         <div class="box-footer text-right">
           <button type="submit" accesskey="s" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
