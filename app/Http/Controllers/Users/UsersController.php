@@ -572,9 +572,6 @@ class UsersController extends Controller
                         trans('general.created_at'),
                     ];
 
-                    //add if else for admin permissions. the admin permissions will allow a user to see permissions a user has in the export
-                    //
-
                     fputcsv($handle, $headers);
 
                     foreach ($users as $user) {
@@ -584,9 +581,13 @@ class UsersController extends Controller
                             $user_groups .= $user_group->name.', ';
                         }
 
-                        $perm = $user->permissions;
-                        $userperm = json_decode($perm);
-                       // $user->permission->wherejsoncontains('permissions', 'LIKE', '%1%');
+                        $permissionstring = "";
+                        if(array_key_exists("superuser", json_decode($user->permissions, true))) {
+                            $permissionstring = "Superuser";
+                        }
+                        if(array_key_exists("admin", json_decode($user->permissions, true))) {
+                            $permissionstring = "Admin";
+                        }
 
                         // Add a new row with data
                         $values = [
@@ -605,10 +606,7 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
-                            //$user->permissions ? $user->permission->where('permissions', 'LIKE', '%1%') : '',
-                            $userperm,
-                         // ? $user->permissions->where('permissions', 'LIKE', '%"1"%') : '',
-                            //where json like '%"category":"Category Example"%
+                            $permissionstring,
                             $user->notes,
                             ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,
