@@ -72,9 +72,9 @@ class UpdateUserApiTest extends TestCase
         $adminNoCompany = User::factory(['company_id' => null])->admin()->create();
 
         // Create users that belongs to company A and B and one that is unscoped
-        $scoped_user_in_companyA = User::factory()->create(['activated' => true, 'company_id' => $companyA->id]);
-        $scoped_user_in_companyB = User::factory()->create(['activated' => true, 'company_id' => $companyB->id]);
-        $scoped_user_in_no_company = User::factory()->create(['activated' => true, 'company_id' => null]);
+        $scoped_user_in_companyA = User::factory()->create(['company_id' => $companyA->id]);
+        $scoped_user_in_companyB = User::factory()->create(['company_id' => $companyB->id]);
+        $scoped_user_in_no_company = User::factory()->create(['company_id' => null]);
 
         // Admin for Company A should allow updating user from Company A
         $this->actingAsForApi($adminA)
