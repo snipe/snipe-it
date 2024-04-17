@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\File\File;
 use Validator;
 
 /**
@@ -82,6 +83,10 @@ class ValidationServiceProvider extends ServiceProvider
 
                 return $count < 1;
             }
+        });
+
+        Validator::extend('not_empty', function ($attribute, $value) {
+            return !empty($value);
         });
         
         /**

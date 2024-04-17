@@ -114,6 +114,8 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
 
         $success = false;
+
+
         $serials = $request->input('serials');
 
         for ($a = 1; $a <= count($asset_tags); $a++) {
