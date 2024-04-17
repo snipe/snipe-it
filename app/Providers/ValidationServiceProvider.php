@@ -86,7 +86,11 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
         Validator::extend('not_empty', function ($attribute, $value) {
-            return !empty($value);
+           if(Setting::getSettings()->mandatory_serial != '1'){
+               dd('hi');
+                return !empty($value);
+            }
+                 return true;
         });
         
         /**

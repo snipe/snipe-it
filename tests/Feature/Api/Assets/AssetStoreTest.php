@@ -303,6 +303,33 @@ class AssetStoreTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('error');
     }
+    public function testMandatorySerialNumbersIsEnforcedWhenEnabled()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+        $serial = '1234567890';
+
+        $this->settings->enableAutoIncrement();
+        $this->settings->enableMandatorySerialNumbers();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                'serial' => $serial,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                'serial' => '',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
 
     public function testUniqueSerialNumbersIsNotEnforcedWhenDisabled()
     {

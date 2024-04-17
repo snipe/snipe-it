@@ -83,6 +83,10 @@ class Settings
     {
         return $this->update(['unique_serial' => 1]);
     }
+    public function enableMandatorySerialNumbers(): Settings
+    {
+        return $this->update(['mandatory_serial' => 1]);
+    }
 
     public function disableUniqueSerialNumbers(): Settings
     {
