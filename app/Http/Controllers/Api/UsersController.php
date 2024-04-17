@@ -465,6 +465,7 @@ class UsersController extends Controller
             if (! Auth::user()->isSuperUser()) {
                 unset($permissions_array['superuser']);
             }
+
             $user->permissions = $permissions_array;
         }
 
@@ -487,6 +488,7 @@ class UsersController extends Controller
 
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
+
                 $validator = Validator::make($request->all(), [
                     'groups.*' => 'integer|exists:permission_groups,id',
                 ]);
@@ -494,10 +496,19 @@ class UsersController extends Controller
                 if ($validator->fails()){
                     return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
                 }
-                $user->groups()->sync($request->input('groups'));
+
+                // Only save groups if the user is a superuser
+                if (Auth::user()->isSuperUser()) {
+                    $user->groups()->sync($request->input('groups'));
+                }
+
             // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups')) {
-                $user->groups()->sync([]);
+                
+                // Only save groups if the user is a superuser
+                if (Auth::user()->isSuperUser()) {
+                    $user->groups()->sync($request->input('groups'));
+                }
             }
 
 
