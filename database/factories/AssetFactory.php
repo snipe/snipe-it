@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
@@ -353,9 +354,15 @@ class AssetFactory extends Factory
         return $this->state(['requestable' => false]);
     }
 
-    public function hasEncryptedCustomField()
+    public function hasEncryptedCustomField(CustomField $field = null)
     {
-        return $this->state(['model_id' => AssetModel::where('name', 'asset with encrypted field')->first() ?? AssetModel::factory()->withEncryptedField()]);
+        // @todo: update this so existing asset model is used if present on the asset
+        // (may have been created in a test case)
+        return $this->state(function () use ($field) {
+            return [
+                'model_id' => AssetModel::factory()->hasEncryptedCustomField($field),
+            ];
+        });
     }
 
 

@@ -45,12 +45,12 @@ class CustomFieldsetFactory extends Factory
         });
     }
 
-    public function has_encrypted_custom_field()
+    public function hasEncryptedCustomField(CustomField $field = null)
     {
-        return $this->state(function () {
-            return [
-                'name' => 'Has Encrypted Custom Field',
-            ];
+        return $this->afterCreating(function (CustomFieldset $fieldset) use ($field) {
+            $field = $field ?? CustomField::factory()->testEncrypted()->create();
+
+            $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
         });
     }
 }
