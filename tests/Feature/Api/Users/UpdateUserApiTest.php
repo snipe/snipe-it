@@ -71,56 +71,55 @@ class UpdateUserApiTest extends TestCase
         $adminB = User::factory(['company_id' => $companyB->id])->admin()->create();
         $adminNoCompany = User::factory(['company_id' => null])->admin()->create();
 
-        // Create a user that belongs to company B
-        $userA = User::factory()->create(['activated' => true, 'company_id' => $companyA->id]);
-        $userB = User::factory()->create(['activated' => true, 'company_id' => $companyB->id]);
-        $userNoCompany = User::factory()->create(['activated' => true, 'company_id' => null]);
+        // Create users that belongs to company A and B and one that is unscoped
+        $scoped_user_in_companyA = User::factory()->create(['activated' => true, 'company_id' => $companyA->id]);
+        $scoped_user_in_companyB = User::factory()->create(['activated' => true, 'company_id' => $companyB->id]);
+        $scoped_user_in_no_company = User::factory()->create(['activated' => true, 'company_id' => null]);
 
         // Admin for Company A should allow updating user from Company A
         $this->actingAsForApi($adminA)
-            ->patchJson(route('api.users.update', $userA))
+            ->patchJson(route('api.users.update', $scoped_user_in_companyA))
             ->assertStatus(200);
 
         // Admin for Company A should get denied updating user from Company B
         $this->actingAsForApi($adminA)
-            ->patchJson(route('api.users.update', $userB))
+            ->patchJson(route('api.users.update', $scoped_user_in_companyB))
             ->assertStatus(403);
 
         // Admin for Company A should get denied updating user without a company
         $this->actingAsForApi($adminA)
-            ->patchJson(route('api.users.update', $userNoCompany))
+            ->patchJson(route('api.users.update', $scoped_user_in_no_company))
             ->assertStatus(403);
 
         // Admin for Company B should allow updating user from Company B
         $this->actingAsForApi($adminB)
-            ->patchJson(route('api.users.update', $userB))
+            ->patchJson(route('api.users.update', $scoped_user_in_companyB))
             ->assertStatus(200);
 
         // Admin for Company B should get denied updating user from Company A
         $this->actingAsForApi($adminB)
-            ->patchJson(route('api.users.update', $userA))
+            ->patchJson(route('api.users.update', $scoped_user_in_companyA))
             ->assertStatus(403);
 
         // Admin for Company B should get denied updating user without a company
         $this->actingAsForApi($adminB)
-            ->patchJson(route('api.users.update', $userNoCompany))
+            ->patchJson(route('api.users.update', $scoped_user_in_no_company))
             ->assertStatus(403);
 
         // Admin without a company should allow updating user without a company
         $this->actingAsForApi($adminNoCompany)
-            ->patchJson(route('api.users.update', $userNoCompany))
+            ->patchJson(route('api.users.update', $scoped_user_in_no_company))
             ->assertStatus(200);
 
         // Admin without a company should get denied updating user from Company A
         $this->actingAsForApi($adminNoCompany)
-            ->patchJson(route('api.users.update', $userA))
+            ->patchJson(route('api.users.update', $scoped_user_in_companyA))
             ->assertStatus(403);
 
         // Admin without a company should get denied updating user from Company B
         $this->actingAsForApi($adminNoCompany)
-            ->patchJson(route('api.users.update', $userB))
+            ->patchJson(route('api.users.update', $scoped_user_in_companyB))
             ->assertStatus(403);
-
 
     }
 }
