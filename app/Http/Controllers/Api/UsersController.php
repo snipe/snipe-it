@@ -404,7 +404,10 @@ class UsersController extends Controller
     public function show($id)
     {
         $this->authorize('view', User::class);
+
         $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count')->findOrFail($id);
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('update', $user);
 
         return (new UsersTransformer)->transformUser($user);
     }
@@ -424,6 +427,8 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
 
         $user = User::findOrFail($id);
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('update', $user);
 
         /**
          * This is a janky hack to prevent people from changing admin demo user data on the public demo.
@@ -515,6 +520,7 @@ class UsersController extends Controller
         $this->authorize('delete', User::class);
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
         $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('delete', $user);
 
         if ($user) {
 
@@ -566,6 +572,11 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
+
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('view', $user);
+
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
 
 
@@ -601,7 +612,10 @@ class UsersController extends Controller
      */
     public function emailAssetList(Request $request, $id)
     {
+        $this->authorize('update', User::class);
         $user = User::findOrFail($id);
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('update', $user);
 
         if (empty($user->email)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
@@ -625,6 +639,7 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $this->authorize('view', Consumable::class);
         $user = User::findOrFail($id);
+        $this->authorize('update', $user);
         $consumables = $user->consumables;
         return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
@@ -641,6 +656,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $user = User::findOrFail($id);
+        $this->authorize('view', $user);
         $this->authorize('view', Accessory::class);
         $accessories = $user->accessories;
 
@@ -661,6 +677,7 @@ class UsersController extends Controller
         $this->authorize('view', License::class);
         
         if ($user = User::where('id', $id)->withTrashed()->first()) {
+            $this->authorize('update', $user);
             $licenses = $user->licenses()->get();
             return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
         }
@@ -684,6 +701,7 @@ class UsersController extends Controller
         if ($request->filled('id')) {
             try {
                 $user = User::find($request->get('id'));
+                $this->authorize('update', $user);
                 $user->two_factor_secret = null;
                 $user->two_factor_enrolled = 0;
                 $user->saveQuietly();
