@@ -131,7 +131,7 @@ final class Company extends SnipeModel
     public static function isCurrentUserHasAccess($companyable)
     {
         // When would this even happen tho??
-        if (!$companyable) {
+        if (is_null($companyable)) {
             return false;
         }
 
