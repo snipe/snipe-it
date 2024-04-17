@@ -10,6 +10,7 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
@@ -500,7 +501,7 @@ class AssetStoreTest extends TestCase
             ->json();
 
         $asset = Asset::findOrFail($response['payload']['id']);
-        $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
+        $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 
     public function testPermissionNeededToStoreEncryptedField()
@@ -527,6 +528,6 @@ class AssetStoreTest extends TestCase
             ->json();
 
         $asset = Asset::findOrFail($response['payload']['id']);
-        $this->assertEquals('This is encrypted field', \Crypt::decrypt($asset->{$field->db_column_name()}));
+        $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 }
