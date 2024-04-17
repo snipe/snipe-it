@@ -103,7 +103,7 @@ class Asset extends Depreciable
         'location_id'      => 'nullable|exists:locations,id',
         'rtd_location_id'  => 'nullable|exists:locations,id',
         'purchase_date'    => 'nullable|date|date_format:Y-m-d',
-        'serial'           => 'nullable|unique_undeleted:assets,serial|not_empty',
+        'serial'           => 'not_empty|unique_undeleted:assets,serial',
         'purchase_cost'    => 'nullable|numeric|gte:0',
         'supplier_id'      => 'nullable|exists:suppliers,id',
         'asset_eol_date'   => 'nullable|date',

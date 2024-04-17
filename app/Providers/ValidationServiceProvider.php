@@ -6,12 +6,15 @@ use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
 use DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Concerns\ValidatesAttributes;
 use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\File\File;
 use Validator;
+use Illuminate\Validation\Validator as IlluminateValidator;
 
 /**
  * This service provider handles a few custom validation rules.
@@ -21,6 +24,7 @@ use Validator;
  */
 class ValidationServiceProvider extends ServiceProvider
 {
+    use ValidatesAttributes;
     /**
      * Custom email array validation
      *
@@ -66,7 +70,7 @@ class ValidationServiceProvider extends ServiceProvider
          * The UniqueUndeletedTrait prefills these parameters, so you can just use
          * `unique_undeleted:table,fieldname` in your rules out of the box
          */
-        Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+        Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, IlluminateValidator $validator) {
 
             if (count($parameters)) {
 
@@ -85,13 +89,19 @@ class ValidationServiceProvider extends ServiceProvider
             }
         });
 
-        Validator::extend('not_empty', function ($attribute, $value) {
-           if(Setting::getSettings()->mandatory_serial != '1'){
-               dd('hi');
-                return !empty($value);
+        Validator::extend('not_empty', function ($attribute, $value, $parameters, IlluminateValidator $validator) {
+
+            $validator->sometimes('serial', 'nullable', function ($value) {
+                if( Setting::getSettings()->mandatory_serial == '1' && $value == null)
+                    return $this->validateNullable();
+            });
+
+           if(Setting::getSettings()->mandatory_serial == '1' && $value == null){
+               return false;
             }
-                 return true;
+
         });
+
         
         /**
          * Unique if undeleted for two columns

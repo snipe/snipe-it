@@ -115,9 +115,6 @@ class AssetsController extends Controller
 
         $success = false;
 
-        $request->validate([
-            'serials' => 'not_empty',
-        ]);
         $serials = $request->input('serials');
 
         for ($a = 1; $a <= count($asset_tags); $a++) {

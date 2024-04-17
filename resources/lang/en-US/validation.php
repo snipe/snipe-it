@@ -68,7 +68,7 @@ return [
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'ends_with'            => 'The :attribute must end with one of the following: :values.',
-
+    'not_empty'            => ':attribute is empty. A value for :attribute must be given.',
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
