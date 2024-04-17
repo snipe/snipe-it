@@ -432,12 +432,14 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-
-        // We can use the more generic auth check here since the company scoping is happening at the query level
+        // Make sure the user can view users at all
         $this->authorize('view', User::class);
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
         $user = Company::scopeCompanyables($user)->find($userId);
+
+        // Make sure they can view this particular user
+        $this->authorize('view', $user);
 
         if ($user) {
             $userlog = $user->userlog->load('item');
@@ -471,6 +473,10 @@ class UsersController extends Controller
 
         $user_to_clone = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
         $user_to_clone = Company::scopeCompanyables($user_to_clone)->find($id);
+
+        // Make sure they can view this particular user
+        $this->authorize('view', $user_to_clone);
+
 
         if ($user_to_clone) {
 
@@ -614,6 +620,10 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $show_user = Company::scopeCompanyables(User::where('id', $id)->withTrashed()->first());
+
+        // Make sure they can view this particular user
+        $this->authorize('view', $show_user);
+
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $accessories = $show_user->accessories()->get();
         $consumables = $show_user->consumables()->get();
@@ -638,16 +648,23 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        if (!$user = Company::scopeCompanyables(User::find($id))) {
-            return redirect()->back()
-                ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
-        }
-        if (empty($user->email)) {
-            return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+        $user = Company::scopeCompanyables(User::find($id));
+
+        // Make sure they can view this particular user
+        $this->authorize('view', $user);
+
+        if ($user) {
+
+            if (empty($user->email)) {
+                return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+            }
+
+            $user->notify((new CurrentInventory($user)));
+            return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
         }
 
-        $user->notify((new CurrentInventory($user)));
-        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
+        return redirect()->back()->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
+
     }
 
     /**
@@ -665,13 +682,13 @@ class UsersController extends Controller
             try {
 
                 Password::sendResetLink($credentials);
-
                 return redirect()->back()->with('success', trans('admin/users/message.password_reset_sent', ['email' => $user->email]));
+
             } catch (\Exception $e) {
-                return redirect()->back()->with('error', ' Error sending email. :( ');
+                return redirect()->back()->with('error', trans('general.error_sending_email'));
             }
         }
 
-        return redirect()->back()->with('error', 'User is not activated, is LDAP synced, or does not have an email address ');
+        return redirect()->back()->with('error', trans('general.pwd_reset_not_sent'));
     }
 }
