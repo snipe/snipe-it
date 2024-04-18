@@ -93,21 +93,28 @@ class AuthServiceProvider extends ServiceProvider
         Passport::personalAccessTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::withCookieSerialization();
 
-        // --------------------------------
-        // BEFORE ANYTHING ELSE
-        // --------------------------------
-        // If this condition is true, ANYTHING else below will be assumed
-        // to be true. This can cause weird blade behavior.
+
+        /**
+         * BEFORE ANYTHING ELSE
+         *
+         * If this condition is true, ANYTHING else below will be assumed to be true.
+         * This is where we set the superadmin permission to allow superadmins to be able to do everything within the system.
+         *
+         */
         Gate::before(function ($user) {
             if ($user->isSuperUser()) {
                 return true;
             }
         });
 
-        // --------------------------------
-        // GENERAL GATES
-        // These control general sections of the admin
-        // --------------------------------
+
+        /**
+         * GENERAL GATES
+         *
+         * These control general sections of the admin. These definitions are used in our blades via @can('blah) and also
+         * use in our controllers to determine if a user has access to a certain area.
+         */
+
         Gate::define('admin', function ($user) {
             if ($user->hasAccess('admin')) {
                 return true;
