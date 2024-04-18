@@ -260,7 +260,6 @@ final class Company extends SnipeModel
     {
         // If not logged in and hitting this, assume we are on the command line and don't scope?'
         if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
-            \Log::debug('Skip scoping in scopeCompanyableChildren. User is not logged in or is a superadmin');
             return $query;
         } else {
             \Log::debug('Fire scopeCompanyablesDirectly.');
@@ -313,7 +312,6 @@ final class Company extends SnipeModel
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
         } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
-            \Log::debug('Skip scoping in scopeCompanyableChildren. User is not logged in or is a superadmin');
             return $query;
         } else {
             $f = function ($q) {
