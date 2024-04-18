@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api\Users;
 
 use App\Models\Company;
+use App\Models\Group;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -120,6 +121,58 @@ class UpdateUserApiTest extends TestCase
         $this->actingAsForApi($adminNoCompany)
             ->patchJson(route('api.users.update', $scoped_user_in_companyB))
             ->assertStatus(403);
+    }
 
+    public function testUserGroupsAreOnlyUpdatedIfAuthenticatedUserIsSuperUser()
+    {
+        $groupToJoin = Group::factory()->create();
+
+        $normalUser = User::factory()->editUsers()->create();
+        $superUser = User::factory()->superuser()->create();
+
+        $oneUserToUpdate = User::factory()->create();
+        $anotherUserToUpdate = User::factory()->create();
+
+        $this->actingAsForApi($normalUser)
+            ->patchJson(route('api.users.update', $oneUserToUpdate), [
+                'groups' => [$groupToJoin->id],
+            ]);
+
+        $this->actingAsForApi($superUser)
+            ->patchJson(route('api.users.update', $anotherUserToUpdate), [
+                'groups' => [$groupToJoin->id],
+            ]);
+
+        $this->assertFalse(
+            $oneUserToUpdate->refresh()->groups->contains($groupToJoin),
+            'Non-super-user was able to modify user group'
+        );
+        $this->assertTrue($anotherUserToUpdate->refresh()->groups->contains($groupToJoin));
+    }
+
+    public function testUserGroupsCanBeClearedBySuperUser()
+    {
+        $normalUser = User::factory()->editUsers()->create();
+        $superUser = User::factory()->superuser()->create();
+
+        $oneUserToUpdate = User::factory()->create();
+        $anotherUserToUpdate = User::factory()->create();
+
+        $joinedGroup = Group::factory()->create();
+        $oneUserToUpdate->groups()->sync([$joinedGroup->id]);
+        $anotherUserToUpdate->groups()->sync([$joinedGroup->id]);
+
+        $this->actingAsForApi($normalUser)
+            ->patchJson(route('api.users.update', $oneUserToUpdate), [
+                'groups' => null,
+            ]);
+
+        $this->actingAsForApi($superUser)
+            ->patchJson(route('api.users.update', $anotherUserToUpdate), [
+                'groups' => null,
+            ]);
+
+        $this->assertTrue($oneUserToUpdate->refresh()->groups->contains($joinedGroup));
+        $this->assertFalse($anotherUserToUpdate->refresh()->groups->contains($joinedGroup));
     }
 }
