@@ -71,8 +71,28 @@ class ValidationServiceProvider extends ServiceProvider
          * `unique_undeleted:table,fieldname` in your rules out of the box
          */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, IlluminateValidator $validator) {
+            if(($parameters[0]=='assets') && ($attribute == 'serial')) {
+                $notEmptyPasses = $validator->validate('not_empty:serial', $value);
+                $validator->sometimes($attribute, 'nullable', function ($value, $notEmptyPasses) {
+
+                        if($notEmptyPasses) {
+                            return Setting::getSettings()->mandatory_serial != '1' && $value == null;
+                        }
+                        return false;
+                });
+
+//                $notEmptyPasses = $validator->validate('not_empty', $value);
+//
+//
+//            // If not_empty rule passes and the value is nullable, return true
+//            if ($notEmptyPasses && is_null($value) && Setting::getSettings()->mandatory_serial != '1') {
+//                return true;
+//            }
+        }
 
             if (count($parameters)) {
+
+
 
                 // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable
                 if (($parameters[0]=='assets') && ($attribute == 'serial') && (Setting::getSettings()->unique_serial != '1')) {
@@ -89,17 +109,13 @@ class ValidationServiceProvider extends ServiceProvider
             }
         });
 
-        Validator::extend('not_empty', function ($attribute, $value, $parameters, IlluminateValidator $validator) {
 
-            $validator->sometimes('serial', 'nullable', function ($value) {
-                if( Setting::getSettings()->mandatory_serial == '1' && $value == null)
-                    return $this->validateNullable();
-            });
+        Validator::extend('not_empty', function ($attribute, $value) {
 
-           if(Setting::getSettings()->mandatory_serial == '1' && $value == null){
+            if(Setting::getSettings()->mandatory_serial == '1' && $value == null){
                return false;
             }
-
+                return true;
         });
 
         
