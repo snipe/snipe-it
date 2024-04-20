@@ -57,7 +57,7 @@
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
         "signature_pad": "^4.2.0",
-        "tableexport.jquery.plugin": "1.28.0",
+        "tableexport.jquery.plugin": "1.29.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
         "webpack": "^5.90.2"
