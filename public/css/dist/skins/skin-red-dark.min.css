@@ -444,7 +444,10 @@ input[type=search] {
   color: var(--text-main);
 }
 .skin-red-dark .main-header .navbar .dropdown-menu li a {
-  color: var(--header);
+  color: #FFFFFF;
+}
+.skin-red-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #c23320;
 }
 .fixed-table-body thead th .th-inner,
 .skin-red-dark .sidebar-menu > li.active > a,

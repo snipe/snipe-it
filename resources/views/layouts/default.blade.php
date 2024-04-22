@@ -374,7 +374,7 @@
                                                 </a>
                                             </li>
                                         @endcan
-                                        <li class="divider"></li>
+                                        <li class="divider" style="margin-top: -1px; margin-bottom: -1px"></li>
                                         <li>
 
                                             <a href="{{ route('logout.get') }}"

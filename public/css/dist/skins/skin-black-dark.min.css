@@ -462,7 +462,10 @@ input[type=search] {
   color: var(--text-main);
 }
 .skin-black-dark .main-header .navbar .dropdown-menu li a {
-  color: var(--header);
+  color: #FFFFFF;
+}
+.skin-black-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #000000;
 }
 .fixed-table-body thead th .th-inner,
 .skin-black-dark .sidebar-menu > li.active > a,
