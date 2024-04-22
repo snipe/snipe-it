@@ -356,8 +356,6 @@ class AssetFactory extends Factory
 
     public function hasEncryptedCustomField(CustomField $field = null)
     {
-        // @todo: update this so existing asset model is used if present on the asset
-        // (may have been created in a test case)
         return $this->state(function () use ($field) {
             return [
                 'model_id' => AssetModel::factory()->hasEncryptedCustomField($field),
