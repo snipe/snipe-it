@@ -482,8 +482,16 @@ class AssetStoreTest extends TestCase
             });
     }
 
+    public function markIncompleteIfMySQL()
+    {
+        if (config('database.default') === 'mysql') {
+            $this->markTestIncomplete('Custom Fields tests do not work on MySQL');
+        }
+    }
+
     public function testEncryptedCustomFieldCanBeStored()
     {
+        $this->markIncompleteIfMySQL();
         $status = Statuslabel::factory()->create();
         $field = CustomField::factory()->testEncrypted()->create();
         $superuser = User::factory()->superuser()->create();
