@@ -10,18 +10,10 @@ use Tests\TestCase;
 
 class AssetUpdateTest extends TestCase
 {
-    // TODO - this 'helper' is duplicated in AssetStoreTest - we should extract it out if we can figure out how
-    public function markIncompleteIfMySQL()
-    {
-        if (config('database.default') === 'mysql') {
-            $this->markTestIncomplete('Custom Fields tests do not work on MySQL');
-        }
-    }
-
-
     public function testEncryptedCustomFieldCanBeUpdated()
     {
-        $this->markIncompleteIfMySQL();
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
         $field = CustomField::factory()->testEncrypted()->create();
         $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $superuser = User::factory()->superuser()->create();
@@ -39,7 +31,8 @@ class AssetUpdateTest extends TestCase
 
     public function testPermissionNeededToUpdateEncryptedField()
     {
-        $this->markIncompleteIfMySQL();
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
         $field = CustomField::factory()->testEncrypted()->create();
         $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $normal_user = User::factory()->editAssets()->create();
