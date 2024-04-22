@@ -14,7 +14,5 @@ return array(
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
     'title'      		=> 'License',
-    'updated_at'        => 'Updated at',
-    'created_by'        => 'Created By',
 
 );
