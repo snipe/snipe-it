@@ -308,8 +308,13 @@ class LicensesController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            License::with('company','manufacturer','category', 'supplier', 'adminuser')
-                ->orderBy('created_at', 'DESC')
+            $licenses= License::with('company',
+                          'manufacturer',
+                          'category',
+                          'supplier',
+                          'adminuser')
+                          ->orderBy('created_at', 'DESC');
+            Company::scopeCompanyables($licenses)
                 ->chunk(500, function ($licenses) use ($handle) {
                     $headers = [
                         // strtolower to prevent Excel from trying to open it as a SYLK file
