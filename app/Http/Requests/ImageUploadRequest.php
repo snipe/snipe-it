@@ -36,6 +36,7 @@ class ImageUploadRequest extends Request
             return [
                 'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp,avif',
                 'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp,avif',
+                'favicon' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp,image/x-icon,image/vnd.microsoft.icon,ico',
             ];
     }
 
@@ -103,9 +104,9 @@ class ImageUploadRequest extends Request
                 \Log::info('File name will be: '.$file_name);
                 \Log::debug('File extension is: '.$ext);
 
-                if (($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
-                    // If the file is a webp or avif, we need to just move it since webp support
-                    // needs to be compiled into gd for resizing to be available
+                if (($image->getMimeType() == 'image/vnd.microsoft.icon') || ($image->getMimeType() == 'image/x-icon') || ($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
+                    // If the file is an icon, webp or avif, we need to just move it since gd doesn't support resizing
+                    // icons or avif, and webp support and needs to be compiled into gd for resizing to be available
                     Storage::disk('public')->put($path.'/'.$file_name, file_get_contents($image));
 
                 } elseif($image->getMimeType() == 'image/svg+xml') {
