@@ -583,10 +583,13 @@ class UsersController extends Controller
 
                         $permissionstring = "";
                         if(array_key_exists("superuser", json_decode($user->permissions, true))) {
-                            $permissionstring = "Superuser";
+                            $permissionstring = trans('general.superuser');
                         }
-                        if(array_key_exists("admin", json_decode($user->permissions, true))) {
-                            $permissionstring = "Admin";
+                        elseif(array_key_exists("admin", json_decode($user->permissions, true))) {
+                            $permissionstring = trans('general.admin');
+                        }
+                        else {
+                            $permissionstring = trans('general.user');
                         }
 
                         // Add a new row with data

@@ -268,6 +268,7 @@ return [
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
     'accept_eula'           => 'Acceptance Agreement',
+    'superuser'             => 'Superuser',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
     'sure_to_delete'        => 'Are you sure you wish to delete',
