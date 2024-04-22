@@ -38,7 +38,7 @@ class AssetFilesController extends Controller
             foreach ($request->file('file') as $file) {
                 $file_name = $request->handleFile('private_uploads/assets/','hardware-'.$asset->id, $file);
                 
-                $asset->logUpload($file_name, e($request->get('notes')));
+                $asset->logUpload($file_name, $request->get('notes'));
             }
 
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
