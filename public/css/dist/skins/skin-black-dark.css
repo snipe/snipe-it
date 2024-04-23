@@ -141,7 +141,7 @@
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: #000000;
-  border-color: #000000;
+  border-color: #FFF;
   color: #fff;
 }
 .btna.btn-primary:hover,

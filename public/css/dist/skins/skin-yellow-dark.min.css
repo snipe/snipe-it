@@ -106,7 +106,7 @@
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: var(--button-default);
-  border-color: var(--button-default);
+  border-color: #000000;
   color: #545454;
 }
 .btna.btn-primary:hover,
