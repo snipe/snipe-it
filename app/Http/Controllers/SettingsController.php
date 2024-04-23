@@ -790,10 +790,9 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
-        return view('settings.labels', [
-            'setting' => Setting::getSettings(),
-            'customFields' => CustomField::all(),
-        ]);
+        return view('settings.labels')
+            ->with('setting', Setting::getSettings())
+            ->with('customFields', CustomField::where('field_encrypted', '=', 0)->get());
     }
 
     /**
