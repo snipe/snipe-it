@@ -310,7 +310,6 @@ body {
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
-  color: var(--link) !important;
 }
 #componentsTable > tbody > tr > td > nobr > a > i.fa {
   color: var(--text-main);
@@ -444,7 +443,10 @@ input[type=search] {
   color: var(--text-main);
 }
 .skin-blue-dark .main-header .navbar .dropdown-menu li a {
-  color: var(--header);
+  color: #FFFFFF;
+}
+.skin-blue-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #3c8dbc;
 }
 .fixed-table-body thead th .th-inner,
 .skin-blue-dark .sidebar-menu > li.active > a,

@@ -306,6 +306,7 @@
                         <label style="grid-area: source-title">DataSource</label>
                         <select style="grid-area: source-field" x-model="option.datasource">
                             <optgroup label="Asset">
+                                <option value="" disabled>{{ trans('general.select_datasource') }}</option>
                                 <option value="asset_tag">{{trans('admin/hardware/table.asset_tag')}}</option>
                                 <option value="name">{{trans('admin/hardware/form.name')}}</option>
                                 <option value="serial">{{trans('admin/hardware/table.serial')}}</option>
@@ -313,6 +314,8 @@
                                 <option value="order_number">{{trans('admin/hardware/form.order')}}</option>
                                 <option value="purchase_date">{{trans('admin/hardware/table.purchase_date')}}</option>
                                 <option value="assignedTo">{{trans('admin/hardware/table.assigned_to')}}</option>
+                                <option value="last_audit_date">{{trans('general.last_audit')}}</option>
+                                <option value="next_audit_date">{{trans('general.next_audit_date')}}</option>
                             </optgroup>
                             <optgroup label="Asset Model">
                                 <option value="model.name">{{trans('admin/models/table.name')}}</option>
@@ -348,6 +351,7 @@
                             </optgroup>
                             <optgroup label="Custom Fields">
                                 @foreach($customFields as $customField)
+
                                     <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
                                 @endforeach
                             </optgroup>

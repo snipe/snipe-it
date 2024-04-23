@@ -698,7 +698,7 @@ body {
   white-space: normal;
 }
 .bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading {
-  z-index: 840 !important;
+  z-index: 0 !important;
 }
 @media print {
   a[href]:after {
@@ -970,6 +970,12 @@ th.css-accessory > .th-inner::before {
 @media screen and (max-width: 912px) and (min-width: 512px) {
   .sidebar-menu {
     margin-top: 100px;
+  }
+  .navbar-custom-menu > .navbar-nav > li.dropdown.user.user-menu {
+    float: right;
+  }
+  .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+    margin-right: -39px;
   }
 }
 @media screen and (max-width: 1268px) and (min-width: 912px) {
