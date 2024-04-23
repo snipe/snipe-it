@@ -59,7 +59,8 @@ class AssetModelsController extends Controller
 
         return view('models/edit')->with('category_type', 'asset')
             ->with('depreciation_list', Helper::depreciationList())
-            ->with('item', new AssetModel);
+            ->with('item', new AssetModel)
+            ->with('setting', Setting::getSettings());
     }
 
     /**
