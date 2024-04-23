@@ -565,7 +565,7 @@ class UsersController extends Controller
                         trans('general.licenses'),
                         trans('general.accessories'),
                         trans('general.consumables'),
-                        trans('general.groups'),
+                        trans('admin/users/table.groups'),
                         trans('general.permission_level'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
