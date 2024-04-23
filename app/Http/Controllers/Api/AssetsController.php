@@ -687,7 +687,6 @@ class AssetsController extends Controller
                     }
                 }
             }
-        }
 
         if ($asset->save()) {
             if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
@@ -707,12 +706,12 @@ class AssetsController extends Controller
 
             if ($asset->image) {
                 $asset->image = $asset->getImageUrl();
-              
-                if ($problems_updating_encrypted_custom_fields) {
-                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
-                } else {
-                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
-                }
+            }
+
+            if ($problems_updating_encrypted_custom_fields) {
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+            } else {
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
             }
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
