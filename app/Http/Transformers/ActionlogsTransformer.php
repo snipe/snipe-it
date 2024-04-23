@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\Company;
 use App\Models\Supplier;
 use App\Models\Location;
@@ -181,6 +182,9 @@ class ActionlogsTransformer
             'note'          => ($actionlog->note) ? Helper::parseEscapedMarkedownInline($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
+            'remote_ip'          => ($actionlog->remote_ip) ??  null,
+            'user_agent'          => ($actionlog->user_agent) ??  null,
+            'action_source'          => ($actionlog->action_source) ??  null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
 
@@ -212,6 +216,7 @@ class ActionlogsTransformer
     {   $location = Location::withTrashed()->get();
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
+        $status = Statuslabel::withTrashed()->get();
         $company = Company::get();
 
 
@@ -284,6 +289,19 @@ class ActionlogsTransformer
             $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ". $newSupplierName : trans('general.unassigned');
             $clean_meta['Supplier'] = $clean_meta['supplier_id'];
             unset($clean_meta['supplier_id']);
+        }
+        if(array_key_exists('status_id', $clean_meta)) {
+
+            $oldStatus = $status->find($clean_meta['status_id']['old']);
+            $oldStatusName = $oldStatus ? e($oldStatus->name) : trans('admin/statuslabels/message.deleted_label');
+
+            $newStatus = $status->find($clean_meta['status_id']['new']);
+            $newStatusName = $newStatus ? e($newStatus->name) : trans('admin/statuslabels/message.deleted_label');
+
+            $clean_meta['status_id']['old'] = $clean_meta['status_id']['old'] ? "[id: ".$clean_meta['status_id']['old']."] ". $oldStatusName : trans('general.unassigned');
+            $clean_meta['status_id']['new'] = $clean_meta['status_id']['new'] ? "[id: ".$clean_meta['status_id']['new']."] ". $newStatusName : trans('general.unassigned');
+            $clean_meta['Status'] = $clean_meta['status_id'];
+            unset($clean_meta['status_id']);
         }
         if(array_key_exists('asset_eol_date', $clean_meta)) {
             $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];

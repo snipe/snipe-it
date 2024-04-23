@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Hantida Tag',
+    'asset_model'       => 'Qaabka',
+    'assigned_to'   => 'Loo xilsaaray',
+    'book_value'  	=> 'Qiimaha hadda',
+    'change' 		=> 'Gudaha/kabaxsan',
+    'checkout_date' => 'Taariikhda Bixinta',
+    'checkoutto' 	=> 'La Hubiyay',
+    'components_cost' => 'Wadarta Qiimaha Qaybaha',
+    'current_value' => 'Qiimaha hadda',
+    'diff' 			=> 'Kala duwanaansho',
+    'dl_csv' 		=> 'Soo deji CSV',
+    'eol' 			=> 'EOL',
+    'id'      		=> 'Aqoonsi',
+    'last_checkin_date' => 'Taariikhda Jeedintii Ugu Dambeysay',
+    'location' 		=> 'Goobta',
+    'purchase_cost'	=> 'Qiimaha',
+    'purchase_date'	=> 'Iibsaday',
+    'serial'   		=> 'Taxane',
+    'status'   		=> 'Xaalada',
+    'title'      	=> 'Hantida. ',
+    'image'		    => 'Sawirka Qalabka',
+    'days_without_acceptance' => 'Maalmo Aqbali La\'aan',
+    'monthly_depreciation' => 'Qiima dhaca bishii',
+    'assigned_to'    => 'Loo xilsaaray',
+    'requesting_user' => 'Codsada Isticmaalaha',
+    'requested_date' => 'Taariikhda la codsaday',
+    'changed'       => 'Bedelay',
+    'icon' => 'Astaan',
+];

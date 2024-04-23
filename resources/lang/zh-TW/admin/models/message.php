@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> '沒有欄位被更改，因此沒有更新任何內容。',
         'success' 		=> '成功更新型號。|成功更新 :model_count 個型號。',
-        'warn'          => '您即將更新以下型號的屬性：|您即將編輯以下 :model_count 個型號的屬性：',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

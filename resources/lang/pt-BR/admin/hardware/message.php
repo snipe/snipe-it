@@ -10,7 +10,7 @@ return [
     'create' => [
         'error'   		=> 'O ativo não foi criado, tente novamente. :(',
         'success' 		=> 'Ativo criado com sucesso. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'O ativo com a tag :tag foi criado com sucesso. <strong><a href=":link" style="color: white;">clique aqui para ver</a></strong>.',
     ],
 
     'update' => [
@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Ativo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum campo foi selecionado, então nada foi atualizado.',
         'no_assets_selected'  =>  'Nenhum ativo foi selecionado, portanto, nada foi atualizado.',
+        'assets_do_not_exist_or_are_invalid' => 'Os arquivos selecionados não podem ser atualizados.',
     ],
 
     'restore' => [

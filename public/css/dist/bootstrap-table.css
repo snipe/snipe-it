@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.22.1
+ * version: 1.22.3
  * https://github.com/wenzhixin/bootstrap-table/
  */
 /* stylelint-disable annotation-no-unknown, max-line-length */
@@ -198,8 +198,7 @@
 }
 
 .bootstrap-table .fixed-table-container .fixed-table-body {
-  overflow-x: auto;
-  overflow-y: auto;
+  overflow: auto auto;
   height: 100%;
 }
 

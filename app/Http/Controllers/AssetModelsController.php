@@ -7,6 +7,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -88,7 +89,7 @@ class AssetModelsController extends Controller
         $model->requestable = Request::has('requestable');
 
         if ($request->input('fieldset_id') != '') {
-            $model->fieldset_id = e($request->input('fieldset_id'));
+            $model->fieldset_id = $request->input('fieldset_id');
         }
 
         $model = $request->handleImages($model);
@@ -101,7 +102,6 @@ class AssetModelsController extends Controller
                 }
             }
 
-            // Redirect to the new model  page
             return redirect()->route('models.index')->with('success', trans('admin/models/message.create.success'));
         }
 
@@ -166,17 +166,14 @@ class AssetModelsController extends Controller
 
         $this->removeCustomFieldsDefaultValues($model);
 
-        if ($request->input('fieldset_id') == '') {
-            $model->fieldset_id = null;
-        } else {
-            $model->fieldset_id = $request->input('fieldset_id');
+        $model->fieldset_id = $request->input('fieldset_id');
 
-            if ($this->shouldAddDefaultValues($request->input())) {
-                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
-                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
-                }
+        if ($this->shouldAddDefaultValues($request->input())) {
+            if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
             }
         }
+
        
       
        
@@ -292,7 +289,7 @@ class AssetModelsController extends Controller
     public function show($modelId = null)
     {
         $this->authorize('view', AssetModel::class);
-        $model = AssetModel::withTrashed()->find($modelId);
+        $model = AssetModel::withTrashed()->withCount('assets')->find($modelId);
 
         if (isset($model->id)) {
             return view('models/view', compact('model'));
@@ -446,7 +443,6 @@ class AssetModelsController extends Controller
             $del_count = 0;
 
             foreach ($models as $model) {
-                \Log::debug($model->id);
 
                 if ($model->assets_count > 0) {
                     $del_error_count++;
@@ -456,8 +452,6 @@ class AssetModelsController extends Controller
                 }
             }
 
-            \Log::debug($del_count);
-            \Log::debug($del_error_count);
 
             if ($del_error_count == 0) {
                 return redirect()->route('models.index')
@@ -493,11 +487,11 @@ class AssetModelsController extends Controller
      * @param  array      $defaultValues
      * @return void
      */
-    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
+    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues): bool
     {
         $data = array();
         foreach ($defaultValues as $customFieldId => $defaultValue) {
-            $customField = \App\Models\CustomField::find($customFieldId);
+            $customField = CustomField::find($customFieldId);
 
             $data[$customField->db_column] = $defaultValue;
         }

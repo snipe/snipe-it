@@ -25,7 +25,7 @@
                         </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.users') }}
-                          {!! (($location->users) && ($location->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
+                          {!! ($location->users->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
 
                       </span>
                   </a>
@@ -38,7 +38,7 @@
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('admin/locations/message.current_location') }}
-                          {!! (($location->assets) && ($location->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                          {!! ($location->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -51,7 +51,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/hardware/form.default_location') }}
-                          {!! (($location->rtd_assets) && ($location->rtd_assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                          {!! ($location->rtd_assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -63,7 +63,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/locations/message.assigned_assets') }}
-                          {!! (($location->rtd_assets) && ($location->assignedAssets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                          {!! ($location->assignedAssets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -76,7 +76,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
-                          {!! (($location->accessories) && ($location->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
+                          {!! ($location->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -88,7 +88,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
-                          {!! (($location->consumables) && ($location->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
+                          {!! ($location->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -100,7 +100,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
-                          {!! (($location->components) && ($location->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
+                          {!! ($location->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>

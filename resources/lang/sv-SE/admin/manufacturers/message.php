@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Variabler <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, och <code>{MODEL_NAME}</code> kan användas i din URL för att få dessa värden automatiskt fyllda när du visar tillgångar - till exempel https://checkcoverage. pple<unk>{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Tillverkaren existerar inte.',
     'assoc_users'	 => 'Tillverkaren är för tillfället associerad med en modell och kan inte tas bort. Vänligen uppdatera dina modeller till att inte vara associerade med denna tillverkare och försök igen. ',
 

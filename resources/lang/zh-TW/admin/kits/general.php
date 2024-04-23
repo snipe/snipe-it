@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => '配件成功分離',
     'accessory_error'                   => '配件已經附加到套件',
     'accessory_deleted'                 => '已成功刪除',
-    'accessory_none'                    => '配件不存在',
+    'accessory_none'                    => 'The accessory does not exist',
     'checkout_success'                  => '已成功借出',
     'checkout_error'                    => '借出錯誤',
     'kit_none'                          => '套件不存在',

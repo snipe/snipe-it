@@ -43,7 +43,7 @@
 
                     <!-- Serial -->
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>
+                        <label class="col-sm-3 control-label">{{ trans('admin/licenses/form.license_key') }}</label>
                         <div class="col-md-9">
                             <p class="form-control-static" style="word-wrap: break-word;">
                                 @can('viewKeys', $license)

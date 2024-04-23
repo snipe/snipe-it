@@ -6,8 +6,8 @@ return array(
     'assoc_users'	 => 'La ubicación esta asociada con al menos un usuario, por lo que no puede eliminarse. Actualiza la información de tus usuarios para que no la usen, e inténtalo de nuevo. ',
     'assoc_assets'	 => 'La ubicación esta asociada con al menos un equipo, por lo que no puede eliminarse. Por favor actualiza la información de tus equipos para que no la usen, e inténtalo de nuevo. ',
     'assoc_child_loc'	 => 'La ubicación esta asociada con al menos una ubicación hija, por lo que no puede eliminarse. Actualiza la información de tus ubicaciones para desasociarlas, e inténtalo de nuevo. ',
-    'assigned_assets' => 'Activos asignados',
-    'current_location' => 'Ubicación Actual',
+    'assigned_assets' => 'Recursos asignados',
+    'current_location' => 'Ubicación actual',
 
 
     'create' => array(

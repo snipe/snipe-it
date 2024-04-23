@@ -522,7 +522,7 @@
                                     {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                                 </div>
                                 <div class="col-md-8" id="ldaptestrow">
-                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>
+                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>
                                 </div>
                                 <div class="col-md-8 col-md-offset-3">
                                     <br />
@@ -700,11 +700,13 @@
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
             html += '</ul>'
+            html += '<div style="overflow:auto;">'
             html += '<div>{{ trans('admin/settings/message.ldap.sync_success') }}</div>'
-            html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
+            html += '<table class="table table-bordered table-condensed" style=" table-layout:fixed; width:100%;background-color: #fff">'
             html += buildLdapResultsTableHeader()
             html += buildLdapResultsTableBody(results.user_sync.users)
-            html += '<table>'
+            html += '</table>'
+            html += '</div>'
             return html;
         }
 

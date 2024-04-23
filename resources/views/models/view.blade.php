@@ -43,7 +43,7 @@
                         </span>
                                     <span class="hidden-xs hidden-sm">
                             {{ trans('general.assets') }}
-                                        {!! (($model->assets) && ($model->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($model->assets->count()).'</badge>' : '' !!}
+                                        {!! ($model->assets_count > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets_count).'</badge>' : '' !!}
                         </span>
                     </a>
                 </li>
@@ -236,6 +236,12 @@
                         </li>
                     @endif
 
+                    @if ($model->created_at)
+                        <li>{{ trans('general.created_at') }}:
+                            {{ Helper::getFormattedDateObject($model->created_at, 'datetime', false) }}
+                        </li>
+                    @endif
+
                     @if ($model->min_amt)
                         <li>{{ trans('general.min_amt') }}:
                            {{$model->min_amt }}
@@ -309,15 +315,10 @@
                     @if ($model->notes)
                         <li>
                             {{ trans('general.notes') }}:
-                            {{ $model->notes }}
+                            {!! nl2br(Helper::parseEscapedMarkedownInline($model->notes)) !!}
                         </li>
                     @endif
 
-
-
-                    @if  ($model->deleted_at!='')
-                        <li><br /><a href="{{ route('models.restore.store', $model->id) }}" class="btn-flat large info ">{{ trans('admin/models/general.restore') }}</a></li>
-                    @endif
                 </ul>
 
                 @if ($model->note)
@@ -337,22 +338,32 @@
 
             @can('create', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.clone.create', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('admin/models/table.clone') }}</a>
+                <a href="{{ route('models.clone.create', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/models/table.clone') }}</a>
             </div>
             @endcan
 
             @can('delete', \App\Models\AssetModel::class)
-                @if ($model->assets->count() > 0)
-
+                @if ($model->assets_count > 0)
                     <div class="col-md-12" style="padding-bottom: 5px;">
-                        <button class="btn btn-block btn-sm btn-danger hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">{{ trans('general.delete') }}</button>
+                        <button class="btn btn-block btn-sm btn-primary hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">{{ trans('general.delete') }}</button>
                     </div>
                 @else
-                    <div class="col-md-12" style="padding-bottom: 10px;">
-                        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $model->name]) }}" data-target="#dataConfirmModal" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}">{{ trans('general.delete') }} </button>
-                        <span class="sr-only">{{ trans('general.delete') }}</span>
-                    </div>
+
                 @endif
+
+
+               <div class="text-center col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+                @if  ($model->deleted_at!='')
+                    <form method="POST" action="{{ route('models.restore.store', $model->id) }}">
+                        @csrf
+                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
+                    </form>
+                @else
+                    <button class="btn btn-block btn-sm btn-danger delete-asset" data-toggle="modal" title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $model->name]) }}" data-target="#dataConfirmModal" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}">{{ trans('general.delete') }} </button>
+                    <span class="sr-only">{{ trans('general.delete') }}</span>
+                @endif
+               </div>
+
            @endcan
         </div>
 </div> <!-- /.row -->

@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Marcação do Ativo',
     'asset_model'       => 'Modelo',
+    'assigned_to'   => 'Atribuído a',
     'book_value'  	=> 'Valor Atual',
     'change' 		=> 'Entrada/Saída',
     'checkout_date' => 'Data de saída',

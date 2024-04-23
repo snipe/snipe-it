@@ -21,6 +21,7 @@ return array(
     'manager' 				=> 'Manager',
     'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Name',
+    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Confirm Password',
     'password' 				=> 'Password',

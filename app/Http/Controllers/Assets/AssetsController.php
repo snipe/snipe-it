@@ -102,6 +102,10 @@ class AssetsController extends Controller
     {
         $this->authorize(Asset::class);
 
+        // There are a lot more rules to add here but prevents
+        // errors around `asset_tags` not being present below.
+        $this->validate($request, ['asset_tags' => ['required', 'array']]);
+
         // Handle asset tags - there could be one, or potentially many.
         // This is only necessary on create, not update, since bulk editing is handled
         // differently
@@ -131,9 +135,6 @@ class AssetsController extends Controller
             $asset->order_number            = $request->input('order_number');
             $asset->notes                   = $request->input('notes');
             $asset->user_id                 = Auth::id();
-            $asset->archived                = '0';
-            $asset->physical                = '1';
-            $asset->depreciate              = '0';
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = request('purchase_cost');
@@ -149,7 +150,8 @@ class AssetsController extends Controller
                 $asset->next_audit_date = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
             }
 
-            if ($asset->assigned_to == '') {
+            // Set location_id to rtd_location_id ONLY if the asset isn't being checked out
+            if (!request('assigned_user') && !request('assigned_asset') && !request('assigned_location')) {
                 $asset->location_id = $request->input('rtd_location_id', null);
             }
 
@@ -365,7 +367,6 @@ class AssetsController extends Controller
         $asset->order_number = $request->input('order_number');
         $asset->asset_tag = $asset_tag[1];
         $asset->notes = $request->input('notes');
-        $asset->physical = '1';
 
         $asset = $request->handleImages($asset);
 
@@ -525,31 +526,33 @@ class AssetsController extends Controller
     public function getBarCode($assetId = null)
     {
         $settings = Setting::getSettings();
-        $asset = Asset::find($assetId);
-        $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
+        if ($asset = Asset::withTrashed()->find($assetId)) {
+            $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
 
-        if (isset($asset->id, $asset->asset_tag)) {
-            if (file_exists($barcode_file)) {
-                $header = ['Content-type' => 'image/png'];
+            if (isset($asset->id, $asset->asset_tag)) {
+                if (file_exists($barcode_file)) {
+                    $header = ['Content-type' => 'image/png'];
 
-                return response()->file($barcode_file, $header);
-            } else {
-                // Calculate barcode width in pixel based on label width (inch)
-                $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 200.000000000001;
+                    return response()->file($barcode_file, $header);
+                } else {
+                    // Calculate barcode width in pixel based on label width (inch)
+                    $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 200.000000000001;
 
-                $barcode = new \Com\Tecnick\Barcode\Barcode();
-                try {
-                    $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, ($barcode_width < 300 ? $barcode_width : 300), 50);
-                    file_put_contents($barcode_file, $barcode_obj->getPngData());
+                    $barcode = new \Com\Tecnick\Barcode\Barcode();
+                    try {
+                        $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, ($barcode_width < 300 ? $barcode_width : 300), 50);
+                        file_put_contents($barcode_file, $barcode_obj->getPngData());
 
-                    return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
-                } catch (\Exception $e) {
-                    Log::debug('The barcode format is invalid.');
+                        return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+                    } catch (\Exception $e) {
+                        Log::debug('The barcode format is invalid.');
 
-                    return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
+                        return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
+                    }
                 }
             }
         }
+        return null;
     }
 
     /**
@@ -738,11 +741,11 @@ class AssetsController extends Controller
 
                         if ($isCheckinHeaderExplicit) {
 
-                            //if checkin date header exists, assume that empty or future date is still checked out
-                            //if checkin is before todays date, assume it's checked in and do not assign user ID, if checkin date is in the future or blank, this is the expected checkin date, items is checked out
+                            // if checkin date header exists, assume that empty or future date is still checked out
+                            // if checkin is before today's date, assume it's checked in and do not assign user ID, if checkin date is in the future or blank, this is the expected checkin date, items are checked out
 
-                            if ((strtotime($checkin_date) > strtotime(Carbon::now())) || (empty($checkin_date))
-                            ) {
+                            if ((strtotime($checkin_date) > strtotime(Carbon::now())) || (empty($checkin_date)))
+                            {
                                 //only do this if item is checked out
                                 $asset->assigned_to = $user->id;
                                 $asset->assigned_type = User::class;

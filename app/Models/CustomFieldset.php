@@ -5,6 +5,8 @@ namespace App\Models;
 use Gate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
@@ -92,8 +94,19 @@ class CustomFieldset extends Model
 
             array_push($rule, $field->attributes['format']);
             $rules[$field->db_column_name()] = $rule;
-            //add not_array to rules for all fields
-            $rules[$field->db_column_name()][] = 'not_array';
+
+            // add not_array to rules for all fields but checkboxes
+            if ($field->element != 'checkbox') {
+                $rules[$field->db_column_name()][] = 'not_array';
+            }
+
+            if ($field->element == 'checkbox') {
+                $rules[$field->db_column_name()][] = 'checkboxes';
+            }
+
+            if ($field->element == 'radio') {
+                $rules[$field->db_column_name()][] = 'radio_buttons';
+            }
         }
 
         return $rules;

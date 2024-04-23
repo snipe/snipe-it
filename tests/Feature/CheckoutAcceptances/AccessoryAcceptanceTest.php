@@ -7,13 +7,10 @@ use App\Models\CheckoutAcceptance;
 use App\Notifications\AcceptanceAssetAcceptedNotification;
 use App\Notifications\AcceptanceAssetDeclinedNotification;
 use Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AccessoryAcceptanceTest extends TestCase
 {
-    use InteractsWithSettings;
-
     /**
      * This can be absorbed into a bigger test
      */

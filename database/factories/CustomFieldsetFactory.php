@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\CustomFieldset;
+use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CustomFieldsetFactory extends Factory
@@ -41,6 +42,15 @@ class CustomFieldsetFactory extends Factory
             return [
                 'name' => 'Laptops and Desktops',
             ];
+        });
+    }
+
+    public function hasEncryptedCustomField(CustomField $field = null)
+    {
+        return $this->afterCreating(function (CustomFieldset $fieldset) use ($field) {
+            $field = $field ?? CustomField::factory()->testEncrypted()->create();
+
+            $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
         });
     }
 }

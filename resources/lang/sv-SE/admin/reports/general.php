@@ -8,10 +8,10 @@ return [
     'acceptance_deleted' => 'Begäran om godkännande borttagen',
     'acceptance_request' => 'Godkänn begäran',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'Användarens adress',
+        'user_city' => 'Användarens stad',
+        'user_state' => 'Användarens tillstånd',
+        'user_country' => 'Användarens land',
+        'user_zip' => 'Användar Zip'
     ]
 ];

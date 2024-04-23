@@ -97,7 +97,6 @@ return [
     'unique_undeleted'     => ':attribute 属性必须唯一。',
     'non_circular'         => ':attribute 不能创建循环引用。',
     'not_array'            => ':attribute 不能是一个数组。',
-    'unique_serial'        => ':attribute 必须唯一。',
     'disallow_same_pwd_as_user_fields' => '密码不能和用户名相同。',
     'letters'              => '密码必须包含至少一个字母。',
     'numbers'              => '密码必须包含至少一个数字。',
@@ -106,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => '数值不能为负数'
     ],
+    'checkboxes'           => ':attribute 包含无效的选项。',
+    'radio_buttons'        => ':attribute 无效。',
 
 
     /*
@@ -152,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => '此字段中包含的值无效',
 ];

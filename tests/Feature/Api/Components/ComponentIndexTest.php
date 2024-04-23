@@ -5,13 +5,10 @@ namespace Tests\Feature\Api\Components;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ComponentIndexTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testComponentIndexAdheresToCompanyScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();

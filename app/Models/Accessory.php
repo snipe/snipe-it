@@ -305,7 +305,7 @@ class Accessory extends SnipeModel
      */
     public function requireAcceptance()
     {
-        return $this->category->require_acceptance;
+        return $this->category->require_acceptance ?? false;
     }
 
     /**
@@ -364,6 +364,35 @@ class Accessory extends SnipeModel
 
         $accessory_user->limit(1)->delete();
     }
+
+    /**
+     * -----------------------------------------------
+     * BEGIN MUTATORS
+     * -----------------------------------------------
+     **/
+
+    /**
+     * This sets a value for qty if no value is given. The database does not allow this
+     * field to be null, and in the other areas of the code, we set a default, but the importer
+     * does not.
+     *
+     * This simply checks that there is a value for quantity, and if there isn't, set it to 0.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.3.4
+     * @param $value
+     * @return void
+     */
+    public function setQtyAttribute($value)
+    {
+        $this->attributes['qty'] = (!$value) ? 0 : intval($value);
+    }
+
+    /**
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
 
     /**
     * Query builder scope to order on company

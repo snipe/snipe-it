@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Imovina je uspešno ažurirana.',
         'nothing_updated'	=>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
         'no_assets_selected'  =>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
+        'assets_do_not_exist_or_are_invalid' => 'Izabrana imovina ne može biti izmenjena.',
     ],
 
     'restore' => [

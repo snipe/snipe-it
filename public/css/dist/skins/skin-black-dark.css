@@ -141,7 +141,7 @@
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: #000000;
-  border-color: #000000;
+  border-color: #FFF;
   color: #fff;
 }
 .btna.btn-primary:hover,
@@ -185,13 +185,13 @@ a:visited {
   --button-hover: #000000;
   --header: #111;
   /* Use same as Header picker */
-  --text-main: #BBB;
+  --text-main: #fff;
   --text-sub: #9b9b9b;
-  --link: #AAA;
+  --link: #fff;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #777777;
+  --visited-link: #fff;
   /* Use same as Header picker, lighten by 70% */
-  --hover-link: #848484;
+  --hover-link: #949494;
   /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF;
   /* Use same as Header picker */
@@ -254,15 +254,6 @@ h2.task_menu {
 .modal-content {
   background-color: var(--back-main);
   color: var(--text-main);
-}
-a:link {
-  color: var(--link);
-}
-a:visited {
-  color: var(--nav-link);
-}
-a:hover {
-  color: var(--hover-link);
 }
 .btn-primary.hover {
   color: var(--nav-link);
@@ -397,9 +388,13 @@ input[type=search] {
   background-color: var(--back-sub);
   color: var(--text-main);
 }
+.search-highlight,
+.search-highlight:hover {
+  background-color: var(--back-sub) !important;
+}
 .input-group,
 .input-group-addon {
-  background-color: var(--back-sub) !important;
+  background-color: var(--back-sub);
   color: var(--text-main);
 }
 #licensesTable > tbody > tr > td > nobr > a > i.fa {
@@ -446,11 +441,11 @@ input[type=search] {
 .select2-container--default .select2-results__option[aria-selected=true],
 .select2-container--default .select2-results__option[aria-selected=true]:hover {
   background-color: var(--back-sub);
-  color: var(--header);
+  color: var(--nav-link);
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: var(--header);
-  color: var(--back-main);
+  background-color: var(--back-sub);
+  color: var(--visited-link);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: var(--text-main);
@@ -467,7 +462,10 @@ input[type=search] {
   color: var(--text-main);
 }
 .skin-black-dark .main-header .navbar .dropdown-menu li a {
-  color: var(--header);
+  color: #FFFFFF;
+}
+.skin-black-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #000000;
 }
 .fixed-table-body thead th .th-inner,
 .skin-black-dark .sidebar-menu > li.active > a,
@@ -515,9 +513,6 @@ a:hover {
   color: var(--hover-link);
   text-decoration: underline;
 }
-a:visited {
-  color: var(--visited-link);
-}
 .row-striped {
   vertical-align: top;
   line-height: 2.6;
@@ -543,6 +538,20 @@ a:visited {
   background-color: #e9d15b;
 }
 div.container.row-new-striped {
+  background-color: var(--back-sub);
+}
+.table > thead > tr > td.danger,
+.table > tbody > tr > td.danger,
+.table > tfoot > tr > td.danger,
+.table > thead > tr > th.danger,
+.table > tbody > tr > th.danger,
+.table > tfoot > tr > th.danger,
+.table > thead > tr.danger > td,
+.table > tbody > tr.danger > td,
+.table > tfoot > tr.danger > td,
+.table > thead > tr.danger > th,
+.table > tbody > tr.danger > th,
+.table > tfoot > tr.danger > th {
   background-color: var(--back-sub);
 }
 

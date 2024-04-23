@@ -37,6 +37,7 @@ class AssetsTransformer
                 'name'=> e($asset->model->name),
             ] : null,
             'byod' => ($asset->byod ? true : false),
+            'requestable' => ($asset->requestable ? true : false),
 
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'eol' => (($asset->asset_eol_date != '') && ($asset->purchase_date != '')) ? Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date).' months' : null,
@@ -87,6 +88,7 @@ class AssetsTransformer
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
             'age' => $asset->purchase_date ? $asset->purchase_date->diffForHumans() : '',
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
+            'last_checkin' => Helper::getFormattedDateObject($asset->last_checkin, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
             'checkin_counter' => (int) $asset->checkin_counter,

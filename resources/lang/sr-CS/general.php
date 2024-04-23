@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => 'Resetovanje 2FA',
     'accessories'			=> 'Dodatna oprema',
     'activated'			    => 'Aktiviran',
     'accepted_date'         => 'Datum preuzimanja',
@@ -156,6 +157,7 @@ return [
     'image_filetypes_help'  => 'Prihvatljivi tipovi datoteka su jpg, webp, png, gif i svg. Maksimalna veličina datoteke je :size.',
     'unaccepted_image_type'  => 'Datoteka slike nije čitljiva. Prihvatljivi tipovi datoteka su jpg, webp, png, gif i svg. Mimetip ove datoteke je: :mimetype.',
     'import'         	    => 'Import',
+    'import_this_file'      => 'Mapiraj polja i obradi ovu datoteku',
     'importing'         	=> 'Uvoženje',
     'importing_help'        => 'Možete uvesti imovinu, opremu, licence, komponente, potrošnu robu i korisnike uz pomoć CSV datoteke. <br><br>Podaci u CSV datoteci trebaju biti odvojeni zarezom i formatirani sa zaglavljima koji se poklapaju sa <a href="https://snipe-it.readme.io/docs/importing" target="_new">primerima CSV-a u dokumentaciji</a>.',
     'import-history'        => 'Import History',
@@ -181,6 +183,7 @@ return [
     'lock_passwords'        => 'Ova vrednost polja neće biti sačuvana u demo instalaciji.',
     'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Lokacija',
+    'location_plural'        => 'Lokacija|Lokacije',
     'locations'				=> 'Lokacije',
     'logo_size'				=> 'Kvadratni logoi najbolje izgledaju sa Logo + Tekst. Maksimalna veličina prikaza logoa je 50px visine x 500px širine.  ',
     'logout'				=> 'Odjava',
@@ -199,6 +202,7 @@ return [
     'new_password'          => 'Nova lozinka',
     'next'					=> 'Sledeći',
     'next_audit_date'		=> 'Sledeći datum revizije',
+    'no_email'              => 'Nijedna adresa e-pošte nije povezana sa ovim korisnikom',
     'last_audit'		    => 'Poslednja revizija',
     'new'					=> 'novi!',
     'no_depreciation'		=> 'Nema amortizacije',
@@ -436,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generisanje samo-inkrementirajuće imovinske oznake je onemogućeno tako da svi redovi moraju imati popunjenu kolonu "Imovinska Oznaka".',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Omogućeno je generisanje oznaka sredstava koje se automatski povećavaju tako da će sredstva biti kreirana za redove u kojima nije popunjena „Oznaka sredstva“. Redovi koji imaju popunjenu „oznaku sredstva“ biće ažurirani datim informacijama.',
     'send_welcome_email_to_users'   => ' Pošalji e-poruku dobrodošlice novim korisnicima?',
+    'send_email'                => 'Pošalji e-poruku',
+    'call'                      => 'Pozovi broj',
     'back_before_importing'     => 'Napraviti rezervnu kopiju pre uvoza?',
     'csv_header_field'          => 'Polje CSV zaglavlja',
     'import_field'              => 'Polje uvoza',
     'sample_value'              => 'Primer vrednosti',
     'no_headers'                => 'Nijedna kolona nije pronađena',
     'error_in_import_file'      => 'Pojavila se greška pri čitanju CSV datoteke: :error',
-    'percent_complete'          => 'Završeno je :percent %',
     'errors_importing'          => 'Pojavile su se neke greške pri uvoženju: ',
     'warning'                   => 'UPOZORENJE: :warning',
     'success_redirecting'       => '"Uspešno... preusmeravanje.',
@@ -458,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Ne uvrštavaj korisnika za grupno dodeljivanje kroz interfejs ili konzolne alate.',
     'modal_confirm_generic'      => 'Da li ste sigurni?',
     'cannot_be_deleted'      => 'Ova stavka ne može biti obrisana',
+    'cannot_be_edited'      => 'Ova stavka ne može biti izmenjena.',
     'undeployable_tooltip'      => 'Ovaj predmet ne može biti zadužen. Proveriti količinu na stanju.',
     'serial_number'        => 'Serijski broj',
     'item_notes' => ':stavka Napomena',
@@ -491,5 +497,36 @@ return [
     'upload_error' => 'Greška tokom slanja datoteke. Molim vas potvrdite da nema praznih redova i da nazivi kolona nisu duplirani.',
     'copy_to_clipboard' => 'Kopiraj u beležnicu',
     'copied' => 'Kopirano!',
+    'status_compatibility' => 'Ako je imovina već zadužena, ne može biti promenjena u nezaduživi status i promena ove vrednosti će biti preskočena.',
+    'rtd_location_help' => 'Ovo je lokacija imovine kada nije zadužena',
+    'item_not_found' => ':item_type ID :id ne postoji ili je obrisan',
+    'action_permission_denied' => 'Nemate ovlašćenje da :action :item_type ID :id',
+    'action_permission_generic' => 'Nemate ovlašćenje da :action ovu :item_type',
+    'edit' => 'uredi',
+    'action_source' => 'Izvor aktivnosti',
+    'or' => 'ili',
+    'url'                   => 'URL adresa',
+    'edit_fieldset' => 'Izmeni polja i opcije grupe polja',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Masovno briši :object_type',
+                'warn'   =>  'Spremate se da obrišete jedan :object_type|Spremate se da obrišete :count :object_type',
+                'success'   =>  ':object_type je uspešno obrisan|Uspešno obrisano :count :object_type',
+                'error'   =>  'Nije bilo moguće obrisati :object_type',
+                'nothing_selected'   =>  'Nijedan :object_type nije izabran - nikakva radnja nije potrebna',
+                'partial'   =>  'Obrisano :success_count :object_type, ali :error_count :object_type nije moglo biti obrisano',
+             ],
+    ],
+    'no_requestable' => 'Nema imovine ili modela imovine koji se mogu zatražiti.',
+
+    'countable' => [
+        'accessories'  => ':count pribor|:count pribora',
+        'assets'  => ':count imovina|:count imovina',
+        'licenses'  => ':count licenca|:count licenci',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count potrošni materijal|:count potrošnih materijala',
+        'components'  => ':count komponenta|:count komponenti',
+    ]
 
 ];

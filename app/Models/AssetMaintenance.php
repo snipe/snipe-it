@@ -20,10 +20,9 @@ class AssetMaintenance extends Model implements ICompanyableChild
     use SoftDeletes;
     use CompanyableChildTrait;
     use ValidatingTrait;
-    protected $casts = [
-        'start_date' => 'datetime',
-        'completion_date' => 'datetime',
-    ];
+
+
+
     protected $table = 'asset_maintenances';
     protected $rules = [
         'asset_id'               => 'required|integer',
@@ -31,10 +30,29 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
-        'start_date'             => 'required|date',
-        'completion_date'        => 'nullable|date',
+        'start_date'             => 'required|date_format:Y-m-d',
+        'completion_date'        => 'date_format:Y-m-d|nullable',
         'notes'                  => 'string|nullable',
         'cost'                   => 'numeric|nullable',
+    ];
+
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'asset_id',
+        'supplier_id',
+        'asset_maintenance_type',
+        'is_warranty',
+        'start_date',
+        'completion_date',
+        'asset_maintenance_time',
+        'notes',
+        'cost',
     ];
 
     use Searchable;
@@ -44,7 +62,15 @@ class AssetMaintenance extends Model implements ICompanyableChild
      *
      * @var array
      */
-    protected $searchableAttributes = ['title', 'notes', 'asset_maintenance_type', 'cost', 'start_date', 'completion_date'];
+    protected $searchableAttributes =
+        [
+            'title',
+            'notes',
+            'asset_maintenance_type',
+            'cost',
+            'start_date',
+            'completion_date'
+        ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -52,8 +78,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
      * @var array
      */
     protected $searchableRelations = [
-        'asset'     => ['name', 'asset_tag'],
+        'asset'     => ['name', 'asset_tag', 'serial'],
         'asset.model'     => ['name', 'model_number'],
+        'asset.supplier' => ['name'],
+        'asset.assetstatus' => ['name'],
+        'supplier' => ['name'],
     ];
 
     public function getCompanyableParents()
@@ -177,6 +206,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
             ->orderBy('suppliers_maintenances.name', $order);
     }
 
+
     /**
      * Query builder scope to order on admin user
      *
@@ -218,5 +248,34 @@ class AssetMaintenance extends Model implements ICompanyableChild
     {
         return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
             ->orderBy('assets.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on serial
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByAssetSerial($query, $order)
+    {
+        return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
+            ->orderBy('assets.serial', $order);
+    }
+
+    /**
+     * Query builder scope to order on status label name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderStatusName($query, $order)
+    {
+        return $query->join('assets as maintained_asset', 'asset_maintenances.asset_id', '=', 'maintained_asset.id')
+            ->leftjoin('status_labels as maintained_asset_status', 'maintained_asset_status.id', '=', 'maintained_asset.status_id')
+            ->orderBy('maintained_asset_status.name', $order);
     }
 }

@@ -2,9 +2,9 @@
 
 return array(
 
-    'deleted' => 'Modelo del activo eliminado',
+    'deleted' => 'Modelo de recurso eliminado',
     'does_not_exist' => 'Modelo inexistente.',
-    'no_association' => 'ADVERTENCIA! El modelo del activo para este ítem es inválido o no existe!',
+    'no_association' => '¡ATENCIÓN! ¡El modelo de activo para este artículo no es válido o falta!',
     'no_association_fix' => 'Esto romperá cosas de formas extrañas y horribles. Edite este activo ahora para asignarle un modelo.',
     'assoc_users'	 => 'Este modelo está asociado a uno o más equipos actualmente, por lo que no puede ser eliminado. Por favor elimina los equipos asociados, e inténtalo de nuevo. ',
 
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Ningún campo ha cambiado, no hay nada que actualizar.',
         'success' 		=> 'Modelo actualizado correctamente. |:model_count modelos actualizados correctamente.',
-        'warn'          => 'Está a punto de actualizar las propiedades del siguiente modelo: |Está a punto de editar las propiedades de los siguientes :model_count modelos:',
+        'warn'          => 'Está a punto de actualizar las propiedades del siguiente modelo:|Está a punto de editar las propiedades de los siguientes :model_count modelos:',
 
     ),
 

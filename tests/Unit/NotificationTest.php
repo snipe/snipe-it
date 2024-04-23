@@ -8,13 +8,10 @@ use App\Models\Category;
 use Carbon\Carbon;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class NotificationTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
     {
         $admin = User::factory()->superuser()->create();

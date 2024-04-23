@@ -12,7 +12,7 @@
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/manufacturers/table.name')])
     <!-- URL -->
     <div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
-        <label for="url" class="col-md-3 control-label">{{ trans('admin/manufacturers/table.url') }}
+        <label for="url" class="col-md-3 control-label">{{ trans('general.url') }}
         </label>
         <div class="col-md-6">
             <input class="form-control" type="text" name="url" id="url" value="{{ old('url', $item->url) }}" />

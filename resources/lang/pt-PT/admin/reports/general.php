@@ -8,10 +8,10 @@ return [
     'acceptance_deleted' => 'Pedido de aceitação apagado',
     'acceptance_request' => 'Aceitar Pedido',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'Informação Endereço',
+        'user_city' => 'Cidade de usuário',
+        'user_state' => 'Estado do Usuário',
+        'user_country' => 'País do usuário',
+        'user_zip' => 'CEP do Usuário'
     ]
 ];

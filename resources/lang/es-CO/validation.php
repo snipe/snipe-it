@@ -67,7 +67,7 @@ return [
         'array'   => 'El atributo: debe tener al menos: elementos min.',
     ],
     'starts_with'          => 'El :attribute debe comenzar con uno de los siguientes: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'ends_with'            => 'El campo :attribute debe terminar con uno de los siguientes: :values.',
 
     'not_in'               => 'El :attribute seleccionado no es correcto.',
     'numeric'              => ':attribute debe ser un número.',
@@ -90,15 +90,14 @@ return [
     ],
     'string'               => 'El atributo: debe ser una cadena.',
     'timezone'             => 'El atributo: debe ser una zona válida.',
-    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
+    'two_column_unique_undeleted' => ':attribute debe ser único a través de :table1 y :table2. ',
     'unique'               => ':attribute ya ha sido introducido.',
     'uploaded'             => 'El atributo: no se pudo cargar.',
     'url'                  => ':attribute formato incorrecto.',
     'unique_undeleted'     => 'El :atrribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
-    'not_array'            => 'The :attribute field cannot be an array.',
-    'unique_serial'        => 'The :attribute must be unique.',
-    'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el usuario.',
+    'not_array'            => ':attribute no puede ser una matriz.',
+    'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el nombre de usuario.',
     'letters'              => 'La contraseña debe contener al menos una letra.',
     'numbers'              => 'La contraseña debe contener al menos un número.',
     'case_diff'            => 'La contraseña debe usar mayúsculas y minúsculas.',
@@ -106,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'El valor no puede ser negativo'
     ],
+    'checkboxes'           => ':attribute contiene opciones no válidas.',
+    'radio_buttons'        => ':attribute no es válido.',
 
 
     /*
@@ -129,13 +130,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'last_audit_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD hh:mm:ss',
-        'expiration_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'termination_date.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'expected_checkin.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'start_date.date_format'        =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'end_date.date_format'          =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'purchase_date.date_format'     => ':attribute debe ser una fecha válida en formato AAA-MM-DD',
+        'last_audit_date.date_format'   =>  'El campo :attribute debe ser una fecha válida en formato AAA-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  ':attribute debe ser una fecha válida en formato AAA-MM-DD',
+        'termination_date.date_format'  =>  ':attribute debe ser una fecha válida en formato AAA-MM-DD',
+        'expected_checkin.date_format'  =>  ':attribute debe ser una fecha válida en formato AAA-MM-DD',
+        'start_date.date_format'        =>  ':attribute debe ser una fecha válida en formato AAA-MM-DD',
+        'end_date.date_format'          =>  ':attribute debe ser una fecha válida en formato AAA-MM-DD',
 
     ],
 
@@ -152,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Valor no válido incluido en este campo',
 ];

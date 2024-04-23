@@ -23,6 +23,7 @@ return [
     'depreciation'	    => '折舊',
     'depreciates_on'	=> '折舊於',
     'default_location'	=> '預設位置',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> '產品壽命日期',
     'eol_rate'			=> '產品壽命等級',
     'expected_checkin'  => '預計歸還日期',

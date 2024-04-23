@@ -19,7 +19,6 @@ return array(
     'state'                 => '省份',
     'suppliers'             => '供应商',
     'update'                => '更新供货商',
-    'url'                   => '网址',
     'view'                  => '查看供应商',
     'view_assets_for'       => '查看资产关于',
     'zip'                   => '邮政编码',

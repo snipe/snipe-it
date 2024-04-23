@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Označení majetku',
+    'asset_model'       => 'Model',
+    'assigned_to'   => 'Přiděleno',
+    'book_value'  	=> 'Aktuální hodnota',
+    'change' 		=> 'Příjem/Výdej',
+    'checkout_date' => 'Datum vydání',
+    'checkoutto' 	=> 'Vydané',
+    'components_cost' => 'Celkové náklady na součásti',
+    'current_value' => 'Aktuální hodnota',
+    'diff' 			=> 'Rozdíl',
+    'dl_csv' 		=> 'Stáhnout CSV',
+    'eol' 			=> 'Konec životnosti',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Poslední převzetí dne',
+    'location' 		=> 'Umístění',
+    'purchase_cost'	=> 'Cena',
+    'purchase_date'	=> 'Zakoupeno',
+    'serial'   		=> 'Sériové číslo',
+    'status'   		=> 'Stav',
+    'title'      	=> 'Majetek ',
+    'image'		    => 'Obrázek zařízení',
+    'days_without_acceptance' => 'Dní bez schválení',
+    'monthly_depreciation' => 'Měsíční odpisy',
+    'assigned_to'    => 'Přiděleno',
+    'requesting_user' => 'Požaduje uživatel',
+    'requested_date' => 'Požadované datum',
+    'changed'       => 'Upraveno',
+    'icon' => 'Ikona',
+];

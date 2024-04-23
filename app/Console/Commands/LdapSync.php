@@ -66,6 +66,7 @@ class LdapSync extends Command
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
+        $search_base = Setting::getSettings()->ldap_base_dn;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -83,26 +84,37 @@ class LdapSync extends Command
         $summary = [];
 
         try {
-            if ( $this->option('location_id') != '') {
+
+            /**
+             * if a location ID has been specified, use that OU
+             */
+            if ( $this->option('location_id') ) {
 
                 foreach($this->option('location_id') as $location_id){
-                    $location_ou= Location::where('id', '=', $location_id)->value('ldap_ou');
+                    $location_ou = Location::where('id', '=', $location_id)->value('ldap_ou');
                     $search_base = $location_ou;
                     Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
                  }
             }
 
-            else if ($this->option('base_dn') != '') {
+            /**
+             *  if a manual base DN has been specified, use that. Allow the Base DN to override
+             *  even if there's a location-based DN - if you picked it, you must have picked it for a reason.
+             */
+            if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
                 Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
-            } else {
-                $search_base = null;
             }
+
+            /**
+             * If a filter has been specified, use that
+             */
             if ($this->option('filter') != '') {
                 $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
             } else {
                 $results = Ldap::findLdapUsers($search_base);
             }
+            
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
@@ -115,14 +127,14 @@ class LdapSync extends Command
 
         /* Determine which location to assign users to by default. */
         $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
-            if ($this->option('location') != '') {
-                if ($location = Location::where('name', '=', $this->option('location'))->first()) {
-                    Log::debug('Location name ' . $this->option('location') . ' passed');
-                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
-                }
+        if ($this->option('location') != '') {
+            if ($location = Location::where('name', '=', $this->option('location'))->first()) {
+                Log::debug('Location name ' . $this->option('location') . ' passed');
+                Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+            }
 
-            } elseif ($this->option('location_id') != '') {
-                foreach($this->option('location_id') as $location_id) {
+        } elseif ($this->option('location_id')) {
+            foreach($this->option('location_id') as $location_id) {
                 if ($location = Location::where('id', '=', $location_id)->first()) {
                     Log::debug('Location ID ' . $location_id . ' passed');
                     Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
@@ -378,7 +390,7 @@ class LdapSync extends Command
                         $user->location_id = $location->id;
                     }
                 }
-
+                $location = null;
                 $user->ldap_import = 1;
 
                 $errors = '';

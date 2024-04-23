@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA(双因素认证) 重置',
     'accessories'			=> '附属品',
     'activated'			    => '已激活',
     'accepted_date'         => '接受日期',
@@ -156,6 +157,7 @@ return [
     'image_filetypes_help'  => '接受jpg，png，gif和svg类型的文件。文件大小应小于 :size。',
     'unaccepted_image_type'  => '此图像文件不可读。可接受的文件类型为jpg、webp、png、gif和svg。此文件的 mimetype 类型为：:mimetype。',
     'import'         	    => '导入',
+    'import_this_file'      => '映射字段并处理此文件',
     'importing'         	=> '正在导入…',
     'importing_help'        => '您可以通过CSV文件导入资产、配件、许可证、组件、消耗品和用户。 <br><br>CSV 应以逗号分隔和格式化，并且在文档</a> 中与 <a href="https://snipe-it.readme.io/docs/importing" target="_new">样本CSV中的标头匹配。',
     'import-history'        => '导入历史记录',
@@ -181,6 +183,7 @@ return [
     'lock_passwords'        => '此字段值将不会保存到演示安装中。',
     'feature_disabled'      => '演示模式下禁用此功能',
     'location'              => '位置',
+    'location_plural'        => '位置',
     'locations'				=> '地理位置',
     'logo_size'				=> '方形标志使用Logo + 文本看起来最好。标志最大显示尺寸为 50px 高 x 500px 宽度。  ',
     'logout'				=> '注销',
@@ -199,6 +202,7 @@ return [
     'new_password'          => '新密码',
     'next'					=> '下一页',
     'next_audit_date'		=> '下一次盘点时间',
+    'no_email'              => '没有与此用户关联的电子邮件地址',
     'last_audit'		    => '上一次盘点',
     'new'					=> '新！',
     'no_depreciation'		=> '永久',
@@ -436,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => '生成自动递增资产标签已禁用，因此所有行都需要配置“资产标签”栏。',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => '注意：生成自动递增资产标签已启用，因此资产将被创建为不包含“资产标签”的行。 确实有"资产标签"的行将使用所提供的信息更新。已包含“资产标签”的行将使用所提供的信息进行更新。',
     'send_welcome_email_to_users'   => ' 给新用户发送欢迎电子邮件？',
+    'send_email'                => '发送电子邮件',
+    'call'                      => '呼叫号码',
     'back_before_importing'     => '导入前备份？',
     'csv_header_field'          => 'CSV 页眉字段',
     'import_field'              => '导入字段',
     'sample_value'              => '示例值',
     'no_headers'                => '没有找到列',
     'error_in_import_file'      => '读取CSV文件时出错：:error',
-    'percent_complete'          => ':percent % 完成',
     'errors_importing'          => '导入时发生错误： ',
     'warning'                   => '警告：:warning',
     'success_redirecting'       => '"成功... 重定向。',
@@ -458,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => '不包括通过许可证UI或cli工具进行批量分配的用户。',
     'modal_confirm_generic'      => '您确定吗？',
     'cannot_be_deleted'      => '此物品不能被删除',
+    'cannot_be_edited'      => '此条目无法编辑。',
     'undeployable_tooltip'      => '无法借出此物品。请检查剩余数量。',
     'serial_number'        => '序列号',
     'item_notes' => ':item 备注',
@@ -491,5 +497,36 @@ return [
     'upload_error' => '上传文件时出错。请检查是否没有空行，并且没有重复的列名。',
     'copy_to_clipboard' => '复制到剪贴板',
     'copied' => '已复制！',
+    'status_compatibility' => '如果资产已经分配，它们不能被更改为不可部署的状态类型，并且这个值的变化将被跳过。',
+    'rtd_location_help' => '这是当资产未被借出时的位置',
+    'item_not_found' => ':item_type ID :id 不存在或已被删除',
+    'action_permission_denied' => '您没有 :action :item_type ID :id 的权限',
+    'action_permission_generic' => '您没有 :action 此 :item_type 的权限',
+    'edit' => '编辑',
+    'action_source' => '动作来源',
+    'or' => '或',
+    'url'                   => 'URL',
+    'edit_fieldset' => '编辑字段集字段和选项',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => '批量删除 :object_type',
+                'warn'   =>  '您将要删除一个 :object_type|您将要删除 :count 个 :object_type',
+                'success'   =>  ':object_type 已成功删除|成功删除 :count 个 :object_type',
+                'error'   =>  '无法删除 :object_type',
+                'nothing_selected'   =>  '没有选择 :object_type - 什么都不做了',
+                'partial'   =>  '已删除 :succes_count 个 :object_type ，但:error_count 个 :object_type 不能被删除',
+             ],
+    ],
+    'no_requestable' => '没有可申领的资产或资产型号。',
+
+    'countable' => [
+        'accessories'  => ':count 配件|:count 配件',
+        'assets'  => ':count 资产|:count 资产',
+        'licenses'  => ':count 许可证|:count 许可证',
+        'license_seats'  => ':count 许可证席位|:count 许可证席位',
+        'consumables'  => ':count 耗材|:count 耗材',
+        'components'  => ':count 组件|:count 组件',
+    ]
 
 ];

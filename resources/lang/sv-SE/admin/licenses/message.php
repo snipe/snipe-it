@@ -9,7 +9,7 @@ return array(
     'assoc_users'	 => 'Licensen är nu utcheckad till en användare och kan inte raderas. Var god kontrollera licensen först och försök sedan radera igen.',
     'select_asset_or_person' => 'Du måste välja en tillgång eller en användare, men inte båda.',
     'not_found' => 'Licensen hittades inte',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count platser tillgängliga',
 
 
     'create' => array(
@@ -43,7 +43,7 @@ return array(
     'checkout' => array(
         'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
         'success' => 'Licensen utcheckades framgångsrikt',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
+        'not_enough_seats' => 'Inte tillräckligt med licensplatser tillgängliga för utcheckning',
     ),
 
     'checkin' => array(

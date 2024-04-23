@@ -67,7 +67,7 @@ return [
         'array'   => 'El atributo: debe tener al menos: elementos min.',
     ],
     'starts_with'          => 'El :attribute debe comenzar con uno de los siguientes: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'ends_with'            => 'El campo :attribute debe terminar con uno de los siguientes: :values.',
 
     'not_in'               => 'El :attribute seleccionado no es correcto.',
     'numeric'              => ':attribute debe ser un número.',
@@ -90,14 +90,13 @@ return [
     ],
     'string'               => 'El atributo: debe ser una cadena.',
     'timezone'             => 'El atributo: debe ser una zona válida.',
-    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
+    'two_column_unique_undeleted' => ':attribute debe ser único a través de :table1 y :table2. ',
     'unique'               => ':attribute ya ha sido introducido.',
     'uploaded'             => 'El atributo: no se pudo cargar.',
     'url'                  => ':attribute formato incorrecto.',
     'unique_undeleted'     => 'El :atrribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
-    'not_array'            => 'The :attribute field cannot be an array.',
-    'unique_serial'        => 'The :attribute must be unique.',
+    'not_array'            => ':attribute no puede ser una matriz.',
     'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el usuario.',
     'letters'              => 'La contraseña debe contener al menos una letra.',
     'numbers'              => 'La contraseña debe contener al menos un número.',
@@ -106,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'El valor no puede ser negativo'
     ],
+    'checkboxes'           => ':attribute contiene opciones no válidas.',
+    'radio_buttons'        => ':attribute no es válido.',
 
 
     /*
@@ -152,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Valor no válido incluido en este campo',
 ];

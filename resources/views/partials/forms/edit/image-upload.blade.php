@@ -28,7 +28,7 @@
 
         <label class="btn btn-default" aria-hidden="true">
             {{ trans('button.select_file')  }}
-            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/webp,image/png,image/svg,image/svg+xml" style="display:none; max-width: 90%" aria-label="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-hidden="true">
+            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/webp,image/png,image/svg,image/svg+xml,image/avif" style="display:none; max-width: 90%" aria-label="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-hidden="true">
         </label>
         <span class='label label-default' id="uploadFile-info"></span>
 
@@ -36,7 +36,7 @@
         {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
     <div class="col-md-4 col-md-offset-3" aria-hidden="true">
-        <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('partials/forms/general.alt_uploaded_image_thumbnail') }}">
+        <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('general.alt_uploaded_image_thumbnail') }}">
     </div>
 </div>
 

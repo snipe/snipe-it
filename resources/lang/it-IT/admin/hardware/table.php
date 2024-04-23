@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Etichetta bene',
+    'asset_model'       => 'Modello',
+    'assigned_to'   => 'Assegnato a',
+    'book_value'  	=> 'Valore Attuale',
+    'change' 		=> 'Dentro/Fuori',
+    'checkout_date' => 'Data di estrazione',
+    'checkoutto' 	=> 'Estratto',
+    'components_cost' => 'Costo Totale Componenti',
+    'current_value' => 'Valore Attuale',
+    'diff' 			=> 'Differenza',
+    'dl_csv' 		=> 'Scarica CSV',
+    'eol' 			=> 'EOL',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Ultima data check-in',
+    'location' 		=> 'Posizione',
+    'purchase_cost'	=> 'Costo',
+    'purchase_date'	=> 'Acquistati',
+    'serial'   		=> 'Seriale',
+    'status'   		=> 'Stato',
+    'title'      	=> 'Bene ',
+    'image'		    => 'Immagine dispositivo',
+    'days_without_acceptance' => 'Giorni senza accettazione',
+    'monthly_depreciation' => 'Ammortamento Mensile',
+    'assigned_to'    => 'Assegnato a',
+    'requesting_user' => 'Richiesto Da',
+    'requested_date' => 'Data richiesta',
+    'changed'       => 'Cambiato',
+    'icon' => 'Icona',
+];

@@ -73,6 +73,7 @@ class UsersController extends Controller
             'users.end_date',
             'users.vip',
             'users.autoassign_licenses',
+            'users.website',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -120,6 +121,10 @@ class UsersController extends Controller
 
         if ($request->filled('country')) {
             $users = $users->where('users.country', '=', $request->input('country'));
+        }
+
+        if ($request->filled('website')) {
+            $users = $users->where('users.website', '=', $request->input('website'));
         }
 
         if ($request->filled('zip')) {
@@ -192,11 +197,6 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
-        $limit = app('api_limit_value');
-
-
         switch ($request->input('sort')) {
             case 'manager':
                 $users = $users->OrderManager($order);
@@ -259,6 +259,7 @@ class UsersController extends Controller
                         'start_date',
                         'end_date',
                         'autoassign_licenses',
+                        'website',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -272,8 +273,14 @@ class UsersController extends Controller
             $users = $users->withTrashed();
         }
 
+        // Apply companyable scope
         $users = Company::scopeCompanyables($users);
-        
+
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 
@@ -353,6 +360,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->created_by = Auth::user()->id;
 
         if ($request->has('permissions')) {
             $permissions_array = $request->input('permissions');
@@ -396,7 +404,10 @@ class UsersController extends Controller
     public function show($id)
     {
         $this->authorize('view', User::class);
+
         $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count')->findOrFail($id);
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('update', $user);
 
         return (new UsersTransformer)->transformUser($user);
     }
@@ -416,6 +427,8 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
 
         $user = User::findOrFail($id);
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('update', $user);
 
         /**
          * This is a janky hack to prevent people from changing admin demo user data on the public demo.
@@ -452,6 +465,7 @@ class UsersController extends Controller
             if (! Auth::user()->isSuperUser()) {
                 unset($permissions_array['superuser']);
             }
+
             $user->permissions = $permissions_array;
         }
 
@@ -474,6 +488,7 @@ class UsersController extends Controller
 
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
+
                 $validator = Validator::make($request->all(), [
                     'groups.*' => 'integer|exists:permission_groups,id',
                 ]);
@@ -481,10 +496,19 @@ class UsersController extends Controller
                 if ($validator->fails()){
                     return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
                 }
-                $user->groups()->sync($request->input('groups'));
+
+                // Only save groups if the user is a superuser
+                if (Auth::user()->isSuperUser()) {
+                    $user->groups()->sync($request->input('groups'));
+                }
+
             // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups')) {
-                $user->groups()->sync([]);
+                
+                // Only save groups if the user is a superuser
+                if (Auth::user()->isSuperUser()) {
+                    $user->groups()->sync($request->input('groups'));
+                }
             }
 
 
@@ -505,37 +529,43 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', User::class);
-        $user = User::findOrFail($id);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = Company::scopeCompanyables($user)->find($id);
         $this->authorize('delete', $user);
 
-        if (($user->assets) && ($user->assets->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
-        }
+        if ($user) {
 
-        if (($user->licenses) && ($user->licenses->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->licenses->count().' license(s) associated with them and cannot be deleted.'));
-        }
-
-        if (($user->accessories) && ($user->accessories->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->accessories->count().' accessories associated with them.'));
-        }
-
-        if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->managedLocations()->count().' locations that they manage.'));
-        }
-
-        if ($user->delete()) {
-
-            // Remove the user's avatar if they have one
-            if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
-                try {
-                    Storage::disk('public')->delete('avatars/'.$user->avatar);
-                } catch (\Exception $e) {
-                    \Log::debug($e);
-                }
+            $this->authorize('delete', $user);
+            
+            if (($user->assets) && ($user->assets->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
             }
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
+            if (($user->licenses) && ($user->licenses->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
+            }
+
+            if (($user->accessories) && ($user->accessories->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
+            }
+
+            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
+            }
+
+            if ($user->delete()) {
+
+                // Remove the user's avatar if they have one
+                if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    try {
+                        Storage::disk('public')->delete('avatars/' . $user->avatar);
+                    } catch (\Exception $e) {
+                        \Log::debug($e);
+                    }
+                }
+
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
+            }
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
@@ -553,7 +583,31 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
-        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
+
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('view', $user);
+
+        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
+
+
+        // Filter on category ID
+        if ($request->filled('category_id')) {
+            $assets = $assets->InCategory($request->input('category_id'));
+        }
+
+
+        // Filter on model ID
+        if ($request->filled('model_id')) {
+
+            $model_ids = $request->input('model_id');
+            if (!is_array($model_ids)) {
+                $model_ids = array($model_ids);
+            }
+            $assets = $assets->InModelList($model_ids);
+        }
+
+        $assets = $assets->get();
 
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
@@ -569,7 +623,10 @@ class UsersController extends Controller
      */
     public function emailAssetList(Request $request, $id)
     {
+        $this->authorize('update', User::class);
         $user = User::findOrFail($id);
+        $user = Company::scopeCompanyables($user)->find($id);
+        $this->authorize('update', $user);
 
         if (empty($user->email)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
@@ -593,6 +650,7 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $this->authorize('view', Consumable::class);
         $user = User::findOrFail($id);
+        $this->authorize('update', $user);
         $consumables = $user->consumables;
         return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
@@ -609,6 +667,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $user = User::findOrFail($id);
+        $this->authorize('view', $user);
         $this->authorize('view', Accessory::class);
         $accessories = $user->accessories;
 
@@ -629,6 +688,7 @@ class UsersController extends Controller
         $this->authorize('view', License::class);
         
         if ($user = User::where('id', $id)->withTrashed()->first()) {
+            $this->authorize('update', $user);
             $licenses = $user->licenses()->get();
             return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
         }
@@ -652,9 +712,20 @@ class UsersController extends Controller
         if ($request->filled('id')) {
             try {
                 $user = User::find($request->get('id'));
+                $this->authorize('update', $user);
                 $user->two_factor_secret = null;
                 $user->two_factor_enrolled = 0;
-                $user->save();
+                $user->saveQuietly();
+
+                // Log the reset
+                $logaction = new Actionlog();
+                $logaction->target_type = User::class;
+                $logaction->target_id = $user->id;
+                $logaction->item_type = User::class;
+                $logaction->item_id = $user->id;
+                $logaction->created_at = date('Y-m-d H:i:s');
+                $logaction->user_id = Auth::user()->id;
+                $logaction->logaction('2FA reset');
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
             } catch (\Exception $e) {
@@ -706,11 +777,11 @@ class UsersController extends Controller
                 $logaction->user_id = Auth::user()->id;
                 $logaction->logaction('restore');
 
-                return response()->json(Helper::formatStandardApiResponse('success', trans('admin/users/message.restore.success')), 200);
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);
             }
 
             // Check validation to make sure we're not restoring a user with the same username as an existing user
-            return response()->json(Helper::formatStandardApiResponse('error', trans('general.could_not_restore', ['item_type' => trans('general.user'), 'error' => $user->getErrors()->first()])), 200);
+            return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')), 200);

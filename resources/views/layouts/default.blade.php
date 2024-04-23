@@ -140,17 +140,15 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             @can('index', \App\Models\Asset::class)
-                                <li aria-hidden="true"
-                                    {!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
+                                <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
                                     <a href="{{ url('hardware') }}" accesskey="1" tabindex="-1">
-                                        <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
+                                        <i class="fas fa-barcode fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.assets') }}</span>
                                     </a>
                                 </li>
                             @endcan
                             @can('view', \App\Models\License::class)
-                                <li aria-hidden="true"
-                                    {!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
+                                <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                                     <a href="{{ route('licenses.index') }}" accesskey="2" tabindex="-1">
                                         <i class="far fa-save fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.licenses') }}</span>
@@ -158,8 +156,7 @@
                                 </li>
                             @endcan
                             @can('index', \App\Models\Accessory::class)
-                                <li aria-hidden="true"
-                                    {!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
+                                <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                                     <a href="{{ route('accessories.index') }}" accesskey="3" tabindex="-1">
                                         <i class="far fa-keyboard fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.accessories') }}</span>
@@ -233,7 +230,8 @@
                                             <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
                                                 <a href="{{ route('accessories.create') }}" tabindex="-1">
                                                     <i class="far fa-keyboard fa-fw" aria-hidden="true"></i>
-                                                    {{ trans('general.accessory') }}</a>
+                                                    {{ trans('general.accessory') }}
+                                                </a>
                                             </li>
                                         @endcan
                                         @can('create', \App\Models\Consumable::class)
@@ -376,7 +374,7 @@
                                                 </a>
                                             </li>
                                         @endcan
-                                        <li class="divider"></li>
+                                        <li class="divider" style="margin-top: -1px; margin-bottom: -1px"></li>
                                         <li>
 
                                             <a href="{{ route('logout.get') }}"
@@ -624,7 +622,7 @@
                         @can('import')
                             <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('imports.index') }}">
-                                    <i class="fas fa-cloud-download-alt fa-fw" aria-hidden="true"></i>
+                                    <i class="fas fa-cloud-upload-alt fa-fw" aria-hidden="true"></i>
                                     <span>{{ trans('general.import') }}</span>
                                 </a>
                             </li>
@@ -962,7 +960,12 @@
             var clipboard = new ClipboardJS('.js-copy-link');
 
             clipboard.on('success', function(e) {
-                $('.js-copy-link').tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
+                // Get the clicked element
+                var clickedElement = $(e.trigger);
+                // Get the target element selector from data attribute
+                var targetSelector = clickedElement.data('data-clipboard-target');
+                // Show the alert that the content was copied
+                clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
             // ignore: 'input[type=hidden]' is required here to validate the select2 lists
@@ -975,6 +978,23 @@
             });
 
 
+            function showHideEncValue(e) {
+                // Use element id to find the text element to hide / show
+                var targetElement = e.id+"-to-show";
+                var hiddenElement = e.id+"-to-hide";
+                if($(e).hasClass('fa-lock')) {
+                    $(e).removeClass('fa-lock').addClass('fa-unlock');
+                    // Show the encrypted custom value and hide the element with asterisks
+                    document.getElementById(targetElement).style.fontSize = "100%";
+                    document.getElementById(hiddenElement).style.display = "none";
+                } else {
+                    $(e).removeClass('fa-unlock').addClass('fa-lock');
+                    // ClipboardJS can't copy display:none elements so use a trick to hide the value
+                    document.getElementById(targetElement).style.fontSize = "0px";
+                    document.getElementById(hiddenElement).style.display = "";
+                 }
+             }
+
             $(function () {
 
                 // Invoke Bootstrap 3's tooltip
@@ -982,7 +1002,7 @@
                     container: 'body',
                     animation: true,
                 });
-                
+
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');
@@ -1011,6 +1031,72 @@
             $(document).on('click', '[data-toggle="lightbox"]', function (event) {
                 event.preventDefault();
                 $(this).ekkoLightbox();
+            });
+            //This prevents multi-click checkouts for accessories, components, consumables
+            $(document).ready(function () {
+                $('#checkout_form').submit(function (event) {
+                    event.preventDefault();
+                    $('#submit_button').prop('disabled', true);
+                    this.submit();
+                });
+            });
+
+            // Select encrypted custom fields to hide them in the asset list
+            $(document).ready(function() {
+                // Selector for elements with css-padlock class
+                var selector = 'td.css-padlock';
+
+                // Function to add original value to elements
+                function addValue($element) {
+                    // Get original value of the element
+                    var originalValue = $element.text().trim();
+
+                    // Show asterisks only for not empty values
+                    if (originalValue !== '') {
+                        // This is necessary to avoid loop because value is generated dynamically
+                        if (originalValue !== '' && originalValue !== asterisks) $element.attr('value', originalValue);
+
+                        // Hide the original value and show asterisks of the same length
+                        var asterisks = '*'.repeat(originalValue.length);
+                        $element.text(asterisks);
+
+                        // Add click event to show original text
+                        $element.click(function() {
+                            var $this = $(this);
+                            if ($this.text().trim() === asterisks) {
+                                $this.text($this.attr('value'));
+                            } else {
+                                $this.text(asterisks);
+                            }
+                        });
+                    }
+                }
+                // Add value to existing elements
+                $(selector).each(function() {
+                    addValue($(this));
+                });
+
+                // Function to handle mutations in the DOM because content is generated dynamically
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        // Check if new nodes have been inserted
+                        if (mutation.type === 'childList') {
+                            mutation.addedNodes.forEach(function(node) {
+                                if ($(node).is(selector)) {
+                                    addValue($(node));
+                                } else {
+                                    $(node).find(selector).each(function() {
+                                        addValue($(this));
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+
+                // Configure the observer to observe changes in the DOM
+                var config = { childList: true, subtree: true };
+                observer.observe(document.body, config);
             });
 
 

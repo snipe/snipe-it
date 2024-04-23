@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Ithegi lefa',
+    'asset_model'       => 'Isibonelo',
+    'assigned_to'   => 'Kwabiwa Ku',
+    'book_value'  	=> 'Current Value',
+    'change' 		=> 'In / Out',
+    'checkout_date' => 'Usuku lokuhlola',
+    'checkoutto' 	=> 'Ikhishiwe',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Current Value',
+    'diff' 			=> 'Ukuhluka',
+    'dl_csv' 		=> 'Landa i-CSV',
+    'eol' 			=> 'I-EOL',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
+    'location' 		=> 'Indawo',
+    'purchase_cost'	=> 'Izindleko',
+    'purchase_date'	=> 'Kuthengwe',
+    'serial'   		=> 'Serial',
+    'status'   		=> 'Isimo',
+    'title'      	=> 'Impahla',
+    'image'		    => 'Isithombe sedivayisi',
+    'days_without_acceptance' => 'Izinsuku Ngaphandle Kwemukelwa',
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Kwabiwa Ku',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];
