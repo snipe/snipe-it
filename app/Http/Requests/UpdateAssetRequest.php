@@ -43,12 +43,14 @@ class UpdateAssetRequest extends ImageUploadRequest
 
         $rules2 = array_merge(
             parent::rules(),
+            // collects rules, 'rejects' required rules
             collect((new Asset)->getRules())->map(function ($rules) {
                 return collect($rules)->reject(function ($rule) {
                     return $rule === 'required';
+                })->reject(function ($rule) {
+                    return $rule === 'unique_undeleted';
                 })->values()->all();
             })->all(),
-        // remove 'required' rules where they exist
         );
 
         return $rules2;
