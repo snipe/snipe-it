@@ -245,6 +245,7 @@ return [
     'select_all'            => 'Select All',
     'search'				=> 'Search',
     'select_category'       => 'Select a Category',
+    'select_datasource' => 'Select a Datasource',
     'select_department'     => 'Select a Department',
     'select_depreciation'	=> 'Select a Depreciation Type',
     'select_location'		=> 'Select a Location',
