@@ -38,6 +38,19 @@ class UpdateAssetRequest extends ImageUploadRequest
                 ],
             ],
         );
-        return $rules;
+
+        // OR
+
+        $rules2 = array_merge(
+            parent::rules(),
+            collect((new Asset)->getRules())->map(function ($rules) {
+                return collect($rules)->reject(function ($rule) {
+                    return $rule === 'required';
+                })->values()->all();
+            })->all(),
+        // remove 'required' rules where they exist
+        );
+
+        return $rules2;
     }
 }
