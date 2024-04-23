@@ -112,7 +112,7 @@ class AssetsController extends Controller
         $asset_tags = $request->input('asset_tags');
 
         foreach($asset_tags as $asset_tag) {
-            if ($asset_tag > PHP_INT_MAX) {
+            if ($asset_tag >= PHP_INT_MAX) {
                 // Handle the case where the input value is out of range
                 return redirect()->back()->with('error', trans('general.asset_tag_range_error'));
             }
@@ -364,8 +364,13 @@ class AssetsController extends Controller
             }
         }
 
-        // Update the asset data
         $asset_tag = $request->input('asset_tags');
+        // Update the asset data
+        if ($asset_tag[1] >= PHP_INT_MAX) {
+            // Handle the case where the input value is out of range
+            return redirect()->back()->with('error', trans('general.asset_tag_range_error'));
+        }
+
         $serial = $request->input('serials');
         $asset->name = $request->input('name');
         $asset->serial = $serial[1];

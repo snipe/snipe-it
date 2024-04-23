@@ -388,6 +388,35 @@ class AssetStoreTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('success');
     }
+    public function testAssetTagsCanNotBeOutOfIntRange()
+    {
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->create();
+        $asset_tags = ['1234567890','922337203685477580800000000'];
+
+        $this->settings->disableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => $asset_tags[0],
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        Asset::find($response['payload']['id'])->delete();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => $asset_tags[1],
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
 
     public function testAnAssetCanBeCheckedOutToUserOnStore()
     {
