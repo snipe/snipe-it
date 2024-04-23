@@ -7,6 +7,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Component;
 use App\Helpers\Helper;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -52,7 +53,8 @@ class ComponentsController extends Controller
         $this->authorize('create', Component::class);
 
         return view('components/edit')->with('category_type', 'component')
-            ->with('item', new Component);
+            ->with('item', new Component)
+            ->with('setting', Setting::getSettings());
     }
 
     /**
@@ -107,7 +109,8 @@ class ComponentsController extends Controller
         if ($item = Component::find($componentId)) {
             $this->authorize('update', $item);
 
-            return view('components/edit', compact('item'))->with('category_type', 'component');
+            return view('components/edit', compact('item'))->with('category_type', 'component')
+                   ->with('setting', Setting::getSettings());
         }
 
         return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));

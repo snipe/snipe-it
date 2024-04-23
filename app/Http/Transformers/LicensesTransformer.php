@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\License;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -38,7 +39,7 @@ class LicensesTransformer
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
             'free_seats_count' => (int) $license->free_seats_count,
-            'min_amt' => ($license->min_amt) ? (int) ($license->min_amt) : null,
+            'min_amt' => Helper::sumThreshold($license->min_amt),
             'license_name' =>  ($license->license_name) ? e($license->license_name) : null,
             'license_email' => ($license->license_email) ? e($license->license_email) : null,
             'reassignable' => ($license->reassignable == 1) ? true : false,

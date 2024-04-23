@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Accessory;
 use App\Models\Company;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +50,8 @@ class AccessoriesController extends Controller
         $category_type = 'accessory';
 
         return view('accessories/edit')->with('category_type', $category_type)
-          ->with('item', new Accessory);
+          ->with('item', new Accessory)
+          ->with('setting', Setting::getSettings());
     }
 
     /**
@@ -108,7 +110,8 @@ class AccessoriesController extends Controller
         if ($item = Accessory::find($accessoryId)) {
             $this->authorize($item);
 
-            return view('accessories/edit', compact('item'))->with('category_type', 'accessory');
+            return view('accessories/edit', compact('item'))->with('category_type', 'accessory')
+                ->with('setting', Setting::getSettings());
         }
 
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
