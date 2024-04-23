@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Consumable;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +50,8 @@ class ConsumablesController extends Controller
         $this->authorize('create', Consumable::class);
 
         return view('consumables/edit')->with('category_type', 'consumable')
-            ->with('item', new Consumable);
+            ->with('item', new Consumable)
+            ->with('setting', Setting::getSettings());
     }
 
     /**
@@ -107,7 +109,8 @@ class ConsumablesController extends Controller
         if ($item = Consumable::find($consumableId)) {
             $this->authorize($item);
 
-            return view('consumables/edit', compact('item'))->with('category_type', 'consumable');
+            return view('consumables/edit', compact('item'))->with('category_type', 'consumable')
+                 ->with('setting', Setting::getSettings());
         }
 
         return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));

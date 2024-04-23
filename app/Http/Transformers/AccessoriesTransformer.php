@@ -37,7 +37,7 @@ class AccessoriesTransformer
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
-            'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
+            'min_qty' => Helper::sumThreshold($accessory->min_amt),
             'remaining_qty' => (int) $accessory->numRemaining(),
             'users_count' =>  $accessory->users_count,
 

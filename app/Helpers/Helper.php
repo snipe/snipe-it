@@ -1458,5 +1458,9 @@ class Helper
         }
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
+    public static function sumThreshold($min_qty = null){
+
+        return $min_qty + Setting::getSettings()->alert_threshold;
+    }
 
 }
