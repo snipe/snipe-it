@@ -581,6 +581,7 @@ class UsersController extends Controller
                             $user_groups .= $user_group->name.', ';
                         }
 
+
                         $permissionstring = "";
                         if(array_key_exists("superuser", json_decode($user->permissions, true))) {
                             $permissionstring = trans('general.superuser');
