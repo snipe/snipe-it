@@ -307,12 +307,12 @@ class LicensesController extends Controller
         $response = new StreamedResponse(function () {
             // Open output stream
             $handle = fopen('php://output', 'w');
-
             $licenses= License::with('company',
                           'manufacturer',
                           'category',
                           'supplier',
-                          'adminuser')
+                          'adminuser',
+                          'assignedusers')
                           ->orderBy('created_at', 'DESC');
             Company::scopeCompanyables($licenses)
                 ->chunk(500, function ($licenses) use ($handle) {
@@ -325,6 +325,7 @@ class LicensesController extends Controller
                         trans('general.purchase_date'),
                         trans('general.purchase_cost'),
                         trans('general.order_number'),
+                        trans('general.licenses_available'),
                         trans('admin/licenses/table.seats'),
                         trans('general.created_by'),
                         trans('general.depreciation'),
@@ -357,6 +358,7 @@ class LicensesController extends Controller
                             $license->purchase_date,
                             $license->purchase_cost,
                             $license->order_number,
+                            $license->free_seat_count,
                             $license->seats,
                             $license->adminuser->present()->fullName(),
                             $license->depreciation ? $license->depreciation->name: '',
