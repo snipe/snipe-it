@@ -86,7 +86,8 @@ class LdapSync extends Command
         $summary = [];
 
         try {
-
+            $company_id= $this->option('location_id');
+            $location_id =$this->option('location_id');
             /**
              * if a location ID has been specified, use that OU
              */

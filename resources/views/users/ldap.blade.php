@@ -28,8 +28,12 @@
           <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
             
             <div class="col-md-12">
-               <!-- Location -->
-              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id[]', 'multiple' => true])
+                    <!-- Location -->
+{{--                @if($settings->ldap_ou_sync_type == 'location')--}}
+                    @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id[]', 'multiple' => true])
+{{--               @else <!-- Company -->--}}
+                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id[]', 'multiple' => true])
+{{--                @endif--}}
             </div>
           </div>
 

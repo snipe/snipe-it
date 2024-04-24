@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan; // Note that this is awful close to 'Users' the namespace above; be careful
@@ -31,7 +32,8 @@ class LDAPImportController extends Controller
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
 
-        return view('users/ldap');
+        return view('users/ldap')
+             ->with('settings', Setting::getLdapSettings());
     }
 
     /**

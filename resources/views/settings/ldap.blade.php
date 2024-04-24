@@ -527,6 +527,27 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- LDAP OU Sync Type -->
+                        <div class="form-group {{ $errors->has('ldap_ou_sync_type') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_ou_sync_type', trans('admin/settings/general.ldap_ou_sync_type')) }}
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-control">
+                                    <input type="radio" name="ldap_ou_sync_type" id="sync_type_location" value="location">
+                                    {{trans('general.location')}}
+                                </label>
+                                <label class="form-control">
+                                    <input type="radio" name="ldap_ou_sync_type" id="sync_type_company" value="company">
+                                    {{trans('general.company')}}
+                                </label>
+                                <p class="help-block">{!! trans('admin/settings/general.ldap_location_help') !!}</p>
+                                {!! $errors->first('ldap_ou_sync_type', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
                         @if ($setting->ldap_enabled)
 
                             <!-- LDAP test -->
