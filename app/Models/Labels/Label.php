@@ -189,6 +189,7 @@ abstract class Label
      * @param  bool    $squash  Squash text if it's too big
      * @param  int     $border  Thickness of border. Default = 0.
      * @param  int     $spacing Letter spacing. Default = 0.
+     * @param  bool    $whiteBg Draw a white background behind the text. Default = false.
      */
     public final function writeText(TCPDF $pdf, $text, $x, $y, $font=null, $style=null, $size=null, $align='L', $width=null, $height=null, $squash=false, $border=0, $spacing=0, $whiteBg=false) {
         $prevFamily = $pdf->getFontFamily();
