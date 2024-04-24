@@ -32,8 +32,6 @@
         <div class="col-md-12">
 
 
-
-
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -140,6 +138,7 @@
                 </ul>
 
                 <div class="tab-content">
+
                     <div class="tab-pane fade in active" id="details">
                         <div class="row">
                             <div class="col-md-8">
@@ -415,19 +414,24 @@
 
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
                                                         @can('assets.view.encrypted_custom_fields')
-                                                            <span id="text-{{ $field->id }}-to-hide">********</span>
-                                                            <span class="js-copy-{{ $field->id }}" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
-                                                            @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                                                <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
-                                                            @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
-                                                                {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
-                                                            @else
-                                                                {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
-                                                            @endif
-                                                            </span>
-                                                            <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
-                                                                <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
-                                                            </i>
+                                                            @php
+                                                                $fieldSize=strlen(Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()})) 
+                                                            @endphp
+                                                            @if ($fieldSize>0)
+                                                                <span id="text-{{ $field->id }}-to-hide">{{ str_repeat('*', $fieldSize) }}</span>
+                                                                <span class="js-copy-{{ $field->id }}" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
+                                                                @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                                    <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                                @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
+                                                                    {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
+                                                                @else
+                                                                    {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                                                @endif
+                                                                </span>
+                                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                                    <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                                                                </i>
+							    @endif
                                                         @else
                                                             {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
                                                         @endcan
@@ -926,6 +930,7 @@
                                                     <button class="btn btn-sm btn-warning col-md-12">{{ trans('general.restore') }}</button>
                                                 </form>
                                            @endif
+                                        </div>
                                     @endcan
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
@@ -995,7 +1000,7 @@
                             </div> <!-- div.col-md-4 -->
                         </div><!-- /row -->
                     </div><!-- /.tab-pane asset details -->
-                    </div>
+                 
 
                     <div class="tab-pane fade" id="software">
                         <div class="row">

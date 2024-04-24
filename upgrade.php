@@ -19,6 +19,7 @@ $app_environment = 'develop';
 $skip_php_checks = false;
 $branch = 'master';
 $branch_override = false;
+$no_interactive = false;
 
 // Check for branch or other overrides
 if ($argc > 1){
@@ -31,6 +32,9 @@ if ($argc > 1){
                 $arg++;
                 $branch = $argv[$arg];
                 $branch_override = true;
+                break;
+            case '--no-interactive':
+                $no_interactive = true;
                 break;
             default: // for legacy support from before we started using --branch
                 $branch = $argv[$arg];
@@ -81,7 +85,13 @@ if($upgrade_requirements){
     echo "Found PHP requirements, will check for PHP > $php_min_works and < $php_max_wontwork\n";
 }
 // done fetching requirements
-$yesno = readline("\nProceed with upgrade? [Y/n]: ");
+
+if (!$no_interactive) {
+    $yesno = readline("\nProceed with upgrade? [Y/n]: ");
+} else {
+    $yesno = "yes";
+}
+
 if ($yesno == "yes" || $yesno == "YES" ||$yesno == "y" ||$yesno == "Y"){
     # don't do anything
 } else {

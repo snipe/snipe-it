@@ -665,25 +665,26 @@ class AssetsController extends Controller
             $model = AssetModel::find($asset->model_id);
             
             // Update custom fields
+            $problems_updating_encrypted_custom_fields = false;
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
                     $field_val = $request->input($field->db_column, null);
 
                     if ($request->has($field->db_column)) {
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = Crypt::encrypt($field_val);
-                            }
-                        }
                         if ($field->element == 'checkbox') {
                             if(is_array($field_val)) {
                                 $field_val = implode(',', $field_val);
-                                $asset->{$field->db_column} = $field_val;
                             }
                         }
-                        else {
-                            $asset->{$field->db_column} = $field_val;
+                        if ($field->field_encrypted == '1') {
+                            if (Gate::allows('admin')) {
+                                $field_val = Crypt::encrypt($field_val);
+                            } else {
+                                $problems_updating_encrypted_custom_fields = true;
+                                continue;
+                            }
                         }
+                        $asset->{$field->db_column} = $field_val;
                     }
                 }
             }
@@ -709,8 +710,11 @@ class AssetsController extends Controller
                     $asset->image = $asset->getImageUrl();
                 }
 
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
-                return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
+                if ($problems_updating_encrypted_custom_fields) {
+                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+                } else {
+                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                }
             }
 
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
