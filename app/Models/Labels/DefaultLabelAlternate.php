@@ -110,8 +110,8 @@ class DefaultLabelAlternate extends RectangleSheet
         $textX = 0;// Default if no logo
         $titleW = $this->getLabelWidth();// Default if no logo
 
-        $BARCODE1D_SIZE = $this->getLabelHeight() * 0.15; // % of label height
-        $BARCODE2D_SIZE = $this->getLabelHeight() * 0.55; // % of label height
+        $BARCODE1D_SIZE = $this->getLabelHeight() * 0.18; // % of label height
+        $BARCODE2D_SIZE = $this->getLabelHeight() * 0.48; // % of label height
 
         ## 1D Barcode ##
         $barcode1D['height'] = $BARCODE1D_SIZE;
