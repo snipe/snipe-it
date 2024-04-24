@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
@@ -66,6 +67,7 @@ class LdapSync extends Command
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
+        $ldap_result_company = Setting::getSettings()->ldap_company;
         $search_base = Setting::getSettings()->ldap_base_dn;
 
         try {
@@ -215,7 +217,8 @@ class LdapSync extends Command
             }
 
         }
-
+        $company = null;
+        $department = null;
 
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
@@ -232,16 +235,23 @@ class LdapSync extends Command
                 $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
-
+                $item['company'] = $results[$i][$ldap_result_company][0] ?? '';
                 // ONLY if you are using the "ldap_location" option *AND* you have an actual result
                 if ($ldap_result_location && $item['location']) {
                         $location = Location::firstOrCreate([
                                 'name' => $item['location'],
                         ]);
                 }
-                $department = Department::firstOrCreate([
-                    'name' => $item['department'],
-                ]);
+                if ($ldap_result_company && $item['company']) {
+                    $company = Company::firstOrCreate([
+                        'name' => $item['company'],
+                    ]);
+                }
+
+                    $department = Department::firstOrCreate([
+                        'name' => $item['department'],
+                    ]);
+
 
                 $user = User::where('username', $item['username'])->first();
                 if ($user) {
@@ -285,6 +295,9 @@ class LdapSync extends Command
             }
             if($ldap_result_location != null){
                 $user->location_id = $location ? $location->id : null;
+            }
+            if($ldap_result_company != null){
+                $user->company_id = $company ? $company->id : null;
             }
 
             if($ldap_result_manager != null){
