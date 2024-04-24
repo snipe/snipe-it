@@ -176,7 +176,7 @@ return [
     'last_name'             => 'Last Name',
     'license'				=> 'License',
     'license_report'        => 'License Report',
-    'licenses_available'	=> 'licenses available',
+    'licenses_available'	=> 'Licenses available',
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
     'loading'				=> 'Loading... please wait....',
