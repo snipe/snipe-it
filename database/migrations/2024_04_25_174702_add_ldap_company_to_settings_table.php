@@ -14,7 +14,7 @@ class AddLdapCompanyToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('ldap_company')->after('ldap_jobtitle')->nullable()->default(null);$table->string('ldap_ou_sync_type')->after('ldap_location')->default('location');
+            $table->string('ldap_company')->after('ldap_jobtitle')->nullable()->default(null);
         });
     }
 
