@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
