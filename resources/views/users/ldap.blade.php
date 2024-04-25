@@ -25,15 +25,15 @@
       <div class="box box-default">
         <div class="box-body">
           <!-- location_id-->
-          <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
+          <div class="form-group {{ $errors->has('ou_type_id') ? 'has-error' : '' }}">
             
             <div class="col-md-12">
                     <!-- Location -->
-{{--                @if($settings->ldap_ou_sync_type == 'location')--}}
-                    @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id[]', 'multiple' => true])
-{{--               @else <!-- Company -->--}}
-                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id[]', 'multiple' => true])
-{{--                @endif--}}
+                @if($settings->ldap_ou_sync_type == 'location')
+                    @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'ou_type_id[]', 'multiple' => true])
+               @else <!-- Company -->
+                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'ou_type_id', 'multiple' => false])
+                @endif
             </div>
           </div>
 

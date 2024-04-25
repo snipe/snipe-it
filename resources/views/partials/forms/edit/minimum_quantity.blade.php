@@ -10,7 +10,7 @@
                 <span class="sr-only">{{ trans('general.min_amt_help') }}</span>
             </a>
 
-        </div>
+            </div>
         <div class="col-md-12">
            {!! $errors->first('min_amt', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>

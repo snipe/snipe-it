@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLdapCompanyToSettingsTable extends Migration
+class AddLdapCompanyAndOuSyncOptionToSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddLdapCompanyToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('ldap_company')->after('ldap_jobtitle')->nullable();
+            $table->string('ldap_company')->after('ldap_jobtitle')->nullable()->default(null);
+            $table->string('ldap_ou_sync_type')->after('ldap_location')->default('location');
         });
     }
 
@@ -27,6 +28,7 @@ class AddLdapCompanyToSettingsTable extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('ldap_company');
+            $table->dropColumn('ldap_ou_sync_type');
         });
     }
 }

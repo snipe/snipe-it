@@ -19,7 +19,7 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=*} {--base_dn=} {--filter=} {--summary} {--json_summary}';
+    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=*} {--company_id=} {--base_dn=} {--filter=} {--summary} {--json_summary}';
 
     /**
      * The console command description.
@@ -68,6 +68,7 @@ class LdapSync extends Command
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
         $ldap_result_company = Setting::getSettings()->ldap_company;
+        $ldap_ou_sync_type = Setting::getSettings()->ldap_ou_sync_type;
         $search_base = Setting::getSettings()->ldap_base_dn;
 
         try {
@@ -86,18 +87,24 @@ class LdapSync extends Command
         $summary = [];
 
         try {
-            $company_id= $this->option('location_id');
-            $location_id =$this->option('location_id');
+
             /**
-             * if a location ID has been specified, use that OU
+             * if a sync type is Location and a location ID has been specified, use that OU
              */
             if ( $this->option('location_id') ) {
-
                 foreach($this->option('location_id') as $location_id){
                     $location_ou = Location::where('id', '=', $location_id)->value('ldap_ou');
                     $search_base = $location_ou;
                     Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
-                 }
+                }
+            }
+            /**
+             * if a sync type is company and a Company ID has been specified, use that OU
+             */
+            if ( $this->option('company_id') ) {
+                    $ou_type = Company::where('id', '=', $this->option('company_id'))->value('ldap_ou');
+                    $search_base = $ou_type;
+                    Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
             }
 
             /**
