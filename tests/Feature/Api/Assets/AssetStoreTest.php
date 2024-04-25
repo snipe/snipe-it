@@ -280,45 +280,48 @@ class AssetStoreTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    private function purchaseCosts(): array
+    public function testStoresPeriodAsDecimalSeparatorForPurchaseCost()
     {
-        return [
-            'with decimal' => [
-                [
-                    'separator' => '1.234.56',
-                    'input' => 12.34,
-                    'expectation' => 12.34
-                ]
-            ],
-            'EU style' => [
-                [
-                    'separator' => '1.234,56',
-                    'input' => "12,34",
-                    'expectation' => 12.34
-                ]
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider purchaseCosts
-     */
-    public function testPurchaseCost($costs)
-    {
-        $this->settings->set(['digit_separator' => $costs['separator']]);
+        $this->settings->set([
+            'default_currency' => 'USD',
+            'digit_separator' => '1,234.56',
+        ]);
 
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
                 'asset_tag' => 'random-string',
                 'model_id' => AssetModel::factory()->create()->id,
                 'status_id' => Statuslabel::factory()->create()->id,
-                'purchase_cost' => $costs['input'],
+                // API accepts float
+                'purchase_cost' => 12.34,
             ])
             ->assertStatusMessageIs('success');
 
         $asset = Asset::find($response['payload']['id']);
 
-        $this->assertEquals($costs['expectation'], $asset->purchase_cost);
+        $this->assertEquals(12.34, $asset->purchase_cost);
+    }
+
+    public function testStoresPeriodAsCommaSeparatorForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'EUR',
+            'digit_separator' => '1.234,56',
+        ]);
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API also accepts string for comma separated values
+                'purchase_cost' => '12,34',
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(12.34, $asset->purchase_cost);
     }
 
     public function testUniqueSerialNumbersIsEnforcedWhenEnabled()
