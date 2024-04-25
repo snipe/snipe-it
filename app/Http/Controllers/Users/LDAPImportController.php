@@ -52,10 +52,10 @@ class LDAPImportController extends Controller
         $this->authorize('update', User::class);
         // Call Artisan LDAP import command.
         if(Setting::getSettings()->ldap_ou_sync_type == 'location') {
-            Artisan::call('snipeit:ldap-sync', ['--location_id' => $request->input('location_id'), '--json_summary' => true]);
+            Artisan::call('snipeit:ldap-sync', ['--location_id' => $request->input('ou_type_id'), '--json_summary' => true]);
         }
         else {
-            Artisan::call('snipeit:ldap-sync', ['--company_id' => $request->input('company_id'), '--json_summary' => true]);
+            Artisan::call('snipeit:ldap-sync', ['--company_id' => $request->input('ou_type_id'), '--json_summary' => true]);
         }
         // Collect and parse JSON summary.
         $ldap_results_json = Artisan::output();

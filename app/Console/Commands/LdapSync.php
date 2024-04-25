@@ -85,7 +85,6 @@ class LdapSync extends Command
         }
 
         $summary = [];
-
         try {
 
             /**
@@ -136,20 +135,26 @@ class LdapSync extends Command
         }
 
         /* Determine which location to assign users to by default. */
-        $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
+        $location = null;
+        $company = null;// TODO - this would be better called "$default_location", which is more explicit about its purpose
         if ($this->option('location') != '') {
             if ($location = Location::where('name', '=', $this->option('location'))->first()) {
                 Log::debug('Location name ' . $this->option('location') . ' passed');
                 Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
             }
-
-        } elseif ($this->option('location_id')) {
+        }
+        if($this->option('company_id')) {
+            if ($company = Company::where('name', '=', $this->option('company_id'))->first()) {
+                Log::debug('Company name ' . $this->option('company_id') . ' passed');
+                Log::debug('Importing to ' . $company->name . ' (' . $company->id . ')');
+            }
+        }
+        elseif ($this->option('location_id')) {
             foreach($this->option('location_id') as $location_id) {
                 if ($location = Location::where('id', '=', $location_id)->first()) {
                     Log::debug('Location ID ' . $location_id . ' passed');
                     Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
                 }
-
             }
         }
         if (! isset($location)) {
