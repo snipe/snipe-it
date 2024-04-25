@@ -27,6 +27,7 @@ class AddLdapCompanyToSettingsTable extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('ldap_company');
+
         });
     }
 }
