@@ -47,14 +47,17 @@ class StoreAssetRequest extends ImageUploadRequest
     {
         $modelRules = (new Asset)->getRules();
 
-        $modelRules['purchase_cost'] = $this->removeNumericRulesFromPurchaseCost($modelRules['purchase_cost']);
+        // If purchase_cost was submitted as a string with a comma separator
+        // then we need to ignore the normal numeric rules.
+        // Since the original rules still live on the model they will be run
+        // right before saving (and after purchase_cost has been
+        // converted to a float via setPurchaseCostAttribute).
+        $modelRules = $this->removeNumericRulesFromPurchaseCost($modelRules);
 
-        $rules = array_merge(
+        return array_merge(
             $modelRules,
             parent::rules(),
         );
-
-        return $rules;
     }
 
     private function parseLastAuditDate(): void
@@ -74,15 +77,19 @@ class StoreAssetRequest extends ImageUploadRequest
         }
     }
 
-    private function removeNumericRulesFromPurchaseCost($purchaseCost)
+    private function removeNumericRulesFromPurchaseCost(array $rules): array
     {
+        $purchaseCost = $rules['purchase_cost'];
+
         // If rule is in "|" format then turn it into an array
         if (is_string($purchaseCost)) {
             $purchaseCost = explode('|', $purchaseCost);
         }
 
-        return array_filter($purchaseCost, function ($rule) {
+        $rules['purchase_cost'] = array_filter($purchaseCost, function ($rule) {
             return $rule !== 'numeric' && $rule !== 'gte:0';
         });
+
+        return $rules;
     }
 }
