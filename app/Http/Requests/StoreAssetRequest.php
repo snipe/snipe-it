@@ -45,8 +45,14 @@ class StoreAssetRequest extends ImageUploadRequest
      */
     public function rules(): array
     {
+        $modelRules = (new Asset)->getRules();
+
+        $modelRules['purchase_cost'] = array_filter(explode('|', $modelRules['purchase_cost']), function ($rule) {
+            return $rule !== 'numeric' && $rule !== 'gte:0';
+        });
+
         $rules = array_merge(
-            (new Asset)->getRules(),
+            $modelRules,
             parent::rules(),
         );
 

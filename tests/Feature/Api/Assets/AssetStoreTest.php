@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api\Assets;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -12,6 +13,7 @@ use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class AssetStoreTest extends TestCase
@@ -276,6 +278,47 @@ class AssetStoreTest extends TestCase
             ])
             ->assertOk()
             ->assertStatusMessageIs('error');
+    }
+
+    private function purchaseCosts(): array
+    {
+        return [
+            'with decimal' => [
+                [
+                    'separator' => '1.234.56',
+                    'input' => 12.34,
+                    'expectation' => 12.34
+                ]
+            ],
+            'EU style' => [
+                [
+                    'separator' => '1.234,56',
+                    'input' => "12,34",
+                    'expectation' => 12.34
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider purchaseCosts
+     */
+    public function testPurchaseCost($costs)
+    {
+        $this->settings->set(['digit_separator' => $costs['separator']]);
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                'purchase_cost' => $costs['input'],
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals($costs['expectation'], $asset->purchase_cost);
     }
 
     public function testUniqueSerialNumbersIsEnforcedWhenEnabled()
