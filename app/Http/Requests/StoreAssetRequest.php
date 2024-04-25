@@ -47,9 +47,7 @@ class StoreAssetRequest extends ImageUploadRequest
     {
         $modelRules = (new Asset)->getRules();
 
-        $modelRules['purchase_cost'] = array_filter(explode('|', $modelRules['purchase_cost']), function ($rule) {
-            return $rule !== 'numeric' && $rule !== 'gte:0';
-        });
+        $modelRules['purchase_cost'] = $this->removeNumericRulesFromPurchaseCost($modelRules['purchase_cost']);
 
         $rules = array_merge(
             $modelRules,
@@ -74,5 +72,17 @@ class StoreAssetRequest extends ImageUploadRequest
                 // invalid format so validation picks it up later
             }
         }
+    }
+
+    private function removeNumericRulesFromPurchaseCost($purchaseCost)
+    {
+        // If rule is in "|" format then turn it into an array
+        if (is_string($purchaseCost)) {
+            $purchaseCost = explode('|', $purchaseCost);
+        }
+
+        return array_filter($purchaseCost, function ($rule) {
+            return $rule !== 'numeric' && $rule !== 'gte:0';
+        });
     }
 }
