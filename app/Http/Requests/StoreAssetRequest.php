@@ -47,12 +47,14 @@ class StoreAssetRequest extends ImageUploadRequest
     {
         $modelRules = (new Asset)->getRules();
 
-        // If purchase_cost was submitted as a string with a comma separator
-        // then we need to ignore the normal numeric rules.
-        // Since the original rules still live on the model they will be run
-        // right before saving (and after purchase_cost has been
-        // converted to a float via setPurchaseCostAttribute).
-        $modelRules = $this->removeNumericRulesFromPurchaseCost($modelRules);
+        if (is_string($this->input('purchase_cost'))) {
+            // If purchase_cost was submitted as a string with a comma separator
+            // then we need to ignore the normal numeric rules.
+            // Since the original rules still live on the model they will be run
+            // right before saving (and after purchase_cost has been
+            // converted to a float via setPurchaseCostAttribute).
+            $modelRules = $this->removeNumericRulesFromPurchaseCost($modelRules);
+        }
 
         return array_merge(
             $modelRules,
