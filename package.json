@@ -28,7 +28,7 @@
         "vue-template-compiler": "2.4.4"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.5.0",
+        "@fortawesome/fontawesome-free": "^6.5.2",
         "acorn": "^8.11.2",
         "acorn-import-assertions": "^1.9.0",
         "admin-lte": "^2.4.18",
