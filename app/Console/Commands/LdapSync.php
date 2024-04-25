@@ -63,6 +63,7 @@ class LdapSync extends Command
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_location = Setting::getSettings()->ldap_location;
+        $ldap_result_company = Setting::getSettings()->ldap_company;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
@@ -237,6 +238,11 @@ class LdapSync extends Command
                                 'name' => $item['location'],
                         ]);
                 }
+                if ($ldap_result_company && $item['company']) {
+                    $company = Company::firstOrCreate([
+                        'name' => $item['company'],
+                    ]);
+                }
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
@@ -283,6 +289,9 @@ class LdapSync extends Command
             }
             if($ldap_result_location != null){
                 $user->location_id = $location ? $location->id : null;
+            }
+            if($ldap_result_company != null){
+                $user->company_id = $company ? $company->id : null;
             }
 
             if($ldap_result_manager != null){

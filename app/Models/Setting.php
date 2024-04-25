@@ -356,6 +356,7 @@ class Setting extends Model
             'ldap_phone_field',
             'ldap_jobtitle',
             'ldap_manager',
+            'ldap_company',
             'ldap_country',
             'ldap_location',
             ])->first()->getAttributes();

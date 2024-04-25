@@ -973,6 +973,7 @@ class SettingsController extends Controller
             $setting->ldap_jobtitle = $request->input('ldap_jobtitle');
             $setting->ldap_country = $request->input('ldap_country');
             $setting->ldap_location = $request->input('ldap_location');
+            $setting->ldap_company = $request->input('ldap_company');
             $setting->ldap_dept = $request->input('ldap_dept');
             $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
             $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
