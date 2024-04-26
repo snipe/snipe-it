@@ -30,7 +30,7 @@ class AssetIndexTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetApiIndexReturnsDisplayUpcomingAuditsDueToday()
+    public function testAssetApiIndexReturnsDisplayUpcomingAuditsDue()
     {
         Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->format('Y-m-d')]);
 
@@ -38,14 +38,13 @@ class AssetIndexTest extends TestCase
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(
-                route('api.asset.to-audit', ['status' => 'due']))
+                route('api.assets.list-upcoming', ['action' => 'audits', 'upcoming_status' => 'due']))
                 ->assertOk()
                 ->assertJsonStructure([
                     'total',
                     'rows',
                 ])
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
-
     }
 
     public function testAssetApiIndexReturnsOverdueForAudit()
@@ -56,7 +55,7 @@ class AssetIndexTest extends TestCase
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(
-                route('api.asset.to-audit', ['status' => 'overdue']))
+                route('api.assets.list-upcoming', ['action' => 'audits', 'upcoming_status' => 'overdue']))
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -66,7 +65,8 @@ class AssetIndexTest extends TestCase
     }
 
 
-    public function testAssetApiIndexReturnsDueForExpectedCheckinToday()
+
+    public function testAssetApiIndexReturnsDueForExpectedCheckin()
     {
         Asset::factory()->count(3)->create(['expected_checkin' => Carbon::now()->format('Y-m-d')]);
 
@@ -74,7 +74,7 @@ class AssetIndexTest extends TestCase
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(
-                route('api.asset.to-checkin', ['status' => 'due'])
+                route('api.assets.list-upcoming', ['action' => 'checkins', 'upcoming_status' => 'due'])
             )
             ->assertOk()
             ->assertJsonStructure([
@@ -91,7 +91,7 @@ class AssetIndexTest extends TestCase
         $this->assertTrue(Asset::count() === 3);
 
         $this->actingAsForApi(User::factory()->superuser()->create())
-            ->getJson(route('api.asset.to-checkin', ['status' => 'overdue']))
+            ->getJson(route('api.assets.list-upcoming', ['action' => 'checkins', 'upcoming_status' => 'overdue']))
             ->assertOk()
             ->assertJsonStructure([
                 'total',
