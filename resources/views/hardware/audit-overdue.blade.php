@@ -47,7 +47,7 @@
                                     data-bulk-form-id="#assetsBulkForm"
                                     id="assetsAuditListingTable"
                                     class="table table-striped snipe-table"
-                                    data-url="{{ route('api.asset.to-audit', ['audit' => 'overdue']) }}"
+                                    data-url="{{ route('api.asset.to-audit', ['status' => 'overdue']) }}"
                                     data-export-options='{
                 "fileName": "export-assets-due-audit-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
