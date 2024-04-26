@@ -1163,10 +1163,15 @@ class Asset extends Depreciable
     public function scopeDueForAudit($query, $settings)
     {
         $interval = $settings->audit_warning_days ?? 0;
+        $today = Carbon::now();
+        $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
+
+        \Log::debug($interval);
+        \Log::debug($today);
+        \Log::debug($interval_date);
 
         return $query->whereNotNull('assets.next_audit_date')
-            ->where('assets.next_audit_date', '>=', Carbon::now())
-            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
+            ->whereBetween('assets.next_audit_date', [$today->format('Y-m-d'), $interval_date])
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
@@ -1188,7 +1193,7 @@ class Asset extends Depreciable
     public function scopeOverdueForAudit($query)
     {
         return $query->whereNotNull('assets.next_audit_date')
-            ->where('assets.next_audit_date', '<', Carbon::now())
+            ->where('assets.next_audit_date', '<', Carbon::now()->format('Y-m-d'))
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
@@ -1209,10 +1214,47 @@ class Asset extends Depreciable
 
     public function scopeDueOrOverdueForAudit($query, $settings)
     {
+
         $interval = $settings->audit_warning_days ?? 0;
+        $today = Carbon::now();
+        $interval_date = $today->copy()->addDays($interval);
 
         return $query->whereNotNull('assets.next_audit_date')
-            ->whereRaw('DATE_SUB('.DB::getTablePrefix()."assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
+            ->where('assets.next_audit_date', '<=', $interval_date);
+    }
+
+
+    /**
+     * Query builder scope for Assets that are OVERDUE for checkin, based on the assets.next_audit_date
+     * and settings.audit_warning_days. It checks to see if assets.expected_checkin is before now
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.4.0
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeOverdueForCheckin($query)
+    {
+        return $query->whereNotNull('assets.expected_checkin')
+            ->where('assets.expected_checkin', '<', Carbon::now()->format('Y-m-d'))
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
+    /**
+     * Query builder scope for Assets that are due for checkin OR overdue, based on the assets.next_audit_date
+     * and settings.audit_warning_days.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.4.0
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDueOrOverdueForCheckin($query, $settings)
+    {
+
+        return $query->whereNotNull('assets.expected_checkin')
+            ->where('assets.expected_checkin', '<', Carbon::now()->format('Y-m-d'))
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
