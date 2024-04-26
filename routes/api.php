@@ -496,12 +496,21 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.assets.show.byserial')
         ->where('any', '.*');
 
-        Route::get('audit/{audit}',
+        // Get assets that are due or overdue for audit
+        Route::get('audit/{status}',
         [
             Api\AssetsController::class, 
             'index'
         ]
         )->name('api.asset.to-audit');
+
+          // Get assets that are due or overdue for checkin
+          Route::get('checkins/{status}',
+              [
+                  Api\AssetsController::class,
+                  'index'
+              ]
+          )->name('api.asset.to-checkin');
 
         Route::post('audit',
         [
