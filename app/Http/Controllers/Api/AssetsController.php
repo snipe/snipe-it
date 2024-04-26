@@ -162,7 +162,6 @@ class AssetsController extends Controller
         switch ($action) {
             case 'audits':
 
-                \Log::debug('audits');
                 switch ($upcoming_status) {
                     case 'due':
                         $assets->DueForAudit($settings);
@@ -177,13 +176,12 @@ class AssetsController extends Controller
                 break;
 
             case 'checkins':
-
                 switch ($upcoming_status) {
                     case 'due':
                         $assets->DueForCheckin($settings);
                         break;
                     case 'overdue':
-                        $assets->OverdueForCheckin($settings);
+                        $assets->OverdueForCheckin();
                         break;
                     case 'due-or-overdue':
                         $assets->DueOrOverdueForCheckin($settings);
