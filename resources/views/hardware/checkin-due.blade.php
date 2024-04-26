@@ -31,7 +31,7 @@
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-file fa-2x" aria-hidden="true"></i>
                           </span>
-                            <badge class="badge">{{ (isset($total_due_for_checkin)) ? $total_due_for_checkin : '' }}</badge>
+                            <span class="badge">{{ (isset($total_due_for_checkin)) ? $total_due_for_checkin : '' }}</span>
                         </a>
                     </li>
                     <li>
@@ -39,7 +39,7 @@
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-file fa-2x" aria-hidden="true"></i>
                           </span>
-                            <badge class="badge">{{ (isset($total_overdue_for_checkin)) ? $total_overdue_for_checkin : '' }}</badge>
+                            <span class="badge">{{ (isset($total_overdue_for_checkin)) ? $total_overdue_for_checkin : '' }}</span>
                         </a>
                     </li>
                 </ul>
