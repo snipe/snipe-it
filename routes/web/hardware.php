@@ -50,26 +50,10 @@ Route::group(
             [AssetsController::class, 'dueForAudit']
         )->name('assets.audit.due');
 
-        Route::get('audit/overdue',
-            [AssetsController::class, 'overdueForAudit']
-        )->name('assets.audit.overdue');
-
-        Route::get('audit/due',
-            [AssetsController::class, 'dueForAudit']
-        )->name('assets.audit.due');
-
-        Route::get('audit/overdue',
-            [AssetsController::class, 'overdueForAudit']
-        )->name('assets.audit.overdue');
-
-        Route::get('audit/due',
-            [AssetsController::class, 'dueForAudit']
-        )->name('assets.audit.due');
-
-        Route::get('audit/overdue',
-            [AssetsController::class, 'overdueForAudit']
-        )->name('assets.audit.overdue');
-
+        Route::get('checkins/due',
+            [AssetsController::class, 'dueForCheckin']
+        )->name('assets.checkins.due');
+        
         Route::get('audit/{id}',
             [AssetsController::class, 'audit']
         )->name('asset.audit.create');
