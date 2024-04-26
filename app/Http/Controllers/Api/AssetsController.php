@@ -159,10 +159,13 @@ class AssetsController extends Controller
         if (Gate::allows('audit', Asset::class)) {
             switch ($audit) {
                 case 'due':
-                    $assets->DueOrOverdueForAudit($settings);
+                    $assets->DueForAudit($settings);
                     break;
                 case 'overdue':
-                    $assets->overdueForAudit($settings);
+                    $assets->OverdueForAudit($settings);
+                    break;
+                case 'duooroverdue':
+                    $assets->DueOrOverdueForAudit($settings);
                     break;
             }
         }
