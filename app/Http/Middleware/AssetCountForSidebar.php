@@ -88,6 +88,20 @@ class AssetCountForSidebar
             \Log::debug($e);
         }
 
+        try {
+            $total_due_for_checkin = Asset::DueForCheckin($settings)->count();
+            view()->share('total_due_for_checkin', $total_due_for_checkin);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_overdue_for_checkin = Asset::OverdueForCheckin($settings)->count();
+            view()->share('total_overdue_for_checkin', $total_overdue_for_checkin);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
         return $next($request);
     }
 }
