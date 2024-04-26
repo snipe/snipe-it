@@ -1241,6 +1241,13 @@ class Asset extends Depreciable
             ->NotArchived();
     }
 
+    /**
+     * Query builder scope for Assets that are overdue for checkin OR overdue
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.4.0
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOverdueForCheckin($query)
     {
         return $query->whereNotNull('assets.expected_checkin')
@@ -1257,7 +1264,6 @@ class Asset extends Depreciable
      * @since v6.4.0
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-
     public function scopeDueOrOverdueForCheckin($query, $settings)
     {
         return $query->where(function ($query) {
