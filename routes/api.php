@@ -504,21 +504,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         ]
         )->name('api.asset.to-audit');
 
-        // Get assets that are due or overdue for audit
-        Route::get('audits/{status}',
-              [
-                  Api\AssetsController::class,
-                  'index'
-              ]
-        )->name('api.assets.to-audit');
 
-        // Get assets that are due or overdue for checkin
-        Route::get('checkins/{status}',
+
+        // This gets the "due or overdue" API endpoints for audits and checkins
+        Route::get('{action}/{upcoming_status}',
               [
                   Api\AssetsController::class,
                   'index'
               ]
-          )->name('api.asset.to-checkin');
+        )->name('api.assets.list-upcoming')
+        ->where(['action' => 'audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
+
+
 
         Route::post('audit',
         [
