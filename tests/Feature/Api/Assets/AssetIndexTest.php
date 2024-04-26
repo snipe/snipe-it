@@ -32,9 +32,7 @@ class AssetIndexTest extends TestCase
 
     public function testAssetApiIndexReturnsDisplayUpcomingAuditsDueToday()
     {
-        $assets = Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->format('Y-m-d')]);
-
-        //dd($assets);
+        Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->format('Y-m-d')]);
 
         $this->assertTrue(Asset::count() === 3);
 
