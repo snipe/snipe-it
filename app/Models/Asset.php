@@ -1246,6 +1246,7 @@ class Asset extends Depreciable
         return $query->whereNotNull('assets.expected_checkin')
             ->whereBetween('assets.expected_checkin', [$today->format('Y-m-d'), $interval_date])
             ->where('assets.archived', '=', 0)
+            ->whereNotNull('assets.assigned_to')
             ->NotArchived();
     }
 
@@ -1254,6 +1255,7 @@ class Asset extends Depreciable
         return $query->whereNotNull('assets.expected_checkin')
             ->where('assets.expected_checkin', '<', Carbon::now()->format('Y-m-d'))
             ->where('assets.archived', '=', 0)
+            ->whereNotNull('assets.assigned_to')
             ->NotArchived();
     }
 
@@ -1272,6 +1274,7 @@ class Asset extends Depreciable
         return $query->whereNotNull('assets.expected_checkin')
             ->where('assets.expected_checkin', '<=', Carbon::now()->format('Y-m-d'))
             ->where('assets.archived', '=', 0)
+            ->whereNotNull('assets.assigned_to')
             ->NotArchived();
     }
 
