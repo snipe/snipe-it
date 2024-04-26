@@ -459,7 +459,6 @@
                                     <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=Deployed') }}">
                                             <i class="far fa-circle text-blue fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.deployed') }}
                                             <badge class="badge">{{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }}</badge>
                                         </a>
@@ -467,7 +466,6 @@
                                     <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=RTD') }}">
                                             <i class="far fa-circle text-green fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.ready_to_deploy') }}
                                             <badge class="badge">{{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }}</badge>
                                         </a>
@@ -475,7 +473,6 @@
                                     <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Pending') }}"><i
                                                     class="far fa-circle text-orange fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.pending') }}
                                             <badge class="badge">{{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }}</badge>
                                         </a>
@@ -483,7 +480,6 @@
                                     <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
                                                 href="{{ url('hardware?status=Undeployable') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.undeployable') }}
                                             <badge class="badge">{{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}</badge>
                                         </a>
@@ -491,7 +487,6 @@
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=byod') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.byod') }}
                                             <badge class="badge">{{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }}</badge>
                                         </a>
@@ -499,7 +494,6 @@
                                     <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Archived') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('admin/hardware/general.archived') }}
                                             <badge class="badge">{{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }}</badge>
                                         </a>
