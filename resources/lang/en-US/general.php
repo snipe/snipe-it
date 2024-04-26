@@ -313,6 +313,7 @@ return [
     'token_expired'         => 'Your form session has expired. Please try again.',
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
+    'audit_due_days'        => 'Assets Due for Audit Within :days Days',
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'Accept :asset',
     'i_accept'              => 'I accept',
