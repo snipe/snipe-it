@@ -59,7 +59,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, $audit = null) 
+    public function index(Request $request, $action = null, $upcoming_status = null)
     {
 
         $filter_non_deprecable_assets = false;
@@ -155,20 +155,46 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
-        // This is used by the audit reporting routes
-        if (Gate::allows('audit', Asset::class)) {
-            switch ($audit) {
-                case 'due':
-                    $assets->DueForAudit($settings);
-                    break;
-                case 'overdue':
-                    $assets->OverdueForAudit($settings);
-                    break;
-                case 'duooroverdue':
-                    $assets->DueOrOverdueForAudit($settings);
-                    break;
+
+        /**
+         * Handle due and overdue audits and checkin dates
+         */
+        switch ($action) {
+            case 'audits':
+
+                \Log::debug('audits');
+                switch ($upcoming_status) {
+                    case 'due':
+                        $assets->DueForAudit($settings);
+                        break;
+                    case 'overdue':
+                        $assets->OverdueForAudit($settings);
+                        break;
+                    case 'due-or-overdue':
+                        $assets->DueOrOverdueForAudit($settings);
+                        break;
+                }
+                break;
+
+            case 'checkins':
+
+                switch ($upcoming_status) {
+                    case 'due':
+                        $assets->DueForCheckin($settings);
+                        break;
+                    case 'overdue':
+                        $assets->OverdueForCheckin($settings);
+                        break;
+                    case 'due-or-overdue':
+                        $assets->DueOrOverdueForCheckin($settings);
+                        break;
+                }
+                break;
             }
-        }
+
+        /**
+         * End handling due and overdue audits and checkin dates
+         */
 
 
         // This is used by the sidenav, mostly
