@@ -7,10 +7,10 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
-
+use Carbon;
 class AssetIndexTest extends TestCase
 {
-    public function testAssetIndexReturnsExpectedAssets()
+    public function testAssetApiIndexReturnsExpectedAssets()
     {
         Asset::factory()->count(3)->create();
 
@@ -30,7 +30,79 @@ class AssetIndexTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetIndexAdheresToCompanyScoping()
+    public function testAssetApiIndexReturnsDisplayUpcomingAuditsDueToday()
+    {
+        $assets = Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->format('Y-m-d')]);
+
+        //dd($assets);
+
+        $this->assertTrue(Asset::count() === 3);
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(
+                route('api.asset.to-audit', ['status' => 'due']))
+                ->assertOk()
+                ->assertJsonStructure([
+                    'total',
+                    'rows',
+                ])
+            ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
+
+    }
+
+    public function testAssetApiIndexReturnsOverdueForAudit()
+    {
+        Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->subDays(1)->format('Y-m-d')]);
+
+        $this->assertTrue(Asset::count() === 3);
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(
+                route('api.asset.to-audit', ['status' => 'overdue']))
+            ->assertOk()
+            ->assertJsonStructure([
+                'total',
+                'rows',
+            ])
+            ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
+    }
+
+
+    public function testAssetApiIndexReturnsDueForExpectedCheckinToday()
+    {
+        Asset::factory()->count(3)->create(['expected_checkin' => Carbon::now()->format('Y-m-d')]);
+
+        $this->assertTrue(Asset::count() === 3);
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(
+                route('api.asset.to-checkin', ['status' => 'due'])
+            )
+            ->assertOk()
+            ->assertJsonStructure([
+                'total',
+                'rows',
+        ])
+        ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
+    }
+
+    public function testAssetApiIndexReturnsOverdueForExpectedCheckin()
+    {
+        Asset::factory()->count(3)->create(['expected_checkin' => Carbon::now()->subDays(1)->format('Y-m-d')]);
+
+        $this->assertTrue(Asset::count() === 3);
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(route('api.asset.to-checkin', ['status' => 'overdue']))
+            ->assertOk()
+            ->assertJsonStructure([
+                'total',
+                'rows',
+            ])
+            ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
+    }
+
+    public function testAssetApiIndexAdheresToCompanyScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
