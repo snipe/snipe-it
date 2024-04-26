@@ -1221,21 +1221,13 @@ class Asset extends Depreciable
 
 
     /**
-     * Query builder scope for Assets that are OVERDUE for checkin, based on the assets.next_audit_date
-     * and settings.audit_warning_days. It checks to see if assets.expected_checkin is before now
+     * Query builder scope for Assets that are DUE for checkin, based on the assets.expected_checkin
+     * and settings.audit_warning_days. It checks to see if assets.expected_checkin is now
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since v6.4.0
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-
-    public function scopeDueForCheckinToday($query)
-    {
-        return $query->whereNotNull('assets.expected_checkin')
-            ->where('assets.expected_checkin', '=', Carbon::now()->format('Y-m-d'))
-            ->where('assets.archived', '=', 0)
-            ->NotArchived();
-    }
 
     public function scopeDueForCheckin($query, $settings)
     {
