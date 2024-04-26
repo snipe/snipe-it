@@ -9,7 +9,6 @@ use App\Notifications\ExpectedCheckinAdminNotification;
 use App\Notifications\ExpectedCheckinNotification;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
 class SendExpectedCheckinAlerts extends Command
 {
@@ -65,7 +64,7 @@ class SendExpectedCheckinAlerts extends Command
                 return new AlertRecipient($item);
             });
 
-            $this->info('Sending Admin ExpectedCheckinNotification to: '.$recipients);
+            $this->info('Sending Admin ExpectedCheckinNotification to: '.$settings->alert_email);
             \Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
 
         }
