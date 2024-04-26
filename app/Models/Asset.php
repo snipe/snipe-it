@@ -74,9 +74,9 @@ class Asset extends Depreciable
         'eol_explicit' => 'boolean',
         'last_checkout' => 'datetime',
         'last_checkin' => 'datetime',
-        'expected_checkin' => 'date',
+        'expected_checkin' => 'datetime:m-d-Y',
         'last_audit_date' => 'datetime',
-        'next_audit_date' => 'date',
+        'next_audit_date' => 'datetime:m-d-Y',
         'model_id'       => 'integer',
         'status_id'      => 'integer',
         'company_id'     => 'integer',
@@ -1166,10 +1166,6 @@ class Asset extends Depreciable
         $today = Carbon::now();
         $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
 
-        \Log::debug($interval);
-        \Log::debug($today);
-        \Log::debug($interval_date);
-
         return $query->whereNotNull('assets.next_audit_date')
             ->whereBetween('assets.next_audit_date', [$today->format('Y-m-d'), $interval_date])
             ->where('assets.archived', '=', 0)
@@ -1233,6 +1229,26 @@ class Asset extends Depreciable
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
 
+    public function scopeDueForCheckinToday($query)
+    {
+        return $query->whereNotNull('assets.expected_checkin')
+            ->where('assets.expected_checkin', '=', Carbon::now()->format('Y-m-d'))
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
+    public function scopeDueForCheckin($query, $settings)
+    {
+        $interval = $settings->audit_warning_days ?? 0;
+        $today = Carbon::now();
+        $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
+
+        return $query->whereNotNull('assets.expected_checkin')
+            ->whereBetween('assets.expected_checkin', [$today->format('Y-m-d'), $interval_date])
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
     public function scopeOverdueForCheckin($query)
     {
         return $query->whereNotNull('assets.expected_checkin')
@@ -1254,7 +1270,7 @@ class Asset extends Depreciable
     {
 
         return $query->whereNotNull('assets.expected_checkin')
-            ->where('assets.expected_checkin', '<', Carbon::now()->format('Y-m-d'))
+            ->where('assets.expected_checkin', '<=', Carbon::now()->format('Y-m-d'))
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
