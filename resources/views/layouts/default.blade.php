@@ -512,12 +512,15 @@
                                                 <badge class="badge">{{ (isset($total_due_for_audit)) ? $total_due_for_audit : '' }}</badge>
                                             </a>
                                         </li>
-                                        <li{!! (Request::is('hardware/audit/overdue') ? ' class="active"' : '') !!}>
-                                            <a href="{{ route('assets.audit.overdue') }}">
-                                                <i class="fas fa-exclamation-triangle text-red fa-fw"></i> {{ trans('general.audit_overdue') }}
-                                                <badge class="badge">{{ (isset($total_overdue_for_audit)) ? $total_overdue_for_audit : '' }}</badge>
-                                            </a>
-                                        </li>
+                                    @endcan
+
+                                    @can('checkin', \App\Models\Asset::class)
+                                    <li{!! (Request::is('hardware/checkins/due') ? ' class="active"' : '') !!}>
+                                        <a href="{{ route('assets.checkins.due') }}">
+                                            <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.checkin_due') }}
+                                            <badge class="badge">{{ (isset($total_overdue_for_checkin)) ? $total_overdue_for_checkin : '' }}</badge>
+                                        </a>
+                                    </li>
                                     @endcan
 
                                     <li class="divider">&nbsp;</li>
