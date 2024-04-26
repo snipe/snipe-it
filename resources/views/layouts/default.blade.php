@@ -509,7 +509,7 @@
                                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.due') }}">
                                                 <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.audit_due') }}
-                                                <badge class="badge">{{ (isset($total_due_for_audit)) ? $total_due_for_audit : '' }}</badge>
+                                                <badge class="badge">{{ (isset($total_due_and_overdue_for_audit)) ? $total_due_and_overdue_for_audit : '' }}</badge>
                                             </a>
                                         </li>
                                     @endcan
@@ -518,7 +518,7 @@
                                     <li{!! (Request::is('hardware/checkins/due') ? ' class="active"' : '') !!}>
                                         <a href="{{ route('assets.checkins.due') }}">
                                             <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.checkin_due') }}
-                                            <badge class="badge">{{ (isset($total_overdue_for_checkin)) ? $total_overdue_for_checkin : '' }}</badge>
+                                            <badge class="badge">{{ (isset($total_due_and_overdue_for_checkin)) ? $total_due_and_overdue_for_checkin : '' }}</badge>
                                         </a>
                                     </li>
                                     @endcan

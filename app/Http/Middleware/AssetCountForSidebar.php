@@ -102,6 +102,9 @@ class AssetCountForSidebar
             \Log::debug($e);
         }
 
+        view()->share('total_due_and_overdue_for_checkin', ($total_due_for_checkin + $total_overdue_for_checkin));
+        view()->share('total_due_and_overdue_for_audit', ($total_due_for_audit + $total_overdue_for_audit));
+
         return $next($request);
     }
 }
