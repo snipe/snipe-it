@@ -437,6 +437,9 @@
                                         <a href="{{ url('hardware') }}">
                                             <i class="far fa-circle text-grey fa-fw" aria-hidden="true"></i>
                                             {{ trans('general.list_all') }}
+                                            <badge class="badge badge-secondary">
+                                                {{ (isset($total_assets)) ? $total_assets : '' }}
+                                            </badge>
                                         </a>
                                     </li>
 
@@ -447,7 +450,8 @@
                                                 <a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
                                                     <i class="fas fa-circle text-grey fa-fw"
                                                        aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
-                                                    {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
+                                                    {{ $status_nav->name }}
+                                                    <badge class="badge badge-secondary">{{ $status_nav->asset_count }})</badge></a></li>
                                         @endforeach
                                     @endif
 
@@ -457,7 +461,7 @@
                                             <i class="far fa-circle text-blue fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.deployed') }}
-                                            ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
+                                            <badge class="badge badge-secondary">{{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }}</badge>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
@@ -465,7 +469,7 @@
                                             <i class="far fa-circle text-green fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.ready_to_deploy') }}
-                                            ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
+                                            <badge class="badge badge-secondary">{{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }}</badge>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a
@@ -473,7 +477,7 @@
                                                     class="far fa-circle text-orange fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.pending') }}
-                                            ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
+                                            <badge class="badge badge-secondary">{{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }}</badge>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
@@ -481,7 +485,7 @@
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.undeployable') }}
-                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
+                                            <badge class="badge badge-secondary">{{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}</badge>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
@@ -489,7 +493,7 @@
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.byod') }}
-                                            ({{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }})
+                                            <badge class="badge badge-secondary">{{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }}</badge>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a
@@ -497,7 +501,7 @@
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('admin/hardware/general.archived') }}
-                                            ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
+                                            <badge class="badge badge-secondary">{{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }}</badge>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a
@@ -511,11 +515,13 @@
                                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.due') }}">
                                                 <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.audit_due') }}
+                                                <badge class="badge badge-secondary">{{ (isset($total_due_for_audit)) ? $total_due_for_audit : '' }}</badge>
                                             </a>
                                         </li>
                                         <li{!! (Request::is('hardware/audit/overdue') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.overdue') }}">
                                                 <i class="fas fa-exclamation-triangle text-red fa-fw"></i> {{ trans('general.audit_overdue') }}
+                                                <badge class="badge badge-secondary">{{ (isset($total_overdue_for_audit)) ? $total_overdue_for_audit : '' }}</badge>
                                             </a>
                                         </li>
                                     @endcan
