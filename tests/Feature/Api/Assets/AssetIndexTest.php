@@ -68,7 +68,7 @@ class AssetIndexTest extends TestCase
 
     public function testAssetApiIndexReturnsDueForExpectedCheckin()
     {
-        Asset::factory()->count(3)->create(['expected_checkin' => Carbon::now()->format('Y-m-d')]);
+        Asset::factory()->count(3)->create(['assigned_to' => '1', 'expected_checkin' => Carbon::now()->format('Y-m-d')]);
 
         $this->assertTrue(Asset::count() === 3);
 
@@ -86,7 +86,7 @@ class AssetIndexTest extends TestCase
 
     public function testAssetApiIndexReturnsOverdueForExpectedCheckin()
     {
-        Asset::factory()->count(3)->create(['expected_checkin' => Carbon::now()->subDays(1)->format('Y-m-d')]);
+        Asset::factory()->count(3)->create(['assigned_to' => '1', 'expected_checkin' => Carbon::now()->subDays(1)->format('Y-m-d')]);
 
         $this->assertTrue(Asset::count() === 3);
 
