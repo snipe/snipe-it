@@ -84,18 +84,18 @@ class ConsumableCheckoutController extends Controller
             // Redirect to the consumable management page with error
             return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
-
+        $quantity = $request->input('assigned_qty');
         // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
-        for($qty=0;$qty< $request->input('assigned_qty'); $qty++) {
+        for($qty=0;$qty < $quantity; $qty++) {
             $consumable->users()->attach($consumable->id, [
                 'consumable_id' => $consumable->id,
                 'user_id' => $admin_user->id,
                 'assigned_to' => e($request->input('assigned_to')),
                 'note' => $request->input('note'),
             ]);
-                event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
         }
+                event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), [], $quantity));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

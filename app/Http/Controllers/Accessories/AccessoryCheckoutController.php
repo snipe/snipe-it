@@ -81,11 +81,11 @@ class AccessoryCheckoutController extends Controller
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
         }
 
-
+        $quantity =$request->input('assigned_qty');
         // Update the accessory data
         $accessory->assigned_to = e($request->input('assigned_to'));
 
-        for($qty=0;$qty< $request->input('assigned_qty'); $qty++) {
+        for($qty=0;$qty< $quantity; $qty++) {
             $accessory->users()->attach($accessory->id, [
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
@@ -93,8 +93,9 @@ class AccessoryCheckoutController extends Controller
                 'assigned_to' => $request->get('assigned_to'),
                 'note' => $request->input('note'),
             ]);
-            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
         }
+
+            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note'), [], $quantity ));
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 

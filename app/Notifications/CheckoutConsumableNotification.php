@@ -30,11 +30,12 @@ class CheckoutConsumableNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
+    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note, $quantity)
     {
         $this->item = $consumable;
         $this->admin = $checkedOutBy;
         $this->note = $note;
+        $this->quantity = $quantity;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
 
@@ -183,6 +184,7 @@ class CheckoutConsumableNotification extends Notification
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
+                'quantity'      => $this->quantity,
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,

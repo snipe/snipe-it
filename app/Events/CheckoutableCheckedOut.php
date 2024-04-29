@@ -12,6 +12,7 @@ class CheckoutableCheckedOut
 
     public $checkoutable;
     public $checkedOutTo;
+    public $quantity;
     public $checkedOutBy;
     public $note;
     public $originalValues;
@@ -21,11 +22,12 @@ class CheckoutableCheckedOut
      *
      * @return void
      */
-    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $originalValues = [])
+    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $originalValues = [], $quantity=null)
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
         $this->checkedOutBy = $checkedOutBy;
+        $this->quantity = $quantity;
         $this->note = $note;
         $this->originalValues = $originalValues;
     }
