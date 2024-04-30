@@ -39,6 +39,9 @@
 					<div class="dynamic-form-row">
 						@include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 					</div>
+                    <div class="dynamic-form-row">
+                        @include ('partials.forms.edit.location-profile-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
+                    </div>
                     
                     <div class="dynamic-form-row">
                         <div class="col-md-3 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}:</label></div>
