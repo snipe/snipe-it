@@ -144,7 +144,6 @@ class AssetFilesController extends Controller
                 ];
 
                 return Storage::download($file, $log->filename, $headers);
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.upload.success')));
             }
 
             return StorageHelper::downloader($file);
