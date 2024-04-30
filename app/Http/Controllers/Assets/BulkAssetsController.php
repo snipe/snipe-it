@@ -214,7 +214,7 @@ class BulkAssetsController extends Controller
         }
 
 
-        $assets = Asset::whereIn('id', array_keys($request->input('ids')))->get();
+        $assets = Asset::whereIn('id', $request->input('ids'))->get();
 
 
 
