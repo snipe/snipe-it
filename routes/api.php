@@ -554,7 +554,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         Route::get('{asset_id}/files',
           [
               Api\AssetFilesController::class,
-              'show'
+              'list'
           ]
         )->name('api.assets.files');
 

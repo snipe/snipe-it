@@ -12,6 +12,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\Actionlog;
 use \Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DB;
@@ -54,34 +55,54 @@ class AssetFilesController extends Controller
 
         $this->authorize('update', $asset);
 
-	\Log::warning($request);
-	#\Log::warning($request['name']);
-	#\Log::warning($request['filename']);
-	#\Log::warning($request['contents']);
         if ($request->hasFile('file')) {
-	    \Log::warning("So, I am actually getting in here...");
             if (! Storage::exists('private_uploads/assets')) {
                 Storage::makeDirectory('private_uploads/assets', 775);
             }
 
-	    \Log::warning("File is");
-	    \Log::warning($request->file('file'));
-	    \Log::warning("File ends");
             foreach ($request->file('file') as $file) {
-                \Log::warning("Handling file ");
-		\Log::warning($file);
                 $file_name = $request->handleFile('private_uploads/assets/','hardware-'.$asset->id, $file);
                 
                 $asset->logUpload($file_name, e($request->get('notes')));
             }
-	    \Log::warning("Done handling");
-	    #$request->IamAnOrange();
 
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.upload.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, "Bad bananas"), 500);
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.upload.nofiles')), 500);
+    }
+
+    /**
+     * List the files for an asset.
+     *
+     * @param  int $assetId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v6.0]
+     * @author [T. Scarsbrook] [<snipe@scarzybrook.co.uk>]
+     */
+    public function list($assetId = null)
+    {
+        $asset = Asset::find($assetId);
+	
+	// the asset is valid
+        if (isset($asset->id)) {
+            $this->authorize('view', $asset);
+
+            if ($asset->uploads->count() > 0) {
+                $files = array();
+                foreach ($asset->uploads as $upload) {
+                    array_push($files, $upload);
+                }
+                return response()->json(Helper::formatStandardApiResponse('success', $files, trans('admin/hardware/message.upload.success')));
+            }
+            
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.no_match', ['id' => $fileId])), 500);
+        }
+
+        // Send back an error message
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.error', ['id' => $fileId])), 500);
     }
 
     /**
