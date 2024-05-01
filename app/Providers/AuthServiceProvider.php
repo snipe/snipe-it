@@ -145,6 +145,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+        Gate::define('dashboard', function ($user) {
+            if ($user->hasAccess('dashboard')) {
+                return true;
+            }
+        });
 
 
         Gate::define('licenses.files', function ($user) {
