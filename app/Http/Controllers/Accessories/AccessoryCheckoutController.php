@@ -73,7 +73,7 @@ class AccessoryCheckoutController extends Controller
         $this->authorize('checkout', $accessory);
 
         if (!$user = User::find($request->input('assigned_to'))) {
-            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
+            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'))->withInput();
         }
 
         // Make sure there is at least one available to checkout
@@ -85,14 +85,19 @@ class AccessoryCheckoutController extends Controller
         // Update the accessory data
         $accessory->assigned_to = e($request->input('assigned_to'));
 
-        for($qty=0;$qty< $quantity; $qty++) {
-            $accessory->users()->attach($accessory->id, [
-                'accessory_id' => $accessory->id,
-                'created_at' => Carbon::now(),
-                'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to'),
-                'note' => $request->input('note'),
-            ]);
+        if(!is_numeric($quantity)){
+            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.invalid_qty'))->withInput();
+        }
+        else {
+            for ($qty = 0; $qty < $quantity; $qty++) {
+                $accessory->users()->attach($accessory->id, [
+                    'accessory_id' => $accessory->id,
+                    'created_at' => Carbon::now(),
+                    'user_id' => Auth::id(),
+                    'assigned_to' => $request->get('assigned_to'),
+                    'note' => $request->input('note'),
+                ]);
+            }
         }
 
             event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note'), [], $quantity ));
