@@ -64,6 +64,9 @@ class AccessoryCheckoutController extends Controller
      */
     public function store(Request $request, $accessoryId)
     {
+        $validated = $request->validate([
+            'assigned_qty' => 'required|numeric',
+        ]);
         // Check if the accessory exists
         if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
             // Redirect to the accessory management page with error
@@ -85,10 +88,6 @@ class AccessoryCheckoutController extends Controller
         // Update the accessory data
         $accessory->assigned_to = e($request->input('assigned_to'));
 
-        if(!is_numeric($quantity)){
-            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.invalid_qty'))->withInput();
-        }
-        else {
             for ($qty = 0; $qty < $quantity; $qty++) {
                 $accessory->users()->attach($accessory->id, [
                     'accessory_id' => $accessory->id,
@@ -98,8 +97,6 @@ class AccessoryCheckoutController extends Controller
                     'note' => $request->input('note'),
                 ]);
             }
-        }
-
             event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note'), [], $quantity ));
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();

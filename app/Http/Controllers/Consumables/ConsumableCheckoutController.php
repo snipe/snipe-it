@@ -65,6 +65,10 @@ class ConsumableCheckoutController extends Controller
      */
     public function store(Request $request, $consumableId)
     {
+        $validated = $request->validate([
+            'assigned_qty' => 'required|numeric',
+        ]);
+
         if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
@@ -87,10 +91,6 @@ class ConsumableCheckoutController extends Controller
         $quantity = $request->input('assigned_qty');
         $consumable->assigned_to = e($request->input('assigned_to'));
 
-        if(!is_numeric($quantity)){
-            return redirect()->route('accessories.checkout.show', $consumable)->with('error', trans('admin/accessories/message.checkout.invalid_qty'))->withInput();
-        }
-        else {
             // Update the consumable data
             for ($qty = 0; $qty < $quantity; $qty++) {
                 $consumable->users()->attach($consumable->id, [
@@ -100,7 +100,6 @@ class ConsumableCheckoutController extends Controller
                     'note' => $request->input('note'),
                 ]);
             }
-        }
                 event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), [], $quantity));
 
         // Redirect to the new consumable page

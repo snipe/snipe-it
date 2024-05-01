@@ -43,13 +43,14 @@ class AccessoryCheckoutTest extends TestCase
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
+        $quantity = 1;
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
-            ->post(route('accessories.checkout.store', $accessory), [
+            ->post(route('accessories.checkout.store', $accessory, $quantity), [
                 'assigned_to' => $user->id,
             ]);
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertTrue($accessory->users->contains($user), $event->qty == $quantity);
     }
 
     public function testUserSentNotificationUponCheckout()
