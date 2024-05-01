@@ -65,9 +65,6 @@ class ConsumableCheckoutController extends Controller
      */
     public function store(Request $request, $consumableId)
     {
-        $validated = $request->validate([
-            'assigned_qty' => 'required|numeric|min:1',
-        ]);
 
         if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
@@ -88,6 +85,10 @@ class ConsumableCheckoutController extends Controller
             // Redirect to the consumable management page with error
             return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
+
+        $validated = $request->validate([
+            'assigned_qty' => 'required|numeric|min:1',
+        ]);
         $quantity = $request->input('assigned_qty');
         $consumable->assigned_to = e($request->input('assigned_to'));
 

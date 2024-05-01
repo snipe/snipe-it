@@ -36,6 +36,7 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->post(route('accessories.checkout.store', Accessory::factory()->withoutItemsRemaining()->create()), [
                 'assigned_to' => User::factory()->create()->id,
+                'assigned_qty'=> 1,
             ])
             ->assertSessionHas('error');
     }
@@ -69,6 +70,7 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 1,
             ]);
 
         Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
@@ -84,6 +86,7 @@ class AccessoryCheckoutTest extends TestCase
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
                 'note' => 'oh hi there',
+                'assigned_qty'=> 1,
             ]);
 
         $this->assertEquals(
