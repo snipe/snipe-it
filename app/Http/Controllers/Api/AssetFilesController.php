@@ -178,13 +178,12 @@ class AssetFilesController extends Controller
                 }
                 $log->delete();
 
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.success')), 200);
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.deletefile.success')), 200);
             }
 
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.success')), 200);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.error')), 500);
         }
 
-        // Redirect to the hardware management page
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.error')), 500);
     }
 }
