@@ -179,10 +179,10 @@ class AssetFilesController extends Controller
                 }
                 $log->delete();
 
-                return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.success')), 200);
             }
 
-            return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.success')), 200);
         }
 
         // Redirect to the hardware management page
