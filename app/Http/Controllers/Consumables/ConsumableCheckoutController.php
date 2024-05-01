@@ -88,7 +88,7 @@ class ConsumableCheckoutController extends Controller
         $consumable->assigned_to = e($request->input('assigned_to'));
 
         if(!is_numeric($quantity)){
-            return redirect()->route('accessories.checkout.show', $consumable)->with('error', trans('admin/accessories/message.checkout.invalid_qty'))->withInput();
+            return redirect()->route('accessories.checkout.show', $consumable)->with('error', trans('admin/accessories/message.checkout.invalid_qty'));
         }
         else {
             // Update the consumable data

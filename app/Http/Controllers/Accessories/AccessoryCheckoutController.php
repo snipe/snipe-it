@@ -73,7 +73,7 @@ class AccessoryCheckoutController extends Controller
         $this->authorize('checkout', $accessory);
 
         if (!$user = User::find($request->input('assigned_to'))) {
-            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'))->withInput();
+            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
 
         // Make sure there is at least one available to checkout
@@ -86,7 +86,7 @@ class AccessoryCheckoutController extends Controller
         $accessory->assigned_to = e($request->input('assigned_to'));
 
         if(!is_numeric($quantity)){
-            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.invalid_qty'))->withInput();
+            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.invalid_qty'));
         }
         else {
             for ($qty = 0; $qty < $quantity; $qty++) {
