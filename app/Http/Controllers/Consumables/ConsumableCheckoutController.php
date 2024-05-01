@@ -85,15 +85,21 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
         $quantity = $request->input('assigned_qty');
-        // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
-        for($qty=0;$qty < $quantity; $qty++) {
-            $consumable->users()->attach($consumable->id, [
-                'consumable_id' => $consumable->id,
-                'user_id' => $admin_user->id,
-                'assigned_to' => e($request->input('assigned_to')),
-                'note' => $request->input('note'),
-            ]);
+
+        if(!is_numeric($quantity)){
+            return redirect()->route('accessories.checkout.show', $consumable)->with('error', trans('admin/accessories/message.checkout.invalid_qty'));
+        }
+        else {
+            // Update the consumable data
+            for ($qty = 0; $qty < $quantity; $qty++) {
+                $consumable->users()->attach($consumable->id, [
+                    'consumable_id' => $consumable->id,
+                    'user_id' => $admin_user->id,
+                    'assigned_to' => e($request->input('assigned_to')),
+                    'note' => $request->input('note'),
+                ]);
+            }
         }
                 event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), [], $quantity));
 
