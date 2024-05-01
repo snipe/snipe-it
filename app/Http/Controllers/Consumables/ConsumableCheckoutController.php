@@ -72,6 +72,12 @@ class ConsumableCheckoutController extends Controller
 
         $this->authorize('checkout', $consumable);
 
+        // Check if the user exists
+        $assigned_to = e($request->input('assigned_to'));
+        if (is_null($user = User::find($assigned_to))) {
+            // Redirect to the consumable management page with error
+            return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
+        }
         $validated = $request->validate([
             'assigned_qty' => 'required|numeric|min:1',
         ]);
@@ -82,13 +88,7 @@ class ConsumableCheckoutController extends Controller
         }
 
         $admin_user = Auth::user();
-        $assigned_to = e($request->input('assigned_to'));
 
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
-            // Redirect to the consumable management page with error
-            return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
-        }
 
         $consumable->assigned_to = e($request->input('assigned_to'));
 

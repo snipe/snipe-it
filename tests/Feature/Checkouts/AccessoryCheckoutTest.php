@@ -43,7 +43,7 @@ class AccessoryCheckoutTest extends TestCase
 
     public function testAccessoryCanBeCheckedOut()
     {
-        $accessory = Accessory::factory()->create();
+        $accessory = Accessory::factory()->create(['qty' => 2]);
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
