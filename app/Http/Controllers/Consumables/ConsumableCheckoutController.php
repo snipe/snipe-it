@@ -72,8 +72,12 @@ class ConsumableCheckoutController extends Controller
 
         $this->authorize('checkout', $consumable);
 
+        $validated = $request->validate([
+            'assigned_qty' => 'required|numeric|min:1',
+        ]);
+        $quantity = $request->input('assigned_qty');
         // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0) {
+        if ($consumable->numRemaining() <= 0 || $consumable->numRemaining() < $quantity) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
         }
 
@@ -86,10 +90,6 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
 
-        $validated = $request->validate([
-            'assigned_qty' => 'required|numeric|min:1',
-        ]);
-        $quantity = $request->input('assigned_qty');
         $consumable->assigned_to = e($request->input('assigned_to'));
 
             // Update the consumable data
