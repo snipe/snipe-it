@@ -86,17 +86,17 @@ class AssetsBulkEditTest extends TestCase
         $ram = CustomField::factory()->ram()->create();
         $cpu = CustomField::factory()->cpu()->create();
 
-        $assets = Asset::factory()->laptopMbp()->count(10)->hasMultipleCustomFields([$mac_address, $ram, $cpu])->create([
+        $assets = Asset::factory()->count(10)->hasMultipleCustomFields([$mac_address, $ram, $cpu])->create([
             $ram->db_column => 8,
             $cpu->db_column => '2.1',
         ]);
 
+        // seems like the fieldset is random, so bulkedit isn't working because assets don't have the "correct" fieldset
+        // look into more tomorrow
+        dd(Asset::find(1)->model->fieldset);
+
         $id_array = $assets->pluck('id')->toArray();
 
-        // submits the ids and new values for each attribute
-        $asset = Asset::find(1);
-
-        $this->assertEquals(8, $asset->{$ram->db_column});
         $this->actingAs(User::factory()->editAssets()->create())->post(route('hardware/bulksave'), [
             'ids'           => $id_array,
             $ram->db_column => 16,

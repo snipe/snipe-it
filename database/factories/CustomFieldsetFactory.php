@@ -58,6 +58,7 @@ class CustomFieldsetFactory extends Factory
     {
         return $this->afterCreating(function (CustomFieldset $fieldset) {
             if (empty($fields)) {
+                //why are there two after creating and why does it break if i remove one
                 return $this->afterCreating(function (CustomFieldset $fieldset) {
                     $mac_address = CustomField::factory()->macAddress()->create();
                     $ram = CustomField::factory()->ram()->create();

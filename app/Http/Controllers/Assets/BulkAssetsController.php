@@ -195,6 +195,7 @@ class BulkAssetsController extends Controller
      */
     public function update(Request $request)
     {
+        //dd($request->all());
         $this->authorize('update', Asset::class);
         $has_errors = 0;
         $error_array = array();
