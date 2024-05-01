@@ -418,14 +418,14 @@
                 <section class="sidebar">
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
-                        @can('admin')
+                        @canany(['admin', 'dashboard'])
                             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!} class="firstnav">
                                 <a href="{{ route('home') }}">
                                     <i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i>
                                     <span>{{ trans('general.dashboard') }}</span>
                                 </a>
                             </li>
-                        @endcan
+                        @endcanany
                         @can('index', \App\Models\Asset::class)
                             <li class="treeview{{ ((Request::is('statuslabels/*') || Request::is('hardware*')) ? ' active' : '') }}">
                                 <a href="#"><i class="fas fa-barcode fa-fw" aria-hidden="true"></i>

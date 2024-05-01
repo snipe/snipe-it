@@ -35,6 +35,14 @@ return [
             'display'    => true,
         ],
     ],
+    'Dash Board' => [
+        [
+            'permission' => 'dashboard',
+            'label'      => 'View',
+            'note'       => 'This will allow users to view the dash board.',
+            'display'    => true,
+        ],
+    ],
 
     'Reports' => [
         [
