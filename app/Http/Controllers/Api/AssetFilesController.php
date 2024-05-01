@@ -83,7 +83,9 @@ class AssetFilesController extends Controller
      */
     public function list($assetId = null)
     {
-        $asset = Asset::find($assetId);
+        if (! $asset = Asset::find($assetId)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+        }
 	
 	// the asset is valid
         if (isset($asset->id)) {
@@ -116,7 +118,10 @@ class AssetFilesController extends Controller
      */
     public function show($assetId = null, $fileId = null)
     {
-        $asset = Asset::find($assetId);
+        if (! $asset = Asset::find($assetId)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+        }
+
         // the asset is valid
         if (isset($asset->id)) {
             $this->authorize('view', $asset);
@@ -164,8 +169,10 @@ class AssetFilesController extends Controller
      */
     public function destroy($assetId = null, $fileId = null)
     {
-        $asset = Asset::find($assetId);
-        $this->authorize('update', $asset);
+        if (! $asset = Asset::find($assetId)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+        }
+
         $rel_path = 'private_uploads/assets';
 
         // the asset is valid
