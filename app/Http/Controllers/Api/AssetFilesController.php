@@ -69,7 +69,6 @@ class AssetFilesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.upload.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, "Bad bananas"), 500);
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.upload.nofiles')), 500);
     }
 
