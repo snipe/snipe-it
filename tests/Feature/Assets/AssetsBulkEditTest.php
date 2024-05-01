@@ -5,10 +5,10 @@ namespace Tests\Feature\Assets;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\CustomField;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Carbon\Carbon;
 use Tests\TestCase;
 
 class AssetsBulkEditTest extends TestCase
@@ -44,7 +44,7 @@ class AssetsBulkEditTest extends TestCase
         $id_array = $assets->pluck('id')->toArray();
 
         // submits the ids and new values for each attribute
-        $response = $this->actingAs(User::factory()->editAssets()->create())->post(route('hardware/bulksave'), [
+        $this->actingAs(User::factory()->editAssets()->create())->post(route('hardware/bulksave'), [
             'ids'              => $id_array,
             'purchase_date'    => '2024-01-01',
             'expected_checkin' => '2024-01-01',
@@ -73,12 +73,39 @@ class AssetsBulkEditTest extends TestCase
             $this->assertEquals(7890, $asset->order_number);
             $this->assertEquals(36, $asset->warranty_months);
             $this->assertEquals('2025-01-01', $asset->next_audit_date->format('Y-m-d'));
-            // shouldn't requestable be cast as a boolean???
+            // shouldn't requestable be cast as a boolean??? it's not.
             $this->assertEquals(1, $asset->requestable);
         });
+    }
 
-        $this->assertDatabaseHas('assets', [
-            'purchase_date' => '2024-01-01'
+    public function testBulkEditAssetsAcceptsAndUpdatesUnencryptedCustomFields()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $mac_address = CustomField::factory()->macAddress()->create();
+        $ram = CustomField::factory()->ram()->create();
+        $cpu = CustomField::factory()->cpu()->create();
+
+        $assets = Asset::factory()->laptopMbp()->count(10)->hasMultipleCustomFields([$mac_address, $ram, $cpu])->create([
+            $ram->db_column => 8,
+            $cpu->db_column => '2.1',
         ]);
+
+        $id_array = $assets->pluck('id')->toArray();
+
+        // submits the ids and new values for each attribute
+        $asset = Asset::find(1);
+
+        $this->assertEquals(8, $asset->{$ram->db_column});
+        $this->actingAs(User::factory()->editAssets()->create())->post(route('hardware/bulksave'), [
+            'ids'           => $id_array,
+            $ram->db_column => 16,
+            $cpu->db_column => '4.1',
+        ]);
+
+        Asset::findMany($id_array)->each(function (Asset $asset) use ($ram, $cpu, $mac_address) {
+            $this->assertEquals(16, $asset->{$ram->db_column});
+            $this->assertEquals('4.1', $asset->{$ram->db_column});
+        });
     }
 }
