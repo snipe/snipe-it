@@ -54,13 +54,4 @@ class AccessoryTest extends TestCase
             ]);
         $this->assertInstanceOf(Manufacturer::class, $accessory->manufacturer);
     }
-    public function testCheckOutAccessory()
-    {
-        $accessory = Accessory::factory()->appleBtKeyboard()->create(
-            [
-                'category_id' => Category::factory()->create(),
-                'manufacturer_id' => Manufacturer::factory()->apple()->create()
-            ]);
-        $this->assertInstanceOf(Manufacturer::class, $accessory->manufacturer);
-    }
 }
