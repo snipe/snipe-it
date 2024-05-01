@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Checkouts;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\User;
@@ -43,14 +44,19 @@ class AccessoryCheckoutTest extends TestCase
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
-        $quantity = 1;
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
-            ->post(route('accessories.checkout.store', $accessory, $quantity), [
+            ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 2,
             ]);
 
-        $this->assertTrue($accessory->users->contains($user), $event->qty == $quantity);
+        $this->assertEquals(
+            2,
+            $accessory->users->filter(function ($u) use ($user) {
+                return $u->id==$user->id;
+            })->count()
+        );
     }
 
     public function testUserSentNotificationUponCheckout()

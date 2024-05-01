@@ -66,7 +66,7 @@ class ConsumableCheckoutController extends Controller
     public function store(Request $request, $consumableId)
     {
         $validated = $request->validate([
-            'assigned_qty' => 'required|numeric',
+            'assigned_qty' => 'required|numeric|min:1',
         ]);
 
         if (is_null($consumable = Consumable::with('users')->find($consumableId))) {

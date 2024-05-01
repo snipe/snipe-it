@@ -47,9 +47,14 @@ class ConsumableCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutConsumables()->create())
             ->post(route('consumables.checkout.store', $consumable), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 3,
             ]);
-
-        $this->assertTrue($user->consumables->contains($consumable));
+        $this->assertEquals(
+            3,
+            $consumable->users->filter(function ($u) use ($user) {
+                return $u->id === $user->id;
+            })->count()
+        );
     }
 
     public function testUserSentNotificationUponCheckout()

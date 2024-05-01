@@ -65,7 +65,7 @@ class AccessoryCheckoutController extends Controller
     public function store(Request $request, $accessoryId)
     {
         $validated = $request->validate([
-            'assigned_qty' => 'required|numeric',
+            'assigned_qty' => 'required|numeric|min:1',
         ]);
         // Check if the accessory exists
         if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
