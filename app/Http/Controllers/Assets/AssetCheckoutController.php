@@ -10,6 +10,7 @@ use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AssetCheckoutController extends Controller
 {
@@ -97,11 +98,14 @@ class AssetCheckoutController extends Controller
                     return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
                 }
             }
-            
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
-                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+            $redirect_option = $request->get('redirect_option');
+            if($redirect_option != Session::get('redirect_option')) {
+                Session::put('redirect_option', $redirect_option);
             }
 
+            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
+                return Helper::getRedirectOption($request, $assetId);
+            }
             // Redirect to the asset management page with error
             return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
         } catch (ModelNotFoundException $e) {

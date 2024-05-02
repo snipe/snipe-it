@@ -14,6 +14,7 @@ use App\Models\Statuslabel;
 use App\Models\License;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Session;
 use Image;
 use Carbon\Carbon;
 
@@ -1459,4 +1460,27 @@ class Helper
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
+
+    static public function getRedirectOption($request, $assetId)
+    {
+        $redirect_option = session::get('redirect_option');
+
+        if ($redirect_option == '0') {
+            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+        }
+        if ($redirect_option == '1') {
+            return redirect()->route('hardware.show', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
+        }
+        if ($redirect_option == '2') {
+            if ($request->assigned_location != null) {
+                return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        if ($redirect_option == '3') {
+            if ($request->assigned_location != null) {
+
+                return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+    }
 }
