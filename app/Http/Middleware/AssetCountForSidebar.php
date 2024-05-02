@@ -82,7 +82,7 @@ class AssetCountForSidebar
         }
 
         try {
-            $total_overdue_for_audit = Asset::OverdueForAudit($settings)->count();
+            $total_overdue_for_audit = Asset::OverdueForAudit()->count();
             view()->share('total_overdue_for_audit', $total_overdue_for_audit);
         } catch (\Exception $e) {
             \Log::debug($e);
@@ -96,7 +96,7 @@ class AssetCountForSidebar
         }
 
         try {
-            $total_overdue_for_checkin = Asset::OverdueForCheckin($settings)->count();
+            $total_overdue_for_checkin = Asset::OverdueForCheckin()->count();
             view()->share('total_overdue_for_checkin', $total_overdue_for_checkin);
         } catch (\Exception $e) {
             \Log::debug($e);
