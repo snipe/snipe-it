@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Asset;
 use Auth;
 use Closure;
+use App\Models\Setting;
 
 class AssetCountForSidebar
 {
@@ -20,6 +21,13 @@ class AssetCountForSidebar
         try {
             $total_rtd_sidebar = Asset::RTD()->count();
             view()->share('total_rtd_sidebar', $total_rtd_sidebar);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_assets = Asset::RTD()->count();
+            view()->share('total_assets', $total_assets);
         } catch (\Exception $e) {
             \Log::debug($e);
         }
@@ -58,6 +66,44 @@ class AssetCountForSidebar
         } catch (\Exception $e) {
             \Log::debug($e);
         }
+
+        try {
+            $settings = Setting::getSettings();
+            view()->share('settings', $settings);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_due_for_audit = Asset::DueForAudit($settings)->count();
+            view()->share('total_due_for_audit', $total_due_for_audit);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_overdue_for_audit = Asset::OverdueForAudit()->count();
+            view()->share('total_overdue_for_audit', $total_overdue_for_audit);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_due_for_checkin = Asset::DueForCheckin($settings)->count();
+            view()->share('total_due_for_checkin', $total_due_for_checkin);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_overdue_for_checkin = Asset::OverdueForCheckin()->count();
+            view()->share('total_overdue_for_checkin', $total_overdue_for_checkin);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        view()->share('total_due_and_overdue_for_checkin', ($total_due_for_checkin + $total_overdue_for_checkin));
+        view()->share('total_due_and_overdue_for_audit', ($total_due_for_audit + $total_overdue_for_audit));
 
         return $next($request);
     }

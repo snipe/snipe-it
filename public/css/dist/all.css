@@ -22654,6 +22654,11 @@ input[type="radio"]:checked::before {
 .datepicker.dropdown-menu {
   z-index: 1030 !important;
 }
+.sidebar-menu > li .badge {
+  margin-top: 0px;
+  filter: brightness(70%);
+  font-size: 70%;
+}
 
 
 .select2-container {
@@ -23926,5 +23931,10 @@ input[type="radio"]:checked::before {
 }
 .datepicker.dropdown-menu {
   z-index: 1030 !important;
+}
+.sidebar-menu > li .badge {
+  margin-top: 0px;
+  filter: brightness(70%);
+  font-size: 70%;
 }
 
