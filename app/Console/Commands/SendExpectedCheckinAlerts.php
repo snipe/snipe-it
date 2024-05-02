@@ -41,11 +41,11 @@ class SendExpectedCheckinAlerts extends Command
      */
     public function handle()
     {
+        $settings = Setting::getSettings();
         $interval = $settings->audit_warning_days ?? 0;
         $today = Carbon::now();
         $interval_date = $today->copy()->addDays($interval);
-
-        $settings = Setting::getSettings();
+        
         $assets = Asset::whereNull('deleted_at')->DueOrOverdueForCheckin($settings)->orderBy('assets.expected_checkin', 'desc')->get();
 
         $this->info($assets->count().' assets must be checked in on or before '.$interval_date.' is deadline');
