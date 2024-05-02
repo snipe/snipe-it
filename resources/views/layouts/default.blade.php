@@ -437,9 +437,9 @@
                                         <a href="{{ url('hardware') }}">
                                             <i class="far fa-circle text-grey fa-fw" aria-hidden="true"></i>
                                             {{ trans('general.list_all') }}
-                                            <badge class="badge">
+                                            <span class="badge">
                                                 {{ (isset($total_assets)) ? $total_assets : '' }}
-                                            </badge>
+                                            </span>
                                         </a>
                                     </li>
 
@@ -451,7 +451,7 @@
                                                     <i class="fas fa-circle text-grey fa-fw"
                                                        aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
                                                     {{ $status_nav->name }}
-                                                    <badge class="badge badge-secondary">{{ $status_nav->asset_count }})</badge></a></li>
+                                                    <span class="badge badge-secondary">{{ $status_nav->asset_count }})</span></a></li>
                                         @endforeach
                                     @endif
 
@@ -460,42 +460,42 @@
                                         <a href="{{ url('hardware?status=Deployed') }}">
                                             <i class="far fa-circle text-blue fa-fw"></i>
                                             {{ trans('general.deployed') }}
-                                            <badge class="badge">{{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=RTD') }}">
                                             <i class="far fa-circle text-green fa-fw"></i>
                                             {{ trans('general.ready_to_deploy') }}
-                                            <badge class="badge">{{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Pending') }}"><i
                                                     class="far fa-circle text-orange fa-fw"></i>
                                             {{ trans('general.pending') }}
-                                            <badge class="badge">{{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
                                                 href="{{ url('hardware?status=Undeployable') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.undeployable') }}
-                                            <badge class="badge">{{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=byod') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.byod') }}
-                                            <badge class="badge">{{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Archived') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('admin/hardware/general.archived') }}
-                                            <badge class="badge">{{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a
@@ -509,7 +509,7 @@
                                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.due') }}">
                                                 <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.audit_due') }}
-                                                <badge class="badge">{{ (isset($total_due_and_overdue_for_audit)) ? $total_due_and_overdue_for_audit : '' }}</badge>
+                                                <span class="badge">{{ (isset($total_due_and_overdue_for_audit)) ? $total_due_and_overdue_for_audit : '' }}</span>
                                             </a>
                                         </li>
                                     @endcan
@@ -518,7 +518,7 @@
                                     <li{!! (Request::is('hardware/checkins/due') ? ' class="active"' : '') !!}>
                                         <a href="{{ route('assets.checkins.due') }}">
                                             <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.checkin_due') }}
-                                            <badge class="badge">{{ (isset($total_due_and_overdue_for_checkin)) ? $total_due_and_overdue_for_checkin : '' }}</badge>
+                                            <span class="badge">{{ (isset($total_due_and_overdue_for_checkin)) ? $total_due_and_overdue_for_checkin : '' }}</span>
                                         </a>
                                     </li>
                                     @endcan
