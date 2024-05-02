@@ -1,20 +1,9 @@
 @extends('layouts/default')
 
-@section('title0')
-
-    @if ((Request::get('company_id')) && ($company))
-        {{ $company->name }}
-    @endif
-
-    {{ trans_choice('general.checkin_due_days', $settings->audit_warning_days, ['days' => $settings->audit_warning_days]) }}
-
-@stop
-
 {{-- Page title --}}
 @section('title')
-    @yield('title0')  @parent
+    {{ trans_choice('general.checkin_due_days', $settings->audit_warning_days, ['days' => $settings->audit_warning_days]) }}
 @stop
-
 
 {{-- Page content --}}
 @section('content')
