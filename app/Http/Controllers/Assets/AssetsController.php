@@ -854,11 +854,11 @@ class AssetsController extends Controller
         return view('hardware/audit-due');
     }
 
-    public function overdueForAudit()
+    public function dueForCheckin()
     {
-        $this->authorize('audit', Asset::class);
+        $this->authorize('checkin', Asset::class);
 
-        return view('hardware/audit-overdue');
+        return view('hardware/checkin-due');
     }
 
 

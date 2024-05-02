@@ -74,9 +74,9 @@ class Asset extends Depreciable
         'eol_explicit' => 'boolean',
         'last_checkout' => 'datetime',
         'last_checkin' => 'datetime',
-        'expected_checkin' => 'date',
+        'expected_checkin' => 'datetime:m-d-Y',
         'last_audit_date' => 'datetime',
-        'next_audit_date' => 'date',
+        'next_audit_date' => 'datetime:m-d-Y',
         'model_id'       => 'integer',
         'status_id'      => 'integer',
         'company_id'     => 'integer',
@@ -1163,10 +1163,11 @@ class Asset extends Depreciable
     public function scopeDueForAudit($query, $settings)
     {
         $interval = $settings->audit_warning_days ?? 0;
+        $today = Carbon::now();
+        $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
 
         return $query->whereNotNull('assets.next_audit_date')
-            ->where('assets.next_audit_date', '>=', Carbon::now())
-            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
+            ->whereBetween('assets.next_audit_date', [$today->format('Y-m-d'), $interval_date])
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
@@ -1188,7 +1189,7 @@ class Asset extends Depreciable
     public function scopeOverdueForAudit($query)
     {
         return $query->whereNotNull('assets.next_audit_date')
-            ->where('assets.next_audit_date', '<', Carbon::now())
+            ->where('assets.next_audit_date', '<', Carbon::now()->format('Y-m-d'))
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
@@ -1209,12 +1210,67 @@ class Asset extends Depreciable
 
     public function scopeDueOrOverdueForAudit($query, $settings)
     {
-        $interval = $settings->audit_warning_days ?? 0;
 
-        return $query->whereNotNull('assets.next_audit_date')
-            ->whereRaw('DATE_SUB('.DB::getTablePrefix()."assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
+        return $query->where(function ($query) {
+            $query->OverdueForAudit();
+        })->orWhere(function ($query) use ($settings) {
+            $query->DueForAudit($settings);
+        });
+    }
+
+
+    /**
+     * Query builder scope for Assets that are DUE for checkin, based on the assets.expected_checkin
+     * and settings.audit_warning_days. It checks to see if assets.expected_checkin is now
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.4.0
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDueForCheckin($query, $settings)
+    {
+        $interval = $settings->audit_warning_days ?? 0;
+        $today = Carbon::now();
+        $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
+
+        return $query->whereNotNull('assets.expected_checkin')
+            ->whereBetween('assets.expected_checkin', [$today->format('Y-m-d'), $interval_date])
             ->where('assets.archived', '=', 0)
+            ->whereNotNull('assets.assigned_to')
             ->NotArchived();
+    }
+
+    /**
+     * Query builder scope for Assets that are overdue for checkin OR overdue
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.4.0
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOverdueForCheckin($query)
+    {
+        return $query->whereNotNull('assets.expected_checkin')
+            ->where('assets.expected_checkin', '<', Carbon::now()->format('Y-m-d'))
+            ->where('assets.archived', '=', 0)
+            ->whereNotNull('assets.assigned_to')
+            ->NotArchived();
+    }
+
+    /**
+     * Query builder scope for Assets that are due for checkin OR overdue
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.4.0
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeDueOrOverdueForCheckin($query, $settings)
+    {
+        return $query->where(function ($query) {
+            $query->OverdueForCheckin();
+        })->orWhere(function ($query) use ($settings) {
+            $query->DueForCheckin($settings);
+        });
     }
 
 

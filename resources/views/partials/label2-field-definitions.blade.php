@@ -351,6 +351,7 @@
                             </optgroup>
                             <optgroup label="Custom Fields">
                                 @foreach($customFields as $customField)
+
                                     <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
                                 @endforeach
                             </optgroup>
