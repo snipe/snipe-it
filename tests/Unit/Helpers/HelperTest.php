@@ -16,4 +16,13 @@ class HelperTest extends TestCase
     {
         $this->assertIsString(Helper::defaultChartColors(-1));
     }
+
+    public function testParseCurrencyMethod()
+    {
+        $this->settings->set(['default_currency' => 'USD']);
+        $this->assertSame(12.34, Helper::ParseCurrency('USD 12.34'));
+
+        $this->settings->set(['digit_separator' => '1.234,56']);
+        $this->assertSame(12.34, Helper::ParseCurrency('12,34'));
+    }
 }

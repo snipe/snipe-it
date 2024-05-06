@@ -87,7 +87,7 @@ if($upgrade_requirements){
 // done fetching requirements
 
 if (!$no_interactive) {
-    $yesno = readline("\nProceed with upgrade? [Y/n]: ");
+    $yesno = readline("\nProceed with upgrade? [y/N]: ");
 } else {
     $yesno = "yes";
 }
