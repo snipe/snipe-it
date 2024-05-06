@@ -267,7 +267,7 @@
                             @can('admin')
                                 @if ($snipeSettings->show_alerts_in_menu=='1')
                                     <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); ?>
+                                    <?php $alert_items = Helper::checkLowInventory(); $company_items = Helper::checkUserCompanyAssets();?>
 
                                     <li class="dropdown tasks-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
