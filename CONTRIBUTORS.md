@@ -432,6 +432,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bilias"><img src="https://avatars.githubusercontent.com/u/47315739?v=4?s=110" width="110px;" alt="bilias"/><br /><sub><b>bilias</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=bilias" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/coach1988"><img src="https://avatars.githubusercontent.com/u/2565989?v=4?s=110" width="110px;" alt="coach1988"/><br /><sub><b>coach1988</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=coach1988" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mauro-miatello"><img src="https://avatars.githubusercontent.com/u/11910225?v=4?s=110" width="110px;" alt="MrM"/><br /><sub><b>MrM</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mauro-miatello" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/koiakoia"><img src="https://avatars.githubusercontent.com/u/60405354?v=4?s=110" width="110px;" alt="koiakoia"/><br /><sub><b>koiakoia</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=koiakoia" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
