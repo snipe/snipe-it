@@ -20,8 +20,6 @@
         <span id="searchclear" class="fas fa-times" aria-hidden="true"></span>
         <button type="submit" disabled style="display: none" aria-hidden="true"></button>
       </div>
-      <a href="{{ route('settings.index') }}" class="btn btn-primary pull-right" style="margin-left: 10px;">{{ trans('general.back') }}</a>
-
     </form>
 
 
