@@ -442,6 +442,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jeffclay"><img src="https://avatars.githubusercontent.com/u/1380084?v=4?s=110" width="110px;" alt="Jeff Clay"/><br /><sub><b>Jeff Clay</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=jeffclay" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/PP-JN-RL"><img src="https://avatars.githubusercontent.com/u/52716446?v=4?s=110" width="110px;" alt="Phil J R"/><br /><sub><b>Phil J R</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=PP-JN-RL" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.corelight.com/"><img src="https://avatars.githubusercontent.com/u/1496725?v=4?s=110" width="110px;" alt="i_virus"/><br /><sub><b>i_virus</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=chandanchowdhury" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gitgrimbo"><img src="https://avatars.githubusercontent.com/u/1020541?v=4?s=110" width="110px;" alt="Paul Grime"/><br /><sub><b>Paul Grime</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=gitgrimbo" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
