@@ -434,6 +434,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mauro-miatello"><img src="https://avatars.githubusercontent.com/u/11910225?v=4?s=110" width="110px;" alt="MrM"/><br /><sub><b>MrM</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mauro-miatello" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/koiakoia"><img src="https://avatars.githubusercontent.com/u/60405354?v=4?s=110" width="110px;" alt="koiakoia"/><br /><sub><b>koiakoia</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=koiakoia" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mustafa-online"><img src="https://avatars.githubusercontent.com/u/5323832?v=4?s=110" width="110px;" alt="Mustafa Online"/><br /><sub><b>Mustafa Online</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mustafa-online" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/franceslui"><img src="https://avatars.githubusercontent.com/u/104601439?v=4?s=110" width="110px;" alt="franceslui"/><br /><sub><b>franceslui</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=franceslui" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
