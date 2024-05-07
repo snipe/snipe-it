@@ -13,6 +13,7 @@ use App\Models\Setting;
 use App\View\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -189,13 +190,11 @@ class BulkAssetsController extends Controller
      * Save bulk edits
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @return Redirect
      * @internal param array $assets
      * @since [v2.0]
      */
     public function update(Request $request)
     {
-        //dd($request->all());
         $this->authorize('update', Asset::class);
         $has_errors = 0;
         $error_array = array();
@@ -390,7 +389,7 @@ class BulkAssetsController extends Controller
                              * but it wasn't.
                              */
                             if ($decrypted_old != $this->update_array[$field->db_column]) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($this->update_array[$field->db_column]);
+                                $asset->{$field->db_column} = Crypt::encrypt($this->update_array[$field->db_column]);
                             } else {
                                 /*
                                  * Remove the encrypted custom field from the update_array, since nothing changed

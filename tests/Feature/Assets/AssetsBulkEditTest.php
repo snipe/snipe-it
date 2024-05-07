@@ -82,18 +82,18 @@ class AssetsBulkEditTest extends TestCase
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
-        $mac_address = CustomField::factory()->macAddress()->create();
-        $ram = CustomField::factory()->ram()->create();
-        $cpu = CustomField::factory()->cpu()->create();
+        CustomField::factory()->macAddress()->create();
+        CustomField::factory()->ram()->create();
+        CustomField::factory()->cpu()->create();
+
+        $mac_address = CustomField::where('name', 'MAC Address')->first();
+        $ram = CustomField::where('name', 'RAM')->first();
+        $cpu = CustomField::where('name', 'CPU')->first();
 
         $assets = Asset::factory()->count(10)->hasMultipleCustomFields([$mac_address, $ram, $cpu])->create([
             $ram->db_column => 8,
             $cpu->db_column => '2.1',
         ]);
-
-        // seems like the fieldset is random, so bulkedit isn't working because assets don't have the "correct" fieldset
-        // look into more tomorrow
-        dd(Asset::find(1)->model->fieldset);
 
         $id_array = $assets->pluck('id')->toArray();
 
@@ -105,7 +105,7 @@ class AssetsBulkEditTest extends TestCase
 
         Asset::findMany($id_array)->each(function (Asset $asset) use ($ram, $cpu, $mac_address) {
             $this->assertEquals(16, $asset->{$ram->db_column});
-            $this->assertEquals('4.1', $asset->{$ram->db_column});
+            $this->assertEquals('4.1', $asset->{$cpu->db_column});
         });
     }
 }

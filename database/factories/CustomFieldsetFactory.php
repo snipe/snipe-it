@@ -56,10 +56,8 @@ class CustomFieldsetFactory extends Factory
 
     public function hasMultipleCustomFields(array $fields = null): self
     {
-        return $this->afterCreating(function (CustomFieldset $fieldset) {
+        return $this->afterCreating(function (CustomFieldset $fieldset) use ($fields) {
             if (empty($fields)) {
-                //why are there two after creating and why does it break if i remove one
-                return $this->afterCreating(function (CustomFieldset $fieldset) {
                     $mac_address = CustomField::factory()->macAddress()->create();
                     $ram = CustomField::factory()->ram()->create();
                     $cpu = CustomField::factory()->cpu()->create();
@@ -67,7 +65,6 @@ class CustomFieldsetFactory extends Factory
                     $fieldset->fields()->attach($mac_address, ['order' => '1', 'required' => false]);
                     $fieldset->fields()->attach($ram, ['order' => '2', 'required' => false]);
                     $fieldset->fields()->attach($cpu, ['order' => '3', 'required' => false]);
-                });
             } else {
                 foreach ($fields as $field) {
                     $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
