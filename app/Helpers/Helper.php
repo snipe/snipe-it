@@ -815,25 +815,31 @@ class Helper
      * @return array
      */
     public static function checkUserCompanyAssets(){
-        $accessories = \DB::table('accessories')
-                        ->join('accessories_users', 'accessories.id', '=', 'accessories_users.accessory_id')
-                        ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
-                        ->select('accessories_users.*')
-                        ->where('accessories.company_id', '!=', 'users.company_id')
-                        ->get();
-        $assets      = \DB::table('assets')
+        $accessories = Accessory::with('users', 'company')
+                                ->join('accessories_users', 'accessories.id', '=', 'accessories_users.accessory_id')
+                                ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
+                                ->select('accessories_users.*')
+                                ->where('accessories.company_id', '!=', 'users.company_id')
+                                ->get();
+//            \DB::table('accessories')
+//                        ->join('accessories_users', 'accessories.id', '=', 'accessories_users.accessory_id')
+//                        ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
+//                        ->select('accessories_users.*')
+//                        ->where('accessories.company_id', '!=', 'users.company_id')
+//                        ->get();
+        $assets      =  Asset::with('assignedTo', 'company')
                         ->join('users', 'assets.assigned_to', '=', 'users.id')
-                        ->select('assets.*')
-                        ->where('assets.company_id', '!=', 'users.company_id')
+                        ->WhereColumn('assets.company_id', '!=', 'users.company_id')
                         ->get();
-        $licenses    =  LicenseSeat::with('license')
-                        ->join('users', 'license_seats.assigned_to', '=', 'users.id')
-                        ->whereHas('license', function ($query) {
-                            $query->where(function ($query) {
-                                $query->WhereColumn('licenses.company_id', '!=', 'users.company_id');
-                            });
-                        })
-                        ->get();
+
+        $licenses    =  LicenseSeat::with('license', 'user')
+                                    ->join('users', 'license_seats.assigned_to', '=', 'users.id')
+                                    ->whereHas('license', function ($query) {
+                                        $query->where(function ($query) {
+                                            $query->WhereColumn('licenses.company_id', '!=', 'users.company_id');
+                                        });
+                                    })
+                                    ->get();
 //            \DB::table('licenses')
 //                        ->join('license_seats', 'licenses.id', '=', 'license_seats.license_id')
 //                        ->join('users', 'license_seats.assigned_to', '=', 'users.id')
@@ -846,11 +852,11 @@ class Helper
 
             $items_array[$all_count]['id'] = $accessory->id;
             $items_array[$all_count]['name'] = $accessory->name;
-            $items_array[$all_count]['company'] = $accessory->company;
-            $items_array[$all_count]['user'] = $accessory->assigned_to;
+            $items_array[$all_count]['company'] = $accessory->company->name;
+            $items_array[$all_count]['user'] = $accessory->users->name;
             $items_array[$all_count]['type'] = 'accessories';
-
-            if($accessory->updated_at > $accessory->assigned_to->updated_at){
+            dd($items_array);
+            if($accessory->updated_at > $accessory->users->updated_at){
                 $items_array[$all_count]['updated_info'] = trans('fill_in');
             }
             else {
@@ -862,12 +868,12 @@ class Helper
         foreach ($assets as $asset) {
 
             $items_array[$all_count]['id'] = $asset->id;
-            $items_array[$all_count]['name'] = $asset->name;
-            $items_array[$all_count]['company'] = $asset->company;
-            $items_array[$all_count]['user'] = $asset->assigned_to;
+            $items_array[$all_count]['name'] = $asset->asset_tag;
+            $items_array[$all_count]['company'] = $asset->company->name;
+            $items_array[$all_count]['user'] = $asset->assignedto->present()->fullName;
             $items_array[$all_count]['type'] = 'hardware';
 
-            if($asset->updated_at > $asset->assigned_to->updated_at){
+            if($asset->updated_at > $asset->assignedto->updated_at){
                 $items_array[$all_count]['updated_info'] = trans('fill_in');
             } else {
                 $items_array[$all_count]['updated_info'] = trans('fill_in_b');
@@ -875,15 +881,15 @@ class Helper
             $all_count++;
 
         }
-//            dd($licenses);
+
         foreach ($licenses as $license) {
             $items_array[$all_count]['id'] = $license->id;
-            $items_array[$all_count]['name'] = $license->license_id;
-            $items_array[$all_count]['company'] = $license->company;
-            $items_array[$all_count]['user'] = $license->assigned_to;
+            $items_array[$all_count]['name'] = $license->license->name;
+            $items_array[$all_count]['company'] = $license->license->company->name;
+            $items_array[$all_count]['user'] = $license->user->present()->fullName;
             $items_array[$all_count]['type'] = 'licenses';
-dd($license->assigned_to->updated_at);
-            if($license->updated_at > $license->assigned_to->updated_at){
+
+            if($license->updated_at > $license->user->updated_at){
                 $items_array[$all_count]['updated_info'] = trans('fill_in');
             }
             else{
@@ -892,7 +898,7 @@ dd($license->assigned_to->updated_at);
             $all_count++;
 
         }
-//        dd($items_array);
+
         return $items_array;
     }
 
