@@ -416,11 +416,14 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
 
         $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
-        $user = Company::scopeCompanyables($user)->find($id);
 
-        $this->authorize('view', $user);
+        if ($user = Company::scopeCompanyables($user)->find($id)) {
+            $this->authorize('view', $user);
+            return (new UsersTransformer)->transformUser($user);
+        }
+        
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
 
-        return (new UsersTransformer)->transformUser($user);
     }
 
 
