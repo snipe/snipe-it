@@ -76,7 +76,7 @@ class UsersController extends Controller
             'users.website',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
-            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_user_count', 'managedLocations as manages_location_count');
+            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
 
         if ($request->filled('activated')) {
@@ -415,9 +415,10 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count')->findOrFail($id);
+        $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
         $user = Company::scopeCompanyables($user)->find($id);
-        $this->authorize('update', $user);
+
+        $this->authorize('view', $user);
 
         return (new UsersTransformer)->transformUser($user);
     }
@@ -480,7 +481,6 @@ class UsersController extends Controller
         }
 
 
-
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
@@ -489,12 +489,6 @@ class UsersController extends Controller
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
           
         if ($user->save()) {
-
-            // Sync group memberships:
-            // This was changed in Snipe-IT v4.6.x to 4.7, since we upgraded to Laravel 5.5
-            // which changes the behavior of has vs filled.
-            // The $request->has method will now return true even if the input value is an empty string or null.
-            // A new $request->filled method has was added that provides the previous behavior of the has method.
 
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
