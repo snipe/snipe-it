@@ -18,6 +18,14 @@ class AssetCountForSidebar
      */
     public function handle($request, Closure $next)
     {
+        /**
+         * This needs to be set for the /setup process, since the tables might not exist yet
+         */
+        $total_due_for_checkin = 0;
+        $total_overdue_for_checkin = 0;
+        $total_due_for_audit = 0;
+        $total_overdue_for_audit = 0;
+
         try {
             $total_rtd_sidebar = Asset::RTD()->count();
             view()->share('total_rtd_sidebar', $total_rtd_sidebar);
