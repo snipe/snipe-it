@@ -89,7 +89,7 @@
           </a>
         </li>
 
-        @if ($user->managedLocations()->count() >= 0 )
+        @if ($user->managedLocations->count() >= 0 )
         <li>
           <a href="#managed-locations" data-toggle="tab">
             <span class="hidden-lg hidden-md">
@@ -100,7 +100,7 @@
         </li>
         @endif
 
-          @if ($user->managesUsers()->count() >= 0 )
+          @if ($user->managesUsers->count() >= 0 )
               <li>
                   <a href="#managed-users" data-toggle="tab">
             <span class="hidden-lg hidden-md">

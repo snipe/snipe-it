@@ -75,7 +75,7 @@ class UsersController extends Controller
             'users.autoassign_licenses',
             'users.website',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_user_count', 'managedLocations as manages_location_count');
 
 
@@ -253,7 +253,7 @@ class UsersController extends Controller
                         'consumables_count',
                         'accessories_count',
                         'manages_user_count',
-                        'managed_locations_count',
+                        'manages_locations_count',
                         'phone',
                         'address',
                         'city',

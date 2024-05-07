@@ -908,6 +908,7 @@ th.css-padlock > .th-inner::before {
   font-size: 12px;
 }
 /**
+BEGIN ICON TABLE HEADERS
 Set the font-weight css property as 900 (For Solid), 400 (Regular or Brands), 300 (Light for pro icons).
 **/
 th.css-barcode > .th-inner::before {
@@ -938,12 +939,13 @@ th.css-accessory > .th-inner::before {
 th.css-users > .th-inner::before {
   content: "\f0c0";
   font-family: "Font Awesome 5 Free";
-  font-weight: 400;
+  font-size: 15px;
 }
 th.css-location > .th-inner::before {
   content: "\f3c5";
   font-family: "Font Awesome 5 Free";
-  font-weight: 400;
+  font-size: 19px;
+  margin-bottom: 0px;
 }
 .small-box .inner {
   padding-left: 15px;
