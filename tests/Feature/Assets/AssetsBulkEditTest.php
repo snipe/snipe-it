@@ -14,6 +14,36 @@ use Tests\TestCase;
 
 class AssetsBulkEditTest extends TestCase
 {
+    public function testUserWithPermissionsCanAccessPage()
+    {
+        $user = User::factory()->viewAssets()->editAssets()->create();
+        $assets = Asset::factory()->count(2)->create();
+
+        $id_array = $assets->pluck('id')->toArray();
+
+        $this->actingAs($user)->post('/hardware/bulkedit', [
+            'ids'          => $id_array,
+            'order'        => 'asc',
+            'bulk_actions' => 'edit',
+            'sort'         => 'id'
+        ])->assertStatus(200);
+    }
+
+    public function testStandardUserCannotAccessPage()
+    {
+        $user = User::factory()->create();
+        $assets = Asset::factory()->count(2)->create();
+
+        $id_array = $assets->pluck('id')->toArray();
+
+        $this->actingAs($user)->post('/hardware/bulkedit', [
+            'ids'          => $id_array,
+            'order'        => 'asc',
+            'bulk_actions' => 'edit',
+            'sort'         => 'id'
+        ])->assertStatus(403);
+    }
+
     public function testBulkEditAssetsAcceptsAllPossibleAttributes()
     {
         // sets up all needed models and attributes on the assets
@@ -103,7 +133,7 @@ class AssetsBulkEditTest extends TestCase
             'ids'           => $id_array,
             $ram->db_column => 16,
             $cpu->db_column => '4.1',
-        ]);
+        ])->assertStatus(302);
 
         Asset::findMany($id_array)->each(function (Asset $asset) use ($ram, $cpu) {
             $this->assertEquals(16, $asset->{$ram->db_column});
@@ -128,7 +158,7 @@ class AssetsBulkEditTest extends TestCase
         $this->actingAs(User::factory()->admin()->create())->post(route('hardware/bulksave'), [
             'ids'                 => $id_array,
             $encrypted->db_column => 'New Encrypted Text',
-        ]);
+        ])->assertStatus(302);
 
         Asset::findMany($id_array)->each(function (Asset $asset) use ($encrypted) {
             $this->assertEquals('New Encrypted Text', Crypt::decrypt($asset->{$encrypted->db_column}));
@@ -174,6 +204,5 @@ class AssetsBulkEditTest extends TestCase
         Asset::findMany($standard_id_array)->each(function (Asset $asset) use ($encrypted) {
             $this->assertEquals('Original Encrypted Text', Crypt::decrypt($asset->{$encrypted->db_column}));
         });
-
     }
 }
