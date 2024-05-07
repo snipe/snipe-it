@@ -395,10 +395,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
-    public function licensesUsers()
-    {
-        return $this->hasMany(LicenseSeat::class, 'assigned_to');
-    }
 
     /**
      * Establishes the user -> manager relationship

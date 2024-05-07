@@ -811,11 +811,12 @@ class Helper
      * Looks for any items that have a different company_id than the users they are assigned to for the
      * alert dropdown
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.0]
+     * @author [G. Martinez]
+     * @since [v6.4]
      * @return array
      */
-    public static function checkUserCompanyAssets(){
+    public static function checkUserCompanyAssets(): array
+    {
         $accessories = AccessoryCheckout::with('accessory', 'user')
                                     ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
                                     ->whereHas('accessory', function ($query) {
@@ -848,7 +849,7 @@ class Helper
                 $items_array[$all_count]['user'] = $accessory->user->present()->fullName;
                 $items_array[$all_count]['type'] = 'accessories';
 
-            if($accessory->accessory->updated_at > $accessory->users->updated_at){
+            if($accessory->accessory->updated_at > $accessory->user->updated_at){
                 $items_array[$all_count]['updated_info'] = trans('fill_in');
             }
             else {
