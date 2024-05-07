@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AccessoryCheckout extends Model
 {
-    use Loggable;
 
     protected $guarded = 'id';
     protected $table = 'accessories_users';
@@ -20,21 +20,20 @@ class AccessoryCheckout extends Model
      *
      * @author G. Martinez
      * @since [v6.4]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function accessory()
+    public function accessory(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Accessory::class, 'accessory_id')->withTrashed();
+        return $this->belongsTo(Accessory::class, 'accessory_id')->withTrashed();
     }
+
     /**
      * Establishes the checked out accessory -> assignee relationship
      *
      * @author G. Martinez
      * @since [v6.4]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\User::class, 'assigned_to')->withTrashed();
+        return $this->belongsTo(User::class, 'assigned_to')->withTrashed();
     }
 }
