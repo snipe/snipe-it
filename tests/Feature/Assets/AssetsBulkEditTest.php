@@ -9,6 +9,7 @@ use App\Models\CustomField;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 
 class AssetsBulkEditTest extends TestCase
@@ -82,15 +83,16 @@ class AssetsBulkEditTest extends TestCase
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
-        CustomField::factory()->macAddress()->create();
         CustomField::factory()->ram()->create();
         CustomField::factory()->cpu()->create();
 
-        $mac_address = CustomField::where('name', 'MAC Address')->first();
+        // when getting the custom field directly from the factory the field has not been fully created yet
+        // so we have to do a query afterwards to get the actual model :shrug:
+
         $ram = CustomField::where('name', 'RAM')->first();
         $cpu = CustomField::where('name', 'CPU')->first();
 
-        $assets = Asset::factory()->count(10)->hasMultipleCustomFields([$mac_address, $ram, $cpu])->create([
+        $assets = Asset::factory()->count(10)->hasMultipleCustomFields([$ram, $cpu])->create([
             $ram->db_column => 8,
             $cpu->db_column => '2.1',
         ]);
@@ -103,9 +105,75 @@ class AssetsBulkEditTest extends TestCase
             $cpu->db_column => '4.1',
         ]);
 
-        Asset::findMany($id_array)->each(function (Asset $asset) use ($ram, $cpu, $mac_address) {
+        Asset::findMany($id_array)->each(function (Asset $asset) use ($ram, $cpu) {
             $this->assertEquals(16, $asset->{$ram->db_column});
             $this->assertEquals('4.1', $asset->{$cpu->db_column});
         });
+    }
+
+    public function testBulkEditAssetsAcceptsAndUpdatesEncryptedCustomFields()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        CustomField::factory()->testEncrypted()->create();
+
+        $encrypted = CustomField::where('name', 'Test Encrypted')->first();
+
+        $assets = Asset::factory()->count(10)->hasEncryptedCustomField($encrypted)->create([
+            $encrypted->db_column => Crypt::encrypt('Original Encrypted Text'),
+        ]);
+
+        $id_array = $assets->pluck('id')->toArray();
+
+        $this->actingAs(User::factory()->admin()->create())->post(route('hardware/bulksave'), [
+            'ids'                 => $id_array,
+            $encrypted->db_column => 'New Encrypted Text',
+        ]);
+
+        Asset::findMany($id_array)->each(function (Asset $asset) use ($encrypted) {
+            $this->assertEquals('New Encrypted Text', Crypt::decrypt($asset->{$encrypted->db_column}));
+        });
+    }
+
+    public function testBulkEditAssetsRequiresAdminUserToUpdateEncryptedCustomFields()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on mysql');
+        $edit_user = User::factory()->editAssets()->create();
+        $admin_user = User::factory()->admin()->create();
+
+        CustomField::factory()->testEncrypted()->create();
+
+        $encrypted = CustomField::where('name', 'Test Encrypted')->first();
+
+        $admin_assets = Asset::factory()->count(5)->hasEncryptedCustomField($encrypted)->create([
+            $encrypted->db_column => Crypt::encrypt('Original Encrypted Text'),
+        ]);
+
+        $standard_assets = Asset::factory()->count(5)->hasEncryptedCustomField($encrypted)->create([
+            $encrypted->db_column => Crypt::encrypt('Original Encrypted Text'),
+        ]);
+
+        $admin_id_array = $admin_assets->pluck('id')->toArray();
+        $standard_id_array = $standard_assets->pluck('id')->toArray();
+
+        $this->actingAs($admin_user)->post(route('hardware/bulksave'), [
+            'ids'                 => $admin_id_array,
+            $encrypted->db_column => 'New Encrypted Text',
+        ])->assertStatus(302);
+
+        // do we want to return an error when this happens???
+        $this->actingAs($edit_user)->post(route('hardware/bulksave'), [
+            'ids'                 => $standard_id_array,
+            $encrypted->db_column => 'New Encrypted Text',
+        ])->assertStatus(302);
+
+        Asset::findMany($admin_id_array)->each(function (Asset $asset) use ($encrypted) {
+            $this->assertEquals('New Encrypted Text', Crypt::decrypt($asset->{$encrypted->db_column}));
+        });
+
+        Asset::findMany($standard_id_array)->each(function (Asset $asset) use ($encrypted) {
+            $this->assertEquals('Original Encrypted Text', Crypt::decrypt($asset->{$encrypted->db_column}));
+        });
+
     }
 }
