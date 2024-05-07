@@ -514,6 +514,8 @@ th.css-barcode > .th-inner,
 th.css-license > .th-inner,
 th.css-consumable > .th-inner,
 th.css-envelope > .th-inner,
+th.css-users > .th-inner,
+th.css-location > .th-inner,
 th.css-accessory > .th-inner {
   font-size: 0px;
   line-height: 0.75 !important;
@@ -527,6 +529,8 @@ th.css-barcode > .th-inner::before,
 th.css-license > .th-inner::before,
 th.css-consumable > .th-inner::before,
 th.css-envelope > .th-inner::before,
+th.css-users > .th-inner::before,
+th.css-location > .th-inner::before,
 th.css-accessory > .th-inner::before {
   display: inline-block;
   font-size: 20px;
