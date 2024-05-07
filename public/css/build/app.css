@@ -935,6 +935,16 @@ th.css-accessory > .th-inner::before {
   font-family: "Font Awesome 5 Free";
   font-weight: 400;
 }
+th.css-users > .th-inner::before {
+  content: "\f0c0";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+}
+th.css-location > .th-inner::before {
+  content: "\f3c5";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
+}
 .small-box .inner {
   padding-left: 15px;
   padding-right: 15px;
