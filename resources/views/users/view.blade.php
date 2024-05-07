@@ -104,7 +104,7 @@
               <li>
                   <a href="#managed-users" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-              <i class="fas fa-map-marker-alt fa-2x"></i></span>
+              <i class="fa-solid fa-users fa-2x"></i></span>
                       <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_users') }}
                       {!! ($user->managesUsers->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->managesUsers->count()).'</badge>' : '' !!}
                   </a>
