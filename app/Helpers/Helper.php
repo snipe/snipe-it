@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Component;
@@ -815,22 +816,18 @@ class Helper
      * @return array
      */
     public static function checkUserCompanyAssets(){
-        $accessories = Accessory::with('users', 'company')
-                                ->join('accessories_users', 'accessories.id', '=', 'accessories_users.accessory_id')
-                                ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
-                                ->select('accessories_users.*')
-                                ->where('accessories.company_id', '!=', 'users.company_id')
-                                ->get();
-//            \DB::table('accessories')
-//                        ->join('accessories_users', 'accessories.id', '=', 'accessories_users.accessory_id')
-//                        ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
-//                        ->select('accessories_users.*')
-//                        ->where('accessories.company_id', '!=', 'users.company_id')
-//                        ->get();
+        $accessories = AccessoryCheckout::with('accessory', 'user')
+                                    ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
+                                    ->whereHas('accessory', function ($query) {
+                                        $query->where(function ($query) {
+                                            $query->WhereColumn('accessories.company_id', '!=', 'users.company_id');
+                                        });
+                                    })
+                                    ->get();
         $assets      =  Asset::with('assignedTo', 'company')
-                        ->join('users', 'assets.assigned_to', '=', 'users.id')
-                        ->WhereColumn('assets.company_id', '!=', 'users.company_id')
-                        ->get();
+                             ->join('users', 'assets.assigned_to', '=', 'users.id')
+                             ->WhereColumn('assets.company_id', '!=', 'users.company_id')
+                             ->get();
 
         $licenses    =  LicenseSeat::with('license', 'user')
                                     ->join('users', 'license_seats.assigned_to', '=', 'users.id')
@@ -840,23 +837,18 @@ class Helper
                                         });
                                     })
                                     ->get();
-//            \DB::table('licenses')
-//                        ->join('license_seats', 'licenses.id', '=', 'license_seats.license_id')
-//                        ->join('users', 'license_seats.assigned_to', '=', 'users.id')
-//                        ->select('license_seats.*')
-//                        ->where('licenses.company_id', '!=', 'users.company_id')
-//                        ->get();
         $items_array = [];
         $all_count = 0;
+//
         foreach ($accessories as $accessory) {
 
-            $items_array[$all_count]['id'] = $accessory->id;
-            $items_array[$all_count]['name'] = $accessory->name;
-            $items_array[$all_count]['company'] = $accessory->company->name;
-            $items_array[$all_count]['user'] = $accessory->users->name;
-            $items_array[$all_count]['type'] = 'accessories';
-            dd($items_array);
-            if($accessory->updated_at > $accessory->users->updated_at){
+                $items_array[$all_count]['id'] = $accessory->id;
+                $items_array[$all_count]['name'] = $accessory->accessory->name;
+                $items_array[$all_count]['company'] = $accessory->accessory->company->name;
+                $items_array[$all_count]['user'] = $accessory->user->present()->fullName;
+                $items_array[$all_count]['type'] = 'accessories';
+
+            if($accessory->accessory->updated_at > $accessory->users->updated_at){
                 $items_array[$all_count]['updated_info'] = trans('fill_in');
             }
             else {
