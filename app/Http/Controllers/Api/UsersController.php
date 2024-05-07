@@ -76,7 +76,7 @@ class UsersController extends Controller
             'users.website',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
-            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
+            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_user_count', 'managedLocations as manages_location_count');
 
 
         if ($request->filled('activated')) {
@@ -187,6 +187,14 @@ class UsersController extends Controller
             $users->has('accessories', '=', $request->input('accessories_count'));
         }
 
+        if ($request->filled('manages_users_count')) {
+            $users->has('manages_users_count', '=', $request->input('manages_users_count'));
+        }
+
+        if ($request->filled('manages_locations_count')) {
+            $users->has('manages_locations_count', '=', $request->input('manages_locations_count'));
+        }
+
         if ($request->filled('autoassign_licenses')) {
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
@@ -244,6 +252,8 @@ class UsersController extends Controller
                         'licenses_count',
                         'consumables_count',
                         'accessories_count',
+                        'manages_user_count',
+                        'managed_locations_count',
                         'phone',
                         'address',
                         'city',
