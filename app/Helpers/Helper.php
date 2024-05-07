@@ -825,9 +825,13 @@ class Helper
                                         });
                                     })
                                     ->get();
-        $assets      =  Asset::with('assignedTo', 'company')
+        $assets      =  Asset::with('assignedTo', 'company', 'model')
                              ->join('users', 'assets.assigned_to', '=', 'users.id')
-                             ->WhereColumn('assets.company_id', '!=', 'users.company_id')
+                             ->whereHas('assignedTo', function ($query) {
+                                $query->where(function ($query) {
+                                    $query->WhereColumn('assets.company_id', '!=', 'users.company_id');
+                                    });
+                                })
                              ->get();
 
         $licenses    =  LicenseSeat::with('license', 'user')
@@ -840,20 +844,21 @@ class Helper
                                     ->get();
         $items_array = [];
         $all_count = 0;
-//
+
         foreach ($accessories as $accessory) {
 
-                $items_array[$all_count]['id'] = $accessory->id;
+                $items_array[$all_count]['id'] = $accessory->accessory->id;
                 $items_array[$all_count]['name'] = $accessory->accessory->name;
                 $items_array[$all_count]['company'] = $accessory->accessory->company->name;
                 $items_array[$all_count]['user'] = $accessory->user->present()->fullName;
+                $items_array[$all_count]['user_company'] = $accessory->user->company->name;
                 $items_array[$all_count]['type'] = 'accessories';
 
             if($accessory->accessory->updated_at > $accessory->user->updated_at){
-                $items_array[$all_count]['updated_info'] = trans('fill_in');
+                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.accessory')));
             }
             else {
-                $items_array[$all_count]['updated_info'] = trans('fill_in_b');
+                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.user') ));
             }
             $all_count++;
 
@@ -861,32 +866,35 @@ class Helper
         foreach ($assets as $asset) {
 
             $items_array[$all_count]['id'] = $asset->id;
-            $items_array[$all_count]['name'] = $asset->asset_tag;
+            $items_array[$all_count]['name'] = $asset->model->name;
             $items_array[$all_count]['company'] = $asset->company->name;
             $items_array[$all_count]['user'] = $asset->assignedto->present()->fullName;
+            $items_array[$all_count]['user_company'] = $asset->assignedto->company->name;
             $items_array[$all_count]['type'] = 'hardware';
 
             if($asset->updated_at > $asset->assignedto->updated_at){
-                $items_array[$all_count]['updated_info'] = trans('fill_in');
-            } else {
-                $items_array[$all_count]['updated_info'] = trans('fill_in_b');
+                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.asset')));
+            }
+            else {
+                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.user') ));
             }
             $all_count++;
 
         }
 
         foreach ($licenses as $license) {
-            $items_array[$all_count]['id'] = $license->id;
+            $items_array[$all_count]['id'] = $license->license->id;
             $items_array[$all_count]['name'] = $license->license->name;
             $items_array[$all_count]['company'] = $license->license->company->name;
             $items_array[$all_count]['user'] = $license->user->present()->fullName;
+            $items_array[$all_count]['user_company'] = $license->user->company->name;
             $items_array[$all_count]['type'] = 'licenses';
 
-            if($license->updated_at > $license->user->updated_at){
-                $items_array[$all_count]['updated_info'] = trans('fill_in');
+            if($license->license->updated_at > $license->user->updated_at){
+                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.license')));
             }
-            else{
-                $items_array[$all_count]['updated_info'] = trans('fill_in_b');
+            else {
+                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.user') ));
             }
             $all_count++;
 

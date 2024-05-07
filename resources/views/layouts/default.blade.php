@@ -273,8 +273,8 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <i class="far fa-flag" aria-hidden="true"></i>
                                             <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                            @if (count($alert_items))
-                                                <span class="label label-danger">{{ count($alert_items) }}</span>
+                                            @if (count($alert_items) || count($company_items))
+                                                <span class="label label-danger">{{ count($alert_items) + count($company_items) }}</span>
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
@@ -310,6 +310,34 @@
                                             {{-- <li class="footer">
                                               <a href="#">{{ trans('general.tasks_view_all') }}</a>
                                             </li> --}}
+                                            <li class="header">{{ trans('general.company_check', array('count' => count($company_items))) }}</li>
+                                            <li>
+                                                <!-- inner menu: contains the actual data -->
+                                                <ul class="menu">
+
+                                                    @for($i = 0; count($company_items) > $i; $i++)
+
+                                                        <li><!-- Task item -->
+                                                            <a href="{{route($company_items[$i]['type'].'.show', $company_items[$i]['id'])}}">
+                                                               <div style="white-space: nowrap; overflow: hidden;"> <h2 class="task_menu">{{$company_items[$i]['company'].": ".$company_items[$i]['name']}}
+                                                                    <small class="pull-right">
+                                                                        <div class="pull-right" href="#" data-tooltip="true" title="{{$company_items[$i]['updated_info']}}"><i class="fas fa-info-circle" aria-hidden="true"></i>
+                                                                            <span class="sr-only">{{ trans('general.user') }}</span>
+                                                                        </div>
+                                                                    </small>
+                                                                        <br>
+                                                                    <small>{{trans('general.assigned_to', array('name' => $company_items[$i]['user'])) }}</small>
+                                                                    <div style="clear:both;">
+                                                                        <small  class="pull-left">({{$company_items[$i]['user_company']}})</small>
+                                                                    </div>
+                                                                </h2>
+                                                               </div>
+                                                            </a>
+                                                        </li>
+                                                        <!-- end task item -->
+                                                    @endfor
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endcan
