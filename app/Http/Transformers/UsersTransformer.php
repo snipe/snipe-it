@@ -21,11 +21,7 @@ class UsersTransformer
 
     public function transformUser(User $user)
     {
-        \Log::debug('users count: '.$user->manages_users_count);
-        \Log::debug('locations count: '.$user->manages_locations_count);
-        \Log::debug('users count method: '.$user->managesUsers()->count());
-        \Log::debug('locations count method: '.$user->managedLocations()->count());
-        \Log::debug('-----------');
+
         $array = [
                 'id' => (int) $user->id,
                 'avatar' => e($user->present()->gravatar),
