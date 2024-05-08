@@ -66,7 +66,7 @@ return [
     'clear_selection'		=> 'Clear Selection',
     'companies'			    => 'Companies',
     'company'				=> 'Company',
-    'company_check'         => 'There are :count items assigned to users outside of the company.',
+    'company_check'         => 'There are :count items assigned to users outside of their company.',
     'component'			    => 'Component',
     'components'			=> 'Components',
     'complete'				=> 'Complete',
