@@ -818,37 +818,40 @@ class Helper
      * @return array
      */
     public static function checkUserCompanyAssets(): array
-    {
-        $accessories = AccessoryCheckout::with('accessory', 'user')
-                                    ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
-                                    ->whereHas('accessory', function ($query) {
-                                        $query->where(function ($query) {
-                                            $query->WhereColumn('accessories.company_id', '!=', 'users.company_id');
-                                        });
-                                    })
-                                    ->get();
-        $assets      =  Asset::with('assignedTo', 'company', 'model')
-                             ->whereHasMorph(
-                                    'assignedTo',
-                                    [User::class, Asset::class],
-                                    function ($query, $type) {
-                                        $relatedInstance = new $type;
-                                        $query->where('assets.company_id', '!=', $relatedInstance->getTable() .'company_id');
-                                    }
-                             )->get();
+    { if(Setting::getSettings()->full_multiple_companies_support == 1) {
+            $accessories = AccessoryCheckout::with('accessory', 'user')
+                ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
+                ->whereHas('accessory', function ($query) {
+                    $query->where(function ($query) {
+                        $query->WhereColumn('accessories.company_id', '!=', 'users.company_id');
+                    });
+                })
+                ->get();
+            $assets = Asset::with('assignedTo', 'company', 'model')
+                ->whereHasMorph(
+                    'assignedTo',
+                    [Asset::class, User::class],
+                    function ($query, $type) {
+                        $relatedInstance = new $type;
+                        $query->whereColumn('assets.company_id', '!=', $relatedInstance->getTable() . '.company_id');
+                        if ($relatedInstance === Asset::class) {
+                            $query->where('assets.id', '!=', $relatedInstance->getTable() . '.id');
+                        }
+                    }
+                )->get();
 
-        $licenses    =  LicenseSeat::with('license', 'user')
-                                    ->join('users', 'license_seats.assigned_to', '=', 'users.id')
-                                    ->whereHas('license', function ($query) {
-                                        $query->where(function ($query) {
-                                            $query->WhereColumn('licenses.company_id', '!=', 'users.company_id');
-                                        });
-                                    })
-                                    ->get();
-        $items_array = [];
-        $all_count = 0;
+            $licenses = LicenseSeat::with('license', 'user')
+                ->join('users', 'license_seats.assigned_to', '=', 'users.id')
+                ->whereHas('license', function ($query) {
+                    $query->where(function ($query) {
+                        $query->WhereColumn('licenses.company_id', '!=', 'users.company_id');
+                    });
+                })
+                ->get();
+            $items_array = [];
+            $all_count = 0;
 
-        foreach ($accessories as $accessory) {
+            foreach ($accessories as $accessory) {
 
                 $items_array[$all_count]['id'] = $accessory->accessory->id;
                 $items_array[$all_count]['name'] = $accessory->accessory->name;
@@ -857,35 +860,37 @@ class Helper
                 $items_array[$all_count]['user_company'] = $accessory->user->company->name;
                 $items_array[$all_count]['type'] = 'accessories';
 
-            $all_count++;
+                $all_count++;
 
+            }
+            foreach ($assets as $asset) {
+
+                $items_array[$all_count]['id'] = $asset->id;
+                $items_array[$all_count]['name'] = $asset->model->name;
+                $items_array[$all_count]['company'] = $asset->company->name;
+                $items_array[$all_count]['user'] = $asset->assignedto->present()->fullName;
+                $items_array[$all_count]['user_company'] = $asset->assignedto->company->name;
+                $items_array[$all_count]['type'] = 'hardware';
+    //            dd($asset->company->id, $asset->assignedto->company->id);
+                $all_count++;
+
+            }
+
+            foreach ($licenses as $license) {
+                $items_array[$all_count]['id'] = $license->license->id;
+                $items_array[$all_count]['name'] = $license->license->name;
+                $items_array[$all_count]['company'] = $license->license->company->name;
+                $items_array[$all_count]['user'] = $license->user->present()->fullName;
+                $items_array[$all_count]['user_company'] = $license->user->company->name;
+                $items_array[$all_count]['type'] = 'licenses';
+
+                $all_count++;
+
+            }
+
+            return $items_array;
         }
-        foreach ($assets as $asset) {
-
-            $items_array[$all_count]['id'] = $asset->id;
-            $items_array[$all_count]['name'] = $asset->model->name;
-            $items_array[$all_count]['company'] = $asset->company->name;
-            $items_array[$all_count]['user'] = $asset->assignedto->present()->fullName;
-            $items_array[$all_count]['user_company'] = $asset->assignedto->company->name;
-            $items_array[$all_count]['type'] = 'hardware';
-//            dd($asset->company->id, $asset->assignedto->company->id);
-            $all_count++;
-
-        }
-
-        foreach ($licenses as $license) {
-            $items_array[$all_count]['id'] = $license->license->id;
-            $items_array[$all_count]['name'] = $license->license->name;
-            $items_array[$all_count]['company'] = $license->license->company->name;
-            $items_array[$all_count]['user'] = $license->user->present()->fullName;
-            $items_array[$all_count]['user_company'] = $license->user->company->name;
-            $items_array[$all_count]['type'] = 'licenses';
-
-            $all_count++;
-
-        }
-
-        return $items_array;
+        return array();
     }
 
     /**

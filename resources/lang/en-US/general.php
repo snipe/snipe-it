@@ -208,6 +208,7 @@ return [
     'no_results'			=> 'No Results.',
     'no'  					=> 'No',
     'notes'  				=> 'Notes',
+    'notifications_clear'   => 'There are no notifications at the moment.',
     'order_number'          => 'Order Number',
     'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Showing _MENU_ items',

@@ -278,8 +278,13 @@
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
-                                            <li>
+                                            @if(!empty($alert_items))
+                                                <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
+                                            @endif
+                                            @if(empty($alert_items) && empty($company_items))
+                                                <li class="header">{{ trans('general.notifications_clear') }}</li>
+                                            @endif
+                                                <li>
                                                 <!-- inner menu: contains the actual data -->
                                                 <ul class="menu">
 
@@ -310,7 +315,7 @@
                                             {{-- <li class="footer">
                                               <a href="#">{{ trans('general.tasks_view_all') }}</a>
                                             </li> --}}
-                                            @if(isset($company_items))
+                                            @if(!empty($company_items))
                                             <li class="header">{{ trans('general.company_check', array('count' => count($company_items))) }}</li>
                                             @endif
                                             <li>
