@@ -310,7 +310,9 @@
                                             {{-- <li class="footer">
                                               <a href="#">{{ trans('general.tasks_view_all') }}</a>
                                             </li> --}}
+                                            @if(isset($company_items))
                                             <li class="header">{{ trans('general.company_check', array('count' => count($company_items))) }}</li>
+                                            @endif
                                             <li>
                                                 <!-- inner menu: contains the actual data -->
                                                 <ul class="menu">
@@ -320,15 +322,11 @@
                                                         <li><!-- Task item -->
                                                             <a href="{{route($company_items[$i]['type'].'.show', $company_items[$i]['id'])}}">
                                                                <div style="white-space: nowrap; overflow: hidden;"> <h2 class="task_menu">{{$company_items[$i]['company'].": ".$company_items[$i]['name']}}
-                                                                    <small class="pull-right">
-                                                                        <div class="pull-right" href="#" data-tooltip="true" title="{{$company_items[$i]['updated_info']}}"><i class="fas fa-info-circle" aria-hidden="true"></i>
-                                                                            <span class="sr-only">{{ trans('general.user') }}</span>
-                                                                        </div>
-                                                                    </small>
-                                                                        <br>
-                                                                    <small>{{trans('general.assigned_to', array('name' => $company_items[$i]['user'])) }}</small>
                                                                     <div style="clear:both;">
-                                                                        <small  class="pull-left">({{$company_items[$i]['user_company']}})</small>
+                                                                    <small>{{trans('general.assigned_to', array('name' => $company_items[$i]['user'])) }}</small>
+                                                                    </div>
+                                                                    <div style="clear:both;">
+                                                                        <small  class="pull-left">({{$company_items[$i]['user_company']}}) </small>
                                                                     </div>
                                                                 </h2>
                                                                </div>

@@ -11,8 +11,10 @@ use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
 use App\Models\LicenseSeat;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
+use App\Models\User;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Image;
@@ -826,13 +828,14 @@ class Helper
                                     })
                                     ->get();
         $assets      =  Asset::with('assignedTo', 'company', 'model')
-                             ->join('users', 'assets.assigned_to', '=', 'users.id')
-                             ->whereHas('assignedTo', function ($query) {
-                                $query->where(function ($query) {
-                                    $query->WhereColumn('assets.company_id', '!=', 'users.company_id');
-                                    });
-                                })
-                             ->get();
+                             ->whereHasMorph(
+                                    'assignedTo',
+                                    [User::class, Asset::class],
+                                    function ($query, $type) {
+                                        $relatedInstance = new $type;
+                                        $query->where('assets.company_id', '!=', $relatedInstance->getTable() .'company_id');
+                                    }
+                             )->get();
 
         $licenses    =  LicenseSeat::with('license', 'user')
                                     ->join('users', 'license_seats.assigned_to', '=', 'users.id')
@@ -854,12 +857,6 @@ class Helper
                 $items_array[$all_count]['user_company'] = $accessory->user->company->name;
                 $items_array[$all_count]['type'] = 'accessories';
 
-            if($accessory->accessory->updated_at > $accessory->user->updated_at){
-                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.accessory')));
-            }
-            else {
-                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.user') ));
-            }
             $all_count++;
 
         }
@@ -871,13 +868,7 @@ class Helper
             $items_array[$all_count]['user'] = $asset->assignedto->present()->fullName;
             $items_array[$all_count]['user_company'] = $asset->assignedto->company->name;
             $items_array[$all_count]['type'] = 'hardware';
-
-            if($asset->updated_at > $asset->assignedto->updated_at){
-                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.asset')));
-            }
-            else {
-                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.user') ));
-            }
+//            dd($asset->company->id, $asset->assignedto->company->id);
             $all_count++;
 
         }
@@ -890,12 +881,6 @@ class Helper
             $items_array[$all_count]['user_company'] = $license->user->company->name;
             $items_array[$all_count]['type'] = 'licenses';
 
-            if($license->license->updated_at > $license->user->updated_at){
-                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.license')));
-            }
-            else {
-                $items_array[$all_count]['updated_info'] = trans('general.company_check_hint', array('item' => trans('general.user') ));
-            }
             $all_count++;
 
         }
