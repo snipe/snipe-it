@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Ondersteuning URL',
     'warranty_lookup_url'   => 'Garantie opzoek URL',
     'update'				=> 'Wijzig Fabrikant',
-    'url'   				=> 'URL',
 
 );

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Ukunciphisa',
     'depreciates_on'	=> 'Iyancipha',
     'default_location'	=> 'Indawo okuzenzakalelayo',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Usuku lwe-EOL',
     'eol_rate'			=> 'I-EOL Rate',
     'expected_checkin'  => 'Ilanga le-Checkin elilindelekile',

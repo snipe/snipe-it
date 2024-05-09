@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Akcesoria zostały pomyślnie odłączone',
     'accessory_error'                   => 'Akcesoria są już dołączone do zestawu',
     'accessory_deleted'                 => 'Usuwanie zakończone powodzeniem',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'Akcesorium nie istnieje',
     'checkout_success'                  => 'Wydanie powiodło się',
     'checkout_error'                    => 'Błąd wydania',
     'kit_none'                          => 'Zestaw nie istnieje',

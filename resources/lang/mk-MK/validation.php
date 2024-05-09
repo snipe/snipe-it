@@ -96,7 +96,7 @@ return [
     'url'                  => 'Форматот на :attribute не е валиден.',
     'unique_undeleted'     => ':attribute мора да биде уникатен.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Value cannot be negative'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

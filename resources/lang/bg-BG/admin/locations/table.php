@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Изписано на',
     'asset_expected_checkin'    => 'Очаквана дата на вписване',
     'date'                      => 'Дата:',
+    'phone'                     => 'Телефон на местоположението',
     'signed_by_asset_auditor'   => 'Подписан от (проверяващ):',
     'signed_by_finance_auditor' => 'Подписан от (счетоводител):',
     'signed_by_location_manager' => 'Подписан от (мениджър):',

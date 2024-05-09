@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> '資産タグ',
     'asset_model'       => 'モデル',
+    'assigned_to'   => '割り当て先',
     'book_value'  	=> '現在の値',
     'change' 		=> 'In/Out',
     'checkout_date' => '検査日',

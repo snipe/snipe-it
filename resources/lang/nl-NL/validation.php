@@ -96,7 +96,7 @@ return [
     'url'                  => 'Het formaat van :attribute is ongeldig.',
     'unique_undeleted'     => 'De :attribute moet uniek zijn. ',
     'non_circular'         => ':attribute mag geen circulaire referentie aanmaken.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute kan geen array zijn.',
     'disallow_same_pwd_as_user_fields' => 'Wachtwoord kan niet hetzelfde zijn als de gebruikersnaam.',
     'letters'              => 'Wachtwoord moet ten minste één letter bevatten.',
     'numbers'              => 'Wachtwoord moet ten minste één cijfer bevatten.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Waarde mag niet negatief zijn'
     ],
+    'checkboxes'           => ':attribute bevat ongeldige opties.',
+    'radio_buttons'        => ':attribute is ongeldig.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Ongeldige waarde ingevoerd in dit veld',
 ];

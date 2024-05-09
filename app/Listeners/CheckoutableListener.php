@@ -58,13 +58,20 @@ class CheckoutableListener
             }
 
             if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckoutNotification($event));
+
+            //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
+
+              if(Setting::getSettings()->webhook_selected =='slack' || Setting::getSettings()->webhook_selected =='general') {
+
+
+                  Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                      ->notify($this->getCheckoutNotification($event));
+              }
             }
         } catch (ClientException $e) {
-            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
+            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::error("Exception caught during checkout notification: " . $e->getMessage());
+            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
         }
     }
 
@@ -107,15 +114,19 @@ class CheckoutableListener
                     $this->getCheckinNotification($event)
                 );
             }
+            //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
+            if(Setting::getSettings()->webhook_selected =='slack' || Setting::getSettings()->webhook_selected =='general') {
 
-            if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckinNotification($event));
+                if ($this->shouldSendWebhookNotification()) {
+                    Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                        ->notify($this->getCheckinNotification($event));
+                }
             }
+
         } catch (ClientException $e) {
-            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
+            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::error("Exception caught during checkin notification: " . $e->getMessage());
+            Log::warning("Exception caught during checkin notification: " . $e->getMessage());
         }
     }      
 
@@ -216,8 +227,9 @@ class CheckoutableListener
                 break;    
             case LicenseSeat::class:
                 $notificationClass = CheckoutLicenseSeatNotification::class;
-                break;                
+                break;
         }
+
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
     }

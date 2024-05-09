@@ -96,7 +96,7 @@ return [
     'url'                  => 'O formato do :attribute é inválido.',
     'unique_undeleted'     => 'O :atribute deve ser único.',
     'non_circular'         => 'O :attribute não deve criar uma referência circular.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute não pode ser um array.',
     'disallow_same_pwd_as_user_fields' => 'A senha não pode ser igual ao nome de utilizador.',
     'letters'              => 'A senha deve conter no mínimo uma letra.',
     'numbers'              => 'A senha deve conter no mínimo um símbolo.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Valor não pode ser negativo'
     ],
+    'checkboxes'           => ':attribute contém opções inválidas.',
+    'radio_buttons'        => ':attribute é inválido.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Valor inválido incluído neste campo',
 ];

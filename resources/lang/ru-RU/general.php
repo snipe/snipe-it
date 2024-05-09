@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Аксессуары',
     'activated'			    => 'Активно',
     'accepted_date'         => 'Дата принятия',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Это значение не будет сохранено в демо-версии.',
     'feature_disabled'      => 'Функция отключена в этой версии.',
     'location'              => 'Расположение',
+    'location_plural'        => 'Местоположение | Места',
     'locations'				=> 'Места',
     'logo_size'				=> 'Квадратные логотипы лучше смотрятся с текстом. Максимальный размер логотипа 50px в высоту и 500px в ширину. ',
     'logout'				=> 'Выйти',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Новый пароль',
     'next'					=> 'Далее',
     'next_audit_date'		=> 'Следующая дата аудита',
+    'no_email'              => 'Нет адреса электронной почты, связанные с этим пользователем',
     'last_audit'		    => 'Последний аудит',
     'new'					=> 'новое!',
     'no_depreciation'		=> 'Нет аммортизации',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Генерация автоинкрементных тегов активов отключена, поэтому во всех строках должен быть заполнен столбец "Asset Tag".',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Примечание: включен автоинкремент для счетчика тегов активов. Поэтому теги будут созданы для строк с пустым полем "Тег Актива". Строки с заполненным полем "Тег актива" будут обновлены в соответствии с предоставленной информацией.',
     'send_welcome_email_to_users'   => 'Отправить приветственное письмо для новых пользователей?',
+    'send_email'                => 'Отправить письмо',
+    'call'                      => 'Номер телефона',
     'back_before_importing'     => 'Сделать бекап перед импортом?',
     'csv_header_field'          => 'Поле заголовка CSV',
     'import_field'              => 'Импортировать поле',
     'sample_value'              => 'Пример значения',
     'no_headers'                => 'Столбцы не найдены',
     'error_in_import_file'      => 'Ошибка при чтении файла CSV: :error',
-    'percent_complete'          => ':percent % выполнено',
     'errors_importing'          => 'При импорте произошли ошибки: ',
     'warning'                   => 'ВНИМАНИЕ: :warning',
     'success_redirecting'       => '"Успешно... Переадресация.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Не включайте пользователя для массового назначения через пользовательский интерфейс или утилиты cli.',
     'modal_confirm_generic'      => 'Вы уверены?',
     'cannot_be_deleted'      => 'Этот элемент не может быть удален',
+    'cannot_be_edited'      => 'Этот элемент не может быть отредактирован.',
     'undeployable_tooltip'      => 'Этот элемент не может быть выдан. Проверьте оставшееся количество.',
     'serial_number'        => 'Серийный номер',
     'item_notes' => ':item Заметки',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'У вас нет прав на :action this :item_type',
     'edit' => 'редактировать',
     'action_source' => 'Источник действия',
+    'or' => 'или',
+    'url'                   => 'Адрес',
+    'edit_fieldset' => 'Редактировать поля и параметры набора полей',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Массовое удаление :object_type',
+                'warn'   =>  'Вы собираетесь удалить один :object_type|Вы собираетесь удалить :count :object_type',
+                'success'   =>  ':object_type успешно удалено|Успешно удалено :count :object_type',
+                'error'   =>  'Не удалось удалить :object_type',
+                'nothing_selected'   =>  'Не выбрано :object_type - нечего делать',
+                'partial'   =>  'Удалено :success_count :object_type, но :error_count :object_type не может быть удален',
+             ],
+    ],
+    'no_requestable' => 'Нет требуемых активов или моделей активов.',
+
+    'countable' => [
+        'accessories'  => ':count Аксессуары|:count Аксессуаров',
+        'assets'  => ':count Актива|:count Активов',
+        'licenses'  => ':count лицензия|:count лицензий',
+        'license_seats'  => ':count лицензия на место|:count мест',
+        'consumables'  => ':count расходный материал|:count расходников',
+        'components'  => ':count компонент|:count компонентов',
+    ]
 
 ];

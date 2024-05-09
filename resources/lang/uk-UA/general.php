@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Аксесуари',
     'activated'			    => 'Активоване',
     'accepted_date'         => 'Дата прийняття',
@@ -91,7 +92,7 @@ return [
     'days_to_next_audit'    => 'Дні до наступного аудиту',
     'date'					=> 'Дата',
     'debug_warning'         => 'Попередження!',
-    'debug_warning_text'    => 'This application is running in production mode with debugging enabled. This can expose sensitive data if your application is accessible to the outside world. Disable debug mode by setting the <code>APP_DEBUG</code> value in your <code>.env</code> file to <code>false</code>.',
+    'debug_warning_text'    => 'Ця програма працює в робочому режимі з увімкненим відлагодженням. Це може призвести до розкриття конфіденційних даних, якщо ваша програма доступна зовнішньому світу. Вимкніть режим налагодження, установивши для значення <code>APP_DEBUG</code> у вашому файлі <code>.env</code> значення <code>false</code>.',
     'delete'  				=> 'Видалити',
     'delete_confirm'  		=> 'Ви впевнені, що бажаєте видалити :item?',
     'delete_confirm_no_undo' => 'Ви впевнені, що бажаєте видалити :item? Це незворотня дія.',
@@ -143,7 +144,7 @@ return [
     'github_markdown'      => 'Це поле приймає <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Групи',
     'gravatar_email'        => 'Електронна адреса Gravatar',
-    'gravatar_url'          => '<a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.',
+    'gravatar_url'          => '<a href="http://gravatar.com"><small>Змініть свій аватар на Gravatar.com</small></a>.',
     'history'  			    => 'Історія',
     'history_for'  			=> 'Історія для',
     'id'  					=> 'ID',
@@ -158,7 +159,7 @@ return [
     'import'         	    => 'Імпорт',
     'import_this_file'      => 'Поля карти і обробка цього файлу',
     'importing'         	=> 'Імпортування',
-    'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
+    'importing_help'        => 'Ви можете імпортувати активи, аксесуари, ліцензії, компоненти, витратні матеріали та користувачів за допомогою файлу CSV. <br><br>CSV має бути розділений комами та відформатований із заголовками, які відповідають заголовкам у <a href="https://snipe-it.readme.io/docs/importing" target="_new"> зразка CSV у документації</a>.',
     'import-history'        => 'Історія імпорту',
     'asset_maintenance'        => 'Обслуговування активів',
     'asset_maintenance_report' => 'Звіт про обслуговування активів',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Це значення поля не буде збережено в демо версії.',
     'feature_disabled'      => 'Ця функція може бути відключена в демо версіїї.',
     'location'              => 'Місцезнаходження',
+    'location_plural'        => 'Розташування|Місцезнаходження',
     'locations'				=> 'Місця',
     'logo_size'				=> 'Квадратний логотип найкраще підходить з логотипом + текстом. Максимальний розмір логотипу становить 50 пікселів завширшки 500 пікселів.  ',
     'logout'				=> 'Вийти',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Новий пароль',
     'next'					=> 'Далі',
     'next_audit_date'		=> 'Дата наступного аудиту',
+    'no_email'              => 'Немає адреси електронної пошти, пов\'язаної з цим користувачем',
     'last_audit'		    => 'Останній аудит',
     'new'					=> 'нове!',
     'no_depreciation'		=> 'Амортизація відсутня',
@@ -342,8 +345,8 @@ return [
     'reminder_checked_out_items' => 'Нагадування про предмети, які зараз перевірені для вас. Якщо ви відчуваєте, що цей список є неточним (чогось бракує, або ви вважаєте що ви ніколи не отримаєте), напишіть на :reply_to_name на :reply_to_address що-небудь.',
     'changed'               => 'Змінено',
     'to'                    => 'На',
-    'report_fields_info'    => '<p>Select the fields you would like to include in your custom report, and click Generate. The file (custom-asset-report-YYYY-mm-dd.csv) will download automatically, and you can open it in Excel.</p>
-            <p>If you would like to export only certain assets, use the options below to fine-tune your results.</p>',
+    'report_fields_info'    => '<p>Виберіть поля, які ви бажаєте включити у свій спеціальний звіт, і натисніть «Створити». Файл (custom-asset-report-YYYY-mm-dd.csv) завантажиться автоматично, і ви зможете відкрити його в Excel.</p>
+             <p>Якщо ви хочете експортувати лише певні ресурси, скористайтеся наведеними нижче параметрами, щоб налаштувати результати.</p>',
     'range'                 => 'Range',
     'bom_remark'            => 'Додати BOM (марку порядку байтів) до цього CSV',
     'improvements'          => 'Вдосконалення',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Генерування теґів автоматичного збільшення активів вимкнено, тому всі рядки повинні мати заповнену колонку "Тег активу".',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Примітка: Генерування тегів автоматичного збільшення активів увімкнено, тому активи будуть створені для рядків, які не мають заповнених "Активу Тег". Рядки, що мають заповнені «Тег активу», будуть оновлені за наданою інформацією.',
     'send_welcome_email_to_users'   => ' Надіслати привітальну е-пошту для нових користувачів?',
+    'send_email'                => 'Надіслати ел. листа',
+    'call'                      => 'Виклик на номер',
     'back_before_importing'     => 'Зробити резервну копію перед імпортом?',
     'csv_header_field'          => 'CSV заголовка поля',
     'import_field'              => 'Імпорт поля',
     'sample_value'              => 'Зразок значення',
     'no_headers'                => 'Стовпців не знайдено',
     'error_in_import_file'      => 'Під час читання CSV-файлу сталася помилка: :error',
-    'percent_complete'          => ':percent % завершено',
     'errors_importing'          => 'Під час імпорту відбулися помилки: ',
     'warning'                   => 'ПОПЕРЕДЖЕННЯ: :warning',
     'success_redirecting'       => '"Успішно... Перенаправлення.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Не підключати користувача для розширених налаштувань за допомогою ліцензій або інструментів для користування.',
     'modal_confirm_generic'      => 'Ви впевнені?',
     'cannot_be_deleted'      => 'Цей елемент не може бути видалений',
+    'cannot_be_edited'      => 'Неможливо редагувати цей елемент.',
     'undeployable_tooltip'      => 'Цей товар не може бути перевірений. Перевірте кількість, що залишилась.',
     'serial_number'        => 'Серійний номер',
     'item_notes' => ':item примітки',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'У вас немає дозволу на :action : item_type',
     'edit' => 'редагувати',
     'action_source' => 'Джерело дії',
+    'or' => 'або',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Редагування полів і параметрів польових налаштувань',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Масове видалення :object_type',
+                'warn'   =>  'Ви збираєтесь видалити 1 :object_type|Ви маєте намір видалити :count :object_type',
+                'success'   =>  ':object_type успішно видалено|Успішно видалено :count :object_type',
+                'error'   =>  'Не вдалося видалити :object_type',
+                'nothing_selected'   =>  'Немає :object_type - нічого робити',
+                'partial'   =>  'Видалено :success_count :object_type, але :error_count :object_type не вдалося видалити',
+             ],
+    ],
+    'no_requestable' => 'Немає запитуваних активів або моделей активів.',
+
+    'countable' => [
+        'accessories'  => ':count аксесуара|:count аксесуарів',
+        'assets'  => ':count есе|:count Активів',
+        'licenses'  => ':count ліцензія|:count ліцензій',
+        'license_seats'  => ':count реалізація|:count місця для ліцензії',
+        'consumables'  => ':count витратно|:count витратних товарів',
+        'components'  => ':count компонент|:count компонентів',
+    ]
 
 ];

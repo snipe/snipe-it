@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Dibrisiant',
     'depreciates_on'	=> 'Dibrisio Ar',
     'default_location'	=> 'Lleoliad diofyn',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Dyddiad DB',
     'eol_rate'			=> 'Cyfradd DB',
     'expected_checkin'  => 'Dyddiad disgwl i mewn',

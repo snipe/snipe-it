@@ -45,7 +45,7 @@ return [
     'make_required' => 'Необов\'язково - натисніть, щоб зробити необхідне',
     'reorder' => 'Змінити порядок',
     'db_field' => 'БД поле',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => 'УВАГА. Це поле міститься в таблиці спеціальних полів як <code>:db_column</code>, але має бути <code>:expected</code>.',
     'is_unique' => 'Ця величина повинна бути унікальною для всіх активів',
     'unique' => 'Унікальний',
     'display_in_user_view' => 'Дозволити відзначеному користувачеві переглядати ці значення у їх Перегляд призначені для додавання активів',

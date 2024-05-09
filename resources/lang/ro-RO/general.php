@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accesorii',
     'activated'			    => 'activat',
     'accepted_date'         => 'Data acceptării',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Această valoare a câmpului nu va fi salvată într-o instalare demonstrativă.',
     'feature_disabled'      => 'Această funcție a fost dezactivată pentru instalarea demonstrativă.',
     'location'              => 'Locatie',
+    'location_plural'        => 'Locații',
     'locations'				=> 'Locatii',
     'logo_size'				=> 'Logo-urile pătrate arată cel mai bine cu Logo + Text. Dimensiunea maximă a afișajului logo-ului este de 50px lățime maximă x 500px.  ',
     'logout'				=> 'Log out',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Parolă nouă',
     'next'					=> 'Următor →',
     'next_audit_date'		=> 'Data următoarei auditări',
+    'no_email'              => 'Nicio adresă de e-mail asociată cu acest utilizator',
     'last_audit'		    => 'Ultimul audit',
     'new'					=> 'nou!',
     'no_depreciation'		=> 'Fara depreciere',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generarea etichetelor de active cu auto-incrementare este dezactivată astfel încât toate rândurile trebuie să aibă coloana "Etichetă activă".',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Notă: Generarea de etichete active auto-incrementare este activată, astfel încât activele vor fi create pentru rândurile care nu au "Eticheta activului" populată. Rândurile care au "Eticheta activului" populate vor fi actualizate cu informaţiile furnizate.',
     'send_welcome_email_to_users'   => ' Trimite Email de Bine ai venit pentru utilizatori noi?',
+    'send_email'                => 'Trimite email',
+    'call'                      => 'Nr. apel',
     'back_before_importing'     => 'Copie de rezervă înainte de import?',
     'csv_header_field'          => 'Câmp de antet CSV',
     'import_field'              => 'Importă câmp',
     'sample_value'              => 'Valoare mostră',
     'no_headers'                => 'Nici o coloană găsită',
     'error_in_import_file'      => 'A apărut o eroare la citirea fișierului CSV: :error',
-    'percent_complete'          => ':cent % Complet',
     'errors_importing'          => 'Au apărut unele erori în timpul importului: ',
     'warning'                   => 'ATENŢIE: :warning',
     'success_redirecting'       => '"Succes... Redirecţionare.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Nu include utilizatorul pentru atribuirea în bloc a licenţei prin intermediul uneltelor de tip interfaţă sau cli.',
     'modal_confirm_generic'      => 'Ești sigur?',
     'cannot_be_deleted'      => 'Acest element nu poate fi șters',
+    'cannot_be_edited'      => 'Acest element nu poate fi editat.',
     'undeployable_tooltip'      => 'Acest element nu poate fi verificat. Verificaţi cantitatea rămasă.',
     'serial_number'        => 'Număr de serie',
     'item_notes' => ':item Note',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'Nu ai permisiunea să :action acest :item_type',
     'edit' => 'editeaza',
     'action_source' => 'Sursa Acțiune',
+    'or' => 'sau',
+    'url'                   => 'URL-',
+    'edit_fieldset' => 'Editați câmpurile și opțiunile setului de câmp',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Sterge in grup :object_type',
+                'warn'   =>  'Sunteți pe cale de a șterge un :object_type|Urmează să ștergeți :count :object_type',
+                'success'   =>  ':object_type a fost șters cu succes|:count :object_type',
+                'error'   =>  'Nu s-a putut șterge :object_type',
+                'nothing_selected'   =>  'Nu este :object_type selectat - nimic de făcut',
+                'partial'   =>  'Șters :success_count :object_type, dar :error_count :object_type nu a putut fi șters',
+             ],
+    ],
+    'no_requestable' => 'Nu există active sau modele de active solicitate.',
+
+    'countable' => [
+        'accessories'  => ':count Accesorii:count Accesorii',
+        'assets'  => ':count Active|:count Active',
+        'licenses'  => ':count Licență:count Licențe',
+        'license_seats'  => ':count Locul de licență:count Locuri de licență',
+        'consumables'  => ':count Consumabile|:count Consumabile',
+        'components'  => ':count Component|:count Componente',
+    ]
 
 ];

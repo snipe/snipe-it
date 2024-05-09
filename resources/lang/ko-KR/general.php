@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> '부속품들',
     'activated'			    => '활성화',
     'accepted_date'         => 'Date Accepted',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => '이 항목은 데모에서 저장이 불가능합니다.',
     'feature_disabled'      => '데모 설치본에서는 이 기능을 사용할 수 없습니다.',
     'location'              => '장소',
+    'location_plural'        => 'Location|Locations',
     'locations'				=> '위치',
     'logo_size'				=> 'Square logos look best with Logo + Text. Logo maximum display size is 50px high x 500px wide.  ',
     'logout'				=> '로그아웃',
@@ -200,6 +202,7 @@ return [
     'new_password'          => '새로운 비밀번호',
     'next'					=> '다음',
     'next_audit_date'		=> '다음 감사 일자',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => '최근 감사',
     'new'					=> '신규!',
     'no_depreciation'		=> '감가 상각 없음',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generating auto-incrementing asset tags is disabled so all rows need to have the "Asset Tag" column populated.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Note: Generating auto-incrementing asset tags is enabled so assets will be created for rows that do not have "Asset Tag" populated. Rows that do have "Asset Tag" populated will be updated with the provided information.',
     'send_welcome_email_to_users'   => ' Send Welcome Email for new Users?',
+    'send_email'                => 'Send Email',
+    'call'                      => 'Call number',
     'back_before_importing'     => 'Backup before importing?',
     'csv_header_field'          => 'CSV Header Field',
     'import_field'              => 'Import Field',
     'sample_value'              => 'Sample Value',
     'no_headers'                => 'No Columns Found',
     'error_in_import_file'      => 'There was an error reading the CSV file: :error',
-    'percent_complete'          => ':percent % Complete',
     'errors_importing'          => 'Some Errors occurred while importing: ',
     'warning'                   => 'WARNING: :warning',
     'success_redirecting'       => '"Success... Redirecting.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
     'modal_confirm_generic'      => 'Are you sure?',
     'cannot_be_deleted'      => 'This item cannot be deleted',
+    'cannot_be_edited'      => 'This item cannot be edited.',
     'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Notes',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'You do not have permission to :action this :item_type',
     'edit' => '편집',
     'action_source' => 'Action Source',
+    'or' => 'or',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Edit fieldset fields and options',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Delete :object_type',
+                'warn'   =>  'You are about to delete one :object_type|You are about to delete :count :object_type',
+                'success'   =>  ':object_type successfully deleted|Successfully deleted :count :object_type',
+                'error'   =>  'Could not delete :object_type',
+                'nothing_selected'   =>  'No :object_type selected - nothing to do',
+                'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
+             ],
+    ],
+    'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

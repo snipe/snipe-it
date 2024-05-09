@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accessori',
     'activated'			    => 'Attivato',
     'accepted_date'         => 'Accettato Il',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Questo valore non verrà salvato in un\'installazione demo.',
     'feature_disabled'      => 'Questa funzionalità è stata disabilitata per l\'installazione demo.',
     'location'              => 'Luogo',
+    'location_plural'        => 'Posizione<unk> Posizioni',
     'locations'				=> 'Luoghi',
     'logo_size'				=> 'I loghi quadrati appaiono meglio con Logo + Testo. La dimensione massima in pixel è di 50px in altezza e 500px in larghezza.  ',
     'logout'				=> 'Logout',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Nuova password',
     'next'					=> 'Successivo',
     'next_audit_date'		=> 'Prossima data di controllo',
+    'no_email'              => 'Nessun indirizzo email associato a questo utente',
     'last_audit'		    => 'Ultimo Controllo Inventario',
     'new'					=> 'nuovo!',
     'no_depreciation'		=> 'Nessuna Svalutazione',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'La generazione incrementale dei tag dei beni è disattivata: Tutte le righe devono avere una voce in "Tag Bene".',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Nota: la generazione automatica dei tag per i beni è attiva, quindi il tag verrà creato per ogni bene che non avesse il campo tag popolato. Gli elementi già provvisti di Tag saranno aggiornati con le informazioni fornite.',
     'send_welcome_email_to_users'   => ' Inviare Mail di Benvenuto ai nuovi utenti?',
+    'send_email'                => 'Invia Email',
+    'call'                      => 'Chiama il numero',
     'back_before_importing'     => 'Backup prima di importare?',
     'csv_header_field'          => 'Campo Intestazione Csv',
     'import_field'              => 'Importa Campo',
     'sample_value'              => 'Valore di Esempio',
     'no_headers'                => 'Nessuna Colonna Trovata',
     'error_in_import_file'      => 'Errore durante la lettura del file CSV: :error',
-    'percent_complete'          => ':percent % Completato',
     'errors_importing'          => 'Errori durante l\'importazione: ',
     'warning'                   => 'ATTENZIONE: :warning',
     'success_redirecting'       => '"Successo... Reindirizzamento.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Non includere l\'utente nelle assegnazioni massive tramite la GUI o gli strumenti cli.',
     'modal_confirm_generic'      => 'Sei sicuro?',
     'cannot_be_deleted'      => 'Questo articolo non può essere eliminato',
+    'cannot_be_edited'      => 'Questo elemento non può essere modificato.',
     'undeployable_tooltip'      => 'Non puoi assegnare questo articolo. Controlla la quantità rimanente.',
     'serial_number'        => 'Numero Seriale',
     'item_notes' => ':item Note',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'Non hai i permessi per :action questo :item_type',
     'edit' => 'modifica',
     'action_source' => 'Sorgente Azione',
+    'or' => 'o',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Modifica campi e opzioni',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Elimina :object_type',
+                'warn'   =>  'Stai per eliminare uno :object_type<unk> Stai per eliminare :count :object_type',
+                'success'   =>  ':object_type eliminato con successo<unk> Eliminato con successo :count :object_type',
+                'error'   =>  'Impossibile eliminare :object_type',
+                'nothing_selected'   =>  'Nessun :object_type selezionato - niente da fare',
+                'partial'   =>  'Eliminato :success_count :object_type, ma :error_count :object_type non può essere eliminato',
+             ],
+    ],
+    'no_requestable' => 'Non ci sono asset o modelli di asset richiesti.',
+
+    'countable' => [
+        'accessories'  => ':count Accessorio|:count Accessori',
+        'assets'  => ':count Bene|:count Beni',
+        'licenses'  => ':count Licenza|:count Licenze',
+        'license_seats'  => ':count Disponibilità Licenza|:count Disponibilità Licenza',
+        'consumables'  => ':count Consumabile|:count Consumabili',
+        'components'  => ':count Componente|:count Componenti',
+    ]
 
 ];

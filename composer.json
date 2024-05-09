@@ -42,6 +42,8 @@
     "guzzlehttp/guzzle": "^7.0.1",
     "intervention/image": "^2.5",
     "javiereguiluz/easyslugger": "^1.0",
+    "laravel-notification-channels/google-chat": "^1.0",
+    "laravel-notification-channels/microsoft-teams": "^1.1",
     "laravel/framework": "^8.46",
     "laravel/helpers": "^1.4",
     "laravel/passport": "^10.1",
@@ -56,7 +58,6 @@
     "league/flysystem-aws-s3-v3": "^1.0",
     "league/flysystem-cached-adapter": "^1.1",
     "livewire/livewire": "^2.4",
-    "mediconesystems/livewire-datatables": "^0.5.0",
     "neitanod/forceutf8": "^2.0",
     "nesbot/carbon": "^2.32",
     "nunomaduro/collision": "^5.4",
@@ -75,7 +76,8 @@
     "watson/validating": "^6.1"
   },
   "suggest": {
-    "ext-ldap": "*"
+    "ext-ldap": "*",
+    "ext-zip": "*"
   },
   "require-dev": {
     "brianium/paratest": "^6.6",

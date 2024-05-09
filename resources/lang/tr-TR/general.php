@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Aksesuarlar',
     'activated'			    => 'Aktif edildi',
     'accepted_date'         => 'Kabul edilme günü',
@@ -185,6 +186,7 @@ Context | Request Context
     'lock_passwords'        => 'Bu alan değeri bir demo kurulumunda kaydedilmeyecektir.',
     'feature_disabled'      => 'Bu özellik demo yükleme için devre dışı bırakıldı.',
     'location'              => 'Konum',
+    'location_plural'        => 'Location|Locations',
     'locations'				=> 'Konumlar',
     'logo_size'				=> 'Kare logolar, logo ve yazı ile daha iyi görünür. Logo\'nun maksimum görüntülenme boyutu 50px yükseklik x 500px genişliktir.  ',
     'logout'				=> 'Çıkış Yap',
@@ -203,6 +205,7 @@ Context | Request Context
     'new_password'          => 'Yeni Şifre',
     'next'					=> 'Sonraki',
     'next_audit_date'		=> 'Sonraki Denetim Tarihi',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Son denetim',
     'new'					=> 'yeni!',
     'no_depreciation'		=> 'Değer kaybı yok',
@@ -440,13 +443,14 @@ Context | Request Context
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Otomatik artan varlık etiketi pasif olduğu için bütün "Varlık Etiketi" sütunu doldurmalısınız.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Not: Otomatik artan varlık etiketlerinin oluşturulması etkindir, böylece "Varlık Etiketi" doldurulmamış satırlar için etiket oluşturulur. "Varlık Etiketi" girilmiş olan satırlar eski bilgilerle kalacaktır..',
     'send_welcome_email_to_users'   => ' Yeni Kullanıcılar için Hoş Geldiniz E-postası Gönderilsin mi?',
+    'send_email'                => 'Send Email',
+    'call'                      => 'Call number',
     'back_before_importing'     => 'İçeri almadan önce yedeklensinmi?',
     'csv_header_field'          => 'CSV Başlık Alanı',
     'import_field'              => 'İçeri alma alanı',
     'sample_value'              => 'Örnek Değer',
     'no_headers'                => 'Sütun Bulunamadı',
     'error_in_import_file'      => 'CSV dosyası okunurken bir hata oluştu: : hata',
-    'percent_complete'          => ':yüzde % tamamlandı',
     'errors_importing'          => 'İçeri alırken bazı hatalar oluştu: ',
     'warning'                   => 'DİKKAT: :dikkat',
     'success_redirecting'       => '"Başarılı... Yönlendiriliyor.',
@@ -462,6 +466,7 @@ Context | Request Context
     'no_autoassign_licenses_help' => 'Lisans kullanıcı arayüzü veya toplu atama için kullanıcıyı dahil etmeyin.',
     'modal_confirm_generic'      => 'Emin misiniz?',
     'cannot_be_deleted'      => 'Bu öğe silinemez',
+    'cannot_be_edited'      => 'This item cannot be edited.',
     'undeployable_tooltip'      => 'Bu ürün teslim alınamıyor. Kalan miktarı kontrol edin.',
     'serial_number'        => 'Seri Numarası',
     'item_notes' => ':item Notları',
@@ -502,5 +507,29 @@ Context | Request Context
     'action_permission_generic' => ':action veya :item_type izniniz yok',
     'edit' => 'düzenle',
     'action_source' => 'Eylem Kaynağı',
+    'or' => 'veya',
+    'url'                   => 'Link',
+    'edit_fieldset' => 'Edit fieldset fields and options',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Delete :object_type',
+                'warn'   =>  'You are about to delete one :object_type|You are about to delete :count :object_type',
+                'success'   =>  ':object_type successfully deleted|Successfully deleted :count :object_type',
+                'error'   =>  'Could not delete :object_type',
+                'nothing_selected'   =>  'No :object_type selected - nothing to do',
+                'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
+             ],
+    ],
+    'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

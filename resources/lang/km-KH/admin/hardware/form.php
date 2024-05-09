@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'ការរំលោះ',
     'depreciates_on'	=> 'ទម្លាក់តម្លៃលើ',
     'default_location'	=> 'ទីតាំងលំនាំដើម',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'កាលបរិច្ឆេទនៃ EOL',
     'eol_rate'			=> 'អត្រា EOL',
     'expected_checkin'  => 'កាលបរិច្ឆេទដែលរំពឹងទុកនឹង Checkin',

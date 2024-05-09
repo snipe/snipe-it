@@ -32,6 +32,7 @@ return [
 ',
     'default_location'	=> ' پیش فرض محل سکونت
 ',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> ' تاریخ EOL
 ',
     'eol_rate'			=> ' نرخ EOL',

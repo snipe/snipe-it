@@ -96,7 +96,7 @@ return [
     'url'                  => 'Az :attribute formátuma érvénytelen.',
     'unique_undeleted'     => 'A(z) :attribute egyedinek kell lennie.',
     'non_circular'         => 'A(z) :attribute nem hozhat létre körkörös hivatkozást.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'A jelszó nem lehet azonos a felhasználónévvel.',
     'letters'              => 'A jelszónak tartalmaznia kell legalább egy betűt.',
     'numbers'              => 'A jelszónak tartalmaznia kell legalább egy számot.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Az érték nem lehet negatív'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

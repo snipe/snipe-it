@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Abschreibung',
     'depreciates_on'	=> 'Abgeschrieben am',
     'default_location'	=> 'Standard-Standort',
+    'default_location_phone' => 'Standard-Telefon',
     'eol_date'			=> 'Ende der Nutzungsdauer',
     'eol_rate'			=> 'EOL Rate',
     'expected_checkin'  => 'Erwartetes Rückgabedatum',

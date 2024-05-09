@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Тег',
     'asset_model'       => 'Модель',
+    'assigned_to'   => 'Назначенный На',
     'book_value'  	=> 'Текущее значение',
     'change' 		=> 'Отвязан/Привязан',
     'checkout_date' => 'Дата привязки',

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Acessórios',
     'activated'			    => 'Activado',
     'accepted_date'         => 'Data da Aceitação',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'O valor do campo não será guardado numa instalação de demonstração.',
     'feature_disabled'      => 'Esta funcionalidade foi desativada na versão de demonstração.',
     'location'              => 'Localização',
+    'location_plural'        => 'Localizaçãod e Localizações',
     'locations'				=> 'Localizações',
     'logo_size'				=> 'Logotipos quadrados são melhores com logo + Texto. Tamanho máximo de exibição do logotipo é de 50px de altura x 500px de largura.  ',
     'logout'				=> 'Sair',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Nova senha',
     'next'					=> 'Próximo',
     'next_audit_date'		=> 'Próxima Data de Auditoria',
+    'no_email'              => 'Nenhum endereço de e-mail associado a este usuário',
     'last_audit'		    => 'Última auditoria',
     'new'					=> 'novo!',
     'no_depreciation'		=> 'Sem Depreciação',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Gestão de auto incremento de etiquetas de conteúdo está desabilitado, assim todas as linhas precisam de ter a coluna "Etiqueta de Artigo" preenchida.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Nota: Gestão de auto incremento de etiquetas de conteúdo está habilitado assim serão criadas \\"Etiquetas de artigo\\" para os artigos que não a possuem. As linhas que possuem "Etiqueta de artigo" preenchidas, serão atualizadas com as informações fornecidas.',
     'send_welcome_email_to_users'   => ' Enviar endereço eletrónico de boas-vindas para novos utilizadores?',
+    'send_email'                => 'Enviar e-mail',
+    'call'                      => 'Número de chamada',
     'back_before_importing'     => 'Fazer cópias de segurança antes de importar?',
     'csv_header_field'          => 'Campo de cabeçalho CSV',
     'import_field'              => 'Campo de importação',
     'sample_value'              => 'Valor de Amostra',
     'no_headers'                => 'Nenhuma coluna encontrada',
     'error_in_import_file'      => 'Houve um erro ao ler o arquivo CSV: :error',
-    'percent_complete'          => ':percent % Completo',
     'errors_importing'          => 'Ocorreram alguns erros ao importar: ',
     'warning'                   => 'AVISO: :warning',
     'success_redirecting'       => '"Sucesso... Redirecionando.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Não inclua o utilizador para atribuição em massa através da interface do utilizador da licença ou das ferramentas do CLI.',
     'modal_confirm_generic'      => 'Tem a certeza?',
     'cannot_be_deleted'      => 'Este artigo não pode ser apagado',
+    'cannot_be_edited'      => 'Este item não pode ser editado.',
     'undeployable_tooltip'      => 'Este item não pode ser entregue. Verifique a quantidade restante.',
     'serial_number'        => 'Número de Série',
     'item_notes' => ':item Notas',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'Você não tem permissão para :action este: item_type',
     'edit' => 'editar',
     'action_source' => 'Fonte da Ação',
+    'or' => 'ou',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Editar campos e opções',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Exclusão em massa :object_type',
+                'warn'   =>  'Você está prestes a excluir um :object_type|Você está prestes a excluir :count :object_type',
+                'success'   =>  ':object_type deletado com sucesso|:count :object_type :count com sucesso',
+                'error'   =>  'Não foi possível excluir :object_type',
+                'nothing_selected'   =>  'Não :object_type selecionado - nada a fazer',
+                'partial'   =>  'Excluído :success_count :object_type, mas :error_count :object_type não pôde ser excluído',
+             ],
+    ],
+    'no_requestable' => 'Não há ativos solicitáveis ou modelos de ativos.',
+
+    'countable' => [
+        'accessories'  => ':count Acessório™️count Acessórios',
+        'assets'  => ':count Ativo',
+        'licenses'  => ':count Licenças,:count Licenças',
+        'license_seats'  => ':count licença assentonamed@@0:count licença de assentos',
+        'consumables'  => ':count Consumível|:count Consumíveis',
+        'components'  => ':count Componente|:count Componentes',
+    ]
 
 ];

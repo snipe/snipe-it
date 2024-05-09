@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'อุปกรณ์',
     'activated'			    => 'เปิดใช้งาน',
     'accepted_date'         => 'ข้อมูลที่ได้รับการยอมรับแล้ว',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'ข้อมูลในรายการนี้จะไม่ถูกบันทึกเพราะเป็นระบบตัวอย่าง (demo installation)',
     'feature_disabled'      => 'คุณลักษณะนี้ถูกปิดใช้งานสำหรับการติดตั้งแบบสาธิต',
     'location'              => 'สถานที่',
+    'location_plural'        => 'Location|Locations',
     'locations'				=> 'สถานที่',
     'logo_size'				=> 'โลโก้สี่เหลี่ยมจตุรัสจะดูดีที่สุดเมื่อทำแบบ โลโก้ + ข้อความ, ขนาดโลโก้ใหญ่สุดคือ สูง=50px x กว้าง=500px  ',
     'logout'				=> 'ออกจากระบบ',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'รหัสผ่านใหม่',
     'next'					=> 'ถัด​ไป',
     'next_audit_date'		=> 'วันที่ตรวจสอบถัดไป',
+    'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'การตรวจสอบครั้งล่าสุด',
     'new'					=> 'ใหม่!',
     'no_depreciation'		=> 'ไม่มีค่าเสื่อมราคา',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generating auto-incrementing asset tags is disabled so all rows need to have the "Asset Tag" column populated.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Note: Generating auto-incrementing asset tags is enabled so assets will be created for rows that do not have "Asset Tag" populated. Rows that do have "Asset Tag" populated will be updated with the provided information.',
     'send_welcome_email_to_users'   => ' ส่งเมล์ ตอนรับผู้ใช้ใหม่?',
+    'send_email'                => 'Send Email',
+    'call'                      => 'Call number',
     'back_before_importing'     => 'Backup before importing?',
     'csv_header_field'          => 'CSV Header Field',
     'import_field'              => 'Import Field',
     'sample_value'              => 'Sample Value',
     'no_headers'                => 'No Columns Found',
     'error_in_import_file'      => 'There was an error reading the CSV file: :error',
-    'percent_complete'          => ':percent % Complete',
     'errors_importing'          => 'Some Errors occurred while importing: ',
     'warning'                   => 'WARNING: :warning',
     'success_redirecting'       => '"Success... Redirecting.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
     'modal_confirm_generic'      => 'Are you sure?',
     'cannot_be_deleted'      => 'This item cannot be deleted',
+    'cannot_be_edited'      => 'This item cannot be edited.',
     'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Notes',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'You do not have permission to :action this :item_type',
     'edit' => 'แก้ไข',
     'action_source' => 'Action Source',
+    'or' => 'or',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Edit fieldset fields and options',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Delete :object_type',
+                'warn'   =>  'You are about to delete one :object_type|You are about to delete :count :object_type',
+                'success'   =>  ':object_type successfully deleted|Successfully deleted :count :object_type',
+                'error'   =>  'Could not delete :object_type',
+                'nothing_selected'   =>  'No :object_type selected - nothing to do',
+                'partial'   =>  'Deleted :success_count :object_type, but :error_count :object_type could not be deleted',
+             ],
+    ],
+    'no_requestable' => 'There are no requestable assets or asset models.',
+
+    'countable' => [
+        'accessories'  => ':count Accessory|:count Accessories',
+        'assets'  => ':count Asset|:count Assets',
+        'licenses'  => ':count License|:count Licenses',
+        'license_seats'  => ':count License Seat|:count License Seats',
+        'consumables'  => ':count Consumable|:count Consumables',
+        'components'  => ':count Component|:count Components',
+    ]
 
 ];

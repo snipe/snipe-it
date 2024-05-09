@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => '반출 확인',
     'asset_expected_checkin'    => 'Expected Checkin',
     'date'                      => '날짜:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
     'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
     'signed_by_location_manager' => 'Signed By (Location Manager):',

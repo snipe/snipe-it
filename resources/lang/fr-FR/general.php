@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accessoires',
     'activated'			    => 'Activé',
     'accepted_date'         => 'Date d\'acceptation',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Ce champ ne sera pas sauvegardé dans une installation de démonstration.',
     'feature_disabled'      => 'Cette fonctionnalité a été désactivée pour l\'installation de démonstration.',
     'location'              => 'Lieu',
+    'location_plural'        => 'Emplacements',
     'locations'				=> 'Lieux',
     'logo_size'				=> 'Les logos carrés sont mieux affichés avec l\'option Logo + Texte. La taille maximale d\'affichage du logo est de 50px de haut x 500px de large.  ',
     'logout'				=> 'Se déconnecter',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Nouveau mot de passe',
     'next'					=> 'Prochain',
     'next_audit_date'		=> 'Prochaine date de vérification',
+    'no_email'              => 'Aucune adresse e-mail associée à cet utilisateur',
     'last_audit'		    => 'Dernier audit',
     'new'					=> 'nouveau!',
     'no_depreciation'		=> 'Pas d\'amortissement',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'La génération de numéros d\'inventaire autoincrémentés est désactivée, toutes les lignes doivent donc avoir la colonne "Numéro d\'inventaire" renseignée.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Note : La génération de numéros d\'inventaire autoincrémentés est activée, de sorte que les actifs seront créés pour les lignes qui n\'ont pas de numéro d\'inventaire renseigné. Les lignes qui comprennent un numéro d\'inventaire seront mises à jour avec les informations fournies.',
     'send_welcome_email_to_users'   => ' Envoyer un e-mail de bienvenue aux nouveaux·elles utilisateurs·trices ?',
+    'send_email'                => 'Envoyer un e-mail',
+    'call'                      => 'Numéro d\'appel',
     'back_before_importing'     => 'Sauvegarder avant d\'importer ?',
     'csv_header_field'          => 'Champ d\'en-tête CSV',
     'import_field'              => 'Importer le champ',
     'sample_value'              => 'Exemple de valeur',
     'no_headers'                => 'Aucune colonne trouvée',
     'error_in_import_file'      => 'Une erreur s\'est produite lors de la lecture du fichier CSV : :error',
-    'percent_complete'          => ':percent % achevé',
     'errors_importing'          => 'Des erreurs se sont produites lors de l\'importation : ',
     'warning'                   => 'ATTENTION : :warning',
     'success_redirecting'       => '"Succès... Redirection.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Ne pas inclure l\'utilisateur·trice dans l\'attribution groupée via l\'interface utilisateur de licence ou les outils CLI.',
     'modal_confirm_generic'      => 'Êtes-vous sûr·e ?',
     'cannot_be_deleted'      => 'Cet élément ne peut pas être supprimé',
+    'cannot_be_edited'      => 'Cet élément ne peut pas être modifié.',
     'undeployable_tooltip'      => 'Cet élément ne peut pas être attribué. Vérifiez la quantité restante.',
     'serial_number'        => 'Numéro de série',
     'item_notes' => 'Notes :item',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'Vous n\'avez pas la permission de :action ce :item_type',
     'edit' => 'éditer',
     'action_source' => 'Source de l\'action',
+    'or' => 'ou',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Modifier les champs et les options du fieldset',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Supprimer en bloc :object_type',
+                'warn'   =>  'Vous êtes sur le point de supprimer un :object_type|Vous êtes sur le point de supprimer :count :object_type',
+                'success'   =>  ':object_type supprimé avec succès|Succès :count :object_type',
+                'error'   =>  'Impossible de supprimer :object_type',
+                'nothing_selected'   =>  'Aucun :object_type sélectionné - rien à faire',
+                'partial'   =>  'Supprimé :success_count :object_type, mais :error_count :object_type n\'a pas pu être supprimé',
+             ],
+    ],
+    'no_requestable' => 'Il n\'y a pas d\'actifs ou de modèles d\'actifs demandés.',
+
+    'countable' => [
+        'accessories'  => ':count Accessoire|:count Accessoires',
+        'assets'  => ':count Actif|:count Actifs',
+        'licenses'  => ':count Licence|:count Licences',
+        'license_seats'  => ':count Siège de licence|:count sièges de licence',
+        'consumables'  => ':count Consommable|:count Consommables',
+        'components'  => ':count Composant|:count Composants',
+    ]
 
 ];

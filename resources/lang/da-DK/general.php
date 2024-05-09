@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Tilbehør',
     'activated'			    => 'Aktiveret',
     'accepted_date'         => 'Dato accepteret',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Feltværdien vil ikke blive gemt i en demoinstallation.',
     'feature_disabled'      => 'Denne funktion er blevet deaktiveret til demoinstallationen.',
     'location'              => 'Lokation',
+    'location_plural'        => 'Placeringsplaceringer',
     'locations'				=> 'Lokationer',
     'logo_size'				=> 'Kvadratiske logoer ser bedst ud som Logo + Text. Logo maksimum størrelse er 50px høj x 500px bred.  ',
     'logout'				=> 'Log ud',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Ny adgangskode',
     'next'					=> 'Næste',
     'next_audit_date'		=> 'Næste revisionsdato',
+    'no_email'              => 'Ingen e-mailadresse tilknyttet denne bruger',
     'last_audit'		    => 'Seneste revision',
     'new'					=> 'ny!',
     'no_depreciation'		=> 'Ingen Afskrivning',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generering af auto-tilvækst af asset-tags er deaktiveret, så alle rækker skal have kolonnen "Asset Tag" udfyldt.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Bemærk: Generering af auto-tilvækst af asset-tags er aktiveret, så aktiver vil blive oprettet for rækker, der ikke har "Asset Tag" befolket. Rækker, der har "Asset Tag", vil blive opdateret med de angivne oplysninger.',
     'send_welcome_email_to_users'   => ' Send velkomstmail til nye brugere?',
+    'send_email'                => 'Send E-Mail',
+    'call'                      => 'Ring nummer',
     'back_before_importing'     => 'Backup før importering?',
     'csv_header_field'          => 'Csv Header Felt',
     'import_field'              => 'Importér Felt',
     'sample_value'              => 'Eksempel Værdi',
     'no_headers'                => 'Ingen Kolonner Fundet',
     'error_in_import_file'      => 'Der opstod en fejl under læsning af CSV-filen: :error',
-    'percent_complete'          => ':procent % Færdig',
     'errors_importing'          => 'Nogle fejl opstod under importen: ',
     'warning'                   => 'ADVARSEL: :warning',
     'success_redirecting'       => '"Succes... Omdirigering.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Inkludér ikke bruger til bulk-tildeling gennem licens UI eller cli værktøjer.',
     'modal_confirm_generic'      => 'Er du sikker?',
     'cannot_be_deleted'      => 'Dette element kan ikke slettes',
+    'cannot_be_edited'      => 'Dette element kan ikke redigeres.',
     'undeployable_tooltip'      => 'Dette element kan ikke tjekkes ud. Tjek det resterende antal.',
     'serial_number'        => 'Serienummer',
     'item_notes' => ':item Noter',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'Du har ikke tilladelse til at :action denne :item_type',
     'edit' => 'rediger',
     'action_source' => 'Handling Kilde',
+    'or' => 'eller',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Rediger feltsæt felter og indstillinger',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Masse Slet :object_type',
+                'warn'   =>  'Du er ved at slette en :object_typeţYou are about to delete :count :object_type',
+                'success'   =>  ':object_type slettet succesfuldt :count :object_type',
+                'error'   =>  'Kunne ikke slette :object_type',
+                'nothing_selected'   =>  'Nej :object_type valgt - intet at gøre',
+                'partial'   =>  'Slettede :success_count :object_type, men :error_count :object_type kunne ikke slettes',
+             ],
+    ],
+    'no_requestable' => 'Der er ingen requestable aktiver eller asset-modeller.',
+
+    'countable' => [
+        'accessories'  => ':count Tilbehør:count Tilbehør',
+        'assets'  => ':count Aktiver:count Aktiver',
+        'licenses'  => ':count Licens :count Licenser',
+        'license_seats'  => ':count Licenssæde:count Licenssæder',
+        'consumables'  => ':count Forbrugsparti:count Forbrugsvarer',
+        'components'  => ':count Komponent:count Komponenter',
+    ]
 
 ];

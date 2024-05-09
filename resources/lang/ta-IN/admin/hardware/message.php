@@ -18,6 +18,7 @@ return [
         'success' 			=> 'சொத்து வெற்றிகரமாக புதுப்பிக்கப்பட்டது.',
         'nothing_updated'	=>  'எந்த துறைகளும் தேர்ந்தெடுக்கப்படவில்லை, அதனால் எதுவும் புதுப்பிக்கப்படவில்லை.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

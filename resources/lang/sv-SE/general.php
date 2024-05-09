@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Tillbehör',
     'activated'			    => 'Aktiverad',
     'accepted_date'         => 'Datum Accepterat',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'Detta fältvärde kommer inte att sparas i en demoinstallation.',
     'feature_disabled'      => 'Den här funktionen har inaktiverats för demoinstallationen.',
     'location'              => 'Plats',
+    'location_plural'        => 'Plats<unk> platser',
     'locations'				=> 'Platser',
     'logo_size'				=> 'Fyrkantiga logotyper ser bäst ut med Logo + Text. Logotypen maximal visningsstorlek är 50px hög x 500px bred.  ',
     'logout'				=> 'Logga ut',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'Nytt lösenord',
     'next'					=> 'Nästa',
     'next_audit_date'		=> 'Nästa inventeringsdatum',
+    'no_email'              => 'Ingen e-postadress kopplad till den här användaren',
     'last_audit'		    => 'Senaste inventeringen',
     'new'					=> 'ny!',
     'no_depreciation'		=> 'Ingen avskrivning',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Automatiskt ökande tillgångsmarkeringar är inaktiverad, så alla rader måste ha kolumnen "Asset Tag" ifylld.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Notera: Generering av automatiskt ökande tillgångsmarkeringar är aktiverad så tillgångar kommer att skapas för rader som inte har "Asset Tag" ifyllt. Rader där "Asset Tag" är ifylld kommer att uppdateras med den angivna informationen.',
     'send_welcome_email_to_users'   => ' Skicka välkomstmail för nya användare?',
+    'send_email'                => 'Skicka e-post',
+    'call'                      => 'Ring nummer',
     'back_before_importing'     => 'Säkerhetskopiera innan import?',
     'csv_header_field'          => 'CSV Header Fält',
     'import_field'              => 'Import Fält',
     'sample_value'              => 'Exempel värde',
     'no_headers'                => 'Inga kolumner hittades',
     'error_in_import_file'      => 'Det gick inte att läsa CSV-filen: :error',
-    'percent_complete'          => ':procent % Slutförd',
     'errors_importing'          => 'Några fel inträffade vid import: ',
     'warning'                   => 'VARNING: :warning',
     'success_redirecting'       => '"Lyckades... Omdirigerar.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'Inkludera inte användare för bulk-tilldelning genom licens UI eller cli verktyg.',
     'modal_confirm_generic'      => 'Är du säker?',
     'cannot_be_deleted'      => 'Det här objektet kan inte raderas',
+    'cannot_be_edited'      => 'Detta objekt kan inte redigeras.',
     'undeployable_tooltip'      => 'Det här objektet kan inte checkas ut. Kolla antalet kvar.',
     'serial_number'        => 'Serienummer',
     'item_notes' => ':item noteringar',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'Du har inte behörighet att :action denna :item_type',
     'edit' => 'ändra',
     'action_source' => 'Åtgärd Källa',
+    'or' => 'eller',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'Redigera fältfält och alternativ',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'Bulk Ta bort :object_type',
+                'warn'   =>  'Du håller på att ta bort ett :object_type<unk> Du håller på att ta bort :count :object_type',
+                'success'   =>  ':object_type har tagits bort framgångsrikt|:count :object_type har tagits bort framgångsrikt',
+                'error'   =>  'Kunde inte ta bort :object_type',
+                'nothing_selected'   =>  'Inga :object_type valda - inget att göra',
+                'partial'   =>  'Borttagna :success_count :object_type, men :error_count :object_type kunde inte tas bort',
+             ],
+    ],
+    'no_requestable' => 'Det finns inga begärbara tillgångar eller tillgångsmodeller.',
+
+    'countable' => [
+        'accessories'  => ':count Tillbehör :count Tillbehör',
+        'assets'  => ':count Tillgång:count Tillgångar',
+        'licenses'  => ':count License<unk> :count Licenser',
+        'license_seats'  => ':count License Seat<unk> :count License Seats',
+        'consumables'  => ':count Förbrukningsmedel<unk> :count Förbrukningsvaror',
+        'components'  => ':count Component|:count Komponenter',
+    ]
 
 ];

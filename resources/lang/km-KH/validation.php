@@ -13,13 +13,13 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
+    'accepted'             => 'គុណលក្ខណៈ : ត្រូវតែទទួលយក។',
+    'active_url'           => ':attribute មិនមែនជា URL ត្រឹមត្រូវទេ។',
+    'after'                => ':attribute ត្រូវតែជាកាលបរិច្ឆេទបន្ទាប់ពី :date ។',
+    'after_or_equal'       => ':attribute ត្រូវតែជាកាលបរិច្ឆេទបន្ទាប់ពី ឬស្មើនឹង :date។',
+    'alpha'                => ':attribute អាចមានត្រឹមតែអក្សរប៉ុណ្ណោះ។',
+    'alpha_dash'           => ':attribute អាចមានតែអក្សរ លេខ និងសញ្ញាដាច់ៗប៉ុណ្ណោះ។',
+    'alpha_num'            => ':attribute អាចមានត្រឹមតែអក្សរ និងលេខប៉ុណ្ណោះ។',
     'array'                => 'The :attribute must be an array.',
     'before'               => 'The :attribute must be a date before :date.',
     'before_or_equal'      => 'The :attribute must be a date before or equal to :date.',
@@ -96,7 +96,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
     'unique_undeleted'     => 'The :attribute must be unique.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Value cannot be negative'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

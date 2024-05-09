@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Zubehör wurde erfolgreich getrennt',
     'accessory_error'                   => 'Zubehör bereits an Kit angeschlossen',
     'accessory_deleted'                 => 'Löschen war erfolgreich',
-    'accessory_none'                    => 'Zubehör existiert nicht',
+    'accessory_none'                    => 'Das Zubehör existiert nicht',
     'checkout_success'                  => 'Herausgabe war erfolgreich',
     'checkout_error'                    => 'Herausgabe Fehler',
     'kit_none'                          => 'Kit existiert nicht',

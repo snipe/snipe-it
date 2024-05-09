@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Departamento',
     'suppliers'             => 'Proveedores',
     'update'                => 'Actualizar proveedor',
-    'url'                   => 'URL',
     'view'                  => 'Ver Proveedor',
     'view_assets_for'       => 'Ver recursos para',
     'zip'                   => 'Código Postal',

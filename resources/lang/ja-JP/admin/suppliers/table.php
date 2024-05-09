@@ -19,7 +19,6 @@ return array(
     'state'                 => '都道府県',
     'suppliers'             => '仕入先',
     'update'                => '仕入先を更新',
-    'url'                   => 'URL',
     'view'                  => '仕入先を表示',
     'view_assets_for'       => '資産を表示',
     'zip'                   => '郵便番号',

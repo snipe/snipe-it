@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'waardevermindering',
     'depreciates_on'	=> 'Depresiate On',
     'default_location'	=> 'Verstek Ligging',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL Datum',
     'eol_rate'			=> 'EOL-tarief',
     'expected_checkin'  => 'Verwagte tjekdatum',

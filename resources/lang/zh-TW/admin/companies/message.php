@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => '公司不存在',
-    'deleted'        => 'Deleted company',
+    'deleted'        => '已刪除公司',
     'assoc_users'    => '至少還有一個資產與此公司關聯，目前不能被删除，請檢查後重試。 ',
     'create' => [
         'error'   => '新增公司失敗，請重試。',

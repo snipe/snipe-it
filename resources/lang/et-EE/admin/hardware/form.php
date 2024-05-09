@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Amortisatsioon',
     'depreciates_on'	=> 'Halvustab sisse',
     'default_location'	=> 'Vaikimisi asukoht',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'EOL Kuupäev',
     'eol_rate'			=> 'EOL määr',
     'expected_checkin'  => 'Eeldatav tagastamise kuupäev',

@@ -172,4 +172,10 @@ class CategoryFactory extends Factory
          ]);
      }
 
+    public function forAccessories()
+    {
+        return $this->state([
+            'category_type' => 'accessory',
+        ]);
+    }
 }

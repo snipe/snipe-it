@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SamlNonce;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Ldap;
@@ -109,7 +110,14 @@ class LoginController extends Controller
 
             try {
                 $user = $saml->samlLogin($samlData);
-
+                $notValidAfter = new \Carbon\Carbon(@$samlData['assertionNotOnOrAfter']);
+                if(\Carbon::now()->greaterThanOrEqualTo($notValidAfter)) {
+                    abort(400,"Expired SAML Assertion");
+                }
+                if(SamlNonce::where('nonce', @$samlData['nonce'])->count() > 0) {
+                    abort(400,"Assertion has already been used");
+                }
+                Log::debug("okay, fine, this is a new nonce then. Good for you.");
                 if (!is_null($user)) {
                     Auth::login($user);
                 } else {
@@ -123,10 +131,14 @@ class LoginController extends Controller
                     $user->last_login = \Carbon::now();
                     $user->saveQuietly();
                 }
-                
+                $s = new SamlNonce();
+                $s->nonce = @$samlData['nonce'];
+                $s->not_valid_after = $notValidAfter;
+                $s->save();
+
             } catch (\Exception $e) {
                 \Log::debug('There was an error authenticating the SAML user: '.$e->getMessage());
-                throw new \Exception($e->getMessage());
+                throw $e;
             }
 
         // Fallthrough with better logging

@@ -1,17 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
-    'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
-    'update'				=> 'Update Manufacturer',
-    'url'   				=> 'URL',
+    'about_manufacturers_title'    => 'Ku saabsan warshadeeyayaasha',
+    'about_manufacturers_text'  => 'Soo-saareyaashu waa shirkadaha abuura hantidaada. Waxaad halkan ku kaydin kartaa macluumaadka taageerada muhiimka ah ee xiriirka iyaga ku saabsan, kaas oo lagu muujin doono boggaga faahfaahinta hantidaada.',
+    'asset_manufacturers'	=> 'Soo-saareyaasha Hantida',
+    'create'				=> 'Abuur saaraha',
+    'id'   					=> 'Aqoonsi',
+    'name'      			=> 'Magaca',
+    'support_email'   		=> 'Taageerada iimaylka',
+    'support_phone'   		=> 'Telefoonka Taageerada',
+    'support_url'   		=> 'Taageerada URL',
+    'warranty_lookup_url'   => 'URL Raadinta damaanada',
+    'update'				=> 'Cusbooneysii soo saaraha',
 
 );

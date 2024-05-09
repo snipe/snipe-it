@@ -8,14 +8,10 @@ use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use League\Csv\Reader;
 use PHPUnit\Framework\Assert;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
-
 
 class CustomReportTest extends TestCase
 {
-    use InteractsWithSettings;
-
     protected function setUp(): void
     {
         parent::setUp();

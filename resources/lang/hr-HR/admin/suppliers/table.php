@@ -19,7 +19,6 @@ return array(
     'state'                 => 'država',
     'suppliers'             => 'Dobavljači',
     'update'                => 'Ažuriraj dobavljača',
-    'url'                   => 'URL',
     'view'                  => 'Pregledajte dobavljača',
     'view_assets_for'       => 'Prikaži opcije za',
     'zip'                   => 'Poštanski broj',

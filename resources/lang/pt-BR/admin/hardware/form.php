@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Depreciação',
     'depreciates_on'	=> 'Deprecia em',
     'default_location'	=> 'Local Padrão',
+    'default_location_phone' => 'Telefone de localização padrão',
     'eol_date'			=> 'Date de EOL',
     'eol_rate'			=> 'Classificação de EOL',
     'expected_checkin'  => 'Excedeu a data dar entrada',

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
+use App\Http\Traits\MigratesLegacyAssetLocations;
+use App\Models\CheckoutAcceptance;
+use App\Models\LicenseSeat;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
@@ -45,6 +49,8 @@ use Route;
  */
 class AssetsController extends Controller
 {
+    use MigratesLegacyAssetLocations;
+
     /**
      * Returns JSON listing of all assets
      *
@@ -53,7 +59,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, $audit = null) 
+    public function index(Request $request, $action = null, $upcoming_status = null)
     {
 
         $filter_non_deprecable_assets = false;
@@ -88,6 +94,7 @@ class AssetsController extends Controller
             'serial',
             'model_number',
             'last_checkout',
+            'last_checkin',
             'notes',
             'expected_checkin',
             'order_number',
@@ -105,6 +112,7 @@ class AssetsController extends Controller
             'requests_counter',
             'byod',
             'asset_eol_date',
+            'requestable',
         ];
 
         $filter = [];
@@ -136,7 +144,7 @@ class AssetsController extends Controller
 
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
-            if ($request->filled($field->db_column_name())) {
+            if ($request->filled($field->db_column_name()) && $field->db_column_name()) {
                 $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
             }
         }
@@ -147,17 +155,44 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
-        // This is used by the audit reporting routes
-        if (Gate::allows('audit', Asset::class)) {
-            switch ($audit) {
-                case 'due':
-                    $assets->DueOrOverdueForAudit($settings);
-                    break;
-                case 'overdue':
-                    $assets->overdueForAudit($settings);
-                    break;
+
+        /**
+         * Handle due and overdue audits and checkin dates
+         */
+        switch ($action) {
+            case 'audits':
+
+                switch ($upcoming_status) {
+                    case 'due':
+                        $assets->DueForAudit($settings);
+                        break;
+                    case 'overdue':
+                        $assets->OverdueForAudit();
+                        break;
+                    case 'due-or-overdue':
+                        $assets->DueOrOverdueForAudit($settings);
+                        break;
+                }
+                break;
+
+            case 'checkins':
+                switch ($upcoming_status) {
+                    case 'due':
+                        $assets->DueForCheckin($settings);
+                        break;
+                    case 'overdue':
+                        $assets->OverdueForCheckin();
+                        break;
+                    case 'due-or-overdue':
+                        $assets->DueOrOverdueForCheckin($settings);
+                        break;
+                }
+                break;
             }
-        }
+
+        /**
+         * End handling due and overdue audits and checkin dates
+         */
 
 
         // This is used by the sidenav, mostly
@@ -584,6 +619,11 @@ class AssetsController extends Controller
                         }
                     }
                 }
+                if ($field->element == 'checkbox') {
+                    if(is_array($field_val)) {
+                        $field_val = implode(',', $field_val);
+                    }
+                }
 
 
                 $asset->{$field->db_column} = $field_val;
@@ -607,6 +647,8 @@ class AssetsController extends Controller
             }
 
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
+
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -650,16 +692,26 @@ class AssetsController extends Controller
             $model = AssetModel::find($asset->model_id);
             
             // Update custom fields
+            $problems_updating_encrypted_custom_fields = false;
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
+                    $field_val = $request->input($field->db_column, null);
+
                     if ($request->has($field->db_column)) {
+                        if ($field->element == 'checkbox') {
+                            if(is_array($field_val)) {
+                                $field_val = implode(',', $field_val);
+                            }
+                        }
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                                $field_val = Crypt::encrypt($field_val);
+                            } else {
+                                $problems_updating_encrypted_custom_fields = true;
+                                continue;
                             }
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
                         }
+                        $asset->{$field->db_column} = $field_val;
                     }
                 }
             }
@@ -685,7 +737,11 @@ class AssetsController extends Controller
                     $asset->image = $asset->getImageUrl();
                 }
 
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                if ($problems_updating_encrypted_custom_fields) {
+                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+                } else {
+                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                }
             }
 
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -864,10 +920,8 @@ class AssetsController extends Controller
      */
     public function checkin(Request $request, $asset_id)
     {
-        $this->authorize('checkin', Asset::class);
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
-
 
         $target = $asset->assignedTo;
         if (is_null($target)) {
@@ -879,9 +933,8 @@ class AssetsController extends Controller
         }
 
         $asset->expected_checkin = null;
-        $asset->last_checkout = null;
+        //$asset->last_checkout = null;
         $asset->last_checkin = now();
-        $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
 
@@ -889,10 +942,16 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
         }
 
+        $this->migrateLegacyLocations($asset);
+
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
             $asset->location_id = $request->input('location_id');
+
+            if ($request->input('update_default_location')){
+                $asset->rtd_location_id = $request->input('location_id');
+            }
         }
 
         if ($request->has('status_id')) {
@@ -905,6 +964,23 @@ class AssetsController extends Controller
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
             $originalValues['action_date'] = $checkin_at;
         }
+
+        $asset->licenseseats->each(function (LicenseSeat $seat) {
+            $seat->update(['assigned_to' => null]);
+        });
+
+        // Get all pending Acceptances for this asset and delete them
+        CheckoutAcceptance::pending()
+            ->whereHasMorph(
+                'checkoutable',
+                [Asset::class],
+                function (Builder $query) use ($asset) {
+                    $query->where('id', $asset->id);
+                })
+            ->get()
+            ->map(function ($acceptance) {
+                $acceptance->delete();
+            });
 
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
@@ -1035,8 +1111,7 @@ class AssetsController extends Controller
 
         $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests')
-            ->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests');
 
 
 
@@ -1044,7 +1119,7 @@ class AssetsController extends Controller
         if ($request->filled('search')) {
             $assets->TextSearch($request->input('search'));
         }
-
+        
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
             if ($request->filled($field->db_column_name())) {
@@ -1074,6 +1149,7 @@ class AssetsController extends Controller
                 break;
         }
 
+        $assets->requestableAssets();
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');

@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute 格式不正確',
     'unique_undeleted'     => ':attribute 必須是唯一值',
     'non_circular'         => ':attribule 屬性不能建立一個循環參考',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => '密碼不可以和使用者名稱相同',
     'letters'              => '密碼至少必須包含 1 個字母。',
     'numbers'              => '密碼至少必須包含 1 個數字。',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => '值不能為負'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

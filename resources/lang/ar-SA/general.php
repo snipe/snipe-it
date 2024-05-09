@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'ملحقات',
     'activated'			    => 'مفعل',
     'accepted_date'         => 'تم تخزين التاريخ',
@@ -182,6 +183,7 @@ return [
     'lock_passwords'        => 'لن يتم حفظ قيمة الحقل هذه في تثبيت تجريبي.',
     'feature_disabled'      => 'تم تعطيل هذه الميزة للتثبيت التجريبي.',
     'location'              => 'الموقع',
+    'location_plural'        => 'الموقع<unk> المواقع',
     'locations'				=> 'المواقع',
     'logo_size'				=> 'يبدو شعار مربع أفضل مع الشعار + النص. الحد الأقصى لحجم عرض الشعار هو 50 بكسل × 500 بكس.  ',
     'logout'				=> 'تسجيل خروج',
@@ -200,6 +202,7 @@ return [
     'new_password'          => 'كلمة المرور الجديدة',
     'next'					=> 'التالى',
     'next_audit_date'		=> 'تاريخ التدقيق التالي',
+    'no_email'              => 'لا يوجد عنوان بريد إلكتروني مرتبط بهذا المستخدم',
     'last_audit'		    => 'آخر مراجعة',
     'new'					=> 'الجديد!',
     'no_depreciation'		=> 'لا يوجد إستهلاك',
@@ -437,13 +440,14 @@ return [
     'auto_incrementing_asset_tags_disabled_so_tags_required' => 'تم تعطيل إنشاء علامات الأصول التزايدية التلقائية لذلك يجب أن يكون لجميع الصفوف عمود "علامة الأصول" مأهول.',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'ملاحظة: تم تمكين إنشاء علامات الأصول التزايدية التلقائية لذلك سيتم إنشاء أصول للصفوف التي لا تحتوي على "علامة الأصول" مأهولة. الصفوف التي تحتوي على "علامة أصول" مأهولة سيتم تحديثها مع المعلومات المقدمة.',
     'send_welcome_email_to_users'   => ' إرسال بريد إلكتروني مرحبا للمستخدمين الجدد؟',
+    'send_email'                => 'إرسال البريد الإلكتروني',
+    'call'                      => 'رقم المكالمة',
     'back_before_importing'     => 'النسخ الاحتياطي قبل الاستيراد؟',
     'csv_header_field'          => 'حقل ترويسة CSV',
     'import_field'              => 'حقل الاستيراد',
     'sample_value'              => 'قيمة العينة',
     'no_headers'                => 'لم يتم العثور على أعمدة',
     'error_in_import_file'      => 'حدث خطأ أثناء قراءة ملف CSV: :error',
-    'percent_complete'          => 'اكتمل :%',
     'errors_importing'          => 'حدثت بعض الأخطاء أثناء الاستيراد: ',
     'warning'                   => 'تحذير: تحذير',
     'success_redirecting'       => '"نجاح... إعادة التوجيه.',
@@ -459,6 +463,7 @@ return [
     'no_autoassign_licenses_help' => 'لا تقم بتضمين المستخدم للتعيين الضخم من خلال واجهة المستخدم الترخيص أو أدوات العصابات.',
     'modal_confirm_generic'      => 'هل أنت متأكد؟',
     'cannot_be_deleted'      => 'لا يمكن حذف هذا العنصر',
+    'cannot_be_edited'      => 'لا يمكن تعديل هذا العنصر.',
     'undeployable_tooltip'      => 'لا يمكن التحقق من هذا العنصر. تحقق من الكمية المتبقية.',
     'serial_number'        => 'الرقم التسلسلي',
     'item_notes' => ':item ملاحظات',
@@ -499,5 +504,29 @@ return [
     'action_permission_generic' => 'ليس لديك الإذن لـ :action هذا :item_type',
     'edit' => 'تعديل',
     'action_source' => 'مصدر العمل',
+    'or' => 'أو',
+    'url'                   => 'URL',
+    'edit_fieldset' => 'تحرير حقول مجموعة الحقول والخيارات',
+    'bulk' => [
+            'delete' =>
+                [
+                'header' => 'حذف كتلة :object_type',
+                'warn'   =>  'أنت على وشك حذف واحد :object_type<unk> أنت على وشك حذف :count :object_type',
+                'success'   =>  'تم حذف :object_type بنجاح بنجاح حذف :count :object_type',
+                'error'   =>  'تعذر حذف :object_type',
+                'nothing_selected'   =>  'لا :object_type محدد - لا شيء للقيام به',
+                'partial'   =>  'تم حذف :success_count :object_type, ولكن لم يتم حذف :error_count :object_type',
+             ],
+    ],
+    'no_requestable' => 'لا توجد أصول أو نماذج للأصول التي يمكن طلبها.',
+
+    'countable' => [
+        'accessories'  => ':count ملحقات :count ملحقات',
+        'assets'  => ':count أصول :count أصول',
+        'licenses'  => ':count ترخيص :count تراخيص',
+        'license_seats'  => ':count مقاعد الرخصة<unk> :count مقاعد الرخص',
+        'consumables'  => ':count مستهلكة<unk> :count مستهلك',
+        'components'  => ':count مكون<unk> :count مكونات',
+    ]
 
 ];

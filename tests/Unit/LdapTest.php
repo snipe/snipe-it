@@ -3,13 +3,13 @@
 namespace Tests\Unit;
 
 use App\Models\Ldap;
-use Exception;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+/**
+ * @group ldap
+ */
 class LdapTest extends TestCase
 {
-    use InteractsWithSettings;
     use \phpmock\phpunit\PHPMock;
 
     public function testConnect()

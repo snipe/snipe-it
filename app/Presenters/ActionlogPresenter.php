@@ -38,9 +38,13 @@ class ActionlogPresenter extends Presenter
 
     public function icon()
     {
-        
+
         // User related icons
         if ($this->itemType() == 'user') {
+
+            if ($this->actionType()=='2fa reset') {
+                return 'fa-solid fa-mobile-screen';
+            }
 
             if ($this->actionType()=='create new') {
                 return 'fa-solid fa-user-plus';
@@ -61,6 +65,7 @@ class ActionlogPresenter extends Presenter
             if ($this->actionType()=='update') {
                 return 'fa-solid fa-user-pen';
             }
+
              return 'fa-solid fa-user';
         }
 

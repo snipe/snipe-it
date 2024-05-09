@@ -2,25 +2,25 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Qaybta ma jirto.',
+    'assoc_models'	 => 'Qaybtan hadda waxay la xidhiidhaa ugu yaraan hal nooc oo lama tirtiri karo. Fadlan cusboonaysii moodooyinkaaga si aanay u tixraacin qaybtan oo isku day mar kale. ',
+    'assoc_items'	 => 'Qaybtan hadda waxa lala xidhiidhiyaa ugu yaraan hal :asset_type lamana tirtiri karo. Fadlan cusboonaysii :asset_type kaaga si aanad mar dambe tixraac qaybtan oo isku day mar kale. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Qaybta lama abuurin, fadlan isku day mar kale.',
+        'success' => 'Qaybta si guul leh ayaa loo sameeyay.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'error'   => 'Qaybta lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Qaybta si guul leh ayaa loo cusboonaysiiyay.',
+        'cannot_change_category_type'   => 'Ma beddeli kartid nooca qaybta marka la abuuro',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Ma hubtaa inaad doonayso inaad tirtirto qaybtan?',
+        'error'   => 'Waxaa jirtay arrin la tirtiray qaybta Fadlan isku day mar kale.',
+        'success' => 'Qaybta si guul leh ayaa loo tirtiray.'
     )
 
 );

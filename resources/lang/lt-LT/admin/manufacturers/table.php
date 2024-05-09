@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Palaikymo URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Atnaujinti gamintoją',
-    'url'   				=> 'URL',
 
 );

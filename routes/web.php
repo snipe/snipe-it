@@ -54,7 +54,18 @@ Route::group(['middleware' => 'auth'], function () {
      */
 
     Route::group(['prefix' => 'locations', 'middleware' => ['auth']], function () {
-        
+
+        Route::post(
+            'bulkdelete',
+            [LocationsController::class, 'postBulkDelete']
+        )->name('locations.bulkdelete.show');
+
+        Route::post(
+            'bulkedit',
+            [LocationsController::class, 'postBulkDeleteStore']
+        )->name('locations.bulkdelete.store');
+
+
         Route::get('{locationId}/clone',
             [LocationsController::class, 'getClone']
         )->name('clone/location');
@@ -68,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
             '{locationId}/printallassigned',
             [LocationsController::class, 'print_all_assigned']
         )->name('locations.print_all_assigned');
+
     });
 
     Route::resource('locations', LocationsController::class, [

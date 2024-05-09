@@ -174,19 +174,56 @@
                 @endif
 
 
-                @if ($license->supplier_id)
-                  <div class="row">
-                    <div class="col-md-3">
-                      <strong>
-                        {{ trans('general.supplier') }}
-                      </strong>
+                @if ($license->supplier)
+                    <div class="row">
+                      <div class="col-md-3">
+                        <strong>{{ trans('general.supplier') }}</strong>
+                      </div>
+                      <div class="col-md-9">
+                        @can('view', \App\Models\Supplier::class)
+                          <a href="{{ route('suppliers.show', $license->supplier->id) }}">
+                            {{ $license->supplier->name }}
+                          </a>
+                        @else
+                          {{ $license->supplier->name }}
+                        @endcan
+
+                          @if ($license->supplier->url)
+                            <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->supplier->url }}" rel="noopener">{{ $license->supplier->url }}</a>
+                          @endif
+
+                          @if ($license->supplier->phone)
+                            <br><i class="fas fa-phone" aria-hidden="true"></i>
+                            <a href="tel:{{ $license->supplier->phone }}">{{ $license->supplier->phone }}</a>
+                          @endif
+
+                          @if ($license->supplier->email)
+                            <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->supplier->email }}">{{ $license->supplier->email }}</a>
+                          @endif
+
+                          @if ($license->supplier->address)
+                            <br>{{ $license->supplier->address }}
+                          @endif
+                          @if ($license->supplier->address2)
+                            <br>{{ $license->supplier->address2 }}
+                          @endif
+                          @if ($license->supplier->city)
+                            <br>{{ $license->supplier->city }},
+                          @endif
+                          @if ($license->supplier->state)
+                            {{ $license->supplier->state }}
+                          @endif
+                          @if ($license->supplier->country)
+                            {{ $license->supplier->country }}
+                          @endif
+                          @if ($license->supplier->zip)
+                            {{ $license->supplier->zip }}
+                          @endif
+                        
+                      </div>
                     </div>
-                    <div class="col-md-9">
-                      <a href="{{ route('suppliers.show', $license->supplier_id) }}">
-                        {{ $license->supplier->name }}
-                      </a>
-                    </div>
-                  </div>
+                @else
+                    {{ trans('general.deleted') }}
                 @endif
 
 
@@ -333,11 +370,21 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
+
+                      @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
+                        <span data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold', ['remaining_count' => $license->remaincount(), 'min_amt' => $license->min_amt]) }}"><i class="fas fa-exclamation-triangle text-danger" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.warning') }}</span>
+                        </span>
+                      @endif
+
                       {{ $license->seats }}
+                        @if ($license->remaincount()  <= ($license->min_amt - \App\Models\Setting::getSettings()->alert_threshold))
+
+                        @endif
+
                     </div>
                   </div>
                   @endif
-
 
 
                   <div class="row">
@@ -534,6 +581,7 @@
                   <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
                   <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>

@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute formatas neteisingas.',
     'unique_undeleted'     => ':attribute turi būti unikalus.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Slaptažodis negali sutapti su vartotojo vardu.',
     'letters'              => 'Slaptažodis turi turėti bent vieną raidę.',
     'numbers'              => 'Slaptažodis turi turėti bent vieną skaitmenį.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Value cannot be negative'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

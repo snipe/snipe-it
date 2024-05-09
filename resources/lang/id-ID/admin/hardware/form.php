@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Penyusutan',
     'depreciates_on'	=> 'Penyusutan aktif',
     'default_location'	=> 'Lokasi awal',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Tanggal EOL',
     'eol_rate'			=> 'Tingkat EOL',
     'expected_checkin'  => 'Tanggal pengembalian diharapkan diterima',

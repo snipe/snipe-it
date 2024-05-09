@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Poisto',
     'depreciates_on'	=> 'Poistoaika',
     'default_location'	=> 'Oletussijainti',
+    'default_location_phone' => 'Oletus Sijainti Puhelin',
     'eol_date'			=> 'Poistopäivä',
     'eol_rate'			=> 'Poistonopeus',
     'expected_checkin'  => 'Odotettu palautuspäivä',

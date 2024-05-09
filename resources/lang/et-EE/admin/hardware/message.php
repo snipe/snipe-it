@@ -18,6 +18,7 @@ return [
         'success' 			=> 'Vara värskendati edukalt',
         'nothing_updated'	=>  'Pole ühtegi välju valitud, nii et midagi ei uuendatud.',
         'no_assets_selected'  =>  'Ühtegi vahendit ei valitud, muudatusi ei tehtud.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

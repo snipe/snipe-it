@@ -1,7 +1,13 @@
 <?php
 
 return [
-
+    'example_company'    => 'Test Company Limited',
+    'example_defaultloc' => 'Budova 1',
+    'example_category'   => 'Zkušební kategorie',
+    'example_location'   => 'Budova 2',
+    'example_manufacturer'  => 'Zkoušky výrobce',
+    'example_model'      => 'Zkušební model',
+    'example_supplier'   => 'Test Company Limited',
     'labels_per_page'    => 'Štítky',
     'support_fields'     => 'Pole',
     'support_asset_tag'  => 'Značka',

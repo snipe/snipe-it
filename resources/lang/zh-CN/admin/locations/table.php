@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => '已借出',
     'asset_expected_checkin'    => '预计归还日期',
     'date'                      => '日期:',
+    'phone'                     => '位置电话',
     'signed_by_asset_auditor'   => '签名(资产管理员):',
     'signed_by_finance_auditor' => '签名(财务人员):',
     'signed_by_location_manager' => '签名(当地经理):',

@@ -23,6 +23,7 @@ return [
     'depreciation'	    => '감가 상각',
     'depreciates_on'	=> '감가 상각 일자',
     'default_location'	=> '기본 장소',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> '폐기 일자',
     'eol_rate'			=> '폐기 비율',
     'expected_checkin'  => '반입 예상 일',

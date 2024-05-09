@@ -35,6 +35,7 @@ return [
     'asset_checked_out'         => 'تحویل',
     'asset_expected_checkin'    => 'استرداد مورد انتظار',
     'date'                      => 'تاریخ:',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'امضاء توسط (ممیز دارایی):',
     'signed_by_finance_auditor' => 'امضاء توسط (ممیز مالی):',
     'signed_by_location_manager' => 'امضاء توسط (ممیز مکانی):',

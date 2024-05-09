@@ -53,6 +53,7 @@ class License extends Depreciable
         'purchase_date'   => 'date_format:Y-m-d|nullable|max:10',
         'expiration_date'   => 'date_format:Y-m-d|nullable|max:10',
         'termination_date'   => 'date_format:Y-m-d|nullable|max:10',
+        'min_amt'   => 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -80,7 +81,9 @@ class License extends Depreciable
         'serial',
         'supplier_id',
         'termination_date',
+        'free_seat_count',
         'user_id',
+        'min_amt',
     ];
 
     use Searchable;
@@ -112,6 +115,7 @@ class License extends Depreciable
         'category'     => ['name'],
         'depreciation' => ['name'],
     ];
+    protected $appends = ['free_seat_count'];
 
     /**
      * Update seat counts when the license is updated
@@ -277,6 +281,16 @@ class License extends Depreciable
             $value = (new Carbon($value))->toDateString();
         }
         $this->attributes['termination_date'] = $value;
+    }
+    /**
+     * Sets free_seat_count attribute
+     *
+     * @author G. Martinez
+     * @since [v6.3]
+     * @return mixed
+     */
+    public function getFreeSeatCountAttribute(){
+        return $this->attributes['free_seat_count'] = $this->remaincount();
     }
 
     /**
@@ -500,7 +514,13 @@ class License extends Depreciable
             ->whereNull('deleted_at')
             ->count();
     }
-
+    /**
+     * Returns the available seats remaining
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return int
+     */
 
     /**
      * Returns the number of total available seats for this license
@@ -577,7 +597,7 @@ class License extends Depreciable
         $taken = $this->assigned_seats_count;
         $diff = ($total - $taken);
 
-        return $diff;
+        return (int) $diff;
     }
 
     /**

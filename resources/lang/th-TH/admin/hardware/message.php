@@ -18,6 +18,7 @@ return [
         'success' 			=> 'อัปเดตเนื้อหาสำเร็จแล้ว',
         'nothing_updated'	=>  'ไม่มีการเลือกเขตข้อมูลดังนั้นไม่มีการอัปเดตอะไรเลย',
         'no_assets_selected'  =>  'ไม่มีการเลือกรายการสินทรัพย์ จึงไม่มีการอัพเดท',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [

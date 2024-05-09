@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Negeri',
     'suppliers'             => 'Pembekal',
     'update'                => 'Kemaskini Pembekal',
-    'url'                   => 'URL',
     'view'                  => 'Papar pembekal',
     'view_assets_for'       => 'Papar Harta Untuk',
     'zip'                   => 'Poskod',

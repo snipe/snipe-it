@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'ស្លាកទ្រព្យសម្បត្តិ',
     'asset_model'       => 'គំរូ',
+    'assigned_to'   => 'Assigned To',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
     'checkout_date' => 'ថ្ងៃប្រគល់អោយ',

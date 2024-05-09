@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Uitgecheckt',
     'asset_expected_checkin'    => 'Verwachte incheck datum',
     'date'                      => 'Datum:',
+    'phone'                     => 'Telefoon locatie',
     'signed_by_asset_auditor'   => 'Ondertekend door (Asset Auditor):',
     'signed_by_finance_auditor' => 'Ondertekend door (Asset Auditor):',
     'signed_by_location_manager' => 'Ondertekend door (Locatiebeheer):',

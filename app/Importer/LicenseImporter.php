@@ -85,10 +85,10 @@ class LicenseImporter extends ItemImporter
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
         }
-        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
-        // $license->unsetEventDispatcher();
+
+        // This sets an attribute on the Loggable trait for the action log
+        $license->setImported(true);
         if ($license->save()) {
-            $license->logCreate('Imported using csv importer');
             $this->log('License '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // Lets try to checkout seats if the fields exist and we have seats.

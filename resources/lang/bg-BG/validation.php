@@ -90,13 +90,13 @@ return [
     ],
     'string'               => 'Атрибутът: трябва да е низ.',
     'timezone'             => 'Атрибутът: трябва да е валидна зона.',
-    'two_column_unique_undeleted' => 'The :attribute must be unique across :table1 and :table2. ',
+    'two_column_unique_undeleted' => ':attribute трябва да бъде уникален за :table1 и :table2. ',
     'unique'               => ':attribute вече е вписан.',
     'uploaded'             => 'Атрибутът: не успя да качи.',
     'url'                  => 'Форматът на :attribute е невалиден.',
     'unique_undeleted'     => ':attribute трябва да бъде уникален.',
     'non_circular'         => ':attribute не трябва да създава препрадка към себе си.',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attribute не може да бъде масив.',
     'disallow_same_pwd_as_user_fields' => 'Паролата не може да бъде същата, като потребителското име.',
     'letters'              => 'Паролата трябва да съдържа поне една буква.',
     'numbers'              => 'Паролата трябва да съдържа поне една цифра.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Стойността не може да бъде отрицателна'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute format je neispravan.',
     'unique_undeleted'     => ':attribute mora biti jedinstven.',
     'non_circular'         => ':attribute ne sme da kreira cirkularnu referencu.',
-    'not_array'            => ':atribute harus niz.',
+    'not_array'            => ':attribute ne može biti niz.',
     'disallow_same_pwd_as_user_fields' => 'Lozinka ne može biti ista kao korisničko ime.',
     'letters'              => 'Lozinka mora da sadrži barem jedno slovo.',
     'numbers'              => 'Lozinka mora da sadrži barem jednu cifru.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Vrednost ne može biti negativna'
     ],
+    'checkboxes'           => ':attribute sadrži neispravne opcije.',
+    'radio_buttons'        => ':attribute je neispravan.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Neispravna vrednost je sadržana u ovom polju',
 ];

@@ -96,7 +96,7 @@ return [
     'url'                  => ':attribute フォーマットが不正です。',
     'unique_undeleted'     => ':attribute は 一意の値である必要があります。',
     'non_circular'         => ':attribute は、循環参照を作成してはいけません。',
-    'not_array'            => ':atribute harus array.',
+    'not_array'            => ':attributeには配列を指定できません。',
     'disallow_same_pwd_as_user_fields' => 'パスワードはユーザー名と同じにすることはできません。',
     'letters'              => 'パスワードには英字が1文字以上必要です。',
     'numbers'              => 'パスワードには数字が1つ以上必要です。',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => '負の値にすることはできません'
     ],
+    'checkboxes'           => ':attribute に無効なオプションが含まれています。',
+    'radio_buttons'        => ':attribute は不正です。',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'このフィールドに含まれる値が無効です',
 ];

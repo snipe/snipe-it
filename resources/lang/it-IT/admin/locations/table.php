@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Checked-Out il',
     'asset_expected_checkin'    => 'Check-In Previsto',
     'date'                      => 'Data:',
+    'phone'                     => 'Telefono Posizione',
     'signed_by_asset_auditor'   => 'Firmato Da (Revisore dei Beni):',
     'signed_by_finance_auditor' => 'Firmato Da (Revisore Finanziario):',
     'signed_by_location_manager' => 'Firmato Da (Manager della Posizione):',

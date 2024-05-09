@@ -23,6 +23,7 @@ return [
     'depreciation'	    => 'Értékcsökkenés',
     'depreciates_on'	=> 'Leértékelődik',
     'default_location'	=> 'Alapértelmezett hely',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> 'Lejárat Dátuma',
     'eol_rate'			=> 'EOL arány',
     'expected_checkin'  => 'Várható visszaadás dátuma',
