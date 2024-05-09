@@ -842,10 +842,7 @@ class Helper
      */
     public static function checkUserCompanyAssets(): array
     { if(Setting::getSettings()->full_multiple_companies_support == 1) {
-//        \DB::listen(function($e){
-//            dump($e->sql);
-//            dump($e->bindings);
-//        });
+
             $accessories = AccessoryCheckout::with('accessory', 'user')
                 ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
                 ->whereHas('accessory', function ($query) {
@@ -855,43 +852,28 @@ class Helper
                 })
                 ->get();
 
+            $assets = Asset::with('assignedTo', 'company', 'model')
+                ->whereHasMorph(
+                    'assignedTo',
+                    [Asset::class, User::class],
+                    function (Builder $query, $type) {
+                        $tableName = (new $type)->getTable();
 
-
-
-
-
-        $assets = Asset::with('assignedTo', 'company', 'model')
-            ->whereHasMorph(
-                'assignedTo',
-                [Asset::class, User::class],
-                function (Builder $query, $type) {
-                    $tableName = (new $type)->getTable();
-                    $tableAlias = $type === Asset::class ? 'assigned_asset' : null;
-
-                    if ($tableAlias) {
-                        // If checked out to Asset, we are making an alias for the assigned_asset.
-                        // we use the assigned_to to join on the assigned_asset ID
-                        $query->join($tableName . ' as ' . $tableAlias, function ($join) use ($tableAlias) {
-                            $join->on('assets.assigned_to', '=', $tableAlias . '.id');
-                        })
-                        // continue with company_id check for an Asset.
-                            ->whereRaw('assets.company_id != ' . $tableAlias . '.company_id')
-                            ->whereRaw('assets.id != ' . $tableAlias . '.id');
-                    } else {
-                        // For users, we do not need an alias
-                        $query->whereRaw('assets.company_id != ' . $tableName . '.company_id');
+                        if ($type === Asset::class) {
+                            // If checked out to Asset, we are making an alias for the assigned_asset.
+                            // we use the assigned_to to join on the assigned_asset ID
+                            $query->join($tableName . ' as ' . 'assigned_asset', function ($join)  {
+                                $join->on('assets.assigned_to', '=', 'assigned_asset.id');
+                            })
+                            // continue with company_id check for an Asset.
+                                ->whereColumn('assets.company_id', '!=', 'assigned_asset.company_id')
+                                ->whereColumn('assets.id', '!=', 'assigned_asset.id');
+                        } else {
+                            // For users, we do not need an alias
+                            $query->whereColumn('assets.company_id', '!=', $tableName . '.company_id');
+                        }
                     }
-                }
-            )->get();
-
-
-
-
-
-
-
-
-
+                )->get();
 
             $licenses = LicenseSeat::with('license', 'user')
                 ->join('users', 'license_seats.assigned_to', '=', 'users.id')
