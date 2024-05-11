@@ -35,7 +35,7 @@ class AssetCountForSidebar
         }
 
         try {
-            $total_assets = Asset::all()->count();
+            $total_assets = Asset::count();
             if ($settings->show_archived_in_list != '1') {
                 $total_assets -= Asset::Archived()->count();
             }
