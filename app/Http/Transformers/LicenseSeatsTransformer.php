@@ -12,6 +12,7 @@ class LicenseSeatsTransformer
     public function transformLicenseSeats(Collection $seats, $total, $offset, $page)
     {
         $array = [];
+        $offset = isset($offset) ? $offset : 0;
         $seat_count = 0 +($offset *($page + 1));
         foreach ($seats as $seat) {
             $seat_count++;
