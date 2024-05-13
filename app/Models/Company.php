@@ -307,7 +307,6 @@ final class Company extends SnipeModel
      */
     public static function scopeCompanyableChildren(array $companyable_names, $query)
     {
-        \Log::debug('Company Names in scopeCompanyableChildren: '.print_r($companyable_names, true));
 
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
