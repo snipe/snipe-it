@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Tvåfaktorsregistrering',
     'two_factor_enabled_text'        => 'Aktivera tvåfaktorsautentisering',
     'two_factor_reset'        => 'Återställ tvåfaktorshemlighet',
-    'two_factor_reset_help'        => 'Detta kommer att tvinga användaren att anmäla sin enhet med Google Authenticator igen. Detta kan vara användbart om den för närvarande inskrivna enheten är förlorad eller stulen.',
+    'two_factor_reset_help'        => 'Detta kommer att tvinga användaren att registrera sin enhet med sin autentiseringsapp igen. Detta kan vara användbart om deras nuvarande inskrivna enhet är förlorad eller stulen. ',
     'two_factor_reset_success'          => 'Tvåfaktorsenheten har återställts',
     'two_factor_reset_error'          => 'Återställningen av tvåfelsenhet misslyckades',
     'two_factor_enabled_warning'        => 'Aktivering av tvåfaktorn om den inte är aktiverad för tillfället tvingar dig omedelbart att verifiera med en Google Auth-registrerad enhet. Du kommer att ha möjlighet att registrera din enhet om du inte är inloggad för närvarande.',

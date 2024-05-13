@@ -2,7 +2,7 @@
 
 return array(
     'activated'  			=> 'Firfircoon',
-    'allow'  				=> 'Allow',
+    'allow'  				=> 'Oggolow',
     'checkedout'  			=> 'Hantida',
     'created_at' 			=> 'Abuuray',
     'createuser' 			=> 'Abuur isticmaale',
@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Maareeyaha',
     'managed_locations'     => 'Goobaha la maamulay',
     'name' 					=> 'Magaca',
-    'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+    'nogroup'               => 'Weli kooxo lama abuurin Si aad mid ugu darto, booqo: ',
     'notes'                 => 'Xusuusin',
     'password_confirm' 		=> 'Xaqiiji erayga sirta ah',
     'password' 				=> 'Password-ka',

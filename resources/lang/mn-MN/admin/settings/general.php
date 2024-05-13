@@ -261,7 +261,7 @@ return [
     'two_factor_enrollment'        => 'Хоёр хүчин зүйлийн элсэлт',
     'two_factor_enabled_text'        => 'Хоёр хүчин зүйлийг идэвхжүүлэх',
     'two_factor_reset'        => 'Хоёр хүчин зүйлийн нууцыг дахин тохируулна уу',
-    'two_factor_reset_help'        => 'Энэ нь хэрэглэгчийг Google Authenticator-т ​​дахин ашиглах боломжтой болно. Энэ нь одоогоор бүртгэгдсэн төхөөрөмжөө алдсан эсвэл хулгайлсан тохиолдолд ашигтай байж болно.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'Хоёр хүчин зүйл төхөөрөмжийг амжилттай дахин тохируулах',
     'two_factor_reset_error'          => 'Хоёр хүчин зүйлийн төхөөрөмжийн дахин тохируулга амжилтгүй боллоо',
     'two_factor_enabled_warning'        => 'Хэрэв та одоогоор идэвхжээгүй бол хоёр хүчин зүйлийг идэвхжүүлэх нь таныг Google Auth бүртгэлтэй төхөөрөмжтэй таныг баталгаажуулахыг шаардана. Хэрэв та элсээгүй бол та төхөөрөмжөө бүртгүүлэх боломжтой болно.',

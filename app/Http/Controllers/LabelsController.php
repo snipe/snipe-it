@@ -14,6 +14,7 @@ use App\Models\Setting;
 use App\Models\Supplier;
 use App\Models\User;
 use App\View\Label as LabelView;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LabelsController extends Controller
@@ -21,9 +22,9 @@ class LabelsController extends Controller
     /**
      * Returns the Label view with test data
      *
-     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
-     * @param  string  $labelName
+     * @param string $labelName
      * @return \Illuminate\Contracts\View\View
+     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
      */
     public function show(string $labelName)
     {
@@ -66,16 +67,18 @@ class LabelsController extends Controller
         $exampleAsset->model->category->id = 999999;
         $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
 
-        $customFieldColumns = CustomField::all()->pluck('db_column');
+        $customFieldColumns = CustomField::where('field_encrypted', '=', 0)->pluck('db_column');
 
         collect(explode(';', Setting::getSettings()->label2_fields))
             ->filter()
             ->each(function ($item) use ($customFieldColumns, $exampleAsset) {
-                $pair = explode('=', $item);
-
-                if ($customFieldColumns->contains($pair[1])) {
-                    $exampleAsset->{$pair[1]} = "{{$pair[0]}}";
-                }
+               $pair = explode('=', $item);
+               
+                if (array_key_exists(1, $pair)) {
+                        if ($customFieldColumns->contains($pair[1])) {
+                            $exampleAsset->{$pair[1]} = "{{$pair[0]}}";
+                        }
+                    }
             });
 
         $settings = Setting::getSettings();

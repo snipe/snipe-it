@@ -81,26 +81,6 @@ final class Company extends SnipeModel
         }
     }
 
-    /**
-     * Scoping table queries, determining if a logged in user is part of a company, and only allows
-     * that user to see items associated with that company
-     */
-    private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
-    {
-        if (Auth::user()) {
-            $company_id = Auth::user()->company_id;
-        } else {
-            $company_id = null;
-        }
-
-        $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
-
-        if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
-             return $query->where($table.$column, '=', $company_id);
-        } else {
-            return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id);
-        }
-    }
 
     public static function getIdFromInput($unescaped_input)
     {
@@ -141,25 +121,49 @@ final class Company extends SnipeModel
         }
     }
 
+    /**
+     * Check to see if the current user should have access to the model.
+     * I hate this method and I think it should be refactored.
+     *
+     * @param $companyable
+     * @return bool|void
+     */
     public static function isCurrentUserHasAccess($companyable)
     {
+        // When would this even happen tho??
         if (is_null($companyable)) {
             return false;
-        } elseif (! static::isFullMultipleCompanySupportEnabled()) {
-            return true;
-        } elseif (!$companyable instanceof Company && !\Schema::hasColumn($companyable->getModel()->getTable(), 'company_id')) {
-            // This is primary for the gate:allows-check in location->isDeletable()
-            // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
-            // because this function is called by SnipePermissionsPolicy->before()
-            return true;
-        } else {
-            if (Auth::user()) {
-                $current_user_company_id = Auth::user()->company_id;
-                $companyable_company_id = $companyable->company_id;
+        }
 
-                return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
+        // If FMCS is not enabled, everyone has access, return true
+        if (! static::isFullMultipleCompanySupportEnabled()) {
+            return true;
+        }
+
+        // Again, where would this happen? But check that $companyable is not a string
+        if (!is_string($companyable)) {
+            $company_table = $companyable->getModel()->getTable();
+            try {
+                // This is primary for the gate:allows-check in location->isDeletable()
+                // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
+                // because this function is called by SnipePermissionsPolicy->before()
+                if (!$companyable instanceof Company && !\Schema::hasColumn($company_table, 'company_id')) {
+                    return true;
+                }
+
+            } catch (\Exception $e) {
+                \Log::warning($e);
             }
         }
+
+
+        if (Auth::user()) {
+            \Log::warning('Companyable is '.$companyable);
+            $current_user_company_id = Auth::user()->company_id;
+            $companyable_company_id = $companyable->company_id;
+            return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
+        }
+
     }
 
     public static function isCurrentUserAuthorized()
@@ -190,6 +194,10 @@ final class Company extends SnipeModel
                 && ($this->users()->count() === 0);
     }
 
+    /**
+     * @param $unescaped_input
+     * @return int|mixed|string|null
+     */
     public static function getIdForUser($unescaped_input)
     {
         if (! static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser()) {
@@ -199,38 +207,6 @@ final class Company extends SnipeModel
         }
     }
 
-    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
-    {
-        // If not logged in and hitting this, assume we are on the command line and don't scope?'
-        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
-            return $query;
-        } else {
-            return static::scopeCompanyablesDirectly($query, $column, $table_name);
-        }
-    }
-
-    public static function scopeCompanyableChildren(array $companyable_names, $query)
-    {
-        if (count($companyable_names) == 0) {
-            throw new Exception('No Companyable Children to scope');
-        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
-            return $query;
-        } else {
-            $f = function ($q) {
-                static::scopeCompanyablesDirectly($q);
-            };
-
-            $q = $query->where(function ($q) use ($companyable_names, $f) {
-                $q2 = $q->whereHas($companyable_names[0], $f);
-
-                for ($i = 1; $i < count($companyable_names); $i++) {
-                    $q2 = $q2->orWhereHas($companyable_names[$i], $f);
-                }
-            });
-
-            return $q;
-        }
-    }
 
     public function users()
     {
@@ -261,4 +237,97 @@ final class Company extends SnipeModel
     {
         return $this->hasMany(Component::class, 'company_id');
     }
+
+    /**
+     * START COMPANY SCOPING FOR FMCS
+     */
+
+    /**
+     * Scoping table queries, determining if a logged in user is part of a company, and only allows the user to access items associated with that company if FMCS is enabled.
+     *
+     * This method is the one that the CompanyableTrait uses to contrain queries automatically, however that trait CANNOT be
+     * applied to the user's model, since it causes an infinite loop against the authenticated user.
+     *
+     * @todo - refactor that trait to handle the user's model as well.
+     *
+     * @author [A. Gianotto] <snipe@snipe.net>
+     * @param $query
+     * @param $column
+     * @param $table_name
+     * @return mixed
+     */
+    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
+    {
+        // If not logged in and hitting this, assume we are on the command line and don't scope?'
+        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
+            return $query;
+        } else {
+            \Log::debug('Fire scopeCompanyablesDirectly.');
+            return static::scopeCompanyablesDirectly($query, $column, $table_name);
+        }
+    }
+
+    /**
+     * Scoping table queries, determining if a logged in user is part of a company, and only allows
+     * that user to see items associated with that company
+     */
+    private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
+    {
+        // Get the company ID of the logged in user, or set it to null if there is no company assicoated with the user
+        if (Auth::user()) {
+            \Log::debug('Admin company is: '.Auth::user()->company_id);
+            $company_id = Auth::user()->company_id;
+        } else {
+            $company_id = null;
+        }
+
+        // Dynamically get the table name if it's not passed in, based on the model we're querying against
+        $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
+         \Log::debug('Model is: '.$query->getModel());
+
+        \Log::debug('Table is: '.$table);
+
+        // If the column exists in the table, use it to scope the query
+        if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
+            return $query->where($table.$column, '=', $company_id);
+        } else {
+            return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id);
+        }
+    }
+
+    /**
+     * I legit do not know what this method does, but we can't remove it (yet).
+     *
+     * This gets invoked by CompanyableChildScope, but I'm not sure what it does.
+     *
+     * @author [A. Gianotto] <snipe@snipe.net>
+     * @param array $companyable_names
+     * @param $query
+     * @return mixed
+     */
+    public static function scopeCompanyableChildren(array $companyable_names, $query)
+    {
+
+        if (count($companyable_names) == 0) {
+            throw new Exception('No Companyable Children to scope');
+        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
+            return $query;
+        } else {
+            $f = function ($q) {
+                \Log::debug('scopeCompanyablesDirectly firing ');
+                static::scopeCompanyablesDirectly($q);
+            };
+
+            $q = $query->where(function ($q) use ($companyable_names, $f) {
+                $q2 = $q->whereHas($companyable_names[0], $f);
+
+                for ($i = 1; $i < count($companyable_names); $i++) {
+                    $q2 = $q2->orWhereHas($companyable_names[$i], $f);
+                }
+            });
+
+            return $q;
+        }
+    }
+
 }

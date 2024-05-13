@@ -1,6 +1,7 @@
 <?php
 
 return [
+    '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Tilbehør',
     'activated'			    => 'Aktiveret',
     'accepted_date'         => 'Dato accepteret',
@@ -518,5 +519,14 @@ return [
              ],
     ],
     'no_requestable' => 'Der er ingen requestable aktiver eller asset-modeller.',
+
+    'countable' => [
+        'accessories'  => ':count Tilbehør:count Tilbehør',
+        'assets'  => ':count Aktiver:count Aktiver',
+        'licenses'  => ':count Licens :count Licenser',
+        'license_seats'  => ':count Licenssæde:count Licenssæder',
+        'consumables'  => ':count Forbrugsparti:count Forbrugsvarer',
+        'components'  => ':count Komponent:count Komponenter',
+    ]
 
 ];
