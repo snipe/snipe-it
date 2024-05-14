@@ -1461,27 +1461,34 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $assetId)
-    {
+    static public function getRedirectOption($request, $Id, $table)
+    {   dd($request);
         $redirect_option = session::get('redirect_option');
         $checkout_to_type = session::get('checkout_to_type');
 
         if ($redirect_option == '0') {
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+            switch ($table) {
+                case "Assets":
+                    return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+                case "Licenses":
+                    return redirect()->route('licenses.index')->with('success', trans('admin/hardware/message.checkout.success'));
+            }
         }
         if ($redirect_option == '1') {
-            return redirect()->route('hardware.show', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
+            switch ($table) {
+                case "Assets":
+                    return redirect()->route('hardware.show', $Id)->with('success', trans('admin/hardware/message.checkout.success'));
+                case "Licenses":
+                    return redirect()->route('licenses.show', $Id)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
         }
         if ($redirect_option == '2') {
-
-            if ($checkout_to_type == 'user') {
-                return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
-            }
-            if ($checkout_to_type == 'location') {
-
-                return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
-            }
-            if ($checkout_to_type == 'asset') {
+            switch ($checkout_to_type) {
+                case 'user':
+                    return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+                case 'location':
+                    return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+                case 'asset':
                     return redirect()->route('hardware.show', $request->assigned_asset)->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }

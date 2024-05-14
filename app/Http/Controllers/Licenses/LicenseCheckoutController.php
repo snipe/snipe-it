@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Accessory;
@@ -11,6 +12,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LicenseCheckoutController extends Controller
 {
@@ -41,7 +43,7 @@ class LicenseCheckoutController extends Controller
                 }
 
                 // Return the checkout view
-                return view('licenses/checkout', compact('license'));
+                return view('licenses/checkout', compact('license'))->with('table_name' , 'Licenses');
             }
 
             // Invalid category
@@ -77,11 +79,15 @@ class LicenseCheckoutController extends Controller
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
         $licenseSeat->notes = $request->input('notes');
-        
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
+        $redirect_option = $request->get('redirect_option');
+        Session::put('checkout_to_type', $request->input('checkout_to_type'));
+        if($redirect_option != Session::get('redirect_option')) {
+            Session::put(['redirect_option' => $redirect_option]);
+        }
         if ($this->$checkoutMethod($licenseSeat)) {
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
+            return Helper::getRedirectOption($request, $licenseId, 'Licenses');
         }
 
         return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
@@ -112,7 +118,6 @@ class LicenseCheckoutController extends Controller
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
         }
         $licenseSeat->asset_id = request('asset_id');
-
         // Override asset's assigned user if available
         if ($target->checkedOutToUser()) {
             $licenseSeat->assigned_to = $target->assigned_to;
