@@ -104,6 +104,12 @@
                     <div class="box-footer">
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                       <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
+                      <div class="btn-group pull-right">
+                        <select class="redirect-options form-control" name="redirect_option">
+                          <option {{Session::get('redirect_option')=="0" ? 'selected' : ''}} value="0">{{trans('admin/hardware/form.redirect_to_all', ['type' => $table_name])}}</option>
+                          <option {{Session::get('redirect_option')=="1" ? 'selected' : ''}} value="1">{{trans('admin/hardware/form.redirect_to_type', ['type' => $asset->model->name])}}</option>
+                        </select>
+                      </div>
                     </div>
                   </form>
           </div> <!--/.col-md-12-->

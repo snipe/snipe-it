@@ -36,7 +36,8 @@ class AssetCheckoutController extends Controller
 
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
-                ->with('statusLabel_list', Helper::deployableStatusLabelList());
+                ->with('statusLabel_list', Helper::deployableStatusLabelList())
+                ->with('table_name', 'Assets');
         }
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
@@ -100,7 +101,7 @@ class AssetCheckoutController extends Controller
             }
             $redirect_option = $request->get('redirect_option');
             if($redirect_option != Session::get('redirect_option')) {
-                Session::put('redirect_option', $redirect_option);
+                Session::put(['redirect_option' => $redirect_option, 'checkout_to_type' => $request->get('checkout_to_type')]);
             }
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {

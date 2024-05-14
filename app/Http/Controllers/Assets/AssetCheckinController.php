@@ -45,7 +45,7 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
-        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
+        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto)->with('table_name', 'Assets');
     }
 
     /**
@@ -125,12 +125,7 @@ class AssetCheckinController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
-
-            if ((isset($user)) && ($backto == 'user')) {
-                return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
-            }
-
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkin.success'));
+            return Helper::getRedirectOption($request, $assetId);
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());

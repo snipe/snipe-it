@@ -145,15 +145,11 @@
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                         <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
                         <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <select class="redirect-options js-states form-control" name="redirect_option">
-                                    <option value="0">Return to all Assets</option>
-                                    <option value="1">Go to Asset</option>
-                                    <option value="2">Go to User</option>
-                                    <option value="3">Go to Location</option>
+                                <select class="redirect-options form-control" name="redirect_option">
+                                    <option {{Session::get('redirect_option')=="0" ? 'selected' : ''}} value="0">{{trans('admin/hardware/form.redirect_to_all', ['type' => $table_name])}}</option>
+                                    <option {{Session::get('redirect_option')=="1" ? 'selected' : ''}} value="1">{{trans('admin/hardware/form.redirect_to_type', ['type' => $asset->model->name])}}</option>
+                                    <option {{Session::get('redirect_option')=="2" ? 'selected' : ''}} value="2">{{trans('admin/hardware/form.redirect_to_checked_out_to')}}</option>
                                 </select>
-                            </button>
-
                         </div>
                     </div>
                 </form>

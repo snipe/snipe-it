@@ -1464,6 +1464,7 @@ class Helper
     static public function getRedirectOption($request, $assetId)
     {
         $redirect_option = session::get('redirect_option');
+        $checkout_to_type = session::get('checkout_to_type');
 
         if ($redirect_option == '0') {
             return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
@@ -1472,15 +1473,18 @@ class Helper
             return redirect()->route('hardware.show', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
         }
         if ($redirect_option == '2') {
-            if ($request->assigned_location != null) {
+
+            if ($checkout_to_type == 'user') {
                 return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
             }
-        }
-        if ($redirect_option == '3') {
-            if ($request->assigned_location != null) {
+            if ($checkout_to_type == 'location') {
 
                 return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
             }
+            if ($checkout_to_type == 'asset') {
+                    return redirect()->route('hardware.show', $request->assigned_asset)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
         }
+        return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
     }
 }
