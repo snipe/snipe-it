@@ -907,6 +907,23 @@ class Asset extends Depreciable
 
     }
 
+
+    /**
+     * Determine whether this asset's next audit date is before the last audit date
+     *
+     * @return bool
+     * @since [v6.4.1]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * */
+    public function checkInvalidNextAuditDate()
+    {
+        if (($this->last_audit_date) && ($this->next_audit_date) && ($this->last_audit_date > $this->next_audit_date)) {
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * Checks for a category-specific EULA, and if that doesn't exist,
      * checks for a settings level EULA
