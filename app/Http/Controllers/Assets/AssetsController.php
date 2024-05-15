@@ -166,21 +166,20 @@ class AssetsController extends Controller
 
             if (($model) && ($model->fieldset)) {
                 foreach ($model->fieldset->fields as $field) {
+                    $field_val = $request->input($field->db_column);
+
+                    //handle multi-value checkboxes
+                    if (is_array($request->input($field->db_column))) {
+                        $field_val = implode(', ', $field_val);
+                    }
+
+                    //handle encrypted fields
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
-                            if (is_array($request->input($field->db_column))) {
-                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                            } else {
-                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                            }
-                        }
-                    } else {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
+                            $field_val = Crypt::encrypt($field_val);
                         }
                     }
+                    $asset->{$field->db_column} = $field_val;
                 }
             }
 
@@ -377,30 +376,30 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column);
+
+                if (is_array($field_val)) {
+                    $field_val = implode(', ', $field_val);
+                }
+
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                    } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
+                        $field_val = Crypt::encrypt($field_val);
                     }
                 }
+                $asset->{$field->db_column} = $field_val;
             }
         }
 
 
+        \Log::debug("so is this, like, firing right before we die?");
         if ($asset->save()) {
+            \Log::debug("it did and seemed to work?");
             return redirect()->route('hardware.show', $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
+        \Log::debug("It is firing and not doing well at it :(");
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 

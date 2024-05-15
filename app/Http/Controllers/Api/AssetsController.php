@@ -590,8 +590,8 @@ class AssetsController extends Controller
         // Update custom fields in the database.
         $model = AssetModel::find($request->input('model_id'));
 
-        // Check that it's an object and not a collection
-        // (Sometimes people send arrays here and they shouldn't
+        $problems_updating_encrypted_custom_fields = false;
+
         if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
 
@@ -605,26 +605,23 @@ class AssetsController extends Controller
                     Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
 
+                if ($field->element == 'checkbox') {
+                    if (is_array($field_val)) {
+                        $field_val = implode(',', $field_val);
+                    }
+                }
+
                 // if the field is set to encrypted, make sure we encrypt the value
                 if ($field->field_encrypted == '1') {
                     Log::debug('This model field is encrypted in this fieldset.');
 
                     if (Gate::allows('admin')) {
-
-                        // If input value is null, use custom field's default value
-                        if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
-                        } else {
-                            $field_val = Crypt::encrypt($request->input($field->db_column));
-                        }
+                        $field_val = Crypt::encrypt($field_val);
+                    } else {
+                        // FIXME - should this just _throw_ - this isn't just an update, we are creating something from scratch?
+                        $problems_updating_encrypted_custom_fields = true;
                     }
                 }
-                if ($field->element == 'checkbox') {
-                    if(is_array($field_val)) {
-                        $field_val = implode(',', $field_val);
-                    }
-                }
-
 
                 $asset->{$field->db_column} = $field_val;
             }
@@ -646,9 +643,12 @@ class AssetsController extends Controller
                 $asset->image = $asset->getImageUrl();
             }
 
-            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
+            if ($problems_updating_encrypted_custom_fields) {
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
+            } else {
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+            }
 
-            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);

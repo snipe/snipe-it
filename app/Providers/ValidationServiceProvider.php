@@ -320,7 +320,12 @@ class ValidationServiceProvider extends ServiceProvider
         // that the submitted values actually exist in the options.
         Validator::extend('checkboxes', function ($attribute, $value, $parameters, $validator){
             $field = CustomField::where('db_column', $attribute)->first();
+            \Log::debug("If you got here, it means you could've checked the encrypted value of the thingee or whatever");
             $options = $field->formatFieldValuesAsArray();
+
+            if ($field->field_encrypted) {
+                $value = Crypt::decrypt($value);
+            }
 
             if(is_array($value)) {
                 $invalid = array_diff($value, $options);

@@ -19,7 +19,9 @@
                   @foreach ($field->formatFieldValuesAsArray() as $key => $value)
                       <div>
                           <label class="form-control">
-                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
+                              {{-- what is $item? --}}
+                              <input type="checkbox" value="{{ $value }}"
+                                     name="{{ $field->db_column_name() }}[]" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', Helper::gracefulDecrypt($field, $item->{$field->db_column_name()})))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
                               {{ $value }}
                           </label>
                       </div>
