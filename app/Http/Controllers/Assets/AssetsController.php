@@ -6,7 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
-use App\Models\Manufacturer;
+use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -863,7 +863,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(Request $request, $id)
+    public function auditStore(UploadFileRequest $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -895,19 +895,10 @@ class AssetsController extends Controller
 
         if ($asset->isValid() && $asset->save()) {
 
-            $file_name = '';
-            // Upload an image, if attached
+            // Create the image (if one was chosen.)
             if ($request->hasFile('image')) {
-                $path = 'private_uploads/audits';
-                if (! Storage::exists($path)) {
-                    Storage::makeDirectory($path, 775);
-                }
-                $upload = $image = $request->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = 'audit-'.str_random(18).'.'.$ext;
-                Storage::putFileAs($path, $upload, $file_name);
+                $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
             }
-
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
