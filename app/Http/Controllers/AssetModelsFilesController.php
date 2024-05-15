@@ -70,7 +70,6 @@ class AssetModelsFilesController extends Controller
             }
 
             $file = 'private_uploads/assetmodels/'.$log->filename;
-            \Log::debug('Checking for '.$file);
 
 
             if (! Storage::exists($file)) {
