@@ -1462,7 +1462,7 @@ class Helper
 
 
     static public function getRedirectOption($request, $Id, $table)
-    {   dd($request);
+    {
         $redirect_option = session::get('redirect_option');
         $checkout_to_type = session::get('checkout_to_type');
 
