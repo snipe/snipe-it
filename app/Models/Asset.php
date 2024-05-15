@@ -945,6 +945,25 @@ class Asset extends Depreciable
      **/
 
     /**
+     * Make sure the next_audit_date is formatted as Y-m-d.
+     *
+     * This is kind of dumb and confusing, since we already cast it that way AND it's a date field
+     * in the database, but here we are.
+     *
+     * @param $value
+     * @return void
+     */
+    public function getNextAuditDateAttribute($value)
+    {
+        return $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+    public function setNextAuditDateAttribute($value)
+    {
+        $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+    /**
      * This sets the requestable to a boolean 0 or 1. This accounts for forms or API calls that
      * explicitly pass the requestable field but it has a null or empty value.
      *
