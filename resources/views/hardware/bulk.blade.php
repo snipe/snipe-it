@@ -196,8 +196,8 @@
 
           @include("models/custom_fields_form_bulk_edit",["models" => $models])
 
-          @foreach ($assets as $key => $value)
-            <input type="hidden" name="ids[{{ $value }}]" value="1">
+          @foreach($assets as $asset)
+            <input type="hidden" name="ids[]" value="{{ $asset }}">
           @endforeach
         </div> <!--/.box-body-->
 
