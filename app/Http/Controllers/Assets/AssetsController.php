@@ -308,7 +308,8 @@ class AssetsController extends Controller
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
-        $asset->purchase_date = $request->input('purchase_date', null); 
+        $asset->purchase_date = $request->input('purchase_date', null);
+        $asset->next_audit_date = $request->input('next_audit_date', null);
         if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
             $asset->purchase_date = $request->input('purchase_date', null); 
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
@@ -888,12 +889,12 @@ class AssetsController extends Controller
         // Check to see if they checked the box to update the physical location,
         // not just note it in the audit notes
         if ($request->input('update_location') == '1') {
-            Log::debug('update location in audit');
             $asset->location_id = $request->input('location_id');
         }
 
 
-        if ($asset->save()) {
+        if ($asset->isValid() && $asset->save()) {
+
             $file_name = '';
             // Upload an image, if attached
             if ($request->hasFile('image')) {
@@ -911,6 +912,8 @@ class AssetsController extends Controller
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
+
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     public function getRequestedIndex($user_id = null)
