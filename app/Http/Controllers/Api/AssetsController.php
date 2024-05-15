@@ -1094,7 +1094,7 @@ class AssetsController extends Controller
                 ], trans('admin/hardware/message.audit.success')));
             }
 
-            // Asset was not valid
+            // Asset failed validation or was not able to be saved
             return response()->json(Helper::formatStandardApiResponse('error', [
                 'asset_tag'=> e($asset->asset_tag),
                 'error'=> $asset->getErrors()->first(),
@@ -1103,7 +1103,7 @@ class AssetsController extends Controller
         }
 
 
-        // Asset not found
+        // No matching asset for the asset tag that was passed.
         return response()->json(Helper::formatStandardApiResponse('error', [
             'asset_tag'=> e($request->input('asset_tag')),
             'error'=> trans('admin/hardware/message.audit.error'),
