@@ -1032,19 +1032,18 @@ class AssetsController extends Controller
 
     {
         $this->authorize('audit', Asset::class);
-        $rules = [
-            'asset_tag' => 'required',
-            'location_id' => 'exists:locations,id|nullable|numeric',
-            'next_audit_date' => 'date|nullable',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
-        }
 
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+
+        // No tag passed
+        if (!$request->filled('asset_tag')) {
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> '',
+                'error'=> trans('admin/hardware/message.no_tag'),
+            ], trans('admin/hardware/message.no_tag')), 200);
+        }
+
 
         $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
 
@@ -1066,7 +1065,8 @@ class AssetsController extends Controller
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
-            if ($asset->save()) {
+            // Asset is valid and the save was successful
+            if ($asset->isValid() && $asset->save()) {
                 $log = $asset->logAudit(request('note'), request('location_id'));
 
                 return response()->json(Helper::formatStandardApiResponse('success', [
@@ -1075,9 +1075,23 @@ class AssetsController extends Controller
                     'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
                 ], trans('admin/hardware/message.audit.success')));
             }
+
+            // Asset was not valid
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> e($asset->asset_tag),
+                'error'=> $asset->getErrors()->first(),
+            ], trans('admin/hardware/message.audit.error', ['error' => $asset->getErrors()->first()])), 200);
+
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+
+        // Asset not found
+        return response()->json(Helper::formatStandardApiResponse('error', [
+            'asset_tag'=> e($request->input('asset_tag')),
+            'error'=> trans('admin/hardware/message.audit.error'),
+        ], trans('admin/hardware/message.audit.error', ['error' => trans('admin/hardware/message.does_not_exist')])), 200);
+
+
     }
 
 
