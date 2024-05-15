@@ -43,7 +43,7 @@ class LicenseCheckoutController extends Controller
                 }
 
                 // Return the checkout view
-                return view('licenses/checkout', compact('license'))->with('table_name' , 'Licenses');
+                return view('licenses/checkout', compact('license'));
             }
 
             // Invalid category

@@ -1461,7 +1461,7 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $Id, $table)
+    static public function getRedirectOption($request, $id, $table)
     {
         $redirect_option = session::get('redirect_option');
         $checkout_to_type = session::get('checkout_to_type');
@@ -1470,16 +1470,12 @@ class Helper
             switch ($table) {
                 case "Assets":
                     return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
-                case "Licenses":
-                    return redirect()->route('licenses.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
         if ($redirect_option == '1') {
             switch ($table) {
                 case "Assets":
-                    return redirect()->route('hardware.show', $Id)->with('success', trans('admin/hardware/message.checkout.success'));
-                case "Licenses":
-                    return redirect()->route('licenses.show', $Id)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return redirect()->route('hardware.show', $id)->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
         if ($redirect_option == '2') {
