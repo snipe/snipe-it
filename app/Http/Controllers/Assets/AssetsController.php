@@ -881,12 +881,16 @@ class AssetsController extends Controller
         $asset = Asset::findOrFail($id);
 
         /**
-         * We don't want to log this as a normal update, so let's bypass that using unsetEventDispatcher(),
-         * otherwise the audit will create an action_log entry and so will be saving of the asset model
-         * with the de-normed fields (next_audit_date, etc.) But invoking unsetEventDispatcher() will bypass
-         * normal model-level validation that's usually handled at the observer )
+         * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
+         * which would trigger the Asset Observer and would log an asset *update* log entry (because the
+         * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
+         * the audit log entry we're creating through this controller.
          *
-         * We handle validation on the save by checking if the asset is valid via the ->isValid() method,
+         * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
+         * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
+         * will bypass normal model-level validation that's usually handled at the observer )
+         *
+         * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
          * which manually invokes Watson Validating to make sure the asset's model is valid.
          *
          * @see \App\Observers\AssetObserver::updating()
