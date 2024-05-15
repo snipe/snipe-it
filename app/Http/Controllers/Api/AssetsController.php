@@ -1036,7 +1036,7 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
 
-        // No tag passed
+        // No tag passed - return an error
         if (!$request->filled('asset_tag')) {
             return response()->json(Helper::formatStandardApiResponse('error', [
                 'asset_tag'=> '',
@@ -1049,7 +1049,18 @@ class AssetsController extends Controller
 
 
         if ($asset) {
-            // We don't want to log this as a normal update, so let's bypass that
+
+            /**
+             * We don't want to log this as a normal update, so let's bypass that using unsetEventDispatcher(),
+             * otherwise the audit will create an action_log entry and so will be saving of the asset model
+             * with the de-normed fields (next_audit_date, etc.) But invoking unsetEventDispatcher() will bypass
+             * normal model-level validation that's usually handled at the observer )
+             *
+             * We handle validation on the save by checking if the asset is valid via the ->isValid() method,
+             * which manually invokes Watson Validating to make sure the asset's model is valid.
+             *
+             * @see App\Observers\AssetObserver::updating()
+             */
             $asset->unsetEventDispatcher();
             $asset->next_audit_date = $dt;
 
@@ -1065,9 +1076,12 @@ class AssetsController extends Controller
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
-            // Asset is valid and the save was successful
+            /**
+             * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
+             * We have to invoke this manually because of the unsetEventDispatcher() above.)
+             */
             if ($asset->isValid() && $asset->save()) {
-                $log = $asset->logAudit(request('note'), request('location_id'));
+                $asset->logAudit(request('note'), request('location_id'));
 
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'asset_tag'=> e($asset->asset_tag),
