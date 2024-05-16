@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'Asignado A',
     'checkout'   		=> 'Registrado / Asignado',
+    'deleted_at'        => 'Eliminado el',
     'id'      			=> 'ID',
     'license_email'   	=> 'Correo Electrónico de la Licencia',
     'license_name'   	=> 'Licenciado A',

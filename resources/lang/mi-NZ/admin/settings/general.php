@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA Taunoa',
     'default_language'			=> 'Reo Taunoa',
     'default_eula_help_text'	=> 'Ka taea hoki e koe te hono atu i nga Taekerangi ritenga ki nga waahanga tahua.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Whakaatuhia te Ingoa Tahua',
     'display_checkout_date'     => 'Whakaatuhia te Whakataunga Rā',
     'display_eol'               => 'Whakaatuhia EOL i te tirohanga ripanga',

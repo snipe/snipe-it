@@ -105,8 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Стойността не може да бъде отрицателна'
     ],
-    'checkboxes'           => ':attribute contains invalid options.',
-    'radio_buttons'        => ':attribute is invalid.',
+    'checkboxes'           => ':attribute съдържа невалидни опции.',
+    'radio_buttons'        => ':attribute е невалиден.',
 
 
     /*
@@ -158,5 +158,5 @@ return [
     | Generic Validation Messages
     |--------------------------------------------------------------------------
     */
-    'invalid_value_in_field' => 'Invalid value included in this field',
+    'invalid_value_in_field' => 'В това поле е включена невалидна стойност',
 ];

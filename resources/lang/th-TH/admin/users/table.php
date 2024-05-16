@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'รายละเอียดการเข้าสู่ระบบไม่สามารถแก้ไขเปลี่ยนแปลงบนการติดตั้งนี้',
     'manager' 				=> 'ผู้จัดการ',
     'managed_locations'     => 'สถานที่ที่มีการจัดการ',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'ชื่อ',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'หมายเหตุ',

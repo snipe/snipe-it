@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Digniin: </strong> Hantidan waxaa loo calaamadeeyay mid aan hadda la daabul karin.
                         Haddii heerkan uu isbedelay, fadlan cusboonaysii heerka hantida.',
     'does_not_exist' 	=> 'Hantidu ma jirto.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Hantidaas ma jirto ama lama codsan karo.',
     'assoc_users'	 	=> 'Hantidan hadda waa la hubiyay isticmaale lamana tirtiri karo Fadlan marka hore hubi hantida, ka dibna isku day mar kale in aad tirtirto. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Hantida lama abuurin, fadlan isku day mar kale. :(',
@@ -17,6 +20,7 @@ return [
     'update' => [
         'error'   			=> 'Hantida lama cusboonaysiin, fadlan isku day mar kale',
         'success' 			=> 'Hantida si guul leh ayaa loo cusboonaysiiyay.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Goobo lama dooran, markaa waxba lama cusboonaysiin.',
         'no_assets_selected'  =>  'Wax hanti ah lama dooran, markaa waxba lama cusboonaysiin.',
         'assets_do_not_exist_or_are_invalid' => 'Hantida la xushay lama cusboonaysiin karo.',
@@ -30,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Hantidhawrka hantida waa lagu guulaysan waayay. Fadlan isku day mar kale.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Hantidhawrka hantida ayaa si guul leh loo diiwaan geliyay.',
     ],
 

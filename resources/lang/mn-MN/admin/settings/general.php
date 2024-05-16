@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Үндсэн EULA',
     'default_language'			=> 'Үндсэн хэл',
     'default_eula_help_text'	=> 'Та мөн EULA-г тусгай активын төрлөөр ангилж болно.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Дэлгэцийн нэрийг харуулах',
     'display_checkout_date'     => 'Дэлгэцийн төлбөр хийх хугацаа',
     'display_eol'               => 'EOL харуулах хүснэгтийг харна уу',

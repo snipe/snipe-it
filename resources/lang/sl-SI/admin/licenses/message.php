@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Uporabnik ne obstaja.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Sredstev, katero poskušate povezati s to licenco, ne obstaja.',
     'owner_doesnt_match_asset' => 'Sredstev, ki ga poskušate povezati s to licenco, je v lasti nekoga drugega, in ne v lasti uporabnika ki je izbran v spustnem seznamu.',
     'assoc_users'	 => 'Ta licenca je trenutno izdana uporabniku in je ni mogoče izbrisati. Najprej preverite licenco in poskusite znova izbrisati. ',
