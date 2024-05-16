@@ -86,12 +86,8 @@ class ImageUploadRequest extends Request
 
         if ($this->offsetGet($form_fieldname) instanceof UploadedFile) {
            $image = $this->offsetGet($form_fieldname);
-           \Log::debug('Image is an instance of UploadedFile');
         } elseif ($this->hasFile($form_fieldname)) {
             $image = $this->file($form_fieldname);
-            \Log::debug('Just use regular upload for '.$form_fieldname);
-        } else {
-            \Log::debug('No image found for form fieldname: '.$form_fieldname);
         }
 
         if (isset($image)) {

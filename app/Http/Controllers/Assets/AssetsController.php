@@ -293,7 +293,7 @@ class AssetsController extends Controller
      *
      * @param int $assetId
      * @return \Illuminate\Http\RedirectResponse|Redirect
-     *@since [v1.0]
+     * @since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function update(ImageUploadRequest $request, $assetId = null)
