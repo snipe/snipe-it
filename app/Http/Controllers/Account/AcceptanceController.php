@@ -223,6 +223,7 @@ class AcceptanceController extends Controller
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
                 'eula' => $item->getEula(),
+                'note' => $request->input('note'),
                 'check_out_date' => Carbon::parse($acceptance->created_at)->format('Y-m-d'),
                 'accepted_date' => Carbon::parse($acceptance->accepted_at)->format('Y-m-d'),
                 'assigned_to' => $assigned_to,
@@ -238,7 +239,7 @@ class AcceptanceController extends Controller
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
 
-            $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename);
+            $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename, $request->input('note'));
             $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             event(new CheckoutAccepted($acceptance));
 
@@ -306,10 +307,12 @@ class AcceptanceController extends Controller
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
             }
+
             $data = [
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
+                'note' => $request->input('note'),
                 'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
                 'assigned_to' => $assigned_to,
@@ -323,7 +326,7 @@ class AcceptanceController extends Controller
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
 
-            $acceptance->decline($sig_filename);
+            $acceptance->decline($sig_filename, $request->input('note'));
             $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
             $return_msg = trans('admin/users/message.declined');
