@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Manufacturer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -96,9 +97,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return Redirect
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request): RedirectResponse
     {
         $this->authorize(Asset::class);
 
@@ -177,6 +177,8 @@ class AssetsController extends Controller
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
                             $field_val = Crypt::encrypt($field_val);
+                        } else {
+                            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.encrypted_error'));
                         }
                     }
                     $asset->{$field->db_column} = $field_val;
@@ -291,11 +293,10 @@ class AssetsController extends Controller
      * Validate and process asset edit form.
      *
      * @param int $assetId
-     * @return \Illuminate\Http\RedirectResponse|Redirect
      * @since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function update(ImageUploadRequest $request, $assetId = null)
+    public function update(ImageUploadRequest $request, $assetId = null): RedirectResponse
     {
         // Check if the asset exists
         if (! $asset = Asset::find($assetId)) {
@@ -385,6 +386,8 @@ class AssetsController extends Controller
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
                         $field_val = Crypt::encrypt($field_val);
+                    } else {
+                        return redirect()->route('hardware.show', $assetId)->with('error', trans('admin/hardware/message.update.encrypted_error'));
                     }
                 }
                 $asset->{$field->db_column} = $field_val;
