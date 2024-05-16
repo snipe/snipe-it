@@ -6,12 +6,9 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
-<<<<<<< encrypted_custom_checkboxes
 use App\Models\Manufacturer;
 use Illuminate\Http\RedirectResponse;
-=======
 use App\Http\Requests\UploadFileRequest;
->>>>>>> develop
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
