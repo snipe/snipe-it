@@ -449,11 +449,11 @@ class AssetModelFactory extends Factory
         });
     }
 
-    public function hasCustomCheckbox()
+    public function hasCustomCheckbox(bool $encrypted = false)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($encrypted) {
             return [
-                'fieldset_id' => CustomFieldset::factory()->hasCustomCheckbox(),
+                'fieldset_id' => CustomFieldset::factory()->hasCustomCheckbox($encrypted),
             ];
         });
     }

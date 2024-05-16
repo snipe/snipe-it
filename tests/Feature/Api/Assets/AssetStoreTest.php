@@ -675,4 +675,30 @@ class AssetStoreTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('error');
     }
+
+    public function testEncryptedCustomFieldCheckboxPassesValidationForValidOptionsWithString()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox(true)->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => 'One, Two, Three',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals('One, Two, Three', $asset->{$column});
+    }
 }
