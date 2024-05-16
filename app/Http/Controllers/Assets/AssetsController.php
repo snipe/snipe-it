@@ -913,6 +913,7 @@ class AssetsController extends Controller
          */
         if ($asset->isValid() && $asset->save()) {
 
+            $file_name = null;
             // Create the image (if one was chosen.)
             if ($request->hasFile('image')) {
                 $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
