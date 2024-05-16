@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA asalka ah',
     'default_language'			=> 'Luuqada caadiga ah',
     'default_eula_help_text'	=> 'Waxa kale oo aad ku xidhidhi kartaa EULA-yada gaarka ah qaybaha hantida gaarka ah.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Muuji Magaca Hantida',
     'display_checkout_date'     => 'Muujin Taariikhda Bixinta',
     'display_eol'               => 'Ku muuji EOL muuqaalka miiska',

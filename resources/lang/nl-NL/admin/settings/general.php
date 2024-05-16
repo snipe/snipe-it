@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Standaard gebruikersovereenkomst',
     'default_language'			=> 'Standaardtaal',
     'default_eula_help_text'	=> 'Je kunt aangepaste gebruikersovereenkomsten koppelen aan specifieke assetcategorieën.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Geef Asset naam weer',
     'display_checkout_date'     => 'Toon Checkout datum',
     'display_eol'               => 'Toon EOL in tabel weergave',

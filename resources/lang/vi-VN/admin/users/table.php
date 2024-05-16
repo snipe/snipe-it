@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Chi tiết đăng nhập không thể thay đổi trong cài đặt này.',
     'manager' 				=> 'Người quản lý',
     'managed_locations'     => 'Vị trí Quản lý',
+    'managed_users'         => 'Quản lý người dùng',
     'name' 					=> 'Tên',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Ghi chú',

@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Ang mga detalye ng login hindi pwedeng mababago sa pag-install na ito.',
     'manager' 				=> 'Namamahala',
     'managed_locations'     => 'Ang Pinamahalaang mga Lokasyon',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Pangalan',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Ang mga Paalala',

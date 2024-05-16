@@ -103,7 +103,7 @@ class AssetsBulkEditTest extends TestCase
             $this->assertEquals($company2->id, $asset->company_id);
             $this->assertEquals(7890, $asset->order_number);
             $this->assertEquals(36, $asset->warranty_months);
-            $this->assertEquals('2025-01-01', $asset->next_audit_date->format('Y-m-d'));
+            $this->assertEquals('2025-01-01', $asset->next_audit_date);
             // shouldn't requestable be cast as a boolean??? it's not.
             $this->assertEquals(1, $asset->requestable);
         });

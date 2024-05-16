@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'CGTG Diofyn',
     'default_language'			=> 'Iaith Diofyn',
     'default_eula_help_text'	=> 'Yn ogystal, fedrwch perthnasu CTDT yn erbyn asedau penodol.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Dangos Enw Ased',
     'display_checkout_date'     => 'Dangos Dyddiad Allan',
     'display_eol'               => 'Dangos DB yn y tabl',

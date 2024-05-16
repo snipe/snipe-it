@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Sjálfgefinn samningur um noandaleyfi',
     'default_language'			=> 'Sjálfgefið tungumál',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Sýna ráðstöfunardagsetningu',
     'display_eol'               => 'Display EOL in table view',

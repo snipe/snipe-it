@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Login gegevens kunnen niet worden gewijzigd in deze installatie.',
     'manager' 				=> 'Manager',
     'managed_locations'     => 'Beheerde locaties',
+    'managed_users'         => 'Beheerde gebruikers',
     'name' 					=> 'Naam',
     'nogroup'               => 'Er zijn nog geen groepen aangemaakt. Om er een toe te voegen, bezoek: ',
     'notes'                 => 'Notities',

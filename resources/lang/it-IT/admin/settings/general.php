@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA Predefinita',
     'default_language'			=> 'Lingua predefinita',
     'default_eula_help_text'	=> 'È possibile associare EULAs personalizzati a categorie di beni specifici.',
+    'acceptance_note'           => 'Aggiungi una nota alla tua decisione (facoltativo)',
     'display_asset_name'        => 'Mostra Nome Bene',
     'display_checkout_date'     => 'Mostra Data Estrazione',
     'display_eol'               => 'Visualizzare EOL in vista tabella',

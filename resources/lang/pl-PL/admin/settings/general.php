@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Domyślna EULA',
     'default_language'			=> 'Domyślny język',
     'default_eula_help_text'	=> 'Możesz również sporządzić własną licencje by sprecyzować kategorie aktywa.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Wyświetl nazwę aktywa',
     'display_checkout_date'     => 'Wyświetl Datę Przypisania',
     'display_eol'               => 'Wyświetl koniec linii w widoku tabeli',

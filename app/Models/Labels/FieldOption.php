@@ -27,6 +27,11 @@ class FieldOption {
 
             return $asset->assignedTo ? $asset->assignedTo->present()->fullName() : null;
         }
+
+        // Handle Laravel's stupid Carbon datetime casting
+        if ($dataPath[0] === 'purchase_date') {
+            return $asset->purchase_date ? $asset->purchase_date->format('Y-m-d') : null;
+        }
         
         return $dataPath->reduce(function ($myValue, $path) {
             try { return $myValue ? $myValue->{$path} : ${$myValue}; }

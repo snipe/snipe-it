@@ -99,7 +99,8 @@ class Asset extends Depreciable
         'last_checkin'     => 'nullable|date_format:Y-m-d H:i:s',
         'expected_checkin' => 'nullable|date',
         'last_audit_date'  => 'nullable|date_format:Y-m-d H:i:s',
-        'next_audit_date'  => 'nullable|date|after:last_audit_date',
+        // 'next_audit_date'  => 'nullable|date|after:last_audit_date',
+        'next_audit_date'  => 'nullable|date',
         'location_id'      => 'nullable|exists:locations,id',
         'rtd_location_id'  => 'nullable|exists:locations,id',
         'purchase_date'    => 'nullable|date|date_format:Y-m-d',
@@ -907,6 +908,23 @@ class Asset extends Depreciable
 
     }
 
+
+    /**
+     * Determine whether this asset's next audit date is before the last audit date
+     *
+     * @return bool
+     * @since [v6.4.1]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * */
+    public function checkInvalidNextAuditDate()
+    {
+        if (($this->last_audit_date) && ($this->next_audit_date) && ($this->last_audit_date > $this->next_audit_date)) {
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * Checks for a category-specific EULA, and if that doesn't exist,
      * checks for a settings level EULA
@@ -943,6 +961,25 @@ class Asset extends Depreciable
      * BEGIN MUTATORS
      * -----------------------------------------------
      **/
+
+    /**
+     * Make sure the next_audit_date is formatted as Y-m-d.
+     *
+     * This is kind of dumb and confusing, since we already cast it that way AND it's a date field
+     * in the database, but here we are.
+     *
+     * @param $value
+     * @return void
+     */
+    public function getNextAuditDateAttribute($value)
+    {
+        return $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+    public function setNextAuditDateAttribute($value)
+    {
+        $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
 
     /**
      * This sets the requestable to a boolean 0 or 1. This accounts for forms or API calls that

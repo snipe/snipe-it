@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Энэ суулгац дээр нэвтрэх мэдээлэл өөрчлөгдөх боломжгүй.',
     'manager' 				=> 'Менежер',
     'managed_locations'     => 'Managed Locations',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Нэр',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Тэмдэглэл',

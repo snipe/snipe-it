@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Numatytasis EULA',
     'default_language'			=> 'Numatyta kalba',
     'default_eula_help_text'	=> 'Jūs taip pat galite susieti pritaikytą EULĄ specifinėms įrangos grupėms.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Rodyti įrangos pavadinimą',
     'display_checkout_date'     => 'Rodyti išdavimo datą',
     'display_eol'               => 'Rodyti įrangos naudojimo pabaigos datas lentelės pavidalu',

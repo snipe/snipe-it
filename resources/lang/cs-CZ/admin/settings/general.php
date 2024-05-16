@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Výchozí EULA',
     'default_language'			=> 'Výchozí jazyk',
     'default_eula_help_text'	=> 'Můžete také spojit vlastní EULA se specifickými kategoriemi majetku.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Zobrazit název majetku',
     'display_checkout_date'     => 'Zobrazit den převzetí',
     'display_eol'               => 'Zobrazit EOL v tabulkovém zobrazení',
