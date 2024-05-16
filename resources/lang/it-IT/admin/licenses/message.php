@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Il database non esiste o non si dispone delle autorizzazioni per la connessione.',
-    'user_does_not_exist' => 'L\'utente non esiste.',
+    'user_does_not_exist' => 'L\'utente non esiste o non ha il permesso di visualizzarlo.',
     'asset_does_not_exist' 	=> 'Il bene che si sta cercando di associare a questa licenza non esiste.',
     'owner_doesnt_match_asset' => 'Il bene che si sta cercando di associare a questa licenza è di proprietà di una persona diversa dal soggetto selezionato nel menù a discesa.',
     'assoc_users'	 => 'Questo bene è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo. ',

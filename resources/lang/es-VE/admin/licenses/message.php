@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La licencia no existe o no tiene permiso para verla.',
-    'user_does_not_exist' => 'El usuario no existe.',
+    'user_does_not_exist' => 'El usuario no existe o no tiene permiso para verlos.',
     'asset_does_not_exist' 	=> 'El activo que intentas asociar con esta licencia no existe.',
     'owner_doesnt_match_asset' => 'El activo al que estás intentando asociar con esta licencia está asignado a un usuario diferente al de la persona seleccionada para retirar.',
     'assoc_users'	 => 'Esta licencia está actualmente asignada a un usuario y no puede ser borrada. Por favor, revisa la licencia primero y luego intenta borrarla. ',

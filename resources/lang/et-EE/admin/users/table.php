@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Selles installatsioonis ei sa sisselogimise infot muuta.',
     'manager' 				=> 'Juht',
     'managed_locations'     => 'Hallatavad asukohad',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Nimi',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Märkmed',

@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Licence d\'utilisation par défaut',
     'default_language'			=> 'Langue par défaut',
     'default_eula_help_text'	=> 'Vous pouvez également associer les licences d\'utilisations personnalisés à des catégories spécifiques d\'actifs .',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Afficher le nom des actifs',
     'display_checkout_date'     => 'Afficher la date d\'association',
     'display_eol'               => 'Afficher la fin de vie dans les tables',

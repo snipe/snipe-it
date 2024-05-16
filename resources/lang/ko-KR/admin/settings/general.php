@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> '기본 사용권 계약',
     'default_language'			=> '기본 언어',
     'default_eula_help_text'	=> '또한 특정 자산 분류에는 맞춤형 사용권 계약들과 연결을 해야 합니다.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => '자산 명 표시',
     'display_checkout_date'     => '반출 일자 표시',
     'display_eol'               => '테이블 보기에서 폐기일 표시',

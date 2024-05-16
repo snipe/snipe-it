@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Varsayılan Sözleşme',
     'default_language'			=> 'Varsayılan Dil',
     'default_eula_help_text'	=> 'Özel Demirbaş Kategorileri için özel Son Kullanıcı Lisans Sözleşmesi ilişkilendirebilirsiniz.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Demirbaş Adı Göster',
     'display_checkout_date'     => 'Çıkış Tarihi Göster',
     'display_eol'               => 'Tablo görüntüsünde Sözleşmeyi görüntüle',

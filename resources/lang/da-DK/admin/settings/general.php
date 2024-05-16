@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Standard EULA',
     'default_language'			=> 'Standard sprog',
     'default_eula_help_text'	=> 'Du kan også knytte brugerdefinerede EULA til specifikke aktivkategorier.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Vis aktivnavn',
     'display_checkout_date'     => 'Vis checkout dato',
     'display_eol'               => 'Vis EOL i tabelvisning',

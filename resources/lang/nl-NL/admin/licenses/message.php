@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Licentie bestaat niet of je hebt geen toestemming om het te bekijken.',
-    'user_does_not_exist' => 'Gebruiker bestaat niet.',
+    'user_does_not_exist' => 'Gebruiker bestaat niet of je hebt geen toestemming om deze te bekijken.',
     'asset_does_not_exist' 	=> 'Het asset dat je probeert te koppelen aan deze licentie bestaat niet.',
     'owner_doesnt_match_asset' => 'Het asset dat je probeert te koppelen aan deze licentie is eigendom van iemand anders dan de persoon die is geselecteerd in de toegewezen aan de dropdown.',
     'assoc_users'	 => 'Deze licentie is momenteel uitgecheckt aan een gebruiker en kan daarom niet worden verwijderd. Controleer je licentie eerst en probeer het later nog eens. ',

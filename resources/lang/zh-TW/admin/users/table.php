@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> '不能修改登入資料',
     'manager' 				=> '主管',
     'managed_locations'     => '管理位置',
+    'managed_users'         => 'Managed Users',
     'name' 					=> '名字',
     'nogroup'               => '尚未建立任何群組。要新增群組，請訪問: ',
     'notes'                 => '備註',

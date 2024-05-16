@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Die Lizenz existiert nicht oder Du hast keine Berechtigung, sie anzusehen.',
-    'user_does_not_exist' => 'Benutzer existiert nicht.',
+    'user_does_not_exist' => 'Benutzer existiert nicht oder Sie haben keine Berechtigung, sie anzusehen.',
     'asset_does_not_exist' 	=> 'Der Gegenstand, mit dem Du diese Lizenz verknüpfen möchtest, existiert nicht.',
     'owner_doesnt_match_asset' => 'Der Gegenstand, den Du mit dieser Lizenz verknüpfen möchtest, gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Lizenz ist derzeit einem Benutzer zugeordnet und kann nicht gelöscht werden. Bitte nimm die Lizenz zurück und versuche anschließend erneut, diese zu löschen. ',

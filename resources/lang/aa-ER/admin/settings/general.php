@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'crwdns1259:0crwdne1259:0',
     'default_language'			=> 'crwdns1581:0crwdne1581:0',
     'default_eula_help_text'	=> 'crwdns1260:0crwdne1260:0',
+    'acceptance_note'           => 'crwdns12186:0crwdne12186:0',
     'display_asset_name'        => 'crwdns828:0crwdne828:0',
     'display_checkout_date'     => 'crwdns829:0crwdne829:0',
     'display_eol'               => 'crwdns1118:0crwdne1118:0',

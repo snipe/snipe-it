@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'Wedi Neilltuo i',
     'checkout'   		=> 'Mewn/Allan',
+    'deleted_at'        => 'Deleted at',
     'id'      			=> 'Rhif Unigryw',
     'license_email'   	=> 'Ebost wedi trwyddedu',
     'license_name'   	=> 'Wedi Trwyddedi',
