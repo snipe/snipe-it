@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Enten findes licensen ikke eller også har du ikke tilladelse til at se den.',
-    'user_does_not_exist' => 'Bruger eksisterer ikke.',
+    'user_does_not_exist' => 'Brugeren findes ikke, eller du har ikke tilladelse til at se dem.',
     'asset_does_not_exist' 	=> 'Aktivet, du forsøger at associere med denne licens, findes ikke.',
     'owner_doesnt_match_asset' => 'Aktivet, du forsøger at associere med denne licens, ejes af en anden end den person, der er valgt i Tildelt-rullemenuen.',
     'assoc_users'	 => 'Denne licens er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller venligst licensen først, og prøv derefter at slette igen.',

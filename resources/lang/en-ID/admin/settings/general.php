@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA bawaan',
     'default_language'			=> 'Bahasa Dasar',
     'default_eula_help_text'	=> 'Anda juga dapat mengaitkan EULA kastom dengan kategori aset tertentu.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Tampilan nama aset',
     'display_checkout_date'     => 'Tampilan tanggal keluar',
     'display_eol'               => 'Tampilkan EOL dalam tampilan tabel',

@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'اختصاص داده شده به',
     'checkout'   		=> '/ خارج',
+    'deleted_at'        => 'Deleted at',
     'id'      			=> 'شناسه',
     'license_email'   	=> 'مجوز ایمیل',
     'license_name'   	=> 'دارای مجوز به

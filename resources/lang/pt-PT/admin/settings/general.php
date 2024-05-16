@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA padrão',
     'default_language'			=> 'Idioma predefinido',
     'default_eula_help_text'	=> 'Também pode associar EULAs personalizados para categorias de artigos especificas.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Mostrar Nome do Artigo',
     'display_checkout_date'     => 'Mostrar Data de Alocação',
     'display_eol'               => 'Mostrar EOL na tabela',

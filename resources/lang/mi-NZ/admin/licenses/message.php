@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Kāore te Kaiwhakamahi i te tīariari.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Ko te taonga e ngana ana koe ki te hono atu ki tenei raihana kaore i te.',
     'owner_doesnt_match_asset' => 'Ko te taonga e ngana ana koe ki te hono atu ki tenei raihana ko te pene atu i te tangata i whiriwhiria i roto i te waahanga kua tohaina.',
     'assoc_users'	 => 'Kei te tirohia tenei raihana ki tetahi kaiwhakamahi me te kore e taea te muku. Titirohia te raihana i te tuatahi, ka ngana ki te muku ano.',

@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'اتفاقية ترخيص المستخدم النهائي الافتراضية',
     'default_language'			=> 'اللغة الافتراضية',
     'default_eula_help_text'	=> 'يمكنك أيضا ربط (اتفاقية ترخيص المستخدم) لاصناف محددة من الاصول.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'عرض اسم مادة العرض',
     'display_checkout_date'     => 'عرض تاريخ الخروج',
     'display_eol'               => 'عرض نهاية العمر على شكل جدول',

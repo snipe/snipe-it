@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Loginoplysninger kan ikke ændres på denne installation.',
     'manager' 				=> 'Manager',
     'managed_locations'     => 'Administrerede placeringer',
+    'managed_users'         => 'Administrerede Brugere',
     'name' 					=> 'Navn',
     'nogroup'               => 'Ingen grupper er blevet oprettet endnu. For at tilføje en, besøg: ',
     'notes'                 => 'Noter',

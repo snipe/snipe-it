@@ -11,6 +11,6 @@
         'calibration'        => 'Kalibreerimine',
         'software_support'   => 'Tarkvara tugi',
         'hardware_support'   => 'Riistvara tugi',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'configuration_change'   => 'Konfiguratsiooni muudatus',
+        'pat_test'           => 'PAT test',
     ];
