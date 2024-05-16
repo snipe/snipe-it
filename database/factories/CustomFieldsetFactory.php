@@ -72,4 +72,13 @@ class CustomFieldsetFactory extends Factory
             }
         });
     }
+
+    public function hasCustomCheckbox()
+    {
+        return $this->afterCreating(function (CustomFieldset $fieldset) {
+            $field = $field ?? CustomField::factory()->testCheckbox()->create();
+
+            $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
+        });
+    }
 }

@@ -448,4 +448,13 @@ class AssetModelFactory extends Factory
             ];
         });
     }
+
+    public function hasCustomCheckbox()
+    {
+        return $this->state(function () {
+            return [
+                'fieldset_id' => CustomFieldset::factory()->hasCustomCheckbox(),
+            ];
+        });
+    }
 }

@@ -372,6 +372,15 @@ class AssetFactory extends Factory
         });
     }
 
+    public function hasCustomCheckBox()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => AssetModel::factory()->hasCustomCheckBox(),
+            ];
+        });
+    }
+
 
     /**
      * This allows bypassing model level validation if you want to purposefully
