@@ -325,9 +325,9 @@ class ValidationServiceProvider extends ServiceProvider
             // we don't need to decrypt the submitted value, we need to decrypt the options before they get compared.
             // i can't even test how this works because we removed the option to encrypt checkboxes. will look at it more later.
             // pushing for now for the beginnings of encrypting testing.
-            //if ($field->field_encrypted) {
-            //    $value = Crypt::decrypt($value);
-            //}
+            if ($field->field_encrypted) {
+                $value = Crypt::decrypt($value);
+            }
 
             if (is_array($value)) {
                 $invalid = array_diff($value, $options);
