@@ -109,6 +109,29 @@
             @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
             @include ('partials.forms.edit.warranty')
 
+            <!-- Datepicker -->
+            <div class="form-group{{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
+
+                <label class="col-md-3 control-label">
+                    {{ trans('general.next_audit_date') }}
+                </label>
+
+                <div class="input-group col-md-4">
+                    <div class="input-group date" data-provide="datepicker" data-date-clear-btn="true" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                        <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $item->next_audit_date) }}" readonly style="background-color:inherit" maxlength="10">
+                        <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-3">
+                    {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
+                </div>
+
+            </div>
+
+
+
+
             <!-- byod checkbox -->
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">

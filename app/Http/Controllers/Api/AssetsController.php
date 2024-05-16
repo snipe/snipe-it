@@ -1032,25 +1032,39 @@ class AssetsController extends Controller
 
     {
         $this->authorize('audit', Asset::class);
-        $rules = [
-            'asset_tag' => 'required',
-            'location_id' => 'exists:locations,id|nullable|numeric',
-            'next_audit_date' => 'date|nullable',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
-        }
 
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+
+        // No tag passed - return an error
+        if (!$request->filled('asset_tag')) {
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> '',
+                'error'=> trans('admin/hardware/message.no_tag'),
+            ], trans('admin/hardware/message.no_tag')), 200);
+        }
+
 
         $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
 
 
         if ($asset) {
-            // We don't want to log this as a normal update, so let's bypass that
+
+            /**
+             * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
+             * which would trigger the Asset Observer and would log an asset *update* log entry (because the
+             * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
+             * the audit log entry we're creating through this controller.
+             *
+             * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
+             * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
+             * will bypass normal model-level validation that's usually handled at the observer )
+             *
+             * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
+             * which manually invokes Watson Validating to make sure the asset's model is valid.
+             *
+             * @see \App\Observers\AssetObserver::updating()
+             */
             $asset->unsetEventDispatcher();
             $asset->next_audit_date = $dt;
 
@@ -1066,8 +1080,12 @@ class AssetsController extends Controller
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
-            if ($asset->save()) {
-                $log = $asset->logAudit(request('note'), request('location_id'));
+            /**
+             * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
+             * We have to invoke this manually because of the unsetEventDispatcher() above.)
+             */
+            if ($asset->isValid() && $asset->save()) {
+                $asset->logAudit(request('note'), request('location_id'));
 
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'asset_tag'=> e($asset->asset_tag),
@@ -1075,9 +1093,23 @@ class AssetsController extends Controller
                     'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
                 ], trans('admin/hardware/message.audit.success')));
             }
+
+            // Asset failed validation or was not able to be saved
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> e($asset->asset_tag),
+                'error'=> $asset->getErrors()->first(),
+            ], trans('admin/hardware/message.audit.error', ['error' => $asset->getErrors()->first()])), 200);
+
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+
+        // No matching asset for the asset tag that was passed.
+        return response()->json(Helper::formatStandardApiResponse('error', [
+            'asset_tag'=> e($request->input('asset_tag')),
+            'error'=> trans('admin/hardware/message.audit.error'),
+        ], trans('admin/hardware/message.audit.error', ['error' => trans('admin/hardware/message.does_not_exist')])), 200);
+
+
     }
 
 
