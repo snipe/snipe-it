@@ -554,6 +554,7 @@ class AssetStoreTest extends TestCase
 
     public function testPermissionNeededToStoreEncryptedField()
     {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
         $status = Statuslabel::factory()->create();
         $field = CustomField::factory()->testEncrypted()->create();
