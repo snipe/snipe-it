@@ -554,29 +554,20 @@ class AssetStoreTest extends TestCase
 
     public function testPermissionNeededToStoreEncryptedField()
     {
-        // @todo:
-        $this->markTestIncomplete();
 
         $status = Statuslabel::factory()->create();
         $field = CustomField::factory()->testEncrypted()->create();
         $normal_user = User::factory()->editAssets()->create();
         $assetData = Asset::factory()->hasEncryptedCustomField($field)->make();
 
-        $response = $this->actingAsForApi($normal_user)
+        $this->actingAsForApi($normal_user)
             ->postJson(route('api.assets.store'), [
                 $field->db_column_name() => 'Some Other Value Entirely!',
                 'model_id' => $assetData->model->id,
                 'status_id' => $status->id,
                 'asset_tag' => '1234',
             ])
-            // @todo: this is 403 unauthorized
-            ->assertStatusMessageIs('success')
-            ->assertOk()
-            ->assertMessagesAre('Asset updated successfully, but encrypted custom fields were not due to permissions')
-            ->json();
-
-        $asset = Asset::findOrFail($response['payload']['id']);
-        $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
+            ->assertForbidden();
     }
 
     public function testCustomFieldCheckboxPassesValidationForValidOptionsWithString()
