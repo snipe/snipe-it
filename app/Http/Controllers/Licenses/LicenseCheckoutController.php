@@ -77,9 +77,9 @@ class LicenseCheckoutController extends Controller
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
         $licenseSeat->notes = $request->input('notes');
+        
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-
         if ($this->$checkoutMethod($licenseSeat)) {
             return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
         }
@@ -112,6 +112,7 @@ class LicenseCheckoutController extends Controller
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
         }
         $licenseSeat->asset_id = request('asset_id');
+
         // Override asset's assigned user if available
         if ($target->checkedOutToUser()) {
             $licenseSeat->assigned_to = $target->assigned_to;
