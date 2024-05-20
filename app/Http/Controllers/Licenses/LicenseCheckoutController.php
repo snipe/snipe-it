@@ -81,13 +81,9 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->notes = $request->input('notes');
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-        $redirect_option = $request->get('redirect_option');
-        Session::put('checkout_to_type', $request->input('checkout_to_type'));
-        if($redirect_option != Session::get('redirect_option')) {
-            Session::put(['redirect_option' => $redirect_option]);
-        }
+
         if ($this->$checkoutMethod($licenseSeat)) {
-            return Helper::getRedirectOption($request, $licenseId, 'Licenses');
+            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
         return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
