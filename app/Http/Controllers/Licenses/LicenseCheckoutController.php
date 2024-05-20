@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedOut;
-use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Accessory;
@@ -12,7 +11,6 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class LicenseCheckoutController extends Controller
 {
