@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Anmeldedaten können bei dieser Installation nicht geändert werden.',
     'manager' 				=> 'Manager',
     'managed_locations'     => 'Verwaltete Standorte',
+    'managed_users'         => 'Verwaltete Benutzer',
     'name' 					=> 'Name',
     'nogroup'               => 'Es wurden noch keine Gruppen erstellt. Um eine hinzuzufügen, besuche: ',
     'notes'                 => 'Notizen',

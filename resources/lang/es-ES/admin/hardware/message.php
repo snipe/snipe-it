@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
                         Si no es correcto, actualiza su estado.',
     'does_not_exist' 	=> 'Equipo inexistente.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Buen intento. El activo no existe o no es solicitable.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Equipo no creado, intentalo de nuevo. :(',
@@ -17,6 +20,7 @@ return [
     'update' => [
         'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 			=> 'Equipo actualizado.',
+        'encrypted_warning' => 'Activo actualizado con éxito, pero los campos personalizados cifrados no se debieron a permisos',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
         'no_assets_selected'  =>  'Ningún recurso fue seleccionado, por lo que no se actualizó nada.',
         'assets_do_not_exist_or_are_invalid' => 'Los activos seleccionados no se pueden actualizar.',
@@ -30,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'La auditoría de activos no tuvo éxito. Vuelve a intentarlo.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
 

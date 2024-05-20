@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Shatiga ma jiro ama ma haysatid fasax aad ku aragto.',
-    'user_does_not_exist' => 'Isticmaaluhu ma jiro',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Hantida aad isku dayayso inaad ku xidho shatigan ma jiro.',
     'owner_doesnt_match_asset' => 'Hantida aad isku dayayso inaad ku xidho shatigan waxa iska leh cid kale oo aan ahayn qofka lagu doortay meesha hoos u dhigida.',
     'assoc_users'	 => 'Shatigan hadda waa la hubiyay isticmaale lamana tirtiri karo. Fadlan marka hore iska hubi shatiga, ka dibna isku day mar kale in aad tirtirto. ',

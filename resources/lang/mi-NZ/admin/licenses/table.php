@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'Tohua Ki To',
     'checkout'   		=> 'In / Out',
+    'deleted_at'        => 'Deleted at',
     'id'      			=> 'ID',
     'license_email'   	=> 'Raihana Email',
     'license_name'   	=> 'I Raihana Hei',

@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Prisijungimo duomenys negali būti keičiami šio diegimo metu.',
     'manager' 				=> 'Tiesioginis vadovas',
     'managed_locations'     => 'Valdomos vietos',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Pavadinimas',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Pastabos',

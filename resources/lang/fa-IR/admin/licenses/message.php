@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'کاربر وجود ندارد.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'دارایی شما در حال تلاش برای ارتباط با این مجوز وجود ندارد.',
     'owner_doesnt_match_asset' => 'دارایی شما در حال تلاش برای ارتباط با این مجوز توسط کسی غیر از فرد در اختصاص داده شده به انتخاب کرکره متعلق به.
 ',

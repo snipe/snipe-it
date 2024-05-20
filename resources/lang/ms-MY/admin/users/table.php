@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Butiran log masuk tidak boleh diubah pada pemasangan ini.',
     'manager' 				=> 'Pengurus',
     'managed_locations'     => 'Lokasi Terurus',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Nama',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Nota',

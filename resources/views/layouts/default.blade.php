@@ -452,7 +452,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                                     <i class="fas fa-circle text-grey fa-fw"
                                                        aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
                                                     {{ $status_nav->name }}
-                                                    <span class="badge badge-secondary">{{ $status_nav->asset_count }})</span></a></li>
+                                                    <span class="badge badge-secondary">{{ $status_nav->asset_count }}</span></a></li>
                                         @endforeach
                                     @endif
 

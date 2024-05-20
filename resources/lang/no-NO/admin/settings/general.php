@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Standard EULA',
     'default_language'			=> 'Standardspråk',
     'default_eula_help_text'	=> 'Du kan også knytte tilpassede EULAer til bestemte eiendelskategorier.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Vis eiendelsnavn',
     'display_checkout_date'     => 'Vis utsjekksdato',
     'display_eol'               => 'Vis levetid i tabellvisning',

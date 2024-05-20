@@ -18,16 +18,35 @@ class AssetCountForSidebar
      */
     public function handle($request, Closure $next)
     {
+        /**
+         * This needs to be set for the /setup process, since the tables might not exist yet
+         */
+        $total_assets = 0;
+        $total_due_for_checkin = 0;
+        $total_overdue_for_checkin = 0;
+        $total_due_for_audit = 0;
+        $total_overdue_for_audit = 0;
+
         try {
-            $total_rtd_sidebar = Asset::RTD()->count();
-            view()->share('total_rtd_sidebar', $total_rtd_sidebar);
+            $settings = Setting::getSettings();
+            view()->share('settings', $settings);
         } catch (\Exception $e) {
             \Log::debug($e);
         }
 
         try {
-            $total_assets = Asset::RTD()->count();
+            $total_assets = Asset::count();
+            if ($settings->show_archived_in_list != '1') {
+                $total_assets -= Asset::Archived()->count();
+            }
             view()->share('total_assets', $total_assets);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
+        try {
+            $total_rtd_sidebar = Asset::RTD()->count();
+            view()->share('total_rtd_sidebar', $total_rtd_sidebar);
         } catch (\Exception $e) {
             \Log::debug($e);
         }
@@ -63,13 +82,6 @@ class AssetCountForSidebar
         try {
             $total_byod_sidebar = Asset::where('byod', '=', '1')->count();
             view()->share('total_byod_sidebar', $total_byod_sidebar);
-        } catch (\Exception $e) {
-            \Log::debug($e);
-        }
-
-        try {
-            $settings = Setting::getSettings();
-            view()->share('settings', $settings);
         } catch (\Exception $e) {
             \Log::debug($e);
         }
