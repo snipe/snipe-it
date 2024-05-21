@@ -44,18 +44,30 @@ class SendAcceptanceReminder extends Command
      */
     public function handle()
     {
-        $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model', 'checkoutable.adminuser'])->get();
+        $pending = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')
+                                                ->whereHas('checkoutable', function($query) {
+                                                    $query->where('archived', 0);
+                                                })
+                                                ->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model', 'checkoutable.adminuser'])
+                                                ->get();
 
         $count = 0;
-        $unacceptedAssets = $acceptances
+        $unacceptedAssets = $pending
             ->filter(function($acceptance) {
                 return $acceptance->checkoutable_type == 'App\Models\Asset';
             })
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
+            })
+            ->groupBy(function($item) {
+                return $item['acceptance']->assignedTo ? $item['acceptance']->assignedTo->id : '';
             });
+        $no_mail_address = [];
 
         foreach($unacceptedAssets as $unacceptedAsset) {
+            if ($unacceptedAsset['acceptance']->assignedTo->email == ''){
+                $no_mail_address[] = $unacceptedAsset['checkoutable']->assignedTo->present()->fullName;
+            }
             if ($unacceptedAsset['acceptance']->assignedTo) {
 
                 if (!$unacceptedAsset['acceptance']->assignedTo->locale) {
@@ -73,8 +85,12 @@ class SendAcceptanceReminder extends Command
             }
         }
 
-        if ($unacceptedAsset['acceptance']->assignedTo->email == ''){
-            return "no email";
+        if (!empty($no_mail_address)) {
+            foreach($no_mail_address as $user) {
+                return $user.' has no email.';
+            }
+
+
         }
 
 
