@@ -70,6 +70,17 @@
         </li>
 
         <li>
+          <a href="#notes" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="far fa-file fa-2x" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.notes') }}
+              {!! ($user->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($user->uploads->count()).'</span>' : '' !!}
+            </span>
+          </a>
+        </li>
+
+        <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
                 <i class="far fa-file fa-2x"></i>
@@ -216,6 +227,13 @@
                     @endif
                   </div>
                   @endif
+                @endcan
+
+                <!-- Add Note -->
+                @can('edit', \App\Models\User::class)
+                    <div class="col-md-12" style="padding-top: 5px;">
+                        <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
+                    </div>
                 @endcan
 
                 @can('delete', $user)
@@ -861,6 +879,32 @@
           </table>
           </div>
         </div><!-- /consumables-tab -->
+
+        <!-- Notes tab -->
+        <div class="tab-pane fade" id="Notes">
+          <div class="row">
+            <div class="col-md-12">
+              <table
+                  class="table table-striped snipe-table"
+                  id="notes"
+                  data-pagination="true"
+                  data-id-table="notes"
+                  data-search="false"
+                  data-side-pagination="client"
+                  data-show-columns="true"
+                  data-show-fullscreen="true"
+                  data-show-refresh="true">
+              <thread>
+                  <tr>
+                      <th></th>
+                  </tr>
+              </thread>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- /notes-tab -->
 
         <div class="tab-pane" id="files">
           <div class="row">

@@ -142,7 +142,31 @@
                             </div><!--tab history-->
                      </div>
 
-
+                    <!-- Notes tab -->
+                    <div class="tab-pane fade" id="Notes">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table
+                                        class="table table-striped snipe-table"
+                                        id="notes"
+                                        data-pagination="true"
+                                        data-id-table="notes"
+                                        data-search="false"
+                                        data-side-pagination="client"
+                                        data-show-columns="true"
+                                        data-show-fullscreen="true"
+                                        data-show-refresh="true">
+                                    <thread>
+                                        <tr>
+                                            <th></th>
+                                        </tr>
+                                    </thread>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- /notes-tab -->
 
                     @can('accessories.files', $accessory)
                         <div class="tab-pane" id="files">
@@ -356,7 +380,12 @@
     </div>
 </div>
 
-
+    <!-- Add Note -->
+    @can('edit', \App\Models\Accessory::class)
+        <div class="text-center" style="padding-top: 5px;">
+            <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
+        </div>
+    @endcan
 
 @can('accessories.files', Accessory::class)
     @include ('modals.upload-file', ['item_type' => 'accessory', 'item_id' => $accessory->id])
