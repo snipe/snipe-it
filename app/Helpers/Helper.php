@@ -1461,8 +1461,9 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $id, $table)
+    static public function getRedirectOption($request, $id, $table, $asset_id = null)
     {
+
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
 
@@ -1477,7 +1478,7 @@ class Helper
         if ($redirect_option == '1') {
             switch ($table) {
                 case "Assets":
-                    return redirect()->route('hardware.show', $id)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return redirect()->route('hardware.show', $id ? $id : $asset_id)->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
         //return to thing being assigned to

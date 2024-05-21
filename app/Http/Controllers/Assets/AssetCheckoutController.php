@@ -99,13 +99,11 @@ class AssetCheckoutController extends Controller
                     return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
                 }
             }
-            $redirect_option = $request->get('redirect_option');
-            if($redirect_option != Session::get('redirect_option')) {
-                Session::put(['redirect_option' => $redirect_option, 'checkout_to_type' => $request->get('checkout_to_type')]);
-            }
+
+                Session::put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
-                return Helper::getRedirectOption($request, $assetId);
+                return Helper::getRedirectOption($request, $assetId, 'Assets');
             }
             // Redirect to the asset management page with error
             return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());

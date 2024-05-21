@@ -13,6 +13,7 @@ use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class AssetCheckinController extends Controller
@@ -122,10 +123,12 @@ class AssetCheckinController extends Controller
             $acceptance->delete();
         });
 
+        Session::put('redirect_option', $request->get('redirect_option'));
         // Was the asset updated?
         if ($asset->save()) {
+
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
-            return Helper::getRedirectOption($request, $assetId);
+            return Helper::getRedirectOption($asset, $assetId, 'Assets');
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());
