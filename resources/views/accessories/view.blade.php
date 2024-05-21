@@ -152,7 +152,7 @@
                                         data-pagination="true"
                                         data-id-table="notes"
                                         data-search="false"
-                                        data-side-pagination="client"
+                                        data-side-pagination="server"
                                         data-show-columns="true"
                                         data-show-fullscreen="true"
                                         data-show-refresh="true">
@@ -360,6 +360,13 @@
                 </div>
         @endcan
 
+        <!-- Add Note -->
+        @can('edit', \App\Models\Accessory::class)
+            <div class="text-center" style="padding-top: 5px;">
+                <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
+            </div>
+        @endcan
+
         @can('delete', $accessory)
             @if ($accessory->users_count == 0)
                 <div class="text-center" style="padding-top:5px;">
@@ -379,13 +386,6 @@
         @endcan
     </div>
 </div>
-
-    <!-- Add Note -->
-    @can('edit', \App\Models\Accessory::class)
-        <div class="text-center" style="padding-top: 5px;">
-            <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
-        </div>
-    @endcan
 
 @can('accessories.files', Accessory::class)
     @include ('modals.upload-file', ['item_type' => 'accessory', 'item_id' => $accessory->id])

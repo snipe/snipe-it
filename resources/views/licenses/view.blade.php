@@ -457,7 +457,7 @@
         </div> <!-- /.tab-pane -->
 
         <!-- Notes tab -->
-        <div class="tab-pane fade" id="Notes">
+        <div class="tab-pane fade" id="notes">
           <div class="row">
             <div class="col-md-12">
               <table

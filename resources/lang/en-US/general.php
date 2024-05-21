@@ -208,6 +208,7 @@ return [
     'no_depreciation'		=> 'No Depreciation',
     'no_results'			=> 'No Results.',
     'no'  					=> 'No',
+    'add_note'              => 'Add Note',
     'notes'  				=> 'Notes',
     'order_number'          => 'Order Number',
     'only_deleted'          => 'Only Deleted Assets',
