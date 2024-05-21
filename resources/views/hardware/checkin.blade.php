@@ -101,7 +101,7 @@
                         {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                     </div>
-                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'hidden' => true])
+                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'checkin' => true])
                   </form>
           </div> <!--/.col-md-12-->
         </div> <!--/.box-body-->

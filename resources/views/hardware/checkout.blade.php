@@ -141,7 +141,7 @@
                         @endif
 
                     </div> <!--/.box-body-->
-                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'hidden' => false])
+                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'checkin' => false])
                 </form>
             </div>
         </div> <!--/.col-md-7-->

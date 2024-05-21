@@ -5,7 +5,7 @@
             <select class="redirect-options form-control" name="redirect_option">
                 <option {{Session::get('redirect_option')=="0" ? 'selected' : ''}} value="0">{{trans('admin/hardware/form.redirect_to_all', ['type' => $table_name])}}</option>
                 <option {{Session::get('redirect_option')=="1" ? 'selected' : ''}} value="1">{{trans('admin/hardware/form.redirect_to_type', ['type' => $type])}}</option>
-                <option {{Session::get('redirect_option')=="2" ? 'selected' : ''}} value="2" {{$hidden ? 'hidden' : ''}}>{{trans('admin/hardware/form.redirect_to_checked_out_to')}}</option>
+                <option {{Session::get('redirect_option')=="2" ? 'selected' : ''}} value="2" {{$checkin ? 'hidden' : ''}}>{{trans('admin/hardware/form.redirect_to_checked_out_to')}}</option>
             </select>
         </div>
     </div>
