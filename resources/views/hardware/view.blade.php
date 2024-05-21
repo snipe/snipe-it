@@ -102,6 +102,17 @@
                     </li>
 
                     <li>
+                        <a href="#notes" data-toggle="tab">
+                          <span class="hidden-lg hidden-md">
+                            <i class="far fa-file fa-2x" aria-hidden="true"></i>
+                          </span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.notes') }}
+                                {!! ($asset->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->uploads->count()).'</span>' : '' !!}
+                          </span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="#files" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
                             <i class="far fa-file fa-2x" aria-hidden="true"></i>
@@ -919,6 +930,13 @@
                                         </div>
                                     @endcan
 
+                                    <!-- Add notes -->
+                                    @can('edit', \App\Models\Asset::class)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
+                                        </div>
+                                    @endcan
+
                                     @can('delete', $asset)
                                         <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
                                             @if ($asset->deleted_at=='')
@@ -1243,10 +1261,10 @@
                   <th data-field="note">{{ trans('general.notes') }}</th>
                   <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   <th data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
-                   <th data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
-                   <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
-                   <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
-                   <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
+                  <th data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
+                  <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
+                  <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
+                  <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
                 </tr>
                 </thead>
               </table>
@@ -1254,6 +1272,33 @@
           </div> <!-- /.row -->
         </div> <!-- /.tab-pane history -->
 
+        <!-- Notes tab -->
+        <div class="tab-pane fade" id="notes">
+            <div class="row">
+                <div class="col-md-12">
+                    <table
+                        class="table table-striped snipe-table"
+                        id="notes"
+                        data-pagination="true"
+                        data-id-table="comments"
+                        data-search="false"
+                        data-side-pagination="client"
+                        data-show-columns="true"
+                        data-show-fullscreen="true"
+                        data-show-refresh="true">
+                            <thread>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                            </thread>
+                            <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> <!--/end notes tab -->
+
+        <!-- Files tab -->
         <div class="tab-pane fade" id="files">
           <div class="row">
             <div class="col-md-12">
