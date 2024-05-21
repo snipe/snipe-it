@@ -3,6 +3,9 @@
 namespace Tests\Unit\Helpers;
 
 use App\Helpers\Helper;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class HelperTest extends TestCase
@@ -24,5 +27,65 @@ class HelperTest extends TestCase
 
         $this->settings->set(['digit_separator' => '1.234,56']);
         $this->assertSame(12.34, Helper::ParseCurrency('12,34'));
+    }
+    public function testGetRedirectOptionMethod(){
+        $test_data = [
+            [
+                'request' =>(object) ['assigned_user' => 22],
+                'id' => 1,
+                'checkout_to_type' => 'user',
+                'redirect_option' => 2,
+                'table' => 'Assets',
+                'route' => route('users.show', 22),
+                'message' => 'redirect option 2 for user assigned to failed.'
+            ],
+            [
+                'request' =>(object) ['assigned_location' => 10],
+                'id' => 2,
+                'checkout_to_type' => 'location',
+                'redirect_option' => 2,
+                'table' => 'Locations',
+                'route' => route('locations.show', 10),
+                'message' => 'redirect option 2 location assigned to failed.'
+            ],
+            [
+                'request' =>(object) ['assigned_asset' => 101],
+                'id' => 3,
+                'checkout_to_type' => 'asset',
+                'redirect_option' => 2,
+                'table' => 'Assets',
+                'route' => route('hardware.show', 101),
+                'message' => 'redirect option 2 back to asset assigned to failed.'
+            ],
+            [
+                'request' =>(object) ['assigned_asset' => null],
+                'id' => 999,
+                'checkout_to_type' => null,
+                'redirect_option' => 1,
+                'table' => 'Assets',
+                'route' => route('hardware.show', 999),
+                'message' => 'redirect option 1 back to asset failed.'
+            ],
+            [
+                'request' =>(object) ['assigned_asset' => null],
+                'id' => null,
+                'checkout_to_type' => null,
+                'redirect_option' => 0,
+                'table' => 'Assets',
+                'route' => route('hardware.index'),
+                'message' => 'redirect option 0 back to index failed.'
+            ],
+        ];
+
+        foreach ($test_data as $data) {
+
+            Session::put('redirect_option', $data['redirect_option']);
+            Session::put('checkout_to_type', $data['checkout_to_type']);
+
+            $redirect = Helper::getRedirectOption($data['request'],$data['id'], $data['table']);
+
+            $this->assertInstanceOf(RedirectResponse::class, $redirect);
+            $this->assertEquals($data['route'], $redirect->getTargetUrl(), $data['message']);
+        }
     }
 }

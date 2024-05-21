@@ -51,14 +51,13 @@ class AssetCheckinTest extends TestCase
 
         $this->actingAs(User::factory()->checkinAssets()->create())
             ->post(
-                route('hardware.checkin.store', ['assetId' => $asset->id, 'backto' => 'user']),
+                route('hardware.checkin.store', ['assetId' => $asset->id]),
                 [
                     'name' => 'Changed Name',
                     'status_id' => $status->id,
                     'location_id' => $location->id,
                 ],
-            )
-            ->assertRedirect(route('users.show', $user));
+            );
 
         $this->assertNull($asset->refresh()->assignedTo);
         $this->assertNull($asset->expected_checkin);

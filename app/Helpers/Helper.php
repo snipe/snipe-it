@@ -1463,21 +1463,24 @@ class Helper
 
     static public function getRedirectOption($request, $id, $table)
     {
-        $redirect_option = session::get('redirect_option');
-        $checkout_to_type = session::get('checkout_to_type');
+        $redirect_option = Session::get('redirect_option');
+        $checkout_to_type = Session::get('checkout_to_type');
 
+        //return to index
         if ($redirect_option == '0') {
             switch ($table) {
                 case "Assets":
                     return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
+        //return to thing being assigned
         if ($redirect_option == '1') {
             switch ($table) {
                 case "Assets":
                     return redirect()->route('hardware.show', $id)->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
+        //return to thing being assigned to
         if ($redirect_option == '2') {
             switch ($checkout_to_type) {
                 case 'user':
