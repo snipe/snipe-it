@@ -8,5 +8,4 @@
                 <option {{Session::get('redirect_option')=="2" ? 'selected' : ''}} value="2" {{$checkin ? 'hidden' : ''}}>{{trans('admin/hardware/form.redirect_to_checked_out_to')}}</option>
             </select>
         </div>
-    </div>
 </div> <!-- /.box-->
