@@ -147,7 +147,7 @@ class UpdateUserApiTest extends TestCase
             'Non-super-user was able to modify user group'
         );
 
-        $this->assertTrue($userToUpdateByToUpdateuserBySuperuser->refresh()->groups->contains($groupToJoin));
+        $this->assertTrue($userToUpdateByToUserBySuperuser->refresh()->groups->contains($groupToJoin));
     }
 
     public function testUserGroupsCanBeClearedBySuperUser()
