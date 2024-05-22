@@ -847,7 +847,6 @@ class AssetsController extends Controller
         }
 
         if (! isset($target)) {
-            // @todo: test this code path
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
 
