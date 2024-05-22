@@ -143,7 +143,7 @@ class UpdateUserApiTest extends TestCase
                 'groups' => [$groupToJoin->id],
             ]);
 
-        $this->assertFalse($userToUpdateByToUpdateuserWhoCanEditUsers->refresh()->groups->contains($groupToJoin),
+        $this->assertFalse($userToUpdateByUserWhoCanEditUsers->refresh()->groups->contains($groupToJoin),
             'Non-super-user was able to modify user group'
         );
 
