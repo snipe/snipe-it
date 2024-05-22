@@ -689,6 +689,8 @@ class AssetsController extends Controller
             }     
 
             $asset = $request->handleImages($asset);
+
+
             $model = AssetModel::find($asset->model_id);
             
             // Update custom fields
