@@ -96,7 +96,7 @@ class UserFilesController extends Controller
                 return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
             }
 
-            return redirect()->back()->with('success', trans('admin/users/message.user_not_found', ['id' => $userId]));
+            return redirect()->back()->with('error', trans('admin/users/general.log_does_not_exist'));
 
         }
 
