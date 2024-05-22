@@ -85,18 +85,6 @@ class AssetCheckoutTest extends TestCase
     public function checkoutTargets(): array
     {
         return [
-            'Checkout to User without location set' => [
-                function () {
-                    $userLocation = Location::factory()->create();
-                    $user = User::factory()->for($userLocation)->create(['location_id' => null]);
-
-                    return [
-                        'checkout_type' => 'user',
-                        'target' => $user,
-                        'expected_location' => null,
-                    ];
-                }
-            ],
             'Checkout to User' => [
                 function () {
                     $userLocation = Location::factory()->create();
@@ -109,14 +97,14 @@ class AssetCheckoutTest extends TestCase
                     ];
                 }
             ],
-            'Checkout to Asset without location set' => [
+            'Checkout to User without location set' => [
                 function () {
-                    $rtdLocation = Location::factory()->create();
-                    $asset = Asset::factory()->for($rtdLocation, 'defaultLoc')->create(['location_id' => null]);
+                    $userLocation = Location::factory()->create();
+                    $user = User::factory()->for($userLocation)->create(['location_id' => null]);
 
                     return [
-                        'checkout_type' => 'asset',
-                        'target' => $asset,
+                        'checkout_type' => 'user',
+                        'target' => $user,
                         'expected_location' => null,
                     ];
                 }
@@ -131,6 +119,18 @@ class AssetCheckoutTest extends TestCase
                         'checkout_type' => 'asset',
                         'target' => $asset,
                         'expected_location' => $location,
+                    ];
+                }
+            ],
+            'Checkout to Asset without location set' => [
+                function () {
+                    $rtdLocation = Location::factory()->create();
+                    $asset = Asset::factory()->for($rtdLocation, 'defaultLoc')->create(['location_id' => null]);
+
+                    return [
+                        'checkout_type' => 'asset',
+                        'target' => $asset,
+                        'expected_location' => null,
                     ];
                 }
             ],
