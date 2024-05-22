@@ -160,20 +160,21 @@ class AssetCheckoutTest extends TestCase
         $this->actingAsForApi($admin)
             ->postJson(route('api.asset.checkout', $asset), [
                 'checkout_to_type' => $type,
-                'assigned_' . $type => $target->id,
+                'assigned_'.$type => $target->id,
                 'status_id' => $newStatus->id,
                 'checkout_at' => '2024-04-01',
                 'expected_checkin' => '2024-04-08',
                 'name' => 'Changed Name',
                 'note' => 'Here is a cool note!',
-            ]);
+            ])
+            ->assertOk();
 
         $asset->refresh();
         $this->assertTrue($asset->assignedTo()->is($target));
         $this->assertEquals('Changed Name', $asset->name);
         $this->assertTrue($asset->assetstatus->is($newStatus));
         $this->assertEquals('2024-04-01 00:00:00', $asset->last_checkout);
-        $this->assertEquals('2024-04-08 00:00:00', (string)$asset->expected_checkin);
+        $this->assertEquals('2024-04-08 00:00:00', (string) $asset->expected_checkin);
 
         $expectedLocation
             ? $this->assertTrue($asset->location->is($expectedLocation))
@@ -181,10 +182,12 @@ class AssetCheckoutTest extends TestCase
 
         Event::assertDispatched(CheckoutableCheckedOut::class, 1);
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $target) {
-            return $event->checkoutable->is($asset)
-                && $event->checkedOutTo->is($target)
-                && $event->checkedOutBy->is($admin)
-                && $event->note === 'Here is a cool note!';
+            $this->assertTrue($event->checkoutable->is($asset));
+            $this->assertTrue($event->checkedOutTo->is($target));
+            $this->assertTrue($event->checkedOutBy->is($admin));
+            $this->assertEquals('Here is a cool note!', $event->note);
+
+            return true;
         });
     }
 
