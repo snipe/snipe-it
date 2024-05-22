@@ -139,7 +139,7 @@ class UpdateUserApiTest extends TestCase
             ]);
 
         $this->actingAsForApi($superUser)
-            ->patchJson(route('api.users.update', $userToUpdateByToUpdateuserBySuperuser), [
+            ->patchJson(route('api.users.update', $userToUpdateByToUserBySuperuser), [
                 'groups' => [$groupToJoin->id],
             ]);
 
