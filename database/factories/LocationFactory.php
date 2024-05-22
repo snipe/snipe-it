@@ -25,4 +25,10 @@ class LocationFactory extends Factory
             'image' => rand(1, 9).'.jpg',
         ];
     }
+
+    public function deleted()
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
+    }
+
 }
