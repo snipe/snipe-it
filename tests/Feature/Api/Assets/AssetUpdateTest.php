@@ -170,27 +170,6 @@ class AssetUpdateTest extends TestCase
         $this->assertNull($asset->assigned_to);
         $this->assertNull($asset->assigned_type);
     }
-
-    public function testCheckinOnAssetUpdate()
-    {
-        $asset = Asset::factory()->assignedToUser()->create();
-        $user = User::factory()->editAssets()->create();
-
-        $response = $this->actingAsForApi($user)
-            ->patchJson(route('api.assets.update', ['hardware' => $asset->id]), [
-                'assigned_user' => '',
-            ])
-            ->assertOk()
-            ->assertStatusMessageIs('success')
-            ->json();
-        \Log::error($response);
-
-        $asset->refresh();
-        $this->assertNull($asset->assigned_to);
-        $this->assertNull($asset->assigned_type);
-
-
-    }
-
+    
 
 }
