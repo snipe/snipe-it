@@ -84,6 +84,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['superuser' => '1']);
     }
 
+    public function deleted()
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
+    }
+
     public function admin()
     {
         return $this->state(function () {
