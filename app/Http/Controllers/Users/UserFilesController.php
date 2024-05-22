@@ -83,19 +83,20 @@ class UserFilesController extends Controller
             $this->authorize('delete', $user);
             $rel_path = 'private_uploads/users';
 
+
             if ($log = Actionlog::find($fileId)) {
-
-                $full_filename = $rel_path.'/'.$log->filename;
-
-                if (Storage::exists($rel_path.'/'.$full_filename)) {
-                    Storage::delete($rel_path.'/'.$full_filename);
-                    $log->delete();
+                $filename = $log->filename;
+                $log->delete();
+                
+                if (Storage::exists($rel_path.'/'.$filename)) {
+                    Storage::delete($rel_path.'/'.$filename);
                     return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
                 }
+
             }
 
-            return redirect()->back()->with('error', trans('admin/users/general.log_does_not_exist'));
-
+            // The log record doesn't exist somehow
+            return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
         }
 
         return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
