@@ -78,24 +78,29 @@ class UserFilesController extends Controller
      */
     public function destroy($userId = null, $fileId = null)
     {
-        $user = User::find($userId);
-        $destinationPath = config('app.private_uploads').'/users';
+        if ($user = User::find($userId)) {
 
-        if (isset($user->id)) {
-            $this->authorize('update', $user);
-            $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+            $this->authorize('delete', $user);
+            $rel_path = 'private_uploads/users';
+
+            if ($log = Actionlog::find($fileId)) {
+
+                $full_filename = $rel_path.'/'.$log->filename;
+
+                if (file_exists($full_filename)) {
+                    Storage::delete($rel_path.'/'.$log->filename);
+                    return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
+                }
+
+                $log->delete();
+                return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
             }
-            $log->delete();
 
-            return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
+            return redirect()->back()->with('success', trans('admin/users/message.user_not_found', ['id' => $userId]));
+
         }
-        // Prepare the error message
-        $error = trans('admin/users/message.user_not_found', ['id' => $userId]);
-        // Redirect to the licence management page
-        return redirect()->route('users.index')->with('error', $error);
+
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
 
     }
 
