@@ -829,7 +829,6 @@ class AssetsController extends Controller
             $error_payload['target_type'] = 'location';
 
         } elseif (request('checkout_to_type') == 'asset') {
-            // @todo: test this code path
             $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';

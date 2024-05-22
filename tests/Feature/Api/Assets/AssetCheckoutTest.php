@@ -142,7 +142,7 @@ class AssetCheckoutTest extends TestCase
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
         $newStatus = Statuslabel::factory()->readyToDeploy()->create();
-        $asset = Asset::factory()->create();
+        $asset = Asset::factory()->forLocation()->create();
         $admin = User::factory()->checkoutAssets()->create();
 
         $this->actingAsForApi($admin)
