@@ -235,12 +235,11 @@ class UpdateUserApiTest extends TestCase
         $groupA = Group::factory()->create(['name'=>'Group A']);
         $groupB = Group::factory()->create(['name'=>'Group B']);
 
-        $response = $this->actingAsForApi($superUser)
+        $this->actingAsForApi($superUser)
             ->patchJson(route('api.users.update', $user), [
                 'groups' => [$groupA->id, $groupB->id],
             ])->json();
 
-        \Log::error($response);
         $this->assertTrue($user->refresh()->groups->contains($groupA));
         $this->assertTrue($user->refresh()->groups->contains($groupB));
     }
