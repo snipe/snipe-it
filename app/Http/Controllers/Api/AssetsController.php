@@ -718,16 +718,21 @@ class AssetsController extends Controller
                 }
             }
 
+            if (($request->filled('assigned_user')) || ($request->filled('assigned_asset')) || ($request->filled('assigned_location'))) {
+                app('App\Http\Requests\AssetCheckoutRequest');
+            }
+
 
             if ($asset->save()) {
-                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
-                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                    $location = $target->location_id;
 
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
-                        ->update(['location_id' => $target->location_id]);
-                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
+                if ($request->filled('assigned_user')) {
+                    $target = User::find($request->get('assigned_user'));
+                    $location = $target->location_id;
+                } elseif ($request->filled('assigned_asset')) {
+                    $target = Asset::find($request->get('assigned_asset'));
+                    $location = $target->location_id;
+                } elseif ($request->filled('assigned_location')) {
+                    $target = Location::find($request->get('assigned_location'));
                     $location = $target->id;
                 }
 
