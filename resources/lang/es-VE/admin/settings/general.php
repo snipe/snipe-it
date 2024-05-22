@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Licencia Predeterminada',
     'default_language'			=> 'Lenguaje Predeterminado',
     'default_eula_help_text'	=> 'También puedes asociar licencias personalizadas a categorías de activos específicas.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Mostrar Nombre del Equipo',
     'display_checkout_date'     => 'Mostrar fecha de Salida',
     'display_eol'               => 'Mostrar Fin de Vida en la vista de tabla',

@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA por defecto',
     'default_language'			=> 'Idioma predeterminado',
     'default_eula_help_text'	=> 'También puede asociar EULAs personalizadas para categorías especificas de equipos.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Mostrar Nombre Equipo',
     'display_checkout_date'     => 'Mostrar Fecha de Salida',
     'display_eol'               => 'Mostrar EOL',

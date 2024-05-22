@@ -209,7 +209,9 @@
                     array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
                 },
 
-                get valueString() { return this.toString(this.fields); },
+                get valueString() {
+                    return this.getCombinedString(this.fields);
+                },
                 onTest: function(a) {
                     console.log('test', a);
                 },
@@ -229,7 +231,7 @@
                                 })
                         }));
                 },
-                toString: function(fields) {
+                getCombinedString: function (fields) {
                     return fields
                         .map(field => field.options
                             .map(option => option.label + '=' + option.datasource)
@@ -306,6 +308,7 @@
                         <label style="grid-area: source-title">DataSource</label>
                         <select style="grid-area: source-field" x-model="option.datasource">
                             <optgroup label="Asset">
+                                <option value="" disabled>{{ trans('general.select_datasource') }}</option>
                                 <option value="asset_tag">{{trans('admin/hardware/table.asset_tag')}}</option>
                                 <option value="name">{{trans('admin/hardware/form.name')}}</option>
                                 <option value="serial">{{trans('admin/hardware/table.serial')}}</option>
@@ -350,6 +353,7 @@
                             </optgroup>
                             <optgroup label="Custom Fields">
                                 @foreach($customFields as $customField)
+
                                     <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
                                 @endforeach
                             </optgroup>

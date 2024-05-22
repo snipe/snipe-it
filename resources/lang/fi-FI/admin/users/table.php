@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Kirjautumistietoja ei voida muokata tässä asennuksessa.',
     'manager' 				=> 'Esimies',
     'managed_locations'     => 'Esimiehenä sijainneissa',
+    'managed_users'         => 'Hallinnoidut Käyttäjät',
     'name' 					=> 'Nimi',
     'nogroup'               => 'Yhtään ryhmää ei ole vielä luotu. Lisätäksesi yhden, käy: ',
     'notes'                 => 'Muistiinpanot',

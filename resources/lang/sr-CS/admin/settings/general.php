@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Default EULA',
     'default_language'			=> 'Podrazumevani jezik',
     'default_eula_help_text'	=> 'Takođe možete da povežete prilagođene EULA-e sa određenim kategorijama sredstava.',
+    'acceptance_note'           => 'Dodajte napomenu vašoj odluci (opciono)',
     'display_asset_name'        => 'Naziv osnovnog sredstva',
     'display_checkout_date'     => 'Prikaži datum razduženja',
     'display_eol'               => 'Prikažite EOL u prikazu tabele',

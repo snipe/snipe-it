@@ -32,7 +32,10 @@
         </label>
         <span class='label label-default' id="uploadFile-info"></span>
 
-        <p class="help-block" id="uploadFile-status">{{ trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]) }}</p>
+        <p class="help-block" id="uploadFile-status">{{ trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]) }} {{ $help_text ?? '' }}</p>
+
+
+
         {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
     <div class="col-md-4 col-md-offset-3" aria-hidden="true">

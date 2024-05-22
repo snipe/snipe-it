@@ -23,7 +23,7 @@ return [
     'depreciation'	    => 'Khấu hao',
     'depreciates_on'	=> 'Trích khấu hao',
     'default_location'	=> 'Vị trí mặc định',
-    'default_location_phone' => 'Default Location Phone',
+    'default_location_phone' => 'Số điện thoại mặc định',
     'eol_date'			=> 'Ngày EOL',
     'eol_rate'			=> 'Tỷ lệ EOL',
     'expected_checkin'  => 'Ngày mong muốn Checkin',

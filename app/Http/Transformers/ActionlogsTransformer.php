@@ -85,20 +85,23 @@ class ActionlogsTransformer
                                     $enc_old = '';
                                     $enc_new = '';
 
-                                    try  {
-                                        $enc_old = \Crypt::decryptString($this->clean_field($fieldata->old));
-                                    } catch (\Exception $e) {
-                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    if ($this->clean_field($fieldata->old!='')) {
+                                        try {
+                                            $enc_old = \Crypt::decryptString($this->clean_field($fieldata->old));
+                                        } catch (\Exception $e) {
+                                            \Log::debug('Could not decrypt old field value - maybe the key changed?');
+                                        }
                                     }
 
-                                    try {
-                                        $enc_new = \Crypt::decryptString($this->clean_field($fieldata->new));
-                                    } catch (\Exception $e) {
-                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    if ($this->clean_field($fieldata->new!='')) {
+                                        try {
+                                            $enc_new = \Crypt::decryptString($this->clean_field($fieldata->new));
+                                        } catch (\Exception $e) {
+                                            \Log::debug('Could not decrypt new field value - maybe the key changed?');
+                                        }
                                     }
 
                                     if ($enc_old != $enc_new) {
-                                        \Log::debug('custom fields do not match');
                                         $clean_meta[$fieldname]['old'] = "************";
                                         $clean_meta[$fieldname]['new'] = "************";
 

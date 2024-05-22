@@ -36,7 +36,7 @@ return array(
         'create' => 'Kasutaja loomisel tekkis probleem. Palun proovi uuesti.',
         'update' => 'Kasutaja uuendamisel tekkis probleem. Palun proovi uuesti.',
         'delete' => 'Kasutaja kustutamisel tekkis probleem. Palun proovi uuesti.',
-        'delete_has_assets' => 'Sellel kasutajal on elemendid määratud ja neid ei saanud kustutada.',
+        'delete_has_assets' => 'Sellel kasutajal on varad määratud ja teda ei saa kustutada.',
         'unsuspend' => 'Kasutaja pole probleemi lahendanud. Palun proovi uuesti.',
         'import'    => 'Kasutajate importimisel tekkis probleem. Palun proovi uuesti.',
         'asset_already_accepted' => 'See vahend on juba vastu võetud.',

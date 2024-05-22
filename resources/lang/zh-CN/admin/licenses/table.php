@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> '分配给',
     'checkout'   		=> '进/出',
+    'deleted_at'        => '删除于',
     'id'      			=> '编号',
     'license_email'   	=> '授权邮箱',
     'license_name'   	=> '授权给',

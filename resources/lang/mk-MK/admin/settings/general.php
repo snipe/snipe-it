@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Default EULA',
     'default_language'			=> 'Стандарден јазик',
     'default_eula_help_text'	=> 'Можете доделите сопствени услови за користење на одредени категории на средства.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Прикажи име на основно средство',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',

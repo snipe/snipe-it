@@ -59,7 +59,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, $audit = null) 
+    public function index(Request $request, $action = null, $upcoming_status = null)
     {
 
         $filter_non_deprecable_assets = false;
@@ -155,17 +155,44 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
-        // This is used by the audit reporting routes
-        if (Gate::allows('audit', Asset::class)) {
-            switch ($audit) {
-                case 'due':
-                    $assets->DueOrOverdueForAudit($settings);
-                    break;
-                case 'overdue':
-                    $assets->overdueForAudit($settings);
-                    break;
+
+        /**
+         * Handle due and overdue audits and checkin dates
+         */
+        switch ($action) {
+            case 'audits':
+
+                switch ($upcoming_status) {
+                    case 'due':
+                        $assets->DueForAudit($settings);
+                        break;
+                    case 'overdue':
+                        $assets->OverdueForAudit();
+                        break;
+                    case 'due-or-overdue':
+                        $assets->DueOrOverdueForAudit($settings);
+                        break;
+                }
+                break;
+
+            case 'checkins':
+                switch ($upcoming_status) {
+                    case 'due':
+                        $assets->DueForCheckin($settings);
+                        break;
+                    case 'overdue':
+                        $assets->OverdueForCheckin();
+                        break;
+                    case 'due-or-overdue':
+                        $assets->DueOrOverdueForCheckin($settings);
+                        break;
+                }
+                break;
             }
-        }
+
+        /**
+         * End handling due and overdue audits and checkin dates
+         */
 
 
         // This is used by the sidenav, mostly
@@ -665,25 +692,26 @@ class AssetsController extends Controller
             $model = AssetModel::find($asset->model_id);
             
             // Update custom fields
+            $problems_updating_encrypted_custom_fields = false;
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
                     $field_val = $request->input($field->db_column, null);
 
                     if ($request->has($field->db_column)) {
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = Crypt::encrypt($field_val);
-                            }
-                        }
                         if ($field->element == 'checkbox') {
                             if(is_array($field_val)) {
                                 $field_val = implode(',', $field_val);
-                                $asset->{$field->db_column} = $field_val;
                             }
                         }
-                        else {
-                            $asset->{$field->db_column} = $field_val;
+                        if ($field->field_encrypted == '1') {
+                            if (Gate::allows('admin')) {
+                                $field_val = Crypt::encrypt($field_val);
+                            } else {
+                                $problems_updating_encrypted_custom_fields = true;
+                                continue;
+                            }
                         }
+                        $asset->{$field->db_column} = $field_val;
                     }
                 }
             }
@@ -709,8 +737,11 @@ class AssetsController extends Controller
                     $asset->image = $asset->getImageUrl();
                 }
 
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
-                return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
+                if ($problems_updating_encrypted_custom_fields) {
+                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+                } else {
+                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                }
             }
 
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -995,25 +1026,39 @@ class AssetsController extends Controller
 
     {
         $this->authorize('audit', Asset::class);
-        $rules = [
-            'asset_tag' => 'required',
-            'location_id' => 'exists:locations,id|nullable|numeric',
-            'next_audit_date' => 'date|nullable',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
-        }
 
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+
+        // No tag passed - return an error
+        if (!$request->filled('asset_tag')) {
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> '',
+                'error'=> trans('admin/hardware/message.no_tag'),
+            ], trans('admin/hardware/message.no_tag')), 200);
+        }
+
 
         $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
 
 
         if ($asset) {
-            // We don't want to log this as a normal update, so let's bypass that
+
+            /**
+             * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
+             * which would trigger the Asset Observer and would log an asset *update* log entry (because the
+             * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
+             * the audit log entry we're creating through this controller.
+             *
+             * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
+             * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
+             * will bypass normal model-level validation that's usually handled at the observer )
+             *
+             * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
+             * which manually invokes Watson Validating to make sure the asset's model is valid.
+             *
+             * @see \App\Observers\AssetObserver::updating()
+             */
             $asset->unsetEventDispatcher();
             $asset->next_audit_date = $dt;
 
@@ -1029,8 +1074,12 @@ class AssetsController extends Controller
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
-            if ($asset->save()) {
-                $log = $asset->logAudit(request('note'), request('location_id'));
+            /**
+             * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
+             * We have to invoke this manually because of the unsetEventDispatcher() above.)
+             */
+            if ($asset->isValid() && $asset->save()) {
+                $asset->logAudit(request('note'), request('location_id'));
 
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'asset_tag'=> e($asset->asset_tag),
@@ -1038,9 +1087,23 @@ class AssetsController extends Controller
                     'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
                 ], trans('admin/hardware/message.audit.success')));
             }
+
+            // Asset failed validation or was not able to be saved
+            return response()->json(Helper::formatStandardApiResponse('error', [
+                'asset_tag'=> e($asset->asset_tag),
+                'error'=> $asset->getErrors()->first(),
+            ], trans('admin/hardware/message.audit.error', ['error' => $asset->getErrors()->first()])), 200);
+
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+
+        // No matching asset for the asset tag that was passed.
+        return response()->json(Helper::formatStandardApiResponse('error', [
+            'asset_tag'=> e($request->input('asset_tag')),
+            'error'=> trans('admin/hardware/message.audit.error'),
+        ], trans('admin/hardware/message.audit.error', ['error' => trans('admin/hardware/message.does_not_exist')])), 200);
+
+
     }
 
 

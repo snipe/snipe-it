@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Noklusējuma EULA',
     'default_language'			=> 'Noklusējuma valoda',
     'default_eula_help_text'	=> 'Varat arī saistīt pielāgotās EULA ar noteiktām aktīvu kategorijām.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Displeja aktīvu nosaukums',
     'display_checkout_date'     => 'Displeja norēķinu datums',
     'display_eol'               => 'Displejs EOL tabulas skatījumā',

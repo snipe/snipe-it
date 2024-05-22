@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
@@ -352,6 +353,25 @@ class AssetFactory extends Factory
     {
         return $this->state(['requestable' => false]);
     }
+
+    public function hasEncryptedCustomField(CustomField $field = null)
+    {
+        return $this->state(function () use ($field) {
+            return [
+                'model_id' => AssetModel::factory()->hasEncryptedCustomField($field),
+            ];
+        });
+    }
+
+    public function hasMultipleCustomFields(array $fields = null): self
+    {
+        return $this->state(function () use ($fields) {
+            return [
+                'model_id' => AssetModel::factory()->hasMultipleCustomFields($fields),
+            ];
+        });
+    }
+
 
     /**
      * This allows bypassing model level validation if you want to purposefully

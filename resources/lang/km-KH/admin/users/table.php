@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'អ្នកគ្រប់គ្រង',
     'managed_locations'     => 'Managed Locations',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'ឈ្មោះ',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'កំណត់ចំណាំ',

@@ -32,7 +32,7 @@ return [
     'csv_import_match_f-l' => 'Попробуйте сопоставить пользователей с форматом <strong>firstname.lastname</strong> (<code>jane.smith</code>)',
     'csv_import_match_initial_last' => 'Попробуйте сопоставить пользователей с форматом <strong>первого первоначального имени</strong> (<code>jsmith</code>)',
     'csv_import_match_first' => 'Попробуйте сопоставить пользователей с форматом <strong>имени</strong> (<code>jane</code>)',
-    'csv_import_match_email' => 'Try to match users by <strong>email</strong> as username',
+    'csv_import_match_email' => 'Попробуйте сопоставить пользователей по <strong>электронной почте</strong> в качестве имени пользователя',
     'csv_import_match_username' => 'Попытаться сопоставить пользователей с помощью <strong>имени пользователя</strong>',
     'error_messages' => 'Сообщения об ошибках:',
     'success_messages' => 'Сообщения об успехе:',

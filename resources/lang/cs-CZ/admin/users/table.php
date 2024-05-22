@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Přihlašovací údaje nelze v této instalaci měnit.',
     'manager' 				=> 'Nadřízený',
     'managed_locations'     => 'Spravovaná místa',
+    'managed_users'         => 'Spravovaní uživatelé',
     'name' 					=> 'Položka',
     'nogroup'               => 'Zatím nebyly vytvořeny žádné skupiny. Chcete-li přidat jednu skupinu, navštivte: ',
     'notes'                 => 'Poznámky',

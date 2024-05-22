@@ -2,14 +2,18 @@
 
 namespace Tests\Feature\Api\Assets;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class AssetStoreTest extends TestCase
@@ -276,6 +280,50 @@ class AssetStoreTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
+    public function testStoresPeriodAsDecimalSeparatorForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'USD',
+            'digit_separator' => '1,234.56',
+        ]);
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API accepts float
+                'purchase_cost' => 12.34,
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(12.34, $asset->purchase_cost);
+    }
+
+    public function testStoresPeriodAsCommaSeparatorForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'EUR',
+            'digit_separator' => '1.234,56',
+        ]);
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API also accepts string for comma separated values
+                'purchase_cost' => '12,34',
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(12.34, $asset->purchase_cost);
+    }
+
     public function testUniqueSerialNumbersIsEnforcedWhenEnabled()
     {
         $model = AssetModel::factory()->create();
@@ -478,5 +526,56 @@ class AssetStoreTest extends TestCase
             ->assertJson(function (AssertableJson $json) {
                 $json->has('messages.company_id')->etc();
             });
+    }
+
+    public function testEncryptedCustomFieldCanBeStored()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $field = CustomField::factory()->testEncrypted()->create();
+        $superuser = User::factory()->superuser()->create();
+        $assetData = Asset::factory()->hasEncryptedCustomField($field)->make();
+
+        $response = $this->actingAsForApi($superuser)
+            ->postJson(route('api.assets.store'), [
+                $field->db_column_name() => 'This is encrypted field',
+                'model_id' => $assetData->model->id,
+                'status_id' => $status->id,
+                'asset_tag' => '1234',
+            ])
+            ->assertStatusMessageIs('success')
+            ->assertOk()
+            ->json();
+
+        $asset = Asset::findOrFail($response['payload']['id']);
+        $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
+    }
+
+    public function testPermissionNeededToStoreEncryptedField()
+    {
+        // @todo:
+        $this->markTestIncomplete();
+
+        $status = Statuslabel::factory()->create();
+        $field = CustomField::factory()->testEncrypted()->create();
+        $normal_user = User::factory()->editAssets()->create();
+        $assetData = Asset::factory()->hasEncryptedCustomField($field)->make();
+
+        $response = $this->actingAsForApi($normal_user)
+            ->postJson(route('api.assets.store'), [
+                $field->db_column_name() => 'Some Other Value Entirely!',
+                'model_id' => $assetData->model->id,
+                'status_id' => $status->id,
+                'asset_tag' => '1234',
+            ])
+            // @todo: this is 403 unauthorized
+            ->assertStatusMessageIs('success')
+            ->assertOk()
+            ->assertMessagesAre('Asset updated successfully, but encrypted custom fields were not due to permissions')
+            ->json();
+
+        $asset = Asset::findOrFail($response['payload']['id']);
+        $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 }

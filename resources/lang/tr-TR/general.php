@@ -1,7 +1,7 @@
 <?php
 
 return [
-    '2FA_reset'             => '2FA reset',
+    '2FA_reset'             => '2 Aşamalı doğrulama yenile',
     'accessories'			=> 'Aksesuarlar',
     'activated'			    => 'Aktif edildi',
     'accepted_date'         => 'Kabul edilme günü',
@@ -186,7 +186,7 @@ Context | Request Context
     'lock_passwords'        => 'Bu alan değeri bir demo kurulumunda kaydedilmeyecektir.',
     'feature_disabled'      => 'Bu özellik demo yükleme için devre dışı bırakıldı.',
     'location'              => 'Konum',
-    'location_plural'        => 'Location|Locations',
+    'location_plural'        => 'Lokasyon',
     'locations'				=> 'Konumlar',
     'logo_size'				=> 'Kare logolar, logo ve yazı ile daha iyi görünür. Logo\'nun maksimum görüntülenme boyutu 50px yükseklik x 500px genişliktir.  ',
     'logout'				=> 'Çıkış Yap',
@@ -205,6 +205,8 @@ Context | Request Context
     'new_password'          => 'Yeni Şifre',
     'next'					=> 'Sonraki',
     'next_audit_date'		=> 'Sonraki Denetim Tarihi',
+    'next_audit_date_help'  => 'If you use auditing in your organization, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
+    'audit_images_help'     => 'You can find audit images in the asset\'s history tab.',
     'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Son denetim',
     'new'					=> 'yeni!',
@@ -248,6 +250,7 @@ Context | Request Context
     'select_all'            => 'Tümünü Seç',
     'search'				=> 'Ara',
     'select_category'       => 'Kategori Seç',
+    'select_datasource' => 'Select a Datasource',
     'select_department'     => 'Bölüm Seç',
     'select_depreciation'	=> 'Bir Değer Kaybı Türü Seç',
     'select_location'		=> 'Konum Seç',
@@ -297,6 +300,7 @@ Context | Request Context
     'user'					=> 'Kullanıcı',
     'accepted'			    => 'kabul edildi',
     'declined'			    => 'reddedildi',
+    'declined_note'         => 'Declined Notes',
     'unassigned'            => 'Atanmamış',
     'unaccepted_asset_report' => 'Kabul Edilmeyen Varlıklar',
     'users'                 => 'Kullanıcılar',
@@ -315,6 +319,10 @@ Context | Request Context
     'token_expired'         => 'Oturum zaman aşımına uğradı. Lütfen tekrar giriş yapın.',
     'login_enabled'         => 'Kullanıcı Aktif',
     'audit_due'             => 'Beklenen Denetimler',
+    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'checkin_due'           => 'Due for Checkin',
+    'checkin_overdue'       => 'Overdue for Checkin',
+    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Zamanı Geçmiş Denetimler',
     'accept'                => 'Demirbaş Kabul',
     'i_accept'              => 'Kabul ediyorum',
@@ -510,6 +518,9 @@ Context | Request Context
     'or' => 'veya',
     'url'                   => 'Link',
     'edit_fieldset' => 'Edit fieldset fields and options',
+    'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
+    'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
+    'error_sending_email' => 'Error sending email',
     'bulk' => [
             'delete' =>
                 [

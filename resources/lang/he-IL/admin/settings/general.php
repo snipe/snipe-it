@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'ברירת מחדל ל- EULA',
     'default_language'			=> 'שפת ברירת מחדל',
     'default_eula_help_text'	=> 'ניתן גם לשייך ערכי רשיון קצה מותאמים אישית לקטגוריות ספציפיות של נכסים.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'שם נכס לתצוגה',
     'display_checkout_date'     => 'הצג תאריך יציאה',
     'display_eol'               => 'הצג EOL בתצוגת טבלה',
