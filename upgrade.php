@@ -248,6 +248,7 @@ $required_exts_array =
     [
         'bcmath',
         'curl',
+        'exif',
         'fileinfo',
         'gd|imagick',
         'json',
