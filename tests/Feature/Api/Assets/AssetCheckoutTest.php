@@ -105,7 +105,7 @@ class AssetCheckoutTest extends TestCase
                     return [
                         'checkout_type' => 'asset',
                         'target' => $asset,
-                        'expected_location' => $rtdLocation,
+                        'expected_location' => null,
                     ];
                 }
             ],
@@ -158,11 +158,14 @@ class AssetCheckoutTest extends TestCase
 
         $asset->refresh();
         $this->assertTrue($asset->assignedTo()->is($target));
-        $this->assertTrue($asset->location->is($expectedLocation));
         $this->assertEquals('Changed Name', $asset->name);
         $this->assertTrue($asset->assetstatus->is($newStatus));
         $this->assertEquals('2024-04-01 00:00:00', $asset->last_checkout);
         $this->assertEquals('2024-04-08 00:00:00', (string)$asset->expected_checkin);
+
+        $expectedLocation
+            ? $this->assertTrue($asset->location->is($expectedLocation))
+            : $this->assertNull($asset->location);
 
         Event::assertDispatched(CheckoutableCheckedOut::class, 1);
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $target) {
