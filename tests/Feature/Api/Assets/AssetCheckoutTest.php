@@ -85,6 +85,18 @@ class AssetCheckoutTest extends TestCase
     public function checkoutTargets(): array
     {
         return [
+            'Checkout to User without location set' => [
+                function () {
+                    $userLocation = Location::factory()->create();
+                    $user = User::factory()->for($userLocation)->create(['location_id' => null]);
+
+                    return [
+                        'checkout_type' => 'user',
+                        'target' => $user,
+                        'expected_location' => null,
+                    ];
+                }
+            ],
             'Checkout to User' => [
                 function () {
                     $userLocation = Location::factory()->create();

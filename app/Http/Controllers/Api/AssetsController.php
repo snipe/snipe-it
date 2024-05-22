@@ -823,7 +823,6 @@ class AssetsController extends Controller
         // This item is checked out to a location
         if (request('checkout_to_type') == 'location') {
             $target = Location::find(request('assigned_location'));
-            // @todo: test the setting of ''
             $asset->location_id = ($target) ? $target->id : '';
             $error_payload['target_id'] = $request->input('assigned_location');
             $error_payload['target_type'] = 'location';
@@ -836,10 +835,8 @@ class AssetsController extends Controller
             $error_payload['target_type'] = 'asset';
 
         } elseif (request('checkout_to_type') == 'user') {
-            // @todo: test this code path
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
-            // @todo: test if this is needed or already handled in checkOut method
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_user');
             $error_payload['target_type'] = 'user';
