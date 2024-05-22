@@ -179,14 +179,12 @@ class UpdateUserApiTest extends TestCase
     public function testNonSuperuserCannotUpdateOwnGroups()
     {
         $groupToJoin = Group::factory()->create();
-
         $user = User::factory()->editUsers()->create();
 
         $this->actingAsForApi($user)
             ->patchJson(route('api.users.update', $user), [
                 'groups' => [$groupToJoin->id],
             ]);
-
 
         $this->assertFalse($user->refresh()->groups->contains($groupToJoin),
             'Non-super-user was able to modify user group'
@@ -227,6 +225,24 @@ class UpdateUserApiTest extends TestCase
             ->patchJson(route('api.users.update', $user), []);
 
         $this->assertTrue($user->refresh()->groups->contains($group));
+    }
+
+    public function testMultipleGroupsUpdateBySuperUser()
+    {
+        $user = User::factory()->create();
+        $superUser = User::factory()->superuser()->create();
+
+        $groupA = Group::factory()->create(['name'=>'Group A']);
+        $groupB = Group::factory()->create(['name'=>'Group B']);
+
+        $response = $this->actingAsForApi($superUser)
+            ->patchJson(route('api.users.update', $user), [
+                'groups' => [$groupA->id, $groupB->id],
+            ])->json();
+
+        \Log::error($response);
+        $this->assertTrue($user->refresh()->groups->contains($groupA));
+        $this->assertTrue($user->refresh()->groups->contains($groupB));
     }
 
 }
