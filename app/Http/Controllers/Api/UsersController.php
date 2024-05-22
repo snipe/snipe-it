@@ -496,17 +496,20 @@ class UsersController extends Controller
             // Check if the request has groups passed and has a value, AND that the user us a superuser
             if (($request->has('groups')) && (Auth::user()->isSuperUser())) {
 
-                $validator = Validator::make($request->all(), [
+                $validator = Validator::make($request->only('groups'), [
                     'groups.*' => 'integer|exists:permission_groups,id',
                 ]);
 
-                $user->groups()->sync($request->input('groups'));
-
                 if ($validator->fails()) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()));
                 }
 
+                // Sync the groups since the user is a superuser and the groups pass validation
+                $user->groups()->sync($request->input('groups'));
+
+
             }
+
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
 
