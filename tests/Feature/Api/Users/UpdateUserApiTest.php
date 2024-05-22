@@ -130,8 +130,8 @@ class UpdateUserApiTest extends TestCase
         $userWhoCanEditUsers = User::factory()->editUsers()->create();
         $superUser = User::factory()->superuser()->create();
 
-        $userToUpdateByToUpdateuserWhoCanEditUsers = User::factory()->create();
-        $userToUpdateByToUpdateuserBySuperuser = User::factory()->create();
+        $userToUpdateByUserWhoCanEditUsers = User::factory()->create();
+        $userToUpdateByToUserBySuperuser = User::factory()->create();
 
         $this->actingAsForApi($userWhoCanEditUsers)
             ->patchJson(route('api.users.update', $userToUpdateByToUpdateuserWhoCanEditUsers), [
