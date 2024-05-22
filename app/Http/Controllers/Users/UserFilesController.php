@@ -87,13 +87,11 @@ class UserFilesController extends Controller
 
                 $full_filename = $rel_path.'/'.$log->filename;
 
-                if (file_exists($full_filename)) {
-                    Storage::delete($rel_path.'/'.$log->filename);
+                if (Storage::exists($rel_path.'/'.$full_filename)) {
+                    Storage::delete($rel_path.'/'.$full_filename);
+                    $log->delete();
                     return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
                 }
-
-                $log->delete();
-                return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
             }
 
             return redirect()->back()->with('error', trans('admin/users/general.log_does_not_exist'));
