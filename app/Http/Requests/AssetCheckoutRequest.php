@@ -24,11 +24,8 @@ class AssetCheckoutRequest extends Request
             $this->assigned_type = 'App\Models\Location';
         }
 
-        $this->replace([
-            'assigned_asset' => $this->assigned_asset,
-            'assigned_location' => $this->assigned_location,
-            'assigned_user' => $this->assigned_user,
-            'assigned_type' => $this->checkout_to_type,
+        $this->merge([
+            'assigned_type' => $this->assigned_type,
         ]);
     }
 
