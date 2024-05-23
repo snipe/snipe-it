@@ -188,10 +188,12 @@ class AssetCheckoutTest extends TestCase
 
         Event::assertDispatched(CheckoutableCheckedOut::class, 1);
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $target) {
-            return $event->checkoutable->is($asset)
-                && $event->checkedOutTo->is($target)
-                && $event->checkedOutBy->is($admin)
-                && $event->note === 'An awesome note';
+            $this->assertTrue($event->checkoutable->is($asset));
+            $this->assertTrue($event->checkedOutTo->is($target));
+            $this->assertTrue($event->checkedOutBy->is($admin));
+            $this->assertEquals('An awesome note', $event->note);
+
+            return true;
         });
     }
 
