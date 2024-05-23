@@ -53,6 +53,8 @@ jobs:
         run: php artisan key:generate
 
       - name: Install Passport
+        env:
+          DB_CONNECTION: sqlite_testing
         run: php artisan passport:install
 
       - name: Debug Passport
