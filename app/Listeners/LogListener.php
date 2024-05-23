@@ -148,5 +148,18 @@ class LogListener
         }
     }
 
+    /**
+     * Note is added to action log
+     *
+     */
+    public function AddedNote(Note $event)
+    {
+        $logaction = new Actionlog();
+        $logaction->target_id =
+        $logaction->target_type =
+        $logaction->note =
+        $logaction->user_id =
+        $logaction->save();
+    }
 
 }

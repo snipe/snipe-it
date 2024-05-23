@@ -1298,6 +1298,13 @@
             </div>
         </div> <!--/end notes tab -->
 
+                    <!--
+                    notes controller -store method
+                    pass item type, id, and note itself -validation -hidden on form
+                        target_id, target_type, note
+                    make event on loglistener
+-->
+
         <!-- Files tab -->
         <div class="tab-pane fade" id="files">
           <div class="row">
