@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CurrentInventory;
+use App\Notifications\UnacceptedAssetReminderNotification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Notification;
 
@@ -52,7 +53,7 @@ class SendAcceptanceReminder extends Command
                                                 ->get();
 
         $count = 0;
-        $unacceptedAssets = $pending
+        $unacceptedAssetGroups = $pending
             ->filter(function($acceptance) {
                 return $acceptance->checkoutable_type == 'App\Models\Asset';
             })
@@ -62,26 +63,30 @@ class SendAcceptanceReminder extends Command
             ->groupBy(function($item) {
                 return $item['acceptance']->assignedTo ? $item['acceptance']->assignedTo->id : '';
             });
+
         $no_mail_address = [];
 
-        foreach($unacceptedAssets as $unacceptedAsset) {
-            if ($unacceptedAsset['acceptance']->assignedTo->email == ''){
-                $no_mail_address[] = $unacceptedAsset['checkoutable']->assignedTo->present()->fullName;
-            }
-            if ($unacceptedAsset['acceptance']->assignedTo) {
+        foreach($unacceptedAssetGroups as $unacceptedAssetGroup) {
+            $item_count = $unacceptedAssetGroup->count();
+            foreach ($unacceptedAssetGroup as $unacceptedAsset) {
+//            if ($unacceptedAsset['acceptance']->assignedTo->email == ''){
+//                $no_mail_address[] = $unacceptedAsset['checkoutable']->assignedTo->present()->fullName;
+//            }
+                if ($unacceptedAsset['acceptance']->assignedTo) {
 
-                if (!$unacceptedAsset['acceptance']->assignedTo->locale) {
-                    Notification::locale(Setting::getSettings()->locale)->send(
-                        $unacceptedAsset['acceptance']->assignedTo,
-                        new CheckoutAssetNotification($unacceptedAsset['assetItem'], $unacceptedAsset['acceptance']->assignedTo, $unacceptedAsset['assetItem']->adminuser, $unacceptedAsset['acceptance'], '')
-                    );
-                } else {
-                    Notification::send(
-                        $unacceptedAsset['acceptance']->assignedTo,
-                        new CheckoutAssetNotification($unacceptedAsset['assetItem'], $unacceptedAsset['acceptance']->assignedTo, $unacceptedAsset['assetItem']->adminuser, $unacceptedAsset['acceptance'], '')
-                    );
+                    if (!$unacceptedAsset['acceptance']->assignedTo->locale) {
+                        Notification::locale(Setting::getSettings()->locale)->send(
+                            $unacceptedAsset['acceptance']->assignedTo,
+                            new UnacceptedAssetReminderNotification($unacceptedAsset['assetItem'], $count)
+                        );
+                    } else {
+                        Notification::send(
+                            $unacceptedAsset['acceptance']->assignedTo,
+                            new UnacceptedAssetReminderNotification($unacceptedAsset, $item_count)
+                        );
+                    }
+                    $count++;
                 }
-                $count++;
             }
         }
 
