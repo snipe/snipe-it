@@ -1299,10 +1299,11 @@
         </div> <!--/end notes tab -->
 
                     <!--
-                    notes controller -store method
+                    notes controller get store method working/saving
                     pass item type, id, and note itself -validation -hidden on form
                         target_id, target_type, note
-                    make event on loglistener
+                    log listener event needs values
+                    get notes to display on their tabs
 -->
 
         <!-- Files tab -->
