@@ -53,4 +53,23 @@ class CustomFieldsetFactory extends Factory
             $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
         });
     }
+
+    public function hasMultipleCustomFields(array $fields = null): self
+    {
+        return $this->afterCreating(function (CustomFieldset $fieldset) use ($fields) {
+            if (empty($fields)) {
+                    $mac_address = CustomField::factory()->macAddress()->create();
+                    $ram = CustomField::factory()->ram()->create();
+                    $cpu = CustomField::factory()->cpu()->create();
+
+                    $fieldset->fields()->attach($mac_address, ['order' => '1', 'required' => false]);
+                    $fieldset->fields()->attach($ram, ['order' => '2', 'required' => false]);
+                    $fieldset->fields()->attach($cpu, ['order' => '3', 'required' => false]);
+            } else {
+                foreach ($fields as $field) {
+                    $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
+                }
+            }
+        });
+    }
 }

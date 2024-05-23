@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Kaore e taea te whakarereke i nga taipitopito whakauru i runga i tenei taunga.',
     'manager' 				=> 'Kaiwhakahaere',
     'managed_locations'     => 'Ngā Tauwāhi Whakahaere',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Ingoa',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Tuhipoka',

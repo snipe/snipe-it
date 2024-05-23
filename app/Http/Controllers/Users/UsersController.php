@@ -293,7 +293,14 @@ class UsersController extends Controller
                 $user->password = bcrypt($request->input('password'));
             }
 
+
+        // Update the location of any assets checked out to this user
+        Asset::where('assigned_type', User::class)
+            ->where('assigned_to', $user->id)
+            ->update(['location_id' => $user->location_id]);
+
             $permissions_array = $request->input('permission');
+
 
             // Strip out the superuser permission if the user isn't a superadmin
             if (! Auth::user()->isSuperUser()) {

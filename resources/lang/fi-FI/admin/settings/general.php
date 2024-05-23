@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Yleiset käyttöehdot',
     'default_language'			=> 'Oletuskieli',
     'default_eula_help_text'	=> 'Voit myös liittää mukautettuja käyttöehtoja tiettyihin laitekategorioihin.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Näytä laitteen nimi',
     'display_checkout_date'     => 'Näytä luovutuspäivämäärä listauksessa',
     'display_eol'               => 'Näytä elinaika listauksessa',

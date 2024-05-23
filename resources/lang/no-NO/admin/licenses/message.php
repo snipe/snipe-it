@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Lisensen finnes ikke, eller du har ikke tillatelse til å se den.',
-    'user_does_not_exist' => 'Bruker eksisterer ikke.',
+    'user_does_not_exist' => 'Brukeren finnes ikke, eller du har ikke tillatelse til å se dem.',
     'asset_does_not_exist' 	=> 'Eiendelen du prøver å koble til denne lisensen eksisterer ikke.',
     'owner_doesnt_match_asset' => 'Eiendelen du prøver å koble til denne lisensen er eid av noen andre enn personen du har valgt i tildelt til-nedtrekkslista.',
     'assoc_users'	 => 'Denne lisensen er sjekket ut til en bruker og kan ikke slettes. Vennligst sjekk inn lisensen først, og forsøk sletting på nytt. ',

@@ -75,8 +75,8 @@ class UsersController extends Controller
             'users.autoassign_licenses',
             'users.website',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
-            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
+            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
 
         if ($request->filled('activated')) {
@@ -187,6 +187,14 @@ class UsersController extends Controller
             $users->has('accessories', '=', $request->input('accessories_count'));
         }
 
+        if ($request->filled('manages_users_count')) {
+            $users->has('manages_users_count', '=', $request->input('manages_users_count'));
+        }
+
+        if ($request->filled('manages_locations_count')) {
+            $users->has('manages_locations_count', '=', $request->input('manages_locations_count'));
+        }
+
         if ($request->filled('autoassign_licenses')) {
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
@@ -244,6 +252,8 @@ class UsersController extends Controller
                         'licenses_count',
                         'consumables_count',
                         'accessories_count',
+                        'manages_user_count',
+                        'manages_locations_count',
                         'phone',
                         'address',
                         'city',
@@ -405,11 +415,15 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count')->findOrFail($id);
-        $user = Company::scopeCompanyables($user)->find($id);
-        $this->authorize('update', $user);
+        $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
-        return (new UsersTransformer)->transformUser($user);
+        if ($user = Company::scopeCompanyables($user)->find($id)) {
+            $this->authorize('view', $user);
+            return (new UsersTransformer)->transformUser($user);
+        }
+        
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+
     }
 
 
@@ -461,14 +475,13 @@ class UsersController extends Controller
         if ($request->has('permissions')) {
             $permissions_array = $request->input('permissions');
 
-            // Strip out the superuser permission if the API user isn't a superadmin
+            // Strip out the individual superuser permission if the API user isn't a superadmin
             if (! Auth::user()->isSuperUser()) {
                 unset($permissions_array['superuser']);
             }
 
             $user->permissions = $permissions_array;
         }
-
 
 
         // Update the location of any assets checked out to this user
@@ -480,37 +493,22 @@ class UsersController extends Controller
           
         if ($user->save()) {
 
-            // Sync group memberships:
-            // This was changed in Snipe-IT v4.6.x to 4.7, since we upgraded to Laravel 5.5
-            // which changes the behavior of has vs filled.
-            // The $request->has method will now return true even if the input value is an empty string or null.
-            // A new $request->filled method has was added that provides the previous behavior of the has method.
+            // Check if the request has groups passed and has a value, AND that the user us a superuser
+            if (($request->has('groups')) && (Auth::user()->isSuperUser())) {
 
-            // Check if the request has groups passed and has a value
-            if ($request->filled('groups')) {
-
-                $validator = Validator::make($request->all(), [
+                $validator = Validator::make($request->only('groups'), [
                     'groups.*' => 'integer|exists:permission_groups,id',
                 ]);
-                
-                if ($validator->fails()){
-                    return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
+
+                if ($validator->fails()) {
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()));
                 }
 
-                // Only save groups if the user is a superuser
-                if (Auth::user()->isSuperUser()) {
-                    $user->groups()->sync($request->input('groups'));
-                }
+                // Sync the groups since the user is a superuser and the groups pass validation
+                $user->groups()->sync($request->input('groups'));
 
-            // The groups field has been passed but it is null, so we should blank it out
-            } elseif ($request->has('groups')) {
-                
-                // Only save groups if the user is a superuser
-                if (Auth::user()->isSuperUser()) {
-                    $user->groups()->sync($request->input('groups'));
-                }
+
             }
-
 
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }

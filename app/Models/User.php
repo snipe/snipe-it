@@ -214,10 +214,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
-            && ($this->assets()->count() === 0)
-            && ($this->licenses()->count() === 0)
-            && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0)
+            && ($this->assets->count() === 0)
+            && ($this->licenses->count() === 0)
+            && ($this->consumables->count() === 0)
+            && ($this->accessories->count() === 0)
+            && ($this->managedLocations->count() === 0)
+            && ($this->managesUsers->count() === 0)
             && ($this->deleted_at == '');
     }
 
@@ -409,6 +411,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsTo(self::class, 'manager_id')->withTrashed();
     }
+
+    /**
+     * Establishes the user -> managed users relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.4.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function managesUsers()
+    {
+        return $this->hasMany(\App\Models\User::class, 'manager_id');
+    }
+
 
     /**
      * Establishes the user -> managed locations relationship

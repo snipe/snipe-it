@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Pengguna tidak ada.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Aset yang ingin Anda kaitkan dengan lisensi ini tidak ada.',
     'owner_doesnt_match_asset' => 'Aset yang ingin Anda kaitkan dengan lisensi ini dimiliki oleh orang lain selain orang yang dipilih di dropdown yang ditugaskan.',
     'assoc_users'	 => 'Lisensi ini saat ini diperiksa oleh pengguna dan tidak dapat dihapus. Mohon periksa dulu lisensinya, lalu coba hapus lagi. ',

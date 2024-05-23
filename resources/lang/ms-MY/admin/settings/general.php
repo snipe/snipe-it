@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA lalai',
     'default_language'			=> 'Bahasa Lalai',
     'default_eula_help_text'	=> 'Anda juga boleh mengaitkan EULA tersuai untuk kategori aset tertentu.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Papar Nama Harta',
     'display_checkout_date'     => 'Papar Tarikh \'Checkout\'',
     'display_eol'               => 'Papar EOL dalam paparan jadual',

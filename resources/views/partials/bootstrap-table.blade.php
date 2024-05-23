@@ -92,6 +92,9 @@
             exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
+            },
+            formatNoMatches: function () {
+                return '{{ trans('table.no_matching_records') }}';
             }
 
             });

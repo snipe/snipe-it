@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Licence neexistuje nebo nemáte oprávnění k jejímu zobrazení.',
-    'user_does_not_exist' => 'Uživatel neexistuje.',
+    'user_does_not_exist' => 'Uživatel neexistuje nebo nemáte oprávnění k jeho zobrazení.',
     'asset_does_not_exist' 	=> 'Majetek, který se pokoušíte spojit s touto licencí, neexistuje.',
     'owner_doesnt_match_asset' => 'Majetek, který se pokoušíte spojit s touto licencí, vlastní někdo jiný než osoba vybraná v rozbalovací nabídce k této licenci.',
     'assoc_users'	 => 'Licence je předána svému uživateli a nelze ji odstranit. Před odstraněním ji nejprve převezměte. ',

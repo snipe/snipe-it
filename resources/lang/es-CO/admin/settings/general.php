@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Default EULA',
     'default_language'			=> 'Idioma por defecto',
     'default_eula_help_text'	=> 'También puede asociar EULAs personalizados a categorías específicas de activos.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Mostrar nombre de activo',
     'display_checkout_date'     => 'Mostrar fecha de pago',
     'display_eol'               => 'Mostrar EOL en vista de tabla',

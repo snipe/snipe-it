@@ -23,9 +23,7 @@
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
-                    <div class="box-header with-border">
-                        <h2 class="box-title"> {{ trans('general.bulkaudit') }} </h2>
-                    </div>
+
                     <div class="box-body">
                     {{csrf_field()}}
 
@@ -185,7 +183,7 @@
             } else {
                 var messages = '';
             }
-            $('#audited tbody').prepend("<tr class='danger'><td>" + asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
+            $('#audited tbody').prepend("<tr class='danger'><td>" + data.payload.asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
         }
 
         function incrementOnSuccess() {

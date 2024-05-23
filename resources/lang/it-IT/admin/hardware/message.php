@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
                        Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Questo bene non esiste o non è disponibile.',
     'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
@@ -17,6 +20,7 @@ return [
     'update' => [
         'error'   			=> 'Il bene non è stato aggiornato, si prega di riprovare',
         'success' 			=> 'Bene aggiornato con successo.',
+        'encrypted_warning' => 'Asset aggiornato con successo, ma i campi personalizzati crittografati non sono dovuti ai permessi',
         'nothing_updated'	=>  'Non è stato selezionato nessun campo, nulla è stato aggiornato.',
         'no_assets_selected'  =>  'Nessun asset è stato selezionato, quindi niente è stato eliminato.',
         'assets_do_not_exist_or_are_invalid' => 'Gli asset selezionati non possono essere aggiornati.',
@@ -30,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'L\'audit del patrimonio non è riuscito. Riprova.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'L\'audit di risorse si è registrato con successo.',
     ],
 

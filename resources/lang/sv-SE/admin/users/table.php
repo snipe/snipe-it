@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Inloggningsuppgifter kan inte ändras på den här installationen.',
     'manager' 				=> 'Chef',
     'managed_locations'     => 'Hanterade platser',
+    'managed_users'         => 'Hanterade användare',
     'name' 					=> 'namn',
     'nogroup'               => 'Inga grupper har skapats ännu. För att lägga till ett, besök: ',
     'notes'                 => 'anteckningar',

@@ -375,6 +375,15 @@ class AssetFactory extends Factory
         });
     }
 
+    public function hasMultipleCustomFields(array $fields = null): self
+    {
+        return $this->state(function () use ($fields) {
+            return [
+                'model_id' => AssetModel::factory()->hasMultipleCustomFields($fields),
+            ];
+        });
+    }
+
     /**
      * This allows bypassing model level validation if you want to purposefully
      * create an asset in an invalid state. Validation is turned back on

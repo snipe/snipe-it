@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Корисникот не постои.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Средството што се обидувате да го поврзете со оваа лиценца не постои.',
     'owner_doesnt_match_asset' => 'Средството што се обидувате да го поврзете со оваа лиценца е задолжено на различно лице од она кое е избрано на паѓачкото мени.',
     'assoc_users'	 => 'Оваа лиценца е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да ја избришете. ',
