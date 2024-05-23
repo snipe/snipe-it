@@ -63,6 +63,7 @@ class AssetCheckoutTest extends TestCase
 
     public function testAssetCannotBeCheckedOutToItself()
     {
+        // @todo:
         $this->markTestIncomplete();
     }
 
@@ -158,7 +159,7 @@ class AssetCheckoutTest extends TestCase
     }
 
     /** @dataProvider checkoutTargets */
-    public function testAnAssetCanBeCheckedOut($data)
+    public function testAssetCanBeCheckedOut($data)
     {
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
