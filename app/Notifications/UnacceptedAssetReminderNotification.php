@@ -22,6 +22,8 @@ class UnacceptedAssetReminderNotification extends Notification
     {
         $this->count = $count;
         $this->target = $checkout_info['acceptance']->assignedTo;
+        $this->acceptance = $checkout_info['acceptance'];
+
     }
 
     /**
@@ -43,11 +45,13 @@ class UnacceptedAssetReminderNotification extends Notification
      */
     public function toMail()
     {
+        $accept_url = route('account.accept');
         $message = (new MailMessage)->markdown('notifications.markdown.asset-reminder',
             [
                 'count'          => $this->count,
                 'assigned_to'  => $this->target->present()->fullName,
-                'link'           => route('account.accept')
+                'link'           => route('account.accept'),
+                'accept_url' => $accept_url,
             ])
             ->subject(trans('mail.unaccepted_asset_reminder'));
 
