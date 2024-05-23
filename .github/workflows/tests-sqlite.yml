@@ -46,19 +46,14 @@ jobs:
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-
-      - name: Generate key
-        run: php artisan key:generate
-
-      - name: Install Passport
+      - name: Setup Laravel
         env:
           DB_CONNECTION: sqlite_testing
-        run: php artisan passport:install
-
-      - name: Debug Passport
-        run: ls -la storage
+        run: |
+          php artisan key:generate
+          php artisan migrate --force
+          php artisan passport:install
+          chmod -R 777 storage bootstrap/cache
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
