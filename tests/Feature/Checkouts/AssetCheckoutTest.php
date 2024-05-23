@@ -63,8 +63,16 @@ class AssetCheckoutTest extends TestCase
 
     public function testAssetCannotBeCheckedOutToItself()
     {
-        // @todo:
-        $this->markTestIncomplete();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAssets()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'asset',
+                'assigned_asset' => $asset->id,
+            ])
+            ->assertSessionHas('error');
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function testValidationWhenCheckingOutAsset()
