@@ -52,6 +52,9 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
+      - name: Install Passport
+        run: php artisan passport:install
+
       - name: Debug Passport
         run: ls -la storage
 
