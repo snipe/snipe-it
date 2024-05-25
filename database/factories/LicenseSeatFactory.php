@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Asset;
 use App\Models\License;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -13,6 +14,15 @@ class LicenseSeatFactory extends Factory
         return [
             'license_id' => License::factory(),
         ];
+    }
+
+    public function assignedToAsset(Asset $asset = null)
+    {
+        return $this->state(function () use ($asset) {
+            return [
+                'asset_id' => $asset->id ?? Asset::factory(),
+            ];
+        });
     }
 
     public function assignedToUser(User $user = null)
