@@ -738,7 +738,11 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             {{ trans('general.activity_report') }}
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                                            {{ trans('general.custom_report') }}
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
                                             {{ trans('general.audit_report') }}</a>
@@ -766,11 +770,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                     <li>
                                         <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
                                             {{ trans('general.accessory_report') }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                                            {{ trans('general.custom_report') }}
                                         </a>
                                     </li>
                                 </ul>
