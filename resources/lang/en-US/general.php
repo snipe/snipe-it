@@ -500,6 +500,7 @@ return [
         'address2' => 'Address Line 2',
         'import_note' => 'Imported using csv importer',
     ],
+    'remove_customfield_association' => 'Remove this field from the fieldset. This will not delete the custom field, only this field\'s association with this fieldset.',
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
     'upload_error' => 'Error uploading file. Please check that there are no empty rows and that no column names are duplicated.',
