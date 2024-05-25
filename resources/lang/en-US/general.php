@@ -242,6 +242,7 @@ return [
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Request Canceled',
     'request_item'          => 'Request this item',
+    'external_link_tooltip' => 'External link to',
     'save'  				=> 'Save',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'Select',

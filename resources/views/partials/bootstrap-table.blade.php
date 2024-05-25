@@ -573,7 +573,7 @@
 
         if (value) {
             if ((value.indexOf("{") === -1) || (value.indexOf("}") ===-1)) {
-                return '<nobr><a href="' + value + '" target="_blank" title="External link to ' + value + '" data-tooltip="true"><i class="fa fa-external-link"></i> ' + value + '</a></nobr>';
+                return '<nobr><a href="' + value + '" target="_blank" title="{{ trans('general.external_link_tooltip') }} ' + value + '" data-tooltip="true"><i class="fa fa-external-link"></i> ' + value + '</a></nobr>';
             }
             return value;
         }
