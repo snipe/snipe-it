@@ -241,6 +241,7 @@ return [
     'requested_assets'      => 'Requested Assets',
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Request Canceled',
+    'request_item'          => 'Request this item',
     'save'  				=> 'Save',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'Select',
@@ -400,6 +401,7 @@ return [
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in so that it is available for re-issue, re-imaging, etc',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'checkin_to_diff_location' => 'You can choose to check this asset in to a location other than this asset\'s default location of :default_location if one is set',
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
