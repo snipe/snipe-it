@@ -563,14 +563,14 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
               Api\AssetFilesController::class,
               'show'
           ]
-        )->name('api.assets.files');
+        )->name('api.assets.file');
 
         Route::delete('{asset_id}/file/{file_id}',
           [
               Api\AssetFilesController::class,
               'destroy'
           ]
-        )->name('api.assets.files');
+        )->name('api.assets.file');
 
       });
 
