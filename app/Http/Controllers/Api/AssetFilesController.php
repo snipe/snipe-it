@@ -110,8 +110,8 @@ class AssetFilesController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('success', $files, trans('admin/hardware/message.upload.success')));
             }
 
-	    // There are no files. This possibly isn't the best response for this, but it does get the point across
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.no_match', ['id' => $fileId])), 500);
+	    // There are no files.
+            return response()->json(Helper::formatStandardApiResponse('success', array(), trans('admin/hardware/message.upload.success')));
         }
 
         // 
