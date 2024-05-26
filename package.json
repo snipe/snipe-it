@@ -31,7 +31,7 @@
         "@fortawesome/fontawesome-free": "^6.5.2",
         "acorn": "^8.11.2",
         "acorn-import-assertions": "^1.9.0",
-        "admin-lte": "^2.4.18",
+        "admin-lte": "^3.0.0",
         "ajv": "^6.12.6",
         "alpinejs": "^3.13.10",
         "blueimp-file-upload": "^9.34.0",
