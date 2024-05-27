@@ -6,5 +6,5 @@
     "php_min_version": "8.1.0",
     "php_max_major_minor": "8.2",
     "php_max_wontwork": "8.3.0",
-    "current_snipeit_version": "6.3"
+    "current_snipeit_version": "7.0"
 }
