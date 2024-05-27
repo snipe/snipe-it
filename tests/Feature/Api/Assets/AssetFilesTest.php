@@ -37,6 +37,8 @@ class AssetFilesTest extends TestCase
 
 	// Create a superuser to run this as
 	$user = User::factory()->superuser()->create();
+
+	// List the files
 	$this->actingAsForApi($user)
             ->getJson(
 		    route('api.assets.files', ['asset_id' => $asset[0]["id"]]))
@@ -63,14 +65,21 @@ class AssetFilesTest extends TestCase
             ->post(
                route('api.assets.files', ['asset_id' => $asset[0]["id"]]), [
 		       'file' => [UploadedFile::fake()->create("test.jpg", 100)]
-	       ])->assertOk();
+	       ])
+	       ->assertOk();
+
+	// List the files to get the file ID
+	$result = $this->actingAsForApi($user)
+            ->getJson(
+		    route('api.assets.files', ['asset_id' => $asset[0]["id"]]))
+                ->assertOk();
 
 	// Get the file
 	$this->actingAsForApi($user)
             ->get(
                route('api.assets.file', [
                    'asset_id' => $asset[0]["id"],
-                   'file_id' => 1,
+                   'file_id' => $result->decodeResponseJson()->json()["payload"][0]["id"],
 	       ]))
 	       ->assertOk();
     }
@@ -93,12 +102,18 @@ class AssetFilesTest extends TestCase
 	       ])
 	       ->assertOk();
 
+	// List the files to get the file ID
+	$result = $this->actingAsForApi($user)
+            ->getJson(
+		    route('api.assets.files', ['asset_id' => $asset[0]["id"]]))
+                ->assertOk();
+
 	// Delete the file
 	$this->actingAsForApi($user)
             ->delete(
                route('api.assets.file', [
                    'asset_id' => $asset[0]["id"],
-                   'file_id' => 1,
+                   'file_id' => $result->decodeResponseJson()->json()["payload"][0]["id"],
 	       ]))
 	       ->assertOk();
     }
