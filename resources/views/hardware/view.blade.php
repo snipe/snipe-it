@@ -1144,7 +1144,7 @@
                                             <option value="delete">{{ trans('button.delete')}}</option>
                                             <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
                                         </select>
-                                        <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
+                                        <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
                                     </div>
 
                                     <!-- checked out assets table -->
@@ -1162,6 +1162,7 @@
                                                 data-show-export="true"
                                                 data-show-refresh="true"
                                                 data-sort-order="asc"
+                                                data-bulk-button-id="#bulkAssetEditButton"
                                                 id="assetsListingTable"
                                                 class="table table-striped snipe-table"
                                                 data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"

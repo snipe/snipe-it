@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -199,7 +200,9 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
-        if ($request->filled('search')) {
+        if ($request->filled('location_id') != '') {
+            $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
+         } else {
             $users = $users->TextSearch($request->input('search'));
         }
 
@@ -533,8 +536,6 @@ class UsersController extends Controller
 
         if ($user) {
 
-            $this->authorize('delete', $user);
-            
             if (($user->assets) && ($user->assets->count() > 0)) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
             }
