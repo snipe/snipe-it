@@ -68,7 +68,7 @@ class GroupsController extends Controller
 
         $group->name = $request->input('name');
         $group->created_by = Auth::user()->id;
-        $group->permissions = $request->input('permissions', $groupPermissions);
+        $group->permissions = json_encode($request->input('permissions', $groupPermissions));
 
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new GroupsTransformer)->transformGroup($group), trans('admin/groups/message.success.create')));
