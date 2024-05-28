@@ -13,7 +13,7 @@ class Group extends SnipeModel
     protected $table = 'permission_groups';
 
     public $rules = [
-      'name' => 'required|min:2|max:255',
+        'name' => 'required|min:2|max:255|unique',
     ];
 
     protected $fillable = [

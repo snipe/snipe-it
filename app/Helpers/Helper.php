@@ -875,12 +875,15 @@ class Helper
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-                    if ($selected_arr) {
+
+                    if (is_array($selected_arr)) {
+
                         if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
                         }
+
                     } else {
                         $permissions_arr[$permission_name] = '0';
                     }
