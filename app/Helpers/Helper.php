@@ -875,13 +875,19 @@ class Helper
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-                    if ($selected_arr) {
+
+                    if (is_array($selected_arr)) {
+                        \Log::debug('$selected_arr is an array');
+
                         if (array_key_exists($permission_name, $selected_arr)) {
+                            \Log::debug($permission_name. ' exists in $selected_arr');
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
                         }
+
                     } else {
+                        \Log::debug('$selected_arr is NOT array');
                         $permissions_arr[$permission_name] = '0';
                     }
                 }
