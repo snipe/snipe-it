@@ -48,7 +48,12 @@ class ActionlogsTransformer
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
+
+        static $custom_fields = false;
+
+        if ($custom_fields === false) {
         $custom_fields = CustomField::all();
+        }
 
         if ($actionlog->filename!='') {
             $icon =  Helper::filetype_icon($actionlog->filename);
