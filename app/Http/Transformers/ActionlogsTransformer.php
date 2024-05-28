@@ -200,11 +200,35 @@ class ActionlogsTransformer
      */
 
     public function changedInfo(array $clean_meta)
+<<<<<<< Updated upstream
     {   $location = Location::withTrashed()->get();
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
         $company = Company::get();
 
+=======
+    {
+        static $location = false;
+        static $supplier = false;
+        static $model = false;
+        static $status = false;
+        static $company = false;
+        if ($location === false) {
+            $location = Location::withTrashed()->get();
+        }
+        if ($supplier === false) {
+            $supplier = Supplier::withTrashed()->get();
+        }
+        if ($model === false) {
+            $model = AssetModel::withTrashed()->get();
+        }
+        if ($status === false) {
+            $status = Statuslabel::withTrashed()->get();
+        }
+        if ($company === false) {
+            $company = Company::get();
+        }
+>>>>>>> Stashed changes
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
 
