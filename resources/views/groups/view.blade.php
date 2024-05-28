@@ -57,7 +57,7 @@
 
             </ul>
             @else
-                <p>{{ trans('admin/groups/title.no_permissions') }}</p>
+                <p>{{ trans('admin/groups/titles.no_permissions') }}</p>
             @endif
 
         </div>
