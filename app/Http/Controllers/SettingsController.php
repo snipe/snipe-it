@@ -923,67 +923,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Saves settings from form.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v4.0]
-     *
-     * @return View
-     */
-    public function postLdapSettings(Request $request)
-    {
-        if (is_null($setting = Setting::getSettings())) {
-            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
-        }
-
-        if (! config('app.lock_passwords') === true) {
-            $setting->ldap_enabled = $request->input('ldap_enabled', '0');
-            $setting->ldap_server = $request->input('ldap_server');
-            $setting->ldap_server_cert_ignore = $request->input('ldap_server_cert_ignore', false);
-            $setting->ldap_uname = $request->input('ldap_uname');
-            if ($request->filled('ldap_pword')) {
-                $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
-            }
-            $setting->ldap_basedn = $request->input('ldap_basedn');
-            $setting->ldap_default_group = $request->input('ldap_default_group');
-            $setting->ldap_filter = $request->input('ldap_filter');
-            $setting->ldap_username_field = $request->input('ldap_username_field');
-            $setting->ldap_lname_field = $request->input('ldap_lname_field');
-            $setting->ldap_fname_field = $request->input('ldap_fname_field');
-            $setting->ldap_auth_filter_query = $request->input('ldap_auth_filter_query');
-            $setting->ldap_version = $request->input('ldap_version', 3);
-            $setting->ldap_active_flag = $request->input('ldap_active_flag');
-            $setting->ldap_emp_num = $request->input('ldap_emp_num');
-            $setting->ldap_email = $request->input('ldap_email');
-            $setting->ldap_manager = $request->input('ldap_manager');
-            $setting->ad_domain = $request->input('ad_domain');
-            $setting->is_ad = $request->input('is_ad', '0');
-            $setting->ad_append_domain = $request->input('ad_append_domain', '0');
-            $setting->ldap_tls = $request->input('ldap_tls', '0');
-            $setting->ldap_pw_sync = $request->input('ldap_pw_sync', '0');
-            $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
-            $setting->ldap_phone_field = $request->input('ldap_phone');
-            $setting->ldap_jobtitle = $request->input('ldap_jobtitle');
-            $setting->ldap_country = $request->input('ldap_country');
-            $setting->ldap_location = $request->input('ldap_location');
-            $setting->ldap_dept = $request->input('ldap_dept');
-            $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
-            $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
-
-
-        }
-
-        if ($setting->save()) {
-            $setting->update_client_side_cert_files();
-            return redirect()->route('settings.ldap.index')
-                ->with('success', trans('admin/settings/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($setting->getErrors());
-    }
-
-    /**
      * Return a form to allow a super admin to update settings.
      *
      * @author Johnson Yi <jyi.dev@outlook.com>
