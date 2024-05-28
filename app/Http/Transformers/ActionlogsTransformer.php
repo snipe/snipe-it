@@ -48,7 +48,12 @@ class ActionlogsTransformer
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
-        $custom_fields = CustomField::all();
+
+        static $custom_fields = false;
+
+        if ($custom_fields === false) {
+            $custom_fields = CustomField::all();
+        }
 
         if ($actionlog->filename!='') {
             $icon =  Helper::filetype_icon($actionlog->filename);
@@ -216,12 +221,29 @@ class ActionlogsTransformer
      */
 
     public function changedInfo(array $clean_meta)
-    {   $location = Location::withTrashed()->get();
-        $supplier = Supplier::withTrashed()->get();
-        $model = AssetModel::withTrashed()->get();
-        $status = Statuslabel::withTrashed()->get();
-        $company = Company::get();
+    {
+        static $location = false;
+        static $supplier = false;
+        static $model = false;
+        static $status = false;
+        static $company = false;
 
+
+        if ($location === false) {
+            $location = Location::select('id', 'name')->withTrashed()->get();
+        }
+        if ($supplier === false) {
+            $supplier = Supplier::select('id', 'name')->withTrashed()->get();
+        }
+        if ($model === false) {
+            $model = AssetModel::select('id', 'name')->withTrashed()->get();
+        }
+        if ($status === false) {
+            $status = Statuslabel::select('id', 'name')->withTrashed()->get();
+        }
+        if ($company === false) {
+            $company = Company::select('id', 'name')->get();
+        }
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
 
