@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api\Groups;
 
+use App\Helpers\Helper;
 use App\Models\Group;
 use App\Models\User;
 use Tests\TestCase;
@@ -49,10 +50,15 @@ class GroupStoreTest extends TestCase
 
         $this->assertNotNull($group);
 
+        $this->assertEquals(
+            Helper::selectedPermissionsArray(config('permissions'), config('permissions')),
+            $group->decodePermissions(),
+            'Default group permissions were not set as expected',
+        );
+
         $this->actingAsForApi($superuser)
             ->getJson(route('api.groups.show',  ['group' => $group]))
             ->assertOk();
-
     }
 
     public function testStoringGroupWithInvalidPermissionDropsBadPermission()
