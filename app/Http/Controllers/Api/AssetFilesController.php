@@ -53,7 +53,7 @@ class AssetFilesController extends Controller
     {
         // Start by checking if the asset being acted upon exists
         if (! $asset = Asset::find($assetId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
         }
 
         // Make sure we are allowed to update this asset
@@ -93,7 +93,7 @@ class AssetFilesController extends Controller
     {
         // Start by checking if the asset being acted upon exists
         if (! $asset = Asset::find($assetId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
         }
 	
 	// the asset is valid
@@ -132,7 +132,7 @@ class AssetFilesController extends Controller
     {
         // Start by checking if the asset being acted upon exists
         if (! $asset = Asset::find($assetId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
         }
 
         // the asset is valid
@@ -141,7 +141,7 @@ class AssetFilesController extends Controller
 
             // Check that the file being requested exists for the asset
             if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $asset->id)->find($fileId)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.no_match', ['id' => $fileId])), 500);
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.no_match', ['id' => $fileId])), 404);
             }
 
 	    // Form the full filename with path
@@ -187,7 +187,7 @@ class AssetFilesController extends Controller
     {
         // Start by checking if the asset being acted upon exists
         if (! $asset = Asset::find($assetId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 500);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
         }
 
         $rel_path = 'private_uploads/assets';
