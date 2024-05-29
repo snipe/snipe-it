@@ -14,22 +14,18 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
-use Auth;
-use Crypt;
-use DB;
-use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Image;
-use Input;
 use Redirect;
-use Response;
-use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 /**
  * This controller handles all actions related to Settings for
@@ -108,7 +104,7 @@ class SettingsController extends Controller
             $start_settings['env_exposed'] = true;
         }
 
-        if (\App::Environment('production') && (true == config('app.debug'))) {
+        if (App::Environment('production') && (true == config('app.debug'))) {
             $start_settings['debug_exposed'] = true;
         } else {
             $start_settings['debug_exposed'] = false;
@@ -642,9 +638,9 @@ class SettingsController extends Controller
                     ['next_audit_date' => DB::raw('DATE_ADD(next_audit_date, INTERVAL '.$audit_diff_months.' MONTH)')]
             );
 
-            \Log::debug($affected .' assets affected by audit interval update');
+            Log::debug($affected .' assets affected by audit interval update');
 
-            
+
         }
 
         $alert_email = rtrim($request->input('alert_email'), ',');
@@ -1115,11 +1111,11 @@ class SettingsController extends Controller
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
                         'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
-                        
+
                     ];
                 }
 
-               
+
             }
         }
 
@@ -1211,7 +1207,7 @@ class SettingsController extends Controller
                         Storage::delete($path . '/' . $filename);
                         return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
 
                 } else {
@@ -1223,7 +1219,7 @@ class SettingsController extends Controller
         }
 
         // Hell to the no
-        \Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
+        Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
         return redirect()->route('settings.backups.index')->with('error', trans('general.backup_delete_not_allowed'));
     }
 
@@ -1255,7 +1251,7 @@ class SettingsController extends Controller
                         $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
 
                         Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
-            
+
                         return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
                 }
 
@@ -1265,10 +1261,10 @@ class SettingsController extends Controller
 
         } else {
             return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
-        }    
+        }
 
-        
-        
+
+
     }
 
     /**
@@ -1282,7 +1278,7 @@ class SettingsController extends Controller
      */
     public function postRestore($filename = null)
     {
-        
+
         if (! config('app.lock_passwords')) {
             $path = 'app/backups';
 
@@ -1298,13 +1294,13 @@ class SettingsController extends Controller
                     '--force' => true,
                 ]);
 
-                \Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
+                Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
                 // run the restore command
-                Artisan::call('snipeit:restore', 
+                Artisan::call('snipeit:restore',
                 [
-                    '--force' => true, 
-                    '--no-progress' => true, 
+                    '--force' => true,
+                    '--no-progress' => true,
                     'filename' => storage_path($path).'/'.$filename
                 ]);
 
@@ -1312,29 +1308,29 @@ class SettingsController extends Controller
                 $output = Artisan::output();
 
                 /* Run migrations */
-                \Log::debug('Migrating database...');
+                Log::debug('Migrating database...');
                 Artisan::call('migrate', ['--force' => true]);
                 $migrate_output = Artisan::output();
-                \Log::debug($migrate_output);
+                Log::debug($migrate_output);
 
                 $find_user = DB::table('users')->where('username', $user->username)->exists();
-                
+
                 if (!$find_user){
-                    \Log::warning('Attempting to restore user: ' . $user->username);
+                    Log::warning('Attempting to restore user: ' . $user->username);
                     $new_user = $user->replicate();
                     $new_user->push();
                 } else {
-                    \Log::debug('User: ' . $user->username .' already exists.');
+                    Log::debug('User: ' . $user->username .' already exists.');
                 }
 
-                \Log::debug('Logging all users out..');
+                Log::debug('Logging all users out..');
                 Artisan::call('snipeit:global-logout', ['--force' => true]);
 
                 DB::table('users')->update(['remember_token' => null]);
-                \Auth::logout();
+                Auth::logout();
 
                 return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
-                
+
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -1355,7 +1351,7 @@ class SettingsController extends Controller
     public function getPurge()
     {
 
-        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+        Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
             return view('settings.purge-form');
@@ -1376,16 +1372,16 @@ class SettingsController extends Controller
      */
     public function postPurge(Request $request)
     {
-        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+        Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
-            \Log::debug('Purging is not allowed via the .env');
+            Log::debug('Purging is not allowed via the .env');
 
             if (!config('app.lock_passwords')) {
 
                 if ($request->input('confirm_purge')=='DELETE') {
 
-                    \Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
+                    Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
                     // Run a backup immediately before processing
                     Artisan::call('backup:run');
                     Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
@@ -1404,7 +1400,7 @@ class SettingsController extends Controller
             }
         }
 
-        \Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
+        Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
 
 
         // Nope.
@@ -1447,7 +1443,7 @@ class SettingsController extends Controller
             ])->notify(new MailTest());
 
             return response()->json(Helper::formatStandardApiResponse('success', null, 'Maiol sent!'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('success', null, $e->getMessage()));
         }
     }
