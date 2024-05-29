@@ -86,7 +86,7 @@ class CustomFieldsetsController extends Controller
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v1.8]
      * @param Request $request
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request)
@@ -126,7 +126,7 @@ class CustomFieldsetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
      * @since [v6.0.14]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($id)
@@ -147,7 +147,7 @@ class CustomFieldsetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
      * @since [v6.0.14]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, $id)

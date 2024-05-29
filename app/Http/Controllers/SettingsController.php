@@ -162,7 +162,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postSaveFirstAdmin(SetupUserRequest $request)
     {
@@ -1132,7 +1132,7 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postBackups()
     {
@@ -1231,7 +1231,7 @@ class SettingsController extends Controller
      *
      * @since [v6.0]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
 
     public function postUploadBackup(Request $request) {
@@ -1432,7 +1432,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function ajaxTestEmail()
     {

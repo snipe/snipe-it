@@ -108,7 +108,7 @@ class ProfileController extends Controller
     /**
      * Users change password form processing page.
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function passwordSave(Request $request)
     {

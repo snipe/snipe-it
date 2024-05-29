@@ -96,7 +96,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ImageUploadRequest $request)
     {
@@ -411,7 +411,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($assetId)
     {
@@ -445,7 +445,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getAssetBySerial(Request $request)
     {
@@ -463,7 +463,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getAssetByTag(Request $request, $tag=null)
     {

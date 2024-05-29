@@ -56,7 +56,7 @@ class AssetCheckinController extends Controller
      * @param AssetCheckinRequest $request
      * @param int $assetId
      * @param null $backto
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */

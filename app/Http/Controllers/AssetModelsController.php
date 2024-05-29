@@ -66,7 +66,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param ImageUploadRequest $request
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
@@ -139,7 +139,7 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param ImageUploadRequest $request
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(ImageUploadRequest $request, $modelId = null)
@@ -200,7 +200,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($modelId)
@@ -237,7 +237,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param int $id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function getRestore($id)
@@ -429,7 +429,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postBulkDelete(Request $request)
     {

@@ -80,7 +80,7 @@ class AcceptanceController extends Controller
      *
      * @param  Request $request
      * @param  int  $id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, $id)
     {

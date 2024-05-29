@@ -47,7 +47,7 @@ class PredefinedKitsController extends Controller
      * Validate and process the new Predefined Kit data.
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ImageUploadRequest $request)
     {
@@ -95,7 +95,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @since [v1.0]
      * @param int $kit_id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ImageUploadRequest $request, $kit_id = null)
     {
@@ -122,7 +122,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @since [v1.0]
      * @param int $kit_id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($kit_id)
     {

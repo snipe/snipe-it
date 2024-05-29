@@ -71,7 +71,7 @@ class SamlController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
     {
@@ -93,7 +93,7 @@ class SamlController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function acs(Request $request)
     {
@@ -126,7 +126,7 @@ class SamlController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function sls(Request $request)
     {
