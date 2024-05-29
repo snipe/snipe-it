@@ -1099,7 +1099,6 @@
       </div><!-- /.tab-content -->
     </div><!-- nav-tabs-custom -->
   </div>
-</div>
 
   @can('update', \App\Models\User::class)
     @include ('modals.upload-file', ['item_type' => 'user', 'item_id' => $user->id])
