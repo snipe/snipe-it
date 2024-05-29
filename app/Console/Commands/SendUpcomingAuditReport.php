@@ -7,7 +7,7 @@ use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
 use App\Notifications\SendUpcomingAuditNotification;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
 class SendUpcomingAuditReport extends Command

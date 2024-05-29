@@ -23,13 +23,13 @@ use App\Notifications\AcceptanceAssetAcceptedNotification;
 use App\Notifications\AcceptanceAssetDeclinedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use phpDocumentor\Reflection\Types\Compound;
+use Illuminate\Support\Facades\Log;
 
 class AcceptanceController extends Controller
 {
@@ -234,7 +234,7 @@ class AcceptanceController extends Controller
             ];
 
             if ($pdf_view_route!='') {
-                \Log::debug($pdf_filename.' is the filename, and the route was specified.');
+                Log::debug($pdf_filename.' is the filename, and the route was specified.');
                 $pdf = Pdf::loadView($pdf_view_route, $data);
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
@@ -321,7 +321,7 @@ class AcceptanceController extends Controller
             ];
 
             if ($pdf_view_route!='') {
-                \Log::debug($pdf_filename.' is the filename, and the route was specified.');
+                Log::debug($pdf_filename.' is the filename, and the route was specified.');
                 $pdf = Pdf::loadView($pdf_view_route, $data);
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }

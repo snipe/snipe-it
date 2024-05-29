@@ -3,6 +3,7 @@
 namespace App\Importer;
 
 use App\Models\Location;
+use Illuminate\Support\Facades\Log;
 
 /**
  * When we are importing users via an Asset/etc import, we use createOrFetchUser() in
@@ -76,15 +77,15 @@ class LocationImporter extends ItemImporter
             }
         }
 
-        \Log::debug('Item array is: ');
-        \Log::debug(print_r($this->item, true));
+        Log::debug('Item array is: ');
+        Log::debug(print_r($this->item, true));
 
 
         if ($editingLocation) {
-            \Log::debug('Updating existing location');
+            Log::debug('Updating existing location');
             $location->update($this->sanitizeItemForUpdating($location));
         } else {
-            \Log::debug('Creating location');
+            Log::debug('Creating location');
             $location->fill($this->sanitizeItemForStoring($location));
         }
 
@@ -93,7 +94,7 @@ class LocationImporter extends ItemImporter
             return $location;
 
         } else {
-            \Log::debug($location->getErrors());
+            Log::debug($location->getErrors());
             return $location->errors;
         }
 

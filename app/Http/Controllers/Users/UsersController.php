@@ -14,7 +14,7 @@ use App\Models\Group;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;

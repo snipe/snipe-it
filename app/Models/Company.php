@@ -4,12 +4,12 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
-
+use Illuminate\Support\Facades\Log;
 /**
  * Model for Companies.
  *
@@ -152,13 +152,13 @@ final class Company extends SnipeModel
                 }
 
             } catch (\Exception $e) {
-                \Log::warning($e);
+                Log::warning($e);
             }
         }
 
 
         if (Auth::user()) {
-            \Log::warning('Companyable is '.$companyable);
+            Log::warning('Companyable is '.$companyable);
             $current_user_company_id = Auth::user()->company_id;
             $companyable_company_id = $companyable->company_id;
             return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
@@ -309,7 +309,7 @@ final class Company extends SnipeModel
             return $query;
         } else {
             $f = function ($q) {
-                \Log::debug('scopeCompanyablesDirectly firing ');
+                Log::debug('scopeCompanyablesDirectly firing ');
                 static::scopeCompanyablesDirectly($q);
             };
 

@@ -24,6 +24,7 @@ use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use League\Csv\EscapeFormula;
 use App\Http\Requests\CustomAssetReportRequest;
+use Illuminate\Support\Facades\Log;
 
 
 /**
@@ -235,7 +236,7 @@ class ReportsController extends Controller
 
         \Debugbar::disable();
         $response = new StreamedResponse(function () {
-            \Log::debug('Starting streamed response');
+            Log::debug('Starting streamed response');
 
             // Open output stream
             $handle = fopen('php://output', 'w');
@@ -259,16 +260,16 @@ class ReportsController extends Controller
 
             ];
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-            \Log::debug('Starting headers: '.$executionTime);
+            Log::debug('Starting headers: '.$executionTime);
             fputcsv($handle, $header);
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-            \Log::debug('Added headers: '.$executionTime);
+            Log::debug('Added headers: '.$executionTime);
 
             $actionlogs = Actionlog::with('item', 'user', 'target', 'location')
                 ->orderBy('created_at', 'DESC')
                 ->chunk(20, function ($actionlogs) use ($handle) {
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-                \Log::debug('Walking results: '.$executionTime);
+                Log::debug('Walking results: '.$executionTime);
                 $count = 0;
 
                 foreach ($actionlogs as $actionlog) {
@@ -312,7 +313,7 @@ class ReportsController extends Controller
             // Close the output stream
             fclose($handle);
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-            \Log::debug('-- SCRIPT COMPLETED IN '.$executionTime);
+            Log::debug('-- SCRIPT COMPLETED IN '.$executionTime);
         }, 200, [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="activity-report-'.date('Y-m-d-his').'.csv"',
@@ -425,8 +426,8 @@ class ReportsController extends Controller
         \Debugbar::disable();
         $customfields = CustomField::get();
         $response = new StreamedResponse(function () use ($customfields, $request) {
-            \Log::debug('Starting streamed response');
-            \Log::debug('CSV escaping is set to: '.config('app.escape_formulas'));
+            Log::debug('Starting streamed response');
+            Log::debug('CSV escaping is set to: '.config('app.escape_formulas'));
 
             // Open output stream
             $handle = fopen('php://output', 'w');
@@ -627,10 +628,10 @@ class ReportsController extends Controller
             }
 
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-            \Log::debug('Starting headers: '.$executionTime);
+            Log::debug('Starting headers: '.$executionTime);
             fputcsv($handle, $header);
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-            \Log::debug('Added headers: '.$executionTime);
+            Log::debug('Added headers: '.$executionTime);
 
             $assets = Asset::select('assets.*')->with(
                 'location', 'assetstatus', 'company', 'defaultLoc', 'assignedTo',
@@ -732,11 +733,11 @@ class ReportsController extends Controller
                 $assets->onlyTrashed();
             }
 
-            \Log::debug($assets->toSql());
+            Log::debug($assets->toSql());
             $assets->orderBy('assets.id', 'ASC')->chunk(20, function ($assets) use ($handle, $customfields, $request) {
             
                 $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-                \Log::debug('Walking results: '.$executionTime);
+                Log::debug('Walking results: '.$executionTime);
                 $count = 0;
 
                 $formatter = new EscapeFormula("`");
@@ -996,14 +997,14 @@ class ReportsController extends Controller
                     }
 
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-                    \Log::debug('-- Record '.$count.' Asset ID:'.$asset->id.' in '.$executionTime);
+                    Log::debug('-- Record '.$count.' Asset ID:'.$asset->id.' in '.$executionTime);
                 }
             });
 
             // Close the output stream
             fclose($handle);
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-            \Log::debug('-- SCRIPT COMPLETED IN '.$executionTime);
+            Log::debug('-- SCRIPT COMPLETED IN '.$executionTime);
         }, 200, [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="custom-assets-report-'.date('Y-m-d-his').'.csv"',
@@ -1141,23 +1142,23 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
 
         if (!$acceptance = CheckoutAcceptance::pending()->find($request->input('acceptance_id'))) {
-            \Log::debug('No pending acceptances');
+            Log::debug('No pending acceptances');
             // Redirect to the unaccepted assets report page with error
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
         }
 
         $assetItem = $acceptance->checkoutable;
 
-        \Log::debug(print_r($assetItem, true));
+        Log::debug(print_r($assetItem, true));
 
         if (is_null($acceptance->created_at)){
-            \Log::debug('No acceptance created_at');
+            Log::debug('No acceptance created_at');
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
         } else {
             $logItem_res = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get();
 
             if ($logItem_res->isEmpty()){
-                \Log::debug('Acceptance date mismatch');
+                Log::debug('Acceptance date mismatch');
                 return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
             }
             $logItem = $logItem_res[0];

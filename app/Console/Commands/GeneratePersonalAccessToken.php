@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use App\Models\User;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class GeneratePersonalAccessToken extends Command
 {

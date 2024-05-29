@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class UploadFileRequest extends Request
 {
@@ -44,11 +45,11 @@ class UploadFileRequest extends Request
         $file_name = $name_prefix.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$file->guessExtension();
 
 
-        \Log::debug("Your filetype IS: ".$file->getMimeType());
+        Log::debug("Your filetype IS: ".$file->getMimeType());
         // Check for SVG and sanitize it
         if ($file->getMimeType() === 'image/svg+xml') {
-            \Log::debug('This is an SVG');
-            \Log::debug($file_name);
+            Log::debug('This is an SVG');
+            Log::debug($file_name);
 
             $sanitizer = new Sanitizer();
             $dirtySVG = file_get_contents($file->getRealPath());
@@ -57,13 +58,13 @@ class UploadFileRequest extends Request
             try {
                 Storage::put($dirname.$file_name, $cleanSVG);
             } catch (\Exception $e) {
-                \Log::debug('Upload no workie :( ');
-                \Log::debug($e);
+                Log::debug('Upload no workie :( ');
+                Log::debug($e);
             }
 
         } else {
             $put_results = Storage::put($dirname.$file_name, file_get_contents($file));
-            \Log::debug("Here are the '$put_results' (should be 0 or 1 or true or false or something?)");
+            Log::debug("Here are the '$put_results' (should be 0 or 1 or true or false or something?)");
         }
         return $file_name;
     }
