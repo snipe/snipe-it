@@ -261,7 +261,7 @@ class LoginController extends Controller
     /**
      * Account sign in form processing.
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
     {
@@ -339,7 +339,7 @@ class LoginController extends Controller
     /**
      * Two factor enrollment page
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getTwoFactorEnroll()
     {
@@ -389,7 +389,7 @@ class LoginController extends Controller
     /**
      * Two factor code form page
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getTwoFactorAuth()
     {
@@ -415,7 +415,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postTwoFactorAuth(Request $request)
     {

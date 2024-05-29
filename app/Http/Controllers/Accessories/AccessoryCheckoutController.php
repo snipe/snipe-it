@@ -59,7 +59,7 @@ class AccessoryCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
      * @param  int $accessoryId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request, $accessoryId)

@@ -47,7 +47,7 @@ class AssetCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param AssetCheckoutRequest $request
      * @param int $assetId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
      */
     public function store(AssetCheckoutRequest $request, $assetId)

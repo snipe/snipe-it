@@ -105,7 +105,7 @@ class BulkAssetModelsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
     {
