@@ -114,8 +114,8 @@ class AssetFilesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', array(), trans('admin/hardware/message.upload.success')));
         }
 
-        // 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.error', ['id' => $fileId])), 500);
+        // Send back an error message
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.error')), 500);
     }
 
     /**
