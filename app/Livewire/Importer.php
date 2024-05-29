@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\CustomField;
 use Livewire\Component;
@@ -60,7 +60,7 @@ class Importer extends Component
     ];
 
     /**
-     * This is used in resources/views/livewire/importer.blade.php, and we kinda shouldn't need to check for
+     * This is used in resources/views/livewire.importer.blade.php, and we kinda shouldn't need to check for
      * activeFile here, but there's some UI goofiness that allows this to crash out on some imports.
      *
      * @return string
@@ -548,7 +548,7 @@ class Importer extends Component
     public function render()
     {
         $this->files = Import::orderBy('id','desc')->get(); //HACK - slows down renders.
-        return view('livewire.importer')
+        return view('')
                 ->extends('layouts.default')
                 ->section('content');
     }

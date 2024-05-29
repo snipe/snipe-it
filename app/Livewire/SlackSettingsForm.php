@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
