@@ -307,9 +307,9 @@
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function(e, data) {
-                @this.progress_bar_class = 'progress-bar-success';
-                @this.progress_message = '<i class="fas fa-check faa-pulse animated"></i> {{ trans('general.notification_success') }}';
-                @this.progress = 100;
+                $wire.$set('progress_bar_class', 'progress-bar-success');
+                $wire.$set('progress_message', '<i class="fas fa-check faa-pulse animated"></i> {{ trans('general.notification_success') }}');
+                $wire.$set('progress', 100);
             },
             add: function(e, data) {
                 data.headers = {
@@ -317,17 +317,17 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 };
                 data.process().done( function () {data.submit();});
-                @this.progress = 0;
-                @this.clearMessage();
+                $wire.$set('progress', 0);
+                $wire.clearMessage();
             },
             progress: function(e, data) {
-                @this.progress = parseInt((data.loaded / data.total * 100, 10));
-                @this.progress_message = '{{ trans('general.uploading') }}';
+                $wire.$set('progress', parseInt((data.loaded / data.total * 100, 10)));
+                $wire.$set('progress_message', '{{ trans('general.uploading') }}');
             },
             fail: function() {
-                @this.progress_bar_class = "progress-bar-danger";
-                @this.progress = 100;
-                @this.progress_message = '<i class="fas fa-exclamation-triangle faa-pulse animated"></i> {{ trans('general.upload_error') }}';
+                $wire.$set('progress_bar_class', "progress-bar-danger");
+                $wire.$set('progress', 100);
+                $wire.$set('progress_message', '<i class="fas fa-exclamation-triangle faa-pulse animated"></i> {{ trans('general.upload_error') }}');
             }
         })
 
@@ -338,28 +338,28 @@
             // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
             // because the #import button isn't visible until you click an import_type
             $('#upload-table').on('click', '#import', function () {
-                if(!@this.activeFile.import_type) {
-                    @this.statusType='error';
-                    @this.statusText= "An import type is required... "; //TODO: translate?
+                if (!$wire.$get('activeFile.import_type')) {
+                    $wire.$set('statusType', 'error');
+                    $wire.$set('statusText', "An import type is required... "); //TODO: translate?
                     return;
                 }
-                @this.statusType ='pending';
-                @this.statusText = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('admin/hardware/form.processing_spinner') }}';
-                @this.generate_field_map().then(function (mappings_raw) {
+                $wire.$set('statusType', 'pending');
+                $wire.$set('statusText', '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('admin/hardware/form.processing_spinner') }}');
+                $wire.generate_field_map().then(function (mappings_raw) {
                     var mappings = JSON.parse(mappings_raw)
                     // console.warn("Here is the mappings:")
                     // console.dir(mappings)
-                    // console.warn("Uh, active file id is, I guess: "+@this.activeFile.id)
-                    var this_file = @this.file_id; // okay, I actually don't know what I'm doing here.
+                    // console.warn("Uh, active file id is, I guess: "+$wire.$set('activeFile.id'))
+                    var this_file = $wire.$get('file_id'); // okay, I actually don't know what I'm doing here.
                     $.post({
                         {{-- I want to do something like: route('api.imports.importFile', $activeFile->id) }} --}}
                         url: "api/v1/imports/process/"+this_file, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
                         contentType: 'application/json',
                         data: JSON.stringify({
-                            'import-update': !!@this.update,
-                            'send-welcome': !!@this.send_welcome,
-                            'import-type': @this.activeFile.import_type,
-                            'run-backup': !!@this.run_backup,
+                            'import-update': !!$wire.$set('update'),
+                            'send-welcome': !!$wire.$set('send_welcome'),
+                            'import-type': $wire.$set('activeFile.import_type'),
+                            'run-backup': !!$wire.$set('run_backup'),
                             'column-mappings': mappings
                         }),
                         headers: {
@@ -367,19 +367,19 @@
                         }
                     }).done( function (body) {
                         // Success
-                        @this.statusType="success";
-                        @this.statusText = "{{ trans('general.success_redirecting') }}";
+                        $wire.$set('statusType', "success");
+                        $wire.$set('statusText', "{{ trans('general.success_redirecting') }}");
                         // console.dir(body)
                         window.location.href = body.messages.redirect_url;
                     }).fail( function (jqXHR, textStatus, error) {
                         // Failure
                         var body = jqXHR.responseJSON
                         if((body) && (body.status) && body.status == 'import-errors') {
-                            @this.emit('importError', body.messages);
-                            @this.import_errors = body.messages
+                            $wire.$dispatch('importError', body.messages);
+                            $wire.$set('import_errors', body.messages);
 
-                            @this.statusType='error';
-                            @this.statusText = "Error";
+                            $wire.$set('statusType', 'error');
+                            $wire.$set('statusText', "Error");
 
                         //  If Slack/notifications hits API thresholds, we *do* 500, but we never
                         //  actually surface that info.
@@ -390,15 +390,15 @@
                         // notifications could be sent".
                         } else {
                             console.warn("Not import-errors, just regular errors - maybe API limits")
-                            @this.message_type="warning"
+                            $wire.$set('message_type', "warning");
                             if ((body) && (error in body)) {
-                                @this.message = body.error ? body.error:"Unknown error - might just be throttling by notifications."
+                                $wire.$set('message', body.error ? body.error : "Unknown error - might just be throttling by notifications.");
                             } else {
-                                @this.message = "{{ trans('general.importer_generic_error') }}"
+                                $wire.$set('message', "{{ trans('general.importer_generic_error') }}");
                             }
 
                         }
-                        @this.activeFile = null; //@this.set('hideDetails')
+                        $wire.$set('activeFile', null); //$wire.$set('hideDetails')
                     });
                 })
                 return false;
