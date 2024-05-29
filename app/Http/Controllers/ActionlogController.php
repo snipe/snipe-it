@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Actionlog;
-use Response;
-
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Log;
 class ActionlogController extends Controller
 {
     public function displaySig($filename)
@@ -20,7 +20,7 @@ class ActionlogController extends Controller
 
         $contents = file_get_contents($file, false, stream_context_create(['http' => ['ignore_errors' => true]]));
         if ($contents === false) {
-            \Log::warn('File '.$file.' not found');
+            Log::warning('File '.$file.' not found');
             return false;
         } else {
             return Response::make($contents)->header('Content-Type', $filetype);

@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Redirect;
 
 /**
@@ -122,7 +122,7 @@ class LoginController extends Controller
                     Auth::login($user);
                 } else {
                     $username = $saml->getUsername();
-                    \Log::debug("SAML user '$username' could not be found in database.");
+                    Log::debug("SAML user '$username' could not be found in database.");
                     $request->session()->flash('error', trans('auth/message.signin.error'));
                     $saml->clearData();
                 }
@@ -137,7 +137,7 @@ class LoginController extends Controller
                 $s->save();
 
             } catch (\Exception $e) {
-                \Log::debug('There was an error authenticating the SAML user: '.$e->getMessage());
+                Log::debug('There was an error authenticating the SAML user: '.$e->getMessage());
                 throw $e;
             }
 
@@ -146,7 +146,7 @@ class LoginController extends Controller
 
             // Better logging
             if (empty($samlData)) {
-                \Log::debug("SAML page requested, but samlData seems empty.");
+                Log::debug("SAML page requested, but samlData seems empty.");
             }
         }
 
@@ -268,12 +268,12 @@ class LoginController extends Controller
 
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
-            \Log::debug('require SAML is enabled in the .env - return a 403');
+            Log::debug('require SAML is enabled in the .env - return a 403');
             return view('errors.403');
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
-            \Log::debug('login_common_disabled is set to 1 - return a 403');
+            Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -451,7 +451,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
     {

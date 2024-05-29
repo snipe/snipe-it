@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
+use Illuminate\Support\Facades\Log;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -224,7 +225,7 @@ class AccessoriesController extends Controller
             try {
                 Storage::disk('public')->delete('accessories'.'/'.$accessory->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 

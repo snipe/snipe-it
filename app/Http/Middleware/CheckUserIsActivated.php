@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class CheckUserIsActivated
 {

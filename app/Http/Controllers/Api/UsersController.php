@@ -17,9 +17,8 @@ use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -559,7 +558,7 @@ class UsersController extends Controller
                     try {
                         Storage::disk('public')->delete('avatars/' . $user->avatar);
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
                 }
 

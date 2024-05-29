@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 trait Loggable
 {
@@ -186,7 +187,7 @@ trait Loggable
 //            try {
 //                $target->notify(new static::$checkinClass($params));
 //            } catch (\Exception $e) {
-//                \Log::debug($e);
+//                Log::debug($e);
 //            }
 //
 //        }
@@ -198,7 +199,7 @@ trait Loggable
 //            try {
 //                $recipient->notify(new static::$checkinClass($params));
 //            } catch (\Exception $e) {
-//                \Log::debug($e);
+//                Log::debug($e);
 //            }
 //
 //        }

@@ -12,6 +12,7 @@ use App\Models\AssetModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This class controls all actions related to asset models for
@@ -224,7 +225,7 @@ class AssetModelsController extends Controller
             try {
                 Storage::disk('public')->delete('assetmodels/'.$assetmodel->image);
             } catch (\Exception $e) {
-                \Log::info($e);
+                Log::info($e);
             }
         }
 
