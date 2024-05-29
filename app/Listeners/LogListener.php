@@ -126,6 +126,21 @@ class LogListener
     }
 
     /**
+     * Note is added to action log
+     *
+     */
+    public function AddedNote(Note $event)
+    {
+        $logaction = new Actionlog();
+        $logaction->target_id = $event->item()->id;
+        $logaction->target_type = $event->item()::class; //???
+        $logaction->note = $event->note; //this is the received alphanumeric text from the box
+        $logaction->user_id = $event->user->id;
+        $logaction->save();
+    }
+
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param  Illuminate\Events\Dispatcher  $events
@@ -138,6 +153,7 @@ class LogListener
             'CheckoutAccepted',
             'CheckoutDeclined',
             'UserMerged',
+            'NoteAdded',
         ];
 
         foreach ($list as $event) {
@@ -147,19 +163,4 @@ class LogListener
             );
         }
     }
-
-    /**
-     * Note is added to action log
-     *
-     */
-    public function AddedNote(Note $event)
-    {
-        $logaction = new Actionlog();
-        $logaction->target_id =
-        $logaction->target_type =
-        $logaction->note =
-        $logaction->user_id =
-        $logaction->save();
-    }
-
 }
