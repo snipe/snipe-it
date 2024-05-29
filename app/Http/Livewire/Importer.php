@@ -6,7 +6,7 @@ use App\Models\CustomField;
 use Livewire\Component;
 
 use App\Models\Import;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

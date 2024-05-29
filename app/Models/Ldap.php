@@ -6,8 +6,8 @@ use App\Models\Setting;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Input;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 
 /***********************************************
  * TODOS:

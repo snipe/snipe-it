@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserNotFoundException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Actionlog;
@@ -18,11 +17,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Input;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use View;
 use App\Notifications\CurrentInventory;
 
 /**
@@ -152,7 +149,7 @@ class UsersController extends Controller
                 $user->notify(new WelcomeNotification($data));
             }
 
-            return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
+            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());

@@ -11,12 +11,10 @@ use App\Models\CustomField;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
-use Redirect;
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
