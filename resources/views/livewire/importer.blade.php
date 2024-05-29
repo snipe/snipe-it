@@ -170,7 +170,7 @@
 
                                                             <div class="form-group col-md-9 col-md-offset-3">
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
+                                                                    <input type="checkbox" name="update" data-livewire-component="{{ $_instance->id }}" wire:model.live="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
                                                                 @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
@@ -180,12 +180,12 @@
                                                                 @endif
 
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model="send_welcome">
+                                                                    <input type="checkbox" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model.live="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
 
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model="run_backup">
+                                                                    <input type="checkbox" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model.live="run_backup">
                                                                     {{ trans('general.back_before_importing') }}
                                                                 </label>
 

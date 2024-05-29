@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-3">
                 <label class="form-control">
-                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $_instance->id, 'id' => 'add_default_values', 'wire:model' => 'add_default_values']) }}
+                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $_instance->id, 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values']) }}
                 {{ trans('admin/models/general.add_default_values') }}
             </label>
         </div>
