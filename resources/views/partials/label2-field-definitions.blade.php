@@ -270,7 +270,7 @@
                         'l2fd-listitem': true,
                         'selected': selectedField === field
                     }"
-                    x-bind:style="index < 4 && template === 'DefaultLabel' ? 'background-color:#EEEEEE;' : ''"
+                    x-bind:style="index < 4 && template === 'DefaultLabel' ? 'background-color:#EEEEEE;' : 'background-color:#FFF;'"
                     x-on:click="selectedField = field"
                     >
                     <label><span x-text="index+1"></span>: <span x-text="getFieldLabel(field)"></span></label>
