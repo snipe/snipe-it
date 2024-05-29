@@ -548,7 +548,7 @@ class Importer extends Component
     public function render()
     {
         $this->files = Import::orderBy('id','desc')->get(); //HACK - slows down renders.
-        return view('')
+        return view('livewire.importer')
                 ->extends('layouts.default')
                 ->section('content');
     }
