@@ -40,6 +40,19 @@
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
+            <div class="form-group {{ $errors->has('assigned_qty') ? ' has-error' : '' }}">
+              <label for="assigned_qty" class="col-md-3 control-label">
+                {{ trans('general.qty') }}
+              </label>
+              <div class="col-md-2 col-sm-5 col-xs-5">
+                <input class="form-control required col-md-12" type="number" min="1" name="assigned_qty" id="assigned_qty" value="{{ old('assigned_qty') ?? 1 }}" />
+              </div>
+              @if ($errors->first('assigned_qty'))
+                <div class="col-md-9 col-md-offset-3">
+                  {!! $errors->first('assigned_qty', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                </div>
+              @endif
+            </div>
 
             @if ($consumable->requireAcceptance() || $consumable->getEula() || ($snipeSettings->webhook_endpoint!=''))
               <div class="form-group notification-callout">

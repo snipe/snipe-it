@@ -32,6 +32,7 @@ class ConsumableCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutConsumables()->create())
             ->post(route('consumables.checkout.store', Consumable::factory()->withoutItemsRemaining()->create()), [
                 'assigned_to' => User::factory()->create()->id,
+                'assigned_qty'=> 1,
             ])
             ->assertSessionHas('error');
     }
@@ -44,9 +45,14 @@ class ConsumableCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutConsumables()->create())
             ->post(route('consumables.checkout.store', $consumable), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 3,
             ]);
-
-        $this->assertTrue($user->consumables->contains($consumable));
+        $this->assertEquals(
+            3,
+            $consumable->users->filter(function ($u) use ($user) {
+                return $u->id === $user->id;
+            })->count()
+        );
     }
 
     public function testUserSentNotificationUponCheckout()
@@ -59,6 +65,7 @@ class ConsumableCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutConsumables()->create())
             ->post(route('consumables.checkout.store', $consumable), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 1,
             ]);
 
         Notification::assertSentTo($user, CheckoutConsumableNotification::class);
@@ -74,6 +81,7 @@ class ConsumableCheckoutTest extends TestCase
             ->post(route('consumables.checkout.store', $consumable), [
                 'assigned_to' => $user->id,
                 'note' => 'oh hi there',
+                'assigned_qty'=> 1,
             ]);
 
         $this->assertEquals(

@@ -65,37 +65,43 @@ class ConsumableCheckoutController extends Controller
      */
     public function store(Request $request, $consumableId)
     {
+
         if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
 
         $this->authorize('checkout', $consumable);
 
-        // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
-        }
-
-        $admin_user = Auth::user();
-        $assigned_to = e($request->input('assigned_to'));
-
         // Check if the user exists
+        $assigned_to = e($request->input('assigned_to'));
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
             return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
+        $validated = $request->validate([
+            'assigned_qty' => 'required|numeric|min:1',
+        ]);
+        $quantity = $request->input('assigned_qty');
+        // Make sure there is at least one available to checkout
+        if ($consumable->numRemaining() <= 0 || $consumable->numRemaining() < $quantity) {
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
+        }
 
-        // Update the consumable data
+        $admin_user = Auth::user();
+
+
         $consumable->assigned_to = e($request->input('assigned_to'));
 
-        $consumable->users()->attach($consumable->id, [
-            'consumable_id' => $consumable->id,
-            'user_id' => $admin_user->id,
-            'assigned_to' => e($request->input('assigned_to')),
-            'note' => $request->input('note'),
-        ]);
-
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+            // Update the consumable data
+            for ($qty = 0; $qty < $quantity; $qty++) {
+                $consumable->users()->attach($consumable->id, [
+                    'consumable_id' => $consumable->id,
+                    'user_id' => $admin_user->id,
+                    'assigned_to' => e($request->input('assigned_to')),
+                    'note' => $request->input('note'),
+                ]);
+            }
+                event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), [], $quantity));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

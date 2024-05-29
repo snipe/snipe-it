@@ -231,7 +231,7 @@ class CheckoutableListener
         }
 
 
-        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
+        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note, $event->quantity);
     }
 
     /**

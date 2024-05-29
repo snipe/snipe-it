@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Checkouts;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\User;
@@ -32,21 +33,28 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->post(route('accessories.checkout.store', Accessory::factory()->withoutItemsRemaining()->create()), [
                 'assigned_to' => User::factory()->create()->id,
+                'assigned_qty'=> 1,
             ])
             ->assertSessionHas('error');
     }
 
     public function testAccessoryCanBeCheckedOut()
     {
-        $accessory = Accessory::factory()->create();
+        $accessory = Accessory::factory()->create(['qty' => 2]);
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 2,
             ]);
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertEquals(
+            2,
+            $accessory->users->filter(function ($u) use ($user) {
+                return $u->id==$user->id;
+            })->count()
+        );
     }
 
     public function testUserSentNotificationUponCheckout()
@@ -59,6 +67,7 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
+                'assigned_qty'=> 1,
             ]);
 
         Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
@@ -74,6 +83,7 @@ class AccessoryCheckoutTest extends TestCase
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
                 'note' => 'oh hi there',
+                'assigned_qty'=> 1,
             ]);
 
         $this->assertEquals(
