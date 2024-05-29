@@ -98,7 +98,7 @@
                                        name="name"
                                        wire:keydown.enter="createToken(name)"
                                        {{-- defer because it's submitting as i type if i don't --}}
-                                       wire:model.defer="name"
+                                       wire:model="name"
                                        autofocus
                                 >
                             </div>
