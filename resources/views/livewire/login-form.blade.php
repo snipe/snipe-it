@@ -1,5 +1,5 @@
 <div>
-    <form role="form" method="POST" action="{{ route('login') }}" autocomplete="false" wire:submit.prevent="submitForm">
+    <form role="form" method="POST" action="{{ route('login') }}" autocomplete="false" wire:submit="submitForm">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
     <!-- this is a hack to prevent Chrome from trying to autocomplete fields -->

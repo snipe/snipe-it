@@ -13,7 +13,7 @@
 @section('content')
 
 <div><!-- livewire div - do not remove -->
-    <form class="form-horizontal" role="form" wire:submit.prevent="submit">
+    <form class="form-horizontal" role="form" wire:submit="submit">
         {{csrf_field()}}
 
         <div class="row">
