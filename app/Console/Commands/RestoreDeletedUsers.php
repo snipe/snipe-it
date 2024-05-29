@@ -6,7 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\User;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
