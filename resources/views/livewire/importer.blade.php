@@ -133,7 +133,7 @@
                                                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
-                                                    <a href="#" wire:click="$set('activeFile',null)">
+                                                    <a href="#" wire:click.prevent="$set('activeFile',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                                     </a>
@@ -261,7 +261,7 @@
 
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
                                                                         <button type="submit" class="btn btn-primary col-md-5" id="import">Import</button>
@@ -277,7 +277,7 @@
                                                             @else
                                                                 <div class="form-group col-md-10">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                 </div>
                                                             @endif {{-- end of if ... activeFile->import_type --}}
