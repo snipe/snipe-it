@@ -261,13 +261,18 @@
         <h1 class="l2fd-title" style="grid-area: fields-title">Fields</h1>
         <div class="l2fd-list" style="grid-area: fields-list">
             <template x-for="(field, index) in fields">
-                <div 
-                    x-bind:key="'field-' + index" 
+                <div
+                    x-data="{
+                                template: '{{ $template }}'
+                            }"
+                    x-bind:key="'field-' + index"
                     x-bind:class="{
                         'l2fd-listitem': true,
                         'selected': selectedField === field
                     }"
-                    x-on:click="selectedField = field" >
+                    x-bind:style="index < 4 && template === 'DefaultLabel' ? 'background-color:#EEEEEE;' : ''"
+                    x-on:click="selectedField = field"
+                    >
                     <label><span x-text="index+1"></span>: <span x-text="getFieldLabel(field)"></span></label>
                 </div>
             </template>
