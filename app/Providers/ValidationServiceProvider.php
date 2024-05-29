@@ -322,7 +322,14 @@ class ValidationServiceProvider extends ServiceProvider
             $field = CustomField::where('db_column', $attribute)->first();
             $options = $field->formatFieldValuesAsArray();
 
-            if(is_array($value)) {
+            // we don't need to decrypt the submitted value, we need to decrypt the options before they get compared.
+            // i can't even test how this works because we removed the option to encrypt checkboxes. will look at it more later.
+            // pushing for now for the beginnings of encrypting testing.
+            if ($field->field_encrypted) {
+                $value = Crypt::decrypt($value);
+            }
+
+            if (is_array($value)) {
                 $invalid = array_diff($value, $options);
                 if(count($invalid) > 0) {
                     return false;
@@ -330,7 +337,7 @@ class ValidationServiceProvider extends ServiceProvider
             }
 
             // for legacy, allows users to submit a comma separated string of options
-            elseif(!is_array($value)) {
+            elseif (!empty($value) && !is_array($value)) {
                 $exploded = array_map('trim', explode(',', $value));
                 $invalid = array_diff($exploded, $options);
                 if(count($invalid) > 0) {

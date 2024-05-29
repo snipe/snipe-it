@@ -72,4 +72,13 @@ class CustomFieldsetFactory extends Factory
             }
         });
     }
+
+    public function hasCustomCheckbox(bool $encrypted = false): self
+    {
+        return $this->afterCreating(function (CustomFieldset $fieldset) use ($encrypted) {
+            $field = $field ?? CustomField::factory()->testCheckbox($encrypted)->create();
+
+            $fieldset->fields()->attach($field, ['order' => '1', 'required' => false]);
+        });
+    }
 }

@@ -15,12 +15,14 @@ return [
         'error'   		=> 'Asset was not created, please try again. :(',
         'success' 		=> 'Asset created successfully. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'encrypted_error' => 'Asset not created, you do not have permission to update an encrypted field',
     ],
 
     'update' => [
         'error'   			=> 'Asset was not updated, please try again',
         'success' 			=> 'Asset updated successfully.',
         'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
+        'encrypted_error' => 'Asset not updated, you do not have permission to update an encrypted field',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
         'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',

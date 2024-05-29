@@ -6,6 +6,8 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
+use App\Models\Manufacturer;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
@@ -96,9 +98,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return Redirect
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request): RedirectResponse
     {
         $this->authorize(Asset::class);
 
@@ -166,21 +167,22 @@ class AssetsController extends Controller
 
             if (($model) && ($model->fieldset)) {
                 foreach ($model->fieldset->fields as $field) {
+                    $field_val = $request->input($field->db_column);
+
+                    //handle multi-value checkboxes
+                    if (is_array($request->input($field->db_column))) {
+                        $field_val = implode(', ', $field_val);
+                    }
+
+                    //handle encrypted fields
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
-                            if (is_array($request->input($field->db_column))) {
-                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                            } else {
-                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                            }
-                        }
-                    } else {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                            $field_val = Crypt::encrypt($field_val);
                         } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
+                            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.encrypted_error'));
                         }
                     }
+                    $asset->{$field->db_column} = $field_val;
                 }
             }
 
@@ -292,11 +294,10 @@ class AssetsController extends Controller
      * Validate and process asset edit form.
      *
      * @param int $assetId
-     * @return \Illuminate\Http\RedirectResponse|Redirect
      * @since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function update(ImageUploadRequest $request, $assetId = null)
+    public function update(ImageUploadRequest $request, $assetId = null): RedirectResponse
     {
         // Check if the asset exists
         if (! $asset = Asset::find($assetId)) {
@@ -378,30 +379,32 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column);
+
+                if (is_array($field_val)) {
+                    $field_val = implode(', ', $field_val);
+                }
+
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        $field_val = Crypt::encrypt($field_val);
                     } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
+                        return redirect()->route('hardware.show', $assetId)->with('error', trans('admin/hardware/message.update.encrypted_error'));
                     }
                 }
+                $asset->{$field->db_column} = $field_val;
             }
         }
 
 
+        \Log::debug("so is this, like, firing right before we die?");
         if ($asset->save()) {
+            \Log::debug("it did and seemed to work?");
             return redirect()->route('hardware.show', $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
+        \Log::debug("It is firing and not doing well at it :(");
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 

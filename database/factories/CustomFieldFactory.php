@@ -93,15 +93,25 @@ class CustomFieldFactory extends Factory
         });
     }
 
-    public function testCheckbox()
+    public function testCheckbox(bool $encrypted = false): self
     {
-        return $this->state(function () {
-            return [
-                'name' => 'Test Checkbox',
-                'help_text' => 'This is a sample checkbox.',
-                'field_values' => "One\r\nTwo\r\nThree",
-                'element'   => 'checkbox',
-            ];
+        return $this->state(function () use ($encrypted) {
+            if ($encrypted) {
+                return [
+                    'name'            => 'Test Checkbox',
+                    'help_text'       => 'This is a sample checkbox.',
+                    'field_values'    => "One\r\nTwo\r\nThree",
+                    'element'         => 'checkbox',
+                    'field_encrypted' => '1'
+                ];
+            } else {
+                return [
+                    'name'         => 'Test Checkbox',
+                    'help_text'    => 'This is a sample checkbox.',
+                    'field_values' => "One\r\nTwo\r\nThree",
+                    'element'      => 'checkbox',
+                ];
+            }
         });
     }
 

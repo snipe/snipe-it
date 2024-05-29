@@ -297,16 +297,11 @@
         }).change();
 
         // Only display the field element if the type is not text
-        // and don't display encryption option for checkbox or radio
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
                 if (($(this).attr("value")!="text") && ($(this).attr("value")!="textarea")){
                     $("#field_values_text").show();
-                if ($(this).attr("value") == "checkbox" || $(this).attr("value") == "radio") {
-                    $("#encryption_section").hide();
-                }
                 } else{
-                    $("#encryption_section").show();
                     $("#field_values_text").hide();
                 }
             });

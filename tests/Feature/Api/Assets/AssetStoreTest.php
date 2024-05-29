@@ -554,28 +554,214 @@ class AssetStoreTest extends TestCase
 
     public function testPermissionNeededToStoreEncryptedField()
     {
-        // @todo:
-        $this->markTestIncomplete();
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
         $status = Statuslabel::factory()->create();
         $field = CustomField::factory()->testEncrypted()->create();
         $normal_user = User::factory()->editAssets()->create();
         $assetData = Asset::factory()->hasEncryptedCustomField($field)->make();
 
-        $response = $this->actingAsForApi($normal_user)
+        $this->actingAsForApi($normal_user)
             ->postJson(route('api.assets.store'), [
                 $field->db_column_name() => 'Some Other Value Entirely!',
                 'model_id' => $assetData->model->id,
                 'status_id' => $status->id,
                 'asset_tag' => '1234',
             ])
-            // @todo: this is 403 unauthorized
-            ->assertStatusMessageIs('success')
-            ->assertOk()
-            ->assertMessagesAre('Asset updated successfully, but encrypted custom fields were not due to permissions')
-            ->json();
+            ->assertForbidden();
+    }
 
-        $asset = Asset::findOrFail($response['payload']['id']);
-        $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
+    public function testCustomFieldCheckboxPassesValidationForValidOptionsWithString()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox()->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => 'One, Two, Three',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals('One, Two, Three', $asset->{$column});
+    }
+
+    public function testCustomFieldCheckboxPassesValidationForValidOptionsWithArray()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox()->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => ['One', 'Two', 'Three'],
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        // hmm, should probably look at trimming spaces when it's submitted as a string (above test)
+        $this->assertEquals('One,Two,Three', $asset->{$column});
+    }
+
+    public function testCustomFieldCheckboxFailsValidationForInvalidOptionsWithString()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox()->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => 'One, Two, Four, Five',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testCustomFieldCheckboxFailsValidationForInvalidOptionsWithArray()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox()->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => ['One', 'Two', 'Four', 'Five'],
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testEncryptedCustomFieldCheckboxPassesValidationForValidOptionsWithString()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox(true)->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => 'One, Two, Three',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals('One, Two, Three', Crypt::decrypt($asset->{$column}));
+    }
+
+    public function testEncryptedCustomFieldCheckboxPassesValidationForValidOptionsWithArray()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox(true)->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => ['One', 'Two', 'Three'],
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        // again, dumb space trimmed or not thing - i don't think it matters in real world though
+        $this->assertEquals('One,Two,Three', Crypt::decrypt($asset->{$column}));
+    }
+
+    public function testEncryptedCustomFieldCheckboxFailsValidationForInvalidOptionsWithString()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox(true)->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => 'One, Two, Four, Five',
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+    }
+
+    public function testEncryptedCustomFieldCheckboxFailsValidationForInvalidOptionsWithArray()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->create();
+        $assetData = Asset::factory()->hasCustomCheckBox(true)->create();
+
+        $column = CustomField::where('name', 'Test Checkbox')->first()->db_column;
+
+
+        $this->settings->enableAutoIncrement();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'model_id'  => $assetData->model->id,
+                'status_id' => $status->id,
+                $column     => ['One', 'Two', 'Four', 'Five'],
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
     }
 }

@@ -372,6 +372,15 @@ class AssetFactory extends Factory
         });
     }
 
+    public function hasCustomCheckBox(bool $encrypted = false): self
+    {
+        return $this->state(function () use ($encrypted) {
+            return [
+                'model_id' => AssetModel::factory()->hasCustomCheckBox($encrypted),
+            ];
+        });
+    }
+
 
     /**
      * This allows bypassing model level validation if you want to purposefully
