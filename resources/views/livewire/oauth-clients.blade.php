@@ -14,7 +14,7 @@
                 @endif
 
                 <a class="button button-small"
-                   wire:click="$emit('openModal')"
+                   wire:click="$dispatch('openModal')"
                    onclick="$('#modal-create-client').modal('show');"
                 >
                     Create New Client
