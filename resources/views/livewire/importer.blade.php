@@ -150,10 +150,9 @@
                                                                     {{ trans('general.import_type') }}
                                                                 </label>
 
-                                                                <div class="col-md-9 col-xs-12">
+                                                            <div class="col-md-9 col-xs-12" wire:ignore>
                                                                     {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, [
                                                                         'id' => 'import_type',
-                                                                        'class' => 'livewire-select2',
                                                                         'style' => 'min-width: 350px',
                                                                         'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]),
                                                                         'placeholder' => '', //needed so that the form-helper will put an empty option first
@@ -170,9 +169,7 @@
 
                                                             <div class="form-group col-md-9 col-md-offset-3">
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="update"
-                                                                           data-livewire-component="{{ $this->getId() }}"
-                                                                           wire:model.live="update">
+                                                                    <input type="checkbox" name="update" data-livewire-component="{{ $this->getId() }}" wire:model.live="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
                                                                 @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
@@ -182,16 +179,12 @@
                                                                 @endif
 
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="send_welcome"
-                                                                           data-livewire-component="{{ $this->getId() }}"
-                                                                           wire:model.live="send_welcome">
+                                                                    <input type="checkbox" name="send_welcome" data-livewire-component="{{ $this->getId() }}" wire:model.live="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
 
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="run_backup"
-                                                                           data-livewire-component="{{ $this->getId() }}"
-                                                                           wire:model.live="run_backup">
+                                                                    <input type="checkbox" name="run_backup" data-livewire-component="{{ $this->getId() }}" wire:model.live="run_backup">
                                                                     {{ trans('general.back_before_importing') }}
                                                                 </label>
 
@@ -230,11 +223,11 @@
                                                                         <div class="form-group col-md-12" wire:key="header-row-{{ $index }}">
 
                                                                             <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-4" wire:ignore>
 
                                                                                 {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$field_map[$index],
                                                                                     [
-                                                                                        'class' => 'mappings livewire-select2',
+                                                                                        'class' => 'mappings',
                                                                                         'placeholder' => trans('general.importer.do_not_import'),
                                                                                         'style' => 'min-width: 100%',
                                                                                         'data-livewire-component' => $this->getId()
@@ -349,17 +342,17 @@
                     var mappings = JSON.parse(mappings_raw)
                     // console.warn("Here is the mappings:")
                     // console.dir(mappings)
-                    // console.warn("Uh, active file id is, I guess: "+$wire.$set('activeFile.id'))
+                    // console.warn("Uh, active file id is, I guess: "+$wire.$get('activeFile.id'))
                     var this_file = $wire.$get('file_id'); // okay, I actually don't know what I'm doing here.
                     $.post({
                         {{-- I want to do something like: route('api.imports.importFile', $activeFile->id) }} --}}
                         url: "api/v1/imports/process/"+this_file, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
                         contentType: 'application/json',
                         data: JSON.stringify({
-                            'import-update': !!$wire.$set('update'),
-                            'send-welcome': !!$wire.$set('send_welcome'),
-                            'import-type': $wire.$set('activeFile.import_type'),
-                            'run-backup': !!$wire.$set('run_backup'),
+                            'import-update': !!$wire.$get('update'),
+                            'send-welcome': !!$wire.$get('send_welcome'),
+                            'import-type': $wire.$get('activeFile.import_type'),
+                            'run-backup': !!$wire.$get('run_backup'),
                             'column-mappings': mappings
                         }),
                         headers: {
