@@ -50,7 +50,7 @@ class OauthClients extends Component
             $this->redirect,
         );
 
-        $this->dispatchBrowserEvent('clientCreated');
+        $this->dispatch('clientCreated');
     }
 
     public function deleteClient(Client $clientId): void
@@ -83,7 +83,7 @@ class OauthClients extends Component
 
         $this->editClientId = $editClientId->id;
 
-        $this->dispatchBrowserEvent('editClient');
+        $this->dispatch('editClient');
     }
 
     public function updateClient(Client $editClientId): void
@@ -103,7 +103,7 @@ class OauthClients extends Component
             $this->authorizationError = 'You are not authorized to edit this client.';
         }
 
-        $this->dispatchBrowserEvent('clientUpdated');
+        $this->dispatch('clientUpdated');
 
     }
 }
