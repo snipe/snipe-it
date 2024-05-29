@@ -300,7 +300,7 @@
 
         </div>
 </div>
-@push('js')
+@script
     <script>
 
         {{-- TODO: Maybe change this to the file upload thing that's baked-in to Livewire? --}}
@@ -405,4 +405,4 @@
             });})
 
     </script>
-@endpush
+@endscript
