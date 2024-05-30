@@ -141,10 +141,7 @@
                         @endif
 
                     </div> <!--/.box-body-->
-                    <div class="box-footer">
-                        <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-                    </div>
+                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'checkin' => false])
                 </form>
             </div>
         </div> <!--/.col-md-7-->

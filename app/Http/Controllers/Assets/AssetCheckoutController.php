@@ -10,6 +10,7 @@ use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AssetCheckoutController extends Controller
 {
@@ -35,7 +36,8 @@ class AssetCheckoutController extends Controller
 
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
-                ->with('statusLabel_list', Helper::deployableStatusLabelList());
+                ->with('statusLabel_list', Helper::deployableStatusLabelList())
+                ->with('table_name', 'Assets');
         }
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
@@ -97,11 +99,12 @@ class AssetCheckoutController extends Controller
                     return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
                 }
             }
-            
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
-                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
-            }
 
+                Session::put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
+            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
+                return Helper::getRedirectOption($request, $assetId, 'Assets');
+            }
             // Redirect to the asset management page with error
             return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
         } catch (ModelNotFoundException $e) {
