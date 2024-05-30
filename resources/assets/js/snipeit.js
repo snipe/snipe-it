@@ -644,8 +644,8 @@ document.addEventListener('livewire:init', () => {
         Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value)
     });
 
-    Livewire.hook('commit', function ({succeed}) {
-        succeed(({snapshot, effect}) => {
+    Livewire.hook('request', ({succeed}) => {
+        succeed(() => {
             queueMicrotask(() => {
                 $('.livewire-select2').select2();
             });

@@ -153,6 +153,7 @@
                                                             <div class="col-md-9 col-xs-12" wire:ignore>
                                                                     {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, [
                                                                         'id' => 'import_type',
+                                                                        'class' => 'livewire-select2',
                                                                         'style' => 'min-width: 350px',
                                                                         'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]),
                                                                         'placeholder' => '', //needed so that the form-helper will put an empty option first
@@ -227,7 +228,7 @@
 
                                                                                 {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$field_map[$index],
                                                                                     [
-                                                                                        'class' => 'mappings',
+                                                                                        'class' => 'mappings livewire-select2',
                                                                                         'placeholder' => trans('general.importer.do_not_import'),
                                                                                         'style' => 'min-width: 100%',
                                                                                         'data-livewire-component' => $this->getId()
