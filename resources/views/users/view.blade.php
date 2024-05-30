@@ -167,7 +167,7 @@
                 
                  @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
                     <i class="fas fa-crown fa-2x{{  ($user->isSuperUser()) ? ' text-danger' : ' text-orange'}}"></i>
-                    <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? 'superadmin' : 'admin'}}</div>
+                    <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? strtolower(trans('general.superuser')) : strtolower(trans('general.admin')) }}</div>
                   @endif
 
                 
@@ -309,9 +309,9 @@
                       <div class="col-md-9">
 
                         @if ($user->isSuperUser())
-                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label>&nbsp;
+                          <label class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}"><i class="fas fa-crown" title="{{ trans('general.superuser') }}"></i></label>&nbsp;
                         @elseif ($user->hasAccess('admin'))
-                          <label class="label label-warning"><i class="fas fa-crown" title="admin"></i></label>&nbsp;
+                          <label class="label label-warning" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}"><i class="fas fa-crown" title="{{ trans('general.admin') }}"></i></label>&nbsp;
                         @endif
                          {{ $user->username }}
 

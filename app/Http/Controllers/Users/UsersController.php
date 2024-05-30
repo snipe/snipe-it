@@ -563,7 +563,7 @@ class UsersController extends Controller
                         trans('general.accessories'),
                         trans('general.consumables'),
                         trans('general.groups'),
-                        trans('general.permission_level'),
+                        trans('general.permissions'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
@@ -580,10 +580,11 @@ class UsersController extends Controller
 
 
                         $permissionstring = "";
-                        if(array_key_exists("superuser", json_decode($user->permissions, true))) {
+                        
+                        if($user->isSuperUser()) {
                             $permissionstring = trans('general.superuser');
                         }
-                        elseif(array_key_exists("admin", json_decode($user->permissions, true))) {
+                        elseif($user->hasAccess('admin')) {
                             $permissionstring = trans('general.admin');
                         }
                         else {
