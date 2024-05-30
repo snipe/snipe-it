@@ -2,6 +2,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
 class LoginForm extends Component
 {
@@ -39,13 +40,12 @@ class LoginForm extends Component
         } 
 
         $whatever = $this->validateOnly($fields);
-        //\Log::info(print_r($whatever,true));
 
         $errors = $this->getErrorBag();
 
         $this->can_submit = $this->username !== "" && $this->password !== "" && !$errors->has('username') && !$errors->has('password') ; // wait, what?
         
-        \Log::info("Oy - can we submit yet?!".$this->can_submit);
+        Log::info("Oy - can we submit yet?!".$this->can_submit);
     }
     
     /**

@@ -9,7 +9,7 @@ use App\Http\Traits\ConvertsBase64ToFiles;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Exception\NotReadableException;
-
+use Illuminate\Support\Facades\Log;
 
 class ImageUploadRequest extends Request
 {
@@ -86,12 +86,8 @@ class ImageUploadRequest extends Request
 
         if ($this->offsetGet($form_fieldname) instanceof UploadedFile) {
            $image = $this->offsetGet($form_fieldname);
-           \Log::debug('Image is an instance of UploadedFile');
         } elseif ($this->hasFile($form_fieldname)) {
             $image = $this->file($form_fieldname);
-            \Log::debug('Just use regular upload for '.$form_fieldname);
-        } else {
-            \Log::debug('No image found for form fieldname: '.$form_fieldname);
         }
 
         if (isset($image)) {
@@ -101,8 +97,8 @@ class ImageUploadRequest extends Request
                 $ext = $image->guessExtension();
                 $file_name = $type.'-'.$form_fieldname.'-'.$item->id.'-'.str_random(10).'.'.$ext;
 
-                \Log::info('File name will be: '.$file_name);
-                \Log::debug('File extension is: '.$ext);
+                Log::info('File name will be: '.$file_name);
+                Log::debug('File extension is: '.$ext);
 
                 if (($image->getMimeType() == 'image/vnd.microsoft.icon') || ($image->getMimeType() == 'image/x-icon') || ($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
                     // If the file is an icon, webp or avif, we need to just move it since gd doesn't support resizing
@@ -118,7 +114,7 @@ class ImageUploadRequest extends Request
                     try {
                         Storage::disk('public')->put($path . '/' . $file_name, $cleanSVG);
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
                 } else {
 
@@ -129,7 +125,7 @@ class ImageUploadRequest extends Request
                         })->orientate();
 
                     } catch(NotReadableException $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                         $validator = \Validator::make([], []);
                         $validator->errors()->add($form_fieldname, trans('general.unaccepted_image_type', ['mimetype' => $image->getClientMimeType()]));
 
@@ -146,7 +142,7 @@ class ImageUploadRequest extends Request
                     try {
                          Storage::disk('public')->delete($path.'/'.$item->{$form_fieldname});
                     } catch (\Exception $e) {
-                        \Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
+                        Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
                     }
                 }
 
@@ -156,12 +152,12 @@ class ImageUploadRequest extends Request
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } elseif ($this->input('image_delete') == '1') {
-            \Log::debug('Deleting image');
+            Log::debug('Deleting image');
             try {
                 Storage::disk('public')->delete($path.'/'.$item->{$db_fieldname});
                     $item->{$db_fieldname} = null;
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
 
         }

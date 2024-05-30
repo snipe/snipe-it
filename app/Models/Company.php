@@ -4,12 +4,12 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
-
+use Illuminate\Support\Facades\Log;
 /**
  * Model for Companies.
  *
@@ -152,13 +152,13 @@ final class Company extends SnipeModel
                 }
 
             } catch (\Exception $e) {
-                \Log::warning($e);
+                Log::warning($e);
             }
         }
 
 
         if (Auth::user()) {
-            \Log::warning('Companyable is '.$companyable);
+            Log::warning('Companyable is '.$companyable);
             $current_user_company_id = Auth::user()->company_id;
             $companyable_company_id = $companyable->company_id;
             return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
@@ -262,7 +262,6 @@ final class Company extends SnipeModel
         if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
             return $query;
         } else {
-            \Log::debug('Fire scopeCompanyablesDirectly.');
             return static::scopeCompanyablesDirectly($query, $column, $table_name);
         }
     }
@@ -275,7 +274,6 @@ final class Company extends SnipeModel
     {
         // Get the company ID of the logged in user, or set it to null if there is no company assicoated with the user
         if (Auth::user()) {
-            \Log::debug('Admin company is: '.Auth::user()->company_id);
             $company_id = Auth::user()->company_id;
         } else {
             $company_id = null;
@@ -283,9 +281,6 @@ final class Company extends SnipeModel
 
         // Dynamically get the table name if it's not passed in, based on the model we're querying against
         $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
-         \Log::debug('Model is: '.$query->getModel());
-
-        \Log::debug('Table is: '.$table);
 
         // If the column exists in the table, use it to scope the query
         if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
@@ -307,7 +302,6 @@ final class Company extends SnipeModel
      */
     public static function scopeCompanyableChildren(array $companyable_names, $query)
     {
-        \Log::debug('Company Names in scopeCompanyableChildren: '.print_r($companyable_names, true));
 
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
@@ -315,7 +309,7 @@ final class Company extends SnipeModel
             return $query;
         } else {
             $f = function ($q) {
-                \Log::debug('scopeCompanyablesDirectly firing ');
+                Log::debug('scopeCompanyablesDirectly firing ');
                 static::scopeCompanyablesDirectly($q);
             };
 

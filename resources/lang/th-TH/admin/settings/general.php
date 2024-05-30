@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'ค่าเริ่มต้นข้อกำหนดการใช้งาน',
     'default_language'			=> 'ภาษาเริ่มต้น',
     'default_eula_help_text'	=> 'คุณยังสามารถปรับแต่งข้อตกลงการใช้งานสำหรับกกำหนดให้กับหมวดหมู่ทรัพย์สินได้',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'แสดงชื่อทรัพย์สิน',
     'display_checkout_date'     => 'แสดงวันที่นำออก',
     'display_eol'               => 'ดู EOL ในแบบตาราง',

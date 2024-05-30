@@ -12,11 +12,11 @@ use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\License;
-use Crypt;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Support\Facades\Session;
-use Image;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Helper
 {
@@ -413,7 +413,7 @@ class Helper
 
         if ($index >= $total_colors) {
 
-            \Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
+            Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
             //patch fix for array key overflow (color count starts at 1, array starts at 0)
             $index = $index - $total_colors - 1;
 
@@ -876,12 +876,15 @@ class Helper
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-                    if ($selected_arr) {
+
+                    if (is_array($selected_arr)) {
+
                         if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
                         }
+
                     } else {
                         $permissions_arr[$permission_name] = '0';
                     }
@@ -1013,7 +1016,7 @@ class Helper
 
 
         try {
-            $tmp_date = new \Carbon($date);
+            $tmp_date = new Carbon($date);
 
             if ($type == 'datetime') {
                 $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
@@ -1030,7 +1033,7 @@ class Helper
             return $dt['formatted'];
 
         } catch (\Exception $e) {
-            \Log::warning($e);
+            Log::warning($e);
             return $date.' (Invalid '.$type.' value.)';
         }
 
@@ -1343,7 +1346,7 @@ class Helper
     public static function isDemoMode() {
         if (config('app.lock_passwords') === true) {
             return true;
-            \Log::debug('app locked!');
+            Log::debug('app locked!');
         }
         
         return false;
@@ -1436,7 +1439,7 @@ class Helper
 
         foreach (self::$language_map as $legacy => $new) {
             if ($language_code == $legacy) {
-                \Log::debug('Current language is '.$legacy.', using '.$new.' instead');
+                Log::debug('Current language is '.$legacy.', using '.$new.' instead');
                 return $new;
             }
         }

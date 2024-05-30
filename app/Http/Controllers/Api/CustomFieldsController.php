@@ -179,7 +179,7 @@ class CustomFieldsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v1.8]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($field_id)
     {

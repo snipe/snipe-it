@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
-use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -11,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Image;
-use Redirect;
-use View;
 
 /**
  * This controller handles all actions related to User Profiles for
@@ -72,7 +67,7 @@ class ProfileController extends Controller
 
 
         if ($user->save()) {
-            return redirect()->route('profile')->with('success', 'Account successfully updated');
+            return redirect()->route('profile')->with('success', trans('account.general.profile_updated'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
@@ -87,11 +82,9 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
      */
-    public function api()
+    public function api(): \Illuminate\Contracts\View\View
     {
-
         // Make sure the self.api permission has been granted
         if (!Gate::allows('self.api')) {
             abort(403);
@@ -115,7 +108,7 @@ class ProfileController extends Controller
     /**
      * Users change password form processing page.
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function passwordSave(Request $request)
     {

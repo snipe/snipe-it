@@ -11,6 +11,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LicenseCheckoutController extends Controller
 {
@@ -155,16 +156,16 @@ class LicenseCheckoutController extends Controller
 
     public function bulkCheckout($licenseId) {
 
-        \Log::debug('Checking out '.$licenseId.' via bulk');
+        Log::debug('Checking out '.$licenseId.' via bulk');
         $license = License::findOrFail($licenseId);
         $this->authorize('checkin', $license);
         $avail_count = $license->getAvailSeatsCountAttribute();
 
         $users = User::whereNull('deleted_at')->where('autoassign_licenses', '=', 1)->with('licenses')->get();
-        \Log::debug($avail_count.' will be assigned');
+        Log::debug($avail_count.' will be assigned');
 
         if ($users->count() > $avail_count) {
-            \Log::debug('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
+            Log::debug('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
         }
 
         // If the license is valid, check that there is an available seat
@@ -179,7 +180,7 @@ class LicenseCheckoutController extends Controller
 
             // Check to make sure this user doesn't already have this license checked out to them
             if ($user->licenses->where('id', '=', $licenseId)->count()) {
-                \Log::debug($user->username.' already has this license checked out to them. Skipping... ');
+                Log::debug($user->username.' already has this license checked out to them. Skipping... ');
                 continue;
             }
 
@@ -192,7 +193,7 @@ class LicenseCheckoutController extends Controller
                 $avail_count--;
                 $assigned_count++;
                 $licenseSeat->logCheckout(trans('admin/licenses/general.bulk.checkout_all.log_msg'), $user);
-                \Log::debug('License '.$license->name.' seat '.$licenseSeat->id.' checked out to '.$user->username);
+                Log::debug('License '.$license->name.' seat '.$licenseSeat->id.' checked out to '.$user->username);
             }
 
             if ($avail_count ==  0) {

@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Faahfaahinta galitaanka laguma beddeli karo rakibaaddan.',
     'manager' 				=> 'Maareeyaha',
     'managed_locations'     => 'Goobaha la maamulay',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Magaca',
     'nogroup'               => 'Weli kooxo lama abuurin Si aad mid ugu darto, booqo: ',
     'notes'                 => 'Xusuusin',

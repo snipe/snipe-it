@@ -49,7 +49,7 @@ class AssetCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param AssetCheckoutRequest $request
      * @param int $assetId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
      */
     public function store(AssetCheckoutRequest $request, $assetId)
@@ -64,7 +64,7 @@ class AssetCheckoutController extends Controller
             $this->authorize('checkout', $asset);
             $admin = Auth::user();
 
-            $target = $this->determineCheckoutTarget($asset);
+            $target = $this->determineCheckoutTarget();
 
             $asset = $this->updateAssetLocation($asset, $target);
 

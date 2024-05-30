@@ -18,13 +18,12 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Fideloper\Proxy\TrustProxies::class,
         \App\Http\Middleware\CheckForSetup::class,
         \App\Http\Middleware\CheckForDebug::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\SecurityHeaders::class,
         \App\Http\Middleware\PreventBackHistory::class,
-        \Fruitcake\Cors\HandleCors::class,
+        \Illuminate\Http\Middleware\HandleCors::class,
 
     ];
 

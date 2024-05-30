@@ -6,7 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\Company;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Slack;

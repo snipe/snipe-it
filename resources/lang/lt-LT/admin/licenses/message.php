@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Naudotojo nėra.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Įrangą, kurią ketinate susieti su šia licenzija neegzistuoja.',
     'owner_doesnt_match_asset' => 'Įrangą, kurią ketinate susieti su šia licenzija yra naudojama kažkieno kito nei asmens, kurį pasirinkote meniu.',
     'assoc_users'	 => 'Ši licenzija šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite licenziją ir tik tuomet bandykite vėl ištrinti. ',

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La licencia no existe o no tiene permiso para verla.',
-    'user_does_not_exist' => 'El usuario no existe.',
+    'user_does_not_exist' => 'El usuario no existe o no tiene permiso para verlos.',
     'asset_does_not_exist' 	=> 'El activo que está intentando asociar con esta licencia no existe.',
     'owner_doesnt_match_asset' => 'El activo que está intentando asociar con esta licencia es propiedad de alguien que no sea la persona seleccionada en el desplegable asignado.',
     'assoc_users'	 => 'Esta licencia está actualmente reservada a un usuario y no puede ser eliminada. Por favor, compruebe la licencia en primer lugar y vuelva a intentarlo. ',

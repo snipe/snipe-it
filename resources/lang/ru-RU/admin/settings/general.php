@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Пользовательское соглашение по умолчанию',
     'default_language'			=> 'Язык по умолчанию',
     'default_eula_help_text'	=> 'Вы так же можете привязать собственные пользовательские соглашения к определенным категориям активов.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Отображаемое имя актива',
     'display_checkout_date'     => 'Отображать дату выдачи',
     'display_eol'               => 'Отображать дату истечения срока гарантии в таблице',

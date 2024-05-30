@@ -19,6 +19,23 @@
             </div>
         @endif
 
+        @if ($asset->checkInvalidNextAuditDate())
+            <div class="col-md-12">
+                <div class="callout callout-warning">
+                    <p><strong>{{ trans('general.warning',
+                        [
+                            'warning' => trans('admin/hardware/message.warning_audit_date_mismatch',
+                                    [
+                                        'last_audit_date' => Helper::getFormattedDateObject($asset->last_audit_date, 'date', false),
+                                        'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date', false)
+                                    ]
+                                    )
+                        ]
+                        ) }}</strong></p>
+                </div>
+            </div>
+        @endif
+
         @if ($asset->deleted_at!='')
             <div class="col-md-12">
                 <div class="alert alert-danger">
@@ -51,7 +68,7 @@
                             <i class="far fa-save fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
-                            {!! ($asset->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->licenses->count()).'</badge>' : '' !!}
+                            {!! ($asset->licenses->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->licenses->count()).'</span>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -62,7 +79,7 @@
                             <i class="far fa-hdd fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
-                            {!! ($asset->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->components->count()).'</badge>' : '' !!}
+                            {!! ($asset->components->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->components->count()).'</span>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -73,7 +90,7 @@
                             <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-                            {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</badge>' : '' !!}
+                            {!! ($asset->assignedAssets()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</span>' : '' !!}
 
                           </span>
                         </a>
@@ -96,7 +113,7 @@
                             <i class="fas fa-wrench fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
-                            {!! ($asset->assetmaintenances()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->assetmaintenances()->count()).'</badge>' : '' !!}
+                            {!! ($asset->assetmaintenances()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assetmaintenances()->count()).'</span>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -107,7 +124,7 @@
                             <i class="far fa-file fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.files') }}
-                            {!! ($asset->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->uploads->count()).'</badge>' : '' !!}
+                            {!! ($asset->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->uploads->count()).'</span>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -119,7 +136,7 @@
                           </span>
                         <span class="hidden-xs hidden-sm">
                             {{ trans('general.additional_files') }}
-                            {!! ($asset->model) && ($asset->model->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</badge>' : '' !!}
+                            {!! ($asset->model) && ($asset->model->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</span>' : '' !!}
                           </span>
                     </a>
                     </li>
@@ -237,7 +254,8 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }}
+                                                {!! $asset->checkInvalidNextAuditDate() ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }}
                                                 @if ($audit_log->user)
                                                     (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
                                                 @endif
@@ -254,6 +272,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
+                                                {!! $asset->checkInvalidNextAuditDate() ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
                                                 {{ Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
                                             </div>
                                         </div>
@@ -302,7 +321,7 @@
 
                                                     @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                         <li>
-                                                            <i class="far fa-wrench" aria-hidden="true"></i>
+                                                            <i class="fa-solid fa-wrench" aria-hidden="true"></i>
                                                             <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
                                                                 {{ $asset->present()->dynamicWarrantyUrl() }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
@@ -1125,7 +1144,7 @@
                                             <option value="delete">{{ trans('button.delete')}}</option>
                                             <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
                                         </select>
-                                        <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
+                                        <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
                                     </div>
 
                                     <!-- checked out assets table -->
@@ -1143,6 +1162,7 @@
                                                 data-show-export="true"
                                                 data-show-refresh="true"
                                                 data-sort-order="asc"
+                                                data-bulk-button-id="#bulkAssetEditButton"
                                                 id="assetsListingTable"
                                                 class="table table-striped snipe-table"
                                                 data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"

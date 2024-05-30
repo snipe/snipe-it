@@ -176,7 +176,7 @@ return [
     'last_name'             => 'Επίθετο',
     'license'				=> 'Άδεια Χρήσεως',
     'license_report'        => 'Αναφορά άδειας',
-    'licenses_available'	=> 'διαθέσιμες άδειες',
+    'licenses_available'	=> 'Διαθέσιμες άδειες',
     'licenses'				=> 'Άδειες',
     'list_all'				=> 'Λίστα όλων',
     'loading'				=> 'Φόρτωση... παρακαλώ περιμένετε...',
@@ -202,6 +202,8 @@ return [
     'new_password'          => 'Νέος Κωδικός Πρόσβασης',
     'next'					=> 'Επόμενο',
     'next_audit_date'		=> 'Επόμενη ημερομηνία ελέγχου',
+    'next_audit_date_help'  => 'If you use auditing in your organization, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
+    'audit_images_help'     => 'You can find audit images in the asset\'s history tab.',
     'no_email'              => 'Καμία διεύθυνση ηλεκτρονικού ταχυδρομείου δεν συσχετίζεται με αυτόν το χρήστη',
     'last_audit'		    => 'Τελευταίος Έλεγχος',
     'new'					=> 'νεό!',
@@ -245,6 +247,7 @@ return [
     'select_all'            => 'Επιλογή Όλων',
     'search'				=> 'Αναζήτηση',
     'select_category'       => 'Επιλέξτε μια κατηγορία',
+    'select_datasource' => 'Επιλέξτε ένα Datasource',
     'select_department'     => 'Επιλέξτε ένα Τμήμα',
     'select_depreciation'	=> 'Επιλέξτε τύπο απόσβεσης',
     'select_location'		=> 'Επιλέξτε τοποθεσία',
@@ -294,6 +297,7 @@ return [
     'user'					=> 'Χρήστης',
     'accepted'			    => 'αποδεκτή',
     'declined'			    => 'απορρίφθηκε',
+    'declined_note'         => 'Declined Notes',
     'unassigned'            => 'Ανεκχώρησε',
     'unaccepted_asset_report' => 'Μη αποδεκτά πάγια',
     'users'                 => 'Χρήστες',
@@ -312,6 +316,10 @@ return [
     'token_expired'         => 'Έχει λήξει η συνεδρία σας. Παρακαλώ συνδεθείτε ξανά.',
     'login_enabled'         => 'Ενεργοποίηση Σύνδεσης',
     'audit_due'             => 'Οφειλόμενη για έλεγχο',
+    'audit_due_days'        => 'Στοιχεία που οφείλονται για έλεγχο Εντός :days Ημερήσια Εξόφληση περιουσιακών στοιχείων για έλεγχο Εντός :days',
+    'checkin_due'           => 'Πληρωμή για Checkin',
+    'checkin_overdue'       => 'Εκπρόθεσμο για Checkin',
+    'checkin_due_days'      => 'Τα περιουσιακά στοιχεία που οφείλονται για Checkin Εντός :days Ημερήσια Πάγια Checkin Μέσα σε :days Ημέρες',
     'audit_overdue'         => 'Εκπρόθεσμο για έλεγχο',
     'accept'                => 'Αποδοχή :asset',
     'i_accept'              => 'Αποδέχομαι',
@@ -507,6 +515,9 @@ return [
     'or' => 'ή',
     'url'                   => 'URL',
     'edit_fieldset' => 'Επεξεργασία πεδίων και επιλογών',
+    'permission_denied_superuser_demo' => 'Δεν επιτρέπεται η χορήγηση άδειας. Δεν μπορείτε να ενημερώσετε τις πληροφορίες χρήστη για superadmins στο demo.',
+    'pwd_reset_not_sent' => 'Ο χρήστης δεν είναι ενεργοποιημένος, είναι LDAP συγχρονισμένος ή δεν έχει διεύθυνση ηλεκτρονικού ταχυδρομείου',
+    'error_sending_email' => 'Σφάλμα αποστολής email',
     'bulk' => [
             'delete' =>
                 [
@@ -521,12 +532,12 @@ return [
     'no_requestable' => 'Δεν υπάρχουν απαιτούμενα στοιχεία ενεργητικού ή μοντέλα στοιχείων ενεργητικού.',
 
     'countable' => [
-        'accessories'  => ':count Αξεσουάρ: Μετρήστε Αξεσουάρ',
+        'accessories'  => ':count Αξεσουάρ |:count Αξεσουάρ',
         'assets'  => ':count Ενεργητικό:count Περιουσιακών Στοιχείων',
         'licenses'  => ':count Άδεια Χρήσης:count Άδειες',
-        'license_seats'  => ':count Άδεια Θέση:count Καθίσματα Άδειας',
-        'consumables'  => ':count Αναλώσιμα :count Αναλώσιμα',
-        'components'  => ':count Εξαρτήματα :count',
+        'license_seats'  => ':count Εξαρτήματα |:count  Εξαρτήματα',
+        'consumables'  => ':count Αναλώσιμα |:count Αναλώσιμα',
+        'components'  => ':count Εξαρτήματα |:count  Εξαρτήματα',
     ]
 
 ];

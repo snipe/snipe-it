@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Log;
 
 class AssetCheckinController extends Controller
 {
@@ -56,7 +57,7 @@ class AssetCheckinController extends Controller
      * @param AssetCheckinRequest $request
      * @param int $assetId
      * @param null $backto
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
@@ -93,7 +94,7 @@ class AssetCheckinController extends Controller
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
-            \Log::debug('NEW Location ID: '.$request->get('location_id'));
+            Log::debug('NEW Location ID: '.$request->get('location_id'));
             $asset->location_id = $request->get('location_id');
 
             if ($request->get('update_default_location') == 0){

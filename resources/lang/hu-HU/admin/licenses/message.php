@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'A licenc nem létezik, vagy nincs engedélye a megtekintéséhez.',
-    'user_does_not_exist' => 'Felhasználó nem létezik.',
+    'user_does_not_exist' => 'A felhasználó nem létezik, vagy nincs engedélye a megtekintéséhez.',
     'asset_does_not_exist' 	=> 'A licencel társítani kívánt eszköz nem létezik.',
     'owner_doesnt_match_asset' => 'Az ehhez a licenchez társítani kívánt eszköz tulajdonosa nem más, mint a kiválasztott legördülő menüben kiválasztott személy.',
     'assoc_users'	 => 'Ez a licenc jelenleg ki van adva a felhasználónak, és nem törölhető. Kérjük, először ellenőrizze az engedélyt, majd próbálja meg újra törölni.',

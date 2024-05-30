@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Nid yw\'n bosib newid manylion mewngofnodi ar y system yma.',
     'manager' 				=> 'Rheolwr',
     'managed_locations'     => 'Lleoliadau a Reolir',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Enw',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Nodiadau',
