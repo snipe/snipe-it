@@ -119,8 +119,7 @@ class Importer extends Component
     public function updating($name, $new_import_type)
     {
         if ($name == "activeFile.import_type") {
-            Log::debug("WE ARE CHANGING THE import_type!!!!! TO: " . $new_import_type);
-            Log::debug("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
+
             // go through each header, find a matching field to try and map it to.
             foreach ($this->activeFile->header_row as $i => $header) {
                 // do we have something mapped already?
