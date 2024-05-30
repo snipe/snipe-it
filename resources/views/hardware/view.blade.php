@@ -705,18 +705,6 @@
                                         </div>
                                     @endif
 
-                                    @if ($asset->expected_checkin!='')
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <strong>
-                                                    {{ trans('admin/hardware/form.expected_checkin') }}
-                                                </strong>
-                                            </div>
-                                            <div class="col-md-6">
-                                                {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
-                                            </div>
-                                        </div>
-                                    @endif
 
                                     <div class="row">
                                         <div class="col-md-2">
@@ -804,6 +792,19 @@
                                             </div>
                                         </div>
                                      @endif
+                                     @if ($asset->expected_checkin!='')
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/form.expected_checkin') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
+                                            </div>
+                                        </div>
+                                     @endif
+
                                      @if ($asset->last_checkin!='')
                                             <div class="row">
                                                 <div class="col-md-2">
