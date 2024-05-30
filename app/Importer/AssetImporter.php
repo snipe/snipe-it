@@ -7,8 +7,10 @@ use App\Models\AssetModel;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Events\CheckoutableCheckedIn;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class AssetImporter extends ItemImporter
 {
@@ -19,7 +21,7 @@ class AssetImporter extends ItemImporter
         parent::__construct($filename);
 
         if (!is_null(Statuslabel::first())) {
-            $this->defaultStatusLabelId = Statuslabel::first()->id;
+            $this->defaultStatusLabelId = Statuslabel::deployable()->first()->id;
         }
     }
 
