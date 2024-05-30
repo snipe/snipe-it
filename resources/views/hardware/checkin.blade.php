@@ -101,10 +101,7 @@
                         {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                     </div>
-                    <div class="box-footer">
-                      <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                      <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
-                    </div>
+                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'checkin' => true])
                   </form>
           </div> <!--/.col-md-12-->
         </div> <!--/.box-body-->

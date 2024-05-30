@@ -17,6 +17,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Session;
 
 class Helper
 {
@@ -1463,4 +1464,38 @@ class Helper
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
+
+    static public function getRedirectOption($request, $id, $table, $asset_id = null)
+    {
+
+        $redirect_option = Session::get('redirect_option');
+        $checkout_to_type = Session::get('checkout_to_type');
+
+        //return to index
+        if ($redirect_option == '0') {
+            switch ($table) {
+                case "Assets":
+                    return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        //return to thing being assigned
+        if ($redirect_option == '1') {
+            switch ($table) {
+                case "Assets":
+                    return redirect()->route('hardware.show', $id ? $id : $asset_id)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        //return to thing being assigned to
+        if ($redirect_option == '2') {
+            switch ($checkout_to_type) {
+                case 'user':
+                    return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+                case 'location':
+                    return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+                case 'asset':
+                    return redirect()->route('hardware.show', $request->assigned_asset)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
+    }
 }
