@@ -347,7 +347,7 @@ class SettingsController extends Controller
         $setting->email_domain = $request->input('email_domain');
         $setting->email_format = $request->input('email_format');
         $setting->username_format = $request->input('username_format');
-        $setting->require_accept_signature = $request->input('require_accept_signature');
+        $setting->require_accept_signature = $request->input('require_accept_signature', '0');
         $setting->show_assigned_assets = $request->input('show_assigned_assets', '0');
         if (! config('app.lock_passwords')) {
             $setting->login_note = $request->input('login_note');
@@ -413,7 +413,7 @@ class SettingsController extends Controller
         $setting->version_footer = $request->input('version_footer');
         $setting->footer_text = $request->input('footer_text');
         $setting->skin = $request->input('skin');
-        $setting->allow_user_skin = $request->input('allow_user_skin');
+        $setting->allow_user_skin = $request->input('allow_user_skin', '0');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets = $request->input('logo_print_assets', '0');
 
