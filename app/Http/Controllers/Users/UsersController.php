@@ -563,6 +563,7 @@ class UsersController extends Controller
                         trans('general.accessories'),
                         trans('general.consumables'),
                         trans('general.groups'),
+                        trans('general.permission_level'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
@@ -575,6 +576,18 @@ class UsersController extends Controller
 
                         foreach ($user->groups as $user_group) {
                             $user_groups .= $user_group->name.', ';
+                        }
+
+
+                        $permissionstring = "";
+                        if(array_key_exists("superuser", json_decode($user->permissions, true))) {
+                            $permissionstring = trans('general.superuser');
+                        }
+                        elseif(array_key_exists("admin", json_decode($user->permissions, true))) {
+                            $permissionstring = trans('general.admin');
+                        }
+                        else {
+                            $permissionstring = trans('general.user');
                         }
 
                         // Add a new row with data
@@ -594,6 +607,7 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
+                            $permissionstring,
                             $user->notes,
                             ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,
