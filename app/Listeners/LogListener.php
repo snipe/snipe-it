@@ -17,6 +17,7 @@ use App\Events\ItemAccepted;
 use App\Events\ItemDeclined;
 use App\Events\LicenseCheckedIn;
 use App\Events\LicenseCheckedOut;
+use App\Events\NoteAdded;
 use App\Models\Actionlog;
 use App\Models\User;
 use App\Models\LicenseSeat;
@@ -129,13 +130,14 @@ class LogListener
      * Note is added to action log
      *
      */
-    public function AddedNote(Note $event)
+    public function onNoteAdded(NoteAdded $event)
     {
         $logaction = new Actionlog();
-        $logaction->target_id = $event->item()->id;
-        $logaction->target_type = $event->item()::class; //???
+        $logaction->item_id = $event->itemNoteAddedOn->id;
+        $logaction->item_type = get_class($event->itemNoteAddedOn);
         $logaction->note = $event->note; //this is the received alphanumeric text from the box
-        $logaction->user_id = $event->user->id;
+        $logaction->user_id = $event->noteAddedBy->id;
+        $logaction->action_type = 'note added';
         $logaction->save();
     }
 

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\NoteAdded;
 use App\Http\Controllers\Controller;
-use Auth;
-use DB;
+use App\Models\Asset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class NotesController extends Controller
 {
     public function store(Request $request)
     {
-        dd($request->all());
-        AddedNote($request);
+        //dd($request->all());
+        $item=Asset::findOrFail($request->input("id"));
+        event(new NoteAdded($item, Auth::user(), $request->input("note")));
     }
 }

@@ -19,7 +19,7 @@ class NoteAdded
      *
      * @return void
      */
-    public function ___construct($itemNoteAddedOn, User $noteAddedBy, $note)
+    public function __construct($itemNoteAddedOn, User $noteAddedBy, $note)
     {
         $this->itemNoteAddedOn = $itemNoteAddedOn;
         $this->note = $note;

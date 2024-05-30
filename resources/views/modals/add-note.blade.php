@@ -7,7 +7,9 @@
         </div>
 
         <div class="modal-body">
-            <form action="{{ route('api.notes.store') }}" onsubmit="return true">
+            <form action="{{ route('api.notes.store') }}" onsubmit="return false">
+                <input type="hidden" name="type" value="{{request("type")}}"/>
+                <input type="hidden" name="id" value="{{request("id")}}"/>
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none"></div>
                 {{ Form::label('note', trans('general.add_note'), array('class' => 'col-md-3 control-label')) }}
                 <div class="col-md-8">
