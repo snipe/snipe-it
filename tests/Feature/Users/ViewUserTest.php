@@ -53,7 +53,7 @@ class ViewUserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testUserWithhoutPermissionsCannotSendInventory()
+    public function testUserWithoutPermissionsCannotSendInventory()
     {
         Notification::fake();
 
@@ -81,7 +81,7 @@ class ViewUserTest extends TestCase
         );
     }
 
-    public function testUserWithhoutPermissionsCannotDeleteUser()
+    public function testUserWithoutPermissionsCannotDeleteUser()
     {
 
         $this->settings->enableMultipleFullCompanySupport();
