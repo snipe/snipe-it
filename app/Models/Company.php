@@ -259,7 +259,7 @@ final class Company extends SnipeModel
     public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
     {
         // If not logged in and hitting this, assume we are on the command line and don't scope?'
-        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
+        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::hasUser() && Auth::user()->isSuperUser()) || (! Auth::hasUser())) {
             return $query;
         } else {
             return static::scopeCompanyablesDirectly($query, $column, $table_name);
@@ -267,13 +267,16 @@ final class Company extends SnipeModel
     }
 
     /**
-     * Scoping table queries, determining if a logged in user is part of a company, and only allows
+     * Scoping table queries, determining if a logged-in user is part of a company, and only allows
      * that user to see items associated with that company
+     *
+     * @see https://github.com/laravel/framework/pull/24518 for info on Auth::hasUser()
      */
     private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
     {
-        // Get the company ID of the logged in user, or set it to null if there is no company assicoated with the user
-        if (Auth::user()) {
+
+        // Get the company ID of the logged-in user, or set it to null if there is no company associated with the user
+        if (Auth::hasUser()) {
             $company_id = Auth::user()->company_id;
         } else {
             $company_id = null;
@@ -285,9 +288,8 @@ final class Company extends SnipeModel
         // If the column exists in the table, use it to scope the query
         if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
             return $query->where($table.$column, '=', $company_id);
-        } else {
-            return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id);
         }
+
     }
 
     /**
@@ -305,7 +307,7 @@ final class Company extends SnipeModel
 
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
-        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
+        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::hasUser() && Auth::user()->isSuperUser())) {
             return $query;
         } else {
             $f = function ($q) {
