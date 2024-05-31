@@ -71,7 +71,7 @@ class AssetCheckoutController extends Controller
             if (!$asset->model) {
                 return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
             }
-            
+
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget();

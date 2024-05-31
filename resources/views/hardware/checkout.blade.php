@@ -46,9 +46,10 @@
                                         {{ $asset->model->name }}
                                     @else
                                         <span class="text-danger text-bold">
-                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                              {{ trans('admin/hardware/general.model_invalid')}}
-                            </span>
+                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              {{ trans('admin/hardware/general.model_invalid')}}
+                                        </span>
+
                                         {{ trans('admin/hardware/general.model_invalid_fix')}}
                                         <a href="{{ route('hardware.edit', $asset->id) }}">
                                             <strong>{{ trans('admin/hardware/general.edit') }}</strong>
