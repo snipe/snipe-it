@@ -13,7 +13,6 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -285,10 +284,6 @@ class UsersController extends Controller
             $users = $users->withTrashed();
         }
 
-        // Apply companyable scope
-        $users = Company::scopeCompanyables($users);
-
-
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
         $limit = app('api_limit_value');
@@ -320,8 +315,6 @@ class UsersController extends Controller
                 'users.email',
             ]
             )->where('show_in_list', '=', '1');
-
-        $users = Company::scopeCompanyables($users);
 
         if ($request->filled('search')) {
             $users = $users->where(function ($query) use ($request) {
@@ -417,9 +410,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
-
-        if ($user = Company::scopeCompanyables($user)->find($id)) {
+        if ($user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count')) {
             $this->authorize('view', $user);
             return (new UsersTransformer)->transformUser($user);
         }
@@ -442,15 +433,12 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        $user = User::findOrFail($id);
-        $user = Company::scopeCompanyables($user)->find($id);
+        $user = User::find($id);
         $this->authorize('update', $user);
 
         /**
          * This is a janky hack to prevent people from changing admin demo user data on the public demo.
-         * 
          * The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
-         * 
          *  Thanks, jerks. You are why we can't have nice things. - snipe
          * 
          */ 
@@ -529,8 +517,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
         $this->authorize('delete', $user);
 
         if ($user) {
@@ -564,9 +551,12 @@ class UsersController extends Controller
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
             }
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
+
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+
     }
 
     /**
@@ -582,32 +572,35 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
-        $this->authorize('view', $user);
+        if ($user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id)) {
+            $this->authorize('view', $user);
 
-        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
-
-
-        // Filter on category ID
-        if ($request->filled('category_id')) {
-            $assets = $assets->InCategory($request->input('category_id'));
-        }
+            $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
 
 
-        // Filter on model ID
-        if ($request->filled('model_id')) {
-
-            $model_ids = $request->input('model_id');
-            if (!is_array($model_ids)) {
-                $model_ids = array($model_ids);
+            // Filter on category ID
+            if ($request->filled('category_id')) {
+                $assets = $assets->InCategory($request->input('category_id'));
             }
-            $assets = $assets->InModelList($model_ids);
+
+
+            // Filter on model ID
+            if ($request->filled('model_id')) {
+
+                $model_ids = $request->input('model_id');
+                if (!is_array($model_ids)) {
+                    $model_ids = array($model_ids);
+                }
+                $assets = $assets->InModelList($model_ids);
+            }
+
+            $assets = $assets->get();
+
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
         }
 
-        $assets = $assets->get();
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
 
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
     /**
@@ -622,17 +615,21 @@ class UsersController extends Controller
     public function emailAssetList(Request $request, $id)
     {
         $this->authorize('update', User::class);
-        $user = User::findOrFail($id);
-        $user = Company::scopeCompanyables($user)->find($id);
-        $this->authorize('update', $user);
 
-        if (empty($user->email)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
+        if ($user = User::find($id)) {
+            $this->authorize('update', $user);
+
+            if (empty($user->email)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
+            }
+
+            $user->notify((new CurrentInventory($user)));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success')));
         }
 
-        $user->notify((new CurrentInventory($user)));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
  
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success')));
+
     }
 
     /**
