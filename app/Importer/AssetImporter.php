@@ -97,20 +97,19 @@ class AssetImporter extends ItemImporter
         $this->item['warranty_months'] = intval(trim($this->findCsvMatch($row, 'warranty_months')));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
         $this->item['byod'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'byod'))) == 1) ? '1' : 0;
-        $this->item['last_checkout'] = trim($this->findCsvMatch($row, 'last_checkout'));
         $this->item['last_checkin'] = trim($this->findCsvMatch($row, 'last_checkin'));
+        $this->item['last_checkout'] = trim($this->findCsvMatch($row, 'last_checkout'));
         $this->item['expected_checkin'] = trim($this->findCsvMatch($row, 'expected_checkin'));
         $this->item['last_audit_date'] = trim($this->findCsvMatch($row, 'last_audit_date'));
         $this->item['next_audit_date'] = trim($this->findCsvMatch($row, 'next_audit_date'));
-        $this->item['asset_eol_date'] = trim($this->findCsvMatch($row, 'asset_eol_date'));
-
+        $this->item['asset_eol_date'] = trim($this->findCsvMatch($row, 'next_audit_date'));
         $this->item['asset_tag'] = $asset_tag;
 
         // We need to save the user if it exists so that we can checkout to user later.
         // Sanitizing the item will remove it.
         if (array_key_exists('checkout_target', $this->item)) {
             $target = $this->item['checkout_target'];
-        } 
+        }
 
         $item = $this->sanitizeItemForStoring($asset, $editingAsset);
 
@@ -121,15 +120,14 @@ class AssetImporter extends ItemImporter
             $item['rtd_location_id'] = $this->item['location_id'];
         }
 
+
+        /**
+         * We use this to backdate the checkin action further down
+         */
         $checkin_date = date('Y-m-d H:i:s');
         if ($this->item['last_checkin']!='') {
-            try {
-                $checkin_date = CarbonImmutable::parse($this->item['last_checkin'])->format('Y-m-d H:i:s');
-                $this->item['last_checkout'] = $checkin_date;
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-                $this->log('Unable to parse date: '.$this->item['last_checkout']);
-            }
+            $item['last_checkin'] = $this->parseOrNullDate('last_checkin', 'datetime');
+            $checkout_date = $this->item['last_checkin'];
         }
 
         /**
@@ -137,41 +135,24 @@ class AssetImporter extends ItemImporter
          */
         $checkout_date = date('Y-m-d H:i:s');
         if ($this->item['last_checkout']!='') {
-
-            try {
-                $checkout_date = CarbonImmutable::parse($this->item['last_checkout'])->format('Y-m-d H:i:s');
-                $this->item['last_checkout'] = $checkout_date;
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-                $this->log('Unable to parse date: '.$this->item['last_checkout']);
-            }
+            $item['last_checkout'] = $this->parseOrNullDate('last_checkout', 'datetime');
+            $checkout_date = $this->item['last_checkout'];
         }
 
         if ($this->item['expected_checkin']!='') {
-            try {
-                $this->item['expected_checkin'] = CarbonImmutable::parse($this->item['expected_checkin'])->format('Y-m-d');
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-                $this->log('Unable to parse date: '.$this->item['expected_checkin']);
-            }
+            $item['expected_checkin'] = $this->parseOrNullDate('expected_checkin');
         }
 
         if ($this->item['last_audit_date']!='') {
-            try {
-                $this->item['last_audit_date'] = CarbonImmutable::parse($this->item['last_audit_date'])->format('Y-m-d');
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-                $this->log('Unable to parse date: '.$this->item['last_audit_date']);
-            }
+            $item['last_audit_date'] = $this->parseOrNullDate('last_audit_date');
         }
 
         if ($this->item['next_audit_date']!='') {
-            try {
-                $this->item['next_audit_date'] = CarbonImmutable::parse($this->item['next_audit_date'])->format('Y-m-d');
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-                $this->log('Unable to parse date: '.$this->item['next_audit_date']);
-            }
+            $item['next_audit_date'] = $this->parseOrNullDate('next_audit_date');
+        }
+
+        if ($this->item['asset_eol_date']!='') {
+            $item['asset_eol_date'] = $this->parseOrNullDate('asset_eol_date');
         }
 
 
@@ -202,16 +183,16 @@ class AssetImporter extends ItemImporter
                 if (!is_null($asset->assigned_to)){
                     if ($asset->assigned_to != $target->id) {
                         event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), Auth::user(), 'Checkin from CSV Importer', $checkin_date));
-                        $this->log('Checking this asset in');
                     }
                 }
 
                 $asset->fresh()->checkOut($target, $this->user_id, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
-                $this->log('Checking this asset out');
             }
 
             return;
         }
         $this->logError($asset, 'Asset "'.$this->item['name'].'"');
     }
+
+
 }

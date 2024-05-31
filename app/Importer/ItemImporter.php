@@ -79,17 +79,17 @@ class ItemImporter extends Importer
             $this->item['purchase_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'purchase_date')));
         }
 
-        $this->item['asset_eol_date'] = null;
-        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
-            $csvMatch = $this->findCsvMatch($row, 'asset_eol_date');
-            \Log::warning('EOL Date for $csvMatch is '.$csvMatch);
-            try {
-                $this->item['asset_eol_date'] = CarbonImmutable::parse($csvMatch)->format('Y-m-d');
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-                $this->log('Unable to parse date: '.$csvMatch);
-            }
-        }
+//        $this->item['asset_eol_date'] = null;
+//        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
+//            $csvMatch = $this->findCsvMatch($row, 'asset_eol_date');
+//            \Log::warning('EOL Date for $csvMatch is '.$csvMatch);
+//            try {
+//                $this->item['asset_eol_date'] = CarbonImmutable::parse($csvMatch)->format('Y-m-d');
+//            } catch (\Exception $e) {
+//                Log::info($e->getMessage());
+//                $this->log('Unable to parse date: '.$csvMatch);
+//            }
+//        }
 
 
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
@@ -500,4 +500,5 @@ class ItemImporter extends Importer
 
         return null;
     }
+
 }
