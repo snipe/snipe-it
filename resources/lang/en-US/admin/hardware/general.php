@@ -16,7 +16,7 @@ return [
     'edit'  					=> 'Edit Asset',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'model_invalid'             => 'This model for this asset is invalid.',
-    'model_invalid_fix'         => 'The asset must be updated use a valid asset model this before attempting to check it in or out, or to audit it.',
+    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'Requestable',
     'requested'				    => 'Requested',
     'not_requestable'           => 'Not Requestable',
