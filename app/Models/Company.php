@@ -5,11 +5,11 @@ namespace App\Models;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 /**
  * Model for Companies.
  *
@@ -147,7 +147,7 @@ final class Company extends SnipeModel
                 // This is primary for the gate:allows-check in location->isDeletable()
                 // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
                 // because this function is called by SnipePermissionsPolicy->before()
-                if (!$companyable instanceof Company && !\Schema::hasColumn($company_table, 'company_id')) {
+                if (!$companyable instanceof Company && !Schema::hasColumn($company_table, 'company_id')) {
                     return true;
                 }
 
@@ -282,11 +282,13 @@ final class Company extends SnipeModel
             $company_id = null;
         }
 
-        // Dynamically get the table name if it's not passed in, based on the model we're querying against
-        $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
 
         // If the column exists in the table, use it to scope the query
-        if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
+        if ((($query) && ($query->getModel()) && (Schema::hasColumn($query->getModel()->getTable(), $column)))) {
+
+            // Dynamically get the table name if it's not passed in, based on the model we're querying against
+            $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
+
             return $query->where($table.$column, '=', $company_id);
         }
 
