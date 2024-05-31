@@ -28,6 +28,16 @@ class AssetCheckinTest extends TestCase
     {
         $this->actingAs(User::factory()->checkinAssets()->create())
             ->post(route('hardware.checkin.store', ['assetId' => Asset::factory()->create()->id]))
+            ->assertStatus(302)
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.index'));
+    }
+
+    public function testCannotStoreAssetCheckinThatIsNotCheckedOut()
+    {
+        $this->actingAs(User::factory()->checkinAssets()->create())
+            ->get(route('hardware.checkin.store', ['assetId' => Asset::factory()->create()->id]))
+            ->assertStatus(302)
             ->assertSessionHas('error')
             ->assertRedirect(route('hardware.index'));
     }
@@ -158,5 +168,32 @@ class AssetCheckinTest extends TestCase
         Event::assertDispatched(function (CheckoutableCheckedIn $event) {
             return $event->action_date === '2023-01-02' && $event->note === 'hello';
         }, 1);
+    }
+
+    public function testAssetCheckinPageIsRedirectedIfModelIsInvalid()
+    {
+
+        $asset = Asset::factory()->assignedToUser()->create();
+        $asset->model_id = 0;
+        $asset->forceSave();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->get(route('hardware.checkin.create', ['assetId' => $asset->id]))
+            ->assertStatus(302)
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.show',['hardware' => $asset->id]));
+    }
+
+    public function testAssetCheckinPagePostIsRedirectedIfModelIsInvalid()
+    {
+        $asset = Asset::factory()->assignedToUser()->create();
+        $asset->model_id = 0;
+        $asset->forceSave();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->post(route('hardware.checkin.store', ['assetId' => $asset->id]))
+            ->assertStatus(302)
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
     }
 }
