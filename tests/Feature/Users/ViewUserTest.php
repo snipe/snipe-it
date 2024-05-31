@@ -10,7 +10,7 @@ use App\Notifications\CurrentInventory;
 
 class ViewUserTest extends TestCase
 {
-    public function testUserWithoutPermissionsCannotViewUserDetailPage()
+    public function testUserWithoutCompanyPermissionsCannotViewUserDetailPage()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -29,7 +29,7 @@ class ViewUserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testUserWithoutPermissionsCannotViewPrintAllInventoryPage()
+    public function testUserWithoutCompanyPermissionsCannotViewPrintAllInventoryPage()
     {
         $this->settings->enableMultipleFullCompanySupport();
         //$this->withoutExceptionHandling();
@@ -53,7 +53,7 @@ class ViewUserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testUserWithoutPermissionsCannotSendInventory()
+    public function testUserWithoutCompanyPermissionsCannotSendInventory()
     {
         Notification::fake();
 
@@ -81,7 +81,7 @@ class ViewUserTest extends TestCase
         );
     }
 
-    public function testUserWithoutPermissionsCannotDeleteUser()
+    public function testUserWithoutCompanyPermissionsCannotDeleteUser()
     {
 
         $this->settings->enableMultipleFullCompanySupport();
