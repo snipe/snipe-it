@@ -34,11 +34,16 @@ class AssetCheckoutController extends Controller
 
         $this->authorize('checkout', $asset);
 
+        if (!$asset->model) {
+            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+        }
+
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
                 ->with('statusLabel_list', Helper::deployableStatusLabelList())
                 ->with('table_name', 'Assets');
         }
+
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
     }
@@ -62,6 +67,11 @@ class AssetCheckoutController extends Controller
                 return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
             }
             $this->authorize('checkout', $asset);
+
+            if (!$asset->model) {
+                return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+            }
+            
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget();
