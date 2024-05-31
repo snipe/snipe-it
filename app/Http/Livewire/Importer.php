@@ -8,7 +8,6 @@ use Livewire\Component;
 use App\Models\Import;
 use Illuminate\Support\Facades\Storage;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
@@ -544,7 +543,6 @@ class Importer extends Component
     {
         // TODO: why don't we just do File::find($id)? This seems dumb.
         foreach($this->files as $file) {
-            Log::debug("File id is: ".$file->id);
             if ($id == $file->id) {
                 if (Storage::delete('private_uploads/imports/'.$file->file_path)) {
                     $file->delete();
