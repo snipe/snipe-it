@@ -983,6 +983,49 @@ class Asset extends Depreciable
         $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
     }
 
+    public function getLastCheckoutAttribute($value)
+    {
+        return $this->attributes['last_checkout'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function setLastCheckoutAttribute($value)
+    {
+        $this->attributes['last_checkout'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function getLastCheckinAttribute($value)
+    {
+        return $this->attributes['last_checkin'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function setLastCheckinAttribute($value)
+    {
+        $this->attributes['last_checkin'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function getLastAuditDateAttribute($value)
+    {
+        return $this->attributes['last_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function setLastAuditDateAttribute($value)
+    {
+        $this->attributes['last_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function getAssetEolDateAttribute($value)
+    {
+        return $this->attributes['asset_eol_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+    public function setAssetEolDateAttribute($value)
+    {
+        $this->attributes['asset_eol_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+
+
+
     /**
      * This sets the requestable to a boolean 0 or 1. This accounts for forms or API calls that
      * explicitly pass the requestable field but it has a null or empty value.
