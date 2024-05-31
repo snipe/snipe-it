@@ -626,20 +626,21 @@ class UsersController extends Controller
     public function printInventory($id)
     {
         $this->authorize('view', User::class);
-        $show_user = Company::scopeCompanyables(User::where('id', $id)->withTrashed()->first());
+        $get_user = User::find($id)->withTrashed();
+        $user = Company::scopeCompanyables($get_user)->find($id);
 
         // Make sure they can view this particular user
-        $this->authorize('view', $show_user);
+        $this->authorize('view', $user);
 
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-        $accessories = $show_user->accessories()->get();
-        $consumables = $show_user->consumables()->get();
+        $accessories = $user->accessories()->get();
+        $consumables = $user->consumables()->get();
 
         return view('users/print')->with('assets', $assets)
-            ->with('licenses', $show_user->licenses()->get())
+            ->with('licenses', $user->licenses()->get())
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
-            ->with('show_user', $show_user)
+            ->with('show_user', $user)
             ->with('settings', Setting::getSettings());
     }
 
@@ -654,8 +655,8 @@ class UsersController extends Controller
     public function emailAssetList($id)
     {
         $this->authorize('view', User::class);
-
-        $user = Company::scopeCompanyables(User::find($id));
+        $get_user = User::find($id);
+        $user = Company::scopeCompanyables($get_user)->find($id);
 
         // Make sure they can view this particular user
         $this->authorize('view', $user);
@@ -683,7 +684,11 @@ class UsersController extends Controller
      */
     public function sendPasswordReset($id)
     {
-        if (($user = Company::scopeCompanyables(User::find($id))) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
+        $this->authorize('view', User::class);
+        $get_user = User::find($id);
+        $user = Company::scopeCompanyables($get_user)->find($id);
+
+        if (($user) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
             $credentials = ['email' => trim($user->email)];
 
             try {
