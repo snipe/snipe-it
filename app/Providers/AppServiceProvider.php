@@ -20,6 +20,7 @@ use App\Observers\SettingObserver;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This service provider handles setting the observers on models
@@ -42,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
             if (strpos(env('APP_URL'), 'https') === 0) {
                 $url->forceScheme('https');
             } else {
-                \Log::debug("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
+                Log::debug("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
             }
         }
 
@@ -52,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
             if ($url_parts && array_key_exists('scheme', $url_parts) && array_key_exists('host', $url_parts)) { // check for the *required* parts of a bare-minimum URL
                 \URL::forceRootUrl(config('app.url'));
             } else {
-                \Log::error("Your APP_URL in your .env is misconfigured - it is: ".config('app.url').". Many things will work strangely unless you fix it.");
+                Log::error("Your APP_URL in your .env is misconfigured - it is: ".config('app.url').". Many things will work strangely unless you fix it.");
             }
         }
 

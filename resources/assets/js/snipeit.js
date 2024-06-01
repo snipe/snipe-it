@@ -4,6 +4,8 @@
 // window.jQuery = jQuery
 // window.$ = jQuery
 
+require('./bootstrap');
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object

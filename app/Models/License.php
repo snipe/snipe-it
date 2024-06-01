@@ -6,7 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -689,7 +689,7 @@ class License extends Depreciable
 
         return self::whereNotNull('expiration_date')
             ->whereNull('deleted_at')
-            ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
+            ->whereRaw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) ')
             ->where('expiration_date', '>', date('Y-m-d'))
             ->orderBy('expiration_date', 'ASC')
             ->get();

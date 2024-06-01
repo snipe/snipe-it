@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserNotFoundException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Actionlog;
@@ -14,15 +13,13 @@ use App\Models\Group;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Input;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use View;
 use App\Notifications\CurrentInventory;
 
 /**
@@ -152,7 +149,7 @@ class UsersController extends Controller
                 $user->notify(new WelcomeNotification($data));
             }
 
-            return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
+            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
@@ -349,31 +346,33 @@ class UsersController extends Controller
             if ($user->id === Auth::id()) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'We would feel really bad if you deleted yourself, please reconsider.');
+                    ->with('error', trans('admin/users/message.error.cannot_delete_yourself'));
             }
 
-            if (($user->assets()) && (($assetsCount = $user->assets()->count()) > 0)) {
+            if (($user->assets()) && ($user->assets()->count() > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$assetsCount.' assets associated with them.');
+                    ->with('error', trans_choice('admin/users/message.error.delete_has_assets_var', $user->assets()->count(), ['count'=> $user->assets()->count()]));
             }
 
-            if (($user->licenses()) && (($licensesCount = $user->licenses()->count())) > 0) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$licensesCount.' licenses associated with them.');
+            if (($user->licenses()) && ($user->licenses()->count() > 0)) {
+                return redirect()->route('users.index')->with('error', trans_choice('admin/users/message.error.delete_has_licenses_var', $user->licenses()->count(), ['count'=> $user->licenses()->count()]));
             }
 
-            if (($user->accessories()) && (($accessoriesCount = $user->accessories()->count()) > 0)) {
+            if (($user->accessories()) && ($user->accessories()->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$accessoriesCount.' accessories associated with them.');
+                return redirect()->route('users.index')->with('error', trans_choice('admin/users/message.error.delete_has_accessories_var', $user->accessories()->count(), ['count'=> $user->accessories()->count()]));
             }
 
-            if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
+            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$managedLocationsCount.' locations that they manage.');
+                    ->with('error', trans_choice('admin/users/message.error.delete_has_locations_var', $user->managedLocations()->count(), ['count'=> $user->managedLocations()->count()]));
+            }
+
+            if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
+                return redirect()->route('users.index')
+                    ->with('error', trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()]));
             }
 
             // Delete the user
@@ -566,6 +565,7 @@ class UsersController extends Controller
                         trans('general.accessories'),
                         trans('general.consumables'),
                         trans('general.groups'),
+                        trans('general.permissions'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
@@ -578,6 +578,19 @@ class UsersController extends Controller
 
                         foreach ($user->groups as $user_group) {
                             $user_groups .= $user_group->name.', ';
+                        }
+
+
+                        $permissionstring = "";
+                        
+                        if($user->isSuperUser()) {
+                            $permissionstring = trans('general.superuser');
+                        }
+                        elseif($user->hasAccess('admin')) {
+                            $permissionstring = trans('general.admin');
+                        }
+                        else {
+                            $permissionstring = trans('general.user');
                         }
 
                         // Add a new row with data
@@ -597,6 +610,7 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
+                            $permissionstring,
                             $user->notes,
                             ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,

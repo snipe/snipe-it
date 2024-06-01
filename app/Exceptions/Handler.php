@@ -7,7 +7,7 @@ use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 use ArieTimmerman\Laravel\SCIMServer\Exceptions\SCIMException;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 use JsonException;
 use Carbon\Exceptions\InvalidFormatException;
@@ -44,8 +44,8 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         if ($this->shouldReport($exception)) {
-            if (class_exists(\Log::class)) {
-                \Log::error($exception);
+            if (class_exists(Log::class)) {
+                Log::error($exception);
             }
             return parent::report($exception);
         }

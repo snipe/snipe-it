@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
+use Illuminate\Support\Facades\Log;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -57,7 +58,7 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param ImageUploadRequest $request
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
@@ -150,7 +151,7 @@ class AccessoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param ImageUploadRequest $request
      * @param  int $accessoryId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(ImageUploadRequest $request, $accessoryId = null)
@@ -204,7 +205,7 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $accessoryId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($accessoryId)
@@ -224,7 +225,7 @@ class AccessoriesController extends Controller
             try {
                 Storage::disk('public')->delete('accessories'.'/'.$accessory->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 

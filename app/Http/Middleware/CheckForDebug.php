@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class CheckForDebug

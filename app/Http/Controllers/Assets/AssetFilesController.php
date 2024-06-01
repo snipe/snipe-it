@@ -17,7 +17,7 @@ class AssetFilesController extends Controller
      *
      * @param UploadFileRequest $request
      * @param int $assetId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      *@since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]

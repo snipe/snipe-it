@@ -9,7 +9,7 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LicenseSeatsController extends Controller

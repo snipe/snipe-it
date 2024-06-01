@@ -8,7 +8,7 @@ use App\Http\Transformers\LabelsTransformer;
 use App\Models\Labels\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\ItemNotFoundException;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LabelsController extends Controller
 {

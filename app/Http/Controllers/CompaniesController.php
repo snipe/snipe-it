@@ -6,6 +6,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to Companies for
@@ -154,7 +155,7 @@ final class CompaniesController extends Controller
             try {
                 Storage::disk('public')->delete('companies'.'/'.$company->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 

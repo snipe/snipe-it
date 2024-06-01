@@ -5,13 +5,13 @@ namespace App\Http\Middleware;
 use App\Models\Setting;
 use Closure;
 use \App\Helpers\Helper;
-
+use Illuminate\Support\Facades\Log;
 class CheckLocale
 {
     private function warn_legacy_locale($language, $source)
     {
         if ($language != Helper::mapLegacyLocale($language)) {
-            \Log::warning("$source $language and should be updated to be ".Helper::mapLegacyLocale($language));
+            Log::warning("$source $language and should be updated to be ".Helper::mapLegacyLocale($language));
         }
     }
     /**

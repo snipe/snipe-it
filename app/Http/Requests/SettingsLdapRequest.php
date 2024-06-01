@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class SettingsLdapRequest extends Request
 {

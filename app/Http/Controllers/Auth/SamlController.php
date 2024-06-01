@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Services\Saml;
 use Illuminate\Http\Request;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller provides the endpoint for SAML communication and metadata.
@@ -51,7 +51,7 @@ class SamlController extends Controller
         $metadata = $this->saml->getSPMetadata();
 
         if (empty($metadata)) {
-            \Log::debug('SAML metadata is empty - return a 403');
+            Log::debug('SAML metadata is empty - return a 403');
             return response()->view('errors.403', [], 403);
         }
 
@@ -71,7 +71,7 @@ class SamlController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
     {
@@ -93,7 +93,7 @@ class SamlController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function acs(Request $request)
     {
@@ -126,7 +126,7 @@ class SamlController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function sls(Request $request)
     {

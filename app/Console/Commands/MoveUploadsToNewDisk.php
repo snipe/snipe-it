@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class MoveUploadsToNewDisk extends Command
 {
@@ -74,7 +75,7 @@ class MoveUploadsToNewDisk extends Command
                     $new_url = Storage::disk('public')->url('uploads/'.$public_type.'/'.$filename, $filename);
                     $this->info($type_count.'. PUBLIC: '.$filename.' was copied to '.$new_url);
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                     $this->error($e);
                 }
             }
@@ -116,7 +117,7 @@ class MoveUploadsToNewDisk extends Command
                         $new_url = Storage::url($private_type . '/' . $filename, $filename);
                         $this->info($type_count . '. PRIVATE: ' . $filename . ' was copied to ' . $new_url);
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                         $this->error($e);
                     }
                 }
@@ -140,7 +141,7 @@ class MoveUploadsToNewDisk extends Command
                                 unlink($filename);
                                 $public_delete_count++;
                             } catch (\Exception $e) {
-                                \Log::debug($e);
+                                Log::debug($e);
                                 $this->error($e);
                             }
                         }
@@ -153,7 +154,7 @@ class MoveUploadsToNewDisk extends Command
                                 unlink($filename);
                                 $private_delete_count++;
                             } catch (\Exception $e) {
-                                \Log::debug($e);
+                                Log::debug($e);
                                 $this->error($e);
                             }
                         }

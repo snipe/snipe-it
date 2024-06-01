@@ -49,89 +49,72 @@ mix
 mix
   .js(
     [
-      "./resources/assets/js/vue.js", // require()s vue, and require()s bootstrap.js
-      "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
+      "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS - require()s bootstrap.js
       "./resources/assets/js/snipeit_modals.js",
     ],
     "./public/js/build/app.js" //because of compiling - this does not work very well :(
   )
-  .vue();
 
 // Convert the skins to CSS
 mix.less(
   "./resources/assets/less/skins/skin-blue.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-blue.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-red.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-red.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-contrast.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-contrast.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-green.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-green.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-green-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-green-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-black.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-black.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-black-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-black-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-red-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-red-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-purple.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-purple.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-purple-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-purple-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-yellow.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-yellow.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-yellow-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-yellow-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-blue-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-blue-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-orange-dark.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-orange-light.css"
 );
 mix.less(
   "./resources/assets/less/skins/skin-orange.less",
   "css/dist/skins",
-  "./public/css/dist/skins/skin-orange.css"
 );
 
 /**
@@ -168,7 +151,7 @@ mix.combine(
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
     "./resources/assets/js/signature_pad.js",
-    "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js", //problem?
+    "./node_modules/jquery-validation/dist/jquery.validate.js",
     "./node_modules/list.js/dist/list.js",
     "./node_modules/clipboard/dist/clipboard.js",
   ],

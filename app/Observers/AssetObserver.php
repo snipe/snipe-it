@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AssetObserver

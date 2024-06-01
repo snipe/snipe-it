@@ -10,6 +10,7 @@ use App\Models\Accessory;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Accessory\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class AccessoriesFilesController extends Controller
 {
@@ -85,7 +86,7 @@ class AccessoriesFilesController extends Controller
                 try {
                     Storage::delete('accessories/'.$log->filename);
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                 }
             }
 
@@ -112,7 +113,7 @@ class AccessoriesFilesController extends Controller
     public function show($accessoryId = null, $fileId = null, $download = true)
     {
 
-        \Log::debug('Private filesystem is: '.config('filesystems.default'));
+        Log::debug('Private filesystem is: '.config('filesystems.default'));
         $accessory = Accessory::find($accessoryId);
 
 
@@ -129,8 +130,8 @@ class AccessoriesFilesController extends Controller
             $file = 'private_uploads/accessories/'.$log->filename;
 
             if (Storage::missing($file)) {
-                \Log::debug('FILE DOES NOT EXISTS for '.$file);
-                \Log::debug('URL should be '.Storage::url($file));
+                Log::debug('FILE DOES NOT EXISTS for '.$file);
+                Log::debug('URL should be '.Storage::url($file));
 
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');

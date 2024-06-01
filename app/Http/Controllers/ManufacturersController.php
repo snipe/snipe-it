@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Redirect;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to Manufacturers for
@@ -174,7 +175,7 @@ class ManufacturersController extends Controller
             try {
                 Storage::disk('public')->delete('manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
-                \Log::info($e);
+                Log::info($e);
             }
         }
 
@@ -219,7 +220,7 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.1.15]
      * @param int $manufacturers_id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function restore($id)

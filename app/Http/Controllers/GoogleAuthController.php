@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
 use App\Models\Setting;
-
+use Illuminate\Support\Facades\Log;
 
 class GoogleAuthController extends Controller
 {
@@ -34,9 +34,9 @@ class GoogleAuthController extends Controller
     {
         try {
             $socialUser = Socialite::driver('google')->user();
-            \Log::debug('Google user found in Google Workspace');
+            Log::debug('Google user found in Google Workspace');
         } catch (InvalidStateException $exception) {
-            \Log::debug('Google user NOT found in Google Workspace');
+            Log::debug('Google user NOT found in Google Workspace');
             return redirect()->route('login')
                 ->withErrors(
                     [
@@ -52,7 +52,7 @@ class GoogleAuthController extends Controller
 
 
         if ($user) {
-            \Log::debug('Google user '.$socialUser->getEmail().' found in Snipe-IT');
+            Log::debug('Google user '.$socialUser->getEmail().' found in Snipe-IT');
             $user->update([
                 'avatar'   => $socialUser->avatar,
             ]);
@@ -61,7 +61,7 @@ class GoogleAuthController extends Controller
             return redirect()->route('home');
         }
 
-        \Log::debug('Google user '.$socialUser->getEmail().' NOT found in Snipe-IT');
+        Log::debug('Google user '.$socialUser->getEmail().' NOT found in Snipe-IT');
         return redirect()->route('login')
             ->withErrors(
                 [

@@ -189,7 +189,7 @@
 
             <!-- User fields -->
 
-              <h2>{{ trans('general.checked_out_to') }} {{ trans('general.fields') }}:</h2>
+              <h2>{{ trans('general.checked_out_to_fields') }}: </h2>
 
               <label class="form-control">
                 {{ Form::checkbox('assigned_to', '1', '1') }}

@@ -236,4 +236,35 @@ class AssetCheckoutTest extends TestCase
 
         $this->assertTrue(Carbon::parse($asset->last_checkout)->diffInSeconds(now()) < 2);
     }
+
+    public function testAssetCheckoutPageIsRedirectedIfModelIsInvalid()
+    {
+
+        $asset = Asset::factory()->create();
+        $asset->model_id = 0;
+        $asset->forceSave();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->get(route('hardware.checkout.create', ['assetId' => $asset->id]))
+            ->assertStatus(302)
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.show',['hardware' => $asset->id]));
+    }
+
+    public function testAssetCheckoutPagePostIsRedirectedIfModelIsInvalid()
+    {
+        $asset = Asset::factory()->create();
+        $asset->model_id = 0;
+        $asset->forceSave();
+        $user = User::factory()->create();
+        
+        $this->actingAs(User::factory()->admin()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+            ])
+            ->assertStatus(302)
+            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+    }
 }

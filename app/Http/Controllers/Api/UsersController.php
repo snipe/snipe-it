@@ -17,11 +17,11 @@ use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -78,6 +78,10 @@ class UsersController extends Controller
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
+
+        if ($request->filled('search') != '') {
+            $users = $users->TextSearch($request->input('search'));
+        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -199,8 +203,14 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
-        if ($request->filled('search')) {
-            $users = $users->TextSearch($request->input('search'));
+        if ($request->filled('location_id') != '') {
+            $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
+         }
+
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -252,7 +262,7 @@ class UsersController extends Controller
                         'licenses_count',
                         'consumables_count',
                         'accessories_count',
-                        'manages_user_count',
+                        'manages_users_count',
                         'manages_locations_count',
                         'phone',
                         'address',
@@ -272,16 +282,12 @@ class UsersController extends Controller
                         'website',
                     ];
 
-                $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
+                $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
                 $users = $users->orderBy($sort, $order);
                 break;
         }
 
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
+
 
         // Apply companyable scope
         $users = Company::scopeCompanyables($users);
@@ -533,22 +539,29 @@ class UsersController extends Controller
 
         if ($user) {
 
-            $this->authorize('delete', $user);
-            
+            if ($user->id === Auth::id()) {
+                // Redirect to the user management page
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.cannot_delete_yourself')));
+            }
+
             if (($user->assets) && ($user->assets->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_assets_var', $user->assets()->count(), ['count'=> $user->assets()->count()])));
             }
 
             if (($user->licenses) && ($user->licenses->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_licenses_var', $user->licenses()->count(), ['count'=> $user->licenses()->count()])));
             }
 
             if (($user->accessories) && ($user->accessories->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_accessories_var', $user->accessories()->count(), ['count'=> $user->accessories()->count()])));
             }
 
             if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_locations_var', $user->managedLocations()->count(), ['count'=> $user->managedLocations()->count()])));
+            }
+
+            if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()])));
             }
 
             if ($user->delete()) {
@@ -558,7 +571,7 @@ class UsersController extends Controller
                     try {
                         Storage::disk('public')->delete('avatars/' . $user->avatar);
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
                 }
 

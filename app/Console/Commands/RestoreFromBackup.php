@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use ZipArchive;
+use Illuminate\Support\Facades\Log;
 
 class SQLStreamer {
     private $input;
@@ -125,7 +126,7 @@ class SQLStreamer {
         while (($buffer = fgets($this->input, SQLStreamer::$buffer_size)) !== false) {
             $bytes_read += strlen($buffer);
             if ($this->reading_beginning_of_line) {
-                // \Log::debug("Buffer is: '$buffer'");
+                // Log::debug("Buffer is: '$buffer'");
                 $cleaned_buffer = $this->parse_sql($buffer);
                 if ($this->output) {
                     $bytes_written = fwrite($this->output, $cleaned_buffer);
@@ -191,7 +192,7 @@ class RestoreFromBackup extends Command
     {
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
-            \Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
+            Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
             chdir(base_path()); // TODO - is this *safe* to change on a running script?!
         }
         //
@@ -297,7 +298,7 @@ class RestoreFromBackup extends Command
                 continue;
             }
             if (@pathinfo($raw_path, PATHINFO_EXTENSION) == 'sql') {
-                \Log::debug("Found a sql file!");
+                Log::debug("Found a sql file!");
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
                 continue;
@@ -413,7 +414,7 @@ class RestoreFromBackup extends Command
                 $bytes_read = 0;
                 while (($buffer = fgets($sql_contents, SQLStreamer::$buffer_size)) !== false) {
                     $bytes_read += strlen($buffer);
-                    // \Log::debug("Buffer is: '$buffer'");
+                    // Log::debug("Buffer is: '$buffer'");
                     $bytes_written = fwrite($pipes[0], $buffer);
 
                     if ($bytes_written === false) {
@@ -425,13 +426,13 @@ class RestoreFromBackup extends Command
                 $bytes_read = $sql_importer->line_aware_piping();
             }
         } catch (\Exception $e) {
-            \Log::error("Error during restore!!!! ".$e->getMessage());
+            Log::error("Error during restore!!!! ".$e->getMessage());
             // FIXME - put these back and/or put them in the right places?!
             $err_out = fgets($pipes[1]);
             $err_err = fgets($pipes[2]);
-            \Log::error("Error OUTPUT: ".$err_out);
+            Log::error("Error OUTPUT: ".$err_out);
             $this->info($err_out);
-            \Log::error("Error ERROR : ".$err_err);
+            Log::error("Error ERROR : ".$err_err);
             $this->error($err_err);
             throw $e;
         }

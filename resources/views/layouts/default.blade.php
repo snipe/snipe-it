@@ -738,7 +738,11 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             {{ trans('general.activity_report') }}
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                                            {{ trans('general.custom_report') }}
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
                                             {{ trans('general.audit_report') }}</a>
@@ -766,11 +770,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                     <li>
                                         <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
                                             {{ trans('general.accessory_report') }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                                            {{ trans('general.custom_report') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -972,13 +971,25 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                 clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
-            // ignore: 'input[type=hidden]' is required here to validate the select2 lists
-            $.validate({
-                form: '#create-form',
-                modules: 'date, toggleDisabled',
-                disabledFormFilter: '#create-form',
-                showErrorDialogs: true,
-                ignore: 'input[type=hidden]'
+            // Reference: https://jqueryvalidation.org/validate/
+            $('#create-form').validate({
+                ignore: 'input[type=hidden]',
+                errorClass: 'help-block form-error',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
+                        // If the element is a select2 then place the error above the input
+                        ? element.parents('.required').append(error)
+                        // Otherwise place it after
+                        : error.insertAfter(element);
+                },
+                highlight: function(inputElement) {
+                    $(inputElement).parent().addClass('has-error');
+                    $(inputElement).closest('.help-block').remove();
+                },
+                onfocusout: function(element) {
+                    return $(element).valid();
+                },
             });
 
 

@@ -10,6 +10,7 @@ use App\Models\Component;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class ComponentsFilesController extends Controller
 {
@@ -84,7 +85,7 @@ class ComponentsFilesController extends Controller
                 try {
                     Storage::delete('components/'.$log->filename);
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                 }
             }
 
@@ -110,7 +111,7 @@ class ComponentsFilesController extends Controller
      */
     public function show($componentId = null, $fileId = null)
     {
-        \Log::debug('Private filesystem is: '.config('filesystems.default'));
+        Log::debug('Private filesystem is: '.config('filesystems.default'));
         $component = Component::find($componentId);
 
         // the component is valid
@@ -126,8 +127,8 @@ class ComponentsFilesController extends Controller
             $file = 'private_uploads/components/'.$log->filename;
 
             if (Storage::missing($file)) {
-                \Log::debug('FILE DOES NOT EXISTS for '.$file);
-                \Log::debug('URL should be '.Storage::url($file));
+                Log::debug('FILE DOES NOT EXISTS for '.$file);
+                Log::debug('URL should be '.Storage::url($file));
 
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');

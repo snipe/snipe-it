@@ -2,6 +2,7 @@
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+use Illuminate\Support\Facades\Log;
 
 $config = [
 
@@ -126,12 +127,12 @@ if ((env('APP_ENV')=='production') && (env('ROLLBAR_TOKEN'))) {
     // Note: it will *not* be cacheable
     $config['channels']['rollbar']['check_ignore'] = function ($isUncaught, $args, $payload) {
         if (App::environment('production') && is_object($args) && get_class($args) == Rollbar\ErrorWrapper::class && $args->errorLevel == E_WARNING ) {
-            \Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
+            Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
             return true; // "TRUE - you should ignore it!"
         }
         $needle = "ArieTimmerman\\Laravel\\SCIMServer\\Exceptions\\SCIMException";
         if (App::environment('production') && is_string($args) && strncmp($args, $needle, strlen($needle) ) === 0 ) {
-            \Log::info("String: '$args' looks like a SCIM Exception; ignoring error");
+            Log::info("String: '$args' looks like a SCIM Exception; ignoring error");
             return true; //yes, *do* ignore it
         }
         return false;

@@ -44,7 +44,7 @@ class AccessoryCheckinController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param null $accessoryUserId
      * @param string $backto
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param int $accessoryId
      */

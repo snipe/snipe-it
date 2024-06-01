@@ -33,18 +33,18 @@ class SettingsController extends Controller
         $settings = Setting::getSettings();
 
         if ($settings->ldap_enabled!='1') {
-            \Log::debug('LDAP is not enabled cannot test.');
+            Log::debug('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
 
-        \Log::debug('Preparing to test LDAP connection');
+        Log::debug('Preparing to test LDAP connection');
 
         $message = []; //where we collect together test messages
         try {
             $connection = Ldap::connectToLdap();
             try {
                 $message['bind'] = ['message' => 'Successfully bound to LDAP server.'];
-                \Log::debug('attempting to bind to LDAP for LDAP test');
+                Log::debug('attempting to bind to LDAP for LDAP test');
                 Ldap::bindAdminToLdap($connection);
                 $message['login'] = [
                     'message' => 'Successfully connected to LDAP server.',
@@ -75,13 +75,13 @@ class SettingsController extends Controller
 
                 return response()->json($message, 200);
             } catch (\Exception $e) {
-                \Log::debug('Bind failed');
-                \Log::debug("Exception was: ".$e->getMessage());
+                Log::debug('Bind failed');
+                Log::debug("Exception was: ".$e->getMessage());
                 return response()->json(['message' => $e->getMessage()], 400);
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
-            \Log::debug('Connection failed but we cannot debug it any further on our end.');
+            Log::debug('Connection failed but we cannot debug it any further on our end.');
             return response()->json(['message' => $e->getMessage()], 500);
         }
 
@@ -92,7 +92,7 @@ class SettingsController extends Controller
     {
 
         if (Setting::getSettings()->ldap_enabled != '1') {
-            \Log::debug('LDAP is not enabled. Cannot test.');
+            Log::debug('LDAP is not enabled. Cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
 
@@ -104,39 +104,39 @@ class SettingsController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            \Log::debug('LDAP Validation test failed.');
+            Log::debug('LDAP Validation test failed.');
             $validation_errors = implode(' ',$validator->errors()->all());
             return response()->json(['message' => $validator->errors()->all()], 400);
         }
         
 
 
-        \Log::debug('Preparing to test LDAP login');
+        Log::debug('Preparing to test LDAP login');
         try {
             $connection = Ldap::connectToLdap();
             try {
                 Ldap::bindAdminToLdap($connection);
-                \Log::debug('Attempting to bind to LDAP for LDAP test');
+                Log::debug('Attempting to bind to LDAP for LDAP test');
                 try {
                     $ldap_user = Ldap::findAndBindUserLdap($request->input('ldaptest_user'), $request->input('ldaptest_password'));
                     if ($ldap_user) {
-                        \Log::debug('It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.');
+                        Log::debug('It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.');
                         return response()->json(['message' => 'It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.'], 200);
                     }
                     return response()->json(['message' => 'Login Failed. '. $request->input('ldaptest_user').' did not successfully bind to LDAP.'], 400);
 
                 } catch (\Exception $e) {
-                    \Log::debug('LDAP login failed');
+                    Log::debug('LDAP login failed');
                     return response()->json(['message' => $e->getMessage()], 400);
                 }
 
             } catch (\Exception $e) {
-                \Log::debug('Bind failed');
+                Log::debug('Bind failed');
                 return response()->json(['message' => $e->getMessage()], 400);
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
-            \Log::debug('Connection failed');
+            Log::debug('Connection failed');
             return response()->json(['message' => $e->getMessage()], 500);
         }
 
@@ -181,19 +181,19 @@ class SettingsController extends Controller
 
             $file_parts = explode('.', $file);
             $extension = end($file_parts);
-            \Log::debug($extension);
+            Log::debug($extension);
 
             // Only generated barcodes would have a .png file extension
             if ($extension == 'png') {
-                \Log::debug('Deleting: '.$file);
+                Log::debug('Deleting: '.$file);
 
 
                 try {
                     Storage::disk('public')->delete($file);
-                    \Log::debug('Deleting: '.$file);
+                    Log::debug('Deleting: '.$file);
                     $file_count++;
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                 }
             }
         }

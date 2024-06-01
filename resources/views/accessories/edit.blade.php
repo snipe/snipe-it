@@ -18,7 +18,7 @@
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.order_number')
 @include ('partials.forms.edit.purchase_date')
-@include ('partials.forms.edit.purchase_cost')
+@include ('partials.forms.edit.purchase_cost', ['currency_type' => $item->location->currency ?? null])
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
 @include ('partials.forms.edit.notes')

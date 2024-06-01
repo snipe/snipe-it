@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class LicenseCheckinController extends Controller
 {
@@ -145,7 +146,7 @@ class LicenseCheckinController extends Controller
             $user_seat->assigned_to = null;
 
             if ($user_seat->save()) {
-                \Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
+                Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
                 $user_seat->logCheckin($user_seat->user, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
             }
         }
@@ -160,7 +161,7 @@ class LicenseCheckinController extends Controller
             $asset_seat->asset_id = null;
 
             if ($asset_seat->save()) {
-                \Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
+                Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
                 $asset_seat->logCheckin($asset_seat->asset, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
                 $count++;
             }

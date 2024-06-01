@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\License;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class LicenseFilesController extends Controller
 {
@@ -20,7 +19,7 @@ class LicenseFilesController extends Controller
      * @param int $licenseId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
-     *@author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @todo Switch to using the AssetFileRequest form request validator.
      */
@@ -78,7 +77,7 @@ class LicenseFilesController extends Controller
                     try {
                         Storage::delete('licenses/'.$log->filename);
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
                 }
                 
@@ -121,8 +120,8 @@ class LicenseFilesController extends Controller
             $file = 'private_uploads/licenses/'.$log->filename;
 
             if (Storage::missing($file)) {
-                \Log::debug('NOT EXISTS for '.$file);
-                \Log::debug('NOT EXISTS URL should be '.Storage::url($file));
+                Log::debug('NOT EXISTS for '.$file);
+                Log::debug('NOT EXISTS URL should be '.Storage::url($file));
 
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');

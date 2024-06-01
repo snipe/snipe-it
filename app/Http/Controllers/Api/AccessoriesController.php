@@ -10,9 +10,9 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 
@@ -274,7 +274,7 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $accessoryId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function checkout(Request $request, $accessoryId)
     {
@@ -320,7 +320,7 @@ class AccessoriesController extends Controller
      * @param Request $request
      * @param int $accessoryUserId
      * @param string $backto
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @internal param int $accessoryId
      */
     public function checkin(Request $request, $accessoryUserId = null)

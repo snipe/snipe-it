@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Actionlog;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UserObserver
 {

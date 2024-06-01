@@ -7,6 +7,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class DepartmentsController extends Controller
 {
@@ -129,7 +130,7 @@ class DepartmentsController extends Controller
             try {
                 Storage::disk('public')->delete('departments'.'/'.$department->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
         $department->delete();

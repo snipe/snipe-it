@@ -16,6 +16,7 @@ use NotificationChannels\GoogleChat\Section;
 use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutAccessoryNotification extends Notification
 {
@@ -168,7 +169,7 @@ class CheckoutAccessoryNotification extends Notification
      */
     public function toMail()
     {
-        \Log::debug($this->item->getImageUrl());
+        Log::debug($this->item->getImageUrl());
         $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 

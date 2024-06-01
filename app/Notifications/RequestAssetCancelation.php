@@ -7,6 +7,7 @@ use App\Models\Setting;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class RequestAssetCancelation extends Notification
 {
@@ -58,7 +59,7 @@ class RequestAssetCancelation extends Notification
         $notifyBy = [];
 
         if (Setting::getSettings()->webhook_endpoint != '') {
-            \Log::debug('use webhook');
+            Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
 

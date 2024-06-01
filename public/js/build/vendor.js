@@ -10873,19 +10873,13 @@ return jQuery;
 
 /*! Select2 4.0.13 | https://github.com/select2/select2/blob/master/LICENSE.md */
 !function(n){"function"==typeof define&&define.amd?define(["jquery"],n):"object"==typeof module&&module.exports?module.exports=function(e,t){return void 0===t&&(t="undefined"!=typeof window?require("jquery"):require("jquery")(e)),n(t),t}:n(jQuery)}(function(d){var e=function(){if(d&&d.fn&&d.fn.select2&&d.fn.select2.amd)var e=d.fn.select2.amd;var t,n,i,h,o,s,f,g,m,v,y,_,r,a,w,l;function b(e,t){return r.call(e,t)}function c(e,t){var n,i,r,o,s,a,l,c,u,d,p,h=t&&t.split("/"),f=y.map,g=f&&f["*"]||{};if(e){for(s=(e=e.split("/")).length-1,y.nodeIdCompat&&w.test(e[s])&&(e[s]=e[s].replace(w,"")),"."===e[0].charAt(0)&&h&&(e=h.slice(0,h.length-1).concat(e)),u=0;u<e.length;u++)if("."===(p=e[u]))e.splice(u,1),--u;else if(".."===p){if(0===u||1===u&&".."===e[2]||".."===e[u-1])continue;0<u&&(e.splice(u-1,2),u-=2)}e=e.join("/")}if((h||g)&&f){for(u=(n=e.split("/")).length;0<u;--u){if(i=n.slice(0,u).join("/"),h)for(d=h.length;0<d;--d)if(r=(r=f[h.slice(0,d).join("/")])&&r[i]){o=r,a=u;break}if(o)break;!l&&g&&g[i]&&(l=g[i],c=u)}!o&&l&&(o=l,a=c),o&&(n.splice(0,a,o),e=n.join("/"))}return e}function A(t,n){return function(){var e=a.call(arguments,0);return"string"!=typeof e[0]&&1===e.length&&e.push(null),s.apply(h,e.concat([t,n]))}}function x(t){return function(e){m[t]=e}}function D(e){if(b(v,e)){var t=v[e];delete v[e],_[e]=!0,o.apply(h,t)}if(!b(m,e)&&!b(_,e))throw new Error("No "+e);return m[e]}function u(e){var t,n=e?e.indexOf("!"):-1;return-1<n&&(t=e.substring(0,n),e=e.substring(n+1,e.length)),[t,e]}function S(e){return e?u(e):[]}return e&&e.requirejs||(e?n=e:e={},m={},v={},y={},_={},r=Object.prototype.hasOwnProperty,a=[].slice,w=/\.js$/,f=function(e,t){var n,i,r=u(e),o=r[0],s=t[1];return e=r[1],o&&(n=D(o=c(o,s))),o?e=n&&n.normalize?n.normalize(e,(i=s,function(e){return c(e,i)})):c(e,s):(o=(r=u(e=c(e,s)))[0],e=r[1],o&&(n=D(o))),{f:o?o+"!"+e:e,n:e,pr:o,p:n}},g={require:function(e){return A(e)},exports:function(e){var t=m[e];return void 0!==t?t:m[e]={}},module:function(e){return{id:e,uri:"",exports:m[e],config:(t=e,function(){return y&&y.config&&y.config[t]||{}})};var t}},o=function(e,t,n,i){var r,o,s,a,l,c,u,d=[],p=typeof n;if(c=S(i=i||e),"undefined"==p||"function"==p){for(t=!t.length&&n.length?["require","exports","module"]:t,l=0;l<t.length;l+=1)if("require"===(o=(a=f(t[l],c)).f))d[l]=g.require(e);else if("exports"===o)d[l]=g.exports(e),u=!0;else if("module"===o)r=d[l]=g.module(e);else if(b(m,o)||b(v,o)||b(_,o))d[l]=D(o);else{if(!a.p)throw new Error(e+" missing "+o);a.p.load(a.n,A(i,!0),x(o),{}),d[l]=m[o]}s=n?n.apply(m[e],d):void 0,e&&(r&&r.exports!==h&&r.exports!==m[e]?m[e]=r.exports:s===h&&u||(m[e]=s))}else e&&(m[e]=n)},t=n=s=function(e,t,n,i,r){if("string"==typeof e)return g[e]?g[e](t):D(f(e,S(t)).f);if(!e.splice){if((y=e).deps&&s(y.deps,y.callback),!t)return;t.splice?(e=t,t=n,n=null):e=h}return t=t||function(){},"function"==typeof n&&(n=i,i=r),i?o(h,e,t,n):setTimeout(function(){o(h,e,t,n)},4),s},s.config=function(e){return s(e)},t._defined=m,(i=function(e,t,n){if("string"!=typeof e)throw new Error("See almond README: incorrect module build, no module name");t.splice||(n=t,t=[]),b(m,e)||b(v,e)||(v[e]=[e,t,n])}).amd={jQuery:!0},e.requirejs=t,e.require=n,e.define=i),e.define("almond",function(){}),e.define("jquery",[],function(){var e=d||$;return null==e&&console&&console.error&&console.error("Select2: An instance of jQuery or a jQuery-compatible library was not found. Make sure that you are including jQuery before Select2 on your web page."),e}),e.define("select2/utils",["jquery"],function(o){var r={};function u(e){var t=e.prototype,n=[];for(var i in t){"function"==typeof t[i]&&"constructor"!==i&&n.push(i)}return n}r.Extend=function(e,t){var n={}.hasOwnProperty;function i(){this.constructor=e}for(var r in t)n.call(t,r)&&(e[r]=t[r]);return i.prototype=t.prototype,e.prototype=new i,e.__super__=t.prototype,e},r.Decorate=function(i,r){var e=u(r),t=u(i);function o(){var e=Array.prototype.unshift,t=r.prototype.constructor.length,n=i.prototype.constructor;0<t&&(e.call(arguments,i.prototype.constructor),n=r.prototype.constructor),n.apply(this,arguments)}r.displayName=i.displayName,o.prototype=new function(){this.constructor=o};for(var n=0;n<t.length;n++){var s=t[n];o.prototype[s]=i.prototype[s]}function a(e){var t=function(){};e in o.prototype&&(t=o.prototype[e]);var n=r.prototype[e];return function(){return Array.prototype.unshift.call(arguments,t),n.apply(this,arguments)}}for(var l=0;l<e.length;l++){var c=e[l];o.prototype[c]=a(c)}return o};function e(){this.listeners={}}e.prototype.on=function(e,t){this.listeners=this.listeners||{},e in this.listeners?this.listeners[e].push(t):this.listeners[e]=[t]},e.prototype.trigger=function(e){var t=Array.prototype.slice,n=t.call(arguments,1);this.listeners=this.listeners||{},null==n&&(n=[]),0===n.length&&n.push({}),(n[0]._type=e)in this.listeners&&this.invoke(this.listeners[e],t.call(arguments,1)),"*"in this.listeners&&this.invoke(this.listeners["*"],arguments)},e.prototype.invoke=function(e,t){for(var n=0,i=e.length;n<i;n++)e[n].apply(this,t)},r.Observable=e,r.generateChars=function(e){for(var t="",n=0;n<e;n++){t+=Math.floor(36*Math.random()).toString(36)}return t},r.bind=function(e,t){return function(){e.apply(t,arguments)}},r._convertData=function(e){for(var t in e){var n=t.split("-"),i=e;if(1!==n.length){for(var r=0;r<n.length;r++){var o=n[r];(o=o.substring(0,1).toLowerCase()+o.substring(1))in i||(i[o]={}),r==n.length-1&&(i[o]=e[t]),i=i[o]}delete e[t]}}return e},r.hasScroll=function(e,t){var n=o(t),i=t.style.overflowX,r=t.style.overflowY;return(i!==r||"hidden"!==r&&"visible"!==r)&&("scroll"===i||"scroll"===r||(n.innerHeight()<t.scrollHeight||n.innerWidth()<t.scrollWidth))},r.escapeMarkup=function(e){var t={"\\":"&#92;","&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","/":"&#47;"};return"string"!=typeof e?e:String(e).replace(/[&<>"'\/\\]/g,function(e){return t[e]})},r.appendMany=function(e,t){if("1.7"===o.fn.jquery.substr(0,3)){var n=o();o.map(t,function(e){n=n.add(e)}),t=n}e.append(t)},r.__cache={};var n=0;return r.GetUniqueElementId=function(e){var t=e.getAttribute("data-select2-id");return null==t&&(e.id?(t=e.id,e.setAttribute("data-select2-id",t)):(e.setAttribute("data-select2-id",++n),t=n.toString())),t},r.StoreData=function(e,t,n){var i=r.GetUniqueElementId(e);r.__cache[i]||(r.__cache[i]={}),r.__cache[i][t]=n},r.GetData=function(e,t){var n=r.GetUniqueElementId(e);return t?r.__cache[n]&&null!=r.__cache[n][t]?r.__cache[n][t]:o(e).data(t):r.__cache[n]},r.RemoveData=function(e){var t=r.GetUniqueElementId(e);null!=r.__cache[t]&&delete r.__cache[t],e.removeAttribute("data-select2-id")},r}),e.define("select2/results",["jquery","./utils"],function(h,f){function i(e,t,n){this.$element=e,this.data=n,this.options=t,i.__super__.constructor.call(this)}return f.Extend(i,f.Observable),i.prototype.render=function(){var e=h('<ul class="select2-results__options" role="listbox"></ul>');return this.options.get("multiple")&&e.attr("aria-multiselectable","true"),this.$results=e},i.prototype.clear=function(){this.$results.empty()},i.prototype.displayMessage=function(e){var t=this.options.get("escapeMarkup");this.clear(),this.hideLoading();var n=h('<li role="alert" aria-live="assertive" class="select2-results__option"></li>'),i=this.options.get("translations").get(e.message);n.append(t(i(e.args))),n[0].className+=" select2-results__message",this.$results.append(n)},i.prototype.hideMessages=function(){this.$results.find(".select2-results__message").remove()},i.prototype.append=function(e){this.hideLoading();var t=[];if(null!=e.results&&0!==e.results.length){e.results=this.sort(e.results);for(var n=0;n<e.results.length;n++){var i=e.results[n],r=this.option(i);t.push(r)}this.$results.append(t)}else 0===this.$results.children().length&&this.trigger("results:message",{message:"noResults"})},i.prototype.position=function(e,t){t.find(".select2-results").append(e)},i.prototype.sort=function(e){return this.options.get("sorter")(e)},i.prototype.highlightFirstItem=function(){var e=this.$results.find(".select2-results__option[aria-selected]"),t=e.filter("[aria-selected=true]");0<t.length?t.first().trigger("mouseenter"):e.first().trigger("mouseenter"),this.ensureHighlightVisible()},i.prototype.setClasses=function(){var t=this;this.data.current(function(e){var i=h.map(e,function(e){return e.id.toString()});t.$results.find(".select2-results__option[aria-selected]").each(function(){var e=h(this),t=f.GetData(this,"data"),n=""+t.id;null!=t.element&&t.element.selected||null==t.element&&-1<h.inArray(n,i)?e.attr("aria-selected","true"):e.attr("aria-selected","false")})})},i.prototype.showLoading=function(e){this.hideLoading();var t={disabled:!0,loading:!0,text:this.options.get("translations").get("searching")(e)},n=this.option(t);n.className+=" loading-results",this.$results.prepend(n)},i.prototype.hideLoading=function(){this.$results.find(".loading-results").remove()},i.prototype.option=function(e){var t=document.createElement("li");t.className="select2-results__option";var n={role:"option","aria-selected":"false"},i=window.Element.prototype.matches||window.Element.prototype.msMatchesSelector||window.Element.prototype.webkitMatchesSelector;for(var r in(null!=e.element&&i.call(e.element,":disabled")||null==e.element&&e.disabled)&&(delete n["aria-selected"],n["aria-disabled"]="true"),null==e.id&&delete n["aria-selected"],null!=e._resultId&&(t.id=e._resultId),e.title&&(t.title=e.title),e.children&&(n.role="group",n["aria-label"]=e.text,delete n["aria-selected"]),n){var o=n[r];t.setAttribute(r,o)}if(e.children){var s=h(t),a=document.createElement("strong");a.className="select2-results__group";h(a);this.template(e,a);for(var l=[],c=0;c<e.children.length;c++){var u=e.children[c],d=this.option(u);l.push(d)}var p=h("<ul></ul>",{class:"select2-results__options select2-results__options--nested"});p.append(l),s.append(a),s.append(p)}else this.template(e,t);return f.StoreData(t,"data",e),t},i.prototype.bind=function(t,e){var l=this,n=t.id+"-results";this.$results.attr("id",n),t.on("results:all",function(e){l.clear(),l.append(e.data),t.isOpen()&&(l.setClasses(),l.highlightFirstItem())}),t.on("results:append",function(e){l.append(e.data),t.isOpen()&&l.setClasses()}),t.on("query",function(e){l.hideMessages(),l.showLoading(e)}),t.on("select",function(){t.isOpen()&&(l.setClasses(),l.options.get("scrollAfterSelect")&&l.highlightFirstItem())}),t.on("unselect",function(){t.isOpen()&&(l.setClasses(),l.options.get("scrollAfterSelect")&&l.highlightFirstItem())}),t.on("open",function(){l.$results.attr("aria-expanded","true"),l.$results.attr("aria-hidden","false"),l.setClasses(),l.ensureHighlightVisible()}),t.on("close",function(){l.$results.attr("aria-expanded","false"),l.$results.attr("aria-hidden","true"),l.$results.removeAttr("aria-activedescendant")}),t.on("results:toggle",function(){var e=l.getHighlightedResults();0!==e.length&&e.trigger("mouseup")}),t.on("results:select",function(){var e=l.getHighlightedResults();if(0!==e.length){var t=f.GetData(e[0],"data");"true"==e.attr("aria-selected")?l.trigger("close",{}):l.trigger("select",{data:t})}}),t.on("results:previous",function(){var e=l.getHighlightedResults(),t=l.$results.find("[aria-selected]"),n=t.index(e);if(!(n<=0)){var i=n-1;0===e.length&&(i=0);var r=t.eq(i);r.trigger("mouseenter");var o=l.$results.offset().top,s=r.offset().top,a=l.$results.scrollTop()+(s-o);0===i?l.$results.scrollTop(0):s-o<0&&l.$results.scrollTop(a)}}),t.on("results:next",function(){var e=l.getHighlightedResults(),t=l.$results.find("[aria-selected]"),n=t.index(e)+1;if(!(n>=t.length)){var i=t.eq(n);i.trigger("mouseenter");var r=l.$results.offset().top+l.$results.outerHeight(!1),o=i.offset().top+i.outerHeight(!1),s=l.$results.scrollTop()+o-r;0===n?l.$results.scrollTop(0):r<o&&l.$results.scrollTop(s)}}),t.on("results:focus",function(e){e.element.addClass("select2-results__option--highlighted")}),t.on("results:message",function(e){l.displayMessage(e)}),h.fn.mousewheel&&this.$results.on("mousewheel",function(e){var t=l.$results.scrollTop(),n=l.$results.get(0).scrollHeight-t+e.deltaY,i=0<e.deltaY&&t-e.deltaY<=0,r=e.deltaY<0&&n<=l.$results.height();i?(l.$results.scrollTop(0),e.preventDefault(),e.stopPropagation()):r&&(l.$results.scrollTop(l.$results.get(0).scrollHeight-l.$results.height()),e.preventDefault(),e.stopPropagation())}),this.$results.on("mouseup",".select2-results__option[aria-selected]",function(e){var t=h(this),n=f.GetData(this,"data");"true"!==t.attr("aria-selected")?l.trigger("select",{originalEvent:e,data:n}):l.options.get("multiple")?l.trigger("unselect",{originalEvent:e,data:n}):l.trigger("close",{})}),this.$results.on("mouseenter",".select2-results__option[aria-selected]",function(e){var t=f.GetData(this,"data");l.getHighlightedResults().removeClass("select2-results__option--highlighted"),l.trigger("results:focus",{data:t,element:h(this)})})},i.prototype.getHighlightedResults=function(){return this.$results.find(".select2-results__option--highlighted")},i.prototype.destroy=function(){this.$results.remove()},i.prototype.ensureHighlightVisible=function(){var e=this.getHighlightedResults();if(0!==e.length){var t=this.$results.find("[aria-selected]").index(e),n=this.$results.offset().top,i=e.offset().top,r=this.$results.scrollTop()+(i-n),o=i-n;r-=2*e.outerHeight(!1),t<=2?this.$results.scrollTop(0):(o>this.$results.outerHeight()||o<0)&&this.$results.scrollTop(r)}},i.prototype.template=function(e,t){var n=this.options.get("templateResult"),i=this.options.get("escapeMarkup"),r=n(e,t);null==r?t.style.display="none":"string"==typeof r?t.innerHTML=i(r):h(t).append(r)},i}),e.define("select2/keys",[],function(){return{BACKSPACE:8,TAB:9,ENTER:13,SHIFT:16,CTRL:17,ALT:18,ESC:27,SPACE:32,PAGE_UP:33,PAGE_DOWN:34,END:35,HOME:36,LEFT:37,UP:38,RIGHT:39,DOWN:40,DELETE:46}}),e.define("select2/selection/base",["jquery","../utils","../keys"],function(n,i,r){function o(e,t){this.$element=e,this.options=t,o.__super__.constructor.call(this)}return i.Extend(o,i.Observable),o.prototype.render=function(){var e=n('<span class="select2-selection" role="combobox"  aria-haspopup="true" aria-expanded="false"></span>');return this._tabindex=0,null!=i.GetData(this.$element[0],"old-tabindex")?this._tabindex=i.GetData(this.$element[0],"old-tabindex"):null!=this.$element.attr("tabindex")&&(this._tabindex=this.$element.attr("tabindex")),e.attr("title",this.$element.attr("title")),e.attr("tabindex",this._tabindex),e.attr("aria-disabled","false"),this.$selection=e},o.prototype.bind=function(e,t){var n=this,i=e.id+"-results";this.container=e,this.$selection.on("focus",function(e){n.trigger("focus",e)}),this.$selection.on("blur",function(e){n._handleBlur(e)}),this.$selection.on("keydown",function(e){n.trigger("keypress",e),e.which===r.SPACE&&e.preventDefault()}),e.on("results:focus",function(e){n.$selection.attr("aria-activedescendant",e.data._resultId)}),e.on("selection:update",function(e){n.update(e.data)}),e.on("open",function(){n.$selection.attr("aria-expanded","true"),n.$selection.attr("aria-owns",i),n._attachCloseHandler(e)}),e.on("close",function(){n.$selection.attr("aria-expanded","false"),n.$selection.removeAttr("aria-activedescendant"),n.$selection.removeAttr("aria-owns"),n.$selection.trigger("focus"),n._detachCloseHandler(e)}),e.on("enable",function(){n.$selection.attr("tabindex",n._tabindex),n.$selection.attr("aria-disabled","false")}),e.on("disable",function(){n.$selection.attr("tabindex","-1"),n.$selection.attr("aria-disabled","true")})},o.prototype._handleBlur=function(e){var t=this;window.setTimeout(function(){document.activeElement==t.$selection[0]||n.contains(t.$selection[0],document.activeElement)||t.trigger("blur",e)},1)},o.prototype._attachCloseHandler=function(e){n(document.body).on("mousedown.select2."+e.id,function(e){var t=n(e.target).closest(".select2");n(".select2.select2-container--open").each(function(){this!=t[0]&&i.GetData(this,"element").select2("close")})})},o.prototype._detachCloseHandler=function(e){n(document.body).off("mousedown.select2."+e.id)},o.prototype.position=function(e,t){t.find(".selection").append(e)},o.prototype.destroy=function(){this._detachCloseHandler(this.container)},o.prototype.update=function(e){throw new Error("The `update` method must be defined in child classes.")},o.prototype.isEnabled=function(){return!this.isDisabled()},o.prototype.isDisabled=function(){return this.options.get("disabled")},o}),e.define("select2/selection/single",["jquery","./base","../utils","../keys"],function(e,t,n,i){function r(){r.__super__.constructor.apply(this,arguments)}return n.Extend(r,t),r.prototype.render=function(){var e=r.__super__.render.call(this);return e.addClass("select2-selection--single"),e.html('<span class="select2-selection__rendered"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>'),e},r.prototype.bind=function(t,e){var n=this;r.__super__.bind.apply(this,arguments);var i=t.id+"-container";this.$selection.find(".select2-selection__rendered").attr("id",i).attr("role","textbox").attr("aria-readonly","true"),this.$selection.attr("aria-labelledby",i),this.$selection.on("mousedown",function(e){1===e.which&&n.trigger("toggle",{originalEvent:e})}),this.$selection.on("focus",function(e){}),this.$selection.on("blur",function(e){}),t.on("focus",function(e){t.isOpen()||n.$selection.trigger("focus")})},r.prototype.clear=function(){var e=this.$selection.find(".select2-selection__rendered");e.empty(),e.removeAttr("title")},r.prototype.display=function(e,t){var n=this.options.get("templateSelection");return this.options.get("escapeMarkup")(n(e,t))},r.prototype.selectionContainer=function(){return e("<span></span>")},r.prototype.update=function(e){if(0!==e.length){var t=e[0],n=this.$selection.find(".select2-selection__rendered"),i=this.display(t,n);n.empty().append(i);var r=t.title||t.text;r?n.attr("title",r):n.removeAttr("title")}else this.clear()},r}),e.define("select2/selection/multiple",["jquery","./base","../utils"],function(r,e,l){function n(e,t){n.__super__.constructor.apply(this,arguments)}return l.Extend(n,e),n.prototype.render=function(){var e=n.__super__.render.call(this);return e.addClass("select2-selection--multiple"),e.html('<ul class="select2-selection__rendered"></ul>'),e},n.prototype.bind=function(e,t){var i=this;n.__super__.bind.apply(this,arguments),this.$selection.on("click",function(e){i.trigger("toggle",{originalEvent:e})}),this.$selection.on("click",".select2-selection__choice__remove",function(e){if(!i.isDisabled()){var t=r(this).parent(),n=l.GetData(t[0],"data");i.trigger("unselect",{originalEvent:e,data:n})}})},n.prototype.clear=function(){var e=this.$selection.find(".select2-selection__rendered");e.empty(),e.removeAttr("title")},n.prototype.display=function(e,t){var n=this.options.get("templateSelection");return this.options.get("escapeMarkup")(n(e,t))},n.prototype.selectionContainer=function(){return r('<li class="select2-selection__choice"><span class="select2-selection__choice__remove" role="presentation">&times;</span></li>')},n.prototype.update=function(e){if(this.clear(),0!==e.length){for(var t=[],n=0;n<e.length;n++){var i=e[n],r=this.selectionContainer(),o=this.display(i,r);r.append(o);var s=i.title||i.text;s&&r.attr("title",s),l.StoreData(r[0],"data",i),t.push(r)}var a=this.$selection.find(".select2-selection__rendered");l.appendMany(a,t)}},n}),e.define("select2/selection/placeholder",["../utils"],function(e){function t(e,t,n){this.placeholder=this.normalizePlaceholder(n.get("placeholder")),e.call(this,t,n)}return t.prototype.normalizePlaceholder=function(e,t){return"string"==typeof t&&(t={id:"",text:t}),t},t.prototype.createPlaceholder=function(e,t){var n=this.selectionContainer();return n.html(this.display(t)),n.addClass("select2-selection__placeholder").removeClass("select2-selection__choice"),n},t.prototype.update=function(e,t){var n=1==t.length&&t[0].id!=this.placeholder.id;if(1<t.length||n)return e.call(this,t);this.clear();var i=this.createPlaceholder(this.placeholder);this.$selection.find(".select2-selection__rendered").append(i)},t}),e.define("select2/selection/allowClear",["jquery","../keys","../utils"],function(r,i,a){function e(){}return e.prototype.bind=function(e,t,n){var i=this;e.call(this,t,n),null==this.placeholder&&this.options.get("debug")&&window.console&&console.error&&console.error("Select2: The `allowClear` option should be used in combination with the `placeholder` option."),this.$selection.on("mousedown",".select2-selection__clear",function(e){i._handleClear(e)}),t.on("keypress",function(e){i._handleKeyboardClear(e,t)})},e.prototype._handleClear=function(e,t){if(!this.isDisabled()){var n=this.$selection.find(".select2-selection__clear");if(0!==n.length){t.stopPropagation();var i=a.GetData(n[0],"data"),r=this.$element.val();this.$element.val(this.placeholder.id);var o={data:i};if(this.trigger("clear",o),o.prevented)this.$element.val(r);else{for(var s=0;s<i.length;s++)if(o={data:i[s]},this.trigger("unselect",o),o.prevented)return void this.$element.val(r);this.$element.trigger("input").trigger("change"),this.trigger("toggle",{})}}}},e.prototype._handleKeyboardClear=function(e,t,n){n.isOpen()||t.which!=i.DELETE&&t.which!=i.BACKSPACE||this._handleClear(t)},e.prototype.update=function(e,t){if(e.call(this,t),!(0<this.$selection.find(".select2-selection__placeholder").length||0===t.length)){var n=this.options.get("translations").get("removeAllItems"),i=r('<span class="select2-selection__clear" title="'+n()+'">&times;</span>');a.StoreData(i[0],"data",t),this.$selection.find(".select2-selection__rendered").prepend(i)}},e}),e.define("select2/selection/search",["jquery","../utils","../keys"],function(i,a,l){function e(e,t,n){e.call(this,t,n)}return e.prototype.render=function(e){var t=i('<li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="-1" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" /></li>');this.$searchContainer=t,this.$search=t.find("input");var n=e.call(this);return this._transferTabIndex(),n},e.prototype.bind=function(e,t,n){var i=this,r=t.id+"-results";e.call(this,t,n),t.on("open",function(){i.$search.attr("aria-controls",r),i.$search.trigger("focus")}),t.on("close",function(){i.$search.val(""),i.$search.removeAttr("aria-controls"),i.$search.removeAttr("aria-activedescendant"),i.$search.trigger("focus")}),t.on("enable",function(){i.$search.prop("disabled",!1),i._transferTabIndex()}),t.on("disable",function(){i.$search.prop("disabled",!0)}),t.on("focus",function(e){i.$search.trigger("focus")}),t.on("results:focus",function(e){e.data._resultId?i.$search.attr("aria-activedescendant",e.data._resultId):i.$search.removeAttr("aria-activedescendant")}),this.$selection.on("focusin",".select2-search--inline",function(e){i.trigger("focus",e)}),this.$selection.on("focusout",".select2-search--inline",function(e){i._handleBlur(e)}),this.$selection.on("keydown",".select2-search--inline",function(e){if(e.stopPropagation(),i.trigger("keypress",e),i._keyUpPrevented=e.isDefaultPrevented(),e.which===l.BACKSPACE&&""===i.$search.val()){var t=i.$searchContainer.prev(".select2-selection__choice");if(0<t.length){var n=a.GetData(t[0],"data");i.searchRemoveChoice(n),e.preventDefault()}}}),this.$selection.on("click",".select2-search--inline",function(e){i.$search.val()&&e.stopPropagation()});var o=document.documentMode,s=o&&o<=11;this.$selection.on("input.searchcheck",".select2-search--inline",function(e){s?i.$selection.off("input.search input.searchcheck"):i.$selection.off("keyup.search")}),this.$selection.on("keyup.search input.search",".select2-search--inline",function(e){if(s&&"input"===e.type)i.$selection.off("input.search input.searchcheck");else{var t=e.which;t!=l.SHIFT&&t!=l.CTRL&&t!=l.ALT&&t!=l.TAB&&i.handleSearch(e)}})},e.prototype._transferTabIndex=function(e){this.$search.attr("tabindex",this.$selection.attr("tabindex")),this.$selection.attr("tabindex","-1")},e.prototype.createPlaceholder=function(e,t){this.$search.attr("placeholder",t.text)},e.prototype.update=function(e,t){var n=this.$search[0]==document.activeElement;this.$search.attr("placeholder",""),e.call(this,t),this.$selection.find(".select2-selection__rendered").append(this.$searchContainer),this.resizeSearch(),n&&this.$search.trigger("focus")},e.prototype.handleSearch=function(){if(this.resizeSearch(),!this._keyUpPrevented){var e=this.$search.val();this.trigger("query",{term:e})}this._keyUpPrevented=!1},e.prototype.searchRemoveChoice=function(e,t){this.trigger("unselect",{data:t}),this.$search.val(t.text),this.handleSearch()},e.prototype.resizeSearch=function(){this.$search.css("width","25px");var e="";""!==this.$search.attr("placeholder")?e=this.$selection.find(".select2-selection__rendered").width():e=.75*(this.$search.val().length+1)+"em";this.$search.css("width",e)},e}),e.define("select2/selection/eventRelay",["jquery"],function(s){function e(){}return e.prototype.bind=function(e,t,n){var i=this,r=["open","opening","close","closing","select","selecting","unselect","unselecting","clear","clearing"],o=["opening","closing","selecting","unselecting","clearing"];e.call(this,t,n),t.on("*",function(e,t){if(-1!==s.inArray(e,r)){t=t||{};var n=s.Event("select2:"+e,{params:t});i.$element.trigger(n),-1!==s.inArray(e,o)&&(t.prevented=n.isDefaultPrevented())}})},e}),e.define("select2/translation",["jquery","require"],function(t,n){function i(e){this.dict=e||{}}return i.prototype.all=function(){return this.dict},i.prototype.get=function(e){return this.dict[e]},i.prototype.extend=function(e){this.dict=t.extend({},e.all(),this.dict)},i._cache={},i.loadPath=function(e){if(!(e in i._cache)){var t=n(e);i._cache[e]=t}return new i(i._cache[e])},i}),e.define("select2/diacritics",[],function(){return{"Ⓐ":"A","Ａ":"A","À":"A","Á":"A","Â":"A","Ầ":"A","Ấ":"A","Ẫ":"A","Ẩ":"A","Ã":"A","Ā":"A","Ă":"A","Ằ":"A","Ắ":"A","Ẵ":"A","Ẳ":"A","Ȧ":"A","Ǡ":"A","Ä":"A","Ǟ":"A","Ả":"A","Å":"A","Ǻ":"A","Ǎ":"A","Ȁ":"A","Ȃ":"A","Ạ":"A","Ậ":"A","Ặ":"A","Ḁ":"A","Ą":"A","Ⱥ":"A","Ɐ":"A","Ꜳ":"AA","Æ":"AE","Ǽ":"AE","Ǣ":"AE","Ꜵ":"AO","Ꜷ":"AU","Ꜹ":"AV","Ꜻ":"AV","Ꜽ":"AY","Ⓑ":"B","Ｂ":"B","Ḃ":"B","Ḅ":"B","Ḇ":"B","Ƀ":"B","Ƃ":"B","Ɓ":"B","Ⓒ":"C","Ｃ":"C","Ć":"C","Ĉ":"C","Ċ":"C","Č":"C","Ç":"C","Ḉ":"C","Ƈ":"C","Ȼ":"C","Ꜿ":"C","Ⓓ":"D","Ｄ":"D","Ḋ":"D","Ď":"D","Ḍ":"D","Ḑ":"D","Ḓ":"D","Ḏ":"D","Đ":"D","Ƌ":"D","Ɗ":"D","Ɖ":"D","Ꝺ":"D","Ǳ":"DZ","Ǆ":"DZ","ǲ":"Dz","ǅ":"Dz","Ⓔ":"E","Ｅ":"E","È":"E","É":"E","Ê":"E","Ề":"E","Ế":"E","Ễ":"E","Ể":"E","Ẽ":"E","Ē":"E","Ḕ":"E","Ḗ":"E","Ĕ":"E","Ė":"E","Ë":"E","Ẻ":"E","Ě":"E","Ȅ":"E","Ȇ":"E","Ẹ":"E","Ệ":"E","Ȩ":"E","Ḝ":"E","Ę":"E","Ḙ":"E","Ḛ":"E","Ɛ":"E","Ǝ":"E","Ⓕ":"F","Ｆ":"F","Ḟ":"F","Ƒ":"F","Ꝼ":"F","Ⓖ":"G","Ｇ":"G","Ǵ":"G","Ĝ":"G","Ḡ":"G","Ğ":"G","Ġ":"G","Ǧ":"G","Ģ":"G","Ǥ":"G","Ɠ":"G","Ꞡ":"G","Ᵹ":"G","Ꝿ":"G","Ⓗ":"H","Ｈ":"H","Ĥ":"H","Ḣ":"H","Ḧ":"H","Ȟ":"H","Ḥ":"H","Ḩ":"H","Ḫ":"H","Ħ":"H","Ⱨ":"H","Ⱶ":"H","Ɥ":"H","Ⓘ":"I","Ｉ":"I","Ì":"I","Í":"I","Î":"I","Ĩ":"I","Ī":"I","Ĭ":"I","İ":"I","Ï":"I","Ḯ":"I","Ỉ":"I","Ǐ":"I","Ȉ":"I","Ȋ":"I","Ị":"I","Į":"I","Ḭ":"I","Ɨ":"I","Ⓙ":"J","Ｊ":"J","Ĵ":"J","Ɉ":"J","Ⓚ":"K","Ｋ":"K","Ḱ":"K","Ǩ":"K","Ḳ":"K","Ķ":"K","Ḵ":"K","Ƙ":"K","Ⱪ":"K","Ꝁ":"K","Ꝃ":"K","Ꝅ":"K","Ꞣ":"K","Ⓛ":"L","Ｌ":"L","Ŀ":"L","Ĺ":"L","Ľ":"L","Ḷ":"L","Ḹ":"L","Ļ":"L","Ḽ":"L","Ḻ":"L","Ł":"L","Ƚ":"L","Ɫ":"L","Ⱡ":"L","Ꝉ":"L","Ꝇ":"L","Ꞁ":"L","Ǉ":"LJ","ǈ":"Lj","Ⓜ":"M","Ｍ":"M","Ḿ":"M","Ṁ":"M","Ṃ":"M","Ɱ":"M","Ɯ":"M","Ⓝ":"N","Ｎ":"N","Ǹ":"N","Ń":"N","Ñ":"N","Ṅ":"N","Ň":"N","Ṇ":"N","Ņ":"N","Ṋ":"N","Ṉ":"N","Ƞ":"N","Ɲ":"N","Ꞑ":"N","Ꞥ":"N","Ǌ":"NJ","ǋ":"Nj","Ⓞ":"O","Ｏ":"O","Ò":"O","Ó":"O","Ô":"O","Ồ":"O","Ố":"O","Ỗ":"O","Ổ":"O","Õ":"O","Ṍ":"O","Ȭ":"O","Ṏ":"O","Ō":"O","Ṑ":"O","Ṓ":"O","Ŏ":"O","Ȯ":"O","Ȱ":"O","Ö":"O","Ȫ":"O","Ỏ":"O","Ő":"O","Ǒ":"O","Ȍ":"O","Ȏ":"O","Ơ":"O","Ờ":"O","Ớ":"O","Ỡ":"O","Ở":"O","Ợ":"O","Ọ":"O","Ộ":"O","Ǫ":"O","Ǭ":"O","Ø":"O","Ǿ":"O","Ɔ":"O","Ɵ":"O","Ꝋ":"O","Ꝍ":"O","Œ":"OE","Ƣ":"OI","Ꝏ":"OO","Ȣ":"OU","Ⓟ":"P","Ｐ":"P","Ṕ":"P","Ṗ":"P","Ƥ":"P","Ᵽ":"P","Ꝑ":"P","Ꝓ":"P","Ꝕ":"P","Ⓠ":"Q","Ｑ":"Q","Ꝗ":"Q","Ꝙ":"Q","Ɋ":"Q","Ⓡ":"R","Ｒ":"R","Ŕ":"R","Ṙ":"R","Ř":"R","Ȑ":"R","Ȓ":"R","Ṛ":"R","Ṝ":"R","Ŗ":"R","Ṟ":"R","Ɍ":"R","Ɽ":"R","Ꝛ":"R","Ꞧ":"R","Ꞃ":"R","Ⓢ":"S","Ｓ":"S","ẞ":"S","Ś":"S","Ṥ":"S","Ŝ":"S","Ṡ":"S","Š":"S","Ṧ":"S","Ṣ":"S","Ṩ":"S","Ș":"S","Ş":"S","Ȿ":"S","Ꞩ":"S","Ꞅ":"S","Ⓣ":"T","Ｔ":"T","Ṫ":"T","Ť":"T","Ṭ":"T","Ț":"T","Ţ":"T","Ṱ":"T","Ṯ":"T","Ŧ":"T","Ƭ":"T","Ʈ":"T","Ⱦ":"T","Ꞇ":"T","Ꜩ":"TZ","Ⓤ":"U","Ｕ":"U","Ù":"U","Ú":"U","Û":"U","Ũ":"U","Ṹ":"U","Ū":"U","Ṻ":"U","Ŭ":"U","Ü":"U","Ǜ":"U","Ǘ":"U","Ǖ":"U","Ǚ":"U","Ủ":"U","Ů":"U","Ű":"U","Ǔ":"U","Ȕ":"U","Ȗ":"U","Ư":"U","Ừ":"U","Ứ":"U","Ữ":"U","Ử":"U","Ự":"U","Ụ":"U","Ṳ":"U","Ų":"U","Ṷ":"U","Ṵ":"U","Ʉ":"U","Ⓥ":"V","Ｖ":"V","Ṽ":"V","Ṿ":"V","Ʋ":"V","Ꝟ":"V","Ʌ":"V","Ꝡ":"VY","Ⓦ":"W","Ｗ":"W","Ẁ":"W","Ẃ":"W","Ŵ":"W","Ẇ":"W","Ẅ":"W","Ẉ":"W","Ⱳ":"W","Ⓧ":"X","Ｘ":"X","Ẋ":"X","Ẍ":"X","Ⓨ":"Y","Ｙ":"Y","Ỳ":"Y","Ý":"Y","Ŷ":"Y","Ỹ":"Y","Ȳ":"Y","Ẏ":"Y","Ÿ":"Y","Ỷ":"Y","Ỵ":"Y","Ƴ":"Y","Ɏ":"Y","Ỿ":"Y","Ⓩ":"Z","Ｚ":"Z","Ź":"Z","Ẑ":"Z","Ż":"Z","Ž":"Z","Ẓ":"Z","Ẕ":"Z","Ƶ":"Z","Ȥ":"Z","Ɀ":"Z","Ⱬ":"Z","Ꝣ":"Z","ⓐ":"a","ａ":"a","ẚ":"a","à":"a","á":"a","â":"a","ầ":"a","ấ":"a","ẫ":"a","ẩ":"a","ã":"a","ā":"a","ă":"a","ằ":"a","ắ":"a","ẵ":"a","ẳ":"a","ȧ":"a","ǡ":"a","ä":"a","ǟ":"a","ả":"a","å":"a","ǻ":"a","ǎ":"a","ȁ":"a","ȃ":"a","ạ":"a","ậ":"a","ặ":"a","ḁ":"a","ą":"a","ⱥ":"a","ɐ":"a","ꜳ":"aa","æ":"ae","ǽ":"ae","ǣ":"ae","ꜵ":"ao","ꜷ":"au","ꜹ":"av","ꜻ":"av","ꜽ":"ay","ⓑ":"b","ｂ":"b","ḃ":"b","ḅ":"b","ḇ":"b","ƀ":"b","ƃ":"b","ɓ":"b","ⓒ":"c","ｃ":"c","ć":"c","ĉ":"c","ċ":"c","č":"c","ç":"c","ḉ":"c","ƈ":"c","ȼ":"c","ꜿ":"c","ↄ":"c","ⓓ":"d","ｄ":"d","ḋ":"d","ď":"d","ḍ":"d","ḑ":"d","ḓ":"d","ḏ":"d","đ":"d","ƌ":"d","ɖ":"d","ɗ":"d","ꝺ":"d","ǳ":"dz","ǆ":"dz","ⓔ":"e","ｅ":"e","è":"e","é":"e","ê":"e","ề":"e","ế":"e","ễ":"e","ể":"e","ẽ":"e","ē":"e","ḕ":"e","ḗ":"e","ĕ":"e","ė":"e","ë":"e","ẻ":"e","ě":"e","ȅ":"e","ȇ":"e","ẹ":"e","ệ":"e","ȩ":"e","ḝ":"e","ę":"e","ḙ":"e","ḛ":"e","ɇ":"e","ɛ":"e","ǝ":"e","ⓕ":"f","ｆ":"f","ḟ":"f","ƒ":"f","ꝼ":"f","ⓖ":"g","ｇ":"g","ǵ":"g","ĝ":"g","ḡ":"g","ğ":"g","ġ":"g","ǧ":"g","ģ":"g","ǥ":"g","ɠ":"g","ꞡ":"g","ᵹ":"g","ꝿ":"g","ⓗ":"h","ｈ":"h","ĥ":"h","ḣ":"h","ḧ":"h","ȟ":"h","ḥ":"h","ḩ":"h","ḫ":"h","ẖ":"h","ħ":"h","ⱨ":"h","ⱶ":"h","ɥ":"h","ƕ":"hv","ⓘ":"i","ｉ":"i","ì":"i","í":"i","î":"i","ĩ":"i","ī":"i","ĭ":"i","ï":"i","ḯ":"i","ỉ":"i","ǐ":"i","ȉ":"i","ȋ":"i","ị":"i","į":"i","ḭ":"i","ɨ":"i","ı":"i","ⓙ":"j","ｊ":"j","ĵ":"j","ǰ":"j","ɉ":"j","ⓚ":"k","ｋ":"k","ḱ":"k","ǩ":"k","ḳ":"k","ķ":"k","ḵ":"k","ƙ":"k","ⱪ":"k","ꝁ":"k","ꝃ":"k","ꝅ":"k","ꞣ":"k","ⓛ":"l","ｌ":"l","ŀ":"l","ĺ":"l","ľ":"l","ḷ":"l","ḹ":"l","ļ":"l","ḽ":"l","ḻ":"l","ſ":"l","ł":"l","ƚ":"l","ɫ":"l","ⱡ":"l","ꝉ":"l","ꞁ":"l","ꝇ":"l","ǉ":"lj","ⓜ":"m","ｍ":"m","ḿ":"m","ṁ":"m","ṃ":"m","ɱ":"m","ɯ":"m","ⓝ":"n","ｎ":"n","ǹ":"n","ń":"n","ñ":"n","ṅ":"n","ň":"n","ṇ":"n","ņ":"n","ṋ":"n","ṉ":"n","ƞ":"n","ɲ":"n","ŉ":"n","ꞑ":"n","ꞥ":"n","ǌ":"nj","ⓞ":"o","ｏ":"o","ò":"o","ó":"o","ô":"o","ồ":"o","ố":"o","ỗ":"o","ổ":"o","õ":"o","ṍ":"o","ȭ":"o","ṏ":"o","ō":"o","ṑ":"o","ṓ":"o","ŏ":"o","ȯ":"o","ȱ":"o","ö":"o","ȫ":"o","ỏ":"o","ő":"o","ǒ":"o","ȍ":"o","ȏ":"o","ơ":"o","ờ":"o","ớ":"o","ỡ":"o","ở":"o","ợ":"o","ọ":"o","ộ":"o","ǫ":"o","ǭ":"o","ø":"o","ǿ":"o","ɔ":"o","ꝋ":"o","ꝍ":"o","ɵ":"o","œ":"oe","ƣ":"oi","ȣ":"ou","ꝏ":"oo","ⓟ":"p","ｐ":"p","ṕ":"p","ṗ":"p","ƥ":"p","ᵽ":"p","ꝑ":"p","ꝓ":"p","ꝕ":"p","ⓠ":"q","ｑ":"q","ɋ":"q","ꝗ":"q","ꝙ":"q","ⓡ":"r","ｒ":"r","ŕ":"r","ṙ":"r","ř":"r","ȑ":"r","ȓ":"r","ṛ":"r","ṝ":"r","ŗ":"r","ṟ":"r","ɍ":"r","ɽ":"r","ꝛ":"r","ꞧ":"r","ꞃ":"r","ⓢ":"s","ｓ":"s","ß":"s","ś":"s","ṥ":"s","ŝ":"s","ṡ":"s","š":"s","ṧ":"s","ṣ":"s","ṩ":"s","ș":"s","ş":"s","ȿ":"s","ꞩ":"s","ꞅ":"s","ẛ":"s","ⓣ":"t","ｔ":"t","ṫ":"t","ẗ":"t","ť":"t","ṭ":"t","ț":"t","ţ":"t","ṱ":"t","ṯ":"t","ŧ":"t","ƭ":"t","ʈ":"t","ⱦ":"t","ꞇ":"t","ꜩ":"tz","ⓤ":"u","ｕ":"u","ù":"u","ú":"u","û":"u","ũ":"u","ṹ":"u","ū":"u","ṻ":"u","ŭ":"u","ü":"u","ǜ":"u","ǘ":"u","ǖ":"u","ǚ":"u","ủ":"u","ů":"u","ű":"u","ǔ":"u","ȕ":"u","ȗ":"u","ư":"u","ừ":"u","ứ":"u","ữ":"u","ử":"u","ự":"u","ụ":"u","ṳ":"u","ų":"u","ṷ":"u","ṵ":"u","ʉ":"u","ⓥ":"v","ｖ":"v","ṽ":"v","ṿ":"v","ʋ":"v","ꝟ":"v","ʌ":"v","ꝡ":"vy","ⓦ":"w","ｗ":"w","ẁ":"w","ẃ":"w","ŵ":"w","ẇ":"w","ẅ":"w","ẘ":"w","ẉ":"w","ⱳ":"w","ⓧ":"x","ｘ":"x","ẋ":"x","ẍ":"x","ⓨ":"y","ｙ":"y","ỳ":"y","ý":"y","ŷ":"y","ỹ":"y","ȳ":"y","ẏ":"y","ÿ":"y","ỷ":"y","ẙ":"y","ỵ":"y","ƴ":"y","ɏ":"y","ỿ":"y","ⓩ":"z","ｚ":"z","ź":"z","ẑ":"z","ż":"z","ž":"z","ẓ":"z","ẕ":"z","ƶ":"z","ȥ":"z","ɀ":"z","ⱬ":"z","ꝣ":"z","Ά":"Α","Έ":"Ε","Ή":"Η","Ί":"Ι","Ϊ":"Ι","Ό":"Ο","Ύ":"Υ","Ϋ":"Υ","Ώ":"Ω","ά":"α","έ":"ε","ή":"η","ί":"ι","ϊ":"ι","ΐ":"ι","ό":"ο","ύ":"υ","ϋ":"υ","ΰ":"υ","ώ":"ω","ς":"σ","’":"'"}}),e.define("select2/data/base",["../utils"],function(i){function n(e,t){n.__super__.constructor.call(this)}return i.Extend(n,i.Observable),n.prototype.current=function(e){throw new Error("The `current` method must be defined in child classes.")},n.prototype.query=function(e,t){throw new Error("The `query` method must be defined in child classes.")},n.prototype.bind=function(e,t){},n.prototype.destroy=function(){},n.prototype.generateResultId=function(e,t){var n=e.id+"-result-";return n+=i.generateChars(4),null!=t.id?n+="-"+t.id.toString():n+="-"+i.generateChars(4),n},n}),e.define("select2/data/select",["./base","../utils","jquery"],function(e,a,l){function n(e,t){this.$element=e,this.options=t,n.__super__.constructor.call(this)}return a.Extend(n,e),n.prototype.current=function(e){var n=[],i=this;this.$element.find(":selected").each(function(){var e=l(this),t=i.item(e);n.push(t)}),e(n)},n.prototype.select=function(r){var o=this;if(r.selected=!0,l(r.element).is("option"))return r.element.selected=!0,void this.$element.trigger("input").trigger("change");if(this.$element.prop("multiple"))this.current(function(e){var t=[];(r=[r]).push.apply(r,e);for(var n=0;n<r.length;n++){var i=r[n].id;-1===l.inArray(i,t)&&t.push(i)}o.$element.val(t),o.$element.trigger("input").trigger("change")});else{var e=r.id;this.$element.val(e),this.$element.trigger("input").trigger("change")}},n.prototype.unselect=function(r){var o=this;if(this.$element.prop("multiple")){if(r.selected=!1,l(r.element).is("option"))return r.element.selected=!1,void this.$element.trigger("input").trigger("change");this.current(function(e){for(var t=[],n=0;n<e.length;n++){var i=e[n].id;i!==r.id&&-1===l.inArray(i,t)&&t.push(i)}o.$element.val(t),o.$element.trigger("input").trigger("change")})}},n.prototype.bind=function(e,t){var n=this;(this.container=e).on("select",function(e){n.select(e.data)}),e.on("unselect",function(e){n.unselect(e.data)})},n.prototype.destroy=function(){this.$element.find("*").each(function(){a.RemoveData(this)})},n.prototype.query=function(i,e){var r=[],o=this;this.$element.children().each(function(){var e=l(this);if(e.is("option")||e.is("optgroup")){var t=o.item(e),n=o.matches(i,t);null!==n&&r.push(n)}}),e({results:r})},n.prototype.addOptions=function(e){a.appendMany(this.$element,e)},n.prototype.option=function(e){var t;e.children?(t=document.createElement("optgroup")).label=e.text:void 0!==(t=document.createElement("option")).textContent?t.textContent=e.text:t.innerText=e.text,void 0!==e.id&&(t.value=e.id),e.disabled&&(t.disabled=!0),e.selected&&(t.selected=!0),e.title&&(t.title=e.title);var n=l(t),i=this._normalizeItem(e);return i.element=t,a.StoreData(t,"data",i),n},n.prototype.item=function(e){var t={};if(null!=(t=a.GetData(e[0],"data")))return t;if(e.is("option"))t={id:e.val(),text:e.text(),disabled:e.prop("disabled"),selected:e.prop("selected"),title:e.prop("title")};else if(e.is("optgroup")){t={text:e.prop("label"),children:[],title:e.prop("title")};for(var n=e.children("option"),i=[],r=0;r<n.length;r++){var o=l(n[r]),s=this.item(o);i.push(s)}t.children=i}return(t=this._normalizeItem(t)).element=e[0],a.StoreData(e[0],"data",t),t},n.prototype._normalizeItem=function(e){e!==Object(e)&&(e={id:e,text:e});return null!=(e=l.extend({},{text:""},e)).id&&(e.id=e.id.toString()),null!=e.text&&(e.text=e.text.toString()),null==e._resultId&&e.id&&null!=this.container&&(e._resultId=this.generateResultId(this.container,e)),l.extend({},{selected:!1,disabled:!1},e)},n.prototype.matches=function(e,t){return this.options.get("matcher")(e,t)},n}),e.define("select2/data/array",["./select","../utils","jquery"],function(e,f,g){function i(e,t){this._dataToConvert=t.get("data")||[],i.__super__.constructor.call(this,e,t)}return f.Extend(i,e),i.prototype.bind=function(e,t){i.__super__.bind.call(this,e,t),this.addOptions(this.convertToOptions(this._dataToConvert))},i.prototype.select=function(n){var e=this.$element.find("option").filter(function(e,t){return t.value==n.id.toString()});0===e.length&&(e=this.option(n),this.addOptions(e)),i.__super__.select.call(this,n)},i.prototype.convertToOptions=function(e){var t=this,n=this.$element.find("option"),i=n.map(function(){return t.item(g(this)).id}).get(),r=[];function o(e){return function(){return g(this).val()==e.id}}for(var s=0;s<e.length;s++){var a=this._normalizeItem(e[s]);if(0<=g.inArray(a.id,i)){var l=n.filter(o(a)),c=this.item(l),u=g.extend(!0,{},a,c),d=this.option(u);l.replaceWith(d)}else{var p=this.option(a);if(a.children){var h=this.convertToOptions(a.children);f.appendMany(p,h)}r.push(p)}}return r},i}),e.define("select2/data/ajax",["./array","../utils","jquery"],function(e,t,o){function n(e,t){this.ajaxOptions=this._applyDefaults(t.get("ajax")),null!=this.ajaxOptions.processResults&&(this.processResults=this.ajaxOptions.processResults),n.__super__.constructor.call(this,e,t)}return t.Extend(n,e),n.prototype._applyDefaults=function(e){var t={data:function(e){return o.extend({},e,{q:e.term})},transport:function(e,t,n){var i=o.ajax(e);return i.then(t),i.fail(n),i}};return o.extend({},t,e,!0)},n.prototype.processResults=function(e){return e},n.prototype.query=function(n,i){var r=this;null!=this._request&&(o.isFunction(this._request.abort)&&this._request.abort(),this._request=null);var t=o.extend({type:"GET"},this.ajaxOptions);function e(){var e=t.transport(t,function(e){var t=r.processResults(e,n);r.options.get("debug")&&window.console&&console.error&&(t&&t.results&&o.isArray(t.results)||console.error("Select2: The AJAX results did not return an array in the `results` key of the response.")),i(t)},function(){"status"in e&&(0===e.status||"0"===e.status)||r.trigger("results:message",{message:"errorLoading"})});r._request=e}"function"==typeof t.url&&(t.url=t.url.call(this.$element,n)),"function"==typeof t.data&&(t.data=t.data.call(this.$element,n)),this.ajaxOptions.delay&&null!=n.term?(this._queryTimeout&&window.clearTimeout(this._queryTimeout),this._queryTimeout=window.setTimeout(e,this.ajaxOptions.delay)):e()},n}),e.define("select2/data/tags",["jquery"],function(u){function e(e,t,n){var i=n.get("tags"),r=n.get("createTag");void 0!==r&&(this.createTag=r);var o=n.get("insertTag");if(void 0!==o&&(this.insertTag=o),e.call(this,t,n),u.isArray(i))for(var s=0;s<i.length;s++){var a=i[s],l=this._normalizeItem(a),c=this.option(l);this.$element.append(c)}}return e.prototype.query=function(e,c,u){var d=this;this._removeOldTags(),null!=c.term&&null==c.page?e.call(this,c,function e(t,n){for(var i=t.results,r=0;r<i.length;r++){var o=i[r],s=null!=o.children&&!e({results:o.children},!0);if((o.text||"").toUpperCase()===(c.term||"").toUpperCase()||s)return!n&&(t.data=i,void u(t))}if(n)return!0;var a=d.createTag(c);if(null!=a){var l=d.option(a);l.attr("data-select2-tag",!0),d.addOptions([l]),d.insertTag(i,a)}t.results=i,u(t)}):e.call(this,c,u)},e.prototype.createTag=function(e,t){var n=u.trim(t.term);return""===n?null:{id:n,text:n}},e.prototype.insertTag=function(e,t,n){t.unshift(n)},e.prototype._removeOldTags=function(e){this.$element.find("option[data-select2-tag]").each(function(){this.selected||u(this).remove()})},e}),e.define("select2/data/tokenizer",["jquery"],function(d){function e(e,t,n){var i=n.get("tokenizer");void 0!==i&&(this.tokenizer=i),e.call(this,t,n)}return e.prototype.bind=function(e,t,n){e.call(this,t,n),this.$search=t.dropdown.$search||t.selection.$search||n.find(".select2-search__field")},e.prototype.query=function(e,t,n){var r=this;t.term=t.term||"";var i=this.tokenizer(t,this.options,function(e){var t,n=r._normalizeItem(e);if(!r.$element.find("option").filter(function(){return d(this).val()===n.id}).length){var i=r.option(n);i.attr("data-select2-tag",!0),r._removeOldTags(),r.addOptions([i])}t=n,r.trigger("select",{data:t})});i.term!==t.term&&(this.$search.length&&(this.$search.val(i.term),this.$search.trigger("focus")),t.term=i.term),e.call(this,t,n)},e.prototype.tokenizer=function(e,t,n,i){for(var r=n.get("tokenSeparators")||[],o=t.term,s=0,a=this.createTag||function(e){return{id:e.term,text:e.term}};s<o.length;){var l=o[s];if(-1!==d.inArray(l,r)){var c=o.substr(0,s),u=a(d.extend({},t,{term:c}));null!=u?(i(u),o=o.substr(s+1)||"",s=0):s++}else s++}return{term:o}},e}),e.define("select2/data/minimumInputLength",[],function(){function e(e,t,n){this.minimumInputLength=n.get("minimumInputLength"),e.call(this,t,n)}return e.prototype.query=function(e,t,n){t.term=t.term||"",t.term.length<this.minimumInputLength?this.trigger("results:message",{message:"inputTooShort",args:{minimum:this.minimumInputLength,input:t.term,params:t}}):e.call(this,t,n)},e}),e.define("select2/data/maximumInputLength",[],function(){function e(e,t,n){this.maximumInputLength=n.get("maximumInputLength"),e.call(this,t,n)}return e.prototype.query=function(e,t,n){t.term=t.term||"",0<this.maximumInputLength&&t.term.length>this.maximumInputLength?this.trigger("results:message",{message:"inputTooLong",args:{maximum:this.maximumInputLength,input:t.term,params:t}}):e.call(this,t,n)},e}),e.define("select2/data/maximumSelectionLength",[],function(){function e(e,t,n){this.maximumSelectionLength=n.get("maximumSelectionLength"),e.call(this,t,n)}return e.prototype.bind=function(e,t,n){var i=this;e.call(this,t,n),t.on("select",function(){i._checkIfMaximumSelected()})},e.prototype.query=function(e,t,n){var i=this;this._checkIfMaximumSelected(function(){e.call(i,t,n)})},e.prototype._checkIfMaximumSelected=function(e,n){var i=this;this.current(function(e){var t=null!=e?e.length:0;0<i.maximumSelectionLength&&t>=i.maximumSelectionLength?i.trigger("results:message",{message:"maximumSelected",args:{maximum:i.maximumSelectionLength}}):n&&n()})},e}),e.define("select2/dropdown",["jquery","./utils"],function(t,e){function n(e,t){this.$element=e,this.options=t,n.__super__.constructor.call(this)}return e.Extend(n,e.Observable),n.prototype.render=function(){var e=t('<span class="select2-dropdown"><span class="select2-results"></span></span>');return e.attr("dir",this.options.get("dir")),this.$dropdown=e},n.prototype.bind=function(){},n.prototype.position=function(e,t){},n.prototype.destroy=function(){this.$dropdown.remove()},n}),e.define("select2/dropdown/search",["jquery","../utils"],function(o,e){function t(){}return t.prototype.render=function(e){var t=e.call(this),n=o('<span class="select2-search select2-search--dropdown"><input class="select2-search__field" type="search" tabindex="-1" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" /></span>');return this.$searchContainer=n,this.$search=n.find("input"),t.prepend(n),t},t.prototype.bind=function(e,t,n){var i=this,r=t.id+"-results";e.call(this,t,n),this.$search.on("keydown",function(e){i.trigger("keypress",e),i._keyUpPrevented=e.isDefaultPrevented()}),this.$search.on("input",function(e){o(this).off("keyup")}),this.$search.on("keyup input",function(e){i.handleSearch(e)}),t.on("open",function(){i.$search.attr("tabindex",0),i.$search.attr("aria-controls",r),i.$search.trigger("focus"),window.setTimeout(function(){i.$search.trigger("focus")},0)}),t.on("close",function(){i.$search.attr("tabindex",-1),i.$search.removeAttr("aria-controls"),i.$search.removeAttr("aria-activedescendant"),i.$search.val(""),i.$search.trigger("blur")}),t.on("focus",function(){t.isOpen()||i.$search.trigger("focus")}),t.on("results:all",function(e){null!=e.query.term&&""!==e.query.term||(i.showSearch(e)?i.$searchContainer.removeClass("select2-search--hide"):i.$searchContainer.addClass("select2-search--hide"))}),t.on("results:focus",function(e){e.data._resultId?i.$search.attr("aria-activedescendant",e.data._resultId):i.$search.removeAttr("aria-activedescendant")})},t.prototype.handleSearch=function(e){if(!this._keyUpPrevented){var t=this.$search.val();this.trigger("query",{term:t})}this._keyUpPrevented=!1},t.prototype.showSearch=function(e,t){return!0},t}),e.define("select2/dropdown/hidePlaceholder",[],function(){function e(e,t,n,i){this.placeholder=this.normalizePlaceholder(n.get("placeholder")),e.call(this,t,n,i)}return e.prototype.append=function(e,t){t.results=this.removePlaceholder(t.results),e.call(this,t)},e.prototype.normalizePlaceholder=function(e,t){return"string"==typeof t&&(t={id:"",text:t}),t},e.prototype.removePlaceholder=function(e,t){for(var n=t.slice(0),i=t.length-1;0<=i;i--){var r=t[i];this.placeholder.id===r.id&&n.splice(i,1)}return n},e}),e.define("select2/dropdown/infiniteScroll",["jquery"],function(n){function e(e,t,n,i){this.lastParams={},e.call(this,t,n,i),this.$loadingMore=this.createLoadingMore(),this.loading=!1}return e.prototype.append=function(e,t){this.$loadingMore.remove(),this.loading=!1,e.call(this,t),this.showLoadingMore(t)&&(this.$results.append(this.$loadingMore),this.loadMoreIfNeeded())},e.prototype.bind=function(e,t,n){var i=this;e.call(this,t,n),t.on("query",function(e){i.lastParams=e,i.loading=!0}),t.on("query:append",function(e){i.lastParams=e,i.loading=!0}),this.$results.on("scroll",this.loadMoreIfNeeded.bind(this))},e.prototype.loadMoreIfNeeded=function(){var e=n.contains(document.documentElement,this.$loadingMore[0]);if(!this.loading&&e){var t=this.$results.offset().top+this.$results.outerHeight(!1);this.$loadingMore.offset().top+this.$loadingMore.outerHeight(!1)<=t+50&&this.loadMore()}},e.prototype.loadMore=function(){this.loading=!0;var e=n.extend({},{page:1},this.lastParams);e.page++,this.trigger("query:append",e)},e.prototype.showLoadingMore=function(e,t){return t.pagination&&t.pagination.more},e.prototype.createLoadingMore=function(){var e=n('<li class="select2-results__option select2-results__option--load-more"role="option" aria-disabled="true"></li>'),t=this.options.get("translations").get("loadingMore");return e.html(t(this.lastParams)),e},e}),e.define("select2/dropdown/attachBody",["jquery","../utils"],function(f,a){function e(e,t,n){this.$dropdownParent=f(n.get("dropdownParent")||document.body),e.call(this,t,n)}return e.prototype.bind=function(e,t,n){var i=this;e.call(this,t,n),t.on("open",function(){i._showDropdown(),i._attachPositioningHandler(t),i._bindContainerResultHandlers(t)}),t.on("close",function(){i._hideDropdown(),i._detachPositioningHandler(t)}),this.$dropdownContainer.on("mousedown",function(e){e.stopPropagation()})},e.prototype.destroy=function(e){e.call(this),this.$dropdownContainer.remove()},e.prototype.position=function(e,t,n){t.attr("class",n.attr("class")),t.removeClass("select2"),t.addClass("select2-container--open"),t.css({position:"absolute",top:-999999}),this.$container=n},e.prototype.render=function(e){var t=f("<span></span>"),n=e.call(this);return t.append(n),this.$dropdownContainer=t},e.prototype._hideDropdown=function(e){this.$dropdownContainer.detach()},e.prototype._bindContainerResultHandlers=function(e,t){if(!this._containerResultsHandlersBound){var n=this;t.on("results:all",function(){n._positionDropdown(),n._resizeDropdown()}),t.on("results:append",function(){n._positionDropdown(),n._resizeDropdown()}),t.on("results:message",function(){n._positionDropdown(),n._resizeDropdown()}),t.on("select",function(){n._positionDropdown(),n._resizeDropdown()}),t.on("unselect",function(){n._positionDropdown(),n._resizeDropdown()}),this._containerResultsHandlersBound=!0}},e.prototype._attachPositioningHandler=function(e,t){var n=this,i="scroll.select2."+t.id,r="resize.select2."+t.id,o="orientationchange.select2."+t.id,s=this.$container.parents().filter(a.hasScroll);s.each(function(){a.StoreData(this,"select2-scroll-position",{x:f(this).scrollLeft(),y:f(this).scrollTop()})}),s.on(i,function(e){var t=a.GetData(this,"select2-scroll-position");f(this).scrollTop(t.y)}),f(window).on(i+" "+r+" "+o,function(e){n._positionDropdown(),n._resizeDropdown()})},e.prototype._detachPositioningHandler=function(e,t){var n="scroll.select2."+t.id,i="resize.select2."+t.id,r="orientationchange.select2."+t.id;this.$container.parents().filter(a.hasScroll).off(n),f(window).off(n+" "+i+" "+r)},e.prototype._positionDropdown=function(){var e=f(window),t=this.$dropdown.hasClass("select2-dropdown--above"),n=this.$dropdown.hasClass("select2-dropdown--below"),i=null,r=this.$container.offset();r.bottom=r.top+this.$container.outerHeight(!1);var o={height:this.$container.outerHeight(!1)};o.top=r.top,o.bottom=r.top+o.height;var s=this.$dropdown.outerHeight(!1),a=e.scrollTop(),l=e.scrollTop()+e.height(),c=a<r.top-s,u=l>r.bottom+s,d={left:r.left,top:o.bottom},p=this.$dropdownParent;"static"===p.css("position")&&(p=p.offsetParent());var h={top:0,left:0};(f.contains(document.body,p[0])||p[0].isConnected)&&(h=p.offset()),d.top-=h.top,d.left-=h.left,t||n||(i="below"),u||!c||t?!c&&u&&t&&(i="below"):i="above",("above"==i||t&&"below"!==i)&&(d.top=o.top-h.top-s),null!=i&&(this.$dropdown.removeClass("select2-dropdown--below select2-dropdown--above").addClass("select2-dropdown--"+i),this.$container.removeClass("select2-container--below select2-container--above").addClass("select2-container--"+i)),this.$dropdownContainer.css(d)},e.prototype._resizeDropdown=function(){var e={width:this.$container.outerWidth(!1)+"px"};this.options.get("dropdownAutoWidth")&&(e.minWidth=e.width,e.position="relative",e.width="auto"),this.$dropdown.css(e)},e.prototype._showDropdown=function(e){this.$dropdownContainer.appendTo(this.$dropdownParent),this._positionDropdown(),this._resizeDropdown()},e}),e.define("select2/dropdown/minimumResultsForSearch",[],function(){function e(e,t,n,i){this.minimumResultsForSearch=n.get("minimumResultsForSearch"),this.minimumResultsForSearch<0&&(this.minimumResultsForSearch=1/0),e.call(this,t,n,i)}return e.prototype.showSearch=function(e,t){return!(function e(t){for(var n=0,i=0;i<t.length;i++){var r=t[i];r.children?n+=e(r.children):n++}return n}(t.data.results)<this.minimumResultsForSearch)&&e.call(this,t)},e}),e.define("select2/dropdown/selectOnClose",["../utils"],function(o){function e(){}return e.prototype.bind=function(e,t,n){var i=this;e.call(this,t,n),t.on("close",function(e){i._handleSelectOnClose(e)})},e.prototype._handleSelectOnClose=function(e,t){if(t&&null!=t.originalSelect2Event){var n=t.originalSelect2Event;if("select"===n._type||"unselect"===n._type)return}var i=this.getHighlightedResults();if(!(i.length<1)){var r=o.GetData(i[0],"data");null!=r.element&&r.element.selected||null==r.element&&r.selected||this.trigger("select",{data:r})}},e}),e.define("select2/dropdown/closeOnSelect",[],function(){function e(){}return e.prototype.bind=function(e,t,n){var i=this;e.call(this,t,n),t.on("select",function(e){i._selectTriggered(e)}),t.on("unselect",function(e){i._selectTriggered(e)})},e.prototype._selectTriggered=function(e,t){var n=t.originalEvent;n&&(n.ctrlKey||n.metaKey)||this.trigger("close",{originalEvent:n,originalSelect2Event:t})},e}),e.define("select2/i18n/en",[],function(){return{errorLoading:function(){return"The results could not be loaded."},inputTooLong:function(e){var t=e.input.length-e.maximum,n="Please delete "+t+" character";return 1!=t&&(n+="s"),n},inputTooShort:function(e){return"Please enter "+(e.minimum-e.input.length)+" or more characters"},loadingMore:function(){return"Loading more results…"},maximumSelected:function(e){var t="You can only select "+e.maximum+" item";return 1!=e.maximum&&(t+="s"),t},noResults:function(){return"No results found"},searching:function(){return"Searching…"},removeAllItems:function(){return"Remove all items"}}}),e.define("select2/defaults",["jquery","require","./results","./selection/single","./selection/multiple","./selection/placeholder","./selection/allowClear","./selection/search","./selection/eventRelay","./utils","./translation","./diacritics","./data/select","./data/array","./data/ajax","./data/tags","./data/tokenizer","./data/minimumInputLength","./data/maximumInputLength","./data/maximumSelectionLength","./dropdown","./dropdown/search","./dropdown/hidePlaceholder","./dropdown/infiniteScroll","./dropdown/attachBody","./dropdown/minimumResultsForSearch","./dropdown/selectOnClose","./dropdown/closeOnSelect","./i18n/en"],function(c,u,d,p,h,f,g,m,v,y,s,t,_,w,$,b,A,x,D,S,C,E,O,T,q,j,L,I,e){function n(){this.reset()}return n.prototype.apply=function(e){if(null==(e=c.extend(!0,{},this.defaults,e)).dataAdapter){if(null!=e.ajax?e.dataAdapter=$:null!=e.data?e.dataAdapter=w:e.dataAdapter=_,0<e.minimumInputLength&&(e.dataAdapter=y.Decorate(e.dataAdapter,x)),0<e.maximumInputLength&&(e.dataAdapter=y.Decorate(e.dataAdapter,D)),0<e.maximumSelectionLength&&(e.dataAdapter=y.Decorate(e.dataAdapter,S)),e.tags&&(e.dataAdapter=y.Decorate(e.dataAdapter,b)),null==e.tokenSeparators&&null==e.tokenizer||(e.dataAdapter=y.Decorate(e.dataAdapter,A)),null!=e.query){var t=u(e.amdBase+"compat/query");e.dataAdapter=y.Decorate(e.dataAdapter,t)}if(null!=e.initSelection){var n=u(e.amdBase+"compat/initSelection");e.dataAdapter=y.Decorate(e.dataAdapter,n)}}if(null==e.resultsAdapter&&(e.resultsAdapter=d,null!=e.ajax&&(e.resultsAdapter=y.Decorate(e.resultsAdapter,T)),null!=e.placeholder&&(e.resultsAdapter=y.Decorate(e.resultsAdapter,O)),e.selectOnClose&&(e.resultsAdapter=y.Decorate(e.resultsAdapter,L))),null==e.dropdownAdapter){if(e.multiple)e.dropdownAdapter=C;else{var i=y.Decorate(C,E);e.dropdownAdapter=i}if(0!==e.minimumResultsForSearch&&(e.dropdownAdapter=y.Decorate(e.dropdownAdapter,j)),e.closeOnSelect&&(e.dropdownAdapter=y.Decorate(e.dropdownAdapter,I)),null!=e.dropdownCssClass||null!=e.dropdownCss||null!=e.adaptDropdownCssClass){var r=u(e.amdBase+"compat/dropdownCss");e.dropdownAdapter=y.Decorate(e.dropdownAdapter,r)}e.dropdownAdapter=y.Decorate(e.dropdownAdapter,q)}if(null==e.selectionAdapter){if(e.multiple?e.selectionAdapter=h:e.selectionAdapter=p,null!=e.placeholder&&(e.selectionAdapter=y.Decorate(e.selectionAdapter,f)),e.allowClear&&(e.selectionAdapter=y.Decorate(e.selectionAdapter,g)),e.multiple&&(e.selectionAdapter=y.Decorate(e.selectionAdapter,m)),null!=e.containerCssClass||null!=e.containerCss||null!=e.adaptContainerCssClass){var o=u(e.amdBase+"compat/containerCss");e.selectionAdapter=y.Decorate(e.selectionAdapter,o)}e.selectionAdapter=y.Decorate(e.selectionAdapter,v)}e.language=this._resolveLanguage(e.language),e.language.push("en");for(var s=[],a=0;a<e.language.length;a++){var l=e.language[a];-1===s.indexOf(l)&&s.push(l)}return e.language=s,e.translations=this._processTranslations(e.language,e.debug),e},n.prototype.reset=function(){function a(e){return e.replace(/[^\u0000-\u007E]/g,function(e){return t[e]||e})}this.defaults={amdBase:"./",amdLanguageBase:"./i18n/",closeOnSelect:!0,debug:!1,dropdownAutoWidth:!1,escapeMarkup:y.escapeMarkup,language:{},matcher:function e(t,n){if(""===c.trim(t.term))return n;if(n.children&&0<n.children.length){for(var i=c.extend(!0,{},n),r=n.children.length-1;0<=r;r--)null==e(t,n.children[r])&&i.children.splice(r,1);return 0<i.children.length?i:e(t,i)}var o=a(n.text).toUpperCase(),s=a(t.term).toUpperCase();return-1<o.indexOf(s)?n:null},minimumInputLength:0,maximumInputLength:0,maximumSelectionLength:0,minimumResultsForSearch:0,selectOnClose:!1,scrollAfterSelect:!1,sorter:function(e){return e},templateResult:function(e){return e.text},templateSelection:function(e){return e.text},theme:"default",width:"resolve"}},n.prototype.applyFromElement=function(e,t){var n=e.language,i=this.defaults.language,r=t.prop("lang"),o=t.closest("[lang]").prop("lang"),s=Array.prototype.concat.call(this._resolveLanguage(r),this._resolveLanguage(n),this._resolveLanguage(i),this._resolveLanguage(o));return e.language=s,e},n.prototype._resolveLanguage=function(e){if(!e)return[];if(c.isEmptyObject(e))return[];if(c.isPlainObject(e))return[e];var t;t=c.isArray(e)?e:[e];for(var n=[],i=0;i<t.length;i++)if(n.push(t[i]),"string"==typeof t[i]&&0<t[i].indexOf("-")){var r=t[i].split("-")[0];n.push(r)}return n},n.prototype._processTranslations=function(e,t){for(var n=new s,i=0;i<e.length;i++){var r=new s,o=e[i];if("string"==typeof o)try{r=s.loadPath(o)}catch(e){try{o=this.defaults.amdLanguageBase+o,r=s.loadPath(o)}catch(e){t&&window.console&&console.warn&&console.warn('Select2: The language file for "'+o+'" could not be automatically loaded. A fallback will be used instead.')}}else r=c.isPlainObject(o)?new s(o):o;n.extend(r)}return n},n.prototype.set=function(e,t){var n={};n[c.camelCase(e)]=t;var i=y._convertData(n);c.extend(!0,this.defaults,i)},new n}),e.define("select2/options",["require","jquery","./defaults","./utils"],function(i,d,r,p){function e(e,t){if(this.options=e,null!=t&&this.fromElement(t),null!=t&&(this.options=r.applyFromElement(this.options,t)),this.options=r.apply(this.options),t&&t.is("input")){var n=i(this.get("amdBase")+"compat/inputData");this.options.dataAdapter=p.Decorate(this.options.dataAdapter,n)}}return e.prototype.fromElement=function(e){var t=["select2"];null==this.options.multiple&&(this.options.multiple=e.prop("multiple")),null==this.options.disabled&&(this.options.disabled=e.prop("disabled")),null==this.options.dir&&(e.prop("dir")?this.options.dir=e.prop("dir"):e.closest("[dir]").prop("dir")?this.options.dir=e.closest("[dir]").prop("dir"):this.options.dir="ltr"),e.prop("disabled",this.options.disabled),e.prop("multiple",this.options.multiple),p.GetData(e[0],"select2Tags")&&(this.options.debug&&window.console&&console.warn&&console.warn('Select2: The `data-select2-tags` attribute has been changed to use the `data-data` and `data-tags="true"` attributes and will be removed in future versions of Select2.'),p.StoreData(e[0],"data",p.GetData(e[0],"select2Tags")),p.StoreData(e[0],"tags",!0)),p.GetData(e[0],"ajaxUrl")&&(this.options.debug&&window.console&&console.warn&&console.warn("Select2: The `data-ajax-url` attribute has been changed to `data-ajax--url` and support for the old attribute will be removed in future versions of Select2."),e.attr("ajax--url",p.GetData(e[0],"ajaxUrl")),p.StoreData(e[0],"ajax-Url",p.GetData(e[0],"ajaxUrl")));var n={};function i(e,t){return t.toUpperCase()}for(var r=0;r<e[0].attributes.length;r++){var o=e[0].attributes[r].name,s="data-";if(o.substr(0,s.length)==s){var a=o.substring(s.length),l=p.GetData(e[0],a);n[a.replace(/-([a-z])/g,i)]=l}}d.fn.jquery&&"1."==d.fn.jquery.substr(0,2)&&e[0].dataset&&(n=d.extend(!0,{},e[0].dataset,n));var c=d.extend(!0,{},p.GetData(e[0]),n);for(var u in c=p._convertData(c))-1<d.inArray(u,t)||(d.isPlainObject(this.options[u])?d.extend(this.options[u],c[u]):this.options[u]=c[u]);return this},e.prototype.get=function(e){return this.options[e]},e.prototype.set=function(e,t){this.options[e]=t},e}),e.define("select2/core",["jquery","./options","./utils","./keys"],function(o,c,u,i){var d=function(e,t){null!=u.GetData(e[0],"select2")&&u.GetData(e[0],"select2").destroy(),this.$element=e,this.id=this._generateId(e),t=t||{},this.options=new c(t,e),d.__super__.constructor.call(this);var n=e.attr("tabindex")||0;u.StoreData(e[0],"old-tabindex",n),e.attr("tabindex","-1");var i=this.options.get("dataAdapter");this.dataAdapter=new i(e,this.options);var r=this.render();this._placeContainer(r);var o=this.options.get("selectionAdapter");this.selection=new o(e,this.options),this.$selection=this.selection.render(),this.selection.position(this.$selection,r);var s=this.options.get("dropdownAdapter");this.dropdown=new s(e,this.options),this.$dropdown=this.dropdown.render(),this.dropdown.position(this.$dropdown,r);var a=this.options.get("resultsAdapter");this.results=new a(e,this.options,this.dataAdapter),this.$results=this.results.render(),this.results.position(this.$results,this.$dropdown);var l=this;this._bindAdapters(),this._registerDomEvents(),this._registerDataEvents(),this._registerSelectionEvents(),this._registerDropdownEvents(),this._registerResultsEvents(),this._registerEvents(),this.dataAdapter.current(function(e){l.trigger("selection:update",{data:e})}),e.addClass("select2-hidden-accessible"),e.attr("aria-hidden","true"),this._syncAttributes(),u.StoreData(e[0],"select2",this),e.data("select2",this)};return u.Extend(d,u.Observable),d.prototype._generateId=function(e){return"select2-"+(null!=e.attr("id")?e.attr("id"):null!=e.attr("name")?e.attr("name")+"-"+u.generateChars(2):u.generateChars(4)).replace(/(:|\.|\[|\]|,)/g,"")},d.prototype._placeContainer=function(e){e.insertAfter(this.$element);var t=this._resolveWidth(this.$element,this.options.get("width"));null!=t&&e.css("width",t)},d.prototype._resolveWidth=function(e,t){var n=/^width:(([-+]?([0-9]*\.)?[0-9]+)(px|em|ex|%|in|cm|mm|pt|pc))/i;if("resolve"==t){var i=this._resolveWidth(e,"style");return null!=i?i:this._resolveWidth(e,"element")}if("element"==t){var r=e.outerWidth(!1);return r<=0?"auto":r+"px"}if("style"!=t)return"computedstyle"!=t?t:window.getComputedStyle(e[0]).width;var o=e.attr("style");if("string"!=typeof o)return null;for(var s=o.split(";"),a=0,l=s.length;a<l;a+=1){var c=s[a].replace(/\s/g,"").match(n);if(null!==c&&1<=c.length)return c[1]}return null},d.prototype._bindAdapters=function(){this.dataAdapter.bind(this,this.$container),this.selection.bind(this,this.$container),this.dropdown.bind(this,this.$container),this.results.bind(this,this.$container)},d.prototype._registerDomEvents=function(){var t=this;this.$element.on("change.select2",function(){t.dataAdapter.current(function(e){t.trigger("selection:update",{data:e})})}),this.$element.on("focus.select2",function(e){t.trigger("focus",e)}),this._syncA=u.bind(this._syncAttributes,this),this._syncS=u.bind(this._syncSubtree,this),this.$element[0].attachEvent&&this.$element[0].attachEvent("onpropertychange",this._syncA);var e=window.MutationObserver||window.WebKitMutationObserver||window.MozMutationObserver;null!=e?(this._observer=new e(function(e){t._syncA(),t._syncS(null,e)}),this._observer.observe(this.$element[0],{attributes:!0,childList:!0,subtree:!1})):this.$element[0].addEventListener&&(this.$element[0].addEventListener("DOMAttrModified",t._syncA,!1),this.$element[0].addEventListener("DOMNodeInserted",t._syncS,!1),this.$element[0].addEventListener("DOMNodeRemoved",t._syncS,!1))},d.prototype._registerDataEvents=function(){var n=this;this.dataAdapter.on("*",function(e,t){n.trigger(e,t)})},d.prototype._registerSelectionEvents=function(){var n=this,i=["toggle","focus"];this.selection.on("toggle",function(){n.toggleDropdown()}),this.selection.on("focus",function(e){n.focus(e)}),this.selection.on("*",function(e,t){-1===o.inArray(e,i)&&n.trigger(e,t)})},d.prototype._registerDropdownEvents=function(){var n=this;this.dropdown.on("*",function(e,t){n.trigger(e,t)})},d.prototype._registerResultsEvents=function(){var n=this;this.results.on("*",function(e,t){n.trigger(e,t)})},d.prototype._registerEvents=function(){var n=this;this.on("open",function(){n.$container.addClass("select2-container--open")}),this.on("close",function(){n.$container.removeClass("select2-container--open")}),this.on("enable",function(){n.$container.removeClass("select2-container--disabled")}),this.on("disable",function(){n.$container.addClass("select2-container--disabled")}),this.on("blur",function(){n.$container.removeClass("select2-container--focus")}),this.on("query",function(t){n.isOpen()||n.trigger("open",{}),this.dataAdapter.query(t,function(e){n.trigger("results:all",{data:e,query:t})})}),this.on("query:append",function(t){this.dataAdapter.query(t,function(e){n.trigger("results:append",{data:e,query:t})})}),this.on("keypress",function(e){var t=e.which;n.isOpen()?t===i.ESC||t===i.TAB||t===i.UP&&e.altKey?(n.close(e),e.preventDefault()):t===i.ENTER?(n.trigger("results:select",{}),e.preventDefault()):t===i.SPACE&&e.ctrlKey?(n.trigger("results:toggle",{}),e.preventDefault()):t===i.UP?(n.trigger("results:previous",{}),e.preventDefault()):t===i.DOWN&&(n.trigger("results:next",{}),e.preventDefault()):(t===i.ENTER||t===i.SPACE||t===i.DOWN&&e.altKey)&&(n.open(),e.preventDefault())})},d.prototype._syncAttributes=function(){this.options.set("disabled",this.$element.prop("disabled")),this.isDisabled()?(this.isOpen()&&this.close(),this.trigger("disable",{})):this.trigger("enable",{})},d.prototype._isChangeMutation=function(e,t){var n=!1,i=this;if(!e||!e.target||"OPTION"===e.target.nodeName||"OPTGROUP"===e.target.nodeName){if(t)if(t.addedNodes&&0<t.addedNodes.length)for(var r=0;r<t.addedNodes.length;r++){t.addedNodes[r].selected&&(n=!0)}else t.removedNodes&&0<t.removedNodes.length?n=!0:o.isArray(t)&&o.each(t,function(e,t){if(i._isChangeMutation(e,t))return!(n=!0)});else n=!0;return n}},d.prototype._syncSubtree=function(e,t){var n=this._isChangeMutation(e,t),i=this;n&&this.dataAdapter.current(function(e){i.trigger("selection:update",{data:e})})},d.prototype.trigger=function(e,t){var n=d.__super__.trigger,i={open:"opening",close:"closing",select:"selecting",unselect:"unselecting",clear:"clearing"};if(void 0===t&&(t={}),e in i){var r=i[e],o={prevented:!1,name:e,args:t};if(n.call(this,r,o),o.prevented)return void(t.prevented=!0)}n.call(this,e,t)},d.prototype.toggleDropdown=function(){this.isDisabled()||(this.isOpen()?this.close():this.open())},d.prototype.open=function(){this.isOpen()||this.isDisabled()||this.trigger("query",{})},d.prototype.close=function(e){this.isOpen()&&this.trigger("close",{originalEvent:e})},d.prototype.isEnabled=function(){return!this.isDisabled()},d.prototype.isDisabled=function(){return this.options.get("disabled")},d.prototype.isOpen=function(){return this.$container.hasClass("select2-container--open")},d.prototype.hasFocus=function(){return this.$container.hasClass("select2-container--focus")},d.prototype.focus=function(e){this.hasFocus()||(this.$container.addClass("select2-container--focus"),this.trigger("focus",{}))},d.prototype.enable=function(e){this.options.get("debug")&&window.console&&console.warn&&console.warn('Select2: The `select2("enable")` method has been deprecated and will be removed in later Select2 versions. Use $element.prop("disabled") instead.'),null!=e&&0!==e.length||(e=[!0]);var t=!e[0];this.$element.prop("disabled",t)},d.prototype.data=function(){this.options.get("debug")&&0<arguments.length&&window.console&&console.warn&&console.warn('Select2: Data can no longer be set using `select2("data")`. You should consider setting the value instead using `$element.val()`.');var t=[];return this.dataAdapter.current(function(e){t=e}),t},d.prototype.val=function(e){if(this.options.get("debug")&&window.console&&console.warn&&console.warn('Select2: The `select2("val")` method has been deprecated and will be removed in later Select2 versions. Use $element.val() instead.'),null==e||0===e.length)return this.$element.val();var t=e[0];o.isArray(t)&&(t=o.map(t,function(e){return e.toString()})),this.$element.val(t).trigger("input").trigger("change")},d.prototype.destroy=function(){this.$container.remove(),this.$element[0].detachEvent&&this.$element[0].detachEvent("onpropertychange",this._syncA),null!=this._observer?(this._observer.disconnect(),this._observer=null):this.$element[0].removeEventListener&&(this.$element[0].removeEventListener("DOMAttrModified",this._syncA,!1),this.$element[0].removeEventListener("DOMNodeInserted",this._syncS,!1),this.$element[0].removeEventListener("DOMNodeRemoved",this._syncS,!1)),this._syncA=null,this._syncS=null,this.$element.off(".select2"),this.$element.attr("tabindex",u.GetData(this.$element[0],"old-tabindex")),this.$element.removeClass("select2-hidden-accessible"),this.$element.attr("aria-hidden","false"),u.RemoveData(this.$element[0]),this.$element.removeData("select2"),this.dataAdapter.destroy(),this.selection.destroy(),this.dropdown.destroy(),this.results.destroy(),this.dataAdapter=null,this.selection=null,this.dropdown=null,this.results=null},d.prototype.render=function(){var e=o('<span class="select2 select2-container"><span class="selection"></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>');return e.attr("dir",this.options.get("dir")),this.$container=e,this.$container.addClass("select2-container--"+this.options.get("theme")),u.StoreData(e[0],"element",this.$element),e},d}),e.define("select2/compat/utils",["jquery"],function(s){return{syncCssClasses:function(e,t,n){var i,r,o=[];(i=s.trim(e.attr("class")))&&s((i=""+i).split(/\s+/)).each(function(){0===this.indexOf("select2-")&&o.push(this)}),(i=s.trim(t.attr("class")))&&s((i=""+i).split(/\s+/)).each(function(){0!==this.indexOf("select2-")&&null!=(r=n(this))&&o.push(r)}),e.attr("class",o.join(" "))}}}),e.define("select2/compat/containerCss",["jquery","./utils"],function(s,a){function l(e){return null}function e(){}return e.prototype.render=function(e){var t=e.call(this),n=this.options.get("containerCssClass")||"";s.isFunction(n)&&(n=n(this.$element));var i=this.options.get("adaptContainerCssClass");if(i=i||l,-1!==n.indexOf(":all:")){n=n.replace(":all:","");var r=i;i=function(e){var t=r(e);return null!=t?t+" "+e:e}}var o=this.options.get("containerCss")||{};return s.isFunction(o)&&(o=o(this.$element)),a.syncCssClasses(t,this.$element,i),t.css(o),t.addClass(n),t},e}),e.define("select2/compat/dropdownCss",["jquery","./utils"],function(s,a){function l(e){return null}function e(){}return e.prototype.render=function(e){var t=e.call(this),n=this.options.get("dropdownCssClass")||"";s.isFunction(n)&&(n=n(this.$element));var i=this.options.get("adaptDropdownCssClass");if(i=i||l,-1!==n.indexOf(":all:")){n=n.replace(":all:","");var r=i;i=function(e){var t=r(e);return null!=t?t+" "+e:e}}var o=this.options.get("dropdownCss")||{};return s.isFunction(o)&&(o=o(this.$element)),a.syncCssClasses(t,this.$element,i),t.css(o),t.addClass(n),t},e}),e.define("select2/compat/initSelection",["jquery"],function(i){function e(e,t,n){n.get("debug")&&window.console&&console.warn&&console.warn("Select2: The `initSelection` option has been deprecated in favor of a custom data adapter that overrides the `current` method. This method is now called multiple times instead of a single time when the instance is initialized. Support will be removed for the `initSelection` option in future versions of Select2"),this.initSelection=n.get("initSelection"),this._isInitialized=!1,e.call(this,t,n)}return e.prototype.current=function(e,t){var n=this;this._isInitialized?e.call(this,t):this.initSelection.call(null,this.$element,function(e){n._isInitialized=!0,i.isArray(e)||(e=[e]),t(e)})},e}),e.define("select2/compat/inputData",["jquery","../utils"],function(s,i){function e(e,t,n){this._currentData=[],this._valueSeparator=n.get("valueSeparator")||",","hidden"===t.prop("type")&&n.get("debug")&&console&&console.warn&&console.warn("Select2: Using a hidden input with Select2 is no longer supported and may stop working in the future. It is recommended to use a `<select>` element instead."),e.call(this,t,n)}return e.prototype.current=function(e,t){function i(e,t){var n=[];return e.selected||-1!==s.inArray(e.id,t)?(e.selected=!0,n.push(e)):e.selected=!1,e.children&&n.push.apply(n,i(e.children,t)),n}for(var n=[],r=0;r<this._currentData.length;r++){var o=this._currentData[r];n.push.apply(n,i(o,this.$element.val().split(this._valueSeparator)))}t(n)},e.prototype.select=function(e,t){if(this.options.get("multiple")){var n=this.$element.val();n+=this._valueSeparator+t.id,this.$element.val(n),this.$element.trigger("input").trigger("change")}else this.current(function(e){s.map(e,function(e){e.selected=!1})}),this.$element.val(t.id),this.$element.trigger("input").trigger("change")},e.prototype.unselect=function(e,r){var o=this;r.selected=!1,this.current(function(e){for(var t=[],n=0;n<e.length;n++){var i=e[n];r.id!=i.id&&t.push(i.id)}o.$element.val(t.join(o._valueSeparator)),o.$element.trigger("input").trigger("change")})},e.prototype.query=function(e,t,n){for(var i=[],r=0;r<this._currentData.length;r++){var o=this._currentData[r],s=this.matches(t,o);null!==s&&i.push(s)}n({results:i})},e.prototype.addOptions=function(e,t){var n=s.map(t,function(e){return i.GetData(e[0],"data")});this._currentData.push.apply(this._currentData,n)},e}),e.define("select2/compat/matcher",["jquery"],function(s){return function(o){return function(e,t){var n=s.extend(!0,{},t);if(null==e.term||""===s.trim(e.term))return n;if(t.children){for(var i=t.children.length-1;0<=i;i--){var r=t.children[i];o(e.term,r.text,r)||n.children.splice(i,1)}if(0<n.children.length)return n}return o(e.term,t.text,t)?n:null}}}),e.define("select2/compat/query",[],function(){function e(e,t,n){n.get("debug")&&window.console&&console.warn&&console.warn("Select2: The `query` option has been deprecated in favor of a custom data adapter that overrides the `query` method. Support will be removed for the `query` option in future versions of Select2."),e.call(this,t,n)}return e.prototype.query=function(e,t,n){t.callback=n,this.options.get("query").call(null,t)},e}),e.define("select2/dropdown/attachContainer",[],function(){function e(e,t,n){e.call(this,t,n)}return e.prototype.position=function(e,t,n){n.find(".dropdown-wrapper").append(t),t.addClass("select2-dropdown--below"),n.addClass("select2-container--below")},e}),e.define("select2/dropdown/stopPropagation",[],function(){function e(){}return e.prototype.bind=function(e,t,n){e.call(this,t,n);this.$dropdown.on(["blur","change","click","dblclick","focus","focusin","focusout","input","keydown","keyup","keypress","mousedown","mouseenter","mouseleave","mousemove","mouseover","mouseup","search","touchend","touchstart"].join(" "),function(e){e.stopPropagation()})},e}),e.define("select2/selection/stopPropagation",[],function(){function e(){}return e.prototype.bind=function(e,t,n){e.call(this,t,n);this.$selection.on(["blur","change","click","dblclick","focus","focusin","focusout","input","keydown","keyup","keypress","mousedown","mouseenter","mouseleave","mousemove","mouseover","mouseup","search","touchend","touchstart"].join(" "),function(e){e.stopPropagation()})},e}),l=function(p){var h,f,e=["wheel","mousewheel","DOMMouseScroll","MozMousePixelScroll"],t="onwheel"in document||9<=document.documentMode?["wheel"]:["mousewheel","DomMouseScroll","MozMousePixelScroll"],g=Array.prototype.slice;if(p.event.fixHooks)for(var n=e.length;n;)p.event.fixHooks[e[--n]]=p.event.mouseHooks;var m=p.event.special.mousewheel={version:"3.1.12",setup:function(){if(this.addEventListener)for(var e=t.length;e;)this.addEventListener(t[--e],i,!1);else this.onmousewheel=i;p.data(this,"mousewheel-line-height",m.getLineHeight(this)),p.data(this,"mousewheel-page-height",m.getPageHeight(this))},teardown:function(){if(this.removeEventListener)for(var e=t.length;e;)this.removeEventListener(t[--e],i,!1);else this.onmousewheel=null;p.removeData(this,"mousewheel-line-height"),p.removeData(this,"mousewheel-page-height")},getLineHeight:function(e){var t=p(e),n=t["offsetParent"in p.fn?"offsetParent":"parent"]();return n.length||(n=p("body")),parseInt(n.css("fontSize"),10)||parseInt(t.css("fontSize"),10)||16},getPageHeight:function(e){return p(e).height()},settings:{adjustOldDeltas:!0,normalizeOffset:!0}};function i(e){var t,n=e||window.event,i=g.call(arguments,1),r=0,o=0,s=0,a=0,l=0;if((e=p.event.fix(n)).type="mousewheel","detail"in n&&(s=-1*n.detail),"wheelDelta"in n&&(s=n.wheelDelta),"wheelDeltaY"in n&&(s=n.wheelDeltaY),"wheelDeltaX"in n&&(o=-1*n.wheelDeltaX),"axis"in n&&n.axis===n.HORIZONTAL_AXIS&&(o=-1*s,s=0),r=0===s?o:s,"deltaY"in n&&(r=s=-1*n.deltaY),"deltaX"in n&&(o=n.deltaX,0===s&&(r=-1*o)),0!==s||0!==o){if(1===n.deltaMode){var c=p.data(this,"mousewheel-line-height");r*=c,s*=c,o*=c}else if(2===n.deltaMode){var u=p.data(this,"mousewheel-page-height");r*=u,s*=u,o*=u}if(t=Math.max(Math.abs(s),Math.abs(o)),(!f||t<f)&&y(n,f=t)&&(f/=40),y(n,t)&&(r/=40,o/=40,s/=40),r=Math[1<=r?"floor":"ceil"](r/f),o=Math[1<=o?"floor":"ceil"](o/f),s=Math[1<=s?"floor":"ceil"](s/f),m.settings.normalizeOffset&&this.getBoundingClientRect){var d=this.getBoundingClientRect();a=e.clientX-d.left,l=e.clientY-d.top}return e.deltaX=o,e.deltaY=s,e.deltaFactor=f,e.offsetX=a,e.offsetY=l,e.deltaMode=0,i.unshift(e,r,o,s),h&&clearTimeout(h),h=setTimeout(v,200),(p.event.dispatch||p.event.handle).apply(this,i)}}function v(){f=null}function y(e,t){return m.settings.adjustOldDeltas&&"mousewheel"===e.type&&t%120==0}p.fn.extend({mousewheel:function(e){return e?this.bind("mousewheel",e):this.trigger("mousewheel")},unmousewheel:function(e){return this.unbind("mousewheel",e)}})},"function"==typeof e.define&&e.define.amd?e.define("jquery-mousewheel",["jquery"],l):"object"==typeof exports?module.exports=l:l(d),e.define("jquery.select2",["jquery","jquery-mousewheel","./select2/core","./select2/defaults","./select2/utils"],function(r,e,o,t,s){if(null==r.fn.select2){var a=["open","close","destroy"];r.fn.select2=function(t){if("object"==typeof(t=t||{}))return this.each(function(){var e=r.extend(!0,{},t);new o(r(this),e)}),this;if("string"!=typeof t)throw new Error("Invalid arguments for Select2: "+t);var n,i=Array.prototype.slice.call(arguments,1);return this.each(function(){var e=s.GetData(this,"select2");null==e&&window.console&&console.error&&console.error("The select2('"+t+"') method was called on an element that is not using Select2."),n=e[t].apply(e,i)}),-1<r.inArray(t,a)?this:n}}return null==r.fn.select2.defaults&&(r.fn.select2.defaults=t),o}),{define:e.define,require:e.require}}(),t=e.require("jquery.select2");return d.fn.select2.amd=e,t});
-/*! AdminLTE app.js
-* ================
-* Main JS application file for AdminLTE v2. This file
-* should be included in all pages. It controls some layout
-* options and implements exclusive AdminLTE plugins.
-*
-* @author Colorlib
-* @support <https://github.com/ColorlibHQ/AdminLTE/issues>
-* @version v2.4.18
-* @repository git://github.com/ColorlibHQ/AdminLTE.git
-* @license MIT <http://opensource.org/licenses/MIT>
-*/
-if("undefined"==typeof jQuery)throw new Error("AdminLTE requires jQuery");!function(i){"use strict";function s(t,e){if(this.element=t,this.options=e,this.$overlay=i(e.overlayTemplate),""===e.source)throw new Error("Source url was not defined. Please specify a url in your BoxRefresh source option.");this._setUpListeners(),this.load()}var r="lte.boxrefresh",a={source:"",params:{},trigger:".refresh-btn",content:".box-body",loadInContent:!0,responseType:"",overlayTemplate:'<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>',onLoadStart:function(){},onLoadDone:function(t){return t}},t='[data-widget="box-refresh"]';function e(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}if("string"==typeof e){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}s.prototype.load=function(){this._addOverlay(),this.options.onLoadStart.call(i(this)),i.get(this.options.source,this.options.params,function(t){this.options.loadInContent&&i(this.element).find(this.options.content).html(t),this.options.onLoadDone.call(i(this),t),this._removeOverlay()}.bind(this),""!==this.options.responseType&&this.options.responseType)},s.prototype._setUpListeners=function(){i(this.element).on("click",this.options.trigger,function(t){t&&t.preventDefault(),this.load()}.bind(this))},s.prototype._addOverlay=function(){i(this.element).append(this.$overlay)},s.prototype._removeOverlay=function(){i(this.$overlay).remove()};var o=i.fn.boxRefresh;i.fn.boxRefresh=e,i.fn.boxRefresh.Constructor=s,i.fn.boxRefresh.noConflict=function(){return i.fn.boxRefresh=o,this},i(window).on("load",function(){i(t).each(function(){e.call(i(this))})})}(jQuery),function(i){"use strict";function s(t,e){this.element=t,this.options=e,this._setUpListeners()}var r="lte.boxwidget",a={animationSpeed:500,collapseTrigger:'[data-widget="collapse"]',removeTrigger:'[data-widget="remove"]',collapseIcon:"fa-minus",expandIcon:"fa-plus",removeIcon:"fa-times"},t=".box",e=".collapsed-box",d=".box-header",l=".box-body",c=".box-footer",h=".box-tools",f="collapsed-box",p="collapsing.boxwidget",u="collapsed.boxwidget",g="expanding.boxwidget",v="expanded.boxwidget",o="removing.boxwidget",n="removed.boxwidget";function b(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}if("string"==typeof n){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}s.prototype.toggle=function(){!i(this.element).is(e)?this.collapse():this.expand()},s.prototype.expand=function(){var t=i.Event(v),e=i.Event(g),o=this.options.collapseIcon,n=this.options.expandIcon;i(this.element).removeClass(f),i(this.element).children(d+", "+l+", "+c).children(h).find("."+n).removeClass(n).addClass(o),i(this.element).children(l+", "+c).slideDown(this.options.animationSpeed,function(){i(this.element).trigger(t)}.bind(this)).trigger(e)},s.prototype.collapse=function(){var t=i.Event(u),e=i.Event(p),o=this.options.collapseIcon,n=this.options.expandIcon;i(this.element).children(d+", "+l+", "+c).children(h).find("."+o).removeClass(o).addClass(n),i(this.element).children(l+", "+c).slideUp(this.options.animationSpeed,function(){i(this.element).addClass(f),i(this.element).trigger(t)}.bind(this)).trigger(e)},s.prototype.remove=function(){var t=i.Event(n),e=i.Event(o);i(this.element).slideUp(this.options.animationSpeed,function(){i(this.element).trigger(t),i(this.element).remove()}.bind(this)).trigger(e)},s.prototype._setUpListeners=function(){var e=this;i(this.element).on("click",this.options.collapseTrigger,function(t){return t&&t.preventDefault(),e.toggle(i(this)),!1}),i(this.element).on("click",this.options.removeTrigger,function(t){return t&&t.preventDefault(),e.remove(i(this)),!1})};var m=i.fn.boxWidget;i.fn.boxWidget=b,i.fn.boxWidget.Constructor=s,i.fn.boxWidget.noConflict=function(){return i.fn.boxWidget=m,this},i(window).on("load",function(){i(t).each(function(){b.call(i(this))})})}(jQuery),function(i){"use strict";function s(t,e){this.element=t,this.options=e,this.hasBindedResize=!1,this.init()}var r="lte.controlsidebar",a={controlsidebarSlide:!0},e=".control-sidebar",t='[data-toggle="control-sidebar"]',o=".control-sidebar-open",n=".control-sidebar-bg",d=".wrapper",l=".layout-boxed",c="control-sidebar-open",h="control-sidebar-hold-transition",f="collapsed.controlsidebar",p="expanded.controlsidebar";function u(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}"string"==typeof n&&e.toggle()})}s.prototype.init=function(){i(this.element).is(t)||i(this).on("click",this.toggle),this.fix(),i(window).resize(function(){this.fix()}.bind(this))},s.prototype.toggle=function(t){t&&t.preventDefault(),this.fix(),i(e).is(o)||i("body").is(o)?this.collapse():this.expand()},s.prototype.expand=function(){i(e).show(),this.options.controlsidebarSlide?i(e).addClass(c):i("body").addClass(h).addClass(c).delay(50).queue(function(){i("body").removeClass(h),i(this).dequeue()}),i(this.element).trigger(i.Event(p))},s.prototype.collapse=function(){this.options.controlsidebarSlide?i(e).removeClass(c):i("body").addClass(h).removeClass(c).delay(50).queue(function(){i("body").removeClass(h),i(this).dequeue()}),i(e).fadeOut(),i(this.element).trigger(i.Event(f))},s.prototype.fix=function(){i("body").is(l)&&this._fixForBoxed(i(n))},s.prototype._fixForBoxed=function(t){t.css({position:"absolute",height:i(d).height()})};var g=i.fn.controlSidebar;i.fn.controlSidebar=u,i.fn.controlSidebar.Constructor=s,i.fn.controlSidebar.noConflict=function(){return i.fn.controlSidebar=g,this},i(document).on("click",t,function(t){t&&t.preventDefault(),u.call(i(this),"toggle")})}(jQuery),function(n){"use strict";function i(t){this.element=t}var s="lte.directchat",t='[data-widget="chat-pane-toggle"]',e=".direct-chat",o="direct-chat-contacts-open";function r(o){return this.each(function(){var t=n(this),e=t.data(s);e||t.data(s,e=new i(t)),"string"==typeof o&&e.toggle(t)})}i.prototype.toggle=function(t){t.parents(e).first().toggleClass(o)};var a=n.fn.directChat;n.fn.directChat=r,n.fn.directChat.Constructor=i,n.fn.directChat.noConflict=function(){return n.fn.directChat=a,this},n(document).on("click",t,function(t){t&&t.preventDefault(),r.call(n(this),"toggle")})}(jQuery),function(i){"use strict";function s(t){this.options=t,this.init()}var r="lte.pushmenu",a={collapseScreenSize:767,expandOnHover:!1,expandTransitionDelay:200},t=".sidebar-collapse",e=".main-sidebar",o=".content-wrapper",n=".sidebar-form .form-control",d='[data-toggle="push-menu"]',l=".sidebar-mini",c=".sidebar-expanded-on-hover",h=".fixed",f="sidebar-collapse",p="sidebar-open",u="sidebar-expanded-on-hover",g="sidebar-mini-expand-feature",v="expanded.pushMenu",b="collapsed.pushMenu";function m(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(o))}"toggle"===n&&e.toggle()})}s.prototype.init=function(){(this.options.expandOnHover||i("body").is(l+h))&&(this.expandOnHover(),i("body").addClass(g)),i(o).click(function(){i(window).width()<=this.options.collapseScreenSize&&i("body").hasClass(p)&&this.close()}.bind(this)),i(n).click(function(t){t.stopPropagation()})},s.prototype.toggle=function(){var t=i(window).width(),e=!i("body").hasClass(f);t<=this.options.collapseScreenSize&&(e=i("body").hasClass(p)),e?this.close():this.open()},s.prototype.open=function(){i(window).width()>this.options.collapseScreenSize?i("body").removeClass(f).trigger(i.Event(v)):i("body").addClass(p).trigger(i.Event(v))},s.prototype.close=function(){i(window).width()>this.options.collapseScreenSize?i("body").addClass(f).trigger(i.Event(b)):i("body").removeClass(p+" "+f).trigger(i.Event(b))},s.prototype.expandOnHover=function(){i(e).hover(function(){i("body").is(l+t)&&i(window).width()>this.options.collapseScreenSize&&this.expand()}.bind(this),function(){i("body").is(c)&&this.collapse()}.bind(this))},s.prototype.expand=function(){setTimeout(function(){i("body").removeClass(f).addClass(u)},this.options.expandTransitionDelay)},s.prototype.collapse=function(){setTimeout(function(){i("body").removeClass(u).addClass(f)},this.options.expandTransitionDelay)};var y=i.fn.pushMenu;i.fn.pushMenu=m,i.fn.pushMenu.Constructor=s,i.fn.pushMenu.noConflict=function(){return i.fn.pushMenu=y,this},i(document).on("click",d,function(t){t.preventDefault(),m.call(i(this),"toggle")}),i(window).on("load",function(){m.call(i(d))})}(jQuery),function(i){"use strict";function s(t,e){this.element=t,this.options=e,this._setUpListeners()}var r="lte.todolist",a={onCheck:function(t){return t},onUnCheck:function(t){return t}},e={data:'[data-widget="todo-list"]'},o="done";function t(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}if("string"==typeof e){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}s.prototype.toggle=function(t){t.parents(e.li).first().toggleClass(o),t.prop("checked")?this.check(t):this.unCheck(t)},s.prototype.check=function(t){this.options.onCheck.call(t)},s.prototype.unCheck=function(t){this.options.onUnCheck.call(t)},s.prototype._setUpListeners=function(){var t=this;i(this.element).on("change ifChanged","input:checkbox",function(){t.toggle(i(this))})};var n=i.fn.todoList;i.fn.todoList=t,i.fn.todoList.Constructor=s,i.fn.todoList.noConflict=function(){return i.fn.todoList=n,this},i(window).on("load",function(){i(e.data).each(function(){t.call(i(this))})})}(jQuery),function(s){"use strict";function n(t,e){this.element=t,this.options=e,s(this.element).addClass(h),s(a+o,this.element).addClass(c),this._setUpListeners()}var i="lte.tree",r={animationSpeed:500,accordion:!0,followLink:!1,trigger:".treeview a"},a=".treeview",d=".treeview-menu",l=".menu-open, .active",t='[data-widget="tree"]',o=".active",c="menu-open",h="tree",f="collapsed.tree",p="expanded.tree";function e(o){return this.each(function(){var t=s(this);if(!t.data(i)){var e=s.extend({},r,t.data(),"object"==typeof o&&o);t.data(i,new n(t,e))}})}n.prototype.toggle=function(t,e){var o=t.next(d),n=t.parent(),i=n.hasClass(c);n.is(a)&&(this.options.followLink&&"#"!==t.attr("href")||e.preventDefault(),i?this.collapse(o,n):this.expand(o,n))},n.prototype.expand=function(t,e){var o=s.Event(p);if(this.options.accordion){var n=e.siblings(l),i=n.children(d);this.collapse(i,n)}e.addClass(c),t.stop().slideDown(this.options.animationSpeed,function(){s(this.element).trigger(o),e.height("auto")}.bind(this))},n.prototype.collapse=function(t,e){var o=s.Event(f);e.removeClass(c),t.stop().slideUp(this.options.animationSpeed,function(){s(this.element).trigger(o),e.find(a).removeClass(c).find(d).hide()}.bind(this))},n.prototype._setUpListeners=function(){var e=this;s(this.element).on("click",this.options.trigger,function(t){e.toggle(s(this),t)})};var u=s.fn.tree;s.fn.tree=e,s.fn.tree.Constructor=n,s.fn.tree.noConflict=function(){return s.fn.tree=u,this},s(window).on("load",function(){s(t).each(function(){e.call(s(this))})})}(jQuery),function(a){"use strict";function i(t){this.options=t,this.bindedResize=!1,this.activate()}var s="lte.layout",r={slimscroll:!0,resetHeight:!0},d=".wrapper",l=".content-wrapper",c=".layout-boxed",h=".main-footer",f=".main-header",t=".main-sidebar",e="slimScrollDiv",p=".sidebar",u=".control-sidebar",o=".sidebar-menu",n=".main-header .logo",g="fixed",v="hold-transition";function b(n){return this.each(function(){var t=a(this),e=t.data(s);if(!e){var o=a.extend({},r,t.data(),"object"==typeof n&&n);t.data(s,e=new i(o))}if("string"==typeof n){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}i.prototype.activate=function(){this.fix(),this.fixSidebar(),a("body").removeClass(v),this.options.resetHeight&&a("body, html, "+d).css({height:"auto","min-height":"100%"}),this.bindedResize||(a(window).resize(function(){this.fix(),this.fixSidebar(),a(n+", "+p).one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",function(){this.fix(),this.fixSidebar()}.bind(this))}.bind(this)),this.bindedResize=!0),a(o).on("expanded.tree",function(){this.fix(),this.fixSidebar()}.bind(this)),a(o).on("collapsed.tree",function(){this.fix(),this.fixSidebar()}.bind(this))},i.prototype.fix=function(){a(c+" > "+d).css("overflow","hidden");var t=a(h).outerHeight()||0,e=a(f).outerHeight()||0,o=e+t,n=a(window).height(),i=a(p).outerHeight()||0;if(a("body").hasClass(g))a(l).css("min-height",n-t);else{var s;s=i+e<=n?(a(l).css("min-height",n-o),n-o):(a(l).css("min-height",i),i);var r=a(u);void 0!==r&&r.height()>s&&a(l).css("min-height",r.height())}},i.prototype.fixSidebar=function(){a("body").hasClass(g)?this.options.slimscroll&&void 0!==a.fn.slimScroll&&0===a(t).find(e).length&&a(p).slimScroll({height:a(window).height()-a(f).height()+"px"}):void 0!==a.fn.slimScroll&&a(p).slimScroll({destroy:!0}).height("auto")};var m=a.fn.layout;a.fn.layout=b,a.fn.layout.Constuctor=i,a.fn.layout.noConflict=function(){return a.fn.layout=m,this},a(window).on("load",function(){b.call(a("body"))})}(jQuery);
+/*!
+ * AdminLTE v3.2.0 (https://adminlte.io)
+ * Copyright 2014-2022 Colorlib <https://colorlib.com>
+ * Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
+ */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports,require("jquery")):"function"==typeof define&&define.amd?define(["exports","jquery"],t):t((e="undefined"!=typeof globalThis?globalThis:e||self).adminlte={},e.jQuery)}(this,(function(e,t){"use strict";function a(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var n=a(t),i="CardRefresh",o="lte.cardrefresh",l=n.default.fn[i],s="card",r='[data-card-widget="card-refresh"]',d={source:"",sourceSelector:"",params:{},trigger:r,content:".card-body",loadInContent:!0,loadOnInit:!0,loadErrorTemplate:!0,responseType:"",overlayTemplate:'<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>',errorTemplate:'<span class="text-danger"></span>',onLoadStart:function(){},onLoadDone:function(e){return e},onLoadFail:function(e,t,a){}},f=function(){function e(e,t){if(this._element=e,this._parent=e.parents(".card").first(),this._settings=n.default.extend({},d,t),this._overlay=n.default(this._settings.overlayTemplate),e.hasClass(s)&&(this._parent=e),""===this._settings.source)throw new Error("Source url was not defined. Please specify a url in your CardRefresh source option.")}var t=e.prototype;return t.load=function(){var e=this;this._addOverlay(),this._settings.onLoadStart.call(n.default(this)),n.default.get(this._settings.source,this._settings.params,(function(t){e._settings.loadInContent&&(""!==e._settings.sourceSelector&&(t=n.default(t).find(e._settings.sourceSelector).html()),e._parent.find(e._settings.content).html(t)),e._settings.onLoadDone.call(n.default(e),t),e._removeOverlay()}),""!==this._settings.responseType&&this._settings.responseType).fail((function(t,a,i){if(e._removeOverlay(),e._settings.loadErrorTemplate){var o=n.default(e._settings.errorTemplate).text(i);e._parent.find(e._settings.content).empty().append(o)}e._settings.onLoadFail.call(n.default(e),t,a,i)})),n.default(this._element).trigger(n.default.Event("loaded.lte.cardrefresh"))},t._addOverlay=function(){this._parent.append(this._overlay),n.default(this._element).trigger(n.default.Event("overlay.added.lte.cardrefresh"))},t._removeOverlay=function(){this._parent.find(this._overlay).remove(),n.default(this._element).trigger(n.default.Event("overlay.removed.lte.cardrefresh"))},t._init=function(){var e=this;n.default(this).find(this._settings.trigger).on("click",(function(){e.load()})),this._settings.loadOnInit&&this.load()},e._jQueryInterface=function(t){var a=n.default(this).data(o),i=n.default.extend({},d,n.default(this).data());a||(a=new e(n.default(this),i),n.default(this).data(o,"string"==typeof t?a:t)),"string"==typeof t&&/load/.test(t)?a[t]():a._init(n.default(this))},e}();n.default(document).on("click",r,(function(e){e&&e.preventDefault(),f._jQueryInterface.call(n.default(this),"load")})),n.default((function(){n.default(r).each((function(){f._jQueryInterface.call(n.default(this))}))})),n.default.fn[i]=f._jQueryInterface,n.default.fn[i].Constructor=f,n.default.fn[i].noConflict=function(){return n.default.fn[i]=l,f._jQueryInterface};var u="CardWidget",c="lte.cardwidget",h=n.default.fn[u],g="card",p="collapsed-card",m="collapsing-card",v="expanding-card",_="was-collapsed",b="maximized-card",y='[data-card-widget="remove"]',C='[data-card-widget="collapse"]',w='[data-card-widget="maximize"]',x={animationSpeed:"normal",collapseTrigger:C,removeTrigger:y,maximizeTrigger:w,collapseIcon:"fa-minus",expandIcon:"fa-plus",maximizeIcon:"fa-expand",minimizeIcon:"fa-compress"},I=function(){function e(e,t){this._element=e,this._parent=e.parents(".card").first(),e.hasClass(g)&&(this._parent=e),this._settings=n.default.extend({},x,t)}var t=e.prototype;return t.collapse=function(){var e=this;this._parent.addClass(m).children(".card-body, .card-footer").slideUp(this._settings.animationSpeed,(function(){e._parent.addClass(p).removeClass(m)})),this._parent.find("> .card-header "+this._settings.collapseTrigger+" ."+this._settings.collapseIcon).addClass(this._settings.expandIcon).removeClass(this._settings.collapseIcon),this._element.trigger(n.default.Event("collapsed.lte.cardwidget"),this._parent)},t.expand=function(){var e=this;this._parent.addClass(v).children(".card-body, .card-footer").slideDown(this._settings.animationSpeed,(function(){e._parent.removeClass(p).removeClass(v)})),this._parent.find("> .card-header "+this._settings.collapseTrigger+" ."+this._settings.expandIcon).addClass(this._settings.collapseIcon).removeClass(this._settings.expandIcon),this._element.trigger(n.default.Event("expanded.lte.cardwidget"),this._parent)},t.remove=function(){this._parent.slideUp(),this._element.trigger(n.default.Event("removed.lte.cardwidget"),this._parent)},t.toggle=function(){this._parent.hasClass(p)?this.expand():this.collapse()},t.maximize=function(){this._parent.find(this._settings.maximizeTrigger+" ."+this._settings.maximizeIcon).addClass(this._settings.minimizeIcon).removeClass(this._settings.maximizeIcon),this._parent.css({height:this._parent.height(),width:this._parent.width(),transition:"all .15s"}).delay(150).queue((function(){var e=n.default(this);e.addClass(b),n.default("html").addClass(b),e.hasClass(p)&&e.addClass(_),e.dequeue()})),this._element.trigger(n.default.Event("maximized.lte.cardwidget"),this._parent)},t.minimize=function(){this._parent.find(this._settings.maximizeTrigger+" ."+this._settings.minimizeIcon).addClass(this._settings.maximizeIcon).removeClass(this._settings.minimizeIcon),this._parent.css("cssText","height: "+this._parent[0].style.height+" !important; width: "+this._parent[0].style.width+" !important; transition: all .15s;").delay(10).queue((function(){var e=n.default(this);e.removeClass(b),n.default("html").removeClass(b),e.css({height:"inherit",width:"inherit"}),e.hasClass(_)&&e.removeClass(_),e.dequeue()})),this._element.trigger(n.default.Event("minimized.lte.cardwidget"),this._parent)},t.toggleMaximize=function(){this._parent.hasClass(b)?this.minimize():this.maximize()},t._init=function(e){var t=this;this._parent=e,n.default(this).find(this._settings.collapseTrigger).click((function(){t.toggle()})),n.default(this).find(this._settings.maximizeTrigger).click((function(){t.toggleMaximize()})),n.default(this).find(this._settings.removeTrigger).click((function(){t.remove()}))},e._jQueryInterface=function(t){var a=n.default(this).data(c),i=n.default.extend({},x,n.default(this).data());a||(a=new e(n.default(this),i),n.default(this).data(c,"string"==typeof t?a:t)),"string"==typeof t&&/collapse|expand|remove|toggle|maximize|minimize|toggleMaximize/.test(t)?a[t]():"object"==typeof t&&a._init(n.default(this))},e}();n.default(document).on("click",C,(function(e){e&&e.preventDefault(),I._jQueryInterface.call(n.default(this),"toggle")})),n.default(document).on("click",y,(function(e){e&&e.preventDefault(),I._jQueryInterface.call(n.default(this),"remove")})),n.default(document).on("click",w,(function(e){e&&e.preventDefault(),I._jQueryInterface.call(n.default(this),"toggleMaximize")})),n.default.fn[u]=I._jQueryInterface,n.default.fn[u].Constructor=I,n.default.fn[u].noConflict=function(){return n.default.fn[u]=h,I._jQueryInterface};var T="ControlSidebar",S="lte.controlsidebar",j=n.default.fn[T],k=".control-sidebar",Q=".control-sidebar-content",H='[data-widget="control-sidebar"]',z=".main-header",F=".main-footer",E="control-sidebar-animate",L="control-sidebar-open",D="control-sidebar-slide-open",R="layout-fixed",A={controlsidebarSlide:!0,scrollbarTheme:"os-theme-light",scrollbarAutoHide:"l",target:k,animationSpeed:300},M=function(){function e(e,t){this._element=e,this._config=t}var t=e.prototype;return t.collapse=function(){var e=this,t=n.default("body"),a=n.default("html");this._config.controlsidebarSlide?(a.addClass(E),t.removeClass(D).delay(300).queue((function(){n.default(k).hide(),a.removeClass(E),n.default(this).dequeue()}))):t.removeClass(L),n.default(this._element).trigger(n.default.Event("collapsed.lte.controlsidebar")),setTimeout((function(){n.default(e._element).trigger(n.default.Event("collapsed-done.lte.controlsidebar"))}),this._config.animationSpeed)},t.show=function(e){void 0===e&&(e=!1);var t=n.default("body"),a=n.default("html");e&&n.default(k).hide(),this._config.controlsidebarSlide?(a.addClass(E),n.default(this._config.target).show().delay(10).queue((function(){t.addClass(D).delay(300).queue((function(){a.removeClass(E),n.default(this).dequeue()})),n.default(this).dequeue()}))):t.addClass(L),this._fixHeight(),this._fixScrollHeight(),n.default(this._element).trigger(n.default.Event("expanded.lte.controlsidebar"))},t.toggle=function(){var e=n.default("body"),t=this._config.target,a=!n.default(t).is(":visible"),i=e.hasClass(L)||e.hasClass(D),o=a&&(e.hasClass(L)||e.hasClass(D));a||o?this.show(a):i&&this.collapse()},t._init=function(){var e=this,t=n.default("body");t.hasClass(L)||t.hasClass(D)?(n.default(k).not(this._config.target).hide(),n.default(this._config.target).css("display","block")):n.default(k).hide(),this._fixHeight(),this._fixScrollHeight(),n.default(window).resize((function(){e._fixHeight(),e._fixScrollHeight()})),n.default(window).scroll((function(){var t=n.default("body");(t.hasClass(L)||t.hasClass(D))&&e._fixScrollHeight()}))},t._isNavbarFixed=function(){var e=n.default("body");return e.hasClass("layout-navbar-fixed")||e.hasClass("layout-sm-navbar-fixed")||e.hasClass("layout-md-navbar-fixed")||e.hasClass("layout-lg-navbar-fixed")||e.hasClass("layout-xl-navbar-fixed")},t._isFooterFixed=function(){var e=n.default("body");return e.hasClass("layout-footer-fixed")||e.hasClass("layout-sm-footer-fixed")||e.hasClass("layout-md-footer-fixed")||e.hasClass("layout-lg-footer-fixed")||e.hasClass("layout-xl-footer-fixed")},t._fixScrollHeight=function(){var e=n.default("body"),t=n.default(this._config.target);if(e.hasClass(R)){var a={scroll:n.default(document).height(),window:n.default(window).height(),header:n.default(z).outerHeight(),footer:n.default(F).outerHeight()},i=Math.abs(a.window+n.default(window).scrollTop()-a.scroll),o=n.default(window).scrollTop(),l=this._isNavbarFixed()&&"fixed"===n.default(z).css("position"),s=this._isFooterFixed()&&"fixed"===n.default(F).css("position"),r=n.default(this._config.target+", "+this._config.target+" "+Q);if(0===o&&0===i)t.css({bottom:a.footer,top:a.header}),r.css("height",a.window-(a.header+a.footer));else if(i<=a.footer)if(!1===s){var d=a.header-o;t.css("bottom",a.footer-i).css("top",d>=0?d:0),r.css("height",a.window-(a.footer-i))}else t.css("bottom",a.footer);else o<=a.header?!1===l?(t.css("top",a.header-o),r.css("height",a.window-(a.header-o))):t.css("top",a.header):!1===l?(t.css("top",0),r.css("height",a.window)):t.css("top",a.header);s&&l?(r.css("height","100%"),t.css("height","")):(s||l)&&(r.css("height","100%"),r.css("height",""))}},t._fixHeight=function(){var e=n.default("body"),t=n.default(this._config.target+" "+Q);if(e.hasClass(R)){var a=n.default(window).height(),i=n.default(z).outerHeight(),o=n.default(F).outerHeight(),l=a-i;this._isFooterFixed()&&"fixed"===n.default(F).css("position")&&(l=a-i-o),t.css("height",l),"undefined"!=typeof n.default.fn.overlayScrollbars&&t.overlayScrollbars({className:this._config.scrollbarTheme,sizeAutoCapable:!0,scrollbars:{autoHide:this._config.scrollbarAutoHide,clickScrolling:!0}})}else t.attr("style","")},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(S),i=n.default.extend({},A,n.default(this).data());if(a||(a=new e(this,i),n.default(this).data(S,a)),"undefined"===a[t])throw new Error(t+" is not a function");a[t]()}))},e}();n.default(document).on("click",H,(function(e){e.preventDefault(),M._jQueryInterface.call(n.default(this),"toggle")})),n.default(document).ready((function(){M._jQueryInterface.call(n.default(H),"_init")})),n.default.fn[T]=M._jQueryInterface,n.default.fn[T].Constructor=M,n.default.fn[T].noConflict=function(){return n.default.fn[T]=j,M._jQueryInterface};var q="DirectChat",O="lte.directchat",N=n.default.fn[q],P=function(){function e(e){this._element=e}return e.prototype.toggle=function(){n.default(this._element).parents(".direct-chat").first().toggleClass("direct-chat-contacts-open"),n.default(this._element).trigger(n.default.Event("toggled.lte.directchat"))},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(O);a||(a=new e(n.default(this)),n.default(this).data(O,a)),a[t]()}))},e}();n.default(document).on("click",'[data-widget="chat-pane-toggle"]',(function(e){e&&e.preventDefault(),P._jQueryInterface.call(n.default(this),"toggle")})),n.default.fn[q]=P._jQueryInterface,n.default.fn[q].Constructor=P,n.default.fn[q].noConflict=function(){return n.default.fn[q]=N,P._jQueryInterface};var U="Dropdown",B="lte.dropdown",$=n.default.fn[U],J=".dropdown-menu",W={},V=function(){function e(e,t){this._config=t,this._element=e}var t=e.prototype;return t.toggleSubmenu=function(){this._element.siblings().show().toggleClass("show"),this._element.next().hasClass("show")||this._element.parents(J).first().find(".show").removeClass("show").hide(),this._element.parents("li.nav-item.dropdown.show").on("hidden.bs.dropdown",(function(){n.default(".dropdown-submenu .show").removeClass("show").hide()}))},t.fixPosition=function(){var e=n.default(".dropdown-menu.show");if(0!==e.length){e.hasClass("dropdown-menu-right")?e.css({left:"inherit",right:0}):e.css({left:0,right:"inherit"});var t=e.offset(),a=e.width(),i=n.default(window).width()-t.left;t.left<0?e.css({left:"inherit",right:t.left-5}):i<a&&e.css({left:"inherit",right:0})}},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(B),i=n.default.extend({},W,n.default(this).data());a||(a=new e(n.default(this),i),n.default(this).data(B,a)),"toggleSubmenu"!==t&&"fixPosition"!==t||a[t]()}))},e}();n.default('.dropdown-menu [data-toggle="dropdown"]').on("click",(function(e){e.preventDefault(),e.stopPropagation(),V._jQueryInterface.call(n.default(this),"toggleSubmenu")})),n.default('.navbar [data-toggle="dropdown"]').on("click",(function(e){e.preventDefault(),n.default(e.target).parent().hasClass("dropdown-submenu")||setTimeout((function(){V._jQueryInterface.call(n.default(this),"fixPosition")}),1)})),n.default.fn[U]=V._jQueryInterface,n.default.fn[U].Constructor=V,n.default.fn[U].noConflict=function(){return n.default.fn[U]=$,V._jQueryInterface};var G="ExpandableTable",K="lte.expandableTable",X=n.default.fn[G],Y=".expandable-body",Z='[data-widget="expandable-table"]',ee="aria-expanded",te=function(){function e(e,t){this._options=t,this._element=e}var t=e.prototype;return t.init=function(){n.default(Z).each((function(e,t){var a=n.default(t).attr(ee),i=n.default(t).next(Y).children().first().children();"true"===a?i.show():"false"===a&&(i.hide(),i.parent().parent().addClass("d-none"))}))},t.toggleRow=function(){var e=this._element;"TR"!==e[0].nodeName&&"TR"!==(e=e.parent())[0].nodeName&&(e=e.parent());var t=e.attr(ee),a=e.next(Y).children().first().children();a.stop(),"true"===t?(a.slideUp(500,(function(){e.next(Y).addClass("d-none")})),e.attr(ee,"false"),e.trigger(n.default.Event("collapsed.lte.expandableTable"))):"false"===t&&(e.next(Y).removeClass("d-none"),a.slideDown(500),e.attr(ee,"true"),e.trigger(n.default.Event("expanded.lte.expandableTable")))},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(K);a||(a=new e(n.default(this)),n.default(this).data(K,a)),"string"==typeof t&&/init|toggleRow/.test(t)&&a[t]()}))},e}();n.default(".expandable-table").ready((function(){te._jQueryInterface.call(n.default(this),"init")})),n.default(document).on("click",Z,(function(){te._jQueryInterface.call(n.default(this),"toggleRow")})),n.default.fn[G]=te._jQueryInterface,n.default.fn[G].Constructor=te,n.default.fn[G].noConflict=function(){return n.default.fn[G]=X,te._jQueryInterface};var ae="Fullscreen",ne="lte.fullscreen",ie=n.default.fn[ae],oe='[data-widget="fullscreen"]',le=oe+" i",se={minimizeIcon:"fa-compress-arrows-alt",maximizeIcon:"fa-expand-arrows-alt"},re=function(){function e(e,t){this.element=e,this.options=n.default.extend({},se,t)}var t=e.prototype;return t.toggle=function(){document.fullscreenElement||document.mozFullScreenElement||document.webkitFullscreenElement||document.msFullscreenElement?this.windowed():this.fullscreen()},t.toggleIcon=function(){document.fullscreenElement||document.mozFullScreenElement||document.webkitFullscreenElement||document.msFullscreenElement?n.default(le).removeClass(this.options.maximizeIcon).addClass(this.options.minimizeIcon):n.default(le).removeClass(this.options.minimizeIcon).addClass(this.options.maximizeIcon)},t.fullscreen=function(){document.documentElement.requestFullscreen?document.documentElement.requestFullscreen():document.documentElement.webkitRequestFullscreen?document.documentElement.webkitRequestFullscreen():document.documentElement.msRequestFullscreen&&document.documentElement.msRequestFullscreen()},t.windowed=function(){document.exitFullscreen?document.exitFullscreen():document.webkitExitFullscreen?document.webkitExitFullscreen():document.msExitFullscreen&&document.msExitFullscreen()},e._jQueryInterface=function(t){var a=n.default(this).data(ne);a||(a=n.default(this).data());var i=n.default.extend({},se,"object"==typeof t?t:a),o=new e(n.default(this),i);n.default(this).data(ne,"object"==typeof t?t:a),"string"==typeof t&&/toggle|toggleIcon|fullscreen|windowed/.test(t)?o[t]():o.init()},e}();n.default(document).on("click",oe,(function(){re._jQueryInterface.call(n.default(this),"toggle")})),n.default(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange",(function(){re._jQueryInterface.call(n.default(oe),"toggleIcon")})),n.default.fn[ae]=re._jQueryInterface,n.default.fn[ae].Constructor=re,n.default.fn[ae].noConflict=function(){return n.default.fn[ae]=ie,re._jQueryInterface};var de="lte.iframe",fe=n.default.fn.IFrame,ue='[data-widget="iframe"]',ce='[data-widget="iframe-fullscreen"]',he=".content-wrapper",ge=".content-wrapper iframe",pe=".content-wrapper.iframe-mode .nav",me=".content-wrapper.iframe-mode .navbar-nav",ve=me+" .nav-item",_e=me+" .nav-link",be=".content-wrapper.iframe-mode .tab-content",ye=be+" .tab-empty",Ce=be+" .tab-loading",we=be+" .tab-pane",xe=".main-sidebar .nav-item > a.nav-link",Ie=".main-header .nav-item a.nav-link",Te=".main-header a.dropdown-item",Se="iframe-mode",je="iframe-mode-fullscreen",ke={onTabClick:function(e){return e},onTabChanged:function(e){return e},onTabCreated:function(e){return e},autoIframeMode:!0,autoItemActive:!0,autoShowNewTab:!0,autoDarkMode:!1,allowDuplicates:!1,allowReload:!0,loadingScreen:!0,useNavbarItems:!0,scrollOffset:40,scrollBehaviorSwap:!1,iconMaximize:"fa-expand",iconMinimize:"fa-compress"},Qe=function(){function e(e,t){this._config=t,this._element=e,this._init()}var t=e.prototype;return t.onTabClick=function(e){this._config.onTabClick(e)},t.onTabChanged=function(e){this._config.onTabChanged(e)},t.onTabCreated=function(e){this._config.onTabCreated(e)},t.createTab=function(e,t,a,i){var o=this,l="panel-"+a,s="tab-"+a;this._config.allowDuplicates&&(l+="-"+Math.floor(1e3*Math.random()),s+="-"+Math.floor(1e3*Math.random()));var r='<li class="nav-item" role="presentation"><a href="#" class="btn-iframe-close" data-widget="iframe-close" data-type="only-this"><i class="fas fa-times"></i></a><a class="nav-link" data-toggle="row" id="'+s+'" href="#'+l+'" role="tab" aria-controls="'+l+'" aria-selected="false">'+e+"</a></li>";n.default(me).append(unescape(escape(r)));var d='<div class="tab-pane fade" id="'+l+'" role="tabpanel" aria-labelledby="'+s+'"><iframe src="'+t+'"></iframe></div>';if(n.default(be).append(unescape(escape(d))),i)if(this._config.loadingScreen){var f=n.default(Ce);f.fadeIn(),n.default(l+" iframe").ready((function(){"number"==typeof o._config.loadingScreen?(o.switchTab("#"+s),setTimeout((function(){f.fadeOut()}),o._config.loadingScreen)):(o.switchTab("#"+s),f.fadeOut())}))}else this.switchTab("#"+s);this.onTabCreated(n.default("#"+s))},t.openTabSidebar=function(e,t){void 0===t&&(t=this._config.autoShowNewTab);var a=n.default(e).clone();void 0===a.attr("href")&&(a=n.default(e).parent("a").clone()),a.find(".right, .search-path").remove();var i=a.find("p").text();""===i&&(i=a.text());var o=a.attr("href");if("#"!==o&&""!==o&&void 0!==o){var l=unescape(o).replace("./","").replace(/["#&'./:=?[\]]/gi,"-").replace(/(--)/gi,""),s="tab-"+l;if(!this._config.allowDuplicates&&n.default("#"+s).length>0)return this.switchTab("#"+s,this._config.allowReload);(!this._config.allowDuplicates&&0===n.default("#"+s).length||this._config.allowDuplicates)&&this.createTab(i,o,l,t)}},t.switchTab=function(e,t){var a=this;void 0===t&&(t=!1);var i=n.default(e),o=i.attr("href");if(n.default(ye).hide(),t){var l=n.default(Ce);this._config.loadingScreen?l.show(0,(function(){n.default(o+" iframe").attr("src",n.default(o+" iframe").attr("src")).ready((function(){a._config.loadingScreen&&("number"==typeof a._config.loadingScreen?setTimeout((function(){l.fadeOut()}),a._config.loadingScreen):l.fadeOut())}))})):n.default(o+" iframe").attr("src",n.default(o+" iframe").attr("src"))}n.default(me+" .active").tab("dispose").removeClass("active"),this._fixHeight(),i.tab("show"),i.parents("li").addClass("active"),this.onTabChanged(i),this._config.autoItemActive&&this._setItemActive(n.default(o+" iframe").attr("src"))},t.removeActiveTab=function(e,t){if("all"==e)n.default(ve).remove(),n.default(we).remove(),n.default(ye).show();else if("all-other"==e)n.default(ve+":not(.active)").remove(),n.default(we+":not(.active)").remove();else if("only-this"==e){var a=n.default(t),i=a.parent(".nav-item"),o=i.parent(),l=i.index(),s=a.siblings(".nav-link").attr("aria-controls");if(i.remove(),n.default("#"+s).remove(),n.default(be).children().length==n.default(ye+", "+Ce).length)n.default(ye).show();else{var r=l-1;this.switchTab(o.children().eq(r).find("a.nav-link"))}}else{var d=n.default(ve+".active"),f=d.parent(),u=d.index();if(d.remove(),n.default(we+".active").remove(),n.default(be).children().length==n.default(ye+", "+Ce).length)n.default(ye).show();else{var c=u-1;this.switchTab(f.children().eq(c).find("a.nav-link"))}}},t.toggleFullscreen=function(){n.default("body").hasClass(je)?(n.default(ce+" i").removeClass(this._config.iconMinimize).addClass(this._config.iconMaximize),n.default("body").removeClass(je),n.default(ye+", "+Ce).height("100%"),n.default(he).height("100%"),n.default(ge).height("100%")):(n.default(ce+" i").removeClass(this._config.iconMaximize).addClass(this._config.iconMinimize),n.default("body").addClass(je)),n.default(window).trigger("resize"),this._fixHeight(!0)},t._init=function(){var e=n.default(be).children().length>2;if(this._setupListeners(),this._fixHeight(!0),e){var t=n.default(""+we).first();console.log(t);var a="#tab-"+t.attr("id").replace("panel-","");this.switchTab(a,!0)}},t._initFrameElement=function(){if(window.frameElement&&this._config.autoIframeMode){var e=n.default("body");e.addClass(Se),this._config.autoDarkMode&&e.addClass("dark-mode")}},t._navScroll=function(e){var t=n.default(me).scrollLeft();n.default(me).animate({scrollLeft:t+e},250,"linear")},t._setupListeners=function(){var e=this;n.default(window).on("resize",(function(){setTimeout((function(){e._fixHeight()}),1)})),n.default(he).hasClass(Se)&&(n.default(document).on("click",xe+", .sidebar-search-results .list-group-item",(function(t){t.preventDefault(),e.openTabSidebar(t.target)})),this._config.useNavbarItems&&n.default(document).on("click",Ie+", "+Te,(function(t){t.preventDefault(),e.openTabSidebar(t.target)}))),n.default(document).on("click",_e,(function(t){t.preventDefault(),e.onTabClick(t.target),e.switchTab(t.target)})),n.default(document).on("click",_e,(function(t){t.preventDefault(),e.onTabClick(t.target),e.switchTab(t.target)})),n.default(document).on("click",'[data-widget="iframe-close"]',(function(t){t.preventDefault();var a=t.target;"I"==a.nodeName&&(a=t.target.offsetParent),e.removeActiveTab(a.attributes["data-type"]?a.attributes["data-type"].nodeValue:null,a)})),n.default(document).on("click",ce,(function(t){t.preventDefault(),e.toggleFullscreen()}));var t=!1,a=null;n.default(document).on("mousedown",'[data-widget="iframe-scrollleft"]',(function(n){n.preventDefault(),clearInterval(a);var i=e._config.scrollOffset;e._config.scrollBehaviorSwap||(i=-i),t=!0,e._navScroll(i),a=setInterval((function(){e._navScroll(i)}),250)})),n.default(document).on("mousedown",'[data-widget="iframe-scrollright"]',(function(n){n.preventDefault(),clearInterval(a);var i=e._config.scrollOffset;e._config.scrollBehaviorSwap&&(i=-i),t=!0,e._navScroll(i),a=setInterval((function(){e._navScroll(i)}),250)})),n.default(document).on("mouseup",(function(){t&&(t=!1,clearInterval(a),a=null)}))},t._setItemActive=function(e){n.default(xe+", "+Te).removeClass("active"),n.default(Ie).parent().removeClass("active");var t=n.default(Ie+'[href$="'+e+'"]'),a=n.default('.main-header a.dropdown-item[href$="'+e+'"]'),i=n.default(xe+'[href$="'+e+'"]');t.each((function(e,t){n.default(t).parent().addClass("active")})),a.each((function(e,t){n.default(t).addClass("active")})),i.each((function(e,t){n.default(t).addClass("active"),n.default(t).parents(".nav-treeview").prevAll(".nav-link").addClass("active")}))},t._fixHeight=function(e){if(void 0===e&&(e=!1),n.default("body").hasClass(je)){var t=n.default(window).height(),a=n.default(pe).outerHeight();n.default(ye+", "+Ce+", "+ge).height(t-a),n.default(he).height(t)}else{var i=parseFloat(n.default(he).css("height")),o=n.default(pe).outerHeight();1==e?setTimeout((function(){n.default(ye+", "+Ce).height(i-o)}),50):n.default(ge).height(i-o)}},e._jQueryInterface=function(t){if(n.default(ue).length>0){var a=n.default(this).data(de);a||(a=n.default(this).data());var i=n.default.extend({},ke,"object"==typeof t?t:a);localStorage.setItem("AdminLTE:IFrame:Options",JSON.stringify(i));var o=new e(n.default(this),i);n.default(this).data(de,"object"==typeof t?t:a),"string"==typeof t&&/createTab|openTabSidebar|switchTab|removeActiveTab/.test(t)&&o[t]()}else new e(n.default(this),JSON.parse(localStorage.getItem("AdminLTE:IFrame:Options")))._initFrameElement()},e}();n.default(window).on("load",(function(){Qe._jQueryInterface.call(n.default(ue))})),n.default.fn.IFrame=Qe._jQueryInterface,n.default.fn.IFrame.Constructor=Qe,n.default.fn.IFrame.noConflict=function(){return n.default.fn.IFrame=fe,Qe._jQueryInterface};var He="lte.layout",ze=n.default.fn.Layout,Fe=".main-header",Ee=".main-sidebar",Le=".main-sidebar .sidebar",De=".main-footer",Re="sidebar-focused",Ae={scrollbarTheme:"os-theme-light",scrollbarAutoHide:"l",panelAutoHeight:!0,panelAutoHeightMode:"min-height",preloadDuration:200,loginRegisterAutoHeight:!0},Me=function(){function e(e,t){this._config=t,this._element=e}var t=e.prototype;return t.fixLayoutHeight=function(e){void 0===e&&(e=null);var t=n.default("body"),a=0;(t.hasClass("control-sidebar-slide-open")||t.hasClass("control-sidebar-open")||"control_sidebar"===e)&&(a=n.default(".control-sidebar-content").outerHeight());var i={window:n.default(window).height(),header:n.default(Fe).length>0?n.default(Fe).outerHeight():0,footer:n.default(De).length>0?n.default(De).outerHeight():0,sidebar:n.default(Le).length>0?n.default(Le).height():0,controlSidebar:a},o=this._max(i),l=this._config.panelAutoHeight;!0===l&&(l=0);var s=n.default(".content-wrapper");!1!==l&&(o===i.controlSidebar?s.css(this._config.panelAutoHeightMode,o+l):o===i.window?s.css(this._config.panelAutoHeightMode,o+l-i.header-i.footer):s.css(this._config.panelAutoHeightMode,o+l-i.header),this._isFooterFixed()&&s.css(this._config.panelAutoHeightMode,parseFloat(s.css(this._config.panelAutoHeightMode))+i.footer)),t.hasClass("layout-fixed")&&("undefined"!=typeof n.default.fn.overlayScrollbars?n.default(Le).overlayScrollbars({className:this._config.scrollbarTheme,sizeAutoCapable:!0,scrollbars:{autoHide:this._config.scrollbarAutoHide,clickScrolling:!0}}):n.default(Le).css("overflow-y","auto"))},t.fixLoginRegisterHeight=function(){var e=n.default("body"),t=n.default(".login-box, .register-box");if(e.hasClass("iframe-mode"))e.css("height","100%"),n.default(".wrapper").css("height","100%"),n.default("html").css("height","100%");else if(0===t.length)e.css("height","auto"),n.default("html").css("height","auto");else{var a=t.height();e.css(this._config.panelAutoHeightMode)!==a&&e.css(this._config.panelAutoHeightMode,a)}},t._init=function(){var e=this;this.fixLayoutHeight(),!0===this._config.loginRegisterAutoHeight?this.fixLoginRegisterHeight():this._config.loginRegisterAutoHeight===parseInt(this._config.loginRegisterAutoHeight,10)&&setInterval(this.fixLoginRegisterHeight,this._config.loginRegisterAutoHeight),n.default(Le).on("collapsed.lte.treeview expanded.lte.treeview",(function(){e.fixLayoutHeight()})),n.default(Ee).on("mouseenter mouseleave",(function(){n.default("body").hasClass("sidebar-collapse")&&e.fixLayoutHeight()})),n.default('[data-widget="pushmenu"]').on("collapsed.lte.pushmenu shown.lte.pushmenu",(function(){setTimeout((function(){e.fixLayoutHeight()}),300)})),n.default('[data-widget="control-sidebar"]').on("collapsed.lte.controlsidebar",(function(){e.fixLayoutHeight()})).on("expanded.lte.controlsidebar",(function(){e.fixLayoutHeight("control_sidebar")})),n.default(window).resize((function(){e.fixLayoutHeight()})),setTimeout((function(){n.default("body.hold-transition").removeClass("hold-transition")}),50),setTimeout((function(){var e=n.default(".preloader");e&&(e.css("height",0),setTimeout((function(){e.children().hide()}),200))}),this._config.preloadDuration)},t._max=function(e){var t=0;return Object.keys(e).forEach((function(a){e[a]>t&&(t=e[a])})),t},t._isFooterFixed=function(){return"fixed"===n.default(De).css("position")},e._jQueryInterface=function(t){return void 0===t&&(t=""),this.each((function(){var a=n.default(this).data(He),i=n.default.extend({},Ae,n.default(this).data());a||(a=new e(n.default(this),i),n.default(this).data(He,a)),"init"===t||""===t?a._init():"fixLayoutHeight"!==t&&"fixLoginRegisterHeight"!==t||a[t]()}))},e}();n.default(window).on("load",(function(){Me._jQueryInterface.call(n.default("body"))})),n.default(Le+" a").on("focusin",(function(){n.default(Ee).addClass(Re)})).on("focusout",(function(){n.default(Ee).removeClass(Re)})),n.default.fn.Layout=Me._jQueryInterface,n.default.fn.Layout.Constructor=Me,n.default.fn.Layout.noConflict=function(){return n.default.fn.Layout=ze,Me._jQueryInterface};var qe="PushMenu",Oe="lte.pushmenu",Ne="."+Oe,Pe=n.default.fn[qe],Ue='[data-widget="pushmenu"]',Be="body",$e="sidebar-collapse",Je="sidebar-open",We="sidebar-is-opening",Ve="sidebar-closed",Ge={autoCollapseSize:992,enableRemember:!1,noTransitionAfterReload:!0,animationSpeed:300},Ke=function(){function e(e,t){this._element=e,this._options=n.default.extend({},Ge,t),0===n.default("#sidebar-overlay").length&&this._addOverlay(),this._init()}var t=e.prototype;return t.expand=function(){var e=n.default(Be);this._options.autoCollapseSize&&n.default(window).width()<=this._options.autoCollapseSize&&e.addClass(Je),e.addClass(We).removeClass("sidebar-collapse sidebar-closed").delay(50).queue((function(){e.removeClass(We),n.default(this).dequeue()})),this._options.enableRemember&&localStorage.setItem("remember"+Ne,Je),n.default(this._element).trigger(n.default.Event("shown.lte.pushmenu"))},t.collapse=function(){var e=this,t=n.default(Be);this._options.autoCollapseSize&&n.default(window).width()<=this._options.autoCollapseSize&&t.removeClass(Je).addClass(Ve),t.addClass($e),this._options.enableRemember&&localStorage.setItem("remember"+Ne,$e),n.default(this._element).trigger(n.default.Event("collapsed.lte.pushmenu")),setTimeout((function(){n.default(e._element).trigger(n.default.Event("collapsed-done.lte.pushmenu"))}),this._options.animationSpeed)},t.toggle=function(){n.default(Be).hasClass($e)?this.expand():this.collapse()},t.autoCollapse=function(e){if(void 0===e&&(e=!1),this._options.autoCollapseSize){var t=n.default(Be);n.default(window).width()<=this._options.autoCollapseSize?t.hasClass(Je)||this.collapse():!0===e&&(t.hasClass(Je)?t.removeClass(Je):t.hasClass(Ve)&&this.expand())}},t.remember=function(){if(this._options.enableRemember){var e=n.default("body");localStorage.getItem("remember"+Ne)===$e?this._options.noTransitionAfterReload?e.addClass("hold-transition").addClass($e).delay(50).queue((function(){n.default(this).removeClass("hold-transition"),n.default(this).dequeue()})):e.addClass($e):this._options.noTransitionAfterReload?e.addClass("hold-transition").removeClass($e).delay(50).queue((function(){n.default(this).removeClass("hold-transition"),n.default(this).dequeue()})):e.removeClass($e)}},t._init=function(){var e=this;this.remember(),this.autoCollapse(),n.default(window).resize((function(){e.autoCollapse(!0)}))},t._addOverlay=function(){var e=this,t=n.default("<div />",{id:"sidebar-overlay"});t.on("click",(function(){e.collapse()})),n.default(".wrapper").append(t)},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(Oe),i=n.default.extend({},Ge,n.default(this).data());a||(a=new e(this,i),n.default(this).data(Oe,a)),"string"==typeof t&&/collapse|expand|toggle/.test(t)&&a[t]()}))},e}();n.default(document).on("click",Ue,(function(e){e.preventDefault();var t=e.currentTarget;"pushmenu"!==n.default(t).data("widget")&&(t=n.default(t).closest(Ue)),Ke._jQueryInterface.call(n.default(t),"toggle")})),n.default(window).on("load",(function(){Ke._jQueryInterface.call(n.default(Ue))})),n.default.fn[qe]=Ke._jQueryInterface,n.default.fn[qe].Constructor=Ke,n.default.fn[qe].noConflict=function(){return n.default.fn[qe]=Pe,Ke._jQueryInterface};var Xe="SidebarSearch",Ye="lte.sidebar-search",Ze=n.default.fn[Xe],et="sidebar-search-open",tt="fa-search",at="fa-times",nt="sidebar-search-results",it="list-group",ot='[data-widget="sidebar-search"]',lt=ot+" .form-control",st=ot+" .btn",rt=st+" i",dt=".sidebar-search-results",ft=".sidebar-search-results .list-group",ut={arrowSign:"->",minLength:3,maxResults:7,highlightName:!0,highlightPath:!1,highlightClass:"text-light",notFoundText:"No element found!"},ct=[],ht=function(){function e(e,t){this.element=e,this.options=n.default.extend({},ut,t),this.items=[]}var a=e.prototype;return a.init=function(){var e=this;0!==n.default(ot).length&&(0===n.default(ot).next(dt).length&&n.default(ot).after(n.default("<div />",{class:nt})),0===n.default(dt).children(".list-group").length&&n.default(dt).append(n.default("<div />",{class:it})),this._addNotFound(),n.default(".main-sidebar .nav-sidebar").children().each((function(t,a){e._parseItem(a)})))},a.search=function(){var e=this,t=n.default(lt).val().toLowerCase();if(t.length<this.options.minLength)return n.default(ft).empty(),this._addNotFound(),void this.close();var a=ct.filter((function(e){return e.name.toLowerCase().includes(t)})),i=n.default(a.slice(0,this.options.maxResults));n.default(ft).empty(),0===i.length?this._addNotFound():i.each((function(t,a){n.default(ft).append(e._renderItem(escape(a.name),encodeURI(a.link),a.path))})),this.open()},a.open=function(){n.default(ot).parent().addClass(et),n.default(rt).removeClass(tt).addClass(at)},a.close=function(){n.default(ot).parent().removeClass(et),n.default(rt).removeClass(at).addClass(tt)},a.toggle=function(){n.default(ot).parent().hasClass(et)?this.close():this.open()},a._parseItem=function(e,t){var a=this;if(void 0===t&&(t=[]),!n.default(e).hasClass("nav-header")){var i={},o=n.default(e).clone().find("> .nav-link"),l=n.default(e).clone().find("> .nav-treeview"),s=o.attr("href"),r=o.find("p").children().remove().end().text();if(i.name=this._trimText(r),i.link=s,i.path=t,0===l.length)ct.push(i);else{var d=i.path.concat([i.name]);l.children().each((function(e,t){a._parseItem(t,d)}))}}},a._trimText=function(e){return t.trim(e.replace(/(\r\n|\n|\r)/gm," "))},a._renderItem=function(e,t,a){var i=this;if(a=a.join(" "+this.options.arrowSign+" "),e=unescape(e),t=decodeURI(t),this.options.highlightName||this.options.highlightPath){var o=n.default(lt).val().toLowerCase(),l=new RegExp(o,"gi");this.options.highlightName&&(e=e.replace(l,(function(e){return'<strong class="'+i.options.highlightClass+'">'+e+"</strong>"}))),this.options.highlightPath&&(a=a.replace(l,(function(e){return'<strong class="'+i.options.highlightClass+'">'+e+"</strong>"})))}var s=n.default("<a/>",{href:decodeURIComponent(t),class:"list-group-item"}),r=n.default("<div/>",{class:"search-title"}).html(e),d=n.default("<div/>",{class:"search-path"}).html(a);return s.append(r).append(d),s},a._addNotFound=function(){n.default(ft).append(this._renderItem(this.options.notFoundText,"#",[]))},e._jQueryInterface=function(t){var a=n.default(this).data(Ye);a||(a=n.default(this).data());var i=n.default.extend({},ut,"object"==typeof t?t:a),o=new e(n.default(this),i);n.default(this).data(Ye,"object"==typeof t?t:a),"string"==typeof t&&/init|toggle|close|open|search/.test(t)?o[t]():o.init()},e}();n.default(document).on("click",st,(function(e){e.preventDefault(),ht._jQueryInterface.call(n.default(ot),"toggle")})),n.default(document).on("keyup",lt,(function(e){return 38==e.keyCode?(e.preventDefault(),void n.default(ft).children().last().focus()):40==e.keyCode?(e.preventDefault(),void n.default(ft).children().first().focus()):void setTimeout((function(){ht._jQueryInterface.call(n.default(ot),"search")}),100)})),n.default(document).on("keydown",ft,(function(e){var t=n.default(":focus");38==e.keyCode&&(e.preventDefault(),t.is(":first-child")?t.siblings().last().focus():t.prev().focus()),40==e.keyCode&&(e.preventDefault(),t.is(":last-child")?t.siblings().first().focus():t.next().focus())})),n.default(window).on("load",(function(){ht._jQueryInterface.call(n.default(ot),"init")})),n.default.fn[Xe]=ht._jQueryInterface,n.default.fn[Xe].Constructor=ht,n.default.fn[Xe].noConflict=function(){return n.default.fn[Xe]=Ze,ht._jQueryInterface};var gt="NavbarSearch",pt="lte.navbar-search",mt=n.default.fn[gt],vt='[data-widget="navbar-search"]',_t=".form-control",bt="navbar-search-open",yt={resetOnClose:!0,target:".navbar-search-block"},Ct=function(){function e(e,t){this._element=e,this._config=n.default.extend({},yt,t)}var t=e.prototype;return t.open=function(){n.default(this._config.target).css("display","flex").hide().fadeIn().addClass(bt),n.default(this._config.target+" "+_t).focus()},t.close=function(){n.default(this._config.target).fadeOut().removeClass(bt),this._config.resetOnClose&&n.default(this._config.target+" "+_t).val("")},t.toggle=function(){n.default(this._config.target).hasClass(bt)?this.close():this.open()},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(pt),i=n.default.extend({},yt,n.default(this).data());if(a||(a=new e(this,i),n.default(this).data(pt,a)),!/toggle|close|open/.test(t))throw new Error("Undefined method "+t);a[t]()}))},e}();n.default(document).on("click",vt,(function(e){e.preventDefault();var t=n.default(e.currentTarget);"navbar-search"!==t.data("widget")&&(t=t.closest(vt)),Ct._jQueryInterface.call(t,"toggle")})),n.default.fn[gt]=Ct._jQueryInterface,n.default.fn[gt].Constructor=Ct,n.default.fn[gt].noConflict=function(){return n.default.fn[gt]=mt,Ct._jQueryInterface};var wt=n.default.fn.Toasts,xt="topRight",It="topLeft",Tt="bottomRight",St="bottomLeft",jt={position:xt,fixed:!0,autohide:!1,autoremove:!0,delay:1e3,fade:!0,icon:null,image:null,imageAlt:null,imageHeight:"25px",title:null,subtitle:null,close:!0,body:null,class:null},kt=function(){function e(e,t){this._config=t,this._prepareContainer(),n.default("body").trigger(n.default.Event("init.lte.toasts"))}var t=e.prototype;return t.create=function(){var e=n.default('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"/>');e.data("autohide",this._config.autohide),e.data("animation",this._config.fade),this._config.class&&e.addClass(this._config.class),this._config.delay&&500!=this._config.delay&&e.data("delay",this._config.delay);var t=n.default('<div class="toast-header">');if(null!=this._config.image){var a=n.default("<img />").addClass("rounded mr-2").attr("src",this._config.image).attr("alt",this._config.imageAlt);null!=this._config.imageHeight&&a.height(this._config.imageHeight).width("auto"),t.append(a)}if(null!=this._config.icon&&t.append(n.default("<i />").addClass("mr-2").addClass(this._config.icon)),null!=this._config.title&&t.append(n.default("<strong />").addClass("mr-auto").html(this._config.title)),null!=this._config.subtitle&&t.append(n.default("<small />").html(this._config.subtitle)),1==this._config.close){var i=n.default('<button data-dismiss="toast" />').attr("type","button").addClass("ml-2 mb-1 close").attr("aria-label","Close").append('<span aria-hidden="true">&times;</span>');null==this._config.title&&i.toggleClass("ml-2 ml-auto"),t.append(i)}e.append(t),null!=this._config.body&&e.append(n.default('<div class="toast-body" />').html(this._config.body)),n.default(this._getContainerId()).prepend(e);var o=n.default("body");o.trigger(n.default.Event("created.lte.toasts")),e.toast("show"),this._config.autoremove&&e.on("hidden.bs.toast",(function(){n.default(this).delay(200).remove(),o.trigger(n.default.Event("removed.lte.toasts"))}))},t._getContainerId=function(){return this._config.position==xt?"#toastsContainerTopRight":this._config.position==It?"#toastsContainerTopLeft":this._config.position==Tt?"#toastsContainerBottomRight":this._config.position==St?"#toastsContainerBottomLeft":void 0},t._prepareContainer=function(){if(0===n.default(this._getContainerId()).length){var e=n.default("<div />").attr("id",this._getContainerId().replace("#",""));this._config.position==xt?e.addClass("toasts-top-right"):this._config.position==It?e.addClass("toasts-top-left"):this._config.position==Tt?e.addClass("toasts-bottom-right"):this._config.position==St&&e.addClass("toasts-bottom-left"),n.default("body").append(e)}this._config.fixed?n.default(this._getContainerId()).addClass("fixed"):n.default(this._getContainerId()).removeClass("fixed")},e._jQueryInterface=function(t,a){return this.each((function(){var i=n.default.extend({},jt,a),o=new e(n.default(this),i);"create"===t&&o[t]()}))},e}();n.default.fn.Toasts=kt._jQueryInterface,n.default.fn.Toasts.Constructor=kt,n.default.fn.Toasts.noConflict=function(){return n.default.fn.Toasts=wt,kt._jQueryInterface};var Qt="TodoList",Ht="lte.todolist",zt=n.default.fn[Qt],Ft="done",Et={onCheck:function(e){return e},onUnCheck:function(e){return e}},Lt=function(){function e(e,t){this._config=t,this._element=e,this._init()}var t=e.prototype;return t.toggle=function(e){e.parents("li").toggleClass(Ft),n.default(e).prop("checked")?this.check(e):this.unCheck(n.default(e))},t.check=function(e){this._config.onCheck.call(e)},t.unCheck=function(e){this._config.onUnCheck.call(e)},t._init=function(){var e=this,t=this._element;t.find("input:checkbox:checked").parents("li").toggleClass(Ft),t.on("change","input:checkbox",(function(t){e.toggle(n.default(t.target))}))},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(Ht);a||(a=n.default(this).data());var i=n.default.extend({},Et,"object"==typeof t?t:a),o=new e(n.default(this),i);n.default(this).data(Ht,"object"==typeof t?t:a),"init"===t&&o[t]()}))},e}();n.default(window).on("load",(function(){Lt._jQueryInterface.call(n.default('[data-widget="todo-list"]'))})),n.default.fn[Qt]=Lt._jQueryInterface,n.default.fn[Qt].Constructor=Lt,n.default.fn[Qt].noConflict=function(){return n.default.fn[Qt]=zt,Lt._jQueryInterface};var Dt="Treeview",Rt="lte.treeview",At=n.default.fn[Dt],Mt=".nav-item",qt=".nav-treeview",Ot=".menu-open",Nt='[data-widget="treeview"]',Pt="menu-open",Ut="menu-is-opening",Bt={trigger:Nt+" .nav-link",animationSpeed:300,accordion:!0,expandSidebar:!1,sidebarButtonSelector:'[data-widget="pushmenu"]'},$t=function(){function e(e,t){this._config=t,this._element=e}var t=e.prototype;return t.init=function(){n.default(".nav-item.menu-open .nav-treeview.menu-open").css("display","block"),this._setupListeners()},t.expand=function(e,t){var a=this,i=n.default.Event("expanded.lte.treeview");if(this._config.accordion){var o=t.siblings(Ot).first(),l=o.find(qt).first();this.collapse(l,o)}t.addClass(Ut),e.stop().slideDown(this._config.animationSpeed,(function(){t.addClass(Pt),n.default(a._element).trigger(i)})),this._config.expandSidebar&&this._expandSidebar()},t.collapse=function(e,t){var a=this,i=n.default.Event("collapsed.lte.treeview");t.removeClass("menu-is-opening menu-open"),e.stop().slideUp(this._config.animationSpeed,(function(){n.default(a._element).trigger(i),e.find(".menu-open > .nav-treeview").slideUp(),e.find(Ot).removeClass("menu-is-opening menu-open")}))},t.toggle=function(e){var t=n.default(e.currentTarget),a=t.parent(),i=a.find("> .nav-treeview");if(i.is(qt)||(a.is(Mt)||(i=a.parent().find("> .nav-treeview")),i.is(qt))){e.preventDefault();var o=t.parents(Mt).first();o.hasClass(Pt)?this.collapse(n.default(i),o):this.expand(n.default(i),o)}},t._setupListeners=function(){var e=this,t=void 0!==this._element.attr("id")?"#"+this._element.attr("id"):"";n.default(document).on("click",""+t+this._config.trigger,(function(t){e.toggle(t)}))},t._expandSidebar=function(){n.default("body").hasClass("sidebar-collapse")&&n.default(this._config.sidebarButtonSelector).PushMenu("expand")},e._jQueryInterface=function(t){return this.each((function(){var a=n.default(this).data(Rt),i=n.default.extend({},Bt,n.default(this).data());a||(a=new e(n.default(this),i),n.default(this).data(Rt,a)),"init"===t&&a[t]()}))},e}();n.default(window).on("load.lte.treeview",(function(){n.default(Nt).each((function(){$t._jQueryInterface.call(n.default(this),"init")}))})),n.default.fn[Dt]=$t._jQueryInterface,n.default.fn[Dt].Constructor=$t,n.default.fn[Dt].noConflict=function(){return n.default.fn[Dt]=At,$t._jQueryInterface},e.CardRefresh=f,e.CardWidget=I,e.ControlSidebar=M,e.DirectChat=P,e.Dropdown=V,e.ExpandableTable=te,e.Fullscreen=re,e.IFrame=Qe,e.Layout=Me,e.NavbarSearch=Ct,e.PushMenu=Ke,e.SidebarSearch=ht,e.Toasts=kt,e.TodoList=Lt,e.Treeview=$t,Object.defineProperty(e,"__esModule",{value:!0})}));
+//# sourceMappingURL=adminlte.min.js.map
 /*! tether 1.4.7 */
 
 (function(root, factory) {
@@ -12707,10 +12701,10 @@ return Tether;
 
 }));
 
-/*! jQuery UI - v1.13.2 - 2022-07-14
-* http://jqueryui.com
+/*! jQuery UI - v1.13.3 - 2024-04-26
+* https://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
-* Copyright jQuery Foundation and other contributors; Licensed MIT */
+* Copyright OpenJS Foundation and other contributors; Licensed MIT */
 
 ( function( factory ) {
 	"use strict";
@@ -12729,23 +12723,23 @@ return Tether;
 
 $.ui = $.ui || {};
 
-var version = $.ui.version = "1.13.2";
+var version = $.ui.version = "1.13.3";
 
 
 /*!
- * jQuery UI Widget 1.13.2
- * http://jqueryui.com
+ * jQuery UI Widget 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Widget
 //>>group: Core
 //>>description: Provides a factory for creating stateful widgets with a common API.
-//>>docs: http://api.jqueryui.com/jQuery.widget/
-//>>demos: http://jqueryui.com/widget/
+//>>docs: https://api.jqueryui.com/jQuery.widget/
+//>>demos: https://jqueryui.com/widget/
 
 
 var widgetUuid = 0;
@@ -13475,21 +13469,21 @@ var widget = $.widget;
 
 
 /*!
- * jQuery UI Position 1.13.2
- * http://jqueryui.com
+ * jQuery UI Position 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
- * http://api.jqueryui.com/position/
+ * https://api.jqueryui.com/position/
  */
 
 //>>label: Position
 //>>group: Core
 //>>description: Positions elements relative to other elements.
-//>>docs: http://api.jqueryui.com/position/
-//>>demos: http://jqueryui.com/position/
+//>>docs: https://api.jqueryui.com/position/
+//>>demos: https://jqueryui.com/position/
 
 
 ( function() {
@@ -13972,18 +13966,18 @@ var position = $.ui.position;
 
 
 /*!
- * jQuery UI :data 1.13.2
- * http://jqueryui.com
+ * jQuery UI :data 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :data Selector
 //>>group: Core
 //>>description: Selects elements which have data stored under the specified key.
-//>>docs: http://api.jqueryui.com/data-selector/
+//>>docs: https://api.jqueryui.com/data-selector/
 
 
 var data = $.extend( $.expr.pseudos, {
@@ -14001,18 +13995,18 @@ var data = $.extend( $.expr.pseudos, {
 } );
 
 /*!
- * jQuery UI Disable Selection 1.13.2
- * http://jqueryui.com
+ * jQuery UI Disable Selection 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: disableSelection
 //>>group: Core
 //>>description: Disable selection of text content within the set of matched elements.
-//>>docs: http://api.jqueryui.com/disableSelection/
+//>>docs: https://api.jqueryui.com/disableSelection/
 
 // This file is deprecated
 
@@ -14049,7 +14043,7 @@ var jQuery = $;
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
  * Date: Sun May 10 09:02:36 2020 +0200
  */
@@ -14756,12 +14750,12 @@ colors = jQuery.Color.names = {
 
 
 /*!
- * jQuery UI Effects 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Effects Core
@@ -14769,8 +14763,8 @@ colors = jQuery.Color.names = {
 /* eslint-disable max-len */
 //>>description: Extends the internal jQuery effects. Includes morphing and easing. Required by all other effects.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/category/effects-core/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/category/effects-core/
+//>>demos: https://jqueryui.com/effect/
 
 
 var dataSpace = "ui-effects-",
@@ -15140,7 +15134,7 @@ if ( $.uiBackCompat !== false ) {
 }
 
 $.extend( $.effects, {
-	version: "1.13.2",
+	version: "1.13.3",
 
 	define: function( name, mode, effect ) {
 		if ( !effect ) {
@@ -15263,7 +15257,7 @@ $.extend( $.effects, {
 
 		// Lock in margins first to account for form elements, which
 		// will change margin if you explicitly set height
-		// see: http://jsfiddle.net/JZSMt/3/ https://bugs.webkit.org/show_bug.cgi?id=107380
+		// see: https://jsfiddle.net/JZSMt/3/ https://bugs.webkit.org/show_bug.cgi?id=107380
 		// Support: Safari
 		element.css( {
 			marginTop: element.css( "marginTop" ),
@@ -15657,7 +15651,7 @@ $.fx.step.clip = function( fx ) {
 
 ( function() {
 
-// Based on easing equations from Robert Penner (http://www.robertpenner.com/easing)
+// Based on easing equations from Robert Penner (http://robertpenner.com/easing)
 
 var baseEasings = {};
 
@@ -15708,19 +15702,19 @@ var effect = $.effects;
 
 
 /*!
- * jQuery UI Effects Blind 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Blind 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Blind Effect
 //>>group: Effects
 //>>description: Blinds the element.
-//>>docs: http://api.jqueryui.com/blind-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/blind-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectBlind = $.effects.define( "blind", "hide", function( options, done ) {
@@ -15763,19 +15757,19 @@ var effectsEffectBlind = $.effects.define( "blind", "hide", function( options, d
 
 
 /*!
- * jQuery UI Effects Bounce 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Bounce 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Bounce Effect
 //>>group: Effects
 //>>description: Bounces an element horizontally or vertically n times.
-//>>docs: http://api.jqueryui.com/bounce-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/bounce-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) {
@@ -15858,19 +15852,19 @@ var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) 
 
 
 /*!
- * jQuery UI Effects Clip 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Clip 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Clip Effect
 //>>group: Effects
 //>>description: Clips the element on and off like an old TV.
-//>>docs: http://api.jqueryui.com/clip-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/clip-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectClip = $.effects.define( "clip", "hide", function( options, done ) {
@@ -15908,19 +15902,19 @@ var effectsEffectClip = $.effects.define( "clip", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Drop 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Drop 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Drop Effect
 //>>group: Effects
 //>>description: Moves an element in one direction and hides it at the same time.
-//>>docs: http://api.jqueryui.com/drop-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/drop-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, done ) {
@@ -15962,12 +15956,12 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Explode 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Explode 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Explode Effect
@@ -15975,8 +15969,8 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 /* eslint-disable max-len */
 //>>description: Explodes an element in all directions into n pieces. Implodes an element to its original wholeness.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/explode-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/explode-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectExplode = $.effects.define( "explode", "hide", function( options, done ) {
@@ -16058,19 +16052,19 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 
 
 /*!
- * jQuery UI Effects Fade 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Fade 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Fade Effect
 //>>group: Effects
 //>>description: Fades the element.
-//>>docs: http://api.jqueryui.com/fade-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/fade-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, done ) {
@@ -16090,19 +16084,19 @@ var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, d
 
 
 /*!
- * jQuery UI Effects Fold 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Fold 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Fold Effect
 //>>group: Effects
 //>>description: Folds an element first horizontally and then vertically.
-//>>docs: http://api.jqueryui.com/fold-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/fold-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectFold = $.effects.define( "fold", "hide", function( options, done ) {
@@ -16164,19 +16158,19 @@ var effectsEffectFold = $.effects.define( "fold", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Highlight 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Highlight 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Highlight Effect
 //>>group: Effects
 //>>description: Highlights the background of an element in a defined color for a custom duration.
-//>>docs: http://api.jqueryui.com/highlight-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/highlight-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectHighlight = $.effects.define( "highlight", "show", function( options, done ) {
@@ -16206,19 +16200,19 @@ var effectsEffectHighlight = $.effects.define( "highlight", "show", function( op
 
 
 /*!
- * jQuery UI Effects Size 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Size 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Size Effect
 //>>group: Effects
 //>>description: Resize an element to a specified width and height.
-//>>docs: http://api.jqueryui.com/size-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/size-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectSize = $.effects.define( "size", function( options, done ) {
@@ -16384,19 +16378,19 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Scale 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Scale 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Scale Effect
 //>>group: Effects
 //>>description: Grows or shrinks an element and its content.
-//>>docs: http://api.jqueryui.com/scale-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/scale-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
@@ -16424,19 +16418,19 @@ var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Puff 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Puff 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Puff Effect
 //>>group: Effects
 //>>description: Creates a puff effect by scaling the element up and hiding it at the same time.
-//>>docs: http://api.jqueryui.com/puff-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/puff-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectPuff = $.effects.define( "puff", "hide", function( options, done ) {
@@ -16450,19 +16444,19 @@ var effectsEffectPuff = $.effects.define( "puff", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Pulsate 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Pulsate 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Pulsate Effect
 //>>group: Effects
 //>>description: Pulsates an element n times by changing the opacity to zero and back.
-//>>docs: http://api.jqueryui.com/pulsate-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/pulsate-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( options, done ) {
@@ -16499,19 +16493,19 @@ var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( option
 
 
 /*!
- * jQuery UI Effects Shake 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Shake 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Shake Effect
 //>>group: Effects
 //>>description: Shakes an element horizontally or vertically n times.
-//>>docs: http://api.jqueryui.com/shake-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/shake-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectShake = $.effects.define( "shake", function( options, done ) {
@@ -16558,19 +16552,19 @@ var effectsEffectShake = $.effects.define( "shake", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Slide 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Slide 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Slide Effect
 //>>group: Effects
 //>>description: Slides an element in and out of the viewport.
-//>>docs: http://api.jqueryui.com/slide-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/slide-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectSlide = $.effects.define( "slide", "show", function( options, done ) {
@@ -16619,19 +16613,19 @@ var effectsEffectSlide = $.effects.define( "slide", "show", function( options, d
 
 
 /*!
- * jQuery UI Effects Transfer 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Transfer 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Transfer Effect
 //>>group: Effects
 //>>description: Displays a transfer effect from one element to another.
-//>>docs: http://api.jqueryui.com/transfer-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/transfer-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effect;
@@ -16644,18 +16638,18 @@ var effectsEffectTransfer = effect;
 
 
 /*!
- * jQuery UI Focusable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Focusable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :focusable Selector
 //>>group: Core
 //>>description: Selects elements which can be focused.
-//>>docs: http://api.jqueryui.com/focusable-selector/
+//>>docs: https://api.jqueryui.com/focusable-selector/
 
 
 // Selectors
@@ -16726,18 +16720,18 @@ var form = $.fn._form = function() {
 
 
 /*!
- * jQuery UI Form Reset Mixin 1.13.2
- * http://jqueryui.com
+ * jQuery UI Form Reset Mixin 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Form Reset Mixin
 //>>group: Core
 //>>description: Refresh input widgets when their form is reset
-//>>docs: http://api.jqueryui.com/form-reset-mixin/
+//>>docs: https://api.jqueryui.com/form-reset-mixin/
 
 
 var formResetMixin = $.ui.formResetMixin = {
@@ -16788,12 +16782,12 @@ var formResetMixin = $.ui.formResetMixin = {
 
 
 /*!
- * jQuery UI Support for jQuery core 1.8.x and newer 1.13.2
- * http://jqueryui.com
+ * jQuery UI Support for jQuery core 1.8.x and newer 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
  */
 
@@ -16863,18 +16857,18 @@ if ( !$.fn.even || !$.fn.odd ) {
 
 ;
 /*!
- * jQuery UI Keycode 1.13.2
- * http://jqueryui.com
+ * jQuery UI Keycode 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Keycode
 //>>group: Core
 //>>description: Provide keycodes as keynames
-//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
+//>>docs: https://api.jqueryui.com/jQuery.ui.keyCode/
 
 
 var keycode = $.ui.keyCode = {
@@ -16898,18 +16892,18 @@ var keycode = $.ui.keyCode = {
 
 
 /*!
- * jQuery UI Labels 1.13.2
- * http://jqueryui.com
+ * jQuery UI Labels 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: labels
 //>>group: Core
 //>>description: Find all the labels associated with a given input
-//>>docs: http://api.jqueryui.com/labels/
+//>>docs: https://api.jqueryui.com/labels/
 
 
 var labels = $.fn.labels = function() {
@@ -16953,18 +16947,18 @@ var labels = $.fn.labels = function() {
 
 
 /*!
- * jQuery UI Scroll Parent 1.13.2
- * http://jqueryui.com
+ * jQuery UI Scroll Parent 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: scrollParent
 //>>group: Core
 //>>description: Get the closest ancestor element that is scrollable.
-//>>docs: http://api.jqueryui.com/scrollParent/
+//>>docs: https://api.jqueryui.com/scrollParent/
 
 
 var scrollParent = $.fn.scrollParent = function( includeHidden ) {
@@ -16987,18 +16981,18 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 
 
 /*!
- * jQuery UI Tabbable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tabbable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :tabbable Selector
 //>>group: Core
 //>>description: Selects elements which can be tabbed to.
-//>>docs: http://api.jqueryui.com/tabbable-selector/
+//>>docs: https://api.jqueryui.com/tabbable-selector/
 
 
 var tabbable = $.extend( $.expr.pseudos, {
@@ -17011,18 +17005,18 @@ var tabbable = $.extend( $.expr.pseudos, {
 
 
 /*!
- * jQuery UI Unique ID 1.13.2
- * http://jqueryui.com
+ * jQuery UI Unique ID 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: uniqueId
 //>>group: Core
 //>>description: Functions to generate and remove uniqueId's
-//>>docs: http://api.jqueryui.com/uniqueId/
+//>>docs: https://api.jqueryui.com/uniqueId/
 
 
 var uniqueId = $.fn.extend( {
@@ -17049,12 +17043,12 @@ var uniqueId = $.fn.extend( {
 
 
 /*!
- * jQuery UI Accordion 1.13.2
- * http://jqueryui.com
+ * jQuery UI Accordion 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Accordion
@@ -17062,15 +17056,15 @@ var uniqueId = $.fn.extend( {
 /* eslint-disable max-len */
 //>>description: Displays collapsible content panels for presenting information in a limited amount of space.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/accordion/
-//>>demos: http://jqueryui.com/accordion/
+//>>docs: https://api.jqueryui.com/accordion/
+//>>demos: https://jqueryui.com/accordion/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/accordion.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsAccordion = $.widget( "ui.accordion", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		active: 0,
 		animate: {},
@@ -17681,26 +17675,26 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 
 
 /*!
- * jQuery UI Menu 1.13.2
- * http://jqueryui.com
+ * jQuery UI Menu 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Menu
 //>>group: Widgets
 //>>description: Creates nestable menus.
-//>>docs: http://api.jqueryui.com/menu/
-//>>demos: http://jqueryui.com/menu/
+//>>docs: https://api.jqueryui.com/menu/
+//>>demos: https://jqueryui.com/menu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/menu.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsMenu = $.widget( "ui.menu", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -18372,26 +18366,26 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 /*!
- * jQuery UI Autocomplete 1.13.2
- * http://jqueryui.com
+ * jQuery UI Autocomplete 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Autocomplete
 //>>group: Widgets
 //>>description: Lists suggested words as the user is typing.
-//>>docs: http://api.jqueryui.com/autocomplete/
-//>>demos: http://jqueryui.com/autocomplete/
+//>>docs: https://api.jqueryui.com/autocomplete/
+//>>demos: https://jqueryui.com/autocomplete/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/autocomplete.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.autocomplete", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
@@ -19028,19 +19022,19 @@ var widgetsAutocomplete = $.ui.autocomplete;
 
 
 /*!
- * jQuery UI Controlgroup 1.13.2
- * http://jqueryui.com
+ * jQuery UI Controlgroup 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Controlgroup
 //>>group: Widgets
 //>>description: Visually groups form control widgets
-//>>docs: http://api.jqueryui.com/controlgroup/
-//>>demos: http://jqueryui.com/controlgroup/
+//>>docs: https://api.jqueryui.com/controlgroup/
+//>>demos: https://jqueryui.com/controlgroup/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/controlgroup.css
 //>>css.theme: ../../themes/base/theme.css
@@ -19049,7 +19043,7 @@ var widgetsAutocomplete = $.ui.autocomplete;
 var controlgroupCornerRegex = /ui-corner-([a-z]){2,6}/g;
 
 var widgetsControlgroup = $.widget( "ui.controlgroup", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<div>",
 	options: {
 		direction: "horizontal",
@@ -19313,19 +19307,19 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 } );
 
 /*!
- * jQuery UI Checkboxradio 1.13.2
- * http://jqueryui.com
+ * jQuery UI Checkboxradio 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Checkboxradio
 //>>group: Widgets
 //>>description: Enhances a form with multiple themeable checkboxes or radio buttons.
-//>>docs: http://api.jqueryui.com/checkboxradio/
-//>>demos: http://jqueryui.com/checkboxradio/
+//>>docs: https://api.jqueryui.com/checkboxradio/
+//>>demos: https://jqueryui.com/checkboxradio/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/button.css
 //>>css.structure: ../../themes/base/checkboxradio.css
@@ -19333,7 +19327,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 
 
 $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		disabled: null,
 		label: null,
@@ -19584,26 +19578,26 @@ var widgetsCheckboxradio = $.ui.checkboxradio;
 
 
 /*!
- * jQuery UI Button 1.13.2
- * http://jqueryui.com
+ * jQuery UI Button 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Button
 //>>group: Widgets
 //>>description: Enhances a form with themeable buttons.
-//>>docs: http://api.jqueryui.com/button/
-//>>demos: http://jqueryui.com/button/
+//>>docs: https://api.jqueryui.com/button/
+//>>demos: https://jqueryui.com/button/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/button.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.button", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<button>",
 	options: {
 		classes: {
@@ -20010,25 +20004,25 @@ var widgetsButton = $.ui.button;
 
 /* eslint-disable max-len, camelcase */
 /*!
- * jQuery UI Datepicker 1.13.2
- * http://jqueryui.com
+ * jQuery UI Datepicker 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Datepicker
 //>>group: Widgets
 //>>description: Displays a calendar from an input or inline for selecting dates.
-//>>docs: http://api.jqueryui.com/datepicker/
-//>>demos: http://jqueryui.com/datepicker/
+//>>docs: https://api.jqueryui.com/datepicker/
+//>>demos: https://jqueryui.com/datepicker/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/datepicker.css
 //>>css.theme: ../../themes/base/theme.css
 
 
-$.extend( $.ui, { datepicker: { version: "1.13.2" } } );
+$.extend( $.ui, { datepicker: { version: "1.13.3" } } );
 
 var datepicker_instActive;
 
@@ -20345,7 +20339,7 @@ $.extend( Datepicker.prototype, {
 		}
 
 		// Set display:block in place of inst.dpDiv.show() which won't work on disconnected elements
-		// http://bugs.jqueryui.com/ticket/7552 - A Datepicker created on a detached div has zero height
+		// https://bugs.jqueryui.com/ticket/7552 - A Datepicker created on a detached div has zero height
 		inst.dpDiv.css( "display", "block" );
 	},
 
@@ -22225,7 +22219,7 @@ $.fn.datepicker = function( options ) {
 $.datepicker = new Datepicker(); // singleton instance
 $.datepicker.initialized = false;
 $.datepicker.uuid = new Date().getTime();
-$.datepicker.version = "1.13.2";
+$.datepicker.version = "1.13.3";
 
 var widgetsDatepicker = $.datepicker;
 
@@ -22235,18 +22229,18 @@ var widgetsDatepicker = $.datepicker;
 var ie = $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 /*!
- * jQuery UI Mouse 1.13.2
- * http://jqueryui.com
+ * jQuery UI Mouse 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Mouse
 //>>group: Widgets
 //>>description: Abstracts mouse-based interactions to assist in creating certain widgets.
-//>>docs: http://api.jqueryui.com/mouse/
+//>>docs: https://api.jqueryui.com/mouse/
 
 
 var mouseHandled = false;
@@ -22255,7 +22249,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 var widgetsMouse = $.widget( "ui.mouse", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,
@@ -22497,24 +22491,24 @@ var safeBlur = $.ui.safeBlur = function( element ) {
 
 
 /*!
- * jQuery UI Draggable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Draggable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Draggable
 //>>group: Interactions
 //>>description: Enables dragging functionality for any element.
-//>>docs: http://api.jqueryui.com/draggable/
-//>>demos: http://jqueryui.com/draggable/
+//>>docs: https://api.jqueryui.com/draggable/
+//>>demos: https://jqueryui.com/draggable/
 //>>css.structure: ../../themes/base/draggable.css
 
 
 $.widget( "ui.draggable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "drag",
 	options: {
 		addClasses: true,
@@ -22860,7 +22854,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 				o.appendTo ) );
 		}
 
-		// Http://bugs.jqueryui.com/ticket/9446
+		// https://bugs.jqueryui.com/ticket/9446
 		// a helper function can return the original element
 		// which wouldn't have been set to relative in _create
 		if ( helperIsFunction && helper[ 0 ] === this.element[ 0 ] ) {
@@ -23732,26 +23726,26 @@ var widgetsDraggable = $.ui.draggable;
 
 
 /*!
- * jQuery UI Resizable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Resizable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Resizable
 //>>group: Interactions
 //>>description: Enables resize functionality for any element.
-//>>docs: http://api.jqueryui.com/resizable/
-//>>demos: http://jqueryui.com/resizable/
+//>>docs: https://api.jqueryui.com/resizable/
+//>>demos: https://jqueryui.com/resizable/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/resizable.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.resizable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "resize",
 	options: {
 		alsoResize: false,
@@ -24245,14 +24239,17 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		if ( this.position.left !== this.prevPosition.left ) {
 			props.left = this.position.left + "px";
 		}
+
+		this.helper.css( props );
+
 		if ( this.size.width !== this.prevSize.width ) {
 			props.width = this.size.width + "px";
+			this.helper.width( props.width );
 		}
 		if ( this.size.height !== this.prevSize.height ) {
 			props.height = this.size.height + "px";
+			this.helper.height( props.height );
 		}
-
-		this.helper.css( props );
 
 		return props;
 	},
@@ -24760,7 +24757,7 @@ $.ui.plugin.add( "resizable", "alsoResize", {
 		$( o.alsoResize ).each( function() {
 			var el = $( this );
 			el.data( "ui-resizable-alsoresize", {
-				width: parseFloat( el.width() ), height: parseFloat( el.height() ),
+				width: parseFloat( el.css( "width" ) ), height: parseFloat( el.css( "height" ) ),
 				left: parseFloat( el.css( "left" ) ), top: parseFloat( el.css( "top" ) )
 			} );
 		} );
@@ -24930,26 +24927,26 @@ var widgetsResizable = $.ui.resizable;
 
 
 /*!
- * jQuery UI Dialog 1.13.2
- * http://jqueryui.com
+ * jQuery UI Dialog 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Dialog
 //>>group: Widgets
 //>>description: Displays customizable dialog windows.
-//>>docs: http://api.jqueryui.com/dialog/
-//>>demos: http://jqueryui.com/dialog/
+//>>docs: https://api.jqueryui.com/dialog/
+//>>demos: https://jqueryui.com/dialog/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/dialog.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.dialog", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		appendTo: "body",
 		autoOpen: true,
@@ -25783,12 +25780,15 @@ $.widget( "ui.dialog", {
 					event.preventDefault();
 					instance._focusTabbable();
 
-					// Support: jQuery >=3.4 <3.6 only
-					// Focus re-triggering in jQuery 3.4/3.5 makes the original element
-					// have its focus event propagated last, breaking the re-targeting.
-					// Trigger focus in a delay in addition if needed to avoid the issue
+					// Support: jQuery >=3.4 <3.7 only
+					// In jQuery 3.4-3.6, there are multiple issues with focus/blur
+					// trigger chains or when triggering is done on a hidden element
+					// at least once.
+					// Trigger focus in a delay in addition if needed to avoid the issues.
 					// See https://github.com/jquery/jquery/issues/4382
-					if ( jqMinor === "3.4." || jqMinor === "3.5." ) {
+					// See https://github.com/jquery/jquery/issues/4856
+					// See https://github.com/jquery/jquery/issues/4950
+					if ( jqMinor === "3.4." || jqMinor === "3.5." || jqMinor === "3.6." ) {
 						instance._delay( instance._restoreTabbableFocus );
 					}
 				}
@@ -25855,23 +25855,23 @@ var widgetsDialog = $.ui.dialog;
 
 
 /*!
- * jQuery UI Droppable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Droppable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Droppable
 //>>group: Interactions
 //>>description: Enables drop targets for draggable elements.
-//>>docs: http://api.jqueryui.com/droppable/
-//>>demos: http://jqueryui.com/droppable/
+//>>docs: https://api.jqueryui.com/droppable/
+//>>demos: https://jqueryui.com/droppable/
 
 
 $.widget( "ui.droppable", {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "drop",
 	options: {
 		accept: "*",
@@ -26338,12 +26338,12 @@ var widgetsDroppable = $.ui.droppable;
 
 
 /*!
- * jQuery UI Progressbar 1.13.2
- * http://jqueryui.com
+ * jQuery UI Progressbar 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Progressbar
@@ -26351,15 +26351,15 @@ var widgetsDroppable = $.ui.droppable;
 /* eslint-disable max-len */
 //>>description: Displays a status indicator for loading state, standard percentage, and other progress indicators.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/progressbar/
-//>>demos: http://jqueryui.com/progressbar/
+//>>docs: https://api.jqueryui.com/progressbar/
+//>>demos: https://jqueryui.com/progressbar/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/progressbar.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsProgressbar = $.widget( "ui.progressbar", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		classes: {
 			"ui-progressbar": "ui-corner-all",
@@ -26501,24 +26501,24 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 
 
 /*!
- * jQuery UI Selectable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Selectable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Selectable
 //>>group: Interactions
 //>>description: Allows groups of elements to be selected with the mouse.
-//>>docs: http://api.jqueryui.com/selectable/
-//>>demos: http://jqueryui.com/selectable/
+//>>docs: https://api.jqueryui.com/selectable/
+//>>demos: https://jqueryui.com/selectable/
 //>>css.structure: ../../themes/base/selectable.css
 
 
 var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		appendTo: "body",
 		autoRefresh: true,
@@ -26799,12 +26799,12 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Selectmenu 1.13.2
- * http://jqueryui.com
+ * jQuery UI Selectmenu 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Selectmenu
@@ -26812,15 +26812,15 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 /* eslint-disable max-len */
 //>>description: Duplicates and extends the functionality of a native HTML select element, allowing it to be customizable in behavior and appearance far beyond the limitations of a native select.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/selectmenu/
-//>>demos: http://jqueryui.com/selectmenu/
+//>>docs: https://api.jqueryui.com/selectmenu/
+//>>demos: https://jqueryui.com/selectmenu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/selectmenu.css, ../../themes/base/button.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<select>",
 	options: {
 		appendTo: null,
@@ -27130,7 +27130,12 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		if ( item.disabled ) {
 			this._addClass( li, null, "ui-state-disabled" );
 		}
-		this._setText( wrapper, item.label );
+
+		if ( item.hidden ) {
+			li.prop( "hidden", true );
+		} else {
+			this._setText( wrapper, item.label );
+		}
 
 		return li.append( wrapper ).appendTo( ul );
 	},
@@ -27434,10 +27439,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		var that = this,
 			data = [];
 		options.each( function( index, item ) {
-			if ( item.hidden ) {
-				return;
-			}
-
 			data.push( that._parseOption( $( item ), index ) );
 		} );
 		this.items = data;
@@ -27451,6 +27452,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			index: index,
 			value: option.val(),
 			label: option.text(),
+			hidden: optgroup.prop( "hidden" ) || option.prop( "hidden" ),
 			optgroup: optgroup.attr( "label" ) || "",
 			disabled: optgroup.prop( "disabled" ) || option.prop( "disabled" )
 		};
@@ -27468,26 +27470,26 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 
 
 /*!
- * jQuery UI Slider 1.13.2
- * http://jqueryui.com
+ * jQuery UI Slider 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Slider
 //>>group: Widgets
 //>>description: Displays a flexible slider with ranges and accessibility via keyboard.
-//>>docs: http://api.jqueryui.com/slider/
-//>>demos: http://jqueryui.com/slider/
+//>>docs: https://api.jqueryui.com/slider/
+//>>demos: https://jqueryui.com/slider/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/slider.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -28203,24 +28205,24 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Sortable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Sortable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Sortable
 //>>group: Interactions
 //>>description: Enables items in a list to be sorted using the mouse.
-//>>docs: http://api.jqueryui.com/sortable/
-//>>demos: http://jqueryui.com/sortable/
+//>>docs: https://api.jqueryui.com/sortable/
+//>>demos: https://jqueryui.com/sortable/
 //>>css.structure: ../../themes/base/sortable.css
 
 
 var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
@@ -29796,19 +29798,19 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Spinner 1.13.2
- * http://jqueryui.com
+ * jQuery UI Spinner 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Spinner
 //>>group: Widgets
 //>>description: Displays buttons to easily input numbers via the keyboard or mouse.
-//>>docs: http://api.jqueryui.com/spinner/
-//>>demos: http://jqueryui.com/spinner/
+//>>docs: https://api.jqueryui.com/spinner/
+//>>demos: https://jqueryui.com/spinner/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/spinner.css
 //>>css.theme: ../../themes/base/theme.css
@@ -29826,7 +29828,7 @@ function spinnerModifier( fn ) {
 }
 
 $.widget( "ui.spinner", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<input>",
 	widgetEventPrefix: "spin",
 	options: {
@@ -30357,26 +30359,26 @@ var widgetsSpinner = $.ui.spinner;
 
 
 /*!
- * jQuery UI Tabs 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tabs 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Tabs
 //>>group: Widgets
 //>>description: Transforms a set of container elements into a tab structure.
-//>>docs: http://api.jqueryui.com/tabs/
-//>>demos: http://jqueryui.com/tabs/
+//>>docs: https://api.jqueryui.com/tabs/
+//>>demos: https://jqueryui.com/tabs/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/tabs.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.tabs", {
-	version: "1.13.2",
+	version: "1.13.3",
 	delay: 300,
 	options: {
 		active: null,
@@ -31205,7 +31207,7 @@ $.widget( "ui.tabs", {
 				.done( function( response, status, jqXHR ) {
 
 					// support: jQuery <1.8
-					// http://bugs.jquery.com/ticket/11778
+					// https://bugs.jquery.com/ticket/11778
 					setTimeout( function() {
 						panel.html( response );
 						that._trigger( "load", event, eventData );
@@ -31216,7 +31218,7 @@ $.widget( "ui.tabs", {
 				.fail( function( jqXHR, status ) {
 
 					// support: jQuery <1.8
-					// http://bugs.jquery.com/ticket/11778
+					// https://bugs.jquery.com/ticket/11778
 					setTimeout( function() {
 						complete( jqXHR, status );
 					}, 1 );
@@ -31261,26 +31263,26 @@ var widgetsTabs = $.ui.tabs;
 
 
 /*!
- * jQuery UI Tooltip 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tooltip 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Tooltip
 //>>group: Widgets
 //>>description: Shows additional information for any element on hover or focus.
-//>>docs: http://api.jqueryui.com/tooltip/
-//>>demos: http://jqueryui.com/tooltip/
+//>>docs: https://api.jqueryui.com/tooltip/
+//>>demos: https://jqueryui.com/tooltip/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/tooltip.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.tooltip", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		classes: {
 			"ui-tooltip": "ui-corner-all ui-widget-shadow"
@@ -54833,2394 +54835,1706 @@ return SignaturePad;
 
 }));
 
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    define(["jquery"], function (a0) {
-      return (factory(a0));
-    });
-  } else if (typeof module === 'object' && module.exports) {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory(require("jquery"));
-  } else {
-    factory(root["jQuery"]);
-  }
-}(this, function (jQuery) {
-
-/** File generated by Grunt -- do not modify
- *  JQUERY-FORM-VALIDATOR
+/*!
+ * jQuery Validation Plugin v1.20.0
  *
- *  @version 2.3.79
- *  @website http://formvalidator.net/
- *  @author Victor Jonsson, http://victorjonsson.se
- *  @license MIT
+ * https://jqueryvalidation.org/
+ *
+ * Copyright (c) 2023 Jörn Zaefferer
+ * Released under the MIT license
  */
-/**
- */
-(function ($, window, undefined) {
-
-  var disableFormSubmit = function () {
-      return false;
-    },
-    lastFormEvent = null,
-    HaltManager = {
-      numHalted: 0,
-      haltValidation: function($form) {
-        this.numHalted++;
-        $.formUtils.haltValidation = true;
-        $form
-          .unbind('submit', disableFormSubmit)
-          .bind('submit', disableFormSubmit)
-          .find('*[type="submit"]')
-            .addClass('disabled')
-            .attr('disabled', 'disabled');
-      },
-      unHaltValidation: function($form) {
-        this.numHalted--;
-        if (this.numHalted === 0) {
-          $.formUtils.haltValidation = false;
-          $form
-            .unbind('submit', disableFormSubmit)
-            .find('*[type="submit"]')
-              .removeClass('disabled')
-              .removeAttr('disabled', 'disabled');
-        }
-      }
-    };
-
-  function AsyncValidation($form, $input) {
-    this.$form = $form;
-    this.$input = $input;
-    this.reset();
-    $input.on('change paste', this.reset.bind(this));
-  }
-
-  AsyncValidation.prototype.reset = function() {
-    this.haltedFormValidation = false;
-    this.hasRun = false;
-    this.isRunning = false;
-    this.result = undefined;
-  };
-
-  AsyncValidation.prototype.run = function(eventContext, callback) {
-    if (eventContext === 'keyup') {
-      return null;
-    } else if (this.isRunning) {
-      lastFormEvent = eventContext;
-      if (!this.haltedFormValidation) {
-        HaltManager.haltValidation();
-        this.haltedFormValidation = true;
-      }
-      return null; // Waiting for result
-    } else if(this.hasRun) {
-      //this.$input.one('keyup change paste', this.reset.bind(this));
-      return this.result;
-    } else {
-      lastFormEvent = eventContext;
-      HaltManager.haltValidation(this.$form);
-      this.haltedFormValidation = true;
-      this.isRunning = true;
-      this.$input
-        .attr('disabled', 'disabled')
-        .addClass('async-validation');
-      this.$form.addClass('async-validation');
-
-      callback(function(result) {
-        this.done(result);
-      }.bind(this));
-
-      return null;
-    }
-  };
-
-  AsyncValidation.prototype.done = function(result) {
-    this.result = result;
-    this.hasRun = true;
-    this.isRunning = false;
-    this.$input
-      .removeAttr('disabled')
-      .removeClass('async-validation');
-    this.$form.removeClass('async-validation');
-    if (this.haltedFormValidation) {
-      HaltManager.unHaltValidation(this.$form);
-      if (lastFormEvent === 'submit') {
-        this.$form.trigger('submit');
-      } else {
-        this.$input.trigger('validation.revalidate');
-      }
-    }
-  };
-
-  AsyncValidation.loadInstance = function(validatorName, $input, $form) {
-    // Return async validator attached to this input element
-    // or create a new async validator and attach it to the input
-    var asyncValidation,
-      input = $input.get(0);
-
-    if (!input.asyncValidators) {
-      input.asyncValidators = {};
-    }
-
-    if (input.asyncValidators[validatorName]) {
-      asyncValidation = input.asyncValidators[validatorName];
-    } else {
-      asyncValidation = new AsyncValidation($form, $input);
-      input.asyncValidators[validatorName] = asyncValidation;
-    }
-
-    return asyncValidation;
-  };
-
-  $.formUtils = $.extend($.formUtils || {}, {
-
-    /**
-     * @deprecated
-     * @param validatorName
-     * @param $input
-     * @param $form
-     */
-    asyncValidation: function(validatorName, $input, $form) {
-      // @todo: Remove when moving up to version 3.0
-      this.warn('Use of deprecated function $.formUtils.asyncValidation, use $.formUtils.addAsyncValidator() instead');
-      return AsyncValidation.loadInstance(validatorName, $input, $form);
-    },
-
-    /**
-     * @param {Object} asyncValidator
-     */
-    addAsyncValidator: function (asyncValidator) {
-      var validator = $.extend({}, asyncValidator),
-        originalValidatorFunc = validator.validatorFunction;
-      validator.async = true;
-      validator.validatorFunction = function (value, $el, config, language, $form, eventContext) {
-        var asyncValidation = AsyncValidation.loadInstance(this.name, $el, $form);
-        return asyncValidation.run(eventContext, function(done) {
-          originalValidatorFunc.apply(validator, [
-            done, value, $el, config, language, $form, eventContext
-          ]);
-        });
-      };
-      this.addValidator(validator);
-    }
-  });
-
-  // Tag elements having async validators
-  $(window).bind('validatorsLoaded formValidationSetup', function (evt, $form) {
-    if (!$form) {
-      $form = $('form');
-    }
-    $form.find('[data-validation]').each(function () {
-      var $input = $(this);
-      $input.valAttr('async', false);
-      $.each($.split($input.attr('data-validation')), function (i, validatorName) {
-        var validator = $.formUtils.validators['validate_'+validatorName];
-        if (validator && validator.async) {
-          $input.valAttr('async', 'yes');
-        }
-      });
-    });
-  });
-
-})(jQuery, window);
-
-/**
- * Deprecated functions and attributes
- * @todo: Remove in release of 3.0
- */
-(function ($, undefined) {
-
-  'use strict';
-
-  /**
-   * @deprecated
-   * @param language
-   * @param conf
-   */
-  $.fn.validateForm = function (language, conf) {
-    $.formUtils.warn('Use of deprecated function $.validateForm, use $.isValid instead');
-    return this.isValid(language, conf, true);
-  };
-
-  $(window)
-    .on('formValidationPluginInit', function(evt, config) {
-      convertDeprecatedLangCodeToISO6391(config);
-      addSupportForCustomErrorMessageCallback(config);
-      addSupportForElementReferenceInPositionParam(config);
-    })
-    .on('validatorsLoaded formValidationSetup', function(evt, $form) {
-      if( !$form ) {
-        $form = $('form');
-      }
-      addSupportForValidationDependingOnCheckedInput($form);
-    });
-
-
-  function addSupportForCustomErrorMessageCallback(config) {
-    if (config &&
-        config.errorMessagePosition === 'custom' &&
-        typeof config.errorMessageCustom === 'function') {
-
-      $.formUtils.warn('Use of deprecated function errorMessageCustom, use config.submitErrorMessageCallback instead');
-
-      config.submitErrorMessageCallback = function($form, errorMessages) {
-        config.errorMessageCustom(
-            $form,
-            config.language.errorTitle,
-            errorMessages,
-            config
-        );
-      };
-    }
-  }
-
-  function addSupportForElementReferenceInPositionParam(config) {
-    if (config.errorMessagePosition && typeof config.errorMessagePosition === 'object') {
-      $.formUtils.warn('Deprecated use of config parameter errorMessagePosition, use config.submitErrorMessageCallback instead');
-      var $errorMessageContainer = config.errorMessagePosition;
-      config.errorMessagePosition = 'top';
-      config.submitErrorMessageCallback = function() {
-        return $errorMessageContainer;
-      };
-    }
-  }
-
-  function addSupportForValidationDependingOnCheckedInput($form) {
-    var $inputsDependingOnCheckedInputs = $form.find('[data-validation-if-checked]');
-    if ($inputsDependingOnCheckedInputs.length) {
-      $.formUtils.warn(
-        'Detected use of attribute "data-validation-if-checked" which is '+
-        'deprecated. Use "data-validation-depends-on" provided by module "logic"'
-      );
-    }
-
-    $inputsDependingOnCheckedInputs
-      .on('beforeValidation', function() {
-
-        var $elem = $(this),
-          nameOfDependingInput = $elem.valAttr('if-checked');
-
-        // Set the boolean telling us that the validation depends
-        // on another input being checked
-        var $dependingInput = $('input[name="' + nameOfDependingInput + '"]', $form),
-          dependingInputIsChecked = $dependingInput.is(':checked'),
-          valueOfDependingInput = ($.formUtils.getValue($dependingInput) || '').toString(),
-          requiredValueOfDependingInput = $elem.valAttr('if-checked-value');
-
-        if (!dependingInputIsChecked || !(
-              !requiredValueOfDependingInput ||
-              requiredValueOfDependingInput === valueOfDependingInput
-          )) {
-          $elem.valAttr('skipped', true);
-        }
-
-      });
-    }
-
-    function convertDeprecatedLangCodeToISO6391(config) {
-      var deprecatedLangCodes = {
-        se: 'sv',
-        cz: 'cs',
-        dk: 'da'
-      };
-
-      if (config.lang in deprecatedLangCodes) {
-        var newLangCode = deprecatedLangCodes[config.lang];
-        $.formUtils.warn(
-          'Deprecated use of lang code "'+config.lang+'" use "'+newLangCode+'" instead'
-        );
-        config.lang = newLangCode;
-      }
-    }
-
-})(jQuery);
-
-/**
- * Utility methods used for displaying error messages (attached to $.formUtils)
- */
-(function ($) {
-
-  'use strict';
-
-  var dialogs = {
-
-    resolveErrorMessage: function($elem, validator, validatorName, conf, language) {
-      var errorMsgAttr = conf.validationErrorMsgAttribute + '-' + validatorName.replace('validate_', ''),
-        validationErrorMsg = $elem.attr(errorMsgAttr);
-
-      if (!validationErrorMsg) {
-        validationErrorMsg = $elem.attr(conf.validationErrorMsgAttribute);
-        if (!validationErrorMsg) {
-          if (typeof validator.errorMessageKey !== 'function') {
-            validationErrorMsg = language[validator.errorMessageKey];
-          }
-          else {
-            validationErrorMsg = language[validator.errorMessageKey(conf)];
-          }
-          if (!validationErrorMsg) {
-            validationErrorMsg = validator.errorMessage;
-          }
-        }
-      }
-      return validationErrorMsg;
-    },
-    getParentContainer: function ($elem) {
-      if ($elem.valAttr('error-msg-container')) {
-        return $($elem.valAttr('error-msg-container'));
-      } else {
-        var $parent = $elem.parent();
-        if($elem.attr('type') === 'checkbox' && $elem.closest('.checkbox').length) {
-          $parent = $elem.closest('.checkbox').parent();
-        } else if($elem.attr('type') === 'radio' && $elem.closest('.radio').length) {
-          $parent = $elem.closest('.radio').parent();
-        }
-        if($parent.closest('.input-group').length) {
-          $parent = $parent.closest('.input-group').parent();
-        }
-        return $parent;
-      }
-    },
-    applyInputErrorStyling: function ($input, conf) {
-      $input
-        .addClass(conf.errorElementClass)
-        .removeClass(conf.successElementClass);
-
-      this.getParentContainer($input)
-        .addClass(conf.inputParentClassOnError)
-        .removeClass(conf.inputParentClassOnSuccess);
-
-      if (conf.borderColorOnError !== '') {
-        $input.css('border-color', conf.borderColorOnError);
-      }
-    },
-    applyInputSuccessStyling: function($input, conf) {
-      $input.addClass(conf.successElementClass);
-      this.getParentContainer($input)
-        .addClass(conf.inputParentClassOnSuccess);
-    },
-    removeInputStylingAndMessage: function($input, conf) {
-
-      // Reset input css
-      $input
-        .removeClass(conf.successElementClass)
-        .removeClass(conf.errorElementClass)
-        .css('border-color', '');
-
-      var $parentContainer = dialogs.getParentContainer($input);
-
-      // Reset parent css
-      $parentContainer
-        .removeClass(conf.inputParentClassOnError)
-        .removeClass(conf.inputParentClassOnSuccess);
-
-      // Remove possible error message
-      if (typeof conf.inlineErrorMessageCallback === 'function') {
-        var $errorMessage = conf.inlineErrorMessageCallback($input, false, conf);
-        if ($errorMessage) {
-          $errorMessage.html('');
-        }
-      } else {
-        $parentContainer
-          .find('.' + conf.errorMessageClass)
-          .remove();
-      }
-
-    },
-    removeAllMessagesAndStyling: function($form, conf) {
-
-      // Remove error messages in top of form
-      if (typeof conf.submitErrorMessageCallback === 'function') {
-        var $errorMessagesInTopOfForm = conf.submitErrorMessageCallback($form, false, conf);
-        if ($errorMessagesInTopOfForm) {
-          $errorMessagesInTopOfForm.html('');
-        }
-      } else {
-        $form.find('.' + conf.errorMessageClass + '.alert').remove();
-      }
-
-      // Remove input css/messages
-      $form.find('.' + conf.errorElementClass + ',.' + conf.successElementClass).each(function() {
-        dialogs.removeInputStylingAndMessage($(this), conf);
-      });
-    },
-    setInlineMessage: function ($input, errorMsg, conf) {
-
-      this.applyInputErrorStyling($input, conf);
-
-      var custom = document.getElementById($input.attr('name') + '_err_msg'),
-        $messageContainer = false,
-        setErrorMessage = function ($elem) {
-          $.formUtils.$win.trigger('validationErrorDisplay', [$input, $elem]);
-          $elem.html(errorMsg);
-        },
-        addErrorToMessageContainer = function() {
-          var $found = false;
-          $messageContainer.find('.' + conf.errorMessageClass).each(function () {
-            if (this.inputReferer === $input[0]) {
-              $found = $(this);
-              return false;
-            }
-          });
-          if ($found) {
-            if (!errorMsg) {
-              $found.remove();
-            } else {
-              setErrorMessage($found);
-            }
-          } else if(errorMsg !== '') {
-            $message = $('<div class="' + conf.errorMessageClass + ' alert"></div>');
-            setErrorMessage($message);
-            $message[0].inputReferer = $input[0];
-            $messageContainer.prepend($message);
-          }
-        },
-        $message;
-
-      if (custom) {
-        // Todo: remove in 3.0
-        $.formUtils.warn('Using deprecated element reference ' + custom.id);
-        $messageContainer = $(custom);
-        addErrorToMessageContainer();
-      } else if (typeof conf.inlineErrorMessageCallback === 'function') {
-        $messageContainer = conf.inlineErrorMessageCallback($input, errorMsg, conf);
-        if (!$messageContainer) {
-          // Error display taken care of by inlineErrorMessageCallback
-          return;
-        }
-        addErrorToMessageContainer();
-      } else {
-        var $parent = this.getParentContainer($input);
-        $message = $parent.find('.' + conf.errorMessageClass + '.help-block');
-        if ($message.length === 0) {
-          $message = $('<span></span>').addClass('help-block').addClass(conf.errorMessageClass);
-          $message.appendTo($parent);
-        }
-        setErrorMessage($message);
-      }
-    },
-    setMessageInTopOfForm: function ($form, errorMessages, conf, lang) {
-      var view = '<div class="{errorMessageClass} alert alert-danger">'+
-                    '<strong>{errorTitle}</strong>'+
-                    '<ul>{fields}</ul>'+
-                '</div>',
-          $container = false;
-
-      if (typeof conf.submitErrorMessageCallback === 'function') {
-        $container = conf.submitErrorMessageCallback($form, errorMessages, conf);
-        if (!$container) {
-          // message display taken care of by callback
-          return;
-        }
-      }
-
-      var viewParams = {
-            errorTitle: lang.errorTitle,
-            fields: '',
-            errorMessageClass: conf.errorMessageClass
-          };
-
-      $.each(errorMessages, function (i, msg) {
-        viewParams.fields += '<li>'+msg+'</li>';
-      });
-
-      $.each(viewParams, function(param, value) {
-        view = view.replace('{'+param+'}', value);
-      });
-
-      if ($container) {
-        $container.html(view);
-      } else {
-        $form.children().eq(0).before($(view));
-      }
-    }
-  };
-
-  $.formUtils = $.extend($.formUtils || {}, {
-    dialogs: dialogs
-  });
-
-})(jQuery);
-
-/**
- * File declaring all methods if this plugin which is applied to $.fn.
- */
-(function($, window, undefined) {
-
-  'use strict';
-
-  var _helpers = 0;
-
-
-  /**
-   * Assigns validateInputOnBlur function to elements blur event
-   *
-   * @param {Object} language Optional, will override $.formUtils.LANG
-   * @param {Object} conf Optional, will override the default settings
-   * @return {jQuery}
-   */
-  $.fn.validateOnBlur = function (language, conf) {
-    var $form = this,
-        $elems = this.find('*[data-validation]');
-
-    $elems.each(function(){
-      var $this = $(this);
-      if ($this.is('[type=radio]')){
-        var $additionals = $form.find('[type=radio][name="' + $this.attr('name') + '"]');
-        $additionals.bind('blur.validation', function(){
-          $this.validateInputOnBlur(language, conf, true, 'blur');
-        });
-        if (conf.validateCheckboxRadioOnClick) {
-          $additionals.bind('click.validation', function () {
-            $this.validateInputOnBlur(language, conf, true, 'click');
-          });
-        }
-      }
-    });
-
-    $elems.bind('blur.validation', function () {
-      $(this).validateInputOnBlur(language, conf, true, 'blur');
-    });
-
-    if (conf.validateCheckboxRadioOnClick) {
-      // bind click event to validate on click for radio & checkboxes for nice UX
-      this.find('input[type=checkbox][data-validation],input[type=radio][data-validation]')
-        .bind('click.validation', function () {
-          $(this).validateInputOnBlur(language, conf, true, 'click');
-        });
-    }
-
-    return this;
-  };
-
-  /*
-   * Assigns validateInputOnBlur function to elements custom event
-   * @param {Object} language Optional, will override $.formUtils.LANG
-   * @param {Object} settings Optional, will override the default settings
-   * * @return {jQuery}
-   */
-  $.fn.validateOnEvent = function (language, config) {
-    if(this.length === 0) {
-      return;
-    }
-    
-    var $elements = this[0].nodeName === 'FORM' ? this.find('*[data-validation-event]') : this;
-    $elements
-      .each(function () {
-        var $el = $(this),
-          etype = $el.valAttr('event');
-        if (etype) {
-          $el
-            .unbind(etype + '.validation')
-            .bind(etype + '.validation', function (evt) {
-              if( (evt || {}).keyCode !== 9 ) {
-                $(this).validateInputOnBlur(language, config, true, etype);
-              }
-            });
-        }
-      });
-    return this;
-  };
-
-  /**
-   * fade in help message when input gains focus
-   * fade out when input loses focus
-   * <input data-help="The info that I want to display for the user when input is focused" ... />
-   *
-   * @param {String} attrName - Optional, default is data-help
-   * @return {jQuery}
-   */
-  $.fn.showHelpOnFocus = function (attrName) {
-    if (!attrName) {
-      attrName = 'data-validation-help';
-    }
-
-    // Add help text listeners
-    this.find('textarea,input').each(function () {
-      var $elem = $(this),
-        className = 'jquery_form_help_' + (++_helpers),
-        help = $elem.attr(attrName);
-
-      // Reset
-      $elem
-        .removeClass('has-help-text')
-        .unbind('focus.help')
-        .unbind('blur.help');
-
-      if (help) {
-        $elem
-          .addClass('has-help-txt')
-          .bind('focus.help', function () {
-            var $help = $elem.parent().find('.' + className);
-            if ($help.length === 0) {
-              $help = $('<span />')
-                .addClass(className)
-                .addClass('help')
-                .addClass('help-block') // twitter bs
-                .text(help)
-                .hide();
-
-              $elem.after($help);
-            }
-            $help.fadeIn();
-          })
-          .bind('blur.help', function () {
-            $(this)
-              .parent()
-              .find('.' + className)
-              .fadeOut('slow');
-          });
-      }
-    });
-
-    return this;
-  };
-
-  /**
-   * @param {Function} cb
-   * @param {Object} [conf]
-   * @param {Object} [lang]
-   */
-  $.fn.validate = function(cb, conf, lang) {
-    var language = $.extend({}, $.formUtils.LANG, lang || {});
-    this.each(function() {
-      var $elem = $(this),
-        closestFormElem = $elem.closest('form').get(0) || {},
-        formDefaultConfig = closestFormElem.validationConfig || $.formUtils.defaultConfig();
-
-      $elem.one('validation', function(evt, isValid) {
-        if ( typeof cb === 'function' ) {
-          cb(isValid, this, evt);
-        }
-      });
-
-      $elem.validateInputOnBlur(
-        language,
-        $.extend({}, formDefaultConfig, conf || {}),
-        true
-      );
-    });
-  };
-
-  /**
-   * Tells whether or not validation of this input will have to postpone the form submit ()
-   * @returns {Boolean}
-   */
-  $.fn.willPostponeValidation = function() {
-    return (this.valAttr('suggestion-nr') ||
-      this.valAttr('postpone') ||
-      this.hasClass('hasDatepicker')) &&
-      !window.postponedValidation;
-  };
-
-  /**
-   * Validate single input when it loses focus
-   * shows error message in a span element
-   * that is appended to the parent element
-   *
-   * @param {Object} [language] Optional, will override $.formUtils.LANG
-   * @param {Object} [conf] Optional, will override the default settings
-   * @param {Boolean} attachKeyupEvent Optional
-   * @param {String} eventContext
-   * @return {jQuery}
-   */
-  $.fn.validateInputOnBlur = function (language, conf, attachKeyupEvent, eventContext) {
-
-    $.formUtils.eventType = eventContext;
-
-    if ( this.willPostponeValidation() ) {
-      // This validation has to be postponed
-      var _self = this,
-        postponeTime = this.valAttr('postpone') || 200;
-
-      window.postponedValidation = function () {
-        _self.validateInputOnBlur(language, conf, attachKeyupEvent, eventContext);
-        window.postponedValidation = false;
-      };
-
-      setTimeout(function () {
-        if (window.postponedValidation) {
-          window.postponedValidation();
-        }
-      }, postponeTime);
-
-      return this;
-    }
-
-    language = $.extend({}, $.formUtils.LANG, language || {});
-    $.formUtils.dialogs.removeInputStylingAndMessage(this, conf);
-
-    var $elem = this,
-      $form = $elem.closest('form'),
-      result = $.formUtils.validateInput(
-        $elem,
-        language,
-        conf,
-        $form,
-        eventContext
-      );
-
-    var reValidate = function() {
-      $elem.validateInputOnBlur(language, conf, false, 'blur.revalidated');
-    };
-
-    if (eventContext === 'blur') {
-      $elem
-        .unbind('validation.revalidate', reValidate)
-        .one('validation.revalidate', reValidate);
-    }
-
-    if (attachKeyupEvent) {
-      $elem.removeKeyUpValidation();
-    }
-
-    if (result.shouldChangeDisplay) {
-      if (result.isValid) {
-        $.formUtils.dialogs.applyInputSuccessStyling($elem, conf);
-      } else {
-        $.formUtils.dialogs.setInlineMessage($elem, result.errorMsg, conf);
-      }
-    }
-
-    if (!result.isValid && attachKeyupEvent) {
-      $elem.validateOnKeyUp(language, conf);
-    }
-
-    return this;
-  };
-
-  /**
-   * Validate element on keyup-event
-   */
-  $.fn.validateOnKeyUp = function(language, conf) {
-    this.each(function() {
-      var $input = $(this);
-      if (!$input.valAttr('has-keyup-event')) {
-        $input
-          .valAttr('has-keyup-event', 'true')
-          .bind('keyup.validation', function (evt) {
-            if( evt.keyCode !== 9 ) {
-              $input.validateInputOnBlur(language, conf, false, 'keyup');
-            }
-          });
-      }
-    });
-    return this;
-  };
-
-  /**
-   * Remove validation on keyup
-   */
-  $.fn.removeKeyUpValidation = function() {
-    this.each(function() {
-      $(this)
-        .valAttr('has-keyup-event', false)
-        .unbind('keyup.validation');
-    });
-    return this;
-  };
-
-  /**
-   * Short hand for fetching/adding/removing element attributes
-   * prefixed with 'data-validation-'
-   *
-   * @param {String} name
-   * @param {String|Boolean} [val]
-   * @return {String|undefined|jQuery}
-   * @protected
-   */
-  $.fn.valAttr = function (name, val) {
-    if (val === undefined) {
-      return this.attr('data-validation-' + name);
-    } else if (val === false || val === null) {
-      return this.removeAttr('data-validation-' + name);
-    } else {
-      name = ((name.length > 0) ? '-' + name : '');
-      return this.attr('data-validation' + name, val);
-    }
-  };
-
-  /**
-   * Function that validates all inputs in active form
-   *
-   * @param {Object} [language]
-   * @param {Object} [conf]
-   * @param {Boolean} [displayError] Defaults to true
-   */
-  $.fn.isValid = function (language, conf, displayError) {
-
-    if ($.formUtils.isLoadingModules) {
-      var $self = this;
-      setTimeout(function () {
-        $self.isValid(language, conf, displayError);
-      }, 200);
-      return null;
-    }
-
-    conf = $.extend({}, $.formUtils.defaultConfig(), conf || {});
-    language = $.extend({}, $.formUtils.LANG, language || {});
-    displayError = displayError !== false;
-
-    if ($.formUtils.errorDisplayPreventedWhenHalted) {
-      // isValid() was called programmatically with argument displayError set
-      // to false when the validation was halted by any of the validators
-      delete $.formUtils.errorDisplayPreventedWhenHalted;
-      displayError = false;
-    }
-
-    /**
-     * Adds message to error message stack if not already in the message stack
-     *
-     * @param {String} mess
-     * @para {jQuery} $elem
-     */
-    var addErrorMessage = function (mess, $elem) {
-        if ($.inArray(mess, errorMessages) < 0) {
-          errorMessages.push(mess);
-        }
-        errorInputs.push($elem);
-        $elem.valAttr('current-error', mess);
-        if (displayError) {
-          $.formUtils.dialogs.applyInputErrorStyling($elem, conf);
-        }
-      },
-
-      /** Holds inputs (of type checkox or radio) already validated, to prevent recheck of mulitple checkboxes & radios */
-      checkedInputs = [],
-
-      /** Error messages for this validation */
-      errorMessages = [],
-
-      /** Input elements which value was not valid */
-      errorInputs = [],
-
-      /** Form instance */
-      $form = this,
-
-      /**
-       * Tells whether or not to validate element with this name and of this type
-       *
-       * @param {String} name
-       * @param {String} type
-       * @return {Boolean}
-       */
-      ignoreInput = function (name, type) {
-        if (type === 'submit' || type === 'button' || type === 'reset') {
-          return true;
-        }
-        return $.inArray(name, conf.ignore || []) > -1;
-      };
-
-    // Reset style and remove error class
-    if (displayError) {
-      $.formUtils.dialogs.removeAllMessagesAndStyling($form, conf);
-    }
-
-    // Validate element values
-    $form.find('input,textarea,select').filter(':not([type="submit"],[type="button"])').each(function () {
-      var $elem = $(this),
-        elementType = $elem.attr('type'),
-        isCheckboxOrRadioBtn = elementType === 'radio' || elementType === 'checkbox',
-        elementName = $elem.attr('name');
-
-      if (!ignoreInput(elementName, elementType) && (!isCheckboxOrRadioBtn || $.inArray(elementName, checkedInputs) < 0)) {
-
-        if (isCheckboxOrRadioBtn) {
-          checkedInputs.push(elementName);
-        }
-
-        var result = $.formUtils.validateInput(
-          $elem,
-          language,
-          conf,
-          $form,
-          'submit'
-        );
-
-        if (!result.isValid) {
-          addErrorMessage(result.errorMsg, $elem);
-        } else if (result.isValid && result.shouldChangeDisplay) {
-          $elem.valAttr('current-error', false);
-          $.formUtils.dialogs.applyInputSuccessStyling($elem, conf);
-        }
-      }
-
-    });
-
-    // Run validation callback
-    if (typeof conf.onValidate === 'function') {
-      var errors = conf.onValidate($form);
-      if ($.isArray(errors)) {
-        $.each(errors, function (i, err) {
-          addErrorMessage(err.message, err.element);
-        });
-      }
-      else if (errors && errors.element && errors.message) {
-        addErrorMessage(errors.message, errors.element);
-      }
-    }
-
-    // Reset form validation flag
-    $.formUtils.isValidatingEntireForm = false;
-
-    // Validation failed
-    if (errorInputs.length > 0) {
-      if (displayError) {
-        if (conf.errorMessagePosition === 'top') {
-          $.formUtils.dialogs.setMessageInTopOfForm($form, errorMessages, conf, language);
-        } else {
-          $.each(errorInputs, function (i, $input) {
-            $.formUtils.dialogs.setInlineMessage($input, $input.valAttr('current-error'), conf);
-          });
-        }
-        if (conf.scrollToTopOnError) {
-          $.formUtils.$win.scrollTop($form.offset().top - 20);
-        }
-      }
-    }
-
-    if (!displayError && $.formUtils.haltValidation) {
-      $.formUtils.errorDisplayPreventedWhenHalted = true;
-    }
-
-    return errorInputs.length === 0 && !$.formUtils.haltValidation;
-  };
-
-  /**
-   * Plugin for displaying input length restriction
-   */
-  $.fn.restrictLength = function (maxLengthElement) {
-    new $.formUtils.lengthRestriction(this, maxLengthElement);
-    return this;
-  };
-
-  /**
-   * Add suggestion dropdown to inputs having data-suggestions with a comma
-   * separated string with suggestions
-   * @param {Array} [settings]
-   * @returns {jQuery}
-   */
-  $.fn.addSuggestions = function (settings) {
-    var sugs = false;
-    this.find('input').each(function () {
-      var $field = $(this);
-
-      sugs = $.split($field.attr('data-suggestions'));
-
-      if (sugs.length > 0 && !$field.hasClass('has-suggestions')) {
-        $.formUtils.suggest($field, sugs, settings);
-        $field.addClass('has-suggestions');
-      }
-    });
-    return this;
-  };
-
-
-})(jQuery, window);
-
-/**
- * Utility methods used for handling loading of modules (attached to $.formUtils)
- */
-(function($) {
-
-  'use strict';
-
-  $.formUtils = $.extend($.formUtils || {}, {
-
-    /**
-     * @var {Boolean}
-     */
-    isLoadingModules: false,
-
-    /**
-     * @var {Object}
-     */
-    loadedModules: {},
-
-    /**
-     * @param {String} name
-     */
-    registerLoadedModule: function (name) {
-      this.loadedModules[$.trim(name).toLowerCase()] = true;
-    },
-
-    /**
-     * @param {String} name
-     * @return {Boolean}
-     */
-    hasLoadedModule: function (name) {
-      return $.trim(name).toLowerCase() in this.loadedModules;
-    },
-
-    /**
-     * @example
-     *  $.formUtils.loadModules('date, security.dev');
-     *
-     * Will load the scripts date.js and security.dev.js from the
-     * directory where this script resides. If you want to load
-     * the modules from another directory you can use the
-     * path argument.
-     *
-     * The script will be cached by the browser unless the module
-     * name ends with .dev
-     *
-     * @param {String} modules - Comma separated string with module file names (no directory nor file extension)
-     * @param {String} [path] - Path where the module files are located if their not in the same directory as the core modules
-     * @param {function} [callback] - Callback invoked when all modules are loaded
-     */
-    loadModules: function (modules, path, callback) {
-
-      if ($.formUtils.isLoadingModules) {
-        setTimeout(function () {
-          $.formUtils.loadModules(modules, path, callback);
-        }, 100);
-        return;
-      }
-
-      var loadModuleScripts = function (modules, path) {
-
-          var moduleList = $.split(modules),
-            numModules = moduleList.length,
-            moduleLoadedCallback = function () {
-              numModules--;
-              if (numModules === 0) {
-                $.formUtils.isLoadingModules = false;
-                if (typeof callback === 'function') {
-                    callback();
-                }
-              }
-            };
-
-          if (numModules > 0) {
-            $.formUtils.isLoadingModules = true;
-          }
-
-          var cacheSuffix = '?_=' + ( new Date().getTime() ),
-            appendToElement = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0];
-
-          $.each(moduleList, function (i, modName) {
-            modName = $.trim(modName);
-            if (modName.length === 0 || $.formUtils.hasLoadedModule(modName)) {
-              moduleLoadedCallback();
-            } else {
-              var scriptUrl = path + modName + (modName.slice(-3) === '.js' ? '' : '.js'),
-                script = document.createElement('SCRIPT');
-
-              if (typeof define === 'function' && define.amd) {
-                require([scriptUrl + ( scriptUrl.slice(-7) === '.dev.js' ? cacheSuffix : '' )], moduleLoadedCallback);
-              } else {
-                // Load the script
-                script.type = 'text/javascript';
-                script.onload = moduleLoadedCallback;
-                script.src = scriptUrl + ( scriptUrl.slice(-7) === '.dev.js' ? cacheSuffix : '' );
-                script.onerror = function() {
-                  $.formUtils.warn('Unable to load form validation module '+scriptUrl, true);
-                  moduleLoadedCallback();
-                };
-                script.onreadystatechange = function () {
-                  // IE 7 fix
-                  if (this.readyState === 'complete' || this.readyState === 'loaded') {
-                    moduleLoadedCallback();
-                    // Handle memory leak in IE
-                    this.onload = null;
-                    this.onreadystatechange = null;
-                  }
-                };
-                appendToElement.appendChild(script);
-              }
-            }
-          });
-        };
-
-      if (path) {
-        loadModuleScripts(modules, path);
-      } else {
-        var findScriptPathAndLoadModules = function () {
-          var foundPath = false;
-          $('script[src*="form-validator"]').each(function () {
-            var isScriptFromPluginNodeModulesDirectory = this.src.split('form-validator')[1].split('node_modules').length > 1;
-            if (!isScriptFromPluginNodeModulesDirectory) {
-              foundPath = this.src.substr(0, this.src.lastIndexOf('/')) + '/';
-              if (foundPath === '/') {
-                foundPath = '';
-              }
-              return false;
-            }
-          });
-
-          if (foundPath !== false) {
-            loadModuleScripts(modules, foundPath);
-            return true;
-          }
-          return false;
-        };
-
-        if (!findScriptPathAndLoadModules()) {
-          $(function () {
-            var hasLoadedModuleScripts = findScriptPathAndLoadModules();
-            if (!hasLoadedModuleScripts) {
-              // The modules may have been inserted via a minified script
-              if (typeof callback === 'function') {
-                callback();
-              }
-            }
-          });
-        }
-      }
-    }
-
-  });
-
-})(jQuery);
-
-/**
- * Setup function for the plugin
- */
-(function ($) {
-
-  'use strict';
-
-
-  /**
-   * A bit smarter split function
-   * delimiter can be space, comma, dash or pipe
-   * @param {String} val
-   * @param {Function|String} [callback]
-   * @param {Boolean} [allowSpaceAsDelimiter]
-   * @returns {Array|void}
-   */
-  $.split = function (val, callback, allowSpaceAsDelimiter) {
-    // default to true
-    allowSpaceAsDelimiter = allowSpaceAsDelimiter === undefined || allowSpaceAsDelimiter === true;
-    var pattern = '[,|'+(allowSpaceAsDelimiter ? '\\s':'')+'-]\\s*',
-      regex = new RegExp(pattern, 'g');
-    if (typeof callback !== 'function') {
-      // return array
-      if (!val) {
-        return [];
-      }
-      var values = [];
-      $.each(val.split(callback ? callback : regex),
-        function (i, str) {
-          str = $.trim(str);
-          if (str.length) {
-            values.push(str);
-          }
-        }
-      );
-      return values;
-    } else if (val) {
-      // exec callback func on each
-      $.each(val.split(regex),
-        function (i, str) {
-          str = $.trim(str);
-          if (str.length) {
-            return callback(str, i);
-          }
-        }
-      );
-    }
-  };
-
-  /**
-   * Short hand function that makes the validation setup require less code
-   * @param conf
-   */
-  $.validate = function (conf) {
-
-    var defaultConf = $.extend($.formUtils.defaultConfig(), {
-      form: 'form',
-      validateOnEvent: false,
-      validateOnBlur: true,
-      validateCheckboxRadioOnClick: true,
-      showHelpOnFocus: true,
-      addSuggestions: true,
-      modules: '',
-      onModulesLoaded: null,
-      language: false,
-      onSuccess: false,
-      onError: false,
-      onElementValidate: false
-    });
-
-    conf = $.extend(defaultConf, conf || {});
-
-    $(window).trigger('formValidationPluginInit', [conf]);
-
-    if( conf.lang && conf.lang !== 'en' ) {
-      var langModule = 'lang/'+conf.lang+'.js';
-      conf.modules += conf.modules.length ? ','+langModule : langModule;
-    }
-
-    // Add validation to forms
-    $(conf.form).each(function (i, form) {
-
-      // Make a reference to the config for this form
-      form.validationConfig = conf;
-
-      // Trigger jQuery event that we're about to setup validation
-      var $form = $(form);
-      $form.trigger('formValidationSetup', [$form, conf]);
-
-      // Remove classes and event handlers that might have been
-      // added by a previous call to $.validate
-      $form.find('.has-help-txt')
-          .unbind('focus.validation')
-          .unbind('blur.validation');
-
-      $form
-        .removeClass('has-validation-callback')
-        .unbind('submit.validation')
-        .unbind('reset.validation')
-        .find('input[data-validation],textarea[data-validation]')
-          .unbind('blur.validation');
-
-      // Validate when submitted
-      $form.bind('submit.validation', function (evt) {
-
-        var $form = $(this),
-          stop = function() {
-            evt.stopImmediatePropagation();
-            return false;
-          };
-
-        if ($.formUtils.haltValidation) {
-          // pressing several times on submit button while validation is halted
-          return stop();
-        }
-
-        if ($.formUtils.isLoadingModules) {
-          setTimeout(function () {
-            $form.trigger('submit.validation');
-          }, 200);
-          return stop();
-        }
-
-        var valid = $form.isValid(conf.language, conf);
-        if ($.formUtils.haltValidation) {
-          // Validation got halted by one of the validators
-          return stop();
-        } else {
-          if (valid && typeof conf.onSuccess === 'function') {
-            var callbackResponse = conf.onSuccess($form);
-            if (callbackResponse === false) {
-              return stop();
-            }
-          } else if (!valid && typeof conf.onError === 'function') {
-            conf.onError($form);
-            return stop();
-          } else {
-            return valid ? true : stop();
-          }
-        }
-      })
-      .bind('reset.validation', function () {
-        $.formUtils.dialogs.removeAllMessagesAndStyling($form, conf);
-      })
-      .addClass('has-validation-callback');
-
-      if (conf.showHelpOnFocus) {
-        $form.showHelpOnFocus();
-      }
-      if (conf.addSuggestions) {
-        $form.addSuggestions();
-      }
-      if (conf.validateOnBlur) {
-        $form.validateOnBlur(conf.language, conf);
-        $form.bind('html5ValidationAttrsFound', function () {
-          $form.validateOnBlur(conf.language, conf);
-        });
-      }
-      if (conf.validateOnEvent) {
-        $form.validateOnEvent(conf.language, conf);
-      }
-    });
-
-    if (conf.modules !== '') {
-      $.formUtils.loadModules(conf.modules, null, function() {
-        if (typeof conf.onModulesLoaded === 'function') {
-          conf.onModulesLoaded();
-        }
-        var $form = typeof conf.form === 'string' ? $(conf.form) : conf.form;
-        $.formUtils.$win.trigger('validatorsLoaded', [$form, conf]);
-      });
-    }
-  };
-
-})(jQuery);
-
-/**
- * Utility methods and properties attached to $.formUtils
- */
-(function($, window) {
-
-  'use strict';
-
-  var $win = $(window);
-
-  $.formUtils = $.extend($.formUtils || {}, {
-
-    $win: $win,
-
-    /**
-     * Default config for $(...).isValid();
-     */
-    defaultConfig: function () {
-      return {
-        ignore: [], // Names of inputs not to be validated even though `validationRuleAttribute` containing the validation rules tells us to
-        errorElementClass: 'error', // Class that will be put on elements which value is invalid
-        successElementClass: 'valid', // Class that will be put on elements that has been validated with success
-        borderColorOnError: '#b94a48', // Border color of elements which value is invalid, empty string to not change border color
-        errorMessageClass: 'form-error', // class name of div containing error messages when validation fails
-        validationRuleAttribute: 'data-validation', // name of the attribute holding the validation rules
-        validationErrorMsgAttribute: 'data-validation-error-msg', // define custom err msg inline with element
-        errorMessagePosition: 'inline', // Can be either "top" or "inline"
-        errorMessageTemplate: {
-          container: '<div class="{errorMessageClass} alert alert-danger">{messages}</div>',
-          messages: '<strong>{errorTitle}</strong><ul>{fields}</ul>',
-          field: '<li>{msg}</li>'
-        },
-        scrollToTopOnError: true,
-        dateFormat: 'yyyy-mm-dd',
-        addValidClassOnAll: false, // whether or not to apply class="valid" even if the input wasn't validated
-        decimalSeparator: '.',
-        inputParentClassOnError: 'has-error', // twitter-bootstrap default class name
-        inputParentClassOnSuccess: 'has-success', // twitter-bootstrap default class name
-        validateHiddenInputs: false, // whether or not hidden inputs should be validated
-        inlineErrorMessageCallback: false,
-        submitErrorMessageCallback: false
-      };
-    },
-
-    /**
-     * Available validators
-     */
-    validators: {},
-
-    /**
-     * Available sanitizers
-     */
-    sanitizers: {},
-
-    /**
-     * Events triggered by form validator
-     */
-    _events: {load: [], valid: [], invalid: []},
-
-    /**
-     * Setting this property to true during validation will
-     * stop further validation from taking place and form will
-     * not be sent
-     */
-    haltValidation: false,
-
-    /**
-     * Function for adding a validator
-     * @see $.formUtils.addAsyncValidator (async.js)
-     * @param {Object} validator
-     */
-    addValidator: function (validator) {
-      // prefix with "validate_" for backward compatibility reasons
-      var name = validator.name.indexOf('validate_') === 0 ? validator.name : 'validate_' + validator.name;
-      if (validator.validateOnKeyUp === undefined) {
-        validator.validateOnKeyUp = true;
-      }
-      this.validators[name] = validator;
-    },
-
-    /**
-     * Function for adding a sanitizer
-     * @param {Object} sanitizer
-     */
-    addSanitizer: function (sanitizer) {
-      this.sanitizers[sanitizer.name] = sanitizer;
-    },
-
-    /**
-     * Warn user via the console if available
-     */
-    warn: function(msg, fallbackOnAlert) {
-      if( 'console' in window ) {
-        if( typeof window.console.warn === 'function' ) {
-          window.console.warn(msg);
-        } else if( typeof window.console.log === 'function' ) {
-          window.console.log(msg);
-        }
-      } else if (fallbackOnAlert) {
-        // This is for some old IE version...
-        alert(msg);
-      }
-    },
-
-    /**
-     * Same as input $.fn.val() but also supporting input of typ radio or checkbox
-     * @example
-     *
-     *  $.formUtils.getValue('.myRadioButtons', $('#some-form'));
-     *  $.formUtils.getValue($('#some-form').find('.check-boxes'));
-     *
-     * @param query
-     * @param $parent
-     * @returns {String|Boolean}
-     */
-    getValue: function(query, $parent) {
-      var $inputs = $parent ? $parent.find(query) : query;
-      if ($inputs.length > 0 ) {
-        var type = $inputs.eq(0).attr('type');
-        if (type === 'radio' || type === 'checkbox') {
-          return $inputs.filter(':checked').val() || '';
-        } else {
-          return $inputs.val() || '';
-        }
-      }
-      return false;
-    },
-
-    /**
-     * Validate the value of given element according to the validation rules
-     * found in the attribute data-validation. Will return an object representing
-     * a validation result, having the props shouldChangeDisplay, isValid and errorMsg
-     * @param {jQuery} $elem
-     * @param {Object} language ($.formUtils.LANG)
-     * @param {Object} conf
-     * @param {jQuery} $form
-     * @param {String} [eventContext]
-     * @return {Object}
-     */
-    validateInput: function ($elem, language, conf, $form, eventContext) {
-
-      conf = conf || $.formUtils.defaultConfig();
-      language = language || $.formUtils.LANG;
-
-      if (!$form.length) {
-        $form = $elem.parent();
-      }
-
-      var value = this.getValue($elem);
-
-      $elem
-        .valAttr('skipped', false)
-        .one('beforeValidation', function() {
-          // Skip input because its hidden or disabled
-          // Doing this in a callback makes it possible for others to prevent the default
-          // behaviour by binding to the same event and call evt.stopImmediatePropagation()
-          if ($elem.attr('disabled') || (!$elem.is(':visible') && !conf.validateHiddenInputs)) {
-            $elem.valAttr('skipped', 1);
-          }
-        })
-        .trigger('beforeValidation', [value, language, conf]);
-
-      var inputIsOptional = $elem.valAttr('optional') === 'true',
-          skipBecauseItsEmpty = !value && inputIsOptional,
-          validationRules = $elem.attr(conf.validationRuleAttribute),
-          isValid = true,
-          errorMsg = '',
-          result = {isValid: true, shouldChangeDisplay:true, errorMsg:''};
-
-      // For input type="number", browsers attempt to parse the entered value into a number.
-      // If the input is not numeric, browsers handle the situation differently:
-      // Chrome 48 simply disallows non-numeric input; FF 44 clears out the input box on blur;
-      // Safari 5 parses the entered string to find a leading number.
-      // If the input fails browser validation, the browser sets the input value equal to an empty string.
-      // Therefore, we cannot distinguish (apart from hacks) between an empty input type="text" and one with a
-      // value that can't be parsed by the browser.
-
-      if (!validationRules || skipBecauseItsEmpty || $elem.valAttr('skipped')) {
-        result.shouldChangeDisplay = conf.addValidClassOnAll;
-        return result;
-      }
-
-      // Filter out specified characters
-      var ignore = $elem.valAttr('ignore');
-      if (ignore) {
-        $.each(ignore.split(''), function(i, character) {
-          value = value.replace(new RegExp('\\'+character, 'g'), '');
-        });
-      }
-
-      $.split(validationRules, function (rule) {
-
-        if (rule.indexOf('validate_') !== 0) {
-          rule = 'validate_' + rule;
-        }
-
-        var validator = $.formUtils.validators[rule];
-
-        if (validator) {
-
-          // special change of element for checkbox_group rule
-          if (rule === 'validate_checkbox_group') {
-            // set element to first in group, so error msg attr doesn't need to be set on all elements in group
-            $elem = $form.find('[name="' + $elem.attr('name') + '"]:eq(0)');
-          }
-
-          if (eventContext !== 'keyup' || validator.validateOnKeyUp) {
-            // A validator can prevent itself from getting triggered on keyup
-            isValid = validator.validatorFunction(value, $elem, conf, language, $form, eventContext);
-          }
-
-          if (!isValid) {
-            if (conf.validateOnBlur) {
-              $elem.validateOnKeyUp(language, conf);
-            }
-            errorMsg = $.formUtils.dialogs.resolveErrorMessage($elem, validator, rule, conf, language);
-            return false; // break iteration
-          }
-
-        } else {
-
-          // todo: Add some validator lookup function and tell immediately which module is missing
-          throw new Error('Using undefined validator "' + rule +
-            '". Maybe you have forgotten to load the module that "' + rule +'" belongs to?');
-
-        }
-
-      });
-
-
-      if (isValid === false) {
-        $elem.trigger('validation', false);
-        result.errorMsg = errorMsg;
-        result.isValid = false;
-        result.shouldChangeDisplay = true;
-      } else if (isValid === null) {
-        // A validatorFunction returning null means that it's not able to validate
-        // the input at this time. Most probably some async stuff need to gets finished
-        // first and then the validator will re-trigger the validation.
-        result.shouldChangeDisplay = false;
-      } else {
-        $elem.trigger('validation', true);
-        result.shouldChangeDisplay = true;
-      }
-
-      // Run element validation callback
-      if (typeof conf.onElementValidate === 'function' && errorMsg !== null) {
-        conf.onElementValidate(result.isValid, $elem, $form, errorMsg);
-      }
-
-      $elem.trigger('afterValidation', [result, eventContext]);
-
-      return result;
-    },
-
-    /**
-     * Is it a correct date according to given dateFormat. Will return false if not, otherwise
-     * an array 0=>year 1=>month 2=>day
-     *
-     * @param {String} val
-     * @param {String} dateFormat
-     * @param {Boolean} [addMissingLeadingZeros]
-     * @return {Array}|{Boolean}
-     */
-    parseDate: function (val, dateFormat, addMissingLeadingZeros) {
-      var divider = dateFormat.replace(/[a-zA-Z]/gi, '').substring(0, 1),
-        regexp = '^',
-        formatParts = dateFormat.split(divider || null),
-        matches, day, month, year;
-
-      $.each(formatParts, function (i, part) {
-        regexp += (i > 0 ? '\\' + divider : '') + '(\\d{' + part.length + '})';
-      });
-
-      regexp += '$';
-
-      if (addMissingLeadingZeros) {
-        var newValueParts = [];
-        $.each(val.split(divider), function(i, part) {
-          if(part.length === 1) {
-            part = '0'+part;
-          }
-          newValueParts.push(part);
-        });
-        val = newValueParts.join(divider);
-      }
-
-      matches = val.match(new RegExp(regexp));
-      if (matches === null) {
-        return false;
-      }
-
-      var findDateUnit = function (unit, formatParts, matches) {
-        for (var i = 0; i < formatParts.length; i++) {
-          if (formatParts[i].substring(0, 1) === unit) {
-            return $.formUtils.parseDateInt(matches[i + 1]);
-          }
-        }
-        return -1;
-      };
-
-      month = findDateUnit('m', formatParts, matches);
-      day = findDateUnit('d', formatParts, matches);
-      year = findDateUnit('y', formatParts, matches);
-
-      if ((month === 2 && day > 28 && (year % 4 !== 0 || year % 100 === 0 && year % 400 !== 0)) ||
-        (month === 2 && day > 29 && (year % 4 === 0 || year % 100 !== 0 && year % 400 === 0)) ||
-        month > 12 || month === 0) {
-        return false;
-      }
-      if ((this.isShortMonth(month) && day > 30) || (!this.isShortMonth(month) && day > 31) || day === 0) {
-        return false;
-      }
-
-      return [year, month, day];
-    },
-
-    /**
-     * skum fix. är talet 05 eller lägre ger parseInt rätt int annars får man 0 när man kör parseInt?
-     *
-     * @param {String} val
-     * @return {Number}
-     */
-    parseDateInt: function (val) {
-      if (val.indexOf('0') === 0) {
-        val = val.replace('0', '');
-      }
-      return parseInt(val, 10);
-    },
-
-    /**
-     * Has month only 30 days?
-     *
-     * @param {Number} m
-     * @return {Boolean}
-     */
-    isShortMonth: function (m) {
-      return (m % 2 === 0 && m < 7) || (m % 2 !== 0 && m > 7);
-    },
-
-    /**
-     * Restrict input length
-     *
-     * @param {jQuery} $inputElement Jquery Html object
-     * @param {jQuery} $maxLengthElement jQuery Html Object
-     * @return void
-     */
-    lengthRestriction: function ($inputElement, $maxLengthElement) {
-      // read maxChars from counter display initial text value
-      var maxChars = parseInt($maxLengthElement.text(), 10),
-        charsLeft = 0,
-
-      // internal function does the counting and sets display value
-        countCharacters = function () {
-          var numChars = $inputElement.val().length;
-          if (numChars > maxChars) {
-            // get current scroll bar position
-            var currScrollTopPos = $inputElement.scrollTop();
-            // trim value to max length
-            $inputElement.val($inputElement.val().substring(0, maxChars));
-            $inputElement.scrollTop(currScrollTopPos);
-          }
-          charsLeft = maxChars - numChars;
-          if (charsLeft < 0) {
-            charsLeft = 0;
-          }
-
-          // set counter text
-          $maxLengthElement.text(charsLeft);
-        };
-
-      // bind events to this element
-      // setTimeout is needed, cut or paste fires before val is available
-      $($inputElement).bind('keydown keyup keypress focus blur', countCharacters)
-        .bind('cut paste', function () {
-          setTimeout(countCharacters, 100);
-        });
-
-      // count chars on pageload, if there are prefilled input-values
-      $(document).bind('ready', countCharacters);
-    },
-
-    /**
-     * Test numeric against allowed range
-     *
-     * @param $value int
-     * @param $rangeAllowed str; (1-2, min1, max2, 10)
-     * @return array
-     */
-    numericRangeCheck: function (value, rangeAllowed) {
-      // split by dash
-      var range = $.split(rangeAllowed),
-      // min or max
-        minmax = parseInt(rangeAllowed.substr(3), 10);
-
-      if( range.length === 1 && rangeAllowed.indexOf('min') === -1 && rangeAllowed.indexOf('max') === -1 ) {
-        range = [rangeAllowed, rangeAllowed]; // only a number, checking agains an exact number of characters
-      }
-
-      // range ?
-      if (range.length === 2 && (value < parseInt(range[0], 10) || value > parseInt(range[1], 10) )) {
-        return [ 'out', range[0], range[1] ];
-      } // value is out of range
-      else if (rangeAllowed.indexOf('min') === 0 && (value < minmax )) // min
-      {
-        return ['min', minmax];
-      } // value is below min
-      else if (rangeAllowed.indexOf('max') === 0 && (value > minmax )) // max
-      {
-        return ['max', minmax];
-      } // value is above max
-      // since no other returns executed, value is in allowed range
-      return [ 'ok' ];
-    },
-
-
-    _numSuggestionElements: 0,
-    _selectedSuggestion: null,
-    _previousTypedVal: null,
-
-    /**
-     * Utility function that can be used to create plugins that gives
-     * suggestions when inputs is typed into
-     * @param {jQuery} $elem
-     * @param {Array} suggestions
-     * @param {Object} settings - Optional
-     * @return {jQuery}
-     */
-    suggest: function ($elem, suggestions, settings) {
-      var conf = {
-          css: {
-            maxHeight: '150px',
-            background: '#FFF',
-            lineHeight: '150%',
-            textDecoration: 'underline',
-            overflowX: 'hidden',
-            overflowY: 'auto',
-            border: '#CCC solid 1px',
-            borderTop: 'none',
-            cursor: 'pointer'
-          },
-          activeSuggestionCSS: {
-            background: '#E9E9E9'
-          }
-        },
-        setSuggsetionPosition = function ($suggestionContainer, $input) {
-          var offset = $input.offset();
-          $suggestionContainer.css({
-            width: $input.outerWidth(),
-            left: offset.left + 'px',
-            top: (offset.top + $input.outerHeight()) + 'px'
-          });
-        };
-
-      if (settings) {
-        $.extend(conf, settings);
-      }
-
-      conf.css.position = 'absolute';
-      conf.css['z-index'] = 9999;
-      $elem.attr('autocomplete', 'off');
-
-      if (this._numSuggestionElements === 0) {
-        // Re-position suggestion container if window size changes
-        $win.bind('resize', function () {
-          $('.jquery-form-suggestions').each(function () {
-            var $container = $(this),
-              suggestID = $container.attr('data-suggest-container');
-            setSuggsetionPosition($container, $('.suggestions-' + suggestID).eq(0));
-          });
-        });
-      }
-
-      this._numSuggestionElements++;
-
-      var onSelectSuggestion = function ($el) {
-        var suggestionId = $el.valAttr('suggestion-nr');
-        $.formUtils._selectedSuggestion = null;
-        $.formUtils._previousTypedVal = null;
-        $('.jquery-form-suggestion-' + suggestionId).fadeOut('fast');
-      };
-
-      $elem
-        .data('suggestions', suggestions)
-        .valAttr('suggestion-nr', this._numSuggestionElements)
-        .unbind('focus.suggest')
-        .bind('focus.suggest', function () {
-          $(this).trigger('keyup');
-          $.formUtils._selectedSuggestion = null;
-        })
-        .unbind('keyup.suggest')
-        .bind('keyup.suggest', function () {
-          var $input = $(this),
-            foundSuggestions = [],
-            val = $.trim($input.val()).toLocaleLowerCase();
-
-          if (val === $.formUtils._previousTypedVal) {
-            return;
-          }
-          else {
-            $.formUtils._previousTypedVal = val;
-          }
-
-          var hasTypedSuggestion = false,
-            suggestionId = $input.valAttr('suggestion-nr'),
-            $suggestionContainer = $('.jquery-form-suggestion-' + suggestionId);
-
-          $suggestionContainer.scrollTop(0);
-
-          // Find the right suggestions
-          if (val !== '') {
-            var findPartial = val.length > 2;
-            $.each($input.data('suggestions'), function (i, suggestion) {
-              var lowerCaseVal = suggestion.toLocaleLowerCase();
-              if (lowerCaseVal === val) {
-                foundSuggestions.push('<strong>' + suggestion + '</strong>');
-                hasTypedSuggestion = true;
-                return false;
-              } else if (lowerCaseVal.indexOf(val) === 0 || (findPartial && lowerCaseVal.indexOf(val) > -1)) {
-                foundSuggestions.push(suggestion.replace(new RegExp(val, 'gi'), '<strong>$&</strong>'));
-              }
-            });
-          }
-
-          // Hide suggestion container
-          if (hasTypedSuggestion || (foundSuggestions.length === 0 && $suggestionContainer.length > 0)) {
-            $suggestionContainer.hide();
-          }
-
-          // Create suggestion container if not already exists
-          else if (foundSuggestions.length > 0 && $suggestionContainer.length === 0) {
-            $suggestionContainer = $('<div></div>').css(conf.css).appendTo('body');
-            $elem.addClass('suggestions-' + suggestionId);
-            $suggestionContainer
-              .attr('data-suggest-container', suggestionId)
-              .addClass('jquery-form-suggestions')
-              .addClass('jquery-form-suggestion-' + suggestionId);
-          }
-
-          // Show hidden container
-          else if (foundSuggestions.length > 0 && !$suggestionContainer.is(':visible')) {
-            $suggestionContainer.show();
-          }
-
-          // add suggestions
-          if (foundSuggestions.length > 0 && val.length !== foundSuggestions[0].length) {
-
-            // put container in place every time, just in case
-            setSuggsetionPosition($suggestionContainer, $input);
-
-            // Add suggestions HTML to container
-            $suggestionContainer.html('');
-            $.each(foundSuggestions, function (i, text) {
-              $('<div></div>')
-                .append(text)
-                .css({
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  padding: '5px'
-                })
-                .addClass('form-suggest-element')
-                .appendTo($suggestionContainer)
-                .click(function () {
-                  $input.focus();
-                  $input.val($(this).text());
-                  $input.trigger('change');
-                  onSelectSuggestion($input);
-                });
-            });
-          }
-        })
-        .unbind('keydown.validation')
-        .bind('keydown.validation', function (e) {
-          var code = (e.keyCode ? e.keyCode : e.which),
-            suggestionId,
-            $suggestionContainer,
-            $input = $(this);
-
-          if (code === 13 && $.formUtils._selectedSuggestion !== null) {
-            suggestionId = $input.valAttr('suggestion-nr');
-            $suggestionContainer = $('.jquery-form-suggestion-' + suggestionId);
-            if ($suggestionContainer.length > 0) {
-              var newText = $suggestionContainer.find('div').eq($.formUtils._selectedSuggestion).text();
-              $input.val(newText);
-              $input.trigger('change');
-              onSelectSuggestion($input);
-              e.preventDefault();
-            }
-          }
-          else {
-            suggestionId = $input.valAttr('suggestion-nr');
-            $suggestionContainer = $('.jquery-form-suggestion-' + suggestionId);
-            var $suggestions = $suggestionContainer.children();
-            if ($suggestions.length > 0 && $.inArray(code, [38, 40]) > -1) {
-              if (code === 38) { // key up
-                if ($.formUtils._selectedSuggestion === null) {
-                  $.formUtils._selectedSuggestion = $suggestions.length - 1;
-                }
-                else{
-                  $.formUtils._selectedSuggestion--;
-                }
-                if ($.formUtils._selectedSuggestion < 0) {
-                  $.formUtils._selectedSuggestion = $suggestions.length - 1;
-                }
-              }
-              else if (code === 40) { // key down
-                if ($.formUtils._selectedSuggestion === null) {
-                  $.formUtils._selectedSuggestion = 0;
-                }
-                else {
-                  $.formUtils._selectedSuggestion++;
-                }
-                if ($.formUtils._selectedSuggestion > ($suggestions.length - 1)) {
-                  $.formUtils._selectedSuggestion = 0;
-                }
-              }
-
-              // Scroll in suggestion window
-              var containerInnerHeight = $suggestionContainer.innerHeight(),
-                containerScrollTop = $suggestionContainer.scrollTop(),
-                suggestionHeight = $suggestionContainer.children().eq(0).outerHeight(),
-                activeSuggestionPosY = suggestionHeight * ($.formUtils._selectedSuggestion);
-
-              if (activeSuggestionPosY < containerScrollTop || activeSuggestionPosY > (containerScrollTop + containerInnerHeight)) {
-                $suggestionContainer.scrollTop(activeSuggestionPosY);
-              }
-
-              $suggestions
-                .removeClass('active-suggestion')
-                .css('background', 'none')
-                .eq($.formUtils._selectedSuggestion)
-                .addClass('active-suggestion')
-                .css(conf.activeSuggestionCSS);
-
-              e.preventDefault();
-              return false;
-            }
-          }
-        })
-        .unbind('blur.suggest')
-        .bind('blur.suggest', function () {
-          onSelectSuggestion($(this));
-        });
-
-      return $elem;
-    },
-
-    /**
-     * Error dialogs
-     *
-     * @var {Object}
-     */
-    LANG: {
-      errorTitle: 'Form submission failed!',
-      requiredField: 'This is a required field',
-      requiredFields: 'You have not answered all required fields',
-      badTime: 'You have not given a correct time',
-      badEmail: 'You have not given a correct e-mail address',
-      badTelephone: 'You have not given a correct phone number',
-      badSecurityAnswer: 'You have not given a correct answer to the security question',
-      badDate: 'You have not given a correct date',
-      lengthBadStart: 'The input value must be between ',
-      lengthBadEnd: ' characters',
-      lengthTooLongStart: 'The input value is longer than ',
-      lengthTooShortStart: 'The input value is shorter than ',
-      notConfirmed: 'Input values could not be confirmed',
-      badDomain: 'Incorrect domain value',
-      badUrl: 'The input value is not a correct URL',
-      badCustomVal: 'The input value is incorrect',
-      andSpaces: ' and spaces ',
-      badInt: 'The input value was not a correct number',
-      badSecurityNumber: 'Your social security number was incorrect',
-      badUKVatAnswer: 'Incorrect UK VAT Number',
-      badUKNin: 'Incorrect UK NIN',
-      badUKUtr: 'Incorrect UK UTR Number',
-      badStrength: 'The password isn\'t strong enough',
-      badNumberOfSelectedOptionsStart: 'You have to choose at least ',
-      badNumberOfSelectedOptionsEnd: ' answers',
-      badAlphaNumeric: 'The input value can only contain alphanumeric characters ',
-      badAlphaNumericExtra: ' and ',
-      wrongFileSize: 'The file you are trying to upload is too large (max %s)',
-      wrongFileType: 'Only files of type %s is allowed',
-      groupCheckedRangeStart: 'Please choose between ',
-      groupCheckedTooFewStart: 'Please choose at least ',
-      groupCheckedTooManyStart: 'Please choose a maximum of ',
-      groupCheckedEnd: ' item(s)',
-      badCreditCard: 'The credit card number is not correct',
-      badCVV: 'The CVV number was not correct',
-      wrongFileDim : 'Incorrect image dimensions,',
-      imageTooTall : 'the image can not be taller than',
-      imageTooWide : 'the image can not be wider than',
-      imageTooSmall : 'the image was too small',
-      min : 'min',
-      max : 'max',
-      imageRatioNotAccepted : 'Image ratio is not be accepted',
-      badBrazilTelephoneAnswer: 'The phone number entered is invalid',
-      badBrazilCEPAnswer: 'The CEP entered is invalid',
-      badBrazilCPFAnswer: 'The CPF entered is invalid',
-      badPlPesel: 'The PESEL entered is invalid',
-      badPlNip: 'The NIP entered is invalid',
-      badPlRegon: 'The REGON entered is invalid',
-      badreCaptcha: 'Please confirm that you are not a bot',
-      passwordComplexityStart: 'Password must contain at least ',
-      passwordComplexitySeparator: ', ',
-      passwordComplexityUppercaseInfo: ' uppercase letter(s)',
-      passwordComplexityLowercaseInfo: ' lowercase letter(s)',
-      passwordComplexitySpecialCharsInfo: ' special character(s)',
-      passwordComplexityNumericCharsInfo: ' numeric character(s)',
-      passwordComplexityEnd: '.'
-    }
-  });
-
-})(jQuery, window);
-
-/**
- * File declaring all default validators.
- */
-(function($) {
-
-  /*
-   * Validate email
-   */
-  $.formUtils.addValidator({
-    name: 'email',
-    validatorFunction: function (email) {
-
-      var emailParts = email.toLowerCase().split('@'),
-        localPart = emailParts[0],
-        domain = emailParts[1];
-
-      if (localPart && domain) {
-
-        if( localPart.indexOf('"') === 0 ) {
-          var len = localPart.length;
-          localPart = localPart.replace(/\"/g, '');
-          if( localPart.length !== (len-2) ) {
-            return false; // It was not allowed to have more than two apostrophes
-          }
-        }
-
-        return $.formUtils.validators.validate_domain.validatorFunction(emailParts[1]) &&
-          localPart.indexOf('.') !== 0 &&
-          localPart.substring(localPart.length-1, localPart.length) !== '.' &&
-          localPart.indexOf('..') === -1 &&
-          !(/[^\w\+\.\-\#\-\_\~\!\$\&\'\(\)\*\+\,\;\=\:]/.test(localPart));
-      }
-
-      return false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badEmail'
-  });
-
-  /*
-   * Validate domain name
-   */
-  $.formUtils.addValidator({
-    name: 'domain',
-    validatorFunction: function (val) {
-      return val.length > 0 &&
-        val.length <= 253 && // Including sub domains
-        !(/[^a-zA-Z0-9]/.test(val.slice(-2))) && !(/[^a-zA-Z0-9]/.test(val.substr(0, 1))) && !(/[^a-zA-Z0-9\.\-]/.test(val)) &&
-        val.split('..').length === 1 &&
-        val.split('.').length > 1;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badDomain'
-  });
-
-  /*
-   * Validate required
-   */
-  $.formUtils.addValidator({
-    name: 'required',
-    validatorFunction: function (val, $el, config, language, $form) {
-      switch ($el.attr('type')) {
-        case 'checkbox':
-          return $el.is(':checked');
-        case 'radio':
-          return $form.find('input[name="' + $el.attr('name') + '"]').filter(':checked').length > 0;
-        default:
-          return $.trim(val) !== '';
-      }
-    },
-    errorMessage: '',
-    errorMessageKey: function(config) {
-      if (config.errorMessagePosition === 'top' || typeof config.errorMessagePosition === 'function') {
-        return 'requiredFields';
-      }
-      else {
-        return 'requiredField';
-      }
-    }
-  });
-
-  /*
-   * Validate length range
-   */
-  $.formUtils.addValidator({
-    name: 'length',
-    validatorFunction: function (val, $el, conf, lang) {
-      var lengthAllowed = $el.valAttr('length'),
-        type = $el.attr('type');
-
-      if (lengthAllowed === undefined) {
-        alert('Please add attribute "data-validation-length" to ' + $el[0].nodeName + ' named ' + $el.attr('name'));
-        return true;
-      }
-
-      // check if length is above min, below max or within range.
-      var len = type === 'file' && $el.get(0).files !== undefined ? $el.get(0).files.length : val.length,
-        lengthCheckResults = $.formUtils.numericRangeCheck(len, lengthAllowed),
-        checkResult;
-
-      switch (lengthCheckResults[0]) {   // outside of allowed range
-        case 'out':
-          this.errorMessage = lang.lengthBadStart + lengthAllowed + lang.lengthBadEnd;
-          checkResult = false;
-          break;
-        // too short
-        case 'min':
-          this.errorMessage = lang.lengthTooShortStart + lengthCheckResults[1] + lang.lengthBadEnd;
-          checkResult = false;
-          break;
-        // too long
-        case 'max':
-          this.errorMessage = lang.lengthTooLongStart + lengthCheckResults[1] + lang.lengthBadEnd;
-          checkResult = false;
-          break;
-        // ok
-        default:
-          checkResult = true;
-      }
-
-      return checkResult;
-    },
-    errorMessage: '',
-    errorMessageKey: ''
-  });
-
-  /*
-   * Validate url
-   */
-  $.formUtils.addValidator({
-    name: 'url',
-    validatorFunction: function (url) {
-      // written by Scott Gonzalez: http://projects.scottsplayground.com/iri/
-      // - Victor Jonsson added support for arrays in the url ?arg[]=sdfsdf
-      // - General improvements made by Stéphane Moureau <https://github.com/TraderStf>
-
-      var urlFilter = /^(https?|ftp):\/\/((((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])(\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])(\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/(((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|\[|\]|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#(((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
-      if (urlFilter.test(url)) {
-        var domain = url.split('://')[1],
-          domainSlashPos = domain.indexOf('/');
-
-        if (domainSlashPos > -1) {
-          domain = domain.substr(0, domainSlashPos);
-        }
-
-        return $.formUtils.validators.validate_domain.validatorFunction(domain); // todo: add support for IP-addresses
-      }
-      return false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badUrl'
-  });
-
-  /*
-   * Validate number (floating or integer)
-   */
-  $.formUtils.addValidator({
-    name: 'number',
-    validatorFunction: function (val, $el, conf) {
-      if (val !== '') {
-        var allowing = $el.valAttr('allowing') || '',
-          decimalSeparator = $el.valAttr('decimal-separator') || conf.decimalSeparator,
-          allowsRange = false,
-          begin, end,
-          steps = $el.valAttr('step') || '',
-          allowsSteps = false,
-          sanitize = $el.attr('data-sanitize') || '',
-          isFormattedWithNumeral = sanitize.match(/(^|[\s])numberFormat([\s]|$)/i);
-
-        if (isFormattedWithNumeral) {
-          if (!window.numeral) {
-            throw new ReferenceError('The data-sanitize value numberFormat cannot be used without the numeral' +
-              ' library. Please see Data Validation in http://www.formvalidator.net for more information.');
-          }
-          //Unformat input first, then convert back to String
-          if (val.length) {
-            val = String(numeral().unformat(val));
-          }
-        }
-
-        if (allowing.indexOf('number') === -1) {
-          allowing += ',number';
-        }
-
-        if (allowing.indexOf('negative') === -1 && val.indexOf('-') === 0) {
-          return false;
-        }
-
-        if (allowing.indexOf('range') > -1) {
-          begin = parseFloat(allowing.substring(allowing.indexOf('[') + 1, allowing.indexOf(';')));
-          end = parseFloat(allowing.substring(allowing.indexOf(';') + 1, allowing.indexOf(']')));
-          allowsRange = true;
-        }
-
-        if (steps !== '') {
-          allowsSteps = true;
-        }
-
-        if (decimalSeparator === ',') {
-          if (val.indexOf('.') > -1) {
-            return false;
-          }
-          // Fix for checking range with floats using ,
-          val = val.replace(',', '.');
-        }
-        if (val.replace(/[0-9-]/g, '') === '' && (!allowsRange || (val >= begin && val <= end)) && (!allowsSteps || (val % steps === 0))) {
-          return true;
-        }
-
-        if (allowing.indexOf('float') > -1 && val.match(new RegExp('^([0-9-]+)\\.([0-9]+)$')) !== null && (!allowsRange || (val >= begin && val <= end)) && (!allowsSteps || (val % steps === 0))) {
-          return true;
-        }
-      }
-      return false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badInt'
-  });
-
-  /*
-   * Validate alpha numeric
-   */
-  $.formUtils.addValidator({
-    name: 'alphanumeric',
-    validatorFunction: function (val, $el, conf, language) {
-      var patternStart = '^([a-zA-Z0-9',
-        patternEnd = ']+)$',
-        additionalChars = $el.valAttr('allowing'),
-        pattern = '',
-        hasSpaces = false;
-
-      if (additionalChars) {
-        pattern = patternStart + additionalChars + patternEnd;
-        var extra = additionalChars.replace(/\\/g, '');
-        if (extra.indexOf(' ') > -1) {
-          hasSpaces = true;
-          extra = extra.replace(' ', '');
-          extra += language.andSpaces || $.formUtils.LANG.andSpaces;
-        }
-
-        if(language.badAlphaNumericAndExtraAndSpaces && language.badAlphaNumericAndExtra) {
-          if(hasSpaces) {
-            this.errorMessage = language.badAlphaNumericAndExtraAndSpaces + extra; 
-          } else {
-            this.errorMessage = language.badAlphaNumericAndExtra + extra + language.badAlphaNumericExtra; 
-          }
-        } else {
-          this.errorMessage = language.badAlphaNumeric + language.badAlphaNumericExtra + extra;
-        }
-      } else {
-        pattern = patternStart + patternEnd;
-        this.errorMessage = language.badAlphaNumeric;
-      }
-
-      return new RegExp(pattern).test(val);
-    },
-    errorMessage: '',
-    errorMessageKey: ''
-  });
-
-  /*
-   * Validate against regexp
-   */
-  $.formUtils.addValidator({
-    name: 'custom',
-    validatorFunction: function (val, $el) {
-      var regexp = new RegExp($el.valAttr('regexp'));
-      return regexp.test(val);
-    },
-    errorMessage: '',
-    errorMessageKey: 'badCustomVal'
-  });
-
-  /*
-   * Validate date
-   */
-  $.formUtils.addValidator({
-    name: 'date',
-    validatorFunction: function (date, $el, conf) {
-      var dateFormat = $el.valAttr('format') || conf.dateFormat || 'yyyy-mm-dd',
-        addMissingLeadingZeros = $el.valAttr('require-leading-zero') === 'false';
-      return $.formUtils.parseDate(date, dateFormat, addMissingLeadingZeros) !== false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badDate'
-  });
-
-
-  /*
-   * Validate group of checkboxes, validate qty required is checked
-   * written by Steve Wasiura : http://stevewasiura.waztech.com
-   * element attrs
-   *    data-validation="checkbox_group"
-   *    data-validation-qty="1-2"  // min 1 max 2
-   *    data-validation-error-msg="chose min 1, max of 2 checkboxes"
-   */
-  $.formUtils.addValidator({
-    name: 'checkbox_group',
-    validatorFunction: function (val, $el, conf, lang, $form) {
-      // preset return var
-      var isValid = true,
-      // get name of element. since it is a checkbox group, all checkboxes will have same name
-        elname = $el.attr('name'),
-      // get checkboxes and count the checked ones
-        $checkBoxes = $('input[type=checkbox][name^="' + elname + '"]', $form),
-        checkedCount = $checkBoxes.filter(':checked').length,
-      // get el attr that specs qty required / allowed
-        qtyAllowed = $el.valAttr('qty');
-
-      if (qtyAllowed === undefined) {
-        var elementType = $el.get(0).nodeName;
-        alert('Attribute "data-validation-qty" is missing from ' + elementType + ' named ' + $el.attr('name'));
-      }
-
-      // call Utility function to check if count is above min, below max, within range etc.
-      var qtyCheckResults = $.formUtils.numericRangeCheck(checkedCount, qtyAllowed);
-
-      // results will be array, [0]=result str, [1]=qty int
-      switch (qtyCheckResults[0]) {
-        // outside allowed range
-        case 'out':
-          this.errorMessage = lang.groupCheckedRangeStart + qtyAllowed + lang.groupCheckedEnd;
-          isValid = false;
-          break;
-        // below min qty
-        case 'min':
-          this.errorMessage = lang.groupCheckedTooFewStart + qtyCheckResults[1] + (lang.groupCheckedTooFewEnd || lang.groupCheckedEnd);
-          isValid = false;
-          break;
-        // above max qty
-        case 'max':
-          this.errorMessage = lang.groupCheckedTooManyStart + qtyCheckResults[1] + (lang.groupCheckedTooManyEnd || lang.groupCheckedEnd);
-          isValid = false;
-          break;
-        // ok
-        default:
-          isValid = true;
-      }
-
-      if( !isValid ) {
-        var _triggerOnBlur = function() {
-          $checkBoxes.unbind('click', _triggerOnBlur);
-          $checkBoxes.filter('*[data-validation]').validateInputOnBlur(lang, conf, false, 'blur');
-        };
-        $checkBoxes.bind('click', _triggerOnBlur);
-      }
-
-      return isValid;
-    }
-    //   errorMessage : '', // set above in switch statement
-    //   errorMessageKey: '' // not used
-  });
-
-})(jQuery);
-
-
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+		define( ["jquery"], factory );
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( jQuery );
+	}
+}(function( $ ) {
+
+$.extend( $.fn, {
+
+	// https://jqueryvalidation.org/validate/
+	validate: function( options ) {
+
+		// If nothing is selected, return nothing; can't chain anyway
+		if ( !this.length ) {
+			if ( options && options.debug && window.console ) {
+				console.warn( "Nothing selected, can't validate, returning nothing." );
+			}
+			return;
+		}
+
+		// Check if a validator for this form was already created
+		var validator = $.data( this[ 0 ], "validator" );
+		if ( validator ) {
+			return validator;
+		}
+
+		// Add novalidate tag if HTML5.
+		this.attr( "novalidate", "novalidate" );
+
+		validator = new $.validator( options, this[ 0 ] );
+		$.data( this[ 0 ], "validator", validator );
+
+		if ( validator.settings.onsubmit ) {
+
+			this.on( "click.validate", ":submit", function( event ) {
+
+				// Track the used submit button to properly handle scripted
+				// submits later.
+				validator.submitButton = event.currentTarget;
+
+				// Allow suppressing validation by adding a cancel class to the submit button
+				if ( $( this ).hasClass( "cancel" ) ) {
+					validator.cancelSubmit = true;
+				}
+
+				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
+				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
+					validator.cancelSubmit = true;
+				}
+			} );
+
+			// Validate the form on submit
+			this.on( "submit.validate", function( event ) {
+				if ( validator.settings.debug ) {
+
+					// Prevent form submit to be able to see console output
+					event.preventDefault();
+				}
+
+				function handle() {
+					var hidden, result;
+
+					// Insert a hidden input as a replacement for the missing submit button
+					// The hidden input is inserted in two cases:
+					//   - A user defined a `submitHandler`
+					//   - There was a pending request due to `remote` method and `stopRequest()`
+					//     was called to submit the form in case it's valid
+					if ( validator.submitButton && ( validator.settings.submitHandler || validator.formSubmitted ) ) {
+						hidden = $( "<input type='hidden'/>" )
+							.attr( "name", validator.submitButton.name )
+							.val( $( validator.submitButton ).val() )
+							.appendTo( validator.currentForm );
+					}
+
+					if ( validator.settings.submitHandler && !validator.settings.debug ) {
+						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
+						if ( hidden ) {
+
+							// And clean up afterwards; thanks to no-block-scope, hidden can be referenced
+							hidden.remove();
+						}
+						if ( result !== undefined ) {
+							return result;
+						}
+						return false;
+					}
+					return true;
+				}
+
+				// Prevent submit for invalid forms or custom submit handlers
+				if ( validator.cancelSubmit ) {
+					validator.cancelSubmit = false;
+					return handle();
+				}
+				if ( validator.form() ) {
+					if ( validator.pendingRequest ) {
+						validator.formSubmitted = true;
+						return false;
+					}
+					return handle();
+				} else {
+					validator.focusInvalid();
+					return false;
+				}
+			} );
+		}
+
+		return validator;
+	},
+
+	// https://jqueryvalidation.org/valid/
+	valid: function() {
+		var valid, validator, errorList;
+
+		if ( $( this[ 0 ] ).is( "form" ) ) {
+			valid = this.validate().form();
+		} else {
+			errorList = [];
+			valid = true;
+			validator = $( this[ 0 ].form ).validate();
+			this.each( function() {
+				valid = validator.element( this ) && valid;
+				if ( !valid ) {
+					errorList = errorList.concat( validator.errorList );
+				}
+			} );
+			validator.errorList = errorList;
+		}
+		return valid;
+	},
+
+	// https://jqueryvalidation.org/rules/
+	rules: function( command, argument ) {
+		var element = this[ 0 ],
+			isContentEditable = typeof this.attr( "contenteditable" ) !== "undefined" && this.attr( "contenteditable" ) !== "false",
+			settings, staticRules, existingRules, data, param, filtered;
+
+		// If nothing is selected, return empty object; can't chain anyway
+		if ( element == null ) {
+			return;
+		}
+
+		if ( !element.form && isContentEditable ) {
+			element.form = this.closest( "form" )[ 0 ];
+			element.name = this.attr( "name" );
+		}
+
+		if ( element.form == null ) {
+			return;
+		}
+
+		if ( command ) {
+			settings = $.data( element.form, "validator" ).settings;
+			staticRules = settings.rules;
+			existingRules = $.validator.staticRules( element );
+			switch ( command ) {
+			case "add":
+				$.extend( existingRules, $.validator.normalizeRule( argument ) );
+
+				// Remove messages from rules, but allow them to be set separately
+				delete existingRules.messages;
+				staticRules[ element.name ] = existingRules;
+				if ( argument.messages ) {
+					settings.messages[ element.name ] = $.extend( settings.messages[ element.name ], argument.messages );
+				}
+				break;
+			case "remove":
+				if ( !argument ) {
+					delete staticRules[ element.name ];
+					return existingRules;
+				}
+				filtered = {};
+				$.each( argument.split( /\s/ ), function( index, method ) {
+					filtered[ method ] = existingRules[ method ];
+					delete existingRules[ method ];
+				} );
+				return filtered;
+			}
+		}
+
+		data = $.validator.normalizeRules(
+		$.extend(
+			{},
+			$.validator.classRules( element ),
+			$.validator.attributeRules( element ),
+			$.validator.dataRules( element ),
+			$.validator.staticRules( element )
+		), element );
+
+		// Make sure required is at front
+		if ( data.required ) {
+			param = data.required;
+			delete data.required;
+			data = $.extend( { required: param }, data );
+		}
+
+		// Make sure remote is at back
+		if ( data.remote ) {
+			param = data.remote;
+			delete data.remote;
+			data = $.extend( data, { remote: param } );
+		}
+
+		return data;
+	}
+} );
+
+// JQuery trim is deprecated, provide a trim method based on String.prototype.trim
+var trim = function( str ) {
+
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim#Polyfill
+	return str.replace( /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "" );
+};
+
+// Custom selectors
+$.extend( $.expr.pseudos || $.expr[ ":" ], {		// '|| $.expr[ ":" ]' here enables backwards compatibility to jQuery 1.7. Can be removed when dropping jQ 1.7.x support
+
+	// https://jqueryvalidation.org/blank-selector/
+	blank: function( a ) {
+		return !trim( "" + $( a ).val() );
+	},
+
+	// https://jqueryvalidation.org/filled-selector/
+	filled: function( a ) {
+		var val = $( a ).val();
+		return val !== null && !!trim( "" + val );
+	},
+
+	// https://jqueryvalidation.org/unchecked-selector/
+	unchecked: function( a ) {
+		return !$( a ).prop( "checked" );
+	}
+} );
+
+// Constructor for validator
+$.validator = function( options, form ) {
+	this.settings = $.extend( true, {}, $.validator.defaults, options );
+	this.currentForm = form;
+	this.init();
+};
+
+// https://jqueryvalidation.org/jQuery.validator.format/
+$.validator.format = function( source, params ) {
+	if ( arguments.length === 1 ) {
+		return function() {
+			var args = $.makeArray( arguments );
+			args.unshift( source );
+			return $.validator.format.apply( this, args );
+		};
+	}
+	if ( params === undefined ) {
+		return source;
+	}
+	if ( arguments.length > 2 && params.constructor !== Array  ) {
+		params = $.makeArray( arguments ).slice( 1 );
+	}
+	if ( params.constructor !== Array ) {
+		params = [ params ];
+	}
+	$.each( params, function( i, n ) {
+		source = source.replace( new RegExp( "\\{" + i + "\\}", "g" ), function() {
+			return n;
+		} );
+	} );
+	return source;
+};
+
+$.extend( $.validator, {
+
+	defaults: {
+		messages: {},
+		groups: {},
+		rules: {},
+		errorClass: "error",
+		pendingClass: "pending",
+		validClass: "valid",
+		errorElement: "label",
+		focusCleanup: false,
+		focusInvalid: true,
+		errorContainer: $( [] ),
+		errorLabelContainer: $( [] ),
+		onsubmit: true,
+		ignore: ":hidden",
+		ignoreTitle: false,
+		onfocusin: function( element ) {
+			this.lastActive = element;
+
+			// Hide error label and remove error class on focus if enabled
+			if ( this.settings.focusCleanup ) {
+				if ( this.settings.unhighlight ) {
+					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.hideThese( this.errorsFor( element ) );
+			}
+		},
+		onfocusout: function( element ) {
+			if ( !this.checkable( element ) && ( element.name in this.submitted || !this.optional( element ) ) ) {
+				this.element( element );
+			}
+		},
+		onkeyup: function( element, event ) {
+
+			// Avoid revalidate the field when pressing one of the following keys
+			// Shift       => 16
+			// Ctrl        => 17
+			// Alt         => 18
+			// Caps lock   => 20
+			// End         => 35
+			// Home        => 36
+			// Left arrow  => 37
+			// Up arrow    => 38
+			// Right arrow => 39
+			// Down arrow  => 40
+			// Insert      => 45
+			// Num lock    => 144
+			// AltGr key   => 225
+			var excludedKeys = [
+				16, 17, 18, 20, 35, 36, 37,
+				38, 39, 40, 45, 144, 225
+			];
+
+			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
+				return;
+			} else if ( element.name in this.submitted || element.name in this.invalid ) {
+				this.element( element );
+			}
+		},
+		onclick: function( element ) {
+
+			// Click on selects, radiobuttons and checkboxes
+			if ( element.name in this.submitted ) {
+				this.element( element );
+
+			// Or option elements, check parent select in that case
+			} else if ( element.parentNode.name in this.submitted ) {
+				this.element( element.parentNode );
+			}
+		},
+		highlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+			} else {
+				$( element ).addClass( errorClass ).removeClass( validClass );
+			}
+		},
+		unhighlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
+			} else {
+				$( element ).removeClass( errorClass ).addClass( validClass );
+			}
+		}
+	},
+
+	// https://jqueryvalidation.org/jQuery.validator.setDefaults/
+	setDefaults: function( settings ) {
+		$.extend( $.validator.defaults, settings );
+	},
+
+	messages: {
+		required: "This field is required.",
+		remote: "Please fix this field.",
+		email: "Please enter a valid email address.",
+		url: "Please enter a valid URL.",
+		date: "Please enter a valid date.",
+		dateISO: "Please enter a valid date (ISO).",
+		number: "Please enter a valid number.",
+		digits: "Please enter only digits.",
+		equalTo: "Please enter the same value again.",
+		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+		minlength: $.validator.format( "Please enter at least {0} characters." ),
+		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+		range: $.validator.format( "Please enter a value between {0} and {1}." ),
+		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+		step: $.validator.format( "Please enter a multiple of {0}." )
+	},
+
+	autoCreateRanges: false,
+
+	prototype: {
+
+		init: function() {
+			this.labelContainer = $( this.settings.errorLabelContainer );
+			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
+			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
+			this.submitted = {};
+			this.valueCache = {};
+			this.pendingRequest = 0;
+			this.pending = {};
+			this.invalid = {};
+			this.reset();
+
+			var currentForm = this.currentForm,
+				groups = ( this.groups = {} ),
+				rules;
+			$.each( this.settings.groups, function( key, value ) {
+				if ( typeof value === "string" ) {
+					value = value.split( /\s/ );
+				}
+				$.each( value, function( index, name ) {
+					groups[ name ] = key;
+				} );
+			} );
+			rules = this.settings.rules;
+			$.each( rules, function( key, value ) {
+				rules[ key ] = $.validator.normalizeRule( value );
+			} );
+
+			function delegate( event ) {
+				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
+
+				// Set form expando on contenteditable
+				if ( !this.form && isContentEditable ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+					this.name = $( this ).attr( "name" );
+				}
+
+				// Ignore the element if it belongs to another form. This will happen mainly
+				// when setting the `form` attribute of an input to the id of another form.
+				if ( currentForm !== this.form ) {
+					return;
+				}
+
+				var validator = $.data( this.form, "validator" ),
+					eventType = "on" + event.type.replace( /^validate/, "" ),
+					settings = validator.settings;
+				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
+					settings[ eventType ].call( validator, this, event );
+				}
+			}
+
+			$( this.currentForm )
+				.on( "focusin.validate focusout.validate keyup.validate",
+					":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], " +
+					"[type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], " +
+					"[type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], " +
+					"[type='radio'], [type='checkbox'], [contenteditable], [type='button']", delegate )
+
+				// Support: Chrome, oldIE
+				// "select" is provided as event.target when clicking a option
+				.on( "click.validate", "select, option, [type='radio'], [type='checkbox']", delegate );
+
+			if ( this.settings.invalidHandler ) {
+				$( this.currentForm ).on( "invalid-form.validate", this.settings.invalidHandler );
+			}
+		},
+
+		// https://jqueryvalidation.org/Validator.form/
+		form: function() {
+			this.checkForm();
+			$.extend( this.submitted, this.errorMap );
+			this.invalid = $.extend( {}, this.errorMap );
+			if ( !this.valid() ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+			}
+			this.showErrors();
+			return this.valid();
+		},
+
+		checkForm: function() {
+			this.prepareForm();
+			for ( var i = 0, elements = ( this.currentElements = this.elements() ); elements[ i ]; i++ ) {
+				this.check( elements[ i ] );
+			}
+			return this.valid();
+		},
+
+		// https://jqueryvalidation.org/Validator.element/
+		element: function( element ) {
+			var cleanElement = this.clean( element ),
+				checkElement = this.validationTargetFor( cleanElement ),
+				v = this,
+				result = true,
+				rs, group;
+
+			if ( checkElement === undefined ) {
+				delete this.invalid[ cleanElement.name ];
+			} else {
+				this.prepareElement( checkElement );
+				this.currentElements = $( checkElement );
+
+				// If this element is grouped, then validate all group elements already
+				// containing a value
+				group = this.groups[ checkElement.name ];
+				if ( group ) {
+					$.each( this.groups, function( name, testgroup ) {
+						if ( testgroup === group && name !== checkElement.name ) {
+							cleanElement = v.validationTargetFor( v.clean( v.findByName( name ) ) );
+							if ( cleanElement && cleanElement.name in v.invalid ) {
+								v.currentElements.push( cleanElement );
+								result = v.check( cleanElement ) && result;
+							}
+						}
+					} );
+				}
+
+				rs = this.check( checkElement ) !== false;
+				result = result && rs;
+				if ( rs ) {
+					this.invalid[ checkElement.name ] = false;
+				} else {
+					this.invalid[ checkElement.name ] = true;
+				}
+
+				if ( !this.numberOfInvalids() ) {
+
+					// Hide error containers on last error
+					this.toHide = this.toHide.add( this.containers );
+				}
+				this.showErrors();
+
+				// Add aria-invalid status for screen readers
+				$( element ).attr( "aria-invalid", !rs );
+			}
+
+			return result;
+		},
+
+		// https://jqueryvalidation.org/Validator.showErrors/
+		showErrors: function( errors ) {
+			if ( errors ) {
+				var validator = this;
+
+				// Add items to error list and map
+				$.extend( this.errorMap, errors );
+				this.errorList = $.map( this.errorMap, function( message, name ) {
+					return {
+						message: message,
+						element: validator.findByName( name )[ 0 ]
+					};
+				} );
+
+				// Remove items from success list
+				this.successList = $.grep( this.successList, function( element ) {
+					return !( element.name in errors );
+				} );
+			}
+			if ( this.settings.showErrors ) {
+				this.settings.showErrors.call( this, this.errorMap, this.errorList );
+			} else {
+				this.defaultShowErrors();
+			}
+		},
+
+		// https://jqueryvalidation.org/Validator.resetForm/
+		resetForm: function() {
+			if ( $.fn.resetForm ) {
+				$( this.currentForm ).resetForm();
+			}
+			this.invalid = {};
+			this.submitted = {};
+			this.prepareForm();
+			this.hideErrors();
+			var elements = this.elements()
+				.removeData( "previousValue" )
+				.removeAttr( "aria-invalid" );
+
+			this.resetElements( elements );
+		},
+
+		resetElements: function( elements ) {
+			var i;
+
+			if ( this.settings.unhighlight ) {
+				for ( i = 0; elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ],
+						this.settings.errorClass, "" );
+					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
+				}
+			} else {
+				elements
+					.removeClass( this.settings.errorClass )
+					.removeClass( this.settings.validClass );
+			}
+		},
+
+		numberOfInvalids: function() {
+			return this.objectLength( this.invalid );
+		},
+
+		objectLength: function( obj ) {
+			/* jshint unused: false */
+			var count = 0,
+				i;
+			for ( i in obj ) {
+
+				// This check allows counting elements with empty error
+				// message as invalid elements
+				if ( obj[ i ] !== undefined && obj[ i ] !== null && obj[ i ] !== false ) {
+					count++;
+				}
+			}
+			return count;
+		},
+
+		hideErrors: function() {
+			this.hideThese( this.toHide );
+		},
+
+		hideThese: function( errors ) {
+			errors.not( this.containers ).text( "" );
+			this.addWrapper( errors ).hide();
+		},
+
+		valid: function() {
+			return this.size() === 0;
+		},
+
+		size: function() {
+			return this.errorList.length;
+		},
+
+		focusInvalid: function() {
+			if ( this.settings.focusInvalid ) {
+				try {
+					$( this.findLastActive() || this.errorList.length && this.errorList[ 0 ].element || [] )
+					.filter( ":visible" )
+					.trigger( "focus" )
+
+					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+					.trigger( "focusin" );
+				} catch ( e ) {
+
+					// Ignore IE throwing errors when focusing hidden elements
+				}
+			}
+		},
+
+		findLastActive: function() {
+			var lastActive = this.lastActive;
+			return lastActive && $.grep( this.errorList, function( n ) {
+				return n.element.name === lastActive.name;
+			} ).length === 1 && lastActive;
+		},
+
+		elements: function() {
+			var validator = this,
+				rulesCache = {};
+
+			// Select all valid inputs inside the form (no submit or reset buttons)
+			return $( this.currentForm )
+			.find( "input, select, textarea, [contenteditable]" )
+			.not( ":submit, :reset, :image, :disabled" )
+			.not( this.settings.ignore )
+			.filter( function() {
+				var name = this.name || $( this ).attr( "name" ); // For contenteditable
+				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
+
+				if ( !name && validator.settings.debug && window.console ) {
+					console.error( "%o has no name assigned", this );
+				}
+
+				// Set form expando on contenteditable
+				if ( isContentEditable ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+					this.name = name;
+				}
+
+				// Ignore elements that belong to other/nested forms
+				if ( this.form !== validator.currentForm ) {
+					return false;
+				}
+
+				// Select only the first element for each name, and only those with rules specified
+				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
+					return false;
+				}
+
+				rulesCache[ name ] = true;
+				return true;
+			} );
+		},
+
+		clean: function( selector ) {
+			return $( selector )[ 0 ];
+		},
+
+		errors: function() {
+			var errorClass = this.settings.errorClass.split( " " ).join( "." );
+			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
+		},
+
+		resetInternals: function() {
+			this.successList = [];
+			this.errorList = [];
+			this.errorMap = {};
+			this.toShow = $( [] );
+			this.toHide = $( [] );
+		},
+
+		reset: function() {
+			this.resetInternals();
+			this.currentElements = $( [] );
+		},
+
+		prepareForm: function() {
+			this.reset();
+			this.toHide = this.errors().add( this.containers );
+		},
+
+		prepareElement: function( element ) {
+			this.reset();
+			this.toHide = this.errorsFor( element );
+		},
+
+		elementValue: function( element ) {
+			var $element = $( element ),
+				type = element.type,
+				isContentEditable = typeof $element.attr( "contenteditable" ) !== "undefined" && $element.attr( "contenteditable" ) !== "false",
+				val, idx;
+
+			if ( type === "radio" || type === "checkbox" ) {
+				return this.findByName( element.name ).filter( ":checked" ).val();
+			} else if ( type === "number" && typeof element.validity !== "undefined" ) {
+				return element.validity.badInput ? "NaN" : $element.val();
+			}
+
+			if ( isContentEditable ) {
+				val = $element.text();
+			} else {
+				val = $element.val();
+			}
+
+			if ( type === "file" ) {
+
+				// Modern browser (chrome & safari)
+				if ( val.substr( 0, 12 ) === "C:\\fakepath\\" ) {
+					return val.substr( 12 );
+				}
+
+				// Legacy browsers
+				// Unix-based path
+				idx = val.lastIndexOf( "/" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Windows-based path
+				idx = val.lastIndexOf( "\\" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Just the file name
+				return val;
+			}
+
+			if ( typeof val === "string" ) {
+				return val.replace( /\r/g, "" );
+			}
+			return val;
+		},
+
+		check: function( element ) {
+			element = this.validationTargetFor( this.clean( element ) );
+
+			var rules = $( element ).rules(),
+				rulesCount = $.map( rules, function( n, i ) {
+					return i;
+				} ).length,
+				dependencyMismatch = false,
+				val = this.elementValue( element ),
+				result, method, rule, normalizer;
+
+			// Abort any pending Ajax request from a previous call to this method.
+			this.abortRequest( element );
+
+			// Prioritize the local normalizer defined for this element over the global one
+			// if the former exists, otherwise user the global one in case it exists.
+			if ( typeof rules.normalizer === "function" ) {
+				normalizer = rules.normalizer;
+			} else if (	typeof this.settings.normalizer === "function" ) {
+				normalizer = this.settings.normalizer;
+			}
+
+			// If normalizer is defined, then call it to retreive the changed value instead
+			// of using the real one.
+			// Note that `this` in the normalizer is `element`.
+			if ( normalizer ) {
+				val = normalizer.call( element, val );
+
+				// Delete the normalizer from rules to avoid treating it as a pre-defined method.
+				delete rules.normalizer;
+			}
+
+			for ( method in rules ) {
+				rule = { method: method, parameters: rules[ method ] };
+				try {
+					result = $.validator.methods[ method ].call( this, val, element, rule.parameters );
+
+					// If a method indicates that the field is optional and therefore valid,
+					// don't mark it as valid when there are no other rules
+					if ( result === "dependency-mismatch" && rulesCount === 1 ) {
+						dependencyMismatch = true;
+						continue;
+					}
+					dependencyMismatch = false;
+
+					if ( result === "pending" ) {
+						this.toHide = this.toHide.not( this.errorsFor( element ) );
+						return;
+					}
+
+					if ( !result ) {
+						this.formatAndAdd( element, rule );
+						return false;
+					}
+				} catch ( e ) {
+					if ( this.settings.debug && window.console ) {
+						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
+					}
+					if ( e instanceof TypeError ) {
+						e.message += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
+					}
+
+					throw e;
+				}
+			}
+			if ( dependencyMismatch ) {
+				return;
+			}
+			if ( this.objectLength( rules ) ) {
+				this.successList.push( element );
+			}
+			return true;
+		},
+
+		// Return the custom message for the given element and validation method
+		// specified in the element's HTML5 data attribute
+		// return the generic message if present and no method specific message is present
+		customDataMessage: function( element, method ) {
+			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
+				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
+		},
+
+		// Return the custom message for the given element name and validation method
+		customMessage: function( name, method ) {
+			var m = this.settings.messages[ name ];
+			return m && ( m.constructor === String ? m : m[ method ] );
+		},
+
+		// Return the first defined argument, allowing empty strings
+		findDefined: function() {
+			for ( var i = 0; i < arguments.length; i++ ) {
+				if ( arguments[ i ] !== undefined ) {
+					return arguments[ i ];
+				}
+			}
+			return undefined;
+		},
+
+		// The second parameter 'rule' used to be a string, and extended to an object literal
+		// of the following form:
+		// rule = {
+		//     method: "method name",
+		//     parameters: "the given method parameters"
+		// }
+		//
+		// The old behavior still supported, kept to maintain backward compatibility with
+		// old code, and will be removed in the next major release.
+		defaultMessage: function( element, rule ) {
+			if ( typeof rule === "string" ) {
+				rule = { method: rule };
+			}
+
+			var message = this.findDefined(
+					this.customMessage( element.name, rule.method ),
+					this.customDataMessage( element, rule.method ),
+
+					// 'title' is never undefined, so handle empty string as undefined
+					!this.settings.ignoreTitle && element.title || undefined,
+					$.validator.messages[ rule.method ],
+					"<strong>Warning: No message defined for " + element.name + "</strong>"
+				),
+				theregex = /\$?\{(\d+)\}/g;
+			if ( typeof message === "function" ) {
+				message = message.call( this, rule.parameters, element );
+			} else if ( theregex.test( message ) ) {
+				message = $.validator.format( message.replace( theregex, "{$1}" ), rule.parameters );
+			}
+
+			return message;
+		},
+
+		formatAndAdd: function( element, rule ) {
+			var message = this.defaultMessage( element, rule );
+
+			this.errorList.push( {
+				message: message,
+				element: element,
+				method: rule.method
+			} );
+
+			this.errorMap[ element.name ] = message;
+			this.submitted[ element.name ] = message;
+		},
+
+		addWrapper: function( toToggle ) {
+			if ( this.settings.wrapper ) {
+				toToggle = toToggle.add( toToggle.parent( this.settings.wrapper ) );
+			}
+			return toToggle;
+		},
+
+		defaultShowErrors: function() {
+			var i, elements, error;
+			for ( i = 0; this.errorList[ i ]; i++ ) {
+				error = this.errorList[ i ];
+				if ( this.settings.highlight ) {
+					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.showLabel( error.element, error.message );
+			}
+			if ( this.errorList.length ) {
+				this.toShow = this.toShow.add( this.containers );
+			}
+			if ( this.settings.success ) {
+				for ( i = 0; this.successList[ i ]; i++ ) {
+					this.showLabel( this.successList[ i ] );
+				}
+			}
+			if ( this.settings.unhighlight ) {
+				for ( i = 0, elements = this.validElements(); elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
+				}
+			}
+			this.toHide = this.toHide.not( this.toShow );
+			this.hideErrors();
+			this.addWrapper( this.toShow ).show();
+		},
+
+		validElements: function() {
+			return this.currentElements.not( this.invalidElements() );
+		},
+
+		invalidElements: function() {
+			return $( this.errorList ).map( function() {
+				return this.element;
+			} );
+		},
+
+		showLabel: function( element, message ) {
+			var place, group, errorID, v,
+				error = this.errorsFor( element ),
+				elementID = this.idOrName( element ),
+				describedBy = $( element ).attr( "aria-describedby" );
+
+			if ( error.length ) {
+
+				// Refresh error/success class
+				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
+
+				// Replace message on existing label
+				if ( this.settings && this.settings.escapeHtml ) {
+					error.text( message || "" );
+				} else {
+					error.html( message || "" );
+				}
+			} else {
+
+				// Create error element
+				error = $( "<" + this.settings.errorElement + ">" )
+					.attr( "id", elementID + "-error" )
+					.addClass( this.settings.errorClass );
+
+				if ( this.settings && this.settings.escapeHtml ) {
+					error.text( message || "" );
+				} else {
+					error.html( message || "" );
+				}
+
+				// Maintain reference to the element to be placed into the DOM
+				place = error;
+				if ( this.settings.wrapper ) {
+
+					// Make sure the element is visible, even in IE
+					// actually showing the wrapped element is handled elsewhere
+					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
+				}
+				if ( this.labelContainer.length ) {
+					this.labelContainer.append( place );
+				} else if ( this.settings.errorPlacement ) {
+					this.settings.errorPlacement.call( this, place, $( element ) );
+				} else {
+					place.insertAfter( element );
+				}
+
+				// Link error back to the element
+				if ( error.is( "label" ) ) {
+
+					// If the error is a label, then associate using 'for'
+					error.attr( "for", elementID );
+
+					// If the element is not a child of an associated label, then it's necessary
+					// to explicitly apply aria-describedby
+				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
+					errorID = error.attr( "id" );
+
+					// Respect existing non-error aria-describedby
+					if ( !describedBy ) {
+						describedBy = errorID;
+					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
+
+						// Add to end of list if not already present
+						describedBy += " " + errorID;
+					}
+					$( element ).attr( "aria-describedby", describedBy );
+
+					// If this element is grouped, then assign to all elements in the same group
+					group = this.groups[ element.name ];
+					if ( group ) {
+						v = this;
+						$.each( v.groups, function( name, testgroup ) {
+							if ( testgroup === group ) {
+								$( "[name='" + v.escapeCssMeta( name ) + "']", v.currentForm )
+									.attr( "aria-describedby", error.attr( "id" ) );
+							}
+						} );
+					}
+				}
+			}
+			if ( !message && this.settings.success ) {
+				error.text( "" );
+				if ( typeof this.settings.success === "string" ) {
+					error.addClass( this.settings.success );
+				} else {
+					this.settings.success( error, element );
+				}
+			}
+			this.toShow = this.toShow.add( error );
+		},
+
+		errorsFor: function( element ) {
+			var name = this.escapeCssMeta( this.idOrName( element ) ),
+				describer = $( element ).attr( "aria-describedby" ),
+				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+
+			// 'aria-describedby' should directly reference the error element
+			if ( describer ) {
+				selector = selector + ", #" + this.escapeCssMeta( describer )
+					.replace( /\s+/g, ", #" );
+			}
+
+			return this
+				.errors()
+				.filter( selector );
+		},
+
+		// See https://api.jquery.com/category/selectors/, for CSS
+		// meta-characters that should be escaped in order to be used with JQuery
+		// as a literal part of a name/id or any selector.
+		escapeCssMeta: function( string ) {
+			if ( string === undefined ) {
+				return "";
+			}
+
+			return string.replace( /([\\!"#$%&'()*+,./:;<=>?@\[\]^`{|}~])/g, "\\$1" );
+		},
+
+		idOrName: function( element ) {
+			return this.groups[ element.name ] || ( this.checkable( element ) ? element.name : element.id || element.name );
+		},
+
+		validationTargetFor: function( element ) {
+
+			// If radio/checkbox, validate first element in group instead
+			if ( this.checkable( element ) ) {
+				element = this.findByName( element.name );
+			}
+
+			// Always apply ignore filter
+			return $( element ).not( this.settings.ignore )[ 0 ];
+		},
+
+		checkable: function( element ) {
+			return ( /radio|checkbox/i ).test( element.type );
+		},
+
+		findByName: function( name ) {
+			return $( this.currentForm ).find( "[name='" + this.escapeCssMeta( name ) + "']" );
+		},
+
+		getLength: function( value, element ) {
+			switch ( element.nodeName.toLowerCase() ) {
+			case "select":
+				return $( "option:selected", element ).length;
+			case "input":
+				if ( this.checkable( element ) ) {
+					return this.findByName( element.name ).filter( ":checked" ).length;
+				}
+			}
+			return value.length;
+		},
+
+		depend: function( param, element ) {
+			return this.dependTypes[ typeof param ] ? this.dependTypes[ typeof param ]( param, element ) : true;
+		},
+
+		dependTypes: {
+			"boolean": function( param ) {
+				return param;
+			},
+			"string": function( param, element ) {
+				return !!$( param, element.form ).length;
+			},
+			"function": function( param, element ) {
+				return param( element );
+			}
+		},
+
+		optional: function( element ) {
+			var val = this.elementValue( element );
+			return !$.validator.methods.required.call( this, val, element ) && "dependency-mismatch";
+		},
+
+		elementAjaxPort: function( element ) {
+			return "validate" + element.name;
+		},
+
+		startRequest: function( element ) {
+			if ( !this.pending[ element.name ] ) {
+				this.pendingRequest++;
+				$( element ).addClass( this.settings.pendingClass );
+				this.pending[ element.name ] = true;
+			}
+		},
+
+		stopRequest: function( element, valid ) {
+			this.pendingRequest--;
+
+			// Sometimes synchronization fails, make sure pendingRequest is never < 0
+			if ( this.pendingRequest < 0 ) {
+				this.pendingRequest = 0;
+			}
+			delete this.pending[ element.name ];
+			$( element ).removeClass( this.settings.pendingClass );
+			if ( valid && this.pendingRequest === 0 && this.formSubmitted && this.form() && this.pendingRequest === 0 ) {
+				$( this.currentForm ).trigger( "submit" );
+
+				// Remove the hidden input that was used as a replacement for the
+				// missing submit button. The hidden input is added by `handle()`
+				// to ensure that the value of the used submit button is passed on
+				// for scripted submits triggered by this method
+				if ( this.submitButton ) {
+					$( "input:hidden[name='" + this.submitButton.name + "']", this.currentForm ).remove();
+				}
+
+				this.formSubmitted = false;
+			} else if ( !valid && this.pendingRequest === 0 && this.formSubmitted ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+				this.formSubmitted = false;
+			}
+		},
+
+		abortRequest: function( element ) {
+			var port;
+
+			if ( this.pending[ element.name ] ) {
+				port = this.elementAjaxPort( element );
+				$.ajaxAbort( port );
+
+				this.pendingRequest--;
+
+				// Sometimes synchronization fails, make sure pendingRequest is never < 0
+				if ( this.pendingRequest < 0 ) {
+					this.pendingRequest = 0;
+				}
+
+				delete this.pending[ element.name ];
+				$( element ).removeClass( this.settings.pendingClass );
+			}
+		},
+
+		previousValue: function( element, method ) {
+			method = typeof method === "string" && method || "remote";
+
+			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
+				old: null,
+				valid: true,
+				message: this.defaultMessage( element, { method: method } )
+			} );
+		},
+
+		// Cleans up all forms and elements, removes validator-specific events
+		destroy: function() {
+			this.resetForm();
+
+			$( this.currentForm )
+				.off( ".validate" )
+				.removeData( "validator" )
+				.find( ".validate-equalTo-blur" )
+					.off( ".validate-equalTo" )
+					.removeClass( "validate-equalTo-blur" )
+				.find( ".validate-lessThan-blur" )
+					.off( ".validate-lessThan" )
+					.removeClass( "validate-lessThan-blur" )
+				.find( ".validate-lessThanEqual-blur" )
+					.off( ".validate-lessThanEqual" )
+					.removeClass( "validate-lessThanEqual-blur" )
+				.find( ".validate-greaterThanEqual-blur" )
+					.off( ".validate-greaterThanEqual" )
+					.removeClass( "validate-greaterThanEqual-blur" )
+				.find( ".validate-greaterThan-blur" )
+					.off( ".validate-greaterThan" )
+					.removeClass( "validate-greaterThan-blur" );
+		}
+
+	},
+
+	classRuleSettings: {
+		required: { required: true },
+		email: { email: true },
+		url: { url: true },
+		date: { date: true },
+		dateISO: { dateISO: true },
+		number: { number: true },
+		digits: { digits: true },
+		creditcard: { creditcard: true }
+	},
+
+	addClassRules: function( className, rules ) {
+		if ( className.constructor === String ) {
+			this.classRuleSettings[ className ] = rules;
+		} else {
+			$.extend( this.classRuleSettings, className );
+		}
+	},
+
+	classRules: function( element ) {
+		var rules = {},
+			classes = $( element ).attr( "class" );
+
+		if ( classes ) {
+			$.each( classes.split( " " ), function() {
+				if ( this in $.validator.classRuleSettings ) {
+					$.extend( rules, $.validator.classRuleSettings[ this ] );
+				}
+			} );
+		}
+		return rules;
+	},
+
+	normalizeAttributeRule: function( rules, type, method, value ) {
+
+		// Convert the value to a number for number inputs, and for text for backwards compability
+		// allows type="date" and others to be compared as strings
+		if ( /min|max|step/.test( method ) && ( type === null || /number|range|text/.test( type ) ) ) {
+			value = Number( value );
+
+			// Support Opera Mini, which returns NaN for undefined minlength
+			if ( isNaN( value ) ) {
+				value = undefined;
+			}
+		}
+
+		if ( value || value === 0 ) {
+			rules[ method ] = value;
+		} else if ( type === method && type !== "range" ) {
+
+			// Exception: the jquery validate 'range' method
+			// does not test for the html5 'range' type
+			rules[ type === "date" ? "dateISO" : method ] = true;
+		}
+	},
+
+	attributeRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+
+			// Support for <input required> in both html5 and older browsers
+			if ( method === "required" ) {
+				value = element.getAttribute( method );
+
+				// Some browsers return an empty string for the required attribute
+				// and non-HTML5 browsers might have required="" markup
+				if ( value === "" ) {
+					value = true;
+				}
+
+				// Force non-HTML5 browsers to return bool
+				value = !!value;
+			} else {
+				value = $element.attr( method );
+			}
+
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+
+		// 'maxlength' may be returned as -1, 2147483647 ( IE ) and 524288 ( safari ) for text inputs
+		if ( rules.maxlength && /-1|2147483647|524288/.test( rules.maxlength ) ) {
+			delete rules.maxlength;
+		}
+
+		return rules;
+	},
+
+	dataRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
+
+			// Cast empty attributes like `data-rule-required` to `true`
+			if ( value === "" ) {
+				value = true;
+			}
+
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+		return rules;
+	},
+
+	staticRules: function( element ) {
+		var rules = {},
+			validator = $.data( element.form, "validator" );
+
+		if ( validator.settings.rules ) {
+			rules = $.validator.normalizeRule( validator.settings.rules[ element.name ] ) || {};
+		}
+		return rules;
+	},
+
+	normalizeRules: function( rules, element ) {
+
+		// Handle dependency check
+		$.each( rules, function( prop, val ) {
+
+			// Ignore rule when param is explicitly false, eg. required:false
+			if ( val === false ) {
+				delete rules[ prop ];
+				return;
+			}
+			if ( val.param || val.depends ) {
+				var keepRule = true;
+				switch ( typeof val.depends ) {
+				case "string":
+					keepRule = !!$( val.depends, element.form ).length;
+					break;
+				case "function":
+					keepRule = val.depends.call( element, element );
+					break;
+				}
+				if ( keepRule ) {
+					rules[ prop ] = val.param !== undefined ? val.param : true;
+				} else {
+					$.data( element.form, "validator" ).resetElements( $( element ) );
+					delete rules[ prop ];
+				}
+			}
+		} );
+
+		// Evaluate parameters
+		$.each( rules, function( rule, parameter ) {
+			rules[ rule ] = typeof parameter === "function" && rule !== "normalizer" ? parameter( element ) : parameter;
+		} );
+
+		// Clean number parameters
+		$.each( [ "minlength", "maxlength" ], function() {
+			if ( rules[ this ] ) {
+				rules[ this ] = Number( rules[ this ] );
+			}
+		} );
+		$.each( [ "rangelength", "range" ], function() {
+			var parts;
+			if ( rules[ this ] ) {
+				if ( Array.isArray( rules[ this ] ) ) {
+					rules[ this ] = [ Number( rules[ this ][ 0 ] ), Number( rules[ this ][ 1 ] ) ];
+				} else if ( typeof rules[ this ] === "string" ) {
+					parts = rules[ this ].replace( /[\[\]]/g, "" ).split( /[\s,]+/ );
+					rules[ this ] = [ Number( parts[ 0 ] ), Number( parts[ 1 ] ) ];
+				}
+			}
+		} );
+
+		if ( $.validator.autoCreateRanges ) {
+
+			// Auto-create ranges
+			if ( rules.min != null && rules.max != null ) {
+				rules.range = [ rules.min, rules.max ];
+				delete rules.min;
+				delete rules.max;
+			}
+			if ( rules.minlength != null && rules.maxlength != null ) {
+				rules.rangelength = [ rules.minlength, rules.maxlength ];
+				delete rules.minlength;
+				delete rules.maxlength;
+			}
+		}
+
+		return rules;
+	},
+
+	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
+	normalizeRule: function( data ) {
+		if ( typeof data === "string" ) {
+			var transformed = {};
+			$.each( data.split( /\s/ ), function() {
+				transformed[ this ] = true;
+			} );
+			data = transformed;
+		}
+		return data;
+	},
+
+	// https://jqueryvalidation.org/jQuery.validator.addMethod/
+	addMethod: function( name, method, message ) {
+		$.validator.methods[ name ] = method;
+		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
+		if ( method.length < 3 ) {
+			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
+		}
+	},
+
+	// https://jqueryvalidation.org/jQuery.validator.methods/
+	methods: {
+
+		// https://jqueryvalidation.org/required-method/
+		required: function( value, element, param ) {
+
+			// Check if dependency is met
+			if ( !this.depend( param, element ) ) {
+				return "dependency-mismatch";
+			}
+			if ( element.nodeName.toLowerCase() === "select" ) {
+
+				// Could be an array for select-multiple or a string, both are fine this way
+				var val = $( element ).val();
+				return val && val.length > 0;
+			}
+			if ( this.checkable( element ) ) {
+				return this.getLength( value, element ) > 0;
+			}
+			return value !== undefined && value !== null && value.length > 0;
+		},
+
+		// https://jqueryvalidation.org/email-method/
+		email: function( value, element ) {
+
+			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+			// Retrieved 2014-01-14
+			// If you have a problem with this implementation, report a bug against the above spec
+			// Or use custom methods to implement your own email validation
+			return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/url-method/
+		url: function( value, element ) {
+
+			// Copyright (c) 2010-2013 Diego Perini, MIT licensed
+			// https://gist.github.com/dperini/729294
+			// see also https://mathiasbynens.be/demo/url-regex
+			// modified to allow protocol-relative URLs
+			return this.optional( element ) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:(?:[^\]\[?\/<~#`!@$^&*()+=}|:";',>{ ]|%[0-9A-Fa-f]{2})+(?::(?:[^\]\[?\/<~#`!@$^&*()+=}|:";',>{ ]|%[0-9A-Fa-f]{2})*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test( value );
+		},
+
+		// https://jqueryvalidation.org/date-method/
+		date: ( function() {
+			var called = false;
+
+			return function( value, element ) {
+				if ( !called ) {
+					called = true;
+					if ( this.settings.debug && window.console ) {
+						console.warn(
+							"The `date` method is deprecated and will be removed in version '2.0.0'.\n" +
+							"Please don't use it, since it relies on the Date constructor, which\n" +
+							"behaves very differently across browsers and locales. Use `dateISO`\n" +
+							"instead or one of the locale specific methods in `localizations/`\n" +
+							"and `additional-methods.js`."
+						);
+					}
+				}
+
+				return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+			};
+		}() ),
+
+		// https://jqueryvalidation.org/dateISO-method/
+		dateISO: function( value, element ) {
+			return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/number-method/
+		number: function( value, element ) {
+			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/digits-method/
+		digits: function( value, element ) {
+			return this.optional( element ) || /^\d+$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/minlength-method/
+		minlength: function( value, element, param ) {
+			var length = Array.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length >= param;
+		},
+
+		// https://jqueryvalidation.org/maxlength-method/
+		maxlength: function( value, element, param ) {
+			var length = Array.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length <= param;
+		},
+
+		// https://jqueryvalidation.org/rangelength-method/
+		rangelength: function( value, element, param ) {
+			var length = Array.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || ( length >= param[ 0 ] && length <= param[ 1 ] );
+		},
+
+		// https://jqueryvalidation.org/min-method/
+		min: function( value, element, param ) {
+			return this.optional( element ) || value >= param;
+		},
+
+		// https://jqueryvalidation.org/max-method/
+		max: function( value, element, param ) {
+			return this.optional( element ) || value <= param;
+		},
+
+		// https://jqueryvalidation.org/range-method/
+		range: function( value, element, param ) {
+			return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
+		},
+
+		// https://jqueryvalidation.org/step-method/
+		step: function( value, element, param ) {
+			var type = $( element ).attr( "type" ),
+				errorMessage = "Step attribute on input type " + type + " is not supported.",
+				supportedTypes = [ "text", "number", "range" ],
+				re = new RegExp( "\\b" + type + "\\b" ),
+				notSupported = type && !re.test( supportedTypes.join() ),
+				decimalPlaces = function( num ) {
+					var match = ( "" + num ).match( /(?:\.(\d+))?$/ );
+					if ( !match ) {
+						return 0;
+					}
+
+					// Number of digits right of decimal point.
+					return match[ 1 ] ? match[ 1 ].length : 0;
+				},
+				toInt = function( num ) {
+					return Math.round( num * Math.pow( 10, decimals ) );
+				},
+				valid = true,
+				decimals;
+
+			// Works only for text, number and range input types
+			// TODO find a way to support input types date, datetime, datetime-local, month, time and week
+			if ( notSupported ) {
+				throw new Error( errorMessage );
+			}
+
+			decimals = decimalPlaces( param );
+
+			// Value can't have too many decimals
+			if ( decimalPlaces( value ) > decimals || toInt( value ) % toInt( param ) !== 0 ) {
+				valid = false;
+			}
+
+			return this.optional( element ) || valid;
+		},
+
+		// https://jqueryvalidation.org/equalTo-method/
+		equalTo: function( value, element, param ) {
+
+			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+			var target = $( param );
+			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
+				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
+					$( element ).valid();
+				} );
+			}
+			return value === target.val();
+		},
+
+		// https://jqueryvalidation.org/remote-method/
+		remote: function( value, element, param, method ) {
+			if ( this.optional( element ) ) {
+				return "dependency-mismatch";
+			}
+
+			method = typeof method === "string" && method || "remote";
+
+			var previous = this.previousValue( element, method ),
+				validator, data, optionDataString;
+
+			if ( !this.settings.messages[ element.name ] ) {
+				this.settings.messages[ element.name ] = {};
+			}
+			previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
+			this.settings.messages[ element.name ][ method ] = previous.message;
+
+			param = typeof param === "string" && { url: param } || param;
+			optionDataString = $.param( $.extend( { data: value }, param.data ) );
+			if ( previous.old === optionDataString ) {
+				return previous.valid;
+			}
+
+			previous.old = optionDataString;
+			validator = this;
+			this.startRequest( element );
+			data = {};
+			data[ element.name ] = value;
+			$.ajax( $.extend( true, {
+				mode: "abort",
+				port: this.elementAjaxPort( element ),
+				dataType: "json",
+				data: data,
+				context: validator.currentForm,
+				success: function( response ) {
+					var valid = response === true || response === "true",
+						errors, message, submitted;
+
+					validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
+					if ( valid ) {
+						submitted = validator.formSubmitted;
+						validator.toHide = validator.errorsFor( element );
+						validator.formSubmitted = submitted;
+						validator.successList.push( element );
+						validator.invalid[ element.name ] = false;
+						validator.showErrors();
+					} else {
+						errors = {};
+						message = response || validator.defaultMessage( element, { method: method, parameters: value } );
+						errors[ element.name ] = previous.message = message;
+						validator.invalid[ element.name ] = true;
+						validator.showErrors( errors );
+					}
+					previous.valid = valid;
+					validator.stopRequest( element, valid );
+				}
+			}, param ) );
+			return "pending";
+		}
+	}
+
+} );
+
+// Ajax mode: abort
+// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+//        $.ajaxAbort( port );
+// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
+
+var pendingRequests = {},
+	ajax;
+
+// Use a prefilter if available (1.5+)
+if ( $.ajaxPrefilter ) {
+	$.ajaxPrefilter( function( settings, _, xhr ) {
+		var port = settings.port;
+		if ( settings.mode === "abort" ) {
+			$.ajaxAbort( port );
+			pendingRequests[ port ] = xhr;
+		}
+	} );
+} else {
+
+	// Proxy ajax
+	ajax = $.ajax;
+	$.ajax = function( settings ) {
+		var mode = ( "mode" in settings ? settings : $.ajaxSettings ).mode,
+			port = ( "port" in settings ? settings : $.ajaxSettings ).port;
+		if ( mode === "abort" ) {
+			$.ajaxAbort( port );
+			pendingRequests[ port ] = ajax.apply( this, arguments );
+			return pendingRequests[ port ];
+		}
+		return ajax.apply( this, arguments );
+	};
+}
+
+// Abort the previous request without sending a new one
+$.ajaxAbort = function( port ) {
+	if ( pendingRequests[ port ] ) {
+		pendingRequests[ port ].abort();
+		delete pendingRequests[ port ];
+	}
+};
+return $;
 }));
-
 /*! List.js v1.5.0 (http://listjs.com) by Jonny Strömberg (http://javve.com) */
 var List =
 /******/ (function(modules) { // webpackBootstrap

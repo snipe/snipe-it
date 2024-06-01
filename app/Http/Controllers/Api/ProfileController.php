@@ -12,7 +12,7 @@ use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Facades\Gate;
 use App\Models\CustomField;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {

@@ -10,7 +10,7 @@ use App\Models\Consumable;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Consumable\HttpFoundation\JsonResponse;
-
+use Illuminate\Support\Facades\Log;
 class ConsumablesFilesController extends Controller
 {
     /**
@@ -83,7 +83,7 @@ class ConsumablesFilesController extends Controller
                 try {
                     Storage::delete('consumables/'.$log->filename);
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                 }
             }
 
@@ -124,8 +124,8 @@ class ConsumablesFilesController extends Controller
             $file = 'private_uploads/consumables/'.$log->filename;
 
             if (Storage::missing($file)) {
-                \Log::debug('FILE DOES NOT EXISTS for '.$file);
-                \Log::debug('URL should be '.Storage::url($file));
+                Log::debug('FILE DOES NOT EXISTS for '.$file);
+                Log::debug('URL should be '.Storage::url($file));
 
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');

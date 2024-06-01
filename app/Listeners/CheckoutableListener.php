@@ -21,7 +21,7 @@ use App\Notifications\CheckoutLicenseSeatNotification;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Notification;
 use Exception;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutableListener
 {
@@ -80,7 +80,7 @@ class CheckoutableListener
      */    
     public function onCheckedIn($event)
     {
-        \Log::debug('onCheckedIn in the Checkoutable listener fired');
+        Log::debug('onCheckedIn in the Checkoutable listener fired');
 
         if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
@@ -199,7 +199,7 @@ class CheckoutableListener
                 break;
         }
 
-        \Log::debug('Notification class: '.$notificationClass);
+        Log::debug('Notification class: '.$notificationClass);
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);  
     }

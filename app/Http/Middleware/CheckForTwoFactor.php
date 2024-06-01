@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class CheckForTwoFactor

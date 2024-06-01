@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This is ONLY used for the User Import. When we are importing users
@@ -88,7 +89,7 @@ class UserImporter extends ItemImporter
         if ($user) {
 
             if (! $this->updating) {
-                \Log::debug('A matching User '.$this->item['name'].' already exists.  ');
+                Log::debug('A matching User '.$this->item['name'].' already exists.  ');
                 return;
             }
             $this->log('Updating User');
@@ -100,7 +101,7 @@ class UserImporter extends ItemImporter
                 ->where('assigned_to', $user->id)
                 ->update(['location_id' => $user->location_id]);
             
-            // \Log::debug('UserImporter.php Updated User ' . print_r($user, true));
+            // Log::debug('UserImporter.php Updated User ' . print_r($user, true));
             return;
         }
 

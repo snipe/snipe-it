@@ -9,13 +9,14 @@ use App\Http\Transformers\ImportsTransformer;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Illuminate\Support\Facades\Log;
 
 class ImportController extends Controller
 {
@@ -159,10 +160,10 @@ class ImportController extends Controller
 
         // Run a backup immediately before processing
         if ($request->get('run-backup')) {
-            \Log::debug('Backup manually requested via importer');
+            Log::debug('Backup manually requested via importer');
             Artisan::call('snipeit:backup', ['--filename' => 'pre-import-backup-'.date('Y-m-d-H:i:s')]);
         } else {
-            \Log::debug('NO BACKUP requested via importer');
+            Log::debug('NO BACKUP requested via importer');
         }
 
         $import = Import::find($import_id);
