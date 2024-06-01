@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Api\Users;
 
+use App\Models\Asset;
+use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\LicenseSeat;
@@ -63,6 +65,36 @@ class DeleteUsersTest extends TestCase
             ->assertStatus(403)
             ->json();
     }
+
+    public function testDisallowUserDeletionIfNotInSameCompanyIfNotSuperadmin()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $superUser = $companyA->users()->save(User::factory()->superuser()->make());
+        $userInCompanyA = $companyA->users()->save(User::factory()->deleteUsers()->make());
+        $userInCompanyB = $companyB->users()->save(User::factory()->deleteUsers()->make());
+
+        $this->actingAsForApi($userInCompanyA)
+            ->deleteJson(route('api.users.destroy', $userInCompanyB))
+            ->assertStatus(403)
+            ->json();
+
+        $this->actingAsForApi($userInCompanyB)
+            ->deleteJson(route('api.users.destroy', $userInCompanyA))
+            ->assertStatus(403)
+            ->json();
+
+        $this->actingAsForApi($superUser)
+            ->deleteJson(route('api.users.destroy', $userInCompanyA))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
+
+    }
+
+
 
 
 
