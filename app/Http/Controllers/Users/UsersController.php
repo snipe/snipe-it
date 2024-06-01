@@ -370,10 +370,10 @@ class UsersController extends Controller
                     ->with('error', trans_choice('admin/users/message.error.delete_has_locations_var', $user->managedLocations()->count(), ['count'=> $user->managedLocations()->count()]));
             }
 
-//            if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
-//                return redirect()->route('users.index')
-//                    ->with('error', trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()]));
-//            }
+            if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
+                return redirect()->route('users.index')
+                    ->with('error', trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()]));
+            }
 
             // Delete the user
             $user->delete();

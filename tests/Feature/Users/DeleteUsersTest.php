@@ -18,10 +18,12 @@ class DeleteUsersTest extends TestCase
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($manager->isDeletable());
 
-        $this->actingAs(User::factory()->deleteUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->delete(route('users.destroy', $manager->id))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Error');
     }
 
     public function testDisallowUserDeletionIfStillManagingLocations()
@@ -31,10 +33,12 @@ class DeleteUsersTest extends TestCase
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($manager->isDeletable());
 
-        $this->actingAs(User::factory()->deleteUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->delete(route('users.destroy', $manager->id))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
+
+           $this->followRedirects($response)->assertSee('Error');
     }
 
     public function testAllowUserDeletionIfNotManagingLocations()
@@ -42,10 +46,13 @@ class DeleteUsersTest extends TestCase
         $manager = User::factory()->create();
         $this->actingAs(User::factory()->deleteUsers()->create())->assertTrue($manager->isDeletable());
 
-        $this->actingAs(User::factory()->deleteUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->delete(route('users.destroy', $manager->id))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Success');
+
     }
 
     public function testDisallowUserDeletionIfNoDeletePermissions()
