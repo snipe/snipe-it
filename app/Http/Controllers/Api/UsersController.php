@@ -539,30 +539,30 @@ class UsersController extends Controller
 
         if ($user) {
 
+            if ($user->id === Auth::id()) {
+                // Redirect to the user management page
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.cannot_delete_yourself')));
+            }
+
             if (($user->assets) && ($user->assets->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_assets_var', $user->assets()->count(), ['count'=> $user->assets()->count()])));
             }
 
             if (($user->licenses) && ($user->licenses->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_licenses_var', $user->licenses()->count(), ['count'=> $user->licenses()->count()])));
             }
 
             if (($user->accessories) && ($user->accessories->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_accessories_var', $user->accessories()->count(), ['count'=> $user->accessories()->count()])));
             }
 
             if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_locations_var', $user->managedLocations()->count(), ['count'=> $user->managedLocations()->count()])));
             }
-
-
 
             if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
-
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managesUsers()->count() . ' users that they manage.'));
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()])));
             }
-
-
 
             if ($user->delete()) {
 
