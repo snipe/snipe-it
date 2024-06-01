@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Api\Users;
+namespace Tests\Feature\Users;
 
 use App\Models\Location;
 use App\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-class UsersDeleteTest extends TestCase
+class DeleteUsersTest extends TestCase
 {
 
 
