@@ -66,7 +66,7 @@ class DeleteUsersTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionIfNotInSameCompanyIfNotSuperadmin()
+    public function testDisallowUserDeletionIfNotInSameCompanyAndNotSuperadmin()
     {
         $this->settings->enableMultipleFullCompanySupport();
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -93,6 +93,20 @@ class DeleteUsersTest extends TestCase
             ->json();
 
     }
+
+    public function testUsersCannotDeleteThemselves()
+    {
+        $user = User::factory()->deleteUsers()->create();
+        $this->actingAsForApi($user)
+            ->deleteJson(route('api.users.destroy', $user))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+
+    }
+
+
 
 
 

@@ -13,27 +13,44 @@ class DeleteUsersTest extends TestCase
 
     public function testDisallowUserDeletionIfStillManagingPeople()
     {
-        $manager = User::factory()->create(['first_name' => 'Manager', 'last_name' => 'McManagerson']);
-        User::factory()->create(['first_name' => 'Lowly', 'last_name' => 'Worker', 'manager_id' => $manager->id]);
+        $manager = User::factory()->create();
+        User::factory()->count(3)->create(['manager_id' => $manager->id]);
+
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($manager->isDeletable());
+
+        $this->actingAs(User::factory()->deleteUsers()->create())
+            ->delete(route('users.destroy', $manager->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
     }
 
     public function testDisallowUserDeletionIfStillManagingLocations()
     {
-        $manager = User::factory()->create(['first_name' => 'Manager', 'last_name' => 'McManagerson']);
-        Location::factory()->create(['manager_id' => $manager->id]);
+        $manager = User::factory()->create();
+        Location::factory()->count(3)->create(['manager_id' => $manager->id]);
+
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($manager->isDeletable());
+
+        $this->actingAs(User::factory()->deleteUsers()->create())
+            ->delete(route('users.destroy', $manager->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
     }
 
     public function testAllowUserDeletionIfNotManagingLocations()
     {
-        $manager = User::factory()->create(['first_name' => 'Manager', 'last_name' => 'McManagerson']);
+        $manager = User::factory()->create();
         $this->actingAs(User::factory()->deleteUsers()->create())->assertTrue($manager->isDeletable());
+
+        $this->actingAs(User::factory()->deleteUsers()->create())
+            ->delete(route('users.destroy', $manager->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
     }
 
     public function testDisallowUserDeletionIfNoDeletePermissions()
     {
-        $manager = User::factory()->create(['first_name' => 'Manager', 'last_name' => 'McManagerson']);
+        $manager = User::factory()->create();
         Location::factory()->create(['manager_id' => $manager->id]);
         $this->actingAs(User::factory()->editUsers()->create())->assertFalse($manager->isDeletable());
     }
