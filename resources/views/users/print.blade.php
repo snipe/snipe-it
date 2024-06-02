@@ -78,7 +78,10 @@
     {{ ($show_user->employee_num!='') ? ' (#'.$show_user->employee_num.') ' : '' }}
     {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
 </h3>
-<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}</body>
+<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
+
+</body>
+
     @if ($assets->count() > 0)
         @php
             $counter = 1;
@@ -356,26 +359,32 @@
         </table>
     @endif
 
+    <p></p>
+    <div class="pull-right">
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+            <i class="fa fa-eye-slash"></i>
+        </button>
+    </div>
+
     <table style="margin-top: 80px;">
-        <tr>
+        <tr class="collapse" id="eula-row">
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
-            <td style="padding-right: 10px; vertical-align: top;" colspan="3">
+            <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
                 @php
-                    $eulas = array_unique($eulas);
+                    if (!empty($eulas)) $eulas = array_unique($eulas);
                 @endphp
-		@foreach ($eulas as $eula)
-		    {!! $eula !!}
-		@endforeach
-	    </td>
+                @if (!empty($eulas))
+                    @foreach ($eulas as $key => $eula)
+                        {!! $eula !!}
+                    @endforeach
+                @endif
+            </td>
 	</tr>
-        <tr style="height: 80px;">
-            <td colspan="4"></td>
-        </tr>
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('general.signed_off_by') }}:</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td>_____________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td>_____________</td>
         </tr>
         <tr style="height: 80px;">
             <td></td>
@@ -385,9 +394,9 @@
         </tr>
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('admin/users/table.manager') }}:</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td>_____________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td>_____________</td>
         </tr>
         <tr>
             <td></td>
