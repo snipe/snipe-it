@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class UpdateUserApiTest extends TestCase
+class UpdateUserTest extends TestCase
 {
     public function testCanUpdateUserViaPatch()
     {
