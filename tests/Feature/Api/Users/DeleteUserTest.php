@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\LicenseSeat;
 use Tests\TestCase;
 
-class DeleteUsersTest extends TestCase
+class DeleteUserTest extends TestCase
 {
 
 

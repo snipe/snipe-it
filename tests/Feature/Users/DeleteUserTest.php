@@ -7,7 +7,7 @@ use App\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-class DeleteUsersTest extends TestCase
+class DeleteUserTest extends TestCase
 {
 
 

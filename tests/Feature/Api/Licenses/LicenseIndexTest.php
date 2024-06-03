@@ -7,7 +7,7 @@ use App\Models\License;
 use App\Models\User;
 use Tests\TestCase;
 
-class LicensesIndexTest extends TestCase
+class LicenseIndexTest extends TestCase
 {
     public function testLicensesIndexAdheresToCompanyScoping()
     {
