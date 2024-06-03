@@ -11,6 +11,9 @@ return [
     'activity_report'		=> 'گزارش فعالیت',
     'address'				=> 'آدرس',
     'admin'					=> 'مدیر',
+    'admin_tooltip'			=> 'This user has admin privileges',
+    'superuser'				=> 'Superuser',
+    'superuser_tooltip'		=> 'This user has superuser privileges',
     'administrator'			=> 'مدیر',
     'add_seats'             => 'اضافه شدن صندلی',
     'age'                   => "سن",
@@ -266,6 +269,8 @@ return [
     'requested_assets_menu' => 'دارایی های درخواستی
 ',
     'request_canceled'      => 'درخواست لغو شد',
+    'request_item'          => 'Request this item',
+    'external_link_tooltip' => 'External link to',
     'save'  				=> 'ذخیره کردن',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'انتخاب',
@@ -475,10 +480,10 @@ return [
 ',
     'checkout_tooltip' => 'این مورد را بررسی کنید
 ',
-    'checkin_tooltip' => 'این مورد را بررسی کنید
-',
+    'checkin_tooltip' => 'Check this item in so that it is available for re-issue, re-imaging, etc',
     'checkout_user_tooltip' => 'این مورد را برای یک کاربر بررسی کنید
 ',
+    'checkin_to_diff_location' => 'You can choose to check this asset in to a location other than this asset\'s default location of :default_location if one is set',
     'maintenance_mode'      => 'این سرویس به طور موقت برای به روز رسانی سیستم در دسترس نیست. لطفاً بعداً دوباره بررسی کنید.
 ',
     'maintenance_mode_title' => 'سرویس موقتا در دسترس نیست.',
@@ -591,6 +596,8 @@ return [
         'address2' => 'Address Line 2',
         'import_note' => 'Imported using csv importer',
     ],
+    'remove_customfield_association' => 'Remove this field from the fieldset. This will not delete the custom field, only this field\'s association with this fieldset.',
+    'checked_out_to_fields' => 'Checked Out To Fields',
     'percent_complete' => '% تکمیل',
     'uploading' => 'Uploading... ',
     'upload_error' => 'Error uploading file. Please check that there are no empty rows and that no column names are duplicated.',
