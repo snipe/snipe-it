@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 
-class AssetUpdateTest extends TestCase
+class UpdateAssetTest extends TestCase
 {
     public function testEncryptedCustomFieldCanBeUpdated()
     {
