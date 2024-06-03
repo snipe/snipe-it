@@ -10,6 +10,7 @@ use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Testing\TestResponse;
 use PDOException;
@@ -220,7 +221,7 @@ class ShowSetUpPageTest extends TestCase
 
         Http::fake([URL::to('.env') => fn () => throw new ConnectionException('Some curl error message.')]);
 
-        Event::fake();
+        Log::setEventDispatcher(Event::fake());
 
         $this->getSetUpPageResponse()->assertOk();
 
