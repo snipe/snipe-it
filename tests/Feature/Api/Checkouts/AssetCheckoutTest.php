@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\Assets;
+namespace Tests\Feature\Api\Checkouts;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;

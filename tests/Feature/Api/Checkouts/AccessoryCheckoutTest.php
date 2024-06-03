@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\Accessories;
+namespace Tests\Feature\Api\Checkouts;
 
 use App\Models\Accessory;
 use App\Models\Actionlog;

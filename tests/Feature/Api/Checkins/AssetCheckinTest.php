@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\Assets;
+namespace Tests\Feature\Api\Checkins;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
