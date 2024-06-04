@@ -311,7 +311,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            window.livewire.on('openModal', () => {
+            Livewire.on('openModal', () => {
                 $('#modal-create-client').modal('show').on('shown.bs.modal', function() {
                     $(this).find('[autofocus]').focus();
                 });
