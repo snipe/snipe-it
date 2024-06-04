@@ -175,11 +175,6 @@
             var data = $('#select2').select2("val");
             @this.set('webhook_selected', data);
         });
-
-        // Re-render select2
-        window.livewire.hook('message.processed', function (el, component) {
-            $('.select2').select2();
-        });
     });
 
 
