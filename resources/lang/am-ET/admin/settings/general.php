@@ -105,6 +105,7 @@ return [
     'ldap_phone'                => 'LDAP Telephone Number',
     'ldap_jobtitle'             => 'LDAP Job Title',
     'ldap_country'              => 'LDAP Country',
+    'ldap_company'              => 'LDAP Company',
     'ldap_pword'                => 'LDAP Bind Password',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'LDAP Filter',
