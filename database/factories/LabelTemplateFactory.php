@@ -7,70 +7,54 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class LabelFactory extends Factory
+class LabelTemplateFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'name',
-            'page_format',
-            'page_orientation',
-            'column1_x',
-            'column2_x',
-            'row1_y',
-            'row2_y',
-            'label_width',
-            'label_height',
-            'barcode_size',
-            'barcode_margin',
-            'title_size',
-            'title_margin',
-            'field_size',
-            'field_margin',
-            'label_size',
-            'label_margin',
-            'tag_size',
-            'logo_max_width',
-            'logo_margin',
-            'measurement_unit',
-            'margin_top',
-            'margin_bottom',
-            'margin_left',
-            'margin_right',
-            'fields_supported',
-            'tag_option',
-            '1d_barcode_option',
-            '2d_barcode_option',
-            'logo_option',
-            'title_option',
-            'tape_height',
-            'tape_margin_sides',
-            'tape_margin_ends',
-            'tape_text_size_mod',
-            //
+            'name' => $this->faker->word,
+            'page_format' => 'LETTER',
+            'page_orientation' => 'P',
+            'column1_x' => $this->faker->randomFloat(2, 0, 6),
+            'column2_x' => $this->faker->randomFloat(2, 0, 6),
+            'row1_y' => $this->faker->randomFloat(2, 0, 6),
+            'row2_y' => $this->faker->randomFloat(2, 0, 6),
+            'label_width' => $this->faker->randomFloat(2, 0, 6),
+            'label_height' => $this->faker->randomFloat(2, 0, 6),
+            'barcode_size' => $this->faker->randomFloat(2, 0, 1),
+            'barcode_margin' => $this->faker->randomFloat(2, 0, 1),
+            'title_size' => $this->faker->randomFloat(2, 0, 1),
+            'title_margin' => $this->faker->randomFloat(2, 0, 1),
+            'field_size' => $this->faker->randomFloat(2, 0, 1),
+            'field_margin' => $this->faker->randomFloat(2, 0, 1),
+            'label_size' => $this->faker->randomFloat(2, 0, 1),
+            'label_margin' => $this->faker->randomFloat(2, 0, 1),
+            'tag_size' => $this->faker->randomFloat(2, 0, 1),
+            'logo_max_width' => $this->faker->randomFloat(2, 0, 6),
+            'logo_margin' => $this->faker->randomFloat(2, 0, 1),
+            'measurement_unit' => 'in',
+            'margin_top' => $this->faker->randomFloat(2, 0, 1),
+            'margin_bottom' => $this->faker->randomFloat(2, 0, 1),
+            'margin_left' => $this->faker->randomFloat(2, 0, 1),
+            'margin_right' => $this->faker->randomFloat(2, 0, 1),
+            'fields_supported' => 1,
+            'tag_option' => 0,
+            '1d_barcode_option' => 1,
+            '2d_barcode_option' => 0,
+            'logo_option' => 0,
+            'title_option' => 1,
+            'tape_height' => $this->faker->randomFloat(2, 0, 1),
+            'tape_margin_sides' => $this->faker->randomFloat(2, 0, 1),
+            'tape_margin_ends' => $this->faker->randomFloat(2, 0, 1),
+            'tape_text_size_mod' => $this->faker->randomFloat(2, 0, 1),
         ];
     }
-    public function loadLabels(){
-        return $this->state(
-            [
-                $this->avery5520Template(),
-                $this->avery5267Template(),
-                $this->averyL163Template(),
-                $this->averyL7162_2DTemplate(),
-                $this->averyL7162_1DTemplate(),
-                $this->brotherTze_12mmTemplate(),
-                $this->brotherTze_18mmTemplate(),
-                $this->brotherTze_24mmTemplate(),
-                $this->dymolabelWriter30252Template(),
-                $this->dymolabelWriter1933081Template(),
-                $this->dymolabelWriter2112283Template()
-            ]);
-    }
+
     public function avery5267Template() {
         return $this->state(function() {
             return [
