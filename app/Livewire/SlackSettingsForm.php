@@ -23,6 +23,8 @@ class SlackSettingsForm extends Component
 
     public Setting $setting;
 
+    public $save_button;
+
     public $webhook_endpoint_rules;
 
 
