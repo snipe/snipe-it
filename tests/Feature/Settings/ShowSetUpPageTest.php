@@ -3,14 +3,28 @@
 namespace Tests\Feature\Settings;
 
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\Client\Response;
+use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Testing\TestResponse;
 use PDOException;
 use Tests\TestCase;
 
 class ShowSetUpPageTest extends TestCase
 {
+    /**
+     * We do not want to make actual http request on every test to check .env file
+     * visibility because that can be really slow especially in some cases where an
+     * actual server is not running.
+     */
+    protected bool $preventStrayRequest = true;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -20,6 +34,10 @@ class ShowSetUpPageTest extends TestCase
 
     protected function getSetUpPageResponse(): TestResponse
     {
+        if ($this->preventStrayRequest) {
+            Http::fake([URL::to('.env') => Http::response(null, 404)]);
+        }
+
         return $this->get('/setup');
     }
 
@@ -137,5 +155,83 @@ class ShowSetUpPageTest extends TestCase
         $this->getSetUpPageResponse()->assertOk();
 
         $this->assertSeeEnvironmentMisconfigurationErrorMessage(false);
+    }
+
+    public function testWillCheckDotEnvFileVisibility(): void
+    {
+        $this->getSetUpPageResponse()->assertOk();
+
+        Http::assertSent(function (Request $request) {
+            $this->assertEquals('GET', $request->method());
+            $this->assertEquals(URL::to('.env'), $request->url());
+            return true;
+        });
+    }
+
+    /**
+     * @dataProvider willShowErrorWhenDotEnvFileIsAccessibleViaHttpData
+     */
+    public function testWillShowErrorWhenDotEnvFileIsAccessibleViaHttp(int $statusCode): void
+    {
+        $this->preventStrayRequest = false;
+
+        Http::fake([URL::to('.env') => Http::response(null, $statusCode)]);
+
+        $this->getSetUpPageResponse()->assertOk();
+
+        Http::assertSent(function (Request $request, Response $response) use ($statusCode) {
+            $this->assertEquals($statusCode, $response->status());
+            return true;
+        });
+
+        $this->assertSeeDotEnvFileExposedErrorMessage();
+    }
+
+    public static function willShowErrorWhenDotEnvFileIsAccessibleViaHttpData(): array
+    {
+        return collect([200, 202, 204, 206])
+            ->mapWithKeys(fn (int $code) => ["StatusCode: {$code}" => [$code]])
+            ->all();
+    }
+
+    protected function assertSeeDotEnvFileExposedErrorMessage(bool $shouldSee = true): void
+    {
+        $errorMessage = "We cannot determine if your config file is exposed to the outside world, so you will have to manually verify this. You don't ever want anyone able to see that file. Ever. Ever ever. An exposed <code>.env</code> file can disclose sensitive data about your system and database.";
+        $successMessage = "Sweet. It doesn't look like your <code>.env</code> file is exposed to the outside world. (You should double check this in a browser though. You don't ever want anyone able to see that file. Ever. Ever ever.) <a href=\"../../.env\">Click here to check now</a> (This should return a file not found or forbidden error.)";
+
+        if ($shouldSee) {
+            self::$latestResponse->assertSee($errorMessage, false)->assertDontSee($successMessage, false);
+
+            return;
+        }
+
+        self::$latestResponse->assertSee($successMessage, false)->assertDontSee($errorMessage, false);
+    }
+
+    public function testWillNotShowErrorWhenDotEnvFileIsNotAccessibleViaHttp(): void
+    {
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeDotEnvFileExposedErrorMessage(false);
+    }
+
+    public function testWillShowErrorWhenDotEnvFileVisibilityCheckRequestFails(): void
+    {
+        $this->preventStrayRequest = false;
+
+        Http::fake([URL::to('.env') => fn () => throw new ConnectionException('Some curl error message.')]);
+
+        Log::setEventDispatcher(Event::fake());
+
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeDotEnvFileExposedErrorMessage();
+
+        Event::assertDispatched(function (MessageLogged $event) {
+            $this->assertEquals('debug', $event->level);
+            $this->assertEquals('Some curl error message.', $event->message);
+
+            return true;
+        });
     }
 }
