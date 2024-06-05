@@ -49,6 +49,7 @@ class LabelTemplateFactory extends Factory
             'logo_option' => 0,
             'title_option' => 1,
             'tape_height' => $this->faker->randomFloat(2, 0, 1),
+            "tape_width" => null,
             'tape_margin_sides' => $this->faker->randomFloat(2, 0, 1),
             'tape_margin_ends' => $this->faker->randomFloat(2, 0, 1),
             'tape_text_size_mod' => $this->faker->randomFloat(2, 0, 1),
@@ -206,7 +207,7 @@ class LabelTemplateFactory extends Factory
     public function averyL163Template(){
         return $this->state(function() {
             return [
-                'name' => 'Avery L7162 1D Barcode',
+                'name' => 'Avery L163 1D Barcode',
                 'page_format' => 'A4',
                 'page_orientation' => 'P',
                 'column1_x' => 13.25,

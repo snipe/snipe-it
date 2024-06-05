@@ -14,17 +14,6 @@ class LabelTemplateSeeder extends Seeder
      */
     public function run(): void
     {
-        LabelTemplate::factory()->avery5267Template()->create();
-        LabelTemplate::factory()->avery5520Template()->create();
-        LabelTemplate::factory()->averyL163Template()->create();
-        LabelTemplate::factory()->averyL7162_2DTemplate()->create();
-        LabelTemplate::factory()->averyL7162_1DTemplate()->create();
-        LabelTemplate::factory()->brotherTze_12mmTemplate()->create();
-        LabelTemplate::factory()->brotherTze_18mmTemplate()->create();
-        LabelTemplate::factory()->brotherTze_24mmTemplate()->create();
-        LabelTemplate::factory()->dymolabelWriter30252Template()->create();
-        LabelTemplate::factory()->dymolabelWriter1933081Template()->create();
-        LabelTemplate::factory()->dymolabelWriter2112283Template()->create();
 
     }
 }
