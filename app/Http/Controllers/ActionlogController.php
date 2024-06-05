@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Actionlog;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 class ActionlogController extends Controller
 {
     public function displaySig($filename)
