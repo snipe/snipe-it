@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Users\Ui;
 
+use Tests\TestCase;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Accessory;
 use App\Models\User;
-use Tests\TestCase;
+
+use App\Models\Asset;
 
 class DeleteUserTest extends TestCase
 {
@@ -93,6 +95,22 @@ class DeleteUserTest extends TestCase
         Location::factory()->create(['manager_id' => $manager->id]);
         $this->actingAs(User::factory()->editUsers()->viewUsers()->create())->assertFalse($manager->isDeletable());
     }
+
+    public function testDisallowUserDeletionIfTheyStillHaveAssets()
+    {
+        $user = User::factory()->create();
+        Asset::factory()->count(6)->checkedOutToUser($user)->create();
+
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertFalse($user->isDeletable());
+
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $user->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Error');
+    }
+
 
     public function testUsersCannotDeleteThemselves()
     {
