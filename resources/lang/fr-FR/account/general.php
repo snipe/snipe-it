@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'Les jetons d\'API sont configurés pour expirer après:',
     'api_reference' => 'Veuillez consulter la <a href="https://snipe-it.readme.io/reference" target="_blank">documentation de référence des API</a> pour
                     trouver des points de terminaison spécifiques et des informations supplémentaires.',
+    'profile_updated' => 'Account successfully updated',
 );

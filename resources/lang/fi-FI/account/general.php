@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'API-tunnisteet vanhenevat:',
     'api_reference' => 'Tarkista <a href="https://snipe-it.readme.io/reference" target="_blank">API viite</a>
                     löydät erityisiä API päätepisteitä ja muuta API dokumentaatiota.',
+    'profile_updated' => 'Account successfully updated',
 );

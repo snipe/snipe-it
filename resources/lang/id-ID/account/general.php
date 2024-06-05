@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'Token API disetel kedaluwarsa dalam:',
     'api_reference' => 'Silakan periksa <a href="https://snipe-it.readme.io/reference" target="_blank">Referensi API</a> untuk
                     menemukan titik akhir API tertentu dan dokumentasi API tambahan.',
+    'profile_updated' => 'Account successfully updated',
 );

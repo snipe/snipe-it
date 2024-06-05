@@ -68,7 +68,7 @@ return [
     'footer_text'               => 'Dodatni tekst u futeru ',
     'footer_text_help'          => 'Ovaj tekst će se pojaviti u desnom podnožju. Veze su dozvoljene korišćenjem <a href="https://help.github.com/articles/github-flavored-markdovn/">Github flavored markdovn</a>. Prelomi redova, zaglavlja, slike itd. mogu dovesti do nepredvidivih rezultata.',
     'general_settings'			=> 'Osnovna podešavanja',
-    'general_settings_keywords' => 'podrška kompanije, potpis, prihvatanje, format e-poruke, format korisničkog imena, slike, po stranici, sličica, ugovoro korišćenju, gravatar, uslovi usluga, komandna tabla, privatnost',
+    'general_settings_keywords' => 'podrška kompanije, potpis, prihvatanje, format e-poruke, format korisničkog imena, slike, po stranici, sličica, ugovor o korišćenju, gravatar, uslovi usluga, komandna tabla, privatnost',
     'general_settings_help'     => 'Podrazumevani EULA i još mnogo toga',
     'generate_backup'			=> 'Generiši rezervnu kopiju',
     'google_workspaces'         => 'Google Workspaces',
