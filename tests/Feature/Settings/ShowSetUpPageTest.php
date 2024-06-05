@@ -25,13 +25,6 @@ class ShowSetUpPageTest extends TestCase
      */
     protected bool $preventStrayRequest = true;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $_SERVER['REQUEST_URI'] = '/setup';
-    }
-
     protected function getSetUpPageResponse(): TestResponse
     {
         if ($this->preventStrayRequest) {
@@ -233,5 +226,45 @@ class ShowSetUpPageTest extends TestCase
 
             return true;
         });
+    }
+
+    public function testWillShowErrorMessageWhenAppUrlIsNotSameWithPageUrl(): void
+    {
+        config(['app.url' => 'http://www.github.com']);
+
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeAppUrlMisconfigurationErrorMessage();
+    }
+
+    protected function assertSeeAppUrlMisconfigurationErrorMessage(bool $shouldSee = true): void
+    {
+        $url = URL::to('setup');
+
+        $errorMessage = "Uh oh! Snipe-IT thinks your URL is http://www.github.com/setup, but your real URL is {$url}";
+        $successMessage = 'That URL looks right! Good job!';
+
+        if ($shouldSee) {
+            self::$latestResponse->assertSee($errorMessage)->assertDontSee($successMessage);
+            return;
+        }
+
+        self::$latestResponse->assertSee($successMessage)->assertDontSee($errorMessage);
+    }
+
+    public function testWillNotShowErrorMessageWhenAppUrlIsSameWithPageUrl(): void
+    {
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeAppUrlMisconfigurationErrorMessage(false);
+    }
+
+    public function testWhenAppUrlContainsTrailingSlash(): void
+    {
+        config(['app.url' => 'http://www.github.com/']);
+
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeAppUrlMisconfigurationErrorMessage();
     }
 }
