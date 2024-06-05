@@ -99,7 +99,14 @@ class DeleteUserTest extends TestCase
     public function testDisallowUserDeletionIfTheyStillHaveAssets()
     {
         $user = User::factory()->create();
-        Asset::factory()->count(6)->checkedOutToUser($user)->create();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAssets()->create())
+            ->post(route('hardware.checkout.store', $asset->id), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+                'name' => 'Changed Name',
+            ]);
 
         $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertFalse($user->isDeletable());
 

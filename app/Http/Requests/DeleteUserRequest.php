@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 
 class DeleteUserRequest extends FormRequest
 {
+
+    protected $redirectRoute = 'users.index';
+
     /**
      * Determine if the user is authorized to make this request.
      */
