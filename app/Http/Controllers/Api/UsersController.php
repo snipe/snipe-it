@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\DeleteUserRequest;
 
 class UsersController extends Controller
 {
@@ -530,40 +531,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeleteUserRequest $request, $id)
     {
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc');
         $user = Company::scopeCompanyables($user)->find($id);
         $this->authorize('delete', $user);
 
+
         if ($user) {
-
-            if ($user->id === Auth::id()) {
-                // Redirect to the user management page
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.cannot_delete_yourself')));
-            }
-
-            if (($user->assets) && ($user->assets->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_assets_var', $user->assets()->count(), ['count'=> $user->assets()->count()])));
-            }
-
-            if (($user->licenses) && ($user->licenses->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_licenses_var', $user->licenses()->count(), ['count'=> $user->licenses()->count()])));
-            }
-
-            if (($user->accessories) && ($user->accessories->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_accessories_var', $user->accessories()->count(), ['count'=> $user->accessories()->count()])));
-            }
-
-            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_locations_var', $user->managedLocations()->count(), ['count'=> $user->managedLocations()->count()])));
-            }
-
-            if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()])));
-            }
-
+            
             if ($user->delete()) {
 
                 // Remove the user's avatar if they have one
@@ -579,7 +556,7 @@ class UsersController extends Controller
             }
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
     }
 
     /**
