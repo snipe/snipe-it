@@ -565,7 +565,7 @@ abstract class Importer
      */
     public function parseOrNullDate($field, $format = 'date') {
 
-        $format = 'Y-m-d';
+        $date_format = 'Y-m-d';
 
         if ($format == 'datetime') {
             $date_format = 'Y-m-d H:i:s';
@@ -577,7 +577,7 @@ abstract class Importer
                 $value = CarbonImmutable::parse($this->item[$field])->format($date_format);
                 return $value;
             } catch (\Exception $e) {
-                $this->log('Unable to parse date: ' . $this->item['next_audit_date']);
+                $this->log('Unable to parse date: ' . $this->item[$field]);
                 return null;
             }
         }
