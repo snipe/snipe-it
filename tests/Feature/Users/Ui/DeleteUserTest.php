@@ -4,6 +4,7 @@ namespace Tests\Feature\Users\Ui;
 
 use App\Models\LicenseSeat;
 use App\Models\Location;
+use App\Models\Accessory;
 use App\Models\User;
 use Tests\TestCase;
 
