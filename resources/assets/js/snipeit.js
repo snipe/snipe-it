@@ -613,24 +613,6 @@ function htmlEntities(str) {
  * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
  *    or just $this->getId() if not).
  */
-// $(function () {
-//     $('.livewire-select2').select2()
-//
-//     $(document).on('select2:select', '.livewire-select2', function (event) {
-//         var target = $(event.target)
-//         if(!event.target.name || !target.data('livewire-component')) {
-//             console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!")
-//             console.error("For data-livewire-component, you probably want to use $_instance->id or {{ $_instance->id }}, as appropriate")
-//             return false
-//         }
-//         window.livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value)
-//     })
-//
-//     window.livewire.hook('message.processed', function (el,component) {
-//         $('.livewire-select2').select2();
-//     });
-//
-// })
 document.addEventListener('livewire:init', () => {
     $('.livewire-select2').select2()
 
