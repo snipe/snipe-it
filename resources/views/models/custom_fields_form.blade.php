@@ -35,7 +35,6 @@
                   </label>
               </div>
           @endforeach
-
               @endif
 
 
