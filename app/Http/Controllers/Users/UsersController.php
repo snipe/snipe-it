@@ -341,8 +341,7 @@ class UsersController extends Controller
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc');
         $user = Company::scopeCompanyables($user)->find($id);
 
-
-        if ($user) {
+        if (($user) && ($user->deleted_at = '')) {
             // Delete the user
             $user->delete();
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
