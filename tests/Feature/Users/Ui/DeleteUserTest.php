@@ -15,7 +15,7 @@ class DeleteUserTest extends TestCase
     public function testDisallowUserDeletionIfStillManagingPeople()
     {
         $manager = User::factory()->create();
-        User::factory()->count(3)->create(['manager_id' => $manager->id]);
+        User::factory()->count(1)->create(['manager_id' => $manager->id]);
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($manager->isDeletable());
 
@@ -30,7 +30,7 @@ class DeleteUserTest extends TestCase
     public function testDisallowUserDeletionIfStillManagingLocations()
     {
         $manager = User::factory()->create();
-        Location::factory()->count(3)->create(['manager_id' => $manager->id]);
+        Location::factory()->count(2)->create(['manager_id' => $manager->id]);
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($manager->isDeletable());
 
@@ -45,7 +45,7 @@ class DeleteUserTest extends TestCase
     public function testDisallowUserDeletionIfStillHaveAccessories()
     {
         $user = User::factory()->create();
-        Accessory::factory()->count(3)->checkedOutToUser()->create($user);
+        Accessory::factory()->count(3)->checkedOutToUser($user)->create();
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($user->isDeletable());
 
@@ -60,7 +60,7 @@ class DeleteUserTest extends TestCase
     public function testDisallowUserDeletionIfStillHaveLicenses()
     {
         $user = User::factory()->create();
-        LicenseSeat::factory()->count(3)->create(['assigned_to' => $user->id]);
+        LicenseSeat::factory()->count(4)->create(['assigned_to' => $user->id]);
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($user->isDeletable());
 
