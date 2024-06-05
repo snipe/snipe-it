@@ -23,6 +23,7 @@ use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Livewire\Importer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -262,7 +263,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 */
 
 Route::get('/import',
-    \App\Livewire\Importer::class
+    Importer::class
 )->middleware('auth')->name('imports.index');
 
 /*
