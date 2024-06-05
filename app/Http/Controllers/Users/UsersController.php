@@ -227,7 +227,7 @@ class UsersController extends Controller
         $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->find($id)->withTrashed();
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
 
         // User is valid - continue...
         if ($user) {
