@@ -45,7 +45,7 @@ class DeleteUserTest extends TestCase
     public function testDisallowUserDeletionIfStillHaveAccessories()
     {
         $user = User::factory()->create();
-        Accessory::factory()->count(3)->create(['assigned_to' => $user->id]);
+        Accessory::factory()->count(3)->checkedOutToUser()->create($user);
 
         $this->actingAs(User::factory()->deleteUsers()->create())->assertFalse($user->isDeletable());
 
