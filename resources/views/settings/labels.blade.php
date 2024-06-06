@@ -90,7 +90,11 @@
                                     ></table>
                                     <script>
                                         document.addEventListener('DOMContentLoaded', () => {
+                                            const chosenLabel = "{{ old('label2_template', $chosenLabel ?? '') }}";
                                             $('#label2TemplateTable').on('load-success.bs.table', (e) => {
+                                                if (chosenLabel) {
+                                                    $('input[name="label2_template"][value="' + chosenLabel + '"]').prop('checked', true);
+                                                }
                                                 let form = document.getElementById('settingsForm');
                                                 form.dispatchEvent(new Event('change'));
                                             });
