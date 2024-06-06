@@ -16,6 +16,7 @@ class CreateLabelTemplatesTable extends Migration
         Schema::create('label_templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('label_type')->nullable();
             $table->string('page_format')->nullable();
             $table->string('page_orientation')->nullable();
             $table->decimal('column1_x',6, 3)->nullable();
@@ -23,6 +24,7 @@ class CreateLabelTemplatesTable extends Migration
             $table->decimal('row1_y', 6, 3)->nullable();
             $table->decimal('row2_y', 6, 3)->nullable();
             $table->decimal('label_width', 6, 3)->nullable();
+            $table->decimal('label_border', 6, 3)->nullable();
             $table->decimal('label_height', 6, 3)->nullable();
             $table->decimal('barcode_size', 6, 3)->nullable();
             $table->decimal('barcode_margin', 6, 3)->nullable();
@@ -62,6 +64,7 @@ class CreateLabelTemplatesTable extends Migration
             [
                 [
                     'name' => 'Avery 5267',
+                    'label_type' =>'',
                     'page_format' => 'LETTER',
                     'page_orientation' => 'P',
                     'column1_x' => 21.6,
@@ -69,6 +72,7 @@ class CreateLabelTemplatesTable extends Migration
                     'row1_y' => 36.1,
                     'row2_y' => 72.1,
                     'label_width' => 126,
+                    'label_border' => 0,
                     'label_height' => 36,
                     'barcode_size' => .175,
                     'barcode_margin' => 0,
@@ -79,7 +83,6 @@ class CreateLabelTemplatesTable extends Migration
                     'field_margin' => null,
                     'label_size' => null,
                     'label_margin' => null,
-                    'tag_size' => null,
                     'logo_max_width' => null,
                     'logo_margin' => null,
                     'measurement_unit' => 'in',
@@ -88,9 +91,10 @@ class CreateLabelTemplatesTable extends Migration
                     'margin_left' => .04,
                     'margin_right' => .04,
                     'fields_supported' => 1,
+                    'tag_align' => null,
                     'tag_option' => 0,
                     'tag_position' => null,
-                    'tag_align' => null,
+                    'tag_size' => null,
                     'one_d_barcode_option' => 1,
                     'two_d_barcode_option' => 0,
                     'logo_option' => 0,
@@ -105,6 +109,7 @@ class CreateLabelTemplatesTable extends Migration
                 ],
                 [
                     'name' => 'Avery 5520',
+                    'label_type' =>'',
                     'page_format' => 'LETTER',
                     'page_orientation' => 'P',
                     'column1_x' => 13.55,
@@ -112,6 +117,7 @@ class CreateLabelTemplatesTable extends Migration
                     'row1_y' => 36.1,
                     'row2_y' => 108.1,
                     'label_width' => 189.35,
+                    'label_border' => 0,
                     'label_height' => 72,
                     'barcode_size' => null,
                     'barcode_margin' => .075,
@@ -148,6 +154,7 @@ class CreateLabelTemplatesTable extends Migration
                 ],
                 [
                     'name' => 'Avery L7162 2D Barcode',
+                    'label_type' =>'',
                     'page_format' => 'A4',
                     'page_orientation' => 'P',
                     'column1_x' => 13.25,
@@ -155,6 +162,7 @@ class CreateLabelTemplatesTable extends Migration
                     'row1_y' => 37,
                     'row2_y' => 133,
                     'label_width' => 280.8,
+                    'label_border' => 0,
                     'label_height' => 96,
                     'barcode_size' => null,
                     'barcode_margin' => 1.6,
@@ -191,6 +199,7 @@ class CreateLabelTemplatesTable extends Migration
                 ],
                 [
                     'name' => 'Avery L7162 1D Barcode',
+                    'label_type' =>'',
                     'page_format' => 'A4',
                     'page_orientation' => 'P',
                     'column1_x' => 13.25,
@@ -198,6 +207,7 @@ class CreateLabelTemplatesTable extends Migration
                     'row1_y' => 37,
                     'row2_y' => 133,
                     'label_width' => 280.8,
+                    'label_border' => 0,
                     'label_height' => 96,
                     'barcode_size' => 6,
                     'barcode_margin' => 1.6,
@@ -234,6 +244,7 @@ class CreateLabelTemplatesTable extends Migration
                 ],
                 [
                     'name' => 'Avery L163',
+                    'label_type' =>'',
                     'page_format' => 'A4',
                     'page_orientation' => 'P',
                     'column1_x' => 13.25,
@@ -241,6 +252,7 @@ class CreateLabelTemplatesTable extends Migration
                     'row1_y' => 43.05,
                     'row2_y' => 151.05,
                     'label_width' => 280.8,
+                    'label_border' => 0,
                     'label_height' => 108,
                     'barcode_size' => null,
                     'barcode_margin' => 1.8,
@@ -277,6 +289,7 @@ class CreateLabelTemplatesTable extends Migration
                 ],
                 [
                     "name" => "Brother TZE 12mm",
+                    'label_type' =>'',
                     "page_format" => null,
                     "page_orientation" => "P",
                     "column1_x" => null,
@@ -284,6 +297,7 @@ class CreateLabelTemplatesTable extends Migration
                     "row1_y" => null,
                     "row2_y" => null,
                     "label_width" => null,
+                    "label_border" => null,
                     "label_height" => null,
                     "barcode_size" => 1.00,
                     "barcode_margin" => 0.30,
@@ -315,12 +329,12 @@ class CreateLabelTemplatesTable extends Migration
                     'columns' => null,
                     'rows' => null,
                     'title_align' => null,
-                    'barcode_size' => null,
                     'tag_position' => null,
                     'tag_align' => null
                 ],
                 [
                     "name" => "Brother TZE 18mm",
+                    'label_type' =>'',
                     "page_format" => null,
                     "page_orientation" => "P",
                     "column1_x" => null,
@@ -328,6 +342,7 @@ class CreateLabelTemplatesTable extends Migration
                     "row1_y" => null,
                     "row2_y" => null,
                     "label_width" => null,
+                    "label_border" => null,
                     "label_height" => null,
                     "barcode_size" => 3.20,
                     "barcode_margin" => 0.30,
@@ -359,12 +374,12 @@ class CreateLabelTemplatesTable extends Migration
                     'columns' => null,
                     'rows' => null,
                     'title_align' => null,
-                    'barcode_size' => null,
                     'tag_position' => null,
                     'tag_align' => null
                 ],
                 [
                     "name" => "Brother TZE 24mm",
+                    'label_type' =>'',
                     "page_format" => null,
                     "page_orientation" => "P",
                     "column1_x" => null,
@@ -372,6 +387,7 @@ class CreateLabelTemplatesTable extends Migration
                     "row1_y" => null,
                     "row2_y" => null,
                     "label_width" => null,
+                    "label_border" => null,
                     "label_height" => null,
                     "barcode_size" => null,
                     "barcode_margin" => 1.40,
@@ -403,12 +419,12 @@ class CreateLabelTemplatesTable extends Migration
                     'columns' => null,
                     'rows' => null,
                     'title_align' => null,
-                    'barcode_size' => null,
                     'tag_position' => null,
                     'tag_align' => null
                 ],
                 [
                     "name" => "Dymo Label Writer 30252",
+                    'label_type' =>'',
                     "page_format" => null,
                     "page_orientation" => "P",
                     "column1_x" => null,
@@ -416,6 +432,7 @@ class CreateLabelTemplatesTable extends Migration
                     "row1_y" => null,
                     "row2_y" => null,
                     "label_width" => null,
+                    "label_border" => null,
                     "label_height" => null,
                     "barcode_size" => null,
                     "barcode_margin" => 1.80,
@@ -447,12 +464,12 @@ class CreateLabelTemplatesTable extends Migration
                     'columns' => null,
                     'rows' => null,
                     'title_align' => null,
-                    'barcode_size' => null,
                     'tag_position' => null,
                     'tag_align' => null
                 ],
                 [
                     "name" => "Dymo Label Writer 1933081",
+                    'label_type' =>'',
                     "page_format" => null,
                     "page_orientation" => "P",
                     "column1_x" => null,
@@ -460,6 +477,7 @@ class CreateLabelTemplatesTable extends Migration
                     "row1_y" => null,
                     "row2_y" => null,
                     "label_width" => null,
+                    "label_border" => null,
                     "label_height" => null,
                     "barcode_size" => null,
                     "barcode_margin" => 1.80,
@@ -491,12 +509,12 @@ class CreateLabelTemplatesTable extends Migration
                     'columns' => null,
                     'rows' => null,
                     'title_align' => null,
-                    'barcode_size' => null,
                     'tag_position' => null,
                     'tag_align' => null
                 ],
                 [
                     "name" => "Dymo Label Writer 2112283",
+                    'label_type' =>'',
                     "page_format" => null,
                     "page_orientation" => "P",
                     "column1_x" => null,
@@ -504,6 +522,7 @@ class CreateLabelTemplatesTable extends Migration
                     "row1_y" => null,
                     "row2_y" => null,
                     "label_width" => null,
+                    "label_border" => null,
                     "label_height" => null,
                     "barcode_size" => null,
                     "barcode_margin" => 1.80,
@@ -535,7 +554,6 @@ class CreateLabelTemplatesTable extends Migration
                     'columns' => null,
                     'rows' => null,
                     'title_align' => null,
-                    'barcode_size' => null,
                     'tag_position' => null,
                     'tag_align' => null
                 ]

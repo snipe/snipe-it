@@ -54,7 +54,7 @@ class LabelsTransformer
                 'label_margin_left'   => $label->margin_left,
                 'label_margin_right'  => $label->margin_right,
 
-                'labels_per_page' => $label->getLabelsPerPage(),
+                'labels_per_page' => $label->labelsPerPage(),
                 'label_border' => $label->getLabelBorder(),
             ];
         }
@@ -63,8 +63,8 @@ class LabelsTransformer
             $array['rectanglesheet_info'] = [
                 'columns' => $label->columns(),
                 'rows'    => $label->rows(),
-                'column_spacing' => $label->getLabelColumnSpacing(),
-                'row_spacing'    => $label->getLabelRowSpacing(),
+                'column_spacing' => $label->columnSpacing(),
+                'row_spacing'    => $label->rowSpacing(),
             ];
         }
 

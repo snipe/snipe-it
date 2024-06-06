@@ -12,23 +12,24 @@ class LabelTemplate extends Model
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'page_format' => 'required|string',
-        'page_orientation' => 'required|string',
-        'column1_x' => 'required|numeric|lt:column2_x',
-        'column2_x' => 'required|numeric|gt:column1_x',
+        'page_format' => 'string',
+        'page_orientation' => 'string',
+        'column1_x' => 'numeric|lt:column2_x',
+        'column2_x' => 'numeric|gt:column1_x',
         'row1_y' => 'nullable|numeric',
         'row2_y' => 'nullable|numeric|gt:row1_y',
-        'label_width' => 'required|numeric',
-        'label_height' => 'required|numeric',
+        'label_width' => 'numeric',
+        'label_border' => 'numeric',
+        'label_height' => 'numeric',
         'barcode_size' => 'nullable|numeric',
         'barcode_margin' => 'nullable|numeric',
         'title_size' => 'nullable|numeric',
         'title_margin' => 'nullable|numeric',
+        'title_align' => 'string',
         'field_size' => 'nullable|numeric',
         'field_margin' => 'nullable|numeric',
         'label_size' => 'nullable|numeric',
         'label_margin' => 'nullable|numeric',
-        'tag_size' => 'nullable|numeric',
         'logo_max_width' => 'nullable|numeric',
         'logo_margin' => 'nullable|numeric',
         'measurement_unit' => 'required|string',
@@ -37,12 +38,16 @@ class LabelTemplate extends Model
         'margin_left' => 'nullable|numeric',
         'margin_right' => 'nullable|numeric',
         'fields_supported' => 'nullable|integer',
+        'tag_align' => 'nullable|string',
         'tag_option' => 'nullable|boolean',
+        'tag_position' => 'nullable|string',
+        'tag_size' => 'nullable|numeric',
         'one_d_barcode_option' => 'nullable|boolean',
         'two_d_barcode_option' => 'nullable|boolean',
         'logo_option' => 'nullable|boolean',
         'title_option' => 'nullable|boolean',
         'tape_height' => 'nullable|numeric',
+        'tape_width' => 'nullable|numeric',
         'tape_margin_sides' => 'nullable|numeric',
         'tape_margin_ends' => 'nullable|numeric',
         'tape_text_size_mod' => 'nullable|numeric',
@@ -60,8 +65,10 @@ class LabelTemplate extends Model
         'row2_y',
         'label_width',
         'label_height',
+        'label_border',
         'barcode_size',
         'barcode_margin',
+        'title_align',
         'title_size',
         'title_margin',
         'field_size',
@@ -78,11 +85,14 @@ class LabelTemplate extends Model
         'margin_right',
         'fields_supported',
         'tag_option',
+        'tag_position',
+        'tag_align',
         'one_d_barcode_option',
         'two_d_barcode_option',
         'logo_option',
         'title_option',
         'tape_height',
+        'tape_width',
         'tape_margin_sides',
         'tape_margin_ends',
         'tape_text_size_mod',
@@ -93,6 +103,10 @@ class LabelTemplate extends Model
     public function labelsPerPage()  {
 
         return $this->columns * $this->rows;
+    }
+    public function labelBorder()  {
+
+        return $this->label_border;
     }
 
     public function labelPosition($index)  {
@@ -129,7 +143,7 @@ class LabelTemplate extends Model
      *
      * @return float The column spacing in points.
      */
-    public function columnSpacingPt() {
+    public function columnSpacing() {
         $columnSpacingPT = ($this->column2_x - $this->column1_x - $this->label_width);
         return Helper::convertUnit($columnSpacingPT, 'pt', $this->measurement_unit);
     }
@@ -139,7 +153,7 @@ class LabelTemplate extends Model
      *
      * @return float The row spacing in points.
      */
-    public function rowSpacingPt() {
+    public function rowSpacing() {
         $rowSpacingPT = ($this->row2_y - $this->row1_y - $this->label_height);
         return Helper::convertUnit($rowSpacingPT, 'pt', $this->measurement_unit);
     }
