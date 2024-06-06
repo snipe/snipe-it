@@ -66,10 +66,10 @@
 
                             <!-- Template -->
                             <div class="form-group{{ $errors->has('label2_template') ? ' has-error' : '' }}">
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-md-offset-3">
                                     @include('partials.label2-preview')
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-9 col-md-offset-3">
                                     <table
                                         data-click-to-select="true"
                                         data-columns="{{ \App\Presenters\LabelPresenter::dataTableLayout() }}"
