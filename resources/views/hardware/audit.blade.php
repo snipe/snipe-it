@@ -95,7 +95,7 @@
                                 <div class="col-md-12">
                                     <ul class="treeview-menu" style="display: none; padding-top: 10px;" id="optional_details">
                                         <li>
-                                            @include("models/custom_fields_form",["model" => $asset->model])
+                                            @include("models/custom_fields_form",["model" => $asset->model, "item"=>$asset])
                                         </li>
                                     </ul>
                                 </div>
