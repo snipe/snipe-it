@@ -28,11 +28,14 @@ class CreateLabelTemplatesTable extends Migration
             $table->decimal('barcode_margin', 6, 3)->nullable();
             $table->decimal('title_size', 6, 3)->nullable();
             $table->decimal('title_margin', 6, 3)->nullable();
+            $table->char('title_align', 1)->nullable();
             $table->decimal('field_size', 6, 3)->nullable();
             $table->decimal('field_margin', 6, 3)->nullable();
             $table->decimal('label_size', 6, 3)->nullable();
             $table->decimal('label_margin', 6, 3)->nullable();
             $table->decimal('tag_size', 6, 3)->nullable();
+            $table->char('tag_align', 1)->nullable();
+            $table->string('tag_position')->nullable();
             $table->decimal('logo_max_width', 6, 3)->nullable();
             $table->decimal('logo_margin', 6, 3)->nullable();
             $table->string('measurement_unit')->nullable();
@@ -42,8 +45,8 @@ class CreateLabelTemplatesTable extends Migration
             $table->decimal('margin_right', 6, 3)->nullable();
             $table->integer('fields_supported')->default(1);
             $table->boolean('tag_option')->nullable();
-            $table->boolean('1d_barcode_option')->nullable();
-            $table->boolean('2d_barcode_option')->nullable();
+            $table->boolean('one_d_barcode_option')->nullable();
+            $table->boolean('two_d_barcode_option')->nullable();
             $table->boolean('logo_option')->nullable();
             $table->boolean('title_option')->nullable();
             $table->decimal('tape_height', 6, 3)->nullable();
@@ -51,6 +54,8 @@ class CreateLabelTemplatesTable extends Migration
             $table->decimal('tape_margin_sides', 6, 3)->nullable();
             $table->decimal('tape_margin_ends', 6, 3)->nullable();
             $table->decimal('tape_text_size_mod', 6, 3)->nullable();
+            $table->integer('columns')->nullable();
+            $table->integer('rows')->nullable();
             $table->timestamps();
         });
         $defaults =
@@ -69,6 +74,7 @@ class CreateLabelTemplatesTable extends Migration
                     'barcode_margin' => 0,
                     'title_size' => .14,
                     'title_margin' => null,
+                    'title_align' => 'L',
                     'field_size' => .15,
                     'field_margin' => null,
                     'label_size' => null,
@@ -83,8 +89,10 @@ class CreateLabelTemplatesTable extends Migration
                     'margin_right' => .04,
                     'fields_supported' => 1,
                     'tag_option' => 0,
-                    '1d_barcode_option' => 1,
-                    '2d_barcode_option' => 0,
+                    'tag_position' => null,
+                    'tag_align' => null,
+                    'one_d_barcode_option' => 1,
+                    'two_d_barcode_option' => 0,
                     'logo_option' => 0,
                     'title_option' => 1,
                     'tape_height' => null,
@@ -92,6 +100,8 @@ class CreateLabelTemplatesTable extends Migration
                     'tape_margin_sides' => null,
                     'tape_margin_ends' => null,
                     'tape_text_size_mod' => null,
+                    'columns' => 4,
+                    'rows' => 20,
                 ],
                 [
                     'name' => 'Avery 5520',
@@ -107,11 +117,14 @@ class CreateLabelTemplatesTable extends Migration
                     'barcode_margin' => .075,
                     'title_size' => .14,
                     'title_margin' => .04,
+                    'title_align' => 'C',
                     'field_size' => .15,
                     'field_margin' => null,
                     'label_size' => .09,
                     'label_margin' => -.015,
                     'tag_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null,
                     'logo_max_width' => null,
                     'logo_margin' => null,
                     'measurement_unit' => 'in',
@@ -121,8 +134,8 @@ class CreateLabelTemplatesTable extends Migration
                     'margin_right' => .06,
                     'fields_supported' => 3,
                     'tag_option' => 0,
-                    '1d_barcode_option' => 0,
-                    '2d_barcode_option' => 1,
+                    'one_d_barcode_option' => 0,
+                    'two_d_barcode_option' => 1,
                     'logo_option' => 0,
                     'title_option' => 1,
                     'tape_height' => null,
@@ -130,6 +143,8 @@ class CreateLabelTemplatesTable extends Migration
                     'tape_margin_sides' => null,
                     'tape_margin_ends' => null,
                     'tape_text_size_mod' => null,
+                    'columns' => 3,
+                    'rows' => 10,
                 ],
                 [
                     'name' => 'Avery L7162 2D Barcode',
@@ -145,6 +160,7 @@ class CreateLabelTemplatesTable extends Migration
                     'barcode_margin' => 1.6,
                     'title_size' => 4.2,
                     'title_margin' => 1.4,
+                    'title_align' => 'L',
                     'field_size' => 4.6,
                     'field_margin' => .3,
                     'label_size' => 2.2,
@@ -159,8 +175,10 @@ class CreateLabelTemplatesTable extends Migration
                     'margin_right' => 1,
                     'fields_supported' => 4,
                     'tag_option' => 1,
-                    '1d_barcode_option' => 0,
-                    '2d_barcode_option' => 1,
+                    'tag_position' => 'bottom',
+                    'tag_align' => 'R',
+                    'one_d_barcode_option' => 0,
+                    'two_d_barcode_option' => 1,
                     'logo_option' => 0,
                     'title_option' => 1,
                     'tape_height' => null,
@@ -168,9 +186,54 @@ class CreateLabelTemplatesTable extends Migration
                     'tape_margin_sides' => null,
                     'tape_margin_ends' => null,
                     'tape_text_size_mod' => null,
+                    'columns' => 2,
+                    'rows' => 8,
                 ],
                 [
-                    'name' => 'Avery L163 1D Barcode',
+                    'name' => 'Avery L7162 1D Barcode',
+                    'page_format' => 'A4',
+                    'page_orientation' => 'P',
+                    'column1_x' => 13.25,
+                    'column2_x' => 301.25,
+                    'row1_y' => 37,
+                    'row2_y' => 133,
+                    'label_width' => 280.8,
+                    'label_height' => 96,
+                    'barcode_size' => 6,
+                    'barcode_margin' => 1.6,
+                    'title_size' => 4.2,
+                    'title_margin' => 1.2,
+                    'title_align' => 'L',
+                    'field_size' => 4.2,
+                    'field_margin' => .3,
+                    'label_size' => 2.2,
+                    'label_margin' => -.5,
+                    'tag_size' => 3.2,
+                    'logo_max_width' => 25,
+                    'logo_margin' => 2.2,
+                    'measurement_unit' => 'mm',
+                    'margin_top' => 1,
+                    'margin_bottom' => 1,
+                    'margin_left' => 1,
+                    'margin_right' => 1,
+                    'fields_supported' => 4,
+                    'tag_option' => 1,
+                    'tag_position' => 'bottom',
+                    'tag_align' => 'R',
+                    'one_d_barcode_option' => 1,
+                    'two_d_barcode_option' => 0,
+                    'logo_option' => 0,
+                    'title_option' => 1,
+                    'tape_height' => null,
+                    "tape_width" => null,
+                    'tape_margin_sides' => null,
+                    'tape_margin_ends' => null,
+                    'tape_text_size_mod' => null,
+                    'columns' => 2,
+                    'rows' => 8,
+                ],
+                [
+                    'name' => 'Avery L163',
                     'page_format' => 'A4',
                     'page_orientation' => 'P',
                     'column1_x' => 13.25,
@@ -183,6 +246,7 @@ class CreateLabelTemplatesTable extends Migration
                     'barcode_margin' => 1.8,
                     'title_size' => 5,
                     'title_margin' => 1.8,
+                    'title_align' => 'C',
                     'field_size' => 4.8,
                     'field_margin' => .3,
                     'label_size' => 2.35,
@@ -197,8 +261,10 @@ class CreateLabelTemplatesTable extends Migration
                     'margin_right' => 1,
                     'fields_supported' => 4,
                     'tag_option' => 1,
-                    '1d_barcode_option' => 0,
-                    '2d_barcode_option' => 1,
+                    'tag_align' => 'R',
+                    'tag_position' => 'bottom',
+                    'one_d_barcode_option' => 0,
+                    'two_d_barcode_option' => 1,
                     'logo_option' => 0,
                     'title_option' => 1,
                     'tape_height' => null,
@@ -206,6 +272,8 @@ class CreateLabelTemplatesTable extends Migration
                     'tape_margin_sides' => null,
                     'tape_margin_ends' => null,
                     'tape_text_size_mod' => null,
+                    'columns' => 2,
+                    'rows' => 7,
                 ],
                 [
                     "name" => "Brother TZE 12mm",
@@ -235,8 +303,8 @@ class CreateLabelTemplatesTable extends Migration
                     "margin_right" => null,
                     "fields_supported" => 1,
                     "tag_option" => 1,
-                    "1d_barcode_option" => 1,
-                    "2d_barcode_option" => 0,
+                    "one_d_barcode_option" => 1,
+                    "two_d_barcode_option" => 0,
                     "logo_option" => 0,
                     "title_option" => 0,
                     "tape_height" => 12.00,
@@ -244,6 +312,12 @@ class CreateLabelTemplatesTable extends Migration
                     "tape_margin_sides" => 3.20,
                     "tape_margin_ends" => 3.20,
                     "tape_text_size_mod" => 1.00,
+                    'columns' => null,
+                    'rows' => null,
+                    'title_align' => null,
+                    'barcode_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null
                 ],
                 [
                     "name" => "Brother TZE 18mm",
@@ -273,8 +347,8 @@ class CreateLabelTemplatesTable extends Migration
                     "margin_right" => null,
                     "fields_supported" => 1,
                     "tag_option" => 1,
-                    "1d_barcode_option" => 1,
-                    "2d_barcode_option" => 0,
+                    "one_d_barcode_option" => 1,
+                    "two_d_barcode_option" => 0,
                     "logo_option" => 0,
                     "title_option" => 0,
                     "tape_height" => 18.00,
@@ -282,6 +356,12 @@ class CreateLabelTemplatesTable extends Migration
                     "tape_margin_sides" => 3.20,
                     "tape_margin_ends" => 3.20,
                     "tape_text_size_mod" => 1.00,
+                    'columns' => null,
+                    'rows' => null,
+                    'title_align' => null,
+                    'barcode_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null
                 ],
                 [
                     "name" => "Brother TZE 24mm",
@@ -311,8 +391,8 @@ class CreateLabelTemplatesTable extends Migration
                     "margin_right" => null,
                     "fields_supported" => 3,
                     "tag_option" => 1,
-                    "1d_barcode_option" => 0,
-                    "2d_barcode_option" => 1,
+                    "one_d_barcode_option" => 0,
+                    "two_d_barcode_option" => 1,
                     "logo_option" => 0,
                     "title_option" => 1,
                     "tape_height" => 24.00,
@@ -320,6 +400,12 @@ class CreateLabelTemplatesTable extends Migration
                     "tape_margin_sides" => 3.20,
                     "tape_margin_ends" => 3.20,
                     "tape_text_size_mod" => null,
+                    'columns' => null,
+                    'rows' => null,
+                    'title_align' => null,
+                    'barcode_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null
                 ],
                 [
                     "name" => "Dymo Label Writer 30252",
@@ -349,8 +435,8 @@ class CreateLabelTemplatesTable extends Migration
                     "margin_right" => null,
                     "fields_supported" => 3,
                     "tag_option" => 1,
-                    "1d_barcode_option" => 1,
-                    "2d_barcode_option" => 1,
+                    "one_d_barcode_option" => 1,
+                    "two_d_barcode_option" => 1,
                     "logo_option" => 0,
                     "title_option" => 1,
                     "tape_height" => 1.15,
@@ -358,6 +444,12 @@ class CreateLabelTemplatesTable extends Migration
                     "tape_margin_sides" => 0.10,
                     "tape_margin_ends" => 0.10,
                     "tape_text_size_mod" => null,
+                    'columns' => null,
+                    'rows' => null,
+                    'title_align' => null,
+                    'barcode_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null
                 ],
                 [
                     "name" => "Dymo Label Writer 1933081",
@@ -387,8 +479,8 @@ class CreateLabelTemplatesTable extends Migration
                     "margin_right" => null,
                     "fields_supported" => 5,
                     "tag_option" => 1,
-                    "1d_barcode_option" => 1,
-                    "2d_barcode_option" => 1,
+                    "one_d_barcode_option" => 1,
+                    "two_d_barcode_option" => 1,
                     "logo_option" => 0,
                     "title_option" => 1,
                     "tape_height" => 25.00,
@@ -396,6 +488,12 @@ class CreateLabelTemplatesTable extends Migration
                     "tape_margin_sides" => 0.10,
                     "tape_margin_ends" => 0.10,
                     "tape_text_size_mod" => null,
+                    'columns' => null,
+                    'rows' => null,
+                    'title_align' => null,
+                    'barcode_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null
                 ],
                 [
                     "name" => "Dymo Label Writer 2112283",
@@ -425,8 +523,8 @@ class CreateLabelTemplatesTable extends Migration
                     "margin_right" => null,
                     "fields_supported" => 5,
                     "tag_option" => 1,
-                    "1d_barcode_option" => 1,
-                    "2d_barcode_option" => 1,
+                    "one_d_barcode_option" => 1,
+                    "two_d_barcode_option" => 1,
                     "logo_option" => 0,
                     "title_option" => 1,
                     "tape_height" => 54.00,
@@ -434,6 +532,12 @@ class CreateLabelTemplatesTable extends Migration
                     "tape_margin_sides" => 0.10,
                     "tape_margin_ends" => 0.10,
                     "tape_text_size_mod" => null,
+                    'columns' => null,
+                    'rows' => null,
+                    'title_align' => null,
+                    'barcode_size' => null,
+                    'tag_position' => null,
+                    'tag_align' => null
                 ]
             ];
         DB::table('label_templates')->insert($defaults);
