@@ -7,6 +7,7 @@ use App\Models\CustomFieldset;
 use Illuminate\Support\Collection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Event;
 use App\Models\DefaultValuesForCustomFields;
 
@@ -25,9 +26,16 @@ trait HasCustomFields
         // https://tech.chrishardie.com/2022/define-fire-listen-custom-laravel-model-events-trait/
 
         static::registerModelEvent('validating', function ($model, $event) {
-            \Log::debug("Uh, something happened? Something good, maybe?");
-            \Log::debug("model: $model, event: $event");
-            self::augmentValidationRulesForCustomFields($model);
+//            \Log::error("Uh, something happened? Something good, maybe?");
+//            \Log::error("model: $model, event: $event");
+//            \Log::error("WHATS MY NAME? " . HasCustomFields::class);
+//            dump(class_uses_recursive($model));
+            if (in_array(HasCustomFields::class, class_uses_recursive($model))) {
+                \Log::error("!!!!!!!!!!!!! YOU ARE USING THE TRAIT!");
+                self::augmentValidationRulesForCustomFields($model);
+            } else {
+                \Log::error("You aren't useing the trait so go away");
+            }
         });
     }
 
@@ -44,7 +52,7 @@ trait HasCustomFields
         if(is_int($pivot)) { //why does this look just like the other thing? (below, look for is_int()
             return CustomFieldset::find($pivot);
         }
-        return $pivot->fieldset;
+        return $pivot?->fieldset; //this is bonkers, why is this even firing?!
     }
 
     /**********************
@@ -113,6 +121,7 @@ trait HasCustomFields
     }
 
     public function customFill(Request $request, User $user, bool $shouldSetDefaults = false) {
+        $success = true;
         if ($this->getFieldset()) {
             foreach ($this->getFieldset()->fields as $field) {
                 if (is_array($request->input($field->db_column))) {
@@ -126,12 +135,16 @@ trait HasCustomFields
                 }
                 if ($field->field_encrypted == '1') {
                     if ($user->can('admin')) {
-                        $this->{$field->db_column} = \Crypt::encrypt($field_value);
+                        $this->{$field->db_column} = Crypt::encrypt($field_value);
+                    } else {
+                        $success = false;
+                        continue; //may not be necessary? I'm not sure. I like the other way of doing this TODO
                     }
                 } else {
                     $this->{$field->db_column} = $request->input($field->db_column);
                 }
             }
         }
+        return $success;
     }
 }

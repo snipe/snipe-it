@@ -691,9 +691,8 @@ class AssetsController extends Controller
             }     
 
             $asset = $request->handleImages($asset);
-            $model = AssetModel::find($asset->model_id);
 
-            $asset->customFill($request, Auth::user());
+            $problems_updating_encrypted_custom_fields = !$asset->customFill($request, Auth::user());
 
             if ($asset->save()) {
                 if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
