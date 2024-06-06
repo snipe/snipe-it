@@ -66,9 +66,7 @@
 
                             <!-- Template -->
                             <div class="form-group{{ $errors->has('label2_template') ? ' has-error' : '' }}">
-                                <div class="col-md-9 col-md-offset-3">
-                                    @include('partials.label2-preview')
-                                </div>
+
                                 <div class="col-md-9 col-md-offset-3">
                                     <table
                                         data-click-to-select="true"
@@ -209,7 +207,9 @@
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
                             </div>
-
+                            <div class="col-md-9 col-md-offset-3" style="margin-bottom: 10px;">
+                                @include('partials.label2-preview')
+                            </div>
                             <!-- Fields -->
                             <div class="form-group {{ $errors->has('label2_fields') ? 'error' : '' }}">
                                 <div class="col-md-3 text-right">
