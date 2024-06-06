@@ -14,6 +14,7 @@ use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
+use App\Models\CustomField;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -37,7 +38,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $users = User::select([
+        $allowed_columns = [
             'users.activated',
             'users.created_by',
             'users.address',
@@ -75,7 +76,12 @@ class UsersController extends Controller
             'users.autoassign_licenses',
             'users.website',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
+        ];
+
+        foreach (CustomField::where('type', User::class)->get() as $field) {
+            $allowed_columns[] = $field->db_column_name();
+        }
+        $users = User::select($allowed_columns)->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
 
@@ -396,7 +402,9 @@ class UsersController extends Controller
         }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-        
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -496,7 +504,9 @@ class UsersController extends Controller
 
         
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-          
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
 
             // Check if the request has groups passed and has a value, AND that the user us a superuser

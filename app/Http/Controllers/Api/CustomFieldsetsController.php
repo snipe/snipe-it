@@ -35,7 +35,7 @@ class CustomFieldsetsController extends Controller
     public function index()
     {
         $this->authorize('index', CustomField::class);
-        $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get();
+        $fieldsets = CustomFieldset::withCount('fields as fields_count')->get();
 
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
     }
@@ -125,7 +125,7 @@ class CustomFieldsetsController extends Controller
         $this->authorize('delete', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
 
-        $modelsCount = $fieldset->models->count();
+        $modelsCount = $fieldset->customizables()->count();
         $fieldsCount = $fieldset->fields->count();
 
         if (($modelsCount > 0) || ($fieldsCount > 0)) {
