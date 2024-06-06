@@ -11,7 +11,7 @@ class LabelWriter extends Eloquent
      *
      * @return void
      */
-    public function write($pdf, $record, $template, $options = [])
+    public function write($pdf, $record, $template)
     {
         $pa = $this->getLabelPrintableArea();
         
