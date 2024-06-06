@@ -6,7 +6,6 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LabelsTransformer;
 use App\Models\Labels\Label;
-use App\Models\LabelTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\ItemNotFoundException;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +22,7 @@ class LabelsController extends Controller
     {
         $this->authorize('view', Label::class);
 
-        $labels = LabelTemplate::all();
+        $labels = Label::find();
 
         if ($request->filled('search')) {
             $search = $request->get('search');

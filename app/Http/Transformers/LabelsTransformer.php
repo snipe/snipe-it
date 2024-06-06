@@ -6,53 +6,51 @@ use App\Helpers\Helper;
 use App\Models\Labels\Label;
 use App\Models\Labels\Sheet;
 use App\Models\Labels\RectangleSheet;
-use App\Models\LabelTemplate;
 use Illuminate\Support\Collection;
 
 class LabelsTransformer
 {
-    public function transformLabels($total)
+    public function transformLabels(Collection $labels, $total)
     {
-        $label_templates = LabelTemplate::all();
         $array = [];
-        foreach ($label_templates as $label_template) {
-            $array[] = self::transformLabel($label_template);
+        foreach ($labels as $label) {
+            $array[] = self::transformLabel($label);
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLabel(LabelTemplate $label)
+    public function transformLabel(Label $label)
     {
         $array = [
-            'name' => $label->name,
-            'unit' => $label->measurement_unit,
+            'name' => $label->getName(),
+            'unit' => $label->getUnit(),
 
-            'width'  => number_format($label->label_width, 3),
-            'height' => number_format($label->label_height, 3),
+            'width'  => number_format($label->getWidth(), 2),
+            'height' => number_format($label->getHeight(), 2),
 
-            'margin_top'    => $label->margin_top,
-            'margin_bottom' => $label->margin_bottom,
-            'margin_left'   => $label->margin_left,
-            'margin_right'  => $label->margin_right,
+            'margin_top'    => $label->getMarginTop(),
+            'margin_bottom' => $label->getMarginBottom(),
+            'margin_left'   => $label->getMarginLeft(),
+            'margin_right'  => $label->getMarginRight(),
 
-            'tag_option'         => $label->tag_option,
-            'one_d_barcode_option'  => $label->one_d_barcode_option,
-            'two_d_barcode_option' => $label->two_d_barcode_option,
-            'fields_supported'     => $label->fields_supported,
-            'logo_option'       => $label->logo_option,
-            'title_option'      => $label->title_option,
+            'support_asset_tag'  => $label->getSupportAssetTag(),
+            'support_1d_barcode' => $label->getSupport1DBarcode(),
+            'support_2d_barcode' => $label->getSupport2DBarcode(),
+            'support_fields'     => $label->getSupportFields(),
+            'support_logo'       => $label->getSupportLogo(),
+            'support_title'      => $label->getSupportTitle(),
         ];
 
         if ($label instanceof Sheet) {
             $array['sheet_info'] = [
-                'label_width'  => $label->label_width,
-                'label_height' => $label->label_height,
+                'label_width'  => $label->getLabelWidth(),
+                'label_height' => $label->getLabelHeight(),
 
-                'label_margin_top'    => $label->margin_top,
-                'label_margin_bottom' => $label->margin_bottom,
-                'label_margin_left'   => $label->margin_left,
-                'label_margin_right'  => $label->margin_right,
+                'label_margin_top'    => $label->getLabelMarginTop(),
+                'label_margin_bottom' => $label->getLabelMarginBottom(),
+                'label_margin_left'   => $label->getLabelMarginLeft(),
+                'label_margin_right'  => $label->getLabelMarginRight(),
 
                 'labels_per_page' => $label->getLabelsPerPage(),
                 'label_border' => $label->getLabelBorder(),
@@ -61,8 +59,8 @@ class LabelsTransformer
 
         if ($label instanceof RectangleSheet) {
             $array['rectanglesheet_info'] = [
-                'columns' => $label->columns(),
-                'rows'    => $label->rows(),
+                'columns' => $label->getColumns(),
+                'rows'    => $label->getRows(),
                 'column_spacing' => $label->getLabelColumnSpacing(),
                 'row_spacing'    => $label->getLabelRowSpacing(),
             ];
