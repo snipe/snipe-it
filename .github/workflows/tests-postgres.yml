@@ -13,7 +13,7 @@ jobs:
 
     services:
       postgresql:
-        image: postgres:14
+        image: postgres
         env:
           POSTGRES_DB: snipeit
           POSTGRES_USER: snipeit
