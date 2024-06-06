@@ -448,4 +448,13 @@ class AssetModelFactory extends Factory
             ];
         });
     }
+
+    public function complicated()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Complicated fieldset'
+            ];
+        })->for(CustomFieldSet::factory()->complicated(), 'fieldset');
+    }
 }

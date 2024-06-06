@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Asset;
+use App\Models\DefaultValuesForCustomFields;
 use Livewire\Component;
 
 use App\Models\CustomFieldset;
@@ -30,7 +32,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
             $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
         } 
 
-        $this->add_default_values = ($this->model->defaultValues->count() > 0);
+        $this->add_default_values = (DefaultValuesForCustomFields::forPivot($this->model, Asset::class)->count() > 0);
     }
 
     public function updatedFieldsetId()
