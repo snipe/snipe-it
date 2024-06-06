@@ -10,6 +10,9 @@ class LabelTemplate extends Model
 {
     use HasFactory;
 
+    protected $table = 'label_templates';
+    protected $primaryKey = 'id';
+
     protected $rules = [
         'name' => 'required|string|max:255',
         'page_format' => 'string',
@@ -158,6 +161,10 @@ class LabelTemplate extends Model
         return Helper::convertUnit($rowSpacingPT, 'pt', $this->measurement_unit);
     }
 
+    public function labelIndexOffset() {
+       return 0;
+    }
+
 
     /**
      * Get the label width in points.
@@ -165,7 +172,13 @@ class LabelTemplate extends Model
      * @return float The label width in points.
      */
     public function labelWidth() {
-        return Helper::convertUnit($this->label_width, 'pt', $this->measurement_unit);
+        if (isset($this->label_width)) {
+            return Helper::convertUnit($this->label_width, 'pt', $this->measurement_unit);
+        }
+        else{
+            return Helper::convertUnit($this->tape_width, 'pt', $this->measurement_unit);
+        }
+
     }
 
     /**
@@ -174,7 +187,12 @@ class LabelTemplate extends Model
      * @return float The label height in points.
      */
     public function labelHeight() {
-        return Helper::convertUnit($this->label_height, 'pt', $this->measurement_unit);
+        if (isset($this->label_height)) {
+            return Helper::convertUnit($this->label_height, 'pt', $this->measurement_unit);
+        }
+        else{
+            return Helper::convertUnit($this->tape_height, 'pt', $this->measurement_unit);
+        }
     }
 
     /**

@@ -1,8 +1,22 @@
 <?php
 
 
-class LabelWriter extends Eloquent
+use Illuminate\Support\Collection;
+
+class LabelWriter
 {
+    /**
+     * Handle the data here. Override for multiple-per-page handling
+     *
+     * @param  TCPDF       $pdf   The TCPDF instance
+     * @param  Collection  $data  The data
+     */
+    public function writeAll(TCPDF $pdf, Collection $data) {
+        $data->each(function ($record, $index) use ($pdf) {
+            $pdf->AddPage();
+            $this->write($pdf, $record);
+        });
+    }
     /**
      * Write the label information to the PDF.
      *

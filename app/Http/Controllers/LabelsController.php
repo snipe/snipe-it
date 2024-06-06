@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Labels\Label;
+use App\Models\LabelTemplate;
 use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Setting;
@@ -29,7 +30,8 @@ class LabelsController extends Controller
     public function show(string $labelName)
     {
         $labelName = str_replace('/', '\\', $labelName);
-        $template = Label::find($labelName);
+        $template = LabelTemplate::query()->where('name', $labelName)->first();
+
 
         $exampleAsset = new Asset();
 
@@ -89,9 +91,11 @@ class LabelsController extends Controller
             }
         }
 
+
         return (new LabelView())
             ->with('assets', collect([$exampleAsset]))
             ->with('settings', $settings)
+            ->with('settings', $template)
             ->with('template', $template)
             ->with('bulkedit', false)
             ->with('count', 0);

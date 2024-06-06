@@ -23,13 +23,11 @@ class LabelsController extends Controller
     {
         $this->authorize('view', Label::class);
 
-        $labels = LabelTemplate::all();
+        $labels = LabelTemplate::query();
 
         if ($request->filled('search')) {
             $search = $request->get('search');
-            $labels = $labels->filter(function ($label, $index) use ($search) {
-                return stripos($label->getName(), $search) !== false;
-            });
+            $labels->where('name', 'LIKE', "%{$search}%");
         }
 
         $total = $labels->count();

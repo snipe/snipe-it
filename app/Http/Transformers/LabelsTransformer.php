@@ -11,9 +11,10 @@ use Illuminate\Support\Collection;
 
 class LabelsTransformer
 {
-    public function transformLabels($total)
+    public function transformLabels()
     {
         $label_templates = LabelTemplate::all();
+        $total = count($label_templates);
         $array = [];
         foreach ($label_templates as $label_template) {
             $array[] = self::transformLabel($label_template);
@@ -28,8 +29,8 @@ class LabelsTransformer
             'name' => $label->name,
             'unit' => $label->measurement_unit,
 
-            'width'  => number_format($label->label_width, 3),
-            'height' => number_format($label->label_height, 3),
+            'width'  => $label->label_width ? number_format($label->label_width, 3) : number_format($label->tape_width, 3),
+            'height' => $label->label_height ? number_format($label->label_height, 3) : number_format($label->tape_height, 3),
 
             'margin_top'    => $label->margin_top,
             'margin_bottom' => $label->margin_bottom,
@@ -44,7 +45,7 @@ class LabelsTransformer
             'title_option'      => $label->title_option,
         ];
 
-        if ($label instanceof Sheet) {
+        if (strpos($label->label_type, 'Sheet') !== false) {
             $array['sheet_info'] = [
                 'label_width'  => $label->label_width,
                 'label_height' => $label->label_height,
@@ -55,11 +56,11 @@ class LabelsTransformer
                 'label_margin_right'  => $label->margin_right,
 
                 'labels_per_page' => $label->labelsPerPage(),
-                'label_border' => $label->getLabelBorder(),
+                'label_border' => $label->LabelBorder(),
             ];
         }
 
-        if ($label instanceof RectangleSheet) {
+        if (strpos($label->label_type, 'Rectangle') !== false) {
             $array['rectanglesheet_info'] = [
                 'columns' => $label->columns(),
                 'rows'    => $label->rows(),
