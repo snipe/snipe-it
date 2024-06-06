@@ -16,9 +16,10 @@ class AddTypeColumnToDefaultValuesForCustomFields extends Migration
     public function up()
     {
         Schema::table('default_values_for_custom_fields', function (Blueprint $table) {
-            $table->string('type')->nullable();
             $table->renameColumn('asset_model_id','item_pivot_id'); //this one works. okay. that's someting.
-            //$table->text('type')->nullable(false)->change();
+        });
+        Schema::table('default_values_for_custom_fields', function (Blueprint $table) {
+            $table->string('type')->nullable();
         });
         DefaultValuesForCustomFields::query()->update(['type' => Asset::class]);
         Schema::table('default_values_for_custom_fields', function (Blueprint $table) {
