@@ -10,7 +10,7 @@
         <div class="col-md-9 text-right">
             <div class="btn-group text-left">
 
-                <select class="redirect-options form-control select2" name="redirect_option" style="min-width: 200px"{{ (!$asset->model ? ' disabled' : '') }}>
+                <select class="redirect-options form-control select2" data-minimum-results-for-search="Infinity" name="redirect_option" style="min-width: 200px"{{ (!$asset->model ? ' disabled' : '') }}>
 
                     <option {{ (Session::get('redirect_option')=="0" || (Session::get('redirect_option')=="2" && $checkin)) ? 'selected' : '' }} value="0">
                         {{ trans('admin/hardware/form.redirect_to_all', ['type' => $table_name]) }}
@@ -18,8 +18,8 @@
                     <option {{ Session::get('redirect_option')=="1" ? 'selected' : ''}} value="1">
                         {{ trans('admin/hardware/form.redirect_to_type', ['type' => $type]) }}
                     </option>
-                    <option {{ Session::get('redirect_option')=="2" && !$checkin ? 'selected' : ''}}{{ $checkin ? 'disabled hidden' : '' }} value="2" >
-                        {{ trans('admin/hardware/form.redirect_to_checked_out_to') }}
+                    <option {{ Session::get('redirect_option')=="2" && !$checkin ? 'selected' : ''}}{{ $checkin ? 'hidden disabled' : '' }} value="2" >
+                        {{ !$checkin ? trans('admin/hardware/form.redirect_to_checked_out_to') : '' }}
                     </option>
 
                 </select>

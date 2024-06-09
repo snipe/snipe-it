@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'Tokeny API tracą ważność za:',
     'api_reference' => 'Sprawdź <a href="https://snipe-it.readme.io/referencję" target="_blank">API reference</a>, aby
                     znaleźć konkretne enpoint-y API i dodatkową dokumentację API.',
+    'profile_updated' => 'Account successfully updated',
 );

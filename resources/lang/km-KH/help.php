@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'ព័​ត៍​មាន​បន្ថែម',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'ការធីកប្រអប់នេះនឹងកែសម្រួលកំណត់ត្រាទ្រព្យសម្បត្តិដើម្បីឆ្លុះបញ្ចាំងពីទីតាំងថ្មីនេះ។ ការទុកវាចោលដោយមិនធីកនឹងកត់សម្គាល់ទីតាំងនៅក្នុងកំណត់ហេតុសវនកម្ម។<br><br>ចំណាំថាប្រសិនបើទ្រព្យសកម្មនេះត្រូវបាន checked out វានឹងមិនផ្លាស់ប្តូរទីតាំងរបស់មនុស្ស ទ្រព្យសម្បត្តិ ឬទីតាំងដែលវាត្រូវបាន checked out ទៅ.',
 
     'assets' => 'ទ្រព្យសកម្មគឺជាធាតុដែលតាមដានដោយលេខស៊េរី ឬស្លាកទ្រព្យសម្បត្តិ។ ពួកវាមានទំនោរទៅជាធាតុមានតម្លៃខ្ពស់ជាង ដែលការកំណត់អត្តសញ្ញាណធាតុជាក់លាក់មួយមានសារៈសំខាន់។',
 

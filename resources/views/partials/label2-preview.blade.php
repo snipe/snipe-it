@@ -2,7 +2,7 @@
     @push('css')
         <style>
             :root {
-                --l2p-height: 400px;
+                --l2p-height: 200px;
                 --l2p-background-color: aliceblue;
             }
 

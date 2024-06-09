@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Actionlog;
@@ -333,48 +334,14 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id = null)
+    public function destroy(DeleteUserRequest $request, $id = null)
     {
 
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc');
         $user = Company::scopeCompanyables($user)->find($id);
 
-
-        if ($user) {
-            // Check if we are not trying to delete ourselves
-            if ($user->id === Auth::id()) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', trans('admin/users/message.error.cannot_delete_yourself'));
-            }
-
-            if (($user->assets()) && ($user->assets()->count() > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', trans_choice('admin/users/message.error.delete_has_assets_var', $user->assets()->count(), ['count'=> $user->assets()->count()]));
-            }
-
-            if (($user->licenses()) && ($user->licenses()->count() > 0)) {
-                return redirect()->route('users.index')->with('error', trans_choice('admin/users/message.error.delete_has_licenses_var', $user->licenses()->count(), ['count'=> $user->licenses()->count()]));
-            }
-
-            if (($user->accessories()) && ($user->accessories()->count() > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', trans_choice('admin/users/message.error.delete_has_accessories_var', $user->accessories()->count(), ['count'=> $user->accessories()->count()]));
-            }
-
-            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', trans_choice('admin/users/message.error.delete_has_locations_var', $user->managedLocations()->count(), ['count'=> $user->managedLocations()->count()]));
-            }
-
-            if (($user->managesUsers()) && ($user->managesUsers()->count() > 0)) {
-                return redirect()->route('users.index')
-                    ->with('error', trans_choice('admin/users/message.error.delete_has_users_var', $user->managesUsers()->count(), ['count'=> $user->managesUsers()->count()]));
-            }
-
+        if (($user) && ($user->deleted_at = '')) {
             // Delete the user
             $user->delete();
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));

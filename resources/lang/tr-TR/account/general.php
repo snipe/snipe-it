@@ -8,4 +8,5 @@ return array(
     'api_base_url_endpoint' => '/&lt;uçnokta&gt;',
     'api_token_expiration_time' => 'API jetonlarınız şu süre içinde sona erecek şekilde ayarlanmıştır:',
     'api_reference' => 'Lütfen <a href="https://snipe-it.readme.io/reference" target="_blank"> API referansını</a> kontrol edin                    belirli API uç noktalarını ve ek API belgelerini bulun.',
+    'profile_updated' => 'Account successfully updated',
 );

@@ -49,7 +49,7 @@ return [
     'default_eula_text'			=> 'Standard EULA',
     'default_language'			=> 'Standardsprache',
     'default_eula_help_text'	=> 'Du kannst ebenso benutzerdefinierte EULAs bestimmten Asset-Kategorien zuordnen.',
-    'acceptance_note'           => 'Add a note for your decision (Optional)',
+    'acceptance_note'           => 'Notiz für Ihre Entscheidung hinzufügen (Optional)',
     'display_asset_name'        => 'Asset-Name anzeigen',
     'display_checkout_date'     => 'Checkout-Datum anzeigen',
     'display_eol'               => 'EOL in Tabellenansicht anzeigen',

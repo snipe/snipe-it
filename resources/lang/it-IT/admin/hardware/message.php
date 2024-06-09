@@ -5,11 +5,11 @@ return [
     'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
                        Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Bene con tag :asset_tag non trovato.',
+    'no_tag' 	        => 'Nessun tag del Bene è stato fornito.',
     'does_not_exist_or_not_requestable' => 'Questo bene non esiste o non è disponibile.',
     'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'La prossima data d\'inventario di questo Bene (:next_audit_date) precede l\'ultima data d\'inventario (:last_audit_date). Si prega di aggiornare la prossima data d\'inventario.',
 
     'create' => [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
@@ -34,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Inventario del Bene non riuscito: :error ',
         'success' 		=> 'L\'audit di risorse si è registrato con successo.',
     ],
 

@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'API-tokens er satt til å utløpe om:',
     'api_reference' => 'Sjekk <a href="https://snipe-it.readme.io/reference" target="_blank">API-referanse</a> for å
                     finne spesifikke API-endepunkter og ytterligere API-dokumentasjon.',
+    'profile_updated' => 'Account successfully updated',
 );

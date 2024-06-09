@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'API tokeny vyprší:',
     'api_reference' => 'Zkontrolujte prosím <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> pro
                     nalezení konkrétního koncového bodu a další API dokumentaci.',
+    'profile_updated' => 'Account successfully updated',
 );

@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => '设定 API 令牌过期时间为：',
     'api_reference' => '请查询 <a href="https://snipe-it.readme.io/reference" target="_blank">API 引用</a> 到
                     找到特定的 API 端点以及额外的 API 文档。',
+    'profile_updated' => '帐户已成功更新',
 );

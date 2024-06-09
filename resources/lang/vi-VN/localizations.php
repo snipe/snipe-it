@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a language',
+    'select_language' => 'Lựa chọn ngôn ngữ',
     'languages' => [
         'en-US'=> 'English, US',
         'en-GB'=> 'English, UK',

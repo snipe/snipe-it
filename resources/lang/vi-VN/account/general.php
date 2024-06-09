@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'Khóa API được thiết lập có thời hạn đến:',
     'api_reference' => 'Vui lòng kiểm tra <a href="https://snipe-it.readme.io/reference" target="_blank">tài liệu tham khảo API</a> để
                      tìm các API endpoint cụ thể và tài liệu API bổ sung.',
+    'profile_updated' => 'Đã cập nhật tài khoản thành công',
 );

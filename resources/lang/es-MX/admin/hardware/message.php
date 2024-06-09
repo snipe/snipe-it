@@ -5,11 +5,11 @@ return [
     'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
                         Si no es correcto, actualiza su estado.',
     'does_not_exist' 	=> 'Equipo inexistente.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Activo con etiqueta :asset_tag no encontrado.',
+    'no_tag' 	        => 'No se ha proporcionado ninguna etiqueta de activo.',
     'does_not_exist_or_not_requestable' => 'Ese activo no existe o no puede ser solicitado.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
         'error'   		=> 'Equipo no creado, intentalo de nuevo. :(',
@@ -20,7 +20,7 @@ return [
     'update' => [
         'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 			=> 'Equipo actualizado.',
-        'encrypted_warning' => 'Activo actualizado con éxito, pero los campos personalizados cifrados no se debieron a permisos',
+        'encrypted_warning' => 'Activo actualizado con éxito, pero los campos personalizados cifrados no se actualizaron debido a permisos',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
         'no_assets_selected'  =>  'Ningún recurso fue seleccionado, por lo que no se actualizó nada.',
         'assets_do_not_exist_or_are_invalid' => 'Los activos seleccionados no se pueden actualizar.',
@@ -34,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Auditoría de activos fallida: :error ',
         'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
 

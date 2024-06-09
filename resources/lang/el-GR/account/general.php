@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'Τα API tokens έχουν οριστεί να λήγουν:',
     'api_reference' => 'Παρακαλούμε ελέγξτε τον <a href="https://snipe-it.readme.io/reference" target="_blank">API κωδικό</a> στο
                     βρείτε συγκεκριμένα endpoints API και πρόσθετη τεκμηρίωση API.',
+    'profile_updated' => 'Account successfully updated',
 );

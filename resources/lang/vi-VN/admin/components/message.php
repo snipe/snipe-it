@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Hợp phần đã không được kiểm tra, hãy thử lại',
         'success' 		=> 'Thành phần được kiểm tra thành công.',
         'user_does_not_exist' => 'Người dùng đó không hợp lệ. Vui lòng thử lại.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Không đủ thành phần còn lại: :remaining, Yêu cầu :requested ',
     ),
 
     'checkin' => array(

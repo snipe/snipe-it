@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'API ключа ще изтиче на:',
     'api_reference' => 'Прочетете <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> за да
                     намерите специфични API endpoints и допълнителна API документация.',
+    'profile_updated' => 'Account successfully updated',
 );

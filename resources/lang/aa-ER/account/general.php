@@ -7,4 +7,5 @@ return array(
     'api_base_url_endpoint' => 'crwdns6804:0crwdne6804:0',
     'api_token_expiration_time' => 'crwdns6806:0crwdne6806:0',
     'api_reference' => 'crwdns6808:0crwdne6808:0',
+    'profile_updated' => 'crwdns12202:0crwdne12202:0',
 );

@@ -16,7 +16,7 @@ return [
     'edit'  					=> '编辑资产',
     'model_deleted'  			=> '这个资源模型已被删除。您必须先还原模型才能还原素材。',
     'model_invalid'             => '此资产的型号无效。',
-    'model_invalid_fix'         => '在尝试归还或借出资产之前，应编辑资产以更正此问题。',
+    'model_invalid_fix'         => '在尝试借出、归还或盘点之前，必须使用有效的资产型号更新资产。',
     'requestable'               => '可申领',
     'requested'				    => '已申请',
     'not_requestable'           => '不可申领',

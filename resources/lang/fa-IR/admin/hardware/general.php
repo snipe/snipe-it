@@ -18,8 +18,8 @@ return [
     'edit'  					=> 'ویرایش دارایی',
     'model_deleted'  			=> 'این مدل دارایی حذف شده است. قبل از اینکه بتوانید Asset را بازیابی کنید، باید مدل را بازیابی کنید.
 ',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'This model for this asset is invalid.',
+    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'در خواست شد',
     'requested'				    => 'درخواست شده',
     'not_requestable'           => 'غیر قابل درخواست

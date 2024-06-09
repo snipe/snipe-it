@@ -7,4 +7,5 @@ return array(
     'api_base_url_endpoint' => '/&lt; dhamaadka&gt;',
     'api_token_expiration_time' => 'Calaamadaha API waxa lagu dejiyay inay ku dhacaan:',
     'api_reference' => 'Fadlan hubi <a href="https://snipe-it.readme.io/reference" target="_blank">Tixraaca API</a> si aad u heshid meelaha dhamaadka API ee gaarka ah iyo dukumeenti API oo dheeri ah.',
+    'profile_updated' => 'Account successfully updated',
 );

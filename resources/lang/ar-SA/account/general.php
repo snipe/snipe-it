@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'تم تعيين رموز API لانتهاء صلاحيتها في:',
     'api_reference' => 'الرجاء التحقق من مرجع API <a href="https://snipe-it.readme.io/reference" target="_blank"></a> إلى
                     العثور على نقاط نهاية API المحددة ووثائق API الإضافية.',
+    'profile_updated' => 'Account successfully updated',
 );

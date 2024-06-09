@@ -11,6 +11,6 @@ return [
     'update'  					            => 'Actualizar Depreciación',
     'depreciation_min'                      => 'Valor mínimo después de depreciación',
     'no_depreciations_warning'               => '<strong>Advertencia: </strong>
-                      No tiene ninguna amortización configurada.
-                      Por favor, configure al menos una amortización para ver el informe de amortizaciones.',
+                      No tiene ninguna depreciación configurada.
+                      Por favor, configure al menos una depreciación para ver el informe de depreciaciones.',
 ];

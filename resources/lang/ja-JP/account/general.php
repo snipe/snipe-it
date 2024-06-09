@@ -7,4 +7,5 @@ return array(
     'api_base_url_endpoint' => '/<エンドポイント>',
     'api_token_expiration_time' => 'APIトークンの有効期限:',
     'api_reference' => '<a href="https://snipe-it.readme.io/reference" target="_blank">API リファレンス</a> を確認して、特定のAPI エンドポイントと追加のAPIドキュメントを見つけてください。',
+    'profile_updated' => 'Account successfully updated',
 );

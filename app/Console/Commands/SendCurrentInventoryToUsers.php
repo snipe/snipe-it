@@ -43,7 +43,7 @@ class SendCurrentInventoryToUsers extends Command
 
         $count = 0;
         foreach ($users as $user) {
-            if (($user->assets->count() > 0) || ($user->accessories->count() > 0) || ($user->licenses->count() > 0)) {
+            if (($user->assets->count() > 0) || ($user->accessories->count() > 0) || ($user->licenses->count() > 0) || ($user->consumables->count() > 0)) {
                 $count++;
                 $user->notify((new CurrentInventory($user)));
             }
