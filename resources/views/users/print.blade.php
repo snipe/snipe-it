@@ -361,7 +361,7 @@
 
     <p></p>
     <div class="pull-right">
-        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+        <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target="#eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
             <i class="fa fa-eye-slash"></i>
         </button>
     </div>
