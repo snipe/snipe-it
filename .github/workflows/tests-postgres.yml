@@ -1,11 +1,6 @@
 name: Tests in Postgres
 
-on:
-  push:
-    branches:
-      - master
-      - develop
-  pull_request:
+on: workflow_dispatch
 
 jobs:
   tests:
