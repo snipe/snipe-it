@@ -34,7 +34,7 @@ class OauthClients extends Component
             'redirect' => 'required|url|max:255',
         ]);
 
-        $newClient = app(ClientRepository::class)->create(
+        app(ClientRepository::class)->create(
             auth()->user()->id,
             $this->name,
             $this->redirect,
