@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Traits\ConvertsBase64ToFiles;
 use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class UploadFileRequest extends Request
 {
+    use ConvertsBase64ToFiles;
     /**
      * Determine if the user is authorized to make this request.
      *
