@@ -7,11 +7,34 @@ use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Accessory;
 use App\Models\User;
+use App\Models\Company;
 
 use App\Models\Asset;
 
 class DeleteUserTest extends TestCase
 {
+
+    public function testPermissionsToDeleteUser()
+    {
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $superuser = User::factory()->superuser()->create();
+        $userFromA = User::factory()->for($companyA)->create();
+        $userFromB = User::factory()->for($companyB)->create();
+
+        $this->followingRedirects()->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+            ->delete(route('users.destroy', ['user' => $userFromB->id]))
+            ->assertStatus(403);
+
+        $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+            ->delete(route('users.destroy', ['user' => $userFromA->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+    }
 
 
     public function testDisallowUserDeletionIfStillManagingPeople()
