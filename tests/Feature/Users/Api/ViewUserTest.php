@@ -20,7 +20,7 @@ class ViewUserTest extends TestCase
             ->assertOk();
     }
 
-    public function testUserWithoutCompanyPermissionsCannotDeleteUser()
+    public function testPermissionsWithCompanyableToDeleteUser()
     {
 
         $this->settings->enableMultipleFullCompanySupport();

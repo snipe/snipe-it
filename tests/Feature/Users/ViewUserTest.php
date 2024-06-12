@@ -10,7 +10,7 @@ use App\Notifications\CurrentInventory;
 
 class ViewUserTest extends TestCase
 {
-    public function testUserWithoutCompanyPermissionsCannotViewUserDetailPage()
+    public function testPermissionsForUserDetailPage()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -29,7 +29,7 @@ class ViewUserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testUserWithoutCompanyPermissionsCannotViewPrintAllInventoryPage()
+    public function testPermissionsForPrintAllInventoryPage()
     {
         $this->settings->enableMultipleFullCompanySupport();
         //$this->withoutExceptionHandling();

@@ -56,7 +56,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionIfNoDeletePermissions()
+    public function testPermissionsForDeletingUsers()
     {
 
         $this->actingAsForApi(User::factory()->create())
@@ -65,7 +65,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionIfNotInSameCompanyAndNotSuperadmin()
+    public function testPermissionsIfNotInSameCompanyAndNotSuperadmin()
     {
         $this->settings->enableMultipleFullCompanySupport();
         [$companyA, $companyB] = Company::factory()->count(2)->create();
