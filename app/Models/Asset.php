@@ -10,7 +10,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use AssetPresenter;
+use App\Presenters\AssetPresenter;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Model for Assets.
@@ -28,7 +30,7 @@ use Watson\Validating\ValidatingTrait;
 class Asset extends Depreciable
 {
 
-    protected $presenter = \App\Presenters\AssetPresenter::class;
+    protected $presenter = AssetPresenter::class;
 
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
@@ -149,6 +151,8 @@ class Asset extends Depreciable
         'last_audit_date',
         'next_audit_date',
         'asset_eol_date',
+        'last_checkin',
+        'last_checkout',
     ];
 
     use Searchable;
@@ -971,14 +975,37 @@ class Asset extends Depreciable
      * @param $value
      * @return void
      */
-    public function getNextAuditDateAttribute($value)
+
+    protected function nextAuditDate(): Attribute
     {
-        return $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d') : null,
+            set: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d') : null,
+        );
     }
 
-    public function setNextAuditDateAttribute($value)
+    protected function lastCheckout(): Attribute
     {
-        $this->attributes['next_audit_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null,
+            set: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null,
+        );
+    }
+
+    protected function lastCheckin(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null,
+            set: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null,
+        );
+    }
+
+    protected function assetEolDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d') : null,
+            set: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d') : null,
+        );
     }
 
     /**
@@ -990,9 +1017,13 @@ class Asset extends Depreciable
      * @param $value
      * @return void
      */
-    public function setRequestableAttribute($value)
+
+    protected function requestable(): Attribute
     {
-        $this->attributes['requestable'] = (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return Attribute::make(
+            get: fn ($value) => (int) filter_var($value, FILTER_VALIDATE_BOOLEAN),
+            set: fn ($value) => (int) filter_var($value, FILTER_VALIDATE_BOOLEAN),
+        );
     }
 
 

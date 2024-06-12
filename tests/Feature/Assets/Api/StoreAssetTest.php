@@ -67,7 +67,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals('random_string', $asset->asset_tag);
         $this->assertEquals($userAssigned->id, $asset->assigned_to);
         $this->assertTrue($asset->company->is($company));
-        $this->assertEquals('2023-09-03 00:00:00', $asset->last_audit_date->format('Y-m-d H:i:s'));
+        $this->assertEquals('2023-09-03 00:00:00', $asset->last_audit_date);
         $this->assertTrue($asset->location->is($location));
         $this->assertTrue($asset->model->is($model));
         $this->assertEquals('A New Asset', $asset->name);
@@ -87,7 +87,7 @@ class StoreAssetTest extends TestCase
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
-                'last_audit_date' => '2023-09-03 12:23:45',
+                'last_audit_date' => '2023-09-03',
                 'asset_tag' => '1234',
                 'model_id' => AssetModel::factory()->create()->id,
                 'status_id' => Statuslabel::factory()->create()->id,
@@ -96,7 +96,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('success');
 
         $asset = Asset::find($response['payload']['id']);
-        $this->assertEquals('00:00:00', $asset->last_audit_date->format('H:i:s'));
+        $this->assertEquals('2023-09-03 00:00:00', $asset->last_audit_date);
     }
 
     public function testLastAuditDateCanBeNull()
