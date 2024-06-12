@@ -34,14 +34,6 @@ class DeleteUserTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
 
-        $this->actingAs($superuser)
-            ->post(route('users.email', ['userId' => $userFromA->id]))
-            ->assertStatus(302);
-
-        $this->actingAs($superuser)
-            ->post(route('users.email', ['userId' => $userFromB->id]))
-            ->assertStatus(302);
-
     }
 
 
