@@ -7,4 +7,5 @@ return array(
     'api_base_url_endpoint' => '/&lt;endpoint&gt;',
     'api_token_expiration_time' => 'Az API tokenek lejárati ideje:',
     'api_reference' => 'Kérjük, ellenőrizze a <a href="https://snipe-it.readme.io/reference" target="_blank">API referenciákat</a> ahol konkrét API végpontokat és további API dokumentációt talál.',
+    'profile_updated' => 'A fiók frissítése sikeres',
 );

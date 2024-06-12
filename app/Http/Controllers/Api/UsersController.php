@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\DeleteUserRequest;
 
 class UsersController extends Controller
 {
@@ -77,6 +78,10 @@ class UsersController extends Controller
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
+
+        if ($request->filled('search') != '') {
+            $users = $users->TextSearch($request->input('search'));
+        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -200,8 +205,12 @@ class UsersController extends Controller
 
         if ($request->filled('location_id') != '') {
             $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
-         } else {
-            $users = $users->TextSearch($request->input('search'));
+         }
+
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -253,7 +262,7 @@ class UsersController extends Controller
                         'licenses_count',
                         'consumables_count',
                         'accessories_count',
-                        'manages_user_count',
+                        'manages_users_count',
                         'manages_locations_count',
                         'phone',
                         'address',
@@ -273,16 +282,12 @@ class UsersController extends Controller
                         'website',
                     ];
 
-                $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
+                $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
                 $users = $users->orderBy($sort, $order);
                 break;
         }
 
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
+
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
@@ -514,30 +519,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeleteUserRequest $request, $id)
     {
         $this->authorize('delete', User::class);
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+
         $this->authorize('delete', $user);
 
+
         if ($user) {
-
-            if (($user->assets) && ($user->assets->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
-            }
-
-            if (($user->licenses) && ($user->licenses->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
-            }
-
-            if (($user->accessories) && ($user->accessories->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
-            }
-
-            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
-            }
-
+            
             if ($user->delete()) {
 
                 // Remove the user's avatar if they have one

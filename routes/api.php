@@ -544,12 +544,35 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
               'restore'
           ]
       )->name('api.assets.restore');
+        Route::post('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'store'
+          ]
+        )->name('api.assets.files');
+
+        Route::get('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'list'
+          ]
+        )->name('api.assets.files');
+
+        Route::get('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'show'
+          ]
+        )->name('api.assets.file');
+
+        Route::delete('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'destroy'
+          ]
+        )->name('api.assets.file');
 
       });
-
-
-
-
 
         Route::resource('hardware', 
         Api\AssetsController::class,

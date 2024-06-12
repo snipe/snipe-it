@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Actionlog;
@@ -330,45 +331,14 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id = null)
+    public function destroy(DeleteUserRequest $request, $id = null)
     {
 
         $this->authorize('delete', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc');
 
-        if ($user) {
-            // Check if we are not trying to delete ourselves
-            if ($user->id === Auth::id()) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'We would feel really bad if you deleted yourself, please reconsider.');
-            }
-
-            if (($user->assets()) && (($assetsCount = $user->assets()->count()) > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$assetsCount.' assets associated with them.');
-            }
-
-            if (($user->licenses()) && (($licensesCount = $user->licenses()->count())) > 0) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$licensesCount.' licenses associated with them.');
-            }
-
-            if (($user->accessories()) && (($accessoriesCount = $user->accessories()->count()) > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$accessoriesCount.' accessories associated with them.');
-            }
-
-            if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$managedLocationsCount.' locations that they manage.');
-            }
-
+        if (($user) && ($user->deleted_at = '')) {
             // Delete the user
             $user->delete();
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));

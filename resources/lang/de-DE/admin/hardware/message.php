@@ -5,8 +5,8 @@ return [
     'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
                         Falls sich dieser Status verändert hat, aktualisieren Sie bitte den Asset Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Asset mit Tag :asset_tag nicht gefunden.',
+    'no_tag' 	        => 'Kein Asset Tag angegeben.',
     'does_not_exist_or_not_requestable' => 'Dieses Asset existiert nicht oder kann nicht angefordert werden.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',

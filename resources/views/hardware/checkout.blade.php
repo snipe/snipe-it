@@ -36,7 +36,8 @@
                                 </div>
                             </div>
                         @endif
-                    <!-- AssetModel name -->
+
+                        <!-- AssetModel name -->
                         <div class="form-group">
                             {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
@@ -45,8 +46,14 @@
                                         {{ $asset->model->name }}
                                     @else
                                         <span class="text-danger text-bold">
-                  <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
-                  <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
+                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              {{ trans('admin/hardware/general.model_invalid')}}
+                                        </span>
+
+                                        {{ trans('admin/hardware/general.model_invalid_fix')}}
+                                        <a href="{{ route('hardware.edit', $asset->id) }}">
+                                            <strong>{{ trans('admin/hardware/general.edit') }}</strong>
+                                        </a>
                                     @endif
                                 </p>
                             </div>
@@ -141,7 +148,13 @@
                         @endif
 
                     </div> <!--/.box-body-->
-                    @include ('partials.forms.redirect_submit_options', ['route' => 'hardware.index', 'table_name' => $table_name, 'type'=> $asset->model->name, 'checkin' => false])
+                    @include ('partials.forms.redirect_submit_options',
+                                 [
+                                 'route' => 'hardware.index',
+                                 'table_name' => $table_name,
+                                 'type'=> ($asset->model ? $asset->model->name : trans('general.asset_model')),
+                                 'checkin' => false
+                           ])
                 </form>
             </div>
         </div> <!--/.col-md-7-->

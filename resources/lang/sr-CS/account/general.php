@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'API tokeni će isteći za:',
     'api_reference' => 'Proverite <a href="https://snipe-it.readme.io/reference" target="_blank">API referencu</a> da biste
  pronašli određene krajnje tačke API-ja i dodatnu API dokumentaciju.',
+    'profile_updated' => 'Nalog je uspešno izmenjen',
 );
