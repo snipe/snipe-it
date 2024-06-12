@@ -8,26 +8,8 @@ use App\Models\User;
 use Tests\TestCase;
 use App\Notifications\CurrentInventory;
 
-class ViewUserTest extends TestCase
+class DeleteUserTest extends TestCase
 {
-    public function testUserWithoutCompanyPermissionsCannotViewUserDetailPage()
-    {
-        $this->settings->enableMultipleFullCompanySupport();
-
-        [$companyA, $companyB] = Company::factory()->count(2)->create();
-
-        $superuser = User::factory()->superuser()->create();
-        $user = User::factory()->for($companyB)->create();
-
-        $this->actingAs(User::factory()->editUsers()->for($companyA)->create())
-            ->get(route('users.show', ['user' => $user->id]))
-            ->assertStatus(403);
-
-        $this->actingAs($superuser)
-            ->get(route('users.show', ['user' => $user->id]))
-            ->assertOk()
-            ->assertStatus(200);
-    }
 
     public function testUserWithoutCompanyPermissionsCannotViewPrintAllInventoryPage()
     {
@@ -55,7 +37,6 @@ class ViewUserTest extends TestCase
 
     public function testUserWithoutCompanyPermissionsCannotSendInventory()
     {
-
         Notification::fake();
 
         $this->settings->enableMultipleFullCompanySupport();
@@ -81,5 +62,36 @@ class ViewUserTest extends TestCase
             [$user], CurrentInventory::class
         );
     }
+
+    public function testUserWithoutCompanyPermissionsCannotDeleteUser()
+    {
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $superuser = User::factory()->superuser()->create();
+        $userFromA = User::factory()->for($companyA)->create();
+        $userFromB = User::factory()->for($companyB)->create();
+
+        $this->followingRedirects()->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+            ->delete(route('users.destroy', ['user' => $userFromB->id]))
+            ->assertStatus(403);
+
+        $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+            ->delete(route('users.destroy', ['user' => $userFromA->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->actingAs($superuser)
+            ->post(route('users.email', ['userId' => $userFromA->id]))
+            ->assertStatus(302);
+
+        $this->actingAs($superuser)
+            ->post(route('users.email', ['userId' => $userFromB->id]))
+            ->assertStatus(302);
+
+    }
+
 
 }
