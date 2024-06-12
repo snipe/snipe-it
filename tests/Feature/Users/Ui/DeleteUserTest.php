@@ -7,6 +7,7 @@ use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Accessory;
 use App\Models\User;
+use App\Models\Company;
 
 use App\Models\Asset;
 
@@ -43,7 +44,7 @@ class DeleteUserTest extends TestCase
 
     }
 
-    
+
     public function testDisallowUserDeletionIfStillManagingPeople()
     {
         $manager = User::factory()->create();

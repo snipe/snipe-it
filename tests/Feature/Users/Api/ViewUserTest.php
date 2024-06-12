@@ -15,7 +15,7 @@ class ViewUserTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->actingAs(User::factory()->viewUsers()->create())
+        $this->actingAsForApi(User::factory()->viewUsers()->create())
             ->getJson(route('api.users.show', $user))
             ->assertOk();
     }
@@ -31,22 +31,30 @@ class ViewUserTest extends TestCase
         $userFromA = User::factory()->for($companyA)->create();
         $userFromB = User::factory()->for($companyB)->create();
 
-        $this->followingRedirects()->actingAsForApi(User::factory()->deleteUsers()->for($companyA)->create())
-            ->delete(route('users.destroy', ['user' => $userFromB->id]))
+        $this->actingAsForApi(User::factory()->deleteUsers()->for($companyA)->create())
+            ->deleteJson(route('api.users.destroy', $userFromA->id))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $this->actingAsForApi(User::factory()->deleteUsers()->for($companyB)->create())
+            ->deleteJson(route('api.users.destroy', $userFromA->id))
             ->assertStatus(403);
 
-        $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
-            ->delete(route('users.destroy', ['user' => $userFromA->id]))
-            ->assertStatus(302)
-            ->assertRedirect(route('users.index'));
+        $this->actingAsForApi($superuser)
+            ->deleteJson(route('api.users.destroy', $userFromA->id))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
 
-        $this->actingAs($superuser)
-            ->post(route('users.destroy', ['userId' => $userFromA->id]))
-            ->assertStatus(302);
-
-        $this->actingAs($superuser)
-            ->post(route('users.destroy', ['userId' => $userFromB->id]))
-            ->assertStatus(302);
+        $this->actingAsForApi($superuser)
+            ->deleteJson(route('api.users.destroy', $userFromB->id))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
 
     }
 

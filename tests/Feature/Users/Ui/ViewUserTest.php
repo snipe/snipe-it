@@ -32,7 +32,6 @@ class ViewUserTest extends TestCase
     public function testPermissionsForPrintAllInventoryPage()
     {
         $this->settings->enableMultipleFullCompanySupport();
-        //$this->withoutExceptionHandling();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
