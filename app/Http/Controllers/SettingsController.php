@@ -14,6 +14,7 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -64,45 +67,13 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        if (array_key_exists("HTTP_X_FORWARDED_PROTO", $_SERVER)) {
-            $protocol = $_SERVER["HTTP_X_FORWARDED_PROTO"] . "://";
-        } elseif (array_key_exists('HTTPS', $_SERVER) && ('on' == $_SERVER['HTTPS'])) {
-            $protocol = "https://";
-        } else {
-            $protocol = "http://";
-        }
-
-        if (array_key_exists("HTTP_X_FORWARDED_HOST", $_SERVER)) {
-            $host = $_SERVER["HTTP_X_FORWARDED_HOST"];
-        } else {
-            $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
-            $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
-            if (('http://' === $protocol && '80' != $port) || ('https://' === $protocol && '443' != $port)) {
-                $host .= ':'.$port;
-            }
-        }
-        $pageURL = $protocol.$host.$_SERVER['REQUEST_URI'];
-
-        $start_settings['url_config'] = config('app.url').'/setup';
-        $start_settings['url_valid'] = ($start_settings['url_config'] === $pageURL);
-        $start_settings['real_url'] = $pageURL;
+        $start_settings['url_config'] = trim(config('app.url'), '/'). '/setup';
+        $start_settings['real_url']  = request()->url();
+        $start_settings['url_valid'] = $start_settings['url_config'] === $start_settings['real_url'];
         $start_settings['php_version_min'] = true;
 
         // Curl the .env file to make sure it's not accessible via a browser
-        $ch = curl_init($protocol.$host.'/.env');
-        curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-        curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        $output = curl_exec($ch);
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        if (404 == $httpcode || 403 == $httpcode || 0 == $httpcode) {
-            $start_settings['env_exposed'] = false;
-        } else {
-            $start_settings['env_exposed'] = true;
-        }
+        $start_settings['env_exposed'] = $this->dotEnvFileIsExposed();
 
         if (App::Environment('production') && (true == config('app.debug'))) {
             $start_settings['debug_exposed'] = true;
@@ -153,6 +124,25 @@ class SettingsController extends Controller
             ->with('step', 1)
             ->with('start_settings', $start_settings)
             ->with('section', 'Pre-Flight Check');
+    }
+
+    /**
+     * Determine if the .env file accessible via a browser.
+     *
+     * @return bool This method will return true when exceptions (such as curl exception) is thrown.
+     * Check the log files to see more details about the exception.
+     */
+    protected function dotEnvFileIsExposed()
+    {
+        try {
+            return Http::timeout(10)
+                ->accept('*/*')
+                ->get(URL::to('.env'))
+                ->successful();
+        } catch (HttpClientException $e) {
+            Log::debug($e->getMessage());
+            return true;
+        }
     }
 
     /**
@@ -458,7 +448,6 @@ class SettingsController extends Controller
                 Storage::disk('public')->delete($setting->favicon);
                 $setting->favicon = null;
             }
-
         }
 
         if ($setting->save()) {
@@ -966,8 +955,6 @@ class SettingsController extends Controller
             $setting->ldap_dept = $request->input('ldap_dept');
             $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
             $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
-
-
         }
 
         if ($setting->save()) {
@@ -1114,8 +1101,6 @@ class SettingsController extends Controller
 
                     ];
                 }
-
-
             }
         }
 
@@ -1209,7 +1194,6 @@ class SettingsController extends Controller
                     } catch (\Exception $e) {
                         Log::debug($e);
                     }
-
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
                 }
@@ -1256,15 +1240,10 @@ class SettingsController extends Controller
                 }
 
                 return redirect()->route('settings.backups.index')->withErrors($validator);
-
             }
-
         } else {
             return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
         }
-
-
-
     }
 
     /**
@@ -1330,7 +1309,6 @@ class SettingsController extends Controller
                 Auth::logout();
 
                 return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
-
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -1358,7 +1336,6 @@ class SettingsController extends Controller
         }
 
         return redirect()->route('settings.index')->with('error', trans('general.purge_not_allowed'));
-
     }
 
     /**
@@ -1389,7 +1366,6 @@ class SettingsController extends Controller
 
                     return redirect()->route('settings.index')
                         ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
-
                 } else {
                     return redirect()->route('settings.purge.index')
                         ->with('error', trans('admin/settings/message.purge.validation_failed'));

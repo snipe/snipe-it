@@ -469,7 +469,7 @@
         });
     });
 </script>
-
+@endpush
 
 
 </body>

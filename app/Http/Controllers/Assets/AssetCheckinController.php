@@ -12,7 +12,6 @@ use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
@@ -47,6 +46,10 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
+        if (!$asset->model) {
+            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+        }
+
         return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto)->with('table_name', 'Assets');
     }
 
@@ -72,6 +75,11 @@ class AssetCheckinController extends Controller
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
+
+        if (!$asset->model) {
+            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+        }
+
         $this->authorize('checkin', $asset);
 
         if ($asset->assignedType() == Asset::USER) {

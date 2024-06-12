@@ -6,6 +6,7 @@ use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -549,6 +550,37 @@ abstract class Importer
         }
         $this->log('No matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
 
+        return null;
+    }
+
+    /**
+     * Parse a date or return null
+     *
+     * @author A. Gianotto
+     * @since 7.0.0
+     * @param $field
+     * @param $format
+     * @return string|null
+
+     */
+    public function parseOrNullDate($field, $format = 'date') {
+
+        $date_format = 'Y-m-d';
+
+        if ($format == 'datetime') {
+            $date_format = 'Y-m-d H:i:s';
+        }
+
+        if (array_key_exists($field, $this->item) && $this->item[$field] != '') {
+
+            try {
+                $value = CarbonImmutable::parse($this->item[$field])->format($date_format);
+                return $value;
+            } catch (\Exception $e) {
+                $this->log('Unable to parse date: ' . $this->item[$field]);
+                return null;
+            }
+        }
         return null;
     }
 }

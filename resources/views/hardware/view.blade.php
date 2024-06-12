@@ -705,18 +705,6 @@
                                         </div>
                                     @endif
 
-                                    @if ($asset->expected_checkin!='')
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <strong>
-                                                    {{ trans('admin/hardware/form.expected_checkin') }}
-                                                </strong>
-                                            </div>
-                                            <div class="col-md-6">
-                                                {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
-                                            </div>
-                                        </div>
-                                    @endif
 
                                     <div class="row">
                                         <div class="col-md-2">
@@ -804,6 +792,19 @@
                                             </div>
                                         </div>
                                      @endif
+                                     @if ($asset->expected_checkin!='')
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/form.expected_checkin') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
+                                            </div>
+                                        </div>
+                                     @endif
+
                                      @if ($asset->last_checkin!='')
                                             <div class="row">
                                                 <div class="col-md-2">
@@ -867,7 +868,7 @@
                                                        'id' => 'bulkForm']) }}
                                                 <input type="hidden" name="bulk_actions" value="labels" />
                                                 <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
-                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fas fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
+                                                <button class="btn btn-sm btn-default" id="bulkEdit"{{ (!$asset->model ? ' disabled' : '') }}{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid').'"' : '') !!}><i class="fas fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
 
                                             {{ Form::close() }}
 
@@ -895,17 +896,21 @@
                                         @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
                                             @can('checkin', \App\Models\Asset::class)
                                                 <div class="col-md-12">
-                                                    <a href="{{ route('hardware.checkin.create', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                    <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
+                                                        <a role="button" href="{{ route('hardware.checkin.create', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
                                                         {{ trans('admin/hardware/general.checkin') }}
                                                     </a>
+                                                    </span>
                                                 </div>
                                             @endcan
                                         @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
                                             @can('checkout', \App\Models\Asset::class)
                                                 <div class="col-md-12" style="padding-top: 5px;">
-                                                    <a href="{{ route('hardware.checkout.create', $asset->id)  }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                    <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
+                                                        <a href="{{ route('hardware.checkout.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
                                                         {{ trans('admin/hardware/general.checkout') }}
                                                     </a>
+                                                    </span>
                                                 </div>
                                             @endcan
                                         @endif
@@ -915,7 +920,7 @@
                                     @can('update', $asset)
                                         @if ($asset->deleted_at=='')
                                         <div class="col-md-12" style="padding-top: 5px;">
-                                            <a href="{{ route('hardware.edit', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                            <a href="{{ route('hardware.edit', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
                                                 {{ trans('admin/hardware/general.edit') }}
                                             </a>
                                         </div>
@@ -924,7 +929,7 @@
 
                                     @can('create', $asset)
                                         <div class="col-md-12" style="padding-top: 5px;">
-                                            <a href="{{ route('clone/hardware', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                            <a href="{{ route('clone/hardware', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
                                                 {{ trans('admin/hardware/general.clone') }}
                                             </a>
                                         </div>
@@ -932,21 +937,24 @@
 
                                     @can('audit', \App\Models\Asset::class)
                                         <div class="col-md-12" style="padding-top: 5px;">
-                                            <a href="{{ route('asset.audit.create', $asset->id)  }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
-                                                {{ trans('general.audit') }}
+                                            <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
+                                                <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
+                                                 {{ trans('general.audit') }}
                                             </a>
+                                            </span>
                                         </div>
                                     @endcan
 
                                     @can('delete', $asset)
                                         <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
                                             @if ($asset->deleted_at=='')
-                                                <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
+                                                <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                                                </button>
                                                 <span class="sr-only">{{ trans('general.delete') }}</span>
                                             @else
                                                 <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
                                                     @csrf
-                                                    <button class="btn btn-sm btn-warning col-md-12">{{ trans('general.restore') }}</button>
+                                                    <button class="btn btn-sm btn-warning btn-block">{{ trans('general.restore') }}</button>
                                                 </form>
                                            @endif
                                         </div>

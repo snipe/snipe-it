@@ -2,9 +2,9 @@
 return array(
     'companies' => 'Các công ty',
     'create'    => 'Tạo công ty',
-    'email'     => 'Company Email',
+    'email'     => 'Địa chỉ email',
     'title'     => 'Công ty',
-    'phone'     => 'Company Phone',
+    'phone'     => 'Số điện thoại',
     'update'    => 'Cập nhật Công ty',
     'name'      => 'Tên công ty',
     'id'        => 'ID',

@@ -5,11 +5,11 @@ return [
     'undeployable' 		=> 'ADVERTENCI<strong>ADVERTENCI </strong> Este activo ha sido marcado como actualmente no desplegable.
                         Si este estado ha cambiado, por favor actualice el estado del activo.',
     'does_not_exist' 	=> 'El recurso no existe.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Activo con etiqueta :asset_tag no encontrado.',
+    'no_tag' 	        => 'No se ha proporcionado ninguna etiqueta de activo.',
     'does_not_exist_or_not_requestable' => 'Ese activo no existe o no es solicitable.',
     'assoc_users'	 	=> 'Este activo está actualmente reservado a un usuario y no puede ser eliminado. Por favor, compruebe el activo primero y vuelva a intentarlo. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
         'error'   		=> 'El recurso no fue creado, por favor inténtalo de nuevo. :(',
@@ -34,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Auditoría de activos fallida: :error ',
         'success' 		=> 'Auditoría de activos registrada con éxito.',
     ],
 

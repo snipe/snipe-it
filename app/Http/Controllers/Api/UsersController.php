@@ -13,7 +13,6 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -22,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\DeleteUserRequest;
 
 class UsersController extends Controller
 {
@@ -78,6 +78,10 @@ class UsersController extends Controller
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
+
+        if ($request->filled('search') != '') {
+            $users = $users->TextSearch($request->input('search'));
+        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -201,8 +205,12 @@ class UsersController extends Controller
 
         if ($request->filled('location_id') != '') {
             $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
-         } else {
-            $users = $users->TextSearch($request->input('search'));
+         }
+
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -254,7 +262,7 @@ class UsersController extends Controller
                         'licenses_count',
                         'consumables_count',
                         'accessories_count',
-                        'manages_user_count',
+                        'manages_users_count',
                         'manages_locations_count',
                         'phone',
                         'address',
@@ -274,19 +282,11 @@ class UsersController extends Controller
                         'website',
                     ];
 
-                $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
+                $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
                 $users = $users->orderBy($sort, $order);
                 break;
         }
 
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
-
-        // Apply companyable scope
-        $users = Company::scopeCompanyables($users);
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
@@ -320,8 +320,6 @@ class UsersController extends Controller
                 'users.email',
             ]
             )->where('show_in_list', '=', '1');
-
-        $users = Company::scopeCompanyables($users);
 
         if ($request->filled('search')) {
             $users = $users->where(function ($query) use ($request) {
@@ -417,9 +415,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
-
-        if ($user = Company::scopeCompanyables($user)->find($id)) {
+        if ($user = User::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count')->find($id)) {
             $this->authorize('view', $user);
             return (new UsersTransformer)->transformUser($user);
         }
@@ -442,15 +438,12 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        $user = User::findOrFail($id);
-        $user = Company::scopeCompanyables($user)->find($id);
+        $user = User::find($id);
         $this->authorize('update', $user);
 
         /**
          * This is a janky hack to prevent people from changing admin demo user data on the public demo.
-         * 
          * The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
-         * 
          *  Thanks, jerks. You are why we can't have nice things. - snipe
          * 
          */ 
@@ -526,31 +519,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeleteUserRequest $request, $id)
     {
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+
         $this->authorize('delete', $user);
 
+
         if ($user) {
-
-            if (($user->assets) && ($user->assets->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete_has_assets')));
-            }
-
-            if (($user->licenses) && ($user->licenses->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
-            }
-
-            if (($user->accessories) && ($user->accessories->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
-            }
-
-            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
-            }
-
+            
             if ($user->delete()) {
 
                 // Remove the user's avatar if they have one
@@ -564,9 +542,12 @@ class UsersController extends Controller
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
             }
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
+
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+
     }
 
     /**
@@ -582,32 +563,35 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
-        $this->authorize('view', $user);
+        if ($user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id)) {
+            $this->authorize('view', $user);
 
-        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
-
-
-        // Filter on category ID
-        if ($request->filled('category_id')) {
-            $assets = $assets->InCategory($request->input('category_id'));
-        }
+            $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model');
 
 
-        // Filter on model ID
-        if ($request->filled('model_id')) {
-
-            $model_ids = $request->input('model_id');
-            if (!is_array($model_ids)) {
-                $model_ids = array($model_ids);
+            // Filter on category ID
+            if ($request->filled('category_id')) {
+                $assets = $assets->InCategory($request->input('category_id'));
             }
-            $assets = $assets->InModelList($model_ids);
+
+
+            // Filter on model ID
+            if ($request->filled('model_id')) {
+
+                $model_ids = $request->input('model_id');
+                if (!is_array($model_ids)) {
+                    $model_ids = array($model_ids);
+                }
+                $assets = $assets->InModelList($model_ids);
+            }
+
+            $assets = $assets->get();
+
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
         }
 
-        $assets = $assets->get();
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
 
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
     /**
@@ -622,17 +606,21 @@ class UsersController extends Controller
     public function emailAssetList(Request $request, $id)
     {
         $this->authorize('update', User::class);
-        $user = User::findOrFail($id);
-        $user = Company::scopeCompanyables($user)->find($id);
-        $this->authorize('update', $user);
 
-        if (empty($user->email)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
+        if ($user = User::find($id)) {
+            $this->authorize('update', $user);
+
+            if (empty($user->email)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
+            }
+
+            $user->notify((new CurrentInventory($user)));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success')));
         }
 
-        $user->notify((new CurrentInventory($user)));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
  
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success')));
+
     }
 
     /**

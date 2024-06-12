@@ -4,7 +4,7 @@ return array(
 
     'does_not_exist' => 'La categoría no existe.',
     'assoc_models'	 => 'Esta categoría está actualmente asociada con al menos un modelo y no puede ser eliminada. Por favor actualiza tus modelos para no referenciar más esta categoría e inténtalo de nuevo. ',
-    'assoc_items'	 => 'Esta categoría está actualmente asociada con al menos un :asset_type y no puede ser eliminada. Por favor actualiza tus :asset_type para no referenciar más esta categoría e inténtalo de nuevo. ',
+    'assoc_items'	 => 'Esta categoría está actualmente asociada con al menos un: asset_type y no se puede eliminar. Por favor actualice su: asset_type para que no haga referencia a esta categoría e inténtelo de nuevo. ',
 
     'create' => array(
         'error'   => 'La categoría no fue creada, por favor inténtalo de nuevo.',

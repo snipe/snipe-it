@@ -18,7 +18,7 @@
 
     <div class="row">
         <!-- left column -->
-        <div class="col-md-7">
+        <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
 
                 {{ Form::open([
@@ -32,15 +32,28 @@
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
-                    @if ($asset->model->name)
-                        <!-- Asset name -->
+
+                        <!-- Asset model -->
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
                                 <div class="col-md-8">
-                                    <p class="form-control-static">{{ $asset->model->name }}</p>
+                                    <p class="form-control-static">
+                                        @if (($asset->model) && ($asset->model->name))
+                                            {{ $asset->model->name }}
+                                        @else
+                                            <span class="text-danger text-bold">
+                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              {{ trans('admin/hardware/general.model_invalid')}}
+                                            </span>
+                                            {{ trans('admin/hardware/general.model_invalid_fix')}}
+                                            <a href="{{ route('hardware.edit', $asset->id) }}">
+                                                <strong>{{ trans('admin/hardware/general.edit') }}</strong>
+                                            </a>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
-                    @endif
+
 
                     <!-- Asset Name -->
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -114,7 +127,10 @@
                     </div> <!--/.box-body-->
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.audit') }}</button>
+                        <button type="submit" class="btn btn-success pull-right{{ (!$asset->model ? ' disabled' : '') }}"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'" disabled' : '') !!}>
+                            <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                            {{ trans('general.audit') }}
+                        </button>
                     </div>
                 </form>
             </div>
