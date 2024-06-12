@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Users;
+namespace Feature\Users\Ui;
 
-use Illuminate\Support\Facades\Notification;
 use App\Models\Company;
 use App\Models\User;
-use Tests\TestCase;
 use App\Notifications\CurrentInventory;
+use Illuminate\Support\Facades\Notification;
+use Tests\TestCase;
 
 class ViewUserTest extends TestCase
 {
