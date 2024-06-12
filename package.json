@@ -33,7 +33,7 @@
         "acorn-import-assertions": "^1.9.0",
         "admin-lte": "^2.4.18",
         "ajv": "^6.12.6",
-        "alpinejs": "^3.13.10",
+        "alpinejs": "^3.14.0",
         "blueimp-file-upload": "^9.34.0",
         "bootstrap": "^3.4.1",
         "bootstrap-colorpicker": "^2.5.3",
