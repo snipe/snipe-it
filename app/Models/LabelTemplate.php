@@ -4,9 +4,10 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use TCPDF_STATIC;
 
-class LabelTemplate extends Model
+class LabelTemplate extends SnipeModel
 {
     use HasFactory;
 
@@ -113,11 +114,11 @@ class LabelTemplate extends Model
     }
 
     public function labelPosition($index)  {
-        $printIndex = $index + $this->getLabelIndexOffset();
-        $row = (int)($printIndex / $this->getColumns());
-        $col = $printIndex - ($row * $this->getColumns());
-        $x = $this->getPageMarginLeft() + (($this->getLabelWidth() + $this->getLabelColumnSpacing()) * $col);
-        $y = $this->getPageMarginTop() + (($this->getLabelHeight() + $this->getLabelRowSpacing()) * $row);
+        $printIndex = $index + $this->label_index;
+        $row = (int)($printIndex / $this->columns());
+        $col = $printIndex - ($row * $this->rows());
+        $x = $this->marginLeft() + (($this->label_Width() + $this->columnSpacing()) * $col);
+        $y = $this->margintTop() + (( $this->label_Height() + $this->labelRowSpacing())  * $row);
         return [ $x, $y ];
     }
     public function columns() {
@@ -146,9 +147,11 @@ class LabelTemplate extends Model
      *
      * @return float The column spacing in points.
      */
-    public function columnSpacing() {
+    public function columnSpacing()
+    {
         $columnSpacingPT = ($this->column2_x - $this->column1_x - $this->label_width);
         return Helper::convertUnit($columnSpacingPT, 'pt', $this->measurement_unit);
+
     }
 
     /**
@@ -171,7 +174,9 @@ class LabelTemplate extends Model
      *
      * @return float The label width in points.
      */
-    public function labelWidth() {
+    public function label_Width()
+    {
+
         if (isset($this->label_width)) {
             return Helper::convertUnit($this->label_width, 'pt', $this->measurement_unit);
         }
@@ -186,7 +191,8 @@ class LabelTemplate extends Model
      *
      * @return float The label height in points.
      */
-    public function labelHeight() {
+    public function label_Height()
+    {
         if (isset($this->label_height)) {
             return Helper::convertUnit($this->label_height, 'pt', $this->measurement_unit);
         }
@@ -238,5 +244,21 @@ class LabelTemplate extends Model
             'width'  => ($round !== false) ? round($width, $round)  : $width,
             'height' => ($round !== false) ? round($height, $round) : $height,
         ];
+    }
+
+    /**
+     * Returns the label's orientation as a string.
+     * 'L' = Landscape
+     * 'P' = Portrait
+     *
+     * @return string
+     */
+    public function getOrientation() {
+        if (!empty($this->label_width) && !empty($this->label_height)) {
+            return ($this->label_width >= $this->label_height) ? 'L' : 'P';
+        }
+        else{
+            return ($this->tape_width >= $this->tape_height) ? 'L' : 'P';
+        }
     }
 }

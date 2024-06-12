@@ -35,6 +35,7 @@ class CreateLabelTemplatesTable extends Migration
             $table->decimal('field_margin', 6, 3)->nullable();
             $table->decimal('label_size', 6, 3)->nullable();
             $table->decimal('label_margin', 6, 3)->nullable();
+            $table->decimal('label_index', 6, 3)->nullable();
             $table->decimal('tag_size', 6, 3)->nullable();
             $table->char('tag_align', 1)->nullable();
             $table->string('tag_position')->nullable();
@@ -83,6 +84,7 @@ class CreateLabelTemplatesTable extends Migration
                     'field_margin' => null,
                     'label_size' => null,
                     'label_margin' => null,
+                    'label_index' => 0,
                     'logo_max_width' => null,
                     'logo_margin' => null,
                     'measurement_unit' => 'in',
@@ -128,6 +130,7 @@ class CreateLabelTemplatesTable extends Migration
                     'field_margin' => null,
                     'label_size' => .09,
                     'label_margin' => -.015,
+                    'label_index' => 0,
                     'tag_size' => null,
                     'tag_position' => null,
                     'tag_align' => null,
@@ -173,6 +176,7 @@ class CreateLabelTemplatesTable extends Migration
                     'field_margin' => .3,
                     'label_size' => 2.2,
                     'label_margin' => -.5,
+                    'label_index' => 0,
                     'tag_size' => 4.6,
                     'logo_max_width' => null,
                     'logo_margin' => null,
@@ -218,6 +222,7 @@ class CreateLabelTemplatesTable extends Migration
                     'field_margin' => .3,
                     'label_size' => 2.2,
                     'label_margin' => -.5,
+                    'label_index' => 0,
                     'tag_size' => 3.2,
                     'logo_max_width' => 25,
                     'logo_margin' => 2.2,
@@ -262,6 +267,7 @@ class CreateLabelTemplatesTable extends Migration
                     'field_size' => 4.8,
                     'field_margin' => .3,
                     'label_size' => 2.35,
+                    'label_index' => 0,
                     'label_margin' => -.3,
                     'tag_size' => 4.8,
                     'logo_max_width' => null,
@@ -307,6 +313,7 @@ class CreateLabelTemplatesTable extends Migration
                     "field_margin" => null,
                     "label_size" => null,
                     "label_margin" => null,
+                    'label_index' => 0,
                     "tag_size" => null,
                     "logo_max_width" => null,
                     "logo_margin" => null,
@@ -330,7 +337,7 @@ class CreateLabelTemplatesTable extends Migration
                     'rows' => null,
                     'title_align' => null,
                     'tag_position' => null,
-                    'tag_align' => null
+                    'tag_align' => null,
                 ],
                 [
                     "name" => "Brother TZE 18mm",
@@ -352,6 +359,7 @@ class CreateLabelTemplatesTable extends Migration
                     "field_margin" => null,
                     "label_size" => null,
                     "label_margin" => null,
+                    'label_index' => 0,
                     "tag_size" => null,
                     "logo_max_width" => null,
                     "logo_margin" => null,
@@ -375,7 +383,7 @@ class CreateLabelTemplatesTable extends Migration
                     'rows' => null,
                     'title_align' => null,
                     'tag_position' => null,
-                    'tag_align' => null
+                    'tag_align' => null,
                 ],
                 [
                     "name" => "Brother TZE 24mm",
@@ -397,6 +405,7 @@ class CreateLabelTemplatesTable extends Migration
                     "field_margin" => 0.15,
                     "label_size" => 2.00,
                     "label_margin" => -0.35,
+                    'label_index' => 0,
                     "tag_size" => 2.80,
                     "logo_max_width" => null,
                     "logo_margin" => null,
@@ -420,7 +429,7 @@ class CreateLabelTemplatesTable extends Migration
                     'rows' => null,
                     'title_align' => null,
                     'tag_position' => null,
-                    'tag_align' => null
+                    'tag_align' => null,
                 ],
                 [
                     "name" => "Dymo Label Writer 30252",
@@ -442,6 +451,7 @@ class CreateLabelTemplatesTable extends Migration
                     "field_margin" => 0.15,
                     "label_size" => 2.00,
                     "label_margin" => -0.35,
+                    'label_index' => 0,
                     "tag_size" => 2.80,
                     "logo_max_width" => 2.00,
                     "logo_margin" => 0.17,
@@ -465,7 +475,7 @@ class CreateLabelTemplatesTable extends Migration
                     'rows' => null,
                     'title_align' => null,
                     'tag_position' => null,
-                    'tag_align' => null
+                    'tag_align' => null,
                 ],
                 [
                     "name" => "Dymo Label Writer 1933081",
@@ -487,6 +497,7 @@ class CreateLabelTemplatesTable extends Migration
                     "field_margin" => 0.15,
                     "label_size" => 2.80,
                     "label_margin" => -0.35,
+                    'label_index' => 0,
                     "tag_size" => 2.80,
                     "logo_max_width" => 5.61,
                     "logo_margin" => 0.01,
@@ -510,7 +521,7 @@ class CreateLabelTemplatesTable extends Migration
                     'rows' => null,
                     'title_align' => null,
                     'tag_position' => null,
-                    'tag_align' => null
+                    'tag_align' => null,
                 ],
                 [
                     "name" => "Dymo Label Writer 2112283",
@@ -532,6 +543,7 @@ class CreateLabelTemplatesTable extends Migration
                     "field_margin" => 0.15,
                     "label_size" => 2.80,
                     "label_margin" => -0.35,
+                    'label_index' => 0,
                     "tag_size" => 2.80,
                     "logo_max_width" => null,
                     "logo_margin" => null,
@@ -555,7 +567,7 @@ class CreateLabelTemplatesTable extends Migration
                     'rows' => null,
                     'title_align' => null,
                     'tag_position' => null,
-                    'tag_align' => null
+                    'tag_align' => null,
                 ]
             ];
         DB::table('label_templates')->insert($defaults);

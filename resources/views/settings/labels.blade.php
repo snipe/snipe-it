@@ -382,35 +382,35 @@
                                 </div>
                             </div>
                         @endif
-                        @if(!$setting->label2_enable)
-                            <div class="form-group">
-                                <div class="col-md-3 text-right">
-                                {{ Form::label('labels_display', trans('admin/settings/general.label_fields'), ['class' => 'control-label']) }}
-                                </div>
-                                <div class="col-md-9">
-                                        <label class="form-control">
-                                            {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
-                                            {{ trans('admin/hardware/form.name') }}
-                                        </label>
-                                        <label class="form-control">
-                                            {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}
-                                            {{ trans('admin/hardware/form.serial') }}
-                                        </label>
-                                        <label class="form-control">
-                                            {{ Form::checkbox('labels_display_tag', '1', old('labels_display_tag',   $setting->labels_display_tag),['class' => 'minimal', 'aria-label'=>'labels_display_tag']) }}
-                                            {{ trans('admin/hardware/form.tag') }}
-                                        </label>
-                                        <label class="form-control">
-                                            {{ Form::checkbox('labels_display_model', '1', old('labels_display_model',   $setting->labels_display_model),['class' => 'minimal', 'aria-label'=>'labels_display_model']) }}
-                                            {{ trans('admin/hardware/form.model') }}
-                                        </label>
-                                        <label class="form-control">
-                                            {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}
-                                            {{ trans('admin/companies/table.name') }}
-                                        </label>
-                                </div> <!--/.col-md-9-->
-                            </div> <!--/.form-group-->
-                        @endif
+{{--                        @if(!$setting->label2_enable)--}}
+{{--                            <div class="form-group">--}}
+{{--                                <div class="col-md-3 text-right">--}}
+{{--                                {{ Form::label('labels_display', trans('admin/settings/general.label_fields'), ['class' => 'control-label']) }}--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-9">--}}
+{{--                                        <label class="form-control">--}}
+{{--                                            {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}--}}
+{{--                                            {{ trans('admin/hardware/form.name') }}--}}
+{{--                                        </label>--}}
+{{--                                        <label class="form-control">--}}
+{{--                                            {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}--}}
+{{--                                            {{ trans('admin/hardware/form.serial') }}--}}
+{{--                                        </label>--}}
+{{--                                        <label class="form-control">--}}
+{{--                                            {{ Form::checkbox('labels_display_tag', '1', old('labels_display_tag',   $setting->labels_display_tag),['class' => 'minimal', 'aria-label'=>'labels_display_tag']) }}--}}
+{{--                                            {{ trans('admin/hardware/form.tag') }}--}}
+{{--                                        </label>--}}
+{{--                                        <label class="form-control">--}}
+{{--                                            {{ Form::checkbox('labels_display_model', '1', old('labels_display_model',   $setting->labels_display_model),['class' => 'minimal', 'aria-label'=>'labels_display_model']) }}--}}
+{{--                                            {{ trans('admin/hardware/form.model') }}--}}
+{{--                                        </label>--}}
+{{--                                        <label class="form-control">--}}
+{{--                                            {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}--}}
+{{--                                            {{ trans('admin/companies/table.name') }}--}}
+{{--                                        </label>--}}
+{{--                                </div> <!--/.col-md-9-->--}}
+{{--                            </div> <!--/.form-group-->--}}
+{{--                        @endif--}}
                     </div>
 
                 </div> <!--/.box-body-->

@@ -1365,7 +1365,7 @@ class Helper
      * @param int    $round    Round the result to decimals (Default false - No rounding)
      * @return float
      */
-    public static function convertUnit($value, $srcUnit, $dstUnit, $round=false) {
+    public static function convertUnit($value, string $srcUnit, $dstUnit, $round=false) {
         $srcFactor = static::getUnitConversionFactor($srcUnit);
         $dstFactor = static::getUnitConversionFactor($dstUnit);
         $output = $value * $srcFactor / $dstFactor;

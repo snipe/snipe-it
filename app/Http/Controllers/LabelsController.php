@@ -30,7 +30,7 @@ class LabelsController extends Controller
     public function show(string $labelName)
     {
         $labelName = str_replace('/', '\\', $labelName);
-        $template = LabelTemplate::query()->where('name', $labelName)->first();
+        $template = LabelTemplate::where('name', $labelName)->first();
 
 
         $exampleAsset = new Asset();
@@ -95,7 +95,6 @@ class LabelsController extends Controller
         return (new LabelView())
             ->with('assets', collect([$exampleAsset]))
             ->with('settings', $settings)
-            ->with('settings', $template)
             ->with('template', $template)
             ->with('bulkedit', false)
             ->with('count', 0);

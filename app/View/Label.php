@@ -10,7 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Traits\Macroable;
-use LabelWriter;
+use App\Models\Labels\LabelWriter;
 use TCPDF;
 
 class Label implements View
@@ -40,7 +40,7 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = LabelTemplate::query()->where('name', '=', $settings->label2_template);
+        $template = LabelTemplate::where('name', '=', $settings->label2_template)->first();
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
@@ -66,7 +66,7 @@ class Label implements View
         $pdf->SetCellPaddings(0, 0, 0, 0);
         $pdf->setCreator('Snipe-IT');
         $pdf->SetSubject('Asset Labels');
-        $template->preparePDF($pdf);
+//        $this->preparePDF($pdf);
 
         // Get fields from settings
         $fieldDefinitions = collect(explode(';', $settings->label2_fields))
@@ -178,11 +178,11 @@ class Label implements View
             });
 
         if (strpos($template->label_type, 'Sheet') !== false){
-            $template->labelIndexOffset;
-            dd($template->labelIndexOffset);
+            $template->label_index;
+
         }
         $writer = new LabelWriter();
-        $writer->writeAll($pdf, $data);
+        $writer->writeAll($pdf, $data, $template);
 
         $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
         $pdf->Output($filename, 'I');
