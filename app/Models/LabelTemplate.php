@@ -113,12 +113,13 @@ class LabelTemplate extends SnipeModel
         return $this->label_border;
     }
 
-    public function labelPosition($index)  {
+    public function getlabelPosition($index)  {
         $printIndex = $index + $this->label_index;
         $row = (int)($printIndex / $this->columns());
-        $col = $printIndex - ($row * $this->rows());
-        $x = $this->marginLeft() + (($this->label_Width() + $this->columnSpacing()) * $col);
-        $y = $this->margintTop() + (( $this->label_Height() + $this->labelRowSpacing())  * $row);
+
+        $col = $printIndex - ($row * $this->columns());
+        $x = $this->margin_Left() + (($this->label_Width() + $this->columnSpacing()) * $col);
+        $y = $this->margin_Top() + (( $this->label_Height() + $this->labelRowSpacing())  * $row);
         return [ $x, $y ];
     }
     public function columns() {
@@ -191,7 +192,7 @@ class LabelTemplate extends SnipeModel
      *
      * @return float The label height in points.
      */
-    public function label_Height()
+    public function label_Height(): float
     {
         if (isset($this->label_height)) {
             return Helper::convertUnit($this->label_height, 'pt', $this->measurement_unit);
@@ -206,7 +207,8 @@ class LabelTemplate extends SnipeModel
      *
      * @return float The left margin in points.
      */
-    public function marginLeft(){
+    public function margin_Left(): float
+    {
         return Helper::convertUnit($this->column1_x, 'pt', $this->measurement_unit);
     }
 
@@ -215,7 +217,8 @@ class LabelTemplate extends SnipeModel
      *
      * @return float The top margin in points.
      */
-    public function margintTop(){
+    public function margin_Top(): float
+    {
         return Helper::convertUnit($this->row1_y, 'pt', $this->measurement_unit);
     }
     /**
@@ -261,4 +264,5 @@ class LabelTemplate extends SnipeModel
             return ($this->tape_width >= $this->tape_height) ? 'L' : 'P';
         }
     }
+
 }

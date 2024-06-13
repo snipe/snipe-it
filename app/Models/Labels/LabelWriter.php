@@ -38,7 +38,7 @@ class LabelWriter
                 }
 
                 $pageIndex = $recordIndex - ($label->labelsPerPage() * $pageNumber);
-                $position = $label->labelPosition($pageIndex);
+                $position = $label->getlabelPosition($pageIndex);
 
                 $pdf->StartTemplate();
                 $this->write($pdf, $data->get($recordIndex), $label);
@@ -71,25 +71,32 @@ class LabelWriter
     /**
      * Write the label information to the PDF.
      *
-     * @param object $pdf The PDF object to write to.
+     * @param TCPDF $pdf The PDF object to write to.
      * @param object $record The record containing the data to write on the label.
      *
      * @return void
      */
-    public function write(TCPDF $pdf, $record, $template)
+    public function write(TCPDF $pdf, object $record, $template)
     {
         $pa = $this->getLabelPrintableArea($template);
-        
         $currentX = $pa->x1;
         $currentY = $pa->y1;
         $usableWidth = $pa->w;
         $usableHeight = $pa->h;
 
+        if ($record->has('barcode1d')) {
+            static::write1DBarcode(
+                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
+                $pa->x1, $pa->y2 - $template->barcode_size,
+                $pa->w, $template->barcode_size
+            );
+            $usableHeight -= $template->barcode_size + $template->barcode_margin;
+        }
         if ($record->has('title')) {
             static::writeText(
                 $pdf, $record->get('title'),
                 $currentX, $currentY,
-                'freesans', '', $template->title_size, isset($template->title_align) ? $template->title_align : 'L',
+                'freesans', '', $template->title_size, $template->title_align ?? 'L',
                 $usableWidth, $template->title_size, true, 0
             );
             $currentY += $template->title_size + $template->title_margin;
@@ -120,22 +127,19 @@ class LabelWriter
             static::writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $tagY,
-                'freemono', 'b', $template->tag_size, $template->tag_align,
-                $usableWidth, $template->tag_size, true, 0
+                'freemono',
+                'b', $template->tag_size,
+                (string) $template->tag_align,
+                $usableWidth,
+                $template->tag_size,
+                true,
+                0
             );
             if ($tagPosition === 'bottom') {
                 $currentY += $template->tag_size + $template->barcode_margin;
             }
         }
 
-        if ($record->has('barcode1d')) {
-            static::write1DBarcode(
-                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
-                $pa->x1, $pa->y2 - $template->barcode_size,
-                $pa->w, $template->barcode_size
-            );
-            $usableHeight -= $template->barcode_size + $template->barcode_margin;
-        }
 
         if ($record->has('logo')) {
             $logoSize = static::writeImage(
@@ -210,7 +214,7 @@ class LabelWriter
      * @param  int     $border  Thickness of border. Default = 0.
      * @param  int     $spacing Letter spacing. Default = 0.
      */
-    public function writeText(TCPDF $pdf, $text, $x, $y, $font=null, $style=null, $size=null, $align='L', $width=null, $height=null, $squash=false, $border=0, $spacing=0) {
+    public function writeText(TCPDF $pdf, string $text, float $x,float $y, string $font=null, string $style=null, int $size=null, string $align='L', float $width=null, float $height=null, bool $squash=false, int $border=0, int $spacing=0) {
         $prevFamily = $pdf->getFontFamily();
         $prevStyle = $pdf->getFontStyle();
         $prevSizePt = $pdf->getFontSizePt();
@@ -222,7 +226,7 @@ class LabelWriter
         if ($size) $fontSizePt = Helper::convertUnit($size, $template->measurement_unit, 'pt', true);
         else $fontSizePt = $prevSizePt;
 
-        $pdf->SetFontSpacing($spacing);
+//        $pdf->SetFontSpacing($spacing);
 
         $parts = collect(explode('**', $text))
             ->map(function ($part, $index) use ($pdf, $fontFamily, $fontStyle, $fontSizePt) {
@@ -407,7 +411,7 @@ class LabelWriter
      * @param  float   $width   The container width
      * @param  float   $height  The container height
      */
-    public final function write2DBarcode(TCPDF $pdf, $value, $type, $x, $y, $width, $height) {
+    public function write2DBarcode(TCPDF $pdf, string $value, string $type, float $x, float $y, float $width, float $height) {
         if (empty($value)) return;
         $pdf->write2DBarcode($value, $type, $x, $y, $width, $height, null, ['stretch'=>true]);
     }
@@ -420,14 +424,15 @@ class LabelWriter
     public final function getLabelPrintableArea($template) : object
     {
         return (object)[
-            'x1' => $template->margin_left,
-            'y1' => $template->margin_top,
-            'x2' => $template->label_width - $template->margin_right,
-            'y2' => $template->label_height - $template->margin_bottom,
-            'w' => $template->label_width - $template->margin_left - $template->margin_right,
-            'h' => $template->label_height - $template->margin_top - $template->margin_botom,
+            'x1' => $template->margin_Left(),
+            'y1' => $template->margin_Top(),
+            'x2' => $template->paperSize()->width - $template->margin_right,
+            'y2' => $template->paperSize()->height - $template->margin_bottom,
+            'w' => $template->paperSize()->width - $template->margin_Left() - $template->margin_right,
+            'h' => $template->paperSize()->height - $template->margin_Top() - $template->margin_botom,
         ];
     }
+
 
 
 
