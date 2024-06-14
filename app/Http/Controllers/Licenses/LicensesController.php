@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\LicenseSeat;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,8 @@ class LicensesController extends Controller
         return view('licenses/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('maintained_list', $maintained_list)
-            ->with('item', new License);
+            ->with('item', new License)
+            ->with('setting', Setting::getSettings());
     }
 
     /**
@@ -135,7 +137,8 @@ class LicensesController extends Controller
 
         return view('licenses/edit', compact('item'))
             ->with('depreciation_list', Helper::depreciationList())
-            ->with('maintained_list', $maintained_list);
+            ->with('maintained_list', $maintained_list)
+            ->with('setting', Setting::getSettings());
     }
 
 
