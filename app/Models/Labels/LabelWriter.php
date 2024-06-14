@@ -41,7 +41,7 @@ class LabelWriter
                 $position = $label->getlabelPosition($pageIndex);
 
                 $pdf->StartTemplate();
-                $this->write($pdf, $data->get($recordIndex), $label);
+                $this->write5267($pdf, $data->get($recordIndex), $label);
                 $template = $pdf->EndTemplate();
 
                 $pdf->printTemplate($template, $position[0], $position[1]);
@@ -64,7 +64,7 @@ class LabelWriter
         }else {
             $data->each(function ($record, $index) use ($label, $pdf) {
                 $pdf->AddPage();
-                $this->write($pdf, $record, $label);
+                $this->write5267($pdf, $record, $label);
             });
         }
     }
@@ -191,6 +191,40 @@ class LabelWriter
                 'freemono', 'b', $template->tag_size, 'R',
                 $usableWidth, $template->tag_size, true, 0, 0.3
             );
+        }
+
+    }
+    public function write5267($pdf, $record, $template) {
+        $pa = $this->getLabelPrintableArea($template);
+//dd($this->getLabelPrintableArea($template));
+        if ($record->has('barcode1d')) {
+            static::write1DBarcode(
+                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
+                $pa->x1, $pa->y2 - $template->barcode_size,
+                $pa->w, $template->barcode_size
+            );
+        }
+
+        if ($record->has('title')) {
+            static::writeText(
+                $pdf, $record->get('title'),
+                $pa->x1, $pa->y1,
+                'freesans', '', $template->title_size, 'L',
+                $pa->w, $template->title_size, true, 0
+            );
+        }
+
+        $fieldY = $pa->y2 - $template->barcode_size - $template->barcode_margin - $template->field_size;
+        if ($record->has('fields')) {
+            if ($record->get('fields')->count() >= 1) {
+                $field = $record->get('fields')->first();
+                static::writeText(
+                    $pdf, $field['value'],
+                    $pa->x1, $fieldY,
+                    'freemono', 'B', $template->field_size, 'C',
+                    $pa->w, $template->field_size, true, 0, 0.01
+                );
+            }
         }
 
     }
@@ -424,12 +458,12 @@ class LabelWriter
     public final function getLabelPrintableArea($template) : object
     {
         return (object)[
-            'x1' => $template->margin_Left(),
-            'y1' => $template->margin_Top(),
-            'x2' => $template->paperSize()->width - $template->margin_right,
-            'y2' => $template->paperSize()->height - $template->margin_bottom,
-            'w' => $template->paperSize()->width - $template->margin_Left() - $template->margin_right,
-            'h' => $template->paperSize()->height - $template->margin_Top() - $template->margin_botom,
+            'x1' => $template->margin_left,
+            'y1' => $template->margin_top,
+            'x2' => $template->label_width - $template->margin_right,
+            'y2' => $template->label_height - $template->margin_bottom,
+            'w' => $template->label_width - $template->margin_left - $template->margin_right,
+            'h' => $template->label_height - $template->margin_top - $template->margin_botom,
         ];
     }
 
