@@ -26,7 +26,7 @@
     "alek13/slack": "^2.0",
     "arietimmerman/laravel-scim-server": "dev-master",
     "bacon/bacon-qr-code": "^2.0",
-    "barryvdh/laravel-debugbar": "^3.6",
+    "barryvdh/laravel-debugbar": "^3.13",
     "barryvdh/laravel-dompdf": "^2.0",
     "doctrine/cache": "^1.10",
     "doctrine/dbal": "^3.1",
