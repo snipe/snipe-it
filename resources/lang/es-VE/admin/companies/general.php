@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Seleccionar Compañía',
-    'about_companies' => 'Acerca de la compañias',
-    'about_companies_description' => '        Puede usar las empresas como un campo informativo simple, o puede usarlas para restringir la visibilidad y la disponibilidad de los activos a los usuarios con una empresa específica al habilitar el Soporte completo de la empresa en su Configuración de administrador.',
+    'about_companies' => 'Acerca de las empresas',
+    'about_companies_description' => '        Puede utilizar las empresas como un simple campo informativo, o puede utilizarlas para restringir la visibilidad y la disponibilidad de los activos a los usuarios con una empresa específica, esto se hace habilitando la opción de "Soporte completo a varias empresas" en la "Configuración de administrador"',
 ];

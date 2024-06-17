@@ -2,12 +2,12 @@
 
 return array(
 
-    'accepted'                  => 'Has aceptado este activo con éxito.',
+    'accepted'                  => 'Ha aceptado este artículo exitosamente.',
     'declined'                  => 'Has rechazado este activo con éxito.',
-    'bulk_manager_warn'	        => 'Tus usuarios han sido actualizados con éxito, sin embargo tu entrada de administrador no fue guardada debido que el administrador que seleccionaste también era un usuario de la lista que iba a ser editada, y los usuarios no pueden editar a su propio administrador. Por favor selecciona a tus usuarios de nuevo, excluyendo al administrador.',
+    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada de administrador no fue guardada porque el gerente seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propios gerentes. Vuelva a seleccionar los usuarios, excluyendo al gerente.',
     'user_exists'               => '¡El usuario ya existe!',
     'user_not_found'            => 'El usuario no existe.',
-    'user_login_required'       => 'El campo de usuario es obligatorio',
+    'user_login_required'       => 'El campo usuario es obligatorio',
     'user_has_no_assets_assigned' => 'No hay activos asignados al usuario.',
     'user_password_required'    => 'La contraseña es obligatoria.',
     'insufficient_permissions'  => 'Permisos insuficientes.',
@@ -21,7 +21,7 @@ return array(
 
     'success' => array(
         'create'    => 'El usuario fue creado con éxito.',
-        'update'    => 'El usuario fue actualizado con éxito.',
+        'update'    => 'Usuario actualizado exitosamente.',
         'update_bulk'    => '¡Los usuarios fueron actualizados con éxito!',
         'delete'    => 'Usuario borrado con éxito.',
         'ban'       => 'Usuario bloqueado con éxito.',
@@ -47,7 +47,7 @@ return array(
         'asset_already_accepted' => 'Este activo ya ha sido aceptado.',
         'accept_or_decline' => 'Debes aceptar o rechazar este activo.',
         'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
-        'incorrect_user_accepted' => 'El activo que intentaste aceptar no fue asignado a ti.',
+        'incorrect_user_accepted' => 'El elemento que ha intentado aceptar no fue asignado a usted.',
         'ldap_could_not_connect' => 'No se pudo conectar al servidor LDAP. Por favor verifica la configuración LDAP de tu servidor en el archivo de configuración LDAP. <br>Error del servidor LDAP:',
         'ldap_could_not_bind' => 'No se pudo enlazar al servidor LDAP. Por favor verifica la configuración LDAP de tu servidor en el archivo de configuración LDAP. <br>Error del servidor LDAP: ',
         'ldap_could_not_search' => 'No se pudo buscar el servidor LDAP. Por favor verifica la configuración LDAP de tu servidor en el archivo de configuración LDAP. <br>Error del servidor LDAP:',

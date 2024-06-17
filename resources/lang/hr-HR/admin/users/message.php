@@ -68,7 +68,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
+        'error'   => 'Ovaj korisnik nema postavljenu mail adresu.',
         'success' => 'The user has been notified about their current inventory.'
     )
 );

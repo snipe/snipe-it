@@ -2,12 +2,12 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
-                        Si no es correcto, actualiza su estado.',
+    'undeployable' 		=> '<strong>Atención:</strong> Este elemento ha sido marcado como no utilizable.
+                        Si no es correcto, actualice el estado.',
     'does_not_exist' 	=> 'Equipo inexistente.',
     'does_not_exist_var'=> 'Activo con etiqueta :asset_tag no encontrado.',
     'no_tag' 	        => 'No se ha proporcionado ninguna etiqueta de activo.',
-    'does_not_exist_or_not_requestable' => 'Buen intento. El activo no existe o no es solicitable.',
+    'does_not_exist_or_not_requestable' => 'Ese activo no existe o no puede ser solicitado.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
@@ -45,9 +45,9 @@ return [
     ],
 
     'upload' => [
-        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
-        'success' => 'Archivo(s) cargado correctamente.',
-        'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
+        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
+        'success' => 'Archivo(s) cargado(s) exitosamente.',
+        'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que está tratando de cargar es demasiado grande',
         'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ],
 

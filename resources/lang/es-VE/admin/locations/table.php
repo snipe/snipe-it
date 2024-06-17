@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'about_locations_title'     => 'Acerca de las Ubicaciones',
-    'about_locations'           => 'Las ubicaciones son usadas para seguir la información de la ubicación de usuarios, activos, y otros objetos',
+    'about_locations_title'     => 'Acerca de las ubicaciones',
+    'about_locations'           => 'Las ubicaciones son utilizadas para hacer seguimiento de la información sobre ubicación de usuarios, activos, y otros ítems',
     'assets_rtd'                => 'Activos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Activos Asignados',
+    'assets_checkedout'         => 'Activos asignados',
     'id'                        => 'Identificación',
     'city'                      => 'Ciudad',
     'state'                     => 'Estado',
     'country'                   => 'País',
-    'create'                    => 'Crear Ubicación',
-    'update'                    => 'Actualizar Ubicación',
-    'print_assigned'            => 'Imprimir asignados',
-    'print_all_assigned'        => 'Imprimir Todos los Asignados',
+    'create'                    => 'Crear ubicación',
+    'update'                    => 'Actualizar ubicación',
+    'print_assigned'            => 'Imprimir los asignados',
+    'print_all_assigned'        => 'Imprimir todos los asignados',
     'name'                      => 'Nombre de Ubicación',
     'address'                   => 'Dirección',
     'address2'                   => 'Dirección línea 2',

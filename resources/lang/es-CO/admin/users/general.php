@@ -25,7 +25,7 @@ return [
     'send_email_help'   => 'Debe proporcionar una dirección de correo electrónico para que este usuario le envíe credenciales. Las credenciales de correo electrónico sólo se pueden hacer en la creación del usuario. Las contraseñas se almacenan en un hash de un solo sentido y no se pueden recuperar una vez guardadas.',
     'view_user'         => 'Ver usuario :name',
     'usercsv'           => 'Archivo CSV',
-    'two_factor_admin_optin_help' => 'La configuración actual de administración permite la ejecución selectiva de la autenticación de dos factores.  ',
+    'two_factor_admin_optin_help' => 'La configuración actual permite la aplicación selectiva de la autenticación de dos factores.  ',
     'two_factor_enrolled' => 'Dispositivo 2FA inscrito ',
     'two_factor_active'   => '2FA activo ',
     'user_deactivated'  => 'Usuario no puede iniciar sesión',

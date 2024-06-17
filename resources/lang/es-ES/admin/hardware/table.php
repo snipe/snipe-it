@@ -23,7 +23,7 @@ return [
     'status'   		=> 'Estado',
     'title'      	=> 'Equipo ',
     'image'		    => 'Imagen de dispositivo',
-    'days_without_acceptance' => 'Días Sin Aceptación',
+    'days_without_acceptance' => 'Días sin aceptación',
     'monthly_depreciation' => 'Depreciación mensual',
     'assigned_to'    => 'Asignado a',
     'requesting_user' => 'Solicitando usuario',
