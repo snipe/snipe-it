@@ -17,7 +17,7 @@
             <livewire:oauth-clients />
         </div>
     @else
-        <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
     @endif
 
 @stop
