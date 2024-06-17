@@ -85,7 +85,7 @@ class AssetModelsController extends Controller
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
         $model->user_id = Auth::id();
-        $model->requestable = Request::has('requestable');
+        $model->requestable = $request->has('requestable');
 
         if ($request->input('fieldset_id') != '') {
             $model->fieldset_id = $request->input('fieldset_id');
