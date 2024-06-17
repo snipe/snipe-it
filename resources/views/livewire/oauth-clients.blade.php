@@ -195,7 +195,7 @@
                                        type="text"
                                        aria-label="create-client-name"
                                        class="form-control"
-                                       wire:model.live="name"
+                                       wire:model="name"
                                        wire:keydown.enter="createClient"
                                        autofocus>
 
@@ -214,7 +214,7 @@
                                        class="form-control"
                                        aria-label="redirect"
                                        name="redirect"
-                                       wire:model.live="redirect"
+                                       wire:model="redirect"
                                        wire:keydown.enter="createClient"
                                 >
 
@@ -305,7 +305,7 @@
                                         class="form-control"
                                         name="redirect"
                                         aria-label="redirect"
-                                        wire:model.live="editRedirect"
+                                        wire:model="editRedirect"
                                         wire:keydown.enter="updateClient('{{ $editClientId }}')"
                                 >
 
