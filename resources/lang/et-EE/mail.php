@@ -6,7 +6,7 @@ return [
     'Accessory_Checkout_Notification' => 'Tarvik väljastatud',
     'Asset_Checkin_Notification' => 'Vara sissevõetud',
     'Asset_Checkout_Notification' => 'Vara väljastatud',
-    'Confirm_Accessory_Checkin' => 'Tarvitu sissevõtmise kinnitus',
+    'Confirm_Accessory_Checkin' => 'Tarviku vastuvõtmise kinnitus',
     'Confirm_Asset_Checkin' => 'Vara sissevõtmise kinnitus',
     'Confirm_accessory_delivery' => 'Tarvitu tarne kinnitus',
     'Confirm_asset_delivery' => 'Vara tarne kinnitus',

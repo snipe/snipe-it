@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Api\Assets;
+namespace Tests\Feature\Assets\Api;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Asset;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Tests\TestCase;
 
 class AssetFilesTest extends TestCase
 {

@@ -1,79 +1,84 @@
 <div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2>
-                    OAuth Clients
+    <div class="box box-default">
+
+        <div class="box-header">
+                <h2 class="box-title">
+                    {{ trans('admin/settings/general.oauth_clients') }}
                 </h2>
-                @if($authorizationError)
+                @if ($authorizationError)
                     <div class="alert alert-danger">
-                        <p><strong>Whoops!</strong> Something went wrong!</p>
+                        <p>{{ trans('admin/users/message.insufficient_permissions') }}
                         <br>
                         {{ $authorizationError }}
+                        </p>
                     </div>
                 @endif
 
-                <a class="button button-small"
-                   wire:click="$dispatch('openModal')"
-                   onclick="$('#modal-create-client').modal('show');"
-                >
-                    Create New Client
-                </a>
+                <div class="box-tools pull-right">
+                        <a class="btn btn-primary"
+                           wire:click="$dispatch('openModal')"
+                           onclick="$('#modal-create-client').modal('show');">
+                            {{ trans('general.create') }}
+                        </a>
+                </div>
             </div>
-        </div>
 
-        <div class="panel-body">
-            <!-- Current Clients -->
-            @if($clients->count() === 0)
-                <p class="m-b-none">
-                    You have not created any OAuth clients.
-                </p>
-            @endif
+            <div class="box-body">
+                <!-- Current Clients -->
+                @if($clients->count() === 0)
+                    <p>
+                        {{ trans('admin/settings/general.oauth_no_clients') }}
+                    </p>
+                @endif
 
-            @if($clients->count() > 0)
-                <table class="table table-borderless m-b-none">
+            @if ($clients->count() > 0)
+                <table class="table table-striped snipe-table">
                     <thead>
                         <tr>
-                            <th>Client ID</th>
-                            <th>Name</th>
-                            <th>Secret</th>
-                            <th><span class="sr-only">Edit</span></th>
-                            <th><span class="sr-only">Delete</span></th>
+                            <th>{{ trans('general.id') }}</th>
+                            <th>{{ trans('general.name') }}</th>
+                            <th>{{ trans('admin/settings/general.oauth_redirect_url') }}</th>
+                            <th>{{ trans('admin/settings/general.oauth_secret') }}</th>
+                            <th><span class="sr-only">{{ trans('general.actions') }}</span></th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach($clients as $client)
                             <tr>
                                 <!-- ID -->
-                                <td style="vertical-align: middle;">
+                                <td>
                                     {{ $client->id }}
                                 </td>
 
                                 <!-- Name -->
-                                <td style="vertical-align: middle;">
+                                <td>
                                     {{ $client->name }}
                                 </td>
 
+                                <!-- Redirect -->
+                                <td>
+                                    {{ $client->redirect }}
+                                </td>
+
                                 <!-- Secret -->
-                                <td style="vertical-align: middle;">
+                                <td>
                                     <code>{{ $client->secret }}</code>
                                 </td>
 
-                                <!-- Edit Button -->
-                                <td style="vertical-align: middle;">
-                                    <a class="action-link btn"
-                                       wire:click="editClient('{{ $client->id }}')"
-                                        onclick="$('#modal-edit-client').modal('show');"
-                                    >
-                                        Edit
-                                    </a>
-                                </td>
+                                <!-- Edit / Delete Button -->
+                                <td class="text-right">
 
-                                <!-- Delete Button -->
-                                <td style="vertical-align: middle;" class="text-right">
+                                    <a class="action-link btn btn-sm btn-warning"
+                                       wire:click="editClient('{{ $client->id }}')"
+                                       onclick="$('#modal-edit-client').modal('show');">
+                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span>
+                                    </a>
+
                                     <a class="action-link btn btn-danger btn-sm" wire:click="deleteClient('{{ $client->id }}')">
-                                        <i class="fas fa-trash"></i>
+                                        <i class="fas fa-trash" aria-hidden="true"></i>
+                                        <span class="sr-only">
+                                                    {{ trans('general.delete') }}
+                                                </span>
                                     </a>
                                 </td>
                             </tr>
@@ -82,20 +87,28 @@
                 </table>
             @endif
         </div>
+    </div>
+
+
+
         <div>
             @if ($authorized_tokens->count() > 0)
                 <div>
-                    <div class="panel panel-default">
-                        <h2 class="panel-heading">Authorized Applications</h2>
+                    <div class="box box-default">
+                        <div class="box-header">
+                            <h2>
+                                {{ trans('admin/settings/general.oauth_authorized_apps') }}
+                            </h2>
+                        </div>
 
-                        <div class="panel-body">
+                        <div class="box-body">
                             <!-- Authorized Tokens -->
-                            <table class="table table-borderless m-b-none">
+                            <table class="table table-striped snipe-table">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Scopes</th>
-                                    <th><span class="sr-only">Delete</span></th>
+                                    <th>{{ trans('general.name') }}</th>
+                                    <th>{{ trans('admin/settings/general.oauth_scopes')  }}</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
 
@@ -103,23 +116,28 @@
                                 @foreach($authorized_tokens as $token)
                                     <tr>
                                         <!-- Client Name -->
-                                        <td style="vertical-align: middle;">
+                                        <td>
                                             {{ $token->client->name }}
                                         </td>
 
                                         <!-- Scopes -->
-                                        <td style="vertical-align: middle;">
+                                        <td>
                                             @if(!$token->scopes)
-                                                <span class="label label-default">No Scopes</span>
+                                                <span class="label label-default">
+                                                    {{ trans('admin/settings/general.no_scopes') }}
+                                                </span>
                                             @endif
                                         </td>
 
                                         <!-- Revoke Button -->
-                                        <td style="vertical-align: middle;">
-                                            <a class="btn btn-sm btn-danger"
+                                        <td>
+                                            <a class="btn btn-sm btn-danger pull-right"
                                                 wire:click="deleteToken('{{ $token->id }}')"
                                             >
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash" aria-hidden="true"></i>
+                                                <span class="sr-only">
+                                                    {{ trans('general.delete') }}
+                                                </span>
                                             </a>
                                         </td>
                                     </tr>
@@ -130,8 +148,10 @@
                     </div>
                 </div>
             @endif
-        </div>
-    </div>
+
+
+
+
 
     <!-- Create Client Modal -->
     <div class="modal fade" id="modal-create-client" tabindex="-1" role="dialog" wire:ignore.self>
@@ -141,7 +161,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                     <h2 class="modal-title">
-                        Create Client
+                        {{ trans('admin/settings/general.create_client') }}
                     </h2>
                 </div>
 
@@ -166,7 +186,9 @@
                     <form class="form-horizontal" role="form">
                         <!-- Name -->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="create-client-name">Name</label>
+                            <label class="col-md-3 control-label" for="create-client-name">
+                                {{ trans('general.name') }}
+                            </label>
 
                             <div class="col-md-7">
                                 <input id="create-client-name"
@@ -175,18 +197,17 @@
                                        class="form-control"
                                        wire:model.live="name"
                                        wire:keydown.enter="createClient"
-                                       autofocus
-                                >
+                                       autofocus>
 
                                 <span class="help-block">
-                                    Something your users will recognize and trust.
+                                   {{ trans('admin/settings/general.oauth_name_help') }}
                                 </span>
                             </div>
                         </div>
 
                         <!-- Redirect URL -->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="redirect">Redirect URL</label>
+                            <label class="col-md-3 control-label" for="redirect">{{ trans('admin/settings/general.oauth_redirect_url') }}</label>
 
                             <div class="col-md-7">
                                 <input type="text"
@@ -198,7 +219,7 @@
                                 >
 
                                 <span class="help-block">
-                                    Your application's authorization callback URL.
+                                    {{ trans('admin/settings/general.oauth_callback_url') }}
                                 </span>
                             </div>
                         </div>
@@ -218,6 +239,8 @@
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Edit Client Modal -->
     <div class="modal fade" id="modal-edit-client" tabindex="-1" role="dialog" wire:ignore.self>
@@ -225,9 +248,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
                     <h4 class="modal-title">
-                        Edit Client
+                        {{ trans('general.update') }}
                     </h4>
                 </div>
 
@@ -268,14 +290,14 @@
                                 >
 
                                 <span class="help-block">
-                                    Something your users will recognize and trust.
+                                    {{ trans('admin/settings/general.oauth_name_help') }}
                                 </span>
                             </div>
                         </div>
 
                         <!-- Redirect URL -->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="redirect">Redirect URL</label>
+                            <label class="col-md-3 control-label" for="redirect">{{ trans('admin/settings/general.oauth_redirect_url') }}</label>
 
                             <div class="col-md-7">
                                 <input
@@ -288,7 +310,7 @@
                                 >
 
                                 <span class="help-block">
-                                    Your application's authorization callback URL.
+                                    {{ trans('admin/settings/general.oauth_callback_url')  }}
                                 </span>
                             </div>
                         </div>
@@ -331,3 +353,5 @@
 
     </script>
 </div>
+
+

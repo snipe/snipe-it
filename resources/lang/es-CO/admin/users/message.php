@@ -2,14 +2,14 @@
 
 return array(
 
-    'accepted'                  => 'Ha aceptado este activo con éxito.',
+    'accepted'                  => 'Ha aceptado este artículo exitosamente.',
     'declined'                  => 'Ha rechazado este activo con éxito.',
-    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada del administrador no fue guardada porque el administrador seleccionado también estaba en la lista de usuarios a editar, y los usuarios no pueden ser su propio gerente. Por favor, selecciona tus usuarios de nuevo, excluyendo el administrador.',
+    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada de administrador no fue guardada porque el gerente seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propios gerentes. Vuelva a seleccionar los usuarios, excluyendo al gerente.',
     'user_exists'               => '¡El usuario ya existe!',
     'user_not_found'            => 'El usuario no existe.',
-    'user_login_required'       => 'El campo de acceso es obligatorio',
+    'user_login_required'       => 'El campo usuario es obligatorio',
     'user_has_no_assets_assigned' => 'No hay activos asignados al usuario.',
-    'user_password_required'    => 'La contraseña es requerida.',
+    'user_password_required'    => 'La contraseña es obligatoria.',
     'insufficient_permissions'  => 'Permisos insuficientes.',
     'user_deleted_warning'      => 'Este usuario ha sido eliminado. Tendrá que restaurar este usuario para editarlo o asignarle nuevos recursos.',
     'ldap_not_configured'        => 'La integración LDAP no ha sido configurada para esta instalación.',
@@ -21,7 +21,7 @@ return array(
 
     'success' => array(
         'create'    => 'El usuario se ha creado correctamente.',
-        'update'    => 'El usuario se ha actualizado correctamente.',
+        'update'    => 'Usuario actualizado exitosamente.',
         'update_bulk'    => '¡Usuarios actualizados con éxito!',
         'delete'    => 'El usuario se ha eliminado correctamente.',
         'ban'       => 'El usuario fue baneado con éxito.',
@@ -47,7 +47,7 @@ return array(
         'asset_already_accepted' => 'Este activo ya ha sido aceptado.',
         'accept_or_decline' => 'Debe aceptar o rechazar este activo.',
         'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
-        'incorrect_user_accepted' => 'El activo que ha intentado aceptar no ha sido revisado para usted.',
+        'incorrect_user_accepted' => 'El elemento que ha intentado aceptar no fue asignado a usted.',
         'ldap_could_not_connect' => 'No se pudo conectar al servidor LDAP. Por favor, compruebe la configuración del servidor LDAP en el archivo de configuración LDAP. <br>Error del servidor LDAP:',
         'ldap_could_not_bind' => 'No se pudo enlazar al servidor LDAP. Por favor, compruebe la configuración del servidor LDAP en el archivo de configuración LDAP. <br>Error del servidor LDAP: ',
         'ldap_could_not_search' => 'No se pudo buscar en el servidor LDAP. Por favor, compruebe la configuración del servidor LDAP en el archivo de configuración LDAP. <br>Error del servidor LDAP:',

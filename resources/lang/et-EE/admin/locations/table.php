@@ -11,7 +11,7 @@ return [
     'country'                   => 'Riik',
     'create'                    => 'Uus asukoht',
     'update'                    => 'Uuenda asukohta',
-    'print_assigned'            => 'Print Assigned',
+    'print_assigned'            => 'Prindi määratud',
     'print_all_assigned'        => 'Prindi kõik varad',
     'name'                      => 'Asukoha nimi',
     'address'                   => 'Aadress',

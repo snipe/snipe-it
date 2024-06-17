@@ -51,13 +51,6 @@ return [
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ],
 
-    'download' => [
-        'error'   => 'File(s) not downloaded. Please try again.',
-        'success' => 'File(s) successfully downloaded.',
-        'does_not_exist' => 'No file exists',
-	'no_match' => 'No matching record for that asset/file',
-    ],
-
     'import' => [
         'error'                 => 'Some items did not import correctly.',
         'errorDetail'           => 'The following Items were not imported because of errors.',
