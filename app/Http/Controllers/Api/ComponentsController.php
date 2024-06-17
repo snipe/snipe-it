@@ -14,6 +14,7 @@ use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Log;
 
 class ComponentsController extends Controller
 {
@@ -331,7 +332,7 @@ class ComponentsController extends Controller
             // actually checked out.
             $component_assets->assigned_qty = $qty_remaining_in_checkout;
 
-            \Log::debug($component_asset_id.' - '.$qty_remaining_in_checkout.' remaining in record '.$component_assets->id);
+            Log::debug($component_asset_id.' - '.$qty_remaining_in_checkout.' remaining in record '.$component_assets->id);
             
             \DB::table('components_assets')->where('id',
                 $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);

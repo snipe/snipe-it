@@ -8,7 +8,6 @@ use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Redirect;
 
 /**
  * This controller handles all actions related to Custom Asset Fields for

@@ -12,10 +12,12 @@ use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\License;
-use Crypt;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
-use Image;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Session;
 
 class Helper
 {
@@ -412,7 +414,7 @@ class Helper
 
         if ($index >= $total_colors) {
 
-            \Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
+            Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
             //patch fix for array key overflow (color count starts at 1, array starts at 0)
             $index = $index - $total_colors - 1;
 
@@ -875,12 +877,15 @@ class Helper
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-                    if ($selected_arr) {
+
+                    if (is_array($selected_arr)) {
+
                         if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
                         }
+
                     } else {
                         $permissions_arr[$permission_name] = '0';
                     }
@@ -1012,7 +1017,7 @@ class Helper
 
 
         try {
-            $tmp_date = new \Carbon($date);
+            $tmp_date = new Carbon($date);
 
             if ($type == 'datetime') {
                 $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
@@ -1029,7 +1034,7 @@ class Helper
             return $dt['formatted'];
 
         } catch (\Exception $e) {
-            \Log::warning($e);
+            Log::warning($e);
             return $date.' (Invalid '.$type.' value.)';
         }
 
@@ -1342,7 +1347,7 @@ class Helper
     public static function isDemoMode() {
         if (config('app.lock_passwords') === true) {
             return true;
-            \Log::debug('app locked!');
+            Log::debug('app locked!');
         }
         
         return false;
@@ -1435,7 +1440,7 @@ class Helper
 
         foreach (self::$language_map as $legacy => $new) {
             if ($language_code == $legacy) {
-                \Log::debug('Current language is '.$legacy.', using '.$new.' instead');
+                Log::debug('Current language is '.$legacy.', using '.$new.' instead');
                 return $new;
             }
         }
@@ -1459,4 +1464,38 @@ class Helper
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
+
+    static public function getRedirectOption($request, $id, $table, $asset_id = null)
+    {
+
+        $redirect_option = Session::get('redirect_option');
+        $checkout_to_type = Session::get('checkout_to_type');
+
+        //return to index
+        if ($redirect_option == '0') {
+            switch ($table) {
+                case "Assets":
+                    return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        //return to thing being assigned
+        if ($redirect_option == '1') {
+            switch ($table) {
+                case "Assets":
+                    return redirect()->route('hardware.show', $id ? $id : $asset_id)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        //return to thing being assigned to
+        if ($redirect_option == '2') {
+            switch ($checkout_to_type) {
+                case 'user':
+                    return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+                case 'location':
+                    return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+                case 'asset':
+                    return redirect()->route('hardware.show', $request->assigned_asset)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+        }
+        return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
+    }
 }

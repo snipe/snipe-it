@@ -470,7 +470,7 @@
         });
     });
 </script>
-
+@endpush
 
 
 </body>

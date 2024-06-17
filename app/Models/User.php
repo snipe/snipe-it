@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use DB;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -24,6 +23,7 @@ use Watson\Validating\ValidatingTrait;
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     use HasFactory;
+    use CompanyableTrait;
 
     protected $presenter = \App\Presenters\UserPresenter::class;
     use SoftDeletes, ValidatingTrait;
@@ -822,5 +822,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
 
         return $this;
+    }
+    public function scopeUserLocation($query, $location, $search){
+
+
+        return $query->where('location_id','=', $location)
+            ->where('first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('permissions', 'LIKE', '%' . $search . '%')
+            ->orWhere('country', 'LIKE', '%' . $search . '%')
+            ->orWhere('phone', 'LIKE', '%' . $search . '%')
+            ->orWhere('jobtitle', 'LIKE', '%' . $search . '%')
+            ->orWhere('employee_num', 'LIKE', '%' . $search . '%')
+            ->orWhere('username', 'LIKE', '%' . $search . '%')
+            ->orwhereRaw('CONCAT(first_name," ",last_name) LIKE \''.$search.'%\'');
+
+
+
+
     }
 }

@@ -11,7 +11,7 @@ return [
     'remove'                    => 'Eliminar',
     'request'                   => 'Solicitud',
     'submit'  	                => 'Enviar',
-    'upload'                    => 'Subir',
+    'upload'                    => 'Cargar',
     'select_file'				=> 'Seleccionar Archivo...',
     'select_files'				=> 'Selecciona Archivos...',
     'generate_labels'           => '{1} Generar Etiqueta|[2,*] Generar Etiquetas',

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class ActionlogsTransformer
 {
@@ -92,17 +93,17 @@ class ActionlogsTransformer
 
                                     if ($this->clean_field($fieldata->old!='')) {
                                         try {
-                                            $enc_old = \Crypt::decryptString($this->clean_field($fieldata->old));
+                                            $enc_old = Crypt::decryptString($this->clean_field($fieldata->old));
                                         } catch (\Exception $e) {
-                                            \Log::debug('Could not decrypt old field value - maybe the key changed?');
+                                            Log::debug('Could not decrypt old field value - maybe the key changed?');
                                         }
                                     }
 
                                     if ($this->clean_field($fieldata->new!='')) {
                                         try {
-                                            $enc_new = \Crypt::decryptString($this->clean_field($fieldata->new));
+                                            $enc_new = Crypt::decryptString($this->clean_field($fieldata->new));
                                         } catch (\Exception $e) {
-                                            \Log::debug('Could not decrypt new field value - maybe the key changed?');
+                                            Log::debug('Could not decrypt new field value - maybe the key changed?');
                                         }
                                     }
 
@@ -196,7 +197,7 @@ class ActionlogsTransformer
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
 
-//        \Log::info("Clean Meta is: ".print_r($clean_meta,true));
+//        Log::info("Clean Meta is: ".print_r($clean_meta,true));
         //dd($array);
 
         return $array;

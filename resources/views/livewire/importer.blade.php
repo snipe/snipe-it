@@ -36,15 +36,11 @@
                             <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
-                            @php \Log::debug("import errors are: ".print_r($import_errors,true)); @endphp
                             @foreach($import_errors AS $key => $actual_import_errors)
-                                @php \Log::debug("Key is: $key"); @endphp
                                 @foreach($actual_import_errors AS $table => $error_bag)
-                                    @php \Log::debug("Table is: $table"); @endphp
                                     @foreach($error_bag as $field => $error_list)
-                                        @php \Log::debug("Field is: $field"); @endphp
                                         <tr>
-                                            <td>{{ $activeFile->file_path ?? "Unknown File" }}</td>
+                                            <td><b>{{ $key }}</b></td>
                                             <td>
                                                 <b>{{ $field }}:</b>
                                                 <span>{{ implode(", ",$error_list) }}</span>

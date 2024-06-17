@@ -16,7 +16,7 @@ return [
     'edit'  					=> 'Modifica Asset',
     'model_deleted'  			=> 'Questo modello di asset è stato eliminato. Devi ripristinare il modello prima di poter ripristinare il bene.',
     'model_invalid'             => 'Il modello di questo bene non è valido.',
-    'model_invalid_fix'         => 'Il bene deve essere modificato per correggerlo prima di farne il check in o il check out.',
+    'model_invalid_fix'         => 'Il bene deve avere un modello valido prima di poterne fare l\'assegnazioni, check-in o controlli.',
     'requestable'               => 'Disponibile',
     'requested'				    => 'richiesto',
     'not_requestable'           => 'Non Richiedibili',

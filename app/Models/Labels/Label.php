@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use TCPDF;
 use TCPDF_STATIC;
 use TypeError;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Model for Labels.
@@ -374,7 +375,7 @@ abstract class Label
         try {
             $pdf->write1DBarcode($value, $type, $x, $y, $width, $height, null, ['stretch'=>true]);
         } catch (\Exception|TypeError $e) {
-            \Log::debug('The 1D barcode ' . $value . ' is not compliant with the barcode type '. $type);
+            Log::debug('The 1D barcode ' . $value . ' is not compliant with the barcode type '. $type);
         }
     }
 

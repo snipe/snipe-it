@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to Locations for
@@ -186,7 +187,7 @@ class LocationsController extends Controller
             try {
                 Storage::disk('public')->delete('locations/'.$location->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                Log::error($e);
             }
         }
         $location->delete();
@@ -341,8 +342,8 @@ class LocationsController extends Controller
                 }
             }
 
-            \Log::debug('Success count: '.$success_count);
-            \Log::debug('Error count: '.$error_count);
+            Log::debug('Success count: '.$success_count);
+            Log::debug('Error count: '.$error_count);
             // Complete success
             if ($success_count == count($locations_raw_array)) {
                 return redirect()

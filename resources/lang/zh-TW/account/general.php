@@ -7,4 +7,5 @@ return array(
     'api_base_url_endpoint' => '/&lt;端點&gt;',
     'api_token_expiration_time' => 'API tokens 設定為在以下時間過期：',
     'api_reference' => '請查閱 <a href="https://snipe-it.readme.io/reference" target="_blank">API 參考文件</a> 以找到特定的 API 端點和額外的 API 文件。',
+    'profile_updated' => 'Account successfully updated',
 );

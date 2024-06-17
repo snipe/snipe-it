@@ -6,9 +6,8 @@ use App\Models\CustomField;
 use Livewire\Component;
 
 use App\Models\Import;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
-use Log;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
@@ -119,8 +118,7 @@ class Importer extends Component
     public function updating($name, $new_import_type)
     {
         if ($name == "activeFile.import_type") {
-            \Log::debug("WE ARE CHANGING THE import_type!!!!! TO: " . $new_import_type);
-            \Log::debug("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
+
             // go through each header, find a matching field to try and map it to.
             foreach ($this->activeFile->header_row as $i => $header) {
                 // do we have something mapped already?
@@ -237,6 +235,15 @@ class Importer extends Component
             'email' => trans('general.importer.checked_out_to_email'),
             'username' => trans('general.importer.checked_out_to_username'),
             'checkout_location' => trans('general.importer.checkout_location'),
+            /**
+             * These are here so users can import history, to replace the dinosaur that
+             * was the history importer
+             */
+            'last_checkin' => trans('admin/hardware/table.last_checkin_date'),
+            'last_checkout' => trans('admin/hardware/table.checkout_date'),
+            'expected_checkin' => trans('admin/hardware/form.expected_checkin'),
+            'last_audit_date' => trans('general.last_audit'),
+            'next_audit_date' => trans('general.next_audit_date'),
         ];
 
         $this->consumables_fields = [
@@ -380,6 +387,12 @@ class Importer extends Component
                     'job title for user',
                     'job title',
                 ],
+            'full_name' =>
+                [
+                    'full name',
+                    'fullname',
+                    trans('general.importer.checked_out_to_fullname')
+                ],
             'username' =>
                 [
                     'user name',
@@ -412,6 +425,7 @@ class Importer extends Component
                     'telephone',
                     'tel.',
                 ],
+
             'serial' =>
                 [
                     'serial number',
@@ -455,6 +469,12 @@ class Importer extends Component
             'next_audit_date' =>
                 [
                     'Next Audit',
+                ],
+            'last_checkout' =>
+                [
+                    'Last Checkout',
+                    'Last Checkout Date',
+                    'Checkout Date',
                 ],
             'address2' =>
                 [
@@ -523,9 +543,8 @@ class Importer extends Component
     {
         // TODO: why don't we just do File::find($id)? This seems dumb.
         foreach($this->files as $file) {
-            \Log::debug("File id is: ".$file->id);
-            if($id == $file->id) {
-                if(Storage::delete('private_uploads/imports/'.$file->file_path)) {
+            if ($id == $file->id) {
+                if (Storage::delete('private_uploads/imports/'.$file->file_path)) {
                     $file->delete();
 
                     $this->message = trans('admin/hardware/message.import.file_delete_success');

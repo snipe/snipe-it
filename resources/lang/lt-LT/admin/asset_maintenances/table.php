@@ -1,8 +1,8 @@
 <?php
 
     return [
-        'title'         => 'Įrangos priežiūra',
-        'asset_name'    => 'Turto pavadinimas',
+        'title'         => 'Įrangos aptarnavimas',
+        'asset_name'    => 'Įrangos pavadinimas',
         'is_warranty'   => 'Garantija',
-        'dl_csv'        => 'Atsisiųti CSV fromatu',
+        'dl_csv'        => 'Atsisiųsti CSV',
     ];

@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'និមិត្តសញ្ញា API ត្រូវបានកំណត់ឱ្យផុតកំណត់នៅក្នុង៖',
     'api_reference' => 'សូមពិនិត្យមើល <a href="https://snipe-it.readme.io/reference" target="_blank">ឯកសារយោង API</a> ទៅ
                      ស្វែងរកចំណុចបញ្ចប់ API ជាក់លាក់ និងឯកសារ API បន្ថែម',
+    'profile_updated' => 'ធ្វើបច្ចុប្បន្នភាពគណនីដោយជោគជ័យ',
 );

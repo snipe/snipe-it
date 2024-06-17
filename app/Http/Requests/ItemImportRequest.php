@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Import;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ItemImportRequest extends FormRequest
 {
@@ -71,7 +72,7 @@ class ItemImportRequest extends FormRequest
 
     public function log($string)
     {
-        \Log::Info($string);
+        Log::Info($string);
     }
 
     public function progress($count)
