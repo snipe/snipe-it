@@ -28,7 +28,7 @@ $(function () {
 
   var baseUrl = $('meta[name="baseUrl"]').attr('content');
   //handle modal-add-interstitial calls
-  var model, select, refreshSelector;
+  var model, select, refreshSelector, hasnopayload;
 
   if($('#createModal').length == 0) {
     $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
@@ -39,7 +39,7 @@ $(function () {
       model = link.data("dependency");
       select = link.data("select");
       refreshSelector = link.data("refresh");
-
+      hasnopayload = link.data("hasnopayload");
 
       $('#createModal').load(link.attr('href'),function () {
 
@@ -122,11 +122,13 @@ $(function () {
                 $('#modal_error_msg').html(error_message).show();
                 return false;
             }
-            var id = result.payload.id;
-            var name = result.payload.name || (result.payload.first_name + " " + result.payload.last_name);
-            if(!id || !name) {
-                console.error("Could not find resulting name or ID from modal-create. Name: "+name+", id: "+id);
-                return false;
+            if(!hasnopayload) {
+                var id = result.payload.id;
+                var name = result.payload.name || (result.payload.first_name + " " + result.payload.last_name);
+                if (!id || !name) {
+                    console.error("Could not find resulting name or ID from modal-create. Name: " + name + ", id: " + id);
+                    return false;
+                }
             }
             $('#createModal').modal('hide');
             $('#createModal').html("");
