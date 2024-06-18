@@ -148,6 +148,7 @@ $(function () {
                 return false;
             }
 
+
             selector.options[selector.length] = new Option(name, id);
             selector.selectedIndex = selector.length - 1;
             $(selector).trigger("change");
