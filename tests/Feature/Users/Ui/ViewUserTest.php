@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Users\Ui;
+namespace Tests\Feature\Users\Ui;
 
 use App\Models\Company;
 use App\Models\User;
@@ -80,5 +80,4 @@ class ViewUserTest extends TestCase
             [$user], CurrentInventory::class
         );
     }
-
 }
