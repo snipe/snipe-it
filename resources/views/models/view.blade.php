@@ -42,8 +42,8 @@
                           <i class="fas fa-barcode fa-2x"></i>
                         </span>
                                     <span class="hidden-xs hidden-sm">
-                            {{ trans('general.assets') }}
-                                        {!! ($model->assets_count > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets_count).'</badge>' : '' !!}
+                                        {{ trans('general.assets') }}
+                                        {!! ($model->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                         </span>
                     </a>
                 </li>
