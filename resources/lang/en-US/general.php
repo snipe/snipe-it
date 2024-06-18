@@ -203,6 +203,7 @@ return [
     'moreinfo'				=> 'More Info',
     'name'					=> 'Name',
     'new_password'          => 'New Password',
+    'note_added'            => 'Note Added',
     'next'					=> 'Next',
     'next_audit_date'		=> 'Next Audit Date',
     'next_audit_date_help'  => 'If you use auditing in your organization, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',

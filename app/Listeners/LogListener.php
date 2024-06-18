@@ -140,10 +140,9 @@ class LogListener
         $logaction->item_type = get_class($event->itemNoteAddedOn);
         $logaction->note = $event->note; //this is the received alphanumeric text from the box
         $logaction->user_id = $event->noteAddedBy->id;
-        $logaction->action_type = 'note added';
+        $logaction->action_type = 'note_added';
         $logaction->save();
     }
-
 
     /**
      * Register the listeners for the subscriber.
