@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Bu kurulumda giriş bilgileri değiştirilemez.',
     'manager' 				=> 'Yönetici',
     'managed_locations'     => 'Yönetilen Mekanlar',
+    'managed_users'         => 'Yönetilen Kullanıcılar',
     'name' 					=> 'Adı',
     'nogroup'               => 'Henüz hiçbir grup oluşturulmadı. Bir tane eklemek için şu adresi ziyaret edin:',
     'notes'                 => 'Notlar',

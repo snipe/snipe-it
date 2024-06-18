@@ -54,8 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => 'Añadir a cualquier conjunto de campos existente',
     'show_in_listview' => 'Mostrar por defecto en las vistas de la lista. Los usuarios autorizados podrán mostrar/ocultar a través del selector de columnas',
     'show_in_listview_short' => 'Mostrar en listas',
-    'show_in_requestable_list_short' => 'Mostrar en la lista de activos solicitables',
-    'show_in_requestable_list' => 'Mostrar el valor en la lista de activos solicitables. Los campos cifrados no se mostrarán',
+    'show_in_requestable_list_short' => 'Mostrar en la lista de activos que se pueden solicitar',
+    'show_in_requestable_list' => 'Mostrar el valor en la lista de activos que se pueden solicitar. Los campos cifrados no se mostrarán',
     'encrypted_options' => 'Este campo está cifrado, por lo que algunas opciones de visualización no estarán disponibles.',
 
 ];

@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Внимание:</strong> Този актив е маркиран като невъзможен за предоставяне. Ако статусът е променен, моля обновете актива.',
     'does_not_exist' 	=> 'Активът не съществува.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Актива не съществува или не може да бъде предоставян.',
     'assoc_users'	 	=> 'Активът е изписан на потребител и не може да бъде изтрит. Моля впишете го обратно и след това опитайте да го изтриете отново.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Активът не беше създаден. Моля опитайте отново.',
@@ -16,6 +19,7 @@ return [
     'update' => [
         'error'   			=> 'Активът не беше обновен. Моля опитайте отново.',
         'success' 			=> 'Активът обновен успешно.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
         'no_assets_selected'  =>  'Няма избрани активи, така че нищо не бе обновено.',
         'assets_do_not_exist_or_are_invalid' => 'Избраните активи не могат да се обновят.',
@@ -29,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Одитът на активи бе неуспешен. Моля, опитайте отново.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Активният одит бе успешно регистриран.',
     ],
 

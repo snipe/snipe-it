@@ -48,7 +48,7 @@ class CheckoutKitController extends Controller
      * Validate and process the new Predefined Kit data.
      *
      * @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, $kit_id)
     {

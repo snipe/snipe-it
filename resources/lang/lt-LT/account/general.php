@@ -9,4 +9,5 @@ return array(
     'api_token_expiration_time' => 'API tokenai nustos galioti:',
     'api_reference' => 'Prašau patikrinti <a href="https://snipe-it.readme.io/reference" target="_blank">API nuorodą,</a> kad
                     rasti API galinius taškus ir papildomą API dokumentaciją.',
+    'profile_updated' => 'Account successfully updated',
 );

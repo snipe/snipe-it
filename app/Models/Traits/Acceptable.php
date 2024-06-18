@@ -3,7 +3,7 @@
 namespace App\Models\Traits;
 
 use App\Models\User;
-
+use Illuminate\Support\Facades\Log;
 /**
  * This trait allows models to have a callback after their checkout gets accepted or declined.
  *
@@ -19,7 +19,7 @@ trait Acceptable
      */
     public function acceptedCheckout(User $acceptedBy, $signature, $filename = null)
     {
-        \Log::debug('acceptedCheckout in Acceptable trait fired, tho it doesn\'t do anything?');
+        Log::debug('acceptedCheckout in Acceptable trait fired, tho it doesn\'t do anything?');
     }
 
     /**

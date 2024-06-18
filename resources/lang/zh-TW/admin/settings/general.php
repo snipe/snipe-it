@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> '預設EULA',
     'default_language'			=> '預設語言',
     'default_eula_help_text'	=> '您也可以將自訂的EULA與特定資產類別相關聯。',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => '顯示資產名稱',
     'display_checkout_date'     => '顯示借出日期',
     'display_eol'               => '以表格形式顯示EOL',

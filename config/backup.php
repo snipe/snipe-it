@@ -121,12 +121,12 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
         ],
 
         /*

@@ -17,7 +17,7 @@ class AssetFilesController extends Controller
      *
      * @param UploadFileRequest $request
      * @param int $assetId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      *@since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -70,7 +70,6 @@ class AssetFilesController extends Controller
             }
 
             $file = 'private_uploads/assets/'.$log->filename;
-            \Log::debug('Checking for '.$file);
 
             if ($log->action_type == 'audit') {
                 $file = 'private_uploads/audits/'.$log->filename;

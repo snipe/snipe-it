@@ -7,7 +7,7 @@ use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
 use App\Notifications\SendUpcomingAuditNotification;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
 class SendUpcomingAuditReport extends Command
@@ -43,12 +43,11 @@ class SendUpcomingAuditReport extends Command
      */
     public function handle()
     {
-
+        $settings = Setting::getSettings();
         $interval = $settings->audit_warning_days ?? 0;
         $today = Carbon::now();
         $interval_date = $today->copy()->addDays($interval);
 
-        $settings = Setting::getSettings();
         $assets = Asset::whereNull('deleted_at')->DueOrOverdueForAudit($settings)->orderBy('assets.next_audit_date', 'desc')->get();
         $this->info($assets->count().' assets must be audited in on or before '.$interval_date.' is deadline');
 

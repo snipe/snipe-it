@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'Dodijeljena',
     'checkout'   		=> 'In / Out',
+    'deleted_at'        => 'Deleted at',
     'id'      			=> 'iskaznica',
     'license_email'   	=> 'E-adresa za licencu',
     'license_name'   	=> 'Licencirano',

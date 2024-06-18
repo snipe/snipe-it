@@ -46,6 +46,11 @@ class StatuslabelFactory extends Factory
         });
     }
 
+    public function readyToDeploy()
+    {
+        return $this->rtd();
+    }
+
     public function pending()
     {
         return $this->state(function () {

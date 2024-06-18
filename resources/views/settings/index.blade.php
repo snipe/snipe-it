@@ -446,8 +446,8 @@
         </div>
       </div> <!-- /box-body-->
     </div> <!--/box-default-->
-  </div><!--/col-md-8-->
-</div><!--/row-->
+
+
 
 
 

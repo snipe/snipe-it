@@ -2,10 +2,14 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Advertencia:</strong> este activo ha sido marcado actualmente como no enviable.                         Si este estado cambia, por favor actualiza el estado de activos.',
+    'undeployable' 		=> '<strong>Atención:</strong> Este elemento ha sido marcado como no utilizable.
+                        Si no es correcto, actualice el estado.',
     'does_not_exist' 	=> 'El activo no existe.',
+    'does_not_exist_var'=> 'Activo con etiqueta :asset_tag no encontrado.',
+    'no_tag' 	        => 'No se ha proporcionado ninguna etiqueta de activo.',
     'does_not_exist_or_not_requestable' => 'Ese activo no existe o no es solicitable.',
     'assoc_users'	 	=> 'Este activo está actualmente asignado a un usuario y no puede ser borrado. Por favor, revisa el activo primero y luego intenta borrarlo. ',
+    'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
         'error'   		=> 'El activo no ha sido creado, por favor, inténtelo de nuevo. :(',
@@ -16,6 +20,7 @@ return [
     'update' => [
         'error'   			=> 'Activo no ha sido actualizado, por favor, inténtelo de nuevo',
         'success' 			=> 'Activo actualizado con éxito.',
+        'encrypted_warning' => 'Activo actualizado con éxito, pero los campos personalizados cifrados no se debieron a permisos',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, así que nada se actualizó.',
         'no_assets_selected'  =>  'Ningún recurso fue seleccionado, por lo que no se actualizó nada.',
         'assets_do_not_exist_or_are_invalid' => 'Los activos seleccionados no se pueden actualizar.',
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'La auditoria de activo no tuvo éxito. Inténtalo de nuevo.',
+        'error'   		=> 'Auditoría de activos fallida: :error ',
         'success' 		=> 'Audoría de activo registrada con éxito.',
     ],
 
@@ -41,8 +46,8 @@ return [
 
     'upload' => [
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
-        'success' => 'Archivo(s) cargado(s) con éxito.',
-        'nofiles' => 'No seleccionaste ningún archivo para actualizar, o el archivo que estás intentando cargar es demasiado grande',
+        'success' => 'Archivo(s) cargado(s) exitosamente.',
+        'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que está tratando de cargar es demasiado grande',
         'invalidfiles' => 'Uno o más de tus archivos es demasiado grande o es de un tipo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf, y txt.',
     ],
 

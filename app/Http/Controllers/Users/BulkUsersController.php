@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Log;
 
 class BulkUsersController extends Controller
 {
@@ -323,18 +324,18 @@ class BulkUsersController extends Controller
         foreach ($users_to_merge as $user_to_merge) {
 
             foreach ($user_to_merge->assets as $asset) {
-                \Log::debug('Updating asset: '.$asset->asset_tag . ' to '.$merge_into_user->id);
+                Log::debug('Updating asset: '.$asset->asset_tag . ' to '.$merge_into_user->id);
                 $asset->assigned_to = $request->input('merge_into_id');
                 $asset->save();
             }
 
             foreach ($user_to_merge->licenses as $license) {
-                \Log::debug('Updating license pivot: '.$license->id . ' to '.$merge_into_user->id);
+                Log::debug('Updating license pivot: '.$license->id . ' to '.$merge_into_user->id);
                 $user_to_merge->licenses()->updateExistingPivot($license->id, ['assigned_to' => $merge_into_user->id]);
             }
 
             foreach ($user_to_merge->consumables as $consumable) {
-                \Log::debug('Updating consumable pivot: '.$consumable->id . ' to '.$merge_into_user->id);
+                Log::debug('Updating consumable pivot: '.$consumable->id . ' to '.$merge_into_user->id);
                 $user_to_merge->consumables()->updateExistingPivot($consumable->id, ['assigned_to' => $merge_into_user->id]);
             }
 

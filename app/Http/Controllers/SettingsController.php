@@ -14,22 +14,21 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
-use Auth;
-use Crypt;
-use DB;
-use enshrined\svgSanitize\Sanitizer;
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Image;
-use Input;
 use Redirect;
-use Response;
-use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 /**
  * This controller handles all actions related to Settings for
@@ -68,47 +67,15 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        if (array_key_exists("HTTP_X_FORWARDED_PROTO", $_SERVER)) {
-            $protocol = $_SERVER["HTTP_X_FORWARDED_PROTO"] . "://";
-        } elseif (array_key_exists('HTTPS', $_SERVER) && ('on' == $_SERVER['HTTPS'])) {
-            $protocol = "https://";
-        } else {
-            $protocol = "http://";
-        }
-
-        if (array_key_exists("HTTP_X_FORWARDED_HOST", $_SERVER)) {
-            $host = $_SERVER["HTTP_X_FORWARDED_HOST"];
-        } else {
-            $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
-            $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
-            if (('http://' === $protocol && '80' != $port) || ('https://' === $protocol && '443' != $port)) {
-                $host .= ':'.$port;
-            }
-        }
-        $pageURL = $protocol.$host.$_SERVER['REQUEST_URI'];
-
-        $start_settings['url_config'] = config('app.url').'/setup';
-        $start_settings['url_valid'] = ($start_settings['url_config'] === $pageURL);
-        $start_settings['real_url'] = $pageURL;
+        $start_settings['url_config'] = trim(config('app.url'), '/'). '/setup';
+        $start_settings['real_url']  = request()->url();
+        $start_settings['url_valid'] = $start_settings['url_config'] === $start_settings['real_url'];
         $start_settings['php_version_min'] = true;
 
         // Curl the .env file to make sure it's not accessible via a browser
-        $ch = curl_init($protocol.$host.'/.env');
-        curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-        curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        $output = curl_exec($ch);
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        $start_settings['env_exposed'] = $this->dotEnvFileIsExposed();
 
-        if (404 == $httpcode || 403 == $httpcode || 0 == $httpcode) {
-            $start_settings['env_exposed'] = false;
-        } else {
-            $start_settings['env_exposed'] = true;
-        }
-
-        if (\App::Environment('production') && (true == config('app.debug'))) {
+        if (App::Environment('production') && (true == config('app.debug'))) {
             $start_settings['debug_exposed'] = true;
         } else {
             $start_settings['debug_exposed'] = false;
@@ -160,13 +127,32 @@ class SettingsController extends Controller
     }
 
     /**
+     * Determine if the .env file accessible via a browser.
+     *
+     * @return bool This method will return true when exceptions (such as curl exception) is thrown.
+     * Check the log files to see more details about the exception.
+     */
+    protected function dotEnvFileIsExposed()
+    {
+        try {
+            return Http::timeout(10)
+                ->accept('*/*')
+                ->get(URL::to('.env'))
+                ->successful();
+        } catch (HttpClientException $e) {
+            Log::debug($e->getMessage());
+            return true;
+        }
+    }
+
+    /**
      * Save the first admin user from Setup.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v3.0]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postSaveFirstAdmin(SetupUserRequest $request)
     {
@@ -425,6 +411,7 @@ class SettingsController extends Controller
         // Because public demos make people act like dicks
 
         if (! config('app.lock_passwords')) {
+            $request->validate(['site_name' => 'required']);
             $setting->site_name = $request->input('site_name');
             $setting->custom_css = $request->input('custom_css');
             $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
@@ -461,7 +448,6 @@ class SettingsController extends Controller
                 Storage::disk('public')->delete($setting->favicon);
                 $setting->favicon = null;
             }
-
         }
 
         if ($setting->save()) {
@@ -641,9 +627,9 @@ class SettingsController extends Controller
                     ['next_audit_date' => DB::raw('DATE_ADD(next_audit_date, INTERVAL '.$audit_diff_months.' MONTH)')]
             );
 
-            \Log::debug($affected .' assets affected by audit interval update');
+            Log::debug($affected .' assets affected by audit interval update');
 
-            
+
         }
 
         $alert_email = rtrim($request->input('alert_email'), ',');
@@ -969,8 +955,6 @@ class SettingsController extends Controller
             $setting->ldap_dept = $request->input('ldap_dept');
             $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
             $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
-
-
         }
 
         if ($setting->save()) {
@@ -1114,11 +1098,9 @@ class SettingsController extends Controller
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
                         'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
-                        
+
                     ];
                 }
-
-               
             }
         }
 
@@ -1135,7 +1117,7 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postBackups()
     {
@@ -1210,9 +1192,8 @@ class SettingsController extends Controller
                         Storage::delete($path . '/' . $filename);
                         return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
-
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
                 }
@@ -1222,7 +1203,7 @@ class SettingsController extends Controller
         }
 
         // Hell to the no
-        \Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
+        Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
         return redirect()->route('settings.backups.index')->with('error', trans('general.backup_delete_not_allowed'));
     }
 
@@ -1234,7 +1215,7 @@ class SettingsController extends Controller
      *
      * @since [v6.0]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
 
     public function postUploadBackup(Request $request) {
@@ -1254,20 +1235,15 @@ class SettingsController extends Controller
                         $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
 
                         Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
-            
+
                         return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
                 }
 
                 return redirect()->route('settings.backups.index')->withErrors($validator);
-
             }
-
         } else {
             return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
-        }    
-
-        
-        
+        }
     }
 
     /**
@@ -1281,7 +1257,7 @@ class SettingsController extends Controller
      */
     public function postRestore($filename = null)
     {
-        
+
         if (! config('app.lock_passwords')) {
             $path = 'app/backups';
 
@@ -1297,13 +1273,13 @@ class SettingsController extends Controller
                     '--force' => true,
                 ]);
 
-                \Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
+                Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
                 // run the restore command
-                Artisan::call('snipeit:restore', 
+                Artisan::call('snipeit:restore',
                 [
-                    '--force' => true, 
-                    '--no-progress' => true, 
+                    '--force' => true,
+                    '--no-progress' => true,
                     'filename' => storage_path($path).'/'.$filename
                 ]);
 
@@ -1311,29 +1287,28 @@ class SettingsController extends Controller
                 $output = Artisan::output();
 
                 /* Run migrations */
-                \Log::debug('Migrating database...');
+                Log::debug('Migrating database...');
                 Artisan::call('migrate', ['--force' => true]);
                 $migrate_output = Artisan::output();
-                \Log::debug($migrate_output);
+                Log::debug($migrate_output);
 
                 $find_user = DB::table('users')->where('username', $user->username)->exists();
-                
+
                 if (!$find_user){
-                    \Log::warning('Attempting to restore user: ' . $user->username);
+                    Log::warning('Attempting to restore user: ' . $user->username);
                     $new_user = $user->replicate();
                     $new_user->push();
                 } else {
-                    \Log::debug('User: ' . $user->username .' already exists.');
+                    Log::debug('User: ' . $user->username .' already exists.');
                 }
 
-                \Log::debug('Logging all users out..');
+                Log::debug('Logging all users out..');
                 Artisan::call('snipeit:global-logout', ['--force' => true]);
 
                 DB::table('users')->update(['remember_token' => null]);
-                \Auth::logout();
+                Auth::logout();
 
                 return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
-                
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -1354,14 +1329,13 @@ class SettingsController extends Controller
     public function getPurge()
     {
 
-        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+        Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
             return view('settings.purge-form');
         }
 
         return redirect()->route('settings.index')->with('error', trans('general.purge_not_allowed'));
-
     }
 
     /**
@@ -1375,16 +1349,16 @@ class SettingsController extends Controller
      */
     public function postPurge(Request $request)
     {
-        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+        Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
-            \Log::debug('Purging is not allowed via the .env');
+            Log::debug('Purging is not allowed via the .env');
 
             if (!config('app.lock_passwords')) {
 
                 if ($request->input('confirm_purge')=='DELETE') {
 
-                    \Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
+                    Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
                     // Run a backup immediately before processing
                     Artisan::call('backup:run');
                     Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
@@ -1392,7 +1366,6 @@ class SettingsController extends Controller
 
                     return redirect()->route('settings.index')
                         ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
-
                 } else {
                     return redirect()->route('settings.purge.index')
                         ->with('error', trans('admin/settings/message.purge.validation_failed'));
@@ -1403,7 +1376,7 @@ class SettingsController extends Controller
             }
         }
 
-        \Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
+        Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
 
 
         // Nope.
@@ -1435,7 +1408,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function ajaxTestEmail()
     {
@@ -1446,7 +1419,7 @@ class SettingsController extends Controller
             ])->notify(new MailTest());
 
             return response()->json(Helper::formatStandardApiResponse('success', null, 'Maiol sent!'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('success', null, $e->getMessage()));
         }
     }

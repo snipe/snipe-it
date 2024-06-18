@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> '不能更换登陆资料',
     'manager' 				=> '领导',
     'managed_locations'     => '管理位置',
+    'managed_users'         => '管理用户',
     'name' 					=> '名字',
     'nogroup'               => '尚未创建组。要添加一个组，请访问： ',
     'notes'                 => '笔记',

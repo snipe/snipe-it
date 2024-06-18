@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'Toegewezen aan',
     'checkout'   		=> 'In/Uit',
+    'deleted_at'        => 'Verwijderd op',
     'id'      			=> 'ID',
     'license_email'   	=> 'Licentie uitgegeven aan E-mail',
     'license_name'   	=> 'Licentie uitgegeven aan',

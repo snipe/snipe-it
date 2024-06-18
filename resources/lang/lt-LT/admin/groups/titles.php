@@ -2,7 +2,7 @@
 
 return [
     'about_groups_title'            => 'Apie grupes',
-    'about_groups'                  => 'Grupės naudojamos apibendrinti naudotojo leidimus.',
+    'about_groups'                  => 'Grupės naudojamos naudotojų teisėms apibendrinti.',
     'group_management' 	 	=> 'Grupės valdymas',
     'create' 	 	 	    => 'Sukurti naują grupę',
     'update' 	 		        => 'Redaguoti grupę',
@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> 'Gruopės administratorius',
     'allow' 	 			=> 'Leisti',
     'deny' 	 				=> 'Neleisti',
-    'permission'            => 'Teises',
+    'permission'            => 'Teisė',
     'grant'                 => 'Suteikti',
     'no_permissions'        => 'Ši grupė neturi teisių.'
 ];

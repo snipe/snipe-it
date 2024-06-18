@@ -11,13 +11,12 @@ use App\Models\CustomField;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
-use Redirect;
-use Request;
-use Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This class controls all actions related to asset models for
@@ -67,7 +66,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param ImageUploadRequest $request
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
@@ -86,7 +85,7 @@ class AssetModelsController extends Controller
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
         $model->user_id = Auth::id();
-        $model->requestable = Request::has('requestable');
+        $model->requestable = $request->has('requestable');
 
         if ($request->input('fieldset_id') != '') {
             $model->fieldset_id = $request->input('fieldset_id');
@@ -140,7 +139,7 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param ImageUploadRequest $request
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(ImageUploadRequest $request, $modelId = null)
@@ -201,7 +200,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($modelId)
@@ -221,7 +220,7 @@ class AssetModelsController extends Controller
             try {
                 Storage::disk('public')->delete('models/'.$model->image);
             } catch (\Exception $e) {
-                \Log::info($e);
+                Log::info($e);
             }
         }
 
@@ -238,7 +237,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param int $id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function getRestore($id)
@@ -289,7 +288,7 @@ class AssetModelsController extends Controller
     public function show($modelId = null)
     {
         $this->authorize('view', AssetModel::class);
-        $model = AssetModel::withTrashed()->withCount('assets')->find($modelId);
+        $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
             return view('models/view', compact('model'));
@@ -430,7 +429,7 @@ class AssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postBulkDelete(Request $request)
     {

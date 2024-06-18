@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use DB;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -24,6 +23,7 @@ use Watson\Validating\ValidatingTrait;
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     use HasFactory;
+    use CompanyableTrait;
 
     protected $presenter = \App\Presenters\UserPresenter::class;
     use SoftDeletes, ValidatingTrait;
@@ -214,10 +214,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
-            && ($this->assets()->count() === 0)
-            && ($this->licenses()->count() === 0)
-            && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0)
+            && ($this->assets->count() === 0)
+            && ($this->licenses->count() === 0)
+            && ($this->consumables->count() === 0)
+            && ($this->accessories->count() === 0)
+            && ($this->managedLocations->count() === 0)
+            && ($this->managesUsers->count() === 0)
             && ($this->deleted_at == '');
     }
 
@@ -409,6 +411,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsTo(self::class, 'manager_id')->withTrashed();
     }
+
+    /**
+     * Establishes the user -> managed users relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.4.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function managesUsers()
+    {
+        return $this->hasMany(\App\Models\User::class, 'manager_id');
+    }
+
 
     /**
      * Establishes the user -> managed locations relationship
@@ -807,5 +822,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
 
         return $this;
+    }
+    public function scopeUserLocation($query, $location, $search){
+
+
+        return $query->where('location_id','=', $location)
+            ->where('users.first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.email', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.permissions', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.country', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.phone', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.jobtitle', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.employee_num', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.username', 'LIKE', '%' . $search . '%')
+            ->orwhereRaw('CONCAT(users.first_name," ",users.last_name) LIKE \''.$search.'%\'');
+
+
+
+
     }
 }

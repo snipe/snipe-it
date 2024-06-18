@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This class controls all actions related to Components for
@@ -188,7 +189,7 @@ class ComponentsController extends Controller
             try {
                 Storage::disk('public')->delete('components/'.$component->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 

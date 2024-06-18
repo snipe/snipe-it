@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Detalhes de autenticação não podem ser alterados nesta instalação.',
     'manager' 				=> 'Responsável',
     'managed_locations'     => 'Locais gerenciados',
+    'managed_users'         => 'Usuários gerenciados',
     'name' 					=> 'Nome',
     'nogroup'               => 'Nenhum grupo foi criado ainda. Para adicionar um, visite: ',
     'notes'                 => 'Notas',

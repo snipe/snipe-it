@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Licensen finns inte eller så har du inte behörighet att se den.',
-    'user_does_not_exist' => 'Användare finns inte.',
+    'user_does_not_exist' => 'Användaren finns inte eller så har du inte behörighet att se dem.',
     'asset_does_not_exist' 	=> 'Den tillgång du försöker associera med denna licens existerar inte.',
     'owner_doesnt_match_asset' => 'Den tillgång du försöker associera med denna licens ägs av någon annan än den person som valts i den tilldelade till rullgardinsmenyn.',
     'assoc_users'	 => 'Licensen är nu utcheckad till en användare och kan inte raderas. Var god kontrollera licensen först och försök sedan radera igen.',

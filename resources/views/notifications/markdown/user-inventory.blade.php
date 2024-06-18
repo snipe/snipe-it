@@ -56,6 +56,19 @@
 </table>
 @endif
 
+@if ($consumables->count() > 0)
+## {{ $consumables->count() }} {{ trans('general.consumables') }}
+
+<table width="100%">
+<tr><th align="left">{{ trans('mail.name') }} </th> <th></th> </tr>
+@foreach($consumables as $consumable)
+<tr>
+<td>{{ $consumable->name }}</td>
+</tr>
+@endforeach
+</table>
+@endif
+
 
 @endcomponent
 

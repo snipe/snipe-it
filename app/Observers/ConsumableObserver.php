@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Actionlog;
 use App\Models\Consumable;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ConsumableObserver
 {

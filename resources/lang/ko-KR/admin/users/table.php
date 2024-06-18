@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> '이 설치본에서는 로그인 상세를 변경 할 수 없습니다.',
     'manager' 				=> '상사',
     'managed_locations'     => '관리되는 위치',
+    'managed_users'         => 'Managed Users',
     'name' 					=> '이름',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => '비고',

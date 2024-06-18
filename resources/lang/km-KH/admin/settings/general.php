@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'EULA លំនាំដើម',
     'default_language'			=> 'ភាសាលំនាំដើម',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'បង្ហាញ​ឈ្មោះ​ទ្រព្យសកម្ម',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'បង្ហាញ EOL នៅក្នុងទិដ្ឋភាពតារាង',

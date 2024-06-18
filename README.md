@@ -1,13 +1,13 @@
 ![snipe-it-by-grok](https://github.com/snipe/snipe-it/assets/197404/b515673b-c7c8-4d9a-80f5-9fa58829a602)
 
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeitapp.svg?style=social)](https://twitter.com/snipeitapp) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://www.codacy.com/app/snipe/snipe-it?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=snipe/snipe-it&amp;utm_campaign=Badge_Grade) [![Tests](https://github.com/snipe/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/snipe/snipe-it/actions/workflows/tests.yml)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeitapp.svg?style=social)](https://twitter.com/snipeitapp) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://app.codacy.com/gh/snipe/snipe-it/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Tests](https://github.com/snipe/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/snipe/snipe-it/actions/workflows/tests.yml)
 [![All Contributors](https://img.shields.io/badge/all_contributors-331-orange.svg?style=flat-square)](#contributing) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/yZFtShAcKk)
 
 ## Snipe-IT - Open Source Asset Management System
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 8](http://laravel.com).
+It is built on [Laravel 10](http://laravel.com).
 
 Snipe-IT is actively developed and we [release quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
 

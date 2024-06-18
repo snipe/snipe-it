@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Irangos priežiūra, kurios tu ieškai, nerasta!',
+        'not_found'                    => 'Jūsų ieškomas įrangos aptarnavimas nebuvo rastas!',
         'delete'                       => [
-            'confirm' => 'Ar tikrai norite ištrinti šią įrangos priežiūrą?',
-            'error'   => 'Inepavyko ištrinti įrangos priežiūrą. Prašome bandykite dar kartą.',
-            'success' => 'Įrangos preižiūra buvo sėkmingai ištrinta.',
+            'confirm' => 'Ar tikrai norite panaikinti šį įrangos aptarnavimą?',
+            'error'   => 'Bandant panaikinti įrangos aptarnavimą įvyko klaida. Bandykite dar kartą.',
+            'success' => 'Įrangos aptarnavimas panaikintas sėkmingai.',
         ],
         'create'                       => [
-            'error'   => 'Įrangos priežiūra nebuvo sukurta, prašome bandykite dar kartą.',
-            'success' => 'Įrangos priežiūra sukurta sėkmingai.',
+            'error'   => 'Įrangos aptarnavimas nebuvo sukurtas, bandykite dar kartą.',
+            'success' => 'Įrangos aptarnavimas sukurtas sėkmingai.',
         ],
         'edit'                       => [
-            'error'   => 'Turto priežiūra nebuvo redaguota, bandykite dar kartą.',
-            'success' => 'Turto priežiūra sėkmingai redaguojama.',
+            'error'   => 'Įrangos aptarnavimas nebuvo pakeistas, bandykite dar kartą.',
+            'success' => 'Įrangos aptarnavimas redaguotas sėkmingai.',
         ],
         'asset_maintenance_incomplete' => 'Nebaigta',
-        'warranty'                     => 'Garantija',
-        'not_warranty'                 => 'Nėra garantijos',
+        'warranty'                     => 'Garantinis',
+        'not_warranty'                 => 'Ne garantinis',
     ];

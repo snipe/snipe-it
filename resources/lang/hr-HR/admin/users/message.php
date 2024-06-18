@@ -37,10 +37,16 @@ return array(
         'update' => 'Došlo je do problema s ažuriranjem korisnika. Molim te pokušaj ponovno.',
         'delete' => 'Došlo je do problema s brisanjem korisnika. Molim te pokušaj ponovno.',
         'delete_has_assets' => 'Ovaj korisnik ima stavke dodijeljene i nije ih moguće izbrisati.',
+        'delete_has_assets_var' => 'This user still has an asset assigned. Please check it in first.|This user still has :count assets assigned. Please check their assets in first.',
+        'delete_has_licenses_var' => 'This user still has a license seats assigned. Please check it in first.|This user still has :count license seats assigned. Please check them in first.',
+        'delete_has_accessories_var' => 'This user still has an accessory assigned. Please check it in first.|This user still has :count accessories assigned. Please check their assets in first.',
+        'delete_has_locations_var' => 'This user still manages a location. Please select another manager first.|This user still manages :count locations. Please select another manager first.',
+        'delete_has_users_var' => 'This user still manages another user. Please select another manager for that user first.|This user still manages :count users. Please select another manager for them first.',
         'unsuspend' => 'Došlo je do problema s obustavom korisnika. Molim te pokušaj ponovno.',
         'import'    => 'Došlo je do problema s uvozom korisnika. Molim te pokušaj ponovno.',
         'asset_already_accepted' => 'Ova je imovina već prihvaćena.',
         'accept_or_decline' => 'Morate prihvatiti ili odbiti ovaj materijal.',
+        'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
         'incorrect_user_accepted' => 'Predmete koje ste pokušali prihvatiti nisu provjereni.',
         'ldap_could_not_connect' => 'Povezivanje s LDAP poslužiteljem nije uspjelo. Provjerite konfiguraciju LDAP poslužitelja u LDAP konfiguracijskoj datoteci. <br>Preku s LDAP poslužitelja:',
         'ldap_could_not_bind' => 'Nije moguće povezati se s LDAP poslužiteljem. Provjerite konfiguraciju LDAP poslužitelja u LDAP konfiguracijskoj datoteci. <br>Preku s LDAP poslužitelja:',
@@ -62,7 +68,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
+        'error'   => 'Ovaj korisnik nema postavljenu mail adresu.',
         'success' => 'The user has been notified about their current inventory.'
     )
 );

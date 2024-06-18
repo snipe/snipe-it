@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Standard EULA',
     'default_language'			=> 'Standardsprache',
     'default_eula_help_text'	=> 'Sie können ebenfalls eigene EULA\'s mit spezifischen Asset Kategorien verknüpfen.',
+    'acceptance_note'           => 'Notiz für Ihre Entscheidung hinzufügen (Optional)',
     'display_asset_name'        => 'Zeige Assetname an',
     'display_checkout_date'     => 'Zeige Herausgabedatum',
     'display_eol'               => 'Zeige EOL in der Tabellenansicht',

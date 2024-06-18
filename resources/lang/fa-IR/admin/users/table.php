@@ -21,6 +21,7 @@ return array(
     'lock_passwords'		=> 'جزییات وارد شدن نمیتواند در این نصب تغییر کند.',
     'manager' 				=> 'مدیر',
     'managed_locations'     => 'مکان های مدیریت شده',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'نام',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'یادداشت ها',

@@ -68,6 +68,7 @@ return [
     'default_eula_text'			=> 'EULA پیش فرض',
     'default_language'			=> 'زبان پیش فرض',
     'default_eula_help_text'	=> 'همچنین می توانید  EULA های سفارشی به دسته های خاص دارایی مرتبط کنید.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'نمایش نام حساب',
     'display_checkout_date'     => 'نمایش تاریخ پرداخت',
     'display_eol'               => 'نمایش EOL در جدول',

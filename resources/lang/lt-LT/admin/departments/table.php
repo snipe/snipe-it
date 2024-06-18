@@ -3,9 +3,9 @@
 return array(
 
     'id'                        => 'ID',
-    'name'                      => 'Departamento pavadinimas',
-    'manager'                   => 'Vadybininkas',
+    'name'                      => 'Skyriaus pavadinimas',
+    'manager'                   => 'Vadovas',
     'location'                  => 'Vieta',
-    'create'                    => 'Sukurkite skyrių',
-    'update'                    => 'Atnaujinti departamentą',
+    'create'                    => 'Sukurti skyrių',
+    'update'                    => 'Atnaujinti skyrių',
     );

@@ -3,8 +3,9 @@
 namespace App\Listeners;
 
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Failed;
+use Illuminate\Support\Facades\Log;
 
 class LogFailedLogin
 {
@@ -38,7 +39,7 @@ class LogFailedLogin
                 ]
             );
         } catch (\Exception $e) {
-            \Log::debug($e);
+            Log::debug($e);
         }
     }
 }

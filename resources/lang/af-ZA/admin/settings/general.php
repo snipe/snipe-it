@@ -49,6 +49,7 @@ return [
     'default_eula_text'			=> 'Standaard EULA',
     'default_language'			=> 'Verstek taal',
     'default_eula_help_text'	=> 'U kan ook aangepaste EULA\'s aan spesifieke batekategorieë assosieer.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'Wys bate naam',
     'display_checkout_date'     => 'Vertoon Checkout Date',
     'display_eol'               => 'Wys EOL in tabelweergawe',

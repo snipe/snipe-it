@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Asset;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class SyncAssetCounters extends Command
 {
@@ -58,7 +59,7 @@ class SyncAssetCounters extends Command
                         $asset->save();
                         $bar->advance();
 
-                        \Log::debug('Asset: '.$asset->id.' has '.$asset->checkin_counter.' checkins, '.$asset->checkout_counter.' checkouts, and '.$asset->requests_counter.' requests');
+                        Log::debug('Asset: '.$asset->id.' has '.$asset->checkin_counter.' checkins, '.$asset->checkout_counter.' checkouts, and '.$asset->requests_counter.' requests');
 
                     }
 

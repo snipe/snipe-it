@@ -25,7 +25,7 @@ class ViewAssetsController extends Controller
     /**
      * Redirect to the profile page.
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getIndex()
     {
