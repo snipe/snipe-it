@@ -26,6 +26,7 @@
     "alek13/slack": "^2.0",
     "arietimmerman/laravel-scim-server": "dev-master",
     "bacon/bacon-qr-code": "^2.0",
+    "barryvdh/laravel-debugbar": "^3.13",
     "barryvdh/laravel-dompdf": "^2.0",
     "doctrine/cache": "^1.10",
     "doctrine/dbal": "^3.1",
@@ -72,7 +73,6 @@
     "ext-zip": "*"
   },
   "require-dev": {
-    "barryvdh/laravel-debugbar": "^3.13",
     "brianium/paratest": "^v6.4.4",
     "fakerphp/faker": "^1.16",
     "mockery/mockery": "^1.4",
