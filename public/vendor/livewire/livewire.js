@@ -635,7 +635,9 @@
       unsetUploadLoading(this.component);
       let uploadItem = this.uploadBag.first(name);
       if (uploadItem) {
-        uploadItem.request.abort();
+        if (uploadItem.request) {
+          uploadItem.request.abort();
+        }
         this.uploadBag.shift(name).cancelledCallback();
         if (cancelledCallback)
           cancelledCallback();
@@ -1011,7 +1013,7 @@
       const target = objects.find((obj) => Object.prototype.hasOwnProperty.call(obj, name)) || objects[objects.length - 1];
       const descriptor = Object.getOwnPropertyDescriptor(target, name);
       if (descriptor?.set && descriptor?.get)
-        return Reflect.set(target, name, value, thisProxy);
+        return descriptor.set.call(thisProxy, value) || true;
       return Reflect.set(target, name, value);
     }
   };
@@ -2278,7 +2280,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     get raw() {
       return raw;
     },
-    version: "3.14.0",
+    version: "3.14.1",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -4566,6 +4568,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       let effects = this.originalEffects.listeners ? { listeners: this.originalEffects.listeners } : {};
       if (this.originalEffects.url) {
         effects.url = this.originalEffects.url;
+      }
+      if (this.originalEffects.scripts) {
+        effects.scripts = this.originalEffects.scripts;
       }
       el.setAttribute("wire:effects", JSON.stringify(effects));
     }
@@ -7914,13 +7919,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
     Alpine3.history = { track: track2 };
   }
-  function track2(name, initialSeedValue, alwaysShow = false) {
+  function track2(name, initialSeedValue, alwaysShow = false, except = null) {
     let { has: has2, get: get3, set: set3, remove } = queryStringUtils();
     let url = new URL(window.location.href);
     let isInitiallyPresentInUrl = has2(url, name);
     let initialValue = isInitiallyPresentInUrl ? get3(url, name) : initialSeedValue;
     let initialValueMemo = JSON.stringify(initialValue);
+    let exceptValueMemo = [false, null, void 0].includes(except) ? initialSeedValue : JSON.stringify(except);
     let hasReturnedToInitialValue = (newValue) => JSON.stringify(newValue) === initialValueMemo;
+    let hasReturnedToExceptValue = (newValue) => JSON.stringify(newValue) === exceptValueMemo;
     if (alwaysShow)
       url = set3(url, name, initialValue);
     replace(url, name, { value: initialValue });
@@ -7932,6 +7939,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (!alwaysShow && !isInitiallyPresentInUrl && hasReturnedToInitialValue(newValue)) {
         url2 = remove(url2, name);
       } else if (newValue === void 0) {
+        url2 = remove(url2, name);
+      } else if (!alwaysShow && hasReturnedToExceptValue(newValue)) {
         url2 = remove(url2, name);
       } else {
         url2 = set3(url2, name, newValue);
@@ -9082,7 +9091,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (!as)
         as = name;
       let initialValue = [false, null, void 0].includes(except) ? dataGet(component.ephemeral, name) : except;
-      let { replace: replace2, push: push2, pop } = track2(as, initialValue, alwaysShow);
+      let { replace: replace2, push: push2, pop } = track2(as, initialValue, alwaysShow, except);
       if (use === "replace") {
         let effectReference = module_default.effect(() => {
           replace2(dataGet(component.reactive, name));
