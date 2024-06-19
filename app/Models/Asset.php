@@ -984,6 +984,14 @@ class Asset extends Depreciable
         );
     }
 
+    protected function lastAuditDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null,
+            set: fn ($value) => $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null,
+        );
+    }
+
     protected function lastCheckout(): Attribute
     {
         return Attribute::make(
