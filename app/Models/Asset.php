@@ -100,7 +100,7 @@ class Asset extends Depreciable
         'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
         'last_checkin'     => 'nullable|date_format:Y-m-d H:i:s',
         'expected_checkin' => 'nullable|date',
-        'last_audit_date'  => 'nullable|date_format:Y-m-d H:i:s',
+        'last_audit_date'  => 'nullable',
         // 'next_audit_date'  => 'nullable|date|after:last_audit_date',
         'next_audit_date'  => 'nullable|date',
         'location_id'      => 'nullable|exists:locations,id',
