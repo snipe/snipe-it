@@ -203,9 +203,6 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
-        if ($request->filled('location_id') != '') {
-            $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
-         }
 
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
