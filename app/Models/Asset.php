@@ -100,7 +100,7 @@ class Asset extends Depreciable
         'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
         'last_checkin'     => 'nullable|date_format:Y-m-d H:i:s',
         'expected_checkin' => 'nullable|date',
-        'last_audit_date'  => 'nullable',
+        'last_audit_date'  => 'nullable|date_format:Y-m-d H:i:s',
         // 'next_audit_date'  => 'nullable|date|after:last_audit_date',
         'next_audit_date'  => 'nullable|date',
         'location_id'      => 'nullable|exists:locations,id',
@@ -147,7 +147,7 @@ class Asset extends Depreciable
         'expected_checkin',
         'byod',
         'asset_eol_date',
-        'eol_explicit', 
+        'eol_explicit',
         'last_audit_date',
         'next_audit_date',
         'asset_eol_date',
@@ -159,21 +159,21 @@ class Asset extends Depreciable
 
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = [
-      'name', 
-      'asset_tag', 
-      'serial', 
-      'order_number', 
-      'purchase_cost', 
-      'notes', 
+      'name',
+      'asset_tag',
+      'serial',
+      'order_number',
+      'purchase_cost',
+      'notes',
       'created_at',
-      'updated_at',      
-      'purchase_date', 
-      'expected_checkin', 
-      'next_audit_date', 
+      'updated_at',
+      'purchase_date',
+      'expected_checkin',
+      'next_audit_date',
       'last_audit_date',
       'last_checkin',
       'last_checkout',
@@ -182,7 +182,7 @@ class Asset extends Depreciable
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -295,7 +295,7 @@ class Asset extends Depreciable
 
             // The asset status is not archived and is deployable
             if (($this->assetstatus) && ($this->assetstatus->archived == '0')
-                && ($this->assetstatus->deployable == '1')) 
+                && ($this->assetstatus->deployable == '1'))
             {
                 return true;
 
@@ -852,11 +852,11 @@ class Asset extends Depreciable
         foreach ($assets as $asset) {
             $results = preg_match("/\d+$/", $asset['asset_tag'], $matches);
 
-            if ($results) 
+            if ($results)
             {
                 $number = $matches[0];
 
-                if ($number > $max) 
+                if ($number > $max)
                 {
                     $max = $number;
                 }
