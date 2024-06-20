@@ -427,10 +427,6 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
-        if (! $request->has('two_factor_secret')) { // TODO this seems almost the same as above?
-            return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
-        }
-
         $user = Auth::user();
         $secret = $request->input('two_factor_secret');
 
@@ -537,7 +533,7 @@ class LoginController extends Controller
 
         $minutes = round($seconds / 60);
 
-        $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
+        $message = trans('auth/message.throttle', ['minutes' => $minutes]);
 
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
