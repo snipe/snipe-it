@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'about_asset_depreciations'  			=> 'Info Amortización Equipos',
-    'about_depreciations'  					=> 'Puedes configurar clases de amortización para amortizar equipos de forma lineal.',
+    'about_asset_depreciations'  			=> 'Sobre amortización de activos',
+    'about_depreciations'  					=> 'Puede configurar la depreciación de activos usando un método de línea recta.',
     'asset_depreciations'  					=> 'Amortizaciones',
-    'create'  					            => 'Crear Amortización',
-    'depreciation_name'  					=> 'Nombre Amortización',
+    'create'  					            => 'Crear amortización',
+    'depreciation_name'  					=> 'Nombre amortización',
     'depreciation_min'                      => 'Valor mínimo de amortización',
     'number_of_months'  					=> 'Meses',
     'update'  					            => 'Actualizar Amortización',

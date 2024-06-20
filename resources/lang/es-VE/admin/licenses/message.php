@@ -47,7 +47,7 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   => 'Hubo un problema registrando la licencia. Por favor, inténtalo de nuevo.',
+        'error'   => 'Hubo un problema devolviendo la licencia. Por favor, inténtalo de nuevo.',
         'success' => 'La licencia fue registrada con éxito'
     ),
 

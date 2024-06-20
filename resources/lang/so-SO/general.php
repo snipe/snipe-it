@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Magaca Dambe ee ugu horreeya (smith_j@example.com)',
     'firstinitial.lastname' => 'Magaca Dambe ee Koowaad (j.smith@example.com)',
     'firstnamelastinitial'  => 'Magaca hore ee ugu dambeeya (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Magaca koowaad',
     'first_name_format'		=> 'Magaca koowaad (jane@example.com)',
     'files'                 => 'Faylasha',

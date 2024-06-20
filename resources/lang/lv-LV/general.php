@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Uzvārds un vārda pirmais burts (berzinsj@epasts.lv)',
     'firstinitial.lastname' => 'Vārds un uzvārds (j.smith@example.com)',
     'firstnamelastinitial'  => 'Vārds Uzvārds (jane_smith@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Vārds',
     'first_name_format'		=> 'Vārds (jane@example.com)',
     'files'                 => 'Datnes',

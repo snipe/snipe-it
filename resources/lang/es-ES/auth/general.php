@@ -2,7 +2,7 @@
 
 return [
     'send_password_link'	        => 'Enviar enlace de restablecimiento de contraseña',
-    'email_reset_password'			=> 'Enviar correo para restablecer contraseña',
+    'email_reset_password'			=> 'Enviar correo',
     'reset_password'			    => 'Restablecer Contraseña',
     'saml_login'                    => 'Iniciar sesión a través de SAML',
     'login'                         => 'Iniciar Sesión',

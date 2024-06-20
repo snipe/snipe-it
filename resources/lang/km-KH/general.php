@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'នាមត្រកូល នាមខ្លួនដំបូង (smith_j@example.com)',
     'firstinitial.lastname' => 'នាមត្រកូលដំបូង (j.smith@example.com)',
     'firstnamelastinitial'  => 'នាមខ្លួន នាមត្រកូលដំបូង (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'នាមខ្លួន',
     'first_name_format'		=> 'នាមខ្លួន (jane@example.com)',
     'files'                 => 'ឯកសារ',

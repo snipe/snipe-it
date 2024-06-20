@@ -24,7 +24,7 @@ return array(
     'delete' => array(
         'confirm'   => 'Ar jūs tikrai norite panaikinti šį gamintoją?',
         'error'   => 'Bandant panaikinti gamintoją įvyko klaida. Bandykite dar kartą.',
-        'success' => 'Gamintojas sėkmingai ištrintas.'
+        'success' => 'Gamintojas panaikintas sėkmingai.'
     )
 
 );

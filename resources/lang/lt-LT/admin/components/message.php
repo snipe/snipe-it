@@ -15,7 +15,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Ar tikrai norite pannaikinti šį komponentą?',
+        'confirm'   => 'Ar tikrai norite panaikinti šį komponentą?',
         'error'   => 'Bandant panaikinti komponentą įvyko klaida. Bandykite dar kartą.',
         'success' => 'Komponentas panaikintas sėkmingai.'
     ),

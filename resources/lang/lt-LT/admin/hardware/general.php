@@ -22,7 +22,7 @@ return [
     'not_requestable'           => 'Neužsakoma',
     'requestable_status_warning' => 'Nekeisti užsakomos įrangos būsenos',
     'restore'  					=> 'Atkurti įrangą',
-    'pending'  					=> 'Laukiama',
+    'pending'  					=> 'Ruošiama',
     'undeployable'  			=> 'Negalimas naudoti',
     'undeployable_tooltip'  	=> 'Ši įranga yra pažymėta kaip neišduotina, todėl šiuo metu jos negalima išduoti.',
     'view'  					=> 'Peržiūrėti įrangą',

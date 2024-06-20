@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Sobrenome Primeira Inicial (silva_j@exemplo.com.br)',
     'firstinitial.lastname' => 'Inicial do Nome sobrenome (j.silva@exemplo.com.br)',
     'firstnamelastinitial'  => 'Primeiro Nome com Inicial do Sobrenome (joses@exemplo.com.br)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Primeiro Nome',
     'first_name_format'		=> 'Primeiro Nome (jose@exemplo.com.br)',
     'files'                 => 'Arquivos',
