@@ -79,10 +79,10 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'El activo no se ha registrado, por favor, inténtelo de nuevo',
-        'success' 		=> 'Activo registrado con éxito.',
-        'user_does_not_exist' => 'El usuario es inválido. Por favor inténtelo de nuevo.',
-        'already_checked_in'  => 'Ese activo ya ha sido registrado.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
+        'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],
 

@@ -6,7 +6,7 @@ return array(
     'created_at' 			=> 'Creado el',
     'eol'	 				=> 'EOL',
     'modelnumber'   		=> 'Modelo No.',
-    'name'      			=> 'Nombre Modelo',
+    'name'      			=> 'Nombre del modelo de activo',
     'numassets' 			=> 'Equipos',
     'title'					=> 'Modelos Equipos',
     'update'				=> 'Actualizar Modelo',

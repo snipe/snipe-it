@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => '苗字_名前のイニシャル (smith_j@example.com)',
     'firstinitial.lastname' => '名前.イニシャルと苗字 (j.smith@example.com)',
     'firstnamelastinitial'  => '名前と苗字のイニシャル (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> '名前',
     'first_name_format'		=> '名前 (jane@example.com)',
     'files'                 => 'ファイル',

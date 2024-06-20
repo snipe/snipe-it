@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'Términos y condiciones',
+	'eula_text'      			=> 'Acuerdo de uso',
     'id'      					=> 'Identificación',
     'parent'   					=> 'Padre',
     'require_acceptance'      	=> 'Aceptación',

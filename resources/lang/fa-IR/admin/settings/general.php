@@ -393,10 +393,20 @@ return [
 ',
     'oauth_title' => 'تنظیمات API OAuth
 ',
+    'oauth_clients' => 'OAuth Clients',
     'oauth' => 'OAuth
 ',
     'oauth_help' => 'تنظیمات نقطه پایانی Oauth
 ',
+    'oauth_no_clients' => 'You have not created any OAuth clients yet.',
+    'oauth_secret' => 'Secret',
+    'oauth_authorized_apps' => 'Authorized Applications',
+    'oauth_redirect_url' => 'Redirect URL',
+    'oauth_name_help' => ' Something your users will recognize and trust.',
+    'oauth_scopes' => 'Scopes',
+    'oauth_callback_url' => 'Your application authorization callback URL.',
+    'create_client' => 'Create Client',
+    'no_scopes' => 'No scopes',
     'asset_tag_title' => 'تنظیمات برچسب دارایی را به روز کنید
 ',
     'barcode_title' => 'تنظیمات بارکد را به روز کنید

@@ -145,6 +145,7 @@ return [
     'lastname_firstinitial' => 'فامیل نام میانه (smith_j@example.com)',
     'firstinitial.lastname' => 'نام میانه فامیل (j.smith@example.com)',
     'firstnamelastinitial'  => 'نام فامیل میانه (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'نام',
     'first_name_format'		=> 'نام (jane@example.com)',
     'files'                 => 'فایل ها',

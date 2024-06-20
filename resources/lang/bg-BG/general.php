@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Фамилия и Първа буква от име (ivanov_i@example.com)',
     'firstinitial.lastname' => 'Първа буква от името и Фамилия (i.ivanov@example.com)',
     'firstnamelastinitial'  => 'Име и първа буква от фамилия (ivani@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Собствено име',
     'first_name_format'		=> 'Име (jane@example.com)',
     'files'                 => 'Файлове',

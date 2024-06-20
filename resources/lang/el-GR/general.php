@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Πρώτο Όνομα Αρχικό (smith_j@example.com)',
     'firstinitial.lastname' => 'Πρώτο Αρχικό Όνομα (j.smith@example.com)',
     'firstnamelastinitial'  => 'Επίθετο Όνομα (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Όνομα',
     'first_name_format'		=> 'Όνομα (jane@example.com)',
     'files'                 => 'Αρχεία',

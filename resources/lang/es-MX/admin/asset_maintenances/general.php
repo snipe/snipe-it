@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Mantenimientos de Equipo',
+        'asset_maintenances' => 'Mantenimiento de activos',
         'edit'               => 'Editar Mantenimiento de Equipo',
         'delete'             => 'Eliminar Mantenimiento de Equipo',
         'view'               => 'Ver Detalle de Mantenimiento de Equipo',

@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Nom de famille et première lettre du prénom (smith_j@example.com)',
     'firstinitial.lastname' => 'Première lettre du prénom et nom de famille (j.smith@example.com)',
     'firstnamelastinitial'  => 'Prénom (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Prénom',
     'first_name_format'		=> 'Prénom (jane@example.com)',
     'files'                 => 'Fichiers',

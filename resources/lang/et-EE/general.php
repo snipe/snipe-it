@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Perenimi Eesnimi algustäht (smith_j@example.com)',
     'firstinitial.lastname' => 'Eesnime algustäht Perekonnanimi (j.smith@example.com)',
     'firstnamelastinitial'  => 'Eesnimi Perekonnanime algustäht (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Eesnimi',
     'first_name_format'		=> 'Eesnimi (jane@example.com)',
     'files'                 => 'Failid',

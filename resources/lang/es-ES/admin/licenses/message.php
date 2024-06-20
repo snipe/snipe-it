@@ -47,7 +47,7 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   => 'No se ha quitado el equipo. Intentalo de nuevo.',
+        'error'   => 'Hubo un problema devolviendo la licencia. Por favor, inténtalo de nuevo.',
         'success' => 'Equipo quitado correctamente.'
     ),
 

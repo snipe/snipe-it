@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Įspėjimas:</strong> Ši įranga pažymėta kaip negalima išduoti. Jei ši būsena pasikeitė, atnaujinkite ją.',
     'does_not_exist' 	=> 'Tokios įrangos nėra.',
-    'does_not_exist_var'=> 'Įranga su žyma :asset_tag nerasta.',
+    'does_not_exist_var'=> 'Įranga su numeriu :asset_tag nerasta.',
     'no_tag' 	        => 'Nenurodytas inventorinis numeris.',
     'does_not_exist_or_not_requestable' => 'Tokios įrangos nėra arba jos negalima užsakyti.',
     'assoc_users'	 	=> 'Ši įranga šiuo metu yra išduota naudotojui ir negali būti panaikinta. Pirmiausia paimkite įrangą ir tuomet vėl bandykite panaikinti. ',
