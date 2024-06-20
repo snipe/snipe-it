@@ -61,7 +61,7 @@
     "phpspec/prophecy": "^1.10",
     "pragmarx/google2fa-laravel": "^1.3",
     "rollbar/rollbar-laravel": "^8.0",
-    "spatie/laravel-backup": "^8.0",
+    "spatie/laravel-backup": "^8.8",
     "spatie/laravel-ignition": "^2.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tecnickcom/tcpdf": "^6.5",
