@@ -439,7 +439,7 @@ class LoginController extends Controller
             $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 
-            return redirect()->route('home')->with('success', 'You are logged in!');
+            return redirect()->route('home')->with('success', trans('auth/general.login_success'));
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
