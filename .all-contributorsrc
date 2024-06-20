@@ -3127,6 +3127,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Tyree",
+      "name": "Matt Tyree",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5395363?v=4",
+      "profile": "https://github.com/Tyree",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }

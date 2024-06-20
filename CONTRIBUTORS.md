@@ -448,6 +448,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/U-H-T"><img src="https://avatars.githubusercontent.com/u/64061710?v=4?s=110" width="110px;" alt="U-H-T"/><br /><sub><b>U-H-T</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=U-H-T" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Tyree"><img src="https://avatars.githubusercontent.com/u/5395363?v=4?s=110" width="110px;" alt="Matt Tyree"/><br /><sub><b>Matt Tyree</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Tyree" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
