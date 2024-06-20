@@ -361,11 +361,12 @@
         @endcan
 
         <!-- Add Note -->
-        @can('edit', \App\Models\Accessory::class)
-            <div class="text-center" style="padding-top: 5px;">
-                <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
-            </div>
-        @endcan
+            <!-- Add notes -->
+            @can('edit', \App\Models\Accessory::class)
+                <div class="col-md-12" style="padding-top: 5px;">
+                    <a href='{{ route('modal.show', 'add-note') }}?type=asset&id={{$asset->id}}' style="width: 100%" data-toggle="modal" data-target="#createModal" data-select='add-note_select_id' data-refresh="assetHistory" data-hasnopayload="true" class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
+                </div>
+            @endcan
 
         @can('delete', $accessory)
             @if ($accessory->users_count == 0)

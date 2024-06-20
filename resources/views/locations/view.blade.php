@@ -8,6 +8,7 @@
  
 @parent
 @stop
+@stop
 
 {{-- Page content --}}
 @section('content')
