@@ -428,7 +428,7 @@ class LoginController extends Controller
         }
 
         if (! $request->has('two_factor_secret')) { // TODO this seems almost the same as above?
-            return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
+            return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
         $user = Auth::user();
@@ -439,7 +439,7 @@ class LoginController extends Controller
             $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 
-            return redirect()->route('home')->with('success', trans('auth/general.login_success'));
+            return redirect()->route('home')->with('success', trans('auth/message.signin.success'));
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));

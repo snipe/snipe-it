@@ -15,6 +15,5 @@ return [
     'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login failed, please try again.',
     'two_factor_code'                => 'Please enter your two-factor authentication code.',
-    'login_success'                  => 'You are logged in!.',
 ];
 
