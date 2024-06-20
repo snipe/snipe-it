@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Achternaam eerste initiaal (smith_j@example.com)',
     'firstinitial.lastname' => 'Eerste initiaal achternaam (j.smith@example.com)',
     'firstnamelastinitial'  => 'Voornaam Initiaal Achternaam (janes@voorbeeld.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Voornaam',
     'first_name_format'		=> 'Voornaam (jane@example.com)',
     'files'                 => 'Bestanden',

@@ -79,9 +79,9 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'El equipo no pudo ser asignado, por favor inténtalo de nuevo',
-        'success' 		=> 'El equipo fue asignado exitosamente.',
-        'user_does_not_exist' => 'Es usuario es invalido, por favor inténtalo de nuevo.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
         'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],

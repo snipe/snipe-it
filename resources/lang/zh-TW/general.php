@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => '姓氏與名首字母 (smith_j@example.com)',
     'firstinitial.lastname' => '姓氏與名首子母 (j.smith@example.com)',
     'firstnamelastinitial'  => '名字與姓首字母 (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> '名字',
     'first_name_format'		=> '名，例如 (jane@example.com)',
     'files'                 => '檔案',

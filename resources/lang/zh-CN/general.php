@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => '姓 缩写名, 例如 (smith_j@example.com)',
     'firstinitial.lastname' => '缩写名 姓，例如(jsmith@example.com)',
     'firstnamelastinitial'  => '名 姓，例如 (jane.smith@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> '名字',
     'first_name_format'		=> '名，例如 (jane@example.com)',
     'files'                 => '文件',

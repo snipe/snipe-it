@@ -2,7 +2,7 @@
 
 return [
 
-    'asset_tag'   	=> 'Inventoriaus numeris',
+    'asset_tag'   	=> 'Inventorinis numeris',
     'asset_model'       => 'Modelis',
     'assigned_to'   => 'Išduota',
     'book_value'  	=> 'Dabartinė reikšmė',

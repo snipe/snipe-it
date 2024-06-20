@@ -12,7 +12,7 @@ return array(
 	'show_mac_address'			      => 'Mostrar campo de dirección MAC en los activos de este modelo',
     'view_deleted'              => 'Vista eliminada',
     'view_models'               => 'Ver modelos',
-    'fieldset'                  => 'Fieldset',
+    'fieldset'                  => 'Grupos de campo',
     'no_custom_field'           => 'No hay campos personalizados',
     'add_default_values'        => 'Añadir valores por defecto',
 );

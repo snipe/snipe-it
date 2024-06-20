@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Prenume Prima Inițială (smith_j@example.com)',
     'firstinitial.lastname' => 'Primul nume inițial (j.smith@example.com)',
     'firstnamelastinitial'  => 'Prenume Nume Ultima Inițială (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Prenume',
     'first_name_format'		=> 'Prenume (jane@example.com)',
     'files'                 => 'Fișiere',

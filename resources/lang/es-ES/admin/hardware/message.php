@@ -79,10 +79,10 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
-        'success' 		=> 'Equipo quitado correctamente.',
-        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
-        'already_checked_in'  => 'Ese activo ya se quito.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
+        'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],
 

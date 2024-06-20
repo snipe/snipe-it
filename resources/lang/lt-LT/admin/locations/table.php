@@ -24,7 +24,7 @@ return [
     'user_name'                 => 'Naudotojo vardas',
     'department'                => 'Skyrius',
     'location'                  => 'Vieta',
-    'asset_tag'                 => 'Inventoriaus numeris',
+    'asset_tag'                 => 'Inventorinis numeris',
     'asset_name'                => 'Pavadinimas',
     'asset_category'            => 'Kategorija',
     'asset_manufacturer'        => 'Gamintojas',

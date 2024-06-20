@@ -32,7 +32,7 @@ return [
     'additional_notes' => 'Notas Adicionales:',
     'admin_has_created' => 'Un administrador ha creado una cuenta para ti en el sitio web de :web.',
     'asset' => 'Activo:',
-    'asset_name' => 'Nombre de Activo:',
+    'asset_name' => 'Nombre del activo:',
     'asset_requested' => 'Activo solicitado',
     'asset_tag' => 'Etiqueta de activo',
     'assets_warrantee_alert' => 'Hay :count activo con una garantía que expira en los próximos :threshold days.|Hay :count activos con garantías que expiran en los siguientes :threshold days.',

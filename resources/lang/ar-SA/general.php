@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'اللقب والحرف الاول من الاسم (smithj@example.com)',
     'firstinitial.lastname' => 'الاسم الأخير الأول (jsmith@example.com)',
     'firstnamelastinitial'  => 'اللقب والحرف الاول من الاسم (smithj@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'الإسم الأول',
     'first_name_format'		=> 'الاسم الأول (jane@example.com)',
     'files'                 => 'الملفات',

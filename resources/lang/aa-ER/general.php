@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'crwdns5952:0crwdne5952:0',
     'firstinitial.lastname' => 'crwdns5954:0crwdne5954:0',
     'firstnamelastinitial'  => 'crwdns5956:0crwdne5956:0',
+    'lastnamefirstname'      => 'crwdns12266:0crwdne12266:0',
     'first_name'			=> 'crwdns1053:0crwdne1053:0',
     'first_name_format'		=> 'crwdns1647:0crwdne1647:0',
     'files'                 => 'crwdns1996:0crwdne1996:0',
