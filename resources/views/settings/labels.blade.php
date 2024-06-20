@@ -220,7 +220,7 @@
                                     {{ Form::label('label2_fields', trans('admin/settings/general.label2_fields')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields), 'customFields' => $customFields ])
+                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields), 'customFields' => $customFields, 'template' => $setting->label2_template])
                                     {!! $errors->first('label2_fields', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">{{ trans('admin/settings/general.label2_fields_help') }}</p>
                                 </div>
