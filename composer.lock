@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc24b4f3399cb2119c0587e2e542d5ad",
+    "content-hash": "23aaae0a08be87061067b5636f840a02",
     "packages": [
         {
             "name": "alek13/slack",
@@ -8084,16 +8084,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "8.6.0",
+            "version": "8.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "c6a7607c0eea80efc2cf6628ffcd172f73a2088f"
+                "reference": "a9c2d2f726f4c60c2dc5d7c0c8380f72492638c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/c6a7607c0eea80efc2cf6628ffcd172f73a2088f",
-                "reference": "c6a7607c0eea80efc2cf6628ffcd172f73a2088f",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/a9c2d2f726f4c60c2dc5d7c0c8380f72492638c2",
+                "reference": "a9c2d2f726f4c60c2dc5d7c0c8380f72492638c2",
                 "shasum": ""
             },
             "require": {
@@ -8167,7 +8167,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/8.6.0"
+                "source": "https://github.com/spatie/laravel-backup/tree/8.8.1"
             },
             "funding": [
                 {
@@ -8179,7 +8179,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-02-06T20:39:11+00:00"
+            "time": "2024-06-04T11:31:33+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
