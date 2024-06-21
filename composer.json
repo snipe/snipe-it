@@ -45,7 +45,7 @@
     "laravel/socialite": "^5.6",
     "laravel/tinker": "^2.6",
     "laravel/ui": "^4.0",
-    "laravelcollective/html": "^6.4",
+    "laravelcollective/html": "^6.2",
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^2.4",
