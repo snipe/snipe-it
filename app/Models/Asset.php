@@ -568,7 +568,7 @@ class Asset extends Depreciable
      */
     public function assignedType()
     {
-        return strtolower(class_basename($this->assigned_type));
+        return $this->assigned_type ? strtolower(class_basename($this->assigned_type)) : null;
     }
 
 
