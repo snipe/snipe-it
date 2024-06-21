@@ -20,7 +20,9 @@ class AssetImporter extends ItemImporter
     {
         parent::__construct($filename);
 
-        if (!is_null(Statuslabel::first())) {
+        $this->defaultStatusLabelId = Statuslabel::first()->id;
+        
+        if (!is_null(Statuslabel::deployable()->first())) {
             $this->defaultStatusLabelId = Statuslabel::deployable()->first()->id;
         }
     }
