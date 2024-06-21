@@ -302,7 +302,9 @@ class LicensesController extends Controller
     public function getExportLicensesCsv()
     {
         $this->authorize('view', License::class);
-        \Debugbar::disable();
+
+        // Disable debugbar
+        config(['debugbar.enabled' => false]);
 
         $response = new StreamedResponse(function () {
             // Open output stream

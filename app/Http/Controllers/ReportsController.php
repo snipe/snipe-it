@@ -233,7 +233,9 @@ class ReportsController extends Controller
         ini_set('max_execution_time', 12000);
         $this->authorize('reports.view');
 
-        \Debugbar::disable();
+        // Disable debugbar
+        config(['debugbar.enabled' => false]);
+
         $response = new StreamedResponse(function () {
             Log::debug('Starting streamed response');
 
@@ -422,7 +424,9 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
 
 
-        \Debugbar::disable();
+        // Disable debugbar
+        config(['debugbar.enabled' => false]);
+
         $customfields = CustomField::get();
         $response = new StreamedResponse(function () use ($customfields, $request) {
             Log::debug('Starting streamed response');
@@ -933,7 +937,7 @@ class ReportsController extends Controller
                             $diff = ($asset->purchase_cost - $depreciation);
                         $row[] = Helper::formatCurrencyOutput($depreciation);
                         $row[] = Helper::formatCurrencyOutput($diff);
-                        $row[] = ($asset->depreciation) ? $asset->depreciated_date()->format('Y-m-d') : '';
+                        $row[] = ($asset->depreciated_date()) ? $asset->depreciated_date()->format('Y-m-d') : '';
                     }
 
                     if ($request->filled('checkout_date')) {
