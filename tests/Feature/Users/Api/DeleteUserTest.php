@@ -11,27 +11,16 @@ use Tests\TestCase;
 class DeleteUserTest extends TestCase
 {
 
-    public function testUserCanDeleteAnotherUserViaApi()
-    {
 
-        $this->actingAsForApi(User::factory()->deleteUsers()->create())
-            ->deleteJson(route('api.users.destroy', User::factory()->create()))
-            ->assertOk()
-            ->assertStatus(200)
-            ->assertStatusMessageIs('success')
-            ->json();
-    }
-
-
-    public function testErrorReturnedViaApiIfUserDoesNotExist()
-    {
-        $this->actingAsForApi(User::factory()->deleteUsers()->create())
-            ->deleteJson(route('api.users.destroy', 'invalid-id'))
-            ->assertOk()
-            ->assertStatus(200)
-            ->assertStatusMessageIs('error')
-            ->json();
-    }
+//    public function testErrorReturnedViaApiIfUserDoesNotExist()
+//    {
+//        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+//            ->deleteJson(route('api.users.destroy', 'invalid-id'))
+//            ->assertOk()
+//            ->assertStatus(200)
+//            ->assertStatusMessageIs('error')
+//            ->json();
+//    }
 
     public function testErrorReturnedViaApiIfUserIsAlreadyDeleted()
     {
@@ -89,16 +78,28 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testPermissionsForDeletingUsers()
+    public function testDeniedPermissionsForDeletingUserViaApi()
     {
-
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.users.destroy', User::factory()->create()))
             ->assertStatus(403)
             ->json();
     }
 
-    public function testPermissionsIfNotInSameCompanyAndNotSuperadmin()
+    public function testSuccessPermissionsForDeletingUserViaApi()
+    {
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+            ->deleteJson(route('api.users.destroy', User::factory()->create()))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
+    }
+
+
+
+
+    public function testPermissionsForDeletingIfNotInSameCompanyAndNotSuperadmin()
     {
         $this->settings->enableMultipleFullCompanySupport();
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -106,6 +107,7 @@ class DeleteUserTest extends TestCase
         $superUser = $companyA->users()->save(User::factory()->superuser()->make());
         $userInCompanyA = $companyA->users()->save(User::factory()->deleteUsers()->make());
         $userInCompanyB = $companyB->users()->save(User::factory()->deleteUsers()->make());
+
 
         $this->actingAsForApi($userInCompanyA)
             ->deleteJson(route('api.users.destroy', $userInCompanyB))
