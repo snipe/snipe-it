@@ -68,7 +68,7 @@ class DeleteUserRequest extends FormRequest
 
             $messages = array_merge([
 
-                'user.exists' => 'Boop. '.trans('admin/users/message.user_not_found'),
+                'user.exists' => trans('admin/users/message.user_not_found'),
 
                 // Cannot delete yourself
                 'user.not_in' => trans('admin/users/message.error.cannot_delete_yourself'),

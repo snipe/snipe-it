@@ -544,7 +544,7 @@ class UsersController extends Controller
 
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Whoops.'.trans('admin/users/message.user_not_found')));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')));
 
     }
 
