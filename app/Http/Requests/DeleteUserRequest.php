@@ -48,7 +48,7 @@ class DeleteUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' =>  ['in:null|not_in:auth()->user()->id'],
+            'user' =>  Rule::notIn([auth()->user()->id]),
             'managed_users' =>  Rule::in([0]),
             'managed_locations' => Rule::in([0]),
             'assigned_assets' => Rule::in([0]),
