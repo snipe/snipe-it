@@ -14,6 +14,30 @@ use App\Models\Asset;
 class DeleteUserTest extends TestCase
 {
 
+    public function testUserCanDeleteAnotherUser()
+    {
+        $user = User::factory()->deleteUsers()->viewUsers()->create();
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($user->isDeletable());
+
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', ['user' => $user->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee(trans('general.notification_success'));
+    }
+
+
+    public function testErrorReturnedIfUserDoesNotExist()
+    {
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', ['user' => '40596803548609346']))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+        //$this->followRedirects($response)->assertSee(trans('general.error'));
+    }
+
+
     public function testPermissionsToDeleteUser()
     {
 

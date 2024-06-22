@@ -11,6 +11,28 @@ use Tests\TestCase;
 class DeleteUserTest extends TestCase
 {
 
+    public function testUserCanDeleteAnotherUserViaApi()
+    {
+
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+            ->deleteJson(route('api.users.destroy', User::factory()->create()))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
+    }
+
+
+    public function testErrorReturnedViaApiIfUserDoesNotExist()
+    {
+        $this->actingAsForApi(User::factory()->deleteUsers()->create(['company_id'=> null]))
+            ->deleteJson(route('api.users.destroy', 'invalid-id'))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+    }
+
 
     public function testDisallowUserDeletionViaApiIfStillManagingPeople()
     {
