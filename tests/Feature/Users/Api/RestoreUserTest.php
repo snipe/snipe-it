@@ -45,12 +45,8 @@ class RestoreUserTest extends TestCase
     public function testSuccessPermissionsForRestoringUserViaApi()
     {
         $deleted_user = User::factory()->deletedUser()->create();
-        \Log::warning($deleted_user);
 
-        $admin = User::factory()->deleteUsers()->create();
-        \Log::warning($admin->permissions);
-
-        $this->actingAsForApi($admin)
+        $this->actingAsForApi(User::factory()->admin()->create())
             ->postJson(route('api.users.restore', ['user' => $deleted_user]))
             ->assertOk()
             ->assertStatus(200)
