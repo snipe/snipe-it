@@ -742,10 +742,12 @@ class UsersController extends Controller
      * @since [v6.0.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function restore($userId = null)
+    public function restore($userId)
     {
+        $this->authorize('delete', User::class);
 
         if ($user = User::withTrashed()->find($userId)) {
+
             $this->authorize('delete', $user);
 
             if ($user->deleted_at == '') {
@@ -764,8 +766,6 @@ class UsersController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);
             }
 
-            // Check validation to make sure we're not restoring a user with the same username as an existing user
-            return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')), 200);
