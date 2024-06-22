@@ -63,6 +63,12 @@ class Asset extends Depreciable
     protected $table = 'assets';
 
     /**
+     * Leaving this commented out, since we need to test further, but this would eager load the model relationship every single
+     * time the asset model is loaded.
+     */
+     // protected $with = ['model'];
+
+    /**
     * Whether the model should inject it's identifier to the unique
     * validation rules before attempting validation. If this property
     * is not set in the model it will default to true.

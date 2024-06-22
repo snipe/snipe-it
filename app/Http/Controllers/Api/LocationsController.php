@@ -244,7 +244,7 @@ class LocationsController extends Controller
 
         if (! $location->isDeletable()) {
             return response()
-                    ->json(Helper::formatStandardApiResponse('error', null, trans('admin/companies/message.assoc_users')));
+                    ->json(Helper::formatStandardApiResponse('error', null, trans('admin/locations/message.assoc_users')));
         }
         $this->authorize('delete', $location);
         $location->delete();

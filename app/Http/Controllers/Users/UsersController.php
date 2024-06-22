@@ -336,9 +336,9 @@ class UsersController extends Controller
 
         $this->authorize('delete', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc');
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->first();
 
-        if (($user) && ($user->deleted_at = '')) {
+        if (($user) && ($user->deleted_at == '')) {
             // Delete the user
             $user->delete();
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
@@ -599,6 +599,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $user = User::where('id', $id)->withTrashed()->first();
+      
 
         // Make sure they can view this particular user
         $this->authorize('view', $user);
@@ -655,6 +656,8 @@ class UsersController extends Controller
      */
     public function sendPasswordReset($id)
     {
+        $this->authorize('view', User::class);
+
         if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
             $credentials = ['email' => trim($user->email)];
 
