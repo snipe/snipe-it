@@ -634,7 +634,7 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $this->authorize('view', Consumable::class);
         $user = User::findOrFail($id);
-        $this->authorize('update', $user);
+        $this->authorize('view', $user);
         $consumables = $user->consumables;
         return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
