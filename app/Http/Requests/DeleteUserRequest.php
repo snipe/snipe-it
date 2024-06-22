@@ -20,7 +20,6 @@ class DeleteUserRequest extends FormRequest
     public function authorize(): bool
     {
         return Gate::allows('delete', new User);
-        //return true;
     }
 
     public function prepareForValidation(): void
