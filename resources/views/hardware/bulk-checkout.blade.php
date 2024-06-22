@@ -18,15 +18,52 @@
 
 <div class="row">
   <!-- left column -->
-  <div class="col-md-7">
+  <div class="col-md-12">
+    <form class="form-horizontal" method="post" action="{{ route('hardware.bulkcheckout.store') }}" autocomplete="off">
+      {{ csrf_field() }}
+    <!-- show asset to be checkedout -->
+     <!-- selected assets -->
+      @foreach ($assets as $asset)
+        <input type="hidden" name="selected_assets[]" value="{{$asset->id}}">
+      @endforeach
     <div class="box box-default">
       <div class="box-header with-border">
-        <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} </h2>
       </div>
-      <div class="box-body">
-        <form class="form-horizontal" method="post" action="" autocomplete="off">
-          {{ csrf_field() }}
 
+      <div class="box-body">
+        <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+              <td>{{ trans('admin/hardware/table.id') }}</td>
+              <td>{{ trans('admin/hardware/table.asset_tag') }}</td>
+              <td>{{ trans('admin/hardware/form.notes') }}</td>
+              
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($assets as $asset)
+            <tr>
+              <td>{{ $asset->id }}</td>
+              <td>{{ $asset->present()->name() }}</td>
+              <td>
+                <div class="">
+                  <textarea class="col-md-6 form-control" id="note" name="note[]">{{ old('note', $asset->note) }}</textarea>
+                  {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                  </div>
+              </td>
+              
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div><!-- /.box-body -->
+
+    </div><!-- /.box -->
+
+
+    <div class="box box-default">
+      <div class="box-body">
+        
           <!-- Checkout selector -->
           @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
@@ -34,6 +71,7 @@
           @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
           @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
 
+          
           <!-- Checkout/Checkin Date -->
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                   {{ Form::label('checkout_at', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
@@ -59,23 +97,24 @@
               </div>
 
 
-          <!-- Note -->
-          <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
-            <div class="col-md-8">
-              <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
-              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
+      <h4>Responsable destination</h4>
+      <!-- checkout responsable name -->
+      <div class="form-group {{ $errors->has('responsable') ? 'error' : '' }}">
+          {{ Form::label('responsable', trans('admin/hardware/form.responsable'), array('class' => 'col-md-3 control-label')) }}
+          <div class="col-md-8">
+              <input class="form-control" type="text" name="responsable" id="responsable" value="{{ old('responsable') }}" tabindex="1" data-validation="">
+              {!! $errors->first('responsable', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
+      </div>
 
-          @include ('partials.forms.edit.asset-select', [
-            'translated_name' => trans('general.assets'),
-            'fieldname' => 'selected_assets[]',
-            'multiple' => true,
-            'asset_status_type' => 'RTD',
-            'select_id' => 'assigned_assets_select',
-          ])
-
+      <!-- checkout responsable matricule -->
+      <div class="form-group {{ $errors->has('responsable_matricule') ? 'error' : '' }}">
+          {{ Form::label('responsable_matricule', trans('admin/hardware/form.responsable_matricule'), array('class' => 'col-md-3 control-label')) }}
+          <div class="col-md-8">
+              <input class="form-control" type="text" name="responsable_matricule" id="responsable_matricule" value="{{ old('responsable_matricule') }}" tabindex="1" data-validation="">
+              {!! $errors->first('responsable_matricule', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+      </div>
 
       </div> <!--./box-body-->
       <div class="box-footer">
@@ -83,7 +122,7 @@
         <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
       </div>
     </div>
-      </form>
+  </form>
   </div> <!--/.col-md-7-->
 
   <!-- right column -->

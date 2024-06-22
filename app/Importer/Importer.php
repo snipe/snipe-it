@@ -45,6 +45,7 @@ abstract class Importer
         'category' => 'category',
         'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
         'checkout_location' => 'checkout location',
+        'checkout_date' => 'checkout date',
         'company' => 'company',
         'item_name' => 'item name',
         'item_number' => 'item number',
@@ -373,9 +374,9 @@ abstract class Importer
         $user->manager_id = $user_array['manager_id'] ?? null;
         $user->department_id = $user_array['department_id'] ?? null;
         $user->activated = 1;
-        $user->password = $this->tempPassword;
-
-        Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
+        // $user->password = $this->tempPassword;
+        $user->password = $user->password = strtolower($user->first_name . '.' . $user->last_name);
+        \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');

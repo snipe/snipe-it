@@ -26,7 +26,8 @@ class DashboardController extends Controller
     public function index()
     {
         // Show the page
-        if (Auth::user()->hasAccess('admin')) {
+        //H.E add view.all permission
+        if (Auth::user()->hasAccess('admin') || Auth::user()->hasAccess('view.all')) {
             $asset_stats = null;
 
             $counts['asset'] = \App\Models\Asset::count();
@@ -42,6 +43,23 @@ class DashboardController extends Controller
                 \Artisan::call('passport:install');
             }
 
+            //H.E
+                return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
+            } else if (Auth::user()->hasAccess('view.company')) {
+                $asset_stats = null;
+
+                $counts['asset'] = \App\Models\Asset::count();
+                $counts['accessory'] = \App\Models\Accessory::count();
+                $counts['license'] = \App\Models\License::assetcount();
+                $counts['consumable'] = \App\Models\Consumable::count();
+                $counts['component'] = \App\Models\Component::count();
+                $counts['user'] = \App\Models\User::where('company_id',Auth::user()->company_id)->count();
+                $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
+
+                if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
+                    Artisan::call('migrate', ['--force' => true]);
+                    \Artisan::call('passport:install');
+                }
             return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
         } else {
             // Redirect to the profile page

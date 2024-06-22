@@ -24,6 +24,7 @@ class AssetFilesController extends Controller
      */
     public function store(UploadFileRequest $request, $assetId = null)
     {
+
         if (! $asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
@@ -36,7 +37,27 @@ class AssetFilesController extends Controller
             }
 
             foreach ($request->file('file') as $file) {
-                $file_name = $request->handleFile('private_uploads/assets/','hardware-'.$asset->id, $file);
+                $extension = $file->getClientOriginalExtension();
+                $file_name = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+
+                // Check for SVG and sanitize it
+                if ($extension=='svg') {
+                    \Log::debug('This is an SVG');
+
+                        $sanitizer = new Sanitizer();
+                        $dirtySVG = file_get_contents($file->getRealPath());
+                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                        try {
+                            Storage::put('private_uploads/assets/'.$file_name, $cleanSVG);
+                        } catch (\Exception $e) {
+                            \Log::debug('Upload no workie :( ');
+                            \Log::debug($e);
+                        }
+                } else {
+                Storage::put('private_uploads/assets/'.$file_name, file_get_contents($file));
+                }
+               
                 
                 $asset->logUpload($file_name, $request->get('notes'));
             }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Assets;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
+use App\Http\Traits\DocumentGeneratorTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 class AssetCheckoutController extends Controller
 {
     use CheckInOutRequest;
+    use DocumentGeneratorTrait;
 
     /**
      * Returns a view that presents a form to check an asset out to a
@@ -100,20 +102,21 @@ class AssetCheckoutController extends Controller
                     }
                 }
             }
-
-            $settings = \App\Models\Setting::getSettings();
-
-            // We have to check whether $target->company_id is null here since locations don't have a company yet
-            if (($settings->full_multiple_companies_support) && ((!is_null($target->company_id)) &&  (!is_null($asset->company_id)))) {
-                if ($target->company_id != $asset->company_id){
-                    return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
-                }
+            
+            if(request('checkout_to_type') == 'location') {
+                $asset_ids = [$asset->id];
+                $file_name = $this->generate_checkout_checkin($asset_ids,$target,$checkout_at,'Attribution');
+                Session::flash('downloadfile', $file_name);
             }
 
-                Session::put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+            
 
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
-                return Helper::getRedirectOption($request, $assetId, 'Assets');
+            # add responsable name and mat in note
+            $note = $request->get("responsable") . " - " . $request->get('responsable_matricule').' ('.$request->get('note').' )';
+
+            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($note), $request->get('name'))) {
+                
+                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
             // Redirect to the asset management page with error
             return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());

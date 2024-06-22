@@ -101,6 +101,50 @@
                   </div>
                 </div>
 
+                {{-- H.E added jobtitle --}}
+                                {{-- <!-- Jobtitle -->
+                <div class="form-group {{ $errors->has('jobtitle') ? 'has-error' : '' }}">
+                  <label class="col-md-3 control-label" for="jobtitle">{{ trans('admin/users/table.title') }}</label>
+                  <div class="col-md-6">
+                      <input
+                              class="form-control"
+                              type="text"
+                              maxlength="191"
+                              name="jobtitle"
+                              id="jobtitle"
+                              value="{{ Request::old('jobtitle', $user->jobtitle) }}"
+                      />
+                      {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                  </div>
+                </div> --}}
+
+                <!-- User Rank -->
+                <div class="form-group {{ $errors->has('jobtitle') ? ' has-error' : '' }}">
+                  <label for="jobtitle" class="col-md-3 control-label">{{ trans('admin/users/table.title') }}
+                  </label>
+                  <div class="col-md-7{{  (Helper::checkIfRequired($user, 'jobtitle')) ? ' required' : '' }}">
+                      {{ Form::select('jobtitle', $userRanks , old('jobtitle', $user->jobtitle), ['class'=>'select2', 'style'=>'min-width:350px', 'aria-label'=>'jobtitle']) }}
+                      {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                  </div>
+                </div>
+
+                <!-- Employee Number -->
+                <div class="form-group {{ $errors->has('employee_num') ? 'has-error' : '' }}">
+                  <label class="col-md-3 control-label" for="employee_num">{{ trans('general.employee_number') }}</label>
+                  <div class="col-md-6">
+                      <input
+                              class="form-control"
+                              type="text"
+                              aria-label="employee_num"
+                              name="employee_num"
+                              maxlength="191"
+                              id="employee_num"
+                              value="{{ Request::old('employee_num', $user->employee_num) }}"
+                      />
+                      {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                  </div>
+                </div>
+
                 <!-- Username -->
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
@@ -311,41 +355,7 @@
                               </div>
                           </div>
 
-                          <!-- Employee Number -->
-                          <div class="form-group {{ $errors->has('employee_num') ? 'has-error' : '' }}">
-                              <label class="col-md-3 control-label" for="employee_num">{{ trans('general.employee_number') }}</label>
-                              <div class="col-md-6">
-                                  <input
-                                          class="form-control"
-                                          type="text"
-                                          aria-label="employee_num"
-                                          name="employee_num"
-                                          maxlength="191"
-                                          id="employee_num"
-                                          value="{{ Request::old('employee_num', $user->employee_num) }}"
-                                  />
-                                  {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                              </div>
-                          </div>
-
-
-                          <!-- Jobtitle -->
-                          <div class="form-group {{ $errors->has('jobtitle') ? 'has-error' : '' }}">
-                              <label class="col-md-3 control-label" for="jobtitle">{{ trans('admin/users/table.title') }}</label>
-                              <div class="col-md-6">
-                                  <input
-                                          class="form-control"
-                                          type="text"
-                                          maxlength="191"
-                                          name="jobtitle"
-                                          id="jobtitle"
-                                          value="{{ Request::old('jobtitle', $user->jobtitle) }}"
-                                  />
-                                  {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                              </div>
-                          </div>
-
-
+                        
                           <!-- Manager -->
                           @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
 

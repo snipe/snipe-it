@@ -98,6 +98,7 @@ class ItemImporter extends Importer
         $this->item['serial'] = $this->findCsvMatch($row, 'serial');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
+        $this->item['checkout_date'] = $this->findCsvMatch($row, 'checkout_date');
         $this->item['checkout_class'] = $this->findCsvMatch($row, 'checkout_class');
         if (get_class($this) !== UserImporter::class) {
             // $this->item["user"] = $this->createOrFetchUser($row);

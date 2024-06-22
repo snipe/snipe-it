@@ -9,7 +9,7 @@
                     {{ (\App\Models\Supplier::find($supplier_id)) ? \App\Models\Supplier::find($supplier_id)->name : '' }}
                 </option>
             @else
-                <option value="" role="option">{{ trans('general.select_supplier') }}</option>
+            <option value="1"  role="option">{{ \App\Models\Supplier::find(1)->name }}</option>
             @endif
         </select>
     </div>

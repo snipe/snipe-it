@@ -47,6 +47,13 @@ class AssetsController extends Controller
         parent::__construct();
     }
 
+
+    # added function to download file #
+    public function downloadfile(Request $request,$file = null)
+    {
+        $this->authorize('index', Asset::class);
+        return Storage::download('private_uploads/assets/'.$file);
+    }
     /**
      * Returns a view that invokes the ajax tables which actually contains
      * the content for the assets listing, which is generated in getDatatable.

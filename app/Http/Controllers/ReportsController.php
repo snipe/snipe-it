@@ -52,6 +52,8 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+        $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
 
         return view('reports/accessories');
     }
@@ -68,6 +70,8 @@ class ReportsController extends Controller
     public function exportAccessoryReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $accessories = Accessory::orderBy('created_at', 'DESC')->get();
 
         $rows = [];
@@ -109,6 +113,8 @@ class ReportsController extends Controller
     public function getDeprecationReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $depreciations = Depreciation::get();
         return view('reports/depreciation')->with('depreciations',$depreciations);
     }
@@ -124,6 +130,8 @@ class ReportsController extends Controller
     public function exportDeprecationReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         // Grab all the assets
         $assets = Asset::with('model', 'assignedTo', 'assetstatus', 'defaultLoc', 'assetlog')
                        ->orderBy('created_at', 'DESC')->get();
@@ -202,7 +210,8 @@ class ReportsController extends Controller
     public function audit()
     {
         $this->authorize('reports.view');
-
+        $this->authorize('admin');
+        
         return view('reports/audit');
     }
 
@@ -217,6 +226,7 @@ class ReportsController extends Controller
     public function getActivityReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         return view('reports/activity');
     }
@@ -232,6 +242,7 @@ class ReportsController extends Controller
     {
         ini_set('max_execution_time', 12000);
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         \Debugbar::disable();
         $response = new StreamedResponse(function () {
@@ -333,6 +344,8 @@ class ReportsController extends Controller
     public function getLicenseReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $licenses = License::with('depreciation')->orderBy('created_at', 'DESC')
                            ->with('company')
                            ->get();
@@ -351,6 +364,8 @@ class ReportsController extends Controller
     public function exportLicenseReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $licenses = License::orderBy('created_at', 'DESC')->get();
 
         $rows = [];
@@ -403,6 +418,8 @@ class ReportsController extends Controller
     public function getCustomReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $customfields = CustomField::get();
 
         return view('reports/custom')->with('customfields', $customfields);
@@ -420,7 +437,7 @@ class ReportsController extends Controller
     {
         ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
         $this->authorize('reports.view');
-
+        $this->authorize('admin');
 
         \Debugbar::disable();
         $customfields = CustomField::get();
@@ -1022,6 +1039,12 @@ class ReportsController extends Controller
     public function getAssetMaintenancesReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
+        // Grab all the improvements
+        $assetMaintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company')
+                                              ->orderBy('created_at', 'DESC')
+                                              ->get();
 
         return view('reports.asset_maintenances');
     }
@@ -1036,6 +1059,8 @@ class ReportsController extends Controller
     public function exportAssetMaintenancesReport()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         // Grab all the improvements
         $assetMaintenances = AssetMaintenance::with('asset', 'supplier')
                                              ->orderBy('created_at', 'DESC')
@@ -1099,6 +1124,8 @@ class ReportsController extends Controller
     public function getAssetAcceptanceReport($deleted = false)
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $showDeleted = $deleted == 'deleted';
 
         /**
@@ -1139,6 +1166,7 @@ class ReportsController extends Controller
     public function sentAssetAcceptanceReminder(Request $request)
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         if (!$acceptance = CheckoutAcceptance::pending()->find($request->input('acceptance_id'))) {
             Log::debug('No pending acceptances');
@@ -1197,6 +1225,7 @@ class ReportsController extends Controller
     public function deleteAssetAcceptance($acceptanceId = null)
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         if (!$acceptance = CheckoutAcceptance::pending()->find($acceptanceId)) {
             // Redirect to the unaccepted assets report page with error
@@ -1220,6 +1249,8 @@ class ReportsController extends Controller
     public function postAssetAcceptanceReport($deleted = false)
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $showDeleted = $deleted == 'deleted';
 
         /**
@@ -1287,6 +1318,8 @@ class ReportsController extends Controller
     protected function getCheckedOutAssetsRequiringAcceptance($modelsInCategoriesThatRequireAcceptance)
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
+
         $assets = Asset::deployed()
                         ->inModelList($modelsInCategoriesThatRequireAcceptance)
                         ->select('id')
@@ -1307,6 +1340,7 @@ class ReportsController extends Controller
     protected function getModelsInCategoriesThatRequireAcceptance($assetCategoriesRequiringAcceptance)
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         return array_pluck(Model::inCategory($assetCategoriesRequiringAcceptance)
                                  ->select('id')
@@ -1324,6 +1358,7 @@ class ReportsController extends Controller
     protected function getCategoriesThatRequireAcceptance()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         return array_pluck(Category::requiresAcceptance()
                                     ->select('id')
@@ -1341,6 +1376,7 @@ class ReportsController extends Controller
     protected function getAssetsCheckedOutRequiringAcceptance()
     {
         $this->authorize('reports.view');
+        $this->authorize('admin');
 
         return $this->getCheckedOutAssetsRequiringAcceptance(
             $this->getModelsInCategoriesThatRequireAcceptance($this->getCategoriesThatRequireAcceptance())

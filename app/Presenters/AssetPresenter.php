@@ -3,7 +3,7 @@
 namespace App\Presenters;
 
 use App\Models\CustomField;
-use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Auth;
 use DateTime;
 
 /**
@@ -100,14 +100,16 @@ class AssetPresenter extends Presenter
                 'title' => trans('admin/hardware/form.checkedout_to'),
                 'visible' => true,
                 'formatter' => 'polymorphicItemFormatter',
-            ], [
-                'field' => 'employee_number',
-                'searchable' => false,
-                'sortable' => false,
-                'title' => trans('general.employee_number'),
-                'visible' => false,
-                'formatter' => 'employeeNumFormatter',
-            ], [
+            ], 
+            // [
+            //     'field' => 'employee_number',
+            //     'searchable' => false,
+            //     'sortable' => false,
+            //     'title' => trans('general.employee_number'),
+            //     'visible' => false,
+            //     'formatter' => 'employeeNumFormatter',
+            // ], 
+            [
                 'field' => 'location',
                 'searchable' => true,
                 'sortable' => true,
@@ -121,90 +123,9 @@ class AssetPresenter extends Presenter
                 'title' => trans('admin/hardware/form.default_location'),
                 'visible' => false,
                 'formatter' => 'deployedLocationFormatter',
-            ], [
-                'field' => 'manufacturer',
-                'searchable' => true,
-                'sortable' => true,
-                'title' => trans('general.manufacturer'),
-                'visible' => false,
-                'formatter' => 'manufacturersLinkObjFormatter',
-            ], [
-                'field' => 'supplier',
-                'searchable' => true,
-                'sortable' => true,
-                'title' => trans('general.supplier'),
-                'visible' => false,
-                'formatter' => 'suppliersLinkObjFormatter',
-            ], [
-                'field' => 'purchase_date',
-                'searchable' => true,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('general.purchase_date'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'age',
-                'searchable' => false,
-                'sortable' => false,
-                'visible' => false,
-                'title' => trans('general.age'),
-            ], [
-                'field' => 'purchase_cost',
-                'searchable' => true,
-                'sortable' => true,
-                'title' => trans('general.purchase_cost'),
-                'footerFormatter' => 'sumFormatter',
-                'class' => 'text-right',
-            ], [
-                "field" => "book_value",
-                "searchable" => false,
-                "sortable" => false,
-                "title" => trans('admin/hardware/table.book_value'),
-                "footerFormatter" => 'sumFormatter',
-                "class" => "text-right",
-            ],[
-                'field' => 'order_number',
-                'searchable' => true,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('general.order_number'),
-                'formatter' => 'orderNumberObjFilterFormatter',
-            ], [
-                'field' => 'eol',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('admin/hardware/form.eol_rate'),
-            ],
+            ], 
+            
             [
-                'field' => 'asset_eol_date',
-                'searchable' => true,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('admin/hardware/form.eol_date'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'warranty_months',
-                'searchable' => true,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('admin/hardware/form.warranty'),
-            ], [
-                'field' => 'warranty_expires',
-                'searchable' => false,
-                'sortable' => false,
-                'visible' => false,
-                'title' => trans('admin/hardware/form.warranty_expires'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'requestable',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('admin/hardware/general.requestable'),
-                'formatter' => 'trueFalseFormatter',
-
-            ], [
                 'field' => 'notes',
                 'searchable' => true,
                 'sortable' => true,
@@ -225,14 +146,16 @@ class AssetPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.checkins_count'),
 
-            ], [
-                'field' => 'requests_counter',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('general.user_requests_count'),
+            ], 
+            // [
+            //     'field' => 'requests_counter',
+            //     'searchable' => false,
+            //     'sortable' => true,
+            //     'visible' => false,
+            //     'title' => trans('general.user_requests_count'),
 
-            ], [
+            // ], 
+            [
                 'field' => 'created_at',
                 'searchable' => false,
                 'sortable' => true,
@@ -253,44 +176,94 @@ class AssetPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('admin/hardware/table.checkout_date'),
                 'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'last_checkin',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('admin/hardware/table.last_checkin_date'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'expected_checkin',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('admin/hardware/form.expected_checkin'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'last_audit_date',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('general.last_audit'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'next_audit_date',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('general.next_audit_date'),
-                'formatter' => 'dateDisplayFormatter',
-            ], [
-                'field' => 'byod',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => false,
-                'title' => trans('general.byod'),
-                'formatter' => 'trueFalseFormatter',
-
-            ],
+            ], 
+            // [
+            //     'field' => 'expected_checkin',
+            //     'searchable' => false,
+            //     'sortable' => true,
+            //     'visible' => false,
+            //     'title' => trans('admin/hardware/form.expected_checkin'),
+            //     'formatter' => 'dateDisplayFormatter',
+            // ], [
+            //     'field' => 'last_audit_date',
+            //     'searchable' => false,
+            //     'sortable' => true,
+            //     'visible' => false,
+            //     'title' => trans('general.last_audit'),
+            //     'formatter' => 'dateDisplayFormatter',
+            // ], [
+            //     'field' => 'next_audit_date',
+            //     'searchable' => false,
+            //     'sortable' => true,
+            //     'visible' => false,
+            //     'title' => trans('general.next_audit_date'),
+            //     'formatter' => 'dateDisplayFormatter',
+            // ],
         ];
+
+        //H.E permission view.all
+        if (Auth::user()->hasAccess('view.all')) {
+            $layout = array_merge($layout, [
+                [
+                    'field' => 'manufacturer',
+                    'searchable' => true,
+                    'sortable' => true,
+                    'title' => trans('general.manufacturer'),
+                    'visible' => false,
+                    'formatter' => 'manufacturersLinkObjFormatter',
+                ], [
+                    'field' => 'supplier',
+                    'searchable' => true,
+                    'sortable' => true,
+                    'title' => trans('general.supplier'),
+                    'visible' => false,
+                    'formatter' => 'suppliersLinkObjFormatter',
+                ], [
+                    'field' => 'purchase_date',
+                    'searchable' => true,
+                    'sortable' => true,
+                    'visible' => false,
+                    'title' => trans('general.purchase_date'),
+                    'formatter' => 'dateDisplayFormatter',
+                ], [
+                    'field' => 'purchase_cost',
+                    'searchable' => true,
+                    'sortable' => true,
+                    'visible' => false,
+                    'title' => trans('general.purchase_cost'),
+                    'footerFormatter' => 'sumFormatter',
+                    'class' => 'text-right',
+                ], [
+                    'field' => 'order_number',
+                    'searchable' => true,
+                    'sortable' => true,
+                    'visible' => false,
+                    'title' => trans('general.order_number'),
+                    'formatter' => 'orderNumberObjFilterFormatter',
+                ], [
+                    'field' => 'eol',
+                    'searchable' => false,
+                    'sortable' => false,
+                    'visible' => false,
+                    'title' => trans('general.eol'),
+                    'formatter' => 'dateDisplayFormatter',
+                ], [
+                    'field' => 'warranty_months',
+                    'searchable' => true,
+                    'sortable' => true,
+                    'visible' => false,
+                    'title' => trans('admin/hardware/form.warranty'),
+                ], [
+                    'field' => 'warranty_expires',
+                    'searchable' => false,
+                    'sortable' => false,
+                    'visible' => false,
+                    'title' => trans('admin/hardware/form.warranty_expires'),
+                    'formatter' => 'dateDisplayFormatter',
+                ],
+            ]);
+        }
+
 
         // This looks complicated, but we have to confirm that the custom fields exist in custom fieldsets
         // *and* those fieldsets are associated with models, otherwise we'll trigger
@@ -299,25 +272,38 @@ class AssetPresenter extends Presenter
         // models. We only pass the fieldsets that pertain to each asset (via their model) so that we
         // don't junk up the REST API with tons of custom fields that don't apply
 
-        $fields = CustomField::whereHas('fieldset', function ($query) {
-            $query->whereHas('models');
-        })->get();
+        //H.E permission view.company
+        if (Auth::user()->hasAccess('view.company') && !Auth::user()->hasAccess('view.all')){
+            $fields = CustomField::whereHas('fieldset', function ($query1) {
+                $query1->whereHas('models', function ($query2) {
+                    $query2->whereHas('assets', function($query3) {
+                        $query3->where('company_id', Auth::user()->company_id);
+                    });
+                });
+            })->get();
+        } elseif (Auth::user()->hasAccess('view.company') && Auth::user()->hasAccess('view.all')){
+            $fields = CustomField::whereHas('fieldset', function ($query) {
+                $query->whereHas('models');
+            })->get();
+        }
 
         // Note: We do not need to e() escape the field names here, as they are already escaped when
         // they are presented in the blade view. If we escape them here, custom fields with quotes in their
         // name can break the listings page. - snipe
-        foreach ($fields as $field) {
-            $layout[] = [
-                'field' => 'custom_fields.'.$field->db_column,
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => $field->name,
-                'formatter'=> 'customFieldsFormatter',
-                'escape' => true,
-                'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => ($field->show_in_listview == '1') ? true : false,
-            ];
+        if (isset($fields)) {
+            foreach ($fields as $field) {
+                 $layout[] = [
+                     'field' => 'custom_fields.'.$field->db_column,
+                     'searchable' => true,
+                     'sortable' => true,
+                     'switchable' => true,
+                     'title' => $field->name,
+                     'formatter'=> 'customFieldsFormatter',
+                     'escape' => true,
+                     'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
+                     'visible' => true,
+                 ];
+             }
         }
 
         $layout[] = [
@@ -428,7 +414,8 @@ class AssetPresenter extends Presenter
 
         // Asset tag
         if ($this->asset_tag) {
-            $str .= ' ('.$this->model->asset_tag.')';
+            //H.E add "Tag"
+            $str .= ' (Tag :'.$this->model->asset_tag.')';
         }
 
         // Asset Model name

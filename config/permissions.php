@@ -27,6 +27,26 @@ return [
         ],
     ],
 
+    //H.E
+    'View ALL' => [
+        [
+            'permission' => 'view.all',
+            'label'      => '',
+            'note'       => 'Determines whether the user can view all assets. ',
+            'display'    => true,
+        ],
+    ],
+
+    'View COMPANY DASHBOARD' => [
+        [
+            'permission' => 'view.company',
+            'label'      => '',
+            'note'       => 'Determines whether the user can view per company assets on dashboard. ',
+            'display'    => true,
+        ],
+    ],
+
+
     'CSV Import' => [
         [
             'permission' => 'import',
@@ -114,6 +134,35 @@ return [
         ],
 
     ],
+
+    //H.E addd permissions for Asset maintenance
+    'Asset Maintenances' => [
+        [
+            'permission' => 'assetmaintenances.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'assetmaintenances.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'assetmaintenances.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'assetmaintenances.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ],
+    ],
+
 
     'Accessories' => [
         [

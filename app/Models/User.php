@@ -801,45 +801,31 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->locale;
     }
-    public function getUserTotalCost(){
-        $asset_cost= 0;
-        $license_cost= 0;
-        $accessory_cost= 0;
-        foreach ($this->assets as $asset){
-            $asset_cost += $asset->purchase_cost;
-            $this->asset_cost = $asset_cost;
-        }
-        foreach ($this->licenses as $license){
-            $license_cost += $license->purchase_cost;
-            $this->license_cost = $license_cost;
-        }
-        foreach ($this->accessories as $accessory){
-            $accessory_cost += $accessory->purchase_cost;
-            $this->accessory_cost = $accessory_cost;
-        }
 
-        $this->total_user_cost = ($asset_cost + $accessory_cost + $license_cost);
-
-
-        return $this;
-    }
-    public function scopeUserLocation($query, $location, $search){
-
-
-        return $query->where('location_id','=', $location)
-            ->where('users.first_name', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.email', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.permissions', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.country', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.phone', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.jobtitle', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.employee_num', 'LIKE', '%' . $search . '%')
-            ->orWhere('users.username', 'LIKE', '%' . $search . '%')
-            ->orwhereRaw('CONCAT(users.first_name," ",users.last_name) LIKE \''.$search.'%\'');
-
-
-
-
+    //H.E
+    
+    /**
+     * getRankOptions
+     * to get the rank of users
+     * @return array
+     * @author  
+     * @version 
+     */
+    public static function getRankOptions()
+    {
+        return [
+            'M/G'   => 'M/G',
+            'M/C'   => 'M/C',
+            'ADJT'  => 'ADJT',
+            'A/C'   => 'A/C',
+            'SLT'   => 'SLT',
+            'LT'    => 'LT',
+            'CNE'   => 'CNE',
+            'CDT'   => 'CDT',
+            'LT-COL'=> 'LT-COL',
+            'COL'   => 'COL',
+            'CM'    => 'CM',
+            'Ingénieur' => 'Ingénieur',
+        ];
     }
 }

@@ -18,60 +18,69 @@
 
   <div class="row">
     <!-- left column -->
-    <div class="col-md-9">
+    <div class="col-md-12">
+
+        <form class="form-horizontal" method="post"
+        action="{{ route('hardware.bulkcheckin.store') }}" autocomplete="off">
+        <!-- show asset to be checkedin -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h2 class="box-title">{{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h2>
+        </div>
+
+        <div class="box-body">
+          <table class="table table-striped table-condensed">
+            <thead>
+              <tr>
+                <td>{{ trans('admin/hardware/table.id') }}</td>
+                <td>{{ trans('admin/hardware/table.asset_tag') }}</td>
+                <td>{{ trans('admin/hardware/table.assigned_to') }}</td>
+                <td>{{ trans('admin/hardware/form.status') }}</td>
+                <td>{{ trans('admin/hardware/form.notes') }}</td>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($assets as $asset)
+              <tr>
+                <td>{{ $asset->id }}</td>
+                <td>{{ $asset->present()->name() }}</td>
+                <td>
+                    @if ($asset->assigned_to != null)
+                        {{ $asset->assigned->name}}
+                    @endif
+                </td>
+                <td>
+                    <div class="required">
+                        {{ Form::select('status_id[]', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types_'.$asset->id.'', 'aria-label'=>'status_id')) }}
+                        {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    </div>
+                </td>
+                <td>
+                    <div class="">
+                        <textarea class="col-md-6 form-control" id="note" name="note[]">{{ old('note', $asset->note) }}</textarea>
+                        {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    </div>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+
+      </div><!-- /.box -->
+
+
+
+      <div class="box box-default">
+        <div class="box-header with-border">
         </div><!-- /.box-header -->
 
         <div class="box-body">
           <div class="col-md-12">
-            @if ($backto=='user')
-              <form class="form-horizontal" method="post"
-                    action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id, 'backto'=>'user')) }}"
-                    autocomplete="off">
-                @else
-                  <form class="form-horizontal" method="post"
-                        action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id)) }}" autocomplete="off">
-                  @endif
                   {{csrf_field()}}
-
-                  <!-- AssetModel name -->
-                    <div class="form-group">
-                      {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
-                      <div class="col-md-8">
-                        <p class="form-control-static">
-                          @if (($asset->model) && ($asset->model->name))
-                            {{ $asset->model->name }}
-
-                          @else
-                            <span class="text-danger text-bold">
-                      <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
-                      The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
-                          @endif
-                        </p>
-                      </div>
-                    </div>
-
-
-                    <!-- Asset Name -->
-                    <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-                      {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
-                      <div class="col-md-8">
-                        <input class="form-control" type="text" name="name" aria-label="name" id="name"
-                               value="{{ old('name', $asset->name) }}"/>
-                        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                      </div>
-                    </div>
-
-                    <!-- Status -->
-                    <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
-                      {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
-                      <div class="col-md-7 required">
-                        {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
-                        {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                      </div>
-                    </div>
+                    <!-- List of all assets id to be checkedin -->
+                    @foreach ($assets as $asset)
+                    <input type="hidden" name="assets_id[]" value="{{$asset->id}}">
+                    @endforeach
 
                   @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? 'You can choose to check this asset in to a location other than the default location of '.$asset->defaultLoc->name.' if one is set.' : null])
 
@@ -89,18 +98,6 @@
                       </div>
                     </div>
 
-
-                    <!-- Note -->
-                    <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-
-                      {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
-
-                      <div class="col-md-8">
-                  <textarea class="col-md-6 form-control" id="note"
-                            name="note">{{ old('note', $asset->note) }}</textarea>
-                        {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                      </div>
-                    </div>
                     <h4>Responsable Initial</h4>
                         <!-- checkout responsable name -->
                         <div class="form-group {{ $errors->has('responsable') ? 'error' : '' }}">
@@ -123,12 +120,12 @@
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                       <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
                     </div>
-                  </form>
           </div> <!--/.col-md-12-->
         </div> <!--/.box-body-->
 
       </div> <!--/.box.box-default-->
-    </div>
+    </form><!--/form-->
+    </div><!--/left-column-->
   </div>
 
 @stop

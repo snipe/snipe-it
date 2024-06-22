@@ -22,7 +22,7 @@
             <div class="box box-default">
                 <form class="form-horizontal" method="post" action="" autocomplete="off">
                     <div class="box-header with-border">
-                        <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h2>
+                        <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} - {{ $asset->serial }}</h2>
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
@@ -59,7 +59,7 @@
                             </div>
                         </div>
 
-                        <!-- Asset Name -->
+                        <!-- Asset Name 
                         <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
                             {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
@@ -67,8 +67,8 @@
                                 {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
-
-                        <!-- Status -->
+                        -->
+                        <!-- Status 
                         <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
                             {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-7 required">
@@ -76,7 +76,7 @@
                                 {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
-
+                        -->
                     @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
                     @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        <!-- Expected Checkin Date -->
+                        <!-- Expected Checkin Date 
                         <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
                             {{ Form::label('expected_checkin', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
@@ -111,7 +111,7 @@
                                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
-
+                        -->
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
@@ -120,8 +120,28 @@
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
+                        <h4>Responsable destination</h4>
+                        <!-- checkout responsable name -->
+                        <div class="form-group {{ $errors->has('responsable') ? 'error' : '' }}">
+                            {{ Form::label('responsable', trans('admin/hardware/form.responsable'), array('class' => 'col-md-3 control-label')) }}
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="responsable" id="responsable" value="{{ old('responsable') }}" tabindex="1" data-validation="" >
+                                {!! $errors->first('responsable', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                            </div>
+                        </div>
 
-                        @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->webhook_endpoint!=''))
+                        <!-- checkout responsable matricule -->
+                        <div class="form-group {{ $errors->has('responsable_matricule') ? 'error' : '' }}">
+                            {{ Form::label('responsable_matricule', trans('admin/hardware/form.responsable_matricule'), array('class' => 'col-md-3 control-label')) }}
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="responsable_matricule" id="responsable_matricule" value="{{ old('responsable_matricule') }}" tabindex="1" data-validation="" >
+                                {!! $errors->first('responsable_matricule', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->slack_endpoint!=''))
                             <div class="form-group notification-callout">
                                 <div class="col-md-8 col-md-offset-3">
                                     <div class="callout callout-info">

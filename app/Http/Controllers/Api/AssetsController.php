@@ -521,6 +521,8 @@ class AssetsController extends Controller
             'assets.name',
             'assets.asset_tag',
             'assets.model_id',
+            // H.E 'assets.serial',
+            'assets.serial',
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id',
@@ -551,7 +553,8 @@ class AssetsController extends Controller
 
 
             if ($asset->assetstatus->getStatuslabelType() == 'pending') {
-                $asset->use_text .= '('.$asset->assetstatus->getStatuslabelType().')';
+                //H.E add "Status"
+                $asset->use_text .= ' (Status : '.$asset->assetstatus->getStatuslabelType().')';
             }
 
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;

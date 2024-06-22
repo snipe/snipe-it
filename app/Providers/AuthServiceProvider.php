@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Accessory;
 use App\Models\Asset;
+//H.E AssetMaintenance
+use App\Models\AssetMaintenance;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -21,6 +23,8 @@ use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Policies\AccessoryPolicy;
+//H.E AssetMaintenancePolicy
+use App\Policies\AssetMaintenancePolicy;
 use App\Policies\AssetModelPolicy;
 use App\Policies\AssetPolicy;
 use App\Policies\CategoryPolicy;
@@ -71,6 +75,8 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
         Company::class => CompanyPolicy::class,
+        //H.E         AssetMaintenance::class => AssetMaintenancePolicy::class,
+        AssetMaintenance::class => AssetMaintenancePolicy::class,
     ];
 
     /**
@@ -121,20 +127,15 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define('accessories.files', function ($user) {
-            if ($user->hasAccess('accessories.files')) {
+        //H.E
+        Gate::define('view.all', function ($user) {
+            if ($user->hasAccess('view.all')) {
                 return true;
             }
         });
 
-        Gate::define('components.files', function ($user) {
-            if ($user->hasAccess('components.files')) {
-                return true;
-            }
-        });
-
-        Gate::define('consumables.files', function ($user) {
-            if ($user->hasAccess('consumables.files')) {
+        Gate::define('view.company', function ($user) {
+            if ($user->hasAccess('view.company')) {
                 return true;
             }
         });
@@ -220,7 +221,10 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('create', Asset::class)    
                 || $user->can('checkout', Asset::class)
                 || $user->can('checkin', Asset::class)
-                || $user->can('audit', Asset::class)       
+                || $user->can('audit', Asset::class)
+                //H.E Asset Maintenance
+                || $user->can('update', AssetMaintenance::class) 
+                || $user->can('create', AssetMaintenance::class) 
                 || $user->can('update', License::class)   
                 || $user->can('create', License::class)   
                 || $user->can('update', Component::class)

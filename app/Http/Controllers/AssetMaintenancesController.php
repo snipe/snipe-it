@@ -50,7 +50,7 @@ class AssetMaintenancesController extends Controller
     */
     public function index()
     {
-        $this->authorize('view', Asset::class);
+        $this->authorize('view', AssetMaintenance::class);
         return view('asset_maintenances/index');
     }
 
@@ -65,7 +65,7 @@ class AssetMaintenancesController extends Controller
      */
     public function create()
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         $asset = null;
 
         if ($asset = Asset::find(request('asset_id'))) {
@@ -75,13 +75,18 @@ class AssetMaintenancesController extends Controller
 
         // Prepare Asset Maintenance Type List
         $assetMaintenanceType = [
-                                    '' => 'Select an asset maintenance type',
+                                    '' => '--- Selectionnez un type de maintenance d\'actif ---',
                                 ] + AssetMaintenance::getImprovementOptions();
+        // Prepare Asset Maintenance Title List
+        $title = [
+            '' => '--- Selectionnez un titre de maintenance d\'actif ---',
+        ] + AssetMaintenance::getImprovementTitles();
         // Mark the selected asset, if it came in
 
         return view('asset_maintenances/edit')
                    ->with('asset', $asset)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
+                   ->with('title', $title)
                    ->with('item', new AssetMaintenance);
     }
 
@@ -96,15 +101,17 @@ class AssetMaintenancesController extends Controller
     */
     public function store(Request $request)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
+        if ($assetMaintenance->supplier_id == null) {
+            $assetMaintenance->supplier_id = 1;
+        }
         $assetMaintenance->is_warranty = $request->input('is_warranty');
         $assetMaintenance->cost = $request->input('cost');
         $assetMaintenance->notes = $request->input('notes');
         $asset = Asset::find($request->input('asset_id'));
-
         if ((! Company::isCurrentUserHasAccess($asset)) && ($asset != null)) {
             return static::getInsufficientPermissionsRedirect();
         }
@@ -116,7 +123,6 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->start_date = $request->input('start_date');
         $assetMaintenance->completion_date = $request->input('completion_date');
         $assetMaintenance->user_id = Auth::id();
-
         if (($assetMaintenance->completion_date !== null)
             && ($assetMaintenance->start_date !== '')
             && ($assetMaintenance->start_date !== '0000-00-00')
@@ -125,7 +131,7 @@ class AssetMaintenancesController extends Controller
             $completionDate = Carbon::parse($assetMaintenance->completion_date);
             $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
         }
-
+        // dd($assetMaintenance);
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
             // Redirect to the new asset maintenance page
@@ -148,7 +154,7 @@ class AssetMaintenancesController extends Controller
     */
     public function edit($assetMaintenanceId = null)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         // Check if the asset maintenance exists
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
@@ -189,7 +195,7 @@ class AssetMaintenancesController extends Controller
      */
     public function update(Request $request, $assetMaintenanceId = null)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         // Check if the asset maintenance exists
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
@@ -259,7 +265,7 @@ class AssetMaintenancesController extends Controller
     */
     public function destroy($assetMaintenanceId)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         // Check if the asset maintenance exists
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
@@ -288,7 +294,7 @@ class AssetMaintenancesController extends Controller
     */
     public function show($assetMaintenanceId)
     {
-        $this->authorize('view', Asset::class);
+        $this->authorize('view', AssetMaintenance::class);
 
         // Check if the asset maintenance exists
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {

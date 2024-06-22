@@ -28,6 +28,8 @@
 
 <div class="row">
   <!-- panel -->
+  {{-- H.E can view assets --}}
+  @can('index', \App\Models\Asset::class)
   <div class="col-lg-2 col-xs-6">
       <a href="{{ route('hardware.index') }}">
     <!-- small box -->
@@ -45,6 +47,8 @@
     </div>
       </a>
   </div><!-- ./col -->
+  @endcan
+  @can('view', \App\Models\License::class)
 
   <div class="col-lg-2 col-xs-6">
      <a href="{{ route('licenses.index') }}">
@@ -57,14 +61,13 @@
       <div class="icon" aria-hidden="true">
         <i class="far fa-save"></i>
       </div>
-        @can('view', \App\Models\License::class)
           <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-        @endcan
     </div>
      </a>
   </div><!-- ./col -->
+  @endcan
 
-
+  @can('index', \App\Models\Accessory::class)
   <div class="col-lg-2 col-xs-6">
     <!-- small box -->
       <a href="{{ route('accessories.index') }}">
@@ -76,13 +79,14 @@
       <div class="icon" aria-hidden="true">
         <i class="far fa-keyboard"></i>
       </div>
-      @can('index', \App\Models\Accessory::class)
           <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-      @endcan
     </div>
       </a>
   </div><!-- ./col -->
+  @endcan
 
+
+  @can('index', \App\Models\Consumable::class)
   <div class="col-lg-2 col-xs-6">
     <!-- small box -->
 
@@ -95,12 +99,13 @@
       <div class="icon" aria-hidden="true">
         <i class="fas fa-tint"></i>
       </div>
-      @can('index', \App\Models\Consumable::class)
         <a href="{{ route('consumables.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-      @endcan
     </div>
   </div><!-- ./col -->
+  @endcan
 
+
+  @can('view', \App\Models\Component::class)
   <div class="col-lg-2 col-xs-6">
     <a href="{{ route('components.index') }}">
    <!-- small box -->
@@ -112,13 +117,14 @@
      <div class="icon" aria-hidden="true">
        <i class="far fa-hdd"></i>
      </div>
-       @can('view', \App\Models\License::class)
          <a href="{{ route('components.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-       @endcan
    </div>
     </a>
  </div><!-- ./col -->
+ @endcan
 
+
+ @can('view', \App\Models\User::class)
  <div class="col-lg-2 col-xs-6">
     <a href="{{ route('users.index') }}">
    <!-- small box -->
@@ -130,12 +136,12 @@
      <div class="icon" aria-hidden="true">
        <i class="fas fa-users"></i>
      </div>
-       @can('view', \App\Models\License::class)
          <a href="{{ route('users.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-       @endcan
    </div>
     </a>
  </div><!-- ./col -->
+ @endcan
+
 
 </div>
 </div>

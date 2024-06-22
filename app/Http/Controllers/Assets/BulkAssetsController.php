@@ -19,11 +19,12 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
-use App\Models\CustomField;
+use App\Http\Traits\DocumentGeneratorTrait;
 
 class BulkAssetsController extends Controller
 {
     use CheckInOutRequest;
+    use DocumentGeneratorTrait;
 
     /**
      * Display the bulk edit page.
@@ -43,12 +44,10 @@ class BulkAssetsController extends Controller
      */
     public function edit(Request $request)
     {
-        $this->authorize('view', Asset::class);
-
-        /**
-         * No asset IDs were passed
-         */
+        $this->authorize('update', Asset::class);
+        
         if (! $request->filled('ids')) {
+            
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
@@ -58,57 +57,8 @@ class BulkAssetsController extends Controller
         $bulk_back_url = request()->headers->get('referer');
         session(['bulk_back_url' => $bulk_back_url]);
 
-        $allowed_columns = [
-            'id',
-            'name',
-            'asset_tag',
-            'serial',
-            'model_number',
-            'last_checkout',
-            'notes',
-            'expected_checkin',
-            'order_number',
-            'image',
-            'assigned_to',
-            'created_at',
-            'updated_at',
-            'purchase_date',
-            'purchase_cost',
-            'last_audit_date',
-            'next_audit_date',
-            'warranty_months',
-            'checkout_counter',
-            'checkin_counter',
-            'requests_counter',
-            'byod',
-            'asset_eol_date',
-        ];
-
-
-        /**
-         * Make sure the column is allowed, and if it's a custom field, make sure we strip the custom_fields. prefix
-         */
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort_override = str_replace('custom_fields.', '', $request->input('sort'));
-
-        // This handles all of the pivot sorting below (versus the assets.* fields in the allowed_columns array)
-        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.id';
-
-        $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('assets.id', $asset_ids);
-
-        $assets = $assets->get();
-
-        if ($assets->isEmpty()) {
-            Log::debug('No assets were found for the provided IDs', ['ids' => $asset_ids]);
-            return redirect()->back()->with('error', trans('admin/hardware/message.update.assets_do_not_exist_or_are_invalid'));
-        }
-
-        $models = $assets->unique('model_id');
-        $modelNames = [];
-        foreach($models as $model) {
-            $modelNames[] = $model->model->name;
-        }
-
+        $asset_ids = array_values(array_unique($request->input('ids')));
+        
         if ($request->filled('bulk_actions')) {
 
 
@@ -143,9 +93,56 @@ class BulkAssetsController extends Controller
 
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
-                        ->with('statuslabel_list', Helper::statusLabelList())
-                        ->with('models', $models->pluck(['model']))
-                        ->with('modelNames', $modelNames);
+                        ->with('statuslabel_list', Helper::statusLabelList());
+
+                case 'checkin':
+                    $assets = Asset::with('assignedTo', 'location','defaultLoc')->find($asset_ids);
+                    // test if asset is assigned to a location
+                    foreach($assets as $asset){
+                        if($asset->assigned_to == null){
+                            return redirect()->back()->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+                        }
+                    }
+                    // test if all asset are from same location
+                    $unique = count(array_unique($assets->pluck('assigned_to')->toArray()));
+                    if($unique>1){
+                        return redirect()->back()->with('error', "please select assets from same affectaion");
+                    }
+                    return view('hardware/bulk-checkin')
+                        ->with('assets', $assets)
+                        ->with('statusLabel_list', Helper::statusLabelList());
+                
+                case 'checkout':
+                    $assets = Asset::with('assignedTo', 'location','defaultLoc')->find($asset_ids);
+                    // test if asset is not assigned to a location
+                    foreach($assets as $asset){
+                        if($asset->assigned_to != null){
+                            return redirect()->back()->with('error', trans('admin/hardware/message.checkout.not_available'));
+                        }
+                    }
+
+                    return view('hardware/bulk-checkout')
+                        ->with('assets', $assets)
+                        ->with('statusLabel_list', Helper::statusLabelList());
+
+                case 'replace':
+                    $assets = Asset::with('assignedTo', 'location','defaultLoc')->find($asset_ids);
+                    // test if asset is assigned to a location
+                    foreach($assets as $asset){
+                        if($asset->assigned_to == null){
+                            return redirect()->back()->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+                        }
+                    }
+                    // test if all asset are from same location
+                    $unique = count(array_unique($assets->pluck('assigned_to')->toArray()));
+                    if($unique>1){
+                        return redirect()->back()->with('error', "please select assets from same affectaion");
+                    }
+                    return view('hardware/bulk-replace')
+                        ->with('assets', $assets)
+                        ->with('statusLabel_list', Helper::statusLabelList());
+
+                    
             }
         }
 
@@ -555,11 +552,20 @@ class BulkAssetsController extends Controller
 
             $errors = [];
             DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids, $request) {
-                foreach ($asset_ids as $asset_id) {
+                # generate doc if assigned to location
+                if (request('checkout_to_type') == 'location') {
+                    $file_name = $this->generate_checkout_checkin($asset_ids,$target,$checkout_at,'Attribution');
+                    Session::flash('downloadfile', $file_name);
+                }
+
+                
+                
+                
+                foreach ($asset_ids as $key => $asset_id) {
                     $asset = Asset::findOrFail($asset_id);
                     $this->authorize('checkout', $asset);
-
-                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
+                    $note = $request->get("responsable") . " - " . $request->get('responsable_matricule').' ('.$request->note[$key].' )';
+                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($note), null);
 
                     if ($target->location_id != '') {
                         $asset->location_id = $target->location_id;

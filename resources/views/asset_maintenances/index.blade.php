@@ -8,7 +8,8 @@
 
 
 @section('header_right')
-  @can('update', \App\Models\Asset::class)
+{{-- H.E AssetMaintenance --}}
+  @can('update', \App\Models\AssetMaintenance::class)
     <a href="{{ route('maintenances.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
   @endcan
 @stop

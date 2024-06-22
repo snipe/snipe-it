@@ -36,6 +36,9 @@ return [
     'months'			=> 'Mois',
     'name'				=> 'Nom de l\'actif',
     'notes'				=> 'Remarques',
+    //H.E added responsable by Mohcin
+    'responsable'				=> 'Nom et prénom',
+    'responsable_matricule'				=> 'Matricule',
     'order'				=> 'Numéro de Commande',
     'qr'				=> 'Code QR',
     'requestable'		=> 'Les utilisateurs·trices peuvent demander cet actif',

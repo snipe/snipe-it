@@ -24,6 +24,11 @@ Route::group(
     
     function () {
         
+        //H.E download file added by Mohcin
+        Route::get('downloadfile/{file}',
+            [AssetsController::class, 'downloadfile']
+        )->name('hardware.downloadfile');
+
         Route::get('bulkaudit',
             [AssetsController::class, 'quickScan']
         )->name('assets.bulkaudit');
@@ -105,6 +110,16 @@ Route::group(
         Route::post('{assetId}/checkin/{backto?}',
             [AssetCheckinController::class, 'store']
         )->name('hardware.checkin.store');
+        //H.E by Mohcin
+        # add hardrware bulk replace into AssetCheckinController
+        Route::post('bulkreplace',
+            [AssetCheckinController::class, 'bulkreplace']
+        )->name('hardware.bulkreplace.store');
+
+        # add hardrware bulk checkin into AssetCheckinController
+        Route::post('bulkcheckin',
+            [AssetCheckinController::class, 'bulkcheckin']
+        )->name('hardware.bulkcheckin.store');
 
         // Redirect old legacy /asset_id/view urls to the resource route version
         Route::get('{assetId}/view', function ($assetId) {

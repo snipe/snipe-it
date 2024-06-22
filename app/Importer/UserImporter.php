@@ -109,7 +109,8 @@ class UserImporter extends ItemImporter
 
         // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
         // Issue #5408
-        $this->item['password'] = bcrypt($this->tempPassword);
+        // $this->item['password'] = bcrypt($this->tempPassword);
+        $this->item['password'] = bcrypt(strtolower($this->item['first_name'] . '.' . $this->item['last_name']));
 
         $this->log('No matching user, creating one');
         $user = new User();
@@ -124,8 +125,8 @@ class UserImporter extends ItemImporter
                     'username' => $user->username,
                     'first_name' => $user->first_name,
                     'last_name' => $user->last_name,
-                    'password' => $this->tempPassword,
-                ];
+                    // 'password' => $this->tempPassword,
+                    'password' => $this->item['password'],                ];
 
                 if ($this->send_welcome) {
                     $user->notify(new WelcomeNotification($data));

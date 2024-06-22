@@ -7,7 +7,6 @@
   @endif
 
 
-
 @if (Request::get('status'))
   @if (Request::get('status')=='Pending')
     {{ trans('general.pending') }}
@@ -54,6 +53,23 @@
 
 {{-- Page content --}}
 @section('content')
+
+@if(Session::has('downloadfile'))
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Télécharger fichier</h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p> {{ Session::get('downloadfile') }} </p>
+            <a target="_blank" href="{{ route('hardware.downloadfile', Session::get('downloadfile')) }}" class="btn btn-primary">Télécharger</a>
+          </div>
+      </div>
+  </div>
+</div>
+@endif
 
 <div class="row">
   <div class="col-md-12">
@@ -107,6 +123,11 @@
 @stop
 
 @section('moar_scripts')
+<script>
+  $(document).ready(function(){
+      $("#myModal").modal('show');
+  });
+</script>
 @include('partials.bootstrap-table')
 
 @stop

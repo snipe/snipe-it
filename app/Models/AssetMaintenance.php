@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+// use App\Models\Company;
+use Auth;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 /**
  * Model for Asset Maintenances.
@@ -26,7 +31,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     protected $table = 'asset_maintenances';
     protected $rules = [
         'asset_id'               => 'required|integer',
-        'supplier_id'            => 'required|integer',
+        'supplier_id'            => 'integer',
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
@@ -99,17 +104,75 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public static function getImprovementOptions()
     {
-        return [
+        $company_name = '';
+        if(!Auth::user()->isSuperUser()){
+            $company_name = Auth::user()->company->name;
+        };
+
+        $iprovement_options = [
             trans('admin/asset_maintenances/general.maintenance') => trans('admin/asset_maintenances/general.maintenance'),
             trans('admin/asset_maintenances/general.repair')      => trans('admin/asset_maintenances/general.repair'),
             trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade'),
-            trans('admin/asset_maintenances/general.pat_test')     => trans('admin/asset_maintenances/general.pat_test'),
-            trans('admin/asset_maintenances/general.calibration')     => trans('admin/asset_maintenances/general.calibration'),
-            trans('admin/asset_maintenances/general.software_support')      => trans('admin/asset_maintenances/general.software_support'),
-            trans('admin/asset_maintenances/general.hardware_support')      => trans('admin/asset_maintenances/general.hardware_support'),
-            trans('admin/asset_maintenances/general.configuration_change')     => trans('admin/asset_maintenances/general.configuration_change'),
+            // trans('admin/asset_maintenances/general.pat_test')     => trans('admin/asset_maintenances/general.pat_test'),
+            // trans('admin/asset_maintenances/general.calibration')     => trans('admin/asset_maintenances/general.calibration'),
+            // trans('admin/asset_maintenances/general.software_support')      => trans('admin/asset_maintenances/general.software_support'),
+            // trans('admin/asset_maintenances/general.hardware_support')      => trans('admin/asset_maintenances/general.hardware_support'),
+            // trans('admin/asset_maintenances/general.configuration_change')     => trans('admin/asset_maintenances/general.configuration_change'),
         ];
+        if ($company_name != '') {
+            switch ($company_name) {
+                case 'CPI':
+                    # code...
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }               
+        
+        return $iprovement_options;
     }
+
+    public static function getImprovementTitles()
+    {
+        $company_name = '';
+        if(!Auth::user()->isSuperUser()){
+            $company_name = Auth::user()->company->name;
+        };
+
+        $improvement_titles = [
+            trans('admin/asset_maintenances/general.maintenance') => trans('admin/asset_maintenances/general.maintenance'),
+        ];
+        
+        if ($company_name != '') {
+            switch ($company_name) {
+                case 'CPI':
+                    $improvement_titles = array_merge($improvement_titles, [
+                        '  ' => '--- AXON BODY 2 ---',
+                        trans('admin/asset_maintenances/maintenance_titles.power_issue') =>  trans('admin/asset_maintenances/maintenance_titles.power_issue'),
+                        trans('admin/asset_maintenances/maintenance_titles.failed_battery') =>  trans('admin/asset_maintenances/maintenance_titles.failed_battery'),
+                        trans('admin/asset_maintenances/maintenance_titles.battery_charging_issue') =>  trans('admin/asset_maintenances/maintenance_titles.battery_charging_issue'),
+                        trans('admin/asset_maintenances/maintenance_titles.connectivity_issue') =>  trans('admin/asset_maintenances/maintenance_titles.connectivity_issue'),
+                        trans('admin/asset_maintenances/maintenance_titles.operating_problem') =>  trans('admin/asset_maintenances/maintenance_titles.operating_problem'),
+                        trans('admin/asset_maintenances/maintenance_titles.failed_camera_switch') =>  trans('admin/asset_maintenances/maintenance_titles.failed_camera_switch'),
+                        '   ' => '--- AXON DOCK ---',
+                        trans('admin/asset_maintenances/maintenance_titles.power_issue') =>  trans('admin/asset_maintenances/maintenance_titles.power_issue'),
+                        trans('admin/asset_maintenances/maintenance_titles.management_port_issue') =>  trans('admin/asset_maintenances/maintenance_titles.management_port_issue'),
+                        trans('admin/asset_maintenances/maintenance_titles.core_module_issue') =>  trans('admin/asset_maintenances/maintenance_titles.core_module_issue'),
+                        trans('admin/asset_maintenances/maintenance_titles.bay_connectors_issue') =>  trans('admin/asset_maintenances/maintenance_titles.bay_connectors_issue'),
+                    ]);
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }        
+        
+        return $improvement_titles;
+    }
+
 
     public function setIsWarrantyAttribute($value)
     {

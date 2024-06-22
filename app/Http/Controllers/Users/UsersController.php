@@ -72,9 +72,17 @@ class UsersController extends Controller
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
+        $user->activated = 1;
+        //H.E
+        // Prepare user ranks List
+        $userRanks = [
+            '' => '----- Selectionnez un grade -----',
+        ] + User::getRankOptions();
 
         return view('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
-            ->with('user', $user);
+            ->with('user', $user)
+            //H.E
+            ->with('userRanks', $userRanks);
     }
 
     /**
@@ -193,9 +201,12 @@ class UsersController extends Controller
             $user->permissions = $user->decodePermissions();
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
             $permissions = $this->filterDisplayable($permissions);
+            //H.E
+            $userRanks = [
+                '' => '----- Selectionnez un grade -----',
+            ] + User::getRankOptions();
 
-            return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user);
-        }
+            return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user)->with('userRanks', $userRanks);        }
 
         return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
     }
