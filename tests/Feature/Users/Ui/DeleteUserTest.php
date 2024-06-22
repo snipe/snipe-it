@@ -34,7 +34,18 @@ class DeleteUserTest extends TestCase
             ->delete(route('users.destroy', ['user' => '40596803548609346']))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
-        //$this->followRedirects($response)->assertSee(trans('general.error'));
+        $this->followRedirects($response)->assertSee(trans('alert-danger'));
+    }
+
+    public function testErrorReturnedIfUserIsAlreadyDeleted()
+    {
+        $user = User::factory()->deletedUser()->viewUsers()->create();
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $user->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+          $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
 
