@@ -521,13 +521,11 @@ class UsersController extends Controller
     public function destroy(DeleteUserRequest $request, $id)
     {
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
 
-        $this->authorize('delete', $user);
+        if ($user = User::withTrashed()->find($id)) {
 
+            $this->authorize('delete', $user);
 
-        if ($user) {
-            
             if ($user->delete()) {
 
                 // Remove the user's avatar if they have one
@@ -541,6 +539,7 @@ class UsersController extends Controller
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
             }
+
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
 
         }
