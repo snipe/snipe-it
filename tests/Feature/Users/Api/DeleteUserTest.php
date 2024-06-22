@@ -109,13 +109,23 @@ class DeleteUserTest extends TestCase
 
         $this->actingAsForApi($userFromA)
             ->deleteJson(route('api.users.destroy', ['user' => $userFromB->id]))
-            ->assertStatus(403)
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
             ->json();
+
+        $userFromB->refresh();
+        $this->assertNull($userFromB->deleted_at);
 
         $this->actingAsForApi($userFromB)
             ->deleteJson(route('api.users.destroy', ['user' => $userFromA->id]))
-            ->assertStatus(403)
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
             ->json();
+
+        $userFromA->refresh();
+        $this->assertNull($userFromA->deleted_at);
 
         $this->actingAsForApi($superuser)
             ->deleteJson(route('api.users.destroy', ['user' => $userFromA->id]))
@@ -123,6 +133,9 @@ class DeleteUserTest extends TestCase
             ->assertStatus(200)
             ->assertStatusMessageIs('success')
             ->json();
+
+        $userFromA->refresh();
+        $this->assertNotNull($userFromA->deleted_at);
 
     }
 

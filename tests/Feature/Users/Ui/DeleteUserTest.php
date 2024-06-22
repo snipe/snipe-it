@@ -65,17 +65,27 @@ class DeleteUserTest extends TestCase
             ->assertStatus(403);
         $this->followRedirects($response)->assertSee('sad-panda.png');
 
+        $userFromB->refresh();
+        $this->assertNull($userFromB->deleted_at);
+
+
         $response = $this->actingAs($userFromB)
             ->delete(route('users.destroy', ['user' => $userFromA->id]))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
         $this->followRedirects($response)->assertSee('sad-panda.png');
 
+        $userFromA->refresh();
+        $this->assertNull($userFromA->deleted_at);
+
         $response = $this->actingAs($superuser)
             ->delete(route('users.destroy', ['user' => $userFromA->id]))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
         $this->followRedirects($response)->assertSee('Success');
+
+        $userFromA->refresh();
+        $this->assertNotNull($userFromA->deleted_at);
 
     }
 
