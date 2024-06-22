@@ -14,7 +14,42 @@ use App\Models\Asset;
 class DeleteUserTest extends TestCase
 {
 
-    public function testPermissionsToDeleteUser()
+    public function testUserCanDeleteAnotherUser()
+    {
+        $user = User::factory()->deleteUsers()->viewUsers()->create();
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($user->isDeletable());
+
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', ['user' => $user->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee(trans('general.notification_success'));
+    }
+
+
+    public function testErrorReturnedIfUserDoesNotExist()
+    {
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', ['user' => '40596803548609346']))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+        $this->followRedirects($response)->assertSee(trans('alert-danger'));
+    }
+
+    public function testErrorReturnedIfUserIsAlreadyDeleted()
+    {
+        $user = User::factory()->deletedUser()->viewUsers()->create();
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $user->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+          $this->followRedirects($response)->assertSee(trans('general.error'));
+    }
+
+
+    public function testFmcsPermissionsToDeleteUser()
     {
 
         $this->settings->enableMultipleFullCompanySupport();
@@ -22,17 +57,35 @@ class DeleteUserTest extends TestCase
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
         $superuser = User::factory()->superuser()->create();
-        $userFromA = User::factory()->for($companyA)->create();
-        $userFromB = User::factory()->for($companyB)->create();
+        $userFromA = User::factory()->deleteUsers()->for($companyA)->create();
+        $userFromB = User::factory()->deleteUsers()->for($companyB)->create();
 
-        $this->followingRedirects()->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+        $response =  $this->followingRedirects()->actingAs($userFromA)
             ->delete(route('users.destroy', ['user' => $userFromB->id]))
             ->assertStatus(403);
+        $this->followRedirects($response)->assertSee('sad-panda.png');
 
-        $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+        $userFromB->refresh();
+        $this->assertNull($userFromB->deleted_at);
+
+
+        $response = $this->actingAs($userFromB)
             ->delete(route('users.destroy', ['user' => $userFromA->id]))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
+        $this->followRedirects($response)->assertSee('sad-panda.png');
+
+        $userFromA->refresh();
+        $this->assertNull($userFromA->deleted_at);
+
+        $response = $this->actingAs($superuser)
+            ->delete(route('users.destroy', ['user' => $userFromA->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+        $this->followRedirects($response)->assertSee('Success');
+
+        $userFromA->refresh();
+        $this->assertNotNull($userFromA->deleted_at);
 
     }
 
