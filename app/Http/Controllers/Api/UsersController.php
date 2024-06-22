@@ -13,6 +13,8 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\Accessory;
+use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -31,7 +33,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index(Request $request)
     {
@@ -359,7 +361,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function store(SaveUserRequest $request)
     {
@@ -406,7 +408,7 @@ class UsersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -429,7 +431,7 @@ class UsersController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(SaveUserRequest $request, $id)
     {
@@ -514,7 +516,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(DeleteUserRequest $request, $id)
     {
@@ -543,7 +545,7 @@ class UsersController extends Controller
 
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Whoops.'.trans('admin/users/message.user_not_found')));
 
     }
 
@@ -553,7 +555,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return string JSON
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function assets(Request $request, $id)
     {
@@ -626,7 +628,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return string JSON
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function consumables(Request $request, $id)
     {
@@ -644,7 +646,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.6.14]
      * @param $userId
-     * @return string JSON
+     * @return array
      */
     public function accessories($id)
     {
@@ -663,7 +665,7 @@ class UsersController extends Controller
      * @author [N. Mathar] [<snipe@snipe.net>]
      * @since [v5.0]
      * @param $userId
-     * @return string JSON
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function licenses($id)
     {
@@ -726,7 +728,7 @@ class UsersController extends Controller
      * @author [Juan Font] [<juanfontalonso@gmail.com>]
      * @since [v4.4.2]
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function getCurrentUserInfo(Request $request)
     {
@@ -739,7 +741,7 @@ class UsersController extends Controller
      * @author [E. Taylor] [<dev@evantaylor.name>]
      * @param int $userId
      * @since [v6.0.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function restore($userId = null)
     {
