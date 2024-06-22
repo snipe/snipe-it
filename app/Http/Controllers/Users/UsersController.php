@@ -17,7 +17,9 @@ use App\Notifications\WelcomeNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Storage;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -336,16 +338,22 @@ class UsersController extends Controller
 
         $this->authorize('delete', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->first();
+        if ($user = User::find($id)) {
 
-        if (($user) && ($user->deleted_at == '')) {
-            // Delete the user
-            $user->delete();
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
+            if ($user->delete()) {
+
+                if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    try {
+                        Storage::disk('public')->delete('avatars/' . $user->avatar);
+                    } catch (\Exception $e) {
+                        Log::debug($e);
+                    }
+                }
+                return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
+            }
+
         }
-
-        return redirect()->route('users.index')
-            ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found'));
 
     }
 
