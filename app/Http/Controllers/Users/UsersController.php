@@ -335,13 +335,13 @@ class UsersController extends Controller
      */
     public function destroy(DeleteUserRequest $request, $id = null)
     {
-
         $this->authorize('delete', User::class);
 
         if ($user = User::find($id)) {
 
-            if ($user->delete()) {
+            $this->authorize('delete', $user);
 
+            if ($user->delete()) {
                 if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
                     try {
                         Storage::disk('public')->delete('avatars/' . $user->avatar);
@@ -351,7 +351,6 @@ class UsersController extends Controller
                 }
                 return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
             }
-
         }
         return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found'));
 
