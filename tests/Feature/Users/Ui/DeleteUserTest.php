@@ -49,7 +49,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testPermissionsToDeleteUser()
+    public function testFmcsPermissionsToDeleteUser()
     {
 
         $this->settings->enableMultipleFullCompanySupport();
@@ -60,14 +60,22 @@ class DeleteUserTest extends TestCase
         $userFromA = User::factory()->for($companyA)->create();
         $userFromB = User::factory()->for($companyB)->create();
 
-        $this->followingRedirects()->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+        $response =  $this->followingRedirects()->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
             ->delete(route('users.destroy', ['user' => $userFromB->id]))
             ->assertStatus(403);
+        $this->followRedirects($response)->assertSee('sad-panda.png');
 
-        $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
             ->delete(route('users.destroy', ['user' => $userFromA->id]))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
+        $this->followRedirects($response)->assertSee('sad-panda.png');
+
+        $response = $this->actingAs($superuser)
+            ->delete(route('users.destroy', ['user' => $userFromA->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+        $this->followRedirects($response)->assertSee('Success');
 
     }
 
