@@ -336,7 +336,7 @@ class UsersController extends Controller
 
         $this->authorize('delete', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->first();
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->first();
 
         if (($user) && ($user->deleted_at == '')) {
             // Delete the user
