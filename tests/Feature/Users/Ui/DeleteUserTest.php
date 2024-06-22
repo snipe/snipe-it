@@ -57,15 +57,15 @@ class DeleteUserTest extends TestCase
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
         $superuser = User::factory()->superuser()->create();
-        $userFromA = User::factory()->for($companyA)->create();
-        $userFromB = User::factory()->for($companyB)->create();
+        $userFromA = User::factory()->deleteUsers()->for($companyA)->create();
+        $userFromB = User::factory()->deleteUsers()->for($companyB)->create();
 
-        $response =  $this->followingRedirects()->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+        $response =  $this->followingRedirects()->actingAs($userFromA)
             ->delete(route('users.destroy', ['user' => $userFromB->id]))
             ->assertStatus(403);
         $this->followRedirects($response)->assertSee('sad-panda.png');
 
-        $response = $this->actingAs(User::factory()->deleteUsers()->for($companyA)->create())
+        $response = $this->actingAs($userFromB)
             ->delete(route('users.destroy', ['user' => $userFromA->id]))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
