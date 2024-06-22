@@ -25,8 +25,19 @@ class DeleteUserTest extends TestCase
 
     public function testErrorReturnedViaApiIfUserDoesNotExist()
     {
-        $this->actingAsForApi(User::factory()->deleteUsers()->create(['company_id'=> null]))
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
             ->deleteJson(route('api.users.destroy', 'invalid-id'))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+    }
+
+    public function testErrorReturnedViaApiIfUserIsAlreadyDeleted()
+    {
+        $user = User::factory()->deletedUser()->create();
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+            ->deleteJson(route('api.users.destroy', $user->id))
             ->assertOk()
             ->assertStatus(200)
             ->assertStatusMessageIs('error')
