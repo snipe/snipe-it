@@ -123,9 +123,11 @@ mix.less(
 mix
   .combine(
     [
-      "./node_modules/bootstrap-table/dist/bootstrap-table.css",
-      "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
-     "./resources/assets/css/dragtable.css",
+        "./resources/assets/css/dragtable.css",
+        "./node_modules/bootstrap-table/dist/bootstrap-table.css",
+        "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
+        "./node_modules/bootstrap-table/dist/extensions/fixed-columns/bootstrap-table-fixed-columns.min.css",
+
     ],
     "public/css/dist/bootstrap-table.css"
   )
@@ -170,6 +172,7 @@ mix
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
             './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
+            './node_modules/bootstrap-table/dist/extensions/fixed-columns/bootstrap-table-fixed-columns.min.js',
             './node_modules/bootstrap-table/dist/extensions/addrbar/bootstrap-table-addrbar.js',
             './resources/assets/js/extensions/jquery.base64.js',
             './node_modules/tableexport.jquery.plugin/tableExport.min.js',
@@ -177,6 +180,7 @@ mix
             './resources/assets/js/FileSaver.min.js',
             './node_modules/xlsx/dist/xlsx.core.min.js',
             './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
+            './node_modules/bootstrap-table/dist/extensions/reorder-columns/bootstrap-table-reorder-columns.min.js',
             './node_modules/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.js'
         ],
         'public/js/dist/bootstrap-table.js'
