@@ -70,17 +70,17 @@
   },
   "suggest": {
     "ext-ldap": "*",
-    "ext-zip": "*"
+    "ext-zip": "*",
+    "ext-exif": "*"
   },
   "require-dev": {
     "brianium/paratest": "^v6.4.4",
     "fakerphp/faker": "^1.16",
+    "larastan/larastan": "^2.9",
     "mockery/mockery": "^1.4",
-    "nunomaduro/larastan": "^2.0",
     "nunomaduro/phpinsights": "^2.7",
-    "php-mock/php-mock-phpunit": "^2.8",
-    "phpunit/php-token-stream": "^3.1",
-    "phpunit/phpunit": "^9.0",
+    "php-mock/php-mock-phpunit": "^2.10",
+    "phpunit/phpunit": "^9.6.19",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4",
