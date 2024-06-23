@@ -61,7 +61,9 @@
         @if ($snipeSettings->allow_user_skin=='1')
         <!-- Skin -->
         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
-          <label for="website" class="col-md-3 control-label">{{ Form::label('skin', trans('general.skin')) }}</label>
+          <label for="skin" class="col-md-3 control-label">
+            {{ trans('general.skin') }}
+          </label>
           <div class="col-md-8">
             {!! Form::user_skin('skin', old('skin', $user->skin), 'select2') !!}
             {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
