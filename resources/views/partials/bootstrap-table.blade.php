@@ -6,6 +6,8 @@
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 
+
+
 <script nonce="{{ csrf_token() }}">
     $(function () {
 
@@ -42,10 +44,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             },
-            // reorderableColumns: true,
+
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
+
             locale: '{{ app()->getLocale() }}',
             undefinedText: '',
             iconsPrefix: 'fa',
@@ -66,6 +69,13 @@
             pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
+
+            fixedColumns: true,
+            //fixedNumber: 1,
+            fixedRightNumber: 2,
+
+            // reorderableColumns: true,
+
             queryParams: function (params) {
                 var newParams = {};
                 for(var i in params) {
