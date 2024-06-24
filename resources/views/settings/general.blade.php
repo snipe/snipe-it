@@ -181,6 +181,24 @@
                            </div>
                        </div>
 
+                       <!-- required serial -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               <strong>{{ trans('admin/settings/general.required_serial') }}</strong>
+                           </div>
+                           <div class="col-md-9">
+                               <label class="form-control">
+                                   {{ Form::checkbox('required_serial', '1', Request::old('required_serial', $setting->required_serial),array('class' => 'minimal')) }}
+                                   {{ trans('general.yes') }}
+                                   {!! $errors->first('required_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                               </label>
+
+                               <p class="help-block">
+                                   {{ trans('admin/settings/general.require_serial_help_text') }}
+                               </p>
+                           </div>
+                       </div>
+
 
                        <!-- Per Page -->
                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">

@@ -96,6 +96,7 @@ class Asset extends Depreciable
         'deleted_at'  => 'datetime',
     ];
 
+
     protected $rules = [
         'model_id'         => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
         'status_id'        => 'required|integer|exists:status_labels,id',
@@ -124,7 +125,14 @@ class Asset extends Depreciable
         'requestable'      => 'nullable|boolean',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
 
+        $required_serial = Setting::getSettings()->required_serial;
+
+        $this->rules['serial'] = 'unique_undeleted:assets,serial|' . ($required_serial ? 'required' : 'nullable');
+    }
   /**
    * The attributes that are mass assignable.
    *
