@@ -232,5 +232,12 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('update', User::class)
                 || $user->can('create', User::class);  
         });
+
+
+        // This determines whether the user can edit their profile based on the setting in Admin > General
+        Gate::define('self.profile', function ($user) {
+            return $user->canEditProfile();
+        });
+
     }
 }

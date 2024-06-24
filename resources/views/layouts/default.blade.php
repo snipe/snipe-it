@@ -353,12 +353,15 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             </a></li>
 
 
+                                        @can('self.profile')
                                         <li>
                                             <a href="{{ route('profile') }}">
                                                 <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                                                 {{ trans('general.editprofile') }}
                                             </a>
                                         </li>
+                                        @endcan
+
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <i class="fa-solid fa-asterisk fa-fw" aria-hidden="true"></i>
