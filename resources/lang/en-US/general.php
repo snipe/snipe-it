@@ -240,6 +240,7 @@ return [
     'restored'				=> 'restored',
     'restore'				=> 'Restore',
     'requestable_models'    => 'Requestable Models',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Requested',
     'requested_date'        => 'Requested Date',
     'requested_assets'      => 'Requested Assets',

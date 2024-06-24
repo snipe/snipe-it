@@ -780,7 +780,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('requestable-assets') }}">
                                     <i class="fa fa-laptop fa-fw"></i>
-                                    <span>{{ trans('admin/hardware/general.requestable') }}</span>
+                                    <span>{{ trans('general.requestable_items') }}</span>
                                 </a>
                             </li>
                         @endcan
