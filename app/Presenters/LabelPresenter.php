@@ -42,14 +42,14 @@ class LabelPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'labelPerPageFormatter'
             ], [
-                'field' => 'support_fields',
+                'field' => 'fields_supported',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
                 'title' => trans('admin/labels/table.support_fields'),
                 'visible' => true
             ], [
-                'field' => 'support_asset_tag',
+                'field' => 'tag_option',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
@@ -57,7 +57,7 @@ class LabelPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'trueFalseFormatter'
             ], [
-                'field' => 'support_1d_barcode',
+                'field' => 'one_d_barcode_option',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
@@ -65,7 +65,7 @@ class LabelPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'trueFalseFormatter'
             ], [
-                'field' => 'support_2d_barcode',
+                'field' => 'two_d_barcode_option',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
@@ -73,7 +73,7 @@ class LabelPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'trueFalseFormatter'
             ], [
-                'field' => 'support_logo',
+                'field' => 'logo_option',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
@@ -81,7 +81,7 @@ class LabelPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'trueFalseFormatter'
             ], [
-                'field' => 'support_title',
+                'field' => 'title_option',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,

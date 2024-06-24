@@ -155,7 +155,12 @@ abstract class Label
      * @return string
      */
     public final function getOrientation() {
-        return ($this->getWidth() >= $this->getHeight()) ? 'L' : 'P';
+        if (!empty($this->label_width) && !empty($this->label_height)) {
+            return ($this->label_width >= $this->label_height) ? 'L' : 'P';
+        }
+        else{
+            return ($this->tape_width >= $this->tape_height) ? 'L' : 'P';
+        }
     }
 
     /**

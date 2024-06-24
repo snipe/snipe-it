@@ -5,10 +5,12 @@ namespace App\View;
 use App\Models\Labels\Field;
 use App\Models\Labels\Label as LabelModel;
 use App\Models\Labels\Sheet;
+use App\Models\LabelTemplate;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Traits\Macroable;
+use App\Models\Labels\LabelWriter;
 use TCPDF;
 
 class Label implements View
@@ -38,7 +40,7 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = LabelModel::find($settings->label2_template);
+        $template = LabelTemplate::where('name', '=', $settings->label2_template)->first();
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
@@ -49,12 +51,10 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
-        $template->validate();
-
         $pdf = new TCPDF(
             $template->getOrientation(),
-            $template->getUnit(),
-            [ $template->getWidth(), $template->getHeight() ]
+            $template->measurement_unit,
+            [ $template->labelWidth, $template->labelHeight ]
         );
 
         // Reset parameters
@@ -66,7 +66,7 @@ class Label implements View
         $pdf->SetCellPaddings(0, 0, 0, 0);
         $pdf->setCreator('Snipe-IT');
         $pdf->SetSubject('Asset Labels');
-        $template->preparePDF($pdf);
+//        $this->preparePDF($pdf);
 
         // Get fields from settings
         $fieldDefinitions = collect(explode(';', $settings->label2_fields))
@@ -83,12 +83,12 @@ class Label implements View
                 $assetData->put('id', $asset->id);
                 $assetData->put('tag', $asset->asset_tag);
 
-                if ($template->getSupportTitle() && !empty($settings->label2_title)) {
+                if ($template->title_option && !empty($settings->label2_title)) {
                     $title = str_replace('{COMPANY}', data_get($asset, 'company.name'), $settings->label2_title);
                     $assetData->put('title', $title);
                 }
 
-                if ($template->getSupportLogo()) {
+                if ($template->logo_option) {
 
                     $logo = null;
 
@@ -106,7 +106,7 @@ class Label implements View
                 }
 
                 if ($settings->alt_barcode_enabled) {
-                    if ($template->getSupport1DBarcode()) {
+                    if ($template->one_d_barcode_option) {
                         $barcode1DType = $settings->alt_barcode;
                         if ($barcode1DType != 'none') {
                             $assetData->put('barcode1d', (object)[
@@ -117,7 +117,7 @@ class Label implements View
                     }
                 }
 
-                if ($template->getSupport2DBarcode()) {
+                if ($template->two_d_barcode_option) {
                     $barcode2DType = $settings->label2_2d_type;
                     $barcode2DType = ($barcode2DType == 'default') ? 
                         $settings->barcode_type :
@@ -172,15 +172,17 @@ class Label implements View
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
 
-                $assetData->put('fields', $fields->take($template->getSupportFields()));
+                $assetData->put('fields', $fields->take($template->fields_supported));
 
                 return $assetData;
             });
-        
-        if ($template instanceof Sheet) {
-            $template->setLabelIndexOffset($offset ?? 0);
+
+        if (strpos($template->label_type, 'Sheet') !== false){
+            $template->label_index;
+
         }
-        $template->writeAll($pdf, $data);
+        $writer = new LabelWriter();
+        $writer->writeAll($pdf, $data, $template);
 
         $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
         $pdf->Output($filename, 'I');
