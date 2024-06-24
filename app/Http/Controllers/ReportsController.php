@@ -933,7 +933,7 @@ class ReportsController extends Controller
                             $diff = ($asset->purchase_cost - $depreciation);
                         $row[] = Helper::formatCurrencyOutput($depreciation);
                         $row[] = Helper::formatCurrencyOutput($diff);
-                        $row[] = ($asset->depreciation) ? $asset->depreciated_date()->format('Y-m-d') : '';
+                        $row[] = (($asset->depreciation) && ($asset->depreciated_date())) ? $asset->depreciated_date()->format('Y-m-d') : '';
                     }
 
                     if ($request->filled('checkout_date')) {
