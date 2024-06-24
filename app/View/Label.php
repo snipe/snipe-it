@@ -8,6 +8,7 @@ use App\Models\Labels\Sheet;
 use App\Models\LabelTemplate;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Traits\Macroable;
 use App\Models\Labels\LabelWriter;
@@ -41,7 +42,17 @@ class Label implements View
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
         $template = LabelTemplate::where('name', '=', $settings->label2_template)->first();
-
+        if ($template === null) {
+            // Handle the case when the template is not found
+            // For example, log an error, throw an exception, or return a default response
+            Log::error("LabelTemplate not found for name: " . $settings->label2_template);
+            // Optionally, you can return a view or a default response
+            return view('hardware/labels')
+                ->with('assets', $assets)
+                ->with('settings', $settings)
+                ->with('bulkedit', $this->data->get('bulkedit'))
+                ->with('count', $this->data->get('count'));
+        }
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
             return view('hardware/labels')

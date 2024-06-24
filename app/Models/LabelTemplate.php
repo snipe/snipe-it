@@ -256,7 +256,7 @@ class LabelTemplate extends SnipeModel
      *
      * @return string
      */
-    public function getOrientation() {
+    public function getOrientation(): string {
         if (!empty($this->label_width) && !empty($this->label_height)) {
             return ($this->label_width >= $this->label_height) ? 'L' : 'P';
         }
