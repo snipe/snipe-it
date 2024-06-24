@@ -1274,7 +1274,7 @@
                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                        }'
 
-                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
+                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset') }}"
                       data-cookie-id-table="assetHistory"
                       data-cookie="true">
                 <thead>
@@ -1313,7 +1313,9 @@
                         data-side-pagination="client"
                         data-show-columns="true"
                         data-show-fullscreen="true"
-                        data-show-refresh="true">
+                        data-show-refresh="true"
+                        data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset', 'action_type' => 'note']) }}"
+                    >
                             <thread>
                                 <tr>
                                     <th></th>
@@ -1325,14 +1327,6 @@
                 </div>
             </div>
         </div> <!--/end notes tab -->
-
-                    <!--
-                    notes controller get store method working/saving
-                    pass item type, id, and note itself -validation -hidden on form
-                        target_id, target_type, note
-                    log listener event needs values
-                    get notes to display on their tabs
--->
 
         <!-- Files tab -->
         <div class="tab-pane fade" id="files">

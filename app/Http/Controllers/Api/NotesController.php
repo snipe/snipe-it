@@ -13,8 +13,6 @@ class NotesController extends Controller
 {
     public function store(Request $request)
     {
-        //dd($request->all());
-        //return a success message
         $item=Asset::findOrFail($request->input("id"));
         event(new NoteAdded($item, Auth::user(), $request->input("note")));
 
