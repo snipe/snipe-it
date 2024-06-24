@@ -246,7 +246,7 @@ return [
     'requested_assets_menu' => 'الأصول المطلوبة',
     'request_canceled'      => 'تم إلغاء الطلب',
     'request_item'          => 'Request this item',
-    'external_link_tooltip' => 'External link to',
+    'external_link_tooltip' => 'رابط خارجي إلى',
     'save'  				=> 'حفظ',
     'select_var'            => 'اختر :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'تحديد',

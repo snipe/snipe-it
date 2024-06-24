@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'ទីតាំងមិនមានទេ។',
-    'assoc_users'	 => 'បច្ចុប្បន្នទីតាំងនេះត្រូវបានភ្ជាប់ជាមួយអ្នកប្រើប្រាស់យ៉ាងហោចណាស់ម្នាក់ ហើយមិនអាចលុបបានទេ។ សូមអាប់ដេតអ្នកប្រើប្រាស់របស់អ្នក ដើម្បីកុំឱ្យយោងទីតាំងនេះតទៅទៀត ហើយព្យាយាមម្តងទៀត។ ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'បច្ចុប្បន្នទីតាំងនេះត្រូវបានភ្ជាប់ជាមួយទ្រព្យសកម្មយ៉ាងហោចណាស់មួយ ហើយមិនអាចលុបបានទេ។ សូមអាប់ដេតទ្រព្យសកម្មរបស់អ្នក ដើម្បីកុំឱ្យយោងទីតាំងនេះតទៅទៀត ហើយព្យាយាមម្តងទៀត។ ',
     'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
     'assigned_assets' => 'ទ្រព្យសកម្មដែលបានចាត់តាំង',

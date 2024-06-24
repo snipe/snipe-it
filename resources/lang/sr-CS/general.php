@@ -134,7 +134,7 @@ return [
     'lastname_firstinitial' => 'Prezime inicijal Imena (smith_j@example.com)',
     'firstinitial.lastname' => 'Inicijal imena Prezime (j.smith@example.com)',
     'firstnamelastinitial'  => 'Ime inicijal Prezimena (janes@example.com)',
-    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
+    'lastnamefirstname'      => 'Prezime Ime (smith.jane@example.com)',
     'first_name'			=> 'Ime',
     'first_name_format'		=> 'Ime (jane@example.com)',
     'files'                 => 'Datoteke',

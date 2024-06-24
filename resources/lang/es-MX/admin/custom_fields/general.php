@@ -11,7 +11,7 @@ return [
     'encrypt_field_help'      => 'CUIDADO: Encriptar un campo hace que no se pueda buscar por él.',
     'encrypted'      	        => 'Encriptado',
     'fieldset'      	        => 'Grupo de campos',
-    'qty_fields'      	      => 'Campos de Cantidad',
+    'qty_fields'      	      => 'Campos de cantidad',
     'fieldsets'      	        => 'Grupo de campos',
     'fieldset_name'           => 'Nombre del grupo de campos',
     'field_name'              => 'Nombre del campo',
