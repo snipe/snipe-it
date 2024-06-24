@@ -34,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Eignaúttekt var ekki skráð. Vinsamlegast reyndu aftur: :error ',
         'success' 		=> 'Eignaúttekt var skráð.',
     ],
 

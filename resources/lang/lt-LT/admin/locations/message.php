@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Tokios vietos nėra.',
-    'assoc_users'	 => 'Ši vieta šiuo metu yra susieta bent su vienu naudotoju ir negali būti panaikinta. Atnaujinkite savo naudotojus, kad nebebūtų sąsajos su šia vieta, ir bandykite dar kartą. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'Ši vieta šiuo metu yra susieta bent su viena įranga ir negali būti panaikinta. Atnaujinkite savo įrangą, kad nebebūtų sąsajos su šia vieta, ir bandykite dar kartą. ',
     'assoc_child_loc'	 => 'Ši vieta šiuo metu yra kaip pagrindinė bent vienai žemesnio lygio vietai ir negali būti panaikinta. Atnaujinkite savo žemesnio lygio vietas, kad nebebūtų sąsajos su šia vieta, ir bandykite dar kartą. ',
     'assigned_assets' => 'Priskirta įranga',

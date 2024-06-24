@@ -4,7 +4,7 @@ return array(
 
     'asset'             => 'Equipo',
     'checkin'           => 'Devolver',
-    'create'            => 'Nueva Licencia',
+    'create'            => 'Crear licencia',
     'expiration'        => 'Fecha de vencimiento',
     'license_key'       => 'Clave de producto',
     'maintained'        => 'Mantenido',

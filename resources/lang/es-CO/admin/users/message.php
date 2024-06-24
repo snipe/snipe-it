@@ -11,7 +11,7 @@ return array(
     'user_has_no_assets_assigned' => 'No hay activos asignados al usuario.',
     'user_password_required'    => 'La contraseña es obligatoria.',
     'insufficient_permissions'  => 'Permisos insuficientes.',
-    'user_deleted_warning'      => 'Este usuario ha sido eliminado. Tendrá que restaurar este usuario para editarlo o asignarle nuevos recursos.',
+    'user_deleted_warning'      => 'Este usuario ha sido eliminado. Tendrá que restaurar este usuario para editarlo o para asignarle nuevos activos.',
     'ldap_not_configured'        => 'La integración LDAP no ha sido configurada para esta instalación.',
     'password_resets_sent'      => 'Los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida han sido enviados un enlace de restablecimiento de contraseña.',
     'password_reset_sent'       => 'Un enlace para restablecer la contraseña ha sido enviado a :email!',
