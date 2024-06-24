@@ -113,6 +113,22 @@
                         </div>
                     </div>
 
+                       <!-- user profile edit checkbox -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               <label>
+                                   {{ trans('admin/settings/general.profile_edit') }}
+                               </label>
+                           </div>
+                           <div class="col-md-8">
+                               <label class="form-control">
+                                   <input type="checkbox" value="1" name="profile_edit" {{ (old('profile_edit', $setting->profile_edit)) == '1' ? ' checked="checked"' : '' }} aria-label="profile_edit">
+                                   {{ trans('admin/settings/general.profile_edit_help') }}
+                               </label>
+
+                           </div>
+                       </div>
+
                        <!-- Load images in emails -->
                        <div class="form-group {{ $errors->has('show_images_in_email') ? 'error' : '' }}">
                            <div class="col-md-3">
