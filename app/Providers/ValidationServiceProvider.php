@@ -83,6 +83,20 @@ class ValidationServiceProvider extends ServiceProvider
                 return $count < 1;
             }
         });
+
+            Validator::extend('required_serial', function ($attribute, $value, $parameters, $validator) {
+                $required = Setting::getSettings()->required_serial;
+
+                if ($required) {
+                    return !empty($value);
+                }
+
+                return true;
+            });
+            Validator::replacer('required_serial', function ($message, $attribute, $rule, $parameters) {
+                return str_replace(':attribute', $attribute, ':attribute is required.');
+            });
+
         
         /**
          * Unique if undeleted for two columns

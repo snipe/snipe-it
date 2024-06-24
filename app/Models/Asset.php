@@ -113,7 +113,7 @@ class Asset extends Depreciable
         'location_id'      => 'nullable|exists:locations,id',
         'rtd_location_id'  => 'nullable|exists:locations,id',
         'purchase_date'    => 'nullable|date|date_format:Y-m-d',
-        'serial'           => '',
+        'serial'           => 'unique_undeleted:assets,serial|required_serial',
         'purchase_cost'    => 'nullable|numeric|gte:0',
         'supplier_id'      => 'nullable|exists:suppliers,id',
         'asset_eol_date'   => 'nullable|date',
@@ -125,14 +125,6 @@ class Asset extends Depreciable
         'requestable'      => 'nullable|boolean',
     ];
 
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        $required_serial = Setting::getSettings()->required_serial;
-
-        $this->rules['serial'] = 'unique_undeleted:assets,serial|' . ($required_serial ? 'required' : 'nullable');
-    }
   /**
    * The attributes that are mass assignable.
    *
