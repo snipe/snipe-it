@@ -327,7 +327,6 @@ return [
     'labels' => 'Labels',
     'labels_title' => 'Update Label Settings',
     'labels_help' => 'Label sizes &amp; settings',
-    'purge' => 'Purge',
     'purge_keywords' => 'permanently delete',
     'purge_help' => 'Purge Deleted Records',
     'ldap_extension_warning' => 'It does not look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.',
