@@ -85,9 +85,7 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
             Validator::extend('required_serial', function ($attribute, $value, $parameters, $validator) {
-                $required = Setting::getSettings()->required_serial;
-
-                if ($required) {
+                if (Setting::getSettings()->required_serial) {
                     return !empty($value);
                 }
 
