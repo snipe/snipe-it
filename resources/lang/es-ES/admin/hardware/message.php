@@ -12,7 +12,7 @@ return [
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
-        'error'   		=> 'Equipo no creado, intentalo de nuevo. :(',
+        'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Equipo creado. :)',
         'success_linked' => 'Activo con etiqueta :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
     ],
@@ -71,7 +71,7 @@ return [
     ],
 
     'checkout' => [
-        'error'   		=> 'Equipo no asignado, intentalo de nuevo',
+        'error'   		=> 'El activo no fue asignado, por favor inténtelo de nuevo',
         'success' 		=> 'Equipo asignado.',
         'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
         'not_available' => '¡Ese artículo no está disponible para retirada!',
@@ -79,10 +79,10 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
-        'success' 		=> 'Equipo quitado correctamente.',
-        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
-        'already_checked_in'  => 'Ese activo ya se quito.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
+        'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],
 

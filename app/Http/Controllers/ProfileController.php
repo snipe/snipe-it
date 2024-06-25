@@ -28,8 +28,8 @@ class ProfileController extends Controller
      */
     public function getIndex()
     {
+        $this->authorize('self.profile');
         $user = Auth::user();
-
         return view('account/profile', compact('user'));
     }
 
@@ -42,6 +42,7 @@ class ProfileController extends Controller
      */
     public function postIndex(ImageUploadRequest $request)
     {
+        $this->authorize('self.profile');
         $user = Auth::user();
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -67,7 +68,7 @@ class ProfileController extends Controller
 
 
         if ($user->save()) {
-            return redirect()->route('profile')->with('success', trans('account.general.profile_updated'));
+            return redirect()->route('profile')->with('success', trans('account/general.profile_updated'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());

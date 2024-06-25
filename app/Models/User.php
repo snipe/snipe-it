@@ -204,6 +204,23 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->checkPermissionSection('superuser');
     }
 
+
+    /**
+     * Checks if the can edit their own profile
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.4]
+     * @return bool
+     */
+    public function canEditProfile() : bool {
+
+        $setting = Setting::getSettings();
+        if ($setting->profile_edit == 1) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Checks if the user is deletable
      *
@@ -572,7 +589,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
             if ($format=='firstname.lastname') {
                 $username = str_slug($first_name) . '.' . str_slug($last_name);
-
             } elseif ($format == 'lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
             } elseif ($format == 'firstintial.lastname') {
@@ -589,7 +605,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
                 $username = str_slug($first_name).str_slug($last_name);
             } elseif ($format == 'firstnamelastinitial') {
                 $username = str_slug(($first_name.substr($last_name, 0, 1)));
-              }
+            } elseif ($format == 'lastname.firstname') {
+                $username = str_slug($last_name).'.'.str_slug($first_name);
+            }
         }
 
         $user['first_name'] = $first_name;

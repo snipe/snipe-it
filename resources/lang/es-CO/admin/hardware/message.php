@@ -12,7 +12,7 @@ return [
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
-        'error'   		=> 'El recurso no fue creado, por favor inténtalo de nuevo. :(',
+        'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Equipo creado con éxito. :)',
         'success_linked' => 'Activo con etiqueta :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
     ],
@@ -71,7 +71,7 @@ return [
     ],
 
     'checkout' => [
-        'error'   		=> 'El recurso no fue retirado, por favor inténtalo de nuevo',
+        'error'   		=> 'El activo no fue asignado, por favor inténtelo de nuevo',
         'success' 		=> 'Equipo retirado con éxito.',
         'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.',
         'not_available' => '¡Ese equipo no está disponible para asignar!',
@@ -79,9 +79,9 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'El equipo no pudo ser asignado, por favor inténtalo de nuevo',
-        'success' 		=> 'El equipo fue asignado exitosamente.',
-        'user_does_not_exist' => 'Es usuario es invalido, por favor inténtalo de nuevo.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
         'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],

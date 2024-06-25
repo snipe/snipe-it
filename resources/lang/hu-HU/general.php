@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Vezetéknév majd keresztnév kezdőbetűje (smith_j@example.com)',
     'firstinitial.lastname' => 'Keresztnév kezdőbetűje majd vezetéknév (j.smith@example.com)',
     'firstnamelastinitial'  => 'Keresztnév majd vezetéknév kezdőbetűje (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Keresztnév',
     'first_name_format'		=> 'Keresztnév (jane@example.com)',
     'files'                 => 'Fájlok',

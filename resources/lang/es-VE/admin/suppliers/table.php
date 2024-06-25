@@ -20,7 +20,7 @@ return array(
     'suppliers'             => 'Proveedores',
     'update'                => 'Actualizar Proveedor',
     'view'                  => 'Ver Proveedor',
-    'view_assets_for'       => 'Ver Activos para',
-    'zip'                   => 'Código Postal',
+    'view_assets_for'       => 'Ver activos para',
+    'zip'                   => 'Código postal',
 
 );

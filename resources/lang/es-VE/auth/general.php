@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Enviar Enlace de Reestablecimiento de Contraseña',
-    'email_reset_password'			=> 'Enviar correo para restablecer contraseña',
+    'send_password_link'	        => 'Enviar enlace de restablecimiento de contraseña',
+    'email_reset_password'			=> 'Enviar correo',
     'reset_password'			    => 'Restablecer Contraseña',
     'saml_login'                    => 'Iniciar sesión a través de SAML',
     'login'                         => 'Iniciar Sesión',

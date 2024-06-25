@@ -18,7 +18,7 @@ return array(
     'last_name'  			=> 'Apellido',
     'location'  			=> 'Ubicación',
     'lock_passwords'		=> 'Los detalles de acceso no pueden ser cambiados en esta instalación.',
-    'manager' 				=> 'Responsable',
+    'manager' 				=> 'Supervisor',
     'managed_locations'     => 'Ubicaciones adminsitradas',
     'managed_users'         => 'Usuarios gestionados',
     'name' 					=> 'Nombre',

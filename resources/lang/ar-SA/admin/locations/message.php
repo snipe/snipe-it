@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'الموقع غير موجود.',
-    'assoc_users'	 => 'هذا الموقع مرتبط حاليا بمستخدم واحد على الأقل ولا يمكن حذفه. يرجى تحديث المستخدمين لم يعد يشيروا إلى هذا الموقع ثم أعد المحاولة. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'هذا الموقع مرتبط حاليا بمادة عرض واحدة على الأقل ولا يمكن حذفها. يرجى تحديث مواد العرض لم تعد تشير إلى هذا الموقع ثم أعد المحاولة. ',
     'assoc_child_loc'	 => 'هذا الموقع هو حاليا أحد الوالدين لموقع طفل واحد على الأقل ولا يمكن حذفه. يرجى تحديث مواقعك لم تعد تشير إلى هذا الموقع ثم أعد المحاولة.',
     'assigned_assets' => 'الأصول المعينة',

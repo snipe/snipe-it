@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Nachname_Initial des Vornamens (mustermann_e@beispiel.de)',
     'firstinitial.lastname' => 'Initial des Vornamens.Nachname (e.mustermann@beispiel.de)',
     'firstnamelastinitial'  => 'Vorname_Initial des Nachnamen (erika_m@beispiel.de)',
+    'lastnamefirstname'      => 'Nach- und Vorname (mustermann.jana@example.com)',
     'first_name'			=> 'Vorname',
     'first_name_format'		=> 'Vorname (erika@beispiel.de)',
     'files'                 => 'Dateien',

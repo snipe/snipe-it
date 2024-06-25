@@ -6,7 +6,7 @@ return array(
     'created_at' 			=> 'Creado el',
     'eol'	 				=> 'Fin de Vida',
     'modelnumber'   		=> 'Modelo No.',
-    'name'      			=> 'Nombre de Activo de Modelo',
+    'name'      			=> 'Nombre del modelo de activo',
     'numassets' 			=> 'Activos',
     'title'					=> 'Modelos de Activo',
     'update'				=> 'Actualizar Modelo de Activo',

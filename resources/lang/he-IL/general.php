@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'שם משפחה ראשי תיבות שם פרטי (smith_j@example.com)',
     'firstinitial.lastname' => 'ראשי תיבות שם פרטי שם משפחה (j.smith@example)',
     'firstnamelastinitial'  => 'שם פרטי ראשי תיבות שם משפחה (janes@example.com)',
+    'lastnamefirstname'      => 'שם משפחה שם פרטי (smith.jane@example.com)',
     'first_name'			=> 'שם פרטי',
     'first_name_format'		=> 'שם פרטי (jane@example.com)',
     'files'                 => 'קבצים',

@@ -12,7 +12,7 @@ return array(
     'create' => array(
         'error'   => 'El modelo no fue creado, por favor inténtalo de nuevo.',
         'success' => 'Modelo creado con éxito.',
-        'duplicate_set' => 'Un modelo de activo con ese nombre, fabricante y número de modelo ya existe.',
+        'duplicate_set' => 'Ya existe un modelo de equipo con el mismo nombre, fabricante y número de modelo.',
     ),
 
     'update' => array(

@@ -45,7 +45,7 @@ return [
     'select_statustype'	=> 'Pasirinkite būsenos tipą',
     'serial'			=> 'Serijos numeris',
     'status'			=> 'Būsena',
-    'tag'				=> 'Inventoriaus numeris',
+    'tag'				=> 'Inventorinis numeris',
     'update'			=> 'Įrangos atnaujinimas',
     'warranty'			=> 'Garantija',
         'warranty_expires'		=> 'Garantija baigiasi',

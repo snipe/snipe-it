@@ -12,7 +12,7 @@ return [
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
-        'error'   		=> 'El activo no ha sido creado, por favor, inténtelo de nuevo. :(',
+        'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Activo creado con éxito. :)',
         'success_linked' => 'Activo con etiqueta :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
     ],
@@ -71,7 +71,7 @@ return [
     ],
 
     'checkout' => [
-        'error'   		=> 'El activo no se ha asignado, por favor, inténtelo de nuevo',
+        'error'   		=> 'El activo no fue asignado, por favor inténtelo de nuevo',
         'success' 		=> 'Activo asignado con éxito.',
         'user_does_not_exist' => 'El usuario es inválido. Por favor, inténtelo de nuevo.',
         'not_available' => '¡Ese activo no está disponible para retirar!',
@@ -79,10 +79,10 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'El activo no se ha registrado, por favor, inténtelo de nuevo',
-        'success' 		=> 'Activo registrado con éxito.',
-        'user_does_not_exist' => 'El usuario es inválido. Por favor inténtelo de nuevo.',
-        'already_checked_in'  => 'Ese activo ya ha sido registrado.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
+        'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],
 

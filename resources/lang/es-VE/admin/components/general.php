@@ -7,10 +7,10 @@ return array(
     'cost'				=> 'Costo de Compra',
     'create'                             => 'Crear Componente',
     'edit'                             => 'Editar Componente',
-    'date'					=> 'Fecha de Compra',
-    'order'					=> 'Número de Orden',
+    'date'					=> 'Fecha de compra',
+    'order'					=> 'Número de orden',
     'remaining' 			             => 'Restante',
     'total' 			                 => 'Total',
     'update'                            => 'Actualizar Componente',
-    'checkin_limit'            => 'El importe facturado debe ser igual o menor que :assigned_qty'
+    'checkin_limit'            => 'La cantidad devuelta debe ser igual o menor que :assigned_qty'
 );

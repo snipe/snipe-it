@@ -29,7 +29,7 @@ return [
 
     'consumables'   => 'Los consumibles son cualquier cosa comprada que se usará con el tiempo. Por ejemplo, tinta de impresora o papel copiador.',
 
-    'depreciations' => 'Puede configurar depreciaciones de activos para depreciar activos basados en una depreciación lineal.',
+    'depreciations' => 'Puede configurar la depreciación de activos usando un método de línea recta.',
     
     'empty_file'    => 'El importador detecta que este archivo está vacío.'
 ];

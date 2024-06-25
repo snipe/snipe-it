@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
@@ -106,17 +107,7 @@ class SettingsController extends Controller
             $start_settings['owner_is_admin'] = false;
         }
 
-        if ((is_writable(storage_path()))
-            && (is_writable(storage_path().'/framework'))
-            && (is_writable(storage_path().'/framework/cache'))
-            && (is_writable(storage_path().'/framework/sessions'))
-            && (is_writable(storage_path().'/framework/views'))
-            && (is_writable(storage_path().'/logs'))
-        ) {
-            $start_settings['writable'] = true;
-        } else {
-            $start_settings['writable'] = false;
-        }
+        $start_settings['writable'] = $this->storagePathIsWritable();
 
         $start_settings['gd'] = extension_loaded('gd');
 
@@ -143,6 +134,19 @@ class SettingsController extends Controller
             Log::debug($e->getMessage());
             return true;
         }
+    }
+
+    /**
+     * Determine if the app storage path is writable.
+     */
+    protected function storagePathIsWritable(): bool
+    {
+        return File::isWritable(storage_path())                  &&
+            File::isWritable(storage_path('framework'))          &&
+            File::isWritable(storage_path('framework/cache'))    &&
+            File::isWritable(storage_path('framework/sessions')) &&
+            File::isWritable(storage_path('framework/views'))    &&
+            File::isWritable(storage_path('logs'));
     }
 
     /**
@@ -347,9 +351,9 @@ class SettingsController extends Controller
         $setting->load_remote = $request->input('load_remote', 0);
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
-
         $setting->depreciation_method = $request->input('depreciation_method');
         $setting->dash_chart_type = $request->input('dash_chart_type');
+        $setting->profile_edit = $request->input('profile_edit', 0);
 
         if ($request->input('per_page') != '') {
             $setting->per_page = $request->input('per_page');

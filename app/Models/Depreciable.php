@@ -173,10 +173,14 @@ class Depreciable extends SnipeModel
 
     public function depreciated_date()
     {
-        $date = date_create($this->purchase_date);
-        date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months.' months'));
+        if (($this->purchase_date) && ($this->get_depreciation())) {
+            $date = date_create($this->purchase_date);
 
-        return $date; //date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
+            return date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months.' months'));//date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
+        }
+
+        return null;
+
     }
 
     // it's necessary for unit tests

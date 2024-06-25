@@ -134,6 +134,7 @@ return [
     'lastname_firstinitial' => 'Sukunimi _ etunimen ensimmäinen kirjain (virtanen_p@example.com)',
     'firstinitial.lastname' => 'Etunimen ensimmäinen kirjain . sukunimi (p.virtanen@example.com)',
     'firstnamelastinitial'  => 'Etunimi Sukunimen ensimmäinen kirjain (paiviv@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'Etunimi',
     'first_name_format'		=> 'Etunimi (jane@example.com)',
     'files'                 => 'Tiedostot',

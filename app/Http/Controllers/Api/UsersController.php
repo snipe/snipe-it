@@ -13,6 +13,8 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\Accessory;
+use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -31,7 +33,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index(Request $request)
     {
@@ -75,7 +77,7 @@ class UsersController extends Controller
             'users.autoassign_licenses',
             'users.website',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy', 'managesUsers', 'managedLocations')
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
 
 
@@ -203,9 +205,6 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
-        if ($request->filled('location_id') != '') {
-            $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
-         }
 
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
@@ -362,7 +361,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function store(SaveUserRequest $request)
     {
@@ -409,7 +408,7 @@ class UsersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -432,7 +431,7 @@ class UsersController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(SaveUserRequest $request, $id)
     {
@@ -517,18 +516,16 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(DeleteUserRequest $request, $id)
     {
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
 
-        $this->authorize('delete', $user);
+        if ($user = User::withTrashed()->find($id)) {
 
+            $this->authorize('delete', $user);
 
-        if ($user) {
-            
             if ($user->delete()) {
 
                 // Remove the user's avatar if they have one
@@ -542,11 +539,12 @@ class UsersController extends Controller
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.delete')));
             }
+
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.error.delete')));
 
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')));
 
     }
 
@@ -556,7 +554,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return string JSON
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function assets(Request $request, $id)
     {
@@ -629,14 +627,14 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return string JSON
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function consumables(Request $request, $id)
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Consumable::class);
         $user = User::findOrFail($id);
-        $this->authorize('update', $user);
+        $this->authorize('view', $user);
         $consumables = $user->consumables;
         return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
@@ -647,7 +645,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.6.14]
      * @param $userId
-     * @return string JSON
+     * @return array
      */
     public function accessories($id)
     {
@@ -666,7 +664,7 @@ class UsersController extends Controller
      * @author [N. Mathar] [<snipe@snipe.net>]
      * @since [v5.0]
      * @param $userId
-     * @return string JSON
+     * @return array | \Illuminate\Http\JsonResponse
      */
     public function licenses($id)
     {
@@ -729,7 +727,7 @@ class UsersController extends Controller
      * @author [Juan Font] [<juanfontalonso@gmail.com>]
      * @since [v4.4.2]
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function getCurrentUserInfo(Request $request)
     {
@@ -742,12 +740,14 @@ class UsersController extends Controller
      * @author [E. Taylor] [<dev@evantaylor.name>]
      * @param int $userId
      * @since [v6.0.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function restore($userId = null)
+    public function restore($userId)
     {
+        $this->authorize('delete', User::class);
 
         if ($user = User::withTrashed()->find($userId)) {
+
             $this->authorize('delete', $user);
 
             if ($user->deleted_at == '') {
@@ -766,8 +766,6 @@ class UsersController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);
             }
 
-            // Check validation to make sure we're not restoring a user with the same username as an existing user
-            return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found')), 200);
