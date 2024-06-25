@@ -70,17 +70,6 @@
         </li>
 
         <li>
-          <a href="#notes" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="far fa-file fa-2x" aria-hidden="true"></i>
-            </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.notes') }}
-              {!! ($user->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($user->uploads->count()).'</span>' : '' !!}
-            </span>
-          </a>
-        </li>
-
-        <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
                 <i class="far fa-file fa-2x"></i>
