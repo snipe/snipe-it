@@ -656,7 +656,7 @@
     <!-- Add Note -->
     @can('edit', \App\Models\License::class)
       <div class="text-center" style="padding-top: 5px;">
-        <a href='{{ route('modal.show', 'add-note') }}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
+        <a href='{{ route('modal.show', 'add-note') }}?type=license&id={{$license->id}}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
       </div>
     @endcan
 

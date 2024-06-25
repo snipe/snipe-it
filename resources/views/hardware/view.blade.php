@@ -119,17 +119,6 @@
                     </li>
 
                     <li>
-                        <a href="#notes" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                            <i class="far fa-file-text fa-2x" aria-hidden="true"></i>
-                          </span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.notes') }}
-                                {!! ($asset->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->uploads->count()).'</span>' : '' !!}
-                          </span>
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="#files" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
                             <i class="far fa-file fa-2x" aria-hidden="true"></i>
@@ -1274,7 +1263,7 @@
                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                        }'
 
-                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset') }}"
+                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
                       data-cookie-id-table="assetHistory"
                       data-cookie="true">
                 <thead>
