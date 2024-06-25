@@ -1300,34 +1300,6 @@
           </div> <!-- /.row -->
         </div> <!-- /.tab-pane history -->
 
-        <!-- Notes tab -->
-        <div class="tab-pane fade" id="notes">
-            <div class="row">
-                <div class="col-md-12">
-                    <table
-                        class="table table-striped snipe-table"
-                        id="notes"
-                        data-pagination="true"
-                        data-id-table="comments"
-                        data-search="false"
-                        data-side-pagination="client"
-                        data-show-columns="true"
-                        data-show-fullscreen="true"
-                        data-show-refresh="true"
-                        data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset', 'action_type' => 'note']) }}"
-                    >
-                            <thread>
-                                <tr>
-                                    <th></th>
-                                </tr>
-                            </thread>
-                            <tbody>
-                            </tbody>
-                    </table>
-                </div>
-            </div>
-        </div> <!--/end notes tab -->
-
         <!-- Files tab -->
         <div class="tab-pane fade" id="files">
           <div class="row">

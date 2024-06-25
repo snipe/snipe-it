@@ -142,32 +142,6 @@
                             </div><!--tab history-->
                      </div>
 
-                    <!-- Notes tab -->
-                    <div class="tab-pane fade" id="Notes">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table
-                                        class="table table-striped snipe-table"
-                                        id="notes"
-                                        data-pagination="true"
-                                        data-id-table="notes"
-                                        data-search="false"
-                                        data-side-pagination="server"
-                                        data-show-columns="true"
-                                        data-show-fullscreen="true"
-                                        data-show-refresh="true">
-                                    <thread>
-                                        <tr>
-                                            <th></th>
-                                        </tr>
-                                    </thread>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div><!-- /notes-tab -->
-
                     @can('accessories.files', $accessory)
                         <div class="tab-pane" id="files">
 

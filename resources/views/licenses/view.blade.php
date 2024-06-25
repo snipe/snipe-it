@@ -456,32 +456,6 @@
           </div> <!--/.row-->
         </div> <!-- /.tab-pane -->
 
-        <!-- Notes tab -->
-        <div class="tab-pane fade" id="notes">
-          <div class="row">
-            <div class="col-md-12">
-              <table
-                      class="table table-striped snipe-table"
-                      id="notes"
-                      data-pagination="true"
-                      data-id-table="notes"
-                      data-search="false"
-                      data-side-pagination="client"
-                      data-show-columns="true"
-                      data-show-fullscreen="true"
-                      data-show-refresh="true">
-                <thread>
-                  <tr>
-                    <th></th>
-                  </tr>
-                </thread>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div><!-- /notes-tab -->
-
         @can('licenses.files', $license)
         <div class="tab-pane" id="files">
           <div class="table-responsive">
