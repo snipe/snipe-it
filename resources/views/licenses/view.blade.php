@@ -647,7 +647,7 @@
             </a>
         </span>
       @else
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
           {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
         </a>
       @endif
@@ -655,7 +655,7 @@
 
     <!-- Add Note -->
     @can('edit', \App\Models\License::class)
-      <div class="text-center" style="padding-top: 5px;">
+      <div class="text-center" style="margin-bottom: 25px;">
         <a href='{{ route('modal.show', 'add-note') }}?type=license&id={{$license->id}}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
       </div>
     @endcan

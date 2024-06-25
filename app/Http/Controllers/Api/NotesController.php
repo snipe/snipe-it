@@ -13,6 +13,7 @@ class NotesController extends Controller
 {
     public function store(Request $request)
     {
+        //we're calling asset here, and not the 4 types ->
         $item=Asset::findOrFail($request->input("id"));
         event(new NoteAdded($item, Auth::user(), $request->input("note")));
 
