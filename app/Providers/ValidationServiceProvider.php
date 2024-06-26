@@ -83,17 +83,24 @@ class ValidationServiceProvider extends ServiceProvider
                 return $count < 1;
             }
         });
+        /**
+         * Required or nullable field
+         *
+         * This checks for a boolean if something should be required. passing the boolean column name from the settings as the parameter
+         * will check the settings table and apply a requirement if true.
+         */
+        Validator::extend('potentially_required', function ($attribute, $value, $parameters, $validator) {
+            $required_bool = $parameters[0] ?? null;
 
-            Validator::extend('required_serial', function ($attribute, $value, $parameters, $validator) {
-                if (Setting::getSettings()->required_serial) {
-                    return !empty($value);
-                }
+            if ($required_bool && Setting::getSettings()->{$required_bool}) {
+                return !empty($value);
+            }
 
-                return true;
-            });
-            Validator::replacer('required_serial', function ($message, $attribute, $rule, $parameters) {
-                return str_replace(':attribute', $attribute, ':attribute is required.');
-            });
+            return true;
+        });
+        Validator::replacer('potentially_required', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, ':attribute is required.');
+        });
 
         
         /**
