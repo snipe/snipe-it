@@ -163,6 +163,7 @@ class Saml
             OneLogin_Saml2_Utils::setProxyVars(request()->isFromTrustedProxy());
 
             data_set($settings, 'sp.entityId', config('app.url'));
+            data_set($settings, 'baseurl', config('app.url') . '/saml');
             data_set($settings, 'sp.assertionConsumerService.url', route('saml.acs'));
             data_set($settings, 'sp.singleLogoutService.url', route('saml.sls'));
             data_set($settings, 'sp.x509cert', $setting->saml_sp_x509cert);
