@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Загрузить изображение',
     'filetypes_accepted_help'    => 'Разрешенный тип файлов :types. Максимальный допустимый размер загружаемых файлов :size.|Разрешенные типы файлов :types. Максимальный допустимый размер загружаемых файлов :size.',
     'filetypes_size_help'   => 'Максимальный размер файла - :size.',
-    'image_filetypes_help'  => 'Допустимые типы файлов - pg, webp, png, gif, и svg. Максимальный размер файла :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Нечитаемый файл изображения. Допустимые типы файлов: jpg, webp, png, gif и svg. Медиа тип этого файла: :mimetype.',
     'import'         	    => 'Импорт',
     'import_this_file'      => 'Сопоставить поля и обработать этот файл',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'восстановлено',
     'restore'				=> 'Восстановить',
     'requestable_models'    => 'Запрашиваемые модели',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Запрошено',
     'requested_date'        => 'Запрашиваемая дата',
     'requested_assets'      => 'Запрашиваемые активы',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'В разрешении отказано. Вы не можете обновить информацию пользователя для суперадминов в демо.',
     'pwd_reset_not_sent' => 'Пользователь не активирован, синхронизирован LDAP или не имеет адреса электронной почты',
     'error_sending_email' => 'Ошибка при отправке письма',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

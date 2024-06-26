@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'رفع صورة',
     'filetypes_accepted_help'    => 'نوع الملف المقبول هو :types. الحد الأقصى لحجم التحميل المسموح به هو :size.|أنواع الملف المقبول هي :types. الحد الأقصى لحجم التحميل المسموح به هو :size.',
     'filetypes_size_help'   => 'الحد الأقصى لحجم الرفع المسموح به هو :size.',
-    'image_filetypes_help'  => 'أنواع الملفات المقبولة هي jpg، webpp، png، gif، svg. الحد الأقصى المسموح به للتحميل هو :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'ملف الصورة هذا غير قابل للقراءة. أنواع الملفات المقبولة هي jpg، webpp، png، gif، svg. نوع هذا الملف هو: :mimetype.',
     'import'         	    => 'استيراد',
     'import_this_file'      => 'حقول الخريطة ومعالجة هذا الملف',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'المعاد',
     'restore'				=> 'إستعادة',
     'requestable_models'    => 'النماذج المطلوبة',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'طلب',
     'requested_date'        => 'تاريخ الطلب',
     'requested_assets'      => 'الأصول المطلوبة',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'تم رفض الإذن. لا يمكنك تحديث معلومات المستخدم للمديرين الخارقين في العرض التجريبي.',
     'pwd_reset_not_sent' => 'المستخدم غير مفعل، أو مزامنة LDAP أو ليس لديه عنوان بريد إلكتروني',
     'error_sending_email' => 'خطأ في إرسال البريد الإلكتروني',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

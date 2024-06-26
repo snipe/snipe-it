@@ -14,6 +14,8 @@ return array(
         'success'               => 'Has iniciado sesión con éxito.',
         'code_required'         => 'El código de doble factor es necesario.',
         'invalid_code'          => 'El código de doble factor no es válido.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

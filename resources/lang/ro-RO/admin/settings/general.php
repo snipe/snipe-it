@@ -327,7 +327,6 @@ return [
     'labels' => 'Etichete',
     'labels_title' => 'Actualizați setările etichetei',
     'labels_help' => 'Setări etichete &amp;',
-    'purge' => 'Purge',
     'purge_keywords' => 'şterge permanent',
     'purge_help' => 'Eliminați înregistrările șterse',
     'ldap_extension_warning' => 'Nu arată ca și cum extensia LDAP este instalată sau activată pe acest server. Încă puteți salva setările, dar va trebui să activați extensia LDAP pentru PHP înainte ca logarea sau sincronizarea LDAP să funcționeze.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Șofer bază de date',
     'bs_table_storage' => 'Stocare tabel',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

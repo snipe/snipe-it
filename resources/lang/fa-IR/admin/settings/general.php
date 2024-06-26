@@ -459,7 +459,6 @@ return [
 ',
     'labels_help' => 'اندازه برچسب &amp; تنظیمات
 ',
-    'purge' => 'پاکسازی',
     'purge_keywords' => 'برای همیشه حذف کنید
 ',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
@@ -520,5 +519,7 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

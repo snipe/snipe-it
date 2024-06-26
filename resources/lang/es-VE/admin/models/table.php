@@ -9,9 +9,9 @@ return array(
     'name'      			=> 'Nombre del modelo de activo',
     'numassets' 			=> 'Activos',
     'title'					=> 'Modelos de Activo',
-    'update'				=> 'Actualizar Modelo de Activo',
+    'update'				=> 'Actualizar modelo de activo',
     'view'					=> 'Ver Modelos de Activo',
-    'update'				=> 'Actualizar Modelo de Activo',
+    'update'				=> 'Actualizar modelo de activo',
     'clone'				=> 'Clonar Modelo',
     'edit'				=> 'Editar Modelo',
 );

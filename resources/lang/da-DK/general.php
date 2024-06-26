@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Upload billede',
     'filetypes_accepted_help'    => 'Accepteret filtype er :types. Filstørrelsen må højst være :size.|Accepterede filtyper er :types. Filstørrelsen må højst være :size.',
     'filetypes_size_help'   => 'Filstørrelsen må højst være :size.',
-    'image_filetypes_help'  => 'Tilladte filtyper er jpg, png, gif, og svg. Maximalt tilladte upload størrelse er :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Denne billedfil var ikke læsbar. Accepterede filtyper er jpg, webp, png, gif og svg. Mimetypen for denne fil er: :mimetype.',
     'import'         	    => 'Importér',
     'import_this_file'      => 'Kortfelter og behandl denne fil',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'gendannet',
     'restore'				=> 'Gendan',
     'requestable_models'    => 'Modeller der kan anmodes om',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Anmodet',
     'requested_date'        => 'Anmodningsdato',
     'requested_assets'      => 'Anmodede aktiver',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Tilladelse nægtet. Du kan ikke opdatere brugerinformation for superadmins på demoen.',
     'pwd_reset_not_sent' => 'Brugeren er ikke aktiveret, er LDAP-synkroniseret, eller har ikke en e-mailadresse',
     'error_sending_email' => 'Fejl ved afsendelse af e-mail',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

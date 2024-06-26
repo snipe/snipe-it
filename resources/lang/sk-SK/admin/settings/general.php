@@ -327,7 +327,6 @@ return [
     'labels' => 'Štítky',
     'labels_title' => 'Aktualizovať nastavenia štítka',
     'labels_help' => 'Veľkosti štítka &amp; nastavenia',
-    'purge' => 'Purge',
     'purge_keywords' => 'natrvalo odstrániť',
     'purge_help' => 'Odstrániť odmazané záznamy',
     'ldap_extension_warning' => 'It does not look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -18,7 +18,7 @@ return array(
         ),
 
         'delete' => array(
-            'confirm'   	=> '¿Estás seguro de querer borrar este campo?',
+            'confirm'   	=> '¿Está seguro de que quiere eliminar este campo?',
             'error'   => 'Hubo un problema al borrar el campo. Por favor, inténtelo de nuevo.',
             'success' => 'El campo fue borrado con éxito.',
             'in_use'   => 'Campo aún en uso.',
@@ -41,7 +41,7 @@ return array(
         ),
 
         'delete' => array(
-            'confirm'   	=> '¿Estás seguro de querer eliminar este campo?',
+            'confirm'   	=> '¿Está seguro de que quiere eliminar este grupo de campos?',
             'error'   => 'Hubo un problema al eliminar el Fieldset. Por favor, inténtelo de nuevo.',
             'success' => 'El Fieldset ha sido borrado con éxito.',
             'in_use'   => 'Este Fieldset aún está en uso.',

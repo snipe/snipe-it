@@ -14,6 +14,8 @@ return array(
         'success'               => 'Anda telah berhasil login.',
         'code_required'         => 'Kode Two-factor diperlukan.',
         'invalid_code'          => 'Kode Two-factor tidak valid.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

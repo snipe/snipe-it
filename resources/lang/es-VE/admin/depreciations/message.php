@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro de que quieres borrar esta clase de depreciación?',
+        'confirm'   => '¿Está seguro de que desea eliminar esta clase de depreciación?',
         'error'   => 'Hubo un problema borrando la clase de depreciación. Por favor inténtalo de nuevo.',
         'success' => 'La clase de depreciación ha sido actualizada con éxito.'
     )

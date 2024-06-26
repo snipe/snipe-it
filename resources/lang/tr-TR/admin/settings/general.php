@@ -328,7 +328,6 @@ return [
     'labels' => 'Etiket',
     'labels_title' => 'Etiket ayarlarını güncelle',
     'labels_help' => 'Etiket tasarımı &amp;',
-    'purge' => 'Temizle',
     'purge_keywords' => 'kalıcı olarak sil',
     'purge_help' => 'Silinen kayıtları temizle',
     'ldap_extension_warning' => 'Bu sunucuda LDAP uzantısı yüklü veya etkin değil gibi görünüyor. Ayarlarınızı yine de kaydedebilirsiniz, ancak LDAP senkronizasyonu veya oturum açma işleminin çalışması için PHP için LDAP uzantısını etkinleştirmeniz gerekir.',
@@ -375,5 +374,7 @@ return [
     'database_driver' => 'Veritabanı Sürücüsü',
     'bs_table_storage' => 'Tablo Depolama',
     'timezone' => 'Zaman Dilimi',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

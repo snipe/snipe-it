@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> '上传图片',
     'filetypes_accepted_help'    => '可接受的文件类型是 :types. 最大允许上传大小为 :size.|可接受的文件类型是 :types. 最大允许上传大小为 :size.',
     'filetypes_size_help'   => '允许最大上传文件的大小为 :size.',
-    'image_filetypes_help'  => '接受jpg，png，gif和svg类型的文件。文件大小应小于 :size。',
+    'image_filetypes_help'  => '可接受的文件类型是 jpg、webp、png、gif、svg和avif。最大允许上传大小为 :size.',
     'unaccepted_image_type'  => '此图像文件不可读。可接受的文件类型为jpg、webp、png、gif和svg。此文件的 mimetype 类型为：:mimetype。',
     'import'         	    => '导入',
     'import_this_file'      => '映射字段并处理此文件',
@@ -240,6 +240,7 @@ return [
     'restored'				=> '恢复',
     'restore'				=> '还原',
     'requestable_models'    => '可申领的型号',
+    'requestable_items'     => '可申领名目',
     'requested'				=> '已申请',
     'requested_date'        => '申领日期',
     'requested_assets'      => '已申领资产',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => '权限被拒绝。您不能更新演示上超级管理员的用户信息。',
     'pwd_reset_not_sent' => '用户未激活，LDAP同步，或没有电子邮件地址',
     'error_sending_email' => '发送邮件时出错',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

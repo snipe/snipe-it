@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Nahrát obrázek',
     'filetypes_accepted_help'    => 'Přijatý typ souboru je :types. Maximální povolená velikost nahrávání je :size.|Přijaté typy souborů jsou :types. Maximální povolená velikost nahrávání je :size.',
     'filetypes_size_help'   => 'Maximální povolená velikost nahrávání je :size.',
-    'image_filetypes_help'  => 'Podporované typy souborů jsou jpg, png, gif, a svg. Velikost může být nejvýše :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Soubor s obrázkem nebyl čitelný. Přijatelné druhy souborů jsou jpg, webp, png, gif, a svg. Tento soubor je druhu: :mimetype.',
     'import'         	    => 'Import',
     'import_this_file'      => 'Mapa polí a zpracovávat tento soubor',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'obnoveno',
     'restore'				=> 'Obnovit',
     'requestable_models'    => 'Požadované modely',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Požadováno',
     'requested_date'        => 'Požadované datum',
     'requested_assets'      => 'Vyžádaný majetek',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Oprávnění bylo odepřeno. Nemůžete aktualizovat informace o uživateli pro superadminy na demo.',
     'pwd_reset_not_sent' => 'Uživatel není aktivován, LDAP je synchronizován, nebo nemá e-mailovou adresu',
     'error_sending_email' => 'Chyba při odesílání e-mailu',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

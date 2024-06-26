@@ -327,7 +327,6 @@ return [
     'labels' => 'Ετικέτες',
     'labels_title' => 'Ενημέρωση Ρυθμίσεων Ετικετών',
     'labels_help' => 'Label sizes &amp; settings',
-    'purge' => 'Purge',
     'purge_keywords' => 'μόνιμη διαγραφή',
     'purge_help' => 'Καθαρισμός αρχείων που έχουν διαγραφεί',
     'ldap_extension_warning' => 'Δεν φαίνεται ότι η επέκταση LDAP είναι εγκατεστημένη ή ενεργοποιημένη σε αυτόν τον διακομιστή. Μπορείτε ακόμα να αποθηκεύσετε τις ρυθμίσεις σας, αλλά θα πρέπει να ενεργοποιήσετε την επέκταση LDAP για PHP πριν το συγχρονισμό LDAP ή σύνδεση θα λειτουργήσει.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Οδηγός Βάσης Δεδομένων',
     'bs_table_storage' => 'Αποθηκευτικός Χώρος',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

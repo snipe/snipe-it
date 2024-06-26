@@ -15,7 +15,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro de que quieres borrar este componente?',
+        'confirm'   => '¿Está seguro de que desea eliminar este componente?',
         'error'   => 'Hubo un problema al borrar el componente. Por favor inténtalo de nuevo.',
         'success' => 'El componente se ha borrado con éxito.'
     ),

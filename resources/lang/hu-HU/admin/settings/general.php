@@ -327,7 +327,6 @@ return [
     'labels' => 'Címkék',
     'labels_title' => 'Címke beállítások frissítése',
     'labels_help' => 'Címke méretek &amp; beállításai',
-    'purge' => 'Tisztítás',
     'purge_keywords' => 'véglegesen törölni',
     'purge_help' => 'Törölt rekordok kitisztítása',
     'ldap_extension_warning' => 'Úgy tűnik, hogy az LDAP-bővítmény nincs telepítve vagy engedélyezve ezen a kiszolgálón. A beállításokat továbbra is elmentheti, de az LDAP-szinkronizálás vagy a bejelentkezés előtt engedélyeznie kell az LDAP-bővítményt a PHP számára.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Adatbázis Illesztő',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Időzóna',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

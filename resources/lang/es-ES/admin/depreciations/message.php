@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Estas seguro que quieres eliminar la Amortización?',
+        'confirm'   => '¿Está seguro de que desea eliminar esta clase de depreciación?',
         'error'   => 'Amortización no eliminada, intentalo de nuevo.',
         'success' => 'Amortización eliminada correctamente.'
     )

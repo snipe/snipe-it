@@ -1,9 +1,9 @@
 <?php
 
     return [
-        'not_found'                    => 'El Mantenimiento de Equipo que buscaba no se encontró!',
+        'not_found'                    => '¡El mantenimiento del activo que estaba buscando no se encontró!',
         'delete'                       => [
-            'confirm' => '¿Está seguro que desea eliminar este mantenimiento de equipo?',
+            'confirm' => '¿Está seguro de que desea eliminar el mantenimiento de este activo?',
             'error'   => 'Hubo un problema al eliminar el mantenimiento de equipo. Por favor intente nuevamente.',
             'success' => 'El mantenimiento de equipo fue eliminado de manera exitosa.',
         ],

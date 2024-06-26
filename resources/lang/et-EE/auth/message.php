@@ -14,6 +14,8 @@ return array(
         'success'               => 'Oled edukalt sisse logitud.',
         'code_required'         => 'Kahe-astmeline autentimiskood on vajalik.',
         'invalid_code'          => 'Kahe-astmeline autentimiskood on vale.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

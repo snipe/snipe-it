@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Lähetä kuva',
     'filetypes_accepted_help'    => 'Hyväksytty tiedostotyyppi on :types. Suurin sallittu tiedostokoko on :size. Hyväksytyt tiedostotyypit ovat :types. Suurin sallittu tiedostokoko on :size.',
     'filetypes_size_help'   => 'Suurin sallittu tiedostokoko on :size.',
-    'image_filetypes_help'  => 'Hyväksytyt tiedostotyyppejä ovat jpg, png, gif ja svg. Suurin sallittu lähetyskoko on :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Kuvatiedostoa ei voitu lukea. Hyväksytyt tiedostotyypit ovat jpg, webp, png, gif ja svg. Tämän tiedoston mimetype on: :mimetype.',
     'import'         	    => 'Tuo tiedot',
     'import_this_file'      => 'Kartta kentät ja käsitellä tätä tiedostoa',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'palautettu',
     'restore'				=> 'Palauta',
     'requestable_models'    => 'Pyydettävissä olevat mallit',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Pyydetty',
     'requested_date'        => 'Pyynnön päivämäärä',
     'requested_assets'      => 'Pyydetyt laitteet',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Lupa evätty. Et voi päivittää supervalvojien käyttäjätietoja demoissa.',
     'pwd_reset_not_sent' => 'Käyttäjä ei ole aktivoitu, LDAP on synkronoitu tai hänellä ei ole sähköpostiosoitetta',
     'error_sending_email' => 'Virhe sähköpostin lähettämisessä',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

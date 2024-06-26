@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'បង្ហោះរូបភាព',
     'filetypes_accepted_help'    => 'ប្រភេទឯកសារដែលទទួលយកគឺ៖ ប្រភេទ. ទំហំផ្ទុកឡើងអតិបរមាដែលអនុញ្ញាតគឺ :size.|ប្រភេទឯកសារដែលទទួលយកគឺ :types. ទំហំផ្ទុកឡើងអតិបរមាដែលអនុញ្ញាតគឺ៖ ទំហំ.',
     'filetypes_size_help'   => 'ទំហំផ្ទុកឡើងអតិបរមាដែលអនុញ្ញាតគឺ :ទំហំ.',
-    'image_filetypes_help'  => 'ប្រភេទឯកសារដែលទទួលយកគឺ jpg, webp, png, gif និង svg ។ ទំហំផ្ទុកឡើងអតិបរមាដែលអនុញ្ញាតគឺ៖ ទំហំ.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'ឯកសាររូបភាពនេះមិនអាចអានបានទេ។ ប្រភេទឯកសារដែលទទួលយកគឺ jpg, webp, png, gif និង svg ។ ប្រភេទ mime នៃឯកសារនេះគឺ៖ :mimetype.',
     'import'         	    => 'នាំចូល',
     'import_this_file'      => 'Map fields and process this file',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'restored',
     'restore'				=> 'ស្តារ',
     'requestable_models'    => 'Requestable Models',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'បានស្នើសុំ',
     'requested_date'        => 'Requested Date',
     'requested_assets'      => 'Requested Assets',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

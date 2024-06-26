@@ -327,7 +327,6 @@ return [
     'labels' => 'التسميات',
     'labels_title' => 'تحديث إعدادات التسمية',
     'labels_help' => 'أحجام التسمية &amp; الإعدادات',
-    'purge' => 'Purge',
     'purge_keywords' => 'حذف نهائيًا',
     'purge_help' => 'تطهير السجلات المحذوفة',
     'ldap_extension_warning' => 'لا يبدو أن ملحق LDAP مثبت أو مفعّل على هذا الخادم. لا يزال بإمكانك حفظ الإعدادات الخاصة بك، ولكن ستحتاج إلى تمكين ملحق LDAP لـ PHP قبل أن تعمل مزامنة LDAP أو تسجيل الدخول.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'سائق قاعدة البيانات',
     'bs_table_storage' => 'تخزين الجدول',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -327,7 +327,6 @@ return [
     'labels' => 'crwdns6459:0crwdne6459:0',
     'labels_title' => 'crwdns6461:0crwdne6461:0',
     'labels_help' => 'crwdns6463:0crwdne6463:0',
-    'purge' => 'crwdns6465:0crwdne6465:0',
     'purge_keywords' => 'crwdns6467:0crwdne6467:0',
     'purge_help' => 'crwdns6469:0crwdne6469:0',
     'ldap_extension_warning' => 'crwdns6471:0crwdne6471:0',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'crwdns11827:0crwdne11827:0',
     'bs_table_storage' => 'crwdns11829:0crwdne11829:0',
     'timezone' => 'crwdns11831:0crwdne11831:0',
+    'profile_edit'          => 'crwdns12280:0crwdne12280:0',
+    'profile_edit_help'          => 'crwdns12282:0crwdne12282:0',
 
 ];

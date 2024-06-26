@@ -22,7 +22,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Está seguro que desea eliminar este fabricante?',
+        'confirm'   => '¿Está seguro de que desea eliminar este fabricante?',
         'error'   => 'Hubo un problema al eliminar el fabricante. Por favor, inténtelo de nuevo.',
         'success' => 'El fabricante se ha eliminado correctamente.'
     )

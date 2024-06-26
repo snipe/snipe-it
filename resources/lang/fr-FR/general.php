@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Charger une image',
     'filetypes_accepted_help'    => 'Le type de fichier accepté est :types. La taille maximale autorisée est :size.|Les types de fichiers acceptés sont :types. La taille maximale autorisée est :size.',
     'filetypes_size_help'   => 'La taille maximale autorisée des téléversements est :size.',
-    'image_filetypes_help'  => 'Les types de fichiers acceptés sont jpg, webp, png, gif et svg. Taille maximale est de:size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Ce fichier image n\'est pas lisible. Les types de fichiers acceptés sont jpg, webp, png, gif et svg. Le type mimetype de ce fichier est : :mimetype.',
     'import'         	    => 'Importer',
     'import_this_file'      => 'Champs de la carte et traiter ce fichier',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'restauré',
     'restore'				=> 'Restaurer',
     'requestable_models'    => 'Modèles demandables',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Demandé',
     'requested_date'        => 'Date de la demande',
     'requested_assets'      => 'Actifs demandés',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Autorisation refusée. Vous ne pouvez pas mettre à jour les informations de l\'utilisateur pour les super-admins sur la démo.',
     'pwd_reset_not_sent' => 'L\'utilisateur n\'est pas activé, est synchronisé avec LDAP ou n\'a pas d\'adresse e-mail',
     'error_sending_email' => 'Erreur lors de l\'envoi de l\'e-mail',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

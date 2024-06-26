@@ -64,7 +64,7 @@ return [
 
 
     'delete' => [
-        'confirm'   	=> '¿Estás seguro de que quieres borrar este archivo?',
+        'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Ha habido un problema eliminando el activo. Por favor, inténtelo de nuevo.',
         'nothing_updated'   => 'Ningún activo se seleccionó, así que nada fue borrado.',
         'success' 		=> 'El activo fue borrado con éxito.',

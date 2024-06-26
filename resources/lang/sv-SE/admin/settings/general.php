@@ -327,7 +327,6 @@ return [
     'labels' => 'Etiketter',
     'labels_title' => 'Uppdatera etikettinställningar',
     'labels_help' => 'Etikettstorlekar &amp; inställningar',
-    'purge' => 'Rensa',
     'purge_keywords' => 'radera permanent',
     'purge_help' => 'Rensa borttagna poster',
     'ldap_extension_warning' => 'Det ser inte ut som LDAP-tillägget är installerat eller aktiverat på denna server. Du kan fortfarande spara dina inställningar, men du måste aktivera LDAP-tillägget för PHP innan LDAP-synkronisering eller inloggning fungerar.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Databasdrivrutinen',
     'bs_table_storage' => 'Tabell Lagring',
     'timezone' => 'Tidszon',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -327,7 +327,6 @@ return [
     'labels' => 'Мітки',
     'labels_title' => 'Оновити налаштування Міток',
     'labels_help' => 'Розміри етикеток і налаштування',
-    'purge' => 'Purge',
     'purge_keywords' => 'остаточно видалити',
     'purge_help' => 'Знищити вилучені записи',
     'ldap_extension_warning' => 'Схоже, що розширення LDAP встановлено або увімкнено на цьому сервері. Ви все ще можете зберігати ваші налаштування, але вам потрібно буде увімкнути розширення LDAP для PHP перед синхронізацією LDAP або можливістю входу в систему.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Драйвер баз даних',
     'bs_table_storage' => 'Складський стіл',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

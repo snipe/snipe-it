@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de querer eliminar este Proveedor?',
+        'confirm'   => '¿Está seguro de que desea eliminar este proveedor?',
         'error'   => 'Ha habido un problema eliminando el Proveedor. Intentalo de nuevo.',
         'success' => 'Proveedor eliminado.',
         'assoc_assets'	 => 'Este proveedor esta asociado a uno o más modelos y no puede ser eliminado. ',

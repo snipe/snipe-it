@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Μεταφόρτωση εικόνας',
     'filetypes_accepted_help'    => 'Ο τύπος αρχείου είναι :types. Το μέγιστο επιτρεπόμενο μέγεθος μεταφορτώσεων είναι :size."Οι αποδεκτοί τύποι αρχείων είναι :types. Το μέγιστο επιτρεπόμενο μέγεθος αποστολής είναι :size.',
     'filetypes_size_help'   => 'Το μέγιστο επιτρεπόμενο μέγεθος ανεβάσματος είναι :size.',
-    'image_filetypes_help'  => 'Οι αποδεκτοί τύποι αρχείων είναι jpg, webp, png, gif και svg. Το μέγιστο επιτρεπόμενο μέγεθος ανεβάσματος είναι :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Αυτό το αρχείο εικόνας δεν ήταν αναγνώσιμο. Οι αποδεκτοί τύποι αρχείων είναι jpg, webp, png, gif, και svg. Ο τύπος mime αυτού του αρχείου είναι: :mimetype.',
     'import'         	    => 'Εισαγωγή',
     'import_this_file'      => 'Χάρτης πεδίων και επεξεργασία αυτού του αρχείου',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'επαναφέρθηκε',
     'restore'				=> 'Επαναφορά',
     'requestable_models'    => 'Απαιτούμενα Μοντέλα',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Ζητήθηκαν',
     'requested_date'        => 'Ημερομηνία Που Ζητήθηκε',
     'requested_assets'      => 'Ζητούμενα Περιουσιακά Στοιχεία',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Δεν επιτρέπεται η χορήγηση άδειας. Δεν μπορείτε να ενημερώσετε τις πληροφορίες χρήστη για superadmins στο demo.',
     'pwd_reset_not_sent' => 'Ο χρήστης δεν είναι ενεργοποιημένος, είναι LDAP συγχρονισμένος ή δεν έχει διεύθυνση ηλεκτρονικού ταχυδρομείου',
     'error_sending_email' => 'Σφάλμα αποστολής email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

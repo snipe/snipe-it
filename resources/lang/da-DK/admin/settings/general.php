@@ -327,7 +327,6 @@ return [
     'labels' => 'Etiketter',
     'labels_title' => 'Opdater Etiketindstillinger',
     'labels_help' => 'Etiketstørrelser &amp; indstillinger',
-    'purge' => 'Purge',
     'purge_keywords' => 'slet permanent',
     'purge_help' => 'Ryd slettet poster',
     'ldap_extension_warning' => 'Det ser ikke ud som om LDAP- udvidelsen er installeret eller aktiveret på denne server. Du kan stadig gemme dine indstillinger, men du bliver nødt til at aktivere LDAP-udvidelsen til PHP, før LDAP-synkronisering eller login vil virke.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Database Chauffør',
     'bs_table_storage' => 'Lagerplads I Tabel',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

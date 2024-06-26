@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Carregar Imagem',
     'filetypes_accepted_help'    => 'O tipo de arquivo aceito é :types. O tamanho máximo de upload permitido é :size.abroad. tipos de arquivos aceitos são :types. O tamanho máximo de upload permitido é :size.',
     'filetypes_size_help'   => 'O tamanho máximo de upload permitido é :size.',
-    'image_filetypes_help'  => 'Os tipos de ficheiros aceites são jpg, webp, png, gif e svg. O tamanho máximo permitido para envio é de :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Este ficheiro de imagem não era legível. Tipos de ficheiros aceites são jpg, webp, png, gif e svg. O mimetype deste ficheiro é: :mimetype.',
     'import'         	    => 'Importar',
     'import_this_file'      => 'Mapear os campos e processar este arquivo',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'restaurado',
     'restore'				=> 'Restaurar',
     'requestable_models'    => 'Modelos Solicitados',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Solicitado',
     'requested_date'        => 'Data de solicitação',
     'requested_assets'      => 'Artigos solicitados',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permissão negada. Você não pode atualizar informações de usuário para superadministradores na demonstração.',
     'pwd_reset_not_sent' => 'Usuário não está ativado, está sincronizado com o LDAP ou não tem um endereço de e-mail',
     'error_sending_email' => 'Erro ao enviar email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
