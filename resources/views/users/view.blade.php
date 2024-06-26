@@ -511,6 +511,19 @@
                         </a>
                       </div>
                     </div>
+                      @if($user->department->manager)
+                        <div class="row">
+                          <div class="col-md-3">
+                            {{ trans('general.department') }}
+                            {{ trans('admin/departments/table.manager') }}
+                          </div>
+                          <div class="col-md-9">
+                            <a href="{{ route('users.show', $user->department->manager) }}">
+                              {{ $user->department->manager->full_name }}
+                            </a>
+                          </div>
+                        </div>
+                      @endif
                     @endif
 
                     @if ($user->created_at)
