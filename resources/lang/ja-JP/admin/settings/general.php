@@ -330,7 +330,6 @@ return [
     'labels' => 'ラベル',
     'labels_title' => 'ラベル設定を更新',
     'labels_help' => 'ラベルサイズ &amp; 設定',
-    'purge' => '消去',
     'purge_keywords' => '恒久的に削除',
     'purge_help' => '削除したレコードを消去',
     'ldap_extension_warning' => 'このサーバーでは、LDAP 拡張モジュールがインストールされていないか、または有効になっていないようです。設定を保存することはできますが、LDAPの同期やログインを機能させるために、PHPのLDAP拡張モジュールを有効にする必要があります。',
@@ -377,5 +376,7 @@ return [
     'database_driver' => 'データベースドライバ',
     'bs_table_storage' => 'テーブルストレージ',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -327,7 +327,6 @@ return [
     'labels' => 'Oznake',
     'labels_title' => 'Obnovite podešavanja oznaka',
     'labels_help' => 'Veličina oznake &amp; podešavanja',
-    'purge' => 'Pročisti',
     'purge_keywords' => 'trajno brisanje',
     'purge_help' => 'Očistite izbrisane zapise',
     'ldap_extension_warning' => 'Ne izgleda da je LDAP ekstenzija instalirana ili omogućena na ovom serveru. I dalje možete da sačuvate svoja podešavanja, ali ćete morati da omogućite LDAP ekstenziju za PHP pre nego što LDAP sinhronizacija ili prijavljivanje budu funkcionisali.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Drajver Baze Podataka',
     'bs_table_storage' => 'Skladište tabele',
     'timezone' => 'Vremenska zona',
+    'profile_edit'          => 'Izmeni profil',
+    'profile_edit_help'          => 'Dozvoli korisnicima da izmene svoje profile.',
 
 ];

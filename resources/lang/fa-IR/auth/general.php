@@ -17,6 +17,5 @@ return [
 ',
     'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login failed, please try again.',
-
 ];
 

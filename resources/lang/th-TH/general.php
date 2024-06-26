@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'อัพโหลดภาพ',
     'filetypes_accepted_help'    => 'ชนิดไฟล๋ที่ยอมรับ :types ขนาดไฟล์ใหญ่สุดที่ให้อัพโหลดได้ :size |ชนิดไฟล๋ที่ยอมรับ :types ขนาดไฟล์ใหญ่สุดที่ให้อัพโหลดได้ :size',
     'filetypes_size_help'   => 'ขนาดไฟล์ใหญ่สุดที่ให้อัพโหลดได้ :size',
-    'image_filetypes_help'  => 'ชนิดไฟล์ที่รองรับคือ jpg, webp, png, gif, และ svg. ขนาดไฟล์ใหญ่สุดที่ให้อัพโหลดได้ :size',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'นำเข้า',
     'import_this_file'      => 'Map fields and process this file',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'คืนค่า',
     'restore'				=> 'เรียกคืน',
     'requestable_models'    => 'Requestable Models',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'คำร้องขอ',
     'requested_date'        => 'วันที่ขอ',
     'requested_assets'      => 'Requested Assets',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

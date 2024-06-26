@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Ladda upp Bild',
     'filetypes_accepted_help'    => 'Accepterad filtyp är :types. Max tillåten uppladdningsstorlek är :size.<unk> Accepterade filtyper är :types. Max tillåten uppladdningsstorlek är :size.',
     'filetypes_size_help'   => 'Max tillåten uppladdningsstorlek är :size.',
-    'image_filetypes_help'  => 'Godkända filtyper är jpg, webp, png, gif och svg. Max tillåten uppladdningsstorlek är :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Denna bildfil kunde inte läsas. Godkända filtyper är jpg, webp, png, gif, och svg. Filens mimetyp är: :mimetype.',
     'import'         	    => 'Importera',
     'import_this_file'      => 'Karta fält och bearbeta denna fil',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'återställd',
     'restore'				=> 'Återställ',
     'requestable_models'    => 'Begärbara modeller',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Begärda',
     'requested_date'        => 'Begärt datum',
     'requested_assets'      => 'Begärda tillgångar',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Åtkomst nekad. Du kan inte uppdatera användarinformation för superadministratörer på demo.',
     'pwd_reset_not_sent' => 'Användaren är inte aktiverad, är LDAP-synkroniserad, eller har ingen e-postadress',
     'error_sending_email' => 'Fel vid sändning av e-post',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

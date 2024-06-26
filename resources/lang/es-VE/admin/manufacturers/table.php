@@ -2,8 +2,8 @@
 
 return array(
     'about_manufacturers_title'    => 'Sobre Fabricantes',
-    'about_manufacturers_text'  => 'Los fabricantes son las compañías que crean tus activos. Puedes guardar información importante de soporte aquí, que será mostrado en la páginas de detalles de tu activo.',
-    'asset_manufacturers'	=> 'Fabricantes de Activos',
+    'about_manufacturers_text'  => 'Los fabricantes son las empresas que crean sus activos. Aquí puede almacenar importante información de contacto para soporte, la cual se mostrará en las páginas de detalle de sus activos.',
+    'asset_manufacturers'	=> 'Fabricantes de activos',
     'create'				=> 'Crear Fabricante',
     'id'   					=> 'ID',
     'name'      			=> 'Nombre',

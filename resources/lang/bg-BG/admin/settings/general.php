@@ -327,7 +327,6 @@ return [
     'labels' => 'Етикети',
     'labels_title' => 'Обнови настройките на етикета',
     'labels_help' => 'Размер на етикета &amp; настройки',
-    'purge' => 'Изчисти',
     'purge_keywords' => 'изтриване за постоянно',
     'purge_help' => 'Пречисти изтрити записи',
     'ldap_extension_warning' => 'Изглежда, че нямате инсталирани LDAP разширения или не са пуснати на сървъра. Вие можете все пак да запишите настройките, но ще трябва да включите LDAP разширенията за PHP преди да синхронизирате с LDAP, в противен случай няма да можете да се логнете.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Драйвер на датабаза',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Часова зона',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -14,6 +14,8 @@ return array(
         'success'               => 'Du er blevet logget ind.',
         'code_required'         => 'To-faktor-kode er påkrævet.',
         'invalid_code'          => 'To-faktor kode er ugyldig.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

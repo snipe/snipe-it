@@ -64,7 +64,7 @@ return [
 
 
     'delete' => [
-        'confirm'   	=> '¿Está seguro que desea eliminar este recurso?',
+        'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Hubo un problema al eliminar el activo. Por favor, inténtelo de nuevo.',
         'nothing_updated'   => 'No se seleccionaron activos, por lo que no se eliminó nada.',
         'success' 		=> 'El recurso se ha eliminado correctamente.',

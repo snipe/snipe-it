@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Tu nombre de usuario y dirección de correo electrónico <em>puede</em> ser el mismo, pero puede que no lo sea, dependiendo de tu configuración. Si no puede recordar su nombre de usuario, póngase en contacto con su administrador. <br><br><strong>Los nombres de usuario sin una dirección de correo electrónico asociada no se enviarán por correo electrónico un enlace de restablecimiento de contraseña.</strong> ',
     'google_login'                  => 'Iniciar sesión con Google Workspace',
     'google_login_failed'           => 'Error al iniciar sesión en Google. Vuelve a intentarlo.',
-
 ];
 

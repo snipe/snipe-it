@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Качване на изображение',
     'filetypes_accepted_help'    => 'Позволенo разширенe на файлa :types. Максимално позволен размер :size.|Позволени разширения на файлове са :types. Максимално позволен размер :size.',
     'filetypes_size_help'   => 'Максимално позволен размер на файла е :size.',
-    'image_filetypes_help'  => 'Файлов формат в jpg, webp, png, gif и svg. Максимален размер е :size .',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Снимката не може да се прочете. Типовете файлови разширения са jpg, webp, png, gif и svg. Разширението на този файл е :mimetype.',
     'import'         	    => 'Зареждане',
     'import_this_file'      => 'Асоциирайте полетата и обработете този файл',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'възстановени',
     'restore'				=> 'Възстановяване',
     'requestable_models'    => 'Изискуеми Модели',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Изискан',
     'requested_date'        => 'Дата на заявката',
     'requested_assets'      => 'Изискуеми активи',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Разрешението е отказано. Не можете да актуализирате потребителска информация за суперадминистратори в демо версията.',
     'pwd_reset_not_sent' => 'Потребителят не е активиран, синхронизиран е с LDAP или няма имейл адрес',
     'error_sending_email' => 'Възникна грешка при изпращане на имейл',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

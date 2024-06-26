@@ -50,7 +50,7 @@ return [
     'ip'                   => 'El :attribute debe ser una dirección IP correcta.',
     'ipv4'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'ipv6'                 => 'El :atrribute debe ser una dirección IPv6 válida.',
-    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la empresa',
+    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la compañía',
     'json'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'max'                  => [
         'numeric' => 'El :attribute no debe ser mayor que :max kilobytes.',

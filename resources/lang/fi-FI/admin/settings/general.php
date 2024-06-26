@@ -327,7 +327,6 @@ return [
     'labels' => 'Tunnisteet',
     'labels_title' => 'Päivitä Tunnisteasetukset',
     'labels_help' => 'Tunnistekoot &amp; asetukset',
-    'purge' => 'Purge',
     'purge_keywords' => 'poista pysyvästi',
     'purge_help' => 'Puhdista poistetut tietueet',
     'ldap_extension_warning' => 'Se ei näytä LDAP laajennus on asennettu tai otettu käyttöön tällä palvelimella. Voit silti tallentaa asetuksesi, mutta sinun täytyy ottaa käyttöön LDAP laajennus PHP ennen LDAP synkronointia tai kirjautuminen toimii.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Tietokannan Ajuri',
     'bs_table_storage' => 'Taulukko Tallennustila',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

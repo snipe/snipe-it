@@ -14,6 +14,8 @@ return array(
         'success'               => 'Accesso eseguito correttamente.',
         'code_required'         => 'Codice a due fattori richiesto.',
         'invalid_code'          => 'Codice a due fattori non valido.',
+        'enter_two_factor_code' => 'Si prega di inserire il codice di autenticazione a due fattori.',
+        'please_enroll'         => 'Si prega di registrare un dispositivo nell\'autenticazione a due fattori.',
     ),
 
     'signin' => array(

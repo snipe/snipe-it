@@ -14,6 +14,8 @@ return array(
         'success'               => 'Zalogowano pomyślnie.',
         'code_required'         => 'Kod weryfikacji dwuskładnikowej jest wymagany.',
         'invalid_code'          => 'Kod weryfikacji dwuskładnikowej jest nieprawidłowy.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

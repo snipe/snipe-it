@@ -14,6 +14,8 @@ return array(
         'success'               => 'Sikeresen bejelentkeztél.',
         'code_required'         => 'Kétlépcsős azonosító kód szükséges.',
         'invalid_code'          => 'A kétlépcsős azonosító kód érvénytelen.',
+        'enter_two_factor_code' => 'Kérem, írja be a kétfaktoros hitelesítés kódját.',
+        'please_enroll'         => 'Kérem, hogy rendeljen hozzá egy eszközt a kétfaktoros azonosításhoz.',
     ),
 
     'signin' => array(

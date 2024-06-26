@@ -16,7 +16,7 @@ return [
     'edit'  					=> 'Editar activo',
     'model_deleted'  			=> 'Este Modelo de activo fue eliminado. Debes restaurar este modelo antes de poder restaurar el Activo.',
     'model_invalid'             => 'Este modelo para este activo es inválido.',
-    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
+    'model_invalid_fix'         => 'El activo debe ser actualizado, use un modelo de activo válido antes de intentar asignarlo, devolverlo o auditarlo.',
     'requestable'               => 'Puede solicitarse',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'No puede solicitarse',

@@ -13,7 +13,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Seguroq que quieres Eliminar grupo?',
+        'confirm'   => '¿Está seguro de que desea eliminar este grupo?',
         'create' => 'Ha habido un problema creando el grupo. Vuelve a intentarlo.',
         'update' => 'Ha habido un problema actualizando el grupo. Vuelve a intentarlo.',
         'delete' => 'Ha habido un problema eliminando el grupo. Vuelve a intentarlo.',

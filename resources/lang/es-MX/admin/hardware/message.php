@@ -64,7 +64,7 @@ return [
 
 
     'delete' => [
-        'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',
+        'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Equipo no eliminado, intentalo de nuevo.',
         'nothing_updated'   => 'No se seleccionaron los activos, por lo que no se eliminó nada.',
         'success' 		=> 'Equipo eliminado.',

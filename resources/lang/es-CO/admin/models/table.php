@@ -9,9 +9,9 @@ return array(
     'name'      			=> 'Nombre del modelo de activo',
     'numassets' 			=> 'Equipos',
     'title'					=> 'Modelos de equipo',
-    'update'				=> 'Actualizar Modelo de Equipo',
+    'update'				=> 'Actualizar modelo de activo',
     'view'					=> 'Ver Modelo de Equipo',
-    'update'				=> 'Actualizar Modelo de Equipo',
+    'update'				=> 'Actualizar modelo de activo',
     'clone'				=> 'Clonar Modelo',
     'edit'				=> 'Editar Modelo',
 );

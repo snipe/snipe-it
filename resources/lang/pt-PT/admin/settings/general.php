@@ -327,7 +327,6 @@ return [
     'labels' => 'Etiquetas',
     'labels_title' => 'Atualizar Configurações de Etiquetas',
     'labels_help' => 'Tamanho da etiqueta &amp; configurações',
-    'purge' => 'Purgar',
     'purge_keywords' => 'apagar permanentemente',
     'purge_help' => 'Remover registos apagados',
     'ldap_extension_warning' => 'Não parece que a extensão LDAP esteja instalada ou ativada neste servidor. Ainda pode salvar as suas configurações, mas precisará de ativar a extensão LDAP para PHP antes de a sincronização LDAP ou login funcionar.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Driver Base de Dados',
     'bs_table_storage' => 'Armazenamento de mesa',
     'timezone' => 'Fuso horário',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -134,7 +134,7 @@ return [
     'lastname_firstinitial' => 'Cognome_ Iniziale Nome (smith_j@example.com)',
     'firstinitial.lastname' => 'Iniziale Nome . Cognome (j.smith@example.com)',
     'firstnamelastinitial'  => 'Nome + Iniziale Cognome (janes@example.com)',
-    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
+    'lastnamefirstname'      => 'Cognome Nome (smith.jane@esempio.it)',
     'first_name'			=> 'Nome',
     'first_name_format'		=> 'Nome (jane@example.com)',
     'files'                 => 'Files',
@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Carica immagine',
     'filetypes_accepted_help'    => 'Tipo di file accettato :types. Dimensione massima di caricamento :size.|Tipi di file accettati :types. Dimensione massima di caricamento :size.',
     'filetypes_size_help'   => 'Dimensione massima di caricamento :size.',
-    'image_filetypes_help'  => 'I tipi di file accettati sono jpg, webp, png, gif e svg. La dimensione massima consentita per il caricamento è :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Questo immagine non è leggibile. I tipi di file accettati sono jpg, webp, png, gif e svg. Il tipo di questo file è :mimetype.',
     'import'         	    => 'Importa',
     'import_this_file'      => 'Mappa i campi ed elabora questo file',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'ripristinato',
     'restore'				=> 'Ripristina',
     'requestable_models'    => 'Modelli richiedibili',
+    'requestable_items'     => 'Oggetti richiedibili',
     'requested'				=> 'Richiesto',
     'requested_date'        => 'Data di richiesta',
     'requested_assets'      => 'Beni richiesti',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permesso negato. Impossibile aggiornare le informazioni utente per i superadmin sulla demo.',
     'pwd_reset_not_sent' => 'L\'utente non è attivato, è sincronizzato con LDAP o non ha un indirizzo email',
     'error_sending_email' => 'Errore nell\'invio dell\'email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [

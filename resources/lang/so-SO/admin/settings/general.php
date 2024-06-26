@@ -327,7 +327,6 @@ return [
     'labels' => 'Calaamadaha',
     'labels_title' => 'Cusbooneysii Settings Label',
     'labels_help' => 'Cabbirrada summada &amp; goobaha',
-    'purge' => 'Nadiifin',
     'purge_keywords' => 'si joogto ah u tirtir',
     'purge_help' => 'Nadiifi Diiwaanada La Tiray',
     'ldap_extension_warning' => 'Uma eka in kordhinta LDAP lagu rakibay ama lagu furay serfarkan. Weli waad kaydin kartaa dejimahaaga, laakiin waxaad u baahan doontaa inaad awood u siiso kordhinta LDAP ee PHP ka hor inta LDAP isku-xidhka ama galitaanka aanu shaqayn.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -13,7 +13,7 @@ return [
         'success' => 'Compañía actualizada con éxito.',
     ],
     'delete' => [
-        'confirm' => '¿Estás seguro de que quieres eliminar esta compañía?',
+        'confirm' => '¿Está seguro de que quiere eliminar esta compañía?',
         'error'   => 'Hubo un problema eliminando la compañía. Por favor, inténtalo de nuevo.',
         'success' => 'La compañía fue eliminada con éxito.',
     ],

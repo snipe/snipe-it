@@ -327,7 +327,6 @@ return [
     'labels' => 'Labels',
     'labels_title' => 'Labelinstellingen bijwerken',
     'labels_help' => 'Label maten &amp; instellingen',
-    'purge' => 'Wis',
     'purge_keywords' => 'permanent verwijderen',
     'purge_help' => 'Verwijderde Records opschonen',
     'ldap_extension_warning' => 'Het lijkt erop dat de LDAP-extensie niet is geïnstalleerd of ingeschakeld op deze server. U kunt nog steeds uw instellingen opslaan, maar u moet de LDAP extensie voor PHP inschakelen voordat LDAP synchronisatie of login zal werken.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Database Stuurprogramma',
     'bs_table_storage' => 'Tafel opslag',
     'timezone' => 'Tijdzone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

@@ -327,7 +327,6 @@ return [
     'labels' => 'Этикетки',
     'labels_title' => 'Обновить настройки этикетки',
     'labels_help' => 'Настройки &amp; размеров этикетки',
-    'purge' => 'Очистить',
     'purge_keywords' => 'удалить полностью',
     'purge_help' => 'Очистка удалённых записей',
     'ldap_extension_warning' => 'Похоже на вашем сервере не установлен или не включен модуль LDAP синхронизации. Вы можете сохранить ваши параметры, но вам потребуется установить\\включить модуль для PHP прежде выполнить синхронизацию с доменом.',
@@ -374,5 +373,7 @@ return [
     'database_driver' => 'Драйвер базы данных',
     'bs_table_storage' => 'Хранилище таблицы',
     'timezone' => 'Часовой пояс',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
 
 ];

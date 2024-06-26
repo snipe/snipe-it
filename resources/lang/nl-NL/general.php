@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Afbeelding uploaden',
     'filetypes_accepted_help'    => 'Geaccepteerde bestandstype is :types. Maximale toegestane uploadgrootte is :size.|Geaccepteerde bestandstypen zijn :types. Maximale uploadgrootte is :size.',
     'filetypes_size_help'   => 'Maximale toegestane uploadgrootte is :size.',
-    'image_filetypes_help'  => 'Geaccepteerde bestandstypen zijn jpg, webp, png, gif en svg. Maximale toegestane bestandsgrootte is :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Dit afbeeldingsbestand is niet leesbaar. Geaccepteerde bestandstypen zijn jpg, webp, png, gif en svg. Het mimetype van dit bestand is: :mimetype.',
     'import'         	    => 'Importeer',
     'import_this_file'      => 'Kaart velden en verwerk dit bestand',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'hersteld',
     'restore'				=> 'Herstel',
     'requestable_models'    => 'Aanvraagbare modellen',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Aangevraagd',
     'requested_date'        => 'Aangevraagde datum',
     'requested_assets'      => 'Aangevraagd activa',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Toestemming geweigerd. U kunt geen gebruikersinformatie voor superadmins op de demo bijwerken.',
     'pwd_reset_not_sent' => 'Gebruiker is niet geactiveerd, wordt LDAP-gesynchroniseerd of heeft geen e-mailadres',
     'error_sending_email' => 'Fout bij verzenden e-mail',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
