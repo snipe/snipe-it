@@ -230,13 +230,6 @@
                   @endif
                 @endcan
 
-                <!-- Add notes -->
-                @can('edit', \App\Models\User::class)
-                    <div class="col-md-12" style="padding-top: 5px;">
-                        <a href='{{ route('modal.show', 'add-note') }}?type=user&id={{$user->id}}' style="width: 100%" data-toggle="modal" data-target="#createModal" data-select='add-note_select_id' data-refresh="userHistory" data-hasnopayload="true" class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
-                    </div>
-                @endcan
-
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
                     <div class="col-md-12" style="padding-top: 30px;">

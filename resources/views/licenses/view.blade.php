@@ -653,16 +653,7 @@
       @endif
     @endcan
 
-    <!-- Add Note -->
-    @can('edit', \App\Models\License::class)
-      <div class="text-center" style="margin-bottom: 25px;">
-        <a href='{{ route('modal.show', 'add-note') }}?type=license&id={{$license->id}}' style="width: 100%" data-toggle="modal"  data-target="#createModal" data-select='add-note_select_id' class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
-      </div>
-    @endcan
-
-
     @can('delete', $license)
-
       @if ($license->availCount()->count() == $license->seats)
         <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
           {{ trans('general.delete') }}

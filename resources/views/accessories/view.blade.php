@@ -334,14 +334,6 @@
                 </div>
         @endcan
 
-        <!-- Add Note -->
-            <!-- Add notes -->
-            @can('edit', \App\Models\Accessory::class)
-                <div class="text-center" style="padding-top: 5px;">
-                    <a href='{{ route('modal.show', 'add-note') }}?type=accessory&id={{$accessory->id}}' style="width: 100%" data-toggle="modal" data-target="#createModal" data-select='add-note_select_id' data-refresh="accessoryHistory" data-hasnopayload="true" class="btn btn-sm btn-primary">{{ trans('general.add_note') }}</a>
-                </div>
-            @endcan
-
         @can('delete', $accessory)
             @if ($accessory->users_count == 0)
                 <div class="text-center" style="padding-top:5px;">
