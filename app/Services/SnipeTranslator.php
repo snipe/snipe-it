@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\Helper;
 use Illuminate\Translation\Translator;
 
 /***************************************************************
@@ -16,6 +17,10 @@ use Illuminate\Translation\Translator;
  * This method is called by the trans_choice() helper, which we *do* use a lot.
  ***************************************************************/
 class SnipeTranslator extends Translator {
+
+    static $legacy_translation_namespaces = [
+        "backup::" //Spatie backup uses 'legacy' locale names
+    ];
 
     //This is copied-and-pasted (almost) verbatim from Illuminate\Translation\Translator
     public function choice($key, $number, array $replace = [], $locale = null)
@@ -38,5 +43,29 @@ class SnipeTranslator extends Translator {
             $this->getSelector()->choose($line, $number, $underscored_locale), $replace
         );
     }
+
+    public function get($key, array $replace = [], $locale = null, $fallback = true)
+    {
+        $modified_locale = $locale;
+        $changed_fallback = false;
+        $previous_fallback = $this->fallback;
+        // 'legacy' translation directories tend to be two-char ('en'), not 5-char ('en-US').
+        // Here we try our best to handle that.
+        foreach (self::$legacy_translation_namespaces as $namespace) {
+            if (preg_match("/^$namespace/", $key)) {
+                $modified_locale = Helper::mapBackToLegacyLocale($locale);
+                $changed_fallback = true;
+                $this->fallback = 'en'; //TODO - should this be 'env-able'? Or do we just put our foot down and say 'en'?
+                break;
+            }
+        }
+
+        $result = parent::get($key, $replace, $modified_locale, $fallback);
+        if ($changed_fallback) {
+            $this->fallback = $previous_fallback;
+        }
+        return $result;
+    }
+
 
 }
