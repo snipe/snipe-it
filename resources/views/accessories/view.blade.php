@@ -142,6 +142,8 @@
                             </div><!--tab history-->
                      </div>
 
+
+
                     @can('accessories.files', $accessory)
                         <div class="tab-pane" id="files">
 
@@ -353,6 +355,8 @@
         @endcan
     </div>
 </div>
+
+
 
 @can('accessories.files', Accessory::class)
     @include ('modals.upload-file', ['item_type' => 'accessory', 'item_id' => $accessory->id])
