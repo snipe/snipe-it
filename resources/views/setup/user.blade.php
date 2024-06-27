@@ -18,7 +18,9 @@
     <!-- Site Name -->
     <div class="row">
       <div class="form-group col-lg-12 required {{ $errors->has('site_name') ? 'error' : '' }}">
-        {{ Form::label('site_name', trans('general.site_name')) }}
+        <label for="site_name">
+          {{ trans('general.site_name') }}
+        </label>
         {{ Form::text('site_name', Request::old('site_name'), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
 
         {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -29,9 +31,10 @@
 
     <!-- Language -->
     <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'default_language')) ? ' required' : '' }} {{$errors->has('default_language') ? 'error' : ''}}">
-      {{ Form::label('locale', trans('admin/settings/general.default_language')) }}
+      <label for="locale">
+        {{ trans('admin/settings/general.default_language') }}
+      </label>
       {!! Form::locales('locale', Request::old('locale', "en-US"), 'select2') !!}
-
       {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 
