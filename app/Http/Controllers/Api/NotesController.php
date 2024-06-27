@@ -17,7 +17,10 @@ class NotesController extends Controller
         $item = Asset::findOrFail($request->input("id"));
         $this->authorize('update', $item);
 
-        event(new NoteAdded($item, Auth::user(), $request->input("note")));
+        $validated = $request->validate([
+            'note' => 'required|string|max:500']);
+
+        event(new NoteAdded($item, Auth::user(), $validated['note']));
 
         return response()->json(Helper::formatStandardApiResponse('success'));
     }
