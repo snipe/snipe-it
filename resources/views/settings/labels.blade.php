@@ -430,3 +430,8 @@
     {{Form::close()}}
 
 @stop
+
+@push('js')
+    {{-- Can't use @script here because we're not in a livewire component so let's manually load --}}
+    @livewireScripts
+@endpush

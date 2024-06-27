@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +17,7 @@ class PersonalAccessTokens extends Component
     //this is just an annoying thing to make the modal input autofocus
     public function autoFocusModalEvent(): void
     {
-        $this->dispatchBrowserEvent('autoFocusModal');
+        $this->dispatch('autoFocusModal');
     }
 
     public function render()
@@ -42,7 +42,7 @@ class PersonalAccessTokens extends Component
 
        $this->newTokenString = $newToken->accessToken;
 
-       $this->dispatchBrowserEvent('tokenCreated', $newToken->accessToken);
+        $this->dispatch('tokenCreated', token: $newToken->accessToken);
     }
 
     public function deleteToken($tokenId): void

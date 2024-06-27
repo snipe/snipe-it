@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -19,21 +19,11 @@ class OauthClients extends Component
 
     public $authorizationError;
 
-    protected $clientRepository;
-    protected $tokenRepository;
-
-    public function __construct()
-    {
-        $this->clientRepository = app(ClientRepository::class);
-        $this->tokenRepository = app(TokenRepository::class);
-        parent::__construct();
-    }
-
     public function render()
     {
         return view('livewire.oauth-clients', [
-            'clients' => $this->clientRepository->activeForUser(auth()->user()->id),
-            'authorized_tokens' => $this->tokenRepository->forUser(auth()->user()->id)->where('revoked', false),
+            'clients' => app(ClientRepository::class)->activeForUser(auth()->user()->id),
+            'authorized_tokens' => app(TokenRepository::class)->forUser(auth()->user()->id)->where('revoked', false),
         ]);
     }
 
@@ -44,13 +34,13 @@ class OauthClients extends Component
             'redirect' => 'required|url|max:255',
         ]);
 
-        $newClient = $this->clientRepository->create(
+        app(ClientRepository::class)->create(
             auth()->user()->id,
             $this->name,
             $this->redirect,
         );
 
-        $this->dispatchBrowserEvent('clientCreated');
+        $this->dispatch('clientCreated');
     }
 
     public function deleteClient(Client $clientId): void
@@ -58,7 +48,7 @@ class OauthClients extends Component
         // test for safety
         // ->delete must be of type Client - thus the model binding
         if ($clientId->user_id == auth()->user()->id) {
-            $this->clientRepository->delete($clientId);
+            app(ClientRepository::class)->delete($clientId);
         } else {
             Log::warning('User ' . auth()->user()->id . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->user_id);
             $this->authorizationError = 'You are not authorized to delete this client.';
@@ -67,9 +57,9 @@ class OauthClients extends Component
 
     public function deleteToken($tokenId): void
     {
-        $token = $this->tokenRepository->find($tokenId);
+        $token = app(TokenRepository::class)->find($tokenId);
         if ($token->user_id == auth()->user()->id) {
-            $this->tokenRepository->revokeAccessToken($tokenId);
+            app(TokenRepository::class)->revokeAccessToken($tokenId);
         } else {
             Log::warning('User ' . auth()->user()->id . ' attempted to delete token ' . $tokenId . ' which belongs to user ' . $token->user_id);
             $this->authorizationError = 'You are not authorized to delete this token.';
@@ -83,7 +73,7 @@ class OauthClients extends Component
 
         $this->editClientId = $editClientId->id;
 
-        $this->dispatchBrowserEvent('editClient');
+        $this->dispatch('editClient');
     }
 
     public function updateClient(Client $editClientId): void
@@ -93,7 +83,7 @@ class OauthClients extends Component
             'editRedirect' => 'required|url|max:255',
         ]);
 
-        $client = $this->clientRepository->find($editClientId->id);
+        $client = app(ClientRepository::class)->find($editClientId->id);
         if ($client->user_id == auth()->user()->id) {
             $client->name = $this->editName;
             $client->redirect = $this->editRedirect;
@@ -103,7 +93,7 @@ class OauthClients extends Component
             $this->authorizationError = 'You are not authorized to edit this client.';
         }
 
-        $this->dispatchBrowserEvent('clientUpdated');
+        $this->dispatch('clientUpdated');
 
     }
 }
