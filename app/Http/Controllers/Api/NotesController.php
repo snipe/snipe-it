@@ -13,13 +13,13 @@ class NotesController extends Controller
 {
     public function store(Request $request)
     {
+
         $item = Asset::findOrFail($request->input("id"));
+        $this->authorize('update', $item);
 
         event(new NoteAdded($item, Auth::user(), $request->input("note")));
 
-        if ($item->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success'));
-        }
+        return response()->json(Helper::formatStandardApiResponse('success'));
     }
 
 }
