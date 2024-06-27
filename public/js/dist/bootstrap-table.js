@@ -5285,7 +5285,7 @@
     }
   };
 
-  var VERSION = '1.22.6';
+  var VERSION = '1.22.5';
   var bootstrapVersion = Utils.getBootstrapVersion();
   var CONSTANTS = {
     3: {
@@ -16840,7 +16840,7 @@
         if (!this.options.cookie) {
           return;
         }
-        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageList, this.options.pageSize === this.options.formatAllRows() ? 'all' : this.options.pageSize);
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageList, this.options.pageSize);
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageNumber, this.options.pageNumber);
       }
     }, {
@@ -17013,7 +17013,7 @@
         // pageNumber
         this.options.pageNumber = pageNumberCookie ? +pageNumberCookie : this.options.pageNumber;
         // pageSize
-        this.options.pageSize = pageListCookie ? pageListCookie === 'all' ? this.options.formatAllRows() : +pageListCookie : this.options.pageSize;
+        this.options.pageSize = pageListCookie ? pageListCookie === this.options.formatAllRows() ? pageListCookie : +pageListCookie : this.options.pageSize;
         // searchText
         if (UtilsCookie.isCookieEnabled(this, UtilsCookie.cookieIds.searchText) && this.options.searchText === '') {
           this.options.searchText = searchTextCookie ? searchTextCookie : '';
@@ -27350,7 +27350,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       },
       classes: {},
       html: {
-        modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <button class=\"close toolbar-modal-close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n                <h4 class=\"modal-title toolbar-modal-title\"></h4>\n              </div>\n              <div class=\"modal-body toolbar-modal-body\"></div>\n              <div class=\"modal-footer toolbar-modal-footer\">\n                <button class=\"btn btn-%s toolbar-modal-close\"></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
+        modal: "\n        <div id=\"avdSearchModal_%s\"  class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n                <h4 class=\"modal-title\">%s</h4>\n              </div>\n              <div class=\"modal-body modal-body-custom\">\n                <div class=\"container-fluid\" id=\"avdSearchModalContent_%s\"\n                  style=\"padding-right: 0px; padding-left: 0px;\" >\n                </div>\n              </div>\n              <div class=\"modal-footer\">\n                <button type=\"button\" id=\"btnCloseAvd_%s\" class=\"btn btn-%s\">%s</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
       }
     },
     bootstrap4: {
@@ -27359,7 +27359,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       },
       classes: {},
       html: {
-        modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4 class=\"modal-title toolbar-modal-title\"></h4>\n                <button class=\"close toolbar-modal-close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n              <div class=\"modal-body toolbar-modal-body\"></div>\n              <div class=\"modal-footer toolbar-modal-footer\">\n                <button class=\"btn btn-%s toolbar-modal-close\"></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
+        modal: "\n        <div id=\"avdSearchModal_%s\"  class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4 class=\"modal-title\">%s</h4>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n              <div class=\"modal-body modal-body-custom\">\n                <div class=\"container-fluid\" id=\"avdSearchModalContent_%s\"\n                  style=\"padding-right: 0; padding-left: 0;\" >\n                </div>\n              </div>\n              <div class=\"modal-footer\">\n                <button type=\"button\" id=\"btnCloseAvd_%s\" class=\"btn btn-%s\">%s</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
       }
     },
     bootstrap5: {
@@ -27370,7 +27370,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
         formGroup: 'mb-3'
       },
       html: {
-        modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal fade\" tabindex=\"-1\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h5 class=\"modal-title toolbar-modal-title\"></h5>\n                <button class=\"btn-close toolbar-modal-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n              </div>\n              <div class=\"modal-body toolbar-modal-body\"></div>\n              <div class=\"modal-footer toolbar-modal-footer\">\n                <button class=\"btn btn-%s toolbar-modal-close\"></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
+        modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal fade\" tabindex=\"-1\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h5 class=\"modal-title\">%s</h5>\n                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n              </div>\n              <div class=\"modal-body modal-body-custom\">\n                <div class=\"container-fluid\" id=\"avdSearchModalContent_%s\"\n                  style=\"padding-right: 0; padding-left: 0;\" >\n                </div>\n              </div>\n              <div class=\"modal-footer\">\n                <button type=\"button\" id=\"btnCloseAvd_%s\" class=\"btn btn-%s\">%s</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
       }
     },
     bulma: {
@@ -27379,7 +27379,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       },
       classes: {},
       html: {
-        modal: "\n        <div class=\"modal\" id=\"avdSearchModal_%s\">\n          <div class=\"modal-background\"></div>\n          <div class=\"modal-card\">\n            <header class=\"modal-card-head\">\n              <p class=\"modal-card-title toolbar-modal-title\"></p>\n              <button class=\"delete toolbar-modal-close\"></button>\n            </header>\n            <section class=\"modal-card-body toolbar-modal-body\"></section>\n            <footer class=\"modal-card-foot toolbar-modal-footer\">\n              <button class=\"button button-%s toolbar-modal-close\"></button>\n            </footer>\n          </div>\n        </div>\n      "
+        modal: "\n        <div class=\"modal\" id=\"avdSearchModal_%s\">\n          <div class=\"modal-background\"></div>\n          <div class=\"modal-card\">\n            <header class=\"modal-card-head\">\n              <p class=\"modal-card-title\">%s</p>\n              <button class=\"delete\" aria-label=\"close\"></button>\n            </header>\n            <section class=\"modal-card-body\" id=\"avdSearchModalContent_%s\"></section>\n            <footer class=\"modal-card-foot\">\n              <button class=\"button\" id=\"btnCloseAvd_%s\" data-close=\"btn btn-%s\">%s</button>\n            </footer>\n          </div>\n        </div>\n      "
       }
     },
     foundation: {
@@ -27388,7 +27388,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       },
       classes: {},
       html: {
-        modal: "\n        <div class=\"reveal\" id=\"avdSearchModal_%s\" data-reveal>\n          <h1 class=\"toolbar-modal-title\"></h1>\n          <div class=\"toolbar-modal-body\"></div>\n          <button class=\"close-button toolbar-modal-close\" data-close aria-label=\"Close modal\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n          <div class=\"toolbar-modal-footer\">\n            <button class=\"button button-%s toolbar-modal-close\"></button>\n          </div>\n        </div>\n      "
+        modal: "\n        <div class=\"reveal\" id=\"avdSearchModal_%s\" data-reveal>\n          <h1>%s</h1>\n          <div id=\"avdSearchModalContent_%s\">\n\n          </div>\n          <button class=\"close-button\" data-close aria-label=\"Close modal\" type=\"button\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n\n          <button id=\"btnCloseAvd_%s\" class=\"%s\" type=\"button\">%s</button>\n        </div>\n      "
       }
     },
     materialize: {
@@ -27397,7 +27397,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       },
       classes: {},
       html: {
-        modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal\">\n          <div class=\"modal-content\">\n            <h4 class=\"toolbar-modal-title\"></h4>\n            <div class=\"toolbar-modal-body\"></div>\n          </div>\n          <div class=\"modal-footer toolbar-modal-footer\">\n            <a href=\"javascript:void(0)\" class=\"modal-close waves-effect waves-green btn-flat btn-%s toolbar-modal-close\"></a>\n          </div>\n        </div>\n      "
+        modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal\">\n          <div class=\"modal-content\">\n            <h4>%s</h4>\n            <div id=\"avdSearchModalContent_%s\">\n\n            </div>\n          </div>\n          <div class=\"modal-footer\">\n            <a href=\"javascript:void(0)\"\" id=\"btnCloseAvd_%s\" class=\"modal-close waves-effect waves-green btn-flat %s\">%s</a>\n          </div>\n        </div>\n      "
       }
     },
     semantic: {
@@ -27406,7 +27406,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       },
       classes: {},
       html: {
-        modal: "\n        <div class=\"ui modal\" id=\"avdSearchModal_%s\">\n          <i class=\"close icon toolbar-modal-close\"></i>\n          <div class=\"header toolbar-modal-title\"\"></div>\n          <div class=\"image content ui form toolbar-modal-body\"></div>\n          <div class=\"actions toolbar-modal-footer\">\n            <div class=\"ui black deny button button-%s toolbar-modal-close\"></div>\n          </div>\n        </div>\n      "
+        modal: "\n        <div class=\"ui modal\" id=\"avdSearchModal_%s\">\n          <i class=\"close icon\"></i>\n          <div class=\"header\">\n            %s\n          </div>\n          <div class=\"image content ui form\" id=\"avdSearchModalContent_%s\"></div>\n          <div class=\"actions\">\n            <div id=\"btnCloseAvd_%s\" class=\"ui black deny button %s\">%s</div>\n          </div>\n        </div>\n      "
       }
     }
   }[$$b.fn.bootstrapTable.theme];
@@ -27444,91 +27444,101 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     return _createClass(_class, [{
       key: "initToolbar",
       value: function initToolbar() {
-        this.showToolbar = this.showToolbar || this.options.search && this.options.advancedSearch && this.options.idTable;
-        if (this.showToolbar) {
+        var o = this.options;
+        this.showToolbar = this.showToolbar || o.search && o.advancedSearch && o.idTable;
+        if (o.search && o.advancedSearch && o.idTable) {
           this.buttons = Object.assign(this.buttons, {
             advancedSearch: {
               text: this.options.formatAdvancedSearch(),
               icon: this.options.icons.advancedSearchIcon,
-              event: this.showAdvancedSearch,
+              event: this.showAvdSearch,
               attributes: {
                 'aria-label': this.options.formatAdvancedSearch(),
                 title: this.options.formatAdvancedSearch()
               }
             }
           });
-          if (Utils.isEmptyObject(this.filterColumnsPartial)) {
-            this.filterColumnsPartial = {};
-          }
         }
         _get(_getPrototypeOf(_class.prototype), "initToolbar", this).call(this);
       }
     }, {
-      key: "showAdvancedSearch",
-      value: function showAdvancedSearch() {
+      key: "showAvdSearch",
+      value: function showAvdSearch() {
         var _this = this;
-        this.$toolbarModal = $$b("#avdSearchModal_".concat(this.options.idTable));
-        if (this.$toolbarModal.length <= 0) {
-          $$b('body').append(Utils.sprintf(theme.html.modal, this.options.idTable, this.options.buttonsClass));
-          this.$toolbarModal = $$b("#avdSearchModal_".concat(this.options.idTable));
-          this.$toolbarModal.find('.toolbar-modal-close').off('click').on('click', function () {
-            return _this.hideToolbarModal();
+        var o = this.options;
+        var modalSelector = "#avdSearchModal_".concat(o.idTable);
+        if ($$b(modalSelector).length <= 0) {
+          $$b('body').append(Utils.sprintf(theme.html.modal, o.idTable, o.formatAdvancedSearch(), o.idTable, o.idTable, o.buttonsClass, o.formatAdvancedCloseButton()));
+          var timeoutId = 0;
+          $$b("#avdSearchModalContent_".concat(o.idTable)).append(this.createFormAvd().join(''));
+          $$b("#".concat(o.idForm)).off('keyup blur', 'input').on('keyup blur', 'input', function (e) {
+            if (o.sidePagination === 'server') {
+              _this.onColumnAdvancedSearch(e);
+            } else {
+              clearTimeout(timeoutId);
+              timeoutId = setTimeout(function () {
+                _this.onColumnAdvancedSearch(e);
+              }, o.searchTimeOut);
+            }
           });
+          $$b("#btnCloseAvd_".concat(o.idTable)).click(function () {
+            return _this.hideModal();
+          });
+          if ($$b.fn.bootstrapTable.theme === 'bulma') {
+            $$b(modalSelector).find('.delete').off('click').on('click', function () {
+              return _this.hideModal();
+            });
+          }
+          this.showModal();
+        } else {
+          this.showModal();
         }
-        this.initToolbarModalBody();
-        this.showToolbarModal();
       }
     }, {
-      key: "initToolbarModalBody",
-      value: function initToolbarModalBody() {
-        var _this2 = this;
-        this.$toolbarModal.find('.toolbar-modal-title').html(this.options.formatAdvancedSearch());
-        this.$toolbarModal.find('.toolbar-modal-footer .toolbar-modal-close').html(this.options.formatAdvancedCloseButton());
-        this.$toolbarModal.find('.toolbar-modal-body').html(this.createToolbarForm()).off('keyup blur', 'input').on('keyup blur', 'input', function (e) {
-          _this2.onColumnAdvancedSearch(e);
-        });
-      }
-    }, {
-      key: "showToolbarModal",
-      value: function showToolbarModal() {
-        var theme = $$b.fn.bootstrapTable.theme;
-        if (['bootstrap3', 'bootstrap4'].includes(theme)) {
-          this.$toolbarModal.modal();
-        } else if (theme === 'bootstrap5') {
+      key: "showModal",
+      value: function showModal() {
+        var modalSelector = "#avdSearchModal_".concat(this.options.idTable);
+        if ($$b.inArray($$b.fn.bootstrapTable.theme, ['bootstrap3', 'bootstrap4']) !== -1) {
+          $$b(modalSelector).modal();
+        } else if ($$b.fn.bootstrapTable.theme === 'bootstrap5') {
           if (!this.toolbarModal) {
-            this.toolbarModal = new window.bootstrap.Modal(this.$toolbarModal[0], {});
+            //   eslint-disable-next-line no-undef
+            this.toolbarModal = new bootstrap.Modal(document.getElementById("avdSearchModal_".concat(this.options.idTable)), {});
           }
           this.toolbarModal.show();
-        } else if (theme === 'bulma') {
-          this.$toolbarModal.toggleClass('is-active');
-        } else if (theme === 'foundation') {
+        } else if ($$b.fn.bootstrapTable.theme === 'bulma') {
+          $$b(modalSelector).toggleClass('is-active');
+        } else if ($$b.fn.bootstrapTable.theme === 'foundation') {
           if (!this.toolbarModal) {
-            this.toolbarModal = new window.Foundation.Reveal(this.$toolbarModal);
+            // eslint-disable-next-line no-undef
+            this.toolbarModal = new Foundation.Reveal($$b(modalSelector));
           }
           this.toolbarModal.open();
-        } else if (theme === 'materialize') {
-          this.$toolbarModal.modal().modal('open');
-        } else if (theme === 'semantic') {
-          this.$toolbarModal.modal('show');
+        } else if ($$b.fn.bootstrapTable.theme === 'materialize') {
+          $$b(modalSelector).modal();
+          $$b(modalSelector).modal('open');
+        } else if ($$b.fn.bootstrapTable.theme === 'semantic') {
+          $$b(modalSelector).modal('show');
         }
       }
     }, {
-      key: "hideToolbarModal",
-      value: function hideToolbarModal() {
-        var theme = $$b.fn.bootstrapTable.theme;
-        if (['bootstrap3', 'bootstrap4'].includes(theme)) {
-          this.$toolbarModal.modal('hide');
-        } else if (theme === 'bootstrap5') {
+      key: "hideModal",
+      value: function hideModal() {
+        var $closeModalButton = $$b("#avdSearchModal_".concat(this.options.idTable));
+        var modalSelector = "#avdSearchModal_".concat(this.options.idTable);
+        if ($$b.inArray($$b.fn.bootstrapTable.theme, ['bootstrap3', 'bootstrap4']) !== -1) {
+          $closeModalButton.modal('hide');
+        } else if ($$b.fn.bootstrapTable.theme === 'bootstrap5') {
           this.toolbarModal.hide();
-        } else if (theme === 'bulma') {
+        } else if ($$b.fn.bootstrapTable.theme === 'bulma') {
           $$b('html').toggleClass('is-clipped');
-          this.$toolbarModal.toggleClass('is-active');
-        } else if (theme === 'foundation') {
+          $$b(modalSelector).toggleClass('is-active');
+        } else if ($$b.fn.bootstrapTable.theme === 'foundation') {
           this.toolbarModal.close();
-        } else if (theme === 'materialize') {
-          this.$toolbarModal.modal('open');
-        } else if (theme === 'semantic') {
-          this.$toolbarModal.modal('close');
+        } else if ($$b.fn.bootstrapTable.theme === 'materialize') {
+          $$b(modalSelector).modal('open');
+        } else if ($$b.fn.bootstrapTable.theme === 'semantic') {
+          $$b(modalSelector).modal('close');
         }
         if (this.options.sidePagination === 'server') {
           this.options.pageNumber = 1;
@@ -27537,18 +27547,17 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
         }
       }
     }, {
-      key: "createToolbarForm",
-      value: function createToolbarForm() {
-        var html = ["<form class=\"form-horizontal toolbar-model-form\" action=\"".concat(this.options.actionForm, "\">")];
+      key: "createFormAvd",
+      value: function createFormAvd() {
+        var o = this.options;
+        var html = ["<form class=\"form-horizontal\" id=\"".concat(o.idForm, "\" action=\"").concat(o.actionForm, "\">")];
         var _iterator = _createForOfIteratorHelper(this.columns),
           _step;
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var column = _step.value;
             if (!column.checkbox && column.visible && column.searchable) {
-              var title = $$b('<div/>').html(column.title).text().trim();
-              var value = this.filterColumnsPartial[column.field] || '';
-              html.push("\n          <div class=\"form-group row ".concat(theme.classes.formGroup || '', "\">\n            <label class=\"col-sm-4 control-label\">").concat(title, "</label>\n            <div class=\"col-sm-6\">\n              <input type=\"text\" class=\"form-control ").concat(this.constants.classes.input, "\"\n                name=\"").concat(column.field, "\" placeholder=\"").concat(title, "\" value=\"").concat(value, "\">\n            </div>\n          </div>\n        "));
+              html.push("\n          <div class=\"form-group row ".concat(theme.classes.formGroup || '', "\">\n            <label class=\"col-sm-4 control-label\">").concat(column.title, "</label>\n            <div class=\"col-sm-6\">\n              <input type=\"text\" class=\"form-control ").concat(this.constants.classes.input, "\" name=\"").concat(column.field, "\" placeholder=\"").concat(column.title, "\" id=\"").concat(column.field, "\">\n            </div>\n          </div>\n        "));
             }
           }
         } catch (err) {
@@ -27557,17 +27566,17 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
           _iterator.f();
         }
         html.push('</form>');
-        return html.join('');
+        return html;
       }
     }, {
       key: "initSearch",
       value: function initSearch() {
-        var _this3 = this;
+        var _this2 = this;
         _get(_getPrototypeOf(_class.prototype), "initSearch", this).call(this);
         if (!this.options.advancedSearch || this.options.sidePagination === 'server') {
           return;
         }
-        var fp = Utils.isEmptyObject(this.filterColumnsPartial) ? null : this.filterColumnsPartial;
+        var fp = $$b.isEmptyObject(this.filterColumnsPartial) ? null : this.filterColumnsPartial;
         this.data = fp ? this.data.filter(function (item, i) {
           for (var _i = 0, _Object$entries = Object.entries(fp); _i < _Object$entries.length; _i++) {
             var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
@@ -27575,8 +27584,8 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
               v = _Object$entries$_i[1];
             var val = v.toLowerCase();
             var value = item[key];
-            var index = _this3.header.fields.indexOf(key);
-            value = Utils.calculateObjectValue(_this3.header, _this3.header.formatters[index], [value, item, i], value);
+            var index = _this2.header.fields.indexOf(key);
+            value = Utils.calculateObjectValue(_this2.header, _this2.header.formatters[index], [value, item, i], value);
             if (!(index !== -1 && (typeof value === 'string' || typeof value === 'number') && "".concat(value).toLowerCase().includes(val))) {
               return false;
             }
@@ -27589,17 +27598,20 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       key: "onColumnAdvancedSearch",
       value: function onColumnAdvancedSearch(e) {
         var text = $$b(e.currentTarget).val().trim();
-        var field = $$b(e.currentTarget).attr('name');
+        var $field = $$b(e.currentTarget)[0].id;
+        if ($$b.isEmptyObject(this.filterColumnsPartial)) {
+          this.filterColumnsPartial = {};
+        }
         if (text) {
-          this.filterColumnsPartial[field] = text;
+          this.filterColumnsPartial[$field] = text;
         } else {
-          delete this.filterColumnsPartial[field];
+          delete this.filterColumnsPartial[$field];
         }
         if (this.options.sidePagination !== 'server') {
           this.options.pageNumber = 1;
           this.initSearch();
           this.updatePagination();
-          this.trigger('column-advanced-search', field, text);
+          this.trigger('column-advanced-search', $field, text);
         }
       }
     }]);
