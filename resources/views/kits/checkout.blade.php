@@ -32,7 +32,7 @@
                   </label>
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-date-clear-btn="true">
-                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ Request::old('checkout_at') }}">
+                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ old('checkout_at') }}">
                           <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>
                       {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
@@ -46,7 +46,7 @@
                   </label>
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-start-date="0d">
-                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ Request::old('expected_checkin') }}">
+                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
                           <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>
                       {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
@@ -60,7 +60,7 @@
                   {{ trans('general.notes') }}
               </label>
             <div class="col-md-8">
-              <textarea class="col-md-6 form-control" id="note" name="note">{{ Request::old('note') }}</textarea>
+              <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
               {!! $errors->first('note', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
           </div>

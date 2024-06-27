@@ -34,7 +34,7 @@
                         {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'checkin_tag')) }}
                         <div class="col-md-9">
                             <div class="input-group date col-md-5" data-date-format="yyyy-mm-dd">
-                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ Request::old('asset_tag') }}">
+                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}">
 
                             </div>
                             {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
