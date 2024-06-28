@@ -11,6 +11,7 @@ use App\Models\AssetModel;
 use App\Models\Statuslabel;
 use App\Models\Setting;
 use App\View\Label;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -268,11 +269,31 @@ class BulkAssetsController extends Controller
                         $this->conditionallyAddItem($custom_field_column); 
                    }
 
+                if (!($asset->eol_explicit)) {
+					if ($request->filled('model_id')) {
+						$model = AssetModel::find($request->input('model_id'));
+						if ($model->eol > 0) {
+							if ($request->filled('purchase_date')) {
+								$this->update_array['asset_eol_date'] = Carbon::parse($request->input('purchase_date'))->addMonths($model->eol)->format('Y-m-d');
+							} else {
+								$this->update_array['asset_eol_date'] = Carbon::parse($asset->purchase_date)->addMonths($model->eol)->format('Y-m-d');
+							}
+						} else {
+							$this->update_array['asset_eol_date'] = null;
+						}
+					} elseif (($request->filled('purchase_date')) && ($asset->model->eol > 0)) {
+						$this->update_array['asset_eol_date'] = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+					}
+				}                
+                
                 /**
                  * Blank out fields that were requested to be blanked out via checkbox
                  */
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
+                    if (!($asset->eol_explicit)) {
+						$this->update_array['asset_eol_date'] = null;
+					}
                 }
 
                 if ($request->input('null_expected_checkin_date')=='1') {
