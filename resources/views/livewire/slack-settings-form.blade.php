@@ -13,7 +13,7 @@
 @section('content')
 
 <div><!-- livewire div - do not remove -->
-    <form class="form-horizontal" role="form" wire:submit.prevent="submit">
+    <form class="form-horizontal" role="form" wire:submit="submit">
         {{csrf_field()}}
 
         <div class="row">
@@ -79,7 +79,7 @@
                                 {{ Form::label('webhook_endpoint', trans('admin/settings/general.webhook_endpoint',['app' => $webhook_name ])) }}
                             </div>
                             <div class="col-md-9 required">
-                                    <input type="text" wire:model.lazy="webhook_endpoint" class="form-control" placeholder="{{$webhook_placeholder}}" value="{{old('webhook_endpoint', $webhook_endpoint)}}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                    <input type="text" wire:model.blur="webhook_endpoint" class="form-control" placeholder="{{$webhook_placeholder}}" value="{{old('webhook_endpoint', $webhook_endpoint)}}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
                                 {!! $errors->first('webhook_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                     {{ Form::label('webhook_channel', trans('admin/settings/general.webhook_channel',['app' => $webhook_name ])) }}
                                 </div>
                                 <div class="col-md-9 required">
-                                        <input type="text" wire:model.lazy="webhook_channel" class="form-control" placeholder="#IT-Ops" value="{{ old('webhook_channel', $webhook_channel) }}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                        <input type="text" wire:model.blur="webhook_channel" class="form-control" placeholder="#IT-Ops" value="{{ old('webhook_channel', $webhook_channel) }}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
 
                                     {!! $errors->first('webhook_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>
@@ -114,7 +114,7 @@
                                     {{ Form::label('webhook_botname', trans('admin/settings/general.webhook_botname',['app' => $webhook_name ])) }}
                                 </div>
                                 <div class="col-md-9">
-                                        <input type="text" wire:model.lazy="webhook_botname" class='form-control' placeholder="Snipe-Bot" {{ old('webhook_botname', $webhook_botname)}}{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                        <input type="text" wire:model.blur="webhook_botname" class='form-control' placeholder="Snipe-Bot" {{ old('webhook_botname', $webhook_botname)}}{{ Helper::isDemoMode() ? ' disabled' : ''}}>
                                     {!! $errors->first('webhook_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div><!--col-md-10-->
                             </div>
@@ -174,11 +174,6 @@
         $('#select2').on('change', function (e) {
             var data = $('#select2').select2("val");
             @this.set('webhook_selected', data);
-        });
-
-        // Re-render select2
-        window.livewire.hook('message.processed', function (el, component) {
-            $('.select2').select2();
         });
     });
 

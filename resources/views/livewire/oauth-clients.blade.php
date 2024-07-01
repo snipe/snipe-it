@@ -16,7 +16,7 @@
 
                 <div class="box-tools pull-right">
                         <a class="btn btn-primary"
-                           wire:click="$emit('openModal')"
+                           wire:click="$dispatch('openModal')"
                            onclick="$('#modal-create-client').modal('show');">
                             {{ trans('general.create') }}
                         </a>
@@ -285,7 +285,7 @@
                                         type="text"
                                         aria-label="edit-client-name"
                                         class="form-control"
-                                        wire:model="editName"
+                                        wire:model.live="editName"
                                         wire:keydown.enter="updateClient('{{ $editClientId }}')"
                                 >
 
@@ -333,7 +333,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            window.livewire.on('openModal', () => {
+            Livewire.on('openModal', () => {
                 $('#modal-create-client').modal('show').on('shown.bs.modal', function() {
                     $(this).find('[autofocus]').focus();
                 });
@@ -353,4 +353,5 @@
 
     </script>
 </div>
+
 

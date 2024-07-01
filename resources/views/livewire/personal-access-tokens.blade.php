@@ -4,7 +4,7 @@
             <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
                 <a class="btn btn-info btn-sm action-link pull-right"
                    onclick="$('#modal-create-token').modal('show');"
-                   wire:click="$emit('openModal')"
+                   wire:click="$dispatch('openModal')"
                 >
                     Create New Token
                 </a>
@@ -98,7 +98,7 @@
                                        name="name"
                                        wire:keydown.enter="createToken(name)"
                                        {{-- defer because it's submitting as i type if i don't --}}
-                                       wire:model.defer="name"
+                                       wire:model="name"
                                        autofocus
                                 >
                             </div>

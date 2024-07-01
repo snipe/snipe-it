@@ -37,7 +37,9 @@
                                     @if ($accessory->name)
                                     <!-- accessory name -->
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
+                                        <label class="col-sm-3 control-label">
+                                            {{ trans('admin/hardware/form.name') }}
+                                        </label>
                                         <div class="col-md-6">
                                           <p class="form-control-static">{{ $accessory->name }}</p>
                                         </div>
@@ -54,7 +56,9 @@
                                     </div>
                             <!-- Checkout/Checkin Date -->
                             <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
-                                {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
+                                <label for="checkin_at" class="col-md-3 control-label">
+                                    {{ trans('admin/hardware/form.checkin_date') }}
+                                </label>
                                 <div class="col-md-7">
                                     <div class="input-group col-md-5 required" style="padding-left: 0px;">
                                         <div class="input-group date" data-date-clear-btn="true" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-autoclose="true">
