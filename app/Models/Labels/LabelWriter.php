@@ -85,7 +85,7 @@ class LabelWriter
         $usableHeight = $pa->h;
 
         if ($record->has('barcode1d')) {
-            static::write1DBarcode(
+            $this->write1DBarcode(
                 $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
                 $pa->x1, $pa->y2 - $template->barcode_size,
                 $pa->w, $template->barcode_size
@@ -93,7 +93,7 @@ class LabelWriter
             $usableHeight -= $template->barcode_size + $template->barcode_margin;
         }
         if ($record->has('title')) {
-            static::writeText(
+            $this->writeText(
                 $pdf, $record->get('title'),
                 $currentX, $currentY,
                 'freesans', '', $template->title_size, $template->title_align ?? 'L',
@@ -105,7 +105,7 @@ class LabelWriter
 
         if ($record->has('barcode2d')) {
             $barcodeSize = $this->options['barcode_size'] ?? $usableHeight;
-            static::write2DBarcode(
+            $this->write2DBarcode(
                 $pdf, $record->get('barcode2d')->content, $record->get('barcode2d')->type,
                 $currentX, $currentY,
                 $barcodeSize, $barcodeSize
@@ -114,7 +114,7 @@ class LabelWriter
             $usableWidth -= $barcodeSize + $template->barcode_margin;
 
             if ($record->has('tag')) {
-                static::writeText(
+                $this->writeText(
                     $pdf, $record->get('tag'),
                     $pa->x1, $pa->y2 - $template->tag_size,
                     'freemono', 'b', $template->tag_size, 'C',
@@ -124,7 +124,7 @@ class LabelWriter
         } else if ($record->has('tag')) {
             $tagPosition = $template->tag_position;
             $tagY = $tagPosition === 'bottom' ? $pa->y2 - $template->tag_size : $currentY;
-            static::writeText(
+            $this->writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $tagY,
                 'freemono',
@@ -142,7 +142,7 @@ class LabelWriter
 
 
         if ($record->has('logo')) {
-            $logoSize = static::writeImage(
+            $logoSize = $this->writeImage(
                 $pdf, $record->get('logo'),
                 $pa->x1, $pa->y1,
                 $template->logo_max_width, $usableHeight,
@@ -155,7 +155,7 @@ class LabelWriter
         if ($record->has('tag')) {
             $tagPosition = isset($template->tag_position) ? $template->tag_position : 'L';
             $tagY = $tagPosition === 'bottom' ? $pa->y2 - $template->tag_size : $currentY;
-            static::writeText(
+            $this->writeText(
                 $pdf, $record->get('tag'),
                 $pa->x1, $tagY,
                 'freemono', 'b', $template->tag_size, isset($template->tag_align) ? $template->tag_align : 'L',
@@ -167,7 +167,7 @@ class LabelWriter
         }
 
         foreach ($record->get('fields') as $field) {
-            static::writeText(
+            $this->writeText(
                 $pdf, $field['label'],
                 $currentX, $currentY,
                 'freesans', '', $template->label_size, 'L',
@@ -175,7 +175,7 @@ class LabelWriter
             );
             $currentY += $template->label_size + $template->label_margin;
 
-            static::writeText(
+            $this->writeText(
                 $pdf, $field['value'],
                 $currentX, $currentY,
                 'freemono', 'B', $template->field_size, 'L',
@@ -185,7 +185,7 @@ class LabelWriter
         }
 
         if ($record->has('tag') && isset($template->tag_position) && $template->tag_position === 'bottom') {
-            static::writeText(
+            $this->writeText(
                 $pdf, $record->get('tag'),
                 $currentX, $pa->y2 - $template->barcode_size - $template->barcode_margin - $template->tag_size,
                 'freemono', 'b', $template->tag_size, 'R',
@@ -198,7 +198,7 @@ class LabelWriter
         $pa = $this->getLabelPrintableArea($template);
 //dd($this->getLabelPrintableArea($template));
         if ($record->has('barcode1d')) {
-            static::write1DBarcode(
+            $this->write1DBarcode(
                 $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
                 $pa->x1, $pa->y2 - $template->barcode_size,
                 $pa->w, $template->barcode_size
@@ -206,7 +206,7 @@ class LabelWriter
         }
 
         if ($record->has('title')) {
-            static::writeText(
+            $this->writeText(
                 $pdf, $record->get('title'),
                 $pa->x1, $pa->y1,
                 'freesans', '', $template->title_size, 'L',
@@ -218,7 +218,7 @@ class LabelWriter
         if ($record->has('fields')) {
             if ($record->get('fields')->count() >= 1) {
                 $field = $record->get('fields')->first();
-                static::writeText(
+                $this->writeText(
                     $pdf, $field['value'],
                     $pa->x1, $fieldY,
                     'freemono', 'B', $template->field_size, 'C',
@@ -457,7 +457,7 @@ class LabelWriter
      */
     public final function getLabelPrintableArea($template) : object
     {
-        dd('margin left: '.$template->margin_left,'margin top: '.$template->margin_top, 'width: '.$template->label_width, 'margin right: '.$template->margin_right, 'height: '.$template->label_width, 'margin bottom:'.$template->margin_bottom);
+//        dd('margin left: '.$template->margin_left,'margin top: '.$template->margin_top, 'width: '.$template->label_width, 'margin right: '.$template->margin_right, 'height: '.$template->label_width, 'margin bottom:'.$template->margin_bottom);
         return (object)[
             'x1' => $template->margin_left,
             'y1' => $template->margin_top,
