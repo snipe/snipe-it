@@ -78,7 +78,10 @@
     {{ ($show_user->employee_num!='') ? ' (#'.$show_user->employee_num.') ' : '' }}
     {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
 </h3>
-<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}</body>
+<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
+
+</body>
+
     @if ($assets->count() > 0)
         @php
             $counter = 1;
@@ -118,7 +121,9 @@
             </thead>
             <tbody>
             @foreach ($assets as $asset)
-
+                @php
+                    if ($asset->model->category->getEula()) $eulas[] = $asset->model->category->getEula()
+                @endphp
                 <tr>
                     <td>{{ $counter }}</td>
                     <td>
@@ -146,7 +151,6 @@
                         $assignedCounter = 1;
                     @endphp
                     @foreach ($asset->assignedAssets as $asset)
-
                         <tr>
                             <td>{{ $counter }}.{{ $assignedCounter }}</td>
                             <td data-formatter="imageFormatter">
@@ -209,7 +213,9 @@
             @endphp
 
             @foreach ($licenses as $license)
-
+                @php
+                    if ($license->category->getEula()) $eulas[] = $license->category->getEula()
+                @endphp
                 <tr>
                     <td>{{ $lcounter }}</td>
                     <td>{{ $license->name }}</td>
@@ -228,7 +234,6 @@
             @endforeach
         </table>
     @endif
-
 
     @if ($accessories->count() > 0)
         <div id="accessories-toolbar">
@@ -265,6 +270,9 @@
 
             @foreach ($accessories as $accessory)
                 @if ($accessory)
+                    @php
+                        if ($accessory->category->getEula()) $eulas[] = $accessory->category->getEula()
+                    @endphp
                     <tr>
                         <td>{{ $acounter }}</td>
                         <td>
@@ -275,7 +283,6 @@
                         <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                         <td>{{ $accessory->category->name }}</td>
                         <td>{{ $accessory->pivot->created_at }}</td>
-
                         <td>
                             @if (($accessory->assetlog->first()) && ($accessory->assetlog->first()->accept_signature!=''))
                             <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->assetlog->first()->accept_signature }}">
@@ -316,7 +323,6 @@
                 <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
                 <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
                 <th style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
-
             </tr>
             </thead>
             @php
@@ -325,10 +331,11 @@
 
             @foreach ($consumables as $consumable)
                 @if ($consumable)
+                    @php
+                        if ($consumable->category->getEula()) $eulas[] = $consumable->category->getEula()
+                    @endphp
                     <tr>
                         <td>{{ $ccounter }}</td>
-
-
                         <td>
                         @if ($consumable->deleted_at!='')
                             <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
@@ -352,12 +359,32 @@
         </table>
     @endif
 
+    <p></p>
+    <div class="pull-right">
+        <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target="#eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+            <i class="fa fa-eye-slash"></i>
+        </button>
+    </div>
+
     <table style="margin-top: 80px;">
+        <tr class="collapse" id="eula-row">
+            <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
+            <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
+                @php
+                    if (!empty($eulas)) $eulas = array_unique($eulas);
+                @endphp
+                @if (!empty($eulas))
+                    @foreach ($eulas as $key => $eula)
+                        {!! $eula !!}
+                    @endforeach
+                @endif
+            </td>
+	</tr>
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('general.signed_off_by') }}:</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td>_____________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td>_____________</td>
         </tr>
         <tr style="height: 80px;">
             <td></td>
@@ -365,12 +392,11 @@
             <td style="padding-right: 10px; vertical-align: top;">Signature</td>
             <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
         </tr>
-
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('admin/users/table.manager') }}:</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td>_____________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td>_____________</td>
         </tr>
         <tr>
             <td></td>
@@ -379,12 +405,10 @@
             <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
             <td></td>
         </tr>
-
     </table>
 
 {{-- Javascript files --}}
 <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-
 
 @push('css')
     <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
@@ -470,7 +494,6 @@
     });
 </script>
 @endpush
-
 
 </body>
 </html>
