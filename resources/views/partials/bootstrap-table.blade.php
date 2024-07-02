@@ -804,6 +804,38 @@
         }
     }
 
+    function linkToUserSectionBasedOnCount (count, id, section) {
+        if (count) {
+            return '<a href="{{ config('app.url') }}/users/' + id + '#' + section +'">' + count + '</a>';
+        }
+
+        return count;
+    }
+
+    function linkNumberToUserAssetsFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'asset');
+    }
+
+    function linkNumberToUserLicensesFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'licenses');
+    }
+
+    function linkNumberToUserConsumablesFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'consumables');
+    }
+
+    function linkNumberToUserAccessoriesFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'accessories');
+    }
+
+    function linkNumberToUserManagedUsersFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'managed-users');
+    }
+
+    function linkNumberToUserManagedLocationsFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'managed-locations');
+    }
+
     function labelPerPageFormatter(value, row, index, field) {
         if (row) {
             if (!row.hasOwnProperty('sheet_info')) { return 1; }
