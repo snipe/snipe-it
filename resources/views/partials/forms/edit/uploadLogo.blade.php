@@ -48,7 +48,7 @@
 
     <div class="col-md-9 col-md-offset-3">
         <label id="{{ $logoId }}-deleteCheckbox" for="{{ $logoClearVariable }}" style="font-weight: normal" class="form-control">
-            {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable)) }}
+            {{ Form::checkbox($logoClearVariable, '1', old($logoClearVariable)) }}
             Remove current {{ ucwords(str_replace('_', ' ', $logoVariable)) }} image
         </label>
     </div>

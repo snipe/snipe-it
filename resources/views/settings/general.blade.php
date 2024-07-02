@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-md-9">
                             <label class="form-control">
-                                {{ Form::checkbox('require_accept_signature', '1', Request::old('require_accept_signature', $setting->require_accept_signature)) }}
+                                {{ Form::checkbox('require_accept_signature', '1', old('require_accept_signature', $setting->require_accept_signature)) }}
                                 {{ trans('general.yes') }}
                             </label>
                             {!! $errors->first('require_accept_signature', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -80,7 +80,7 @@
                             {{ Form::label('email_domain', trans('general.email_domain')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::text('email_domain', Request::old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                            {{ Form::text('email_domain', old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
                             <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
                             {!! $errors->first('email_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
@@ -170,7 +170,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                                   {{ Form::checkbox('unique_serial', '1', Request::old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
+                                   {{ Form::checkbox('unique_serial', '1', old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
                                    {{ trans('general.yes') }}
                                    {!! $errors->first('unique_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                </label>
@@ -199,7 +199,7 @@
                            {{ Form::label('thumbnail_max_h', trans('admin/settings/general.thumbnail_max_h')) }}
                        </div>
                        <div class="col-md-9">
-                           {{ Form::text('thumbnail_max_h', Request::old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                           {{ Form::text('thumbnail_max_h', old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                            <p class="help-block">{{ trans('admin/settings/general.thumbnail_max_h_help') }}</p>
                            {!! $errors->first('thumbnail_max_h', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                        </div>
@@ -309,7 +309,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                               {{ Form::checkbox('show_assigned_assets', '1', Request::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
+                               {{ Form::checkbox('show_assigned_assets', '1', old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                </label>
                                <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
@@ -347,7 +347,7 @@
                            <div class="col-md-9">
                                {{ Form::select('dash_chart_type', array(
                                    'name' => 'Status Label Name',
-                                   'type' => 'Status Label Type'), Request::old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                                   'type' => 'Status Label Type'), old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
 
@@ -362,7 +362,7 @@
                                     'default' => 'Linear (default)', 
                                     'half_1' => 'Half-year convention, always applied', 
                                     'half_2' => 'Half-year convention, applied with condition', 
-                                ), Request::old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                                ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
                        <!-- /.form-group -->
@@ -374,9 +374,9 @@
                            </div>
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))
-                                   {{ Form::text('privacy_policy_link', Request::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
+                                   {{ Form::text('privacy_policy_link', old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
                                @else
-                                   {{ Form::text('privacy_policy_link', Request::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
+                                   {{ Form::text('privacy_policy_link', old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
 
                                @endif
 

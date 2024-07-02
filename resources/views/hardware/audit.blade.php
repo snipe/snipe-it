@@ -75,7 +75,7 @@
 
                             <div class="col-md-8 col-md-offset-3">
                                 <label class="form-control">
-                                    <input type="checkbox" value="1" name="update_location" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
+                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
                                 </label>
                                 <p class="help-block">{!! trans('help.audit_help') !!}</p>
                             </div>
