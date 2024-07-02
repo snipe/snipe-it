@@ -242,7 +242,8 @@ class AssetsController extends Controller
 
         return view('hardware/edit', compact('item'))
             ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('statuslabel_types', Helper::statusTypeList());
+            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('settings', Setting::getSettings());
     }
 
 

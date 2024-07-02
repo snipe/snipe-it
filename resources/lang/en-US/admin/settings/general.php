@@ -283,6 +283,8 @@ return [
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
     'unique_serial'                => 'Unique serial numbers',
+    'required_serial'   => 'Require Serial numbers',
+    'require_serial_help_text'                => 'Checking this box will enforce all assets to require a serial.',
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Length of asset tags, including zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
