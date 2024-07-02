@@ -26,6 +26,17 @@ abstract class Label
     public abstract function getUnit();
 
     /**
+     * Returns the PDF rotation.
+     * 0, 90, 180, 270
+     * 0 is a sane default. Override when necessary.
+     *
+     * @return int
+     */
+    public function getRotation() {
+        return 0;
+    }
+
+    /**
      * Returns the label's width in getUnit() units
      * 
      * @return float
