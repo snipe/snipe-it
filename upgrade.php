@@ -282,17 +282,22 @@ foreach ($required_exts_array as $required_ext) {
             // Split the either/ors by their pipe and put them into an array
             $require_either = explode("|", $required_ext);
 
+            $has_one_required_ext = false;
+
             // Now loop through the either/or array and see whether any of the options match
             foreach ($require_either as $require_either_value) {
 
                 if (in_array($require_either_value, $loaded_exts_array)) {
                     $ext_installed .=  '√ '.$require_either_value." is installed!\n";
-                    break;
-                // If no match, add it to the string for errors
-                } else {
-                    $ext_missing .=  '✘ MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
+                    $has_one_required_ext = true;
                     break;
                 }
+            }
+
+            // If no match, add it to the string for errors
+            if (!$has_one_required_ext) {
+                $ext_missing .= '✘ MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
+                break;
             }
 
         // If this isn't an either/or option, just add it to the string of errors conventionally
