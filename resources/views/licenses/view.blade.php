@@ -647,14 +647,13 @@
             </a>
         </span>
       @else
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
           {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
         </a>
       @endif
     @endcan
 
     @can('delete', $license)
-
       @if ($license->availCount()->count() == $license->seats)
         <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
           {{ trans('general.delete') }}
