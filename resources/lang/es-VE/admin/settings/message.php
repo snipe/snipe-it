@@ -7,7 +7,7 @@ return [
         'success'               => 'Configuraciones actualizados con éxito.',
     ],
     'backup' => [
-        'delete_confirm'        => '¿Estás seguro de que quieres eliminar este archivo de respaldo? Esta acción no puede deshacerse. ',
+        'delete_confirm'        => '¿Está seguro de que desea eliminar este archivo de respaldo? Esta acción no puede se puede deshacer. ',
         'file_deleted'          => 'El archivo de respaldo fue eliminado satisfactoriamente. ',
         'generated'             => 'Un nuevo archivo de respaldo ha sido creado con éxito.',
         'file_not_found'        => 'El archivo de respaldo no puede ser encontrado en el servidor.',

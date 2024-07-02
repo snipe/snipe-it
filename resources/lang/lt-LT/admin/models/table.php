@@ -12,6 +12,6 @@ return array(
     'update'				=> 'Atnaujinti įrangos modelį',
     'view'					=> 'Peržiūrėti įrangos modelį',
     'update'				=> 'Atnaujinti įrangos modelį',
-    'clone'				=> 'Kopijuoti modelį',
-    'edit'				=> 'Taisyti modelį',
+    'clone'				=> 'Klonuoti modelį',
+    'edit'				=> 'Redaguoti modelį',
 );

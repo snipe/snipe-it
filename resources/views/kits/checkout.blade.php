@@ -27,10 +27,12 @@
 
           <!-- Checkout/Checkin Date -->
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
-                  {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
+                  <label for="checkout_at" class="col-md-3 control-label">
+                      {{ trans('admin/hardware/form.checkout_date') }}
+                  </label>
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-date-clear-btn="true">
-                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ Request::old('checkout_at') }}">
+                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ old('checkout_at') }}">
                           <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>
                       {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
@@ -39,10 +41,12 @@
 
               <!-- Expected Checkin Date -->
               <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
-                  {{ Form::label('name', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
+                  <label for="expected_checkin" class="col-md-3 control-label">
+                      {{ trans('admin/hardware/form.expected_checkin') }}
+                  </label>
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-start-date="0d">
-                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ Request::old('expected_checkin') }}">
+                          <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
                           <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>
                       {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
@@ -52,9 +56,11 @@
 
           <!-- Note -->
           <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+              <label for="note" class="col-md-3 control-label">
+                  {{ trans('general.notes') }}
+              </label>
             <div class="col-md-8">
-              <textarea class="col-md-6 form-control" id="note" name="note">{{ Request::old('note') }}</textarea>
+              <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
               {!! $errors->first('note', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
           </div>

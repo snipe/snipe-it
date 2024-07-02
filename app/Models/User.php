@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use DB;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -24,6 +23,7 @@ use Watson\Validating\ValidatingTrait;
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     use HasFactory;
+    use CompanyableTrait;
 
     protected $presenter = \App\Presenters\UserPresenter::class;
     use SoftDeletes, ValidatingTrait;
@@ -202,6 +202,23 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function isSuperUser()
     {
         return $this->checkPermissionSection('superuser');
+    }
+
+
+    /**
+     * Checks if the can edit their own profile
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.4]
+     * @return bool
+     */
+    public function canEditProfile() : bool {
+
+        $setting = Setting::getSettings();
+        if ($setting->profile_edit == 1) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -572,7 +589,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
             if ($format=='firstname.lastname') {
                 $username = str_slug($first_name) . '.' . str_slug($last_name);
-
             } elseif ($format == 'lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
             } elseif ($format == 'firstintial.lastname') {
@@ -589,7 +605,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
                 $username = str_slug($first_name).str_slug($last_name);
             } elseif ($format == 'firstnamelastinitial') {
                 $username = str_slug(($first_name.substr($last_name, 0, 1)));
-              }
+            } elseif ($format == 'lastname.firstname') {
+                $username = str_slug($last_name).'.'.str_slug($first_name);
+            }
         }
 
         $user['first_name'] = $first_name;
@@ -822,5 +840,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
 
         return $this;
+    }
+    public function scopeUserLocation($query, $location, $search){
+
+
+        return $query->where('location_id','=', $location)
+            ->where('users.first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.email', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.permissions', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.country', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.phone', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.jobtitle', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.employee_num', 'LIKE', '%' . $search . '%')
+            ->orWhere('users.username', 'LIKE', '%' . $search . '%')
+            ->orwhereRaw('CONCAT(users.first_name," ",users.last_name) LIKE \''.$search.'%\'');
+
+
+
+
     }
 }

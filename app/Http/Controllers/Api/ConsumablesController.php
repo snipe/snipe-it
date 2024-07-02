@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ConsumablesController extends Controller
 {
@@ -277,7 +278,7 @@ class ConsumablesController extends Controller
         if (!$user = User::find($request->input('assigned_to'))) {
             // Return error message
             return response()->json(Helper::formatStandardApiResponse('error', null, 'No user found'));
-            \Log::debug('No valid user');
+            Log::debug('No valid user');
         }
 
         // Update the consumable data

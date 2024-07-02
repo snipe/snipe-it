@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Support\Facades\Log;
 
 ini_set('max_execution_time', env('IMPORT_TIME_LIMIT', 600)); //600 seconds = 10 minutes
 ini_set('memory_limit', env('IMPORT_MEMORY_LIMIT', '500M'));
@@ -59,7 +60,7 @@ class ObjectImportCommand extends Command
 
         // This $logFile/useFiles() bit is currently broken, so commenting it out for now
         // $logFile = $this->option('logfile');
-        // \Log::useFiles($logFile);
+        // Log::useFiles($logFile);
         $this->comment('======= Importing Items from '.$filename.' =========');
         $importer->import();
 
@@ -112,10 +113,10 @@ class ObjectImportCommand extends Command
     public function log($string, $level = 'info')
     {
         if ($level === 'warning') {
-            \Log::warning($string);
+            Log::warning($string);
             $this->comment($string);
         } else {
-            \Log::Info($string);
+            Log::Info($string);
             if ($this->option('verbose')) {
                 $this->comment($string);
             }

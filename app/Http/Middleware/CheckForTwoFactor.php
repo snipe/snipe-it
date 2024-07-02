@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class CheckForTwoFactor
@@ -49,10 +49,10 @@ class CheckForTwoFactor
 
                 // Otherwise make sure they're enrolled and show them the 2FA code screen
                 if ((Auth::user()->two_factor_secret != '') && (Auth::user()->two_factor_enrolled == '1')) {
-                    return redirect()->route('two-factor')->with('info', 'Please enter your two-factor authentication code.');
+                    return redirect()->route('two-factor')->with('info', trans('auth/message.two_factor.enter_two_factor_code'));
                 }
 
-                return redirect()->route('two-factor-enroll')->with('success', 'Please enroll a device in two-factor authentication.');
+                return redirect()->route('two-factor-enroll')->with('success', trans('auth/message.two_factor.please_enroll'));
             }
         }
 

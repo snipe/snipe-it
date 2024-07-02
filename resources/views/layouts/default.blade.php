@@ -83,7 +83,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
     <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
     <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
-    @livewireStyles
+
 
 </head>
 
@@ -353,12 +353,15 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             </a></li>
 
 
+                                        @can('self.profile')
                                         <li>
                                             <a href="{{ route('profile') }}">
                                                 <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                                                 {{ trans('general.editprofile') }}
                                             </a>
                                         </li>
+                                        @endcan
+
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <i class="fa-solid fa-asterisk fa-fw" aria-hidden="true"></i>
@@ -738,7 +741,11 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             {{ trans('general.activity_report') }}
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                                            {{ trans('general.custom_report') }}
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
                                             {{ trans('general.audit_report') }}</a>
@@ -768,11 +775,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             {{ trans('general.accessory_report') }}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                                            {{ trans('general.custom_report') }}
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         @endcan
@@ -781,7 +783,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('requestable-assets') }}">
                                     <i class="fa fa-laptop fa-fw"></i>
-                                    <span>{{ trans('admin/hardware/general.requestable') }}</span>
+                                    <span>{{ trans('general.requestable_items') }}</span>
                                 </a>
                             </li>
                         @endcan
@@ -947,7 +949,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
 
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-        <script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -972,13 +973,25 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                 clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
-            // ignore: 'input[type=hidden]' is required here to validate the select2 lists
-            $.validate({
-                form: '#create-form',
-                modules: 'date, toggleDisabled',
-                disabledFormFilter: '#create-form',
-                showErrorDialogs: true,
-                ignore: 'input[type=hidden]'
+            // Reference: https://jqueryvalidation.org/validate/
+            $('#create-form').validate({
+                ignore: 'input[type=hidden]',
+                errorClass: 'help-block form-error',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
+                        // If the element is a select2 then place the error above the input
+                        ? element.parents('.required').append(error)
+                        // Otherwise place it after
+                        : error.insertAfter(element);
+                },
+                highlight: function(inputElement) {
+                    $(inputElement).parent().addClass('has-error');
+                    $(inputElement).closest('.help-block').remove();
+                },
+                onfocusout: function(element) {
+                    return $(element).valid();
+                },
             });
 
 
@@ -1114,7 +1127,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
 
         @include('partials.bpay')
 
-        @livewireScripts
 
         </body>
 </html>

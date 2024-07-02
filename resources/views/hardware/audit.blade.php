@@ -18,7 +18,7 @@
 
     <div class="row">
         <!-- left column -->
-        <div class="col-md-7">
+        <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
 
                 {{ Form::open([
@@ -32,19 +32,36 @@
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
-                    @if ($asset->model->name)
-                        <!-- Asset name -->
+
+                        <!-- Asset model -->
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
+                                <label class="col-sm-3 control-label">
+                                    {{ trans('admin/hardware/form.model') }}
+                                </label>
                                 <div class="col-md-8">
-                                    <p class="form-control-static">{{ $asset->model->name }}</p>
+                                    <p class="form-control-static">
+                                        @if (($asset->model) && ($asset->model->name))
+                                            {{ $asset->model->name }}
+                                        @else
+                                            <span class="text-danger text-bold">
+                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              {{ trans('admin/hardware/general.model_invalid')}}
+                                            </span>
+                                            {{ trans('admin/hardware/general.model_invalid_fix')}}
+                                            <a href="{{ route('hardware.edit', $asset->id) }}">
+                                                <strong>{{ trans('admin/hardware/general.edit') }}</strong>
+                                            </a>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
-                    @endif
+
 
                     <!-- Asset Name -->
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="name" class="col-sm-3 control-label">
+                                {{ trans('general.name') }}
+                            </label>
                             <div class="col-md-8">
                                 <p class="form-control-static">{{ $asset->name }}</p>
                             </div>
@@ -58,7 +75,7 @@
 
                             <div class="col-md-8 col-md-offset-3">
                                 <label class="form-control">
-                                    <input type="checkbox" value="1" name="update_location" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
+                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
                                 </label>
                                 <p class="help-block">{!! trans('help.audit_help') !!}</p>
                             </div>
@@ -86,7 +103,9 @@
 
                         <!-- Next Audit -->
                         <div class="form-group{{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
-                            {{ Form::label('name', trans('general.next_audit_date'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="next_audit_date" class="col-sm-3 control-label">
+                                {{ trans('general.next_audit_date') }}
+                            </label>
                             <div class="col-md-8">
                                 <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $next_audit_date) }}">
@@ -100,7 +119,9 @@
 
                         <!-- Note -->
                         <div class="form-group{{ $errors->has('note') ? ' has-error' : '' }}">
-                            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="note" class="col-sm-3 control-label">
+                                {{ trans('general.notes') }}
+                            </label>
                             <div class="col-md-8">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $asset->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -114,7 +135,10 @@
                     </div> <!--/.box-body-->
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.audit') }}</button>
+                        <button type="submit" class="btn btn-success pull-right{{ (!$asset->model ? ' disabled' : '') }}"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'" disabled' : '') !!}>
+                            <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                            {{ trans('general.audit') }}
+                        </button>
                     </div>
                 </form>
             </div>

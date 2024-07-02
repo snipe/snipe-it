@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Locatie bestaat niet.',
-    'assoc_users'	 => 'Deze locatie is momenteel gekoppeld met tenminste één persoon en kan hierdoor niet worden verwijderd. Update je gebruikers die niet meer bij deze locatie horen en probeer het opnieuw. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'Deze locatie is momenteel gekoppeld met tenminste één asset en kan hierdoor niet worden verwijderd. Update je assets die niet meer bij deze locatie en probeer het opnieuw. ',
     'assoc_child_loc'	 => 'Deze locatie is momenteen de ouder van ten minste één kind locatie en kan hierdoor niet worden verwijderd. Update je locaties bij die niet meer naar deze locatie verwijzen en probeer het opnieuw. ',
     'assigned_assets' => 'Toegewezen activa',

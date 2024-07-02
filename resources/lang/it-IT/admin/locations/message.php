@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La posizione non esiste.',
-    'assoc_users'	 => 'Questa posizione è associata ad almeno un utente e non può essere cancellata. Si prega di aggiornare i vostri utenti di riferimento e riprovare. ',
+    'assoc_users'    => 'Non puoi cancellare questa posizione perché è la posizione di almeno un bene o un utente, ha dei beni assegnati, o è la posizione principale di un\'altra posizione. Aggiornare i modelli per non fare più riferimento a questa azienda e riprovare. ',
     'assoc_assets'	 => 'Questa posizione è associata ad almeno un prodotto e non può essere cancellata. Si prega di aggiornare i vostri prodotti di riferimento e riprovare. ',
     'assoc_child_loc'	 => 'Questa posizione è parente di almeno un\'altra posizione e non può essere cancellata. Si prega di aggiornare le vostre posizioni di riferimento e riprovare. ',
     'assigned_assets' => 'Beni Assegnati',

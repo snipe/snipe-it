@@ -11,8 +11,8 @@ return array(
     'requestable'               => 'Los usuarios pueden solicitar este modelo',
 	'show_mac_address'			      => 'Mostrar campo de dirección MAC en activos en este modelo',
     'view_deleted'              => 'Ver Borrados',
-    'view_models'               => 'Ver Modelos',
-    'fieldset'                  => 'Fieldset',
+    'view_models'               => 'Ver modelos',
+    'fieldset'                  => 'Grupos de campo',
     'no_custom_field'           => 'Sin campos personalizados',
     'add_default_values'        => 'Añadir valores por defecto',
 );

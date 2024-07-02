@@ -14,6 +14,8 @@ return array(
         'success'               => 'Usted inició sesión correctamente.',
         'code_required'         => 'Se requiere el código de 2FA(Autenticación en dos pasos) .',
         'invalid_code'          => 'El código de doble factor es inválido.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

@@ -14,6 +14,8 @@ return array(
         'success'               => 'ログインに成功しました。',
         'code_required'         => '二段階認証コードが必要です。',
         'invalid_code'          => '二段階認証コードが無効です。',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

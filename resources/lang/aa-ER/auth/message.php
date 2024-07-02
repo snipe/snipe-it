@@ -14,6 +14,8 @@ return array(
         'success'               => 'crwdns5930:0crwdne5930:0',
         'code_required'         => 'crwdns5932:0crwdne5932:0',
         'invalid_code'          => 'crwdns5934:0crwdne5934:0',
+        'enter_two_factor_code' => 'crwdns12274:0crwdne12274:0',
+        'please_enroll'         => 'crwdns12276:0crwdne12276:0',
     ),
 
     'signin' => array(

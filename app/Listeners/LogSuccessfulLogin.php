@@ -3,9 +3,9 @@
 namespace App\Listeners;
 
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Login;
-
+use Illuminate\Support\Facades\Log;
 class LogSuccessfulLogin
 {
     /**
@@ -39,7 +39,7 @@ class LogSuccessfulLogin
                 ]
             );
         } catch (\Exception $e) {
-            \Log::debug($e);
+            Log::debug($e);
         }
     }
 }

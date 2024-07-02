@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro de que quieres borrar este proveedor?',
+        'confirm'   => '¿Está seguro de que desea eliminar este proveedor?',
         'error'   => 'Hubo un problema borrando el proveedor. Por favor, inténtalo de nuevo.',
         'success' => 'El proveedor fue eliminado con éxito.',
         'assoc_assets'	 => 'Este proveedor está actualmente asociado con :asset_count activo(s) y no puede ser borrado. Por favor, actualiza tus activos para no referenciar más este proveedor e inténtalo de nuevo. ',

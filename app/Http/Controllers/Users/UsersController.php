@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserNotFoundException;
+use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Actionlog;
@@ -14,15 +14,15 @@ use App\Models\Group;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
-use Input;
+use Illuminate\Support\Facades\Storage;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use View;
 use App\Notifications\CurrentInventory;
 
 /**
@@ -152,7 +152,7 @@ class UsersController extends Controller
                 $user->notify(new WelcomeNotification($data));
             }
 
-            return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
+            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
@@ -184,8 +184,7 @@ class UsersController extends Controller
     {
 
         $this->authorize('update', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
 
         if ($user) {
 
@@ -231,9 +230,7 @@ class UsersController extends Controller
         $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
-
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
 
         // User is valid - continue...
         if ($user) {
@@ -336,53 +333,26 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id = null)
+    public function destroy(DeleteUserRequest $request, $id = null)
     {
-
         $this->authorize('delete', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($id);
 
+        if ($user = User::find($id)) {
 
-        if ($user) {
-            // Check if we are not trying to delete ourselves
-            if ($user->id === Auth::id()) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'We would feel really bad if you deleted yourself, please reconsider.');
+            $this->authorize('delete', $user);
+
+            if ($user->delete()) {
+                if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    try {
+                        Storage::disk('public')->delete('avatars/' . $user->avatar);
+                    } catch (\Exception $e) {
+                        Log::debug($e);
+                    }
+                }
+                return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
             }
-
-            if (($user->assets()) && (($assetsCount = $user->assets()->count()) > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$assetsCount.' assets associated with them.');
-            }
-
-            if (($user->licenses()) && (($licensesCount = $user->licenses()->count())) > 0) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$licensesCount.' licenses associated with them.');
-            }
-
-            if (($user->accessories()) && (($accessoriesCount = $user->accessories()->count()) > 0)) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$accessoriesCount.' accessories associated with them.');
-            }
-
-            if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$managedLocationsCount.' locations that they manage.');
-            }
-
-            // Delete the user
-            $user->delete();
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
         }
-
-        return redirect()->route('users.index')
-            ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found'));
 
     }
 
@@ -442,8 +412,7 @@ class UsersController extends Controller
         // Make sure the user can view users at all
         $this->authorize('view', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user = Company::scopeCompanyables($user)->find($userId);
+        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId);
 
         // Make sure they can view this particular user
         $this->authorize('view', $user);
@@ -478,9 +447,7 @@ class UsersController extends Controller
         app('request')->request->set('permissions', $permissions);
 
 
-        $user_to_clone = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
-        $user_to_clone = Company::scopeCompanyables($user_to_clone)->find($id);
-
+        $user_to_clone = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
         // Make sure they can view this particular user
         $this->authorize('view', $user_to_clone);
 
@@ -544,10 +511,7 @@ class UsersController extends Controller
                 'groups',
                 'userloc',
                 'company'
-            )->orderBy('created_at', 'DESC');
-
-            // FMCS scoping
-            Company::scopeCompanyables($users)
+            )->orderBy('created_at', 'DESC')
                 ->chunk(500, function ($users) use ($handle) {
                     $headers = [
                         // strtolower to prevent Excel from trying to open it as a SYLK file
@@ -566,6 +530,7 @@ class UsersController extends Controller
                         trans('general.accessories'),
                         trans('general.consumables'),
                         trans('general.groups'),
+                        trans('general.permissions'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
                         trans('general.created_at'),
@@ -578,6 +543,19 @@ class UsersController extends Controller
 
                         foreach ($user->groups as $user_group) {
                             $user_groups .= $user_group->name.', ';
+                        }
+
+
+                        $permissionstring = "";
+                        
+                        if($user->isSuperUser()) {
+                            $permissionstring = trans('general.superuser');
+                        }
+                        elseif($user->hasAccess('admin')) {
+                            $permissionstring = trans('general.admin');
+                        }
+                        else {
+                            $permissionstring = trans('general.user');
                         }
 
                         // Add a new row with data
@@ -597,6 +575,7 @@ class UsersController extends Controller
                             $user->accessories->count(),
                             $user->consumables->count(),
                             $user_groups,
+                            $permissionstring,
                             $user->notes,
                             ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,
@@ -626,20 +605,21 @@ class UsersController extends Controller
     public function printInventory($id)
     {
         $this->authorize('view', User::class);
-        $show_user = Company::scopeCompanyables(User::where('id', $id)->withTrashed()->first());
+        $user = User::where('id', $id)->withTrashed()->first();
+      
 
         // Make sure they can view this particular user
-        $this->authorize('view', $show_user);
+        $this->authorize('view', $user);
 
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-        $accessories = $show_user->accessories()->get();
-        $consumables = $show_user->consumables()->get();
+        $accessories = $user->accessories()->get();
+        $consumables = $user->consumables()->get();
 
         return view('users/print')->with('assets', $assets)
-            ->with('licenses', $show_user->licenses()->get())
+            ->with('licenses', $user->licenses()->get())
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
-            ->with('show_user', $show_user)
+            ->with('show_user', $user)
             ->with('settings', Setting::getSettings());
     }
 
@@ -655,7 +635,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $user = Company::scopeCompanyables(User::find($id));
+        $user = User::find($id);
 
         // Make sure they can view this particular user
         $this->authorize('view', $user);
@@ -683,7 +663,9 @@ class UsersController extends Controller
      */
     public function sendPasswordReset($id)
     {
-        if (($user = Company::scopeCompanyables(User::find($id))) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
+        $this->authorize('view', User::class);
+
+        if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
             $credentials = ['email' => trim($user->email)];
 
             try {

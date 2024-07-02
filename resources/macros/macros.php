@@ -190,6 +190,7 @@ Form::macro('username_format', function ($name = 'username_format', $selected = 
         'lastname_firstinitial' => trans('general.lastname_firstinitial'),
         'firstnamelastname' => trans('general.firstnamelastname'),
         'firstnamelastinitial' => trans('general.firstnamelastinitial'),
+        'lastname.firstname' => trans('general.lastnamefirstname'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';

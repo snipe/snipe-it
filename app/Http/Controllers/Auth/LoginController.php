@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Redirect;
 
 /**
@@ -122,7 +122,7 @@ class LoginController extends Controller
                     Auth::login($user);
                 } else {
                     $username = $saml->getUsername();
-                    \Log::debug("SAML user '$username' could not be found in database.");
+                    Log::debug("SAML user '$username' could not be found in database.");
                     $request->session()->flash('error', trans('auth/message.signin.error'));
                     $saml->clearData();
                 }
@@ -137,7 +137,7 @@ class LoginController extends Controller
                 $s->save();
 
             } catch (\Exception $e) {
-                \Log::debug('There was an error authenticating the SAML user: '.$e->getMessage());
+                Log::debug('There was an error authenticating the SAML user: '.$e->getMessage());
                 throw $e;
             }
 
@@ -146,7 +146,7 @@ class LoginController extends Controller
 
             // Better logging
             if (empty($samlData)) {
-                \Log::debug("SAML page requested, but samlData seems empty.");
+                Log::debug("SAML page requested, but samlData seems empty.");
             }
         }
 
@@ -261,19 +261,19 @@ class LoginController extends Controller
     /**
      * Account sign in form processing.
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
     {
 
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
-            \Log::debug('require SAML is enabled in the .env - return a 403');
+            Log::debug('require SAML is enabled in the .env - return a 403');
             return view('errors.403');
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
-            \Log::debug('login_common_disabled is set to 1 - return a 403');
+            Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -339,7 +339,7 @@ class LoginController extends Controller
     /**
      * Two factor enrollment page
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getTwoFactorEnroll()
     {
@@ -389,7 +389,7 @@ class LoginController extends Controller
     /**
      * Two factor code form page
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getTwoFactorAuth()
     {
@@ -415,7 +415,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postTwoFactorAuth(Request $request)
     {
@@ -427,10 +427,6 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
-        if (! $request->has('two_factor_secret')) { // TODO this seems almost the same as above?
-            return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
-        }
-
         $user = Auth::user();
         $secret = $request->input('two_factor_secret');
 
@@ -439,7 +435,7 @@ class LoginController extends Controller
             $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 
-            return redirect()->route('home')->with('success', 'You are logged in!');
+            return redirect()->route('home')->with('success', trans('auth/message.signin.success'));
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
@@ -451,7 +447,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
     {
@@ -537,7 +533,7 @@ class LoginController extends Controller
 
         $minutes = round($seconds / 60);
 
-        $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
+        $message = trans('auth/message.throttle', ['minutes' => $minutes]);
 
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))

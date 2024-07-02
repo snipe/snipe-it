@@ -8,7 +8,7 @@ return array(
     'id'      			=> 'ID',
     'license_email'   	=> 'Email de licencia',
     'license_name'   	=> 'Licenciado a',
-    'purchase_date'   	=> 'Fecha de Compra',
+    'purchase_date'   	=> 'Fecha de compra',
     'purchased'   		=> 'Comprado',
     'seats'   			=> 'Asientos',
     'hardware'   		=> 'Hardware',

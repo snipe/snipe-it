@@ -54,7 +54,7 @@ class Label implements View
         $pdf = new TCPDF(
             $template->getOrientation(),
             $template->getUnit(),
-            [ $template->getWidth(), $template->getHeight() ]
+            [0 => $template->getWidth(), 1 => $template->getHeight(), 'Rotate' => $template->getRotation()]
         );
 
         // Reset parameters

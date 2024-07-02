@@ -21,8 +21,8 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro de que deseas eliminar este modelo de equipo?',
-        'error'   => 'Hubo un problema eliminando el modelo. Por favor, inténtalo de nuevo.',
+        'confirm'   => '¿Está seguro de que desea eliminar este modelo de activo?',
+        'error'   => 'Hubo un problema eliminando el modelo. Por favor, inténtelo de nuevo.',
         'success' => 'El modelo fue eliminado exitosamente.'
     ),
 

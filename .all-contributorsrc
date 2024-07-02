@@ -3108,6 +3108,34 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bryanlopezinc",
+      "name": "BRYAN ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23613427?v=4",
+      "profile": "https://github.com/bryanlopezinc",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "U-H-T",
+      "name": "U-H-T",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64061710?v=4",
+      "profile": "https://github.com/U-H-T",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Tyree",
+      "name": "Matt Tyree",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5395363?v=4",
+      "profile": "https://github.com/Tyree",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }

@@ -3,8 +3,8 @@
 return array(
 
     'asset'             => 'Equipo',
-    'checkin'           => 'Quita',
-    'create'            => 'Nueva Licencia',
+    'checkin'           => 'Devolver',
+    'create'            => 'Crear licencia',
     'expiration'        => 'Fecha de vencimiento',
     'license_key'       => 'Clave de producto',
     'maintained'        => 'Mantenido',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Registrado a Email',
     'to_name'           => 'Registrado a Nombre',
     'update'            => 'Actualizar Licencia',
-    'checkout_help'     => 'Puedes asignar la licencia a un equipo a a un usuario. Puedes seleccionarlos a ambos, pero el dueño de la licencia debe ser el mismo usuario al que asignes el equipo.'
+    'checkout_help'     => 'Debe asignar una licencia a un activo de hardware o a una persona. Puede seleccionar ambos, pero el propietario del activo debe coincidir con la persona a la que está asignado el activo.'
 );

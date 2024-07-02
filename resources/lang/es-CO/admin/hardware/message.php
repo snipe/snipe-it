@@ -2,17 +2,17 @@
 
 return [
 
-    'undeployable' 		=> 'ADVERTENCI<strong>ADVERTENCI </strong> Este activo ha sido marcado como actualmente no desplegable.
-                        Si este estado ha cambiado, por favor actualice el estado del activo.',
+    'undeployable' 		=> '<strong>Atención:</strong> Este elemento ha sido marcado como no utilizable.
+                        Si no es correcto, actualice el estado.',
     'does_not_exist' 	=> 'El recurso no existe.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Activo con etiqueta :asset_tag no encontrado.',
+    'no_tag' 	        => 'No se ha proporcionado ninguna etiqueta de activo.',
     'does_not_exist_or_not_requestable' => 'Ese activo no existe o no es solicitable.',
     'assoc_users'	 	=> 'Este activo está actualmente reservado a un usuario y no puede ser eliminado. Por favor, compruebe el activo primero y vuelva a intentarlo. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
-        'error'   		=> 'El recurso no fue creado, por favor inténtalo de nuevo. :(',
+        'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Equipo creado con éxito. :)',
         'success_linked' => 'Activo con etiqueta :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
     ],
@@ -34,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Auditoría de activos fallida: :error ',
         'success' 		=> 'Auditoría de activos registrada con éxito.',
     ],
 
@@ -45,9 +45,9 @@ return [
     ],
 
     'upload' => [
-        'error'   => 'Archivo(s) no cargados. Por favor, inténtelo de nuevo.',
-        'success' => 'Archivo(s) cargados correctamente.',
-        'nofiles' => 'No has seleccionado ningún archivo para subir, o el archivo que estás intentando subir es demasiado grande',
+        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
+        'success' => 'Archivo(s) cargado(s) exitosamente.',
+        'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que está tratando de cargar es demasiado grande',
         'invalidfiles' => 'Uno o más de sus archivos es demasiado grande o es un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ],
 
@@ -64,14 +64,14 @@ return [
 
 
     'delete' => [
-        'confirm'   	=> '¿Está seguro que desea eliminar este recurso?',
+        'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Hubo un problema al eliminar el activo. Por favor, inténtelo de nuevo.',
         'nothing_updated'   => 'No se seleccionaron activos, por lo que no se eliminó nada.',
         'success' 		=> 'El recurso se ha eliminado correctamente.',
     ],
 
     'checkout' => [
-        'error'   		=> 'El recurso no fue retirado, por favor inténtalo de nuevo',
+        'error'   		=> 'El activo no fue asignado, por favor inténtelo de nuevo',
         'success' 		=> 'Equipo retirado con éxito.',
         'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.',
         'not_available' => '¡Ese equipo no está disponible para asignar!',
@@ -79,9 +79,9 @@ return [
     ],
 
     'checkin' => [
-        'error'   		=> 'El equipo no pudo ser asignado, por favor inténtalo de nuevo',
-        'success' 		=> 'El equipo fue asignado exitosamente.',
-        'user_does_not_exist' => 'Es usuario es invalido, por favor inténtalo de nuevo.',
+        'error'   		=> 'El equipo no se pudo devolver, por favor inténtelo de nuevo',
+        'success' 		=> 'El activo fue devuelto exitosamente.',
+        'user_does_not_exist' => 'Es usuario no es correcto, por favor inténtelo de nuevo.',
         'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ],

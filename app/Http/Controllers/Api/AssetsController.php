@@ -28,17 +28,16 @@ use App\Models\Setting;
 use App\Models\User;
 use \Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Log;
-use Input;
 use Paginator;
 use Slack;
 use Str;
 use TCPDF;
 use Validator;
-use Route;
+use Illuminate\Support\Facades\Route;
 
 
 /**
@@ -845,7 +844,6 @@ class AssetsController extends Controller
             'asset_tag' => $asset->asset_tag,
         ];
 
-
         // This item is checked out to a location
         if (request('checkout_to_type') == 'location') {
             $target = Location::find(request('assigned_location'));
@@ -872,12 +870,9 @@ class AssetsController extends Controller
             $asset->status_id = $request->get('status_id');
         }
 
-
         if (! isset($target)) {
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
-
-
 
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
         $expected_checkin = request('expected_checkin', null);
@@ -893,8 +888,6 @@ class AssetsController extends Controller
 //        if ((isset($target->rtd_location_id)) && ($asset->rtd_location_id!='')) {
 //            $asset->location_id = $target->rtd_location_id;
 //        }
-
-
 
         if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));

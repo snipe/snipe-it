@@ -28,7 +28,9 @@
                     {{csrf_field()}}
                         @if ($asset->company && $asset->company->name)
                             <div class="form-group">
-                                {{ Form::label('model', trans('general.company'), array('class' => 'col-md-3 control-label')) }}
+                                <label for="company" class="col-md-3 control-label">
+                                    {{ trans('general.company') }}
+                                </label>
                                 <div class="col-md-8">
                                     <p class="form-control-static">
                                         {{ $asset->company->name }}
@@ -36,17 +38,26 @@
                                 </div>
                             </div>
                         @endif
-                    <!-- AssetModel name -->
+
+                        <!-- AssetModel name -->
                         <div class="form-group">
-                            {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="model" class="col-md-3 control-label">
+                                {{ trans('general.company') }}
+                            </label>
                             <div class="col-md-8">
                                 <p class="form-control-static">
                                     @if (($asset->model) && ($asset->model->name))
                                         {{ $asset->model->name }}
                                     @else
                                         <span class="text-danger text-bold">
-                  <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
-                  <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
+                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              {{ trans('admin/hardware/general.model_invalid')}}
+                                        </span>
+
+                                        {{ trans('admin/hardware/general.model_invalid_fix')}}
+                                        <a href="{{ route('hardware.edit', $asset->id) }}">
+                                            <strong>{{ trans('admin/hardware/general.edit') }}</strong>
+                                        </a>
                                     @endif
                                 </p>
                             </div>
@@ -54,7 +65,10 @@
 
                         <!-- Asset Name -->
                         <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-                            {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="name" class="col-md-3 control-label">
+                                {{ trans('admin/hardware/form.name') }}
+                            </label>
+
                             <div class="col-md-8">
                                 <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $asset->name) }}" tabindex="1">
                                 {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -63,7 +77,9 @@
 
                         <!-- Status -->
                         <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
-                            {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="status_id" class="col-md-3 control-label">
+                                {{ trans('admin/hardware/form.status') }}
+                            </label>
                             <div class="col-md-7 required">
                                 {{ Form::select('status_id', $statusLabel_list, $asset->status_id, array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
                                 {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -83,7 +99,9 @@
 
                     <!-- Checkout/Checkin Date -->
                         <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
-                            {{ Form::label('checkout_at', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="checkout_at" class="col-md-3 control-label">
+                                {{ trans('admin/hardware/form.checkout_date') }}
+                            </label>
                             <div class="col-md-8">
                                 <div class="input-group date col-md-7" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ old('checkout_at', date('Y-m-d')) }}">
@@ -95,7 +113,10 @@
 
                         <!-- Expected Checkin Date -->
                         <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
-                            {{ Form::label('expected_checkin', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="expected_checkin" class="col-md-3 control-label">
+                                {{ trans('admin/hardware/form.expected_checkin') }}
+                            </label>
+
                             <div class="col-md-8">
                                 <div class="input-group date col-md-7" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-start-date="0d" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
@@ -107,7 +128,9 @@
 
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="note" class="col-md-3 control-label">
+                                {{ trans('general.notes') }}
+                            </label>
                             <div class="col-md-8">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $asset->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -141,10 +164,13 @@
                         @endif
 
                     </div> <!--/.box-body-->
-                    <div class="box-footer">
-                        <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-                    </div>
+                    @include ('partials.forms.redirect_submit_options',
+                                 [
+                                 'route' => 'hardware.index',
+                                 'table_name' => $table_name,
+                                 'type'=> ($asset->model ? $asset->model->name : trans('general.asset_model')),
+                                 'checkin' => false
+                           ])
                 </form>
             </div>
         </div> <!--/.col-md-7-->

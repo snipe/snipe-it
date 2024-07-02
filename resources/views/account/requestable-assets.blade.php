@@ -1,8 +1,7 @@
 @extends('layouts/default')
 
 @section('title0')
-  {{ trans('admin/hardware/general.requestable') }}
-  {{ trans('general.assets') }}
+  {{ trans('general.requestable_items') }}
 @stop
 
 {{-- Page title --}}

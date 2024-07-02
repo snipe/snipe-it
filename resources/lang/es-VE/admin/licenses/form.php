@@ -3,8 +3,8 @@
 return array(
 
     'asset'             => 'Activo',
-    'checkin'           => 'Registro',
-    'create'            => 'Crear Licencia',
+    'checkin'           => 'Devolver',
+    'create'            => 'Crear licencia',
     'expiration'        => 'Fecha de vencimiento',
     'license_key'       => 'Clave del Producto',
     'maintained'        => 'Mantenido',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licenciado al Correo Electrónico',
     'to_name'           => 'Licenciado a Nombre',
     'update'            => 'Actualizar Licencia',
-    'checkout_help'     => 'Debes asignar una licencia a un activo de hardware o a una persona. Puedes seleccionar ambos pero el dueño del activo debe coincidir con la persona a la que le registras el activo.'
+    'checkout_help'     => 'Debe asignar una licencia a un activo de hardware o a una persona. Puede seleccionar ambos, pero el propietario del activo debe coincidir con la persona a la que está asignado el activo.'
 );

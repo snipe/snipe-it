@@ -98,14 +98,14 @@
                             </div>
                             <div class="col-md-9">
                                 @if ($setting->qr_code == 1)
-                                    {{ Form::text('qr_text', Request::old('qr_text', $setting->qr_text), array('class' => 'form-control','placeholder' => 'Property of Your Company',
+                                    {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array('class' => 'form-control','placeholder' => 'Property of Your Company',
                                     'rel' => 'txtTooltip',
                                     'title' =>'Extra text that you would like to display on your labels. ',
                                     'data-toggle' =>'tooltip',
                                     'data-placement'=>'top')) }}
                                     {!! $errors->first('qr_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @else
-                                    {{ Form::text('qr_text', Request::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Property of Your Company')) }}
+                                    {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Property of Your Company')) }}
                                     <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
                                 @endif
                             </div>

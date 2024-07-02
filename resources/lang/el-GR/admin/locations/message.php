@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Η τοποθεσία δεν υπάρχει.',
-    'assoc_users'	 => 'Αυτή η θέση είναι επί του παρόντος σχετίζεται με τουλάχιστον ένα χρήστη και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τους χρήστες σας να μην αναφέρονται σε αυτήν τη θέση και δοκιμάστε ξανά. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'Αυτή η τοποθεσία συσχετίζεται προς το παρόν με τουλάχιστον ένα στοιχείο και δεν μπορεί να διαγραφεί. Ενημερώστε τα στοιχεία σας ώστε να μην αναφέρονται πλέον στην τοποθεσία αυτή και να προσπαθήσετε ξανά.',
     'assoc_child_loc'	 => 'Αυτή η τοποθεσία είναι αυτήν τη στιγμή γονέας τουλάχιστον μιας τοποθεσίας παιδιού και δεν μπορεί να διαγραφεί. Ενημερώστε τις τοποθεσίες σας ώστε να μην αναφέρονται πλέον σε αυτήν την τοποθεσία και δοκιμάστε ξανά.',
     'assigned_assets' => 'Αντιστοιχισμένα Στοιχεία Ενεργητικού',

@@ -5,7 +5,7 @@ return array(
     'does_not_exist' => 'La licencia no existe o no tiene permiso para verla.',
     'user_does_not_exist' => 'El usuario no existe o no tiene permiso para verlos.',
     'asset_does_not_exist' 	=> 'El activo que intentas asociar con esta licencia no existe.',
-    'owner_doesnt_match_asset' => 'El activo al que estás intentando asociar con esta licencia está asignado a un usuario diferente al de la persona seleccionada para retirar.',
+    'owner_doesnt_match_asset' => 'El activo que está intentando asignar con esta licencia está asignado a un usuario diferente al de la persona seleccionada de la lista.',
     'assoc_users'	 => 'Esta licencia está actualmente asignada a un usuario y no puede ser borrada. Por favor, revisa la licencia primero y luego intenta borrarla. ',
     'select_asset_or_person' => 'Debes seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
@@ -25,7 +25,7 @@ return array(
     'upload' => array(
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
         'success' => 'Archivo(s) cargado(s) con éxito.',
-        'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
+        'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de tus archivos son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
     ),
 
@@ -35,7 +35,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro de querer borrar esta licencia?',
+        'confirm'   => '¿Está seguro de que desea eliminar esta licencia?',
         'error'   => 'Hubo un problema al borrar la licencia. Por favor, inténtalo de nuevo.',
         'success' => 'La licencia fue eliminada con éxito.'
     ),
@@ -47,7 +47,7 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   => 'Hubo un problema registrando la licencia. Por favor, inténtalo de nuevo.',
+        'error'   => 'Hubo un problema devolviendo la licencia. Por favor, inténtalo de nuevo.',
         'success' => 'La licencia fue registrada con éxito'
     ),
 
