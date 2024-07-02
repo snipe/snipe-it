@@ -315,11 +315,11 @@ class SettingsController extends Controller
     /**
      * Return a form to allow a super admin to update settings.
      *
+     * @return \Illuminate\Http\RedirectResponse
+     *@since [v1.0]
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @since [v1.0]
-     *
-     * @return View
      */
     public function postSettings(Request $request)
     {
@@ -335,7 +335,13 @@ class SettingsController extends Controller
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->unique_serial = $request->input('unique_serial', '0');
-        $setting->required_serial = $request->input('required_serial', '0');
+//        dd(Asset::where('serial', '=', null)->count());
+        if((Asset::where('serial', '=', null)->count() > 0) && ($request->input('required_serial') == 0)) {
+            $setting->required_serial = $request->input('required_serial', '0');
+        }
+        else{
+            return redirect()->route('settings.general.index')->with('error', trans('admin/settings/general.required_serial_error', ['count' => Asset::where('serial', '=', null)->count(),'link' => route('hardware.index')]));
+        }
         $setting->show_images_in_email = $request->input('show_images_in_email', '0');
         $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
         $setting->dashboard_message = $request->input('dashboard_message');

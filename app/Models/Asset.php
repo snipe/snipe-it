@@ -96,7 +96,6 @@ class Asset extends Depreciable
         'deleted_at'  => 'datetime',
     ];
 
-
     protected $rules = [
         'model_id'         => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
         'status_id'        => 'required|integer|exists:status_labels,id',
@@ -113,7 +112,7 @@ class Asset extends Depreciable
         'location_id'      => 'nullable|exists:locations,id',
         'rtd_location_id'  => 'nullable|exists:locations,id',
         'purchase_date'    => 'nullable|date|date_format:Y-m-d',
-        'serial'           => 'unique_undeleted:assets,serial|potentially_required:required_serial',
+        'serial'           => 'nullable|unique_undeleted:assets,serial',
         'purchase_cost'    => 'nullable|numeric|gte:0',
         'supplier_id'      => 'nullable|exists:suppliers,id',
         'asset_eol_date'   => 'nullable|date',
@@ -124,6 +123,7 @@ class Asset extends Depreciable
         'assigned_to'      => 'nullable|integer',
         'requestable'      => 'nullable|boolean',
     ];
+
 
   /**
    * The attributes that are mass assignable.
