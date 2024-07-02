@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api;
-// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -547,20 +546,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       });
 
-
-
-
+    // pulling this out of resource route group to begin normalizing for route-model binding.
+    // this would probably keep working with the resource route group, but the general practice is for
+    // the model name to be the parameter - and i think it's a good differentiation in the code while we convert the others.
+    Route::patch('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.update');
 
         Route::resource('hardware', 
         Api\AssetsController::class,
         ['names' => [
                 'index' => 'api.assets.index',
                 'show' => 'api.assets.show',
-                'update' => 'api.assets.update',
                 'store' => 'api.assets.store',
                 'destroy' => 'api.assets.destroy',
             ],
-        'except' => ['create', 'edit'],
+            'except' => ['create', 'edit', 'update'],
         'parameters' => ['asset' => 'asset_id'],
         ]
         ); // end assets API routes

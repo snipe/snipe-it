@@ -299,4 +299,9 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function deleted(): self
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
+    }
 }

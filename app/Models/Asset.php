@@ -89,35 +89,38 @@ class Asset extends Depreciable
     ];
 
     protected $rules = [
-        'model_id'         => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
-        'status_id'        => 'required|integer|exists:status_labels,id',
-        'asset_tag'        => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
-        'name'             => 'nullable|max:255',
-        'company_id'       => 'nullable|integer|exists:companies,id',
-        'warranty_months'  => 'nullable|numeric|digits_between:0,240',
-        'last_checkout'    => 'nullable|date_format:Y-m-d H:i:s',
-        'last_checkin'     => 'nullable|date_format:Y-m-d H:i:s',
-        'expected_checkin' => 'nullable|date',
-        'last_audit_date'  => 'nullable|date_format:Y-m-d H:i:s',
-        // 'next_audit_date'  => 'nullable|date|after:last_audit_date',
-        'next_audit_date'  => 'nullable|date',
-        'location_id'      => 'nullable|exists:locations,id',
-        'rtd_location_id'  => 'nullable|exists:locations,id',
-        'purchase_date'    => 'nullable|date|date_format:Y-m-d',
-        'serial'           => 'nullable|unique_undeleted:assets,serial',
-        'purchase_cost'    => 'nullable|numeric|gte:0',
-        'supplier_id'      => 'nullable|exists:suppliers,id',
-        'asset_eol_date'   => 'nullable|date',
-        'eol_explicit'     => 'nullable|boolean',
-        'byod'             => 'nullable|boolean',
-        'order_number'     => 'nullable|string|max:191',
-        'notes'            => 'nullable|string|max:65535',
-        'assigned_to'      => 'nullable|integer',
-        'requestable'      => 'nullable|boolean',
+        'model_id'          => ['required', 'integer', 'exists:models,id,deleted_at,NULL', 'not_array'],
+        'status_id'         => ['required', 'integer', 'exists:status_labels,id'],
+        'asset_tag'         => ['required', 'min:1', 'max:255', 'unique_undeleted:assets,asset_tag', 'not_array'],
+        'name'              => ['nullable', 'max:255'],
+        'company_id'        => ['nullable', 'integer', 'exists:companies,id'],
+        'warranty_months'   => ['nullable', 'numeric', 'digits_between:0,240'],
+        'last_checkout'     => ['nullable', 'date_format:Y-m-d H:i:s'],
+        'last_checkin'      => ['nullable', 'date_format:Y-m-d H:i:s'],
+        'expected_checkin'  => ['nullable', 'date'],
+        'last_audit_date'   => ['nullable', 'date_format:Y-m-d H:i:s'],
+        'next_audit_date'   => ['nullable', 'date'],
+        //'after:last_audit_date'],
+        'location_id'       => ['nullable', 'exists:locations,id'],
+        'rtd_location_id'   => ['nullable', 'exists:locations,id'],
+        'purchase_date'     => ['nullable', 'date', 'date_format:Y-m-d'],
+        'serial'            => ['nullable', 'unique_undeleted:assets,serial'],
+        'purchase_cost'     => ['nullable', 'numeric', 'gte:0'],
+        'supplier_id'       => ['nullable', 'exists:suppliers,id'],
+        'asset_eol_date'    => ['nullable', 'date'],
+        'eol_explicit'      => ['nullable', 'boolean'],
+        'byod'              => ['nullable', 'boolean'],
+        'order_number'      => ['nullable', 'string', 'max:191'],
+        'notes'             => ['nullable', 'string', 'max:65535'],
+        'assigned_to'       => ['nullable', 'integer'],
+        'requestable'       => ['nullable', 'boolean'],
+        'assigned_user'     => ['nullable', 'exists:users,id,deleted_at,NULL'],
+        'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL'],
+        'assigned_asset'    => ['nullable', 'exists:assets,id,deleted_at,NULL']
     ];
 
 
-  /**
+    /**
    * The attributes that are mass assignable.
    *
    * @var array
