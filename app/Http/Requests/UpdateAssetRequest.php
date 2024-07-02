@@ -39,21 +39,6 @@ class UpdateAssetRequest extends ImageUploadRequest
             ],
         );
 
-        // OR
-
-        $rules2 = array_merge(
-            parent::rules(),
-            // collects rules, 'rejects' required rules not a fan of this approach, feels inflexible
-            // what if we decide something _is_ required, etc, it could get complicated and harder to read than the above
-            collect((new Asset)->getRules())->map(function ($rules) {
-                return collect($rules)->reject(function ($rule) {
-                    return $rule === 'required';
-                })->reject(function ($rule) {
-                    return $rule === 'unique_undeleted:assets,asset_tag';
-                })->values()->all();
-            })->all(),
-        );
-
-        return $rules2;
+        return $rules;
     }
 }
