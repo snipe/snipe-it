@@ -498,7 +498,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * Establishes the user -> acceptances relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
-     * @since [v3.0]
+     * @since [v7.0.7]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function acceptances()
