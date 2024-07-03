@@ -124,7 +124,7 @@ class ConsumableFactory extends Factory
             $consumable->users()->attach($consumable->id, [
                 'consumable_id' => $consumable->id,
                 'created_at' => Carbon::now(),
-                'user_id' => 1,
+                'user_id' => User::factory()->create()->id,
                 'assigned_to' => $user->id ?? User::factory()->create()->id,
             ]);
         });

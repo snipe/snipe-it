@@ -153,7 +153,7 @@ class ActionlogFactory extends Factory
         });
     }
 
-    public function logUserUpdate()
+    public function userUpdated()
     {
         return $this->state(function () {
 

@@ -33,7 +33,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->assets->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->assets->count());
         $this->assertEquals(0, $user1->refresh()->assets->count());
         $this->assertEquals(0, $user2->refresh()->assets->count());
@@ -62,7 +61,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->licenses->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->licenses->count());
         $this->assertEquals(0, $user1->refresh()->licenses->count());
         $this->assertEquals(0, $user2->refresh()->licenses->count());
@@ -91,7 +89,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->accessories->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->accessories->count());
         $this->assertEquals(0, $user1->refresh()->accessories->count());
         $this->assertEquals(0, $user2->refresh()->accessories->count());
@@ -120,7 +117,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->consumables->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->consumables->count());
         $this->assertEquals(0, $user1->refresh()->consumables->count());
         $this->assertEquals(0, $user2->refresh()->consumables->count());
@@ -149,7 +145,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->uploads->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->uploads->count());
         $this->assertEquals(0, $user1->refresh()->uploads->count());
         $this->assertEquals(0, $user2->refresh()->uploads->count());
@@ -178,7 +173,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->acceptances->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->acceptances->count());
         $this->assertEquals(0, $user1->refresh()->acceptances->count());
         $this->assertEquals(0, $user2->refresh()->acceptances->count());
@@ -191,9 +185,9 @@ class MergeUsersTest extends TestCase
         $user2 = User::factory()->create();
         $user_to_merge_into = User::factory()->create();
 
-        Actionlog::factory()->count(3)->logUserUpdate()->create(['target_id' => $user1->id, 'item_id' => $user1->id]);
-        Actionlog::factory()->count(3)->logUserUpdate()->create(['target_id' => $user2->id, 'item_id' => $user2->id]);
-        Actionlog::factory()->count(3)->logUserUpdate()->create(['target_id' => $user_to_merge_into->id, 'item_id' => $user_to_merge_into->id]);
+        Actionlog::factory()->count(3)->userUpdated()->create(['target_id' => $user1->id, 'item_id' => $user1->id]);
+        Actionlog::factory()->count(3)->userUpdated()->create(['target_id' => $user2->id, 'item_id' => $user2->id]);
+        Actionlog::factory()->count(3)->userUpdated()->create(['target_id' => $user_to_merge_into->id, 'item_id' => $user_to_merge_into->id]);
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->userlog->count());
 
@@ -207,7 +201,6 @@ class MergeUsersTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertNotEquals(3, $user_to_merge_into->refresh()->userlog->count());
 
         // This needs to be 2 more than the otherwise expected because the merge action itself is logged for the two merging users
         $this->assertEquals(11, $user_to_merge_into->refresh()->userlog->count());
