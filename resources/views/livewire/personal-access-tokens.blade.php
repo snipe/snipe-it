@@ -48,7 +48,8 @@
                         </td>
                         <!-- Delete Button -->
                         <td style="vertical-align: middle;" class="text-right">
-                            <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken('{{ $token->id }}')">
+                            <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken('{{ $token->id }}')"
+                               wire:loading.attr="disabled">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>

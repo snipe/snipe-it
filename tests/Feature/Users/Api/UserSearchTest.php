@@ -144,4 +144,17 @@ class UserSearchTest extends TestCase
             'User index contains unexpected user from another company'
         );
     }
+
+    public function testUsersIndexWhenInvalidSortFieldIsPassed()
+    {
+        $this->markIncompleteIfSqlite('This test is not compatible with SQLite');
+
+        $this->actingAsForApi(User::factory()->viewUsers()->create())
+            ->getJson(route('api.users.index', [
+                'sort' => 'assets',
+            ]))
+            ->assertOk()
+            ->assertStatus(200)
+            ->json();
+    }
 }
