@@ -317,7 +317,7 @@ class BulkUsersController extends Controller
 
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
-        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'licenses', 'consumables','accessories')->get();
+        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'licenses', 'consumables','accessories', 'uploads', 'acceptances')->get();
         $admin = User::find(Auth::user()->id);
 
         // Walk users
@@ -344,8 +344,18 @@ class BulkUsersController extends Controller
             }
 
             foreach ($user_to_merge->userlog as $log) {
-                $log->target_id = $user_to_merge->id;
+                $log->target_id = $merge_into_user->id;
                 $log->save();
+            }
+
+            foreach ($user_to_merge->uploads as $upload) {
+                $upload->item_id = $merge_into_user->id;
+                $upload->save();
+            }
+
+            foreach ($user_to_merge->acceptances as $acceptance) {
+                $acceptance->item_id = $merge_into_user->id;
+                $acceptance->save();
             }
 
             User::where('manager_id', '=', $user_to_merge->id)->update(['manager_id' => $merge_into_user->id]);
@@ -356,7 +366,6 @@ class BulkUsersController extends Controller
             }
 
             $user_to_merge->delete();
-            //$user_to_merge->save();
 
             event(new UserMerged($user_to_merge, $merge_into_user, $admin));
 
