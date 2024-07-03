@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\UserMerged;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -121,6 +122,10 @@ class MergeUsersByUsername extends Command
                 $this->info('Marking the user as deleted');
                 $bad_user->deleted_at = Carbon::now()->timestamp;
                 $bad_user->save();
+
+                event(new UserMerged($bad_user, $user, null));
+
+
             }
         }
     }
