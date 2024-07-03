@@ -198,6 +198,10 @@ foreach ($env as $line_num => $line) {
 
         }
 
+        if ($env_key == 'MAIL_ENCRYPTION') {
+            $env_good .= '! Your .env still contains MAIL_ENCRYPTION (set to '.$env_value.'). This setting has been deprecated. You might need to add MAIL_TLS_VERIFY_PEER=false to your .env to make your mail work as expected.'."\n";
+        }
+
 
     }
 
