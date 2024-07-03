@@ -45,6 +45,7 @@
                     <th class="col-md-5">{{ trans('general.accessories') }}</th>
                     <th class="col-md-5">{{ trans('general.licenses') }}</th>
                     <th class="col-md-5">{{ trans('general.consumables') }}</th>
+                    <th class="col-md-5">{{ trans('general.files') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -72,16 +73,19 @@
                       @endforeach
                     </td>
                     <td>
-                      {{ number_format($user->assets()->count())  }}
+                      {{ number_format($user->assets->count())  }}
                     </td>
                     <td>
-                      {{ number_format($user->accessories()->count())  }}
+                      {{ number_format($user->accessories->count())  }}
                     </td>
                     <td>
-                      {{ number_format($user->licenses()->count())  }}
+                      {{ number_format($user->licenses->count())  }}
                     </td>
                     <td>
-                      {{ number_format($user->consumables()->count())  }}
+                      {{ number_format($user->consumables->count())  }}
+                    </td>
+                    <td>
+                      {{ number_format($user->uploads->count())  }}
                     </td>
                   </tr>
                   @endforeach
@@ -89,13 +93,13 @@
                 <tfoot>
 
                   <tr>
-                    <td colspan="7">
+                    <td colspan="8">
                       {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
                       <label>{{ trans('admin/users/general.update_user_assets_status') }}</label>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="7" class="col-md-12 alert-danger">
+                    <td colspan="8" class="col-md-12 alert-danger">
                       <label class="form-control">
                         <input type="checkbox" name="delete_user" value="1">
                         <span><i class="fa fa-warning fa-2x"></i> {{ trans('general.bulk_soft_delete') }}</span>
