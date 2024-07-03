@@ -317,7 +317,7 @@ class BulkUsersController extends Controller
 
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
-        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'licenses', 'consumables','accessories', 'uploads', 'acceptances')->get();
+        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
         $admin = User::find(Auth::user()->id);
 
         // Walk users
