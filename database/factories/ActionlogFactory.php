@@ -152,4 +152,17 @@ class ActionlogFactory extends Factory
             ];
         });
     }
+
+    public function logUserUpdate()
+    {
+        return $this->state(function () {
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'update',
+                'target_type'  => User::class,
+                'item_type'  => User::class,
+            ];
+        });
+    }
 }
