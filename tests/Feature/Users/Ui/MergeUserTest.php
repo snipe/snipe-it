@@ -2,7 +2,10 @@
 
 namespace Tests\Feature\Users\Ui;
 
+use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\User;
 use App\Models\Actionlog;
 use Tests\TestCase;
@@ -32,6 +35,60 @@ class MergeUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Success');
         $this->assertNotEquals(3, $user_to_merge_into->refresh()->assets->count());
         $this->assertEquals(9, $user_to_merge_into->refresh()->assets->count());
+
+    }
+
+    public function testLicensesAreTransferredOnUserMerge()
+    {
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+        $user_to_merge_into = User::factory()->create();
+
+        LicenseSeat::factory()->count(3)->create(['assigned_to' => $user1->id]);
+        LicenseSeat::factory()->count(3)->create(['assigned_to' => $user2->id]);
+        LicenseSeat::factory()->count(3)->create(['assigned_to' => $user_to_merge_into->id]);
+
+        $this->assertEquals(3, $user_to_merge_into->refresh()->licenses->count());
+
+        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+            ->post(route('users.merge.save', $user1->id),
+                [
+                    'ids_to_merge' => [$user1->id, $user2->id],
+                    'merge_into_id' => $user_to_merge_into->id
+                ])
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Success');
+        $this->assertNotEquals(3, $user_to_merge_into->refresh()->licenses->count());
+        $this->assertEquals(9, $user_to_merge_into->refresh()->licenses->count());
+
+    }
+
+    public function testAccessoriesTransferredOnUserMerge()
+    {
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+        $user_to_merge_into = User::factory()->create();
+
+        Accessory::factory()->count(3)->checkedOutToUser($user1)->create();
+        Accessory::factory()->count(3)->checkedOutToUser($user2)->create();
+        Accessory::factory()->count(3)->checkedOutToUser($user_to_merge_into)->create();
+
+        $this->assertEquals(3, $user_to_merge_into->refresh()->accessories->count());
+
+        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+            ->post(route('users.merge.save', $user1->id),
+                [
+                    'ids_to_merge' => [$user1->id, $user2->id],
+                    'merge_into_id' => $user_to_merge_into->id
+                ])
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Success');
+        $this->assertNotEquals(3, $user_to_merge_into->refresh()->accessories->count());
+        $this->assertEquals(9, $user_to_merge_into->refresh()->accessories->count());
 
     }
 
