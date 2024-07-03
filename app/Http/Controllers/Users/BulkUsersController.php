@@ -42,7 +42,7 @@ class BulkUsersController extends Controller
             // Get the list of affected users
             $user_raw_array = request('ids');
             $users = User::whereIn('id', $user_raw_array)
-                ->with('groups', 'assets', 'licenses', 'accessories')->get();
+                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
 
             // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
