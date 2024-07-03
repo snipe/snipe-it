@@ -36,6 +36,9 @@ if ($argc > 1){
             case '--no-interactive':
                 $no_interactive = true;
                 break;
+            case '--skip-backup':
+                $skip_backup = true;
+                break;
             default: // for legacy support from before we started using --branch
                 $branch = $argv[$arg];
                 $branch_override = true;
@@ -396,12 +399,20 @@ if ($dirs_not_writable!='') {
 echo "--------------------------------------------------------\n";
 echo "STEP 4: Backing up database: \n";
 echo "--------------------------------------------------------\n\n";
-$backup = exec('php artisan snipeit:backup', $backup_results, $return_code);
-echo '-- ' . implode("\n", $backup_results) . "\n\n";
-if ($return_code > 0) {
-    die("Something went wrong with your backup. Aborting!\n\n");
+
+if (!$skip_backup) {
+    
+    try {
+        $return_code = backup();
+    } catch (Exception $e) {
+        echo 'Caught exception: '. $e->getMessage(). "\n";
+        unset($return_code);
+    }
+
+} else {
+    echo "Upgrader was run with --skip-backup, so no backup will be run.\n";
 }
-unset($return_code);
+
 
 echo "--------------------------------------------------------\n";
 echo "STEP 5: Putting application into maintenance mode: \n";
@@ -565,6 +576,18 @@ function str_begins($haystack, $needle) {
 
 function str_ends($haystack,  $needle) {
     return (substr_compare($haystack, $needle, -strlen($needle)) === 0);
+}
+
+function backup() {
+
+    exec('php artisan snipeit:backup', $backup_results, $return_code);
+    echo '-- ' . implode("\n", $backup_results) . "\n\n";
+
+    if ($return_code > 0) {
+        throw new Exception('Something went wrong with your backup. Aborting!\n\n');
+    }
+
+    return $return_code;
 }
 
 
