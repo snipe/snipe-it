@@ -133,9 +133,9 @@ class MergeUsersTest extends TestCase
 
         $this->assertNotEquals(3, $user_to_merge_into->refresh()->userlog->count());
 
-        // This needs to be 2 more than the otherwise expected because the merge action itself is logged for the two merging users
-        $this->assertEquals(11, $user_to_merge_into->refresh()->userlog->count());
-        $this->assertEquals(2, $user1->refresh()->userlog->count());
+        // This needs to be more than the otherwise expected because the merge action itself is logged for the two merging users
+        $this->assertEquals(7, $user_to_merge_into->refresh()->userlog->count());
+        $this->assertEquals(1, $user1->refresh()->userlog->count());
 
     }
 
