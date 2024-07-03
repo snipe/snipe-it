@@ -147,6 +147,8 @@ class UserSearchTest extends TestCase
 
     public function testUsersIndexWhenInvalidSortFieldIsPassed()
     {
+        $this->markIncompleteIfSqlite('This test is not compatible with SQLite');
+
         $this->actingAsForApi(User::factory()->viewUsers()->create())
             ->getJson(route('api.users.index', [
                 'sort' => 'assets',
