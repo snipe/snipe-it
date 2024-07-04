@@ -35,7 +35,9 @@ class UpdateAssetModelsTest extends TestCase
 
     public function testUserCanEditAssetModels()
     {
-        $model = AssetModel::factory()->create(['name' => 'Test Model', 'category_id' => Category::factory()->create()->id]);
+        $category = Category::factory()->forAssets()->create();
+        \Log::error('Test Category: '.$category->category_type);
+        $model = AssetModel::factory()->create(['name' => 'Test Model', 'category_id' => $category->id]);
         $this->assertTrue(AssetModel::where('name', 'Test Model')->exists());
 
         $response = $this->actingAs(User::factory()->superuser()->create())
@@ -54,7 +56,10 @@ class UpdateAssetModelsTest extends TestCase
 
     public function testUserCannotChangeAssetModelCategoryType()
     {
-        $model = AssetModel::factory()->create(['name' => 'Test Model', 'category_id' => Category::factory()->forAssets()->create()->id]);
+        $category = Category::factory()->forAssets()->create();
+        \Log::error('Test Update Category: '.$category->category_type);
+
+        $model = AssetModel::factory()->create(['name' => 'Test Model', 'category_id' => $category->id]);
         $this->assertTrue(AssetModel::where('name', 'Test Model')->exists());
 
         $response = $this->actingAs(User::factory()->superuser()->create())
@@ -63,8 +68,8 @@ class UpdateAssetModelsTest extends TestCase
                 'category_id' => Category::factory()->forAccessories()->create()->id,
             ])
             ->assertStatus(302)
-            ->assertSessionHasNoErrors()
-            ->assertRedirect(route('models.index'));
+            ->assertSessionHasErrors(['model_category_type'])
+            ->assertRedirect(route('models.update', ['model' => $model]));
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
         $this->assertFalse(AssetModel::where('name', 'Test Model Edited')->exists());
