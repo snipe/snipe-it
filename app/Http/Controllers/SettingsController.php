@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use \Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
@@ -159,7 +160,7 @@ class SettingsController extends Controller
      */
     public function postSaveFirstAdmin(SetupUserRequest $request) : RedirectResponse
     {
-    {
+
         $user = new User();
         $user->first_name = $data['first_name'] = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -547,10 +548,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getLocalization()
+    public function getLocalization() : View
     {
         $setting = Setting::getSettings();
 
@@ -563,10 +562,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postLocalization(Request $request)
+    public function postLocalization(Request $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -595,10 +592,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getAlerts()
+    public function getAlerts() : View
     {
         $setting = Setting::getSettings();
 
@@ -609,12 +604,9 @@ class SettingsController extends Controller
      * Return a form to allow a super admin to update settings.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function postAlerts(Request $request)
+    public function postAlerts(Request $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -668,10 +660,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getSlack()
+    public function getSlack() : View
     {
         $setting = Setting::getSettings();
 
@@ -684,10 +674,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getAssetTags()
+    public function getAssetTags() : View
     {
         $setting = Setting::getSettings();
 
@@ -700,10 +688,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function postAssetTags(Request $request)
+    public function postAssetTags(Request $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -728,10 +714,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getBarcodes()
+    public function getBarcodes() : View
     {
         $setting = Setting::getSettings();
         $is_gd_installed = extension_loaded('gd');
@@ -745,10 +729,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function postBarcodes(Request $request)
+    public function postBarcodes(Request $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -774,10 +756,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function getPhpInfo()
+    public function getPhpInfo() : View | RedirectResponse
     {
         if (config('app.debug') === true) {
             return view('settings.phpinfo');
@@ -791,12 +771,9 @@ class SettingsController extends Controller
      * Return a form to allow a super admin to update settings.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getLabels()
+    public function getLabels() : View
     {
         return view('settings.labels')
             ->with('setting', Setting::getSettings())
@@ -807,12 +784,9 @@ class SettingsController extends Controller
      * Saves settings from form.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function postLabels(Request $request)
+    public function postLabels(Request $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -886,10 +860,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getLdapSettings()
+    public function getLdapSettings() : View
     {
         $setting = Setting::getSettings();
         $groups = Group::pluck('name', 'id');
@@ -919,12 +891,9 @@ class SettingsController extends Controller
      * Saves settings from form.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postLdapSettings(Request $request)
+    public function postLdapSettings(Request $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -978,15 +947,11 @@ class SettingsController extends Controller
      * Return a form to allow a super admin to update settings.
      *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     *
      * @since v5.0.0
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getSamlSettings()
+    public function getSamlSettings() : View
     {
         $setting = Setting::getSettings();
-
         return view('settings.saml', compact('setting'));
     }
 
@@ -994,12 +959,9 @@ class SettingsController extends Controller
      * Saves settings from form.
      *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     *
      * @since v5.0.0
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postSamlSettings(SettingsSamlRequest $request)
+    public function postSamlSettings(SettingsSamlRequest $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -1028,10 +990,13 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
-    public static function getPDFBranding()
-    {
-        $pdf_branding= Setting::getSettings();
 
+    /**
+     * Do we need this? Can we not just call getSettings() directly?
+     */
+    public static function getPDFBranding() : Setting
+    {
+        $pdf_branding = Setting::getSettings();
         return $pdf_branding;
     }
 
@@ -1041,9 +1006,8 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.1.1]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getGoogleLoginSettings()
+    public function getGoogleLoginSettings() : View
     {
         $setting = Setting::getSettings();
         return view('settings.google', compact('setting'));
@@ -1054,9 +1018,8 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.1.1]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postGoogleLoginSettings(Request $request)
+    public function postGoogleLoginSettings(Request $request) : RedirectResponse
     {
         if (!config('app.lock_passwords')) {
             $setting = Setting::getSettings();
@@ -1083,10 +1046,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.8]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getBackups()
+    public function getBackups() : View
     {
         $settings = Setting::getSettings();
         $path = 'app/backups';
@@ -1122,12 +1083,9 @@ class SettingsController extends Controller
      * Process the backup.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v1.8]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postBackups()
+    public function postBackups() : RedirectResponse
     {
         if (! config('app.lock_passwords')) {
             Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H-i-s')]);
@@ -1156,12 +1114,9 @@ class SettingsController extends Controller
      * Download the backup file.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v1.8]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function downloadFile($filename = null)
+    public function downloadFile($filename = null) : RedirectResponse
     {
         $path = 'app/backups';
 
@@ -1182,12 +1137,9 @@ class SettingsController extends Controller
      * Delete the backup file.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v1.8]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteFile($filename = null)
+    public function deleteFile($filename = null) : RedirectResponse
     {
         if (config('app.allow_backup_delete')=='true') {
 
@@ -1220,13 +1172,11 @@ class SettingsController extends Controller
      * Uploads a backup file
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v6.0]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function postUploadBackup(Request $request) {
+    public function postUploadBackup(Request $request) : RedirectResponse
+    {
 
         if (! config('app.lock_passwords')) {
             if (!$request->hasFile('file')) {
@@ -1258,12 +1208,9 @@ class SettingsController extends Controller
      * Restore the backup file.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v6.0]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postRestore($filename = null)
+    public function postRestore($filename = null) : RedirectResponse
     {
 
         if (! config('app.lock_passwords')) {
@@ -1331,13 +1278,11 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function getPurge()
+    public function getPurge() : View | RedirectResponse
     {
 
-        Log::warning('User '.auth()->user()->username.' (ID'.auth()->id().') is attempting a PURGE');
+        Log::warning('User '.auth()->user()->username.' (ID: '.auth()->id().') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
             return view('settings.purge-form');
@@ -1350,12 +1295,9 @@ class SettingsController extends Controller
      * Purges soft-deletes.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v3.0]
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPurge(Request $request)
+    public function postPurge(Request $request) : RedirectResponse
     {
         Log::warning('User '.auth()->user()->username.' (ID'.auth()->id().') is attempting a PURGE');
 
@@ -1399,12 +1341,9 @@ class SettingsController extends Controller
      * in the routes file if you want to be able to cache the routes.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v4.0]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function api()
+    public function api() : View
     {
         return view('settings.api');
     }
@@ -1413,12 +1352,9 @@ class SettingsController extends Controller
      * Test the email configuration.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v3.0]
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function ajaxTestEmail()
+    public function ajaxTestEmail() : JsonResponse
     {
         try {
             (new User())->forceFill([
@@ -1438,10 +1374,8 @@ class SettingsController extends Controller
      * Get login attempts view
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getLoginAttempts()
+    public function getLoginAttempts() : View
     {
         return view('settings.logins');
     }

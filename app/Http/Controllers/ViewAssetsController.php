@@ -8,11 +8,11 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\CustomField;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -25,9 +25,8 @@ class ViewAssetsController extends Controller
     /**
      * Redirect to the profile page.
      *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function getIndex()
+    public function getIndex() : View | RedirectResponse
     {
         $user = User::with(
             'assets',
@@ -72,9 +71,8 @@ class ViewAssetsController extends Controller
 
     /**
      * Returns view of requestable items for a user.
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getRequestableIndex()
+    public function getRequestableIndex() : View
     {
         $assets = Asset::with('model', 'defaultLoc', 'location', 'assignedTo', 'requests')->Hardware()->RequestableAssets();
         $models = AssetModel::with('category', 'requests', 'assets')->RequestableModels()->get();
@@ -82,7 +80,7 @@ class ViewAssetsController extends Controller
         return view('account/requestable-assets', compact('assets', 'models'));
     }
 
-    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null)
+    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null) : RedirectResponse
     {
         $item = null;
         $fullItemType = 'App\\Models\\'.studly_case($itemType);
@@ -144,9 +142,8 @@ class ViewAssetsController extends Controller
     /**
      * Process a specific requested asset
      * @param null $assetId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function getRequestAsset($assetId = null)
+    public function getRequestAsset($assetId = null) : RedirectResponse
     {
         $user = auth()->user();
 
@@ -196,7 +193,7 @@ class ViewAssetsController extends Controller
         return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
     }
 
-    public function getRequestedAssets()
+    public function getRequestedAssets() : View
     {
         return view('account/requested');
     }
