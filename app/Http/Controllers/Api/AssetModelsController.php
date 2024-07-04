@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAssetModelRequest;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
@@ -119,7 +120,7 @@ class AssetModelsController extends Controller
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(StoreAssetModelRequest $request)
     {
         $this->authorize('create', AssetModel::class);
         $assetmodel = new AssetModel;
@@ -176,7 +177,7 @@ class AssetModelsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(StoreAssetModelRequest $request, $id)
     {
         $this->authorize('update', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);

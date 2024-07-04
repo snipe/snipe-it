@@ -64,7 +64,7 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param ImageUploadRequest $request
      */
-    public function store(ImageUploadRequest $request) : RedirectResponse
+    public function store(StoreAssetModelRequest $request) : RedirectResponse
     {
         $this->authorize('create', AssetModel::class);
         $model = new AssetModel;
