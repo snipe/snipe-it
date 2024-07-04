@@ -7,9 +7,9 @@ use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-class AssetModelStoreTest extends TestCase
+class CreateAssetModelsTest extends TestCase
 {
-    public function testPermissionRequiredToStoreAssetModel()
+    public function testPermissionRequiredToCreateAssetModel()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('models.store'), [
@@ -32,4 +32,5 @@ class AssetModelStoreTest extends TestCase
 
         $this->assertTrue(AssetModel::where('name', 'Test Model')->exists());
     }
+
 }
