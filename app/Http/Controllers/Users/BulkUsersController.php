@@ -102,7 +102,7 @@ class BulkUsersController extends Controller
         // Remove the user from any updates.
         $user_raw_array = array_diff($user_raw_array, [Auth::id()]);
         $manager_conflict = false;
-        $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
+        $users = User::whereIn('id', $user_raw_array)->where('id', '!=', auth()->id())->get();
 
         $return_array = [
             'success' => trans('admin/users/message.success.update_bulk'),
@@ -318,7 +318,7 @@ class BulkUsersController extends Controller
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
         $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
-        $admin = User::find(Auth::user()->id);
+        $admin = User::find(auth()->id());
 
         // Walk users
         foreach ($users_to_merge as $user_to_merge) {

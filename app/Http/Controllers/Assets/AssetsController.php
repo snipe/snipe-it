@@ -55,7 +55,7 @@ class AssetsController extends Controller
      * @see AssetController::getDatatable() method that generates the JSON response
      * @since [v1.0]
      * @param Request $request
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(Request $request)
@@ -72,7 +72,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param Request $request
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @internal param int $model_id
      */
     public function create(Request $request)
@@ -198,7 +198,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
+                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
                 $success = true;
@@ -229,7 +229,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($assetId = null)
     {
@@ -252,7 +252,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($assetId = null)
     {
@@ -561,7 +561,7 @@ class AssetsController extends Controller
      *
      * @author [L. Swartzendruber] [<logan.swartzendruber@gmail.com>
      * @param int $assetId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getLabel($assetId = null)
     {
@@ -585,7 +585,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getClone($assetId = null)
     {
@@ -614,7 +614,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getImportHistory()
     {
@@ -636,7 +636,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function postImportHistory(Request $request)
     {
@@ -730,8 +730,8 @@ class AssetsController extends Controller
                         Actionlog::firstOrCreate([
                             'item_id' => $asset->id,
                             'item_type' => Asset::class,
-                            'user_id' =>  Auth::user()->id,
-                            'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
+                            'user_id' =>  auth()->id(),
+                            'note' => 'Checkout imported by '.auth()->user()->present()->fullName().' from history importer',
                             'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                             'target_type' => User::class,
                             'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
@@ -758,8 +758,8 @@ class AssetsController extends Controller
                             Actionlog::firstOrCreate([
                                 'item_id' => $item[$asset_tag][$batch_counter]['asset_id'],
                                 'item_type' => Asset::class,
-                                'user_id' => Auth::user()->id,
-                                'note' => 'Checkin imported by '.Auth::user()->present()->fullName().' from history importer',
+                                'user_id' => auth()->id(),
+                                'note' => 'Checkin imported by '.auth()->user()->present()->fullName().' from history importer',
                                 'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin',
@@ -796,7 +796,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getRestore($assetId = null)
     {

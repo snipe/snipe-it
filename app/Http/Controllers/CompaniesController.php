@@ -81,7 +81,7 @@ final class CompaniesController extends Controller
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
      * @param int $companyId
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($companyId)

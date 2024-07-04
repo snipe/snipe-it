@@ -82,7 +82,7 @@ class SuppliersController extends Controller
      * Supplier update.
      *
      * @param  int $supplierId
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($supplierId = null)
@@ -174,7 +174,7 @@ class SuppliersController extends Controller
      *  Get the asset information to present to the supplier view page
      *
      * @param null $supplierId
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @internal param int $assetId
      */
     public function show($supplierId = null)

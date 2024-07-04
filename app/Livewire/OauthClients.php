@@ -22,8 +22,8 @@ class OauthClients extends Component
     public function render()
     {
         return view('livewire.oauth-clients', [
-            'clients' => app(ClientRepository::class)->activeForUser(auth()->user()->id),
-            'authorized_tokens' => app(TokenRepository::class)->forUser(auth()->user()->id)->where('revoked', false),
+            'clients' => app(ClientRepository::class)->activeForUser(auth()->id()),
+            'authorized_tokens' => app(TokenRepository::class)->forUser(auth()->id())->where('revoked', false),
         ]);
     }
 
@@ -35,7 +35,7 @@ class OauthClients extends Component
         ]);
 
         app(ClientRepository::class)->create(
-            auth()->user()->id,
+            auth()->id(),
             $this->name,
             $this->redirect,
         );
@@ -47,10 +47,10 @@ class OauthClients extends Component
     {
         // test for safety
         // ->delete must be of type Client - thus the model binding
-        if ($clientId->user_id == auth()->user()->id) {
+        if ($clientId->user_id == auth()->id()) {
             app(ClientRepository::class)->delete($clientId);
         } else {
-            Log::warning('User ' . auth()->user()->id . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->user_id);
+            Log::warning('User ' . auth()->id() . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->user_id);
             $this->authorizationError = 'You are not authorized to delete this client.';
         }
     }
@@ -58,10 +58,10 @@ class OauthClients extends Component
     public function deleteToken($tokenId): void
     {
         $token = app(TokenRepository::class)->find($tokenId);
-        if ($token->user_id == auth()->user()->id) {
+        if ($token->user_id == auth()->id()) {
             app(TokenRepository::class)->revokeAccessToken($tokenId);
         } else {
-            Log::warning('User ' . auth()->user()->id . ' attempted to delete token ' . $tokenId . ' which belongs to user ' . $token->user_id);
+            Log::warning('User ' . auth()->id() . ' attempted to delete token ' . $tokenId . ' which belongs to user ' . $token->user_id);
             $this->authorizationError = 'You are not authorized to delete this token.';
         }
     }
@@ -84,12 +84,12 @@ class OauthClients extends Component
         ]);
 
         $client = app(ClientRepository::class)->find($editClientId->id);
-        if ($client->user_id == auth()->user()->id) {
+        if ($client->user_id == auth()->id()) {
             $client->name = $this->editName;
             $client->redirect = $this->editRedirect;
             $client->save();
         } else {
-            Log::warning('User ' . auth()->user()->id . ' attempted to edit client ' . $editClientId->id . ' which belongs to user ' . $client->user_id);
+            Log::warning('User ' . auth()->id() . ' attempted to edit client ' . $editClientId->id . ' which belongs to user ' . $client->user_id);
             $this->authorizationError = 'You are not authorized to edit this client.';
         }
 

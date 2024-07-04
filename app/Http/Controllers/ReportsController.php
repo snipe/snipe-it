@@ -47,7 +47,7 @@ class ReportsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return View
+    * @return \Illuminate\Contracts\View\View
     */
     public function getAccessoryReport()
     {
@@ -104,7 +104,7 @@ class ReportsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return View
+    * @return \Illuminate\Contracts\View\View
     */
     public function getDeprecationReport()
     {
@@ -197,7 +197,7 @@ class ReportsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function audit()
     {
@@ -212,7 +212,7 @@ class ReportsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return View
+    * @return \Illuminate\Contracts\View\View
     */
     public function getActivityReport()
     {
@@ -328,7 +328,7 @@ class ReportsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getLicenseReport()
     {
@@ -1015,7 +1015,7 @@ class ReportsController extends Controller
     /**
      * getImprovementsReport
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */

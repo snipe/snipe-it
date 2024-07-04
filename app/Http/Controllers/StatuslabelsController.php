@@ -96,7 +96,7 @@ class StatuslabelsController extends Controller
      * Statuslabel update.
      *
      * @param  int $statuslabelId
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($statuslabelId = null)

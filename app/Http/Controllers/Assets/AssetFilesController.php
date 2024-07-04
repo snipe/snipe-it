@@ -54,7 +54,7 @@ class AssetFilesController extends Controller
      * @param  int $assetId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($assetId = null, $fileId = null)
@@ -105,7 +105,7 @@ class AssetFilesController extends Controller
      * @param  int $assetId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($assetId = null, $fileId = null)

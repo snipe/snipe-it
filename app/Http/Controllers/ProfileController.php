@@ -29,7 +29,7 @@ class ProfileController extends Controller
     public function getIndex()
     {
         $this->authorize('self.profile');
-        $user = Auth::user();
+        $user = auth()->user();
         return view('account/profile', compact('user'));
     }
 
@@ -43,7 +43,7 @@ class ProfileController extends Controller
     public function postIndex(ImageUploadRequest $request)
     {
         $this->authorize('self.profile');
-        $user = Auth::user();
+        $user = auth()->user();
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->website = $request->input('website');
@@ -97,11 +97,11 @@ class ProfileController extends Controller
     /**
      * User change email page.
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function password()
     {
-        $user = Auth::user();
+        $user = auth()->user();
         
         return view('account/change-password', compact('user'));
     }
@@ -117,7 +117,7 @@ class ProfileController extends Controller
             return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
         }
 
-        $user = Auth::user();
+        $user = auth()->user();
         if ($user->ldap_import == '1') {
             return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
         }
@@ -178,7 +178,7 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getMenuState(Request $request)
     {
@@ -199,10 +199,10 @@ class ProfileController extends Controller
      */
     public function printInventory()
     {
-        $show_user = Auth::user();
+        $show_user = auth()->user();
 
         return view('users/print')
-            ->with('assets', Auth::user()->assets)
+            ->with('assets', auth()->user()->assets)
             ->with('licenses', $show_user->licenses()->get())
             ->with('accessories', $show_user->accessories()->get())
             ->with('consumables', $show_user->consumables()->get())
@@ -220,7 +220,7 @@ class ProfileController extends Controller
     public function emailAssetList()
     {
 
-        if (!$user = User::find(Auth::user()->id)) {
+        if (!$user = User::find(auth()->id())) {
             return redirect()->back()
                 ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
         }

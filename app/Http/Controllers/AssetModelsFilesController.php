@@ -54,7 +54,7 @@ class AssetModelsFilesController extends Controller
      * @param  int $modelId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($modelId = null, $fileId = null)
@@ -101,7 +101,7 @@ class AssetModelsFilesController extends Controller
      * @param  int $modelId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($modelId = null, $fileId = null)

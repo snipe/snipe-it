@@ -100,7 +100,7 @@ class LocationsController extends Controller
      * @see LocationsController::postCreate() method that validates and stores
      * @param int $locationId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($locationId = null)
@@ -202,7 +202,7 @@ class LocationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $id
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function show($id = null)
     {
@@ -240,7 +240,7 @@ class LocationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $locationId
      * @since [v6.0.14]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function getClone($locationId = null)
     {
@@ -282,7 +282,7 @@ class LocationsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.3.1]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postBulkDelete(Request $request)
     {

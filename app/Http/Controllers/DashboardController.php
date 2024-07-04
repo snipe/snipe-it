@@ -21,12 +21,12 @@ class DashboardController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
         // Show the page
-        if (Auth::user()->hasAccess('admin')) {
+        if (auth()->user()->hasAccess('admin')) {
             $asset_stats = null;
 
             $counts['asset'] = \App\Models\Asset::count();
@@ -34,7 +34,7 @@ class DashboardController extends Controller
             $counts['license'] = \App\Models\License::assetcount();
             $counts['consumable'] = \App\Models\Consumable::count();
             $counts['component'] = \App\Models\Component::count();
-            $counts['user'] = \App\Models\Company::scopeCompanyables(Auth::user())->count();
+            $counts['user'] = \App\Models\Company::scopeCompanyables(auth()->user())->count();
             $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
 
             if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {

@@ -92,7 +92,7 @@ class ManufacturersController extends Controller
      * @see ManufacturersController::update()
      * @param int $manufacturerId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($manufacturerId = null)
@@ -197,7 +197,7 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $manufacturerId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($manufacturerId = null)
@@ -238,7 +238,7 @@ class ManufacturersController extends Controller
                 $logaction->item_type = Manufacturer::class;
                 $logaction->item_id = $manufacturer->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
+                $logaction->user_id = auth()->id();
                 $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index

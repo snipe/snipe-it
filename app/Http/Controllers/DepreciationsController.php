@@ -87,7 +87,7 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::postEdit()
      * @param int $depreciationId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($depreciationId = null)
@@ -175,7 +175,7 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::postEdit()
      * @param int $depreciationId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)

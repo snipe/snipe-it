@@ -7,7 +7,6 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Category as Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Str;
 
 /**
  * This class controls all actions related to Categories for
@@ -91,7 +90,7 @@ class CategoriesController extends Controller
      * @see CategoriesController::postEdit() method saves the data
      * @param int $categoryId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($categoryId = null)
@@ -178,7 +177,7 @@ class CategoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see CategoriesController::getDataView() method that generates the JSON response
      * @param $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.8]
      */

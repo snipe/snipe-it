@@ -23,7 +23,7 @@ class AssetCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function create($assetId)
     {
@@ -72,7 +72,7 @@ class AssetCheckoutController extends Controller
                 return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
             }
 
-            $admin = Auth::user();
+            $admin = auth()->user();
 
             $target = $this->determineCheckoutTarget();
 

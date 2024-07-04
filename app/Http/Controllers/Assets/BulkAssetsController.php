@@ -36,7 +36,7 @@ class BulkAssetsController extends Controller
      * action would make a lot more sense here and make things a lot more clear.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @internal param int $assetId
      * @since [v2.0]
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -471,7 +471,7 @@ class BulkAssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param array $assets
      * @since [v2.0]
@@ -505,7 +505,7 @@ class BulkAssetsController extends Controller
 
     /**
      * Show Bulk Checkout Page
-     * @return View View to checkout multiple assets
+     * @return \Illuminate\Contracts\View\View View to checkout multiple assets
      */
     public function showCheckout()
     {
@@ -517,7 +517,7 @@ class BulkAssetsController extends Controller
 
     /**
      * Process Multiple Checkout Request
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function storeCheckout(AssetCheckoutRequest $request)
     {
@@ -525,7 +525,7 @@ class BulkAssetsController extends Controller
         $this->authorize('checkout', Asset::class);
 
         try {
-            $admin = Auth::user();
+            $admin = auth()->user();
 
             $target = $this->determineCheckoutTarget();
 

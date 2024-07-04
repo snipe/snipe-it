@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Redirect;
+use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +47,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\Response
      */
     public function getSetupIndex()
     {
@@ -215,7 +215,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSetupUser()
     {
@@ -231,7 +231,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSetupDone()
     {
@@ -248,7 +248,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSetupMigrate()
     {
@@ -271,7 +271,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -287,7 +287,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getEdit()
     {
@@ -303,7 +303,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSettings()
     {
@@ -319,7 +319,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postSettings(Request $request)
     {
@@ -376,7 +376,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getBranding()
     {
@@ -494,7 +494,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSecurity()
     {
@@ -510,7 +510,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postSecurity(Request $request)
     {
@@ -568,7 +568,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getLocalization()
     {
@@ -584,7 +584,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postLocalization(Request $request)
     {
@@ -616,7 +616,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getAlerts()
     {
@@ -632,7 +632,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postAlerts(Request $request)
     {
@@ -689,7 +689,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSlack()
     {
@@ -705,7 +705,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getAssetTags()
     {
@@ -721,7 +721,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postAssetTags(Request $request)
     {
@@ -749,7 +749,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getBarcodes()
     {
@@ -766,7 +766,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postBarcodes(Request $request)
     {
@@ -795,7 +795,7 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function getPhpInfo()
     {
@@ -814,7 +814,7 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getLabels()
     {
@@ -830,7 +830,7 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postLabels(Request $request)
     {
@@ -907,7 +907,7 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getLdapSettings()
     {
@@ -942,7 +942,7 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postLdapSettings(Request $request)
     {
@@ -1001,7 +1001,7 @@ class SettingsController extends Controller
      *
      * @since v5.0.0
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSamlSettings()
     {
@@ -1017,7 +1017,7 @@ class SettingsController extends Controller
      *
      * @since v5.0.0
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postSamlSettings(SettingsSamlRequest $request)
     {
@@ -1061,7 +1061,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.1.1]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getGoogleLoginSettings()
     {
@@ -1074,7 +1074,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.1.1]
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postGoogleLoginSettings(Request $request)
     {
@@ -1104,7 +1104,7 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getBackups()
     {
@@ -1179,7 +1179,7 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return Storage
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function downloadFile($filename = null)
     {
@@ -1205,7 +1205,7 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteFile($filename = null)
     {
@@ -1231,7 +1231,7 @@ class SettingsController extends Controller
         }
 
         // Hell to the no
-        Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
+        Log::warning('User ID '.auth()->id().' is attempting to delete backup file '.$filename.' and is not authorized to.');
         return redirect()->route('settings.backups.index')->with('error', trans('general.backup_delete_not_allowed'));
     }
 
@@ -1281,7 +1281,7 @@ class SettingsController extends Controller
      *
      * @since [v6.0]
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postRestore($filename = null)
     {
@@ -1292,7 +1292,7 @@ class SettingsController extends Controller
             if (Storage::exists($path.'/'.$filename)) {
 
                 // grab the user's info so we can make sure they exist in the system
-                $user = User::find(Auth::user()->id);
+                $user = User::find(auth()->id());
 
                 // TODO: run a backup
 
@@ -1352,12 +1352,12 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function getPurge()
     {
 
-        Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+        Log::warning('User '.auth()->user()->username.' (ID'.auth()->id().') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
             return view('settings.purge-form');
@@ -1373,11 +1373,11 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postPurge(Request $request)
     {
-        Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+        Log::warning('User '.auth()->user()->username.' (ID'.auth()->id().') is attempting a PURGE');
 
         if (config('app.allow_purge')=='true') {
             Log::debug('Purging is not allowed via the .env');
@@ -1386,7 +1386,7 @@ class SettingsController extends Controller
 
                 if ($request->input('confirm_purge')=='DELETE') {
 
-                    Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
+                    Log::warning('User ID ' . auth()->id() . ' initiated a PURGE!');
                     // Run a backup immediately before processing
                     Artisan::call('backup:run');
                     Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
@@ -1404,7 +1404,7 @@ class SettingsController extends Controller
             }
         }
 
-        Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
+        Log::error('User '.auth()->user()->username.' (ID'.auth()->id().') is attempting to purge deleted data and is not authorized to.');
 
 
         // Nope.
@@ -1422,7 +1422,7 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function api()
     {
@@ -1436,7 +1436,7 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function ajaxTestEmail()
     {
@@ -1446,12 +1446,21 @@ class SettingsController extends Controller
                 'email' => config('mail.from.address'),
             ])->notify(new MailTest());
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, 'Maiol sent!'));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('mail_sent.mail_sent')));
         } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('success', null, $e->getMessage()));
         }
     }
 
+
+
+    /**
+     * Get login attempts view
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function getLoginAttempts()
     {
         return view('settings.logins');

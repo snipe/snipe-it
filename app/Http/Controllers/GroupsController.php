@@ -64,7 +64,7 @@ class GroupsController extends Controller
         $group = new Group();
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
-        $group->created_by = Auth::user()->id;
+        $group->created_by = auth()->id();
 
         if ($group->save()) {
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.create'));
@@ -80,7 +80,7 @@ class GroupsController extends Controller
      * @see GroupsController::postEdit()
      * @param int $id
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function edit($id)
     {
@@ -154,7 +154,7 @@ class GroupsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @since [v4.0.11]
      */
     public function show($id)

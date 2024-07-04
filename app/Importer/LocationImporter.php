@@ -65,7 +65,7 @@ class LocationImporter extends ItemImporter
         $this->item['ldap_ou'] = trim($this->findCsvMatch($row, 'ldap_ou'));
         $this->item['manager'] = trim($this->findCsvMatch($row, 'manager'));
         $this->item['manager_username'] = trim($this->findCsvMatch($row, 'manager_username'));
-        $this->item['user_id'] = \Auth::user()->id;
+        $this->item['user_id'] = auth()->id();
 
         if ($this->findCsvMatch($row, 'parent_location')) {
             $this->item['parent_id'] = $this->createOrFetchLocation(trim($this->findCsvMatch($row, 'parent_location')));

@@ -23,7 +23,7 @@ class PersonalAccessTokens extends Component
     public function render()
     {
         return view('livewire.personal-access-tokens', [
-            'tokens' => Auth::user()->tokens,
+            'tokens' => auth()->user()->tokens,
         ]);
     }
 
@@ -38,7 +38,7 @@ class PersonalAccessTokens extends Component
     {
        $this->validate();
 
-       $newToken = Auth::user()->createToken($this->name);
+       $newToken = auth()->user()->createToken($this->name);
 
        $this->newTokenString = $newToken->accessToken;
 
@@ -49,6 +49,6 @@ class PersonalAccessTokens extends Component
     {
         //this needs safety (though the scope of auth::user might kind of do it...)
         //seems like it does, test more
-        Auth::user()->tokens()->find($tokenId)?->delete();
+        auth()->user()->tokens()->find($tokenId)?->delete();
     }
 }

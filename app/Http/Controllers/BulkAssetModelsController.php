@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\AssetModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class BulkAssetModelsController extends Controller
@@ -16,7 +15,7 @@ class BulkAssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
      * @param Request $request
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function edit(Request $request)
     {
@@ -61,7 +60,7 @@ class BulkAssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
      * @param Request $request
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {

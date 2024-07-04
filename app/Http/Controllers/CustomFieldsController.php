@@ -25,7 +25,7 @@ class CustomFieldsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v1.8]
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
@@ -60,7 +60,7 @@ class CustomFieldsController extends Controller
      * @see CustomFieldsController::storeField()
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v1.8]
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create(Request $request)
@@ -202,7 +202,7 @@ class CustomFieldsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $id
      * @since [v4.0]
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Request $request, $id)

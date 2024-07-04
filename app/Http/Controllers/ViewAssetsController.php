@@ -36,7 +36,7 @@ class ViewAssetsController extends Controller
             'consumables',
             'accessories',
             'licenses',
-        )->find(Auth::user()->id);
+        )->find(auth()->id());
 
         $field_array = array();
 
@@ -92,7 +92,7 @@ class ViewAssetsController extends Controller
         }
         $item = call_user_func([$fullItemType, 'find'], $itemId);
 
-        $user = Auth::user();
+        $user = auth()->user();
 
         $logaction = new Actionlog();
         $logaction->item_id = $data['asset_id'] = $item->id;
@@ -102,14 +102,15 @@ class ViewAssetsController extends Controller
         if ($user->location_id) {
             $logaction->location_id = $user->location_id;
         }
-        $logaction->target_id = $data['user_id'] = Auth::user()->id;
+
+        $logaction->target_id = $data['user_id'] = auth()->id();
         $logaction->target_type = User::class;
 
         $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
         $data['item'] = $item;
         $data['item_type'] = $itemType;
-        $data['target'] = Auth::user();
+        $data['target'] = auth()->user();
 
         if ($fullItemType == Asset::class) {
             $data['item_url'] = route('hardware.show', $item->id);
@@ -147,7 +148,7 @@ class ViewAssetsController extends Controller
      */
     public function getRequestAsset($assetId = null)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         // Check if the asset exists and is requestable
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
@@ -160,7 +161,7 @@ class ViewAssetsController extends Controller
         }
 
         $data['item'] = $asset;
-        $data['target'] = Auth::user();
+        $data['target'] = auth()->user();
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
@@ -172,11 +173,11 @@ class ViewAssetsController extends Controller
         if ($user->location_id) {
             $logaction->location_id = $user->location_id;
         }
-        $logaction->target_id = $data['user_id'] = Auth::user()->id;
+        $logaction->target_id = $data['user_id'] = auth()->id();
         $logaction->target_type = User::class;
 
         // If it's already requested, cancel the request.
-        if ($asset->isRequestedBy(Auth::user())) {
+        if ($asset->isRequestedBy(auth()->user())) {
             $asset->cancelRequest();
             $asset->decrement('requests_counter', 1);
 

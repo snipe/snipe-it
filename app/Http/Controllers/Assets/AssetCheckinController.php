@@ -26,7 +26,7 @@ class AssetCheckinController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @param string $backto
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
@@ -136,7 +136,7 @@ class AssetCheckinController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
 
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
             return Helper::getRedirectOption($asset, $assetId, 'Assets');
         }
         // Redirect to the asset management page with error

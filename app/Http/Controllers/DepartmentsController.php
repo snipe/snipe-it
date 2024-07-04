@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Department;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,7 @@ class DepartmentsController extends Controller
      * @see AssetController::getDatatable() method that generates the JSON response
      * @since [v4.0]
      * @param Request $request
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(Request $request)
@@ -45,7 +46,7 @@ class DepartmentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param ImageUploadRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
@@ -53,7 +54,7 @@ class DepartmentsController extends Controller
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
-        $department->user_id = Auth::user()->id;
+        $department->user_id = auth()->id();
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
         $department->location_id = ($request->filled('location_id') ? $request->input('location_id') : null);
         $department->company_id = ($request->filled('company_id') ? $request->input('company_id') : null);
@@ -73,7 +74,7 @@ class DepartmentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $id
      * @since [v4.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)
@@ -145,7 +146,7 @@ class DepartmentsController extends Controller
      * @see LocationsController::postCreate() method that validates and stores
      * @param int $departmentId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($departmentId = null)
@@ -159,6 +160,16 @@ class DepartmentsController extends Controller
         return view('departments/edit', compact('item'));
     }
 
+    /**
+     * Save updated Department information.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::postCreate() method that validates and stores
+     * @param int $departmentId
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(ImageUploadRequest $request, $id)
     {
         if (is_null($department = Department::find($id))) {

@@ -34,7 +34,7 @@ class CustomFieldsetsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @param int $id
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.8]
      */
@@ -70,7 +70,7 @@ class CustomFieldsetsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v1.8]
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
@@ -95,7 +95,7 @@ class CustomFieldsetsController extends Controller
 
         $fieldset = new CustomFieldset([
                 'name' => $request->get('name'),
-                'user_id' => Auth::user()->id,
+                'user_id' => auth()->id(),
         ]);
 
         $validator = Validator::make($request->all(), $fieldset->rules);
@@ -175,7 +175,7 @@ class CustomFieldsetsController extends Controller
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @param  int $id
      * @since [v1.8]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($id)
@@ -203,7 +203,7 @@ class CustomFieldsetsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v1.8]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function associate(Request $request, $id)
     {
