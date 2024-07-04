@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 class StoreAssetModelRequest extends ImageUploadRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -19,6 +20,7 @@ class StoreAssetModelRequest extends ImageUploadRequest
     {
 
         $this->category_type = Category::find($this->category_id)->category_type;
+
         $this->merge([
             'category_type' => $this->category_type,
         ]);
@@ -39,7 +41,7 @@ class StoreAssetModelRequest extends ImageUploadRequest
 
     public function messages(): array
     {
-        $messages = ['category_type.in' => 'The category must be an asset category, dummy.'];
+        $messages = ['category_type.in' => trans('admin/models/message.invalid_category_type')];
         return $messages;
     }
 }
