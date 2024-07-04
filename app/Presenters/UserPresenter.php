@@ -432,6 +432,8 @@ class UserPresenter extends Presenter
      */
     public function gravatar()
     {
+
+        // User's specific avatar
         if ($this->avatar) {
 
             // Check if it's a google avatar or some external avatar
@@ -443,6 +445,8 @@ class UserPresenter extends Presenter
             return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
+
+        // Fall back to Gravatar if the settings allow loading remote scripts
         if (Setting::getSettings()->load_remote == '1') {
             if ($this->model->gravatar != '') {
 
@@ -456,8 +460,12 @@ class UserPresenter extends Presenter
             }
         }
 
-        // Set a fun, gender-neutral default icon
-        return config('app.url').'/img/default-sm.png';
+        // If there is a default avatar
+        if (Setting::getSettings()->default_avatar!= '') {
+            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
+        }
+
+        return false;
     }
 
     /**
