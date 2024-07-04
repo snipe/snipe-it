@@ -348,7 +348,6 @@ class SettingsController extends Controller
         }
 
         $setting->default_eula_text = $request->input('default_eula_text');
-        $setting->load_remote = $request->input('load_remote', 0);
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
         $setting->depreciation_method = $request->input('depreciation_method');
@@ -411,6 +410,7 @@ class SettingsController extends Controller
         $setting->allow_user_skin = $request->input('allow_user_skin', '0');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets = $request->input('logo_print_assets', '0');
+        $setting->load_remote = $request->input('load_remote', 0);
 
         // Only allow the site name, images, and CSS to be changed if lock_passwords is false
         // Because public demos make people act like dicks
