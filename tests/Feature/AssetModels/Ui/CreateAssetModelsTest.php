@@ -33,4 +33,22 @@ class CreateAssetModelsTest extends TestCase
         $this->assertTrue(AssetModel::where('name', 'Test Model')->exists());
     }
 
+    public function testUserCannotUseAccessoryCategoryTypeAsAssetModelCategoryType()
+    {
+
+        $response = $this->actingAs(User::factory()->superuser()->create())
+            ->from(route('models.create'))
+            ->post(route('models.store'), [
+                'name' => 'Test Invalid Model Category',
+                'category_id' => Category::factory()->forAccessories()->create()->id
+            ]);
+        $response->assertStatus(302);
+        $response->assertRedirect(route('models.create'));
+        $response->assertInvalid(['category_type']);
+        $response->assertSessionHasErrors(['category_type']);
+        $this->followRedirects($response)->assertSee(trans('general.error'));
+        $this->assertFalse(AssetModel::where('name', 'Test Invalid Model Category')->exists());
+
+    }
+
 }
