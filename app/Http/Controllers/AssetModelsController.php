@@ -130,7 +130,7 @@ class AssetModelsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(StoreAssetModelRequest $request, $modelId = null) : RedirectResponse
+    public function update(StoreAssetModelRequest $request, $modelId) : RedirectResponse
     {
         $this->authorize('update', AssetModel::class);
 
