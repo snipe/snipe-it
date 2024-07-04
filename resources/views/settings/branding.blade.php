@@ -109,7 +109,18 @@
                         "maxSize" => 20000
                     ])
 
-                    <!-- Include logo in print assets -->
+                    <!-- Default Avatar -->
+                    @include('partials/forms/edit/uploadLogo', [
+                        "logoVariable" => "default_avatar",
+                        "logoId" => "defaultAvatar",
+                        "logoLabel" => trans('admin/settings/general.default_avatar'),
+                        "logoClearVariable" => "clear_default_avatar",
+                        "logoPath" => "avatars/",
+                        "helpBlock" => trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
+                    ])
+
+
+                        <!-- Include logo in print assets -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 <strong>{{ trans('admin/settings/general.logo_print_assets') }}</strong>

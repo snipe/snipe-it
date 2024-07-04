@@ -393,10 +393,11 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
     public function postBranding(ImageUploadRequest $request)
     {
+        // Something has gone horribly wrong - no settings record exists!
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
@@ -407,50 +408,52 @@ class SettingsController extends Controller
         $setting->version_footer = $request->input('version_footer');
         $setting->footer_text = $request->input('footer_text');
         $setting->skin = $request->input('skin');
-        $setting->allow_user_skin = $request->input('allow_user_skin');
+        $setting->allow_user_skin = $request->input('allow_user_skin', '0');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets = $request->input('logo_print_assets', '0');
 
-        // Only allow the site name and CSS to be changed if lock_passwords is false
+        // Only allow the site name, images, and CSS to be changed if lock_passwords is false
         // Because public demos make people act like dicks
 
-        if (! config('app.lock_passwords')) {
-            $request->validate(['site_name' => 'required']);
+        if (!config('app.lock_passwords')) {
             $setting->site_name = $request->input('site_name');
             $setting->custom_css = $request->input('custom_css');
-            $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
 
+            // Logo upload
+            $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
             if ('1' == $request->input('clear_logo')) {
                 Storage::disk('public')->delete($setting->logo);
                 $setting->logo = null;
                 $setting->brand = 1;
             }
 
-
+            // Email logo upload
             $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
-
-
             if ('1' == $request->input('clear_email_logo')) {
                 Storage::disk('public')->delete($setting->email_logo);
                 $setting->email_logo = null;
                 // If they are uploading an image, validate it and upload it
             }
 
-
+             // Label logo upload
             $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
-
             if ('1' == $request->input('clear_label_logo')) {
                 Storage::disk('public')->delete($setting->label_logo);
                 $setting->label_logo = null;
             }
 
-
-            $setting = $request->handleImages($setting, 600, 'favicon', '', 'favicon');
-
-            // If the user wants to clear the favicon...
+            // Favicon upload
+            $setting = $request->handleImages($setting, 100, 'favicon', '', 'favicon');
             if ('1' == $request->input('clear_favicon')) {
                 Storage::disk('public')->delete($setting->favicon);
                 $setting->favicon = null;
+            }
+
+            // Default avatar upload
+            $setting = $request->handleImages($setting, 500, 'default_avatar', 'avatars', 'default_avatar');
+            if ($request->input('clear_default_avatar') == '1') {
+                Storage::disk('public')->delete('avatars/'.$setting->default_avatar);
+                $setting->default_avatar = null;
             }
         }
 
