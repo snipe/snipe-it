@@ -69,6 +69,7 @@ class UpdateAssetModelsTest extends TestCase
                 'category_id' => Category::factory()->forAccessories()->create()->id,
             ])
             ->assertSessionHasErrors(['category_type'])
+            ->assertInvalid(['category_type'])
             ->assertStatus(302)
             ->assertRedirect(route('models.edit', ['model' => $model->id]));
 
@@ -76,4 +77,5 @@ class UpdateAssetModelsTest extends TestCase
         $this->assertFalse(AssetModel::where('name', 'Test Model Edited')->exists());
 
     }
+
 }
