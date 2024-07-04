@@ -49,7 +49,6 @@ class Setting extends Model
      * @var array
      */
     protected $rules = [
-          'site_name'                           => 'required',
           'brand'                               => 'required|min:1|numeric',
           'qr_text'                             => 'max:31|nullable',
           'alert_email'                         => 'email_array|nullable',
