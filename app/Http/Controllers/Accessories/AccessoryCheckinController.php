@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class AccessoryCheckinController extends Controller
 {
@@ -19,15 +20,10 @@ class AccessoryCheckinController extends Controller
      * @param Request $request
      * @param int $accessoryUserId
      * @param string $backto
-     * @return \Illuminate\Contracts\View\View
-     * @internal param int $accessoryId
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($accessoryUserId = null, $backto = null)
+    public function create($accessoryUserId = null, $backto = null) : View | RedirectResponse
     {
-        // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
-            // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
 
@@ -44,15 +40,10 @@ class AccessoryCheckinController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param null $accessoryUserId
      * @param string $backto
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     * @internal param int $accessoryId
      */
-    public function store(Request $request, $accessoryUserId = null, $backto = null)
+    public function store(Request $request, $accessoryUserId = null, $backto = null) : RedirectResponse
     {
-        // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
-            // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 

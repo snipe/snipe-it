@@ -28,20 +28,18 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use phpDocumentor\Reflection\Types\Compound;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 
 class AcceptanceController extends Controller
 {
     /**
      * Show a listing of pending checkout acceptances for the current user
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index() : View
     {
         $acceptances = CheckoutAcceptance::forUser(auth()->user())->pending()->get();
-
         return view('account/accept.index', compact('acceptances'));
     }
 
@@ -49,9 +47,8 @@ class AcceptanceController extends Controller
      * Shows a form to either accept or decline the checkout acceptance
      *
      * @param  int  $id
-     * @return mixed
      */
-    public function create($id)
+    public function create($id) : View | RedirectResponse
     {
         $acceptance = CheckoutAcceptance::find($id);
 
@@ -80,9 +77,8 @@ class AcceptanceController extends Controller
      *
      * @param  Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id) : RedirectResponse
     {
         $acceptance = CheckoutAcceptance::find($id);
 

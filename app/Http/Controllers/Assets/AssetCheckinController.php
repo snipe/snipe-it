@@ -11,10 +11,10 @@ use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class AssetCheckinController extends Controller
 {
@@ -26,11 +26,9 @@ class AssetCheckinController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @param string $backto
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
-    public function create($assetId, $backto = null)
+    public function create($assetId, $backto = null) : View | RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -60,11 +58,9 @@ class AssetCheckinController extends Controller
      * @param AssetCheckinRequest $request
      * @param int $assetId
      * @param null $backto
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
-    public function store(AssetCheckinRequest $request, $assetId = null, $backto = null)
+    public function store(AssetCheckinRequest $request, $assetId = null, $backto = null) : RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
