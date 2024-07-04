@@ -112,14 +112,24 @@ class CategoriesController extends Controller
         $this->authorize('update', Category::class);
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the categories management page
-            return redirect()->to('admin/categories')->with('error', trans('admin/categories/message.does_not_exist'));
+            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.does_not_exist'));
         }
 
         // Update the category data
         $category->name = $request->input('name');
         // If the item count is > 0, we disable the category type in the edit. Disabled items
         // don't POST, so if the category_type is blank we just set it to the default.
+
+
+        // Don't allow the user to change the category_type once it's been created
+        if (($request->filled('category_type') && ($category->itemCount() > 0))) {
+            $request->validate(['category_type' => 'in:'.$category->category_type]);
+        }
+        
         $category->category_type = $request->input('category_type', $category->category_type);
+
+        $category->fill($request->all());
+
         $category->eula_text = $request->input('eula_text');
         $category->use_default_eula = $request->input('use_default_eula', '0');
         $category->require_acceptance = $request->input('require_acceptance', '0');
