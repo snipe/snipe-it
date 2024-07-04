@@ -96,10 +96,7 @@ class ImageUploadRequest extends Request
 
                 $ext = $image->guessExtension();
                 $file_name = $type.'-'.$form_fieldname.'-'.$item->id.'-'.str_random(10).'.'.$ext;
-
-                Log::info('File name will be: '.$file_name);
-                Log::debug('File extension is: '.$ext);
-
+                
                 if (($image->getMimeType() == 'image/vnd.microsoft.icon') || ($image->getMimeType() == 'image/x-icon') || ($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
                     // If the file is an icon, webp or avif, we need to just move it since gd doesn't support resizing
                     // icons or avif, and webp support and needs to be compiled into gd for resizing to be available

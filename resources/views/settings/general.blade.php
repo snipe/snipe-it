@@ -144,24 +144,6 @@
                            </div>
                        </div>
 
-                       <!-- Load gravatar -->
-                       <div class="form-group {{ $errors->has('load_remote') ? 'error' : '' }}">
-                           <div class="col-md-3">
-                               <strong>{{ trans('admin/settings/general.load_remote') }}</strong>
-                           </div>
-                           <div class="col-md-9">
-                               <label class="form-control">
-                                   {{ Form::checkbox('load_remote', '1', old('load_remote', $setting->load_remote)) }}
-                                   {{ trans('general.yes') }}
-                                   {!! $errors->first('load_remote', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                               </label>
-
-                               <p class="help-block">
-                                   {{ trans('admin/settings/general.load_remote_help_text') }}
-                               </p>
-
-                           </div>
-                       </div>
 
                        <!-- unique serial -->
                        <div class="form-group">

@@ -324,7 +324,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image"
                                                  alt="">
                                         @else
-                                            <i class="fas fa-users" aria-hidden="true"></i>
+                                            <i class="fas fa-user" aria-hidden="true"></i>
                                         @endif
 
                                         <span class="hidden-xs">{{ Auth::user()->getFullNameAttribute() }} <strong
