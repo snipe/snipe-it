@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\AssetModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 class BulkAssetModelsController extends Controller
 {
@@ -15,9 +16,8 @@ class BulkAssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
      * @param Request $request
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function edit(Request $request)
+    public function edit(Request $request) : View | RedirectResponse
     {
         $models_raw_array = $request->input('ids');
 
@@ -60,9 +60,8 @@ class BulkAssetModelsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
      * @param Request $request
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(Request $request): View | RedirectResponse
     {
         $this->authorize('update', AssetModel::class);
       
@@ -104,9 +103,8 @@ class BulkAssetModelsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request) : RedirectResponse
     {
         $this->authorize('delete', AssetModel::class);
       

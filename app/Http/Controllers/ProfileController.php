@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 /**
  * This controller handles all actions related to User Profiles for
  * the Snipe-IT Asset Management application.
@@ -24,9 +25,8 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getIndex()
+    public function getIndex() : View
     {
         $this->authorize('self.profile');
         $user = auth()->user();
@@ -38,9 +38,8 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postIndex(ImageUploadRequest $request)
+    public function postIndex(ImageUploadRequest $request) : RedirectResponse
     {
         $this->authorize('self.profile');
         $user = auth()->user();
@@ -84,7 +83,7 @@ class ProfileController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      */
-    public function api(): \Illuminate\Contracts\View\View
+    public function api(): View
     {
         // Make sure the self.api permission has been granted
         if (!Gate::allows('self.api')) {
@@ -97,21 +96,17 @@ class ProfileController extends Controller
     /**
      * User change email page.
      *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function password()
+    public function password() : View
     {
         $user = auth()->user();
-        
         return view('account/change-password', compact('user'));
     }
 
     /**
      * Users change password form processing page.
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function passwordSave(Request $request)
+    public function passwordSave(Request $request) : RedirectResponse
     {
         if (config('app.lock_passwords')) {
             return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
@@ -178,9 +173,8 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getMenuState(Request $request)
+    public function getMenuState(Request $request) : void
     {
         if ($request->input('state') == 'open') {
             $request->session()->put('menu_state', 'open');
@@ -195,9 +189,8 @@ class ProfileController extends Controller
      *
      * @author A. Gianotto
      * @since [v6.0.12]
-     * @return Illuminate\View\View
      */
-    public function printInventory()
+    public function printInventory() : View
     {
         $show_user = auth()->user();
 
@@ -215,9 +208,8 @@ class ProfileController extends Controller
      *
      * @author A. Gianotto
      * @since [v6.0.12]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function emailAssetList()
+    public function emailAssetList() : RedirectResponse
     {
 
         if (!$user = User::find(auth()->id())) {

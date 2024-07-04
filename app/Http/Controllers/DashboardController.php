@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 
 /**
@@ -21,9 +22,8 @@ class DashboardController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index() : View | RedirectResponse
     {
         // Show the page
         if (auth()->user()->hasAccess('admin')) {

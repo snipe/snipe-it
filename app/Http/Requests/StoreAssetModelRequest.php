@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\AssetModel;
 use App\Models\Category;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class StoreAssetModelRequest extends ImageUploadRequest
 {
@@ -13,7 +14,7 @@ class StoreAssetModelRequest extends ImageUploadRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('create', new AssetModel);
     }
 
     public function prepareForValidation(): void
