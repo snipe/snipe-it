@@ -445,7 +445,11 @@ class UserPresenter extends Presenter
             return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
-
+        // If there is a default avatar
+        if (Setting::getSettings()->default_avatar!= '') {
+            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
+        }
+        
         // Fall back to Gravatar if the settings allow loading remote scripts
         if (Setting::getSettings()->load_remote == '1') {
             if ($this->model->gravatar != '') {
@@ -460,10 +464,7 @@ class UserPresenter extends Presenter
             }
         }
 
-        // If there is a default avatar
-        if (Setting::getSettings()->default_avatar!= '') {
-            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
-        }
+
 
         return false;
     }
