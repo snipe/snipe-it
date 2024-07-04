@@ -33,7 +33,7 @@ class CustomFieldsController extends Controller
      * @author [V. Cordes] [<volker@fdatek.de>]
      * @param int $id
      * @since [v4.1.10]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id)
     {

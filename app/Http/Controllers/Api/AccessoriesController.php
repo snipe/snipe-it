@@ -303,7 +303,7 @@ class AccessoriesController extends Controller
                 'note' => $request->get('note'),
             ]);
 
-            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
         }

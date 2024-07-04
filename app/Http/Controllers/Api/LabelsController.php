@@ -16,7 +16,7 @@ class LabelsController extends Controller
      * Returns JSON listing of all labels.
      *
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -50,7 +50,7 @@ class LabelsController extends Controller
      *
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
      * @param  string  $labelName
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(string $labelName)
     {

@@ -14,7 +14,7 @@ class ReportsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {

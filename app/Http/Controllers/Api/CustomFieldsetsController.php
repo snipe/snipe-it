@@ -30,7 +30,7 @@ class CustomFieldsetsController extends Controller
      * @author [Josh Gibson]
      * @param int $id
      * @since [v1.8]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -46,7 +46,7 @@ class CustomFieldsetsController extends Controller
      * @author [Josh Gibson]
      * @param int $id
      * @since [v1.8]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id)
     {

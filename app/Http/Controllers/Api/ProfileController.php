@@ -47,7 +47,7 @@ class ProfileController extends Controller
      */
     public function requestedAssets()
     {
-        $checkoutRequests = CheckoutRequest::where('user_id', '=', Auth::user()->id)->get();
+        $checkoutRequests = CheckoutRequest::where('user_id', '=', auth()->id())->get();
 
         $results = array();
         $show_field = array();
@@ -106,10 +106,10 @@ class ProfileController extends Controller
 
         $accessTokenName = $request->input('name', 'Auth Token');
 
-        if ($accessToken = Auth::user()->createToken($accessTokenName)->accessToken) {
+        if ($accessToken = auth()->user()->createToken($accessTokenName)->accessToken) {
 
             // Get the ID so we can return that with the payload
-            $token = DB::table('oauth_access_tokens')->where('user_id', '=', Auth::user()->id)->where('name','=',$accessTokenName)->orderBy('created_at', 'desc')->first();
+            $token = DB::table('oauth_access_tokens')->where('user_id', '=', auth()->id())->where('name','=',$accessTokenName)->orderBy('created_at', 'desc')->first();
             $accessTokenData['id'] = $token->id;
             $accessTokenData['token'] = $accessToken;
             $accessTokenData['name'] = $accessTokenName;
@@ -135,7 +135,7 @@ class ProfileController extends Controller
         }
 
         $token = $this->tokenRepository->findForUser(
-            $tokenId, Auth::user()->getAuthIdentifier()
+            $tokenId, auth()->user()->getAuthIdentifier()
         );
 
         if (is_null($token)) {
@@ -163,7 +163,7 @@ class ProfileController extends Controller
             abort(403);
         }
         
-        $tokens = $this->tokenRepository->forUser(Auth::user()->getAuthIdentifier());
+        $tokens = $this->tokenRepository->forUser(auth()->user()->getAuthIdentifier());
         $token_values = $tokens->load('client')->filter(function ($token) {
             return $token->client->personal_access_client && ! $token->revoked;
         })->values();

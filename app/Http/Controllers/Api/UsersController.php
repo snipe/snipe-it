@@ -365,13 +365,13 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
-        $user->created_by = Auth::user()->id;
+        $user->created_by = auth()->id();
 
         if ($request->has('permissions')) {
             $permissions_array = $request->input('permissions');
 
             // Strip out the superuser permission if the API user isn't a superadmin
-            if (! Auth::user()->isSuperUser()) {
+            if (! auth()->user()->isSuperUser()) {
                 unset($permissions_array['superuser']);
             }
             $user->permissions = $permissions_array;
@@ -468,7 +468,7 @@ class UsersController extends Controller
                 $permissions_array = $request->input('permissions');
 
                 // Strip out the individual superuser permission if the API user isn't a superadmin
-                if (!Auth::user()->isSuperUser()) {
+                if (!auth()->user()->isSuperUser()) {
                     unset($permissions_array['superuser']);
                 }
 
@@ -486,7 +486,7 @@ class UsersController extends Controller
             if ($user->save()) {
 
                 // Check if the request has groups passed and has a value, AND that the user us a superuser
-                if (($request->has('groups')) && (Auth::user()->isSuperUser())) {
+                if (($request->has('groups')) && (auth()->user()->isSuperUser())) {
 
                     $validator = Validator::make($request->only('groups'), [
                         'groups.*' => 'integer|exists:permission_groups,id',
@@ -710,7 +710,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
+                $logaction->user_id = auth()->id();
                 $logaction->logaction('2FA reset');
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
@@ -762,7 +762,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
+                $logaction->user_id = auth()->id();
                 $logaction->logaction('restore');
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);

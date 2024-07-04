@@ -638,7 +638,7 @@ class AssetsController extends Controller
                 $target = Location::find(request('assigned_location'));
             }
             if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
+                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
 
             if ($asset->image) {
@@ -729,7 +729,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
                 }
 
                 if ($asset->image) {
@@ -895,7 +895,7 @@ class AssetsController extends Controller
 //            $asset->location_id = $target->rtd_location_id;
 //        }
 
-        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
+        if ($asset->checkOut($target, auth()->user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
@@ -976,7 +976,7 @@ class AssetsController extends Controller
             });
 
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
 
             return response()->json(Helper::formatStandardApiResponse('success', [
                 'asset_tag'=> e($asset->asset_tag),

@@ -19,7 +19,7 @@ class AccessoryCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create($id)
@@ -95,7 +95,7 @@ class AccessoryCheckoutController extends Controller
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
-        event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
 
         // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));

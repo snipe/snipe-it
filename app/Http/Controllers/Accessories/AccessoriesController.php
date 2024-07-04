@@ -27,7 +27,7 @@ class AccessoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see AccessoriesController::getDatatable() method that generates the JSON response
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
@@ -41,7 +41,7 @@ class AccessoriesController extends Controller
      * Returns a view with a form to create a new Accessory.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
@@ -80,7 +80,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_date           = request('purchase_date');
         $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
-        $accessory->user_id                 = Auth::user()->id;
+        $accessory->user_id                 = auth()->id();
         $accessory->supplier_id             = request('supplier_id');
         $accessory->notes                   = request('notes');
 
@@ -100,7 +100,7 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $accessoryId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($accessoryId = null)
@@ -122,7 +122,7 @@ class AccessoriesController extends Controller
      * @author [J. Vinsmoke]
      * @param int $accessoryId
      * @since [v6.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getClone($accessoryId = null)
     {
@@ -243,7 +243,7 @@ class AccessoriesController extends Controller
      * @param  int $accessoryID
      * @see AccessoriesController::getDataView() method that generates the JSON response
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($accessoryID = null)

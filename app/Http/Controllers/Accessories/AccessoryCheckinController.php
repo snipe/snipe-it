@@ -19,7 +19,7 @@ class AccessoryCheckinController extends Controller
      * @param Request $request
      * @param int $accessoryUserId
      * @param string $backto
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @internal param int $accessoryId
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -70,7 +70,7 @@ class AccessoryCheckinController extends Controller
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
             $return_to = e($accessory_user->assigned_to);
 
-            event(new CheckoutableCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note'), $checkin_at));
+            event(new CheckoutableCheckedIn($accessory, User::find($return_to), auth()->user(), $request->input('note'), $checkin_at));
 
             return redirect()->route('accessories.show', $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }

@@ -67,7 +67,7 @@ class GroupsController extends Controller
         $groupPermissions = Helper::selectedPermissionsArray($permissions, $permissions);
 
         $group->name = $request->input('name');
-        $group->created_by = Auth::user()->id;
+        $group->created_by = auth()->id();
         $group->permissions = json_encode($request->input('permissions', $groupPermissions));
 
         if ($group->save()) {

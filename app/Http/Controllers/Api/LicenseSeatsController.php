@@ -110,7 +110,7 @@ class LicenseSeatsController extends Controller
 
         // attempt to update the license seat
         $licenseSeat->fill($request->all());
-        $licenseSeat->user_id = Auth::user()->id;
+        $licenseSeat->user_id = auth()->id();
 
         // check if this update is a checkin operation
         // 1. are relevant fields touched at all?

@@ -252,7 +252,7 @@ class ConsumablesController extends Controller
      * @author [A. Gutierrez] [<andres@baller.tv>]
      * @param int $id
      * @since [v4.9.5]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkout(Request $request, $id)
     {
@@ -293,7 +293,7 @@ class ConsumablesController extends Controller
                 ]
             );
 
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
 

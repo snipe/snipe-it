@@ -277,7 +277,7 @@ class ComponentsController extends Controller
                 'component_id' => $component->id,
                 'created_at' => \Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
-                'user_id' => \Auth::id(),
+                'user_id' => auth()->id(),
                 'asset_id' => $request->get('assigned_to'),
                 'note' => $request->get('note'),
             ]);
@@ -346,7 +346,7 @@ class ComponentsController extends Controller
 
             $asset = Asset::find($component_assets->asset_id);
 
-            event(new CheckoutableCheckedIn($component, $asset, \Auth::user(), $request->input('note'), \Carbon::now()));
+            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), \Carbon::now()));
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkin.success')));
 

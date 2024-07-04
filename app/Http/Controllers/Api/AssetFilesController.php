@@ -15,7 +15,7 @@ use App\Models\AssetModel;
 use App\Models\Actionlog;
 use \Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;

@@ -148,7 +148,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function ajaxTestEmail()
     {
@@ -170,7 +170,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function purgeBarcodes()
     {
@@ -276,7 +276,7 @@ class SettingsController extends Controller
      * exhausts memory on larger files.
      *
      * @author [A. Gianotto]
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function downloadBackup($file) {
 
@@ -296,7 +296,7 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto]
      * @since [v6.3.1]
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function downloadLatestBackup() {
 

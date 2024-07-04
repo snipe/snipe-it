@@ -36,11 +36,11 @@ class AcceptanceController extends Controller
     /**
      * Show a listing of pending checkout acceptances for the current user
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $acceptances = CheckoutAcceptance::forUser(Auth::user())->pending()->get();
+        $acceptances = CheckoutAcceptance::forUser(auth()->user())->pending()->get();
 
         return view('account/accept.index', compact('acceptances'));
     }
@@ -64,7 +64,7 @@ class AcceptanceController extends Controller
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
-        if (! $acceptance->isCheckedOutTo(Auth::user())) {
+        if (! $acceptance->isCheckedOutTo(auth()->user())) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
@@ -94,7 +94,7 @@ class AcceptanceController extends Controller
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
-        if (! $acceptance->isCheckedOutTo(Auth::user())) {
+        if (! $acceptance->isCheckedOutTo(auth()->user())) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 

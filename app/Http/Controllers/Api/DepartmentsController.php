@@ -100,7 +100,7 @@ class DepartmentsController extends Controller
         $department->fill($request->all());
         $department = $request->handleImages($department);
 
-        $department->user_id = Auth::user()->id;
+        $department->user_id = auth()->id();
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
 
         if ($department->save()) {
