@@ -6,25 +6,31 @@ use App\Models\Location;
 use App\Models\User;
 use Tests\TestCase;
 
-class UpdateLocationsTest extends TestCase
+class CreateLocationsTest extends TestCase
 {
 
-    public function testCanUpdateLocationViaPatchWithoutLocationType()
+    public function testRequiresPermissionToCreateLocation()
+    {
+        $this->actingAsForApi(User::factory()->create())
+            ->postJson(route('api.departments.store'))
+            ->assertForbidden();
+    }
+
+    public function testCannotCreateNewLocationsWithTheSameName()
     {
         $location = Location::factory()->create();
+        $location2 = Location::factory()->create();
 
         $this->actingAsForApi(User::factory()->superuser()->create())
-            ->patchJson(route('api.locations.update', $location), [
-                'name' => 'Test Location',
+            ->patchJson(route('api.locations.update', $location2), [
+                'name' => $location->name,
             ])
             ->assertOk()
-            ->assertStatusMessageIs('success')
+            ->assertStatusMessageIs('error')
             ->assertStatus(200)
             ->json();
 
-        $location->refresh();
-        $this->assertEquals('Test Location', $location->name, 'Name was not updated');
 
     }
-    
+
 }
