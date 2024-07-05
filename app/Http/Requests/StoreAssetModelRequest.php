@@ -21,11 +21,11 @@ class StoreAssetModelRequest extends ImageUploadRequest
     {
 
         if ($this->category_id) {
-            $this->category_type = Category::find($this->category_id)->category_type;
-
-            $this->merge([
-                'category_type' => $this->category_type,
-            ]);
+            if ($category = Category::find($this->category_id)) {
+                $this->merge([
+                    'category_type' => $category->category_type ?? null,
+                ]);
+            }
         }
 
     }
@@ -47,5 +47,10 @@ class StoreAssetModelRequest extends ImageUploadRequest
     {
         $messages = ['category_type.in' => trans('admin/models/message.invalid_category_type')];
         return $messages;
+    }
+
+    public function response(array $errors)
+    {
+        return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
     }
 }
