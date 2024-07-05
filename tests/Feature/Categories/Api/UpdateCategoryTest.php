@@ -44,8 +44,7 @@ class UpdateCategoriesTest extends TestCase
             ->assertStatusMessageIs('error')
             ->assertStatus(200)
             ->json();
-
-        //dd($response);
+        
         $category->refresh();
         $this->assertNotEquals('Test Category', $category->name, 'Name was not updated');
         $this->assertNotEquals('Test EULA', $category->eula_text, 'EULA was not updated');
