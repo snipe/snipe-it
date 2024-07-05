@@ -20,11 +20,14 @@ class StoreAssetModelRequest extends ImageUploadRequest
     public function prepareForValidation(): void
     {
 
-        $this->category_type = Category::find($this->category_id)->category_type;
+        if ($this->category_id) {
+            $this->category_type = Category::find($this->category_id)->category_type;
 
-        $this->merge([
-            'category_type' => $this->category_type,
-        ]);
+            $this->merge([
+                'category_type' => $this->category_type,
+            ]);
+        }
+
     }
 
     /**
@@ -35,7 +38,7 @@ class StoreAssetModelRequest extends ImageUploadRequest
     public function rules(): array
     {
         return array_merge(
-            ['category_type' => 'required|in:asset'],
+            ['category_type' => 'in:asset'],
             parent::rules(),
         );
     }
