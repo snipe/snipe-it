@@ -33,4 +33,24 @@ class CreateLocationsTest extends TestCase
 
     }
 
+    public function testUserCannotCreateLocationsThatAreTheirOwnParent()
+    {
+        $location = Location::factory()->create();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->patchJson(route('api.locations.update', $location), [
+                'parent_id' => $location->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error')
+            ->assertJson([
+                'messages' => [
+                    'parent_id'    => ['The parent id must not create a circular reference.'],
+                ],
+            ])
+            ->json();
+
+
+    }
+
 }
