@@ -12,8 +12,8 @@ use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
 
 class ConsumablesController extends Controller
 {
@@ -22,10 +22,8 @@ class ConsumablesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : array
     {
         $this->authorize('index', Consumable::class);
 
@@ -132,9 +130,8 @@ class ConsumablesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable;
@@ -153,9 +150,8 @@ class ConsumablesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('view', Consumable::class);
         $consumable = Consumable::with('users')->findOrFail($id);
@@ -170,9 +166,8 @@ class ConsumablesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Consumable::class);
         $consumable = Consumable::findOrFail($id);
@@ -192,9 +187,8 @@ class ConsumablesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Consumable::class);
         $consumable = Consumable::findOrFail($id);
@@ -211,9 +205,8 @@ class ConsumablesController extends Controller
     * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
     * @since [v1.0]
     * @param int $consumableId
-    * @return array
      */
-    public function getDataView($consumableId)
+    public function getDataView($consumableId) : array
     {
         $consumable = Consumable::with(['consumableAssignments'=> function ($query) {
             $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
@@ -252,9 +245,8 @@ class ConsumablesController extends Controller
      * @author [A. Gutierrez] [<andres@baller.tv>]
      * @param int $id
      * @since [v4.9.5]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function checkout(Request $request, $id)
+    public function checkout(Request $request, $id) : JsonResponse
     {
         // Check if the consumable exists
         if (!$consumable = Consumable::with('users')->find($id)) {
@@ -278,7 +270,6 @@ class ConsumablesController extends Controller
         if (!$user = User::find($request->input('assigned_to'))) {
             // Return error message
             return response()->json(Helper::formatStandardApiResponse('error', null, 'No user found'));
-            Log::debug('No valid user');
         }
 
         // Update the consumable data
@@ -304,7 +295,7 @@ class ConsumablesController extends Controller
     *
     * @see \App\Http\Transformers\SelectlistTransformer
     */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request) : array
     {
         $consumables = Consumable::select([
             'consumables.id',

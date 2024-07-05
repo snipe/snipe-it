@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\DeleteUserRequest;
+use Illuminate\Http\JsonResponse;
 
 class UsersController extends Controller
 {
@@ -35,7 +36,7 @@ class UsersController extends Controller
      *
      * @return array
      */
-    public function index(Request $request)
+    public function index(Request $request) : array
     {
         $this->authorize('view', User::class);
 
@@ -301,7 +302,7 @@ class UsersController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request) : array
     {
         $users = User::select(
             [
@@ -357,9 +358,8 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return array | \Illuminate\Http\JsonResponse
      */
-    public function store(SaveUserRequest $request)
+    public function store(SaveUserRequest $request) : JsonResponse
     {
         $this->authorize('create', User::class);
 
@@ -404,9 +404,8 @@ class UsersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
-     * @return array | \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($id) : JsonResponse | array
     {
         $this->authorize('view', User::class);
 
@@ -427,9 +426,8 @@ class UsersController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(SaveUserRequest $request, $id)
+    public function update(SaveUserRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', User::class);
 
@@ -518,9 +516,8 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(DeleteUserRequest $request, $id)
+    public function destroy(DeleteUserRequest $request, $id) : JsonResponse
     {
         $this->authorize('delete', User::class);
 
@@ -556,9 +553,8 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return array | \Illuminate\Http\JsonResponse
      */
-    public function assets(Request $request, $id)
+    public function assets(Request $request, $id) : JsonResponse | array
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
@@ -601,9 +597,9 @@ class UsersController extends Controller
      * @since [v6.0.13]
      * @param Request $request
      * @param $id
-     * @return string JSON
      */
-    public function emailAssetList(Request $request, $id)
+    public function emailAssetList(Request $request, $id) : JsonResponse
+
     {
         $this->authorize('update', User::class);
 
@@ -629,9 +625,8 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return array | \Illuminate\Http\JsonResponse
      */
-    public function consumables(Request $request, $id)
+    public function consumables(Request $request, $id) : array
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Consumable::class);
@@ -647,9 +642,8 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.6.14]
      * @param $userId
-     * @return array
      */
-    public function accessories($id)
+    public function accessories($id) : array
     {
         $this->authorize('view', User::class);
         $user = User::findOrFail($id);
@@ -666,9 +660,8 @@ class UsersController extends Controller
      * @author [N. Mathar] [<snipe@snipe.net>]
      * @since [v5.0]
      * @param $userId
-     * @return array | \Illuminate\Http\JsonResponse
      */
-    public function licenses($id)
+    public function licenses($id) : JsonResponse | array
     {
         $this->authorize('view', User::class);
         $this->authorize('view', License::class);
@@ -689,9 +682,8 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $userId
-     * @return string JSON
      */
-    public function postTwoFactorReset(Request $request)
+    public function postTwoFactorReset(Request $request) : JsonResponse
     {
         $this->authorize('update', User::class);
 
@@ -729,9 +721,8 @@ class UsersController extends Controller
      * @author [Juan Font] [<juanfontalonso@gmail.com>]
      * @since [v4.4.2]
      * @param  \Illuminate\Http\Request  $request
-     * @return array
      */
-    public function getCurrentUserInfo(Request $request)
+    public function getCurrentUserInfo(Request $request) : array
     {
         return (new UsersTransformer)->transformUser($request->user());
     }
@@ -742,9 +733,8 @@ class UsersController extends Controller
      * @author [E. Taylor] [<dev@evantaylor.name>]
      * @param int $userId
      * @since [v6.0.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function restore($userId)
+    public function restore($userId) : JsonResponse
     {
         $this->authorize('delete', User::class);
 

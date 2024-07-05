@@ -63,5 +63,5 @@ class IndexAssetModelsTest extends TestCase
             ])
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 1)->etc());
     }
-    
+
 }

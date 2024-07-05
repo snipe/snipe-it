@@ -6,13 +6,13 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CheckoutRequest;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Facades\Gate;
 use App\Models\CustomField;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 
 class ProfileController extends Controller
 {
@@ -42,10 +42,8 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.3.0]
-     *
-     * @return array
      */
-    public function requestedAssets()
+    public function requestedAssets() :  array
     {
         $checkoutRequests = CheckoutRequest::where('user_id', '=', auth()->id())->get();
 
@@ -95,10 +93,9 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.0.5]
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function createApiToken(Request $request) {
+    public function createApiToken(Request $request) : JsonResponse
+    {
 
         if (!Gate::allows('self.api')) {
             abort(403);
@@ -125,10 +122,9 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.0.5]
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function deleteApiToken($tokenId) {
+    public function deleteApiToken($tokenId) : Response
+    {
 
         if (!Gate::allows('self.api')) {
             abort(403);
@@ -154,10 +150,9 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.0.5]
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function showApiTokens(Request $request) {
+    public function showApiTokens() : JsonResponse
+    {
 
         if (!Gate::allows('self.api')) {
             abort(403);

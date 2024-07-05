@@ -184,7 +184,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Category::class);
         $category = Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')->findOrFail($id);
@@ -207,7 +207,7 @@ class CategoriesController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request, $category_type = 'asset')
+    public function selectlist(Request $request, $category_type = 'asset') : array
     {
         $this->authorize('view.selectlists');
         $categories = Category::select([
