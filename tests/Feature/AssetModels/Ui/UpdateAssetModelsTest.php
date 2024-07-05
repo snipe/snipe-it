@@ -19,23 +19,7 @@ class UpdateAssetModelsTest extends TestCase
             ->assertStatus(403)
             ->assertForbidden();
     }
-
-    public function testUserCanCreateAssetModels()
-    {
-        $this->assertFalse(AssetModel::where('name', 'Test Model')->exists());
-
-        $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('models.store'), [
-                'name' => 'Test Model',
-                'category_id' => Category::factory()->create()->id
-            ])
-            ->assertStatus(302)
-            ->assertSessionHasNoErrors()
-            ->assertRedirect(route('models.index'));
-
-        $this->assertTrue(AssetModel::where('name', 'Test Model')->exists());
-    }
-
+    
     public function testUserCanEditAssetModels()
     {
         $category = Category::factory()->forAssets()->create();
