@@ -19,7 +19,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Redirect;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use \Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -47,9 +49,9 @@ class SettingsController extends Controller
      *
      * @since [v3.0]
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\Response
      */
-    public function getSetupIndex()
+    public function getSetupIndex() : View
     {
         $start_settings['php_version_min'] = false;
 
@@ -123,7 +125,7 @@ class SettingsController extends Controller
      * @return bool This method will return true when exceptions (such as curl exception) is thrown.
      * Check the log files to see more details about the exception.
      */
-    protected function dotEnvFileIsExposed()
+    protected function dotEnvFileIsExposed() : bool
     {
         try {
             return Http::timeout(10)
@@ -153,13 +155,12 @@ class SettingsController extends Controller
      * Save the first admin user from Setup.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v3.0]
      *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postSaveFirstAdmin(SetupUserRequest $request)
+    public function postSaveFirstAdmin(SetupUserRequest $request) : RedirectResponse
     {
+
         $user = new User();
         $user->first_name = $data['first_name'] = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -214,10 +215,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v3.0]
-     *
-     * @return View
      */
-    public function getSetupUser()
+    public function getSetupUser() : View
     {
         return view('setup/user')
             ->with('step', 3)
@@ -230,10 +229,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v3.0]
-     *
-     * @return View
      */
-    public function getSetupDone()
+    public function getSetupDone() : View
     {
         return view('setup/done')
             ->with('step', 4)
@@ -247,10 +244,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v3.0]
-     *
-     * @return View
      */
-    public function getSetupMigrate()
+    public function getSetupMigrate() : View
     {
         Artisan::call('migrate', ['--force' => true]);
         if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
@@ -270,10 +265,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return View
      */
-    public function index()
+    public function index() : View
     {
         $settings = Setting::getSettings();
 
@@ -286,10 +279,9 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return View
      */
-    public function getEdit()
+    public function getEdit() : View
+
     {
         $setting = Setting::getSettings();
 
@@ -302,10 +294,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @return View
      */
-    public function getSettings()
+    public function getSettings() : View
     {
         $setting = Setting::getSettings();
 
@@ -315,13 +305,12 @@ class SettingsController extends Controller
     /**
      * Return a form to allow a super admin to update settings.
      *
-     * @return \Illuminate\Http\RedirectResponse
-     *@since [v1.0]
-     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
+     * @since [v1.0]
      */
-    public function postSettings(Request $request)
+    public function postSettings(Request $request) : RedirectResponse
+
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));

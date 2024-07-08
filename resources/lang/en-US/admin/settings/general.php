@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP Synchronization',
     'license'                   => 'Software License',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Login Attempts',
     'login_attempt'             => 'Login Attempt',
     'login_ip'                  => 'IP Address',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',
     'php'                       => 'PHP Version',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info',
@@ -379,10 +379,6 @@ return [
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
     'required_serial_error' => 'All current assets must have a serial before you can select this option. There are currently :count Assets without serials.',
     'unique_serial_error'   => 'All current assets must have a unique serial before you can select this option. There are currently :count Assets with duplicate or empty serials.',
-
-
-
-
-
+    'default_avatar' => 'Upload default avatar',
 
 ];
