@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => '测试 LDAP',
     'ldap_test_sync'            => '测试 LDAP 同步',
     'license'                   => '软件许可证',
-    'load_remote'               => '使用 Gravatar头像',
-    'load_remote_help_text'		=> '如果您的安装不能从外部网络加载脚本，请取消选中此框。这将防止Snipe-IT尝试从 Gravatar 加载图像。',
+    'load_remote'               => '加载远程头像',
+    'load_remote_help_text'		=> '如果您的安装不能从外部网络加载脚本，请取消选中此项。 这将防止Snipe-IT 尝试从 Gravatar 或其他外部来源加载头像。',
     'login'                     => '登录尝试',
     'login_attempt'             => '登录尝试',
     'login_ip'                  => 'IP 地址',
@@ -327,7 +327,6 @@ return [
     'labels' => '标签',
     'labels_title' => '更新标签设置',
     'labels_help' => '标签大小 &amp; 设置',
-    'purge' => '清除',
     'purge_keywords' => '永久删除',
     'purge_help' => '清除已删除的记录',
     'ldap_extension_warning' => '它看起来不像在这个服务器上安装或启用LDAP扩展。 您仍然可以保存您的设置，但您需要启用 PHP 的 LDAP 扩展，然后LDAP 同步或登录才能正常工作。',
@@ -374,5 +373,8 @@ return [
     'database_driver' => '数据库驱动程序',
     'bs_table_storage' => '表存储',
     'timezone' => '时区',
+    'profile_edit'          => '编辑个人资料',
+    'profile_edit_help'          => '允许用户编辑自己的个人资料。',
+    'default_avatar' => '上传默认头像',
 
 ];

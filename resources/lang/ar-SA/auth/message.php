@@ -14,6 +14,8 @@ return array(
         'success'               => 'قمت بتسجيل الدخول بنجاح.',
         'code_required'         => 'رمز Two-factor مطلوب.',
         'invalid_code'          => 'رمز Two-factor غير صالح.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

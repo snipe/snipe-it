@@ -23,7 +23,7 @@ return [
 
     'accessories' => 'Accesorios son cualquier cosa que entregues a los usuarios pero que no tenga numero de serie (o no te interese seguirlos en forma única). Por ejemplo, ratones o teclados.',
 
-    'companies'     => 'Las empresas pueden ser utilizadas como un campo identificador simple, o pueden ser utilizadas para limitar la visibilidad de los activos, usuarios, etc si el soporte completo de la empresa está habilitado en la configuración del Administrador.',
+    'companies'     => 'Las compañías se pueden utilizar como un simple campo identificador, o se pueden utilizar para limitar la visibilidad de los activos, usuarios, etc si la opción "Soporte completo a múltiples compañías" está habilitado en "Configuración de administrador".',
 
     'components'    => 'Los componentes son elementos que son parte de un activo, por ejemplo HDD, RAM, etc.',
 

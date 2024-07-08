@@ -45,6 +45,12 @@ mix
 mix
     .copy("./node_modules/@fortawesome/fontawesome-free/webfonts", "./public/css/webfonts")
 
+/**
+ * Copy BS tables js file
+ */
+mix
+    .copy( './node_modules/bootstrap-table/dist/bootstrap-table-locale-all.min.js', 'public/js/dist' )
+
 // Combine main SnipeIT JS files
 mix
   .js(
@@ -186,13 +192,6 @@ mix
   .combine(
     ["./public/js/build/vendor.js", "./public/js/build/app.js"],
     "./public/js/dist/all.js"
-  )
-  .version();
-
-mix
-  .combine(
-    ['./node_modules/alpinejs/dist/cdn.js'],
-    './public/js/dist/all-defer.js'
   )
   .version();
 

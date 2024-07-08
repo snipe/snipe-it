@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Testează LDAP',
     'ldap_test_sync'            => 'Testează sincronizarea LDAP',
     'license'                   => 'Licență software',
-    'load_remote'               => 'Folosește Gravatar',
-    'load_remote_help_text'		=> 'Debifați această casetă dacă instalarea nu poate încărca scripturi din exterior. Acest lucru va împiedica Snipe-IT să încerce încărcarea imaginilor de la Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Încercări de conectare',
     'login_attempt'             => 'Încercare de conectare',
     'login_ip'                  => 'Adresă IP',
@@ -327,7 +327,6 @@ return [
     'labels' => 'Etichete',
     'labels_title' => 'Actualizați setările etichetei',
     'labels_help' => 'Setări etichete &amp;',
-    'purge' => 'Purge',
     'purge_keywords' => 'şterge permanent',
     'purge_help' => 'Eliminați înregistrările șterse',
     'ldap_extension_warning' => 'Nu arată ca și cum extensia LDAP este instalată sau activată pe acest server. Încă puteți salva setările, dar va trebui să activați extensia LDAP pentru PHP înainte ca logarea sau sincronizarea LDAP să funcționeze.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'Șofer bază de date',
     'bs_table_storage' => 'Stocare tabel',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

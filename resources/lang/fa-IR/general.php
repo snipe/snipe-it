@@ -172,7 +172,7 @@ return [
 ',
     'filetypes_size_help'   => 'حداکثر اندازه مجاز بارگذاری: اندازه است.
 ',
-    'image_filetypes_help'  => 'نوع فایل های قابل قبول: jpg, webp, png, gif, و svg. حداکثر سایز فایل :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'واردات',
     'import_this_file'      => 'Map fields and process this file',
@@ -263,6 +263,7 @@ return [
     'restore'				=> 'بازیابی',
     'requestable_models'    => 'مدل های درخواستی
 ',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'در خواست شده',
     'requested_date'        => 'تاریخ درخواست',
     'requested_assets'      => 'دارایی های درخواستی
@@ -617,6 +618,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -637,6 +639,8 @@ return [
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'اطلاعات بیشتر',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

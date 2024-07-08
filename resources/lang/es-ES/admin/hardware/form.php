@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'bulk_delete'		=> 'Confirmar eliminación masiva de bienes',
+    'bulk_delete'		=> 'Confirmar eliminación masiva de activos',
     'bulk_restore'      => 'Confirmar recuperación masiva de activos', 
   'bulk_delete_help'	=> 'Revisar los bienes para eliminación masiva. Una vez eliminados, esos bienes pueden ser restaurados, pero no volverán a estar asociados con ningún usuario a los que esté asignado.',
   'bulk_restore_help'	=> 'Revisar los activos para la restauración en masa a continuación. Una vez restaurados, estos activos no estarán asociados con los usuarios a los que fueron asignados anteriormente.',
-  'bulk_delete_warn'	=> 'Está a punto de borrar :asset_count.',
+  'bulk_delete_warn'	=> 'Va a eliminar :asset_count activos.',
   'bulk_restore_warn'	=> 'Está a punto de restaurar :asset_count activos.',
     'bulk_update'		=> 'Actualización masiva de Equipos',
-    'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
+    'bulk_update_help'	=> 'Este formulario le permite actualizar varios activos a la vez. Complete solo los campos que necesite modificar. Los campos que se dejen en blanco no se modificarán. ',
     'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
     'bulk_update_with_custom_field' => 'Tenga en cuenta que los activos son :asset_model_count diferentes tipos de modelos.',
     'bulk_update_model_prefix' => 'En modelos', 
@@ -45,7 +45,7 @@ return [
     'select_statustype'	=> 'Seleccione un tipo de estado',
     'serial'			=> 'N. Serie',
     'status'			=> 'Estado',
-    'tag'				=> 'Etiqueta',
+    'tag'				=> 'Etiqueta del activo',
     'update'			=> 'Actualizar Equipo',
     'warranty'			=> 'Garantía',
         'warranty_expires'		=> 'Vencimiento de la Garantía',

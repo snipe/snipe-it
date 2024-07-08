@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro que deseas borrar este accesorio?',
+        'confirm'   => '¿Está seguro de que desea eliminar este accesorio?',
         'error'   => 'Hubo un problema borrando este accesorio. Por favor inténtalo nuevamente.',
         'success' => 'El accesorio se ha borrado con éxito.'
     ),

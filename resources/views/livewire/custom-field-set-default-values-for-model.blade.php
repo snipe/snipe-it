@@ -5,12 +5,12 @@
             {{ trans('admin/models/general.fieldset') }}
         </label>
         <div class="col-md-5">
-            {{ Form::select('fieldset_id', Helper::customFieldsetList(), old('fieldset_id', $fieldset_id), array('class'=>'select2 js-fieldset-field livewire-select2', 'style'=>'width:100%; min-width:350px', 'aria-label'=>'custom_fieldset', 'data-livewire-component' => $_instance->id)) }}
+            {{ Form::select('fieldset_id', Helper::customFieldsetList(), old('fieldset_id', $fieldset_id), array('class'=>'select2 js-fieldset-field livewire-select2', 'style'=>'width:100%; min-width:350px', 'aria-label'=>'custom_fieldset', 'data-livewire-component' => $this->getId())) }}
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
         </div>
         <div class="col-md-3">
                 <label class="form-control">
-                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $_instance->id, 'id' => 'add_default_values', 'wire:model' => 'add_default_values']) }}
+                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values']) }}
                 {{ trans('admin/models/general.add_default_values') }}
             </label>
         </div>

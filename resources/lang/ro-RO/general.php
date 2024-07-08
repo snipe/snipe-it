@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Incarca poza',
     'filetypes_accepted_help'    => 'Tipul de fișier acceptat este :types. Dimensiunea maximă permisă a încărcării este :size.<unk> Tipurile de fișiere acceptate sunt :types. Dimensiunea maximă permisă este de :size.',
     'filetypes_size_help'   => 'Dimensiunea maximă permisă pentru încărcare este de :size.',
-    'image_filetypes_help'  => 'Tipurile de fișiere acceptate sunt jpg, webp, png, gif și svg. Dimensiunea maximă permisă pentru încărcare este :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Acest fișier de imagine nu a putut fi citit. Tipurile de fișiere acceptate sunt jpg, webp, png, gif și svg. Amprenta acestui fișier este: :mimetype.',
     'import'         	    => 'Import',
     'import_this_file'      => 'Harta câmpuri și procesarea acestui fișier',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'restaurat',
     'restore'				=> 'Restaureaza',
     'requestable_models'    => 'Modele de solicitare',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Cereri',
     'requested_date'        => 'Data solicitării',
     'requested_assets'      => 'Activele solicitate',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permisiune refuzată. Nu puteți actualiza informațiile utilizatorului pentru superadminii de pe demo.',
     'pwd_reset_not_sent' => 'Utilizatorul nu este activat, este LDAP sincronizat sau nu are o adresă de e-mail',
     'error_sending_email' => 'Eroare trimitere e-mail',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count Locul de licență:count Locuri de licență',
         'consumables'  => ':count Consumabile|:count Consumabile',
         'components'  => ':count Component|:count Componente',
-    ]
+    ],
+    'more_info' => 'Mai multe',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

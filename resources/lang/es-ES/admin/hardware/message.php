@@ -48,14 +48,14 @@ return [
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
         'success' => 'Archivo(s) cargado(s) exitosamente.',
         'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que está tratando de cargar es demasiado grande',
-        'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
+        'invalidfiles' => 'Uno o más de sus archivos son demasiado grandes o son de un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ],
 
     'import' => [
         'error'                 => 'Algunos elementos no se pudieron importar correctamente.',
         'errorDetail'           => 'Estos elementos no pudieron importarse debido a errores.',
-        'success'               => 'Tu archivo ha sido importado',
-        'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
+        'success'               => 'Su archivo ha sido importado',
+        'file_delete_success'   => 'Su archivo se ha eliminado correctamente',
         'file_delete_error'      => 'No pudimos eliminar tu archivo',
         'file_missing' => 'Falta el archivo seleccionado',
         'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',
@@ -64,7 +64,7 @@ return [
 
 
     'delete' => [
-        'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',
+        'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Equipo no eliminado, intentalo de nuevo.',
         'nothing_updated'   => 'No se seleccionaron los activos, por lo que no se eliminó nada.',
         'success' 		=> 'Equipo eliminado.',

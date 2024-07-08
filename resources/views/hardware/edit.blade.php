@@ -77,7 +77,7 @@
         @if ($item->model && $item->model->fieldset)
         <?php $model = $item->model; ?>
         @endif
-        @if (Request::old('model_id'))
+        @if (old('model_id'))
             @php
                 $model = \App\Models\AssetModel::find(old('model_id'));
             @endphp

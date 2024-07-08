@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Tải hình',
     'filetypes_accepted_help'    => 'Các loại tệp được chấp nhận là :types. Kích thước tải lên tối đa được cho phép là :size.|Các loại tệp được chấp nhận là :types. Kích thước tải lên tối đa được cho phép là :size.',
     'filetypes_size_help'   => 'Dung lượng tải lên tối đa cho phép.',
-    'image_filetypes_help'  => 'Các loại tệp được chấp nhận là jpg, webp, png, gif và svg. Kích thước tải lên tối đa được cho phép là :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Tập tin hình ảnh không thể đọc được. Chỉ chấp nhận các kiểu tập tin là jpg, webp, png, gif, và svg.',
     'import'         	    => 'Nhập',
     'import_this_file'      => 'Các trường bản đồ và quá trình xử lý tệp này',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'khôi phục',
     'restore'				=> 'Khôi phục',
     'requestable_models'    => 'Các model có thể yêu cầu',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Đã yêu cầu',
     'requested_date'        => 'Ngày yêu cầu',
     'requested_assets'      => 'Tài sản đã yêu cầu',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'Xem thêm thông tin',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

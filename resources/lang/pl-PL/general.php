@@ -11,9 +11,9 @@ return [
     'activity_report'		=> 'Raport Aktywności',
     'address'				=> 'Adres',
     'admin'					=> 'Admin',
-    'admin_tooltip'			=> 'This user has admin privileges',
-    'superuser'				=> 'Superuser',
-    'superuser_tooltip'		=> 'This user has superuser privileges',
+    'admin_tooltip'			=> 'Ten użytkownik ma uprawnienia administratora',
+    'superuser'				=> 'Superużytkownik',
+    'superuser_tooltip'		=> 'Ten użytkownik ma uprawnienia superużytkownika',
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Dodano miejsca',
     'age'                   => "Wiek",
@@ -134,7 +134,7 @@ return [
     'lastname_firstinitial' => 'Nazwisko i pierwsza litera imienia (smith_j@example.com)',
     'firstinitial.lastname' => 'Pierwsza litera imienia i nazwisko (jsmith@example.com)',
     'firstnamelastinitial'  => 'Nazwisko i pierwsza litera imienia (smithj@example.com)',
-    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
+    'lastnamefirstname'      => 'Nazwisko i imię (smith.jane@example.com)',
     'first_name'			=> 'Imię',
     'first_name_format'		=> 'Imię (jane@example.com)',
     'files'                 => 'Pliki',
@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Dodaj zdjęcie',
     'filetypes_accepted_help'    => 'Akceptowany typ pliku to :types. Maksymalny dozwolony rozmiar pliku to :size.|Akceptowane typy plików to :types. Maksymalny dozwolony rozmiar plików to :size.',
     'filetypes_size_help'   => 'Maksymalny dozwolony rozmiar wysyłania to :size.',
-    'image_filetypes_help'  => 'Akceptowane typy plików to jpg, webp, png, gif i svg. Maksymalny dozwolony rozmiar to :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Plik z obrazem jest nieczytelny. Akceptowane typy plików to JPG, WebP, PNG, GIF i SVG. Typ MIME przesłanego pliku to :mimetype.',
     'import'         	    => 'Zaimportuj',
     'import_this_file'      => 'Mapuj pola i przetwarzaj ten plik',
@@ -240,13 +240,14 @@ return [
     'restored'				=> 'przywrócone',
     'restore'				=> 'Przywróć',
     'requestable_models'    => 'Żądane modele',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Wymagane',
     'requested_date'        => 'Data złożenia zapotrzebowania',
     'requested_assets'      => 'Żądane zasoby',
     'requested_assets_menu' => 'Żądane zasoby',
     'request_canceled'      => 'Żądanie anulowane',
     'request_item'          => 'Request this item',
-    'external_link_tooltip' => 'External link to',
+    'external_link_tooltip' => 'Zewnętrzny link do',
     'save'  				=> 'Zapisz',
     'select_var'            => 'Wybierz :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'Wybierz',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Odmowa uprawnień. Nie można zaktualizować informacji użytkownika dla superadminów na demo.',
     'pwd_reset_not_sent' => 'Użytkownik nie jest aktywny, jest zsynchronizowany z LDAP lub nie posiada adresu e-mail',
     'error_sending_email' => 'Błąd podczas wysyłania wiadomości e-mail',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count Licencja Siedzenia|:count Licencja',
         'consumables'  => ':count Materiał|:count Materiałów|:count Materiałów',
         'components'  => ':count Składnik|:count Składniki',
-    ]
+    ],
+    'more_info' => 'Więcej informacji',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

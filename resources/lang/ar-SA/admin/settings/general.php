@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'اختبار LDAP',
     'ldap_test_sync'            => 'اختبار مزامنة LDAP',
     'license'                   => 'ترخيص البرنامج',
-    'load_remote'               => 'استخدام Gravatar',
-    'load_remote_help_text'		=> 'قم بإلغاء تحديد هذا المربع إذا لم يتمكن التثبيت الخاص بك من تحميل البرامج النصية من الإنترنت الخارجي. وهذا سيمنع Snipe-IT من محاولة تحميل الصور من Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'محاولات تسجيل الدخول',
     'login_attempt'             => 'محاولة تسجيل الدخول',
     'login_ip'                  => 'عنوان IP',
@@ -327,7 +327,6 @@ return [
     'labels' => 'التسميات',
     'labels_title' => 'تحديث إعدادات التسمية',
     'labels_help' => 'أحجام التسمية &amp; الإعدادات',
-    'purge' => 'Purge',
     'purge_keywords' => 'حذف نهائيًا',
     'purge_help' => 'تطهير السجلات المحذوفة',
     'ldap_extension_warning' => 'لا يبدو أن ملحق LDAP مثبت أو مفعّل على هذا الخادم. لا يزال بإمكانك حفظ الإعدادات الخاصة بك، ولكن ستحتاج إلى تمكين ملحق LDAP لـ PHP قبل أن تعمل مزامنة LDAP أو تسجيل الدخول.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'سائق قاعدة البيانات',
     'bs_table_storage' => 'تخزين الجدول',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

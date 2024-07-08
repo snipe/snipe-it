@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP sinhronizaciju',
     'license'                   => 'Licence za softver',
-    'load_remote'               => 'Koristi Gravatar',
-    'load_remote_help_text'		=> 'Isključi ovo polje ako tvoja instalacija ne može da učita skripte izvan interneta. Ovo će sprečiti Snipe-IT od pokušaja da učita slike sa Gravatara.',
+    'load_remote'               => 'Učitaj udaljene avatare',
+    'load_remote_help_text'		=> 'Isključi ovo polje ako tvoja instalacija ne može da učita skripte sa spoljnog interneta. Ovo će sprečiti Snipe-IT od pokušaja da učita slike sa Gravatara ili drugih spoljnih izvora.',
     'login'                     => 'Pokušaj logovanja',
     'login_attempt'             => 'Pokušaj logovanja',
     'login_ip'                  => 'IP adresa',
@@ -327,7 +327,6 @@ return [
     'labels' => 'Oznake',
     'labels_title' => 'Obnovite podešavanja oznaka',
     'labels_help' => 'Veličina oznake &amp; podešavanja',
-    'purge' => 'Pročisti',
     'purge_keywords' => 'trajno brisanje',
     'purge_help' => 'Očistite izbrisane zapise',
     'ldap_extension_warning' => 'Ne izgleda da je LDAP ekstenzija instalirana ili omogućena na ovom serveru. I dalje možete da sačuvate svoja podešavanja, ali ćete morati da omogućite LDAP ekstenziju za PHP pre nego što LDAP sinhronizacija ili prijavljivanje budu funkcionisali.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'Drajver Baze Podataka',
     'bs_table_storage' => 'Skladište tabele',
     'timezone' => 'Vremenska zona',
+    'profile_edit'          => 'Izmeni profil',
+    'profile_edit_help'          => 'Dozvoli korisnicima da izmene svoje profile.',
+    'default_avatar' => 'Postavi podrazumevani avatar',
 
 ];

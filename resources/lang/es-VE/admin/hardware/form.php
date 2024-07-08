@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'bulk_delete'		=> 'Confirmar Eliminación Masiva de Activos',
+    'bulk_delete'		=> 'Confirmar eliminación masiva de activos',
     'bulk_restore'      => 'Confirmar recuperación masiva de activos', 
   'bulk_delete_help'	=> 'Revisa los activos para eliminación masiva abajo. Una vez borrados, estos activos pueden ser restaurados, pero no estarán asociados con ningún usuario al que estén asignados actualmente.',
   'bulk_restore_help'	=> 'Revisar los activos para la restauración en masa a continuación. Una vez restaurados, estos activos no estarán asociados con los usuarios a los que fueron asignados anteriormente.',
-  'bulk_delete_warn'	=> 'Vas a eliminar :asset_count activos.',
+  'bulk_delete_warn'	=> 'Va a eliminar :asset_count activos.',
   'bulk_restore_warn'	=> 'Está a punto de restaurar :asset_count activos.',
     'bulk_update'		=> 'Actualización Masiva de Activos',
-    'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples activos de una vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios. ',
+    'bulk_update_help'	=> 'Este formulario le permite actualizar varios activos a la vez. Complete solo los campos que necesite modificar. Los campos que se dejen en blanco no se modificarán. ',
     'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo recurso.|Está a punto de editar las propiedades de :asset_count activos.',
     'bulk_update_with_custom_field' => 'Tenga en cuenta que los activos son :asset_model_count diferentes tipos de modelos.',
     'bulk_update_model_prefix' => 'En modelos', 
@@ -45,7 +45,7 @@ return [
     'select_statustype'	=> 'Seleccione un tipo de estado',
     'serial'			=> 'Serial',
     'status'			=> 'Estado',
-    'tag'				=> 'Etiqueta de Activo',
+    'tag'				=> 'Etiqueta del activo',
     'update'			=> 'Actualizar Activo',
     'warranty'			=> 'Garantía',
         'warranty_expires'		=> 'La garantía vence',

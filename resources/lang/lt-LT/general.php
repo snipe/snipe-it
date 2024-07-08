@@ -122,8 +122,8 @@ return [
     'exclude_deleted'       => 'Neįtraukti panaikintos įrangos',
     'example'				=> 'Pavyzdys: ',
     'filastname_format'			=> 'Vardo pirmoji raidė, Pavardė (vpavarde@example.com)',
-    'firstname_lastname_format'	=> 'Vardas Pavardė (vardas.pavarde@example.com)',
-    'firstname_lastname_underscore_format' => 'Vardas Pavardė (vardas_pavarde@example.com)',
+    'firstname_lastname_format'	=> 'Vardas.Pavardė (vardas.pavarde@example.com)',
+    'firstname_lastname_underscore_format' => 'Vardas_Pavardė (vardas_pavarde@example.com)',
     'lastnamefirstinitial_format' =>  'Pavardė, Vardo pirmoji raidė (pavardev@example.com)',
     'firstintial_dot_lastname_format' => 'V. Pavardė (v.pavarde@example.com)',
     'firstname_lastname_display'	=> 'Vardas Pavardė (Vardenis Pavardenis)',
@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Įkelti atvaizdą',
     'filetypes_accepted_help'    => 'Leidžiamas failo tipas yra :types. Didžiausias leistinas įkeliamo failo dydis yra :size.|Leidžiami failų tipai yra :types. Didžiausias leistinas įkeliamų failų dydis yra :size.',
     'filetypes_size_help'   => 'Didžiausias leistinas įkeliamų failų dydis yra :size.',
-    'image_filetypes_help'  => 'Leidžiami failų tipai yra: jpg, webp, png, gif ir svg. Didžiausias leistinas įkeliamų failų dydis yra :size.',
+    'image_filetypes_help'  => 'Leidžiami failų tipai yra: jpg, webp, png, gif, svg ir avif. Didžiausias leistinas įkeliamų failų dydis yra :size.',
     'unaccepted_image_type'  => 'Šio atvaizdo failo nepavyko nuskaityti. Leidžiami failų tipai yra: jpg, webp, png, gif ir svg. Šio failo mimetype identifikatorius yra: :mimetype.',
     'import'         	    => 'Importavimas',
     'import_this_file'      => 'Susieti laukus ir apdoroti šį failą',
@@ -201,7 +201,7 @@ return [
     'min_amt_help'          => 'Mažiausias turimų elementų kiekis, kurį pasiekus yra aktyvuojamas įspėjimas. Palikite lauką "Mažiausias kiekis" tuščią, jei nenorite gauti įspėjimų apie mažą atsargų likutį.',
     'model_no'				=> 'Modelio Nr.',
     'months'				=> 'mėnesiai',
-    'moreinfo'				=> 'Daugiau informacijos',
+    'moreinfo'				=> 'Detaliau',
     'name'					=> 'Vardas',
     'new_password'          => 'Naujas slaptažodis',
     'next'					=> 'Kitas',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'atkurta',
     'restore'				=> 'Atkurti',
     'requestable_models'    => 'Užsakomi modeliai',
+    'requestable_items'     => 'Užsakomi daiktai',
     'requested'				=> 'Užsakyta',
     'requested_date'        => 'Prašymo data',
     'requested_assets'      => 'Prašoma įranga',
@@ -482,7 +483,7 @@ return [
     'undeployable_tooltip'      => 'Šis elemento negalima išduoti. Patikrinkite likutį.',
     'serial_number'        => 'Serijos numeris',
     'item_notes' => ':item Pastabos',
-    'item_name_var' => ':failo Pavadinimas',
+    'item_name_var' => ':item Pavadinimas',
     'error_user_company' => 'Paskirties ir įrangos įmonės nesutampa',
     'error_user_company_accept_view' => 'Jums paskirta įranga priklauso kitai įmonei, todėl Jūs negalite jos priimti ar atmesti, pasitarkite su savo vadovu',
     'importer' => [
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Leidimas nesuteiktas. Demonstraciniame režime negalite keisti superadministratoriaus naudotojo informacijos.',
     'pwd_reset_not_sent' => 'Naudotojas nesuaktyvintas, yra sinchronizuotas LDAP arba neturi el. pašto adreso',
     'error_sending_email' => 'Siunčiant el. laišką įvyko klaida',
+    'sad_panda' => 'Liūdna panda. Jūs neturite reikiamų teisių šiam veiksmui. Verčiau <a href=":link">grįžkite į valdymo skydą</a> arba susisiekite su administratoriumi.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count Licencijos vieta|:count Licencijos vietos',
         'consumables'  => ':count Eksploatacinė medžiaga|:count Eksploatacinės medžiagos',
         'components'  => ':count Komponentas|:count Komponentai',
-    ]
+    ],
+    'more_info' => 'Detaliau',
+    'quickscan_bulk_help' => 'Pažymėjus šį langelį, įrangos įrašas bus atnaujintas, kad atspindėtų šią naują vietą. Jei paliksite jį nepažymėtą, vieta bus pažymėta tik audito žurnale. Atkreipkite dėmesį, kad jei ši įranga bus išduota, tai nepakeis asmens, įrangos ar vietos, kuriems išduodama įranga, buvimo vietos.',
 
 ];

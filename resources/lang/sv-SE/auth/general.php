@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Ditt användarnamn och e-postadress <em>kan</em> vara samma, men kanske inte är beroende på din konfiguration. Om du inte kommer ihåg ditt användarnamn, kontakta din administratör. <br><br><strong>Användarnamn utan en associerad e-postadress kommer inte att få en länk för att återställa lösenordet.</strong> ',
     'google_login'                  => 'Logga in med Google Workspace',
     'google_login_failed'           => 'Google-inloggning misslyckades, försök igen.',
-
 ];
 

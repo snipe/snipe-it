@@ -14,6 +14,8 @@ return array(
         'success'               => 'Bạn đã đăng nhập thành công.',
         'code_required'         => 'Mã xác thực hai yếu tố là bắt buộc.',
         'invalid_code'          => 'Mã xác thực hai yếu tố chưa đúng.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

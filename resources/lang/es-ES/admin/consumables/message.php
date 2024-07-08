@@ -15,7 +15,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '¿Está seguro que desea eliminar este consumible?',
+        'confirm'   => '¿Está seguro de que desea eliminar este consumible?',
         'error'   => 'Hubo un problema al eliminar el consumible. Por favor inténtelo de nuevo.',
         'success' => 'El consumible ha sido eliminado correctamente.'
     ),

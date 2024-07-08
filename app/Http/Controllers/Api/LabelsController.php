@@ -8,7 +8,7 @@ use App\Http\Transformers\LabelsTransformer;
 use App\Models\Labels\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\ItemNotFoundException;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class LabelsController extends Controller
 {
@@ -16,9 +16,8 @@ class LabelsController extends Controller
      * Returns JSON listing of all labels.
      *
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
-     * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Label::class);
 
@@ -50,9 +49,8 @@ class LabelsController extends Controller
      *
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
      * @param  string  $labelName
-     * @return JsonResponse
      */
-    public function show(string $labelName)
+    public function show(string $labelName) : JsonResponse | array
     {
         $labelName = str_replace('/', '\\', $labelName);
         try {

@@ -14,6 +14,8 @@ return array(
         'success'               => 'Þú hefur skráð þig inn.',
         'code_required'         => 'Tveggja þátta kóða er krafist.',
         'invalid_code'          => 'Tveggja þátta kóði er ógildur.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

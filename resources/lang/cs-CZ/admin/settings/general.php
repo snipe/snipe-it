@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP synchronizace',
     'license'                   => 'Softwarová licence',
-    'load_remote'               => 'Použít Gravatar',
-    'load_remote_help_text'		=> 'Zrušte zaškrtnutí tohoto políčka, pokud vaše instalace nemůže načíst skripty z externího internetu. To Snipe-IT zabrání načítání obrázků z Gravataru.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Pokusů o přihlášení',
     'login_attempt'             => 'Pokus o přihlášení',
     'login_ip'                  => 'IP adresa',
@@ -327,7 +327,6 @@ return [
     'labels' => 'Štítky',
     'labels_title' => 'Upravit nastavení štítků',
     'labels_help' => 'Velikost štítků &amp; nastavení',
-    'purge' => 'Smazat',
     'purge_keywords' => 'trvale odstranit',
     'purge_help' => 'Vymazat smazané záznamy',
     'ldap_extension_warning' => 'Nevypadá to, že LDAP rozšíření je nainstalováno nebo povoleno na tomto serveru. Stále můžete uložit vaše nastavení, ale budete muset povolit LDAP rozšíření pro PHP, než bude fungovat LDAP synchronizace nebo přihlášení.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'Ovladač databáze',
     'bs_table_storage' => 'Úložiště tabulky',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

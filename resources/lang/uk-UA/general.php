@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Завантажити зображення',
     'filetypes_accepted_help'    => 'Прийнятий тип файлу - :types. Максимальний розмір завантаження - :size.| Прийняті типи файлів :types. Максимальний розмір завантаження - :size.',
     'filetypes_size_help'   => 'Максимальний розмір завантажуваного файлу - :size.',
-    'image_filetypes_help'  => 'Допустимі типи файлів - jpg, webp, png, gif і svg. Максимальний дозволений розмір файлу :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Цей файл зображення не був прочитаний. Допустимі типи файлів - jpg, webp, png, gif та svg. Mimetype цього файлу: :mimetype.',
     'import'         	    => 'Імпорт',
     'import_this_file'      => 'Поля карти і обробка цього файлу',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'відновлено',
     'restore'				=> 'Відновити',
     'requestable_models'    => 'Необхідно ввести моделі',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Запрошено користувачем',
     'requested_date'        => 'Дата запиту',
     'requested_assets'      => 'Запитані активи',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'У доступі відмовлено. Ви не можете оновити інформацію про користувача для суперадміністраторів на демо.',
     'pwd_reset_not_sent' => 'Користувач не активований, він синхронізується або не має електронної адреси',
     'error_sending_email' => 'Помилка при відправці електронної пошти',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count реалізація|:count місця для ліцензії',
         'consumables'  => ':count витратно|:count витратних товарів',
         'components'  => ':count компонент|:count компонентів',
-    ]
+    ],
+    'more_info' => 'Детальніше',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

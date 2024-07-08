@@ -10,7 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class AccessoryCheckoutController extends Controller
 {
@@ -19,10 +20,8 @@ class AccessoryCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $id
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($id)
+    public function create($id) : View | RedirectResponse
     {
 
         if ($accessory = Accessory::withCount('users as users_count')->find($id)) {
@@ -59,10 +58,8 @@ class AccessoryCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
      * @param  int $accessoryId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request, $accessoryId)
+    public function store(Request $request, $accessoryId) : RedirectResponse
     {
         // Check if the accessory exists
         if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
@@ -95,7 +92,7 @@ class AccessoryCheckoutController extends Controller
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
-        event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
 
         // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));

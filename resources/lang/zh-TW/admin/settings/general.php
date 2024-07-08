@@ -123,8 +123,8 @@ return [
     'ldap_test'                 => '測試 LDAP',
     'ldap_test_sync'            => '測試 LDAP 同步',
     'license'                   => '軟體授權',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => '登入嘗試',
     'login_attempt'             => '登入嘗試',
     'login_ip'                  => 'IP 位址',
@@ -328,7 +328,6 @@ return [
     'labels' => '標籤',
     'labels_title' => '更新標籤設定',
     'labels_help' => '標籤大小和設定',
-    'purge' => '清除',
     'purge_keywords' => '永久刪除',
     'purge_help' => '清除已刪除的記錄',
     'ldap_extension_warning' => '似乎此伺服器上未安裝或啟用 LDAP 擴充套件。您仍然可以儲存您的設定，但在 LDAP 同步或登入將正常工作之前，您需要啟用 LDAP 擴充套件。',
@@ -375,5 +374,8 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

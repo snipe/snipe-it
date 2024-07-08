@@ -16,7 +16,7 @@ return [
     'eol' 			=> 'Fin de Vida',
     'id'      		=> 'Identificación',
     'last_checkin_date' => 'Última fecha de devolución',
-    'location' 		=> 'Localización',
+    'location' 		=> 'Ubicación',
     'purchase_cost'	=> 'Costo',
     'purchase_date'	=> 'Comprado',
     'serial'   		=> 'Serial',

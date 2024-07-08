@@ -223,6 +223,7 @@ class UserPresenter extends Presenter
                 'class' => 'css-barcode',
                 'title' => trans('general.assets'),
                 'visible' => true,
+                'formatter' => 'linkNumberToUserAssetsFormatter',
             ],
             [
                 'field' => 'licenses_count',
@@ -232,6 +233,7 @@ class UserPresenter extends Presenter
                 'class' => 'css-license',
                 'title' => trans('general.licenses'),
                 'visible' => true,
+                'formatter' => 'linkNumberToUserLicensesFormatter',
             ],
             [
                 'field' => 'consumables_count',
@@ -241,6 +243,7 @@ class UserPresenter extends Presenter
                 'class' => 'css-consumable',
                 'title' => trans('general.consumables'),
                 'visible' => true,
+                'formatter' => 'linkNumberToUserConsumablesFormatter',
             ],
             [
                 'field' => 'accessories_count',
@@ -250,6 +253,7 @@ class UserPresenter extends Presenter
                 'class' => 'css-accessory',
                 'title' => trans('general.accessories'),
                 'visible' => true,
+                'formatter' => 'linkNumberToUserAccessoriesFormatter',
             ],
             [
                 'field' => 'manages_users_count',
@@ -259,6 +263,7 @@ class UserPresenter extends Presenter
                 'class' => 'css-users',
                 'title' => trans('admin/users/table.managed_users'),
                 'visible' => true,
+                'formatter' => 'linkNumberToUserManagedUsersFormatter',
             ],
             [
                 'field' => 'manages_locations_count',
@@ -268,6 +273,7 @@ class UserPresenter extends Presenter
                 'class' => 'css-location',
                 'title' => trans('admin/users/table.managed_locations'),
                 'visible' => true,
+                'formatter' => 'linkNumberToUserManagedLocationsFormatter',
             ],
             [
                 'field' => 'notes',
@@ -426,6 +432,8 @@ class UserPresenter extends Presenter
      */
     public function gravatar()
     {
+
+        // User's specific avatar
         if ($this->avatar) {
 
             // Check if it's a google avatar or some external avatar
@@ -437,6 +445,12 @@ class UserPresenter extends Presenter
             return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
+        // If there is a default avatar
+        if (Setting::getSettings()->default_avatar!= '') {
+            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
+        }
+
+        // Fall back to Gravatar if the settings allow loading remote scripts
         if (Setting::getSettings()->load_remote == '1') {
             if ($this->model->gravatar != '') {
 
@@ -450,8 +464,8 @@ class UserPresenter extends Presenter
             }
         }
 
-        // Set a fun, gender-neutral default icon
-        return config('app.url').'/img/default-sm.png';
+
+        return false;
     }
 
     /**

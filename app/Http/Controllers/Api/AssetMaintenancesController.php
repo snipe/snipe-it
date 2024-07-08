@@ -9,9 +9,8 @@ use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\JsonResponse;
 
 /**
  * This controller handles all actions related to Asset Maintenance for
@@ -22,7 +21,6 @@ use Illuminate\Support\Facades\Input;
 class AssetMaintenancesController extends Controller
 {
 
-
     /**
      *  Generates the JSON response for asset maintenances listing view.
      *
@@ -30,9 +28,8 @@ class AssetMaintenancesController extends Controller
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      * @since [v1.8]
-     * @return string JSON
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Asset::class);
 
@@ -120,9 +117,8 @@ class AssetMaintenancesController extends Controller
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      * @since [v1.8]
-     * @return string JSON
      */
-    public function store(Request $request)
+    public function store(Request $request) : JsonResponse
     {
         $this->authorize('update', Asset::class);
         // create a new model instance
@@ -148,9 +144,8 @@ class AssetMaintenancesController extends Controller
      * @param int $request
      * @version v1.0
      * @since [v4.0]
-     * @return string JSON
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) : JsonResponse
     {
         $this->authorize('update', Asset::class);
 
@@ -186,9 +181,8 @@ class AssetMaintenancesController extends Controller
      * @param int $assetMaintenanceId
      * @version v1.0
      * @since [v4.0]
-     * @return string JSON
      */
-    public function destroy($assetMaintenanceId)
+    public function destroy($assetMaintenanceId) : JsonResponse
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
@@ -212,9 +206,8 @@ class AssetMaintenancesController extends Controller
      * @param int $assetMaintenanceId
      * @version v1.0
      * @since [v4.0]
-     * @return string JSON
      */
-    public function show($assetMaintenanceId)
+    public function show($assetMaintenanceId) : JsonResponse
     {
         $this->authorize('view', Asset::class);
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);

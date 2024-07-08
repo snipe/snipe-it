@@ -14,6 +14,8 @@ return array(
         'success'               => 'Si guul leh ayaad u soo gashay',
         'code_required'         => 'Koodhka laba-factor ayaa loo baahan yahay.',
         'invalid_code'          => 'Koodhka laba-factor waa mid aan shaqayn.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

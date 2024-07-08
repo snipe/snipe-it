@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test Sincronizzazione Ldap',
     'license'                   => 'Licenza software',
-    'load_remote'               => 'Usa Gravatar',
-    'load_remote_help_text'		=> 'Deseleziona questa casella se la tua installazione non può caricare script da internet esterna. Ciò impedirà a Snipe-IT di provare a caricare le immagini da Gravatar.',
+    'load_remote'               => 'Carica Avatar Remoti',
+    'load_remote_help_text'		=> 'Deseleziona questa casella se la tua installazione non può caricare gli script dall\'esterno. Questo impedirà a Snipe-IT di provare il caricamento degli avatar da Gravatar o da altre fonti esterne.',
     'login'                     => 'Tentativi di Accesso',
     'login_attempt'             => 'Tentativo di Accesso',
     'login_ip'                  => 'Indirizzo IP',
@@ -327,7 +327,6 @@ return [
     'labels' => 'Etichette',
     'labels_title' => 'Aggiorna Impostazioni Etichette',
     'labels_help' => 'Dimensioni etichette &amp; impostazioni',
-    'purge' => 'Pulisci',
     'purge_keywords' => 'elimina definitivamente',
     'purge_help' => 'Elimina Record Cancellati',
     'ldap_extension_warning' => 'L\'estensione LDAP non è installata o abilitata su questo server. Puoi ancora salvare le impostazioni, ma è necessario abilitare l\'estensione LDAP per PHP prima che il login o la sincronizzazione LDAP funzioni.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'Driver del database',
     'bs_table_storage' => 'Archiviazione Tabella',
     'timezone' => 'Fuso orario',
+    'profile_edit'          => 'Modifica Profilo',
+    'profile_edit_help'          => 'Consenti agli utenti di modificare i propri profili.',
+    'default_avatar' => 'Carica avatar predefinito',
 
 ];

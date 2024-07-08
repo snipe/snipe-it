@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Upload Image',
     'filetypes_accepted_help'    => 'Uključi izbrisana sredstva.',
     'filetypes_size_help'   => 'Maksimalna dozvoljena veličina za otpremanje je :size.',
-    'image_filetypes_help'  => 'Prihvatljivi tipovi datoteka su jpg, webp, png, gif i svg. Maksimalna veličina datoteke je :size.',
+    'image_filetypes_help'  => 'Prihvatljivi tipovi datoteka su jpg, webp, png, gif, svg i avig. Maksimalna veličina datoteke je :size.',
     'unaccepted_image_type'  => 'Datoteka slike nije čitljiva. Prihvatljivi tipovi datoteka su jpg, webp, png, gif i svg. Mimetip ove datoteke je: :mimetype.',
     'import'         	    => 'Import',
     'import_this_file'      => 'Mapiraj polja i obradi ovu datoteku',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'vraćeno u prethodno stanje',
     'restore'				=> 'Povrati',
     'requestable_models'    => 'Zatraživi modeli',
+    'requestable_items'     => 'Zatraživa stavka',
     'requested'				=> 'Tražena',
     'requested_date'        => 'Datum zatraživanja',
     'requested_assets'      => 'Zatražena imovina',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Ovlašćenje je odbijeno. Ne možete da izmenite podatke o superadmin korisniku u ovoj demostraciji.',
     'pwd_reset_not_sent' => 'Korisnik nije aktiviran, nije sinhronizovan sa LDAP-om, ili nema navedenu adresu e-pošte',
     'error_sending_email' => 'Greška prilikom slanja e-poruke',
+    'sad_panda' => 'Tužni panda. Niste ovlašćeni da uradite tu stvar. Možda da se <a href=":link">vratite na kontrolnu tablu</a>, ili kontaktirajte vašeg administratora.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count licencnih mesta|:count licencnih mesta',
         'consumables'  => ':count potrošni materijal|:count potrošnih materijala',
         'components'  => ':count komponenta|:count komponenti',
-    ]
+    ],
+    'more_info' => 'Više informacija',
+    'quickscan_bulk_help' => 'Potvrđivanjem ovog polja će izmeniti zapis imovine kako bi se ažurirala ova nova lokacija. Ukoliko ostane nepotvrđeno lokacija će se evidentirati samo u zapisu popisa. Imajte na umu da, ukoliko je imovina zadužena, neće promeniti lokaciju osobe, imovine ili lokacije za koju je zadužena.',
 
 ];

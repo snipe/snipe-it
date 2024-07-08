@@ -54842,11 +54842,11 @@ return SignaturePad;
 }));
 
 /*!
- * jQuery Validation Plugin v1.20.0
+ * jQuery Validation Plugin v1.20.1
  *
  * https://jqueryvalidation.org/
  *
- * Copyright (c) 2023 Jörn Zaefferer
+ * Copyright (c) 2024 Jörn Zaefferer
  * Released under the MIT license
  */
 (function( factory ) {
@@ -56455,11 +56455,12 @@ $.extend( $.validator, {
 
 			param = typeof param === "string" && { url: param } || param;
 			optionDataString = $.param( $.extend( { data: value }, param.data ) );
-			if ( previous.old === optionDataString ) {
+			if ( previous.valid !== null && previous.old === optionDataString ) {
 				return previous.valid;
 			}
 
 			previous.old = optionDataString;
+			previous.valid = null;
 			validator = this;
 			this.startRequest( element );
 			data = {};
@@ -59777,22 +59778,27 @@ function htmlEntities(str) {
  *
  * 1. Set the class of your select2 elements to 'livewire-select2').
  * 2. Name your element to match a property in your Livewire component
- * 3. Add an attribute called 'data-livewire-component' that points to $_instance->id (via `{{ }}` if you're in a blade,
- *    or just $_instance->id if not).
+ * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
+ *    or just $this->getId() if not).
  */
-$(function () {
+document.addEventListener('livewire:init', function () {
   $('.livewire-select2').select2();
   $(document).on('select2:select', '.livewire-select2', function (event) {
     var target = $(event.target);
     if (!event.target.name || !target.data('livewire-component')) {
       console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!");
-      console.error("For data-livewire-component, you probably want to use $_instance->id or {{ $_instance->id }}, as appropriate");
+      console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate");
       return false;
     }
-    window.livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
+    Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
   });
-  window.livewire.hook('message.processed', function (el, component) {
-    $('.livewire-select2').select2();
+  Livewire.hook('request', function (_ref) {
+    var succeed = _ref.succeed;
+    succeed(function () {
+      queueMicrotask(function () {
+        $('.livewire-select2').select2();
+      });
+    });
   });
 });
 

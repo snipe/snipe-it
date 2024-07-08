@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Unggah gambar',
     'filetypes_accepted_help'    => 'Jenis file yang diterima adalah :types. Ukuran unggahan maksimum yang diizinkan adalah :size.',
     'filetypes_size_help'   => 'Ukuran unggahan maksimum yang diizinkan adalah :size.',
-    'image_filetypes_help'  => 'Jenis file yang diterima adalah jpg, webp, png, gif, dan svg. Ukuran unggahan maksimum yang diizinkan adalah :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Pilihan file gambar ini tidak dapat dibaca. Jenis file yang diterima adalah jpg, webp, png, gif, dan svg. Tipe file ini adalah :mimetype.',
     'import'         	    => 'Impor',
     'import_this_file'      => 'Map fields and process this file',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'kembalikan',
     'restore'				=> 'Pulihkan',
     'requestable_models'    => 'Model yang Dapat Diminta',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Diminta',
     'requested_date'        => 'Tanggal Permintaan',
     'requested_assets'      => 'Aset yang Diminta',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'Lebih Lanjut',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

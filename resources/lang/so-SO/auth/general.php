@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Magacaaga isticmaale iyo ciwaanka iimaylka <em>waxa laga yaabaa in</em> isku mid noqdaan, laakiin ma noqon karaan, iyadoo ku xidhan qaabayntaada. Haddii aadan xasuusan karin magacaaga isticmaale, la xiriir maamulahaaga. <br><br><xoogan>Magacyada isticmaalayaasha aan lahayn ciwaanka iimaylka la xidhiidha iimaylka looma diri doono isku xidhka dib u dejinta erayga sirta ah.</strong> ',
     'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login wuu fashilmay, fadlan isku day mar kale.',
-
 ];
 

@@ -164,8 +164,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -459,7 +459,6 @@ return [
 ',
     'labels_help' => 'اندازه برچسب &amp; تنظیمات
 ',
-    'purge' => 'پاکسازی',
     'purge_keywords' => 'برای همیشه حذف کنید
 ',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
@@ -520,5 +519,8 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

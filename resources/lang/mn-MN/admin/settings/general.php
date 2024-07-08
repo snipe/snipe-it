@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP Synchronization',
     'license'                   => 'Програм хангамжийн лиценз',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Login Attempts',
     'login_attempt'             => 'Login Attempt',
     'login_ip'                  => 'IP Address',
@@ -327,7 +327,6 @@ return [
     'labels' => 'Labels',
     'labels_title' => 'Update Label Settings',
     'labels_help' => 'Label sizes &amp; settings',
-    'purge' => 'Purge',
     'purge_keywords' => 'permanently delete',
     'purge_help' => 'Устгагдсан бүртгэл',
     'ldap_extension_warning' => 'It does not look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

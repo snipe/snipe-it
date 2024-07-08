@@ -5,11 +5,11 @@
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url(mix('js/dist/bootstrap-table-locale-all.min.js')) }}"></script>
 
 <script nonce="{{ csrf_token() }}">
     $(function () {
 
-        var locale = '{{ config('app.locale') }}';
         var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
 
         var keyBlocked = function(key) {
@@ -46,7 +46,6 @@
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            locale: '{{ app()->getLocale() }}',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
@@ -88,6 +87,7 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
+            locale: '{{ app()->getLocale() }}',
             exportOptions: export_options,
             exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
@@ -802,6 +802,38 @@
         if ((value) && (value.filename) && (value.url)) {
             return '<a href="' + value.url + '">' + value.filename + '</a>';
         }
+    }
+
+    function linkToUserSectionBasedOnCount (count, id, section) {
+        if (count) {
+            return '<a href="{{ config('app.url') }}/users/' + id + '#' + section +'">' + count + '</a>';
+        }
+
+        return count;
+    }
+
+    function linkNumberToUserAssetsFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'asset');
+    }
+
+    function linkNumberToUserLicensesFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'licenses');
+    }
+
+    function linkNumberToUserConsumablesFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'consumables');
+    }
+
+    function linkNumberToUserAccessoriesFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'accessories');
+    }
+
+    function linkNumberToUserManagedUsersFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'managed-users');
+    }
+
+    function linkNumberToUserManagedLocationsFormatter(value, row) {
+        return linkToUserSectionBasedOnCount(value, row.id, 'managed-locations');
     }
 
     function labelPerPageFormatter(value, row, index, field) {

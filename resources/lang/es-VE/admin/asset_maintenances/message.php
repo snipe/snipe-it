@@ -1,9 +1,9 @@
 <?php
 
     return [
-        'not_found'                    => '¡El Mantenimiento de Activo que estás buscando no fue encontrado!',
+        'not_found'                    => '¡El mantenimiento del activo que estaba buscando no se encontró!',
         'delete'                       => [
-            'confirm' => '¿Estás seguro de que quieres borrar el mantenimiento de este activo?',
+            'confirm' => '¿Está seguro de que desea eliminar el mantenimiento de este activo?',
             'error'   => 'Hubo un problema borrando el mantenimiento del activo. Por favor, inténtalo de nuevo.',
             'success' => 'El mantenimiento de activo fue eliminado con éxito.',
         ],

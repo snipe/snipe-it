@@ -19,7 +19,7 @@ return [
     'zip'                       => 'Código postal',
     'locations'                 => 'Ubicaciones',
     'parent'                    => 'Ubicación padre',
-    'currency'                  => 'Moneda de ubicación',
+    'currency'                  => 'Divisa de la ubicación',
     'ldap_ou'                   => 'OU de búsqueda LDAP',
     'user_name'                 => 'Usuario',
     'department'                => 'Departamento',

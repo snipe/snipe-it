@@ -33,15 +33,16 @@
             @if ($backto == 'user')
               <form class="form-horizontal" method="post" action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id, 'backto'=>'user')) }}"  autocomplete="off">
             @else
-              <form class="form-horizontal" method="post"
-                    action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id)) }}" autocomplete="off">
+              <form class="form-horizontal" method="post"  action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id)) }}" autocomplete="off">
             @endif
                   {{csrf_field()}}
 
                   <!-- AssetModel name -->
                     <div class="form-group">
-                      {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
-                      <div class="col-md-8">
+                        <label for="model" class="col-sm-3 control-label">
+                            {{ trans('admin/hardware/form.model') }}
+                        </label>
+                        <div class="col-md-8">
 
                         <p class="form-control-static">
                           @if (($asset->model) && ($asset->model->name))
@@ -63,16 +64,20 @@
 
                     <!-- Asset Name -->
                     <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-                      {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
-                      <div class="col-md-8">
-                        <input class="form-control" type="text" name="name" aria-label="name" id="name" value="{{ old('name', $asset->name) }}"/>
-                        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                      </div>
+                        <label for="name" class="col-sm-3 control-label">
+                            {{ trans('general.name') }}
+                        </label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" name="name" aria-label="name" id="name" value="{{ old('name', $asset->name) }}"/>
+                            {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                          </div>
                     </div>
 
                     <!-- Status -->
                     <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
-                      {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
+                        <label for="status_id" class="col-sm-3 control-label">
+                            {{ trans('admin/hardware/form.status') }}
+                        </label>
                       <div class="col-md-8 required">
                         {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
                         {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -83,8 +88,9 @@
 
                   <!-- Checkout/Checkin Date -->
                     <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
-
-                      {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
+                        <label for="checkin_at" class="col-sm-3 control-label">
+                            {{ trans('admin/hardware/form.checkin_date') }}
+                        </label>
 
                       <div class="col-md-8">
                         <div class="input-group col-md-5 required">
@@ -99,7 +105,9 @@
 
                     <!-- Note -->
                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                      {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+                        <label for="note" class="col-sm-3 control-label">
+                            {{ trans('general.notes') }}
+                        </label>
                       <div class="col-md-8">
                         <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $asset->note) }}</textarea>
                         {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}

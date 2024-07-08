@@ -11,9 +11,9 @@ return [
     'activity_report'		=> 'Tevékenység riport',
     'address'				=> 'Cím',
     'admin'					=> 'Admin',
-    'admin_tooltip'			=> 'This user has admin privileges',
+    'admin_tooltip'			=> 'Ez a felhasználó adminisztrátor jogosultsággal rendelkezik',
     'superuser'				=> 'Superuser',
-    'superuser_tooltip'		=> 'This user has superuser privileges',
+    'superuser_tooltip'		=> 'Ez a felhasználó superuser jogosultsággal rendelkezik',
     'administrator'			=> 'Adminisztrátor',
     'add_seats'             => 'Hozzáadott ülések',
     'age'                   => "Életkor",
@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Kép feltöltése',
     'filetypes_accepted_help'    => 'Az elfogadott fájltípus :types. A megengedett maximális feltöltési méret :size.|Az elfogadott fájltípusok :types. A megengedett maximális feltöltési méret :size.',
     'filetypes_size_help'   => 'A feltölthető méret maximum :size.',
-    'image_filetypes_help'  => 'Az elfogadott fájltípusok jpg, webp, png, gif és svg. A maximális feltöltési méret a következő: size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Ez a képfájl nem beolvasható. Az elfogadott fájltípusok: jpg, webp, png, gif és svg. A fájl kódolása: :mimetype.',
     'import'         	    => 'Importálás',
     'import_this_file'      => 'Map fields and process this file',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'visszaállítva',
     'restore'				=> 'Visszaállítás',
     'requestable_models'    => 'Igényelhető modellek',
+    'requestable_items'     => 'Igényelhető modellek',
     'requested'				=> 'Kérve',
     'requested_date'        => 'Kért időpont',
     'requested_assets'      => 'Kért eszközök',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Hozzáférés megtagadva. Nem frissítheti a szuperadminisztrátorok felhasználói adatait a próba verzióban.',
     'pwd_reset_not_sent' => 'A felhasználó nem aktív, vagy nem LDAP szinkronizált, vagy nincs email címe',
     'error_sending_email' => 'Hiba történt az e-mail elküldésekor',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'További információ',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

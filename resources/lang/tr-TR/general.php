@@ -161,7 +161,7 @@ Context | Request Context
     'image_upload'         	=> 'Resim yükle',
     'filetypes_accepted_help'    => 'İzin verilen edilen dosya türü :types. İzin verilen asgari yükleme boyutu :size.|İzin verilen edilen dosya türleri:types. İzin verilen asgari yükleme boyutu :size.',
     'filetypes_size_help'   => 'İzin verilen asgari yükleme boyutu :size.',
-    'image_filetypes_help'  => 'Kabul edilen dosya türleri jpg, webp, png, gif ve svg\'dir. İzin verilen maksimum yükleme boyutu :size \'dir.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Bu dosya okunamadı. Kabul edilen dosya türleri jpg, webp, png, gif ve svg\'dir. Bu dosyanın mime tipi: :mimetype.',
     'import'         	    => 'İçeri aktar',
     'import_this_file'      => 'Alanları eşleyin ve bu dosyayı işleyin',
@@ -243,6 +243,7 @@ Context | Request Context
     'restored'				=> 'geri yüklendi',
     'restore'				=> 'Geri Yükle',
     'requestable_models'    => 'Talep Edilebilir Modeller',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Talep Edilen',
     'requested_date'        => 'Talep Tarihi',
     'requested_assets'      => 'Talep Edilen Varlıklar',
@@ -530,6 +531,7 @@ Context | Request Context
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -550,6 +552,8 @@ Context | Request Context
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'Daha Fazla Bilgi',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> '画像をアップロード',
     'filetypes_accepted_help'    => 'アップロード可能なファイル形式は :types です。アップロード可能な最大サイズは :size です。|アップロード可能なファイル形式は :types です。アップロード可能な最大サイズは :size です。',
     'filetypes_size_help'   => '許可されている最大アップロードサイズは :size です。',
-    'image_filetypes_help'  => '使用できるファイルはjpg、png、gif、svgです。許可される最大ファイルサイズは:size です。',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'この画像ファイルは読み取れませんでした。受け入れられるファイルタイプはjpg、webp、png、gif、svgです。このファイルのmimetypeは:mimetypeです。',
     'import'         	    => 'インポート',
     'import_this_file'      => 'フィールドをマップし、このファイルを処理します',
@@ -240,6 +240,7 @@ return [
     'restored'				=> '復元',
     'restore'				=> '復元',
     'requestable_models'    => '要求可能なモデル',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> '要求済',
     'requested_date'        => 'リクエスト日',
     'requested_assets'      => '要求された資産',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'アクセスが拒否されました。デモでスーパー管理者のユーザー情報を更新できません。',
     'pwd_reset_not_sent' => 'ユーザーが有効になっていないか、LDAP 同期されているか、メール アドレスがありません。',
     'error_sending_email' => 'メール送信エラー',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count個のライセンスシート',
         'consumables'  => ':count 消耗品数',
         'components'  => ':count コンポーネント',
-    ]
+    ],
+    'more_info' => '詳細',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

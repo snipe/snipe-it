@@ -123,7 +123,7 @@
                     @else
                         <!-- insert the old username so we don't break validation -->
                          {{ trans('general.managed_ldap') }}
-                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
+                          <input type="hidden" name="username" value="{{ old('username', $user->username) }}">
                     @endif
                   </div>
 
@@ -246,7 +246,7 @@
                       name="email"
                       id="email"
                       maxlength="191"
-                      value="{{ Request::old('email', $user->email) }}"
+                      value="{{ old('email', $user->email) }}"
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
@@ -322,7 +322,7 @@
                                           name="employee_num"
                                           maxlength="191"
                                           id="employee_num"
-                                          value="{{ Request::old('employee_num', $user->employee_num) }}"
+                                          value="{{ old('employee_num', $user->employee_num) }}"
                                   />
                                   {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -339,7 +339,7 @@
                                           maxlength="191"
                                           name="jobtitle"
                                           id="jobtitle"
-                                          value="{{ Request::old('jobtitle', $user->jobtitle) }}"
+                                          value="{{ old('jobtitle', $user->jobtitle) }}"
                                   />
                                   {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>

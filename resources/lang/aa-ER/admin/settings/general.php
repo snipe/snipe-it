@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'crwdns6349:0crwdne6349:0',
     'ldap_test_sync'            => 'crwdns6351:0crwdne6351:0',
     'license'                   => 'crwdns1989:0crwdne1989:0',
-    'load_remote'               => 'crwdns12086:0crwdne12086:0',
-    'load_remote_help_text'		=> 'crwdns12088:0crwdne12088:0',
+    'load_remote'               => 'crwdns12292:0crwdne12292:0',
+    'load_remote_help_text'		=> 'crwdns12294:0crwdne12294:0',
     'login'                     => 'crwdns6353:0crwdne6353:0',
     'login_attempt'             => 'crwdns6355:0crwdne6355:0',
     'login_ip'                  => 'crwdns6357:0crwdne6357:0',
@@ -327,7 +327,6 @@ return [
     'labels' => 'crwdns6459:0crwdne6459:0',
     'labels_title' => 'crwdns6461:0crwdne6461:0',
     'labels_help' => 'crwdns6463:0crwdne6463:0',
-    'purge' => 'crwdns6465:0crwdne6465:0',
     'purge_keywords' => 'crwdns6467:0crwdne6467:0',
     'purge_help' => 'crwdns6469:0crwdne6469:0',
     'ldap_extension_warning' => 'crwdns6471:0crwdne6471:0',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'crwdns11827:0crwdne11827:0',
     'bs_table_storage' => 'crwdns11829:0crwdne11829:0',
     'timezone' => 'crwdns11831:0crwdne11831:0',
+    'profile_edit'          => 'crwdns12280:0crwdne12280:0',
+    'profile_edit_help'          => 'crwdns12282:0crwdne12282:0',
+    'default_avatar' => 'crwdns12296:0crwdne12296:0',
 
 ];

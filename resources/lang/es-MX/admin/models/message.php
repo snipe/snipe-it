@@ -21,8 +21,8 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de querer eliminar el Modelo?',
-        'error'   => 'Ha habido un problema al eliminar el Modelo. Intentalo de nuevo.',
+        'confirm'   => '¿Está seguro de que desea eliminar este modelo de activo?',
+        'error'   => 'Hubo un problema eliminando el modelo. Por favor, inténtelo de nuevo.',
         'success' => 'Modelo eliminado.'
     ),
 

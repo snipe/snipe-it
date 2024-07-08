@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Soo rar sawirka',
     'filetypes_accepted_help'    => 'Nooca faylka la aqbalay waa :types. Cabbirka ugu badan ee soo dejinta la oggol yahay waa :size.| Noocyada faylalka la aqbalay waa :types. Cabbirka gelinta ugu badan ee la ogolyahay waa :size.',
     'filetypes_size_help'   => 'Cabbirka gelinta ugu badan ee la ogolyahay waa :size.',
-    'image_filetypes_help'  => 'Noocyada faylalka la aqbalay waa jpg, webp, png, gif, iyo svg. Cabbirka gelinta ugu badan ee la ogolyahay waa :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Sawirkan ma ahayn mid la akhriyi karo Noocyada faylalka la aqbalay waa jpg, webp, png, gif, iyo svg. Nooca faylkani waa: :mimetype.',
     'import'         	    => 'Soo dejinta',
     'import_this_file'      => 'Meelaha khariidad samee oo habee faylkan',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'soo celiyay',
     'restore'				=> 'Soo celi',
     'requestable_models'    => 'Qaababka la Codsado',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'La codsaday',
     'requested_date'        => 'Taariikhda la codsaday',
     'requested_assets'      => 'Hantida la codsaday',
@@ -526,6 +527,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -546,6 +548,8 @@ return [
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'Macluumaad dheeraad ah',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

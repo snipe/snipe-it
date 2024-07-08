@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'crwdns6046:0crwdne6046:0',
     'google_login'                  => 'crwdns12026:0crwdne12026:0',
     'google_login_failed'           => 'crwdns11603:0crwdne11603:0',
-
 ];
 

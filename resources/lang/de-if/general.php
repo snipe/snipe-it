@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Bild hochladen',
     'filetypes_accepted_help'    => 'Akzeptierter Dateityp ist :types. Maximal zulässige Upload-Größe ist :size.|Akzeptierte Dateitypen sind :types. Maximal erlaubte Upload-Größe ist :size.',
     'filetypes_size_help'   => 'Maximal erlaubte Upload-Größe ist :size.',
-    'image_filetypes_help'  => 'Akzeptierte Dateitypen sind jpg, png, gif und svg. Maximale Uploadgröße ist :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'Diese Bilddatei ist nicht lesbar. Akzeptierte Dateitypen sind jpg, webp, png, gif und svg. Der MIME-Type dieser Datei ist: :mimetype.',
     'import'         	    => 'Import',
     'import_this_file'      => 'Felder zuordnen und diese Datei bearbeiten',
@@ -240,6 +240,7 @@ return [
     'restored'				=> 'Wiederhergestellt',
     'restore'				=> 'Wiederherstellen',
     'requestable_models'    => 'Angeforderte Modelle',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'Angefragt',
     'requested_date'        => 'Anfragedatum',
     'requested_assets'      => 'Angeforderte Assets',
@@ -527,6 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Zugriff verweigert. Benutzerinformationen für Superadministratoren auf der Demo können nicht aktualisiert werden.',
     'pwd_reset_not_sent' => 'Benutzer ist nicht aktiviert, ist LDAP-synchronisiert oder hat keine E-Mail-Adresse',
     'error_sending_email' => 'Fehler beim Senden der E-Mail',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -547,6 +549,8 @@ return [
         'license_seats'  => ':count Lizenzsitze|:count Lizenzsitze',
         'consumables'  => ':count Verbrauchsmaterialien|:count Verbrauchsmaterialien',
         'components'  => ':count Komponente|:count Komponenten',
-    ]
+    ],
+    'more_info' => 'Mehr Info',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Тест LDAP',
     'ldap_test_sync'            => 'Тест синхронизации LDAP',
     'license'                   => 'Лицензия на ПО',
-    'load_remote'               => 'Использовать Gravatar',
-    'load_remote_help_text'		=> 'Снимите флажок, если вы не можете загрузить скрипты из внешнего интернета. Это не позволит Snipe-IT пытаться загрузить образы из Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Попытки входа',
     'login_attempt'             => 'Попытка входа',
     'login_ip'                  => 'IP-адрес',
@@ -327,7 +327,6 @@ return [
     'labels' => 'Этикетки',
     'labels_title' => 'Обновить настройки этикетки',
     'labels_help' => 'Настройки &amp; размеров этикетки',
-    'purge' => 'Очистить',
     'purge_keywords' => 'удалить полностью',
     'purge_help' => 'Очистка удалённых записей',
     'ldap_extension_warning' => 'Похоже на вашем сервере не установлен или не включен модуль LDAP синхронизации. Вы можете сохранить ваши параметры, но вам потребуется установить\\включить модуль для PHP прежде выполнить синхронизацию с доменом.',
@@ -374,5 +373,8 @@ return [
     'database_driver' => 'Драйвер базы данных',
     'bs_table_storage' => 'Хранилище таблицы',
     'timezone' => 'Часовой пояс',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];
