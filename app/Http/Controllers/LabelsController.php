@@ -21,7 +21,6 @@ class LabelsController extends Controller
      * Returns the Label view with test data
      *
      * @param string $labelName
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
      */
     public function show(string $labelName)
