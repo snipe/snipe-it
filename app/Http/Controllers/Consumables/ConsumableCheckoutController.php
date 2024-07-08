@@ -82,7 +82,7 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
         }
 
-        $admin_user = Auth::user();
+        $admin_user = auth()->user();
         $assigned_to = e($request->input('assigned_to'));
 
         // Check if the user exists
@@ -102,7 +102,7 @@ class ConsumableCheckoutController extends Controller
             'note' => $request->input('note'),
         ]);
         }
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

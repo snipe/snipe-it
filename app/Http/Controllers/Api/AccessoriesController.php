@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 
+
 class AccessoriesController extends Controller
 {
     /**
@@ -303,7 +304,7 @@ class AccessoriesController extends Controller
                 'note' => $request->get('note'),
             ]);
 
-            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
         }

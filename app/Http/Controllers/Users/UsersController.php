@@ -117,7 +117,7 @@ class UsersController extends Controller
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
         $user->website = $request->input('website', null);
-        $user->created_by = Auth::user()->id;
+        $user->created_by = auth()->id();
         $user->start_date = $request->input('start_date', null);
         $user->end_date = $request->input('end_date', null);
         $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
@@ -125,7 +125,7 @@ class UsersController extends Controller
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
 
-        if (! Auth::user()->isSuperUser()) {
+        if (! auth()->user()->isSuperUser()) {
             unset($permissions_array['superuser']);
         }
         $user->permissions = json_encode($permissions_array);
@@ -176,7 +176,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param $permissions
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @internal param int $id
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -246,7 +246,7 @@ class UsersController extends Controller
             }
 
             // Only save groups if the user is a superuser
-            if (Auth::user()->isSuperUser()) {
+            if (auth()->user()->isSuperUser()) {
                 $user->groups()->sync($request->input('groups'));
             }
 
@@ -300,7 +300,7 @@ class UsersController extends Controller
 
 
             // Strip out the superuser permission if the user isn't a superadmin
-            if (! Auth::user()->isSuperUser()) {
+            if (! auth()->user()->isSuperUser()) {
                 unset($permissions_array['superuser']);
                 $permissions_array['superuser'] = $orig_superuser;
             }
@@ -379,7 +379,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
+                $logaction->user_id = auth()->id();
                 $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index

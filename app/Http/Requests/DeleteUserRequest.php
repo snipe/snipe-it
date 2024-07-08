@@ -29,7 +29,7 @@ class DeleteUserRequest extends FormRequest
         if ($user_to_delete) {
             $this->merge([
                 'user' => request()->route('user'),
-                'admin_id' => Auth::user()->id,
+                'admin_id' => auth()->id(),
                 'managed_users' => $user_to_delete->managesUsers()->count(),
                 'managed_locations' => $user_to_delete->managedLocations()->count(),
                 'assigned_assets' => $user_to_delete->assets()->count(),
@@ -48,7 +48,7 @@ class DeleteUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' =>  Rule::notIn([auth()->user()->id]),
+            'user' =>  Rule::notIn([auth()->id()]),
             'managed_users' =>  Rule::in([0]),
             'managed_locations' => Rule::in([0]),
             'assigned_assets' => Rule::in([0]),
