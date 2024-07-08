@@ -378,7 +378,7 @@ return [
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
     'required_serial_error' => 'All current assets must have a serial before you can select this option. There are currently :count Assets without serials.',
-
+    'unique_serial_error'   => 'All current assets must have a unique serial before you can select this option. There are currently :count Assets with duplicate or empty serials.',
 
 
 
