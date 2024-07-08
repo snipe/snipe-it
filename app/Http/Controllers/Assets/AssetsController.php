@@ -160,29 +160,7 @@ class AssetsController extends Controller
                 $asset = $request->handleImages($asset);
             }
 
-            // Update custom fields in the database.
-            // Validation for these fields is handled through the AssetRequest form request
-            $model = AssetModel::find($request->get('model_id'));
-
-            if (($model) && ($model->fieldset)) {
-                foreach ($model->fieldset->fields as $field) {
-                    if ($field->field_encrypted == '1') {
-                        if (Gate::allows('admin')) {
-                            if (is_array($request->input($field->db_column))) {
-                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                            } else {
-                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                            }
-                        }
-                    } else {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
-                        }
-                    }
-                }
-            }
+            $asset = $asset->handleCustomFieldsForStoring($request);
 
             // Validate the asset before saving
             if ($asset->isValid() && $asset->save()) {
@@ -370,32 +348,7 @@ class AssetsController extends Controller
         $asset->notes = $request->input('notes');
 
         $asset = $request->handleImages($asset);
-
-        // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
-        $model = AssetModel::find($request->get('model_id'));
-        if (($model) && ($model->fieldset)) {
-            foreach ($model->fieldset->fields as $field) {
-                if ($field->field_encrypted == '1') {
-                    if (Gate::allows('admin')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                    } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
-                    }
-                }
-            }
-        }
-
+        $asset = $asset->handleCustomFieldsForStoring($request);
 
         if ($asset->save()) {
             return redirect()->route('hardware.show', $assetId)

@@ -13,10 +13,12 @@ use App\Presenters\Presentable;
 use App\Presenters\AssetPresenter;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -964,6 +966,46 @@ class Asset extends Depreciable
             $cost += $component->pivot->assigned_qty*$component->purchase_cost;
         }
         return $cost;
+    }
+
+    public function handleCustomFieldsForStoring($request) : Asset
+    {
+        $model = AssetModel::find($this->model_id);
+
+        if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
+
+            foreach ($model->fieldset->fields as $field) {
+
+                /*
+                   * Check if the decrypted existing value is different from one we just submitted
+                   * and if not, pull it out of the object since it shouldn't really be updating at all.
+                   * If we don't do this, it will try to re-encrypt it, and the same value encrypted two
+                   * different times will have different values, so it will *look* like it was updated
+                   * but it wasn't.
+                   */
+                if ($request->input($field->db_column)!='') {
+
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('admin')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $this->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $this->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
+                        }
+
+                    } else {
+                        if (is_array($request->input($field->db_column))) {
+                            $this->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $this->{$field->db_column} = $request->input($field->db_column);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $this;
     }
 
     /**
