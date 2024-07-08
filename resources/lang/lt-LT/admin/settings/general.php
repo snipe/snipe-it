@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Testuoti LDAP',
     'ldap_test_sync'            => 'Testuoti LDAP sinchronizavimą',
     'license'                   => 'Programinės įrangos licencija',
-    'load_remote'               => 'Naudoti „Gravatar“',
-    'load_remote_help_text'		=> 'Atžymėkite šį langelį, jei jūsų diegimas negali vykdyti skriptų iš interneto. Tai neleis „Snipe-IT“ bandyti įkelti vaizdų iš „Gravatar“.',
+    'load_remote'               => 'Įkelti nuotolinius avatarus',
+    'load_remote_help_text'		=> 'Atžymėkite šį langelį, jei jūsų diegimas negali vykdyti skriptų iš interneto. Tai neleis „Snipe-IT“ bandyti įkelti avatarų iš „Gravatar“ ar kitų išorinių šaltinių.',
     'login'                     => 'Prisijungimo bandymai',
     'login_attempt'             => 'Prisijungimo bandymas',
     'login_ip'                  => 'IP adresas',
@@ -375,5 +375,6 @@ return [
     'timezone' => 'Laiko juosta',
     'profile_edit'          => 'Redaguoti profilį',
     'profile_edit_help'          => 'Leisti naudotojams redaguoti savo profilius.',
+    'default_avatar' => 'Įkelti numatytąjį avatarą',
 
 ];

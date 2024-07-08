@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP sinhronizaciju',
     'license'                   => 'Licence za softver',
-    'load_remote'               => 'Koristi Gravatar',
-    'load_remote_help_text'		=> 'Isključi ovo polje ako tvoja instalacija ne može da učita skripte izvan interneta. Ovo će sprečiti Snipe-IT od pokušaja da učita slike sa Gravatara.',
+    'load_remote'               => 'Učitaj udaljene avatare',
+    'load_remote_help_text'		=> 'Isključi ovo polje ako tvoja instalacija ne može da učita skripte sa spoljnog interneta. Ovo će sprečiti Snipe-IT od pokušaja da učita slike sa Gravatara ili drugih spoljnih izvora.',
     'login'                     => 'Pokušaj logovanja',
     'login_attempt'             => 'Pokušaj logovanja',
     'login_ip'                  => 'IP adresa',
@@ -375,5 +375,6 @@ return [
     'timezone' => 'Vremenska zona',
     'profile_edit'          => 'Izmeni profil',
     'profile_edit_help'          => 'Dozvoli korisnicima da izmene svoje profile.',
+    'default_avatar' => 'Postavi podrazumevani avatar',
 
 ];

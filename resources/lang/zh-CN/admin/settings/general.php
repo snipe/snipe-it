@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => '测试 LDAP',
     'ldap_test_sync'            => '测试 LDAP 同步',
     'license'                   => '软件许可证',
-    'load_remote'               => '使用 Gravatar头像',
-    'load_remote_help_text'		=> '如果您的安装不能从外部网络加载脚本，请取消选中此框。这将防止Snipe-IT尝试从 Gravatar 加载图像。',
+    'load_remote'               => '加载远程头像',
+    'load_remote_help_text'		=> '如果您的安装不能从外部网络加载脚本，请取消选中此项。 这将防止Snipe-IT 尝试从 Gravatar 或其他外部来源加载头像。',
     'login'                     => '登录尝试',
     'login_attempt'             => '登录尝试',
     'login_ip'                  => 'IP 地址',
@@ -375,5 +375,6 @@ return [
     'timezone' => '时区',
     'profile_edit'          => '编辑个人资料',
     'profile_edit_help'          => '允许用户编辑自己的个人资料。',
+    'default_avatar' => '上传默认头像',
 
 ];

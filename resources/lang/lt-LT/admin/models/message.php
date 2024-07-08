@@ -40,7 +40,7 @@ return array(
 
     'bulkdelete' => array(
         'error'   		    => 'Nebuvo pasirinktas joks modelis, todėl niekas nebuvo panaikinta.',
-        'success' 		    => 'Modelis panaikintas!|:success_count modeliai panaikinti!',
+        'success' 		    => 'Modelis panaikintas! :success_count modeliai panaikinti!',
         'success_partial' 	=> 'Panaikinti modeliai – :success_count, tačiau dar :fail_count nepavyko panaikinti, nes vis dar yra su jais susietos įrangos.'
     ),
 

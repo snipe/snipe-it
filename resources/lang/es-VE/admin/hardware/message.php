@@ -48,14 +48,14 @@ return [
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
         'success' => 'Archivo(s) cargado(s) exitosamente.',
         'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que está tratando de cargar es demasiado grande',
-        'invalidfiles' => 'Uno o más de tus archivos es demasiado grande o es de un tipo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf, y txt.',
+        'invalidfiles' => 'Uno o más de sus archivos son demasiado grandes o son de un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ],
 
     'import' => [
         'error'                 => 'Algunos de los elementos no se importaron correctamente.',
         'errorDetail'           => 'Lo siguientes elementos no se importaron debido a errores.',
-        'success'               => 'Tu archivo ha sido importado',
-        'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
+        'success'               => 'Su archivo ha sido importado',
+        'file_delete_success'   => 'Su archivo se ha eliminado correctamente',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
         'file_missing' => 'Falta el archivo seleccionado',
         'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',

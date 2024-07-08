@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Δοκιμή LDAP',
     'ldap_test_sync'            => 'Δοκιμή Συγχρονισμού Ldap',
     'license'                   => 'Άδειες λογισμικού',
-    'load_remote'               => 'Χρήση Gravatar',
-    'load_remote_help_text'		=> 'Απενεργοποιήστε αυτό το πλαίσιο αν η εγκατάστασή σας δεν μπορεί να φορτώσει δέσμες ενεργειών από το εξωτερικό internet. Αυτό θα αποτρέψει το Snipe-IT από το να προσπαθήσει να φορτώσει εικόνες από το Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Προσπάθειες Σύνδεσης',
     'login_attempt'             => 'Προσπάθεια Σύνδεσης',
     'login_ip'                  => 'Διεύθυνση IP',
@@ -375,5 +375,6 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

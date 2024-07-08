@@ -3,8 +3,8 @@
 return array(
 
     'accepted'                  => 'Ha aceptado este artículo exitosamente.',
-    'declined'                  => 'Has rechazado este activo con éxito.',
-    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada de administrador no fue guardada porque el gerente seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propios gerentes. Vuelva a seleccionar los usuarios, excluyendo al gerente.',
+    'declined'                  => 'Ha rechazado este activo con exitosamente.',
+    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada supervisor (manager) no fue guardada porque el supervisor seleccionado también estaba en la lista de usuarios a editar, y los usuarios no pueden ser su propio supervisor. Vuelva a seleccionar los usuarios, excluyendo al supervisor.',
     'user_exists'               => '¡El usuario ya existe!',
     'user_not_found'            => 'El usuario no existe.',
     'user_login_required'       => 'El campo usuario es obligatorio',
@@ -16,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida han sido enviados un enlace de restablecimiento de contraseña.',
     'password_reset_sent'       => 'Un enlace para restablecer la contraseña ha sido enviado a :email!',
     'user_has_no_email'         => 'Este usuario no tiene una dirección de correo electrónico en su perfil.',
-    'log_record_not_found'        => 'No se pudo encontrar un registro de registro coincidente para este usuario.',
+    'log_record_not_found'        => 'No se pudo encontrar un registro de eventos que coincida con este usuario.',
 
 
     'success' => array(
@@ -45,7 +45,7 @@ return array(
         'unsuspend' => 'Hubo un problema des-suspendiendo al usuario. Por favor inténtelo de nuevo.',
         'import'    => 'Hubo un problema importando usuarios. Por favor inténtelo de nuevo.',
         'asset_already_accepted' => 'Este activo ya ha sido aceptado.',
-        'accept_or_decline' => 'Debes aceptar o rechazar este activo.',
+        'accept_or_decline' => 'Debe aceptar o rechazar este equipo.',
         'cannot_delete_yourself' => 'Nos sentiríamos muy mal si usted se eliminara, por favor reconsidérelo.',
         'incorrect_user_accepted' => 'El elemento que ha intentado aceptar no fue asignado a usted.',
         'ldap_could_not_connect' => 'No se pudo conectar al servidor LDAP. Por favor verifica la configuración LDAP de tu servidor en el archivo de configuración LDAP. <br>Error del servidor LDAP:',
@@ -63,8 +63,8 @@ return array(
     'upload' => array(
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
         'success' => 'Archivo(s) cargado(s) con éxito.',
-        'nofiles' => 'No ha seleccionado ningún archivo para subir',
-        'invalidfiles' => 'Uno o más de tus archivos es demasiado grande o es de un tipo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf, y txt.',
+        'nofiles' => 'No seleccionó ningún archivo para cargar',
+        'invalidfiles' => 'Uno o más de sus archivos son demasiado grandes o son de un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ),
 
     'inventorynotification' => array(

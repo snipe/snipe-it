@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Тестувати LDAP',
     'ldap_test_sync'            => 'Тестувати синхронізацію LDAP',
     'license'                   => 'Ліцензія програмного забезпечення',
-    'load_remote'               => 'Використовувати Gravatar',
-    'load_remote_help_text'		=> 'Зніміть цей прапорець, якщо інсталяція не може завантажити скрипти з зовнішнього Інтернету. Це дозволить Snipe-IT завантажити зображення з Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Спроби входу в систему',
     'login_attempt'             => 'Спроби входу в систему',
     'login_ip'                  => 'IP-адреса',
@@ -375,5 +375,6 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP Synchronization',
     'license'                   => 'Lisensi Perangkat Lunak',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'Login Attempts',
     'login_attempt'             => 'Login Attempt',
     'login_ip'                  => 'IP Address',
@@ -375,5 +375,6 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

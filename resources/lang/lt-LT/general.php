@@ -201,7 +201,7 @@ return [
     'min_amt_help'          => 'Mažiausias turimų elementų kiekis, kurį pasiekus yra aktyvuojamas įspėjimas. Palikite lauką "Mažiausias kiekis" tuščią, jei nenorite gauti įspėjimų apie mažą atsargų likutį.',
     'model_no'				=> 'Modelio Nr.',
     'months'				=> 'mėnesiai',
-    'moreinfo'				=> 'Daugiau informacijos',
+    'moreinfo'				=> 'Detaliau',
     'name'					=> 'Vardas',
     'new_password'          => 'Naujas slaptažodis',
     'next'					=> 'Kitas',
@@ -528,7 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Leidimas nesuteiktas. Demonstraciniame režime negalite keisti superadministratoriaus naudotojo informacijos.',
     'pwd_reset_not_sent' => 'Naudotojas nesuaktyvintas, yra sinchronizuotas LDAP arba neturi el. pašto adreso',
     'error_sending_email' => 'Siunčiant el. laišką įvyko klaida',
-    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
+    'sad_panda' => 'Liūdna panda. Jūs neturite reikiamų teisių šiam veiksmui. Verčiau <a href=":link">grįžkite į valdymo skydą</a> arba susisiekite su administratoriumi.',
     'bulk' => [
             'delete' =>
                 [
@@ -549,6 +549,8 @@ return [
         'license_seats'  => ':count Licencijos vieta|:count Licencijos vietos',
         'consumables'  => ':count Eksploatacinė medžiaga|:count Eksploatacinės medžiagos',
         'components'  => ':count Komponentas|:count Komponentai',
-    ]
+    ],
+    'more_info' => 'Detaliau',
+    'quickscan_bulk_help' => 'Pažymėjus šį langelį, įrangos įrašas bus atnaujintas, kad atspindėtų šią naują vietą. Jei paliksite jį nepažymėtą, vieta bus pažymėta tik audito žurnale. Atkreipkite dėmesį, kad jei ši įranga bus išduota, tai nepakeis asmens, įrangos ar vietos, kuriems išduodama įranga, buvimo vietos.',
 
 ];

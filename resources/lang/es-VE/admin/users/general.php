@@ -2,7 +2,7 @@
 
 return [
     'activated_help_text' => 'Este usuario puede iniciar sesión',
-    'activated_disabled_help_text' => 'No puedes editar el estado de activación de tu propia cuenta.',
+    'activated_disabled_help_text' => 'No puede editar el estado de activación de su propia cuenta.',
     'assets_user'       => 'Activos asignados a :name',
     'bulk_update_warn'	=> 'Está a punto de modificar las propiedades de :user_count usuarios. Por favor, tenga en cuenta que no puede modificar las propiedades de su propio usuario con este formulario, y debe realizar las modificaciones a su propio usuario de forma individual.',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples usuarios a la vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios.',
@@ -18,7 +18,7 @@ return [
     'ldap_config_text'  => 'Los parámetros de configuración LDAP pueden ser encontrados en Admin > Settings. La ubicación (opcional) seleccionada será establecida para todos los usuarios importados.',
     'print_assigned'    => 'Imprimir todos los asignados',
     'email_assigned'    => 'Enviar correo con todos los asignados',
-    'user_notified'     => 'El usuario ha sido enviado por correo electrónico a una lista de sus elementos asignados actualmente.',
+    'user_notified'     => 'Se ha enviado al usuario un correo electrónico con lista de los elementos que tiene asignados actualmente.',
     'auto_assign_label' => 'Incluye a este usuario al asignar automáticamente licencias elegibles',
     'auto_assign_help'  => 'Omitir este usuario en la asignación automática de licencias',
     'software_user'     => 'Software Asignado a :name',

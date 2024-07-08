@@ -548,6 +548,8 @@ return [
         'license_seats'  => 'crwdns12142:0crwdne12142:0',
         'consumables'  => 'crwdns12144:0crwdne12144:0',
         'components'  => 'crwdns12146:0crwdne12146:0',
-    ]
+    ],
+    'more_info' => 'crwdns12288:0crwdne12288:0',
+    'quickscan_bulk_help' => 'crwdns12290:0crwdne12290:0',
 
 ];

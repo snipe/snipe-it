@@ -3,8 +3,8 @@
 return array(
 
     'accepted'                  => 'Ha aceptado este artículo exitosamente.',
-    'declined'                  => 'Ha declinado con éxito este equipo.',
-    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada de administrador no fue guardada porque el gerente seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propios gerentes. Vuelva a seleccionar los usuarios, excluyendo al gerente.',
+    'declined'                  => 'Ha rechazado este activo con exitosamente.',
+    'bulk_manager_warn'	        => 'Sus usuarios han sido actualizados con éxito, sin embargo, la entrada supervisor (manager) no fue guardada porque el supervisor seleccionado también estaba en la lista de usuarios a editar, y los usuarios no pueden ser su propio supervisor. Vuelva a seleccionar los usuarios, excluyendo al supervisor.',
     'user_exists'               => 'El Usuario ya existe!',
     'user_not_found'            => 'Usuario inexistente.',
     'user_login_required'       => 'El campo usuario es obligatorio',
@@ -16,7 +16,7 @@ return array(
     'password_resets_sent'      => 'A los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida se les ha enviado un enlace de restablecimiento de contraseña.',
     'password_reset_sent'       => '¡Se ha enviado un enlace de restablecimiento de contraseña a :email!',
     'user_has_no_email'         => 'Este usuario no tiene una dirección de correo electrónico en su perfil.',
-    'log_record_not_found'        => 'No se pudo encontrar un registro de registro coincidente para este usuario.',
+    'log_record_not_found'        => 'No se pudo encontrar un registro de eventos que coincida con este usuario.',
 
 
     'success' => array(
@@ -63,8 +63,8 @@ return array(
     'upload' => array(
         'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo(s) cargado correctamente.',
-        'nofiles' => 'No ha seleccionado ningún archivo para subir',
-        'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
+        'nofiles' => 'No seleccionó ningún archivo para cargar',
+        'invalidfiles' => 'Uno o más de sus archivos son demasiado grandes o son de un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ),
 
     'inventorynotification' => array(
