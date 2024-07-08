@@ -5,16 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ComponentsTransformer;
-use App\Models\Company;
 use App\Models\Component;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
-use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ComponentsController extends Controller
 {
@@ -24,9 +25,8 @@ class ComponentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Component::class);
 
@@ -116,9 +116,8 @@ class ComponentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Component::class);
         $component = new Component;
@@ -137,9 +136,8 @@ class ComponentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('view', Component::class);
         $component = Component::findOrFail($id);
@@ -156,9 +154,8 @@ class ComponentsController extends Controller
      * @since [v4.0]
      * @param   \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Component::class);
         $component = Component::findOrFail($id);
@@ -179,9 +176,8 @@ class ComponentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Component::class);
         $component = Component::findOrFail($id);
@@ -198,9 +194,8 @@ class ComponentsController extends Controller
      * @since [v4.0]
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
     */
-    public function getAssets(Request $request, $id)
+    public function getAssets(Request $request, $id) : array
     {
         $this->authorize('view', \App\Models\Asset::class);
         
@@ -241,10 +236,8 @@ class ComponentsController extends Controller
      * @since [v5.1.8]
      * @param Request $request
      * @param int $componentId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function checkout(Request $request, $componentId)
+    public function checkout(Request $request, $componentId) : JsonResponse
     {
         // Check if the component exists
         if (!$component = Component::find($componentId)) {
@@ -275,9 +268,9 @@ class ComponentsController extends Controller
 
             $component->assets()->attach($component->id, [
                 'component_id' => $component->id,
-                'created_at' => \Carbon::now(),
+                'created_at' => Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
-                'user_id' => \Auth::id(),
+                'user_id' => auth()->id(),
                 'asset_id' => $request->get('assigned_to'),
                 'note' => $request->get('note'),
             ]);
@@ -297,12 +290,10 @@ class ComponentsController extends Controller
      * @since [v5.1.8]
      * @param Request $request
      * @param $component_asset_id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function checkin(Request $request, $component_asset_id)
+    public function checkin(Request $request, $component_asset_id) : JsonResponse
     {
-        if ($component_assets = \DB::table('components_assets')->find($component_asset_id)) {
+        if ($component_assets = DB::table('components_assets')->find($component_asset_id)) {
 
             if (is_null($component = Component::find($component_assets->component_id))) {
 
@@ -315,7 +306,7 @@ class ComponentsController extends Controller
 
             if ($max_to_checkin > 1) {
                 
-                $validator = \Validator::make($request->all(), [
+                $validator = Validator::make($request->all(), [
                     "checkin_qty" => "required|numeric|between:1,$max_to_checkin"
                 ]);
     
@@ -334,19 +325,19 @@ class ComponentsController extends Controller
 
             Log::debug($component_asset_id.' - '.$qty_remaining_in_checkout.' remaining in record '.$component_assets->id);
             
-            \DB::table('components_assets')->where('id',
+            DB::table('components_assets')->where('id',
                 $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
 
             // If the checked-in qty is exactly the same as the assigned_qty,
             // we can simply delete the associated components_assets record
             if ($qty_remaining_in_checkout == 0) {
-                \DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
+                DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
             }
             
 
             $asset = Asset::find($component_assets->asset_id);
 
-            event(new CheckoutableCheckedIn($component, $asset, \Auth::user(), $request->input('note'), \Carbon::now()));
+            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkin.success')));
 

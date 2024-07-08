@@ -369,7 +369,7 @@ class Asset extends Depreciable
             } elseif (get_class($admin) === \App\Models\User::class) {
                 $checkedOutBy = $admin;
             } else {
-                $checkedOutBy = Auth::user();
+                $checkedOutBy = auth()->user();
             }
             event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
 

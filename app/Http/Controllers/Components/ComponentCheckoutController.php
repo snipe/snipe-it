@@ -100,14 +100,14 @@ class ComponentCheckoutController extends Controller
         $component->asset_id = $request->input('asset_id');
         $component->assets()->attach($component->id, [
             'component_id' => $component->id,
-            'user_id' => Auth::user(),
+            'user_id' => auth()->user(),
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => $request->input('assigned_qty'),
             'asset_id' => $request->input('asset_id'),
             'note' => $request->input('note'),
         ]);
 
-        event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($component, $asset, auth()->user(), $request->input('note')));
 
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
     }

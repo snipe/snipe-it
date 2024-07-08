@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class DepartmentIndexTest extends TestCase
+class DepartmentsIndexTest extends TestCase
 {
     public function testViewingDepartmentIndexRequiresAuthentication()
     {

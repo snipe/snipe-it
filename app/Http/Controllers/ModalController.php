@@ -15,7 +15,7 @@ class ModalController extends Controller
      * @version    v5.3.7-pre
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @author [A. Gianotto] [<snipe@snipe.net]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function show ($type, $itemId = null) {
 

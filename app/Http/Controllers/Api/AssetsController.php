@@ -25,17 +25,12 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Log;
-use Paginator;
-use Slack;
-use Str;
-use TCPDF;
-use Validator;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,9 +51,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, $action = null, $upcoming_status = null)
+    public function index(Request $request, $action = null, $upcoming_status = null) : JsonResponse | array
     {
 
         $filter_non_deprecable_assets = false;
@@ -415,9 +409,8 @@ class AssetsController extends Controller
      * @param string $tag
      * @since [v4.2.1]
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function showByTag(Request $request, $tag)
+    public function showByTag(Request $request, $tag) : JsonResponse | array
     {
         $this->authorize('index', Asset::class);
         $assets = Asset::where('asset_tag', $tag)->with('assetstatus')->with('assignedTo');
@@ -455,7 +448,7 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function showBySerial(Request $request, $serial)
+    public function showBySerial(Request $request, $serial) : JsonResponse | array
     {
         $this->authorize('index', Asset::class);
         $assets = Asset::where('serial', $serial)->with('assetstatus')->with('assignedTo');
@@ -482,19 +475,20 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $id) : JsonResponse | array
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()
-            ->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')->findOrFail($id)) {
+        if ($asset = Asset::with('assetstatus')
+            ->with('assignedTo')->withTrashed()
+            ->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')->find($id)) {
             $this->authorize('view', $asset);
 
             return (new AssetsTransformer)->transformAsset($asset, $request->input('components') );
         }
-
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
 
     }
 
-    public function licenses(Request $request, $id)
+    public function licenses(Request $request, $id) : array
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
@@ -511,9 +505,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request) : array
     {
 
         $assets = Asset::select([
@@ -638,7 +631,7 @@ class AssetsController extends Controller
                 $target = Location::find(request('assigned_location'));
             }
             if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
+                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
 
             if ($asset->image) {
@@ -660,9 +653,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Asset::class);
 
@@ -729,7 +721,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
                 }
 
                 if ($asset->image) {
@@ -756,9 +748,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Asset::class);
 
@@ -785,9 +776,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v5.1.18]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function restore(Request $request, $assetId = null)
+    public function restore(Request $request, $assetId = null) : JsonResponse
     {
 
         if ($asset = Asset::withTrashed()->find($assetId)) {
@@ -815,9 +805,8 @@ class AssetsController extends Controller
      * @author [N. Butler]
      * @param string $tag
      * @since [v6.0.5]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function checkoutByTag(AssetCheckoutRequest $request, $tag)
+    public function checkoutByTag(AssetCheckoutRequest $request, $tag) : JsonResponse
     {
         if ($asset = Asset::where('asset_tag', $tag)->first()) {
             return $this->checkout($request, $asset->id);
@@ -831,9 +820,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function checkout(AssetCheckoutRequest $request, $asset_id)
+    public function checkout(AssetCheckoutRequest $request, $asset_id) : JsonResponse
     {
         $this->authorize('checkout', Asset::class);
         $asset = Asset::findOrFail($asset_id);
@@ -895,7 +883,7 @@ class AssetsController extends Controller
 //            $asset->location_id = $target->rtd_location_id;
 //        }
 
-        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
+        if ($asset->checkOut($target, auth()->user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
@@ -909,9 +897,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function checkin(Request $request, $asset_id)
+    public function checkin(Request $request, $asset_id) : JsonResponse
     {
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
@@ -976,7 +963,7 @@ class AssetsController extends Controller
             });
 
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
 
             return response()->json(Helper::formatStandardApiResponse('success', [
                 'asset_tag'=> e($asset->asset_tag),
@@ -993,9 +980,8 @@ class AssetsController extends Controller
      *
      * @author [A. Janes] [<ajanes@adagiohealth.org>]
      * @since [v6.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function checkinByTag(Request $request, $tag = null)
+    public function checkinByTag(Request $request, $tag = null) : JsonResponse
     {
         $this->authorize('checkin', Asset::class);
         if(null == $tag && null !== ($request->input('asset_tag'))) {
@@ -1019,9 +1005,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $id
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function audit(Request $request)
+    public function audit(Request $request) : JsonResponse
 
     {
         $this->authorize('audit', Asset::class);
@@ -1112,9 +1097,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function requestable(Request $request)
+    public function requestable(Request $request) : JsonResponse | array
     {
         $this->authorize('viewRequestable', Asset::class);
 

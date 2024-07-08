@@ -184,7 +184,7 @@ class AssetImporter extends ItemImporter
             if (isset($target) && ($target !== false)) {
                 if (!is_null($asset->assigned_to)){
                     if ($asset->assigned_to != $target->id) {
-                        event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), Auth::user(), 'Checkin from CSV Importer', $checkin_date));
+                        event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), auth()->user(), 'Checkin from CSV Importer', $checkin_date));
                     }
                 }
 

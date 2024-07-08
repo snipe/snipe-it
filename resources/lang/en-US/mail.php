@@ -90,4 +90,5 @@ return [
     'welcome_to' => 'Welcome to :web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Your Snipe-IT credentials',
+    'mail_sent' => 'Mail sent successfully!',
 ];
