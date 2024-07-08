@@ -48,13 +48,13 @@ return [
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
         'success' => 'Archivo(s) cargado(s) exitosamente.',
         'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que está tratando de cargar es demasiado grande',
-        'invalidfiles' => 'Uno o más de sus archivos es demasiado grande o es un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
+        'invalidfiles' => 'Uno o más de sus archivos son demasiado grandes o son de un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ],
 
     'import' => [
         'error'                 => 'Algunos artículos no importaron correctamente.',
         'errorDetail'           => 'Los siguientes artículos no fueron importados debido a errores.',
-        'success'               => 'Tu archivo ha sido importado',
+        'success'               => 'Su archivo ha sido importado',
         'file_delete_success'   => 'Su archivo se ha eliminado correctamente',
         'file_delete_error'      => 'El archivo no pudo ser eliminado',
         'file_missing' => 'Falta el archivo seleccionado',

@@ -29,6 +29,7 @@
     "/css/webfonts/fa-solid-900.woff2": "/css/webfonts/fa-solid-900.woff2?id=96d16b1bdb177fd796c810b9e706c780",
     "/css/webfonts/fa-v4compatibility.ttf": "/css/webfonts/fa-v4compatibility.ttf?id=8994b282f9f3b7a00380bb1e2731a4bf",
     "/css/webfonts/fa-v4compatibility.woff2": "/css/webfonts/fa-v4compatibility.woff2?id=111e341dba724e1df946e8d1f406a7bd",
+    "/js/dist/bootstrap-table-locale-all.min.js": "/js/dist/bootstrap-table-locale-all.min.js?id=7373e7d7017cceca6c32928080cea0fb",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=5f79123a6750afd34dbf565faec3dda3",
     "/js/build/vendor.js": "/js/build/vendor.js?id=e27070bdbc5fce3bfd132b952d641fd6",
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=e5918703a22f8992c4c98f1dbbecb8f7",

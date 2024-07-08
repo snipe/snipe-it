@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Uwaga: </strong> To aktywo zostało oznaczone jako tymczasowo niemożliwe do wdrożenia.
                         Jeśli jego stan się zmienił, zaktualizuj status aktywa.',
     'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'does_not_exist_var'=> 'Nie znaleziono zasobu o tagu :asset_tag.',
     'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Aktywo nie istnieje albo nie można go zażądać.',
     'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',

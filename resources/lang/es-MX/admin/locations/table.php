@@ -25,7 +25,7 @@ return [
     'department'                => 'Departamento',
     'location'                  => 'Ubicación',
     'asset_tag'                 => 'Etiqueta de Activo',
-    'asset_name'                => 'Nombre de Activo',
+    'asset_name'                => 'Nombre',
     'asset_category'            => 'Categoría',
     'asset_manufacturer'        => 'Fabricante',
     'asset_model'               => 'Modelo',

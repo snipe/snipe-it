@@ -21,7 +21,7 @@ return array(
     'manager' 				=> 'Supervisor',
     'managed_locations'     => 'Ubicaciones gestionadas',
     'managed_users'         => 'Usuarios gestionados',
-    'name' 					=> 'Usuario',
+    'name' 					=> 'Nombre',
     'nogroup'               => 'Aún no se han creado grupos. Para añadir uno, visite: ',
     'notes'                 => 'Notas',
     'password_confirm' 		=> 'Confirmar Password',

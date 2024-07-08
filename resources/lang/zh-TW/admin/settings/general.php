@@ -123,8 +123,8 @@ return [
     'ldap_test'                 => '測試 LDAP',
     'ldap_test_sync'            => '測試 LDAP 同步',
     'license'                   => '軟體授權',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => '登入嘗試',
     'login_attempt'             => '登入嘗試',
     'login_ip'                  => 'IP 位址',
@@ -376,5 +376,6 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

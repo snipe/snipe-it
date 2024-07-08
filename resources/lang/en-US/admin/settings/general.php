@@ -150,7 +150,7 @@ return [
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',
     'php'                       => 'PHP Version',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info',

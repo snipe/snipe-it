@@ -14,7 +14,7 @@ return [
     'deleted'  					=> 'Este activo ha sido borrado.',
     'delete_confirm'            => '¿Está seguro de que desea eliminar este recurso?',
     'edit'  					=> 'Editar activo',
-    'model_deleted'  			=> 'El modelo de este activo ha sido borrado. Debe restaurar el modelo antes de restaurar o crear el activo.',
+    'model_deleted'  			=> 'Este modelo de activo ha sido eliminado. Debe restaurar este modelo antes de poder restaurar el activo.',
     'model_invalid'             => 'Este modelo para este activo es inválido.',
     'model_invalid_fix'         => 'El activo debe ser actualizado, use un modelo de activo válido antes de intentar asignarlo, devolverlo o auditarlo.',
     'requestable'               => 'Puede solicitarse',
@@ -37,6 +37,6 @@ return [
     'success_messages' => 'Mensajes de éxito:',
     'alert_details' => 'Por favor vea abajo para más detalles.',
     'custom_export' => 'Exportación personalizada',
-    'mfg_warranty_lookup' => ':fabricante Garantía Estado Búsqueda',
+    'mfg_warranty_lookup' => 'Búsqueda del estado de garantía para :manufacturer',
     'user_department' => 'Departamento de Usuario',
 ];

@@ -124,8 +124,8 @@ return [
     'ldap_test'                 => 'LDAPをテスト',
     'ldap_test_sync'            => 'LDAP同期のテスト',
     'license'                   => 'ソフトウェアライセンス',
-    'load_remote'               => 'Gravatarを使用',
-    'load_remote_help_text'		=> 'インストールがスクリプトを外部から読み込めない場合は、このチェックボックスをオフにしてください。Snipe-IT が Gravatar から画像を読み込むのを防ぎます。',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'ログイン試行',
     'login_attempt'             => 'ログイン試行',
     'login_ip'                  => 'IPアドレス',
@@ -378,5 +378,6 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

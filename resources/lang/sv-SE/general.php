@@ -549,6 +549,8 @@ return [
         'license_seats'  => ':count License Seat<unk> :count License Seats',
         'consumables'  => ':count Förbrukningsmedel<unk> :count Förbrukningsvaror',
         'components'  => ':count Component|:count Komponenter',
-    ]
+    ],
+    'more_info' => 'Mer information',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

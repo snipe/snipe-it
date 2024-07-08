@@ -8,7 +8,7 @@ return [
     'no_tag' 	        => '未提供资产标签。',
     'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
-    'warning_audit_date_mismatch' 	=> '此资产的下一个盘点日期 (:next_audit_date) 早于上一个盘点日期 (:last_audit_date)。请更新下一个盘点日期',
+    'warning_audit_date_mismatch' 	=> '此资产的下一个盘点日期 (:next_audit_date) 早于上一个盘点日期 (:last_audit_date)。请更新下一个盘点日期。',
 
     'create' => [
         'error'   		=> '资产创建失败，请重试。:(',
@@ -33,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> '资产盘点失败 :error ',
+        'error'   		=> '资产盘点失败：:error ',
         'success' 		=> '资产审计已成功记录。',
     ],
 

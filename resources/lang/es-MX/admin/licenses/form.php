@@ -14,7 +14,7 @@ return array(
     'reassignable'      => 'Reasignable',
     'remaining_seats'   => 'Posiciones Restantes',
     'seats'             => 'Instalaciones',
-    'termination_date'  => 'Fecha de Fin',
+    'termination_date'  => 'Fecha de finalización',
     'to_email'          => 'Registrado a Email',
     'to_name'           => 'Registrado a Nombre',
     'update'            => 'Actualizar Licencia',

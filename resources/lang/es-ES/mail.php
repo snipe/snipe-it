@@ -70,7 +70,7 @@ return [
     'read_the_terms' => 'Por favor lea los términos de uso a continuación.',
     'read_the_terms_and_click' => 'Por favor lea los términos de uso a continuación y haga clic en el enlace en la parte inferior para confirmar que usted leyó los términos de uso y los acepta, y que ha recibido el activo.',
     'requested' => 'Solicitado:',
-    'reset_link' => 'Tu enlace de restablecimiento de contraseña',
+    'reset_link' => 'Su enlace de restablecimiento de contraseña',
     'reset_password' => 'Haga Clic aquí para restablecer su contraseña:',
     'rights_reserved' => 'Todos los derechos reservados.',
     'serial' => 'Número de serie',
@@ -89,5 +89,5 @@ return [
     'welcome' => 'Bienvenido, :name',
     'welcome_to' => '¡Bienvenido a: web!',
     'your_assets' => 'Ver tus activos',
-    'your_credentials' => 'Tus credenciales de Snipe-IT',
+    'your_credentials' => 'Sus credenciales de Snipe-IT',
 ];

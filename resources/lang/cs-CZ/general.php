@@ -549,6 +549,8 @@ return [
         'license_seats'  => ':count sídlo licence|:count licenční místa',
         'consumables'  => ':count Spotřební materiál|:count Spotřební materiál',
         'components'  => ':count komponenta|:count komponenty',
-    ]
+    ],
+    'more_info' => 'Více informací',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
 ];

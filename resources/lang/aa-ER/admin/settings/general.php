@@ -122,8 +122,8 @@ return [
     'ldap_test'                 => 'crwdns6349:0crwdne6349:0',
     'ldap_test_sync'            => 'crwdns6351:0crwdne6351:0',
     'license'                   => 'crwdns1989:0crwdne1989:0',
-    'load_remote'               => 'crwdns12086:0crwdne12086:0',
-    'load_remote_help_text'		=> 'crwdns12088:0crwdne12088:0',
+    'load_remote'               => 'crwdns12292:0crwdne12292:0',
+    'load_remote_help_text'		=> 'crwdns12294:0crwdne12294:0',
     'login'                     => 'crwdns6353:0crwdne6353:0',
     'login_attempt'             => 'crwdns6355:0crwdne6355:0',
     'login_ip'                  => 'crwdns6357:0crwdne6357:0',
@@ -375,5 +375,6 @@ return [
     'timezone' => 'crwdns11831:0crwdne11831:0',
     'profile_edit'          => 'crwdns12280:0crwdne12280:0',
     'profile_edit_help'          => 'crwdns12282:0crwdne12282:0',
+    'default_avatar' => 'crwdns12296:0crwdne12296:0',
 
 ];

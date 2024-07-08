@@ -123,7 +123,7 @@ return [
     'custom' => [
         'alpha_space' => 'El campo :attribute contiene un caracter que no está permitido.',
         'email_array'      => 'Una o más direcciones de correo electrónico no son válidas.',
-        'hashed_pass'      => 'Tu contraseña actual es incorrecta',
+        'hashed_pass'      => 'Su contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
         'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido',
 
