@@ -29,6 +29,7 @@ use League\Csv\Reader;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * This class controls all actions related to assets for
@@ -474,7 +475,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function getQrCode($assetId = null) : Response
+    public function getQrCode($assetId = null) : Response | BinaryFileResponse
     {
         $settings = Setting::getSettings();
 
