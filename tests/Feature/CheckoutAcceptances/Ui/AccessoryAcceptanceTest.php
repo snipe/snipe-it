@@ -90,13 +90,10 @@ class AccessoryAcceptanceTest extends TestCase
             ->for(Asset::factory()->laptopMbp(), 'checkoutable')
             ->create();
 
-        $request = $this->actingAs($otherUser)
+        $this->actingAs($otherUser)
             ->post(route('account.store-acceptance', $acceptance), ['asset_acceptance' => 'accepted'])
-            //->assertSessionHasNoErrors();
-            //->dd()
-            ->assertSessionHasNoErrors();
+            ->assertSessionHas(['error' => trans('admin/users/message.error.incorrect_user_accepted')]);
 
-        $this->assertNotNull($acceptance->fresh()->accepted_at);
-
+        $this->assertNull($acceptance->fresh()->accepted_at);
     }
 }
