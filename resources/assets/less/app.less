@@ -384,7 +384,24 @@ a.logo.no-hover a:hover {
   background-color: transparent;
 }
 
-input:required, select:required, textarea:required {
+.help-block {
+  color: var(--text-sub);
+  max-width: 400px;
+  max-height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  white-space: nowrap;
+}
+.help-block:hover{
+  background-color: var(--back-sub);
+  color: var(--text-main);
+  overflow: visible;
+  white-space: normal;
+  height:auto;
+}
+
+.required {
   border-right: 6px solid orange;
 }
 
