@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AssetFilesController extends Controller
 {
@@ -58,7 +59,7 @@ class AssetFilesController extends Controller
      * @param  int $fileId
      * @since [v1.0]
      */
-    public function show($assetId = null, $fileId = null) : View | RedirectResponse | Response | StreamedResponse
+    public function show($assetId = null, $fileId = null) : View | RedirectResponse | Response | StreamedResponse | BinaryFileResponse
     {
         $asset = Asset::find($assetId);
         // the asset is valid
