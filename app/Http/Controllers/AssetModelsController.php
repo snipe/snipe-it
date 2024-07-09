@@ -8,6 +8,7 @@ use App\Http\Requests\StoreAssetModelRequest;
 use App\Models\Actionlog;
 use App\Models\AssetModel;
 use App\Models\CustomField;
+use App\Models\SnipeModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -457,7 +458,7 @@ class AssetModelsController extends Controller
      * @param  AssetModel $model
      * @param  array      $defaultValues
      */
-    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues): bool
+    private function assignCustomFieldsDefaultValues(AssetModel|SnipeModel $model, array $defaultValues): bool
     {
         $data = array();
         foreach ($defaultValues as $customFieldId => $defaultValue) {
@@ -466,17 +467,17 @@ class AssetModelsController extends Controller
             $data[$customField->db_column] = $defaultValue;
         }
 
-        $fieldsets = $model->fieldset->validation_rules();
+        $allRules = $model->fieldset->validation_rules();
         $rules = array();
 
-        foreach ($fieldsets as $fieldset => $validation){
+        foreach ($allRules as $field => $validation) {
             // If the field is marked as required, eliminate the rule so it doesn't interfere with the default values
             // (we are at model level, the rule still applies when creating a new asset using this model)
             $index = array_search('required', $validation);
             if ($index !== false){
                 $validation[$index] = 'nullable';
             }
-            $rules[$fieldset] = $validation;
+            $rules[$field] = $validation;
         }
 
         $validator = Validator::make($data, $rules);
@@ -499,7 +500,7 @@ class AssetModelsController extends Controller
      * Removes all default values
      *
      */
-    private function removeCustomFieldsDefaultValues(AssetModel $model) : void
+    private function removeCustomFieldsDefaultValues(AssetModel|SnipeModel $model): void
     {
         $model->defaultValues()->detach();
     }
