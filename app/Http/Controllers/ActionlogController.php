@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class ActionlogController extends Controller
 {
     public function displaySig($filename) : RedirectResponse | Response | bool
@@ -36,7 +37,7 @@ class ActionlogController extends Controller
         }
     }
 
-    public function getStoredEula($filename) : Response
+    public function getStoredEula($filename) : Response | BinaryFileResponse
     {
         $this->authorize('view', \App\Models\Asset::class);
         $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
