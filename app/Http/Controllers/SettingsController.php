@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * This controller handles all actions related to Settings for
@@ -1116,7 +1117,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.8]
      */
-    public function downloadFile($filename = null) : RedirectResponse
+    public function downloadFile($filename = null) : RedirectResponse | BinaryFileResponse
     {
         $path = 'app/backups';
 
