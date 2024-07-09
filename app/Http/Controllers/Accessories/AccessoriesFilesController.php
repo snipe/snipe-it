@@ -13,6 +13,7 @@ use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AccessoriesFilesController extends Controller
 {
@@ -105,7 +106,7 @@ class AccessoriesFilesController extends Controller
      * @param int $accessoryId
      * @param int $fileId
      */
-    public function show($accessoryId = null, $fileId = null, $download = true) : View | RedirectResponse | Response | BinaryFileResponse
+    public function show($accessoryId = null, $fileId = null, $download = true) : View | RedirectResponse | Response | BinaryFileResponse | StreamedResponse
     {
 
         Log::debug('Private filesystem is: '.config('filesystems.default'));
