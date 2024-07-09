@@ -209,7 +209,7 @@
                                                         {{ $file->note }}
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td style="white-space: nowrap;">
                                                     @if ($file->filename)
                                                         <a href="{{ route('show.accessoryfile', [$accessory->id, $file->id]) }}" class="btn btn-sm btn-default">
                                                             <i class="fas fa-download" aria-hidden="true"></i>
