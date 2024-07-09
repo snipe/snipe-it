@@ -110,7 +110,7 @@ class ProfileController extends Controller
             $accessTokenData['id'] = $token->id;
             $accessTokenData['token'] = $accessToken;
             $accessTokenData['name'] = $accessTokenName;
-            return response()->json(Helper::formatStandardApiResponse('success', $accessTokenData, 'Personal access token '.$accessTokenName.' created successfully'));
+            return response()->json(Helper::formatStandardApiResponse('success', $accessTokenData, trans('account/general.personal_api_keys_success', ['key' => $accessTokenName])));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Token could not be created.'));
 
