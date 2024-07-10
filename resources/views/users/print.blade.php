@@ -151,20 +151,25 @@
 
                         <tr>
                             <td>{{ $counter }}.{{ $assignedCounter }}</td>
-                            <td data-formatter="imageFormatter">
+                            <td>
                                 @if ($asset->getImageUrl())
                                     <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
                                 @endif
                             </td>
                             <td>{{ $asset->asset_tag }}</td>
                             <td>{{ $asset->name }}</td>
-                            <td>{{ $asset->model->category->name }}</td>
+                            <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
+                            <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
                             <td>{{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}</td>
                             <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
-                            <td>{{ $asset->model->name }}</td>
                             <td>{{ $asset->serial }}</td>
-                            <td>{{ $asset->last_checkout }}</td>
-                            <td><img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></td>
+                            <td>
+                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}</td>
+                            <td>
+                                @if (($asset->assetlog->first()) && ($asset->assetlog->first()->accept_signature!=''))
+                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
+                                @endif
+                            </td>
                         </tr>
                         @php
                             $assignedCounter++
