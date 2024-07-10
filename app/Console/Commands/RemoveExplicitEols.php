@@ -13,7 +13,7 @@ class RemoveExplicitEols extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:remove-explicit-eols {--model_name=*}';
+    protected $signature = 'snipeit:remove-explicit-eols {--model_name=}';
 
     /**
      * The console command description.
@@ -31,11 +31,17 @@ class RemoveExplicitEols extends Command
 
         if($assetModel){
             $assets = Asset::where('model_id', '=', $assetModel->id)->get();
+
+            foreach ($assets as $asset) {
+                $asset->eol_explicit = 0;
+                $asset->asset_eol_date = null;
+                $asset->save();
+            }
+
+            $this->info($assets->count().' Assets updated successfully');
         }
         else {
             $this->error('Asset model not found');
         }
-
-        dd($assets);
     }
 }
