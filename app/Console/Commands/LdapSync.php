@@ -257,7 +257,7 @@ class LdapSync extends Command
 
             //If a sync option is not filled in on the LDAP settings don't populate the user field
             if($ldap_result_username  != null){
-                $user->username = $item[name'];
+                $user->username = $item['username'];
             }
             if($ldap_result_last_name != null){
                 $user->last_name = $item['lastname'];
