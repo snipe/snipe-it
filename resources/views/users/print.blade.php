@@ -6,6 +6,8 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : config('app.url').'/favicon.ico' }}">
 
+    <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
+
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
@@ -386,18 +388,16 @@
 <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 
 
-@push('css')
-    <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
-@endpush
 
-@push('js')
+
+
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 
 <script>
     $('.snipe-table').bootstrapTable('destroy').each(function () {
-
         console.log('BS table loaded');
+
         data_export_options = $(this).attr('data-export-options');
         export_options = data_export_options ? JSON.parse(data_export_options) : {};
         export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
@@ -469,7 +469,7 @@
         });
     });
 </script>
-@endpush
+
 
 
 </body>

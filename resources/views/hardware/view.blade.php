@@ -962,11 +962,13 @@
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                     <div style="text-align: left">
-                                        <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
+                                        <h2>
+                                            {{ trans('admin/hardware/form.checkedout_to') }}
+                                        </h2>
                                         <p>
-                                        @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
+                                        @if (($asset->checkedOutToUser()) && ($asset->assignedTo->present()->gravatar()))
                                             <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">
-                                            @endif
+                                        @endif
                                         </p>
                                             {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                                         </p>
