@@ -55,4 +55,10 @@ trait CheckInOutRequest
 
         return $asset;
     }
+    protected function updateAssetCustomFields($asset)
+    {
+
+
+    }
+
 }

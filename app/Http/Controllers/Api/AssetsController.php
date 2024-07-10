@@ -883,6 +883,26 @@ class AssetsController extends Controller
 //            $asset->location_id = $target->rtd_location_id;
 //        }
 
+        if (($asset->model->fieldset)) {
+            foreach ($asset->model->fieldset->fields as $field) {
+                if ($field->field_encrypted == '1') {
+                    if (Gate::allows('admin')) {
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                        } else {
+                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                        }
+                    }
+                } else {
+                    if (is_array($request->input($field->db_column))) {
+                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                    } else {
+                        $asset->{$field->db_column} = $request->input($field->db_column);
+                    }
+                }
+            }
+        }
+
         if ($asset->checkOut($target, auth()->user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
