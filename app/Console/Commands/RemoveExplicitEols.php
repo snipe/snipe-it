@@ -20,7 +20,7 @@ class RemoveExplicitEols extends Command
      *
      * @var string
      */
-    protected $description = 'remove explicit eols on assets with selected model';
+    protected $description = 'remove explicit eols on assets with selected model so they may inherit the asset model eol';
 
     /**
      * Execute the console command.
