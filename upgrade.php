@@ -10,6 +10,12 @@ function url_get_contents ($Url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $Url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // If we're on windows, make sure we can load intermediate certificates in
+    // weird corporate environments.
+    // See:  https://github.com/curl/curl/commit/2d6333101a71129a6a802eb93f84a5ac89e34479
+    if (PHP_OS == "WINNT"){
+        curl_setopt($ch, CURLOPT_SSL_OPTIONS, CURLSSLOPT_NATIVE_CA);
+    }
     $output = curl_exec($ch);
     curl_close($ch);
     return $output;
