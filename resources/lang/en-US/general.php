@@ -157,7 +157,7 @@ return [
     'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Upload Image',
     'filetypes_size_help'   => 'Max upload size allowed is :size.',
-    'filetypes_accepted_help'        => 'Accepted filetype/s are :filetypes. Max upload size allowed is :size.',
+    'filetypes_accepted_help'        => 'Accepted filetype is :filetypes. Max upload size allowed is :size.|Accepted filetypes are :filetypes. Max upload size allowed is :size.',
     'unaccepted_image_type' => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'Import',
     'import_this_file'      => 'Map fields and process this file',
