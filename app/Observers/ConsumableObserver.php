@@ -16,12 +16,26 @@ class ConsumableObserver
      */
     public function updated(Consumable $consumable)
     {
-        $logAction = new Actionlog();
-        $logAction->item_type = Consumable::class;
-        $logAction->item_id = $consumable->id;
-        $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
-        $logAction->logaction('update');
+
+        $changed = [];
+        
+        foreach ($consumable->getRawOriginal() as $key => $value) {
+            // Check and see if the value changed
+            if ($consumable->getRawOriginal()[$key] != $consumable->getAttributes()[$key]) {
+                $changed[$key]['old'] = $consumable->getRawOriginal()[$key];
+                $changed[$key]['new'] = $consumable->getAttributes()[$key];
+            }
+        }
+
+        if (count($changed) > 0) {
+            $logAction = new Actionlog();
+            $logAction->item_type = Consumable::class;
+            $logAction->item_id = $consumable->id;
+            $logAction->created_at = date('Y-m-d H:i:s');
+            $logAction->user_id = Auth::id();
+            $logAction->log_meta = json_encode($changed);
+            $logAction->logaction('update');
+        }
     }
 
     /**
