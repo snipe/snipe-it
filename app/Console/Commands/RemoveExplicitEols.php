@@ -27,6 +27,8 @@ class RemoveExplicitEols extends Command
      */
     public function handle()
     {
+        $startTime = microtime(true);
+
         if ($this->option('model_name') == 'all') {
             $assets = Asset::all();
             $this->updateAssets($assets);
@@ -40,6 +42,9 @@ class RemoveExplicitEols extends Command
                 $this->error('Asset model not found');
             }
         }
+        $endTime = microtime(true);
+        $executionTime = ($endTime - $startTime);
+        $this->info('Command executed in ' . round($executionTime, 2) . ' seconds.');
     }
 
     private function updateAssets($assets)
