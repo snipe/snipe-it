@@ -3136,6 +3136,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "FlorentDotMe",
+      "name": "Florent Bervas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/292081?v=4",
+      "profile": "http://spoontux.net",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
