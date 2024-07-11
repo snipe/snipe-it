@@ -176,6 +176,7 @@
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                         </a>
+
                       </td>
                     </tr>
                   @endforeach
@@ -254,6 +255,19 @@
                   </div>
                 @endif
 
+                @if ($consumable->notes)
+
+                  <div class="col-md-12">
+                    <strong>
+                      {{ trans('general.notes') }}:
+                    </strong>
+                  </div>
+                    <div class="col-md-12">
+                    {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
+                    </div>
+
+                @endif
+
     @can('checkout', \App\Models\Consumable::class)
 
       <div class="col-md-12">
@@ -268,21 +282,23 @@
           </button>
         @endif
       </div>
+        @can('update', \App\Models\Consumable::class)
+            <div class="col-md-12">
+              <a href="{{ route('consumables.edit', $consumable->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.edit') }}</a>
+            </div>
+        @endcan
+
+          @can('delete', $consumable)
+            <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+              @if ($consumable->deleted_at=='')
+                <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->id]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                </button>
+                <span class="sr-only">{{ trans('general.delete') }}</span>
+              @endif
+            </div>
+          @endcan
 
     @endcan
-
-    @if ($consumable->notes)
-
-    <div class="col-md-12">
-      <strong>
-        {{ trans('general.notes') }}:
-      </strong>
-              </div>
-    <div class="col-md-12">
-      {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
-            </div>
-          </div>
-  @endif
 
     </div>
 
@@ -297,5 +313,16 @@
 @stop
 
 @section('moar_scripts')
+      <script>
+
+        $('#dataConfirmModal').on('show.bs.modal', function (event) {
+          var content = $(event.relatedTarget).data('content');
+          var title = $(event.relatedTarget).data('title');
+          $(this).find(".modal-body").text(content);
+          $(this).find(".modal-header").text(title);
+        });
+
+      </script>
+
 @include ('partials.bootstrap-table', ['exportFile' => 'consumable' . $consumable->name . '-export', 'search' => false])
 @stop
