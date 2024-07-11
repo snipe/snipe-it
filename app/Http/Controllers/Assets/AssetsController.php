@@ -162,8 +162,8 @@ class AssetsController extends Controller
             // Validation for these fields is handled through the AssetRequest form request
             $model = AssetModel::find($request->get('model_id'));
 
-            if (($asset->model->fieldset)) {
-                foreach ($asset->model->fieldset->fields as $field) {
+            if (($model) && ($model->fieldset)) {
+                foreach ($model->fieldset->fields as $field) {
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
                             if (is_array($request->input($field->db_column))) {
@@ -893,6 +893,7 @@ class AssetsController extends Controller
         if ($request->input('update_location') == '1') {
             $asset->location_id = $request->input('location_id');
         }
+
 
         /**
          * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
