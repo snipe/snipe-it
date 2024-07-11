@@ -28,7 +28,7 @@ class ConsumablesController extends Controller
     {
         $this->authorize('index', Consumable::class);
 
-        $consumables = Consumable::with('company', 'location', 'category', 'manufacturer')
+        $consumables = Consumable::with('company', 'location', 'category', 'supplier', 'manufacturer')
             ->withCount('users as consumables_users_count');
 
         if ($request->filled('search')) {
