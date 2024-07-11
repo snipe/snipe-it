@@ -672,6 +672,10 @@ class ReportsController extends Controller
                 $assets->where('assets.order_number', $request->input('by_order_number'));
             }
 
+            if ($request->filled('by_asset_tag')) {
+                $assets->where('assets.asset_tag', $request->input('by_asset_tag'));
+            }
+
             if ($request->filled('by_status_id')) {
                 $assets->whereIn('assets.status_id', $request->input('by_status_id'));
             }

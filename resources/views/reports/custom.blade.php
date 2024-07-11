@@ -288,6 +288,14 @@
             @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'by_category_id', 'hide_new' => 'true', 'category_type' => 'asset'])
               @include ('partials.forms.edit.status-select', ['translated_name' => trans('admin/hardware/form.status'), 'fieldname' => 'by_status_id[]', 'multiple' => 'true', 'hide_new' => 'true'])
 
+            <!-- Asset Tag -->
+            <div class="form-group">
+              <label for="by_asset_tag" class="col-md-3 control-label">{{ trans('general.asset_tag') }}</label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" name="by_asset_tag" value="" aria-label="by_asset_tag">
+              </div>
+            </div>
+
             <!-- Order Number -->
             <div class="form-group">
               <label for="by_order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
