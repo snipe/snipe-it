@@ -883,8 +883,6 @@ class AssetsController extends Controller
 //            $asset->location_id = $target->rtd_location_id;
 //        }
 
-
-
         if ($asset->checkOut($target, auth()->user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }

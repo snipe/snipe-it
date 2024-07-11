@@ -162,6 +162,26 @@ class AssetsController extends Controller
             // Validation for these fields is handled through the AssetRequest form request
             $model = AssetModel::find($request->get('model_id'));
 
+            if (($asset->model->fieldset)) {
+                foreach ($asset->model->fieldset->fields as $field) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('admin')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
+                        }
+                    } else {
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                    }
+                }
+            }
+
             // Validate the asset before saving
             if ($asset->isValid() && $asset->save()) {
                 if (request('assigned_user')) {
@@ -873,27 +893,6 @@ class AssetsController extends Controller
         if ($request->input('update_location') == '1') {
             $asset->location_id = $request->input('location_id');
         }
-
-        if (($asset->model->fieldset)) {
-            foreach ($asset->model->fieldset->fields as $field) {
-                if ($field->field_encrypted == '1') {
-                    if (Gate::allows('admin')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                    } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
-                    }
-                }
-            }
-        }
-
 
         /**
          * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
