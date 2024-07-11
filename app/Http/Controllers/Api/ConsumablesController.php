@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreConsumableRequest;
 use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
@@ -126,7 +127,7 @@ class ConsumablesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
      */
-    public function store(ImageUploadRequest $request) : JsonResponse
+    public function store(StoreConsumableRequest $request) : JsonResponse
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable;
@@ -162,7 +163,7 @@ class ConsumablesController extends Controller
      * @param  \App\Http\Requests\ImageUploadRequest $request
      * @param  int $id
      */
-    public function update(ImageUploadRequest $request, $id) : JsonResponse
+    public function update(StoreConsumableRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Consumable::class);
         $consumable = Consumable::findOrFail($id);
