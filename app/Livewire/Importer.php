@@ -161,10 +161,6 @@ class Importer extends Component
         }
     }
 
-    public function boot() { // FIXME - delete or undelete.
-        ///////$this->activeFile = null; // I do *not* understand why I have to do this, but, well, whatever.
-    }
-
 
     public function mount()
     {
