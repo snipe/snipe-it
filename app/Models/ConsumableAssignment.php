@@ -13,7 +13,7 @@ class ConsumableAssignment extends Model
     protected $table = 'consumables_users';
 
     public $rules = [
-        'assigned_to'        => 'exists:users,id',
+        'assigned_to'        => 'required|exists:users,id',
     ];
 
     public function consumable()
