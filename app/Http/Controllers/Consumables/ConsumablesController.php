@@ -182,7 +182,7 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
         $this->authorize($consumable);
-        $consumable->users()->detach();
+
         $consumable->delete();
         // Redirect to the locations management page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.delete.success'));

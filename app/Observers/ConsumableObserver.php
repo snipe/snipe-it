@@ -5,6 +5,8 @@ namespace App\Observers;
 use App\Models\Actionlog;
 use App\Models\Consumable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ConsumableObserver
 {
@@ -66,6 +68,28 @@ class ConsumableObserver
      */
     public function deleting(Consumable $consumable)
     {
+
+        $consumable->users()->detach();
+
+        foreach ($consumable->uploads() as $file) {
+            try {
+                Storage::disk('public')->delete('consumables/'.$file);
+            } catch (\Exception $e) {
+                Log::info($e);
+            }
+        }
+
+        try {
+            Storage::disk('public')->delete('consumables/'.$consumable->image);
+        } catch (\Exception $e) {
+            Log::info($e);
+        }
+
+        $consumable->image = null;
+        $consumable->save();
+
+
+
         $logAction = new Actionlog();
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
