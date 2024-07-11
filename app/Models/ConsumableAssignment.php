@@ -3,12 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 class ConsumableAssignment extends Model
 {
     use CompanyableTrait;
+    use ValidatingTrait;
 
     protected $table = 'consumables_users';
+
+    public $rules = [
+        'assigned_to'        => 'required|exists:users,id',
+    ];
 
     public function consumable()
     {

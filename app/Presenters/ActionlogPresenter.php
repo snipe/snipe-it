@@ -75,7 +75,7 @@ class ActionlogPresenter extends Presenter
         }
 
         if ($this->actionType()=='delete') {
-            return 'fa-solid fa-user-xmark';
+            return 'fa-solid fa-trash';
         }
 
         if ($this->actionType()=='update') {

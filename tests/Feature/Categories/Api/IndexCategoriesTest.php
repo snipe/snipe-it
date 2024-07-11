@@ -32,7 +32,6 @@ class IndexCategoriesTest extends TestCase
                     'limit' => '20',
                 ]))
             ->assertOk()
-            ->assertOk()
             ->assertJsonStructure([
                 'total',
                 'rows',
