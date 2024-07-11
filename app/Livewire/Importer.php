@@ -3,18 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\CustomField;
-use Livewire\Component;
-
 use App\Models\Import;
 use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use Livewire\Component;
 
 class Importer extends Component
 {
-    use AuthorizesRequests;
-
     public $files;
 
     public $progress; //upload progress - '-1' means don't show
@@ -74,8 +68,6 @@ class Importer extends Component
         return json_encode($tmp);
 
     }
-
-
 
     private function getColumns($type)
     {
@@ -160,7 +152,6 @@ class Importer extends Component
             }
         }
     }
-
 
     public function mount()
     {
