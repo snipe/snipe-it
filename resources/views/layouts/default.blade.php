@@ -976,7 +976,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
             // Reference: https://jqueryvalidation.org/validate/
             $('#create-form').validate({
                 ignore: 'input[type=hidden]',
-                errorClass: 'help-block form-error',
+                errorClass: 'alert-msg',
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')

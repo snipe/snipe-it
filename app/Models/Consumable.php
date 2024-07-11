@@ -10,12 +10,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Presenters\ConsumablePresenter;
+use App\Models\Actionlog;
+use App\Models\ConsumableAssignment;
+use App\Models\User;
+use App\Models\Location;
+use App\Models\Manufacturer;
+use App\Models\Supplier;
+use App\Models\Category;
 
 class Consumable extends SnipeModel
 {
     use HasFactory;
 
-    protected $presenter = \App\Presenters\ConsumablePresenter::class;
+    protected $presenter = ConsumablePresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
@@ -37,10 +46,10 @@ class Consumable extends SnipeModel
      */
     public $rules = [
         'name'        => 'required|min:3|max:255',
-        'qty'         => 'required|integer|min:0',
+        'qty'         => 'required|integer|min:0|max:99999',
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
-        'min_amt'     => 'integer|min:0|nullable',
+        'min_amt'     => 'integer|min:0|max:99999|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
     ];
@@ -109,7 +118,7 @@ class Consumable extends SnipeModel
      */
     public function uploads()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+        return $this->hasMany(Actionlog::class, 'item_id')
             ->where('item_type', '=', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
@@ -147,7 +156,7 @@ class Consumable extends SnipeModel
      */
     public function admin()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -159,7 +168,7 @@ class Consumable extends SnipeModel
      */
     public function consumableAssignments()
     {
-        return $this->hasMany(\App\Models\ConsumableAssignment::class);
+        return $this->hasMany(ConsumableAssignment::class);
     }
 
     /**
@@ -183,7 +192,7 @@ class Consumable extends SnipeModel
      */
     public function manufacturer()
     {
-        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
+        return $this->belongsTo(Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -195,7 +204,7 @@ class Consumable extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo(\App\Models\Location::class, 'location_id');
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     /**
@@ -207,7 +216,7 @@ class Consumable extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo(\App\Models\Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
 
@@ -220,7 +229,7 @@ class Consumable extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
@@ -244,11 +253,10 @@ class Consumable extends SnipeModel
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function users()
+    public function users() : Relation
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
     /**
@@ -260,7 +268,7 @@ class Consumable extends SnipeModel
      */
     public function supplier()
     {
-        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+        return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
 
@@ -317,10 +325,7 @@ class Consumable extends SnipeModel
      */
     public function numCheckedOut()
     {
-        $checkedout = 0;
-        $checkedout = $this->users->count();
-
-        return $checkedout;
+        return $this->consumables_users_count ?? $this->users()->count();
     }
 
     /**
@@ -332,7 +337,7 @@ class Consumable extends SnipeModel
      */
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
+        $checkedout = $this->numCheckedOut();
         $total = $this->qty;
         $remaining = $total - $checkedout;
 

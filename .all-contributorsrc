@@ -3138,6 +3138,15 @@
       ]
     },
     {
+      "login": "FlorentDotMe",
+      "name": "Florent Bervas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/292081?v=4",
+      "profile": "http://spoontux.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "Galaxy102",
       "name": "Konstantin Köhring",
       "avatar_url": "https://avatars.githubusercontent.com/u/18245993?v=4",
@@ -3146,5 +3155,6 @@
         "code"
       ]
     }
+
   ]
 }
