@@ -13,7 +13,7 @@ class RemoveExplicitEols extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:remove-explicit-eols {--model_name=}';
+    protected $signature = 'snipeit:remove-explicit-eols {--model_name= : The name of the asset model to update (use "all" to update all models)}';
 
     /**
      * The console command description.
@@ -27,21 +27,29 @@ class RemoveExplicitEols extends Command
      */
     public function handle()
     {
-        $assetModel= AssetModel::where('name', '=', $this->option('model_name'))->first();
+        if ($this->option('model_name') == 'all') {
+            $assets = Asset::all();
+            $this->updateAssets($assets);
+        } else {
+            $assetModel = AssetModel::where('name', '=', $this->option('model_name'))->first();
 
-        if($assetModel){
-            $assets = Asset::where('model_id', '=', $assetModel->id)->get();
-
-            foreach ($assets as $asset) {
-                $asset->eol_explicit = 0;
-                $asset->asset_eol_date = null;
-                $asset->save();
+            if ($assetModel) {
+                $assets = Asset::where('model_id', '=', $assetModel->id)->get();
+                $this->updateAssets($assets);
+            } else {
+                $this->error('Asset model not found');
             }
+        }
+    }
 
-            $this->info($assets->count().' Assets updated successfully');
+    private function updateAssets($assets)
+    {
+        foreach ($assets as $asset) {
+            $asset->eol_explicit = 0;
+            $asset->asset_eol_date = null;
+            $asset->save();
         }
-        else {
-            $this->error('Asset model not found');
-        }
+
+        $this->info($assets->count() . ' Assets updated successfully');
     }
 }
