@@ -37,6 +37,25 @@
           </div>
           @endif
 
+          <!-- total -->
+          <div class="form-group">
+              <label class="col-sm-3 control-label">{{  trans('admin/components/general.total') }}</label>
+              <div class="col-md-6">
+                  <p class="form-control-static">{{ $consumable->qty }}</p>
+              </div>
+          </div>
+
+          <!-- remaining -->
+          <div class="form-group">
+              <label class="col-sm-3 control-label">{{  trans('admin/components/general.remaining') }}</label>
+              <div class="col-md-6">
+                  <p class="form-control-static">{{ $consumable->numRemaining() }}</p>
+              </div>
+          </div>
+
+
+
+
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 

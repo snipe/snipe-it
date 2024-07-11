@@ -70,14 +70,18 @@ class ConsumableObserver
     {
 
         $consumable->users()->detach();
+        $uploads = $consumable->uploads;
 
-        foreach ($consumable->uploads() as $file) {
+        foreach ($uploads as $file) {
             try {
-                Storage::disk('public')->delete('consumables/'.$file);
+                Storage::delete('private_uploads/consumables/'.$file->filename);
+                $file->delete();
             } catch (\Exception $e) {
                 Log::info($e);
             }
         }
+
+
 
         try {
             Storage::disk('public')->delete('consumables/'.$consumable->image);
