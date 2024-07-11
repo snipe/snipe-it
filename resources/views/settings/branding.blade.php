@@ -77,7 +77,7 @@
                         "logoId" => "uploadLogo",
                         "logoLabel" => trans('admin/settings/general.logo'),
                         "logoClearVariable" => "clear_logo",
-                        "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('general.logo_size') . trans('general.filetypes_help', ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]),
                     ])
 
                     <!-- Email Logo -->
@@ -86,7 +86,7 @@
                         "logoId" => "uploadEmailLogo",
                         "logoLabel" => trans('admin/settings/general.email_logo'),
                         "logoClearVariable" => "clear_email_logo",
-                        "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.filetypes_help', ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]),
                     ])
 
                     <!-- Label Logo -->
@@ -95,7 +95,7 @@
                         "logoId" => "uploadLabelLogo",
                         "logoLabel" => trans('admin/settings/general.label_logo'),
                         "logoClearVariable" => "clear_label_logo",
-                        "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['filetypes' => 'jpg, webp, png, gif, and avif', 'size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.filetypes_help', ['filetypes' => 'jpg, webp, png, gif, and avif', 'size' => Helper::file_upload_max_size_readable()]),
                     ])
 
                     <!-- Favicon -->
@@ -116,7 +116,7 @@
                         "logoLabel" => trans('admin/settings/general.default_avatar'),
                         "logoClearVariable" => "clear_default_avatar",
                         "logoPath" => "avatars/",
-                        "helpBlock" => trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('general.filetypes_help', ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]),
                     ])
 
                         <!-- Load gravatar -->
