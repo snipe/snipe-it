@@ -48,7 +48,11 @@
                             <th data-sortable="true">{{ trans('admin/settings/general.oauth_secret') }}</th>
                             <th data-sortable="true">{{ trans('general.created_at')  }}</th>
                             <th data-sortable="true">{{ trans('general.updated_at')  }}</th>
-                            <th data-sortable="true"><span class="sr-only">{{ trans('general.actions') }}</span></th>
+                            <th>
+                                <span class="sr-only">
+                                    {{ trans('general.actions') }}
+                                </span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,7 +94,10 @@
                                     <a class="action-link btn btn-sm btn-warning"
                                        wire:click="editClient('{{ $client->id }}')"
                                        onclick="$('#modal-edit-client').modal('show');">
-                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span>
+                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                        <span class="sr-only">
+                                            {{ trans('general.update') }}
+                                        </span>
                                     </a>
 
                                     <a class="action-link btn btn-danger btn-sm" wire:click="deleteClient('{{ $client->id }}')">
@@ -115,21 +122,21 @@
                 <div>
                     <div class="box box-default">
                         <div class="box-header">
-                            <h2  class="box-title">
+                            <h2 class="box-title">
                                 {{ trans('admin/settings/general.oauth_authorized_apps') }}
                             </h2>
                         </div>
 
                         <div class="box-body">
                             <!-- Authorized Tokens -->
-                            <table data-cookie-id-table="AuthorizedAppsTale"
+                            <table data-cookie-id-table="AuthorizedAppsTable"
                                    data-pagination="true"
-                                   data-id-table="AuthorizedAppsTale"
+                                   data-id-table="AuthorizedAppsTable"
                                    data-toolbar="#AuthorizedAppsToolbar"
                                    data-side-pagination="client"
                                    data-sort-order="desc"
                                    data-sort-name="created_at"
-                                   id="AuthorizedAppsTale"
+                                   id="AuthorizedAppsTable"
                                    class="table table-striped snipe-table">
                                 <thead>
                                 <tr>
@@ -137,8 +144,12 @@
                                     <th data-sortable="true"> {{ trans('account/general.personal_access_token') }}</th>
                                     <th data-sortable="true">{{ trans('admin/settings/general.oauth_scopes')  }}</th>
                                     <th data-sortable="true">{{ trans('general.created_at')  }}</th>
-                                    <th data-sortable="true">{{ trans('account/general.expires')  }}</th>
-                                    <th></th>
+                                    <th data-sortable="true">{{ trans('general.expires') }}</th>
+                                    <th>
+                                        <span class="sr-only">
+                                            {{ trans('general.actions') }}
+                                        </span>
+                                    </th>
                                 </tr>
                                 </thead>
 
