@@ -232,7 +232,6 @@ class LdapSync extends Command
                 $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
-                $item['locale'] = app()->getLocale();
 
                 // ONLY if you are using the "ldap_location" option *AND* you have an actual result
                 if ($ldap_result_location && $item['location']) {
@@ -252,6 +251,7 @@ class LdapSync extends Command
                     // Creating a new user.
                     $user = new User;
                     $user->password = $user->noPassword();
+                    $item['locale'] = app()->getLocale();
                     $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item['createorupdate'] = 'created';
                 }
