@@ -31,7 +31,7 @@
         "admin-lte": "^2.4.18",
         "ajv": "^6.12.6",
         "blueimp-file-upload": "^9.34.0",
-        "bootstrap": "^3.4.1",
+        "bootstrap": "^5.0.0",
         "bootstrap-colorpicker": "^2.5.3",
         "bootstrap-datepicker": "^1.10.0",
         "bootstrap-less": "^3.3.8",
