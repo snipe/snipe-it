@@ -11,9 +11,9 @@ class Importer extends Component
 {
     public $files;
 
-    public $progress; //upload progress - '-1' means don't show
+    public $progress = -1; //upload progress - '-1' means don't show
     public $progress_message;
-    public $progress_bar_class;
+    public $progress_bar_class = 'progress-bar-warning';
 
     public $message; //status/error message?
     public $message_type; //success/error?
@@ -156,8 +156,6 @@ class Importer extends Component
     public function mount()
     {
         $this->authorize('import');
-        $this->progress = -1; // '-1' means 'don't show the progressbar'
-        $this->progress_bar_class = 'progress-bar-warning';
         $this->importTypes = [
             'asset' =>      trans('general.assets'),
             'accessory' =>  trans('general.accessories'),
