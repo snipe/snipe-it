@@ -106,7 +106,7 @@
                 {{ trans('general.location') }}
               </label>
 
-              <label class="form-control" style="margin-left: 20px;">
+              <label class="form-control" style="margin-left: 25px;">
                 {{ Form::checkbox('location_address', '1', '1') }}
                   {{ trans('general.address') }}
               </label>
@@ -116,9 +116,9 @@
                 {{ trans('admin/hardware/form.default_location') }}
               </label>
 
-              <label class="form-control" style="margin-left: 20px;">
+              <label class="form-control" style="margin-left: 25px;">
                 {{ Form::checkbox('rtd_location_address', '1', '1') }}
-                - {{ trans('general.address') }}
+                {{ trans('general.address') }}
               </label>
 
               <label class="form-control">
@@ -181,9 +181,9 @@
                 {{ trans('general.notes') }}
               </label>
 
-              <label class="form-control">
+              <label class="form-control" style="margin-left: 25px;">
                 {{ Form::checkbox('url', '1', '1') }}
-                - {{ trans('general.url') }}
+                {{ trans('general.url') }}
               </label>
 
 
