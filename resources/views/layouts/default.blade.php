@@ -979,7 +979,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
             });
 
             // Reference: https://jqueryvalidation.org/validate/
-            $('#create-form').validate({
+            var validator = $('#create-form').validate({
                 ignore: 'input[type=hidden]',
                 errorClass: 'alert-msg',
                 errorElement: 'span',
@@ -997,6 +997,12 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 onfocusout: function(element) {
                     return $(element).valid();
                 },
+
+            });
+
+            $.extend($.validator.messages, {
+                required: "{{ trans('validation.generic.required') }}",
+                email: "{{ trans('validation.generic.email') }}"
             });
 
 

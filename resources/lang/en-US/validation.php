@@ -155,8 +155,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Generic Validation Messages
+    | Generic Validation Messages - we use these in the jquery validation where we don't have
+    | access to the :attribute
     |--------------------------------------------------------------------------
     */
-    'invalid_value_in_field' => 'Invalid value included in this field',
+    'generic' => [
+        'invalid_value_in_field' => 'Invalid value included in this field',
+        'required' => 'This field is required',
+        'email' => 'Please enter a valid email address',
+    ],
+
 ];
