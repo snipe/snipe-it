@@ -118,7 +118,7 @@
                                         </th>
                                     </tr>
 
-                                    @foreach($files as $currentFile)
+                                    @foreach($this->files as $currentFile)
 
                                     		<tr style="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>

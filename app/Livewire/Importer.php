@@ -5,12 +5,11 @@ namespace App\Livewire;
 use App\Models\CustomField;
 use App\Models\Import;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Importer extends Component
 {
-    public $files;
-
     public $progress = -1; //upload progress - '-1' means don't show
     public $progress_message;
     public $progress_bar_class = 'progress-bar-warning';
@@ -545,6 +544,8 @@ class Importer extends Component
                 }
             }
         }
+
+        unset($this->files);
     }
 
     public function clearMessage()
@@ -553,9 +554,14 @@ class Importer extends Component
         $this->message_type = null;
     }
 
+    #[Computed]
+    public function files()
+    {
+        return Import::orderBy('id', 'desc')->get();
+    }
+
     public function render()
     {
-        $this->files = Import::orderBy('id','desc')->get(); //HACK - slows down renders.
         return view('livewire.importer')
                 ->extends('layouts.default')
                 ->section('content');
