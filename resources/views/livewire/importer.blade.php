@@ -213,9 +213,9 @@
                                                                     </div>
                                                                 </div><!-- /div row -->
 
-                                                                @if($activeFile->header_row)
+                                                                @if(! empty($headerRow))
 
-                                                                    @foreach($activeFile->header_row as $index => $header)
+                                                                    @foreach($headerRow as $index => $header)
 
                                                                         <div class="form-group col-md-12" wire:key="header-row-{{ $index }}">
 

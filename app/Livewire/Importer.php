@@ -21,6 +21,7 @@ class Importer extends Component
     //originally from ImporterFile
     public $import_errors; //
     public ?Import $activeFile = null;
+    public $headerRow = [];
     public $importTypes;
     public $columnOptions;
     public $statusType;
@@ -49,6 +50,7 @@ class Importer extends Component
         'activeFile.import_type' => 'string',
         'activeFile.field_map' => 'array',
         'activeFile.header_row' => 'array',
+        'headerRow' => 'array',
         'field_map' => 'array'
     ];
 
@@ -62,7 +64,7 @@ class Importer extends Component
     {
         $tmp = array();
         if ($this->activeFile) {
-            $tmp = array_combine($this->activeFile->header_row, $this->field_map);
+            $tmp = array_combine($this->headerRow, $this->field_map);
             $tmp = array_filter($tmp);
         }
         return json_encode($tmp);
@@ -112,7 +114,7 @@ class Importer extends Component
         if ($propertyKey == "import_type") {
 
             // go through each header, find a matching field to try and map it to.
-            foreach ($this->activeFile->header_row as $i => $header) {
+            foreach ($this->headerRow as $i => $header) {
                 // do we have something mapped already?
                 if (array_key_exists($i, $this->field_map)) {
                     // yes, we do. Is it valid for this type of import?
@@ -510,8 +512,10 @@ class Importer extends Component
             return;
         }
 
+        $this->headerRow = $this->activeFile->header_row;
+
         $this->field_map = null;
-        foreach($this->activeFile->header_row as $element) {
+        foreach ($this->headerRow as $element) {
             if(isset($this->activeFile->field_map[$element])) {
                 $this->field_map[] = $this->activeFile->field_map[$element];
             } else {
