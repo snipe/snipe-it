@@ -75,7 +75,7 @@
                                     </div>
                                 @endif
 
-                                <div class="col-md-2 col-sm-5 col-xs-12 text-right pull-right">
+                                <div class="col-md-4 col-sm-5 col-xs-12 text-right pull-right">
 
                                     <!-- The fileinput-button span is used to style the file input field as button -->
                                     @if (!config('app.lock_passwords'))
@@ -258,7 +258,7 @@
                                                                         <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
-                                                                        <button type="submit" class="btn btn-primary col-md-5" id="import">Import</button>
+                                                                        <button type="submit" class="btn btn-primary col-md-5" id="import">{{ trans('admin/hardware/message.import.import_button') }}</button>
                                                                         <br><br>
                                                                     </div>
                                                                 </div>
