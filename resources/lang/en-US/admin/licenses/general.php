@@ -23,7 +23,7 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin All Seats',
-                'modal'             => 'This will action checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checkin ALL seats for this license from both users and assets',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
                 'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
