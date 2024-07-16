@@ -107,9 +107,9 @@ class Importer extends Component
         return $results;
     }
 
-    public function updating($name, $new_import_type)
+    public function updatingActiveFile($value, $propertyKey)
     {
-        if ($name == "activeFile.import_type") {
+        if ($propertyKey == "import_type") {
 
             // go through each header, find a matching field to try and map it to.
             foreach ($this->activeFile->header_row as $i => $header) {
@@ -117,7 +117,7 @@ class Importer extends Component
                 if (array_key_exists($i, $this->field_map)) {
                     // yes, we do. Is it valid for this type of import?
                     // (e.g. the import type might have been changed...?)
-                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$new_import_type])) {
+                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$value])) {
                         //yes, this key *is* valid. Continue on to the next field.
                         continue;
                     } else {
@@ -127,9 +127,9 @@ class Importer extends Component
                     } // TODO - strictly speaking, this isn't necessary here I don't think.
                 }
                 // first, check for exact matches
-                foreach ($this->columnOptions[$new_import_type] as $value => $text) {
+                foreach ($this->columnOptions[$value] as $v => $text) {
                     if (strcasecmp($text, $header) === 0) { // case-INSENSITIVe on purpose!
-                        $this->field_map[$i] = $value;
+                        $this->field_map[$i] = $v;
                         continue 2; //don't bother with the alias check, go to the next header
                     }
                 }
@@ -140,7 +140,7 @@ class Importer extends Component
                             // Make *absolutely* sure that this key actually _exists_ in this import type -
                             // you can trigger this by importing accessories with a 'Warranty' column (which don't exist
                             // in "Accessories"!)
-                            if (array_key_exists($key, $this->columnOptions[$new_import_type])) {
+                            if (array_key_exists($key, $this->columnOptions[$value])) {
                                 $this->field_map[$i] = $key;
                                 continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
                             }
