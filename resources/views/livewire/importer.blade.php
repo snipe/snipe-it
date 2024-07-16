@@ -198,7 +198,11 @@
                                                             @if ($activeFile->import_type)
                                                                 <div class="form-group col-md-12">
                                                                     <hr style="border-top: 1px solid lightgray">
-                                                                    <h3><i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}"></i> Map {{ ucwords($activeFile->import_type) }} Import Fields</h3>
+                                                                    <h3>
+                                                                        <i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}">
+                                                                        </i>
+                                                                        {{ trans('general.map_fields', ['item_type' => ucwords($activeFile->import_type)]) }}
+                                                                       </h3>
                                                                     <hr style="border-top: 1px solid lightgray">
                                                                 </div>
                                                                 <div class="form-group col-md-12">
