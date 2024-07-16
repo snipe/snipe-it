@@ -40,7 +40,13 @@ mix
   .minify("./public/css/dist/signature-pad.css");
 
 /**
- * Copy, minify and version signature-pad.css
+ * Copy and version select2
+ */
+mix
+    .copy("./node_modules/select2/dist/js/i18n", "./public/js/select2/i18n")
+
+/**
+ * Copy and version fontawesome
  */
 mix
     .copy("./node_modules/@fortawesome/fontawesome-free/webfonts", "./public/css/webfonts")
