@@ -42,7 +42,7 @@
                         <!-- AssetModel name -->
                         <div class="form-group">
                             <label for="model" class="col-md-3 control-label">
-                                {{ trans('general.company') }}
+                                {{ trans('admin/hardware/form.model') }}
                             </label>
                             <div class="col-md-8">
                                 <p class="form-control-static">
