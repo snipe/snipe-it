@@ -85,6 +85,12 @@ class CheckoutAssetNotification extends Notification
         if ($this->target instanceof User && $this->target->email != '') {
 
             /**
+             * wouldn't we just remove the email qualifier?
+             * cause if no email exists then smtp would return an email doen't exist?
+             * but then the email would still send to the CC/BCC?
+             */
+
+            /**
              * Send an email if the asset requires acceptance,
              * so the user can accept or decline the asset
              */
@@ -109,6 +115,8 @@ class CheckoutAssetNotification extends Notification
 
         return $notifyBy;
     }
+
+
 
     public function toSlack()
     {
