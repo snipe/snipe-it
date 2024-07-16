@@ -475,7 +475,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function getQrCode($assetId = null) : Response | BinaryFileResponse
+    public function getQrCode($assetId = null) : Response | BinaryFileResponse | string | bool
     {
         $settings = Setting::getSettings();
 
@@ -502,6 +502,7 @@ class AssetsController extends Controller
 
             return 'That asset is invalid';
         }
+        return false;
     }
 
     /**
