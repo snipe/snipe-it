@@ -62,8 +62,21 @@ class DepreciationsController extends Controller
         $depreciation->name = $request->input('name');
         $depreciation->months = $request->input('months');
         $depreciation->user_id = Auth::id();
-        $depreciation->depreciation_min = $request->input('depreciation_min');
+
+        $request->validate([
+            'depreciation_min' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
+                        $fail('The depreciation minimum must be between 0 and 100 when depreciation type is percentage.');
+                    }
+                },
+            ],
+            'depreciation_type' => 'required|in:amount,percent',
+        ]);
         $depreciation->depreciation_type = $request->input('depreciation_type');
+        $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
         if ($depreciation->save()) {
