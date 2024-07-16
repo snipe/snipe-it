@@ -142,12 +142,12 @@
 
                                                         <div class="form-group">
 
-                                                                <label for="activeFile.import_type" class="col-md-3 col-xs-12">
+                                                                <label for="typeOfImport" class="col-md-3 col-xs-12">
                                                                     {{ trans('general.import_type') }}
                                                                 </label>
 
                                                             <div class="col-md-9 col-xs-12" wire:ignore>
-                                                                    {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, [
+                                                                    {{ Form::select('typeOfImport', $importTypes, $typeOfImport, [
                                                                         'id' => 'import_type',
                                                                         'class' => 'livewire-select2',
                                                                         'style' => 'min-width: 350px',
@@ -156,7 +156,7 @@
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                                                                         'data-livewire-component' => $this->getId()
                                                                     ]) }}
-                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
+                                                                    @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 0)
                                                                         <p class="help-block">
                                                                             {{ trans('general.auto_incrementing_asset_tags_disabled_so_tags_required') }}
                                                                         </p>
@@ -169,7 +169,7 @@
                                                                     <input type="checkbox" name="update" data-livewire-component="{{ $this->getId() }}" wire:model.live="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
-                                                                @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
+                                                                @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
                                                                     <p class="help-block">
                                                                         {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
                                                                     </p>
@@ -195,10 +195,10 @@
                                                             @endif
 
 
-                                                            @if ($activeFile->import_type)
+                                                            @if ($typeOfImport)
                                                                 <div class="form-group col-md-12">
                                                                     <hr style="border-top: 1px solid lightgray">
-                                                                    <h3><i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}"></i> Map {{ ucwords($activeFile->import_type) }} Import Fields</h3>
+                                                                    <h3><i class="{{ Helper::iconTypeByItem($typeOfImport) }}"></i> Map {{ ucwords($typeOfImport) }} Import Fields</h3>
                                                                     <hr style="border-top: 1px solid lightgray">
                                                                 </div>
                                                                 <div class="form-group col-md-12">
@@ -222,7 +222,7 @@
                                                                             <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
                                                                             <div class="col-md-4" wire:ignore>
 
-                                                                                {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$field_map[$index],
+                                                                                {{ Form::select('field_map.'.$index, $columnOptions[$typeOfImport], @$field_map[$index],
                                                                                     [
                                                                                         'class' => 'mappings livewire-select2',
                                                                                         'placeholder' => trans('general.importer.do_not_import'),
@@ -270,7 +270,7 @@
                                                                         <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                 </div>
-                                                            @endif {{-- end of if ... activeFile->import_type --}}
+                                                            @endif {{-- end of if ... $typeOfImport --}}
 
                                                         </div><!-- /div v-show -->                                                    </td>
                                                 </tr>
@@ -328,7 +328,7 @@
             // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
             // because the #import button isn't visible until you click an import_type
             $('#upload-table').on('click', '#import', function () {
-                if (!$wire.$get('activeFile.import_type')) {
+                if (!$wire.$get('typeOfImport')) {
                     $wire.$set('statusType', 'error');
                     $wire.$set('statusText', "An import type is required... "); //TODO: translate?
                     return;
@@ -348,7 +348,7 @@
                         data: JSON.stringify({
                             'import-update': !!$wire.$get('update'),
                             'send-welcome': !!$wire.$get('send_welcome'),
-                            'import-type': $wire.$get('activeFile.import_type'),
+                            'import-type': $wire.$get('typeOfImport'),
                             'run-backup': !!$wire.$get('run_backup'),
                             'column-mappings': mappings
                         }),

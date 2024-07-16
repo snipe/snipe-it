@@ -22,6 +22,7 @@ class Importer extends Component
     public $import_errors; //
     public ?Import $activeFile = null;
     public $headerRow = [];
+    public $typeOfImport;
     public $importTypes;
     public $columnOptions;
     public $statusType;
@@ -51,6 +52,7 @@ class Importer extends Component
         'activeFile.field_map' => 'array',
         'activeFile.header_row' => 'array',
         'headerRow' => 'array',
+        'typeOfImport' => 'string',
         'field_map' => 'array'
     ];
 
@@ -109,49 +111,46 @@ class Importer extends Component
         return $results;
     }
 
-    public function updatingActiveFile($value, $propertyKey)
+    public function updatingTypeOfImport($type)
     {
-        if ($propertyKey == "import_type") {
-
-            // go through each header, find a matching field to try and map it to.
-            foreach ($this->headerRow as $i => $header) {
-                // do we have something mapped already?
-                if (array_key_exists($i, $this->field_map)) {
-                    // yes, we do. Is it valid for this type of import?
-                    // (e.g. the import type might have been changed...?)
-                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$value])) {
-                        //yes, this key *is* valid. Continue on to the next field.
-                        continue;
-                    } else {
-                        //no, this key is *INVALID* for this import type. Better set it to null
-                        // and we'll hope that the $aliases_fields or something else picks it up.
-                        $this->field_map[$i] = null; // fingers crossed! But it's not likely, tbh.
-                    } // TODO - strictly speaking, this isn't necessary here I don't think.
+        // go through each header, find a matching field to try and map it to.
+        foreach ($this->headerRow as $i => $header) {
+            // do we have something mapped already?
+            if (array_key_exists($i, $this->field_map)) {
+                // yes, we do. Is it valid for this type of import?
+                // (e.g. the import type might have been changed...?)
+                if (array_key_exists($this->field_map[$i], $this->columnOptions[$type])) {
+                    //yes, this key *is* valid. Continue on to the next field.
+                    continue;
+                } else {
+                    //no, this key is *INVALID* for this import type. Better set it to null
+                    // and we'll hope that the $aliases_fields or something else picks it up.
+                    $this->field_map[$i] = null; // fingers crossed! But it's not likely, tbh.
+                } // TODO - strictly speaking, this isn't necessary here I don't think.
+            }
+            // first, check for exact matches
+            foreach ($this->columnOptions[$type] as $v => $text) {
+                if (strcasecmp($text, $header) === 0) { // case-INSENSITIVe on purpose!
+                    $this->field_map[$i] = $v;
+                    continue 2; //don't bother with the alias check, go to the next header
                 }
-                // first, check for exact matches
-                foreach ($this->columnOptions[$value] as $v => $text) {
-                    if (strcasecmp($text, $header) === 0) { // case-INSENSITIVe on purpose!
-                        $this->field_map[$i] = $v;
-                        continue 2; //don't bother with the alias check, go to the next header
-                    }
-                }
-                // if you got here, we didn't find a match. Try the $aliases_fields
-                foreach ($this->aliases_fields as $key => $alias_values) {
-                    foreach ($alias_values as $alias_value) {
-                        if (strcasecmp($alias_value, $header) === 0) { // aLsO CaSe-INSENSitiVE!
-                            // Make *absolutely* sure that this key actually _exists_ in this import type -
-                            // you can trigger this by importing accessories with a 'Warranty' column (which don't exist
-                            // in "Accessories"!)
-                            if (array_key_exists($key, $this->columnOptions[$value])) {
-                                $this->field_map[$i] = $key;
-                                continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
-                            }
+            }
+            // if you got here, we didn't find a match. Try the $aliases_fields
+            foreach ($this->aliases_fields as $key => $alias_values) {
+                foreach ($alias_values as $alias_value) {
+                    if (strcasecmp($alias_value, $header) === 0) { // aLsO CaSe-INSENSitiVE!
+                        // Make *absolutely* sure that this key actually _exists_ in this import type -
+                        // you can trigger this by importing accessories with a 'Warranty' column (which don't exist
+                        // in "Accessories"!)
+                        if (array_key_exists($key, $this->columnOptions[$type])) {
+                            $this->field_map[$i] = $key;
+                            continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
                         }
                     }
                 }
-                // and if you got here, we got nothing. Let's recommend 'null'
-                $this->field_map[$i] = null; // Booooo :(
             }
+            // and if you got here, we got nothing. Let's recommend 'null'
+            $this->field_map[$i] = null; // Booooo :(
         }
     }
 
@@ -513,6 +512,7 @@ class Importer extends Component
         }
 
         $this->headerRow = $this->activeFile->header_row;
+        $this->typeOfImport = $this->activeFile->import_type;
 
         $this->field_map = null;
         foreach ($this->headerRow as $element) {
