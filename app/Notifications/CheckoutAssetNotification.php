@@ -82,13 +82,7 @@ class CheckoutAssetNotification extends Notification
         /**
          * Only send notifications to users that have email addresses
          */
-        if ($this->target instanceof User && $this->target->email != '') {
-
-            /**
-             * wouldn't we just remove the email qualifier?
-             * cause if no email exists then smtp would return an email doen't exist?
-             * but then the email would still send to the CC/BCC?
-             */
+        if ($this->target instanceof User && (($this->target->email != '') || $this->settings->admin_cc_email != '')) {
 
             /**
              * Send an email if the asset requires acceptance,
