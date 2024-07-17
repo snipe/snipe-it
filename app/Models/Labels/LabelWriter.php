@@ -457,6 +457,14 @@ class LabelWriter
      */
     public final function getLabelPrintableArea($template) : object
     {
+        dd([
+            'x1' => $template->margin_left,
+            'y1' => $template->margin_top,
+            'x2' => $template->label_width - $template->margin_right,
+            'y2' => $template->label_height - $template->margin_bottom,
+            'w' => $template->label_width - $template->margin_left - $template->margin_right,
+            'h' => $template->label_height - $template->margin_top - $template->margin_botom,
+        ]);
 //        dd('margin left: '.$template->margin_left,'margin top: '.$template->margin_top, 'width: '.$template->label_width, 'margin right: '.$template->margin_right, 'height: '.$template->label_width, 'margin bottom:'.$template->margin_bottom);
         return (object)[
             'x1' => $template->margin_left,
