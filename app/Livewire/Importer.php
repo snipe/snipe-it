@@ -528,7 +528,9 @@ class Importer extends Component
         $import = Import::find($id);
 
         // Check that the import wasn't deleted after while page was already loaded...
-        // @todo: next up...handle the file being missing for other interactions...for example switching the import type
+        // @todo: next up...handle the file being missing for other interactions...
+        // for example having an import open in two tabs, deleting it, and then changing
+        // the import type in the other tab. The error message below wouldn't display in that case.
         if (!$import) {
             // @todo: improve error message
             $this->message = trans('admin/hardware/message.import.file_delete_error');
