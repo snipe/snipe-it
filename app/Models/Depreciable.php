@@ -188,16 +188,16 @@ class Depreciable extends SnipeModel
     {
         return new \DateTime($time);
     }
-    private function calculateDepreciation(){
-        $depreciation_min = 0;
+
+    private function calculateDepreciation()
+    {
         if($this->get_depreciation()->depreciation_type === 'percent') {
             $depreciation_percent= $this->get_depreciation()->depreciation_min / 100;
             $depreciation_min= $this->purchase_cost * $depreciation_percent;
             return $depreciation_min;
         }
-        else{
-            $depreciation_min = $this->get_depreciation()->depreciation_min;
-            return $depreciation_min;
-        }
+
+        $depreciation_min = $this->get_depreciation()->depreciation_min;
+        return $depreciation_min;
     }
 }
