@@ -330,6 +330,20 @@ class Accessory extends SnipeModel
 
 
     /**
+     * Check how many items within an accessory are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        \Log::debug('numCheckedOut: '.$this->users_count ?? $this->users->count());
+        return $this->users_count ?? $this->users->count();
+    }
+
+
+    /**
      * Check how many items of an accessory remain.
      *
      * In order to use this model method, you MUST call withCount('users as users_count')
@@ -342,9 +356,13 @@ class Accessory extends SnipeModel
      */
     public function numRemaining()
     {
-        $checkedout = $this->users_count;
+        $checkedout = $this->numCheckedOut();
         $total = $this->qty;
         $remaining = $total - $checkedout;
+
+        \Log::debug('checked out: '.$checkedout);
+        \Log::debug('total: '.$total);
+        \Log::debug('remaining: '.$remaining);
 
         return (int) $remaining;
     }
