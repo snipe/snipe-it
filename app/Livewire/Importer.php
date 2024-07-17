@@ -19,7 +19,7 @@ class Importer extends Component
 
     //originally from ImporterFile
     public $import_errors; //
-    public ?Import $activeFile = null;
+    public $activeFileId;
     public $headerRow = [];
     public $typeOfImport;
     public $importTypes;
@@ -30,6 +30,7 @@ class Importer extends Component
     public $send_welcome;
     public $run_backup;
     public $field_map; // we need a separate variable for the field-mapping, because the keys in the normal array are too complicated for Livewire to understand
+    // @todo: remove the need for this by using $activeFileId
     public $file_id; // TODO: I can't figure out *why* we need this, but it really seems like we do. I can't seem to pull the id from the activeFile for some reason?
 
     // Make these variables public - we set the properties in the constructor so we can localize them (versus the old static arrays)
@@ -46,10 +47,6 @@ class Importer extends Component
         'files.*.file_path' => 'required|string',
         'files.*.created_at' => 'required|string',
         'files.*.filesize' => 'required|integer',
-        'activeFile' => 'Import',
-        'activeFile.import_type' => 'string',
-        'activeFile.field_map' => 'array',
-        'activeFile.header_row' => 'array',
         'headerRow' => 'array',
         'typeOfImport' => 'string',
         'field_map' => 'array'
@@ -157,19 +154,19 @@ class Importer extends Component
     {
         $this->authorize('import');
         $this->importTypes = [
-            'asset' =>      trans('general.assets'),
-            'accessory' =>  trans('general.accessories'),
+            'asset' => trans('general.assets'),
+            'accessory' => trans('general.accessories'),
             'consumable' => trans('general.consumables'),
-            'component' =>  trans('general.components'),
-            'license' =>    trans('general.licenses'),
-            'user' =>       trans('general.users'),
-            'location' =>    trans('general.locations'),
+            'component' => trans('general.components'),
+            'license' => trans('general.licenses'),
+            'user' => trans('general.users'),
+            'location' => trans('general.locations'),
         ];
 
         /**
          * These are the item-type specific columns
          */
-        $this->accessories_fields  = [
+        $this->accessories_fields = [
             'company' => trans('general.company'),
             'location' => trans('general.location'),
             'quantity' => trans('general.qty'),
@@ -292,7 +289,7 @@ class Importer extends Component
             'manufacturer' => trans('general.manufacturer'),
         ];
 
-        $this->users_fields  = [
+        $this->users_fields = [
             'id' => trans('general.id'),
             'company' => trans('general.company'),
             'location' => trans('general.location'),
@@ -317,12 +314,12 @@ class Importer extends Component
             'website' => trans('general.website'),
             'avatar' => trans('general.image'),
             'gravatar' => trans('general.importer.gravatar'),
-            'start_date'    => trans('general.start_date'),
-            'end_date'   => trans('general.end_date'),
-            'employee_num'   => trans('general.employee_number'),
+            'start_date' => trans('general.start_date'),
+            'end_date' => trans('general.end_date'),
+            'employee_num' => trans('general.employee_number'),
         ];
 
-        $this->locations_fields  = [
+        $this->locations_fields = [
             'name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
             'address2' => trans('general.importer.address2'),
@@ -489,11 +486,8 @@ class Importer extends Component
         ];
 
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
-        foreach($this->importTypes AS $type => $name) {
+        foreach ($this->importTypes as $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
-        }
-        if ($this->activeFile) {
-            $this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map) : [];
         }
     }
 
@@ -501,7 +495,7 @@ class Importer extends Component
     {
         $this->clearMessage();
 
-        $this->activeFile = Import::find($id);
+        $this->activeFileId = $id;
 
         if (!$this->activeFile) {
             $this->message = trans('admin/hardware/message.import.file_missing');
@@ -515,7 +509,7 @@ class Importer extends Component
 
         $this->field_map = null;
         foreach ($this->headerRow as $element) {
-            if(isset($this->activeFile->field_map[$element])) {
+            if (isset($this->activeFile->field_map[$element])) {
                 $this->field_map[] = $this->activeFile->field_map[$element];
             } else {
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
@@ -530,9 +524,9 @@ class Importer extends Component
     public function destroy($id)
     {
         // TODO: why don't we just do File::find($id)? This seems dumb.
-        foreach($this->files as $file) {
+        foreach ($this->files as $file) {
             if ($id == $file->id) {
-                if (Storage::delete('private_uploads/imports/'.$file->file_path)) {
+                if (Storage::delete('private_uploads/imports/' . $file->file_path)) {
                     $file->delete();
 
                     $this->message = trans('admin/hardware/message.import.file_delete_success');
@@ -560,10 +554,20 @@ class Importer extends Component
         return Import::orderBy('id', 'desc')->get();
     }
 
+    #[Computed]
+    public function activeFile()
+    {
+        if ($this->activeFileId) {
+            return Import::find($this->activeFileId);
+        }
+
+        return null;
+    }
+
     public function render()
     {
         return view('livewire.importer')
-                ->extends('layouts.default')
-                ->section('content');
+            ->extends('layouts.default')
+            ->section('content');
     }
 }

@@ -120,7 +120,7 @@
 
                                     @foreach($this->files as $currentFile)
 
-                                    		<tr style="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'warning' : '' }}">
+                                    		<tr style="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
@@ -129,14 +129,14 @@
                                                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
-                                                    <a href="#" wire:click.prevent="$set('activeFile',null)">
+                                                    <a href="#" wire:click.prevent="$set('activeFileId',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                                     </a>
                                     			</td>
                                     		</tr>
 
-                                            @if( $currentFile && $activeFile && ($currentFile->id == $activeFile->id))
+                                            @if( $currentFile && $this->activeFile && ($currentFile->id == $this->activeFile->id))
                                                 <tr class="warning">
                                                     <td colspan="4">
 
@@ -233,9 +233,9 @@
                                                                                     ])
                                                                                 }}
                                                                             </div>
-									                                    @if (($activeFile->first_row) && (array_key_exists($index, $activeFile->first_row)))
+									                                    @if (($this->activeFile->first_row) && (array_key_exists($index, $this->activeFile->first_row)))
                                                                             <div class="col-md-5">
-                                                                                <p class="form-control-static">{{ str_limit($activeFile->first_row[$index], 50, '...') }}</p>
+                                                                                <p class="form-control-static">{{ str_limit($this->activeFile->first_row[$index], 50, '...') }}</p>
                                                                             </div>
                                                                         @else
                                                                             @php
@@ -251,7 +251,7 @@
 
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click.prevent="$set('activeFileId',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
                                                                         <button type="submit" class="btn btn-primary col-md-5" id="import">Import</button>
@@ -267,7 +267,7 @@
                                                             @else
                                                                 <div class="form-group col-md-10">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click.prevent="$set('activeFileId',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                 </div>
                                                             @endif {{-- end of if ... $typeOfImport --}}
@@ -388,7 +388,7 @@
                             }
 
                         }
-                        $wire.$set('activeFile', null); //$wire.$set('hideDetails')
+                        $wire.$set('activeFileId', null); //$wire.$set('hideDetails')
                     });
                 })
                 return false;
