@@ -523,23 +523,22 @@ class Importer extends Component
 
     public function destroy($id)
     {
-        // TODO: why don't we just do File::find($id)? This seems dumb.
-        foreach ($this->files as $file) {
-            if ($id == $file->id) {
-                if (Storage::delete('private_uploads/imports/' . $file->file_path)) {
-                    $file->delete();
+        $this->authorize('import');
 
-                    $this->message = trans('admin/hardware/message.import.file_delete_success');
-                    $this->message_type = 'success';
-                    return;
-                } else {
-                    $this->message = trans('admin/hardware/message.import.file_delete_error');
-                    $this->message_type = 'danger';
-                }
-            }
+        $import = Import::findOrFail($id);
+
+        if (Storage::delete('private_uploads/imports/' . $import->file_path)) {
+            $import->delete();
+            $this->message = trans('admin/hardware/message.import.file_delete_success');
+            $this->message_type = 'success';
+
+            unset($this->files);
+
+            return;
         }
 
-        unset($this->files);
+        $this->message = trans('admin/hardware/message.import.file_delete_error');
+        $this->message_type = 'danger';
     }
 
     public function clearMessage()
