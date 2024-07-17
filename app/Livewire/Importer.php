@@ -525,7 +525,16 @@ class Importer extends Component
     {
         $this->authorize('import');
 
-        $import = Import::findOrFail($id);
+        $import = Import::find($id);
+
+        // Check that the import wasn't deleted after while page was already loaded...
+        if (!$import) {
+            // @todo: improve error message
+            $this->message = trans('admin/hardware/message.import.file_delete_error');
+            $this->message_type = 'danger';
+
+            return;
+        }
 
         if (Storage::delete('private_uploads/imports/' . $import->file_path)) {
             $import->delete();
