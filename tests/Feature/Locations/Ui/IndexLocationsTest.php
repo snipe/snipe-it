@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\AssetModels\Ui;
+namespace Tests\Feature\Locations\Ui;
 
 use App\Models\User;
 use Tests\TestCase;
