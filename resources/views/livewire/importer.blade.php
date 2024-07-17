@@ -340,10 +340,10 @@
                     // console.warn("Here is the mappings:")
                     // console.dir(mappings)
                     // console.warn("Uh, active file id is, I guess: "+$wire.$get('activeFile.id'))
-                    var this_file = $wire.$get('file_id'); // okay, I actually don't know what I'm doing here.
+                    var file_id = $wire.$get('activeFileId');
                     $.post({
                         {{-- I want to do something like: route('api.imports.importFile', $activeFile->id) }} --}}
-                        url: "api/v1/imports/process/"+this_file, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
+                        url: "api/v1/imports/process/"+file_id, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
                         contentType: 'application/json',
                         data: JSON.stringify({
                             'import-update': !!$wire.$get('update'),

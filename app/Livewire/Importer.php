@@ -30,8 +30,6 @@ class Importer extends Component
     public $send_welcome;
     public $run_backup;
     public $field_map; // we need a separate variable for the field-mapping, because the keys in the normal array are too complicated for Livewire to understand
-    // @todo: remove the need for this by using $activeFileId
-    public $file_id; // TODO: I can't figure out *why* we need this, but it really seems like we do. I can't seem to pull the id from the activeFile for some reason?
 
     // Make these variables public - we set the properties in the constructor so we can localize them (versus the old static arrays)
     public $accessories_fields;
@@ -515,7 +513,6 @@ class Importer extends Component
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
             }
         }
-        $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
 
