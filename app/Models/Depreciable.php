@@ -67,7 +67,7 @@ class Depreciable extends SnipeModel
      * @return float|int
      */
     public function getLinearDepreciatedValue() // TODO - for testing it might be nice to have an optional $relative_to param here, defaulted to 'now'
-    {  ;
+    {
         if (($this->get_depreciation()) && ($this->purchase_date)) {
             $months_passed = ($this->purchase_date->diff(now())->m)+($this->purchase_date->diff(now())->y*12);
         } else {
@@ -76,7 +76,7 @@ class Depreciable extends SnipeModel
 
         if ($months_passed >= $this->get_depreciation()->months){
             //if there is a floor use it
-            if(!$this->get_depreciation()->depreciation_min == null) {
+            if((!$this->get_depreciation()->depreciation_min) === null) {
 
                 $current_value = $this->calculateDepreciation();
 
