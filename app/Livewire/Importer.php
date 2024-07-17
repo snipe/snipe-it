@@ -528,6 +528,7 @@ class Importer extends Component
         $import = Import::find($id);
 
         // Check that the import wasn't deleted after while page was already loaded...
+        // @todo: next up...handle the file being missing for other interactions...for example switching the import type
         if (!$import) {
             // @todo: improve error message
             $this->message = trans('admin/hardware/message.import.file_delete_error');
@@ -535,8 +536,6 @@ class Importer extends Component
 
             return;
         }
-
-        // @todo: next up...handle the file being missing for other interactions...
 
         if (Storage::delete('private_uploads/imports/' . $import->file_path)) {
             $import->delete();
