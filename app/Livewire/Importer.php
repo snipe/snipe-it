@@ -529,8 +529,7 @@ class Importer extends Component
         // for example having an import open in two tabs, deleting it, and then changing
         // the import type in the other tab. The error message below wouldn't display in that case.
         if (!$import) {
-            // @todo: improve error message
-            $this->message = trans('admin/hardware/message.import.file_delete_error');
+            $this->message = trans('admin/hardware/message.import.file_already_deleted');
             $this->message_type = 'danger';
 
             return;
