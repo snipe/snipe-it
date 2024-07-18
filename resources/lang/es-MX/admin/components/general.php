@@ -8,9 +8,9 @@ return array(
     'create'                             => 'Crear componente',
     'edit'                             => 'Editar componente',
     'date'					=> 'Fecha de compra',
-    'order'					=> 'Nùmero de orden',
+    'order'					=> 'Número de orden',
     'remaining' 			             => 'Restante',
     'total' 			                 => 'Total',
     'update'                            => 'Actualizar Componente',
-    'checkin_limit'            => 'La cantidad introducida debe ser igual o menor que :assigned_qty'
+    'checkin_limit'            => 'La cantidad devuelta debe ser igual o menor que :assigned_qty'
 );

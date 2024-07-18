@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> 'crwdns1173:0crwdne1173:0',
     'does_not_exist' 	=> 'crwdns740:0crwdne740:0',
+    'does_not_exist_var'=> 'crwdns12188:0crwdne12188:0',
+    'no_tag' 	        => 'crwdns12190:0crwdne12190:0',
     'does_not_exist_or_not_requestable' => 'crwdns6581:0crwdne6581:0',
     'assoc_users'	 	=> 'crwdns741:0crwdne741:0',
+    'warning_audit_date_mismatch' 	=> 'crwdns12192:0crwdne12192:0',
 
     'create' => [
         'error'   		=> 'crwdns742:0crwdne742:0',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'crwdns744:0crwdne744:0',
         'success' 			=> 'crwdns745:0crwdne745:0',
+        'encrypted_warning' => 'crwdns12168:0crwdne12168:0',
         'nothing_updated'	=>  'crwdns1186:0crwdne1186:0',
         'no_assets_selected'  =>  'crwdns6810:0crwdne6810:0',
+        'assets_do_not_exist_or_are_invalid' => 'crwdns12132:0crwdne12132:0',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'crwdns1906:0crwdne1906:0',
+        'error'   		=> 'crwdns12194:0crwdne12194:0',
         'success' 		=> 'crwdns1907:0crwdne1907:0',
     ],
 

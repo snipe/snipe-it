@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utleverbar.
                         Oppdater eiendelsstatus hvis situasjonen har endret seg.',
     'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Eiendelen eksisterer ikke eller kan ikke forespørres.',
     'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Eiendelen ble ikke opprettet, prøv igjen :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 			=> 'Oppdatering av eiendel vellykket.',
+        'encrypted_warning' => 'Eiendel er oppdatert, men kryptert tilpassede felter var ikke grunnet tillatelser',
         'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
         'no_assets_selected'  =>  'Ingen felter er valgt, så ingenting ble endret.',
+        'assets_do_not_exist_or_are_invalid' => 'Valgte eiendeler kan ikke oppdateres.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit var mislykket. Prøv på nytt.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Asset audit ble logget.',
     ],
 

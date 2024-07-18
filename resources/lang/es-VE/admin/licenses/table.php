@@ -4,10 +4,11 @@ return array(
 
     'assigned_to'   	=> 'Asignado A',
     'checkout'   		=> 'Registrado / Asignado',
+    'deleted_at'        => 'Eliminado el',
     'id'      			=> 'ID',
-    'license_email'   	=> 'Correo Electrónico de la Licencia',
+    'license_email'   	=> 'Email de licencia',
     'license_name'   	=> 'Licenciado A',
-    'purchase_date'   	=> 'Fecha de Compra',
+    'purchase_date'   	=> 'Fecha de compra',
     'purchased'   		=> 'Comprado',
     'seats'   			=> 'Puestos',
     'hardware'   		=> 'Hardware',

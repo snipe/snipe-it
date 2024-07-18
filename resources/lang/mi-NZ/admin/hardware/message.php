@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Warning: </strong> Kua tohua tenei taonga i te mea kaore i te rongonui. Mena kua hurihia tenei mana, whakahouhia te mana o te taonga.',
     'does_not_exist' 	=> 'Kaore he tahua.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Kei te tirohia tenei taonga i tetahi kaiwhakamahi me te kore e taea te muku. Tirohia koa te taonga i te tuatahi, a ka ngana ki te muku ano.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Kaore i hangaia te tahua, tēnā whakamātau anō. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Kāore i te whakahouhia te tahua, tēnā whakamātau anō',
         'success' 			=> 'Kua whakahoutia te tahua.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Kaore i whiriwhiria he mahinga, na reira kaore i whakahoutia.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Kaore i te angitu te arotake o te tahua. Tena ngana ano.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Kua pai te takiuru o te kaute.',
     ],
 

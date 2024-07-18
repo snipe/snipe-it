@@ -1,11 +1,11 @@
 <?php
 return array(
-    'companies' => 'Kompanijos',
-    'create'    => 'Sukurti kompaniją',
-    'email'     => 'Company Email',
-    'title'     => 'Kompanija',
-    'phone'     => 'Company Phone',
-    'update'    => 'Atnaujinti kompaniją',
-    'name'      => 'Kompanijos pavadinimas',
+    'companies' => 'Įmonės',
+    'create'    => 'Sukurti įmonę',
+    'email'     => 'Įmonės el. paštas',
+    'title'     => 'Įmonė',
+    'phone'     => 'Įmonės telefonas',
+    'update'    => 'Atnaujinti įmonę',
+    'name'      => 'Įmonės pavadinimas',
     'id'        => 'ID',
 );

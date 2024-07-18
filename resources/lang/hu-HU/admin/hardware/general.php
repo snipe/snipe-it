@@ -16,7 +16,7 @@ return [
     'edit'  					=> 'Eszköz módosítása',
     'model_deleted'  			=> 'Ennek az eszköznek a modellje törölve lett. Elösszőr a modellt vissza kell állítani, utánna lehet csak az eszközt visszaállítani.',
     'model_invalid'             => 'Ennek az eszköznek a modellje érvénytelen.',
-    'model_invalid_fix'         => 'Az eszközt módosítani kell a javításához, mielőtt megkísérli a kiadását vagy visszavételét.',
+    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'lehívási',
     'requested'				    => 'Kérve',
     'not_requestable'           => 'Nem kérhető',

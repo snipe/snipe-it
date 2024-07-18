@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite  ei ole käytettävävissä.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Tätä laitetta ei ole tai se ei ole pyydettävissä.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Laitetta ei luotu, yritä uudelleen. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Laitetta ei päivitetty, yritä uudelleen',
         'success' 			=> 'Laite päivitetty onnistuneesti.',
+        'encrypted_warning' => 'Laite päivitettiin onnistuneesti, mutta salatut mukautetut kentät eivät johtuneet käyttöoikeuksista',
         'nothing_updated'	=>  'Mitään kenttiä ei valittu, joten mitään ei päivitetty.',
         'no_assets_selected'  =>  'Laitetta ei ollut valittuna, joten mitään ei muutettu.',
+        'assets_do_not_exist_or_are_invalid' => 'Valittuja sisältöjä ei voi päivittää.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Laitteen tarkastus epäonnistui. Yritä uudelleen.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Laitteen tarkastus kirjattu.',
     ],
 

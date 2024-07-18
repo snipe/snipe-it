@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class CheckForTwoFactor
@@ -38,21 +38,21 @@ class CheckForTwoFactor
         if ($settings = Setting::getSettings()) {
             if (Auth::check() && ($settings->two_factor_enabled != '')) {
                 // This user is already 2fa-authed
-                if ($request->session()->get('2fa_authed')==Auth::user()->id) {
+                if ($request->session()->get('2fa_authed')==auth()->id()) {
                     return $next($request);
                 }
 
                 // Two-factor is optional and the user has NOT opted in, let them through
-                if (($settings->two_factor_enabled == '1') && (Auth::user()->two_factor_optin != '1')) {
+                if (($settings->two_factor_enabled == '1') && (auth()->user()->two_factor_optin != '1')) {
                     return $next($request);
                 }
 
                 // Otherwise make sure they're enrolled and show them the 2FA code screen
-                if ((Auth::user()->two_factor_secret != '') && (Auth::user()->two_factor_enrolled == '1')) {
-                    return redirect()->route('two-factor')->with('info', 'Please enter your two-factor authentication code.');
+                if ((auth()->user()->two_factor_secret != '') && (auth()->user()->two_factor_enrolled == '1')) {
+                    return redirect()->route('two-factor')->with('info', trans('auth/message.two_factor.enter_two_factor_code'));
                 }
 
-                return redirect()->route('two-factor-enroll')->with('success', 'Please enroll a device in two-factor authentication.');
+                return redirect()->route('two-factor-enroll')->with('success', trans('auth/message.two_factor.please_enroll'));
             }
         }
 

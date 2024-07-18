@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Предупредување:</strong> Ова основно средство е означено како нераспоредливо. Ако овој статус е променет, ве молиме да го ажурирате статусот на средството.',
     'does_not_exist' 	=> 'Основното средство не постои.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ова средство е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да го избришете. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Основното средство не е креирано, обидете се повторно. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Основното средство не е ажурирано, обидете се повторно',
         'success' 			=> 'Основното средство е успешно ажурирано.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Не беа избрани полиња, затоа ништо не беше ажурирано.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Ревизијата на основни средства беше неуспешна. Обидете се повторно.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Ревизијата на основни средства е логирана.',
     ],
 

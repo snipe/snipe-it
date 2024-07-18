@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\Helper;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Support\Facades\Log;
 
 
 /**
@@ -133,7 +134,7 @@ class Setting extends Model
 
             return $usercount > 0 && $settingsCount > 0;
         } catch (\Throwable $th) {
-            \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
+            Log::debug('User table and settings table DO NOT exist or DO NOT have records');
             // Catch the error if the tables dont exit
             return false;
         }

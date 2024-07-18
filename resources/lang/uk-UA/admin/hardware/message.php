@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Попередження: </strong> цей актив позначено як такий, що наразі неможливо розгорнути.
                          Якщо цей статус змінився, оновіть статус активу.',
     'does_not_exist' 	=> 'Медіафайл не існує.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Цей актив не існує або його не можна запитувати.',
     'assoc_users'	 	=> 'Цей актив в даний час відмічений користувачу і не може бути видалений. Спочатку перевірте активи, а потім спробуйте видалити знову. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Актив не був створений, будь ласка, спробуйте ще раз :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Актив не був оновлений, будь ласка, спробуйте ще раз',
         'success' 			=> 'Актив успішно оновлено.',
+        'encrypted_warning' => 'Актив успішно оновлений, але зашифровані користувальницькі поля не були із-за дозволів',
         'nothing_updated'	=>  'Не було обрано жодного поля, тому нічого не було оновлено.',
         'no_assets_selected'  =>  'Не було обрано медіафайли, тому нічого не було змінено.',
+        'assets_do_not_exist_or_are_invalid' => 'Вибрані медіафайли не можуть бути оновлені.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Помилка аудиту активу. Будь ласка, спробуйте ще раз.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Активу успішно зараховано журнал.',
     ],
 

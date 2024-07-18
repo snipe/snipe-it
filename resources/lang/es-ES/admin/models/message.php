@@ -12,7 +12,7 @@ return array(
     'create' => array(
         'error'   => 'Modelo no creado, Intentalo de nuevo.',
         'success' => 'Modelo creado.',
-        'duplicate_set' => 'Un modelo de activo con ese nombre, fabricante y número de modelo ya existe.',
+        'duplicate_set' => 'Ya existe un modelo de equipo con el mismo nombre, fabricante y número de modelo.',
     ),
 
     'update' => array(
@@ -21,8 +21,8 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de querer eliminar el Modelo?',
-        'error'   => 'Ha habido un problema al eliminar el Modelo. Intentalo de nuevo.',
+        'confirm'   => '¿Está seguro de que desea eliminar este modelo de activo?',
+        'error'   => 'Hubo un problema eliminando el modelo. Por favor, inténtelo de nuevo.',
         'success' => 'Modelo eliminado.'
     ),
 

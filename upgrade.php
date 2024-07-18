@@ -10,6 +10,12 @@ function url_get_contents ($Url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $Url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // If we're on windows, make sure we can load intermediate certificates in
+    // weird corporate environments.
+    // See:  https://github.com/curl/curl/commit/2d6333101a71129a6a802eb93f84a5ac89e34479
+    if (PHP_OS == "WINNT"){
+        curl_setopt($ch, CURLOPT_SSL_OPTIONS, CURLSSLOPT_NATIVE_CA);
+    }
     $output = curl_exec($ch);
     curl_close($ch);
     return $output;
@@ -19,6 +25,7 @@ $app_environment = 'develop';
 $skip_php_checks = false;
 $branch = 'master';
 $branch_override = false;
+$no_interactive = false;
 
 // Check for branch or other overrides
 if ($argc > 1){
@@ -31,6 +38,9 @@ if ($argc > 1){
                 $arg++;
                 $branch = $argv[$arg];
                 $branch_override = true;
+                break;
+            case '--no-interactive':
+                $no_interactive = true;
                 break;
             default: // for legacy support from before we started using --branch
                 $branch = $argv[$arg];
@@ -55,8 +65,8 @@ echo "- clear out old cache settings\n\n";
 
 // Fetching most current upgrade requirements from github. Read more here: https://github.com/snipe/snipe-it/pull/14127
 $remote_requirements_file = "https://raw.githubusercontent.com/snipe/snipe-it/$branch/.upgrade_requirements.json";
-$upgrade_requirements = json_decode(url_get_contents($remote_requirements_file), true);
-
+$upgrade_requirements_raw = url_get_contents($remote_requirements_file);
+$upgrade_requirements = json_decode($upgrade_requirements_raw, true);
 if (! $upgrade_requirements) {
     if(!$skip_php_checks){
         echo "\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\n\n";
@@ -64,6 +74,14 @@ if (! $upgrade_requirements) {
             echo "NOTE: You passed a custom branch: $branch\n";
             echo "   If the above URL doesn't work, that may be why. Please check you branch spelling/extistance\n\n";
         }
+
+        if (json_last_error()) {
+            print "JSON DECODE ERROR DETECTED:\n";
+            print json_last_error_msg() . "\n\n";
+            print "Raw curl output:\n";
+            print $upgrade_requirements_raw . "\n\n";
+        }
+
         echo "We suggest correcting this, but if you can't,  please verify that your requirements conform to those at that url.\n\n";
         echo " -- DANGER -- DO AT YOUR OWN RISK --\n";
         echo "      IF YOU ARE SURE, re-run this script with --skip-php-compatibility-checks to skip this check.\n";
@@ -81,7 +99,13 @@ if($upgrade_requirements){
     echo "Found PHP requirements, will check for PHP > $php_min_works and < $php_max_wontwork\n";
 }
 // done fetching requirements
-$yesno = readline("\nProceed with upgrade? [Y/n]: ");
+
+if (!$no_interactive) {
+    $yesno = readline("\nProceed with upgrade? [y/N]: ");
+} else {
+    $yesno = "yes";
+}
+
 if ($yesno == "yes" || $yesno == "YES" ||$yesno == "y" ||$yesno == "Y"){
     # don't do anything
 } else {
@@ -238,6 +262,7 @@ $required_exts_array =
     [
         'bcmath',
         'curl',
+        'exif',
         'fileinfo',
         'gd|imagick',
         'json',
@@ -271,17 +296,22 @@ foreach ($required_exts_array as $required_ext) {
             // Split the either/ors by their pipe and put them into an array
             $require_either = explode("|", $required_ext);
 
+            $has_one_required_ext = false;
+
             // Now loop through the either/or array and see whether any of the options match
             foreach ($require_either as $require_either_value) {
 
                 if (in_array($require_either_value, $loaded_exts_array)) {
                     $ext_installed .=  '√ '.$require_either_value." is installed!\n";
-                    break;
-                // If no match, add it to the string for errors
-                } else {
-                    $ext_missing .=  '✘ MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
+                    $has_one_required_ext = true;
                     break;
                 }
+            }
+
+            // If no match, add it to the string for errors
+            if (!$has_one_required_ext) {
+                $ext_missing .= '✘ MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
+                break;
             }
 
         // If this isn't an either/or option, just add it to the string of errors conventionally

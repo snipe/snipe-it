@@ -32,12 +32,18 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
 
     $idclause = (!is_null($id)) ? $id : '';
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%" '.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_country').'</option>';
 
     // Pull the autoglossonym array from the localizations translation file
     foreach (trans('localizations.countries') as $abbr => $country) {
-        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected) == strtoupper($abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+
+        // We have to handle it this way to handle deprecication warnings since you can't strtoupper on null
+        if ($abbr!='') {
+            $abbr = strtoupper($abbr);
+        }
+
+        $select .= '<option value="'.$abbr.'"'.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
     }
 
     $select .= '</select>';
@@ -184,6 +190,7 @@ Form::macro('username_format', function ($name = 'username_format', $selected = 
         'lastname_firstinitial' => trans('general.lastname_firstinitial'),
         'firstnamelastname' => trans('general.firstnamelastname'),
         'firstnamelastinitial' => trans('general.firstnamelastinitial'),
+        'lastname.firstname' => trans('general.lastnamefirstname'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';

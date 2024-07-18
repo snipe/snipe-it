@@ -49,7 +49,7 @@ class Settings
         ]);
     }
 
-    public function disableWebhook(): Settings
+    public function disableSlackWebhook(): Settings
     {
         return $this->update([
             'webhook_selected' => '',

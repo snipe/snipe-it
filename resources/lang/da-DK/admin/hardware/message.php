@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Advarsel: </strong> Dette aktiv er blevet markeret som uudnytteligt. Hvis denne status er ændret, skal du opdatere aktivstatus.',
     'does_not_exist' 	=> 'Asset eksisterer ikke.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Dette aktiv findes ikke eller er ikke påkrævet.',
     'assoc_users'	 	=> 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Akten blev ikke oprettet, prøv igen. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Akten blev ikke opdateret, prøv igen',
         'success' 			=> 'Asset opdateret med succes.',
+        'encrypted_warning' => 'Asset opdateret med succes, men krypterede brugerdefinerede felter skyldtes ikke tilladelser',
         'nothing_updated'	=>  'Ingen felter blev valgt, så intet blev opdateret.',
         'no_assets_selected'  =>  'Ingen aktiver blev valgt, så intet blev opdateret.',
+        'assets_do_not_exist_or_are_invalid' => 'Valgte aktiver kan ikke opdateres.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Assetrevision mislykkedes. Prøv igen.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Asset audit succesfuldt logget.',
     ],
 

@@ -3,8 +3,8 @@
 return array(
 
     'asset'             => 'Equipo',
-    'checkin'           => 'Entrada',
-    'create'            => 'Crear Licencia',
+    'checkin'           => 'Devolver',
+    'create'            => 'Crear licencia',
     'expiration'        => 'Fecha de caducidad',
     'license_key'       => 'Clave del producto',
     'maintained'        => 'Mantenido',
@@ -14,9 +14,9 @@ return array(
     'reassignable'      => 'Reasignable',
     'remaining_seats'   => 'Asientos restantes',
     'seats'             => 'Asientos',
-    'termination_date'  => 'Fecha de Terminación',
+    'termination_date'  => 'Fecha de finalización',
     'to_email'          => 'Licenciado a Email',
     'to_name'           => 'Licenciado a Nombre',
     'update'            => 'Actualizar Licencia',
-    'checkout_help'     => 'Debe comprobar una licencia a un activo de hardware o a una persona. Puede seleccionar ambos, pero el propietario del activo debe coincidir con la persona a la que está comprobando el activo.'
+    'checkout_help'     => 'Debe asignar una licencia a un activo de hardware o a una persona. Puede seleccionar ambos, pero el propietario del activo debe coincidir con la persona a la que está asignado el activo.'
 );

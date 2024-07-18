@@ -68,7 +68,7 @@ return [
     'password' => 'Lozinka:',
     'password_reset' => 'Ponovno postavljanje zaporke',
     'read_the_terms' => 'Pročitajte uvjete upotrebe u nastavku.',
-    'read_the_terms_and_click' => 'Please read the terms of use below, and click on the link at the bottom to confirm that you read and agree to the terms of use, and have received the asset.',
+    'read_the_terms_and_click' => 'Molimo pročitajte uvjete korištenja u nastavku i kliknite na poveznicu na dnu kako biste potvrdili da ste pročitali i da se slažete s uvjetima korištenja te da ste primili imovinu.',
     'requested' => 'Traženi:',
     'reset_link' => 'Vaša lozinka resetiraj vezu',
     'reset_password' => 'Kliknite ovdje da biste poništili zaporku:',

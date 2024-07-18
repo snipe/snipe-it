@@ -3,13 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Asset;
-use App\Models\License;
-use App\Models\Recipients;
+use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
-use App\Notifications\ExpiringAssetsNotification;
 use App\Notifications\SendUpcomingAuditNotification;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
 class SendUpcomingAuditReport extends Command
@@ -46,39 +44,24 @@ class SendUpcomingAuditReport extends Command
     public function handle()
     {
         $settings = Setting::getSettings();
+        $interval = $settings->audit_warning_days ?? 0;
+        $today = Carbon::now();
+        $interval_date = $today->copy()->addDays($interval);
 
-        if (($settings->alert_email != '') && ($settings->audit_warning_days) && ($settings->alerts_enabled == 1)) {
+        $assets = Asset::whereNull('deleted_at')->DueOrOverdueForAudit($settings)->orderBy('assets.next_audit_date', 'desc')->get();
+        $this->info($assets->count().' assets must be audited in on or before '.$interval_date.' is deadline');
 
+
+        if (($assets) && ($assets->count() > 0) && ($settings->alert_email != '')) {
             // Send a rollup to the admin, if settings dictate
-            $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
-                return new \App\Models\Recipients\AlertRecipient($item);
+            $recipients = collect(explode(',', $settings->alert_email))->map(function ($item) {
+                return new AlertRecipient($item);
             });
 
-            // Assets due for auditing
+            $this->info('Sending Admin SendUpcomingAuditNotification to: '.$settings->alert_email);
+            \Notification::send($recipients, new SendUpcomingAuditNotification($assets, $settings->audit_warning_days));
 
-            $assets = Asset::whereNotNull('next_audit_date')
-                    ->DueOrOverdueForAudit($settings)
-                    ->orderBy('last_audit_date', 'asc')->get();
-
-            if ($assets->count() > 0) {
-                $this->info(trans_choice('mail.upcoming-audits', $assets->count(),
-                    ['count' => $assets->count(), 'threshold' => $settings->audit_warning_days]));
-                \Notification::send($recipients, new SendUpcomingAuditNotification($assets, $settings->audit_warning_days));
-                $this->info('Audit report sent to '.$settings->alert_email);
-            } else {
-                $this->info('No assets to be audited. No report sent.');
-            }
-        } elseif ($settings->alert_email == '') {
-            $this->error('Could not send email. No alert email configured in settings');
-        } elseif (! $settings->audit_warning_days) {
-            $this->error('No audit warning days set in Admin Notifications. No mail will be sent.');
-        } elseif ($settings->alerts_enabled != 1) {
-            $this->info('Alerts are disabled in the settings. No mail will be sent');
-        } else {
-            $this->error('Something went wrong. :( ');
-            $this->error('Admin Notifications Email Setting: '.$settings->alert_email);
-            $this->error('Admin Audit Warning Setting: '.$settings->audit_warning_days);
-            $this->error('Admin Alerts Emnabled: '.$settings->alerts_enabled);
         }
+
     }
 }

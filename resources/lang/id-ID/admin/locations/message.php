@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Lokasi tidak ada.',
-    'assoc_users'	 => 'Lokasi saat ini dikaitkan dengan setidaknya oleh satu pengguna dan tidak dapat dihapus. Perbarui pengguna Anda yang tidak ada referensi dari lokasi ini dan coba lagi. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'Lokasi saat ini dikaitkan dengan setidaknya oleh satu aset dan tidak dapat dihapus. Perbarui aset Anda yang tidak ada referensi dari lokasi ini dan coba lagi. ',
     'assoc_child_loc'	 => 'Lokasi saat ini digunakan oleh induk salah satu dari turunan lokasi dan tidak dapat di hapus. Mohon perbarui lokasi Anda ke yang tidak ada referensi dengan lokasi ini dan coba kembali. ',
     'assigned_assets' => 'Aset yang Ditetapkan',

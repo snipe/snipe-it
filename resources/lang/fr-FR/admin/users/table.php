@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Les informations de connexion ne peuvent pas être modifiés sur cette installation .',
     'manager' 				=> 'Responsable',
     'managed_locations'     => 'Emplacements gérés',
+    'managed_users'         => 'Utilisateurs gérés',
     'name' 					=> 'Nom',
     'nogroup'               => 'Aucun groupe n\'a encore été créé. Pour en ajouter un, visitez : ',
     'notes'                 => 'Notes',

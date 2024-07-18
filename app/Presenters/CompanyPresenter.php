@@ -25,7 +25,7 @@ class CompanyPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'switchable' => true,
+                'switchable' => false,
                 'title' => trans('admin/companies/table.name'),
                 'visible' => true,
                 'formatter' => 'companiesLinkFormatter',

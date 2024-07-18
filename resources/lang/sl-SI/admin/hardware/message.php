@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Opozorilo: </strong> To sredstvo je bilo označeno kot trenutno nerazdeljeno. Če se je ta status spremenil, posodobite status sredstva.',
     'does_not_exist' 	=> 'Sredstvo ne obstaja.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'To sredstvo je trenutno izdano uporabniku in ga ni mogoče izbrisati. Najprej preverite sredstvo in poskusite znova izbrisati. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Sredstvo ni bilo ustvarjeno, poskusite znova. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Sredstvo ni bilo posodobljeno, poskusite znova',
         'success' 			=> 'Sredstvo je uspešno posodobljeno.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Nobeno polje ni bilo izbrana, zato nebo nič posodobljeno.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Revizija sredstva je bila neuspešna. Prosim poskusite ponovno.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Revizija sredstva je uspešno zabeležena.',
     ],
 

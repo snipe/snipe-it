@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Heerka qiimo-dhaca ma jiro.',
+    'assoc_users'	 => 'Qiimo dhacan hadda waxa lala xidhiidhiyaa hal ama dhawr nooc oo lama tirtiri karo. Fadlan tirtir moodooyinka, ka dibna isku day mar kale tirtir. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Qiimo dhaca lama abuurin, fadlan isku day mar kale. :(',
+        'success' => 'Qiimo-dhimis ayaa loo sameeyay si guul leh. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Fasalka qiima dhaca lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Heerka qiima dhaca ayaa si guul leh loo cusboonaysiiyay'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Ma hubtaa inaad rabto inaad tirtirto heerkan qiimo-dhaca?',
+        'error'   => 'Waxaa jirtay arrin lagu tirtirayo heerka qiima dhaca. Fadlan isku day mar kale',
+        'success' => 'Heerka qiima dhimista ayaa si guul leh loo tirtiray'
     )
 
 );

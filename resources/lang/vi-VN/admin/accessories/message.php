@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Phụ kiện [:id] Không tồn tại.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Phụ kiện không được tìm thấy.',
     'assoc_users'	 => 'Phụ kiện này hiện có :count cái đã giao cho người dùng. Bạn hãy nhập lại vào trong phần phụ kiện và thử lại lần nữa. ',
 
     'create' => array(
@@ -25,7 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Phụ kiện chưa được xuất kho. Bạn hãy thử lại',
         'success' 		=> 'Phụ kiện được xuất kho thành công.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Không có sẵn phụ kiện để xuất. Hãy kiểm tra số lượng có sẵn',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
     ),
 

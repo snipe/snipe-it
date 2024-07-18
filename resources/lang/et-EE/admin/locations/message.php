@@ -3,11 +3,11 @@
 return array(
 
     'does_not_exist' => 'Asukohta ei eksisteeri.',
-    'assoc_users'	 => 'Selle asukohaga on seotud vähemalt üks kasutaja ja seda ei saa kustutada. Palun uuenda oma kasutajaid nii, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
     'assoc_assets'	 => 'Selle asukohaga on seotud vähemalt üks vahend ja seda ei saa kustutada. Palun uuenda oma vahendeid, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
     'assoc_child_loc'	 => 'Sel asukohal on hetkel all-asukohti ja seda ei saa kustutada. Palun uuenda oma asukohti nii, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
-    'assigned_assets' => 'Assigned Assets',
-    'current_location' => 'Current Location',
+    'assigned_assets' => 'Määratud Varad',
+    'current_location' => 'Praegune asukoht',
 
 
     'create' => array(

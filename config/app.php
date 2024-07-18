@@ -112,7 +112,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en-US',
+    'fallback_locale' => env('FALLBACK_APP_LOCALE', 'en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -201,6 +201,9 @@ return [
 
     'enable_csp' => env('ENABLE_CSP', true),
 
+    'additional_csp_urls' => env('ADDITIONAL_CSP_URLS', ''),
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -239,7 +242,7 @@ return [
     |
     */
 
-    'min_php' => '7.4.0',
+    'min_php' => '8.1.2',
 
 
     /*
@@ -290,7 +293,6 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
-        Fideloper\Proxy\TrustedProxyServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
@@ -309,8 +311,9 @@ return [
         App\Providers\ValidationServiceProvider::class,
 
         /*
-        * Custom service provider
+        * Custom Service Providers...
         */
+        App\Providers\LivewireServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
 

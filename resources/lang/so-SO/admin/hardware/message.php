@@ -2,89 +2,94 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Digniin: </strong> Hantidan waxaa loo calaamadeeyay mid aan hadda la daabul karin.
+                        Haddii heerkan uu isbedelay, fadlan cusboonaysii heerka hantida.',
+    'does_not_exist' 	=> 'Hantidu ma jirto.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_or_not_requestable' => 'Hantidaas ma jirto ama lama codsan karo.',
+    'assoc_users'	 	=> 'Hantidan hadda waa la hubiyay isticmaale lamana tirtiri karo Fadlan marka hore hubi hantida, ka dibna isku day mar kale in aad tirtirto. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'error'   		=> 'Hantida lama abuurin, fadlan isku day mar kale. :(',
+        'success' 		=> 'Hantida loo sameeyay si guul leh :)',
+        'success_linked' => 'Hanti leh sumad :tag si guul leh ayaa loo abuuray. <strong><a href=":link" style="color: white;">Riix halkan si aad u aragto</a></strong>.',
     ],
 
     'update' => [
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'error'   			=> 'Hantida lama cusboonaysiin, fadlan isku day mar kale',
+        'success' 			=> 'Hantida si guul leh ayaa loo cusboonaysiiyay.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
+        'nothing_updated'	=>  'Goobo lama dooran, markaa waxba lama cusboonaysiin.',
+        'no_assets_selected'  =>  'Wax hanti ah lama dooran, markaa waxba lama cusboonaysiin.',
+        'assets_do_not_exist_or_are_invalid' => 'Hantida la xushay lama cusboonaysiin karo.',
     ],
 
     'restore' => [
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'error'   		=> 'Hantidii lama soo celin, fadlan isku day mar kale',
+        'success' 		=> 'Hantida si guul leh ayaa loo soo celiyay.',
+        'bulk_success' 		=> 'Hantida si guul leh ayaa loo soo celiyay.',
+        'nothing_updated'   => 'Wax hanti ah lama dooran, markaa waxba lama soo celin.', 
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'success' 		=> 'Hantidhawrka hantida ayaa si guul leh loo diiwaan geliyay.',
     ],
 
 
     'deletefile' => [
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Faylka lama tirtirin Fadlan isku day mar kale.',
+        'success' => 'Faylka si guul leh waa la tirtiray.',
     ],
 
     'upload' => [
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Faylka lama soo rarin Fadlan isku day mar kale.',
+        'success' => 'Faylka(yada) si guul leh loo soo raray.',
+        'nofiles' => 'Ma aadan dooran wax fayl ah oo la soo geliyo, ama faylka aad isku dayeyso inaad geliyaan waa mid aad u weyn',
+        'invalidfiles' => 'Mid ama in ka badan oo faylashaada ah aad bay u weyn yihiin ama waa nooc faylal ah oo aan la oggolayn. Noocyada faylalka la oggol yahay waa png, gif, jpg, doc, docx, pdf, iyo txt.',
     ],
 
     'import' => [
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => 'Your file has been imported',
-        'file_delete_success'   => 'Your file has been been successfully deleted',
-        'file_delete_error'      => 'The file was unable to be deleted',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'error'                 => 'Alaabta qaar si sax ah uma soo dejin.',
+        'errorDetail'           => 'Alaabta soo socota looma soo dejin khaladaad dartood.',
+        'success'               => 'Faylkaaga waa la soo dejiyay',
+        'file_delete_success'   => 'Faylkaaga si guul leh ayaa loo tirtiray',
+        'file_delete_error'      => 'Faylka waa la tirtiri waayay',
+        'file_missing' => 'Faylka la doortay waa maqan yahay',
+        'header_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah oo ku jira safka madaxa waxa ku jira xarfaha UTF-8 oo khaldan',
+        'content_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah safka koowaad ee nuxurka waxa ku jira xarfo UTF-8 oo khaldan',
     ],
 
 
     'delete' => [
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.',
+        'confirm'   	=> 'Ma hubtaa inaad rabto inaad tirtirto hantidan?',
+        'error'   		=> 'Waxaa jirtay arrin la tirtiray hantida Fadlan isku day mar kale.',
+        'nothing_updated'   => 'Wax hanti ah lama dooran, markaa waxba lama tirtirin.',
+        'success' 		=> 'Hantida si guul leh ayaa loo tirtiray.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list',
+        'error'   		=> 'Hantida lama hubin, fadlan isku day mar kale',
+        'success' 		=> 'Hantida si guul leh ayaa loo hubiyay.',
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale.',
+        'not_available' => 'Hantidaas looma hayo hubin!',
+        'no_assets_selected' => 'Waa inaad liiska ka doorataa ugu yaraan hal hanti',
     ],
 
     'checkin' => [
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Hantida lama hubin, fadlan isku day mar kale',
+        'success' 		=> 'Hantida si guul leh ayaa loo hubiyay.',
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale.',
+        'already_checked_in'  => 'Hantidaas mar horeba waa la hubiyay.',
 
     ],
 
     'requests' => [
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled',
+        'error'   		=> 'Hantida lama codsan, fadlan isku day mar kale',
+        'success' 		=> 'Hantida ayaa si guul leh u codsatay.',
+        'canceled'      => 'Codsiga hubinta si guul leh waa la joojiyay',
     ],
 
 ];

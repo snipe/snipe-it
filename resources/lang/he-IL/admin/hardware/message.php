@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong> אזהרה: </strong> הנכס הזה סומן כבלתי ניתן לפריסה כעת. אם סטטוס זה השתנה, עדכן את סטטוס הנכס.',
     'does_not_exist' 	=> 'הנכס אינו קיים.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'הנכס אינו קיים או לא זמין.',
     'assoc_users'	 	=> 'הנכס הזה מסומן כרגע למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הנכס ולאחר מכן נסה למחוק שוב.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'הנכס לא נוצר, נסה שוב. You',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'הנכס לא עודכן, נסה שוב',
         'success' 			=> 'הנכס עודכן בהצלחה.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'לא נבחרו שדות, ולכן דבר לא עודכן.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'ביקורת הנכסים נכשלה. בבקשה נסה שוב.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'ביקורת נכסים נרשמה בהצלחה.',
     ],
 

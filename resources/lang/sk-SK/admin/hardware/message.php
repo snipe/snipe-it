@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Varovanie: </strong> Tento majetok bol oznáčený ako nepriraditeľný. 
                         Ak došlo k zmene, prosím upravte aktuálny stav majetku.',
     'does_not_exist' 	=> 'Majetok neexistuje.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Tento majetok je práve priradený používateľovi, preto nemôže byť odstránený. Prosim najprv odoberte majetok používateľovi, následne skúste znovu. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Majetok nebol vytvorený, prosím skúste znovu. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Majetok sa nepodarilo upraviť, skúste prosím znovu',
         'success' 			=> 'Majetok bol úspešne upravený.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Neboli vybrané žiadne položky, preto nebolo nič upravené.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Audit majetku bol neúspešný. Prosím skúste znovu.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Audit majetko bol úspešne zaznamenaný.',
     ],
 

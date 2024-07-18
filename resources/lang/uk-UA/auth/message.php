@@ -14,6 +14,8 @@ return array(
         'success'               => 'Ви успішно увійшли в систему.',
         'code_required'         => 'Необхідно вказати двофакторний код.',
         'invalid_code'          => 'Двофакторний код невірний.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

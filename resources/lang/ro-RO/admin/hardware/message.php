@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Warning: </strong> Acest activ a fost marcat ca fiind în prezent nedelimitat. Dacă această stare sa modificat, actualizați starea activelor.',
     'does_not_exist' 	=> 'Activul nu exista.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Acest activ nu există sau nu poate fi solicitat.',
     'assoc_users'	 	=> 'Acest activ este predat catre un utilizator si nu se poate sterge. Va rugam verificati activul, dupa care incercati sa-l stergeti iar. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Activul nu a fost creat, va rugam incercati iar. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Activul nu a fost actualizat, va rugam incercati iar',
         'success' 			=> 'Activul a fost actualizat.',
+        'encrypted_warning' => 'Activă actualizată cu succes, dar câmpurile personalizate criptate nu s-au datorat permisiunilor',
         'nothing_updated'	=>  'Nu au fost selectate câmpuri, deci nimic nu a fost actualizat.',
         'no_assets_selected'  =>  'Nu au fost selectate active, deci nimic nu a fost actualizat.',
+        'assets_do_not_exist_or_are_invalid' => 'Activele selectate nu pot fi actualizate.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Analiza activelor nu a avut succes. Vă rugăm să încercați din nou.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Analiza activelor a fost înregistrată cu succes.',
     ],
 

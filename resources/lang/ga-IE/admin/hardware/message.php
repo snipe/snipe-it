@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Marradh: </strong> Tá an tsócmhainn seo marcáilte mar atá inghníomhaithe faoi láthair. Má d\'athraigh an stádas seo, déan an stádas sócmhainne a nuashonrú.',
     'does_not_exist' 	=> 'Níl sócmhainn ann.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Faoi láthair déanfar an tsócmhainn seo a sheiceáil chuig úsáideoir agus ní féidir é a scriosadh. Déan seiceáil ar an tsócmhainn sa chéad uair, agus déan iarracht ansin scriosadh arís.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Níor cruthaíodh sócmhainn, déan iarracht arís. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Níor tugadh nuashonrú ar an tsócmhainn, déan iarracht arís',
         'success' 			=> 'Nuashonraíodh sócmhainn go rathúil',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Níor roghnaíodh réimsí ar bith, mar sin níor nuashonraíodh aon rud.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Níor éirigh leis an iniúchadh sócmhainne. Arís, le d\'thoil.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Iniúchadh sócmhainne logáilte go rathúil.',
     ],
 

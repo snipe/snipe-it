@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a language',
+    'select_language' => 'Lựa chọn ngôn ngữ',
     'languages' => [
         'en-US'=> 'English, US',
         'en-GB'=> 'English, UK',
@@ -50,6 +50,7 @@ return [
         'sr-CS' => 'Serbian (Latin)',
         'sk-SK'=> 'Slovak',
         'sl-SI'=> 'Slovenian',
+        'so-SO'=> 'Somali',
         'es-ES'=> 'Spanish',
         'es-CO'=> 'Spanish, Colombia',
         'es-MX'=> 'Spanish, Mexico',

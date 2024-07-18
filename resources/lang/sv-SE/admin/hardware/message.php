@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har markerats som omöjlig för närvarande. Om denna status har ändrats uppdaterar du tillgångsstatusen.',
     'does_not_exist' 	=> 'Tillgång existerar inte.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Den tillgången finns inte eller är inte önskvärd.',
     'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Tillgången skapades inte, försök igen. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Tillgången var inte uppdaterad, försök igen',
         'success' 			=> 'Asset uppdaterad framgångsrikt.',
+        'encrypted_warning' => 'Tillgången uppdaterades framgångsrikt, men krypterade anpassade fält berodde inte på behörigheter',
         'nothing_updated'	=>  'Inga fält valdes, så ingenting uppdaterades.',
         'no_assets_selected'  =>  'Inga tillgångar valdes, så ingenting uppdaterades.',
+        'assets_do_not_exist_or_are_invalid' => 'Valda tillgångar kan inte uppdateras.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Inventeringen av tillgången misslyckades. Var god försök igen.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Inventeringen av tillgången har loggats.',
     ],
 

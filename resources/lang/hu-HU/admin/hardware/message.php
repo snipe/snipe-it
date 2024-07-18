@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Figyelem: </strong> Ez az eszköz pillanatnyilag  nem kiadható. Ha ez a helyzet változott, kérjük, frissítse az eszköz állapotát.',
     'does_not_exist' 	=> 'Eszköz nem létezik.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Az eszköz nem létezik vagy nem igényelhető.',
     'assoc_users'	 	=> 'Ez az eszköz jelenleg ki van jelölve egy felhasználónak, és nem törölhető. Kérjük, először ellenőrizze az eszközt, majd próbálja meg újra törölni.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Az eszköz nem jött létre, próbálkozzon újra. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Az eszköz nem frissült, próbálkozzon újra',
         'success' 			=> 'Az eszköz sikeresen frissült.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Nem választottak ki mezőket, így semmi sem frissült.',
         'no_assets_selected'  =>  'Egyetlen eszköz sem volt kiválasztva, így semmi sem frissült.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Az eszközellenőrzés sikertelen volt. Kérlek próbáld újra.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Az eszközellenőrzés sikeresen be van jelentkezve.',
     ],
 

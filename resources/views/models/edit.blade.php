@@ -23,7 +23,7 @@
     <label for="eol" class="col-md-3 control-label">{{ trans('general.eol') }}</label>
     <div class="col-md-3 col-sm-4 col-xs-7">
         <div class="input-group">
-            <input class="form-control" type="text" name="eol" id="eol" value="{{ Request::old('eol', isset($item->eol)) ? $item->eol : ''  }}" />
+            <input class="form-control" type="text" name="eol" id="eol" value="{{ old('eol', isset($item->eol)) ? $item->eol : ''  }}" />
             <span class="input-group-addon">
                 {{ trans('general.months') }}
             </span>

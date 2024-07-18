@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Uwaga: </strong> To aktywo zostało oznaczone jako tymczasowo niemożliwe do wdrożenia.
                         Jeśli jego stan się zmienił, zaktualizuj status aktywa.',
     'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
+    'does_not_exist_var'=> 'Nie znaleziono zasobu o tagu :asset_tag.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Aktywo nie istnieje albo nie można go zażądać.',
     'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Nabytek nie został utworzony, proszę spróbować ponownie. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Nie zaktualizowano nabytku/zasobu, proszę spróbować ponownie',
         'success' 			=> 'Aktualizacja poprawna.',
+        'encrypted_warning' => 'Zasób zaktualizowany pomyślnie, ale zaszyfrowane pola niestandardowe nie były ze względu na uprawnienia',
         'nothing_updated'	=>  'Żadne pole nie zostało wybrane, więc nic nie zostało zmienione.',
         'no_assets_selected'  =>  'Żadne aktywa nie zostały wybrane, więc nic nie zostało zmienione.',
+        'assets_do_not_exist_or_are_invalid' => 'Wybrane zasoby nie mogą zostać zaktualizowane.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Audyt aktywów nie powiódł się. Proszę spróbować ponownie.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Audyt aktywów pomyślnie zarejestrowany.',
     ],
 

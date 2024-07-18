@@ -50,7 +50,7 @@ return [
     'ip'                   => ':attribute debe ser una dirección IP correcta.',
     'ipv4'                 => 'El atributo: debe ser una dirección IPv4 válida.',
     'ipv6'                 => 'El atributo: debe ser una dirección IPv6 válida.',
-    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la empresa',
+    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la compañía',
     'json'                 => 'El atributo: debe ser una cadena JSON válida.',
     'max'                  => [
         'numeric' => ':attribute no debe ser mayor que :max.',
@@ -74,9 +74,9 @@ return [
     'present'              => 'El campo: atributo debe estar presente.',
     'valid_regex'          => 'Este no es un regex válido. ',
     'regex'                => ':attribute formato incorrecto.',
-    'required'             => ':attribute es obligatorio.',
-    'required_if'          => ':attribute es obligatrio cuando :other es :value.',
-    'required_unless'      => 'El campo: atributo es obligatorio a menos que: otro esté en: valores.',
+    'required'             => 'El campo :attribute es obligatorio.',
+    'required_if'          => 'El campo :attribute es obligatorio cuando :other es :value.',
+    'required_unless'      => 'El campo :attribute es obligatorio a menos que :other esté en :values.',
     'required_with'        => ':attribute es obligatrio cuando :values es present.',
     'required_with_all'    => 'El campo: atributo se requiere cuando: los valores están presentes.',
     'required_without'     => ':attribute es obligatrio cuando :values es not present.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'El valor no puede ser negativo'
     ],
+    'checkboxes'           => ':attribute contiene opciones no válidas.',
+    'radio_buttons'        => ':attribute no es válido.',
 
 
     /*
@@ -121,7 +123,7 @@ return [
     'custom' => [
         'alpha_space' => 'El campo: atributo contiene un carácter que no está permitido.',
         'email_array'      => 'Una o más direcciones de correo electrónico no es válida.',
-        'hashed_pass'      => 'Tu contraseña actual es incorrecta',
+        'hashed_pass'      => 'Su contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
         'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido.',
 
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Valor no válido incluido en este campo',
 ];

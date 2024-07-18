@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Внимание: </strong> Этот актив был помечен как выданный.
                         Если этот статус изменился, необходимо его обновить.',
     'does_not_exist' 	=> 'Актив не существует.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Этот актив не существует или не подлежит запросу.',
     'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Актив не был создан, пожалуйста попробуйте снова. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Актив не был изменен, пожалуйста попробуйте снова',
         'success' 			=> 'Актив успешно изменен.',
+        'encrypted_warning' => 'Актив обновлен успешно, но зашифрованные пользовательские поля не были из-за разрешений',
         'nothing_updated'	=>  'Поля не выбраны, нечего обновлять.',
         'no_assets_selected'  =>  'Никакие ресурсы не были выбраны, поэтому ничего не обновлялось.',
+        'assets_do_not_exist_or_are_invalid' => 'Выбранные медиафайлы не могут быть обновлены.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Аудит активов не увенчался успехом. Пожалуйста, попробуйте еще раз.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Аудит успешно выполнен.',
     ],
 

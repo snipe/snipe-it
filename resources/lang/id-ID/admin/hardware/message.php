@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Peringatan: </strong> Aset ini telah di tandai sebagai aset yang tak dapat digunakan.
                         Jika status ini telah berubah, silahkan perbarui status aset.',
     'does_not_exist' 	=> 'Aset tidak ada.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Aset tersebut tidak ada atau tidak dapat di minta.',
     'assoc_users'	 	=> 'Aset ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek aset terlebih dahulu kemudian coba hapus kembali. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Aset gagal di buat, silahkan coba kembali',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Gagal perbarui aset, silahkan coba kembali',
         'success' 			=> 'Sukses perbarui aset.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Tidak ada kolom yang dipilih, jadi tidak ada yang diperbaharui.',
         'no_assets_selected'  =>  'Tidak ada aset yang dipilih, jadi tidak ada yang diperbarui.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Audit aset tidak berhasil. Silahkan coba lagi',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Audit aset berhasil login.',
     ],
 

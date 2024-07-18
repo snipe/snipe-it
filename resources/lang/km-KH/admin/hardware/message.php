@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>ការព្រមាន៖ </strong> ទ្រព្យសកម្មនេះត្រូវបានសម្គាល់ថាមិនអាចប្រើប្រាស់បាននាពេលបច្ចុប្បន្ន។
                          ប្រសិនបើស្ថានភាពនេះត្រូវបានផ្លាស់ប្តូរ សូមធ្វើបច្ចុប្បន្នភាពស្ថានភាពទ្រព្យសម្បត្តិ។',
     'does_not_exist' 	=> 'ទ្រព្យសកម្មមិនមានទេ។',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'ទ្រព្យសកម្មនោះមិនមានទេ ឬមិនអាចស្នើសុំបាន។',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'ទ្រព្យសកម្មមិនត្រូវបានបង្កើតទេ សូមព្យាយាមម្តងទៀត។ :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'ទ្រព្យសកម្មមិនត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ សូមព្យាយាមម្តងទៀត',
         'success' 			=> 'ទ្រព្យសកម្មបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'គ្មាន​វាល​ត្រូវ​បាន​ជ្រើស ដូច្នេះ​មិន​មាន​អ្វី​ត្រូវ​បាន​ធ្វើ​បច្ចុប្បន្នភាព​។',
         'no_assets_selected'  =>  'គ្មានទ្រព្យសម្បត្តិត្រូវបានជ្រើសរើស ដូច្នេះគ្មានអ្វីត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ។',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'សវនកម្មទ្រព្យសកម្មមិនបានជោគជ័យទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'សវនកម្មទ្រព្យសកម្មត្រូវបានកត់ត្រាដោយជោគជ័យ។',
     ],
 

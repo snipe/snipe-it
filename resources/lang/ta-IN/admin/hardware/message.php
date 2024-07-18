@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong> எச்சரிக்கை: </strong> இந்த சொத்து தற்போது undeployable என குறிக்கப்பட்டுள்ளது. இந்த நிலை மாறியிருந்தால், சொத்து நிலையை புதுப்பிக்கவும்.',
     'does_not_exist' 	=> 'சொத்து இல்லை.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'இந்த சொத்து தற்போது ஒரு பயனர் வெளியே சோதிக்கப்பட்டது மற்றும் நீக்க முடியாது. முதலில் சொத்தை சரிபார்த்து, மீண்டும் நீக்கி முயற்சிக்கவும்.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'சொத்து உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும். :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'சொத்து புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 			=> 'சொத்து வெற்றிகரமாக புதுப்பிக்கப்பட்டது.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'எந்த துறைகளும் தேர்ந்தெடுக்கப்படவில்லை, அதனால் எதுவும் புதுப்பிக்கப்படவில்லை.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'சொத்து தணிக்கை தோல்வியடைந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'சொத்து தணிக்கை வெற்றிகரமாக உள்நுழைந்தது.',
     ],
 

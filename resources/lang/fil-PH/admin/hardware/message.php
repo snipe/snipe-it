@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Babala: </strong> Ang asset na ito ay kasalukuyang namarkahan bilang hindi pwedeng mai-deploy..
                         Kung nabago na ang katayuang ito, paki-update ng katayuan ng asset.',
     'does_not_exist' 	=> 'Hindi umiiral ang asset.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ang asset na ito ay kasalukuyang nai-check out sa isang user at hindi na maaaring mai-delete. Mangyaring suriin muna ang asset, at pagkatapos subukang i-delete muli. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Ang asset ay hindi naisagawa, mangyaring subukang muli. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Ang asset ay hindi nai-update, mangyaring subukang muli',
         'success' 			=> 'Ang asset ay matagumpay na nai-update.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Walang napiling mga fields, kaya walang nai-update.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Ang audit ng asset ay hindi nagtagumpay. Mangyaring subukang muli.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Matagumpay na nai-log ang audit ng asset.',
     ],
 

@@ -105,4 +105,64 @@ class ActionlogFactory extends Factory
             ];
         });
     }
+
+    public function filesUploaded()
+    {
+        return $this->state(function () {
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'uploaded',
+                'item_type'  => User::class,
+                'filename'  => $this->faker->unixTime('now'),
+            ];
+        });
+    }
+
+    public function acceptedSignature()
+    {
+        return $this->state(function () {
+
+            $asset = Asset::factory()->create();
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'accepted',
+                'item_id' => $asset->id,
+                'item_type'  => Asset::class,
+                'target_type'  => User::class,
+                'accept_signature'  => $this->faker->unixTime('now'),
+            ];
+        });
+    }
+
+    public function acceptedEula()
+    {
+        return $this->state(function () {
+
+            $asset = Asset::factory()->create();
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'accepted',
+                'item_id' => $asset->id,
+                'item_type'  => Asset::class,
+                'target_type'  => User::class,
+                'filename'  => $this->faker->unixTime('now'),
+            ];
+        });
+    }
+
+    public function userUpdated()
+    {
+        return $this->state(function () {
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'update',
+                'target_type'  => User::class,
+                'item_type'  => User::class,
+            ];
+        });
+    }
 }

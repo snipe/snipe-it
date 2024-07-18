@@ -174,23 +174,58 @@
                 @endif
 
 
-                @if ($license->supplier_id)
-                  <div class="row">
-                    <div class="col-md-3">
-                      <strong>
-                        {{ trans('general.supplier') }}
-                      </strong>
-                    </div>
-                    <div class="col-md-9">
-                      @if ($license->supplier)
-                        <a href="{{ route('suppliers.show', $license->supplier_id) }}">
+                @if ($license->supplier)
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <strong>{{ trans('general.supplier') }}</strong>
+                      </div>
+                      <div class="col-md-9">
+                        @if ($license->supplier->deleted_at=='')
+                        @can('view', \App\Models\Supplier::class)
+                          <a href="{{ route('suppliers.show', $license->supplier->id) }}">
+                            {{ $license->supplier->name }}
+                          </a>
+                        @else
                           {{ $license->supplier->name }}
-                        </a>
-                      @else
-                      {{ trans('general.deleted') }}
-                      @endif
+                        @endcan
+
+                          @if ($license->supplier->url)
+                            <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->supplier->url }}" rel="noopener">{{ $license->supplier->url }}</a>
+                          @endif
+
+                          @if ($license->supplier->phone)
+                            <br><i class="fas fa-phone" aria-hidden="true"></i>
+                            <a href="tel:{{ $license->supplier->phone }}">{{ $license->supplier->phone }}</a>
+                          @endif
+
+                          @if ($license->supplier->email)
+                            <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->supplier->email }}">{{ $license->supplier->email }}</a>
+                          @endif
+
+                          @if ($license->supplier->address)
+                            <br>{{ $license->supplier->address }}
+                          @endif
+                          @if ($license->supplier->address2)
+                            <br>{{ $license->supplier->address2 }}
+                          @endif
+                          @if ($license->supplier->city)
+                            <br>{{ $license->supplier->city }},
+                          @endif
+                          @if ($license->supplier->state)
+                            {{ $license->supplier->state }}
+                          @endif
+                          @if ($license->supplier->country)
+                            {{ $license->supplier->country }}
+                          @endif
+                          @if ($license->supplier->zip)
+                            {{ $license->supplier->zip }}
+                          @endif
+                        @else
+                          {{ trans('general.deleted') }}
+                        @endif
+                      </div>
                     </div>
-                  </div>
                 @endif
 
 
@@ -255,12 +290,14 @@
                     </strong>
                   </div>
                   <div class="col-md-9">
-                    @if ($license->time_until_depreciated()->y > 0)
-                      {{ $license->time_until_depreciated()->y }}
-                      {{ trans('admin/hardware/form.years') }},
-                    @endif
-                    {{ $license->time_until_depreciated()->m }}
-                    {{ trans('admin/hardware/form.months') }}
+                    @if ($license->time_until_depreciated())
+                      @if ($license->time_until_depreciated()->y > 0)
+                        {{ $license->time_until_depreciated()->y }}
+                        {{ trans('admin/hardware/form.years') }},
+                      @endif
+                      {{ $license->time_until_depreciated()->m }}
+                      {{ trans('admin/hardware/form.months') }}
+                   @endif
                   </div>
                 </div>
                 @endif

@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Uyarı:</strong> Bu demirbaş dağıtılamaz olarak işlaretlenmiş.
                         Eğer durumu değişti ise, lütfen Demirbaş Durumu\'nu güncelleyiniz.',
     'does_not_exist' 	=> 'Demirbaş mevcut değil.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Bu varlık mevcut değil veya talep edilebilir değil.',
     'assoc_users'	 	=> 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Demirbaş oluşturulamadı, lütfen tekrar deneyin. ',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Demirbaş güncellenemedi, lütfen tekrar deneyin',
         'success' 			=> 'Demirbaş güncellendi.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Hiçbir alan seçilmedi, dolayısıyla hiç bir alan güncellenmedi.',
         'no_assets_selected'  =>  'Hiçbir varlık seçilmedi, bu nedenle hiçbir şey güncellenmedi.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Varlık denetimi başarısız oldu. Lütfen tekrar deneyin.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Varlık denetimi başarıyla günlüğe kaydedildi.',
     ],
 

@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Nhãn Trạng thái không tồn tại.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Tình trạng nhãn đã xóa',
     'assoc_assets'	 => 'Nhãn Trạng thái này hiện được liên kết với ít nhất một Tài sản và không thể bị xóa. Vui lòng cập nhật nội dung của bạn để không tham khảo trạng thái này nữa và thử lại.',
 
     'create' => [

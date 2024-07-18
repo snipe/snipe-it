@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>警告:</strong>この資産は、現在 未配備としてマークされています。
                         この状態が変更された場合は、資産のステータスを更新してください。',
     'does_not_exist' 	=> '資産が存在しません。',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'その資産は存在しないか要求可能ではありません。',
     'assoc_users'	 	=> 'この資産はユーザーに貸し出されているため削除できません。資産を返却後、もう一度、やり直して下さい。 ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> '資産は作成されませんでした。もう一度、やり直して下さい。',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> '資産は更新されませんでした。もう一度、やり直して下さい。',
         'success' 			=> '資産は正常に更新されました。',
+        'encrypted_warning' => '資産は正常に更新されましたが、権限が原因で暗号化されたカスタム項目がありませんでした',
         'nothing_updated'	=>  'フィールドが選択されていないため、更新されませんでした。',
         'no_assets_selected'  =>  '資産が選択されていないため、何も更新されませんでした。',
+        'assets_do_not_exist_or_are_invalid' => '選択したアセットは更新できません。',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> '資産の監査に失敗しました。もう一度やり直してください。',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> '資産の監査ログに記録しました。',
     ],
 

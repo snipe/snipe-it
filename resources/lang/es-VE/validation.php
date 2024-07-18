@@ -50,7 +50,7 @@ return [
     'ip'                   => 'El :attribute debe ser una dirección IP correcta.',
     'ipv4'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'ipv6'                 => 'El :atrribute debe ser una dirección IPv6 válida.',
-    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la empresa',
+    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la compañía',
     'json'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'max'                  => [
         'numeric' => 'El :attribute no debe ser mayor que :max kilobytes.',
@@ -75,8 +75,8 @@ return [
     'valid_regex'          => 'Este no es un regex válido. ',
     'regex'                => 'El formato :attribute es inválido.',
     'required'             => 'El campo :attribute es obligatorio.',
-    'required_if'          => 'El :attribute es obligatorio cuando :other es :value.',
-    'required_unless'      => 'El campo :attribute es obligatorio cuando :other es :value.',
+    'required_if'          => 'El campo :attribute es obligatorio cuando :other es :value.',
+    'required_unless'      => 'El campo :attribute es obligatorio a menos que :other esté en :values.',
     'required_with'        => 'El :attribute es obligatrio cuando :values está presente.',
     'required_with_all'    => 'El campo :attribute es obligatrio cuando :values está presente.',
     'required_without'     => 'El :attribute es obligatrio cuando :values está presente.',
@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'El valor no puede ser negativo'
     ],
+    'checkboxes'           => ':attribute contiene opciones no válidas.',
+    'radio_buttons'        => ':attribute no es válido.',
 
 
     /*
@@ -121,7 +123,7 @@ return [
     'custom' => [
         'alpha_space' => 'El campo :attribute contiene un caracter que no está permitido.',
         'email_array'      => 'Una o más direcciones de correo electrónico no son válidas.',
-        'hashed_pass'      => 'Tu contraseña actual es incorrecta',
+        'hashed_pass'      => 'Su contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
         'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido',
 
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Valor no válido incluido en este campo',
 ];

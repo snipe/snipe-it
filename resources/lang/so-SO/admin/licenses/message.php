@@ -2,53 +2,53 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
-    'select_asset_or_person' => 'You must select an asset or a user, but not both.',
-    'not_found' => 'License not found',
+    'does_not_exist' => 'Shatiga ma jiro ama ma haysatid fasax aad ku aragto.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
+    'asset_does_not_exist' 	=> 'Hantida aad isku dayayso inaad ku xidho shatigan ma jiro.',
+    'owner_doesnt_match_asset' => 'Hantida aad isku dayayso inaad ku xidho shatigan waxa iska leh cid kale oo aan ahayn qofka lagu doortay meesha hoos u dhigida.',
+    'assoc_users'	 => 'Shatigan hadda waa la hubiyay isticmaale lamana tirtiri karo. Fadlan marka hore iska hubi shatiga, ka dibna isku day mar kale in aad tirtirto. ',
+    'select_asset_or_person' => 'Waa inaad doorataa hanti ama isticmaale, laakiin labadaba maaha.',
+    'not_found' => 'Shatiga lama helin',
     'seats_available' => ':seat_count seats available',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Shatiga lama abuurin, fadlan isku day mar kale.',
+        'success' => 'Shatiga loo sameeyay si guul leh.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Faylka lama tirtirin Fadlan isku day mar kale',
+        'success' => 'Faylka si guul leh waa la tirtiray',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Faylka lama soo rarin Fadlan isku day mar kale',
+        'success' => 'Faylka(yada) si guul leh loo soo raray.',
+        'nofiles' => 'Ma aadan dooran wax fayl ah oo la soo geliyo, ama faylka aad isku dayeyso inaad geliyaan waa mid aad u weyn',
+        'invalidfiles' => 'Mid ama in ka badan oo ka mid ah faylalkaagu aad bay u weyn yihiin ama waa nooc faylal ah oo aan la oggolayn. Noocyada faylalka la oggol yahay waa png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, iyo lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Shatiga lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Shatiga si guul leh ayaa loo cusboonaysiiyay'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Ma hubtaa inaad rabto inaad tirtirto shatigan?',
+        'error'   => 'Waxaa jirtay arrin la tirtiray shatiga Fadlan isku day mar kale',
+        'success' => 'Shatiga si guul leh ayaa loo tirtiray'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully',
+        'error'   => 'Waxaa jirtay arrin lagu hubinayo shatiga. Fadlan isku day mar kale',
+        'success' => 'Shatiga si guul leh ayaa loo hubiyay',
         'not_enough_seats' => 'Not enough license seats available for checkout',
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Waxaa jirtay arrin hubinta shatiga. Fadlan isku day mar kale',
+        'success' => 'Shatiga si guul leh ayaa loo hubiyay'
     ),
 
 );

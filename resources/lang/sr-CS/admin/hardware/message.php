@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Upozorenje: </strong> Ovaj resurs, imovina je označena kao trenutno nedeljiva. Ako se ovaj status promenio, ažurirajte status imovine.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
+    'does_not_exist_var'=> 'Nije pronađena imovina za oznakom :asset_tag.',
+    'no_tag' 	        => 'Nije navedena oznaka imovine.',
     'does_not_exist_or_not_requestable' => 'Imovina ne postoji ili se ne može zatražiti.',
     'assoc_users'	 	=> 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
+    'warning_audit_date_mismatch' 	=> 'Naredni datum popisa ove imovine (:next_audit_date) je pre poslednjeg datuma popisa (:last_audit_date). Molim vas izmenite datum narednog popisa.',
 
     'create' => [
         'error'   		=> 'Imovina, resurs nije kreiran, pokušajte ponovo. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Imovina nije ažurirana, pokušajte ponovo',
         'success' 			=> 'Imovina je uspešno ažurirana.',
+        'encrypted_warning' => 'Imovina je uspešno izmenjena, ali enkriptovana prilagođena polja nisu zbog ovlašćenja',
         'nothing_updated'	=>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
         'no_assets_selected'  =>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
+        'assets_do_not_exist_or_are_invalid' => 'Izabrana imovina ne može biti izmenjena.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Provera imovine nije uspela. Molim pokušajte ponovo.',
+        'error'   		=> 'Neuspešan popis imovine: :error ',
         'success' 		=> 'Provera imovine uspešno je evidentirana.',
     ],
 

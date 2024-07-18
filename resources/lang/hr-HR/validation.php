@@ -96,15 +96,17 @@ return [
     'url'                  => 'Format atributa nije važeći.',
     'unique_undeleted'     => ':attribute mora biti jedinstven.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
-    'not_array'            => ':attribute cannot be an array.',
+    'not_array'            => ':attribute ne smije biti niz.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
+    'numbers'              => 'Zaporka treba sadržavati barem jedan broj.',
     'case_diff'            => 'Password must use mixed case.',
     'symbols'              => 'Password must contain symbols.',
     'gte'                  => [
         'numeric'          => 'Value cannot be negative'
     ],
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Invalid value included in this field',
 ];

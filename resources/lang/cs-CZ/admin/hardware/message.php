@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Varování:</strong> Toto zařízení bylo označeno jako momentálně nepřiřaditelné.
                         Pokud se na jeho stavu něco změnilo, upravte jej.',
     'does_not_exist' 	=> 'Majetek nenalezen.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Tento majetek neexistuje nebo jej nelze vyskladnit.',
     'assoc_users'	 	=> 'Majetek je předán svému uživateli a nelze jej odstranit. Před odstraněním jej nejprve převezměte. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Majetek se nepodařilo vytvořit, zkuste to prosím znovu.',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Majetek se nepodařilo upravit, zkuste to prosím znovu',
         'success' 			=> 'Majetek úspěšně aktualizován.',
+        'encrypted_warning' => 'Majetek byl úspěšně aktualizován, ale šifrovaná vlastní pole nebyla způsobena oprávněním',
         'nothing_updated'	=>  'Nebyla zvolena žádná pole, nic se tedy neupravilo.',
         'no_assets_selected'  =>  'Nebyl zvolen žádný majetek, nic se tedy neupravilo.',
+        'assets_do_not_exist_or_are_invalid' => 'Vybrané položky nelze aktualizovat.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Audit majetku byl neúspěšný. Prosím zkuste to znovu.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Audit aktiv byl úspěšně zaznamenáván.',
     ],
 

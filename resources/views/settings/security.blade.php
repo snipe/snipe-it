@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-md-9">
 
-                                {!! Form::two_factor_options('two_factor_enabled', Request::old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
+                                {!! Form::two_factor_options('two_factor_enabled', old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
 
                                 @if (config('app.lock_passwords'))
@@ -60,7 +60,7 @@
                                 {{ Form::label('pwd_secure_min', trans('admin/settings/general.pwd_secure_min')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('pwd_secure_min', Request::old('pwd_secure_min', $setting->pwd_secure_min), array('class' => 'form-control',  'style'=>'width: 50px;')) }}
+                                {{ Form::text('pwd_secure_min', old('pwd_secure_min', $setting->pwd_secure_min), array('class' => 'form-control',  'style'=>'width: 50px;')) }}
 
                                 {!! $errors->first('pwd_secure_min', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">
@@ -74,12 +74,11 @@
 
 
                         <!-- Common Passwords -->
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('pwd_secure_complexity.*') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('pwd_secure_complexity', trans('admin/settings/general.pwd_secure_complexity')) }}
                             </div>
                             <div class="col-md-9">
-
                                 <label class="form-control">
                                     <span class="sr-only">{{ trans('admin/settings/general.pwd_secure_uncommon') }}</span>
                                     {{ Form::checkbox('pwd_secure_uncommon', '1', old('pwd_secure_uncommon', $setting->pwd_secure_uncommon),array( 'aria-label'=>'pwd_secure_uncommon')) }}
@@ -106,6 +105,9 @@
                                     {{ trans('admin/settings/general.pwd_secure_complexity_case_diff') }}
                                 </label>
 
+                                @if ($errors->has('pwd_secure_complexity.*'))
+                                    <span class="alert-msg">{{ trans('validation.generic.invalid_value_in_field') }}</span>
+                                @endif
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
                                 </p>
@@ -135,7 +137,7 @@
                                     </p>
                                     <!-- Use custom remote user header name -->
                                     {{ Form::label('login_remote_user_header_name',  trans('admin/settings/general.login_remote_user_header_name_text')) }}
-                                    {{ Form::text('login_remote_user_header_name', Request::old('login_remote_user_header_name', $setting->login_remote_user_header_name),array('class' => 'form-control')) }}
+                                    {{ Form::text('login_remote_user_header_name', old('login_remote_user_header_name', $setting->login_remote_user_header_name),array('class' => 'form-control')) }}
                                     {!! $errors->first('login_remote_user_header_name', '<span class="alert-msg">:message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_header_name_help') }}

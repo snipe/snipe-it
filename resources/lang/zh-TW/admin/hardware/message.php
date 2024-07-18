@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>警告: </strong>此資產目前已標記為不可佈署，如果資產狀態已改變，請更新狀態。',
     'does_not_exist' 	=> '資產不存在',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => '該資產不存在或無法申請。',
     'assoc_users'	 	=> '此資產目前已借給某個使用者，不能被刪除，請檢查資產狀態，然後再嘗試刪除。',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> '新增資產失敗，請重試。',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> '更新資產失敗，請重試。',
         'success' 			=> '更新資產成功。',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  '沒有欄位被選擇，因此沒有更新任何內容。',
         'no_assets_selected'  =>  '沒有資產被選取，因此沒有更新任何內容。',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> '資產稽核失敗。請再試一次。',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> '資產稽核成功登錄。',
     ],
 

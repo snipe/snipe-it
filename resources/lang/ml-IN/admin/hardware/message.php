@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
                         If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Asset does not exist.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Asset was not created, please try again. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Asset was not updated, please try again',
         'success' 			=> 'Asset updated successfully.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Asset audit successfully logged.',
     ],
 

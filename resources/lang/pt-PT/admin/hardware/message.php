@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável".
                         Se este estado mudou, por favor atualize o estado do artigo.',
     'does_not_exist' 	=> 'Artigo não existente.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Esse artigo não existe ou não é solicitável.',
     'assoc_users'	 	=> 'Este artigo está correntemente alocado a um utilizador e não pode ser removido. Por favor devolva o artigo e de seguida tente remover novamente. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Não foi possível criar o Artigo. Por favor, tente novamente. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Artigo não foi atualizado. Por favor, tente novamente',
         'success' 			=> 'Artigo atualizado com sucesso.',
+        'encrypted_warning' => 'Os ativos atualizados com sucesso, mas campos personalizados criptografados não se devem às permissões',
         'nothing_updated'	=>  'Nenhum atributo foi selecionado, portanto nada foi atualizado.',
         'no_assets_selected'  =>  'Nenhum ativo foi selecionado, por isso nada foi atualizado.',
+        'assets_do_not_exist_or_are_invalid' => 'Os arquivos selecionados não podem ser atualizados.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'A auditoria de ativos não teve êxito. Por favor, tente novamente.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Auditoria de ativos logada com sucesso.',
     ],
 

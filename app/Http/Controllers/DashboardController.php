@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 
 /**
@@ -21,12 +22,11 @@ class DashboardController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return View
      */
-    public function index()
+    public function index() : View | RedirectResponse
     {
         // Show the page
-        if (Auth::user()->hasAccess('admin')) {
+        if (auth()->user()->hasAccess('admin')) {
             $asset_stats = null;
 
             $counts['asset'] = \App\Models\Asset::count();
@@ -34,7 +34,7 @@ class DashboardController extends Controller
             $counts['license'] = \App\Models\License::assetcount();
             $counts['consumable'] = \App\Models\Consumable::count();
             $counts['component'] = \App\Models\Component::count();
-            $counts['user'] = \App\Models\Company::scopeCompanyables(Auth::user())->count();
+            $counts['user'] = \App\Models\Company::scopeCompanyables(auth()->user())->count();
             $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
 
             if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {

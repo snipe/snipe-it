@@ -4,9 +4,12 @@ return [
 
     'undeployable' 		=> '<strong> اخطار: </ strong> این دارایی به برانگیز گزارش شده است که در حال حاضر undeployable. اگر این وضعیت تغییر کرده است، لطفا به روز رسانی وضعیت دارایی.',
     'does_not_exist' 	=> 'دارایی وجود ندارد.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'آن دارایی وجود ندارد یا قابل درخواست نیست.
 ',
     'assoc_users'	 	=> 'این دارایی در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا دارایی در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'دارایی ساخته نشده است، لطفا دوباره تلاش کنید.',
@@ -17,9 +20,11 @@ return [
     'update' => [
         'error'   			=> 'دارایی به روز نیست، لطفا دوباره امتحان کنید',
         'success' 			=> 'دارایی ها با موفقیت به روز رسانی.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'هیچ زمینه، انتخاب شدند تا هیچ چیز به روز شد.',
         'no_assets_selected'  =>  'هیچ دارایی انتخاب نشد، بنابراین چیزی به‌روزرسانی نشد.
 ',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -30,7 +35,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'ممیزی دارایی ناموفق بود. لطفا دوباره تلاش کنید.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'حسابرسی املاک با موفقیت وارد شد',
     ],
 

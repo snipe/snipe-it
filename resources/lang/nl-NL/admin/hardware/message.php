@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar.
                         Als deze status is veranderd, update dan de asset status.',
     'does_not_exist' 	=> 'Dit asset bestaat niet.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Die asset bestaat niet of is niet aanvraagbaar.',
     'assoc_users'	 	=> 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Asset is niet aangemaakt, probeer het opnieuw :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> 'Asset is niet gewijzigd, probeer het opnieuw',
         'success' 			=> 'Asset is succesvol bijgewerkt.',
+        'encrypted_warning' => 'Asset is succesvol bijgewerkt, maar gecodeerde aangepaste velden hadden geen toegang tot machtigingen',
         'nothing_updated'	=>  'Geen veld is geselecteerd, er is dus niks gewijzigd.',
         'no_assets_selected'  =>  'Er zijn geen assets geselecteerd, er is dus niets bijgewerkt.',
+        'assets_do_not_exist_or_are_invalid' => 'Geselecteerde assets kunnen niet worden bijgewerkt.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit is mislukt. Probeer het opnieuw.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Asset audit succesvol geregistreerd.',
     ],
 

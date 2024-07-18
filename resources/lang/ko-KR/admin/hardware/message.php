@@ -5,8 +5,11 @@ return [
     'undeployable' 		=> '<strong>경고: </strong> 이 자산은 현재 사용불가 상태입니다.
                         이 상태를 변경하시려면, 자산 상태를 갱신하세요.',
     'does_not_exist' 	=> '자산이 존재하지 않습니다.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> '자산이 생성되지 않았습니다. 다시 시도해 주세요. :(',
@@ -17,8 +20,10 @@ return [
     'update' => [
         'error'   			=> '자산이 갱신되지 않았습니다. 다시 시도해 주세요.',
         'success' 			=> '자산이 갱신되었습니다.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  '선택된 항목이 없어서, 갱신 되지 않습니다.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -29,7 +34,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> '자산 감사가 실패했습니다. 다시 시도해 주세요.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> '자산 감사가 성공적으로 기록되었습니다.',
     ],
 

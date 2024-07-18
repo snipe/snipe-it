@@ -68,6 +68,7 @@ return [
     'default_eula_text'			=> 'EULA پیش فرض',
     'default_language'			=> 'زبان پیش فرض',
     'default_eula_help_text'	=> 'همچنین می توانید  EULA های سفارشی به دسته های خاص دارایی مرتبط کنید.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'نمایش نام حساب',
     'display_checkout_date'     => 'نمایش تاریخ پرداخت',
     'display_eol'               => 'نمایش EOL در جدول',
@@ -163,8 +164,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -363,7 +364,7 @@ return [
     'two_factor_enrollment'        => 'ثبت نام دو عامل',
     'two_factor_enabled_text'        => 'فعال کردن دو عامل',
     'two_factor_reset'        => 'تنظیم مجدد دو راز فاکتور',
-    'two_factor_reset_help'        => 'این باعث می شود کاربر دوباره دستگاه خود را با Google Authenticator ثبت کند. این می تواند مفید باشد اگر دستگاه ثبت شده فعلی شما گم شده یا دزدیده شود.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'دستگاه دو عامل با موفقیت تنظیم مجدد',
     'two_factor_reset_error'          => 'تنظیم مجدد دستگاه دو عامل انجام نشد',
     'two_factor_enabled_warning'        => 'فعال کردن دو عامل اگر آن را در حال حاضر فعال نیست، بلافاصله شما را مجبور به تایید با یک دستگاه ثبت نام Google Auth. اگر کسی در حال حاضر ثبت نام نکند، می توانید دستگاه خود را ثبت نام کنید.',
@@ -392,10 +393,20 @@ return [
 ',
     'oauth_title' => 'تنظیمات API OAuth
 ',
+    'oauth_clients' => 'OAuth Clients',
     'oauth' => 'OAuth
 ',
     'oauth_help' => 'تنظیمات نقطه پایانی Oauth
 ',
+    'oauth_no_clients' => 'You have not created any OAuth clients yet.',
+    'oauth_secret' => 'Secret',
+    'oauth_authorized_apps' => 'Authorized Applications',
+    'oauth_redirect_url' => 'Redirect URL',
+    'oauth_name_help' => ' Something your users will recognize and trust.',
+    'oauth_scopes' => 'Scopes',
+    'oauth_callback_url' => 'Your application authorization callback URL.',
+    'create_client' => 'Create Client',
+    'no_scopes' => 'No scopes',
     'asset_tag_title' => 'تنظیمات برچسب دارایی را به روز کنید
 ',
     'barcode_title' => 'تنظیمات بارکد را به روز کنید
@@ -448,7 +459,6 @@ return [
 ',
     'labels_help' => 'اندازه برچسب &amp; تنظیمات
 ',
-    'purge' => 'پاکسازی',
     'purge_keywords' => 'برای همیشه حذف کنید
 ',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
@@ -509,5 +519,8 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

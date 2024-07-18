@@ -16,6 +16,7 @@ use NotificationChannels\GoogleChat\Section;
 use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
+use Illuminate\Support\Facades\Log;
 
 class CheckinAccessoryNotification extends Notification
 {
@@ -43,12 +44,12 @@ class CheckinAccessoryNotification extends Notification
     public function via()
     {
         $notifyBy = [];
-        if (Setting::getSettings()->webhook_selected == 'google'){
+        if (Setting::getSettings()->webhook_selected == 'google' && Setting::getSettings()->webhook_endpoint) {
 
             $notifyBy[] = GoogleChatChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_selected == 'microsoft'){
+        if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
 
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
@@ -61,14 +62,14 @@ class CheckinAccessoryNotification extends Notification
          * Only send notifications to users that have email addresses
          */
         if ($this->target instanceof User && $this->target->email != '') {
-            \Log::debug('The target is a user');
+            Log::debug('The target is a user');
 
             if ($this->item->checkin_email()) {
                 $notifyBy[] = 'mail';
             }
         }
 
-        \Log::debug('checkin_email on this category is '.$this->item->checkin_email());
+        Log::debug('checkin_email on this category is '.$this->item->checkin_email());
 
         return $notifyBy;
     }
@@ -150,7 +151,7 @@ class CheckinAccessoryNotification extends Notification
      */
     public function toMail()
     {
-        \Log::debug('to email called');
+        Log::debug('to email called');
 
         return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
             [

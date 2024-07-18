@@ -50,6 +50,7 @@ return [
         'sr-CS' => 'crwdns10642:0crwdne10642:0',
         'sk-SK'=> 'crwdns12002:0crwdne12002:0',
         'sl-SI'=> 'crwdns12004:0crwdne12004:0',
+        'so-SO'=> 'crwdns12134:0crwdne12134:0',
         'es-ES'=> 'crwdns10646:0crwdne10646:0',
         'es-CO'=> 'crwdns10648:0crwdne10648:0',
         'es-MX'=> 'crwdns10650:0crwdne10650:0',

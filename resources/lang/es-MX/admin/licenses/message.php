@@ -3,9 +3,9 @@
 return array(
 
     'does_not_exist' => 'La licencia no existe o usted no tiene permiso para verla.',
-    'user_does_not_exist' => 'Usuario inexistente.',
+    'user_does_not_exist' => 'El usuario no existe o no tiene permiso para verlos.',
     'asset_does_not_exist' 	=> 'El equipo que intentas asignar a esta licencia no existe.',
-    'owner_doesnt_match_asset' => 'El equipo al que estas intentando asignar esta licenciam, está asignado a un usuario diferente que el de la licencia.',
+    'owner_doesnt_match_asset' => 'El activo que está intentando asignar con esta licencia está asignado a un usuario diferente al de la persona seleccionada de la lista.',
     'assoc_users'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada.',
     'select_asset_or_person' => 'Debe seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
@@ -25,7 +25,7 @@ return array(
     'upload' => array(
         'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo(s) cargado correctamente.',
-        'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
+        'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de tus ficheros son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
     ),
 
@@ -35,7 +35,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de eliminar esta categoría?',
+        'confirm'   => '¿Está seguro de que desea eliminar esta licencia?',
         'error'   => 'Ha habido un problema eliminando la categoría. Intentalo de nuevo.',
         'success' => 'Categoría eliminada.'
     ),
@@ -47,7 +47,7 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   => 'No se ha quitado el equipo. Intentalo de nuevo.',
+        'error'   => 'Hubo un problema devolviendo la licencia. Por favor, inténtalo de nuevo.',
         'success' => 'Equipo quitado correctamente.'
     ),
 

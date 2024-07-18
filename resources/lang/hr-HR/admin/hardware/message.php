@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Upozorenje: </strong> Ova je snimka označena kao trenutno nedjeljiva. Ako se ovaj status promijenio, ažurirajte status aktive.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ovaj je entitet trenutno provjeren korisniku i ne može se izbrisati. Najprije provjerite snimljeni materijal, a zatim pokušajte ponovo ukloniti.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Imovina nije izrađena, pokušajte ponovo. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Imovina nije ažurirana, pokušajte ponovo',
         'success' 			=> 'Imovina je uspješno ažurirana.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Revizija imovine nije uspjela. Molim te pokušaj ponovno.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Uspjeh uspješno prijavljen.',
     ],
 

@@ -105,6 +105,8 @@ return [
     'gte'                  => [
         'numeric'          => 'Verdi kan ikke være negativ'
     ],
+    'checkboxes'           => ':attribute inneholder ugyldige valg.',
+    'radio_buttons'        => ':attribute er ugyldig.',
 
 
     /*
@@ -151,4 +153,10 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Validation Messages
+    |--------------------------------------------------------------------------
+    */
+    'invalid_value_in_field' => 'Ugyldig verdi inkludert i dette feltet',
 ];

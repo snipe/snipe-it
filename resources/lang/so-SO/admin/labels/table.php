@@ -8,12 +8,12 @@ return [
     'example_manufacturer'  => 'Test Manufacturing Inc.',
     'example_model'      => 'Test Model',
     'example_supplier'   => 'Test Company Limited',
-    'labels_per_page'    => 'Labels',
-    'support_fields'     => 'Fields',
+    'labels_per_page'    => 'Calaamadaha',
+    'support_fields'     => 'Beeraha',
     'support_asset_tag'  => 'Tag',
     'support_1d_barcode' => '1D',
     'support_2d_barcode' => '2D',
     'support_logo'       => 'Logo',
-    'support_title'      => 'Title',
+    'support_title'      => 'Ciwaanka',
 
 ];

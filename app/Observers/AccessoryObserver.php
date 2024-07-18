@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Accessory;
 use App\Models\Actionlog;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AccessoryObserver
 {

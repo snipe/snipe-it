@@ -37,7 +37,7 @@
     {{ Form::label('color', trans('admin/statuslabels/table.color'), ['class' => 'col-md-3 control-label']) }}
     <div class="col-md-9">
         <div class="input-group color">
-            {{ Form::text('color', Request::old('color', $item->color), array('class' => 'form-control col-md-10', 'maxlength'=>'20')) }}
+            {{ Form::text('color', old('color', $item->color), array('class' => 'form-control col-md-10', 'maxlength'=>'20')) }}
             <div class="input-group-addon"><i></i></div>
         </div><!-- /.input group -->
         {!! $errors->first('color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -50,7 +50,7 @@
 <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
     <div class="col-md-9 col-md-offset-3">
         <label class="form-control">
-            <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" {{ Request::old('show_in_nav', $item->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
+            <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" {{ old('show_in_nav', $item->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
         </label>
     </div>
 </div>
@@ -60,7 +60,7 @@
 
     <div class="col-md-9 col-md-offset-3">
         <label class="form-control">
-            <input type="checkbox" value="1" name="default_label" id="default_label" {{ Request::old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}>
+            <input type="checkbox" value="1" name="default_label" id="default_label" {{ old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}>
              {{ trans('admin/statuslabels/table.default_label') }}
         </label>
         <p class="help-block"> {{ trans('admin/statuslabels/table.default_label_help') }}</p>

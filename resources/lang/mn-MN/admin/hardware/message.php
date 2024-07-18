@@ -4,8 +4,11 @@ return [
 
     'undeployable' 		=> '<strong>Анхааруулга: </strong> Энэ хөрөнгө нь одоогоор хүчингүй болсон гэж тэмдэглэгдсэн байна. Хэрэв энэ байдал өөрчлөгдсөн бол хөрөнгийн статусыг шинэчлэнэ үү.',
     'does_not_exist' 	=> 'Хөрөнгө байхгүй байна.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Энэ хөрөнгийг одоогоор хэрэглэгчид шалгаж, устгах боломжгүй байна. Эхлээд хөрөнгийг шалгаж үзээд дараа нь устга.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Акт үүсгээгүй байна, дахин оролдоно уу. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Хөрөнгийн шинэчлэлт хийгдээгүй тул дахин оролдоно уу',
         'success' 			=> 'Акт амжилттай шинэчлэгдсэн.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Ямар ч талбар сонгогдоогүй тул шинэчлэгдээгүй байна.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Хөрөнгийн аудит амжилтгүй болсон. Дахин оролдоно уу.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Хөрөнгийн аудит амжилттай нэвтэрсэн байна.',
     ],
 

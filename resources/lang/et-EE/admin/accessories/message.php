@@ -2,30 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Lisaseade [:id] ei eksisteeri.',
-    'not_found' => 'That accessory was not found.',
-    'assoc_users'	 => 'See lisavarustus on praegu: kasutajate poolt kontrollitud arvude arv. Palun kontrollige tarvikuid ja proovige uuesti.',
+    'does_not_exist' => 'Tarvik [:id] ei eksisteeri.',
+    'not_found' => 'Seda tarvikut ei leitud.',
+    'assoc_users'	 => 'Seda tarvikut on praegu :count väljastatud kasutajatele. Palun kontrollige tarvikuid ja proovige uuesti. ',
 
     'create' => array(
-        'error'   => 'Lisatarvikut ei loodud, proovige uuesti.',
-        'success' => 'Lisavarustus loodi edukalt.'
+        'error'   => 'Tarvikut ei loodud, proovige uuesti.',
+        'success' => 'See tarvik loodi edukalt.'
     ),
 
     'update' => array(
-        'error'   => 'Lisatarvikut ei värskendatud. Proovige uuesti',
-        'success' => 'Lisatarvikut uuendati edukalt.'
+        'error'   => 'Tarvikut ei uuendatud. Proovige uuesti',
+        'success' => 'Tarvikut uuendati edukalt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Kas olete kindel, et soovite seda lisaseadet kustutada?',
-        'error'   => 'Aksessuaar eemaldati. Palun proovi uuesti.',
+        'confirm'   => 'Kas olete kindel, et soovite seda tarvikut kustutada?',
+        'error'   => 'Tarvikut ei õnnestunud kustutada. Palun proovi uuesti.',
         'success' => 'Lisaseade kustutati edukalt.'
     ),
 
      'checkout' => array(
         'error'   		=> 'Lisatarvikut ei kontrollitud, palun proovige uuesti',
         'success' 		=> 'Lisaseade edukalt kontrollitud.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Tarvik ei ole väljastamiseks saadaval. Kontrolli laoseisu',
         'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.'
     ),
 

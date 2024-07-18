@@ -2,11 +2,10 @@
 
 return array(
     'personal_api_keys' => 'Persönliche API-Schlüssel',
-    'api_key_warning' => 'Wenn Du ein API-Token generierst, stelle sicher, dass Du es sofort danach kopierst, da es
-                    nicht mehr für Dich sichtbar sein wird.',
+    'api_key_warning' => 'When generating an API token, be sure to copy it down immediately as they will not be visible to you again.',
     'api_base_url' => 'Deine API Basis-URL befindet sich unter:',
     'api_base_url_endpoint' => '/&lt;Endpunkt&gt;',
     'api_token_expiration_time' => 'API-Token sollen ablaufen in:',
-    'api_reference' => 'Bitte lese die <a href="https://snipe-it.readme.io/reference" target="_blank">API Dokumentation</a> um
-                    Informationen über die verfügbaren API endpoints und ihre Verwendung zu erhalten.',
+    'api_reference' => 'Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to find specific API endpoints and additional API documentation.',
+    'profile_updated' => 'Konto erfolgreich aktualisiert',
 );

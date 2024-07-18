@@ -70,7 +70,7 @@
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@black, 10%);
-    border-color: darken(@black, 20%);
+    border-color: #FFF;
     color: #fff;
   }
 
@@ -375,7 +375,10 @@ input[type=text], input[type=search] {
   color: var(--text-main);
 }
 .skin-black-dark .main-header .navbar .dropdown-menu li a {
-  color: var(--header);
+  color: #FFFFFF;
+}
+.skin-black-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #000000;
 }
 .fixed-table-body thead th .th-inner, .skin-black-dark .sidebar-menu>li.active>a, .skin-black .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
   background-color: var(--header)!important;
@@ -454,4 +457,7 @@ div.container.row-new-striped{
 }
 .table > thead > tr > td.danger, .table > tbody > tr > td.danger, .table > tfoot > tr > td.danger, .table > thead > tr > th.danger, .table > tbody > tr > th.danger, .table > tfoot > tr > th.danger, .table > thead > tr.danger > td, .table > tbody > tr.danger > td, .table > tfoot > tr.danger > td, .table > thead > tr.danger > th, .table > tbody > tr.danger > th, .table > tfoot > tr.danger > th {
   background-color: var(--back-sub);
+}
+.table > tbody > tr.warning > td{
+  background-color:var(--back-sub);
 }

@@ -23,13 +23,13 @@ return [
 
     'accessories' => 'Los accesorios son cualquier cosa que se le asigne a los usuarios pero que no tenga numero de serie (o no importe realizarle el seguimiento en forma unica). Por ejemplo, mouse o teclados.',
 
-    'companies'     => 'Las empresas pueden ser utilizadas como un campo identificador simple, o pueden ser utilizadas para limitar la visibilidad de los activos, usuarios, etc si el soporte completo de la empresa está habilitado en la configuración del Administrador.',
+    'companies'     => 'Las compañías se pueden utilizar como un simple campo identificador, o se pueden utilizar para limitar la visibilidad de los activos, usuarios, etc si la opción "Soporte completo a múltiples compañías" está habilitado en "Configuración de administrador".',
 
     'components'    => 'Los componentes son elementos que son parte de un activo, por ejemplo HDD, RAM, etc.',
 
     'consumables'   => 'Los consumibles son cualquier cosa comprada que se usará con el tiempo. Por ejemplo, tinta de impresora o papel copiador.',
 
-    'depreciations' => 'Puede configurar las depreciaciones de activos para depreciar activos basados en una depreciación lineal.',
+    'depreciations' => 'Puede configurar la depreciación de activos usando un método de línea recta.',
     
     'empty_file'    => 'El importador detecta que este archivo está vacío.'
 ];

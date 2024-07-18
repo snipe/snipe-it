@@ -2,9 +2,9 @@
 return array(
     'companies' => 'Compañías',
     'create'    => 'Crear Compañía',
-    'email'     => 'Email de la empresa',
+    'email'     => 'Correo electrónico de la compañía',
     'title'     => 'Compañía',
-    'phone'     => 'Teléfono de empresa',
+    'phone'     => 'Teléfono de la compañía',
     'update'    => 'Actualizar Compañía',
     'name'      => 'Nombre de Compañía',
     'id'        => 'ID',
