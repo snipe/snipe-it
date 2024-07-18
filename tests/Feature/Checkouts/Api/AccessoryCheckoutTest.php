@@ -35,33 +35,42 @@ class AccessoryCheckoutTest extends TestCase
             ])
             ->assertOk()
             ->assertStatusMessageIs('error')
-            ->assertJson([
-                'messages' => [
-                    'assigned_to'    => ['The assigned to field must be an integer.'],
-                ],
-            ])
+            ->assertJson(
+                [
+                'status' => 'error',
+                'messages' =>
+                    [
+                        'checkout_qty' =>
+                            [
+                                trans_choice('admin/accessories/message.checkout.checkout_qty.lte', 0,
+                                    [
+                                        'number_currently_remaining' => 0,
+                                        'checkout_qty' => 1,
+                                        'number_remaining_after_checkout' => 0
+                                    ])
+                            ],
+
+                    ],
+                    'payload' => null,
+                ])
             ->assertStatus(200)
             ->json();
     }
 
-    public function testAccessoryCanBeCheckedOut()
+    public function testAccessoryCanBeCheckedOutWithoutQty()
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
         $admin = User::factory()->checkoutAccessories()->create();
 
-        $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
+        $this->actingAsForApi($admin)
             ->postJson(route('api.accessories.checkout', $accessory), [
                 'assigned_to' => $user->id,
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
             ->assertStatus(200)
-            ->assertJson([
-                'messages' => [
-                    'assigned_to'    => ['Accessory checked out successfully.'],
-                ],
-            ])
+            ->assertJson(['messages' =>  trans('admin/accessories/message.checkout.success')])
             ->json();
 
         $this->assertTrue($accessory->users->contains($user));
@@ -75,9 +84,7 @@ class AccessoryCheckoutTest extends TestCase
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
                 'user_id' => $admin->id,
-                'note' => 'oh hi there',
-            ])->count(),
-            'Log entry either does not exist or there are more than expected'
+            ])->count(),'Log entry either does not exist or there are more than expected'
         );
     }
 
@@ -87,7 +94,7 @@ class AccessoryCheckoutTest extends TestCase
         $user = User::factory()->create();
         $admin = User::factory()->checkoutAccessories()->create();
 
-        $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
+        $this->actingAsForApi($admin)
             ->postJson(route('api.accessories.checkout', $accessory), [
                 'assigned_to' => $user->id,
                 'checkout_qty' => 2,
@@ -95,11 +102,7 @@ class AccessoryCheckoutTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('success')
             ->assertStatus(200)
-            ->assertJson([
-                'messages' => [
-                    'assigned_to'    => ['The assigned to field must be an integer.'],
-                ],
-            ])
+            ->assertJson(['messages' =>  trans('admin/accessories/message.checkout.success')])
             ->json();
 
         $this->assertTrue($accessory->users->contains($user));
@@ -113,7 +116,6 @@ class AccessoryCheckoutTest extends TestCase
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
                 'user_id' => $admin->id,
-                'note' => 'oh hi there',
             ])->count(),
             'Log entry either does not exist or there are more than expected'
         );
@@ -131,15 +133,10 @@ class AccessoryCheckoutTest extends TestCase
             ])
             ->assertOk()
             ->assertStatusMessageIs('error')
-            ->assertJson([
-                'messages' => [
-                    'assigned_to'    => ['The assigned to field must be an integer.'],
-                ],
-            ])
             ->assertStatus(200)
             ->json();
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertFalse($accessory->users->contains($user));
     }
 
     public function testUserSentNotificationUponCheckout()
