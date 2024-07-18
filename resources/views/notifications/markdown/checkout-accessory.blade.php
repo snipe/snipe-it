@@ -20,6 +20,9 @@
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
 @endif
+@if (isset($checkout_qty))
+| **{{ trans('general.qty') }}** | {{ $checkout_qty }} |
+@endif
 @if ($note)
 | **{{ trans('mail.additional_notes') }}** | {{ $note }} |
 @endif
