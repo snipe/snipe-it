@@ -251,6 +251,8 @@ $(document).ready(function () {
        */
       placeholder: '',
       allowClear: true,
+      language: $('meta[name="language"]').attr('content'),
+      dir: $('meta[name="language-direction"]').attr('content'),
       ajax: {
         // the baseUrl includes a trailing slash
         url: baseUrl + 'api/v1/' + endpoint + '/selectlist',

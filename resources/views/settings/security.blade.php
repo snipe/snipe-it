@@ -106,7 +106,7 @@
                                 </label>
 
                                 @if ($errors->has('pwd_secure_complexity.*'))
-                                    <span class="alert-msg">{{ trans('validation.invalid_value_in_field') }}</span>
+                                    <span class="alert-msg">{{ trans('validation.generic.invalid_value_in_field') }}</span>
                                 @endif
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
