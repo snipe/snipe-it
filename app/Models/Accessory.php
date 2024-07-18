@@ -338,7 +338,7 @@ class Accessory extends SnipeModel
      */
     public function numCheckedOut()
     {
-        return $this->users_count ?? $this->users->count();
+        return $this->users_count ?? $this->users()->count();
     }
 
 
