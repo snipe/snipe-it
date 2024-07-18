@@ -19,7 +19,9 @@ use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\ArraySerializer;
 use App\Http\Transformers\CategoriesTransformer;
 use League\Fractal\Manager;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Spatie\Fractalistic\Fractal;
+use function Illuminate\Events\queueable;
 
 
 
@@ -106,6 +108,16 @@ class CategoriesController extends Controller
 
 
 
+        $paginator = Category::paginate(2);
+        $categories = $paginator->getCollection();
+
+        $results = Fractal::create()
+            ->collection($categories, new CategoriesTransformer())
+            ->serializeWith(new BootstrapTablesSerializer())
+            ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+            ->toArray();
+
+        return $results;
 
         $categories = Category::paginate(2);
 //        $manager = new Manager();
