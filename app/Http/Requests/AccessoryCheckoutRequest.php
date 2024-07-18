@@ -22,17 +22,11 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
         if ($this->accessory) {
 
             $this->diff = ($this->accessory->numRemaining() - $this->checkout_qty);
-
-            \Log::debug('num remaining in form request: '.$this->accessory->numRemaining());
-            \Log::debug('accessory qty in form request: '.$this->accessory->qty);
-            \Log::debug('checkout qty in form request: '.$this->checkout_qty);
-            \Log::debug('diff in form request: '.$this->diff);
-
             $this->merge([
-                'checkout_qty' => $this->checkout_qty,
-                'number_remaining_after_checkout' =>  ($this->accessory->numRemaining() - $this->checkout_qty),
-                'number_currently_remaining' =>  $this->accessory->numRemaining(),
-                'checkout_difference' =>  $this->diff,
+                'checkout_qty' => $this->checkout_qty ?? 1,
+                'number_remaining_after_checkout' =>  (int) ($this->accessory->numRemaining() - $this->checkout_qty),
+                'number_currently_remaining' =>  (int) $this->accessory->numRemaining(),
+                'checkout_difference' =>  (int) $this->diff,
             ]);
 
             \Log::debug('---------------------------------------------');
@@ -65,7 +59,6 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
 
                 'checkout_qty' => [
                     'integer',
-                    'lte:qty',
                     'lte:number_currently_remaining',
                     'min:1',
                 ],
@@ -75,7 +68,12 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
 
     public function messages(): array
     {
-        $messages = ['checkout_qty.lte' => 'There are only '.$this->accessory->qty.' available accessories, and you are trying to check out '.$this->checkout_qty.', leaving '.$this->number_remaining_after_checkout.' ('.$this->number_currently_remaining.') accessories remaining ('.$this->diff.').'];
+        $messages = [
+            'checkout_qty.lte' => trans_choice('admin/accessories/message.checkout.checkout_qty.lte', $this->number_currently_remaining, [
+                'number_currently_remaining' => $this->number_currently_remaining,
+                'checkout_qty' => $this->checkout_qty,
+            ]),
+        ];
         return $messages;
     }
 
