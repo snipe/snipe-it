@@ -64,6 +64,7 @@ class Helper
         'nl' => 'nl-NL', // Dutch
         'no' => 'no-NO', // Norwegian
         'pl' => 'pl-PL', // Polish
+        'pt' => 'pt-PT', // Portuguese
         'ro' => 'ro-RO', // Romanian
         'ru' => 'ru-RU', // Russian
         'sk' => 'sk-SK', // Slovak
@@ -1440,7 +1441,6 @@ class Helper
 
         foreach (self::$language_map as $legacy => $new) {
             if ($language_code == $legacy) {
-                Log::debug('Current language is '.$legacy.', using '.$new.' instead');
                 return $new;
             }
         }
@@ -1451,6 +1451,7 @@ class Helper
 
     public static function mapBackToLegacyLocale($new_locale = null)
     {
+
         if (strlen($new_locale) <= 4) {
             return $new_locale; //"new locale" apparently wasn't quite so new
         }
@@ -1458,10 +1459,19 @@ class Helper
         // This does a *reverse* search against our new language map array - given the value, find the *key* for it
         $legacy_locale = array_search($new_locale, self::$language_map);
 
-        if($legacy_locale !== false) {
+        if ($legacy_locale !== false) {
             return $legacy_locale;
         }
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
+    }
+
+    public static function determineLanguageDirection() {
+        return in_array(app()->getLocale(),
+            [
+                'ar-SA',
+                'fa-IR',
+                'he-IL'
+            ]) ? 'rtl' : 'ltr';
     }
 
 

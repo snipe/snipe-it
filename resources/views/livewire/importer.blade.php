@@ -75,7 +75,7 @@
                                     </div>
                                 @endif
 
-                                <div class="col-md-2 col-sm-5 col-xs-12 text-right pull-right">
+                                <div class="col-md-4 col-sm-5 col-xs-12 text-right pull-right">
 
                                     <!-- The fileinput-button span is used to style the file input field as button -->
                                     @if (!config('app.lock_passwords'))
@@ -198,7 +198,11 @@
                                                             @if ($activeFile->import_type)
                                                                 <div class="form-group col-md-12">
                                                                     <hr style="border-top: 1px solid lightgray">
-                                                                    <h3><i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}"></i> Map {{ ucwords($activeFile->import_type) }} Import Fields</h3>
+                                                                    <h3>
+                                                                        <i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}">
+                                                                        </i>
+                                                                        {{ trans('general.map_fields', ['item_type' => ucwords($activeFile->import_type)]) }}
+                                                                       </h3>
                                                                     <hr style="border-top: 1px solid lightgray">
                                                                 </div>
                                                                 <div class="form-group col-md-12">
@@ -254,7 +258,7 @@
                                                                         <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
-                                                                        <button type="submit" class="btn btn-primary col-md-5" id="import">Import</button>
+                                                                        <button type="submit" class="btn btn-primary col-md-5" id="import">{{ trans('admin/hardware/message.import.import_button') }}</button>
                                                                         <br><br>
                                                                     </div>
                                                                 </div>
