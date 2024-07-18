@@ -13,10 +13,9 @@ class BootstrapTablesSerializer extends JsonApiSerializer
 {
     public function collection($resourceKey, array $data): array
     {
-        \Log::error('resource key: '.$resourceKey);
         return [
-                'total' => count($data),
-                'rows' => $data
+            'total' => count($data),
+            'rows' => $data
         ];
     }
 

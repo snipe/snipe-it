@@ -34,9 +34,9 @@ class CategoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\Response
+
      */
-    public function index(Request $request)
+    public function index(Request $request) : array
     {
         $this->authorize('view', Category::class);
         $allowed_columns = [
@@ -106,40 +106,20 @@ class CategoriesController extends Controller
             $categories->where('checkin_email', '=', $request->input('checkin_email'));
         }
 
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
+        $categories->orderBy($sort, $order);
 
+        $paginator = $categories->paginate(app('page_number'));
+        $total_results = $paginator->total();
+        $results = $paginator->getCollection();
 
-        $paginator = Category::paginate(2);
-        $categories = $paginator->getCollection();
-
-        $results = Fractal::create()
-            ->collection($categories, new CategoriesTransformer())
+        return Fractal::create()
+            ->collection($results, new CategoriesTransformer())
             ->serializeWith(new BootstrapTablesSerializer())
+            ->addMeta(['total' => $total_results])
             ->paginateWith(new IlluminatePaginatorAdapter($paginator))
             ->toArray();
-
-        return $results;
-
-        $categories = Category::paginate(2);
-//        $manager = new Manager();
-//        $manager->setSerializer(new BootstrapTablesSerializer('rows', $categories));
-
-        $categories =  Fractal::create()
-            ->collection($categories, new BootstrapTablesSerializer('rows', $categories->toArray() ))
-            ->transformWith(CategoriesTransformer::class)
-            ->serializeWith(new BootstrapTablesSerializer('rows', $categories));
-            //->toArray();
-
-
-
-        return $categories;
-
-        //$transformer = $categories->first()->transformer;
-        $resource = new Collection($categories->toArray(), new CategoriesTransformer(), 'rows');
-        //return $categories->transformWith(new CategoriesTransformer())->toArray();
-        //return new Collection($categories->toArray(), new CategoriesTransformer());
-
-        //return $this->transformData($categories, $transformer);
-        return $resource;
 
     }
 

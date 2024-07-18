@@ -48,6 +48,24 @@ class SettingsServiceProvider extends ServiceProvider
             return $offset;
         });
 
+        // Make sure the offset is actually set and is an integer
+        \App::singleton('page_number', function ($results) {
+
+            if (request('page_number')) {
+                return (int) request('page_number');
+            }
+
+            $offset = app('api_offset_value');
+            \Log::error('offset is: '.$offset);
+
+            $limit = app('api_limit_value');
+            \Log::error('limit is: '.$limit);
+
+            $page_number = (intval($offset / $limit) + 1);
+            \Log::error('page number is: '.$page_number);
+            return $page_number;
+        });
+
 
         /**
          * Set some common variables so that they're globally available.
