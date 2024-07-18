@@ -41,7 +41,7 @@ class LabelWriter
                 $position = $label->getlabelPosition($pageIndex);
 
                 $pdf->StartTemplate();
-                $this->write5267($pdf, $data->get($recordIndex), $label);
+                $this->write($pdf, $data->get($recordIndex), $label);
                 $template = $pdf->EndTemplate();
 
                 $pdf->printTemplate($template, $position[0], $position[1]);
@@ -64,7 +64,7 @@ class LabelWriter
         }else {
             $data->each(function ($record, $index) use ($label, $pdf) {
                 $pdf->AddPage();
-                $this->write5267($pdf, $record, $label);
+                $this->write($pdf, $record, $label);
             });
         }
     }
@@ -457,22 +457,13 @@ class LabelWriter
      */
     public final function getLabelPrintableArea($template) : object
     {
-        dd([
-            'x1' => $template->margin_left,
+        return (object)
+        [   'x1' => $template->margin_left,
             'y1' => $template->margin_top,
-            'x2' => $template->label_width - $template->margin_right,
-            'y2' => $template->label_height - $template->margin_bottom,
-            'w' => $template->label_width - $template->margin_left - $template->margin_right,
-            'h' => $template->label_height - $template->margin_top - $template->margin_botom,
-        ]);
-//        dd('margin left: '.$template->margin_left,'margin top: '.$template->margin_top, 'width: '.$template->label_width, 'margin right: '.$template->margin_right, 'height: '.$template->label_width, 'margin bottom:'.$template->margin_bottom);
-        return (object)[
-            'x1' => $template->margin_left,
-            'y1' => $template->margin_top,
-            'x2' => $template->label_width - $template->margin_right,
-            'y2' => $template->label_height - $template->margin_bottom,
-            'w' => $template->label_width - $template->margin_left - $template->margin_right,
-            'h' => $template->label_height - $template->margin_top - $template->margin_botom,
+            'x2' => $template->label_Width() - $template->margin_right,
+            'y2' => $template->label_Height() - $template->margin_bottom,
+            'w' => $template->label_Width() - $template->margin_left - $template->margin_right,
+            'h' => $template->label_Height() - $template->margin_top - $template->margin_bottom,
         ];
     }
 

@@ -179,13 +179,10 @@ class LabelTemplate extends SnipeModel
     {
 
         if (isset($this->label_width)) {
-            return $this->label_width;
-//                Helper::convertUnit($this->label_width, 'pt', $this->measurement_unit);
+            return Helper::convertUnit($this->label_width, 'pt', $this->measurement_unit);
         }
-        else{
-            return $this->tape_width;
-//                Helper::convertUnit($this->tape_width, 'pt', $this->measurement_unit);
-        }
+
+        return Helper::convertUnit($this->tape_width, 'pt', $this->measurement_unit);
 
     }
 
@@ -197,13 +194,10 @@ class LabelTemplate extends SnipeModel
     public function label_Height(): float
     {
         if (isset($this->label_height)) {
-            return $this->label_height;
-//                Helper::convertUnit($this->label_height, 'pt', $this->measurement_unit);
+            return Helper::convertUnit($this->label_height, 'pt', $this->measurement_unit);
         }
-        else{
-            return $this->tape_height;
-//                Helper::convertUnit($this->tape_height, 'pt', $this->measurement_unit);
-        }
+
+        return Helper::convertUnit($this->tape_height, 'pt', $this->measurement_unit);
     }
 
     /**
