@@ -564,11 +564,7 @@ class Importer extends Component
     #[Computed]
     public function activeFile()
     {
-        if ($this->activeFileId) {
-            return Import::find($this->activeFileId);
-        }
-
-        return null;
+        return Import::find($this->activeFileId);
     }
 
     public function render()
