@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Accessory;
-use App\Models\Category;
-use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 class AccessoryCheckoutRequest extends ImageUploadRequest
@@ -23,10 +21,21 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
 
         if ($this->accessory) {
 
+            $this->diff = ($this->accessory->numRemaining() - $this->checkout_qty);
+
+            \Log::debug('num remaining in form request: '.$this->accessory->numRemaining());
+            \Log::debug('accessory qty in form request: '.$this->accessory->qty);
+            \Log::debug('checkout qty in form request: '.$this->checkout_qty);
+            \Log::debug('diff in form request: '.$this->diff);
+
             $this->merge([
-                'checkout_qty' => (int) $this->checkout_qty ?? 1,
-                'number_remaining_after_checkout' => (int) ($this->accessory->numRemaining() - $this->checkout_qty) ?? 0,
+                'checkout_qty' => $this->checkout_qty,
+                'number_remaining_after_checkout' =>  ($this->accessory->numRemaining() - $this->checkout_qty),
+                'number_currently_remaining' =>  $this->accessory->numRemaining(),
+                'checkout_difference' =>  $this->diff,
             ]);
+
+            \Log::debug('---------------------------------------------');
         }
 
     }
@@ -47,14 +56,18 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
                     'exists:users,id,deleted_at,NULL',
                     'not_array'
                 ],
+
                 'number_remaining_after_checkout' => [
-                    //'gte:checkout_qty',
+                    'min:0',
                     'required',
                     'integer',
-                    'min:0',
                 ],
+
                 'checkout_qty' => [
-                    'lte:number_remaining_after_checkout',
+                    'integer',
+                    'lte:qty',
+                    'lte:number_currently_remaining',
+                    'min:1',
                 ],
             ],
         );
@@ -62,7 +75,7 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
 
     public function messages(): array
     {
-        $messages = ['checkout_qty.lte' => 'There are only  '.$this->accessory->qty.'/'.$this->number_remaining_after_checkout.' accessories remaining, trying to check out '.$this->checkout_qty];
+        $messages = ['checkout_qty.lte' => 'There are only '.$this->accessory->qty.' available accessories, and you are trying to check out '.$this->checkout_qty.', leaving '.$this->number_remaining_after_checkout.' ('.$this->number_currently_remaining.') accessories remaining ('.$this->diff.').'];
         return $messages;
     }
 

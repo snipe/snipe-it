@@ -63,7 +63,7 @@ class Accessory extends SnipeModel
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
         'purchase_cost'     => 'numeric|nullable|gte:0',
-        'purchase_date'   => 'date_format:Y-m-d|nullable',
+        'purchase_date'     => 'date_format:Y-m-d|nullable',
     ];
 
 
@@ -338,8 +338,7 @@ class Accessory extends SnipeModel
      */
     public function numCheckedOut()
     {
-        \Log::debug('numCheckedOut: '.$this->users_count ?? $this->users->count());
-        return $this->users_count ?? $this->users->count();
+        return (int) $this->users_count ?? $this->users->count();
     }
 
 
@@ -347,7 +346,7 @@ class Accessory extends SnipeModel
      * Check how many items of an accessory remain.
      *
      * In order to use this model method, you MUST call withCount('users as users_count')
-     * on the eloquent query in the controller, otherwise $this->>users_count will be null and
+     * on the eloquent query in the controller, otherwise $this->users_count will be null and
      * bad things happen.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -357,14 +356,15 @@ class Accessory extends SnipeModel
     public function numRemaining()
     {
         $checkedout = $this->numCheckedOut();
-        $total = $this->qty;
-        $remaining = $total - $checkedout;
-
         \Log::debug('checked out: '.$checkedout);
+
+        $total = $this->qty;
         \Log::debug('total: '.$total);
+
+        $remaining = $total - $checkedout;
         \Log::debug('remaining: '.$remaining);
 
-        return (int) $remaining;
+        return  $remaining;
     }
 
     /**
