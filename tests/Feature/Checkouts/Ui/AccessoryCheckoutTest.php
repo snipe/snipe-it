@@ -71,10 +71,12 @@ class AccessoryCheckoutTest extends TestCase
 
     public function testAccessoryCanBeCheckedOutWithQuantity()
     {
+        //$this->withoutExceptionHandling();
         $accessory = Accessory::factory()->create(['qty'=>5]);
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
+            ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
                 'checkout_qty' => 3,
@@ -101,6 +103,7 @@ class AccessoryCheckoutTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
+            ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
             ]);
@@ -115,6 +118,7 @@ class AccessoryCheckoutTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($actor)
+            ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => $user->id,
                 'note' => 'oh hi there',
