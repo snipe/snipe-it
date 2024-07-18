@@ -76,10 +76,4 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
         ];
         return $messages;
     }
-
-
-    public function response(array $errors)
-    {
-        return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
-    }
 }
