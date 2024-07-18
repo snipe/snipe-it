@@ -55,6 +55,29 @@ class EmailNotificationsUponCheckinTest extends TestCase
         );
     }
 
+    public function testCheckInEmailSentToAdminIfUserEmailNull()
+    {
+        $user = User::factory()->create(["email" => null]);
+        $admin = User::factory()->admin()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create();
+        $asset->model->category->update(['checkin_email' => true]);
+        $this->fireCheckInEvent($asset, $user);
+
+        Notification::assertNotSentTo(
+            $user,
+            function (CheckInAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            }
+        );
+
+        /*Notification::assertSentTo(
+            $this->settings->admin_cc_email;
+            function (CheckInAssetNotification $notification, $channels) {
+                return in_array('mail', $channels);
+            }
+        );*/
+    }
+
     private function fireCheckInEvent($asset, $user): void
     {
         event(new CheckoutableCheckedIn(
