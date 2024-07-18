@@ -4,16 +4,26 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Transformers\CategoriesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Traits\ApiResponder;
+use App\Http\Serializers\BootstrapTablesSerializer;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Serializer\DataArraySerializer;
+use App\Http\Transformers\CategoriesTransformer;
+
 
 class CategoriesController extends Controller
 {
+    use ApiResponder;
+
     /**
      * Display a listing of the resource.
      *
@@ -91,18 +101,18 @@ class CategoriesController extends Controller
             $categories->where('checkin_email', '=', $request->input('checkin_email'));
         }
 
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : app('api_offset_value');
-        $limit = app('api_limit_value');
 
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
-        $categories->orderBy($sort, $order);
+        //$manager = new Manager();
+        //$manager->setSerializer(new BootstrapTablesSerializer());
 
-        $total = $categories->count();
-        $categories = $categories->skip($offset)->take($limit)->get();
+        $categories = Category::latest()->paginate(2);
 
-        return (new CategoriesTransformer)->transformCategories($categories, $total);
+        $transformer = $categories->first()->transformer;
+        $resource = new Collection($categories, new CategoriesTransformer(), 'rows');
+        return $categories->transformWith(new CategoriesTransformer('rows'))->toArray();
+        return new Collection('rows', $categories->toArray(), new CategoriesTransformer());
+
+        //return $this->transformData($categories, $transformer);
 
     }
 
@@ -141,7 +151,8 @@ class CategoriesController extends Controller
     {
         $this->authorize('view', Category::class);
         $category = Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')->findOrFail($id);
-        return (new CategoriesTransformer)->transformCategory($category);
+        $transformer = $category->first()->transformer;
+        return $this->transformData($category, $transformer);
 
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Transformers;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class DatatablesTransformer
 {
     public function transformDatatables($objects, $total = null)

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 use App\Helpers\Helper;
 use Illuminate\Support\Str;
+use App\Http\Transformers\CategoriesTransformer;
+use App\Presenters\CategoryPresenter;
 
 /**
  * Model for Categories. Categories are a higher-level group
@@ -24,7 +26,9 @@ class Category extends SnipeModel
 {
     use HasFactory;
 
-    protected $presenter = \App\Presenters\CategoryPresenter::class;
+    protected $presenter = CategoryPresenter::class;
+    public $transformer = CategoriesTransformer::class;
+
     use Presentable;
     use SoftDeletes;
 

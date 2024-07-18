@@ -7,20 +7,11 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use League\Fractal\TransformerAbstract;
 
-class CategoriesTransformer
+class CategoriesTransformer extends TransformerAbstract
 {
-    public function transformCategories(Collection $categorys, $total)
-    {
-        $array = [];
-        foreach ($categorys as $category) {
-            $array[] = self::transformCategory($category);
-        }
-
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
-    }
-
-    public function transformCategory(Category $category = null)
+    public function transform(Category $category = null)
     {
 
         // We only ever use item_count for categories in this transformer, so it makes sense to keep it
@@ -76,4 +67,6 @@ class CategoriesTransformer
             return $array;
         }
     }
+
+
 }
