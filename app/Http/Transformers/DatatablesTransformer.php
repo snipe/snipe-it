@@ -8,7 +8,7 @@ class DatatablesTransformer
     {
         $objects_array['total'] = $paginator->total();
         $objects_array['rows'] = $objects;
-        $objects_array['meta'] = [
+        $objects_array['meta']['pagination'] = [
                                     'per_page' => $paginator->perPage(),
                                     'current_page' => $paginator->currentPage(),
                                     'last_page' => $paginator->lastPage(),
