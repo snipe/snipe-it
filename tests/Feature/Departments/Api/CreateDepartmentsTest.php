@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Department\Api;
+namespace Tests\Feature\Departments\Api;
 
 use App\Models\AssetModel;
 use App\Models\Department;

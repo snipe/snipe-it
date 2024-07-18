@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'LDAP Server',
-    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'LDAP SSL certificate validation',
     'ldap_server_cert_ignore'	=> 'Allow invalid SSL Certificate',
     'ldap_server_cert_help'		=> 'Select this checkbox if you are using a self signed SSL cert and would like to accept an invalid SSL certificate.',
