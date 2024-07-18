@@ -22,6 +22,7 @@ class AccessoryCheckoutTest extends TestCase
     {
         $accessory = Accessory::factory()->create();
         $response = $this->actingAs(User::factory()->superuser()->create())
+            ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
                 // missing assigned_to
             ])
@@ -32,17 +33,19 @@ class AccessoryCheckoutTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
-    public function testAccessoryMustBeAvailableWhenCheckingOut()
+    public function testAccessoryMustHaveAvailableItemsForCheckoutWhenCheckingOut()
     {
 
+        $accessory = Accessory::factory()->withoutItemsRemaining()->create();
         $response = $this->actingAs(User::factory()->viewAccessories()->checkoutAccessories()->create())
-            ->post(route('accessories.checkout.store', Accessory::factory()->withoutItemsRemaining()->create()), [
+            ->from(route('accessories.checkout.show', $accessory))
+            ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_to' => User::factory()->create()->id,
             ])
             ->assertStatus(302)
-            ->assertSessionHas('error')
-            ->assertRedirect(route('accessories.index'));
-
+            ->assertSessionHas('errors')
+            ->assertRedirect(route('accessories.checkout.store', $accessory));
+        $response->assertInvalid(['checkout_qty']);
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
@@ -71,7 +74,6 @@ class AccessoryCheckoutTest extends TestCase
 
     public function testAccessoryCanBeCheckedOutWithQuantity()
     {
-        //$this->withoutExceptionHandling();
         $accessory = Accessory::factory()->create(['qty'=>5]);
         $user = User::factory()->create();
 
