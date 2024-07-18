@@ -13,11 +13,14 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Traits\ApiResponder;
 use App\Http\Serializers\BootstrapTablesSerializer;
-use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Serializer\DataArraySerializer;
+use League\Fractal\Serializer\ArraySerializer;
 use App\Http\Transformers\CategoriesTransformer;
+use League\Fractal\Manager;
+use Spatie\Fractalistic\Fractal;
+
 
 
 class CategoriesController extends Controller
@@ -31,7 +34,7 @@ class CategoriesController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) : array
+    public function index(Request $request)
     {
         $this->authorize('view', Category::class);
         $allowed_columns = [
@@ -102,17 +105,29 @@ class CategoriesController extends Controller
         }
 
 
-        //$manager = new Manager();
-        //$manager->setSerializer(new BootstrapTablesSerializer());
 
-        $categories = Category::latest()->paginate(2);
 
-        $transformer = $categories->first()->transformer;
-        $resource = new Collection($categories, new CategoriesTransformer(), 'rows');
-        return $categories->transformWith(new CategoriesTransformer('rows'))->toArray();
-        return new Collection('rows', $categories->toArray(), new CategoriesTransformer());
+        $categories = Category::paginate(2);
+//        $manager = new Manager();
+//        $manager->setSerializer(new BootstrapTablesSerializer('rows', $categories));
+
+        $categories =  Fractal::create()
+            ->collection($categories, new BootstrapTablesSerializer('rows', $categories->toArray() ))
+            ->transformWith(CategoriesTransformer::class)
+            ->serializeWith(new BootstrapTablesSerializer('rows', $categories));
+            //->toArray();
+
+
+
+        return $categories;
+
+        //$transformer = $categories->first()->transformer;
+        $resource = new Collection($categories->toArray(), new CategoriesTransformer(), 'rows');
+        //return $categories->transformWith(new CategoriesTransformer())->toArray();
+        //return new Collection($categories->toArray(), new CategoriesTransformer());
 
         //return $this->transformData($categories, $transformer);
+        return $resource;
 
     }
 
