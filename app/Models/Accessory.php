@@ -356,13 +356,8 @@ class Accessory extends SnipeModel
     public function numRemaining()
     {
         $checkedout = $this->numCheckedOut();
-        \Log::debug('checked out: '.$checkedout);
-
         $total = $this->qty;
-        \Log::debug('total: '.$total);
-
         $remaining = $total - $checkedout;
-        \Log::debug('remaining: '.$remaining);
 
         return  $remaining;
     }
