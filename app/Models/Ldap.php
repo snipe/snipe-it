@@ -229,6 +229,7 @@ class Ldap extends Model
         $item['department'] = $ldapattributes[$ldap_result_dept][0] ?? '';
         $item['manager'] = $ldapattributes[$ldap_result_manager][0] ?? '';
         $item['location'] = $ldapattributes[$ldap_result_location][0] ?? '';
+        $item['locale'] = app()->getLocale();
 
         return $item;
     }
@@ -239,7 +240,7 @@ class Ldap extends Model
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $ldapatttibutes
-     * @return array|bool
+     * @return User | bool
      */
     public static function createUserFromLdap($ldapatttibutes, $password)
     {
@@ -252,6 +253,7 @@ class Ldap extends Model
             $user->last_name = $item['lastname'];
             $user->username = $item['username'];
             $user->email = $item['email'];
+            $user->locale = $item['locale'];
             $user->password = $user->noPassword();
 
             if (Setting::getSettings()->ldap_pw_sync == '1') {
