@@ -299,7 +299,7 @@
                                                         <li> {{ $asset->model->manufacturer->name }}</li>
                                                     @endcan
 
-                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->url!=''))
+                                                        @if (($asset->model) && ($asset->model->manufacturer) &&  ($asset->model->manufacturer->url!=''))
                                                         <li>
                                                             <i class="fas fa-globe-americas" aria-hidden="true"></i>
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}" target="_blank">
@@ -309,7 +309,7 @@
                                                         </li>
                                                     @endif
 
-                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->support_url!=''))
+                                                    @if (($asset->model) && ($asset->model->manufacturer) &&  ($asset->model->manufacturer->support_url!=''))
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}" target="_blank">
@@ -319,7 +319,7 @@
                                                         </li>
                                                     @endif
 
-                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
+                                                    @if (($asset->model) && ($asset->model->manufacturer) &&  ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                         <li>
                                                             <i class="far fa-wrench" aria-hidden="true"></i>
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
