@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'A felhasználóneved és az email címed <em>talán</em> azonos, talán nem, ez függ a beállításoktól. Ha nem emlékszel a felhasználónevedre, vedd fel a kapcsolatot az adminiszrátorral. <br><br><strong>Email nélküli felhasználónevek nem fognak jelszó visszaállítási linket kapni.</strong> ',
     'google_login'                  => 'Bejelentkezés Google Workspace-el',
     'google_login_failed'           => 'Google bejelentkezés sikertelen, kérem, próbálja újra.',
-
 ];
 

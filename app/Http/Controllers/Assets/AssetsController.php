@@ -6,7 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
-use App\Models\Manufacturer;
+use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -20,14 +20,16 @@ use Illuminate\Support\Facades\Auth;
 use App\View\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use League\Csv\Reader;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Response;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * This class controls all actions related to assets for
@@ -55,10 +57,8 @@ class AssetsController extends Controller
      * @see AssetController::getDatatable() method that generates the JSON response
      * @since [v1.0]
      * @param Request $request
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index(Request $request)
+    public function index(Request $request) : View
     {
         $this->authorize('index', Asset::class);
         $company = Company::find($request->input('company_id'));
@@ -72,13 +72,12 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param Request $request
-     * @return View
      * @internal param int $model_id
      */
-    public function create(Request $request)
+    public function create(Request $request) : View
     {
         $this->authorize('create', Asset::class);
-        $view = View::make('hardware/edit')
+        $view = view('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('item', new Asset)
             ->with('statuslabel_types', Helper::statusTypeList());
@@ -96,9 +95,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return Redirect
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : RedirectResponse
     {
         $this->authorize(Asset::class);
 
@@ -198,7 +196,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
+                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
                 $success = true;
@@ -207,7 +205,6 @@ class AssetsController extends Controller
         }
 
         if ($success) {
-            \Log::debug(e($asset->asset_tag));
             return redirect()->route('hardware.index')
                 ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset->id), 'id', 'tag' => e($asset->asset_tag)]));
                
@@ -217,11 +214,6 @@ class AssetsController extends Controller
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
-    public function getOptionCookie(Request $request){
-        $value = $request->cookie('optional_info');
-        echo $value;
-        return $value;
-     }
 
     /**
      * Returns a view that presents a form to edit an existing asset.
@@ -229,9 +221,9 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($assetId = null)
+    public function edit($assetId = null) : View | RedirectResponse
     {
         if (! $item = Asset::find($assetId)) {
             // Redirect to the asset management page with error
@@ -252,9 +244,9 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show($assetId = null)
+    public function show($assetId = null) : View | RedirectResponse
     {
         $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('view', $asset);
@@ -292,11 +284,10 @@ class AssetsController extends Controller
      * Validate and process asset edit form.
      *
      * @param int $assetId
-     * @return \Illuminate\Http\RedirectResponse|Redirect
-     *@since [v1.0]
+     * @since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function update(ImageUploadRequest $request, $assetId = null)
+    public function update(ImageUploadRequest $request, $assetId = null) : RedirectResponse
     {
         // Check if the asset exists
         if (! $asset = Asset::find($assetId)) {
@@ -308,7 +299,8 @@ class AssetsController extends Controller
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
-        $asset->purchase_date = $request->input('purchase_date', null); 
+        $asset->purchase_date = $request->input('purchase_date', null);
+        $asset->next_audit_date = $request->input('next_audit_date', null);
         if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
             $asset->purchase_date = $request->input('purchase_date', null); 
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
@@ -410,9 +402,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return Redirect
      */
-    public function destroy($assetId)
+    public function destroy($assetId) : RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -444,9 +435,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Redirect
      */
-    public function getAssetBySerial(Request $request)
+    public function getAssetBySerial(Request $request) : RedirectResponse
     {
         $topsearch = ($request->get('topsearch')=="true");
 
@@ -462,9 +452,9 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function getAssetByTag(Request $request, $tag=null)
+    public function getAssetByTag(Request $request, $tag=null) : RedirectResponse
     {
         $tag = $tag ? $tag : $request->get('assetTag');
         $topsearch = ($request->get('topsearch') == 'true');
@@ -484,9 +474,8 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return Response
      */
-    public function getQrCode($assetId = null)
+    public function getQrCode($assetId = null) : Response | BinaryFileResponse | string | bool
     {
         $settings = Setting::getSettings();
 
@@ -513,6 +502,7 @@ class AssetsController extends Controller
 
             return 'That asset is invalid';
         }
+        return false;
     }
 
     /**
@@ -560,7 +550,7 @@ class AssetsController extends Controller
      *
      * @author [L. Swartzendruber] [<logan.swartzendruber@gmail.com>
      * @param int $assetId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getLabel($assetId = null)
     {
@@ -584,7 +574,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getClone($assetId = null)
     {
@@ -613,7 +603,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getImportHistory()
     {
@@ -635,7 +625,7 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function postImportHistory(Request $request)
     {
@@ -729,8 +719,8 @@ class AssetsController extends Controller
                         Actionlog::firstOrCreate([
                             'item_id' => $asset->id,
                             'item_type' => Asset::class,
-                            'user_id' =>  Auth::user()->id,
-                            'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
+                            'user_id' =>  auth()->id(),
+                            'note' => 'Checkout imported by '.auth()->user()->present()->fullName().' from history importer',
                             'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                             'target_type' => User::class,
                             'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
@@ -757,8 +747,8 @@ class AssetsController extends Controller
                             Actionlog::firstOrCreate([
                                 'item_id' => $item[$asset_tag][$batch_counter]['asset_id'],
                                 'item_type' => Asset::class,
-                                'user_id' => Auth::user()->id,
-                                'note' => 'Checkin imported by '.Auth::user()->present()->fullName().' from history importer',
+                                'user_id' => auth()->id(),
+                                'note' => 'Checkin imported by '.auth()->user()->present()->fullName().' from history importer',
                                 'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin',
@@ -795,7 +785,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function getRestore($assetId = null)
     {
@@ -854,15 +844,15 @@ class AssetsController extends Controller
         return view('hardware/audit-due');
     }
 
-    public function overdueForAudit()
+    public function dueForCheckin()
     {
-        $this->authorize('audit', Asset::class);
+        $this->authorize('checkin', Asset::class);
 
-        return view('hardware/audit-overdue');
+        return view('hardware/checkin-due');
     }
 
 
-    public function auditStore(Request $request, $id)
+    public function auditStore(UploadFileRequest $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -879,7 +869,21 @@ class AssetsController extends Controller
 
         $asset = Asset::findOrFail($id);
 
-        // We don't want to log this as a normal update, so let's bypass that
+        /**
+         * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
+         * which would trigger the Asset Observer and would log an asset *update* log entry (because the
+         * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
+         * the audit log entry we're creating through this controller.
+         *
+         * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
+         * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
+         * will bypass normal model-level validation that's usually handled at the observer )
+         *
+         * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
+         * which manually invokes Watson Validating to make sure the asset's model is valid.
+         *
+         * @see \App\Observers\AssetObserver::updating()
+         */
         $asset->unsetEventDispatcher();
 
         $asset->next_audit_date = $request->input('next_audit_date');
@@ -888,29 +892,27 @@ class AssetsController extends Controller
         // Check to see if they checked the box to update the physical location,
         // not just note it in the audit notes
         if ($request->input('update_location') == '1') {
-            Log::debug('update location in audit');
             $asset->location_id = $request->input('location_id');
         }
+        
 
+        /**
+         * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
+         * We have to invoke this manually because of the unsetEventDispatcher() above.)
+         */
+        if ($asset->isValid() && $asset->save()) {
 
-        if ($asset->save()) {
-            $file_name = '';
-            // Upload an image, if attached
+            $file_name = null;
+            // Create the image (if one was chosen.)
             if ($request->hasFile('image')) {
-                $path = 'private_uploads/audits';
-                if (! Storage::exists($path)) {
-                    Storage::makeDirectory($path, 775);
-                }
-                $upload = $image = $request->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = 'audit-'.str_random(18).'.'.$ext;
-                Storage::putFileAs($path, $upload, $file_name);
+                $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
             }
-
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
+
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     public function getRequestedIndex($user_id = null)

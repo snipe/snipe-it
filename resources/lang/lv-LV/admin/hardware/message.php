@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Ievadīšana: </strong> Šis īpašums ir atzīmēts kā pašlaik nederīgs. Ja šis statuss ir mainījies, lūdzu, atjauniniet aktīvu statusu.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Aktīvs neeksistē.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Šobrīd šis īpašums tiek pārbaudīts lietotājam un to nevar izdzēst. Vispirms pārbaudiet aktīvu, un pēc tam mēģiniet vēlreiz izdzēst.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Īpašums netika izveidots, lūdzu, mēģiniet vēlreiz. :(',
@@ -16,6 +19,7 @@ return [
     'update' => [
         'error'   			=> 'Īpašums netika atjaunināts, lūdzu, mēģiniet vēlreiz',
         'success' 			=> 'Īpašums ir veiksmīgi atjaunināts.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Lauki nav atlasīti, tāpēc nekas netika atjaunināts.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
         'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
@@ -29,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Aktīvu revīzija bija neveiksmīga. Lūdzu mēģiniet vēlreiz.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Aktīvu audits ir veiksmīgi reģistrēts.',
     ],
 
@@ -47,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Daži vienumi netika pareizi importēti.',
         'errorDetail'           => 'Tālāk minētie vienumi netika importēti kļūdu dēļ.',
         'success'               => 'Jūsu fails ir importēts',

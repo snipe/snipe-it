@@ -16,6 +16,8 @@ return array(
         'code_required'         => 'کد دو حرفی  مورد نیاز است',
         'invalid_code'          => 'کد دو حرفی نامعتبر است.
 ',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

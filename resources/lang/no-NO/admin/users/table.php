@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Innloggingsdetaljer kan ikke endres i denne installasjonen.',
     'manager' 				=> 'Overordnet',
     'managed_locations'     => 'Administrere plasseringer',
+    'managed_users'         => 'Administrerte brukere',
     'name' 					=> 'Navn',
     'nogroup'               => 'Ingen grupper er opprettet ennå. For å legge til en, besøk: ',
     'notes'                 => 'Notater',

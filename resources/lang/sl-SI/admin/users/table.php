@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Podrobnosti prijav ni mogoče spremeniti pri tej namestitvi.',
     'manager' 				=> 'Vodja',
     'managed_locations'     => 'Upravljane lokacije',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Ime',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Opombe',

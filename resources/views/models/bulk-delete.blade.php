@@ -35,7 +35,7 @@
 
                                 </td>
                                 <td class="col-md-1"><i class="fas fa-barcode" aria-hidden="true"></i></td>
-                                <td class="col-md-10">Name</td>
+                                <td class="col-md-10">{{ trans('general.name') }}</td>
                             </tr>
                             </thead>
                             <tbody>

@@ -14,6 +14,8 @@ return array(
         'success'               => 'V-ati logat cu succes.',
         'code_required'         => 'Codul doi factori este necesar.',
         'invalid_code'          => 'Codul doi factori este invalid.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

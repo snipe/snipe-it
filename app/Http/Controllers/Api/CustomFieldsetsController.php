@@ -9,8 +9,7 @@ use App\Http\Transformers\CustomFieldsTransformer;
 use App\Models\CustomFieldset;
 use App\Models\CustomField;
 use Illuminate\Http\Request;
-use Redirect;
-use View;
+use Illuminate\Http\JsonResponse;
 
 /**
  * This controller handles all actions related to Custom Asset Fieldsets for
@@ -30,9 +29,8 @@ class CustomFieldsetsController extends Controller
      * @author [Josh Gibson]
      * @param int $id
      * @since [v1.8]
-     * @return View
      */
-    public function index()
+    public function index() : array
     {
         $this->authorize('index', CustomField::class);
         $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get();
@@ -46,9 +44,8 @@ class CustomFieldsetsController extends Controller
      * @author [Josh Gibson]
      * @param int $id
      * @since [v1.8]
-     * @return View
      */
-    public function show($id)
+    public function show($id) : JsonResponse | array
     {
         $this->authorize('view', CustomField::class);
         if ($fieldset = CustomFieldset::find($id)) {
@@ -65,9 +62,8 @@ class CustomFieldsetsController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) : JsonResponse
     {
         $this->authorize('update', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
@@ -86,9 +82,8 @@ class CustomFieldsetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) : JsonResponse
     {
         $this->authorize('create', CustomField::class);
         $fieldset = new CustomFieldset;
@@ -118,9 +113,8 @@ class CustomFieldsetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return Redirect
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
@@ -147,7 +141,7 @@ class CustomFieldsetsController extends Controller
      * @param $fieldsetId
      * @return string JSON
      */
-    public function fields($id)
+    public function fields($id) : array
     {
         $this->authorize('view', CustomField::class);
         $set = CustomFieldset::findOrFail($id);
@@ -164,14 +158,11 @@ class CustomFieldsetsController extends Controller
      * @param $fieldsetId
      * @return string JSON
      */
-    public function fieldsWithDefaultValues($fieldsetId, $modelId)
+    public function fieldsWithDefaultValues($fieldsetId, $modelId) : array
     {
         $this->authorize('view', CustomField::class);
-
         $set = CustomFieldset::findOrFail($fieldsetId);
-
         $fields = $set->fields;
-
         return (new CustomFieldsTransformer)->transformCustomFieldsWithDefaultValues($fields, $modelId, $fields->count());
     }
 }

@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Consumables;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Http\Controllers\Controller;
-use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class ConsumableCheckoutController extends Controller
 {
@@ -20,13 +19,11 @@ class ConsumableCheckoutController extends Controller
      * @see ConsumableCheckoutController::store() method that stores the data.
      * @since [v1.0]
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($id)
+    public function create($id) : View | RedirectResponse
     {
 
-        if ($consumable = Consumable::with('users')->find($id)) {
+        if ($consumable = Consumable::find($id)) {
 
             $this->authorize('checkout', $consumable);
 
@@ -71,12 +68,18 @@ class ConsumableCheckoutController extends Controller
 
         $this->authorize('checkout', $consumable);
 
+        // If the quantity is not present in the request or is not a positive integer, set it to 1
+        $quantity = $request->input('qty');
+        if (!isset($quantity) || !ctype_digit((string)$quantity) || $quantity <= 0) {
+            $quantity = 1;
+        }
+
         // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0) {
+        if ($consumable->numRemaining() <= 0 || $quantity > $consumable->numRemaining()) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
         }
 
-        $admin_user = Auth::user();
+        $admin_user = auth()->user();
         $assigned_to = e($request->input('assigned_to'));
 
         // Check if the user exists
@@ -88,14 +91,15 @@ class ConsumableCheckoutController extends Controller
         // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
 
+        for($i = 0; $i < $quantity; $i++){
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
             'note' => $request->input('note'),
         ]);
-
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+        }
+        event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

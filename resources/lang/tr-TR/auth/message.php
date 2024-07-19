@@ -14,6 +14,8 @@ return array(
         'success'               => 'Başarıyla giriş yaptınız.',
         'code_required'         => 'İki faktörlü kod gereklidir.',
         'invalid_code'          => 'İki faktörlü kod geçersiz.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

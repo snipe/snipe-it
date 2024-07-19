@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Bidang tersebut tidak tersedia.',
         'already_added'   => 'Bidang sudah ditambahkan',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Bidang gagal dibuat, silahkan coba lagi.',

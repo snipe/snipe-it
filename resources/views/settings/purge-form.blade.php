@@ -30,9 +30,9 @@
                     </div>
                     <div class="col-md-9{{ $errors->has('confirm_purge') ? 'error' : '' }}">
                         @if (config('app.lock_passwords')===true)
-                            {{ Form::text('confirm_purge', Request::old('confirm_purge'), array('class' => 'form-control', 'disabled'=>'true')) }}
+                            {{ Form::text('confirm_purge', old('confirm_purge'), array('class' => 'form-control', 'disabled'=>'true')) }}
                         @else
-                            {{ Form::text('confirm_purge', Request::old('confirm_purge'), array('class' => 'form-control')) }}
+                            {{ Form::text('confirm_purge', old('confirm_purge'), array('class' => 'form-control')) }}
                         @endif
 
                         @if (config('app.lock_passwords')===true)

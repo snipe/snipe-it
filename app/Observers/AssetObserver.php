@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AssetObserver
@@ -92,7 +92,7 @@ class AssetObserver
 
                 // only modify the 'next' one if it's *bigger* than the stored base
                 //
-                if($next_asset_tag > $settings->next_auto_tag_base) {
+                if ($next_asset_tag > $settings->next_auto_tag_base && $next_asset_tag < PHP_INT_MAX) {
                     $settings->next_auto_tag_base = $next_asset_tag;
                     $settings->save();
                 }

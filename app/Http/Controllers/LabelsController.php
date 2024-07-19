@@ -14,16 +14,14 @@ use App\Models\Setting;
 use App\Models\Supplier;
 use App\Models\User;
 use App\View\Label as LabelView;
-use Illuminate\Support\Facades\Storage;
 
 class LabelsController extends Controller
 {
     /**
      * Returns the Label view with test data
      *
+     * @param string $labelName
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
-     * @param  string  $labelName
-     * @return \Illuminate\Contracts\View\View
      */
     public function show(string $labelName)
     {
@@ -66,7 +64,7 @@ class LabelsController extends Controller
         $exampleAsset->model->category->id = 999999;
         $exampleAsset->model->category->name = trans('admin/labels/table.example_category');
 
-        $customFieldColumns = CustomField::all()->pluck('db_column');
+        $customFieldColumns = CustomField::where('field_encrypted', '=', 0)->pluck('db_column');
 
         collect(explode(';', Setting::getSettings()->label2_fields))
             ->filter()
@@ -95,6 +93,5 @@ class LabelsController extends Controller
             ->with('bulkedit', false)
             ->with('count', 0);
 
-        return redirect()->route('home')->with('error', trans('admin/labels/message.does_not_exist'));
     }
 }

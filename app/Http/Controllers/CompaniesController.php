@@ -6,6 +6,9 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 /**
  * This controller handles all actions related to Companies for
@@ -20,10 +23,8 @@ final class CompaniesController extends Controller
      *
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index()
+    public function index() : View
     {
         $this->authorize('view', Company::class);
 
@@ -35,10 +36,8 @@ final class CompaniesController extends Controller
      *
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create() : View
     {
         $this->authorize('create', Company::class);
 
@@ -51,10 +50,8 @@ final class CompaniesController extends Controller
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : RedirectResponse
     {
         $this->authorize('create', Company::class);
 
@@ -80,10 +77,8 @@ final class CompaniesController extends Controller
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
      * @param int $companyId
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($companyId)
+    public function edit($companyId) : View | RedirectResponse
     {
         if (is_null($item = Company::find($companyId))) {
             return redirect()->route('companies.index')
@@ -102,10 +97,8 @@ final class CompaniesController extends Controller
      * @since [v1.8]
      * @param ImageUploadRequest $request
      * @param int $companyId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(ImageUploadRequest $request, $companyId)
+    public function update(ImageUploadRequest $request, $companyId) : RedirectResponse
     {
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
@@ -134,10 +127,8 @@ final class CompaniesController extends Controller
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
      * @param int $companyId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($companyId)
+    public function destroy($companyId) : RedirectResponse
     {
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')
@@ -154,7 +145,7 @@ final class CompaniesController extends Controller
             try {
                 Storage::disk('public')->delete('companies'.'/'.$company->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 
@@ -164,7 +155,7 @@ final class CompaniesController extends Controller
             ->with('success', trans('admin/companies/message.delete.success'));
     }
 
-    public function show($id)
+    public function show($id) : View | RedirectResponse
     {
         $this->authorize('view', Company::class);
 

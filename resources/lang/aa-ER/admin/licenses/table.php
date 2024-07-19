@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'crwdns923:0crwdne923:0',
     'checkout'   		=> 'crwdns924:0crwdne924:0',
+    'deleted_at'        => 'crwdns12170:0crwdne12170:0',
     'id'      			=> 'crwdns925:0crwdne925:0',
     'license_email'   	=> 'crwdns926:0crwdne926:0',
     'license_name'   	=> 'crwdns927:0crwdne927:0',

@@ -45,6 +45,17 @@
           </li>
         @endcan
 
+      <li>
+        <a href="#history" data-toggle="tab">
+        <span class="hidden-lg hidden-md">
+          <i class="fas fa-history fa-2x" aria-hidden="true"></i>
+        </span>
+        <span class="hidden-xs hidden-sm">
+          {{ trans('general.history') }}
+        </span>
+        </a>
+      </li>
+
         @can('update', $consumable)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
@@ -95,7 +106,56 @@
         </div> <!-- close tab-pane div -->
 
 
-        @can('consumables.files', $consumable)
+        <div class="tab-pane fade" id="history">
+          <!-- checked out assets table -->
+          <div class="row">
+            <div class="col-md-12">
+              <table
+                      class="table table-striped snipe-table"
+                      id="consumableHistory"
+                      data-pagination="true"
+                      data-id-table="consumableHistory"
+                      data-search="true"
+                      data-side-pagination="server"
+                      data-show-columns="true"
+                      data-show-fullscreen="true"
+                      data-show-refresh="true"
+                      data-sort-order="desc"
+                      data-sort-name="created_at"
+                      data-show-export="true"
+                      data-export-options='{
+                         "fileName": "export-consumable-{{  $consumable->id }}-history",
+                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                       }'
+
+                      data-url="{{ route('api.activity.index', ['item_id' => $consumable->id, 'item_type' => 'consumable']) }}"
+                      data-cookie-id-table="assetHistory"
+                      data-cookie="true">
+                <thead>
+                <tr>
+                  <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
+                  <th data-visible="true" data-field="action_date" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
+                  <th data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th data-field="note">{{ trans('general.notes') }}</th>
+                  <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  <th data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                  <th data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
+                  <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
+                  <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
+                  <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
+                </tr>
+                </thead>
+              </table>
+            </div>
+          </div> <!-- /.row -->
+        </div> <!-- /.tab-pane history -->
+
+
+      @can('consumables.files', $consumable)
           <div class="tab-pane" id="files">
 
             <div class="table-responsive">
@@ -176,6 +236,7 @@
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                         </a>
+
                       </td>
                     </tr>
                   @endforeach
@@ -254,6 +315,19 @@
                   </div>
                 @endif
 
+                @if ($consumable->notes)
+
+                  <div class="col-md-12">
+                    <strong>
+                      {{ trans('general.notes') }}:
+                    </strong>
+                  </div>
+                    <div class="col-md-12">
+                    {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
+                    </div>
+
+                @endif
+
     @can('checkout', \App\Models\Consumable::class)
 
       <div class="col-md-12">
@@ -268,21 +342,23 @@
           </button>
         @endif
       </div>
+        @can('update', \App\Models\Consumable::class)
+            <div class="col-md-12">
+              <a href="{{ route('consumables.edit', $consumable->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.edit') }}</a>
+            </div>
+        @endcan
+
+          @can('delete', $consumable)
+            <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+              @if ($consumable->deleted_at=='')
+                <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                </button>
+                <span class="sr-only">{{ trans('general.delete') }}</span>
+              @endif
+            </div>
+          @endcan
 
     @endcan
-
-    @if ($consumable->notes)
-
-    <div class="col-md-12">
-      <strong>
-        {{ trans('general.notes') }}:
-      </strong>
-              </div>
-    <div class="col-md-12">
-      {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
-            </div>
-          </div>
-  @endif
 
     </div>
 
@@ -297,5 +373,16 @@
 @stop
 
 @section('moar_scripts')
+      <script>
+
+        $('#dataConfirmModal').on('show.bs.modal', function (event) {
+          var content = $(event.relatedTarget).data('content');
+          var title = $(event.relatedTarget).data('title');
+          $(this).find(".modal-body").text(content);
+          $(this).find(".modal-header").text(title);
+        });
+
+      </script>
+
 @include ('partials.bootstrap-table', ['exportFile' => 'consumable' . $consumable->name . '-export', 'search' => false])
 @stop

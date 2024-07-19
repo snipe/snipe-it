@@ -26,14 +26,14 @@
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
 
 
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" data-validation="required">
+          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
@@ -78,7 +78,7 @@
         @if ($item->model && $item->model->fieldset)
         <?php $model = $item->model; ?>
         @endif
-        @if (Request::old('model_id'))
+        @if (old('model_id'))
             @php
                 $model = \App\Models\AssetModel::find(old('model_id'));
             @endphp
@@ -108,6 +108,29 @@
         <br>
             @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
             @include ('partials.forms.edit.warranty')
+
+            <!-- Datepicker -->
+            <div class="form-group{{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
+
+                <label class="col-md-3 control-label">
+                    {{ trans('general.next_audit_date') }}
+                </label>
+
+                <div class="input-group col-md-4">
+                    <div class="input-group date" data-provide="datepicker" data-date-clear-btn="true" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                        <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $item->next_audit_date) }}" readonly style="background-color:inherit" maxlength="10">
+                        <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-3">
+                    {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
+                </div>
+
+            </div>
+
+
+
 
             <!-- byod checkbox -->
             <div class="form-group">
@@ -295,7 +318,7 @@
                 box_html += '<span class="fields_wrapper">';
                 box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12 required">';
-                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" data-validation="required">';
+                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" required>';
                 box_html += '</div>';
                 box_html += '<div class="col-md-2 col-sm-12">';
                 box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fas fa-minus"></i></a>';

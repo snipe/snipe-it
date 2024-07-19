@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Ieejas dati nevar tikt mainīti šajā instalācijā.',
     'manager' 				=> 'Vadītājs',
     'managed_locations'     => 'Pārvaldītās atrašanās vietas',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Nosaukums',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Piezīmes',

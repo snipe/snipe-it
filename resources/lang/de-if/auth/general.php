@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Abhängig von der Konfiguration, <em>kann</em> der Benutzername identisch mit ihrer E-Mailadresse sein. Falls Du Deinen Benutzernamen vergessen hast, kontaktiere Deinen Administrator.<br><br><strong>Benutzernamen ohne zugeordnete E-Mailadresse erhalten keine E-Mail zum Zurücksetzen des Passwortes.</strong> ',
     'google_login'                  => 'Mit Google Workspace anmelden',
     'google_login_failed'           => 'Anmeldung fehlgeschlagen, bitte melde dich erneut an!',
-
 ];
 

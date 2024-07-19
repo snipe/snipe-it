@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'អាជ្ញាប័ណ្ណមិនមានទេ ឬអ្នកមិនមានសិទ្ធិមើលវា។',
-    'user_does_not_exist' => 'អ្នកប្រើប្រាស់មិនមានទេ។',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'ទ្រព្យសកម្មដែលអ្នកកំពុងព្យាយាមភ្ជាប់ជាមួយអាជ្ញាប័ណ្ណនេះមិនមានទេ។',
     'owner_doesnt_match_asset' => 'ទ្រព្យសកម្មដែលអ្នកកំពុងព្យាយាមភ្ជាប់ជាមួយអាជ្ញាប័ណ្ណនេះគឺជាកម្មសិទ្ធិរបស់នរណាម្នាក់ក្រៅពីបុគ្គលដែលបានជ្រើសរើសនៅក្នុងបញ្ជីទម្លាក់ចុះ។',
     'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'There was an issue checking out the license. Please try again.',
         'success' => 'The license was checked out successfully',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

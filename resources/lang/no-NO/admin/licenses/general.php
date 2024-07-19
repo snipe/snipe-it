@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Lisensinformasjon',
     'license_seats'  			=> 'Setelisenser',
     'seat'  					=> 'Setelisens',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Setelisenser',
     'software_licenses'  		=> 'Programvarelisenser',
     'user'  					=> 'Bruker',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Sjekk inn alle seter',
-                'modal'             => 'Dette vil handling innhente ett sete. Denne handlingen vil sjekke inn alle :checkedout_seats_count seter for denne lisensen.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Sjekk inn ALLE seter for denne lisensen fra både brukere og ressurser',
                 'disabled_tooltip'  => 'Dette er deaktivert fordi det ikke er seter som er sjekket ut',
                 'disabled_tooltip_reassignable'  => 'Dette er deaktivert fordi lisensen ikke kan refordeles',
                 'success'           => 'Lisensen ble sjekket inn! | Alle lisensene ble vellykket sjekket inn!',
-                'log_msg'           => 'Sjekket inn via masselisensutsjekking i lisens GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

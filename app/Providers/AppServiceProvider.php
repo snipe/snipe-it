@@ -20,6 +20,8 @@ use App\Observers\SettingObserver;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 /**
  * This service provider handles setting the observers on models
@@ -30,7 +32,7 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Custom email array validation
+     * Bootstrap application services.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
@@ -38,21 +40,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        if (env('APP_FORCE_TLS')) {
-            if (strpos(env('APP_URL'), 'https') === 0) {
-                $url->forceScheme('https');
-            } else {
-                \Log::debug("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
-            }
+        /**
+         * This is a workaround for proxies/reverse proxies that don't always pass the proper headers.
+         *
+         * Here, we check if the APP_URL starts with https://, which we should always honor,
+         * regardless of how well the proxy or network is configured.
+         *
+         * We'll force the https scheme if the APP_URL starts with https://, or if APP_FORCE_TLS is set to true.
+         *
+         */
+        if ((strpos(env('APP_URL'), 'https://') === 0) || (env('APP_FORCE_TLS'))) {
+            $url->forceScheme('https');
         }
 
         // TODO - isn't it somehow 'gauche' to check the environment directly; shouldn't we be using config() somehow?
         if ( ! env('APP_ALLOW_INSECURE_HOSTS')) {  // unless you set APP_ALLOW_INSECURE_HOSTS, you should PROHIBIT forging domain parts of URL via Host: headers
             $url_parts = parse_url(config('app.url'));
             if ($url_parts && array_key_exists('scheme', $url_parts) && array_key_exists('host', $url_parts)) { // check for the *required* parts of a bare-minimum URL
-                \URL::forceRootUrl(config('app.url'));
+                URL::forceRootUrl(config('app.url'));
             } else {
-                \Log::error("Your APP_URL in your .env is misconfigured - it is: ".config('app.url').". Many things will work strangely unless you fix it.");
+                Log::error("Your APP_URL in your .env is misconfigured - it is: ".config('app.url').". Many things will work strangely unless you fix it.");
             }
         }
 

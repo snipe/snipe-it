@@ -496,12 +496,26 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.assets.show.byserial')
         ->where('any', '.*');
 
-        Route::get('audit/{audit}',
+        // LEGACY URL - Get assets that are due or overdue for audit
+        Route::get('audit/{status}',
         [
             Api\AssetsController::class, 
             'index'
         ]
         )->name('api.asset.to-audit');
+
+
+
+        // This gets the "due or overdue" API endpoints for audits and checkins
+        Route::get('{action}/{upcoming_status}',
+              [
+                  Api\AssetsController::class,
+                  'index'
+              ]
+        )->name('api.assets.list-upcoming')
+        ->where(['action' => 'audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
+
+
 
         Route::post('audit',
         [
@@ -530,12 +544,35 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
               'restore'
           ]
       )->name('api.assets.restore');
+        Route::post('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'store'
+          ]
+        )->name('api.assets.files.store');
+
+        Route::get('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'list'
+          ]
+        )->name('api.assets.files.index');
+
+        Route::get('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'show'
+          ]
+        )->name('api.assets.files.show');
+
+        Route::delete('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'destroy'
+          ]
+        )->name('api.assets.files.destroy');
 
       });
-
-
-
-
 
         Route::resource('hardware', 
         Api\AssetsController::class,

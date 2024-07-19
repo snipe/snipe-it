@@ -15,6 +15,5 @@ return [
 <br><br><strong>Uporabniškim imenom brez dodeljenega e-poštnega računa ne bo poslane povezave za ponastavitev gesla.</strong> ',
     'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login failed, please try again.',
-
 ];
 

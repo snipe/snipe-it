@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\ActionlogsTransformer;
 use App\Models\Actionlog;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class ReportsController extends Controller
 {
@@ -14,9 +15,8 @@ class ReportsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('reports.view');
 
@@ -78,13 +78,14 @@ class ReportsController extends Controller
         ];
 
 
+        $total = $actionlogs->count();
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $actionlogs->count()) ? $actionlogs->count() : app('api_offset_value');
+        $offset = ($request->input('offset') > $total) ? $total : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
         $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
-        $total = $actionlogs->count();
+
 
         $actionlogs = $actionlogs->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 

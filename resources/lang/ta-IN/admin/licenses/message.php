@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'பயனர் இல்லை.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'நீங்கள் இந்த உரிமத்துடன் தொடர்பு கொள்ள முயற்சிக்கும் சொத்து இல்லை.',
     'owner_doesnt_match_asset' => 'நீங்கள் இந்த உரிமத்துடன் தொடர்பு கொள்ள முயற்சிக்கும் சொத்தை சொடுக்கும் ஒதுக்கீட்டில் தேர்ந்தெடுக்கப்பட்ட நபரை விட வேறு ஏதேனும் சொந்தமானது.',
     'assoc_users'	 => 'இந்த உரிமம் தற்போது ஒரு பயனர் வெளியே சோதிக்கப்பட்டது மற்றும் நீக்க முடியாது. முதலில் உரிமம் சரிபார்க்கவும், பின்னர் மீண்டும் நீக்கி முயற்சிக்கவும்.',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'உரிமத்தை சரிபார்க்க ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
         'success' => 'உரிமம் வெற்றிகரமாக சரிபார்க்கப்பட்டது',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

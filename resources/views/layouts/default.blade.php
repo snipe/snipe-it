@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+dir="{{ Helper::determineLanguageDirection() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +24,8 @@
 
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="language" content="{{ Helper::mapBackToLegacyLocale(app()->getLocale()) }}">
+    <meta name="language-direction" content="{{ Helper::determineLanguageDirection() }}">
     <meta name="baseUrl" content="{{ config('app.url') }}/">
 
     <script nonce="{{ csrf_token() }}">
@@ -82,7 +85,7 @@
     <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
     <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
-    @livewireStyles
+
 
 </head>
 
@@ -323,7 +326,7 @@
                                             <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image"
                                                  alt="">
                                         @else
-                                            <i class="fas fa-users" aria-hidden="true"></i>
+                                            <i class="fas fa-user" aria-hidden="true"></i>
                                         @endif
 
                                         <span class="hidden-xs">{{ Auth::user()->getFullNameAttribute() }} <strong
@@ -352,12 +355,15 @@
                                             </a></li>
 
 
+                                        @can('self.profile')
                                         <li>
                                             <a href="{{ route('profile') }}">
                                                 <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                                                 {{ trans('general.editprofile') }}
                                             </a>
                                         </li>
+                                        @endcan
+
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <i class="fa-solid fa-asterisk fa-fw" aria-hidden="true"></i>
@@ -374,7 +380,7 @@
                                                 </a>
                                             </li>
                                         @endcan
-                                        <li class="divider"></li>
+                                        <li class="divider" style="margin-top: -1px; margin-bottom: -1px"></li>
                                         <li>
 
                                             <a href="{{ route('logout.get') }}"
@@ -437,6 +443,9 @@
                                         <a href="{{ url('hardware') }}">
                                             <i class="far fa-circle text-grey fa-fw" aria-hidden="true"></i>
                                             {{ trans('general.list_all') }}
+                                            <span class="badge">
+                                                {{ (isset($total_assets)) ? $total_assets : '' }}
+                                            </span>
                                         </a>
                                     </li>
 
@@ -447,7 +456,8 @@
                                                 <a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
                                                     <i class="fas fa-circle text-grey fa-fw"
                                                        aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
-                                                    {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
+                                                    {{ $status_nav->name }}
+                                                    <span class="badge badge-secondary">{{ $status_nav->asset_count }}</span></a></li>
                                         @endforeach
                                     @endif
 
@@ -455,49 +465,43 @@
                                     <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=Deployed') }}">
                                             <i class="far fa-circle text-blue fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.deployed') }}
-                                            ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
+                                            <span class="badge">{{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=RTD') }}">
                                             <i class="far fa-circle text-green fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.ready_to_deploy') }}
-                                            ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
+                                            <span class="badge">{{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Pending') }}"><i
                                                     class="far fa-circle text-orange fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.pending') }}
-                                            ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
+                                            <span class="badge">{{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
                                                 href="{{ url('hardware?status=Undeployable') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.undeployable') }}
-                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
+                                            <span class="badge">{{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=byod') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('general.byod') }}
-                                            ({{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }})
+                                            <span class="badge">{{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Archived') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
-                                            {{ trans('general.all') }}
                                             {{ trans('admin/hardware/general.archived') }}
-                                            ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
+                                            <span class="badge">{{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }}</span>
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a
@@ -511,13 +515,18 @@
                                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.due') }}">
                                                 <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.audit_due') }}
+                                                <span class="badge">{{ (isset($total_due_and_overdue_for_audit)) ? $total_due_and_overdue_for_audit : '' }}</span>
                                             </a>
                                         </li>
-                                        <li{!! (Request::is('hardware/audit/overdue') ? ' class="active"' : '') !!}>
-                                            <a href="{{ route('assets.audit.overdue') }}">
-                                                <i class="fas fa-exclamation-triangle text-red fa-fw"></i> {{ trans('general.audit_overdue') }}
-                                            </a>
-                                        </li>
+                                    @endcan
+
+                                    @can('checkin', \App\Models\Asset::class)
+                                    <li{!! (Request::is('hardware/checkins/due') ? ' class="active"' : '') !!}>
+                                        <a href="{{ route('assets.checkins.due') }}">
+                                            <i class="fas fa-history text-yellow fa-fw"></i> {{ trans('general.checkin_due') }}
+                                            <span class="badge">{{ (isset($total_due_and_overdue_for_checkin)) ? $total_due_and_overdue_for_checkin : '' }}</span>
+                                        </a>
+                                    </li>
                                     @endcan
 
                                     <li class="divider">&nbsp;</li>
@@ -734,7 +743,11 @@
                                             {{ trans('general.activity_report') }}
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                                            {{ trans('general.custom_report') }}
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
                                             {{ trans('general.audit_report') }}</a>
@@ -764,11 +777,6 @@
                                             {{ trans('general.accessory_report') }}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                                            {{ trans('general.custom_report') }}
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         @endcan
@@ -777,7 +785,7 @@
                             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('requestable-assets') }}">
                                     <i class="fa fa-laptop fa-fw"></i>
-                                    <span>{{ trans('admin/hardware/general.requestable') }}</span>
+                                    <span>{{ trans('general.requestable_items') }}</span>
                                 </a>
                             </li>
                         @endcan
@@ -941,9 +949,11 @@
             </div>
         </div>
 
+
+
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-        <script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url('js/select2/i18n/'.Helper::mapBackToLegacyLocale(app()->getLocale()).'.js') }}"></script>
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -968,13 +978,31 @@
                 clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
-            // ignore: 'input[type=hidden]' is required here to validate the select2 lists
-            $.validate({
-                form: '#create-form',
-                modules: 'date, toggleDisabled',
-                disabledFormFilter: '#create-form',
-                showErrorDialogs: true,
-                ignore: 'input[type=hidden]'
+            // Reference: https://jqueryvalidation.org/validate/
+            var validator = $('#create-form').validate({
+                ignore: 'input[type=hidden]',
+                errorClass: 'alert-msg',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
+                        // If the element is a select2 then place the error above the input
+                        ? element.parents('.required').append(error)
+                        // Otherwise place it after
+                        : error.insertAfter(element);
+                },
+                highlight: function(inputElement) {
+                    $(inputElement).parent().addClass('has-error');
+                    $(inputElement).closest('.help-block').remove();
+                },
+                onfocusout: function(element) {
+                    return $(element).valid();
+                },
+
+            });
+
+            $.extend($.validator.messages, {
+                required: "{{ trans('validation.generic.required') }}",
+                email: "{{ trans('validation.generic.email') }}"
             });
 
 
@@ -1041,6 +1069,64 @@
                 });
             });
 
+            // Select encrypted custom fields to hide them in the asset list
+            $(document).ready(function() {
+                // Selector for elements with css-padlock class
+                var selector = 'td.css-padlock';
+
+                // Function to add original value to elements
+                function addValue($element) {
+                    // Get original value of the element
+                    var originalValue = $element.text().trim();
+
+                    // Show asterisks only for not empty values
+                    if (originalValue !== '') {
+                        // This is necessary to avoid loop because value is generated dynamically
+                        if (originalValue !== '' && originalValue !== asterisks) $element.attr('value', originalValue);
+
+                        // Hide the original value and show asterisks of the same length
+                        var asterisks = '*'.repeat(originalValue.length);
+                        $element.text(asterisks);
+
+                        // Add click event to show original text
+                        $element.click(function() {
+                            var $this = $(this);
+                            if ($this.text().trim() === asterisks) {
+                                $this.text($this.attr('value'));
+                            } else {
+                                $this.text(asterisks);
+                            }
+                        });
+                    }
+                }
+                // Add value to existing elements
+                $(selector).each(function() {
+                    addValue($(this));
+                });
+
+                // Function to handle mutations in the DOM because content is generated dynamically
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        // Check if new nodes have been inserted
+                        if (mutation.type === 'childList') {
+                            mutation.addedNodes.forEach(function(node) {
+                                if ($(node).is(selector)) {
+                                    addValue($(node));
+                                } else {
+                                    $(node).find(selector).each(function() {
+                                        addValue($(this));
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+
+                // Configure the observer to observe changes in the DOM
+                var config = { childList: true, subtree: true };
+                observer.observe(document.body, config);
+            });
+
 
         </script>
 
@@ -1052,7 +1138,6 @@
 
         @include('partials.bpay')
 
-        @livewireScripts
 
         </body>
 </html>

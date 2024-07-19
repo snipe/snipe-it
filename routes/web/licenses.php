@@ -48,6 +48,13 @@ Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function () {
     '{licenseId}/showfile/{fileId}/{download?}',
         [Licenses\LicenseFilesController::class, 'show']
     )->name('show.licensefile');
+    Route::get(
+        'export',
+        [
+            Licenses\LicensesController::class,
+            'getExportLicensesCsv'
+        ]
+    )->name('licenses.export');
 });
 
 Route::resource('licenses', Licenses\LicensesController::class, [

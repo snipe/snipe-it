@@ -87,27 +87,34 @@ class AuthServiceProvider extends ServiceProvider
         ]);
 
         $this->registerPolicies();
-        Passport::routes();
+        //Passport::routes(); //this is no longer required in newer passport versions
         Passport::tokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::refreshTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::personalAccessTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::withCookieSerialization();
 
-        // --------------------------------
-        // BEFORE ANYTHING ELSE
-        // --------------------------------
-        // If this condition is true, ANYTHING else below will be assumed
-        // to be true. This can cause weird blade behavior.
+
+        /**
+         * BEFORE ANYTHING ELSE
+         *
+         * If this condition is true, ANYTHING else below will be assumed to be true.
+         * This is where we set the superadmin permission to allow superadmins to be able to do everything within the system.
+         *
+         */
         Gate::before(function ($user) {
             if ($user->isSuperUser()) {
                 return true;
             }
         });
 
-        // --------------------------------
-        // GENERAL GATES
-        // These control general sections of the admin
-        // --------------------------------
+
+        /**
+         * GENERAL GATES
+         *
+         * These control general sections of the admin. These definitions are used in our blades via @can('blah) and also
+         * use in our controllers to determine if a user has access to a certain area.
+         */
+
         Gate::define('admin', function ($user) {
             if ($user->hasAccess('admin')) {
                 return true;
@@ -225,5 +232,12 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('update', User::class)
                 || $user->can('create', User::class);  
         });
+
+
+        // This determines whether the user can edit their profile based on the setting in Admin > General
+        Gate::define('self.profile', function ($user) {
+            return $user->canEditProfile();
+        });
+
     }
 }

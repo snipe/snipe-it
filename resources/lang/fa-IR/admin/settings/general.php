@@ -68,6 +68,7 @@ return [
     'default_eula_text'			=> 'EULA پیش فرض',
     'default_language'			=> 'زبان پیش فرض',
     'default_eula_help_text'	=> 'همچنین می توانید  EULA های سفارشی به دسته های خاص دارایی مرتبط کنید.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'نمایش نام حساب',
     'display_checkout_date'     => 'نمایش تاریخ پرداخت',
     'display_eol'               => 'نمایش EOL در جدول',
@@ -128,7 +129,7 @@ return [
     'ldap_manager'              => 'مدیر LDAP
 ',
     'ldap_server'               => 'سرویس دهنده LDAP',
-    'ldap_server_help'          => 'این باید با ldap: // (برای رمزگذاری نشده یا TLS) یا ldaps: ((برای SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
     'ldap_server_cert_ignore'	=> 'اجازه می دهد به گواهی های بی اعتبار SSL',
     'ldap_server_cert_help'		=> 'اگر از یک امضای SSL شخصی معتبر استفاده می کنید این گزینه را فعال کنید.',
@@ -163,8 +164,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -207,8 +208,7 @@ return [
     'optional'					=> 'اختیاری',
     'per_page'                  => 'نتایج در هر صفحه',
     'php'                       => 'نسخه php',
-    'php_info'                  => 'اطلاعات پی اچ پی
-',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
     'php_overview_keywords'     => 'phpinfo, system, info',
@@ -392,10 +392,20 @@ return [
 ',
     'oauth_title' => 'تنظیمات API OAuth
 ',
+    'oauth_clients' => 'OAuth Clients',
     'oauth' => 'OAuth
 ',
     'oauth_help' => 'تنظیمات نقطه پایانی Oauth
 ',
+    'oauth_no_clients' => 'You have not created any OAuth clients yet.',
+    'oauth_secret' => 'Secret',
+    'oauth_authorized_apps' => 'Authorized Applications',
+    'oauth_redirect_url' => 'Redirect URL',
+    'oauth_name_help' => ' Something your users will recognize and trust.',
+    'oauth_scopes' => 'Scopes',
+    'oauth_callback_url' => 'Your application authorization callback URL.',
+    'create_client' => 'Create Client',
+    'no_scopes' => 'No scopes',
     'asset_tag_title' => 'تنظیمات برچسب دارایی را به روز کنید
 ',
     'barcode_title' => 'تنظیمات بارکد را به روز کنید
@@ -448,7 +458,6 @@ return [
 ',
     'labels_help' => 'اندازه برچسب &amp; تنظیمات
 ',
-    'purge' => 'پاکسازی',
     'purge_keywords' => 'برای همیشه حذف کنید
 ',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
@@ -509,5 +518,8 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload default avatar',
 
 ];

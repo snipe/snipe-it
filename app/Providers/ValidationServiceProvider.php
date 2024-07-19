@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -279,7 +279,24 @@ class ValidationServiceProvider extends ServiceProvider
 
         Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator) {
             $data = $validator->getData();
-            if ((array_key_exists('location_id', $data) && $data['location_id'] != null) && (array_key_exists('company_id', $data) && $data['company_id'] != null)) {
+
+            if (
+                array_key_exists('location_id', $data) && $data['location_id'] !== null &&
+                array_key_exists('company_id', $data) && $data['company_id'] !== null
+            ) {
+                //for updating existing departments
+                if(array_key_exists('id', $data) && $data['id'] !== null){
+                    $count = Department::where('name', $data['name'])
+                        ->where('location_id', $data['location_id'])
+                        ->where('company_id', $data['company_id'])
+                        ->whereNotNull('company_id')
+                        ->whereNotNull('location_id')
+                        ->where('id', '!=', $data['id'])
+                        ->count('name');
+
+                    return $count < 1;
+                }else // for entering in new departments
+                {
                 $count = Department::where('name', $data['name'])
                     ->where('location_id', $data['location_id'])
                     ->where('company_id', $data['company_id'])
@@ -289,9 +306,10 @@ class ValidationServiceProvider extends ServiceProvider
 
                 return $count < 1;
             }
+        }
             else {
                 return true;
-            }
+        }
         });
 
         Validator::extend('not_array', function ($attribute, $value, $parameters, $validator) {

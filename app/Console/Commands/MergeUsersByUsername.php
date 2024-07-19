@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\UserMerged;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -51,7 +52,7 @@ class MergeUsersByUsername extends Command
 
             $bad_users = User::where('username', '=', trim($parts[0]))
                 ->whereNull('deleted_at')
-                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations')
+                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')
                 ->get();
 
 
@@ -105,10 +106,26 @@ class MergeUsersByUsername extends Command
                     $managedLocation->save();
                 }
 
+                foreach ($bad_user->uploads as $upload) {
+                    $this->info('Updating upload log record '.$upload->id.' to user '.$user->id);
+                    $upload->item_id = $user->id;
+                    $upload->save();
+                }
+
+                foreach ($bad_user->acceptances as $acceptance) {
+                    $this->info('Updating acceptance log record '.$acceptance->id.' to user '.$user->id);
+                    $acceptance->item_id = $user->id;
+                    $acceptance->save();
+                }
+
                 // Mark the user as deleted
                 $this->info('Marking the user as deleted');
                 $bad_user->deleted_at = Carbon::now()->timestamp;
                 $bad_user->save();
+
+                event(new UserMerged($bad_user, $user, null));
+
+
             }
         }
     }
