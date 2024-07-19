@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'El campo no existe.',
         'already_added'   => 'El campo ya fue añadido',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'El campo no fue creado, por favor, inténtalo de nuevo.',
@@ -31,8 +32,8 @@ return array(
         'does_not_exist' => 'El grupo de campos no existe',
 
         'create' => array(
-            'error'   => 'El fieldset no fue creado, por favor inténtalo de nuevo.',
-            'success' => 'Fieldset creado con éxito.'
+            'error'   => 'El grupo de campos no ha sido creado, por favor inténtelo de nuevo.',
+            'success' => 'Grupo de campos creado satisfactoriamente.'
         ),
 
         'update' => array(
@@ -42,7 +43,7 @@ return array(
 
         'delete' => array(
             'confirm'   	=> '¿Está seguro de que quiere eliminar este grupo de campos?',
-            'error'   => 'Hubo un problema al eliminar este fieldset. Por favor inténtalo de nuevo.',
+            'error'   => 'Hubo un problema al eliminar el grupo de campos. Inténtelo de nuevo.',
             'success' => 'El grupo de campos se eliminó correctamente.',
             'in_use'   => 'El grupo de campos está aún en uso.',
         )

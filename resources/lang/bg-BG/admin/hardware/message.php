@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Внимание:</strong> Този актив е маркиран като невъзможен за предоставяне. Ако статусът е променен, моля обновете актива.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Активът не съществува.',
     'does_not_exist_var'=> 'Активът с етике :asset_tag не е намерен.',
     'no_tag' 	        => 'Не е предоставен етикет на актив.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Някои елементи не бяха въведени правилно.',
         'errorDetail'           => 'Следните елементи не бяха въведени поради грешки.',
         'success'               => 'Вашият файл беше въведен.',

@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Hoiatus: </strong> See vahend on märgitud kui kasutuselevõtmatu. Kui see olek on muutunud, palun värskendage vahendi olekut.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Vahend puudub.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Mõned üksused ei impordinud õigesti.',
         'errorDetail'           => 'Järgmisi punkte ei imporditud vigade tõttu.',
         'success'               => 'Teie fail on imporditud',

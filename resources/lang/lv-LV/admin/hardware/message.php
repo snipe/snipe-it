@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Ievadīšana: </strong> Šis īpašums ir atzīmēts kā pašlaik nederīgs. Ja šis statuss ir mainījies, lūdzu, atjauniniet aktīvu statusu.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Aktīvs neeksistē.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Daži vienumi netika pareizi importēti.',
         'errorDetail'           => 'Tālāk minētie vienumi netika importēti kļūdu dēļ.',
         'success'               => 'Jūsu fails ir importēts',

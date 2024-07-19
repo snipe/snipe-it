@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Informação de Licença',
     'license_seats'  			=> 'Instalações da Licença',
     'seat'  					=> 'Instalação',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Instalações',
     'software_licenses'  		=> 'Licenças de Software',
     'user'  					=> 'Utilizador',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Receber todos os lugares',
-                'modal'             => 'Esta ação irá realizar a verificação de um único lugar. | Esta ação verificará todos os :checkedout_seats_count lugares para esta licença.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Entrega de TODOS os lugares para esta licença de utilizadores e ativos',
                 'disabled_tooltip'  => 'Isto está desativado porque não há lugares recebidos no momento',
                 'disabled_tooltip_reassignable'  => 'Isso está desativado porque a licença não é reatribuível',
                 'success'           => 'Licença entregue com sucesso! Todas as licenças foram entregues com sucesso!',
-                'log_msg'           => 'Entrega feita através da entrega em massa da licença',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

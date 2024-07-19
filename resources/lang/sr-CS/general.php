@@ -552,5 +552,10 @@ return [
     ],
     'more_info' => 'Više informacija',
     'quickscan_bulk_help' => 'Potvrđivanjem ovog polja će izmeniti zapis imovine kako bi se ažurirala ova nova lokacija. Ukoliko ostane nepotvrđeno lokacija će se evidentirati samo u zapisu popisa. Imajte na umu da, ukoliko je imovina zadužena, neće promeniti lokaciju osobe, imovine ili lokacije za koju je zadužena.',
+    'whoops' => 'Ups!',
+    'something_went_wrong' => 'Nešto je pošlo po zlu sa vašim zahtevom.',
+    'close' => 'Zatvori',
+    'expires' => 'Ističe',
+    'map_fields'=> 'Map :item_type Field',
 
 ];

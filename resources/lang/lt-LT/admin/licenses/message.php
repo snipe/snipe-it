@@ -44,6 +44,8 @@ return array(
         'error'   => 'Bandant išduoti licenciją įvyko klaida. Bandykite dar kartą.',
         'success' => 'Licencija išduota sėkmingai',
         'not_enough_seats' => 'Turimų laisvų vietų nepakanka licencijos išdavimui',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

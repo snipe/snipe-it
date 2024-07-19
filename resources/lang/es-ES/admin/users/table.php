@@ -11,7 +11,7 @@ return array(
     'employee_num'      	=> 'No. Empleado',
     'first_name' 			=> 'Nombre',
     'groupnotes'			=> 'Seleccione un grupo para asignar al usuario, recuerde que un usuario asume los permisos del grupo al que se le asigna. Use ctrl+click (o cmd+click en MacOS) para anular la selección de grupos.',
-    'id'         			=> 'ID',
+    'id'         			=> 'Id',
     'inherit'  				=> 'Hereda de',
     'job' 					=> 'Cargo',
     'last_login'  			=> 'Ultimo Login',

@@ -7,7 +7,7 @@ return [
     'assoc_assets'	 => 'Esta etiqueta de estado está actualmente asociada con al menos un activo y no se puede eliminar. Por favor actualice sus activos para que ya no hagan referencia a este estado e inténtelo de nuevo. ',
 
     'create' => [
-        'error'   => 'La etiqueta de estado no pudo ser creada, por favor inténtalo de nuevo.',
+        'error'   => 'La etiqueta de estado no pudo ser creada, por favor inténtelo de nuevo.',
         'success' => 'La etiqueta de estado fue creada exitosamente.',
     ],
 
@@ -18,7 +18,7 @@ return [
 
     'delete' => [
         'confirm'   => '¿Está seguro de que desea eliminar esta etiqueta de estado?',
-        'error'   => 'Hubo un problema al eliminar la etiqueta de estado. Por favor inténtalo de nuevo.',
+        'error'   => 'Hubo un problema borrando la etiqueta de estado. Por favor, inténtelo de nuevo.',
         'success' => 'La etiqueta de estado fue eliminada de forma exitosa.',
     ],
 

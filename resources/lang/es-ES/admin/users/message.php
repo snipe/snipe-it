@@ -33,16 +33,16 @@ return array(
     ),
 
     'error' => array(
-        'create' => 'Ha habido un problema creando el Usuario. Intentalo de nuevo.',
-        'update' => 'Ha habido un problema actualizando el Usuario. Intentalo de nuevo.',
-        'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
+        'create' => 'Hubo un problema al crear el usuario. Por favor, inténtelo de nuevo.',
+        'update' => 'Hubo un problema al actualizar el usuario. Por favor, inténtelo de nuevo.',
+        'delete' => 'Hubo un problema al eliminar el usuario. Por favor, inténtelo de nuevo.',
         'delete_has_assets' => 'Este usuario tiene elementos asignados y no se pueden eliminar.',
-        'delete_has_assets_var' => 'Este usuario todavía tienen un activo asignado. Por favor devuélvalo primero.| Este usuario todavía tienen :count activos asignados. Por favor devuélvalos primero.',
-        'delete_has_licenses_var' => 'Este usuario todavía tiene una licencia asignada. Por favor primero haga su devolución.|Este usuario todavía tiene :count licencias asignadas. Por favor primero haga su devolución.',
-        'delete_has_accessories_var' => 'Este usuario todavía tiene un accesorio asignado. Por favor primero haga su devolución.|Este usuario todavía tiene :count accesorios asignados. Por favor primero haga su devolución.',
-        'delete_has_locations_var' => 'Este usuario todavía supervisa una ubicación. Por favor seleccione otro supervisor primero.|Este usuario todavía supervisa :count ubicaciones. Por favor seleccione otro supervisor primero.',
+        'delete_has_assets_var' => 'Este usuario todavía tiene un activo asignado. Por favor ingréselo primero.|Este usuario todavía tiene :count activos asignados. Por favor ingréselos primero.',
+        'delete_has_licenses_var' => 'Este usuario todavía tiene una licencia asignada. Por favor ingrésela primero.|Este usuario todavía tiene :count licencias asignadas. Por favor ingréselas primero.',
+        'delete_has_accessories_var' => 'Este usuario todavía tiene un accesorio asignado. Por favor ingréselo primero.|Este usuario todavía tiene :count accesorios asignados. Por favor ingréselos primero.',
+        'delete_has_locations_var' => 'Este usuario todavía supervisa una ubicación. Por favor primero seleccione otro supervisor.|Este usuario todavía supervisa :count ubicaciones. Por favor primero seleccione otro supervisor.',
         'delete_has_users_var' => 'Este usuario todavía supervisa a otro usuario. Por favor primero seleccione otro supervisor para ese usuario.|Este usuario todavía supervisa :count usuarios. Por favor primero seleccione otro supervisor para ellos.',
-        'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.',
+        'unsuspend' => 'Hubo un problema marcando como no suspendido al usuario. Por favor, inténtelo de nuevo.',
         'import'    => 'Ha habido un problema importando los usuarios. Por favor intente nuevamente.',
         'asset_already_accepted' => 'Este equipo ya ha sido aceptado.',
         'accept_or_decline' => 'Debe aceptar o rechazar este equipo.',
@@ -56,7 +56,7 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
+        'error'   => 'El archivo no fue borrado. Por favor, inténtelo de nuevo.',
         'success' => 'Archivo eliminado correctamente.',
     ),
 

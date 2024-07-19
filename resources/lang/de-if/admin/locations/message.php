@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Standort existiert nicht.',
-    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
+    'assoc_users'    => 'Dieser Standort kann derzeit nicht gelöscht werden, da er der Standort für mindestens ein Asset oder einen Benutzer ist, ihm Assets zugewiesen sind oder er der übergeordnete Standort eines anderen Standorts ist. Aktualisieren Sie Ihre Modelle, damit diese nicht mehr auf dieses Unternehmen verweisen, und versuchen Sie es erneut. ',
     'assoc_assets'	 => 'Dieser Standort ist mindestens einem Gegenstand zugewiesen und kann nicht gelöscht werden. Bitte entferne die Standortzuweisung bei den jeweiligen Gegenständen und versuche erneut, diesen Standort zu entfernen. ',
     'assoc_child_loc'	 => 'Dieser Standort ist mindestens einem anderen Ort übergeordnet und kann nicht gelöscht werden. Bitte aktualisiere Deine Standorte, so dass dieser Standort nicht mehr verknüpft ist, und versuche es erneut. ',
     'assigned_assets' => 'Zugeordnete Assets',

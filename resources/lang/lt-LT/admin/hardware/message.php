@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Įspėjimas:</strong> Ši įranga pažymėta kaip negalima išduoti. Jei ši būsena pasikeitė, atnaujinkite ją.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Tokios įrangos nėra.',
     'does_not_exist_var'=> 'Įranga su numeriu :asset_tag nerasta.',
     'no_tag' 	        => 'Nenurodytas inventorinis numeris.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Kai kurie elementai nebuvo tinkamai importuoti.',
         'errorDetail'           => 'Šie elementai nebuvo importuoti dėl klaidų.',
         'success'               => 'Jūsų failas buvo importuotas',

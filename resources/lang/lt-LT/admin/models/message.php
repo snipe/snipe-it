@@ -7,7 +7,7 @@ return array(
     'no_association' => 'ĮSPĖJIMAS! Tokio įrangos modelio nėra arba jis netinkamas!',
     'no_association_fix' => 'Tai sugadins dalykus keistais ir siaubingais būdais. Nedelsdami redaguokite šią įrangą ir priskirkite jai modelį.',
     'assoc_users'	 => 'Šis modelis šiuo metu susietas su bent vienu įrangos vienetu, todėl negali būti panaikintas. Panaikinkite šią įrangą, tuomet vėl bandykite panaikinti modelį. ',
-
+    'invalid_category_type' => 'The category must be an asset category.',
 
     'create' => array(
         'error'   => 'Modelis nebuvo panaikintas, bandykite dar kartą.',

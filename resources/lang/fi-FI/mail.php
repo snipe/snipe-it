@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Olen lukenut ja hyväksynyt käyttöehdot ja olen saanut tämän kohteen.',
     'inventory_report' => 'Varaston Raportti',
     'item' => 'Nimike:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count lisenssiä vanhenee :threshold päivän sisällä.|:count lisenssiä vanhenee :threshold päivän sisällä.',
     'link_to_update_password' => 'Napsauta seuraavaa linkkiä päivittääksesi :web salasanasi:',
     'login' => 'Kirjaudu sisään:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Seuraavien :count laitteiden tarkistus on tulossa :threshold päivän aikana .|Seuraavien :count laitteiden tarkistus on tulossa :threshold päivän aikana.',
     'user' => 'Käyttäjä',
     'username' => 'Käyttäjätunnus',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Tervetuloa :name',
     'welcome_to' => 'Tervetuloa :web!',
     'your_assets' => 'Omat laitteesi',
     'your_credentials' => 'Snipe-IT - kirjautumistietosi',
+    'mail_sent' => 'Mail sent successfully!',
 ];

@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Questo verifica solamente che LDAP possa sincronizzare correttamente. Se la tua query di autenticazione LDAP non è corretta, gli utenti potrebbero non essere ancora in grado di accedere. DEVI SALVARE LE IMPOSTAZIONI LDAP PRIMA DI EFFETTUARE QUESTO TEST.',
     'ldap_manager'              => 'Manager LDAP',
     'ldap_server'               => 'Server LDAP',
-    'ldap_server_help'          => 'Questo dovrebbe iniziare con ldap: // (per unencrypted o TLS) o ldaps: // (per SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validazione certificato SSL di LDAP',
     'ldap_server_cert_ignore'	=> 'Consenti Certificato SSL non valido',
     'ldap_server_cert_help'		=> 'Seleziona questa casella se stai utilizzando un certificato SSL autofirmato e vuoi accettare un certificato SSL non valido.',

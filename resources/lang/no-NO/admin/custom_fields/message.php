@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Feltet finnes ikke.',
         'already_added'   => 'Feltet er allerede lagt til',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Feltet ble ikke opprettet, vennligst prøv igjen.',

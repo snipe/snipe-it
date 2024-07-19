@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Jeg har lest og godtar vilkårene for bruk, og har mottatt denne enheten.',
     'inventory_report' => 'Lagerbeholdnings rapport',
     'item' => 'Enhet:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count lisens utløper de neste :threshold dagene.|:count lisenser utløper de neste :threshold dagene.',
     'link_to_update_password' => 'Klikk på følgende link for å bekrefte din :web passord:',
     'login' => 'Logg inn:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => ':count eiendel har revisjonsfrist innen :treshold dager.|:count eiendeler har revisjonsfrist innen :threshold dager.',
     'user' => 'Bruker',
     'username' => 'Brukernavn',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Velkommen :name',
     'welcome_to' => 'Velkommen til :web!',
     'your_assets' => 'Vis dine eiendeler',
     'your_credentials' => 'Din Snipe-IT konto',
+    'mail_sent' => 'Mail sent successfully!',
 ];

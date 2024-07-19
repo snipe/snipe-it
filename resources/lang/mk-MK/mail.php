@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Ги прочитав и се согласив со условите за користење и го примив ова средство.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Средство:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Ве молиме кликнете на следната врска за да ја обновите вашата :web лозинка:',
     'login' => 'Најава:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Корисник',
     'username' => 'Корисничко име',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Добредојдовте :name',
     'welcome_to' => 'Добредојдовте на :web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Вашите корисничко име и лозинка',
+    'mail_sent' => 'Mail sent successfully!',
 ];

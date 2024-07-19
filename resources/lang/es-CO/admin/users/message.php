@@ -37,12 +37,12 @@ return array(
         'update' => 'Hubo un problema al actualizar el usuario. Por favor, inténtelo de nuevo.',
         'delete' => 'Hubo un problema al eliminar el usuario. Por favor, inténtelo de nuevo.',
         'delete_has_assets' => 'Este usuario tiene elementos asignados y no se ha podido eliminar.',
-        'delete_has_assets_var' => 'Este usuario todavía tienen un activo asignado. Por favor devuélvalo primero.| Este usuario todavía tienen :count activos asignados. Por favor devuélvalos primero.',
-        'delete_has_licenses_var' => 'Este usuario todavía tiene una licencia asignada. Por favor primero haga su devolución.|Este usuario todavía tiene :count licencias asignadas. Por favor primero haga su devolución.',
-        'delete_has_accessories_var' => 'Este usuario todavía tiene un accesorio asignado. Por favor primero haga su devolución.|Este usuario todavía tiene :count accesorios asignados. Por favor primero haga su devolución.',
-        'delete_has_locations_var' => 'Este usuario todavía supervisa una ubicación. Por favor seleccione otro supervisor primero.|Este usuario todavía supervisa :count ubicaciones. Por favor seleccione otro supervisor primero.',
+        'delete_has_assets_var' => 'Este usuario todavía tiene un activo asignado. Por favor ingréselo primero.|Este usuario todavía tiene :count activos asignados. Por favor ingréselos primero.',
+        'delete_has_licenses_var' => 'Este usuario todavía tiene una licencia asignada. Por favor ingrésela primero.|Este usuario todavía tiene :count licencias asignadas. Por favor ingréselas primero.',
+        'delete_has_accessories_var' => 'Este usuario todavía tiene un accesorio asignado. Por favor ingréselo primero.|Este usuario todavía tiene :count accesorios asignados. Por favor ingréselos primero.',
+        'delete_has_locations_var' => 'Este usuario todavía supervisa una ubicación. Por favor primero seleccione otro supervisor.|Este usuario todavía supervisa :count ubicaciones. Por favor primero seleccione otro supervisor.',
         'delete_has_users_var' => 'Este usuario todavía supervisa a otro usuario. Por favor primero seleccione otro supervisor para ese usuario.|Este usuario todavía supervisa :count usuarios. Por favor primero seleccione otro supervisor para ellos.',
-        'unsuspend' => 'Hubo un problema sin suspender al usuario. Por favor, inténtelo de nuevo.',
+        'unsuspend' => 'Hubo un problema marcando como no suspendido al usuario. Por favor, inténtelo de nuevo.',
         'import'    => 'Hubo un problema importando usuarios. Por favor, inténtelo de nuevo.',
         'asset_already_accepted' => 'Este activo ya ha sido aceptado.',
         'accept_or_decline' => 'Debe aceptar o rechazar este activo.',
@@ -56,7 +56,7 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'Archivo no eliminado. Vuelve a intentarlo.',
+        'error'   => 'El archivo no fue borrado. Por favor, inténtelo de nuevo.',
         'success' => 'Archivo eliminado correctamente.',
     ),
 

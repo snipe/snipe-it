@@ -2,7 +2,7 @@
 return array(
     'companies' => 'Cégek',
     'create'    => 'Vállalat létrehozása',
-    'email'     => 'Company Email',
+    'email'     => 'A cég email címe',
     'title'     => 'Társág',
     'phone'     => 'Company Phone',
     'update'    => 'Társaság frissítése',

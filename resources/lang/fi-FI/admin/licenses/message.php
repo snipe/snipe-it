@@ -44,6 +44,8 @@ return array(
         'error'   => 'Lisenssin luovutuksessa tapahtui virhe. Yritä uudelleen.',
         'success' => 'Lisenssi luovutettiin onnistuneesti',
         'not_enough_seats' => 'Lisenssipaikkoja ei ole riittävästi saatavilla kassalle',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

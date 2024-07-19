@@ -44,6 +44,8 @@ return array(
         'error'   => '分配（借出）许可证的过程中出现了一些问题，请重试。',
         'success' => '许可证已经成功借出',
         'not_enough_seats' => '没有足够的许可证座位可供结账',
+        'mismatch' => '提供的许可证席位与许可证不匹配',
+        'unavailable' => '这个席位不能借出。',
     ),
 
     'checkin' => array(

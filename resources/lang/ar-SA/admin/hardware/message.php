@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong> تحذير: </strong> تم تحديد الحالة لهذا الأصل بانه غير قابل للتوزيع حاليا. إذا تغيرت هذه الحالة، يرجى تحديث حالة الأصل.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'الأصل غير موجود.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'لم يتم استيراد بعض العناصر بشكل صحيح.',
         'errorDetail'           => 'لم يتم استيراد العناصر التالية بسبب الأخطاء.',
         'success'               => 'تم استيراد الملف الخاص بك',

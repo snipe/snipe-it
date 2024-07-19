@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告: </strong>此資產目前已標記為不可佈署，如果資產狀態已改變，請更新狀態。',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> '資產不存在',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => '某些項目沒有被正確匯入。',
         'errorDetail'           => '以下項目由於錯誤未被匯入。',
         'success'               => '您的檔案已被匯入。',

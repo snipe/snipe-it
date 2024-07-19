@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> Το περιουσιακό αυτό στοιχείο έχει επισημανθεί ως επί του παρόντος undeployable.
-                        Εάν αυτή η κατάσταση έχει αλλάξει, παρακαλούμε να ενημερώσετε την κατάσταση των περιουσιακών στοιχείων.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'To πάγιο δεν υπάρχει.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Ορισμένα στοιχεία δεν έχουν εισαχθεί σωστά.',
         'errorDetail'           => 'Τα παρακάτω στοιχεία δεν εισήχθησαν εξαιτίας σφαλμάτων.',
         'success'               => 'Το αρχείο σας έχει εισαχθεί',

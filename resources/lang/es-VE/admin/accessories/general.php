@@ -3,8 +3,8 @@
 return array(
     'accessory_category' 				=> 'Categoría de accesorio',
     'accessory_name'  					=> 'Nombre de Accesorio',
-    'checkout'  							=> 'Accesorio de Salida',
-    'checkin'  							=> 'Accesorio de Entrada',
+    'checkout'  							=> 'Asignar accesorio',
+    'checkin'  							=> 'Ingresar accesorio',
     'create'  							=> 'Crear Accesorio',
     'edit'  							=> 'Editar Accesorio',
     'eula_text'							=> 'Acuerdo de uso de la categoría',
@@ -13,10 +13,10 @@ return array(
     'no_default_eula'					=> 'No se encontraron términos y condiciones por defecto. Agregue unos en Configuración.',
     'total'  							=> 'Total',
     'remaining'  						=> 'Disponibles',
-    'update'  							=> 'Actualizar Accesorio',
+    'update'  							=> 'Actualizar accesorio',
     'use_default_eula'					=> 'En su lugar, el <a href="#" data-toggle="modal" data-target="#eulaModal">acuerdo de uso predeterminado</a>.',
     'use_default_eula_disabled'			=> '<del>En su lugar, use el acuerdo de uso predeterminado.</del> No está configurado el acuerdo de uso predeterminado. Por favor agregue uno en Configuración.',
     'clone'                             => 'Clonar accesorio',
-    'delete_disabled'                   => 'Este accesorio no se puede eliminar aún porque algunos artículos todavía están retirados.',
+    'delete_disabled'                   => 'Este accesorio no se puede eliminar aún porque algunos elementos todavía están asignados.',
 
 );
