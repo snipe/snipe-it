@@ -92,7 +92,9 @@ class BulkAssetsController extends Controller
         // This handles all of the pivot sorting below (versus the assets.* fields in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.id';
 
-        $assets = Asset::with('assignedTo', 'location', 'model')->whereIn('assets.id', $asset_ids);
+        $assets = Asset::with('assignedTo', 'location', 'model')
+                ->whereIn('assets.id', $asset_ids)
+                ->withTrashed();
 
         $assets = $assets->get();
 
@@ -483,12 +485,7 @@ class BulkAssetsController extends Controller
         if ($request->filled('ids')) {
             $assets = Asset::find($request->get('ids'));
             foreach ($assets as $asset) {
-                $update_array['deleted_at'] = date('Y-m-d H:i:s');
-                $update_array['assigned_to'] = null;
-
-                DB::table('assets')
-                    ->where('id', $asset->id)
-                    ->update($update_array);
+                $asset->delete();
             } // endforeach
 
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
