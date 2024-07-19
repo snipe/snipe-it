@@ -13,7 +13,7 @@ class CheckinNotificationUser extends Migration
     public function up()
     {
         Schema::table('settings', function ($table) {
-            $table->boolean('checkin_notification_user')->default(0);
+            $table->boolean('checkin_notification_user')->default(1);
         });
     }
 
