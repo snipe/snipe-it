@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Tôi đã đọc và đồng ý với các điều khoản sử dụng và đã nhận được mục này.',
     'inventory_report' => 'Báo cáo kho',
     'item' => 'Mục:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Có: giấy phép bản quyền sắp hết hạn trong ngày mai:threshold days. | Có nhiều: giấy phép bản quyên sắp hết hạn trong lần tiếp theo: threshold days.',
     'link_to_update_password' => 'Vui lòng nhấp vào liên kết sau để cập nhật: mật khẩu web:',
     'login' => 'Đăng nhập:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Hiện có :count tài sản sẽ được xem xét trong :threshold này nữa.',
     'user' => 'Người dùng',
     'username' => 'Tên đăng nhập',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Chào mừng: tên',
     'welcome_to' => 'Chào mừng đến với: web!',
     'your_assets' => 'Xen qua tài sản của bạn',
     'your_credentials' => 'Thông tin về Snipe-IT của bạn',
+    'mail_sent' => 'Mail sent successfully!',
 ];

@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Kāore te mara i te tīariari.',
         'already_added'   => 'Kua tapirihia te mara',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Kāore i hanga te mara, tēnā whakamātau anō.',

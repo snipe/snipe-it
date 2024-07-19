@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Lĩnh vực đó không tồn tại.',
         'already_added'   => 'Trường đã được thêm',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Trường không được tạo, vui lòng thử lại.',

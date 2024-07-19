@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Digniin: </strong> Hantidan waxaa loo calaamadeeyay mid aan hadda la daabul karin.
-                        Haddii heerkan uu isbedelay, fadlan cusboonaysii heerka hantida.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Hantidu ma jirto.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Alaabta qaar si sax ah uma soo dejin.',
         'errorDetail'           => 'Alaabta soo socota looma soo dejin khaladaad dartood.',
         'success'               => 'Faylkaaga waa la soo dejiyay',

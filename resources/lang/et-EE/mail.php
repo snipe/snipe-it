@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Olen lugenud ja nõustun kasutustingimustega ja saanud selle kirje.',
     'inventory_report' => 'Inventari aruanne',
     'item' => 'Kirje:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count litsents aegub järgmise :threshold päeva jooksul.|:count litsentsi aegub järgmise :threshold päeva jooksul.',
     'link_to_update_password' => 'Klienditeenuse uuendamiseks klõpsake järgmisel lingil:',
     'login' => 'Logi sisse:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Sul on :count vahend, mida tuleb auditeerida :threshold päeva jooksul.|Sul on :count vahendit, mida tuleb auditeerida :threshold päeva jooksul.',
     'user' => 'Kasutaja',
     'username' => 'Kasutajanimi',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Tere tulemast, :name',
     'welcome_to' => 'Teretulemast lehele :web!',
     'your_assets' => 'Vaata oma varasi',
     'your_credentials' => 'Sinu Snipe-IT rekvisiidid',
+    'mail_sent' => 'Mail sent successfully!',
 ];

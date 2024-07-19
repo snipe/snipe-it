@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告: </strong>该资产目前已经被标记为不可被分配，如果该资产状态已经改变，请刷新。',
+    'undeployable' 		=> '<strong>警告： </strong> 此资产已被标记为当前不可借出。如果此状态已经改变，请更新资产状态。',
     'does_not_exist' 	=> '资产不存在',
     'does_not_exist_var'=> '找不到标签为 :asset_tag 的资产',
     'no_tag' 	        => '未提供资产标签。',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => '流程导入',
         'error'                 => '某些字段没有正确导入',
         'errorDetail'           => '以下项由于错误未被导入',
         'success'               => '您的文件已被导入',

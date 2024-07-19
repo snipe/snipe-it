@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'crwdns1736:0crwdne1736:0',
     'inventory_report' => 'crwdns11243:0crwdne11243:0',
     'item' => 'crwdns1737:0crwdne1737:0',
+    'item_checked_reminder' => 'crwdns12322:0crwdne12322:0',
     'license_expiring_alert' => 'crwdns2048:0crwdne2048:0',
     'link_to_update_password' => 'crwdns1742:0crwdne1742:0',
     'login' => 'crwdns1744:0crwdne1744:0',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'crwdns6002:0crwdne6002:0',
     'user' => 'crwdns2032:0crwdne2032:0',
     'username' => 'crwdns2033:0crwdne2033:0',
+    'unaccepted_asset_reminder' => 'crwdns12324:0crwdne12324:0',
     'welcome' => 'crwdns1767:0crwdne1767:0',
     'welcome_to' => 'crwdns1768:0crwdne1768:0',
     'your_assets' => 'crwdns6014:0crwdne6014:0',
     'your_credentials' => 'crwdns1769:0crwdne1769:0',
+    'mail_sent' => 'crwdns12300:0crwdne12300:0',
 ];

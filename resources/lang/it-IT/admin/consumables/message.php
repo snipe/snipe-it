@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'La categoria deve essere consumabile.',
     'does_not_exist' => 'Il consumabile non esiste.',
 
     'create' => array(

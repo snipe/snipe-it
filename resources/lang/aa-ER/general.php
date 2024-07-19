@@ -551,5 +551,10 @@ return [
     ],
     'more_info' => 'crwdns12288:0crwdne12288:0',
     'quickscan_bulk_help' => 'crwdns12290:0crwdne12290:0',
+    'whoops' => 'crwdns12304:0crwdne12304:0',
+    'something_went_wrong' => 'crwdns12306:0crwdne12306:0',
+    'close' => 'crwdns12308:0crwdne12308:0',
+    'expires' => 'crwdns12310:0crwdne12310:0',
+    'map_fields'=> 'crwdns12572:0crwdne12572:0',
 
 ];

@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => '这只证明了LDAP同步正确。如果您的LDAP身份验证查询设置不正确，用户可能仍然无法登录。当然您必须先保存您的LDAP设置。',
     'ldap_manager'              => 'LDAP 领导（Manager）',
     'ldap_server'               => 'LDAP 服务器',
-    'ldap_server_help'          => '这应以ldap:// (for unencrypted or TLS)或 ldaps:// (for SSL)开头',
+    'ldap_server_help'          => '此处应该以 ldap:// (对于未加密的) 或 ldaps:// (对于TLS 或 SSL) 开始',
     'ldap_server_cert'			=> '检验LDAP的SSL证书',
     'ldap_server_cert_ignore'	=> '允许未通过校验的SSL证书',
     'ldap_server_cert_help'		=> '如果你使用了自签发证书，请勾选',

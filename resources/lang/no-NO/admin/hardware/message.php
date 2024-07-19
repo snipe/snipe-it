@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utleverbar.
-                        Oppdater eiendelsstatus hvis situasjonen har endret seg.',
+    'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utplasserbar. Vennligst endre status for eiendel dette har endret seg.',
     'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Noen elementer ble ikke importert riktig.',
         'errorDetail'           => 'Følgende elementer ble ikke importert på grunn av feil.',
         'success'               => 'Filen har blitt importert',

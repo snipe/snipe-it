@@ -552,5 +552,10 @@ return [
     ],
     'more_info' => 'Altre informazioni',
     'quickscan_bulk_help' => 'Selezionando questa casella verrà modificata la posizione di questo bene. Non selezionandola, il luogo verrà semplicemente annotato nel log di controllo. Nota che se questo bene è assegnato, non verrà modificata la posizione della persona, del bene o della posizione a cui è assegnato.',
+    'whoops' => 'Ops!',
+    'something_went_wrong' => 'Qualcosa è andato storto con la tua richiesta.',
+    'close' => 'Chiudi',
+    'expires' => 'Scade',
+    'map_fields'=> 'Map :item_type Field',
 
 ];

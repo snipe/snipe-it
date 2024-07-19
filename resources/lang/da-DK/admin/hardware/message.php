@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Advarsel: </strong> Dette aktiv er blevet markeret som uudnytteligt. Hvis denne status er ændret, skal du opdatere aktivstatus.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Asset eksisterer ikke.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Nogle elementer importerede ikke korrekt.',
         'errorDetail'           => 'Følgende elementer blev ikke importeret på grund af fejl.',
         'success'               => 'Din fil er blevet importeret',

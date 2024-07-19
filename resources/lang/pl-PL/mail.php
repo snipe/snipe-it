@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Przeczytałem i zgadzam się z warunkami użytkowania oraz potwierdzam otrzymanie niniejszej pozycji.',
     'inventory_report' => 'Raport z magazynu',
     'item' => 'Pozycja:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Istnieje: liczba licencja wygasająca w ciągu następnych: dni progowe. | Istnieje: liczba licencji wygasających w ciągu następnych: dni progowe.',
     'link_to_update_password' => 'Proszę kliknąć na poniższy link, aby zaktualizować swoje hasło na :web:',
     'login' => 'Login:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Istnieje :count aktywa, które nadchodzą do rewizji w ciągu :threshold days.|Istnieje :count aktywów, które nadchodzą do rewizji w ciągu :threshold dni.',
     'user' => 'Użytkownik',
     'username' => 'Nazwa użytkownika',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Witaj :name',
     'welcome_to' => 'Witamy na :web!',
     'your_assets' => 'Zobacz swój sprzęt',
     'your_credentials' => 'Twoje poświadczenia :web',
+    'mail_sent' => 'Mail sent successfully!',
 ];

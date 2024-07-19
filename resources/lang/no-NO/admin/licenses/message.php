@@ -44,6 +44,8 @@ return array(
         'error'   => 'Det oppstod et problem under utsjekk av lisens. Vennligst prøv igjen.',
         'success' => 'Vellykket utsjekk av lisens',
         'not_enough_seats' => 'Ikke nok lisensseter tilgjengelige for utsjekking',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

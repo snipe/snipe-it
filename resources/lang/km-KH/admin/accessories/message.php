@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'គ្រឿងបន្លាស់មិនchecked outទេ សូមព្យាយាមម្តងទៀត',
         'success' 		=> 'គ្រឿងបន្លាស់ត្រូវchecked out ដោយជោគជ័យ។',
         'unavailable'   => 'គ្រឿងបន្លាស់មិនមានសម្រាប់ checkout ទេ។ ពិនិត្យបរិមាណដែលអាចប្រើបាន',
-        'user_does_not_exist' => 'អ្នកប្រើប្រាស់នោះមិនត្រឹមត្រូវទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។'
+        'user_does_not_exist' => 'អ្នកប្រើប្រាស់នោះមិនត្រឹមត្រូវទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+         'checkout_qty' => array(
+            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            ),
+           
     ),
 
     'checkin' => array(

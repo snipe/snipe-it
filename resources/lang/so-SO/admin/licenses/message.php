@@ -44,6 +44,8 @@ return array(
         'error'   => 'Waxaa jirtay arrin lagu hubinayo shatiga. Fadlan isku day mar kale',
         'success' => 'Shatiga si guul leh ayaa loo hubiyay',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

@@ -129,7 +129,7 @@ return [
     'ldap_manager'              => 'مدیر LDAP
 ',
     'ldap_server'               => 'سرویس دهنده LDAP',
-    'ldap_server_help'          => 'این باید با ldap: // (برای رمزگذاری نشده یا TLS) یا ldaps: ((برای SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
     'ldap_server_cert_ignore'	=> 'اجازه می دهد به گواهی های بی اعتبار SSL',
     'ldap_server_cert_help'		=> 'اگر از یک امضای SSL شخصی معتبر استفاده می کنید این گزینه را فعال کنید.',
@@ -208,8 +208,7 @@ return [
     'optional'					=> 'اختیاری',
     'per_page'                  => 'نتایج در هر صفحه',
     'php'                       => 'نسخه php',
-    'php_info'                  => 'اطلاعات پی اچ پی
-',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
     'php_overview_keywords'     => 'phpinfo, system, info',

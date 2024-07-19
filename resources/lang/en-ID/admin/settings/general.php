@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Ini hanya tes yang bisa dilacak LDAP dengan benar. Jika pengesahan LDAP anda tidak benar, pengguna mungkin masih belum dapat masuk. ANDA HARUS MENYIMPAN PENGATURAN LDAP YANG ANDA PERBARUI PERTAMA.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'Server LDAP',
-    'ldap_server_help'          => 'Ini harus dimulai dengan ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validasi sertifikat SSL LDAP',
     'ldap_server_cert_ignore'	=> 'Izinkan Sertifikat SSL yang tidak sah',
     'ldap_server_cert_help'		=> 'Pilih kotak centang ini jika anda menggunakan sertifikat SSL yang masuk sendiri dan ingin menerima sertifikat SSL yang tidak sah.',

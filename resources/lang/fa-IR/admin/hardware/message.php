@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong> اخطار: </ strong> این دارایی به برانگیز گزارش شده است که در حال حاضر undeployable. اگر این وضعیت تغییر کرده است، لطفا به روز رسانی وضعیت دارایی.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'دارایی وجود ندارد.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -53,6 +53,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'بعضی از موارد به درستی وارد نشدند.',
         'errorDetail'           => 'موارد زیر به علت خطا وارد نشده است.',
         'success'               => 'فایل شما وارد شده است',

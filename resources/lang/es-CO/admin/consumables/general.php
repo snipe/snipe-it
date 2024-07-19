@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'checkout'                          => 'Retirar Consumible al Usuario',
+    'checkout'                          => 'Asignar consumible a usuario',
     'consumable_name'                   => 'Nombre del Consumible',
     'create'                            => 'Crear Consumible',
     'item_no'                           => 'Elemento No.',

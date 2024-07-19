@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Ceci vérifie uniquement que LDAP se synchronise correctement. Si votre requête d\'authentification LDAP est incorrecte, les utilisateurs peuvent ne pas pouvoir se connecter. VOUS DEVEZ D\'ABORD ENREGISTRER VOS PARAMÈTRES LDAP MIS À JOUR.',
     'ldap_manager'              => 'Gestionnaire LDAP',
     'ldap_server'               => 'Serveur LDAP',
-    'ldap_server_help'          => 'Ca devrait commencer par ldap:// (non crypté ou TLS) ou ldaps:// (SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validation du certificat SSL LDAP',
     'ldap_server_cert_ignore'	=> 'Autorise un certificat SSL invalide',
     'ldap_server_cert_help'		=> 'Sélectionnez cette case à cocher si vous utilisez un certificat SSL auto-signé et voudriez accepter un certificat SSL invalide.',

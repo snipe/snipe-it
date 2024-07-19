@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Am citit și sunt de acord cu termenii de utilizare și am primit acest articol.',
     'inventory_report' => 'Raport de inventar',
     'item' => 'Articol:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Există :count licență care expiră în următoarele :prag zile.<unk> Există :count licențe care expiră în următoarele :threshold zile.',
     'link_to_update_password' => 'Faceți clic pe următorul link pentru a vă actualiza parola web:',
     'login' => 'Logare:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Există :count atuuri care vin pentru audit în :prag zile.• Există :count active care vin pentru audit în următoarele zile limită.',
     'user' => 'Utilizator',
     'username' => 'Utilizator',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Bun venit: nume',
     'welcome_to' => 'Bun venit pe: web!',
     'your_assets' => 'Vezi activele tale',
     'your_credentials' => 'Informațiile dvs. Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

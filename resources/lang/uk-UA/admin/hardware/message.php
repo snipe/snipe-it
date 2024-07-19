@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Попередження: </strong> цей актив позначено як такий, що наразі неможливо розгорнути.
-                         Якщо цей статус змінився, оновіть статус активу.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Медіафайл не існує.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Деякі елементи не імпортовано належним чином.',
         'errorDetail'           => 'Наступні елементи не були імпортовані через помилки.',
         'success'               => 'Ваш файл імпортовано',

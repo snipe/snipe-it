@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Licentiegegevens',
     'license_seats'  			=> 'Licentie werkplekken',
     'seat'  					=> 'Werkplek',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Werkplekken',
     'software_licenses'  		=> 'Applicatie Licenties',
     'user'  					=> 'Gebruiker',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Alle licenties inchecken',
-                'modal'             => 'Hiermee wordt één werkplek ingecheckt. | Hiermee worden alle :checkedout_seats_count werkplekken voor deze licentie ingecheckt.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Check ALLE werkplekken in voor deze licentie van zowel gebruikers als assets',
                 'disabled_tooltip'  => 'Dit is uitgeschakeld omdat er nog niets is uitgecheckt',
                 'disabled_tooltip_reassignable'  => 'Dit is uitgeschakeld omdat de licentie niet opnieuw toegewezen kan worden',
                 'success'           => 'Licentie met succes ingecheckt! | Alle licenties zijn met succes ingecheckt!',
-                'log_msg'           => 'Ingecheckt via bulklicentie-checkin in licentie GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

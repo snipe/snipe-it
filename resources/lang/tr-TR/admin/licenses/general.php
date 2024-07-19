@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Lisans Bilgisi',
     'license_seats'  			=> 'Lisans Kullanıcıları',
     'seat'  					=> 'Kullanıcı',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Kullanıcılar',
     'software_licenses'  		=> 'Yazılım Lisansları',
     'user'  					=> 'Kullanıcı',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Tüm koltukları ayır',
-                'modal'             => 'Bu, bir koltukta kontrol işlemini gerçekleştirecektir. | Bu işlem, bu lisans için tüm :checkedout_seats_count koltukları kontrol edecektir.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Bu lisans için hem kullanıcılardan hem de varlıklardan TÜM lisansları kontrol edin',
                 'disabled_tooltip'  => 'Şu anda teslim alınmış koltuk olmadığından bu devre dışı bırakıldı',
                 'disabled_tooltip_reassignable'  => 'Lisans yeniden atanamadığı için bu devre dışı bırakıldı',
                 'success'           => 'Lisans başarıyla kontrol edildi! | Tüm lisanslar başarıyla kontrol edildi!',
-                'log_msg'           => 'Lisans GUI\'sinde toplu lisans ödemesi yoluyla giriş yapıldı',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

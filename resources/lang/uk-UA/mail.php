@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Я прочитав і згоден з умовами використання даного товару.',
     'inventory_report' => 'Звіт про запаси',
     'item' => 'Елемент:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'В наступні :threshold днів закінчується :count термін дії ліцензії для наступних :threshold днів.|В наступному :threshold строк дії ліцензії.',
     'link_to_update_password' => 'Будь-ласка, натисніть на це посилання, щоб оновити свій пароль:',
     'login' => 'Логін:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Знайдено :count актив, що наближається до аудиту в :threshold днів.|Є :count активів, які йдуть до аудиту в :threshold днів.',
     'user' => 'Користувач',
     'username' => 'Ім\'я кристувача',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Ласкаво просимо, :name',
     'welcome_to' => 'Ласкаво просимо до :web!',
     'your_assets' => 'Переглянути Ваші Активи',
     'your_credentials' => 'Ваші облікові дані Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

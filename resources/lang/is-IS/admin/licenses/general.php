@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'License Info',
     'license_seats'  			=> 'License Seats',
     'seat'  					=> 'Seat',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Seats',
     'software_licenses'  		=> 'Hugbúnaðarleyfi',
     'user'  					=> 'Notandi',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin All Seats',
-                'modal'             => 'This will action checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checkin ALL seats for this license from both users and assets',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
                 'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => 'License successfully checked in! | All licenses were successfully checked in!',
-                'log_msg'           => 'Checked in via bulk license checkout in license GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
