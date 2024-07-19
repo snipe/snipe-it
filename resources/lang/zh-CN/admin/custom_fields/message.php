@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => '字段不存在',
         'already_added'   => '已经新增字段',
+        'none_selected'   => '未选择字段',
 
         'create' => array(
             'error'   => '新增字段失败，请重试',

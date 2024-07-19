@@ -3,14 +3,14 @@
 return array(
 
     'assigned_to'   	=> 'Asignado A',
-    'checkout'   		=> 'Registrado / Asignado',
+    'checkout'   		=> 'Entrada/Salida',
     'deleted_at'        => 'Eliminado el',
     'id'      			=> 'ID',
     'license_email'   	=> 'Email de licencia',
-    'license_name'   	=> 'Licenciado A',
+    'license_name'   	=> 'Licenciado a',
     'purchase_date'   	=> 'Fecha de compra',
     'purchased'   		=> 'Comprado',
-    'seats'   			=> 'Puestos',
+    'seats'   			=> 'Total de licencias',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
     'title'      		=> 'Licencia',

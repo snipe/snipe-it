@@ -553,5 +553,10 @@ return [
     ],
     'more_info' => 'Več informacij',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'whoops' => 'Whoops!',
+    'something_went_wrong' => 'Something went wrong with your request.',
+    'close' => 'Close',
+    'expires' => 'Poteče',
+    'map_fields'=> 'Map :item_type Field',
 
 ];

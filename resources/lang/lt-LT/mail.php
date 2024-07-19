@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Aš perskaičiau ir sutinku su naudojimo sąlygomis, ir patvirtinu, kad gavau šį daiktą.',
     'inventory_report' => 'Inventoriaus ataskaita',
     'item' => 'Daiktas:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Yra :count licencija, kuri baigiasi per kitas :threshold dienas.|Yra :count licencijos (-ų), kurios baigiasi per kitas :threshold dienas (-ų).',
     'link_to_update_password' => 'Spustelėkite šią nuorodą, kad atnaujintumėte savo :web slaptažodį:',
     'login' => 'Prisijungti:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Yra :count įranga, kuriai per :threshold dienas (-ų) turi būti atliktas auditas.|Yra :count įrangos (-ų), kurioms per :threshold dienas (-ų) turi būti atliktas auditas.',
     'user' => 'Naudotojas',
     'username' => 'Naudotojo vardas',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Sveiki :vardas',
     'welcome_to' => 'Sveiki apsilankę :web!',
     'your_assets' => 'Peržiūrėti jūsų įrangą',
     'your_credentials' => 'Jūsų „Snipe-IT“ prisijungimo duomenys',
+    'mail_sent' => 'Mail sent successfully!',
 ];

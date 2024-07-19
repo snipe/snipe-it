@@ -44,6 +44,8 @@ return array(
         'error'   => 'Došlo je do problema prilikom provere licence. Molim pokušajte ponovo.',
         'success' => 'Licenca je uspešno proverena',
         'not_enough_seats' => 'Nema dovoljno dostupnih licenci za zaduživanje',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

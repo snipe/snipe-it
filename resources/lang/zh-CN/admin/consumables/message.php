@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => '该类别必须是一个耗材类别。',
     'does_not_exist' => '耗材不存在。',
 
     'create' => array(

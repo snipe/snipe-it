@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Opozorilo: </strong> To sredstvo je bilo označeno kot trenutno nerazdeljeno. Če se je ta status spremenil, posodobite status sredstva.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Sredstvo ne obstaja.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Nekateri elementi niso bili pravilno uvoženi.',
         'errorDetail'           => 'Naslednji elementi niso bili uvoženi zaradi napak.',
         'success'               => 'Vaša datoteka je bila uvožena',

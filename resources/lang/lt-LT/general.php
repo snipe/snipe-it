@@ -552,5 +552,10 @@ return [
     ],
     'more_info' => 'Detaliau',
     'quickscan_bulk_help' => 'Pažymėjus šį langelį, įrangos įrašas bus atnaujintas, kad atspindėtų šią naują vietą. Jei paliksite jį nepažymėtą, vieta bus pažymėta tik audito žurnale. Atkreipkite dėmesį, kad jei ši įranga bus išduota, tai nepakeis asmens, įrangos ar vietos, kuriems išduodama įranga, buvimo vietos.',
+    'whoops' => 'Whoops!',
+    'something_went_wrong' => 'Something went wrong with your request.',
+    'close' => 'Close',
+    'expires' => 'Baigia galioti',
+    'map_fields'=> 'Map :item_type Field',
 
 ];

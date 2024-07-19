@@ -7,7 +7,7 @@ return array(
     'no_association' => '警告！このアイテムのアセットモデルが無効または不足しています！',
     'no_association_fix' => 'モデルを割り当てるために今すぐこの資産を編集してください。',
     'assoc_users'	 => 'この減価償却は複数のモデルに関係付けられているため削除することができません。モデルを削除してから再度実行してください。 ',
-
+    'invalid_category_type' => 'The category must be an asset category.',
 
     'create' => array(
         'error'   => '型番が作成できませんでした。もう一度やり直して下さい。',

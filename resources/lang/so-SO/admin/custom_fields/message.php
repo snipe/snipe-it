@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Goobtaas ma jirto.',
         'already_added'   => 'Goobta mar hore ayaa lagu daray',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Goobta lama abuurin, fadlan isku day mar kale.',

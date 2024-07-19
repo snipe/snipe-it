@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'ライセンス情報',
     'license_seats'  			=> 'ライセンスシート',
     'seat'  					=> 'シート',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'シート数',
     'software_licenses'  		=> 'ソフトウェア・ライセンス',
     'user'  					=> '利用者',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => '全てのシートをチェックイン',
-                'modal'             => 'このアクションは、1つのシートをチェックインします。 | このアクションは、このライセンスのすべての :checkedout_seats_count シートをチェックインします。',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'ユーザーとアセットの両方から、このライセンスのすべてのシートをチェックインします',
                 'disabled_tooltip'  => '現在チェックアウトされているシートがないため、これは無効です',
                 'disabled_tooltip_reassignable'  => 'ライセンスが再割り当てできないため、これは無効です',
                 'success'           => 'ライセンスのチェックインに成功しました! | すべてのライセンスは正常にチェックインされました!',
-                'log_msg'           => 'ライセンスGUIで一括ライセンスチェックアウトを行いました',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

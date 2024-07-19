@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Энэ талбар байхгүй байна.',
         'already_added'   => 'Талбай нэмэгдсэн байна',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Талбар үүсгэгдсэнгүй, дахин оролдоно уу.',

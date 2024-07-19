@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Анхааруулга: </strong> Энэ хөрөнгө нь одоогоор хүчингүй болсон гэж тэмдэглэгдсэн байна. Хэрэв энэ байдал өөрчлөгдсөн бол хөрөнгийн статусыг шинэчлэнэ үү.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Хөрөнгө байхгүй байна.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Зарим зүйлс зөв импорт хийгдээгүй байна.',
         'errorDetail'           => 'Дараах зүйлсийг алдааны улмаас импортолсонгүй.',
         'success'               => 'Таны файл импортлогдсон байна',

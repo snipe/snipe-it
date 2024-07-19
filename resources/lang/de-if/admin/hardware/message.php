@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
-                        Falls sich dieser Status verändert hat, aktualisiere bitte den Asset Status.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
     'does_not_exist_var'=> 'Asset mit Tag :asset_tag nicht gefunden.',
     'no_tag' 	        => 'Kein Asset Tag angegeben.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Einige Elemente wurden nicht korrekt importiert.',
         'errorDetail'           => 'Die folgenden Elemente wurden aufgrund von Fehlern nicht importiert.',
         'success'               => 'Deine Datei wurde importiert',

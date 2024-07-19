@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável".
-                        Se este estado mudou, por favor atualize o estado do artigo.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Artigo não existente.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Alguns itens não foram importados corretamente.',
         'errorDetail'           => 'Os seguintes itens não foram importados devido a erros.',
         'success'               => 'O seu ficheiro foi importado',

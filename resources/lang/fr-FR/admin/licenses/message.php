@@ -44,6 +44,8 @@ return array(
         'error'   => 'Un problème a eu lieu pendant l\'association de la licence. Veuillez essayer à nouveau.',
         'success' => 'La licence a été associée avec succès',
         'not_enough_seats' => 'Pas assez de sièges de licence disponibles pour le paiement',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

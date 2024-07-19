@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Seleccione un idioma',
+    'select_language' => 'Seleccionar un idioma',
     'languages' => [
         'en-US'=> 'Inglés, EEUU',
         'en-GB'=> 'Inglés, Reino Unido',
@@ -66,7 +66,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Seleccione un país',
+    'select_country' => 'Seleccionar un país',
     
     'countries' => [
         'AC'=>'Isla de Ascensión',

@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Léigh na téarmaí úsáide agus léigh mé na téarmaí úsáide agus fuair mé an t-ítim seo.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Mír:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Cliceáil ar an nasc seo a leanas chun do chuid focal faire:',
     'login' => 'Logáil isteach:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Úsáideoir',
     'username' => 'Ainm Úsáideora',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Fáilte: ainm',
     'welcome_to' => 'Fáilte go dtí: gréasáin!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Do dhintiúir Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

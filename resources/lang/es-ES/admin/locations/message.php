@@ -11,7 +11,7 @@ return array(
 
 
     'create' => array(
-        'error'   => 'Localización no creada, Intentalo de nuevo.',
+        'error'   => 'La ubicación no pudo ser creada, por favor inténtelo de nuevo.',
         'success' => 'La ubicación fue creada exitosamente.'
     ),
 
