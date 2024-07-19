@@ -3,14 +3,10 @@
 namespace App\Importer;
 
 use App\Models\Asset;
-use App\Models\AssetModel;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Events\CheckoutableCheckedIn;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 
 class AssetImporter extends ItemImporter
 {
