@@ -8,7 +8,7 @@ use App\Models\CheckoutAcceptance;
 use App\Models\User;
 use App\Notifications\AcceptanceAssetAcceptedNotification;
 use App\Notifications\AcceptanceAssetDeclinedNotification;
-use Notification;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class AccessoryAcceptanceTest extends TestCase
