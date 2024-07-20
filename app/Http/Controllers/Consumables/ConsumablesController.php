@@ -209,4 +209,14 @@ class ConsumablesController extends Controller
         return redirect()->route('consumables.index')
             ->with('error', trans('admin/consumables/message.does_not_exist'));
     }
+
+    public function clone(Consumable $consumable) : View
+    {
+        $this->authorize('create', $consumable);
+        $consumable_to_close = $consumable;
+        $consumable = clone $consumable_to_close;
+        $consumable->id = null;
+
+        return view('consumables/edit')->with('item', $consumable);
+    }
 }
