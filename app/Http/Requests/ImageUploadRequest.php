@@ -136,29 +136,28 @@ class ImageUploadRequest extends Request
                 }
 
                  // Remove Current image if exists
-                $item = $this->deleteExistingImage($item, $form_fieldname, $path, $db_fieldname);
+                $item = $this->deleteExistingImage($item, $path, $db_fieldname);
                 $item->{$db_fieldname} = $file_name;
             }
 
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } elseif ($this->input('image_delete') == '1') {
-            $item = $this->deleteExistingImage($item, $form_fieldname, $path, $db_fieldname);
+            $item = $this->deleteExistingImage($item, $path, $db_fieldname);
         }
 
         return $item;
     }
 
-    public function deleteExistingImage($item, $form_fieldname = 'image', $path = null, $db_fieldname = 'image') {
+    public function deleteExistingImage($item, $path = null, $db_fieldname = 'image') {
 
-        \Log::error('DELETING '.$form_fieldname);
-
-        try {
-            Storage::disk('public')->delete($path.'/'.$item->{$db_fieldname});
-            $item->{$db_fieldname} = null;
-            \Log::error('deleted successfully');
-        } catch (\Exception $e) {
-            Log::debug($e);
+        if ($item->{$db_fieldname}!='') {
+            try {
+                Storage::disk('public')->delete($path.'/'.$item->{$db_fieldname});
+                $item->{$db_fieldname} = null;
+            } catch (\Exception $e) {
+                Log::debug($e);
+            }
         }
 
         return $item;
