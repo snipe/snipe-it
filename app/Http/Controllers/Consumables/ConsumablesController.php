@@ -200,7 +200,7 @@ class ConsumablesController extends Controller
      */
     public function show($consumableId = null)
     {
-        $consumable = Consumable::find($consumableId);
+        $consumable = Consumable::withCount('users as users_consumables')->find($consumableId);
         $this->authorize($consumable);
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));

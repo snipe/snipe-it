@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
   {{ $consumable->name }}
-  {{ trans('general.consumable') }}
+  {{ trans('general.consumable') }} -
   ({{ trans('general.remaining_var', ['count' => $consumable->numRemaining()])  }})
   @parent
 @endsection
@@ -38,10 +38,10 @@
             <li>
               <a href="#checkedout" data-toggle="tab">
                 <span class="hidden-lg hidden-md">
-                <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+                <i class="fas fa-users fa-2x" aria-hidden="true"></i>
                 </span>
-                    <span class="hidden-xs hidden-sm">{{ trans('general.users') }}
-                      {!! ($consumable->users->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($consumable->users->count()).'</badge>' : '' !!}
+                    <span class="hidden-xs hidden-sm">{{ trans('general.assigned') }}
+                      {!! ($consumable->users_consumables > 0 ) ? '<badge class="badge badge-secondary">'.number_format($consumable->users_consumables).'</badge>' : '' !!}
                     </span>
                   </a>
             </li>
@@ -190,6 +190,18 @@
                     </div>
                   @endif
 
+                  <!-- min amt -->
+                  @if ($consumable->min_amt)
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.min_amt') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ $consumable->min_amt }}
+                      </div>
+                    </div>
+                  @endif
+
                   <!-- locationm -->
                   @if ($consumable->location)
                     <div class="row">
@@ -248,7 +260,7 @@
                         <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                           <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                         </i>
-                        
+
                       </div>
                     </div>
                   @endif
