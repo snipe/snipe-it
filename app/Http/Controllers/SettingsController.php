@@ -455,8 +455,9 @@ class SettingsController extends Controller
 
             // Default avatar upload
             $setting = $request->handleImages($setting, 500, 'default_avatar', 'avatars', 'default_avatar');
-            if ($request->input('clear_default_avatar') == '1') {
+            if (($request->input('clear_default_avatar') == '1') && ($setting->default_avatar!='default.png')) {
 
+                \Log::debug('Deleting default avatar');
                 if (($setting->default_avatar) && (Storage::exists('avatars/'.$setting->default_avatar))) {
                     Storage::disk('public')->delete('avatars/'.$setting->default_avatar);
                 }
