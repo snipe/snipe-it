@@ -422,9 +422,8 @@ class SettingsController extends Controller
             // Email logo upload
             $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
             if ($request->input('clear_email_logo') == '1') {
-                $setting = $request->deleteExistingImage($setting, 'email_logo', 'email_logo');
+                $setting = $request->deleteExistingImage($setting, '', 'email_logo');
                 $setting->email_logo = null;
-                // If they are uploading an image, validate it and upload it
             }
 
              // Label logo upload
