@@ -452,7 +452,6 @@ class SettingsController extends Controller
             }
 
             if ($request->input('restore_default_avatar') == '1')  {
-                Setting::restoreDefaultAvatar();
                 $setting->default_avatar = 'default.png';
             }
         }
