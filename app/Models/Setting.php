@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Support\Facades\Log;
 
@@ -409,6 +410,26 @@ class Setting extends Model
                 unlink(self::get_client_side_key_path());
             }
         }
+    }
+
+    /**
+     * Copy the default avatar back over if it's missing
+     *
+     * @return string
+    **/
+
+    public static function restoreDefaultAvatar() : void {
+
+        if (Storage::disk('public')->missing(public_path('uploads/avatars/default.png'))) {
+            \Log::debug('default avatar not found');
+            try {
+                Storage::disk('public')->copy(public_path('img/demo/avatars/default.png'), public_path('uploads/avatars/default.png'));
+                \Log::debug('Default avatar copied back over from img/demo/default.png');
+            } catch (\Exception $e) {
+                \Log::debug('Could not copy default avatar. Error: '.$e);
+            }
+        }
+
     }
 
 
