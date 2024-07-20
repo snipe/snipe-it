@@ -414,10 +414,7 @@ class SettingsController extends Controller
             $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
 
             if ($request->input('clear_logo') == '1') {
-
-                if (($setting->logo) && (Storage::exists($setting->logo))) {
-                    Storage::disk('public')->delete($setting->logo);
-                }
+                $setting = $request->deleteExistingImage($setting, 'logo', 'logo');
                 $setting->logo = null;
                 $setting->brand = 1;
             }
@@ -425,43 +422,39 @@ class SettingsController extends Controller
             // Email logo upload
             $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
             if ($request->input('clear_email_logo') == '1') {
-
-                if (($setting->email_logo) && (Storage::exists($setting->email_logo))) {
-                    Storage::disk('public')->delete($setting->email_logo);
-                }
+                $setting = $request->deleteExistingImage($setting, 'email_logo', 'email_logo');
                 $setting->email_logo = null;
                 // If they are uploading an image, validate it and upload it
             }
 
              // Label logo upload
             $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
-            if ($request->input('clear_label_logo') == '1') {
 
-                if (($setting->label_logo) && (Storage::exists($setting->label_logo))) {
-                    Storage::disk('public')->delete($setting->label_logo);
-                }
+            if ($request->input('clear_label_logo') == '1') {
+                $setting = $request->deleteExistingImage($setting, '', 'label_logo');
                 $setting->label_logo = null;
             }
 
             // Favicon upload
             $setting = $request->handleImages($setting, 100, 'favicon', '', 'favicon');
             if ('1' == $request->input('clear_favicon')) {
-
-                if (($setting->favicon) && (Storage::exists($setting->favicon))) {
-                    Storage::disk('public')->delete($setting->favicon);
-                }
+                $setting = $request->deleteExistingImage($setting, '', 'favicon');
                 $setting->favicon = null;
             }
 
             // Default avatar upload
             $setting = $request->handleImages($setting, 500, 'default_avatar', 'avatars', 'default_avatar');
-            if (($request->input('clear_default_avatar') == '1') && ($setting->default_avatar!='default.png')) {
-
-                \Log::debug('Deleting default avatar');
-                if (($setting->default_avatar) && (Storage::exists('avatars/'.$setting->default_avatar))) {
-                    Storage::disk('public')->delete('avatars/'.$setting->default_avatar);
+            if ($request->input('clear_default_avatar') == '1')  {
+                // Don't delete the file, just update the field if this is the default
+                if ($setting->default_avatar!='default.png') {
+                    $setting = $request->deleteExistingImage($setting, 'avatars', 'default_avatar');
                 }
                 $setting->default_avatar = null;
+            }
+
+            if ($request->input('restore_default_avatar') == '1')  {
+                Setting::restoreDefaultAvatar();
+                $setting->default_avatar = 'default.png';
             }
         }
 
