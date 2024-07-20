@@ -101,6 +101,14 @@
                   </div>
                 @endcan
 
+                  @can('create', Consumable::class)
+
+                    <div class="col-md-12">
+                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}</a>
+                    </div>
+
+                  @endcan
+
                   @can('checkout', $consumable)
                     @if ($consumable->numRemaining() > 0)
                         <div class="col-md-12">

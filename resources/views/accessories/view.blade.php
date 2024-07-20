@@ -330,7 +330,7 @@
                   <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.edit') }}</a>
                </div>
         @endcan
-        @can('update', \App\Models\Accessory::class)
+        @can('create', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
                     <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
                 </div>

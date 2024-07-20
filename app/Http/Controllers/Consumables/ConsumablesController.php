@@ -216,6 +216,8 @@ class ConsumablesController extends Controller
         $consumable_to_close = $consumable;
         $consumable = clone $consumable_to_close;
         $consumable->id = null;
+        $consumable->image = null;
+        $consumable->user_id = null;
 
         return view('consumables/edit')->with('item', $consumable);
     }
