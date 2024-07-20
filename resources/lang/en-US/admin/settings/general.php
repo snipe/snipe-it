@@ -376,5 +376,6 @@ return [
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
     'default_avatar' => 'Upload default avatar',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original default avatar</a>',
 
 ];
