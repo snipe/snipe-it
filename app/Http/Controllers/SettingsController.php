@@ -414,7 +414,7 @@ class SettingsController extends Controller
             $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
 
             if ($request->input('clear_logo') == '1') {
-                $setting = $request->deleteExistingImage($setting, 'logo', 'logo');
+                $setting = $request->deleteExistingImage($setting, '', 'logo');
                 $setting->logo = null;
                 $setting->brand = 1;
             }
