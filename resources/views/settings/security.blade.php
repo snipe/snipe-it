@@ -151,7 +151,7 @@
                                         {{ trans('admin/settings/general.login_remote_user_custom_logout_url_help') }}
                                     </p>
 
-                                    @if (($setting->login_remote_user_enabled == '1') && (config('app.show_remote_login_only_option') != false))
+                                    @if ($setting->login_remote_user_enabled == '1')
 
                                     <!--  Disable other logins mechanism -->
                                     <label class="form-control">
