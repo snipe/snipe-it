@@ -56,6 +56,7 @@ mix
  */
 mix
     .copy( './node_modules/bootstrap-table/dist/bootstrap-table-locale-all.min.js', 'public/js/dist' )
+    .copy( './node_modules/bootstrap-table/dist/bootstrap-table-en-US.min.js', 'public/js/dist' )
 
 // Combine main SnipeIT JS files
 mix
