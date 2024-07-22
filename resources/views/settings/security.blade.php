@@ -150,6 +150,9 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_custom_logout_url_help') }}
                                     </p>
+
+                                    @if ($setting->login_remote_user_enabled == '1')
+
                                     <!--  Disable other logins mechanism -->
                                     <label class="form-control">
 
@@ -160,6 +163,8 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_common_disabled_help') }}
                                     </p>
+                                    @endif
+
                                 @endif
 
                             </div>

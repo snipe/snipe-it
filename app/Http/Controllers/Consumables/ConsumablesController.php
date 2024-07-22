@@ -200,7 +200,7 @@ class ConsumablesController extends Controller
      */
     public function show($consumableId = null)
     {
-        $consumable = Consumable::find($consumableId);
+        $consumable = Consumable::withCount('users as users_consumables')->find($consumableId);
         $this->authorize($consumable);
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));
@@ -208,5 +208,17 @@ class ConsumablesController extends Controller
 
         return redirect()->route('consumables.index')
             ->with('error', trans('admin/consumables/message.does_not_exist'));
+    }
+
+    public function clone(Consumable $consumable) : View
+    {
+        $this->authorize('create', $consumable);
+        $consumable_to_close = $consumable;
+        $consumable = clone $consumable_to_close;
+        $consumable->id = null;
+        $consumable->image = null;
+        $consumable->user_id = null;
+
+        return view('consumables/edit')->with('item', $consumable);
     }
 }

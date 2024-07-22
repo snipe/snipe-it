@@ -427,5 +427,5 @@ return [
   */
 
     'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
-
+    
 ];
