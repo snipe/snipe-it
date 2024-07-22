@@ -5,7 +5,8 @@ namespace Tests\Feature\Notifications\Email;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
 use App\Models\User;
-use App\Notifications\CheckOutAssetNotification;
+use App\Notifications\CheckoutAssetNotification;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -59,21 +60,15 @@ class EmailNotificationsUponCheckoutTest extends TestCase
         $this->settings->enableCCEmail("test@snipetest.io");
 
         $user = User::factory()->create(["email"=>null]);
-        $admin = User::factory()->admin()->create(["email"=>"test@snipetest.io"]);
-        $asset = Asset::factory()->assignedToUser($user)->create();
+        $asset = Asset::factory()->create();
         $asset->model->category->update(['checkout_email' => true]);
+
         $this->fireCheckOutEvent($asset, $user);
 
-        Notification::assertNotSentTo(
-            $user,
-            function (CheckOutAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            }
-        );
-
         Notification::assertSentOnDemand(
-            CheckOutAssetNotification::class,
-            function (CheckOutAssetNotification $notification, $channels, $notifiable) {
+            CheckoutAssetNotification::class,
+            function (CheckoutAssetNotification $notification, $channels, AnonymousNotifiable $notifiable) {
+                return $notifiable->routes['mail'] === 'test@snipetest.io';
             }
         );
     }

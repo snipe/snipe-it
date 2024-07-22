@@ -57,6 +57,11 @@ class CheckoutableListener
                 );
             }
 
+            if ($this->shouldSendCCEmail()) {
+                Notification::route('mail', Setting::getSettings()->admin_cc_email)
+                    ->notify($this->getCheckoutNotification($event));
+            }
+
             if ($this->shouldSendWebhookNotification()) {
 
             //slack doesn't include the url in its messaging format so this is needed to hit the endpoint
@@ -166,13 +171,6 @@ class CheckoutableListener
             $notifiables->push($event->checkedOutTo);
         }
 
-        /**
-         * Notify Admin users if the settings is activated
-         */
-        if ((Setting::getSettings()) && (Setting::getSettings()->admin_cc_email != '')) {
-            $notifiables->push(new AdminRecipient());
-        }
-
         return $notifiables;       
     }
 
@@ -258,5 +256,10 @@ class CheckoutableListener
     private function shouldSendWebhookNotification(): bool
     {
         return Setting::getSettings() && Setting::getSettings()->webhook_endpoint;
+    }
+
+    private function shouldSendCCEmail(): bool
+    {
+        return Setting::getSettings() && Setting::getSettings()->admin_cc_email;
     }
 }
