@@ -115,11 +115,11 @@ class LabelTemplate extends SnipeModel
 
     public function getlabelPosition($index)  {
         $printIndex = $index + $this->label_index;
-        $row = (int)($printIndex / $this->columns());
+        $row = (int)($printIndex / $this->columns);
 
-        $col = $printIndex - ($row * $this->columns());
-        $x = $this->margin_Left() + (($this->label_Width() + $this->columnSpacing()) * $col);
-        $y = $this->margin_Top() + (( $this->label_Height() + $this->labelRowSpacing())  * $row);
+        $col = $printIndex - ($row * $this->columns);
+        $x = $this->margin_left + (($this->label_Width() + $this->columnSpacing()) * $col);
+        $y = $this->margin_top + (( $this->label_Height() + $this->rowSpacing())  * $row);
         return [ $x, $y ];
     }
     public function columns() {
@@ -150,7 +150,7 @@ class LabelTemplate extends SnipeModel
      */
     public function columnSpacing()
     {
-        $columnSpacingPT = ($this->column2_x - $this->column1_x - $this->label_width);
+        $columnSpacingPT = ($this->column2_x - $this->column1_x - $this->label_Width());
         return Helper::convertUnit($columnSpacingPT, 'pt', $this->measurement_unit);
 
     }
@@ -161,7 +161,7 @@ class LabelTemplate extends SnipeModel
      * @return float The row spacing in points.
      */
     public function rowSpacing() {
-        $rowSpacingPT = ($this->row2_y - $this->row1_y - $this->label_height);
+        $rowSpacingPT = ($this->row2_y - $this->row1_y - $this->label_Height());
         return Helper::convertUnit($rowSpacingPT, 'pt', $this->measurement_unit);
     }
 

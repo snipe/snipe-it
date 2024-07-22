@@ -83,7 +83,6 @@ class LabelWriter
         $currentY = $pa->y1;
         $usableWidth = $pa->w;
         $usableHeight = $pa->h;
-
         if ($record->has('barcode1d')) {
             $this->write1DBarcode(
                 $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
@@ -92,6 +91,7 @@ class LabelWriter
             );
             $usableHeight -= $template->barcode_size + $template->barcode_margin;
         }
+
         if ($record->has('title')) {
             $this->writeText(
                 $pdf, $record->get('title'),
@@ -165,23 +165,24 @@ class LabelWriter
                 $currentY += $template->tag_size + $template->barcode_margin;
             }
         }
+        if ($record->has('fields')) {
+            foreach ($record->get('fields') as $field) {
+                $this->writeText(
+                    $pdf, $field['label'],
+                    $currentX, $currentY,
+                    'freesans', '', $template->label_size, 'L',
+                    $usableWidth, $template->label_size, true, 0
+                );
+                $currentY += $template->label_size + $template->label_margin;
 
-        foreach ($record->get('fields') as $field) {
-            $this->writeText(
-                $pdf, $field['label'],
-                $currentX, $currentY,
-                'freesans', '', $template->label_size, 'L',
-                $usableWidth, $template->label_size, true, 0
-            );
-            $currentY += $template->label_size + $template->label_margin;
-
-            $this->writeText(
-                $pdf, $field['value'],
-                $currentX, $currentY,
-                'freemono', 'B', $template->field_size, 'L',
-                $usableWidth, $template->field_size, true, 0, 0.3
-            );
-            $currentY += $template->field_size + $template->field_margin;
+                $this->writeText(
+                    $pdf, $field['value'],
+                    $currentX, $currentY,
+                    'freemono', 'B', $template->field_size, 'C',
+                    $usableWidth, $template->field_size, true, 0, 0.3
+                );
+                $currentY += $template->field_size + $template->field_margin;
+            }
         }
 
         if ($record->has('tag') && isset($template->tag_position) && $template->tag_position === 'bottom') {
@@ -194,40 +195,7 @@ class LabelWriter
         }
 
     }
-    public function write5267($pdf, $record, $template) {
-        $pa = $this->getLabelPrintableArea($template);
-//dd($this->getLabelPrintableArea($template));
-        if ($record->has('barcode1d')) {
-            $this->write1DBarcode(
-                $pdf, $record->get('barcode1d')->content, $record->get('barcode1d')->type,
-                $pa->x1, $pa->y2 - $template->barcode_size,
-                $pa->w, $template->barcode_size
-            );
-        }
 
-        if ($record->has('title')) {
-            $this->writeText(
-                $pdf, $record->get('title'),
-                $pa->x1, $pa->y1,
-                'freesans', '', $template->title_size, 'L',
-                $pa->w, $template->title_size, true, 0
-            );
-        }
-
-        $fieldY = $pa->y2 - $template->barcode_size - $template->barcode_margin - $template->field_size;
-        if ($record->has('fields')) {
-            if ($record->get('fields')->count() >= 1) {
-                $field = $record->get('fields')->first();
-                $this->writeText(
-                    $pdf, $field['value'],
-                    $pa->x1, $fieldY,
-                    'freemono', 'B', $template->field_size, 'C',
-                    $pa->w, $template->field_size, true, 0, 0.01
-                );
-            }
-        }
-
-    }
     public function barcodeSize(){
 
     }
