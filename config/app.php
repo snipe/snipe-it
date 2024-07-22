@@ -428,4 +428,18 @@ return [
 
     'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
 
+    /*
+  |--------------------------------------------------------------------------
+  | Show Remote Login Options
+  |--------------------------------------------------------------------------
+  |
+  | This determins whether or not to display the remote login options under Security.
+  | Most people won't need this, and if you don't have remote login configured
+  | and working correctly, you can lock yourself out of the system by enabling that
+  | option in the Admin Settings > Security section.
+  |
+  */
+
+    'show_remote_login_only_option' => env('SHOW_REMOTE_LOGIN_ONLY_OPTION', false),
+
 ];
