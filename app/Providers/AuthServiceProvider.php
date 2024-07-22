@@ -91,7 +91,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::refreshTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::personalAccessTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
 
-        Passport::cookie('snipeit_token');
+        Passport::cookie(config('passport.cookie_name'));
 
 
         /**
