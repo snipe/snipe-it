@@ -62,7 +62,7 @@ class Helper
         'mn' => 'mn-MN', // Mongolian
         'ms' => 'ms-MY', // Malay
         'nl' => 'nl-NL', // Dutch
-        'no' => 'no-NO', // Norwegian
+        'no' => 'nb-NO', // Norwegian Bokmål
         'pl' => 'pl-PL', // Polish
         'pt' => 'pt-PT', // Portuguese
         'ro' => 'ro-RO', // Romanian
