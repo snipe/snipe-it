@@ -76,7 +76,7 @@ class Depreciable extends SnipeModel
 
         if ($months_passed >= $this->get_depreciation()->months){
             //if there is a floor use it
-            if((!$this->get_depreciation()->depreciation_min) === null) {
+            if($this->get_depreciation()->depreciation_min) {
 
                 $current_value = $this->calculateDepreciation();
 
