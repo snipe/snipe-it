@@ -133,7 +133,7 @@ class SettingsController extends Controller
                 ->get(URL::to('.env'))
                 ->successful();
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::debug($e->getMessage());
             return true;
         }
     }
