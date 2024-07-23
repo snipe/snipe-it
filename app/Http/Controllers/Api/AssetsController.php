@@ -578,49 +578,8 @@ class AssetsController extends Controller
         }     
 
         $asset = $request->handleImages($asset);
+        $asset = $asset->handleCustomFieldsForStoring($request);
 
-        // Update custom fields in the database.
-        $model = AssetModel::find($request->input('model_id'));
-
-        // Check that it's an object and not a collection
-        // (Sometimes people send arrays here and they shouldn't
-        if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
-            foreach ($model->fieldset->fields as $field) {
-
-                // Set the field value based on what was sent in the request
-                $field_val = $request->input($field->db_column, null);
-
-                // If input value is null, use custom field's default value
-                if ($field_val == null) {
-                    Log::debug('Field value for '.$field->db_column.' is null');
-                    $field_val = $field->defaultValue($request->get('model_id'));
-                    Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
-                }
-
-                // if the field is set to encrypted, make sure we encrypt the value
-                if ($field->field_encrypted == '1') {
-                    Log::debug('This model field is encrypted in this fieldset.');
-
-                    if (Gate::allows('admin')) {
-
-                        // If input value is null, use custom field's default value
-                        if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
-                        } else {
-                            $field_val = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                }
-                if ($field->element == 'checkbox') {
-                    if(is_array($field_val)) {
-                        $field_val = implode(',', $field_val);
-                    }
-                }
-
-
-                $asset->{$field->db_column} = $field_val;
-            }
-        }
 
         if ($asset->save()) {
             if ($request->get('assigned_user')) {
@@ -680,32 +639,7 @@ class AssetsController extends Controller
             }     
 
             $asset = $request->handleImages($asset);
-            $model = AssetModel::find($asset->model_id);
-            
-            // Update custom fields
-            $problems_updating_encrypted_custom_fields = false;
-            if (($model) && (isset($model->fieldset))) {
-                foreach ($model->fieldset->fields as $field) {
-                    $field_val = $request->input($field->db_column, null);
-
-                    if ($request->has($field->db_column)) {
-                        if ($field->element == 'checkbox') {
-                            if(is_array($field_val)) {
-                                $field_val = implode(',', $field_val);
-                            }
-                        }
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
-                                $field_val = Crypt::encrypt($field_val);
-                            } else {
-                                $problems_updating_encrypted_custom_fields = true;
-                                continue;
-                            }
-                        }
-                        $asset->{$field->db_column} = $field_val;
-                    }
-                }
-            }
+            $asset = $asset->handleCustomFieldsForStoring($request);
 
 
             if ($asset->save()) {
