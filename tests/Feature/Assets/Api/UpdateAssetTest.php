@@ -427,16 +427,14 @@ class UpdateAssetTest extends TestCase
 
     public function testAssetCannotBeUpdatedByUserInSeparateCompany()
     {
-        $this->markTestIncomplete('not done with this yet');
-
         $this->settings->enableMultipleFullCompanySupport();
 
         $companyA = Company::factory()->create();
         $companyB = Company::factory()->create();
-        $userA = User::factory()->create([
+        $userA = User::factory()->editAssets()->create([
             'company_id' => $companyA->id,
         ]);
-        $userB = User::factory()->create([
+        $userB = User::factory()->editAssets()->create([
             'company_id' => $companyB->id,
         ]);
         $asset = Asset::factory()->create([
@@ -448,7 +446,12 @@ class UpdateAssetTest extends TestCase
             ->patchJson(route('api.assets.update', $asset->id), [
                 'name' => 'test name'
             ])
-            ->assertStatus(403);
+            ->assertStatusMessageIs('error');
 
+        $this->actingAsForApi($userA)
+            ->patchJson(route('api.assets.update', $asset->id), [
+                'name' => 'test name'
+            ])
+            ->assertStatusMessageIs('success');
     }
 }

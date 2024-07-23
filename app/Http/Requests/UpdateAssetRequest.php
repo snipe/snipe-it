@@ -15,7 +15,7 @@ class UpdateAssetRequest extends ImageUploadRequest
      */
     public function authorize()
     {
-        return Gate::allows('update', new Asset);
+        return Gate::allows('update', $this->asset);
     }
 
     /**
