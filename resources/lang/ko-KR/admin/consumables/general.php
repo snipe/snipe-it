@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => '잔여수량',
     'total' 			                => '총계',
     'update'                            => '소모품 갱신',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

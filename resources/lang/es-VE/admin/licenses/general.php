@@ -14,7 +14,7 @@ return array(
     'info'  					=> 'Información de licencia',
     'license_seats'  			=> 'Total de licencias',
     'seat'  					=> 'Licencia',
-    'seat_count'  				=> 'Seat :count',
+    'seat_count'  				=> 'Licencia :count',
     'seats'  					=> 'Total de licencias',
     'software_licenses'  		=> 'Licencias de Software',
     'user'  					=> 'Usuario',
@@ -24,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Ingresar todas las licencias',
-                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'Esta acción ingresará una licencia. | Esta acción ingresará todas las :checkedout_seats_count licencias.',
                 'enabled_tooltip'   => 'Recibir TODAS las licencias tanto de usuarios como de activos',
                 'disabled_tooltip'  => 'Esto está deshabilitado porque no hay licencias asignadas actualmente',
                 'disabled_tooltip_reassignable'  => 'Esto está desactivado porque la licencia no es reasignable',
                 'success'           => '¡Licencia recibida correctamente! | ¡Todas las licencias fueron recibidas correctamente!',
-                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
+                'log_msg'           => 'Ingresada mediante ingreso masivo en página de licencias',
             ],
 
             'checkout_all'              => [
@@ -41,7 +41,7 @@ return array(
                 'error_no_seats'    => 'No quedan licencias disponibles.',
                 'warn_not_enough_seats'    => 'Se asignaron :count usuarios a esta licencia, y se agotaron las licencias disponibles.',
                 'warn_no_avail_users'    => 'Nada que hacer. No hay usuarios que no tengan esta licencia asignada.',
-                'log_msg'           => 'Asignada mediante asignación masiva de licencias en página de licencias',
+                'log_msg'           => 'Asignada vía asignación masiva en página de licencias',
 
 
             ],

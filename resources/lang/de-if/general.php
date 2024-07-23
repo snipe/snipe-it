@@ -207,7 +207,7 @@ return [
     'next'					=> 'Nächste',
     'next_audit_date'		=> 'Nächstes Prüfdatum',
     'next_audit_date_help'  => 'Wenn Sie Auditing in Ihrer Organisation verwenden, dies wird in der Regel automatisch anhand des letzten Prüfdatums und der Prüffrequenz (in <code>Admin-Einstellungen &gt; Alarme</code>) berechnet und Sie können dies leer lassen. Sie können dieses Datum hier manuell festlegen, wenn Sie es benötigen, aber es muss später als das letzte Prüfungsdatum sein. ',
-    'audit_images_help'     => 'Sie können Prüfbilder in der Asset-Historie finden.',
+    'audit_images_help'     => 'Du kannst Prüfbilder in der Asset-Historie finden.',
     'no_email'              => 'Keine E-Mail-Adresse mit diesem Benutzer verknüpft',
     'last_audit'		    => 'Letzte Prüfung',
     'new'					=> 'Neu!',
@@ -304,7 +304,7 @@ return [
     'user'					=> 'Benutzer',
     'accepted'			    => 'angenommen',
     'declined'			    => 'abgelehnt',
-    'declined_note'         => 'Abgelehnte Notizen',
+    'declined_note'         => 'Abgelehnte Notiz',
     'unassigned'            => 'Nicht zugewiesen',
     'unaccepted_asset_report' => 'Nicht akzeptierte Assets',
     'users'                 => 'Benutzer',
@@ -509,7 +509,7 @@ return [
         'import_note' => 'Mit CSV-Importer importiert',
     ],
     'remove_customfield_association' => 'Entfernen Sie dieses Feld aus dem Feldsatz. Dies wird das benutzerdefinierte Feld nicht löschen, sondern nur die Zuordnung dieses Feldes zu diesem Feldsatz entfernen.',
-    'checked_out_to_fields' => 'Folgenden Feldern zugewiesen',
+    'checked_out_to_fields' => 'Auf folgende Felder herausgegeben',
     'percent_complete' => '% vollständig',
     'uploading' => 'Hochladen... ',
     'upload_error' => 'Fehler beim Hochladen der Datei. Bitte überprüfe, dass keine leeren Zeilen vorhanden sind und keine Spaltennamen dupliziert werden.',
@@ -528,7 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Zugriff verweigert. Benutzerinformationen für Superadministratoren auf der Demo können nicht aktualisiert werden.',
     'pwd_reset_not_sent' => 'Benutzer ist nicht aktiviert, ist LDAP-synchronisiert oder hat keine E-Mail-Adresse',
     'error_sending_email' => 'Fehler beim Senden der E-Mail',
-    'sad_panda' => 'Trauriger Panda. Sie sind nicht berechtigt, das zu tun. <a href=":link">Kehren Sie zum Dashboard zurück</a> oder wenden Sie sich an Ihren Administrator.',
+    'sad_panda' => 'Trauriger Panda. Du bist nicht berechtigt, das zu tun. <a href=":link">Kehre zum Dashboard zurück</a> oder wende dich an deinen Administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -551,11 +551,12 @@ return [
         'components'  => ':count Komponente|:count Komponenten',
     ],
     'more_info' => 'Mehr Info',
-    'quickscan_bulk_help' => 'Wenn Sie dieses Kontrollkästchen aktivieren, wird der Asset-Datensatz so bearbeitet, dass dieser neue Standort angezeigt wird. Wenn Sie es nicht aktivieren, wird der Standort einfach im Prüfprotokoll vermerkt. Beachten Sie, dass sich der Standort der Person, des Assets oder des Standorts, an den es ausgecheckt wurde, nicht ändert, wenn dieses Asset ausgecheckt wird.',
+    'quickscan_bulk_help' => 'Wenn du dieses Kontrollkästchen aktivierst, wird der Asset-Datensatz so bearbeitet, dass der neue Standort angezeigt wird. Wenn du es nicht aktivierst, wird der Standort nur im Prüfprotokoll vermerkt. Beachte, dass sich der Standort der Person, des Assets oder des Standorts, an den es ausgecheckt wurde, nicht ändert, wenn dieses Asset ausgecheckt wird.',
     'whoops' => 'Hoppla!',
     'something_went_wrong' => 'Etwas ist bei Ihrer Anfrage schiefgegangen.',
     'close' => 'Schließen',
     'expires' => 'Ablaufdatum',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Feld :item_type zuordnen',
+    'remaining_var' => ':count verbleibend',
 
 ];

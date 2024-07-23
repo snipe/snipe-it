@@ -93,7 +93,7 @@ return [
         'BD'=>'Bangladesh',
         'BF'=>'Burkina Faso',
         'BG'=>'Bulgaria',
-        'BH'=>'Bahréin',
+        'BH'=>'Baréin',
         'BI'=>'Burundi',
         'BJ'=>'Benín',
         'BM'=>'Bermuda',

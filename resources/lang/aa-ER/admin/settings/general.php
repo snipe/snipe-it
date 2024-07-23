@@ -375,6 +375,9 @@ return [
     'timezone' => 'crwdns11831:0crwdne11831:0',
     'profile_edit'          => 'crwdns12280:0crwdne12280:0',
     'profile_edit_help'          => 'crwdns12282:0crwdne12282:0',
-    'default_avatar' => 'crwdns12296:0crwdne12296:0',
+    'default_avatar' => 'crwdns12588:0crwdne12588:0',
+    'default_avatar_help' => 'crwdns12590:0crwdne12590:0',
+    'restore_default_avatar' => 'crwdns12592:0crwdne12592:0',
+    'restore_default_avatar_help' => 'crwdns12594:0crwdne12594:0',
 
 ];

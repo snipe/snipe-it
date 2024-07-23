@@ -14,7 +14,7 @@ return array(
     'info'  					=> 'Licencijos informacija',
     'license_seats'  			=> 'Licencijos vietų skaičius',
     'seat'  					=> 'Vieta',
-    'seat_count'  				=> 'Seat :count',
+    'seat_count'  				=> 'Vietos :count',
     'seats'  					=> 'Vietos',
     'software_licenses'  		=> 'Programinės įrangos licencijos',
     'user'  					=> 'Naudotojas',
@@ -24,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Paimti visas vietas',
-                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
-                'enabled_tooltip'   => 'Paimkite VISAS licencijos vietas – tiek iš naudotojų, tiek iš įrangos',
+                'modal'             => 'Šis veiksmas paims vieną vietą. | Šis veiksmas paims visas :checkedout_seats_count šios licencijos vietas.',
+                'enabled_tooltip'   => 'Paimkite VISAS licencijos vietas – tiek iš naudotojų, tiek iš turto',
                 'disabled_tooltip'  => 'Išjungta, kadangi šiuo metu nėra išduotų vietų',
                 'disabled_tooltip_reassignable'  => 'Išjungta, kadangi licencijos negalima perskirti',
                 'success'           => 'Licencija paimta sėkmingai! | Visos licencijos paimtos sėkmingai!',
-                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
+                'log_msg'           => 'Paimta naudojant masinio licencijų paėmimo sąsają',
             ],
 
             'checkout_all'              => [

@@ -557,5 +557,6 @@ return [
     'close' => 'Close',
     'expires' => 'Mawalan ng Bisa',
     'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];
