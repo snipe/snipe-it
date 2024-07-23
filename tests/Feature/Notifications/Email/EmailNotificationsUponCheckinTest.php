@@ -6,6 +6,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\CheckinAssetNotification;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -57,25 +58,20 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
     public function testCheckInEmailSentToAdminIfUserEmailNull()
     {
-        $user = User::factory()->create(["email" => null]);
-        $admin = User::factory()->admin()->create();
-        $asset = Asset::factory()->assignedToUser($user)->create();
+        $this->settings->enableCCEmail("test@snipetest.io");
+
+        $user = User::factory()->create(["email"=>null]);
+        $asset = Asset::factory()->create();
         $asset->model->category->update(['checkin_email' => true]);
+
         $this->fireCheckInEvent($asset, $user);
 
-        Notification::assertNotSentTo(
-            $user,
-            function (CheckInAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
+        Notification::assertSentOnDemand(
+            CheckinAssetNotification::class,
+            function (CheckinAssetNotification $notification, $channels, AnonymousNotifiable $notifiable) {
+                return $notifiable->routes['mail'] === 'test@snipetest.io';
             }
         );
-
-        /*Notification::assertSentTo(
-            $this->settings->admin_cc_email;
-            function (CheckInAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            }
-        );*/
     }
 
     private function fireCheckInEvent($asset, $user): void
