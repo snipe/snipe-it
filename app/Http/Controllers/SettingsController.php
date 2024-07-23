@@ -14,7 +14,6 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
-use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
@@ -129,12 +128,12 @@ class SettingsController extends Controller
     protected function dotEnvFileIsExposed() : bool
     {
         try {
-            return Http::timeout(10)
+            return Http::withoutVerifying()->timeout(10)
                 ->accept('*/*')
                 ->get(URL::to('.env'))
                 ->successful();
-        } catch (HttpClientException $e) {
-            Log::debug($e->getMessage());
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return true;
         }
     }

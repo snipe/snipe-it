@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Settings;
 
+use App\Http\Controllers\SettingsController;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Request;
@@ -300,5 +301,12 @@ class ShowSetUpPageTest extends TestCase
         $this->getSetUpPageResponse()->assertOk();
 
         $this->assertSeeDirectoryPermissionError(false);
+    }
+
+    public function testInvalidTLSCertsOkWhenCheckingForEnvFile()
+    {
+        //set the weird bad SSL cert place - https://self-signed.badssl.com
+
+        $this->assertTrue((new SettingsController())->dotEnvFileIsExposed());
     }
 }
