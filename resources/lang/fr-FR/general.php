@@ -557,5 +557,6 @@ return [
     'close' => 'Close',
     'expires' => 'Expire le',
     'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

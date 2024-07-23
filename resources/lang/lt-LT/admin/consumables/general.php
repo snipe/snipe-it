@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Likutis',
     'total' 			                => 'Iš viso',
     'update'                            => 'Atnaujinti eksploatacinę medžiagą',
+    'inventory_warning'                 => 'Šių eksploatacinių medžiagų atsargos yra mažesnės už minimalų kiekį :min_count',
 );

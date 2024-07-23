@@ -2,7 +2,7 @@
 
 return array(
 
-    'id'                        => 'CARNÉ DE IDENTIDAD',
+    'id'                        => 'ID',
     'name'                      => 'Nombre de Departamento',
     'manager'                   => 'Supervisor',
     'location'                  => 'Ubicación',

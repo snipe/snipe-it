@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Sisa',
     'total' 			                => 'Total',
     'update'                            => 'Memperbarui Barang Habis Pakai',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

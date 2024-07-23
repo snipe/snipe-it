@@ -647,5 +647,6 @@ return [
     'close' => 'Close',
     'expires' => 'منقضی می شود',
     'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

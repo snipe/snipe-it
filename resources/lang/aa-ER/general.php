@@ -556,5 +556,6 @@ return [
     'close' => 'crwdns12308:0crwdne12308:0',
     'expires' => 'crwdns12310:0crwdne12310:0',
     'map_fields'=> 'crwdns12572:0crwdne12572:0',
+    'remaining_var' => 'crwdns12612:0crwdne12612:0',
 
 ];

@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Үлдсэн',
     'total' 			                => 'Нийт',
     'update'                            => 'Боломжийн талаар шинэчиллээ',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

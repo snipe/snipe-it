@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Dies testet nur, ob LDAP korrekt synchronisiert werden kann. Wenn Ihre LDAP-Authentifizierungsabfrage nicht korrekt ist, können sich Benutzer möglicherweise nicht anmelden. SIE MÜSSEN IHRE AKTUALISIERTEN LDAP-EINSTELLUNGEN ZUERST SPEICHERN.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'LDAP Server',
-    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
+    'ldap_server_help'          => 'Dies sollte mit ldap:// (für unverschlüsselt) oder ldaps:// (für TLS oder SSL) beginnen',
     'ldap_server_cert'			=> 'LDAP SSL Zertifikatsüberprüfung',
     'ldap_server_cert_ignore'	=> 'Erlaube ungültige SSL Zertifikate',
     'ldap_server_cert_help'		=> 'Wählen Sie diese Option, wenn Sie selbstsignierte SSL Zertifikate verwenden und diese gegebenenfalls ungültigen Zertifikate akzeptieren möchten.',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Zeitzone',
     'profile_edit'          => 'Profil bearbeiten',
     'profile_edit_help'          => 'Benutzern erlauben, ihre eigenen Profile zu bearbeiten.',
-    'default_avatar' => 'Standard-Avatar hochladen',
+    'default_avatar' => 'Benutzerdefinierten Standard-Avatar hochladen',
+    'default_avatar_help' => 'Dieses Bild wird als Profilbild angezeigt, wenn ein Benutzer kein Profilbild festgelegt hat.',
+    'restore_default_avatar' => '<a href=":default_avatar" data-toggle="lightbox" data-type="image">Ursprünglichen Standard-Avatar des Systems</a> wiederherstellen',
+    'restore_default_avatar_help' => '',
 
 ];
