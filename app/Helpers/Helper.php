@@ -914,10 +914,20 @@ class Helper
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
+                if (is_array($rule)) {
+                    foreach ($rule as $rule_value) {
+                        if ($rule_value === 'required') {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
                 if (strpos($rule, 'required') === false) {
                     return false;
                 } else {
                     return true;
+                }
                 }
             }
         }
