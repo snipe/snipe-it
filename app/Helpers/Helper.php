@@ -914,7 +914,7 @@ class Helper
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
-                if (strpos($rule, 'required') === false) {
+                if (strpos($rule_name, 'required') === false) {
                     return false;
                 } else {
                     return true;
