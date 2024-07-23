@@ -922,15 +922,11 @@ class Helper
                     }
                 } else {
                     if (strpos($rule, 'required') === false) {
-                        return false;
-                    } else {
-                        if (strpos($rule_name, 'required') === false) {
                             $required = false;
                         } else {
                             $required = true;
                         }
                     }
-                }
             }
         }
         return $required;
