@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'crwdns1307:0crwdne1307:0',
     'total' 			                => 'crwdns1308:0crwdne1308:0',
     'update'                            => 'crwdns1398:0crwdne1398:0',
+    'inventory_warning'                 => 'crwdns12614:0crwdne12614:0',
 );

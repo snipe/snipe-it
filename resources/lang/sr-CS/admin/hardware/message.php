@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Upozorenje: </strong> Ova imovina je trenutno označena kao nezaduživa. Ukoliko je status drugačiji, molim vas ažurirajte status imovine.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
     'does_not_exist_var'=> 'Nije pronađena imovina za oznakom :asset_tag.',
     'no_tag' 	        => 'Nije navedena oznaka imovine.',
@@ -51,7 +51,7 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Izvrši uvoz',
         'error'                 => 'Neke stavke nisu pravilno uvezene.',
         'errorDetail'           => 'Sledeće stavke nisu uvezene zbog grešaka.',
         'success'               => 'Vaš fajl je importovan',

@@ -44,8 +44,8 @@ return array(
         'error'   => 'Hubo un problema asignando la licencia. Por favor, inténtelo de nuevo.',
         'success' => 'La licencia fue asignada con éxito',
         'not_enough_seats' => 'No hay suficientes asientos de licencia disponibles para la compra',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'mismatch' => 'La licencia proporcionada no coincide con la licencia seleccionada',
+        'unavailable' => 'Esta licencia no está disponible para ser asignada.',
     ),
 
     'checkin' => array(

@@ -2,7 +2,7 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
+    'invalid_category_type' => 'Kategorija turi būti eksploatacinių medžiagų kategorija.',
     'does_not_exist' => 'Tokios eksploatacinės medžiagos nėra.',
 
     'create' => array(

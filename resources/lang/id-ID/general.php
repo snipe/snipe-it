@@ -557,5 +557,6 @@ return [
     'close' => 'Close',
     'expires' => 'Kadaluarsa',
     'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

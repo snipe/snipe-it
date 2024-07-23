@@ -556,6 +556,7 @@ return [
     'something_went_wrong' => 'Bei Ihrer Anfrage ist ein Fehler aufgetreten.',
     'close' => 'Schließen',
     'expires' => 'Ablaufdatum',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> ':item_type Feld zuordnen',
+    'remaining_var' => ':count verbleibend',
 
 ];

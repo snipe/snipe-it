@@ -29,7 +29,7 @@ return [
         'testing' => 'Tikrinamas LDAP ryšys, susiejimas ir užklausos...',
         '500' => '500 serverio klaida. Norėdami gauti daugiau informacijos, patikrinkite savo serverio žurnalus.',
         'error' => 'Kažkas ne taip :(',
-        'sync_success' => 'Pavyzdys 10 vartotojų, grąžintų iš LDAP serverio, pagal jūsų nustatymus:',
+        'sync_success' => '10 naudotojų, gautų iš LDAP serverio, pagal jūsų nustatymus:',
         'testing_authentication' => 'Tikrinamas LDAP autentifikavimas...',
         'authentication_success' => 'Naudotojas sėkmingai atpažintas naudojant LDAP!'
     ],

@@ -49,7 +49,7 @@ return [
         'ru-RU'=> 'Ruso',
         'sr-CS' => 'Serbian (Latin)',
         'sk-SK'=> 'Eslovaco',
-        'sl-SI'=> 'Slovenian',
+        'sl-SI'=> 'Esloveno',
         'so-SO'=> 'Somali',
         'es-ES'=> 'Español',
         'es-CO'=> 'Español, Colombia',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    '2FA_reset'             => '2FA reset',
+    '2FA_reset'             => 'Reestablecer 2FA',
     'accessories'			=> 'Accesorios',
     'activated'			    => 'Activado',
     'accepted_date'         => 'Fecha de aceptación',
@@ -161,7 +161,7 @@ return [
     'image_filetypes_help'  => 'Los tipos de archivo aceptados son jpg, webp, png, gif, svg y avif. El tamaño máximo permitido es :size.',
     'unaccepted_image_type'  => 'No se pudo leer este archivo de imagen. Los tipos de archivo aceptados son jpg, webp, png, gif y svg. El tipo mimetype de este archivo es: :mimetype.',
     'import'         	    => 'Importar',
-    'import_this_file'      => 'Mapear campos y procesar este archivo',
+    'import_this_file'      => 'Asociar campos y procesar este archivo',
     'importing'         	=> 'Importar datos',
     'importing_help'        => 'Puede importar activos, accesorios, licencias, componentes, consumibles y usuarios a través del archivo CSV. <br><br>El CSV debe estar delimitado por comas y formateado con encabezados que coincidan con los de los <a href="https://snipe-it.readme.io/docs/importing" target="_new">archivos CSV de muestra en la documentación</a>.',
     'import-history'        => 'Importar historial',
@@ -556,6 +556,7 @@ return [
     'something_went_wrong' => 'Algo falló en su solicitud.',
     'close' => 'Cerrar',
     'expires' => 'Vence',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Asociar el campo :item_type',
+    'remaining_var' => ':count restantes',
 
 ];

@@ -52,7 +52,7 @@ return [
     'expecting_checkin_date' => 'Fecha esperada de devolución:',
     'expires' => 'Vence',
     'hello' => 'Hola',
-    'hi' => 'Hi',
+    'hi' => 'Hola',
     'i_have_read' => 'He leído y aceptado los términos de uso, y he recibido este artículo.',
     'inventory_report' => 'Informe de inventario',
     'item' => 'Elemento:',

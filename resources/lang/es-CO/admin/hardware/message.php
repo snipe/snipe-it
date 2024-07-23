@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Advertencia:</strong> Este activo actualmente está marcado como no utilizable. Si este estado ha cambiado, por favor, actualice el estado del activo.',
     'does_not_exist' 	=> 'El recurso no existe.',
     'does_not_exist_var'=> 'Activo con placa :asset_tag no encontrado.',
     'no_tag' 	        => 'No se ha proporcionado ninguna placa de activo.',
@@ -51,7 +51,7 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Proceso para importar',
         'error'                 => 'Algunos artículos no importaron correctamente.',
         'errorDetail'           => 'Los siguientes artículos no fueron importados debido a errores.',
         'success'               => 'Su archivo ha sido importado',

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Paimti viską / Panaikinti naudotoją',
     'delete'  	                => 'Panaikinti',
     'edit'    	                => 'Redaguoti',
+    'clone'    	                => 'Klonuoti',
     'restore' 	                => 'Atkurti',
     'remove'                    => 'Pašalinti',
     'request'                   => 'Užsakyti',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Pridėti įrangos aptarnavimą',
     'append'                    => 'Papildyti',
     'new'                       => 'Naujas',
+    'var' => [
+        'clone'     => 'Klonuoti :item_type',
+        'edit'      => 'Redaguoti :item_type',
+        'delete'    => 'Panaikinti :item_type',
+        'restore'   => 'Panaikinti :item_type',
+        'create'    => 'Kurti naują :item_type',
+        'checkout'  => 'Išduoti :item_type',
+        'checkin'   => 'Paimti :item_type',
+    ]
 ];
