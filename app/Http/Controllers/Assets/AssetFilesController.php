@@ -7,8 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use Illuminate\Support\Facades\Response;
+use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AssetFilesController extends Controller
 {
@@ -22,7 +26,7 @@ class AssetFilesController extends Controller
      *@since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function store(UploadFileRequest $request, $assetId = null)
+    public function store(UploadFileRequest $request, $assetId = null) : RedirectResponse
     {
         if (! $asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -54,10 +58,8 @@ class AssetFilesController extends Controller
      * @param  int $assetId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($assetId = null, $fileId = null)
+    public function show($assetId = null, $fileId = null) : View | RedirectResponse | Response | StreamedResponse | BinaryFileResponse
     {
         $asset = Asset::find($assetId);
         // the asset is valid
@@ -105,10 +107,8 @@ class AssetFilesController extends Controller
      * @param  int $assetId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($assetId = null, $fileId = null)
+    public function destroy($assetId = null, $fileId = null) : RedirectResponse
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);
@@ -131,7 +131,6 @@ class AssetFilesController extends Controller
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
-        // Redirect to the hardware management page
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
 }

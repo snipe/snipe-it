@@ -543,34 +543,33 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
               'restore'
           ]
       )->name('api.assets.restore');
-          Route::post('{asset_id}/files',
-              [
-                  Api\AssetFilesController::class,
-                  'store'
-              ]
-          )->name('api.assets.files');
+        Route::post('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'store'
+          ]
+        )->name('api.assets.files.store');
 
-          Route::get('{asset_id}/files',
-              [
-                  Api\AssetFilesController::class,
-                  'list'
-              ]
-          )->name('api.assets.files');
+        Route::get('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'list'
+          ]
+        )->name('api.assets.files.index');
 
-          Route::get('{asset_id}/file/{file_id}',
-              [
-                  Api\AssetFilesController::class,
-                  'show'
-              ]
-          )->name('api.assets.file');
+        Route::get('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'show'
+          ]
+        )->name('api.assets.files.show');
 
-          Route::delete('{asset_id}/file/{file_id}',
-              [
-                  Api\AssetFilesController::class,
-                  'destroy'
-              ]
-          )->name('api.assets.file');
-
+        Route::delete('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'destroy'
+          ]
+        )->name('api.assets.files.destroy');
       });
 
     // pulling this out of resource route group to begin normalizing for route-model binding.

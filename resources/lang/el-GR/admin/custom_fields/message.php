@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Αυτό το πεδίο δεν υπάρχει.',
         'already_added'   => 'Το πεδίο έχει ήδη προσθέσει',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Το πεδία δεν δημιουργήθηκαν, παρακαλώ προσπαθήστε ξανά.',

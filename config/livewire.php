@@ -157,4 +157,21 @@ return [
     */
 
     'pagination_theme' => 'tailwind',
+
+    /*
+    |---------------------------------------------------------------------------
+    | URL Prefix
+    |---------------------------------------------------------------------------
+    |
+    | By default, Livewire sends network requests to {app.com}/livewire/update
+    | while javascript assets are served via {app.com}/livewire/livewire.js
+    | If you need to adjust the prefix of those urls you can do it below.
+    |
+    | Defining a prefix will result in the following url
+    | {app.com}/{prefix}/livewire/{update|livewire.js}
+    | Note: do not include the leading or trailing /
+    |
+    */
+
+    'url_prefix' => env('LIVEWIRE_URL_PREFIX', null),
 ];

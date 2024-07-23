@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Haraaga',
     'total' 			                => 'Wadarta',
     'update'                            => 'Cusbooneysii Isticmaalka',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

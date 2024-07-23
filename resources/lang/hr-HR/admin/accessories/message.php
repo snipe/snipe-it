@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Dodatak nije provjeren, pokušajte ponovo',
         'success' 		=> 'Usluga je uspješno provjerena.',
         'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
-        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
+        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.',
+         'checkout_qty' => array(
+            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            ),
+           
     ),
 
     'checkin' => array(

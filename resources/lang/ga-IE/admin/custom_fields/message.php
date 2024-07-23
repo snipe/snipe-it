@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Níl an réimse sin ann.',
         'already_added'   => 'Réimse curtha cheana féin',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Níor cruthaíodh réimse, déan iarracht arís.',

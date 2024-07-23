@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Jag har läst och godkänt användarvillkoren och har fått den här produkten.',
     'inventory_report' => 'Inventarierapport',
     'item' => 'Artikel:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count licens löper ut inom :threshold dagar.|:count licenser löper ut inom :threshold days.',
     'link_to_update_password' => 'Vänligen klicka på följande länk för att uppdatera ditt: webblösenord:',
     'login' => 'Logga in:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Det finns :count tillgång som kommer upp för revision inom :threshold days.|Det finns :count tillgångar som kommer upp för revision inom :threshold dagar.',
     'user' => 'Användare',
     'username' => 'Användarnamn',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Välkommen: namn',
     'welcome_to' => 'Välkommen till: web!',
     'your_assets' => 'Visa dina tillgångar',
     'your_credentials' => 'Dina Snipe-IT användaruppgifter',
+    'mail_sent' => 'Mail sent successfully!',
 ];

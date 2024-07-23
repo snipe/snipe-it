@@ -55,6 +55,7 @@ class ConsumablesTransformer
             'checkin' => Gate::allows('checkin', Consumable::class),
             'update' => Gate::allows('update', Consumable::class),
             'delete' => Gate::allows('delete', Consumable::class),
+            'clone' => (Gate::allows('create', Consumable::class) && ($consumable->deleted_at == '')),
         ];
         $array += $permissions_array;
 

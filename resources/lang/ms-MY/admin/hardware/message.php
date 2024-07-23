@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Amaran: </strong> Aset ini telah ditandakan sebagai tidak boleh dikehendaki. Jika status ini telah berubah, sila kemas kini status aset.',
+    'undeployable' 		=> '<strong>Amaran: </strong> Harta ini sekarang ditanda sebagai tidak boleh agih. Jika statusnya telah berubah, sila kemaskini staus harta.',
     'does_not_exist' 	=> 'Harta tidak wujud.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Sesetengah item tidak diimport dengan betul.',
         'errorDetail'           => 'Item berikut tidak diimport kerana kesilapan.',
         'success'               => 'Fail anda telah diimport',

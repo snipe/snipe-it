@@ -27,7 +27,7 @@ return [
     'asset_tag'				=> '资产标签',
     'asset_tags'            => '资产标签',
     'assets_available'		=> '可用资产',
-    'accept_assets'         => '接受资产：名称',
+    'accept_assets'         => '接受资产 :name',
     'accept_assets_menu'    => '接受资产',
     'audit'				    => '审计',
     'audit_report'			=> '审核日志',
@@ -357,7 +357,7 @@ return [
     'last_checkout'         => '上次借出',
     'due_to_checkin'        => '以下:count 件物品将很快归还：',
     'expected_checkin'      => '预计归还日期',
-    'reminder_checked_out_items' => '这是当前借出给您的物品的提醒。 如果你觉得这个列表不准确(有些东西缺失，或者你认为你从未收到的东西)，请给:reply_to_name发送电子邮件，邮箱地址为：:reply_to_address_address。',
+    'reminder_checked_out_items' => '这是当前借给您的物品的提醒。如果你觉得这个列表不准确(有些东西缺失，或者此处出现了你认为从未收到的东西)，请给:reply_to_name发送电子邮件，邮箱地址为：:reply_to_address。',
     'changed'               => '已修改',
     'to'                    => '至',
     'report_fields_info'    => '<p>选择您想要在自定义报告中包含的字段，然后单击生成. 该文件(custom-asset-report-YYYY-mm-dd.csv)将自动下载，您可以使用 Excel打开它。</p>
@@ -528,7 +528,7 @@ return [
     'permission_denied_superuser_demo' => '权限被拒绝。您不能更新演示上超级管理员的用户信息。',
     'pwd_reset_not_sent' => '用户未激活，LDAP同步，或没有电子邮件地址',
     'error_sending_email' => '发送邮件时出错',
-    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
+    'sad_panda' => '不好意思，您没有权限做这件事。或许 <a href=":link">返回到仪表板</a>或联系您的管理员。',
     'bulk' => [
             'delete' =>
                 [
@@ -543,12 +543,20 @@ return [
     'no_requestable' => '没有可申领的资产或资产型号。',
 
     'countable' => [
-        'accessories'  => ':count 配件|:count 配件',
+        'accessories'  => ':count 个配件|:count 个配件',
         'assets'  => ':count 资产|:count 资产',
-        'licenses'  => ':count 许可证|:count 许可证',
-        'license_seats'  => ':count 许可证席位|:count 许可证席位',
-        'consumables'  => ':count 耗材|:count 耗材',
+        'licenses'  => ':count 个许可证|:count 个许可证',
+        'license_seats'  => ':count 个许可证席位|:count 许可证席位',
+        'consumables'  => ':count 个耗材|:count 个耗材',
         'components'  => ':count 组件|:count 组件',
-    ]
+    ],
+    'more_info' => '更多信息',
+    'quickscan_bulk_help' => '勾选此框将编辑资产记录以反映其新的位置。不勾选则只会在盘点日志中记录该位置。注意，如果此资产已被借出，则不会更改其借出到的人员、资产或位置的位置。',
+    'whoops' => '哎呀！',
+    'something_went_wrong' => '您的请求出了点问题。',
+    'close' => '关闭',
+    'expires' => '过期',
+    'map_fields'=> '映射 :item_type 字段',
+    'remaining_var' => '剩余:count个',
 
 ];

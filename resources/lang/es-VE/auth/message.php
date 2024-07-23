@@ -11,21 +11,21 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Su dispositivo ya está inscrito.',
-        'success'               => 'Has iniciado sesión con éxito.',
+        'success'               => 'Ha iniciado sesión exitosamente.',
         'code_required'         => 'El código de doble factor es necesario.',
         'invalid_code'          => 'El código de doble factor no es válido.',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'enter_two_factor_code' => 'Por favor ingrese su código de autenticación de dos factores.',
+        'please_enroll'         => 'Por favor inscriba un dispositivo en la autenticación de dos factores.',
     ),
 
     'signin' => array(
         'error'   => 'Hubo un problema mientras se intentaba iniciar su sesión, por favor inténtelo de nuevo.',
-        'success' => 'Has iniciado sesión con éxito.',
+        'success' => 'Ha iniciado sesión exitosamente.',
     ),
 
     'logout' => array(
         'error'   => 'Hubo un problema al intentar cerrar la sesión, por favor inténtelo de nuevo.',
-        'success' => 'Has cerrado la sesión con éxito.',
+        'success' => 'Ha cerrado la sesión exitosamente.',
     ),
 
     'signup' => array(
@@ -39,8 +39,8 @@ return array(
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'Ha habido un problema mientras se intentaba restablecer tu contraseña, por favor, inténtalo de nuevo.',
-        'success' => 'Tu contraseña ha sido reiniciada con éxito.',
+        'error'   => 'Hubo un problema al intentar restablecer su contraseña, por favor inténtelo de nuevo.',
+        'success' => 'Su contraseña se ha restablecido correctamente.',
     ),
 
 

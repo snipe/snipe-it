@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Licensinfo',
     'license_seats'  			=> 'Licenssäten',
     'seat'  					=> 'Sittplats',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Säten',
     'software_licenses'  		=> 'Programvarulicenser',
     'user'  					=> 'Användare',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checka in alla platser',
-                'modal'             => 'Detta kommer att checka in en plats.|Denna åtgärd kommer att checka in alla :checkedout_seats_count platser för denna licens.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checka in ALLA platser för denna licens från både användare och tillgångar',
                 'disabled_tooltip'  => 'Detta är inaktiverat eftersom det för närvarande inte finns några platser utcheckade',
                 'disabled_tooltip_reassignable'  => 'Detta är inaktiverat eftersom licensen inte är omtilldelbar',
                 'success'           => 'Licensen har checkats in! | Alla licenser har checkats in!',
-                'log_msg'           => 'Incheckad via bulk licens checkout i licens GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

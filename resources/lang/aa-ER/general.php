@@ -548,6 +548,14 @@ return [
         'license_seats'  => 'crwdns12142:0crwdne12142:0',
         'consumables'  => 'crwdns12144:0crwdne12144:0',
         'components'  => 'crwdns12146:0crwdne12146:0',
-    ]
+    ],
+    'more_info' => 'crwdns12288:0crwdne12288:0',
+    'quickscan_bulk_help' => 'crwdns12290:0crwdne12290:0',
+    'whoops' => 'crwdns12304:0crwdne12304:0',
+    'something_went_wrong' => 'crwdns12306:0crwdne12306:0',
+    'close' => 'crwdns12308:0crwdne12308:0',
+    'expires' => 'crwdns12310:0crwdne12310:0',
+    'map_fields'=> 'crwdns12572:0crwdne12572:0',
+    'remaining_var' => 'crwdns12612:0crwdne12612:0',
 
 ];

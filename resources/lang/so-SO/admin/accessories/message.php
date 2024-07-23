@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Agabka lama hubin, fadlan isku day mar kale',
         'success' 		=> 'Qalabka si guul leh ayaa loo hubiyay',
         'unavailable'   => 'Agabka looma hayo hubinta Hubi tirada la heli karo',
-        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale'
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale',
+         'checkout_qty' => array(
+            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            ),
+           
     ),
 
     'checkin' => array(

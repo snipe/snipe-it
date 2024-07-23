@@ -432,6 +432,8 @@ class UserPresenter extends Presenter
      */
     public function gravatar()
     {
+
+        // User's specific avatar
         if ($this->avatar) {
 
             // Check if it's a google avatar or some external avatar
@@ -443,21 +445,31 @@ class UserPresenter extends Presenter
             return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
-        if (Setting::getSettings()->load_remote == '1') {
-            if ($this->model->gravatar != '') {
 
+        // If the default is system default
+        if (Setting::getSettings()->default_avatar == 'default.png') {
+            return Storage::disk('public')->url('default.png');
+        }
+
+        // If there is a custom default avatar
+        if (Setting::getSettings()->default_avatar != '') {
+            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
+        }
+
+        // If there is no default and no custom avatar, check for gravatar
+        if ((Setting::getSettings()->load_remote == '1') && (Setting::getSettings()->default_avatar == '')) {
+
+            if ($this->model->gravatar != '') {
                 $gravatar = md5(strtolower(trim($this->model->gravatar)));
                 return '//gravatar.com/avatar/'.$gravatar;
 
             } elseif ($this->email != '') {
-
                 $gravatar = md5(strtolower(trim($this->email)));
                 return '//gravatar.com/avatar/'.$gravatar;
             }
         }
 
-        // Set a fun, gender-neutral default icon
-        return config('app.url').'/img/default-sm.png';
+        return false;
     }
 
     /**

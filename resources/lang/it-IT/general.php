@@ -158,7 +158,7 @@ return [
     'image_upload'         	=> 'Carica immagine',
     'filetypes_accepted_help'    => 'Tipo di file accettato :types. Dimensione massima di caricamento :size.|Tipi di file accettati :types. Dimensione massima di caricamento :size.',
     'filetypes_size_help'   => 'Dimensione massima di caricamento :size.',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
+    'image_filetypes_help'  => 'I tipi di file accettati sono jpg, webp, png, gif, svg e avif. La dimensione massima consentita è :size.',
     'unaccepted_image_type'  => 'Questo immagine non è leggibile. I tipi di file accettati sono jpg, webp, png, gif e svg. Il tipo di questo file è :mimetype.',
     'import'         	    => 'Importa',
     'import_this_file'      => 'Mappa i campi ed elabora questo file',
@@ -528,7 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permesso negato. Impossibile aggiornare le informazioni utente per i superadmin sulla demo.',
     'pwd_reset_not_sent' => 'L\'utente non è attivato, è sincronizzato con LDAP o non ha un indirizzo email',
     'error_sending_email' => 'Errore nell\'invio dell\'email',
-    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
+    'sad_panda' => 'Triste panda. Non sei autorizzato a fare questa cosa. Forse <a href=":link">vuoi tornare al cruscotto iniziale</a>, oppure contattare il tuo amministratore.',
     'bulk' => [
             'delete' =>
                 [
@@ -549,6 +549,14 @@ return [
         'license_seats'  => ':count Disponibilità Licenza|:count Disponibilità Licenza',
         'consumables'  => ':count Consumabile|:count Consumabili',
         'components'  => ':count Componente|:count Componenti',
-    ]
+    ],
+    'more_info' => 'Altre informazioni',
+    'quickscan_bulk_help' => 'Selezionando questa casella verrà modificata la posizione di questo bene. Non selezionandola, il luogo verrà semplicemente annotato nel log di controllo. Nota che se questo bene è assegnato, non verrà modificata la posizione della persona, del bene o della posizione a cui è assegnato.',
+    'whoops' => 'Ops!',
+    'something_went_wrong' => 'Qualcosa è andato storto con la tua richiesta.',
+    'close' => 'Chiudi',
+    'expires' => 'Scade',
+    'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

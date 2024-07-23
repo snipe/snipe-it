@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Šis lauks neeksistē.',
         'already_added'   => 'Lauks jau ir pievienots',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Lauks nav izveidots, lūdzu, mēģiniet vēlreiz.',

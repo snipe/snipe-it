@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'קראתי והסכמתי לתנאי השימוש וקיבלתי פריט זה.',
     'inventory_report' => 'Inventory Report',
     'item' => 'פריט:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'לחץ על הקישור הבא כדי לעדכן את: סיסמת האינטרנט:',
     'login' => 'התחברות:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'משתמש',
     'username' => 'שם משתמש',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'ברוכים הבאים: שם',
     'welcome_to' => 'ברוכים הבאים ל: אינטרנט!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'שלך Snipe- IT אישורים',
+    'mail_sent' => 'Mail sent successfully!',
 ];

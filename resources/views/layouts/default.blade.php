@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' }}">
+dir="{{ Helper::determineLanguageDirection() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +24,8 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
 
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="language" content="{{ Helper::mapBackToLegacyLocale(app()->getLocale()) }}">
+    <meta name="language-direction" content="{{ Helper::determineLanguageDirection() }}">
     <meta name="baseUrl" content="{{ config('app.url') }}/">
 
     <script nonce="{{ csrf_token() }}">
@@ -324,7 +326,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image"
                                                  alt="">
                                         @else
-                                            <i class="fas fa-users" aria-hidden="true"></i>
+                                            <i class="fas fa-user" aria-hidden="true"></i>
                                         @endif
 
                                         <span class="hidden-xs">{{ Auth::user()->getFullNameAttribute() }} <strong
@@ -947,8 +949,11 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
             </div>
         </div>
 
+
+
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url('js/select2/i18n/'.Helper::mapBackToLegacyLocale(app()->getLocale()).'.js') }}"></script>
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -974,9 +979,9 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
             });
 
             // Reference: https://jqueryvalidation.org/validate/
-            $('#create-form').validate({
+            var validator = $('#create-form').validate({
                 ignore: 'input[type=hidden]',
-                errorClass: 'help-block form-error',
+                errorClass: 'alert-msg',
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
@@ -992,6 +997,12 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                 onfocusout: function(element) {
                     return $(element).valid();
                 },
+
+            });
+
+            $.extend($.validator.messages, {
+                required: "{{ trans('validation.generic.required') }}",
+                email: "{{ trans('validation.generic.email') }}"
             });
 
 

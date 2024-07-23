@@ -6,6 +6,6 @@ return array(
     'action' 		        => 'Действие',
     'by'      		        => 'От',
     'item' 			        => 'Информация',
-    'no_matching_records'   => 'No matching records found',
+    'no_matching_records'   => 'Няма намерени съответстващи записи',
 
 );

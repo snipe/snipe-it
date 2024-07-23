@@ -21,7 +21,7 @@ return [
     'purchase_date'	=> 'Nupirkta',
     'serial'   		=> 'Serijos numeris',
     'status'   		=> 'Būsena',
-    'title'      	=> 'Įranga ',
+    'title'      	=> 'Turtas ',
     'image'		    => 'Įrenginio atvaizdas',
     'days_without_acceptance' => 'Dienų skaičius laukiant patvirtinimo',
     'monthly_depreciation' => 'Mėnesinis nusidėvėjimas',

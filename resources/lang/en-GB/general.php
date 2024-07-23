@@ -180,7 +180,7 @@ return [
     'last_name'             => 'Last Name',
     'license'				=> 'License',
     'license_report'        => 'License Report',
-    'licenses_available'	=> 'Licenses available',
+    'licenses_available'	=> 'Licences available',
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
     'loading'				=> 'Loading... please wait....',
@@ -206,7 +206,7 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Next',
     'next_audit_date'		=> 'Next Audit Date',
-    'next_audit_date_help'  => 'If you use auditing in your organization, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
+    'next_audit_date_help'  => 'If you use auditing in your organisation, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
     'audit_images_help'     => 'You can find audit images in the asset\'s history tab.',
     'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'Last Audit',
@@ -528,7 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
     'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
     'error_sending_email' => 'Error sending email',
-    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
+    'sad_panda' => 'Sad panda. You are not authorised to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -545,10 +545,18 @@ return [
     'countable' => [
         'accessories'  => ':count Accessory|:count Accessories',
         'assets'  => ':count Asset|:count Assets',
-        'licenses'  => ':count License|:count Licenses',
-        'license_seats'  => ':count License Seat|:count License Seats',
+        'licenses'  => ':count Licence|:count Licences',
+        'license_seats'  => ':count Licence Seat|:count Licence Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'More Info',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'whoops' => 'Whoops!',
+    'something_went_wrong' => 'Something went wrong with your request.',
+    'close' => 'Close',
+    'expires' => 'Expires',
+    'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

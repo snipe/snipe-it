@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => '삭제',
     'edit'    	                => '편집',
+    'clone'    	                => 'Clone',
     'restore' 	                => '복원',
     'remove'                    => '삭제',
     'request'                   => '요청',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => '유지 보수 정보 추가',
     'append'                    => 'Append',
     'new'                       => '신규',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Delete :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

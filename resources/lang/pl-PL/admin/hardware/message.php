@@ -2,10 +2,9 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Uwaga: </strong> To aktywo zostało oznaczone jako tymczasowo niemożliwe do wdrożenia.
-                        Jeśli jego stan się zmienił, zaktualizuj status aktywa.',
+    'undeployable' 		=> '<strong>Uwaga:</strong> Ten nabytek został oznaczony jako obecnie nie przypisany. Jeśli jego status uległ zmianie proszę zaktualizować status nabytku.',
     'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'does_not_exist_var'=> 'Nie znaleziono zasobu o tagu :asset_tag.',
     'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Aktywo nie istnieje albo nie można go zażądać.',
     'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Niektóre elementy nie zostały poprawnie zaimportowane.',
         'errorDetail'           => 'Następujące elementy nie zostały zaimportowane z powodu błędów.',
         'success'               => 'Twój plik został zaimportowany',

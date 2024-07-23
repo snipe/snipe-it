@@ -209,7 +209,7 @@
                                                         {{ $file->note }}
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td style="white-space: nowrap;">
                                                     @if ($file->filename)
                                                         <a href="{{ route('show.accessoryfile', [$accessory->id, $file->id]) }}" class="btn btn-sm btn-default">
                                                             <i class="fas fa-download" aria-hidden="true"></i>
@@ -330,7 +330,7 @@
                   <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.edit') }}</a>
                </div>
         @endcan
-        @can('update', \App\Models\Accessory::class)
+        @can('create', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
                     <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
                 </div>

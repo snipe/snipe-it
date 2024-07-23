@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Внимание: </strong> Этот актив был помечен как выданный.
-                        Если этот статус изменился, необходимо его обновить.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Актив не существует.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Некоторые элементы не были импортированы корректно.',
         'errorDetail'           => 'Следующие элементы не были импортированы из за ошибок.',
         'success'               => 'Ваш файл был импортирован',

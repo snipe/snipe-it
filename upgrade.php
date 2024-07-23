@@ -10,6 +10,12 @@ function url_get_contents ($Url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $Url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // If we're on windows, make sure we can load intermediate certificates in
+    // weird corporate environments.
+    // See:  https://github.com/curl/curl/commit/2d6333101a71129a6a802eb93f84a5ac89e34479
+    if (PHP_OS == "WINNT"){
+        curl_setopt($ch, CURLOPT_SSL_OPTIONS, CURLSSLOPT_NATIVE_CA);
+    }
     $output = curl_exec($ch);
     curl_close($ch);
     return $output;
@@ -59,8 +65,8 @@ echo "- clear out old cache settings\n\n";
 
 // Fetching most current upgrade requirements from github. Read more here: https://github.com/snipe/snipe-it/pull/14127
 $remote_requirements_file = "https://raw.githubusercontent.com/snipe/snipe-it/$branch/.upgrade_requirements.json";
-$upgrade_requirements = json_decode(url_get_contents($remote_requirements_file), true);
-
+$upgrade_requirements_raw = url_get_contents($remote_requirements_file);
+$upgrade_requirements = json_decode($upgrade_requirements_raw, true);
 if (! $upgrade_requirements) {
     if(!$skip_php_checks){
         echo "\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\n\n";
@@ -68,6 +74,14 @@ if (! $upgrade_requirements) {
             echo "NOTE: You passed a custom branch: $branch\n";
             echo "   If the above URL doesn't work, that may be why. Please check you branch spelling/extistance\n\n";
         }
+
+        if (json_last_error()) {
+            print "JSON DECODE ERROR DETECTED:\n";
+            print json_last_error_msg() . "\n\n";
+            print "Raw curl output:\n";
+            print $upgrade_requirements_raw . "\n\n";
+        }
+
         echo "We suggest correcting this, but if you can't,  please verify that your requirements conform to those at that url.\n\n";
         echo " -- DANGER -- DO AT YOUR OWN RISK --\n";
         echo "      IF YOU ARE SURE, re-run this script with --skip-php-compatibility-checks to skip this check.\n";

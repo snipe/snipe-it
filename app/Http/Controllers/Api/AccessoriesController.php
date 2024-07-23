@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccessoryCheckoutRequest;
+use App\Http\Requests\StoreAccessoryRequest;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
@@ -15,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+
 
 class AccessoriesController extends Controller
 {
@@ -120,12 +123,12 @@ class AccessoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \App\Http\Requests\ImageUploadRequest $request
+     * @return \Illuminate\Http\JsonResponse
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \App\Http\Requests\ImageUploadRequest $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(StoreAccessoryRequest $request)
     {
         $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
@@ -143,10 +146,10 @@ class AccessoriesController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  int  $id
+     * @return array
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -160,10 +163,10 @@ class AccessoriesController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  int  $id
+     * @return array
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function accessory_detail($id)
     {
@@ -272,43 +275,31 @@ class AccessoriesController extends Controller
      * If Slack is enabled and/or asset acceptance is enabled, it will also
      * trigger a Slack message and send an email.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $accessoryId
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function checkout(Request $request, $accessoryId)
+    public function checkout(AccessoryCheckoutRequest $request, Accessory $accessory)
     {
-        // Check if the accessory exists
-        if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
-        }
-
         $this->authorize('checkout', $accessory);
+        $accessory->assigned_to = $request->input('assigned_to');
+        $user = User::find($request->input('assigned_to'));
+        $accessory->checkout_qty = $request->input('checkout_qty', 1);
 
-
-        if ($accessory->numRemaining() > 0) {
-
-            if (! $user = User::find($request->input('assigned_to'))) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
-            }
-
-            // Update the accessory data
-            $accessory->assigned_to = $request->input('assigned_to');
-
+        for ($i = 0; $i < $accessory->checkout_qty; $i++) {
             $accessory->users()->attach($accessory->id, [
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to'),
-                'note' => $request->get('note'),
+                'assigned_to' => $request->input('assigned_to'),
+                'note' => $request->input('note'),
             ]);
-
-            event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
-
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'No accessories remaining'));
+        // Set this value to be able to pass the qty through to the event
+        event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
+
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
 
     }
 

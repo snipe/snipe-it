@@ -8,8 +8,10 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Consumable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
+use App\Http\Requests\StoreConsumableRequest;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -62,7 +64,7 @@ class ConsumablesController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ImageUploadRequest $request)
+    public function store(StoreConsumableRequest $request)
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable();
@@ -99,10 +101,8 @@ class ConsumablesController extends Controller
      * @param  int $consumableId
      * @see ConsumablesController::postEdit() method that stores the form data.
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($consumableId = null)
+    public function edit($consumableId = null) : View | RedirectResponse
     {
         if ($item = Consumable::find($consumableId)) {
             $this->authorize($item);
@@ -124,7 +124,7 @@ class ConsumablesController extends Controller
      * @see ConsumablesController::getEdit() method that stores the form data.
      * @since [v1.0]
      */
-    public function update(ImageUploadRequest $request, $consumableId = null)
+    public function update(StoreConsumableRequest $request, $consumableId = null)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
@@ -182,6 +182,7 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
         $this->authorize($consumable);
+
         $consumable->delete();
         // Redirect to the locations management page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.delete.success'));
@@ -199,7 +200,7 @@ class ConsumablesController extends Controller
      */
     public function show($consumableId = null)
     {
-        $consumable = Consumable::find($consumableId);
+        $consumable = Consumable::withCount('users as users_consumables')->find($consumableId);
         $this->authorize($consumable);
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));
@@ -207,5 +208,17 @@ class ConsumablesController extends Controller
 
         return redirect()->route('consumables.index')
             ->with('error', trans('admin/consumables/message.does_not_exist'));
+    }
+
+    public function clone(Consumable $consumable) : View
+    {
+        $this->authorize('create', $consumable);
+        $consumable_to_close = $consumable;
+        $consumable = clone $consumable_to_close;
+        $consumable->id = null;
+        $consumable->image = null;
+        $consumable->user_id = null;
+
+        return view('consumables/edit')->with('item', $consumable);
     }
 }

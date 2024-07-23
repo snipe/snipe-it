@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Slack;
-use Str;
-use TCPDF;
-use View;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 /**
  * This controller handles all actions related to Asset Maintenance for
@@ -29,9 +26,8 @@ class AssetMaintenancesController extends Controller
     * @author  Vincent Sposato <vincent.sposato@gmail.com>
     * @version v1.0
     * @since [v1.8]
-    * @return View
     */
-    private static function getInsufficientPermissionsRedirect()
+    private static function getInsufficientPermissionsRedirect(): RedirectResponse
     {
         return redirect()->route('maintenances.index')
           ->with('error', trans('general.insufficient_permissions'));
@@ -46,9 +42,8 @@ class AssetMaintenancesController extends Controller
     * @author  Vincent Sposato <vincent.sposato@gmail.com>
     * @version v1.0
     * @since [v1.8]
-    * @return View
     */
-    public function index()
+    public function index() : View
     {
         $this->authorize('view', Asset::class);
         return view('asset_maintenances/index');
@@ -63,7 +58,7 @@ class AssetMaintenancesController extends Controller
      * @since [v1.8]
      * @return mixed
      */
-    public function create()
+    public function create() : View
     {
         $this->authorize('update', Asset::class);
         $asset = null;
@@ -92,9 +87,8 @@ class AssetMaintenancesController extends Controller
     * @author  Vincent Sposato <vincent.sposato@gmail.com>
     * @version v1.0
     * @since [v1.8]
-    * @return mixed
     */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $this->authorize('update', Asset::class);
         // create a new model instance
@@ -144,9 +138,8 @@ class AssetMaintenancesController extends Controller
     * @param int $assetMaintenanceId
     * @version v1.0
     * @since [v1.8]
-    * @return mixed
     */
-    public function edit($assetMaintenanceId = null)
+    public function edit($assetMaintenanceId = null) : View | RedirectResponse
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
@@ -162,14 +155,9 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-
         // Prepare Improvement Type List
-        $assetMaintenanceType = [
-                                    '' => 'Select an improvement type',
-                                ] + AssetMaintenance::getImprovementOptions();
+        $assetMaintenanceType = ['' => 'Select an improvement type'] + AssetMaintenance::getImprovementOptions();
 
-        // Get Supplier List
-        // Render the view
         return view('asset_maintenances/edit')
                    ->with('selectedAsset', null)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
@@ -183,11 +171,10 @@ class AssetMaintenancesController extends Controller
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @param Request $request
      * @param int $assetMaintenanceId
-     * @return mixed
      * @version v1.0
      * @since [v1.8]
      */
-    public function update(Request $request, $assetMaintenanceId = null)
+    public function update(Request $request, $assetMaintenanceId = null) : View | RedirectResponse
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
@@ -255,9 +242,8 @@ class AssetMaintenancesController extends Controller
     * @param int $assetMaintenanceId
     * @version v1.0
     * @since [v1.8]
-    * @return mixed
     */
-    public function destroy($assetMaintenanceId)
+    public function destroy($assetMaintenanceId) : RedirectResponse
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
@@ -284,9 +270,8 @@ class AssetMaintenancesController extends Controller
     * @param int $assetMaintenanceId
     * @version v1.0
     * @since [v1.8]
-    * @return View
     */
-    public function show($assetMaintenanceId)
+    public function show($assetMaintenanceId) : View | RedirectResponse
     {
         $this->authorize('view', Asset::class);
 

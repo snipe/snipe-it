@@ -95,7 +95,7 @@ class ComponentCheckinController extends Controller
 
             $asset = Asset::find($component_assets->asset_id);
 
-            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note'), Carbon::now()));
+            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
             if ($backto == 'asset'){
                 return redirect()->route('hardware.show', $asset->id)->with('success',
                     trans('admin/components/message.checkin.success'));

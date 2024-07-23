@@ -7,10 +7,10 @@ return [
     'create'  					            => 'Crear depreciación',
     'depreciation_name'  					=> 'Nombre de depreciación',
     'depreciation_min'                      => 'Valor del piso de la depreciación',
-    'number_of_months'  					=> 'Número de Meses',
+    'number_of_months'  					=> 'Número de meses',
     'update'  					            => 'Actualizar Depreciación',
     'depreciation_min'                      => 'Valor mínimo después de depreciación',
     'no_depreciations_warning'               => '<strong>Advertencia: </strong>
                       No tiene ninguna depreciación configurada.
-                      Por favor, configure al menos una depreciación para ver el informe de depreciaciones.',
+                      Por favor, configure al menos una depreciación para ver el informe de depreciación.',
 ];

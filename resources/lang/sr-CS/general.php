@@ -528,7 +528,7 @@ return [
     'permission_denied_superuser_demo' => 'Ovlašćenje je odbijeno. Ne možete da izmenite podatke o superadmin korisniku u ovoj demostraciji.',
     'pwd_reset_not_sent' => 'Korisnik nije aktiviran, nije sinhronizovan sa LDAP-om, ili nema navedenu adresu e-pošte',
     'error_sending_email' => 'Greška prilikom slanja e-poruke',
-    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
+    'sad_panda' => 'Tužni panda. Niste ovlašćeni da uradite tu stvar. Možda da se <a href=":link">vratite na kontrolnu tablu</a>, ili kontaktirajte vašeg administratora.',
     'bulk' => [
             'delete' =>
                 [
@@ -549,6 +549,14 @@ return [
         'license_seats'  => ':count licencnih mesta|:count licencnih mesta',
         'consumables'  => ':count potrošni materijal|:count potrošnih materijala',
         'components'  => ':count komponenta|:count komponenti',
-    ]
+    ],
+    'more_info' => 'Više informacija',
+    'quickscan_bulk_help' => 'Potvrđivanjem ovog polja će izmeniti zapis imovine kako bi se ažurirala ova nova lokacija. Ukoliko ostane nepotvrđeno lokacija će se evidentirati samo u zapisu popisa. Imajte na umu da, ukoliko je imovina zadužena, neće promeniti lokaciju osobe, imovine ili lokacije za koju je zadužena.',
+    'whoops' => 'Ups!',
+    'something_went_wrong' => 'Nešto je pošlo po zlu sa vašim zahtevom.',
+    'close' => 'Zatvori',
+    'expires' => 'Ističe',
+    'map_fields'=> 'Mapiraj polje :item_type',
+    'remaining_var' => ':count preostalo',
 
 ];

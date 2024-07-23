@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Предупредување:</strong> Ова основно средство е означено како нераспоредливо. Ако овој статус е променет, ве молиме да го ажурирате статусот на средството.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Основното средство не постои.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Некои ставки не се увезоа правилно.',
         'errorDetail'           => 'Следниве елементи не се увезени поради грешки.',
         'success'               => 'Вашата датотека е увезена',

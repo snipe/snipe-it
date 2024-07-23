@@ -94,14 +94,14 @@ class LicenseCheckoutController extends Controller
 
         if (! $licenseSeat) {
             if ($seatId) {
-                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.'));
+                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.unavailable')));
             }
             
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'There are no available seats for this license.'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.not_enough_seats')));
         }
 
         if (! $licenseSeat->license->is($license)) {
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.mismatch')));
         }
 
         return $licenseSeat;
@@ -119,7 +119,7 @@ class LicenseCheckoutController extends Controller
             $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
 
             return true;
         }
@@ -136,7 +136,7 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
 
             return true;
         }

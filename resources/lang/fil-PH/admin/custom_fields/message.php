@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Ang field ay hindi umiiral.',
         'already_added'   => 'Ang field ay naidagdag na',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Ang field ay hindi naisagawa, mangyaring subukang muli.',

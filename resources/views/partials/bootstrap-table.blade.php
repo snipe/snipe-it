@@ -5,11 +5,14 @@
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url(mix('js/dist/bootstrap-table-locale-all.min.js')) }}"></script>
+
+<!-- load english again here, even though it's in the all.js file, because if BS table doesn't have the translation, it otherwise defaults to chinese. See https://bootstrap-table.com/docs/api/table-options/#locale -->
+<script src="{{ url(mix('js/dist/bootstrap-table-en-US.min.js')) }}"></script>
 
 <script nonce="{{ csrf_token() }}">
     $(function () {
 
-        var locale = '{{ config('app.locale') }}';
         var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
 
         var keyBlocked = function(key) {
@@ -46,7 +49,6 @@
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            locale: '{{ app()->getLocale() }}',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
@@ -88,6 +90,7 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
+            locale: '{{ app()->getLocale() }}',
             exportOptions: export_options,
             exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
@@ -432,7 +435,7 @@
         if ((row.available_actions.checkout === true) && (row.user_can_checkout === true) && ((!row.asset_id) && (!row.assigned_to))) {
             return '<a href="{{ config('app.url') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
         } else {
-            return '<a href="{{ config('app.url') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
+            return '<a href="{{ config('app.url') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="{{ trans('general.checkin_tooltip') }}">{{ trans('general.checkin') }}</a>';
         }
 
     }

@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Ako ay nakabasa ay sumasang-ayon sa mga tuntunin ng paggamit, at ang aytem na ito ay aking tinatanggap.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Aytem:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Paki-klik sa mga sumusunod na link para makapag-update sa iyong :web password:',
     'login' => 'Mag-login:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Ang gumagamit',
     'username' => 'Ang pangalan ng gumagamit',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Maligayang pagdating :ang pangalan',
     'welcome_to' => 'Maligayang pagdating sa: web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Ang iyong mga Kredensyal sa Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

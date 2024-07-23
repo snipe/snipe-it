@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável.                        Se este status mudou, atualize o status do ativo.',
+    'undeployable' 		=> '<strong>Aviso:</strong> Este bem foi marcado como atualmente não implementável.                        Se este status mudou, por favor, atualize o status do bem.',
     'does_not_exist' 	=> 'O ativo não existe.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Alguns itens não foram importados corretamente.',
         'errorDetail'           => 'Os seguintes itens não foram importados devido a erros.',
         'success'               => 'O seu arquivo foi importado',

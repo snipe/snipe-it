@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'மீதமுள்ள',
     'total' 			                => 'மொத்த',
     'update'                            => 'நுகர்வோர் புதுப்பிக்கவும்',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

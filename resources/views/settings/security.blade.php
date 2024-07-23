@@ -106,7 +106,7 @@
                                 </label>
 
                                 @if ($errors->has('pwd_secure_complexity.*'))
-                                    <span class="alert-msg">{{ trans('validation.invalid_value_in_field') }}</span>
+                                    <span class="alert-msg">{{ trans('validation.generic.invalid_value_in_field') }}</span>
                                 @endif
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
@@ -150,6 +150,9 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_custom_logout_url_help') }}
                                     </p>
+
+                                    @if ($setting->login_remote_user_enabled == '1')
+
                                     <!--  Disable other logins mechanism -->
                                     <label class="form-control">
 
@@ -160,6 +163,8 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_common_disabled_help') }}
                                     </p>
+                                    @endif
+
                                 @endif
 
                             </div>

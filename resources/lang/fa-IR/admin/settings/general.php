@@ -129,7 +129,7 @@ return [
     'ldap_manager'              => 'مدیر LDAP
 ',
     'ldap_server'               => 'سرویس دهنده LDAP',
-    'ldap_server_help'          => 'این باید با ldap: // (برای رمزگذاری نشده یا TLS) یا ldaps: ((برای SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
     'ldap_server_cert_ignore'	=> 'اجازه می دهد به گواهی های بی اعتبار SSL',
     'ldap_server_cert_help'		=> 'اگر از یک امضای SSL شخصی معتبر استفاده می کنید این گزینه را فعال کنید.',
@@ -164,8 +164,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -208,8 +208,7 @@ return [
     'optional'					=> 'اختیاری',
     'per_page'                  => 'نتایج در هر صفحه',
     'php'                       => 'نسخه php',
-    'php_info'                  => 'اطلاعات پی اچ پی
-',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
     'php_overview_keywords'     => 'phpinfo, system, info',
@@ -521,5 +520,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

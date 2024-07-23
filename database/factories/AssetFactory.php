@@ -301,11 +301,11 @@ class AssetFactory extends Factory
         });
     }
 
-    public function assignedToLocation()
+    public function assignedToLocation(Location $location = null)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($location) {
             return [
-                'assigned_to' => Location::factory(),
+                'assigned_to' => $location->id ?? Location::factory(),
                 'assigned_type' => Location::class,
             ];
         });
