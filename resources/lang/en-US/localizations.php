@@ -41,6 +41,8 @@ return [
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongolian',
         'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norwegian Bokmål',
+        'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Persian',
         'pl-PL'=> 'Polish',
         'pt-PT'=> 'Portuguese',
