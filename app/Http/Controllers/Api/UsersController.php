@@ -475,11 +475,7 @@ class UsersController extends Controller
                 $user->password = bcrypt($request->input('password'));
             }
 
-        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-
-        $user->customFill($request,Auth::user());
-
-        if ($user->save()) {
+            $user->customFill($request, Auth::user());
 
             // We need to use has()  instead of filled()
             // here because we need to overwrite permissions
