@@ -560,5 +560,6 @@ Context | Request Context
     'close' => 'Close',
     'expires' => 'Bitiş',
     'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

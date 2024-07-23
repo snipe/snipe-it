@@ -1,7 +1,7 @@
 <?php
 
 return [
-    '2FA_reset'             => '2FA reset',
+    '2FA_reset'             => 'Reestablecer 2FA',
     'accessories'			=> 'Accesorios',
     'activated'			    => 'Activado',
     'accepted_date'         => 'Fecha de aceptación',
@@ -161,7 +161,7 @@ return [
     'image_filetypes_help'  => 'Los tipos de archivo aceptados son jpg, webp, png, gif, svg y avif. El tamaño máximo permitido es :size.',
     'unaccepted_image_type'  => 'Este archivo de imagen no fue legible. Los tipos de archivo aceptados son jpg, webp, png, gif y svg. El tipo mimetype de este archivo es: :mimetype.',
     'import'         	    => 'Importar',
-    'import_this_file'      => 'Mapear campos y procesar este archivo',
+    'import_this_file'      => 'Asociar campos y procesar este archivo',
     'importing'         	=> 'Importar datos',
     'importing_help'        => 'Puede importar activos, accesorios, licencias, componentes, consumibles y usuarios a través del archivo CSV. <br><br>El CSV debe estar delimitado por comas y formateado con encabezados que coincidan con los de los <a href="https://snipe-it.readme.io/docs/importing" target="_new">archivos CSV de muestra en la documentación</a>.',
     'import-history'        => 'Importar historial',
@@ -371,7 +371,7 @@ return [
     'export'                => 'Exportar',
     'ldap_sync'             => 'Sincronización LDAP',
     'ldap_user_sync'        => 'Sincronización de usuario LDAP',
-    'synchronize'           => 'Synchronize',
+    'synchronize'           => 'Sincronizar',
     'sync_results'          => 'Resultados de sincronización',
     'license_serial'        => 'Clave de Serial/Producto',
     'invalid_category'      => 'Categoría no válida o ausente',
@@ -395,7 +395,7 @@ return [
     'notification_bulk_error_hint' => 'Los siguientes campos tenían errores de validación y no fueron editados:',
     'notification_success'  => 'Éxito',
     'notification_warning'   => 'Advertencia',
-    'notification_info'      => 'Info',
+    'notification_info'      => 'Información',
     'asset_information'     => 'Información del activo',
     'model_name'            => 'Nombre del modelo',
     'asset_name'            => 'Nombre del activo',
@@ -439,7 +439,7 @@ return [
     'alerts'                => 'Alertas',
     'tasks_view_all'        => 'Ver todas las tareas',
     'true'                  => 'Verdadero',
-    'false'                 => 'False',
+    'false'                 => 'Falso',
     'integration_option'    => 'Opción de integración',
     'log_does_not_exist'    => 'No existe ningún registro de eventos que coincida.',
     'merge_users'           => 'Combinar usuarios',
@@ -510,7 +510,7 @@ return [
     ],
     'remove_customfield_association' => 'Elimine este campo del grupo de campos. Esto no eliminará el campo personalizado, solo la asociación de este campo con este grupo de campos.',
     'checked_out_to_fields' => 'Campos sobre quién tiene asignado el elemento',
-    'percent_complete' => '% complete',
+    'percent_complete' => '% completo',
     'uploading' => 'Subiendo... ',
     'upload_error' => 'Error al cargar el archivo. Por favor, compruebe que no hay filas vacías y que no hay nombres de columna duplicados.',
     'copy_to_clipboard' => 'Copiar al portapapeles',
@@ -556,6 +556,7 @@ return [
     'something_went_wrong' => 'Algo falló en su solicitud.',
     'close' => 'Cerrar',
     'expires' => 'Vence',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Asociar el campo :item_type',
+    'remaining_var' => ':count restantes',
 
 ];

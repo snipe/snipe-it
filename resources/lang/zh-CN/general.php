@@ -557,5 +557,6 @@ return [
     'close' => '关闭',
     'expires' => '过期',
     'map_fields'=> '映射 :item_type 字段',
+    'remaining_var' => '剩余:count个',
 
 ];

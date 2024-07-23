@@ -556,6 +556,7 @@ return [
     'something_went_wrong' => 'Nešto je pošlo po zlu sa vašim zahtevom.',
     'close' => 'Zatvori',
     'expires' => 'Ističe',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Mapiraj polje :item_type',
+    'remaining_var' => ':count preostalo',
 
 ];

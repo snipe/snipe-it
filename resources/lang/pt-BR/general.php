@@ -558,5 +558,6 @@ Resultados da Sincronização',
     'close' => 'Close',
     'expires' => 'Expira',
     'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

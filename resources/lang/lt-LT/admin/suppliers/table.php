@@ -4,7 +4,7 @@ return array(
     'about_suppliers_title' => 'Apie tiekėjus',
     'about_suppliers_text'  => 'Tiekėjai naudojami daiktų šaltiniui stebėti',
     'address'               => 'Tiekėjo adresas',
-    'assets'                => 'Įranga',
+    'assets'                => 'Turtas',
     'city'                  => 'Miestas',
     'contact'               => 'Kontaktinis asmuo',
     'country'               => 'Šalis',
@@ -20,7 +20,7 @@ return array(
     'suppliers'             => 'Tiekėjai',
     'update'                => 'Atnaujinti tiekėją',
     'view'                  => 'Peržiūrėti tiekėją',
-    'view_assets_for'       => 'Įrangos peržiūra –',
+    'view_assets_for'       => 'Turto peržiūra –',
     'zip'                   => 'Pašto kodas',
 
 );

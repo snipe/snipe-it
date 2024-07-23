@@ -375,6 +375,9 @@ return [
     'timezone' => 'Fuso horário',
     'profile_edit'          => 'Editar perfil',
     'profile_edit_help'          => 'Permitir que os usuários editem seus próprios perfis.',
-    'default_avatar' => 'Carregar avatar padrão',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

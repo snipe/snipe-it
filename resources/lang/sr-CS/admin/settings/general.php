@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Ovo samo testira da LDAP može ispravno da se sinhronizuje. Ako vaš upit za LDAP autentifikaciju nije tačan, korisnici možda i dalje neće moći da se prijave. PRVO MORATE SAČUVATI VAŠA AŽURIRANA LDAP PODEŠAVANJA.',
     'ldap_manager'              => 'LDAP Menadžer',
     'ldap_server'               => 'LDAP Server',
-    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
+    'ldap_server_help'          => 'Ovo bi trebalo da počne sa ldap:// (za neenkriptovanu) ili ldaps:// (za TLS ili SSL)',
     'ldap_server_cert'			=> 'LDAP SSL validacija sertifikata',
     'ldap_server_cert_ignore'	=> 'Dopusti neispravne SSL sertifikate',
     'ldap_server_cert_help'		=> 'Označite ovo polje za potvrdu ako koristite samopotpisani SSL sertifikat i želite da prihvatite nevažeći SSL sertifikat.',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Vremenska zona',
     'profile_edit'          => 'Izmeni profil',
     'profile_edit_help'          => 'Dozvoli korisnicima da izmene svoje profile.',
-    'default_avatar' => 'Postavi podrazumevani avatar',
+    'default_avatar' => 'Postavi prilagođenu podrazumevanu sličicu',
+    'default_avatar_help' => 'Ova slika će se prikazivati kao profilna ako korisnik nema svoju sliku profila.',
+    'restore_default_avatar' => 'Vrati <a href=":default_avatar" data-toggle="lightbox" data-type="image">originalnu podrazumevanu sličicu</a>',
+    'restore_default_avatar_help' => '',
 
 ];

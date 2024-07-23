@@ -375,6 +375,9 @@ return [
     'timezone' => 'Часова зона',
     'profile_edit'          => 'Редактиране на профил',
     'profile_edit_help'          => 'Позволете на потребителите сами да могат да редактират собствените си профили.',
-    'default_avatar' => 'Качване на аватар по подразбиране',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];
