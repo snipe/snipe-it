@@ -915,12 +915,10 @@ class Helper
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
                 if (is_array($rule)) {
-                    foreach ($rule as $rule_value) {
-                        if ($rule_value === 'required') {
-                            return true;
-                        } else {
-                            return false;
-                        }
+                    if (in_array('required', $rule)) {
+                        return true;
+                    } else {
+                        return false;
                     }
                 } else {
                 if (strpos($rule, 'required') === false) {
