@@ -576,26 +576,20 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function getClone($assetId = null)
+    public function getClone(Asset $asset)
     {
-        // Check if the asset exists
-        if (is_null($asset_to_clone = Asset::find($assetId))) {
-            // Redirect to the asset management page
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
-
-        $this->authorize('create', $asset_to_clone);
-
-        $asset = clone $asset_to_clone;
-        $asset->id = null;
-        $asset->asset_tag = '';
-        $asset->serial = '';
-        $asset->assigned_to = '';
+        $this->authorize('create', $asset);
+        $cloned = clone $asset;
+        $cloned->id = null;
+        $cloned->asset_tag = '';
+        $cloned->serial = '';
+        $cloned->assigned_to = '';
+        $cloned->deleted_at = '';
 
         return view('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('item', $asset);
+            ->with('item', $cloned);
     }
 
     /**
