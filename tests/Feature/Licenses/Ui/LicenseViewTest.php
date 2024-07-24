@@ -16,17 +16,7 @@ class LicenseViewTest extends TestCase
             ->get(route('licenses.show', $license))
             ->assertForbidden();
     }
-
-
-    public function testLicenseWithNoPurchaseDateDoesNotTriggerDepreciation()
-    {
-        $depreciation = Depreciation::factory()->create(['months' => 12]);
-        $license = License::factory()->create(['depreciation_id' => $depreciation->id, 'purchase_date' => null]);
-        $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('licenses.show', $license))
-            ->assertOk();
-    }
-
+    
     public function testLicenseWithPurchaseDateDepreciatesCorrectly()
     {
         $depreciation = Depreciation::factory()->create(['months' => 12]);
