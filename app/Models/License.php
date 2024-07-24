@@ -50,7 +50,7 @@ class License extends Depreciable
         'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
         'purchase_cost'=> 'numeric|nullable|gte:0',
-        'purchase_date'   => 'date_format:Y-m-d|nullable|max:10',
+        'purchase_date'   => 'date_format:Y-m-d|nullable|max:10|required_with:depreciation_id',
         'expiration_date'   => 'date_format:Y-m-d|nullable|max:10',
         'termination_date'   => 'date_format:Y-m-d|nullable|max:10',
         'min_amt'   => 'numeric|nullable|gte:0',
