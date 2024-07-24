@@ -206,7 +206,7 @@ class AssetsController extends Controller
 
         if ($success) {
             return redirect()->route('hardware.index')
-                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset->id), 'id', 'tag' => e($asset->asset_tag)]));
+                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
                
       
         }
@@ -475,7 +475,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function getQrCode($assetId = null) : Response | BinaryFileResponse
+    public function getQrCode($assetId = null) : Response | BinaryFileResponse | string | bool
     {
         $settings = Setting::getSettings();
 
@@ -502,6 +502,7 @@ class AssetsController extends Controller
 
             return 'That asset is invalid';
         }
+        return false;
     }
 
     /**
@@ -575,26 +576,20 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function getClone($assetId = null)
+    public function getClone(Asset $asset)
     {
-        // Check if the asset exists
-        if (is_null($asset_to_clone = Asset::find($assetId))) {
-            // Redirect to the asset management page
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
-
-        $this->authorize('create', $asset_to_clone);
-
-        $asset = clone $asset_to_clone;
-        $asset->id = null;
-        $asset->asset_tag = '';
-        $asset->serial = '';
-        $asset->assigned_to = '';
+        $this->authorize('create', $asset);
+        $cloned = clone $asset;
+        $cloned->id = null;
+        $cloned->asset_tag = '';
+        $cloned->serial = '';
+        $cloned->assigned_to = '';
+        $cloned->deleted_at = '';
 
         return view('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('item', $asset);
+            ->with('item', $cloned);
     }
 
     /**

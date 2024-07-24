@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Dette tester kun om LDAP kan synkronisere korrekt. Hvis din LDAP authentisering ikke er korrekt, er det usikkert om brugere kan logge ind. DU SKAL FØRST OPDATERE OG GEMME DINE LDAP INDSTILLINGER.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'LDAP-server',
-    'ldap_server_help'          => 'Dette skal starte med ldap: // (for ukrypteret eller TLS) eller ldaps: // (for SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validering af LDAP SSL-certifikat',
     'ldap_server_cert_ignore'	=> 'Tillad ugyldigt SSL-certifikat',
     'ldap_server_cert_help'		=> 'Marker dette afkrydsningsfelt, hvis du bruger et selvtegnet SSL cert og vil gerne acceptere et ugyldigt SSL-certifikat.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'valgfri',
     'per_page'                  => 'Resultater pr. Side',
     'php'                       => 'PHP Version',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'Php System info',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

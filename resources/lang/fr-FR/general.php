@@ -552,5 +552,11 @@ return [
     ],
     'more_info' => 'Plus d\'info',
     'quickscan_bulk_help' => 'Si vous cochez cette case, l\'enregistrement de l\'actif sera modifié pour refléter ce nouvel emplacement. Si elle n\'est pas cochée, l\'emplacement sera simplement noté dans le journal d\'audit. Notez que si ce bien est sorti, il ne changera pas l\'emplacement de la personne, du bien ou de l\'emplacement auquel il est sorti.',
+    'whoops' => 'Whoops!',
+    'something_went_wrong' => 'Something went wrong with your request.',
+    'close' => 'Close',
+    'expires' => 'Expire le',
+    'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

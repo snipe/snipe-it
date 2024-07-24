@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varúð: </strong> Þessi eign hefur verið merkt sem ónothæf að svo stöddu.
-                        Ef ástand hennar hefur breyst skaltu uppfæra stöðu eignarinnar.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Þessi eign finnst ekki.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Some items did not import correctly.',
         'errorDetail'           => 'The following Items were not imported because of errors.',
         'success'               => 'Your file has been imported',

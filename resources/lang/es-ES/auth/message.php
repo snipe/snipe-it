@@ -39,7 +39,7 @@ return array(
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
+        'error'   => 'Hubo un problema al intentar restablecer su contraseña, por favor inténtelo de nuevo.',
         'success' => 'Su contraseña se ha restablecido correctamente.',
     ),
 

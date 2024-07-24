@@ -54,4 +54,29 @@ class ConsumableIndexTest extends TestCase
             ->assertResponseDoesNotContainInRows($consumableA)
             ->assertResponseContainsInRows($consumableB);
     }
+
+    public function testConsumableIndexReturnsExpectedSearchResults()
+    {
+        Consumable::factory()->count(10)->create();
+        Consumable::factory()->count(1)->create(['name' => 'My Test Consumable']);
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(
+                route('api.consumables.index', [
+                    'search' => 'My Test Consumable',
+                    'sort' => 'name',
+                    'order' => 'asc',
+                    'offset' => '0',
+                    'limit' => '20',
+                ]))
+            ->assertOk()
+            ->assertJsonStructure([
+                'total',
+                'rows',
+            ])
+            ->assertJson([
+                'total' => 1,
+            ]);
+
+    }
 }

@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Này chỉ kiểm tra LDAP có thể đồng bộ một cách chính xác. Nếu truy vấn xác thực LDAP của bạn không đúng, người sử dụng vẫn không thể đăng nhập. BẠN PHẢI LƯU THIẾT ĐẶT CẬP NHẬT LDAP CỦA BẠN ĐẦU TIÊN.',
     'ldap_manager'              => 'Quản lý LDAP',
     'ldap_server'               => 'Máy chủ LDAP',
-    'ldap_server_help'          => 'Điều này sẽ bắt đầu với ldap: // (cho không mã hóa hoặc TLS) hoặc ldaps: // (cho SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Xác thực giấy chứng nhận LDAP SSL',
     'ldap_server_cert_ignore'	=> 'Cho phép Chứng chỉ SSL không hợp lệ',
     'ldap_server_cert_help'		=> 'Chọn hộp kiểm này nếu bạn đang sử dụng chứng chỉ SSL ký tự và muốn chấp nhận chứng chỉ SSL không hợp lệ.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'tùy ý',
     'per_page'                  => 'Kết quả trên trang',
     'php'                       => 'Phiên bản PHP',
-    'php_info'                  => 'Thông tin PHP',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'Thông tin Hệ thống PHP',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

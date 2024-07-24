@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varování:</strong> Toto zařízení bylo označeno jako momentálně nepřiřaditelné.
-                        Pokud se na jeho stavu něco změnilo, upravte jej.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Majetek nenalezen.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Některé položky nebyly správně importovány.',
         'errorDetail'           => 'Následující položky nebyly importovány kvůli chybám.',
         'success'               => 'Váš soubor byl importován',

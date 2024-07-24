@@ -56,6 +56,7 @@ return [
     'i_have_read' => '我同意使用条款并确认已收到物品。',
     'inventory_report' => '库存报告',
     'item' => '项目：',
+    'item_checked_reminder' => '提醒，当前借出给您 :count 件物品，您还没有签收或拒绝。 请点击下面的链接以确认您的决定。',
     'license_expiring_alert' => '有：个许可将在：天后到期。|有：个许可将在：天后到期。',
     'link_to_update_password' => '请点击以下链接以更新 :web 的密码：',
     'login' => '登录：',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => '有:count 项资产将在:threshold 天内进行审计.|有:count 项资产将在:threshold 天内进行审计。',
     'user' => '用户',
     'username' => '用户名',
+    'unaccepted_asset_reminder' => '您有未接受的资产。',
     'welcome' => '欢迎您，:name',
     'welcome_to' => '欢迎来到 :web！',
     'your_assets' => '查看您的资产',
     'your_credentials' => '您的 Snipe-IT 登录凭据',
+    'mail_sent' => '邮件发送成功！',
 ];

@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Phụ kiện chưa được xuất kho. Bạn hãy thử lại',
         'success' 		=> 'Phụ kiện được xuất kho thành công.',
         'unavailable'   => 'Không có sẵn phụ kiện để xuất. Hãy kiểm tra số lượng có sẵn',
-        'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.',
+         'checkout_qty' => array(
+            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            ),
+           
     ),
 
     'checkin' => array(

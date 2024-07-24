@@ -44,6 +44,8 @@ return array(
         'error'   => 'crwdns946:0crwdne946:0',
         'success' => 'crwdns947:0crwdne947:0',
         'not_enough_seats' => 'crwdns11902:0crwdne11902:0',
+        'mismatch' => 'crwdns12574:0crwdne12574:0',
+        'unavailable' => 'crwdns12576:0crwdne12576:0',
     ),
 
     'checkin' => array(

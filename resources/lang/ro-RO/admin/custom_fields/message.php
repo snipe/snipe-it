@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Acest câmp nu există.',
         'already_added'   => 'Câmpul deja adăugat',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Câmpul nu a fost creat, încercați din nou.',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'about_locations_title'     => 'Acerca de Ubicaciones',
+    'about_locations_title'     => 'Acerca de las ubicaciones',
     'about_locations'           => 'Las ubicaciones son utilizadas para hacer seguimiento de la información sobre ubicación de usuarios, activos, y otros ítems',
     'assets_rtd'                => 'Activos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Activos asignados',
@@ -24,7 +24,7 @@ return [
     'user_name'                 => 'Usuario',
     'department'                => 'Departamento',
     'location'                  => 'Ubicación',
-    'asset_tag'                 => 'Etiqueta de recursos',
+    'asset_tag'                 => 'Placa del activo',
     'asset_name'                => 'Nombre',
     'asset_category'            => 'Categoría',
     'asset_manufacturer'        => 'Fabricante',

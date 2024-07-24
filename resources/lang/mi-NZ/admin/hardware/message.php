@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> Kua tohua tenei taonga i te mea kaore i te rongonui. Mena kua hurihia tenei mana, whakahouhia te mana o te taonga.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Kaore he tahua.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Kāore i tika te kawemai o etahi o nga mea.',
         'errorDetail'           => 'Ko nga mea e whai ake nei kihai i kawemai no te mea he hapa.',
         'success'               => 'I kawemai to kōnae',

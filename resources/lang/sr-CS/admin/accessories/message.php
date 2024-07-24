@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Pribor nije potvrdjen, pokušajte ponovo',
         'success' 		=> 'Pribor je uspešno proveren.',
         'unavailable'   => 'Pribor nije dostupan za zaduživanje. Proverite dostupnu količinu',
-        'user_does_not_exist' => 'Korisnik nevažeći. Molim pokušajte ponovo.'
+        'user_does_not_exist' => 'Korisnik nevažeći. Molim pokušajte ponovo.',
+         'checkout_qty' => array(
+            'lte'  => 'Trenutno ima samo jedna dostupna dodatna oprema ove vrste, a vi pokušavate da zadužite :checkout_qty. Molim vas prilagodite količinu za zaduživanje prema dostupnom stanju ove opreme i pokušajte ponovo.|Trenutno ima ukupno :number_currently_remaining dodatne opreme, a vi pokušavate da zadužite :checkout_qty. Molim vas prilagodite količinu za zaduživanje prema dostupnom stanju ove opreme i pokušajte ponovo.',
+            ),
+           
     ),
 
     'checkin' => array(

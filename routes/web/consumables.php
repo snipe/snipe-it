@@ -31,6 +31,10 @@ Route::group(['prefix' => 'consumables', 'middleware' => ['auth']], function () 
         [Consumables\ConsumablesFilesController::class, 'show']
     )->name('show.consumablefile');
 
+    Route::get('{consumable}/clone',
+        [Consumables\ConsumablesController::class, 'clone']
+    )->name('consumables.clone.create');
+    
 
 });
     

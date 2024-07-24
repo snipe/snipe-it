@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Acest lucru testează numai faptul că LDAP poate sincroniza corect. Dacă interogarea dvs. de autentificare LDAP nu este corectă, este posibil ca utilizatorii să nu se poată conecta. TREBUIE SĂ ACTUALIZAȚI SETĂRILE LDAP MAI ÎNTÂI.',
     'ldap_manager'              => 'Manager LDAP',
     'ldap_server'               => 'LDAP Server',
-    'ldap_server_help'          => 'Acest lucru ar trebui să înceapă cu ldap: // (pentru TCP sau TLS) sau ldaps: // (pentru SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validarea certificatelor SSL pentru LDAP',
     'ldap_server_cert_ignore'	=> 'Permiteți certificatul SSL nevalid',
     'ldap_server_cert_help'		=> 'Bifați această casetă de selectare dacă utilizați un certificat SSL auto-semnat și doriți să acceptați un certificat SSL nevalid.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'facultativ',
     'per_page'                  => 'Rezultate pe pagina',
     'php'                       => 'Versiune PHP',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, sistem, info',
     'php_overview_help'         => 'Informaţii sistem PHP',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

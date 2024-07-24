@@ -13,7 +13,7 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
     )->name('accessories.checkout.show');
 
     Route::post(
-        '{accessoryID}/checkout',
+        '{accessory}/checkout',
         [Accessories\AccessoryCheckoutController::class, 'store']
     )->name('accessories.checkout.store');
 

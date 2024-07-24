@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong> אזהרה: </strong> הנכס הזה סומן כבלתי ניתן לפריסה כעת. אם סטטוס זה השתנה, עדכן את סטטוס הנכס.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'הנכס אינו קיים.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'פריטים מסוימים לא ייבאו כראוי.',
         'errorDetail'           => 'הפריטים הבאים לא יובאו בגלל שגיאות.',
         'success'               => 'הקובץ שלך יובא',

@@ -552,5 +552,11 @@ return [
     ],
     'more_info' => '更多信息',
     'quickscan_bulk_help' => '勾选此框将编辑资产记录以反映其新的位置。不勾选则只会在盘点日志中记录该位置。注意，如果此资产已被借出，则不会更改其借出到的人员、资产或位置的位置。',
+    'whoops' => '哎呀！',
+    'something_went_wrong' => '您的请求出了点问题。',
+    'close' => '关闭',
+    'expires' => '过期',
+    'map_fields'=> '映射 :item_type 字段',
+    'remaining_var' => '剩余:count个',
 
 ];

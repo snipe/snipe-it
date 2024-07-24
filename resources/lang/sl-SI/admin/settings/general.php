@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'To samo testira, če lahko LDAP pravilno sinhronizira. Če vaša poizvedba LDAP Authentication ni pravilna, se uporabniki morda še vedno ne morejo prijaviti. Najprej morate shraniti posodobljene nastavitve za LDAP.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'Strežnik LDAP',
-    'ldap_server_help'          => 'To se mora začeti z ldap: / / (za nešifrirano ali TLS) ali ldaps: / / (za SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validacija potrdila SSL LDAP',
     'ldap_server_cert_ignore'	=> 'Dovoli neveljavno potrdilo SSL',
     'ldap_server_cert_help'		=> 'Izberite to potrditveno polje, če uporabljate samo-podpisano potrdilo SSL in želite sprejeti neveljavno potrdilo SSL.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'Opcijsko',
     'per_page'                  => 'Rezultatov na stran',
     'php'                       => 'PHP različica',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

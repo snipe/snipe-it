@@ -44,6 +44,8 @@ return array(
         'error'   => 'Възникна проблем при изписването на лиценза. Моля, опитайте отново.',
         'success' => 'Лицензът е изписан',
         'not_enough_seats' => 'Няма достатъчно лицензи за изписване',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

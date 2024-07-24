@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Това единствено проверява дали LDAP може да се синхронизира успешно. Ако вашата LDAP заявка за оторизация не е коректна е възможно потребителите да не могат да влязат. НЕОБХОДИМО Е ДА ЗАПИШЕТЕ LDAP НАСТРОЙКИТЕ ПРЕДИ ТОВА.',
     'ldap_manager'              => 'LDAP мениджър',
     'ldap_server'               => 'LDAP сървър',
-    'ldap_server_help'          => 'Това трябва да започва с Idap:// (for unencrypted or TLS) или Idaps:// (for SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Валидация на LDAP SSL сертификата',
     'ldap_server_cert_ignore'	=> 'Допускане на невалиден SSL сертификат',
     'ldap_server_cert_help'		=> 'Изберете тази опция ако използвате самоподписан SSL сертификат.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'незадължително',
     'per_page'                  => 'Резултати на страница',
     'php'                       => 'PHP версия',
-    'php_info'                  => 'PHP инфо',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, система, информация',
     'php_overview_help'         => 'PHP Системна информация',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Часова зона',
     'profile_edit'          => 'Редактиране на профил',
     'profile_edit_help'          => 'Позволете на потребителите сами да могат да редактират собствените си профили.',
-    'default_avatar' => 'Качване на аватар по подразбиране',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

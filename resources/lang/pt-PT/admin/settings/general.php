@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Isto apenas testa que a LDAP consegue sincronizar corretamente. Se a sua consulta de autenticação LDAP não estiver correta, os utilizadores poderão ainda não conseguir fazer a autenticação. PRIMEIRO DEVE GRAVAR AS SUAS DEFINIÇÕES ATUALIZADAS DA LDAP.',
     'ldap_manager'              => 'Gestor LDAP',
     'ldap_server'               => 'Servidor LDAP',
-    'ldap_server_help'          => 'Isso deve começar com ldap: / / (para não-criptado ou TLS) ou ldaps: / / (para SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validação certificado SSL LDAP',
     'ldap_server_cert_ignore'	=> 'Permitir certificado SSL inválido',
     'ldap_server_cert_help'		=> 'Seleccione esta opção se está a usar um certificado SSL auto-assinado e desejar aceitar um certificado SSL inválido.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'opcional',
     'per_page'                  => 'Resultados por página',
     'php'                       => 'Versão do PHP',
-    'php_info'                  => 'Informações do PHP',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, sistema, informações',
     'php_overview_help'         => 'Informação do sistema PHP',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Fuso horário',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Saya telah membaca dan bersetuju dengan terma penggunaan, dan telah menerima item ini.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Perkara:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Terdapat :count lesen yang akan tamat dalam tempoh :threshold hari.|Terdapat :count lesen yang akan tamat dalam tempoh :threshold hari.',
     'link_to_update_password' => 'Sila klik pada pautan berikut untuk mengemas kini kata laluan web anda:',
     'login' => 'Log masuk:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Pengguna',
     'username' => 'Nama Pengguna',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Selamat datang: nama',
     'welcome_to' => 'Selamat datang ke: web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Kredensial Snipe-IT anda',
+    'mail_sent' => 'Mail sent successfully!',
 ];

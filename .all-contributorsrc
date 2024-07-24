@@ -3136,6 +3136,42 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "FlorentDotMe",
+      "name": "Florent Bervas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/292081?v=4",
+      "profile": "http://spoontux.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dbakan",
+      "name": "Daniel Albertsen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4498077?v=4",
+      "profile": "https://ditscheri.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "r-xyz",
+      "name": "r-xyz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100710244?v=4",
+      "profile": "https://github.com/r-xyz",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "DrekiDegga",
+      "name": "Steven Mainor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47491036?v=4",
+      "profile": "https://github.com/DrekiDegga",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

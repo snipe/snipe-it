@@ -36,6 +36,7 @@ class SettingsSeeder extends Seeder
         $settings->version_footer = 'on';
         $settings->support_footer = 'on';
         $settings->pwd_secure_min = '8';
+        $settings->default_avatar = 'default.png';
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {

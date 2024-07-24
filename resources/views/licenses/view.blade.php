@@ -290,12 +290,14 @@
                     </strong>
                   </div>
                   <div class="col-md-9">
-                    @if ($license->time_until_depreciated()->y > 0)
-                      {{ $license->time_until_depreciated()->y }}
-                      {{ trans('admin/hardware/form.years') }},
-                    @endif
-                    {{ $license->time_until_depreciated()->m }}
-                    {{ trans('admin/hardware/form.months') }}
+                    @if ($license->time_until_depreciated())
+                      @if ($license->time_until_depreciated()->y > 0)
+                        {{ $license->time_until_depreciated()->y }}
+                        {{ trans('admin/hardware/form.years') }},
+                      @endif
+                      {{ $license->time_until_depreciated()->m }}
+                      {{ trans('admin/hardware/form.months') }}
+                   @endif
                   </div>
                 </div>
                 @endif

@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Ek het die gebruiksvoorwaardes gelees en ingestem en het hierdie item ontvang.',
     'inventory_report' => 'Inventory Report',
     'item' => 'item:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Klik asseblief op die volgende skakel om u webtuiste te verander:',
     'login' => 'Teken aan:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'gebruiker',
     'username' => 'Gebruikersnaam',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Welkom: naam',
     'welcome_to' => 'Welkom by: web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Jou Snipe-IT-referenties',
+    'mail_sent' => 'Mail sent successfully!',
 ];

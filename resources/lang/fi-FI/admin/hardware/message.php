@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite  ei ole käytettävävissä.
-                        Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Joitakin nimikkeitä ei tuotu oikein.',
         'errorDetail'           => 'Seuraavia nimikkeitä ei tuotu virheiden vuoksi.',
         'success'               => 'Tiedostosi on tuotu',

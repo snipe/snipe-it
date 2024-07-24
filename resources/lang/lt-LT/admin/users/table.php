@@ -3,7 +3,7 @@
 return array(
     'activated'  			=> 'Aktyvus',
     'allow'  				=> 'Leisti',
-    'checkedout'  			=> 'Įranga',
+    'checkedout'  			=> 'Turtas',
     'created_at' 			=> 'Sukurta',
     'createuser' 			=> 'Sukurti naudotoją',
     'deny'  				=> 'Neleisti',
@@ -31,7 +31,7 @@ return array(
     'show_deleted'          => 'Rodyti panaikintus naudotojus',
     'title' 				=> 'Antraštė',
 	'to_restore_them'		=> 'juos atkurti.',
-    'total_assets_cost'     => "Bendra įrangos vertė",
+    'total_assets_cost'     => "Bendra turto vertė",
     'updateuser' 			=> 'Atnaujinti naudotoją',
     'username' 				=> 'Naudotojo vardas',
 	'user_deleted_text' 	=> 'Šis naudotojas buvo pažymėtas kaip panaikintas.',

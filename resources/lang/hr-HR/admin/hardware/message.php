@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Upozorenje: </strong> Ova je snimka označena kao trenutno nedjeljiva. Ako se ovaj status promijenio, ažurirajte status aktive.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Neke stavke nisu pravilno uvezene.',
         'errorDetail'           => 'Sljedeće stavke nisu uvezene zbog pogrešaka.',
         'success'               => 'Vaša je datoteka uvezena',

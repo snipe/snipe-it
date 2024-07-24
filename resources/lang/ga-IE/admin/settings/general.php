@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'Freastalaí LDAP',
-    'ldap_server_help'          => 'Ba chóir go dtosódh sé seo le ldap: // (le haghaidh neamhchriptithe nó TLS) nó ldaps: // (do SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Bailíochtú deimhnithe SSL LDAP',
     'ldap_server_cert_ignore'	=> 'Ceadaigh Teastas SSL neamhbhailí',
     'ldap_server_cert_help'		=> 'Roghnaigh an bosca seo má tá tú ag úsáid deimhnithe SSL féinmhínithe agus gur mhaith leat glacadh le deimhniú SSL neamhbhailí.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'roghnach',
     'per_page'                  => 'Torthaí ar an Leathanach',
     'php'                       => 'Leagan PHP',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'هذا الحقل غير موجود.',
         'already_added'   => 'تم إضافة الحقل مسبقا',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'لم يتم إنشاء الحقل، الرجاء المحاولة مرة اخرى.',
