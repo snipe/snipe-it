@@ -91,6 +91,11 @@ class CheckoutableListener
             return;
         }
 
+        if ($this->shouldSendCCEmail()) {
+            Notification::route('mail', Setting::getSettings()->admin_cc_email)
+                ->notify($this->getCheckinNotification($event));
+        }
+
         /**
          * Send the appropriate notification
          */
