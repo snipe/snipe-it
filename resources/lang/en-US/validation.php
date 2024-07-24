@@ -72,6 +72,7 @@ return [
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
+    'percent'              => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
     'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'The :attribute format is invalid.',
     'required'             => 'The :attribute field is required.',

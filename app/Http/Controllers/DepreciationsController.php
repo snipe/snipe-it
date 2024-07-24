@@ -69,7 +69,7 @@ class DepreciationsController extends Controller
                 'numeric',
                 function ($attribute, $value, $fail) use ($request) {
                     if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
-                        $fail('The depreciation minimum must be between 0 and 100 when depreciation type is percentage.');
+                        $fail(trans('validation.percent'));
                     }
                 },
             ],
@@ -137,7 +137,7 @@ class DepreciationsController extends Controller
                 'numeric',
                 function ($attribute, $value, $fail) use ($request) {
                     if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
-                        $fail('The depreciation minimum must be between 0 and 100 when depreciation type is percentage.');
+                        $fail(trans('validation.percent'));
                     }
                 },
             ],
