@@ -32,6 +32,6 @@ class CloneAssetTest extends TestCase
             ->assertOk()
             ->assertSee([
                 'Asset to clone'
-            ], false);;
+            ], false);
     }
 }
