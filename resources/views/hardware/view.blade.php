@@ -36,18 +36,7 @@
                 </div>
             </div>
         @endif
-
-        @if ($asset->deleted_at!='')
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
-                    <strong>{{ trans('general.notification_warning') }} </strong>
-                    {{ trans('general.asset_deleted_warning') }}
-                </div>
-            </div>
-        @endif
-
-
+            
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs hidden-print">
