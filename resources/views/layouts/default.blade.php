@@ -1136,8 +1136,5 @@ dir="{{ Helper::determineLanguageDirection() }}">
             </script>
         @endif
 
-        @include('partials.bpay')
-
-
         </body>
 </html>
