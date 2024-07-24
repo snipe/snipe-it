@@ -36,7 +36,7 @@
                 </div>
             </div>
         @endif
-            
+
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs hidden-print">
@@ -197,32 +197,31 @@
                                     @endif
                                 @endif
 
-
-                                @can('update', $asset)
-                                    @if ($asset->deleted_at=='')
+                                @if ($asset->deleted_at=='')
+                                    @can('update', $asset)
                                         <div class="col-md-12" style="padding-top: 5px;">
                                             <a href="{{ route('hardware.edit', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
                                                 {{ trans('admin/hardware/general.edit') }}
                                             </a>
                                         </div>
-                                    @endif
-                                @endcan
+                                    @endcan
+
+                                    @can('audit', \App\Models\Asset::class)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                        <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
+                                            <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
+                                             {{ trans('general.audit') }}
+                                        </a>
+                                        </span>
+                                        </div>
+                                    @endcan
+                                @endif
 
                                 @can('create', $asset)
                                     <div class="col-md-12" style="padding-top: 5px;">
                                         <a href="{{ route('clone/hardware', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
                                             {{ trans('admin/hardware/general.clone') }}
                                         </a>
-                                    </div>
-                                @endcan
-
-                                @can('audit', \App\Models\Asset::class)
-                                    <div class="col-md-12" style="padding-top: 5px;">
-                                            <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
-                                                <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
-                                                 {{ trans('general.audit') }}
-                                            </a>
-                                            </span>
                                     </div>
                                 @endcan
 
