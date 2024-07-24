@@ -916,20 +916,20 @@ class Helper
             if ($rule_name == $field) {
                 if (is_array($rule)) {
                     if (in_array('required', $rule)) {
-                        $required = true;
+                       return true;
                     } else {
-                        $required = false;
+                        return false;
                     }
                 } else {
                     if (strpos($rule, 'required') === false) {
-                            $required = false;
+                            return false;
                         } else {
-                            $required = true;
+                            return true;
                         }
                     }
             }
         }
-        return $required;
+        return false;
     }
 
     /**
