@@ -16,6 +16,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
@@ -229,9 +230,9 @@ class BulkUsersController extends Controller
 
 
         $this->logItemCheckinAndDelete($assets, Asset::class);
-        $this->logItemCheckinAndDelete($accessories, Accessory::class);
+        $this->logAccessoriesCheckin($accessories);
         $this->logItemCheckinAndDelete($licenses, License::class);
-        $this->logItemCheckinAndDelete($consumables, Consumable::class);
+        $this->logConsumablesCheckin($consumables);
 
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
@@ -279,11 +280,39 @@ class BulkUsersController extends Controller
             if ($itemType == License::class){
                 $item_id = $item->license_id;
             }
-            
+
             $logAction->item_id = $item_id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
             $logAction->item_type = $itemType;
             $logAction->target_id = $item->assigned_to;
+            $logAction->target_type = User::class;
+            $logAction->user_id = Auth::id();
+            $logAction->note = 'Bulk checkin items';
+            $logAction->logaction('checkin from');
+        }
+    }
+
+    private function logAccessoriesCheckin(Collection $accessories): void
+    {
+        foreach ($accessories as $accessory) {
+            $logAction = new Actionlog();
+            $logAction->item_id = $accessory->accessory_id;
+            $logAction->item_type = Accessory::class;
+            $logAction->target_id = $accessory->assigned_to;
+            $logAction->target_type = User::class;
+            $logAction->user_id = Auth::id();
+            $logAction->note = 'Bulk checkin items';
+            $logAction->logaction('checkin from');
+        }
+    }
+
+    private function logConsumablesCheckin(Collection $consumables): void
+    {
+        foreach ($consumables as $consumable) {
+            $logAction = new Actionlog();
+            $logAction->item_id = $consumable->consumable_id;
+            $logAction->item_type = Consumable::class;
+            $logAction->target_id = $consumable->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
             $logAction->note = 'Bulk checkin items';
