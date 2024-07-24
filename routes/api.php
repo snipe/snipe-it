@@ -712,7 +712,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             Route::get('{location}/assets',
             [
                 Api\LocationsController::class, 
-                'getDataViewAssets'
+                'assets'
             ]
             )->name('api.locations.viewassets');
     
