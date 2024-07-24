@@ -35,7 +35,9 @@ class CheckoutableListener
      */
     public function onCheckedOut($event)
     {
-        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){
+        Log::debug('onCheckedOut in the Checkoutable listener fired');
+
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){ //this is currently false in test
             return;
         }
 
@@ -256,6 +258,12 @@ class CheckoutableListener
     private function shouldNotSendAnyNotifications($checkoutable): bool
     {
         return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+        //checkoutabale is a HUGE json array
+        //$this->>skipNotificationsFor = App/Model/Component | from the top of this Listener
+        //private array $skipNotificationsFor = [
+        //        Component::class,
+        //    ];
+
     }
 
     private function shouldSendWebhookNotification(): bool
