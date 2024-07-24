@@ -914,13 +914,22 @@ class Helper
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
-                if (strpos($rule_name, 'required') === false) {
-                    return false;
+                if (is_array($rule)) {
+                    if (in_array('required', $rule)) {
+                        $required = true;
+                    } else {
+                        $required = false;
+                    }
                 } else {
-                    return true;
-                }
+                    if (strpos($rule, 'required') === false) {
+                            $required = false;
+                        } else {
+                            $required = true;
+                        }
+                    }
             }
         }
+        return $required;
     }
 
     /**
