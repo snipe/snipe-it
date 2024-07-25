@@ -135,7 +135,7 @@
             <!-- byod checkbox -->
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
-                    <label for="byod" class="form-control">
+                    <label class="form-control">
                         <input type="checkbox" value="1" name="byod" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
                         {{ trans('general.byod') }}
 
