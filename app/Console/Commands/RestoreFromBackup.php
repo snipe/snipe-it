@@ -483,6 +483,9 @@ class RestoreFromBackup extends Command
             $ugly_file_name = $za->statIndex($file_details['index'])['name'];
             $fp = $za->getStream($ugly_file_name);
             //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
+            if (!is_dir($file_details['dest'])) {
+                mkdir($file_details['dest'], 0755, true); //0755 is what Laravel uses, so we do that
+            }
             $migrated_file = fopen($file_details['dest'].'/'.basename($pretty_file_name), 'w');
             while (($buffer = fgets($fp, SQLStreamer::$buffer_size)) !== false) {
                 fwrite($migrated_file, $buffer);
