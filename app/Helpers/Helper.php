@@ -1494,7 +1494,7 @@ class Helper
         if ($redirect_option == 'index') {
             switch ($table) {
                 case "Assets":
-                    return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('hardware.index');
             }
         }
 
@@ -1502,7 +1502,7 @@ class Helper
         if ($redirect_option == 'item') {
             switch ($table) {
                 case "Assets":
-                    return redirect()->route('hardware.show', $id ? $id : $asset_id)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('hardware.show', $id ?? $asset_id);
             }
         }
 
@@ -1510,11 +1510,12 @@ class Helper
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+                    \Log::error('We think the checkout type is user?');
+                    return route('users.show', $request->assigned_user);
                 case 'location':
-                    return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('locations.show', $request->assigned_location);
                 case 'asset':
-                    return redirect()->route('hardware.show', $request->assigned_asset)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('hardware.show', $request->assigned_asset);
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
