@@ -1510,7 +1510,6 @@ class Helper
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    \Log::error('We think the checkout type is user?');
                     return route('users.show', $request->assigned_user);
                 case 'location':
                     return route('locations.show', $request->assigned_location);
