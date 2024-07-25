@@ -207,8 +207,10 @@ class AssetsController extends Controller
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
+
         if ($success) {
-            return redirect()->route('hardware.index')
+
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
                
       
@@ -292,7 +294,6 @@ class AssetsController extends Controller
      */
     public function update(ImageUploadRequest $request, $assetId = null) : RedirectResponse
     {
-
 
         // Check if the asset exists
         if (! $asset = Asset::find($assetId)) {
@@ -395,7 +396,8 @@ class AssetsController extends Controller
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         if ($asset->save()) {
-            return Helper::getRedirectOption($request, $assetId, 'Assets');
+            return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
+                ->with('success', trans('admin/hardware/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
