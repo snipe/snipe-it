@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+const fs = require("node:fs");
 
 // This generates a file called app.css, which we use
 // later on to build all.css
@@ -68,67 +69,15 @@ mix
     "./public/js/build/app.js" //because of compiling - this does not work very well :(
   )
 
+var skins = fs.readdirSync("resources/assets/less/skins");
+
 // Convert the skins to CSS
-mix.less(
-  "./resources/assets/less/skins/skin-blue.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-red.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-contrast.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-green.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-green-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-black.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-black-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-red-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-purple.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-purple-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-yellow.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-yellow-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-blue-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-orange-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-orange.less",
-  "css/dist/skins",
-);
+for (var i in skins) {
+    mix.less(
+        "resources/assets/less/skins/" + skins[i],
+        "css/dist/skins"
+    )
+}
 
 /**
  * Combine bootstrap table css
@@ -163,7 +112,7 @@ mix.combine(
     "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
-    "./resources/assets/js/signature_pad.js",
+      "./resources/assets/js/signature_pad.js", //dupe?
     "./node_modules/jquery-validation/dist/jquery.validate.js",
     "./node_modules/list.js/dist/list.js",
     "./node_modules/clipboard/dist/clipboard.js",
