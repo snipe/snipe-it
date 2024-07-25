@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use League\Csv\Reader;
@@ -204,6 +205,8 @@ class AssetsController extends Controller
             }
         }
 
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
         if ($success) {
             return redirect()->route('hardware.index')
                 ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
@@ -289,6 +292,8 @@ class AssetsController extends Controller
      */
     public function update(ImageUploadRequest $request, $assetId = null) : RedirectResponse
     {
+
+
         // Check if the asset exists
         if (! $asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
@@ -387,10 +392,10 @@ class AssetsController extends Controller
             }
         }
 
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         if ($asset->save()) {
-            return redirect()->route('hardware.show', $assetId)
-                ->with('success', trans('admin/hardware/message.update.success'));
+            return Helper::getRedirectOption($request, $assetId, 'Assets');
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());

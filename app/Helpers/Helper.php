@@ -1490,22 +1490,24 @@ class Helper
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
 
-        //return to index
-        if ($redirect_option == '0') {
+        // return to index
+        if ($redirect_option == 'index') {
             switch ($table) {
                 case "Assets":
                     return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
-        //return to thing being assigned
-        if ($redirect_option == '1') {
+
+        // return to thing being assigned
+        if ($redirect_option == 'item') {
             switch ($table) {
                 case "Assets":
                     return redirect()->route('hardware.show', $id ? $id : $asset_id)->with('success', trans('admin/hardware/message.checkout.success'));
             }
         }
-        //return to thing being assigned to
-        if ($redirect_option == '2') {
+
+        // return to assignment target
+        if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
                     return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
