@@ -35,7 +35,7 @@ class HelperTest extends TestCase
                 'request' =>(object) ['assigned_user' => 22],
                 'id' => 1,
                 'checkout_to_type' => 'user',
-                'redirect_option' => 2,
+                'redirect_option' => 'target',
                 'table' => 'Assets',
                 'route' => route('users.show', 22),
             ],
@@ -43,7 +43,7 @@ class HelperTest extends TestCase
                 'request' =>(object) ['assigned_location' => 10],
                 'id' => 2,
                 'checkout_to_type' => 'location',
-                'redirect_option' => 2,
+                'redirect_option' => 'target',
                 'table' => 'Locations',
                 'route' => route('locations.show', 10),
             ],
@@ -51,7 +51,7 @@ class HelperTest extends TestCase
                 'request' =>(object) ['assigned_asset' => 101],
                 'id' => 3,
                 'checkout_to_type' => 'asset',
-                'redirect_option' => 2,
+                'redirect_option' => 'target',
                 'table' => 'Assets',
                 'route' => route('hardware.show', 101),
             ],
@@ -59,7 +59,7 @@ class HelperTest extends TestCase
                 'request' =>(object) ['assigned_asset' => null],
                 'id' => 999,
                 'checkout_to_type' => null,
-                'redirect_option' => 1,
+                'redirect_option' => 'item',
                 'table' => 'Assets',
                 'route' => route('hardware.show', 999),
             ],
@@ -67,7 +67,7 @@ class HelperTest extends TestCase
                 'request' =>(object) ['assigned_asset' => null],
                 'id' => null,
                 'checkout_to_type' => null,
-                'redirect_option' => 0,
+                'redirect_option' => 'index',
                 'table' => 'Assets',
                 'route' => route('hardware.index'),
             ],
@@ -78,7 +78,7 @@ class HelperTest extends TestCase
             Session::put('redirect_option', $data['redirect_option']);
             Session::put('checkout_to_type', $data['checkout_to_type']);
 
-            $redirect = Helper::getRedirectOption($data['request'],$data['id'], $data['table']);
+            $redirect = redirect()->to(Helper::getRedirectOption($data['request'],$data['id'], $data['table']));
 
             $this->assertInstanceOf(RedirectResponse::class, $redirect);
             $this->assertEquals($data['route'], $redirect->getTargetUrl(), $scenario.'failed.');
