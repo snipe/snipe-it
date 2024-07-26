@@ -1484,7 +1484,7 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $id, $table, $asset_id = null)
+    static public function getRedirectOption($request, $id, $table, $item_id = null)
     {
 
         $redirect_option = Session::get('redirect_option');
@@ -1495,6 +1495,16 @@ class Helper
             switch ($table) {
                 case "Assets":
                     return route('hardware.index');
+                case "Users":
+                    return route('users.index');
+                case "Licenses":
+                    return route('licenses.index');
+                case "Accessories":
+                    return route('accessories.index');
+                case "Components":
+                    return route('components.index');
+                case "Consumables":
+                    return route('consumables.index');
             }
         }
 
@@ -1502,7 +1512,17 @@ class Helper
         if ($redirect_option == 'item') {
             switch ($table) {
                 case "Assets":
-                    return route('hardware.show', $id ?? $asset_id);
+                    return route('hardware.show', $id ?? $item_id);
+                case "Users":
+                    return route('users.show', $id ?? $item_id);
+                case "Licenses":
+                    return route('licenses.show', $id ?? $item_id);
+                case "Accessories":
+                    return route('accessories.show', $id ?? $item_id);
+                case "Components":
+                    return route('components.show', $id ?? $item_id);
+                case "Consumables":
+                    return route('consumables.show', $id ?? $item_id);
             }
         }
 

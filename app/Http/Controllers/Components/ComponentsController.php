@@ -86,8 +86,10 @@ class ComponentsController extends Controller
 
         $component = $request->handleImages($component);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($component->save()) {
-            return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success', trans('admin/components/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
@@ -160,8 +162,10 @@ class ComponentsController extends Controller
 
         $component = $request->handleImages($component);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($component->save()) {
-            return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success', trans('admin/components/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
