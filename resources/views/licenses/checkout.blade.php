@@ -105,10 +105,15 @@
                     </div>
                 @endif
 
-                <div class="box-footer">
-                    <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
-                    <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-                </div>
+                <x-redirect_submit_options
+                        index_route="licenses.index"
+                        :button_label="trans('general.checkout')"
+                        :options="[
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.licenses')]),
+                                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.license')]),
+                                'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
+                               ]"
+                />
             </div> <!-- /.box-->
         </form>
     </div> <!-- /.col-md-7-->
