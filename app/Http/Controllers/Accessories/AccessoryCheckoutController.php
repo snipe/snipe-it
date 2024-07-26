@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Accessories;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccessoryCheckoutRequest;
 use App\Models\Accessory;
@@ -78,8 +79,15 @@ class AccessoryCheckoutController extends Controller
         }
         event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
 
+        // Set this as user since we only allow checkout to user for this item type
+        $request->request->add(['checkout_to_type' => 'user']);
+        $request->request->add(['assigned_user' => $user->id]);
+
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
+
         // Redirect to the new accessory page
-        return redirect()->route('accessories.index')
+        return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))
             ->with('success', trans('admin/accessories/message.checkout.success'));
     }
 }

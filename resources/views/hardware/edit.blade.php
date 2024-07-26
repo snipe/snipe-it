@@ -6,6 +6,11 @@
     'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
     'formAction' => ($item->id) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
+    'index_route' => 'hardware.index',
+    'options' => [
+                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
+                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
+               ]
 ])
 
 
@@ -128,8 +133,6 @@
                 </div>
 
             </div>
-
-
 
 
             <!-- byod checkbox -->

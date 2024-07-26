@@ -66,7 +66,11 @@
                     <!-- CSRF Token -->
                     {{ csrf_field() }}
                     @yield('inputFields')
-                    @include('partials.forms.edit.submit')
+                        <x-redirect_submit_options
+                                :index_route="$index_route ?? null"
+                                :button_label="trans('general.save')"
+                                :options="$options ?? []"
+                        />
                 </div>
 
             </div> <!-- ./box-body -->

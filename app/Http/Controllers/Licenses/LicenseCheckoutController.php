@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Accessory;
@@ -81,9 +82,26 @@ class LicenseCheckoutController extends Controller
         
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-        if ($this->$checkoutMethod($licenseSeat)) {
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
+
+        if ($request->filled('asset_id')) {
+
+            $checkoutTarget = $this->checkoutToAsset($licenseSeat);
+            $request->request->add(['assigned_asset' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'asset']);
+
+        } elseif ($request->filled('assigned_to')) {
+            $checkoutTarget = $this->checkoutToUser($licenseSeat);
+            $request->request->add(['assigned_user' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'user']);
         }
+
+
+
+        if ($checkoutTarget) {
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
+        }
+
+
 
         return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
     }
@@ -120,8 +138,7 @@ class LicenseCheckoutController extends Controller
         }
         if ($licenseSeat->save()) {
             event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
-
-            return true;
+            return $target;
         }
 
         return false;
@@ -137,8 +154,7 @@ class LicenseCheckoutController extends Controller
 
         if ($licenseSeat->save()) {
             event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
-
-            return true;
+            return $target;
         }
 
         return false;
