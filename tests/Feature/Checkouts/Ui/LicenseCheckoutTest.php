@@ -57,7 +57,7 @@ class LicenseCheckoutTest extends TestCase
         ]);
     }
 
-    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
     {
         $license = License::factory()->create();
 
