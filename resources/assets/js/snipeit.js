@@ -27,8 +27,7 @@ require('ekko-lightbox') //TODO - this doesn't seem jquery-ish, we might need to
                          // it *does* require Bootstrap, which requires jquery, so maybe that's OK
                          // it seems to work...
 require('./extensions/pGenerator.jquery'); //WEIRD, but works
-require('chart.js') //weird, I _should_ have to assign this to window.Chart - but it seems to work? Is it even being used?
-                    // or does AdminLTE's inclusion of it make that not necessary?
+require('chart.js') // Weirdly, this seems to "just work." Without this line, the dashboard blows up
 window.SignaturePad = require('./signature_pad'); //ALSO WEIRD - but works
 require('jquery-validation')
 window.List = require('list.js')
