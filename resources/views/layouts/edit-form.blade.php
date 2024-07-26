@@ -67,7 +67,7 @@
                     {{ csrf_field() }}
                     @yield('inputFields')
                         <x-redirect_submit_options
-                                route="hardware.index"
+                                :index_route="$index_route ?? null"
                                 :button_label="trans('general.save')"
                                 :options="$options ?? []"
                         />

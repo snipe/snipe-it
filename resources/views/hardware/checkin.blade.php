@@ -128,7 +128,7 @@
                 </div> <!--/.box-body-->
 
                 <x-redirect_submit_options
-                        route="hardware.index"
+                        index_route="hardware.index"
                         :button_label="trans('general.checkout')"
                         :disabled_select="!$asset->model"
                         :options="[

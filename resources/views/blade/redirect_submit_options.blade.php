@@ -1,6 +1,6 @@
 <!-- begin redirect submit options -->
 @props([
-    'route' => 'hardware.index',
+    'index_route',
     'button_label',
     'disabled_select' => false,
     'options' => [],
@@ -10,7 +10,7 @@
     <div class="row">
 
         <div class="col-md-3">
-            <a class="btn btn-link" href="{{ route($route) }}">{{ trans('button.cancel') }}</a>
+            <a class="btn btn-link" href="{{ $index_route ? route($index_route) : url()->previous() }}">{{ trans('button.cancel') }}</a>
         </div>
 
         <div class="col-md-9 text-right">
