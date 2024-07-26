@@ -487,7 +487,7 @@
 @push('js')
 
 
-
+        <script src="{{ url(mix('js/dist/Chart.min.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
     // ---------------------------
     // - ASSET STATUS CHART -
