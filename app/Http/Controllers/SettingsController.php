@@ -1255,7 +1255,7 @@ class SettingsController extends Controller
                 DB::table('users')->update(['remember_token' => null]);
                 Auth::logout();
 
-                return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                return redirect()->route('login')->with('success', trans('admin/settings/message.restore.success'));
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
