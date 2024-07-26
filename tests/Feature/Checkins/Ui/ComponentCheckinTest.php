@@ -17,7 +17,8 @@ class ComponentCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testAssetCheckinPagePostIsRedirectedIfModelIsInvalid()
+
+    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex()
     {
         $component = Component::factory()->checkedOutToAsset()->create();
 
@@ -31,7 +32,7 @@ class ComponentCheckinTest extends TestCase
             ->assertRedirect(route('components.index'));
     }
 
-    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectioonGiven()
+    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsItem()
     {
         $component = Component::factory()->checkedOutToAsset()->create();
 
@@ -42,6 +43,7 @@ class ComponentCheckinTest extends TestCase
                 'checkin_qty' => 1,
             ])
             ->assertStatus(302)
+            ->assertSessionHasNoErrors()
             ->assertRedirect(route('components.show', ['component' => $component->id]));
     }
 

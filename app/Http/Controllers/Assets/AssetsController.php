@@ -336,7 +336,7 @@ class AssetsController extends Controller
 
         $status = Statuslabel::find($asset->status_id);
 
-        if($status->archived){
+        if ($status && $status->archived) {
             $asset->assigned_to = null;
         }
 
@@ -355,14 +355,26 @@ class AssetsController extends Controller
         }
 
         // Update the asset data
-        $asset_tag = $request->input('asset_tags');
+
         $serial = $request->input('serials');
+        $asset->serial = $request->input('serials');
+
+        if (is_array($request->input('serials'))) {
+            $asset->serial = $serial[1];
+        }
+
         $asset->name = $request->input('name');
-        $asset->serial = $serial[1];
         $asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $asset->model_id = $request->input('model_id');
         $asset->order_number = $request->input('order_number');
-        $asset->asset_tag = $asset_tag[1];
+
+        $asset_tags = $request->input('asset_tags');
+        $asset->asset_tag = $request->input('asset_tags');
+
+        if (is_array($request->input('asset_tags'))) {
+            $asset->asset_tag = $asset_tags[1];
+        }
+
         $asset->notes = $request->input('notes');
 
         $asset = $request->handleImages($asset);
@@ -374,6 +386,7 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
+
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
                         if (is_array($request->input($field->db_column))) {
