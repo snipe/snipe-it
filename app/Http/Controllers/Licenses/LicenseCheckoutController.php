@@ -83,18 +83,22 @@ class LicenseCheckoutController extends Controller
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
 
-        if (request('checkout_to_type')=='asset') {
+        if ($request->filled('asset_id')) {
+
             $checkoutTarget = $this->checkoutToAsset($licenseSeat);
             $request->request->add(['assigned_asset' => $checkoutTarget->id]);
-        } else {
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'asset']);
+
+        } elseif ($request->filled('assigned_to')) {
             $checkoutTarget = $this->checkoutToUser($licenseSeat);
             $request->request->add(['assigned_user' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'user']);
         }
 
-        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
 
         if ($checkoutTarget) {
-            return redirect()->to(Helper::getRedirectOption($request, $checkoutTarget->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
 
