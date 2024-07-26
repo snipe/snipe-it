@@ -19,9 +19,9 @@ require('bootstrap-datepicker')
 require('ekko-lightbox') //TODO - this doesn't seem jquery-ish, we might need to do somethign weird here
 require('./extensions/pGenerator.jquery'); //WEIRD
 require('chart.js')
-require('./signature_pad'); //ALSO WEIRD
+window.SignaturePad = require('./signature_pad'); //ALSO WEIRD
 require('jquery-validation')
-require('list.js')
+window.List = require('list.js') //HERE - busted :(
 window.ClipboardJS = require('clipboard') //maybe? worth a shot
 
 /**
