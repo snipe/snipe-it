@@ -17,5 +17,33 @@ class ComponentCheckinTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testAssetCheckinPagePostIsRedirectedIfModelIsInvalid()
+    {
+        $component = Component::factory()->checkedOutToAsset()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('components.index'))
+            ->post(route('components.checkin.store', $component), [
+                'redirect_option' => 'index',
+                'checkin_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('components.index'));
+    }
+
+    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectioonGiven()
+    {
+        $component = Component::factory()->checkedOutToAsset()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('components.index'))
+            ->post(route('components.checkin.store', $component), [
+                'redirect_option' => 'item',
+                'checkin_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('components.show', ['component' => $component->id]));
+    }
+
 
 }
