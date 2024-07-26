@@ -83,6 +83,7 @@
                         </div>
 
                         <!-- Custom fields -->
+                        <!-- Currently doesn't work, but this is here as a WIP see custom fields on checkout/checkin PR-->
                         @can('assets.edit')
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
