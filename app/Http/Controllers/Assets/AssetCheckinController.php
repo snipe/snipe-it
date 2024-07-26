@@ -11,7 +11,6 @@ use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
@@ -83,7 +82,6 @@ class AssetCheckinController extends Controller
         }
 
         $asset->expected_checkin = null;
-        //$asset->last_checkout = null;
         $asset->last_checkin = now();
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
@@ -128,12 +126,12 @@ class AssetCheckinController extends Controller
             $acceptance->delete();
         });
 
-        Session::put('redirect_option', $request->get('redirect_option'));
-        // Was the asset updated?
+        session()->put('redirect_option', $request->get('redirect_option'));
+
         if ($asset->save()) {
 
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
-            return Helper::getRedirectOption($asset, $assetId, 'Assets');
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());

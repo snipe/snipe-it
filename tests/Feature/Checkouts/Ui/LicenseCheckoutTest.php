@@ -56,4 +56,62 @@ class LicenseCheckoutTest extends TestCase
             'note' => 'oh hi there',
         ]);
     }
+
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    {
+        $license = License::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('licenses.checkout', ['licenseId' => $license->id]))
+            ->post(route('licenses.checkout', ['licenseId' => $license->id]), [
+                'assigned_to' =>  User::factory()->create()->id,
+                'redirect_option' => 'index',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('licenses.index'));
+    }
+
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    {
+        $license = License::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('licenses.checkout', ['licenseId' => $license->id]))
+            ->post(route('licenses.checkout' , ['licenseId' => $license->id]), [
+                'assigned_to' =>  User::factory()->create()->id,
+                'redirect_option' => 'item',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('licenses.show', ['license' => $license->id]));
+    }
+
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsUserTarget()
+    {
+        $user = User::factory()->create();
+        $license = License::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('licenses.checkout', ['licenseId' => $license->id]))
+            ->post(route('licenses.checkout' , $license), [
+                'assigned_to' =>  $user->id,
+                'redirect_option' => 'target',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('users.show', ['user' => $user->id]));
+    }
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsAssetTarget()
+    {
+        $asset = Asset::factory()->create();
+        $license = License::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('licenses.checkout', ['licenseId' => $license->id]))
+            ->post(route('licenses.checkout' , $license), [
+                'asset_id' =>  $asset->id,
+                'redirect_option' => 'target',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+    }
 }

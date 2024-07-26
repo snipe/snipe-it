@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+const fs = require("node:fs");
 
 // This generates a file called app.css, which we use
 // later on to build all.css
@@ -68,67 +69,30 @@ mix
       "./public/js/dist/all.js"
   ).sourceMaps().version();
 
+var skins = fs.readdirSync("resources/assets/less/skins");
+
 // Convert the skins to CSS
-mix.less(
-  "./resources/assets/less/skins/skin-blue.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-red.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-contrast.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-green.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-green-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-black.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-black-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-red-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-purple.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-purple-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-yellow.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-yellow-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-blue-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-orange-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-orange.less",
-  "css/dist/skins",
-);
+for (var i in skins) {
+    mix.less(
+        "resources/assets/less/skins/" + skins[i],
+        "css/dist/skins"
+    )
+}
+
+var css_skins = fs.readdirSync("public/css/dist/skins");
+for (var i in css_skins) {
+    if (css_skins[i].endsWith(".min.css")) {
+        //don't minify already minified skinns
+        continue;
+    }
+    if (css_skins[i].endsWith(".css")) {
+        // only minify files ending with '.css'
+        mix.minify("public/css/dist/skins/" + css_skins[i]).version();
+    }
+    //TODO - if we only ever use the minified versions, this could be simplified down to one line (above)
+    // but it stays like this so we have the minified and non-minified versions of the skins
+    // right now the code seems to use the un-minified skins
+}
 
 /**
  * Combine bootstrap table css
@@ -167,26 +131,3 @@ mix
         ],
         'public/js/dist/bootstrap-table.js'
  ).version();
-
-/**
- * Copy, minify and version skins
- */
-mix
-  .minify([
-    "./public/css/dist/skins/skin-green.css",
-    "./public/css/dist/skins/skin-green-dark.css",
-    "./public/css/dist/skins/skin-black.css",
-    "./public/css/dist/skins/skin-black-dark.css",
-    "./public/css/dist/skins/skin-blue.css",
-    "./public/css/dist/skins/skin-blue-dark.css",
-    "./public/css/dist/skins/skin-yellow.css",
-    "./public/css/dist/skins/skin-yellow-dark.css",
-    "./public/css/dist/skins/skin-red.css",
-    "./public/css/dist/skins/skin-red-dark.css",
-    "./public/css/dist/skins/skin-purple.css",
-    "./public/css/dist/skins/skin-purple-dark.css",
-    "./public/css/dist/skins/skin-orange.css",
-    "./public/css/dist/skins/skin-orange-dark.css",
-    "./public/css/dist/skins/skin-contrast.css",
-  ])
-  .version();

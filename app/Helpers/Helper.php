@@ -1484,35 +1484,57 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $id, $table, $asset_id = null)
+    static public function getRedirectOption($request, $id, $table, $item_id = null)
     {
 
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
 
-        //return to index
-        if ($redirect_option == '0') {
+        // return to index
+        if ($redirect_option == 'index') {
             switch ($table) {
                 case "Assets":
-                    return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('hardware.index');
+                case "Users":
+                    return route('users.index');
+                case "Licenses":
+                    return route('licenses.index');
+                case "Accessories":
+                    return route('accessories.index');
+                case "Components":
+                    return route('components.index');
+                case "Consumables":
+                    return route('consumables.index');
             }
         }
-        //return to thing being assigned
-        if ($redirect_option == '1') {
+
+        // return to thing being assigned
+        if ($redirect_option == 'item') {
             switch ($table) {
                 case "Assets":
-                    return redirect()->route('hardware.show', $id ? $id : $asset_id)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('hardware.show', $id ?? $item_id);
+                case "Users":
+                    return route('users.show', $id ?? $item_id);
+                case "Licenses":
+                    return route('licenses.show', $id ?? $item_id);
+                case "Accessories":
+                    return route('accessories.show', $id ?? $item_id);
+                case "Components":
+                    return route('components.show', $id ?? $item_id);
+                case "Consumables":
+                    return route('consumables.show', $id ?? $item_id);
             }
         }
-        //return to thing being assigned to
-        if ($redirect_option == '2') {
+
+        // return to assignment target
+        if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('users.show', ['user' => $request->assigned_user]);
                 case 'location':
-                    return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('locations.show', ['location' => $request->assigned_location]);
                 case 'asset':
-                    return redirect()->route('hardware.show', $request->assigned_asset)->with('success', trans('admin/hardware/message.checkout.success'));
+                    return route('hardware.show', ['hardware' => $request->assigned_asset]);
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
