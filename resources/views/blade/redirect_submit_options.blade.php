@@ -17,7 +17,7 @@
             <div class="btn-group text-left">
 
                 @if (($options) && (count($options) > 0))
-                <select class="redirect-options form-control select2" data-minimum-results-for-search="Infinity" name="redirect_option" style="min-width: 200px"{{ ($disabled_select ? ' disabled' : '') }}>
+                <select class="redirect-options form-control select2" data-minimum-results-for-search="Infinity" name="redirect_option" style="min-width: 250px"{{ ($disabled_select ? ' disabled' : '') }}>
                     @foreach ($options as $key => $value)
                         <option value="{{ $key }}"{{ Session::get('redirect_option') == $key ? ' selected' : ''}}>
                             {{ $value }}
