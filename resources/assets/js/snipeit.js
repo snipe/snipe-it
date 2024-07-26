@@ -2,7 +2,14 @@ var jQuery = require('jquery');
 window.jQuery = jQuery
 window.$ = jQuery
 
-window._ = require('lodash');
+window._ = require('lodash'); //the only place I saw this used was vue.js, and we don't use that anymore
+
+/****************************************
+ Much of what you'll see below is just plain require()'ed, this is because
+ it is mostly jQuery stuff, which attaches itself to the $() function/object
+ So we don't have to assign it to anything, it will just automagically attach
+ itself
+ *****************************************/
 
 require('jquery-ui'); //should we export this to the window?
 jQuery.fn.uitooltip = jQuery.fn.tooltip;
@@ -16,13 +23,16 @@ require('jquery.iframe-transport'); //probably not needed anymore, if I'm honest
 require('blueimp-file-upload')
 require('bootstrap-colorpicker')
 require('bootstrap-datepicker')
-require('ekko-lightbox') //TODO - this doesn't seem jquery-ish, we might need to do somethign weird here
-require('./extensions/pGenerator.jquery'); //WEIRD
-require('chart.js')
-window.SignaturePad = require('./signature_pad'); //ALSO WEIRD
+require('ekko-lightbox') //TODO - this doesn't seem jquery-ish, we might need to do something weird here
+                         // it *does* require Bootstrap, which requires jquery, so maybe that's OK
+                         // it seems to work...
+require('./extensions/pGenerator.jquery'); //WEIRD, but works
+require('chart.js') //weird, I _should_ have to assign this to window.Chart - but it seems to work? Is it even being used?
+                    // or does AdminLTE's inclusion of it make that not necessary?
+window.SignaturePad = require('./signature_pad'); //ALSO WEIRD - but works
 require('jquery-validation')
-window.List = require('list.js') //HERE - busted :(
-window.ClipboardJS = require('clipboard') //maybe? worth a shot
+window.List = require('list.js')
+window.ClipboardJS = require('clipboard')
 
 /**
  * Module containing core application logic.
