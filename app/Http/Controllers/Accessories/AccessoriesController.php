@@ -79,10 +79,11 @@ class AccessoriesController extends Controller
 
         $accessory = $request->handleImages($accessory);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
         // Was the accessory created?
         if ($accessory->save()) {
             // Redirect to the new accessory  page
-            return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.create.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))->with('success', trans('admin/accessories/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
@@ -176,9 +177,10 @@ class AccessoriesController extends Controller
 
             $accessory = $request->handleImages($accessory);
 
-            // Was the accessory updated?
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
+
             if ($accessory->save()) {
-                return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
+                return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))->with('success', trans('admin/accessories/message.update.success'));
             }
         } else {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));

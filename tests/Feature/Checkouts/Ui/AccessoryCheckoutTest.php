@@ -140,4 +140,51 @@ class AccessoryCheckoutTest extends TestCase
             'Log entry either does not exist or there are more than expected'
         );
     }
+
+    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    {
+        $accessory = Accessory::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('accessories.index'))
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_to' =>  User::factory()->create()->id,
+                'redirect_option' => 'index',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('accessories.index'));
+    }
+
+    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    {
+        $accessory = Accessory::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('accessories.index'))
+            ->post(route('accessories.checkout.store' , $accessory), [
+                'assigned_to' =>  User::factory()->create()->id,
+                'redirect_option' => 'item',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('accessories.show', ['accessory' => $accessory->id]));
+    }
+
+    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget()
+    {
+        $user = User::factory()->create();
+        $accessory = Accessory::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('accessories.index'))
+            ->post(route('accessories.checkout.store' , $accessory), [
+                'assigned_to' =>  $user->id,
+                'redirect_option' => 'target',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('users.show', ['user' => $user]));
+    }
 }

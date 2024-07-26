@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Accessories;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\User;
@@ -63,7 +64,9 @@ class AccessoryCheckinController extends Controller
 
             event(new CheckoutableCheckedIn($accessory, User::find($return_to), auth()->user(), $request->input('note'), $checkin_at));
 
-            return redirect()->route('accessories.show', $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
+
+            return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))->with('success', trans('admin/accessories/message.checkin.success'));
         }
         // Redirect to the accessory management page with error
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkin.error'));

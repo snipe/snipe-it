@@ -596,9 +596,14 @@
             </table>
           </div><!-- /.tab-pane -->
         </div><!-- /.tab-content -->
-        <div class="box-footer text-right">
-          <button type="submit" accesskey="s" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
-        </div>
+          <x-redirect_submit_options
+                  index_route="users.index"
+                  :button_label="trans('general.save')"
+                  :options="[
+                        'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'users']),
+                        'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
+                        ]"
+          />
       </div><!-- nav-tabs-custom -->
     </form>
   </div> <!--/col-md-8-->
