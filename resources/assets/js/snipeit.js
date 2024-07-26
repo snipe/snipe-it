@@ -1,10 +1,28 @@
+var jQuery = require('jquery');
+window.jQuery = jQuery
+window.$ = jQuery
 
+window._ = require('lodash');
 
-// var jQuery = require('jquery');
-// window.jQuery = jQuery
-// window.$ = jQuery
-
-require('./bootstrap');
+require('jquery-ui'); //should we export this to the window?
+jQuery.fn.uitooltip = jQuery.fn.tooltip;
+require('bootstrap-less');
+console.error("Jquery version is: " + jQuery().jquery)
+require('select2');
+require('admin-lte');
+require('tether');
+require('jquery-slimscroll');
+require('jquery.iframe-transport'); //probably not needed anymore, if I'm honest
+require('blueimp-file-upload')
+require('bootstrap-colorpicker')
+require('bootstrap-datepicker')
+require('ekko-lightbox') //TODO - this doesn't seem jquery-ish, we might need to do somethign weird here
+require('./extensions/pGenerator.jquery'); //WEIRD
+require('chart.js')
+require('./signature_pad'); //ALSO WEIRD
+require('jquery-validation')
+require('list.js')
+window.ClipboardJS = require('clipboard') //maybe? worth a shot
 
 /**
  * Module containing core application logic.

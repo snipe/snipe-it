@@ -62,11 +62,11 @@ mix
 mix
   .js(
     [
-      "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS - require()s bootstrap.js
+        "./resources/assets/js/snipeit.js",
       "./resources/assets/js/snipeit_modals.js",
     ],
-    "./public/js/build/app.js" //because of compiling - this does not work very well :(
-  )
+      "./public/js/dist/all.js"
+  ).sourceMaps().version();
 
 // Convert the skins to CSS
 mix.less(
@@ -145,33 +145,6 @@ mix
   .version();
 
 /**
- * Combine JS
- */
-mix.combine(
-  [
-    // lots of node_modules here - should this be subsumed by require()?
-    "./node_modules/jquery/dist/jquery.js",
-    "./node_modules/select2/dist/js/select2.full.min.js",
-    "./node_modules/admin-lte/dist/js/adminlte.min.js",
-    "./node_modules/tether/dist/js/tether.js",
-    "./node_modules/jquery-ui/dist/jquery-ui.js",
-    "./node_modules/jquery-slimscroll/jquery.slimscroll.js",
-    "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js",
-    "./node_modules/blueimp-file-upload/js/jquery.fileupload.js",
-    "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
-    "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
-    "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
-    "./resources/assets/js/extensions/pGenerator.jquery.js",
-    "./node_modules/chart.js/dist/Chart.js",
-    "./resources/assets/js/signature_pad.js",
-    "./node_modules/jquery-validation/dist/jquery.validate.js",
-    "./node_modules/list.js/dist/list.js",
-    "./node_modules/clipboard/dist/clipboard.js",
-  ],
-  "public/js/build/vendor.js" // this file seems OK!
-);
-
-/**
  * Combine bootstrap table js
  */
 mix
@@ -194,13 +167,6 @@ mix
         ],
         'public/js/dist/bootstrap-table.js'
  ).version();
-
-mix
-  .combine(
-    ["./public/js/build/vendor.js", "./public/js/build/app.js"],
-    "./public/js/dist/all.js"
-  )
-  .version();
 
 /**
  * Copy, minify and version skins
