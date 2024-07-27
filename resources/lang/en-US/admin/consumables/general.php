@@ -12,5 +12,6 @@ return array(
     'replenish'                         => 'Replenish Consumable Stock',
     'initial_qty'                       => 'Initial Quantity',
     'totalreplenish'                    => 'Replenish Quantity',
-    'replenish_note'                     => 'Replenish Note',
+    'replenish_note'                    => 'Replenish Note',
+    'note'                              => 'Note'
 );

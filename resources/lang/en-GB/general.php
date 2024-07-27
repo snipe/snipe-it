@@ -405,7 +405,6 @@ return [
     'accessory_name'       => 'Accessory Name:',
     'clone_item'            => 'Clone Item',
     'checkout_tooltip' => 'Check this item out',
-<<<<<<< HEAD
     'checkin_tooltip' => 'Check this item in so that it is available for re-issue, re-imaging, etc',
     'checkout_user_tooltip' => 'Check this item out to a user',
     'checkin_to_diff_location' => 'You can choose to check this asset in to a location other than this asset\'s default location of :default_location if one is set',
@@ -559,17 +558,16 @@ return [
     'expires' => 'Expires',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-
-=======
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
-<<<<<<< HEAD
->>>>>>> 64747d0fb (updates based on review)
-=======
->>>>>>> cb8e800e48e3172ec3cef459b7062980d282dfd8
     'replenish_history'     => 'Item Replenish History',
     'replenish'             => 'Replenish Stock',
     'checkout_history'      => 'Item Chekcout History',
     'documents'             => 'Documents',
-    'document_archive'      => 'Supporting Document'
+    'document_archive'      => 'Supporting Document',
+    'replenish' => 'Replenish Qty',
+    'replenish_history' => 'Replenish History',
+    'documents' => 'Documents',
+    'document_archive' => 'Reference Document'
+    
 ];

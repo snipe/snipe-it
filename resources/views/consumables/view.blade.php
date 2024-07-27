@@ -30,6 +30,17 @@
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.checkout_history') }}</span>
           </a>
         </li>
+        <li>
+          <a href="#replenishhistory" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.replenish_history') }}
+             {!! ($user->replenishconsumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->replenishconsumables->count().'</badge>' : '' !!}  
+            
+            </span>
+          </a>
+        </li>
 
 
 
@@ -407,7 +418,7 @@
                     data-sort-name="name"
                     id="consumablesCheckedoutTable"
                     class="table table-striped snipe-table"
-                    data-url="{{route('api.consumables.show.users', $consumable->id)}}"
+                    data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
                     data-export-options='{
                 "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -570,17 +581,7 @@
                 </tr>
                 </thead>
               </table>
-        <li>
-          <a href="#replenishhistory" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
-            </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.replenish_history') }}
-             {!! ($user->replenishconsumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->replenishconsumables->count().'</badge>' : '' !!}  
-            
-            </span>
-          </a>
-        </li>
+       
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="checkouthistory">
@@ -760,7 +761,7 @@
 
                 @can('checkout', \App\Models\Consumable::class)
                 <div class="col-md-12">
-                  <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                  <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                 </div>
                 @endcan
 

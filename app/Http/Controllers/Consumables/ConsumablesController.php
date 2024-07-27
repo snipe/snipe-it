@@ -200,33 +200,7 @@ class ConsumablesController extends Controller
     }
 
     
-    /**
-     * Returns a form view to edit a consumable stock.
-     *
-     * @author [A. Rahardianto] [<snipe@snipe.net>]     
-     * @param  int $consumableId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     * @see ConsumablesController::getEdit() method that stores the form data.
-     * @since [v6.0]
-     */
-    public function updatestock($consumableId = null)
-    {
-        if (is_null($consumable = Consumable::find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
-        }
-
-        $this->authorize($consumable);
-
-        $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
-
-        if ($consumable->save()) {
-            return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($consumable->getErrors());
-    }
-
+    
     /**
      * Delete a consumable.
      *
