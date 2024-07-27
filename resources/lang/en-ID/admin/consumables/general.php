@@ -8,9 +8,6 @@ return array(
     'remaining' 			            => 'Tersisa',
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
-<<<<<<< HEAD
     'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
-=======
     'replenish'                         => 'Tambah Stok Consumable'
->>>>>>> 64747d0fb (updates based on review)
 );

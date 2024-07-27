@@ -61,17 +61,12 @@
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-                <i class="fas fa-tint fa-2x"></i>
-            </span>
+            <i class="fas fa-tint fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
-<<<<<<< HEAD
-              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->consumables->count()).'</badge>' : '' !!}
-            </span>
-=======
             
             {!! (($user->consumables->count() > 0 ) || ($user->replenishconsumables->where('user_id',$user->id)->count() > 0 )) ? '<badge class="badge badge-secondary">'.collect([$user->consumables->count(), $user->replenishconsumables->where('user_id',$user->id)->count()])->sum() .'</badge>' : '' !!} 
           </span>
->>>>>>> a49fe30ff (fix view layout on consumable & user)
+
           </a>
         </li>
 

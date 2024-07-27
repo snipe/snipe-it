@@ -1,33 +1,22 @@
 <?php
 
-<<<<<<< HEAD
 return [
     '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Aksesoris',
     'activated'			    => 'Diaktifkan',
     'accepted_date'         => 'Date Accepted',
-=======
-    return [
-    'accessories'			=> 'Aksesoris',
-    'activated'			    => 'Diaktifkan',
->>>>>>> 64747d0fb (updates based on review)
     'accessory'				=> 'Aksesoris',
     'accessory_report'		=> 'Laporan Aksesori',
     'action'                => 'Langkah',
     'activity_report'		=> 'Laporan Aktifitas',
     'address'				=> 'Alamat',
     'admin'					=> 'Admin',
-<<<<<<< HEAD
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Seat ditambahkan',
     'age'                   => "Age",
-=======
-    'administrator'			=> 'Administrator',
-    'add_seats'             => 'Seat ditambahkan',
->>>>>>> 64747d0fb (updates based on review)
     'all_assets'			=> 'Semua aset',
     'all'       			=> 'Semua',
     'archived'              => 'Diarsipkan',
@@ -43,7 +32,6 @@ return [
     'audit'				    => 'Audit',
     'audit_report'			=> 'Audit Log',
     'assets'				=> 'Aset',
-<<<<<<< HEAD
     'assets_audited'        => 'assets audited',
     'assets_checked_in_count'     => 'assets checked in',
     'assets_checked_out_count'     => 'assets checked out',
@@ -51,8 +39,6 @@ return [
     'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
     'assignee'              => 'Assigned to',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'avatar_delete'         => 'Hapus Avatar',
     'avatar_upload'         => 'Unggah Avatar',
     'back'      			=> 'Kembali',
@@ -63,13 +49,9 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-<<<<<<< HEAD
     'bulk_checkin_delete'   => 'Bulk Checkin / Delete Users',
     'byod'                  => 'BYOD',
     'byod_help'             => 'This device is owned by the user',
-=======
-    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
->>>>>>> 64747d0fb (updates based on review)
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Batal',
     'categories'			=> 'Kategori',
@@ -94,7 +76,6 @@ return [
     'consumable'			=> 'Dapat dikonsumsi',
     'consumables'			=> 'Dapat dikonsumsi',
     'country'  				=> 'Negara',
-<<<<<<< HEAD
     'could_not_restore'     => 'Error restoring :item_type: :error',
     'not_deleted'           => 'The :item_type is not deleted, so it cannot be restored',
     'create'				=> 'Buat baru',
@@ -102,12 +83,6 @@ return [
     'created_asset'			=> 'buat aset',
     'created_at' 			=> 'Created At',
     'created_by'            => 'Created By',
-=======
-    'create'				=> 'Buat baru',
-    'created'               => 'Item telah dibuat',
-    'created_asset'			=> 'buat aset',
-    'created_at' 			=> 'Dibuat di',
->>>>>>> 64747d0fb (updates based on review)
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Diperbarui pada',
     'currency'  			=> 'IDR', // this is deprecated
@@ -123,10 +98,7 @@ return [
     'debug_warning_text'    => 'Aplikasi ini berjalan dalam mode produksi dengan debugging diaktifkan. Hal ini dapat mengekspos data sensitif jika aplikasi Anda dapat diakses oleh dunia luar. Nonaktifkan mode debug dengan menetapkan nilai <code>APP_DEBUG</code> value in your <code>.env</code> file to <code>false</code>.',
     'delete'  				=> 'Hapus',
     'delete_confirm'  		=> 'Apa Anda yakin untuk menghapus :item?',
-<<<<<<< HEAD
     'delete_confirm_no_undo' => 'Are you sure you wish to delete :item? This cannot be undone.',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'deleted'  				=> 'Dihapus',
     'delete_seats'  		=> 'Tempat dihapus',
     'deletion_failed'       => 'Deletion failed',
@@ -143,46 +115,32 @@ return [
     'eol'					=> 'EOL',
     'email_domain'			=> 'Email Domain',
     'email_format'			=> 'Format Surel',
-<<<<<<< HEAD
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ini digunakan untuk menghasilkan alamat surel ketika saat mengimpor',
     'error'				    => 'Error',
     'exclude_archived'      => 'Exclude Archived Assets',
     'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
-=======
-    'email_domain_help'		=> 'Ini digunakan untuk menghasilkan alamat surel ketika saat mengimpor',
-    'error'				    => 'Error',
->>>>>>> 64747d0fb (updates based on review)
     'filastname_format'			=> 'Nama Depan Nama Belakang (jane.smith@example.com)',
     'firstname_lastname_format'	=> 'Nama Depan Nama Belakang (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Nama Depan Nama Belakang (jane.smith@example.com)',
     'lastnamefirstinitial_format' =>  'Nama Depan First Initial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'First Initial Last Name (j.smith@example.com)',
-<<<<<<< HEAD
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'first'					=> 'Pertama',
     'firstnamelastname'     => 'First Name Last Name (janesmith@example.com)',
     'lastname_firstinitial' => 'Last Name First Initial (smith_j@example.com)',
     'firstinitial.lastname' => 'First Initial Last Name (j.smith@example.com)',
     'firstnamelastinitial'  => 'First Name Last Initial (janes@example.com)',
-<<<<<<< HEAD
     'lastnamefirstname'      => 'Last Name.First Name (smith.jane@example.com)',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'first_name'			=> 'Nama Pertama',
     'first_name_format'		=> 'Nama Depan (jane@example.com)',
     'files'                 => 'Berkas',
     'file_name'				=> 'Berkas',
     'file_type'             => 'File Type',
-<<<<<<< HEAD
     'filesize'              => 'File Size',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'file_uploads'			=> 'Unggah berkas',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Hasilkan',
@@ -196,7 +154,6 @@ return [
     'id'  					=> 'ID',
     'image'                 => 'Gambar',
     'image_delete'         	=> 'Hapus Gambar',
-<<<<<<< HEAD
     'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Unggah Gambar',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. The maximum size allowed is :size.|Accepted filetypes are :types. The maximum upload size allowed is :size.',
@@ -205,13 +162,6 @@ return [
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'Impor',
     'import_this_file'      => 'Map fields and process this file',
-=======
-    'image_upload'         	=> 'Unggah Gambar',
-    'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
-    'filetypes_size_help'   => 'Max upload size allowed is :size.',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
-    'import'         	    => 'Impor',
->>>>>>> 64747d0fb (updates based on review)
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
     'import-history'        => 'Riwayat Impor',
@@ -220,11 +170,8 @@ return [
     'asset_maintenances'       => 'Pemeliharaan Aset',
     'item'  				=> 'Item',
     'item_name'             => 'Item Name',
-<<<<<<< HEAD
     'import_file'  			=> 'import CSV file',
     'import_type'  			=> 'CSV import type',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'insufficient_permissions' => 'Tidak ada hak akses!',
     'kits'       			=> 'Predefined Kits',
     'language'				=> 'Bahasa',
@@ -233,7 +180,6 @@ return [
     'last_name'             => 'Nama Belakang',
     'license'				=> 'Lisensi',
     'license_report'        => 'Laporan Lisensi',
-<<<<<<< HEAD
     'licenses_available'	=> 'Licenses available',
     'licenses'				=> 'Lisensi',
     'list_all'				=> 'Tampilkan semua',
@@ -242,25 +188,12 @@ return [
     'feature_disabled'      => 'Fitur ini telah dinonaktifkan untuk instalasi demo.',
     'location'              => 'Lokasi',
     'location_plural'        => 'Location|Locations',
-=======
-    'licenses_available'	=> 'lisensi yang tersedia',
-    'licenses'				=> 'Lisensi',
-    'list_all'				=> 'Tampilkan semua',
-    'loading'				=> 'Loading... please wait....',
-    'lock_passwords'        => 'This field value will not be saved in a demo installation.',
-    'feature_disabled'      => 'Fitur ini telah dinonaktifkan untuk instalasi demo.',
-    'location'              => 'Lokasi',
->>>>>>> 64747d0fb (updates based on review)
     'locations'				=> 'Lokasi',
     'logo_size'				=> 'Square logos look best with Logo + Text. Logo maximum display size is 50px high x 500px wide.  ',
     'logout'				=> 'Keluar',
     'lookup_by_tag'     => 'Mencari berdasarkan tag aset',
     'maintenances'          => 'Pemeliharaan',
-<<<<<<< HEAD
     'manage_api_keys'       => 'Manage API keys',
-=======
-    'manage_api_keys'       => 'Manage API Keys',
->>>>>>> 64747d0fb (updates based on review)
     'manufacturer'			=> 'Pabrikan',
     'manufacturers'			=> 'Pabrikan',
     'markdown'				=> 'Bidang ini mengizinkan penggunaan <a href="https://help.github.com/articles/github-flavored-markdown/">kode markup milik Github</a>.',
@@ -273,12 +206,9 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Selanjutnya',
     'next_audit_date'		=> 'Tanggal Audit berikutnya',
-<<<<<<< HEAD
     'next_audit_date_help'  => 'If you use auditing in your organization, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
     'audit_images_help'     => 'You can find audit images in the asset\'s history tab.',
     'no_email'              => 'No email address associated with this user',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'last_audit'		    => 'Audit Terakhir',
     'new'					=> 'baru!',
     'no_depreciation'		=> 'Tidak ada penyusutan',
@@ -286,10 +216,7 @@ return [
     'no'  					=> 'Tidak',
     'notes'  				=> 'Catatan',
     'order_number'          => 'Nomor Pemesanan',
-<<<<<<< HEAD
     'only_deleted'          => 'Only Deleted Assets',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'page_menu'				=> 'Menampilkan item _MENU_',
     'pagination_info'		=> 'Menampilkan item _START_ to _END_ of _TOTAL_',
     'pending'				=> 'Tertunda',
@@ -303,7 +230,6 @@ return [
     'qty'		            => 'JML',
     'quantity'		        => 'Jumlah',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
-<<<<<<< HEAD
     'quickscan_checkin'  	=> 'Quick Scan Checkin',
     'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Siap digunakan',
@@ -315,37 +241,20 @@ return [
     'restore'				=> 'Kembalikan',
     'requestable_models'    => 'Requestable Models',
     'requestable_items'     => 'Requestable Items',
-=======
-    'ready_to_deploy'		=> 'Siap digunakan',
-    'recent_activity'		=> 'Aktifitas tebaru',
-    'remaining'             => 'Remaining',
-    'remove_company'        => 'Hapus Asosiasi Perusahaan',
-    'reports'				=> 'Laporan',
-    'restored'				=> 'dikembalikan',
-    'restore'				=> 'Restore',
-    'requestable_models'    => 'Requestable Models',
->>>>>>> 64747d0fb (updates based on review)
     'requested'				=> 'Diminta',
     'requested_date'        => 'Requested Date',
     'requested_assets'      => 'Requested Assets',
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Permintaan dibatalkan',
-<<<<<<< HEAD
     'request_item'          => 'Request this item',
     'external_link_tooltip' => 'External link to',
     'save'  				=> 'Simpan',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
-=======
-    'save'  				=> 'Simpan',
->>>>>>> 64747d0fb (updates based on review)
     'select'				=> 'Pilih',
     'select_all'            => 'Select All',
     'search'				=> 'Cari',
     'select_category'       => 'Pilih kategori',
-<<<<<<< HEAD
     'select_datasource' => 'Select a data source',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'select_department'     => 'Pilih Departemen',
     'select_depreciation'	=> 'Pilih Jenis Penyusutan',
     'select_location'		=> 'Pilih lokasi',
@@ -362,22 +271,15 @@ return [
     'show_current'  		=> 'Tampilkan Saat Ini',
     'sign_in'				=> 'Masuk',
     'signature'             => 'Tanda tangan',
-<<<<<<< HEAD
     'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Tema',
     'webhook_msg_note'        => 'A notification will be sent via webhook',
     'webhook_test_msg'        => 'Oh hai! It looks like your :app integration with Snipe-IT is working!',
-=======
-    'skin'       			=> 'Tema',
-    'slack_msg_note'        => 'A slack message will be sent',
-    'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
->>>>>>> 64747d0fb (updates based on review)
     'some_features_disabled' => 'DEMO MODE: Beberapa fitur dinonaktifkan untuk penginstalan ini.',
     'site_name'				=> 'Nama Situs',
     'state'  				=> 'Negara',
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
-<<<<<<< HEAD
     'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Pemasok',
     'suppliers'  			=> 'Pemasok',
@@ -386,14 +288,6 @@ return [
     'delete_what'           => 'Delete :item',
     'submit'				=> 'Kirim',
     'target'                => 'Target',
-=======
-    'supplier'              => 'Pemasok',
-    'suppliers'  			=> 'Pemasok',
-    'sure_to_delete'    => 'Apakah anda yakin ingin menghapus',
-    'submit'				=> 'Kirim',
-    'target'                => 'Target',
-    'toggle_navigation'     => 'Toogle Navigation',
->>>>>>> 64747d0fb (updates based on review)
     'time_and_date_display' => 'Tampilan Waktu dan Tanggal',
     'total_assets'			=> 'total aset',
     'total_licenses'		=> 'total lisensi',
@@ -403,21 +297,15 @@ return [
     'undeployable'			=> 'Tidak dapat disebarkan',
     'unknown_admin'			=> 'Admin tidak diketahui',
     'username_format'		=> 'Format nama pengguna',
-<<<<<<< HEAD
     'username'              => 'Nama Pengguna',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'update'                => 'Perbarui',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Unggah',
     'user'					=> 'Pengguna',
     'accepted'			    => 'diterima',
     'declined'			    => 'menurun',
-<<<<<<< HEAD
     'declined_note'         => 'Declined Notes',
     'unassigned'            => 'Unassigned',
-=======
->>>>>>> 64747d0fb (updates based on review)
     'unaccepted_asset_report' => 'Aset tidak diterima',
     'users'                 => 'Pengguna',
     'viewall'				=> 'View All',
@@ -429,7 +317,6 @@ return [
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
     'noimage'				=> 'Gambar tidak diunggah atau gambar tidak ditemukan.',
-<<<<<<< HEAD
     'file_does_not_exist'   => 'The requested file does not exist on the server.',
     'file_upload_success'   => 'File upload success!',
     'no_files_uploaded'     => 'File upload success!',
@@ -440,11 +327,6 @@ return [
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
     'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
-=======
-    'token_expired'         => 'Sesi formulir anda sudah berakhir. Silahkan coba lagi.',
-    'login_enabled'         => 'Login Enabled',
-    'audit_due'             => 'Due for Audit',
->>>>>>> 64747d0fb (updates based on review)
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'Accept :asset',
     'i_accept'              => 'I accept',
@@ -457,32 +339,19 @@ return [
     'view_all'              => 'view all',
     'hide_deleted'          => 'Hide Deleted',
     'email'                 => 'Email',
-<<<<<<< HEAD
     'do_not_change'         => 'Do not change',
     'bug_report'            => 'Report a bug',
-=======
-    'do_not_change'         => 'Do Not Change',
-    'bug_report'            => 'Report a Bug',
->>>>>>> 64747d0fb (updates based on review)
     'user_manual'           => 'User\'s Manual',
     'setup_step_1'          => 'Step 1',
     'setup_step_2'          => 'Step 2',
     'setup_step_3'          => 'Step 3',
     'setup_step_4'          => 'Step 4',
     'setup_config_check'    => 'Configuration Check',
-<<<<<<< HEAD
     'setup_create_database' => 'Create database tables',
     'setup_create_admin'    => 'Create admin user',
     'setup_done'            => 'Finished!',
     'bulk_edit_about_to'    => 'You are about to edit the following: ',
     'checked_out'           => 'Memeriksa',
-=======
-    'setup_create_database' => 'Create Database Tables',
-    'setup_create_admin'    => 'Create Admin User',
-    'setup_done'            => 'Finished!',
-    'bulk_edit_about_to'    => 'You are about to edit the following: ',
-    'checked_out'           => 'Checked Out',
->>>>>>> 64747d0fb (updates based on review)
     'checked_out_to'        => 'Checked out to',
     'fields'                => 'Fields',
     'last_checkout'         => 'Last Checkout',
@@ -505,18 +374,11 @@ return [
     'synchronize'           => 'Synchronize',
     'sync_results'          => 'Synchronization Results',
     'license_serial'        => 'Serial/Product Key',
-<<<<<<< HEAD
     'invalid_category'      => 'Invalid or missing category',
     'invalid_item_category_single' => 'Invalid or missing :type category. Please update the category of this :type to include a valid category before checking out.',
     'dashboard_info'        => 'This is your dashboard. There are many like it, but this one is yours.',
     '60_percent_warning'    => '60% Complete (warning)',
     'dashboard_empty'       => 'It looks like you have not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
-=======
-    'invalid_category'      => 'Invalid category',
-    'dashboard_info'        => 'This is your dashboard. There are many like it, but this one is yours.',
-    '60_percent_warning'    => '60% Complete (warning)',
-    'dashboard_empty'       => 'It looks like you haven not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
->>>>>>> 64747d0fb (updates based on review)
     'new_asset'             => 'New Asset',
     'new_license'           => 'New License',
     'new_accessory'         => 'New Accessory',
@@ -528,7 +390,6 @@ return [
     'consumables_count'     => 'Consumables Count',
     'components_count'      => 'Components Count',
     'licenses_count'        => 'Licenses Count',
-<<<<<<< HEAD
     'notification_error'    => 'Error',
     'notification_error_hint' => 'Please check the form below for errors',
     'notification_bulk_error_hint' => 'The following fields had validation errors and were not edited:',
@@ -698,27 +559,4 @@ return [
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
 
-=======
-    'notification_error'    => 'Error:',
-    'notification_error_hint' => 'Please check the form below for errors',
-    'notification_success'  => 'Success:',
-    'notification_warning'   => 'Warning:',
-    'notification_info'      => 'Info:',
-    'asset_information'     => 'Asset Information',
-    'model_name'            => 'Model Name:',
-    'asset_name'            => 'Asset Name:',
-    'consumable_information' => 'Consumable Information:',
-    'consumable_name'       => 'Consumable Name:',
-    'accessory_information' => 'Accessory Information:',
-    'accessory_name'       => 'Accessory Name:',
-    'clone_item'            => 'Clone Item',
-    'checkout_tooltip' => 'Check this item out',
-    'checkin_tooltip' => 'Check this item in',
-    'checkout_user_tooltip' => 'Check this item out to a user',
->>>>>>> 64747d0fb (updates based on review)
-    'replenish_history'     => 'Sejarah Replenish Item',
-    'replenish'             => 'Replenish Stok',
-    'checkout_history'      => 'Sejarah Item Chekcout',
-    'documents'             => 'Dokumen',
-    'document_archive'      => 'Dokumen Pendukung'
 ];

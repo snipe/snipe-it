@@ -4,32 +4,38 @@ return array(
 
     'does_not_exist' => 'Consumable does not exist.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.',
-    ],
+        'success' => 'Consumable created successfully.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.',
-    ],
+        'success' => 'Consumable updated successfully.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.',
-    ],
+        'success' => 'The consumable was deleted successfully.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-    ],
+        'user_does_not_exist' => 'That user is invalid. Please try again.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Consumable was not checked in, please try again',
         'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-    ],
+        'user_does_not_exist' => 'That user is invalid. Please try again.'
+    ),
+
+    'numeric'  => 'Total number must be numeric' ,
+    'required' => 'Total number cannot be empty' ,
+    'over'     => 'Total checked out number is greater than available stock',
+    'under'    => 'Total number cannot be zero'
+
 
 );

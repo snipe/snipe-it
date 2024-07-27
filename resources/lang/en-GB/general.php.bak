@@ -361,7 +361,6 @@ return [
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
-<<<<<<< HEAD
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
@@ -382,12 +381,12 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
-
-
-
-];
-=======
+    'placeholder_kit'       => 'Select a kit',
+    'replenish_history'     => 'Item Replenish History',
+    'replenish'             => 'Replenish Stock',
+    'checkout_history'      => 'Item Checkout History',
+    'documents'             => 'Documents',
+    'document_archive'      => 'Supporting Document',
     'total'                 => 'Total Items'
 ];
 >>>>>>> 3ae4c8ec8 (incorporating number of checked out consumables in the email notification message)
