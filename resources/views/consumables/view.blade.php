@@ -36,7 +36,7 @@
             <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.replenish_history') }}
-             {!! ($user->replenishconsumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->replenishconsumables->count().'</badge>' : '' !!}  
+             <!-- {!! ($user->replenishconsumables()->wherePivot('user_id', $user->id)->wherePivot('consumable_id',$consumable->id)->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->replenishconsumables()->wherePivot('user_id', $user->id)->wherePivot('consumable_id',$consumable->id)->count().'</badge>' : '' !!}   -->
             
             </span>
           </a>
