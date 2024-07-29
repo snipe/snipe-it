@@ -314,7 +314,7 @@ class AccessoriesController extends Controller
      */
     public function checkin(Request $request, $accessoryUserId = null)
     {
-        if (is_null($accessory_checkout = DB::table('accessories_checkout')->find($accessoryUserId))) {
+        if (is_null($accessory_checkout = AccessoryCheckout::find($accessoryUserId))) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
         }
 
@@ -324,7 +324,7 @@ class AccessoriesController extends Controller
         $logaction = $accessory->logCheckin(User::find($accessory_checkout->assigned_to), $request->input('note'));
 
         // Was the accessory updated?
-        if (DB::table('accessories_checkout')->where('id', '=', $accessory_checkout->id)->delete()) {
+        if ($accessory_checkout->delete()) {
             if (! is_null($accessory_checkout->assigned_to)) {
                 $user = User::find($accessory_checkout->assigned_to);
             }

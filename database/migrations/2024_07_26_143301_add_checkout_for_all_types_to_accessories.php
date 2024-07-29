@@ -33,6 +33,10 @@ return new class extends Migration
     public function down(): void
     {
         if (Schema::hasTable('accessories_checkout')) {
+            Schema::table('accessories_checkout', function (Blueprint $table) {
+                $table->dropColumn('assigned_type');   
+            });
+
             Schema::rename('accessories_checkout', 'accessories_users');
         }
     }
