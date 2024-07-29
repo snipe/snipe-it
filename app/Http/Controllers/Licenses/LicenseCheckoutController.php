@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Accessory;
@@ -11,6 +12,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LicenseCheckoutController extends Controller
 {
@@ -80,9 +82,26 @@ class LicenseCheckoutController extends Controller
         
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-        if ($this->$checkoutMethod($licenseSeat)) {
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
+
+        if ($request->filled('asset_id')) {
+
+            $checkoutTarget = $this->checkoutToAsset($licenseSeat);
+            $request->request->add(['assigned_asset' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'asset']);
+
+        } elseif ($request->filled('assigned_to')) {
+            $checkoutTarget = $this->checkoutToUser($licenseSeat);
+            $request->request->add(['assigned_user' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'user']);
         }
+
+
+
+        if ($checkoutTarget) {
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
+        }
+
+
 
         return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
     }
@@ -93,14 +112,14 @@ class LicenseCheckoutController extends Controller
 
         if (! $licenseSeat) {
             if ($seatId) {
-                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.'));
+                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.unavailable')));
             }
             
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'There are no available seats for this license.'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.not_enough_seats')));
         }
 
         if (! $licenseSeat->license->is($license)) {
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.mismatch')));
         }
 
         return $licenseSeat;
@@ -118,9 +137,8 @@ class LicenseCheckoutController extends Controller
             $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
-
-            return true;
+            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
+            return $target;
         }
 
         return false;
@@ -135,9 +153,8 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
-
-            return true;
+            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
+            return $target;
         }
 
         return false;
@@ -155,16 +172,16 @@ class LicenseCheckoutController extends Controller
 
     public function bulkCheckout($licenseId) {
 
-        \Log::debug('Checking out '.$licenseId.' via bulk');
+        Log::debug('Checking out '.$licenseId.' via bulk');
         $license = License::findOrFail($licenseId);
         $this->authorize('checkin', $license);
         $avail_count = $license->getAvailSeatsCountAttribute();
 
         $users = User::whereNull('deleted_at')->where('autoassign_licenses', '=', 1)->with('licenses')->get();
-        \Log::debug($avail_count.' will be assigned');
+        Log::debug($avail_count.' will be assigned');
 
         if ($users->count() > $avail_count) {
-            \Log::debug('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
+            Log::debug('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
         }
 
         // If the license is valid, check that there is an available seat
@@ -179,7 +196,7 @@ class LicenseCheckoutController extends Controller
 
             // Check to make sure this user doesn't already have this license checked out to them
             if ($user->licenses->where('id', '=', $licenseId)->count()) {
-                \Log::debug($user->username.' already has this license checked out to them. Skipping... ');
+                Log::debug($user->username.' already has this license checked out to them. Skipping... ');
                 continue;
             }
 
@@ -192,7 +209,7 @@ class LicenseCheckoutController extends Controller
                 $avail_count--;
                 $assigned_count++;
                 $licenseSeat->logCheckout(trans('admin/licenses/general.bulk.checkout_all.log_msg'), $user);
-                \Log::debug('License '.$license->name.' seat '.$licenseSeat->id.' checked out to '.$user->username);
+                Log::debug('License '.$license->name.' seat '.$licenseSeat->id.' checked out to '.$user->username);
             }
 
             if ($avail_count ==  0) {

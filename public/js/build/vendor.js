@@ -12707,10 +12707,10 @@ return Tether;
 
 }));
 
-/*! jQuery UI - v1.13.2 - 2022-07-14
-* http://jqueryui.com
+/*! jQuery UI - v1.13.3 - 2024-04-26
+* https://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
-* Copyright jQuery Foundation and other contributors; Licensed MIT */
+* Copyright OpenJS Foundation and other contributors; Licensed MIT */
 
 ( function( factory ) {
 	"use strict";
@@ -12729,23 +12729,23 @@ return Tether;
 
 $.ui = $.ui || {};
 
-var version = $.ui.version = "1.13.2";
+var version = $.ui.version = "1.13.3";
 
 
 /*!
- * jQuery UI Widget 1.13.2
- * http://jqueryui.com
+ * jQuery UI Widget 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Widget
 //>>group: Core
 //>>description: Provides a factory for creating stateful widgets with a common API.
-//>>docs: http://api.jqueryui.com/jQuery.widget/
-//>>demos: http://jqueryui.com/widget/
+//>>docs: https://api.jqueryui.com/jQuery.widget/
+//>>demos: https://jqueryui.com/widget/
 
 
 var widgetUuid = 0;
@@ -13475,21 +13475,21 @@ var widget = $.widget;
 
 
 /*!
- * jQuery UI Position 1.13.2
- * http://jqueryui.com
+ * jQuery UI Position 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
- * http://api.jqueryui.com/position/
+ * https://api.jqueryui.com/position/
  */
 
 //>>label: Position
 //>>group: Core
 //>>description: Positions elements relative to other elements.
-//>>docs: http://api.jqueryui.com/position/
-//>>demos: http://jqueryui.com/position/
+//>>docs: https://api.jqueryui.com/position/
+//>>demos: https://jqueryui.com/position/
 
 
 ( function() {
@@ -13972,18 +13972,18 @@ var position = $.ui.position;
 
 
 /*!
- * jQuery UI :data 1.13.2
- * http://jqueryui.com
+ * jQuery UI :data 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :data Selector
 //>>group: Core
 //>>description: Selects elements which have data stored under the specified key.
-//>>docs: http://api.jqueryui.com/data-selector/
+//>>docs: https://api.jqueryui.com/data-selector/
 
 
 var data = $.extend( $.expr.pseudos, {
@@ -14001,18 +14001,18 @@ var data = $.extend( $.expr.pseudos, {
 } );
 
 /*!
- * jQuery UI Disable Selection 1.13.2
- * http://jqueryui.com
+ * jQuery UI Disable Selection 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: disableSelection
 //>>group: Core
 //>>description: Disable selection of text content within the set of matched elements.
-//>>docs: http://api.jqueryui.com/disableSelection/
+//>>docs: https://api.jqueryui.com/disableSelection/
 
 // This file is deprecated
 
@@ -14049,7 +14049,7 @@ var jQuery = $;
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
  * Date: Sun May 10 09:02:36 2020 +0200
  */
@@ -14756,12 +14756,12 @@ colors = jQuery.Color.names = {
 
 
 /*!
- * jQuery UI Effects 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Effects Core
@@ -14769,8 +14769,8 @@ colors = jQuery.Color.names = {
 /* eslint-disable max-len */
 //>>description: Extends the internal jQuery effects. Includes morphing and easing. Required by all other effects.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/category/effects-core/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/category/effects-core/
+//>>demos: https://jqueryui.com/effect/
 
 
 var dataSpace = "ui-effects-",
@@ -15140,7 +15140,7 @@ if ( $.uiBackCompat !== false ) {
 }
 
 $.extend( $.effects, {
-	version: "1.13.2",
+	version: "1.13.3",
 
 	define: function( name, mode, effect ) {
 		if ( !effect ) {
@@ -15263,7 +15263,7 @@ $.extend( $.effects, {
 
 		// Lock in margins first to account for form elements, which
 		// will change margin if you explicitly set height
-		// see: http://jsfiddle.net/JZSMt/3/ https://bugs.webkit.org/show_bug.cgi?id=107380
+		// see: https://jsfiddle.net/JZSMt/3/ https://bugs.webkit.org/show_bug.cgi?id=107380
 		// Support: Safari
 		element.css( {
 			marginTop: element.css( "marginTop" ),
@@ -15657,7 +15657,7 @@ $.fx.step.clip = function( fx ) {
 
 ( function() {
 
-// Based on easing equations from Robert Penner (http://www.robertpenner.com/easing)
+// Based on easing equations from Robert Penner (http://robertpenner.com/easing)
 
 var baseEasings = {};
 
@@ -15708,19 +15708,19 @@ var effect = $.effects;
 
 
 /*!
- * jQuery UI Effects Blind 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Blind 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Blind Effect
 //>>group: Effects
 //>>description: Blinds the element.
-//>>docs: http://api.jqueryui.com/blind-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/blind-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectBlind = $.effects.define( "blind", "hide", function( options, done ) {
@@ -15763,19 +15763,19 @@ var effectsEffectBlind = $.effects.define( "blind", "hide", function( options, d
 
 
 /*!
- * jQuery UI Effects Bounce 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Bounce 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Bounce Effect
 //>>group: Effects
 //>>description: Bounces an element horizontally or vertically n times.
-//>>docs: http://api.jqueryui.com/bounce-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/bounce-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) {
@@ -15858,19 +15858,19 @@ var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) 
 
 
 /*!
- * jQuery UI Effects Clip 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Clip 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Clip Effect
 //>>group: Effects
 //>>description: Clips the element on and off like an old TV.
-//>>docs: http://api.jqueryui.com/clip-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/clip-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectClip = $.effects.define( "clip", "hide", function( options, done ) {
@@ -15908,19 +15908,19 @@ var effectsEffectClip = $.effects.define( "clip", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Drop 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Drop 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Drop Effect
 //>>group: Effects
 //>>description: Moves an element in one direction and hides it at the same time.
-//>>docs: http://api.jqueryui.com/drop-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/drop-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, done ) {
@@ -15962,12 +15962,12 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Explode 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Explode 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Explode Effect
@@ -15975,8 +15975,8 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 /* eslint-disable max-len */
 //>>description: Explodes an element in all directions into n pieces. Implodes an element to its original wholeness.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/explode-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/explode-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectExplode = $.effects.define( "explode", "hide", function( options, done ) {
@@ -16058,19 +16058,19 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 
 
 /*!
- * jQuery UI Effects Fade 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Fade 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Fade Effect
 //>>group: Effects
 //>>description: Fades the element.
-//>>docs: http://api.jqueryui.com/fade-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/fade-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, done ) {
@@ -16090,19 +16090,19 @@ var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, d
 
 
 /*!
- * jQuery UI Effects Fold 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Fold 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Fold Effect
 //>>group: Effects
 //>>description: Folds an element first horizontally and then vertically.
-//>>docs: http://api.jqueryui.com/fold-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/fold-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectFold = $.effects.define( "fold", "hide", function( options, done ) {
@@ -16164,19 +16164,19 @@ var effectsEffectFold = $.effects.define( "fold", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Highlight 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Highlight 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Highlight Effect
 //>>group: Effects
 //>>description: Highlights the background of an element in a defined color for a custom duration.
-//>>docs: http://api.jqueryui.com/highlight-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/highlight-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectHighlight = $.effects.define( "highlight", "show", function( options, done ) {
@@ -16206,19 +16206,19 @@ var effectsEffectHighlight = $.effects.define( "highlight", "show", function( op
 
 
 /*!
- * jQuery UI Effects Size 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Size 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Size Effect
 //>>group: Effects
 //>>description: Resize an element to a specified width and height.
-//>>docs: http://api.jqueryui.com/size-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/size-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectSize = $.effects.define( "size", function( options, done ) {
@@ -16384,19 +16384,19 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Scale 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Scale 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Scale Effect
 //>>group: Effects
 //>>description: Grows or shrinks an element and its content.
-//>>docs: http://api.jqueryui.com/scale-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/scale-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
@@ -16424,19 +16424,19 @@ var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Puff 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Puff 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Puff Effect
 //>>group: Effects
 //>>description: Creates a puff effect by scaling the element up and hiding it at the same time.
-//>>docs: http://api.jqueryui.com/puff-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/puff-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectPuff = $.effects.define( "puff", "hide", function( options, done ) {
@@ -16450,19 +16450,19 @@ var effectsEffectPuff = $.effects.define( "puff", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Pulsate 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Pulsate 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Pulsate Effect
 //>>group: Effects
 //>>description: Pulsates an element n times by changing the opacity to zero and back.
-//>>docs: http://api.jqueryui.com/pulsate-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/pulsate-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( options, done ) {
@@ -16499,19 +16499,19 @@ var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( option
 
 
 /*!
- * jQuery UI Effects Shake 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Shake 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Shake Effect
 //>>group: Effects
 //>>description: Shakes an element horizontally or vertically n times.
-//>>docs: http://api.jqueryui.com/shake-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/shake-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectShake = $.effects.define( "shake", function( options, done ) {
@@ -16558,19 +16558,19 @@ var effectsEffectShake = $.effects.define( "shake", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Slide 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Slide 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Slide Effect
 //>>group: Effects
 //>>description: Slides an element in and out of the viewport.
-//>>docs: http://api.jqueryui.com/slide-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/slide-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effectsEffectSlide = $.effects.define( "slide", "show", function( options, done ) {
@@ -16619,19 +16619,19 @@ var effectsEffectSlide = $.effects.define( "slide", "show", function( options, d
 
 
 /*!
- * jQuery UI Effects Transfer 1.13.2
- * http://jqueryui.com
+ * jQuery UI Effects Transfer 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Transfer Effect
 //>>group: Effects
 //>>description: Displays a transfer effect from one element to another.
-//>>docs: http://api.jqueryui.com/transfer-effect/
-//>>demos: http://jqueryui.com/effect/
+//>>docs: https://api.jqueryui.com/transfer-effect/
+//>>demos: https://jqueryui.com/effect/
 
 
 var effect;
@@ -16644,18 +16644,18 @@ var effectsEffectTransfer = effect;
 
 
 /*!
- * jQuery UI Focusable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Focusable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :focusable Selector
 //>>group: Core
 //>>description: Selects elements which can be focused.
-//>>docs: http://api.jqueryui.com/focusable-selector/
+//>>docs: https://api.jqueryui.com/focusable-selector/
 
 
 // Selectors
@@ -16726,18 +16726,18 @@ var form = $.fn._form = function() {
 
 
 /*!
- * jQuery UI Form Reset Mixin 1.13.2
- * http://jqueryui.com
+ * jQuery UI Form Reset Mixin 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Form Reset Mixin
 //>>group: Core
 //>>description: Refresh input widgets when their form is reset
-//>>docs: http://api.jqueryui.com/form-reset-mixin/
+//>>docs: https://api.jqueryui.com/form-reset-mixin/
 
 
 var formResetMixin = $.ui.formResetMixin = {
@@ -16788,12 +16788,12 @@ var formResetMixin = $.ui.formResetMixin = {
 
 
 /*!
- * jQuery UI Support for jQuery core 1.8.x and newer 1.13.2
- * http://jqueryui.com
+ * jQuery UI Support for jQuery core 1.8.x and newer 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  *
  */
 
@@ -16863,18 +16863,18 @@ if ( !$.fn.even || !$.fn.odd ) {
 
 ;
 /*!
- * jQuery UI Keycode 1.13.2
- * http://jqueryui.com
+ * jQuery UI Keycode 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Keycode
 //>>group: Core
 //>>description: Provide keycodes as keynames
-//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
+//>>docs: https://api.jqueryui.com/jQuery.ui.keyCode/
 
 
 var keycode = $.ui.keyCode = {
@@ -16898,18 +16898,18 @@ var keycode = $.ui.keyCode = {
 
 
 /*!
- * jQuery UI Labels 1.13.2
- * http://jqueryui.com
+ * jQuery UI Labels 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: labels
 //>>group: Core
 //>>description: Find all the labels associated with a given input
-//>>docs: http://api.jqueryui.com/labels/
+//>>docs: https://api.jqueryui.com/labels/
 
 
 var labels = $.fn.labels = function() {
@@ -16953,18 +16953,18 @@ var labels = $.fn.labels = function() {
 
 
 /*!
- * jQuery UI Scroll Parent 1.13.2
- * http://jqueryui.com
+ * jQuery UI Scroll Parent 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: scrollParent
 //>>group: Core
 //>>description: Get the closest ancestor element that is scrollable.
-//>>docs: http://api.jqueryui.com/scrollParent/
+//>>docs: https://api.jqueryui.com/scrollParent/
 
 
 var scrollParent = $.fn.scrollParent = function( includeHidden ) {
@@ -16987,18 +16987,18 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 
 
 /*!
- * jQuery UI Tabbable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tabbable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: :tabbable Selector
 //>>group: Core
 //>>description: Selects elements which can be tabbed to.
-//>>docs: http://api.jqueryui.com/tabbable-selector/
+//>>docs: https://api.jqueryui.com/tabbable-selector/
 
 
 var tabbable = $.extend( $.expr.pseudos, {
@@ -17011,18 +17011,18 @@ var tabbable = $.extend( $.expr.pseudos, {
 
 
 /*!
- * jQuery UI Unique ID 1.13.2
- * http://jqueryui.com
+ * jQuery UI Unique ID 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: uniqueId
 //>>group: Core
 //>>description: Functions to generate and remove uniqueId's
-//>>docs: http://api.jqueryui.com/uniqueId/
+//>>docs: https://api.jqueryui.com/uniqueId/
 
 
 var uniqueId = $.fn.extend( {
@@ -17049,12 +17049,12 @@ var uniqueId = $.fn.extend( {
 
 
 /*!
- * jQuery UI Accordion 1.13.2
- * http://jqueryui.com
+ * jQuery UI Accordion 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Accordion
@@ -17062,15 +17062,15 @@ var uniqueId = $.fn.extend( {
 /* eslint-disable max-len */
 //>>description: Displays collapsible content panels for presenting information in a limited amount of space.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/accordion/
-//>>demos: http://jqueryui.com/accordion/
+//>>docs: https://api.jqueryui.com/accordion/
+//>>demos: https://jqueryui.com/accordion/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/accordion.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsAccordion = $.widget( "ui.accordion", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		active: 0,
 		animate: {},
@@ -17681,26 +17681,26 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 
 
 /*!
- * jQuery UI Menu 1.13.2
- * http://jqueryui.com
+ * jQuery UI Menu 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Menu
 //>>group: Widgets
 //>>description: Creates nestable menus.
-//>>docs: http://api.jqueryui.com/menu/
-//>>demos: http://jqueryui.com/menu/
+//>>docs: https://api.jqueryui.com/menu/
+//>>demos: https://jqueryui.com/menu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/menu.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsMenu = $.widget( "ui.menu", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -18372,26 +18372,26 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 /*!
- * jQuery UI Autocomplete 1.13.2
- * http://jqueryui.com
+ * jQuery UI Autocomplete 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Autocomplete
 //>>group: Widgets
 //>>description: Lists suggested words as the user is typing.
-//>>docs: http://api.jqueryui.com/autocomplete/
-//>>demos: http://jqueryui.com/autocomplete/
+//>>docs: https://api.jqueryui.com/autocomplete/
+//>>demos: https://jqueryui.com/autocomplete/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/autocomplete.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.autocomplete", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
@@ -19028,19 +19028,19 @@ var widgetsAutocomplete = $.ui.autocomplete;
 
 
 /*!
- * jQuery UI Controlgroup 1.13.2
- * http://jqueryui.com
+ * jQuery UI Controlgroup 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Controlgroup
 //>>group: Widgets
 //>>description: Visually groups form control widgets
-//>>docs: http://api.jqueryui.com/controlgroup/
-//>>demos: http://jqueryui.com/controlgroup/
+//>>docs: https://api.jqueryui.com/controlgroup/
+//>>demos: https://jqueryui.com/controlgroup/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/controlgroup.css
 //>>css.theme: ../../themes/base/theme.css
@@ -19049,7 +19049,7 @@ var widgetsAutocomplete = $.ui.autocomplete;
 var controlgroupCornerRegex = /ui-corner-([a-z]){2,6}/g;
 
 var widgetsControlgroup = $.widget( "ui.controlgroup", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<div>",
 	options: {
 		direction: "horizontal",
@@ -19313,19 +19313,19 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 } );
 
 /*!
- * jQuery UI Checkboxradio 1.13.2
- * http://jqueryui.com
+ * jQuery UI Checkboxradio 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Checkboxradio
 //>>group: Widgets
 //>>description: Enhances a form with multiple themeable checkboxes or radio buttons.
-//>>docs: http://api.jqueryui.com/checkboxradio/
-//>>demos: http://jqueryui.com/checkboxradio/
+//>>docs: https://api.jqueryui.com/checkboxradio/
+//>>demos: https://jqueryui.com/checkboxradio/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/button.css
 //>>css.structure: ../../themes/base/checkboxradio.css
@@ -19333,7 +19333,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 
 
 $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		disabled: null,
 		label: null,
@@ -19584,26 +19584,26 @@ var widgetsCheckboxradio = $.ui.checkboxradio;
 
 
 /*!
- * jQuery UI Button 1.13.2
- * http://jqueryui.com
+ * jQuery UI Button 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Button
 //>>group: Widgets
 //>>description: Enhances a form with themeable buttons.
-//>>docs: http://api.jqueryui.com/button/
-//>>demos: http://jqueryui.com/button/
+//>>docs: https://api.jqueryui.com/button/
+//>>demos: https://jqueryui.com/button/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/button.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.button", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<button>",
 	options: {
 		classes: {
@@ -20010,25 +20010,25 @@ var widgetsButton = $.ui.button;
 
 /* eslint-disable max-len, camelcase */
 /*!
- * jQuery UI Datepicker 1.13.2
- * http://jqueryui.com
+ * jQuery UI Datepicker 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Datepicker
 //>>group: Widgets
 //>>description: Displays a calendar from an input or inline for selecting dates.
-//>>docs: http://api.jqueryui.com/datepicker/
-//>>demos: http://jqueryui.com/datepicker/
+//>>docs: https://api.jqueryui.com/datepicker/
+//>>demos: https://jqueryui.com/datepicker/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/datepicker.css
 //>>css.theme: ../../themes/base/theme.css
 
 
-$.extend( $.ui, { datepicker: { version: "1.13.2" } } );
+$.extend( $.ui, { datepicker: { version: "1.13.3" } } );
 
 var datepicker_instActive;
 
@@ -20345,7 +20345,7 @@ $.extend( Datepicker.prototype, {
 		}
 
 		// Set display:block in place of inst.dpDiv.show() which won't work on disconnected elements
-		// http://bugs.jqueryui.com/ticket/7552 - A Datepicker created on a detached div has zero height
+		// https://bugs.jqueryui.com/ticket/7552 - A Datepicker created on a detached div has zero height
 		inst.dpDiv.css( "display", "block" );
 	},
 
@@ -22225,7 +22225,7 @@ $.fn.datepicker = function( options ) {
 $.datepicker = new Datepicker(); // singleton instance
 $.datepicker.initialized = false;
 $.datepicker.uuid = new Date().getTime();
-$.datepicker.version = "1.13.2";
+$.datepicker.version = "1.13.3";
 
 var widgetsDatepicker = $.datepicker;
 
@@ -22235,18 +22235,18 @@ var widgetsDatepicker = $.datepicker;
 var ie = $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 /*!
- * jQuery UI Mouse 1.13.2
- * http://jqueryui.com
+ * jQuery UI Mouse 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Mouse
 //>>group: Widgets
 //>>description: Abstracts mouse-based interactions to assist in creating certain widgets.
-//>>docs: http://api.jqueryui.com/mouse/
+//>>docs: https://api.jqueryui.com/mouse/
 
 
 var mouseHandled = false;
@@ -22255,7 +22255,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 var widgetsMouse = $.widget( "ui.mouse", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,
@@ -22497,24 +22497,24 @@ var safeBlur = $.ui.safeBlur = function( element ) {
 
 
 /*!
- * jQuery UI Draggable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Draggable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Draggable
 //>>group: Interactions
 //>>description: Enables dragging functionality for any element.
-//>>docs: http://api.jqueryui.com/draggable/
-//>>demos: http://jqueryui.com/draggable/
+//>>docs: https://api.jqueryui.com/draggable/
+//>>demos: https://jqueryui.com/draggable/
 //>>css.structure: ../../themes/base/draggable.css
 
 
 $.widget( "ui.draggable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "drag",
 	options: {
 		addClasses: true,
@@ -22860,7 +22860,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 				o.appendTo ) );
 		}
 
-		// Http://bugs.jqueryui.com/ticket/9446
+		// https://bugs.jqueryui.com/ticket/9446
 		// a helper function can return the original element
 		// which wouldn't have been set to relative in _create
 		if ( helperIsFunction && helper[ 0 ] === this.element[ 0 ] ) {
@@ -23732,26 +23732,26 @@ var widgetsDraggable = $.ui.draggable;
 
 
 /*!
- * jQuery UI Resizable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Resizable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Resizable
 //>>group: Interactions
 //>>description: Enables resize functionality for any element.
-//>>docs: http://api.jqueryui.com/resizable/
-//>>demos: http://jqueryui.com/resizable/
+//>>docs: https://api.jqueryui.com/resizable/
+//>>demos: https://jqueryui.com/resizable/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/resizable.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.resizable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "resize",
 	options: {
 		alsoResize: false,
@@ -24245,14 +24245,17 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		if ( this.position.left !== this.prevPosition.left ) {
 			props.left = this.position.left + "px";
 		}
+
+		this.helper.css( props );
+
 		if ( this.size.width !== this.prevSize.width ) {
 			props.width = this.size.width + "px";
+			this.helper.width( props.width );
 		}
 		if ( this.size.height !== this.prevSize.height ) {
 			props.height = this.size.height + "px";
+			this.helper.height( props.height );
 		}
-
-		this.helper.css( props );
 
 		return props;
 	},
@@ -24760,7 +24763,7 @@ $.ui.plugin.add( "resizable", "alsoResize", {
 		$( o.alsoResize ).each( function() {
 			var el = $( this );
 			el.data( "ui-resizable-alsoresize", {
-				width: parseFloat( el.width() ), height: parseFloat( el.height() ),
+				width: parseFloat( el.css( "width" ) ), height: parseFloat( el.css( "height" ) ),
 				left: parseFloat( el.css( "left" ) ), top: parseFloat( el.css( "top" ) )
 			} );
 		} );
@@ -24930,26 +24933,26 @@ var widgetsResizable = $.ui.resizable;
 
 
 /*!
- * jQuery UI Dialog 1.13.2
- * http://jqueryui.com
+ * jQuery UI Dialog 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Dialog
 //>>group: Widgets
 //>>description: Displays customizable dialog windows.
-//>>docs: http://api.jqueryui.com/dialog/
-//>>demos: http://jqueryui.com/dialog/
+//>>docs: https://api.jqueryui.com/dialog/
+//>>demos: https://jqueryui.com/dialog/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/dialog.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.dialog", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		appendTo: "body",
 		autoOpen: true,
@@ -25783,12 +25786,15 @@ $.widget( "ui.dialog", {
 					event.preventDefault();
 					instance._focusTabbable();
 
-					// Support: jQuery >=3.4 <3.6 only
-					// Focus re-triggering in jQuery 3.4/3.5 makes the original element
-					// have its focus event propagated last, breaking the re-targeting.
-					// Trigger focus in a delay in addition if needed to avoid the issue
+					// Support: jQuery >=3.4 <3.7 only
+					// In jQuery 3.4-3.6, there are multiple issues with focus/blur
+					// trigger chains or when triggering is done on a hidden element
+					// at least once.
+					// Trigger focus in a delay in addition if needed to avoid the issues.
 					// See https://github.com/jquery/jquery/issues/4382
-					if ( jqMinor === "3.4." || jqMinor === "3.5." ) {
+					// See https://github.com/jquery/jquery/issues/4856
+					// See https://github.com/jquery/jquery/issues/4950
+					if ( jqMinor === "3.4." || jqMinor === "3.5." || jqMinor === "3.6." ) {
 						instance._delay( instance._restoreTabbableFocus );
 					}
 				}
@@ -25855,23 +25861,23 @@ var widgetsDialog = $.ui.dialog;
 
 
 /*!
- * jQuery UI Droppable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Droppable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Droppable
 //>>group: Interactions
 //>>description: Enables drop targets for draggable elements.
-//>>docs: http://api.jqueryui.com/droppable/
-//>>demos: http://jqueryui.com/droppable/
+//>>docs: https://api.jqueryui.com/droppable/
+//>>demos: https://jqueryui.com/droppable/
 
 
 $.widget( "ui.droppable", {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "drop",
 	options: {
 		accept: "*",
@@ -26338,12 +26344,12 @@ var widgetsDroppable = $.ui.droppable;
 
 
 /*!
- * jQuery UI Progressbar 1.13.2
- * http://jqueryui.com
+ * jQuery UI Progressbar 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Progressbar
@@ -26351,15 +26357,15 @@ var widgetsDroppable = $.ui.droppable;
 /* eslint-disable max-len */
 //>>description: Displays a status indicator for loading state, standard percentage, and other progress indicators.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/progressbar/
-//>>demos: http://jqueryui.com/progressbar/
+//>>docs: https://api.jqueryui.com/progressbar/
+//>>demos: https://jqueryui.com/progressbar/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/progressbar.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsProgressbar = $.widget( "ui.progressbar", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		classes: {
 			"ui-progressbar": "ui-corner-all",
@@ -26501,24 +26507,24 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 
 
 /*!
- * jQuery UI Selectable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Selectable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Selectable
 //>>group: Interactions
 //>>description: Allows groups of elements to be selected with the mouse.
-//>>docs: http://api.jqueryui.com/selectable/
-//>>demos: http://jqueryui.com/selectable/
+//>>docs: https://api.jqueryui.com/selectable/
+//>>demos: https://jqueryui.com/selectable/
 //>>css.structure: ../../themes/base/selectable.css
 
 
 var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		appendTo: "body",
 		autoRefresh: true,
@@ -26799,12 +26805,12 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Selectmenu 1.13.2
- * http://jqueryui.com
+ * jQuery UI Selectmenu 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Selectmenu
@@ -26812,15 +26818,15 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 /* eslint-disable max-len */
 //>>description: Duplicates and extends the functionality of a native HTML select element, allowing it to be customizable in behavior and appearance far beyond the limitations of a native select.
 /* eslint-enable max-len */
-//>>docs: http://api.jqueryui.com/selectmenu/
-//>>demos: http://jqueryui.com/selectmenu/
+//>>docs: https://api.jqueryui.com/selectmenu/
+//>>demos: https://jqueryui.com/selectmenu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/selectmenu.css, ../../themes/base/button.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<select>",
 	options: {
 		appendTo: null,
@@ -27130,7 +27136,12 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		if ( item.disabled ) {
 			this._addClass( li, null, "ui-state-disabled" );
 		}
-		this._setText( wrapper, item.label );
+
+		if ( item.hidden ) {
+			li.prop( "hidden", true );
+		} else {
+			this._setText( wrapper, item.label );
+		}
 
 		return li.append( wrapper ).appendTo( ul );
 	},
@@ -27434,10 +27445,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		var that = this,
 			data = [];
 		options.each( function( index, item ) {
-			if ( item.hidden ) {
-				return;
-			}
-
 			data.push( that._parseOption( $( item ), index ) );
 		} );
 		this.items = data;
@@ -27451,6 +27458,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			index: index,
 			value: option.val(),
 			label: option.text(),
+			hidden: optgroup.prop( "hidden" ) || option.prop( "hidden" ),
 			optgroup: optgroup.attr( "label" ) || "",
 			disabled: optgroup.prop( "disabled" ) || option.prop( "disabled" )
 		};
@@ -27468,26 +27476,26 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 
 
 /*!
- * jQuery UI Slider 1.13.2
- * http://jqueryui.com
+ * jQuery UI Slider 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Slider
 //>>group: Widgets
 //>>description: Displays a flexible slider with ranges and accessibility via keyboard.
-//>>docs: http://api.jqueryui.com/slider/
-//>>demos: http://jqueryui.com/slider/
+//>>docs: https://api.jqueryui.com/slider/
+//>>demos: https://jqueryui.com/slider/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/slider.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -28203,24 +28211,24 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Sortable 1.13.2
- * http://jqueryui.com
+ * jQuery UI Sortable 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Sortable
 //>>group: Interactions
 //>>description: Enables items in a list to be sorted using the mouse.
-//>>docs: http://api.jqueryui.com/sortable/
-//>>demos: http://jqueryui.com/sortable/
+//>>docs: https://api.jqueryui.com/sortable/
+//>>demos: https://jqueryui.com/sortable/
 //>>css.structure: ../../themes/base/sortable.css
 
 
 var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
-	version: "1.13.2",
+	version: "1.13.3",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
@@ -29796,19 +29804,19 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Spinner 1.13.2
- * http://jqueryui.com
+ * jQuery UI Spinner 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Spinner
 //>>group: Widgets
 //>>description: Displays buttons to easily input numbers via the keyboard or mouse.
-//>>docs: http://api.jqueryui.com/spinner/
-//>>demos: http://jqueryui.com/spinner/
+//>>docs: https://api.jqueryui.com/spinner/
+//>>demos: https://jqueryui.com/spinner/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/spinner.css
 //>>css.theme: ../../themes/base/theme.css
@@ -29826,7 +29834,7 @@ function spinnerModifier( fn ) {
 }
 
 $.widget( "ui.spinner", {
-	version: "1.13.2",
+	version: "1.13.3",
 	defaultElement: "<input>",
 	widgetEventPrefix: "spin",
 	options: {
@@ -30357,26 +30365,26 @@ var widgetsSpinner = $.ui.spinner;
 
 
 /*!
- * jQuery UI Tabs 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tabs 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Tabs
 //>>group: Widgets
 //>>description: Transforms a set of container elements into a tab structure.
-//>>docs: http://api.jqueryui.com/tabs/
-//>>demos: http://jqueryui.com/tabs/
+//>>docs: https://api.jqueryui.com/tabs/
+//>>demos: https://jqueryui.com/tabs/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/tabs.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.tabs", {
-	version: "1.13.2",
+	version: "1.13.3",
 	delay: 300,
 	options: {
 		active: null,
@@ -31205,7 +31213,7 @@ $.widget( "ui.tabs", {
 				.done( function( response, status, jqXHR ) {
 
 					// support: jQuery <1.8
-					// http://bugs.jquery.com/ticket/11778
+					// https://bugs.jquery.com/ticket/11778
 					setTimeout( function() {
 						panel.html( response );
 						that._trigger( "load", event, eventData );
@@ -31216,7 +31224,7 @@ $.widget( "ui.tabs", {
 				.fail( function( jqXHR, status ) {
 
 					// support: jQuery <1.8
-					// http://bugs.jquery.com/ticket/11778
+					// https://bugs.jquery.com/ticket/11778
 					setTimeout( function() {
 						complete( jqXHR, status );
 					}, 1 );
@@ -31261,26 +31269,26 @@ var widgetsTabs = $.ui.tabs;
 
 
 /*!
- * jQuery UI Tooltip 1.13.2
- * http://jqueryui.com
+ * jQuery UI Tooltip 1.13.3
+ * https://jqueryui.com
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license.
- * http://jquery.org/license
+ * https://jquery.org/license
  */
 
 //>>label: Tooltip
 //>>group: Widgets
 //>>description: Shows additional information for any element on hover or focus.
-//>>docs: http://api.jqueryui.com/tooltip/
-//>>demos: http://jqueryui.com/tooltip/
+//>>docs: https://api.jqueryui.com/tooltip/
+//>>demos: https://jqueryui.com/tooltip/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/tooltip.css
 //>>css.theme: ../../themes/base/theme.css
 
 
 $.widget( "ui.tooltip", {
-	version: "1.13.2",
+	version: "1.13.3",
 	options: {
 		classes: {
 			"ui-tooltip": "ui-corner-all ui-widget-shadow"
@@ -54833,2394 +54841,1707 @@ return SignaturePad;
 
 }));
 
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    define(["jquery"], function (a0) {
-      return (factory(a0));
-    });
-  } else if (typeof module === 'object' && module.exports) {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory(require("jquery"));
-  } else {
-    factory(root["jQuery"]);
-  }
-}(this, function (jQuery) {
-
-/** File generated by Grunt -- do not modify
- *  JQUERY-FORM-VALIDATOR
+/*!
+ * jQuery Validation Plugin v1.20.1
  *
- *  @version 2.3.79
- *  @website http://formvalidator.net/
- *  @author Victor Jonsson, http://victorjonsson.se
- *  @license MIT
+ * https://jqueryvalidation.org/
+ *
+ * Copyright (c) 2024 Jörn Zaefferer
+ * Released under the MIT license
  */
-/**
- */
-(function ($, window, undefined) {
-
-  var disableFormSubmit = function () {
-      return false;
-    },
-    lastFormEvent = null,
-    HaltManager = {
-      numHalted: 0,
-      haltValidation: function($form) {
-        this.numHalted++;
-        $.formUtils.haltValidation = true;
-        $form
-          .unbind('submit', disableFormSubmit)
-          .bind('submit', disableFormSubmit)
-          .find('*[type="submit"]')
-            .addClass('disabled')
-            .attr('disabled', 'disabled');
-      },
-      unHaltValidation: function($form) {
-        this.numHalted--;
-        if (this.numHalted === 0) {
-          $.formUtils.haltValidation = false;
-          $form
-            .unbind('submit', disableFormSubmit)
-            .find('*[type="submit"]')
-              .removeClass('disabled')
-              .removeAttr('disabled', 'disabled');
-        }
-      }
-    };
-
-  function AsyncValidation($form, $input) {
-    this.$form = $form;
-    this.$input = $input;
-    this.reset();
-    $input.on('change paste', this.reset.bind(this));
-  }
-
-  AsyncValidation.prototype.reset = function() {
-    this.haltedFormValidation = false;
-    this.hasRun = false;
-    this.isRunning = false;
-    this.result = undefined;
-  };
-
-  AsyncValidation.prototype.run = function(eventContext, callback) {
-    if (eventContext === 'keyup') {
-      return null;
-    } else if (this.isRunning) {
-      lastFormEvent = eventContext;
-      if (!this.haltedFormValidation) {
-        HaltManager.haltValidation();
-        this.haltedFormValidation = true;
-      }
-      return null; // Waiting for result
-    } else if(this.hasRun) {
-      //this.$input.one('keyup change paste', this.reset.bind(this));
-      return this.result;
-    } else {
-      lastFormEvent = eventContext;
-      HaltManager.haltValidation(this.$form);
-      this.haltedFormValidation = true;
-      this.isRunning = true;
-      this.$input
-        .attr('disabled', 'disabled')
-        .addClass('async-validation');
-      this.$form.addClass('async-validation');
-
-      callback(function(result) {
-        this.done(result);
-      }.bind(this));
-
-      return null;
-    }
-  };
-
-  AsyncValidation.prototype.done = function(result) {
-    this.result = result;
-    this.hasRun = true;
-    this.isRunning = false;
-    this.$input
-      .removeAttr('disabled')
-      .removeClass('async-validation');
-    this.$form.removeClass('async-validation');
-    if (this.haltedFormValidation) {
-      HaltManager.unHaltValidation(this.$form);
-      if (lastFormEvent === 'submit') {
-        this.$form.trigger('submit');
-      } else {
-        this.$input.trigger('validation.revalidate');
-      }
-    }
-  };
-
-  AsyncValidation.loadInstance = function(validatorName, $input, $form) {
-    // Return async validator attached to this input element
-    // or create a new async validator and attach it to the input
-    var asyncValidation,
-      input = $input.get(0);
-
-    if (!input.asyncValidators) {
-      input.asyncValidators = {};
-    }
-
-    if (input.asyncValidators[validatorName]) {
-      asyncValidation = input.asyncValidators[validatorName];
-    } else {
-      asyncValidation = new AsyncValidation($form, $input);
-      input.asyncValidators[validatorName] = asyncValidation;
-    }
-
-    return asyncValidation;
-  };
-
-  $.formUtils = $.extend($.formUtils || {}, {
-
-    /**
-     * @deprecated
-     * @param validatorName
-     * @param $input
-     * @param $form
-     */
-    asyncValidation: function(validatorName, $input, $form) {
-      // @todo: Remove when moving up to version 3.0
-      this.warn('Use of deprecated function $.formUtils.asyncValidation, use $.formUtils.addAsyncValidator() instead');
-      return AsyncValidation.loadInstance(validatorName, $input, $form);
-    },
-
-    /**
-     * @param {Object} asyncValidator
-     */
-    addAsyncValidator: function (asyncValidator) {
-      var validator = $.extend({}, asyncValidator),
-        originalValidatorFunc = validator.validatorFunction;
-      validator.async = true;
-      validator.validatorFunction = function (value, $el, config, language, $form, eventContext) {
-        var asyncValidation = AsyncValidation.loadInstance(this.name, $el, $form);
-        return asyncValidation.run(eventContext, function(done) {
-          originalValidatorFunc.apply(validator, [
-            done, value, $el, config, language, $form, eventContext
-          ]);
-        });
-      };
-      this.addValidator(validator);
-    }
-  });
-
-  // Tag elements having async validators
-  $(window).bind('validatorsLoaded formValidationSetup', function (evt, $form) {
-    if (!$form) {
-      $form = $('form');
-    }
-    $form.find('[data-validation]').each(function () {
-      var $input = $(this);
-      $input.valAttr('async', false);
-      $.each($.split($input.attr('data-validation')), function (i, validatorName) {
-        var validator = $.formUtils.validators['validate_'+validatorName];
-        if (validator && validator.async) {
-          $input.valAttr('async', 'yes');
-        }
-      });
-    });
-  });
-
-})(jQuery, window);
-
-/**
- * Deprecated functions and attributes
- * @todo: Remove in release of 3.0
- */
-(function ($, undefined) {
-
-  'use strict';
-
-  /**
-   * @deprecated
-   * @param language
-   * @param conf
-   */
-  $.fn.validateForm = function (language, conf) {
-    $.formUtils.warn('Use of deprecated function $.validateForm, use $.isValid instead');
-    return this.isValid(language, conf, true);
-  };
-
-  $(window)
-    .on('formValidationPluginInit', function(evt, config) {
-      convertDeprecatedLangCodeToISO6391(config);
-      addSupportForCustomErrorMessageCallback(config);
-      addSupportForElementReferenceInPositionParam(config);
-    })
-    .on('validatorsLoaded formValidationSetup', function(evt, $form) {
-      if( !$form ) {
-        $form = $('form');
-      }
-      addSupportForValidationDependingOnCheckedInput($form);
-    });
-
-
-  function addSupportForCustomErrorMessageCallback(config) {
-    if (config &&
-        config.errorMessagePosition === 'custom' &&
-        typeof config.errorMessageCustom === 'function') {
-
-      $.formUtils.warn('Use of deprecated function errorMessageCustom, use config.submitErrorMessageCallback instead');
-
-      config.submitErrorMessageCallback = function($form, errorMessages) {
-        config.errorMessageCustom(
-            $form,
-            config.language.errorTitle,
-            errorMessages,
-            config
-        );
-      };
-    }
-  }
-
-  function addSupportForElementReferenceInPositionParam(config) {
-    if (config.errorMessagePosition && typeof config.errorMessagePosition === 'object') {
-      $.formUtils.warn('Deprecated use of config parameter errorMessagePosition, use config.submitErrorMessageCallback instead');
-      var $errorMessageContainer = config.errorMessagePosition;
-      config.errorMessagePosition = 'top';
-      config.submitErrorMessageCallback = function() {
-        return $errorMessageContainer;
-      };
-    }
-  }
-
-  function addSupportForValidationDependingOnCheckedInput($form) {
-    var $inputsDependingOnCheckedInputs = $form.find('[data-validation-if-checked]');
-    if ($inputsDependingOnCheckedInputs.length) {
-      $.formUtils.warn(
-        'Detected use of attribute "data-validation-if-checked" which is '+
-        'deprecated. Use "data-validation-depends-on" provided by module "logic"'
-      );
-    }
-
-    $inputsDependingOnCheckedInputs
-      .on('beforeValidation', function() {
-
-        var $elem = $(this),
-          nameOfDependingInput = $elem.valAttr('if-checked');
-
-        // Set the boolean telling us that the validation depends
-        // on another input being checked
-        var $dependingInput = $('input[name="' + nameOfDependingInput + '"]', $form),
-          dependingInputIsChecked = $dependingInput.is(':checked'),
-          valueOfDependingInput = ($.formUtils.getValue($dependingInput) || '').toString(),
-          requiredValueOfDependingInput = $elem.valAttr('if-checked-value');
-
-        if (!dependingInputIsChecked || !(
-              !requiredValueOfDependingInput ||
-              requiredValueOfDependingInput === valueOfDependingInput
-          )) {
-          $elem.valAttr('skipped', true);
-        }
-
-      });
-    }
-
-    function convertDeprecatedLangCodeToISO6391(config) {
-      var deprecatedLangCodes = {
-        se: 'sv',
-        cz: 'cs',
-        dk: 'da'
-      };
-
-      if (config.lang in deprecatedLangCodes) {
-        var newLangCode = deprecatedLangCodes[config.lang];
-        $.formUtils.warn(
-          'Deprecated use of lang code "'+config.lang+'" use "'+newLangCode+'" instead'
-        );
-        config.lang = newLangCode;
-      }
-    }
-
-})(jQuery);
-
-/**
- * Utility methods used for displaying error messages (attached to $.formUtils)
- */
-(function ($) {
-
-  'use strict';
-
-  var dialogs = {
-
-    resolveErrorMessage: function($elem, validator, validatorName, conf, language) {
-      var errorMsgAttr = conf.validationErrorMsgAttribute + '-' + validatorName.replace('validate_', ''),
-        validationErrorMsg = $elem.attr(errorMsgAttr);
-
-      if (!validationErrorMsg) {
-        validationErrorMsg = $elem.attr(conf.validationErrorMsgAttribute);
-        if (!validationErrorMsg) {
-          if (typeof validator.errorMessageKey !== 'function') {
-            validationErrorMsg = language[validator.errorMessageKey];
-          }
-          else {
-            validationErrorMsg = language[validator.errorMessageKey(conf)];
-          }
-          if (!validationErrorMsg) {
-            validationErrorMsg = validator.errorMessage;
-          }
-        }
-      }
-      return validationErrorMsg;
-    },
-    getParentContainer: function ($elem) {
-      if ($elem.valAttr('error-msg-container')) {
-        return $($elem.valAttr('error-msg-container'));
-      } else {
-        var $parent = $elem.parent();
-        if($elem.attr('type') === 'checkbox' && $elem.closest('.checkbox').length) {
-          $parent = $elem.closest('.checkbox').parent();
-        } else if($elem.attr('type') === 'radio' && $elem.closest('.radio').length) {
-          $parent = $elem.closest('.radio').parent();
-        }
-        if($parent.closest('.input-group').length) {
-          $parent = $parent.closest('.input-group').parent();
-        }
-        return $parent;
-      }
-    },
-    applyInputErrorStyling: function ($input, conf) {
-      $input
-        .addClass(conf.errorElementClass)
-        .removeClass(conf.successElementClass);
-
-      this.getParentContainer($input)
-        .addClass(conf.inputParentClassOnError)
-        .removeClass(conf.inputParentClassOnSuccess);
-
-      if (conf.borderColorOnError !== '') {
-        $input.css('border-color', conf.borderColorOnError);
-      }
-    },
-    applyInputSuccessStyling: function($input, conf) {
-      $input.addClass(conf.successElementClass);
-      this.getParentContainer($input)
-        .addClass(conf.inputParentClassOnSuccess);
-    },
-    removeInputStylingAndMessage: function($input, conf) {
-
-      // Reset input css
-      $input
-        .removeClass(conf.successElementClass)
-        .removeClass(conf.errorElementClass)
-        .css('border-color', '');
-
-      var $parentContainer = dialogs.getParentContainer($input);
-
-      // Reset parent css
-      $parentContainer
-        .removeClass(conf.inputParentClassOnError)
-        .removeClass(conf.inputParentClassOnSuccess);
-
-      // Remove possible error message
-      if (typeof conf.inlineErrorMessageCallback === 'function') {
-        var $errorMessage = conf.inlineErrorMessageCallback($input, false, conf);
-        if ($errorMessage) {
-          $errorMessage.html('');
-        }
-      } else {
-        $parentContainer
-          .find('.' + conf.errorMessageClass)
-          .remove();
-      }
-
-    },
-    removeAllMessagesAndStyling: function($form, conf) {
-
-      // Remove error messages in top of form
-      if (typeof conf.submitErrorMessageCallback === 'function') {
-        var $errorMessagesInTopOfForm = conf.submitErrorMessageCallback($form, false, conf);
-        if ($errorMessagesInTopOfForm) {
-          $errorMessagesInTopOfForm.html('');
-        }
-      } else {
-        $form.find('.' + conf.errorMessageClass + '.alert').remove();
-      }
-
-      // Remove input css/messages
-      $form.find('.' + conf.errorElementClass + ',.' + conf.successElementClass).each(function() {
-        dialogs.removeInputStylingAndMessage($(this), conf);
-      });
-    },
-    setInlineMessage: function ($input, errorMsg, conf) {
-
-      this.applyInputErrorStyling($input, conf);
-
-      var custom = document.getElementById($input.attr('name') + '_err_msg'),
-        $messageContainer = false,
-        setErrorMessage = function ($elem) {
-          $.formUtils.$win.trigger('validationErrorDisplay', [$input, $elem]);
-          $elem.html(errorMsg);
-        },
-        addErrorToMessageContainer = function() {
-          var $found = false;
-          $messageContainer.find('.' + conf.errorMessageClass).each(function () {
-            if (this.inputReferer === $input[0]) {
-              $found = $(this);
-              return false;
-            }
-          });
-          if ($found) {
-            if (!errorMsg) {
-              $found.remove();
-            } else {
-              setErrorMessage($found);
-            }
-          } else if(errorMsg !== '') {
-            $message = $('<div class="' + conf.errorMessageClass + ' alert"></div>');
-            setErrorMessage($message);
-            $message[0].inputReferer = $input[0];
-            $messageContainer.prepend($message);
-          }
-        },
-        $message;
-
-      if (custom) {
-        // Todo: remove in 3.0
-        $.formUtils.warn('Using deprecated element reference ' + custom.id);
-        $messageContainer = $(custom);
-        addErrorToMessageContainer();
-      } else if (typeof conf.inlineErrorMessageCallback === 'function') {
-        $messageContainer = conf.inlineErrorMessageCallback($input, errorMsg, conf);
-        if (!$messageContainer) {
-          // Error display taken care of by inlineErrorMessageCallback
-          return;
-        }
-        addErrorToMessageContainer();
-      } else {
-        var $parent = this.getParentContainer($input);
-        $message = $parent.find('.' + conf.errorMessageClass + '.help-block');
-        if ($message.length === 0) {
-          $message = $('<span></span>').addClass('help-block').addClass(conf.errorMessageClass);
-          $message.appendTo($parent);
-        }
-        setErrorMessage($message);
-      }
-    },
-    setMessageInTopOfForm: function ($form, errorMessages, conf, lang) {
-      var view = '<div class="{errorMessageClass} alert alert-danger">'+
-                    '<strong>{errorTitle}</strong>'+
-                    '<ul>{fields}</ul>'+
-                '</div>',
-          $container = false;
-
-      if (typeof conf.submitErrorMessageCallback === 'function') {
-        $container = conf.submitErrorMessageCallback($form, errorMessages, conf);
-        if (!$container) {
-          // message display taken care of by callback
-          return;
-        }
-      }
-
-      var viewParams = {
-            errorTitle: lang.errorTitle,
-            fields: '',
-            errorMessageClass: conf.errorMessageClass
-          };
-
-      $.each(errorMessages, function (i, msg) {
-        viewParams.fields += '<li>'+msg+'</li>';
-      });
-
-      $.each(viewParams, function(param, value) {
-        view = view.replace('{'+param+'}', value);
-      });
-
-      if ($container) {
-        $container.html(view);
-      } else {
-        $form.children().eq(0).before($(view));
-      }
-    }
-  };
-
-  $.formUtils = $.extend($.formUtils || {}, {
-    dialogs: dialogs
-  });
-
-})(jQuery);
-
-/**
- * File declaring all methods if this plugin which is applied to $.fn.
- */
-(function($, window, undefined) {
-
-  'use strict';
-
-  var _helpers = 0;
-
-
-  /**
-   * Assigns validateInputOnBlur function to elements blur event
-   *
-   * @param {Object} language Optional, will override $.formUtils.LANG
-   * @param {Object} conf Optional, will override the default settings
-   * @return {jQuery}
-   */
-  $.fn.validateOnBlur = function (language, conf) {
-    var $form = this,
-        $elems = this.find('*[data-validation]');
-
-    $elems.each(function(){
-      var $this = $(this);
-      if ($this.is('[type=radio]')){
-        var $additionals = $form.find('[type=radio][name="' + $this.attr('name') + '"]');
-        $additionals.bind('blur.validation', function(){
-          $this.validateInputOnBlur(language, conf, true, 'blur');
-        });
-        if (conf.validateCheckboxRadioOnClick) {
-          $additionals.bind('click.validation', function () {
-            $this.validateInputOnBlur(language, conf, true, 'click');
-          });
-        }
-      }
-    });
-
-    $elems.bind('blur.validation', function () {
-      $(this).validateInputOnBlur(language, conf, true, 'blur');
-    });
-
-    if (conf.validateCheckboxRadioOnClick) {
-      // bind click event to validate on click for radio & checkboxes for nice UX
-      this.find('input[type=checkbox][data-validation],input[type=radio][data-validation]')
-        .bind('click.validation', function () {
-          $(this).validateInputOnBlur(language, conf, true, 'click');
-        });
-    }
-
-    return this;
-  };
-
-  /*
-   * Assigns validateInputOnBlur function to elements custom event
-   * @param {Object} language Optional, will override $.formUtils.LANG
-   * @param {Object} settings Optional, will override the default settings
-   * * @return {jQuery}
-   */
-  $.fn.validateOnEvent = function (language, config) {
-    if(this.length === 0) {
-      return;
-    }
-    
-    var $elements = this[0].nodeName === 'FORM' ? this.find('*[data-validation-event]') : this;
-    $elements
-      .each(function () {
-        var $el = $(this),
-          etype = $el.valAttr('event');
-        if (etype) {
-          $el
-            .unbind(etype + '.validation')
-            .bind(etype + '.validation', function (evt) {
-              if( (evt || {}).keyCode !== 9 ) {
-                $(this).validateInputOnBlur(language, config, true, etype);
-              }
-            });
-        }
-      });
-    return this;
-  };
-
-  /**
-   * fade in help message when input gains focus
-   * fade out when input loses focus
-   * <input data-help="The info that I want to display for the user when input is focused" ... />
-   *
-   * @param {String} attrName - Optional, default is data-help
-   * @return {jQuery}
-   */
-  $.fn.showHelpOnFocus = function (attrName) {
-    if (!attrName) {
-      attrName = 'data-validation-help';
-    }
-
-    // Add help text listeners
-    this.find('textarea,input').each(function () {
-      var $elem = $(this),
-        className = 'jquery_form_help_' + (++_helpers),
-        help = $elem.attr(attrName);
-
-      // Reset
-      $elem
-        .removeClass('has-help-text')
-        .unbind('focus.help')
-        .unbind('blur.help');
-
-      if (help) {
-        $elem
-          .addClass('has-help-txt')
-          .bind('focus.help', function () {
-            var $help = $elem.parent().find('.' + className);
-            if ($help.length === 0) {
-              $help = $('<span />')
-                .addClass(className)
-                .addClass('help')
-                .addClass('help-block') // twitter bs
-                .text(help)
-                .hide();
-
-              $elem.after($help);
-            }
-            $help.fadeIn();
-          })
-          .bind('blur.help', function () {
-            $(this)
-              .parent()
-              .find('.' + className)
-              .fadeOut('slow');
-          });
-      }
-    });
-
-    return this;
-  };
-
-  /**
-   * @param {Function} cb
-   * @param {Object} [conf]
-   * @param {Object} [lang]
-   */
-  $.fn.validate = function(cb, conf, lang) {
-    var language = $.extend({}, $.formUtils.LANG, lang || {});
-    this.each(function() {
-      var $elem = $(this),
-        closestFormElem = $elem.closest('form').get(0) || {},
-        formDefaultConfig = closestFormElem.validationConfig || $.formUtils.defaultConfig();
-
-      $elem.one('validation', function(evt, isValid) {
-        if ( typeof cb === 'function' ) {
-          cb(isValid, this, evt);
-        }
-      });
-
-      $elem.validateInputOnBlur(
-        language,
-        $.extend({}, formDefaultConfig, conf || {}),
-        true
-      );
-    });
-  };
-
-  /**
-   * Tells whether or not validation of this input will have to postpone the form submit ()
-   * @returns {Boolean}
-   */
-  $.fn.willPostponeValidation = function() {
-    return (this.valAttr('suggestion-nr') ||
-      this.valAttr('postpone') ||
-      this.hasClass('hasDatepicker')) &&
-      !window.postponedValidation;
-  };
-
-  /**
-   * Validate single input when it loses focus
-   * shows error message in a span element
-   * that is appended to the parent element
-   *
-   * @param {Object} [language] Optional, will override $.formUtils.LANG
-   * @param {Object} [conf] Optional, will override the default settings
-   * @param {Boolean} attachKeyupEvent Optional
-   * @param {String} eventContext
-   * @return {jQuery}
-   */
-  $.fn.validateInputOnBlur = function (language, conf, attachKeyupEvent, eventContext) {
-
-    $.formUtils.eventType = eventContext;
-
-    if ( this.willPostponeValidation() ) {
-      // This validation has to be postponed
-      var _self = this,
-        postponeTime = this.valAttr('postpone') || 200;
-
-      window.postponedValidation = function () {
-        _self.validateInputOnBlur(language, conf, attachKeyupEvent, eventContext);
-        window.postponedValidation = false;
-      };
-
-      setTimeout(function () {
-        if (window.postponedValidation) {
-          window.postponedValidation();
-        }
-      }, postponeTime);
-
-      return this;
-    }
-
-    language = $.extend({}, $.formUtils.LANG, language || {});
-    $.formUtils.dialogs.removeInputStylingAndMessage(this, conf);
-
-    var $elem = this,
-      $form = $elem.closest('form'),
-      result = $.formUtils.validateInput(
-        $elem,
-        language,
-        conf,
-        $form,
-        eventContext
-      );
-
-    var reValidate = function() {
-      $elem.validateInputOnBlur(language, conf, false, 'blur.revalidated');
-    };
-
-    if (eventContext === 'blur') {
-      $elem
-        .unbind('validation.revalidate', reValidate)
-        .one('validation.revalidate', reValidate);
-    }
-
-    if (attachKeyupEvent) {
-      $elem.removeKeyUpValidation();
-    }
-
-    if (result.shouldChangeDisplay) {
-      if (result.isValid) {
-        $.formUtils.dialogs.applyInputSuccessStyling($elem, conf);
-      } else {
-        $.formUtils.dialogs.setInlineMessage($elem, result.errorMsg, conf);
-      }
-    }
-
-    if (!result.isValid && attachKeyupEvent) {
-      $elem.validateOnKeyUp(language, conf);
-    }
-
-    return this;
-  };
-
-  /**
-   * Validate element on keyup-event
-   */
-  $.fn.validateOnKeyUp = function(language, conf) {
-    this.each(function() {
-      var $input = $(this);
-      if (!$input.valAttr('has-keyup-event')) {
-        $input
-          .valAttr('has-keyup-event', 'true')
-          .bind('keyup.validation', function (evt) {
-            if( evt.keyCode !== 9 ) {
-              $input.validateInputOnBlur(language, conf, false, 'keyup');
-            }
-          });
-      }
-    });
-    return this;
-  };
-
-  /**
-   * Remove validation on keyup
-   */
-  $.fn.removeKeyUpValidation = function() {
-    this.each(function() {
-      $(this)
-        .valAttr('has-keyup-event', false)
-        .unbind('keyup.validation');
-    });
-    return this;
-  };
-
-  /**
-   * Short hand for fetching/adding/removing element attributes
-   * prefixed with 'data-validation-'
-   *
-   * @param {String} name
-   * @param {String|Boolean} [val]
-   * @return {String|undefined|jQuery}
-   * @protected
-   */
-  $.fn.valAttr = function (name, val) {
-    if (val === undefined) {
-      return this.attr('data-validation-' + name);
-    } else if (val === false || val === null) {
-      return this.removeAttr('data-validation-' + name);
-    } else {
-      name = ((name.length > 0) ? '-' + name : '');
-      return this.attr('data-validation' + name, val);
-    }
-  };
-
-  /**
-   * Function that validates all inputs in active form
-   *
-   * @param {Object} [language]
-   * @param {Object} [conf]
-   * @param {Boolean} [displayError] Defaults to true
-   */
-  $.fn.isValid = function (language, conf, displayError) {
-
-    if ($.formUtils.isLoadingModules) {
-      var $self = this;
-      setTimeout(function () {
-        $self.isValid(language, conf, displayError);
-      }, 200);
-      return null;
-    }
-
-    conf = $.extend({}, $.formUtils.defaultConfig(), conf || {});
-    language = $.extend({}, $.formUtils.LANG, language || {});
-    displayError = displayError !== false;
-
-    if ($.formUtils.errorDisplayPreventedWhenHalted) {
-      // isValid() was called programmatically with argument displayError set
-      // to false when the validation was halted by any of the validators
-      delete $.formUtils.errorDisplayPreventedWhenHalted;
-      displayError = false;
-    }
-
-    /**
-     * Adds message to error message stack if not already in the message stack
-     *
-     * @param {String} mess
-     * @para {jQuery} $elem
-     */
-    var addErrorMessage = function (mess, $elem) {
-        if ($.inArray(mess, errorMessages) < 0) {
-          errorMessages.push(mess);
-        }
-        errorInputs.push($elem);
-        $elem.valAttr('current-error', mess);
-        if (displayError) {
-          $.formUtils.dialogs.applyInputErrorStyling($elem, conf);
-        }
-      },
-
-      /** Holds inputs (of type checkox or radio) already validated, to prevent recheck of mulitple checkboxes & radios */
-      checkedInputs = [],
-
-      /** Error messages for this validation */
-      errorMessages = [],
-
-      /** Input elements which value was not valid */
-      errorInputs = [],
-
-      /** Form instance */
-      $form = this,
-
-      /**
-       * Tells whether or not to validate element with this name and of this type
-       *
-       * @param {String} name
-       * @param {String} type
-       * @return {Boolean}
-       */
-      ignoreInput = function (name, type) {
-        if (type === 'submit' || type === 'button' || type === 'reset') {
-          return true;
-        }
-        return $.inArray(name, conf.ignore || []) > -1;
-      };
-
-    // Reset style and remove error class
-    if (displayError) {
-      $.formUtils.dialogs.removeAllMessagesAndStyling($form, conf);
-    }
-
-    // Validate element values
-    $form.find('input,textarea,select').filter(':not([type="submit"],[type="button"])').each(function () {
-      var $elem = $(this),
-        elementType = $elem.attr('type'),
-        isCheckboxOrRadioBtn = elementType === 'radio' || elementType === 'checkbox',
-        elementName = $elem.attr('name');
-
-      if (!ignoreInput(elementName, elementType) && (!isCheckboxOrRadioBtn || $.inArray(elementName, checkedInputs) < 0)) {
-
-        if (isCheckboxOrRadioBtn) {
-          checkedInputs.push(elementName);
-        }
-
-        var result = $.formUtils.validateInput(
-          $elem,
-          language,
-          conf,
-          $form,
-          'submit'
-        );
-
-        if (!result.isValid) {
-          addErrorMessage(result.errorMsg, $elem);
-        } else if (result.isValid && result.shouldChangeDisplay) {
-          $elem.valAttr('current-error', false);
-          $.formUtils.dialogs.applyInputSuccessStyling($elem, conf);
-        }
-      }
-
-    });
-
-    // Run validation callback
-    if (typeof conf.onValidate === 'function') {
-      var errors = conf.onValidate($form);
-      if ($.isArray(errors)) {
-        $.each(errors, function (i, err) {
-          addErrorMessage(err.message, err.element);
-        });
-      }
-      else if (errors && errors.element && errors.message) {
-        addErrorMessage(errors.message, errors.element);
-      }
-    }
-
-    // Reset form validation flag
-    $.formUtils.isValidatingEntireForm = false;
-
-    // Validation failed
-    if (errorInputs.length > 0) {
-      if (displayError) {
-        if (conf.errorMessagePosition === 'top') {
-          $.formUtils.dialogs.setMessageInTopOfForm($form, errorMessages, conf, language);
-        } else {
-          $.each(errorInputs, function (i, $input) {
-            $.formUtils.dialogs.setInlineMessage($input, $input.valAttr('current-error'), conf);
-          });
-        }
-        if (conf.scrollToTopOnError) {
-          $.formUtils.$win.scrollTop($form.offset().top - 20);
-        }
-      }
-    }
-
-    if (!displayError && $.formUtils.haltValidation) {
-      $.formUtils.errorDisplayPreventedWhenHalted = true;
-    }
-
-    return errorInputs.length === 0 && !$.formUtils.haltValidation;
-  };
-
-  /**
-   * Plugin for displaying input length restriction
-   */
-  $.fn.restrictLength = function (maxLengthElement) {
-    new $.formUtils.lengthRestriction(this, maxLengthElement);
-    return this;
-  };
-
-  /**
-   * Add suggestion dropdown to inputs having data-suggestions with a comma
-   * separated string with suggestions
-   * @param {Array} [settings]
-   * @returns {jQuery}
-   */
-  $.fn.addSuggestions = function (settings) {
-    var sugs = false;
-    this.find('input').each(function () {
-      var $field = $(this);
-
-      sugs = $.split($field.attr('data-suggestions'));
-
-      if (sugs.length > 0 && !$field.hasClass('has-suggestions')) {
-        $.formUtils.suggest($field, sugs, settings);
-        $field.addClass('has-suggestions');
-      }
-    });
-    return this;
-  };
-
-
-})(jQuery, window);
-
-/**
- * Utility methods used for handling loading of modules (attached to $.formUtils)
- */
-(function($) {
-
-  'use strict';
-
-  $.formUtils = $.extend($.formUtils || {}, {
-
-    /**
-     * @var {Boolean}
-     */
-    isLoadingModules: false,
-
-    /**
-     * @var {Object}
-     */
-    loadedModules: {},
-
-    /**
-     * @param {String} name
-     */
-    registerLoadedModule: function (name) {
-      this.loadedModules[$.trim(name).toLowerCase()] = true;
-    },
-
-    /**
-     * @param {String} name
-     * @return {Boolean}
-     */
-    hasLoadedModule: function (name) {
-      return $.trim(name).toLowerCase() in this.loadedModules;
-    },
-
-    /**
-     * @example
-     *  $.formUtils.loadModules('date, security.dev');
-     *
-     * Will load the scripts date.js and security.dev.js from the
-     * directory where this script resides. If you want to load
-     * the modules from another directory you can use the
-     * path argument.
-     *
-     * The script will be cached by the browser unless the module
-     * name ends with .dev
-     *
-     * @param {String} modules - Comma separated string with module file names (no directory nor file extension)
-     * @param {String} [path] - Path where the module files are located if their not in the same directory as the core modules
-     * @param {function} [callback] - Callback invoked when all modules are loaded
-     */
-    loadModules: function (modules, path, callback) {
-
-      if ($.formUtils.isLoadingModules) {
-        setTimeout(function () {
-          $.formUtils.loadModules(modules, path, callback);
-        }, 100);
-        return;
-      }
-
-      var loadModuleScripts = function (modules, path) {
-
-          var moduleList = $.split(modules),
-            numModules = moduleList.length,
-            moduleLoadedCallback = function () {
-              numModules--;
-              if (numModules === 0) {
-                $.formUtils.isLoadingModules = false;
-                if (typeof callback === 'function') {
-                    callback();
-                }
-              }
-            };
-
-          if (numModules > 0) {
-            $.formUtils.isLoadingModules = true;
-          }
-
-          var cacheSuffix = '?_=' + ( new Date().getTime() ),
-            appendToElement = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0];
-
-          $.each(moduleList, function (i, modName) {
-            modName = $.trim(modName);
-            if (modName.length === 0 || $.formUtils.hasLoadedModule(modName)) {
-              moduleLoadedCallback();
-            } else {
-              var scriptUrl = path + modName + (modName.slice(-3) === '.js' ? '' : '.js'),
-                script = document.createElement('SCRIPT');
-
-              if (typeof define === 'function' && define.amd) {
-                require([scriptUrl + ( scriptUrl.slice(-7) === '.dev.js' ? cacheSuffix : '' )], moduleLoadedCallback);
-              } else {
-                // Load the script
-                script.type = 'text/javascript';
-                script.onload = moduleLoadedCallback;
-                script.src = scriptUrl + ( scriptUrl.slice(-7) === '.dev.js' ? cacheSuffix : '' );
-                script.onerror = function() {
-                  $.formUtils.warn('Unable to load form validation module '+scriptUrl, true);
-                  moduleLoadedCallback();
-                };
-                script.onreadystatechange = function () {
-                  // IE 7 fix
-                  if (this.readyState === 'complete' || this.readyState === 'loaded') {
-                    moduleLoadedCallback();
-                    // Handle memory leak in IE
-                    this.onload = null;
-                    this.onreadystatechange = null;
-                  }
-                };
-                appendToElement.appendChild(script);
-              }
-            }
-          });
-        };
-
-      if (path) {
-        loadModuleScripts(modules, path);
-      } else {
-        var findScriptPathAndLoadModules = function () {
-          var foundPath = false;
-          $('script[src*="form-validator"]').each(function () {
-            var isScriptFromPluginNodeModulesDirectory = this.src.split('form-validator')[1].split('node_modules').length > 1;
-            if (!isScriptFromPluginNodeModulesDirectory) {
-              foundPath = this.src.substr(0, this.src.lastIndexOf('/')) + '/';
-              if (foundPath === '/') {
-                foundPath = '';
-              }
-              return false;
-            }
-          });
-
-          if (foundPath !== false) {
-            loadModuleScripts(modules, foundPath);
-            return true;
-          }
-          return false;
-        };
-
-        if (!findScriptPathAndLoadModules()) {
-          $(function () {
-            var hasLoadedModuleScripts = findScriptPathAndLoadModules();
-            if (!hasLoadedModuleScripts) {
-              // The modules may have been inserted via a minified script
-              if (typeof callback === 'function') {
-                callback();
-              }
-            }
-          });
-        }
-      }
-    }
-
-  });
-
-})(jQuery);
-
-/**
- * Setup function for the plugin
- */
-(function ($) {
-
-  'use strict';
-
-
-  /**
-   * A bit smarter split function
-   * delimiter can be space, comma, dash or pipe
-   * @param {String} val
-   * @param {Function|String} [callback]
-   * @param {Boolean} [allowSpaceAsDelimiter]
-   * @returns {Array|void}
-   */
-  $.split = function (val, callback, allowSpaceAsDelimiter) {
-    // default to true
-    allowSpaceAsDelimiter = allowSpaceAsDelimiter === undefined || allowSpaceAsDelimiter === true;
-    var pattern = '[,|'+(allowSpaceAsDelimiter ? '\\s':'')+'-]\\s*',
-      regex = new RegExp(pattern, 'g');
-    if (typeof callback !== 'function') {
-      // return array
-      if (!val) {
-        return [];
-      }
-      var values = [];
-      $.each(val.split(callback ? callback : regex),
-        function (i, str) {
-          str = $.trim(str);
-          if (str.length) {
-            values.push(str);
-          }
-        }
-      );
-      return values;
-    } else if (val) {
-      // exec callback func on each
-      $.each(val.split(regex),
-        function (i, str) {
-          str = $.trim(str);
-          if (str.length) {
-            return callback(str, i);
-          }
-        }
-      );
-    }
-  };
-
-  /**
-   * Short hand function that makes the validation setup require less code
-   * @param conf
-   */
-  $.validate = function (conf) {
-
-    var defaultConf = $.extend($.formUtils.defaultConfig(), {
-      form: 'form',
-      validateOnEvent: false,
-      validateOnBlur: true,
-      validateCheckboxRadioOnClick: true,
-      showHelpOnFocus: true,
-      addSuggestions: true,
-      modules: '',
-      onModulesLoaded: null,
-      language: false,
-      onSuccess: false,
-      onError: false,
-      onElementValidate: false
-    });
-
-    conf = $.extend(defaultConf, conf || {});
-
-    $(window).trigger('formValidationPluginInit', [conf]);
-
-    if( conf.lang && conf.lang !== 'en' ) {
-      var langModule = 'lang/'+conf.lang+'.js';
-      conf.modules += conf.modules.length ? ','+langModule : langModule;
-    }
-
-    // Add validation to forms
-    $(conf.form).each(function (i, form) {
-
-      // Make a reference to the config for this form
-      form.validationConfig = conf;
-
-      // Trigger jQuery event that we're about to setup validation
-      var $form = $(form);
-      $form.trigger('formValidationSetup', [$form, conf]);
-
-      // Remove classes and event handlers that might have been
-      // added by a previous call to $.validate
-      $form.find('.has-help-txt')
-          .unbind('focus.validation')
-          .unbind('blur.validation');
-
-      $form
-        .removeClass('has-validation-callback')
-        .unbind('submit.validation')
-        .unbind('reset.validation')
-        .find('input[data-validation],textarea[data-validation]')
-          .unbind('blur.validation');
-
-      // Validate when submitted
-      $form.bind('submit.validation', function (evt) {
-
-        var $form = $(this),
-          stop = function() {
-            evt.stopImmediatePropagation();
-            return false;
-          };
-
-        if ($.formUtils.haltValidation) {
-          // pressing several times on submit button while validation is halted
-          return stop();
-        }
-
-        if ($.formUtils.isLoadingModules) {
-          setTimeout(function () {
-            $form.trigger('submit.validation');
-          }, 200);
-          return stop();
-        }
-
-        var valid = $form.isValid(conf.language, conf);
-        if ($.formUtils.haltValidation) {
-          // Validation got halted by one of the validators
-          return stop();
-        } else {
-          if (valid && typeof conf.onSuccess === 'function') {
-            var callbackResponse = conf.onSuccess($form);
-            if (callbackResponse === false) {
-              return stop();
-            }
-          } else if (!valid && typeof conf.onError === 'function') {
-            conf.onError($form);
-            return stop();
-          } else {
-            return valid ? true : stop();
-          }
-        }
-      })
-      .bind('reset.validation', function () {
-        $.formUtils.dialogs.removeAllMessagesAndStyling($form, conf);
-      })
-      .addClass('has-validation-callback');
-
-      if (conf.showHelpOnFocus) {
-        $form.showHelpOnFocus();
-      }
-      if (conf.addSuggestions) {
-        $form.addSuggestions();
-      }
-      if (conf.validateOnBlur) {
-        $form.validateOnBlur(conf.language, conf);
-        $form.bind('html5ValidationAttrsFound', function () {
-          $form.validateOnBlur(conf.language, conf);
-        });
-      }
-      if (conf.validateOnEvent) {
-        $form.validateOnEvent(conf.language, conf);
-      }
-    });
-
-    if (conf.modules !== '') {
-      $.formUtils.loadModules(conf.modules, null, function() {
-        if (typeof conf.onModulesLoaded === 'function') {
-          conf.onModulesLoaded();
-        }
-        var $form = typeof conf.form === 'string' ? $(conf.form) : conf.form;
-        $.formUtils.$win.trigger('validatorsLoaded', [$form, conf]);
-      });
-    }
-  };
-
-})(jQuery);
-
-/**
- * Utility methods and properties attached to $.formUtils
- */
-(function($, window) {
-
-  'use strict';
-
-  var $win = $(window);
-
-  $.formUtils = $.extend($.formUtils || {}, {
-
-    $win: $win,
-
-    /**
-     * Default config for $(...).isValid();
-     */
-    defaultConfig: function () {
-      return {
-        ignore: [], // Names of inputs not to be validated even though `validationRuleAttribute` containing the validation rules tells us to
-        errorElementClass: 'error', // Class that will be put on elements which value is invalid
-        successElementClass: 'valid', // Class that will be put on elements that has been validated with success
-        borderColorOnError: '#b94a48', // Border color of elements which value is invalid, empty string to not change border color
-        errorMessageClass: 'form-error', // class name of div containing error messages when validation fails
-        validationRuleAttribute: 'data-validation', // name of the attribute holding the validation rules
-        validationErrorMsgAttribute: 'data-validation-error-msg', // define custom err msg inline with element
-        errorMessagePosition: 'inline', // Can be either "top" or "inline"
-        errorMessageTemplate: {
-          container: '<div class="{errorMessageClass} alert alert-danger">{messages}</div>',
-          messages: '<strong>{errorTitle}</strong><ul>{fields}</ul>',
-          field: '<li>{msg}</li>'
-        },
-        scrollToTopOnError: true,
-        dateFormat: 'yyyy-mm-dd',
-        addValidClassOnAll: false, // whether or not to apply class="valid" even if the input wasn't validated
-        decimalSeparator: '.',
-        inputParentClassOnError: 'has-error', // twitter-bootstrap default class name
-        inputParentClassOnSuccess: 'has-success', // twitter-bootstrap default class name
-        validateHiddenInputs: false, // whether or not hidden inputs should be validated
-        inlineErrorMessageCallback: false,
-        submitErrorMessageCallback: false
-      };
-    },
-
-    /**
-     * Available validators
-     */
-    validators: {},
-
-    /**
-     * Available sanitizers
-     */
-    sanitizers: {},
-
-    /**
-     * Events triggered by form validator
-     */
-    _events: {load: [], valid: [], invalid: []},
-
-    /**
-     * Setting this property to true during validation will
-     * stop further validation from taking place and form will
-     * not be sent
-     */
-    haltValidation: false,
-
-    /**
-     * Function for adding a validator
-     * @see $.formUtils.addAsyncValidator (async.js)
-     * @param {Object} validator
-     */
-    addValidator: function (validator) {
-      // prefix with "validate_" for backward compatibility reasons
-      var name = validator.name.indexOf('validate_') === 0 ? validator.name : 'validate_' + validator.name;
-      if (validator.validateOnKeyUp === undefined) {
-        validator.validateOnKeyUp = true;
-      }
-      this.validators[name] = validator;
-    },
-
-    /**
-     * Function for adding a sanitizer
-     * @param {Object} sanitizer
-     */
-    addSanitizer: function (sanitizer) {
-      this.sanitizers[sanitizer.name] = sanitizer;
-    },
-
-    /**
-     * Warn user via the console if available
-     */
-    warn: function(msg, fallbackOnAlert) {
-      if( 'console' in window ) {
-        if( typeof window.console.warn === 'function' ) {
-          window.console.warn(msg);
-        } else if( typeof window.console.log === 'function' ) {
-          window.console.log(msg);
-        }
-      } else if (fallbackOnAlert) {
-        // This is for some old IE version...
-        alert(msg);
-      }
-    },
-
-    /**
-     * Same as input $.fn.val() but also supporting input of typ radio or checkbox
-     * @example
-     *
-     *  $.formUtils.getValue('.myRadioButtons', $('#some-form'));
-     *  $.formUtils.getValue($('#some-form').find('.check-boxes'));
-     *
-     * @param query
-     * @param $parent
-     * @returns {String|Boolean}
-     */
-    getValue: function(query, $parent) {
-      var $inputs = $parent ? $parent.find(query) : query;
-      if ($inputs.length > 0 ) {
-        var type = $inputs.eq(0).attr('type');
-        if (type === 'radio' || type === 'checkbox') {
-          return $inputs.filter(':checked').val() || '';
-        } else {
-          return $inputs.val() || '';
-        }
-      }
-      return false;
-    },
-
-    /**
-     * Validate the value of given element according to the validation rules
-     * found in the attribute data-validation. Will return an object representing
-     * a validation result, having the props shouldChangeDisplay, isValid and errorMsg
-     * @param {jQuery} $elem
-     * @param {Object} language ($.formUtils.LANG)
-     * @param {Object} conf
-     * @param {jQuery} $form
-     * @param {String} [eventContext]
-     * @return {Object}
-     */
-    validateInput: function ($elem, language, conf, $form, eventContext) {
-
-      conf = conf || $.formUtils.defaultConfig();
-      language = language || $.formUtils.LANG;
-
-      if (!$form.length) {
-        $form = $elem.parent();
-      }
-
-      var value = this.getValue($elem);
-
-      $elem
-        .valAttr('skipped', false)
-        .one('beforeValidation', function() {
-          // Skip input because its hidden or disabled
-          // Doing this in a callback makes it possible for others to prevent the default
-          // behaviour by binding to the same event and call evt.stopImmediatePropagation()
-          if ($elem.attr('disabled') || (!$elem.is(':visible') && !conf.validateHiddenInputs)) {
-            $elem.valAttr('skipped', 1);
-          }
-        })
-        .trigger('beforeValidation', [value, language, conf]);
-
-      var inputIsOptional = $elem.valAttr('optional') === 'true',
-          skipBecauseItsEmpty = !value && inputIsOptional,
-          validationRules = $elem.attr(conf.validationRuleAttribute),
-          isValid = true,
-          errorMsg = '',
-          result = {isValid: true, shouldChangeDisplay:true, errorMsg:''};
-
-      // For input type="number", browsers attempt to parse the entered value into a number.
-      // If the input is not numeric, browsers handle the situation differently:
-      // Chrome 48 simply disallows non-numeric input; FF 44 clears out the input box on blur;
-      // Safari 5 parses the entered string to find a leading number.
-      // If the input fails browser validation, the browser sets the input value equal to an empty string.
-      // Therefore, we cannot distinguish (apart from hacks) between an empty input type="text" and one with a
-      // value that can't be parsed by the browser.
-
-      if (!validationRules || skipBecauseItsEmpty || $elem.valAttr('skipped')) {
-        result.shouldChangeDisplay = conf.addValidClassOnAll;
-        return result;
-      }
-
-      // Filter out specified characters
-      var ignore = $elem.valAttr('ignore');
-      if (ignore) {
-        $.each(ignore.split(''), function(i, character) {
-          value = value.replace(new RegExp('\\'+character, 'g'), '');
-        });
-      }
-
-      $.split(validationRules, function (rule) {
-
-        if (rule.indexOf('validate_') !== 0) {
-          rule = 'validate_' + rule;
-        }
-
-        var validator = $.formUtils.validators[rule];
-
-        if (validator) {
-
-          // special change of element for checkbox_group rule
-          if (rule === 'validate_checkbox_group') {
-            // set element to first in group, so error msg attr doesn't need to be set on all elements in group
-            $elem = $form.find('[name="' + $elem.attr('name') + '"]:eq(0)');
-          }
-
-          if (eventContext !== 'keyup' || validator.validateOnKeyUp) {
-            // A validator can prevent itself from getting triggered on keyup
-            isValid = validator.validatorFunction(value, $elem, conf, language, $form, eventContext);
-          }
-
-          if (!isValid) {
-            if (conf.validateOnBlur) {
-              $elem.validateOnKeyUp(language, conf);
-            }
-            errorMsg = $.formUtils.dialogs.resolveErrorMessage($elem, validator, rule, conf, language);
-            return false; // break iteration
-          }
-
-        } else {
-
-          // todo: Add some validator lookup function and tell immediately which module is missing
-          throw new Error('Using undefined validator "' + rule +
-            '". Maybe you have forgotten to load the module that "' + rule +'" belongs to?');
-
-        }
-
-      });
-
-
-      if (isValid === false) {
-        $elem.trigger('validation', false);
-        result.errorMsg = errorMsg;
-        result.isValid = false;
-        result.shouldChangeDisplay = true;
-      } else if (isValid === null) {
-        // A validatorFunction returning null means that it's not able to validate
-        // the input at this time. Most probably some async stuff need to gets finished
-        // first and then the validator will re-trigger the validation.
-        result.shouldChangeDisplay = false;
-      } else {
-        $elem.trigger('validation', true);
-        result.shouldChangeDisplay = true;
-      }
-
-      // Run element validation callback
-      if (typeof conf.onElementValidate === 'function' && errorMsg !== null) {
-        conf.onElementValidate(result.isValid, $elem, $form, errorMsg);
-      }
-
-      $elem.trigger('afterValidation', [result, eventContext]);
-
-      return result;
-    },
-
-    /**
-     * Is it a correct date according to given dateFormat. Will return false if not, otherwise
-     * an array 0=>year 1=>month 2=>day
-     *
-     * @param {String} val
-     * @param {String} dateFormat
-     * @param {Boolean} [addMissingLeadingZeros]
-     * @return {Array}|{Boolean}
-     */
-    parseDate: function (val, dateFormat, addMissingLeadingZeros) {
-      var divider = dateFormat.replace(/[a-zA-Z]/gi, '').substring(0, 1),
-        regexp = '^',
-        formatParts = dateFormat.split(divider || null),
-        matches, day, month, year;
-
-      $.each(formatParts, function (i, part) {
-        regexp += (i > 0 ? '\\' + divider : '') + '(\\d{' + part.length + '})';
-      });
-
-      regexp += '$';
-
-      if (addMissingLeadingZeros) {
-        var newValueParts = [];
-        $.each(val.split(divider), function(i, part) {
-          if(part.length === 1) {
-            part = '0'+part;
-          }
-          newValueParts.push(part);
-        });
-        val = newValueParts.join(divider);
-      }
-
-      matches = val.match(new RegExp(regexp));
-      if (matches === null) {
-        return false;
-      }
-
-      var findDateUnit = function (unit, formatParts, matches) {
-        for (var i = 0; i < formatParts.length; i++) {
-          if (formatParts[i].substring(0, 1) === unit) {
-            return $.formUtils.parseDateInt(matches[i + 1]);
-          }
-        }
-        return -1;
-      };
-
-      month = findDateUnit('m', formatParts, matches);
-      day = findDateUnit('d', formatParts, matches);
-      year = findDateUnit('y', formatParts, matches);
-
-      if ((month === 2 && day > 28 && (year % 4 !== 0 || year % 100 === 0 && year % 400 !== 0)) ||
-        (month === 2 && day > 29 && (year % 4 === 0 || year % 100 !== 0 && year % 400 === 0)) ||
-        month > 12 || month === 0) {
-        return false;
-      }
-      if ((this.isShortMonth(month) && day > 30) || (!this.isShortMonth(month) && day > 31) || day === 0) {
-        return false;
-      }
-
-      return [year, month, day];
-    },
-
-    /**
-     * skum fix. är talet 05 eller lägre ger parseInt rätt int annars får man 0 när man kör parseInt?
-     *
-     * @param {String} val
-     * @return {Number}
-     */
-    parseDateInt: function (val) {
-      if (val.indexOf('0') === 0) {
-        val = val.replace('0', '');
-      }
-      return parseInt(val, 10);
-    },
-
-    /**
-     * Has month only 30 days?
-     *
-     * @param {Number} m
-     * @return {Boolean}
-     */
-    isShortMonth: function (m) {
-      return (m % 2 === 0 && m < 7) || (m % 2 !== 0 && m > 7);
-    },
-
-    /**
-     * Restrict input length
-     *
-     * @param {jQuery} $inputElement Jquery Html object
-     * @param {jQuery} $maxLengthElement jQuery Html Object
-     * @return void
-     */
-    lengthRestriction: function ($inputElement, $maxLengthElement) {
-      // read maxChars from counter display initial text value
-      var maxChars = parseInt($maxLengthElement.text(), 10),
-        charsLeft = 0,
-
-      // internal function does the counting and sets display value
-        countCharacters = function () {
-          var numChars = $inputElement.val().length;
-          if (numChars > maxChars) {
-            // get current scroll bar position
-            var currScrollTopPos = $inputElement.scrollTop();
-            // trim value to max length
-            $inputElement.val($inputElement.val().substring(0, maxChars));
-            $inputElement.scrollTop(currScrollTopPos);
-          }
-          charsLeft = maxChars - numChars;
-          if (charsLeft < 0) {
-            charsLeft = 0;
-          }
-
-          // set counter text
-          $maxLengthElement.text(charsLeft);
-        };
-
-      // bind events to this element
-      // setTimeout is needed, cut or paste fires before val is available
-      $($inputElement).bind('keydown keyup keypress focus blur', countCharacters)
-        .bind('cut paste', function () {
-          setTimeout(countCharacters, 100);
-        });
-
-      // count chars on pageload, if there are prefilled input-values
-      $(document).bind('ready', countCharacters);
-    },
-
-    /**
-     * Test numeric against allowed range
-     *
-     * @param $value int
-     * @param $rangeAllowed str; (1-2, min1, max2, 10)
-     * @return array
-     */
-    numericRangeCheck: function (value, rangeAllowed) {
-      // split by dash
-      var range = $.split(rangeAllowed),
-      // min or max
-        minmax = parseInt(rangeAllowed.substr(3), 10);
-
-      if( range.length === 1 && rangeAllowed.indexOf('min') === -1 && rangeAllowed.indexOf('max') === -1 ) {
-        range = [rangeAllowed, rangeAllowed]; // only a number, checking agains an exact number of characters
-      }
-
-      // range ?
-      if (range.length === 2 && (value < parseInt(range[0], 10) || value > parseInt(range[1], 10) )) {
-        return [ 'out', range[0], range[1] ];
-      } // value is out of range
-      else if (rangeAllowed.indexOf('min') === 0 && (value < minmax )) // min
-      {
-        return ['min', minmax];
-      } // value is below min
-      else if (rangeAllowed.indexOf('max') === 0 && (value > minmax )) // max
-      {
-        return ['max', minmax];
-      } // value is above max
-      // since no other returns executed, value is in allowed range
-      return [ 'ok' ];
-    },
-
-
-    _numSuggestionElements: 0,
-    _selectedSuggestion: null,
-    _previousTypedVal: null,
-
-    /**
-     * Utility function that can be used to create plugins that gives
-     * suggestions when inputs is typed into
-     * @param {jQuery} $elem
-     * @param {Array} suggestions
-     * @param {Object} settings - Optional
-     * @return {jQuery}
-     */
-    suggest: function ($elem, suggestions, settings) {
-      var conf = {
-          css: {
-            maxHeight: '150px',
-            background: '#FFF',
-            lineHeight: '150%',
-            textDecoration: 'underline',
-            overflowX: 'hidden',
-            overflowY: 'auto',
-            border: '#CCC solid 1px',
-            borderTop: 'none',
-            cursor: 'pointer'
-          },
-          activeSuggestionCSS: {
-            background: '#E9E9E9'
-          }
-        },
-        setSuggsetionPosition = function ($suggestionContainer, $input) {
-          var offset = $input.offset();
-          $suggestionContainer.css({
-            width: $input.outerWidth(),
-            left: offset.left + 'px',
-            top: (offset.top + $input.outerHeight()) + 'px'
-          });
-        };
-
-      if (settings) {
-        $.extend(conf, settings);
-      }
-
-      conf.css.position = 'absolute';
-      conf.css['z-index'] = 9999;
-      $elem.attr('autocomplete', 'off');
-
-      if (this._numSuggestionElements === 0) {
-        // Re-position suggestion container if window size changes
-        $win.bind('resize', function () {
-          $('.jquery-form-suggestions').each(function () {
-            var $container = $(this),
-              suggestID = $container.attr('data-suggest-container');
-            setSuggsetionPosition($container, $('.suggestions-' + suggestID).eq(0));
-          });
-        });
-      }
-
-      this._numSuggestionElements++;
-
-      var onSelectSuggestion = function ($el) {
-        var suggestionId = $el.valAttr('suggestion-nr');
-        $.formUtils._selectedSuggestion = null;
-        $.formUtils._previousTypedVal = null;
-        $('.jquery-form-suggestion-' + suggestionId).fadeOut('fast');
-      };
-
-      $elem
-        .data('suggestions', suggestions)
-        .valAttr('suggestion-nr', this._numSuggestionElements)
-        .unbind('focus.suggest')
-        .bind('focus.suggest', function () {
-          $(this).trigger('keyup');
-          $.formUtils._selectedSuggestion = null;
-        })
-        .unbind('keyup.suggest')
-        .bind('keyup.suggest', function () {
-          var $input = $(this),
-            foundSuggestions = [],
-            val = $.trim($input.val()).toLocaleLowerCase();
-
-          if (val === $.formUtils._previousTypedVal) {
-            return;
-          }
-          else {
-            $.formUtils._previousTypedVal = val;
-          }
-
-          var hasTypedSuggestion = false,
-            suggestionId = $input.valAttr('suggestion-nr'),
-            $suggestionContainer = $('.jquery-form-suggestion-' + suggestionId);
-
-          $suggestionContainer.scrollTop(0);
-
-          // Find the right suggestions
-          if (val !== '') {
-            var findPartial = val.length > 2;
-            $.each($input.data('suggestions'), function (i, suggestion) {
-              var lowerCaseVal = suggestion.toLocaleLowerCase();
-              if (lowerCaseVal === val) {
-                foundSuggestions.push('<strong>' + suggestion + '</strong>');
-                hasTypedSuggestion = true;
-                return false;
-              } else if (lowerCaseVal.indexOf(val) === 0 || (findPartial && lowerCaseVal.indexOf(val) > -1)) {
-                foundSuggestions.push(suggestion.replace(new RegExp(val, 'gi'), '<strong>$&</strong>'));
-              }
-            });
-          }
-
-          // Hide suggestion container
-          if (hasTypedSuggestion || (foundSuggestions.length === 0 && $suggestionContainer.length > 0)) {
-            $suggestionContainer.hide();
-          }
-
-          // Create suggestion container if not already exists
-          else if (foundSuggestions.length > 0 && $suggestionContainer.length === 0) {
-            $suggestionContainer = $('<div></div>').css(conf.css).appendTo('body');
-            $elem.addClass('suggestions-' + suggestionId);
-            $suggestionContainer
-              .attr('data-suggest-container', suggestionId)
-              .addClass('jquery-form-suggestions')
-              .addClass('jquery-form-suggestion-' + suggestionId);
-          }
-
-          // Show hidden container
-          else if (foundSuggestions.length > 0 && !$suggestionContainer.is(':visible')) {
-            $suggestionContainer.show();
-          }
-
-          // add suggestions
-          if (foundSuggestions.length > 0 && val.length !== foundSuggestions[0].length) {
-
-            // put container in place every time, just in case
-            setSuggsetionPosition($suggestionContainer, $input);
-
-            // Add suggestions HTML to container
-            $suggestionContainer.html('');
-            $.each(foundSuggestions, function (i, text) {
-              $('<div></div>')
-                .append(text)
-                .css({
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  padding: '5px'
-                })
-                .addClass('form-suggest-element')
-                .appendTo($suggestionContainer)
-                .click(function () {
-                  $input.focus();
-                  $input.val($(this).text());
-                  $input.trigger('change');
-                  onSelectSuggestion($input);
-                });
-            });
-          }
-        })
-        .unbind('keydown.validation')
-        .bind('keydown.validation', function (e) {
-          var code = (e.keyCode ? e.keyCode : e.which),
-            suggestionId,
-            $suggestionContainer,
-            $input = $(this);
-
-          if (code === 13 && $.formUtils._selectedSuggestion !== null) {
-            suggestionId = $input.valAttr('suggestion-nr');
-            $suggestionContainer = $('.jquery-form-suggestion-' + suggestionId);
-            if ($suggestionContainer.length > 0) {
-              var newText = $suggestionContainer.find('div').eq($.formUtils._selectedSuggestion).text();
-              $input.val(newText);
-              $input.trigger('change');
-              onSelectSuggestion($input);
-              e.preventDefault();
-            }
-          }
-          else {
-            suggestionId = $input.valAttr('suggestion-nr');
-            $suggestionContainer = $('.jquery-form-suggestion-' + suggestionId);
-            var $suggestions = $suggestionContainer.children();
-            if ($suggestions.length > 0 && $.inArray(code, [38, 40]) > -1) {
-              if (code === 38) { // key up
-                if ($.formUtils._selectedSuggestion === null) {
-                  $.formUtils._selectedSuggestion = $suggestions.length - 1;
-                }
-                else{
-                  $.formUtils._selectedSuggestion--;
-                }
-                if ($.formUtils._selectedSuggestion < 0) {
-                  $.formUtils._selectedSuggestion = $suggestions.length - 1;
-                }
-              }
-              else if (code === 40) { // key down
-                if ($.formUtils._selectedSuggestion === null) {
-                  $.formUtils._selectedSuggestion = 0;
-                }
-                else {
-                  $.formUtils._selectedSuggestion++;
-                }
-                if ($.formUtils._selectedSuggestion > ($suggestions.length - 1)) {
-                  $.formUtils._selectedSuggestion = 0;
-                }
-              }
-
-              // Scroll in suggestion window
-              var containerInnerHeight = $suggestionContainer.innerHeight(),
-                containerScrollTop = $suggestionContainer.scrollTop(),
-                suggestionHeight = $suggestionContainer.children().eq(0).outerHeight(),
-                activeSuggestionPosY = suggestionHeight * ($.formUtils._selectedSuggestion);
-
-              if (activeSuggestionPosY < containerScrollTop || activeSuggestionPosY > (containerScrollTop + containerInnerHeight)) {
-                $suggestionContainer.scrollTop(activeSuggestionPosY);
-              }
-
-              $suggestions
-                .removeClass('active-suggestion')
-                .css('background', 'none')
-                .eq($.formUtils._selectedSuggestion)
-                .addClass('active-suggestion')
-                .css(conf.activeSuggestionCSS);
-
-              e.preventDefault();
-              return false;
-            }
-          }
-        })
-        .unbind('blur.suggest')
-        .bind('blur.suggest', function () {
-          onSelectSuggestion($(this));
-        });
-
-      return $elem;
-    },
-
-    /**
-     * Error dialogs
-     *
-     * @var {Object}
-     */
-    LANG: {
-      errorTitle: 'Form submission failed!',
-      requiredField: 'This is a required field',
-      requiredFields: 'You have not answered all required fields',
-      badTime: 'You have not given a correct time',
-      badEmail: 'You have not given a correct e-mail address',
-      badTelephone: 'You have not given a correct phone number',
-      badSecurityAnswer: 'You have not given a correct answer to the security question',
-      badDate: 'You have not given a correct date',
-      lengthBadStart: 'The input value must be between ',
-      lengthBadEnd: ' characters',
-      lengthTooLongStart: 'The input value is longer than ',
-      lengthTooShortStart: 'The input value is shorter than ',
-      notConfirmed: 'Input values could not be confirmed',
-      badDomain: 'Incorrect domain value',
-      badUrl: 'The input value is not a correct URL',
-      badCustomVal: 'The input value is incorrect',
-      andSpaces: ' and spaces ',
-      badInt: 'The input value was not a correct number',
-      badSecurityNumber: 'Your social security number was incorrect',
-      badUKVatAnswer: 'Incorrect UK VAT Number',
-      badUKNin: 'Incorrect UK NIN',
-      badUKUtr: 'Incorrect UK UTR Number',
-      badStrength: 'The password isn\'t strong enough',
-      badNumberOfSelectedOptionsStart: 'You have to choose at least ',
-      badNumberOfSelectedOptionsEnd: ' answers',
-      badAlphaNumeric: 'The input value can only contain alphanumeric characters ',
-      badAlphaNumericExtra: ' and ',
-      wrongFileSize: 'The file you are trying to upload is too large (max %s)',
-      wrongFileType: 'Only files of type %s is allowed',
-      groupCheckedRangeStart: 'Please choose between ',
-      groupCheckedTooFewStart: 'Please choose at least ',
-      groupCheckedTooManyStart: 'Please choose a maximum of ',
-      groupCheckedEnd: ' item(s)',
-      badCreditCard: 'The credit card number is not correct',
-      badCVV: 'The CVV number was not correct',
-      wrongFileDim : 'Incorrect image dimensions,',
-      imageTooTall : 'the image can not be taller than',
-      imageTooWide : 'the image can not be wider than',
-      imageTooSmall : 'the image was too small',
-      min : 'min',
-      max : 'max',
-      imageRatioNotAccepted : 'Image ratio is not be accepted',
-      badBrazilTelephoneAnswer: 'The phone number entered is invalid',
-      badBrazilCEPAnswer: 'The CEP entered is invalid',
-      badBrazilCPFAnswer: 'The CPF entered is invalid',
-      badPlPesel: 'The PESEL entered is invalid',
-      badPlNip: 'The NIP entered is invalid',
-      badPlRegon: 'The REGON entered is invalid',
-      badreCaptcha: 'Please confirm that you are not a bot',
-      passwordComplexityStart: 'Password must contain at least ',
-      passwordComplexitySeparator: ', ',
-      passwordComplexityUppercaseInfo: ' uppercase letter(s)',
-      passwordComplexityLowercaseInfo: ' lowercase letter(s)',
-      passwordComplexitySpecialCharsInfo: ' special character(s)',
-      passwordComplexityNumericCharsInfo: ' numeric character(s)',
-      passwordComplexityEnd: '.'
-    }
-  });
-
-})(jQuery, window);
-
-/**
- * File declaring all default validators.
- */
-(function($) {
-
-  /*
-   * Validate email
-   */
-  $.formUtils.addValidator({
-    name: 'email',
-    validatorFunction: function (email) {
-
-      var emailParts = email.toLowerCase().split('@'),
-        localPart = emailParts[0],
-        domain = emailParts[1];
-
-      if (localPart && domain) {
-
-        if( localPart.indexOf('"') === 0 ) {
-          var len = localPart.length;
-          localPart = localPart.replace(/\"/g, '');
-          if( localPart.length !== (len-2) ) {
-            return false; // It was not allowed to have more than two apostrophes
-          }
-        }
-
-        return $.formUtils.validators.validate_domain.validatorFunction(emailParts[1]) &&
-          localPart.indexOf('.') !== 0 &&
-          localPart.substring(localPart.length-1, localPart.length) !== '.' &&
-          localPart.indexOf('..') === -1 &&
-          !(/[^\w\+\.\-\#\-\_\~\!\$\&\'\(\)\*\+\,\;\=\:]/.test(localPart));
-      }
-
-      return false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badEmail'
-  });
-
-  /*
-   * Validate domain name
-   */
-  $.formUtils.addValidator({
-    name: 'domain',
-    validatorFunction: function (val) {
-      return val.length > 0 &&
-        val.length <= 253 && // Including sub domains
-        !(/[^a-zA-Z0-9]/.test(val.slice(-2))) && !(/[^a-zA-Z0-9]/.test(val.substr(0, 1))) && !(/[^a-zA-Z0-9\.\-]/.test(val)) &&
-        val.split('..').length === 1 &&
-        val.split('.').length > 1;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badDomain'
-  });
-
-  /*
-   * Validate required
-   */
-  $.formUtils.addValidator({
-    name: 'required',
-    validatorFunction: function (val, $el, config, language, $form) {
-      switch ($el.attr('type')) {
-        case 'checkbox':
-          return $el.is(':checked');
-        case 'radio':
-          return $form.find('input[name="' + $el.attr('name') + '"]').filter(':checked').length > 0;
-        default:
-          return $.trim(val) !== '';
-      }
-    },
-    errorMessage: '',
-    errorMessageKey: function(config) {
-      if (config.errorMessagePosition === 'top' || typeof config.errorMessagePosition === 'function') {
-        return 'requiredFields';
-      }
-      else {
-        return 'requiredField';
-      }
-    }
-  });
-
-  /*
-   * Validate length range
-   */
-  $.formUtils.addValidator({
-    name: 'length',
-    validatorFunction: function (val, $el, conf, lang) {
-      var lengthAllowed = $el.valAttr('length'),
-        type = $el.attr('type');
-
-      if (lengthAllowed === undefined) {
-        alert('Please add attribute "data-validation-length" to ' + $el[0].nodeName + ' named ' + $el.attr('name'));
-        return true;
-      }
-
-      // check if length is above min, below max or within range.
-      var len = type === 'file' && $el.get(0).files !== undefined ? $el.get(0).files.length : val.length,
-        lengthCheckResults = $.formUtils.numericRangeCheck(len, lengthAllowed),
-        checkResult;
-
-      switch (lengthCheckResults[0]) {   // outside of allowed range
-        case 'out':
-          this.errorMessage = lang.lengthBadStart + lengthAllowed + lang.lengthBadEnd;
-          checkResult = false;
-          break;
-        // too short
-        case 'min':
-          this.errorMessage = lang.lengthTooShortStart + lengthCheckResults[1] + lang.lengthBadEnd;
-          checkResult = false;
-          break;
-        // too long
-        case 'max':
-          this.errorMessage = lang.lengthTooLongStart + lengthCheckResults[1] + lang.lengthBadEnd;
-          checkResult = false;
-          break;
-        // ok
-        default:
-          checkResult = true;
-      }
-
-      return checkResult;
-    },
-    errorMessage: '',
-    errorMessageKey: ''
-  });
-
-  /*
-   * Validate url
-   */
-  $.formUtils.addValidator({
-    name: 'url',
-    validatorFunction: function (url) {
-      // written by Scott Gonzalez: http://projects.scottsplayground.com/iri/
-      // - Victor Jonsson added support for arrays in the url ?arg[]=sdfsdf
-      // - General improvements made by Stéphane Moureau <https://github.com/TraderStf>
-
-      var urlFilter = /^(https?|ftp):\/\/((((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])(\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])(\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/(((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|\[|\]|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#(((\w|-|\.|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
-      if (urlFilter.test(url)) {
-        var domain = url.split('://')[1],
-          domainSlashPos = domain.indexOf('/');
-
-        if (domainSlashPos > -1) {
-          domain = domain.substr(0, domainSlashPos);
-        }
-
-        return $.formUtils.validators.validate_domain.validatorFunction(domain); // todo: add support for IP-addresses
-      }
-      return false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badUrl'
-  });
-
-  /*
-   * Validate number (floating or integer)
-   */
-  $.formUtils.addValidator({
-    name: 'number',
-    validatorFunction: function (val, $el, conf) {
-      if (val !== '') {
-        var allowing = $el.valAttr('allowing') || '',
-          decimalSeparator = $el.valAttr('decimal-separator') || conf.decimalSeparator,
-          allowsRange = false,
-          begin, end,
-          steps = $el.valAttr('step') || '',
-          allowsSteps = false,
-          sanitize = $el.attr('data-sanitize') || '',
-          isFormattedWithNumeral = sanitize.match(/(^|[\s])numberFormat([\s]|$)/i);
-
-        if (isFormattedWithNumeral) {
-          if (!window.numeral) {
-            throw new ReferenceError('The data-sanitize value numberFormat cannot be used without the numeral' +
-              ' library. Please see Data Validation in http://www.formvalidator.net for more information.');
-          }
-          //Unformat input first, then convert back to String
-          if (val.length) {
-            val = String(numeral().unformat(val));
-          }
-        }
-
-        if (allowing.indexOf('number') === -1) {
-          allowing += ',number';
-        }
-
-        if (allowing.indexOf('negative') === -1 && val.indexOf('-') === 0) {
-          return false;
-        }
-
-        if (allowing.indexOf('range') > -1) {
-          begin = parseFloat(allowing.substring(allowing.indexOf('[') + 1, allowing.indexOf(';')));
-          end = parseFloat(allowing.substring(allowing.indexOf(';') + 1, allowing.indexOf(']')));
-          allowsRange = true;
-        }
-
-        if (steps !== '') {
-          allowsSteps = true;
-        }
-
-        if (decimalSeparator === ',') {
-          if (val.indexOf('.') > -1) {
-            return false;
-          }
-          // Fix for checking range with floats using ,
-          val = val.replace(',', '.');
-        }
-        if (val.replace(/[0-9-]/g, '') === '' && (!allowsRange || (val >= begin && val <= end)) && (!allowsSteps || (val % steps === 0))) {
-          return true;
-        }
-
-        if (allowing.indexOf('float') > -1 && val.match(new RegExp('^([0-9-]+)\\.([0-9]+)$')) !== null && (!allowsRange || (val >= begin && val <= end)) && (!allowsSteps || (val % steps === 0))) {
-          return true;
-        }
-      }
-      return false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badInt'
-  });
-
-  /*
-   * Validate alpha numeric
-   */
-  $.formUtils.addValidator({
-    name: 'alphanumeric',
-    validatorFunction: function (val, $el, conf, language) {
-      var patternStart = '^([a-zA-Z0-9',
-        patternEnd = ']+)$',
-        additionalChars = $el.valAttr('allowing'),
-        pattern = '',
-        hasSpaces = false;
-
-      if (additionalChars) {
-        pattern = patternStart + additionalChars + patternEnd;
-        var extra = additionalChars.replace(/\\/g, '');
-        if (extra.indexOf(' ') > -1) {
-          hasSpaces = true;
-          extra = extra.replace(' ', '');
-          extra += language.andSpaces || $.formUtils.LANG.andSpaces;
-        }
-
-        if(language.badAlphaNumericAndExtraAndSpaces && language.badAlphaNumericAndExtra) {
-          if(hasSpaces) {
-            this.errorMessage = language.badAlphaNumericAndExtraAndSpaces + extra; 
-          } else {
-            this.errorMessage = language.badAlphaNumericAndExtra + extra + language.badAlphaNumericExtra; 
-          }
-        } else {
-          this.errorMessage = language.badAlphaNumeric + language.badAlphaNumericExtra + extra;
-        }
-      } else {
-        pattern = patternStart + patternEnd;
-        this.errorMessage = language.badAlphaNumeric;
-      }
-
-      return new RegExp(pattern).test(val);
-    },
-    errorMessage: '',
-    errorMessageKey: ''
-  });
-
-  /*
-   * Validate against regexp
-   */
-  $.formUtils.addValidator({
-    name: 'custom',
-    validatorFunction: function (val, $el) {
-      var regexp = new RegExp($el.valAttr('regexp'));
-      return regexp.test(val);
-    },
-    errorMessage: '',
-    errorMessageKey: 'badCustomVal'
-  });
-
-  /*
-   * Validate date
-   */
-  $.formUtils.addValidator({
-    name: 'date',
-    validatorFunction: function (date, $el, conf) {
-      var dateFormat = $el.valAttr('format') || conf.dateFormat || 'yyyy-mm-dd',
-        addMissingLeadingZeros = $el.valAttr('require-leading-zero') === 'false';
-      return $.formUtils.parseDate(date, dateFormat, addMissingLeadingZeros) !== false;
-    },
-    errorMessage: '',
-    errorMessageKey: 'badDate'
-  });
-
-
-  /*
-   * Validate group of checkboxes, validate qty required is checked
-   * written by Steve Wasiura : http://stevewasiura.waztech.com
-   * element attrs
-   *    data-validation="checkbox_group"
-   *    data-validation-qty="1-2"  // min 1 max 2
-   *    data-validation-error-msg="chose min 1, max of 2 checkboxes"
-   */
-  $.formUtils.addValidator({
-    name: 'checkbox_group',
-    validatorFunction: function (val, $el, conf, lang, $form) {
-      // preset return var
-      var isValid = true,
-      // get name of element. since it is a checkbox group, all checkboxes will have same name
-        elname = $el.attr('name'),
-      // get checkboxes and count the checked ones
-        $checkBoxes = $('input[type=checkbox][name^="' + elname + '"]', $form),
-        checkedCount = $checkBoxes.filter(':checked').length,
-      // get el attr that specs qty required / allowed
-        qtyAllowed = $el.valAttr('qty');
-
-      if (qtyAllowed === undefined) {
-        var elementType = $el.get(0).nodeName;
-        alert('Attribute "data-validation-qty" is missing from ' + elementType + ' named ' + $el.attr('name'));
-      }
-
-      // call Utility function to check if count is above min, below max, within range etc.
-      var qtyCheckResults = $.formUtils.numericRangeCheck(checkedCount, qtyAllowed);
-
-      // results will be array, [0]=result str, [1]=qty int
-      switch (qtyCheckResults[0]) {
-        // outside allowed range
-        case 'out':
-          this.errorMessage = lang.groupCheckedRangeStart + qtyAllowed + lang.groupCheckedEnd;
-          isValid = false;
-          break;
-        // below min qty
-        case 'min':
-          this.errorMessage = lang.groupCheckedTooFewStart + qtyCheckResults[1] + (lang.groupCheckedTooFewEnd || lang.groupCheckedEnd);
-          isValid = false;
-          break;
-        // above max qty
-        case 'max':
-          this.errorMessage = lang.groupCheckedTooManyStart + qtyCheckResults[1] + (lang.groupCheckedTooManyEnd || lang.groupCheckedEnd);
-          isValid = false;
-          break;
-        // ok
-        default:
-          isValid = true;
-      }
-
-      if( !isValid ) {
-        var _triggerOnBlur = function() {
-          $checkBoxes.unbind('click', _triggerOnBlur);
-          $checkBoxes.filter('*[data-validation]').validateInputOnBlur(lang, conf, false, 'blur');
-        };
-        $checkBoxes.bind('click', _triggerOnBlur);
-      }
-
-      return isValid;
-    }
-    //   errorMessage : '', // set above in switch statement
-    //   errorMessageKey: '' // not used
-  });
-
-})(jQuery);
-
-
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+		define( ["jquery"], factory );
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( jQuery );
+	}
+}(function( $ ) {
+
+$.extend( $.fn, {
+
+	// https://jqueryvalidation.org/validate/
+	validate: function( options ) {
+
+		// If nothing is selected, return nothing; can't chain anyway
+		if ( !this.length ) {
+			if ( options && options.debug && window.console ) {
+				console.warn( "Nothing selected, can't validate, returning nothing." );
+			}
+			return;
+		}
+
+		// Check if a validator for this form was already created
+		var validator = $.data( this[ 0 ], "validator" );
+		if ( validator ) {
+			return validator;
+		}
+
+		// Add novalidate tag if HTML5.
+		this.attr( "novalidate", "novalidate" );
+
+		validator = new $.validator( options, this[ 0 ] );
+		$.data( this[ 0 ], "validator", validator );
+
+		if ( validator.settings.onsubmit ) {
+
+			this.on( "click.validate", ":submit", function( event ) {
+
+				// Track the used submit button to properly handle scripted
+				// submits later.
+				validator.submitButton = event.currentTarget;
+
+				// Allow suppressing validation by adding a cancel class to the submit button
+				if ( $( this ).hasClass( "cancel" ) ) {
+					validator.cancelSubmit = true;
+				}
+
+				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
+				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
+					validator.cancelSubmit = true;
+				}
+			} );
+
+			// Validate the form on submit
+			this.on( "submit.validate", function( event ) {
+				if ( validator.settings.debug ) {
+
+					// Prevent form submit to be able to see console output
+					event.preventDefault();
+				}
+
+				function handle() {
+					var hidden, result;
+
+					// Insert a hidden input as a replacement for the missing submit button
+					// The hidden input is inserted in two cases:
+					//   - A user defined a `submitHandler`
+					//   - There was a pending request due to `remote` method and `stopRequest()`
+					//     was called to submit the form in case it's valid
+					if ( validator.submitButton && ( validator.settings.submitHandler || validator.formSubmitted ) ) {
+						hidden = $( "<input type='hidden'/>" )
+							.attr( "name", validator.submitButton.name )
+							.val( $( validator.submitButton ).val() )
+							.appendTo( validator.currentForm );
+					}
+
+					if ( validator.settings.submitHandler && !validator.settings.debug ) {
+						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
+						if ( hidden ) {
+
+							// And clean up afterwards; thanks to no-block-scope, hidden can be referenced
+							hidden.remove();
+						}
+						if ( result !== undefined ) {
+							return result;
+						}
+						return false;
+					}
+					return true;
+				}
+
+				// Prevent submit for invalid forms or custom submit handlers
+				if ( validator.cancelSubmit ) {
+					validator.cancelSubmit = false;
+					return handle();
+				}
+				if ( validator.form() ) {
+					if ( validator.pendingRequest ) {
+						validator.formSubmitted = true;
+						return false;
+					}
+					return handle();
+				} else {
+					validator.focusInvalid();
+					return false;
+				}
+			} );
+		}
+
+		return validator;
+	},
+
+	// https://jqueryvalidation.org/valid/
+	valid: function() {
+		var valid, validator, errorList;
+
+		if ( $( this[ 0 ] ).is( "form" ) ) {
+			valid = this.validate().form();
+		} else {
+			errorList = [];
+			valid = true;
+			validator = $( this[ 0 ].form ).validate();
+			this.each( function() {
+				valid = validator.element( this ) && valid;
+				if ( !valid ) {
+					errorList = errorList.concat( validator.errorList );
+				}
+			} );
+			validator.errorList = errorList;
+		}
+		return valid;
+	},
+
+	// https://jqueryvalidation.org/rules/
+	rules: function( command, argument ) {
+		var element = this[ 0 ],
+			isContentEditable = typeof this.attr( "contenteditable" ) !== "undefined" && this.attr( "contenteditable" ) !== "false",
+			settings, staticRules, existingRules, data, param, filtered;
+
+		// If nothing is selected, return empty object; can't chain anyway
+		if ( element == null ) {
+			return;
+		}
+
+		if ( !element.form && isContentEditable ) {
+			element.form = this.closest( "form" )[ 0 ];
+			element.name = this.attr( "name" );
+		}
+
+		if ( element.form == null ) {
+			return;
+		}
+
+		if ( command ) {
+			settings = $.data( element.form, "validator" ).settings;
+			staticRules = settings.rules;
+			existingRules = $.validator.staticRules( element );
+			switch ( command ) {
+			case "add":
+				$.extend( existingRules, $.validator.normalizeRule( argument ) );
+
+				// Remove messages from rules, but allow them to be set separately
+				delete existingRules.messages;
+				staticRules[ element.name ] = existingRules;
+				if ( argument.messages ) {
+					settings.messages[ element.name ] = $.extend( settings.messages[ element.name ], argument.messages );
+				}
+				break;
+			case "remove":
+				if ( !argument ) {
+					delete staticRules[ element.name ];
+					return existingRules;
+				}
+				filtered = {};
+				$.each( argument.split( /\s/ ), function( index, method ) {
+					filtered[ method ] = existingRules[ method ];
+					delete existingRules[ method ];
+				} );
+				return filtered;
+			}
+		}
+
+		data = $.validator.normalizeRules(
+		$.extend(
+			{},
+			$.validator.classRules( element ),
+			$.validator.attributeRules( element ),
+			$.validator.dataRules( element ),
+			$.validator.staticRules( element )
+		), element );
+
+		// Make sure required is at front
+		if ( data.required ) {
+			param = data.required;
+			delete data.required;
+			data = $.extend( { required: param }, data );
+		}
+
+		// Make sure remote is at back
+		if ( data.remote ) {
+			param = data.remote;
+			delete data.remote;
+			data = $.extend( data, { remote: param } );
+		}
+
+		return data;
+	}
+} );
+
+// JQuery trim is deprecated, provide a trim method based on String.prototype.trim
+var trim = function( str ) {
+
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim#Polyfill
+	return str.replace( /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "" );
+};
+
+// Custom selectors
+$.extend( $.expr.pseudos || $.expr[ ":" ], {		// '|| $.expr[ ":" ]' here enables backwards compatibility to jQuery 1.7. Can be removed when dropping jQ 1.7.x support
+
+	// https://jqueryvalidation.org/blank-selector/
+	blank: function( a ) {
+		return !trim( "" + $( a ).val() );
+	},
+
+	// https://jqueryvalidation.org/filled-selector/
+	filled: function( a ) {
+		var val = $( a ).val();
+		return val !== null && !!trim( "" + val );
+	},
+
+	// https://jqueryvalidation.org/unchecked-selector/
+	unchecked: function( a ) {
+		return !$( a ).prop( "checked" );
+	}
+} );
+
+// Constructor for validator
+$.validator = function( options, form ) {
+	this.settings = $.extend( true, {}, $.validator.defaults, options );
+	this.currentForm = form;
+	this.init();
+};
+
+// https://jqueryvalidation.org/jQuery.validator.format/
+$.validator.format = function( source, params ) {
+	if ( arguments.length === 1 ) {
+		return function() {
+			var args = $.makeArray( arguments );
+			args.unshift( source );
+			return $.validator.format.apply( this, args );
+		};
+	}
+	if ( params === undefined ) {
+		return source;
+	}
+	if ( arguments.length > 2 && params.constructor !== Array  ) {
+		params = $.makeArray( arguments ).slice( 1 );
+	}
+	if ( params.constructor !== Array ) {
+		params = [ params ];
+	}
+	$.each( params, function( i, n ) {
+		source = source.replace( new RegExp( "\\{" + i + "\\}", "g" ), function() {
+			return n;
+		} );
+	} );
+	return source;
+};
+
+$.extend( $.validator, {
+
+	defaults: {
+		messages: {},
+		groups: {},
+		rules: {},
+		errorClass: "error",
+		pendingClass: "pending",
+		validClass: "valid",
+		errorElement: "label",
+		focusCleanup: false,
+		focusInvalid: true,
+		errorContainer: $( [] ),
+		errorLabelContainer: $( [] ),
+		onsubmit: true,
+		ignore: ":hidden",
+		ignoreTitle: false,
+		onfocusin: function( element ) {
+			this.lastActive = element;
+
+			// Hide error label and remove error class on focus if enabled
+			if ( this.settings.focusCleanup ) {
+				if ( this.settings.unhighlight ) {
+					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.hideThese( this.errorsFor( element ) );
+			}
+		},
+		onfocusout: function( element ) {
+			if ( !this.checkable( element ) && ( element.name in this.submitted || !this.optional( element ) ) ) {
+				this.element( element );
+			}
+		},
+		onkeyup: function( element, event ) {
+
+			// Avoid revalidate the field when pressing one of the following keys
+			// Shift       => 16
+			// Ctrl        => 17
+			// Alt         => 18
+			// Caps lock   => 20
+			// End         => 35
+			// Home        => 36
+			// Left arrow  => 37
+			// Up arrow    => 38
+			// Right arrow => 39
+			// Down arrow  => 40
+			// Insert      => 45
+			// Num lock    => 144
+			// AltGr key   => 225
+			var excludedKeys = [
+				16, 17, 18, 20, 35, 36, 37,
+				38, 39, 40, 45, 144, 225
+			];
+
+			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
+				return;
+			} else if ( element.name in this.submitted || element.name in this.invalid ) {
+				this.element( element );
+			}
+		},
+		onclick: function( element ) {
+
+			// Click on selects, radiobuttons and checkboxes
+			if ( element.name in this.submitted ) {
+				this.element( element );
+
+			// Or option elements, check parent select in that case
+			} else if ( element.parentNode.name in this.submitted ) {
+				this.element( element.parentNode );
+			}
+		},
+		highlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+			} else {
+				$( element ).addClass( errorClass ).removeClass( validClass );
+			}
+		},
+		unhighlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
+			} else {
+				$( element ).removeClass( errorClass ).addClass( validClass );
+			}
+		}
+	},
+
+	// https://jqueryvalidation.org/jQuery.validator.setDefaults/
+	setDefaults: function( settings ) {
+		$.extend( $.validator.defaults, settings );
+	},
+
+	messages: {
+		required: "This field is required.",
+		remote: "Please fix this field.",
+		email: "Please enter a valid email address.",
+		url: "Please enter a valid URL.",
+		date: "Please enter a valid date.",
+		dateISO: "Please enter a valid date (ISO).",
+		number: "Please enter a valid number.",
+		digits: "Please enter only digits.",
+		equalTo: "Please enter the same value again.",
+		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+		minlength: $.validator.format( "Please enter at least {0} characters." ),
+		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+		range: $.validator.format( "Please enter a value between {0} and {1}." ),
+		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+		step: $.validator.format( "Please enter a multiple of {0}." )
+	},
+
+	autoCreateRanges: false,
+
+	prototype: {
+
+		init: function() {
+			this.labelContainer = $( this.settings.errorLabelContainer );
+			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
+			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
+			this.submitted = {};
+			this.valueCache = {};
+			this.pendingRequest = 0;
+			this.pending = {};
+			this.invalid = {};
+			this.reset();
+
+			var currentForm = this.currentForm,
+				groups = ( this.groups = {} ),
+				rules;
+			$.each( this.settings.groups, function( key, value ) {
+				if ( typeof value === "string" ) {
+					value = value.split( /\s/ );
+				}
+				$.each( value, function( index, name ) {
+					groups[ name ] = key;
+				} );
+			} );
+			rules = this.settings.rules;
+			$.each( rules, function( key, value ) {
+				rules[ key ] = $.validator.normalizeRule( value );
+			} );
+
+			function delegate( event ) {
+				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
+
+				// Set form expando on contenteditable
+				if ( !this.form && isContentEditable ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+					this.name = $( this ).attr( "name" );
+				}
+
+				// Ignore the element if it belongs to another form. This will happen mainly
+				// when setting the `form` attribute of an input to the id of another form.
+				if ( currentForm !== this.form ) {
+					return;
+				}
+
+				var validator = $.data( this.form, "validator" ),
+					eventType = "on" + event.type.replace( /^validate/, "" ),
+					settings = validator.settings;
+				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
+					settings[ eventType ].call( validator, this, event );
+				}
+			}
+
+			$( this.currentForm )
+				.on( "focusin.validate focusout.validate keyup.validate",
+					":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], " +
+					"[type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], " +
+					"[type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], " +
+					"[type='radio'], [type='checkbox'], [contenteditable], [type='button']", delegate )
+
+				// Support: Chrome, oldIE
+				// "select" is provided as event.target when clicking a option
+				.on( "click.validate", "select, option, [type='radio'], [type='checkbox']", delegate );
+
+			if ( this.settings.invalidHandler ) {
+				$( this.currentForm ).on( "invalid-form.validate", this.settings.invalidHandler );
+			}
+		},
+
+		// https://jqueryvalidation.org/Validator.form/
+		form: function() {
+			this.checkForm();
+			$.extend( this.submitted, this.errorMap );
+			this.invalid = $.extend( {}, this.errorMap );
+			if ( !this.valid() ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+			}
+			this.showErrors();
+			return this.valid();
+		},
+
+		checkForm: function() {
+			this.prepareForm();
+			for ( var i = 0, elements = ( this.currentElements = this.elements() ); elements[ i ]; i++ ) {
+				this.check( elements[ i ] );
+			}
+			return this.valid();
+		},
+
+		// https://jqueryvalidation.org/Validator.element/
+		element: function( element ) {
+			var cleanElement = this.clean( element ),
+				checkElement = this.validationTargetFor( cleanElement ),
+				v = this,
+				result = true,
+				rs, group;
+
+			if ( checkElement === undefined ) {
+				delete this.invalid[ cleanElement.name ];
+			} else {
+				this.prepareElement( checkElement );
+				this.currentElements = $( checkElement );
+
+				// If this element is grouped, then validate all group elements already
+				// containing a value
+				group = this.groups[ checkElement.name ];
+				if ( group ) {
+					$.each( this.groups, function( name, testgroup ) {
+						if ( testgroup === group && name !== checkElement.name ) {
+							cleanElement = v.validationTargetFor( v.clean( v.findByName( name ) ) );
+							if ( cleanElement && cleanElement.name in v.invalid ) {
+								v.currentElements.push( cleanElement );
+								result = v.check( cleanElement ) && result;
+							}
+						}
+					} );
+				}
+
+				rs = this.check( checkElement ) !== false;
+				result = result && rs;
+				if ( rs ) {
+					this.invalid[ checkElement.name ] = false;
+				} else {
+					this.invalid[ checkElement.name ] = true;
+				}
+
+				if ( !this.numberOfInvalids() ) {
+
+					// Hide error containers on last error
+					this.toHide = this.toHide.add( this.containers );
+				}
+				this.showErrors();
+
+				// Add aria-invalid status for screen readers
+				$( element ).attr( "aria-invalid", !rs );
+			}
+
+			return result;
+		},
+
+		// https://jqueryvalidation.org/Validator.showErrors/
+		showErrors: function( errors ) {
+			if ( errors ) {
+				var validator = this;
+
+				// Add items to error list and map
+				$.extend( this.errorMap, errors );
+				this.errorList = $.map( this.errorMap, function( message, name ) {
+					return {
+						message: message,
+						element: validator.findByName( name )[ 0 ]
+					};
+				} );
+
+				// Remove items from success list
+				this.successList = $.grep( this.successList, function( element ) {
+					return !( element.name in errors );
+				} );
+			}
+			if ( this.settings.showErrors ) {
+				this.settings.showErrors.call( this, this.errorMap, this.errorList );
+			} else {
+				this.defaultShowErrors();
+			}
+		},
+
+		// https://jqueryvalidation.org/Validator.resetForm/
+		resetForm: function() {
+			if ( $.fn.resetForm ) {
+				$( this.currentForm ).resetForm();
+			}
+			this.invalid = {};
+			this.submitted = {};
+			this.prepareForm();
+			this.hideErrors();
+			var elements = this.elements()
+				.removeData( "previousValue" )
+				.removeAttr( "aria-invalid" );
+
+			this.resetElements( elements );
+		},
+
+		resetElements: function( elements ) {
+			var i;
+
+			if ( this.settings.unhighlight ) {
+				for ( i = 0; elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ],
+						this.settings.errorClass, "" );
+					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
+				}
+			} else {
+				elements
+					.removeClass( this.settings.errorClass )
+					.removeClass( this.settings.validClass );
+			}
+		},
+
+		numberOfInvalids: function() {
+			return this.objectLength( this.invalid );
+		},
+
+		objectLength: function( obj ) {
+			/* jshint unused: false */
+			var count = 0,
+				i;
+			for ( i in obj ) {
+
+				// This check allows counting elements with empty error
+				// message as invalid elements
+				if ( obj[ i ] !== undefined && obj[ i ] !== null && obj[ i ] !== false ) {
+					count++;
+				}
+			}
+			return count;
+		},
+
+		hideErrors: function() {
+			this.hideThese( this.toHide );
+		},
+
+		hideThese: function( errors ) {
+			errors.not( this.containers ).text( "" );
+			this.addWrapper( errors ).hide();
+		},
+
+		valid: function() {
+			return this.size() === 0;
+		},
+
+		size: function() {
+			return this.errorList.length;
+		},
+
+		focusInvalid: function() {
+			if ( this.settings.focusInvalid ) {
+				try {
+					$( this.findLastActive() || this.errorList.length && this.errorList[ 0 ].element || [] )
+					.filter( ":visible" )
+					.trigger( "focus" )
+
+					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+					.trigger( "focusin" );
+				} catch ( e ) {
+
+					// Ignore IE throwing errors when focusing hidden elements
+				}
+			}
+		},
+
+		findLastActive: function() {
+			var lastActive = this.lastActive;
+			return lastActive && $.grep( this.errorList, function( n ) {
+				return n.element.name === lastActive.name;
+			} ).length === 1 && lastActive;
+		},
+
+		elements: function() {
+			var validator = this,
+				rulesCache = {};
+
+			// Select all valid inputs inside the form (no submit or reset buttons)
+			return $( this.currentForm )
+			.find( "input, select, textarea, [contenteditable]" )
+			.not( ":submit, :reset, :image, :disabled" )
+			.not( this.settings.ignore )
+			.filter( function() {
+				var name = this.name || $( this ).attr( "name" ); // For contenteditable
+				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
+
+				if ( !name && validator.settings.debug && window.console ) {
+					console.error( "%o has no name assigned", this );
+				}
+
+				// Set form expando on contenteditable
+				if ( isContentEditable ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+					this.name = name;
+				}
+
+				// Ignore elements that belong to other/nested forms
+				if ( this.form !== validator.currentForm ) {
+					return false;
+				}
+
+				// Select only the first element for each name, and only those with rules specified
+				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
+					return false;
+				}
+
+				rulesCache[ name ] = true;
+				return true;
+			} );
+		},
+
+		clean: function( selector ) {
+			return $( selector )[ 0 ];
+		},
+
+		errors: function() {
+			var errorClass = this.settings.errorClass.split( " " ).join( "." );
+			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
+		},
+
+		resetInternals: function() {
+			this.successList = [];
+			this.errorList = [];
+			this.errorMap = {};
+			this.toShow = $( [] );
+			this.toHide = $( [] );
+		},
+
+		reset: function() {
+			this.resetInternals();
+			this.currentElements = $( [] );
+		},
+
+		prepareForm: function() {
+			this.reset();
+			this.toHide = this.errors().add( this.containers );
+		},
+
+		prepareElement: function( element ) {
+			this.reset();
+			this.toHide = this.errorsFor( element );
+		},
+
+		elementValue: function( element ) {
+			var $element = $( element ),
+				type = element.type,
+				isContentEditable = typeof $element.attr( "contenteditable" ) !== "undefined" && $element.attr( "contenteditable" ) !== "false",
+				val, idx;
+
+			if ( type === "radio" || type === "checkbox" ) {
+				return this.findByName( element.name ).filter( ":checked" ).val();
+			} else if ( type === "number" && typeof element.validity !== "undefined" ) {
+				return element.validity.badInput ? "NaN" : $element.val();
+			}
+
+			if ( isContentEditable ) {
+				val = $element.text();
+			} else {
+				val = $element.val();
+			}
+
+			if ( type === "file" ) {
+
+				// Modern browser (chrome & safari)
+				if ( val.substr( 0, 12 ) === "C:\\fakepath\\" ) {
+					return val.substr( 12 );
+				}
+
+				// Legacy browsers
+				// Unix-based path
+				idx = val.lastIndexOf( "/" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Windows-based path
+				idx = val.lastIndexOf( "\\" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Just the file name
+				return val;
+			}
+
+			if ( typeof val === "string" ) {
+				return val.replace( /\r/g, "" );
+			}
+			return val;
+		},
+
+		check: function( element ) {
+			element = this.validationTargetFor( this.clean( element ) );
+
+			var rules = $( element ).rules(),
+				rulesCount = $.map( rules, function( n, i ) {
+					return i;
+				} ).length,
+				dependencyMismatch = false,
+				val = this.elementValue( element ),
+				result, method, rule, normalizer;
+
+			// Abort any pending Ajax request from a previous call to this method.
+			this.abortRequest( element );
+
+			// Prioritize the local normalizer defined for this element over the global one
+			// if the former exists, otherwise user the global one in case it exists.
+			if ( typeof rules.normalizer === "function" ) {
+				normalizer = rules.normalizer;
+			} else if (	typeof this.settings.normalizer === "function" ) {
+				normalizer = this.settings.normalizer;
+			}
+
+			// If normalizer is defined, then call it to retreive the changed value instead
+			// of using the real one.
+			// Note that `this` in the normalizer is `element`.
+			if ( normalizer ) {
+				val = normalizer.call( element, val );
+
+				// Delete the normalizer from rules to avoid treating it as a pre-defined method.
+				delete rules.normalizer;
+			}
+
+			for ( method in rules ) {
+				rule = { method: method, parameters: rules[ method ] };
+				try {
+					result = $.validator.methods[ method ].call( this, val, element, rule.parameters );
+
+					// If a method indicates that the field is optional and therefore valid,
+					// don't mark it as valid when there are no other rules
+					if ( result === "dependency-mismatch" && rulesCount === 1 ) {
+						dependencyMismatch = true;
+						continue;
+					}
+					dependencyMismatch = false;
+
+					if ( result === "pending" ) {
+						this.toHide = this.toHide.not( this.errorsFor( element ) );
+						return;
+					}
+
+					if ( !result ) {
+						this.formatAndAdd( element, rule );
+						return false;
+					}
+				} catch ( e ) {
+					if ( this.settings.debug && window.console ) {
+						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
+					}
+					if ( e instanceof TypeError ) {
+						e.message += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
+					}
+
+					throw e;
+				}
+			}
+			if ( dependencyMismatch ) {
+				return;
+			}
+			if ( this.objectLength( rules ) ) {
+				this.successList.push( element );
+			}
+			return true;
+		},
+
+		// Return the custom message for the given element and validation method
+		// specified in the element's HTML5 data attribute
+		// return the generic message if present and no method specific message is present
+		customDataMessage: function( element, method ) {
+			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
+				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
+		},
+
+		// Return the custom message for the given element name and validation method
+		customMessage: function( name, method ) {
+			var m = this.settings.messages[ name ];
+			return m && ( m.constructor === String ? m : m[ method ] );
+		},
+
+		// Return the first defined argument, allowing empty strings
+		findDefined: function() {
+			for ( var i = 0; i < arguments.length; i++ ) {
+				if ( arguments[ i ] !== undefined ) {
+					return arguments[ i ];
+				}
+			}
+			return undefined;
+		},
+
+		// The second parameter 'rule' used to be a string, and extended to an object literal
+		// of the following form:
+		// rule = {
+		//     method: "method name",
+		//     parameters: "the given method parameters"
+		// }
+		//
+		// The old behavior still supported, kept to maintain backward compatibility with
+		// old code, and will be removed in the next major release.
+		defaultMessage: function( element, rule ) {
+			if ( typeof rule === "string" ) {
+				rule = { method: rule };
+			}
+
+			var message = this.findDefined(
+					this.customMessage( element.name, rule.method ),
+					this.customDataMessage( element, rule.method ),
+
+					// 'title' is never undefined, so handle empty string as undefined
+					!this.settings.ignoreTitle && element.title || undefined,
+					$.validator.messages[ rule.method ],
+					"<strong>Warning: No message defined for " + element.name + "</strong>"
+				),
+				theregex = /\$?\{(\d+)\}/g;
+			if ( typeof message === "function" ) {
+				message = message.call( this, rule.parameters, element );
+			} else if ( theregex.test( message ) ) {
+				message = $.validator.format( message.replace( theregex, "{$1}" ), rule.parameters );
+			}
+
+			return message;
+		},
+
+		formatAndAdd: function( element, rule ) {
+			var message = this.defaultMessage( element, rule );
+
+			this.errorList.push( {
+				message: message,
+				element: element,
+				method: rule.method
+			} );
+
+			this.errorMap[ element.name ] = message;
+			this.submitted[ element.name ] = message;
+		},
+
+		addWrapper: function( toToggle ) {
+			if ( this.settings.wrapper ) {
+				toToggle = toToggle.add( toToggle.parent( this.settings.wrapper ) );
+			}
+			return toToggle;
+		},
+
+		defaultShowErrors: function() {
+			var i, elements, error;
+			for ( i = 0; this.errorList[ i ]; i++ ) {
+				error = this.errorList[ i ];
+				if ( this.settings.highlight ) {
+					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.showLabel( error.element, error.message );
+			}
+			if ( this.errorList.length ) {
+				this.toShow = this.toShow.add( this.containers );
+			}
+			if ( this.settings.success ) {
+				for ( i = 0; this.successList[ i ]; i++ ) {
+					this.showLabel( this.successList[ i ] );
+				}
+			}
+			if ( this.settings.unhighlight ) {
+				for ( i = 0, elements = this.validElements(); elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
+				}
+			}
+			this.toHide = this.toHide.not( this.toShow );
+			this.hideErrors();
+			this.addWrapper( this.toShow ).show();
+		},
+
+		validElements: function() {
+			return this.currentElements.not( this.invalidElements() );
+		},
+
+		invalidElements: function() {
+			return $( this.errorList ).map( function() {
+				return this.element;
+			} );
+		},
+
+		showLabel: function( element, message ) {
+			var place, group, errorID, v,
+				error = this.errorsFor( element ),
+				elementID = this.idOrName( element ),
+				describedBy = $( element ).attr( "aria-describedby" );
+
+			if ( error.length ) {
+
+				// Refresh error/success class
+				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
+
+				// Replace message on existing label
+				if ( this.settings && this.settings.escapeHtml ) {
+					error.text( message || "" );
+				} else {
+					error.html( message || "" );
+				}
+			} else {
+
+				// Create error element
+				error = $( "<" + this.settings.errorElement + ">" )
+					.attr( "id", elementID + "-error" )
+					.addClass( this.settings.errorClass );
+
+				if ( this.settings && this.settings.escapeHtml ) {
+					error.text( message || "" );
+				} else {
+					error.html( message || "" );
+				}
+
+				// Maintain reference to the element to be placed into the DOM
+				place = error;
+				if ( this.settings.wrapper ) {
+
+					// Make sure the element is visible, even in IE
+					// actually showing the wrapped element is handled elsewhere
+					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
+				}
+				if ( this.labelContainer.length ) {
+					this.labelContainer.append( place );
+				} else if ( this.settings.errorPlacement ) {
+					this.settings.errorPlacement.call( this, place, $( element ) );
+				} else {
+					place.insertAfter( element );
+				}
+
+				// Link error back to the element
+				if ( error.is( "label" ) ) {
+
+					// If the error is a label, then associate using 'for'
+					error.attr( "for", elementID );
+
+					// If the element is not a child of an associated label, then it's necessary
+					// to explicitly apply aria-describedby
+				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
+					errorID = error.attr( "id" );
+
+					// Respect existing non-error aria-describedby
+					if ( !describedBy ) {
+						describedBy = errorID;
+					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
+
+						// Add to end of list if not already present
+						describedBy += " " + errorID;
+					}
+					$( element ).attr( "aria-describedby", describedBy );
+
+					// If this element is grouped, then assign to all elements in the same group
+					group = this.groups[ element.name ];
+					if ( group ) {
+						v = this;
+						$.each( v.groups, function( name, testgroup ) {
+							if ( testgroup === group ) {
+								$( "[name='" + v.escapeCssMeta( name ) + "']", v.currentForm )
+									.attr( "aria-describedby", error.attr( "id" ) );
+							}
+						} );
+					}
+				}
+			}
+			if ( !message && this.settings.success ) {
+				error.text( "" );
+				if ( typeof this.settings.success === "string" ) {
+					error.addClass( this.settings.success );
+				} else {
+					this.settings.success( error, element );
+				}
+			}
+			this.toShow = this.toShow.add( error );
+		},
+
+		errorsFor: function( element ) {
+			var name = this.escapeCssMeta( this.idOrName( element ) ),
+				describer = $( element ).attr( "aria-describedby" ),
+				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+
+			// 'aria-describedby' should directly reference the error element
+			if ( describer ) {
+				selector = selector + ", #" + this.escapeCssMeta( describer )
+					.replace( /\s+/g, ", #" );
+			}
+
+			return this
+				.errors()
+				.filter( selector );
+		},
+
+		// See https://api.jquery.com/category/selectors/, for CSS
+		// meta-characters that should be escaped in order to be used with JQuery
+		// as a literal part of a name/id or any selector.
+		escapeCssMeta: function( string ) {
+			if ( string === undefined ) {
+				return "";
+			}
+
+			return string.replace( /([\\!"#$%&'()*+,./:;<=>?@\[\]^`{|}~])/g, "\\$1" );
+		},
+
+		idOrName: function( element ) {
+			return this.groups[ element.name ] || ( this.checkable( element ) ? element.name : element.id || element.name );
+		},
+
+		validationTargetFor: function( element ) {
+
+			// If radio/checkbox, validate first element in group instead
+			if ( this.checkable( element ) ) {
+				element = this.findByName( element.name );
+			}
+
+			// Always apply ignore filter
+			return $( element ).not( this.settings.ignore )[ 0 ];
+		},
+
+		checkable: function( element ) {
+			return ( /radio|checkbox/i ).test( element.type );
+		},
+
+		findByName: function( name ) {
+			return $( this.currentForm ).find( "[name='" + this.escapeCssMeta( name ) + "']" );
+		},
+
+		getLength: function( value, element ) {
+			switch ( element.nodeName.toLowerCase() ) {
+			case "select":
+				return $( "option:selected", element ).length;
+			case "input":
+				if ( this.checkable( element ) ) {
+					return this.findByName( element.name ).filter( ":checked" ).length;
+				}
+			}
+			return value.length;
+		},
+
+		depend: function( param, element ) {
+			return this.dependTypes[ typeof param ] ? this.dependTypes[ typeof param ]( param, element ) : true;
+		},
+
+		dependTypes: {
+			"boolean": function( param ) {
+				return param;
+			},
+			"string": function( param, element ) {
+				return !!$( param, element.form ).length;
+			},
+			"function": function( param, element ) {
+				return param( element );
+			}
+		},
+
+		optional: function( element ) {
+			var val = this.elementValue( element );
+			return !$.validator.methods.required.call( this, val, element ) && "dependency-mismatch";
+		},
+
+		elementAjaxPort: function( element ) {
+			return "validate" + element.name;
+		},
+
+		startRequest: function( element ) {
+			if ( !this.pending[ element.name ] ) {
+				this.pendingRequest++;
+				$( element ).addClass( this.settings.pendingClass );
+				this.pending[ element.name ] = true;
+			}
+		},
+
+		stopRequest: function( element, valid ) {
+			this.pendingRequest--;
+
+			// Sometimes synchronization fails, make sure pendingRequest is never < 0
+			if ( this.pendingRequest < 0 ) {
+				this.pendingRequest = 0;
+			}
+			delete this.pending[ element.name ];
+			$( element ).removeClass( this.settings.pendingClass );
+			if ( valid && this.pendingRequest === 0 && this.formSubmitted && this.form() && this.pendingRequest === 0 ) {
+				$( this.currentForm ).trigger( "submit" );
+
+				// Remove the hidden input that was used as a replacement for the
+				// missing submit button. The hidden input is added by `handle()`
+				// to ensure that the value of the used submit button is passed on
+				// for scripted submits triggered by this method
+				if ( this.submitButton ) {
+					$( "input:hidden[name='" + this.submitButton.name + "']", this.currentForm ).remove();
+				}
+
+				this.formSubmitted = false;
+			} else if ( !valid && this.pendingRequest === 0 && this.formSubmitted ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+				this.formSubmitted = false;
+			}
+		},
+
+		abortRequest: function( element ) {
+			var port;
+
+			if ( this.pending[ element.name ] ) {
+				port = this.elementAjaxPort( element );
+				$.ajaxAbort( port );
+
+				this.pendingRequest--;
+
+				// Sometimes synchronization fails, make sure pendingRequest is never < 0
+				if ( this.pendingRequest < 0 ) {
+					this.pendingRequest = 0;
+				}
+
+				delete this.pending[ element.name ];
+				$( element ).removeClass( this.settings.pendingClass );
+			}
+		},
+
+		previousValue: function( element, method ) {
+			method = typeof method === "string" && method || "remote";
+
+			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
+				old: null,
+				valid: true,
+				message: this.defaultMessage( element, { method: method } )
+			} );
+		},
+
+		// Cleans up all forms and elements, removes validator-specific events
+		destroy: function() {
+			this.resetForm();
+
+			$( this.currentForm )
+				.off( ".validate" )
+				.removeData( "validator" )
+				.find( ".validate-equalTo-blur" )
+					.off( ".validate-equalTo" )
+					.removeClass( "validate-equalTo-blur" )
+				.find( ".validate-lessThan-blur" )
+					.off( ".validate-lessThan" )
+					.removeClass( "validate-lessThan-blur" )
+				.find( ".validate-lessThanEqual-blur" )
+					.off( ".validate-lessThanEqual" )
+					.removeClass( "validate-lessThanEqual-blur" )
+				.find( ".validate-greaterThanEqual-blur" )
+					.off( ".validate-greaterThanEqual" )
+					.removeClass( "validate-greaterThanEqual-blur" )
+				.find( ".validate-greaterThan-blur" )
+					.off( ".validate-greaterThan" )
+					.removeClass( "validate-greaterThan-blur" );
+		}
+
+	},
+
+	classRuleSettings: {
+		required: { required: true },
+		email: { email: true },
+		url: { url: true },
+		date: { date: true },
+		dateISO: { dateISO: true },
+		number: { number: true },
+		digits: { digits: true },
+		creditcard: { creditcard: true }
+	},
+
+	addClassRules: function( className, rules ) {
+		if ( className.constructor === String ) {
+			this.classRuleSettings[ className ] = rules;
+		} else {
+			$.extend( this.classRuleSettings, className );
+		}
+	},
+
+	classRules: function( element ) {
+		var rules = {},
+			classes = $( element ).attr( "class" );
+
+		if ( classes ) {
+			$.each( classes.split( " " ), function() {
+				if ( this in $.validator.classRuleSettings ) {
+					$.extend( rules, $.validator.classRuleSettings[ this ] );
+				}
+			} );
+		}
+		return rules;
+	},
+
+	normalizeAttributeRule: function( rules, type, method, value ) {
+
+		// Convert the value to a number for number inputs, and for text for backwards compability
+		// allows type="date" and others to be compared as strings
+		if ( /min|max|step/.test( method ) && ( type === null || /number|range|text/.test( type ) ) ) {
+			value = Number( value );
+
+			// Support Opera Mini, which returns NaN for undefined minlength
+			if ( isNaN( value ) ) {
+				value = undefined;
+			}
+		}
+
+		if ( value || value === 0 ) {
+			rules[ method ] = value;
+		} else if ( type === method && type !== "range" ) {
+
+			// Exception: the jquery validate 'range' method
+			// does not test for the html5 'range' type
+			rules[ type === "date" ? "dateISO" : method ] = true;
+		}
+	},
+
+	attributeRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+
+			// Support for <input required> in both html5 and older browsers
+			if ( method === "required" ) {
+				value = element.getAttribute( method );
+
+				// Some browsers return an empty string for the required attribute
+				// and non-HTML5 browsers might have required="" markup
+				if ( value === "" ) {
+					value = true;
+				}
+
+				// Force non-HTML5 browsers to return bool
+				value = !!value;
+			} else {
+				value = $element.attr( method );
+			}
+
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+
+		// 'maxlength' may be returned as -1, 2147483647 ( IE ) and 524288 ( safari ) for text inputs
+		if ( rules.maxlength && /-1|2147483647|524288/.test( rules.maxlength ) ) {
+			delete rules.maxlength;
+		}
+
+		return rules;
+	},
+
+	dataRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
+
+			// Cast empty attributes like `data-rule-required` to `true`
+			if ( value === "" ) {
+				value = true;
+			}
+
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+		return rules;
+	},
+
+	staticRules: function( element ) {
+		var rules = {},
+			validator = $.data( element.form, "validator" );
+
+		if ( validator.settings.rules ) {
+			rules = $.validator.normalizeRule( validator.settings.rules[ element.name ] ) || {};
+		}
+		return rules;
+	},
+
+	normalizeRules: function( rules, element ) {
+
+		// Handle dependency check
+		$.each( rules, function( prop, val ) {
+
+			// Ignore rule when param is explicitly false, eg. required:false
+			if ( val === false ) {
+				delete rules[ prop ];
+				return;
+			}
+			if ( val.param || val.depends ) {
+				var keepRule = true;
+				switch ( typeof val.depends ) {
+				case "string":
+					keepRule = !!$( val.depends, element.form ).length;
+					break;
+				case "function":
+					keepRule = val.depends.call( element, element );
+					break;
+				}
+				if ( keepRule ) {
+					rules[ prop ] = val.param !== undefined ? val.param : true;
+				} else {
+					$.data( element.form, "validator" ).resetElements( $( element ) );
+					delete rules[ prop ];
+				}
+			}
+		} );
+
+		// Evaluate parameters
+		$.each( rules, function( rule, parameter ) {
+			rules[ rule ] = typeof parameter === "function" && rule !== "normalizer" ? parameter( element ) : parameter;
+		} );
+
+		// Clean number parameters
+		$.each( [ "minlength", "maxlength" ], function() {
+			if ( rules[ this ] ) {
+				rules[ this ] = Number( rules[ this ] );
+			}
+		} );
+		$.each( [ "rangelength", "range" ], function() {
+			var parts;
+			if ( rules[ this ] ) {
+				if ( Array.isArray( rules[ this ] ) ) {
+					rules[ this ] = [ Number( rules[ this ][ 0 ] ), Number( rules[ this ][ 1 ] ) ];
+				} else if ( typeof rules[ this ] === "string" ) {
+					parts = rules[ this ].replace( /[\[\]]/g, "" ).split( /[\s,]+/ );
+					rules[ this ] = [ Number( parts[ 0 ] ), Number( parts[ 1 ] ) ];
+				}
+			}
+		} );
+
+		if ( $.validator.autoCreateRanges ) {
+
+			// Auto-create ranges
+			if ( rules.min != null && rules.max != null ) {
+				rules.range = [ rules.min, rules.max ];
+				delete rules.min;
+				delete rules.max;
+			}
+			if ( rules.minlength != null && rules.maxlength != null ) {
+				rules.rangelength = [ rules.minlength, rules.maxlength ];
+				delete rules.minlength;
+				delete rules.maxlength;
+			}
+		}
+
+		return rules;
+	},
+
+	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
+	normalizeRule: function( data ) {
+		if ( typeof data === "string" ) {
+			var transformed = {};
+			$.each( data.split( /\s/ ), function() {
+				transformed[ this ] = true;
+			} );
+			data = transformed;
+		}
+		return data;
+	},
+
+	// https://jqueryvalidation.org/jQuery.validator.addMethod/
+	addMethod: function( name, method, message ) {
+		$.validator.methods[ name ] = method;
+		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
+		if ( method.length < 3 ) {
+			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
+		}
+	},
+
+	// https://jqueryvalidation.org/jQuery.validator.methods/
+	methods: {
+
+		// https://jqueryvalidation.org/required-method/
+		required: function( value, element, param ) {
+
+			// Check if dependency is met
+			if ( !this.depend( param, element ) ) {
+				return "dependency-mismatch";
+			}
+			if ( element.nodeName.toLowerCase() === "select" ) {
+
+				// Could be an array for select-multiple or a string, both are fine this way
+				var val = $( element ).val();
+				return val && val.length > 0;
+			}
+			if ( this.checkable( element ) ) {
+				return this.getLength( value, element ) > 0;
+			}
+			return value !== undefined && value !== null && value.length > 0;
+		},
+
+		// https://jqueryvalidation.org/email-method/
+		email: function( value, element ) {
+
+			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+			// Retrieved 2014-01-14
+			// If you have a problem with this implementation, report a bug against the above spec
+			// Or use custom methods to implement your own email validation
+			return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/url-method/
+		url: function( value, element ) {
+
+			// Copyright (c) 2010-2013 Diego Perini, MIT licensed
+			// https://gist.github.com/dperini/729294
+			// see also https://mathiasbynens.be/demo/url-regex
+			// modified to allow protocol-relative URLs
+			return this.optional( element ) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:(?:[^\]\[?\/<~#`!@$^&*()+=}|:";',>{ ]|%[0-9A-Fa-f]{2})+(?::(?:[^\]\[?\/<~#`!@$^&*()+=}|:";',>{ ]|%[0-9A-Fa-f]{2})*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test( value );
+		},
+
+		// https://jqueryvalidation.org/date-method/
+		date: ( function() {
+			var called = false;
+
+			return function( value, element ) {
+				if ( !called ) {
+					called = true;
+					if ( this.settings.debug && window.console ) {
+						console.warn(
+							"The `date` method is deprecated and will be removed in version '2.0.0'.\n" +
+							"Please don't use it, since it relies on the Date constructor, which\n" +
+							"behaves very differently across browsers and locales. Use `dateISO`\n" +
+							"instead or one of the locale specific methods in `localizations/`\n" +
+							"and `additional-methods.js`."
+						);
+					}
+				}
+
+				return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+			};
+		}() ),
+
+		// https://jqueryvalidation.org/dateISO-method/
+		dateISO: function( value, element ) {
+			return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/number-method/
+		number: function( value, element ) {
+			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/digits-method/
+		digits: function( value, element ) {
+			return this.optional( element ) || /^\d+$/.test( value );
+		},
+
+		// https://jqueryvalidation.org/minlength-method/
+		minlength: function( value, element, param ) {
+			var length = Array.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length >= param;
+		},
+
+		// https://jqueryvalidation.org/maxlength-method/
+		maxlength: function( value, element, param ) {
+			var length = Array.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length <= param;
+		},
+
+		// https://jqueryvalidation.org/rangelength-method/
+		rangelength: function( value, element, param ) {
+			var length = Array.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || ( length >= param[ 0 ] && length <= param[ 1 ] );
+		},
+
+		// https://jqueryvalidation.org/min-method/
+		min: function( value, element, param ) {
+			return this.optional( element ) || value >= param;
+		},
+
+		// https://jqueryvalidation.org/max-method/
+		max: function( value, element, param ) {
+			return this.optional( element ) || value <= param;
+		},
+
+		// https://jqueryvalidation.org/range-method/
+		range: function( value, element, param ) {
+			return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
+		},
+
+		// https://jqueryvalidation.org/step-method/
+		step: function( value, element, param ) {
+			var type = $( element ).attr( "type" ),
+				errorMessage = "Step attribute on input type " + type + " is not supported.",
+				supportedTypes = [ "text", "number", "range" ],
+				re = new RegExp( "\\b" + type + "\\b" ),
+				notSupported = type && !re.test( supportedTypes.join() ),
+				decimalPlaces = function( num ) {
+					var match = ( "" + num ).match( /(?:\.(\d+))?$/ );
+					if ( !match ) {
+						return 0;
+					}
+
+					// Number of digits right of decimal point.
+					return match[ 1 ] ? match[ 1 ].length : 0;
+				},
+				toInt = function( num ) {
+					return Math.round( num * Math.pow( 10, decimals ) );
+				},
+				valid = true,
+				decimals;
+
+			// Works only for text, number and range input types
+			// TODO find a way to support input types date, datetime, datetime-local, month, time and week
+			if ( notSupported ) {
+				throw new Error( errorMessage );
+			}
+
+			decimals = decimalPlaces( param );
+
+			// Value can't have too many decimals
+			if ( decimalPlaces( value ) > decimals || toInt( value ) % toInt( param ) !== 0 ) {
+				valid = false;
+			}
+
+			return this.optional( element ) || valid;
+		},
+
+		// https://jqueryvalidation.org/equalTo-method/
+		equalTo: function( value, element, param ) {
+
+			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+			var target = $( param );
+			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
+				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
+					$( element ).valid();
+				} );
+			}
+			return value === target.val();
+		},
+
+		// https://jqueryvalidation.org/remote-method/
+		remote: function( value, element, param, method ) {
+			if ( this.optional( element ) ) {
+				return "dependency-mismatch";
+			}
+
+			method = typeof method === "string" && method || "remote";
+
+			var previous = this.previousValue( element, method ),
+				validator, data, optionDataString;
+
+			if ( !this.settings.messages[ element.name ] ) {
+				this.settings.messages[ element.name ] = {};
+			}
+			previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
+			this.settings.messages[ element.name ][ method ] = previous.message;
+
+			param = typeof param === "string" && { url: param } || param;
+			optionDataString = $.param( $.extend( { data: value }, param.data ) );
+			if ( previous.valid !== null && previous.old === optionDataString ) {
+				return previous.valid;
+			}
+
+			previous.old = optionDataString;
+			previous.valid = null;
+			validator = this;
+			this.startRequest( element );
+			data = {};
+			data[ element.name ] = value;
+			$.ajax( $.extend( true, {
+				mode: "abort",
+				port: this.elementAjaxPort( element ),
+				dataType: "json",
+				data: data,
+				context: validator.currentForm,
+				success: function( response ) {
+					var valid = response === true || response === "true",
+						errors, message, submitted;
+
+					validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
+					if ( valid ) {
+						submitted = validator.formSubmitted;
+						validator.toHide = validator.errorsFor( element );
+						validator.formSubmitted = submitted;
+						validator.successList.push( element );
+						validator.invalid[ element.name ] = false;
+						validator.showErrors();
+					} else {
+						errors = {};
+						message = response || validator.defaultMessage( element, { method: method, parameters: value } );
+						errors[ element.name ] = previous.message = message;
+						validator.invalid[ element.name ] = true;
+						validator.showErrors( errors );
+					}
+					previous.valid = valid;
+					validator.stopRequest( element, valid );
+				}
+			}, param ) );
+			return "pending";
+		}
+	}
+
+} );
+
+// Ajax mode: abort
+// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+//        $.ajaxAbort( port );
+// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
+
+var pendingRequests = {},
+	ajax;
+
+// Use a prefilter if available (1.5+)
+if ( $.ajaxPrefilter ) {
+	$.ajaxPrefilter( function( settings, _, xhr ) {
+		var port = settings.port;
+		if ( settings.mode === "abort" ) {
+			$.ajaxAbort( port );
+			pendingRequests[ port ] = xhr;
+		}
+	} );
+} else {
+
+	// Proxy ajax
+	ajax = $.ajax;
+	$.ajax = function( settings ) {
+		var mode = ( "mode" in settings ? settings : $.ajaxSettings ).mode,
+			port = ( "port" in settings ? settings : $.ajaxSettings ).port;
+		if ( mode === "abort" ) {
+			$.ajaxAbort( port );
+			pendingRequests[ port ] = ajax.apply( this, arguments );
+			return pendingRequests[ port ];
+		}
+		return ajax.apply( this, arguments );
+	};
+}
+
+// Abort the previous request without sending a new one
+$.ajaxAbort = function( port ) {
+	if ( pendingRequests[ port ] ) {
+		pendingRequests[ port ].abort();
+		delete pendingRequests[ port ];
+	}
+};
+return $;
 }));
-
 /*! List.js v1.5.0 (http://listjs.com) by Jonny Strömberg (http://javve.com) */
 var List =
 /******/ (function(modules) { // webpackBootstrap

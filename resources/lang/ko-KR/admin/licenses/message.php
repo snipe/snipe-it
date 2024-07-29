@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => '사용자가 존재하지 않습니다.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> '이 라이선스와 연결하려는 자산이 존재하지 않습니다.',
     'owner_doesnt_match_asset' => '이 라이센스와 연결하려고하는 자산은 드롭 다운 목록에서 선택한 사람이 아닌 다른 누군가가 소유하고 있습니다.',
     'assoc_users'	 => '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => '라이선스 반출 중 문제가 발생했습니다. 다시 시도해 주세요.',
         'success' => '라이선스가 반출 되었습니다.',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

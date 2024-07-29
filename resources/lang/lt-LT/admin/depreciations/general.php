@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'about_asset_depreciations'  			=> 'Apie įrangos nusidėvėjimą',
-    'about_depreciations'  					=> 'Jūs galite nustatyti irangos nusidėvėjimą naudodami proporcinio metodo nusidėvėjimą.',
-    'asset_depreciations'  					=> 'Irangos nusidėvėjimas',
-    'create'  					            => 'Sukurkite nusidėvėjimą',
+    'about_asset_depreciations'  			=> 'Apie turto nusidėvėjimą',
+    'about_depreciations'  					=> 'Jūs galite nustatyti turto nusidėvėjimą pagal tiesinį nusidėvėjimo modelį.',
+    'asset_depreciations'  					=> 'Turto nusidėvėjimas',
+    'create'  					            => 'Sukurti nusidėvėjimą',
     'depreciation_name'  					=> 'Nusidėvėjimo pavadinimas',
     'depreciation_min'                      => 'Minimali nusidėvėjimo reikšmė',
     'number_of_months'  					=> 'Mėnesių skaičius',

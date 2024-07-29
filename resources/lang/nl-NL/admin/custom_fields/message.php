@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Dat veld bestaat niet.',
         'already_added'   => 'Veld is al toegevoegd',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Veld is niet aangemaakt, probeer het opnieuw.',

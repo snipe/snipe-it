@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use \App\Presenters\AssetModelPresenter;
 
 /**
  * Model for Asset Models. Asset Models contain higher level
@@ -20,7 +21,7 @@ class AssetModel extends SnipeModel
 {
     use HasFactory;
     use SoftDeletes;
-    protected $presenter = \App\Presenters\AssetModelPresenter::class;
+    protected $presenter = AssetModelPresenter::class;
     use Loggable, Requestable, Presentable;
 
     protected $table = 'models';
@@ -37,7 +38,7 @@ class AssetModel extends SnipeModel
     ];
 
     /**
-     * Whether the model should inject it's identifier to the unique
+     * Whether the model should inject its identifier to the unique
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *

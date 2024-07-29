@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'O seu nome de usuário e o seu endereço de email <em>podem</em> podem ser os mesmos, mas também podem não ser os mesmos, dependendo da sua configuração. Se não se recorda do seu nome de usuário, entre em contacto com o seu administrador. <br><br><strong>Nomes de usuário sem um endereço de email associado não receberão um link de redefinição de senha por email. </strong> ',
     'google_login'                  => 'Entrar com Google Workspace',
     'google_login_failed'           => 'Falha do login do Google. Por favor, tente novamente.',
-
 ];
 

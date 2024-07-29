@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use RuntimeException;
 use Tests\Support\AssertsAgainstSlackNotifications;
+use Tests\Support\CanSkipTests;
 use Tests\Support\CustomTestMacros;
 use Tests\Support\InteractsWithAuthentication;
 use Tests\Support\InitializesSettings;
@@ -14,6 +15,7 @@ use Tests\Support\InitializesSettings;
 abstract class TestCase extends BaseTestCase
 {
     use AssertsAgainstSlackNotifications;
+    use CanSkipTests;
     use CreatesApplication;
     use CustomTestMacros;
     use InteractsWithAuthentication;

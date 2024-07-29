@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'الترخيص غير موجود أو ليس لديك الصلاحية لعرضه.',
-    'user_does_not_exist' => 'المستخدم غير موجود.',
+    'user_does_not_exist' => 'المستخدم غير موجود أو ليس لديك الصلاحية لعرضها.',
     'asset_does_not_exist' 	=> 'الأصل اللذي تحاول ربطه مع هذا الترخيص غير موجود.',
     'owner_doesnt_match_asset' => 'الأصل اللذي تحاول ربطه مع هذا الترخيص حاليا مملوك لشخص اخر غير اللذي تم اختياره من القائمة المنسدلة.',
     'assoc_users'	 => 'هذا الترخيص حاليا مخرج لمستخدم ولا يمكن حذفه. يرجى التحقق من الترخيص في البداية، ثم محاولة الحذف مرة أخرى. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'حدثت مشكلة أثناء اخراج الترخيص. يرجى إعادة المحاولة.',
         'success' => 'تم اخراج الترخيص بنجاح',
         'not_enough_seats' => 'لا توجد مقاعد ترخيص كافية متاحة للدفع',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

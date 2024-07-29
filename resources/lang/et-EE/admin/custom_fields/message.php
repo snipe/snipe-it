@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Seda välja ei eksisteeri.',
         'already_added'   => 'Väli on juba lisatud',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Väli ei loodud, proovige uuesti.',

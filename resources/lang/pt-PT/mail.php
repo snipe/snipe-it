@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Li e concordo com os termos de uso e recebi este item.',
     'inventory_report' => 'Relatório de Inventário',
     'item' => 'Item:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Há :count licença a expirar nos próximos :threshold dias. Existem :count licenças que irão expirar nos próximos :threshold dias.',
     'link_to_update_password' => 'Por favor clique no link abaixo para actualizar a sua senha do :web:',
     'login' => 'Login:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Existe um :count ativo que está a chegar para ser auditado em :threshold dias.|Existem :count ativos que estão a chegar para serem auditados em :threshold dias.',
     'user' => 'Utilizador',
     'username' => 'Nome de utilizador',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Bem vindo, :name',
     'welcome_to' => 'Bem-vindo ao :web!',
     'your_assets' => 'Ver seus ativos',
     'your_credentials' => 'Suas credenciais do Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

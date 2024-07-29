@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'crwdns1229:0crwdne1229:0',
         'success' 		=> 'crwdns1230:0crwdne1230:0',
         'unavailable'   => 'crwdns11523:0crwdne11523:0',
-        'user_does_not_exist' => 'crwdns1231:0crwdne1231:0'
+        'user_does_not_exist' => 'crwdns1231:0crwdne1231:0',
+         'checkout_qty' => array(
+            'lte'  => 'crwdns12326:0crwdne12326:0',
+            ),
+           
     ),
 
     'checkin' => array(

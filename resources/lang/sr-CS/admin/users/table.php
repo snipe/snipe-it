@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Na ovoj instalaciji ne mogu se mijenjati podaci za prijavu.',
     'manager' 				=> 'Menadžer',
     'managed_locations'     => 'Managed Locations',
+    'managed_users'         => 'Upravljani korisnici',
     'name' 					=> 'Ime',
     'nogroup'               => 'Nijedna grupa još uvek nije napravljena. Da je dodate, posetite: ',
     'notes'                 => 'Zabeleške',

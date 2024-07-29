@@ -3,5 +3,5 @@
 return [
     'select_company' => 'Vali ettevõte',
     'about_companies' => 'Ettevõtetest',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies_description' => '        Saate kasutada ettevõtteid lihtsa informatiivse väljaga, või piirata vara nähtavust ja kättesaadavust kasutajatele, kellel on konkreetne ettevõte, lubades Täieliku Ettevõtte Toe oma Admin Sättetest.',
 ];

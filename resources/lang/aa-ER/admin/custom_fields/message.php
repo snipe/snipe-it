@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'crwdns1505:0crwdne1505:0',
         'already_added'   => 'crwdns1506:0crwdne1506:0',
+        'none_selected'   => 'crwdns12586:0crwdne12586:0',
 
         'create' => array(
             'error'   => 'crwdns1507:0crwdne1507:0',

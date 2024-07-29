@@ -14,6 +14,8 @@ return array(
         'success'               => 'Uspešna prijava.',
         'code_required'         => 'Dvo-faktorska koda je obvezna.',
         'invalid_code'          => 'Dvo-faktorska koda je neveljavna.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

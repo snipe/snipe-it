@@ -52,12 +52,12 @@
             @if (is_array($group->decodePermissions()))
             <ul class="list-unstyled">
                 @foreach ($group->decodePermissions() as $permission_name => $permission)
-                   <li>{!! ($permission == '1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i><span class="sr-only">GRANTED: </span>' :  '<i class="fas fa-times text-danger" aria-hidden="true"></i><span class="sr-only">DENIED: </span>' !!} {{ e(str_replace('.', ': ', ucwords($permission_name))) }} </li>
+                   <li>{!! ($permission == '1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i><span class="sr-only">'.trans('general.yes').': </span>' :  '<i class="fas fa-times text-danger" aria-hidden="true"></i><span class="sr-only">'.trans('general.no').': </span>' !!} {{ e(str_replace('.', ': ', ucwords($permission_name))) }} </li>
                 @endforeach
 
             </ul>
             @else
-                <p>{{ trans('admin/groups/title.no_permissions') }}</p>
+                <p>{{ trans('admin/groups/titles.no_permissions') }}</p>
             @endif
 
         </div>

@@ -33,7 +33,7 @@ class CheckoutKitController extends Controller
      * Show Bulk Checkout Page
      *
      * @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
-     * @return View View to checkout
+     * @return \Illuminate\Contracts\View\View View to checkout
      */
     public function showCheckout($kit_id)
     {
@@ -48,7 +48,7 @@ class CheckoutKitController extends Controller
      * Validate and process the new Predefined Kit data.
      *
      * @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, $kit_id)
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class LicenseCheckinController extends Controller
 {
@@ -99,15 +101,15 @@ class LicenseCheckinController extends Controller
         $licenseSeat->asset_id = null;
         $licenseSeat->notes = $request->input('notes');
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
+
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedIn($licenseSeat, $return_to, Auth::user(), $request->input('notes')));
+            event(new CheckoutableCheckedIn($licenseSeat, $return_to, auth()->user(), $request->input('notes')));
 
-            if ($backTo == 'user') {
-                return redirect()->route('users.show', $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
-            }
 
-            return redirect()->route('licenses.show', $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkin.success'));
         }
 
         // Redirect to the license page with error
@@ -145,7 +147,7 @@ class LicenseCheckinController extends Controller
             $user_seat->assigned_to = null;
 
             if ($user_seat->save()) {
-                \Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
+                Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
                 $user_seat->logCheckin($user_seat->user, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
             }
         }
@@ -160,7 +162,7 @@ class LicenseCheckinController extends Controller
             $asset_seat->asset_id = null;
 
             if ($asset_seat->save()) {
-                \Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
+                Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
                 $asset_seat->logCheckin($asset_seat->asset, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
                 $count++;
             }

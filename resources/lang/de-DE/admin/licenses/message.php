@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Die Lizenz existiert nicht oder Sie haben keine Berechtigung, sie anzusehen.',
-    'user_does_not_exist' => 'Benutzer existiert nicht.',
+    'user_does_not_exist' => 'Benutzer existiert nicht oder Sie haben keine Berechtigung, ihn anzusehen.',
     'asset_does_not_exist' 	=> 'Das Asset, das Sie mit dieser Lizenz verknüpfen möchten, existiert nicht.',
     'owner_doesnt_match_asset' => 'Der Gegenstand, den Sie mit dieser Lizenz verknüpfen möchten, gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Lizenz ist derzeit mindestens einem Benutzer zugeordnet und kann nicht gelöscht werden. Bitte nehmen Sie die Lizenz zurück und versuchen Sie anschließend erneut diese zu löschen. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Lizenz wurde nicht herausgegeben, bitte versuchen Sie es erneut.',
         'success' => 'Lizenz wurde erfolgreich herausgegeben',
         'not_enough_seats' => 'Nicht genügend Lizenz-Sitze zur Herausgabe verfügbar',
+        'mismatch' => 'Der angegebene Lizenzplatz entspricht nicht der Lizenz',
+        'unavailable' => 'Dieser Platz ist nicht zur Herausgabe verfügbar.',
     ),
 
     'checkin' => array(

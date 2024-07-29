@@ -22,7 +22,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -35,6 +35,6 @@ abstract class Controller extends BaseController
     public function __construct()
     {
         view()->share('signedIn', Auth::check());
-        view()->share('user', Auth::user());
+        view()->share('user', auth()->user());
     }
 }

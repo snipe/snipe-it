@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Thola: </strong> Lelifa limakwe njengamanje elingenakutholakali. Uma lesi simo sesishintshile, sicela ubuyekeze isimo sesifa.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Impahla ayikho.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Leli fayela okwamanje lihlolwe kumsebenzisi futhi alikwazi ukususwa. Sicela uhlole ifa ekuqaleni, bese uzama ukususa futhi.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Impahla ayidalwanga, sicela uzame futhi. :(',
@@ -16,6 +19,7 @@ return [
     'update' => [
         'error'   			=> 'Ifa alizange libuyekezwe, sicela uzame futhi',
         'success' 			=> 'Ifa libuyekezwe ngempumelelo.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Awekho amasimu akhethiwe, ngakho-ke akukho lutho olubuyekeziwe.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
         'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
@@ -29,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Ukuhlolwa kwamafa akuphumelelanga. Ngicela uzame futhi.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'I-akhawunti yokuthengisa ilandelwe ngempumelelo.',
     ],
 
@@ -47,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Ezinye izinto azange zingenise ngendlela efanele.',
         'errorDetail'           => 'Izinto ezilandelayo azange zingeniswe ngenxa yamaphutha.',
         'success'               => 'Ifayela lakho lifakiwe',

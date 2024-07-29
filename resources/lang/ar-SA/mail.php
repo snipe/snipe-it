@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'لقد قرأت بنود الاستخدام وأوافق عليها، وقد تلقيت هذا البند.',
     'inventory_report' => 'تقرير المخزون',
     'item' => 'عنصر:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'هنالك :count رخص سوف تنتهي في الأيام :threshold القادمة.',
     'link_to_update_password' => 'يرجى النقر على الرابط التالي لتحديث كلمة المرور الخاصة بك على :web :',
     'login' => 'تسجيل الدخول:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'هناك :count الأصل الذي سيأتي للمراجعة في غضون :threshold أيام.<unk> هناك :count أصول ستأتي للمراجعة في غضون :threshold أيام.',
     'user' => 'المستخدم',
     'username' => 'اسم المستخدم',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'مرحباً :name',
     'welcome_to' => 'مرحبا بكم في :web!',
     'your_assets' => 'عرض الأصول الخاصة بك',
     'your_credentials' => 'أوراق اعتماد قنص-إيت الخاص بك',
+    'mail_sent' => 'Mail sent successfully!',
 ];

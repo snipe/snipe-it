@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Konum mevcut değil.',
-    'assoc_users'	 => 'Konum en az 1 kullanıcı ile ilişkili durumda ve silinemez. Lütfen önce kullanıcıları güncelleyerek konumu boşaltın ve tekrar deneyin. ',
+    'assoc_users'    => 'Bu bölüm silinemez, çünkü herhangi bir varlığın yada kullanıcının bilgisi yazılmakta. Bu haneyi kullanan kayıtları ve şirket bilgilerini murakabe ederek tekrar deneyin.',
     'assoc_assets'	 => 'Bu konum şu anda en az bir varlık ile ilişkili ve silinemez. Lütfen artık bu konumu kullanabilmek için varlık konumlarını güncelleştirin.',
     'assoc_child_loc'	 => 'Bu konum şu anda en az bir alt konum üstüdür ve silinemez. Lütfen artık bu konuma ait alt konumları güncelleyin. ',
     'assigned_assets' => 'Atanan Varlıklar',

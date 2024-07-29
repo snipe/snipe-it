@@ -2,11 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> Το περιουσιακό αυτό στοιχείο έχει επισημανθεί ως επί του παρόντος undeployable.
-                        Εάν αυτή η κατάσταση έχει αλλάξει, παρακαλούμε να ενημερώσετε την κατάσταση των περιουσιακών στοιχείων.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'To πάγιο δεν υπάρχει.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Αυτό το στοιχείο δεν υπάρχει ή δεν απαιτείται.',
     'assoc_users'	 	=> 'Αυτό το στοιχείο είναι συνήθως αποσυνδεδεμένο από έναν χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα το στοιχείο και, στη συνέχεια, δοκιμάστε ξανά τη διαγραφή.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Το περιουσιακού στοιχείο δεν δημιουργήθηκε, παρακαλώ προσπαθήστε ξανά. :(',
@@ -17,6 +19,7 @@ return [
     'update' => [
         'error'   			=> 'Το πάγιο δεν ενημερώθηκε, παρακαλώ προσπαθήστε ξανά',
         'success' 			=> 'Τα περιουσιακά στοιχεία ενημερώθηκαν επιτυχώς.',
+        'encrypted_warning' => 'Το πάγιο ενημερώθηκε επιτυχώς, αλλά τα κρυπτογραφημένα προσαρμοσμένα πεδία δεν οφείλονταν στα δικαιώματα',
         'nothing_updated'	=>  'Δεν επιλέχθηκαν πεδία, επομένως τίποτα δεν ενημερώθηκε.',
         'no_assets_selected'  =>  'Δεν επιλέχθηκαν στοιχεία ενεργητικού, επομένως τίποτα δεν ενημερώθηκε.',
         'assets_do_not_exist_or_are_invalid' => 'Τα επιλεγμένα περιουσιακά στοιχεία δεν μπορούν να ενημερωθούν.',
@@ -30,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Ο έλεγχος στοιχείων ενεργητικού ήταν ανεπιτυχής. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Ο έλεγχος περιουσιακών στοιχείων ολοκληρώθηκε με επιτυχία.',
     ],
 
@@ -48,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Ορισμένα στοιχεία δεν έχουν εισαχθεί σωστά.',
         'errorDetail'           => 'Τα παρακάτω στοιχεία δεν εισήχθησαν εξαιτίας σφαλμάτων.',
         'success'               => 'Το αρχείο σας έχει εισαχθεί',

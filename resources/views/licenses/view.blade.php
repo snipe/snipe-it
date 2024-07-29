@@ -175,11 +175,13 @@
 
 
                 @if ($license->supplier)
+
                     <div class="row">
                       <div class="col-md-3">
                         <strong>{{ trans('general.supplier') }}</strong>
                       </div>
                       <div class="col-md-9">
+                        @if ($license->supplier->deleted_at=='')
                         @can('view', \App\Models\Supplier::class)
                           <a href="{{ route('suppliers.show', $license->supplier->id) }}">
                             {{ $license->supplier->name }}
@@ -219,11 +221,11 @@
                           @if ($license->supplier->zip)
                             {{ $license->supplier->zip }}
                           @endif
-                        
+                        @else
+                          {{ trans('general.deleted') }}
+                        @endif
                       </div>
                     </div>
-                @else
-                    {{ trans('general.deleted') }}
                 @endif
 
 
@@ -288,12 +290,14 @@
                     </strong>
                   </div>
                   <div class="col-md-9">
-                    @if ($license->time_until_depreciated()->y > 0)
-                      {{ $license->time_until_depreciated()->y }}
-                      {{ trans('admin/hardware/form.years') }},
-                    @endif
-                    {{ $license->time_until_depreciated()->m }}
-                    {{ trans('admin/hardware/form.months') }}
+                    @if ($license->time_until_depreciated())
+                      @if ($license->time_until_depreciated()->y > 0)
+                        {{ $license->time_until_depreciated()->y }}
+                        {{ trans('admin/hardware/form.years') }},
+                      @endif
+                      {{ $license->time_until_depreciated()->m }}
+                      {{ trans('admin/hardware/form.months') }}
+                   @endif
                   </div>
                 </div>
                 @endif

@@ -4,6 +4,11 @@
     'helpPosition'  => 'right',
     'helpText' => trans('help.components'),
     'formAction' => (isset($item->id)) ? route('components.update', ['component' => $item->id]) : route('components.store'),
+    'index_route' => 'components.index',
+    'options' => [
+                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'components']),
+                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.component')]),
+               ]
 
 ])
 

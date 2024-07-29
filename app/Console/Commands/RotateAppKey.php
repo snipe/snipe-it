@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\Setting;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Encryption\Encrypter;

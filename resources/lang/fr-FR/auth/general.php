@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Votre nom d\'utilisateur et votre adresse e-mail <em>peuvent être</em> les mêmes, mais peuvent ne pas l\'être, selon votre configuration. Si vous ne pouvez pas vous souvenir de votre nom d\'utilisateur, contactez votre administrateur. <br><br><strong>Les noms d\'utilisateur sans adresse e-mail associée ne seront pas envoyés par e-mail un lien de réinitialisation du mot de passe.</strong> ',
     'google_login'                  => 'Se connecter avec Google Workspace',
     'google_login_failed'           => 'La connexion via Google a échoué, merci de réessayer.',
-
 ];
 

@@ -14,19 +14,13 @@
 @section('content')
     @if (!config('app.lock_passwords'))
         <div id="app">
-            <passport-clients clients-url="{{ url('oauth/clients') }}"></passport-clients>
-            <passport-authorized-clients clients-url="{{ url('oauth/clients') }}" tokens-url="{{ url('oauth/tokens') }}"></passport-authorized-clients>
+            <livewire:oauth-clients />
         </div>
     @else
-        <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
     @endif
 
 @stop
 
 @section('moar_scripts')
-<script nonce="{{ csrf_token() }}">
-    new Vue({
-        el: "#app",
-    });
-</script>
 @endsection

@@ -19,7 +19,6 @@
             }
         };
     </script>
-    @livewireStyles
 
 
     @if (($snipeSettings) && ($snipeSettings->header_color))
@@ -74,7 +73,6 @@
 
 
     @stack('js')
-    @livewireScripts
 </body>
 
 </html>

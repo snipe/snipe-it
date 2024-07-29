@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Би ашиглалтын нөхцөлийг уншиж, зөвшөөрч, энэ зүйлийг хүлээн авсан.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Зүйл:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count ширхэг лизенц :threshhold өдрийн дотор дуусна.|:count ширхэг лизенц :threshhold өдрийн дотор дуусна.',
     'link_to_update_password' => 'Вэбсайтаа шинэчлэхийн тулд дараах холбоос дээр дарна уу:',
     'login' => 'Нэвтрэх:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Хэрэглэгч',
     'username' => 'Нэвтрэх нэр',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Тавтай морилно уу: нэр',
     'welcome_to' => 'Тавтай морилно уу: Вэб хуудас!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Таны Snipe-IT итгэмжлэлүүд',
+    'mail_sent' => 'Mail sent successfully!',
 ];

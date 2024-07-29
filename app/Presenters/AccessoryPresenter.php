@@ -90,7 +90,7 @@ class AccessoryPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('admin/accessories/general.remaining'),
             ],[
-                'field' => 'users_count',
+                'field' => 'checkouts_count',
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => true,

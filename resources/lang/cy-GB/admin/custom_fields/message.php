@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Nid yw\'r maes yn bodoli.',
         'already_added'   => 'Maes eisoes yn bodoli',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Ni crewyd y maes, ceisiwch eto o. g. y. dd.',

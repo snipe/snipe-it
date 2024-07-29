@@ -11,9 +11,12 @@ return [
     'activity_report'		=> 'گزارش فعالیت',
     'address'				=> 'آدرس',
     'admin'					=> 'مدیر',
+    'admin_tooltip'			=> 'This user has admin privileges',
+    'superuser'				=> 'Superuser',
+    'superuser_tooltip'		=> 'This user has superuser privileges',
     'administrator'			=> 'مدیر',
     'add_seats'             => 'اضافه شدن صندلی',
-    'age'                   => "Age",
+    'age'                   => "سن",
     'all_assets'			=> 'تمام دارایی ها',
     'all'       			=> 'همه',
     'archived'              => 'بایگانی شد',
@@ -142,6 +145,7 @@ return [
     'lastname_firstinitial' => 'فامیل نام میانه (smith_j@example.com)',
     'firstinitial.lastname' => 'نام میانه فامیل (j.smith@example.com)',
     'firstnamelastinitial'  => 'نام فامیل میانه (janes@example.com)',
+    'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
     'first_name'			=> 'نام',
     'first_name_format'		=> 'نام (jane@example.com)',
     'files'                 => 'فایل ها',
@@ -168,7 +172,7 @@ return [
 ',
     'filetypes_size_help'   => 'حداکثر اندازه مجاز بارگذاری: اندازه است.
 ',
-    'image_filetypes_help'  => 'نوع فایل های قابل قبول: jpg, webp, png, gif, و svg. حداکثر سایز فایل :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. Max upload size allowed is :size.',
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'واردات',
     'import_this_file'      => 'Map fields and process this file',
@@ -191,7 +195,7 @@ return [
     'last_name'             => 'نام خانوادگی',
     'license'				=> 'توافق‌نامه',
     'license_report'        => 'مجوز گزارش',
-    'licenses_available'	=> 'مجوز دسترس',
+    'licenses_available'	=> 'Licenses available',
     'licenses'				=> 'گواهی نامه ها',
     'list_all'				=> 'فهرست همه
 ',
@@ -221,6 +225,8 @@ return [
     'new_password'          => 'رمز عبور جديد:',
     'next'					=> 'بعدی',
     'next_audit_date'		=> 'تاریخ تفتیش بعدی',
+    'next_audit_date_help'  => 'If you use auditing in your organization, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
+    'audit_images_help'     => 'You can find audit images in the asset\'s history tab.',
     'no_email'              => 'No email address associated with this user',
     'last_audit'		    => 'آخرین حسابرسی',
     'new'					=> 'جدید!',
@@ -257,6 +263,7 @@ return [
     'restore'				=> 'بازیابی',
     'requestable_models'    => 'مدل های درخواستی
 ',
+    'requestable_items'     => 'Requestable Items',
     'requested'				=> 'در خواست شده',
     'requested_date'        => 'تاریخ درخواست',
     'requested_assets'      => 'دارایی های درخواستی
@@ -264,12 +271,15 @@ return [
     'requested_assets_menu' => 'دارایی های درخواستی
 ',
     'request_canceled'      => 'درخواست لغو شد',
+    'request_item'          => 'Request this item',
+    'external_link_tooltip' => 'External link to',
     'save'  				=> 'ذخیره کردن',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'انتخاب',
     'select_all'            => 'انتخاب همه',
     'search'				=> 'جستوجو',
     'select_category'       => 'یک دسته را انتخاب کنید',
+    'select_datasource' => 'Select a Datasource',
     'select_department'     => 'یک گروه را انتخاب کنید',
     'select_depreciation'	=> 'انتخاب یک نوع استهلاک',
     'select_location'		=> 'انتخاب یک مکان',
@@ -323,6 +333,7 @@ return [
     'user'					=> 'کاربر',
     'accepted'			    => 'تأیید شد',
     'declined'			    => 'خودداری شد',
+    'declined_note'         => 'Declined Notes',
     'unassigned'            => 'Unassigned',
     'unaccepted_asset_report' => 'دارایی های پذیرفته',
     'users'                 => 'کاربران',
@@ -344,6 +355,10 @@ return [
 ',
     'audit_due'             => 'موعد حسابرسی
 ',
+    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'checkin_due'           => 'Due for Checkin',
+    'checkin_overdue'       => 'Overdue for Checkin',
+    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'موعد حسابرسی عقب افتاده
 ',
     'accept'                => 'دارایی های پذیرفته',
@@ -467,10 +482,10 @@ return [
 ',
     'checkout_tooltip' => 'این مورد را بررسی کنید
 ',
-    'checkin_tooltip' => 'این مورد را بررسی کنید
-',
+    'checkin_tooltip' => 'Check this item in so that it is available for re-issue, re-imaging, etc',
     'checkout_user_tooltip' => 'این مورد را برای یک کاربر بررسی کنید
 ',
+    'checkin_to_diff_location' => 'You can choose to check this asset in to a location other than this asset\'s default location of :default_location if one is set',
     'maintenance_mode'      => 'این سرویس به طور موقت برای به روز رسانی سیستم در دسترس نیست. لطفاً بعداً دوباره بررسی کنید.
 ',
     'maintenance_mode_title' => 'سرویس موقتا در دسترس نیست.',
@@ -496,13 +511,13 @@ return [
     'assets_by_status'      => 'Assets by Status',
     'assets_by_status_type'      => 'Assets by Status Type',
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
-    'hello_name'            => 'Hello, :name!',
+    'hello_name'            => 'سلام , :name!',
     'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
     'placeholder_kit'       => 'Select a kit',
-    'file_not_found'        => 'File not found',
+    'file_not_found'        => 'فایل پیدا نشد',
     'preview_not_available' => '(no preview)',
     'setup'                 => 'Setup',
     'pre_flight'            => 'Pre-Flight',
@@ -583,6 +598,8 @@ return [
         'address2' => 'Address Line 2',
         'import_note' => 'Imported using csv importer',
     ],
+    'remove_customfield_association' => 'Remove this field from the fieldset. This will not delete the custom field, only this field\'s association with this fieldset.',
+    'checked_out_to_fields' => 'Checked Out To Fields',
     'percent_complete' => '% تکمیل',
     'uploading' => 'Uploading... ',
     'upload_error' => 'Error uploading file. Please check that there are no empty rows and that no column names are duplicated.',
@@ -598,6 +615,10 @@ return [
     'or' => 'or',
     'url'                   => 'نشانی اینترنتی',
     'edit_fieldset' => 'Edit fieldset fields and options',
+    'permission_denied_superuser_demo' => 'Permission denied. You cannot update user information for superadmins on the demo.',
+    'pwd_reset_not_sent' => 'User is not activated, is LDAP synced, or does not have an email address',
+    'error_sending_email' => 'Error sending email',
+    'sad_panda' => 'Sad panda. You are not authorized to do the thing. Maybe <a href=":link">return to the dashboard</a>, or contact your administrator.',
     'bulk' => [
             'delete' =>
                 [
@@ -618,6 +639,14 @@ return [
         'license_seats'  => ':count License Seat|:count License Seats',
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
-    ]
+    ],
+    'more_info' => 'اطلاعات بیشتر',
+    'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'whoops' => 'Whoops!',
+    'something_went_wrong' => 'Something went wrong with your request.',
+    'close' => 'Close',
+    'expires' => 'منقضی می شود',
+    'map_fields'=> 'Map :item_type Field',
+    'remaining_var' => ':count Remaining',
 
 ];

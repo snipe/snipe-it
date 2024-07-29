@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Seleccione un idioma',
+    'select_language' => 'Seleccionar un idioma',
     'languages' => [
         'en-US'=> 'Inglés, EEUU',
         'en-GB'=> 'Inglés, Reino Unido',
@@ -66,7 +66,7 @@ return [
         'zu-ZA'=> 'Zulú',
     ],
 
-    'select_country' => 'Seleccione un país',
+    'select_country' => 'Seleccionar un país',
     
     'countries' => [
         'AC'=>'Isla de Ascensión',
@@ -93,7 +93,7 @@ return [
         'BD'=>'Bangladesh',
         'BF'=>'Burkina Faso',
         'BG'=>'Bulgaria',
-        'BH'=>'Bahréin',
+        'BH'=>'Baréin',
         'BI'=>'Burundi',
         'BJ'=>'Benín',
         'BM'=>'Bermuda',
@@ -287,8 +287,8 @@ return [
         'TJ'=>'Tajikistan',
         'TK'=>'Tokelau',
         'TI'=>'Timor Oriental',
-        'TM'=>'Turkmenistan',
-        'TN'=>'Tunisia',
+        'TM'=>'Turkmenistán',
+        'TN'=>'Túnez',
         'TO'=>'Tonga',
         'TP'=>'Timor Oriental (código antiguo)',
         'TR'=>'Turquía',

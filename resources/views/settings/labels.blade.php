@@ -66,10 +66,8 @@
 
                             <!-- Template -->
                             <div class="form-group{{ $errors->has('label2_template') ? ' has-error' : '' }}">
-                                <div class="col-md-3">
-                                    @include('partials.label2-preview')
-                                </div>
-                                <div class="col-md-9">
+
+                                <div class="col-md-9 col-md-offset-3">
                                     <table
                                         data-click-to-select="true"
                                         data-columns="{{ \App\Presenters\LabelPresenter::dataTableLayout() }}"
@@ -92,7 +90,11 @@
                                     ></table>
                                     <script>
                                         document.addEventListener('DOMContentLoaded', () => {
+                                            const chosenLabel = "{{ old('label2_template', $chosenLabel ?? '') }}";
                                             $('#label2TemplateTable').on('load-success.bs.table', (e) => {
+                                                if (chosenLabel) {
+                                                    $('input[name="label2_template"][value="' + chosenLabel + '"]').prop('checked', true);
+                                                }
                                                 let form = document.getElementById('settingsForm');
                                                 form.dispatchEvent(new Event('change'));
                                             });
@@ -209,14 +211,16 @@
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
                             </div>
-
+                            <div class="col-md-9 col-md-offset-3" style="margin-bottom: 10px;">
+                                @include('partials.label2-preview')
+                            </div>
                             <!-- Fields -->
                             <div class="form-group {{ $errors->has('label2_fields') ? 'error' : '' }}">
                                 <div class="col-md-3 text-right">
                                     {{ Form::label('label2_fields', trans('admin/settings/general.label2_fields')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields), 'customFields' => $customFields ])
+                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields), 'customFields' => $customFields, 'template' => $setting->label2_template])
                                     {!! $errors->first('label2_fields', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">{{ trans('admin/settings/general.label2_fields_help') }}</p>
                                 </div>
@@ -426,3 +430,8 @@
     {{Form::close()}}
 
 @stop
+
+@push('js')
+    {{-- Can't use @script here because we're not in a livewire component so let's manually load --}}
+    @livewireScripts
+@endpush

@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'To polje ne obstaja.',
         'already_added'   => 'Polje je že dodano',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Polje ni bilo ustvarjeno, poskusite znova.',

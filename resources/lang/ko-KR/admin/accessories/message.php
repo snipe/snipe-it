@@ -26,7 +26,11 @@ return array(
         'error'   		=> '부속품이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '부속품이 반출 되었습니다.',
         'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
-        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
+        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
+         'checkout_qty' => array(
+            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            ),
+           
     ),
 
     'checkin' => array(

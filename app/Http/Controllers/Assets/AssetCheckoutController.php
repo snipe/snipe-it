@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class AssetCheckoutController extends Controller
 {
@@ -22,9 +24,9 @@ class AssetCheckoutController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v1.0]
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
-    public function create($assetId)
+    public function create($assetId) : View | RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::with('company')->find(e($assetId)))) {
@@ -33,10 +35,16 @@ class AssetCheckoutController extends Controller
 
         $this->authorize('checkout', $asset);
 
+        if (!$asset->model) {
+            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+        }
+
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
-                ->with('statusLabel_list', Helper::deployableStatusLabelList());
+                ->with('statusLabel_list', Helper::deployableStatusLabelList())
+                ->with('table_name', 'Assets');
         }
+
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
     }
@@ -46,11 +54,9 @@ class AssetCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param AssetCheckoutRequest $request
-     * @param int $assetId
-     * @return Redirect
      * @since [v1.0]
      */
-    public function store(AssetCheckoutRequest $request, $assetId)
+    public function store(AssetCheckoutRequest $request, $assetId) : RedirectResponse
     {
         try {
             // Check if the asset exists
@@ -60,9 +66,14 @@ class AssetCheckoutController extends Controller
                 return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
             }
             $this->authorize('checkout', $asset);
-            $admin = Auth::user();
 
-            $target = $this->determineCheckoutTarget($asset);
+            if (!$asset->model) {
+                return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+            }
+
+            $admin = auth()->user();
+
+            $target = $this->determineCheckoutTarget();
 
             $asset = $this->updateAssetLocation($asset, $target);
 
@@ -97,11 +108,13 @@ class AssetCheckoutController extends Controller
                     return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
                 }
             }
-            
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
-                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
-            }
 
+                session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
+            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
+                return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                    ->with('success', trans('admin/hardware/message.checkout.success'));
+            }
             // Redirect to the asset management page with error
             return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
         } catch (ModelNotFoundException $e) {

@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Sem prebral oz. prebrala in se strinjam s pogoji uporabe. Potrjujem prejetje opreme.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Element:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Prosimo, kliknite na to povezavo, da posodobite svoje: spletno geslo:',
     'login' => 'Prijava:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Uporabnik',
     'username' => 'Uporabniško ime',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Dobrodošli: ime',
     'welcome_to' => 'Dobrodošli na :web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Vaše poverilnice Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Ní féidir sonraí logála a athrú ar an suiteáil seo.',
     'manager' 				=> 'Bainisteoir',
     'managed_locations'     => 'Láithreáin bhainistithe',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Ainm',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Nótaí',

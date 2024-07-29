@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Vara hoolduse tüüp',
         'title'                  => 'Pealkiri',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Alguskuupäev',
+        'completion_date'        => 'Lõppkuupäev',
         'cost'                   => 'Kulud',
         'is_warranty'            => 'Garantii paranemine',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Vara hooldusaeg (päevades)',
         'notes'                  => 'Märkused',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Vara hoolduse muutmine',
+        'create'                 => 'Loo uus varahooldus'
     ];
