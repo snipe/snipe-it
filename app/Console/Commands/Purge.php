@@ -150,13 +150,14 @@ class Purge extends Command
                     ->where('item_id', $user->id)
                     ->pluck('filename');
                 foreach($filenames as $filename) {
-                    try{
-                        if (Storage::exists($rel_path.'/'.$filename)) {
+                    try {
+                        if (Storage::exists($rel_path . '/' . $filename)) {
                             Storage::delete($rel_path . '/' . $filename);
                         }
-                  } catch (\Exception $e) {
-                     Log::error('An error occurred while deleting files: ' . $e->getMessage());
-                  }
+                    } catch (\Exception $e) {
+                        Log::error('An error occurred while deleting files: ' . $e->getMessage());
+                    }
+                }
                 $this->info('- User "'.$user->username.'" deleted.');
                 $user_assoc += $user->userlog()->count();
                 $user->userlog()->forceDelete();
