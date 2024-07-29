@@ -253,9 +253,10 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function users()
+    public function checkouts()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
+        return $this->hasMany(\App\Models\AccessoryCheckout::class, 'accessory_id')
+            ->with('assignedTo');
     }
 
     /**
@@ -267,7 +268,9 @@ class Accessory extends SnipeModel
      */
     public function hasUsers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->count();
+        return $this->hasMany(\App\Models\AccessoryCheckout::class, 'accessory_id')
+            ->where('assigned_type', User::class)
+            ->count();
     }
 
     /**
@@ -338,15 +341,15 @@ class Accessory extends SnipeModel
      */
     public function numCheckedOut()
     {
-        return $this->users_count ?? $this->users()->count();
+        return $this->checkouts_count ?? $this->checkouts()->count();
     }
 
 
     /**
      * Check how many items of an accessory remain.
      *
-     * In order to use this model method, you MUST call withCount('users as users_count')
-     * on the eloquent query in the controller, otherwise $this->users_count will be null and
+     * In order to use this model method, you MUST call withCount('checkouts as checkouts_count')
+     * on the eloquent query in the controller, otherwise $this->checkouts_count will be null and
      * bad things happen.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -370,12 +373,12 @@ class Accessory extends SnipeModel
      */
     public function declinedCheckout(User $declinedBy, $signature)
     {
-        if (is_null($accessory_user = \DB::table('accessories_users')->where('assigned_to', $declinedBy->id)->where('accessory_id', $this->id)->latest('created_at'))) {
+        if (is_null($accessory_checkout = AccessoryCheckout::userAssigned()->where('assigned_to', $declinedBy->id)->where('accessory_id', $this->id)->latest('created_at'))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 
-        $accessory_user->limit(1)->delete();
+        $accessory_checkout->limit(1)->delete();
     }
 
     /**

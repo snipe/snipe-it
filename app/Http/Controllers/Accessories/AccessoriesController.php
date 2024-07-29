@@ -144,12 +144,12 @@ class AccessoriesController extends Controller
      */
     public function update(ImageUploadRequest $request, $accessoryId = null) : RedirectResponse
     {
-        if ($accessory = Accessory::withCount('users as users_count')->find($accessoryId)) {
+        if ($accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryId)) {
 
             $this->authorize($accessory);
 
             $validator = Validator::make($request->all(), [
-                "qty" => "required|numeric|min:$accessory->users_count"
+                "qty" => "required|numeric|min:$accessory->checkouts_count"
             ]);
 
             if ($validator->fails()) {
@@ -233,7 +233,7 @@ class AccessoriesController extends Controller
      */
     public function show($accessoryID = null) : View | RedirectResponse
     {
-        $accessory = Accessory::withCount('users as users_count')->find($accessoryID);
+        $accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));

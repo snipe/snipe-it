@@ -205,11 +205,11 @@ class ActionlogsTransformer
 
 
 
-    public function transformCheckedoutActionlog (Collection $accessories_users, $total)
+    public function transformCheckedoutActionlog (Collection $accessories_checkout, $total)
     {
 
         $array = array();
-        foreach ($accessories_users as $user) {
+        foreach ($accessories_checkout as $user) {
             $array[] = (new UsersTransformer)->transformUser($user);
         }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
