@@ -4,6 +4,8 @@ namespace Tests\Feature\Checkouts\Ui;
 
 use App\Models\Accessory;
 use App\Models\Actionlog;
+use App\Models\Asset;
+use App\Models\Location;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
@@ -94,6 +96,58 @@ class AccessoryCheckoutTest extends TestCase
             'action_type' => 'checkout',
             'target_id' => $user->id,
             'target_type' => User::class,
+            'item_id' => $accessory->id,
+            'item_type' => Accessory::class,
+            'note' => 'oh hi there',
+        ]);
+    }
+
+    public function testAccessoryCanBeCheckedOutToLocationWithQuantity()
+    {
+        $accessory = Accessory::factory()->create(['qty'=>5]);
+        $location = Location::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAccessories()->create())
+            ->from(route('accessories.checkout.show', $accessory))
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_location' => $location->id,
+                'checkout_to_type' => 'location',
+                'checkout_qty' => 3,
+                'note' => 'oh hi there',
+            ]);
+
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', Location::class)->where('assigned_to', $location->id)->count() > 0);
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkout',
+            'target_id' => $location->id,
+            'target_type' => Location::class,
+            'item_id' => $accessory->id,
+            'item_type' => Accessory::class,
+            'note' => 'oh hi there',
+        ]);
+    }
+
+    public function testAccessoryCanBeCheckedOutToAssetWithQuantity()
+    {
+        $accessory = Accessory::factory()->create(['qty'=>5]);
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAccessories()->create())
+            ->from(route('accessories.checkout.show', $accessory))
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_asset' => $asset->id,
+                'checkout_to_type' => 'asset',
+                'checkout_qty' => 3,
+                'note' => 'oh hi there',
+            ]);
+
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', Asset::class)->where('assigned_to', $asset->id)->count() > 0);
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkout',
+            'target_id' => $asset->id,
+            'target_type' => Asset::class,
             'item_id' => $accessory->id,
             'item_type' => Accessory::class,
             'note' => 'oh hi there',
