@@ -7,7 +7,7 @@ use App\Models\Component;
 use App\Models\User;
 use Tests\TestCase;
 
-class ComponentCheckoutTest extends TestCase
+class ComponentsCheckoutTest extends TestCase
 {
     public function testCheckingOutComponentRequiresCorrectPermission()
     {
