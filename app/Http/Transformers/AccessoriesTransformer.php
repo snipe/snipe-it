@@ -39,7 +39,7 @@ class AccessoriesTransformer
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
             'remaining_qty' => (int) $accessory->numRemaining(),
-            'users_count' =>  $accessory->users_count,
+            'checkouts_count' =>  $accessory->checkouts_count,
 
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
@@ -66,27 +66,42 @@ class AccessoriesTransformer
         return $array;
     }
 
-    public function transformCheckedoutAccessory($accessory, $accessory_users, $total)
+    public function transformCheckedoutAccessory($accessory, $accessory_checkouts, $total)
     {
         $array = [];
 
-        foreach ($accessory_users as $user) {
+        foreach ($accessory_checkouts as $checkout) {
             $array[] = [
-
-                'assigned_pivot_id' => $user->pivot->id,
-                'id' => (int) $user->id,
-                'username' => e($user->username),
-                'name' => e($user->getFullNameAttribute()),
-                'first_name'=> e($user->first_name),
-                'last_name'=> e($user->last_name),
-                'employee_number' =>  e($user->employee_num),
-                'checkout_notes' => e($user->pivot->note),
-                'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
-                'type' => 'user',
+                'id' => $checkout->id,
+                'assigned_to' => $this->transformAssignedTo($checkout),
+                'checkout_notes' => e($checkout->note),
+                'last_checkout' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
                 'available_actions' => ['checkin' => true],
             ];
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformAssignedTo($accessoryCheckout)
+    {
+        if ($accessoryCheckout->checkedOutToUser()) {
+            return [
+                    'id' => (int) $accessoryCheckout->assigned->id,
+                    'username' => e($accessoryCheckout->assigned->username),
+                    'name' => e($accessoryCheckout->assigned->getFullNameAttribute()),
+                    'first_name'=> e($accessoryCheckout->assigned->first_name),
+                    'last_name'=> ($accessoryCheckout->assigned->last_name) ? e($accessoryCheckout->assigned->last_name) : null,
+                    'email'=> ($accessoryCheckout->assigned->email) ? e($accessoryCheckout->assigned->email) : null,
+                    'employee_number' =>  ($accessoryCheckout->assigned->employee_num) ? e($accessoryCheckout->assigned->employee_num) : null,
+                    'type' => 'user',
+                ];
+        }
+
+        return $accessoryCheckout->assigned ? [
+            'id' => $accessoryCheckout->assigned->id,
+            'name' => e($accessoryCheckout->assigned->display_name),
+            'type' => $accessoryCheckout->assignedType(),
+        ] : null;
     }
 }
