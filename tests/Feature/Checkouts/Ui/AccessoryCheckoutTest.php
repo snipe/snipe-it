@@ -207,7 +207,8 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('accessories.index'))
             ->post(route('accessories.checkout.store', $accessory), [
-                'assigned_to' =>  User::factory()->create()->id,
+                'assigned_user' => User::factory()->create()->id,
+                'checkout_to_type' => 'user',
                 'redirect_option' => 'index',
                 'assigned_qty' => 1,
             ])
@@ -222,7 +223,8 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('accessories.index'))
             ->post(route('accessories.checkout.store' , $accessory), [
-                'assigned_to' =>  User::factory()->create()->id,
+                'assigned_user' => User::factory()->create()->id,
+                'checkout_to_type' => 'user',
                 'redirect_option' => 'item',
                 'assigned_qty' => 1,
             ])
@@ -239,7 +241,8 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('accessories.index'))
             ->post(route('accessories.checkout.store' , $accessory), [
-                'assigned_to' =>  $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
                 'redirect_option' => 'target',
                 'assigned_qty' => 1,
             ])
