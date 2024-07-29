@@ -143,15 +143,20 @@ class Purge extends Command
             $this->info($users->count().' users purged.');
             $user_assoc = 0;
             foreach ($users as $user) {
+
                 $rel_path = 'private_uploads/users';
                 $filenames = Actionlog::where('action_type', 'uploaded')
                     ->where('item_id', $user->id)
                     ->pluck('filename');
                 foreach($filenames as $filename) {
-                    if (Storage::exists($rel_path.'/'.$filename)) {
-                        Storage::delete($rel_path . '/' . $filename);
-                    }
-                }
+                    try{
+                        if (Storage::exists($rel_path.'/'.$filename)) {
+                            Storage::delete($rel_path . '/' . $filename);
+                        }
+                  } catch (\Exception $e) {
+                // Handle the exception or log it
+                Log::error('An error occurred while deleting files: ' . $e->getMessage());
+            }
                 $this->info('- User "'.$user->username.'" deleted.');
                 $user_assoc += $user->userlog()->count();
                 $user->userlog()->forceDelete();
