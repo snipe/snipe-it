@@ -306,6 +306,7 @@
 
                               <br><br>
                             </div>
+                            </div>
 
                             <!-- End button column -->
 
