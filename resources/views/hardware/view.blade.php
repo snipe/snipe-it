@@ -211,7 +211,7 @@
                                         <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
                                             <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
                                              {{ trans('general.audit') }}
-                                        </a>
+                                            </a>
                                         </span>
                                         </div>
                                     @endcan
@@ -296,17 +296,19 @@
                                                 </li>
                                             @endif
                                         </ul>
-
+                                    </div>
                                 @endif
-                                        @if  ($snipeSettings->qr_code=='1')
-                                            <div class="col-md-12 text-center" style="padding-top: 15px;">
-                                                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail" style="height: 150px; width: 150px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
-                                            </div>
-                                        @endif
+                                    @if  ($snipeSettings->qr_code=='1')
+                                        <div class="col-md-12 text-center" style="padding-top: 15px;">
+                                            <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail" style="height: 150px; width: 150px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
+                                        </div>
+                                    @endif
 
-                              <br><br>
+                                <br><br>
                             </div>
-                            </div>
+
+
+
 
                             <!-- End button column -->
 
