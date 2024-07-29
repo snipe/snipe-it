@@ -16,6 +16,7 @@ use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Purge extends Command
