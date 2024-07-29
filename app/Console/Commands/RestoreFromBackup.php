@@ -92,7 +92,7 @@ class SQLStreamer {
         $parser->line_aware_piping(); // <----- THIS is doing the heavy lifting!
 
         $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to statics?
-        //can't use 'users' because the 'accessories_users' table?
+        //can't use 'users' because the 'accessories_checkout' table?
         // can't use 'assets' because 'ver1_components_assets'
         foreach($check_tables as $check_table => $_ignore) {
             foreach ($parser->tablenames as $tablename => $_count) {

@@ -44,13 +44,10 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
 
         return array_merge(
             [
-                'assigned_to'  => [
-                    'required',
-                    'integer',
-                    'exists:users,id,deleted_at,NULL',
-                    'not_array'
-                ],
-
+                'assigned_user'         => 'required_without_all:assigned_asset,assigned_location',
+                'assigned_asset'        => 'required_without_all:assigned_user,assigned_location',
+                'assigned_location'     => 'required_without_all:assigned_user,assigned_asset',
+                
                 'number_remaining_after_checkout' => [
                     'min:0',
                     'required',

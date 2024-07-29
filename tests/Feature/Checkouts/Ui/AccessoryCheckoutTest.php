@@ -40,7 +40,8 @@ class AccessoryCheckoutTest extends TestCase
         $response = $this->actingAs(User::factory()->viewAccessories()->checkoutAccessories()->create())
             ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
-                'assigned_to' => User::factory()->create()->id,
+                'assigned_user' => User::factory()->create()->id,
+                'checkout_to_type' => 'user',
             ])
             ->assertStatus(302)
             ->assertSessionHas('errors')
@@ -56,11 +57,12 @@ class AccessoryCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->post(route('accessories.checkout.store', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
                 'note' => 'oh hi there',
             ]);
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkout',
@@ -80,12 +82,13 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
                 'checkout_qty' => 3,
                 'note' => 'oh hi there',
             ]);
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkout',
@@ -107,7 +110,8 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs(User::factory()->checkoutAccessories()->create())
             ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
             ]);
 
         Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
@@ -122,7 +126,8 @@ class AccessoryCheckoutTest extends TestCase
         $this->actingAs($actor)
             ->from(route('accessories.checkout.show', $accessory))
             ->post(route('accessories.checkout.store', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
                 'note' => 'oh hi there',
             ]);
 
