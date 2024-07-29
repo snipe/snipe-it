@@ -107,7 +107,7 @@ class Label implements View
 
                 if ($settings->alt_barcode_enabled) {
                     if ($template->getSupport1DBarcode()) {
-                        $barcode1DType = $settings->alt_barcode;
+                        $barcode1DType = $settings->label2_1d_type;
                         if ($barcode1DType != 'none') {
                             $assetData->put('barcode1d', (object)[
                                 'type' => $barcode1DType,
