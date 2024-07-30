@@ -155,7 +155,7 @@ class Purge extends Command
                             Storage::delete($rel_path . '/' . $filename);
                         }
                     } catch (\Exception $e) {
-                        Log::error('An error occurred while deleting files: ' . $e->getMessage());
+                        Log::info('An error occurred while deleting files: ' . $e->getMessage());
                     }
                 }
                 $this->info('- User "'.$user->username.'" deleted.');
