@@ -134,11 +134,13 @@
         });
 
         $('#submit-button').on("click", function (event) {
-            if (signaturePad.isEmpty()) {
-                alert("Please provide signature first.");
-                return false;
-            } else {
-                $('#signature_output').val(signaturePad.toDataURL());
+            if(signaturePad != null) {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide signature first.");
+                    return false;
+                } else {
+                    $('#signature_output').val(signaturePad.toDataURL());
+                }
             }
         });
 
