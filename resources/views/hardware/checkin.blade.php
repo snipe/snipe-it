@@ -129,7 +129,7 @@
 
                 <x-redirect_submit_options
                         index_route="hardware.index"
-                        :button_label="trans('general.checkout')"
+                        :button_label="trans('general.checkin')"
                         :disabled_select="!$asset->model"
                         :options="[
                                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
