@@ -457,6 +457,8 @@ class UpdateAssetTest extends TestCase
 
     public function testCustomFieldCannotBeUpdatedIfNotOnCurrentAssetModel()
     {
+        $this->markIncompleteIfMySQL('Custom Field Tests do not work in MySQL');
+
         $customField = CustomField::factory()->create();
         $customField2 = CustomField::factory()->create();
         $asset = Asset::factory()->hasMultipleCustomFields([$customField])->create();
