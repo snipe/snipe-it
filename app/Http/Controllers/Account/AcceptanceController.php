@@ -309,7 +309,7 @@ class AcceptanceController extends Controller
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
-                'item_status' => $item->assetstatus->name ?: '',
+                'item_status' => $item->assetstatus?->name,
                 'note' => $request->input('note'),
                 'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
