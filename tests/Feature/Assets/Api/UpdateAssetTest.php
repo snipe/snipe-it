@@ -269,8 +269,6 @@ class UpdateAssetTest extends TestCase
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
-        // hmm, for some reason this customfield isn't attached to a fieldset
-        // need to check out these factory methods...
         $field = CustomField::factory()->testEncrypted()->create();
         $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $superuser = User::factory()->superuser()->create();
@@ -455,5 +453,28 @@ class UpdateAssetTest extends TestCase
                 'name' => 'test name'
             ])
             ->assertStatusMessageIs('success');
+    }
+
+    public function testCustomFieldCannotBeUpdatedIfNotOnCurrentAssetModel()
+    {
+        $customField = CustomField::factory()->create();
+        $customField2 = CustomField::factory()->create();
+        $asset = Asset::factory()->hasMultipleCustomFields([$customField])->create();
+        $user = User::factory()->editAssets()->create();
+
+        // successful
+        $this->actingAsForApi($user)->patchJson(route('api.assets.update', $asset->id), [
+            $customField->db_column_name() => 'test attribute',
+        ])->assertStatusMessageIs('success');
+
+        // custom field exists, but not on this asset model
+        $this->actingAsForApi($user)->patchJson(route('api.assets.update', $asset->id), [
+            $customField2->db_column_name() => 'test attribute',
+        ])->assertStatusMessageIs('error');
+
+        // custom field does not exist
+        $this->actingAsForApi($user)->patchJson(route('api.assets.update', $asset->id), [
+            '_snipeit_non_existent_custom_field_50' => 'test attribute',
+        ])->assertStatusMessageIs('error');
     }
 }
