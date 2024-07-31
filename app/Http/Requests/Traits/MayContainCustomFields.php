@@ -15,7 +15,6 @@ trait MayContainCustomFields
             $asset_model = AssetModel::find($this->model_id);
         }
         if ($this->method() == 'PATCH' || $this->method() == 'PUT') {
-            // this is dependent on the asset update request PR
             $asset_model = $this->asset;
         }
         // collect the custom fields in the request
