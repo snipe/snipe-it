@@ -218,7 +218,7 @@ class AcceptanceController extends Controller
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
-                'item_status' => $item->assetstatus->name ?: '',
+                'item_status' => $item->assetstatus?->name,
                 'eula' => $item->getEula(),
                 'note' => $request->input('note'),
                 'check_out_date' => Carbon::parse($acceptance->created_at)->format('Y-m-d'),
