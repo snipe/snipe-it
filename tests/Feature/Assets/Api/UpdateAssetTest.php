@@ -269,6 +269,8 @@ class UpdateAssetTest extends TestCase
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
+        // hmm, for some reason this customfield isn't attached to a fieldset
+        // need to check out these factory methods...
         $field = CustomField::factory()->testEncrypted()->create();
         $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $superuser = User::factory()->superuser()->create();
