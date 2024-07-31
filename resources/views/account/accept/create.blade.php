@@ -139,6 +139,8 @@
                 return false;
             } else {
                 $('#signature_output').val(signaturePad.toDataURL());
+            }
+        });
 
 
     </script>
