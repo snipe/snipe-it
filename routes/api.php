@@ -577,6 +577,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     // the model name to be the parameter - and i think it's a good differentiation in the code while we convert the others.
     Route::patch('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.update');
 
+    Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
+
     Route::resource('hardware',
         Api\AssetsController::class,
         ['names' => [
