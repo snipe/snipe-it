@@ -384,7 +384,20 @@
                                             </div>
                                         </div>
                                     @endif
+                                        @if ($asset->asset_tag)
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>{{ trans('admin/hardware/form.tag') }}</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span class="js-copy">{{ $asset->asset_tag  }}</span>
 
+                                                    <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                        <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @if ($asset->serial)
                                         <div class="row">
                                             <div class="col-md-3">
