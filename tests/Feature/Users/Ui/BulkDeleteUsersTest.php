@@ -6,6 +6,7 @@ use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Statuslabel;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Tests\TestCase;
 
 class BulkDeleteUsersTest extends TestCase
@@ -31,32 +32,9 @@ class BulkDeleteUsersTest extends TestCase
 
         // These assertions check against a bug where the wrong value from
         // accessories_users was being populated in action_logs.item_id.
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkin from',
-            'target_id' => $userA->id,
-            'target_type' => User::class,
-            'note' => 'Bulk checkin items',
-            'item_type' => Accessory::class,
-            'item_id' => $accessoryA->id,
-        ]);
-
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkin from',
-            'target_id' => $userA->id,
-            'target_type' => User::class,
-            'note' => 'Bulk checkin items',
-            'item_type' => Accessory::class,
-            'item_id' => $accessoryB->id,
-        ]);
-
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkin from',
-            'target_id' => $userC->id,
-            'target_type' => User::class,
-            'note' => 'Bulk checkin items',
-            'item_type' => Accessory::class,
-            'item_id' => $accessoryA->id,
-        ]);
+        $this->assertActionLogCheckInEntryFor($userA, $accessoryA);
+        $this->assertActionLogCheckInEntryFor($userA, $accessoryB);
+        $this->assertActionLogCheckInEntryFor($userC, $accessoryA);
     }
 
     public function testConsumableCheckinsAreProperlyLogged()
@@ -80,32 +58,9 @@ class BulkDeleteUsersTest extends TestCase
 
         // These assertions check against a bug where the wrong value from
         // consumables_users was being populated in action_logs.item_id.
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkin from',
-            'target_id' => $userA->id,
-            'target_type' => User::class,
-            'note' => 'Bulk checkin items',
-            'item_type' => Consumable::class,
-            'item_id' => $consumableA->id,
-        ]);
-
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkin from',
-            'target_id' => $userA->id,
-            'target_type' => User::class,
-            'note' => 'Bulk checkin items',
-            'item_type' => Consumable::class,
-            'item_id' => $consumableB->id,
-        ]);
-
-        $this->assertDatabaseHas('action_logs', [
-            'action_type' => 'checkin from',
-            'target_id' => $userC->id,
-            'target_type' => User::class,
-            'note' => 'Bulk checkin items',
-            'item_type' => Consumable::class,
-            'item_id' => $consumableA->id,
-        ]);
+        $this->assertActionLogCheckInEntryFor($userA, $consumableA);
+        $this->assertActionLogCheckInEntryFor($userA, $consumableB);
+        $this->assertActionLogCheckInEntryFor($userC, $consumableA);
     }
 
     private function attachAccessoryToUsers(Accessory $accessory, array $users): void
@@ -126,5 +81,17 @@ class BulkDeleteUsersTest extends TestCase
                 'assigned_to' => $user->id,
             ]);
         }
+    }
+
+    private function assertActionLogCheckInEntryFor(User $user, Model $model): void
+    {
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkin from',
+            'target_id' => $user->id,
+            'target_type' => User::class,
+            'note' => 'Bulk checkin items',
+            'item_type' => get_class($model),
+            'item_id' => $model->id,
+        ]);
     }
 }
