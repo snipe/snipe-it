@@ -101,10 +101,34 @@ class BulkDeleteUsersTest extends TestCase
 
     public function testAssetsCanBeBulkCheckedIn()
     {
-        $this->markTestIncomplete();
+        // $this->markTestIncomplete();
 
-        // @todo:
-        // $this->assertActionLogCheckInEntryFor(); ...
+        [$userA, $userB, $userC] = User::factory()->count(3)->create();
+
+        $assetA = $this->assignAssetToUser($userA);
+        $assetB = $this->assignAssetToUser($userB);
+        $assetC = $this->assignAssetToUser($userC);
+
+        $this->assertTrue($userA->assets->isNotEmpty());
+        $this->assertTrue($userB->assets->isNotEmpty());
+        $this->assertTrue($userC->assets->isNotEmpty());
+
+        $this->actingAs(User::factory()->editUsers()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $userA->id,
+                    $userC->id,
+                ],
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertRedirect(route('users.index'));
+
+        $this->assertTrue($userA->fresh()->assets->isEmpty());
+        $this->assertTrue($userB->fresh()->assets->isNotEmpty());
+        $this->assertTrue($userC->fresh()->assets->isEmpty());
+
+        $this->assertActionLogCheckInEntryFor($userA, $assetA);
+        $this->assertActionLogCheckInEntryFor($userC, $assetC);
     }
 
     public function testConsumablesCanBeBulkCheckedIn()
@@ -199,5 +223,10 @@ class BulkDeleteUsersTest extends TestCase
             'item_type' => get_class($model),
             'item_id' => $model->id,
         ]);
+    }
+
+    private function assignAssetToUser(User $user): Asset
+    {
+        return Asset::factory()->assignedToUser($user)->create();
     }
 }
