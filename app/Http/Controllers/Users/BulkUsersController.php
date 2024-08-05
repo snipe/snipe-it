@@ -220,20 +220,18 @@ class BulkUsersController extends Controller
 
         $users = User::whereIn('id', $user_raw_array)->get();
         $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', \App\Models\User::class)->get();
-        $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
+        $accessoryUserRows = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-        $consumables = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
+        $consumableUserRows = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
 
         if ((($assets->count() > 0) && ((!$request->filled('status_id')) || ($request->input('status_id') == '')))) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         }
 
-
         $this->logItemCheckinAndDelete($assets, Asset::class);
-        $this->logAccessoriesCheckin($accessories);
+        $this->logAccessoriesCheckin($accessoryUserRows);
         $this->logItemCheckinAndDelete($licenses, License::class);
-        $this->logConsumablesCheckin($consumables);
-
+        $this->logConsumablesCheckin($consumableUserRows);
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
             'status_id'     => e(request('status_id')),
@@ -244,7 +242,7 @@ class BulkUsersController extends Controller
 
 
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
-        ConsumableAssignment::whereIn('id', $consumables->pluck('id'))->delete();
+        ConsumableAssignment::whereIn('id', $consumableUserRows->pluck('id'))->delete();
 
 
         foreach ($users as $user) {
@@ -292,13 +290,13 @@ class BulkUsersController extends Controller
         }
     }
 
-    private function logAccessoriesCheckin(Collection $accessories): void
+    private function logAccessoriesCheckin(Collection $accessoryUserRows): void
     {
-        foreach ($accessories as $accessory) {
+        foreach ($accessoryUserRows as $accessoryUserRow) {
             $logAction = new Actionlog();
-            $logAction->item_id = $accessory->accessory_id;
+            $logAction->item_id = $accessoryUserRow->accessory_id;
             $logAction->item_type = Accessory::class;
-            $logAction->target_id = $accessory->assigned_to;
+            $logAction->target_id = $accessoryUserRow->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
             $logAction->note = 'Bulk checkin items';
@@ -306,13 +304,13 @@ class BulkUsersController extends Controller
         }
     }
 
-    private function logConsumablesCheckin(Collection $consumables): void
+    private function logConsumablesCheckin(Collection $consumableUserRows): void
     {
-        foreach ($consumables as $consumable) {
+        foreach ($consumableUserRows as $consumableUserRow) {
             $logAction = new Actionlog();
-            $logAction->item_id = $consumable->consumable_id;
+            $logAction->item_id = $consumableUserRow->consumable_id;
             $logAction->item_type = Consumable::class;
-            $logAction->target_id = $consumable->assigned_to;
+            $logAction->target_id = $consumableUserRow->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
             $logAction->note = 'Bulk checkin items';
