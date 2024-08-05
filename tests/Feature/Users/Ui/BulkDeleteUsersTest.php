@@ -101,8 +101,6 @@ class BulkDeleteUsersTest extends TestCase
 
     public function testAssetsCanBeBulkCheckedIn()
     {
-        // $this->markTestIncomplete();
-
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
         $assetA = $this->assignAssetToUser($userA);
