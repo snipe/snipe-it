@@ -16,12 +16,8 @@ class BulkDeleteUsersTest extends TestCase
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
         // Add checkouts for multiple accessories to multiple users to get different ids in the mix
-        $this->attachAccessoryToUser($accessoryA, $userA);
-        $this->attachAccessoryToUser($accessoryA, $userB);
-        $this->attachAccessoryToUser($accessoryA, $userC);
-
-        $this->attachAccessoryToUser($accessoryB, $userA);
-        $this->attachAccessoryToUser($accessoryB, $userB);
+        $this->attachAccessoryToUsers($accessoryA, [$userA, $userB, $userC]);
+        $this->attachAccessoryToUsers($accessoryB, [$userA, $userB]);
 
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
@@ -69,12 +65,8 @@ class BulkDeleteUsersTest extends TestCase
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
         // Add checkouts for multiple consumables to multiple users to get different ids in the mix
-        $this->attachConsumableToUser($consumableA, $userA);
-        $this->attachConsumableToUser($consumableA, $userB);
-        $this->attachConsumableToUser($consumableA, $userC);
-
-        $this->attachConsumableToUser($consumableB, $userA);
-        $this->attachConsumableToUser($consumableB, $userB);
+        $this->attachConsumableToUsers($consumableA, [$userA, $userB, $userC]);
+        $this->attachConsumableToUsers($consumableB, [$userA, $userB]);
 
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
@@ -116,19 +108,23 @@ class BulkDeleteUsersTest extends TestCase
         ]);
     }
 
-    private function attachAccessoryToUser(Accessory $accessory, User $user): void
+    private function attachAccessoryToUsers(Accessory $accessory, array $users): void
     {
-        $accessory->users()->attach($accessory->id, [
-            'accessory_id' => $accessory->id,
-            'assigned_to' => $user->id,
-        ]);
+        foreach ($users as $user) {
+            $accessory->users()->attach($accessory->id, [
+                'accessory_id' => $accessory->id,
+                'assigned_to' => $user->id,
+            ]);
+        }
     }
 
-    private function attachConsumableToUser(Consumable $consumable, User $user): void
+    private function attachConsumableToUsers(Consumable $consumable, array $users): void
     {
-        $consumable->users()->attach($consumable->id, [
-            'consumable_id' => $consumable->id,
-            'assigned_to' => $user->id,
-        ]);
+        foreach ($users as $user) {
+            $consumable->users()->attach($consumable->id, [
+                'consumable_id' => $consumable->id,
+                'assigned_to' => $user->id,
+            ]);
+        }
     }
 }
