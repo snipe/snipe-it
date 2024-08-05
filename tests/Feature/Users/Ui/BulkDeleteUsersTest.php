@@ -69,7 +69,7 @@ class BulkDeleteUsersTest extends TestCase
                 ],
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
-            ->assertRedirect();
+            ->assertRedirect(route('users.index'));
 
         $this->assertTrue($userA->fresh()->accessories->isEmpty());
         $this->assertTrue($userB->fresh()->accessories->isNotEmpty());
@@ -103,7 +103,7 @@ class BulkDeleteUsersTest extends TestCase
                 ],
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
-            ->assertRedirect();
+            ->assertRedirect(route('users.index'));
 
         $this->assertTrue($userA->fresh()->consumables->isEmpty());
         $this->assertTrue($userB->fresh()->consumables->isNotEmpty());
@@ -128,7 +128,7 @@ class BulkDeleteUsersTest extends TestCase
                 ],
                 'delete_user' => '1',
             ])
-            ->assertRedirect()
+            ->assertRedirect(route('users.index'))
             ->assertSessionHas('success', trans('general.bulk_checkin_delete_success'));
 
         $this->assertSoftDeleted($userA);
