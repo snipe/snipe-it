@@ -191,6 +191,11 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertSoftDeleted($userC);
     }
 
+    private function assignAssetToUser(User $user): Asset
+    {
+        return Asset::factory()->assignedToUser($user)->create();
+    }
+
     private function attachAccessoryToUsers(Accessory $accessory, array $users): void
     {
         foreach ($users as $user) {
@@ -221,10 +226,5 @@ class BulkDeleteUsersTest extends TestCase
             'item_type' => get_class($model),
             'item_id' => $model->id,
         ]);
-    }
-
-    private function assignAssetToUser(User $user): Asset
-    {
-        return Asset::factory()->assignedToUser($user)->create();
     }
 }
