@@ -483,7 +483,9 @@ class AssetsController extends Controller
 
         // If not a unique result, redirect to the index view
         if ($assets->count() != 1) {
-            return redirect()->route('hardware.index')->with('search', $tag);
+            return redirect()->route('hardware.index')
+                ->with('search', $tag)
+                ->with('warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
         }
         $asset = $assets->first();
         $this->authorize('view', $asset);
