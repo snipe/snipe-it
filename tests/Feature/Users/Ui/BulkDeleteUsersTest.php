@@ -11,6 +11,18 @@ use Tests\TestCase;
 
 class BulkDeleteUsersTest extends TestCase
 {
+    public function testRequiresCorrectPermission()
+    {
+        $this->actingAs(User::factory()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    User::factory()->create()->id,
+                ],
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertForbidden();
+    }
+
     public function testAccessoryCheckinsAreProperlyLogged()
     {
         [$accessoryA, $accessoryB] = Accessory::factory()->count(2)->create();
