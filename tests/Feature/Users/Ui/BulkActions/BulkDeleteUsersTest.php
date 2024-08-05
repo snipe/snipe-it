@@ -5,6 +5,8 @@ namespace Feature\Users\Ui\BulkActions;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\Consumable;
+use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Statuslabel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -153,10 +155,51 @@ class BulkDeleteUsersTest extends TestCase
 
     public function testLicenseSeatsCanBeBulkCheckedIn()
     {
-        $this->markTestIncomplete();
+        [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
-        // @todo:
-        // $this->assertActionLogCheckInEntryFor(); ...
+        $licenseSeatForUserA = LicenseSeat::factory()->assignedToUser($userA)->create();
+        $lonelyLicenseSeat = LicenseSeat::factory()->assignedToUser($userB)->create();
+        $licenseSeatForUserC = LicenseSeat::factory()->assignedToUser($userC)->create();
+
+        $this->actingAs(User::factory()->editUsers()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $userA->id,
+                    $userC->id,
+                ],
+            ])
+            ->assertRedirect(route('users.index'))
+            ->assertSessionHas('success', trans('general.bulk_checkin_success'));
+
+        $this->assertDatabaseMissing('license_seats', [
+            'license_id' => $licenseSeatForUserA->license->id,
+            'assigned_to' => $userA->id,
+        ]);
+
+        $this->assertDatabaseMissing('license_seats', [
+            'license_id' => $licenseSeatForUserC->license->id,
+            'assigned_to' => $userC->id,
+        ]);
+
+        // Slightly different from the other assertions since we use
+        // the license and not the license seat in this case.
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkin from',
+            'target_id' => $userA->id,
+            'target_type' => User::class,
+            'note' => 'Bulk checkin items',
+            'item_type' => License::class,
+            'item_id' => $licenseSeatForUserA->license->id,
+        ]);
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkin from',
+            'target_id' => $userC->id,
+            'target_type' => User::class,
+            'note' => 'Bulk checkin items',
+            'item_type' => License::class,
+            'item_id' => $licenseSeatForUserC->license->id,
+        ]);
     }
 
     public function testUsersCanBeDeletedInBulk()
