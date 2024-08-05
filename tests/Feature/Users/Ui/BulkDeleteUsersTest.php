@@ -128,7 +128,8 @@ class BulkDeleteUsersTest extends TestCase
                 ],
                 'delete_user' => '1',
             ])
-            ->assertRedirect();
+            ->assertRedirect()
+            ->assertSessionHas('success', trans('general.bulk_checkin_delete_success'));
 
         $this->assertSoftDeleted($userA);
         $this->assertNotSoftDeleted($userB);
