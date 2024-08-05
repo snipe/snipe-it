@@ -26,7 +26,6 @@ class BulkDeleteUsersTest extends TestCase
 
     public function testValidation()
     {
-        // $this->markTestIncomplete();
         $user = User::factory()->create();
         Asset::factory()->assignedToUser($user)->create();
 
