@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Users\Ui;
+namespace Feature\Users\Ui\BulkActions;
 
 use App\Models\Accessory;
 use App\Models\Asset;
