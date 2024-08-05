@@ -99,6 +99,14 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userC, $accessoryA);
     }
 
+    public function testAssetsCanBeBulkCheckedIn()
+    {
+        $this->markTestIncomplete();
+
+        // @todo:
+        // $this->assertActionLogCheckInEntryFor(); ...
+    }
+
     public function testConsumablesCanBeBulkCheckedIn()
     {
         [$consumableA, $consumableB] = Consumable::factory()->count(2)->create();
@@ -131,6 +139,14 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userA, $consumableA);
         $this->assertActionLogCheckInEntryFor($userA, $consumableB);
         $this->assertActionLogCheckInEntryFor($userC, $consumableA);
+    }
+
+    public function testLicenseSeatsCanBeBulkCheckedIn()
+    {
+        $this->markTestIncomplete();
+
+        // @todo:
+        // $this->assertActionLogCheckInEntryFor(); ...
     }
 
     public function testUsersCanBeDeletedInBulk()
