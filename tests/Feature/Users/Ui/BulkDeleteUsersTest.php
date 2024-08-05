@@ -3,6 +3,7 @@
 namespace Tests\Feature\Users\Ui;
 
 use App\Models\Accessory;
+use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\Statuslabel;
 use App\Models\User;
@@ -21,6 +22,31 @@ class BulkDeleteUsersTest extends TestCase
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
             ->assertForbidden();
+    }
+
+    public function testValidation()
+    {
+        // $this->markTestIncomplete();
+        $user = User::factory()->create();
+        Asset::factory()->assignedToUser($user)->create();
+
+        $actor = $this->actingAs(User::factory()->editUsers()->create());
+
+        // "ids" required
+        $actor->post(route('users/bulksave'), [
+            // 'ids' => [
+            //     $user->id,
+            // ],
+            'status_id' => Statuslabel::factory()->create()->id,
+        ])->assertSessionHas('error')->assertRedirect();
+
+        // "status_id" needed when provided users have assets associated
+        $actor->post(route('users/bulksave'), [
+            'ids' => [
+                $user->id,
+            ],
+            // 'status_id' => Statuslabel::factory()->create()->id,
+        ])->assertSessionHas('error')->assertRedirect();
     }
 
     public function testAccessoryCheckinsAreProperlyLogged()
