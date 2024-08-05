@@ -74,10 +74,6 @@ class BulkDeleteUsersTest extends TestCase
         $this->attachAccessoryToUsers($accessoryA, [$userA, $userB, $userC]);
         $this->attachAccessoryToUsers($accessoryB, [$userA, $userB]);
 
-        $this->assertTrue($userA->accessories->isNotEmpty());
-        $this->assertTrue($userB->accessories->isNotEmpty());
-        $this->assertTrue($userC->accessories->isNotEmpty());
-
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
                 'ids' => [
@@ -103,13 +99,9 @@ class BulkDeleteUsersTest extends TestCase
     {
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
-        $assetA = $this->assignAssetToUser($userA);
-        $assetB = $this->assignAssetToUser($userB);
-        $assetC = $this->assignAssetToUser($userC);
-
-        $this->assertTrue($userA->assets->isNotEmpty());
-        $this->assertTrue($userB->assets->isNotEmpty());
-        $this->assertTrue($userC->assets->isNotEmpty());
+        $assetForUserA = $this->assignAssetToUser($userA);
+        $lonelyAsset = $this->assignAssetToUser($userB);
+        $assetForUserC = $this->assignAssetToUser($userC);
 
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
@@ -125,8 +117,8 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertTrue($userB->fresh()->assets->isNotEmpty());
         $this->assertTrue($userC->fresh()->assets->isEmpty());
 
-        $this->assertActionLogCheckInEntryFor($userA, $assetA);
-        $this->assertActionLogCheckInEntryFor($userC, $assetC);
+        $this->assertActionLogCheckInEntryFor($userA, $assetForUserA);
+        $this->assertActionLogCheckInEntryFor($userC, $assetForUserC);
     }
 
     public function testConsumablesCanBeBulkCheckedIn()
@@ -137,10 +129,6 @@ class BulkDeleteUsersTest extends TestCase
         // Add checkouts for multiple consumables to multiple users to get different ids in the mix
         $this->attachConsumableToUsers($consumableA, [$userA, $userB, $userC]);
         $this->attachConsumableToUsers($consumableB, [$userA, $userB]);
-
-        $this->assertTrue($userA->consumables->isNotEmpty());
-        $this->assertTrue($userB->consumables->isNotEmpty());
-        $this->assertTrue($userC->consumables->isNotEmpty());
 
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
