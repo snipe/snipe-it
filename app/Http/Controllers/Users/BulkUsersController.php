@@ -244,13 +244,11 @@ class BulkUsersController extends Controller
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
         ConsumableAssignment::whereIn('id', $consumableUserRows->pluck('id'))->delete();
 
-
         foreach ($users as $user) {
             $user->accessories()->sync([]);
             if ($request->input('delete_user')=='1') {
                 $user->delete();
             }
-
         }
 
         $msg = trans('general.bulk_checkin_success');
