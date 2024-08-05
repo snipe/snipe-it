@@ -48,6 +48,23 @@ class BulkDeleteUsersTest extends TestCase
         ])->assertSessionHas('error')->assertRedirect();
     }
 
+    public function testCannotPerformBulkActionsOnSelf()
+    {
+        $actor = User::factory()->editUsers()->create();
+
+        $this->actingAs($actor)
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $actor->id,
+                ],
+                'delete_user' => '1',
+            ])
+            ->assertRedirect(route('users.index'))
+            ->assertSessionHas('success', trans('general.bulk_checkin_delete_success'));
+
+        $this->assertNotSoftDeleted($actor);
+    }
+
     public function testAccessoriesCanBeBulkCheckedIn()
     {
         [$accessoryA, $accessoryB] = Accessory::factory()->count(2)->create();
