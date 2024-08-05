@@ -478,9 +478,14 @@ class AssetsController extends Controller
         $tag = $tag ? $tag : $request->get('assetTag');
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $tag)->first()) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        // Search for an exact and unique asset tag match
+        $assets = Asset::where('asset_tag', '=', $tag);
+
+        // If not a unique result, redirect to the index view
+        if ($assets->count() != 1) {
+            return redirect()->route('hardware.index')->with('search', $tag);
         }
+        $asset = $assets->first();
         $this->authorize('view', $asset);
 
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
