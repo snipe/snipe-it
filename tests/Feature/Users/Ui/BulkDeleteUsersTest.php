@@ -13,11 +13,13 @@ class BulkDeleteUsersTest extends TestCase
     public function testAccessoryCheckinsAreProperlyLogged()
     {
         [$accessoryA, $accessoryB] = Accessory::factory()->count(2)->create();
-        [$userA, $userB] = User::factory()->count(2)->create();
+        [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
         // Add checkouts for multiple accessories to multiple users to get different ids in the mix
         $this->attachAccessoryToUser($accessoryA, $userA);
         $this->attachAccessoryToUser($accessoryA, $userB);
+        $this->attachAccessoryToUser($accessoryA, $userC);
+
         $this->attachAccessoryToUser($accessoryB, $userA);
         $this->attachAccessoryToUser($accessoryB, $userB);
 
@@ -25,6 +27,7 @@ class BulkDeleteUsersTest extends TestCase
             ->post(route('users/bulksave'), [
                 'ids' => [
                     $userA->id,
+                    $userC->id,
                 ],
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
@@ -49,16 +52,27 @@ class BulkDeleteUsersTest extends TestCase
             'item_type' => Accessory::class,
             'item_id' => $accessoryB->id,
         ]);
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkin from',
+            'target_id' => $userC->id,
+            'target_type' => User::class,
+            'note' => 'Bulk checkin items',
+            'item_type' => Accessory::class,
+            'item_id' => $accessoryA->id,
+        ]);
     }
 
     public function testConsumableCheckinsAreProperlyLogged()
     {
         [$consumableA, $consumableB] = Consumable::factory()->count(2)->create();
-        [$userA, $userB] = User::factory()->count(2)->create();
+        [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
         // Add checkouts for multiple consumables to multiple users to get different ids in the mix
         $this->attachConsumableToUser($consumableA, $userA);
         $this->attachConsumableToUser($consumableA, $userB);
+        $this->attachConsumableToUser($consumableA, $userC);
+
         $this->attachConsumableToUser($consumableB, $userA);
         $this->attachConsumableToUser($consumableB, $userB);
 
@@ -66,6 +80,7 @@ class BulkDeleteUsersTest extends TestCase
             ->post(route('users/bulksave'), [
                 'ids' => [
                     $userA->id,
+                    $userC->id,
                 ],
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
@@ -89,6 +104,15 @@ class BulkDeleteUsersTest extends TestCase
             'note' => 'Bulk checkin items',
             'item_type' => Consumable::class,
             'item_id' => $consumableB->id,
+        ]);
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'checkin from',
+            'target_id' => $userC->id,
+            'target_type' => User::class,
+            'note' => 'Bulk checkin items',
+            'item_type' => Consumable::class,
+            'item_id' => $consumableA->id,
         ]);
     }
 
