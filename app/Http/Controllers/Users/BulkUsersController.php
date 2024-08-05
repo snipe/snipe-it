@@ -246,7 +246,6 @@ class BulkUsersController extends Controller
 
 
         foreach ($users as $user) {
-            // @todo: Can this be removed if we introduce AccessoryAssignment?
             $user->accessories()->sync([]);
             if ($request->input('delete_user')=='1') {
                 $user->delete();
