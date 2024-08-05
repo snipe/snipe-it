@@ -240,7 +240,6 @@ class BulkUsersController extends Controller
             'expected_checkin' => null,
         ]);
 
-
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
         ConsumableAssignment::whereIn('id', $consumableUserRows->pluck('id'))->delete();
 
