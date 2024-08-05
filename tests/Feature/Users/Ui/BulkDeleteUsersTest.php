@@ -48,7 +48,7 @@ class BulkDeleteUsersTest extends TestCase
         ])->assertSessionHas('error')->assertRedirect();
     }
 
-    public function testAccessoryCheckinsAreProperlyLogged()
+    public function testAccessoriesCanBeBulkCheckedIn()
     {
         [$accessoryA, $accessoryB] = Accessory::factory()->count(2)->create();
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
@@ -57,6 +57,10 @@ class BulkDeleteUsersTest extends TestCase
         $this->attachAccessoryToUsers($accessoryA, [$userA, $userB, $userC]);
         $this->attachAccessoryToUsers($accessoryB, [$userA, $userB]);
 
+        $this->assertTrue($userA->accessories->isNotEmpty());
+        $this->assertTrue($userB->accessories->isNotEmpty());
+        $this->assertTrue($userC->accessories->isNotEmpty());
+
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
                 'ids' => [
@@ -66,6 +70,10 @@ class BulkDeleteUsersTest extends TestCase
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
             ->assertRedirect();
+
+        $this->assertTrue($userA->fresh()->accessories->isEmpty());
+        $this->assertTrue($userB->fresh()->accessories->isNotEmpty());
+        $this->assertTrue($userC->fresh()->accessories->isEmpty());
 
         // These assertions check against a bug where the wrong value from
         // accessories_users was being populated in action_logs.item_id.
@@ -74,7 +82,7 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userC, $accessoryA);
     }
 
-    public function testConsumableCheckinsAreProperlyLogged()
+    public function testConsumablesCanBeBulkCheckedIn()
     {
         [$consumableA, $consumableB] = Consumable::factory()->count(2)->create();
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
@@ -82,6 +90,10 @@ class BulkDeleteUsersTest extends TestCase
         // Add checkouts for multiple consumables to multiple users to get different ids in the mix
         $this->attachConsumableToUsers($consumableA, [$userA, $userB, $userC]);
         $this->attachConsumableToUsers($consumableB, [$userA, $userB]);
+
+        $this->assertTrue($userA->consumables->isNotEmpty());
+        $this->assertTrue($userB->consumables->isNotEmpty());
+        $this->assertTrue($userC->consumables->isNotEmpty());
 
         $this->actingAs(User::factory()->editUsers()->create())
             ->post(route('users/bulksave'), [
@@ -92,6 +104,10 @@ class BulkDeleteUsersTest extends TestCase
                 'status_id' => Statuslabel::factory()->create()->id,
             ])
             ->assertRedirect();
+
+        $this->assertTrue($userA->fresh()->consumables->isEmpty());
+        $this->assertTrue($userB->fresh()->consumables->isNotEmpty());
+        $this->assertTrue($userC->fresh()->consumables->isEmpty());
 
         // These assertions check against a bug where the wrong value from
         // consumables_users was being populated in action_logs.item_id.
