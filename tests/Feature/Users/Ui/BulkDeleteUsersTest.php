@@ -116,6 +116,25 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userC, $consumableA);
     }
 
+    public function testUsersCanBeDeletedInBulk()
+    {
+        [$userA, $userB, $userC] = User::factory()->count(3)->create();
+
+        $this->actingAs(User::factory()->editUsers()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $userA->id,
+                    $userC->id,
+                ],
+                'delete_user' => '1',
+            ])
+            ->assertRedirect();
+
+        $this->assertSoftDeleted($userA);
+        $this->assertNotSoftDeleted($userB);
+        $this->assertSoftDeleted($userC);
+    }
+
     private function attachAccessoryToUsers(Accessory $accessory, array $users): void
     {
         foreach ($users as $user) {
