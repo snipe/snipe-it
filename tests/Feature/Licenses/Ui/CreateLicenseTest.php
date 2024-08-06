@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Consumables\Ui;
+namespace Tests\Feature\Licenses\Ui;
 
 use App\Models\AssetModel;
 use App\Models\Category;
