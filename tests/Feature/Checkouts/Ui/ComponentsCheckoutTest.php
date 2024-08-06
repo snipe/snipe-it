@@ -21,7 +21,7 @@ class ComponentsCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled()
+    public function test_cannot_checkout_across_companies_when_full_company_support_enabled()
     {
         Event::fake([CheckoutableCheckedOut::class]);
 
@@ -36,9 +36,6 @@ class ComponentsCheckoutTest extends TestCase
             ->post(route('components.checkout.store', $component), [
                 'asset_id' => $asset->id,
                 'assigned_qty' => '1',
-                // @todo:
-                'note' => null,
-                // @todo:
                 'redirect_option' => 'index',
             ]);
 
