@@ -13,7 +13,7 @@ use App\Models\CustomField;
 use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 
-final class UpdateAssetTest extends TestCase
+class UpdateAssetTest extends TestCase
 {
     public function testThatANonExistentAssetIdReturnsError()
     {

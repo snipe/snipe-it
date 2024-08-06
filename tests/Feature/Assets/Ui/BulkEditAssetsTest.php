@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 
-final class BulkEditAssetsTest extends TestCase
+class BulkEditAssetsTest extends TestCase
 {
     public function testUserWithPermissionsCanAccessPage()
     {

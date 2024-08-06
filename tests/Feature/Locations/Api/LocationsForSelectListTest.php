@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-final class LocationsForSelectListTest extends TestCase
+class LocationsForSelectListTest extends TestCase
 {
     public function testGettingLocationListRequiresProperPermission()
     {

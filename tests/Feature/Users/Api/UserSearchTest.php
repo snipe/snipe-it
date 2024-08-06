@@ -7,7 +7,7 @@ use App\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-final class UserSearchTest extends TestCase
+class UserSearchTest extends TestCase
 {
     public function testCanSearchByUserFirstAndLastName()
     {

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 #[Group('notifications')]
-final class SlackNotificationsUponCheckoutTest extends TestCase
+class SlackNotificationsUponCheckoutTest extends TestCase
 {
     protected function setUp(): void
     {

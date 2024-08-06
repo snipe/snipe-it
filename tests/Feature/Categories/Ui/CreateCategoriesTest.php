@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-final class CreateCategoriesTest extends TestCase
+class CreateCategoriesTest extends TestCase
 {
     public function testPermissionRequiredToCreateCategories()
     {

@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-final class ConsumableUpdateTest extends TestCase
+class ConsumableUpdateTest extends TestCase
 {
 
     public function testCanUpdateConsumableViaPatchWithoutCategoryType()

@@ -7,7 +7,7 @@ use App\Models\License;
 use App\Models\AssetModel;
 use Tests\TestCase;
 
-final class DepreciationTest extends TestCase
+class DepreciationTest extends TestCase
 {
     public function testADepreciationHasModels()
     {

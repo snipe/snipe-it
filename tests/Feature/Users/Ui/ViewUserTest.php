@@ -8,7 +8,7 @@ use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-final class ViewUserTest extends TestCase
+class ViewUserTest extends TestCase
 {
     public function testPermissionsForUserDetailPage()
     {

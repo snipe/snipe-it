@@ -7,7 +7,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Tests\TestCase;
 
-final class ConsumableIndexTest extends TestCase
+class ConsumableIndexTest extends TestCase
 {
     public function testConsumableIndexAdheresToCompanyScoping()
     {

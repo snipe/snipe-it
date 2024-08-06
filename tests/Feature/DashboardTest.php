@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 
-final class DashboardTest extends TestCase
+class DashboardTest extends TestCase
 {
     public function testUsersWithoutAdminAccessAreRedirected()
     {

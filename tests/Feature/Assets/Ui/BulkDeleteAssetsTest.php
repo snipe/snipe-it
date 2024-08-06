@@ -8,7 +8,7 @@ use App\Models\Asset;
 use App\Models\User;
 use Tests\TestCase;
 
-final class BulkDeleteAssetsTest extends TestCase
+class BulkDeleteAssetsTest extends TestCase
 {
     public function testUserWithPermissionsCanAccessPage()
     {

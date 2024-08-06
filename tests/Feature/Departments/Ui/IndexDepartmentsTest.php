@@ -5,7 +5,7 @@ namespace Tests\Feature\Departments\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class IndexDepartmentsTest extends TestCase
+class IndexDepartmentsTest extends TestCase
 {
     public function testPermissionRequiredToViewDepartmentsList()
     {

@@ -8,7 +8,7 @@ use App\Models\LicenseSeat;
 use App\Models\User;
 use Tests\TestCase;
 
-final class LicenseCheckoutTest extends TestCase
+class LicenseCheckoutTest extends TestCase
 {
     public function testNotesAreStoredInActionLogOnCheckoutToAsset()
     {

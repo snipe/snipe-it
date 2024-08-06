@@ -7,7 +7,7 @@ use App\Models\Asset;
 use App\Models\User;
 use Tests\TestCase;
 
-final class UpdateCategoriesTest extends TestCase
+class UpdateCategoriesTest extends TestCase
 {
     public function testPermissionRequiredToStoreCategory()
     {

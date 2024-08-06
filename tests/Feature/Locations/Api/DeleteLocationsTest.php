@@ -7,7 +7,7 @@ use App\Models\Location;
 use App\Models\User;
 use Tests\TestCase;
 
-final class DeleteLocationsTest extends TestCase
+class DeleteLocationsTest extends TestCase
 {
 
     public function testErrorReturnedViaApiIfLocationDoesNotExist()

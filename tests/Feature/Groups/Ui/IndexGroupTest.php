@@ -5,7 +5,7 @@ namespace Tests\Feature\Groups\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class IndexGroupTest extends TestCase
+class IndexGroupTest extends TestCase
 {
     public function testPermissionRequiredToViewGroupList()
     {

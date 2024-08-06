@@ -7,7 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-final class CreateDepartmentsTest extends TestCase
+class CreateDepartmentsTest extends TestCase
 {
     public function testPermissionRequiredToCreateDepartment()
     {

@@ -5,7 +5,7 @@ namespace Tests\Feature\Locations\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class IndexLocationsTest extends TestCase
+class IndexLocationsTest extends TestCase
 {
     public function testPermissionRequiredToViewLocationsList()
     {

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 #[Group('notifications')]
-final class EmailNotificationsUponCheckinTest extends TestCase
+class EmailNotificationsUponCheckinTest extends TestCase
 {
     protected function setUp(): void
     {

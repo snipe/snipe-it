@@ -5,7 +5,7 @@ namespace Tests\Feature\AssetModels\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class IndexAssetModelsTest extends TestCase
+class IndexAssetModelsTest extends TestCase
 {
     public function testPermissionRequiredToViewAssetModelList()
     {

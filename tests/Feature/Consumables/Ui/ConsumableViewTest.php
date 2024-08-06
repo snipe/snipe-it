@@ -6,7 +6,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Tests\TestCase;
 
-final class ConsumableViewTest extends TestCase
+class ConsumableViewTest extends TestCase
 {
     public function testPermissionRequiredToViewConsumable()
     {

@@ -6,7 +6,7 @@ use App\Livewire\CategoryEditForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-final class CategoryEditFormTest extends TestCase
+class CategoryEditFormTest extends TestCase
 {
     public function testTheComponentCanRender()
     {

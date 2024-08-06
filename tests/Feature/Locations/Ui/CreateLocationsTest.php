@@ -7,7 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-final class CreateLocationsTest extends TestCase
+class CreateLocationsTest extends TestCase
 {
     public function testPermissionRequiredToCreateLocation()
     {

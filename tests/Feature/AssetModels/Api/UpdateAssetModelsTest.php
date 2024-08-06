@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-final class UpdateAssetModelsTest extends TestCase
+class UpdateAssetModelsTest extends TestCase
 {
 
     public function testRequiresPermissionToEditAssetModel()

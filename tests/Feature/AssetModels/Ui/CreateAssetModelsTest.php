@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-final class CreateAssetModelsTest extends TestCase
+class CreateAssetModelsTest extends TestCase
 {
     public function testPermissionRequiredToCreateAssetModel()
     {

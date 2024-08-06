@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-final class CreateCategoriesTest extends TestCase
+class CreateCategoriesTest extends TestCase
 {
 
 

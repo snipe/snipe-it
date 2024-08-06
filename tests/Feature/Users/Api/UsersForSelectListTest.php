@@ -8,7 +8,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-final class UsersForSelectListTest extends TestCase
+class UsersForSelectListTest extends TestCase
 {
     public function testUsersAreReturned()
     {

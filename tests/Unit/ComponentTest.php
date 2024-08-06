@@ -7,7 +7,7 @@ use App\Models\Component;
 use App\Models\Location;
 use Tests\TestCase;
 
-final class ComponentTest extends TestCase
+class ComponentTest extends TestCase
 {
     public function testAComponentBelongsToACompany()
     {

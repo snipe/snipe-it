@@ -5,7 +5,7 @@ namespace Tests\Feature\Components\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class ComponentIndexTest extends TestCase
+class ComponentIndexTest extends TestCase
 {
     public function testPermissionRequiredToViewComponentsList()
     {

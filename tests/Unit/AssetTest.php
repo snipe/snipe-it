@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Setting;
 
-final class AssetTest extends TestCase
+class AssetTest extends TestCase
 {
     public function testAutoIncrement()
     {

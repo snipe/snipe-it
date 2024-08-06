@@ -11,7 +11,7 @@ use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-final class ConsumableCheckoutTest extends TestCase
+class ConsumableCheckoutTest extends TestCase
 {
     public function testCheckingOutConsumableRequiresCorrectPermission()
     {

@@ -19,7 +19,7 @@ use Illuminate\Testing\TestResponse;
 use PDOException;
 use Tests\TestCase;
 
-final class ShowSetUpPageTest extends TestCase
+class ShowSetUpPageTest extends TestCase
 {
     /**
      * We do not want to make actual http request on every test to check .env file

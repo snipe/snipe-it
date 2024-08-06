@@ -8,7 +8,7 @@ use Tests\TestCase;
  * Test strings for db column names  gathered from
  * http://www.omniglot.com/language/phrases/hovercraft.htm
  */
-final class CustomFieldTest extends TestCase
+class CustomFieldTest extends TestCase
 {
     public function testFormat()
     {

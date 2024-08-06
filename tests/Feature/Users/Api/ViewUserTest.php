@@ -8,7 +8,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-final class ViewUserTest extends TestCase
+class ViewUserTest extends TestCase
 {
 
     public function testCanReturnUser()

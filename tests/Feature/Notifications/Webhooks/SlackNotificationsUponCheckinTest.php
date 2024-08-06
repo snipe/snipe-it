@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 #[Group('notifications')]
-final class SlackNotificationsUponCheckinTest extends TestCase
+class SlackNotificationsUponCheckinTest extends TestCase
 {
     protected function setUp(): void
     {

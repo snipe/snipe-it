@@ -5,7 +5,7 @@ namespace Tests\Feature\Licenses\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class LicenseIndexTest extends TestCase
+class LicenseIndexTest extends TestCase
 {
     public function testPermissionRequiredToViewLicenseList()
     {

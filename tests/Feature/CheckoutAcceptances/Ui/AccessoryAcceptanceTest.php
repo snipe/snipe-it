@@ -11,7 +11,7 @@ use App\Notifications\AcceptanceAssetDeclinedNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-final class AccessoryAcceptanceTest extends TestCase
+class AccessoryAcceptanceTest extends TestCase
 {
     /**
      * This can be absorbed into a bigger test

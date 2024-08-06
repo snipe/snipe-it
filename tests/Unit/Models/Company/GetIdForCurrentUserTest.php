@@ -6,7 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-final class GetIdForCurrentUserTest extends TestCase
+class GetIdForCurrentUserTest extends TestCase
 {
     public function testReturnsProvidedValueWhenFullCompanySupportDisabled()
     {

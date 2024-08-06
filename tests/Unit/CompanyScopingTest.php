@@ -15,7 +15,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Tests\TestCase;
 
-final class CompanyScopingTest extends TestCase
+class CompanyScopingTest extends TestCase
 {
     public static function models(): array
     {

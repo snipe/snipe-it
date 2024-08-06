@@ -6,7 +6,7 @@ use App\Models\LicenseSeat;
 use App\Models\User;
 use Tests\TestCase;
 
-final class LicenseCheckinTest extends TestCase
+class LicenseCheckinTest extends TestCase
 {
     public function testCheckingInLicenseRequiresCorrectPermission()
     {

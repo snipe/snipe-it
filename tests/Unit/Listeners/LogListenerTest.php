@@ -8,7 +8,7 @@ use App\Models\Asset;
 use App\Models\User;
 use Tests\TestCase;
 
-final class LogListenerTest extends TestCase
+class LogListenerTest extends TestCase
 {
     public function testLogsEntryOnCheckoutableCheckedOut()
     {

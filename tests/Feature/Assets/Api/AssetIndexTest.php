@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-final class AssetIndexTest extends TestCase
+class AssetIndexTest extends TestCase
 {
     public function testAssetApiIndexReturnsExpectedAssets()
     {

@@ -5,7 +5,7 @@ namespace Tests\Feature\Consumables\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class ConsumableIndexTest extends TestCase
+class ConsumableIndexTest extends TestCase
 {
     public function testPermissionRequiredToViewConsumablesList()
     {

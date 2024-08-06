@@ -5,7 +5,7 @@ namespace Tests\Feature\Categories\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-final class IndexCategoriesTest extends TestCase
+class IndexCategoriesTest extends TestCase
 {
     public function testPermissionRequiredToViewCategoryList()
     {

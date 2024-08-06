@@ -5,7 +5,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-final class CompanyTest extends TestCase
+class CompanyTest extends TestCase
 {
     public function testACompanyCanHaveUsers()
     {

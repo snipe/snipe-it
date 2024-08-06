@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-final class UpdateCategoriesTest extends TestCase
+class UpdateCategoriesTest extends TestCase
 {
 
     public function testCanUpdateCategoryViaPatchWithoutCategoryType()
