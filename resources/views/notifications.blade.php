@@ -170,3 +170,19 @@
     </div>
 </div>
 @endif
+
+
+@if ($message = session()->get('search_warning'))
+<div class="col-md-12">
+    <div class="alert alert-warning search-warning fade in hidden">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_warning') }}: </strong>
+        {{ $message }}
+        <div class="search-warning-separator"></div>
+        <div class="pull-right btn btn-xs search-warning-dismiss">
+            {{ trans('general.notification_search_warning') }}
+        </div>
+    </div>
+</div>
+@endif
