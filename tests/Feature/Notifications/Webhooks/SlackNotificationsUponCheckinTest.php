@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Notifications\Webhooks;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Accessory;
 use App\Models\Asset;
@@ -16,9 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-/**
- * @group notifications
- */
+#[Group('notifications')]
 class SlackNotificationsUponCheckinTest extends TestCase
 {
     protected function setUp(): void
@@ -69,7 +69,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->assertNoSlackNotificationSent(CheckinAccessoryNotification::class);
     }
 
-    /** @dataProvider assetCheckInTargets */
+    #[DataProvider('assetCheckInTargets')]
     public function testAssetCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         $this->settings->enableSlackWebhook();
@@ -82,7 +82,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->assertSlackNotificationSent(CheckinAssetNotification::class);
     }
 
-    /** @dataProvider assetCheckInTargets */
+    #[DataProvider('assetCheckInTargets')]
     public function testAssetCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         $this->settings->disableSlackWebhook();
@@ -107,7 +107,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         Notification::assertNothingSent();
     }
 
-    /** @dataProvider licenseCheckInTargets */
+    #[DataProvider('licenseCheckInTargets')]
     public function testLicenseCheckinSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         $this->settings->enableSlackWebhook();
@@ -120,7 +120,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         $this->assertSlackNotificationSent(CheckinLicenseSeatNotification::class);
     }
 
-    /** @dataProvider licenseCheckInTargets */
+    #[DataProvider('licenseCheckInTargets')]
     public function testLicenseCheckinDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         $this->settings->disableSlackWebhook();

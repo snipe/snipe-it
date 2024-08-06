@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Settings;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Client\ConnectionException;
@@ -163,9 +164,7 @@ class ShowSetUpPageTest extends TestCase
         });
     }
 
-    /**
-     * @dataProvider willShowErrorWhenDotEnvFileIsAccessibleViaHttpData
-     */
+    #[DataProvider('willShowErrorWhenDotEnvFileIsAccessibleViaHttpData')]
     public function testWillShowErrorWhenDotEnvFileIsAccessibleViaHttp(int $statusCode): void
     {
         $this->preventStrayRequest = false;

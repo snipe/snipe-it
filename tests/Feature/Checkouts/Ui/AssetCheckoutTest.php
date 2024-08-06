@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Checkouts\Ui;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Asset;
@@ -167,7 +168,7 @@ class AssetCheckoutTest extends TestCase
         ];
     }
 
-    /** @dataProvider checkoutTargets */
+    #[DataProvider('checkoutTargets')]
     public function testAssetCanBeCheckedOut($data)
     {
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
