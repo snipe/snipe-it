@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UsersForSelectListTest extends TestCase
 {
-    public function testUsersAreReturned()
+    public function testUsersAreReturned(): void
     {
         $users = User::factory()->superuser()->count(3)->create();
 
@@ -27,7 +27,7 @@ class UsersForSelectListTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('results', 3)->etc());
     }
 
-    public function testUsersCanBeSearchedByFirstAndLastName()
+    public function testUsersCanBeSearchedByFirstAndLastName(): void
     {
         User::factory()->create(['first_name' => 'Luke', 'last_name' => 'Skywalker']);
 
@@ -40,7 +40,7 @@ class UsersForSelectListTest extends TestCase
         $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Luke')));
     }
 
-    public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()
+    public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -68,7 +68,7 @@ class UsersForSelectListTest extends TestCase
         );
     }
 
-    public function testUsersScopedToCompanyDuringSearchWhenMultipleFullCompanySupportEnabled()
+    public function testUsersScopedToCompanyDuringSearchWhenMultipleFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 

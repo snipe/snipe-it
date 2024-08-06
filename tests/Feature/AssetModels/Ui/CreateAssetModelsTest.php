@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CreateAssetModelsTest extends TestCase
 {
-    public function testPermissionRequiredToCreateAssetModel()
+    public function testPermissionRequiredToCreateAssetModel(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('models.store'), [
@@ -19,7 +19,7 @@ class CreateAssetModelsTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanCreateAssetModels()
+    public function testUserCanCreateAssetModels(): void
     {
         $this->assertFalse(AssetModel::where('name', 'Test Model')->exists());
 
@@ -33,7 +33,7 @@ class CreateAssetModelsTest extends TestCase
         $this->assertTrue(AssetModel::where('name', 'Test Model')->exists());
     }
 
-    public function testUserCannotUseAccessoryCategoryTypeAsAssetModelCategoryType()
+    public function testUserCannotUseAccessoryCategoryTypeAsAssetModelCategoryType(): void
     {
 
         $response = $this->actingAs(User::factory()->superuser()->create())

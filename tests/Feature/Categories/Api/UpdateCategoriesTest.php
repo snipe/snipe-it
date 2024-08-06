@@ -9,7 +9,7 @@ use Tests\TestCase;
 class UpdateCategoriesTest extends TestCase
 {
 
-    public function testCanUpdateCategoryViaPatchWithoutCategoryType()
+    public function testCanUpdateCategoryViaPatchWithoutCategoryType(): void
     {
         $category = Category::factory()->create();
 
@@ -30,7 +30,7 @@ class UpdateCategoriesTest extends TestCase
 
     }
 
-    public function testCannotUpdateCategoryViaPatchWithCategoryType()
+    public function testCannotUpdateCategoryViaPatchWithCategoryType(): void
     {
         $category = Category::factory()->create();
 

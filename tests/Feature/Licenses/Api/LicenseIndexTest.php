@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class LicenseIndexTest extends TestCase
 {
-    public function testLicensesIndexAdheresToCompanyScoping()
+    public function testLicensesIndexAdheresToCompanyScoping(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

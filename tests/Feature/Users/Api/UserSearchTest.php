@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UserSearchTest extends TestCase
 {
-    public function testCanSearchByUserFirstAndLastName()
+    public function testCanSearchByUserFirstAndLastName(): void
     {
         User::factory()->create(['first_name' => 'Luke', 'last_name' => 'Skywalker']);
         User::factory()->create(['first_name' => 'Darth', 'last_name' => 'Vader']);
@@ -24,7 +24,7 @@ class UserSearchTest extends TestCase
         $this->assertFalse($results->pluck('name')->contains(fn($text) => str_contains($text, 'Darth')));
     }
 
-    public function testResultsWhenSearchingForActiveUsers()
+    public function testResultsWhenSearchingForActiveUsers(): void
     {
         User::factory()->create(['first_name' => 'Active', 'last_name' => 'User']);
         User::factory()->create(['first_name' => 'Deleted', 'last_name' => 'User'])->delete();
@@ -53,7 +53,7 @@ class UserSearchTest extends TestCase
         );
     }
 
-    public function testResultsWhenSearchingForDeletedUsers()
+    public function testResultsWhenSearchingForDeletedUsers(): void
     {
         User::factory()->create(['first_name' => 'Active', 'last_name' => 'User']);
         User::factory()->create(['first_name' => 'Deleted', 'last_name' => 'User'])->delete();
@@ -82,7 +82,7 @@ class UserSearchTest extends TestCase
         );
     }
 
-    public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()
+    public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -110,7 +110,7 @@ class UserSearchTest extends TestCase
         );
     }
 
-    public function testUsersScopedToCompanyDuringSearchWhenMultipleFullCompanySupportEnabled()
+    public function testUsersScopedToCompanyDuringSearchWhenMultipleFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -145,7 +145,7 @@ class UserSearchTest extends TestCase
         );
     }
 
-    public function testUsersIndexWhenInvalidSortFieldIsPassed()
+    public function testUsersIndexWhenInvalidSortFieldIsPassed(): void
     {
         $this->markIncompleteIfSqlite('This test is not compatible with SQLite');
 

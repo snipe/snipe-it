@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class AssetIndexTest extends TestCase
 {
-    public function testAssetApiIndexReturnsExpectedAssets()
+    public function testAssetApiIndexReturnsExpectedAssets(): void
     {
         Asset::factory()->count(3)->create();
 
@@ -31,7 +31,7 @@ class AssetIndexTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetApiIndexReturnsDisplayUpcomingAuditsDue()
+    public function testAssetApiIndexReturnsDisplayUpcomingAuditsDue(): void
     {
         Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->format('Y-m-d')]);
 
@@ -47,7 +47,7 @@ class AssetIndexTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetApiIndexReturnsOverdueForAudit()
+    public function testAssetApiIndexReturnsOverdueForAudit(): void
     {
         Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->subDays(1)->format('Y-m-d')]);
         
@@ -63,7 +63,7 @@ class AssetIndexTest extends TestCase
     }
 
 
-    public function testAssetApiIndexReturnsDueOrOverdueForAudit()
+    public function testAssetApiIndexReturnsDueOrOverdueForAudit(): void
     {
         Asset::factory()->count(3)->create(['next_audit_date' => Carbon::now()->format('Y-m-d')]);
         Asset::factory()->count(2)->create(['next_audit_date' => Carbon::now()->subDays(1)->format('Y-m-d')]);
@@ -81,7 +81,7 @@ class AssetIndexTest extends TestCase
 
 
 
-    public function testAssetApiIndexReturnsDueForExpectedCheckin()
+    public function testAssetApiIndexReturnsDueForExpectedCheckin(): void
     {
         Asset::factory()->count(3)->create(['assigned_to' => '1', 'expected_checkin' => Carbon::now()->format('Y-m-d')]);
         
@@ -97,7 +97,7 @@ class AssetIndexTest extends TestCase
         ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetApiIndexReturnsOverdueForExpectedCheckin()
+    public function testAssetApiIndexReturnsOverdueForExpectedCheckin(): void
     {
         Asset::factory()->count(3)->create(['assigned_to' => '1', 'expected_checkin' => Carbon::now()->subDays(1)->format('Y-m-d')]);
         
@@ -111,7 +111,7 @@ class AssetIndexTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetApiIndexReturnsDueOrOverdueForExpectedCheckin()
+    public function testAssetApiIndexReturnsDueOrOverdueForExpectedCheckin(): void
     {
         Asset::factory()->count(3)->create(['assigned_to' => '1', 'expected_checkin' => Carbon::now()->subDays(1)->format('Y-m-d')]);
         Asset::factory()->count(2)->create(['assigned_to' => '1', 'expected_checkin' => Carbon::now()->format('Y-m-d')]);
@@ -126,7 +126,7 @@ class AssetIndexTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 5)->etc());
     }
 
-    public function testAssetApiIndexAdheresToCompanyScoping()
+    public function testAssetApiIndexAdheresToCompanyScoping(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

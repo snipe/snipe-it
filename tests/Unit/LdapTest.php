@@ -11,7 +11,7 @@ class LdapTest extends TestCase
 {
     use \phpmock\phpunit\PHPMock;
 
-    public function testConnect()
+    public function testConnect(): void
     {
         $this->settings->enableLdap();
 
@@ -31,14 +31,14 @@ class LdapTest extends TestCase
     // with/without ignore cert validation?
     // test (and mock) ldap_start_tls() ?
 
-    public function testBindAdmin()
+    public function testBindAdmin(): void
     {
         $this->settings->enableLdap();
         $this->getFunctionMock("App\\Models", "ldap_bind")->expects($this->once())->willReturn(true);
         $this->assertNull(Ldap::bindAdminToLdap("dummy"));
     }
 
-    public function testBindBad()
+    public function testBindBad(): void
     {
         $this->settings->enableLdap();
         $this->getFunctionMock("App\\Models", "ldap_bind")->expects($this->once())->willReturn(false);
@@ -49,7 +49,7 @@ class LdapTest extends TestCase
     }
     // other test cases - test donked password?
 
-    public function testAnonymousBind()
+    public function testAnonymousBind(): void
     {
         //todo - would be nice to introspect somehow to make sure the right parameters were passed?
         $this->settings->enableAnonymousLdap();
@@ -57,7 +57,7 @@ class LdapTest extends TestCase
         $this->assertNull(Ldap::bindAdminToLdap("dummy"));
     }
 
-    public function testBadAnonymousBind()
+    public function testBadAnonymousBind(): void
     {
         $this->settings->enableAnonymousLdap();
         $this->getFunctionMock("App\\Models", "ldap_bind")->expects($this->once())->willReturn(false);
@@ -67,7 +67,7 @@ class LdapTest extends TestCase
         $this->assertNull(Ldap::bindAdminToLdap("dummy"));
     }
 
-    public function testBadEncryptedPassword()
+    public function testBadEncryptedPassword(): void
     {
         $this->settings->enableBadPasswordLdap();
 
@@ -75,7 +75,7 @@ class LdapTest extends TestCase
         $this->assertNull(Ldap::bindAdminToLdap("dummy"));
     }
 
-    public function testFindAndBind()
+    public function testFindAndBind(): void
     {
         $this->settings->enableLdap();
 
@@ -105,7 +105,7 @@ class LdapTest extends TestCase
         $this->assertEqualsCanonicalizing(["count" =>1,0 =>['sn' => 'Surname','firstname' => 'FirstName']],$results);
     }
 
-    public function testFindAndBindBadPassword()
+    public function testFindAndBindBadPassword(): void
     {
         $this->settings->enableLdap();
 
@@ -126,7 +126,7 @@ class LdapTest extends TestCase
         $this->assertFalse($results);
     }
 
-    public function testFindAndBindCannotFindSelf()
+    public function testFindAndBindCannotFindSelf(): void
     {
         $this->settings->enableLdap();
 
@@ -147,7 +147,7 @@ class LdapTest extends TestCase
 
     //maybe should do an AD test as well?
 
-    public function testFindLdapUsers()
+    public function testFindLdapUsers(): void
     {
         $this->settings->enableLdap();
 
@@ -170,7 +170,7 @@ class LdapTest extends TestCase
         $this->assertEqualsCanonicalizing(["count" => 1], $results);
     }
 
-    public function testFindLdapUsersPaginated()
+    public function testFindLdapUsersPaginated(): void
     {
         $this->settings->enableLdap();
 

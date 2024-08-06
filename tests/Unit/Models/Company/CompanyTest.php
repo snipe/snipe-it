@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class CompanyTest extends TestCase
 {
-    public function testACompanyCanHaveUsers()
+    public function testACompanyCanHaveUsers(): void
     {
         $company = Company::factory()->create();
         $user = User::factory()

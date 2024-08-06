@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CreateLocationsTest extends TestCase
 {
-    public function testPermissionRequiredToCreateLocation()
+    public function testPermissionRequiredToCreateLocation(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('locations.store'), [
@@ -19,7 +19,7 @@ class CreateLocationsTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanCreateLocations()
+    public function testUserCanCreateLocations(): void
     {
         $this->assertFalse(Location::where('name', 'Test Location')->exists());
 

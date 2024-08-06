@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class AssetModelTest extends TestCase
 {
-    public function testAnAssetModelContainsAssets()
+    public function testAnAssetModelContainsAssets(): void
     {
         $category = Category::factory()->create([
             'category_type' => 'asset'

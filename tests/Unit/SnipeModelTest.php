@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class SnipeModelTest extends TestCase
 {
-    public function testSetsPurchaseDatesAppropriately()
+    public function testSetsPurchaseDatesAppropriately(): void
     {
         $c = new SnipeModel;
         $c->purchase_date = '';
@@ -15,7 +15,7 @@ class SnipeModelTest extends TestCase
         $this->assertTrue($c->purchase_date === '2016-03-25 12:35:50');
     }
 
-    public function testSetsPurchaseCostsAppropriately()
+    public function testSetsPurchaseCostsAppropriately(): void
     {
         $c = new SnipeModel;
         $c->purchase_cost = '0.00';
@@ -26,7 +26,7 @@ class SnipeModelTest extends TestCase
         $this->assertTrue($c->purchase_cost === 9.5);
     }
 
-    public function testNullsBlankLocationIdsButNotOthers()
+    public function testNullsBlankLocationIdsButNotOthers(): void
     {
         $c = new SnipeModel;
         $c->location_id = '';
@@ -35,7 +35,7 @@ class SnipeModelTest extends TestCase
         $this->assertTrue($c->location_id == 5);
     }
 
-    public function testNullsBlankCategoriesButNotOthers()
+    public function testNullsBlankCategoriesButNotOthers(): void
     {
         $c = new SnipeModel;
         $c->category_id = '';
@@ -44,7 +44,7 @@ class SnipeModelTest extends TestCase
         $this->assertTrue($c->category_id == 1);
     }
 
-    public function testNullsBlankSuppliersButNotOthers()
+    public function testNullsBlankSuppliersButNotOthers(): void
     {
         $c = new SnipeModel;
         $c->supplier_id = '';
@@ -53,7 +53,7 @@ class SnipeModelTest extends TestCase
         $this->assertTrue($c->supplier_id == 4);
     }
 
-    public function testNullsBlankDepreciationsButNotOthers()
+    public function testNullsBlankDepreciationsButNotOthers(): void
     {
         $c = new SnipeModel;
         $c->depreciation_id = '';
@@ -62,7 +62,7 @@ class SnipeModelTest extends TestCase
         $this->assertTrue($c->depreciation_id == 4);
     }
 
-    public function testNullsBlankManufacturersButNotOthers()
+    public function testNullsBlankManufacturersButNotOthers(): void
     {
         $c = new SnipeModel;
         $c->manufacturer_id = '';

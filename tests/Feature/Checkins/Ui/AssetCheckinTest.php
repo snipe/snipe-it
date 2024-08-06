@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 class AssetCheckinTest extends TestCase
 {
-    public function testCheckingInAssetRequiresCorrectPermission()
+    public function testCheckingInAssetRequiresCorrectPermission(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('hardware.checkin.store', [
@@ -24,7 +24,7 @@ class AssetCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testCannotCheckInAssetThatIsNotCheckedOut()
+    public function testCannotCheckInAssetThatIsNotCheckedOut(): void
     {
         $this->actingAs(User::factory()->checkinAssets()->create())
             ->post(route('hardware.checkin.store', ['assetId' => Asset::factory()->create()->id]))
@@ -33,7 +33,7 @@ class AssetCheckinTest extends TestCase
             ->assertRedirect(route('hardware.index'));
     }
 
-    public function testCannotStoreAssetCheckinThatIsNotCheckedOut()
+    public function testCannotStoreAssetCheckinThatIsNotCheckedOut(): void
     {
         $this->actingAs(User::factory()->checkinAssets()->create())
             ->get(route('hardware.checkin.store', ['assetId' => Asset::factory()->create()->id]))
@@ -42,7 +42,7 @@ class AssetCheckinTest extends TestCase
             ->assertRedirect(route('hardware.index'));
     }
 
-    public function testAssetCanBeCheckedIn()
+    public function testAssetCanBeCheckedIn(): void
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
@@ -85,7 +85,7 @@ class AssetCheckinTest extends TestCase
         }, 1);
     }
 
-    public function testLocationIsSetToRTDLocationByDefaultUponCheckin()
+    public function testLocationIsSetToRTDLocationByDefaultUponCheckin(): void
     {
         $rtdLocation = Location::factory()->create();
         $asset = Asset::factory()->assignedToUser()->create([
@@ -99,7 +99,7 @@ class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->refresh()->location()->is($rtdLocation));
     }
 
-    public function testDefaultLocationCanBeUpdatedUponCheckin()
+    public function testDefaultLocationCanBeUpdatedUponCheckin(): void
     {
         $location = Location::factory()->create();
         $asset = Asset::factory()->assignedToUser()->create();
@@ -113,7 +113,7 @@ class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
     }
 
-    public function testAssetsLicenseSeatsAreClearedUponCheckin()
+    public function testAssetsLicenseSeatsAreClearedUponCheckin(): void
     {
         $asset = Asset::factory()->assignedToUser()->create();
         LicenseSeat::factory()->assignedToUser()->for($asset)->create();
@@ -126,7 +126,7 @@ class AssetCheckinTest extends TestCase
         $this->assertNull($asset->refresh()->licenseseats->first()->assigned_to);
     }
 
-    public function testLegacyLocationValuesSetToZeroAreUpdated()
+    public function testLegacyLocationValuesSetToZeroAreUpdated(): void
     {
         $asset = Asset::factory()->canBeInvalidUponCreation()->assignedToUser()->create([
             'rtd_location_id' => 0,
@@ -140,7 +140,7 @@ class AssetCheckinTest extends TestCase
         $this->assertEquals($asset->location_id, $asset->rtd_location_id);
     }
 
-    public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
+    public function testPendingCheckoutAcceptancesAreClearedUponCheckin(): void
     {
         $asset = Asset::factory()->assignedToUser()->create();
 
@@ -152,7 +152,7 @@ class AssetCheckinTest extends TestCase
         $this->assertFalse($acceptance->exists(), 'Acceptance was not deleted');
     }
 
-    public function testCheckinTimeAndActionLogNoteCanBeSet()
+    public function testCheckinTimeAndActionLogNoteCanBeSet(): void
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
@@ -170,7 +170,7 @@ class AssetCheckinTest extends TestCase
         }, 1);
     }
 
-    public function testAssetCheckinPageIsRedirectedIfModelIsInvalid()
+    public function testAssetCheckinPageIsRedirectedIfModelIsInvalid(): void
     {
 
         $asset = Asset::factory()->assignedToUser()->create();
@@ -184,7 +184,7 @@ class AssetCheckinTest extends TestCase
             ->assertRedirect(route('hardware.show',['hardware' => $asset->id]));
     }
 
-    public function testAssetCheckinPagePostIsRedirectedIfModelIsInvalid()
+    public function testAssetCheckinPagePostIsRedirectedIfModelIsInvalid(): void
     {
         $asset = Asset::factory()->assignedToUser()->create();
         $asset->model_id = 0;
@@ -197,7 +197,7 @@ class AssetCheckinTest extends TestCase
             ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
     }
 
-    public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex(): void
     {
         $asset = Asset::factory()->assignedToUser()->create();
 
@@ -210,7 +210,7 @@ class AssetCheckinTest extends TestCase
             ->assertRedirect(route('hardware.index'));
     }
 
-    public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsItem()
+    public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsItem(): void
     {
         $asset = Asset::factory()->assignedToUser()->create();
 

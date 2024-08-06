@@ -7,14 +7,14 @@ use Tests\TestCase;
 
 class IndexAssetModelsTest extends TestCase
 {
-    public function testPermissionRequiredToViewAssetModelList()
+    public function testPermissionRequiredToViewAssetModelList(): void
     {
         $this->actingAs(User::factory()->create())
             ->get(route('models.index'))
             ->assertForbidden();
     }
 
-    public function testUserCanListAssetModels()
+    public function testUserCanListAssetModels(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('models.index'))

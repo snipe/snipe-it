@@ -15,14 +15,14 @@ use Tests\TestCase;
 
 class UpdateAssetTest extends TestCase
 {
-    public function testThatANonExistentAssetIdReturnsError()
+    public function testThatANonExistentAssetIdReturnsError(): void
     {
         $this->actingAsForApi(User::factory()->editAssets()->createAssets()->create())
             ->patchJson(route('api.assets.update', 123456789))
             ->assertStatusMessageIs('error');
     }
 
-    public function testRequiresPermissionToUpdateAsset()
+    public function testRequiresPermissionToUpdateAsset(): void
     {
         $asset = Asset::factory()->create();
 
@@ -31,7 +31,7 @@ class UpdateAssetTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testGivenPermissionUpdateAssetIsAllowed()
+    public function testGivenPermissionUpdateAssetIsAllowed(): void
 
     {
         $asset = Asset::factory()->create();
@@ -43,7 +43,7 @@ class UpdateAssetTest extends TestCase
             ->assertOk();
     }
 
-    public function testAllAssetAttributesAreStored()
+    public function testAllAssetAttributesAreStored(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -103,7 +103,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals('2023-09-03 00:00:00', $updatedAsset->last_audit_date);
     }
 
-    public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated()
+    public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated(): void
     {
         $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
 
@@ -120,7 +120,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
     }
 
-    public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet()
+    public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet(): void
     {
         $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
 
@@ -138,7 +138,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals('2022-01-01', $asset->asset_eol_date);
     }
 
-    public function testAssetEolExplicitIsSetIfAssetEolDateIsExplicitlySet()
+    public function testAssetEolExplicitIsSetIfAssetEolDateIsExplicitlySet(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -156,7 +156,7 @@ class UpdateAssetTest extends TestCase
         $this->assertTrue($asset->eol_explicit);
     }
 
-    public function testAssetTagCannotUpdateToNullValue()
+    public function testAssetTagCannotUpdateToNullValue(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -168,7 +168,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testAssetTagCannotUpdateToEmptyStringValue()
+    public function testAssetTagCannotUpdateToEmptyStringValue(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -180,7 +180,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testModelIdCannotUpdateToNullValue()
+    public function testModelIdCannotUpdateToNullValue(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -192,7 +192,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testModelIdCannotUpdateToEmptyStringValue()
+    public function testModelIdCannotUpdateToEmptyStringValue(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -204,7 +204,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testStatusIdCannotUpdateToNullValue()
+    public function testStatusIdCannotUpdateToNullValue(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -216,7 +216,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testStatusIdCannotUpdateToEmptyStringValue()
+    public function testStatusIdCannotUpdateToEmptyStringValue(): void
     {
         $asset = Asset::factory()->laptopMbp()->create();
 
@@ -228,7 +228,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testIfRtdLocationIdIsSetWithoutLocationIdAssetReturnsToDefault()
+    public function testIfRtdLocationIdIsSetWithoutLocationIdAssetReturnsToDefault(): void
     {
         $location = Location::factory()->create();
         $asset = Asset::factory()->laptopMbp()->create([
@@ -247,7 +247,7 @@ class UpdateAssetTest extends TestCase
         $this->assertTrue($asset->location->is($rtdLocation));
     }
 
-    public function testIfLocationAndRtdLocationAreSetLocationIdIsLocation()
+    public function testIfLocationAndRtdLocationAreSetLocationIdIsLocation(): void
     {
         $location = Location::factory()->create();
         $asset = Asset::factory()->laptopMbp()->create();
@@ -265,7 +265,7 @@ class UpdateAssetTest extends TestCase
         $this->assertTrue($asset->location->is($location));
     }
 
-    public function testEncryptedCustomFieldCanBeUpdated()
+    public function testEncryptedCustomFieldCanBeUpdated(): void
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
@@ -284,7 +284,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 
-    public function testPermissionNeededToUpdateEncryptedField()
+    public function testPermissionNeededToUpdateEncryptedField(): void
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
@@ -308,7 +308,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals("encrypted value should not change", Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 
-    public function testCheckoutToUserOnAssetUpdate()
+    public function testCheckoutToUserOnAssetUpdate(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -327,7 +327,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals($asset->assigned_type, 'App\Models\User');
     }
 
-    public function testCheckoutToDeletedUserFailsOnAssetUpdate()
+    public function testCheckoutToDeletedUserFailsOnAssetUpdate(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -346,7 +346,7 @@ class UpdateAssetTest extends TestCase
         $this->assertNull($asset->assigned_type);
     }
 
-    public function testCheckoutToLocationOnAssetUpdate()
+    public function testCheckoutToLocationOnAssetUpdate(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -366,7 +366,7 @@ class UpdateAssetTest extends TestCase
 
     }
 
-    public function testCheckoutToDeletedLocationFailsOnAssetUpdate()
+    public function testCheckoutToDeletedLocationFailsOnAssetUpdate(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -385,7 +385,7 @@ class UpdateAssetTest extends TestCase
         $this->assertNull($asset->assigned_type);
     }
 
-    public function testCheckoutAssetOnAssetUpdate()
+    public function testCheckoutAssetOnAssetUpdate(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -406,7 +406,7 @@ class UpdateAssetTest extends TestCase
 
     }
 
-    public function testCheckoutToDeletedAssetFailsOnAssetUpdate()
+    public function testCheckoutToDeletedAssetFailsOnAssetUpdate(): void
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
@@ -425,7 +425,7 @@ class UpdateAssetTest extends TestCase
         $this->assertNull($asset->assigned_type);
     }
 
-    public function testAssetCannotBeUpdatedByUserInSeparateCompany()
+    public function testAssetCannotBeUpdatedByUserInSeparateCompany(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 

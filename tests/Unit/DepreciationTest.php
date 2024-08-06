@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class DepreciationTest extends TestCase
 {
-    public function testADepreciationHasModels()
+    public function testADepreciationHasModels(): void
     {
         $depreciation = Depreciation::factory()->create();
 
@@ -26,7 +26,7 @@ class DepreciationTest extends TestCase
         $this->assertEquals(5, $depreciation->models->count());
     }
 
-    public function testADepreciationHasLicenses()
+    public function testADepreciationHasLicenses(): void
     {
 
         $depreciation = Depreciation::factory()->create();

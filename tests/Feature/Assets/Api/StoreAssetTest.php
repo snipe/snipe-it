@@ -16,14 +16,14 @@ use Tests\TestCase;
 
 class StoreAssetTest extends TestCase
 {
-    public function testRequiresPermissionToCreateAsset()
+    public function testRequiresPermissionToCreateAsset(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.assets.store'))
             ->assertForbidden();
     }
 
-    public function testAllAssetAttributesAreStored()
+    public function testAllAssetAttributesAreStored(): void
     {
         $company = Company::factory()->create();
         $location = Location::factory()->create();
@@ -83,7 +83,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals(10, $asset->warranty_months);
     }
 
-    public function testSetsLastAuditDateToMidnightOfProvidedDate()
+    public function testSetsLastAuditDateToMidnightOfProvidedDate(): void
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
@@ -99,7 +99,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals('2023-09-03 00:00:00', $asset->last_audit_date);
     }
 
-    public function testLastAuditDateCanBeNull()
+    public function testLastAuditDateCanBeNull(): void
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
@@ -115,7 +115,7 @@ class StoreAssetTest extends TestCase
         $this->assertNull($asset->last_audit_date);
     }
 
-    public function testNonDateUsedForLastAuditDateReturnsValidationError()
+    public function testNonDateUsedForLastAuditDateReturnsValidationError(): void
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
@@ -129,7 +129,7 @@ class StoreAssetTest extends TestCase
         $this->assertNotNull($response->json('messages.last_audit_date'));
     }
 
-    public function testArchivedDepreciateAndPhysicalCanBeNull()
+    public function testArchivedDepreciateAndPhysicalCanBeNull(): void
     {
         $model = AssetModel::factory()->ipadModel()->create();
         $status = Statuslabel::factory()->create();
@@ -154,7 +154,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals(0, $asset->depreciate);
     }
 
-    public function testArchivedDepreciateAndPhysicalCanBeEmpty()
+    public function testArchivedDepreciateAndPhysicalCanBeEmpty(): void
     {
         $model = AssetModel::factory()->ipadModel()->create();
         $status = Statuslabel::factory()->create();
@@ -179,7 +179,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals(0, $asset->depreciate);
     }
 
-    public function testAssetEolDateIsCalculatedIfPurchaseDateSet()
+    public function testAssetEolDateIsCalculatedIfPurchaseDateSet(): void
     {
         $model = AssetModel::factory()->mbp13Model()->create();
         $status = Statuslabel::factory()->create();
@@ -200,7 +200,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals('2024-01-01', $asset->asset_eol_date);
     }
 
-    public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet()
+    public function testAssetEolDateIsNotCalculatedIfPurchaseDateNotSet(): void
     {
         $model = AssetModel::factory()->mbp13Model()->create();
         $status = Statuslabel::factory()->create();
@@ -220,7 +220,7 @@ class StoreAssetTest extends TestCase
         $this->assertNull($asset->asset_eol_date);
     }
 
-    public function testAssetEolExplicitIsSetIfAssetEolDateIsExplicitlySet()
+    public function testAssetEolExplicitIsSetIfAssetEolDateIsExplicitlySet(): void
     {
         $model = AssetModel::factory()->mbp13Model()->create();
         $status = Statuslabel::factory()->create();
@@ -242,7 +242,7 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->eol_explicit);
     }
 
-    public function testAssetGetsAssetTagWithAutoIncrement()
+    public function testAssetGetsAssetTagWithAutoIncrement(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -262,7 +262,7 @@ class StoreAssetTest extends TestCase
         $this->assertNotNull($asset->asset_tag);
     }
 
-    public function testAssetCreationFailsWithNoAssetTagOrAutoIncrement()
+    public function testAssetCreationFailsWithNoAssetTagOrAutoIncrement(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -278,7 +278,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testStoresPeriodAsDecimalSeparatorForPurchaseCost()
+    public function testStoresPeriodAsDecimalSeparatorForPurchaseCost(): void
     {
         $this->settings->set([
             'default_currency' => 'USD',
@@ -300,7 +300,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals(12.34, $asset->purchase_cost);
     }
 
-    public function testStoresPeriodAsCommaSeparatorForPurchaseCost()
+    public function testStoresPeriodAsCommaSeparatorForPurchaseCost(): void
     {
         $this->settings->set([
             'default_currency' => 'EUR',
@@ -322,7 +322,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals(12.34, $asset->purchase_cost);
     }
 
-    public function testUniqueSerialNumbersIsEnforcedWhenEnabled()
+    public function testUniqueSerialNumbersIsEnforcedWhenEnabled(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -350,7 +350,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testUniqueSerialNumbersIsNotEnforcedWhenDisabled()
+    public function testUniqueSerialNumbersIsNotEnforcedWhenDisabled(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -378,7 +378,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('success');
     }
 
-    public function testAssetTagsMustBeUniqueWhenUndeleted()
+    public function testAssetTagsMustBeUniqueWhenUndeleted(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -405,7 +405,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testAssetTagsCanBeDuplicatedIfDeleted()
+    public function testAssetTagsCanBeDuplicatedIfDeleted(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -435,7 +435,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('success');
     }
 
-    public function testAnAssetCanBeCheckedOutToUserOnStore()
+    public function testAnAssetCanBeCheckedOutToUserOnStore(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -461,7 +461,7 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->assignedTo->is($userAssigned));
     }
 
-    public function testAnAssetCanBeCheckedOutToLocationOnStore()
+    public function testAnAssetCanBeCheckedOutToLocationOnStore(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -487,7 +487,7 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->location->is($location));
     }
 
-    public function testAnAssetCanBeCheckedOutToAssetOnStore()
+    public function testAnAssetCanBeCheckedOutToAssetOnStore(): void
     {
         $model = AssetModel::factory()->create();
         $status = Statuslabel::factory()->create();
@@ -514,7 +514,7 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));
     }
 
-    public function testCompanyIdNeedsToBeInteger()
+    public function testCompanyIdNeedsToBeInteger(): void
     {
         $this->actingAsForApi(User::factory()->createAssets()->create())
             ->postJson(route('api.assets.store'), [
@@ -526,7 +526,7 @@ class StoreAssetTest extends TestCase
             });
     }
 
-    public function testEncryptedCustomFieldCanBeStored()
+    public function testEncryptedCustomFieldCanBeStored(): void
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
@@ -550,7 +550,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));
     }
 
-    public function testPermissionNeededToStoreEncryptedField()
+    public function testPermissionNeededToStoreEncryptedField(): void
     {
         // @todo:
         $this->markTestIncomplete();

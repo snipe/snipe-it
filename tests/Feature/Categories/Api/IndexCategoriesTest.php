@@ -10,14 +10,14 @@ use Tests\TestCase;
 class IndexCategoriesTest extends TestCase
 {
 
-    public function testViewingCategoryIndexRequiresPermission()
+    public function testViewingCategoryIndexRequiresPermission(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->getJson(route('api.departments.index'))
             ->assertForbidden();
     }
 
-    public function testCategoryIndexReturnsExpectedSearchResults()
+    public function testCategoryIndexReturnsExpectedSearchResults(): void
     {
         Category::factory()->count(10)->create();
         Category::factory()->count(1)->forAssets()->create(['name' => 'My Test Category']);
@@ -43,7 +43,7 @@ class IndexCategoriesTest extends TestCase
     }
 
 
-    public function testCategoryIndexReturnsExpectedCategories()
+    public function testCategoryIndexReturnsExpectedCategories(): void
     {
         $this->markTestIncomplete('Not sure why the category factory is generating one more than expected here.');
         Category::factory()->count(3)->create();

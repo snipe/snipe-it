@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    public function testFirstNameSplit()
+    public function testFirstNameSplit(): void
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_firstname = 'Natalia';
@@ -16,7 +16,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_lastname, $user['last_name']);
     }
 
-    public function testFirstName()
+    public function testFirstName(): void
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia';
@@ -24,7 +24,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstNameDotLastName()
+    public function testFirstNameDotLastName(): void
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia.allanovna-romanova-oshostakova';
@@ -32,7 +32,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testLastNameFirstInitial()
+    public function testLastNameFirstInitial(): void
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakovan';
@@ -40,7 +40,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstInitialLastName()
+    public function testFirstInitialLastName(): void
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nallanovna-romanova-oshostakova';
@@ -48,7 +48,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstInitialUnderscoreLastName()
+    public function testFirstInitialUnderscoreLastName(): void
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nallanovna-romanova-oshostakova';
@@ -56,7 +56,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testSingleName()
+    public function testSingleName(): void
     {
         $fullname = 'Natalia';
         $expected_username = 'natalia';

@@ -7,14 +7,14 @@ use Tests\TestCase;
 
 class IndexLocationsTest extends TestCase
 {
-    public function testPermissionRequiredToViewLocationsList()
+    public function testPermissionRequiredToViewLocationsList(): void
     {
         $this->actingAs(User::factory()->create())
             ->get(route('locations.index'))
             ->assertForbidden();
     }
 
-    public function testUserCanListLocations()
+    public function testUserCanListLocations(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('locations.index'))

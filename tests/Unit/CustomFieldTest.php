@@ -10,14 +10,14 @@ use Tests\TestCase;
  */
 class CustomFieldTest extends TestCase
 {
-    public function testFormat()
+    public function testFormat(): void
     {
         $customfield = CustomField::factory()->make(['format' => 'IP']);
         $this->assertEquals($customfield->getAttributes()['format'], CustomField::PREDEFINED_FORMATS['IP']); //this seems undocumented...
         $this->assertEquals($customfield->format, 'IP');
     }
 
-    public function testDbNameAscii()
+    public function testDbNameAscii(): void
     {
         $customfield = new CustomField();
         $customfield->name = 'My hovercraft is full of eels';
@@ -26,7 +26,7 @@ class CustomFieldTest extends TestCase
     }
 
     // Western Europe
-    public function testDbNameLatin()
+    public function testDbNameLatin(): void
     {
         $customfield = new CustomField();
         $customfield->name = 'My hovercraft is full of eels';
@@ -35,7 +35,7 @@ class CustomFieldTest extends TestCase
     }
 
     // Asian
-    public function testDbNameChinese()
+    public function testDbNameChinese(): void
     {
         $customfield = new CustomField();
         $customfield->name = '我的氣墊船裝滿了鱔魚';
@@ -47,7 +47,7 @@ class CustomFieldTest extends TestCase
         }
     }
 
-    public function testDbNameJapanese()
+    public function testDbNameJapanese(): void
     {
         $customfield = new CustomField();
         $customfield->name = '私のホバークラフトは鰻でいっぱいです';
@@ -59,7 +59,7 @@ class CustomFieldTest extends TestCase
         }
     }
 
-    public function testDbNameKorean()
+    public function testDbNameKorean(): void
     {
         $customfield = new CustomField();
         $customfield->name = '내 호버크라프트는 장어로 가득 차 있어요';
@@ -72,7 +72,7 @@ class CustomFieldTest extends TestCase
     }
 
     // Nordic languages
-    public function testDbNameNonLatinEuro()
+    public function testDbNameNonLatinEuro(): void
     {
         $customfield = new CustomField();
         $customfield->name = 'Mój poduszkowiec jest pełen węgorzy';
@@ -85,7 +85,7 @@ class CustomFieldTest extends TestCase
     }
 
     //
-    public function testDbNameTurkish()
+    public function testDbNameTurkish(): void
     {
         $customfield = new CustomField();
         $customfield->name = 'Hoverkraftım yılan balığı dolu';
@@ -97,7 +97,7 @@ class CustomFieldTest extends TestCase
         }
     }
 
-    public function testDbNameArabic()
+    public function testDbNameArabic(): void
     {
         $customfield = new CustomField();
         $customfield->name = 'حَوّامتي مُمْتِلئة بِأَنْقَلَيْسون';

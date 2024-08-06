@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
-    public function testCanUpdateUserViaPatch()
+    public function testCanUpdateUserViaPatch(): void
     {
         $admin = User::factory()->superuser()->create();
         $manager = User::factory()->create();
@@ -82,7 +82,7 @@ class UpdateUserTest extends TestCase
         $this->assertTrue($user->groups->contains($groupB), 'Not part of expected group');
     }
 
-    public function testApiUsersCanBeActivatedWithNumber()
+    public function testApiUsersCanBeActivatedWithNumber(): void
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => 0]);
@@ -95,7 +95,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(1, $user->refresh()->activated);
     }
 
-    public function testApiUsersCanBeActivatedWithBooleanTrue()
+    public function testApiUsersCanBeActivatedWithBooleanTrue(): void
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => false]);
@@ -108,7 +108,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(1, $user->refresh()->activated);
     }
 
-    public function testApiUsersCanBeDeactivatedWithNumber()
+    public function testApiUsersCanBeDeactivatedWithNumber(): void
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => true]);
@@ -121,7 +121,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(0, $user->refresh()->activated);
     }
 
-    public function testApiUsersCanBeDeactivatedWithBooleanFalse()
+    public function testApiUsersCanBeDeactivatedWithBooleanFalse(): void
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => true]);
@@ -134,7 +134,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(0, $user->refresh()->activated);
     }
 
-    public function testUsersScopedToCompanyDuringUpdateWhenMultipleFullCompanySupportEnabled()
+    public function testUsersScopedToCompanyDuringUpdateWhenMultipleFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -223,7 +223,7 @@ class UpdateUserTest extends TestCase
             ->json();
     }
 
-    public function testUserGroupsAreOnlyUpdatedIfAuthenticatedUserIsSuperUser()
+    public function testUserGroupsAreOnlyUpdatedIfAuthenticatedUserIsSuperUser(): void
     {
         $groupToJoin = Group::factory()->create();
 
@@ -250,7 +250,7 @@ class UpdateUserTest extends TestCase
         $this->assertTrue($userToUpdateByToUserBySuperuser->refresh()->groups->contains($groupToJoin));
     }
 
-    public function testUserGroupsCanBeClearedBySuperUser()
+    public function testUserGroupsCanBeClearedBySuperUser(): void
     {
         $normalUser = User::factory()->editUsers()->create();
         $superUser = User::factory()->superuser()->create();
@@ -276,7 +276,7 @@ class UpdateUserTest extends TestCase
         $this->assertFalse($anotherUserToUpdate->refresh()->groups->contains($joinedGroup));
     }
 
-    public function testNonSuperuserCannotUpdateOwnGroups()
+    public function testNonSuperuserCannotUpdateOwnGroups(): void
     {
         $groupToJoin = Group::factory()->create();
         $user = User::factory()->editUsers()->create();
@@ -292,7 +292,7 @@ class UpdateUserTest extends TestCase
 
     }
 
-    public function testNonSuperuserCannotUpdateGroups()
+    public function testNonSuperuserCannotUpdateGroups(): void
     {
         $user = User::factory()->editUsers()->create();
         $group = Group::factory()->create();
@@ -313,7 +313,7 @@ class UpdateUserTest extends TestCase
 
     }
 
-    public function testUsersGroupsAreNotClearedIfNoGroupPassedBySuperUser()
+    public function testUsersGroupsAreNotClearedIfNoGroupPassedBySuperUser(): void
     {
         $user = User::factory()->create();
         $superUser = User::factory()->superuser()->create();
@@ -327,7 +327,7 @@ class UpdateUserTest extends TestCase
         $this->assertTrue($user->refresh()->groups->contains($group));
     }
 
-    public function testMultipleGroupsUpdateBySuperUser()
+    public function testMultipleGroupsUpdateBySuperUser(): void
     {
         $user = User::factory()->create();
         $superUser = User::factory()->superuser()->create();

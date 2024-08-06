@@ -14,7 +14,7 @@ use App\Models\Asset;
 class DeleteUserTest extends TestCase
 {
 
-    public function testUserCanDeleteAnotherUser()
+    public function testUserCanDeleteAnotherUser(): void
     {
         $user = User::factory()->deleteUsers()->viewUsers()->create();
         $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($user->isDeletable());
@@ -28,7 +28,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testErrorReturnedIfUserDoesNotExist()
+    public function testErrorReturnedIfUserDoesNotExist(): void
     {
         $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->delete(route('users.destroy', ['user' => '40596803548609346']))
@@ -37,7 +37,7 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('alert-danger'));
     }
 
-    public function testErrorReturnedIfUserIsAlreadyDeleted()
+    public function testErrorReturnedIfUserIsAlreadyDeleted(): void
     {
         $user = User::factory()->deletedUser()->viewUsers()->create();
         $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
@@ -49,7 +49,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testFmcsPermissionsToDeleteUser()
+    public function testFmcsPermissionsToDeleteUser(): void
     {
 
         $this->settings->enableMultipleFullCompanySupport();
@@ -90,7 +90,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testDisallowUserDeletionIfStillManagingPeople()
+    public function testDisallowUserDeletionIfStillManagingPeople(): void
     {
         $manager = User::factory()->create();
         User::factory()->count(1)->create(['manager_id' => $manager->id]);
@@ -105,7 +105,7 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Error');
     }
 
-    public function testDisallowUserDeletionIfStillManagingLocations()
+    public function testDisallowUserDeletionIfStillManagingLocations(): void
     {
         $manager = User::factory()->create();
         Location::factory()->count(2)->create(['manager_id' => $manager->id]);
@@ -120,7 +120,7 @@ class DeleteUserTest extends TestCase
            $this->followRedirects($response)->assertSee('Error');
     }
 
-    public function testDisallowUserDeletionIfStillHaveAccessories()
+    public function testDisallowUserDeletionIfStillHaveAccessories(): void
     {
         $user = User::factory()->create();
         Accessory::factory()->count(3)->checkedOutToUser($user)->create();
@@ -135,7 +135,7 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Error');
     }
 
-    public function testDisallowUserDeletionIfStillHaveLicenses()
+    public function testDisallowUserDeletionIfStillHaveLicenses(): void
     {
         $user = User::factory()->create();
         LicenseSeat::factory()->count(4)->create(['assigned_to' => $user->id]);
@@ -151,7 +151,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testAllowUserDeletionIfNotManagingLocations()
+    public function testAllowUserDeletionIfNotManagingLocations(): void
     {
         $manager = User::factory()->create();
         $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($manager->isDeletable());
@@ -165,14 +165,14 @@ class DeleteUserTest extends TestCase
 
     }
 
-    public function testDisallowUserDeletionIfNoDeletePermissions()
+    public function testDisallowUserDeletionIfNoDeletePermissions(): void
     {
         $manager = User::factory()->create();
         Location::factory()->create(['manager_id' => $manager->id]);
         $this->actingAs(User::factory()->editUsers()->viewUsers()->create())->assertFalse($manager->isDeletable());
     }
 
-    public function testDisallowUserDeletionIfTheyStillHaveAssets()
+    public function testDisallowUserDeletionIfTheyStillHaveAssets(): void
     {
         $user = User::factory()->create();
         $asset = Asset::factory()->create();
@@ -195,7 +195,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testUsersCannotDeleteThemselves()
+    public function testUsersCannotDeleteThemselves(): void
     {
         $manager = User::factory()->deleteUsers()->viewUsers()->create();
         $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($manager->isDeletable());

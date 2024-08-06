@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class MergeUsersTest extends TestCase
 {
-    public function testAssetsAreTransferredOnUserMerge()
+    public function testAssetsAreTransferredOnUserMerge(): void
     {
         $user1 = User::factory()->create(['username' => 'user1']);
         $user_to_merge_into = User::factory()->create(['username' => 'user1@example.com']);

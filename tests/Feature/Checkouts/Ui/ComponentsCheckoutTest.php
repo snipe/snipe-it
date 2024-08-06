@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ComponentsCheckoutTest extends TestCase
 {
-    public function testCheckingOutComponentRequiresCorrectPermission()
+    public function testCheckingOutComponentRequiresCorrectPermission(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('components.checkout.store', [
@@ -18,7 +18,7 @@ class ComponentsCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex(): void
     {
         $component = Component::factory()->create();
 
@@ -33,7 +33,7 @@ class ComponentsCheckoutTest extends TestCase
             ->assertRedirect(route('components.index'));
     }
 
-    public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem(): void
     {
         $component = Component::factory()->create();
 
@@ -48,7 +48,7 @@ class ComponentsCheckoutTest extends TestCase
             ->assertRedirect(route('components.show', ['component' => $component->id]));
     }
 
-    public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget()
+    public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget(): void
     {
         $asset = Asset::factory()->create();
         $component = Component::factory()->create();

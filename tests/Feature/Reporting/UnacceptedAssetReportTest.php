@@ -44,14 +44,14 @@ class UnacceptedAssetReportTest extends TestCase
     }
 
 
-    public function testPermissionRequiredToViewUnacceptedAssetReport()
+    public function testPermissionRequiredToViewUnacceptedAssetReport(): void
     {
         $this->actingAs(User::factory()->create())
             ->get(route('reports/unaccepted_assets'))
             ->assertForbidden();
     }
 
-    public function testUserCanListUnacceptedAssets()
+    public function testUserCanListUnacceptedAssets(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('reports/unaccepted_assets'))

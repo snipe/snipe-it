@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class LogListenerTest extends TestCase
 {
-    public function testLogsEntryOnCheckoutableCheckedOut()
+    public function testLogsEntryOnCheckoutableCheckedOut(): void
     {
         $asset = Asset::factory()->create();
         $checkedOutTo = User::factory()->create();

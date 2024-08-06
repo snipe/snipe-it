@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class UpdateLocationsTest extends TestCase
 {
-    public function testPermissionRequiredToStoreLocation()
+    public function testPermissionRequiredToStoreLocation(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('locations.store'), [
@@ -19,7 +19,7 @@ class UpdateLocationsTest extends TestCase
     }
 
 
-    public function testUserCanEditLocations()
+    public function testUserCanEditLocations(): void
     {
         $location = Location::factory()->create(['name' => 'Test Location']);
         $this->assertTrue(Location::where('name', 'Test Location')->exists());
@@ -36,7 +36,7 @@ class UpdateLocationsTest extends TestCase
         $this->assertTrue(Location::where('name', 'Test Location Edited')->exists());
     }
 
-    public function testUserCannotEditLocationsToMakeThemTheirOwnParent()
+    public function testUserCannotEditLocationsToMakeThemTheirOwnParent(): void
     {
         $location = Location::factory()->create();
 

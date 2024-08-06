@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class IndexGroupTest extends TestCase
 {
-    public function testPermissionRequiredToViewGroupList()
+    public function testPermissionRequiredToViewGroupList(): void
     {
         $this->actingAs(User::factory()->create())
             ->get(route('groups.index'))
@@ -16,7 +16,7 @@ class IndexGroupTest extends TestCase
         //$this->followRedirects($response)->assertSee('sad-panda.png');
     }
 
-    public function testUserCanListGroups()
+    public function testUserCanListGroups(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('groups.index'))

@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ConsumableIndexTest extends TestCase
 {
-    public function testConsumableIndexAdheresToCompanyScoping()
+    public function testConsumableIndexAdheresToCompanyScoping(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
@@ -55,7 +55,7 @@ class ConsumableIndexTest extends TestCase
             ->assertResponseContainsInRows($consumableB);
     }
 
-    public function testConsumableIndexReturnsExpectedSearchResults()
+    public function testConsumableIndexReturnsExpectedSearchResults(): void
     {
         Consumable::factory()->count(10)->create();
         Consumable::factory()->count(1)->create(['name' => 'My Test Consumable']);

@@ -12,14 +12,14 @@ class CreateAssetModelsTest extends TestCase
 {
 
 
-    public function testRequiresPermissionToCreateAssetModel()
+    public function testRequiresPermissionToCreateAssetModel(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.models.store'))
             ->assertForbidden();
     }
 
-    public function testCanCreateAssetModelWithAssetModelType()
+    public function testCanCreateAssetModelWithAssetModelType(): void
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.models.store'), [
@@ -37,7 +37,7 @@ class CreateAssetModelsTest extends TestCase
         $this->assertEquals('Test AssetModel', $model->name);
     }
 
-    public function testCannotCreateAssetModelWithoutCategory()
+    public function testCannotCreateAssetModelWithoutCategory(): void
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.models.store'), [

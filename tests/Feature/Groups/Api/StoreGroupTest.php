@@ -9,14 +9,14 @@ use Tests\TestCase;
 
 class StoreGroupTest extends TestCase
 {
-    public function testStoringGroupRequiresSuperAdminPermission()
+    public function testStoringGroupRequiresSuperAdminPermission(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.groups.store'))
             ->assertForbidden();
     }
 
-    public function testCanStoreGroupWithPermissionsPassed()
+    public function testCanStoreGroupWithPermissionsPassed(): void
     {
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.groups.store'), [
@@ -37,7 +37,7 @@ class StoreGroupTest extends TestCase
         $this->assertEquals('0', $group->decodePermissions()['reports.view']);
     }
 
-    public function testStoringGroupWithoutPermissionPassed()
+    public function testStoringGroupWithoutPermissionPassed(): void
     {
         $superuser = User::factory()->superuser()->create();
         $this->actingAsForApi($superuser)
@@ -61,7 +61,7 @@ class StoreGroupTest extends TestCase
             ->assertOk();
     }
 
-    public function testStoringGroupWithInvalidPermissionDropsBadPermission()
+    public function testStoringGroupWithInvalidPermissionDropsBadPermission(): void
     {
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.groups.store'), [

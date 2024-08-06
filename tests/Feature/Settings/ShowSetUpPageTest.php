@@ -302,7 +302,7 @@ class ShowSetUpPageTest extends TestCase
         $this->assertSeeDirectoryPermissionError(false);
     }
 
-    public function testInvalidTLSCertsOkWhenCheckingForEnvFile()
+    public function testInvalidTLSCertsOkWhenCheckingForEnvFile(): void
     {
         //set the weird bad SSL cert place - https://self-signed.badssl.com
         $this->markTestIncomplete("Not yet sure how to write this test, it requires messing with .env ...");

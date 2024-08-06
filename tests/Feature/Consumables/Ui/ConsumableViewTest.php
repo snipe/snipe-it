@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ConsumableViewTest extends TestCase
 {
-    public function testPermissionRequiredToViewConsumable()
+    public function testPermissionRequiredToViewConsumable(): void
     {
         $consumable = Consumable::factory()->create();
         $this->actingAs(User::factory()->create())
@@ -16,7 +16,7 @@ class ConsumableViewTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanListConsumables()
+    public function testUserCanListConsumables(): void
     {
         $consumable = Consumable::factory()->create();
         $this->actingAs(User::factory()->superuser()->create())

@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 class BulkEditAssetsTest extends TestCase
 {
-    public function testUserWithPermissionsCanAccessPage()
+    public function testUserWithPermissionsCanAccessPage(): void
     {
         $user = User::factory()->viewAssets()->editAssets()->create();
         $assets = Asset::factory()->count(2)->create();
@@ -29,7 +29,7 @@ class BulkEditAssetsTest extends TestCase
         ])->assertStatus(200);
     }
 
-    public function testStandardUserCannotAccessPage()
+    public function testStandardUserCannotAccessPage(): void
     {
         $user = User::factory()->create();
         $assets = Asset::factory()->count(2)->create();
@@ -44,7 +44,7 @@ class BulkEditAssetsTest extends TestCase
         ])->assertStatus(403);
     }
 
-    public function testBulkEditAssetsAcceptsAllPossibleAttributes()
+    public function testBulkEditAssetsAcceptsAllPossibleAttributes(): void
     {
         // sets up all needed models and attributes on the assets
         // this test does not deal with custom fields - will be dealt with in separate cases
@@ -109,7 +109,7 @@ class BulkEditAssetsTest extends TestCase
         });
     }
 
-    public function testBulkEditAssetsAcceptsAndUpdatesUnencryptedCustomFields()
+    public function testBulkEditAssetsAcceptsAndUpdatesUnencryptedCustomFields(): void
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
@@ -141,7 +141,7 @@ class BulkEditAssetsTest extends TestCase
         });
     }
 
-    public function testBulkEditAssetsAcceptsAndUpdatesEncryptedCustomFields()
+    public function testBulkEditAssetsAcceptsAndUpdatesEncryptedCustomFields(): void
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
@@ -165,7 +165,7 @@ class BulkEditAssetsTest extends TestCase
         });
     }
 
-    public function testBulkEditAssetsRequiresAdminUserToUpdateEncryptedCustomFields()
+    public function testBulkEditAssetsRequiresAdminUserToUpdateEncryptedCustomFields(): void
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on mysql');
         $edit_user = User::factory()->editAssets()->create();

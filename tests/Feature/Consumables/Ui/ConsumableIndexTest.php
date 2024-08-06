@@ -7,14 +7,14 @@ use Tests\TestCase;
 
 class ConsumableIndexTest extends TestCase
 {
-    public function testPermissionRequiredToViewConsumablesList()
+    public function testPermissionRequiredToViewConsumablesList(): void
     {
         $this->actingAs(User::factory()->create())
             ->get(route('consumables.index'))
             ->assertForbidden();
     }
 
-    public function testUserCanListConsumables()
+    public function testUserCanListConsumables(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('consumables.index'))

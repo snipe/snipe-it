@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class GetIdForCurrentUserTest extends TestCase
 {
-    public function testReturnsProvidedValueWhenFullCompanySupportDisabled()
+    public function testReturnsProvidedValueWhenFullCompanySupportDisabled(): void
     {
         $this->settings->disableMultipleFullCompanySupport();
 
@@ -16,7 +16,7 @@ class GetIdForCurrentUserTest extends TestCase
         $this->assertEquals(1000, Company::getIdForCurrentUser(1000));
     }
 
-    public function testReturnsProvidedValueForSuperUsersWhenFullCompanySupportEnabled()
+    public function testReturnsProvidedValueForSuperUsersWhenFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -24,7 +24,7 @@ class GetIdForCurrentUserTest extends TestCase
         $this->assertEquals(2000, Company::getIdForCurrentUser(2000));
     }
 
-    public function testReturnsNonSuperUsersCompanyIdWhenFullCompanySupportEnabled()
+    public function testReturnsNonSuperUsersCompanyIdWhenFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -32,7 +32,7 @@ class GetIdForCurrentUserTest extends TestCase
         $this->assertEquals(2000, Company::getIdForCurrentUser(1000));
     }
 
-    public function testReturnsProvidedValueForNonSuperUserWithoutCompanyIdWhenFullCompanySupportEnabled()
+    public function testReturnsProvidedValueForNonSuperUserWithoutCompanyIdWhenFullCompanySupportEnabled(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 

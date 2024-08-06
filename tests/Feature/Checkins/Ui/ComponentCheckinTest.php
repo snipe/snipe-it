@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ComponentCheckinTest extends TestCase
 {
-    public function testCheckingInComponentRequiresCorrectPermission()
+    public function testCheckingInComponentRequiresCorrectPermission(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('components.checkin.store', [
@@ -18,7 +18,7 @@ class ComponentCheckinTest extends TestCase
     }
 
 
-    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex(): void
     {
         $component = Component::factory()->checkedOutToAsset()->create();
 
@@ -32,7 +32,7 @@ class ComponentCheckinTest extends TestCase
             ->assertRedirect(route('components.index'));
     }
 
-    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsItem()
+    public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsItem(): void
     {
         $component = Component::factory()->checkedOutToAsset()->create();
 

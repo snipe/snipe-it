@@ -10,17 +10,17 @@ use Tests\TestCase;
 
 class HelperTest extends TestCase
 {
-    public function testDefaultChartColorsMethodHandlesHighValues()
+    public function testDefaultChartColorsMethodHandlesHighValues(): void
     {
         $this->assertIsString(Helper::defaultChartColors(1000));
     }
 
-    public function testDefaultChartColorsMethodHandlesNegativeNumbers()
+    public function testDefaultChartColorsMethodHandlesNegativeNumbers(): void
     {
         $this->assertIsString(Helper::defaultChartColors(-1));
     }
 
-    public function testParseCurrencyMethod()
+    public function testParseCurrencyMethod(): void
     {
         $this->settings->set(['default_currency' => 'USD']);
         $this->assertSame(12.34, Helper::ParseCurrency('USD 12.34'));
@@ -28,7 +28,7 @@ class HelperTest extends TestCase
         $this->settings->set(['digit_separator' => '1.234,56']);
         $this->assertSame(12.34, Helper::ParseCurrency('12,34'));
     }
-    public function testGetRedirectOptionMethod()
+    public function testGetRedirectOptionMethod(): void
     {
         $test_data = [
             'Option target: redirect for user assigned to ' => [

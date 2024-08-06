@@ -10,19 +10,19 @@ use Tests\TestCase;
 
 class IndexLocationsTest extends TestCase
 {
-    public function testViewingLocationIndexRequiresAuthentication()
+    public function testViewingLocationIndexRequiresAuthentication(): void
     {
         $this->getJson(route('api.locations.index'))->assertRedirect();
     }
 
-    public function testViewingLocationIndexRequiresPermission()
+    public function testViewingLocationIndexRequiresPermission(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->getJson(route('api.locations.index'))
             ->assertForbidden();
     }
 
-    public function testLocationIndexReturnsExpectedLocations()
+    public function testLocationIndexReturnsExpectedLocations(): void
     {
         Location::factory()->count(3)->create();
 

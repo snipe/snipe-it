@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class AccessoryCheckinTest extends TestCase
 {
-    public function testCheckingInAccessoryRequiresCorrectPermission()
+    public function testCheckingInAccessoryRequiresCorrectPermission(): void
     {
         $accessory = Accessory::factory()->checkedOutToUser()->create();
 
@@ -21,7 +21,7 @@ class AccessoryCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testAccessoryCanBeCheckedIn()
+    public function testAccessoryCanBeCheckedIn(): void
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
@@ -38,7 +38,7 @@ class AccessoryCheckinTest extends TestCase
         Event::assertDispatched(CheckoutableCheckedIn::class, 1);
     }
 
-    public function testEmailSentToUserIfSettingEnabled()
+    public function testEmailSentToUserIfSettingEnabled(): void
     {
         Notification::fake();
 
@@ -62,7 +62,7 @@ class AccessoryCheckinTest extends TestCase
         );
     }
 
-    public function testEmailNotSentToUserIfSettingDisabled()
+    public function testEmailNotSentToUserIfSettingDisabled(): void
     {
         Notification::fake();
 

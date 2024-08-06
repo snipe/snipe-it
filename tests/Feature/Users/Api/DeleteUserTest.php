@@ -12,7 +12,7 @@ class DeleteUserTest extends TestCase
 {
 
 
-    public function testErrorReturnedViaApiIfUserDoesNotExist()
+    public function testErrorReturnedViaApiIfUserDoesNotExist(): void
     {
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
             ->deleteJson(route('api.users.destroy', 'invalid-id'))
@@ -22,7 +22,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testErrorReturnedViaApiIfUserIsAlreadyDeleted()
+    public function testErrorReturnedViaApiIfUserIsAlreadyDeleted(): void
     {
         $user = User::factory()->deletedUser()->create();
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
@@ -34,7 +34,7 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testDisallowUserDeletionViaApiIfStillManagingPeople()
+    public function testDisallowUserDeletionViaApiIfStillManagingPeople(): void
     {
         $manager = User::factory()->create();
         User::factory()->count(5)->create(['manager_id' => $manager->id]);
@@ -48,7 +48,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionViaApiIfStillManagingLocations()
+    public function testDisallowUserDeletionViaApiIfStillManagingLocations(): void
     {
         $manager = User::factory()->create();
         Location::factory()->count(5)->create(['manager_id' => $manager->id]);
@@ -63,7 +63,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionViaApiIfStillHasLicenses()
+    public function testDisallowUserDeletionViaApiIfStillHasLicenses(): void
     {
         $manager = User::factory()->create();
         LicenseSeat::factory()->count(5)->create(['assigned_to' => $manager->id]);
@@ -78,7 +78,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testDeniedPermissionsForDeletingUserViaApi()
+    public function testDeniedPermissionsForDeletingUserViaApi(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.users.destroy', User::factory()->create()))
@@ -86,7 +86,7 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testSuccessPermissionsForDeletingUserViaApi()
+    public function testSuccessPermissionsForDeletingUserViaApi(): void
     {
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
             ->deleteJson(route('api.users.destroy', User::factory()->create()))
@@ -97,7 +97,7 @@ class DeleteUserTest extends TestCase
     }
 
     
-    public function testPermissionsForDeletingIfNotInSameCompanyAndNotSuperadmin()
+    public function testPermissionsForDeletingIfNotInSameCompanyAndNotSuperadmin(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -139,7 +139,7 @@ class DeleteUserTest extends TestCase
 
     }
 
-    public function testUsersCannotDeleteThemselves()
+    public function testUsersCannotDeleteThemselves(): void
     {
         $user = User::factory()->deleteUsers()->create();
         $this->actingAsForApi($user)

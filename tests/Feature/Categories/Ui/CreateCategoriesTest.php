@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class CreateCategoriesTest extends TestCase
 {
-    public function testPermissionRequiredToCreateCategories()
+    public function testPermissionRequiredToCreateCategories(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('categories.store'), [
@@ -19,7 +19,7 @@ class CreateCategoriesTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanCreateCategories()
+    public function testUserCanCreateCategories(): void
     {
         $this->assertFalse(Category::where('name', 'Test Category')->exists());
 
@@ -33,7 +33,7 @@ class CreateCategoriesTest extends TestCase
         $this->assertTrue(Category::where('name', 'Test Category')->exists());
     }
 
-    public function testUserCannotCreateCategoriesWithInvalidType()
+    public function testUserCannotCreateCategoriesWithInvalidType(): void
     {
         $this->assertFalse(Category::where('name', 'Test Category')->exists());
 

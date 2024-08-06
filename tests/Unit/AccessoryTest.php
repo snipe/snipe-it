@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class AccessoryTest extends TestCase
 {
-    public function testAnAccessoryBelongsToACompany()
+    public function testAnAccessoryBelongsToACompany(): void
     {
         $accessory = Accessory::factory()
         ->create(
@@ -20,7 +20,7 @@ class AccessoryTest extends TestCase
         $this->assertInstanceOf(Company::class, $accessory->company);
     }
 
-    public function testAnAccessoryHasALocation()
+    public function testAnAccessoryHasALocation(): void
     {
         $accessory = Accessory::factory()
             ->create(
@@ -30,7 +30,7 @@ class AccessoryTest extends TestCase
         $this->assertInstanceOf(Location::class, $accessory->location);
     }
 
-    public function testAnAccessoryBelongsToACategory()
+    public function testAnAccessoryBelongsToACategory(): void
     {
         $accessory = Accessory::factory()->appleBtKeyboard()
             ->create(
@@ -45,7 +45,7 @@ class AccessoryTest extends TestCase
         $this->assertEquals('accessory', $accessory->category->category_type);
     }
 
-    public function testAnAccessoryHasAManufacturer()
+    public function testAnAccessoryHasAManufacturer(): void
     {
         $accessory = Accessory::factory()->appleBtKeyboard()->create(
             [

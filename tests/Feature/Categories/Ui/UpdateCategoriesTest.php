@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UpdateCategoriesTest extends TestCase
 {
-    public function testPermissionRequiredToStoreCategory()
+    public function testPermissionRequiredToStoreCategory(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('categories.store'), [
@@ -20,7 +20,7 @@ class UpdateCategoriesTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanCreateCategories()
+    public function testUserCanCreateCategories(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->post(route('categories.store'), [
@@ -34,7 +34,7 @@ class UpdateCategoriesTest extends TestCase
         $this->assertTrue(Category::where('name', 'Test Category')->exists());
     }
 
-    public function testUserCanEditAssetCategory()
+    public function testUserCanEditAssetCategory(): void
     {
         $category = Category::factory()->forAssets()->create(['name' => 'Test Category']);
         $this->assertTrue(Category::where('name', 'Test Category')->exists());
@@ -52,7 +52,7 @@ class UpdateCategoriesTest extends TestCase
 
     }
 
-    public function testUserCanChangeCategoryTypeIfNoAssetsAssociated()
+    public function testUserCanChangeCategoryTypeIfNoAssetsAssociated(): void
     {
         $category = Category::factory()->forAssets()->create(['name' => 'Test Category']);
         $this->assertTrue(Category::where('name', 'Test Category')->exists());
@@ -72,7 +72,7 @@ class UpdateCategoriesTest extends TestCase
 
     }
 
-    public function testUserCannotChangeCategoryTypeIfAssetsAreAssociated()
+    public function testUserCannotChangeCategoryTypeIfAssetsAreAssociated(): void
     {
         Asset::factory()->count(5)->laptopMbp()->create();
         $category = Category::where('name', 'Laptops')->first();

@@ -9,14 +9,14 @@ use Tests\TestCase;
 
 class RequestableAssetTest extends TestCase
 {
-    public function testViewingRequestableAssetsRequiresCorrectPermission()
+    public function testViewingRequestableAssetsRequiresCorrectPermission(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->getJson(route('api.assets.requestable'))
             ->assertForbidden();
     }
 
-    public function testReturnsRequestableAssets()
+    public function testReturnsRequestableAssets(): void
     {
         $requestableAsset = Asset::factory()->requestable()->create(['asset_tag' => 'requestable']);
         $nonRequestableAsset = Asset::factory()->nonrequestable()->create(['asset_tag' => 'non-requestable']);
@@ -28,7 +28,7 @@ class RequestableAssetTest extends TestCase
             ->assertResponseDoesNotContainInRows($nonRequestableAsset, 'asset_tag');
     }
 
-    public function testRequestableAssetsAreScopedToCompanyWhenMultipleCompanySupportEnabled()
+    public function testRequestableAssetsAreScopedToCompanyWhenMultipleCompanySupportEnabled(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

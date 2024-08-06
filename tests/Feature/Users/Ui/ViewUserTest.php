@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class ViewUserTest extends TestCase
 {
-    public function testPermissionsForUserDetailPage()
+    public function testPermissionsForUserDetailPage(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -29,7 +29,7 @@ class ViewUserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testPermissionsForPrintAllInventoryPage()
+    public function testPermissionsForPrintAllInventoryPage(): void
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -52,7 +52,7 @@ class ViewUserTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testUserWithoutCompanyPermissionsCannotSendInventory()
+    public function testUserWithoutCompanyPermissionsCannotSendInventory(): void
     {
 
         Notification::fake();

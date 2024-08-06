@@ -43,7 +43,7 @@ class CustomReportTest extends TestCase
         );
     }
 
-    public function testCustomAssetReport()
+    public function testCustomAssetReport(): void
     {
         Asset::factory()->create(['name' => 'Asset A']);
         Asset::factory()->create(['name' => 'Asset B']);
@@ -59,7 +59,7 @@ class CustomReportTest extends TestCase
             ->assertSeeTextInStreamedResponse('Asset B');
     }
 
-    public function testCustomAssetReportAdheresToCompanyScoping()
+    public function testCustomAssetReportAdheresToCompanyScoping(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
@@ -105,7 +105,7 @@ class CustomReportTest extends TestCase
             ->assertSeeTextInStreamedResponse('Asset B');
     }
 
-    public function testCanLimitAssetsByLastCheckIn()
+    public function testCanLimitAssetsByLastCheckIn(): void
     {
         Asset::factory()->create(['name' => 'Asset A', 'last_checkin' => '2023-08-01']);
         Asset::factory()->create(['name' => 'Asset B', 'last_checkin' => '2023-08-02']);

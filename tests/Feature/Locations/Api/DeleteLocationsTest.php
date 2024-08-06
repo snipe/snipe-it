@@ -10,7 +10,7 @@ use Tests\TestCase;
 class DeleteLocationsTest extends TestCase
 {
 
-    public function testErrorReturnedViaApiIfLocationDoesNotExist()
+    public function testErrorReturnedViaApiIfLocationDoesNotExist(): void
     {
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->deleteJson(route('api.users.destroy', 'invalid-id'))
@@ -20,7 +20,7 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
-    public function testErrorReturnedViaApiIfLocationIsAlreadyDeleted()
+    public function testErrorReturnedViaApiIfLocationIsAlreadyDeleted(): void
     {
         $location = Location::factory()->deletedLocation()->create();
         $this->actingAsForApi(User::factory()->superuser()->create())
@@ -31,7 +31,7 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
-    public function testDisallowLocationDeletionViaApiIfStillHasPeople()
+    public function testDisallowLocationDeletionViaApiIfStillHasPeople(): void
     {
         $location = Location::factory()->create();
         User::factory()->count(5)->create(['location_id' => $location->id]);
@@ -46,7 +46,7 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionViaApiIfStillHasChildLocations()
+    public function testDisallowUserDeletionViaApiIfStillHasChildLocations(): void
     {
         $parent = Location::factory()->create();
         Location::factory()->count(5)->create(['parent_id' => $parent->id]);
@@ -60,7 +60,7 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionViaApiIfStillHasAssetsAssigned()
+    public function testDisallowUserDeletionViaApiIfStillHasAssetsAssigned(): void
     {
         $location = Location::factory()->create();
         Asset::factory()->count(5)->assignedToLocation($location)->create();
@@ -75,7 +75,7 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
-    public function testDisallowUserDeletionViaApiIfStillHasAssetsAsLocation()
+    public function testDisallowUserDeletionViaApiIfStillHasAssetsAsLocation(): void
     {
         $location = Location::factory()->create();
         Asset::factory()->count(5)->create(['location_id' => $location->id]);

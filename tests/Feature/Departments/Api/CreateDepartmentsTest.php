@@ -13,7 +13,7 @@ class CreateDepartmentsTest extends TestCase
 {
 
 
-    public function testRequiresPermissionToCreateDepartment()
+    public function testRequiresPermissionToCreateDepartment(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.departments.store'))

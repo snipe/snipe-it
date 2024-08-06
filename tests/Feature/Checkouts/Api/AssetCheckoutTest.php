@@ -21,7 +21,7 @@ class AssetCheckoutTest extends TestCase
         Event::fake([CheckoutableCheckedOut::class]);
     }
 
-    public function testCheckingOutAssetRequiresCorrectPermission()
+    public function testCheckingOutAssetRequiresCorrectPermission(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.asset.checkout', Asset::factory()->create()), [
@@ -31,7 +31,7 @@ class AssetCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testNonExistentAssetCannotBeCheckedOut()
+    public function testNonExistentAssetCannotBeCheckedOut(): void
     {
         $this->actingAsForApi(User::factory()->checkoutAssets()->create())
             ->postJson(route('api.asset.checkout', 1000), [
@@ -41,7 +41,7 @@ class AssetCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testAssetNotAvailableForCheckoutCannotBeCheckedOut()
+    public function testAssetNotAvailableForCheckoutCannotBeCheckedOut(): void
     {
         $assetAlreadyCheckedOut = Asset::factory()->assignedToUser()->create();
 
@@ -53,7 +53,7 @@ class AssetCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testAssetCannotBeCheckedOutToItself()
+    public function testAssetCannotBeCheckedOutToItself(): void
     {
         $asset = Asset::factory()->create();
 
@@ -65,7 +65,7 @@ class AssetCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testValidationWhenCheckingOutAsset()
+    public function testValidationWhenCheckingOutAsset(): void
     {
         $this->actingAsForApi(User::factory()->checkoutAssets()->create())
             ->postJson(route('api.asset.checkout', Asset::factory()->create()), [])
@@ -74,7 +74,7 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
-    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled()
+    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled(): void
     {
         $this->markTestIncomplete('This is not implemented');
     }
@@ -150,7 +150,7 @@ class AssetCheckoutTest extends TestCase
     }
 
     #[DataProvider('checkoutTargets')]
-    public function testAssetCanBeCheckedOut($data)
+    public function testAssetCanBeCheckedOut($data): void
     {
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
@@ -192,12 +192,12 @@ class AssetCheckoutTest extends TestCase
         });
     }
 
-    public function testLicenseSeatsAreAssignedToUserUponCheckout()
+    public function testLicenseSeatsAreAssignedToUserUponCheckout(): void
     {
         $this->markTestIncomplete('This is not implemented');
     }
 
-    public function testLastCheckoutUsesCurrentDateIfNotProvided()
+    public function testLastCheckoutUsesCurrentDateIfNotProvided(): void
     {
         $asset = Asset::factory()->create(['last_checkout' => now()->subMonth()]);
 

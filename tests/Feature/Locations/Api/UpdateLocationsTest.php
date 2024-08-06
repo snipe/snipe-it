@@ -9,14 +9,14 @@ use Tests\TestCase;
 class UpdateLocationsTest extends TestCase
 {
 
-    public function testRequiresPermissionToEditLocation()
+    public function testRequiresPermissionToEditLocation(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.locations.store', Location::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testCanUpdateLocationViaPatch()
+    public function testCanUpdateLocationViaPatch(): void
     {
         $location = Location::factory()->create();
 

@@ -29,7 +29,7 @@ class CompanyScopingTest extends TestCase
     }
 
     #[DataProvider('models')]
-    public function testCompanyScoping($model)
+    public function testCompanyScoping($model): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
@@ -69,7 +69,7 @@ class CompanyScopingTest extends TestCase
         $this->assertCanSee($modelB);
     }
 
-    public function testAssetMaintenanceCompanyScoping()
+    public function testAssetMaintenanceCompanyScoping(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
@@ -109,7 +109,7 @@ class CompanyScopingTest extends TestCase
         $this->assertCanSee($assetMaintenanceForCompanyB);
     }
 
-    public function testLicenseSeatCompanyScoping()
+    public function testLicenseSeatCompanyScoping(): void
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

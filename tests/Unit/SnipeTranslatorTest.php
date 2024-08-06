@@ -11,17 +11,17 @@ class SnipeTranslatorTest extends TestCase
 
     // WARNING: If these translation strings are updated, these tests will start to fail. Update them as appropriate.
 
-    public function testBasic()
+    public function testBasic(): void
     {
         $this->assertEquals('This user has admin privileges',trans('general.admin_tooltip',[],'en-US'));
     }
 
-    public function testPortuguese()
+    public function testPortuguese(): void
     {
         $this->assertEquals('Acessório',trans('general.accessory',[],'pt-PT'));
     }
 
-    public function testFallback()
+    public function testFallback(): void
     {
         $this->assertEquals(
             'This user has admin privileges',
@@ -30,7 +30,7 @@ class SnipeTranslatorTest extends TestCase
         );
     }
 
-    public function testBackupString()
+    public function testBackupString(): void
     {
         $this->assertEquals(
             'Ingen sikkerhetskopier ble gjort ennå',
@@ -39,7 +39,7 @@ class SnipeTranslatorTest extends TestCase
         );
     }
 
-    public function testBackupFallback()
+    public function testBackupFallback(): void
     {
         $this->assertEquals(
             'No backups were made yet',
@@ -49,7 +49,7 @@ class SnipeTranslatorTest extends TestCase
 
     }
 
-    public function testTransChoiceSingular()
+    public function testTransChoiceSingular(): void
     {
         $this->assertEquals(
             '1 Consumível',
@@ -57,7 +57,7 @@ class SnipeTranslatorTest extends TestCase
         );
     }
 
-    public function testTransChoicePlural()
+    public function testTransChoicePlural(): void
     {
         $this->assertEquals(
             '2 Consumíveis',
@@ -65,7 +65,7 @@ class SnipeTranslatorTest extends TestCase
         );
     }
 
-    public function testTotallyBogusKey()
+    public function testTotallyBogusKey(): void
     {
         $this->assertEquals(
             'bogus_key',
@@ -74,7 +74,7 @@ class SnipeTranslatorTest extends TestCase
         );
     }
 
-    public function testReplacements() {
+    public function testReplacements(): void {
         $this->assertEquals(
             'Artigos alocados a Some Name Here',
             trans('admin/users/general.assets_user',['name' => 'Some Name Here'],'pt-PT'),
@@ -82,7 +82,7 @@ class SnipeTranslatorTest extends TestCase
         );
     }
 
-    public function testNonlegacyBackupLocale() {
+    public function testNonlegacyBackupLocale(): void {
         //Spatie backup *usually* uses two-character locales, but pt-BR is an exception
         $this->assertEquals(
             'Mensagem de exceção: MESSAGE',

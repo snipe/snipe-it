@@ -9,14 +9,14 @@ use Tests\TestCase;
 class CreateLocationsTest extends TestCase
 {
 
-    public function testRequiresPermissionToCreateLocation()
+    public function testRequiresPermissionToCreateLocation(): void
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.departments.store'))
             ->assertForbidden();
     }
 
-    public function testCannotCreateNewLocationsWithTheSameName()
+    public function testCannotCreateNewLocationsWithTheSameName(): void
     {
         $location = Location::factory()->create();
         $location2 = Location::factory()->create();
@@ -33,7 +33,7 @@ class CreateLocationsTest extends TestCase
 
     }
 
-    public function testUserCannotCreateLocationsThatAreTheirOwnParent()
+    public function testUserCannotCreateLocationsThatAreTheirOwnParent(): void
     {
         $location = Location::factory()->create();
 

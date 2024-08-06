@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class LicenseViewTest extends TestCase
 {
-    public function testPermissionRequiredToViewLicense()
+    public function testPermissionRequiredToViewLicense(): void
     {
         $license = License::factory()->create();
         $this->actingAs(User::factory()->create())
@@ -17,7 +17,7 @@ class LicenseViewTest extends TestCase
             ->assertForbidden();
     }
     
-    public function testLicenseWithPurchaseDateDepreciatesCorrectly()
+    public function testLicenseWithPurchaseDateDepreciatesCorrectly(): void
     {
         $depreciation = Depreciation::factory()->create(['months' => 12]);
         $license = License::factory()->create(['depreciation_id' => $depreciation->id, 'purchase_date' => '2020-01-01']);

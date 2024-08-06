@@ -7,14 +7,14 @@ use Tests\TestCase;
 
 class LicenseIndexTest extends TestCase
 {
-    public function testPermissionRequiredToViewLicenseList()
+    public function testPermissionRequiredToViewLicenseList(): void
     {
         $this->actingAs(User::factory()->create())
             ->get(route('licenses.index'))
             ->assertForbidden();
     }
 
-    public function testUserCanListLicenses()
+    public function testUserCanListLicenses(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('licenses.index'))

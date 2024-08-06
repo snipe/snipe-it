@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class NotificationTest extends TestCase
 {
-    public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
+    public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA(): void
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create();

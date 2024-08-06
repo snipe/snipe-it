@@ -13,14 +13,14 @@ use Tests\TestCase;
 
 class ConsumableCheckoutTest extends TestCase
 {
-    public function testCheckingOutConsumableRequiresCorrectPermission()
+    public function testCheckingOutConsumableRequiresCorrectPermission(): void
     {
         $this->actingAs(User::factory()->create())
             ->post(route('consumables.checkout.store', Consumable::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testValidationWhenCheckingOutConsumable()
+    public function testValidationWhenCheckingOutConsumable(): void
     {
         $this->actingAs(User::factory()->checkoutConsumables()->create())
             ->post(route('consumables.checkout.store', Consumable::factory()->create()), [
@@ -29,7 +29,7 @@ class ConsumableCheckoutTest extends TestCase
             ->assertSessionHas('error');
     }
 
-    public function testConsumableMustBeAvailableWhenCheckingOut()
+    public function testConsumableMustBeAvailableWhenCheckingOut(): void
     {
         $this->actingAs(User::factory()->checkoutConsumables()->create())
             ->post(route('consumables.checkout.store', Consumable::factory()->withoutItemsRemaining()->create()), [
@@ -38,7 +38,7 @@ class ConsumableCheckoutTest extends TestCase
             ->assertSessionHas('error');
     }
 
-    public function testConsumableCanBeCheckedOut()
+    public function testConsumableCanBeCheckedOut(): void
     {
         $consumable = Consumable::factory()->create();
         $user = User::factory()->create();
@@ -51,7 +51,7 @@ class ConsumableCheckoutTest extends TestCase
         $this->assertTrue($user->consumables->contains($consumable));
     }
 
-    public function testUserSentNotificationUponCheckout()
+    public function testUserSentNotificationUponCheckout(): void
     {
         Notification::fake();
 
@@ -66,7 +66,7 @@ class ConsumableCheckoutTest extends TestCase
         Notification::assertSentTo($user, CheckoutConsumableNotification::class);
     }
 
-    public function testActionLogCreatedUponCheckout()
+    public function testActionLogCreatedUponCheckout(): void
     {
         $consumable = Consumable::factory()->create();
         $actor = User::factory()->checkoutConsumables()->create();
@@ -93,7 +93,7 @@ class ConsumableCheckoutTest extends TestCase
         );
     }
 
-    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex(): void
     {
         $consumable = Consumable::factory()->create();
 
@@ -108,7 +108,7 @@ class ConsumableCheckoutTest extends TestCase
             ->assertRedirect(route('consumables.index'));
     }
 
-    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem(): void
     {
         $consumable = Consumable::factory()->create();
 
@@ -123,7 +123,7 @@ class ConsumableCheckoutTest extends TestCase
             ->assertRedirect(route('consumables.show', ['consumable' => $consumable->id]));
     }
 
-    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget()
+    public function testConsumableCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget(): void
     {
         $user = User::factory()->create();
         $consumable = Consumable::factory()->create();

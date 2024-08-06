@@ -11,7 +11,7 @@ use Tests\TestCase;
 class EditAssetTest extends TestCase
 {
 
-    public function testPermissionRequiredToViewLicense()
+    public function testPermissionRequiredToViewLicense(): void
     {
         $asset = Asset::factory()->create();
         $this->actingAs(User::factory()->create())
@@ -27,7 +27,7 @@ class EditAssetTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testAssetEditPostIsRedirectedIfRedirectSelectionIsIndex()
+    public function testAssetEditPostIsRedirectedIfRedirectSelectionIsIndex(): void
     {
         $asset = Asset::factory()->assignedToUser()->create();
 
@@ -45,7 +45,7 @@ class EditAssetTest extends TestCase
             ->assertRedirect(route('hardware.index'));
         $this->assertDatabaseHas('assets', ['asset_tag' => 'New Asset Tag']);
     }
-    public function testAssetEditPostIsRedirectedIfRedirectSelectionIsItem()
+    public function testAssetEditPostIsRedirectedIfRedirectSelectionIsItem(): void
     {
         $asset = Asset::factory()->create();
 
