@@ -5,7 +5,7 @@ namespace Tests\Feature\Users\Ui;
 use App\Models\User;
 use Tests\TestCase;
 
-class UpdateUserTest extends TestCase
+final class UpdateUserTest extends TestCase
 {
     public function testUsersCanBeActivatedWithNumber(): void
     {

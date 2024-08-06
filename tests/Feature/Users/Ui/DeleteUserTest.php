@@ -11,7 +11,7 @@ use App\Models\Company;
 
 use App\Models\Asset;
 
-class DeleteUserTest extends TestCase
+final class DeleteUserTest extends TestCase
 {
 
     public function testUserCanDeleteAnotherUser(): void

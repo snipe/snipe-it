@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class StoreAssetTest extends TestCase
+final class StoreAssetTest extends TestCase
 {
     public function testRequiresPermissionToCreateAsset(): void
     {

@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use App\Models\Location;
 use Tests\TestCase;
 
-class LocationTest extends TestCase
+final class LocationTest extends TestCase
 {
     public function testPassesIfNotSelfParent(): void
     {

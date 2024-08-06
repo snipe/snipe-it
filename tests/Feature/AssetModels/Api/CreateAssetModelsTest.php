@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class CreateAssetModelsTest extends TestCase
+final class CreateAssetModelsTest extends TestCase
 {
 
 

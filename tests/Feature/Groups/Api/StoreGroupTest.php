@@ -7,7 +7,7 @@ use App\Models\Group;
 use App\Models\User;
 use Tests\TestCase;
 
-class StoreGroupTest extends TestCase
+final class StoreGroupTest extends TestCase
 {
     public function testStoringGroupRequiresSuperAdminPermission(): void
     {

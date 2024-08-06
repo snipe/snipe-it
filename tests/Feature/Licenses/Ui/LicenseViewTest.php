@@ -7,7 +7,7 @@ use App\Models\Depreciation;
 use App\Models\User;
 use Tests\TestCase;
 
-class LicenseViewTest extends TestCase
+final class LicenseViewTest extends TestCase
 {
     public function testPermissionRequiredToViewLicense(): void
     {

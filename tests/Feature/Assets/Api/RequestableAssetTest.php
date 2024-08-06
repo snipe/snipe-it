@@ -7,7 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-class RequestableAssetTest extends TestCase
+final class RequestableAssetTest extends TestCase
 {
     public function testViewingRequestableAssetsRequiresCorrectPermission(): void
     {

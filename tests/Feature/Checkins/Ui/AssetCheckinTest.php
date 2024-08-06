@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class AssetCheckinTest extends TestCase
+final class AssetCheckinTest extends TestCase
 {
     public function testCheckingInAssetRequiresCorrectPermission(): void
     {

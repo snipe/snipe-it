@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class AccessoryCheckinTest extends TestCase
+final class AccessoryCheckinTest extends TestCase
 {
     public function testCheckingInAccessoryRequiresCorrectPermission(): void
     {

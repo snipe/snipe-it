@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Setting;
 
 
-class BrandingSettingsTest extends TestCase
+final class BrandingSettingsTest extends TestCase
 {
     public function testSiteNameIsRequired(): void
     {

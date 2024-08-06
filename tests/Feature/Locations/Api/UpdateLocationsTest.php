@@ -6,7 +6,7 @@ use App\Models\Location;
 use App\Models\User;
 use Tests\TestCase;
 
-class UpdateLocationsTest extends TestCase
+final class UpdateLocationsTest extends TestCase
 {
 
     public function testRequiresPermissionToEditLocation(): void

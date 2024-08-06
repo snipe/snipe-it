@@ -9,7 +9,7 @@ use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class AccessoryCheckoutTest extends TestCase
+final class AccessoryCheckoutTest extends TestCase
 {
     public function testCheckingOutAccessoryRequiresCorrectPermission(): void
     {

@@ -10,7 +10,7 @@ use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class NotificationTest extends TestCase
+final class NotificationTest extends TestCase
 {
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA(): void
     {

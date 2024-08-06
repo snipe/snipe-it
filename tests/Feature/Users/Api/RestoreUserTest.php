@@ -8,7 +8,7 @@ use App\Models\Location;
 use App\Models\User;
 use Tests\TestCase;
 
-class RestoreUserTest extends TestCase
+final class RestoreUserTest extends TestCase
 {
 
 

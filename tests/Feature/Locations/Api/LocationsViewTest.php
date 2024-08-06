@@ -7,7 +7,7 @@ use App\Models\Asset;
 use App\Models\User;
 use Tests\TestCase;
 
-class LocationsViewTest extends TestCase
+final class LocationsViewTest extends TestCase
 {
     public function testViewingLocationRequiresPermission(): void
     {

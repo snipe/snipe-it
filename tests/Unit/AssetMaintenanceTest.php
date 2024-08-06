@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use App\Models\AssetMaintenance;
 use Tests\TestCase;
 
-class AssetMaintenanceTest extends TestCase
+final class AssetMaintenanceTest extends TestCase
 {
     public function testZerosOutWarrantyIfBlank(): void
     {

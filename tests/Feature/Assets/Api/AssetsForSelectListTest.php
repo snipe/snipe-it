@@ -7,7 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-class AssetsForSelectListTest extends TestCase
+final class AssetsForSelectListTest extends TestCase
 {
     public function testAssetsCanBeSearchedForByAssetTag(): void
     {

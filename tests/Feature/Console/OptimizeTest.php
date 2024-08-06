@@ -4,7 +4,7 @@ namespace Tests\Feature\Console;
 
 use Tests\TestCase;
 
-class OptimizeTest extends TestCase
+final class OptimizeTest extends TestCase
 {
     public function testOptimizeSucceeds(): void
     {

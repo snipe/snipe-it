@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class AssetCheckoutTest extends TestCase
+final class AssetCheckoutTest extends TestCase
 {
     protected function setUp(): void
     {

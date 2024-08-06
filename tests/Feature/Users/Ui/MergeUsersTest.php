@@ -11,7 +11,7 @@ use App\Models\Actionlog;
 use Tests\TestCase;
 
 
-class MergeUsersTest extends TestCase
+final class MergeUsersTest extends TestCase
 {
     public function testAssetsAreTransferredOnUserMerge(): void
     {

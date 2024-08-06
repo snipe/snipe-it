@@ -7,7 +7,7 @@ use App\Models\Labels\FieldOption;
 use App\Models\User;
 use Tests\TestCase;
 
-class FieldOptionTest extends TestCase
+final class FieldOptionTest extends TestCase
 {
     public function testItDisplaysAssignedToProperly(): void
     {

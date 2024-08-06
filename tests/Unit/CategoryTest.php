@@ -6,7 +6,7 @@ use App\Models\AssetModel;
 use App\Models\Asset;
 use Tests\TestCase;
 
-class CategoryTest extends TestCase
+final class CategoryTest extends TestCase
 {
     public function testFailsEmptyValidation(): void
     {

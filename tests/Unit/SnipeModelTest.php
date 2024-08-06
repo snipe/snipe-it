@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use App\Models\SnipeModel;
 use Tests\TestCase;
 
-class SnipeModelTest extends TestCase
+final class SnipeModelTest extends TestCase
 {
     public function testSetsPurchaseDatesAppropriately(): void
     {

@@ -7,7 +7,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Tests\TestCase;
 
-class ConsumableViewTest extends TestCase
+final class ConsumableViewTest extends TestCase
 {
     public function testConsumableViewAdheresToCompanyScoping(): void
     {

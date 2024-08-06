@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use App\Models\Statuslabel;
 use Tests\TestCase;
 
-class StatuslabelTest extends TestCase
+final class StatuslabelTest extends TestCase
 {
     public function testRTDStatuslabelAdd(): void
     {

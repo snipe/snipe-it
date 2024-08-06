@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
-class AssetFilesTest extends TestCase
+final class AssetFilesTest extends TestCase
 {
     public function testAssetApiAcceptsFileUpload(): void
     {

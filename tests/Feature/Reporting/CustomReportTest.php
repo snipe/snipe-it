@@ -10,7 +10,7 @@ use League\Csv\Reader;
 use PHPUnit\Framework\Assert;
 use Tests\TestCase;
 
-class CustomReportTest extends TestCase
+final class CustomReportTest extends TestCase
 {
     protected function setUp(): void
     {

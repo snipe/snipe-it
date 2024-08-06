@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class IndexLocationsTest extends TestCase
+final class IndexLocationsTest extends TestCase
 {
     public function testViewingLocationIndexRequiresAuthentication(): void
     {

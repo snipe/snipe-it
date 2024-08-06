@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class IndexCategoriesTest extends TestCase
+final class IndexCategoriesTest extends TestCase
 {
 
     public function testViewingCategoryIndexRequiresPermission(): void

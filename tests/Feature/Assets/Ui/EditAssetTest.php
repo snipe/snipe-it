@@ -8,7 +8,7 @@ use App\Models\StatusLabel;
 use App\Models\User;
 use Tests\TestCase;
 
-class EditAssetTest extends TestCase
+final class EditAssetTest extends TestCase
 {
 
     public function testPermissionRequiredToViewLicense(): void

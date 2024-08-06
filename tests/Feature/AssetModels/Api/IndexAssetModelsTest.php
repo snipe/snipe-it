@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class IndexAssetModelsTest extends TestCase
+final class IndexAssetModelsTest extends TestCase
 {
     public function testViewingAssetModelIndexRequiresAuthentication(): void
     {

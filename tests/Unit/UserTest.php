@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use App\Models\User;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+final class UserTest extends TestCase
 {
     public function testFirstNameSplit(): void
     {

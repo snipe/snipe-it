@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\AssetModel;
 use Tests\TestCase;
 
-class AssetModelTest extends TestCase
+final class AssetModelTest extends TestCase
 {
     public function testAnAssetModelContainsAssets(): void
     {

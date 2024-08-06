@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Models\Company;
 use Tests\TestCase;
 
-class AccessoryTest extends TestCase
+final class AccessoryTest extends TestCase
 {
     public function testAnAccessoryBelongsToACompany(): void
     {

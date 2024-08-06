@@ -6,7 +6,7 @@ use App\Models\Component;
 use App\Models\User;
 use Tests\TestCase;
 
-class ComponentCheckinTest extends TestCase
+final class ComponentCheckinTest extends TestCase
 {
     public function testCheckingInComponentRequiresCorrectPermission(): void
     {

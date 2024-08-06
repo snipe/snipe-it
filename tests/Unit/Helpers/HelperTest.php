@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
-class HelperTest extends TestCase
+final class HelperTest extends TestCase
 {
     public function testDefaultChartColorsMethodHandlesHighValues(): void
     {

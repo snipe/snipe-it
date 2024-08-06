@@ -7,7 +7,7 @@ use App\Models\Ldap;
 use Tests\TestCase;
 
 #[Group('ldap')]
-class LdapTest extends TestCase
+final class LdapTest extends TestCase
 {
     use \phpmock\phpunit\PHPMock;
 
