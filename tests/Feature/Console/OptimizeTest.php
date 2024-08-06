@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 final class OptimizeTest extends TestCase
 {
-    public function testOptimizeSucceeds(): void
+    public function testOptimizeSucceeds()
     {
         $this->beforeApplicationDestroyed(function () {
             $this->artisan('config:clear');

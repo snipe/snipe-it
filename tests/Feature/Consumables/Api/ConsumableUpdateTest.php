@@ -10,7 +10,7 @@ use Tests\TestCase;
 final class ConsumableUpdateTest extends TestCase
 {
 
-    public function testCanUpdateConsumableViaPatchWithoutCategoryType(): void
+    public function testCanUpdateConsumableViaPatchWithoutCategoryType()
     {
         $consumable = Consumable::factory()->create();
 
@@ -28,7 +28,7 @@ final class ConsumableUpdateTest extends TestCase
 
     }
 
-    public function testCannotUpdateConsumableViaPatchWithInvalidCategoryType(): void
+    public function testCannotUpdateConsumableViaPatchWithInvalidCategoryType()
     {
         $category = Category::factory()->create(['category_type' => 'asset']);
         $consumable = Consumable::factory()->create();

@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 final class LocationTest extends TestCase
 {
-    public function testPassesIfNotSelfParent(): void
+    public function testPassesIfNotSelfParent()
     {
         $a = Location::factory()->make([
             'name' => 'Test Location',
@@ -17,7 +17,7 @@ final class LocationTest extends TestCase
         $this->assertTrue($a->isValid());
     }
 
-    public function testFailsIfSelfParent(): void
+    public function testFailsIfSelfParent()
     {
         $a = Location::factory()->make([
             'name' => 'Test Location',

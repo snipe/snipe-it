@@ -11,14 +11,14 @@ use Tests\TestCase;
 
 final class AccessoryCheckoutTest extends TestCase
 {
-    public function testCheckingOutAccessoryRequiresCorrectPermission(): void
+    public function testCheckingOutAccessoryRequiresCorrectPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testValidationWhenCheckingOutAccessory(): void
+    public function testValidationWhenCheckingOutAccessory()
     {
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()), [
@@ -27,7 +27,7 @@ final class AccessoryCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testAccessoryMustBeAvailableWhenCheckingOut(): void
+    public function testAccessoryMustBeAvailableWhenCheckingOut()
     {
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->withoutItemsRemaining()->create()), [
@@ -58,7 +58,7 @@ final class AccessoryCheckoutTest extends TestCase
             ->json();
     }
 
-    public function testAccessoryCanBeCheckedOutWithoutQty(): void
+    public function testAccessoryCanBeCheckedOutWithoutQty()
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
@@ -90,7 +90,7 @@ final class AccessoryCheckoutTest extends TestCase
         );
     }
 
-    public function testAccessoryCanBeCheckedOutWithQty(): void
+    public function testAccessoryCanBeCheckedOutWithQty()
     {
         $accessory = Accessory::factory()->create(['qty' => 20]);
         $user = User::factory()->create();
@@ -124,7 +124,7 @@ final class AccessoryCheckoutTest extends TestCase
         );
     }
 
-    public function testAccessoryCannotBeCheckedOutToInvalidUser(): void
+    public function testAccessoryCannotBeCheckedOutToInvalidUser()
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
@@ -143,7 +143,7 @@ final class AccessoryCheckoutTest extends TestCase
             $this->assertFalse($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
     }
 
-    public function testUserSentNotificationUponCheckout(): void
+    public function testUserSentNotificationUponCheckout()
     {
         Notification::fake();
 
@@ -159,7 +159,7 @@ final class AccessoryCheckoutTest extends TestCase
         Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
     }
 
-    public function testActionLogCreatedUponCheckout(): void
+    public function testActionLogCreatedUponCheckout()
     {
         $accessory = Accessory::factory()->create();
         $actor = User::factory()->checkoutAccessories()->create();

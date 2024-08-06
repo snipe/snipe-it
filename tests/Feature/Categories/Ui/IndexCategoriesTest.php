@@ -7,14 +7,14 @@ use Tests\TestCase;
 
 final class IndexCategoriesTest extends TestCase
 {
-    public function testPermissionRequiredToViewCategoryList(): void
+    public function testPermissionRequiredToViewCategoryList()
     {
         $this->actingAs(User::factory()->create())
             ->get(route('categories.index'))
             ->assertForbidden();
     }
 
-    public function testUserCanListCategories(): void
+    public function testUserCanListCategories()
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('categories.index'))

@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class ComponentTest extends TestCase
 {
-    public function testAComponentBelongsToACompany(): void
+    public function testAComponentBelongsToACompany()
     {
         $component = Component::factory()
             ->create(
@@ -20,14 +20,14 @@ final class ComponentTest extends TestCase
         $this->assertInstanceOf(Company::class, $component->company);
     }
 
-    public function testAComponentHasALocation(): void
+    public function testAComponentHasALocation()
     {
         $component = Component::factory()
             ->create(['location_id' => Location::factory()->create()->id]);
         $this->assertInstanceOf(Location::class, $component->location);
     }
 
-    public function testAComponentBelongsToACategory(): void
+    public function testAComponentBelongsToACategory()
     {
         $component = Component::factory()->ramCrucial4()
             ->create(

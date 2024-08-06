@@ -9,14 +9,14 @@ use Tests\TestCase;
 
 final class LocationsForSelectListTest extends TestCase
 {
-    public function testGettingLocationListRequiresProperPermission(): void
+    public function testGettingLocationListRequiresProperPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->getJson(route('api.locations.selectlist'))
             ->assertForbidden();
     }
 
-    public function testLocationsReturned(): void
+    public function testLocationsReturned()
     {
         Location::factory()->create();
 
@@ -35,7 +35,7 @@ final class LocationsForSelectListTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('results', 1)->etc());
     }
 
-    public function testLocationsAreReturnedWhenUserIsUpdatingTheirProfileAndHasPermissionToUpdateLocation(): void
+    public function testLocationsAreReturnedWhenUserIsUpdatingTheirProfileAndHasPermissionToUpdateLocation()
     {
         $this->actingAsForApi(User::factory()->canEditOwnLocation()->create())
             ->withHeader('referer', route('profile'))

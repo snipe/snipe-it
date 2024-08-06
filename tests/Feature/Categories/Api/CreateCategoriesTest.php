@@ -13,14 +13,14 @@ final class CreateCategoriesTest extends TestCase
 {
 
 
-    public function testRequiresPermissionToCreateCategory(): void
+    public function testRequiresPermissionToCreateCategory()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.categories.store'))
             ->assertForbidden();
     }
 
-    public function testCanCreateCategoryWithValidCategoryType(): void
+    public function testCanCreateCategoryWithValidCategoryType()
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.categories.store'), [
@@ -41,7 +41,7 @@ final class CreateCategoriesTest extends TestCase
         $this->assertEquals('accessory', $category->category_type);
     }
 
-    public function testCannotCreateCategoryWithoutCategoryType(): void
+    public function testCannotCreateCategoryWithoutCategoryType()
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.categories.store'), [
@@ -59,7 +59,7 @@ final class CreateCategoriesTest extends TestCase
 
     }
 
-    public function testCannotCreateCategoryWithInvalidCategoryType(): void
+    public function testCannotCreateCategoryWithInvalidCategoryType()
     {
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.categories.store'), [

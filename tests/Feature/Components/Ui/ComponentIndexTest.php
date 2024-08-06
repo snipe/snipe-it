@@ -7,14 +7,14 @@ use Tests\TestCase;
 
 final class ComponentIndexTest extends TestCase
 {
-    public function testPermissionRequiredToViewComponentsList(): void
+    public function testPermissionRequiredToViewComponentsList()
     {
         $this->actingAs(User::factory()->create())
             ->get(route('components.index'))
             ->assertForbidden();
     }
 
-    public function testUserCanListComponents(): void
+    public function testUserCanListComponents()
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('components.index'))

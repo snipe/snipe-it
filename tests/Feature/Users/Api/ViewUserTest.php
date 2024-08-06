@@ -11,7 +11,7 @@ use Tests\TestCase;
 final class ViewUserTest extends TestCase
 {
 
-    public function testCanReturnUser(): void
+    public function testCanReturnUser()
     {
         $user = User::factory()->create();
 

@@ -11,14 +11,14 @@ use Tests\TestCase;
 
 final class ConsumableCheckoutTest extends TestCase
 {
-    public function testCheckingOutConsumableRequiresCorrectPermission(): void
+    public function testCheckingOutConsumableRequiresCorrectPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.consumables.checkout', Consumable::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testValidationWhenCheckingOutConsumable(): void
+    public function testValidationWhenCheckingOutConsumable()
     {
         $this->actingAsForApi(User::factory()->checkoutConsumables()->create())
             ->postJson(route('api.consumables.checkout', Consumable::factory()->create()), [
@@ -27,7 +27,7 @@ final class ConsumableCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testConsumableMustBeAvailableWhenCheckingOut(): void
+    public function testConsumableMustBeAvailableWhenCheckingOut()
     {
         $this->actingAsForApi(User::factory()->checkoutConsumables()->create())
             ->postJson(route('api.consumables.checkout', Consumable::factory()->withoutItemsRemaining()->create()), [
@@ -36,7 +36,7 @@ final class ConsumableCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testConsumableCanBeCheckedOut(): void
+    public function testConsumableCanBeCheckedOut()
     {
         $consumable = Consumable::factory()->create();
         $user = User::factory()->create();
@@ -49,7 +49,7 @@ final class ConsumableCheckoutTest extends TestCase
         $this->assertTrue($user->consumables->contains($consumable));
     }
 
-    public function testUserSentNotificationUponCheckout(): void
+    public function testUserSentNotificationUponCheckout()
     {
         Notification::fake();
 
@@ -65,7 +65,7 @@ final class ConsumableCheckoutTest extends TestCase
         Notification::assertSentTo($user, CheckoutConsumableNotification::class);
     }
 
-    public function testActionLogCreatedUponCheckout(): void
+    public function testActionLogCreatedUponCheckout()
     {$consumable = Consumable::factory()->create();
         $actor = User::factory()->checkoutConsumables()->create();
         $user = User::factory()->create();

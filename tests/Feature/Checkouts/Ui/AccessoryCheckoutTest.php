@@ -13,14 +13,14 @@ use Tests\TestCase;
 
 final class AccessoryCheckoutTest extends TestCase
 {
-    public function testCheckingOutAccessoryRequiresCorrectPermission(): void
+    public function testCheckingOutAccessoryRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('accessories.checkout.store', Accessory::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testValidationWhenCheckingOutAccessory(): void
+    public function testValidationWhenCheckingOutAccessory()
     {
         $accessory = Accessory::factory()->create();
         $response = $this->actingAs(User::factory()->superuser()->create())
@@ -35,7 +35,7 @@ final class AccessoryCheckoutTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
-    public function testAccessoryMustHaveAvailableItemsForCheckoutWhenCheckingOut(): void
+    public function testAccessoryMustHaveAvailableItemsForCheckoutWhenCheckingOut()
     {
 
         $accessory = Accessory::factory()->withoutItemsRemaining()->create();
@@ -52,7 +52,7 @@ final class AccessoryCheckoutTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
-    public function testAccessoryCanBeCheckedOutWithoutQuantity(): void
+    public function testAccessoryCanBeCheckedOutWithoutQuantity()
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
@@ -76,7 +76,7 @@ final class AccessoryCheckoutTest extends TestCase
         ]);
     }
 
-    public function testAccessoryCanBeCheckedOutWithQuantity(): void
+    public function testAccessoryCanBeCheckedOutWithQuantity()
     {
         $accessory = Accessory::factory()->create(['qty'=>5]);
         $user = User::factory()->create();
@@ -102,7 +102,7 @@ final class AccessoryCheckoutTest extends TestCase
         ]);
     }
 
-    public function testAccessoryCanBeCheckedOutToLocationWithQuantity(): void
+    public function testAccessoryCanBeCheckedOutToLocationWithQuantity()
     {
         $accessory = Accessory::factory()->create(['qty'=>5]);
         $location = Location::factory()->create();
@@ -128,7 +128,7 @@ final class AccessoryCheckoutTest extends TestCase
         ]);
     }
 
-    public function testAccessoryCanBeCheckedOutToAssetWithQuantity(): void
+    public function testAccessoryCanBeCheckedOutToAssetWithQuantity()
     {
         $accessory = Accessory::factory()->create(['qty'=>5]);
         $asset = Asset::factory()->create();
@@ -154,7 +154,7 @@ final class AccessoryCheckoutTest extends TestCase
         ]);
     }
 
-    public function testUserSentNotificationUponCheckout(): void
+    public function testUserSentNotificationUponCheckout()
     {
         Notification::fake();
 
@@ -171,7 +171,7 @@ final class AccessoryCheckoutTest extends TestCase
         Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
     }
 
-    public function testActionLogCreatedUponCheckout(): void
+    public function testActionLogCreatedUponCheckout()
     {
         $accessory = Accessory::factory()->create();
         $actor = User::factory()->checkoutAccessories()->create();
@@ -200,7 +200,7 @@ final class AccessoryCheckoutTest extends TestCase
         );
     }
 
-    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex(): void
+    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
     {
         $accessory = Accessory::factory()->create();
 
@@ -216,7 +216,7 @@ final class AccessoryCheckoutTest extends TestCase
             ->assertRedirect(route('accessories.index'));
     }
 
-    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem(): void
+    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
     {
         $accessory = Accessory::factory()->create();
 
@@ -233,7 +233,7 @@ final class AccessoryCheckoutTest extends TestCase
             ->assertRedirect(route('accessories.show', ['accessory' => $accessory->id]));
     }
 
-    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget(): void
+    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget()
     {
         $user = User::factory()->create();
         $accessory = Accessory::factory()->create();

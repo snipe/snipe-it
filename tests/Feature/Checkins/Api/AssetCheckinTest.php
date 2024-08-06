@@ -15,28 +15,28 @@ use Tests\TestCase;
 
 final class AssetCheckinTest extends TestCase
 {
-    public function testCheckingInAssetRequiresCorrectPermission(): void
+    public function testCheckingInAssetRequiresCorrectPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.asset.checkin', Asset::factory()->assignedToUser()->create()))
             ->assertForbidden();
     }
 
-    public function testCannotCheckInNonExistentAsset(): void
+    public function testCannotCheckInNonExistentAsset()
     {
         $this->actingAsForApi(User::factory()->checkinAssets()->create())
             ->postJson(route('api.asset.checkin', ['id' => 'does-not-exist']))
             ->assertStatusMessageIs('error');
     }
 
-    public function testCannotCheckInAssetThatIsNotCheckedOut(): void
+    public function testCannotCheckInAssetThatIsNotCheckedOut()
     {
         $this->actingAsForApi(User::factory()->checkinAssets()->create())
             ->postJson(route('api.asset.checkin', Asset::factory()->create()->id))
             ->assertStatusMessageIs('error');
     }
 
-    public function testAssetCanBeCheckedIn(): void
+    public function testAssetCanBeCheckedIn()
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
@@ -76,7 +76,7 @@ final class AssetCheckinTest extends TestCase
         }, 1);
     }
 
-    public function testLocationIsSetToRTDLocationByDefaultUponCheckin(): void
+    public function testLocationIsSetToRTDLocationByDefaultUponCheckin()
     {
         $rtdLocation = Location::factory()->create();
         $asset = Asset::factory()->assignedToUser()->create([
@@ -90,7 +90,7 @@ final class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->refresh()->location()->is($rtdLocation));
     }
 
-    public function testDefaultLocationCanBeUpdatedUponCheckin(): void
+    public function testDefaultLocationCanBeUpdatedUponCheckin()
     {
         $location = Location::factory()->create();
         $asset = Asset::factory()->assignedToUser()->create();
@@ -104,7 +104,7 @@ final class AssetCheckinTest extends TestCase
         $this->assertTrue($asset->refresh()->defaultLoc()->is($location));
     }
 
-    public function testAssetsLicenseSeatsAreClearedUponCheckin(): void
+    public function testAssetsLicenseSeatsAreClearedUponCheckin()
     {
         $asset = Asset::factory()->assignedToUser()->create();
         LicenseSeat::factory()->assignedToUser()->for($asset)->create();
@@ -117,7 +117,7 @@ final class AssetCheckinTest extends TestCase
         $this->assertNull($asset->refresh()->licenseseats->first()->assigned_to);
     }
 
-    public function testLegacyLocationValuesSetToZeroAreUpdated(): void
+    public function testLegacyLocationValuesSetToZeroAreUpdated()
     {
         $asset = Asset::factory()->canBeInvalidUponCreation()->assignedToUser()->create([
             'rtd_location_id' => 0,
@@ -131,7 +131,7 @@ final class AssetCheckinTest extends TestCase
         $this->assertEquals($asset->location_id, $asset->rtd_location_id);
     }
 
-    public function testPendingCheckoutAcceptancesAreClearedUponCheckin(): void
+    public function testPendingCheckoutAcceptancesAreClearedUponCheckin()
     {
         $asset = Asset::factory()->assignedToUser()->create();
 
@@ -143,7 +143,7 @@ final class AssetCheckinTest extends TestCase
         $this->assertFalse($acceptance->exists(), 'Acceptance was not deleted');
     }
 
-    public function testCheckinTimeAndActionLogNoteCanBeSet(): void
+    public function testCheckinTimeAndActionLogNoteCanBeSet()
     {
         Event::fake();
 

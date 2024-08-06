@@ -10,19 +10,19 @@ use Tests\TestCase;
 
 final class IndexAssetModelsTest extends TestCase
 {
-    public function testViewingAssetModelIndexRequiresAuthentication(): void
+    public function testViewingAssetModelIndexRequiresAuthentication()
     {
         $this->getJson(route('api.models.index'))->assertRedirect();
     }
 
-    public function testViewingAssetModelIndexRequiresPermission(): void
+    public function testViewingAssetModelIndexRequiresPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->getJson(route('api.models.index'))
             ->assertForbidden();
     }
 
-    public function testAssetModelIndexReturnsExpectedAssetModels(): void
+    public function testAssetModelIndexReturnsExpectedAssetModels()
     {
         AssetModel::factory()->count(3)->create();
 
@@ -42,7 +42,7 @@ final class IndexAssetModelsTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
 
-    public function testAssetModelIndexSearchReturnsExpectedAssetModels(): void
+    public function testAssetModelIndexSearchReturnsExpectedAssetModels()
     {
         AssetModel::factory()->count(3)->create();
         AssetModel::factory()->count(1)->create(['name' => 'Test Model']);

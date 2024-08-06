@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 final class CategoryTest extends TestCase
 {
-    public function testFailsEmptyValidation(): void
+    public function testFailsEmptyValidation()
     {
         // An Asset requires a name, a qty, and a category_id.
         $a = Category::create();
@@ -24,7 +24,7 @@ final class CategoryTest extends TestCase
         }
     }
 
-    public function testACategoryCanHaveAssets(): void
+    public function testACategoryCanHaveAssets()
     {
        $category = Category::factory()->assetDesktopCategory()->create();
 

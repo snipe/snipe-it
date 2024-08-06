@@ -10,7 +10,7 @@ use Tests\TestCase;
 final class UpdateAssetModelsTest extends TestCase
 {
 
-    public function testRequiresPermissionToEditAssetModel(): void
+    public function testRequiresPermissionToEditAssetModel()
     {
         $model = AssetModel::factory()->create();
         $this->actingAsForApi(User::factory()->create())
@@ -18,7 +18,7 @@ final class UpdateAssetModelsTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testCanUpdateAssetModelViaPatch(): void
+    public function testCanUpdateAssetModelViaPatch()
     {
         $model = AssetModel::factory()->create();
 
@@ -37,7 +37,7 @@ final class UpdateAssetModelsTest extends TestCase
 
     }
 
-    public function testCannotUpdateAssetModelViaPatchWithAccessoryCategory(): void
+    public function testCannotUpdateAssetModelViaPatchWithAccessoryCategory()
     {
         $category = Category::factory()->forAccessories()->create();
         $model = AssetModel::factory()->create();
@@ -57,7 +57,7 @@ final class UpdateAssetModelsTest extends TestCase
         $this->assertNotEquals('category_id', $category->id, 'Category ID was not updated');
     }
 
-    public function testCannotUpdateAssetModelViaPatchWithLicenseCategory(): void
+    public function testCannotUpdateAssetModelViaPatchWithLicenseCategory()
     {
         $category = Category::factory()->forLicenses()->create();
         $model = AssetModel::factory()->create();
@@ -77,7 +77,7 @@ final class UpdateAssetModelsTest extends TestCase
         $this->assertNotEquals('category_id', $category->id, 'Category ID was not updated');
     }
 
-    public function testCannotUpdateAssetModelViaPatchWithConsumableCategory(): void
+    public function testCannotUpdateAssetModelViaPatchWithConsumableCategory()
     {
         $category = Category::factory()->forConsumables()->create();
         $model = AssetModel::factory()->create();
@@ -97,7 +97,7 @@ final class UpdateAssetModelsTest extends TestCase
         $this->assertNotEquals('category_id', $category->id, 'Category ID was not updated');
     }
 
-    public function testCannotUpdateAssetModelViaPatchWithComponentCategory(): void
+    public function testCannotUpdateAssetModelViaPatchWithComponentCategory()
     {
         $category = Category::factory()->forComponents()->create();
         $model = AssetModel::factory()->create();

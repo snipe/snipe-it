@@ -47,7 +47,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
         ];
     }
 
-    public function testAccessoryCheckoutSendsSlackNotificationWhenSettingEnabled(): void
+    public function testAccessoryCheckoutSendsSlackNotificationWhenSettingEnabled()
     {
         $this->settings->enableSlackWebhook();
 
@@ -59,7 +59,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
         $this->assertSlackNotificationSent(CheckoutAccessoryNotification::class);
     }
 
-    public function testAccessoryCheckoutDoesNotSendSlackNotificationWhenSettingDisabled(): void
+    public function testAccessoryCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
     {
         $this->settings->disableSlackWebhook();
 
@@ -72,7 +72,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
     }
 
     #[DataProvider('assetCheckoutTargets')]
-    public function testAssetCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget): void
+    public function testAssetCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         $this->settings->enableSlackWebhook();
 
@@ -85,7 +85,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
     }
 
     #[DataProvider('assetCheckoutTargets')]
-    public function testAssetCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget): void
+    public function testAssetCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         $this->settings->disableSlackWebhook();
 
@@ -97,7 +97,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
         $this->assertNoSlackNotificationSent(CheckoutAssetNotification::class);
     }
 
-    public function testComponentCheckoutDoesNotSendSlackNotification(): void
+    public function testComponentCheckoutDoesNotSendSlackNotification()
     {
         $this->settings->enableSlackWebhook();
 
@@ -109,7 +109,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
         Notification::assertNothingSent();
     }
 
-    public function testConsumableCheckoutSendsSlackNotificationWhenSettingEnabled(): void
+    public function testConsumableCheckoutSendsSlackNotificationWhenSettingEnabled()
     {
         $this->settings->enableSlackWebhook();
 
@@ -121,7 +121,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
         $this->assertSlackNotificationSent(CheckoutConsumableNotification::class);
     }
 
-    public function testConsumableCheckoutDoesNotSendSlackNotificationWhenSettingDisabled(): void
+    public function testConsumableCheckoutDoesNotSendSlackNotificationWhenSettingDisabled()
     {
         $this->settings->disableSlackWebhook();
 
@@ -134,7 +134,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
     }
 
     #[DataProvider('licenseCheckoutTargets')]
-    public function testLicenseCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget): void
+    public function testLicenseCheckoutSendsSlackNotificationWhenSettingEnabled($checkoutTarget)
     {
         $this->settings->enableSlackWebhook();
 
@@ -147,7 +147,7 @@ final class SlackNotificationsUponCheckoutTest extends TestCase
     }
 
     #[DataProvider('licenseCheckoutTargets')]
-    public function testLicenseCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget): void
+    public function testLicenseCheckoutDoesNotSendSlackNotificationWhenSettingDisabled($checkoutTarget)
     {
         $this->settings->disableSlackWebhook();
 

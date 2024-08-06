@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class LicenseCheckoutTest extends TestCase
 {
-    public function testNotesAreStoredInActionLogOnCheckoutToAsset(): void
+    public function testNotesAreStoredInActionLogOnCheckoutToAsset()
     {
         $admin = User::factory()->superuser()->create();
         $asset = Asset::factory()->create();
@@ -34,7 +34,7 @@ final class LicenseCheckoutTest extends TestCase
         ]);
     }
 
-    public function testNotesAreStoredInActionLogOnCheckoutToUser(): void
+    public function testNotesAreStoredInActionLogOnCheckoutToUser()
     {
         $admin = User::factory()->superuser()->create();
         $licenseSeat = LicenseSeat::factory()->create();
@@ -57,7 +57,7 @@ final class LicenseCheckoutTest extends TestCase
         ]);
     }
 
-    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex(): void
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
     {
         $license = License::factory()->create();
 
@@ -72,7 +72,7 @@ final class LicenseCheckoutTest extends TestCase
             ->assertRedirect(route('licenses.index'));
     }
 
-    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem(): void
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
     {
         $license = License::factory()->create();
 
@@ -86,7 +86,7 @@ final class LicenseCheckoutTest extends TestCase
             ->assertRedirect(route('licenses.show', ['license' => $license->id]));
     }
 
-    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsUserTarget(): void
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsUserTarget()
     {
         $user = User::factory()->create();
         $license = License::factory()->create();
@@ -100,7 +100,7 @@ final class LicenseCheckoutTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('users.show', ['user' => $user->id]));
     }
-    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsAssetTarget(): void
+    public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsAssetTarget()
     {
         $asset = Asset::factory()->create();
         $license = License::factory()->create();

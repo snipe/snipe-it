@@ -10,7 +10,7 @@ use Tests\TestCase;
 final class UpdateDepartmentsTest extends TestCase
 {
 
-    public function testRequiresPermissionToEditDepartment(): void
+    public function testRequiresPermissionToEditDepartment()
     {
         $department = Department::factory()->create();
         $this->actingAsForApi(User::factory()->create())
@@ -18,7 +18,7 @@ final class UpdateDepartmentsTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testCanUpdateDepartmentViaPatch(): void
+    public function testCanUpdateDepartmentViaPatch()
     {
         $department = Department::factory()->create();
 

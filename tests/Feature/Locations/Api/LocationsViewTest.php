@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class LocationsViewTest extends TestCase
 {
-    public function testViewingLocationRequiresPermission(): void
+    public function testViewingLocationRequiresPermission()
     {
         $location = Location::factory()->create();
         $this->actingAsForApi(User::factory()->create())
@@ -17,7 +17,7 @@ final class LocationsViewTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testViewingLocationAssetIndexRequiresPermission(): void
+    public function testViewingLocationAssetIndexRequiresPermission()
     {
         $location = Location::factory()->create();
         $this->actingAsForApi(User::factory()->create())
@@ -25,7 +25,7 @@ final class LocationsViewTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testViewingLocationAssetIndex(): void
+    public function testViewingLocationAssetIndex()
     {
         $location = Location::factory()->create();
         Asset::factory()->count(3)->assignedToLocation($location)->create();

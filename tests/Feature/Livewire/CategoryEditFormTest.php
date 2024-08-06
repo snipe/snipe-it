@@ -8,12 +8,12 @@ use Tests\TestCase;
 
 final class CategoryEditFormTest extends TestCase
 {
-    public function testTheComponentCanRender(): void
+    public function testTheComponentCanRender()
     {
         Livewire::test(CategoryEditForm::class)->assertStatus(200);
     }
 
-    public function testSendEmailCheckboxIsCheckedOnLoadWhenSendEmailIsExistingSetting(): void
+    public function testSendEmailCheckboxIsCheckedOnLoadWhenSendEmailIsExistingSetting()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => true,
@@ -22,7 +22,7 @@ final class CategoryEditFormTest extends TestCase
         ])->assertSet('sendCheckInEmail', true);
     }
 
-    public function testSendEmailCheckboxIsCheckedOnLoadWhenCategoryEulaSet(): void
+    public function testSendEmailCheckboxIsCheckedOnLoadWhenCategoryEulaSet()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,
@@ -31,7 +31,7 @@ final class CategoryEditFormTest extends TestCase
         ])->assertSet('sendCheckInEmail', true);
     }
 
-    public function testSendEmailCheckboxIsCheckedOnLoadWhenUsingDefaultEula(): void
+    public function testSendEmailCheckboxIsCheckedOnLoadWhenUsingDefaultEula()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,
@@ -40,7 +40,7 @@ final class CategoryEditFormTest extends TestCase
         ])->assertSet('sendCheckInEmail', true);
     }
 
-    public function testSendEmailCheckBoxIsUncheckedOnLoadWhenSendEmailIsFalseNoCategoryEulaSetAndNotUsingDefaultEula(): void
+    public function testSendEmailCheckBoxIsUncheckedOnLoadWhenSendEmailIsFalseNoCategoryEulaSetAndNotUsingDefaultEula()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,
@@ -49,7 +49,7 @@ final class CategoryEditFormTest extends TestCase
         ])->assertSet('sendCheckInEmail', false);
     }
 
-    public function testSendEmailCheckboxIsCheckedWhenCategoryEulaEntered(): void
+    public function testSendEmailCheckboxIsCheckedWhenCategoryEulaEntered()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,
@@ -59,7 +59,7 @@ final class CategoryEditFormTest extends TestCase
             ->assertSet('sendCheckInEmail', true);
     }
 
-    public function testSendEmailCheckboxCheckedAndDisabledAndEulaTextDisabledWhenUseDefaultEulaSelected(): void
+    public function testSendEmailCheckboxCheckedAndDisabledAndEulaTextDisabledWhenUseDefaultEulaSelected()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,
@@ -71,7 +71,7 @@ final class CategoryEditFormTest extends TestCase
             ->assertSet('sendCheckInEmailDisabled', true);
     }
 
-    public function testSendEmailCheckboxEnabledAndSetToOriginalValueWhenNoCategoryEulaAndNotUsingGlobalEula(): void
+    public function testSendEmailCheckboxEnabledAndSetToOriginalValueWhenNoCategoryEulaAndNotUsingGlobalEula()
     {
         Livewire::test(CategoryEditForm::class, [
             'eulaText' => 'Some Content',
@@ -94,7 +94,7 @@ final class CategoryEditFormTest extends TestCase
             ->assertSet('sendCheckInEmailDisabled', false);
     }
 
-    public function testEulaFieldEnabledOnLoadWhenNotUsingDefaultEula(): void
+    public function testEulaFieldEnabledOnLoadWhenNotUsingDefaultEula()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,

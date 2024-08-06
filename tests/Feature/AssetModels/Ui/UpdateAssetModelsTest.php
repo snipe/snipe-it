@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class UpdateAssetModelsTest extends TestCase
 {
-    public function testPermissionRequiredToStoreAssetModel(): void
+    public function testPermissionRequiredToStoreAssetModel()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('models.store'), [
@@ -20,7 +20,7 @@ final class UpdateAssetModelsTest extends TestCase
             ->assertForbidden();
     }
     
-    public function testUserCanEditAssetModels(): void
+    public function testUserCanEditAssetModels()
     {
         $category = Category::factory()->forAssets()->create();
         $model = AssetModel::factory()->create(['name' => 'Test Model', 'category_id' => $category->id]);
@@ -40,7 +40,7 @@ final class UpdateAssetModelsTest extends TestCase
 
     }
 
-    public function testUserCannotChangeAssetModelCategoryType(): void
+    public function testUserCannotChangeAssetModelCategoryType()
     {
         $category = Category::factory()->forAssets()->create();
         $model = AssetModel::factory()->create(['name' => 'Test Model', 'category_id' => $category->id]);

@@ -10,7 +10,7 @@ use App\Models\Setting;
 
 final class AssetTest extends TestCase
 {
-    public function testAutoIncrement(): void
+    public function testAutoIncrement()
     {
         $this->settings->enableAutoIncrement();
 
@@ -22,7 +22,7 @@ final class AssetTest extends TestCase
 
     }
 
-    public function testAutoIncrementCollision(): void
+    public function testAutoIncrementCollision()
     {
         $this->settings->enableAutoIncrement();
 
@@ -34,7 +34,7 @@ final class AssetTest extends TestCase
         $this->assertFalse($b->save());
     }
 
-    public function testAutoIncrementDouble(): void
+    public function testAutoIncrementDouble()
     {
         // make one asset with the autoincrement *ONE* higher than the next auto-increment
         // make sure you can then still make another
@@ -53,7 +53,7 @@ final class AssetTest extends TestCase
         $this->assertEquals($c->asset_tag, $final_number);
     }
 
-    public function testAutoIncrementGapAndBackfill(): void
+    public function testAutoIncrementGapAndBackfill()
     {
         // make one asset 3 higher than the next auto-increment
         // manually make one that's 1 lower than that
@@ -82,7 +82,7 @@ final class AssetTest extends TestCase
         $this->assertEquals($final->asset_tag, $final_result);
     }
 
-    public function testPrefixlessAutoincrementBackfill(): void
+    public function testPrefixlessAutoincrementBackfill()
     {
         // TODO: COPYPASTA FROM above, is there a way to still run this test but not have it be so duplicative?
         $this->settings->enableAutoIncrement()->set(['auto_increment_prefix' => '']);
@@ -109,7 +109,7 @@ final class AssetTest extends TestCase
         $this->assertEquals($final->asset_tag, $final_result);
     }
 
-    public function testUnzerofilledPrefixlessAutoincrementBackfill(): void
+    public function testUnzerofilledPrefixlessAutoincrementBackfill()
     {
         // TODO: COPYPASTA FROM above (AGAIN), is there a way to still run this test but not have it be so duplicative?
         $this->settings->enableAutoIncrement()->set(['auto_increment_prefix' => '','zerofill_count' => 0]);
@@ -136,7 +136,7 @@ final class AssetTest extends TestCase
         $this->assertEquals($final->asset_tag, $final_result);
     }
 
-    public function testAutoIncrementBIG(): void
+    public function testAutoIncrementBIG()
     {
         $this->settings->enableAutoIncrement();
 
@@ -153,7 +153,7 @@ final class AssetTest extends TestCase
         $this->assertEquals(Setting::getSettings()->next_auto_tag_base, $matches[0] + 1, "Next auto increment number should be the last normally-saved one plus one, but isn't");
     }
 
-    public function testAutoIncrementAlmostBIG(): void
+    public function testAutoIncrementAlmostBIG()
     {
         // TODO: this looks pretty close to the one above, could we maybe squish them together?
         $this->settings->enableAutoIncrement();
@@ -170,7 +170,7 @@ final class AssetTest extends TestCase
     }
 
 
-    public function testWarrantyExpiresAttribute(): void
+    public function testWarrantyExpiresAttribute()
     {
 
         $asset = Asset::factory()

@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 final class AssetMaintenanceTest extends TestCase
 {
-    public function testZerosOutWarrantyIfBlank(): void
+    public function testZerosOutWarrantyIfBlank()
     {
         $c = new AssetMaintenance;
         $c->is_warranty = '';
@@ -15,7 +15,7 @@ final class AssetMaintenanceTest extends TestCase
         $this->assertTrue($c->is_warranty == 4);
     }
 
-    public function testSetsCostsAppropriately(): void
+    public function testSetsCostsAppropriately()
     {
         $c = new AssetMaintenance();
         $c->cost = '0.00';
@@ -26,7 +26,7 @@ final class AssetMaintenanceTest extends TestCase
         $this->assertTrue($c->cost === 9.5);
     }
 
-    public function testNullsOutNotesIfBlank(): void
+    public function testNullsOutNotesIfBlank()
     {
         $c = new AssetMaintenance;
         $c->notes = '';
@@ -35,7 +35,7 @@ final class AssetMaintenanceTest extends TestCase
         $this->assertTrue($c->notes === 'This is a long note');
     }
 
-    public function testNullsOutCompletionDateIfBlankOrInvalid(): void
+    public function testNullsOutCompletionDateIfBlankOrInvalid()
     {
         $c = new AssetMaintenance;
         $c->completion_date = '';

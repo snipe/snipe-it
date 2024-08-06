@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 final class MergeUsersTest extends TestCase
 {
-    public function testAssetsAreTransferredOnUserMerge(): void
+    public function testAssetsAreTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -39,7 +39,7 @@ final class MergeUsersTest extends TestCase
 
     }
 
-    public function testLicensesAreTransferredOnUserMerge(): void
+    public function testLicensesAreTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -67,7 +67,7 @@ final class MergeUsersTest extends TestCase
 
     }
 
-    public function testAccessoriesTransferredOnUserMerge(): void
+    public function testAccessoriesTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -95,7 +95,7 @@ final class MergeUsersTest extends TestCase
 
     }
 
-    public function testConsumablesTransferredOnUserMerge(): void
+    public function testConsumablesTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -123,7 +123,7 @@ final class MergeUsersTest extends TestCase
 
     }
 
-    public function testFilesAreTransferredOnUserMerge(): void
+    public function testFilesAreTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -151,7 +151,7 @@ final class MergeUsersTest extends TestCase
 
     }
 
-    public function testAcceptancesAreTransferredOnUserMerge(): void
+    public function testAcceptancesAreTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -179,7 +179,7 @@ final class MergeUsersTest extends TestCase
 
     }
 
-    public function testUserUpdateHistoryIsTransferredOnUserMerge(): void
+    public function testUserUpdateHistoryIsTransferredOnUserMerge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();

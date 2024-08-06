@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class CreateDepartmentsTest extends TestCase
 {
-    public function testPermissionRequiredToCreateDepartment(): void
+    public function testPermissionRequiredToCreateDepartment()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('departments.store'), [
@@ -19,7 +19,7 @@ final class CreateDepartmentsTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanCreateDepartments(): void
+    public function testUserCanCreateDepartments()
     {
         $this->assertFalse(Department::where('name', 'Test Department')->exists());
 

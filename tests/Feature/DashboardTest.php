@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 final class DashboardTest extends TestCase
 {
-    public function testUsersWithoutAdminAccessAreRedirected(): void
+    public function testUsersWithoutAdminAccessAreRedirected()
     {
         $this->actingAs(User::factory()->create())
             ->get(route('home'))

@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 final class LicenseCheckinTest extends TestCase
 {
-    public function testCheckingInLicenseRequiresCorrectPermission(): void
+    public function testCheckingInLicenseRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('licenses.checkin.save', [

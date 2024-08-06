@@ -12,7 +12,7 @@ final class RestoreUserTest extends TestCase
 {
 
 
-    public function testErrorReturnedViaApiIfUserDoesNotExist(): void
+    public function testErrorReturnedViaApiIfUserDoesNotExist()
     {
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
             ->postJson(route('api.users.restore', 'invalid-id'))
@@ -22,7 +22,7 @@ final class RestoreUserTest extends TestCase
             ->json();
     }
 
-    public function testErrorReturnedViaApiIfUserIsNotDeleted(): void
+    public function testErrorReturnedViaApiIfUserIsNotDeleted()
     {
         $user = User::factory()->create();
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
@@ -34,7 +34,7 @@ final class RestoreUserTest extends TestCase
     }
 
 
-    public function testDeniedPermissionsForRestoringUserViaApi(): void
+    public function testDeniedPermissionsForRestoringUserViaApi()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.users.restore', User::factory()->deletedUser()->create()))
@@ -42,7 +42,7 @@ final class RestoreUserTest extends TestCase
             ->json();
     }
 
-    public function testSuccessPermissionsForRestoringUserViaApi(): void
+    public function testSuccessPermissionsForRestoringUserViaApi()
     {
         $deleted_user = User::factory()->deletedUser()->create();
 
@@ -57,7 +57,7 @@ final class RestoreUserTest extends TestCase
         $this->assertNull($deleted_user->deleted_at);
     }
 
-    public function testPermissionsForRestoringIfNotInSameCompanyAndNotSuperadmin(): void
+    public function testPermissionsForRestoringIfNotInSameCompanyAndNotSuperadmin()
     {
         $this->settings->enableMultipleFullCompanySupport();
 

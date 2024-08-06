@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class AssetFilesTest extends TestCase
 {
-    public function testAssetApiAcceptsFileUpload(): void
+    public function testAssetApiAcceptsFileUpload()
     {
         // Upload a file to an asset
 
@@ -28,7 +28,7 @@ final class AssetFilesTest extends TestCase
 	       ->assertOk();
     }
 
-    public function testAssetApiListsFiles(): void
+    public function testAssetApiListsFiles()
     {
         // List all files on an asset
         
@@ -50,7 +50,7 @@ final class AssetFilesTest extends TestCase
 		]);
     }
 
-    public function testAssetApiDownloadsFile(): void
+    public function testAssetApiDownloadsFile()
     {
         // Download a file from an asset
 
@@ -84,7 +84,7 @@ final class AssetFilesTest extends TestCase
 	       ->assertOk();
     }
 
-    public function testAssetApiDeletesFile(): void
+    public function testAssetApiDeletesFile()
     {
         // Delete a file from an asset
 

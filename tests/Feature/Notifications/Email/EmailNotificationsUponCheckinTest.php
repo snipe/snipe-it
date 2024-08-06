@@ -20,7 +20,7 @@ final class EmailNotificationsUponCheckinTest extends TestCase
         Notification::fake();
     }
 
-    public function testCheckInEmailSentToUserIfSettingEnabled(): void
+    public function testCheckInEmailSentToUserIfSettingEnabled()
     {
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
@@ -37,7 +37,7 @@ final class EmailNotificationsUponCheckinTest extends TestCase
         );
     }
 
-    public function testCheckInEmailNotSentToUserIfSettingDisabled(): void
+    public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();

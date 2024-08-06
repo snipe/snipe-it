@@ -16,7 +16,7 @@ final class AccessoryAcceptanceTest extends TestCase
     /**
      * This can be absorbed into a bigger test
      */
-    public function testUsersNameIsIncludedInAccessoryAcceptedNotification(): void
+    public function testUsersNameIsIncludedInAccessoryAcceptedNotification()
     {
         Notification::fake();
 
@@ -49,7 +49,7 @@ final class AccessoryAcceptanceTest extends TestCase
     /**
      * This can be absorbed into a bigger test
      */
-    public function testUsersNameIsIncludedInAccessoryDeclinedNotification(): void
+    public function testUsersNameIsIncludedInAccessoryDeclinedNotification()
     {
         Notification::fake();
 
@@ -79,7 +79,7 @@ final class AccessoryAcceptanceTest extends TestCase
         );
     }
 
-    public function testUserIsNotAbleToAcceptAnAssetAssignedToADifferentUser(): void
+    public function testUserIsNotAbleToAcceptAnAssetAssignedToADifferentUser()
     {
         Notification::fake();
 

@@ -12,7 +12,7 @@ use App\Models\Setting;
 
 final class BrandingSettingsTest extends TestCase
 {
-    public function testSiteNameIsRequired(): void
+    public function testSiteNameIsRequired()
     {
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
@@ -25,7 +25,7 @@ final class BrandingSettingsTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
-    public function testSiteNameCanBeSaved(): void
+    public function testSiteNameCanBeSaved()
     {
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->post(route('settings.branding.save', ['site_name' => 'My Awesome Site']))
@@ -38,7 +38,7 @@ final class BrandingSettingsTest extends TestCase
     }
 
 
-    public function testLogoCanBeUploaded(): void
+    public function testLogoCanBeUploaded()
     {
         Storage::fake('public');
         $setting = Setting::factory()->create(['logo' => null]);
@@ -58,7 +58,7 @@ final class BrandingSettingsTest extends TestCase
         Storage::disk('public')->assertExists($setting->logo);
     }
 
-    public function testLogoCanBeDeleted(): void
+    public function testLogoCanBeDeleted()
     {
         Storage::fake('public');
 
@@ -82,7 +82,7 @@ final class BrandingSettingsTest extends TestCase
         //Storage::disk('public')->assertMissing($original_file);
     }
 
-    public function testEmailLogoCanBeUploaded(): void
+    public function testEmailLogoCanBeUploaded()
     {
         Storage::fake('public');
 
@@ -108,7 +108,7 @@ final class BrandingSettingsTest extends TestCase
         // Storage::disk('public')->assertMissing($original_file);
     }
 
-    public function testEmailLogoCanBeDeleted(): void
+    public function testEmailLogoCanBeDeleted()
     {
         Storage::fake('public');
 
@@ -135,7 +135,7 @@ final class BrandingSettingsTest extends TestCase
     }
 
 
-    public function testLabelLogoCanBeUploaded(): void
+    public function testLabelLogoCanBeUploaded()
     {
 
         Storage::fake('public');
@@ -164,7 +164,7 @@ final class BrandingSettingsTest extends TestCase
 
     }
 
-    public function testLabelLogoCanBeDeleted(): void
+    public function testLabelLogoCanBeDeleted()
     {
 
         Storage::fake('public');
@@ -191,7 +191,7 @@ final class BrandingSettingsTest extends TestCase
 
     }
 
-    public function testDefaultAvatarCanBeUploaded(): void
+    public function testDefaultAvatarCanBeUploaded()
     {
         Storage::fake('public');
 
@@ -213,7 +213,7 @@ final class BrandingSettingsTest extends TestCase
         // Storage::disk('public')->assertMissing($original_file);
     }
 
-    public function testDefaultAvatarCanBeDeleted(): void
+    public function testDefaultAvatarCanBeDeleted()
     {
         Storage::fake('public');
 
@@ -238,7 +238,7 @@ final class BrandingSettingsTest extends TestCase
         // Storage::disk('public')->assertMissing($original_file);
     }
 
-    public function testSnipeDefaultAvatarCanBeDeleted(): void
+    public function testSnipeDefaultAvatarCanBeDeleted()
     {
 
         $setting = Setting::getSettings()->first();
@@ -263,7 +263,7 @@ final class BrandingSettingsTest extends TestCase
 
     }
 
-    public function testFaviconCanBeUploaded(): void
+    public function testFaviconCanBeUploaded()
     {
         $this->markTestIncomplete('This fails mimetype validation on the mock');
         Storage::fake('public');
@@ -284,7 +284,7 @@ final class BrandingSettingsTest extends TestCase
         Storage::disk('public')->assertExists('favicon.png');
     }
 
-    public function testFaviconCanBeDeleted(): void
+    public function testFaviconCanBeDeleted()
     {
         $this->markTestIncomplete('This fails mimetype validation on the mock');
         Storage::fake('public');

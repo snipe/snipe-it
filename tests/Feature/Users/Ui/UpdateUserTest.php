@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 final class UpdateUserTest extends TestCase
 {
-    public function testUsersCanBeActivatedWithNumber(): void
+    public function testUsersCanBeActivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => 0]);
@@ -22,7 +22,7 @@ final class UpdateUserTest extends TestCase
         $this->assertEquals(1, $user->refresh()->activated);
     }
 
-    public function testUsersCanBeActivatedWithBooleanTrue(): void
+    public function testUsersCanBeActivatedWithBooleanTrue()
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => false]);
@@ -37,7 +37,7 @@ final class UpdateUserTest extends TestCase
         $this->assertEquals(1, $user->refresh()->activated);
     }
 
-    public function testUsersCanBeDeactivatedWithNumber(): void
+    public function testUsersCanBeDeactivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => true]);
@@ -52,7 +52,7 @@ final class UpdateUserTest extends TestCase
         $this->assertEquals(0, $user->refresh()->activated);
     }
 
-    public function testUsersCanBeDeactivatedWithBooleanFalse(): void
+    public function testUsersCanBeDeactivatedWithBooleanFalse()
     {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => true]);
@@ -67,7 +67,7 @@ final class UpdateUserTest extends TestCase
         $this->assertEquals(0, $user->refresh()->activated);
     }
 
-    public function testUsersUpdatingThemselvesDoNotDeactivateTheirAccount(): void
+    public function testUsersUpdatingThemselvesDoNotDeactivateTheirAccount()
     {
         $admin = User::factory()->superuser()->create(['activated' => true]);
 

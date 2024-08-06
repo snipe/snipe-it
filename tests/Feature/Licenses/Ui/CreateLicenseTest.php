@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 final class CreateLicenseTest extends TestCase
 {
-    public function testPermissionRequiredToViewLicense(): void
+    public function testPermissionRequiredToViewLicense()
     {
         $license = License::factory()->create();
         $this->actingAs(User::factory()->create())
@@ -21,7 +21,7 @@ final class CreateLicenseTest extends TestCase
 
 
 
-    public function testLicenseWithoutPurchaseDateFailsValidation(): void
+    public function testLicenseWithoutPurchaseDateFailsValidation()
     {
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('licenses.create'))

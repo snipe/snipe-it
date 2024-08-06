@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class BulkDeleteAssetsTest extends TestCase
 {
-    public function testUserWithPermissionsCanAccessPage(): void
+    public function testUserWithPermissionsCanAccessPage()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $assets = Asset::factory()->count(2)->create();
@@ -25,7 +25,7 @@ final class BulkDeleteAssetsTest extends TestCase
         ])->assertStatus(200);
     }
 
-    public function testStandardUserCannotAccessPage(): void
+    public function testStandardUserCannotAccessPage()
     {
         $user = User::factory()->create();
         $assets = Asset::factory()->count(2)->create();
@@ -38,7 +38,7 @@ final class BulkDeleteAssetsTest extends TestCase
         ])->assertStatus(403);
     }
 
-    public function testPageRedirectFromInterstitialIfNoAssetsSelectedToDelete(): void
+    public function testPageRedirectFromInterstitialIfNoAssetsSelectedToDelete()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $response = $this->actingAs($user)
@@ -52,7 +52,7 @@ final class BulkDeleteAssetsTest extends TestCase
        $this->followRedirects($response)->assertSee('alert-danger');
     }
 
-    public function testPageRedirectFromInterstitialIfNoAssetsSelectedToRestore(): void
+    public function testPageRedirectFromInterstitialIfNoAssetsSelectedToRestore()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $response = $this->actingAs($user)
@@ -68,7 +68,7 @@ final class BulkDeleteAssetsTest extends TestCase
     }
 
 
-    public function testBulkDeleteSelectedAssetsFromInterstitial(): void
+    public function testBulkDeleteSelectedAssetsFromInterstitial()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $assets = Asset::factory()->count(2)->create();
@@ -89,7 +89,7 @@ final class BulkDeleteAssetsTest extends TestCase
         $this->followRedirects($response)->assertSee('alert-success');
     }
 
-    public function testBulkRestoreSelectedAssetsFromInterstitial(): void
+    public function testBulkRestoreSelectedAssetsFromInterstitial()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $asset = Asset::factory()->deleted()->create();
@@ -116,7 +116,7 @@ final class BulkDeleteAssetsTest extends TestCase
     }
 
 
-    public function testActionLogCreatedUponBulkDelete(): void
+    public function testActionLogCreatedUponBulkDelete()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $asset = Asset::factory()->create();
@@ -139,7 +139,7 @@ final class BulkDeleteAssetsTest extends TestCase
         );
     }
 
-    public function testActionLogCreatedUponBulkRestore(): void
+    public function testActionLogCreatedUponBulkRestore()
     {
         $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
         $asset = Asset::factory()->deleted()->create();

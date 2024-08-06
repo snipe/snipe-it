@@ -10,14 +10,14 @@ use Tests\TestCase;
  */
 final class CustomFieldTest extends TestCase
 {
-    public function testFormat(): void
+    public function testFormat()
     {
         $customfield = CustomField::factory()->make(['format' => 'IP']);
         $this->assertEquals($customfield->getAttributes()['format'], CustomField::PREDEFINED_FORMATS['IP']); //this seems undocumented...
         $this->assertEquals($customfield->format, 'IP');
     }
 
-    public function testDbNameAscii(): void
+    public function testDbNameAscii()
     {
         $customfield = new CustomField();
         $customfield->name = 'My hovercraft is full of eels';
@@ -26,7 +26,7 @@ final class CustomFieldTest extends TestCase
     }
 
     // Western Europe
-    public function testDbNameLatin(): void
+    public function testDbNameLatin()
     {
         $customfield = new CustomField();
         $customfield->name = 'My hovercraft is full of eels';
@@ -35,7 +35,7 @@ final class CustomFieldTest extends TestCase
     }
 
     // Asian
-    public function testDbNameChinese(): void
+    public function testDbNameChinese()
     {
         $customfield = new CustomField();
         $customfield->name = '我的氣墊船裝滿了鱔魚';
@@ -47,7 +47,7 @@ final class CustomFieldTest extends TestCase
         }
     }
 
-    public function testDbNameJapanese(): void
+    public function testDbNameJapanese()
     {
         $customfield = new CustomField();
         $customfield->name = '私のホバークラフトは鰻でいっぱいです';
@@ -59,7 +59,7 @@ final class CustomFieldTest extends TestCase
         }
     }
 
-    public function testDbNameKorean(): void
+    public function testDbNameKorean()
     {
         $customfield = new CustomField();
         $customfield->name = '내 호버크라프트는 장어로 가득 차 있어요';
@@ -72,7 +72,7 @@ final class CustomFieldTest extends TestCase
     }
 
     // Nordic languages
-    public function testDbNameNonLatinEuro(): void
+    public function testDbNameNonLatinEuro()
     {
         $customfield = new CustomField();
         $customfield->name = 'Mój poduszkowiec jest pełen węgorzy';
@@ -85,7 +85,7 @@ final class CustomFieldTest extends TestCase
     }
 
     //
-    public function testDbNameTurkish(): void
+    public function testDbNameTurkish()
     {
         $customfield = new CustomField();
         $customfield->name = 'Hoverkraftım yılan balığı dolu';
@@ -97,7 +97,7 @@ final class CustomFieldTest extends TestCase
         }
     }
 
-    public function testDbNameArabic(): void
+    public function testDbNameArabic()
     {
         $customfield = new CustomField();
         $customfield->name = 'حَوّامتي مُمْتِلئة بِأَنْقَلَيْسون';
