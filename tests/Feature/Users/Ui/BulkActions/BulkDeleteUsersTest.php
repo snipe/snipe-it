@@ -1,9 +1,8 @@
 <?php
 
-namespace Feature\Users\Ui\BulkActions;
+namespace Tests\Feature\Users\Ui\BulkActions;
 
 use App\Models\Accessory;
-use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\License;
