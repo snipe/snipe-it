@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 class BulkDeleteUsersTest extends TestCase
 {
-    public function testRequiresCorrectPermission()
+    public function test_requires_correct_permission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('users/bulksave'), [
@@ -26,7 +26,7 @@ class BulkDeleteUsersTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testValidation()
+    public function test_validation()
     {
         $user = User::factory()->create();
         Asset::factory()->assignedToUser($user)->create();
@@ -50,7 +50,7 @@ class BulkDeleteUsersTest extends TestCase
         ])->assertSessionHas('error')->assertRedirect();
     }
 
-    public function testCannotPerformBulkActionsOnSelf()
+    public function test_cannot_perform_bulk_actions_on_self()
     {
         $actor = User::factory()->editUsers()->create();
 
@@ -67,7 +67,7 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertNotSoftDeleted($actor);
     }
 
-    public function testAccessoriesCanBeBulkCheckedIn()
+    public function test_accessories_can_be_bulk_checked_in()
     {
         [$accessoryA, $accessoryB] = Accessory::factory()->count(2)->create();
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
@@ -97,7 +97,7 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userC, $accessoryA);
     }
 
-    public function testAssetsCanBeBulkCheckedIn()
+    public function test_assets_can_be_bulk_checked_in()
     {
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
@@ -123,7 +123,7 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userC, $assetForUserC);
     }
 
-    public function testConsumablesCanBeBulkCheckedIn()
+    public function test_consumables_can_be_bulk_checked_in()
     {
         [$consumableA, $consumableB] = Consumable::factory()->count(2)->create();
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
@@ -153,7 +153,7 @@ class BulkDeleteUsersTest extends TestCase
         $this->assertActionLogCheckInEntryFor($userC, $consumableA);
     }
 
-    public function testLicenseSeatsCanBeBulkCheckedIn()
+    public function test_license_seats_can_be_bulk_checked_in()
     {
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
@@ -202,7 +202,7 @@ class BulkDeleteUsersTest extends TestCase
         ]);
     }
 
-    public function testUsersCanBeDeletedInBulk()
+    public function test_users_can_be_deleted_in_bulk()
     {
         [$userA, $userB, $userC] = User::factory()->count(3)->create();
 
