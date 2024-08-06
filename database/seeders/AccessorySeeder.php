@@ -16,7 +16,7 @@ class AccessorySeeder extends Seeder
     public function run()
     {
         Accessory::truncate();
-        DB::table('accessories_users')->truncate();
+        DB::table('accessories_checkout')->truncate();
 
         if (! Location::count()) {
             $this->call(LocationSeeder::class);

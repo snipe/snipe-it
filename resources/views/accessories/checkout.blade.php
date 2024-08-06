@@ -66,7 +66,14 @@
              </div>
           <!-- User -->
 
-          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
+          @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
+
+          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_user', 'required'=> 'true'])
+
+          <!-- We have to pass unselect here so that we don't default to the asset that's being checked out. We want that asset to be pre-selected everywhere else. -->
+          @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
+
+          @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
 
              <!-- Checkout QTY -->
              <div class="form-group {{ $errors->has('checkout_qty') ? 'error' : '' }} ">
@@ -114,10 +121,16 @@
             </div>
           </div>
        </div>
-       <div class="box-footer">
-          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" id="submit_button" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-       </div>
+          <x-redirect_submit_options
+                  index_route="accessories.index"
+                  :button_label="trans('general.checkout')"
+                  :options="[
+                        'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.accessories')]),
+                        'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.accessory')]),
+                        'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
+
+                       ]"
+          />
     </div> <!-- .box.box-default -->
   </form>
   </div> <!-- .col-md-9-->

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Accessories;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
+use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccessoryCheckoutRequest;
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,6 +18,9 @@ use \Illuminate\Http\RedirectResponse;
 
 class AccessoryCheckoutController extends Controller
 {
+
+    use CheckInOutRequest;
+
     /**
      * Return the form to checkout an Accessory to a user.
      *
@@ -24,7 +30,7 @@ class AccessoryCheckoutController extends Controller
     public function create($id) : View | RedirectResponse
     {
 
-        if ($accessory = Accessory::withCount('users as users_count')->find($id)) {
+        if ($accessory = Accessory::withCount('checkouts as checkouts_count')->find($id)) {
 
             $this->authorize('checkout', $accessory);
 
@@ -57,29 +63,38 @@ class AccessoryCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
-     * @param  int $accessory
+     * @param  Accessory $accessory
      */
     public function store(AccessoryCheckoutRequest $request, Accessory $accessory) : RedirectResponse
     {
-
+        
         $this->authorize('checkout', $accessory);
-        $accessory->assigned_to = $request->input('assigned_to');
-        $user = User::find($request->input('assigned_to'));
-        $accessory->checkout_qty = $request->input('checkout_qty', 1);
 
+        $target = $this->determineCheckoutTarget();
+        
+        $accessory->checkout_qty = $request->input('checkout_qty', 1);
+        
         for ($i = 0; $i < $accessory->checkout_qty; $i++) {
-            $accessory->users()->attach($accessory->id, [
+            AccessoryCheckout::create([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->input('assigned_to'),
+                'assigned_to' => $target->id,
+                'assigned_type' => $target::class,
                 'note' => $request->input('note'),
             ]);
         }
-        event(new CheckoutableCheckedOut($accessory, $user, auth()->user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
+
+        // Set this as user since we only allow checkout to user for this item type
+        $request->request->add(['checkout_to_type' => request('checkout_to_type')]);
+        $request->request->add(['assigned_user' => $target->id]);
+
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
 
         // Redirect to the new accessory page
-        return redirect()->route('accessories.index')
+        return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))
             ->with('success', trans('admin/accessories/message.checkout.success'));
     }
 }

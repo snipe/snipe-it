@@ -3,6 +3,11 @@
     'updateText' => trans('admin/licenses/form.update'),
     'topSubmit' => true,
     'formAction' => ($item->id) ? route('licenses.update', ['license' => $item->id]) : route('licenses.store'),
+     'index_route' => 'licenses.index',
+    'options' => [
+                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'licenses']),
+                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.license')]),
+               ]
 ])
 
 {{-- Page content --}}

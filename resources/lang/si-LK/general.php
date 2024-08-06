@@ -556,7 +556,7 @@ return [
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => 'Close',
     'expires' => 'Expires',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
 
 ];

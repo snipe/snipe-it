@@ -17,7 +17,7 @@ class AccessoryCheckinTest extends TestCase
         $accessory = Accessory::factory()->checkedOutToUser()->create();
 
         $this->actingAs(User::factory()->create())
-            ->post(route('accessories.checkin.store', $accessory->users->first()->pivot->id))
+            ->post(route('accessories.checkin.store', $accessory->checkouts->first()->id))
             ->assertForbidden();
     }
 
@@ -28,12 +28,12 @@ class AccessoryCheckinTest extends TestCase
         $user = User::factory()->create();
         $accessory = Accessory::factory()->checkedOutToUser($user)->create();
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
         $this->actingAs(User::factory()->checkinAccessories()->create())
-            ->post(route('accessories.checkin.store', $accessory->users->first()->pivot->id));
+            ->post(route('accessories.checkin.store', $accessory->checkouts->first()->id));
 
-        $this->assertFalse($accessory->fresh()->users->contains($user));
+        $this->assertFalse($accessory->fresh()->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
         Event::assertDispatched(CheckoutableCheckedIn::class, 1);
     }

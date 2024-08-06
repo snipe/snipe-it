@@ -204,8 +204,12 @@ class AssetsController extends Controller
             }
         }
 
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
+
         if ($success) {
-            return redirect()->route('hardware.index')
+
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
                
       
@@ -289,6 +293,7 @@ class AssetsController extends Controller
      */
     public function update(ImageUploadRequest $request, $assetId = null) : RedirectResponse
     {
+
         // Check if the asset exists
         if (! $asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
@@ -331,7 +336,7 @@ class AssetsController extends Controller
 
         $status = Statuslabel::find($asset->status_id);
 
-        if($status->archived){
+        if ($status && $status->archived) {
             $asset->assigned_to = null;
         }
 
@@ -350,14 +355,26 @@ class AssetsController extends Controller
         }
 
         // Update the asset data
-        $asset_tag = $request->input('asset_tags');
+
         $serial = $request->input('serials');
+        $asset->serial = $request->input('serials');
+
+        if (is_array($request->input('serials'))) {
+            $asset->serial = $serial[1];
+        }
+
         $asset->name = $request->input('name');
-        $asset->serial = $serial[1];
         $asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $asset->model_id = $request->input('model_id');
         $asset->order_number = $request->input('order_number');
-        $asset->asset_tag = $asset_tag[1];
+
+        $asset_tags = $request->input('asset_tags');
+        $asset->asset_tag = $request->input('asset_tags');
+
+        if (is_array($request->input('asset_tags'))) {
+            $asset->asset_tag = $asset_tags[1];
+        }
+
         $asset->notes = $request->input('notes');
 
         $asset = $request->handleImages($asset);
@@ -369,6 +386,7 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
+
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
                         if (is_array($request->input($field->db_column))) {
@@ -387,9 +405,10 @@ class AssetsController extends Controller
             }
         }
 
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         if ($asset->save()) {
-            return redirect()->route('hardware.show', $assetId)
+            return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
@@ -459,9 +478,16 @@ class AssetsController extends Controller
         $tag = $tag ? $tag : $request->get('assetTag');
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $tag)->first()) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        // Search for an exact and unique asset tag match
+        $assets = Asset::where('asset_tag', '=', $tag);
+
+        // If not a unique result, redirect to the index view
+        if ($assets->count() != 1) {
+            return redirect()->route('hardware.index')
+                ->with('search', $tag)
+                ->with('warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
         }
+        $asset = $assets->first();
         $this->authorize('view', $asset);
 
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);

@@ -2,10 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Accessory;
+use App\Models\Asset;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
+use App\Models\Consumable;
 use App\Models\Location;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Supplier;
 
@@ -97,5 +102,16 @@ class ComponentFactory extends Factory
         });
     }
 
+    public function checkedOutToAsset(Asset $asset = null)
+    {
+        return $this->afterCreating(function (Component $component) use ($asset) {
+            $component->assets()->attach($component->id, [
+                'component_id' => $component->id,
+                'created_at' => Carbon::now(),
+                'user_id' => 1,
+                'asset_id' => $asset->id ?? Asset::factory()->create()->id,
+            ]);
+        });
+    }
 
 }

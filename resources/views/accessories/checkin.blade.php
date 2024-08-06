@@ -71,11 +71,15 @@
                             </div>
 
                               </div>
-                        <div class="box-footer">
-                            <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                            <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i>
-                                {{ trans('general.checkin') }}</button>
-                        </div>
+                        <x-redirect_submit_options
+                                index_route="accessories.index"
+                                :button_label="trans('general.checkin')"
+                                :options="[
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.accessories')]),
+                                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.accessory')]),
+
+                               ]"
+                        />
 
 
                 </div> <!-- .box.box-default -->

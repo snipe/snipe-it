@@ -6,6 +6,11 @@
     'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
     'formAction' => ($item->id) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
+    'index_route' => 'hardware.index',
+    'options' => [
+                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
+                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
+               ]
 ])
 
 
@@ -130,12 +135,10 @@
             </div>
 
 
-
-
             <!-- byod checkbox -->
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
-                    <label for="byod" class="form-control">
+                    <label class="form-control">
                         <input type="checkbox" value="1" name="byod" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
                         {{ trans('general.byod') }}
 

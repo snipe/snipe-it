@@ -87,8 +87,10 @@ class ConsumablesController extends Controller
 
         $consumable = $request->handleImages($consumable);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($consumable->save()) {
-            return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $consumable->id, 'Consumables'))->with('success', trans('admin/consumables/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
@@ -160,8 +162,10 @@ class ConsumablesController extends Controller
 
         $consumable = $request->handleImages($consumable);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($consumable->save()) {
-            return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $consumable->id, 'Consumables'))->with('success', trans('admin/consumables/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());

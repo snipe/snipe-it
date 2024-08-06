@@ -22,7 +22,7 @@ class AccessoryCheckoutTest extends TestCase
     {
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()), [
-                // missing assigned_to
+                // missing assigned_user, assigned_location, assigned_asset
             ])
             ->assertStatusMessageIs('error');
     }
@@ -31,7 +31,8 @@ class AccessoryCheckoutTest extends TestCase
     {
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->withoutItemsRemaining()->create()), [
-                'assigned_to' => User::factory()->create()->id,
+                'assigned_user' => User::factory()->create()->id,
+                'checkout_to_type' => 'user'
             ])
             ->assertOk()
             ->assertStatusMessageIs('error')
@@ -65,7 +66,8 @@ class AccessoryCheckoutTest extends TestCase
 
         $this->actingAsForApi($admin)
             ->postJson(route('api.accessories.checkout', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user'
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -73,7 +75,7 @@ class AccessoryCheckoutTest extends TestCase
             ->assertJson(['messages' =>  trans('admin/accessories/message.checkout.success')])
             ->json();
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
         $this->assertEquals(
             1,
@@ -96,7 +98,8 @@ class AccessoryCheckoutTest extends TestCase
 
         $this->actingAsForApi($admin)
             ->postJson(route('api.accessories.checkout', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
                 'checkout_qty' => 2,
             ])
             ->assertOk()
@@ -105,7 +108,7 @@ class AccessoryCheckoutTest extends TestCase
             ->assertJson(['messages' =>  trans('admin/accessories/message.checkout.success')])
             ->json();
 
-        $this->assertTrue($accessory->users->contains($user));
+        $this->assertTrue($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
         $this->assertEquals(
             1,
@@ -128,7 +131,8 @@ class AccessoryCheckoutTest extends TestCase
 
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', $accessory), [
-                'assigned_to' => 'invalid-user-id',
+                'assigned_user' => 'invalid-user-id',
+                'checkout_to_type' => 'user',
                 'note' => 'oh hi there',
             ])
             ->assertOk()
@@ -136,7 +140,7 @@ class AccessoryCheckoutTest extends TestCase
             ->assertStatus(200)
             ->json();
 
-        $this->assertFalse($accessory->users->contains($user));
+            $this->assertFalse($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
     }
 
     public function testUserSentNotificationUponCheckout()
@@ -148,7 +152,8 @@ class AccessoryCheckoutTest extends TestCase
 
         $this->actingAsForApi(User::factory()->checkoutAccessories()->create())
             ->postJson(route('api.accessories.checkout', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
             ]);
 
         Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
@@ -162,7 +167,8 @@ class AccessoryCheckoutTest extends TestCase
 
         $this->actingAsForApi($actor)
             ->postJson(route('api.accessories.checkout', $accessory), [
-                'assigned_to' => $user->id,
+                'assigned_user' => $user->id,
+                'checkout_to_type' => 'user',
                 'note' => 'oh hi there',
             ]);
 
