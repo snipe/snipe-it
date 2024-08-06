@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Checkins\Ui;
+namespace Tests\Feature\Checkouts\Ui;
 
 use App\Models\Asset;
 use App\Models\Component;
