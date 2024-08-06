@@ -17,7 +17,7 @@ use Tests\TestCase;
 
 class CompanyScopingTest extends TestCase
 {
-    public function models(): array
+    public static function models(): array
     {
         return [
             'Accessories' => [Accessory::class],

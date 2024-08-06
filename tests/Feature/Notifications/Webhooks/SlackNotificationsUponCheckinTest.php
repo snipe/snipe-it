@@ -28,7 +28,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         Notification::fake();
     }
 
-    public function assetCheckInTargets(): array
+    public static function assetCheckInTargets(): array
     {
         return [
             'Asset checked out to user' => [fn() => User::factory()->create()],
@@ -37,7 +37,7 @@ class SlackNotificationsUponCheckinTest extends TestCase
         ];
     }
 
-    public function licenseCheckInTargets(): array
+    public static function licenseCheckInTargets(): array
     {
         return [
             'License checked out to user' => [fn() => User::factory()->create()],

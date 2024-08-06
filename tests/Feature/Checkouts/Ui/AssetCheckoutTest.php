@@ -122,7 +122,7 @@ class AssetCheckoutTest extends TestCase
      * This data provider contains checkout targets along with the
      * asset's expected location after the checkout process.
      */
-    public function checkoutTargets(): array
+    public static function checkoutTargets(): array
     {
         return [
             'User' => [function () {
