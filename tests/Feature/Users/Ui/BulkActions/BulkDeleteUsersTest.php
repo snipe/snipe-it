@@ -3,6 +3,7 @@
 namespace Feature\Users\Ui\BulkActions;
 
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\License;
@@ -230,10 +231,9 @@ class BulkDeleteUsersTest extends TestCase
     private function attachAccessoryToUsers(Accessory $accessory, array $users): void
     {
         foreach ($users as $user) {
-            $accessory->users()->attach($accessory->id, [
-                'accessory_id' => $accessory->id,
-                'assigned_to' => $user->id,
-            ]);
+            $a = $accessory->checkouts()->make();
+            $a->assignedTo()->associate($user);
+            $a->save();
         }
     }
 
