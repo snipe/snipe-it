@@ -49,7 +49,7 @@ class ProfileController extends Controller
         $user->gravatar = $request->input('gravatar');
         $user->skin = $request->input('skin');
         $user->phone = $request->input('phone');
-        $user->enable_sounds = $request->input('enable_sounds');
+        $user->enable_sounds = $request->input('enable_sounds', false);
 
         if (! config('app.lock_passwords')) {
             $user->locale = $request->input('locale', 'en-US');
