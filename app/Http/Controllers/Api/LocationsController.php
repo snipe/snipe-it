@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Location;
+use App\Models\Accessory;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -231,6 +234,20 @@ class LocationsController extends Controller
         $assets = Asset::where('assigned_to', '=', $location->id)->where('assigned_type', '=', Location::class)->with('model', 'model.category', 'assetstatus', 'location', 'company', 'defaultLoc');
         $assets = $assets->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
+    public function assignedAccessories(Request $request, Location $location) : JsonResponse | array
+    {
+        $this->authorize('view', Accessory::class);
+        $this->authorize('view', $location);
+        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('admin')->where('assigned_to', '=', $location->id);
+
+        $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
+        $total = $accessory_checkouts->count();
+        $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_checkouts, $total);
     }
 
     /**
