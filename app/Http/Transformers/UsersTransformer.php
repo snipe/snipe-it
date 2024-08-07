@@ -106,6 +106,33 @@ class UsersTransformer
         return $array;
     }
 
+
+    /**
+     * This gives a compact view of the user data without any additional relational queries,
+     * allowing us to 1) deliver a smaller payload and 2) avoid additional queries on relations that
+     * have not been easy/lazy loaded already
+     *
+     * @param User $user
+     * @return array
+     * @throws \Exception
+     */
+    public function transformUserCompact(User $user) : array
+    {
+
+        $array = [
+            'id' => (int) $user->id,
+            'type' => 'user',
+            'name' => e($user->getFullNameAttribute()),
+            'first_name' => e($user->first_name),
+            'last_name' => e($user->last_name),
+            'username' => e($user->username),
+            'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
+            'deleted_at' => ($user->deleted_at) ? Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
+        ];
+
+        return $array;
+    }
+
     public function transformUsersDatatable($users)
     {
         return (new DatatablesTransformer)->transformDatatables($users);
