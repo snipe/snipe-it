@@ -153,7 +153,9 @@
                 data : formData,
                 success : function (data) {
                     if (data.status == 'success') {
-                        $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+                        $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success' style='font-size:18px;'></i></td></tr>");
+                        var audio = new Audio('/sounds/success.mp3');
+                        audio.play()
                         incrementOnSuccess();
                     } else {
                         handleAuditFail(data);
@@ -173,6 +175,8 @@
         });
 
         function handleAuditFail (data) {
+            var audio = new Audio('/sounds/error.mp3');
+            audio.play()
             if (data.asset_tag) {
                 var asset_tag = data.asset_tag;
             } else {
@@ -183,7 +187,7 @@
             } else {
                 var messages = '';
             }
-            $('#audited tbody').prepend("<tr class='danger'><td>" + data.payload.asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
+            $('#audited tbody').prepend("<tr class='danger'><td>" + data.payload.asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger' style='font-size:18px;'></i></td></tr>");
         }
 
         function incrementOnSuccess() {
