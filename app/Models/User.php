@@ -331,6 +331,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
+        /*******************************
+         *
+         * so 'assignedTo' as the name returns 'unknown column accessories_checkout.assignedTo_type'
+         * 'assigned' returns 'unknown column accessories_checkout.assigned_id'
+         */
+        return $this->morphMany(AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
+        //no, wrong. I mean, it's skipping the polymorphic-ness
         return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_checkout', 'assigned_to', 'accessory_id')
             ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }

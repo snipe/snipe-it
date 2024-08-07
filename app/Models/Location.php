@@ -249,8 +249,13 @@ class Location extends SnipeModel
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function assignedAssets()
-    {
+    { //the morph relationship is weird here?
         return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+    }
+
+    public function assignedAccessories()
+    {
+        return $this->morphMany(AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
     }
 
     public function setLdapOuAttribute($ldap_ou)
