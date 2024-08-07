@@ -18,112 +18,125 @@
       <div class="nav-tabs-custom">
           <ul class="nav nav-tabs hidden-print">
 
-              <li class="active">
-                  <a href="#users" data-toggle="tab">
-                        <span class="hidden-lg hidden-md">
-                            <i class="fas fa-users fa-2x"></i>
-                        </span>
-                      <span class="hidden-xs hidden-sm">
+              @if ($location->users->count() > 0)
+                  <li class="active">
+                      <a href="#users" data-toggle="tab" data-tooltip="true" title="{{ trans('general.users') }}">
+                          <i class="fa-solid fa-house-user" style="font-size: 18px" aria-hidden="true"></i>
+                          <span class="badge badge-secondary">
+                          {{ number_format($location->users->count()) }}
+                      </span>
+                          <span class="sr-only">
                           {{ trans('general.users') }}
-                          {!! ($location->users->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
+                      </span>
+                      </a>
+                  </li>
+              @endif
 
+
+              @if ($location->assets()->AssetsForShow()->count() > 0)
+              <li>
+                  <a href="#assets" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/locations/message.current_location') }}">
+                      <i class="fa-solid fa-house-laptop" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->assets()->AssetsForShow()->count()) }}
+                      </span>
+                      <span class="sr-only">
+                          {{ trans('admin/locations/message.current_location') }}
                       </span>
                   </a>
               </li>
+              @endif
 
+              @if ($location->rtd_assets()->AssetsForShow()->count() > 0)
               <li>
-                  <a href="#assets" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
-                    </span>
-                    <span class="hidden-xs hidden-sm">
-                          {{ trans('admin/locations/message.current_location') }}
-                          {!! ($location->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
-
-
-              <li>
-                  <a href="#rtd_assets" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#rtd_assets" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/hardware/form.default_location') }}">
+                      <i class="fa-solid fa-house-flag" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->rtd_assets()->AssetsForShow()->count()) }}
+                      </span>
+                      <span class="sr-only">
                           {{ trans('admin/hardware/form.default_location') }}
-                          {!! ($location->rtd_assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
-                    </span>
+                      </span>
                   </a>
               </li>
+              @endif
 
+              @if ($location->assignedAssets()->AssetsForShow()->count() > 0)
               <li>
-                  <a href="#assets_assigned" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#assets_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/locations/message.assigned_assets') }}">
+                      <i class="fas fa-barcode" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->assignedAssets()->AssetsForShow()->count()) }}
+                      </span>
+                      <span class="sr-only">
                           {{ trans('admin/locations/message.assigned_assets') }}
-                          {!! ($location->assignedAssets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
-                    </span>
+                      </span>
                   </a>
               </li>
+              @endif
 
+              @if ($location->assignedAccessories->count() > 0)
               <li>
-                  <a href="#accessories_assigned" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-keyboard fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
-                          Accessories Assigned
-                          {!! ($location->assignedAccessories()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAccessories()->count()).'</badge>' : '' !!}
-                    </span>
+                  <a href="#accessories_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories_assigned') }}">
+                      <i class="fas fa-keyboard" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->assignedAccessories->count()) }}
+                      </span>
+                      <span class="sr-only">
+                          {{ trans('general.accessories_assigned') }}
+                      </span>
                   </a>
               </li>
+              @endif
 
+              @if ($location->accessories->count() > 0)
               <li>
-                  <a href="#accessories" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-keyboard fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#accessories" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories') }}">
+                      <i class="fas fa-keyboard" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->accessories->count()) }}
+                      </span>
+                      <span class="sr-only">
                           {{ trans('general.accessories') }}
-                          {!! ($location->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
-                    </span>
+                      </span>
                   </a>
               </li>
+              @endif
 
+              @if ($location->consumables->count() > 0)
               <li>
-                  <a href="#consumables" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-tint fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#consumables" data-toggle="tab" data-tooltip="true" title="{{ trans('general.consumables') }}">
+                      <i class="fas fa-tint" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->consumables->count()) }}
+                      </span>
+                      <span class="sr-only">
                           {{ trans('general.consumables') }}
-                          {!! ($location->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
-                    </span>
+                      </span>
                   </a>
               </li>
+              @endif
 
+              @if ($location->components->count() > 0)
               <li>
-                  <a href="#components" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-hdd fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#components" data-toggle="tab" data-tooltip="true" title="{{ trans('general.components') }}">
+                      <i class="fas fa-hdd" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="badge badge-secondary">
+                          {{ number_format($location->components->count()) }}
+                      </span>
+                      <span class="sr-only">
                           {{ trans('general.components') }}
-                          {!! ($location->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
-                    </span>
+                      </span>
                   </a>
               </li>
+              @endif
               
               <li>
-                  <a href="#history" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="fas fa-hdd fa-2x" aria-hidden="true"></i>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#history" data-toggle="tab" data-tooltip="true" title="{{ trans('general.history') }}">
+                      <i class="fas fa-history" style="font-size: 18px" aria-hidden="true"></i>
+                      <span class="sr-only">
                           {{ trans('general.history') }}
-                    </span>
+                      </span>
                   </a>
               </li>
           </ul>
@@ -428,18 +441,18 @@
       <div class="col-md-12" style="padding-top: 5px;">
           <a href="{{ route('locations.print_assigned', ['locationId' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_assigned') }} </a>
       </div>
-      <div class="col-md-12" style="padding-top: 5px; padding-bottom: 20px;">
+      <div class="col-md-12" style="padding-top: 5px; padding-bottom: 18px;">
           <a href="{{ route('locations.print_all_assigned', ['locationId' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
       </div>
 
 
     @if ($location->image!='')
-      <div class="col-md-12 text-center" style="padding-bottom: 20px;">
+      <div class="col-md-12 text-center" style="padding-bottom: 18px;">
         <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" style="width:100%" alt="{{ $location->name }}">
       </div>
     @endif
       <div class="col-md-12">
-        <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px;">
+        <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 18px;">
           @if ($location->address!='')
             <li>{{ $location->address }}</li>
            @endif
