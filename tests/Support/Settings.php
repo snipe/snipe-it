@@ -29,6 +29,11 @@ class Settings
         return $this->update(['alert_email' => null]);
     }
 
+    public function enableCCEmail(string $email = 'notifications@afcrichmond.com'): Settings
+    {
+        return $this->update(['admin_cc_email' => $email]);
+    }
+
     public function enableMultipleFullCompanySupport(): Settings
     {
         return $this->update(['full_multiple_companies_support' => 1]);

@@ -35,7 +35,9 @@ class CheckoutableListener
      */
     public function onCheckedOut($event)
     {
-        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){
+        Log::debug('onCheckedOut in the Checkoutable listener fired');
+
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){ //this is currently false in test
             return;
         }
 
@@ -55,6 +57,11 @@ class CheckoutableListener
                     $this->getNotifiables($event),
                     $this->getCheckoutNotification($event, $acceptance)
                 );
+            }
+
+            if ($this->shouldSendCCEmail()) {
+                Notification::route('mail', Setting::getSettings()->admin_cc_email)
+                    ->notify($this->getCheckoutNotification($event));
             }
 
             if ($this->shouldSendWebhookNotification()) {
@@ -84,6 +91,11 @@ class CheckoutableListener
 
         if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
+        }
+
+        if ($this->shouldSendCCEmail()) {
+            Notification::route('mail', Setting::getSettings()->admin_cc_email)
+                ->notify($this->getCheckinNotification($event));
         }
 
         /**
@@ -166,13 +178,6 @@ class CheckoutableListener
             $notifiables->push($event->checkedOutTo);
         }
 
-        /**
-         * Notify Admin users if the settings is activated
-         */
-        if ((Setting::getSettings()) && (Setting::getSettings()->admin_cc_email != '')) {
-            $notifiables->push(new AdminRecipient());
-        }
-
         return $notifiables;       
     }
 
@@ -229,8 +234,6 @@ class CheckoutableListener
                 $notificationClass = CheckoutLicenseSeatNotification::class;
                 break;
         }
-
-
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
     }
 
@@ -255,10 +258,21 @@ class CheckoutableListener
     private function shouldNotSendAnyNotifications($checkoutable): bool
     {
         return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+        //checkoutabale is a HUGE json array
+        //$this->>skipNotificationsFor = App/Model/Component | from the top of this Listener
+        //private array $skipNotificationsFor = [
+        //        Component::class,
+        //    ];
+
     }
 
     private function shouldSendWebhookNotification(): bool
     {
         return Setting::getSettings() && Setting::getSettings()->webhook_endpoint;
+    }
+
+    private function shouldSendCCEmail(): bool
+    {
+        return Setting::getSettings() && Setting::getSettings()->admin_cc_email;
     }
 }
