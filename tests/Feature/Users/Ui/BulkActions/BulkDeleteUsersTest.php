@@ -230,9 +230,9 @@ class BulkDeleteUsersTest extends TestCase
     private function attachAccessoryToUsers(Accessory $accessory, array $users): void
     {
         foreach ($users as $user) {
-            $a = $accessory->checkouts()->make();
-            $a->assignedTo()->associate($user);
-            $a->save();
+            $accessoryCheckout = $accessory->checkouts()->make();
+            $accessoryCheckout->assignedTo()->associate($user);
+            $accessoryCheckout->save();
         }
     }
 
