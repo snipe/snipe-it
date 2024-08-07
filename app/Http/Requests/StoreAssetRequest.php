@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Traits\MayContainCustomFields;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Setting;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 
 class StoreAssetRequest extends ImageUploadRequest
 {
+    use MayContainCustomFields;
     /**
      * Determine if the user is authorized to make this request.
      *

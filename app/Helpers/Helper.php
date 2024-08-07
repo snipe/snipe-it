@@ -721,7 +721,7 @@ class Helper
     {
         $alert_threshold = \App\Models\Setting::getSettings()->alert_threshold;
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
-        $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
+        $accessories = Accessory::withCount('checkouts as checkouts_count')->whereNotNull('min_amt')->get();
         $components = Component::whereNotNull('min_amt')->get();
         $asset_models = AssetModel::where('min_amt', '>', 0)->get();
         $licenses = License::where('min_amt', '>', 0)->get();
@@ -749,7 +749,7 @@ class Helper
         }
 
         foreach ($accessories as $accessory) {
-            $avail = $accessory->qty - $accessory->users_count;
+            $avail = $accessory->qty - $accessory->checkouts_count;
             if ($avail < ($accessory->min_amt) + $alert_threshold) {
                 if ($accessory->qty > 0) {
                     $percent = number_format((($avail / $accessory->qty) * 100), 0);

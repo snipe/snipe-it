@@ -188,6 +188,8 @@ return [
         'hashed_pass'      => 'Your current password is incorrect',
         'dumbpwd'          => 'That password is too common.',
         'statuslabel_type' => 'You must select a valid status label type',
+        'custom_field_not_found'          => 'This field does not seem to exist, please double check your custom field names.',
+        'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
