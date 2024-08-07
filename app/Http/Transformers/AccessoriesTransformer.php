@@ -75,13 +75,12 @@ class AccessoriesTransformer
             $array[] = [
                 'id' => $checkout->id,
                 'assigned_to' => $this->transformAssignedTo($checkout),
-                'note' => e($checkout->note),
+                'note' => $checkout->note ? e($checkout->note) : null,
                 'created_by' => $checkout->admin ? [
                     'id' => (int) $checkout->admin->id,
                     'name'=> e($checkout->admin->present()->fullName),
                     ]: null,
                 'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
-                'last_checkout' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
                 'available_actions' => Gate::allows('checkout', Accessory::class) ? ['checkin' => true] : ['checkin' => false],
             ];
         }
@@ -91,7 +90,8 @@ class AccessoriesTransformer
 
     public function transformAssignedTo($accessoryCheckout)
     {
-        \Log::error($accessoryCheckout->assigned);
+
+        //\Log::error($accessoryCheckout->assigned);
 
         if ($accessoryCheckout->checkedOutToUser()) {
             \Log::error('checked out to a user');
@@ -101,7 +101,7 @@ class AccessoriesTransformer
             return (new LocationsTransformer())->transformLocationCompact($accessoryCheckout->assigned);
         } elseif ($accessoryCheckout->checkedOutToAsset()) {
             \Log::error('checked out to an asset');
-            return (new AssetsTransformer())->transformAsset($accessoryCheckout->assigned);
+            return (new AssetsTransformer())->transformAssetCompact($accessoryCheckout->assigned);
         }
 
         return $accessoryCheckout->assigned ? [
