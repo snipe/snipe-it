@@ -7,6 +7,7 @@ use App\Models\Depreciable;
 use App\Models\Depreciation;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 
 class DepreciationsTransformer
 {
@@ -26,7 +27,7 @@ class DepreciationsTransformer
             'id' => (int) $depreciation->id,
             'name' => e($depreciation->name),
             'months' => $depreciation->months.' '.trans('general.months'),
-            'depreciation_min' => $depreciation->depreciation_min,
+            'depreciation_min' => $depreciation->depreciation_type === 'percent' ? $depreciation->depreciation_min.'%' : $depreciation->depreciation_min,
             'created_at' => Helper::getFormattedDateObject($depreciation->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($depreciation->updated_at, 'datetime')
         ];
