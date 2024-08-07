@@ -170,7 +170,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                                   {{ Form::checkbox('shortcuts_enabled', '0', old('shortcuts_enabled', $setting->require_accept_signature)) }}
+                                   {{ Form::checkbox('shortcuts_enabled', '1', old('shortcuts_enabled', $setting->shortcuts_enabled)) }}
                                    {{ trans('general.yes') }}
                                </label>
                                {!! $errors->first('shortcuts_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
