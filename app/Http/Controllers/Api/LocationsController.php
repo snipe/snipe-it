@@ -248,7 +248,7 @@ class LocationsController extends Controller
             ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('children as children_count')
             ->withCount('users as users_count')
-            ->withCount('checkouts as accessories_count')
+            ->withCount('accessories as accessories_count')
             ->findOrFail($id);
 
         if (! $location->isDeletable()) {
