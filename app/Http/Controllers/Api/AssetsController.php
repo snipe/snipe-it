@@ -121,7 +121,7 @@ class AssetsController extends Controller
         }
 
         $assets = Asset::select('assets.*')
-            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
+            ->with('model', 'location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
 
