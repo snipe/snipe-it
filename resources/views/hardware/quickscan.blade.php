@@ -154,8 +154,12 @@
                 success : function (data) {
                     if (data.status == 'success') {
                         $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success' style='font-size:18px;'></i></td></tr>");
+
+                        @if ($user->enable_sounds)
                         var audio = new Audio('/sounds/success.mp3');
                         audio.play()
+                        @endif
+                            
                         incrementOnSuccess();
                     } else {
                         handleAuditFail(data);
@@ -175,8 +179,10 @@
         });
 
         function handleAuditFail (data) {
+            @if ($user->enable_sounds)
             var audio = new Audio('/sounds/error.mp3');
             audio.play()
+            @endif
             if (data.asset_tag) {
                 var asset_tag = data.asset_tag;
             } else {
