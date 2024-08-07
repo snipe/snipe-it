@@ -66,17 +66,23 @@ class AccessoriesTransformer
         return $array;
     }
 
-    public function transformCheckedoutAccessory($accessory, $accessory_checkouts, $total)
+    public function transformCheckedoutAccessory($accessory_checkouts, $total)
     {
-        $array = [];
 
+        $array = [];
         foreach ($accessory_checkouts as $checkout) {
+            \Log::error($checkout);
             $array[] = [
                 'id' => $checkout->id,
                 'assigned_to' => $this->transformAssignedTo($checkout),
-                'checkout_notes' => e($checkout->note),
+                'note' => e($checkout->note),
+                'created_by' => $checkout->admin ? [
+                    'id' => (int) $checkout->admin->id,
+                    'name'=> e($checkout->admin->present()->fullName),
+                    ]: null,
+                'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
                 'last_checkout' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
-                'available_actions' => ['checkin' => true],
+                'available_actions' => Gate::allows('checkout', Accessory::class) ? ['checkin' => true] : ['checkin' => false],
             ];
         }
 
@@ -85,17 +91,17 @@ class AccessoriesTransformer
 
     public function transformAssignedTo($accessoryCheckout)
     {
+        \Log::error($accessoryCheckout->assigned);
+
         if ($accessoryCheckout->checkedOutToUser()) {
-            return [
-                    'id' => (int) $accessoryCheckout->assigned->id,
-                    'username' => e($accessoryCheckout->assigned->username),
-                    'name' => e($accessoryCheckout->assigned->getFullNameAttribute()),
-                    'first_name'=> e($accessoryCheckout->assigned->first_name),
-                    'last_name'=> ($accessoryCheckout->assigned->last_name) ? e($accessoryCheckout->assigned->last_name) : null,
-                    'email'=> ($accessoryCheckout->assigned->email) ? e($accessoryCheckout->assigned->email) : null,
-                    'employee_number' =>  ($accessoryCheckout->assigned->employee_num) ? e($accessoryCheckout->assigned->employee_num) : null,
-                    'type' => 'user',
-                ];
+            \Log::error('checked out to a user');
+            return (new UsersTransformer)->transformUserCompact($accessoryCheckout->assigned);
+        } elseif ($accessoryCheckout->checkedOutToLocation()) {
+            \Log::error('checked out to a location');
+            return (new LocationsTransformer())->transformLocationCompact($accessoryCheckout->assigned);
+        } elseif ($accessoryCheckout->checkedOutToAsset()) {
+            \Log::error('checked out to an asset');
+            return (new AssetsTransformer())->transformAsset($accessoryCheckout->assigned);
         }
 
         return $accessoryCheckout->assigned ? [
