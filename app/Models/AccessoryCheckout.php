@@ -81,7 +81,7 @@ class AccessoryCheckout extends Model
     /**
      * Determines whether the accessory is checked out to a user
      *
-     * Even though we allow allow for checkout to things beyond users
+     * Even though we allow for checkout to things beyond users
      * this method is an easy way of seeing if we are checked out to a user.
      *
      * @author [A. Kroeger]
@@ -89,17 +89,17 @@ class AccessoryCheckout extends Model
      */
     public function checkedOutToUser(): bool
     {
-      return $this->assignedType() === Asset::USER;
+      return $this->assigned_type == User::class;
     }
 
     public function checkedOutToLocation(): bool
     {
-        return $this->assignedType() === Asset::LOCATION;
+        return $this->assigned_type == Location::class;
     }
 
     public function checkedOutToAsset(): bool
     {
-        return $this->assignedType() === Asset::ASSET;
+        return $this->assigned_type == Asset::class;
     }
 
 
