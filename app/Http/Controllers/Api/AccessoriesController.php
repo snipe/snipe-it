@@ -188,7 +188,7 @@ class AccessoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function checkedout($id, Request $request)
+    public function checkedout(Request $request, $id)
     {
         $this->authorize('view', Accessory::class);
 
