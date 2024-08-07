@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>คำเตือน: </strong> สินทรัพย์นี้ถูกกำหนดสถานะให้ไม่สามารถใช้งานได้ หากสถานะนี้ถูกเปลี่ยน กรุณาอัพเดทสถานะสินทรัพย์ด้วย',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'ไม่มีสินทรัพย์',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'บางรายการไม่สามารถนำเข้าได้อย่างถูกต้อง',
         'errorDetail'           => 'รายการต่อไปนี้ไม่ได้นำเข้าเนื่องจากมีข้อผิดพลาด',
         'success'               => 'ไฟล์ของคุณถูกนำเข้าแล้ว',

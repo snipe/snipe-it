@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varovanie: </strong> Tento majetok bol oznáčený ako nepriraditeľný. 
-                        Ak došlo k zmene, prosím upravte aktuálny stav majetku.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Majetok neexistuje.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Niektoré položky neboli správne naimportované.',
         'errorDetail'           => 'Nasledujúce položky neboli kvôli chybám importované.',
         'success'               => 'Súbor bol naimportovaný',

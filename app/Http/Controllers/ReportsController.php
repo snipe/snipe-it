@@ -378,7 +378,7 @@ class ReportsController extends Controller
 
 
         $csv      = implode("\n", $rows);
-        $response = Response::make($csv, 200);
+        $response = response()->make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
 
@@ -1069,7 +1069,7 @@ class ReportsController extends Controller
 
         // spit out a csv
         $csv      = implode("\n", $rows);
-        $response = Response::make($csv, 200);
+        $response = response()->make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
 
@@ -1249,7 +1249,7 @@ class ReportsController extends Controller
 
         // spit out a csv
         $csv      = implode("\n", $rows);
-        $response = Response::make($csv, 200);
+        $response = response()->make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
 

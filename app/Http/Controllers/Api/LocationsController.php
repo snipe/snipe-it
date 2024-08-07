@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Asset;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -222,6 +224,15 @@ class LocationsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
     }
 
+    public function assets(Request $request, Location $location) : JsonResponse | array
+    {
+        $this->authorize('view', Asset::class);
+        $this->authorize('view', $location);
+        $assets = Asset::where('assigned_to', '=', $location->id)->where('assigned_type', '=', Location::class)->with('model', 'model.category', 'assetstatus', 'location', 'company', 'defaultLoc');
+        $assets = $assets->get();
+        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -237,6 +248,7 @@ class LocationsController extends Controller
             ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('children as children_count')
             ->withCount('users as users_count')
+            ->withCount('accessories as accessories_count')
             ->findOrFail($id);
 
         if (! $location->isDeletable()) {

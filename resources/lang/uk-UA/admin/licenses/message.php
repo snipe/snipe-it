@@ -44,6 +44,8 @@ return array(
         'error'   => 'Виникла проблема з перевіркою ліцензії. Спробуйте ще раз.',
         'success' => 'Ліцензію успішно перевірено',
         'not_enough_seats' => 'Недостатньо вільних ліцензійних місць для оформлення замовлення',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

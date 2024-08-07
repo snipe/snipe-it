@@ -158,17 +158,20 @@ class Depreciable extends SnipeModel
 
     public function time_until_depreciated()
     {
-        // @link http://www.php.net/manual/en/class.datetime.php
-        $d1 = new \DateTime();
-        $d2 = $this->depreciated_date();
+        if ($this->depreciated_date()) {
+            // @link http://www.php.net/manual/en/class.datetime.php
+            $d1 = new \DateTime();
+            $d2 = $this->depreciated_date();
 
-        // @link http://www.php.net/manual/en/class.dateinterval.php
-        $interval = $d1->diff($d2);
-        if (! $interval->invert) {
-            return $interval;
-        } else {
-            return new \DateInterval('PT0S'); //null interval (zero seconds from now)
+            // @link http://www.php.net/manual/en/class.dateinterval.php
+            $interval = $d1->diff($d2);
+            if (! $interval->invert) {
+                return $interval;
+            } else {
+                return new \DateInterval('PT0S'); //null interval (zero seconds from now)
+            }
         }
+        return false;
     }
 
     public function depreciated_date()

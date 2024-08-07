@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'Ini hanya tes yang bisa dilacak LDAP dengan benar. Jika pengesahan LDAP anda tidak benar, pengguna mungkin masih belum dapat masuk. ANDA HARUS MENYIMPAN PENGATURAN LDAP YANG ANDA PERBARUI PERTAMA.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'Server LDAP',
-    'ldap_server_help'          => 'Ini harus dimulai dengan ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'Validasi sertifikat SSL LDAP',
     'ldap_server_cert_ignore'	=> 'Izinkan Sertifikat SSL yang tidak sah',
     'ldap_server_cert_help'		=> 'Pilih kotak centang ini jika anda menggunakan sertifikat SSL yang masuk sendiri dan ingin menerima sertifikat SSL yang tidak sah.',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

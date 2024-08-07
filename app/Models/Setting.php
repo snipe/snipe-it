@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Support\Facades\Log;
 

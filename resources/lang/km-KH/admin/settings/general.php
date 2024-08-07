@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'LDAP Server',
-    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'LDAP SSL certificate validation',
     'ldap_server_cert_ignore'	=> 'អនុញ្ញាតឱ្យវិញ្ញាបនបត្រ SSL មិនត្រឹមត្រូវ',
     'ldap_server_cert_help'		=> 'ជ្រើសរើសប្រអប់ធីកនេះ ប្រសិនបើអ្នកកំពុងប្រើវិញ្ញាបនបត្រ SSL ដែលបានចុះហត្ថលេខាដោយខ្លួនឯង ហើយចង់ទទួលយកវិញ្ញាបនបត្រ SSL ដែលមិនត្រឹមត្រូវ។',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'optional',
     'per_page'                  => 'លទ្ធផលក្នុងមួយទំព័រ',
     'php'                       => 'កំណែ PHP',
-    'php_info'                  => 'ព័ត៌មាន PHP',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'ព័ត៌មាន PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

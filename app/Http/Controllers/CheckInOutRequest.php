@@ -20,7 +20,7 @@ trait CheckInOutRequest
                 return Location::findOrFail(request('assigned_location'));
             case 'asset':
                 return Asset::findOrFail(request('assigned_asset'));
-            case 'user':
+            default:
                 return User::findOrFail(request('assigned_user'));
         }
 

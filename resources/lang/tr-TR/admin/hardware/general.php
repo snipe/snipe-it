@@ -15,7 +15,7 @@ return [
     'delete_confirm'            => 'Bu ürünü silmek istediğinize eminmisiniz?',
     'edit'  					=> 'Demirbaşı Düzenle',
     'model_deleted'  			=> 'Bu varlık modeli silindi. Varlığı geri almak için modelini geri almalısınız.',
-    'model_invalid'             => 'This model for this asset is invalid.',
+    'model_invalid'             => 'Bu model bu varlık için değildir.',
     'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Talep edildi',

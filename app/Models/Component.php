@@ -205,7 +205,11 @@ class Component extends SnipeModel
     public function numCheckedOut()
     {
         $checkedout = 0;
-        foreach ($this->assets as $checkout) {
+
+        // In case there are elements checked out to assets that belong to a different company
+        // than this asset and full multiple company support is on we'll remove the global scope,
+        // so they are included in the count.
+        foreach ($this->assets()->withoutGlobalScope(new CompanyableScope)->get() as $checkout) {
             $checkedout += $checkout->pivot->assigned_qty;
         }
 

@@ -94,7 +94,7 @@ return [
     'ldap_login_sync_help'      => 'هذا يختبر فقط أن LDAP يستطيع المزامنة بشكل صحيح. إذا كان استعلام التوثيق الى LDAP الخاص بك غير صحيح، قد لا يزال المستخدمون غير قادرين على تسجيل الدخول. يجب عليك اولا حفظ اي تغييرات في إعدادات LDAP.',
     'ldap_manager'              => 'مدير LDAP',
     'ldap_server'               => 'خادم لداب',
-    'ldap_server_help'          => 'ينبغي أن يبدأ هذا مع //:ldap (للاتصال غير المشفر او TLS) او //:ldaps (لاتصال SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'التحقق من صحة شهادة سل لداب',
     'ldap_server_cert_ignore'	=> 'السماح بشهادة سل غير صالحة',
     'ldap_server_cert_help'		=> 'حدد مربع الاختيار هذا إذا كنت تستخدم شهادة سل موقعة ذاتيا وترغب في قبول شهادة سل غير صالحة.',
@@ -150,7 +150,7 @@ return [
     'optional'					=> 'اختياري',
     'per_page'                  => 'النتائج لكل صفحة',
     'php'                       => 'نسخة فب',
-    'php_info'                  => 'PHP Info',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, النظام, معلومات',
     'php_overview_help'         => 'معلومات نظام PHP',
@@ -375,6 +375,9 @@ return [
     'timezone' => 'Timezone',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload default avatar',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

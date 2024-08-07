@@ -20,7 +20,7 @@ APP_DEBUG=true
 APP_KEY=base64:glJpcM7BYwWiBggp3SQ/+NlRkqsBQMaGEOjemXqJzOU=
 APP_URL=http://localhost:8000
 APP_TIMEZONE='UTC'
-APP_LOCALE=en
+APP_LOCALE=en-US
 
 # --------------------------------------------
 # REQUIRED: DATABASE SETTINGS

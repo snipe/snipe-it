@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'ฉันได้อ่านและยอมรับข้อกำหนดในการให้บริการแล้วและได้รับสินค้านี้แล้ว',
     'inventory_report' => 'Inventory Report',
     'item' => 'รายการ:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'มี: ใบอนุญาตที่จะหมดอายุในวันถัดไป: วันที่กำหนด|มี: ใบอนุญาตที่จะหมดอายุในวันถัดไป: วันที่กำหนด',
     'link_to_update_password' => 'โปรดคลิกลิงก์ต่อไปนี้เพื่ออัปเดต: รหัสผ่านเว็บ:',
     'login' => 'เข้าสู่ระบบ:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'ผู้ใช้งาน',
     'username' => 'ชื่อผู้ใช้',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'ยินดีต้อนรับ: ชื่อ',
     'welcome_to' => 'ยินดีต้อนรับสู่: web!',
     'your_assets' => 'ดูสินทรัพย์ที่มี',
     'your_credentials' => 'ข้อมูลรับรอง Snipe-IT ของคุณ',
+    'mail_sent' => 'Mail sent successfully!',
 ];

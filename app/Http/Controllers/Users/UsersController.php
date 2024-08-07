@@ -133,6 +133,8 @@ class UsersController extends Controller
         // we have to invoke the
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -152,7 +154,7 @@ class UsersController extends Controller
                 $user->notify(new WelcomeNotification($data));
             }
 
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.create'));
+            return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))->with('success', trans('admin/users/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
@@ -309,10 +311,11 @@ class UsersController extends Controller
 
             // Handle uploaded avatar
             app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
 
             if ($user->save()) {
                 // Redirect to the user page
-                return redirect()->route('users.index')
+                return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))
                     ->with('success', trans('admin/users/message.success.update'));
             }
 

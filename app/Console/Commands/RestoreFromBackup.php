@@ -30,8 +30,11 @@ class SQLStreamer {
     public function parse_sql(string $line): string {
         // take into account the 'start of line or not' setting as an instance variable?
         // 'continuation' lines for a permitted statement are PERMITTED.
+        // remove *only* line-feeds & carriage-returns; helpful for regexes against lines from
+        // Windows dumps
+        $line = trim($line, "\r\n");
         if($this->statement_is_permitted && $line[0] === ' ') {
-            return $line;
+            return $line . "\n"; //re-add the newline
         }
 
         $table_regex = '`?([a-zA-Z0-9_]+)`?';
@@ -42,8 +45,12 @@ class SQLStreamer {
             "/^(INSERT INTO )$table_regex(.*)$/" => false,
             "/^UNLOCK TABLES/" => false,
             // "/^\\) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;/" => false, // FIXME not sure what to do here?
-            "/^\\)[a-zA-Z0-9_= ]*;$/" => false
-            // ^^^^^^ that bit should *exit* the 'perimitted' black
+            "/^\\)[a-zA-Z0-9_= ]*;$/" => false,
+            // ^^^^^^ that bit should *exit* the 'permitted' block
+            "/^\\(.*\\)[,;]$/" => false, //older MySQL dump style with one set of values per line
+            /* we *could* have made the ^INSERT INTO blah VALUES$ turn on the capturing state, and closed it with
+               a ^(blahblah);$ but it's cleaner to not have to manage the state machine. We're just going to
+               assume that (blahblah), or (blahblah); are values for INSERT and are always acceptable. */
         ];
 
         foreach($allowed_statements as $statement => $statechange) {
@@ -67,7 +74,7 @@ class SQLStreamer {
                 }
                 //how do we *replace* the tablename?
 //                print "RETURNING LINE: $line";
-                return $line;
+                return $line . "\n"; //re-add newline
             }
         }
         // all that is not allowed is denied.
@@ -85,7 +92,7 @@ class SQLStreamer {
         $parser->line_aware_piping(); // <----- THIS is doing the heavy lifting!
 
         $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to statics?
-        //can't use 'users' because the 'accessories_users' table?
+        //can't use 'users' because the 'accessories_checkout' table?
         // can't use 'assets' because 'ver1_components_assets'
         foreach($check_tables as $check_table => $_ignore) {
             foreach ($parser->tablenames as $tablename => $_count) {
@@ -164,7 +171,8 @@ class RestoreFromBackup extends Command
                                             {filename : The zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}
                                             {--sanitize-guess-prefix : Guess and output the table-prefix needed to "sanitize" the SQL}
-                                            {--sanitize-with-prefix= : "Sanitize" the SQL, using the passed-in table prefix (can be learned from --sanitize-guess-prefix). Pass as just \'--sanitize-with-prefix=\' to use no prefix}';
+                                            {--sanitize-with-prefix= : "Sanitize" the SQL, using the passed-in table prefix (can be learned from --sanitize-guess-prefix). Pass as just \'--sanitize-with-prefix=\' to use no prefix}
+                                            {--sql-stdout-only : ONLY "Sanitize" the SQL and print it to stdout - useful for debugging - probably requires --sanitize-with-prefix= }';
 
     /**
      * The console command description.
@@ -365,6 +373,15 @@ class RestoreFromBackup extends Command
             return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitze your SQL.");
         }
 
+        // If we're doing --sql-stdout-only, handle that now so we don't have to open pipes to mysql and all of that silliness
+        if ($this->option('sql-stdout-only')) {
+            $sql_importer = new SQLStreamer($sql_contents, STDOUT, $this->option('sanitize-with-prefix'));
+            $bytes_read = $sql_importer->line_aware_piping();
+            return $this->warn("$bytes_read total bytes read");
+            //TODO - it'd be nice to dump this message to STDERR so that STDOUT is just pure SQL,
+            // which would be good for redirecting to a file, and not having to trim the last line off of it
+        }
+
         //how to invoke the restore?
         $pipes = [];
 
@@ -466,6 +483,9 @@ class RestoreFromBackup extends Command
             $ugly_file_name = $za->statIndex($file_details['index'])['name'];
             $fp = $za->getStream($ugly_file_name);
             //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
+            if (!is_dir($file_details['dest'])) {
+                mkdir($file_details['dest'], 0755, true); //0755 is what Laravel uses, so we do that
+            }
             $migrated_file = fopen($file_details['dest'].'/'.basename($pretty_file_name), 'w');
             while (($buffer = fgets($fp, SQLStreamer::$buffer_size)) !== false) {
                 fwrite($migrated_file, $buffer);

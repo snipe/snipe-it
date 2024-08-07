@@ -102,8 +102,10 @@ class LicensesController extends Controller
         $license->user_id           = Auth::id();
         $license->min_amt           = $request->input('min_amt');
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($license->save()) {
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.create.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($license->getErrors());
@@ -180,8 +182,10 @@ class LicensesController extends Controller
         $license->category_id       = $request->input('category_id');
         $license->min_amt           = $request->input('min_amt');
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($license->save()) {
-            return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.update.success'));
         }
         // If we can't adjust the number of seats, the error is flashed to the session by the event handler in License.php
         return redirect()->back()->withInput()->withErrors($license->getErrors());

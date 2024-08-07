@@ -159,6 +159,13 @@ class LicensePresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.order_number'),
             ], [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.admin'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ], [
                 'field' => 'created_at',
                 'searchable' => false,
                 'sortable' => true,
