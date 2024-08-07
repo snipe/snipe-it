@@ -558,5 +558,6 @@ return [
     'expires' => 'Expires',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];
