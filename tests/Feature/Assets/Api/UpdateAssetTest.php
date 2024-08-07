@@ -454,4 +454,29 @@ class UpdateAssetTest extends TestCase
             ])
             ->assertStatusMessageIs('success');
     }
+
+    public function testCustomFieldCannotBeUpdatedIfNotOnCurrentAssetModel()
+    {
+        $this->markIncompleteIfMySQL('Custom Field Tests do not work in MySQL');
+
+        $customField = CustomField::factory()->create();
+        $customField2 = CustomField::factory()->create();
+        $asset = Asset::factory()->hasMultipleCustomFields([$customField])->create();
+        $user = User::factory()->editAssets()->create();
+
+        // successful
+        $this->actingAsForApi($user)->patchJson(route('api.assets.update', $asset->id), [
+            $customField->db_column_name() => 'test attribute',
+        ])->assertStatusMessageIs('success');
+
+        // custom field exists, but not on this asset model
+        $this->actingAsForApi($user)->patchJson(route('api.assets.update', $asset->id), [
+            $customField2->db_column_name() => 'test attribute',
+        ])->assertStatusMessageIs('error');
+
+        // custom field does not exist
+        $this->actingAsForApi($user)->patchJson(route('api.assets.update', $asset->id), [
+            '_snipeit_non_existent_custom_field_50' => 'test attribute',
+        ])->assertStatusMessageIs('error');
+    }
 }
