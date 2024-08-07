@@ -216,7 +216,7 @@ class AccessoriesController extends Controller
             $total = $accessory_checkouts->count();
         }
 
-        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_checkouts, $total);
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_checkouts, $total);
     }
 
 
