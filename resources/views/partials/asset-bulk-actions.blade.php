@@ -26,7 +26,7 @@
         @can('delete', \App\Models\Asset::class)
             <option value="delete">{{ trans('button.delete') }}</option>
         @endcan
-        <option value="labels" accesskey="l">{{ trans_choice('button.generate_labels', 2) }}</option>
+        <option value="labels" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=l" : ''}}>{{ trans_choice('button.generate_labels', 2) }}</option>
         @endif
     </select>
 
