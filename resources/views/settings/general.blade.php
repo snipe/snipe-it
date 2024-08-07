@@ -113,8 +113,24 @@
                         </div>
                     </div>
 
+                    <!-- Checkin Notification for User -->
+                    <div class="form-group {{ $errors->has('checkin_notification_user') ? 'error' : '' }}">
+                        <div class="col-md-3">
+                            {{ Form::label('checkin_notification_user', trans('admin/settings/general.checkin_notification_user')) }}
+                        </div>
+                        <div class="col-md-9">
+                            <label class="form-control">
+                                {{ Form::checkbox('checkin_notification_user', '1', Request::old('checkin_notification_user', $setting->checkin_notification_user)) }}
+                                {{ trans('general.yes') }}
+                            </label>
+                            {!! $errors->first('checkin_notification_user', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            <p class="help-block">{{ trans('admin/settings/general.checkin_notification_user_help') }}</p>
+                        </div>
+                    </div> 
+
                        <!-- user profile edit checkbox -->
                        <div class="form-group">
+
                            <div class="col-md-3">
                                <label>
                                    {{ trans('admin/settings/general.profile_edit') }}
