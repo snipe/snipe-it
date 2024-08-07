@@ -68,6 +68,17 @@
                   </a>
               </li>
 
+              <li>
+                  <a href="#accessories_assigned" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="fas fa-keyboard fa-2x" aria-hidden="true"></i>
+                    </span>
+                      <span class="hidden-xs hidden-sm">
+                          Accessories Assigned
+                          {!! ($location->assignedAccessories()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAccessories()->count()).'</badge>' : '' !!}
+                    </span>
+                  </a>
+              </li>
 
               <li>
                   <a href="#accessories" data-toggle="tab">
@@ -209,6 +220,36 @@
                               data-url="{{route('api.assets.index', ['assigned_to' => $location->id, 'assigned_type' => \App\Models\Location::class]) }}"
                               data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+
+                  </div><!-- /.table-responsive -->
+              </div><!-- /.tab-pane -->
+
+              <div class="tab-pane" id="accessories_assigned">
+                  <h2 class="box-title">
+                      Assigned Accessories
+                  </h2>
+
+                  <div class="table table-responsive">
+                      <table
+                              data-columns="{{ \App\Presenters\AccessoryPresenter::assignedDataTableLayout() }}"
+                              data-cookie-id-table="accessoriesAssignedListingTable"
+                              data-pagination="true"
+                              data-id-table="accessoriesAssignedListingTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-click-to-select="true"
+                              id="accessoriesAssignedListingTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{route('api.locations.assigned_accessories', ['location' => $location, 'assigned_to' => $location->id]) }}"
+                              data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
