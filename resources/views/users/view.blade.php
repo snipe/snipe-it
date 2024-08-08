@@ -51,7 +51,7 @@
           <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="far fa-keyboard fa-2x"></i>
-            </span> 
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
               {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->accessories->count()).'</badge>' : '' !!}
             </span>
@@ -117,7 +117,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <span class="hidden-xs"><i class="fas fa-cog" aria-hidden="true"></i></span>
               <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-cog fa-2x" aria-hidden="true"></i></span>
-              
+
               <span class="hidden-xs hidden-sm">
                 {{ trans('button.actions') }}
               </span>
@@ -148,7 +148,7 @@
         <div class="tab-pane active" id="details">
           <div class="row">
 
-            
+
             @if ($user->deleted_at!='')
               <div class="col-md-12">
                 <div class="callout callout-warning">
@@ -161,22 +161,22 @@
             <!-- Start button column -->
             <div class="col-md-3 col-xs-12 col-sm-push-9">
 
-              
+
 
               <div class="col-md-12 text-center">
-                
+
                  @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
                     <i class="fas fa-crown fa-2x{{  ($user->isSuperUser()) ? ' text-danger' : ' text-orange'}}"></i>
                     <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? strtolower(trans('general.superuser')) : strtolower(trans('general.admin')) }}</div>
                   @endif
 
-                
+
               </div>
               <div class="col-md-12 text-center">
-                <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">  
+                <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
                </div>
-               
-          
+
+
 
               @can('update', $user)
                 <div class="col-md-12">
@@ -192,7 +192,7 @@
 
                 @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                @if($user->allAssignedCount() != '0') 
+                @if($user->allAssignedCount() != '0')
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                   @else
                   <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.print_assigned') }}</button>
@@ -224,7 +224,7 @@
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
                       </form>
                     @else
-                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('button.send_password_link') }}</button> 
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('button.send_password_link') }}</button>
                     @endif
                   </div>
                   @endif
@@ -264,16 +264,16 @@
                 @endcan
                 <br><br>
             </div>
- 
+
             <!-- End button column -->
-          
+
             <div class="col-md-9 col-xs-12 col-sm-pull-3">
 
                <div class="row-new-striped">
-                
+
                   <div class="row">
                     <!-- name -->
-    
+
                       <div class="col-md-3 col-sm-2">
                         {{ trans('admin/users/table.name') }}
                       </div>
@@ -283,7 +283,7 @@
 
                   </div>
 
-               
+
 
                    <!-- company -->
                     @if (!is_null($user->company))
@@ -297,7 +297,7 @@
                       </div>
 
                     </div>
-                   
+
                     @endif
 
                     <!-- username -->
@@ -326,7 +326,7 @@
                         {{ trans('general.address') }}
                       </div>
                       <div class="col-md-9">
-                      
+
                           @if ($user->address)
                           {{ $user->address }} <br>
                           @endif
@@ -418,7 +418,7 @@
                         <div class="col-md-9">
                           {{ $user->employee_num }}
                         </div>
-                        
+
                       </div>
                     @endif
 
@@ -439,7 +439,7 @@
 
                     @endif
 
-                    
+
                     @if ($user->email)
                     <!-- email -->
                     <div class="row">
@@ -500,17 +500,29 @@
 
 
                     @if ($user->department)
-                    <!-- empty -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.department') }}
+                      <!-- empty -->
+                      <div class="row">
+                        <div class="col-md-3">
+                          {{ trans('general.department') }}
+                        </div>
+                        <div class="col-md-9">
+                          <a href="{{ route('departments.show', $user->department) }}">
+                            {{ $user->department->name }}
+                          </a>
+                        </div>
                       </div>
-                      <div class="col-md-9">
-                        <a href="{{ route('departments.show', $user->department) }}">
-                          {{ $user->department->name }}
-                        </a>
-                      </div>
-                    </div>
+                      @if($user->department->manager)
+                        <div class="row">
+                          <div class="col-md-3">
+                            {{ trans('admin/users/general.department_manager') }}
+                          </div>
+                          <div class="col-md-9">
+                            <a href="{{ route('users.show', $user->department->manager) }}">
+                              {{ $user->department->manager->full_name }}
+                            </a>
+                          </div>
+                        </div>
+                      @endif
                     @endif
 
                     @if ($user->created_at)
@@ -544,8 +556,8 @@
                       <div class="col-md-9">
                         {!! ($user->vip=='1') ? '<i class="fas fa-check fa-fw fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
-                    </div> 
-                    
+                    </div>
+
                     <!-- remote -->
                      <div class="row">
                       <div class="col-md-3">
@@ -596,12 +608,12 @@
                               {{ trans('admin/users/general.two_factor_active') }}
                             </div>
                             <div class="col-md-9">
-                          
+
                               {!! ($user->two_factor_active()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
-                          
+
                             </div>
                           </div>
-                          
+
                           <!-- 2FA enrolled -->
                           <div class="row two_factor_resetrow">
                             <div class="col-md-3">
@@ -612,16 +624,16 @@
 
                             </div>
                           </div>
-                          
+
                           @if ((Auth::user()->isSuperUser()) && ($user->two_factor_active_and_enrolled()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
-                          
+
                             <!-- 2FA reset -->
                             <div class="row">
                               <div class="col-md-3">
 
                               </div>
                               <div class="col-md-9">
-                                
+
                                 <a class="btn btn-default btn-sm" id="two_factor_reset" style="margin-right: 10px; margin-top: 10px;">
                                   {{ trans('admin/settings/general.two_factor_reset') }}
                                 </a>
@@ -633,13 +645,13 @@
                                 </span>
                                 <br>
                                 <p class="help-block" style="line-height: 1.6;">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
-                          
-                                
+
+
                               </div>
                             </div>
-                            @endif 
+                            @endif
                   @endif
-                    
+
 
                     @if ($user->notes)
                      <!-- empty -->
