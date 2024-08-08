@@ -16,6 +16,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
@@ -219,20 +220,18 @@ class BulkUsersController extends Controller
 
         $users = User::whereIn('id', $user_raw_array)->get();
         $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', User::class)->get();
-        $accessories = DB::table('accessories_checkout')->where('assigned_type', User::class)->whereIn('assigned_to', $user_raw_array)->get();
+        $accessoryUserRows = DB::table('accessories_checkout')->where('assigned_type', User::class)->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-        $consumables = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
+        $consumableUserRows = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
 
         if ((($assets->count() > 0) && ((!$request->filled('status_id')) || ($request->input('status_id') == '')))) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         }
 
-
         $this->logItemCheckinAndDelete($assets, Asset::class);
-        $this->logItemCheckinAndDelete($accessories, Accessory::class);
+        $this->logAccessoriesCheckin($accessoryUserRows);
         $this->logItemCheckinAndDelete($licenses, License::class);
-        $this->logItemCheckinAndDelete($consumables, Consumable::class);
-
+        $this->logConsumablesCheckin($consumableUserRows);
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
             'status_id'     => e(request('status_id')),
@@ -241,19 +240,14 @@ class BulkUsersController extends Controller
             'expected_checkin' => null,
         ]);
 
-
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
-        ConsumableAssignment::whereIn('id', $consumables->pluck('id'))->delete();
-
+        ConsumableAssignment::whereIn('id', $consumableUserRows->pluck('id'))->delete();
 
         foreach ($users as $user) {
-
-            $user->consumables()->sync([]);
             $user->accessories()->sync([]);
             if ($request->input('delete_user')=='1') {
                 $user->delete();
             }
-
         }
 
         $msg = trans('general.bulk_checkin_success');
@@ -279,11 +273,39 @@ class BulkUsersController extends Controller
             if ($itemType == License::class){
                 $item_id = $item->license_id;
             }
-            
+
             $logAction->item_id = $item_id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
             $logAction->item_type = $itemType;
             $logAction->target_id = $item->assigned_to;
+            $logAction->target_type = User::class;
+            $logAction->user_id = Auth::id();
+            $logAction->note = 'Bulk checkin items';
+            $logAction->logaction('checkin from');
+        }
+    }
+
+    private function logAccessoriesCheckin(Collection $accessoryUserRows): void
+    {
+        foreach ($accessoryUserRows as $accessoryUserRow) {
+            $logAction = new Actionlog();
+            $logAction->item_id = $accessoryUserRow->accessory_id;
+            $logAction->item_type = Accessory::class;
+            $logAction->target_id = $accessoryUserRow->assigned_to;
+            $logAction->target_type = User::class;
+            $logAction->user_id = Auth::id();
+            $logAction->note = 'Bulk checkin items';
+            $logAction->logaction('checkin from');
+        }
+    }
+
+    private function logConsumablesCheckin(Collection $consumableUserRows): void
+    {
+        foreach ($consumableUserRows as $consumableUserRow) {
+            $logAction = new Actionlog();
+            $logAction->item_id = $consumableUserRow->consumable_id;
+            $logAction->item_type = Consumable::class;
+            $logAction->target_id = $consumableUserRow->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
             $logAction->note = 'Bulk checkin items';
