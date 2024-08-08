@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
@@ -16,7 +17,7 @@ use Tests\TestCase;
 
 class CompanyScopingTest extends TestCase
 {
-    public function models(): array
+    public static function models(): array
     {
         return [
             'Accessories' => [Accessory::class],
@@ -27,7 +28,7 @@ class CompanyScopingTest extends TestCase
         ];
     }
 
-    /** @dataProvider models */
+    #[DataProvider('models')]
     public function testCompanyScoping($model)
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();

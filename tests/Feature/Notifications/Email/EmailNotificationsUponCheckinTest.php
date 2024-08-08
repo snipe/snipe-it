@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Notifications\Email;
 
+use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\User;
@@ -9,9 +10,7 @@ use App\Notifications\CheckinAssetNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-/**
- * @group notifications
- */
+#[Group('notifications')]
 class EmailNotificationsUponCheckinTest extends TestCase
 {
     protected function setUp(): void
