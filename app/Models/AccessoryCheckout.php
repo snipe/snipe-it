@@ -7,11 +7,7 @@ use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
-use Watson\Validating\ValidatingTrait;
 
 /**
  * Model for Accessories.
@@ -21,8 +17,17 @@ use Watson\Validating\ValidatingTrait;
 class AccessoryCheckout extends Model
 {
     use Searchable;
+    use Presentable;
 
-    protected $fillable = ['user_id', 'accessory_id', 'assigned_to', 'assigned_type', 'note'];
+    protected $fillable = [
+        'user_id',
+        'accessory_id',
+        'assigned_to',
+        'assigned_type',
+        'note'
+    ];
+
+    protected $presenter = \App\Presenters\AccessoryPresenter::class;
     protected $table = 'accessories_checkout';
     
     /**
@@ -34,7 +39,7 @@ class AccessoryCheckout extends Model
      */
     public function accessory()
     {
-        return $this->hasOne(\App\Models\Accessory::class, 'accessory_id');
+        return $this->hasOne(Accessory::class, 'accessory_id');
     }
 
     /**
@@ -44,9 +49,9 @@ class AccessoryCheckout extends Model
      * @since [v7.0.9]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function user()
+    public function admin()
     {
-        return $this->hasOne(\App\Models\User::class, 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     /**
@@ -76,7 +81,7 @@ class AccessoryCheckout extends Model
     /**
      * Determines whether the accessory is checked out to a user
      *
-     * Even though we allow allow for checkout to things beyond users
+     * Even though we allow for checkout to things beyond users
      * this method is an easy way of seeing if we are checked out to a user.
      *
      * @author [A. Kroeger]
@@ -84,12 +89,33 @@ class AccessoryCheckout extends Model
      */
     public function checkedOutToUser(): bool
     {
-      return $this->assignedType() === Asset::USER;
+      return $this->assigned_type == User::class;
     }
+
+    public function checkedOutToLocation(): bool
+    {
+        return $this->assigned_type == Location::class;
+    }
+
+    public function checkedOutToAsset(): bool
+    {
+        return $this->assigned_type == Asset::class;
+    }
+
 
     public function scopeUserAssigned(Builder $query): void
     {
         $query->where('assigned_type', '=', User::class);
+    }
+
+    public function scopeLocationAssigned(Builder $query): void
+    {
+        $query->where('assigned_type', '=', Location::class);
+    }
+
+    public function scopeAssetAssigned(Builder $query): void
+    {
+        $query->where('assigned_type', '=', Asset::class);
     }
 
     /**

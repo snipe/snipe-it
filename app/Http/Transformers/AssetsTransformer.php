@@ -267,4 +267,18 @@ class AssetsTransformer
 
 
     }
+
+    public function transformAssetCompact(Asset $asset)
+    {
+        $array = [
+            'id' => (int) $asset->id,
+            'name' => e($asset->name),
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+        ];
+
+        return $array;
+
+
+    }
 }

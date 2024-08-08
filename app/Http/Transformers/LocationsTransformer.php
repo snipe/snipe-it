@@ -76,4 +76,28 @@ class LocationsTransformer
             return $array;
         }
     }
+
+    /**
+     * This gives a compact view of the location data without any additional relational queries,
+     * allowing us to 1) deliver a smaller payload and 2) avoid additional queries on relations that
+     * have not been easy/lazy loaded already
+     *
+     * @param Location $location
+     * @return array
+     * @throws \Exception
+     */
+    public function transformLocationCompact(Location $location = null)
+    {
+        if ($location) {
+
+            \Log::error($location);
+            $array = [
+                'id' => (int) $location->id,
+                'type' => "location",
+                'name' => e($location->name),
+            ];
+
+            return $array;
+        }
+    }
 }

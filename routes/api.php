@@ -718,6 +718,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 'assets'
             ]
             )->name('api.locations.viewassets');
+
+            Route::get('{location}/accessories/assigned',
+                [
+                    Api\LocationsController::class,
+                    'assignedAccessories'
+                ]
+            )->name('api.locations.assigned_accessories');
     
         }); 
     
