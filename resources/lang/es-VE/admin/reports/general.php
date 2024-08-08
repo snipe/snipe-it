@@ -1,6 +1,7 @@
 <?php
 
 return [
+<<<<<<< HEAD
     'info'   => 'Seleccione las opciones que desea para el informe de activos.',
     'deleted_user' => 'Usuario eliminado',
     'send_reminder' => 'Enviar recordatorio',
@@ -14,4 +15,12 @@ return [
         'user_country' => 'País de usuario',
         'user_zip' => 'Usuario Zip'
     ]
+=======
+    'info'   => 'Selecciona que opciones quieres para tu informe de activos.',
+    'deleted_user' => 'Deleted user',
+    'send_reminder' => 'Send reminder',
+    'reminder_sent' => 'Reminder sent',
+    'acceptance_deleted' => 'Acceptance request deleted',
+    'acceptance_request' => 'Acceptance request'
+>>>>>>> 64747d0fb (updates based on review)
 ];

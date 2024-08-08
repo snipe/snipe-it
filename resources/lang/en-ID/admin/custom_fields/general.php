@@ -28,15 +28,22 @@ return [
     'used_by_models'   		    => 'Digunakan oleh Model',
     'order'   		            => 'Pesanan',
     'create_fieldset'         => 'Atur bidang baru',
+<<<<<<< HEAD
     'update_fieldset'         => 'Update Fieldset',
     'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
     'fieldset_updated'         => 'Fieldset updated',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Kostum field baru',
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Nilai field ini dienkripsi dalam database. Hanya pengguna admin yang bisa melihat nilai dekripsi',
+<<<<<<< HEAD
     'show_in_email'     => 'Sertakan nilai bidang ini dalam semua email keluar yang dikirim ke pengguna? Bidang yang terenkripsi tidak dapat disertakan dalam email',
     'show_in_email_short'     => 'Include in emails.',
+=======
+    'show_in_email'     => 'Sertakan nilai bidang ini dalam semua email keluar yang dikirim ke pengguna? Bidang yang terenkripsi tidak dapat disertakan dalam email.',
+>>>>>>> 64747d0fb (updates based on review)
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -46,6 +53,7 @@ return [
     'make_required' => 'Optional - click to make required',
     'reorder' => 'Reorder',
     'db_field' => 'DB Field',
+<<<<<<< HEAD
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'This value must be unique across all assets',
     'unique' => 'Unique',
@@ -59,4 +67,7 @@ return [
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
+=======
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+>>>>>>> 64747d0fb (updates based on review)
 ];

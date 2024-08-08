@@ -32,7 +32,13 @@ return array(
         'error'   		=> 'El consumible no fue ingresado, por favor inténtelo de nuevo',
         'success' 		=> 'El consumible fue ingresado correctamente.',
         'user_does_not_exist' => 'Ese usuario no es válido. Por favor, inténtelo de nuevo.'
-    )
+    ),
+
+    
+    'numeric'  => 'El número total debe ser numérico' ,
+    'required' => 'El número total no puede estar vacío' ,
+    'over'     => 'El número total prestado es mayor que el stock disponible',
+    'under'    => 'El número total no puede ser cero'
 
 
 );

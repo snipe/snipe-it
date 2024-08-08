@@ -2,7 +2,10 @@
 
 return [
     'does_not_exist' => 'Company does not exist.',
+<<<<<<< HEAD
     'deleted'        => 'Deleted company',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
     'create' => [
         'error'   => 'Company was not created, please try again.',

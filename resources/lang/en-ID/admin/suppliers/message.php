@@ -2,7 +2,10 @@
 
 return array(
 
+<<<<<<< HEAD
     'deleted' => 'Deleted supplier',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'does_not_exist' => 'Pemasok tidak ada.',
 
 

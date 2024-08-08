@@ -17,10 +17,13 @@ return [
     'last_login'        => 'Last Login',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'print_assigned'    => 'Print All Assigned',
+<<<<<<< HEAD
     'email_assigned'    => 'Email List of All Assigned',
     'user_notified'     => 'User has been emailed a list of their currently assigned items.',
     'auto_assign_label' => 'Include this user when auto-assigning eligible licences',
     'auto_assign_help'  => 'Skip this user in auto assignment of licences',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'software_user'     => 'Software Checked out to :name',
     'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'View User :name',
@@ -28,13 +31,18 @@ return [
     'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
     'two_factor_enrolled' => '2FA Device Enrolled ',
     'two_factor_active'   => '2FA Active ',
+<<<<<<< HEAD
     'user_deactivated'  => 'User cannot login',
     'user_activated'  => 'User can login',
+=======
+    'user_deactivated'  => 'User is de-activated',
+>>>>>>> 64747d0fb (updates based on review)
     'activation_status_warning' => 'Do not change activation status',
     'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
     'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
     'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
     'remove_group_memberships' => 'Remove Group Memberships',
+<<<<<<< HEAD
     'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_assets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Check in all properties associated with these users',
@@ -51,4 +59,11 @@ return [
     'next_save_user' => 'Next: Save User',
     'all_assigned_list_generation' => 'Generated on:',
     'email_user_creds_on_create' => 'Email this user their credentials?',
+    'checkout_history' => 'Checkout History'
+=======
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+>>>>>>> 64747d0fb (updates based on review)
 ];

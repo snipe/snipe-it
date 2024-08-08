@@ -6,6 +6,7 @@ return [
     'send_reminder' => 'Send reminder',
     'reminder_sent' => 'Reminder sent',
     'acceptance_deleted' => 'Acceptance request deleted',
+<<<<<<< HEAD
     'acceptance_request' => 'Acceptance request',
     'custom_export' => [
         'user_address' => 'User Address',
@@ -14,4 +15,7 @@ return [
         'user_country' => 'User Country',
         'user_zip' => 'User Zip'
     ]
+=======
+    'acceptance_request' => 'Acceptance request'
+>>>>>>> 64747d0fb (updates based on review)
 ];

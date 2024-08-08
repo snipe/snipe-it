@@ -558,5 +558,9 @@ return [
     'expires' => 'Expires',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
+    'replenish' => 'Replenish Qty',
+    'replenish_history' => 'Replenish History',
+    'documents' => 'Documents',
+    'document_archive' => 'Reference Document'
 
 ];

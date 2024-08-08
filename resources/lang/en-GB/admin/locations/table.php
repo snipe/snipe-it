@@ -15,7 +15,10 @@ return [
     'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Location Name',
     'address'                   => 'Address',
+<<<<<<< HEAD
     'address2'                   => 'Address Line 2',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'zip'                       => 'Postal Code',
     'locations'                 => 'Locations',
     'parent'                    => 'Parent',
@@ -34,7 +37,10 @@ return [
     'asset_checked_out'         => 'Checked Out',
     'asset_expected_checkin'    => 'Expected Checkin',
     'date'                      => 'Date:',
+<<<<<<< HEAD
     'phone'                     => 'Location Phone',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
     'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
     'signed_by_location_manager' => 'Signed By (Location Manager):',

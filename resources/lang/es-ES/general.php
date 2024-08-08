@@ -558,5 +558,5 @@ return [
     'expires' => 'Vence',
     'map_fields'=> 'Asociar el campo :item_type',
     'remaining_var' => ':count restantes',
-
+s
 ];

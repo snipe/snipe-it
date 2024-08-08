@@ -13,8 +13,12 @@ return array(
 
     'update' => array(
         'error'   => 'Kategori gagal diupdate, silahkan coba lagi',
+<<<<<<< HEAD
         'success' => 'Kategori berhasil diupdate.',
         'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+=======
+        'success' => 'Kategori berhasil diupdate.'
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'delete' => array(

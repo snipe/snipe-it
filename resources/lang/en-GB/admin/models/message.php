@@ -2,12 +2,18 @@
 
 return array(
 
+<<<<<<< HEAD
     'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Model does not exist.',
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
     'invalid_category_type' => 'The category must be an asset category.',
+=======
+    'does_not_exist' => 'Model does not exist.',
+    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+
+>>>>>>> 64747d0fb (updates based on review)
 
     'create' => array(
         'error'   => 'Model was not created, please try again.',
@@ -17,7 +23,11 @@ return array(
 
     'update' => array(
         'error'   => 'Model was not updated, please try again',
+<<<<<<< HEAD
         'success' => 'Model updated successfully.',
+=======
+        'success' => 'Model updated successfully.'
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'delete' => array(
@@ -33,14 +43,22 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'No fields were changed, so nothing was updated.',
+<<<<<<< HEAD
         'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
         'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
+=======
+        'success' 		=> 'Models updated.'
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
+<<<<<<< HEAD
         'success' 		    => 'Model deleted!|:success_count models deleted!',
+=======
+        'success' 		    => ':success_count model(s) deleted!',
+>>>>>>> 64747d0fb (updates based on review)
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

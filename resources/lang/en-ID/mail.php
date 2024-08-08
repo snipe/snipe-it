@@ -1,6 +1,7 @@
 <?php
 
 return [
+<<<<<<< HEAD
 
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Accessory_Checkout_Notification' => 'Accessory checked out',
@@ -28,19 +29,28 @@ return [
     'a_user_requested' => 'Pengguna sudah meminta sebuah item di situs web',
     'acceptance_asset_accepted' => 'A user has accepted an item',
     'acceptance_asset_declined' => 'A user has declined an item',
+=======
+    'a_user_canceled' => 'Pengguna sudah membatalkan permintaan item di situs web',
+    'a_user_requested' => 'Pengguna sudah meminta sebuah item di situs web',
+>>>>>>> 64747d0fb (updates based on review)
     'accessory_name' => 'Nama Aksesoris:',
     'additional_notes' => 'Catatan Tambahan:',
     'admin_has_created' => 'Admin sudah membuat akun untuk anda di :web situs web.',
     'asset' => 'Aset:',
     'asset_name' => 'Nama Aset:',
     'asset_requested' => 'Permintaan aset',
+<<<<<<< HEAD
     'asset_tag' => 'Penanda aset',
     'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+=======
+    'asset_tag' => 'Asset Tag',
+>>>>>>> 64747d0fb (updates based on review)
     'assigned_to' => 'Ditetapkan untuk',
     'best_regards' => 'Salam hormat,',
     'canceled' => 'Dibatalkan:',
     'checkin_date' => 'Tanggal Check in:',
     'checkout_date' => 'Tanggal Check out:',
+<<<<<<< HEAD
     'checkedout_from' => 'Checked out from',
     'checkedin_from'  => 'Checked in from',
     'checked_into' => 'Checked into',
@@ -77,20 +87,79 @@ return [
     'serial' => 'Serial',
     'snipe_webhook_test' => 'Snipe-IT Integration Test',
     'snipe_webhook_summary' => 'Snipe-IT Integration Test Summary',
+=======
+    'click_to_confirm' => 'Silahkan klik pada link berikut untuk mengkonfirmasi :akun web Anda:',
+    'click_on_the_link_accessory' => 'Silahkan klik pada link di bagian bawah untuk mengkonfirmasi bahwa Anda telah menerima aksesori.',
+    'click_on_the_link_asset' => 'Silahkan klik pada tautan di bawah untuk konfirmasi anda sudah menerima aset itu.',
+    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
+    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
+    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
+    'Confirm_license_delivery' => 'License delivery confirmation',
+    'Confirm_asset_delivery' => 'Asset delivery confirmation',
+    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'current_QTY' => 'QTY saat ini',
+    'Days' => 'Hari',
+    'days' => 'Hari',
+    'expecting_checkin_date' => 'Tanggal Checkin yang Diharapkan:',
+    'expires' => 'Berakhir',
+    'Expiring_Assets_Report' => 'Laporan aset berakhir.',
+    'Expiring_Licenses_Report' => 'Laporan lisensi berakhir.',
+    'hello' => 'Halo',
+    'hi' => 'Hai',
+    'i_have_read' => 'Saya sudah baca dan menyetujui syarat penggunaan, dan sudah menerima item ini.',
+    'item' => 'Item:',
+    'Item_Request_Canceled' => 'Permintaan item dibatalkan',
+    'Item_Requested' => 'Item yang diminta',
+    'link_to_update_password' => 'Silahkan klik pada link berikut untuk memperbarui :web password:',
+    'login_first_admin' => 'Login ke instalasi Snipe-IT baru Anda dengan menggunakan kredensial di bawah ini:',
+    'login' => 'Masuk:',
+    'Low_Inventory_Report' => 'Laporan Inventaris Rendah',
+    'min_QTY' => 'QTY minimum',
+    'name' => 'Nama',
+    'new_item_checked' => 'Item baru sudah diperiksa atas nama anda, rinciannya dibawah ini.',
+    'password' => 'Kata Sandi:',
+    'password_reset' => 'Atur ulang kata sandi',
+
+    'read_the_terms' => 'Silahkan baca syarat penggunaan dibawah ini.',
+    'read_the_terms_and_click' => 'Silahkan baca syarat penggunaan dibawah ini, dan klik pada tautan di bawah untuk mengkonfirmasi anda sudah                          dan menyetujui syarat penggunaan, dan sudah menerima aset itu.',
+    'requested' => 'Diminta:',
+    'reset_link' => 'Tautan Atur ulang kata sandi anda',
+    'reset_password' => 'Klik disini untuk atur ulang kata sandi anda:',
+    'serial' => 'Serial',
+>>>>>>> 64747d0fb (updates based on review)
     'supplier' => 'Pemasok',
     'tag' => 'Tag',
     'test_email' => 'Coba Email dari Snipe-IT',
     'test_mail_text' => 'Ini adalah uji coba dari Snipe-IT Asset Management System. Jika Anda mendapatkan ini, mail sedang bekerja :)',
     'the_following_item' => 'Item berikut telah diperiksa: ',
+<<<<<<< HEAD
+=======
+    'low_inventory_alert' => 'Ada :count item yang di bawah minimum persediaan atau akan segera habis.|Ada :count item yang di bawah minimum persediaan atau akan segera habis.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'license_expiring_alert' => 'Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.|Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.',
+>>>>>>> 64747d0fb (updates based on review)
     'to_reset' => 'Untuk atur ulang kata sandi situs web: anda, lengkapi formulir ini:',
     'type' => 'Jenis',
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Pengguna',
     'username' => 'Nama Pengguna',
+<<<<<<< HEAD
     'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Selamat datang :nama',
     'welcome_to' => 'Selamat datang di :Web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Kredensial Snipe-IT Anda',
     'mail_sent' => 'Mail sent successfully!',
+=======
+    'welcome' => 'Selamat datang :nama',
+    'welcome_to' => 'Selamat datang di :Web!',
+    'your_credentials' => 'Kredensial Snipe-IT Anda',
+    'Accessory_Checkin_Notification' => 'Accessory checked in',
+    'Asset_Checkin_Notification' => 'Asset checked in',
+    'License_Checkin_Notification' => 'License checked in',
+    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'your_assets' => 'View Your Assets',
+>>>>>>> 64747d0fb (updates based on review)
 ];

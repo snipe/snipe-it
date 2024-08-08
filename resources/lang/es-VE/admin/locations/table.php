@@ -1,6 +1,7 @@
 <?php
 
 return [
+<<<<<<< HEAD
     'about_locations_title'     => 'Acerca de las ubicaciones',
     'about_locations'           => 'Las ubicaciones son utilizadas para hacer seguimiento de la información sobre ubicación de usuarios, activos, y otros ítems',
     'assets_rtd'                => 'Activos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -39,4 +40,42 @@ return [
     'signed_by_finance_auditor' => 'Firmado por (Monitor de Finanzas):',
     'signed_by_location_manager' => 'Firmado por (Administrador de ubicación):',
     'signed_by'                 => 'Firmado por:',
+=======
+    'about_locations_title'     => 'Acerca de las Ubicaciones',
+    'about_locations'           => 'Las ubicaciones son usadas para seguir la información de la ubicación de usuarios, activos, y otros objetos',
+    'assets_rtd'                => 'Activos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Activos Asignados',
+    'id'                        => 'Identificación',
+    'city'                      => 'Ciudad',
+    'state'                     => 'Estado',
+    'country'                   => 'País',
+    'create'                    => 'Crear Ubicación',
+    'update'                    => 'Actualizar Ubicación',
+    'print_assigned'            => 'Imprimir los asignados',
+    'print_all_assigned'        => 'Imprimir todos los asignados',
+    'name'                      => 'Nombre de Ubicación',
+    'address'                   => 'Dirección',
+    'zip'                       => 'Código Postal',
+    'locations'                 => 'Ubicaciones',
+    'parent'                    => 'Padre',
+    'currency'                  => 'Divisa de la Ubicación',
+    'ldap_ou'                   => 'Búsqueda LDAP OU',
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+>>>>>>> 64747d0fb (updates based on review)
 ];

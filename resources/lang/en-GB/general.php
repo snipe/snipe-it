@@ -558,5 +558,16 @@ return [
     'expires' => 'Expires',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-
+    'checkin_tooltip' => 'Check this item in',
+    'checkout_user_tooltip' => 'Check this item out to a user',
+    'replenish_history'     => 'Item Replenish History',
+    'replenish'             => 'Replenish Stock',
+    'checkout_history'      => 'Item Chekcout History',
+    'documents'             => 'Documents',
+    'document_archive'      => 'Supporting Document',
+    'replenish' => 'Replenish Qty',
+    'replenish_history' => 'Replenish History',
+    'documents' => 'Documents',
+    'document_archive' => 'Reference Document'
+    
 ];

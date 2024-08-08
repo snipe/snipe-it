@@ -5,7 +5,10 @@ return array(
     'field' => array(
         'invalid'   => 'Bidang tersebut tidak tersedia.',
         'already_added'   => 'Bidang sudah ditambahkan',
+<<<<<<< HEAD
         'none_selected'   => 'No field selected',
+=======
+>>>>>>> 64747d0fb (updates based on review)
 
         'create' => array(
             'error'   => 'Bidang gagal dibuat, silahkan coba lagi.',
@@ -50,12 +53,15 @@ return array(
 
     ),
 
+<<<<<<< HEAD
     'fieldset_default_value' => array(
 
         'error' => 'Error validating default fieldset values.',
 
     ),
 
+=======
+>>>>>>> 64747d0fb (updates based on review)
 
 
 

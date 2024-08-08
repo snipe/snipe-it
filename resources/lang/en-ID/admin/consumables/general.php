@@ -9,4 +9,5 @@ return array(
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
     'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
+    'replenish'                         => 'Tambah Stok Consumable'
 );

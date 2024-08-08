@@ -23,8 +23,12 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponen tidak bisa dikeluarkan, silahkan coba kembali',
         'success' 		=> 'Komponen berhasil dikeluarkan.',
+<<<<<<< HEAD
         'user_does_not_exist' => 'Pengguna tidak cocok. Silahkan coba lagi.',
         'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+=======
+        'user_does_not_exist' => 'Pengguna tidak cocok. Silahkan coba lagi.'
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'checkin' => array(

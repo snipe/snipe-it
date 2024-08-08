@@ -5,7 +5,10 @@ return array(
     'field' => array(
         'invalid'   => 'El campo no existe.',
         'already_added'   => 'El campo ya fue añadido',
+<<<<<<< HEAD
         'none_selected'   => 'No se ha seleccionado ningún campo',
+=======
+>>>>>>> 64747d0fb (updates based on review)
 
         'create' => array(
             'error'   => 'Campo no creado, por favor, inténtalo de nuevo.',
@@ -19,7 +22,11 @@ return array(
         ),
 
         'delete' => array(
+<<<<<<< HEAD
             'confirm'   	=> '¿Está seguro de que quiere eliminar este campo?',
+=======
+            'confirm'   	=> '¿Seguro que quieres eliminar este campo?',
+>>>>>>> 64747d0fb (updates based on review)
             'error'   => 'Hubo un problema al eliminar el campo. Inténtelo de nuevo.',
             'success' => 'El campo se eliminó correctamente.',
             'in_use'   => 'El campo está aún en uso.',
@@ -29,7 +36,11 @@ return array(
 
     'fieldset' => array(
 
+<<<<<<< HEAD
         'does_not_exist' => 'El grupo de campos no existe',
+=======
+        'does_not_exist' => 'El conjunto de campos no existe',
+>>>>>>> 64747d0fb (updates based on review)
 
         'create' => array(
             'error'   => 'El grupo de campos no ha sido creado, por favor inténtelo de nuevo.',
@@ -37,12 +48,20 @@ return array(
         ),
 
         'update' => array(
+<<<<<<< HEAD
             'error'   => 'El grupo de campos no ha sido actualizado, por favor inténtelo de nuevo',
+=======
+            'error'   => 'El Grupo de campos no ha sido actualizado, por favor inténtelo de nuevo',
+>>>>>>> 64747d0fb (updates based on review)
             'success' => 'Grupo de campos actualizado correctamente.'
         ),
 
         'delete' => array(
+<<<<<<< HEAD
             'confirm'   	=> '¿Está seguro de que quiere eliminar este grupo de campos?',
+=======
+            'confirm'   	=> '¿Seguro que quieres eliminar el grupo de campos?',
+>>>>>>> 64747d0fb (updates based on review)
             'error'   => 'Hubo un problema al eliminar el grupo de campos. Inténtelo de nuevo.',
             'success' => 'El grupo de campos se eliminó correctamente.',
             'in_use'   => 'El grupo de campos está aún en uso.',
@@ -50,12 +69,15 @@ return array(
 
     ),
 
+<<<<<<< HEAD
     'fieldset_default_value' => array(
 
         'error' => 'Error al validar los valores por defecto del grupo de campos.',
 
     ),
 
+=======
+>>>>>>> 64747d0fb (updates based on review)
 
 
 

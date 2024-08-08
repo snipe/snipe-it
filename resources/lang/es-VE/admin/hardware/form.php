@@ -1,6 +1,7 @@
 <?php
 
 return [
+<<<<<<< HEAD
     'bulk_delete'		=> 'Confirmar eliminación masiva de activos',
     'bulk_restore'      => 'Confirmar recuperación masiva de activos', 
   'bulk_delete_help'	=> 'Revise a continuación los activos para eliminación masiva. Una vez eliminados, estos activos se pueden restaurar, pero ya no estarán asociados a ningún usuario al que estén asignados actualmente.',
@@ -30,10 +31,35 @@ return [
     'expires'			=> 'Vence',
     'fully_depreciated'	=> 'Completamente Depreciado',
     'help_checkout'		=> 'Si desea asignar este equipo inmediatamente, seleccione "Listo para asignar" de la lista de estados de arriba. ',
+=======
+    'bulk_delete'		=> 'Confirmar Eliminación Masiva de Activos',
+  'bulk_delete_help'	=> 'Revisa los activos para eliminación masiva abajo. Una vez borrados, estos activos pueden ser restaurados, pero no estarán asociados con ningún usuario al que estén asignados actualmente.',
+  'bulk_delete_warn'	=> 'Vas a eliminar :asset_count activos.',
+    'bulk_update'		=> 'Actualización Masiva de Activos',
+    'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples activos de una vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios. ',
+    'bulk_update_warn'	=> 'Estás a punto de editar las propiedades de :asset_count activos.',
+    'checkedout_to'		=> 'Asignado A',
+    'checkout_date'		=> 'Fecha de Salida',
+    'checkin_date'		=> 'Fecha de Ingreso',
+    'checkout_to'		=> 'Asignar A',
+    'cost'				=> 'Costo de Compra',
+    'create'			=> 'Crear Activo',
+    'date'				=> 'Fecha de Compra',
+    'depreciation'	    => 'Depreciación',
+    'depreciates_on'	=> 'Se Deprecia En',
+    'default_location'	=> 'Ubicación Predeterminada',
+    'eol_date'			=> 'Fecha de Fin de Vida',
+    'eol_rate'			=> 'Tasa de Fin de Vida',
+    'expected_checkin'  => 'Fecha de Entrega Prevista',
+    'expires'			=> 'Vence',
+    'fully_depreciated'	=> 'Completamente Depreciado',
+    'help_checkout'		=> 'Si deseas asignar este activo inmediatamente, selecciona "Listo para Asignar" de la lista de estados arriba. ',
+>>>>>>> 64747d0fb (updates based on review)
     'mac_address'		=> 'Dirección MAC',
     'manufacturer'		=> 'Fabricante',
     'model'				=> 'Modelo',
     'months'			=> 'meses',
+<<<<<<< HEAD
     'name'				=> 'Nombre del activo',
     'notes'				=> 'Notas',
     'order'				=> 'Número de orden',
@@ -59,4 +85,25 @@ return [
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',
     'optional_infos'  => 'Información opcional',
     'order_details'   => 'Información relacionada con el pedido'
+=======
+    'name'				=> 'Nombre de Activo',
+    'notes'				=> 'Notas',
+    'order'				=> 'Número de Orden',
+    'qr'				=> 'Código QR',
+    'requestable'		=> 'Los usuarios pueden solicitar este activo',
+    'select_statustype'	=> 'Seleccionar Tipo de Estado',
+    'serial'			=> 'Serial',
+    'status'			=> 'Estado',
+    'tag'				=> 'Etiqueta de Activo',
+    'update'			=> 'Actualizar Activo',
+    'warranty'			=> 'Garantía',
+        'warranty_expires'		=> 'La garantía vence',
+    'years'				=> 'años',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+>>>>>>> 64747d0fb (updates based on review)
 ];

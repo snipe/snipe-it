@@ -23,8 +23,12 @@ return array(
      'checkout' => array(
         'error'   		=> 'Component was not checked out, please try again',
         'success' 		=> 'Component checked out successfully.',
+<<<<<<< HEAD
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+=======
+        'user_does_not_exist' => 'That user is invalid. Please try again.'
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'checkin' => array(

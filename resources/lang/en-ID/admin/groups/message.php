@@ -3,7 +3,11 @@
 return array(
 
     'group_exists'        => 'Grup sudah ada!',
+<<<<<<< HEAD
     'group_not_found'     => 'Group ID :id does not exist.',
+=======
+    'group_not_found'     => 'Group [:id] tidak ada.',
+>>>>>>> 64747d0fb (updates based on review)
     'group_name_required' => 'Nama field diperlukan',
 
     'success' => array(

@@ -9,10 +9,16 @@ return [
     'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
+<<<<<<< HEAD
     'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'This is an Active Directory server',
     'alerts'                	=> 'Alerts',
     'alert_title'               => 'Update Notification Settings',
+=======
+    'is_ad'				        => 'This is an Active Directory server',
+    'alerts'                	=> 'Alerts',
+    'alert_title'               => 'Update Alert Settings',
+>>>>>>> 64747d0fb (updates based on review)
     'alert_email'				=> 'Send alerts to',
     'alert_email_help'    => 'Email addresses or distribution lists you want alerts to be sent to, comma separated',
     'alerts_enabled'			=> 'Alerts Enabled',
@@ -22,19 +28,31 @@ return [
     'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Audit Interval',
+<<<<<<< HEAD
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
+=======
+    'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months.',
+>>>>>>> 64747d0fb (updates based on review)
     'audit_warning_days'        => 'Audit Warning Threshold',
     'audit_warning_days_help'   => 'How many days in advance should we warn you when assets are due for auditing?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
     'auto_increment_prefix'		=> 'Prefix (optional)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Backups',
+<<<<<<< HEAD
     'backups_help'              => 'Create, Download &amp; Restore Backups',
     'backups_restoring'         => 'Restoring from Backup',
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
     'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'All existing users, including you, will be logged out once your restore is complete.',
+=======
+    'backups_restoring'         => 'Restoring from Backup',
+    'backups_upload'            => 'Upload Backup',
+    'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_logged_out'         => 'You will be logged out once your restore is complete.',
+>>>>>>> 64747d0fb (updates based on review)
     'backups_large'             => 'Very large backups may time out on the restore attempt and may still need to be run via command line. ',
     'barcode_settings'			=> 'Barcode Settings',
     'confirm_purge'			    => 'Confirm Purge',
@@ -49,7 +67,10 @@ return [
     'default_eula_text'			=> 'Default EULA',
     'default_language'			=> 'Default Language',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
+<<<<<<< HEAD
     'acceptance_note'           => 'Add a note for your decision (Optional)',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',
@@ -68,19 +89,28 @@ return [
     'footer_text'               => 'Additional Footer Text ',
     'footer_text_help'          => 'This text will appear in the right-side footer. Links are allowed using <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavoured markdown</a>. Line breaks, headers, images, etc may result in unpredictable results.',
     'general_settings'			=> 'General Settings',
+<<<<<<< HEAD
     'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
     'general_settings_help'     => 'Default EULA and more',
     'generate_backup'			=> 'Generate Backup',
     'google_workspaces'         => 'Google Workspaces',
+=======
+    'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy',
+    'general_settings_help'     => 'Default EULA and more',
+    'generate_backup'			=> 'Generate Backup',
+>>>>>>> 64747d0fb (updates based on review)
     'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Laravel Version',
     'ldap'                      => 'LDAP',
+<<<<<<< HEAD
     'ldap_default_group'        => 'Default Permissions Group',
     'ldap_default_group_info'   => 'Select a group to assign to newly synced users. Remember that a user takes on the permissions of the group they are assigned.',
     'no_default_group'          => 'No Default Group',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'ldap_help'                 => 'LDAP/Active Directory',
     'ldap_client_tls_key'       => 'LDAP Client TLS Key',
     'ldap_client_tls_cert'      => 'LDAP Client-Side TLS Certificate',
@@ -88,6 +118,7 @@ return [
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Settings',
     'ldap_client_tls_cert_help' => 'Client-Side TLS Certificate and Key for LDAP connections are usually only useful in Google Workspace configurations with "Secure LDAP." Both are required.',
+<<<<<<< HEAD
     'ldap_location'             => 'LDAP Location',
 'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'Enter a valid LDAP username and password from the base DN you specified above to test whether your LDAP login is configured correctly. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
@@ -95,6 +126,13 @@ return [
     'ldap_manager'              => 'LDAP Manager',
     'ldap_server'               => 'LDAP Server',
     'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
+=======
+     'ldap_client_tls_key'       => 'LDAP Client-Side TLS key',
+    'ldap_login_test_help'      => 'Enter a valid LDAP username and password from the base DN you specified above to test whether your LDAP login is configured correctly. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
+    'ldap_login_sync_help'      => 'This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
+    'ldap_server'               => 'LDAP Server',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
+>>>>>>> 64747d0fb (updates based on review)
     'ldap_server_cert'			=> 'LDAP SSL certificate validation',
     'ldap_server_cert_ignore'	=> 'Allow invalid SSL Certificate',
     'ldap_server_cert_help'		=> 'Select this checkbox if you are using a self signed SSL cert and would like to accept an invalid SSL certificate.',
@@ -116,14 +154,23 @@ return [
     'ldap_auth_filter_query'    => 'LDAP Authentication query',
     'ldap_version'              => 'LDAP Version',
     'ldap_active_flag'          => 'LDAP Active Flag',
+<<<<<<< HEAD
     'ldap_activated_flag_help'  => 'This value is used to determine whether a synced user can login to Snipe-IT. <strong>It does not affect the ability to check items in or out to them</strong>, and should be the <strong>attribute name</strong> within your AD/LDAP, <strong>not the value</strong>. <br><br>If this field is set to a field name that does not exist in your AD/LDAP, or the value in the AD/LDAP field is set to <code>0</code> or <code>false</code>, <strong>user login will be disabled</strong>. If the value in the AD/LDAP field is set to <code>1</code> or <code>true</code> or <em>any other text</em> means the user can log in. When the field is blank in your AD, we respect the <code>userAccountControl</code> attribute, which usually allows non-suspended users to log in.',
+=======
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
+>>>>>>> 64747d0fb (updates based on review)
     'ldap_emp_num'              => 'LDAP Employee Number',
     'ldap_email'                => 'LDAP Email',
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP Synchronization',
     'license'                   => 'Software License',
+<<<<<<< HEAD
     'load_remote'               => 'Load Remote Avatars',
     'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
+=======
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
+>>>>>>> 64747d0fb (updates based on review)
     'login'                     => 'Login Attempts',
     'login_attempt'             => 'Login Attempt',
     'login_ip'                  => 'IP Address',
@@ -150,7 +197,11 @@ return [
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',
     'php'                       => 'PHP Version',
+<<<<<<< HEAD
     'php_info'                  => 'PHP info',
+=======
+    'php_info'                  => 'PHP Info',
+>>>>>>> 64747d0fb (updates based on review)
     'php_overview'              => 'PHP',
     'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info',
@@ -202,6 +253,7 @@ return [
     'show_images_in_email'     => 'Show images in emails',
     'show_images_in_email_help'   => 'Uncheck this box if your Snipe-IT installation is behind a VPN or closed network and users outside the network will not be able to load images served from this installation in their emails.',
     'site_name'                 => 'Site Name',
+<<<<<<< HEAD
     'integrations'               => 'Integrations',
     'slack'                     => 'Slack',
     'general_webhook'           => 'General Webhook',
@@ -218,6 +270,18 @@ return [
     'webhook_integration_help'    => ':app integration is optional, however the endpoint and channel are required if you wish to use it. To configure :app integration, you must first <a href=":webhook_link" target="_new" rel="noopener">create an incoming webhook</a> on your :app account. Click on the <strong>Test :app Integration</strong> button to confirm your settings are correct before saving. ',
     'webhook_integration_help_button'    => 'Once you have saved your :app information, a test button will appear.',
     'webhook_test_help'           => 'Test whether your :app integration is configured correctly. YOU MUST SAVE YOUR UPDATED :app SETTINGS FIRST.',
+=======
+    'slack'                     => 'Slack',
+    'slack_title'               => 'Update Slack Settings',
+    'slack_help'                => 'Slack settings',
+    'slack_botname'             => 'Slack Botname',
+    'slack_channel'             => 'Slack Channel',
+    'slack_endpoint'            => 'Slack Endpoint',
+    'slack_integration'         => 'Slack Settings',
+    'slack_integration_help'    => 'Slack integration is optional, however the endpoint and channel are required if you wish to use it. To configure Slack integration, you must first <a href=":slack_link" target="_new" rel="noopener">create an incoming webhook</a> on your Slack account. Click on the <strong>Test Slack Integration</strong> button to confirm your settings are correct before saving. ',
+    'slack_integration_help_button'    => 'Once you have saved your Slack information, a test button will appear.',
+    'slack_test_help'           => 'Test whether your Slack integration is configured correctly. YOU MUST SAVE YOUR UPDATED SLACK SETTINGS FIRST.',
+>>>>>>> 64747d0fb (updates based on review)
     'snipe_version'  			=> 'Snipe-IT version',
     'support_footer'            => 'Support Footer Links ',
     'support_footer_help'       => 'Specify who sees the links to the Snipe-IT Support info and Users Manual',
@@ -227,8 +291,13 @@ return [
     'update'                    => 'Update Settings',
     'value'                     => 'Value',
     'brand'                     => 'Branding',
+<<<<<<< HEAD
     'brand_keywords'            => 'footer, logo, print, theme, skin, header, colours, colour, css',
     'brand_help'                => 'Logo, Site Name & Skin',
+=======
+    'brand_keywords'            => 'footer, logo, print, theme, skin, header, colors, color, css',
+    'brand_help'                => 'Logo, Site Name',
+>>>>>>> 64747d0fb (updates based on review)
     'web_brand'                 => 'Web Branding Type',
     'about_settings_title'      => 'About Settings',
     'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',
@@ -262,7 +331,11 @@ return [
     'two_factor_enrollment'        => 'Two-Factor Enrollment',
     'two_factor_enabled_text'        => 'Enable Two Factor',
     'two_factor_reset'        => 'Reset Two-Factor Secret',
+<<<<<<< HEAD
     'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
+=======
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with Google Authenticator again. This can be useful if their currently enrolled device is lost or stolen. ',
+>>>>>>> 64747d0fb (updates based on review)
     'two_factor_reset_success'          => 'Two factor device successfully reset',
     'two_factor_reset_error'          => 'Two factor device reset failed',
     'two_factor_enabled_warning'        => 'Enabling two-factor if it is not currently enabled will immediately force you to authenticate with a Google Auth enrolled device. You will have the ability to enroll your device if one is not currently enrolled.',
@@ -287,6 +360,7 @@ return [
     'zerofill_count'        => 'Length of asset tags, including zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
     'oauth_title' => 'OAuth API Settings',
+<<<<<<< HEAD
     'oauth_clients' => 'OAuth Clients',
     'oauth' => 'OAuth',
     'oauth_help' => 'Oauth Endpoint Settings',
@@ -303,6 +377,14 @@ return [
     'barcode_title' => 'Update Barcode Settings',
     'barcodes' => 'Barcodes',
     'barcodes_help_overview' => 'Barcode &amp; QR Settings',
+=======
+    'oauth' => 'OAuth',
+    'oauth_help' => 'Oauth Endpoint Settings',
+    'asset_tag_title' => 'Update Asset Tag Settings',
+    'barcode_title' => 'Update Barcode Settings',
+    'barcodes' => 'Barcodes',
+    'barcodes_help_overview' => 'Barcode &amp; QR settings',
+>>>>>>> 64747d0fb (updates based on review)
     'barcodes_help' => 'This will attempt to delete cached barcodes. This would typically only be used if your barcode settings have changed, or if your Snipe-IT URL has changed. Barcodes will be re-generated when accessed next.',
     'barcodes_spinner' => 'Attempting to delete files...',
     'barcode_delete_cache' => 'Delete Barcode Cache',
@@ -314,6 +396,7 @@ return [
     'security' => 'Security',
     'security_title' => 'Update Security Settings',
     'security_keywords' => 'password, passwords, requirements, two factor, two-factor, common passwords, remote login, logout, authentication',
+<<<<<<< HEAD
     'security_help' => 'Two-Factor, Password Restrictions',
     'groups_keywords' => 'permissions, permission groups, authorization',
     'groups_help' => 'Account Permission Groups',
@@ -323,10 +406,25 @@ return [
     'localization_help' => 'Language, Date & Currency Display',
     'notifications' => 'Notifications',
     'notifications_help' => 'Email Alerts & Audit Settings',
+=======
+    'security_help' => 'Two-factor, Password Restrictions',
+    'groups_keywords' => 'permissions, permission groups, authorization',
+    'groups_help' => 'Account permission groups',
+    'localization' => 'Localization',
+    'localization_title' => 'Update Localization Settings',
+    'localization_keywords' => 'localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation',
+    'localization_help' => 'Language, date display',
+    'notifications' => 'Notifications',
+    'notifications_help' => 'Email alerts, audit settings',
+>>>>>>> 64747d0fb (updates based on review)
     'asset_tags_help' => 'Incrementing and prefixes',
     'labels' => 'Labels',
     'labels_title' => 'Update Label Settings',
     'labels_help' => 'Label sizes &amp; settings',
+<<<<<<< HEAD
+=======
+    'purge' => 'Purge',
+>>>>>>> 64747d0fb (updates based on review)
     'purge_keywords' => 'permanently delete',
     'purge_help' => 'Purge Deleted Records',
     'ldap_extension_warning' => 'It does not look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.',
@@ -342,6 +440,7 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+<<<<<<< HEAD
     'label2_enable'           => 'New Label Engine',
     'label2_enable_help'      => 'Switch to the new label engine. <b>Note: You will need to save this setting before setting others.</b>',
     'label2_template'         => 'Template',
@@ -380,4 +479,6 @@ return [
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
 
+=======
+>>>>>>> 64747d0fb (updates based on review)
 ];

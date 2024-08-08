@@ -24,20 +24,32 @@ return [
     'license_error'                     => 'License already attached to kit',
     'license_added_success'             => 'License added successfully',
     'license_updated'                   => 'License was successfully updated',
+<<<<<<< HEAD
     'license_none'                      => 'Lisensi tidak ada',
+=======
+    'license_none'                      => 'License does not exist',
+>>>>>>> 64747d0fb (updates based on review)
     'license_detached'                  => 'License was successfully detached',
     'consumable_added_success'          => 'Consumable added successfully',
     'consumable_updated'                => 'Consumable was successfully updated',
     'consumable_error'                  => 'Consumable already attached to kit',
     'consumable_deleted'                => 'Delete was successful',
+<<<<<<< HEAD
     'consumable_none'                   => 'Consumable Tidak ada',
+=======
+    'consumable_none'                   => 'Consumable does not exist',
+>>>>>>> 64747d0fb (updates based on review)
     'consumable_detached'               => 'Consumable was successfully detached',
     'accessory_added_success'           => 'Accessory added successfully',
     'accessory_updated'                 => 'Accessory was successfully updated',
     'accessory_detached'                => 'Accessory was successfully detached',
     'accessory_error'                   => 'Accessory already attached to kit',
     'accessory_deleted'                 => 'Delete was successful',
+<<<<<<< HEAD
     'accessory_none'                    => 'The accessory does not exist',
+=======
+    'accessory_none'                    => 'Accessory does not exist',
+>>>>>>> 64747d0fb (updates based on review)
     'checkout_success'                  => 'Checkout was successful',
     'checkout_error'                    => 'Checkout error',
     'kit_none'                          => 'Kit does not exist',

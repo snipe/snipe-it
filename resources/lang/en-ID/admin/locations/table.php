@@ -15,13 +15,17 @@ return [
     'print_all_assigned'        => 'Cetak Semua yang Ditetapkan',
     'name'                      => 'Nama lokasi',
     'address'                   => 'Alamat',
+<<<<<<< HEAD
     'address2'                   => 'Address Line 2',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'zip'                       => 'Kode pos',
     'locations'                 => 'Lokasi',
     'parent'                    => 'Induk',
     'currency'                  => 'Mata Uang Lokasi',
     'ldap_ou'                   => 'LDAP Cari OU',
     'user_name'                 => 'User Name',
+<<<<<<< HEAD
     'department'                => 'Departemen',
     'location'                  => 'Lokasi',
     'asset_tag'                 => 'Assets Tag',
@@ -35,6 +39,20 @@ return [
     'asset_expected_checkin'    => 'Expected Checkin',
     'date'                      => 'Tanggal:',
     'phone'                     => 'Location Phone',
+=======
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+>>>>>>> 64747d0fb (updates based on review)
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
     'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
     'signed_by_location_manager' => 'Signed By (Location Manager):',

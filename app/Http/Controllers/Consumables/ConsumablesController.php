@@ -171,6 +171,36 @@ class ConsumablesController extends Controller
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
     }
 
+    
+    /**
+     * Returns a form view to edit a consumable stock.
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]     
+     * @param  int $consumableId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @see ConsumablesController::getEdit() method that stores the form data.
+     * @since [v6.0]
+     */
+    public function updatestock($consumableId = null)
+    {
+        if (is_null($consumable = Consumable::find($consumableId))) {
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        }
+
+        $this->authorize($consumable);
+
+        $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
+
+        if ($consumable->save()) {
+            return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
+        }
+
+        return redirect()->back()->withInput()->withErrors($consumable->getErrors());
+    }
+
+    
+    
     /**
      * Delete a consumable.
      *
@@ -193,7 +223,7 @@ class ConsumablesController extends Controller
     }
 
     /**
-     * Return a view to display component information.
+     * Return a view to display consumable information.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see ConsumablesController::getDataView() method that generates the JSON response
@@ -214,6 +244,7 @@ class ConsumablesController extends Controller
             ->with('error', trans('admin/consumables/message.does_not_exist'));
     }
 
+
     public function clone(Consumable $consumable) : View
     {
         $this->authorize('create', $consumable);
@@ -224,5 +255,28 @@ class ConsumablesController extends Controller
         $consumable->user_id = null;
 
         return view('consumables/edit')->with('item', $consumable);
+    }
+    
+     /**
+     * Return a view to display consumable information.
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @see ConsumablesController::getDataView() method that generates the JSON response
+     * @since [v6.0]
+     * @param int $consumableId
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function showreplenish($consumableId = null)
+    {
+        $consumable = Consumable::find($consumableId);
+        $this->authorize($consumable);
+        if (isset($consumable->id)) {
+            return view('consumables/view', compact('consumable'));
+        }
+
+        return redirect()->route('consumables.index')
+            ->with('error', trans('admin/consumables/message.does_not_exist'));
+
     }
 }
