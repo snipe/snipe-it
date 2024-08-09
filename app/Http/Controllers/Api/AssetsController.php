@@ -55,7 +55,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v4.0]
      */
-    public function index(Request $request, $action = null, $upcoming_status = null) : JsonResponse | array
+    public function index(Request $request, $action = null, $upcoming_status = null): JsonResponse | array
     {
 
 
@@ -562,6 +562,10 @@ class AssetsController extends Controller
             $assets = $assets->RTD();
         }
 
+        if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'Deployed') {
+            $assets = $assets->Deployed();
+        }
+
         if ($request->filled('search')) {
             $assets = $assets->AssignedSearch($request->input('search'));
         }
@@ -587,6 +591,10 @@ class AssetsController extends Controller
             }
 
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;
+
+            // Include checkability of the asset
+            $asset->user_can_checkout = ($asset->availableForCheckout()) ? $asset->availableForCheckout() : null;
+            $asset->assigned_to = ($asset->assigned_to) ? $asset->assigned_to : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assets);
@@ -844,12 +852,19 @@ class AssetsController extends Controller
      * @param string $tag
      * @since [v6.0.5]
      */
-    public function checkoutByTag(AssetCheckoutRequest $request, $tag): JsonResponse
+    public function checkoutByTag(AssetCheckoutRequest $request, $tag = null): JsonResponse
     {
-        if ($asset = Asset::where('asset_tag', $tag)->first()) {
+        $this->authorize('checkout', Asset::class);
+        if(null == $tag && null !== ($request->input('asset_tag'))) {
+            $tag = $request->input('asset_tag');
+        }
+        $asset = Asset::where('asset_tag', $tag)->first();
+
+        if ($asset) {
             return $this->checkout($request, $asset->id);
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag' => e($tag)], 'Asset with tag '.e($tag).' not found'));
     }
 
     /**
@@ -859,22 +874,33 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v4.0]
      */
-    public function checkout(AssetCheckoutRequest $request, $asset_id): JsonResponse
+    public function checkout(AssetCheckoutRequest $request, $asset_id = null): JsonResponse
     {
         $this->authorize('checkout', Asset::class);
+
+        // If api call, get value from the request
+        if(null == $asset_id && null !== ($request->input('asset_id'))) {
+            $asset_id = $request->input('asset_id');
+        }
         $asset = Asset::findOrFail($asset_id);
 
+        // payload with asset attributes
+        $payload = [
+            'id' => e($asset->id),
+            'asset_tag'=> e($asset->asset_tag),
+            'name'=> e($asset->name),
+            'model' => e($asset->model->name),
+            'model_number' => e($asset->model->model_number)
+        ];
+
+        // errors payload
+        $error_payload = [];
+
         if (! $asset->availableForCheckout()) {
-            return response()->json(Helper::formatStandardApiResponse('error', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkout.not_available')));
+            return response()->json(Helper::formatStandardApiResponse('error', $payload, trans('admin/hardware/message.checkout.not_available')));
         }
 
         $this->authorize('checkout', $asset);
-
-        $error_payload = [];
-        $error_payload['asset'] = [
-            'id' => $asset->id,
-            'asset_tag' => $asset->asset_tag,
-        ];
 
         // This item is checked out to a location
         if (request('checkout_to_type') == 'location') {
@@ -901,7 +927,7 @@ class AssetsController extends Controller
         }
 
         if (! isset($target)) {
-            return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset ' . e($asset->asset_tag) . ' is invalid - ' . $error_payload['target_type'] . ' does not exist.'));
+            return response()->json(Helper::formatStandardApiResponse('error', $payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
 
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
@@ -920,10 +946,10 @@ class AssetsController extends Controller
         //        }
 
         if ($asset->checkOut($target, auth()->user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
-            return response()->json(Helper::formatStandardApiResponse('success', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')));
+        return response()->json(Helper::formatStandardApiResponse('error', $payload, trans('admin/hardware/message.checkout.error')));
     }
 
 
@@ -934,18 +960,28 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v4.0]
      */
-    public function checkin(Request $request, $asset_id): JsonResponse
+    public function checkin(Request $request, $asset_id = null): JsonResponse
     {
+        $this->authorize('checkin', Asset::class);
+
+        if(null == $asset_id && null !== ($request->input('asset_id'))) {
+            $asset_id = $request->input('asset_id');
+        }
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
 
+        // payload with asset attributes
+        $payload = [
+            'id'=> e($asset->id),
+            'asset_tag'=> e($asset->asset_tag),
+            'name'=> e($asset->name),
+            'model' => e($asset->model->name),
+            'model_number' => e($asset->model->model_number)
+        ];
+
         $target = $asset->assignedTo;
         if (is_null($target)) {
-            return response()->json(Helper::formatStandardApiResponse('error', [
-                'asset_tag' => e($asset->asset_tag),
-                'model' => e($asset->model->name),
-                'model_number' => e($asset->model->model_number)
-            ], trans('admin/hardware/message.checkin.already_checked_in')));
+            return response()->json(Helper::formatStandardApiResponse('error', $payload, trans('admin/hardware/message.checkin.already_checked_in')));
         }
 
         $asset->expected_checkin = null;
@@ -974,11 +1010,13 @@ class AssetsController extends Controller
             $asset->status_id = $request->input('status_id');
         }
 
-        $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at') . ' ' . date('H:i:s') : date('Y-m-d H:i:s');
         $originalValues = $asset->getRawOriginal();
 
-        if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+        // Fixed non-matching condition for bulk-checkin
+        $checkin_at = date('Y-m-d H:i:s');
+        if (($request->filled('checkin_at')) && ($request->input('checkin_at') != date('Y-m-d'))) {
             $originalValues['action_date'] = $checkin_at;
+            $checkin_at = $request->input('checkin_at');
         }
 
         $asset->licenseseats->each(function (LicenseSeat $seat) {
@@ -1004,6 +1042,7 @@ class AssetsController extends Controller
 
             return response()->json(Helper::formatStandardApiResponse('success', [
                 'asset_tag' => e($asset->asset_tag),
+                'name' => e($asset->name),
                 'model' => e($asset->model->name),
                 'model_number' => e($asset->model->model_number)
             ], trans('admin/hardware/message.checkin.success')));

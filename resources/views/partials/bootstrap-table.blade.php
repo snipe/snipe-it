@@ -955,7 +955,9 @@
             });
         };
 
-        $('.search button[name=clearSearch]').click(searchboxHighlighter);
+        $('.search button[name=clearSearch]').click(function(event) {
+            searchboxHighlighter(event);
+        });
         searchboxHighlighter({ name:'pageload'});
         $('.search-input').keyup(searchboxHighlighter);
 
