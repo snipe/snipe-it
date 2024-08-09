@@ -573,6 +573,16 @@ $(document).ready(function () {
 
     });
 
+    // Search warning message: lookup in localStorage if the banner was dismissed
+    $(function() {
+        const showSearchWarning = localStorage.getItem("search-warning-dismissed") === null;
+        $(".search-warning").toggleClass("hidden",!showSearchWarning);
+        $(".search-warning-dismiss").on("click",function() {
+            localStorage.setItem("search-warning-dismissed","true");
+            $(this).closest(".search-warning").addClass("hidden");
+        });
+    })
+
 });
 
 function htmlEntities(str) {

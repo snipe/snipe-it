@@ -485,7 +485,7 @@ class AssetsController extends Controller
         if ($assets->count() != 1) {
             return redirect()->route('hardware.index')
                 ->with('search', $tag)
-                ->with('warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
+                ->with('search_warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
         }
         $asset = $assets->first();
         $this->authorize('view', $asset);
