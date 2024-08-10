@@ -156,7 +156,7 @@
                         $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success' style='font-size:18px;'></i></td></tr>");
 
                         @if ($user->enable_sounds)
-                        var audio = new Audio('/sounds/success.mp3');
+                        var audio = new Audio('{{ config('app.url') }}/sounds/success.mp3');
                         audio.play()
                         @endif
                             
@@ -180,7 +180,7 @@
 
         function handleAuditFail (data) {
             @if ($user->enable_sounds)
-            var audio = new Audio('/sounds/error.mp3');
+            var audio = new Audio('{{ config('app.url') }}/sounds/error.mp3');
             audio.play()
             @endif
             if (data.asset_tag) {
