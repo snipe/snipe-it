@@ -7,7 +7,6 @@ use App\Presenters\Presentable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -21,6 +20,7 @@ class Actionlog extends SnipeModel
 
     // This is to manually set the source (via setActionSource()) for determineActionSource()
     protected ?string $source = null;
+    protected $with = ['admin'];
 
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
@@ -66,7 +66,7 @@ class Actionlog extends SnipeModel
         'company' => ['name'],
         'admin' => ['first_name','last_name','username', 'email'],
         'user'  => ['first_name','last_name','username', 'email'],
-        'assets'  => ['asset_tag','name'],
+        'assets'  => ['asset_tag','name','model', 'model_number'],
     ];
 
     /**
@@ -371,5 +371,10 @@ class Actionlog extends SnipeModel
     public function setActionSource($source = null): void
     {
         $this->source = $source;
+    }
+
+    public function scopeOrderAdmin($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'action_logs.user_id', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }
