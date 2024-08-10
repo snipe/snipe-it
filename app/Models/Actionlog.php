@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Actionlog extends SnipeModel
 {
+    use CompanyableTrait;
     use HasFactory;
 
     // This is to manually set the source (via setActionSource()) for determineActionSource()
