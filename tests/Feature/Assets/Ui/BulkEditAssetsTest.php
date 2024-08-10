@@ -165,7 +165,7 @@ class BulkEditAssetsTest extends TestCase
         });
     }
 
-    public function testBulkEditAssetsRequiresAdminUserToUpdateEncryptedCustomFields()
+    public function testBulkEditAssetsRequiresadminToUpdateEncryptedCustomFields()
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on mysql');
         $edit_user = User::factory()->editAssets()->create();
