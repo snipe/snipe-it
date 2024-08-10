@@ -31,6 +31,7 @@ class Asset extends Depreciable
 {
 
     protected $presenter = AssetPresenter::class;
+    protected $with = ['model', 'admin'];
 
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
@@ -716,7 +717,7 @@ class Asset extends Depreciable
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function adminuser()
+    public function admin()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
