@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
