@@ -67,7 +67,7 @@ class Actionlog extends SnipeModel
         'company' => ['name'],
         'admin' => ['first_name','last_name','username', 'email'],
         'user'  => ['first_name','last_name','username', 'email'],
-        'assets'  => ['asset_tag','name','model', 'model_number'],
+        'assets'  => ['asset_tag','name'],
     ];
 
     /**
