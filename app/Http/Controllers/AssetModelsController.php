@@ -75,6 +75,7 @@ class AssetModelsController extends Controller
         $model->name = $request->input('name');
         $model->model_number = $request->input('model_number');
         $model->min_amt = $request->input('min_amt');
+        $model->default_purchase_cost = $request->input('purchase_cost');
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
@@ -146,6 +147,7 @@ class AssetModelsController extends Controller
         $model->name = $request->input('name');
         $model->model_number = $request->input('model_number');
         $model->min_amt = $request->input('min_amt');
+        $model->default_purchase_cost = $request->input('purchase_cost');
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
@@ -172,6 +174,12 @@ class AssetModelsController extends Controller
     							->update(['asset_eol_date' => DB::raw('null')]);
 					}
                 }
+            if($model->wasChanged('default_purchase_cost')){
+                if ($model->purchase_cost != '') {
+                    $model->assets()->whereNotNull('purchase_cost')->where('cost_explicit', false)
+                        ->update(['purchase_cost']);
+                }
+            }
             return redirect()->route('models.index')->with('success', trans('admin/models/message.update.success'));
         }
 
