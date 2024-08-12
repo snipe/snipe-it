@@ -266,11 +266,11 @@ class UsersController extends Controller
             $user->location_id = $request->input('location_id', null);
             if ($request->has('company_id')) {
                 if ($user->assets->count() > 0) {
-                    if ($user->assets()->pluck('company_id') != $user->getRawOriginal('company_id')) {
+                    //if ($user->assets()->pluck('company_id') != $user->getRawOriginal('company_id')) {
                         {
                             return back()->with('error', 'this user has assets, check them in first');
                         }
-                    }
+                    //}
                 }
             }
             $user->company_id = Company::getIdForUser($request->input('company_id', null));
