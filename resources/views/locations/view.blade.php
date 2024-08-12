@@ -22,7 +22,7 @@
                   <li class="active">
                       <a href="#users" data-toggle="tab" data-tooltip="true" title="{{ trans('general.users') }}">
                           <i class="fa-solid fa-house-user" style="font-size: 18px" aria-hidden="true"></i>
-                          <span class="badge badge-secondary">
+                          <span class="badge">
                           {{ number_format($location->users->count()) }}
                       </span>
                           <span class="sr-only">
@@ -37,7 +37,7 @@
               <li>
                   <a href="#assets" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/locations/message.current_location') }}">
                       <i class="fa-solid fa-house-laptop" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->assets()->AssetsForShow()->count()) }}
                       </span>
                       <span class="sr-only">
@@ -51,7 +51,7 @@
               <li>
                   <a href="#rtd_assets" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/hardware/form.default_location') }}">
                       <i class="fa-solid fa-house-flag" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->rtd_assets()->AssetsForShow()->count()) }}
                       </span>
                       <span class="sr-only">
@@ -65,7 +65,7 @@
               <li>
                   <a href="#assets_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/locations/message.assigned_assets') }}">
                       <i class="fas fa-barcode" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->assignedAssets()->AssetsForShow()->count()) }}
                       </span>
                       <span class="sr-only">
@@ -79,7 +79,7 @@
               <li>
                   <a href="#accessories_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories_assigned') }}">
                       <i class="fas fa-keyboard" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->assignedAccessories->count()) }}
                       </span>
                       <span class="sr-only">
@@ -93,7 +93,7 @@
               <li>
                   <a href="#accessories" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories') }}">
                       <i class="fas fa-keyboard" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->accessories->count()) }}
                       </span>
                       <span class="sr-only">
@@ -107,7 +107,7 @@
               <li>
                   <a href="#consumables" data-toggle="tab" data-tooltip="true" title="{{ trans('general.consumables') }}">
                       <i class="fas fa-tint" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->consumables->count()) }}
                       </span>
                       <span class="sr-only">
@@ -121,7 +121,7 @@
               <li>
                   <a href="#components" data-toggle="tab" data-tooltip="true" title="{{ trans('general.components') }}">
                       <i class="fas fa-hdd" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge badge-secondary">
+                      <span class="badge">
                           {{ number_format($location->components->count()) }}
                       </span>
                       <span class="sr-only">

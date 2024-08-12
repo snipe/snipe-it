@@ -44,6 +44,7 @@ class LocationsController extends Controller
             'manager_id',
             'image',
             'assigned_assets_count',
+            'assigned_accessories_count',
             'users_count',
             'assets_count',
             'assigned_assets_count',
@@ -73,6 +74,7 @@ class LocationsController extends Controller
             'locations.currency',
         ])->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
+            ->withCount('assignedAccessories as assigned_accessories_count')
             ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('children as children_count')
             ->withCount('users as users_count');

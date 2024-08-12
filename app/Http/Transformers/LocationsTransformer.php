@@ -46,6 +46,7 @@ class LocationsTransformer
                 'phone' => ($location->phone!='') ? e($location->phone): null,
                 'fax' => ($location->fax!='') ? e($location->fax): null,
                 'assigned_assets_count' => (int) $location->assigned_assets_count,
+                'assigned_accessories_count' => (int) $location->assigned_accessories_count,
                 'assets_count'    => (int) $location->assets_count,
                 'rtd_assets_count'    => (int) $location->rtd_assets_count,
                 'users_count'    => (int) $location->users_count,

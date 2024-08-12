@@ -581,24 +581,23 @@ h4 {
  See https://github.com/snipe/snipe-it/issues/7989
 
  */
-
 th.css-barcode > .th-inner,
 th.css-license > .th-inner,
 th.css-consumable > .th-inner,
 th.css-envelope > .th-inner,
 th.css-users > .th-inner,
 th.css-location > .th-inner,
-th.css-accessory > .th-inner
-{
+th.css-house-user > .th-inner,
+th.css-house-flag > .th-inner,
+th.css-house-laptop > .th-inner,
+th.css-accessory > .th-inner {
   font-size: 0px;
-  line-height: .75!important;
+  line-height: 0.75 !important;
   text-align: left;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
 th.css-padlock > .th-inner::before,
 th.css-barcode > .th-inner::before,
 th.css-license > .th-inner::before,
@@ -606,61 +605,82 @@ th.css-consumable > .th-inner::before,
 th.css-envelope > .th-inner::before,
 th.css-users > .th-inner::before,
 th.css-location > .th-inner::before,
+th.css-location > .th-inner::before,
+th.css-house-user > .th-inner::before,
+th.css-house-laptop > .th-inner::before,
+th.css-house-flag > .th-inner::before,
 th.css-accessory > .th-inner::before
-
 {
   display: inline-block;
   font-size: 20px;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-
-th.css-padlock > .th-inner::before
-{
+th.css-padlock > .th-inner::before {
   content: "\f023";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   padding-right: 4px;
   font-size: 12px;
 }
-
 /**
 BEGIN ICON TABLE HEADERS
 Set the font-weight css property as 900 (For Solid), 400 (Regular or Brands), 300 (Light for pro icons).
 **/
-th.css-barcode > .th-inner::before
-{
-  content: "\f02a"; font-family: "Font Awesome 5 Free"; font-weight: 900;
+th.css-barcode > .th-inner::before {
+  content: "\f02a";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
-
-th.css-license > .th-inner::before
-{
-  content: "\f0c7"; font-family: "Font Awesome 5 Free"; font-weight: 400;
+th.css-license > .th-inner::before {
+  content: "\f0c7";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
 }
-
-th.css-consumable > .th-inner::before
-{
-  content: "\f043"; font-family: "Font Awesome 5 Free"; font-weight: 900;
+th.css-consumable > .th-inner::before {
+  content: "\f043";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
-
-th.css-envelope > .th-inner::before
-{
-  content: "\f0e0"; font-family: "Font Awesome 5 Free"; font-weight: 400;
+th.css-envelope > .th-inner::before {
+  content: "\f0e0";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
 }
-
-th.css-accessory > .th-inner::before
-{
-  content: "\f11c"; font-family: "Font Awesome 5 Free"; font-weight: 400;
+th.css-accessory > .th-inner::before {
+  content: "\f11c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 400;
 }
-
 th.css-users > .th-inner::before {
-  content: "\f0c0"; font-family: "Font Awesome 5 Free"; font-size: 15px;
+  content: "\f0c0";
+  font-family: "Font Awesome 5 Free";
+  font-size: 15px;
 }
-
 th.css-location > .th-inner::before {
-  content: "\f3c5"; font-family: "Font Awesome 5 Free"; font-size: 19px; margin-bottom: 0px;
+  content: "\f3c5";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
 }
-
+th.css-house-user > .th-inner::before {
+  content: "\e1b0";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-house-flag > .th-inner::before {
+  content: "\e50d";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-house-laptop > .th-inner::before {
+  content: "\e066";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
 
 .small-box .inner {
   padding-left: 15px;

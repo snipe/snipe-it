@@ -71,6 +71,8 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('admin/hardware/form.default_location'),
                 'visible' => false,
+                'class' => 'css-house-flag',
+                'tooltip' => true,
             ],
 
             [
@@ -80,8 +82,17 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('admin/locations/message.assigned_assets'),
                 'visible' => true,
+                'class' => 'css-house-laptop',
             ],
-
+            [
+                'field' => 'assigned_accessories_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' =>  trans('general.accessories_assigned'),
+                'visible' => true,
+                'class' => 'css-accessory',
+            ],
             [
                 'field' => 'users_count',
                 'searchable' => false,
@@ -89,6 +100,7 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('general.people'),
                 'visible' => true,
+                'class' => 'css-house-user',
             ],
             [
                 'field' => 'currency',

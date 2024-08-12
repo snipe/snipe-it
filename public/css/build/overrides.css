@@ -516,6 +516,9 @@ th.css-consumable > .th-inner,
 th.css-envelope > .th-inner,
 th.css-users > .th-inner,
 th.css-location > .th-inner,
+th.css-house-user > .th-inner,
+th.css-house-flag > .th-inner,
+th.css-house-laptop > .th-inner,
 th.css-accessory > .th-inner {
   font-size: 0px;
   line-height: 0.75 !important;
@@ -531,6 +534,10 @@ th.css-consumable > .th-inner::before,
 th.css-envelope > .th-inner::before,
 th.css-users > .th-inner::before,
 th.css-location > .th-inner::before,
+th.css-location > .th-inner::before,
+th.css-house-user > .th-inner::before,
+th.css-house-laptop > .th-inner::before,
+th.css-house-flag > .th-inner::before,
 th.css-accessory > .th-inner::before {
   display: inline-block;
   font-size: 20px;
@@ -584,6 +591,24 @@ th.css-location > .th-inner::before {
   font-size: 19px;
   margin-bottom: 0px;
 }
+th.css-house-user > .th-inner::before {
+  content: "\e1b0";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-house-flag > .th-inner::before {
+  content: "\e50d";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-house-laptop > .th-inner::before {
+  content: "\e066";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
 .small-box .inner {
   padding-left: 15px;
   padding-right: 15px;
@@ -630,6 +655,11 @@ th.css-location > .th-inner::before {
 @media screen and (max-width: 1268px) and (min-width: 912px) {
   .sidebar-menu {
     margin-top: 50px;
+  }
+}
+@media screen and (max-width: 1318px) and (min-width: 1200px) {
+  .box {
+    height: 170px;
   }
 }
 .ellipsis {
