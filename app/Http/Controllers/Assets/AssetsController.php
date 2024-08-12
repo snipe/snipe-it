@@ -135,7 +135,13 @@ class AssetsController extends Controller
             $asset->user_id                 = Auth::id();
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
-            $asset->purchase_cost           = request('purchase_cost');
+            if($request->filled('purchase_cost')) {
+                $asset->purchase_cost = $request->input('purchase_cost', null);
+            }
+            else if($asset->model->default_purchase_cost !== null) {
+                $asset->purchase_cost = $asset->model->default_purchase_cost;
+            }
+            $asset->purchase_cost_explicit = Asset::purchaseCostExplicit($asset, $request);
             $asset->purchase_date           = request('purchase_date', null);
             $asset->asset_eol_date          = request('asset_eol_date', null);
             $asset->assigned_to             = request('assigned_to', null);
