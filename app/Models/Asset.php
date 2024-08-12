@@ -968,6 +968,18 @@ class Asset extends Depreciable
         }
         return $cost;
     }
+    public static function purchaseCostExplicit($asset, $request)
+    {
+        if ($request->input('purchase_cost')) {
+            if ($asset->model->default_purchase_cost) {
+                if ($request->input('purchase_cost') !== $asset->model->default_purchase_cost) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
 
     /**
      * -----------------------------------------------

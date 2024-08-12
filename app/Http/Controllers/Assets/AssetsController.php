@@ -303,7 +303,16 @@ class AssetsController extends Controller
 
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
-        $asset->purchase_cost = $request->input('purchase_cost', null);
+        if($request->filled('purchase_cost')) {
+            $asset->purchase_cost = $request->input('purchase_cost', null);
+        }
+        else if($asset->model->default_purchase_cost !== null) {
+            $asset->purchase_cost = $asset->model->default_purchase_cost;
+        }
+        else{
+            $asset->purchase_cost = null;
+        }
+        $asset->purchase_cost_explicit = Asset::purchaseCostExplicit($asset, $request);
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->next_audit_date = $request->input('next_audit_date', null);
         if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
