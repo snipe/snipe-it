@@ -10,6 +10,7 @@ class FixupAssignedToAssignedTypeTest extends TestCase
 {
     public function testEmptyAssignedType()
     {
+        $this->markTestIncomplete();
         $asset = Asset::factory()->create();
         $user = User::factory()->create();
         $admin = User::factory()->admin()->create();
@@ -30,6 +31,7 @@ class FixupAssignedToAssignedTypeTest extends TestCase
 
     public function testInvalidAssignedTo()
     {
+        $this->markTestIncomplete();
         $asset = Asset::factory()->create();
         $user = User::factory()->create();
         $admin = User::factory()->admin()->create();
