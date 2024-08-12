@@ -322,9 +322,9 @@
                                                 <strong>{{ trans('admin/hardware/form.tag') }}</strong>
                                             </div>
                                             <div class="col-md-9">
-                                                <span class="js-copy">{{ $asset->asset_tag  }}</span>
+                                                <span class="js-copy-assettag">{{ $asset->asset_tag  }}</span>
 
-                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-assettag" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                                                     <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                                                 </i>
                                             </div>
@@ -406,9 +406,9 @@
                                                 <strong>{{ trans('admin/hardware/form.serial') }}</strong>
                                             </div>
                                             <div class="col-md-9">
-                                                <span class="js-copy">{{ $asset->serial  }}</span>
+                                                <span class="js-copy-serial">{{ $asset->serial  }}</span>
 
-                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-serial" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                                                     <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                                                 </i>
                                             </div>
