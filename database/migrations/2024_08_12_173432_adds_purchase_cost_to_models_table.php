@@ -19,13 +19,13 @@ return new class extends Migration
         });
 
         Schema::table('models', function (Blueprint $table) {
-            $table->decimal('default_purchase_cost', 8, 2)->default(null)->nullable()->after('min_amt');
+            $table->decimal('purchase_cost', 8, 2)->default(null)->nullable()->after('min_amt');
         });
 
         Asset::whereNotNull('purchase_cost')->with('model')->chunkById(500, function ($assetsWithPurchaseCosts) {
             foreach ($assetsWithPurchaseCosts as $asset) {
                 if($asset->purchase_cost) {
-                    if ($asset->purchase_cost !== $asset->model->default_purchase_cost) {
+                    if ($asset->purchase_cost !== $asset->model->purchase_cost) {
                         DB::table('assets')->where('id', $asset->id)->update(['purchase_cost_explicit' => true]);
                     }
                 }
@@ -46,7 +46,7 @@ return new class extends Migration
         });
 
         Schema::table('models', function (Blueprint $table) {
-            $table->dropColumn('default_purchase_cost');
+            $table->dropColumn('purchase_cost');
         });
     }
 };

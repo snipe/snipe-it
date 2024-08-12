@@ -971,8 +971,8 @@ class Asset extends Depreciable
     public static function purchaseCostExplicit($asset, $request)
     {
         if ($request->input('purchase_cost')) {
-            if ($asset->model->default_purchase_cost) {
-                if ($request->input('purchase_cost') !== $asset->model->default_purchase_cost) {
+            if ($asset->model->purchase_cost) {
+                if ($request->input('purchase_cost') !== $asset->model->purchase_cost) {
                     return true;
                 }
                 return false;

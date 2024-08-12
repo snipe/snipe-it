@@ -138,8 +138,8 @@ class AssetsController extends Controller
             if($request->filled('purchase_cost')) {
                 $asset->purchase_cost = $request->input('purchase_cost', null);
             }
-            else if($asset->model->default_purchase_cost !== null) {
-                $asset->purchase_cost = $asset->model->default_purchase_cost;
+            else if($asset->model->purchase_cost !== null) {
+                $asset->purchase_cost = $asset->model->purchase_cost;
             }
             $asset->purchase_cost_explicit = Asset::purchaseCostExplicit($asset, $request);
             $asset->purchase_date           = request('purchase_date', null);
@@ -312,8 +312,8 @@ class AssetsController extends Controller
         if($request->filled('purchase_cost')) {
             $asset->purchase_cost = $request->input('purchase_cost', null);
         }
-        else if($asset->model->default_purchase_cost !== null) {
-            $asset->purchase_cost = $asset->model->default_purchase_cost;
+        else if($asset->model->purchase_cost !== null) {
+            $asset->purchase_cost = $asset->model->purchase_cost;
         }
         else{
             $asset->purchase_cost = null;
