@@ -75,6 +75,20 @@
               </li>
               @endif
 
+              @if ($location->accessories->count() > 0)
+                  <li>
+                      <a href="#accessories" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories') }}">
+                          <i class="far fa-keyboard" style="font-size: 18px" aria-hidden="true"></i>
+                          <span class="badge">
+                      {{ number_format($location->accessories->count()) }}
+                  </span>
+                          <span class="sr-only">
+                      {{ trans('general.accessories') }}
+                  </span>
+                      </a>
+                  </li>
+              @endif
+
               @if ($location->assignedAccessories->count() > 0)
               <li>
                   <a href="#accessories_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories_assigned') }}">
@@ -89,19 +103,6 @@
               </li>
               @endif
 
-              @if ($location->accessories->count() > 0)
-              <li>
-                  <a href="#accessories" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories') }}">
-                      <i class="fas fa-keyboard" style="font-size: 18px" aria-hidden="true"></i>
-                      <span class="badge">
-                          {{ number_format($location->accessories->count()) }}
-                      </span>
-                      <span class="sr-only">
-                          {{ trans('general.accessories') }}
-                      </span>
-                  </a>
-              </li>
-              @endif
 
               @if ($location->consumables->count() > 0)
               <li>

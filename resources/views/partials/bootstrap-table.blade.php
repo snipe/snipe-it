@@ -410,6 +410,8 @@
         }
     }
 
+
+
     // Check if checkbox should be selectable
     // Selectability is determined by the API field "selectable" which is set at the Presenter/API Transformer
     // However since different bulk actions have different requirements, we have to walk through the available_actions object

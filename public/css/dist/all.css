@@ -21858,6 +21858,7 @@ th.css-location > .th-inner,
 th.css-house-user > .th-inner,
 th.css-house-flag > .th-inner,
 th.css-house-laptop > .th-inner,
+th.css-accessory-alt > .th-inner,
 th.css-accessory > .th-inner {
   font-size: 0px;
   line-height: 0.75 !important;
@@ -21877,6 +21878,7 @@ th.css-location > .th-inner::before,
 th.css-house-user > .th-inner::before,
 th.css-house-laptop > .th-inner::before,
 th.css-house-flag > .th-inner::before,
+th.css-accessory-alt > .th-inner::before,
 th.css-accessory > .th-inner::before {
   display: inline-block;
   font-size: 20px;
@@ -21944,6 +21946,12 @@ th.css-house-flag > .th-inner::before {
 }
 th.css-house-laptop > .th-inner::before {
   content: "\e066";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-accessory-alt > .th-inner::before {
+  content: "\f11c";
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
@@ -23181,6 +23189,7 @@ th.css-location > .th-inner,
 th.css-house-user > .th-inner,
 th.css-house-flag > .th-inner,
 th.css-house-laptop > .th-inner,
+th.css-accessory-alt > .th-inner,
 th.css-accessory > .th-inner {
   font-size: 0px;
   line-height: 0.75 !important;
@@ -23200,6 +23209,7 @@ th.css-location > .th-inner::before,
 th.css-house-user > .th-inner::before,
 th.css-house-laptop > .th-inner::before,
 th.css-house-flag > .th-inner::before,
+th.css-accessory-alt > .th-inner::before,
 th.css-accessory > .th-inner::before {
   display: inline-block;
   font-size: 20px;
@@ -23267,6 +23277,12 @@ th.css-house-flag > .th-inner::before {
 }
 th.css-house-laptop > .th-inner::before {
   content: "\e066";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-accessory-alt > .th-inner::before {
+  content: "\f11c";
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
