@@ -253,6 +253,21 @@ class Location extends SnipeModel
         return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
+    public function assignedAccessories()
+    {
+        return $this->morphToMany(
+            Accessory::class,
+            'accessory_assignment',
+            'accessories_checkout',
+            'assigned_to',
+            'assigned_type',
+            null,
+            null,
+            'accessory_assignment',
+            true
+        );
+    }
+
     public function setLdapOuAttribute($ldap_ou)
     {
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;

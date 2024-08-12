@@ -255,8 +255,21 @@ class Accessory extends SnipeModel
      */
     public function checkouts()
     {
-        return $this->hasMany(\App\Models\AccessoryCheckout::class, 'accessory_id')
-            ->with('assignedTo');
+        return $this->morphToMany(Accessory::class, 'assignedAccessories', 'accessories_checkout', 'assigned_to', null,);
+    }
+
+    public function locationAssignments()
+    {
+        //I don't nkow that we'll want this, but this is a thing we can do - find the locations that have been assigned this accessory
+        return $this->morphedByMany(Location::class, 'accessory_assignment');
+
+    }
+
+    public function userAssignments()
+    {
+        //I don't nkow that we'll want this, but this is a thing we can do - find the locations that have been assigned this accessory
+        return $this->morphedByMany(User::class, 'accessory_assignment');
+
     }
 
     /**
