@@ -232,7 +232,7 @@ class UsersController extends Controller
         $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+        $user = User::with(['assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc'])->withTrashed()->find($id);
 
         // User is valid - continue...
         if ($user) {
@@ -263,7 +263,7 @@ class UsersController extends Controller
             $user->activated = $request->input('activated', 0);
             $user->jobtitle = $request->input('jobtitle', null);
             $user->phone = $request->input('phone');
-            $user->location_id = $request->input('location_id', null);
+            $user->location_id = $request->input('location_id', null); //here
             $user->company_id = Company::getIdForUser($request->input('company_id', null));
             $user->manager_id = $request->input('manager_id', null);
             $user->notes = $request->input('notes');
