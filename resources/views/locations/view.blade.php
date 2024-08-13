@@ -259,7 +259,7 @@
 
                   <div class="table table-responsive">
                       <table
-                              data-columns="{{ \App\Presenters\AccessoryPresenter::assignedDataTableLayout() }}"
+                              data-columns="{{ \App\Presenters\LocationPresenter::assignedAccessoriesDataTableLayout() }}"
                               data-cookie-id-table="accessoriesAssignedListingTable"
                               data-pagination="true"
                               data-id-table="accessoriesAssignedListingTable"
