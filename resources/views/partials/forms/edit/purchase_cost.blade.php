@@ -5,14 +5,17 @@
         <div class="input-group col-md-4" style="padding-left: 0px;">
             <input class="form-control" type="text" name="purchase_cost" aria-label="purchase_cost" id="purchase_cost" value="{{ (old('purchase_cost', Helper::formatCurrencyOutput($item->purchase_cost))) }}" />
             <span class="input-group-addon">
-                @if (isset($currency_type))
-                    {{ $currency_type }}
-                @else
-                    {{ $snipeSettings->default_currency }}
-                @endif
+            @if (isset($currency_type))
+                {{ $currency_type }}
+            @else
+                {{ $snipeSettings->default_currency }}
+            @endif
             </span>
         </div>
         <div class="col-md-9" style="padding-left: 0px;">
+            @if(Route::is('hardware.create'))
+            <p class="help-block">{{trans('general.purchase_cost_help')}}</p>
+            @endif
             {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>

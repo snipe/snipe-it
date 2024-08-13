@@ -174,12 +174,7 @@ class AssetModelsController extends Controller
     							->update(['asset_eol_date' => DB::raw('null')]);
 					}
                 }
-            if($model->wasChanged('purchase_cost')){
-                if ($model->purchase_cost !== '') {
-                    $model->assets()->whereNotNull('purchase_cost')->where('purchase_cost_explicit', false)
-                        ->update(['purchase_cost' => $model->purchase_cost] );
-                }
-            }
+
             return redirect()->route('models.index')->with('success', trans('admin/models/message.update.success'));
         }
 
