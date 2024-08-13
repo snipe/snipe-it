@@ -17,7 +17,7 @@
 | **{{ trans('general.notes') }}** | {{ $note }} |
 @endif
 @if (isset($item_status))
-    | **{{ trans('general.status') }}** | {{ $item_status }} |
+| **{{ trans('general.status') }}** | {{ $item_status }} |
 @endif
 @if ((isset($item_tag)) && ($item_tag!=''))
 | **{{ trans('mail.asset_tag') }}** | {{ $item_tag }} |

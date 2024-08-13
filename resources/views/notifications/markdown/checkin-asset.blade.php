@@ -32,7 +32,7 @@
 | **{{ trans('mail.checkout_date') }}** | {{ $last_checkout }} |
 @endif
 @if (isset($status))
-    | **{{ trans('general.status') }}** | {{ $status }} |
+| **{{ trans('general.status') }}** | {{ $status }} |
 @endif
 @foreach($fields as $field)
 @if (($item->{ $field->db_column_name() }!='') && ($field->show_in_email) && ($field->field_encrypted=='0'))
