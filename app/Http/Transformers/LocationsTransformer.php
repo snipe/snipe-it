@@ -92,9 +92,9 @@ class LocationsTransformer
     {
         if ($location) {
 
-            \Log::error($location);
             $array = [
                 'id' => (int) $location->id,
+                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
                 'type' => "location",
                 'name' => e($location->name),
             ];

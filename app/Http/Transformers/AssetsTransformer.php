@@ -272,7 +272,11 @@ class AssetsTransformer
     {
         $array = [
             'id' => (int) $asset->id,
-            'name' => e($asset->name),
+            'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
+            'type' => 'asset',
+            'name' => e($asset->present()->fullName()),
+            'model' => ($asset->model) ? e($asset->model->name) : null,
+            'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
         ];

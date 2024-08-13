@@ -71,7 +71,6 @@ class AccessoriesTransformer
 
         $array = [];
         foreach ($accessory_checkouts as $checkout) {
-            \Log::error($checkout);
             $array[] = [
                 'id' => $checkout->id,
                 'assigned_to' => $this->transformAssignedTo($checkout),
@@ -90,17 +89,12 @@ class AccessoriesTransformer
 
     public function transformAssignedTo($accessoryCheckout)
     {
-
-        //\Log::error($accessoryCheckout->assigned);
-
+        
         if ($accessoryCheckout->checkedOutToUser()) {
-            \Log::error('checked out to a user');
             return (new UsersTransformer)->transformUserCompact($accessoryCheckout->assigned);
         } elseif ($accessoryCheckout->checkedOutToLocation()) {
-            \Log::error('checked out to a location');
             return (new LocationsTransformer())->transformLocationCompact($accessoryCheckout->assigned);
         } elseif ($accessoryCheckout->checkedOutToAsset()) {
-            \Log::error('checked out to an asset');
             return (new AssetsTransformer())->transformAssetCompact($accessoryCheckout->assigned);
         }
 

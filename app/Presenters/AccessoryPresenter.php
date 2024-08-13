@@ -159,6 +159,15 @@ class AccessoryPresenter extends Presenter
                 'visible' => false,
             ],
             [
+                'field' => 'assigned_to.image',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.image'),
+                'visible' => true,
+                'formatter' => 'imageFormatter',
+            ],
+            [
                 'field' => 'assigned_to',
                 'searchable' => false,
                 'sortable' => false,

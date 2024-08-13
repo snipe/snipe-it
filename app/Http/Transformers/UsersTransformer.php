@@ -121,6 +121,7 @@ class UsersTransformer
 
         $array = [
             'id' => (int) $user->id,
+            'image' => e($user->present()->gravatar) ?? null,
             'type' => 'user',
             'name' => e($user->getFullNameAttribute()),
             'first_name' => e($user->first_name),
