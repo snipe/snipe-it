@@ -554,4 +554,7 @@ div.container.row-new-striped {
 .table > tfoot > tr.danger > th {
   background-color: var(--back-sub);
 }
+.table > tbody > tr.warning > td {
+  background-color: var(--back-sub);
+}
 

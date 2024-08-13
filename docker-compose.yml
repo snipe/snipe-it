@@ -1,50 +1,34 @@
-version: '3'
+volumes:
+  db_data:
+  storage:
 
 services:
-  snipeit:
-    build:
-      context: .
-      dockerfile: Dockerfile.alpine
-    container_name: snipeit
-    ports:
-    - "8000:80"
+  app:
+    image: snipe/snipe-it:${APP_VERSION:-v6.4.1}
+    restart: always
     volumes:
-    - ./storage/logs:/var/www/html/storage/logs
+      - storage:/var/lib/snipeit
+    ports:
+      - "${APP_PORT:-8000}:80"
     depends_on:
-    - mariadb
-    - redis
+      db:
+        condition: service_healthy
+        restart: true
     env_file:
-    - .env.docker
-    networks:
-    - snipeit-backend
+      - .env
 
-  mariadb:
+  db:
     image: mariadb:10.6.4-focal
+    restart: always
     volumes:
-    - db:/var/lib/mysql
-    env_file:
-    - .env.docker
-    networks:
-    - snipeit-backend
-    ports:
-      - "3306:3306"
-
-  redis:
-    image: redis:6.2.5-buster
-    networks:
-    - snipeit-backend
-
-  mailhog:
-    image: mailhog/mailhog:v1.0.1
-    ports:
-    # - 1025:1025
-    - "8025:8025"
-    networks:
-    - snipeit-backend
-
-
-volumes:
-  db: {}
-
-networks:
-  snipeit-backend: {}
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 5s
+      timeout: 1s
+      retries: 5

@@ -10,7 +10,7 @@ use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class LdapSync extends Command
 {
@@ -259,6 +259,7 @@ class LdapSync extends Command
                     // Creating a new user.
                     $user = new User;
                     $user->password = $user->noPassword();
+                    $user->locale = app()->getLocale();
                     $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item['createorupdate'] = 'created';
                 }
@@ -309,7 +310,7 @@ class LdapSync extends Command
                         try {
                             $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
                         } catch (\Exception $e) {
-                            \Log::warning("Manager lookup caused an exception: " . $e->getMessage() . ". Falling back to direct username lookup");
+                            Log::warning("Manager lookup caused an exception: " . $e->getMessage() . ". Falling back to direct username lookup");
                             // Hail-mary for Okta manager 'shortnames' - will only work if
                             // Okta configuration is using full email-address-style usernames
                             $ldap_manager = [

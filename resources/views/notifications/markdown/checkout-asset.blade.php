@@ -31,6 +31,9 @@
 @if (isset($last_checkout))
 | **{{ trans('mail.checkout_date') }}** | {{ $last_checkout }} |
 @endif
+@if (isset($status))
+| **{{ trans('general.status') }}** | {{ $status }} |
+@endif
 @if ((isset($expected_checkin)) && ($expected_checkin!=''))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |
 @endif

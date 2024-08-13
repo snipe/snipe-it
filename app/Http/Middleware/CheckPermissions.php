@@ -26,6 +26,6 @@ class CheckPermissions
 
         return response()->view('layouts/basic', [
             'content' => view('errors/403'),
-        ]);
+        ], 403);
     }
 }

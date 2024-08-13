@@ -3,34 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Models\Actionlog;
-use Response;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use \Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class ActionlogController extends Controller
 {
-    public function displaySig($filename)
+    public function displaySig($filename) : RedirectResponse | Response | bool
     {
         // PHP doesn't let you handle file not found errors well with 
         // file_get_contents, so we set the error reporting for just this class
         error_reporting(0);
 
-        $this->authorize('view', \App\Models\Asset::class);
-        $file = config('app.private_uploads').'/signatures/'.$filename;
-        $filetype = Helper::checkUploadIsImage($file);
+        $disk = config('filesystems.default');
+        switch (config("filesystems.disks.$disk.driver")) {
 
-        $contents = file_get_contents($file, false, stream_context_create(['http' => ['ignore_errors' => true]]));
-        if ($contents === false) {
-            \Log::warn('File '.$file.' not found');
-            return false;
-        } else {
-            return Response::make($contents)->header('Content-Type', $filetype);
+            case 's3':
+                $file = 'private_uploads/signatures/'.$filename;
+                return redirect()->away(Storage::disk($disk)->temporaryUrl($file, now()->addMinutes(5)));
+            default:
+                $this->authorize('view', \App\Models\Asset::class);
+                $file = config('app.private_uploads').'/signatures/'.$filename;
+                $filetype = Helper::checkUploadIsImage($file);
+
+                $contents = file_get_contents($file, false, stream_context_create(['http' => ['ignore_errors' => true]]));
+                if ($contents === false) {
+                    Log::warning('File '.$file.' not found');
+                    return false;
+                } else {
+                    return response()->make($contents)->header('Content-Type', $filetype);
+                }
         }
-       
     }
-    public function getStoredEula($filename){
+
+    public function getStoredEula($filename) : Response | BinaryFileResponse
+    {
         $this->authorize('view', \App\Models\Asset::class);
         $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
-
-        return Response::download($file);
+        return response()->download($file);
     }
 }

@@ -66,6 +66,10 @@
                                             <i class="fas fa-tint fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
                                             <span class="sr-only">{{ trans('general.consumables') }}</span>
                                         </th>
+                                        <th class="col-md-1 text-right">
+                                            <i class="fas fa-paperclip fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                                            <span class="sr-only">{{ trans('general.files') }}</span>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -93,16 +97,19 @@
                                                 @endforeach
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->assets()->count())  }}
+                                                {{ number_format($user->assets->count())  }}
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->accessories()->count())  }}
+                                                {{ number_format($user->accessories->count())  }}
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->licenses()->count())  }}
+                                                {{ number_format($user->licenses->count())  }}
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->consumables()->count())  }}
+                                                {{ number_format($user->consumables->count())  }}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ number_format($user->uploads->count())  }}
                                             </td>
                                         </tr>
                                     @endforeach

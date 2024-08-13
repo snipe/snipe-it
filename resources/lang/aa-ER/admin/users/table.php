@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'crwdns1262:0crwdne1262:0',
     'manager' 				=> 'crwdns778:0crwdne778:0',
     'managed_locations'     => 'crwdns1887:0crwdne1887:0',
+    'managed_users'         => 'crwdns12182:0crwdne12182:0',
     'name' 					=> 'crwdns779:0crwdne779:0',
     'nogroup'               => 'crwdns11906:0crwdne11906:0',
     'notes'                 => 'crwdns1268:0crwdne1268:0',

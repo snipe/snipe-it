@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Έχω διαβάσει και συμφωνώ με τους όρους χρήσης, και έχω λάβει αυτό το στοιχείο.',
     'inventory_report' => 'Έκθεση Αποθέματος',
     'item' => 'Αντικείμενο:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Υπάρχει :count άδεια που λήγει στις επόμενες :threshold ημέρες."Υπάρχουν :count άδειες που λήγουν στις επόμενες :threshold ημέρες.',
     'link_to_update_password' => 'Κάντε κλικ στον παρακάτω σύνδεσμο για να ενημερώσετε τον κωδικό: web:',
     'login' => 'Σύνδεση:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Υπάρχει :count περιουσιακό στοιχείο που έρχεται για έλεγχο μέσα σε :threshold days.°C. Υπάρχουν :count περιουσιακά στοιχεία που έρχονται για έλεγχο εντός :threshold ημερών.',
     'user' => 'Χρήστης',
     'username' => 'Όνομα χρήστη',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Καλώς ήρθατε, %name',
     'welcome_to' => 'Καλώς ήλθατε στο!',
     'your_assets' => 'Προβολή Των Αντικειμένων Σας',
     'your_credentials' => 'Τα διαπιστευτήρια σας Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

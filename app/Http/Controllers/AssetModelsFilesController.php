@@ -6,8 +6,11 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\AssetModel;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use \Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AssetModelsFilesController extends Controller
 {
@@ -16,12 +19,12 @@ class AssetModelsFilesController extends Controller
      *
      * @param UploadFileRequest $request
      * @param int $modelId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      *@since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function store(UploadFileRequest $request, $modelId = null)
+    public function store(UploadFileRequest $request, $modelId = null) : RedirectResponse
     {
         if (! $model = AssetModel::find($modelId)) {
             return redirect()->route('models.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -54,10 +57,8 @@ class AssetModelsFilesController extends Controller
      * @param  int $modelId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($modelId = null, $fileId = null)
+    public function show($modelId = null, $fileId = null) : StreamedResponse | Response | RedirectResponse | BinaryFileResponse
     {
         $model = AssetModel::find($modelId);
         // the asset is valid
@@ -70,8 +71,6 @@ class AssetModelsFilesController extends Controller
             }
 
             $file = 'private_uploads/assetmodels/'.$log->filename;
-            \Log::debug('Checking for '.$file);
-
 
             if (! Storage::exists($file)) {
                 return response('File '.$file.' not found on server', 404)
@@ -103,10 +102,8 @@ class AssetModelsFilesController extends Controller
      * @param  int $modelId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($modelId = null, $fileId = null)
+    public function destroy($modelId = null, $fileId = null) : RedirectResponse
     {
         $model = AssetModel::find($modelId);
         $this->authorize('update', $model);

@@ -21,7 +21,7 @@ use App\Notifications\CheckoutLicenseSeatNotification;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Notification;
 use Exception;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutableListener
 {
@@ -69,9 +69,9 @@ class CheckoutableListener
               }
             }
         } catch (ClientException $e) {
-            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
+            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
-            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
+            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ class CheckoutableListener
      */    
     public function onCheckedIn($event)
     {
-        \Log::debug('onCheckedIn in the Checkoutable listener fired');
+        Log::debug('onCheckedIn in the Checkoutable listener fired');
 
         if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
@@ -137,7 +137,11 @@ class CheckoutableListener
      */
     private function getCheckoutAcceptance($event)
     {
-        if (! $event->checkoutable->requireAcceptance()) {
+        $checkedOutToType = get_class($event->checkedOutTo);
+        if ($checkedOutToType != "App\Models\User") {
+            return null;
+        }
+        if (!$event->checkoutable->requireAcceptance()) {
             return null;
         }
 
@@ -199,7 +203,7 @@ class CheckoutableListener
                 break;
         }
 
-        \Log::debug('Notification class: '.$notificationClass);
+        Log::debug('Notification class: '.$notificationClass);
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);  
     }

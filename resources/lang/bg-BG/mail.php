@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Прочетох и се съгласих с условията за ползване, и получих този артикул.',
     'inventory_report' => 'Списък активи',
     'item' => 'Артикул:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Има :count лиценз, който изтича в следващите :threshold дни.|Има :count лиценза, които изтичат в следващите :threshold дни.',
     'link_to_update_password' => 'Моля щракенете върху следния линк за да обновите своята :web password:',
     'login' => 'Вход:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Има :count актив, който подлежи на одит в следващите :threshold дни.|Има :count активи, които подлежат на отид през следващите :threshold дни.',
     'user' => 'Потребител',
     'username' => 'Потребителско име',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Добре дошли, :name',
     'welcome_to' => 'Добре дошли: уеб!',
     'your_assets' => 'Преглед на вашите активи',
     'your_credentials' => 'Вашите идентификационни данни за Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

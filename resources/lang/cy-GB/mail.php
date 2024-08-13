@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Rwyf wedi darllen a chytuno â\'r telerau defnyddio, ac wedi derbyn yr eitem hon.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Eitem:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Mae yna :count trwydded yn dod i ben yn ystod y :threshold diwrnod nesaf | Mae :count trwyddedau yn dod i ben yn y :threshold diwrnod nesaf.',
     'link_to_update_password' => 'Cliciwch ar y ddolen ganlynol i gadarnhau eich cyfrinair :gwe:',
     'login' => 'Mewngofnodi:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Defnyddiwr',
     'username' => 'Enw defnyddiwr',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Croeso, :name',
     'welcome_to' => 'Croeso i :web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Eich manylion defnyddiwr Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

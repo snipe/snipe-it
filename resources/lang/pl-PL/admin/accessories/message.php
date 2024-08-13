@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
         'success' 		=> 'Akcesoria przypisany pomyślnie.',
         'unavailable'   => 'Akcesoria nie są dostępne do zakupu. Sprawdź ilość dostępną',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
+         'checkout_qty' => array(
+            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            ),
+           
     ),
 
     'checkin' => array(

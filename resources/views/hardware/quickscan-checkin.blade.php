@@ -34,7 +34,7 @@
                         {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'checkin_tag')) }}
                         <div class="col-md-9">
                             <div class="input-group date col-md-5" data-date-format="yyyy-mm-dd">
-                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ Request::old('asset_tag') }}">
+                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}">
 
                             </div>
                             {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -129,6 +129,12 @@
                 success : function (data) {
                     if (data.status == 'success') {
                         $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.payload.model + "</td><td>" + data.payload.model_number + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+
+                        @if ($user->enable_sounds)
+                        var audio = new Audio('{{ config('app.url') }}/sounds/success.mp3');
+                        audio.play()
+                        @endif
+
                         incrementOnSuccess();
                     } else {
                         handlecheckinFail(data);
@@ -148,6 +154,12 @@
         });
 
         function handlecheckinFail (data) {
+
+            @if ($user->enable_sounds)
+            var audio = new Audio('{{ config('app.url') }}/sounds/error.mp3');
+            audio.play()
+            @endif
+
             if (data.payload.asset_tag) {
                 var asset_tag = data.payload.asset_tag;
                 var model = data.payload.model;

@@ -209,7 +209,9 @@
                     array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
                 },
 
-                get valueString() { return this.toString(this.fields); },
+                get valueString() {
+                    return this.getCombinedString(this.fields);
+                },
                 onTest: function(a) {
                     console.log('test', a);
                 },
@@ -229,7 +231,7 @@
                                 })
                         }));
                 },
-                toString: function(fields) {
+                getCombinedString: function (fields) {
                     return fields
                         .map(field => field.options
                             .map(option => option.label + '=' + option.datasource)
@@ -259,13 +261,18 @@
         <h1 class="l2fd-title" style="grid-area: fields-title">Fields</h1>
         <div class="l2fd-list" style="grid-area: fields-list">
             <template x-for="(field, index) in fields">
-                <div 
-                    x-bind:key="'field-' + index" 
+                <div
+                    x-data="{
+                                template: '{{ $template }}'
+                            }"
+                    x-bind:key="'field-' + index"
                     x-bind:class="{
                         'l2fd-listitem': true,
                         'selected': selectedField === field
                     }"
-                    x-on:click="selectedField = field" >
+                    x-bind:style="index < 4 && template === 'DefaultLabel' ? 'background-color:#EEEEEE;' : 'background-color:#FFF;'"
+                    x-on:click="selectedField = field"
+                    >
                     <label><span x-text="index+1"></span>: <span x-text="getFieldLabel(field)"></span></label>
                 </div>
             </template>

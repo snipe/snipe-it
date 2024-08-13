@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'crwdns10556:0crwdne10556:0',
-    'user_does_not_exist' => 'crwdns935:0crwdne935:0',
+    'user_does_not_exist' => 'crwdns12164:0crwdne12164:0',
     'asset_does_not_exist' 	=> 'crwdns936:0crwdne936:0',
     'owner_doesnt_match_asset' => 'crwdns937:0crwdne937:0',
     'assoc_users'	 => 'crwdns938:0crwdne938:0',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'crwdns946:0crwdne946:0',
         'success' => 'crwdns947:0crwdne947:0',
         'not_enough_seats' => 'crwdns11902:0crwdne11902:0',
+        'mismatch' => 'crwdns12574:0crwdne12574:0',
+        'unavailable' => 'crwdns12576:0crwdne12576:0',
     ),
 
     'checkin' => array(

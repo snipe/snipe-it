@@ -61,7 +61,9 @@
         @if ($snipeSettings->allow_user_skin=='1')
         <!-- Skin -->
         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
-          <label for="website" class="col-md-3 control-label">{{ Form::label('skin', trans('general.skin')) }}</label>
+          <label for="skin" class="col-md-3 control-label">
+            {{ trans('general.skin') }}
+          </label>
           <div class="col-md-8">
             {!! Form::user_skin('skin', old('skin', $user->skin), 'select2') !!}
             {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
@@ -84,6 +86,15 @@
           <div class="col-md-8">
             <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" />
             {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('enable_sounds') ? ' has-error' : '' }}">
+          <div class="col-md-9 col-md-offset-3">
+            <label for="enable_sounds" class="form-control">
+              <input type="checkbox" name="enable_sounds" value="1" {{ old('enable_sounds', $user->enable_sounds) ? 'checked' : '' }}>
+              {{ trans('account/general.enable_sounds') }}
+            </label>
           </div>
         </div>
 
@@ -148,6 +159,7 @@
           </div>
         </div>
         @endif
+
 
 
       </div> <!-- .box-body -->

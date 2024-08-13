@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Nid yw\'r defnyddiwr yn bodoli.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Nid yw\'r ased rydych yn ceisio perthnasu i\'r trwydded yma yn bodoli.',
     'owner_doesnt_match_asset' => 'Nid y defnyddiwr sydd wedi nodi yw perchenog yr ased rydych yn ceisio perthnasu ir trwydded yma.',
     'assoc_users'	 => 'Ar hyn o bryd mae\'r trwydded yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr trwyddedyn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Nid oedd yn bosib nodi\'r trwydded allan. Ceisiwch eto o. g. y. dd.',
         'success' => 'Trwydded wedi nodi allan yn llwyddiannus',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

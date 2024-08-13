@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Yfirmaður',
     'managed_locations'     => 'Managed Locations',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Nafn',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Athugasemdir',

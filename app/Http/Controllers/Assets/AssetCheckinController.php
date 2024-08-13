@@ -11,9 +11,9 @@ use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Log;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class AssetCheckinController extends Controller
 {
@@ -25,11 +25,9 @@ class AssetCheckinController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @param string $backto
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
-    public function create($assetId, $backto = null)
+    public function create($assetId, $backto = null) : View | RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -45,7 +43,11 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
-        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
+        if (!$asset->model) {
+            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+        }
+
+        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto)->with('table_name', 'Assets');
     }
 
     /**
@@ -55,11 +57,9 @@ class AssetCheckinController extends Controller
      * @param AssetCheckinRequest $request
      * @param int $assetId
      * @param null $backto
-     * @return Redirect
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
-    public function store(AssetCheckinRequest $request, $assetId = null, $backto = null)
+    public function store(AssetCheckinRequest $request, $assetId = null, $backto = null) : RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -70,6 +70,11 @@ class AssetCheckinController extends Controller
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
+
+        if (!$asset->model) {
+            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+        }
+
         $this->authorize('checkin', $asset);
 
         if ($asset->assignedType() == Asset::USER) {
@@ -77,7 +82,6 @@ class AssetCheckinController extends Controller
         }
 
         $asset->expected_checkin = null;
-        //$asset->last_checkout = null;
         $asset->last_checkin = now();
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
@@ -92,7 +96,7 @@ class AssetCheckinController extends Controller
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
-            \Log::debug('NEW Location ID: '.$request->get('location_id'));
+            Log::debug('NEW Location ID: '.$request->get('location_id'));
             $asset->location_id = $request->get('location_id');
 
             if ($request->get('update_default_location') == 0){
@@ -122,15 +126,12 @@ class AssetCheckinController extends Controller
             $acceptance->delete();
         });
 
-        // Was the asset updated?
+        session()->put('redirect_option', $request->get('redirect_option'));
+
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
 
-            if ((isset($user)) && ($backto == 'user')) {
-                return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
-            }
-
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkin.success'));
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());

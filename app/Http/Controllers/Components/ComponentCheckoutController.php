@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Components;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Events\ComponentCheckedOut;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Component;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -93,22 +95,31 @@ class ComponentCheckoutController extends Controller
                 ->withInput();
         }
 
-        // Check if the user exists
+        // Check if the asset exists
         $asset = Asset::find($request->input('asset_id'));
+
+        if ((Setting::getSettings()->full_multiple_companies_support) && $component->company_id !== $asset->company_id) {
+            return redirect()->route('components.checkout.show', $componentId)->with('error', trans('general.error_user_company'));
+        }
 
         // Update the component data
         $component->asset_id = $request->input('asset_id');
         $component->assets()->attach($component->id, [
             'component_id' => $component->id,
-            'user_id' => Auth::user(),
+            'user_id' => auth()->user()->id,
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => $request->input('assigned_qty'),
             'asset_id' => $request->input('asset_id'),
             'note' => $request->input('note'),
         ]);
 
-        event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($component, $asset, auth()->user(), $request->input('note')));
 
-        return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
+        $request->request->add(['checkout_to_type' => 'asset']);
+        $request->request->add(['assigned_asset' => $asset->id]);
+
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
+        return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success', trans('admin/components/message.checkout.success'));
     }
 }

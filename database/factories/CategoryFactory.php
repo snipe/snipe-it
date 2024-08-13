@@ -178,4 +178,32 @@ class CategoryFactory extends Factory
             'category_type' => 'accessory',
         ]);
     }
+
+    public function forAssets()
+    {
+        return $this->state([
+            'category_type' => 'asset',
+        ]);
+    }
+
+    public function forLicenses()
+    {
+        return $this->state([
+            'category_type' => 'license',
+        ]);
+    }
+
+    public function forComponents()
+    {
+        return $this->state([
+            'category_type' => 'component',
+        ]);
+    }
+
+    public function forConsumables()
+    {
+        return $this->state([
+            'category_type' => 'consumable',
+        ]);
+    }
 }

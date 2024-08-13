@@ -47,7 +47,7 @@
   <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default">
     {{ trans('admin/hardware/general.custom_export') }}</a>
   @can('create', \App\Models\Asset::class)
-  <a href="{{ route('hardware.create') }}" accesskey="n" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  <a href="{{ route('hardware.create') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "n" : ''}} class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
   @endcan
 
 @stop
@@ -73,6 +73,7 @@
                 data-pagination="true"
                 data-id-table="assetsListingTable"
                 data-search="true"
+                data-search-text="{{ e(Session::get('search')) }}"
                 data-side-pagination="server"
                 data-show-columns="true"
                 data-show-export="true"

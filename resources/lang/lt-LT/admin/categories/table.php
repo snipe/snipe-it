@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Licencinis sutikimas (EULA)',
     'id'      					=> 'ID',
     'parent'   					=> 'Pagrindinė',
-    'require_acceptance'      	=> 'Priėmimas',
-    'title'      				=> 'Įrangos kategorijos pavadinimas',
+    'require_acceptance'      	=> 'Sutikimas',
+    'title'      				=> 'Turto kategorijos pavadinimas',
 
 );

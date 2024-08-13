@@ -14,6 +14,8 @@ return array(
         'success'               => 'Vous êtes bien connecté.',
         'code_required'         => 'Le code à deux facteurs est requis.',
         'invalid_code'          => 'Le code à deux facteurs est invalide.',
+        'enter_two_factor_code' => 'Veuillez saisir votre code d\'authentification à deux facteurs.',
+        'please_enroll'         => 'Veuillez inscrire un appareil dans l\'authentification à deux facteurs.',
     ),
 
     'signin' => array(

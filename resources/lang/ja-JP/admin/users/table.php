@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'ログイン時の詳細設定はインストール時に変更することは出来ません。',
     'manager' 				=> 'マネージャー',
     'managed_locations'     => '管理ロケーション',
+    'managed_users'         => '管理ユーザー',
     'name' 					=> '名前',
     'nogroup'               => 'まだグループが作成されていません．追加する場合は，次を参照してください: ',
     'notes'                 => '備考',

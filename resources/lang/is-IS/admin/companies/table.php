@@ -2,9 +2,9 @@
 return array(
     'companies' => 'Fyrirtæki',
     'create'    => 'Skrá fyrirtæki',
-    'email'     => 'Company Email',
+    'email'     => 'Netfang fyrirtækisins',
     'title'     => 'Fyrirtæki',
-    'phone'     => 'Company Phone',
+    'phone'     => 'Símanúmer fyrirtækisins',
     'update'    => 'Uppfæra fyrirtæki',
     'name'      => 'Heiti fyrirtækis',
     'id'        => 'ID',

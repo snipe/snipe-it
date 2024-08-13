@@ -51,7 +51,7 @@ class LicenseSeatsTransformer
         ];
 
         if ($seat_count != 0) {
-            $array['name'] = 'Seat '.$seat_count;
+            $array['name'] = trans('admin/licenses/general.seat_count', ['count' => $seat_count]);
         }
 
         $permissions_array['available_actions'] = [

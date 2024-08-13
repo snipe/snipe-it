@@ -8,7 +8,7 @@ return [
     'update' 	 		        => 'Kooxda wax ka beddel',
     'group_name' 	 		=> 'Magaca Kooxda',
     'group_admin' 	 		=> 'Kooxda Maamulka',
-    'allow' 	 			=> 'Allow',
+    'allow' 	 			=> 'Oggolow',
     'deny' 	 				=> 'Inkira',
     'permission'            => 'Ogolaanshaha',
     'grant'                 => 'Deeq',

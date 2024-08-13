@@ -54,7 +54,7 @@ class PredefinedKitCheckoutService
                 $expected_checkin = $request->get('expected_checkin');
             }
 
-            $admin = Auth::user();
+            $admin = auth()->user();
 
             $note = e($request->get('note'));
 

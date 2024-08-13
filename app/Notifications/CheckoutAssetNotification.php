@@ -20,7 +20,7 @@ use NotificationChannels\GoogleChat\Section;
 use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
-
+use Illuminate\Support\Facades\Log;
 class CheckoutAssetNotification extends Notification
 {
     use Queueable;
@@ -75,7 +75,7 @@ class CheckoutAssetNotification extends Notification
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
 
-            \Log::debug('use webhook');
+            Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
 
@@ -209,6 +209,7 @@ public function toGoogleChat()
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
+                'status'        => $this->item->assetstatus?->name,
                 'note'          => $this->note,
                 'target'        => $this->target,
                 'fields'        => $fields,

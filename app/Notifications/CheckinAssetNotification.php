@@ -17,7 +17,7 @@ use NotificationChannels\GoogleChat\Section;
 use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
-
+use Illuminate\Support\Facades\Log;
 class CheckinAssetNotification extends Notification
 {
     use Queueable;
@@ -61,7 +61,7 @@ class CheckinAssetNotification extends Notification
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            \Log::debug('use webhook');
+            Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
 
@@ -162,6 +162,7 @@ class CheckinAssetNotification extends Notification
         $message = (new MailMessage)->markdown('notifications.markdown.checkin-asset',
             [
                 'item'          => $this->item,
+                'status'        => $this->item->assetstatus?->name,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,

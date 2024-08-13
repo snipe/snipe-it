@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Informacja o licencji',
     'license_seats'  			=> 'Licencje',
     'seat'  					=> 'Miejsce',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Miejsca',
     'software_licenses'  		=> 'Licencje oprogramowania',
     'user'  					=> 'Użytkownik',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Zaznacz wszystkie miejsca',
-                'modal'             => 'Spowoduje to zaznaczenie jednego miejsca. | Ta akcja będzie sprawdzać wszystkie :checkedout_seats_count miejsc dla tej licencji.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Zaznacz WSZYSTKIE miejsca dla tej licencji zarówno od użytkowników, jak i aktywów',
                 'disabled_tooltip'  => 'To jest wyłączone, ponieważ nie ma obecnie zamówionych miejsc',
                 'disabled_tooltip_reassignable'  => 'To jest wyłączone, ponieważ licencja nie jest przypisywana ponownie',
                 'success'           => 'Licencja pomyślnie odblokowana! | Wszystkie licencje zostały pomyślnie sprawdzone!',
-                'log_msg'           => 'Zamówione za pomocą licencji masowej w interfejsie licencyjnym',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

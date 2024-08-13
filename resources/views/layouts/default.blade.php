@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' }}">
+dir="{{ Helper::determineLanguageDirection() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +24,8 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
 
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="language" content="{{ Helper::mapBackToLegacyLocale(app()->getLocale()) }}">
+    <meta name="language-direction" content="{{ Helper::determineLanguageDirection() }}">
     <meta name="baseUrl" content="{{ config('app.url') }}/">
 
     <script nonce="{{ csrf_token() }}">
@@ -83,7 +85,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
     <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
     <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
-    @livewireStyles
+
 
 </head>
 
@@ -142,7 +144,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                         <ul class="nav navbar-nav">
                             @can('index', \App\Models\Asset::class)
                                 <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ url('hardware') }}" accesskey="1" tabindex="-1">
+                                    <a href="{{ url('hardware') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=1" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.assets') }}">
                                         <i class="fas fa-barcode fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.assets') }}</span>
                                     </a>
@@ -150,7 +152,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             @endcan
                             @can('view', \App\Models\License::class)
                                 <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ route('licenses.index') }}" accesskey="2" tabindex="-1">
+                                    <a href="{{ route('licenses.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=2" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.licenses') }}">
                                         <i class="far fa-save fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.licenses') }}</span>
                                     </a>
@@ -158,7 +160,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             @endcan
                             @can('index', \App\Models\Accessory::class)
                                 <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ route('accessories.index') }}" accesskey="3" tabindex="-1">
+                                    <a href="{{ route('accessories.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=3" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.accessories') }}">
                                         <i class="far fa-keyboard fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.accessories') }}</span>
                                     </a>
@@ -166,7 +168,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             @endcan
                             @can('index', \App\Models\Consumable::class)
                                 <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ url('consumables') }}" accesskey="4" tabindex="-1">
+                                    <a href="{{ url('consumables') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=4" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.consumables') }}">
                                         <i class="fas fa-tint fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.consumables') }}</span>
                                     </a>
@@ -174,7 +176,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             @endcan
                             @can('view', \App\Models\Component::class)
                                 <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ route('components.index') }}" accesskey="5" tabindex="-1">
+                                    <a href="{{ route('components.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=5" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.components') }}">
                                         <i class="far fa-hdd fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.components') }}</span>
                                     </a>
@@ -355,7 +357,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image"
                                                  alt="">
                                         @else
-                                            <i class="fas fa-users" aria-hidden="true"></i>
+                                            <i class="fas fa-user" aria-hidden="true"></i>
                                         @endif
 
                                         <span class="hidden-xs">{{ Auth::user()->getFullNameAttribute() }} <strong
@@ -384,12 +386,15 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             </a></li>
 
 
+                                        @can('self.profile')
                                         <li>
                                             <a href="{{ route('profile') }}">
                                                 <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                                                 {{ trans('general.editprofile') }}
                                             </a>
                                         </li>
+                                        @endcan
+
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <i class="fa-solid fa-asterisk fa-fw" aria-hidden="true"></i>
@@ -648,7 +653,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
 
                         @can('view', \App\Models\User::class)
                             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                                <a href="{{ route('users.index') }}" accesskey="6">
+                                <a href="{{ route('users.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=6" : ''}}>
                                     <i class="fas fa-users fa-fw"></i>
                                     <span>{{ trans('general.people') }}</span>
                                 </a>
@@ -769,7 +774,11 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             {{ trans('general.activity_report') }}
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                                            {{ trans('general.custom_report') }}
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
                                             {{ trans('general.audit_report') }}</a>
@@ -799,11 +808,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                                             {{ trans('general.accessory_report') }}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                                            {{ trans('general.custom_report') }}
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         @endcan
@@ -812,7 +816,7 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('requestable-assets') }}">
                                     <i class="fa fa-laptop fa-fw"></i>
-                                    <span>{{ trans('admin/hardware/general.requestable') }}</span>
+                                    <span>{{ trans('general.requestable_items') }}</span>
                                 </a>
                             </li>
                         @endcan
@@ -976,9 +980,11 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
             </div>
         </div>
 
+
+
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-        <script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url('js/select2/i18n/'.Helper::mapBackToLegacyLocale(app()->getLocale()).'.js') }}"></script>
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -1003,13 +1009,31 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                 clickedElement.tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
-            // ignore: 'input[type=hidden]' is required here to validate the select2 lists
-            $.validate({
-                form: '#create-form',
-                modules: 'date, toggleDisabled',
-                disabledFormFilter: '#create-form',
-                showErrorDialogs: true,
-                ignore: 'input[type=hidden]'
+            // Reference: https://jqueryvalidation.org/validate/
+            var validator = $('#create-form').validate({
+                ignore: 'input[type=hidden]',
+                errorClass: 'alert-msg',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
+                        // If the element is a select2 then place the error above the input
+                        ? element.parents('.required').append(error)
+                        // Otherwise place it after
+                        : error.insertAfter(element);
+                },
+                highlight: function(inputElement) {
+                    $(inputElement).parent().addClass('has-error');
+                    $(inputElement).closest('.help-block').remove();
+                },
+                onfocusout: function(element) {
+                    return $(element).valid();
+                },
+
+            });
+
+            $.extend($.validator.messages, {
+                required: "{{ trans('validation.generic.required') }}",
+                email: "{{ trans('validation.generic.email') }}"
             });
 
 
@@ -1142,10 +1166,6 @@ dir="{{ in_array(app()->getLocale(),['ar-SA','fa-IR', 'he-IL']) ? 'rtl' : 'ltr' 
                 $("#tagSearch").focus();
             </script>
         @endif
-
-        @include('partials.bpay')
-
-        @livewireScripts
 
         </body>
 </html>
