@@ -337,12 +337,12 @@ class Saml
     /**
      * Get a setting.
      *
-     * @author Johnson Yi <jyi.dev@outlook.com>
-     *
      * @param string|array|int $key
      * @param mixed $default
      *
-     * @return void
+     * @return mixed
+     *@author Johnson Yi <jyi.dev@outlook.com>
+     *
      */
     public function getSetting($key, $default = null)
     {
