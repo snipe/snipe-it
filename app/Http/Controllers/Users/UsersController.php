@@ -241,7 +241,7 @@ class UsersController extends Controller
             $this->authorize('update', $user);
 
             if ($request->has('company_id') && $user->allAssignedCount() > 0 && Setting::getSettings()->full_multiple_companies_support) {
-                return back()->with('error', 'this user has assets, check them in first');
+                return back()->with('error', trans('admin/users/message.multi_company_items_assigned'));
             }
 
             // Figure out of this user was an admin before this edit
