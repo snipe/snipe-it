@@ -22117,6 +22117,9 @@ input[type="radio"]:checked::before {
 .select2-container .select2-search--inline .select2-search__field {
   padding-left: 15px;
 }
+.nav-tabs-custom > .nav-tabs > li.active {
+  font-weight: bold;
+}
 /** --------------------------------------- **/
 /** End checkbox styles to replace iCheck   **/
 /** --------------------------------------- **/
@@ -23414,6 +23417,9 @@ input[type="radio"]:checked::before {
 }
 .select2-container .select2-search--inline .select2-search__field {
   padding-left: 15px;
+}
+.nav-tabs-custom > .nav-tabs > li.active {
+  font-weight: bold;
 }
 /** --------------------------------------- **/
 /** End checkbox styles to replace iCheck   **/
