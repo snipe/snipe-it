@@ -341,7 +341,7 @@ class Saml
      * @param mixed $default
      *
      * @return mixed
-     *@author Johnson Yi <jyi.dev@outlook.com>
+     * @author Johnson Yi <jyi.dev@outlook.com>
      *
      */
     public function getSetting($key, $default = null)
