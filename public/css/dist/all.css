@@ -21795,6 +21795,13 @@ body {
     width: 8.33333333%;
   }
 }
+.select2-selection__choice__remove {
+  color: white !important;
+}
+.select2-selection--multiple {
+  border-color: #d2d6de !important;
+  height: 34px;
+}
 img.navbar-brand-img,
 .navbar-brand > img {
   float: left;
@@ -23208,6 +23215,13 @@ body {
   .col-sm-1 {
     width: 8.33333333%;
   }
+}
+.select2-selection__choice__remove {
+  color: white !important;
+}
+.select2-selection--multiple {
+  border-color: #d2d6de !important;
+  height: 34px;
 }
 img.navbar-brand-img,
 .navbar-brand > img {
