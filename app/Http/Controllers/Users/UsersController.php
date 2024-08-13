@@ -186,7 +186,7 @@ class UsersController extends Controller
     {
 
         $this->authorize('update', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+        $user = User::with(['assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc'])->withTrashed()->find($id);
 
         if ($user) {
 
@@ -235,8 +235,14 @@ class UsersController extends Controller
         $user = User::with(['assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc'])->withTrashed()->find($id);
 
         // User is valid - continue...
+
+
         if ($user) {
             $this->authorize('update', $user);
+
+            if ($request->has('company_id') && $user->allAssignedCount() > 0 && Setting::getSettings()->full_multiple_companies_support) {
+                return back()->with('error', 'this user has assets, check them in first');
+            }
 
             // Figure out of this user was an admin before this edit
             $orig_permissions_array = $user->decodePermissions();
@@ -264,15 +270,7 @@ class UsersController extends Controller
             $user->jobtitle = $request->input('jobtitle', null);
             $user->phone = $request->input('phone');
             $user->location_id = $request->input('location_id', null);
-            if ($request->has('company_id')) {
-                if ($user->assets->count() > 0) {
-                    //if ($user->assets()->pluck('company_id') != $user->getRawOriginal('company_id')) {
-                        {
-                            return back()->with('error', 'this user has assets, check them in first');
-                        }
-                    //}
-                }
-            }
+
             $user->company_id = Company::getIdForUser($request->input('company_id', null));
             $user->manager_id = $request->input('manager_id', null);
             $user->notes = $request->input('notes');
