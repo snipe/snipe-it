@@ -41,9 +41,7 @@
               {{ trans('admin/hardware/form.name') }}
             </label>
             <div class="col-md-4">
-              <div class="input-group">
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" maxlength="100" >
-              </div>
+                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" maxlength="100" style="width:100%">
               {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true">
                 <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
