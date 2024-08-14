@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Users\Api;
 
+use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Group;
@@ -342,6 +343,35 @@ class UpdateUserTest extends TestCase
 
         $this->assertTrue($user->refresh()->groups->contains($groupA));
         $this->assertTrue($user->refresh()->groups->contains($groupB));
+    }
+
+    public function testMultiCompanyUserCannotBeMovedIfHasAsset()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $companyA = Company::factory()->create();
+        $companyB = Company::factory()->create();
+
+        $user = User::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
+        $superUser = User::factory()->superuser()->create();
+
+        $asset = Asset::factory()->create();
+
+        // no assets assigned, therefore success
+        $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('success');
+
+        $asset->checkOut($user, $superUser);
+
+        // asset assigned, therefore error
+        $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'company_id' => $companyB->id,
+        ])->assertMessagesAre('error');
     }
 
 }
