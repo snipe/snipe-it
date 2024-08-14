@@ -35,6 +35,27 @@
             @endif
           </div>
 
+          <!-- Name -->
+          <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+            <label for="name" class="col-md-3 control-label">
+              {{ trans('admin/hardware/form.name') }}
+            </label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" maxlength="100" >
+              </div>
+              {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true">
+                <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-5">
+              <label class="form-control">
+                {{ Form::checkbox('null_name', '1', false) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+              </label>
+            </div>
+          </div>
+
+
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
