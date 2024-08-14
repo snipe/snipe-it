@@ -13,7 +13,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public $add_default_values;
 
     public $fieldset_id;
-    public $fields;
     public $model_id;
 
     public function mount($model_id = null)
@@ -30,7 +29,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
     }
 
     #[Computed]
-    public function customFields()
+    public function fields()
     {
         return CustomFieldset::find($this->fieldset_id)?->fields;
     }
