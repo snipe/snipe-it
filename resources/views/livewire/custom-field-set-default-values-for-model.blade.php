@@ -16,10 +16,10 @@
         </div>
     </div>
 
-    @if ($this->add_default_values ) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
-            @if ($fields)
+    @if ($add_default_values ) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
+            @if ($this->customFields)
 
-                @foreach ($fields as $field)
+                @foreach ($this->customFields as $field)
                     <div class="form-group">
 
                         <label class="col-md-3 control-label{{ $errors->has($field->name) ? ' has-error' : '' }}">{{ $field->name }}</label>

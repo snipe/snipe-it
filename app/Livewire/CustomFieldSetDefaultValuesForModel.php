@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 use App\Models\CustomFieldset;
@@ -15,30 +16,23 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public $fields;
     public $model_id;
 
-    public function mount()
+    public function mount($model_id = null)
     {
-        if(is_null($this->model_id)){
-            return;
-        }
-            
-        $this->model = AssetModel::find($this->model_id); // It's possible to do some clever route-model binding here, but let's keep it simple, shall we?
-        $this->fieldset_id = $this->model->fieldset_id;
-
-        $this->fields = null;
-
-        if ($fieldset = CustomFieldset::find($this->fieldset_id)) {
-            $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
-        } 
-
-        $this->add_default_values = ($this->model->defaultValues->count() > 0);
+        $this->model_id = $model_id;
+        $this->fieldset_id = $this->model?->fieldset_id;
+        $this->add_default_values = ($this->model?->defaultValues->count() > 0);
     }
 
-    public function updatedFieldsetId()
+    #[Computed]
+    public function model()
     {
-        if (CustomFieldset::find($this->fieldset_id)) {
-            $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
-        }
-        
+        return AssetModel::find($this->model_id);
+    }
+
+    #[Computed]
+    public function customFields()
+    {
+        return CustomFieldset::find($this->fieldset_id)?->fields;
     }
 
     public function render()
