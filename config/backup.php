@@ -237,4 +237,6 @@ return [
         ],
     ],
 
+    'sanitize_by_default' => env('SANITIZE_BY_DEFAULT', false),
+
 ];
