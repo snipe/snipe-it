@@ -38,7 +38,6 @@ class SaveUserRequest extends FormRequest
             'company_id' => [
                 // determines if the user is being moved between companies and checks to see if they have any items assigned
                 function ($attribute, $value, $fail) {
-                    dd($this->user);
                     if (($this->has('company_id')) && ($this->user->allAssignedCount() > 0) && (Setting::getSettings()->full_multiple_companies_support)) {
                         $fail(trans('admin/users/message.error.multi_company_items_assigned'));
                     }
