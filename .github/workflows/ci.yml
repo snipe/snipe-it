@@ -1,7 +1,5 @@
 name: Workflow for Codecov
 on: [push, pull_request]
-ignore:
-  - "vendor/**"
 jobs:
   run:
     runs-on: ubuntu-latest
