@@ -7,8 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-default pull-right" style="margin-left: 5px;"
-       xmlns="http://www.w3.org/1999/html">
+    <a href="{{ route('settings.index') }}" class="btn btn-default pull-right" style="margin-left: 5px;">
       {{ trans('general.back') }}
     </a>
 
@@ -117,7 +116,6 @@
                           <a data-html="true"
                              href="{{ route('settings.backups.restore', $file['filename']) }}"
                              class="btn btn-warning btn-sm restore-backup {{ (config('app.lock_passwords')) ? ' disabled': '' }}"
-                             {{--                             data-toggle="modal"--}}
                              data-target="#backupRestoreModal"
                              data-title="{{ trans('admin/settings/message.backup.restore_confirm', array('filename' => e($file['filename']))) }}"
                              onClick="return false;">
