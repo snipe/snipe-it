@@ -87,7 +87,7 @@ class LocationPresenter extends Presenter
                 'class' => 'css-house-laptop',
             ],
             [
-                'field' => 'assigned_accessories_count',
+                'field' => 'accessories_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
@@ -244,13 +244,13 @@ class LocationPresenter extends Presenter
                 'visible' => false,
             ],
             [
-                'field' => 'name',
+                'field' => 'accessory',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => true,
-                'title' => trans('general.name'),
+                'title' => trans('general.accessory'),
                 'visible' => true,
-                'formatter' => 'accessoriesLinkFormatter',
+                'formatter' => 'accessoriesLinkObjFormatter',
             ],
             [
                 'field' => 'image',
