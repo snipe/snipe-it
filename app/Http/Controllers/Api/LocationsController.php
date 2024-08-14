@@ -47,9 +47,8 @@ class LocationsController extends Controller
             'assigned_accessories_count',
             'users_count',
             'assets_count',
-            'assigned_assets_count',
-            'assets_count',
             'rtd_assets_count',
+            'accessories_count',
             'currency',
             'ldap_ou',
             ];
@@ -243,14 +242,14 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $this->authorize('view', $location);
-        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('admin')->where('assigned_to', '=', $location->id);
+        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('admin')->with('accessories')->where('assigned_to', '=', $location->id);
 
         $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $total = $accessory_checkouts->count();
         $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
-        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_checkouts, $total);
+        return (new LocationsTransformer)->transformCheckedoutAccessories($accessory_checkouts, $total);
     }
 
     /**
