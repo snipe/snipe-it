@@ -371,7 +371,7 @@ class UpdateUserTest extends TestCase
         $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
             'username'   => 'test',
             'company_id' => $companyB->id,
-        ])->assertMessagesAre('error');
+        ])->assertStatusMessageIs('error');
     }
 
 }
