@@ -1,0 +1,18 @@
+name: Workflow for Codecov
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up php 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Install dependencies
+        run: composer self-update && composer install && composer dump-autoload
+      - name: Run tests and collect coverage
+        run: vendor/bin/phpunit --coverage-clover coverage.xml .
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
