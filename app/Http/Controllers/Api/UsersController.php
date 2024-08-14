@@ -427,7 +427,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
-    public function update(SaveUserRequest $request, $id) : JsonResponse
+    public function update(SaveUserRequest $request, User $user): JsonResponse
     {
         $this->authorize('update', User::class);
 
