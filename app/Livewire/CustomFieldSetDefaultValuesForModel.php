@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -15,11 +16,19 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public $fieldset_id;
     public $model_id;
 
+    public Collection $cachedValues;
+
     public function mount($model_id = null)
     {
         $this->model_id = $model_id;
         $this->fieldset_id = $this->model?->fieldset_id;
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
+
+        $this->cachedValues = collect();
+
+        $this->fields->each(function ($field) {
+            $this->cachedValues->put($field->db_column, $field->defaultValue($this->model_id));
+        });
     }
 
     #[Computed]
@@ -31,7 +40,13 @@ class CustomFieldSetDefaultValuesForModel extends Component
     #[Computed]
     public function fields()
     {
-        return CustomFieldset::find($this->fieldset_id)?->fields;
+        $customFieldset = CustomFieldset::find($this->fieldset_id);
+
+        if ($customFieldset) {
+            return $customFieldset?->fields;
+        }
+
+        return collect();
     }
 
     public function render()
