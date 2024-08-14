@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Accessory;
 use App\Models\Location;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
@@ -45,9 +46,9 @@ class LocationsTransformer
                 'zip' => ($location->zip) ? e($location->zip) : null,
                 'phone' => ($location->phone!='') ? e($location->phone): null,
                 'fax' => ($location->fax!='') ? e($location->fax): null,
-                'assigned_assets_count' => (int) $location->assigned_assets_count,
-                'accessories_count' => (int) $location->assigned_accessories,
+                'accessories_count' => (int) $location->accessories_count,
                 'assigned_accessories_count' => (int) $location->assigned_accessories_count,
+                'assigned_assets_count' => (int) $location->assigned_assets_count,
                 'assets_count'    => (int) $location->assets_count,
                 'rtd_assets_count'    => (int) $location->rtd_assets_count,
                 'users_count'    => (int) $location->users_count,
@@ -77,6 +78,37 @@ class LocationsTransformer
 
             return $array;
         }
+    }
+
+    public function transformCheckedoutAccessories($accessory_checkouts, $total)
+    {
+
+        $array = [];
+        foreach ($accessory_checkouts as $checkout) {
+            $array = [
+                'id' => $checkout->id,
+                'accessory' => [
+                    'id' => $checkout->accessory->id,
+                    'name' => $checkout->accessory->name,
+                ],
+                'image' => ($checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($checkout->accessory->image)) : null,
+                'note' => $checkout->note ? e($checkout->note) : null,
+                'created_by' => $checkout->admin ? [
+                    'id' => (int) $checkout->admin->id,
+                    'name'=> e($checkout->admin->present()->fullName),
+                ]: null,
+                'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
+            ];
+
+            $permissions_array['available_actions'] = [
+                'checkout' => Gate::allows('checkout', Accessory::class),
+                'checkin' => Gate::allows('checkin', Accessory::class),
+            ];
+
+            $array += $permissions_array;
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
     /**
