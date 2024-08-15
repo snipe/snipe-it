@@ -13,7 +13,6 @@ class NotesController extends Controller
 {
     public function store(Request $request)
     {
-
         $item = Asset::findOrFail($request->input("id"));
         $this->authorize('update', $item);
 
@@ -24,5 +23,4 @@ class NotesController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('success'));
     }
-
 }
