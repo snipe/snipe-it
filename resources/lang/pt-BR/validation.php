@@ -20,18 +20,18 @@ return [
     'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
     'alpha' => 'The :attribute field must only contain letters.',
     'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
-    'alpha_num' => 'The :attribute field must only contain letters and numbers.',
+    'alpha_num' => 'O campo :attribute deve conter apenas letras e números.',
     'array' => 'The :attribute field must be an array.',
     'ascii' => 'The :attribute field must only contain single-byte alphanumeric characters and symbols.',
-    'before' => 'The :attribute field must be a date before :date.',
-    'before_or_equal' => 'The :attribute field must be a date before or equal to :date.',
+    'before' => 'O campo :attribute deve ser uma data anterior a :date.',
+    'before_or_equal' => 'O campo :attribute deve ser uma data anterior ou igual a :date.',
     'between' => [
-        'array' => 'The :attribute field must have between :min and :max items.',
-        'file' => 'The :attribute field must be between :min and :max kilobytes.',
+        'array' => 'O campo :attribute deve ter entre :min e :max itens.',
+        'file' => 'O campo :attribute deve ter entre :min e :max kilobytes.',
         'numeric' => 'The :attribute field must be between :min and :max.',
         'string' => 'The :attribute field must be between :min and :max characters.',
     ],
-    'boolean' => 'The :attribute field must be true or false.',
+    'boolean' => 'O campo :attribute deve ser verdadeiro ou falso.',
     'can' => 'The :attribute field contains an unauthorized value.',
     'confirmed' => 'The :attribute field confirmation does not match.',
     'contains' => 'The :attribute field is missing a required value.',
@@ -54,7 +54,7 @@ return [
     'enum' => 'O :attribute selecionado é inválido.',
     'exists' => 'O :attribute selecionado é inválido.',
     'extensions' => 'The :attribute field must have one of the following extensions: :values.',
-    'file' => 'The :attribute field must be a file.',
+    'file' => 'O campo :attribute deve ser um arquivo.',
     'filled' => 'O :attribute deve ter um valor.',
     'gt' => [
         'array' => 'The :attribute field must have more than :value items.',
@@ -125,6 +125,8 @@ return [
         'symbols' => 'The :attribute field must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
+    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+
     'present' => 'O campo:attribute deve estar presente.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
     'present_unless' => 'The :attribute field must be present unless :other is :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Sua senha atual está incorreta',
         'dumbpwd'          => 'Essa senha é muito comum.',
         'statuslabel_type' => 'Você deve selecionar um tipo de etiqueta de status válido',
+        'custom_field_not_found'          => 'This field does not seem to exist, please double check your custom field names.',
+        'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

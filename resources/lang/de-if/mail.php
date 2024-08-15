@@ -88,7 +88,7 @@ return [
     'user' => 'Benutzer',
     'username' => 'Benutzername',
     'unaccepted_asset_reminder' => 'Sie haben nicht akzeptierte Assets.',
-    'welcome' => 'Wilkommen, :name',
+    'welcome' => 'Willkommen, :name',
     'welcome_to' => 'Willkommen bei :web!',
     'your_assets' => 'Deine Assets anzeigen',
     'your_credentials' => 'Ihre Snipe-IT Anmeldedaten',

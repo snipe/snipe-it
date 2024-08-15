@@ -26,7 +26,7 @@ return [
         'clone'     => 'Dupliraj :item_type',
         'edit'      => 'Izmeni :item_type',
         'delete'    => 'Obriši :item_type',
-        'restore'   => 'Obriši :item_type',
+        'restore'   => 'Vrati :item_type',
         'create'    => 'Napravi novu :item_type',
         'checkout'  => 'Zaduži :item_type',
         'checkin'   => 'Razduži :item_type',

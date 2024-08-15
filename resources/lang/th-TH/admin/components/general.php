@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'ที่เหลืออยู่',
     'total' 			                 => 'ทั้งหมด',
     'update'                            => 'อัพเดตคอมโพเนนต์',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'จำนวนเงินที่เช็คอินจะต้องเท่ากับหรือน้อยกว่า :assigned_qty'
 );
