@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Taip, atkurti. Suprantu, kad tai perrašys visus šiuo metu duomenų bazėje esančius duomenis. Taip pat, kad bus atjungti visi esami naudotojai (įskaitant mane).',
         'restore_confirm'       => 'Ar tikrai norite atkurti savo duomenų bazę iš :filename?'
     ],
+    'restore' => [
+        'success'               => 'Jūsų sistemos atsarginė kopija buvo atkurta. Prisijunkite iš naujo.'
+    ],
     'purge' => [
         'error'     => 'Valymo metu įvyko klaida. ',
         'validation_failed'     => 'Jūsų įvestas išvalymo patvirtinimas yra neteisingas. Patvirtinimo lauke įveskite žodį „DELETE“.',

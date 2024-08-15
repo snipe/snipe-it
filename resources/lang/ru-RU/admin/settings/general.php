@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'Интеграция с :app необязательна, однако конечная точка и канал - обязательны, если Вы планируете её использовать. Для конфигурации интеграции с :app, Вы должны в первую очередь <a href=":webhook_link" target="_new" rel="noopener"> создать исходящий веб-хук</a> на свою учетную запись в :app. Нажмите на кнопку <strong> Протестировать Интеграцию с :app</strong> чтобы убедится перед сохранением, что Ваши параметры - верны. ',
     'webhook_integration_help_button'    => 'Как только вы сохраните :app информацию, появится тестовая кнопка.',
     'webhook_test_help'           => 'Проверьте, правильно ли настроена интеграция :app. ВЫ ДОЛЖНЫ СОХРАНИТЬ ВАШЕЕ ОБНОВЛЕННЫЕ :app НАСТРОЙКИ ПРИВЛЕЧЕНИЯ.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Версия Snipe-IT',
     'support_footer'            => 'Ссылки на поддержу в нижнем колонтитуле ',
     'support_footer_help'       => 'Отображать или не отображать ссылку на руководство пользователя и поддержку Snipe-IT',

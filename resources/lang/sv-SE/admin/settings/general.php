@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app integration är frivilligt, men slutpunkt och kanal krävs om du vill använda den. För att konfigurera :app integration, måste du först <a href=":webhook_link" target="_new" rel="noopener">skapa en inkommande webhook</a> på ditt :app konto. Klicka på <strong>Test :app Integration</strong> -knappen för att bekräfta att dina inställningar är korrekta innan du sparar. ',
     'webhook_integration_help_button'    => 'När du har sparat information om :app visas en testknapp.',
     'webhook_test_help'           => 'Testa om din :app integration är korrekt konfigurerad. DU MÅSTE SPARA DIN UPPDATERAD :app INSTÄLLNINGAR FÖRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT-versionen',
     'support_footer'            => 'Stöd länkar i sidfot ',
     'support_footer_help'       => 'Ange vem som kan se länkarna till Snipe-IT Support info och användarmanual',

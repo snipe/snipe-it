@@ -125,6 +125,8 @@ return [
         'symbols' => 'Das Feld :attribute muss mindestens ein Symbol enthalten.',
         'uncompromised' => 'Das angegebene :attribute ist in einem Datenleck aufgetaucht. Bitte wählen Sie ein anderes :attribute.',
     ],
+    'percent'       => 'Bei einer prozentualen Abschreibung muss der Mindestabschreibungswert zwischen 0 und 100 liegen.',
+
     'present' => ':attribute muss vorhanden sein.',
     'present_if' => 'Das Feld :attribute muss vorhanden sein, wenn :other :value ist.',
     'present_unless' => 'Das Feld :attribute muss vorhanden sein, es sei denn, :other ist :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Ihr derzeitiges Passwort ist nicht korrekt',
         'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
         'statuslabel_type' => 'Sie müssen einen gültigen Statuslabel-Typ auswählen',
+        'custom_field_not_found'          => 'Dieses Feld scheint nicht zu existieren. Bitte überprüfen Sie Ihre benutzerdefinierten Feldnamen noch einmal.',
+        'custom_field_not_found_on_model' => 'Dieses Feld scheint vorhanden zu sein, ist aber im Feldsatz dieses Asset-Modells nicht verfügbar.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

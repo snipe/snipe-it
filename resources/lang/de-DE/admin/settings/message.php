@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Ja, wiederherstellen. Ich bestätige, dass dies alle vorhandenen Daten überschreibt, die derzeit in der Datenbank vorhanden sind. Diese Aktion wird auch alle bestehenden Benutzer abmelden (einschließlich Ihnen).',
         'restore_confirm'       => 'Sind Sie sicher, dass Sie Ihre Datenbank aus :filename wiederherstellen möchten?'
     ],
+    'restore' => [
+        'success'               => 'Ihr Systembackup wurde wiederhergestellt. Bitte melden Sie sich erneut an.'
+    ],
     'purge' => [
         'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',
         'validation_failed'     => 'Falsche Bereinigungsbestätigung. Bitte geben Sie das Wort "DELETE" im Bestätigungsfeld ein.',

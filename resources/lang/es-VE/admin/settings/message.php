@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Sí, restaurarlo. Reconozco que esto sobrescribirá cualquier dato existente actualmente en la base de datos. Esto también cerrará la sesión de todos sus usuarios existentes (incluido usted).',
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'
     ],
+    'restore' => [
+        'success'               => 'Su copia de respaldo del sistema ha sido restaurada. Por favor, inicie sesión nuevamente.'
+    ],
     'purge' => [
         'error'     => 'Ha ocurrido un error mientras se realizaba el purgado. ',
         'validation_failed'     => 'Su confirmación de purga es incorrecta. Por favor, escriba la palabra "DELETE" en el cuadro de confirmación.',

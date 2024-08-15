@@ -12,4 +12,6 @@ return array(
     'api_reference' => 'Bitte lese die <a href="https://snipe-it.readme.io/reference" target="_blank">API Dokumentation</a> um Informationen über die verfügbaren API-Endpunkte zu bekommen.',
     'profile_updated' => 'Konto erfolgreich aktualisiert',
     'no_tokens' => 'Sie haben keine persönlichen Zugangsschlüssel erstellt.',
+    'enable_sounds' => 'Soundeffekte aktivieren',
+    'enable_confetti' => 'Enable confetti effects',
 );
