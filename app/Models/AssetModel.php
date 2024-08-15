@@ -29,7 +29,7 @@ class AssetModel extends SnipeModel
 
     // Declare the rules for the model validation
     protected $rules = [
-        'name'              => 'required|min:1|max:255',
+        'name'              => 'required|min:1|max:255|unique:models,name',
         'model_number'      => 'max:255|nullable',
         'min_amt'           => 'integer|min:0|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
