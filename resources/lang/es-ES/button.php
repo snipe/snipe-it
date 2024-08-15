@@ -26,7 +26,7 @@ return [
         'clone'     => 'Clonar :item_type',
         'edit'      => 'Editar :item_type',
         'delete'    => 'Eliminar :item_type',
-        'restore'   => 'Delete :item_type',
+        'restore'   => 'Restaurar :item_type',
         'create'    => 'Crear nuevo :item_type',
         'checkout'  => 'Asignar :item_type',
         'checkin'   => 'Ingresar :item_type',

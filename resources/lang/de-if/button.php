@@ -26,7 +26,7 @@ return [
         'clone'     => ':item_type duplizieren',
         'edit'      => ':item_type bearbeiten',
         'delete'    => ':item_type löschen',
-        'restore'   => ':item_type löschen',
+        'restore'   => ':item_type wiederherstellen',
         'create'    => 'Neue&#47;s :item_type erstellen',
         'checkout'  => ':item_type herausgeben',
         'checkin'   => ':item_type zurücknehmen',

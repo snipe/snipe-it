@@ -92,5 +92,5 @@ return [
     'welcome_to' => 'Hoş geldiniz :web!',
     'your_assets' => 'Varlıkları Görüntüleme',
     'your_credentials' => 'Snipe-IT Bilgileriniz',
-    'mail_sent' => 'E-posta başarılı şekilde gönderildi.',
+    'mail_sent' => 'E-posta başarılı şekilde gönderildi!',
 ];

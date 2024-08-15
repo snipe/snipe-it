@@ -10,6 +10,8 @@ return array(
     'api_base_url_endpoint' => '/&lt;endpoint&gt;',
     'api_token_expiration_time' => 'Las credenciales de la API están establecidas para expirar en:',
     'api_reference' => 'Consulte <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> para encontrar los puntos finales (endpoins) del API y documentación adicional.',
-    'profile_updated' => 'Cuenta actualizada exitosamente',
+    'profile_updated' => 'La cuenta fue actualizada exitosamente',
     'no_tokens' => 'No ha creado ninguna credencial de acceso personal.',
+    'enable_sounds' => 'Habilitar efectos de sonido',
+    'enable_confetti' => 'Enable confetti effects',
 );

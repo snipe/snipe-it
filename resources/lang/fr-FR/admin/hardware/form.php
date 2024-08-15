@@ -41,7 +41,7 @@ return [
     'requestable'		=> 'Les utilisateurs·trices peuvent demander cet actif',
     'redirect_to_all'   => 'Retourner à tous les :type',
     'redirect_to_type'   => 'Aller à :type',
-    'redirect_to_checked_out_to'   => 'Go to Checked Out to',
+    'redirect_to_checked_out_to'   => 'Aller aux attributions',
     'select_statustype'	=> 'Choisissez le type de statut',
     'serial'			=> 'Série ',
     'status'			=> 'Statut',

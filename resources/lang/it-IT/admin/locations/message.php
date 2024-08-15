@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La posizione non esiste.',
-    'assoc_users'    => 'Non puoi cancellare questa posizione perché è la posizione di almeno un bene o un utente, ha dei beni assegnati, o è la posizione principale di un\'altra posizione. Aggiornare i modelli per non fare più riferimento a questa azienda e riprovare. ',
+    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this location and try again. ',
     'assoc_assets'	 => 'Questa posizione è associata ad almeno un prodotto e non può essere cancellata. Si prega di aggiornare i vostri prodotti di riferimento e riprovare. ',
     'assoc_child_loc'	 => 'Questa posizione è parente di almeno un\'altra posizione e non può essere cancellata. Si prega di aggiornare le vostre posizioni di riferimento e riprovare. ',
     'assigned_assets' => 'Beni Assegnati',
