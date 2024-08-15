@@ -50,6 +50,7 @@ class ProfileController extends Controller
         $user->skin = $request->input('skin');
         $user->phone = $request->input('phone');
         $user->enable_sounds = $request->input('enable_sounds', false);
+        $user->enable_confetti = $request->input('enable_confetti', false);
 
         if (! config('app.lock_passwords')) {
             $user->locale = $request->input('locale', 'en-US');

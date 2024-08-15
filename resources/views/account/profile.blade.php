@@ -89,11 +89,20 @@
           </div>
         </div>
 
-        <div class="form-group{{ $errors->has('enable_sounds') ? ' has-error' : '' }}">
+        <div class="form-group">
           <div class="col-md-9 col-md-offset-3">
-            <label for="enable_sounds" class="form-control">
+            <label class="form-control">
               <input type="checkbox" name="enable_sounds" value="1" {{ old('enable_sounds', $user->enable_sounds) ? 'checked' : '' }}>
               {{ trans('account/general.enable_sounds') }}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <label class="form-control">
+              <input type="checkbox" name="enable_confetti" value="1" {{ old('enable_confetti', $user->enable_confetti) ? 'checked' : '' }}>
+              {{ trans('account/general.enable_confetti') }}
             </label>
           </div>
         </div>
