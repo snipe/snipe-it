@@ -837,14 +837,14 @@ class AssetsController extends Controller
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths(12)->toDateString();
 
-        return view('hardware/quickscan')->with('next_audit_date', $dt);
+        return view('hardware/quickscan')->with('statusLabel_list', Helper::statusLabelList())->with('next_audit_date', $dt);
     }
 
     public function quickScanCheckin()
     {
         $this->authorize('checkin', Asset::class);
 
-        return view('hardware/quickscan-checkin');
+        return view('hardware/quickscan-checkin')->with('statusLabel_list', Helper::statusLabelList());
     }
 
     public function audit($id)
