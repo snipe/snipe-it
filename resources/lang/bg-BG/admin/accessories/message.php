@@ -28,7 +28,7 @@ return array(
         'unavailable'   => 'Аксесоарт не е наличен за изписване. Проверете наличното количество',
         'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'В момента има само един наличен аксесоар от този вид и вие се опитвате да изпишете :checkout_qty. Моля коригирайте количеството или общата наличност и опитайте отново.|Има :number_currently_remaining броя налични аксесоари и вие се опитвате да изпишете :checkout_qty. Моля коригирайте количеството или общата наличност и опитайте отново.',
             ),
            
     ),

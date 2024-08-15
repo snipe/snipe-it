@@ -11,7 +11,7 @@ return array(
     'purchase_date'   	=> 'Fecha de compra',
     'purchased'   		=> 'Comprado',
     'seats'   			=> 'Total de licencias',
-    'hardware'   		=> 'Equipo',
+    'hardware'   		=> 'Hardware',
     'serial'   			=> 'N. Serie',
     'title'      		=> 'Categoría de equipo',
 

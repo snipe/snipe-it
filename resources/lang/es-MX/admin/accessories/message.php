@@ -13,7 +13,7 @@ return array(
 
     'update' => array(
         'error'   => 'El accesorio no fue actualizado, por favor, inténtelo de nuevo',
-        'success' => 'Accesorio actualizado correctamente.'
+        'success' => 'El accesorio fue actualizado con éxito.'
     ),
 
     'delete' => array(

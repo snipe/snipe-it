@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'crwdns11403:0crwdne11403:0',
     'webhook_integration_help_button'    => 'crwdns11405:0crwdne11405:0',
     'webhook_test_help'           => 'crwdns11407:0crwdne11407:0',
+    'shortcuts_enabled'         => 'crwdns12654:0crwdne12654:0',
+    'shortcuts_help_text'       => 'crwdns12656:0crwdne12656:0',
     'snipe_version'  			=> 'crwdns1266:0crwdne1266:0',
     'support_footer'            => 'crwdns1991:0crwdne1991:0',
     'support_footer_help'       => 'crwdns1992:0crwdne1992:0',

@@ -125,6 +125,8 @@ return [
         'symbols' => 'The :attribute field must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
+    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+
     'present' => 'Il campo :attribute deve essere presente.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
     'present_unless' => 'The :attribute field must be present unless :other is :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'La tua attuale password non è corretta',
         'dumbpwd'          => 'Questa password è troppo comune.',
         'statuslabel_type' => 'È necessario selezionare un tipo di etichetta di stato valido',
+        'custom_field_not_found'          => 'Questo campo non sembra esistere, si prega di ricontrollare i nomi dei campi personalizzati.',
+        'custom_field_not_found_on_model' => 'Sembra che questo campo esista, ma non è disponibile tra i campi di questo Modello di Bene.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

@@ -2,9 +2,9 @@
 return array(
     'companies' => 'บริษัท',
     'create'    => 'สร้าง บริษัท',
-    'email'     => 'Company Email',
+    'email'     => 'อีเมล์บริษัท',
     'title'     => 'บริษัท',
-    'phone'     => 'Company Phone',
+    'phone'     => 'โทรศัพท์บริษัท',
     'update'    => 'ปรับปรุง บริษัท',
     'name'      => 'ชื่อ บริษัท',
     'id'        => 'ID',

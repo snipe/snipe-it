@@ -34,7 +34,7 @@ return [
 
     'audit' => [
         'error'   		=> 'Auditoría de activos fallida: :error ',
-        'success' 		=> 'Audoría de activo registrada con éxito.',
+        'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
 
 
@@ -51,7 +51,7 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Proceso para importar',
+        'import_button'         => 'Importar',
         'error'                 => 'Algunos de los elementos no se importaron correctamente.',
         'errorDetail'           => 'Lo siguientes elementos no se importaron debido a errores.',
         'success'               => 'Su archivo ha sido importado',

@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app integration is optional, however the endpoint and channel are required if you wish to use it. To configure :app integration, you must first <a href=":webhook_link" target="_new" rel="noopener">create an incoming webhook</a> on your :app account. Click on the <strong>Test :app Integration</strong> button to confirm your settings are correct before saving. ',
     'webhook_integration_help_button'    => 'Once you have saved your :app information, a test button will appear.',
     'webhook_test_help'           => 'Test whether your :app integration is configured correctly. YOU MUST SAVE YOUR UPDATED :app SETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Phiên bản Snipe-IT',
     'support_footer'            => 'Hỗ trợ liên kết ở chân trang ',
     'support_footer_help'       => 'Chỉ định ai nhìn thấy các liên kết đến Thông tin người dùng và Hướng dẫn sử dụng Snipe-IT',

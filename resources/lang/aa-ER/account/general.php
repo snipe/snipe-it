@@ -12,4 +12,6 @@ return array(
     'api_reference' => 'crwdns12270:0crwdne12270:0',
     'profile_updated' => 'crwdns12202:0crwdne12202:0',
     'no_tokens' => 'crwdns12318:0crwdne12318:0',
+    'enable_sounds' => 'crwdns12658:0crwdne12658:0',
+    'enable_confetti' => 'crwdns12664:0crwdne12664:0',
 );

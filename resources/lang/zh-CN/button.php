@@ -26,7 +26,7 @@ return [
         'clone'     => '克隆 :item_type',
         'edit'      => '编辑 :item_type',
         'delete'    => '删除 :item_type',
-        'restore'   => '删除 :item_type',
+        'restore'   => '恢复 :item_type',
         'create'    => '创建新的 :item_type',
         'checkout'  => '借出 :item_type',
         'checkin'   => '归还 :item_type',
