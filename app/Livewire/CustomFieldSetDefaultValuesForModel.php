@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\CustomField;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -29,6 +30,16 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fields->each(function ($field) {
             $this->cachedValues->put($field->db_column, $field->defaultValue($this->model_id));
         });
+    }
+
+    public function getValueForField(CustomField $field)
+    {
+        return $this->cachedValues->get($field->db_column);
+    }
+
+    public function updateFieldValue($dbColumn, $updatedValue): void
+    {
+        $this->cachedValues->put($dbColumn, $updatedValue);
     }
 
     #[Computed]

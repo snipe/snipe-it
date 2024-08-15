@@ -20,7 +20,7 @@
             @if ($this->fields)
 
                 @foreach ($this->fields as $field)
-                    <div class="form-group">
+                    <div class="form-group" wire:key="field-{{ $field->id }}">
 
                         <label class="col-md-3 control-label{{ $errors->has($field->name) ? ' has-error' : '' }}">{{ $field->name }}</label>
 
@@ -38,7 +38,18 @@
                                 @elseif ($field->element == "text")
 
 
-                                        <input class="form-control" type="text" value="{{ $field->defaultValue($model_id) }}" id="default-value{{ $field->id }}" name="default_values[{{ $field->id }}]">
+                                    <input
+                                        class="form-control"
+                                        type="text"
+                                        value="{{ $this->getValueForField($field) }}"
+                                        id="default-value{{ $field->id }}"
+                                        name="default_values[{{ $field->id }}]"
+                                        x-on:blur="(e) => $wire.$call(
+                                            'updateFieldValue',
+                                            '{{ $field->db_column }}',
+                                            e.target.value
+                                        )"
+                                    />
 
 
                                 @elseif($field->element == "textarea")
@@ -80,11 +91,11 @@
                                         Unknown field element: {{ $field->element }}
                                     </span>
                                 @endif
-                            </div>
                         </div>
+                    </div>
 
                 @endforeach
-                </div>
+
                 @endif
 
     @endif
