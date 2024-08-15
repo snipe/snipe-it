@@ -44,7 +44,7 @@
                                         value="{{ $this->getFieldValue($field) }}"
                                         id="default-value{{ $field->id }}"
                                         name="default_values[{{ $field->id }}]"
-                                        x-on:blur="(e) => $wire.$call(
+                                        x-on:change="(e) => $wire.$call(
                                             'updateFieldValue',
                                             '{{ $field->db_column }}',
                                             e.target.value
@@ -55,7 +55,17 @@
                                 @elseif($field->element == "textarea")
 
 
-                                        <textarea class="form-control" style="width: 100%;" id="default-value{{ $field->id }}" name="default_values[{{ $field->id }}]">{{ $field->defaultValue($model_id) }}</textarea>
+                                        <textarea
+                                            class="form-control"
+                                            style="width: 100%;"
+                                            id="default-value{{ $field->id }}"
+                                            name="default_values[{{ $field->id }}]"
+                                            x-on:change="(e) => $wire.$call(
+                                                'updateFieldValue',
+                                                '{{ $field->db_column }}',
+                                                e.target.value
+                                            )"
+                                        >{{ $this->getFieldValue($field) }}</textarea>
 
 
                                 @elseif($field->element == "listbox")
@@ -79,7 +89,19 @@
 
                                     @foreach(explode("\r\n", $field->field_values) as $field_value)
                                     <label class="col-md-3 form-control" for="{{ str_slug($field_value) }}" wire:key="radio-{{ $field_value }}">
-                                        <input id="{{ str_slug($field_value) }}" aria-label="{{ str_slug($field->name) }}"  type='radio' name="default_values[{{ $field->id }}]" value="{{$field_value}}" {{ $field->defaultValue($model_id) == $field_value ? 'checked="checked"': '' }} />{{ $field_value }}
+                                        <input
+                                            id="{{ str_slug($field_value) }}"
+                                            aria-label="{{ str_slug($field->name) }}"
+                                            type="radio"
+                                            name="default_values[{{ $field->id }}]"
+                                            value="{{$field_value}}"
+                                            @checked($this->getFieldValue($field) == $field_value)
+                                            x-on:change="(e) => $wire.$call(
+                                                'updateFieldValue',
+                                                '{{ $field->db_column }}',
+                                                e.target.value
+                                            )"
+                                        />{{ $field_value }}
                                     </label>
                                     @endforeach
 
