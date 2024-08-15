@@ -33,7 +33,7 @@
                     <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
                         {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'checkin_tag')) }}
                         <div class="col-md-9">
-                            <div class="input-group date col-md-11" data-date-format="yyyy-mm-dd">
+                            <div class="input-group col-md-11 required">
                                 <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}" required>
 
                             </div>
