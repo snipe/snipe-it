@@ -31,7 +31,7 @@
                         <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
                             {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'audit_tag')) }}
                             <div class="col-md-9">
-                                <div class="input-group date col-md-5" data-date-format="yyyy-mm-dd">
+                                <div class="input-group date col-md-11 required" data-date-format="yyyy-mm-dd">
                                     <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}">
 
                                 </div>
@@ -49,10 +49,13 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-md-9">
                                 <label class="form-control">
-                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
+                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}>
+                                    <span>{{ trans('admin/hardware/form.asset_location') }}
+                                    <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> {{ trans('general.more_info') }}" data-html="true" data-content="{{ trans('general.quickscan_bulk_help') }}"><i class="far fa-life-ring"></i></a></span>
+
                                 </label>
 
-                                <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i>"{{ trans('general.more_info') }} data-html="true" data-content="{{ trans('general.quickscan_bulk_help') }}"><i class="far fa-life-ring"></i></a>
+
 
                             </div>
                         </div>
