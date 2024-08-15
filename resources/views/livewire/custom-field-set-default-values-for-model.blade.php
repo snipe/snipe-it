@@ -41,7 +41,7 @@
                                     <input
                                         class="form-control"
                                         type="text"
-                                        value="{{ $this->getValueForField($field) }}"
+                                        value="{{ $this->getFieldValue($field) }}"
                                         id="default-value{{ $field->id }}"
                                         name="default_values[{{ $field->id }}]"
                                         x-on:blur="(e) => $wire.$call(

@@ -32,7 +32,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
         });
     }
 
-    public function getValueForField(CustomField $field)
+    public function getFieldValue(CustomField $field)
     {
         return $this->cachedValues->get($field->db_column);
     }
