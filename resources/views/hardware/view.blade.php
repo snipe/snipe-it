@@ -1064,7 +1064,6 @@
                                 @endif
 
                                     <!-- Start side button column -->
-
                                     @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
                                         @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
                                             @can('checkin', \App\Models\Asset::class)
