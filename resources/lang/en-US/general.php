@@ -279,6 +279,7 @@ return [
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
+    'status_label'			=> 'Status Label',
     'status'    			=> 'Status',
     'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Supplier',
