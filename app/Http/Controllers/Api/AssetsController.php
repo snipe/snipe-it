@@ -928,7 +928,7 @@ class AssetsController extends Controller
             }
         }
 
-        if ($request->has('status_id')) {
+        if ($request->filled('status_id')) {
             $asset->status_id = $request->input('status_id');
         }
         
@@ -978,7 +978,7 @@ class AssetsController extends Controller
     public function checkinByTag(Request $request, $tag = null) : JsonResponse
     {
         $this->authorize('checkin', Asset::class);
-        if(null == $tag && null !== ($request->input('asset_tag'))) {
+        if (null == $tag && null !== ($request->input('asset_tag'))) {
             $tag = $request->input('asset_tag');
         }
         $asset = Asset::where('asset_tag', $tag)->first();

@@ -844,7 +844,7 @@ class AssetsController extends Controller
     {
         $this->authorize('checkin', Asset::class);
 
-        return view('hardware/quickscan-checkin');
+        return view('hardware/quickscan-checkin')->with('statusLabel_list', Helper::statusLabelList());
     }
 
     public function audit($id)
