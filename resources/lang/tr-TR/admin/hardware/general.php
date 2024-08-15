@@ -15,8 +15,8 @@ return [
     'delete_confirm'            => 'Bu ürünü silmek istediğinize eminmisiniz?',
     'edit'  					=> 'Demirbaşı Düzenle',
     'model_deleted'  			=> 'Bu varlık modeli silindi. Varlığı geri almak için modelini geri almalısınız.',
-    'model_invalid'             => 'Bu varlığın model bilgisi hatalı.',
-    'model_invalid_fix'         => 'Varlığı iade alma veya teslim etme işlemi öncesinde bunu düzeltmek için varlık bilgisi düzenlenmelidir.',
+    'model_invalid'             => 'Bu model bu varlık için değildir.',
+    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Talep edildi',
     'not_requestable'           => 'Talep Edilemez',
@@ -27,19 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Bu varlığın konuşlandırılamayan ve şu anda teslim alınamayan bir durum etiketi var.',
     'view'  					=> 'Demirbaşı Görüntüle',
     'csv_error' => 'CSV dosyanızda bir hata var:',
-    'import_text' => '
-<p>
-     Varlık geçmişini içeren bir CSV yükleyin. Varlıklar ve kullanıcılar sistemde zaten mevcut OLMALIDIR, aksi takdirde atlanırlar. Varlıkları geçmişteki içe aktarmalarla eşleştirmek, varlık etiketlerine rağmen gerçekleşir. Sağladığınız kullanıcı adına ve aşağıda seçtiğiniz kriterlere göre eşleşen bir kullanıcı bulmaya çalışacağız. Aşağıda herhangi bir ölçüt seçmezseniz, Yönetici &gt; Genel Ayarlar.
-     </p>
-
-     <p>CSV\'ye dahil edilen alanlar şu başlıklarla eşleşmelidir: <strong>Varlık Etiketi, İsim, Çıkış Tarihi, Giriş Tarihi</strong>. Bunların dışındaki alanlar yoksayılacaktır. </p>
-
-     <p>Giriş Tarihi: boş bırakılan veya gelecek tarihli giriş tarihleri, o öğelerin ilgili kullanıcıya çıkışını yapacaktır. Giriş Tarihi sütununun bulunmaması halinde, bugünün tarihiyle bir giriş tarihi oluşturulacaktır.</p>    ',
-    'csv_import_match_f-l' => 'Kullanıcıları ad.soyad (jane.smith) biçimiyle eşleştirmeye çalışın',
-    'csv_import_match_initial_last' => 'Kullanıcıları adın ilk harfi ve soyad (jsmith) biçimiyle eşleştirmeye çalışın',
-    'csv_import_match_first' => 'Kullanıcıları ad (jane) biçimiyle eşleştirmeye çalışın',
-    'csv_import_match_email' => 'Kullanıcıları kullanıcı adı olarak e-postalarıyla eşleştirmeye çalışın',
-    'csv_import_match_username' => 'Kullanıcıları kullanıcı adlarıyla eşleştirmeye çalışın',
+    'import_text' => '<p>Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the <code>Admin &gt; General Settings</code>.</p><p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p><p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    ',
+    'csv_import_match_f-l' => 'Try to match users by <strong>firstname.lastname</strong> (<code>jane.smith</code>) format',
+    'csv_import_match_initial_last' => 'Try to match users by <strong>first initial last name</strong> (<code>jsmith</code>) format',
+    'csv_import_match_first' => 'Try to match users by <strong>first name</strong> (<code>jane</code>) format',
+    'csv_import_match_email' => 'Try to match users by <strong>email</strong> as username',
+    'csv_import_match_username' => 'Try to match users by <strong>username</strong>',
     'error_messages' => 'Hata mesajı:',
     'success_messages' => 'Başarı mesajı:',
     'alert_details' => 'Detaylar için aşağıyı okuyun.',

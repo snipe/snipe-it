@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Leyo nsiyo ayikho.',
         'already_added'   => 'Inkambu isivele iseziwe',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Inkundla ayidalwanga, sicela uzame futhi.',

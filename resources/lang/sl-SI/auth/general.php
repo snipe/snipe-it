@@ -13,8 +13,7 @@ return [
     'username_help_top'                 => 'Vnesi svoje <strong>uporabniško ime</strong> za pošiljanje povezave za ponastavitev gesla.',
     'username_help_bottom'          => 'Uporabniško ime in geslo <em>sta lahko</em> enaki, vendar to ni nujno, odvisno od konfiguracije. Če se ne spomniš uporabniškega imena, kontaktiraj skrbnika.
 <br><br><strong>Uporabniškim imenom brez dodeljenega e-poštnega računa ne bo poslane povezave za ponastavitev gesla.</strong> ',
-    'google_login'                  => 'Or login with Google Workspace',
+    'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login failed, please try again.',
-
 ];
 

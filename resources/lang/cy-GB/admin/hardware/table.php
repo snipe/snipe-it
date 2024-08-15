@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Rhif Ased (tag)',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Wedi Neilltuo i',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Mewn/Allan',
     'checkout_date' => 'Dyddiad Allan',

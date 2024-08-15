@@ -1,16 +1,16 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Įrangos preižiūra',
-        'edit'               => 'Taisyti įrangos preižiūrą',
-        'delete'             => 'Ištrinti įrangos preižiūrą',
-        'view'               => 'Peržiūrėti detalią įrangos priežiūrą',
+        'asset_maintenances' => 'Turto aptarnavimas',
+        'edit'               => 'Redaguoti turto aptarnavimą',
+        'delete'             => 'Panaikinti turto aptarnavimą',
+        'view'               => 'Peržiūrėti turto aptarnavimo informaciją',
         'repair'             => 'Remontas',
-        'maintenance'        => 'Priežiūra',
-        'upgrade'            => 'Atnaujinti',
+        'maintenance'        => 'Aptarnavimas',
+        'upgrade'            => 'Pagerinimas',
         'calibration'        => 'Derinimas',
         'software_support'   => 'Programinės įrangos palaikymas',
         'hardware_support'   => 'Techninės įrangos palaikymas',
-        'configuration_change'   => 'Konfigūracijos pokytis',
-        'pat_test'           => 'PAT testas',
+        'configuration_change'   => 'Konfigūracijos keitimas',
+        'pat_test'           => 'Nešiojamųjų prietaisų testas',
     ];

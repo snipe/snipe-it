@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Моделот во моментов е поврзан со едно или повеќе основни средства и не може да се избрише. Ве молиме избришете ги основните средствата, а потоа пробајте повторно да го избришете. ',
-
+    'invalid_category_type' => 'The category must be an asset category.',
 
     'create' => array(
         'error'   => 'Моделот не е креиран, обидете се повторно.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Не беа сменети полиња, затоа ништо не беше ажурирано.',
         'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

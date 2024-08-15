@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Fylki',
     'suppliers'             => 'Birgjar',
     'update'                => 'Update Supplier',
-    'url'                   => 'URL',
     'view'                  => 'Skoða birgja',
     'view_assets_for'       => 'View Assets for',
     'zip'                   => 'Póstnúmer',

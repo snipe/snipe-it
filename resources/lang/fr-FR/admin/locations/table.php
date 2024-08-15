@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Affecté',
     'asset_expected_checkin'    => 'Date de restitution prévue',
     'date'                      => 'Date :',
+    'phone'                     => 'Téléphone de localisation',
     'signed_by_asset_auditor'   => 'Signé par (auditeur d\'actifs):',
     'signed_by_finance_auditor' => 'Signé par (auditeur financier):',
     'signed_by_location_manager' => 'Signé par (Gestionnaire d\'emplacements):',

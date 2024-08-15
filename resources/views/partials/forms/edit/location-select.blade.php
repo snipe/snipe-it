@@ -9,6 +9,7 @@
                         {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
                     </option>
                 @endif
+
         </select>
     </div>
 

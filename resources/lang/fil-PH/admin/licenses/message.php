@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Ang gumagamit ay hindi umiiral.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Ang asset na sinusubukang mong iugnay sa lisensyang ito ay hindi umiiral.',
     'owner_doesnt_match_asset' => 'Ang asset na sinusubukan nong iugnay sa lisensyang ito ay pag-aari ng isang tao maliban sa taong piniling maitalaga sa dropdown.',
     'assoc_users'	 => 'Ang lisensyang ito ay kasalukuyang nai-check out sa isang user at hindi maaaring mai-delete. Mangyaring suriin muna na naka in ang lisensya, at pagkatapos subukang i-delete muli. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Mayroong isyu sa pag-check out ng lisensya. Mangyaring subukang muli.',
         'success' => 'Matagumpay na nai-check out ang lisensya',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Maakunta',
     'suppliers'             => 'Toimittajat',
     'update'                => 'Päivitä toimittaja',
-    'url'                   => 'Kotisivu',
     'view'                  => 'Näytä toimittaja',
     'view_assets_for'       => 'Laitteet kohteella',
     'zip'                   => 'Postinumero',

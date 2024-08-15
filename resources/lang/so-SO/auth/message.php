@@ -2,43 +2,45 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'account_already_exists' => 'Koonto leh iimaylkan ayaa horay u jiray.',
+    'account_not_found'      => 'Magaca isticmaale ama erayga sirta ah waa khalad.',
+    'account_not_activated'  => 'Koontadan isticmaale lama hawlgelin',
+    'account_suspended'      => 'Koontada isticmaalaha waa la hakiyay',
+    'account_banned'         => 'Koontadan isticmaale waa mamnuuc.',
+    'throttle'               => 'Isku dayo galitaanka oo aad u badan ayaa guul daraystay. Fadlan isku day markale :minutes daqiiqo gudahood',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Qalabkaaga mar horeba wuu diiwaan gashan yahay.',
+        'success'               => 'Si guul leh ayaad u soo gashay',
+        'code_required'         => 'Koodhka laba-factor ayaa loo baahan yahay.',
+        'invalid_code'          => 'Koodhka laba-factor waa mid aan shaqayn.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Dhib baa jirtay markii la isku deyayay in lagu soo galo, fadlan isku day mar kale.',
+        'success' => 'Si guul leh ayaad u soo gashay',
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Dhib baa jirtay markii la isku deyayay inaan kaa saaro, fadlan isku day mar kale.',
+        'success' => 'Si guul leh ayaad uga baxday',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Dhib baa jirtay markii aad isku dayaysay inaad abuurto akoonkaaga, fadlan isku day mar kale.',
+        'success' => 'Akoonka si guul leh ayaa loo sameeyay',
     ),
 
     'forgot-password' => array(
-        'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'error'   => 'Dhibaato baa jirtay markii aad isku dayaysay inaad hesho koodka sirta ah, fadlan isku day mar kale.',
+        'success' => 'Haddii ciwaanka iimaylka uu ku jiro nidaamkayaga, iimaylka soo kabashada erayga sirta ah ayaa la soo diray.',
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'There was a problem while trying to reset your password, please try again.',
-        'success' => 'Your password has been successfully reset.',
+        'error'   => 'Dhib baa jirtay markii aad isku dayaysay inaad dib u dejiso eraygaaga sirta ah, fadlan isku day mar kale.',
+        'success' => 'Furahaaga si guul leh ayaa dib loo dajiyay',
     ),
 
 

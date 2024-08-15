@@ -38,6 +38,16 @@ class UserFactory extends Factory
         ];
     }
 
+    public function deletedUser()
+    {
+        return $this->state(function () {
+            return [
+                'deleted_at' => $this->faker->dateTime(),
+            ];
+        });
+    }
+
+
     public function firstAdmin()
     {
         return $this->state(function () {
@@ -298,5 +308,10 @@ class UserFactory extends Factory
                 ),
             ];
         });
+    }
+
+    public function deleted(): self
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
     }
 }

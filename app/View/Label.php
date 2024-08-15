@@ -38,10 +38,10 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = $this->data->get('template');
+        $template = LabelModel::find($settings->label2_template);
 
         // If disabled, pass to legacy view
-        if ((!$settings->label2_enable) && (!$template)) {
+        if ((!$settings->label2_enable)) {
             return view('hardware/labels')
                 ->with('assets', $assets)
                 ->with('settings', $settings)
@@ -49,19 +49,12 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
-        // If a specific template was set, use it, otherwise fall back to default
-        if (empty($template)) {
-            $template = LabelModel::find($settings->label2_template);
-        } elseif (is_string($template)) {
-            $template = LabelModel::find($template);
-        }
-
         $template->validate();
 
         $pdf = new TCPDF(
             $template->getOrientation(),
             $template->getUnit(),
-            [ $template->getWidth(), $template->getHeight() ]
+            [0 => $template->getWidth(), 1 => $template->getHeight(), 'Rotate' => $template->getRotation()]
         );
 
         // Reset parameters
@@ -90,13 +83,9 @@ class Label implements View
                 $assetData->put('id', $asset->id);
                 $assetData->put('tag', $asset->asset_tag);
 
-                if ($template->getSupportTitle()) {
-
-                    if ($asset->company && !empty($settings->label2_title)) {
-                        $title = str_replace('{COMPANY}', $asset->company->name, $settings->label2_title);
-                        $settings->qr_text;
-                        $assetData->put('title', $title);
-                    }
+                if ($template->getSupportTitle() && !empty($settings->label2_title)) {
+                    $title = str_replace('{COMPANY}', data_get($asset, 'company.name'), $settings->label2_title);
+                    $assetData->put('title', $title);
                 }
 
                 if ($template->getSupportLogo()) {
@@ -116,16 +105,15 @@ class Label implements View
                     }
                 }
 
-                if ($template->getSupport1DBarcode()) {
-                    $barcode1DType = $settings->label2_1d_type;
-                    $barcode1DType = ($barcode1DType == 'default') ? 
-                        (($settings->alt_barcode_enabled) ? $settings->alt_barcode : null) :
-                        $barcode1DType;
-                    if ($barcode1DType != 'none') {
-                        $assetData->put('barcode1d', (object)[
-                            'type' => $barcode1DType,
-                            'content' => $asset->asset_tag,
-                        ]);
+                if ($settings->alt_barcode_enabled) {
+                    if ($template->getSupport1DBarcode()) {
+                        $barcode1DType = $settings->label2_1d_type;
+                        if ($barcode1DType != 'none') {
+                            $assetData->put('barcode1d', (object)[
+                                'type' => $barcode1DType,
+                                'content' => $asset->asset_tag,
+                            ]);
+                        }
                     }
                 }
 
@@ -138,7 +126,7 @@ class Label implements View
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
                             case 'hardware_id':
-                            default: $barcode2DTarget = route('hardware.show', $asset->id); break;
+                            default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
                         }
                         $assetData->put('barcode2d', (object)[
                             'type' => $barcode2DType,
@@ -154,11 +142,36 @@ class Label implements View
                         // Remove Duplicates
                         $toAdd = $field
                             ->filter(fn($o) => !$myFields->contains('dataSource', $o['dataSource']))
-                            ->first();
+                            // For fields that have multiple options, we need to combine them
+                            // into a single field so all values are displayed.
+                            ->reduce(function ($previous, $current) {
+                                // On the first iteration we simply return the item.
+                                // If there is only one item to be processed for the row
+                                // then this effectively skips everything below this if block.
+                                if (is_null($previous)) {
+                                    return $current;
+                                }
+
+                                // At this point we are dealing with a row with multiple items being displayed.
+                                // We need to combine the label and value of the current item with the previous item.
+
+                                // The end result of this will be in this format:
+                                // {labelOne} {valueOne} | {labelTwo} {valueTwo} | {labelThree} {valueThree}
+                                $previous['value'] = trim(implode(' | ', [
+                                    implode(' ', [$previous['label'], $previous['value']]),
+                                    implode(' ', [$current['label'], $current['value']]),
+                                ]));
+
+                                // We'll set the label to an empty string since we
+                                // injected the label into the value field above.
+                                $previous['label'] = '';
+
+                                return $previous;
+                            });
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
-                    
+
                 $assetData->put('fields', $fields->take($template->getSupportFields()));
 
                 return $assetData;

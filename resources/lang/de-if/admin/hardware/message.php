@@ -2,11 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
-                        Falls sich dieser Status verändert hat, aktualisiere bitte den Asset Status.',
+    'undeployable' 		=> '<strong>Warnung: </strong> Dieses Asset wurde als derzeit nicht einsetzbar markiert. Wenn sich dieser Status geändert hat, aktualisieren Sie bitte den Asset-Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
+    'does_not_exist_var'=> 'Asset mit Asset-Tag :asset_tag nicht gefunden.',
+    'no_tag' 	        => 'Kein Asset-Tag angegeben.',
     'does_not_exist_or_not_requestable' => 'Dieses Asset existiert nicht oder kann nicht angefordert werden.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buche das Asset wieder ein und versuche dann erneut, es zu entfernen. ',
+    'warning_audit_date_mismatch' 	=> 'Das nächste Prüfdatum dieses Assets (:next_audit_date) liegt vor dem letzten Prüfdatum (:last_audit_date). Bitte aktualisieren Sie das nächste Prüfdatum.',
 
     'create' => [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuche es erneut. :(',
@@ -17,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Asset wurde nicht aktualisiert. Bitte versuche es erneut',
         'success' 			=> 'Asset wurde erfolgreich aktualisiert.',
+        'encrypted_warning' => 'Das Asset wurde erfolgreich aktualisiert, aber verschlüsselte benutzerdefinierte Felder wurden aufgrund von Berechtigungen nicht aktualisiert',
         'nothing_updated'	=>  'Es wurden keine Felder ausgewählt, somit wurde auch nichts aktualisiert.',
         'no_assets_selected'  =>  'Es wurden keine Assets ausgewählt, somit wurde auch nichts aktualisiert.',
+        'assets_do_not_exist_or_are_invalid' => 'Ausgewählte Assets können nicht aktualisiert werden.',
     ],
 
     'restore' => [
@@ -29,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset Audit war nicht erfolgreich. Bitte versuche es erneut.',
+        'error'   		=> 'Asset Prüfung fehlgeschlagen: :error ',
         'success' 		=> 'Asset-Audit erfolgreich protokolliert.',
     ],
 
@@ -47,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Importvorgang',
         'error'                 => 'Einige Elemente wurden nicht korrekt importiert.',
         'errorDetail'           => 'Die folgenden Elemente wurden aufgrund von Fehlern nicht importiert.',
         'success'               => 'Deine Datei wurde importiert',

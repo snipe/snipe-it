@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Деталите за најава не може да се променат на оваа инсталација.',
     'manager' 				=> 'Менаџер',
     'managed_locations'     => 'Менаџирани локации',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Име',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Забелешки',

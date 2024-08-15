@@ -15,8 +15,8 @@ return [
     'delete_confirm'            => 'Opravdu chcete odstranit tuto položku?',
     'edit'  					=> 'Upravit majetek',
     'model_deleted'  			=> 'Tento model majetku byl odstraněn. Před obnovením majetku musíte model obnovit.',
-    'model_invalid'             => 'Model tohoto majetku je neplatný.',
-    'model_invalid_fix'         => 'Měli byste tento majetek upravit dříve, než jej vydáte, či přijmete.',
+    'model_invalid'             => 'Tento model je pro toto aktivum neplatný.',
+    'model_invalid_fix'         => 'Aktiva musí být před pokusem o zaevidování nebo vyřazení, případně před auditem, aktualizována pomocí platného modelu aktiva.',
     'requestable'               => 'Lze vyžádat',
     'requested'				    => 'Požadováno',
     'not_requestable'           => 'Nelze vyžádat',
@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Tento majetek je ve stavu, který neumožňuje nasazení, a nemůže tak být vydán.',
     'view'  					=> 'Zobrazit majetek',
     'csv_error' => 'Máte chybu v souboru CSV:',
-    'import_text' => '
-    <p>
-    Nahrajte CSV obsahující historii aktiv. Majetek a uživatelé MUSÍ již v systému existovat, nebo budou přeskočeni. Odpovídající aktiva se dopárují přes inventární číslo. Pokusíme se najít odpovídající uživatele na základě uživatelského jména a kritérií, která vyberete níže. Pokud nevyberete žádná kritéria níže, pokusíme se data spárovat pomocí uživatelského jména, který jste nakonfigurovali v Admin &gt; Obecná nastavení.
-    </p>
-
-    <p>Pole zahrnutá do CSV musí odpovídat hlavičkám: <strong>Inventární číslo, Jméno, Datum převzetí majetku, Datum vydání majetku</strong>. Všechna další pole budou ignorována. </p>
-
-    <p>Odevzdání majetku: prázdná nebo budoucí data automaticky odhlásí majetek přidruženému uživateli. Vyloučením sloupce odevzdání majetku nastaví datum odevzdání na dnešek.</p>
+    'import_text' => '<p>Nahrajte CSV, který obsahuje historii aktiv. Aktiva a uživatelé MUSÍ již v systému existovat, nebo budou přeskočeni. Odpovídající aktiva pro import historie se odehrávají proti značce majetku. Pokusíme se najít odpovídající uživatele na základě jména uživatele, které zadáte, a kritérií, která vyberete níže. Pokud nevyberete žádná kritéria níže, se jednoduše pokusí shodnout se ve formátu uživatelského jména, který jste nakonfigurovali v <code>Admin &gt; Obecné nastavení</code>.</p><p>Pole zahrnutá do CSV musí odpovídat hlavičkám: <strong>Štítek majetku, jméno, datum platby, datum platby</strong>. Všechna další pole budou ignorována. </p><p>Datum zaškrtnutí: prázdná nebo budoucí data zaškrtnutí zaškrtněte položky pro přidruženého uživatele. S výjimkou sloupce Datum zaškrtnutí vytvoří datum zaškrtnutí s datumem.</p>
     ',
-    'csv_import_match_f-l' => 'Formát jmeno.prijmeni (karel.novak)',
-    'csv_import_match_initial_last' => 'Formát jprijmeni (knovak)',
-    'csv_import_match_first' => 'Formát jmeno (karel)',
-    'csv_import_match_email' => 'Email jako uživatelské jméno',
-    'csv_import_match_username' => 'Uživatelské jméno podle uživatelského jména',
+    'csv_import_match_f-l' => 'Pokuste se porovnat uživatele podle formátu <strong>firstname.lastname</strong> (<code>jane.smith</code>)',
+    'csv_import_match_initial_last' => 'Pokuste se porovnat uživatele podle formátu <strong>první počáteční příjmení</strong> (<code>jsmith</code>)',
+    'csv_import_match_first' => 'Zkuste porovnat uživatele podle formátu <strong>křestního jména</strong> (<code>jane</code>)',
+    'csv_import_match_email' => 'Pokuste se porovnat uživatele pomocí <strong>e-mailu</strong> jako uživatelské jméno',
+    'csv_import_match_username' => 'Pokuste se porovnat uživatele pomocí <strong>uživatelského jména</strong>',
     'error_messages' => 'Chybové zprávy:',
     'success_messages' => 'Úspěšné zprávy:',
     'alert_details' => 'Podrobnosti naleznete níže.',

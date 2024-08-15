@@ -1,2 +1,3 @@
-!.gitignore
 *
+!.gitignore
+!default.png

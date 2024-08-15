@@ -44,7 +44,7 @@
                         <div class="form-group {{ $errors->has('alerts_enabled') ? 'error' : '' }}">
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('alerts_enabled', '1', Request::old('alerts_enabled', $setting->alerts_enabled)) }}
+                                    {{ Form::checkbox('alerts_enabled', '1', old('alerts_enabled', $setting->alerts_enabled)) }}
                                     {{  trans('admin/settings/general.alerts_enabled') }}
                                 </label>
                             </div>
@@ -54,7 +54,7 @@
                         <div class="form-group {{ $errors->has('show_alerts_in_menu') ? 'error' : '' }}">
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('show_alerts_in_menu', '1', Request::old('show_alerts_in_menu', $setting->show_alerts_in_menu)) }}
+                                    {{ Form::checkbox('show_alerts_in_menu', '1', old('show_alerts_in_menu', $setting->show_alerts_in_menu)) }}
                                     {{ trans('admin/settings/general.show_alerts_in_menu') }}
                                 </label>
                             </div>
@@ -122,7 +122,7 @@
                                 {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('audit_interval', Request::old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -137,7 +137,7 @@
                                 {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('audit_warning_days', Request::old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
 
 

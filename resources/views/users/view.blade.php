@@ -89,9 +89,9 @@
           </a>
         </li>
 
-        @if ($user->managedLocations()->count() >= 0 )
+        @if ($user->managedLocations->count() >= 0 )
         <li>
-          <a href="#managed" data-toggle="tab">
+          <a href="#managed-locations" data-toggle="tab">
             <span class="hidden-lg hidden-md">
               <i class="fas fa-map-marker-alt fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
@@ -100,7 +100,19 @@
         </li>
         @endif
 
-        @can('update', $user)
+          @if ($user->managesUsers->count() >= 0 )
+              <li>
+                  <a href="#managed-users" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa-solid fa-users fa-2x"></i></span>
+                      <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_users') }}
+                      {!! ($user->managesUsers->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->managesUsers->count()).'</badge>' : '' !!}
+                  </a>
+              </li>
+          @endif
+
+
+      @can('update', $user)
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <span class="hidden-xs"><i class="fas fa-cog" aria-hidden="true"></i></span>
@@ -114,7 +126,7 @@
             <ul class="dropdown-menu">
               <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
               <li><a href="{{ route('users.clone.show', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
-              @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
+              @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at=='') && ($user->isDeletable()))
                 <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
               @endif
             </ul>
@@ -155,7 +167,7 @@
                 
                  @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
                     <i class="fas fa-crown fa-2x{{  ($user->isSuperUser()) ? ' text-danger' : ' text-orange'}}"></i>
-                    <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? 'superadmin' : 'admin'}}</div>
+                    <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? strtolower(trans('general.superuser')) : strtolower(trans('general.admin')) }}</div>
                   @endif
 
                 
@@ -221,11 +233,15 @@
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
                     <div class="col-md-12" style="padding-top: 30px;">
-                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
-                        {{csrf_field()}}
-                        {{ method_field("DELETE")}}
-                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
-                      </form>
+                        @if ($user->isDeletable())
+                          <form action="{{route('users.destroy',$user->id)}}" method="POST">
+                            {{csrf_field()}}
+                            {{ method_field("DELETE")}}
+                            <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                          </form>
+                            @else
+                            <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print disabled">{{ trans('button.delete')}}</button>
+                        @endif
                     </div>
                     <div class="col-md-12" style="padding-top: 5px;">
                       <form action="{{ route('users/bulkedit') }}" method="POST">
@@ -293,9 +309,9 @@
                       <div class="col-md-9">
 
                         @if ($user->isSuperUser())
-                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label>&nbsp;
+                          <label class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}"><i class="fas fa-crown" title="{{ trans('general.superuser') }}"></i></label>&nbsp;
                         @elseif ($user->hasAccess('admin'))
-                          <label class="label label-warning"><i class="fas fa-crown" title="admin"></i></label>&nbsp;
+                          <label class="label label-warning" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}"><i class="fas fa-crown" title="{{ trans('general.admin') }}"></i></label>&nbsp;
                         @endif
                          {{ $user->username }}
 
@@ -431,19 +447,19 @@
                         {{ trans('admin/users/table.email') }}
                       </div>
                       <div class="col-md-9">
-                        <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                        <a href="mailto:{{ $user->email }}" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> {{ $user->email }}</a>
                       </div>
                     </div>
                     @endif
 
-                    @if ($user->phone)
+                    @if ($user->website)
                      <!-- website -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('general.website') }}
                       </div>
                       <div class="col-md-9">
-                          <a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a>
+                          <a href="{{ $user->website }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> {{ $user->website }}</a>
                       </div>
                     </div>
                     @endif
@@ -455,7 +471,7 @@
                           {{ trans('admin/users/table.phone') }}
                         </div>
                         <div class="col-md-9">
-                          <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
+                          <a href="tel:{{ $user->phone }}" data-tooltip="true" title="{{ trans('general.call') }}"><i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $user->phone }}</a>
                         </div>
                       </div>
                     @endif
@@ -597,7 +613,7 @@
                             </div>
                           </div>
                           
-                          @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
+                          @if ((Auth::user()->isSuperUser()) && ($user->two_factor_active_and_enrolled()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
                           
                             <!-- 2FA reset -->
                             <div class="row">
@@ -1014,30 +1030,75 @@
           </div>
         </div><!-- /.tab-pane -->
 
-        <div class="tab-pane" id="managed">
-          <div class="table-responsive">
-            <table class="table display table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-8">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($user->managedLocations as $location)
-                <tr>
-                  <td>{!! $location->present()->nameUrl() !!}</td>
-                  <td>{{ $location->created_at }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-          </table>
+        <div class="tab-pane" id="managed-locations">
+
+            @include('partials.locations-bulk-actions')
+
+
+            <table
+                    data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
+                    data-cookie-id-table="locationTable"
+                    data-click-to-select="true"
+                    data-pagination="true"
+                    data-id-table="locationTable"
+                    data-toolbar="#locationsBulkEditToolbar"
+                    data-bulk-button-id="#bulkLocationsEditButton"
+                    data-bulk-form-id="#locationsBulkForm"
+                    data-search="true"
+                    data-show-footer="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-fullscreen="true"
+                    data-show-export="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    id="locationTable"
+                    class="table table-striped snipe-table"
+                    data-url="{{ route('api.locations.index', ['manager_id' => $user->id]) }}"
+                    data-export-options='{
+              "fileName": "export-locations-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+            </table>
+
+          </div>
+
+          <div class="tab-pane" id="managed-users">
+
+              @include('partials.locations-bulk-actions')
+
+
+              <table
+                      data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
+                      data-cookie-id-table="managedUsersTable"
+                      data-click-to-select="true"
+                      data-pagination="true"
+                      data-id-table="managedUsersTable"
+                      data-toolbar="#usersBulkEditToolbar"
+                      data-bulk-button-id="#bulkUsersEditButton"
+                      data-bulk-form-id="#usersBulkForm"
+                      data-search="true"
+                      data-show-footer="true"
+                      data-side-pagination="server"
+                      data-show-columns="true"
+                      data-show-fullscreen="true"
+                      data-show-export="true"
+                      data-show-refresh="true"
+                      data-sort-order="asc"
+                      id="managedUsersTable"
+                      class="table table-striped snipe-table"
+                      data-url="{{ route('api.users.index', ['manager_id' => $user->id]) }}"
+                      data-export-options='{
+              "fileName": "export-users-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+              </table>
+
           </div>
         </div><!-- /consumables-tab -->
       </div><!-- /.tab-content -->
     </div><!-- nav-tabs-custom -->
   </div>
-</div>
 
   @can('update', \App\Models\User::class)
     @include ('modals.upload-file', ['item_type' => 'user', 'item_id' => $user->id])

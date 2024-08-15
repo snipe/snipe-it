@@ -236,7 +236,6 @@ body {
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
-  color: var(--link)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -348,7 +347,10 @@ input[type=text], input[type=search] {
   color: var(--text-main);
 }
 .skin-green-dark .main-header .navbar .dropdown-menu li a {
-  color: var(--link);
+  color: #FFFFFF;
+}
+.skin-green-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #006300;
 }
 .fixed-table-body thead th .th-inner, .skin-green-dark .sidebar-menu>li.active>a, .skin-green .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
   background-color: var(--header)!important;
@@ -429,4 +431,7 @@ a {
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+.table > tbody > tr.warning > td{
+  background-color:var(--back-sub);
 }

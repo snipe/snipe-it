@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'A licença não existe ou não tem permissão para visualizá-la.',
-    'user_does_not_exist' => 'Utilizador não existe.',
+    'user_does_not_exist' => 'O usuário não existe ou você não tem permissão para visualizá-lo.',
     'asset_does_not_exist' 	=> 'O artigo que está a tentar associar com esta licença não existe.',
     'owner_doesnt_match_asset' => 'O proprietário do artigo que está a tentar associar com esta licença não é pessoa selecionada na dropdown.',
     'assoc_users'	 => 'Esta licença está correntemente alocada a um utilizador e não pode ser removida. Por favor devolva a licença e de seguida tente remover novamente. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Ocorreu um problema ao atribuir esta licença. Por favor, tente novamente.',
         'success' => 'A licença foi alocada com sucesso',
         'not_enough_seats' => 'Não há assentos de licença suficientes disponíveis para o pagamento',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

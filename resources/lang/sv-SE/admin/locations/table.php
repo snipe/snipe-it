@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Checkat ut',
     'asset_expected_checkin'    => 'Förväntad incheckning',
     'date'                      => 'Datum:',
+    'phone'                     => 'Plats Telefon',
     'signed_by_asset_auditor'   => 'Signerad av (Asset Auditor):',
     'signed_by_finance_auditor' => 'Undertecknad av (Finansrevisor):',
     'signed_by_location_manager' => 'Undertecknad av (Platschef):',

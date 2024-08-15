@@ -2,22 +2,27 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Внимание:</strong> Този актив е маркиран като невъзможен за предоставяне. Ако статусът е променен, моля обновете актива.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Активът не съществува.',
+    'does_not_exist_var'=> 'Активът с етике :asset_tag не е намерен.',
+    'no_tag' 	        => 'Не е предоставен етикет на актив.',
     'does_not_exist_or_not_requestable' => 'Актива не съществува или не може да бъде предоставян.',
     'assoc_users'	 	=> 'Активът е изписан на потребител и не може да бъде изтрит. Моля впишете го обратно и след това опитайте да го изтриете отново.',
+    'warning_audit_date_mismatch' 	=> 'Следващата дата на одит на този актив (:next_audit_date) е преди последната дата на одит (:last_audit_date). Моля, актуализирайте следващата дата на одита.',
 
     'create' => [
         'error'   		=> 'Активът не беше създаден. Моля опитайте отново.',
         'success' 		=> 'Активът създаден успешно.',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Артикул с етикет :tag беше създаден успешно. <strong><a href=":link" style="color: white;">Щракнете тук за да го видите</a></strong>.',
     ],
 
     'update' => [
         'error'   			=> 'Активът не беше обновен. Моля опитайте отново.',
         'success' 			=> 'Активът обновен успешно.',
+        'encrypted_warning' => 'Активът беше актуализиран успешно, но шифрованите персонализирани полета не бяха актуализирани поради разрешения',
         'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
         'no_assets_selected'  =>  'Няма избрани активи, така че нищо не бе обновено.',
+        'assets_do_not_exist_or_are_invalid' => 'Избраните активи не могат да се обновят.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Одитът на активи бе неуспешен. Моля, опитайте отново.',
+        'error'   		=> 'Одитът на активите е неуспешен: :error ',
         'success' 		=> 'Активният одит бе успешно регистриран.',
     ],
 
@@ -46,12 +51,13 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Някои елементи не бяха въведени правилно.',
         'errorDetail'           => 'Следните елементи не бяха въведени поради грешки.',
         'success'               => 'Вашият файл беше въведен.',
         'file_delete_success'   => 'Вашият файл беше изтрит успешно.',
         'file_delete_error'      => 'Файлът не е в състояние да бъде изтрит',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Избраният файл липсва',
         'header_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
         'content_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
     ],

@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Actionlog;
 use App\Models\License;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LicenseObserver
 {
@@ -38,6 +38,9 @@ class LicenseObserver
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        if($license->imported) {
+            $logAction->setActionSource('importer');
+        }
         $logAction->logaction('create');
     }
 

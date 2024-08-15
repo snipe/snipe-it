@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'ترميز الأصل',
     'asset_model'       => 'الموديل',
+    'assigned_to'   => 'تعيين إلى',
     'book_value'  	=> 'القيمة الحالية',
     'change' 		=> 'ادخال \\ اخراج',
     'checkout_date' => 'تاريخ الاخراج',

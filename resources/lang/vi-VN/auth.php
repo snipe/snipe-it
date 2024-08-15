@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'Thông tin tài khoản không tìm thấy trong hệ thống.',
     'password' => 'Mật khẩu được cung cấp không chính xác.',
     'throttle' => 'Quá nhiều lần thử đăng nhập. Vui lòng thử lại sau :second giây.',
 

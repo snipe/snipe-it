@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>คำเตือน: </strong> สินทรัพย์นี้ถูกกำหนดสถานะให้ไม่สามารถใช้งานได้ หากสถานะนี้ถูกเปลี่ยน กรุณาอัพเดทสถานะสินทรัพย์ด้วย',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'ไม่มีสินทรัพย์',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'สินทรัพย์นั้นไม่มีอยู่หรือไม่สามารถร้องขอได้',
     'assoc_users'	 	=> 'ขณะนี้มีการตรวจสอบเนื้อหานี้แก่ผู้ใช้และไม่สามารถลบออกได้ โปรดตรวจสอบเนื้อหาเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'ไม่ได้สร้างเนื้อหาโปรดลองอีกครั้ง :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'ไม่ได้อัปเดตเนื้อหาโปรดลองอีกครั้ง',
         'success' 			=> 'อัปเดตเนื้อหาสำเร็จแล้ว',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'ไม่มีการเลือกเขตข้อมูลดังนั้นไม่มีการอัปเดตอะไรเลย',
         'no_assets_selected'  =>  'ไม่มีการเลือกรายการสินทรัพย์ จึงไม่มีการอัพเดท',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'การตรวจสอบสินทรัพย์ไม่สำเร็จ กรุณาลองอีกครั้ง.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'บันทึกการตรวจสอบสินทรัพย์สำเร็จแล้ว',
     ],
 
@@ -46,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'บางรายการไม่สามารถนำเข้าได้อย่างถูกต้อง',
         'errorDetail'           => 'รายการต่อไปนี้ไม่ได้นำเข้าเนื่องจากมีข้อผิดพลาด',
         'success'               => 'ไฟล์ของคุณถูกนำเข้าแล้ว',

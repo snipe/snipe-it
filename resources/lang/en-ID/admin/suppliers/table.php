@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Negara',
     'suppliers'             => 'Pemasok',
     'update'                => 'Perbarui pemasok',
-    'url'                   => 'URL',
     'view'                  => 'Lihat pemasok',
     'view_assets_for'       => 'Lihat Aset untuk',
     'zip'                   => 'Kode pos',

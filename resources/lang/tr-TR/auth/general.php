@@ -12,8 +12,7 @@ return [
     'remember_me'                   => 'Beni hatırla',
     'username_help_top'                 => 'E-posta ile bir şifre sıfırlama bağlantısı almak için <strong> kullanıcı adınızı </strong> girin.',
     'username_help_bottom'          => 'Kullanıcı adınız ve e-posta adresiniz <em> olabilir</em> aynı olabilir, ancak yapılandırmanıza bağlı olarak olmayabilir. Kullanıcı adınızı hatırlayamıyorsanız, yöneticinize başvurun. <br><br><strong>İlişkili bir e-posta adresi olmayan kullanıcı adlarına e-postayla şifre sıfırlama bağlantısı gönderilmeyecektir.</strong> ',
-    'google_login'                  => 'Veya Google Workspace ile giriş yapın',
+    'google_login'                  => 'Google Workspace ile giriş yapın',
     'google_login_failed'           => 'Google Girişi başarısız oldu, lütfen tekrar deneyin.',
-
 ];
 

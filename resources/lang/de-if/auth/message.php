@@ -14,6 +14,8 @@ return array(
         'success'               => 'Du hast Dich erfolgreich angemeldet.',
         'code_required'         => 'Zwei-Faktor-Code ist erforderlich.',
         'invalid_code'          => 'Zwei-Faktor-Code ist ungültig.',
+        'enter_two_factor_code' => 'Bitte gebe deinen Zwei-Faktor-Authentifizierungscode ein.',
+        'please_enroll'         => 'Bitte registriere ein Gerät für die Zwei-Faktor-Authentifizierung.',
     ),
 
     'signin' => array(

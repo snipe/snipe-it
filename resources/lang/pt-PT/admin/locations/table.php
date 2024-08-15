@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Entregue',
     'asset_expected_checkin'    => 'Receção Esperada',
     'date'                      => 'Data:',
+    'phone'                     => 'Telefone da Localização',
     'signed_by_asset_auditor'   => 'Assinado por (Auditor de Artigos):',
     'signed_by_finance_auditor' => 'Assinado por (Auditor Financeiro):',
     'signed_by_location_manager' => 'Assinado por (Gestor de Localização):',

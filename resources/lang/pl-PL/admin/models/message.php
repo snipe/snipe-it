@@ -7,7 +7,7 @@ return array(
     'no_association' => 'OSTRZEŻENIE! Model aktywów dla tego przedmiotu jest nieprawidłowy lub brakuje!',
     'no_association_fix' => 'To zepsuje rzeczy w dziwny i straszny sposób. Edytuj teraz ten zasób, aby przypisać mu model.',
     'assoc_users'	 => 'Ten model jest przypisany do minim jednego aktywa i nie może być usunięty. Proszę usunąć aktywa, a następnie spróbować ponownie. ',
-
+    'invalid_category_type' => 'Kategoria musi być kategorią zasobu.',
 
     'create' => array(
         'error'   => 'Model nie został stworzony. Spróbuj ponownie.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Żadne pole nie zostało zmodyfikowane, więc nic nie zostało zaktualizowane.',
         'success' 		=> 'Model pomyślnie zaktualizowany. |:model_count modele pomyślnie zaktualizowane.',
-        'warn'          => 'Zamierzasz zaktualizować właściwości następującego modelu: |Zamierzasz edytować właściwości następujących modeli :model_count:',
+        'warn'          => 'Zamierzasz zaktualizować właściwości następującego modelu:|Zamierzasz edytować właściwości następujących modeli :model_count:',
 
     ),
 

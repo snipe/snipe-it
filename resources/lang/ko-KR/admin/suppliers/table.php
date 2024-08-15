@@ -19,7 +19,6 @@ return array(
     'state'                 => '주',
     'suppliers'             => '공급자',
     'update'                => '공급자 갱신',
-    'url'                   => '웹사이트 주소',
     'view'                  => '공급자 보기',
     'view_assets_for'       => '자산 보기',
     'zip'                   => '우편번호',

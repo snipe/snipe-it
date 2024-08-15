@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'کاربر وجود ندارد.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'دارایی شما در حال تلاش برای ارتباط با این مجوز وجود ندارد.',
     'owner_doesnt_match_asset' => 'دارایی شما در حال تلاش برای ارتباط با این مجوز توسط کسی غیر از فرد در اختصاص داده شده به انتخاب کرکره متعلق به.
 ',
@@ -45,6 +45,8 @@ return array(
         'error'   => 'بود یک موضوع چک کردن مجوز وجود دارد. لطفا دوباره تلاش کنید.',
         'success' => 'مجوز خارج بررسی شد موفقیت',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

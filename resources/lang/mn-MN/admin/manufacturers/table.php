@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Дэмжих URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Үйлдвэрлэгчийг шинэчлэх',
-    'url'   				=> 'URL',
 
 );

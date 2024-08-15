@@ -194,8 +194,7 @@
         </div> <!-- end col-md-12 form div -->
    </div> <!-- end form group div -->
 
-  </div> <!-- end col-md-3 div -->
-</div> <!-- end row div -->
+
 
 @stop
 

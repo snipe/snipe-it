@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Kasutajatoe URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Uuenda tootjat',
-    'url'   				=> 'URL',
 
 );

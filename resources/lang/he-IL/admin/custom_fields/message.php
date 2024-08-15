@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'שדה זה אינו קיים.',
         'already_added'   => 'השדה כבר נוסף',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'שדה לא נוצר, נסה שוב.',

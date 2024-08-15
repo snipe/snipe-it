@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'The category must be a consumable category.',
     'does_not_exist' => 'Vật tư phụ không tồn tại.',
 
     'create' => array(
@@ -24,7 +25,7 @@ return array(
         'error'   		=> 'Vật tư phụ chưa checkout, xin thử lại',
         'success' 		=> 'Vật tư phụ đã checkout thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Xin vui lòng thử lại.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Không đủ vật tư tiêu hao cho checkout. Vui lòng kiểm tra số lượng còn lại. ',
     ),
 
     'checkin' => array(

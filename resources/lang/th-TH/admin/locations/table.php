@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'เช็คเอาท์',
     'asset_expected_checkin'    => 'วันที่เช็คอินที่คาดหวังไว้',
     'date'                      => 'วันเดือนปี',
+    'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'ลงชื่อ (ผู้ตรวจรายการทรัพทย์สิน)',
     'signed_by_finance_auditor' => 'ลงชื่อ (ผู้ตรวจการเงิน)',
     'signed_by_location_manager' => 'ลงชื่อ (หัวหน้าจุด)',

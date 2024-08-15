@@ -14,6 +14,8 @@ return array(
         'success'               => '您已成功登入',
         'code_required'         => '需要雙重驗證碼',
         'invalid_code'          => '兩階段驗證碼無效',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(

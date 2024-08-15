@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'ไม่พบใบอนุญาตหรือคุณไม่มีสิทธิ์ในการเข้าถึง',
-    'user_does_not_exist' => 'ไม่มีผู้ใช้',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'เนื้อหาที่คุณกำลังพยายามเชื่อมโยงกับใบอนุญาตนี้ไม่มีอยู่',
     'owner_doesnt_match_asset' => 'เนื้อหาที่คุณกำลังพยายามเชื่อมโยงกับใบอนุญาตนี้เป็นของ somene ไม่ใช่บุคคลที่เลือกในรายการที่กำหนดให้กับ dropdown',
     'assoc_users'	 => 'ขณะนี้ใบอนุญาตนี้ออกให้แก่ผู้ใช้แล้วและไม่สามารถลบได้ โปรดตรวจสอบใบอนุญาตเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'มีปัญหาในการตรวจสอบใบอนุญาต กรุณาลองอีกครั้ง.',
         'success' => 'ออกใบอนุญาตแล้ว',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

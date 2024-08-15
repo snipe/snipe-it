@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Код на основното средство',
     'asset_model'       => 'Модел',
+    'assigned_to'   => 'Задолжен на',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Раздолжи/Задолжи',
     'checkout_date' => 'Датум на задолжување',

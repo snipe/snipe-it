@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Atbalsta URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Atjaunināt ražotāju',
-    'url'   				=> 'URL',
 
 );

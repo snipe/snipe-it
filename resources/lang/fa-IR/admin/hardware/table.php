@@ -4,6 +4,8 @@ return [
 
     'asset_tag'   	=> 'برچسب دارایی',
     'asset_model'       => 'مدل',
+    'assigned_to'   => 'اختصاص یافته به
+',
     'book_value'  	=> 'ارزش فعلی
 ',
     'change' 		=> '/ خارج',

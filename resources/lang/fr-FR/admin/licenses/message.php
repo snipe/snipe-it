@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La licence n\'existe pas ou vous n\'avez pas la permission d\'y accéder.',
-    'user_does_not_exist' => 'L\'utilisateur n\'existe pas.',
+    'user_does_not_exist' => 'L\'utilisateur n\'existe pas ou vous n\'avez pas la permission de les voir.',
     'asset_does_not_exist' 	=> 'L\'actif que vous essayez d\'associer avec cette licence n\'existe pas.',
     'owner_doesnt_match_asset' => 'L\'actif que vous essayez d\'associer avec cette licence est détenu par une autre personne que celle sélectionnée dans la liste déroulante.',
     'assoc_users'	 => 'Cette catégorie est associée au moins à un modèle et ne peut être supprimée. Veuillez actualiser vos modèles pour ne plus référencer cette catégorie et réessayer.',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Un problème a eu lieu pendant l\'association de la licence. Veuillez essayer à nouveau.',
         'success' => 'La licence a été associée avec succès',
         'not_enough_seats' => 'Pas assez de sièges de licence disponibles pour le paiement',
+        'mismatch' => 'Le poste de licence fourni ne correspond pas à la licence',
+        'unavailable' => 'Ce poste n\'est pas disponible pour attribution.',
     ),
 
     'checkin' => array(

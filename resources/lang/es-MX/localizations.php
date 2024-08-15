@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Seleccione un idioma',
+    'select_language' => 'Seleccionar un idioma',
     'languages' => [
         'en-US'=> 'Inglés, EEUU',
         'en-GB'=> 'Inglés, Reino Unido',
@@ -12,7 +12,7 @@ return [
         'bg-BG'=> 'Búlgaro',
         'zh-CN'=> 'Chino simplificado',
         'zh-TW'=> 'Chino tradicional',
-        'ca-ES' => 'Catalan',
+        'ca-ES' => 'Catalán',
         'hr-HR'=> 'Croata',
         'cs-CZ'=> 'Checo',
         'da-DK'=> 'Danés',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Malayo',
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongol',
-        'no-NO'=> 'Noruego',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Noruego Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Persa',
         'pl-PL'=> 'Polaco',
         'pt-PT'=> 'Portugués',
@@ -48,8 +50,9 @@ return [
         'ro-RO'=> 'Rumano',
         'ru-RU'=> 'Ruso',
         'sr-CS' => 'Serbian (Latin)',
-        'sk-SK'=> 'Slovak',
-        'sl-SI'=> 'Slovenian',
+        'sk-SK'=> 'Eslovaco',
+        'sl-SI'=> 'Esloveno',
+        'so-SO'=> 'Somali',
         'es-ES'=> 'Español',
         'es-CO'=> 'Español, Colombia',
         'es-MX'=> 'Español, México',
@@ -65,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulú',
     ],
 
-    'select_country' => 'Seleccione un país',
+    'select_country' => 'Seleccionar un país',
     
     'countries' => [
         'AC'=>'Isla de Ascensión',

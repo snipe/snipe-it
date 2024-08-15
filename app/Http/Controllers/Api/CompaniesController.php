@@ -10,6 +10,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\JsonResponse;
 
 class CompaniesController extends Controller
 {
@@ -18,9 +19,8 @@ class CompaniesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Company::class);
 
@@ -40,7 +40,9 @@ class CompaniesController extends Controller
             'components_count',
         ];
 
-        $companies = Company::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
+        $companies = Company::withCount(['assets as assets_count'  => function ($query) {
+            $query->AssetsForShow();
+        }])->withCount('licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
 
         if ($request->filled('search')) {
             $companies->TextSearch($request->input('search'));
@@ -77,9 +79,8 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Company::class);
         $company = new Company;
@@ -100,9 +101,8 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
@@ -118,9 +118,8 @@ class CompaniesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Company::class);
         $company = Company::findOrFail($id);
@@ -142,9 +141,8 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Company::class);
         $company = Company::findOrFail($id);
@@ -167,7 +165,7 @@ class CompaniesController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request) : array
     {
         $this->authorize('view.selectlists');
         $companies = Company::select([

@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Vahendi silt',
     'asset_model'       => 'Mudel',
+    'assigned_to'   => 'Väljastatud kasutajale',
     'book_value'  	=> 'Arvestuslik väärtus',
     'change' 		=> 'Sees väljas',
     'checkout_date' => 'Väljastamise kuupäev',
@@ -14,7 +15,7 @@ return [
     'dl_csv' 		=> 'Laadige alla CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'last_checkin_date' => 'Last Checkin Date',
+    'last_checkin_date' => 'Viimane Sissevõtmise kuupäev',
     'location' 		=> 'Asukoht',
     'purchase_cost'	=> 'Kulud',
     'purchase_date'	=> 'Ostetud',

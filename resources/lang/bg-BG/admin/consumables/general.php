@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Остава',
     'total' 			                => 'Oбщо',
     'update'                            => 'Обновяване на консуматив',
+    'inventory_warning'                 => 'Наличноста на този консуматив е под зададения минимум от :min_count',
 );

@@ -2,14 +2,13 @@
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Group;
 use App\Models\Ldap;
-use Exception;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
+#[Group('ldap')]
 class LdapTest extends TestCase
 {
-    use InteractsWithSettings;
     use \phpmock\phpunit\PHPMock;
 
     public function testConnect()

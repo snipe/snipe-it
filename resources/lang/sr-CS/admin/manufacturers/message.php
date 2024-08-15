@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Promenljive <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, i <code>{MODEL_NAME}</code> se mogu koristiti u vašim URL adresama kako bi se te vrednosti automatski popunile pri pregledu imovine - na primer https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Promenljive <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, i <code>{MODEL_NAME}</code> se mogu koristiti u vašim URL adresama kako bi se te vrednosti automatski popunile pri pregledu imovine - na primer https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Proizvođač ne postoji.',
     'assoc_users'	 => 'Ovaj je proizvođač trenutno povezan s barem jednim modelom i ne može se izbrisati. Ažurirajte svoje modele da se više ne referenciraju na ovog proizvođača i pokušajte ponovno. ',
 

@@ -2,88 +2,94 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Dėmesio: </strong> Ši įranga pažymėta kaip negalima naudoti. Jei būklė  pasikeitė, prašome atnaujinti įrangos būklę.',
-    'does_not_exist' 	=> 'Tokios įrangos nėra.',
-    'does_not_exist_or_not_requestable' => 'Tokios įrangos nėra arba jos negalima užklausti.',
-    'assoc_users'	 	=> 'Ši įranga šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite įrangą, tuomet bandykite ištrinti vėl. ',
+    'undeployable' 		=> '<strong>Įspėjimas:</strong> Šis turtas pažymėtas kaip negalimas išduoti. Jei šio turto būsena pasikeitė, atnaujinkite būsenos žymą.',
+    'does_not_exist' 	=> 'Tokio turto nėra.',
+    'does_not_exist_var'=> 'Turtas su numeriu :asset_tag nerastas.',
+    'no_tag' 	        => 'Nenurodytas inventorinis numeris.',
+    'does_not_exist_or_not_requestable' => 'Tokio turto nėra arba jo negalima užsakyti.',
+    'assoc_users'	 	=> 'Šis turtas šiuo metu yra išduotas naudotojui ir negali būti panaikintas. Pirmiausia paimkite turtą ir tuomet vėl bandykite jį panaikinti. ',
+    'warning_audit_date_mismatch' 	=> 'Šio turto kito audito data (:next_audit_date) yra ankstesnė už paskutinio audito datą (:last_audit_date). Atnaujinkite kito audito datą.',
 
     'create' => [
-        'error'   		=> 'Įrangos sukurti nepavyko, prašome bandykite dar kartą. :(',
-        'success' 		=> 'Įranga sėkminga sukurta. :)',
-        'success_linked' => 'Įranga su etikete :tag sukurta sėkmingai. <strong><a href=":link" style="color: white;">Paspausti peržiūrai</a></strong>.',
+        'error'   		=> 'Turto sukurti nepavyko, bandykite dar kartą.',
+        'success' 		=> 'Turtas sukurtas sėkmingai.',
+        'success_linked' => 'Turtas su žyma :tag sukurtas sėkmingai. <strong><a href=":link" style="color: white;">Spustelėkite čia, kad peržiūrėtumėte</a></strong>.',
     ],
 
     'update' => [
-        'error'   			=> 'Įrangos atnaujinti nepavyko, prašome bandykite dar kartą',
-        'success' 			=> 'Įranga sėkmingai atnaujinta.',
-        'nothing_updated'	=>  'Nei vienas laukelis nepasirinktas, tad niekas nebuvo atnaujinta.',
-        'no_assets_selected'  =>  'Nebuvo pasirinkta jokio turto, taigi niekas nebuvo pakeistas.',
+        'error'   			=> 'Turto atnaujinti nepavyko, bandykite dar kartą',
+        'success' 			=> 'Turtas atnaujintas sėkmingai.',
+        'encrypted_warning' => 'Turtas buvo atnaujintas sėkmingai, tačiau dėl nepakankamų teisių, užšifruoti pasirinktiniai laukai nebuvo atnaujinti',
+        'nothing_updated'	=>  'Nebuvo pasirinktas nei vienas laukas, todėl niekas nebuvo atnaujinta.',
+        'no_assets_selected'  =>  'Nebuvo pasirinkta jokio turto, todėl nieko nebuvo atnaujinta.',
+        'assets_do_not_exist_or_are_invalid' => 'Pasirinktas turtas negali būti atnaujintas.',
     ],
 
     'restore' => [
-        'error'   		=> 'Įranga nebuvo atkurta, prašome bandykite dar kartą',
-        'success' 		=> 'Įranga atkurta sėkmingai.',
-        'bulk_success' 		=> 'Įranga atkurta sėkmingai.',
-        'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, taigi niekas nebuvo atstatytas.', 
+        'error'   		=> 'Turto atkurti nepavyko, bandykite dar kartą',
+        'success' 		=> 'Turtas atkurtas sėkmingai.',
+        'bulk_success' 		=> 'Turtas atkurtas sėkmingai.',
+        'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, todėl nieko nebuvo atkurta.', 
     ],
 
     'audit' => [
-        'error'   		=> 'Turto auditas buvo nesėkmingas. Prašau, pabandykite dar kartą.',
-        'success' 		=> 'Turto auditas sėkmingai registruotas.',
+        'error'   		=> 'Turto auditas nesėkmingas: :error ',
+        'success' 		=> 'Turto auditas sėkmingai užregistruotas.',
     ],
 
 
     'deletefile' => [
-        'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
+        'error'   => 'Failas neištrintas. Bandykite dar kartą.',
         'success' => 'Failas sėkmingai ištrintas.',
     ],
 
     'upload' => [
-        'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
-        'success' => 'Failas (-ai) sėkmingai įkelti.',
-        'nofiles' => 'Jūs nepasirinkote nė vieno failo įkėlimui arba failai, kuriuos ketinate įkelti yra per dideli',
-        'invalidfiles' => 'Vienas ar keli failai yra per didelis arba neleidžiamas šis failų formatas. primename, kad leidžiami sekantys formatai png, gif, jpg, doc, docx, pdf, txt.',
+        'error'   => 'Failo (-ų) įkelti nepavyko. Bandykite dar kartą.',
+        'success' => 'Failas (-ai) įkelti sėkmingai.',
+        'nofiles' => 'Nepasirinkote jokio failo įkėlimui arba failas, kurį bandote įkelti, yra per didelis',
+        'invalidfiles' => 'Vienas ar keli failai yra per dideli arba neleistinas šis failų formatas. Leidžiami failų tipai yra: png, gif, jpg, doc, docx, pdf ir txt.',
     ],
 
     'import' => [
-        'error'                 => 'Nepavyko teisingai importuoti kai kurių įrašų.',
+        'import_button'         => 'Vykdyti importavimą',
+        'error'                 => 'Kai kurie elementai nebuvo tinkamai importuoti.',
         'errorDetail'           => 'Šie elementai nebuvo importuoti dėl klaidų.',
-        'success'               => 'Jūsų failas importuotas',
+        'success'               => 'Jūsų failas buvo importuotas',
         'file_delete_success'   => 'Jūsų failas buvo sėkmingai ištrintas',
-        'file_delete_error'      => 'Nepavyko ištrinti failo',
+        'file_delete_error'      => 'Šio failo ištrinti nepavyko',
         'file_missing' => 'Pažymėtas failas nerastas',
-        'header_row_has_malformed_characters' => 'Vienas ar daugiau atributų antraštės eilutėje turi netinkąmą UTF-8 simbolį',
-        'content_row_has_malformed_characters' => 'Vienas ar daugiau atributų pirmoje eilutėje turi netinkamą UTF-8 simbolį',
+        'header_row_has_malformed_characters' => 'Vienas ar keli antraštinės eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
+        'content_row_has_malformed_characters' => 'Vienas ar keli pirmosios eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
     ],
 
 
     'delete' => [
-        'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',
-        'error'   		=> 'Nepavyko ištrinti įrangos. Prašome bandykite dar kartą.',
-        'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, taigi niekas nebuvo ištrintas.',
-        'success' 		=> 'Įranga sėkmingai ištrinta.',
+        'confirm'   	=> 'Ar tikrai norite panaikinti šį turtą?',
+        'error'   		=> 'Bandant panaikinti turtą įvyko klaida. Bandykite dar kartą.',
+        'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, todėl nieko nebuvo panaikinta.',
+        'success' 		=> 'Turtas sėkmingai panaikintas.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
-        'success' 		=> 'Įranga išduota sėkmingai.',
-        'user_does_not_exist' => 'Netinkamas naudotojas. Prašome bandykite dar kartą.',
-        'not_available' => 'Šis turtas negali būti išsiunčiamas!',
-        'no_assets_selected' => 'Jūs turite pasirinkti bent vieną turtą iš sąrašo',
+        'error'   		=> 'Turtas nebuvo išduotas, bandykite dar kartą',
+        'success' 		=> 'Turtas išduotas sėkmingai.',
+        'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.',
+        'not_available' => 'Šis turtas negali būti išduodamas!',
+        'no_assets_selected' => 'Turite pasirinkti bent vieną turto vienetą iš sąrašo',
     ],
 
     'checkin' => [
-        'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
-        'success' 		=> 'Įranga išduota sėkmingai.',
-        'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.',
-        'already_checked_in'  => 'Šis turtas jau yra registruotas.',
+        'error'   		=> 'Turtas nebuvo paimtas, bandykite dar kartą',
+        'success' 		=> 'Turtas paimtas sėkmingai.',
+        'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.',
+        'already_checked_in'  => 'Šis turtas jau yra paimtas.',
 
     ],
 
     'requests' => [
-        'error'   		=> 'Įranga nebuvo užklausta, prašome bandyti dar kartą',
-        'success' 		=> 'Įrangos užklausa sėkmingai išsiusta.',
-        'canceled'      => 'Patikros užklausa sėkmingai atšaukta',
+        'error'   		=> 'Turtas nebuvo užsakytas, bandykite dar kartą',
+        'success' 		=> 'Turtas užsakytas sėkmingai.',
+        'canceled'      => 'Išdavimo prašymas sėkmingai atšauktas',
     ],
 
 ];

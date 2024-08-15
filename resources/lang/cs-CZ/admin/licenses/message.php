@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Licence neexistuje nebo nemáte oprávnění k jejímu zobrazení.',
-    'user_does_not_exist' => 'Uživatel neexistuje.',
+    'user_does_not_exist' => 'Uživatel neexistuje nebo nemáte oprávnění k jeho zobrazení.',
     'asset_does_not_exist' 	=> 'Majetek, který se pokoušíte spojit s touto licencí, neexistuje.',
     'owner_doesnt_match_asset' => 'Majetek, který se pokoušíte spojit s touto licencí, vlastní někdo jiný než osoba vybraná v rozbalovací nabídce k této licenci.',
     'assoc_users'	 => 'Licence je předána svému uživateli a nelze ji odstranit. Před odstraněním ji nejprve převezměte. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Vyskytl se problém při výdeji licence. Zkuste to znovu prosím.',
         'success' => 'Licence byla úspěšně vydána',
         'not_enough_seats' => 'Není k dispozici dostatek licenčních míst pro pokladnu',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Qayb ma jiraan',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Qayb lama abuurin, fadlan isku day mar kale.',
+        'success' => 'Qayb ayaa loo sameeyay si guul leh'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Qaybaha lama cusboonaysiin, fadlan isku day mar kale',
+        'success' => 'Qaybta si guul leh ayaa loo cusboonaysiiyay'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Ma hubtaa inaad rabto inaad tirtirto qaybtan?',
+        'error'   => 'Waxaa jirtay arrin la tirtirayo qaybta Fadlan isku day mar kale',
+        'success' => 'Qaybta si guul leh ayaa loo tirtiray'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'error'   		=> 'Qaybaha lama hubin, fadlan isku day mar kale',
+        'success' 		=> 'Qaybta si guul leh ayaa loo hubiyay',
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale',
+        'unavailable'      => 'Qaybo aan ku filnayn ayaa hadhsan: :remaining hadhay, :requested waa la codsaday ',
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Qaybaha lama hubin, fadlan isku day mar kale',
+        'success' 		=> 'Qaybta si guul leh ayaa loo hubiyay',
+        'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale'
     )
 
 

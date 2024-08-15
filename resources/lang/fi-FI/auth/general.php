@@ -12,8 +12,7 @@ return [
     'remember_me'                   => 'Muista minut',
     'username_help_top'                 => 'Palauttaaksesi salasanasi sähköpostilla, anna <strong> käyttäjätunnuksesi</strong>.',
     'username_help_bottom'          => 'Käyttäjätunnuksesi ja sähköpostiosoitteesi <em>voivat</em> olla samoja, mutta eivät välttämättä. Jos et muista käyttäjätunnustasi, ota yhteyttä järjestelmänvalvojaan. <br><br><strong>Käyttäjätunnuksille, joilla ei ole liitettyä sähköpostiosoitetta, ei voida lähettää sähköpostiin salasanan vaihtamislinkkiä.</strong> ',
-    'google_login'                  => 'Tai kirjaudu sisään Google Workspacen avulla',
+    'google_login'                  => 'Kirjaudu sisään Google Workspacella',
     'google_login_failed'           => 'Google-kirjautuminen epäonnistui, yritä uudelleen.',
-
 ];
 

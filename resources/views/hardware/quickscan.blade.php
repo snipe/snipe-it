@@ -23,9 +23,7 @@
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
-                    <div class="box-header with-border">
-                        <h2 class="box-title"> {{ trans('general.bulkaudit') }} </h2>
-                    </div>
+
                     <div class="box-body">
                     {{csrf_field()}}
 
@@ -33,8 +31,8 @@
                         <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
                             {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'audit_tag')) }}
                             <div class="col-md-9">
-                                <div class="input-group date col-md-5" data-date-format="yyyy-mm-dd">
-                                    <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ Request::old('asset_tag') }}">
+                                <div class="input-group date col-md-11 required" data-date-format="yyyy-mm-dd">
+                                    <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}">
 
                                 </div>
                                 {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -51,10 +49,13 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-md-9">
                                 <label class="form-control">
-                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
+                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}>
+                                    <span>{{ trans('admin/hardware/form.asset_location') }}
+                                    <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> {{ trans('general.more_info') }}" data-html="true" data-content="{{ trans('general.quickscan_bulk_help') }}"><i class="far fa-life-ring"></i></a></span>
+
                                 </label>
 
-                                <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> More Info" data-html="true" data-content="Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to."><i class="far fa-life-ring"></i></a>
+
 
                             </div>
                         </div>
@@ -155,7 +156,13 @@
                 data : formData,
                 success : function (data) {
                     if (data.status == 'success') {
-                        $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+                        $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success' style='font-size:18px;'></i></td></tr>");
+
+                        @if ($user->enable_sounds)
+                        var audio = new Audio('{{ config('app.url') }}/sounds/success.mp3');
+                        audio.play()
+                        @endif
+                            
                         incrementOnSuccess();
                     } else {
                         handleAuditFail(data);
@@ -175,6 +182,10 @@
         });
 
         function handleAuditFail (data) {
+            @if ($user->enable_sounds)
+            var audio = new Audio('{{ config('app.url') }}/sounds/error.mp3');
+            audio.play()
+            @endif
             if (data.asset_tag) {
                 var asset_tag = data.asset_tag;
             } else {
@@ -185,7 +196,7 @@
             } else {
                 var messages = '';
             }
-            $('#audited tbody').prepend("<tr class='danger'><td>" + asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
+            $('#audited tbody').prepend("<tr class='danger'><td>" + data.payload.asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger' style='font-size:18px;'></i></td></tr>");
         }
 
         function incrementOnSuccess() {

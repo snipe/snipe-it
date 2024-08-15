@@ -20,7 +20,7 @@
             <div class="error-content">
               <h2><i class="fas fa-exclamation-triangle text-yellow"></i> 403 Forbidden.</h2>
               <p>
-                Sad panda. You are not authorized to do the thing. Maybe <a href="{{ config('app.url') }}">return to the dashboard</a>, or contact your administrator.
+                {!! trans('general.sad_panda', ['link' => config('app.url')]) !!}
               </p>
 
     </div>

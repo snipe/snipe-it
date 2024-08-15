@@ -7,7 +7,7 @@ use EasySlugger\Utf8Slugger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
-use Schema;
+use Illuminate\Support\Facades\Schema;
 use Watson\Validating\ValidatingTrait;
 class CustomField extends Model
 {

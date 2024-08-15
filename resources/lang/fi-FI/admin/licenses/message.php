@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Lisenssiä ei ole olemassa tai sinulla ei ole oikeuksia tarkastella sitä.',
-    'user_does_not_exist' => 'Käyttäjää ei löydy.',
+    'user_does_not_exist' => 'Käyttäjää ei ole olemassa tai sinulla ei ole oikeuksia tarkastella niitä.',
     'asset_does_not_exist' 	=> 'Laitetta jolle yrität määrittää tämän lisenssin ei löydy.',
     'owner_doesnt_match_asset' => 'Laitteen jolle yrität määrittää tämän lisenssin omistaa joku muu kuin se, jonka olet valinnut alasvetovalikosta.',
     'assoc_users'	 => 'Lisenssin on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssin ensin käyttäjältä, ja yritä sitten uudelleen. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Lisenssin luovutuksessa tapahtui virhe. Yritä uudelleen.',
         'success' => 'Lisenssi luovutettiin onnistuneesti',
         'not_enough_seats' => 'Lisenssipaikkoja ei ole riittävästi saatavilla kassalle',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

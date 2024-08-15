@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável.                        Se este status mudou, atualize o status do ativo.',
+    'undeployable' 		=> '<strong>Aviso:</strong> Este bem foi marcado como atualmente não implementável.                        Se este status mudou, por favor, atualize o status do bem.',
     'does_not_exist' 	=> 'O ativo não existe.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Esse ativo não existe ou não pode ser solicitado.',
     'assoc_users'	 	=> 'Este bem está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu bem para que não referencie mais este usuário e tente novamente. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'O ativo não foi criado, tente novamente. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'O ativo não foi atualizado, tente novamente',
         'success' 			=> 'Ativo atualizado com sucesso.',
+        'encrypted_warning' => 'Os ativos atualizados com sucesso, mas campos personalizados criptografados não se devem às permissões',
         'nothing_updated'	=>  'Nenhum campo foi selecionado, então nada foi atualizado.',
         'no_assets_selected'  =>  'Nenhum ativo foi selecionado, portanto, nada foi atualizado.',
+        'assets_do_not_exist_or_are_invalid' => 'Os arquivos selecionados não podem ser atualizados.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'A auditoria de equipamentos não teve êxito. Por favor, tente novamente.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Auditoria de equipamentos logada com sucesso.',
     ],
 
@@ -46,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Alguns itens não foram importados corretamente.',
         'errorDetail'           => 'Os seguintes itens não foram importados devido a erros.',
         'success'               => 'O seu arquivo foi importado',

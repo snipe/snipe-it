@@ -30,7 +30,7 @@
               <tr>
                 <td></td>
                 <td>{{ trans('admin/hardware/table.id') }}</td>
-                <td>{{ trans('admin/hardware/table.name') }}</td>
+                <td>{{ trans('general.asset_name') }}</td>
                 <td>{{ trans('admin/hardware/table.location')}}</td>
                 <td>{{ trans('admin/hardware/table.assigned_to') }}</td>
               </tr>

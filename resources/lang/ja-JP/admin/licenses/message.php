@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'ライセンスが存在しないか、表示する権限がありません。',
-    'user_does_not_exist' => '利用者が存在しません。',
+    'user_does_not_exist' => 'ユーザーが存在しないか、表示する権限がありません。',
     'asset_does_not_exist' 	=> 'このライセンスに関連付けられている資産が存在しません。',
     'owner_doesnt_match_asset' => 'ドロップダウンで割り当てられた以上の利用者にライセンスを関連付けようとしています。',
     'assoc_users'	 => 'このライセンスは利用者にチェックアウトされているため削除できません。ライセンスをチェックイン後、もう一度、やり直して下さい。 ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'ライセンスのチェックを外す際に問題が発生しました。もう一度、やり直して下さい。',
         'success' => 'ライセンスのチェックを外しました。',
         'not_enough_seats' => '購入可能なライセンスシートが不足しています',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

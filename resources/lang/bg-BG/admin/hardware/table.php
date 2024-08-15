@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Инвентарен номер',
     'asset_model'       => 'Модел',
+    'assigned_to'   => 'Предоставен на',
     'book_value'  	=> 'Текуща стойност',
     'change' 		=> 'Предоставяне',
     'checkout_date' => 'Дата на изписване',
@@ -24,7 +25,7 @@ return [
     'image'		    => 'Изображение на устройството',
     'days_without_acceptance' => 'Дни без да е предаден',
     'monthly_depreciation' => 'Месечна Амортизация',
-    'assigned_to'    => 'Предоставен на',
+    'assigned_to'    => 'Възложени на',
     'requesting_user' => 'Изискан от',
     'requested_date' => 'Дата на заявката',
     'changed'       => 'Променен',

@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Oznaka statusa ne postoji.',
         'already_added'   => 'Polje je već dodato',
+        'none_selected'   => 'Nijedno polje nije izabrano',
 
         'create' => array(
             'error'   => 'Polje nije kreirano, pokušajte ponovo.',

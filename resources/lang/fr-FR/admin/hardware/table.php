@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Étiquette de l\'actif',
     'asset_model'       => 'Modèle',
+    'assigned_to'   => 'Affecté à',
     'book_value'  	=> 'Valeur actuelle',
     'change' 		=> 'Associer/Libérer',
     'checkout_date' => 'Date d\'association',

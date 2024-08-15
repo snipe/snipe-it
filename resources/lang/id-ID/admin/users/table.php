@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Detail masuk tidak dapat di ubah ketika instalasi.',
     'manager' 				=> 'Manajer',
     'managed_locations'     => 'Lokasi yang Dikelola',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Nama',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Catatan',

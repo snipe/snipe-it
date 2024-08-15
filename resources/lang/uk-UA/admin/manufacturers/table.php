@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'URL підтримки',
     'warranty_lookup_url'   => 'URL-адреса фільтрування гарантії',
     'update'				=> 'Оновити виробника',
-    'url'   				=> 'URL',
 
 );

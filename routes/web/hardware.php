@@ -50,26 +50,10 @@ Route::group(
             [AssetsController::class, 'dueForAudit']
         )->name('assets.audit.due');
 
-        Route::get('audit/overdue',
-            [AssetsController::class, 'overdueForAudit']
-        )->name('assets.audit.overdue');
-
-        Route::get('audit/due',
-            [AssetsController::class, 'dueForAudit']
-        )->name('assets.audit.due');
-
-        Route::get('audit/overdue',
-            [AssetsController::class, 'overdueForAudit']
-        )->name('assets.audit.overdue');
-
-        Route::get('audit/due',
-            [AssetsController::class, 'dueForAudit']
-        )->name('assets.audit.due');
-
-        Route::get('audit/overdue',
-            [AssetsController::class, 'overdueForAudit']
-        )->name('assets.audit.overdue');
-
+        Route::get('checkins/due',
+            [AssetsController::class, 'dueForCheckin']
+        )->name('assets.checkins.due');
+        
         Route::get('audit/{id}',
             [AssetsController::class, 'audit']
         )->name('asset.audit.create');
@@ -94,17 +78,14 @@ Route::group(
             [AssetsController::class, 'getAssetBySerial']
         )->where('any', '.*')->name('findbyserial/hardware');
 
-        Route::get('{assetId}/clone',
+        Route::get('{asset}/clone',
             [AssetsController::class, 'getClone']
-        )->name('clone/hardware');
+        )->name('clone/hardware')->withTrashed();
 
         Route::get('{assetId}/label',
             [AssetsController::class, 'getLabel']
         )->name('label/hardware');
-
-        Route::post('{assetId}/clone', 
-            [AssetsController::class, 'postCreate']
-        );
+        
 
         Route::get('{assetId}/checkout',
             [AssetCheckoutController::class, 'create']

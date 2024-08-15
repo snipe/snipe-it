@@ -32,6 +32,7 @@ return [
 ',
     'default_location'	=> ' پیش فرض محل سکونت
 ',
+    'default_location_phone' => 'Default Location Phone',
     'eol_date'			=> ' تاریخ EOL
 ',
     'eol_rate'			=> ' نرخ EOL',
@@ -50,6 +51,9 @@ return [
     'qr'				=> 'کیو آر کد',
     'requestable'		=> 'کاربران ممکن است این دارایی هارا درخواست کنند
 ',
+    'redirect_to_all'   => 'Return to all :type',
+    'redirect_to_type'   => 'Go to :type',
+    'redirect_to_checked_out_to'   => 'Go to Checked Out to',
     'select_statustype'	=> 'انتخاب نوع وضعیت',
     'serial'			=> 'سریال',
     'status'			=> 'وضعیت',

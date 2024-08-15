@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Amaran: </strong> Aset ini telah ditandakan sebagai tidak boleh dikehendaki. Jika status ini telah berubah, sila kemas kini status aset.',
+    'undeployable' 		=> '<strong>Amaran: </strong> Harta ini sekarang ditanda sebagai tidak boleh agih. Jika statusnya telah berubah, sila kemaskini staus harta.',
     'does_not_exist' 	=> 'Harta tidak wujud.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Harta ini sekarang telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak status harta ini dahulu, dan kemudian cuba semula. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Harta gagal dicipta, sila cuba semula. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Harta gagal dikemaskini, sila cuba semula',
         'success' 			=> 'Harta berjaya dikemaskini.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Tiada medan dipilih, jadi tiada apa yang dikemas kini.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Audit aset tidak berjaya. Sila cuba lagi.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Audit aset berjaya log.',
     ],
 
@@ -46,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Sesetengah item tidak diimport dengan betul.',
         'errorDetail'           => 'Item berikut tidak diimport kerana kesilapan.',
         'success'               => 'Fail anda telah diimport',
