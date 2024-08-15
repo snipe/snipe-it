@@ -127,7 +127,7 @@ class LoginController extends Controller
                     $saml->clearData();
                 }
 
-                if ($user = Auth::user()) {
+                if ($user = auth()->user()) {
                     $user->last_login = \Carbon::now();
                     $user->saveQuietly();
                 }
@@ -326,7 +326,7 @@ class LoginController extends Controller
             }
         }
 
-        if ($user = Auth::user()) {
+        if ($user = auth()->user()) {
             $user->last_login = \Carbon::now();
             $user->activated = 1;
             $user->saveQuietly();
@@ -350,7 +350,7 @@ class LoginController extends Controller
         }
 
         $settings = Setting::getSettings();
-        $user = Auth::user();
+        $user = auth()->user();
 
         // We wouldn't normally see this page if 2FA isn't enforced via the
         // \App\Http\Middleware\CheckForTwoFactor middleware AND if a device isn't enrolled,
@@ -398,7 +398,7 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
-        $user = Auth::user();
+        $user = auth()->user();
 
         // Check whether there is a device enrolled.
         // This *should* be handled via the \App\Http\Middleware\CheckForTwoFactor middleware
@@ -427,11 +427,7 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
-        if (! $request->has('two_factor_secret')) { // TODO this seems almost the same as above?
-            return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
-        }
-
-        $user = Auth::user();
+        $user = auth()->user();
         $secret = $request->input('two_factor_secret');
 
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
@@ -439,7 +435,7 @@ class LoginController extends Controller
             $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 
-            return redirect()->route('home')->with('success', 'You are logged in!');
+            return redirect()->route('home')->with('success', trans('auth/message.signin.success'));
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
@@ -537,7 +533,7 @@ class LoginController extends Controller
 
         $minutes = round($seconds / 60);
 
-        $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
+        $message = trans('auth/message.throttle', ['minutes' => $minutes]);
 
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))

@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告:</strong>この資産は、現在 未配備としてマークされています。
-                        この状態が変更された場合は、資産のステータスを更新してください。',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> '資産が存在しません。',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'いくつかの項目は正しくインポートされませんでした。',
         'errorDetail'           => '以下のアイテムはエラーのためインポートできませんでした',
         'success'               => 'ファイルはインポートされました。',

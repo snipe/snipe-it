@@ -28,20 +28,18 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use phpDocumentor\Reflection\Types\Compound;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 
 class AcceptanceController extends Controller
 {
     /**
      * Show a listing of pending checkout acceptances for the current user
-     *
-     * @return View
      */
-    public function index()
+    public function index() : View
     {
-        $acceptances = CheckoutAcceptance::forUser(Auth::user())->pending()->get();
-
+        $acceptances = CheckoutAcceptance::forUser(auth()->user())->pending()->get();
         return view('account/accept.index', compact('acceptances'));
     }
 
@@ -49,9 +47,8 @@ class AcceptanceController extends Controller
      * Shows a form to either accept or decline the checkout acceptance
      *
      * @param  int  $id
-     * @return mixed
      */
-    public function create($id)
+    public function create($id) : View | RedirectResponse
     {
         $acceptance = CheckoutAcceptance::find($id);
 
@@ -64,7 +61,7 @@ class AcceptanceController extends Controller
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
-        if (! $acceptance->isCheckedOutTo(Auth::user())) {
+        if (! $acceptance->isCheckedOutTo(auth()->user())) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
@@ -80,9 +77,8 @@ class AcceptanceController extends Controller
      *
      * @param  Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id) : RedirectResponse
     {
         $acceptance = CheckoutAcceptance::find($id);
 
@@ -94,7 +90,7 @@ class AcceptanceController extends Controller
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
-        if (! $acceptance->isCheckedOutTo(Auth::user())) {
+        if (! $acceptance->isCheckedOutTo(auth()->user())) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
@@ -222,6 +218,7 @@ class AcceptanceController extends Controller
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
+                'item_status' => $item->assetstatus?->name,
                 'eula' => $item->getEula(),
                 'note' => $request->input('note'),
                 'check_out_date' => Carbon::parse($acceptance->created_at)->format('Y-m-d'),
@@ -312,6 +309,7 @@ class AcceptanceController extends Controller
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
+                'item_status' => $item->assetstatus?->name,
                 'note' => $request->input('note'),
                 'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,

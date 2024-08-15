@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Priedo nepavyko išduoti, bandykite dar kartą',
         'success' 		=> 'Priedas išduotas sėkmingai.',
         'unavailable'   => 'Priedo išduoti negalima. Patikrinkite likutį',
-        'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.'
+        'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.',
+         'checkout_qty' => array(
+            'lte'  => 'Šiuo metu yra tik vienas šio tipo priedas, o jūs bandote išduoti :checkout_qty. Pakoreguokite išduodamą arba bendrą šio priedo atsargų kiekį ir bandykite dar kartą.|Yra :number_currently_remaining šio priedo vienetai (-ų), o jūs bandote išduoti :checkout_qty. Pakoreguokite išduodamą arba bendrą šio priedo atsargų kiekį ir bandykite dar kartą.',
+            ),
+           
     ),
 
     'checkin' => array(

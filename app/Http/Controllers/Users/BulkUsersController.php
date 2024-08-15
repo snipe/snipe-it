@@ -16,6 +16,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
@@ -42,7 +43,7 @@ class BulkUsersController extends Controller
             // Get the list of affected users
             $user_raw_array = request('ids');
             $users = User::whereIn('id', $user_raw_array)
-                ->with('groups', 'assets', 'licenses', 'accessories')->get();
+                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
 
             // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
@@ -102,7 +103,7 @@ class BulkUsersController extends Controller
         // Remove the user from any updates.
         $user_raw_array = array_diff($user_raw_array, [Auth::id()]);
         $manager_conflict = false;
-        $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
+        $users = User::whereIn('id', $user_raw_array)->where('id', '!=', auth()->id())->get();
 
         $return_array = [
             'success' => trans('admin/users/message.success.update_bulk'),
@@ -218,21 +219,19 @@ class BulkUsersController extends Controller
         }
 
         $users = User::whereIn('id', $user_raw_array)->get();
-        $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', \App\Models\User::class)->get();
-        $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
+        $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', User::class)->get();
+        $accessoryUserRows = DB::table('accessories_checkout')->where('assigned_type', User::class)->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-        $consumables = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
+        $consumableUserRows = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
 
         if ((($assets->count() > 0) && ((!$request->filled('status_id')) || ($request->input('status_id') == '')))) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         }
 
-
         $this->logItemCheckinAndDelete($assets, Asset::class);
-        $this->logItemCheckinAndDelete($accessories, Accessory::class);
+        $this->logAccessoriesCheckin($accessoryUserRows);
         $this->logItemCheckinAndDelete($licenses, License::class);
-        $this->logItemCheckinAndDelete($consumables, Consumable::class);
-
+        $this->logConsumablesCheckin($consumableUserRows);
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
             'status_id'     => e(request('status_id')),
@@ -241,19 +240,14 @@ class BulkUsersController extends Controller
             'expected_checkin' => null,
         ]);
 
-
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
-        ConsumableAssignment::whereIn('id', $consumables->pluck('id'))->delete();
-
+        ConsumableAssignment::whereIn('id', $consumableUserRows->pluck('id'))->delete();
 
         foreach ($users as $user) {
-
-            $user->consumables()->sync([]);
             $user->accessories()->sync([]);
             if ($request->input('delete_user')=='1') {
                 $user->delete();
             }
-
         }
 
         $msg = trans('general.bulk_checkin_success');
@@ -279,11 +273,39 @@ class BulkUsersController extends Controller
             if ($itemType == License::class){
                 $item_id = $item->license_id;
             }
-            
+
             $logAction->item_id = $item_id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
             $logAction->item_type = $itemType;
             $logAction->target_id = $item->assigned_to;
+            $logAction->target_type = User::class;
+            $logAction->user_id = Auth::id();
+            $logAction->note = 'Bulk checkin items';
+            $logAction->logaction('checkin from');
+        }
+    }
+
+    private function logAccessoriesCheckin(Collection $accessoryUserRows): void
+    {
+        foreach ($accessoryUserRows as $accessoryUserRow) {
+            $logAction = new Actionlog();
+            $logAction->item_id = $accessoryUserRow->accessory_id;
+            $logAction->item_type = Accessory::class;
+            $logAction->target_id = $accessoryUserRow->assigned_to;
+            $logAction->target_type = User::class;
+            $logAction->user_id = Auth::id();
+            $logAction->note = 'Bulk checkin items';
+            $logAction->logaction('checkin from');
+        }
+    }
+
+    private function logConsumablesCheckin(Collection $consumableUserRows): void
+    {
+        foreach ($consumableUserRows as $consumableUserRow) {
+            $logAction = new Actionlog();
+            $logAction->item_id = $consumableUserRow->consumable_id;
+            $logAction->item_type = Consumable::class;
+            $logAction->target_id = $consumableUserRow->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
             $logAction->note = 'Bulk checkin items';
@@ -317,8 +339,8 @@ class BulkUsersController extends Controller
 
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
-        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'licenses', 'consumables','accessories')->get();
-        $admin = User::find(Auth::user()->id);
+        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
+        $admin = User::find(auth()->id());
 
         // Walk users
         foreach ($users_to_merge as $user_to_merge) {
@@ -344,8 +366,18 @@ class BulkUsersController extends Controller
             }
 
             foreach ($user_to_merge->userlog as $log) {
-                $log->target_id = $user_to_merge->id;
+                $log->target_id = $merge_into_user->id;
                 $log->save();
+            }
+
+            foreach ($user_to_merge->uploads as $upload) {
+                $upload->item_id = $merge_into_user->id;
+                $upload->save();
+            }
+
+            foreach ($user_to_merge->acceptances as $acceptance) {
+                $acceptance->item_id = $merge_into_user->id;
+                $acceptance->save();
             }
 
             User::where('manager_id', '=', $user_to_merge->id)->update(['manager_id' => $merge_into_user->id]);
@@ -356,7 +388,6 @@ class BulkUsersController extends Controller
             }
 
             $user_to_merge->delete();
-            //$user_to_merge->save();
 
             event(new UserMerged($user_to_merge, $merge_into_user, $admin));
 

@@ -4,6 +4,11 @@
     'helpPosition'  => 'right',
     'helpText' => trans('help.consumables'),
     'formAction' => (isset($item->id)) ? route('consumables.update', ['consumable' => $item->id]) : route('consumables.store'),
+    'index_route' => 'consumables.index',
+    'options' => [
+                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'consumables']),
+                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.consumable')]),
+               ]
 ])
 {{-- Page content --}}
 @section('inputFields')

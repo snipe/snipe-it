@@ -112,7 +112,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en-US',
+    'fallback_locale' => env('FALLBACK_APP_LOCALE', 'en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -242,7 +242,7 @@ return [
     |
     */
 
-    'min_php' => '7.4.0',
+    'min_php' => '8.1.2',
 
 
     /*
@@ -311,8 +311,10 @@ return [
         App\Providers\ValidationServiceProvider::class,
 
         /*
-        * Custom service provider
+        * Custom Service Providers...
         */
+        App\Providers\BladeServiceProvider::class,
+        App\Providers\LivewireServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
 
@@ -339,7 +341,7 @@ return [
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
-        'Crypt' => Illuminate\Support\FacadesCrypt::class,
+        'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'Date' => Illuminate\Support\Facades\Date::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
@@ -426,5 +428,5 @@ return [
   */
 
     'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
-
+    
 ];

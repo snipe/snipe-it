@@ -6,6 +6,6 @@ return array(
     'action' 		        => 'Ação',
     'by'      		        => 'Por',
     'item' 			        => 'Item',
-    'no_matching_records'   => 'No matching records found',
+    'no_matching_records'   => 'Nenhum resultado foi encontrado',
 
 );

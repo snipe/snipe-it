@@ -231,7 +231,7 @@ class AssetsTransformer
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'location' => ($asset->location) ? e($asset->location->name) : null,
             'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
-            'assigned_to_self' => ($asset->assigned_to == \Auth::user()->id),
+            'assigned_to_self' => ($asset->assigned_to == auth()->id()),
         ];
 
         if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
@@ -258,8 +258,8 @@ class AssetsTransformer
 
 
         $permissions_array['available_actions'] = [
-            'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,
-            'request' => ($asset->isRequestedBy(\Auth::user())) ? false : true,
+            'cancel' => ($asset->isRequestedBy(auth()->user())) ? true : false,
+            'request' => ($asset->isRequestedBy(auth()->user())) ? false : true,
         ];
 
         $array += $permissions_array;

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'すべてチェックイン/ユーザー削除',
     'delete'  	                => '削除',
     'edit'    	                => '編集',
+    'clone'    	                => 'Clone',
     'restore' 	                => '復元',
     'remove'                    => '削除',
     'request'                   => 'リクエスト',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'メンテナンスを追加',
     'append'                    => '追加',
     'new'                       => '新規',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

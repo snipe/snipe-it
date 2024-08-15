@@ -56,6 +56,7 @@ return [
     'i_have_read' => '사용 조약을 읽고 동의 하며, 이 품목을 수령했습니다.',
     'inventory_report' => 'Inventory Report',
     'item' => '품목:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => '다음 :threshold 일 내에 만료되는 라이선스가 :count 개 있습니다.|다음 :threshold 일 내에 만료되는 라이선스가 :count 개 있습니다.',
     'link_to_update_password' => ':web 비밀번호를 수정하려면 다음 링크를 클릭하세요:',
     'login' => '로그인:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => '사용자',
     'username' => '사용자명',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => '환영합니다 :name',
     'welcome_to' => '환영합니다 :web!',
     'your_assets' => '자산 확인',
     'your_credentials' => '당신의 Snipe-IT 인증들',
+    'mail_sent' => 'Mail sent successfully!',
 ];

@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Kasutajanimi ja e-posti aadress <em>võivad</em> olla samad, aga ei pruugi olla. Kui oled kasutajanime unustanud, võta ühendust oma süsteemiadministraatoriga. <br><br><strong>Kasutajatele ilma liidetud e-posti aadressita ei saa parooli lähtestamise linki saata.</strong> ',
     'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login failed, please try again.',
-
 ];
 

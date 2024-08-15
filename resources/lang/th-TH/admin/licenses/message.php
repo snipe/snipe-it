@@ -44,6 +44,8 @@ return array(
         'error'   => 'มีปัญหาในการตรวจสอบใบอนุญาต กรุณาลองอีกครั้ง.',
         'success' => 'ออกใบอนุญาตแล้ว',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

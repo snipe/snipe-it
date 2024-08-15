@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'Términos y condiciones',
+	'eula_text'      			=> 'Acuerdo de uso',
     'id'      					=> 'ID',
-    'parent'   					=> 'Padre',
+    'parent'   					=> 'Ubicación padre',
     'require_acceptance'      	=> 'Aceptación',
     'title'      				=> 'Nombre de la categoría del activo',
 

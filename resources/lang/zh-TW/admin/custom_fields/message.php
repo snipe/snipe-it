@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => '欄位不存在。',
         'already_added'   => '已新增欄位。',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => '新增欄位失敗，請重試。',

@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+const fs = require("node:fs");
 
 // This generates a file called app.css, which we use
 // later on to build all.css
@@ -40,10 +41,23 @@ mix
   .minify("./public/css/dist/signature-pad.css");
 
 /**
- * Copy, minify and version signature-pad.css
+ * Copy and version select2
+ */
+mix
+    .copy("./node_modules/select2/dist/js/i18n", "./public/js/select2/i18n")
+
+/**
+ * Copy and version fontawesome
  */
 mix
     .copy("./node_modules/@fortawesome/fontawesome-free/webfonts", "./public/css/webfonts")
+
+/**
+ * Copy BS tables js file
+ */
+mix
+    .copy( './node_modules/bootstrap-table/dist/bootstrap-table-locale-all.min.js', 'public/js/dist' )
+    .copy( './node_modules/bootstrap-table/dist/locale/bootstrap-table-en-US.min.js', 'public/js/dist' )
 
 // Combine main SnipeIT JS files
 mix
@@ -51,71 +65,35 @@ mix
     [
       "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS - require()s bootstrap.js
       "./resources/assets/js/snipeit_modals.js",
+      "./node_modules/canvas-confetti/dist/confetti.browser.js",
     ],
     "./public/js/build/app.js" //because of compiling - this does not work very well :(
   )
 
+var skins = fs.readdirSync("resources/assets/less/skins");
+
 // Convert the skins to CSS
-mix.less(
-  "./resources/assets/less/skins/skin-blue.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-red.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-contrast.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-green.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-green-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-black.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-black-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-red-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-purple.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-purple-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-yellow.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-yellow-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-blue-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-orange-dark.less",
-  "css/dist/skins",
-);
-mix.less(
-  "./resources/assets/less/skins/skin-orange.less",
-  "css/dist/skins",
-);
+for (var i in skins) {
+    mix.less(
+        "resources/assets/less/skins/" + skins[i],
+        "css/dist/skins"
+    )
+}
+
+var css_skins = fs.readdirSync("public/css/dist/skins");
+for (var i in css_skins) {
+    if (css_skins[i].endsWith(".min.css")) {
+        //don't minify already minified skinns
+        continue;
+    }
+    if (css_skins[i].endsWith(".css")) {
+        // only minify files ending with '.css'
+        mix.minify("public/css/dist/skins/" + css_skins[i]).version();
+    }
+    //TODO - if we only ever use the minified versions, this could be simplified down to one line (above)
+    // but it stays like this so we have the minified and non-minified versions of the skins
+    // right now the code seems to use the un-minified skins
+}
 
 /**
  * Combine bootstrap table css
@@ -150,7 +128,7 @@ mix.combine(
     "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
-    "./resources/assets/js/signature_pad.js",
+      "./resources/assets/js/signature_pad.js", //dupe?
     "./node_modules/jquery-validation/dist/jquery.validate.js",
     "./node_modules/list.js/dist/list.js",
     "./node_modules/clipboard/dist/clipboard.js",
@@ -187,34 +165,4 @@ mix
     ["./public/js/build/vendor.js", "./public/js/build/app.js"],
     "./public/js/dist/all.js"
   )
-  .version();
-
-mix
-  .combine(
-    ['./node_modules/alpinejs/dist/cdn.js'],
-    './public/js/dist/all-defer.js'
-  )
-  .version();
-
-/**
- * Copy, minify and version skins
- */
-mix
-  .minify([
-    "./public/css/dist/skins/skin-green.css",
-    "./public/css/dist/skins/skin-green-dark.css",
-    "./public/css/dist/skins/skin-black.css",
-    "./public/css/dist/skins/skin-black-dark.css",
-    "./public/css/dist/skins/skin-blue.css",
-    "./public/css/dist/skins/skin-blue-dark.css",
-    "./public/css/dist/skins/skin-yellow.css",
-    "./public/css/dist/skins/skin-yellow-dark.css",
-    "./public/css/dist/skins/skin-red.css",
-    "./public/css/dist/skins/skin-red-dark.css",
-    "./public/css/dist/skins/skin-purple.css",
-    "./public/css/dist/skins/skin-purple-dark.css",
-    "./public/css/dist/skins/skin-orange.css",
-    "./public/css/dist/skins/skin-orange-dark.css",
-    "./public/css/dist/skins/skin-contrast.css",
-  ])
   .version();

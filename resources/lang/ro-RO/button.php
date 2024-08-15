@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Verifică tot / Șterge Utilizatorul',
     'delete'  	                => 'Sterge',
     'edit'    	                => 'Editeaza',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'Restaureaza',
     'remove'                    => 'Elimină',
     'request'                   => 'Cerere',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Adaugă Mentenanță',
     'append'                    => 'Adăugare',
     'new'                       => 'Nou',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

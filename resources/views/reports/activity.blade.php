@@ -52,7 +52,7 @@
                             <th class="col-sm-3" data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
                             <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                             <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.to') }}</th>
-                            <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
+                            <th class="col-sm-1" data-field="note" data-sortable="true">{{ trans('general.notes') }}</th>
                             <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">{{ trans('general.changed') }}</th>
                             <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
                             <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>

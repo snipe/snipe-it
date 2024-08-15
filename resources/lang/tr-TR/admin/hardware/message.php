@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Uyarı:</strong> Bu demirbaş dağıtılamaz olarak işlaretlenmiş.
-                        Eğer durumu değişti ise, lütfen Demirbaş Durumu\'nu güncelleyiniz.',
+    'undeployable' 		=> '<strong>Uyarı: </strong> Bu demirbaş dağıtılamaz durumdadır. Eğer bu durum değişti ise demirbaş durumunu değiştiriniz.',
     'does_not_exist' 	=> 'Demirbaş mevcut değil.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'İçeri aktarma işlemi',
         'error'                 => 'Bazı öğeler doğru şekilde içe aktarılamadı.',
         'errorDetail'           => 'Aşağıdaki öğeler hatalar nedeniyle alınamadı.',
         'success'               => 'Dosyanızı içe aktarıldı',

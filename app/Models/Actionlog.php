@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Carbon;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -17,10 +16,12 @@ use Illuminate\Support\Facades\Auth;
  */
 class Actionlog extends SnipeModel
 {
+    use CompanyableTrait;
     use HasFactory;
 
     // This is to manually set the source (via setActionSource()) for determineActionSource()
     protected ?string $source = null;
+    protected $with = ['admin'];
 
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
@@ -81,14 +82,14 @@ class Actionlog extends SnipeModel
         parent::boot();
         static::creating(function (self $actionlog) {
             // If the admin is a superadmin, let's see if the target instead has a company.
-            if (Auth::user() && Auth::user()->isSuperUser()) {
+            if (auth()->user() && auth()->user()->isSuperUser()) {
                 if ($actionlog->target) {
                     $actionlog->company_id = $actionlog->target->company_id;
                 } elseif ($actionlog->item) {
                     $actionlog->company_id = $actionlog->item->company_id;
                 }
-            } elseif (Auth::user() && Auth::user()->company) {
-                $actionlog->company_id = Auth::user()->company_id;
+            } elseif (auth()->user() && auth()->user()->company) {
+                $actionlog->company_id = auth()->user()->company_id;
             }
         });
     }
@@ -371,5 +372,10 @@ class Actionlog extends SnipeModel
     public function setActionSource($source = null): void
     {
         $this->source = $source;
+    }
+
+    public function scopeOrderAdmin($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'action_logs.user_id', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

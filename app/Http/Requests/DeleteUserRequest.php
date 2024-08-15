@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 
 class DeleteUserRequest extends FormRequest
@@ -19,7 +19,25 @@ class DeleteUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('delete', User::class);
+    }
+
+    public function prepareForValidation(): void
+    {
+        $user_to_delete = User::withTrashed()->find(request()->route('user'));
+
+        if ($user_to_delete) {
+            $this->merge([
+                'user' => request()->route('user'),
+                'admin_id' => auth()->id(),
+                'managed_users' => $user_to_delete->managesUsers()->count(),
+                'managed_locations' => $user_to_delete->managedLocations()->count(),
+                'assigned_assets' => $user_to_delete->assets()->count(),
+                'assigned_licenses' => $user_to_delete->licenses()->count(),
+                'assigned_accessories' => $user_to_delete->accessories()->count(),
+                'deleted_at' => $user_to_delete->deleted_at,
+            ]);
+        }
     }
 
     /**
@@ -29,41 +47,28 @@ class DeleteUserRequest extends FormRequest
      */
     public function rules(): array
     {
-
-        $user_to_delete = User::find(request()->route('user'));
-
-        if ($user_to_delete) {
-            $this->merge([
-                'user' => request()->route('user'),
-                'admin_id' => Auth::user()->id,
-                'managed_users' => $user_to_delete->managesUsers()->count(),
-                'managed_locations' => $user_to_delete->managedLocations()->count(),
-                'assigned_assets' => $user_to_delete->assets()->count(),
-                'assigned_licenses' => $user_to_delete->licenses()->count(),
-                'assigned_accessories' => $user_to_delete->accessories()->count(),
-            ]);
-        }
-
         return [
-            'id' => ['exists:users,id'],
-            'user' =>  Rule::notIn([Auth::user()->id]),
+            'user' =>  Rule::notIn([auth()->id()]),
             'managed_users' =>  Rule::in([0]),
             'managed_locations' => Rule::in([0]),
             'assigned_assets' => Rule::in([0]),
             'assigned_licenses' => Rule::in([0]),
             'assigned_accessories' => Rule::in([0]),
+            'deleted_at' => Rule::in([null]),
         ];
     }
 
     public function messages(): array
     {
 
-        $user_to_delete = User::find(request()->route('user'));
-        $messages = ['id.exists' => trans('admin/users/message.user_not_found')];
+        $user_to_delete = User::withTrashed()->find(request()->route('user'));
+        $messages = [];
 
         if ($user_to_delete) {
 
             $messages = array_merge([
+
+                'user.exists' => trans('admin/users/message.user_not_found'),
 
                 // Cannot delete yourself
                 'user.not_in' => trans('admin/users/message.error.cannot_delete_yourself'),
@@ -83,6 +88,8 @@ class DeleteUserRequest extends FormRequest
 
                 // assigned accessories is not 0
                 'assigned_accessories.in' => trans_choice('admin/users/message.error.delete_has_accessories_var', $user_to_delete->accessories()->count(), ['count' => $user_to_delete->accessories()->count()]),
+
+                'deleted_at.in' => trans('admin/users/message.user_deleted_warning'),
 
             ], $messages);
         }

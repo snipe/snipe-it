@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This service provider handles a few custom validation rules.
@@ -66,7 +66,6 @@ class ValidationServiceProvider extends ServiceProvider
          * `unique_undeleted:table,fieldname` in your rules out of the box
          */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-
             if (count($parameters)) {
 
                 // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable

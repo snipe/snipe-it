@@ -87,11 +87,11 @@ class AuthServiceProvider extends ServiceProvider
         ]);
 
         $this->registerPolicies();
-        //Passport::routes(); //this is no longer required in newer passport versions
         Passport::tokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::refreshTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::personalAccessTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
-        Passport::withCookieSerialization();
+
+        Passport::cookie(config('passport.cookie_name'));
 
 
         /**
@@ -230,7 +230,15 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('update', Accessory::class)
                 || $user->can('create', Accessory::class)   
                 || $user->can('update', User::class)
-                || $user->can('create', User::class);  
+                || $user->can('create', User::class)
+                || ($user->hasAccess('reports.view'));
         });
+
+
+        // This determines whether the user can edit their profile based on the setting in Admin > General
+        Gate::define('self.profile', function ($user) {
+            return $user->canEditProfile();
+        });
+
     }
 }

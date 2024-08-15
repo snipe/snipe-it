@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Це поле не існує.',
         'already_added'   => 'Поле вже додане',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Поле не створено, будь ласка, спробуйте ще раз.',

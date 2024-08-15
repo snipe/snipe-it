@@ -5,7 +5,7 @@ return array(
     'actions'	 	        => 'Veiksmai',
     'action' 		        => 'Veiksmas',
     'by'      		        => 'Atlikti',
-    'item' 			        => 'Įranga',
-    'no_matching_records'   => 'No matching records found',
+    'item' 			        => 'Daiktas',
+    'no_matching_records'   => 'Nerasta jokių atitinkančių įrašų',
 
 );

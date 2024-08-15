@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'Die Kategorie muss eine Kategorie mit Verbrauchsmaterialien sein.',
     'does_not_exist' => 'Verbrauchsmaterial existiert nicht.',
 
     'create' => array(

@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Settings;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Request;
@@ -9,6 +11,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
@@ -161,9 +164,7 @@ class ShowSetUpPageTest extends TestCase
         });
     }
 
-    /**
-     * @dataProvider willShowErrorWhenDotEnvFileIsAccessibleViaHttpData
-     */
+    #[DataProvider('willShowErrorWhenDotEnvFileIsAccessibleViaHttpData')]
     public function testWillShowErrorWhenDotEnvFileIsAccessibleViaHttp(int $statusCode): void
     {
         $this->preventStrayRequest = false;
@@ -266,5 +267,45 @@ class ShowSetUpPageTest extends TestCase
         $this->getSetUpPageResponse()->assertOk();
 
         $this->assertSeeAppUrlMisconfigurationErrorMessage();
+    }
+
+    public function testWillSeeDirectoryPermissionErrorWhenStoragePathIsNotWritable(): void
+    {
+        File::shouldReceive('isWritable')->andReturn(false);
+
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeDirectoryPermissionError();
+    }
+
+    protected function assertSeeDirectoryPermissionError(bool $shouldSee = true): void
+    {
+        $storagePath = storage_path();
+
+        $errorMessage = "Uh-oh. Your <code>{$storagePath}</code> directory (or sub-directories within) are not writable by the web-server. Those directories need to be writable by the web server in order for the app to work.";
+        $successMessage = 'Yippee! Your app storage directory seems writable';
+
+        if ($shouldSee) {
+            self::$latestResponse->assertSee($errorMessage, false)->assertDontSee($successMessage, false);
+            return;
+        }
+
+        self::$latestResponse->assertSee($successMessage, false)->assertDontSee($errorMessage,false);
+    }
+
+    public function testWillNotSeeDirectoryPermissionErrorWhenStoragePathIsWritable(): void
+    {
+        File::shouldReceive('isWritable')->andReturn(true);
+
+        $this->getSetUpPageResponse()->assertOk();
+
+        $this->assertSeeDirectoryPermissionError(false);
+    }
+
+    public function testInvalidTLSCertsOkWhenCheckingForEnvFile()
+    {
+        //set the weird bad SSL cert place - https://self-signed.badssl.com
+        $this->markTestIncomplete("Not yet sure how to write this test, it requires messing with .env ...");
+        $this->assertTrue((new SettingsController())->dotEnvFileIsExposed());
     }
 }

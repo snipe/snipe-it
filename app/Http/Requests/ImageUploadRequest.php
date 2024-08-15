@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Exception\NotReadableException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class ImageUploadRequest extends Request
 {
@@ -96,10 +97,7 @@ class ImageUploadRequest extends Request
 
                 $ext = $image->guessExtension();
                 $file_name = $type.'-'.$form_fieldname.'-'.$item->id.'-'.str_random(10).'.'.$ext;
-
-                Log::info('File name will be: '.$file_name);
-                Log::debug('File extension is: '.$ext);
-
+                
                 if (($image->getMimeType() == 'image/vnd.microsoft.icon') || ($image->getMimeType() == 'image/x-icon') || ($image->getMimeType() == 'image/avif') || ($image->getMimeType() == 'image/webp')) {
                     // If the file is an icon, webp or avif, we need to just move it since gd doesn't support resizing
                     // icons or avif, and webp support and needs to be compiled into gd for resizing to be available
@@ -126,7 +124,7 @@ class ImageUploadRequest extends Request
 
                     } catch(NotReadableException $e) {
                         Log::debug($e);
-                        $validator = \Validator::make([], []);
+                        $validator = Validator::make([], []);
                         $validator->errors()->add($form_fieldname, trans('general.unaccepted_image_type', ['mimetype' => $image->getClientMimeType()]));
 
                         throw new \Illuminate\Validation\ValidationException($validator);
@@ -138,28 +136,28 @@ class ImageUploadRequest extends Request
                 }
 
                  // Remove Current image if exists
-                if (($item->{$form_fieldname}!='') && (Storage::disk('public')->exists($path.'/'.$item->{$db_fieldname}))) {
-                    try {
-                         Storage::disk('public')->delete($path.'/'.$item->{$form_fieldname});
-                    } catch (\Exception $e) {
-                        Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
-                    }
-                }
-
+                $item = $this->deleteExistingImage($item, $path, $db_fieldname);
                 $item->{$db_fieldname} = $file_name;
             }
 
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } elseif ($this->input('image_delete') == '1') {
-            Log::debug('Deleting image');
+            $item = $this->deleteExistingImage($item, $path, $db_fieldname);
+        }
+
+        return $item;
+    }
+
+    public function deleteExistingImage($item, $path = null, $db_fieldname = 'image') {
+
+        if ($item->{$db_fieldname}!='') {
             try {
                 Storage::disk('public')->delete($path.'/'.$item->{$db_fieldname});
-                    $item->{$db_fieldname} = null;
+                $item->{$db_fieldname} = null;
             } catch (\Exception $e) {
                 Log::debug($e);
             }
-
         }
 
         return $item;

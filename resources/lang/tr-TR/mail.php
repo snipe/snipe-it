@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Okudum ve kullanım şartlarını ve bu varlığı kabul ediyorum.',
     'inventory_report' => 'Envanter Raporu',
     'item' => 'Ürün:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Şu var: bir sonraki günlerde süren lisans sayımı: eşik günleri. | Şunlar var: bir sonraki günlerde süren sayım lisansları: eşik günleri.',
     'link_to_update_password' => 'Şifrenizi güncellemek için aşağıdaki linke tıklayınız :web password:',
     'login' => 'Giriş:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => ':count gün içinde denetime yaklaşan :count varlık var.|Eşik gün içinde denetime yaklaşan :count varlık var.',
     'user' => 'Kullanıcı',
     'username' => 'Kullanıcı Adı',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Hoşgeldiniz, :name',
     'welcome_to' => 'Hoş geldiniz :web!',
     'your_assets' => 'Varlıkları Görüntüleme',
     'your_credentials' => 'Snipe-IT Bilgileriniz',
+    'mail_sent' => 'E-posta başarılı şekilde gönderildi!',
 ];

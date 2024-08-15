@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Seleccione un idioma',
+    'select_language' => 'Seleccionar un idioma',
     'languages' => [
         'en-US'=> 'Inglés, EEUU',
         'en-GB'=> 'Inglés, Reino Unido',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Malayo',
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongol',
-        'no-NO'=> 'Noruego',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Noruego Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Persa',
         'pl-PL'=> 'Polaco',
         'pt-PT'=> 'Portugués',
@@ -49,7 +51,7 @@ return [
         'ru-RU'=> 'Ruso',
         'sr-CS' => 'Serbian (Latin)',
         'sk-SK'=> 'Eslovaco',
-        'sl-SI'=> 'Slovenian',
+        'sl-SI'=> 'Esloveno',
         'so-SO'=> 'Somali',
         'es-ES'=> 'Español',
         'es-CO'=> 'Español, Colombia',
@@ -66,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Seleccione un país',
+    'select_country' => 'Seleccionar un país',
     
     'countries' => [
         'AC'=>'Isla de Ascensión',
@@ -93,7 +95,7 @@ return [
         'BD'=>'Bangladesh',
         'BF'=>'Burkina Faso',
         'BG'=>'Bulgaria',
-        'BH'=>'Bahrain',
+        'BH'=>'Baréin',
         'BI'=>'Burundi',
         'BJ'=>'Benin',
         'BM'=>'Bermuda',
@@ -287,11 +289,11 @@ return [
         'TJ'=>'Tajikistan',
         'TK'=>'Tokelau',
         'TI'=>'Timor Oriental',
-        'TM'=>'Turkmenistan',
-        'TN'=>'Tunisia',
+        'TM'=>'Turkmenistán',
+        'TN'=>'Túnez',
         'TO'=>'Tonga',
         'TP'=>'Timor Oriental (código antiguo)',
-        'TR'=>'Pavo',
+        'TR'=>'Turquía',
         'TT'=>'Trinidad y Tobago',
         'TV'=>'Tuvalu',
         'TW'=>'Taiwán',

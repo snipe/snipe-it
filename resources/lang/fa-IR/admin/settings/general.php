@@ -129,7 +129,7 @@ return [
     'ldap_manager'              => 'مدیر LDAP
 ',
     'ldap_server'               => 'سرویس دهنده LDAP',
-    'ldap_server_help'          => 'این باید با ldap: // (برای رمزگذاری نشده یا TLS) یا ldaps: ((برای SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
     'ldap_server_cert_ignore'	=> 'اجازه می دهد به گواهی های بی اعتبار SSL',
     'ldap_server_cert_help'		=> 'اگر از یک امضای SSL شخصی معتبر استفاده می کنید این گزینه را فعال کنید.',
@@ -164,8 +164,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote'               => 'Use Gravatar',
-    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load images from Gravatar.',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -208,8 +208,7 @@ return [
     'optional'					=> 'اختیاری',
     'per_page'                  => 'نتایج در هر صفحه',
     'php'                       => 'نسخه php',
-    'php_info'                  => 'اطلاعات پی اچ پی
-',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
     'php_overview_keywords'     => 'phpinfo, system, info',
@@ -311,6 +310,8 @@ return [
     'webhook_integration_help'    => ':app integration is optional, however the endpoint and channel are required if you wish to use it. To configure :app integration, you must first <a href=":webhook_link" target="_new" rel="noopener">create an incoming webhook</a> on your :app account. Click on the <strong>Test :app Integration</strong> button to confirm your settings are correct before saving. ',
     'webhook_integration_help_button'    => 'Once you have saved your :app information, a test button will appear.',
     'webhook_test_help'           => 'Test whether your :app integration is configured correctly. YOU MUST SAVE YOUR UPDATED :app SETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'نسخه Snipe_IT',
     'support_footer'            => 'پشتیبانی از پیوندهای پاورقی
 ',
@@ -393,10 +394,20 @@ return [
 ',
     'oauth_title' => 'تنظیمات API OAuth
 ',
+    'oauth_clients' => 'OAuth Clients',
     'oauth' => 'OAuth
 ',
     'oauth_help' => 'تنظیمات نقطه پایانی Oauth
 ',
+    'oauth_no_clients' => 'You have not created any OAuth clients yet.',
+    'oauth_secret' => 'Secret',
+    'oauth_authorized_apps' => 'Authorized Applications',
+    'oauth_redirect_url' => 'Redirect URL',
+    'oauth_name_help' => ' Something your users will recognize and trust.',
+    'oauth_scopes' => 'Scopes',
+    'oauth_callback_url' => 'Your application authorization callback URL.',
+    'create_client' => 'Create Client',
+    'no_scopes' => 'No scopes',
     'asset_tag_title' => 'تنظیمات برچسب دارایی را به روز کنید
 ',
     'barcode_title' => 'تنظیمات بارکد را به روز کنید
@@ -449,7 +460,6 @@ return [
 ',
     'labels_help' => 'اندازه برچسب &amp; تنظیمات
 ',
-    'purge' => 'پاکسازی',
     'purge_keywords' => 'برای همیشه حذف کنید
 ',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
@@ -510,5 +520,11 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
 
 ];

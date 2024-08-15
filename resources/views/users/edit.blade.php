@@ -123,7 +123,7 @@
                     @else
                         <!-- insert the old username so we don't break validation -->
                          {{ trans('general.managed_ldap') }}
-                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
+                          <input type="hidden" name="username" value="{{ old('username', $user->username) }}">
                     @endif
                   </div>
 
@@ -246,7 +246,7 @@
                       name="email"
                       id="email"
                       maxlength="191"
-                      value="{{ Request::old('email', $user->email) }}"
+                      value="{{ old('email', $user->email) }}"
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
@@ -322,7 +322,7 @@
                                           name="employee_num"
                                           maxlength="191"
                                           id="employee_num"
-                                          value="{{ Request::old('employee_num', $user->employee_num) }}"
+                                          value="{{ old('employee_num', $user->employee_num) }}"
                                   />
                                   {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -339,7 +339,7 @@
                                           maxlength="191"
                                           name="jobtitle"
                                           id="jobtitle"
-                                          value="{{ Request::old('jobtitle', $user->jobtitle) }}"
+                                          value="{{ old('jobtitle', $user->jobtitle) }}"
                                   />
                                   {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -596,9 +596,14 @@
             </table>
           </div><!-- /.tab-pane -->
         </div><!-- /.tab-content -->
-        <div class="box-footer text-right">
-          <button type="submit" accesskey="s" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
-        </div>
+          <x-redirect_submit_options
+                  index_route="users.index"
+                  :button_label="trans('general.save')"
+                  :options="[
+                        'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'users']),
+                        'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
+                        ]"
+          />
       </div><!-- nav-tabs-custom -->
     </form>
   </div> <!--/col-md-8-->
@@ -673,7 +678,7 @@ $(document).ready(function() {
         'bind': 'click',
         'passwordElement': '#password',
         'displayElement': '#generated-password',
-        'passwordLength': 16,
+        'passwordLength': {{ ($settings->pwd_secure_min + 5) }},
         'uppercase': true,
         'lowercase': true,
         'numbers':   true,

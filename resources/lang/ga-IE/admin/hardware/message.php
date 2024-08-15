@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Marradh: </strong> Tá an tsócmhainn seo marcáilte mar atá inghníomhaithe faoi láthair. Má d\'athraigh an stádas seo, déan an stádas sócmhainne a nuashonrú.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Níl sócmhainn ann.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Níor iompórtáil roinnt míreanna i gceart.',
         'errorDetail'           => 'Níor allmhairíodh na Míreanna seo a leanas mar gheall ar earráidí.',
         'success'               => 'Tá do chomhad iompórtáilte',

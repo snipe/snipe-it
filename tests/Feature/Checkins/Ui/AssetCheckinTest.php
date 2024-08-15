@@ -196,4 +196,31 @@ class AssetCheckinTest extends TestCase
             ->assertSessionHas('error')
             ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
     }
+
+    public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    {
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.index'))
+            ->post(route('hardware.checkin.store', $asset), [
+                'redirect_option' => 'index',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('hardware.index'));
+    }
+
+    public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsItem()
+    {
+        $asset = Asset::factory()->assignedToUser()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.index'))
+            ->post(route('hardware.checkin.store', $asset), [
+                'redirect_option' => 'item',
+            ])
+            ->assertStatus(302)
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+    }
 }

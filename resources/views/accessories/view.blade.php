@@ -68,9 +68,9 @@
                           <div class="row">
                               <div class="col-md-12">
                                 <table
-                                    data-cookie-id-table="usersTable"
+                                    data-cookie-id-table="checkoutsTable"
                                     data-pagination="true"
-                                    data-id-table="usersTable"
+                                    data-id-table="checkoutsTable"
                                     data-search="true"
                                     data-side-pagination="server"
                                     data-show-columns="true"
@@ -78,16 +78,16 @@
                                     data-show-export="true"
                                     data-show-refresh="true"
                                     data-sort-order="asc"
-                                    id="usersTable"
+                                    id="checkoutsTable"
                                     class="table table-striped snipe-table"
                                     data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
                                     data-export-options='{
-                                    "fileName": "export-accessories-{{ str_slug($accessory->name) }}-users-{{ date('Y-m-d') }}",
+                                    "fileName": "export-accessories-{{ str_slug($accessory->name) }}-checkouts-{{ date('Y-m-d') }}",
                                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                                     }'>
                                 <thead>
                                     <tr>
-                                    <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                                    <th data-searchable="false" data-formatter="polymorphicItemFormatter" data-sortable="false" data-field="assigned_to">{{ trans('general.checked_out_to') }}</th>
                                     <th data-searchable="false" data-sortable="false" data-field="checkout_notes">{{ trans('general.notes') }}</th>
                                     <th data-searchable="false" data-formatter="dateDisplayFormatter" data-sortable="false" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
                                     <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
@@ -209,7 +209,7 @@
                                                         {{ $file->note }}
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td style="white-space: nowrap;">
                                                     @if ($file->filename)
                                                         <a href="{{ route('show.accessoryfile', [$accessory->id, $file->id]) }}" class="btn btn-sm btn-default">
                                                             <i class="fas fa-download" aria-hidden="true"></i>
@@ -314,7 +314,7 @@
               <strong>{{ trans('general.checked_out') }}</strong>
           </div>
           <div class="col-md-9">
-              {{ $accessory->users_count }}
+              {{ $accessory->checkouts_count }}
           </div>
       </div>
 </div>
@@ -330,14 +330,14 @@
                   <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.edit') }}</a>
                </div>
         @endcan
-        @can('update', \App\Models\Accessory::class)
+        @can('create', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
                     <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
                 </div>
         @endcan
 
         @can('delete', $accessory)
-            @if ($accessory->users_count == 0)
+            @if ($accessory->checkouts_count == 0)
                 <div class="text-center" style="padding-top:5px;">
                     <button class="btn btn-block btn-danger delete-asset" style="padding-top:5px;" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm_no_undo', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
                     {{ trans('general.delete') }}

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'بررسی همه و حذف کاربر',
     'delete'  	                => 'حذف',
     'edit'    	                => 'ويرايش',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'بازیابی',
     'remove'                    => 'پاک کردن',
     'request'                   => 'درخواست',
@@ -22,4 +23,13 @@ return [
 ',
     'append'                    => 'افزودن',
     'new'                       => 'جدید',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

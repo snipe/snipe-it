@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\GroupsTransformer;
 use App\Models\Group;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 
 class GroupsController extends Controller
@@ -17,9 +17,8 @@ class GroupsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('superadmin');
 
@@ -56,9 +55,8 @@ class GroupsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) : JsonResponse
     {
         $this->authorize('superadmin');
         $group = new Group;
@@ -67,7 +65,7 @@ class GroupsController extends Controller
         $groupPermissions = Helper::selectedPermissionsArray($permissions, $permissions);
 
         $group->name = $request->input('name');
-        $group->created_by = Auth::user()->id;
+        $group->created_by = auth()->id();
         $group->permissions = json_encode($request->input('permissions', $groupPermissions));
 
         if ($group->save()) {
@@ -83,9 +81,8 @@ class GroupsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('superadmin');
         $group = Group::findOrFail($id);
@@ -99,9 +96,8 @@ class GroupsController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) : JsonResponse
     {
         $this->authorize('superadmin');
         $group = Group::findOrFail($id);
@@ -122,9 +118,8 @@ class GroupsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('superadmin');
         $group = Group::findOrFail($id);

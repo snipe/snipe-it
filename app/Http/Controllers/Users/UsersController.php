@@ -17,7 +17,9 @@ use App\Notifications\WelcomeNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Storage;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -115,7 +117,7 @@ class UsersController extends Controller
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
         $user->website = $request->input('website', null);
-        $user->created_by = Auth::user()->id;
+        $user->created_by = auth()->id();
         $user->start_date = $request->input('start_date', null);
         $user->end_date = $request->input('end_date', null);
         $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
@@ -123,13 +125,15 @@ class UsersController extends Controller
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
 
-        if (! Auth::user()->isSuperUser()) {
+        if (! auth()->user()->isSuperUser()) {
             unset($permissions_array['superuser']);
         }
         $user->permissions = json_encode($permissions_array);
 
         // we have to invoke the
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
+
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -150,7 +154,7 @@ class UsersController extends Controller
                 $user->notify(new WelcomeNotification($data));
             }
 
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.create'));
+            return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))->with('success', trans('admin/users/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
@@ -174,7 +178,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param $permissions
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      * @internal param int $id
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -244,7 +248,7 @@ class UsersController extends Controller
             }
 
             // Only save groups if the user is a superuser
-            if (Auth::user()->isSuperUser()) {
+            if (auth()->user()->isSuperUser()) {
                 $user->groups()->sync($request->input('groups'));
             }
 
@@ -298,7 +302,7 @@ class UsersController extends Controller
 
 
             // Strip out the superuser permission if the user isn't a superadmin
-            if (! Auth::user()->isSuperUser()) {
+            if (! auth()->user()->isSuperUser()) {
                 unset($permissions_array['superuser']);
                 $permissions_array['superuser'] = $orig_superuser;
             }
@@ -307,10 +311,11 @@ class UsersController extends Controller
 
             // Handle uploaded avatar
             app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
 
             if ($user->save()) {
                 // Redirect to the user page
-                return redirect()->route('users.index')
+                return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))
                     ->with('success', trans('admin/users/message.success.update'));
             }
 
@@ -333,19 +338,24 @@ class UsersController extends Controller
      */
     public function destroy(DeleteUserRequest $request, $id = null)
     {
-
         $this->authorize('delete', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc');
+        if ($user = User::find($id)) {
 
-        if (($user) && ($user->deleted_at = '')) {
-            // Delete the user
-            $user->delete();
-            return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
+            $this->authorize('delete', $user);
+
+            if ($user->delete()) {
+                if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                    try {
+                        Storage::disk('public')->delete('avatars/' . $user->avatar);
+                    } catch (\Exception $e) {
+                        Log::debug($e);
+                    }
+                }
+                return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
+            }
         }
-
-        return redirect()->route('users.index')
-            ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found'));
 
     }
 
@@ -372,7 +382,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
+                $logaction->user_id = auth()->id();
                 $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index
@@ -599,6 +609,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $user = User::where('id', $id)->withTrashed()->first();
+      
 
         // Make sure they can view this particular user
         $this->authorize('view', $user);
@@ -655,6 +666,8 @@ class UsersController extends Controller
      */
     public function sendPasswordReset($id)
     {
+        $this->authorize('view', User::class);
+
         if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
             $credentials = ['email' => trim($user->email)];
 

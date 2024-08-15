@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Tjek alt ind og slet bruger',
     'delete'  	                => 'Slet',
     'edit'    	                => 'Rediger',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'Gendan',
     'remove'                    => 'Fjern',
     'request'                   => 'Anmodning',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Tilføj vedligehold',
     'append'                    => 'Tilføj',
     'new'                       => 'Ny',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

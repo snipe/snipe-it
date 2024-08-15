@@ -44,6 +44,8 @@ return array(
         'error'   => 'Der var et problem med at tjekke licensen. Prøv igen.',
         'success' => 'Licensen blev tjekket ud med succes',
         'not_enough_seats' => 'Ikke nok licenser til rådighed til kassen',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

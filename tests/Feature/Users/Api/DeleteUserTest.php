@@ -12,6 +12,28 @@ class DeleteUserTest extends TestCase
 {
 
 
+    public function testErrorReturnedViaApiIfUserDoesNotExist()
+    {
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+            ->deleteJson(route('api.users.destroy', 'invalid-id'))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+    }
+
+    public function testErrorReturnedViaApiIfUserIsAlreadyDeleted()
+    {
+        $user = User::factory()->deletedUser()->create();
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+            ->deleteJson(route('api.users.destroy', $user->id))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+    }
+
+
     public function testDisallowUserDeletionViaApiIfStillManagingPeople()
     {
         $manager = User::factory()->create();
@@ -56,40 +78,64 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    public function testPermissionsForDeletingUsers()
+    public function testDeniedPermissionsForDeletingUserViaApi()
     {
-
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.users.destroy', User::factory()->create()))
             ->assertStatus(403)
             ->json();
     }
 
-    public function testPermissionsIfNotInSameCompanyAndNotSuperadmin()
+    public function testSuccessPermissionsForDeletingUserViaApi()
     {
-        $this->settings->enableMultipleFullCompanySupport();
-        [$companyA, $companyB] = Company::factory()->count(2)->create();
-
-        $superUser = $companyA->users()->save(User::factory()->superuser()->make());
-        $userInCompanyA = $companyA->users()->save(User::factory()->deleteUsers()->make());
-        $userInCompanyB = $companyB->users()->save(User::factory()->deleteUsers()->make());
-
-        $this->actingAsForApi($userInCompanyA)
-            ->deleteJson(route('api.users.destroy', $userInCompanyB))
-            ->assertStatus(403)
-            ->json();
-
-        $this->actingAsForApi($userInCompanyB)
-            ->deleteJson(route('api.users.destroy', $userInCompanyA))
-            ->assertStatus(403)
-            ->json();
-
-        $this->actingAsForApi($superUser)
-            ->deleteJson(route('api.users.destroy', $userInCompanyA))
+        $this->actingAsForApi(User::factory()->deleteUsers()->create())
+            ->deleteJson(route('api.users.destroy', User::factory()->create()))
             ->assertOk()
             ->assertStatus(200)
             ->assertStatusMessageIs('success')
             ->json();
+    }
+
+    
+    public function testPermissionsForDeletingIfNotInSameCompanyAndNotSuperadmin()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $superuser = User::factory()->superuser()->create();
+        $userFromA = User::factory()->deleteUsers()->for($companyA)->create();
+        $userFromB = User::factory()->deleteUsers()->for($companyB)->create();
+
+        $this->actingAsForApi($userFromA)
+            ->deleteJson(route('api.users.destroy', ['user' => $userFromB->id]))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+
+        $userFromB->refresh();
+        $this->assertNull($userFromB->deleted_at);
+
+        $this->actingAsForApi($userFromB)
+            ->deleteJson(route('api.users.destroy', ['user' => $userFromA->id]))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('error')
+            ->json();
+
+        $userFromA->refresh();
+        $this->assertNull($userFromA->deleted_at);
+
+        $this->actingAsForApi($superuser)
+            ->deleteJson(route('api.users.destroy', ['user' => $userFromA->id]))
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
+
+        $userFromA->refresh();
+        $this->assertNotNull($userFromA->deleted_at);
 
     }
 
@@ -104,11 +150,6 @@ class DeleteUserTest extends TestCase
             ->json();
 
     }
-
-
-
-
-
 
 
 }

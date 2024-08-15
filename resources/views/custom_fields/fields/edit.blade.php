@@ -137,7 +137,7 @@
               <!-- Encrypted  -->
               <div class="col-md-9 col-md-offset-3" id="encryption_section">
                   <label class="form-control">
-                      <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
+                      <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.encrypt_field') }}
                   </label>
               </div>

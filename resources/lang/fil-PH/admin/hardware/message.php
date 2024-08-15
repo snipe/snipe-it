@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Babala: </strong> Ang asset na ito ay kasalukuyang namarkahan bilang hindi pwedeng mai-deploy..
-                        Kung nabago na ang katayuang ito, paki-update ng katayuan ng asset.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Hindi umiiral ang asset.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Ang iilang mga aytem ay hindi nai-import ng tama.',
         'errorDetail'           => 'Ang mga sumusunod na mga Aytem ay hindi na-import dahil sa mga error.',
         'success'               => 'Ang iyong file ay na-import na',

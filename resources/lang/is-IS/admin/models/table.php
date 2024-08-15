@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
+    'create'				=> 'Búa til eignategund',
     'created_at' 			=> 'Created at',
     'eol'	 				=> 'Lok línu',
     'modelnumber'   		=> 'Tegundar Nr.',
-    'name'      			=> 'Asset Model Name',
+    'name'      			=> 'Nafn eignategundar',
     'numassets' 			=> 'Eignir',
     'title'					=> 'Tegundir',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'update'				=> 'Uppfæra eignategund',
+    'view'					=> 'Skoða eignategund',
+    'update'				=> 'Uppfæra eignategund',
+    'clone'				=> 'Klóna tegund',
+    'edit'				=> 'Breyta tegund',
 );

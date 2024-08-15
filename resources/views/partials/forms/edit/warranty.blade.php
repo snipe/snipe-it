@@ -3,7 +3,7 @@
     <label for="warranty_months" class="col-md-3 control-label">{{ trans('admin/hardware/form.warranty') }}</label>
     <div class="col-md-9">
         <div class="input-group col-md-3" style="padding-left: 0px;">
-            <input class="form-control" type="text" name="warranty_months" id="warranty_months" value="{{ Request::old('warranty_months', $item->warranty_months) }}" maxlength="3" />
+            <input class="form-control" type="text" name="warranty_months" id="warranty_months" value="{{ old('warranty_months', $item->warranty_months) }}" maxlength="3" />
             <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
         </div>
         <div class="col-md-9" style="padding-left: 0px;">
