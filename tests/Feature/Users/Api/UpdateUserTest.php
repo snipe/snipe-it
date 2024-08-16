@@ -365,11 +365,25 @@ class UpdateUserTest extends TestCase
             'company_id' => $companyB->id,
         ])->assertStatusMessageIs('success');
 
+        // same test but PUT
+        $this->actingAsForApi($superUser)->putJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'first_name' => 'Test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('success');
+
         $asset->checkOut($user, $superUser);
 
         // asset assigned, therefore error
         $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
             'username'   => 'test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('error');
+
+        // same test but PUT
+        $this->actingAsForApi($superUser)->putJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'first_name' => 'Test',
             'company_id' => $companyB->id,
         ])->assertStatusMessageIs('error');
     }

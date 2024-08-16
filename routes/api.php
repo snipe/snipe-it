@@ -1070,18 +1070,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.users.restore');
 
-        }); 
+        });
+
+    Route::match(['put', 'patch'], '{user}/update', [Api\UsersController::class, 'update'])
+        ->name('api.users.update');
     
         Route::resource('users', 
         Api\UsersController::class,
         ['names' => [
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
-                'update' => 'api.users.update',
                 'store' => 'api.users.store',
                 'destroy' => 'api.users.destroy',
             ],
-        'except' => ['create', 'edit'],
+         'except' => ['create', 'edit', 'update'],
         'parameters' => ['user' => 'user_id'],
         ]
         ); // end users API routes

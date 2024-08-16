@@ -98,17 +98,22 @@ class UpdateUserTest extends TestCase
 
         // no assets assigned, therefore success
         $this->actingAs($superUser)->put(route('users.update', $user), [
-            'first_name' => 'test',
-            'username'   => 'test',
-            'company_id' => $companyB->id,
+            'first_name'      => 'test',
+            'username'        => 'test',
+            'company_id'      => $companyB->id,
+            'redirect_option' => 'index'
         ])->assertRedirect(route('users.index'));
 
-        //$asset->checkOut($user, $superUser);
+        $asset->checkOut($user, $superUser);
 
         // asset assigned, therefore error
-        //$this->actingAs($superUser)->patchJson(route('users.update', $user), [
-        //    'username'   => 'test',
-        //    'company_id' => $companyB->id,
-        //])->assertMessagesAre('error');
+        $response = $this->actingAs($superUser)->patchJson(route('users.update', $user), [
+            'first_name'      => 'test',
+            'username'        => 'test',
+            'company_id'      => $companyB->id,
+            'redirect_option' => 'index'
+        ]);
+
+        $this->followRedirects($response)->assertSee('error');
     }
 }
