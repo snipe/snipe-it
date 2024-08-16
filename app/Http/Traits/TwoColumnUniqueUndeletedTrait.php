@@ -16,10 +16,12 @@ trait TwoColumnUniqueUndeletedTrait
         $column = $parameters[0];
         $value = $this->{$parameters[0]};
 
+        // This is an existing model we're updating so ignore the current ID ($this->getKey())
         if ($this->exists) {
             return 'two_column_unique_undeleted:'.$this->table.','.$this->getKey().','.$column.','.$value;
         }
 
+        // This is a new record, so we can ignore the current ID
         return 'two_column_unique_undeleted:'.$this->table.',0,'.$column.','.$value;
     }
 }

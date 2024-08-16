@@ -24,6 +24,7 @@ class CreateAssetModelsTest extends TestCase
         $this->assertFalse(AssetModel::where('name', 'Test Model')->exists());
 
         $this->actingAs(User::factory()->superuser()->create())
+            ->from(route('models.create'))
             ->post(route('models.store'), [
                 'name' => 'Test Model',
                 'category_id' => Category::factory()->create()->id
@@ -85,9 +86,9 @@ class CreateAssetModelsTest extends TestCase
                 'category_id' => Category::factory()->create()->id
             ])
             ->assertStatus(302)
-            ->assertSessionHasErrors(['name','model_number'])
+            ->assertSessionHasErrors(['name'])
             ->assertRedirect(route('models.create'))
-            ->assertInvalid(['name','model_number']);
+            ->assertInvalid(['name']);
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
 

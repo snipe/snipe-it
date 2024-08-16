@@ -88,18 +88,25 @@ class ValidationServiceProvider extends ServiceProvider
          *
          * $parameters[0] - the name of the first table we're looking at
          * $parameters[1] - the ID (this will be 0 on new creations)
-         * $parameters[2] - the name of the second table we're looking at
+         * $parameters[2] - the name of the second field we're looking at
          * $parameters[3] - the value that the request is passing for the second table we're
          *                  checking for uniqueness across
          *
          */
         Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+
             if (count($parameters)) {
+                
                 $count = DB::table($parameters[0])
-                    ->select('id')->where($attribute, '=', $value)
-                    ->where('id', '!=', $parameters[1])
-                    ->where($parameters[2], $parameters[3])
-                    ->whereNull('deleted_at')
+                    ->select('id')
+                    ->where($attribute, '=', $value)
+                    ->where('id', '!=', $parameters[1]);
+
+                if ($parameters[3]!='') {
+                    $count = $count->where($parameters[2], $parameters[3]);
+                }
+
+                $count = $count->whereNull('deleted_at')
                     ->count();
 
                 return $count < 1;
