@@ -132,7 +132,7 @@
                         :button_label="trans('general.checkin')"
                         :disabled_select="!$asset->model"
                         :options="[
-                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.assets')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
                                ]"
                 />
