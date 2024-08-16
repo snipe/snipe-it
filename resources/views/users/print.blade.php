@@ -373,7 +373,7 @@
         </button>
     </div>
 
-    <table style="margin-top: 80px;">
+    <table style="margin-top: 80px;" class="snipe-table">
         <tr class="collapse" id="eula-row">
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
             <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
@@ -395,8 +395,8 @@
         </tr>
         <tr style="height: 80px;">
             <td></td>
-            <td style="padding-right: 10px; vertical-align: top;">Name</td>
-            <td style="padding-right: 10px; vertical-align: top;">Signature</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.name') }}</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.signature') }}</td>
             <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
         </tr>
         <tr>
@@ -407,8 +407,8 @@
         </tr>
         <tr>
             <td></td>
-            <td style="padding-right: 10px; vertical-align: top;">Name</td>
-            <td style="padding-right: 10px; vertical-align: top;">Signature</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.name') }}</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.signature') }}</td>
             <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
             <td></td>
         </tr>
@@ -419,6 +419,10 @@
 <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url(mix('js/dist/bootstrap-table-locale-all.min.js')) }}"></script>
+
+<!-- load english again here, even though it's in the all.js file, because if BS table doesn't have the translation, it otherwise defaults to chinese. See https://bootstrap-table.com/docs/api/table-options/#locale -->
+<script src="{{ url(mix('js/dist/bootstrap-table-en-US.min.js')) }}"></script>
 
 <script>
     $('.snipe-table').bootstrapTable('destroy').each(function () {
