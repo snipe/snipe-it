@@ -71,7 +71,7 @@ class AssetImporter extends ItemImporter
         $asset = Asset::where(['asset_tag'=> (string) $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
-                $exists_error = 'A matching Asset '.$asset_tag.' already exists';
+                $exists_error = trans('general.import_asset_tag_exists', ['asset_tag' => $asset_tag]);
                 $this->log($exists_error);
                 $this->addErrorToBag($asset, 'asset_tag', $exists_error);
                 return $exists_error;

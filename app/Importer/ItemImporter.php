@@ -221,7 +221,6 @@ class ItemImporter extends Importer
         }
 
         $editingModel = $this->updating;
-        $this->log('SQL: '.$asset_model->toSql());
         $asset_model = $asset_model->first();
 
         $this->log('Name: '.$asset_model_name);
