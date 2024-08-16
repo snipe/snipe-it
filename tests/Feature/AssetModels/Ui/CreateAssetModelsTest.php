@@ -51,4 +51,26 @@ class CreateAssetModelsTest extends TestCase
 
     }
 
+    public function testUniquenessAcrossModelNameAndModelNumber()
+    {
+
+        AssetModel::factory()->create(['name' => 'Test Model', 'model_number'=>'1234']);
+
+        $response = $this->actingAs(User::factory()->superuser()->create())
+            ->from(route('models.create'))
+            ->post(route('models.store'), [
+                'name' => 'Test Model',
+                'model_number' => '1234',
+                'category_id' => Category::factory()->create()->id
+            ])
+            ->assertStatus(302)
+            ->assertSessionHasErrors(['name','model_number'])
+            ->assertStatus(302)
+            ->assertRedirect(route('models.create'))
+            ->assertInvalid(['name','model_number']);
+
+        $this->followRedirects($response)->assertSee(trans('general.error'));
+
+    }
+
 }

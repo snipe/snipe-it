@@ -53,8 +53,29 @@ class CreateAssetModelsTest extends TestCase
             ])
             ->json();
 
-        // dd($response);
         $this->assertFalse(AssetModel::where('name', 'Test AssetModel')->exists());
+
+    }
+
+    public function testUniquenessAcrossModelNameAndModelNumber()
+    {
+        AssetModel::factory()->create(['name' => 'Test Model', 'model_number'=>'1234']);
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.models.store'), [
+                'name' => 'Test Model',
+                'model_number' => '1234',
+            ])
+            ->assertStatus(200)
+            ->assertOk()
+            ->assertStatusMessageIs('error')
+            ->assertJson([
+                'messages' => [
+                    'name'    => ['The name must be unique across models and model number. '],
+                    'model_number'    => ['The model number must be unique across models and name. '],
+                ],
+            ])
+            ->json();
 
     }
 
