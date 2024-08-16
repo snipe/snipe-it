@@ -11,7 +11,7 @@ trait TwoColumnUniqueUndeletedTrait
      * @param  string $field
      * @return string
      */
-    protected function prepareTwoColumnUniqueUndeletedRule($parameters, $field)
+    protected function prepareTwoColumnUniqueUndeletedRule($parameters)
     {
         $column = $parameters[0];
         $value = $this->{$parameters[0]};
