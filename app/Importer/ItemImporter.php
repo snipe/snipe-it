@@ -223,11 +223,6 @@ class ItemImporter extends Importer
         $editingModel = $this->updating;
         $asset_model = $asset_model->first();
 
-        $this->log('Name: '.$asset_model_name);
-        $this->log('Number: '.$asset_modelNumber);
-        $this->log('Category: '.$asset_model_category);
-        $this->log('Model Info: '.print_r($asset_model, true));
-
         if ($asset_model) {
 
             if (! $this->updating) {
