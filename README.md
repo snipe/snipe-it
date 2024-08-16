@@ -78,6 +78,7 @@ Since the release of the JSON REST API, several third-party developers have been
 - [UniFi to Snipe-IT](https://github.com/RodneyLeeBrands/UnifiSnipeSync) by [@karpadiem](https://github.com/karpadiem) - Python script that synchronizes UniFi devices with Snipe-IT.
 - [Kandji2Snipe](https://github.com/grokability/kandji2snipe) by [@briangoldstein](https://github.com/briangoldstein) - Python script that synchronizes Kandji with Snipe-IT.
 - [SnipeAgent](https://github.com/ReticentRobot/SnipeAgent) by @ReticentRobot - Windows agent for Snipe-IT
+- [UnifiSnipeSync](https://github.com/RodneyLeeBrands/UnifiSnipeSync) by [RodneyLeeBrands](https://github.com/RodneyLeeBrands) - Python script that synchronizes UniFi devices with Snipe-IT.
 
 -----
 
