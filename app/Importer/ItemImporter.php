@@ -262,7 +262,10 @@ class ItemImporter extends Importer
         $item['category_id'] = $this->createOrFetchCategory($asset_model_category);
 
         $asset_model->fill($item);
+        //$asset_model = AssetModel::firstOrNew($item);
         $item = null;
+
+
 
         if ($asset_model->save()) {
             $this->log('Asset Model '.$asset_model_name.' with model number '.$asset_modelNumber.' was created');
