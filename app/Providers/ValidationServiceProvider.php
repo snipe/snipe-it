@@ -6,10 +6,7 @@ use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -99,10 +96,11 @@ class ValidationServiceProvider extends ServiceProvider
         Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters)) {
                 $count = DB::table($parameters[0])
-                         ->select('id')->where($attribute, '=', $value)
-                         ->whereNull('deleted_at')
-                         ->where('id', '!=', $parameters[1])
-                         ->where($parameters[2], $parameters[3])->count();
+                    ->select('id')->where($attribute, '=', $value)
+                    ->where('id', '!=', $parameters[1])
+                    ->where($parameters[2], $parameters[3])
+                    ->whereNull('deleted_at')
+                    ->count();
 
                 return $count < 1;
             }
