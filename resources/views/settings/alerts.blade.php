@@ -139,10 +139,6 @@
                             <div class="input-group col-md-2">
                                 {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
-
-
-
-
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 {!! $errors->first('audit_warning_days', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}

@@ -17,7 +17,7 @@
 
         <strong>
           <a href="{{ route('account.accept') }}" style="color: white;">
-            {{ trans('general.unaccepted_profile_warning', array('count' => $acceptances)) }}
+            {{ trans_choice('general.unaccepted_profile_warning', $acceptances, ['count' => $acceptances]) }}
           </a>
           </strong>
       </div>
