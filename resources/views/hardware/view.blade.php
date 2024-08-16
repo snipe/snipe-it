@@ -1030,7 +1030,7 @@
                                     <div class="row hidden-print">
                                         <div class="col-md-3">
                                             <strong>
-                                                {{ trans('general.labels') }}
+                                                {{ trans('general.label') }}
                                             </strong>
                                         </div>
                                         <div class="col-md-9 hidden-print">
