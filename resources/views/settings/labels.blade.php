@@ -147,14 +147,13 @@
                                 <div class="col-md-7">
                                     @php
                                         $select1DValues = [
-                                            'default' => trans('admin/settings/general.default').' [ '.$setting->alt_barcode.' ]',
-                                            'none'    => trans('admin/settings/general.none'),
                                             'C128'    => 'C128',
                                             'C39'     => 'C39',
                                             'EAN5'    => 'EAN5',
                                             'EAN13'   => 'EAN13',
                                             'UPCA'    => 'UPCA',
-                                            'UPCE'    => 'UPCE'
+                                            'UPCE'    => 'UPCE',
+                                             'none'    => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
                                     {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
@@ -179,11 +178,10 @@
                                 <div class="col-md-7">
                                     @php
                                         $select2DValues = [
-                                            'default'    => trans('admin/settings/general.default').' [ '.$setting->barcode_type.' ]',
-                                            'none'       => trans('admin/settings/general.none'),
                                             'QRCODE'     => 'QRCODE',
                                             'DATAMATRIX' => 'DATAMATRIX',
                                             'PDF417'     => 'PDF417',
+                                            'none'       => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
                                     {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
