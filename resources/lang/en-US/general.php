@@ -560,5 +560,6 @@ return [
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
     'assets_in_var' => 'Assets in :name :type',
+    'label' => 'Label',
 
 ];
