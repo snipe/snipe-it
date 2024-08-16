@@ -561,5 +561,6 @@ return [
     'remaining_var' => ':count Remaining',
     'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
+    'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
 
 ];
