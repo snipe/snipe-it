@@ -84,8 +84,9 @@ Form::macro('time_display_format', function ($name = 'time_display_format', $sel
         'H:i',
     ];
 
+    $datetime = date("y-m-d").' 14:00:00';
     foreach ($formats as $format) {
-        $time_display_formats[$format] = Carbon::now()->format($format);
+        $time_display_formats[$format] = Carbon::parse($datetime)->format($format);
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px" aria-label="'.$name.'">';
     foreach ($time_display_formats as $format => $time_display_format) {
