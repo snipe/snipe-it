@@ -113,7 +113,7 @@ class ItemImporter extends Importer
     protected function determineCheckout($row)
     {
         // Locations don't get checked out to anyone/anything
-        if (get_class($this) == LocationImporter::class) {
+        if ((get_class($this) == LocationImporter::class) || (get_class($this) == AssetModelImporter::class)) {
             return;
         }
 
@@ -287,14 +287,22 @@ class ItemImporter extends Importer
         $classname = class_basename(get_class($this));
         $item_type = strtolower(substr($classname, 0, strpos($classname, 'Importer')));
 
+        if ($item_type == 'assetmodel') {
+            $item_type = 'asset';
+        }
+
+        \Log::error('Item Type: '.$item_type);
+
         if (empty($asset_category)) {
             $asset_category = 'Unnamed Category';
         }
+
+
         $category = Category::where(['name' => $asset_category, 'category_type' => $item_type])->first();
+
 
         if ($category) {
             $this->log('A matching category: '.$asset_category.' already exists');
-
             return $category->id;
         }
 

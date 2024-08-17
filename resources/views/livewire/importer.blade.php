@@ -170,16 +170,19 @@
                                                                     <input type="checkbox" name="update" data-livewire-component="{{ $this->getId() }}" wire:model.live="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
+
                                                                 @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
                                                                     <p class="help-block">
                                                                         {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
                                                                     </p>
                                                                 @endif
 
+                                                                @if ($activeFile->import_type != 'location' && $activeFile->import_type == 'assetmodel' && $update)
                                                                 <label class="form-control">
                                                                     <input type="checkbox" name="send_welcome" data-livewire-component="{{ $this->getId() }}" wire:model.live="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
+                                                                @endif
 
                                                                 <label class="form-control">
                                                                     <input type="checkbox" name="run_backup" data-livewire-component="{{ $this->getId() }}" wire:model.live="run_backup">

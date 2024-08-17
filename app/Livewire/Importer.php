@@ -79,6 +79,7 @@ class Importer extends Component
 
     private function getColumns($type)
     {
+        \Log::error($type);
         switch ($type) {
             case 'asset':
                 $results = $this->assets_fields;
@@ -101,10 +102,14 @@ class Importer extends Component
             case 'location':
                 $results = $this->locations_fields;
                 break;
+            case 'assetmodel':
+                $results = $this->assetmodels_fields;
+                break;
             default:
                 $results = [];
         }
         asort($results, SORT_FLAG_CASE | SORT_STRING);
+
         if ($type == "asset") {
             // add Custom Fields after a horizontal line
             $results['-'] = "———" . trans('admin/custom_fields/general.custom_fields') . "———’";
@@ -143,6 +148,7 @@ class Importer extends Component
                 }
                 // if you got here, we didn't find a match. Try the $aliases_fields
                 foreach ($this->aliases_fields as $key => $alias_values) {
+                    \Log::error('No matches');
                     foreach ($alias_values as $alias_value) {
                         if (strcasecmp($alias_value, $header) === 0) { // aLsO CaSe-INSENSitiVE!
                             // Make *absolutely* sure that this key actually _exists_ in this import type -
@@ -172,13 +178,14 @@ class Importer extends Component
         $this->progress = -1; // '-1' means 'don't show the progressbar'
         $this->progress_bar_class = 'progress-bar-warning';
         $this->importTypes = [
-            'asset' =>      trans('general.assets'),
-            'accessory' =>  trans('general.accessories'),
-            'consumable' => trans('general.consumables'),
-            'component' =>  trans('general.components'),
-            'license' =>    trans('general.licenses'),
-            'user' =>       trans('general.users'),
-            'location' =>    trans('general.locations'),
+            'asset'         =>      trans('general.assets'),
+            'accessory'     =>  trans('general.accessories'),
+            'consumable'    => trans('general.consumables'),
+            'component'     =>  trans('general.components'),
+            'license'       =>    trans('general.licenses'),
+            'user'          =>       trans('general.users'),
+            'location'      =>   trans('general.locations'),
+            'assetmodel'    =>      trans('general.asset_models'),
         ];
 
         /**
@@ -350,6 +357,18 @@ class Importer extends Component
             'manager_username' => trans('general.importer.manager_username'),
             'manager' => trans('general.importer.manager_full_name'),
             'parent_location' => trans('admin/locations/table.parent'),
+        ];
+
+        $this->assetmodels_fields  = [
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.asset_model')]),
+            'category' => trans('general.category'),
+            'manufacturer' => trans('general.manufacturer'),
+            'model_number' => trans('general.model_no'),
+            'notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
+            'min_amt' => trans('mail.min_QTY'),
+            'fieldset' => trans('admin/models/general.fieldset'),
+            'category_type' => 'category type',
+
         ];
 
         // "real fieldnames" to a list of aliases for that field
@@ -527,18 +546,19 @@ class Importer extends Component
         if (!$this->activeFile) {
             $this->message = trans('admin/hardware/message.import.file_missing');
             $this->message_type = 'danger';
-
             return;
         }
 
         $this->field_map = null;
         foreach($this->activeFile->header_row as $element) {
+
             if(isset($this->activeFile->field_map[$element])) {
                 $this->field_map[] = $this->activeFile->field_map[$element];
             } else {
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
             }
         }
+
         $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
