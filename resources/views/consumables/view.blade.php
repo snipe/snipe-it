@@ -97,39 +97,51 @@
                 
                 @can('update', $consumable)
                   <div class="col-md-12">
-                    <a href="{{ route('consumables.edit', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.edit') }}</a>
+                    <a href="{{ route('consumables.edit', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-social btn-warning hidden-print">
+                      <x-icon type="edit" />
+                      {{ trans('button.edit') }}
+                    </a>
                   </div>
                 @endcan
 
-                  @can('create', Consumable::class)
+                  @can('checkout', $consumable)
+                    @if ($consumable->numRemaining() > 0)
+                      <div class="col-md-12">
+                        <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:5px;" class="btn btn-sm btn-block bg-maroon btn-social hidden-print">
+                          <x-icon type="checkout" />
+                          {{ trans('general.checkout') }}
+                        </a>
+                      </div>
+                    @else
+                      <div class="col-md-12">
+                        <button style="margin-bottom:10px;" class="btn btn-block bg-maroon btn-sm btn-social hidden-print disabled">
+                          <x-icon type="checkout" />
+                          {{ trans('general.checkout') }}
+                        </button>
+                      </div>
+                    @endif
+                  @endif
+
+
+                @can('create', Consumable::class)
 
                     <div class="col-md-12">
-                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}</a>
+                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-info btn-social hidden-print">
+                        <x-icon type="clone" />
+                        {{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}
+                      </a>
                     </div>
 
                   @endcan
 
-                  @can('checkout', $consumable)
-                    @if ($consumable->numRemaining() > 0)
-                        <div class="col-md-12">
-                            <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:5px;" class="btn btn-sm btn-block btn-primary hidden-print">
-                              {{ trans('general.checkout') }}
-                            </a>
-                        </div>
-                    @else
-                        <div class="col-md-12">
-                          <button style="margin-bottom:10px;" class="btn btn-block btn-primary btn-sm disabled">
-                            {{ trans('general.checkout') }}
-                          </button>
-                        </div>
-                    @endif
-                @endif
 
 
                   @can('delete', $consumable)
                     <div class="col-md-12" style="padding-top: 10px; padding-bottom: 20px">
                       @if ($consumable->deleted_at=='')
-                        <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                        <button class="btn btn-sm btn-block btn-danger btn-social hidden-print delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">
+                          <x-icon type="delete" />
+                          {{ trans('general.delete') }}
                         </button>
                         <span class="sr-only">{{ trans('general.delete') }}</span>
                       @endif

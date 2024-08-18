@@ -329,25 +329,28 @@
 </div>
 
     <div class="col-md-3 pull-right">
+
+        @can('update', \App\Models\Accessory::class)
+            <div class="text-center" style="padding-top:5px;">
+                <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px;" class="btn btn-warning btn-sm btn-social btn-block hidden-print">
+                    <x-icon type="edit" />
+                    {{ trans('admin/accessories/general.edit') }}
+                </a>
+            </div>
+        @endcan
+
         @can('checkout', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
-                    <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn bg-maroon btn-social btn-block hidden-print {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}">
+                    <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn bg-maroon btn-sm btn-social btn-block hidden-print {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}">
                         <x-icon type="checkout" />
                         {{ trans('general.checkout') }}
                     </a>
                 </div>
         @endcan
-        @can('update', \App\Models\Accessory::class)
-               <div class="text-center" style="padding-top:5px;">
-                  <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px;" class="btn btn-warning btn-social btn-block hidden-print">
-                       <x-icon type="edit" />
-                      {{ trans('admin/accessories/general.edit') }}
-                  </a>
-               </div>
-        @endcan
+
         @can('create', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
-                    <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%"  class="btn btn-info btn-block btn-social hidden-print">
+                    <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%"  class="btn btn-info btn-block btn-sm btn-social hidden-print">
                         <x-icon type="clone" />
                         {{ trans('admin/accessories/general.clone') }}</a>
                 </div>
@@ -356,7 +359,7 @@
         @can('delete', $accessory)
             @if ($accessory->checkouts_count == 0)
                 <div class="text-center" style="padding-top:5px;">
-                    <button class="btn btn-block btn-danger btn-social delete-asset" style="padding-top:5px;" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm_no_undo', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
+                    <button class="btn btn-block btn-danger btn-sm btn-social delete-asset" style="padding-top:5px;" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm_no_undo', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
                         <x-icon type="delete" />
                     {{ trans('general.delete') }}
                     </button>
@@ -364,7 +367,7 @@
             @else
                 <div class="text-center" style="padding-top:5px;">
                     <span data-tooltip="true" title=" {{ trans('admin/accessories/general.delete_disabled') }}">
-                        <a href="#" class="btn btn-block btn-danger btn-social delete-asset disabled">
+                        <a href="#" class="btn btn-block btn-danger btn-sm btn-social delete-asset disabled">
                             <x-icon type="delete" />
                         {{ trans('general.delete') }}
                         </a>

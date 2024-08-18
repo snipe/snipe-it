@@ -105,6 +105,8 @@ class IconHelper
                 return 'fa fa-caret-right';
             case 'caret-up':
                 return 'fa fa-caret-up';
+            case 'caret-down':
+                return 'fa fa-caret-down';
             case 'arrow-circle-right':
                 return 'fa fa-arrow-circle-right';
             case 'minus':

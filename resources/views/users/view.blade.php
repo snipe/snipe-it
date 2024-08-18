@@ -182,7 +182,7 @@
 
               @can('update', $user)
                 <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print">
+                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
                       <x-icon type="edit" />
                       {{ trans('admin/users/general.edit') }}
                   </a>
@@ -753,7 +753,7 @@
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
-                               <x-icon type="caret-right" class="fa-2x" id="optional_info_icon" /></i>
+                               <x-icon type="caret-right" id="optional_info_icon" /></i>
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
@@ -1056,7 +1056,7 @@
 
                             <td>
                                 <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
-                                    <x-icon type="deletet" class="fa-2x" />
+                                    <x-icon type="delete" />
                                     <span class="sr-only">{{ trans('general.delete') }}</span>
                                 </a>
                             </td>
@@ -1235,7 +1235,7 @@ $(function () {
   });
 
 
-    //binds to onchange event of your input field
+    // binds to onchange event of your input field
     var uploadedFileSize = 0;
     $('#fileupload').bind('change', function() {
       uploadedFileSize = this.files[0].size;
@@ -1276,7 +1276,7 @@ $(function () {
                 $('.progress-bar-text').html('Finished!');
                 $('.progress-checkmark').fadeIn('fast').html('<x-icon type="checkmark" class="fa-3x text-success" />');
                 $.each(data.result, function (index, file) {
-                    $('<tr><td>' + file.note + '</td><<td>' + file.filename + '</td></tr>').prependTo("#files-table > tbody");
+                    $('<tr><td>' + file.note + '</td><td>' + file.filename + '</td></tr>').prependTo("#files-table > tbody");
                 });
             }
             $('#progress').removeClass('active');
