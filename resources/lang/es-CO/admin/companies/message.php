@@ -10,7 +10,7 @@ return [
     ],
     'update' => [
         'error'   => 'La compañía no fue actualizada, por favor, inténtalo de nuevo',
-        'success' => 'Compañía actualizada con éxito.',
+        'success' => 'Compañía actualizada correctamente.',
     ],
     'delete' => [
         'confirm' => '¿Está seguro de que quiere eliminar esta compañía?',

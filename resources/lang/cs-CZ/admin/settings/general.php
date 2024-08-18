@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app integrace je volitelná, ale koncový bod a kanál jsou vyžadovány, pokud jej chcete používat. Chcete-li konfigurovat integraci :app, musíte nejprve <a href=":webhook_link" target="_new" rel="noopener">vytvořit příchozí webový háček</a> na vašem účtu :app. Klikněte na tlačítko <strong>Test :app Integration</strong> pro potvrzení správného nastavení před uložením. ',
     'webhook_integration_help_button'    => 'Jakmile uložíte informace :app, objeví se testovací tlačítko.',
     'webhook_test_help'           => 'Vyzkoušejte, zda je vaše integrace :app správně nakonfigurována. MŮŽE MŮŽE MŮŽE VÁŠ AKTUALIZOVAT :app NASTAVENÍ FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Verze Snipe-IT',
     'support_footer'            => 'Odkazy v zápatí na podporu ',
     'support_footer_help'       => 'Určete, kdo uvidí odkazy na Snipe-IT podporu a uživatelskou příručku',

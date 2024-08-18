@@ -133,7 +133,7 @@
 
 
                     @can('update', \App\Models\Asset::class)
-                        <li class="pull-right">
+                        <li class="pull-right hidden-print">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
                                 <i class="fas fa-paperclip" aria-hidden="true"></i>
                                 {{ trans('button.upload') }}
@@ -176,7 +176,7 @@
                                 @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
                                     @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
                                         @can('checkin', \App\Models\Asset::class)
-                                            <div class="col-md-12">
+                                            <div class="col-md-12 hidden-print">
                                                     <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
                                                         <a role="button" href="{{ route('hardware.checkin.create', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
                                                         {{ trans('admin/hardware/general.checkin') }}
@@ -186,7 +186,7 @@
                                         @endcan
                                     @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
                                         @can('checkout', \App\Models\Asset::class)
-                                            <div class="col-md-12" style="padding-top: 5px;">
+                                            <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                                     <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
                                                         <a href="{{ route('hardware.checkout.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
                                                         {{ trans('admin/hardware/general.checkout') }}
@@ -199,7 +199,7 @@
 
                                 @if ($asset->deleted_at=='')
                                     @can('update', $asset)
-                                        <div class="col-md-12" style="padding-top: 5px;">
+                                        <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                             <a href="{{ route('hardware.edit', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
                                                 {{ trans('admin/hardware/general.edit') }}
                                             </a>
@@ -207,7 +207,7 @@
                                     @endcan
 
                                     @can('audit', \App\Models\Asset::class)
-                                        <div class="col-md-12" style="padding-top: 5px;">
+                                        <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                         <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
                                             <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
                                              {{ trans('general.audit') }}
@@ -218,7 +218,7 @@
                                 @endif
 
                                 @can('create', $asset)
-                                    <div class="col-md-12" style="padding-top: 5px;">
+                                    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                         <a href="{{ route('clone/hardware', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
                                             {{ trans('admin/hardware/general.clone') }}
                                         </a>
@@ -226,7 +226,7 @@
                                 @endcan
 
                                 @can('delete', $asset)
-                                    <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+                                    <div class="col-md-12 hidden-print" style="padding-top: 30px; padding-bottom: 30px;">
                                         @if ($asset->deleted_at=='')
                                             <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
                                             </button>
@@ -247,7 +247,7 @@
                                         </h2>
                                         <p>
                                             @if (($asset->checkedOutToUser()) && ($asset->assignedTo->present()->gravatar()))
-                                                <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">
+                                                <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline hidden-print" alt="{{ $asset->assignedTo->present()->fullName() }}">
                                             @endif
                                         </p>
                                         {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
@@ -288,7 +288,7 @@
                                                 </li>
                                             @endif
                                             <li>
-                                                <i class="fas fa-calendar"></i> {{ trans('admin/hardware/form.checkout_date') }}: {{ Helper::getFormattedDateObject($asset->last_checkout, 'date', false) }}
+                                                <i class="fas fa-calendar hidden-print"></i> {{ trans('admin/hardware/form.checkout_date') }}: {{ Helper::getFormattedDateObject($asset->last_checkout, 'date', false) }}
                                             </li>
                                             @if (isset($asset->expected_checkin))
                                                 <li>
@@ -322,9 +322,9 @@
                                                 <strong>{{ trans('admin/hardware/form.tag') }}</strong>
                                             </div>
                                             <div class="col-md-9">
-                                                <span class="js-copy">{{ $asset->asset_tag  }}</span>
+                                                <span class="js-copy-assettag">{{ $asset->asset_tag  }}</span>
 
-                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                <i class="fa-regular fa-clipboard js-copy-link hidden-print" data-clipboard-target=".js-copy-assettag" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                                                     <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                                                 </i>
                                             </div>
@@ -378,6 +378,7 @@
                                         </div>
                                     @endif
 
+
                                     @if ($asset->company)
                                         <div class="row">
                                             <div class="col-md-3">
@@ -406,11 +407,24 @@
                                                 <strong>{{ trans('admin/hardware/form.serial') }}</strong>
                                             </div>
                                             <div class="col-md-9">
-                                                <span class="js-copy">{{ $asset->serial  }}</span>
+                                                <span class="js-copy-serial">{{ $asset->serial  }}</span>
 
-                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                <i class="fa-regular fa-clipboard js-copy-link hidden-print" data-clipboard-target=".js-copy-serial" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                                                     <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                                                 </i>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if ($asset->last_checkout!='')
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <strong>
+                                                    {{ trans('admin/hardware/table.checkout_date') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-9">
+                                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
                                             </div>
                                         </div>
                                     @endif
@@ -608,7 +622,7 @@
                                                             @endphp
                                                             @if ($fieldSize>0)
                                                                 <span id="text-{{ $field->id }}-to-hide">{{ str_repeat('*', $fieldSize) }}</span>
-                                                                <span class="js-copy-{{ $field->id }}" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
+                                                                <span class="js-copy-{{ $field->id }} hidden-print" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
                                                                 @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                                         <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
                                                                     @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
@@ -617,7 +631,7 @@
                                                                         {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
                                                                     @endif
                                                                 </span>
-                                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                                <i class="fa-regular fa-clipboard js-copy-link hidden-print" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                                                                     <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                                                                 </i>
                                                             @endif
@@ -731,7 +745,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-9">
-                                                <a href="{{ route('hardware.index', ['order_number' => $asset->order_number]) }}">#{{ $asset->order_number }}</a>
+                                                <a href="{{ route('hardware.index', ['order_number' => $asset->order_number]) }}">{{ $asset->order_number }}</a>
                                             </div>
                                         </div>
                                     @endif
@@ -950,18 +964,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if ($asset->last_checkout!='')
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <strong>
-                                                    {{ trans('admin/hardware/table.checkout_date') }}
-                                                </strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
-                                            </div>
-                                        </div>
-                                    @endif
+
                                     @if ($asset->expected_checkin!='')
                                         <div class="row">
                                             <div class="col-md-3">
@@ -1024,13 +1027,13 @@
                                             {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row hidden-print">
                                         <div class="col-md-3">
                                             <strong>
-                                                Labels
+                                                {{ trans('general.label') }}
                                             </strong>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-9 hidden-print">
                                             {{ Form::open([
                                                       'method' => 'POST',
                                                       'route' => ['hardware/bulkedit'],
@@ -1051,7 +1054,7 @@
                     </div><!-- /.tab-pane -->
 
                     <div class="tab-pane fade" id="software">
-                        <div class="row">
+                        <div class="row{{($asset->licenses->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
                                 <!-- Licenses assets table -->
                                 @if ($asset->licenses->count() > 0)
@@ -1080,7 +1083,7 @@
                                                         {{ Helper::getFormattedDateObject($seat->license->expiration_date, 'date', false) }}
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
+                                                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple hidden-print" data-tooltip="true">{{ trans('general.checkin') }}</a>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -1100,7 +1103,7 @@
 
                     <div class="tab-pane fade" id="components">
                         <!-- checked out assets table -->
-                        <div class="row">
+                        <div class="row{{($asset->components->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
                                 @if($asset->components->count() > 0)
                                     <table class="table table-striped">
@@ -1155,7 +1158,7 @@
 
 
                     <div class="tab-pane fade" id="assets">
-                        <div class="row">
+                        <div class="row{{($asset->assignedAssets->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
 
                                 @if ($asset->assignedAssets->count() > 0)
@@ -1221,7 +1224,7 @@
 
 
                     <div class="tab-pane fade" id="maintenances">
-                        <div class="row">
+                        <div class="row{{($asset->assetmaintenances->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
                                 @can('update', \App\Models\Asset::class)
                                     <div id="maintenance-toolbar">
@@ -1304,7 +1307,7 @@
                     </div> <!-- /.tab-pane history -->
 
                     <div class="tab-pane fade" id="files">
-                        <div class="row">
+                        <div class="row{{ ($asset->uploads->count() > 0 ) ? '' : ' hidden-print' }}">
                             <div class="col-md-12">
 
                                 @if ($asset->uploads->count() > 0)
@@ -1406,7 +1409,7 @@
 
                     @can('view', $asset->model)
                     <div class="tab-pane fade" id="modelfiles">
-                        <div class="row">
+                        <div class="row{{ (($asset->model) && ($asset->model->uploads->count() > 0)) ? '' : ' hidden-print' }}">
                             <div class="col-md-12">
 
                                 @if (($asset->model) && ($asset->model->uploads->count() > 0))

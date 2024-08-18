@@ -125,6 +125,8 @@ return [
         'symbols' => 'crwdns12504:0crwdne12504:0',
         'uncompromised' => 'crwdns12506:0crwdne12506:0',
     ],
+    'percent'       => 'crwdns12660:0crwdne12660:0',
+
     'present' => 'crwdns1936:0crwdne1936:0',
     'present_if' => 'crwdns12508:0crwdne12508:0',
     'present_unless' => 'crwdns12510:0crwdne12510:0',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'crwdns1946:0crwdne1946:0',
         'dumbpwd'          => 'crwdns1947:0crwdne1947:0',
         'statuslabel_type' => 'crwdns1948:0crwdne1948:0',
+        'custom_field_not_found'          => 'crwdns12650:0crwdne12650:0',
+        'custom_field_not_found_on_model' => 'crwdns12652:0crwdne12652:0',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

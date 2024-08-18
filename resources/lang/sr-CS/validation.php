@@ -125,6 +125,8 @@ return [
         'symbols' => 'Polje :attribute mora da sadrži najmanje jedan simbol.',
         'uncompromised' => 'Uneto :attribute se pojavilo među procurelim podacima. Molim vas unesite drugo :attribute.',
     ],
+    'percent'       => 'Minimum amortizacije mora biti između 0 i 100 kada je vrsta amortizacije procentna vrednost.',
+
     'present' => ':attribute polje mora biti prisutno.',
     'present_if' => 'Polje :attribute mora imati vrednost kada :other sadrži :value.',
     'present_unless' => 'Polje :attribute mora imati vrednost osim ako :other sadrži :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Vaša lozinka je neispravna',
         'dumbpwd'          => 'Lozinka nije sigurna.',
         'statuslabel_type' => 'Morate odabrati ispravnu vrstu oznake statusa',
+        'custom_field_not_found'          => 'Izgleda da ovo polje ne postoji. Molim vas proverite imena vaših prilagođenih polja.',
+        'custom_field_not_found_on_model' => 'Izgleda da ovo polje postoji, ali nije dostupno za grupu polja ovog modela imovine.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

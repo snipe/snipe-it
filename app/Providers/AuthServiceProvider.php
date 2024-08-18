@@ -230,7 +230,8 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('update', Accessory::class)
                 || $user->can('create', Accessory::class)   
                 || $user->can('update', User::class)
-                || $user->can('create', User::class);  
+                || $user->can('create', User::class)
+                || ($user->hasAccess('reports.view'));
         });
 
 
