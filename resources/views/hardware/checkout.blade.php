@@ -109,8 +109,8 @@
                                     <input type="text" class="form-control"
                                            placeholder="{{ trans('general.select_date') }}" name="checkout_at"
                                            id="checkout_at" value="{{ old('checkout_at', date('Y-m-d')) }}">
-                                    <span class="input-group-addon"><i class="fas fa-calendar"
-                                                                       aria-hidden="true"></i></span>
+                                    <span class="input-group-addon">
+                                        <x-icon type="calendar" /></span>
                                 </div>
                                 {!! $errors->first('checkout_at', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>

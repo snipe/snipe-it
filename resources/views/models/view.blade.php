@@ -268,7 +268,7 @@
 
                         @if ($model->manufacturer->support_url)
                             <li>
-                                <i class="far fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
+                                <x-icon type="more-info" /> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
                             </li>
                         @endif
 

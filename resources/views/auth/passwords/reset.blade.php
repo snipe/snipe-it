@@ -40,7 +40,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label" for="password"><i class="fa fa-key" aria-hidden="true"></i> {{ trans('admin/users/table.password')  }}</label>
+                            <label class="col-md-4 control-label" for="password">
+                                <x-icon type="password" />
+                                {{ trans('admin/users/table.password')  }}
+                            </label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password" aria-label="password">
@@ -49,7 +52,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label" for="password_confirmation"><i class="fa fa-key" aria-hidden="true"></i> {{ trans('admin/users/table.password_confirm')  }}</label>
+                            <label class="col-md-4 control-label" for="password_confirmation">
+                                <x-icon type="password" />
+                                {{ trans('admin/users/table.password_confirm')  }}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation" aria-label="password_confirmation">
                                 {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}

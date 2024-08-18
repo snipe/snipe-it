@@ -52,14 +52,8 @@
                                     <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}>
                                     <span>{{ trans('admin/hardware/form.asset_location') }}
                                     <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> {{ trans('general.more_info') }}" data-html="true" data-content="{{ trans('general.quickscan_bulk_help') }}">
-                                        <i class="far fa-life-ring">
-
-                                        </i></a></span>
-
+                                        <x-icon type="more-info" /></a></span>
                                 </label>
-
-
-
                             </div>
                         </div>
 
@@ -86,16 +80,14 @@
                             </div>
                         </div>
 
-
-
                     </div> <!--/.box-body-->
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ route('hardware.index') }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" id="audit_button" class="btn btn-success pull-right"><x-icon type="checkmark" /> {{ trans('general.audit') }}</button>
+                        <button type="submit" id="audit_button" class="btn btn-success pull-right">
+                            <x-icon type="checkmark" />
+                            {{ trans('general.audit') }}
+                        </button>
                     </div>
-
-
-
             </div>
 
 
@@ -119,7 +111,8 @@
                         </tr>
                         <tr id="audit-loader" style="display: none;">
                             <td colspan="3">
-                                <i class="fas fa-spinner spin" aria-hidden="true"></i> {{ trans('admin/hardware/form.processing_spinner') }}
+                                <x-icon type="spinner" />
+                                {{ trans('admin/hardware/form.processing_spinner') }}
                             </td>
                         </tr>
                         </thead>
