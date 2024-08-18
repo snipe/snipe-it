@@ -44,7 +44,7 @@
           </div>
           <div class="col-md-2 col-sm-12">
               <button class="add_field_button btn btn-default btn-sm">
-                  <i class="fas fa-plus"></i>
+                  <x-icon type="plus" />
               </button>
           </div>
       @endif

@@ -119,6 +119,8 @@ class IconHelper
                 return 'far fa-life-ring';
             case 'calendar':
                 return 'fas fa-calendar';
+            case 'plus':
+                return 'fas fa-plus';
 
         }
     }
