@@ -141,6 +141,10 @@ class IconHelper
                 return 'fas fa-map-marker-alt';
             case 'superadmin':
                 return 'fas fa-crown';
+            case 'print':
+                return 'fa-solid fa-print';
+            case 'checkin-and-delete':
+                return 'fa-solid fa-user-xmark';
 
         }
     }
