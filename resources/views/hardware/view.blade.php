@@ -178,18 +178,20 @@
                                         @can('checkin', \App\Models\Asset::class)
                                             <div class="col-md-12 hidden-print">
                                                     <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
-                                                        <a role="button" href="{{ route('hardware.checkin.create', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
-                                                        {{ trans('admin/hardware/general.checkin') }}
-                                                    </a>
+                                                        <a role="button" href="{{ route('hardware.checkin.create', $asset->id) }}" class="btn btn-primary bg-purple btn-social btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
+                                                            <x-icon type="checkin" />
+                                                            {{ trans('admin/hardware/general.checkin') }}
+                                                        </a>
                                                     </span>
                                             </div>
                                         @endcan
                                     @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
-                                        @can('checkout', \App\Models\Asset::class)
+                                        @can('checkout', Asset::class)
                                             <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                                     <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
-                                                        <a href="{{ route('hardware.checkout.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
-                                                        {{ trans('admin/hardware/general.checkout') }}
+                                                        <a href="{{ route('hardware.checkout.create', $asset->id)  }}" class="btn bg-maroon btn-social btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
+                                                             <x-icon type="checkout" />
+                                                            {{ trans('admin/hardware/general.checkout') }}
                                                     </a>
                                                     </span>
                                             </div>
@@ -200,7 +202,8 @@
                                 @if ($asset->deleted_at=='')
                                     @can('update', $asset)
                                         <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-                                            <a href="{{ route('hardware.edit', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
+                                            <a href="{{ route('hardware.edit', $asset->id) }}" class="btn btn-warning btn-social btn-block hidden-print">
+                                                <x-icon type="edit" />
                                                 {{ trans('admin/hardware/general.edit') }}
                                             </a>
                                         </div>
@@ -209,7 +212,8 @@
                                     @can('audit', \App\Models\Asset::class)
                                         <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                         <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
-                                            <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-sm btn-primary btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
+                                            <a href="{{ route('asset.audit.create', $asset->id)  }}" class="btn btn-primary btn-block btn-social hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
+                                                 <x-icon type="audit" />
                                              {{ trans('general.audit') }}
                                             </a>
                                         </span>
@@ -219,7 +223,8 @@
 
                                 @can('create', $asset)
                                     <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-                                        <a href="{{ route('clone/hardware', $asset->id) }}" class="btn btn-sm btn-primary btn-block hidden-print">
+                                        <a href="{{ route('clone/hardware', $asset->id) }}" class="btn btn-info btn-block btn-social hidden-print">
+                                            <x-icon type="clone" />
                                             {{ trans('admin/hardware/general.clone') }}
                                         </a>
                                     </div>
@@ -228,7 +233,10 @@
                                 @can('delete', $asset)
                                     <div class="col-md-12 hidden-print" style="padding-top: 30px; padding-bottom: 30px;">
                                         @if ($asset->deleted_at=='')
-                                            <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                                            <button class="btn btn-block btn-danger btn-social delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">
+
+                                                <x-icon type="delete" />
+                                                {{ trans('general.delete') }}
                                             </button>
                                             <span class="sr-only">{{ trans('general.delete') }}</span>
                                         @else
