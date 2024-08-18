@@ -133,10 +133,15 @@
 
 
                     @can('update', \App\Models\Asset::class)
-                        <li class="pull-right hidden-print">
+                        <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                                <x-icon type="paperclip" />
-                                {{ trans('button.upload') }}
+                                <span class="hidden-lg hidden-xl hidden-md">
+                                    <x-icon type="paperclip" class="fa-2x" />
+                                </span>
+                                <span class="hidden-xs hidden-sm">
+                                    <x-icon type="paperclip" />
+                                    {{ trans('button.upload') }}
+                                </span>
                             </a>
                         </li>
                     @endcan
@@ -271,7 +276,7 @@
 
                                             @if ((isset($asset->assignedTo)) && ($asset->assignedTo->phone!=''))
                                                 <li>
-                                                    <i class="fas fa-phone" aria-hidden="true"></i>
+                                                    <x-icon type="phone" />
                                                     <a href="tel:{{ $asset->assignedTo->phone }}">{{ $asset->assignedTo->phone }}</a>
                                                 </li>
                                             @endif
@@ -493,10 +498,10 @@
 
                                                     @if (($asset->model) && ($asset->model->manufacturer) &&  ($asset->model->manufacturer->url!=''))
                                                         <li>
-                                                            <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                                                            <x-icon type="globe-us" />
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}" target="_blank">
                                                                 {{ $asset->present()->dynamicUrl($asset->model->manufacturer->url) }}
-                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                <x-icon type="external-link" />
                                                             </a>
                                                         </li>
                                                     @endif
@@ -506,25 +511,26 @@
                                                             <x-icon type="more-info" />
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}" target="_blank">
                                                                 {{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}
-                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                <x-icon type="external-link" />
                                                             </a>
                                                         </li>
                                                     @endif
 
                                                     @if (($asset->model) && ($asset->model->manufacturer) &&  ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                         <li>
-                                                            <i class="far fa-wrench" aria-hidden="true"></i>
+                                                            <x-icon type="maintenances" />
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
                                                                 {{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}
 
-                                                                <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
+                                                                <i class="fa fa-external-link" aria-hidden="true">
+                                                                    <span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                             </a>
                                                         </li>
                                                     @endif
 
                                                     @if (($asset->model) && ($asset->model->manufacturer->support_phone))
                                                         <li>
-                                                            <i class="fas fa-phone" aria-hidden="true"></i>
+                                                            <x-icon type="phone" />
                                                             <a href="tel:{{ $asset->model->manufacturer->support_phone }}">
                                                                 {{ $asset->model->manufacturer->support_phone }}
                                                             </a>
@@ -621,6 +627,7 @@
                                                 </div>
                                                 <div class="col-md-9{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
                                                     @if (($field->field_encrypted=='1') && ($asset->{$field->db_column_name()}!=''))
+
                                                         <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}" onclick="showHideEncValue(this)" id="text-{{ $field->id }}"></i>
                                                     @endif
 
@@ -792,7 +799,8 @@
 
                                                 @if (($asset->model) && ($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                     <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
-                                                        <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
+                                                        <x-icon type="external-link" />
+                                                        <span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                     </a>
                                                 @endif
                                             </div>
@@ -886,12 +894,17 @@
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
                                                 @if ($asset->eol_explicit)
-                                                    <i class="fas fa-exclamation-triangle text-orange"
-                                                       aria-hidden="true"
-                                                       data-tooltip="true"
-                                                       data-placement="top"
-                                                       data-title="Explicit EOL"
-                                                       title="Explicit EOL">
+
+                                                        <span data-tooltip="true"
+                                                                data-placement="top"
+                                                                data-title="Explicit EOL"
+                                                                title="Explicit EOL">
+                                                                <x-icon type="warning" class="text-orange" />
+                                                        </span>
+
+                                                        <i class="fas fa-exclamation-triangle text-orange"
+
+                                                       >
                                                     </i>
                                                 @endif
                                             </div>
@@ -1385,7 +1398,7 @@
                                                         </a>
 
                                                         <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            <x-icon type="external-link" />
                                                         </a>
                                                     @endif
                                                 </td>
@@ -1487,7 +1500,7 @@
                                                         </a>
 
                                                         <a href="{{ route('show/modelfile', [$asset->model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            <x-icon type="external-link" />
                                                         </a>
 
                                                     @endif

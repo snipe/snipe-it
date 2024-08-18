@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-globe-americas" aria-hidden="true"></i> {{ trans('admin/settings/general.localization') }}
+                        <x-icon type="globe-us" /> {{ trans('admin/settings/general.localization') }}
                     </h2>
                 </div>
                 <div class="box-body">

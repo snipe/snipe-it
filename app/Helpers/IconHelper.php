@@ -56,7 +56,7 @@ class IconHelper
             case 'admin-settings':
                 return 'fa fa-cogs';
             case 'settings':
-                return 'fa fa-sign-out';
+                return 'fa fa-cog';
             case 'angle-left':
                 return 'fa fa-angle-left';
             case 'warning':
@@ -90,7 +90,7 @@ class IconHelper
             case 'alerts':
                 return 'far fa-flag';
             case 'password':
-                return 'fa fa-key';
+                return 'fa-solid fa-key';
             case 'api-key':
                 return 'fa-solid fa-user-secret';
             case 'nav-toggle':
@@ -129,7 +129,12 @@ class IconHelper
                 return 'fas fa-wrench';
             case 'seats':
                 return 'far fa-list-alt';
-
+            case 'globe-us':
+                return 'fas fa-globe-americas';
+            case 'locked':
+                return 'fas fa-lock';
+            case 'unlocked':
+                return 'fas fa-lock';
 
         }
     }

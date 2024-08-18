@@ -459,7 +459,7 @@
                         {{ trans('general.website') }}
                       </div>
                       <div class="col-md-9">
-                          <a href="{{ $user->website }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> {{ $user->website }}</a>
+                          <a href="{{ $user->website }}" target="_blank"><x-icon type="external-link" /> {{ $user->website }}</a>
                       </div>
                     </div>
                     @endif
@@ -957,7 +957,7 @@
                                         </a>
 
                                         <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            <x-icon type="external-link" />
                                         </a>
                                     @endif
                                 @endif

@@ -99,7 +99,7 @@
                       @endcan
 
                       @if ($license->manufacturer->url)
-                        <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
+                        <br><x-icon type="globe-us" /> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
                       @endif
 
                       @if ($license->manufacturer->support_url)
@@ -108,7 +108,7 @@
                       @endif
 
                       @if ($license->manufacturer->support_phone)
-                        <br><i class="fas fa-phone" aria-hidden="true"></i>
+                        <br><x-icon type="phone" />
                         <a href="tel:{{ $license->manufacturer->support_phone }}">{{ $license->manufacturer->support_phone }}</a>
                       @endif
 
@@ -193,11 +193,11 @@
                         @endcan
 
                           @if ($license->supplier->url)
-                            <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->supplier->url }}" rel="noopener">{{ $license->supplier->url }}</a>
+                            <br><x-icon type="globe-us" /> <a href="{{ $license->supplier->url }}" rel="noopener">{{ $license->supplier->url }}</a>
                           @endif
 
                           @if ($license->supplier->phone)
-                            <br><i class="fas fa-phone" aria-hidden="true"></i>
+                            <br><x-icon type="phone" />
                             <a href="tel:{{ $license->supplier->phone }}">{{ $license->supplier->phone }}</a>
                           @endif
 
@@ -536,7 +536,7 @@
                     </a>
 
                     <a href="{{ route('show.licensefile', [$license->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                      <x-icon type="external-link" />
                     </a>
 
                   @endif
