@@ -43,7 +43,7 @@ class IconHelper
                 return 'fa-regular fa-envelope';
             case 'phone':
                 return 'fa-solid fa-phone';
-            case 'long-arrow':
+            case 'long-arrow-right':
                 return 'fas fa-long-arrow-alt-right';
             case 'download':
                 return 'fas fa-download';
@@ -80,7 +80,9 @@ class IconHelper
             case 'heart':
                 return 'fas fa-heart';
             case 'circle':
-                return 'far fa-circle';
+                return 'fa-regular fa-circle';
+            case 'circle-solid':
+                return 'fa-solid fa-circle';
             case 'due':
                 return 'fas fa-history';
             case 'import':
@@ -135,6 +137,10 @@ class IconHelper
                 return 'fas fa-lock';
             case 'unlocked':
                 return 'fas fa-lock';
+            case 'locations':
+                return 'fas fa-map-marker-alt';
+            case 'superadmin':
+                return 'fas fa-crown';
 
         }
     }

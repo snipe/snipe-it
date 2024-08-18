@@ -556,7 +556,7 @@
                     } else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
                         return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green'>" : "<span class='fas fa-times-circle' style='color:red' />";
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
-                        return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '" style="white-space: nowrap" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> ' + row.custom_fields[field_column_plain].value + '</a>';
+                        return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '" style="white-space: nowrap" data-tooltip="true" title="{{ trans('general.send_email') }}"><x-icon type="email" /> ' + row.custom_fields[field_column_plain].value + '</a>';
                     }
                 }
                 return row.custom_fields[field_column_plain].value;
@@ -612,7 +612,7 @@
 
                 extra_pretty_index = prettyLog(pretty_index);
 
-                result += extra_pretty_index + ': <del>' + value[index].old + '</del>  <x-icon type="long-arrow" /> ' + value[index].new + '<br>'
+                result += extra_pretty_index + ': <del>' + value[index].old + '</del>  <x-icon type="long-arrow-right" /> ' + value[index].new + '<br>'
             }
 
         return result;
@@ -664,7 +664,7 @@
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
             if (row.asset.deleted_at!='') {
-                return '<span style="white-space: nowrap;"><i class="fas fa-times text-danger"></i><span class="sr-only">{{ trans('admin/hardware/general.deleted') }}</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.asset_tag + '</a></del></span>';
+                return '<span style="white-space: nowrap;"><x-icon type="x" class="text-danger" /><span class="sr-only">{{ trans('admin/hardware/general.deleted') }}</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.asset_tag + '</a></del></span>';
             }
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
         }
@@ -689,7 +689,7 @@
 
         if ((row.asset) && (row.asset.serial)) {
             if (row.asset.deleted_at!='') {
-                return '<span style="white-space: nowrap;"><i class="fas fa-times text-danger"></i><span class="sr-only">deleted</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.serial + '</a></del></span>';
+                return '<span style="white-space: nowrap;"><x-icon type="x" class="text-danger" /><span class="sr-only">deleted</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.serial + '</a></del></span>';
             }
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.serial + '</a>';
         }
@@ -698,9 +698,9 @@
 
     function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fas fa-check text-success"></i><span class="sr-only">{{ trans('general.true') }}</span>';
+            return '<x-icon type="checkmark" class="text-success" /><span class="sr-only">{{ trans('general.true') }}</span>';
         } else {
-            return '<i class="fas fa-times text-danger"></i><span class="sr-only">{{ trans('general.false') }}</span>';
+            return '<x-icon type="x" class="text-danger" /><span class="sr-only">{{ trans('general.false') }}</span>';
         }
     }
 
@@ -787,7 +787,7 @@
     }
     function downloadFormatter(value) {
         if (value) {
-            return '<a href="' + value + '" target="_blank"><i class="fas fa-download"></i></a>';
+            return '<a href="' + value + '" target="_blank"><x-icon type="download" /></a>';
         }
     }
 
@@ -795,7 +795,7 @@
         if ((value) && (value.url) && (value.inlineable)) {
             return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         } else if ((value) && (value.url)) {
-            return '<a href="' + value.url + '" class="btn btn-default"><i class="fas fa-download"></i></a>';
+            return '<a href="' + value.url + '" class="btn btn-default"><x-icon type="download" /></a>';
         }
     }
 

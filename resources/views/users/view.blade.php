@@ -19,7 +19,7 @@
         <li class="active">
           <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-info-circle fa-2x"></i>
+                <x-icon type="info-circle" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -28,7 +28,7 @@
         <li>
           <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+            <x-icon type="assets" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
               {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
@@ -39,7 +39,7 @@
         <li>
           <a href="#licenses" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="far fa-save fa-2x"></i>
+            <x-icon type="licenses" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
               {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->licenses->count()).'</badge>' : '' !!}
@@ -61,7 +61,7 @@
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-                <i class="fas fa-tint fa-2x"></i>
+                <x-icon type="consumables" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
               {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->consumables->count()).'</badge>' : '' !!}
@@ -72,7 +72,7 @@
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-                <i class="far fa-file fa-2x"></i>
+                <x-icon type="files" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
               {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->uploads->count()).'</badge>' : '' !!}
@@ -83,7 +83,7 @@
         <li>
           <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-                <i class="fas fa-history fa-2x"></i>
+                <x-icon type="history" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
@@ -93,7 +93,8 @@
         <li>
           <a href="#managed-locations" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-              <i class="fas fa-map-marker-alt fa-2x"></i></span>
+                <x-icon type="locations" class="fa-2x" />
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
               {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->managedLocations->count()).'</badge>' : '' !!}
           </a>
@@ -103,8 +104,9 @@
           @if ($user->managesUsers->count() >= 0 )
               <li>
                   <a href="#managed-users" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa-solid fa-users fa-2x"></i></span>
+                    <span class="hidden-lg hidden-md">
+                      <x-icon type="users" class="fa-2x" />
+                    </span>
                       <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_users') }}
                       {!! ($user->managesUsers->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->managesUsers->count()).'</badge>' : '' !!}
                   </a>
@@ -115,8 +117,8 @@
       @can('update', $user)
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <span class="hidden-xs"><i class="fas fa-cog" aria-hidden="true"></i></span>
-              <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-cog fa-2x" aria-hidden="true"></i></span>
+              <span class="hidden-xs"><x-icon type="cog" /></span>
+              <span class="hidden-lg hidden-md hidden-xl"><x-icon type="cog" class="fa-2x" /></span>
               
               <span class="hidden-xs hidden-sm">
                 {{ trans('button.actions') }}
@@ -137,7 +139,7 @@
           <li class="pull-right">
               <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <span class="hidden-xs"><x-icon type="paperclip" /></span>
-              <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-paperclip fa-2x" aria-hidden="true"></i></span>
+              <span class="hidden-lg hidden-md hidden-xl"><x-icon type="paperclip" class="fa-2x" /></span>
               <span class="hidden-xs hidden-sm">{{ trans('button.upload') }}</span>
               </a>
           </li>
@@ -152,7 +154,7 @@
             @if ($user->deleted_at!='')
               <div class="col-md-12">
                 <div class="callout callout-warning">
-                  <i class="icon fas fa-exclamation-triangle"></i>
+                    <x-icon type="warning" />
                   {{ trans('admin/users/message.user_deleted_warning') }}
                 </div>
               </div>
@@ -309,9 +311,13 @@
                       <div class="col-md-9">
 
                         @if ($user->isSuperUser())
-                          <label class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}"><i class="fas fa-crown" title="{{ trans('general.superuser') }}"></i></label>&nbsp;
+                          <label class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}">
+                              <x-icon type="superadmin" title="{{ trans('general.superuser') }}" />
+                          </label>&nbsp;
                         @elseif ($user->hasAccess('admin'))
-                          <label class="label label-warning" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}"><i class="fas fa-crown" title="{{ trans('general.admin') }}"></i></label>&nbsp;
+                          <label class="label label-warning" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}">
+                              <x-icon type="superadmin" title="{{ trans('general.admin') }}" />
+                          </label>&nbsp;
                         @endif
                          {{ $user->username }}
 
@@ -447,7 +453,9 @@
                         {{ trans('admin/users/table.email') }}
                       </div>
                       <div class="col-md-9">
-                        <a href="mailto:{{ $user->email }}" data-tooltip="true" title="{{ trans('general.send_email') }}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> {{ $user->email }}</a>
+                        <a href="mailto:{{ $user->email }}" data-tooltip="true" title="{{ trans('general.send_email') }}">
+                            <x-icon type="email" />
+                            {{ $user->email }}</a>
                       </div>
                     </div>
                     @endif
@@ -471,7 +479,9 @@
                           {{ trans('admin/users/table.phone') }}
                         </div>
                         <div class="col-md-9">
-                          <a href="tel:{{ $user->phone }}" data-tooltip="true" title="{{ trans('general.call') }}"><i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $user->phone }}</a>
+                          <a href="tel:{{ $user->phone }}" data-tooltip="true" title="{{ trans('general.call') }}">
+                              <x-icon type="phone" />
+                              {{ $user->phone }}</a>
                         </div>
                       </div>
                     @endif
@@ -542,7 +552,13 @@
                         {{ trans('admin/users/general.vip_label') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->vip=='1') ? '<i class="fas fa-check fa-fw fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                          @if ($user->vip=='1')
+                              <x-icon type="checkmark" class="fa-fw text-success" />
+                              {{ trans('general.yes') }}
+                          @else
+                              <x-icon type="x" class="fa-fw text-danger" />
+                              {{ trans('general.no') }}
+                          @endif
                       </div>
                     </div> 
                     
@@ -552,7 +568,13 @@
                         {{ trans('admin/users/general.remote') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->remote=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                          @if ($user->remote == '1')
+                              <x-icon type="checkmark" class="fa-fw text-success" />
+                              {{ trans('general.yes') }}
+                          @else
+                              <x-icon type="x" class="fa-fw text-danger" />
+                              {{ trans('general.no') }}
+                          @endif
                       </div>
                     </div>
 
@@ -562,7 +584,13 @@
                         {{ trans('general.login_enabled') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->activated=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                          @if ($user->activated == '1')
+                              <x-icon type="checkmark" class="fa-fw text-success" />
+                              {{ trans('general.yes') }}
+                          @else
+                              <x-icon type="x" class="fa-fw text-danger" />
+                              {{ trans('general.no') }}
+                          @endif
                       </div>
                     </div>
 
@@ -572,7 +600,13 @@
                            {{ trans('general.autoassign_licenses') }}
                        </div>
                        <div class="col-md-9">
-                           {!! ($user->autoassign_licenses=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                           @if ($user->autoassign_licenses == '1')
+                               <x-icon type="checkmark" class="fa-fw text-success" />
+                               {{ trans('general.yes') }}
+                           @else
+                               <x-icon type="x" class="fa-fw text-danger" />
+                               {{ trans('general.no') }}
+                           @endif
                        </div>
                    </div>
 
@@ -583,7 +617,13 @@
                           LDAP
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                          @if ($user->ldap_import == '1')
+                              <x-icon type="checkmark" class="fa-fw text-success" />
+                              {{ trans('general.yes') }}
+                          @else
+                              <x-icon type="x" class="fa-fw text-danger" />
+                              {{ trans('general.no') }}
+                          @endif
 
                       </div>
                     </div>
@@ -596,8 +636,13 @@
                               {{ trans('admin/users/general.two_factor_active') }}
                             </div>
                             <div class="col-md-9">
-                          
-                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                                @if ($user->$user->two_factor_active()) == '1')
+                                    <x-icon type="checkmark" class="fa-fw text-success" />
+                                    {{ trans('general.yes') }}
+                                @else
+                                    <x-icon type="x" class="fa-fw text-danger" />
+                                    {{ trans('general.no') }}
+                                @endif
                           
                             </div>
                           </div>
@@ -608,7 +653,13 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                                @if ($user->$user->two_factor_active_and_enrolled()) == '1')
+                                <x-icon type="checkmark" class="fa-fw text-success" />
+                                {{ trans('general.yes') }}
+                                @else
+                                    <x-icon type="x" class="fa-fw text-danger" />
+                                    {{ trans('general.no') }}
+                                @endif
 
                             </div>
                           </div>
@@ -632,7 +683,9 @@
                                 <span id="two_factor_resetstatus">
                                 </span>
                                 <br>
-                                <p class="help-block" style="line-height: 1.6;">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                                <p class="help-block" style="line-height: 1.6;">
+                                    {{ trans('admin/settings/general.two_factor_reset_help') }}
+                                </p>
                           
                                 
                               </div>
@@ -663,7 +716,7 @@
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
-                               <i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i>
+                               <x-icon type="caret-right" class="fa-2x" id="optional_info_icon" /></i>
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
@@ -932,7 +985,7 @@
                                         {{ trans('general.preview_not_available') }}
                                     @endif
                                 @else
-                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                    <x-icon type="x" class="text-danger" />
                                         {{ trans('general.file_not_found') }}
                                 @endif
                             </td>
@@ -952,7 +1005,7 @@
                                 @if ($file->filename)
                                     @if (Storage::exists('private_uploads/users/'.$file->filename))
                                         <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                            <i class="fas fa-download" aria-hidden="true"></i>
+                                            <x-icon type="download" />
                                             <span class="sr-only">{{ trans('general.download') }}</span>
                                         </a>
 
@@ -965,12 +1018,11 @@
                             <td>{{ $file->created_at }}</td>
 
                             <td>
-                                <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
-                                    <i class="fa fa-trash icon-white" aria-hidden="true"></i>
+                                <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
+                                    <x-icon type="deletet" class="fa-2x" />
                                     <span class="sr-only">{{ trans('general.delete') }}</span>
                                 </a>
                             </td>
-
 
 
                         </tr>
@@ -1117,7 +1169,7 @@ $(function () {
     $("#two_factor_resetrow").removeClass('success');
     $("#two_factor_resetrow").removeClass('danger');
     $("#two_factor_resetstatus").html('');
-    $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i>');
+    $("#two_factor_reseticon").html('<x-icon type="spinner" />');
     $.ajax({
       url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
       type: 'POST',
@@ -1129,15 +1181,15 @@ $(function () {
       dataType: 'json',
 
       success: function (data) {
-        $("#two_factor_reset_toggle").html('').html('<span class="text-danger"><i class="fas fa-times" aria-hidden="true"></i> {{ trans('general.no') }}</span>');
+        $("#two_factor_reset_toggle").html('').html('<span class="text-danger"><x-icon type="x" /> {{ trans('general.no') }}</span>');
         $("#two_factor_reseticon").html('');
-        $("#two_factor_resetstatus").html('<span class="text-success"><i class="fas fa-check"></i> ' + data.message + '</span>');
+        $("#two_factor_resetstatus").html('<span class="text-success"><x-icon type="checkmark" class="fa-2x" /> ' + data.message + '</span>');
 
       },
 
       error: function (data) {
         $("#two_factor_reseticon").html('');
-        $("#two_factor_reseticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
+        $("#two_factor_reseticon").html('<x-icon type="warning" class="text-danger" />');
         $('#two_factor_resetstatus').text(data.message);
       }
 
@@ -1179,13 +1231,13 @@ $(function () {
                 var errorMessage = data.jqXHR.responseJSON.messages["file.0"];
                 $('#progress-bar-text').html(errorMessage[0]);
                 $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-danger').css('width','100%');
-                $('.progress-checkmark').fadeIn('fast').html('<i class="fas fa-times fa-3x icon-white" style="color: #d9534f"></i>');
+                $('.progress-checkmark').fadeIn('fast').html('<x-icon type="xt" class="fa-3x text-danger" />');
             } else {
                 $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-success').css('width','100%');
                 $('.progress-checkmark').fadeIn('fast');
                 $('#progress-container').delay(950).css('visibility', 'visible');
                 $('.progress-bar-text').html('Finished!');
-                $('.progress-checkmark').fadeIn('fast').html('<i class="fas fa-check fa-3x icon-white" style="color: green"></i>');
+                $('.progress-checkmark').fadeIn('fast').html('<x-icon type="checkmark" class="fa-3x text-success" />');
                 $.each(data.result, function (index, file) {
                     $('<tr><td>' + file.note + '</td><<td>' + file.filename + '</td></tr>').prependTo("#files-table > tbody");
                 });

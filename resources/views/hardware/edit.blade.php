@@ -255,17 +255,15 @@
                         $("#assigned_user").show();
 
                         $("#selected_status_status").removeClass('text-danger');
-                        $("#selected_status_status").removeClass('text-warning');
                         $("#selected_status_status").addClass('text-success');
-                        $("#selected_status_status").html('<i class="fas fa-check"></i> {{ trans('admin/hardware/form.asset_deployable')}}');
+                        $("#selected_status_status").html('<x-icon type="checkmark" /> {{ trans('admin/hardware/form.asset_deployable')}}');
 
 
                     } else {
                         $("#assignto_selector").hide();
-                        $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-success');
-                        $("#selected_status_status").addClass('text-warning');
-                        $("#selected_status_status").html('<i class="fas fa-exclamation-triangle"></i> {{ trans('admin/hardware/form.asset_not_deployable')}} ');
+                        $("#selected_status_status").addClass('text-danger');
+                        $("#selected_status_status").html('<x-icon type="warning" /> {{ trans('admin/hardware/form.asset_not_deployable')}} ');
                     }
                 }
             });
@@ -324,7 +322,7 @@
                 box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" required>';
                 box_html += '</div>';
                 box_html += '<div class="col-md-2 col-sm-12">';
-                box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fas fa-minus"></i></a>';
+                box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><x-icon type="minus" /></a>';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</div>';
