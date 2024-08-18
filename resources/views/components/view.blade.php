@@ -284,22 +284,22 @@
     </div>
     @endif
 
+  @can('update', $component)
+    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+      <a href="{{ route('components.edit', $component->id) }}" class="btn btn-sm btn-warning btn-social btn-block hidden-print">
+        <x-icon type="edit" />
+        {{ trans('admin/components/general.edit') }}
+      </a>
+    </div>
+  @endcan
+
   @can('checkout', Component::class)
     <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-            <a href="{{ route('components.checkout.show', $component->id)  }}" class="btn bg-maroon btn-social btn-block hidden-print">
+            <a href="{{ route('components.checkout.show', $component->id)  }}" class="btn btn-sm bg-maroon btn-social btn-block hidden-print">
                  <x-icon type="checkout" />
               {{ trans('admin/components/general.checkout') }}
             </a>
-
     </div>
-    @can('update', $component)
-      <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-        <a href="{{ route('components.edit', $component->id) }}" class="btn btn-warning btn-social btn-block hidden-print">
-          <x-icon type="edit" />
-          {{ trans('admin/components/general.edit') }}
-        </a>
-      </div>
-    @endcan
   @endcan
 
 

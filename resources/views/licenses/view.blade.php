@@ -612,11 +612,11 @@
   <div class="col-md-3">
 
     @can('update', $license)
-      <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-warning btn-sm btn-social btn-block hidden-print" style="margin-bottom: 10px;">
+      <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-warning btn-sm btn-social btn-block hidden-print" style="margin-bottom: 5px;">
         <x-icon type="edit" />
         {{ trans('admin/licenses/general.edit') }}
       </a>
-      <a href="{{ route('clone/license', $license->id) }}" class="btn btn-info btn-block btn-sm btn-social hidden-print" style="margin-bottom: 10px;">
+      <a href="{{ route('clone/license', $license->id) }}" class="btn btn-info btn-block btn-sm btn-social hidden-print" style="margin-bottom: 5px;">
         <x-icon type="clone" />
         {{ trans('admin/licenses/general.clone') }}</a>
     @endcan
@@ -625,25 +625,25 @@
 
       @if ($license->availCount()->count() > 0)
 
-        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn bg-maroon btn-sm btn-social btn-block hidden-print" style="margin-bottom: 10px;">
+        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn bg-maroon btn-sm btn-social btn-block hidden-print" style="margin-bottom: 5px;">
           <x-icon type="checkout" />
           {{ trans('general.checkout') }}
         </a>
 
-        <a href="#" class="btn bg-maroon btn-sm btn-social btn-block hidden-print" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
+        <a href="#" class="btn bg-maroon btn-sm btn-social btn-block hidden-print" style="margin-bottom: 5px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
           <x-icon type="checkout" />
           {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
         </a>
 
       @else
           <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
-          <a href="#" class="btn bg-maroon btn-sm btn-social btn-block hidden-print disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+          <a href="#" class="btn bg-maroon btn-sm btn-social btn-block hidden-print disabled" style="margin-bottom: 5px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
             <x-icon type="checkout" />
             {{ trans('general.checkout') }}
           </a>
           </span>
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
-            <a href="#" class="btn bg-maroon btn-sm btn-social btn-block hidden-print disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+            <a href="#" class="btn bg-maroon btn-sm btn-social btn-block hidden-print disabled" style="margin-bottom: 5px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
               <x-icon type="checkout" />
               {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
             </a>

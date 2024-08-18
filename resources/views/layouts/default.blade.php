@@ -1016,7 +1016,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 var hiddenElement = e.id+"-to-hide";
                 var audio = new Audio('{{ config('app.url') }}/sounds/lock.mp3');
                 if($(e).hasClass('fa-lock')) {
-                    @if ($user->enable_sounds)
+                    @if ((isset($user)) && ($user->enable_sounds))
                         audio.play()
                     @endif
                     $(e).removeClass('fa-lock').addClass('fa-unlock');
@@ -1025,7 +1025,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                     document.getElementById(hiddenElement).style.display = "none";
 
                 } else {
-                    @if ($user->enable_sounds)
+                    @if ((isset($user)) && ($user->enable_sounds))
                         audio.play()
                     @endif
                     $(e).removeClass('fa-unlock').addClass('fa-lock');
