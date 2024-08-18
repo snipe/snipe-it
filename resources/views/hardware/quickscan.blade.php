@@ -88,7 +88,7 @@
                     </div> <!--/.box-body-->
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ route('hardware.index') }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" id="audit_button" class="btn btn-success pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.audit') }}</button>
+                        <button type="submit" id="audit_button" class="btn btn-success pull-right"><x-icon type="checkmark" /> {{ trans('general.audit') }}</button>
                     </div>
 
 

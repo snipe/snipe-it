@@ -136,7 +136,7 @@
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                         <button type="submit" class="btn btn-success pull-right{{ (!$asset->model ? ' disabled' : '') }}"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'" disabled' : '') !!}>
-                            <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                            <x-icon type="checkmark" />
                             {{ trans('general.audit') }}
                         </button>
                     </div>

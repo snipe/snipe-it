@@ -226,7 +226,7 @@
         </div> <!--/.box-body-->
 
         <div class="text-right box-footer">
-          <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
         </div>
       </div> <!--/.box.box-default-->
     </form>

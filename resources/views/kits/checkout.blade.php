@@ -68,7 +68,7 @@
       </div> <!--./box-body-->
       <div class="box-footer">
         <a class="btn btn-link" href="{{ route('kits.index') }}"> {{ trans('button.cancel') }}</a>
-        <button type="submit" class="btn btn-success pull-right"><i class="fas fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+        <button type="submit" class="btn btn-success pull-right"><x-icon type="checkmark" /> {{ trans('general.checkout') }}</button>
       </div>
     </div>
       </form>
