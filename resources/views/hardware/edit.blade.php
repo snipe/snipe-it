@@ -103,7 +103,7 @@
         <div class="col-md-9 col-sm-9 col-md-offset-3">
 
         <a id="optional_info" class="text-primary">
-            <i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i>
+            <x-icon type="caret-right" class="fa-2x" id="optional_info_icon" />
             <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
         </a>
 
@@ -124,7 +124,7 @@
                 <div class="input-group col-md-4">
                     <div class="input-group date" data-provide="datepicker" data-date-clear-btn="true" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                         <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $item->next_audit_date) }}" readonly style="background-color:inherit" maxlength="10">
-                        <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><x-icon type="calendar" /></span>
                     </div>
                 </div>
                 <div class="col-md-8 col-md-offset-3">
@@ -153,7 +153,7 @@
     <div class="form-group">
         <div class="col-md-9 col-sm-9 col-md-offset-3">
             <a id="order_info" class="text-primary">
-                <i class="fa fa-caret-right fa-2x" id="order_info_icon"></i>
+                <x-icon type="caret-right" class="fa-2x" id="order_info_icon" />
                 <strong>{{ trans('admin/hardware/form.order_details') }}</strong>
             </a>
 

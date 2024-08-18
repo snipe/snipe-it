@@ -60,7 +60,7 @@
             <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
-                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
               </div>
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
@@ -78,7 +78,7 @@
              <div class="col-md-4">
                   <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                       <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
-                      <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                      <span class="input-group-addon"><x-icon type="calendar" /></span>
                  </div>
 
                  {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -178,7 +178,7 @@
             <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date') }}">
-                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
               </div>
 
               {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true">

@@ -99,9 +99,9 @@ class IconHelper
                 return 'fas fa-tachometer-alt';
             case 'info-circle':
                     return 'fas fa-info-circle';
-            case 'carat-right':
+            case 'caret-right':
                 return 'fa fa-caret-right';
-            case 'carat-up':
+            case 'caret-up':
                 return 'fa fa-caret-up';
             case 'arrow-circle-right':
                 return 'fa fa-arrow-circle-right';
@@ -117,6 +117,8 @@ class IconHelper
                 return 'fas fa-paperclip';
             case 'more-info':
                 return 'far fa-life-ring';
+            case 'calendar':
+                return 'fas fa-calendar';
 
         }
     }
