@@ -53,7 +53,7 @@
                     <li>
                         <a href="#software" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                           <x-icon type="licenses" class="fa-2x" />
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
                                 {!! ($asset->licenses->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->licenses->count()).'</span>' : '' !!}
@@ -64,7 +64,7 @@
                     <li>
                         <a href="#components" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="far fa-hdd fa-2x" aria-hidden="true"></i>
+                            <x-icon type="components" class="fa-2x" />
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
                                 {!! ($asset->components->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->components->count()).'</span>' : '' !!}
@@ -75,7 +75,7 @@
                     <li>
                         <a href="#assets" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                            <x-icon type="assets" class="fa-2x" />
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
                                 {!! ($asset->assignedAssets()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</span>' : '' !!}
@@ -88,7 +88,7 @@
                     <li>
                         <a href="#history" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fas fa-history fa-2x" aria-hidden="true"></i>
+                              <x-icon type="history" class="fa-2x "/>
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}
                           </span>
@@ -98,7 +98,7 @@
                     <li>
                         <a href="#maintenances" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fas fa-wrench fa-2x" aria-hidden="true"></i>
+                              <x-icon type="maintenances" class="fa-2x" />
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
                                 {!! ($asset->assetmaintenances()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assetmaintenances()->count()).'</span>' : '' !!}
@@ -109,7 +109,7 @@
                     <li>
                         <a href="#files" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="far fa-file fa-2x" aria-hidden="true"></i>
+                            <x-icon type="files" class="fa-2x" />
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.files') }}
                                 {!! ($asset->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->uploads->count()).'</span>' : '' !!}
@@ -121,7 +121,7 @@
                     <li>
                         <a href="#modelfiles" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                              <i class="fa-solid fa-laptop-file fa-2x" aria-hidden="true"></i>
+                              <x-icon type="more-files" class="fa-2x" />
                           </span>
                             <span class="hidden-xs hidden-sm">
                             {{ trans('general.additional_files') }}
@@ -300,7 +300,8 @@
                                             </li>
                                             @if (isset($asset->expected_checkin))
                                                 <li>
-                                                    <i class="fas fa-calendar"></i> {{ trans('admin/hardware/form.expected_checkin') }}: {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
+                                                    <x-icon type="calendar" />
+                                                    {{ trans('admin/hardware/form.expected_checkin') }}: {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                                                 </li>
                                             @endif
                                         </ul>

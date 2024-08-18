@@ -114,13 +114,22 @@ class IconHelper
             case 'paperclip':
                 return 'fas fa-paperclip';
             case 'files':
-                return 'fas fa-paperclip';
+                return 'fa-regular fa-file';
             case 'more-info':
                 return 'far fa-life-ring';
             case 'calendar':
                 return 'fas fa-calendar';
             case 'plus':
                 return 'fas fa-plus';
+            case 'history':
+                return 'fas fa-history';
+            case 'more-files':
+                return 'fa-solid fa-laptop-file';
+            case 'maintenances':
+                return 'fas fa-wrench';
+            case 'seats':
+                return 'far fa-list-alt';
+
 
         }
     }

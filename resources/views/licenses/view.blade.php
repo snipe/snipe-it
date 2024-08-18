@@ -29,7 +29,7 @@
         <li>
           <a href="#seats" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-              <i class="far fa-list-alt fa-2x" aria-hidden="true"></i>
+              <x-icon type="seats" class="fa-2x" />
               </span>
               <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
               <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats) }}</span>
@@ -41,7 +41,8 @@
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="far fa-file fa-2x" aria-hidden="true"></i></span>
+            <x-icon type="files" class="fa-2x" />
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
               {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($license->uploads->count()).'</badge>' : '' !!}
             </span>
@@ -52,7 +53,8 @@
         <li>
           <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-history fa-2x" aria-hidden="true"></i></span>
+            <x-icon type="history" class="fa-2x" />
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
@@ -610,29 +612,42 @@
   <div class="col-md-3">
 
     @can('update', $license)
-      <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.edit') }}</a>
-      <a href="{{ route('clone/license', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.clone') }}</a>
+      <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-warning btn-social btn-block hidden-print" style="margin-bottom: 10px;">
+        <x-icon type="edit" />
+        {{ trans('admin/licenses/general.edit') }}
+      </a>
+      <a href="{{ route('clone/license', $license->id) }}" class="btn btn-info btn-block btn-social hidden-print" style="margin-bottom: 10px;">
+        <x-icon type="clone" />
+        {{ trans('admin/licenses/general.clone') }}</a>
     @endcan
 
     @can('checkout', $license)
 
       @if ($license->availCount()->count() > 0)
-        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">
+
+        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn bg-maroon btn-social btn-block hidden-print" style="margin-bottom: 10px;">
+          <x-icon type="checkout" />
           {{ trans('general.checkout') }}
         </a>
-        <a href="#" class="btn-block btn bg-maroon" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
+
+        <a href="#" class="btn bg-maroon btn-social btn-block hidden-print" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
+          <x-icon type="checkout" />
           {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
         </a>
 
       @else
-        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">
-          {{ trans('general.checkout') }}
-        </a>
+          <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
+          <a href="#" class="btn bg-maroon btn-social btn-block hidden-print disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+            <x-icon type="checkout" />
+            {{ trans('general.checkout') }}
+          </a>
+          </span>
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
-                    <a href="#" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
-                      {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
-                    </a>
-                  </span>
+            <a href="#" class="btn bg-maroon btn-social btn-block hidden-print disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+              <x-icon type="checkout" />
+              {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
+            </a>
+          </span>
       @endif
     @endcan
 
@@ -640,18 +655,21 @@
   
       @if (($license->seats - $license->availCount()->count()) <= 0 )
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
-            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+            <a href="#"  class="btn btn-primary bg-purple btn-social btn-block hidden-print disabled"  style="margin-bottom: 25px;">
+              <x-icon type="checkin" />
              {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
             </a>
         </span>
       @elseif (! $license->reassignable)
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip_reassignable') }}">
-            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+            <a href="#"  class="btn btn-primary bg-purple btn-social btn-block hidden-print disabled"  style="margin-bottom: 25px;">
+              <x-icon type="checkin" />
              {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
             </a>
         </span>
       @else
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+        <a href="#"  class="btn btn-primary bg-purple btn-social btn-block hidden-print" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+          <x-icon type="checkin" />
           {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
         </a>
       @endif
@@ -660,12 +678,14 @@
     @can('delete', $license)
 
       @if ($license->availCount()->count() == $license->seats)
-        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
+        <button class="btn btn-block btn-danger btn-social delete-license" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
+          <x-icon type="delete" />
           {{ trans('general.delete') }}
         </button>
       @else
           <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
-            <a href="#" class="btn btn-block btn-danger disabled">
+            <a href="#" class="btn btn-block btn-danger btn-social delete-license disabled">
+              <x-icon type="delete" />
               {{ trans('general.delete') }}
             </a>
           </span>
