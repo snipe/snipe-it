@@ -50,7 +50,7 @@
         <li>
           <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="far fa-keyboard fa-2x"></i>
+            <x-icon type="accessory" class="fa-2x" />
             </span> 
             <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
               {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->accessories->count()).'</badge>' : '' !!}
@@ -136,7 +136,7 @@
         @can('update', \App\Models\User::class)
           <li class="pull-right">
               <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <span class="hidden-xs"><i class="fas fa-paperclip" aria-hidden="true"></i></span>
+              <span class="hidden-xs"><x-icon type="paperclip" /></span>
               <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-paperclip fa-2x" aria-hidden="true"></i></span>
               <span class="hidden-xs hidden-sm">{{ trans('button.upload') }}</span>
               </a>

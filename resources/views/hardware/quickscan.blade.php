@@ -51,7 +51,10 @@
                                 <label class="form-control">
                                     <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}>
                                     <span>{{ trans('admin/hardware/form.asset_location') }}
-                                    <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> {{ trans('general.more_info') }}" data-html="true" data-content="{{ trans('general.quickscan_bulk_help') }}"><i class="far fa-life-ring"></i></a></span>
+                                    <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> {{ trans('general.more_info') }}" data-html="true" data-content="{{ trans('general.quickscan_bulk_help') }}">
+                                        <i class="far fa-life-ring">
+
+                                        </i></a></span>
 
                                 </label>
 

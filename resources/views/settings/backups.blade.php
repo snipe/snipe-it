@@ -144,7 +144,7 @@
           
              <!-- displayed on screen -->
             <label class="btn btn-default col-md-12 col-xs-12" aria-hidden="true">
-              <i class="fas fa-paperclip" aria-hidden="true"></i>
+              <x-icon type="paperclip" />
                 {{ trans('button.select_file')  }}
                 <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
             </label>

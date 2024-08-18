@@ -295,7 +295,7 @@
 
           <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px; padding-top: 20px;">
               @if ($supplier->contact!='')
-                  <li><i class="fas fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
+                  <li><x-icon type="user" /> {{ $supplier->contact }}</li>
               @endif
               @if ($supplier->phone!='')
                   <li><i class="fas fa-phone"></i>

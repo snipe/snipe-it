@@ -20,7 +20,7 @@
         <li class="active">
           <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+            <x-icon type="info-circle" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -59,7 +59,7 @@
         
         @can('update', \App\Models\License::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+              <x-icon type="paperclip" /> {{ trans('button.upload') }}</a>
           </li>
         @endcan
       </ul>
@@ -101,7 +101,7 @@
                       @endif
 
                       @if ($license->manufacturer->support_url)
-                        <br><i class="far fa-life-ring" aria-hidden="true"></i>
+                        <br><x-icon type="more-info" />
                         <a href="{{ $license->manufacturer->support_url }}"  rel="noopener">{{ $license->manufacturer->support_url }}</a>
                       @endif
 
@@ -111,7 +111,7 @@
                       @endif
 
                       @if ($license->manufacturer->support_email)
-                        <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
+                        <br><x-icon type="email" /> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
                       @endif
                     </div>
                   </div>
@@ -200,7 +200,7 @@
                           @endif
 
                           @if ($license->supplier->email)
-                            <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->supplier->email }}">{{ $license->supplier->email }}</a>
+                            <br><x-icon type="email" /> <a href="mailto:{{ $license->supplier->email }}">{{ $license->supplier->email }}</a>
                           @endif
 
                           @if ($license->supplier->address)

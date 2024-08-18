@@ -50,7 +50,7 @@
                                         {{ $asset->model->name }}
                                     @else
                                         <span class="text-danger text-bold">
-                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              <x-icon type="warning" />
                                               {{ trans('admin/hardware/general.model_invalid')}}
                                         </span>
 
@@ -153,13 +153,13 @@
                                     <div class="callout callout-info">
 
                                         @if ($asset->requireAcceptance())
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
+                                            <x-icon type="email" />
                                             {{ trans('admin/categories/general.required_acceptance') }}
                                             <br>
                                         @endif
 
                                         @if ($asset->getEula())
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
+                                            <x-icon type="email" />
                                             {{ trans('admin/categories/general.required_eula') }}
                                             <br>
                                         @endif

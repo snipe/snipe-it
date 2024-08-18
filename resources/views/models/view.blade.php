@@ -62,7 +62,7 @@
                 </li>
                 <li class="pull-right">
                     <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                        <i class="fas fa-paperclip" aria-hidden="true"></i>
+                        <x-icon type="paperclip" />
                         {{ trans('button.upload') }}
                     </a>
                 </li>

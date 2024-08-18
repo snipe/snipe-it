@@ -44,7 +44,7 @@
                                             {{ $asset->model->name }}
                                         @else
                                             <span class="text-danger text-bold">
-                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              <x-icon type="warning" />
                                               {{ trans('admin/hardware/general.model_invalid')}}
                                             </span>
                                             {{ trans('admin/hardware/general.model_invalid_fix')}}

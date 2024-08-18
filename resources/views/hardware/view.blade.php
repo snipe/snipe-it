@@ -135,7 +135,7 @@
                     @can('update', \App\Models\Asset::class)
                         <li class="pull-right hidden-print">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                                <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                <x-icon type="paperclip" />
                                 {{ trans('button.upload') }}
                             </a>
                         </li>
@@ -264,7 +264,7 @@
                                         <ul class="list-unstyled" style="line-height: 25px;">
                                             @if ((isset($asset->assignedTo->email)) && ($asset->assignedTo->email!=''))
                                                 <li>
-                                                    <i class="far fa-envelope" aria-hidden="true"></i>
+                                                    <x-icon type="email" />
                                                     <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a>
                                                 </li>
                                             @endif
@@ -502,7 +502,7 @@
 
                                                     @if (($asset->model) && ($asset->model->manufacturer) &&  ($asset->model->manufacturer->support_url!=''))
                                                         <li>
-                                                            <i class="far fa-life-ring" aria-hidden="true"></i>
+                                                            <x-icon type="more-info" />
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}" target="_blank">
                                                                 {{ $asset->present()->dynamicUrl($asset->model->manufacturer->support_url) }}
                                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
@@ -532,7 +532,7 @@
 
                                                     @if (($asset->model) && ($asset->model->manufacturer->support_email))
                                                         <li>
-                                                            <i class="far fa-envelope" aria-hidden="true"></i>
+                                                            <x-icon type="email" />
                                                             <a href="mailto:{{ $asset->model->manufacturer->support_email }}">
                                                                 {{ $asset->model->manufacturer->support_email }}
                                                             </a>

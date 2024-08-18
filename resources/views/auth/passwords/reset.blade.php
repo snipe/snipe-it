@@ -11,8 +11,6 @@
         <div class="container">
             <div class="row">
 
-
-
                 <div class="col-md-6 col-md-offset-3">
 
                     <div class="box login-box" style="width: 100%">
@@ -32,7 +30,7 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                        <label class="col-md-4 control-label"><i class="fas fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username')  }}</label>
+                                        <label class="col-md-4 control-label"><x-icon type="user" /> {{ trans('admin/users/table.username')  }}</label>
 
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="username" value="{{ old('username', $username) }}">

@@ -71,7 +71,7 @@
                     <li>
                         <a href="#users_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fas fa-users"></i></span>
+                            <x-icon type="users" /></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.people') }}
                                 {!! (($company->users) && ($company->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->users->count()).'</badge>' : '' !!}
                             </span>

@@ -1,4 +1,6 @@
 @props([
     'type' => '',
+    'class' => '',
+    'style' => '',
 ])
-<i class="{{ Icon::icon($type) }} {{ $attributes->get('class') }}"{{ isset($style) ?  $attributes->merge(['style' => $style]) : '' }} aria-hidden="true"></i>
+<i {{ $attributes->merge(['class' => Icon::icon($type).' '.$class]) }} {{ $attributes->merge(['style' => $style]) }} aria-hidden="true"></i>

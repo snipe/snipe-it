@@ -78,7 +78,7 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h2>';
+                return '<h2><x-icon type="spinner" /> {{ trans('general.loading') }} </h2>';
             },
             icons: {
                 advancedSearchIcon: 'fas fa-search-plus',

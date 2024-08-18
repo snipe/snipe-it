@@ -107,6 +107,17 @@ class IconHelper
                 return 'fa fa-arrow-circle-right';
             case 'minus':
                 return 'fas fa-minus';
+            case 'spinner':
+                return 'fas fa-spinner fa-spin';
+            case 'copy-clipboard':
+                return 'fa-regular fa-clipboard';
+            case 'paperclip':
+                return 'fas fa-paperclip';
+            case 'files':
+                return 'fas fa-paperclip';
+            case 'more-info':
+                return 'far fa-life-ring';
+
         }
     }
 }

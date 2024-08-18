@@ -38,7 +38,7 @@
             <li>
               <a href="#checkedout" data-toggle="tab">
                 <span class="hidden-lg hidden-md">
-                <i class="fas fa-users fa-2x" aria-hidden="true"></i>
+                <x-icon type="users" class="fa-2x" />
                 </span>
                     <span class="hidden-xs hidden-sm">{{ trans('general.assigned') }}
                       {!! ($consumable->users_consumables > 0 ) ? '<badge class="badge badge-secondary">'.number_format($consumable->users_consumables).'</badge>' : '' !!}
@@ -74,7 +74,7 @@
             @can('update', $consumable)
               <li class="pull-right">
                 <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                  <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+                  <x-icon type="paperclip" /> {{ trans('button.upload') }}
                 </a>
               </li>
             @endcan

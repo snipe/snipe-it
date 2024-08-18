@@ -61,7 +61,7 @@
         <li class="active">
           <a href="#checkedout" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+            <x-icon type="info-circle" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -83,7 +83,7 @@
         @can('components.files', $component)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+              <x-icon type="paperclip" /> {{ trans('button.upload') }}
             </a>
           </li>
         @endcan

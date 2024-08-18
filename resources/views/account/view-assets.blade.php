@@ -64,7 +64,7 @@
           <li>
             <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="far fa-keyboard fa-2x"></i>
+            <x-icon type="accessory" class="fa-2x" />
             </span>
               <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
                 {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->accessories->count()).'</badge>' : '' !!}
