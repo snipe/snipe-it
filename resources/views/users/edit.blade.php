@@ -131,7 +131,7 @@
                     @if (config('app.lock_passwords') && ($user->id))
                         <!-- disallow changing existing usernames on the demo -->
                         <div class="col-md-8 col-md-offset-3">
-                            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                            <p class="text-warning"><x-icon type="lock" /> {{ trans('general.feature_disabled') }}</p>
                         </div>
                     @endif
 
@@ -215,7 +215,7 @@
                                       {{ trans('admin/users/general.activated_help_text') }}
 
                                   </label>
-                                  <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                  <p class="text-warning"><x-icon type="lock" /> {{ trans('general.feature_disabled') }}</p>
 
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->

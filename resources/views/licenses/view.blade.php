@@ -544,7 +544,7 @@
                 <td>{{ $file->created_at }}</td>
                 <td>
                   <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
-                    <i class="fas fa-trash icon-white" aria-hidden="true"></i>
+                    <x-icon type="delete" />
                     <span class="sr-only">{{ trans('general.delete') }}</span>
                   </a>
                 </td>
