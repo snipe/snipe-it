@@ -386,6 +386,41 @@
 
   <div class="col-md-3">
 
+      @if ($location->image!='')
+          <div class="col-md-12 text-center" style="padding-bottom: 20px;">
+              <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" style="width:100%" alt="{{ $location->name }}">
+          </div>
+      @endif
+
+      @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
+          <div class="col-md-12 text-center">
+              <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=700x500&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-thumbnail" style="width:100%" alt="Map">
+          </div>
+      @endif
+
+      <div class="col-md-12">
+          <ul class="list-unstyled" style="line-height: 20px; padding-bottom: 20px;">
+              @if ($location->address!='')
+                  <li>{{ $location->address }}</li>
+              @endif
+              @if ($location->address2!='')
+                  <li>{{ $location->address2 }}</li>
+              @endif
+              @if (($location->city!='') || ($location->state!='') || ($location->zip!=''))
+                  <li>{{ $location->city }} {{ $location->state }} {{ $location->zip }}</li>
+              @endif
+              @if ($location->manager)
+                  <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
+              @endif
+              @if ($location->parent)
+                  <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
+              @endif
+              @if ($location->ldap_ou)
+                  <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
+              @endif
+          </ul>
+      </div>
+
       @can('update', $location)
       <div class="col-md-12">
           <a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social">
@@ -401,7 +436,7 @@
               {{ trans('admin/locations/table.print_assigned') }}
           </a>
       </div>
-      <div class="col-md-12" style="padding-top: 5px; padding-bottom: 20px;">
+      <div class="col-md-12" style="padding-top: 5px;">
           <a href="{{ route('locations.print_all_assigned', ['locationId' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print">
               <x-icon type="print" />
               {{ trans('admin/locations/table.print_all_assigned') }}
@@ -438,41 +473,7 @@
     @endcan
 
 
-    @if ($location->image!='')
-        <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-            <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" style="width:100%" alt="{{ $location->name }}">
-        </div>
-    @endif
 
-    <div class="col-md-12">
-        <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px;">
-        @if ($location->address!='')
-            <li>{{ $location->address }}</li>
-        @endif
-        @if ($location->address2!='')
-            <li>{{ $location->address2 }}</li>
-        @endif
-        @if (($location->city!='') || ($location->state!='') || ($location->zip!=''))
-            <li>{{ $location->city }} {{ $location->state }} {{ $location->zip }}</li>
-        @endif
-        @if ($location->manager)
-            <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
-        @endif
-        @if ($location->parent)
-            <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
-        @endif
-        @if ($location->ldap_ou)
-            <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
-        @endif
-        </ul>
-
-    @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
-    <div class="col-md-12 text-center">
-        <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=700x500&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-thumbnail" style="width:100%" alt="Map">
-    </div>
-    @endif
-
-</div>
 </div>
 </div>
 
