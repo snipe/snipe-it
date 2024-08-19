@@ -374,6 +374,12 @@ class Importer extends Component
                     'model name',
                     'model',
                 ],
+            'eol_date' =>
+                [
+                    'eol',
+                    'eol date',
+                    'asset eol date',
+                ],
             'gravatar' =>
                 [
                     'gravatar',

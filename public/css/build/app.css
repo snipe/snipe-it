@@ -1123,14 +1123,18 @@ th.css-location > .th-inner::before {
   }
 }
 @media screen and (max-width: 1318px) and (min-width: 1200px) {
-  .box {
+  .admin.box {
     height: 170px;
   }
 }
-.ellipsis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+@media screen and (max-width: 1494px) and (min-width: 1200px) {
+  .dashboard.small-box {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 188px;
+    display: block;
+    overflow: hidden;
+  }
 }
 /** Form-stuff overrides for checkboxes and stuff **/
 label.form-control {

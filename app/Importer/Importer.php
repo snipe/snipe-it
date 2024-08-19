@@ -281,6 +281,13 @@ abstract class Importer
         }
     }
 
+    protected function addErrorToBag($item, $field,  $error_message)
+    {
+        if ($this->errorCallback) {
+            call_user_func($this->errorCallback, $item, $field, [$field => [$error_message]]);
+        }
+    }
+
     /**
      * Finds the user matching given data, or creates a new one if there is no match.
      * This is NOT used by the User Import, only for Asset/Accessory/etc where
