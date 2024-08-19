@@ -393,7 +393,7 @@
       @endif
 
       @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center" style="padding-bottom: 10px;">
               <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=700x500&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-thumbnail" style="width:100%" alt="Map">
           </div>
       @endif
