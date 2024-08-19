@@ -532,7 +532,7 @@
                                                             <a href="{{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}" target="_blank">
                                                                 {{ $asset->present()->dynamicUrl($asset->model->manufacturer->warranty_lookup_url) }}
 
-                                                                <i class="fa fa-external-link" aria-hidden="true">
+                                                                <x-icon type="external-link" />
                                                                     <span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                             </a>
                                                         </li>

@@ -77,7 +77,7 @@
               <li>
                   <a href="#accessories" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-keyboard fa-2x" aria-hidden="true"></i>
+                        <x-icon type="accessories" class="fa-2x "/>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
@@ -89,7 +89,7 @@
               <li>
                   <a href="#consumables" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-tint fa-2x" aria-hidden="true"></i>
+                        <x-icon type="consumables" class="fa-2x "/>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
@@ -101,7 +101,7 @@
               <li>
                   <a href="#components" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-hdd fa-2x" aria-hidden="true"></i>
+                        <x-icon type="components" class="fa-2x "/>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
@@ -113,7 +113,7 @@
               <li>
                   <a href="#history" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-hdd fa-2x" aria-hidden="true"></i>
+                        <x-icon type="history" class="fa-2x "/>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.history') }}
