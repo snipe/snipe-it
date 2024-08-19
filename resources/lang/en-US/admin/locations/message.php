@@ -20,6 +20,11 @@ return array(
         'success' => 'Location updated successfully.'
     ),
 
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this location?',
         'error'   => 'There was an issue deleting the location. Please try again.',
