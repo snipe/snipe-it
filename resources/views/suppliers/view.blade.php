@@ -31,7 +31,7 @@
             <a href="#assets" data-toggle="tab">
 
                 <span class="hidden-lg hidden-md">
-                    <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                    <x-icon type="assets" class="fa-2x" />
                 </span>
                 <span class="hidden-xs hidden-sm">
                     {{ trans('general.assets') }}

@@ -34,7 +34,7 @@
               <li>
                   <a href="#assets" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                        <x-icon type="assets" class="fa-2x" />
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('admin/locations/message.current_location') }}
@@ -47,7 +47,8 @@
               <li>
                   <a href="#rtd_assets" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+
+                        <x-icon type="assets" class="fa-2x" />
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/hardware/form.default_location') }}
@@ -59,7 +60,7 @@
               <li>
                   <a href="#assets_assigned" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                        <x-icon type="assets" class="fa-2x" />
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/locations/message.assigned_assets') }}
