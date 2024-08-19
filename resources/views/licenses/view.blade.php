@@ -531,7 +531,7 @@
                 <td>
                   @if ($file->filename)
                     <a href="{{ route('show.licensefile', [$license->id, $file->id]) }}" class="btn btn-sm btn-default">
-                      <i class="fas fa-download" aria-hidden="true"></i>
+                      <x-icon type="download"/>
                       <span class="sr-only">{{ trans('general.download') }}</span>
                     </a>
 

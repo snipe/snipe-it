@@ -903,19 +903,13 @@
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
-                                                @if ($asset->eol_explicit)
-
+                                                @if ($asset->eol_explicit =='1')
                                                         <span data-tooltip="true"
                                                                 data-placement="top"
                                                                 data-title="Explicit EOL"
                                                                 title="Explicit EOL">
                                                                 <x-icon type="warning" class="text-orange" />
                                                         </span>
-
-                                                        <i class="fas fa-exclamation-triangle text-orange"
-
-                                                       >
-                                                    </i>
                                                 @endif
                                             </div>
                                         </div>
