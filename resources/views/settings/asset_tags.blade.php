@@ -32,8 +32,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-list-ol"></i> {{ trans('general.asset_tags') }}
-                    </h4>
+                        <x-icon type="asset-tags"/> {{ trans('general.asset_tags') }}
+                    </h2>
                 </div>
                 <div class="box-body">
 

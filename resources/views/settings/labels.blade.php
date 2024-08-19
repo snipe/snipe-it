@@ -27,11 +27,11 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-10">
 
-
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-tags"></i> {{ trans('admin/settings/general.labels') }}
+                        <x-icon type="labels"/>
+                        {{ trans('admin/settings/general.labels') }}
                     </h2>
                 </div>
                 <div class="box-body">

@@ -147,6 +147,32 @@ class IconHelper
                 return 'fa-solid fa-print';
             case 'checkin-and-delete':
                 return 'fa-solid fa-user-xmark';
+            case 'branding':
+                return 'fas fa-copyright';
+            case 'general-settings':
+                return 'fa-solid fa-list-check';
+            case 'groups':
+                return 'fa-solid fa-user-group';
+            case 'bell':
+                return 'fa-solid fa-bell';
+            case 'hashtag':
+                return 'fa-solid fa-hashtag';
+            case 'asset-tags':
+                return 'fas fa-list-ol';
+            case 'labels':
+                return 'fas fa-tags';
+            case 'ldap':
+                return 'fas fa-sitemap';
+            case 'google':
+                return 'fa-brands fa-google';
+            case 'saml':
+                return 'fas fa-sign-in-alt';
+            case 'backups':
+                return 'fas fa-file-archive';
+            case 'logins':
+                return 'fas fa-crosshairs';
+            case 'oauth':
+                return 'fas fa-user-secret';
 
         }
     }

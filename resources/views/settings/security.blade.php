@@ -27,7 +27,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-lock" aria-hidden="true"></i> {{ trans('admin/settings/general.security') }}
+                        <x-icon type="locked"/>
+                        {{ trans('admin/settings/general.security') }}
                     </h2>
                 </div>
                 <div class="box-body">

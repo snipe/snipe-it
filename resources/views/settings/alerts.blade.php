@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-bell"></i> {{ trans('admin/settings/general.alerts') }}
+                        <x-icon type="bell"/> {{ trans('admin/settings/general.alerts') }}
                     </h2>
                 </div>
                 <div class="box-body">

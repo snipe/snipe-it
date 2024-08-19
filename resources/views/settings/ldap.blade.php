@@ -60,7 +60,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-sitemap"></i> {{ trans('admin/settings/general.ldap_ad') }}
+                        <x-icon type="ldap"/>
+                        {{ trans('admin/settings/general.ldap_ad') }}
                     </h4>
                 </div>
                 <div class="box-body">

@@ -38,7 +38,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-sign-in-alt"></i> {{ trans('admin/settings/general.saml') }}
+                        <x-icon type="saml"/>
+                         {{ trans('admin/settings/general.saml') }}
                     </h2>
                 </div>
                 <div class="box-body">

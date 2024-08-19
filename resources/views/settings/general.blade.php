@@ -29,7 +29,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-wrench" aria-hidden="true"></i>
+                        <x-icon type="general-settings"/>
                         {{ trans('admin/settings/general.general_settings') }}
                     </h2>
                 </div>

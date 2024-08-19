@@ -32,7 +32,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-barcode" aria-hidden="true"></i> {{ trans('admin/settings/general.barcodes') }}
+                        <x-icon type="assets"/>
+                        {{ trans('admin/settings/general.barcodes') }}
                     </h2>
                 </div>
                 <div class="box-body">

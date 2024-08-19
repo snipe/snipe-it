@@ -27,7 +27,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa-brands fa-google"></i> {{ trans('admin/settings/general.google_login') }}
+                        <x-icon type="google"/>
+                        {{ trans('admin/settings/general.google_login') }}
                     </h2>
                 </div>
                 <div class="box-body">
