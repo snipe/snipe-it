@@ -33,6 +33,7 @@
                         <table class="table table-striped table-bordered" id="errors-table">
                             <thead>
                             <th>{{ trans('general.item') }}</th>
+                            <th>Field</th>
                             <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
@@ -41,8 +42,8 @@
                                     @foreach($error_bag as $field => $error_list)
                                         <tr>
                                             <td><b>{{ $key }}</b></td>
+                                            <td><b>{{ $field }}</b></td>
                                             <td>
-                                                <b>{{ $field }}:</b>
                                                 <span>{{ implode(", ",$error_list) }}</span>
                                                 <br />
                                             </td>

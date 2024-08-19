@@ -48,6 +48,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'auth:api',
+            \App\Http\Middleware\CheckLocale::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
