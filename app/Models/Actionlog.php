@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Carbon;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -17,7 +16,12 @@ use Illuminate\Support\Facades\Auth;
  */
 class Actionlog extends SnipeModel
 {
+    use CompanyableTrait;
     use HasFactory;
+
+    // This is to manually set the source (via setActionSource()) for determineActionSource()
+    protected ?string $source = null;
+    protected $with = ['admin'];
 
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
@@ -25,7 +29,17 @@ class Actionlog extends SnipeModel
 
     protected $table = 'action_logs';
     public $timestamps = true;
-    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type', 'stored_eula'];
+    protected $fillable = [
+        'created_at',
+        'item_type',
+        'user_id',
+        'item_id',
+        'action_type',
+        'note',
+        'target_id',
+        'target_type',
+        'stored_eula'
+    ];
 
     use Searchable;
 
@@ -34,7 +48,15 @@ class Actionlog extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['action_type', 'note', 'log_meta','user_id'];
+    protected $searchableAttributes = [
+        'action_type',
+        'note',
+        'log_meta',
+        'user_id',
+        'remote_ip',
+        'user_agent',
+        'action_source'
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -60,14 +82,14 @@ class Actionlog extends SnipeModel
         parent::boot();
         static::creating(function (self $actionlog) {
             // If the admin is a superadmin, let's see if the target instead has a company.
-            if (Auth::user() && Auth::user()->isSuperUser()) {
+            if (auth()->user() && auth()->user()->isSuperUser()) {
                 if ($actionlog->target) {
                     $actionlog->company_id = $actionlog->target->company_id;
                 } elseif ($actionlog->item) {
                     $actionlog->company_id = $actionlog->item->company_id;
                 }
-            } elseif (Auth::user() && Auth::user()->company) {
-                $actionlog->company_id = Auth::user()->company_id;
+            } elseif (auth()->user() && auth()->user()->company) {
+                $actionlog->company_id = auth()->user()->company_id;
             }
         });
     }
@@ -248,6 +270,9 @@ class Actionlog extends SnipeModel
     public function logaction($actiontype)
     {
         $this->action_type = $actiontype;
+        $this->remote_ip =  request()->ip();
+        $this->user_agent = request()->header('User-Agent');
+        $this->action_source = $this->determineActionSource();
 
         if ($this->save()) {
             return true;
@@ -311,5 +336,46 @@ class Actionlog extends SnipeModel
                  ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
+    }
+
+    /**
+     * Determines what the type of request is so we can log it to the action_log
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.3.0
+     * @return string
+     */
+    public function determineActionSource(): string
+    {
+        // This is a manually set source
+        if($this->source) {
+            return $this->source;
+        }
+
+        // This is an API call
+        if (((request()->header('content-type') && (request()->header('accept'))=='application/json'))
+            && (starts_with(request()->header('authorization'), 'Bearer '))) {
+            return 'api';
+        }
+
+       // This is probably NOT an API call
+        if (request()->filled('_token')) {
+            return 'gui';
+        }
+
+        // We're not sure, probably cli
+        return 'cli/unknown';
+
+    }
+
+    // Manually sets $this->source for determineActionSource()
+    public function setActionSource($source = null): void
+    {
+        $this->source = $source;
+    }
+
+    public function scopeOrderAdmin($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'action_logs.user_id', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

@@ -33,14 +33,25 @@
                     <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
                         {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'checkin_tag')) }}
                         <div class="col-md-9">
-                            <div class="input-group date col-md-5" data-date-format="yyyy-mm-dd">
-                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ Request::old('asset_tag') }}">
+                            <div class="input-group col-md-11 required">
+                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}" required>
 
                             </div>
                             {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>
-    
+
+                    <!-- Status -->
+                    <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
+                        <label for="status_id" class="col-md-3 control-label">
+                            {{ trans('admin/hardware/form.status') }}
+                        </label>
+                        <div class="col-md-7">
+                            {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
+                            {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        </div>
+                    </div>
+
                     <!-- Locations -->
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
@@ -81,6 +92,8 @@
                         <thead>
                         <tr>
                             <th>{{ trans('general.asset_tag') }}</th>
+                            <th>{{ trans('general.asset_model') }}</th>
+                            <th>{{ trans('general.model_no') }}</th>
                             <th>{{ trans('general.quickscan_checkin_status') }}</th>
                             <th></th>
                         </tr>
@@ -126,7 +139,13 @@
                 data : formData,
                 success : function (data) {
                     if (data.status == 'success') {
-                        $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+                        $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.payload.model + "</td><td>" + data.payload.model_number + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+
+                        @if ($user->enable_sounds)
+                        var audio = new Audio('{{ config('app.url') }}/sounds/success.mp3');
+                        audio.play()
+                        @endif
+
                         incrementOnSuccess();
                     } else {
                         handlecheckinFail(data);
@@ -146,17 +165,27 @@
         });
 
         function handlecheckinFail (data) {
-            if (data.payload.asset) {
-                var asset = data.payload.asset;
+
+            @if ($user->enable_sounds)
+            var audio = new Audio('{{ config('app.url') }}/sounds/error.mp3');
+            audio.play()
+            @endif
+
+            if (data.payload.asset_tag) {
+                var asset_tag = data.payload.asset_tag;
+                var model = data.payload.model;
+                var model_number = data.payload.model_number;
             } else {
-                var asset = '';
+                var asset_tag = '';
+                var model = '';
+                var model_number = '';
             }
             if (data.messages) {
                 var messages = data.messages;
             } else {
                 var messages = '';
             }
-            $('#checkedin tbody').prepend("<tr class='danger'><td>" + asset + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
+            $('#checkedin tbody').prepend("<tr class='danger'><td>" + asset_tag + "</td><td>" + model + "</td><td>" + model_number + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
         }
 
         function incrementOnSuccess() {

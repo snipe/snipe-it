@@ -70,7 +70,7 @@ class CheckoutAcceptance extends Model
      */
     public function isCheckedOutTo(User $user)
     {
-        return $this->assignedTo->is($user);
+        return $this->assignedTo?->is($user);
     }
 
     /**
@@ -80,12 +80,13 @@ class CheckoutAcceptance extends Model
      *
      * @param  string $signature_filename
      */
-    public function accept($signature_filename, $eula = null, $filename = null)
+    public function accept($signature_filename, $eula = null, $filename = null, $note = null)
     {
         $this->accepted_at = now();
         $this->signature_filename = $signature_filename;
         $this->stored_eula = $eula;
         $this->stored_eula_file = $filename;
+        $this->note = $note;
         $this->save();
 
         /**
@@ -99,9 +100,10 @@ class CheckoutAcceptance extends Model
      *
      * @param  string $signature_filename
      */
-    public function decline($signature_filename)
+    public function decline($signature_filename, $note = null)
     {
         $this->declined_at = now();
+        $this->note = $note;
         $this->signature_filename = $signature_filename;
         $this->save();
 

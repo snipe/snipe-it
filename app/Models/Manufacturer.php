@@ -22,9 +22,9 @@ class Manufacturer extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = [
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,id,deleted_at,NULL',
-        'url'   => 'url|nullable',
+        'url'   => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
         'support_email'   => 'email|nullable',
-        'support_url'   => 'nullable|url',
+        'support_url'   => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
         'warranty_lookup_url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://'
     ];
 
@@ -77,7 +77,8 @@ class Manufacturer extends SnipeModel
             && ($this->assets()->count() === 0)
             && ($this->licenses()->count() === 0)
             && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0);
+            && ($this->accessories()->count() === 0)
+            && ($this->deleted_at == '');
     }
 
     public function assets()

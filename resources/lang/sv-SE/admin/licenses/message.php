@@ -3,12 +3,13 @@
 return array(
 
     'does_not_exist' => 'Licensen finns inte eller så har du inte behörighet att se den.',
-    'user_does_not_exist' => 'Användare finns inte.',
+    'user_does_not_exist' => 'Användaren finns inte eller så har du inte behörighet att se dem.',
     'asset_does_not_exist' 	=> 'Den tillgång du försöker associera med denna licens existerar inte.',
     'owner_doesnt_match_asset' => 'Den tillgång du försöker associera med denna licens ägs av någon annan än den person som valts i den tilldelade till rullgardinsmenyn.',
     'assoc_users'	 => 'Licensen är nu utcheckad till en användare och kan inte raderas. Var god kontrollera licensen först och försök sedan radera igen.',
     'select_asset_or_person' => 'Du måste välja en tillgång eller en användare, men inte båda.',
     'not_found' => 'Licensen hittades inte',
+    'seats_available' => ':seat_count platser tillgängliga',
 
 
     'create' => array(
@@ -41,7 +42,10 @@ return array(
 
     'checkout' => array(
         'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
-        'success' => 'Licensen utcheckades framgångsrikt'
+        'success' => 'Licensen utcheckades framgångsrikt',
+        'not_enough_seats' => 'Inte tillräckligt med licensplatser tillgängliga för utcheckning',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

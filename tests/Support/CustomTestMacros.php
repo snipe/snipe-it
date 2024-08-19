@@ -74,5 +74,31 @@ trait CustomTestMacros
                 return $this;
             }
         );
+
+        TestResponse::macro(
+            'assertStatusMessageIs',
+            function (string $message) {
+                Assert::assertEquals(
+                    $message,
+                    $this['status'],
+                    "Response status message was not {$message}"
+                );
+
+                return $this;
+            }
+        );
+
+        TestResponse::macro(
+            'assertMessagesAre',
+            function (string $message) {
+                Assert::assertEquals(
+                    $message,
+                    $this['messages'],
+                    "Response messages was not {$message}"
+                );
+
+                return $this;
+            }
+        );
     }
 }

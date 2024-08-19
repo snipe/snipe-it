@@ -20,8 +20,6 @@
         <span id="searchclear" class="fas fa-times" aria-hidden="true"></span>
         <button type="submit" disabled style="display: none" aria-hidden="true"></button>
       </div>
-      <a href="{{ route('settings.index') }}" class="btn btn-primary pull-right" style="margin-left: 10px;">{{ trans('general.back') }}</a>
-
     </form>
 
 
@@ -59,7 +57,7 @@
     <div class="list clearfix">
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
               <a href="{{ route('settings.branding.index') }}" class="settings_button">
@@ -76,7 +74,7 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.general.index') }}" class="settings_button">
@@ -93,7 +91,7 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.security.index') }}" class="settings_button">
@@ -109,7 +107,7 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('groups.index') }}" class="settings_button">
@@ -126,7 +124,7 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.localization.index') }}" class="settings_button">
@@ -144,7 +142,7 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.alerts.index') }}" class="settings_button">
@@ -160,7 +158,7 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.slack.index') }}" class="settings_button">
@@ -175,7 +173,7 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.asset_tags.index') }}" class="settings_button">
@@ -190,7 +188,7 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.barcodes.index') }}" class="settings_button">
@@ -205,7 +203,7 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.labels.index') }}" class="settings_button">
@@ -221,7 +219,7 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.ldap.index') }}" class="settings_button">
@@ -236,7 +234,7 @@
         </div>
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
+        <div class="admin box box-default">
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.google.index') }}" class="settings_button">
@@ -251,7 +249,7 @@
       </div>
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
+        <div class="admin box box-default">
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.saml.index') }}" class="settings_button">
@@ -266,7 +264,7 @@
       </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.backups.index') }}" class="settings_button">
@@ -282,7 +280,7 @@
 
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
+        <div class="admin box box-default">
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.logins.index') }}" class="settings_button">
@@ -297,7 +295,7 @@
       </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
               <a href="{{ route('settings.oauth.index') }}" class="settings_button">
@@ -313,7 +311,7 @@
 
         @if (config('app.debug')=== true)
           <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-            <div class="box box-default">
+            <div class="admin box box-default">
               <div class="box-body text-center">
                 <h5>
                   <a href="{{ route('settings.phpinfo.index') }}" class="settings_button">
@@ -331,7 +329,7 @@
 
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-danger">
+      <div class="admin box box-danger">
         <div class="box-body text-center">
           <h5>
             <a href="{{ route('settings.purge.index') }}" class="link-danger">
@@ -448,8 +446,8 @@
         </div>
       </div> <!-- /box-body-->
     </div> <!--/box-default-->
-  </div><!--/col-md-8-->
-</div><!--/row-->
+
+
 
 
 

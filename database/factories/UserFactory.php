@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'jobtitle' => $this->faker->jobTitle(),
             'last_name' => $this->faker->lastName(),
-            'locale' => 'en',
+            'locale' => 'en-US',
             'notes' => 'Created by DB seeder',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'permissions' => '{}',
@@ -37,6 +37,16 @@ class UserFactory extends Factory
             'zip' => $this->faker->postcode(),
         ];
     }
+
+    public function deletedUser()
+    {
+        return $this->state(function () {
+            return [
+                'deleted_at' => $this->faker->dateTime(),
+            ];
+        });
+    }
+
 
     public function firstAdmin()
     {
@@ -298,5 +308,10 @@ class UserFactory extends Factory
                 ),
             ];
         });
+    }
+
+    public function deleted(): self
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
     }
 }

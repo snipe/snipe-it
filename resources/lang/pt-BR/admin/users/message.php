@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'O usuário já existe!',
     'user_not_found'            => 'O usuário não existe.',
     'user_login_required'       => 'O campo de login é requerido',
+    'user_has_no_assets_assigned' => 'Não há ativos atualmente atribuídos ao usuário.',
     'user_password_required'    => 'A senha é requerida.',
     'insufficient_permissions'  => 'Permissões Insuficientes.',
     'user_deleted_warning'      => 'Este usuário foi deletado. Você terá que restaurar este usuário para editá-los ou atribui-lós novos bens.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'Os usuários selecionados que são ativados e têm um endereço de e-mail válido receberam um link de redefinição de senha.',
     'password_reset_sent'       => 'Um link de redefinição de senha foi enviado para :email!',
     'user_has_no_email'         => 'Esse usuário não tem um endereço de e-mail no seu perfil.',
-    'user_has_no_assets_assigned'   => 'Este usuário não tem nenhum ativo atribuído',
+    'log_record_not_found'        => 'Não foi possível encontrar um histórico de registro correspondente para este usuário.',
 
 
     'success' => array(
@@ -36,10 +37,16 @@ return array(
         'update' => 'Houve um problema ao atualizar o usuário. Tente novamente.',
         'delete' => 'Houve um problema ao excluir o usuário. Tente novamente.',
         'delete_has_assets' => 'Este usuário tem itens atribuídos e não pôde ser excluído.',
+        'delete_has_assets_var' => 'This user still has an asset assigned. Please check it in first.|This user still has :count assets assigned. Please check their assets in first.',
+        'delete_has_licenses_var' => 'This user still has a license seats assigned. Please check it in first.|This user still has :count license seats assigned. Please check them in first.',
+        'delete_has_accessories_var' => 'This user still has an accessory assigned. Please check it in first.|This user still has :count accessories assigned. Please check their assets in first.',
+        'delete_has_locations_var' => 'This user still manages a location. Please select another manager first.|This user still manages :count locations. Please select another manager first.',
+        'delete_has_users_var' => 'This user still manages another user. Please select another manager for that user first.|This user still manages :count users. Please select another manager for them first.',
         'unsuspend' => 'Houve um problema ao remover a suspensão do usuário. Tente novamente.',
         'import'    => 'Houve um problema ao importar usuários. Tente novamente.',
         'asset_already_accepted' => 'Este ativo já foi aceito.',
         'accept_or_decline' => 'Você precisa aceita ou rejeitar esse ativo.',
+        'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
         'incorrect_user_accepted' => 'O ativo que tentou aceitar não foi solicitado por você.',
         'ldap_could_not_connect' => 'Não foi possível conectar ao servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
         'ldap_could_not_bind' => 'Não foi possível se ligar ao servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP: ',

@@ -2,10 +2,10 @@
 
 return [
 
-    'id'      => 'ID',
-    'months'   => 'Months',
-    'term'   => 'Term',
-    'title'      => 'Name ',
+    'id'      => 'លេខសម្គាល់',
+    'months'   => 'ខែ',
+    'term'   => 'រយៈពេល',
+    'title'      => 'ឈ្មោះ ',
     'depreciation_min' => 'Floor Value',
 
 ];

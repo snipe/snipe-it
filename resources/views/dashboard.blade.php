@@ -31,7 +31,7 @@
   <div class="col-lg-2 col-xs-6">
       <a href="{{ route('hardware.index') }}">
     <!-- small box -->
-    <div class="small-box bg-teal">
+    <div class="dashboard small-box bg-teal">
       <div class="inner">
         <h3>{{ number_format(\App\Models\Asset::AssetsForShow()->count()) }}</h3>
         <p>{{ strtolower(trans('general.assets')) }}</p>
@@ -49,7 +49,7 @@
   <div class="col-lg-2 col-xs-6">
      <a href="{{ route('licenses.index') }}">
     <!-- small box -->
-    <div class="small-box bg-maroon">
+    <div class="dashboard small-box bg-maroon">
       <div class="inner">
         <h3>{{ number_format($counts['license']) }}</h3>
         <p>{{ strtolower(trans('general.licenses')) }}</p>
@@ -68,7 +68,7 @@
   <div class="col-lg-2 col-xs-6">
     <!-- small box -->
       <a href="{{ route('accessories.index') }}">
-    <div class="small-box bg-orange">
+    <div class="dashboard small-box bg-orange">
       <div class="inner">
         <h3> {{ number_format($counts['accessory']) }}</h3>
         <p>{{ strtolower(trans('general.accessories')) }}</p>
@@ -87,7 +87,7 @@
     <!-- small box -->
 
       <a href="{{ route('consumables.index') }}">
-    <div class="small-box bg-purple">
+    <div class="dashboard small-box bg-purple">
       <div class="inner">
         <h3> {{ number_format($counts['consumable']) }}</h3>
         <p>{{ strtolower(trans('general.consumables')) }}</p>
@@ -104,7 +104,7 @@
   <div class="col-lg-2 col-xs-6">
     <a href="{{ route('components.index') }}">
    <!-- small box -->
-   <div class="small-box bg-yellow">
+   <div class="dashboard small-box bg-yellow">
      <div class="inner">
        <h3>{{ number_format($counts['component']) }}</h3>
        <p>{{ strtolower(trans('general.components')) }}</p>
@@ -122,7 +122,7 @@
  <div class="col-lg-2 col-xs-6">
     <a href="{{ route('users.index') }}">
    <!-- small box -->
-   <div class="small-box bg-light-blue">
+   <div class="dashboard small-box bg-light-blue">
      <div class="inner">
        <h3>{{ number_format($counts['user']) }}</h3>
        <p>{{ strtolower(trans('general.people')) }}</p>
@@ -473,7 +473,7 @@
             </div><!-- /.box-body -->
         </div> <!-- /.box -->
     </div>
-</div>
+
 
 @endif
 

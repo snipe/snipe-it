@@ -103,7 +103,7 @@ class RecryptFromMcrypt extends Command
                 $this->comment('INFO: No LDAP password found. Skipping... ');
             } else {
                 $decrypted_ldap_pword = $mcrypter->decrypt($settings->ldap_pword);
-                $settings->ldap_pword = \Crypt::encrypt($decrypted_ldap_pword);
+                $settings->ldap_pword = Crypt::encrypt($decrypted_ldap_pword);
                 $settings->save();
             }
             /** @var CustomField[] $custom_fields */
@@ -132,7 +132,7 @@ class RecryptFromMcrypt extends Command
                         // Try to decrypt the payload using the legacy app key
                         try {
                             $decrypted_field = $mcrypter->decrypt($asset->{$columnName});
-                            $asset->{$columnName} = \Crypt::encrypt($decrypted_field);
+                            $asset->{$columnName} = Crypt::encrypt($decrypted_field);
                             $this->comment($decrypted_field);
                         } catch (\Exception $e) {
                             $errors[] = ' - ERROR: Could not decrypt field ['.$encrypted_field->name.']: '.$e->getMessage();

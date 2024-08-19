@@ -4,6 +4,8 @@
 // window.jQuery = jQuery
 // window.$ = jQuery
 
+require('./bootstrap');
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
@@ -191,17 +193,12 @@ $(document).ready(function () {
      * Select2
      */
 
-     var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
-     if(!iOS)
-     {
-        // Vue collision: Avoid overriding a vue select2 instance
-        // by checking to see if the item has already been select2'd.
         $('select.select2:not(".select2-hidden-accessible")').each(function (i,obj) {
             {
                 $(obj).select2();
             }
         });
-     }
+
 
     // $('.datepicker').datepicker();
     // var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
@@ -222,6 +219,8 @@ $(document).ready(function () {
              */
             placeholder: '',
             allowClear: true,
+            language: $('meta[name="language"]').attr('content'),
+            dir: $('meta[name="language-direction"]').attr('content'),
             
             ajax: {
 
@@ -613,24 +612,27 @@ function htmlEntities(str) {
  *
  * 1. Set the class of your select2 elements to 'livewire-select2').
  * 2. Name your element to match a property in your Livewire component
- * 3. Add an attribute called 'data-livewire-component' that points to $_instance->id (via `{{ }}` if you're in a blade,
- *    or just $_instance->id if not).
+ * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
+ *    or just $this->getId() if not).
  */
-$(function () {
+document.addEventListener('livewire:init', () => {
     $('.livewire-select2').select2()
 
     $(document).on('select2:select', '.livewire-select2', function (event) {
         var target = $(event.target)
         if(!event.target.name || !target.data('livewire-component')) {
             console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!")
-            console.error("For data-livewire-component, you probably want to use $_instance->id or {{ $_instance->id }}, as appropriate")
+            console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate")
             return false
         }
-        window.livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value)
-    })
-
-    window.livewire.hook('message.processed', function (el,component) {
-        $('.livewire-select2').select2();
+        Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value)
     });
 
-})
+    Livewire.hook('request', ({succeed}) => {
+        succeed(() => {
+            queueMicrotask(() => {
+                $('.livewire-select2').select2();
+            });
+        });
+    });
+});

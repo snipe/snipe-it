@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'select_company' => 'Seleccionar compañía',
-    'about_companies' => 'Acerca de las empresas',
-    'about_companies_description' => '        Puedes utilizar empresas como un simple campo de información, o las puedes usar para restringir la visibilidad y disponibilidad de los activos a los usuarios que pertenezcan a una empresa en específico. Esto lo implementas habilitando la opción de Suporte Completo de Empresa en tu página de configuración de administrador.',
+    'select_company' => 'Seleccionar una compañía',
+    'about_companies' => 'Acerca de las compañías',
+    'about_companies_description' => '        Puede utilizar las compañías como un simple campo informativo, o puede utilizarlas para restringir la visibilidad y la disponibilidad de los activos a los usuarios con una compañía específica habilitando la opción "Soporte completo a múltiples compañías" en "Configuración de administración"',
 ];

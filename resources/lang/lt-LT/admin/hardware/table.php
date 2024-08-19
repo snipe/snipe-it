@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Inventorinis numeris',
+    'asset_model'       => 'Modelis',
+    'assigned_to'   => 'Išduota',
+    'book_value'  	=> 'Dabartinė reikšmė',
+    'change' 		=> 'Į/Iš',
+    'checkout_date' => 'Išdavimo data',
+    'checkoutto' 	=> 'Išduota',
+    'components_cost' => 'Bendra komponentų vertė',
+    'current_value' => 'Dabartinė vertė',
+    'diff' 			=> 'Skirtumas',
+    'dl_csv' 		=> 'Atsisiųsti CSV',
+    'eol' 			=> 'Nurašymo data',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Paskutinio paėmimo data',
+    'location' 		=> 'Vieta',
+    'purchase_cost'	=> 'Kaina',
+    'purchase_date'	=> 'Nupirkta',
+    'serial'   		=> 'Serijos numeris',
+    'status'   		=> 'Būsena',
+    'title'      	=> 'Turtas ',
+    'image'		    => 'Įrenginio atvaizdas',
+    'days_without_acceptance' => 'Dienų skaičius laukiant patvirtinimo',
+    'monthly_depreciation' => 'Mėnesinis nusidėvėjimas',
+    'assigned_to'    => 'Išduota',
+    'requesting_user' => 'Prašantis asmuo',
+    'requested_date' => 'Prašymo data',
+    'changed'       => 'Keista',
+    'icon' => 'Piktograma',
+];

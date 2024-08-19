@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Stavka je uspešno odvojena',
     'accessory_error'                   => 'Stavka je vezana za koplet',
     'accessory_deleted'                 => 'Brisanje je izvršeno uspešno',
-    'accessory_none'                    => 'Stavka ne postoji',
+    'accessory_none'                    => 'Pribor ne postoji',
     'checkout_success'                  => 'Razduženje je bilo uspešno',
     'checkout_error'                    => 'Greška u razduženju',
     'kit_none'                          => 'Komplet ne postoji',

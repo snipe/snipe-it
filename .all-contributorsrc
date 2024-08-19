@@ -1,11 +1,14 @@
 {
   "projectName": "snipe-it",
   "projectOwner": "snipe",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 110,
   "commit": true,
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "snipe",
@@ -2985,6 +2988,205 @@
       "name": "Abdelaziz Faki",
       "avatar_url": "https://avatars.githubusercontent.com/u/7429229?v=4",
       "profile": "https://azooz2014.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bilias",
+      "name": "bilias",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47315739?v=4",
+      "profile": "https://github.com/bilias",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "coach1988",
+      "name": "coach1988",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2565989?v=4",
+      "profile": "https://github.com/coach1988",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mauro-miatello",
+      "name": "MrM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11910225?v=4",
+      "profile": "https://github.com/mauro-miatello",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "koiakoia",
+      "name": "koiakoia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60405354?v=4",
+      "profile": "https://github.com/koiakoia",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mustafa-online",
+      "name": "Mustafa Online",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5323832?v=4",
+      "profile": "https://github.com/mustafa-online",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "franceslui",
+      "name": "franceslui",
+      "avatar_url": "https://avatars.githubusercontent.com/u/104601439?v=4",
+      "profile": "https://github.com/franceslui",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Q4kK",
+      "name": "Q4kK",
+      "avatar_url": "https://avatars.githubusercontent.com/u/125313163?v=4",
+      "profile": "https://github.com/Q4kK",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "squintfox",
+      "name": "squintfox",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55590532?v=4",
+      "profile": "https://github.com/squintfox",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jeffclay",
+      "name": "Jeff Clay",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1380084?v=4",
+      "profile": "https://github.com/jeffclay",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "PP-JN-RL",
+      "name": "Phil J R",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52716446?v=4",
+      "profile": "https://github.com/PP-JN-RL",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "chandanchowdhury",
+      "name": "i_virus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1496725?v=4",
+      "profile": "https://www.corelight.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gitgrimbo",
+      "name": "Paul Grime",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1020541?v=4",
+      "profile": "https://github.com/gitgrimbo",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "LeePorte",
+      "name": "Lee Porte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/922815?v=4",
+      "profile": "https://leeporte.co.uk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bryanlopezinc",
+      "name": "BRYAN ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23613427?v=4",
+      "profile": "https://github.com/bryanlopezinc",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "U-H-T",
+      "name": "U-H-T",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64061710?v=4",
+      "profile": "https://github.com/U-H-T",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Tyree",
+      "name": "Matt Tyree",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5395363?v=4",
+      "profile": "https://github.com/Tyree",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "FlorentDotMe",
+      "name": "Florent Bervas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/292081?v=4",
+      "profile": "http://spoontux.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dbakan",
+      "name": "Daniel Albertsen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4498077?v=4",
+      "profile": "https://ditscheri.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "r-xyz",
+      "name": "r-xyz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100710244?v=4",
+      "profile": "https://github.com/r-xyz",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "DrekiDegga",
+      "name": "Steven Mainor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47491036?v=4",
+      "profile": "https://github.com/DrekiDegga",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "arne-kroeger",
+      "name": "arne-kroeger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65785975?v=4",
+      "profile": "https://github.com/arne-kroeger",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Glukose1",
+      "name": "Glukose1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/167117705?v=4",
+      "profile": "https://github.com/Glukose1",
       "contributions": [
         "code"
       ]

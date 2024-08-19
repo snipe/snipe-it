@@ -8,6 +8,7 @@ return array(
     'user_exists'               => '使用者已存在！',
     'user_not_found'            => '找不到使用者。',
     'user_login_required'       => '登入欄位是必需的',
+    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => '密碼欄位是必需的',
     'insufficient_permissions'  => '權限不足',
     'user_deleted_warning'      => '此使用者已被刪除。您必須先還原此使用者才能進行編輯或分配新的資產。',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => '已向選定的已啟動且擁有有效電子郵件地址的使用者傳送了密碼重設連結。',
     'password_reset_sent'       => '密碼重置連結已傳送至 :email',
     'user_has_no_email'         => '該使用者的個人資料尚未填寫電子郵件。',
-    'user_has_no_assets_assigned'   => '該用戶未擁有已分配資產',
+    'log_record_not_found'        => 'A matching log record for this user could not be found.',
 
 
     'success' => array(
@@ -36,10 +37,16 @@ return array(
         'update' => '更新使用者失敗，請重試。',
         'delete' => '刪除使用者失敗，請重試。',
         'delete_has_assets' => '此使用者已分配物件，無法刪除。',
+        'delete_has_assets_var' => 'This user still has an asset assigned. Please check it in first.|This user still has :count assets assigned. Please check their assets in first.',
+        'delete_has_licenses_var' => 'This user still has a license seats assigned. Please check it in first.|This user still has :count license seats assigned. Please check them in first.',
+        'delete_has_accessories_var' => 'This user still has an accessory assigned. Please check it in first.|This user still has :count accessories assigned. Please check their assets in first.',
+        'delete_has_locations_var' => 'This user still manages a location. Please select another manager first.|This user still manages :count locations. Please select another manager first.',
+        'delete_has_users_var' => 'This user still manages another user. Please select another manager for that user first.|This user still manages :count users. Please select another manager for them first.',
         'unsuspend' => '解除停用使用者失敗，請重試。',
         'import'    => '匯入使用者失敗，請重試。',
         'asset_already_accepted' => '資產已被接受',
         'accept_or_decline' => '您必須選擇接受或拒絕該資產。',
+        'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
         'incorrect_user_accepted' => '您正嘗試接受的資產未分配給您',
         'ldap_could_not_connect' => '無法連接到 LDAP 伺服器，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_bind' => '無法綁定 LDAP 伺服器，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',

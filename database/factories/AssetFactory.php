@@ -4,11 +4,11 @@ namespace Database\Factories;
 
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -41,13 +41,14 @@ class AssetFactory extends Factory
             'notes'   => 'Created by DB seeder',
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
             'purchase_cost' => $this->faker->randomFloat(2, '299.99', '2999.99'),
-            'order_number' => $this->faker->numberBetween(1000000, 50000000),
+            'order_number' => (string) $this->faker->numberBetween(1000000, 50000000),
             'supplier_id' => Supplier::factory(),
             'requestable' => $this->faker->boolean(),
             'assigned_to' => null,
             'assigned_type' => null,
             'next_audit_date' => null,
             'last_checkout' => null,
+            'asset_eol_date' => null
         ];
     }
    
@@ -289,21 +290,22 @@ class AssetFactory extends Factory
         });
     }
 
-    public function assignedToUser()
+    public function assignedToUser(User $user = null)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($user) {
             return [
-                'assigned_to' => User::factory(),
+                'assigned_to' => $user->id ?? User::factory(),
                 'assigned_type' => User::class,
+                'last_checkout' => now()->subDay(),
             ];
         });
     }
 
-    public function assignedToLocation()
+    public function assignedToLocation(Location $location = null)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($location) {
             return [
-                'assigned_to' => Location::factory(),
+                'assigned_to' => $location->id ?? Location::factory(),
                 'assigned_type' => Location::class,
             ];
         });
@@ -351,5 +353,49 @@ class AssetFactory extends Factory
     public function nonrequestable()
     {
         return $this->state(['requestable' => false]);
+    }
+
+    public function noPurchaseOrEolDate()
+    {
+        return $this->afterCreating(function (Asset $asset) {
+            $asset->update([
+                'purchase_date' => null,
+                'asset_eol_date' => null
+            ]);
+        });
+    }
+
+  
+    public function hasEncryptedCustomField(CustomField $field = null)
+    {
+        return $this->state(function () use ($field) {
+            return [
+                'model_id' => AssetModel::factory()->hasEncryptedCustomField($field),
+            ];
+        });
+    }
+
+    public function hasMultipleCustomFields(array $fields = null): self
+    {
+        return $this->state(function () use ($fields) {
+            return [
+                'model_id' => AssetModel::factory()->hasMultipleCustomFields($fields),
+            ];
+        });
+    }
+
+    /**
+     * This allows bypassing model level validation if you want to purposefully
+     * create an asset in an invalid state. Validation is turned back on
+     * after the model is created via the factory.
+     * @return AssetFactory
+     */
+    public function canBeInvalidUponCreation()
+    {
+        return $this->afterMaking(function (Asset $asset) {
+            $asset->setValidating(false);
+        })->afterCreating(function (Asset $asset) {
+            $asset->setValidating(true);
+        });
     }
 }

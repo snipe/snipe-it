@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * This controller provide the healthz route  for
+ * This controller provide the health route  for
  * the Snipe-IT Asset Management application.
  *
- * @version    v1.0
+ * @version   v1.0
+ *
+ * @return \Illuminate\Http\JsonResponse
+
  */
 class HealthController extends BaseController
 {

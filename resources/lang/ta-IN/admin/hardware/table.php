@@ -1,0 +1,33 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'சொத்து டேக்',
+    'asset_model'       => 'மாதிரி',
+    'assigned_to'   => 'ஒதுக்கப்படும்',
+    'book_value'  	=> 'Current Value',
+    'change' 		=> 'உள்ளே வெளியே',
+    'checkout_date' => 'புதுப்பிப்பு தேதி',
+    'checkoutto' 	=> 'சரிபார்க்கப்பட்டது',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Current Value',
+    'diff' 			=> 'வேறுபாடு',
+    'dl_csv' 		=> 'CSV ஐ பதிவிறக்குக',
+    'eol' 			=> ', EOL',
+    'id'      		=> 'ஐடி',
+    'last_checkin_date' => 'Last Checkin Date',
+    'location' 		=> 'இருப்பிடம்',
+    'purchase_cost'	=> 'செலவு',
+    'purchase_date'	=> 'வாங்கப்பட்டது',
+    'serial'   		=> 'சீரியல்',
+    'status'   		=> 'நிலைமை',
+    'title'      	=> 'சொத்து',
+    'image'		    => 'சாதன படம்',
+    'days_without_acceptance' => 'ஏற்றுக்கொள்ளாத நாட்கள்',
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'ஒதுக்கப்படும்',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

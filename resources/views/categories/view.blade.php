@@ -3,8 +3,7 @@
 {{-- Page title --}}
 @section('title')
 
- {{ $category->name }}
- {{ ucwords($category_type_route) }}
+{{ trans('general.assets_in_var', ['name'=> $category->name, 'type' => trans('general.category')]) }}
 
 @parent
 @stop

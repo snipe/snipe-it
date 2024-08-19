@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LOCALE', 'en'),
+    'locale' =>  env('APP_LOCALE', 'en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +112,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => env('FALLBACK_APP_LOCALE', 'en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -199,7 +199,10 @@ return [
     |
     */
 
-    'enable_csp' => env('ENABLE_CSP', false),
+    'enable_csp' => env('ENABLE_CSP', true),
+
+    'additional_csp_urls' => env('ADDITIONAL_CSP_URLS', ''),
+
 
 
     /*
@@ -239,7 +242,7 @@ return [
     |
     */
 
-    'min_php' => '7.4.0',
+    'min_php' => '8.1.2',
 
 
     /*
@@ -277,7 +280,8 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
+//        Illuminate\Translation\TranslationServiceProvider::class, //replaced on next line
+        App\Providers\SnipeTranslationServiceProvider::class, //we REPLACE the default Laravel translator with our own
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
@@ -289,7 +293,6 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
-        Fideloper\Proxy\TrustedProxyServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
@@ -308,8 +311,10 @@ return [
         App\Providers\ValidationServiceProvider::class,
 
         /*
-        * Custom service provider
+        * Custom Service Providers...
         */
+        App\Providers\BladeServiceProvider::class,
+        App\Providers\LivewireServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
 
@@ -423,5 +428,5 @@ return [
   */
 
     'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
-
+    
 ];

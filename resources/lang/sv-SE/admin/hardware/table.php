@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modell',
+    'assigned_to'   => 'Tilldelad till',
     'book_value'  	=> 'Nuvarande värde',
     'change' 		=> 'In ut',
     'checkout_date' => 'Checkout Date',
@@ -14,7 +15,7 @@ return [
     'dl_csv' 		=> 'Hämta CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'last_checkin_date' => 'Last Checkin Date',
+    'last_checkin_date' => 'Incheckningsdatum',
     'location' 		=> 'Plats',
     'purchase_cost'	=> 'Kosta',
     'purchase_date'	=> 'Köpt',

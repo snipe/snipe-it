@@ -55,6 +55,7 @@ class AssetPresenter extends Presenter
                 'field' => 'asset_tag',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => false,
                 'title' => trans('admin/hardware/table.asset_tag'),
                 'visible' => true,
                 'formatter' => 'hardwareLinkFormatter',
@@ -196,6 +197,14 @@ class AssetPresenter extends Presenter
                 'title' => trans('admin/hardware/form.warranty_expires'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
+                'field' => 'requestable',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/general.requestable'),
+                'formatter' => 'trueFalseFormatter',
+
+            ], [
                 'field' => 'notes',
                 'searchable' => true,
                 'sortable' => true,
@@ -243,6 +252,13 @@ class AssetPresenter extends Presenter
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('admin/hardware/table.checkout_date'),
+                'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'last_checkin',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/table.last_checkin_date'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'expected_checkin',
@@ -308,7 +324,7 @@ class AssetPresenter extends Presenter
             'field' => 'checkincheckout',
             'searchable' => false,
             'sortable' => false,
-            'switchable' => true,
+            'switchable' => false,
             'title' => trans('general.checkin').'/'.trans('general.checkout'),
             'visible' => true,
             'formatter' => 'hardwareInOutFormatter',
@@ -540,13 +556,12 @@ class AssetPresenter extends Presenter
     }
 
     /**
-     * Used to take user created warranty URL and dynamically fill in the needed values per asset
+     * Used to take user created URL and dynamically fill in the needed values per asset
      * @return string
      */
-    public function dynamicWarrantyUrl()
+    public function dynamicUrl($dynamic_url)
     {
-        $warranty_lookup_url = $this->model->model->manufacturer->warranty_lookup_url;
-        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $warranty_lookup_url));
+        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $dynamic_url));
         $url = (str_replace('{SERIAL}', urlencode($this->model->serial), $url));
         $url = (str_replace('{MODEL_NAME}', urlencode($this->model->model->name), $url));
         $url = (str_replace('{MODEL_NUMBER}', urlencode($this->model->model->model_number), $url));

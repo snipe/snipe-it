@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Informacije o licenci',
     'license_seats'  			=> 'Broj licenciranih mesta',
     'seat'  					=> 'Mesto',
+    'seat_count'  				=> 'Mesta :count',
     'seats'  					=> 'Mesta',
     'software_licenses'  		=> 'Licence za softver',
     'user'  					=> 'Korisnik',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Razduži sva mesta',
-                'modal'             => 'Ova radnja će razdužiti jedno mesto. | Ova radnja će razdužiti svih :checkedout_seats_count mesta za ovu licencu.',
+                'modal'             => 'Ova radnja će razdužiti jedno mesto. | Ova radnja će razdužiti svih :checkedout_seats_count mesta ove licence.',
                 'enabled_tooltip'   => 'Razduži SVA mesta za ovu licencu od korisnika i imovine',
                 'disabled_tooltip'  => 'Ovo je onemogućeno jer trenutno nema zaduženih mesta',
                 'disabled_tooltip_reassignable'  => 'Ovo je onemogućeno jer Licenca nije premestiva',
                 'success'           => 'Licenca je uspešno razdužena! | Sve licence su uspešno razdužene!',
-                'log_msg'           => 'Razduženo grupnim razduživanjem u ekranu licenci',
+                'log_msg'           => 'Razduži putem grupnog razduživanja u interfejsu licence',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Ostalo je samo :remaining_count slobodnih mesta za ovu licencu sa minimalnom količinom :min_amt. Možda bi ste želeli da razmotrite nabavku nove količine.',
+    'below_threshold_short' => 'Ovaj predmet je ispod minimuma potrebne količine.',
 );

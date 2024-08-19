@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Sim, restaurar. Eu reconheço que isso irá substituir quaisquer dados existentes atualmente na base de dados. Isto também irá desligar todos os utilizadores existentes (incluindo você).',
         'restore_confirm'       => 'Tem a certeza que deseja restaurar a sua base de dados a partir de :filename?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please login again.'
+    ],
     'purge' => [
         'error'     => 'Ocorreu um erro ao eliminar os dados. ',
         'validation_failed'     => 'A confirmação para limpar os dados correu mal. Digite a palavra "Apagar" na caixa de confirmação.',
@@ -35,12 +38,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'A enviar mensagem :app de teste...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'Sua integração com :webhook_name funciona!',
         'success_pt1' => 'Sucesso! Verifique o ',
         'success_pt2' => ' canal para a sua mensagem de teste, e certifique-se de clicar em SALVAR abaixo para guardar as suas configurações.',
         '500' => '500 Erro de Servidor.',
         'error' => 'Algo deu erro. :app respondeu com: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'ERRO: 301/302 :endpoint retorna um redirecionamento. Por razões de segurança, não seguimos redirecionamentos. Por favor, use o ponto de extremidade atual.',
         'error_misc' => 'Algo deu erro. :( ',
     ]
 ];

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This class controls all actions related to Components for
@@ -85,8 +86,10 @@ class ComponentsController extends Controller
 
         $component = $request->handleImages($component);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($component->save()) {
-            return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success', trans('admin/components/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
@@ -159,8 +162,10 @@ class ComponentsController extends Controller
 
         $component = $request->handleImages($component);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
+
         if ($component->save()) {
-            return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success', trans('admin/components/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
@@ -188,7 +193,7 @@ class ComponentsController extends Controller
             try {
                 Storage::disk('public')->delete('components/'.$component->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 

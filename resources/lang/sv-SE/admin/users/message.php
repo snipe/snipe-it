@@ -8,6 +8,7 @@ return array(
     'user_exists'               => 'Användaren existerar redan!',
     'user_not_found'            => 'Användaren finns inte.',
     'user_login_required'       => 'Inloggningsfältet krävs',
+    'user_has_no_assets_assigned' => 'Inga tillgångar som för närvarande tilldelats användaren.',
     'user_password_required'    => 'Lösenordet krävs.',
     'insufficient_permissions'  => 'Otillräckliga tillstånd.',
     'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera dem eller tilldela dem nya tillgångar.',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
     'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
     'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
-    'user_has_no_assets_assigned'   => 'Den här användaren har inga tilldelade tillgångar',
+    'log_record_not_found'        => 'Det gick inte att hitta en matchande loggpost för den här användaren.',
 
 
     'success' => array(
@@ -36,10 +37,16 @@ return array(
         'update' => 'Det gick inte att uppdatera användaren. Var god försök igen.',
         'delete' => 'Det gick inte att ta bort användaren. Var god försök igen.',
         'delete_has_assets' => 'Den här användaren har objekt tilldelade och kunde inte raderas.',
+        'delete_has_assets_var' => 'This user still has an asset assigned. Please check it in first.|This user still has :count assets assigned. Please check their assets in first.',
+        'delete_has_licenses_var' => 'This user still has a license seats assigned. Please check it in first.|This user still has :count license seats assigned. Please check them in first.',
+        'delete_has_accessories_var' => 'This user still has an accessory assigned. Please check it in first.|This user still has :count accessories assigned. Please check their assets in first.',
+        'delete_has_locations_var' => 'This user still manages a location. Please select another manager first.|This user still manages :count locations. Please select another manager first.',
+        'delete_has_users_var' => 'This user still manages another user. Please select another manager for that user first.|This user still manages :count users. Please select another manager for them first.',
         'unsuspend' => 'Det uppstod ett problem som avbröt användaren. Var god försök igen.',
         'import'    => 'Det gick inte att importera användare. Var god försök igen.',
         'asset_already_accepted' => 'Denna tillgång har redan godkänts.',
         'accept_or_decline' => 'Du måste antingen godkänna eller neka den här tillgången.',
+        'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
         'incorrect_user_accepted' => 'Den tillgång du försökte acceptera har inte checkats ut till dig.',
         'ldap_could_not_connect' => 'Det gick inte att ansluta till LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'ldap_could_not_bind' => 'Kunde inte binda till LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',

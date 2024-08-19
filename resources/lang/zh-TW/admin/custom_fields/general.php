@@ -35,6 +35,7 @@ return [
     'create_field_title' => '建立新的客製化欄位',
     'value_encrypted'      	        => '此欄位的值已被加密。只有管理員能夠查看原始資料。',
     'show_in_email'     => '在發送給用戶的借出通知信中包含此欄位的值？加密的欄位不能包含在電子郵件中。',
+    'show_in_email_short'     => '包含在電子郵件中。',
     'help_text' => '幫助內文',
     'help_text_description' => '這是一段可選的文字，它將在編輯資產時顯示在表單元素下方，以對欄位提供上下文。',
     'about_custom_fields_title' => '關於客製化欄位',
@@ -53,5 +54,8 @@ return [
     'add_to_preexisting_fieldsets' => '新增到任何現有的欄位群組',
     'show_in_listview' => '預設在列表檢視中顯示。授權使用者仍然可以透過欄位選擇器顯示/隱藏。',
     'show_in_listview_short' => '在列表中顯示',
+    'show_in_requestable_list_short' => '顯示在可申請資產列表中',
+    'show_in_requestable_list' => '在可申請資產列表中顯示值。不顯示已加密欄位',
+    'encrypted_options' => '該欄位已加密，因此某些顯示選項將無法使用',
 
 ];

@@ -4,34 +4,34 @@ namespace App\Http\Controllers\Accessories;
 
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\Accessory;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Accessory\HttpFoundation\JsonResponse;
-use enshrined\svgSanitize\Sanitizer;
+use Illuminate\Support\Facades\Log;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AccessoriesFilesController extends Controller
 {
     /**
      * Validates and stores files associated with a accessory.
      *
-     * @todo Switch to using the AssetFileRequest form request validator.
+     * @param UploadFileRequest $request
+     * @param int $accessoryId
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param AssetFileRequest $request
-     * @param int $accessoryId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @todo Switch to using the AssetFileRequest form request validator.
      */
-    public function store(AssetFileRequest $request, $accessoryId = null)
+    public function store(UploadFileRequest $request, $accessoryId = null) : RedirectResponse
     {
 
         if (config('app.lock_passwords')) {
             return redirect()->route('accessories.show', ['accessory'=>$accessoryId])->with('error', trans('general.feature_disabled'));
         }
-
 
         $accessory = Accessory::find($accessoryId);
 
@@ -45,30 +45,7 @@ class AccessoriesFilesController extends Controller
 
                 foreach ($request->file('file') as $file) {
 
-                    $extension = $file->getClientOriginalExtension();
-                    $file_name = 'accessory-'.$accessory->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-
-                    // Check for SVG and sanitize it
-                    if ($extension == 'svg') {
-                        \Log::debug('This is an SVG');
-                        \Log::debug($file_name);
-
-                        $sanitizer = new Sanitizer();
-                        $dirtySVG = file_get_contents($file->getRealPath());
-                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                        try {
-                            Storage::put('private_uploads/accessories/'.$file_name, $cleanSVG);
-                        } catch (\Exception $e) {
-                            \Log::debug('Upload no workie :( ');
-                            \Log::debug($e);
-                        }
-
-                    } else {
-                        Storage::put('private_uploads/accessories/'.$file_name, file_get_contents($file));
-                    }
-
+                    $file_name = $request->handleFile('private_uploads/accessories/', 'accessory-'.$accessory->id, $file);
                     //Log the upload to the log
                     $accessory->logUpload($file_name, e($request->input('notes')));
                 }
@@ -92,10 +69,8 @@ class AccessoriesFilesController extends Controller
      * @since [v1.0]
      * @param int $accessoryId
      * @param int $fileId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($accessoryId = null, $fileId = null)
+    public function destroy($accessoryId = null, $fileId = null) : RedirectResponse
     {
         $accessory = Accessory::find($accessoryId);
 
@@ -109,7 +84,7 @@ class AccessoriesFilesController extends Controller
                 try {
                     Storage::delete('accessories/'.$log->filename);
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                 }
             }
 
@@ -130,13 +105,11 @@ class AccessoriesFilesController extends Controller
      * @since [v1.4]
      * @param int $accessoryId
      * @param int $fileId
-     * @return \Symfony\Accessory\HttpFoundation\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($accessoryId = null, $fileId = null, $download = true)
+    public function show($accessoryId = null, $fileId = null, $download = true) : View | RedirectResponse | Response | BinaryFileResponse | StreamedResponse
     {
 
-        \Log::debug('Private filesystem is: '.config('filesystems.default'));
+        Log::debug('Private filesystem is: '.config('filesystems.default'));
         $accessory = Accessory::find($accessoryId);
 
 
@@ -153,8 +126,8 @@ class AccessoriesFilesController extends Controller
             $file = 'private_uploads/accessories/'.$log->filename;
 
             if (Storage::missing($file)) {
-                \Log::debug('FILE DOES NOT EXISTS for '.$file);
-                \Log::debug('URL should be '.Storage::url($file));
+                Log::debug('FILE DOES NOT EXISTS for '.$file);
+                Log::debug('URL should be '.Storage::url($file));
 
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');

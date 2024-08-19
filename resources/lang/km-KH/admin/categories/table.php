@@ -2,9 +2,9 @@
 
 return array(
 	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
+    'id'      					=> 'លេខសម្គាល់',
     'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'require_acceptance'      	=> 'ការទទួលយក',
+    'title'      				=> 'ឈ្មោះប្រភេទទ្រព្យសកម្ម',
 
 );

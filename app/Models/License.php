@@ -6,7 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -50,9 +50,10 @@ class License extends Depreciable
         'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
         'purchase_cost'=> 'numeric|nullable|gte:0',
-        'purchase_date'   => 'date_format:Y-m-d|nullable|max:10',
+        'purchase_date'   => 'date_format:Y-m-d|nullable|max:10|required_with:depreciation_id',
         'expiration_date'   => 'date_format:Y-m-d|nullable|max:10',
         'termination_date'   => 'date_format:Y-m-d|nullable|max:10',
+        'min_amt'   => 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -80,7 +81,9 @@ class License extends Depreciable
         'serial',
         'supplier_id',
         'termination_date',
+        'free_seat_count',
         'user_id',
+        'min_amt',
     ];
 
     use Searchable;
@@ -112,6 +115,7 @@ class License extends Depreciable
         'category'     => ['name'],
         'depreciation' => ['name'],
     ];
+    protected $appends = ['free_seat_count'];
 
     /**
      * Update seat counts when the license is updated
@@ -277,6 +281,16 @@ class License extends Depreciable
             $value = (new Carbon($value))->toDateString();
         }
         $this->attributes['termination_date'] = $value;
+    }
+    /**
+     * Sets free_seat_count attribute
+     *
+     * @author G. Martinez
+     * @since [v6.3]
+     * @return mixed
+     */
+    public function getFreeSeatCountAttribute(){
+        return $this->attributes['free_seat_count'] = $this->remaincount();
     }
 
     /**
@@ -500,7 +514,13 @@ class License extends Depreciable
             ->whereNull('deleted_at')
             ->count();
     }
-
+    /**
+     * Returns the available seats remaining
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return int
+     */
 
     /**
      * Returns the number of total available seats for this license
@@ -577,7 +597,7 @@ class License extends Depreciable
         $taken = $this->assigned_seats_count;
         $diff = ($total - $taken);
 
-        return $diff;
+        return (int) $diff;
     }
 
     /**
@@ -669,7 +689,7 @@ class License extends Depreciable
 
         return self::whereNotNull('expiration_date')
             ->whereNull('deleted_at')
-            ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
+            ->whereRaw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) ')
             ->where('expiration_date', '>', date('Y-m-d'))
             ->orderBy('expiration_date', 'ASC')
             ->get();
@@ -715,5 +735,18 @@ class License extends Depreciable
     {
         return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->select('licenses.*')
             ->orderBy('companies.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on the user that created it
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as users_sort', 'licenses.user_id', '=', 'users_sort.id')->select('licenses.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
     }
 }

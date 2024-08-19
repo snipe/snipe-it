@@ -8,6 +8,7 @@ return array(
     'user_exists'               => '用户已经存在!',
     'user_not_found'            => '用户不存在。',
     'user_login_required'       => '登陆字段是必须的',
+    'user_has_no_assets_assigned' => '目前没有分配给用户的资产。',
     'user_password_required'    => '密码为必填项',
     'insufficient_permissions'  => '权限不足',
     'user_deleted_warning'      => '用户已经被删除，你需要恢复这个用户编辑他或者重新指定新资产。',
@@ -15,7 +16,7 @@ return array(
     'password_resets_sent'      => '被选中的已激活并拥有有效电子邮件地址的用户已经收到了一个密码重置链接。',
     'password_reset_sent'       => '密码重置链接已发送至 :email!',
     'user_has_no_email'         => '此用户的个人资料中没有电子邮件地址。',
-    'user_has_no_assets_assigned'   => '此用户没有分配任何资产',
+    'log_record_not_found'        => '找不到该用户匹配的日志记录。',
 
 
     'success' => array(
@@ -36,10 +37,16 @@ return array(
         'update' => '更新用户过程中出现了一些问题，请重试。',
         'delete' => '删除用户过程中出现了一点儿问题，请重试。',
         'delete_has_assets' => '此用户具有分配的项目，无法删除。',
+        'delete_has_assets_var' => '此用户仍然有分配的资产，请先归还。|此用户仍然有分配 :count 个资产，请先归还资产。',
+        'delete_has_licenses_var' => '此用户仍然有一个已分配的许可证席位，请先归还。|此用户仍然已经分配了 :count 个许可证席位。请先归还它们。',
+        'delete_has_accessories_var' => '此用户仍分配有一件配件，请先归还。|此用户仍然分配又 :count 件配件，请先归还。',
+        'delete_has_locations_var' => '此用户仍然管理着一个位置，请先选择另一个管理员。 |此用户仍然管理着 :count 个位置。请先选择另一个管理员。',
+        'delete_has_users_var' => '此用户仍在管理另一个用户，请先为该用户选择另一个管理员。 |此用户仍然管理着 :count 个用户。请先为他们选择另一个管理员。',
         'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。',
         'import'    => '导入用户出现问题。请再试一次。',
         'asset_already_accepted' => '资产已被接受',
         'accept_or_decline' => '你必须选择接受或者拒绝该资产。',
+        'cannot_delete_yourself' => '如果您删除自己，我们会觉得很难过，请您重新考虑。',
         'incorrect_user_accepted' => '您正尝试接受的资产未被分配与您',
         'ldap_could_not_connect' => '无法连接到LDAP服务器，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_bind' => '无法绑定到LDAP服务器，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息: ',

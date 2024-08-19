@@ -1,10 +1,17 @@
 <?php
 
 return [
-    'info'   => 'Select the options you want for your asset report.',
-    'deleted_user' => 'Deleted user',
-    'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request'
+    'info'   => 'ជ្រើសរើសជម្រើសដែលអ្នកចង់បានសម្រាប់របាយការណ៍ទ្រព្យសកម្មរបស់អ្នក។',
+    'deleted_user' => 'អ្នកប្រើប្រាស់ដែលបានលុប',
+    'send_reminder' => 'ផ្ញើការរំលឹក',
+    'reminder_sent' => 'បានផ្ញើការរំលឹក',
+    'acceptance_deleted' => 'បានលុបសំណើទទួលយក',
+    'acceptance_request' => 'សំណើទទួលយក',
+    'custom_export' => [
+        'user_address' => 'អាសយដ្ឋានអ្នកប្រើប្រាស់',
+        'user_city' => 'ទីក្រុងអ្នកប្រើប្រាស់',
+        'user_state' => 'រដ្ឋអ្នកប្រើប្រាស់',
+        'user_country' => 'ប្រទេសអ្នកប្រើប្រាស់',
+        'user_zip' => 'លេខ​កូដ​អ្នក​ប្រើ'
+    ]
 ];

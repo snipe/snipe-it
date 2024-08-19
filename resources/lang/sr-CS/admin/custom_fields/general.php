@@ -34,7 +34,8 @@ return [
     'create_field'            => 'Novo prilagodjeno polje',
     'create_field_title' => 'Kreirajte prilagođeno polje',
     'value_encrypted'      	        => 'Vrednost ovog polja je šifrovana u bazi podataka. Samo administratori će moći da vide dešifrovanu vrednost',
-    'show_in_email'     => 'Želite li da uključite vrednost ovog polja u e-poruke za plaćanje koje se šalju korisniku? Šifrovana polja se ne mogu uključiti u e-poruke.',
+    'show_in_email'     => 'Uvrsti vrednost ovog polja u e-porukama zaduženja koja se šalju korisnicima? Enkriptovana polja se ne mogu uvrstiti u e-porukama',
+    'show_in_email_short'     => 'Uvrsti u e-poruke.',
     'help_text' => 'Pomoćni tekst',
     'help_text_description' => 'Ovo je opcioni tekst koji će se pojaviti ispod elemenata obrasca tokom uređivanja elementa da bi se pružio kontekst na polju.',
     'about_custom_fields_title' => 'O prilagodljivom polju',
@@ -51,7 +52,10 @@ return [
     'display_in_user_view_table' => 'Vidljivo korisniku',
     'auto_add_to_fieldsets' => 'Automatski dodati ovo svakoj novoj grupi polja',
     'add_to_preexisting_fieldsets' => 'Dodaj svim postojećim grupama polja',
-    'show_in_listview' => 'Prikaži podrazumevano u novim listama. Potvrđeni korisnici će i dalje moći da je prikažu i sakriju putem izbornika kolona.',
+    'show_in_listview' => 'Prikaži podrazumevano u tabelarnim prikazima. Autorizovani korisnici će i dalje moći da prikažu/sakriju putem izbornika kolona',
     'show_in_listview_short' => 'Prikaži u listama',
+    'show_in_requestable_list_short' => 'Prikaži u spisku imovine koja se može zatražiti',
+    'show_in_requestable_list' => 'Prikaži vrednost u spisku imovine koja se može zatražiti. Enkriptovana polja neće biti prikazana',
+    'encrypted_options' => 'Ovo polje je enkriptovano, zato neke opcije prikaza neće biti dostupne.',
 
 ];

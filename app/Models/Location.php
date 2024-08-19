@@ -8,7 +8,7 @@ use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Models\User;
 use App\Presenters\Presentable;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -95,7 +95,10 @@ class Location extends SnipeModel
 
 
     /**
-     * Determine whether or not this location can be deleted
+     * Determine whether or not this location can be deleted.
+     *
+     * This method requires the eager loading of the relationships in order to determine whether
+     * it can be deleted. It's tempting to load those here, but that increases the query load considerably.
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v3.0]
@@ -103,10 +106,13 @@ class Location extends SnipeModel
      */
     public function isDeletable()
     {
+
         return Gate::allows('delete', $this)
-                && ($this->assignedAssets()->count() === 0)
-                && ($this->assets()->count() === 0)
-                && ($this->users()->count() === 0);
+                && ($this->assets_count == 0)
+                && ($this->assigned_assets_count == 0)
+                && ($this->children_count == 0)
+                && ($this->accessories_count == 0)
+                && ($this->users_count == 0);
     }
 
     /**

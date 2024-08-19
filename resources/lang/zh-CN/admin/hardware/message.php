@@ -2,21 +2,27 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告: </strong>该资产目前已经被标记为不可被分配，如果该资产状态已经改变，请刷新。',
+    'undeployable' 		=> '<strong>警告： </strong> 此资产已被标记为当前不可借出。如果此状态已经改变，请更新资产状态。',
     'does_not_exist' 	=> '资产不存在',
+    'does_not_exist_var'=> '找不到标签为 :asset_tag 的资产',
+    'no_tag' 	        => '未提供资产标签。',
     'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
+    'warning_audit_date_mismatch' 	=> '此资产的下一个盘点日期 (:next_audit_date) 早于上一个盘点日期 (:last_audit_date)。请更新下一个盘点日期。',
 
     'create' => [
         'error'   		=> '资产创建失败，请重试。:(',
         'success' 		=> '资产创建成功。 :)',
+        'success_linked' => '带有 :tag 标签的资产已成功创建。<strong><a href=":link" style="color: white;">点击此处查看</a></strong>。',
     ],
 
     'update' => [
         'error'   			=> '资产更新失败，请重试。',
         'success' 			=> '资产更新成功。',
+        'encrypted_warning' => '资产更新成功，但加密的自定义字段不是由于权限',
         'nothing_updated'	=>  '一个也没有选，所以什么也不会更新。',
         'no_assets_selected'  =>  '没有选择任何资产，因此没有更新任何内容。',
+        'assets_do_not_exist_or_are_invalid' => '无法更新选定的资产。',
     ],
 
     'restore' => [
@@ -27,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> '尝试一下',
+        'error'   		=> '资产盘点失败：:error ',
         'success' 		=> '资产审计已成功记录。',
     ],
 
@@ -45,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => '流程导入',
         'error'                 => '某些字段没有正确导入',
         'errorDetail'           => '以下项由于错误未被导入',
         'success'               => '您的文件已被导入',

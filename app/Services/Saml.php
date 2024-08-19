@@ -12,6 +12,7 @@ use OneLogin\Saml2\IdPMetadataParser as OneLogin_Saml2_IdPMetadataParser;
 use OneLogin\Saml2\Settings as OneLogin_Saml2_Settings;
 use OneLogin\Saml2\Utils as OneLogin_Saml2_Utils;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Log;
 
 /**
  * SAML Singleton that builds the settings and loads the onelogin/php-saml library.
@@ -134,7 +135,7 @@ class Saml
             $this->_auth = new OneLogin_Saml2_Auth($this->_settings);
         } catch (Exception $e) {
             if ( $this->isEnabled() ) { // $this->loadSettings() initializes this to true if SAML is enabled by settings.
-                \Log::warning('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: '.  $e->getMessage());
+                Log::warning('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: '.  $e->getMessage());
             }
             $this->_enabled = false;
         }
@@ -162,6 +163,7 @@ class Saml
             OneLogin_Saml2_Utils::setProxyVars(request()->isFromTrustedProxy());
 
             data_set($settings, 'sp.entityId', config('app.url'));
+            data_set($settings, 'baseurl', config('app.url') . '/saml');
             data_set($settings, 'sp.assertionConsumerService.url', route('saml.acs'));
             data_set($settings, 'sp.singleLogoutService.url', route('saml.sls'));
             data_set($settings, 'sp.x509cert', $setting->saml_sp_x509cert);
@@ -335,12 +337,12 @@ class Saml
     /**
      * Get a setting.
      *
-     * @author Johnson Yi <jyi.dev@outlook.com>
-     *
      * @param string|array|int $key
      * @param mixed $default
      *
-     * @return void
+     * @return mixed
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     *
      */
     public function getSetting($key, $default = null)
     {
@@ -394,6 +396,8 @@ class Saml
             'nameIdSPNameQualifier' => $auth->getNameIdSPNameQualifier(),
             'sessionIndex' => $auth->getSessionIndex(),
             'sessionExpiration' => $auth->getSessionExpiration(),
+            'nonce' => $auth->getLastAssertionId(),
+            'assertionNotOnOrAfter' => $auth->getLastAssertionNotOnOrAfter(),
         ];
     }
 

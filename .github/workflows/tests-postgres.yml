@@ -1,0 +1,77 @@
+name: Tests in Postgres
+
+on: workflow_dispatch
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      postgresql:
+        image: postgres
+        env:
+          POSTGRES_DB: snipeit
+          POSTGRES_USER: snipeit
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd=pg_isready --health-interval=10s --health-timeout=5s --health-retries=3
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.1"
+          - "8.2"
+          - "8.3"
+
+    name: PHP ${{ matrix.php-version }}
+
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          coverage: none
+
+      - uses: actions/checkout@v4
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Copy .env
+        run: |
+          cp -v .env.testing.example .env
+          cp -v .env.testing.example .env.testing
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Setup Laravel
+        env:
+          DB_CONNECTION: pgsql
+          DB_DATABASE: snipeit
+          DB_PORT: ${{ job.services.postgresql.ports[5432] }}
+          DB_USERNAME: snipeit
+          DB_PASSWORD: password
+        run: |
+          php artisan key:generate
+          php artisan migrate --force
+          php artisan passport:install
+          chmod -R 777 storage bootstrap/cache
+
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        env:
+          DB_CONNECTION: pgsql
+          DB_DATABASE: snipeit
+          DB_PORT: ${{ job.services.postgresql.ports[5432] }}
+          DB_USERNAME: snipeit
+          DB_PASSWORD: password
+        run: php artisan test --parallel

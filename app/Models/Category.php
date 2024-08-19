@@ -100,7 +100,8 @@ class Category extends SnipeModel
     {
 
         return Gate::allows('delete', $this)
-                && ($this->itemCount() == 0);
+                && ($this->itemCount() == 0)
+                && ($this->deleted_at == '');
     }
 
     /**
@@ -170,15 +171,15 @@ class Category extends SnipeModel
 
         switch ($this->category_type) {
             case 'asset':
-                return $this->assets()->count();
+                return $this->assets->count();
             case 'accessory':
-                return $this->accessories()->count();
+                return $this->accessories->count();
             case 'component':
-                return $this->components()->count();
+                return $this->components->count();
             case 'consumable':
-                return $this->consumables()->count();
+                return $this->consumables->count();
             case 'license':
-                return $this->licenses()->count();
+                return $this->licenses->count();
             default:
                 return 0;
         }
@@ -245,6 +246,26 @@ class Category extends SnipeModel
         } else {
             return null;
         }
+    }
+
+    /**
+     * -----------------------------------------------
+     * BEGIN MUTATORS
+     * -----------------------------------------------
+     **/
+
+    /**
+     * This sets the checkin_value to a boolean 0 or 1. This accounts for forms or API calls that
+     * explicitly pass the checkin_email field but it has a null or empty value.
+     *
+     * This will also correctly parse a 1/0 if "true"/"false" is passed.
+     *
+     * @param $value
+     * @return void
+     */
+    public function setCheckinEmailAttribute($value)
+    {
+        $this->attributes['checkin_email'] = (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**

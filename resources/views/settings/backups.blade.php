@@ -40,7 +40,8 @@
                     data-id-table="system-backups"
                     data-search="true"
                     data-side-pagination="client"
-                    data-sort-order="asc"
+                    data-sort-order="desc"
+                    data-sort-name="modified_display"
                     id="system-backups"
                     class="table table-striped snipe-table">
             <thead>
@@ -193,8 +194,7 @@
         </div> <!-- end col-md-12 form div -->
    </div> <!-- end form group div -->
 
-  </div> <!-- end col-md-3 div -->
-</div> <!-- end row div -->
+
 
 @stop
 

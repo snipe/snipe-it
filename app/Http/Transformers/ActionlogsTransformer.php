@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\Company;
 use App\Models\Supplier;
 use App\Models\Location;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class ActionlogsTransformer
 {
@@ -47,7 +49,12 @@ class ActionlogsTransformer
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
-        $custom_fields = CustomField::all();
+
+        static $custom_fields = false;
+
+        if ($custom_fields === false) {
+            $custom_fields = CustomField::all();
+        }
 
         if ($actionlog->filename!='') {
             $icon =  Helper::filetype_icon($actionlog->filename);
@@ -84,20 +91,23 @@ class ActionlogsTransformer
                                     $enc_old = '';
                                     $enc_new = '';
 
-                                    try  {
-                                        $enc_old = \Crypt::decryptString($this->clean_field($fieldata->old));
-                                    } catch (\Exception $e) {
-                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    if ($this->clean_field($fieldata->old!='')) {
+                                        try {
+                                            $enc_old = Crypt::decryptString($this->clean_field($fieldata->old));
+                                        } catch (\Exception $e) {
+                                            Log::debug('Could not decrypt old field value - maybe the key changed?');
+                                        }
                                     }
 
-                                    try {
-                                        $enc_new = \Crypt::decryptString($this->clean_field($fieldata->new));
-                                    } catch (\Exception $e) {
-                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    if ($this->clean_field($fieldata->new!='')) {
+                                        try {
+                                            $enc_new = Crypt::decryptString($this->clean_field($fieldata->new));
+                                        } catch (\Exception $e) {
+                                            Log::debug('Could not decrypt new field value - maybe the key changed?');
+                                        }
                                     }
 
                                     if ($enc_old != $enc_new) {
-                                        \Log::debug('custom fields do not match');
                                         $clean_meta[$fieldname]['old'] = "************";
                                         $clean_meta[$fieldname]['new'] = "************";
 
@@ -181,10 +191,13 @@ class ActionlogsTransformer
             'note'          => ($actionlog->note) ? Helper::parseEscapedMarkedownInline($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
+            'remote_ip'          => ($actionlog->remote_ip) ??  null,
+            'user_agent'          => ($actionlog->user_agent) ??  null,
+            'action_source'          => ($actionlog->action_source) ??  null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
 
-//        \Log::info("Clean Meta is: ".print_r($clean_meta,true));
+//        Log::info("Clean Meta is: ".print_r($clean_meta,true));
         //dd($array);
 
         return $array;
@@ -192,11 +205,11 @@ class ActionlogsTransformer
 
 
 
-    public function transformCheckedoutActionlog (Collection $accessories_users, $total)
+    public function transformCheckedoutActionlog (Collection $accessories_checkout, $total)
     {
 
         $array = array();
-        foreach ($accessories_users as $user) {
+        foreach ($accessories_checkout as $user) {
             $array[] = (new UsersTransformer)->transformUser($user);
         }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
@@ -209,11 +222,29 @@ class ActionlogsTransformer
      */
 
     public function changedInfo(array $clean_meta)
-    {   $location = Location::withTrashed()->get();
-        $supplier = Supplier::withTrashed()->get();
-        $model = AssetModel::withTrashed()->get();
-        $company = Company::get();
+    {
+        static $location = false;
+        static $supplier = false;
+        static $model = false;
+        static $status = false;
+        static $company = false;
 
+
+        if ($location === false) {
+            $location = Location::select('id', 'name')->withTrashed()->get();
+        }
+        if ($supplier === false) {
+            $supplier = Supplier::select('id', 'name')->withTrashed()->get();
+        }
+        if ($model === false) {
+            $model = AssetModel::select('id', 'name')->withTrashed()->get();
+        }
+        if ($status === false) {
+            $status = Statuslabel::select('id', 'name')->withTrashed()->get();
+        }
+        if ($company === false) {
+            $company = Company::select('id', 'name')->get();
+        }
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
 
@@ -225,7 +256,7 @@ class ActionlogsTransformer
 
             $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $oldRtdName : '';
             $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $newRtdName : '';
-            $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
+            $clean_meta[trans('admin/hardware/form.default_location')] = $clean_meta['rtd_location_id'];
             unset($clean_meta['rtd_location_id']);
         }
 
@@ -241,7 +272,7 @@ class ActionlogsTransformer
 
             $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ". $oldLocationName : '';
             $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ". $newLocationName : '';
-            $clean_meta['Current Location'] = $clean_meta['location_id'];
+            $clean_meta[trans('admin/locations/message.current_location')] = $clean_meta['location_id'];
             unset($clean_meta['location_id']);
         }
 
@@ -256,7 +287,7 @@ class ActionlogsTransformer
             $clean_meta['model_id']['old'] = "[id: ".$clean_meta['model_id']['old']."] ".$oldModelName;
             $clean_meta['model_id']['new'] = "[id: ".$clean_meta['model_id']['new']."] ".$newModelName; /** model is required at asset creation */
 
-            $clean_meta['Model'] = $clean_meta['model_id'];
+            $clean_meta[trans('admin/hardware/form.model')] = $clean_meta['model_id'];
             unset($clean_meta['model_id']);
         }
         if(array_key_exists('company_id', $clean_meta)) {
@@ -269,7 +300,7 @@ class ActionlogsTransformer
 
             $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."] ". $oldCompanyName : trans('general.unassigned');
             $clean_meta['company_id']['new'] = $clean_meta['company_id']['new'] ? "[id: ".$clean_meta['company_id']['new']."] ". $newCompanyName : trans('general.unassigned');
-            $clean_meta['Company'] = $clean_meta['company_id'];
+            $clean_meta[trans('general.company')] = $clean_meta['company_id'];
             unset($clean_meta['company_id']);
         }
         if(array_key_exists('supplier_id', $clean_meta)) {
@@ -282,11 +313,24 @@ class ActionlogsTransformer
 
             $clean_meta['supplier_id']['old'] = $clean_meta['supplier_id']['old'] ? "[id: ".$clean_meta['supplier_id']['old']."] ". $oldSupplierName : trans('general.unassigned');
             $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ". $newSupplierName : trans('general.unassigned');
-            $clean_meta['Supplier'] = $clean_meta['supplier_id'];
+            $clean_meta[trans('general.supplier')] = $clean_meta['supplier_id'];
             unset($clean_meta['supplier_id']);
         }
+        if(array_key_exists('status_id', $clean_meta)) {
+
+            $oldStatus = $status->find($clean_meta['status_id']['old']);
+            $oldStatusName = $oldStatus ? e($oldStatus->name) : trans('admin/statuslabels/message.deleted_label');
+
+            $newStatus = $status->find($clean_meta['status_id']['new']);
+            $newStatusName = $newStatus ? e($newStatus->name) : trans('admin/statuslabels/message.deleted_label');
+
+            $clean_meta['status_id']['old'] = $clean_meta['status_id']['old'] ? "[id: ".$clean_meta['status_id']['old']."] ". $oldStatusName : trans('general.unassigned');
+            $clean_meta['status_id']['new'] = $clean_meta['status_id']['new'] ? "[id: ".$clean_meta['status_id']['new']."] ". $newStatusName : trans('general.unassigned');
+            $clean_meta[trans('general.status_label')] = $clean_meta['status_id'];
+            unset($clean_meta['status_id']);
+        }
         if(array_key_exists('asset_eol_date', $clean_meta)) {
-            $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
+            $clean_meta[trans('admin/hardware/form.eol_date')] = $clean_meta['asset_eol_date'];
             unset($clean_meta['asset_eol_date']);
         }
 

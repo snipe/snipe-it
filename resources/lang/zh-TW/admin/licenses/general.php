@@ -14,6 +14,7 @@ return array(
     'info'  					=> '授權訊息',
     'license_seats'  			=> '授權數量',
     'seat'  					=> '數量',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> '數量',
     'software_licenses'  		=> '軟體授權',
     'user'  					=> '使用者
@@ -24,12 +25,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => '歸還所有名額',
-                'modal'             => '此操作將歸還一個名額。| 此操作將歸還所有 :checkedout_seats_count 名額的此授權。',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => '從使用者和資產中歸還此授權的所有名額',
                 'disabled_tooltip'  => '此功能已停用，因為目前沒有名額在借出中',
                 'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => '授權成功歸還！| 所有授權都成功歸還！',
-                'log_msg'           => '透過授權 GUI 的大量歸還功能歸還',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
@@ -46,4 +47,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'There are only :remaining_count seats left for this license with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
+    'below_threshold_short' => 'This item is below the minimum required quantity.',
 );

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'ថ្នាក់រំលោះមិនមានទេ។',
+    'assoc_users'	 => 'ការរំលោះនេះបច្ចុប្បន្នត្រូវបានភ្ជាប់ជាមួយគំរូមួយ ឬច្រើន ហើយមិនអាចលុបបានទេ។ សូម​លុប​ម៉ូដែល ហើយ​ព្យាយាម​លុប​ម្ដង​ទៀត។ ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'ថ្នាក់រំលោះមិនត្រូវបានបង្កើតទេ សូមព្យាយាមម្តងទៀត។ :(',
+        'success' => 'ថ្នាក់រំលោះបានបង្កើតដោយជោគជ័យ។ :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'ថ្នាក់រំលោះមិនត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ សូមព្យាយាមម្តងទៀត',
+        'success' => 'ថ្នាក់រំលោះបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'តើអ្នកប្រាកដថាចង់លុបថ្នាក់រំលោះនេះទេ?',
+        'error'   => 'មាន​បញ្ហា​ក្នុង​ការ​លុប​ថ្នាក់​រំលោះ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'success' => 'ថ្នាក់រំលោះត្រូវបានលុបដោយជោគជ័យ។'
     )
 
 );

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Components;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Component;
@@ -95,13 +96,11 @@ class ComponentCheckinController extends Controller
 
             $asset = Asset::find($component_assets->asset_id);
 
-            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note'), Carbon::now()));
-            if ($backto == 'asset'){
-                return redirect()->route('hardware.show', $asset->id)->with('success',
-                    trans('admin/components/message.checkin.success'));
-            }
+            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
 
-            return redirect()->route('components.index')->with('success',
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
+
+            return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success',
                 trans('admin/components/message.checkin.success'));
         }
 

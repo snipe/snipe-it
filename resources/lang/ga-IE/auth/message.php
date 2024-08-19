@@ -11,9 +11,11 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
+        'success'               => 'Rinne tú logáil isteach go rathúil.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
+        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
+        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
     ),
 
     'signin' => array(
