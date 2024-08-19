@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Jäljellä',
     'total' 			                => 'Yhteensä',
     'update'                            => 'Päivitä kulutustarvike',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

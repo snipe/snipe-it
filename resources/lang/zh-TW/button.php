@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => '全部繳回 / 刪除使用者',
     'delete'  	                => '刪除',
     'edit'    	                => '編輯',
+    'clone'    	                => 'Clone',
     'restore' 	                => '還原',
     'remove'                    => '移除',
     'request'                   => '申請',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => '新增維護',
     'append'                    => '追加',
     'new'                       => '新增',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

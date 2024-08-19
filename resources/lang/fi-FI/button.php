@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Palauta Kaikki / Poista Käyttäjä',
     'delete'  	                => 'Poista',
     'edit'    	                => 'Muokkaa',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'Palauta',
     'remove'                    => 'Poista',
     'request'                   => 'Pyydä',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Lisää Huolto',
     'append'                    => 'Lisää',
     'new'                       => 'Uusi',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

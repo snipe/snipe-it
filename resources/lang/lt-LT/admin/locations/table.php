@@ -2,9 +2,9 @@
 
 return [
     'about_locations_title'     => 'Apie vietas',
-    'about_locations'           => 'Vietos naudojamos stebėti naudotojų, įrangos ir kitų objektų buvimo vietą',
-    'assets_rtd'                => 'Įranga', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Priskirta įranga',
+    'about_locations'           => 'Vietos naudojamos stebėti naudotojų, turto ir kitų daiktų buvimo vietą',
+    'assets_rtd'                => 'Turtas', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Priskirtas turtas',
     'id'                        => 'ID',
     'city'                      => 'Miestas',
     'state'                     => 'Rajonas',

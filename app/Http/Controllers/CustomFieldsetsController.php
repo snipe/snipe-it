@@ -211,7 +211,7 @@ class CustomFieldsetsController extends Controller
             return redirect()->route('fieldsets.show', [$id])->with('success', trans('admin/custom_fields/message.field.create.assoc_success'));
         }
 
-        return redirect()->route('fieldsets.show', [$id])->with('error', 'No field selected.');
+        return redirect()->route('fieldsets.show', [$id])->with('error', trans('admin/custom_fields/message.field.none_selected'));
     }
 
     /**

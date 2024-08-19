@@ -149,7 +149,11 @@ class CheckoutableListener
      */
     private function getCheckoutAcceptance($event)
     {
-        if (! $event->checkoutable->requireAcceptance()) {
+        $checkedOutToType = get_class($event->checkedOutTo);
+        if ($checkedOutToType != "App\Models\User") {
+            return null;
+        }
+        if (!$event->checkoutable->requireAcceptance()) {
             return null;
         }
 

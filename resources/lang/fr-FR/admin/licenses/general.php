@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Informations de licence',
     'license_seats'  			=> 'Licence multipostes',
     'seat'  					=> 'Poste',
+    'seat_count'  				=> 'Poste :count',
     'seats'  					=> 'Postes',
     'software_licenses'  		=> 'Licences de logiciel',
     'user'  					=> 'Utilisateur',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Désattribuer tous les sièges',
-                'modal'             => 'Cette action désassociera un siège. | Cette action désassociera :checkedout_seats_count sièges pour cette licence.',
+                'modal'             => 'Cette action désattribuera un poste. | Cette action désattribuera les :checkedout_seats_count postes pour cette licence.',
                 'enabled_tooltip'   => 'Désassocier TOUS les sièges de cette licence, à la fois des utilisateurs·trices et des actifs',
                 'disabled_tooltip'  => 'Ceci est désactivé car il n\'y a pas de siège actuellement associé',
                 'disabled_tooltip_reassignable'  => 'Ceci est désactivé car la licence n\'est pas réassignable',
                 'success'           => 'Licence désassociée avec succès ! | Toutes les licences ont été désassociées avec succès !',
-                'log_msg'           => 'Désassociée via l\'outil de gestion des licences en volume',
+                'log_msg'           => 'Associée via l\'interface d\'attribution de licence en volumes',
             ],
 
             'checkout_all'              => [

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'تسجيل الكل / حذف المستخدم',
     'delete'  	                => 'حذف',
     'edit'    	                => 'تعديل',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'إستعادة',
     'remove'                    => 'حذف',
     'request'                   => 'طلب',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'إضافة صيانة',
     'append'                    => 'إلحاق',
     'new'                       => 'جديد',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

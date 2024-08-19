@@ -313,6 +313,7 @@ return [
         /*
         * Custom Service Providers...
         */
+        App\Providers\BladeServiceProvider::class,
         App\Providers\LivewireServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
@@ -427,5 +428,5 @@ return [
   */
 
     'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
-
+    
 ];

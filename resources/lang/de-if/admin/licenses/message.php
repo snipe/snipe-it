@@ -44,6 +44,8 @@ return array(
         'error'   => 'Lizenz wurde nicht herausgegeben, bitte versuche es erneut.',
         'success' => 'Lizenz wurde erfolgreich herausgegeben',
         'not_enough_seats' => 'Nicht genügend Lizenz-Plätze zur Herausgabe verfügbar',
+        'mismatch' => 'Die bereitgestellte Lizenzplatzierung entspricht nicht der Lizenz',
+        'unavailable' => 'Dieser Platz ist nicht zur Ausleihe verfügbar.',
     ),
 
     'checkin' => array(

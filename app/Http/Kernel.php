@@ -43,10 +43,13 @@ class Kernel extends HttpKernel
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
             \App\Http\Middleware\AssetCountForSidebar::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
         'api' => [
             'auth:api',
+            \App\Http\Middleware\CheckLocale::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
 

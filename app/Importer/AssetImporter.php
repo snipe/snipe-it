@@ -3,14 +3,10 @@
 namespace App\Importer;
 
 use App\Models\Asset;
-use App\Models\AssetModel;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Events\CheckoutableCheckedIn;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 
 class AssetImporter extends ItemImporter
 {
@@ -75,8 +71,10 @@ class AssetImporter extends ItemImporter
         $asset = Asset::where(['asset_tag'=> (string) $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
-                $this->log('A matching Asset '.$asset_tag.' already exists');
-                return;
+                $exists_error = trans('general.import_asset_tag_exists', ['asset_tag' => $asset_tag]);
+                $this->log($exists_error);
+                $this->addErrorToBag($asset, 'asset_tag', $exists_error);
+                return $exists_error;
             }
 
             $this->log('Updating Asset');

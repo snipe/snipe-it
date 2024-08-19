@@ -162,6 +162,7 @@ class CheckinAssetNotification extends Notification
         $message = (new MailMessage)->markdown('notifications.markdown.checkin-asset',
             [
                 'item'          => $this->item,
+                'status'        => $this->item->assetstatus?->name,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,

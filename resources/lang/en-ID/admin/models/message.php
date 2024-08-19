@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Model ini saat ini dikaitkan dengan satu atau lebih aset dan tidak dapat dihapus. Harap hapus asetnya, lalu coba hapus lagi. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Model tidak dibuat, silahkan dicoba lagi.',

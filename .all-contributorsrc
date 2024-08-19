@@ -3154,6 +3154,42 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "r-xyz",
+      "name": "r-xyz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100710244?v=4",
+      "profile": "https://github.com/r-xyz",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "DrekiDegga",
+      "name": "Steven Mainor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47491036?v=4",
+      "profile": "https://github.com/DrekiDegga",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "arne-kroeger",
+      "name": "arne-kroeger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65785975?v=4",
+      "profile": "https://github.com/arne-kroeger",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Glukose1",
+      "name": "Glukose1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/167117705?v=4",
+      "profile": "https://github.com/Glukose1",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

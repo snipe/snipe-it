@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
         'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Terjadi kesalahan saat membersihkan. ',
         'validation_failed'     => 'Konfirmasi pembersihan Anda salah Ketikkan kata "HAPUS" di kotak konfirmasi.',

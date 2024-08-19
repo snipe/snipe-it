@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'நான் பயன்பாட்டு விதிமுறைகளைப் படித்து ஒப்புக்கொள்கிறேன், இந்த உருப்படியைப் பெற்றுள்ளேன்.',
     'inventory_report' => 'Inventory Report',
     'item' => 'பொருள்:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'தயவுசெய்து புதுப்பிக்க பின்வரும் இணைப்பை கிளிக் செய்யவும்: உங்கள் இணைய கடவுச்சொல்:',
     'login' => 'உள் நுழை:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'பயனர்',
     'username' => 'பயனர்பெயர்',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'வரவேற்பு: பெயர்',
     'welcome_to' => 'வரவேற்கிறோம்: வலை!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'உங்கள் கத்தரி-ஐடி சான்றுகள்',
+    'mail_sent' => 'Mail sent successfully!',
 ];

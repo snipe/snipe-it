@@ -211,6 +211,7 @@ public function toGoogleChat()
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
+                'status'        => $this->item->assetstatus?->name,
                 'note'          => $this->note,
                 'target'        => $this->target,
                 'fields'        => $fields,

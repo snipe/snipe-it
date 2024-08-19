@@ -67,6 +67,7 @@ class UserImporter extends ItemImporter
         $this->item['vip'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'vip'))) ==1 ) ? '1' : 0;
         $this->item['autoassign_licenses'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'autoassign_licenses'))) ==1 ) ? '1' : 0;
 
+        $this->handleEmptyStringsForDates();
 
         $user_department = trim($this->findCsvMatch($row, 'department'));
         if ($this->shouldUpdateField($user_department)) {
@@ -178,5 +179,23 @@ class UserImporter extends ItemImporter
     public function sendWelcome($send = true)
     {
         $this->send_welcome = $send;
+    }
+
+    /**
+     * Since the findCsvMatch() method will set '' for columns that are present but empty,
+     * we need to set those empty strings to null to avoid passing bad data to the database
+     * (ie ending up with 0000-00-00 instead of the intended null).
+     *
+     * @return void
+     */
+    private function handleEmptyStringsForDates(): void
+    {
+        if ($this->item['start_date'] === '') {
+            $this->item['start_date'] = null;
+        }
+
+        if ($this->item['end_date'] === '') {
+            $this->item['end_date'] = null;
+        }
     }
 }

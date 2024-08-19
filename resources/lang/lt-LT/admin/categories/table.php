@@ -5,6 +5,6 @@ return array(
     'id'      					=> 'ID',
     'parent'   					=> 'Pagrindinė',
     'require_acceptance'      	=> 'Sutikimas',
-    'title'      				=> 'Įrangos kategorijos pavadinimas',
+    'title'      				=> 'Turto kategorijos pavadinimas',
 
 );

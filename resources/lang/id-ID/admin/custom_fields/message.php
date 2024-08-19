@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Field tersebut tidak ada.',
         'already_added'   => 'Field sudah di tambahkan',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Field gagal di buat, silahkan coba kembali.',

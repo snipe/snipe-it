@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Peringatan: </strong> Aset ini telah di tandai sebagai aset yang tak dapat digunakan.
-                        Jika status ini telah berubah, silahkan perbarui status aset.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Aset tidak ada.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Beberapa item tidak terimpor dengan benar.',
         'errorDetail'           => 'Item berikut tidak terimpor karena ada kesalahan.',
         'success'               => 'Berkas Anda berhasil terimpor',

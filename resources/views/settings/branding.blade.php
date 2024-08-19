@@ -116,8 +116,24 @@
                         "logoLabel" => trans('admin/settings/general.default_avatar'),
                         "logoClearVariable" => "clear_default_avatar",
                         "logoPath" => "avatars/",
-                        "helpBlock" => trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('admin/settings/general.default_avatar_help').' '.trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
                     ])
+
+                        @if (($setting->default_avatar == '') || (($setting->default_avatar == 'default.png') && (Storage::disk('public')->missing('default.png'))))
+                        <!-- Restore Default Avatar -->
+                        <div class="form-group">
+
+                            <div class="col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('restore_default_avatar', '1', old('restore_default_avatar', $setting->restore_default_avatar)) }}
+                                    <span>{!! trans('admin/settings/general.restore_default_avatar', ['default_avatar'=> Storage::disk('public')->url('default.png')]) !!}</span>
+                                </label>
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.restore_default_avatar_help') }}
+                                </p>
+                            </div>
+                        </div>
+                        @endif
 
                         <!-- Load gravatar -->
                         <div class="form-group {{ $errors->has('load_remote') ? 'error' : '' }}">

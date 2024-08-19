@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Licensz információ',
     'license_seats'  			=> 'Licenc ülések',
     'seat'  					=> 'Ülés',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'ülések',
     'software_licenses'  		=> 'Szoftverlicencek',
     'user'  					=> 'használó',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin All Seats',
-                'modal'             => 'This will action checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checkin ALL seats for this license from both users and assets',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
                 'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => 'Licenc visszavétel sikeres! | Minden licenc sikeresen visszavéve!',
-                'log_msg'           => 'Checked in via bulk license checkout in license GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

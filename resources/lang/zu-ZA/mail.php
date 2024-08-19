@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Ngifunde futhi ngiyavumelana nemigomo yokusetshenziswa, futhi ngithole le nto.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Into:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Sicela uchofoze kusixhumanisi esilandelayo ukuze ubuyekeze: iphasiwedi yakho yewebhu:',
     'login' => 'Ngena ngemvume:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Umsebenzisi',
     'username' => 'Igama lomsebenzisi',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Siyakwamukela: igama',
     'welcome_to' => 'Siyakwamukela ku: iwebhu!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Izimpawu zakho ze-Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

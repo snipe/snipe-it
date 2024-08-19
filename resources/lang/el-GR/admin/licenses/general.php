@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Πληροφορίες άδειας',
     'license_seats'  			=> 'Άδειες Θέσεις',
     'seat'  					=> 'Εδρα',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Καθίσματα',
     'software_licenses'  		=> 'Άδειες λογισμικού',
     'user'  					=> 'Χρήστης',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin Όλα Τα Καθίσματα',
-                'modal'             => 'Αυτό θα ενεργοποιήσει τον έλεγχο μιας θέσης. "Αυτή η ενέργεια θα ελέγξει όλα τα :checkedout_seats_count καθίσματα για αυτήν την άδεια.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checkin ΟΛΕΣ τις θέσεις για αυτή την άδεια χρήσης τόσο από τους χρήστες όσο και από τα περιουσιακά στοιχεία',
                 'disabled_tooltip'  => 'Αυτό είναι απενεργοποιημένο, επειδή δεν υπάρχουν καθίσματα επί του παρόντος ελεγμένο',
                 'disabled_tooltip_reassignable'  => 'Αυτό είναι απενεργοποιημένο επειδή η Άδεια δεν είναι επανασχεδιασμένη',
                 'success'           => 'Η άδεια ελέγχθηκε με επιτυχία! "Όλες οι άδειες ελέγχθηκαν επιτυχώς!',
-                'log_msg'           => 'Έγινε έλεγχος μέσω μαζικού checkout άδειας χρήσης στο GUI άδειας',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

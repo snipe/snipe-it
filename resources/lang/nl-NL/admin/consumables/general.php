@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Resterende',
     'total' 			                => 'Totaal',
     'update'                            => 'Wijzig verbruiksartikel',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

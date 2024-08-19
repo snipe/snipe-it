@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Ya existe un usuario con este e-mail.',
-    'account_not_found'      => 'El nombre de usuario o contraseña es incorrecta.',
+    'account_not_found'      => 'El nombre de usuario o la contraseña son incorrectos.',
     'account_not_activated'  => 'Este usuario no está activado.',
     'account_suspended'      => 'Este usuario está desactivado.',
     'account_banned'         => 'Este usuario ha sido expulsado.',
@@ -19,7 +19,7 @@ return array(
     ),
 
     'signin' => array(
-        'error'   => 'Ha habido un problema al iniciar sesión. Por favor, vuelve a intentarlo.',
+        'error'   => 'Ha habido un problema al iniciar sesión. Por favor, inténtelo de nuevo.',
         'success' => 'Ha iniciado sesión exitosamente.',
     ),
 
@@ -29,17 +29,17 @@ return array(
     ),
 
     'signup' => array(
-        'error'   => 'Ha habido un problema al crear la cuenta. Por favor, vuelve a intentarlo.',
+        'error'   => 'Hubo un problema al crear la cuenta. Por favor, inténtelo de nuevo.',
         'success' => 'Cuenta creada correctamente.',
     ),
 
     'forgot-password' => array(
-        'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
+        'error'   => 'Ha habido un problema al obtener un código de restablecimiento de la contraseña. Por favor, inténtelo de nuevo.',
         'success' => 'Si esa dirección de correo electrónico existe en nuestro sistema, se ha enviado un correo electrónico de recuperación de contraseña.',
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
+        'error'   => 'Hubo un problema al intentar restablecer su contraseña, por favor, inténtelo de nuevo.',
         'success' => 'Su contraseña se ha restablecido correctamente.',
     ),
 

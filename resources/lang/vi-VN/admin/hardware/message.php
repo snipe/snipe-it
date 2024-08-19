@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Cảnh báo: </strong> Tài sản này hiện tại đang được đánh dấu là không cho phép cấp phát.
-                        Nếu tình trạng này đã được thay đổi, xin vui lòng cập nhật tình trạng tài sản.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Tài sản không tồn tại.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,6 +51,7 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Một số mặt hàng không nhập chính xác.',
         'errorDetail'           => 'Các mục sau đây không được nhập khẩu vì lỗi.',
         'success'               => 'Tệp của bạn đã được nhập',

@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Tokio lauko nėra.',
         'already_added'   => 'Laukas jau pridėtas',
+        'none_selected'   => 'Nepasirinktas joks laukas',
 
         'create' => array(
             'error'   => 'Laukas nebuvo sukurtas, bandykite dar kartą.',

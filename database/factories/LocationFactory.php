@@ -25,7 +25,13 @@ class LocationFactory extends Factory
             'image' => rand(1, 9).'.jpg',
         ];
     }
-
+  
+    // one of these can eventuall go away - left temporarily for conflict resolution
+    public function deleted(): self
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
+    }
+  
     public function deletedLocation()
     {
         return $this->state(function () {

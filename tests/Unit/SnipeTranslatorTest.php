@@ -34,7 +34,7 @@ class SnipeTranslatorTest extends TestCase
     {
         $this->assertEquals(
             'Ingen sikkerhetskopier ble gjort ennå',
-            trans('backup::notifications.no_backups_info',[],'no-NO'),
+            trans('backup::notifications.no_backups_info',[],'nb-NO'),
             "Norwegian 'no backups info' message should be here"
         );
     }

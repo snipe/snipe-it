@@ -44,6 +44,8 @@ return array(
         'error'   => 'Mayroong isyu sa pag-check out ng lisensya. Mangyaring subukang muli.',
         'success' => 'Matagumpay na nai-check out ang lisensya',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

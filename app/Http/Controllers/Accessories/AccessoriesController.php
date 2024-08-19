@@ -79,10 +79,11 @@ class AccessoriesController extends Controller
 
         $accessory = $request->handleImages($accessory);
 
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
         // Was the accessory created?
         if ($accessory->save()) {
             // Redirect to the new accessory  page
-            return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.create.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))->with('success', trans('admin/accessories/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
@@ -143,12 +144,12 @@ class AccessoriesController extends Controller
      */
     public function update(ImageUploadRequest $request, $accessoryId = null) : RedirectResponse
     {
-        if ($accessory = Accessory::withCount('users as users_count')->find($accessoryId)) {
+        if ($accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryId)) {
 
             $this->authorize($accessory);
 
             $validator = Validator::make($request->all(), [
-                "qty" => "required|numeric|min:$accessory->users_count"
+                "qty" => "required|numeric|min:$accessory->checkouts_count"
             ]);
 
             if ($validator->fails()) {
@@ -176,9 +177,10 @@ class AccessoriesController extends Controller
 
             $accessory = $request->handleImages($accessory);
 
-            // Was the accessory updated?
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
+
             if ($accessory->save()) {
-                return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
+                return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))->with('success', trans('admin/accessories/message.update.success'));
             }
         } else {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
@@ -231,7 +233,7 @@ class AccessoriesController extends Controller
      */
     public function show($accessoryID = null) : View | RedirectResponse
     {
-        $accessory = Accessory::withCount('users as users_count')->find($accessoryID);
+        $accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));

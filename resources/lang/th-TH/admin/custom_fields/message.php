@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'ฟิลด์นั้นไม่มีอยู่',
         'already_added'   => 'ฟิลด์ถูกเพิ่มแล้ว',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'ไม่ได้สร้างฟิลด์โปรดลองอีกครั้ง',

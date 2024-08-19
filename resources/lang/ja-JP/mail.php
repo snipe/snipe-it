@@ -56,6 +56,7 @@ return [
     'i_have_read' => '私は使用条件を読み、同意し、このアイテムを受け取りました。',
     'inventory_report' => 'インベントリレポート',
     'item' => 'アイテム:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':threshold 日後に:count ライセンスが失効します。',
     'link_to_update_password' => '次のリンクをクリックして、パスワードを更新してください。 :web password:',
     'login' => 'ログイン:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => ':threshold 日以内に監査が行われる資産は :count 個です。|:threshold 日以内に監査が行われる予定の資産が :count 個あります。',
     'user' => 'ユーザ',
     'username' => 'ユーザ名',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'ようこそ、 :name さん',
     'welcome_to' => ':web にようこそ!',
     'your_assets' => 'あなたの資産を表示',
     'your_credentials' => 'Snipe-IT クレデンシャル',
+    'mail_sent' => 'Mail sent successfully!',
 ];
