@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\CheckForSetup::class,
         \App\Http\Middleware\CheckForDebug::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\TrimStrings::class,
         \App\Http\Middleware\SecurityHeaders::class,
         \App\Http\Middleware\PreventBackHistory::class,
         \Illuminate\Http\Middleware\HandleCors::class,
