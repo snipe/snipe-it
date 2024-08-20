@@ -37,7 +37,7 @@
                                                 name="default_values[{{ $field->id }}]"
                                                 id="default-value{{ $field->id }}"
                                                 wire:model="selectedValues.{{ $field->db_column }}"
-                                                {{-- catch the onchange event and dispatch an InputEvent ourselves... --}}
+                                                {{-- catch the onchange event and dispatch an InputEvent ourselves so Livewire can react to it... --}}
                                                 {{-- https://laracasts.com/discuss/channels/livewire/livewire-and-bootstrap-datepicker?page=1&replyId=623122--}}
                                                 onchange="this.dispatchEvent(new InputEvent('input'))"
                                             >
