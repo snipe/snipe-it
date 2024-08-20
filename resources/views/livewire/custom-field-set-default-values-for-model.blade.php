@@ -30,7 +30,17 @@
 
                                     <div class="input-group col-md-4" style="padding-left: 0px;">
                                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-                                            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="default_values[{{ $field->id }}]" id="default-value{{ $field->id }}" value="{{ $field->defaultValue($model_id) }}">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="{{ trans('general.select_date') }}"
+                                                name="default_values[{{ $field->id }}]"
+                                                id="default-value{{ $field->id }}"
+                                                wire:model="selectedValues.{{ $field->db_column }}"
+                                                {{-- catch the onchange event and dispatch an InputEvent ourselves... --}}
+                                                {{-- https://laracasts.com/discuss/channels/livewire/livewire-and-bootstrap-datepicker?page=1&replyId=623122--}}
+                                                onchange="this.dispatchEvent(new InputEvent('input'))"
+                                            >
                                             <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
                                         </div>
                                     </div>

@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -16,7 +15,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public $fieldset_id;
     public $model_id;
 
-    public Collection $cachedValues;
     public array $selectedValues = [];
 
     public function mount($model_id = null)
