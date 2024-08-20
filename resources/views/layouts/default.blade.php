@@ -145,7 +145,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('index', \App\Models\Asset::class)
                                 <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
                                     <a href="{{ url('hardware') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=1" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.assets') }}">
-                                        <x-icon type="assets" />
+                                        <x-icon type="assets" class="fa-fw" />
                                         <span class="sr-only">{{ trans('general.assets') }}</span>
                                     </a>
                                 </li>
@@ -153,7 +153,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('view', \App\Models\License::class)
                                 <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                                     <a href="{{ route('licenses.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=2" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.licenses') }}">
-                                        <x-icon type="licenses" />
+                                        <x-icon type="licenses" class="fa-fw" />
                                         <span class="sr-only">{{ trans('general.licenses') }}</span>
                                     </a>
                                 </li>
@@ -161,7 +161,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('index', \App\Models\Accessory::class)
                                 <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                                     <a href="{{ route('accessories.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=3" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.accessories') }}">
-                                        <x-icon type="accessories" />
+                                        <x-icon type="accessories" class="fa-fw" />
                                         <span class="sr-only">{{ trans('general.accessories') }}</span>
                                     </a>
                                 </li>
@@ -169,7 +169,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('index', \App\Models\Consumable::class)
                                 <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                                     <a href="{{ url('consumables') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=4" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.consumables') }}">
-                                        <x-icon type="consumables" />
+                                        <x-icon type="consumables" class="fa-fw" />
                                         <span class="sr-only">{{ trans('general.consumables') }}</span>
                                     </a>
                                 </li>
@@ -177,7 +177,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('view', \App\Models\Component::class)
                                 <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                                     <a href="{{ route('components.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=5" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.components') }}">
-                                        <x-icon type="components" />
+                                        <x-icon type="components" class="fa-fw" />
                                         <span class="sr-only">{{ trans('general.components') }}</span>
                                     </a>
                                 </li>
