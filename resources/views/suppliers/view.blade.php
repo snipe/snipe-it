@@ -31,7 +31,7 @@
             <a href="#assets" data-toggle="tab">
 
                 <span class="hidden-lg hidden-md">
-                    <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                    <x-icon type="assets" class="fa-2x" />
                 </span>
                 <span class="hidden-xs hidden-sm">
                     {{ trans('general.assets') }}
@@ -44,7 +44,7 @@
           <li>
             <a href="#accessories" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="far fa-keyboard fa-2x" aria-hidden="true"></i>
+                        <x-icon type="accessories" class="fa-2x" />
                     </span>
               <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
@@ -56,7 +56,7 @@
           <li>
             <a href="#licenses" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                        <x-icon type="licenses" class="fa-2x" />
                     </span>
               <span class="hidden-xs hidden-sm">
                           {{ trans('general.licenses') }}
@@ -68,7 +68,7 @@
             <li>
                 <a href="#components" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                        <x-icon type="components" class="fa-2x" />
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
@@ -80,7 +80,7 @@
             <li>
                 <a href="#consumables" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                        <x-icon type="consumables" class="fa-2x" />
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
@@ -92,7 +92,7 @@
           <li>
             <a href="#maintenances" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-wrench fa-2x"></i>
+                        <x-icon type="maintenances" class="fa-2x" />
                     </span>
               <span class="hidden-xs hidden-sm">
                         {{ trans('admin/asset_maintenances/general.asset_maintenances') }}
@@ -295,7 +295,7 @@
 
           <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px; padding-top: 20px;">
               @if ($supplier->contact!='')
-                  <li><i class="fas fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
+                  <li><x-icon type="user" /> {{ $supplier->contact }}</li>
               @endif
               @if ($supplier->phone!='')
                   <li><i class="fas fa-phone"></i>

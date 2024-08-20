@@ -32,7 +32,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-barcode" aria-hidden="true"></i> {{ trans('admin/settings/general.barcodes') }}
+                        <x-icon type="assets"/>
+                        {{ trans('admin/settings/general.barcodes') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -141,7 +142,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

@@ -58,7 +58,7 @@
 
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                             <label for="username">
-                                                <i class="fas fa-user" aria-hidden="true"></i>
+                                                <x-icon type="user" />
                                                 {{ trans('admin/users/table.username')  }}
                                             </label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" id="username" autocomplete="{{ (config('auth.login_autocomplete') === true) ? 'on' : 'off'  }}" autofocus>
@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                             <label for="password">
-                                                <i class="fa fa-key" aria-hidden="true"></i>
+                                                <x-icon type="password" />
                                                 {{ trans('admin/users/table.password')  }}
                                             </label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" id="password" autocomplete="{{ (config('auth.login_autocomplete') === true) ? 'on' : 'off'  }}">

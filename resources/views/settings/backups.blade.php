@@ -113,7 +113,7 @@
     <div class="box box-default">
       <div class="box-header with-border">
         <h2 class="box-title">
-          <i class="far fa-file-archive" aria-hidden="true"></i>
+            <x-icon type="backups"/>
           {{ trans('admin/settings/general.backups_upload') }}
         </h2>
         <div class="box-tools pull-right">
@@ -144,13 +144,16 @@
           
              <!-- displayed on screen -->
             <label class="btn btn-default col-md-12 col-xs-12" aria-hidden="true">
-              <i class="fas fa-paperclip" aria-hidden="true"></i>
+              <x-icon type="paperclip" />
                 {{ trans('button.select_file')  }}
                 <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
             </label>
         </div>
         <div class="col-md-4 col-xs-4">
-            <button class="btn btn-primary col-md-12 col-xs-12" id="uploadButton" disabled>{{ trans('button.upload') }} <span id="uploadIcon"></span></button>
+            <button class="btn btn-primary col-md-12 col-xs-12" id="uploadButton" disabled>
+                {{ trans('button.upload') }}
+                <span id="uploadIcon"></span>
+            </button>
         </div>
         <div class="col-md-12">
           
@@ -170,7 +173,8 @@
     <div class="box box-warning">
       <div class="box-header with-border">
         <h2 class="box-title">
-          <i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i> {{ trans('admin/settings/general.backups_restoring') }}</h2>
+            <x-icon type="warning" class="text-orange"/> {{ trans('admin/settings/general.backups_restoring') }}
+        </h2>
         <div class="box-tools pull-right">
         </div>
       </div><!-- /.box-header -->

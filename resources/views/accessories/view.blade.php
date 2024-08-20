@@ -25,7 +25,7 @@
                     <li class="active">
                         <a href="#checkedout" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+                            <x-icon type="info-circle" class="fa-2x" />
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
                         </a>
@@ -34,7 +34,8 @@
                     <li>
                         <a href="#history" data-toggle="tab">
                         <span class="hidden-lg hidden-md">
-                        <i class="fas fa-history fa-2x" aria-hidden="true"></i></span>
+                            <x-icon type="history" class="fa-2x" />
+                        </span>
                         <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
                         </a>
                     </li>
@@ -43,11 +44,12 @@
                     @can('accessories.files', $accessory)
                         <li>
                             <a href="#files" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="far fa-file fa-2x" aria-hidden="true"></i></span>
+                                <span class="hidden-lg hidden-md">
+                                <x-icon type="files" class="fa-2x" />
+                                </span>
                                 <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
                                     {!! ($accessory->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($accessory->uploads->count()).'</badge>' : '' !!}
-            </span>
+                                </span>
                             </a>
                         </li>
                     @endcan
@@ -55,7 +57,13 @@
                     @can('update', $accessory)
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                                <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+                                <span class="hidden-lg hidden-xl hidden-md">
+                                    <x-icon type="paperclip" class="fa-2x" />
+                                </span>
+                                <span class="hidden-xs hidden-sm">
+                                    <x-icon type="paperclip" />
+                                    {{ trans('button.upload') }}
+                                </span>
                             </a>
                         </li>
                     @endcan
@@ -186,6 +194,7 @@
                                         @foreach ($accessory->uploads as $file)
                                             <tr>
                                                 <td>
+                                                    <x-icon type="paperclip" class="fa-2x" />
                                                     <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
                                                     <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
 
@@ -217,7 +226,7 @@
                                                         </a>
 
                                                         <a href="{{ route('show.accessoryfile', [$accessory->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            <x-icon type="external-link" />
                                                         </a>
 
                                                     @endif
@@ -320,33 +329,46 @@
 </div>
 
     <div class="col-md-3 pull-right">
+
+        @can('update', \App\Models\Accessory::class)
+            <div class="text-center" style="padding-top:5px;">
+                <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px;" class="btn btn-warning btn-sm btn-social btn-block hidden-print">
+                    <x-icon type="edit" />
+                    {{ trans('admin/accessories/general.edit') }}
+                </a>
+            </div>
+        @endcan
+
         @can('checkout', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
-                    <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                    <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn bg-maroon btn-sm btn-social btn-block hidden-print {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}">
+                        <x-icon type="checkout" />
+                        {{ trans('general.checkout') }}
+                    </a>
                 </div>
         @endcan
-        @can('update', \App\Models\Accessory::class)
-               <div class="text-center" style="padding-top:5px;">
-                  <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.edit') }}</a>
-               </div>
-        @endcan
+
         @can('create', \App\Models\Accessory::class)
                 <div class="text-center" style="padding-top:5px;">
-                    <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
+                    <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%"  class="btn btn-info btn-block btn-sm btn-social hidden-print">
+                        <x-icon type="clone" />
+                        {{ trans('admin/accessories/general.clone') }}</a>
                 </div>
         @endcan
 
         @can('delete', $accessory)
             @if ($accessory->checkouts_count == 0)
                 <div class="text-center" style="padding-top:5px;">
-                    <button class="btn btn-block btn-danger delete-asset" style="padding-top:5px;" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm_no_undo', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
+                    <button class="btn btn-block btn-danger btn-sm btn-social delete-asset" style="padding-top:5px;" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm_no_undo', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
+                        <x-icon type="delete" />
                     {{ trans('general.delete') }}
                     </button>
                 </div>
             @else
                 <div class="text-center" style="padding-top:5px;">
                     <span data-tooltip="true" title=" {{ trans('admin/accessories/general.delete_disabled') }}">
-                        <a href="#" class="btn btn-block btn-danger disabled">
+                        <a href="#" class="btn btn-block btn-danger btn-sm btn-social delete-asset disabled">
+                            <x-icon type="delete" />
                         {{ trans('general.delete') }}
                         </a>
                     </span>
