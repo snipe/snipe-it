@@ -20,7 +20,7 @@
 
       <div class="box-header with-border">
         <h1 class="box-title">
-          <i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>
+          <x-icon type="warning" class="text-orange" />
           {{ trans('general.maintenance_mode_title') }}
         </h1>
       </div><!-- /.box-header -->

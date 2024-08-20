@@ -44,7 +44,7 @@
                                             {{ $asset->model->name }}
                                         @else
                                             <span class="text-danger text-bold">
-                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              <x-icon type="warning" />
                                               {{ trans('admin/hardware/general.model_invalid')}}
                                             </span>
                                             {{ trans('admin/hardware/general.model_invalid_fix')}}
@@ -109,7 +109,7 @@
                             <div class="col-md-8">
                                 <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $next_audit_date) }}">
-                                    <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon"><x-icon type="calendar" /></span>
                                 </div>
                                 {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                  <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
@@ -136,7 +136,7 @@
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                         <button type="submit" class="btn btn-success pull-right{{ (!$asset->model ? ' disabled' : '') }}"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'" disabled' : '') !!}>
-                            <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                            <x-icon type="checkmark" />
                             {{ trans('general.audit') }}
                         </button>
                     </div>

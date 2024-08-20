@@ -9,7 +9,10 @@
 @section('header_right')
     {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
     {{csrf_field()}}
-    <button type="submit" class="btn btn-default"><i class="fas fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
+    <button type="submit" class="btn btn-default">
+        <x-icon type="download" />
+        {{ trans('general.download_all') }}
+    </button>
     {{ Form::close() }}
 @stop
 
