@@ -234,12 +234,7 @@ class UsersController extends Controller
 
         $this->authorize('update', $user);
 
-        //see if i can get this working at request level
-        //if ($request->has('company_id') && $user->allAssignedCount() > 0 && Setting::getSettings()->full_multiple_companies_support) {
-        //    return back()->with('error', trans('admin/users/message.multi_company_items_assigned'));
-        //}
-
-            // Figure out of this user was an admin before this edit
+        // Figure out of this user was an admin before this edit
         $orig_permissions_array = $user->decodePermissions();
         $orig_superuser = '0';
         if (is_array($orig_permissions_array)) {
