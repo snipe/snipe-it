@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':A integração com Slack é opcional. Contudo, se quiser usá-la, o endpoint e o canal são obrigatórios. Para configurar a integração com Slack, deve previamente <a href=":webhook_link" target="_new" rel="noopener">criar um webhook de receção</a> na sua conta Slack. Clique no botão <strong>Teste :app Integração</strong> para confirmar que as suas configurações estão corretas antes de salvar. ',
     'webhook_integration_help_button'    => 'Após salvar as suas informações do :app, será exibido um botão de teste.',
     'webhook_test_help'           => 'Teste se a sua integração :app está configurada corretamente. VOCÊ DEVE SALVAR AS CONFIGURAÇÕES DE :app PRIMEIRO.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Versão Snipe-IT',
     'support_footer'            => 'Links de rodapé de suporte',
     'support_footer_help'       => 'Especifica quem vê os links de Suporte e Manual de utilizador do Snipe-IT',

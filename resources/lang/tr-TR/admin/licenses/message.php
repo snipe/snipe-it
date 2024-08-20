@@ -44,7 +44,7 @@ return array(
         'error'   => 'Lisans çıkışı yapılırken hata oluştu. Lütfen tekrar deneyin.',
         'success' => 'Lisans çıkışı yapıldı.',
         'not_enough_seats' => 'Ödeme için yeterli sayıda lisans yeri yok',
-        'mismatch' => 'Girdiğiniz bu lisans türü lisans ile eşleşmiyor.',
+        'mismatch' => 'Girdiğiniz bu lisans türü lisans ile eşleşmiyor',
         'unavailable' => 'Bu varlığı atayamazsınız.',
     ),
 

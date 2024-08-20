@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'integração :app é opcional, porém o endpoint e o canal são necessários se você deseja usá-lo. Para configurar a integração :app, primeiro você deve <a href=":webhook_link" target="_new" rel="noopener">criar um webhook entrante</a> na sua conta :app. Clique no botão <strong>Teste a integração do :app</strong> para confirmar se suas configurações estão corretas antes de salvar. ',
     'webhook_integration_help_button'    => 'Depois de salvar suas informações do :app, será exibido um botão de teste.',
     'webhook_test_help'           => 'Teste se sua integração :app está configurada corretamente. VOCÊ DEVE SALVAR SUAS CONFIGURAÇÃO :app PRIMEIRO.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Versão do Snipe-IT',
     'support_footer'            => 'Links de rodapé de suporte ',
     'support_footer_help'       => 'Especifique quem vê os links para as informações de Suporte Snipe-IT e o Manual do Usuário',

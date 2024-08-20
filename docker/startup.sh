@@ -1,7 +1,48 @@
 #!/bin/bash
 
+# Cribbed from nextcloud docker official repo
+# https://github.com/nextcloud/docker/blob/master/docker-entrypoint.sh
+# usage: file_env VAR [DEFAULT]
+#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
+# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
+#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
+file_env() {
+    local var="$1"
+    local fileVar="${var}_FILE"
+    local def="${2:-}"
+    local varValue=$(env | grep -E "^${var}=" | sed -E -e "s/^${var}=//")
+    local fileVarValue=$(env | grep -E "^${fileVar}=" | sed -E -e "s/^${fileVar}=//")
+    if [ -n "${varValue}" ] && [ -n "${fileVarValue}" ]; then
+        echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
+        exit 1
+    fi
+    if [ -n "${varValue}" ]; then
+        export "$var"="${varValue}"
+    elif [ -n "${fileVarValue}" ]; then
+        export "$var"="$(cat "${fileVarValue}")"
+    elif [ -n "${def}" ]; then
+        export "$var"="$def"
+    fi
+    unset "$fileVar"
+}
+
+# Add docker secrets support for the variables below:
+file_env APP_KEY
+file_env DB_HOST
+file_env DB_PORT
+file_env DB_DATABASE
+file_env DB_USERNAME
+file_env DB_PASSWORD
+file_env REDIS_HOST
+file_env REDIS_PASSWORD
+file_env REDIS_PORT
+file_env MAIL_HOST
+file_env MAIL_PORT
+file_env MAIL_USERNAME
+file_env MAIL_PASSWORD
+
 # fix key if needed
-if [ -z "$APP_KEY" ]
+if [ -z "$APP_KEY" -a -z "$APP_KEY_FILE" ]
 then
   echo "Please re-run this container with an environment variable \$APP_KEY"
   echo "An example APP_KEY you could use is: "

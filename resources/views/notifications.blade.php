@@ -32,6 +32,7 @@
         {{ $message }}
     </div>
 </div>
+@include ('partials.confetti-js')
 @endif
 
 
@@ -44,6 +45,7 @@
             {!!  $message !!}
         </div>
     </div>
+    @include ('partials.confetti-js')
 @endif
 
 

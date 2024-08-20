@@ -125,6 +125,8 @@ return [
         'symbols' => ':attribute lauke turi būti bent vienas simbolis.',
         'uncompromised' => 'Pateiktas :attribute buvo rastas tarp nutekėjusių duomenų. Pasirinkite kitą :attribute.',
     ],
+    'percent'       => 'Nusidėvėjimo minimumas turi būti nuo 0 iki 100, kai nusidėvėjimo tipas yra procentinis.',
+
     'present' => ':attribute laukas turi būti esamas.',
     'present_if' => ':attribute laukas turi egzistuoti, kai :other yra :value.',
     'present_unless' => ':attribute laukas turi egzistuoti, nebent :other yra :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Jūsų dabartinis slaptažodis yra neteisingas',
         'dumbpwd'          => 'Šis slaptažodis yra per dažnas.',
         'statuslabel_type' => 'Turite pasirinkti tinkamą būsenos žymos tipą',
+        'custom_field_not_found'          => 'Panašu, kad tokio lauko nėra. Patikrinkite savo pritaikytų laukų pavadinimus.',
+        'custom_field_not_found_on_model' => 'Panašu, kad šis laukas egzistuoja, tačiau jo nėra šio turto modelio laukų rinkinyje.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

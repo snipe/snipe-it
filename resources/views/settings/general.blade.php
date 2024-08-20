@@ -163,6 +163,21 @@
                            </div>
                        </div>
 
+                       <!-- Shortcuts enable -->
+                       <div class="form-group {{ $errors->has('shortcuts_enabled') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               <strong> {{ trans('admin/settings/general.shortcuts_enabled') }}</strong>
+                           </div>
+                           <div class="col-md-9">
+                               <label class="form-control">
+                                   <input type="checkbox" name="shortcuts_enabled" value="1" {{ old('shortcuts_enabled', $setting->shortcuts_enabled) ? 'checked' : '' }}>
+                                   {{ trans('general.yes') }}
+                               </label>
+                               {!! $errors->first('shortcuts_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                               <p class="help-block">{!!trans('admin/settings/general.shortcuts_help_text') !!}</p>
+                           </div>
+                       </div>
+
 
                        <!-- Per Page -->
                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">

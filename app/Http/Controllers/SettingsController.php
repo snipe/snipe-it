@@ -324,6 +324,7 @@ class SettingsController extends Controller
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->unique_serial = $request->input('unique_serial', '0');
+        $setting->shortcuts_enabled = $request->input('shortcuts_enabled', '0');
         $setting->show_images_in_email = $request->input('show_images_in_email', '0');
         $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
         $setting->dashboard_message = $request->input('dashboard_message');
@@ -638,6 +639,7 @@ class SettingsController extends Controller
         $setting->alert_threshold = $request->input('alert_threshold');
         $setting->audit_interval = $request->input('audit_interval');
         $setting->audit_warning_days = $request->input('audit_warning_days');
+        $setting->due_checkin_days = $request->input('due_checkin_days');
         $setting->show_alerts_in_menu = $request->input('show_alerts_in_menu', '0');
 
         if ($setting->save()) {

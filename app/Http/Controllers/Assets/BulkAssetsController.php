@@ -227,7 +227,8 @@ class BulkAssetsController extends Controller
          * its checkout status.
          */
 
-        if (($request->filled('purchase_date'))
+        if (($request->filled('name'))
+            || ($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
             || ($request->filled('supplier_id'))
@@ -239,6 +240,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('status_id'))
             || ($request->filled('model_id'))
             || ($request->filled('next_audit_date'))
+            || ($request->filled('null_name'))
             || ($request->filled('null_purchase_date'))
             || ($request->filled('null_expected_checkin_date'))
             || ($request->filled('null_next_audit_date'))
@@ -251,13 +253,14 @@ class BulkAssetsController extends Controller
                 $this->update_array = [];
 
                 /**
-                 * Leave out model_id and status here because we do math on that later. We have to do some extra
-                 * validation and checks on those two.
+                 * Leave out model_id and status here because we do math on that later. We have to do some
+                 * extra validation and checks on those two.
                  *
                  * It's tempting to make these match the request check above, but some of these values require
                  * extra work to make sure the data makes sense.
                  */
-                $this->conditionallyAddItem('purchase_date')
+                $this->conditionallyAddItem('name')
+                    ->conditionallyAddItem('purchase_date')
                     ->conditionallyAddItem('expected_checkin')
                     ->conditionallyAddItem('order_number')
                     ->conditionallyAddItem('requestable')
@@ -271,6 +274,11 @@ class BulkAssetsController extends Controller
                 /**
                  * Blank out fields that were requested to be blanked out via checkbox
                  */
+                if ($request->input('null_name')=='1') {
+
+                    $this->update_array['name'] = null;
+                }
+
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
                 }

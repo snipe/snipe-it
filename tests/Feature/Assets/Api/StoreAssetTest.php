@@ -61,7 +61,7 @@ class StoreAssetTest extends TestCase
 
         $asset = Asset::find($response['payload']['id']);
 
-        $this->assertTrue($asset->adminuser->is($user));
+        $this->assertTrue($asset->admin->is($user));
 
         $this->assertEquals('2024-06-02', $asset->asset_eol_date);
         $this->assertEquals('random_string', $asset->asset_tag);
@@ -456,7 +456,7 @@ class StoreAssetTest extends TestCase
 
         $asset = Asset::find($response['payload']['id']);
 
-        $this->assertTrue($asset->adminuser->is($user));
+        $this->assertTrue($asset->admin->is($user));
         $this->assertTrue($asset->checkedOutToUser());
         $this->assertTrue($asset->assignedTo->is($userAssigned));
     }
@@ -482,7 +482,7 @@ class StoreAssetTest extends TestCase
 
         $asset = Asset::find($response['payload']['id']);
 
-        $this->assertTrue($asset->adminuser->is($user));
+        $this->assertTrue($asset->admin->is($user));
         $this->assertTrue($asset->checkedOutToLocation());
         $this->assertTrue($asset->location->is($location));
     }
@@ -508,7 +508,7 @@ class StoreAssetTest extends TestCase
 
         $apiAsset = Asset::find($response['payload']['id']);
 
-        $this->assertTrue($apiAsset->adminuser->is($user));
+        $this->assertTrue($apiAsset->admin->is($user));
         $this->assertTrue($apiAsset->checkedOutToAsset());
         // I think this makes sense, but open to a sanity check
         $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));

@@ -144,7 +144,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         <ul class="nav navbar-nav">
                             @can('index', \App\Models\Asset::class)
                                 <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ url('hardware') }}" accesskey="1" tabindex="-1">
+                                    <a href="{{ url('hardware') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=1" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.assets') }}">
                                         <i class="fas fa-barcode fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.assets') }}</span>
                                     </a>
@@ -152,7 +152,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @endcan
                             @can('view', \App\Models\License::class)
                                 <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ route('licenses.index') }}" accesskey="2" tabindex="-1">
+                                    <a href="{{ route('licenses.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=2" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.licenses') }}">
                                         <i class="far fa-save fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.licenses') }}</span>
                                     </a>
@@ -160,7 +160,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @endcan
                             @can('index', \App\Models\Accessory::class)
                                 <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ route('accessories.index') }}" accesskey="3" tabindex="-1">
+                                    <a href="{{ route('accessories.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=3" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.accessories') }}">
                                         <i class="far fa-keyboard fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.accessories') }}</span>
                                     </a>
@@ -168,7 +168,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @endcan
                             @can('index', \App\Models\Consumable::class)
                                 <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ url('consumables') }}" accesskey="4" tabindex="-1">
+                                    <a href="{{ url('consumables') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=4" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.consumables') }}">
                                         <i class="fas fa-tint fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.consumables') }}</span>
                                     </a>
@@ -176,7 +176,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @endcan
                             @can('view', \App\Models\Component::class)
                                 <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                                    <a href="{{ route('components.index') }}" accesskey="5" tabindex="-1">
+                                    <a href="{{ route('components.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=5" : ''}} tabindex="-1" data-tooltip="true" data-placement="bottom" data-title="{{ trans('general.components') }}">
                                         <i class="far fa-hdd fa-fw"></i>
                                         <span class="sr-only">{{ trans('general.components') }}</span>
                                     </a>
@@ -622,7 +622,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
 
                         @can('view', \App\Models\User::class)
                             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                                <a href="{{ route('users.index') }}" accesskey="6">
+                                <a href="{{ route('users.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=6" : ''}}>
                                     <i class="fas fa-users fa-fw"></i>
                                     <span>{{ trans('general.people') }}</span>
                                 </a>

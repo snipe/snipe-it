@@ -2,7 +2,7 @@
 
 return [
     'about_locations_title'     => 'Acerca de las ubicaciones',
-    'about_locations'           => 'Las ubicaciones son utilizadas para hacer seguimiento de la información sobre ubicación de usuarios, activos, y otros ítems',
+    'about_locations'           => 'Las ubicaciones se utilizan para hacer un seguimiento de la ubicación de usuarios, activos y otros elementos',
     'assets_rtd'                => 'Activos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Activos asignados',
     'id'                        => 'ID',
@@ -35,8 +35,8 @@ return [
     'asset_expected_checkin'    => 'Fecha esperada de devolución',
     'date'                      => 'Fecha:',
     'phone'                     => 'Teléfono ubicación',
-    'signed_by_asset_auditor'   => 'Firmado por (Juego de Acciones):',
-    'signed_by_finance_auditor' => 'Firmado por (Monitor de Finanzas):',
-    'signed_by_location_manager' => 'Firmado por (Administrador de ubicación):',
+    'signed_by_asset_auditor'   => 'Firmado por (Auditor de Activos):',
+    'signed_by_finance_auditor' => 'Firmado por (Auditor de Finanzas):',
+    'signed_by_location_manager' => 'Firmado por (Supervisor de la ubicación):',
     'signed_by'                 => 'Firmado por:',
 ];

@@ -26,7 +26,7 @@ return [
         'clone'     => 'crwdns12598:0crwdne12598:0',
         'edit'      => 'crwdns12600:0crwdne12600:0',
         'delete'    => 'crwdns12602:0crwdne12602:0',
-        'restore'   => 'crwdns12604:0crwdne12604:0',
+        'restore'   => 'crwdns12646:0crwdne12646:0',
         'create'    => 'crwdns12606:0crwdne12606:0',
         'checkout'  => 'crwdns12608:0crwdne12608:0',
         'checkin'   => 'crwdns12610:0crwdne12610:0',

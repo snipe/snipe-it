@@ -18,7 +18,7 @@
         @if ($snipeSettings->ldap_enabled == 1)
             <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fas fa-sitemap"></span>{{trans('general.ldap_sync')}}</a>
         @endif
-        <a href="{{ route('users.create') }}" accesskey="n" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
+        <a href="{{ route('users.create') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "n" : ''}} class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
     @endcan
 
     @if (request('status')=='deleted')

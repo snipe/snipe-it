@@ -246,7 +246,7 @@ class PredefinedKitsController extends Controller
 
         $relation = $kit->models();
         if ($relation->find($model_id)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['model' => 'Model already attached to kit']));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['model' => trans('admin/kits/general.model_already_attached')]));
         }
         $relation->attach($model_id, ['quantity' => $quantity]);
 
