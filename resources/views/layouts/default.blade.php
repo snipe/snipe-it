@@ -440,7 +440,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                 <a href="#">
                                     <x-icon type="assets" class="fa-fw" />
                                     <span>{{ trans('general.assets') }}</span>
-                                    <x-icon type="angle-left" class="pull-right"/>
+                                    <x-icon type="angle-left" class="pull-right fa-fw"/>
                                 </a>
                                 <ul class="treeview-menu">
                                     <li>
@@ -587,7 +587,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('view', \App\Models\License::class)
                             <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('licenses.index') }}">
-                                    <x-icon type="licenses" />
+                                    <x-icon type="licenses" class="fa-fw"/>
                                     <span>{{ trans('general.licenses') }}</span>
                                 </a>
                             </li>
@@ -619,7 +619,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('view', \App\Models\PredefinedKit::class)
                             <li{!! (Request::is('kits') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('kits.index') }}">
-                                    <x-icon type="kits" />
+                                    <x-icon type="kits" class="fa-fw" />
                                     <span>{{ trans('general.kits') }}</span>
                                 </a>
                             </li>
@@ -628,7 +628,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('view', \App\Models\User::class)
                             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('users.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=6" : ''}}>
-                                    <x-icon type="users" />
+                                    <x-icon type="users" class="fa-fw" />
                                     <span>{{ trans('general.people') }}</span>
                                 </a>
                             </li>
@@ -636,7 +636,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('import')
                             <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('imports.index') }}">
-                                    <x-icon type="import" />
+                                    <x-icon type="import" class="fa-fw" />
                                     <span>{{ trans('general.import') }}</span>
                                 </a>
                             </li>
@@ -647,7 +647,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                 <a href="#" id="settings">
                                     <x-icon type="settings" />
                                     <span>{{ trans('general.settings') }}</span>
-                                    <x-icon type="angle-left" class="pull-right"/>
+                                    <x-icon type="angle-left" class="fa-fw"/>
                                 </a>
 
                                 <ul class="treeview-menu">
@@ -737,7 +737,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('reports.view')
                             <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
                                 <a href="#" class="dropdown-toggle">
-                                    <x-icon type="reports" />
+                                    <x-icon type="reports" class="fa-fw" />
                                     <span>{{ trans('general.reports') }}</span>
                                     <x-icon type="angle-left" class="pull-right"/>
                                 </a>
@@ -789,7 +789,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('viewRequestable', \App\Models\Asset::class)
                             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('requestable-assets') }}">
-                                    <x-icon type="requestable" />
+                                    <x-icon type="requestable" class="fa-fw" />
                                     <span>{{ trans('general.requestable_items') }}</span>
                                 </a>
                             </li>
