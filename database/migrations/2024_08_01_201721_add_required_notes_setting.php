@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->boolean('require_checkinout_notes')->nullable()->default(1);
+            $table->boolean('require_checkinout_notes')->nullable()->default(0);
         });
     }
 
