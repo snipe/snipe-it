@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
     'assigned_assets' => 'ទ្រព្យសកម្មដែលបានចាត់តាំង',
     'current_location' => 'ទីតាំង​បច្ចុប្បន្',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'ទីតាំងមិនត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ សូមព្យាយាមម្តងទៀត',
         'success' => 'បានធ្វើបច្ចុប្បន្នភាពទីតាំងដោយជោគជ័យ។'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

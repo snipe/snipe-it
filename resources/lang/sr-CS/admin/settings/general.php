@@ -381,5 +381,7 @@ return [
     'default_avatar_help' => 'Ova slika će se prikazivati kao profilna ako korisnik nema svoju sliku profila.',
     'restore_default_avatar' => 'Vrati <a href=":default_avatar" data-toggle="lightbox" data-type="image">originalnu podrazumevanu sličicu</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Upozorenje da je vreme za razduženje',
+    'due_checkin_days_help' => 'Koliko dana ranije pre očekivanog razduženja imovine bi trebalo biti navedena u stranici "Vreme je za razduživanje"?',
 
 ];

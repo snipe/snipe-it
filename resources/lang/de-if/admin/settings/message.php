@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Bist Du sicher, dass Du Deine Datenbank aus :filename wiederherstellen möchten?'
     ],
     'restore' => [
-        'success'               => 'Dein Systembackup wurde wiederhergestellt. Bitte melde dich erneut an.'
+        'success'               => 'Ihr Systembackup wurde wiederhergestellt. Bitte melde dich erneut an.'
     ],
     'purge' => [
         'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',

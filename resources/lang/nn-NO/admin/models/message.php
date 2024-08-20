@@ -7,7 +7,7 @@ return array(
     'no_association' => 'ADVARSEL! Ressursmodellen for dette elementet er ugyldig eller mangler!',
     'no_association_fix' => 'Dette vil ødelegge ting på merkelige og forferdelige måte. Rediger denne ressursen nå for å tildele den en modell.',
     'assoc_users'	 => 'Denne modellen er tilknyttet en eller flere eiendeler og kan ikke slettes. Slett eiendelene, og prøv å slette modellen igjen. ',
-    'invalid_category_type' => 'The category must be an asset category.',
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Modellen ble ikke opprettet. Prøv igjen.',

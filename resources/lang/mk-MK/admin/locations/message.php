@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Оваа локација моментално е родител на најмалку една локација и не може да се избрише. Ве молиме да ги ажурирате вашите локации повеќе да не ја користат оваа локација како родител и обидете се повторно. ',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Локацијата не беше ажурирана, обидете се повторно',
         'success' => 'Локацијата е успешно ажурирана.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

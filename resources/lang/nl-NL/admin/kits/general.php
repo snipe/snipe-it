@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit is succesvol verwijderd',
     'kit_model_updated'                 => 'Model is succesvol bijgewerkt',
     'kit_model_detached'                => 'Model is met succes losgekoppeld',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

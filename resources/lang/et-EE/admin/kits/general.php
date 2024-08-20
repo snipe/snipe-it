@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Komplekt edukalt kustutatud',
     'kit_model_updated'                 => 'Mudel on edukalt uuendatud',
     'kit_model_detached'                => 'Mudel on edukalt eemaldatud',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

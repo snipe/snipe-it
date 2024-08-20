@@ -32,7 +32,7 @@ return [
     'asset_serial'              => 'Sērijas numurs',
     'asset_location'            => 'Atrašanās vieta',
     'asset_checked_out'         => 'Izrakstīts',
-    'asset_expected_checkin'    => 'Expected Checkin',
+    'asset_expected_checkin'    => 'Paredzamais reģistrēšanas datums',
     'date'                      => 'Datums:',
     'phone'                     => 'Location Phone',
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',

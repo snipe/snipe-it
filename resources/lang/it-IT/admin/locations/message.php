@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Questa posizione è parente di almeno un\'altra posizione e non può essere cancellata. Si prega di aggiornare le vostre posizioni di riferimento e riprovare. ',
     'assigned_assets' => 'Beni Assegnati',
     'current_location' => 'Posizione attuale',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'La posizione non è stata aggiornata, si prega di riprovare',
         'success' => 'Posizione aggiornata con successo.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

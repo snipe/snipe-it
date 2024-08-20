@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Esta localização contém pelo menos uma sub-localização e não pode ser removida. Por favor, atualize as localizações para não referenciarem mais esta localização e tente novamente. ',
     'assigned_assets' => 'Artigos atribuídos',
     'current_location' => 'Localização atual',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'A localização não foi atualizada. Por favor, tente novamente',
         'success' => 'Localização atualizada com sucesso.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

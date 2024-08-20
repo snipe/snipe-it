@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'У этого месторасположения является родительским и у него есть как минимум одно месторасположение уровнем ниже. Поэтому оно не может быть удалено. Обновите ваши месторасположения, так чтобы не ссылаться на него и попробуйте снова. ',
     'assigned_assets' => 'Присвоенные активы',
     'current_location' => 'Текущее местоположение',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Статус актива не был обновлен, попробуйте еще раз',
         'success' => 'Статус актива успешно обновлен.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

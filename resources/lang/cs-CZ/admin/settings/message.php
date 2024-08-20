@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Jste si jisti, že chcete obnovit databázi z :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Během čištění došlo k chybě. ',

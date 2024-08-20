@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Dosyanız başarıyla silindi',
         'file_delete_error'      => 'Dosya silenemedi',
         'file_missing' => 'Seçilen dosya bulunamıyor',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Başlık bilgisindeki bir veya daha fazla öznitelik, hatalı UTF-8 karakterleri içeriyor',
         'content_row_has_malformed_characters' => 'Başlıktaki ilk satırda bir veya daha fazla öznitelik, hatalı biçimlendirilmiş UTF-8 karakterleri içeriyor',
     ],
