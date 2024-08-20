@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'ไฟล์ของคุณถูกลบเรียบร้อยแล้ว',
         'file_delete_error'      => 'ไม่สามารถลบไฟล์ได้',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

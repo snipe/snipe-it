@@ -381,5 +381,7 @@ return [
     'default_avatar_help' => 'Esta imagen se mostrará como la imagen de perfil si el usuario no tiene foto de perfil.',
     'restore_default_avatar' => 'Restaurar <a href=":default_avatar" data-toggle="lightbox" data-type="image">avatar original por defecto del sistema</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Advertencia para próximos ingresos',
+    'due_checkin_days_help' => '¿Cuántos días antes de la fecha prevista de ingreso de un activo debe figurar en la página «Próximos a ingresar»?',
 
 ];

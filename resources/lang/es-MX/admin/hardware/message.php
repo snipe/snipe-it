@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Su archivo se ha eliminado correctamente',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
         'file_missing' => 'Falta el archivo seleccionado',
+        'file_already_deleted' => 'El archivo seleccionado ya fue eliminado',
         'header_row_has_malformed_characters' => 'Uno o más atributos de la fila de encabezado contiene caracteres UTF-8 mal formados',
         'content_row_has_malformed_characters' => 'Uno o más atributos de la fila de encabezado contiene caracteres UTF-8 mal formados',
     ],

@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Hierdie ligging is tans die ouer van ten minste een kind se plek en kan nie uitgevee word nie. Werk asseblief jou liggings by om nie meer hierdie ligging te verwys nie en probeer weer.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Ligging is nie opgedateer nie, probeer asseblief weer',
         'success' => 'Ligging suksesvol opgedateer.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

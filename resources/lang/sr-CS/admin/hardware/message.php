@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Vaš je fajl uspešno izbrisan',
         'file_delete_error'      => 'Fajl nime moguće izbrisati',
         'file_missing' => 'Nedostaje izabrana datoteka',
+        'file_already_deleted' => 'Izabrana datoteka je već obrisana',
         'header_row_has_malformed_characters' => 'Jedan ili više atributa u redu zaglavlja sadrži loše formatirane UTF-8 karaktere',
         'content_row_has_malformed_characters' => 'Jedan ili više atributa u prvom redu sadržaja sadrži loše formatirane UTF-8 karaktere',
     ],

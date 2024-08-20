@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Kei tenei waahi te matua o te iti rawa o te mokopuna me te kore e taea te muku. Whakaorangia nga taangata ki a koe kia kaua e tautuhi i tenei tauranga ka ngana ano.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Kāore i whakahoutia te wāhi, tēnā whakamātau anō',
         'success' => 'Kua whakahoutia te tau.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

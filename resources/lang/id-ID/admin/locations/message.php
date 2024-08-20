@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Lokasi saat ini digunakan oleh induk salah satu dari turunan lokasi dan tidak dapat di hapus. Mohon perbarui lokasi Anda ke yang tidak ada referensi dengan lokasi ini dan coba kembali. ',
     'assigned_assets' => 'Aset yang Ditetapkan',
     'current_location' => 'Lokasi Saat Ini',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Lokasi gagal di perbarui, mohon coba kembali',
         'success' => 'Lokasi sukses di perbarui.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

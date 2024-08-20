@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Toto umístění je nadřazené alespoň jednomu umístění a nelze jej smazat. Aktualizujte své umístění tak, aby na toto umístění již neodkazovalo a zkuste to znovu. ',
     'assigned_assets' => 'Přiřazený majetek',
     'current_location' => 'Současné umístění',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Místo nebylo aktualizováno, zkuste to znovu prosím',
         'success' => 'Místo úspěšně aktualizováno.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

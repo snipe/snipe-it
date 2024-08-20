@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Ta lokacija je trenutno starš vsaj ene lokacije otroka in je ni mogoče izbrisati. Posodobite svoje lokacije, da ne bodo več vsebovale te lokacije in poskusite znova. ',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Lokacija ni posodobljena, poskusite znova',
         'success' => 'Lokacija je bila posodobljena.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

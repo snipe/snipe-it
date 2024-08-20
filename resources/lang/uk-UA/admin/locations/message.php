@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Це місцезнаходження наразі батько принаймні одного дочірнього місця і не може бути видалений. Будь ласка, оновіть ваше місцеположення, щоб більше не посилатися на це місце і повторіть спробу. ',
     'assigned_assets' => 'Призначені активи',
     'current_location' => 'Поточне місцезнаходження',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Розташування не було оновлено, спробуйте ще раз',
         'success' => 'Розташування успішно створено.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Oletko varma, että haluat palauttaa tietokannan :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Virhe on ilmennyt puhdistuksen aikana.',

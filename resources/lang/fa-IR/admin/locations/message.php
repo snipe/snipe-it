@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'این مکان در حال حاضر پدر و مادر کودک حداقل یک مکان است و قادر به حذف نمی شود. لطفا به روز رسانی مکان خود را به دیگر این مکان مرجع و دوباره امتحان کنید. ',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'مکان بروزرسانی نشد،دوباره سعی کنید',
         'success' => 'مکان با موفقیت به روز رسانی شد.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

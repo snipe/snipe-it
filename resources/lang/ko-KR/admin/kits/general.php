@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => '키트가 삭제되었습니다',
     'kit_model_updated'                 => 'Model was successfully updated',
     'kit_model_detached'                => 'Model was successfully detached',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

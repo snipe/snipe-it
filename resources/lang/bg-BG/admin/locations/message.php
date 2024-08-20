@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'В избраното местоположение е присъединено едно или повече местоположения. Моля преместете ги в друго и опитайте отново.',
     'assigned_assets' => 'Изписани Активи',
     'current_location' => 'Текущо местоположение',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Местоположението не е обновено. Моля, опитайте отново',
         'success' => 'Местоположението е обновено.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

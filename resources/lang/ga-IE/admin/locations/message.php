@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Faoi láthair tá an suíomh seo ina tuismitheoir ar a laghad ar shuíomh leanbh amháin ar a laghad agus ní féidir é a scriosadh. Nuashonraigh do láithreacha le do thoil gan tagairt a dhéanamh don suíomh seo agus déan iarracht arís.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Níor nuashonraíodh an suíomh, déan iarracht arís',
         'success' => 'Suíomh curtha chun dáta go rathúil.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

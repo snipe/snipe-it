@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Αυτή η τοποθεσία είναι αυτήν τη στιγμή γονέας τουλάχιστον μιας τοποθεσίας παιδιού και δεν μπορεί να διαγραφεί. Ενημερώστε τις τοποθεσίες σας ώστε να μην αναφέρονται πλέον σε αυτήν την τοποθεσία και δοκιμάστε ξανά.',
     'assigned_assets' => 'Αντιστοιχισμένα Στοιχεία Ενεργητικού',
     'current_location' => 'Τρέχουσα Τοποθεσία',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Η τοποθεσία δεν έχει δημιουργηθεί, δοκιμάστε ξανά',
         'success' => 'Η τοποθεσία αναβαθμίστηκε επιτυχώς.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

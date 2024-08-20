@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Είστε βέβαιοι ότι θέλετε να επαναφέρετε τη βάση δεδομένων σας από :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Παρουσιάστηκε ένα σφάλμα κατά την εκκαθάριση. ',

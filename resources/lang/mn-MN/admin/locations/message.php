@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Энэ байршил нь одоогоор хамгийн багадаа нэг хүүхдийн байрлалын эцэг эх бөгөөд устгах боломжгүй байна. Энэ байршлыг лавшруулахгүй болгохын тулд байршлаа шинэчлээд дахин оролдоно уу.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Байршил шинэчлэгдсэнгүй, дахин оролдоно уу',
         'success' => 'Байршил амжилттай шинэчлэгдсэн.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(
