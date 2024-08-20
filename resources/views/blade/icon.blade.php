@@ -2,6 +2,5 @@
 
 @props([
     'type' => '',
-    'id' => false,
 ])
 <i {{ $attributes->merge(['class' => Icon::icon($type)]) }} aria-hidden="true"></i>
