@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\CustomField;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -18,6 +17,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public $model_id;
 
     public Collection $cachedValues;
+    public array $selectedValues = [];
 
     public function mount($model_id = null)
     {
@@ -25,21 +25,13 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fieldset_id = $this->model?->fieldset_id;
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
-        $this->cachedValues = collect();
-
         $this->fields->each(function ($field) {
-            $this->cachedValues->put($field->db_column, $field->defaultValue($this->model_id));
+            if ($field->element === 'checkbox') {
+                $this->selectedValues[$field->db_column] = explode(', ', $field->defaultValue($this->model_id));
+            } else {
+                $this->selectedValues[$field->db_column] = $field->defaultValue($this->model_id);
+            }
         });
-    }
-
-    public function getFieldValue(CustomField $field)
-    {
-        return $this->cachedValues->get($field->db_column);
-    }
-
-    public function updateFieldValue($dbColumn, $updatedValue): void
-    {
-        $this->cachedValues->put($dbColumn, $updatedValue);
     }
 
     #[Computed]
