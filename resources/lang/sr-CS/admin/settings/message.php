@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Da li ste sigurni da želite da vratite svoju bazu podataka sa :filename?'
     ],
     'restore' => [
-        'success'               => 'Vraćena je rezervna kopija vašeg sistema. Molim vas prijavite se ponovo.'
+        'success'               => 'Rezervna kopija vašeg sistema je povraćena. Molim vas prijavite se ponovo.'
     ],
     'purge' => [
         'error'     => 'Došlo je do pogreške prilikom brisanja. ',

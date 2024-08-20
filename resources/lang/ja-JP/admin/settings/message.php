@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => ':filename からデータベースを復元してもよろしいですか？'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'システムバックアップが復元されました。もう一度ログインしてください。'
     ],
     'purge' => [
         'error'     => 'パージ中にエラーが発生しました。 ',

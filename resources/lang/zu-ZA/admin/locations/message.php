@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Le ndawo okwamanje ungumzali okungenani indawo eyodwa yengane futhi ayikwazi ukususwa. Sicela ubuyekeze izindawo zakho ukuze ungasaphinde ubhekisele kule ndawo bese uyazama futhi.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Indawo ayizange ibuyekezwe, sicela uzame futhi',
         'success' => 'Indawo ibuyekezwe ngempumelelo.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

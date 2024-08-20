@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'இந்த இடம் தற்போது குறைந்தது ஒரு குழந்தையின் இருப்பிடத்தின் பெற்றோர் மற்றும் அதை நீக்க முடியாது. இந்த இருப்பிடத்தை இனி குறிப்பிடாமல் இருக்க உங்கள் இருப்பிடங்களை புதுப்பித்து மீண்டும் முயற்சிக்கவும்.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'இருப்பிடம் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' => 'இருப்பிடம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

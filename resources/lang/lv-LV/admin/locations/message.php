@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Pašlaik šī vieta ir vismaz viena bērna atrašanās vieta un to nevar izdzēst. Lūdzu, atjauniniet savas atrašanās vietas, lai vairs nerindotu šo atrašanās vietu, un mēģiniet vēlreiz.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Atrašanās vieta nav atjaunināta, lūdzu, mēģiniet vēlreiz',
         'success' => 'Atrašanās vieta ir veiksmīgi atjaunināta.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

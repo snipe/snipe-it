@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Er du sikker på at du vil gjenopprette databasen fra :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Det oppstod en feil under fjerning. ',

@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'למיקום זה מוגדרים תתי-מיקומים ולכן לא ניתן למחוק אותו. אנא עדכן את המיקומים כך שלא שמיקום זה לא יכיל תתי מיקומים ונסה שנית. ',
     'assigned_assets' => 'פריטים מוקצים',
     'current_location' => 'מיקום נוכחי',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'המיקום לא עודכן, אנא נסה שנית',
         'success' => 'המיקום עודכן בהצלחה.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

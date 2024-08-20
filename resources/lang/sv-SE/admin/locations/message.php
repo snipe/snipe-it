@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Denna plats är för närvarande överliggande för minst en annan plats och kan inte tas bort. Vänligen uppdatera dina platser så dom inte längre refererar till denna och försök igen.',
     'assigned_assets' => 'Tilldelade tillgångar',
     'current_location' => 'Nuvarande plats',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Platsen kunde inte uppdateras. Vänligen försök igen',
         'success' => 'Platsen uppdaterades.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

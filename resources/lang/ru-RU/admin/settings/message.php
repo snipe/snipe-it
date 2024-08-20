@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Вы уверены, что хотите восстановить базу данных из :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Возникла ошибка при попытке очистки. ',

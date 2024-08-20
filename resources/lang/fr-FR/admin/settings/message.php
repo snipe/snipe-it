@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Êtes-vous sûr de vouloir restaurer votre base de données à partir de :filename ?'
     ],
     'restore' => [
-        'success'               => 'Votre sauvegarde système a été restaurée. Veuillez vous reconnecter.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Une erreur est survenue durant la purge. ',

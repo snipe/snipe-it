@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Goobtan hadda waa waalidka ugu yaraan hal meel oo caruur ah lamana tirtiri karo. Fadlan cusboonaysii goobahaaga si aanay mar dambe tixraac goobtan oo isku day mar kale. ',
     'assigned_assets' => 'Hantida loo qoondeeyay',
     'current_location' => 'Goobta Hadda',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Goobta lama cusboonaysiin, fadlan isku day mar kale',
         'success' => 'Goobta si guul leh ayaa loo cusboonaysiiyay.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

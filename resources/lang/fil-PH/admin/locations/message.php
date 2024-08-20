@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Ang lokasyong ito ay kasalukuyang pinagmumulan sa hindi bumaba sa lokasyon isang bata at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga lokasyon upang hindi na magreperens sa lokasyong ito at paki-subok muli. ',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Ang lokasyon ay hindi nai-update, mangyaring subukang muli',
         'success' => 'Ang lokasyon ay matagumpay na nai-update.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

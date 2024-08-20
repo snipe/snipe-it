@@ -381,5 +381,7 @@ return [
     'default_avatar_help' => '如果用户没有个人资料照片，此图像将作为个人资料显示。',
     'restore_default_avatar' => '恢复 <a href=":default_avatar" data-toggle="lightbox" data-type="image">原始系统默认头像</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Cet emplacement est actuellement le parent d\'au moins un sous emplacement et ne peut pas être supprimé . S\'il vous plaît mettre à jour vos emplacement pour ne plus le référencer et réessayez. ',
     'assigned_assets' => 'Actifs assignés',
     'current_location' => 'Emplacement actuel',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Le lieu n\'a pas été mis à jour, veuillez essayer à nouveau',
         'success' => 'Le lieu a été mis à jour avec succès.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

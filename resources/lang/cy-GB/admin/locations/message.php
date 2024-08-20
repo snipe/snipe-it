@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Mae\'r lleoliad yma yn rhiant i oleiaf un lleoliad a nid yw\'n bosib dileu. Diweddarwch eich lleoliadau i beidio cyfeirio at y lleoliad yma ac yna ceisiwch eto. ',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Ni diweddarwyd y lleoliad, ceisiwch eto o.g.y.dd',
         'success' => 'Lleoliad wedi diweddaru\'n llwyddiannus.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

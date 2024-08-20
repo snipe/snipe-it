@@ -7,7 +7,7 @@ return array(
     'no_association' => '¡ADVERTENCIA! ¡El modelo de activo para este artículo no es válido o no existe!',
     'no_association_fix' => 'Esto causará problemas raros y horribles. Edita este activo para asignarlo a un modelo.',
     'assoc_users'	 => 'Este modelo está asociado a uno o más activos y no puede ser eliminado. Por favor, elimine los activos y vuelva a intentarlo. ',
-    'invalid_category_type' => 'Esta categoría debe ser una categoría de activos.',
+    'invalid_category_type' => 'El tipo de esta categoría debe ser categoría de activos.',
 
     'create' => array(
         'error'   => 'El modelo no fue creado, por favor inténtelo de nuevo.',

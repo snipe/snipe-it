@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Lokalizacja obecnie jest rodzicem minimum jeden innej lokalizacji i nie może zostać usunięta. Uaktualnij właściwości lokalizacji tak aby nie było relacji z tą lokalizacją i spróbuj ponownie. ',
     'assigned_assets' => 'Przypisane aktywa',
     'current_location' => 'Bieżąca lokalizacja',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Lokalizacja nie została zaktualizowana, spróbuj ponownie',
         'success' => 'Lokalizacja zaktualizowana pomyślnie.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'هذا الموقع هو حاليا أحد الوالدين لموقع طفل واحد على الأقل ولا يمكن حذفه. يرجى تحديث مواقعك لم تعد تشير إلى هذا الموقع ثم أعد المحاولة.',
     'assigned_assets' => 'الأصول المعينة',
     'current_location' => 'الموقع الحالي',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'لم يتم تحديث الموقع، الرجاء المحاولة مرة أخرى',
         'success' => 'تم تحديث الموقع بنجاح.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(
