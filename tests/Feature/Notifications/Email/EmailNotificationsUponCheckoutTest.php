@@ -26,7 +26,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
-        $asset->model->category->update(['checkout_email' => true]);
+        $asset->model->category->update(['checkin_email' => true]);
 
         $this->fireCheckOutEvent($asset, $user);
 
@@ -43,7 +43,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
-        $asset->model->category->update(['checkout_email' => false]);
+        $asset->model->category->update(['checkin_email' => false]); //this is a 0 so the setting IS disabled
 
         $this->fireCheckOutEvent($asset, $user);
 

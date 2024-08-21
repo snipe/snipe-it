@@ -82,8 +82,7 @@ class CheckoutAssetNotification extends Notification
         /**
          * Only send notifications to users that have email addresses
          */
-        if ($this->target instanceof User && (($this->target->email != '') || $this->settings->admin_cc_email != '')) {
-
+        if ($this->target instanceof User && ($this->target->email != '') || ($this->settings->admin_cc_email != '')) {
             /**
              * Send an email if the asset requires acceptance,
              * so the user can accept or decline the asset
