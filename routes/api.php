@@ -797,12 +797,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'restore'
                 ]
             )->name('api.models.restore');
-            Route::post('{id}/restore',
-                [
-                    Api\AssetModelsController::class,
-                    'restore'
-                ]
-            )->name('api.models.restore');
 
             Route::post('{model_id}/files',
             [
