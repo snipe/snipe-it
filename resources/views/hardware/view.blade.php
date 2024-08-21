@@ -1120,7 +1120,7 @@
                                     </table>
                                 @else
 
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1157,7 +1157,7 @@
                                                     <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
                                                     <td>{{ $component->serial }}</td>
                                                     <td>
-                                                        <a href="{{ route('components.checkin.show', $component->pivot->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
+                                                        <a href="{{ route('components.checkin.show', $component->pivot->id) }}" class="btn btn-sm bg-purple hidden-print" data-tooltip="true">{{ trans('general.checkin') }}</a>
                                                     </td>
 
                                                         <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
@@ -1175,7 +1175,7 @@
                                         </tfoot>
                                     </table>
                                 @else
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1239,7 +1239,7 @@
 
                                 @else
 
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1403,7 +1403,7 @@
                                                             <x-icon type="download" />
                                                         </a>
 
-                                                        <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                                                        <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default hidden-print" target="_blank">
                                                             <x-icon type="external-link" />
                                                         </a>
                                                     @endif
@@ -1427,7 +1427,7 @@
 
                                 @else
 
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1504,11 +1504,11 @@
                                                 <td>
                                                     @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
                                                         <a href="{{ route('show/modelfile', [$asset->model->id, $file->id]) }}" class="btn btn-sm btn-default hidden-print">
-                                                            <x-icon type="download" />
+                                                            <x-icon type="download" class="hidden-print" />
                                                         </a>
 
                                                         <a href="{{ route('show/modelfile', [$asset->model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default hidden-print" target="_blank">
-                                                            <x-icon type="external-link" />
+                                                            <x-icon type="external-link" class="hidden-print" />
                                                         </a>
 
                                                     @endif
