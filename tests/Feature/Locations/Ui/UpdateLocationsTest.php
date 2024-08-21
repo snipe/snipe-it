@@ -61,7 +61,7 @@ class UpdateLocationsTest extends TestCase
                 'name' => 'Test Location',
                 'parent_id' => '100000000'
             ])
-            ->assertRedirect(route('locations.index'));
+            ->assertRedirect(route('locations.edit', ['location' => $location->id]));
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
         $this->assertFalse(Location::where('name', 'Test Location')->exists());

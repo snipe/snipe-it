@@ -38,11 +38,12 @@ class CreateLocationsTest extends TestCase
         $this->assertFalse(Location::where('name', 'Test Location')->exists());
 
         $this->actingAs(User::factory()->superuser()->create())
+            ->from(route('locations.create'))
             ->post(route('locations.store'), [
                 'name' => 'Test Location',
                 'parent_id' => '100000000'
             ])
-            ->assertRedirect(route('locations.index'));
+            ->assertRedirect(route('locations.create'));
 
         $this->assertFalse(Location::where('name', 'Test Location')->exists());
     }
