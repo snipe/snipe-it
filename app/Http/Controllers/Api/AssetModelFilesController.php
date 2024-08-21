@@ -42,7 +42,7 @@ class AssetModelFilesController extends Controller
         }
 
         // Make sure we are allowed to update this asset
-        $this->authorize('update', $asset);
+        $this->authorize('update', $assetModel);
 
             if ($request->hasFile('file')) {
             // If the file storage directory doesn't exist; create it
@@ -52,13 +52,13 @@ class AssetModelFilesController extends Controller
 
             // Loop over the attached files and add them to the asset
             foreach ($request->file('file') as $file) {
-                $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$asset->id, $file);
+                $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$assetModel->id, $file);
                 
-                $asset->logUpload($file_name, e($request->get('notes')));
+                $assetModel->logUpload($file_name, e($request->get('notes')));
             }
 
             // All done - report success
-            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/models/message.upload.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', $assetModel, trans('admin/models/message.upload.success')));
         }
 
         // We only reach here if no files were included in the POST, so tell the user this
