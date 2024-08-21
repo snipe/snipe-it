@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Notifications\Email;
 
+use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
 use App\Models\User;
@@ -10,9 +11,7 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-/**
- * @group notifications
- */
+#[Group('notifications')]
 class EmailNotificationsUponCheckoutTest extends TestCase
 {
     protected function setUp(): void

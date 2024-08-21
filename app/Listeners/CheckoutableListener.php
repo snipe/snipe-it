@@ -98,6 +98,7 @@ class CheckoutableListener
                 ->notify($this->getCheckinNotification($event));
         }
 
+
         /**
          * Send the appropriate notification
          */
