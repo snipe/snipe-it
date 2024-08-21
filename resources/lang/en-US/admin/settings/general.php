@@ -32,6 +32,7 @@ return [
     'backups_help'              => 'Create, download, and restore backups ',
     'backups_restoring'         => 'Restoring from Backup',
     'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_drop' => 'Perform a \'wipe\' on the database before restoring',
     'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',

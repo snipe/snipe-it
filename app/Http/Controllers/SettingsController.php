@@ -1216,11 +1216,6 @@ class SettingsController extends Controller
 
                 // TODO: run a backup
 
-
-                Artisan::call('db:wipe', [
-                    '--force' => true,
-                ]);
-
                 Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
                 $restore_params = [
@@ -1242,6 +1237,10 @@ class SettingsController extends Controller
                     $restore_params['--sanitize-with-prefix'] = $prefix;
                 }
 
+                if (!$request->input('drop')) {
+                    $restore_params['--do-not-wipe'] = true;
+                }
+
                 // run the restore command
                 Artisan::call('snipeit:restore',
                     $restore_params
@@ -1249,12 +1248,6 @@ class SettingsController extends Controller
 
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
-
-                /* Run migrations */
-                Log::debug('Migrating database...');
-                Artisan::call('migrate', ['--force' => true]);
-                $migrate_output = Artisan::output();
-                Log::debug($migrate_output);
 
                 $find_user = DB::table('users')->where('username', $user->username)->exists();
 

@@ -37,6 +37,12 @@
                                          name="clean" {{ config('backup.sanitize_by_default') ? "checked='checked'" : "" }}>{{ trans('admin/settings/general.backups_clean') }}
                             </label></p>
                         <p>{{ trans('admin/settings/general.backups_clean_helptext') }}</p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="drop"
+                                       checked="checked">{{ trans('admin/settings/general.backups_drop') }}
+                            </label>
+                        </p>
                     </div>
                     <div class="modal-footer">
                         {{ csrf_field() }}
