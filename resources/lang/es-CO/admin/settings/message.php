@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'
     ],
     'restore' => [
-        'success'               => 'Su copia de respaldo del sistema ha sido restaurada. Por favor, inicie sesión nuevamente.'
+        'success'               => 'Se ha restaurado la copia de seguridad de su sistema. Por favor, vuelva a iniciar sesión.'
     ],
     'purge' => [
         'error'     => 'Se ha producido un error al purgar. ',

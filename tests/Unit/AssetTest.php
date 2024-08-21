@@ -146,10 +146,8 @@ class AssetTest extends TestCase
 
         $this->assertTrue($a->save());
         $this->assertTrue($b->save());
-        \Log::error("A asset tag is: " . $a->asset_tag);
         $matches = [];
         preg_match('/\d+/', $a->asset_tag, $matches);
-        \Log::error("digits are: " . $matches[0]);
         $this->assertEquals(Setting::getSettings()->next_auto_tag_base, $matches[0] + 1, "Next auto increment number should be the last normally-saved one plus one, but isn't");
     }
 

@@ -13,5 +13,5 @@ return array(
     'profile_updated' => 'Konto erfolgreich aktualisiert',
     'no_tokens' => 'Sie haben noch keinen persönlichen Zugangs-Token erstellt.',
     'enable_sounds' => 'Soundeffekte aktivieren',
-    'enable_confetti' => 'Enable confetti effects',
+    'enable_confetti' => 'Konfetti-Effekte aktivieren',
 );

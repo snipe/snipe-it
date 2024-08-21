@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => '至少還有一個子項目與此位置關聯，目前不能被删除，請檢查後重試。 ',
     'assigned_assets' => '已分配資產',
     'current_location' => '目前位置',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => '更新位置失敗，請重試。',
         'success' => '成功更新地點.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

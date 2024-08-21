@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'តើ​អ្នក​ប្រាកដ​ថា​អ្នក​ចង់​ស្ដារ​មូលដ្ឋាន​ទិន្នន័យ​របស់​អ្នក​ពី :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'កំហុសបានកើតឡើងខណៈពេលកំពុងសម្អាត។ ',

@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Ta je lokacija trenutačno roditelj najmanje jedne lokacije za djecu i ne može se izbrisati. Ažurirajte svoje lokacije da više ne referiraju ovu lokaciju i pokušajte ponovo.',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Lokacija nije ažurirana, pokušajte ponovo',
         'success' => 'Lokacija je uspješno ažurirana.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

@@ -121,7 +121,7 @@
                     </div> <!--/box-body-->
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled><x-icon type="checkmark" /> {{ trans('button.submit') }}</button>
                     </div><!-- /.box-footer -->
 
                     @foreach ($users as $user)

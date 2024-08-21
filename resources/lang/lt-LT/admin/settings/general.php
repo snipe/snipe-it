@@ -381,5 +381,7 @@ return [
     'default_avatar_help' => 'Jei naudotojas neturi profilio nuotraukos, šis atvaizdas bus rodomas jo profilyje.',
     'restore_default_avatar' => 'Atkurti <a href=":default_avatar" data-toggle="lightbox" data-type="image">pradinį sistemos numatytąjį avatarą</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'Likus kiek dienų iki numatomo turto paėmimo, jis turėtų būti rodomas puslapyje „Laukia paėmimo“?',
 
 ];

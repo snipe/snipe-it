@@ -381,5 +381,7 @@ return [
     'default_avatar_help' => 'Cette image sera utilisée pour le profil des utilisateurs·trices qui n\'ont pas de photo de profil.',
     'restore_default_avatar' => 'Rétablir <a href=":default_avatar" data-toggle="lightbox" data-type="image">l\'avatar par défaut d\'origine</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

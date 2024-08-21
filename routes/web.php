@@ -66,6 +66,11 @@ Route::group(['middleware' => 'auth'], function () {
             [LocationsController::class, 'postBulkDeleteStore']
         )->name('locations.bulkdelete.store');
 
+        Route::post(
+            '{location}/restore',
+            [LocationsController::class, 'postRestore']
+        )->name('locations.restore');
+
 
         Route::get('{locationId}/clone',
             [LocationsController::class, 'getClone']

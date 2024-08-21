@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Ši vieta šiuo metu yra kaip pagrindinė bent vienai žemesnio lygio vietai ir negali būti panaikinta. Atnaujinkite savo žemesnio lygio vietas, kad nebebūtų sąsajos su šia vieta, ir bandykite dar kartą. ',
     'assigned_assets' => 'Priskirtas turtas',
     'current_location' => 'Dabartinė vieta',
+    'open_map' => 'Atidaryti :map_provider_icon žemėlapiuose',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Vieta nebuvo atnaujinta. Bandykite dar kartą',
         'success' => 'Vieta atnaujinta sėkmingai.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Vieta nebuvo atkurta. Bandykite dar kartą',
+        'success' => 'Vieta atkurta sėkmingai.'
     ),
 
     'delete' => array(

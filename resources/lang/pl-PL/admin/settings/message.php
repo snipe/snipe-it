@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Czy na pewno chcesz przywrócić bazę danych z :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Wystąpił błąd podczas czyszczenia. ',

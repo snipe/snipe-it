@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'crwdns1405:0crwdne1405:0',
     'assigned_assets' => 'crwdns11179:0crwdne11179:0',
     'current_location' => 'crwdns11181:0crwdne11181:0',
+    'open_map' => 'crwdns12696:0crwdne12696:0',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'crwdns654:0crwdne654:0',
         'success' => 'crwdns655:0crwdne655:0'
+    ),
+
+    'restore' => array(
+        'error'   => 'crwdns12698:0crwdne12698:0',
+        'success' => 'crwdns12700:0crwdne12700:0'
     ),
 
     'delete' => array(

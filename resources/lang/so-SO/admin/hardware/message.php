@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Faylkaaga si guul leh ayaa loo tirtiray',
         'file_delete_error'      => 'Faylka waa la tirtiri waayay',
         'file_missing' => 'Faylka la doortay waa maqan yahay',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah oo ku jira safka madaxa waxa ku jira xarfaha UTF-8 oo khaldan',
         'content_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah safka koowaad ee nuxurka waxa ku jira xarfo UTF-8 oo khaldan',
     ],

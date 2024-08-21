@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Sel asukohal on hetkel all-asukohti ja seda ei saa kustutada. Palun uuenda oma asukohti nii, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
     'assigned_assets' => 'Määratud Varad',
     'current_location' => 'Praegune asukoht',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Asukohta ei uuendatud, palun proovi uuesti',
         'success' => 'Asukoha uuendamine õnnestus.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

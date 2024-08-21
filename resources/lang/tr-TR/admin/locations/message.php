@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'Bu konum şu anda en az bir alt konum üstüdür ve silinemez. Lütfen artık bu konuma ait alt konumları güncelleyin. ',
     'assigned_assets' => 'Atanan Varlıklar',
     'current_location' => 'Mevcut konum',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Konum güncellenemedi, lütfen tekrar deneyin',
         'success' => 'Konum güncellendi.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

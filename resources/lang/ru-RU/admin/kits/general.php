@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Комплект успешно удален',
     'kit_model_updated'                 => 'Модель успешно изменена',
     'kit_model_detached'                => 'Модель успешно отсоединена',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

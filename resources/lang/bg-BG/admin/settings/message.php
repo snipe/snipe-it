@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Сигурни ли сте че искате да възстановите датабазата от :filename?'
     ],
     'restore' => [
-        'success'               => 'Вашият системен архив беше възстановен. Моля влезте отново.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Възникна грешка при пречистване. ',

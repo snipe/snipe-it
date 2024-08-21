@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => '이 장소는 현재 하나 이상의 하위 장소를 가지고 있기에 삭제 할 수 없습니다. 이 장소의 참조를 수정하고 다시 시도해 주세요. ',
     'assigned_assets' => 'Assigned Assets',
     'current_location' => 'Current Location',
+    'open_map' => 'Open in :map_provider_icon Maps',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => '장소가 갱신되지 않았습니다. 다시 시도해 주세요.',
         'success' => '장소가 갱신되었습니다.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Location was not restored, please try again',
+        'success' => 'Location restored successfully.'
     ),
 
     'delete' => array(

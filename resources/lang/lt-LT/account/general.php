@@ -13,5 +13,5 @@ return array(
     'profile_updated' => 'Paskyra atnaujinta sėkmingai',
     'no_tokens' => 'Nesate sukūrę jokių asmeninių prieigos raktų.',
     'enable_sounds' => 'Įjungti garso efektus',
-    'enable_confetti' => 'Enable confetti effects',
+    'enable_confetti' => 'Įgalinti konfeti efektus',
 );

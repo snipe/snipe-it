@@ -17,7 +17,7 @@ return [
 '
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'در حین پاکسازی خطایی رخ داد. ',

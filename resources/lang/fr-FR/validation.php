@@ -169,7 +169,7 @@ return [
     'unique' => 'Cet-te :attribute a déjà été pris-e.',
     'uploaded' => 'L\'attribut: n\'a pas pu télécharger.',
     'uppercase' => 'The :attribute field must be uppercase.',
-    'url' => 'The :attribute field must be a valid URL.',
+    'url' => 'Le champ :attribute doit être une URL valide.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
