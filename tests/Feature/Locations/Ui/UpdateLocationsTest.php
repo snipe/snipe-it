@@ -52,6 +52,21 @@ class UpdateLocationsTest extends TestCase
         $this->assertFalse(Location::where('name', 'Test Location')->exists());
     }
 
+    public function testUserCannotEditLocationsWithInvalidParent()
+    {
+        $location = Location::factory()->create();
+        $response = $this->actingAs(User::factory()->superuser()->create())
+            ->from(route('locations.edit', ['location' => $location->id]))
+            ->put(route('locations.update', ['location' => $location]), [
+                'name' => 'Test Location',
+                'parent_id' => '100000000'
+            ])
+            ->assertRedirect(route('locations.index'));
+
+        $this->followRedirects($response)->assertSee(trans('general.error'));
+        $this->assertFalse(Location::where('name', 'Test Location')->exists());
+    }
+
 
 
 }

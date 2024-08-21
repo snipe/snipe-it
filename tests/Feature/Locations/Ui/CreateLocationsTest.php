@@ -32,6 +32,19 @@ class CreateLocationsTest extends TestCase
 
         $this->assertTrue(Location::where('name', 'Test Location')->exists());
     }
-    
+
+    public function testUserCannotCreateLocationsWithInvalidParent()
+    {
+        $this->assertFalse(Location::where('name', 'Test Location')->exists());
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('locations.store'), [
+                'name' => 'Test Location',
+                'parent_id' => '100000000'
+            ])
+            ->assertRedirect(route('locations.index'));
+
+        $this->assertFalse(Location::where('name', 'Test Location')->exists());
+    }
 
 }
