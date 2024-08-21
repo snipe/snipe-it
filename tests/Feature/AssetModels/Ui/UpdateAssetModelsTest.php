@@ -14,11 +14,10 @@ class UpdateAssetModelsTest extends TestCase
     public function testPermissionRequiredToStoreAssetModel()
     {
         $this->actingAs(User::factory()->create())
-            ->post(route('models.store'), [
-                'name' => 'Test Model',
-                'category_id' => Category::factory()->create()->id
+            ->put(route('models.update', ['model' => AssetModel::factory()->create()]), [
+                'name' => 'Changed Name',
+                'category_id' => Category::factory()->create()->id,
             ])
-            ->assertStatus(403)
             ->assertForbidden();
     }
 
