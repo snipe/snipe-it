@@ -1204,7 +1204,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.0]
      */
-    public function postRestore($filename = null) : RedirectResponse
+    public function postRestore(Request $request, $filename = null): RedirectResponse
     {
 
         if (! config('app.lock_passwords')) {
@@ -1217,29 +1217,38 @@ class SettingsController extends Controller
 
                 // TODO: run a backup
 
-
-                Artisan::call('db:wipe', [
-                    '--force' => true,
-                ]);
-
                 Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
+
+                $restore_params = [
+                    '--force' => true,
+                    '--no-progress' => true,
+                    'filename' => storage_path($path) . '/' . $filename
+                ];
+
+                if ($request->input('clean')) {
+                    Log::debug("Attempting 'clean' - first, guessing prefix...");
+                    Artisan::call('snipeit:restore', [
+                        '--sanitize-guess-prefix' => true,
+                        'filename' => storage_path($path) . '/' . $filename
+                    ]);
+                    $guess_prefix_output = Artisan::output();
+                    Log::debug("Sanitize output is: $guess_prefix_output");
+                    list($prefix, $_output) = explode("\n", $guess_prefix_output);
+                    Log::debug("prefix is: '$prefix'");
+                    $restore_params['--sanitize-with-prefix'] = $prefix;
+                }
+
+                if (!$request->input('drop')) {
+                    $restore_params['--do-not-wipe'] = true;
+                }
 
                 // run the restore command
                 Artisan::call('snipeit:restore',
-                [
-                    '--force' => true,
-                    '--no-progress' => true,
-                    'filename' => storage_path($path).'/'.$filename
-                ]);
+                    $restore_params
+                );
 
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
-
-                /* Run migrations */
-                Log::debug('Migrating database...');
-                Artisan::call('migrate', ['--force' => true]);
-                $migrate_output = Artisan::output();
-                Log::debug($migrate_output);
 
                 $find_user = DB::table('users')->where('username', $user->username)->exists();
 

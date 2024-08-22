@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use ZipArchive;
 use Illuminate\Support\Facades\Log;
 
@@ -172,7 +173,8 @@ class RestoreFromBackup extends Command
                                             {--no-progress : Don\'t show a progress bar}
                                             {--sanitize-guess-prefix : Guess and output the table-prefix needed to "sanitize" the SQL}
                                             {--sanitize-with-prefix= : "Sanitize" the SQL, using the passed-in table prefix (can be learned from --sanitize-guess-prefix). Pass as just \'--sanitize-with-prefix=\' to use no prefix}
-                                            {--sql-stdout-only : ONLY "Sanitize" the SQL and print it to stdout - useful for debugging - probably requires --sanitize-with-prefix= }';
+                                            {--sql-stdout-only : ONLY "Sanitize" the SQL and print it to stdout - useful for debugging - probably requires --sanitize-with-prefix= }
+                                            {--do-not-wipe : Do *NOT* wipe the database before restoring}';
 
     /**
      * The console command description.
@@ -426,6 +428,12 @@ class RestoreFromBackup extends Command
         }
 
         try {
+            if (!$this->option('do-not-wipe')) {
+                Artisan::call('db:wipe', [
+                    '--force' => true,
+                ]);
+            }
+
             if ( $this->option('sanitize-with-prefix') === null) {
                 // "Legacy" direct-piping
                 $bytes_read = 0;
@@ -497,6 +505,14 @@ class RestoreFromBackup extends Command
                 $bar->advance();
             }
         }
+
+        /* Run migrations */
+        Log::debug('Migrating database...');
+        Artisan::call('migrate', ['--force' => true]);
+        $migrate_output = Artisan::output();
+        Log::debug($migrate_output);
+
+
         if ($bar) {
             $bar->finish();
             $this->line('');
