@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\CustomField;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -24,12 +25,11 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
         $this->fields->each(function ($field) {
-            if ($field->element === 'checkbox') {
-                $this->selectedValues[$field->db_column] = explode(', ', $field->defaultValue($this->model_id));
-            } else {
-                $this->selectedValues[$field->db_column] = $field->defaultValue($this->model_id);
-            }
+            $this->setSelectedValueForField($field);
         });
+
+        dump(old('default_values'));
+        dump($this->selectedValues);
     }
 
     #[Computed]
@@ -53,5 +53,24 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public function render()
     {
         return view('livewire.custom-field-set-default-values-for-model');
+    }
+
+    private function setSelectedValueForField(CustomField $field): void
+    {
+        $defaultValue = $field->defaultValue($this->model_id);
+
+        if (old('default_values.' . $field->id)) {
+            // @todo: need to handle old input being null on purpose...
+            $defaultValue = old('default_values.' . $field->id);
+        }
+
+        // on first load the default value for checkboxes will be
+        // a comma-separated string but if we're loading the page
+        // with old input then it was already parsed into an array.
+        if ($field->element === 'checkbox' && is_string($defaultValue)) {
+            $this->selectedValues[$field->db_column] = explode(', ', $defaultValue);
+        } else {
+            $this->selectedValues[$field->db_column] = $defaultValue;
+        }
     }
 }
