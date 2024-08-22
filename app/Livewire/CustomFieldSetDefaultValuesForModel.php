@@ -25,7 +25,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
         $this->fields->each(function ($field) {
-            $this->setSelectedValueForField($field);
+            $this->selectedValues[$field->db_column] = $this->getSelectedValueForField($field);
         });
     }
 
@@ -52,7 +52,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
         return view('livewire.custom-field-set-default-values-for-model');
     }
 
-    private function setSelectedValueForField(CustomField $field): void
+    private function getSelectedValueForField(CustomField $field)
     {
         $defaultValue = $field->defaultValue($this->model_id);
 
@@ -71,6 +71,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
             $defaultValue = explode(', ', $defaultValue);
         }
 
-        $this->selectedValues[$field->db_column] = $defaultValue;
+        return $defaultValue;
     }
 }
