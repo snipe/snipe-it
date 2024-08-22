@@ -197,7 +197,9 @@
                       {{ trans('admin/users/general.print_assigned') }}
                   </a>
                   @else
-                  <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.print_assigned') }}</button>
+                  <button style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">
+                      <x-icon type="print" />
+                      {{ trans('admin/users/general.print_assigned') }}</button>
                 @endif
                 </div>
                 @endcan
