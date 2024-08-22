@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-default pull-right" style="margin-left: 5px;"> 
+    <a href="{{ route('settings.index') }}" class="btn btn-default pull-right" style="margin-left: 5px;">
       {{ trans('general.back') }}
     </a>
 
@@ -21,8 +21,36 @@
 {{-- Page content --}}
 @section('content')
 
+    <div class="modal modal-warning fade" tabindex="-1" role="dialog" id="backupRestoreModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" role="form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ trans('admin/settings/message.backup.restore_warning') }}</p>
+                        <p><label><input type="checkbox"
+                                         name="clean" {{ config('backup.sanitize_by_default') ? "checked='checked'" : "" }}>{{ trans('admin/settings/general.backups_clean') }}
+                            </label></p>
+                        <p>{{ trans('admin/settings/general.backups_clean_helptext') }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        {{ csrf_field() }}
+                        {{ method_field('POST') }}
+                        <button type="button" class="btn btn-default pull-left"
+                                data-dismiss="modal">{{ trans('general.cancel') }}</button>
+                        <button type="submit" class="btn btn-outline">{{ trans('general.yes') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<div class="row">
+    <div class="row">
 
   <div class="col-md-8">
     
@@ -85,13 +113,12 @@
                           </a>
                       @endif
 
-                     <a data-html="true" 
-                     href="{{ route('settings.backups.restore', $file['filename']) }}" 
-                     class="btn btn-warning btn-sm restore-asset {{ (config('app.lock_passwords')) ? ' disabled': '' }}" 
-                     data-toggle="modal" 
-                     data-content="{{ trans('admin/settings/message.backup.restore_warning') }}" 
-                     data-title="{{ trans('admin/settings/message.backup.restore_confirm', array('filename' => e($file['filename']))) }}"
-                     onClick="return false;">
+                          <a data-html="true"
+                             href="{{ route('settings.backups.restore', $file['filename']) }}"
+                             class="btn btn-warning btn-sm restore-backup {{ (config('app.lock_passwords')) ? ' disabled': '' }}"
+                             data-target="#backupRestoreModal"
+                             data-title="{{ trans('admin/settings/message.backup.restore_confirm', array('filename' => e($file['filename']))) }}"
+                             onClick="return false;">
                       <i class="fas fa-retweet" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('general.restore') }}</span>
                     </a>
@@ -230,11 +257,21 @@
                 });
             }
 
-
-
-
         });
       });
+
+      // due to dynamic loading, we have to use the below 'weird' way of adding event handlers instead of just saying
+      // $('.restore-backup').on( .....
+      $('table').on('click', '.restore-backup', function (event) {
+          event.preventDefault();
+          var modal = $('#backupRestoreModal');
+          modal.find('.modal-title').text($(this).data('title'));
+          modal.find('form').attr('action', $(this).attr('href'));
+          modal.modal({
+              show: true
+          });
+          return false;
+      })
   </script>
 @stop
 
