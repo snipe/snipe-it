@@ -27,9 +27,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fields->each(function ($field) {
             $this->setSelectedValueForField($field);
         });
-
-        dump(old('default_values'));
-        dump($this->selectedValues);
     }
 
     #[Computed]
@@ -59,9 +56,11 @@ class CustomFieldSetDefaultValuesForModel extends Component
     {
         $defaultValue = $field->defaultValue($this->model_id);
 
-        // if we have old input for this field, use that instead
-        if (old('default_values.' . $field->id)) {
-            // @todo: need to handle old input being null on purpose...
+        // if old() contains a value for default_values that means
+        // the user has submitted the form and we were redirected
+        // back with the old input.
+        // Let's use what they had previously set.
+        if (old('default_values')) {
             $defaultValue = old('default_values.' . $field->id);
         }
 
