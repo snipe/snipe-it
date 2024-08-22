@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit blev slettet',
     'kit_model_updated'                 => 'Model blev opdateret',
     'kit_model_detached'                => 'Model blev fjernet',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

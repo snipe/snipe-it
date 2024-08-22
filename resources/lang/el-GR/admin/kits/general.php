@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Το κιτ διαγράφηκε με επιτυχία',
     'kit_model_updated'                 => 'Το μοντέλο ενημερώθηκε με επιτυχία',
     'kit_model_detached'                => 'Το μοντέλο αποσυνδέθηκε με επιτυχία',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

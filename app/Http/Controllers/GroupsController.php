@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Group;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 /**
  * This controller handles all actions related to User Groups for
@@ -22,11 +23,9 @@ class GroupsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @see GroupsController::getDatatable() method that generates the JSON response
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(): View
     {
-        // Show the page
         return view('groups/index');
     }
 
@@ -36,9 +35,8 @@ class GroupsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @see GroupsController::postCreate()
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function create(Request $request)
+    public function create(Request $request) : View
     {
         $group = new Group;
         // Get all the available permissions
@@ -56,15 +54,14 @@ class GroupsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @see GroupsController::getCreate()
      * @since [v1.0]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         // create a new group instance
         $group = new Group();
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
-        $group->created_by = Auth::user()->id;
+        $group->created_by = auth()->id();
 
         if ($group->save()) {
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.create'));
@@ -80,9 +77,8 @@ class GroupsController extends Controller
      * @see GroupsController::postEdit()
      * @param int $id
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit($id) : View | RedirectResponse
     {
         $group = Group::find($id);
 
@@ -104,9 +100,8 @@ class GroupsController extends Controller
      * @see GroupsController::getEdit()
      * @param int $id
      * @since [v1.0]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request, $id = null) : RedirectResponse
     {
         if (! $group = Group::find($id)) {
             return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
@@ -132,10 +127,8 @@ class GroupsController extends Controller
      * @see GroupsController::getEdit()
      * @param int $id
      * @since [v1.0]
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy($id) : RedirectResponse
     {
         if (! config('app.lock_passwords')) {
             if (! $group = Group::find($id)) {
@@ -154,10 +147,9 @@ class GroupsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param $id
-     * @return \Illuminate\Contracts\View\View
      * @since [v4.0.11]
      */
-    public function show($id)
+    public function show($id) : View | RedirectResponse
     {
         $group = Group::find($id);
 

@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          backupGlobals="false"
-         backupStaticAttributes="false"
+         backupStaticProperties="false"
          bootstrap="bootstrap/autoload.php"
+         cacheDirectory=".phpunit.cache"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
 >
-  <coverage>
-    <include>
-      <directory suffix=".php">app/</directory>
-    </include>
-  </coverage>
   <testsuites>
     <testsuite name="Unit">
       <directory suffix="Test.php">./tests/Unit</directory>
@@ -33,4 +26,9 @@
     <env name="SESSION_DRIVER" value="array"/>
     <ini name="display_errors" value="true"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">app/</directory>
+    </include>
+  </source>
 </phpunit>

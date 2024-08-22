@@ -7,7 +7,7 @@ return array(
     'no_association' => '警告！此物品的资产型号无效或丢失！',
     'no_association_fix' => '这将以怪异且可怕的方式破坏一切。立即编辑此资产并为其指定一个型号。',
     'assoc_users'	 => '本模板下目前还有相关的资产，不能被删除，请删除资产以后，再重试。',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => '模板没有被创建，请重试。',

@@ -235,7 +235,7 @@ class LocationPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fas fa-map-marker-alt" aria-hidden="true"></i>';
+        return '<x-icon type="locations" />';
     }
 
     public function fullName()

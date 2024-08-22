@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'crwdns957:0crwdne957:0',
     'license_seats'  			=> 'crwdns958:0crwdne958:0',
     'seat'  					=> 'crwdns959:0crwdne959:0',
+    'seat_count'  				=> 'crwdns12566:0crwdne12566:0',
     'seats'  					=> 'crwdns960:0crwdne960:0',
     'software_licenses'  		=> 'crwdns961:0crwdne961:0',
     'user'  					=> 'crwdns962:0crwdne962:0',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'crwdns11549:0crwdne11549:0',
-                'modal'             => 'crwdns11551:0crwdne11551:0',
+                'modal'             => 'crwdns12568:0crwdne12568:0',
                 'enabled_tooltip'   => 'crwdns11553:0crwdne11553:0',
                 'disabled_tooltip'  => 'crwdns11555:0crwdne11555:0',
                 'disabled_tooltip_reassignable'  => 'crwdns11803:0crwdne11803:0',
                 'success'           => 'crwdns11557:0crwdne11557:0',
-                'log_msg'           => 'crwdns11559:0crwdne11559:0',
+                'log_msg'           => 'crwdns12570:0crwdne12570:0',
             ],
 
             'checkout_all'              => [

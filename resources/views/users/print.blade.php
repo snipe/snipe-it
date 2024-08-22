@@ -6,6 +6,8 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : config('app.url').'/favicon.ico' }}">
 
+    <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
+
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
@@ -31,7 +33,6 @@
             size: A4;
         }
 
-
         .print-logo {
             max-height: 40px;
         }
@@ -40,8 +41,6 @@
             margin-top: 20px;
             margin-bottom: 10px;
         }
-
-
     </style>
 
     <script nonce="{{ csrf_token() }}">
@@ -78,7 +77,10 @@
     {{ ($show_user->employee_num!='') ? ' (#'.$show_user->employee_num.') ' : '' }}
     {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
 </h3>
-<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}</body>
+<p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
+
+</body>
+
     @if ($assets->count() > 0)
         @php
             $counter = 1;
@@ -118,7 +120,9 @@
             </thead>
             <tbody>
             @foreach ($assets as $asset)
-
+                @php
+                    if ($asset->model->category->getEula()) $eulas[] = $asset->model->category->getEula()
+                @endphp
                 <tr>
                     <td>{{ $counter }}</td>
                     <td>
@@ -146,23 +150,27 @@
                         $assignedCounter = 1;
                     @endphp
                     @foreach ($asset->assignedAssets as $asset)
-
                         <tr>
                             <td>{{ $counter }}.{{ $assignedCounter }}</td>
-                            <td data-formatter="imageFormatter">
+                            <td>
                                 @if ($asset->getImageUrl())
                                     <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
                                 @endif
                             </td>
                             <td>{{ $asset->asset_tag }}</td>
                             <td>{{ $asset->name }}</td>
-                            <td>{{ $asset->model->category->name }}</td>
+                            <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
+                            <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
                             <td>{{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}</td>
                             <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
-                            <td>{{ $asset->model->name }}</td>
                             <td>{{ $asset->serial }}</td>
-                            <td>{{ $asset->last_checkout }}</td>
-                            <td><img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></td>
+                            <td>
+                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}</td>
+                            <td>
+                                @if (($asset->assetlog->first()) && ($asset->assetlog->first()->accept_signature!=''))
+                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
+                                @endif
+                            </td>
                         </tr>
                         @php
                             $assignedCounter++
@@ -209,7 +217,9 @@
             @endphp
 
             @foreach ($licenses as $license)
-
+                @php
+                    if ($license->category->getEula()) $eulas[] = $license->category->getEula()
+                @endphp
                 <tr>
                     <td>{{ $lcounter }}</td>
                     <td>{{ $license->name }}</td>
@@ -265,6 +275,9 @@
 
             @foreach ($accessories as $accessory)
                 @if ($accessory)
+                    @php
+                        if ($accessory->category->getEula()) $eulas[] = $accessory->category->getEula()
+                    @endphp
                     <tr>
                         <td>{{ $acounter }}</td>
                         <td>
@@ -325,10 +338,11 @@
 
             @foreach ($consumables as $consumable)
                 @if ($consumable)
+                    @php
+                        if ($consumable->category->getEula()) $eulas[] = $consumable->category->getEula()
+                    @endphp
                     <tr>
                         <td>{{ $ccounter }}</td>
-
-
                         <td>
                         @if ($consumable->deleted_at!='')
                             <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
@@ -352,30 +366,49 @@
         </table>
     @endif
 
-    <table style="margin-top: 80px;">
+    <p></p>
+    <div class="pull-right">
+        <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target="#eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+            <i class="fa fa-eye-slash"></i>
+        </button>
+    </div>
+
+    <table style="margin-top: 80px;" class="snipe-table">
+        <tr class="collapse" id="eula-row">
+            <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
+            <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
+                @php
+                    if (!empty($eulas)) $eulas = array_unique($eulas);
+                @endphp
+                @if (!empty($eulas))
+                    @foreach ($eulas as $key => $eula)
+                        {!! $eula !!}
+                    @endforeach
+                @endif
+            </td>
+		</tr>
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('general.signed_off_by') }}:</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td>_____________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td>_____________</td>
         </tr>
         <tr style="height: 80px;">
             <td></td>
-            <td style="padding-right: 10px; vertical-align: top;">Name</td>
-            <td style="padding-right: 10px; vertical-align: top;">Signature</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.name') }}</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.signature') }}</td>
             <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
         </tr>
-
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('admin/users/table.manager') }}:</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td style="padding-right: 10px; vertical-align: top;">________________________________________________________</td>
-            <td>_____________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
+            <td>_____________</td>
         </tr>
         <tr>
             <td></td>
-            <td style="padding-right: 10px; vertical-align: top;">Name</td>
-            <td style="padding-right: 10px; vertical-align: top;">Signature</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.name') }}</td>
+            <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.signature') }}</td>
             <td style="padding-right: 10px; vertical-align: top;">{{ trans('general.date') }}</td>
             <td></td>
         </tr>
@@ -384,21 +417,17 @@
 
 {{-- Javascript files --}}
 <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-<script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
-
-
-@push('css')
-    <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
-@endpush
-
-@push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url(mix('js/dist/bootstrap-table-locale-all.min.js')) }}"></script>
+
+<!-- load english again here, even though it's in the all.js file, because if BS table doesn't have the translation, it otherwise defaults to chinese. See https://bootstrap-table.com/docs/api/table-options/#locale -->
+<script src="{{ url(mix('js/dist/bootstrap-table-en-US.min.js')) }}"></script>
 
 <script>
     $('.snipe-table').bootstrapTable('destroy').each(function () {
-
         console.log('BS table loaded');
+
         data_export_options = $(this).attr('data-export-options');
         export_options = data_export_options ? JSON.parse(data_export_options) : {};
         export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
@@ -470,8 +499,6 @@
         });
     });
 </script>
-@endpush
-
 
 </body>
 </html>

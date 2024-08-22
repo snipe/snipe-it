@@ -127,7 +127,7 @@ class LoginController extends Controller
                     $saml->clearData();
                 }
 
-                if ($user = Auth::user()) {
+                if ($user = auth()->user()) {
                     $user->last_login = \Carbon::now();
                     $user->saveQuietly();
                 }
@@ -326,7 +326,7 @@ class LoginController extends Controller
             }
         }
 
-        if ($user = Auth::user()) {
+        if ($user = auth()->user()) {
             $user->last_login = \Carbon::now();
             $user->activated = 1;
             $user->saveQuietly();
@@ -350,7 +350,7 @@ class LoginController extends Controller
         }
 
         $settings = Setting::getSettings();
-        $user = Auth::user();
+        $user = auth()->user();
 
         // We wouldn't normally see this page if 2FA isn't enforced via the
         // \App\Http\Middleware\CheckForTwoFactor middleware AND if a device isn't enrolled,
@@ -398,7 +398,7 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
-        $user = Auth::user();
+        $user = auth()->user();
 
         // Check whether there is a device enrolled.
         // This *should* be handled via the \App\Http\Middleware\CheckForTwoFactor middleware
@@ -427,7 +427,7 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
-        $user = Auth::user();
+        $user = auth()->user();
         $secret = $request->input('two_factor_secret');
 
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
@@ -508,8 +508,8 @@ class LoginController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required',
-            'password' => 'required',
+            'username' => 'required|not_array',
+            'password' => 'required|not_array',
         ]);
     }
 

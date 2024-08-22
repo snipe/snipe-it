@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Twoja nazwa użytkownika i adres e-mail <em>mogą być</em> takie same, ale mogą nie być zależne od konfiguracji. Jeśli nie pamiętasz nazwy użytkownika, skontaktuj się z administratorem. <br><br><strong>Nazwy użytkowników bez powiązanego adresu e-mail nie będą otrzymywać powiadomień na adres e-mail z linkiem do resetowania hasła.</strong> ',
     'google_login'                  => 'Zaloguj się przez Google Workspace',
     'google_login_failed'           => 'Logowanie Google nie powiodło się, spróbuj ponownie.',
-
 ];
 

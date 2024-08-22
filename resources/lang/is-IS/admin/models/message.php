@@ -7,7 +7,7 @@ return array(
     'no_association' => 'VIÐVÖRUN! Eignategund fyrir þennan hlut er ógilt eða vantar!',
     'no_association_fix' => 'Þetta mun brjóta hlutina á undarlegan og hræðilegan hátt. Breyttu þessari eign núna til að úthluta henni fyrirmynd.',
     'assoc_users'	 => 'Þessi tegund er sem stendur tengt einni eða fleiri eignum og ekki er hægt að eyða því. Vinsamlegast eyddu eignunum og reyndu síðan að eyða aftur. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Tegundin var ekki búið til, vinsamlegast reyndu aftur.',

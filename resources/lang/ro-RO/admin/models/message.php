@@ -7,7 +7,7 @@ return array(
     'no_association' => 'AVERTISMENT! Modelul de activ pentru acest articol este invalid sau lipsește!',
     'no_association_fix' => 'Acest lucru va strica lucrurile în moduri ciudate și oribile. Editează acest bun acum pentru a-l atribui un model.',
     'assoc_users'	 => 'Acest model este momentan asociat cu cel putin unul sau mai multe active si nu poate fi sters. Va rugam sa stergeti activul si dupa incercati iar. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Modelul nu a fost creat, incercati iar.',

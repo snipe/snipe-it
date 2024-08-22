@@ -3,11 +3,12 @@
 return array(
 
     'does_not_exist' => 'Lokacija ne postoji.',
-    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this company and try again. ',
+    'assoc_users'    => 'Ova lokaciju trenutno nije moguće obrisati zato što je lokacija zapisa barem jedne imovine ili korisnika, ima imovinu dodeljenu njoj, ili je nadlokacija drugoj lokaciji. Molim vas izmenite modele da više ne referenciraju ovu lokaciju i pokušajte ponovo. ',
     'assoc_assets'	 => 'Ta je lokacija trenutno povezana s barem jednim resursom i ne može se izbrisati. Ažurirajte resurs da se više ne referencira na tu lokaciju i pokušajte ponovno. ',
     'assoc_child_loc'	 => 'Ta je lokacija trenutno roditelj najmanje jednoj podredjenoj lokaciji i ne može se izbrisati. Ažurirajte svoje lokacije da se više ne referenciraju na ovu lokaciju i pokušajte ponovo. ',
     'assigned_assets' => 'Dodeljena imovina',
     'current_location' => 'Trenutna lokacija',
+    'open_map' => 'Otvori u :map_provider_icon mapama',
 
 
     'create' => array(
@@ -18,6 +19,11 @@ return array(
     'update' => array(
         'error'   => 'Lokacija nije ažurirana, pokušajte ponovo',
         'success' => 'Lokacija je uspešno ažurirana.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Lokacija nije povraćena, molim vas pokušajte ponovo',
+        'success' => 'Lokacija je uspešno povraćena.'
     ),
 
     'delete' => array(

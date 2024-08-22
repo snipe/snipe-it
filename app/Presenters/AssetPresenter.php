@@ -556,13 +556,12 @@ class AssetPresenter extends Presenter
     }
 
     /**
-     * Used to take user created warranty URL and dynamically fill in the needed values per asset
+     * Used to take user created URL and dynamically fill in the needed values per asset
      * @return string
      */
-    public function dynamicWarrantyUrl()
+    public function dynamicUrl($dynamic_url)
     {
-        $warranty_lookup_url = $this->model->model->manufacturer->warranty_lookup_url;
-        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $warranty_lookup_url));
+        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $dynamic_url));
         $url = (str_replace('{SERIAL}', urlencode($this->model->serial), $url));
         $url = (str_replace('{MODEL_NAME}', urlencode($this->model->model->name), $url));
         $url = (str_replace('{MODEL_NUMBER}', urlencode($this->model->model->model_number), $url));
@@ -580,6 +579,6 @@ class AssetPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fas fa-barcode" aria-hidden="true"></i>';
+        return '<x-icon type="assets" />';
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\ActionlogsTransformer;
 use App\Models\Actionlog;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class ReportsController extends Controller
 {
@@ -14,9 +15,8 @@ class ReportsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('reports.view');
 
@@ -83,11 +83,19 @@ class ReportsController extends Controller
         $offset = ($request->input('offset') > $total) ? $total : app('api_offset_value');
         $limit = app('api_limit_value');
 
-        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
         $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
 
+        switch ($request->input('sort')) {
+            case 'admin':
+                $actionlogs->OrderAdmin($order);
+                break;
+            default:
+                $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
+                $actionlogs = $actionlogs->orderBy($sort, $order);
+                break;
+        }
 
-        $actionlogs = $actionlogs->orderBy($sort, $order)->skip($offset)->take($limit)->get();
+        $actionlogs = $actionlogs->skip($offset)->take($limit)->get();
 
         return response()->json((new ActionlogsTransformer)->transformActionlogs($actionlogs, $total), 200, ['Content-Type' => 'application/json;charset=utf8'], JSON_UNESCAPED_UNICODE);
     }

@@ -9,26 +9,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ldap;
 use App\Models\Setting;
-use Mail;
-use App\Notifications\SlackTest;
 use App\Notifications\MailTest;
-use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator; 
-use App\Http\Requests\SlackSettingsRequest;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Transformers\LoginAttemptsTransformer;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 
 class SettingsController extends Controller
 {
 
 
-    public function ldaptest()
+    public function ldaptest() : JsonResponse
     {
         $settings = Setting::getSettings();
 
@@ -88,7 +84,7 @@ class SettingsController extends Controller
 
     }
 
-    public function ldaptestlogin(Request $request)
+    public function ldaptestlogin(Request $request) : JsonResponse
     {
 
         if (Setting::getSettings()->ldap_enabled != '1') {
@@ -148,9 +144,8 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return JsonResponse
      */
-    public function ajaxTestEmail()
+    public function ajaxTestEmail() : JsonResponse
     {
         if (!config('app.lock_passwords')) {
             try {
@@ -170,9 +165,8 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0.0]
-     * @return JsonResponse
      */
-    public function purgeBarcodes()
+    public function purgeBarcodes() : JsonResponse
     {
         $file_count = 0;
         $files = Storage::disk('public')->files('barcodes');
@@ -211,9 +205,8 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0.0]
      * @param  \Illuminate\Http\Request  $request
-     * @return array | JsonResponse
      */
-    public function showLoginAttempts(Request $request)
+    public function showLoginAttempts(Request $request) : array
     {
         $allowed_columns = ['id', 'username', 'remote_ip', 'user_agent', 'successful', 'created_at'];
 
@@ -233,9 +226,9 @@ class SettingsController extends Controller
      * Lists backup files
      *
      * @author [A. Gianotto]
-     * @return array | JsonResponse
      */
-    public function listBackups() {
+    public function listBackups() : array
+    {
         $settings = Setting::getSettings();
         $path = 'app/backups';
         $backup_files = Storage::files($path);
@@ -276,9 +269,9 @@ class SettingsController extends Controller
      * exhausts memory on larger files.
      *
      * @author [A. Gianotto]
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function downloadBackup($file) {
+    public function downloadBackup($file) : JsonResponse | BinaryFileResponse
+    {
 
         $path = storage_path('app/backups');
         
@@ -296,9 +289,9 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto]
      * @since [v6.3.1]
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function downloadLatestBackup() {
+    public function downloadLatestBackup() : JsonResponse | BinaryFileResponse
+    {
 
         $fileData = collect();
         foreach (Storage::files('app/backups') as $file) {

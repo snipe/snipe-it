@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'Dit brugernavn og din emailadresse <em>kan</em> være den samme; men din konfiguration kan kæve at de er forskellige. Hvis du ikke kan huske dit brugernavn, så kontakt administratoren. <br><br><strong>Brugernavne uden tilhørende emailadresse vil ikke få tilsendt mail med link til reset af kodeord.</strong> ',
     'google_login'                  => 'Log ind med Google Workspace',
     'google_login_failed'           => 'Google Log ind mislykkedes, prøv igen.',
-
 ];
 

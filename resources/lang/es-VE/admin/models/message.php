@@ -2,32 +2,32 @@
 
 return array(
 
-    'deleted' => 'Modelo de recurso eliminado',
+    'deleted' => 'Se eliminó el modelo del activo',
     'does_not_exist' => 'El modelo no existe.',
-    'no_association' => '¡ATENCIÓN! ¡El modelo de activo para este artículo no es válido o falta!',
+    'no_association' => '¡ADVERTENCIA! ¡El modelo de activo para este artículo no es válido o no existe!',
     'no_association_fix' => 'Esto romperá cosas de formas extrañas y horribles. Edite este activo ahora para asignarle un modelo.',
-    'assoc_users'	 => 'Este modelo está asignado a uno o más activos y no puede ser eliminado. Por favor, borra los activos y luego intenta borrarlo nuevamente. ',
-
+    'assoc_users'	 => 'Este modelo está asociado a uno o más activos y no puede ser eliminado. Por favor, elimine los activos y vuelva a intentarlo. ',
+    'invalid_category_type' => 'El tipo de esta categoría debe ser categoría de activos.',
 
     'create' => array(
-        'error'   => 'El modelo no fue creado, por favor inténtalo de nuevo.',
-        'success' => 'Modelo creado con éxito.',
+        'error'   => 'El modelo no fue creado, por favor inténtelo de nuevo.',
+        'success' => 'El modelo fue creado exitosamente.',
         'duplicate_set' => 'Ya existe un modelo de equipo con el mismo nombre, fabricante y número de modelo.',
     ),
 
     'update' => array(
-        'error'   => 'El modelo no fue actualizado, por favor, inténtalo de nuevo',
+        'error'   => 'El modelo no pudo ser actualizado, por favor inténtelo de nuevo',
         'success' => 'Modelo actualizado con éxito.',
     ),
 
     'delete' => array(
-        'confirm'   => '¿Estás seguro de que quieres borrar este modelo de activo?',
-        'error'   => 'Hubo un problema borrando el modelo. Por favor inténtalo de nuevo.',
+        'confirm'   => '¿Está seguro de que desea eliminar este modelo de activo?',
+        'error'   => 'Hubo un problema eliminando el modelo. Por favor, inténtelo de nuevo.',
         'success' => 'El modelo fue borrado con éxito.'
     ),
 
     'restore' => array(
-        'error'   		=> 'El modelo no fue restaurado, por favor inténtalo de nuevo',
+        'error'   		=> 'El modelo no fue restaurado, por favor intente nuevamente',
         'success' 		=> 'Modelo restaurado con éxito.'
     ),
 

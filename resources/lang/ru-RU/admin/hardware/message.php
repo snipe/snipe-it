@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Внимание: </strong> Этот актив был помечен как выданный.
-                        Если этот статус изменился, необходимо его обновить.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Актив не существует.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Некоторые элементы не были импортированы корректно.',
         'errorDetail'           => 'Следующие элементы не были импортированы из за ошибок.',
         'success'               => 'Ваш файл был импортирован',
         'file_delete_success'   => 'Ваш файл был успешно удален',
         'file_delete_error'      => 'Невозможно удалить файл',
         'file_missing' => 'Выбранный файл отсутствует',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Один или несколько атрибутов в строке заголовка содержат неправильно сформированные символы UTF-8',
         'content_row_has_malformed_characters' => 'Один или несколько атрибутов в первой строке содержимого содержат неправильно сформированные символы UTF-8',
     ],

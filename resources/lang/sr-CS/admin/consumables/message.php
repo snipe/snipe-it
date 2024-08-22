@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'Kategorija mora biti kategorija potrošne robe.',
     'does_not_exist' => 'Potrošni materijal ne postoji.',
 
     'create' => array(

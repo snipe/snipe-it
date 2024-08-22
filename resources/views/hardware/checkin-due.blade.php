@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    {{ trans_choice('general.checkin_due_days', $settings->audit_warning_days, ['days' => $settings->audit_warning_days]) }}
+    {{ trans_choice('general.checkin_due_days', $settings->due_checkin_days, ['days' => $settings->due_checkin_days]) }}
 @stop
 
 {{-- Page content --}}

@@ -7,7 +7,7 @@ return array(
     'no_association' => '警告！此項目的資產型號無效或遺失！',
     'no_association_fix' => '這將以奇怪和可怕的方式損壞事物。立即編輯此資產以分配型號。',
     'assoc_users'	 => '至少還有一個資產與此樣板關聯，目前不能被删除，請在刪除資產後重試。 ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => '新增樣板失敗，請重試。',

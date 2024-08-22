@@ -1,61 +1,65 @@
 <div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
-                <a class="btn btn-info btn-sm action-link pull-right"
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="text-right">
+                <a class="btn btn-info btn-sm pull-right"
                    onclick="$('#modal-create-token').modal('show');"
-                   wire:click="$emit('openModal')"
-                >
-                    Create New Token
+                   wire:click="$dispatch('openModal')">
+                    {{ trans('general.create') }}
                 </a>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="box-body">
             <!-- No Tokens Notice -->
             @if($tokens->count() === 0)
-                <p class="m-b-none"
-                >
-                    You have not created any personal access tokens.
+                <p>
+                    {{ trans('account/general.no_tokens') }}
                 </p>
             @endif
 
             <!-- Personal Access Tokens -->
-            <table class="table table-borderless m-b-none">
+            <div class="table table-responsive">
+            <table class="table table-striped snipe-table">
                 @if($tokens->count() > 0)
                     <thead>
                     <tr>
-                        <th class="col-md-3">Name</th>
-                        <th class="col-md-2">Created</th>
-                        <th class="col-md-2">Expires</th>
-                        <th class="col-md-2"><span class="sr-only">Delete</span></th>
+                        <th class="col-md-3">{{ trans('general.name') }}</th>
+                        <th class="col-md-2">{{ trans('general.created_at') }}</th>
+                        <th class="col-md-2">{{ trans('general.expires') }}</th>
+                        <th class="col-md-2"><span class="sr-only">{{ trans('general.delete') }}</span></th>
                     </tr>
                     </thead>
+                    <tbody>
                 @endif
                 @foreach($tokens as $token)
-                    <tbody>
+
                     <tr>
-                        <!-- Client Name -->
-                        <td style="vertical-align: middle;">
+                        <td>
                             {{ $token->name }}
                         </td>
 
-                        <td style="vertical-align: middle;">
+                        <td>
                             {{ $token->created_at }}
                         </td>
 
-                        <td style="vertical-align: middle;">
+                        <td>
                             {{ $token->expires_at }}
                         </td>
-                        <!-- Delete Button -->
-                        <td style="vertical-align: middle;" class="text-right">
-                            <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken('{{ $token->id }}')">
-                                <i class="fas fa-trash"></i>
+                        <td class="text-right">
+                            <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken('{{ $token->id }}')"
+                               wire:loading.attr="disabled" data-tooltip="true" title="{{ trans('general.delete') }}">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                                <span class="sr-only">
+                                    {{ trans('general.delete') }}
+                                </span>
                             </a>
                         </td>
                     </tr>
-                    </tbody>
+
                 @endforeach
+                    </tbody>
             </table>
+            </div>
         </div>
     </div>
     <!-- Create Token Modal -->
@@ -73,22 +77,23 @@
                 <div class="modal-body">
                     <!-- Form Errors -->
                     @if($errors->has('name'))
-                        <div class="alert alert-danger"
-                        >
-                            <p><strong>Whoops!</strong> Something went wrong!</p>
+                        <div class="alert alert-danger">
+                            <p><strong>{{ trans('general.whoops') }}</strong> {{ trans('general.something_went_wrong') }}</p>
                             <br>
                             <ul>
-                                <li
-                                >
-                                    @error('name') <span class="error">{{ $message }}</span> @enderror
+                                <li>
+                                    @error('name')
+                                    <span class="error">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
                                 </li>
                             </ul>
                         </div>
                     @endif
 
                     <!-- Create Token Form -->
-                    <form class="form-horizontal" role="form"
-                    >
+                    <form class="form-horizontal" role="form">
                         <!-- Name -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="name">Name</label>
@@ -97,8 +102,7 @@
                                 <input id="create-token-name" type="text" aria-label="name" class="form-control"
                                        name="name"
                                        wire:keydown.enter="createToken(name)"
-                                       {{-- defer because it's submitting as i type if i don't --}}
-                                       wire:model.defer="name"
+                                       wire:model="name"
                                        autofocus
                                 >
                             </div>
@@ -109,12 +113,10 @@
 
                 <!-- Modal Actions -->
                 <div class="modal-footer">
-                    <button type="button" class="btn primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn primary" data-dismiss="modal">{{ trans('general.close') }}</button>
 
-                    <button type="button" class="btn btn-primary"
-                            wire:click="createToken(name)"
-                    >
-                        Create
+                    <button type="button" class="btn btn-primary" wire:click="createToken(name)">
+                        {{ trans('general.create') }}
                     </button>
                 </div>
             </div>
@@ -129,14 +131,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                     <h4 class="modal-title">
-                        Personal Access Token
+                        {{ trans('account/general.personal_access_token') }}
                     </h4>
                 </div>
 
                 <div class="modal-body">
                     <p>
-                        Here is your new personal access token. This is the only time it will be shown so don't lose it!
-                        You may now use this token to make API requests.
+                        {{ trans('account/general.here_is_api_key') }}
                     </p>
 
                     <pre><code>{{ $newTokenString }}</code></pre>
@@ -144,7 +145,7 @@
 
                 <!-- Modal Actions -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close') }}</button>
                 </div>
             </div>
         </div>

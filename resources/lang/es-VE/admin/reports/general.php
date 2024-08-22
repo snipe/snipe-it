@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'info'   => 'Selecciona que opciones quieres para tu informe de activos.',
+    'info'   => 'Seleccione las opciones que desea para el informe de activos.',
     'deleted_user' => 'Usuario eliminado',
     'send_reminder' => 'Enviar recordatorio',
     'reminder_sent' => 'Recordatorio enviado',

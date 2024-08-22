@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Checkouts\Ui;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use App\Events\CheckoutableCheckedOut;
+use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\LicenseSeat;
@@ -120,7 +122,7 @@ class AssetCheckoutTest extends TestCase
      * This data provider contains checkout targets along with the
      * asset's expected location after the checkout process.
      */
-    public function checkoutTargets(): array
+    public static function checkoutTargets(): array
     {
         return [
             'User' => [function () {
@@ -166,7 +168,7 @@ class AssetCheckoutTest extends TestCase
         ];
     }
 
-    /** @dataProvider checkoutTargets */
+    #[DataProvider('checkoutTargets')]
     public function testAssetCanBeCheckedOut($data)
     {
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
@@ -251,20 +253,85 @@ class AssetCheckoutTest extends TestCase
             ->assertRedirect(route('hardware.show',['hardware' => $asset->id]));
     }
 
-    public function testAssetCheckoutPagePostIsRedirectedIfModelIsInvalid()
+    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
     {
         $asset = Asset::factory()->create();
-        $asset->model_id = 0;
-        $asset->forceSave();
-        $user = User::factory()->create();
-        
+
         $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.checkout.create', $asset))
             ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'user',
-                'assigned_user' => $user->id,
+                'assigned_user' =>  User::factory()->create()->id,
+                'redirect_option' => 'index',
             ])
             ->assertStatus(302)
-            ->assertSessionHas('error')
+            ->assertRedirect(route('hardware.index'));
+    }
+
+    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    {
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.checkout.create', $asset))
+            ->post(route('hardware.checkout.store' , $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' =>  User::factory()->create()->id,
+                'redirect_option' => 'item',
+            ])
+            ->assertStatus(302)
+            ->assertSessionHasNoErrors()
             ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+    }
+
+    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsUserTarget()
+    {
+        $user = User::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.checkout.create', $asset))
+            ->post(route('hardware.checkout.store' , $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' =>  $user->id,
+                'redirect_option' => 'target',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('users.show', ['user' => $user]));
+    }
+
+    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsAssetTarget()
+    {
+        $target = Asset::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.checkout.create', $asset))
+            ->post(route('hardware.checkout.store' , $asset), [
+                'checkout_to_type' => 'asset',
+                'assigned_asset' =>  $target->id,
+                'redirect_option' => 'target',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('hardware.show', ['hardware' => $target]));
+    }
+
+    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsLocationTarget()
+    {
+        $target = Location::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.checkout.create', $asset))
+            ->post(route('hardware.checkout.store' , $asset), [
+                'checkout_to_type' => 'location',
+                'assigned_location' =>  $target->id,
+                'redirect_option' => 'target',
+                'assigned_qty' => 1,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('locations.show', ['location' => $target]));
     }
 }

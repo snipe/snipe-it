@@ -14,6 +14,8 @@ return array(
         'success'               => 'Jūs sėkmingai prisijungėte.',
         'code_required'         => 'Dviejų faktorių kodas yra privalomas.',
         'invalid_code'          => 'Dviejų faktorių kodas neteisingas.',
+        'enter_two_factor_code' => 'Įveskite dviejų veiksnių autentifikavimo kodą.',
+        'please_enroll'         => 'Užregistruokite įrenginį dviejų veiksnių autentifikavimui.',
     ),
 
     'signin' => array(

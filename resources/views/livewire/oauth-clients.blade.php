@@ -3,6 +3,7 @@
 
         <div class="box-header">
                 <h2 class="box-title">
+                    <x-icon type="oauth"/>
                     {{ trans('admin/settings/general.oauth_clients') }}
                 </h2>
                 @if ($authorizationError)
@@ -16,7 +17,7 @@
 
                 <div class="box-tools pull-right">
                         <a class="btn btn-primary"
-                           wire:click="$emit('openModal')"
+                           wire:click="$dispatch('openModal')"
                            onclick="$('#modal-create-client').modal('show');">
                             {{ trans('general.create') }}
                         </a>
@@ -32,14 +33,27 @@
                 @endif
 
             @if ($clients->count() > 0)
-                <table class="table table-striped snipe-table">
+                    <table data-cookie-id-table="OAuthClientsTable"
+                           data-pagination="true"
+                           data-id-table="OAuthClientsTable"
+                           data-side-pagination="client"
+                           data-sort-order="desc"
+                           data-sort-name="created_at"
+                           id="OAuthClientsTable"
+                           class="table table-striped snipe-table">
                     <thead>
                         <tr>
                             <th>{{ trans('general.id') }}</th>
-                            <th>{{ trans('general.name') }}</th>
-                            <th>{{ trans('admin/settings/general.oauth_redirect_url') }}</th>
-                            <th>{{ trans('admin/settings/general.oauth_secret') }}</th>
-                            <th><span class="sr-only">{{ trans('general.actions') }}</span></th>
+                            <th data-sortable="true">{{ trans('general.name') }}</th>
+                            <th data-sortable="true">{{ trans('admin/settings/general.oauth_redirect_url') }}</th>
+                            <th data-sortable="true">{{ trans('admin/settings/general.oauth_secret') }}</th>
+                            <th data-sortable="true">{{ trans('general.created_at')  }}</th>
+                            <th data-sortable="true">{{ trans('general.updated_at')  }}</th>
+                            <th>
+                                <span class="sr-only">
+                                    {{ trans('general.actions') }}
+                                </span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,12 +71,22 @@
 
                                 <!-- Redirect -->
                                 <td>
-                                    {{ $client->redirect }}
+                                    <code>{{ $client->redirect }}</code>
                                 </td>
 
                                 <!-- Secret -->
                                 <td>
                                     <code>{{ $client->secret }}</code>
+                                </td>
+
+                                <td>
+                                    {{ $client->created_at ? Helper::getFormattedDateObject($client->created_at, 'datetime', false) : '' }}
+                                </td>
+
+                                <td>
+                                    @if ($client->created_at != $client->updated_at)
+                                        {{ $client->updated_at ? Helper::getFormattedDateObject($client->updated_at, 'datetime', false) : '' }}
+                                    @endif
                                 </td>
 
                                 <!-- Edit / Delete Button -->
@@ -71,14 +95,17 @@
                                     <a class="action-link btn btn-sm btn-warning"
                                        wire:click="editClient('{{ $client->id }}')"
                                        onclick="$('#modal-edit-client').modal('show');">
-                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span>
+                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                        <span class="sr-only">
+                                            {{ trans('general.update') }}
+                                        </span>
                                     </a>
 
                                     <a class="action-link btn btn-danger btn-sm" wire:click="deleteClient('{{ $client->id }}')">
                                         <i class="fas fa-trash" aria-hidden="true"></i>
                                         <span class="sr-only">
-                                                    {{ trans('general.delete') }}
-                                                </span>
+                                            {{ trans('general.delete') }}
+                                        </span>
                                     </a>
                                 </td>
                             </tr>
@@ -96,19 +123,34 @@
                 <div>
                     <div class="box box-default">
                         <div class="box-header">
-                            <h2>
+                            <h2 class="box-title">
                                 {{ trans('admin/settings/general.oauth_authorized_apps') }}
                             </h2>
                         </div>
 
                         <div class="box-body">
                             <!-- Authorized Tokens -->
-                            <table class="table table-striped snipe-table">
+                            <table data-cookie-id-table="AuthorizedAppsTable"
+                                   data-pagination="true"
+                                   data-id-table="AuthorizedAppsTable"
+                                   data-toolbar="#AuthorizedAppsToolbar"
+                                   data-side-pagination="client"
+                                   data-sort-order="desc"
+                                   data-sort-name="created_at"
+                                   id="AuthorizedAppsTable"
+                                   class="table table-striped snipe-table">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('general.name') }}</th>
-                                    <th>{{ trans('admin/settings/general.oauth_scopes')  }}</th>
-                                    <th></th>
+                                    <th data-sortable="true">{{ trans('general.name') }}</th>
+                                    <th data-sortable="true"> {{ trans('account/general.personal_access_token') }}</th>
+                                    <th data-sortable="true">{{ trans('admin/settings/general.oauth_scopes')  }}</th>
+                                    <th data-sortable="true">{{ trans('general.created_at')  }}</th>
+                                    <th data-sortable="true">{{ trans('general.expires') }}</th>
+                                    <th>
+                                        <span class="sr-only">
+                                            {{ trans('general.actions') }}
+                                        </span>
+                                    </th>
                                 </tr>
                                 </thead>
 
@@ -120,6 +162,10 @@
                                             {{ $token->client->name }}
                                         </td>
 
+                                        <td>
+                                            {{ $token->name }}
+                                        </td>
+
                                         <!-- Scopes -->
                                         <td>
                                             @if(!$token->scopes)
@@ -129,6 +175,13 @@
                                             @endif
                                         </td>
 
+                                        <td>
+                                            {{ $token->created_at ? Helper::getFormattedDateObject($token->created_at, 'datetime', false) : '' }}
+                                        </td>
+
+                                        <td>
+                                            {{ $token->expires_at ? Helper::getFormattedDateObject($token->expires_at, 'datetime', false) : '' }}
+                                        </td>
                                         <!-- Revoke Button -->
                                         <td>
                                             <a class="btn btn-sm btn-danger pull-right"
@@ -285,7 +338,7 @@
                                         type="text"
                                         aria-label="edit-client-name"
                                         class="form-control"
-                                        wire:model="editName"
+                                        wire:model.live="editName"
                                         wire:keydown.enter="updateClient('{{ $editClientId }}')"
                                 >
 
@@ -333,7 +386,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            window.livewire.on('openModal', () => {
+            Livewire.on('openModal', () => {
                 $('#modal-create-client').modal('show').on('shown.bs.modal', function() {
                     $(this).find('[autofocus]').focus();
                 });
@@ -353,4 +406,9 @@
 
     </script>
 </div>
+
+@section('moar_scripts')
+    @include ('partials.bootstrap-table')
+@endsection
+
 

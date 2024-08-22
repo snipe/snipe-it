@@ -484,4 +484,7 @@ tr th div.th-inner {
 .search-highlight:hover {
   background-color: #e9d15b;
 }
+.table > tbody > tr.warning > td {
+  background-color: var(--back-sub);
+}
 

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => '[;id] อุปกรณ์เสริม ไม่มีอยู่',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'ไม่พบอุปกรณ์เสริมนั้น',
     'assoc_users'	 => 'อุปกรณ์เสริมนี้ได้เช็คเอ้าท์ให้ผู้ใช้งานแล้วจำนวน :count รายการในปัจจุบัน กรุณาเช็คอินอุปกรณ์เสริม และลองอีกครั้ง ',
 
     'create' => array(
@@ -25,8 +25,12 @@ return array(
      'checkout' => array(
         'error'   		=> 'อุปกรณ์เสริมยังไม่ถูกเช็คเอ้าท์ กรุณาลองอีกครั้ง',
         'success' 		=> 'อุปกรณ์เสริมเช็คเอ้าท์เรียบร้อยแล้ว',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
-        'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง'
+        'unavailable'   => 'ไม่มีอุปกรณ์เสริมสำหรับการชำระเงิน ตรวจสอบปริมาณที่มีอยู่',
+        'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง',
+         'checkout_qty' => array(
+            'lte'  => ':checkout_qty โปรดปรับจำนวนในการชำระเงินหรือจำนวนในสต็อกของอุปกรณ์เสริมนี้แล้วลองอีกครั้ง|มีอุปกรณ์เสริมที่มีอยู่ :number_currently_remaining ทั้งหมด และคุณกำลังพยายามตรวจสอบ :checkout_qty โปรดปรับปริมาณการชำระเงินหรือสต็อกรวมของอุปกรณ์เสริมนี้แล้วลองอีกครั้ง',
+            ),
+           
     ),
 
     'checkin' => array(

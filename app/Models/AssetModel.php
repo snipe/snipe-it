@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use \App\Presenters\AssetModelPresenter;
+use App\Http\Traits\TwoColumnUniqueUndeletedTrait;
 
 /**
  * Model for Asset Models. Asset Models contain higher level
@@ -20,31 +22,36 @@ class AssetModel extends SnipeModel
 {
     use HasFactory;
     use SoftDeletes;
-    protected $presenter = \App\Presenters\AssetModelPresenter::class;
     use Loggable, Requestable, Presentable;
+    use TwoColumnUniqueUndeletedTrait;
 
+    /**
+     * Whether the model should inject its identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
+
+    protected $injectUniqueIdentifier = true;
+    use ValidatingTrait;
     protected $table = 'models';
     protected $hidden = ['user_id', 'deleted_at'];
+    protected $presenter = AssetModelPresenter::class;
 
     // Declare the rules for the model validation
+
+
     protected $rules = [
-        'name'              => 'required|min:1|max:255',
-        'model_number'      => 'max:255|nullable',
+        'name'              => 'string|required|min:1|max:255|two_column_unique_undeleted:model_number',
+        'model_number'      => 'string|max:255|nullable|two_column_unique_undeleted:name',
         'min_amt'           => 'integer|min:0|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'integer|exists:manufacturers,id|nullable',
         'eol'               => 'integer:min:0|max:240|nullable',
     ];
 
-    /**
-     * Whether the model should inject it's identifier to the unique
-     * validation rules before attempting validation. If this property
-     * is not set in the model it will default to true.
-     *
-     * @var bool
-     */
-    protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
+
 
     /**
      * The attributes that are mass assignable.
@@ -84,6 +91,9 @@ class AssetModel extends SnipeModel
         'category'     => ['name'],
         'manufacturer' => ['name'],
     ];
+
+
+
 
     /**
      * Establishes the model -> assets relationship

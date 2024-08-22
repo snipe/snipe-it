@@ -87,7 +87,7 @@ class ResetPasswordController extends Controller
             'password.not_in' => trans('validation.disallow_same_pwd_as_user_fields'),
         ];
 
-        $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
+        $request->validate($this->rules());
 
         Log::debug('Checking if '.$request->input('username').' exists');
         // Check to see if the user even exists - we'll treat the response the same to prevent user sniffing

@@ -4,10 +4,10 @@ return array(
 
     'does_not_exist' => 'Tokios licencijos nėra arba jūs neturite teisės ją peržiūrėti.',
     'user_does_not_exist' => 'Tokio naudotojo nėra arba jūs neturite teisės jo peržiūrėti.',
-    'asset_does_not_exist' 	=> 'Tokios įrangos, kurią bandote susieti su šia licencija, nėra.',
-    'owner_doesnt_match_asset' => 'Įranga, kurią bandote susieti su šia licencija, yra išduota kažkam kitam, o ne asmeniui, pasirinktam iš sąrašo.',
+    'asset_does_not_exist' 	=> 'Tokio turto, kurį bandote susieti su šia licencija, nėra.',
+    'owner_doesnt_match_asset' => 'Turtas, kurį bandote susieti su šia licencija, yra išduotas kažkam kitam, o ne asmeniui, pasirinktam iš sąrašo.',
     'assoc_users'	 => 'Ši licencija šiuo metu yra išduota naudotojui ir negali būti panaikinta. Pirmiausia paimkite licenciją ir tuomet vėl bandykite panaikinti. ',
-    'select_asset_or_person' => 'Turite pasirinkti įrangą arba naudotoją, bet ne abu.',
+    'select_asset_or_person' => 'Turite pasirinkti turtą arba naudotoją, bet ne abu.',
     'not_found' => 'Licencija nerasta',
     'seats_available' => 'Liko vietų: :seat_count',
 
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Bandant išduoti licenciją įvyko klaida. Bandykite dar kartą.',
         'success' => 'Licencija išduota sėkmingai',
         'not_enough_seats' => 'Turimų laisvų vietų nepakanka licencijos išdavimui',
+        'mismatch' => 'Pateikta licencijos vieta nesutampa su licencija',
+        'unavailable' => 'Šios licencijos negalima išduoti.',
     ),
 
     'checkin' => array(

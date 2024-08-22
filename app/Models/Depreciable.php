@@ -76,9 +76,9 @@ class Depreciable extends SnipeModel
 
         if ($months_passed >= $this->get_depreciation()->months){
             //if there is a floor use it
-            if(!$this->get_depreciation()->depreciation_min == null) {
+            if($this->get_depreciation()->depreciation_min) {
 
-                $current_value = $this->get_depreciation()->depreciation_min;
+                $current_value = $this->calculateDepreciation();
 
             }else{
                 $current_value = 0;
@@ -86,7 +86,7 @@ class Depreciable extends SnipeModel
         }
         else {
             // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
-            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->get_depreciation()->depreciation_min)) * ($months_passed / $this->get_depreciation()->months)), 2);
+            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->months)), 2);
 
         }
 
@@ -95,7 +95,7 @@ class Depreciable extends SnipeModel
 
     public function getMonthlyDepreciation(){
 
-        return ($this->purchase_cost-$this->get_depreciation()->depreciation_min)/$this->get_depreciation()->months;
+        return ($this->purchase_cost-$this->calculateDepreciation())/$this->get_depreciation()->months;
 
     }
 
@@ -158,17 +158,20 @@ class Depreciable extends SnipeModel
 
     public function time_until_depreciated()
     {
-        // @link http://www.php.net/manual/en/class.datetime.php
-        $d1 = new \DateTime();
-        $d2 = $this->depreciated_date();
+        if ($this->depreciated_date()) {
+            // @link http://www.php.net/manual/en/class.datetime.php
+            $d1 = new \DateTime();
+            $d2 = $this->depreciated_date();
 
-        // @link http://www.php.net/manual/en/class.dateinterval.php
-        $interval = $d1->diff($d2);
-        if (! $interval->invert) {
-            return $interval;
-        } else {
-            return new \DateInterval('PT0S'); //null interval (zero seconds from now)
+            // @link http://www.php.net/manual/en/class.dateinterval.php
+            $interval = $d1->diff($d2);
+            if (! $interval->invert) {
+                return $interval;
+            } else {
+                return new \DateInterval('PT0S'); //null interval (zero seconds from now)
+            }
         }
+        return false;
     }
 
     public function depreciated_date()
@@ -187,5 +190,17 @@ class Depreciable extends SnipeModel
     protected function getDateTime($time = null)
     {
         return new \DateTime($time);
+    }
+
+    private function calculateDepreciation()
+    {
+        if($this->get_depreciation()->depreciation_type === 'percent') {
+            $depreciation_percent= $this->get_depreciation()->depreciation_min / 100;
+            $depreciation_min= $this->purchase_cost * $depreciation_percent;
+            return $depreciation_min;
+        }
+
+        $depreciation_min = $this->get_depreciation()->depreciation_min;
+        return $depreciation_min;
     }
 }

@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Digniin: </strong> Hantidan waxaa loo calaamadeeyay mid aan hadda la daabul karin.
-                        Haddii heerkan uu isbedelay, fadlan cusboonaysii heerka hantida.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Hantidu ma jirto.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Alaabta qaar si sax ah uma soo dejin.',
         'errorDetail'           => 'Alaabta soo socota looma soo dejin khaladaad dartood.',
         'success'               => 'Faylkaaga waa la soo dejiyay',
         'file_delete_success'   => 'Faylkaaga si guul leh ayaa loo tirtiray',
         'file_delete_error'      => 'Faylka waa la tirtiri waayay',
         'file_missing' => 'Faylka la doortay waa maqan yahay',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah oo ku jira safka madaxa waxa ku jira xarfaha UTF-8 oo khaldan',
         'content_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah safka koowaad ee nuxurka waxa ku jira xarfo UTF-8 oo khaldan',
     ],

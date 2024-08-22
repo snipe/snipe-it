@@ -14,6 +14,5 @@ return [
     'username_help_bottom'          => 'שם המשתמש וכתובת הדוא״ל שלך <em>עשויים</em> להיות זהים, אך גם עשויים שלא, תלוי בהגדרות שלך. אם לא הצלחת להיזכר בשם המשתמש שלך, מוטב ליצור קשר עם הנהלת המערכת. <br><br><strong>שמות משתמשים שלא שויכה להם כתובת דוא״ל לא יקבלו הודעות עם קישור לאיפוס ססמה.</strong> ',
     'google_login'                  => 'Login with Google Workspace',
     'google_login_failed'           => 'Google Login failed, please try again.',
-
 ];
 

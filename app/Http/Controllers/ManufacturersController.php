@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
-use App\Models\Asset;
 use App\Models\Manufacturer;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Redirect;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 
 /**
  * This controller handles all actions related to Manufacturers for
@@ -29,13 +27,10 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see Api\ManufacturersController::index() method that generates the JSON response
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index()
+    public function index() : View
     {
         $this->authorize('index', Manufacturer::class);
-
         return view('manufacturers/index');
     }
 
@@ -45,10 +40,8 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see ManufacturersController::store()
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create() : View
     {
         $this->authorize('create', Manufacturer::class);
 
@@ -62,10 +55,8 @@ class ManufacturersController extends Controller
      * @see ManufacturersController::create()
      * @since [v1.0]
      * @param ImageUploadRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : RedirectResponse
     {
         $this->authorize('create', Manufacturer::class);
         $manufacturer = new Manufacturer;
@@ -92,10 +83,8 @@ class ManufacturersController extends Controller
      * @see ManufacturersController::update()
      * @param int $manufacturerId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($manufacturerId = null)
+    public function edit($manufacturerId = null) : View | RedirectResponse
     {
         // Handles manufacturer checks and permissions.
         $this->authorize('update', Manufacturer::class);
@@ -116,11 +105,9 @@ class ManufacturersController extends Controller
      * @see ManufacturersController::getEdit()
      * @param Request $request
      * @param int $manufacturerId
-     * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(ImageUploadRequest $request, $manufacturerId = null)
+    public function update(ImageUploadRequest $request, $manufacturerId = null) : RedirectResponse
     {
         $this->authorize('update', Manufacturer::class);
         // Check if the manufacturer exists
@@ -157,10 +144,8 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $manufacturerId
      * @since [v1.0]
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($manufacturerId)
+    public function destroy($manufacturerId) : RedirectResponse
     {
         $this->authorize('delete', Manufacturer::class);
         if (is_null($manufacturer = Manufacturer::withTrashed()->withCount('models as models_count')->find($manufacturerId))) {
@@ -197,10 +182,8 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $manufacturerId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($manufacturerId = null)
+    public function show($manufacturerId = null) : View | RedirectResponse
     {
         $this->authorize('view', Manufacturer::class);
         $manufacturer = Manufacturer::find($manufacturerId);
@@ -220,10 +203,8 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.1.15]
      * @param int $manufacturers_id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function restore($id)
+    public function restore($id) : RedirectResponse
     {
         $this->authorize('delete', Manufacturer::class);
 
@@ -238,7 +219,7 @@ class ManufacturersController extends Controller
                 $logaction->item_type = Manufacturer::class;
                 $logaction->item_id = $manufacturer->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = Auth::user()->id;
+                $logaction->user_id = auth()->id();
                 $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index

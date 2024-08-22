@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'I have read and agree to the terms of use, and have received this item.',
     'inventory_report' => 'Inventory Report',
     'item' => 'Položka:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Please click on the following link to update your :web password:',
     'login' => 'Prihlásenie:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'User',
     'username' => 'Používateľské meno',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Welcome :name',
     'welcome_to' => 'Welcome to :web!',
     'your_assets' => 'View Your Assets',
     'your_credentials' => 'Your Snipe-IT credentials',
+    'mail_sent' => 'Mail sent successfully!',
 ];

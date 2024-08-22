@@ -39,12 +39,28 @@
                     <th class="col-md-1">
                       <!-- <input type="checkbox" id="checkAll"> -->
                       </th>
-                    <th class="col-md-6">{{ trans('general.name') }}</th>
-                    <th class="col-md-5">{{ trans('general.groups') }}</th>
-                    <th class="col-md-5">{{ trans('general.assets') }}</th>
-                    <th class="col-md-5">{{ trans('general.accessories') }}</th>
-                    <th class="col-md-5">{{ trans('general.licenses') }}</th>
-                    <th class="col-md-5">{{ trans('general.consumables') }}</th>
+                    <th class="col-md-3">{{ trans('general.name') }}</th>
+                    <th class="col-md-3">{{ trans('general.groups') }}</th>
+                    <th class="text-right">
+                      <i class="fas fa-barcode fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                      <span class="sr-only">{{ trans('general.assets') }}</span>
+                    </th>
+                    <th class="text-right">
+                      <i class="far fa-keyboard fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                      <span class="sr-only">{{ trans('general.accessories') }}</span>
+                    </th>
+                    <th class="text-right">
+                      <i class="far fa-save fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                      <span class="sr-only">{{ trans('general.licenses') }}</span>
+                    </th>
+                    <th class="text-right">
+                      <i class="fas fa-tint fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                      <span class="sr-only">{{ trans('general.consumables') }}</span>
+                    </th>
+                    <th class="text-right">
+                      <i class="fas fa-paperclip fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                      <span class="sr-only">{{ trans('general.files') }}</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -71,17 +87,20 @@
                       </a>&nbsp;
                       @endforeach
                     </td>
-                    <td>
-                      {{ number_format($user->assets()->count())  }}
+                    <td class="text-right">
+                      {{ number_format($user->assets->count())  }}
                     </td>
-                    <td>
-                      {{ number_format($user->accessories()->count())  }}
+                    <td class="text-right">
+                      {{ number_format($user->accessories->count())  }}
                     </td>
-                    <td>
-                      {{ number_format($user->licenses()->count())  }}
+                    <td class="text-right">
+                      {{ number_format($user->licenses->count())  }}
                     </td>
-                    <td>
-                      {{ number_format($user->consumables()->count())  }}
+                    <td class="text-right">
+                      {{ number_format($user->consumables->count())  }}
+                    </td>
+                    <td class="text-right">
+                      {{ number_format($user->uploads->count())  }}
                     </td>
                   </tr>
                   @endforeach
@@ -89,13 +108,13 @@
                 <tfoot>
 
                   <tr>
-                    <td colspan="7">
-                      {{ Form::select('status_id', $statuslabel_list , Request::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+                    <td colspan="8">
+                      {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
                       <label>{{ trans('admin/users/general.update_user_assets_status') }}</label>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="7" class="col-md-12 alert-danger">
+                    <td colspan="8" class="col-md-12 alert-danger">
                       <label class="form-control">
                         <input type="checkbox" name="delete_user" value="1">
                         <span><i class="fa fa-warning fa-2x"></i> {{ trans('general.bulk_soft_delete') }}</span>
@@ -110,7 +129,7 @@
         <div class="box-footer text-right">
           <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
 
-          <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled="disabled"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+          <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled="disabled"><x-icon type="checkmark" /> {{ trans('button.submit') }}</button>
 
         </div><!-- /.box-footer -->
       </form>

@@ -7,7 +7,7 @@ return array(
     'no_association' => 'אזהרה! דגם הפריט אינו תקין או חסר!',
     'no_association_fix' => 'זה ישבור דברים בדרכים שונות ומשונות. ערוך פריט זה עכשיו וקבע לו דגם.',
     'assoc_users'	 => 'מודל זה משויך כרגע לנכס אחד או יותר ולא ניתן למחוק אותו. מחק את הנכסים ולאחר מכן נסה למחוק שוב.',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'המודל לא נוצר, נסה שוב.',

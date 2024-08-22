@@ -106,9 +106,9 @@
                 {{ trans('general.location') }}
               </label>
 
-              <label class="form-control">
+              <label class="form-control" style="margin-left: 25px;">
                 {{ Form::checkbox('location_address', '1', '1') }}
-                - {{ trans('general.address') }}
+                  {{ trans('general.address') }}
               </label>
 
               <label class="form-control">
@@ -116,9 +116,9 @@
                 {{ trans('admin/hardware/form.default_location') }}
               </label>
 
-              <label class="form-control">
+              <label class="form-control" style="margin-left: 25px;">
                 {{ Form::checkbox('rtd_location_address', '1', '1') }}
-                - {{ trans('general.address') }}
+                {{ trans('general.address') }}
               </label>
 
               <label class="form-control">
@@ -181,9 +181,9 @@
                 {{ trans('general.notes') }}
               </label>
 
-              <label class="form-control">
+              <label class="form-control" style="margin-left: 25px;">
                 {{ Form::checkbox('url', '1', '1') }}
-                - {{ trans('general.url') }}
+                {{ trans('general.url') }}
               </label>
 
 
@@ -298,10 +298,10 @@
 
           <!-- Purchase Date -->
             <div class="form-group purchase-range{{ ($errors->has('purchase_start') || $errors->has('purchase_end')) ? ' has-error' : '' }}">
-              <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }} {{  trans('general.range') }}</label>
+              <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }}</label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
                 <input type="text" class="form-control" name="purchase_start" aria-label="purchase_start" value="{{ old('purchase_start') }}">
-                <span class="input-group-addon">to</span>
+                <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                 <input type="text" class="form-control" name="purchase_end" aria-label="purchase_end" value="{{ old('purchase_end') }}">
               </div>
 
@@ -316,10 +316,10 @@
 
             <!-- Created Date -->
             <div class="form-group purchase-range{{ ($errors->has('created_start') || $errors->has('created_end')) ? ' has-error' : '' }}">
-              <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} {{  trans('general.range') }}</label>
+              <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} </label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
                 <input type="text" class="form-control" name="created_start" aria-label="created_start" value="{{ old('created_start') }}">
-                <span class="input-group-addon">to</span>
+                <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                 <input type="text" class="form-control" name="created_end" aria-label="created_end" value="{{ old('created_end') }}">
               </div>
 
@@ -333,10 +333,10 @@
 
           <!-- Checkout Date -->
           <div class="form-group checkout-range{{ ($errors->has('checkout_date_start') || $errors->has('checkout_date_end')) ? ' has-error' : '' }}">
-              <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} {{  trans('general.range') }}</label>
+              <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} </label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
                   <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start" value="{{ old('checkout_date_start') }}">
-                  <span class="input-group-addon">to</span>
+                  <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                   <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end" value="{{ old('checkout_date_end') }}">
               </div>
 
@@ -371,7 +371,7 @@
               <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
                 <input type="text" class="form-control" name="expected_checkin_start" aria-label="expected_checkin_start" value="{{ old('expected_checkin_start') }}">
-                <span class="input-group-addon">to</span>
+                <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                 <input type="text" class="form-control" name="expected_checkin_end" aria-label="expected_checkin_end" value="{{ old('expected_checkin_end') }}">
               </div>
 
@@ -389,7 +389,7 @@
                   <label for="last_audit_start" class="col-md-3 control-label">{{ trans('general.last_audit') }}</label>
                   <div class="input-daterange input-group col-md-7" id="datepicker">
                       <input type="text" class="form-control" name="last_audit_start" aria-label="last_audit_start" value="{{ old('last_audit_start') }}">
-                      <span class="input-group-addon">to</span>
+                      <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                       <input type="text" class="form-control" name="last_audit_end" aria-label="last_audit_end" value="{{ old('last_audit_end') }}">
                   </div>
 
@@ -406,7 +406,7 @@
                   <label for="next_audit_start" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
                   <div class="input-daterange input-group col-md-7" id="datepicker">
                       <input type="text" class="form-control" name="next_audit_start" aria-label="next_audit_start" value="{{ old('next_audit_start') }}">
-                      <span class="input-group-addon">to</span>
+                      <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                       <input type="text" class="form-control" name="next_audit_end" aria-label="next_audit_end" value="{{ old('next_audit_end') }}">
                   </div>
 

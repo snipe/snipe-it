@@ -99,12 +99,18 @@ class SamlController extends Controller
     {
         $saml = $this->saml;
         $auth = $saml->getAuth();
-        $auth->processResponse();
+        $saml_exception = false;
+        try {
+            $auth->processResponse();
+        } catch (\Exception $e) {
+            Log::warning("Exception caught in SAML login: " . $e->getMessage());
+            $saml_exception = true;
+        }
         $errors = $auth->getErrors();
 
-        if (! empty($errors)) {
-            Log::error('There was an error with SAML ACS: '.implode(', ', $errors));
-            Log::error('Reason: '.$auth->getLastErrorReason());
+        if (!empty($errors) || $saml_exception) {
+            Log::warning('There was an error with SAML ACS: ' . implode(', ', $errors));
+            Log::warning('Reason: ' . $auth->getLastErrorReason());
 
             return redirect()->route('login')->with('error', trans('auth/message.signin.error'));
         }
@@ -132,12 +138,18 @@ class SamlController extends Controller
     {
         $auth = $this->saml->getAuth();
         $retrieveParametersFromServer = $this->saml->getSetting('retrieveParametersFromServer', false);
-        $sloUrl = $auth->processSLO(true, null, $retrieveParametersFromServer, null, true);
+        $saml_exception = false;
+        try {
+            $sloUrl = $auth->processSLO(true, null, $retrieveParametersFromServer, null, true);
+        } catch (\Exception $e) {
+            Log::warning("Exception caught in SAML single-logout: " . $e->getMessage());
+            $saml_exception = true;
+        }
         $errors = $auth->getErrors();
 
-        if (! empty($errors)) {
-            Log::error('There was an error with SAML SLS: '.implode(', ', $errors));
-            Log::error('Reason: '.$auth->getLastErrorReason());
+        if (!empty($errors) || $saml_exception) {
+            Log::warning('There was an error with SAML SLS: ' . implode(', ', $errors));
+            Log::warning('Reason: ' . $auth->getLastErrorReason());
 
             return view('errors.403');
         }

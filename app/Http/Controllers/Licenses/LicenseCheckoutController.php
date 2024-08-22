@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Accessory;
@@ -81,9 +82,26 @@ class LicenseCheckoutController extends Controller
         
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-        if ($this->$checkoutMethod($licenseSeat)) {
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
+
+        if ($request->filled('asset_id')) {
+
+            $checkoutTarget = $this->checkoutToAsset($licenseSeat);
+            $request->request->add(['assigned_asset' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'asset']);
+
+        } elseif ($request->filled('assigned_to')) {
+            $checkoutTarget = $this->checkoutToUser($licenseSeat);
+            $request->request->add(['assigned_user' => $checkoutTarget->id]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'user']);
         }
+
+
+
+        if ($checkoutTarget) {
+            return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
+        }
+
+
 
         return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
     }
@@ -94,14 +112,14 @@ class LicenseCheckoutController extends Controller
 
         if (! $licenseSeat) {
             if ($seatId) {
-                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.'));
+                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.unavailable')));
             }
             
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'There are no available seats for this license.'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.not_enough_seats')));
         }
 
         if (! $licenseSeat->license->is($license)) {
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.'));
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.mismatch')));
         }
 
         return $licenseSeat;
@@ -119,9 +137,8 @@ class LicenseCheckoutController extends Controller
             $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
-
-            return true;
+            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
+            return $target;
         }
 
         return false;
@@ -136,9 +153,8 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
-
-            return true;
+            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
+            return $target;
         }
 
         return false;

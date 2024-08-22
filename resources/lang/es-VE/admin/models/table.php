@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Crear Modelo de Activo',
+    'create'				=> 'Crear modelo de activo',
     'created_at' 			=> 'Creado el',
-    'eol'	 				=> 'Fin de Vida',
+    'eol'	 				=> 'Fin de soporte (EOL)',
     'modelnumber'   		=> 'Modelo No.',
     'name'      			=> 'Nombre del modelo de activo',
     'numassets' 			=> 'Activos',
-    'title'					=> 'Modelos de Activo',
-    'update'				=> 'Actualizar Modelo de Activo',
-    'view'					=> 'Ver Modelos de Activo',
-    'update'				=> 'Actualizar Modelo de Activo',
+    'title'					=> 'Modelos de activos',
+    'update'				=> 'Actualizar modelo de activo',
+    'view'					=> 'Ver modelo de activo',
+    'update'				=> 'Actualizar modelo de activo',
     'clone'				=> 'Clonar Modelo',
     'edit'				=> 'Editar Modelo',
 );

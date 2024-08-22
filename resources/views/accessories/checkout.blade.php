@@ -49,9 +49,36 @@
           </div>
           @endif
 
+             <!-- total -->
+             <div class="form-group">
+                 <label class="col-sm-3 control-label">{{  trans('admin/components/general.total') }}</label>
+                 <div class="col-md-6">
+                     <p class="form-control-static">{{ $accessory->qty }}</p>
+                 </div>
+             </div>
+
+             <!-- remaining -->
+             <div class="form-group">
+                 <label class="col-sm-3 control-label">{{  trans('admin/components/general.remaining') }}</label>
+                 <div class="col-md-6">
+                     <p class="form-control-static">{{ $accessory->numRemaining() }}</p>
+                 </div>
+             </div>
           <!-- User -->
 
-          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
+          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_user', 'required'=> 'true'])
+
+
+             <!-- Checkout QTY -->
+             <div class="form-group {{ $errors->has('checkout_qty') ? 'error' : '' }} ">
+                 <label for="checkout_qty" class="col-md-3 control-label">{{ trans('general.qty') }}</label>
+                 <div class="col-md-7 col-sm-12 required">
+                     <div class="col-md-2" style="padding-left:0px">
+                         <input class="form-control" type="number" name="checkout_qty" id="checkout_qty" value="{{ old('checkout_qty', 1) }}" min="1" max="{{ $accessory->numRemaining() }}" />
+                     </div>
+                 </div>
+                 {!! $errors->first('checkout_qty', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span></div>') !!}
+             </div>
 
 
              @if ($accessory->requireAcceptance() || $accessory->getEula() || ($snipeSettings->webhook_endpoint!=''))
@@ -88,10 +115,16 @@
             </div>
           </div>
        </div>
-       <div class="box-footer">
-          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" id="submit_button" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-       </div>
+          <x-redirect_submit_options
+                  index_route="accessories.index"
+                  :button_label="trans('general.checkout')"
+                  :options="[
+                        'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.accessories')]),
+                        'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.accessory')]),
+                        'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
+
+                       ]"
+          />
     </div> <!-- .box.box-default -->
   </form>
   </div> <!-- .col-md-9-->

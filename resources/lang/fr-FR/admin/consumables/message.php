@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'La catégorie doit être une catégorie de consommables.',
     'does_not_exist' => 'Ce consommable n\'existe pas.',
 
     'create' => array(

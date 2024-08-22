@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告:</strong>この資産は、現在 未配備としてマークされています。
-                        この状態が変更された場合は、資産のステータスを更新してください。',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> '資産が存在しません。',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'いくつかの項目は正しくインポートされませんでした。',
         'errorDetail'           => '以下のアイテムはエラーのためインポートできませんでした',
         'success'               => 'ファイルはインポートされました。',
         'file_delete_success'   => 'ファイルを削除しました。',
         'file_delete_error'      => 'ファイルが削除出来ませんでした。',
         'file_missing' => '選択されたファイルがありません',
+        'file_already_deleted' => '選択したファイルは既に削除されています',
         'header_row_has_malformed_characters' => 'ヘッダー行の1つ以上の属性に不正な形式のUTF-8文字が含まれています',
         'content_row_has_malformed_characters' => 'コンテンツの最初の行の1つまたは複数の属性に不正な形式のUTF-8文字が含まれています',
     ],

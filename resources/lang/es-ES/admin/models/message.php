@@ -2,27 +2,27 @@
 
 return array(
 
-    'deleted' => 'Modelo del activo eliminado',
+    'deleted' => 'Se eliminó el modelo del activo',
     'does_not_exist' => 'Modelo inexistente.',
-    'no_association' => 'ADVERTENCIA! El modelo del activo para este ítem es inválido o no existe!',
+    'no_association' => '¡ADVERTENCIA! ¡El modelo de activo para este artículo no es válido o no existe!',
     'no_association_fix' => 'Esto romperá cosas de formas extrañas y horribles. Edite este activo ahora para asignarle un modelo.',
-    'assoc_users'	 => 'Este modelo está asignado a uno o más equipos y no puede ser eliminado',
-
+    'assoc_users'	 => 'Este modelo está asociado a uno o más activos y no puede ser eliminado. Por favor, elimine los activos y vuelva a intentarlo. ',
+    'invalid_category_type' => 'El tipo de esta categoría debe ser categoría de activos.',
 
     'create' => array(
-        'error'   => 'Modelo no creado, Intentalo de nuevo.',
-        'success' => 'Modelo creado.',
+        'error'   => 'El modelo no fue creado, por favor inténtelo de nuevo.',
+        'success' => 'El modelo fue creado exitosamente.',
         'duplicate_set' => 'Ya existe un modelo de equipo con el mismo nombre, fabricante y número de modelo.',
     ),
 
     'update' => array(
-        'error'   => 'Modelo no actualizado, Intentalo de nuevo',
+        'error'   => 'El modelo no pudo ser actualizado, por favor inténtelo de nuevo',
         'success' => 'Modelo actualizado.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de querer eliminar el Modelo?',
-        'error'   => 'Ha habido un problema al eliminar el Modelo. Intentalo de nuevo.',
+        'confirm'   => '¿Está seguro de que desea eliminar este modelo de activo?',
+        'error'   => 'Hubo un problema eliminando el modelo. Por favor, inténtelo de nuevo.',
         'success' => 'Modelo eliminado.'
     ),
 

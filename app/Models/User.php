@@ -331,7 +331,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
+        return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_checkout', 'assigned_to', 'accessory_id')
             ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
@@ -481,8 +481,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     /**
      * Establishes the user -> uploads relationship
      *
-     * @todo I don't think we use this?
-     *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
@@ -493,6 +491,21 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             ->where('item_type', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Establishes the user -> acceptances relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v7.0.7]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function acceptances()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'target_id')
+            ->where('target_type', self::class)
+            ->where('action_type', '=', 'accepted')
             ->orderBy('created_at', 'desc');
     }
 

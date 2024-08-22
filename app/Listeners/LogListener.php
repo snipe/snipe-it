@@ -111,7 +111,7 @@ class LogListener
         $logaction->target_type = User::class;
         $logaction->action_type = 'merged';
         $logaction->note = trans('general.merged_log_this_user_from', $to_from_array);
-        $logaction->user_id = $event->admin->id;
+        $logaction->user_id = $event->admin->id ?? null;
         $logaction->save();
 
         // Add a record to the users being merged TO
@@ -122,7 +122,7 @@ class LogListener
         $logaction->item_type = User::class;
         $logaction->action_type = 'merged';
         $logaction->note = trans('general.merged_log_this_user_into', $to_from_array);
-        $logaction->user_id = $event->admin->id;
+        $logaction->user_id = $event->admin->id ?? null;
         $logaction->save();
 
 

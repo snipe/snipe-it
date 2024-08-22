@@ -7,7 +7,7 @@ return array(
     'no_association' => 'crwdns11693:0crwdne11693:0',
     'no_association_fix' => 'crwdns11235:0crwdne11235:0',
     'assoc_users'	 => 'crwdns672:0crwdne672:0',
-
+    'invalid_category_type' => 'crwdns12678:0crwdne12678:0',
 
     'create' => array(
         'error'   => 'crwdns673:0crwdne673:0',

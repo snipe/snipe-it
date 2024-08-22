@@ -48,6 +48,7 @@ class AssetFactory extends Factory
             'assigned_type' => null,
             'next_audit_date' => null,
             'last_checkout' => null,
+            'asset_eol_date' => null
         ];
     }
    
@@ -300,11 +301,11 @@ class AssetFactory extends Factory
         });
     }
 
-    public function assignedToLocation()
+    public function assignedToLocation(Location $location = null)
     {
-        return $this->state(function () {
+        return $this->state(function () use ($location) {
             return [
-                'assigned_to' => Location::factory(),
+                'assigned_to' => $location->id ?? Location::factory(),
                 'assigned_type' => Location::class,
             ];
         });
@@ -354,6 +355,17 @@ class AssetFactory extends Factory
         return $this->state(['requestable' => false]);
     }
 
+    public function noPurchaseOrEolDate()
+    {
+        return $this->afterCreating(function (Asset $asset) {
+            $asset->update([
+                'purchase_date' => null,
+                'asset_eol_date' => null
+            ]);
+        });
+    }
+
+  
     public function hasEncryptedCustomField(CustomField $field = null)
     {
         return $this->state(function () use ($field) {
@@ -371,7 +383,6 @@ class AssetFactory extends Factory
             ];
         });
     }
-
 
     /**
      * This allows bypassing model level validation if you want to purposefully

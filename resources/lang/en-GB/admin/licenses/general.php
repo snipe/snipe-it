@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'License Info',
     'license_seats'  			=> 'License Seats',
     'seat'  					=> 'Seat',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Seats',
     'software_licenses'  		=> 'Software Licenses',
     'user'  					=> 'User',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Check In All Seats',
-                'modal'             => 'This will action check in one seat. | This action will check in all :checkedout_seats_count seats for this licence.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Check in ALL seats for this licence from both users and assets',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
                 'disabled_tooltip_reassignable'  => 'This is disabled because the Licence is not re-assignable',
                 'success'           => 'Licence successfully checked in! | All licences were successfully checked in!',
-                'log_msg'           => 'Checked in via bulk licence checkout in licence GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
@@ -46,6 +47,6 @@ return array(
             ],
     ],
 
-    'below_threshold' => 'There are only :remaining_count seats left for this license with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
+    'below_threshold' => 'There are only :remaining_count seats left for this licence with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
     'below_threshold_short' => 'This item is below the minimum required quantity.',
 );

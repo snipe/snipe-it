@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong> எச்சரிக்கை: </strong> இந்த சொத்து தற்போது undeployable என குறிக்கப்பட்டுள்ளது. இந்த நிலை மாறியிருந்தால், சொத்து நிலையை புதுப்பிக்கவும்.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'சொத்து இல்லை.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'சில உருப்படிகளை சரியாக இறக்குமதி செய்யவில்லை.',
         'errorDetail'           => 'பிழைகள் காரணமாக பின்வரும் உருப்படிகளை இறக்குமதி செய்யப்படவில்லை.',
         'success'               => 'உங்கள் கோப்பு இறக்குமதி செய்யப்பட்டது',
         'file_delete_success'   => 'உங்கள் கோப்பு வெற்றிகரமாக நீக்கப்பட்டது',
         'file_delete_error'      => 'கோப்பை நீக்க முடியவில்லை',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

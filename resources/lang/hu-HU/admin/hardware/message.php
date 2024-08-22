@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Figyelem: </strong> Ez az eszköz pillanatnyilag  nem kiadható. Ha ez a helyzet változott, kérjük, frissítse az eszköz állapotát.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Eszköz nem létezik.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Egyes elemek nem importáltak helyesen.',
         'errorDetail'           => 'Az alábbi elemeket nem importálták hiba miatt.',
         'success'               => 'A fájlt importálta',
         'file_delete_success'   => 'A fájlt sikeresen törölték',
         'file_delete_error'      => 'A fájlt nem sikerült törölni',
         'file_missing' => 'A kijelölt fájl nem található',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'A fejlécsorban egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
         'content_row_has_malformed_characters' => 'A tartalom első sorában egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
     ],

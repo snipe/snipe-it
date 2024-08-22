@@ -3,8 +3,8 @@
 return array(
     'asset_categories' 					=> 'Categorías de activos',
     'category_name'  					=> 'Nombre de la categoría',
-    'checkin_email'                     => 'Enviar un correo al usuario al devolver/asignar.',
-    'checkin_email_notification'        => 'A este usuario se le enviará un correo electrónico al devolver/asignar.',
+    'checkin_email'                     => 'Enviar un correo al usuario al recibir/devolver.',
+    'checkin_email_notification'        => 'A este usuario se le enviará un correo electrónico al recibir/devolver.',
     'clone'                             => 'Clonar categoría',
     'create'  							=> 'Crear categoría',
     'edit'                              => 'Editar categoría',

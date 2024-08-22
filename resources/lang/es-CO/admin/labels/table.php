@@ -10,10 +10,10 @@ return [
     'example_supplier'   => 'Compañía de prueba limitada',
     'labels_per_page'    => 'Etiquetas',
     'support_fields'     => 'Campos',
-    'support_asset_tag'  => 'Etiqueta',
+    'support_asset_tag'  => 'Placa',
     'support_1d_barcode' => '1D',
     'support_2d_barcode' => '2D',
     'support_logo'       => 'Logo',
-    'support_title'      => 'Puesto',
+    'support_title'      => 'Título',
 
 ];

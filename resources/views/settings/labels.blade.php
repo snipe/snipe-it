@@ -27,11 +27,11 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-10">
 
-
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-tags"></i> {{ trans('admin/settings/general.labels') }}
+                        <x-icon type="labels"/>
+                        {{ trans('admin/settings/general.labels') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -147,14 +147,13 @@
                                 <div class="col-md-7">
                                     @php
                                         $select1DValues = [
-                                            'default' => trans('admin/settings/general.default').' [ '.$setting->alt_barcode.' ]',
-                                            'none'    => trans('admin/settings/general.none'),
                                             'C128'    => 'C128',
                                             'C39'     => 'C39',
                                             'EAN5'    => 'EAN5',
                                             'EAN13'   => 'EAN13',
                                             'UPCA'    => 'UPCA',
-                                            'UPCE'    => 'UPCE'
+                                            'UPCE'    => 'UPCE',
+                                             'none'    => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
                                     {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
@@ -179,11 +178,10 @@
                                 <div class="col-md-7">
                                     @php
                                         $select2DValues = [
-                                            'default'    => trans('admin/settings/general.default').' [ '.$setting->barcode_type.' ]',
-                                            'none'       => trans('admin/settings/general.none'),
                                             'QRCODE'     => 'QRCODE',
                                             'DATAMATRIX' => 'DATAMATRIX',
                                             'PDF417'     => 'PDF417',
+                                            'none'       => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
                                     {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
@@ -419,7 +417,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>
@@ -430,3 +428,8 @@
     {{Form::close()}}
 
 @stop
+
+@push('js')
+    {{-- Can't use @script here because we're not in a livewire component so let's manually load --}}
+    @livewireScripts
+@endpush

@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Peringatan:</strong>Aset ini telah ditandai karena saat ini tidak dapat dipasangkan lagi. Jika status ini telah berubah, harap perbarui status aset.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Aset tidak ada.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Beberapa item tidak diimpor dengan benar.',
         'errorDetail'           => 'Item berikut tidak diimpor karena kesalahan.',
         'success'               => 'File Anda telah diimpor',
         'file_delete_success'   => 'File anda telah berhasil dihapus',
         'file_delete_error'      => 'File tidak dapat dihapus',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Attempted Logins
+    {{ trans('admin/settings/general.login') }}
     @parent
 @stop
 
