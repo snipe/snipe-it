@@ -10,13 +10,13 @@
         </div>
         <div class="col-md-3">
                 <label class="form-control">
-                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values']) }}
+                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
                 {{ trans('admin/models/general.add_default_values') }}
             </label>
         </div>
     </div>
 
-    @if ($add_default_values ) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
+    @if ($add_default_values )
             @if ($this->fields)
 
                 @foreach ($this->fields as $field)
