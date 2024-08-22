@@ -378,11 +378,10 @@
                                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                                     <x-icon type="circle-solid" class="text-blue" />
                                                     {{ $asset->assetstatus->name }}
-                                                    <label class="label label-default">
-                                                        {{ trans('general.deployed') }}
-                                                    </label>
+                                                    <label class="label label-default">{{ trans('general.deployed') }}</label>
 
-                                                    <x-icon type="long-arrow-right" class="text-orange" />
+                                                
+                                                    <x-icon type="long-arrow-right" />
                                                     {!!  $asset->assignedTo->present()->glyph()  !!}
                                                     {!!  $asset->assignedTo->present()->nameUrl() !!}
                                                 @else
