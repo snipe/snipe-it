@@ -165,7 +165,7 @@ class AssetsController extends Controller
             if (($model) && ($model->fieldset)) {
                 foreach ($model->fieldset->fields as $field) {
                     if ($field->field_encrypted == '1') {
-                        if (Gate::allows('admin')) {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
                             if (is_array($request->input($field->db_column))) {
                                 $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                             } else {
@@ -388,7 +388,7 @@ class AssetsController extends Controller
             foreach ($model->fieldset->fields as $field) {
 
                 if ($field->field_encrypted == '1') {
-                    if (Gate::allows('admin')) {
+                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
                         if (is_array($request->input($field->db_column))) {
                             $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                         } else {
