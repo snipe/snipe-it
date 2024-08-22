@@ -330,6 +330,9 @@ body {
   font-size: 14px;
   white-space: normal;
 }
+.modal-warning .modal-help {
+  color: #fff8af;
+}
 .bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading {
   z-index: 0 !important;
 }

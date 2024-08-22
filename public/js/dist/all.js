@@ -59324,74 +59324,43 @@ pieOptions = {
 //-----------------
 
 var baseUrl = $('meta[name="baseUrl"]').attr('content');
-(function ($, settings) {
-  var Components = {};
-  Components.modals = {};
+$(function () {
+  var $el = $('table');
 
   // confirm restore modal
-  Components.modals.confirmRestore = function () {
-    var $el = $('table');
-    var events = {
-      'click': function click(evnt) {
-        var $context = $(this);
-        var $restoreConfirmModal = $('#restoreConfirmModal');
-        var href = $context.attr('href');
-        var message = $context.attr('data-content');
-        var title = $context.attr('data-title');
-        $('#restoreConfirmModalLabel').text(title);
-        $restoreConfirmModal.find('.modal-body').text(message);
-        $('#restoreForm').attr('action', href);
-        $restoreConfirmModal.modal({
-          show: true
-        });
-        return false;
-      }
-    };
-    var render = function render() {
-      $el.on('click', '.restore-asset', events['click']);
-    };
-    return {
-      render: render
-    };
-  };
+
+  $el.on('click', '.restore-asset', function (evnt) {
+    var $context = $(this);
+    var $restoreConfirmModal = $('#restoreConfirmModal');
+    var href = $context.attr('href');
+    var message = $context.attr('data-content');
+    var title = $context.attr('data-title');
+    $('#confirmModalLabel').text(title);
+    $restoreConfirmModal.find('.modal-body').text(message);
+    $('#restoreForm').attr('action', href);
+    $restoreConfirmModal.modal({
+      show: true
+    });
+    return false;
+  });
 
   // confirm delete modal
-  Components.modals.confirmDelete = function () {
-    var $el = $('table');
-    var events = {
-      'click': function click(evnt) {
-        var $context = $(this);
-        var $dataConfirmModal = $('#dataConfirmModal');
-        var href = $context.attr('href');
-        var message = $context.attr('data-content');
-        var title = $context.attr('data-title');
-        $('#myModalLabel').text(title);
-        $dataConfirmModal.find('.modal-body').text(message);
-        $('#deleteForm').attr('action', href);
-        $dataConfirmModal.modal({
-          show: true
-        });
-        return false;
-      }
-    };
-    var render = function render() {
-      $el.on('click', '.delete-asset', events['click']);
-    };
-    return {
-      render: render
-    };
-  };
 
-  /**
-   * Application start point
-   * Component definition stays out of load event, execution only happens.
-   */
-  $(function () {
-    new Components.modals.confirmRestore().render();
-    new Components.modals.confirmDelete().render();
+  $el.on('click', '.delete-asset', function (evnt) {
+    var $context = $(this);
+    var $dataConfirmModal = $('#dataConfirmModal');
+    var href = $context.attr('href');
+    var message = $context.attr('data-content');
+    var title = $context.attr('data-title');
+    $('#myModalLabel').text(title);
+    $dataConfirmModal.find('.modal-body').text(message);
+    $('#deleteForm').attr('action', href);
+    $dataConfirmModal.modal({
+      show: true
+    });
+    return false;
   });
-})(jQuery, window.snipeit.settings);
-$(document).ready(function () {
+
   /*
   * Slideout help menu
   */
