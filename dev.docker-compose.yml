@@ -12,6 +12,8 @@ services:
       - "8000:80"
     depends_on:
       redis:
+        # The default needs to be stated.
+        condition: service_started
       mariadb:
         condition: service_healthy
         restart: true
