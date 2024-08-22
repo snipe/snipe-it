@@ -90,13 +90,10 @@ class UpdateAssetModelsTest extends TestCase
                 ],
             ]);
 
-        $this->assertEquals(
-            2,
-            $assetModel->fresh()->defaultValues->filter(function (CustomField $field) {
-                return in_array($field->pivot->default_value, ['first default value', 'second default value']);
-            })->count(),
-            'Default field values were changed unexpectedly.'
-        );
+        $potentiallyChangedDefaultValues = $assetModel->defaultValues->pluck('pivot.default_value');
+        $this->assertCount(2, $potentiallyChangedDefaultValues);
+        $this->assertContains('first default value', $potentiallyChangedDefaultValues);
+        $this->assertContains('second default value', $potentiallyChangedDefaultValues);
     }
 
     public function test_default_values_can_be_updated()
@@ -129,7 +126,6 @@ class UpdateAssetModelsTest extends TestCase
             ]);
 
         $potentiallyChangedDefaultValues = $assetModel->defaultValues->pluck('pivot.default_value');
-
         $this->assertCount(2, $potentiallyChangedDefaultValues);
         $this->assertContains('first changed value', $potentiallyChangedDefaultValues);
         $this->assertContains('second changed value', $potentiallyChangedDefaultValues);
