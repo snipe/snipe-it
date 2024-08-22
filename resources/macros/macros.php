@@ -35,7 +35,7 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
     // Pull the autoglossonym array from the localizations translation file
     $countries_array = trans('localizations.countries');
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%" '.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'" data-tags="true">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%" '.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'" data-allow-clear="true" data-tags="true">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_country').'</option>';
 
     foreach ($countries_array as $abbr => $country) {
@@ -46,13 +46,13 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
         }
 
         // Loop through the countries configured in the localization file
-        $select .= '<option value="'.$selected.'" selected="selected" role="option" aria-selected="true" aria-selected="false">'.$country.'</option> ';
+        $select .= '<option value="'.$abbr.'" selected="selected" role="option" '.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
 
     }
 
     // If the country value doesn't exist in the array, add it as a new option and select it so we don't drop that data
     if (!in_array($selected, $countries_array)) {
-        $select .= '<option value="' . $selected . '" selected="selected" role="option" aria-selected="true">' . $selected .' '. trans('general.new') .'</option> ';
+        $select .= '<option value="' . $selected . '" selected="selected" role="option" aria-selected="true">' . $selected .' *</option> ';
     }
 
     $select .= '</select>';
