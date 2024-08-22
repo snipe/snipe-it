@@ -68,9 +68,9 @@ class CustomFieldSetDefaultValuesForModel extends Component
         // a comma-separated string but if we're loading the page
         // with old input then it was already parsed into an array.
         if ($field->element === 'checkbox' && is_string($defaultValue)) {
-            $this->selectedValues[$field->db_column] = explode(', ', $defaultValue);
-        } else {
-            $this->selectedValues[$field->db_column] = $defaultValue;
+            $defaultValue = explode(', ', $defaultValue);
         }
+
+        $this->selectedValues[$field->db_column] = $defaultValue;
     }
 }
