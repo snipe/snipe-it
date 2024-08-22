@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label class="form-control">
                                 <input type="checkbox" name="clean" {{ config('backup.sanitize_by_default') ? "checked='checked'" : "" }}>{{ trans('admin/settings/general.backups_clean') }}
-                            </label></p>
+                            </label>
                             <p class="help-block modal-help">{{ trans('admin/settings/general.backups_clean_helptext') }}</p>
                         </div>
                     </div>
