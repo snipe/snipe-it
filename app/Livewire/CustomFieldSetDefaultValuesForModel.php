@@ -59,6 +59,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
     {
         $defaultValue = $field->defaultValue($this->model_id);
 
+        // if we have old input for this field, use that instead
         if (old('default_values.' . $field->id)) {
             // @todo: need to handle old input being null on purpose...
             $defaultValue = old('default_values.' . $field->id);
