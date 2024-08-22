@@ -1120,7 +1120,7 @@
                                     </table>
                                 @else
 
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1157,7 +1157,7 @@
                                                     <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
                                                     <td>{{ $component->serial }}</td>
                                                     <td>
-                                                        <a href="{{ route('components.checkin.show', $component->pivot->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
+                                                        <a href="{{ route('components.checkin.show', $component->pivot->id) }}" class="btn btn-sm bg-purple hidden-print" data-tooltip="true">{{ trans('general.checkin') }}</a>
                                                     </td>
 
                                                         <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
@@ -1175,7 +1175,7 @@
                                         </tfoot>
                                     </table>
                                 @else
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1239,7 +1239,7 @@
 
                                 @else
 
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1399,11 +1399,11 @@
                                                 </td>
                                                 <td>
                                                     @if (($file->filename) && (Storage::exists('private_uploads/assets/'.$file->filename)))
-                                                        <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'download'=>'true']) }}" class="btn btn-sm btn-default">
+                                                        <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'download'=>'true']) }}" class="btn btn-sm btn-default hidden-print">
                                                             <x-icon type="download" />
                                                         </a>
 
-                                                        <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                                                        <a href="{{ route('show/assetfile', [$asset->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default hidden-print" target="_blank">
                                                             <x-icon type="external-link" />
                                                         </a>
                                                     @endif
@@ -1415,7 +1415,7 @@
                                                 </td>
                                                 <td>
                                                     @can('update', \App\Models\Asset::class)
-                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}">
+                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm hidden-print" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}">
                                                             <x-icon type="delete" />
                                                         </a>
                                                     @endcan
@@ -1427,7 +1427,7 @@
 
                                 @else
 
-                                    <div class="alert alert-info alert-block">
+                                    <div class="alert alert-info alert-block hidden-print">
                                         <x-icon type="info-circle" />
                                         {{ trans('general.no_results') }}
                                     </div>
@@ -1503,12 +1503,12 @@
                                                 </td>
                                                 <td>
                                                     @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
-                                                        <a href="{{ route('show/modelfile', [$asset->model->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                                            <x-icon type="download" />
+                                                        <a href="{{ route('show/modelfile', [$asset->model->id, $file->id]) }}" class="btn btn-sm btn-default hidden-print">
+                                                            <x-icon type="download" class="hidden-print" />
                                                         </a>
 
-                                                        <a href="{{ route('show/modelfile', [$asset->model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                            <x-icon type="external-link" />
+                                                        <a href="{{ route('show/modelfile', [$asset->model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default hidden-print" target="_blank">
+                                                            <x-icon type="external-link" class="hidden-print" />
                                                         </a>
 
                                                     @endif
@@ -1520,8 +1520,8 @@
                                                 </td>
                                                 <td>
                                                     @can('update', \App\Models\AssetModel::class)
-                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/modelfile', [$asset->model->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}">
-                                                            <x-icon type="delete" /></i>
+                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm hidden-print" href="{{ route('delete/modelfile', [$asset->model->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}">
+                                                            <x-icon type="delete" class="hidden-print"/></i>
                                                         </a>
                                                     @endcan
                                                 </td>
