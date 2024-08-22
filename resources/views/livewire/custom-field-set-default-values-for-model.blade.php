@@ -88,9 +88,9 @@
                                 @elseif($field->element == "radio")
 
                                     @foreach(explode("\r\n", $field->field_values) as $field_value)
-                                        <label class="col-md-3 form-control" for="{{ str_slug($field_value) }}" wire:key="radio-{{ $field_value }}">
+                                        <label class="col-md-3 form-control" for="{{ $field->db_column }}_{{ str_slug($field_value) }}" wire:key="radio-{{ $field_value }}">
                                             <input
-                                                id="{{ str_slug($field_value) }}"
+                                                id="{{ $field->db_column }}_{{ str_slug($field_value) }}"
                                                 aria-label="{{ str_slug($field->name) }}"
                                                 type="radio"
                                                 name="default_values[{{ $field->id }}]"
@@ -103,9 +103,9 @@
                                 @elseif($field->element == "checkbox")
 
                                      @foreach(explode("\r\n", $field->field_values) as $field_value)
-                                        <label class="col-md-3 form-control" for="{{ str_slug($field_value) }}" wire:key="checkbox-{{ $field_value }}">
+                                        <label class="col-md-3 form-control" for="{{ $field->db_column }}_{{ str_slug($field_value) }}" wire:key="checkbox-{{ $field_value }}">
                                             <input
-                                                id="{{ str_slug($field_value) }}"
+                                                id="{{ $field->db_column }}_{{ str_slug($field_value) }}"
                                                 type="checkbox"
                                                 aria-label="{{ str_slug($field->name) }}"
                                                 name="default_values[{{ $field->id }}][]"
