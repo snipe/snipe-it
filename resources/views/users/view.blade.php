@@ -159,9 +159,9 @@
                 </div>
               </div>
             @endif
-
+        <div class="info-stack-container">
             <!-- Start button column -->
-            <div class="col-md-3 col-xs-12 col-sm-push-9">
+            <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
 
               
 
@@ -308,7 +308,7 @@
  
             <!-- End button column -->
           
-            <div class="col-md-9 col-xs-12 col-sm-pull-3">
+            <div class="col-md-9 col-xs-12 col-sm-pull-3 info-stack">
 
                <div class="row-new-striped">
                 
@@ -767,6 +767,7 @@
                    @endif
                   </div> <!--/end striped container-->
                 </div> <!-- end col-md-9 -->
+             </div><!-- end info-stack-container-->
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
 
