@@ -645,7 +645,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @can('backend.interact')
                             <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
                                 <a href="#" id="settings">
-                                    <x-icon type="settings" />
+                                    <x-icon type="settings" class="fa-fw" />
                                     <span>{{ trans('general.settings') }}</span>
                                     <x-icon type="angle-left" class="pull-right fa-fw"/>
                                 </a>
