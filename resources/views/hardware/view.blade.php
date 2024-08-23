@@ -190,7 +190,7 @@
 
                                 @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
                                     @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
-                                        @can('checkin', \App\Models\Asset::class)
+                                        @can('checkin', $asset)
                                             <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                                     <span class="tooltip-wrapper"{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid_fix').'"' : '') !!}>
                                                         <a role="button" href="{{ route('hardware.checkin.create', $asset->id) }}" class="btn btn-sm btn-primary bg-purple btn-social btn-block hidden-print{{ (!$asset->model ? ' disabled' : '') }}">
