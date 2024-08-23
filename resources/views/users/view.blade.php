@@ -209,18 +209,18 @@
                   @if(!empty($user->email) && ($user->allAssignedCount() != '0'))
                     <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
                       {{ csrf_field() }}
-                      <button style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print" rel="noopener">
+                      <button class="btn-block btn btn-sm btn-primary btn-social hidden-print" rel="noopener">
                           <x-icon type="email" />
                           {{ trans('admin/users/general.email_assigned') }}
                       </button>
                     </form>
                   @elseif(!empty($user->email) && ($user->allAssignedCount() == '0'))
-                      <button style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">
+                      <button class="btn btn-block btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">
                           <x-icon type="email" />
                           {{ trans('admin/users/general.email_assigned') }}
                       </button>
                   @else
-                      <button style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">
+                      <button class="btn btn-block btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">
                           <x-icon type="email" />
                           {{ trans('admin/users/general.email_assigned') }}
                       </button>
@@ -231,16 +231,16 @@
                 @can('update', $user)
                   @if (($user->activated == '1') && ($user->ldap_import == '0'))
                   <div class="col-md-12" style="padding-top: 5px;">
-                    @if($user->email != '')
+                    @if (($user->email != '') && ($user->activated=='1'))
                       <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
                           {{ csrf_field() }}
-                      <button style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print">
+                      <button class="btn btn-block btn-sm btn-primary btn-social hidden-print">
                           <x-icon type="password" />
                           {{ trans('button.send_password_link') }}
                       </button>
                       </form>
                     @else
-                      <button style="width: 100%;" class="btn btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">
+                      <button class="btn btn-block btn-sm btn-primary btn-social hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">
                           <x-icon type="email" />
                           {{ trans('button.send_password_link') }}
                       </button>
@@ -251,7 +251,7 @@
 
                 @can('create', $user)
                     <div class="col-md-12" style="padding-top: 5px;">
-                        <a href="{{ route('users.clone.show', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-info btn-social hidden-print">
+                        <a href="{{ route('users.clone.show', $user->id) }}" class="btn btn-block btn-sm btn-info btn-social hidden-print">
                             <x-icon type="clone" />
                             {{ trans('admin/users/general.clone') }}
                         </a>
@@ -263,12 +263,12 @@
                   @if ($user->deleted_at=='')
                     <div class="col-md-12" style="padding-top: 30px;">
                         @if ($user->isDeletable())
-                            <a href="#" style="width: 100%;" class="delete-asset btn btn-sm btn-danger btn-social hidden-print" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $user->present()->fullName]) }}" data-target="#dataConfirmModal">
+                            <a href="#" class="btn-block delete-asset btn btn-sm btn-danger btn-social hidden-print" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $user->present()->fullName]) }}" data-target="#dataConfirmModal">
                                 <x-icon type="delete" />
                                 {{ trans('button.delete')}}
                             </a>
                             @else
-                            <button style="width: 100%;" class="btn btn-sm btn-danger btn-social hidden-print disabled">
+                            <button class="btn-block btn btn-sm btn-danger btn-social hidden-print disabled">
                                 <x-icon type="delete" />
                                 {{ trans('button.delete')}}
                             </button>
@@ -281,7 +281,7 @@
                         <input type="hidden" name="bulk_actions" value="delete" />
 
                         <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
-                        <button style="width: 100%;" class="btn btn-sm btn-danger btn-social hidden-print">
+                        <button class="btn btn-block btn-sm btn-danger btn-social hidden-print">
                             <x-icon type="checkin-and-delete" />
                             {{ trans('button.checkin_and_delete') }}
                         </button>
@@ -291,7 +291,7 @@
                     <div class="col-md-12" style="padding-top: 5px;">
                         <form method="POST" action="{{ route('users.restore.store', $user->id) }}">
                             @csrf
-                            <button style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                            <button class="btn btn-block btn-sm btn-warning btn-social hidden-print">
                                 <x-icon type="restore" />
                                 {{ trans('button.restore') }}
                             </button>
