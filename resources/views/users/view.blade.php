@@ -263,16 +263,12 @@
                   @if ($user->deleted_at=='')
                     <div class="col-md-12" style="padding-top: 30px;">
                         @if ($user->isDeletable())
-                          <form action="{{route('users.destroy',$user->id)}}" method="POST">
-                            {{csrf_field()}}
-                            {{ method_field("DELETE")}}
-                            <button style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                            <a href="#" style="width: 100%;" class="delete-asset btn btn-sm btn-danger btn-social hidden-print" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $user->present()->fullName]) }}" data-target="#dataConfirmModal">
                                 <x-icon type="delete" />
                                 {{ trans('button.delete')}}
-                            </button>
-                          </form>
+                            </a>
                             @else
-                            <button style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print disabled">
+                            <button style="width: 100%;" class="btn btn-sm btn-danger btn-social hidden-print disabled">
                                 <x-icon type="delete" />
                                 {{ trans('button.delete')}}
                             </button>
@@ -1200,6 +1196,14 @@
   @include ('partials.bootstrap-table', ['simple_view' => true])
 <script nonce="{{ csrf_token() }}">
 $(function () {
+
+$('#dataConfirmModal').on('show.bs.modal', function (event) {
+    var content = $(event.relatedTarget).data('content');
+    var title = $(event.relatedTarget).data('title');
+    $(this).find(".modal-body").text(content);
+    $(this).find(".modal-header").text(title);
+ });
+
 
   $("#two_factor_reset").click(function(){
     $("#two_factor_resetrow").removeClass('success');
