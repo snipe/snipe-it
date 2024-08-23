@@ -24,9 +24,8 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fieldset_id = $this->model?->fieldset_id;
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
-        $this->fields->each(function ($field) {
-            $this->selectedValues[$field->db_column] = $this->getSelectedValueForField($field);
-        });
+        $this->initializeSelectedValuesArray();
+        $this->populatedSelectedValuesArray();
     }
 
     #[Computed]
@@ -50,6 +49,39 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public function render()
     {
         return view('livewire.custom-field-set-default-values-for-model');
+    }
+
+    /**
+     * Livewire property binding plays nicer with arrays when it knows
+     * which keys will be present instead of them being
+     * dynamically added (this is especially true for checkboxes).
+     *
+     * Let's go ahead and initialize selectedValues with all the potential keys (custom field db_columns).
+     *
+     * @return void
+     */
+    private function initializeSelectedValuesArray(): void
+    {
+        CustomField::all()->each(function ($field) {
+            $this->selectedValues[$field->db_column] = null;
+
+            if ($field->element === 'checkbox') {
+                $this->selectedValues[$field->db_column] = [];
+            }
+        });
+    }
+
+    /**
+     * Populate the selectedValues array with the
+     * default values or old input for each field.
+     *
+     * @return void
+     */
+    private function populatedSelectedValuesArray(): void
+    {
+        $this->fields->each(function ($field) {
+            $this->selectedValues[$field->db_column] = $this->getSelectedValueForField($field);
+        });
     }
 
     private function getSelectedValueForField(CustomField $field)
