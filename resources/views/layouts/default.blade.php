@@ -647,7 +647,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                 <a href="#" id="settings">
                                     <x-icon type="settings" />
                                     <span>{{ trans('general.settings') }}</span>
-                                    <x-icon type="angle-left" class="fa-fw"/>
+                                    <x-icon type="angle-left" class="pull-right fa-fw"/>
                                 </a>
 
                                 <ul class="treeview-menu">
