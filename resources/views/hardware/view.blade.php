@@ -237,6 +237,20 @@
                                     </div>
                                 @endcan
 
+                                <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+                                    {{ Form::open([
+                                                     'method' => 'POST',
+                                                     'route' => ['hardware/bulkedit'],
+                                                     'class' => 'form-inline',
+                                                      'id' => 'bulkForm']) }}
+                                    <input type="hidden" name="bulk_actions" value="labels" />
+                                    <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
+                                    <button class="btn btn-block btn-social btn-sm btn-default" id="bulkEdit"{{ (!$asset->model ? ' disabled' : '') }}{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid').'"' : '') !!}>
+                                        <x-icon type="assets" />
+                                        {{ trans_choice('button.generate_labels', 1) }}</button>
+                                        {{ Form::close() }}
+                                </div>
+
                                 @can('delete', $asset)
                                     <div class="col-md-12 hidden-print" style="padding-top: 30px; padding-bottom: 30px;">
                                         @if ($asset->deleted_at=='')
@@ -1050,28 +1064,6 @@
                                         </div>
                                         <div class="col-md-9">
                                             {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
-                                        </div>
-                                    </div>
-                                    <div class="row hidden-print">
-                                        <div class="col-md-3">
-                                            <strong>
-                                                {{ trans('general.label') }}
-                                            </strong>
-                                        </div>
-                                        <div class="col-md-9 hidden-print">
-                                            {{ Form::open([
-                                                      'method' => 'POST',
-                                                      'route' => ['hardware/bulkedit'],
-                                                      'class' => 'form-inline',
-                                                       'id' => 'bulkForm']) }}
-                                            <input type="hidden" name="bulk_actions" value="labels" />
-                                            <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
-                                            <button class="btn btn-sm btn-default" id="bulkEdit"{{ (!$asset->model ? ' disabled' : '') }}{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid').'"' : '') !!}>
-                                                <x-icon type="assets" />
-                                                {{ trans_choice('button.generate_labels', 1) }}</button>
-
-                                            {{ Form::close() }}
-
                                         </div>
                                     </div>
                                     
