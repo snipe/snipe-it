@@ -62,7 +62,7 @@ class IconHelper
             case 'warning':
                 return 'fas fa-exclamation-triangle';
             case 'kits':
-                return 'fa fa-object-group';
+                return 'fas fa-object-group';
             case 'assets':
                 return 'fas fa-barcode';
             case 'accessories':
@@ -74,7 +74,7 @@ class IconHelper
             case 'licenses':
                 return 'far fa-save';
             case 'requestable':
-                return 'fa fa-laptop';
+                return 'fas fa-laptop';
             case 'reports':
                 return 'fas fa-chart-bar';
             case 'heart':
@@ -86,7 +86,7 @@ class IconHelper
             case 'due':
                 return 'fas fa-history';
             case 'import':
-                return 'fas fa-cloud-upload-alt fa-fw';
+                return 'fas fa-cloud-upload-alt';
             case 'search':
                 return 'fas fa-search';
             case 'alerts':
