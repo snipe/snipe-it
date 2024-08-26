@@ -54,11 +54,11 @@ class IconHelper
             case 'logout':
                 return 'fa fa-sign-out';
             case 'admin-settings':
-                return 'fa fa-cogs';
+                return 'fas fa-cogs';
             case 'settings':
-                return 'fa fa-cog';
+                return 'fas fa-cog';
             case 'angle-left':
-                return 'fa fa-angle-left';
+                return 'fas fa-angle-left';
             case 'warning':
                 return 'fas fa-exclamation-triangle';
             case 'kits':
