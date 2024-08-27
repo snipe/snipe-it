@@ -48,7 +48,7 @@
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_name', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>
           </div>
@@ -67,11 +67,11 @@
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_purchase_date', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets),['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
-
           </div>
+
           <!-- Expected Checkin Date -->
           <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
              <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
@@ -86,7 +86,7 @@
               <div class="col-md-5">
                 <label class="form-control">
                   {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
-                  {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                  {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
                 </label>
               </div>
           </div>
@@ -189,7 +189,7 @@
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_next_audit_date', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>
             <div class="col-md-8 col-md-offset-3">
