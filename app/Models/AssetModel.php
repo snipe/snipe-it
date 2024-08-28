@@ -79,7 +79,12 @@ class AssetModel extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'model_number', 'notes', 'eol'];
+    protected $searchableAttributes = [
+        'name',
+        'model_number',
+        'notes',
+        'eol'
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
