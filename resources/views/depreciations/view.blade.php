@@ -163,6 +163,7 @@
                                             data-sort-name="name"
                                             data-bulk-button-id="#AssetModelsBulkEditButton"
                                             data-bulk-form-id="#bulkForm"
+                                            data-click-to-select="true"
                                             class="table table-striped snipe-table"
                                             data-url="{{ route('api.models.index',['depreciation_id'=> $depreciation->id]) }}"
                                             data-export-options='{
