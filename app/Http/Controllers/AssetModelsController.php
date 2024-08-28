@@ -202,6 +202,7 @@ class AssetModelsController extends Controller
         if ($model->image) {
             try {
                 Storage::disk('public')->delete('models/'.$model->image);
+                $model->update(['image' => null]);
             } catch (\Exception $e) {
                 Log::info($e);
             }
