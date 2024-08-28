@@ -193,13 +193,20 @@ class DepreciationsController extends Controller
      */
     public function show($id) : View | RedirectResponse
     {
-        if (is_null($depreciation = Depreciation::find($id))) {
-            // Redirect to the blogs management page
-            return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
-        }
+        $depreciation = Depreciation::withCount('assets as assets_count')
+            ->withCount('models as models_count')
+            ->withCount('licenses as licenses_count')
+            ->find($id);
 
         $this->authorize('view', $depreciation);
 
-        return view('depreciations/view', compact('depreciation'));
+        if ($depreciation) {
+            return view('depreciations/view', compact('depreciation'));
+
+        }
+
+        return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
+
+
     }
 }

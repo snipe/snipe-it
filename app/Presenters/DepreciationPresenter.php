@@ -47,6 +47,26 @@ class DepreciationPresenter extends Presenter
                 "visible" => true,
             ],
             [
+                'field' => 'assets_count',
+                'searchable' => false,
+                'sortable' => true,
+                'title' =>  trans('general.assets'),
+                'visible' => true,
+            ],
+            [
+                'field' => 'models_count',
+                'searchable' => false,
+                'sortable' => true,
+                'title' =>  trans('general.asset_models'),
+                'visible' => true,
+            ], [
+                'field' => 'licenses_count',
+                'searchable' => false,
+                'sortable' => true,
+                'title' =>  trans('general.licenses'),
+                'visible' => true,
+            ],
+            [
                 'field' => 'actions',
                 'searchable' => false,
                 'sortable' => false,

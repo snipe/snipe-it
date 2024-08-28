@@ -28,6 +28,9 @@ class DepreciationsTransformer
             'name' => e($depreciation->name),
             'months' => $depreciation->months.' '.trans('general.months'),
             'depreciation_min' => $depreciation->depreciation_type === 'percent' ? $depreciation->depreciation_min.'%' : $depreciation->depreciation_min,
+            'assets_count' => $depreciation->assets_count,
+            'models_count' => $depreciation->models_count,
+            'licenses_count' => $depreciation->licenses_count,
             'created_at' => Helper::getFormattedDateObject($depreciation->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($depreciation->updated_at, 'datetime')
         ];
