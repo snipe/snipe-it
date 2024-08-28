@@ -20,9 +20,22 @@ class DepreciationsController extends Controller
     public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Depreciation::class);
-        $allowed_columns = ['id','name','months','depreciation_min', 'depreciation_type','created_at'];
+        $allowed_columns = [
+            'id',
+            'name',
+            'months',
+            'depreciation_min',
+            'depreciation_type',
+            'created_at',
+            'assets_count',
+            'models_count',
+            'licenses_count',
+        ];
 
-        $depreciations = Depreciation::select('id','name','months','depreciation_min','depreciation_type','user_id','created_at','updated_at');
+        $depreciations = Depreciation::select('id','name','months','depreciation_min','depreciation_type','user_id','created_at','updated_at')
+            ->withCount('assets as assets_count')
+            ->withCount('models as models_count')
+            ->withCount('licenses as licenses_count');
 
         if ($request->filled('search')) {
             $depreciations = $depreciations->TextSearch($request->input('search'));
