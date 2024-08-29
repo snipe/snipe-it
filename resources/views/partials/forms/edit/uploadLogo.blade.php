@@ -15,8 +15,7 @@
 
         <span class='label label-default' id="{{ $logoId }}-info"></span>
 
-        {!! $errors->first($logoVariable, '<span class="alert-msg">:message</span>') !!}
-
+        <x-form-error name=":$logoVariable" />
 
         <p class="help-block" style="!important" id="{{ $logoId }}-status">
             {{ $helpBlock }}

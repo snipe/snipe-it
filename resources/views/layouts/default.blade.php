@@ -999,14 +999,15 @@ dir="{{ Helper::determineLanguageDirection() }}">
                     $(inputElement).closest('.help-block').remove();
                 },
                 onfocusout: function(element) {
+                    $(element).closest().removeClass('has-error');
                     return $(element).valid();
                 },
-
             });
 
+
             $.extend($.validator.messages, {
-                required: "{{ trans('validation.generic.required') }}",
-                email: "{{ trans('validation.generic.email') }}"
+                required: '<x-icon type="x"/> {{ trans('validation.generic.required') }}',
+                email: '<x-icon type="x"/> {{ trans('validation.generic.email') }}'
             });
 
 

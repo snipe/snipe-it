@@ -6,6 +6,6 @@
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" readonly value="{{  old('purchase_date', ($item->purchase_date) ? $item->purchase_date->format('Y-m-d') : '') }}" style="background-color:inherit">
             <span class="input-group-addon"><x-icon type="calendar" /></span>
        </div>
-       {!! $errors->first('purchase_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+       <x-form-error name="purchase_date" />
    </div>
 </div>

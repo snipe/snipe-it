@@ -6,7 +6,7 @@
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="{{ $fieldname }}" id="{{ $fieldname }}" value="{{ old($fieldname, ($item->{$fieldname}) ? date('Y-m-d', strtotime($item->{$fieldname})) : '') }}" readonly style="background-color:inherit" maxlength="10">
             <span class="input-group-addon"><x-icon type="calendar" /></span>
         </div>
-        {!! $errors->first($fieldname, '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+        <x-form-error name=":$fieldname" />
     </div>
 </div>
 
