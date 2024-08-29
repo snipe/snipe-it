@@ -4047,7 +4047,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 $.ui = $.ui || {};
 
-return $.ui.version = "1.13.3";
+return $.ui.version = "1.14.0";
 
 } );
 
@@ -4061,7 +4061,7 @@ return $.ui.version = "1.13.3";
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery UI Widget 1.13.3
+ * jQuery UI Widget 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
