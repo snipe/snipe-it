@@ -307,7 +307,7 @@
                           <!-- language -->
                           <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
                               <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
-                              <div class="col-md-9">
+                              <div class="col-md-6">
                                   {!! Form::locales('locale', old('locale', $user->locale), 'select2') !!}
                                   {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
