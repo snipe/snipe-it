@@ -8,8 +8,6 @@
                 <option value="{{ $location_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_location') }}</option>
             @endif
         </select>
     </div>

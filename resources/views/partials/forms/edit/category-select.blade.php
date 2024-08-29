@@ -9,8 +9,6 @@
                 <option value="{{ $category_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Category::find($category_id)) ? \App\Models\Category::find($category_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_category') }}</option>
             @endif
 
         </select>
