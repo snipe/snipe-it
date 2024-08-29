@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Ho letto e accetto i termini di utilizzo e ho ricevuto questo elemento.',
     'inventory_report' => 'Rapporto Inventario',
     'item' => 'Articolo:',
+    'item_checked_reminder' => 'Promemoria: attualmente hai :count elementi assegnati che non hai né accettato né rifiutato. Clicca sul link qui sotto per confermare la tua decisione.',
     'license_expiring_alert' => 'Tra :threshold giorni sta per scadere :count licenza. |Tra :threshold giorni stanno per scadere :count licenze.',
     'link_to_update_password' => 'Per favore clicca sul seguente collegamento per aggiornare la tua password per :web :',
     'login' => 'Accesso:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'C\'è :count Bene da inventariare entro :threshold giorni.|Ci sono :count beni da inventariare entro :threshold giorni.',
     'user' => 'Utente',
     'username' => 'Nome utente',
+    'unaccepted_asset_reminder' => 'Hai dei beni non accettati.',
     'welcome' => 'Benvenuto :name',
     'welcome_to' => 'Benvenuti in :web!',
     'your_assets' => 'Visualizza i tuoi Beni',
     'your_credentials' => 'Le tue credenziali Snipe-IT',
+    'mail_sent' => 'Email inviata correttamente!',
 ];

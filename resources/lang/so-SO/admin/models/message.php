@@ -7,7 +7,7 @@ return array(
     'no_association' => 'DIGNIIN! Qaabka hantida shaygan waa mid aan sax ahayn ama maqan!',
     'no_association_fix' => 'Tani waxay wax u jebin doontaa siyaabo yaab leh oo naxdin leh. Wax ka beddel hantidan hadda si aad mooddo.',
     'assoc_users'	 => 'Qaabkani waxa uu hadda la xidhiidha hal ama ka badan oo hanti ah lamana tirtiri karo. Fadlan tirtir hantida, ka dibna isku day in aad mar kale tirtirto. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Qaabka lama abuurin, fadlan isku day mar kale.',

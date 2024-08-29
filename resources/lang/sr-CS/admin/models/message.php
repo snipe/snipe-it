@@ -7,7 +7,7 @@ return array(
     'no_association' => 'UPOZORENJE! Model za ovu stavku je ili pogrešan ili nedostaje!',
     'no_association_fix' => 'Ovo će polomiti stvari na čudne i užasne načine. Uredite odmah ovu imovinu da bi ste je povezali sa modelom.',
     'assoc_users'	 => 'Ovaj je model trenutno povezan s jednom ili više imovina i ne može se izbrisati. Izbrišite imovinu pa pokušajte ponovo. ',
-
+    'invalid_category_type' => 'Ova kategorija mora biti kategorija imovine.',
 
     'create' => array(
         'error'   => 'Model nije kreiran, pokušajte ponovo.',

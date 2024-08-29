@@ -44,6 +44,8 @@ return array(
         'error'   => 'Houve um problema de registro na licença. Favor tentar novamente.',
         'success' => 'A licença foi registrada com sucesso',
         'not_enough_seats' => 'Não há vagas de licença suficientes disponíveis para o pagamento',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

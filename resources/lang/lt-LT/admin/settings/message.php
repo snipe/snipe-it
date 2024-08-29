@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Taip, atkurti. Suprantu, kad tai perrašys visus šiuo metu duomenų bazėje esančius duomenis. Taip pat, kad bus atjungti visi esami naudotojai (įskaitant mane).',
         'restore_confirm'       => 'Ar tikrai norite atkurti savo duomenų bazę iš :filename?'
     ],
+    'restore' => [
+        'success'               => 'Jūsų sistemos atsarginė kopija buvo atkurta. Prisijunkite iš naujo.'
+    ],
     'purge' => [
         'error'     => 'Valymo metu įvyko klaida. ',
         'validation_failed'     => 'Jūsų įvestas išvalymo patvirtinimas yra neteisingas. Patvirtinimo lauke įveskite žodį „DELETE“.',
@@ -29,7 +32,7 @@ return [
         'testing' => 'Tikrinamas LDAP ryšys, susiejimas ir užklausos...',
         '500' => '500 serverio klaida. Norėdami gauti daugiau informacijos, patikrinkite savo serverio žurnalus.',
         'error' => 'Kažkas ne taip :(',
-        'sync_success' => 'Pavyzdys 10 vartotojų, grąžintų iš LDAP serverio, pagal jūsų nustatymus:',
+        'sync_success' => '10 naudotojų, gautų iš LDAP serverio, pagal jūsų nustatymus:',
         'testing_authentication' => 'Tikrinamas LDAP autentifikavimas...',
         'authentication_success' => 'Naudotojas sėkmingai atpažintas naudojant LDAP!'
     ],

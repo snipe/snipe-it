@@ -24,7 +24,7 @@ class LicensesController extends Controller
     {
         $this->authorize('view', License::class);
 
-        $licenses = License::with('company', 'manufacturer', 'supplier','category')->withCount('freeSeats as free_seats_count');
+        $licenses = License::with('company', 'manufacturer', 'supplier','category', 'adminuser')->withCount('freeSeats as free_seats_count');
 
         if ($request->filled('company_id')) {
             $licenses->where('company_id', '=', $request->input('company_id'));
@@ -70,6 +70,9 @@ class LicensesController extends Controller
             $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
+        if ($request->filled('user_id')) {
+            $licenses->where('user_id', '=', $request->input('user_id'));
+        }
 
         if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
             $licenses->where('maintained','=',1);
@@ -112,6 +115,9 @@ class LicensesController extends Controller
                 break;
             case 'company':
                 $licenses = $licenses->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+                break;
+            case 'created_by':
+                $licenses = $licenses->OrderCreatedBy($order);
                 break;
             default:
                 $allowed_columns =

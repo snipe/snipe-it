@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Попередження: </strong> цей актив позначено як такий, що наразі неможливо розгорнути.
-                         Якщо цей статус змінився, оновіть статус активу.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Медіафайл не існує.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Деякі елементи не імпортовано належним чином.',
         'errorDetail'           => 'Наступні елементи не були імпортовані через помилки.',
         'success'               => 'Ваш файл імпортовано',
         'file_delete_success'   => 'Ваш файл успішно вилучено',
         'file_delete_error'      => 'Файл не може бути видалений',
         'file_missing' => 'Відсутній файл',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Один або кілька атрибутів у рядку заголовка містять невірні символи UTF-8',
         'content_row_has_malformed_characters' => 'Один або кілька атрибутів у першому рядку вмісту містять неправильні символи UTF-8',
     ],

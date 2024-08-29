@@ -2,14 +2,14 @@
 
 return [
     'about_kits_title'                  => 'Apie iš anksto nustatytus rinkinius',
-    'about_kits_text'                   => 'Iš anksto nustatyti rinkiniai leidžia greitai išduoti daiktų rinkinius (įrangą, licencijas ir kt.) naudotojui. Tai patogu, kai įrangos išdavimo procesas yra vieningas ir naudotojai gauna analogiškos įrangos komplektus.',
+    'about_kits_text'                   => 'Iš anksto nustatyti rinkiniai leidžia greitai išduoti daiktų rinkinius (turtą, licencijas ir kt.) naudotojui. Tai patogu, kai turto išdavimo procesas yra vieningas ir naudotojai gauna analogiško turto komplektus.',
     'checkout'                          => 'Išduoti rinkinį ',
     'create_success'                    => 'Rinkinys buvo sukurtas sėkmingai.',
     'create'                            => 'Sukurti iš anksto nustatytą rinkinį',
     'update'                            => 'Atnaujinti iš anksto nustatytą rinkinį',
     'delete_success'                    => 'Rinkinys buvo panaikintas sėkmingai.',
     'update_success'                    => 'Rinkinys buvo atnaujintas sėkmingai.',
-    'none_models'                       => 'Nepakanka laisvos įrangos :model išdavimui. Reikalingas likutis: :qty. ',
+    'none_models'                       => 'Nepakanka laisvo turto :model išdavimui. Reikalingas kiekis: :qty. ',
     'none_licenses'                     => 'Nepakanka laisvų licencijos vietų :license išdavimui. Reikalingas likutis: :qty. ',
     'none_consumables'                  => 'Nepakanka laisvų eksploatacinių medžiagų :consumable išdavimui. Reikalingas likutis: :qty. ',
     'none_accessory'                    => 'Nepakanka laisvų priedų :accessory išdavimui. Reikalingas likutis: :qty. ',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Rinkinys panaikintas sėkmingai',
     'kit_model_updated'                 => 'Modelis atnaujintas sėkmingai',
     'kit_model_detached'                => 'Modelis atskirtas sėkmingai',
+    'model_already_attached'            => 'Modelis jau pridėtas prie rinkinio',
 ];

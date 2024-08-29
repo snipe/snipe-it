@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong> Rhybudd: </strong> Mae\'r ased hwn wedi\'i nodi fel un na ellir ei ddefnyddio ar hyn o bryd.
-                        Os yw\'r statws hwn wedi newid, diweddarwch statws yr ased.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Nid yw\'r ased yn bodoli.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Rhai eitemau heb ei mewnforio\'n gywir.',
         'errorDetail'           => 'Ni fewnforiwyd yr eitemau canlynol oherwydd gwallau.',
         'success'               => 'Mae\'ch ffeil wedi\'i mewnforio',
         'file_delete_success'   => 'Mae eich ffeil wedi\'i dileu yn llwyddiannus',
         'file_delete_error'      => 'Nid oedd yn bosib dileu\'r ffeil',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

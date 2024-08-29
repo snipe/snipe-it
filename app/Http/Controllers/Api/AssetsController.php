@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
@@ -601,7 +602,7 @@ class AssetsController extends Controller
                 if ($field->field_encrypted == '1') {
                     Log::debug('This model field is encrypted in this fieldset.');
 
-                    if (Gate::allows('admin')) {
+                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
 
                         // If input value is null, use custom field's default value
                         if (($field_val == null) && ($request->has('model_id') != '')) {
@@ -651,36 +652,35 @@ class AssetsController extends Controller
      * Accepts a POST request to update an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      */
-    public function update(ImageUploadRequest $request, $id) : JsonResponse
+    public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
-        $this->authorize('update', Asset::class);
+        $asset->fill($request->validated());
 
-        if ($asset = Asset::find($id)) {
-            $asset->fill($request->all());
+        if ($request->has('model_id')) {
+            $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
+        }
+        if ($request->has('company_id')) {
+            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
+        }
+        if ($request->has('rtd_location_id') && !$request->has('location_id')) {
+            $asset->location_id = $request->validated()['rtd_location_id'];
+        }
+        if ($request->input('last_audit_date')) {
+            $asset->last_audit_date = Carbon::parse($request->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s');
+        }
 
-            ($request->filled('model_id')) ?
-                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : '';
-            ($request->filled('company_id')) ?
-                $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
+        /**
+        * this is here just legacy reasons. Api\AssetController
+        * used image_source  once to allow encoded image uploads.
+        */
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
+        }
 
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
-
-            /**
-            * this is here just legacy reasons. Api\AssetController
-            * used image_source  once to allow encoded image uploads.
-            */
-            if ($request->has('image_source')) {
-                $request->offsetSet('image', $request->offsetGet('image_source'));
-            }     
-
-            $asset = $request->handleImages($asset);
-            $model = AssetModel::find($asset->model_id);
+        $asset = $request->handleImages($asset);
+        $model = $asset->model;
             
             // Update custom fields
             $problems_updating_encrypted_custom_fields = false;
@@ -695,7 +695,7 @@ class AssetsController extends Controller
                             }
                         }
                         if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
+                            if (Gate::allows('assets.view.encrypted_custom_fields')) {
                                 $field_val = Crypt::encrypt($field_val);
                             } else {
                                 $problems_updating_encrypted_custom_fields = true;
@@ -706,15 +706,13 @@ class AssetsController extends Controller
                     }
                 }
             }
-
-
             if ($asset->save()) {
                 if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
                         $location = $target->location_id;
                 } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
                     $location = $target->location_id;
 
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
+                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
                         ->update(['location_id' => $target->location_id]);
                 } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                     $location = $target->id;
@@ -728,17 +726,13 @@ class AssetsController extends Controller
                     $asset->image = $asset->getImageUrl();
                 }
 
-                if ($problems_updating_encrypted_custom_fields) {
-                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
-                } else {
-                    return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
-                }
+            if ($problems_updating_encrypted_custom_fields) {
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+            } else {
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
             }
-
-            return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
         }
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
 
@@ -934,7 +928,7 @@ class AssetsController extends Controller
             }
         }
 
-        if ($request->has('status_id')) {
+        if ($request->filled('status_id')) {
             $asset->status_id = $request->input('status_id');
         }
         
@@ -984,7 +978,7 @@ class AssetsController extends Controller
     public function checkinByTag(Request $request, $tag = null) : JsonResponse
     {
         $this->authorize('checkin', Asset::class);
-        if(null == $tag && null !== ($request->input('asset_tag'))) {
+        if (null == $tag && null !== ($request->input('asset_tag'))) {
             $tag = $request->input('asset_tag');
         }
         $asset = Asset::where('asset_tag', $tag)->first();

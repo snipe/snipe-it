@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Bu alan geçersiz.',
         'already_added'   => 'Alan zaten mevcut',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'Alan oluşturulamadı. Lütfen tekrar deneyin.',

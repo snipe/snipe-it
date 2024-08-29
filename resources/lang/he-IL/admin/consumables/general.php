@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'נוֹתָר',
     'total' 			                => 'סה"כ',
     'update'                            => 'עדכון מתכלה',
+    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
 );

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Checkin Όλων / Διαγραφή Χρήστη',
     'delete'  	                => 'Διαγραφή',
     'edit'    	                => 'Επεξεργασία',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'Επαναφορά',
     'remove'                    => 'Αφαίρεση',
     'request'                   => 'Αίτημα',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Προσθήκη Συντήρησης',
     'append'                    => 'Προσάρτηση',
     'new'                       => 'Νεό',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

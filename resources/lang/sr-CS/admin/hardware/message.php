@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Upozorenje: </strong> Ovaj resurs, imovina je označena kao trenutno nedeljiva. Ako se ovaj status promenio, ažurirajte status imovine.',
+    'undeployable' 		=> '<strong>Upozorenje: </strong> Ova imovina je trenutno označena kao nezaduživa. Ukoliko je status drugačiji, molim vas ažurirajte status imovine.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
     'does_not_exist_var'=> 'Nije pronađena imovina za oznakom :asset_tag.',
     'no_tag' 	        => 'Nije navedena oznaka imovine.',
@@ -51,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Izvrši uvoz',
         'error'                 => 'Neke stavke nisu pravilno uvezene.',
         'errorDetail'           => 'Sledeće stavke nisu uvezene zbog grešaka.',
         'success'               => 'Vaš fajl je importovan',
         'file_delete_success'   => 'Vaš je fajl uspešno izbrisan',
         'file_delete_error'      => 'Fajl nime moguće izbrisati',
         'file_missing' => 'Nedostaje izabrana datoteka',
+        'file_already_deleted' => 'Izabrana datoteka je već obrisana',
         'header_row_has_malformed_characters' => 'Jedan ili više atributa u redu zaglavlja sadrži loše formatirane UTF-8 karaktere',
         'content_row_has_malformed_characters' => 'Jedan ili više atributa u prvom redu sadržaja sadrži loše formatirane UTF-8 karaktere',
     ],

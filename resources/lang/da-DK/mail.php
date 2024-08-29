@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Jeg har læst og accepterer vilkårene for brug og har modtaget denne vare.',
     'inventory_report' => 'Lagerrapport',
     'item' => 'Vare:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Der er :count licens(er) der udløber indenfor den/de næste :threshold dag(e).',
     'link_to_update_password' => 'Venligst klik på følgende link for at opdatere din: webadgangskode:',
     'login' => 'Log på:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'Der er :count asset, som skal tilses inden :threshold dage. |Der er :count assets, som skal tilses inden :threshold dage.',
     'user' => 'Bruger',
     'username' => 'Brugernavn',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Velkommen :navn',
     'welcome_to' => 'Velkommen til :web!',
     'your_assets' => 'Se dine assets',
     'your_credentials' => 'Dine Snipe-IT Legitimationsoplysninger',
+    'mail_sent' => 'Mail sent successfully!',
 ];

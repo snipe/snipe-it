@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varovanie: </strong> Tento majetok bol oznáčený ako nepriraditeľný. 
-                        Ak došlo k zmene, prosím upravte aktuálny stav majetku.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Majetok neexistuje.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Niektoré položky neboli správne naimportované.',
         'errorDetail'           => 'Nasledujúce položky neboli kvôli chybám importované.',
         'success'               => 'Súbor bol naimportovaný',
         'file_delete_success'   => 'Súbor bol úspešné odstránený',
         'file_delete_error'      => 'Súbor sa nepodarilo odstrániť',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

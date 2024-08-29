@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreConsumableRequest;
 use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
@@ -27,27 +28,8 @@ class ConsumablesController extends Controller
     {
         $this->authorize('index', Consumable::class);
 
-        // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
-        // Relations will be handled in query scopes a little further down.
-        $allowed_columns = 
-            [
-                'id',
-                'name',
-                'order_number',
-                'min_amt',
-                'purchase_date',
-                'purchase_cost',
-                'company',
-                'category',
-                'model_number', 
-                'item_no', 
-                'qty',
-                'image',
-                'notes',
-                ];
-
-        $consumables = Consumable::select('consumables.*')
-            ->with('company', 'location', 'category', 'users', 'manufacturer');
+        $consumables = Consumable::with('company', 'location', 'category', 'supplier', 'manufacturer')
+            ->withCount('users as consumables_users_count');
 
         if ($request->filled('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
@@ -89,15 +71,9 @@ class ConsumablesController extends Controller
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
-        $allowed_columns = ['id', 'name', 'order_number', 'min_amt', 'purchase_date', 'purchase_cost', 'company', 'category', 'model_number', 'item_no', 'manufacturer', 'location', 'qty', 'image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
-        $sort_override =  $request->input('sort');
-        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
-
-
-        switch ($sort_override) {
+        switch ($request->input('sort')) {
             case 'category':
                 $consumables = $consumables->OrderCategory($order);
                 break;
@@ -111,10 +87,30 @@ class ConsumablesController extends Controller
                 $consumables = $consumables->OrderCompany($order);
                 break;
             case 'supplier':
-                $components = $consumables->OrderSupplier($order);
+                $consumables = $consumables->OrderSupplier($order);
                 break;
             default:
-                $consumables = $consumables->orderBy($column_sort, $order);
+                // This array is what determines which fields should be allowed to be sorted on ON the table itself.
+                // These must match a column on the consumables table directly.
+                $allowed_columns = [
+                    'id',
+                    'name',
+                    'order_number',
+                    'min_amt',
+                    'purchase_date',
+                    'purchase_cost',
+                    'company',
+                    'category',
+                    'model_number',
+                    'item_no',
+                    'manufacturer',
+                    'location',
+                    'qty',
+                    'image'
+                ];
+
+                $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+                $consumables = $consumables->orderBy($sort, $order);
                 break;
         }
 
@@ -131,7 +127,7 @@ class ConsumablesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
      */
-    public function store(ImageUploadRequest $request) : JsonResponse
+    public function store(StoreConsumableRequest $request) : JsonResponse
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable;
@@ -167,7 +163,7 @@ class ConsumablesController extends Controller
      * @param  \App\Http\Requests\ImageUploadRequest $request
      * @param  int $id
      */
-    public function update(ImageUploadRequest $request, $id) : JsonResponse
+    public function update(StoreConsumableRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Consumable::class);
         $consumable = Consumable::findOrFail($id);

@@ -73,6 +73,7 @@ class ResetDemoSettings extends Command
         $settings->saml_forcelogin = '0';
         $settings->saml_slo = null;
         $settings->saml_custom_settings = null;
+        $settings->default_avatar = 'default.png';
 
 
         $settings->save();

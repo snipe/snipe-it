@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Вернуть все и удалить пользователя',
     'delete'  	                => 'Удалить',
     'edit'    	                => 'Редактировать',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'Восстановить',
     'remove'                    => 'Удалить',
     'request'                   => 'Требовать',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Добавить техническое обслуживание',
     'append'                    => 'Добавить',
     'new'                       => 'Создать',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

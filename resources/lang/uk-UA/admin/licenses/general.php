@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Інформація про ліцензію',
     'license_seats'  			=> 'Місця ліцензії',
     'seat'  					=> 'Місце',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Кількість місць',
     'software_licenses'  		=> 'Ліцензії на програмне забезпечення',
     'user'  					=> 'Користувач',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Прийняти всі місця',
-                'modal'             => 'Це призведе до перевірки дій в одному місці. | Ця дія буде перевіряти всі :checkedout_seats_count місць для цієї ліцензії.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Прийняти ВСІ місця для цієї ліцензії від користувачів і активів',
                 'disabled_tooltip'  => 'Це вимкнено, тому що наразі немає місць',
                 'disabled_tooltip_reassignable'  => 'Це вимкнено, оскільки ліцензія не є розумною',
                 'success'           => 'Ліцензія успішно перевірена! | Всі ліцензії успішно перевірені!',
-                'log_msg'           => 'Перевірено через масову ліцензію з використанням GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

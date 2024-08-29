@@ -30,7 +30,6 @@ class CategoryTest extends TestCase
 
        // Generate 5 models via factory
        $models =  AssetModel::factory()
-            ->mbp13Model()
             ->count(5)
             ->create(
                 [

@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'crwdns12320:0crwdne12320:0',
     'does_not_exist' => 'crwdns1309:0crwdne1309:0',
 
     'create' => array(

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Nėra tokios nusidėvėjimo klasės.',
-    'assoc_users'	 => 'Šis nusidėvėjimas šiuo metu yra susietas su vienu ar keliais įrangos modeliais ir negali būti panaikintas. Panaikinkite susietus modelius ir bandykite iš naujo. ',
+    'assoc_users'	 => 'Šis nusidėvėjimas šiuo metu yra susietas su vienu ar keliais modeliais ir negali būti panaikintas. Panaikinkite susietus modelius ir bandykite iš naujo. ',
 
 
     'create' => array(

@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'ខ្ញុំបានអាន និងយល់ព្រមតាមលក្ខខណ្ឌនៃការប្រើប្រាស់ ហើយបានទទួលធាតុនេះ។',
     'inventory_report' => 'របាយការណ៍សារពើភ័ណ្ឌ',
     'item' => 'ធាតុ',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'មាន :count License ផុតកំណត់ក្នុង :threshold days បន្ទាប់។ | មាន :count licenses ផុតកំណត់ក្នុង :threshold days បន្ទាប់។',
     'link_to_update_password' => 'សូមចុចលើតំណខាងក្រោមដើម្បីធ្វើបច្ចុប្បន្នភាព៖ពាក្យសម្ងាត់បណ្ដាញរបស់អ្នក៖',
     'login' => 'ចូល',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'មាន : រាប់ទ្រព្យសកម្មដែលនឹងមកដល់សម្រាប់សវនកម្មក្នុងរយៈពេល : threshold days។|មាន : រាប់ទ្រព្យសកម្មដែលនឹងមកដល់សម្រាប់សវនកម្មក្នុងរយៈពេល : threshold days ។',
     'user' => 'អ្នក​ប្រើ',
     'username' => 'ឈ្មោះ​អ្នកប្រើប្រាស់',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'សូមស្វាគមន៍៖ ឈ្មោះ',
     'welcome_to' => 'សូមស្វាគមន៍មកកាន់៖ គេហទំព័រ!',
     'your_assets' => 'មើលទ្រព្យសកម្មរបស់អ្នក',
     'your_credentials' => 'លិខិតសម្គាល់ Snipe-IT របស់អ្នក។',
+    'mail_sent' => 'Mail sent successfully!',
 ];

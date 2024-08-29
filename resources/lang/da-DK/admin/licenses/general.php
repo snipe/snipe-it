@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Licens Info',
     'license_seats'  			=> 'Licenssæder',
     'seat'  					=> 'Sæde',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Sæder',
     'software_licenses'  		=> 'Softwarelicenser',
     'user'  					=> 'Bruger',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Tjek Alle Pladser Ind',
-                'modal'             => 'Dette vil handle checkin et sæde. - Denne handling vil tjekke alle :checkedout_seats_count sæder for denne licens.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checkin ALLE pladser til denne licens fra både brugere og aktiver',
                 'disabled_tooltip'  => 'Dette er deaktiveret, fordi der ikke er nogen pladser i øjeblikket tjekket ud',
                 'disabled_tooltip_reassignable'  => 'Dette er deaktiveret fordi licensen ikke kan gentildeles',
                 'success'           => 'Licensen blev tjekket ind! - Alle licenser blev tjekket ind!',
-                'log_msg'           => 'Checket ind via bulk licens checkout i licens GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [

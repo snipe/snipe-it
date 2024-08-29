@@ -296,6 +296,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['reports.view' => '1']);
     }
 
+    public function canImport()
+    {
+        return $this->appendPermission(['import' => '1']);
+    }
+
     private function appendPermission(array $permission)
     {
         return $this->state(function ($currentState) use ($permission) {
@@ -308,5 +313,10 @@ class UserFactory extends Factory
                 ),
             ];
         });
+    }
+
+    public function deleted(): self
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
     }
 }

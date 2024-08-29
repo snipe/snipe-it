@@ -2,8 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>경고: </strong> 이 자산은 현재 사용불가 상태입니다.
-                        이 상태를 변경하시려면, 자산 상태를 갱신하세요.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> '자산이 존재하지 않습니다.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -52,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => '몇몇 품목들을 정확하게 읽어오지 못했습니다.',
         'errorDetail'           => '다음 품목들은 오류로 읽어오지 못했습니다.',
         'success'               => '파일에서 읽어오기가 완료되었습니다',
         'file_delete_success'   => '파일 삭제가 완료되었습니다',
         'file_delete_error'      => '파일을 삭제할 수 없습니다',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

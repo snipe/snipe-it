@@ -32,18 +32,27 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
 
     $idclause = (!is_null($id)) ? $id : '';
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%" '.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'">';
+    // Pull the autoglossonym array from the localizations translation file
+    $countries_array = trans('localizations.countries');
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%" '.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'" data-allow-clear="true" data-tags="true">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_country').'</option>';
 
-    // Pull the autoglossonym array from the localizations translation file
-    foreach (trans('localizations.countries') as $abbr => $country) {
+    foreach ($countries_array as $abbr => $country) {
 
         // We have to handle it this way to handle deprecication warnings since you can't strtoupper on null
         if ($abbr!='') {
             $abbr = strtoupper($abbr);
         }
 
-        $select .= '<option value="'.$abbr.'"'.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+        // Loop through the countries configured in the localization file
+        $select .= '<option value="'.$abbr.'" selected="selected" role="option" '.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+
+    }
+
+    // If the country value doesn't exist in the array, add it as a new option and select it so we don't drop that data
+    if (!in_array($selected, $countries_array)) {
+        $select .= '<option value="' . $selected . '" selected="selected" role="option" aria-selected="true">' . $selected .' *</option> ';
     }
 
     $select .= '</select>';
@@ -84,8 +93,9 @@ Form::macro('time_display_format', function ($name = 'time_display_format', $sel
         'H:i',
     ];
 
+    $datetime = date("y-m-d").' 14:00:00';
     foreach ($formats as $format) {
-        $time_display_formats[$format] = Carbon::now()->format($format);
+        $time_display_formats[$format] = Carbon::parse($datetime)->format($format);
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px" aria-label="'.$name.'">';
     foreach ($time_display_formats as $format => $time_display_format) {

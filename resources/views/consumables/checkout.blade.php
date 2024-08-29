@@ -37,6 +37,25 @@
           </div>
           @endif
 
+          <!-- total -->
+          <div class="form-group">
+              <label class="col-sm-3 control-label">{{  trans('admin/components/general.total') }}</label>
+              <div class="col-md-6">
+                  <p class="form-control-static">{{ $consumable->qty }}</p>
+              </div>
+          </div>
+
+          <!-- remaining -->
+          <div class="form-group">
+              <label class="col-sm-3 control-label">{{  trans('admin/components/general.remaining') }}</label>
+              <div class="col-md-6">
+                  <p class="form-control-static">{{ $consumable->numRemaining() }}</p>
+              </div>
+          </div>
+
+
+
+
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
@@ -87,10 +106,14 @@
             </div>
           </div>
         </div> <!-- .box-body -->
-        <div class="box-footer">
-          <a class="btn btn-link" href="{{ route('consumables.show', ['consumable'=> $consumable->id]) }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" id="submit_button" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-       </div>
+            <x-redirect_submit_options
+                    index_route="consumables.index"
+                    :button_label="trans('general.checkout')"
+                    :options="[
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.consumables')]),
+                                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.consumable')]),
+                                'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
+                                ]"/>
       </div>
     </form>
 

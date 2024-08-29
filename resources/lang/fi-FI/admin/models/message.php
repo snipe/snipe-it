@@ -7,7 +7,7 @@ return array(
     'no_association' => 'VAROITUS! Omaisuusmalli tälle tuotteelle on virheellinen tai puuttuu!',
     'no_association_fix' => 'Tämä tulee rikkomaam asioita oudoilla ja kauhistuttavilla tavoilla. Muokkaa tätä laitetta nyt määrittääksesi sille mallin.',
     'assoc_users'	 => 'Tämä malli on käytössä yhdellä tai useammalla laitteella joten sitä ei voida poistaa. Poista malli käytöstä kaikilta laitteilta ja yritä uudelleen. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Mallia ei luotu, yritä uudelleen.',

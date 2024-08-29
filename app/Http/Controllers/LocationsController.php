@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Location;
 use App\Models\User;
@@ -193,7 +194,13 @@ class LocationsController extends Controller
      */
     public function show($id = null) : View | RedirectResponse
     {
-        $location = Location::find($id);
+        $location = Location::withCount('assignedAssets as assigned_assets_count')
+            ->withCount('assets as assets_count')
+            ->withCount('rtd_assets as rtd_assets_count')
+            ->withCount('children as children_count')
+            ->withCount('users as users_count')
+            ->withTrashed()
+            ->find($id);
 
         if (isset($location->id)) {
             return view('locations/view', compact('location'));
@@ -249,6 +256,41 @@ class LocationsController extends Controller
     }
 
 
+    /**
+     * Restore a given Asset Model (mark as un-deleted)
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param int $id
+     */
+    public function postRestore($id) : RedirectResponse
+    {
+        $this->authorize('create', Location::class);
+
+        if ($location = Location::withTrashed()->find($id)) {
+
+            if ($location->deleted_at == '') {
+                return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.location')]));
+            }
+
+            if ($location->restore()) {
+                $logaction = new Actionlog();
+                $logaction->item_type = Location::class;
+                $logaction->item_id = $location->id;
+                $logaction->created_at = date('Y-m-d H:i:s');
+                $logaction->user_id = auth()->id();
+                $logaction->logaction('restore');
+
+                return redirect()->route('locations.index')->with('success', trans('admin/locations/message.restore.success'));
+            }
+
+            // Check validation
+            return redirect()->back()->with('error', trans('general.could_not_restore', ['item_type' => trans('general.location'), 'error' => $location->getErrors()->first()]));
+        }
+
+        return redirect()->back()->with('error', trans('admin/models/message.does_not_exist'));
+
+    }
     public function print_all_assigned($id) : View | RedirectResponse
     {
         if ($location = Location::where('id', $id)->first()) {

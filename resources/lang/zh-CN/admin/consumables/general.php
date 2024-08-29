@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => '剩余',
     'total' 			                => '总计',
     'update'                            => '更新耗材',
+    'inventory_warning'                 => '该耗材的库存低于最低数量 :min_count',
 );

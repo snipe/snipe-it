@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
         'restore_confirm'       => 'האם ברצונך לשחזר את המסד נתונים מ: קובץ?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'אירעה שגיאה בעת הטיהור.',
         'validation_failed'     => 'אישור הטיהור שלך שגוי. הקלד את המילה "DELETE" בתיבת האישור.',

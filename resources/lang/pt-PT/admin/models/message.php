@@ -7,7 +7,7 @@ return array(
     'no_association' => 'AVISO! O modelo de artigo para este item é inválido ou está em falta!',
     'no_association_fix' => 'Isto estragará as coisas de maneiras estranhas e horríveis. Edite este artigo agora para lhe atribuir um modelo.',
     'assoc_users'	 => 'Este modelo está atualmente associado com pelo menos um artigo e não pode ser removido. Por favor, remova os artigos e depois tente novamente. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'O Modelo não foi criado. Por favor tente novamente.',

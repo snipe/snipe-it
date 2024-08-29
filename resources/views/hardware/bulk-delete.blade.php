@@ -30,7 +30,7 @@
               <tr>
                 <td></td>
                 <td>{{ trans('admin/hardware/table.id') }}</td>
-                <td>{{ trans('admin/hardware/table.name') }}</td>
+                <td>{{ trans('general.asset_name') }}</td>
                 <td>{{ trans('admin/hardware/table.location')}}</td>
                 <td>{{ trans('admin/hardware/table.assigned_to') }}</td>
               </tr>
@@ -59,7 +59,7 @@
 
         <div class="box-footer text-right">
           <a class="btn btn-link" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.delete') }}</button>
+          <button type="submit" class="btn btn-success" id="submit-button"><x-icon type="checkmark" /> {{ trans('button.delete') }}</button>
         </div><!-- /.box-footer -->
       </div><!-- /.box -->
     </form>

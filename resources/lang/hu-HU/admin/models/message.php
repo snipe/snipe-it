@@ -7,7 +7,7 @@ return array(
     'no_association' => 'FIGYELEM! Az eszköz modell hiányzik, vagy nem érvényes!',
     'no_association_fix' => 'Ez furcsa és szörnyű módokon fogja szétzúzni a dolgokat. Szerkeszd ezt az eszközt most, és rendeld hozzá egy modellhez.',
     'assoc_users'	 => 'Ez a modell jelenleg társított egy vagy több eszközhöz, és nem törölhető. Legyen szíves törölje az eszközt, és próbálja meg ismét a modell törlését. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'A model nem lett létrehozva. Próbálkozz újra.',

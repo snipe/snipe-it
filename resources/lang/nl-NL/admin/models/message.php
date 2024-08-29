@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WAARSCHUWING! Het asset model voor dit item is ongeldig of ontbreekt!',
     'no_association_fix' => 'Dit maakt dingen kapot op rare en gruwelijke manieren. Bewerk dit product nu om het een model toe te wijzen.',
     'assoc_users'	 => 'Dit model is momenteel gekoppeld met één of meer assets en kan niet worden verwijderd. Verwijder de assets en probeer het opnieuw. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Model is niet aangemaakt, probeer het opnieuw.',

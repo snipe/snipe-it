@@ -27,7 +27,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-lock" aria-hidden="true"></i> {{ trans('admin/settings/general.security') }}
+                        <x-icon type="locked"/>
+                        {{ trans('admin/settings/general.security') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -106,7 +107,7 @@
                                 </label>
 
                                 @if ($errors->has('pwd_secure_complexity.*'))
-                                    <span class="alert-msg">{{ trans('validation.invalid_value_in_field') }}</span>
+                                    <span class="alert-msg">{{ trans('validation.generic.invalid_value_in_field') }}</span>
                                 @endif
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
@@ -150,6 +151,9 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_custom_logout_url_help') }}
                                     </p>
+
+                                    @if ($setting->login_remote_user_enabled == '1')
+
                                     <!--  Disable other logins mechanism -->
                                     <label class="form-control">
 
@@ -160,6 +164,8 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_common_disabled_help') }}
                                     </p>
+                                    @endif
+
                                 @endif
 
                             </div>
@@ -175,7 +181,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

@@ -7,5 +7,5 @@ return array(
     'manager'                   => 'Supervisor',
     'location'                  => 'Ubicación',
     'create'                    => 'Crear departamento',
-    'update'                    => 'Actualizar Departamento',
+    'update'                    => 'Actualizar departamento',
     );

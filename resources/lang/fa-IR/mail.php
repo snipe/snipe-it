@@ -64,6 +64,7 @@ return [
     'i_have_read' => 'من شرایط استفاده را خوانده ام و موافقم و این مورد را دریافت کرده ام.',
     'inventory_report' => 'Inventory Report',
     'item' => 'مورد:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'مجوز :count در روزهای بعدی :threshold منقضی می شود.|مجوزهای :count در روزهای بعدی :threshold منقضی می شوند.',
     'link_to_update_password' => 'برای به روزرسانی لطفا بر روی لینک زیر کلیک کنید: web password:',
     'login' => 'ورود:',
@@ -94,9 +95,11 @@ return [
     'upcoming-audits' => 'دارایی :count وجود دارد که در روزهای :threshold برای حسابرسی ارائه می شود.',
     'user' => 'کاربر',
     'username' => 'نام کاربری',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'خوش آمدید نام',
     'welcome_to' => 'به وب سایت خوش آمدید',
     'your_assets' => 'دارایی های خود را مشاهده کنید
 ',
     'your_credentials' => 'مدارک Snipe-IT شما',
+    'mail_sent' => 'Mail sent successfully!',
 ];

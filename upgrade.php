@@ -1,17 +1,35 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
-// We define this because we can't reliable use file_get_contents because some
+// We define this because we can't reliably use file_get_contents because some
 // machines don't allow URL access via allow_url_fopen being set to off
 function url_get_contents ($Url) {
+    $results = file_get_contents($Url);
+    if ($results) {
+        return $results;
+    }
+    print("file_get_contents() failed, trying curl instead.\n");
     if (!function_exists('curl_init')){
         die("cURL is not installed!\nThis is required for Snipe-IT as well as the upgrade script, so you will need to fix this before continuing.\nAborting upgrade...\n");
     }
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $Url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // If we're on windows, make sure we can load intermediate certificates in
+    // weird corporate environments.
+    // See:  https://github.com/curl/curl/commit/2d6333101a71129a6a802eb93f84a5ac89e34479
+    // this will _probably_ only work if your libcurl has been linked to Schannel, the native Windows SSL implementation
+    if (PHP_OS == "WINNT" && defined("CURLOPT_SSL_OPTIONS") && defined("CURLSSLOPT_NATIVE_CA")) {
+        curl_setopt($ch, CURLOPT_SSL_OPTIONS, CURLSSLOPT_NATIVE_CA);
+    }
     $output = curl_exec($ch);
     curl_close($ch);
+    if ($output === false) {
+        print("Error retrieving PHP requirements!\n");
+        print("Error was: " . curl_error($ch) . "\n");
+        print("Try enabling allow_url_fopen in php.ini, or fixing your curl/OpenSSL setup, or try rerunning with --skip-php-compatibility-checks");
+        return '{}';
+    }
     return $output;
 }
 
@@ -66,7 +84,7 @@ if (! $upgrade_requirements) {
         echo "\nERROR: Failed to retrieve remote requirements from $remote_requirements_file\n\n";
         if ($branch_override){
             echo "NOTE: You passed a custom branch: $branch\n";
-            echo "   If the above URL doesn't work, that may be why. Please check you branch spelling/extistance\n\n";
+            echo "   If the above URL doesn't work, that may be why. Please check you branch spelling/existence\n\n";
         }
 
         if (json_last_error()) {
@@ -143,7 +161,11 @@ foreach ($env as $line_num => $line) {
 
     if ((strlen($line) > 1) && (strpos($line, "#") !== 0)) {
 
-        list ($env_key, $env_value) = $env_line = explode('=', $line);
+        $env_line = explode('=', $line, 2);
+        if (count($env_line) != 2) {
+            continue;
+        }
+        list ($env_key, $env_value) = $env_line;
 
         // The array starts at 0
         $show_line_num = $line_num+1;

@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Энэ загвар одоогоор нэг буюу хэд хэдэн хөрөнгөтэй холбоотой бөгөөд устгаж болохгүй. Хөрөнгө устгаж, дараа нь устгахыг оролдоно уу.',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Загвар үүсгэгдсэнгүй, дахин оролдоно уу.',

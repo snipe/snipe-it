@@ -56,6 +56,7 @@ return [
     'i_have_read' => '我同意使用條款，並且已經收到物品。',
     'inventory_report' => '庫存報告',
     'item' => '項目：',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => '有 :count 個授權將在 :threshold 天後到期。|有 :count 個授權將在 :threshold 天後到期。',
     'link_to_update_password' => '請點擊以下鏈結以更新 :web 的密碼：',
     'login' => '登入',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => '有 :count 項資產將在接下來的 :threshold 天內進行稽核。|有 :count 項資產將在接下來的 :threshold 天內進行稽核。',
     'user' => '使用者',
     'username' => '使用者名稱',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => '歡迎您 :name',
     'welcome_to' => '歡迎來到 :web！',
     'your_assets' => '查看您的資產',
     'your_credentials' => '您的 Snipe-IT 憑證',
+    'mail_sent' => 'Mail sent successfully!',
 ];

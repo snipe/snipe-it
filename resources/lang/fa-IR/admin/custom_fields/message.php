@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'این زمینه وجود ندارد.',
         'already_added'   => 'زمینه اضافه شده است',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'فیلد ایجاد نشده است، لطفا دوباره تلاش کنید.',

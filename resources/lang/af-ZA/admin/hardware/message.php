@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Waarskuwing: </strong> Hierdie bate is gemerk as tans onbruikbaar. As hierdie status verander het, verander asseblief die batestatus.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Bate bestaan ​​nie.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Sommige items is nie korrek ingevoer nie.',
         'errorDetail'           => 'Die volgende items is nie ingevoer as gevolg van foute nie.',
         'success'               => 'Jou lêer is ingevoer',
         'file_delete_success'   => 'Jou lêer is suksesvol verwyder',
         'file_delete_error'      => 'Die lêer kon nie uitgevee word nie',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

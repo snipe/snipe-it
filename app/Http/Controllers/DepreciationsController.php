@@ -62,6 +62,20 @@ class DepreciationsController extends Controller
         $depreciation->name = $request->input('name');
         $depreciation->months = $request->input('months');
         $depreciation->user_id = Auth::id();
+
+        $request->validate([
+            'depreciation_min' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
+                        $fail(trans('validation.percent'));
+                    }
+                },
+            ],
+            'depreciation_type' => 'required|in:amount,percent',
+        ]);
+        $depreciation->depreciation_type = $request->input('depreciation_type');
         $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
@@ -116,6 +130,20 @@ class DepreciationsController extends Controller
         // Depreciation data
         $depreciation->name             = $request->input('name');
         $depreciation->months           = $request->input('months');
+
+        $request->validate([
+            'depreciation_min' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
+                        $fail(trans('validation.percent'));
+                    }
+                },
+            ],
+            'depreciation_type' => 'required|in:amount,percent',
+        ]);
+        $depreciation->depreciation_type = $request->input('depreciation_type');
         $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
@@ -165,13 +193,20 @@ class DepreciationsController extends Controller
      */
     public function show($id) : View | RedirectResponse
     {
-        if (is_null($depreciation = Depreciation::find($id))) {
-            // Redirect to the blogs management page
-            return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
-        }
+        $depreciation = Depreciation::withCount('assets as assets_count')
+            ->withCount('models as models_count')
+            ->withCount('licenses as licenses_count')
+            ->find($id);
 
         $this->authorize('view', $depreciation);
 
-        return view('depreciations/view', compact('depreciation'));
+        if ($depreciation) {
+            return view('depreciations/view', compact('depreciation'));
+
+        }
+
+        return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
+
+
     }
 }

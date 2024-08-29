@@ -139,7 +139,7 @@ return [
             'to' => env('MAIL_BACKUP_NOTIFICATION_ADDRESS', null),
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+                'address' => env('MAIL_FROM_ADDR', 'hello@example.com'),
                 'name' => env('MAIL_FROM_NAME', 'Example'),
             ],
         ],
@@ -236,5 +236,7 @@ return [
             'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
         ],
     ],
+
+    'sanitize_by_default' => env('DB_SANITIZE_BY_DEFAULT', false),
 
 ];

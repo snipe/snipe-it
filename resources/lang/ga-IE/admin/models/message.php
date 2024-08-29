@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Tá an tsamhail seo bainteach le sócmhainní amháin nó níos mó faoi láthair agus ní féidir é a scriosadh. Scrios na sócmhainní, agus ansin déan iarracht a scriosadh arís.',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Níor cruthaíodh an tsamhail, déan iarracht arís.',

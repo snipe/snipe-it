@@ -31,7 +31,7 @@
                                     <div class="input-group col-md-4" style="padding-left: 0px;">
                                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                                             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="default_values[{{ $field->id }}]" id="default-value{{ $field->id }}" value="{{ $field->defaultValue($model_id) }}">
-                                            <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><x-icon type="calendar" /></span>
                                         </div>
                                     </div>
 

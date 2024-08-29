@@ -50,7 +50,7 @@ class License extends Depreciable
         'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
         'purchase_cost'=> 'numeric|nullable|gte:0',
-        'purchase_date'   => 'date_format:Y-m-d|nullable|max:10',
+        'purchase_date'   => 'date_format:Y-m-d|nullable|max:10|required_with:depreciation_id',
         'expiration_date'   => 'date_format:Y-m-d|nullable|max:10',
         'termination_date'   => 'date_format:Y-m-d|nullable|max:10',
         'min_amt'   => 'numeric|nullable|gte:0',
@@ -735,5 +735,18 @@ class License extends Depreciable
     {
         return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->select('licenses.*')
             ->orderBy('companies.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on the user that created it
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as users_sort', 'licenses.user_id', '=', 'users_sort.id')->select('licenses.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
     }
 }

@@ -61,7 +61,7 @@
         <li class="active">
           <a href="#checkedout" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+            <x-icon type="info-circle" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -83,7 +83,7 @@
         @can('components.files', $component)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+              <x-icon type="paperclip" /> {{ trans('button.upload') }}
             </a>
           </li>
         @endcan
@@ -203,15 +203,15 @@
                       </td>
                       <td>
                         @if ($file->filename)
-                          <a href="{{ route('show.componentfile', [$component->id, $file->id]) }}" class="btn btn-sm btn-default">
-                            <i class="fas fa-download" aria-hidden="true"></i>
+                          <nobr><a href="{{ route('show.componentfile', [$component->id, $file->id]) }}" class="btn btn-sm btn-default">
+                            <x-icon type="download" />
                             <span class="sr-only">{{ trans('general.download') }}</span>
                           </a>
 
                           <a href="{{ route('show.componentfile', [$component->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                            <x-icon type="external-link" />
                           </a>
-
+                          </nobr>
                         @endif
                       </td>
                       <td>{{ $file->created_at }}</td>
@@ -284,7 +284,26 @@
     </div>
     @endif
 
-  </div>
+  @can('update', $component)
+    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+      <a href="{{ route('components.edit', $component->id) }}" class="btn btn-sm btn-warning btn-social btn-block hidden-print">
+        <x-icon type="edit" />
+        {{ trans('admin/components/general.edit') }}
+      </a>
+    </div>
+  @endcan
+
+  @can('checkout', Component::class)
+    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+            <a href="{{ route('components.checkout.show', $component->id)  }}" class="btn btn-sm bg-maroon btn-social btn-block hidden-print">
+                 <x-icon type="checkout" />
+              {{ trans('admin/components/general.checkout') }}
+            </a>
+    </div>
+  @endcan
+
+
+</div>
 </div> <!-- .row-->
 
 @can('components.files', Component::class)

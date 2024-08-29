@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Amaran: </strong> Aset ini telah ditandakan sebagai tidak boleh dikehendaki. Jika status ini telah berubah, sila kemas kini status aset.',
+    'undeployable' 		=> '<strong>Amaran: </strong> Harta ini sekarang ditanda sebagai tidak boleh agih. Jika statusnya telah berubah, sila kemaskini staus harta.',
     'does_not_exist' 	=> 'Harta tidak wujud.',
     'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
     'no_tag' 	        => 'No asset tag provided.',
@@ -51,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Sesetengah item tidak diimport dengan betul.',
         'errorDetail'           => 'Item berikut tidak diimport kerana kesilapan.',
         'success'               => 'Fail anda telah diimport',
         'file_delete_success'   => 'Fail anda telah berjaya dihapuskan',
         'file_delete_error'      => 'Fail tidak dapat dipadamkan',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

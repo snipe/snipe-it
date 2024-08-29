@@ -56,6 +56,7 @@ return [
     'i_have_read' => 'Waan akhriyay oo waan aqbalay shuruudaha isticmaalka, waxaana helay shaygan.',
     'inventory_report' => 'Warbixinta Alaabada',
     'item' => 'Shayga:',
+    'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'Fadlan dhagsii xidhiidhka soo socda si aad u cusboonaysiiso :web eraygaaga sirta ah:',
     'login' => 'Soo gal:',
@@ -86,8 +87,10 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'Isticmaale',
     'username' => 'Magaca isticmaale',
+    'unaccepted_asset_reminder' => 'You have Unaccepted Assets.',
     'welcome' => 'Soo dhawoow :name',
     'welcome_to' => 'Ku soo dhawoow :web!',
     'your_assets' => 'Arag Hantidaada',
     'your_credentials' => 'Aqoonsigaaga Snipe-IT',
+    'mail_sent' => 'Mail sent successfully!',
 ];

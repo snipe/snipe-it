@@ -7,7 +7,7 @@ return array(
     'no_association' => 'ADVARSEL! Aktivmodellen for dette element er ugyldig eller mangler!',
     'no_association_fix' => 'Dette vil ødelægge ting på underlige og forfærdelige måder. Rediger dette aktiv nu for at tildele det en model.',
     'assoc_users'	 => 'Denne model er knyttet til en eller flere aktiver og ikke kan slettes. Slet venligst aktiver, og prøv derefter at slette igen. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Modellen blev ikke oprettet, prøve igen.',

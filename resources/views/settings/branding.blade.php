@@ -32,7 +32,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-copyright"></i> {{ trans('admin/settings/general.brand') }}
+                        <x-icon type="branding"/>
+                         {{ trans('admin/settings/general.brand') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -118,6 +119,22 @@
                         "logoPath" => "avatars/",
                         "helpBlock" => trans_choice('general.filetypes_accepted_help', 2,  ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]),
                     ])
+
+                        @if (($setting->default_avatar == '') || (($setting->default_avatar == 'default.png') && (Storage::disk('public')->missing('default.png'))))
+                        <!-- Restore Default Avatar -->
+                        <div class="form-group">
+
+                            <div class="col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('restore_default_avatar', '1', old('restore_default_avatar', $setting->restore_default_avatar)) }}
+                                    <span>{!! trans('admin/settings/general.restore_default_avatar', ['default_avatar'=> Storage::disk('public')->url('default.png')]) !!}</span>
+                                </label>
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.restore_default_avatar_help') }}
+                                </p>
+                            </div>
+                        </div>
+                        @endif
 
                         <!-- Load gravatar -->
                         <div class="form-group {{ $errors->has('load_remote') ? 'error' : '' }}">
@@ -294,7 +311,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

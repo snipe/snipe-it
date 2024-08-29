@@ -218,6 +218,43 @@
                       </div> <!--/controls-->
                         @endif
                     </div> <!--/col-md-5-->
+                    </div>
+
+
+                        <!-- Start Date -->
+                        <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
+                            <label for="start_date" class="col-md-3 control-label">{{ trans('general.start_date') }}</label>
+                            <div class="col-md-4">
+                                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                                    <input type="text" class="form-control" placeholder="{{ trans('general.start_date') }}" name="start_date" id="start_date" value="{{ old('start_date') }}">
+                                    <span class="input-group-addon"><x-icon type="calendar" /></span>
+                                </div>
+                                {!! $errors->first('start_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-control">
+                                    {{ Form::checkbox('null_start_date', '1', false) }}
+                                    {{ trans_choice('general.set_to_null', count($users),['selection_count' => count($users)]) }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- End Date -->
+                        <div class="form-group {{ $errors->has('end_date') ? ' has-error' : '' }}">
+                            <label for="end_date" class="col-md-3 control-label">{{ trans('general.end_date') }}</label>
+                            <div class="col-md-4">
+                                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                                    <input type="text" class="form-control" placeholder="{{ trans('general.end_date') }}" name="end_date" id="end_date" value="{{ old('end_date') }}">
+                                    <span class="input-group-addon"><x-icon type="calendar" /></span>
+                                </div>
+                                {!! $errors->first('end_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-control">
+                                    {{ Form::checkbox('null_end_date', '1', false) }}
+                                    {{ trans_choice('general.set_to_null', count($users),['selection_count' => count($users)]) }}
+                                </label>
+                            </div>
                         </div>
 
 
@@ -230,7 +267,7 @@
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
 
                         <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-                            <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                            <x-icon type="checkmark" />
                             {{ trans('general.update') }}
                         </button>
 

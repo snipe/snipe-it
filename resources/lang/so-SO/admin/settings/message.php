@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Haa, soo celi Waxaan qirayaa in tani ay dib u qori doonto xog kasta oo hadda ku jirta kaydka xogta. Tani waxay sidoo kale ka saari doontaa dhammaan isticmaalayaashaada jira (oo ay ku jirto adiga).',
         'restore_confirm'       => 'Ma hubtaa inaad rabto inaad ka soo celiso xogtaada: filename?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Khalad ayaa dhacay markii la nadiifinayo ',
         'validation_failed'     => 'Xaqiijinta nadiifintaadu waa khalad. Fadlan ku qor kelmadda "DELETE" sanduuqa xaqiijinta.',

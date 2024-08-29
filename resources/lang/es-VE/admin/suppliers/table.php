@@ -2,7 +2,7 @@
 
 return array(
     'about_suppliers_title' => 'Acerca de los Proveedores',
-    'about_suppliers_text'  => 'Los proveedores son utilizados para seguir la fuente de los artículos',
+    'about_suppliers_text'  => 'Los proveedores se utilizan para hacer seguimiento al origen de los elementos',
     'address'               => 'Dirección del Proveedor',
     'assets'                => 'Activos',
     'city'                  => 'Ciudad',

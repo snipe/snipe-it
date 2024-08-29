@@ -78,17 +78,14 @@ Route::group(
             [AssetsController::class, 'getAssetBySerial']
         )->where('any', '.*')->name('findbyserial/hardware');
 
-        Route::get('{assetId}/clone',
+        Route::get('{asset}/clone',
             [AssetsController::class, 'getClone']
-        )->name('clone/hardware');
+        )->name('clone/hardware')->withTrashed();
 
         Route::get('{assetId}/label',
             [AssetsController::class, 'getLabel']
         )->name('label/hardware');
-
-        Route::post('{assetId}/clone', 
-            [AssetsController::class, 'postCreate']
-        );
+        
 
         Route::get('{assetId}/checkout',
             [AssetCheckoutController::class, 'create']

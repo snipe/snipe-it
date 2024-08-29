@@ -57,6 +57,7 @@ class BulkEditAssetsTest extends TestCase
         $company1 = Company::factory()->create();
         $company2 = Company::factory()->create();
         $assets = Asset::factory()->count(10)->create([
+            'name'             => 'Old Asset Name',
             'purchase_date'    => '2023-01-01',
             'expected_checkin' => '2023-01-01',
             'status_id'        => $status1->id,
@@ -77,6 +78,7 @@ class BulkEditAssetsTest extends TestCase
         // submits the ids and new values for each attribute
         $this->actingAs(User::factory()->editAssets()->create())->post(route('hardware/bulksave'), [
             'ids'              => $id_array,
+            'name'             => 'New Asset Name',
             'purchase_date'    => '2024-01-01',
             'expected_checkin' => '2024-01-01',
             'status_id'        => $status2->id,
@@ -97,6 +99,7 @@ class BulkEditAssetsTest extends TestCase
             $this->assertEquals('2024-01-01', $asset->purchase_date->format('Y-m-d'));
             $this->assertEquals('2024-01-01', $asset->expected_checkin->format('Y-m-d'));
             $this->assertEquals($status2->id, $asset->status_id);
+            $this->assertEquals('New Asset Name', $asset->name);
             $this->assertEquals($model2->id, $asset->model_id);
             $this->assertEquals(5678.92, $asset->purchase_cost);
             $this->assertEquals($supplier2->id, $asset->supplier_id);
@@ -106,6 +109,59 @@ class BulkEditAssetsTest extends TestCase
             $this->assertEquals('2025-01-01', $asset->next_audit_date);
             // shouldn't requestable be cast as a boolean??? it's not.
             $this->assertEquals(1, $asset->requestable);
+        });
+    }
+
+    public function testBulkEditAssetsNullsOutFieldsIfSelected()
+    {
+        // sets up all needed models and attributes on the assets
+        // this test does not deal with custom fields - will be dealt with in separate cases
+        $status1 = Statuslabel::factory()->create();
+        $status2 = Statuslabel::factory()->create();
+        $model1 = AssetModel::factory()->create();
+        $model2 = AssetModel::factory()->create();
+        $supplier1 = Supplier::factory()->create();
+        $supplier2 = Supplier::factory()->create();
+        $company1 = Company::factory()->create();
+        $company2 = Company::factory()->create();
+        $assets = Asset::factory()->count(10)->create([
+            'name'             => 'Old Asset Name',
+            'purchase_date'    => '2023-01-01',
+            'expected_checkin' => '2023-01-01',
+            'status_id'        => $status1->id,
+            'model_id'         => $model1->id,
+            // skipping locations on this test, it deserves it's own test
+            'purchase_cost'    => 1234.90,
+            'supplier_id'      => $supplier1->id,
+            'company_id'       => $company1->id,
+            'order_number'     => '123456',
+            'warranty_months'  => 24,
+            'next_audit_date'  => '2024-06-01',
+            'requestable'      => false
+        ]);
+
+        // gets the ids together to submit to the endpoint
+        $id_array = $assets->pluck('id')->toArray();
+
+        // submits the ids and new values for each attribute
+        $this->actingAs(User::factory()->editAssets()->create())->post(route('hardware/bulksave'), [
+            'ids'              => $id_array,
+            'null_name'        => '1',
+            'null_purchase_date'    => '1',
+            'null_expected_checkin_date' => '1',
+            'null_next_audit_date'        => '1',
+            'status_id'        => $status2->id,
+            'model_id'         => $model2->id,
+        ])
+            ->assertStatus(302)
+            ->assertSessionHasNoErrors();
+
+        // asserts that each asset has the updated values
+        Asset::findMany($id_array)->each(function (Asset $asset) use ($status2, $model2, $supplier2, $company2) {
+            $this->assertNull($asset->name);
+            $this->assertNull($asset->purchase_date);
+            $this->assertNull($asset->expected_checkin);
+            $this->assertNull($asset->next_audit_date);
         });
     }
 
@@ -165,7 +221,7 @@ class BulkEditAssetsTest extends TestCase
         });
     }
 
-    public function testBulkEditAssetsRequiresAdminUserToUpdateEncryptedCustomFields()
+    public function testBulkEditAssetsRequiresadminToUpdateEncryptedCustomFields()
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on mysql');
         $edit_user = User::factory()->editAssets()->create();
