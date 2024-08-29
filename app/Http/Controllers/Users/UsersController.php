@@ -601,29 +601,29 @@ class UsersController extends Controller
     /**
      * Print inventory
      *
-     * @author Aladin Alaily
      * @since [v1.8]
-     * @return \Illuminate\Http\RedirectResponse
+     * @author Aladin Alaily
      */
     public function printInventory($id)
     {
         $this->authorize('view', User::class);
-        $user = User::where('id', $id)->withTrashed()->first();
-      
+        if ($user = User::where('id', $id)->withTrashed()->first()) {
 
-        // Make sure they can view this particular user
-        $this->authorize('view', $user);
+            $this->authorize('view', $user);
+            $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
+            $accessories = $user->accessories()->get();
+            $consumables = $user->consumables()->get();
 
-        $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-        $accessories = $user->accessories()->get();
-        $consumables = $user->consumables()->get();
+            return view('users/print')->with('assets', $assets)
+                ->with('licenses', $user->licenses()->get())
+                ->with('accessories', $accessories)
+                ->with('consumables', $consumables)
+                ->with('show_user', $user)
+                ->with('settings', Setting::getSettings());
+        }
 
-        return view('users/print')->with('assets', $assets)
-            ->with('licenses', $user->licenses()->get())
-            ->with('accessories', $accessories)
-            ->with('consumables', $consumables)
-            ->with('show_user', $user)
-            ->with('settings', Setting::getSettings());
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
+
     }
 
     /**
