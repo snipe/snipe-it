@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Rules\UserCannotSwitchCompaniesIfItemsAssigned;
 
 class SaveUserRequest extends FormRequest
 {
@@ -35,12 +36,9 @@ class SaveUserRequest extends FormRequest
             'department_id' => 'nullable|exists:departments,id',
             'manager_id' => 'nullable|exists:users,id',
             'company_id' => [
-                // determines if the user is being moved between companies and checks to see if they have any items assigned
-                function ($attribute, $value, $fail) {
-                    if (($this->has('company_id')) && ($this->user->allAssignedCount() > 0) && (Setting::getSettings()->full_multiple_companies_support)) {
-                        $fail(trans('admin/users/message.error.multi_company_items_assigned'));
-                    }
-                }
+                'nullable',
+                'exists:companies,id',
+
             ]
         ];
 
@@ -60,11 +58,13 @@ class SaveUserRequest extends FormRequest
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 $rules['password'] = Setting::passwordComplexityRulesSaving('update').'|confirmed';
+                $rules['company_id'] = [new UserCannotSwitchCompaniesIfItemsAssigned()];
                 break;
 
             // Save only what's passed
             case 'PATCH':
                 $rules['password'] = Setting::passwordComplexityRulesSaving('update');
+                $rules['company_id'] = [new UserCannotSwitchCompaniesIfItemsAssigned()];
                 break;
 
             default:
