@@ -99,7 +99,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
         <a class="skip-main" href="#main">{{ trans('general.skip_to_main_content') }}</a>
         <div class="wrapper">
 
-            <header class="main-header">
+            <header class="main-header" dusk="main-header">
 
                 <!-- Logo -->
 
@@ -819,7 +819,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
 
                 <!-- Content Header (Page header) -->
                 <section class="content-header" style="padding-bottom: 30px;">
-                    <h1 class="pull-left pagetitle">@yield('title') </h1>
+                    <h1 class="pull-left pagetitle" dusk="pagetitle">@yield('title') </h1>
 
                     @if (isset($helpText))
                         @include ('partials.more-info',

@@ -77,6 +77,7 @@
     "brianium/paratest": "^7.0",
     "fakerphp/faker": "^1.16",
     "larastan/larastan": "^2.9",
+    "laravel/dusk": "^8.2",
     "mockery/mockery": "^1.4",
     "nunomaduro/phpinsights": "^2.11",
     "php-mock/php-mock-phpunit": "^2.10",
