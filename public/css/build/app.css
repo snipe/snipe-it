@@ -831,10 +831,25 @@ body {
 }
 .select2-selection--multiple {
   border-color: #d2d6de !important;
-  height: 34px;
+  overflow-y: auto;
 }
 .select2-selection__choice {
   border-radius: 0px !important;
+}
+.select2-search select2-search--inline {
+  height: 35px !important;
+  float: left;
+  margin: 0;
+}
+.select2-selection__rendered needsclick {
+  color: red;
+}
+.select2-results__option {
+  padding: 5px;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  margin: 0px;
 }
 img.navbar-brand-img,
 .navbar-brand > img {
@@ -842,8 +857,10 @@ img.navbar-brand-img,
   padding: 5px 5px 5px 0;
   max-height: 50px;
 }
-.input-daterange {
-  border-radius: 0px;
+.input-daterange,
+.input-daterange input:first-child,
+.input-daterange input:last-child {
+  border-radius: 0px !important;
 }
 .btn.bg-maroon,
 .btn.bg-purple {
