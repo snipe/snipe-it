@@ -703,7 +703,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     public function decodePermissions()
     {
-        $permissions = json_decode($this->permissions, JSON_OBJECT_AS_ARRAY|JSON_BIGINT_AS_STRING);
+        $permissions = json_decode($this->permissions, JSON_OBJECT_AS_ARRAY|JSON_NUMERIC_CHECK);
         foreach ($permissions as $permission => $value) {
             $permissions[$permission] = (int) $value;
         }
