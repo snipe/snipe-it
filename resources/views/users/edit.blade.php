@@ -66,7 +66,9 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <form class="form-horizontal" method="post" autocomplete="off" action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" enctype="multipart/form-data" id="userForm">
+      <form class="form-horizontal" method="post" autocomplete="off"
+            action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}"
+            enctype="multipart/form-data" id="userForm">
       {{csrf_field()}}
 
       @if($user->id)

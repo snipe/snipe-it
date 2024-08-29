@@ -186,7 +186,7 @@ class UsersController extends Controller
     {
 
         $this->authorize('update', User::class);
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+        $user = User::with(['assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc'])->withTrashed()->find($id);
 
         if ($user) {
 
@@ -214,83 +214,79 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(SaveUserRequest $request, $id = null)
+    public function update(SaveUserRequest $request, User $user)
     {
         $this->authorize('update', User::class);
 
         // This is a janky hack to prevent people from changing admin demo user data on the public demo.
         // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
         // Thanks, jerks. You are why we can't have nice things. - snipe
-
-        if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+        if ((($user->id == 1) || ($user->id == 2)) && (config('app.lock_passwords'))) {
             return redirect()->route('users.index')->with('error', trans('general.permission_denied_superuser_demo'));
         }
-
 
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($id);
+        $user->load(['assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc'])->withTrashed();
 
-        // User is valid - continue...
-        if ($user) {
-            $this->authorize('update', $user);
+        $this->authorize('update', $user);
 
-            // Figure out of this user was an admin before this edit
-            $orig_permissions_array = $user->decodePermissions();
-            $orig_superuser = '0';
-            if (is_array($orig_permissions_array)) {
-                if (array_key_exists('superuser', $orig_permissions_array)) {
-                    $orig_superuser = $orig_permissions_array['superuser'];
-                }
+        // Figure out of this user was an admin before this edit
+        $orig_permissions_array = $user->decodePermissions();
+        $orig_superuser = '0';
+        if (is_array($orig_permissions_array)) {
+            if (array_key_exists('superuser', $orig_permissions_array)) {
+                $orig_superuser = $orig_permissions_array['superuser'];
             }
+        }
 
-            // Only save groups if the user is a superuser
-            if (auth()->user()->isSuperUser()) {
-                $user->groups()->sync($request->input('groups'));
-            }
+        // Only save groups if the user is a superuser
+        if (auth()->user()->isSuperUser()) {
+            $user->groups()->sync($request->input('groups'));
+        }
 
-            // Update the user fields
-            $user->username = trim($request->input('username'));
-            $user->email = trim($request->input('email'));
-            $user->first_name = $request->input('first_name');
-            $user->last_name = $request->input('last_name');
-            $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
-            $user->locale = $request->input('locale');
-            $user->employee_num = $request->input('employee_num');
-            $user->activated = $request->input('activated', 0);
-            $user->jobtitle = $request->input('jobtitle', null);
-            $user->phone = $request->input('phone');
-            $user->location_id = $request->input('location_id', null);
-            $user->company_id = Company::getIdForUser($request->input('company_id', null));
-            $user->manager_id = $request->input('manager_id', null);
-            $user->notes = $request->input('notes');
-            $user->department_id = $request->input('department_id', null);
-            $user->address = $request->input('address', null);
-            $user->city = $request->input('city', null);
-            $user->state = $request->input('state', null);
-            $user->country = $request->input('country', null);
-            // if a user is editing themselves we should always keep activated true
-            $user->activated = $request->input('activated', $request->user()->is($user) ? 1 : 0);
-            $user->zip = $request->input('zip', null);
-            $user->remote = $request->input('remote', 0);
-            $user->vip = $request->input('vip', 0);
-            $user->website = $request->input('website', null);
-            $user->start_date = $request->input('start_date', null);
-            $user->end_date = $request->input('end_date', null);
-            $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
+        // Update the user fields
+        $user->username = trim($request->input('username'));
+        $user->email = trim($request->input('email'));
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
+        $user->locale = $request->input('locale');
+        $user->employee_num = $request->input('employee_num');
+        $user->activated = $request->input('activated', 0);
+        $user->jobtitle = $request->input('jobtitle', null);
+        $user->phone = $request->input('phone');
+        $user->location_id = $request->input('location_id', null);
+        $user->company_id = Company::getIdForUser($request->input('company_id', null));
+        $user->manager_id = $request->input('manager_id', null);
+        $user->notes = $request->input('notes');
+        $user->department_id = $request->input('department_id', null);
+        $user->address = $request->input('address', null);
+        $user->city = $request->input('city', null);
+        $user->state = $request->input('state', null);
+        $user->country = $request->input('country', null);
+        // if a user is editing themselves we should always keep activated true
+        $user->activated = $request->input('activated', $request->user()->is($user) ? 1 : 0);
+        $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
+        $user->vip = $request->input('vip', 0);
+        $user->website = $request->input('website', null);
+        $user->start_date = $request->input('start_date', null);
+        $user->end_date = $request->input('end_date', null);
+        $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
 
-            // Update the location of any assets checked out to this user
-            Asset::where('assigned_type', User::class)
-                ->where('assigned_to', $user->id)
-                ->update(['location_id' => $request->input('location_id', null)]);
+        // Update the location of any assets checked out to this user
+        Asset::where('assigned_type', User::class)
+            ->where('assigned_to', $user->id)
+            ->update(['location_id' => $request->input('location_id', null)]);
 
-            // Do we want to update the user password?
-            if ($request->filled('password')) {
-                $user->password = bcrypt($request->input('password'));
-            }
+        // Do we want to update the user password?
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
 
 
         // Update the location of any assets checked out to this user
@@ -318,13 +314,7 @@ class UsersController extends Controller
                 return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))
                     ->with('success', trans('admin/users/message.success.update'));
             }
-
             return redirect()->back()->withInput()->withErrors($user->getErrors());
-
-
-        }
-
-        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
     }
 
     /**
