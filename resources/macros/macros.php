@@ -11,7 +11,7 @@ Form::macro('locales', function ($name = 'locale', $selected = null, $class = nu
 
     $idclause = (!is_null($id)) ? $id : '';
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:100%"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_language').'</option>';
 
     // Pull the autoglossonym array from the localizations translation file
