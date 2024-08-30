@@ -28,10 +28,12 @@ class LoginTest extends DuskTestCase
     {
         $user = User::factory()->superuser()->create([
             'username' => 'admin',
-            'password' => 'password',
+            'password' => Hash::make('password'),
         ]);
 
         $this->browse(function (Browser $browser) use ($user) {
+            $browser->logout();
+
             $browser->visit('/login')
                 ->type('username', $user->username)
                 ->type('password', 'password')
