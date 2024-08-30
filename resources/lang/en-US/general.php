@@ -26,6 +26,8 @@ return [
     'asset_report'          => 'Asset Report',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Asset Tags',
+	'asset_tag_error'		=> 'Asset Tag number must be less then',
+	'asset_auto_tag_error'	=> 'Invalid Asset Tag number, expected',    
     'assets_available'		=> 'Assets available',
     'accept_assets'         => 'Accept Assets :name',
     'accept_assets_menu'    => 'Accept Assets',
