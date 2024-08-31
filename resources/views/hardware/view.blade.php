@@ -316,7 +316,9 @@
                                             @endif
 
                                             @if((isset($asset->assignedTo)) && ($asset->assignedTo->department))
-                                                <li>{{ trans('admin/hardware/general.user_department') }}: {{ $asset->assignedTo->department->name}}</li>
+                                                <li>
+                                                    <x-icon type="department" class="fa-fw" />
+                                                    {{ $asset->assignedTo->department->name}}</li>
                                             @endif
 
                                             @if (isset($asset->location))

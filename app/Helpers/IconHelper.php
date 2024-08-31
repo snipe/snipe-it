@@ -182,6 +182,8 @@ class IconHelper
                 return 'fas fa-user-secret';
             case 'employee_num' :
                 return 'fa-regular fa-id-card';
+            case 'department' :
+                return 'fa-solid fa-building-user';
 
         }
     }
