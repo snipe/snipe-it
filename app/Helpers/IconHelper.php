@@ -64,14 +64,19 @@ class IconHelper
             case 'kits':
                 return 'fas fa-object-group';
             case 'assets':
+            case 'asset':
                 return 'fas fa-barcode';
             case 'accessories':
+            case 'accessory':
                 return 'far fa-keyboard';
             case 'components':
+            case 'component':
                 return 'far fa-hdd';
             case 'consumables':
+            case 'consumable':
                 return 'fas fa-tint';
             case 'licenses':
+            case 'license':
                 return 'far fa-save';
             case 'requestable':
                 return 'fas fa-laptop';
@@ -141,6 +146,8 @@ class IconHelper
                 return 'fas fa-lock';
             case 'locations':
                 return 'fas fa-map-marker-alt';
+            case 'location':
+                return 'fas fa-map-marker-alt';
             case 'superadmin':
                 return 'fas fa-crown';
             case 'print':
@@ -173,6 +180,10 @@ class IconHelper
                 return 'fas fa-crosshairs';
             case 'oauth':
                 return 'fas fa-user-secret';
+            case 'employee_num' :
+                return 'fa-regular fa-id-card';
+            case 'department' :
+                return 'fa-solid fa-building-user';
 
         }
     }
