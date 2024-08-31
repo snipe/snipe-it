@@ -277,26 +277,40 @@
                                     <div class="col-md-12" style="text-align: left">
                                         <h2>
                                             {{ trans('admin/hardware/form.checkedout_to') }}
+                                            <x-icon type="long-arrow-right" />
                                         </h2>
-                                        <p>
+
+                                        <ul class="list-unstyled" style="line-height: 25px; font-size: 14px">
+
                                             @if (($asset->checkedOutToUser()) && ($asset->assignedTo->present()->gravatar()))
-                                                <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline hidden-print" alt="{{ $asset->assignedTo->present()->fullName() }}">
+                                                <li>
+                                                    <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline hidden-print" alt="{{ $asset->assignedTo->present()->fullName() }}">
+                                                    {!! $asset->assignedTo->present()->nameUrl() !!}
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <x-icon type="{{ $asset->assignedType() }}" class="fa-fw" />
+                                                    {!! $asset->assignedTo->present()->nameUrl() !!}
+                                                </li>
                                             @endif
-                                        </p>
-                                        {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
 
 
-                                        <ul class="list-unstyled" style="line-height: 25px;">
+                                            @if ((isset($asset->assignedTo->employee_num)) && ($asset->assignedTo->employee_num!=''))
+                                                <li>
+                                                    <x-icon type="employee_num" class="fa-fw"/>
+                                                    {{ $asset->assignedTo->employee_num }}
+                                                </li>
+                                            @endif
                                             @if ((isset($asset->assignedTo->email)) && ($asset->assignedTo->email!=''))
                                                 <li>
-                                                    <x-icon type="email" />
+                                                    <x-icon type="email" class="fa-fw" />
                                                     <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a>
                                                 </li>
                                             @endif
 
                                             @if ((isset($asset->assignedTo)) && ($asset->assignedTo->phone!=''))
                                                 <li>
-                                                    <x-icon type="phone" />
+                                                    <x-icon type="phone" class="fa-fw" />
                                                     <a href="tel:{{ $asset->assignedTo->phone }}">{{ $asset->assignedTo->phone }}</a>
                                                 </li>
                                             @endif
@@ -307,7 +321,7 @@
 
                                             @if (isset($asset->location))
                                                 <li>
-                                                    <x-icon type="locations" />
+                                                    <x-icon type="locations" class="fa-fw" />
                                                      {{ $asset->location->name }}</li>
                                                 <li>{{ $asset->location->address }}
                                                     @if ($asset->location->address2!='')
@@ -323,12 +337,12 @@
                                                 </li>
                                             @endif
                                             <li>
-                                                <x-icon type="calendar" />
+                                                <x-icon type="calendar" class="fa-fw" />
                                                 {{ trans('admin/hardware/form.checkout_date') }}: {{ Helper::getFormattedDateObject($asset->last_checkout, 'date', false) }}
                                             </li>
                                             @if (isset($asset->expected_checkin))
                                                 <li>
-                                                    <x-icon type="calendar" />
+                                                    <x-icon type="calendar" class="fa-fw" />
                                                     {{ trans('admin/hardware/form.expected_checkin') }}: {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                                                 </li>
                                             @endif
@@ -397,7 +411,7 @@
 
                                                 
                                                     <x-icon type="long-arrow-right" />
-                                                    {!!  $asset->assignedTo->present()->glyph()  !!}
+                                                    <x-icon type="{{ $asset->assignedType() }}" class="fa-fw" />
                                                     {!!  $asset->assignedTo->present()->nameUrl() !!}
                                                 @else
                                                     @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
