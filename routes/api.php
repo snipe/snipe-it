@@ -1099,18 +1099,16 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
         });
 
-    Route::match(['put', 'patch'], '{user}/update', [Api\UsersController::class, 'update'])
-        ->name('api.users.update');
-    
         Route::resource('users', 
         Api\UsersController::class,
         ['names' => [
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
                 'store' => 'api.users.store',
+                'update' => 'api.users.update',
                 'destroy' => 'api.users.destroy',
             ],
-         'except' => ['create', 'edit', 'update'],
+         'except' => ['create', 'edit'],
         'parameters' => ['user' => 'user_id'],
         ]
         ); // end users API routes
