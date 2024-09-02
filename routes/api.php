@@ -1108,9 +1108,10 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
                 'store' => 'api.users.store',
+                'update' => 'api.users.update',
                 'destroy' => 'api.users.destroy',
             ],
-         'except' => ['create', 'edit', 'update'],
+         'except' => ['create', 'edit'],
         'parameters' => ['user' => 'user_id'],
         ]
         ); // end users API routes
