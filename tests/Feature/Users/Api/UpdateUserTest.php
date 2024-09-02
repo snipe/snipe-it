@@ -51,7 +51,10 @@ class UpdateUserTest extends TestCase
                 'start_date' => '2021-08-01',
                 'end_date' => '2025-12-31',
             ])
-            ->assertOk();
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
 
         $user->refresh();
         $this->assertEquals('Mabel', $user->first_name, 'First name was not updated');
@@ -98,12 +101,13 @@ class UpdateUserTest extends TestCase
             'vip' => false,
         ]);
 
-        $this->actingAsForApi($admin)
-            ->patchJson(route('api.users.update', $user), [
+        $response = $this->actingAsForApi($admin)
+            ->putJson(route('api.users.update', $user), [
                 'first_name' => 'Mabel',
                 'last_name' => 'Mora',
                 'username' => 'mabel',
                 'password' => 'super-secret',
+                'password_confirmation' => 'super-secret',
                 'email' => 'mabel@onlymurderspod.com',
                 'permissions' => '{"a.new.permission":"1"}',
                 'activated' => true,
@@ -121,7 +125,10 @@ class UpdateUserTest extends TestCase
                 'start_date' => '2021-08-01',
                 'end_date' => '2025-12-31',
             ])
-            ->assertOk();
+            ->assertOk()
+            ->assertStatus(200)
+            ->assertStatusMessageIs('success')
+            ->json();
 
         $user->refresh();
         $this->assertEquals('Mabel', $user->first_name, 'First name was not updated');
