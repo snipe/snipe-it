@@ -1098,7 +1098,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             )->name('api.users.restore');
 
         });
-        
+
         Route::resource('users', 
         Api\UsersController::class,
         ['names' => [
