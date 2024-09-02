@@ -536,13 +536,16 @@ Route::group(['middleware' => 'web'], function () {
     )->name('logout.post');
 });
 
+
+// Use the
+Route::group(['middleware' => 'health'], function () {
+    Route::get(
+        '/health',
+        [HealthController::class, 'get']
+    )->name('health');
+});
+
 //Auth::routes();
-
-Route::get(
-    '/health', 
-    [HealthController::class, 'get']
-)->name('health');
-
 Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']

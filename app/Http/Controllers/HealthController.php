@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 /**
  * This controller provide the health route  for
@@ -20,8 +21,19 @@ class HealthController extends BaseController
      */
     public function get()
     {
-        return response()->json([
-            'status' => 'ok',
-        ]);
+        try {
+            DB::select('select 2 + 2');
+            return response()->json([
+                'status' => 'ok',
+            ], 200);
+
+        } catch (\PDOException $e) {
+            return response()->json([
+                'status' => 'database error: '.$e->getMessage(),
+            ], 500);
+        }
+
+
+
     }
 }
