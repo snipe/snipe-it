@@ -124,13 +124,6 @@
                                         name="note">{{ old('note', $asset->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
-                            @else
-                            <div class="col-md-8">
-                                <textarea class="col-md-6 form-control" id="note"
-                                        name="note">{{ old('note', $asset->note) }}</textarea>
-                                {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                            </div>
-                            @endif
                         </div>
                     </div> <!--/.box-body-->
                 </div> <!--/.box-body-->
