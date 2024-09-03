@@ -9,14 +9,16 @@
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
         </div>
         <div class="col-md-3">
+            @if ($fieldset_id)
                 <label class="form-control">
-                {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
-                {{ trans('admin/models/general.add_default_values') }}
-            </label>
+                    {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
+                    {{ trans('admin/models/general.add_default_values') }}
+                </label>
+            @endif
         </div>
     </div>
 
-    @if ($add_default_values )
+    @if ($add_default_values)
             @if ($this->fields)
 
                 @foreach ($this->fields as $field)
