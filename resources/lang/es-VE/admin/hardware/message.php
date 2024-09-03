@@ -34,7 +34,7 @@ return [
 
     'audit' => [
         'error'   		=> 'Auditoría de activos fallida: :error ',
-        'success' 		=> 'Audoría de activo registrada con éxito.',
+        'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
 
 
@@ -51,13 +51,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Proceso para importar',
+        'import_button'         => 'Importar',
         'error'                 => 'Algunos de los elementos no se importaron correctamente.',
         'errorDetail'           => 'Lo siguientes elementos no se importaron debido a errores.',
         'success'               => 'Su archivo ha sido importado',
         'file_delete_success'   => 'Su archivo se ha eliminado correctamente',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
         'file_missing' => 'Falta el archivo seleccionado',
+        'file_already_deleted' => 'El archivo seleccionado ya fue eliminado',
         'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',
         'content_row_has_malformed_characters' => 'Uno o más atributos en la primera fila de contenido contienen caracteres UTF-8 mal formados',
     ],

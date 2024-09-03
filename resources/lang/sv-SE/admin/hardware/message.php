@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
         'file_missing' => 'Den valda filen saknas',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
         'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
     ],

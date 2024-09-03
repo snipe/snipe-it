@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Tập tin của bạn đã được xóa thành công',
         'file_delete_error'      => 'Không thể xóa tệp',
         'file_missing' => 'Tệp đã chọn bị thiếu',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính trong hàng tiêu đề chứa các ký tự không đúng định dạng UTF-8',
         'content_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính ở hàng đầu tiên của nội dung chứa ký tự không đúng định dạng UTF-8',
     ],

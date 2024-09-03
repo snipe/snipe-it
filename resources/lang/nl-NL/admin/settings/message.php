@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Ja, herstellen. Ik bevestig dat dit alle bestaande gegevens die momenteel in de database aanwezig zijn, overschreven worden. Dit zal ook alle bestaande gebruikers uitloggen (inclusief jijzelf).',
         'restore_confirm'       => 'Weet je zeker dat je je database wilt herstellen met :filename?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Er is iets fout gegaan tijdens het opschonen.',
         'validation_failed'     => 'De opschoon bevestiging is niet correct. Typ het woord "DELETE" in het bevestigingsveld.',

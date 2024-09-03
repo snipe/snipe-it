@@ -10,7 +10,7 @@
                     {{ (\App\Models\Manufacturer::find($manufacturer_id)) ? \App\Models\Manufacturer::find($manufacturer_id)->name : '' }}
                 </option>
             @else
-                <option value=""  role="option">{{ trans('general.select_manufacturer') }}</option>
+                {!! (!isset($multiple) || ($multiple=='false')) ? '<option value="" role="option">'.trans('general.select_manufacturer').'</option>' : ''  !!}
             @endif
 
         </select>

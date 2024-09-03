@@ -27,7 +27,7 @@ class LicensesController extends Controller
         $licenses = License::with('company', 'manufacturer', 'supplier','category', 'adminuser')->withCount('freeSeats as free_seats_count');
 
         if ($request->filled('company_id')) {
-            $licenses->where('company_id', '=', $request->input('company_id'));
+            $licenses->where('licenses.company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('name')) {

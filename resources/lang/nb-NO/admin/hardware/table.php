@@ -25,7 +25,7 @@ return [
     'image'		    => 'Enhet bilde',
     'days_without_acceptance' => 'Dager uten aksept',
     'monthly_depreciation' => 'Månedlig avskrivning',
-    'assigned_to'    => 'Tilordnet til',
+    'assigned_to'    => 'Tildelt til',
     'requesting_user' => 'Forespurt av',
     'requested_date' => 'Dato forespurt',
     'changed'       => 'Endret',

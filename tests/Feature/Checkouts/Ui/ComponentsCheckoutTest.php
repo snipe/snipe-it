@@ -1,13 +1,16 @@
 <?php
 
-namespace Tests\Feature\Checkins\Ui;
+namespace Tests\Feature\Checkouts\Ui;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
+use App\Models\Company;
 use App\Models\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class ComponentCheckoutTest extends TestCase
+class ComponentsCheckoutTest extends TestCase
 {
     public function testCheckingOutComponentRequiresCorrectPermission()
     {
@@ -16,6 +19,27 @@ class ComponentCheckoutTest extends TestCase
                 'componentID' => Component::factory()->checkedOutToAsset()->create()->id,
             ]))
             ->assertForbidden();
+    }
+
+    public function test_cannot_checkout_across_companies_when_full_company_support_enabled()
+    {
+        Event::fake([CheckoutableCheckedOut::class]);
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$assetCompany, $componentCompany] = Company::factory()->count(2)->create();
+
+        $asset = Asset::factory()->for($assetCompany)->create();
+        $component = Component::factory()->for($componentCompany)->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.checkout.store', $component), [
+                'asset_id' => $asset->id,
+                'assigned_qty' => '1',
+                'redirect_option' => 'index',
+            ]);
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
     public function testComponentCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
@@ -63,6 +87,4 @@ class ComponentCheckoutTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('hardware.show', ['hardware' => $asset]));
     }
-
-
 }

@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Qalabka si guul leh ayaa loo tirtiray',
     'kit_model_updated'                 => 'Qaabka si guul leh ayaa loo cusboonaysiiyay',
     'kit_model_detached'                => 'Qaabka ayaa si guul leh u go\'ay',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

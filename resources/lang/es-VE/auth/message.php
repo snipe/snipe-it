@@ -19,7 +19,7 @@ return array(
     ),
 
     'signin' => array(
-        'error'   => 'Hubo un problema mientras se intentaba iniciar su sesión, por favor inténtelo de nuevo.',
+        'error'   => 'Ha habido un problema al iniciar sesión. Por favor, inténtelo de nuevo.',
         'success' => 'Ha iniciado sesión exitosamente.',
     ),
 
@@ -29,17 +29,17 @@ return array(
     ),
 
     'signup' => array(
-        'error'   => 'Hubo un problema mientras se creaba la cuenta, por favor inténtalo de nuevo.',
+        'error'   => 'Hubo un problema al crear la cuenta. Por favor, inténtelo de nuevo.',
         'success' => 'Cuenta creada con éxito.',
     ),
 
     'forgot-password' => array(
-        'error'   => 'Hubo un problema al intentar obtener un código para restablecer la contraseña, inténtalo de nuevo.',
+        'error'   => 'Ha habido un problema al obtener un código de restablecimiento de la contraseña. Por favor, inténtelo de nuevo.',
         'success' => 'Si esa dirección de correo electrónico existe en nuestro sistema, se ha enviado un correo electrónico de recuperación de contraseña.',
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'Hubo un problema al intentar restablecer su contraseña, por favor inténtelo de nuevo.',
+        'error'   => 'Hubo un problema al intentar restablecer su contraseña, por favor, inténtelo de nuevo.',
         'success' => 'Su contraseña se ha restablecido correctamente.',
     ),
 

@@ -1,5 +1,5 @@
 <button type="submit" class="btn btn-primary pull-right">
-    <i class="fas fa-check icon-white"></i>
+    <x-icon type="checkmark" />
     {{ trans('general.save') }}
 </button>
 

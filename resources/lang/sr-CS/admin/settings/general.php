@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app integracija je opciona, međutim krajnja tačka i kanal su neophodni ako želite da je koristitie. Da bi ste podesili :app integraciju, prvo morate da <a href=":webhook_link" target="_new" rel="noopener">napravite dolaznu veb zakačku</a> na vašem :app nalogu. Kliknite na <strong>Testiraj :app integraciju</strong> dugme da bi ste potvrdili da su podešavanja ispravna pre čuvanja. ',
     'webhook_integration_help_button'    => 'Onda kada sačuvate :app informacije, dugme za testiranje će se pojaviti.',
     'webhook_test_help'           => 'Testirajte da li je vaša integracija sa :app uspešno podešena. PRVO MORATE DA SAČUVATE IZMENJENA :app PODEŠAVANJA.',
+    'shortcuts_enabled'         => 'Omogući prečice',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access taster, <strong>Mac</strong>: Control + Option + Access taster',
     'snipe_version'  			=> 'Snipe-IT verzija',
     'support_footer'            => 'Podška za linkove u podnožju ',
     'support_footer_help'       => 'Navedite ko vidi veze do informacija o podršci za Snipe-IT i korisničkog priručnika',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'Ova slika će se prikazivati kao profilna ako korisnik nema svoju sliku profila.',
     'restore_default_avatar' => 'Vrati <a href=":default_avatar" data-toggle="lightbox" data-type="image">originalnu podrazumevanu sličicu</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Upozorenje da je vreme za razduženje',
+    'due_checkin_days_help' => 'Koliko dana ranije pre očekivanog razduženja imovine bi trebalo biti navedena u stranici "Vreme je za razduživanje"?',
 
 ];

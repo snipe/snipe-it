@@ -71,6 +71,7 @@ mix
     [
         "./resources/assets/js/snipeit.js",
       "./resources/assets/js/snipeit_modals.js",
+      "./node_modules/canvas-confetti/dist/confetti.browser.js",
     ],
       "./public/js/dist/all.js"
   ).sourceMaps(true, 'source-map', 'source-map').version();

@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Fișierul dvs. a fost șters cu succes',
         'file_delete_error'      => 'Fișierul nu a putut fi șters',
         'file_missing' => 'Fișierul selectat lipsește',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Unul sau mai multe atribute din rândul de antet conțin caractere UTF-8 incorecte',
         'content_row_has_malformed_characters' => 'Unul sau mai multe atribute din primul rând de conținut conțin caractere UTF-8 formatate incorect',
     ],

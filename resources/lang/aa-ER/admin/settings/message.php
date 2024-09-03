@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'crwdns6709:0crwdne6709:0',
         'restore_confirm'       => 'crwdns6711:0crwdne6711:0'
     ],
+    'restore' => [
+        'success'               => 'crwdns12668:0crwdne12668:0'
+    ],
     'purge' => [
         'error'     => 'crwdns1615:0crwdne1615:0',
         'validation_failed'     => 'crwdns1616:0crwdne1616:0',

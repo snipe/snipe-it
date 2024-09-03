@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Ja, återställ den. Jag är medveten att detta kommer att skriva över befintliga data som finns i databasen. Detta kommer också att logga ut alla dina befintliga användare (inklusive dig).',
         'restore_confirm'       => 'Är du säker på att du vill återställa din databas från :filnamn?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Ett fel har uppstått vid spolning.',
         'validation_failed'     => 'Din rengöringsbekräftelse är felaktig. Vänligen skriv ordet "DELETE" i bekräftelsen rutan.',

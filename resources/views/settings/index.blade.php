@@ -57,11 +57,11 @@
     <div class="list clearfix">
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
               <a href="{{ route('settings.branding.index') }}" class="settings_button">
-                <i class="fas fa-copyright fa-4x" aria-hidden="true"></i>
+                <x-icon type="branding" class="fa-4x"/>
                 <br><br>
                 <span class="name">{{ trans('admin/settings/general.brand') }}</span>
                 <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.brand_keywords') }}</span>
@@ -74,11 +74,11 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.general.index') }}" class="settings_button">
-                  <i class="fas fa-wrench fa-4x" aria-hidden="true"></i>
+                  <x-icon type="general-settings" class="fa-4x"/>
                   <br><br>
                   <span class="name"> {{ trans('admin/settings/general.general_settings') }}</span>
                   <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.general_settings_keywords') }}</span>
@@ -91,11 +91,11 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.security.index') }}" class="settings_button">
-                  <i class="fas fa-lock fa-4x" aria-hidden="true"></i>
+                  <x-icon type="locked" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.security') }}</span>
                   <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.security_keywords') }}</span>
@@ -107,11 +107,11 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('groups.index') }}" class="settings_button">
-                  <i class="fas fa-user-friends fa-4x" aria-hidden="true"></i>
+                  <x-icon type="groups" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('general.groups') }}</span>
                   <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.groups_keywords') }}</span>
@@ -124,11 +124,11 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.localization.index') }}" class="settings_button">
-                  <i class="fas fa-globe-americas fa-4x" aria-hidden="true"></i>
+                  <x-icon type="globe-us" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.localization') }}</span>
                   <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.localization_keywords') }}</span>
@@ -142,11 +142,11 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.alerts.index') }}" class="settings_button">
-                  <i class="fas fa-bell fa-4x" aria-hidden="true"></i>
+                  <x-icon type="bell" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.notifications') }}</span>
 
@@ -158,11 +158,11 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.slack.index') }}" class="settings_button">
-                  <i class="fa-solid fa-hashtag fa-4x" aria-hidden="true"></i>
+                  <x-icon type="hashtag" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.integrations') }}</span>
                 </a>
@@ -173,11 +173,11 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.asset_tags.index') }}" class="settings_button">
-                  <i class="fas fa-list-ol fa-4x" aria-hidden="true"></i>
+                  <x-icon type="asset-tags" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('general.asset_tags') }}</span>
                 </a>
@@ -188,11 +188,11 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.barcodes.index') }}" class="settings_button">
-                  <i class="fas fa-barcode fa-4x" aria-hidden="true"></i>
+                  <x-icon type="assets" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.barcodes') }}</span>
                 </a>
@@ -203,11 +203,11 @@
         </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.labels.index') }}" class="settings_button">
-                  <i class="fas fa-tags fa-4x" aria-hidden="true"></i>
+                  <x-icon type="labels" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.labels') }}</span>
                 </a>
@@ -219,11 +219,11 @@
 
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.ldap.index') }}" class="settings_button">
-                  <i class="fas fa-sitemap fa-4x" aria-hidden="true"></i>
+                  <x-icon type="ldap" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.ldap') }}</span>
                 </a>
@@ -234,11 +234,11 @@
         </div>
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
+        <div class="admin box box-default">
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.google.index') }}" class="settings_button">
-                <i class="fa-brands fa-google fa-4x" aria-hidden="true"></i>
+                <x-icon type="google" class="fa-4x"/>
                 <br><br>
                 <span class="name">Google</span>
               </a>
@@ -249,11 +249,11 @@
       </div>
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
+        <div class="admin box box-default">
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.saml.index') }}" class="settings_button">
-                <i class="fas fa-sign-in-alt fa-4x" aria-hidden="true"></i>
+                <x-icon type="saml" class="fa-4x"/>
                 <br><br>
                 <span class="name">{{ trans('admin/settings/general.saml') }}</span>
               </a>
@@ -264,11 +264,11 @@
       </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.backups.index') }}" class="settings_button">
-                  <i class="fas fa-file-archive fa-4x" aria-hidden="true"></i>
+                  <x-icon type="backups" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.backups') }}</span>
                 </a>
@@ -280,11 +280,11 @@
 
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
+        <div class="admin box box-default">
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.logins.index') }}" class="settings_button">
-                <i class="fas fa-crosshairs fa-4x" aria-hidden="true"></i>
+                <x-icon type="logins" class="fa-4x"/>
                 <br><br>
                 <span class="name">{{ trans('admin/settings/general.login') }}</span>
               </a>
@@ -295,11 +295,11 @@
       </div>
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
+          <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
               <a href="{{ route('settings.oauth.index') }}" class="settings_button">
-                <i class="fas fa-user-secret fa-4x" aria-hidden="true"></i>
+                <x-icon type="oauth" class="fa-4x"/>
                 <br><br>
                 <span class="name">{{  trans('admin/settings/general.oauth') }}</span>
               </a>
@@ -311,7 +311,7 @@
 
         @if (config('app.debug')=== true)
           <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-            <div class="box box-default">
+            <div class="admin box box-default">
               <div class="box-body text-center">
                 <h5>
                   <a href="{{ route('settings.phpinfo.index') }}" class="settings_button">
@@ -329,7 +329,7 @@
 
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-danger">
+      <div class="admin box box-danger">
         <div class="box-body text-center">
           <h5>
             <a href="{{ route('settings.purge.index') }}" class="link-danger">

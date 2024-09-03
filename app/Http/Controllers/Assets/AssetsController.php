@@ -165,7 +165,7 @@ class AssetsController extends Controller
             if (($model) && ($model->fieldset)) {
                 foreach ($model->fieldset->fields as $field) {
                     if ($field->field_encrypted == '1') {
-                        if (Gate::allows('admin')) {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
                             if (is_array($request->input($field->db_column))) {
                                 $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                             } else {
@@ -388,7 +388,7 @@ class AssetsController extends Controller
             foreach ($model->fieldset->fields as $field) {
 
                 if ($field->field_encrypted == '1') {
-                    if (Gate::allows('admin')) {
+                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
                         if (is_array($request->input($field->db_column))) {
                             $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                         } else {
@@ -478,9 +478,16 @@ class AssetsController extends Controller
         $tag = $tag ? $tag : $request->get('assetTag');
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $tag)->first()) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        // Search for an exact and unique asset tag match
+        $assets = Asset::where('asset_tag', '=', $tag);
+
+        // If not a unique result, redirect to the index view
+        if ($assets->count() != 1) {
+            return redirect()->route('hardware.index')
+                ->with('search', $tag)
+                ->with('warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
         }
+        $asset = $assets->first();
         $this->authorize('view', $asset);
 
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
@@ -837,7 +844,7 @@ class AssetsController extends Controller
     {
         $this->authorize('checkin', Asset::class);
 
-        return view('hardware/quickscan-checkin');
+        return view('hardware/quickscan-checkin')->with('statusLabel_list', Helper::statusLabelList());
     }
 
     public function audit($id)

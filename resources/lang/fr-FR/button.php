@@ -7,7 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Tout dissocier / Supprimer l\'utilisateur',
     'delete'  	                => 'Supprimer',
     'edit'    	                => 'Éditer',
-    'clone'    	                => 'Clone',
+    'clone'    	                => 'Dupliquer',
     'restore' 	                => 'Restaurer',
     'remove'                    => 'Supprimer',
     'request'                   => 'Demander',
@@ -23,12 +23,12 @@ return [
     'append'                    => 'Ajouter',
     'new'                       => 'Nouveau',
     'var' => [
-        'clone'     => 'Clone :item_type',
-        'edit'      => 'Edit :item_type',
-        'delete'    => 'Delete :item_type',
-        'restore'   => 'Delete :item_type',
-        'create'    => 'Create New :item_type',
-        'checkout'  => 'Checkout :item_type',
-        'checkin'   => 'Checkin :item_type',
+        'clone'     => 'Dupliquer :item_type',
+        'edit'      => 'Éditer :item_type',
+        'delete'    => 'Supprimer :item_type',
+        'restore'   => 'Restaurer :item_type',
+        'create'    => 'Créer nouveau :item_type',
+        'checkout'  => 'Attribuer :item_type',
+        'checkin'   => 'Désattribuer :item_type',
     ]
 ];

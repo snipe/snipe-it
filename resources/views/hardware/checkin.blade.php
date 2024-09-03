@@ -53,7 +53,7 @@
                                                         {{ $asset->model->name }}
                                                     @else
                                                         <span class="text-danger text-bold">
-                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                              <x-icon type="warning" />
                               {{ trans('admin/hardware/general.model_invalid')}}
                             </span>
                                                         {{ trans('admin/hardware/general.model_invalid_fix')}}
@@ -129,10 +129,10 @@
 
                 <x-redirect_submit_options
                         index_route="hardware.index"
-                        :button_label="trans('general.checkout')"
+                        :button_label="trans('general.checkin')"
                         :disabled_select="!$asset->model"
                         :options="[
-                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.assets')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
                                ]"
                 />

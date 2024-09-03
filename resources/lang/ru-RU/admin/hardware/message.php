@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Ваш файл был успешно удален',
         'file_delete_error'      => 'Невозможно удалить файл',
         'file_missing' => 'Выбранный файл отсутствует',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Один или несколько атрибутов в строке заголовка содержат неправильно сформированные символы UTF-8',
         'content_row_has_malformed_characters' => 'Один или несколько атрибутов в первой строке содержимого содержат неправильно сформированные символы UTF-8',
     ],

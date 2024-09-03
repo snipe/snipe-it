@@ -13,7 +13,7 @@ return [
     'bulk_update_with_custom_field' => 'Atminkite, kad turtas yra :asset_model_count skirtingų modelių tipų.',
     'bulk_update_model_prefix' => 'Modeliams', 
     'bulk_update_custom_field_unique' => 'Tai unikalus laukas, todėl jo negalima redaguoti masinio redagavimo būdu.',
-    'checkedout_to'		=> 'Išduota',
+    'checkedout_to'		=> 'Kam išduota',
     'checkout_date'		=> 'Išdavimo data',
     'checkin_date'		=> 'Paėmimo data',
     'checkout_to'		=> 'Išduoti',

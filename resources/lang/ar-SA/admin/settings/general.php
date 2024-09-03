@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'تكامل :app اختياري، ولكن نقطة النهاية والقناة مطلوبة إذا كنت ترغب في استخدامها. لتكوين تكامل :app، يجب عليك أولاً <a href=":webhook_link" target="_new" rel="noopener">إنشاء webhook</a> على حساب :app الخاص بك. انقر على زر <strong>اختبار تكامل :app</strong> لتأكيد أن إعداداتك صحيحة قبل الحفظ. ',
     'webhook_integration_help_button'    => 'بمجرد حفظ معلومات :app الخاصة بك، سيظهر زر الاختبار.',
     'webhook_test_help'           => 'اختبر ما إذا كان تكامل :app الخاص بك قد تم تكوينه بشكل صحيح. لقد قمت بتحديث :app إعدادات التحديثات.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'قنص-إيت الإصدار',
     'support_footer'            => 'دعم روابط تذييل الصفحة ',
     'support_footer_help'       => 'تحديد من يرى الروابط إلى دليل معلومات الدعم للمستخدمين عن طريق القناصة',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Igen, állítsa vissza. Tudomásul veszem, hogy ez felülírja az adatbázisban jelenleg meglévő adatokat. Ez egyben az összes meglévő felhasználó (beleértve Önt is) kijelentkezik.',
         'restore_confirm'       => 'Biztos, hogy vissza szeretné állítani az adatbázisát a :filename -ből?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Hiba történt a tisztítás során.',
         'validation_failed'     => 'A tisztítás megerősítése helytelen. Kérjük, írja be a "DELETE" szót a megerősítő mezőbe.',

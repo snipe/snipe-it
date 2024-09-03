@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Ja, gendanne den. Jeg anerkender, at dette vil overskrive alle eksisterende data i databasen. Dette vil også logge ud alle dine eksisterende brugere (inklusive dig).',
         'restore_confirm'       => 'Er du sikker på, at du vil gendanne din database fra :filnavn?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Der opstod en fejl under udrensning.',
         'validation_failed'     => 'Din udrensningsbekræftelse er forkert. Indtast ordet "DELETE" i bekræftelsesboksen.',

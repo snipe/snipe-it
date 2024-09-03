@@ -6,7 +6,7 @@ return [
     'ad_domain_help'			=> 'Meistens dieselbe wie die E-Mail Domäne.',
     'ad_append_domain_label'    => 'Domänenname anhängen',
     'ad_append_domain'          => 'Domänenname an das Feld Benutzername anhängen',
-    'ad_append_domain_help'     => 'Benutzer muss nicht "username@domain.local" eingeben, "username" ist ausreichend.',
+    'ad_append_domain_help'     => 'Der Benutzer muss nicht "username@domain.local" eingeben, "username" ist ausreichend.',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Wenn Sie eine Kopie der Rücknahme- / Herausgabe-E-Mails, die an Benutzer gehen auch an zusätzliche E-Mail-Empfänger versenden möchten, geben Sie sie hier ein. Ansonsten lassen Sie dieses Feld leer.',
     'admin_settings'            => 'Admin-Einstellungen',
@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app Integration ist optional, allerdings sind Endpunkt und Kanal erforderlich, wenn Sie sie verwenden möchten. Um die :app Integration zu konfigurieren, musst du zuerst in deinem :app Account <a href=":webhook_link" target="_new" rel="noopener">einen eingehenden Webhook erstellen</a>. Klicken Sie auf den <strong>:app Integration testen</strong> -Knopf, um zu bestätigen, dass die Einstellungen vor dem Speichern korrekt sind. ',
     'webhook_integration_help_button'    => 'Sobald Sie Ihre :app Informationen gespeichert haben, erscheint ein Test-Knopf.',
     'webhook_test_help'           => 'Testen Sie, ob Ihre :app Integration korrekt konfiguriert ist. SIE MÜSSEN SIE IHRE AKTUELLEN :app EINSTELLUNGEN ZUERST SPEICHERN.',
+    'shortcuts_enabled'         => 'Shortcuts aktivieren',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access-Taste, <strong>Mac</strong>: Control + Option + Access-Taste',
     'snipe_version'  			=> 'Snipe-IT Version',
     'support_footer'            => 'Fußzeile Support-Link ',
     'support_footer_help'       => 'Geben Sie an, wer die Links zum Snipe-IT Support-Info und Benutzerhandbuch sieht',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'Dieses Bild wird als Profilbild angezeigt, wenn ein Benutzer kein Profilbild festgelegt hat.',
     'restore_default_avatar' => '<a href=":default_avatar" data-toggle="lightbox" data-type="image">Ursprünglichen Standard-Avatar des Systems</a> wiederherstellen',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Zum Einchecken fällig Warnung',
+    'due_checkin_days_help' => 'Wie viele Tage vor dem voraussichtlichen Check-in eines Vermögenswerts soll dieser auf der Seite „Zur Eincheckzeit fällig“ aufgeführt werden?',
 
 ];

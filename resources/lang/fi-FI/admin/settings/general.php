@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app integraatio on valinnainen, mutta päätepiste ja kanava vaaditaan, jos haluat käyttää sitä. Määrittääksesi :app integraation, sinun täytyy ensin <a href=":webhook_link" target="_new" rel="noopener">luoda saapuva webhook</a> :app tilillesi. Klikkaa <strong>Testaa :app Integration</strong> -painiketta varmistaaksesi, että asetuksesi ovat oikein ennen tallentamista. ',
     'webhook_integration_help_button'    => 'Kun olet tallentanut :app tietosi, ilmestyy testipainike.',
     'webhook_test_help'           => 'Testaa, onko sovelluksen :app integraatio määritetty oikein. SINUN TULEE TALLENTAA PÄIVÄNÄ :app ASETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT versio',
     'support_footer'            => 'Tuki-alatunnisteen linkit ',
     'support_footer_help'       => 'Määrittele, kuka voi nähdä linkit Snipe-IT tukipalvelun tietoihin ja käyttöohjeeseen',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

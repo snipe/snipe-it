@@ -576,6 +576,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     // this would probably keep working with the resource route group, but the general practice is for
     // the model name to be the parameter - and i think it's a good differentiation in the code while we convert the others.
     Route::patch('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.update');
+    Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
+
+    Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
 
     Route::resource('hardware',
         Api\AssetsController::class,
@@ -795,6 +798,33 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.models.restore');
 
+            Route::post('{model_id}/files',
+            [
+                Api\AssetModelFilesController::class,
+                'store'
+            ]
+            )->name('api.models.files.store');
+
+            Route::get('{model_id}/files',
+            [
+                Api\AssetModelFilesController::class,
+                'list'
+            ]
+            )->name('api.models.files.index');
+
+            Route::get('{model_id}/file/{file_id}',
+            [
+                Api\AssetModelFilesController::class,
+                'show'
+            ]
+            )->name('api.models.files.show');
+
+            Route::delete('{model_id}/file/{file_id}',
+            [
+                Api\AssetModelFilesController::class,
+                'destroy'
+            ]
+            )->name('api.models.files.destroy');
         }); 
     
         Route::resource('models', 
@@ -1067,18 +1097,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.users.restore');
 
-        }); 
-    
+        });
+
         Route::resource('users', 
         Api\UsersController::class,
         ['names' => [
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
-                'update' => 'api.users.update',
                 'store' => 'api.users.store',
+                'update' => 'api.users.update',
                 'destroy' => 'api.users.destroy',
             ],
-        'except' => ['create', 'edit'],
+         'except' => ['create', 'edit'],
         'parameters' => ['user' => 'user_id'],
         ]
         ); // end users API routes

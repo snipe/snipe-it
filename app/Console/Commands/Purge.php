@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Accessory;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
@@ -15,6 +16,8 @@ use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class Purge extends Command
 {
@@ -141,6 +144,20 @@ class Purge extends Command
             $this->info($users->count().' users purged.');
             $user_assoc = 0;
             foreach ($users as $user) {
+
+                $rel_path = 'private_uploads/users';
+                $filenames = Actionlog::where('action_type', 'uploaded')
+                    ->where('item_id', $user->id)
+                    ->pluck('filename');
+                foreach($filenames as $filename) {
+                    try {
+                        if (Storage::exists($rel_path . '/' . $filename)) {
+                            Storage::delete($rel_path . '/' . $filename);
+                        }
+                    } catch (\Exception $e) {
+                        Log::info('An error occurred while deleting files: ' . $e->getMessage());
+                    }
+                }
                 $this->info('- User "'.$user->username.'" deleted.');
                 $user_assoc += $user->userlog()->count();
                 $user->userlog()->forceDelete();

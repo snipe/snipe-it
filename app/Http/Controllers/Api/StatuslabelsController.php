@@ -8,6 +8,7 @@ use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
+use App\Models\Setting;
 use App\Models\Statuslabel;
 use Illuminate\Http\Request;
 use App\Http\Transformers\PieChartTransformer;
@@ -187,8 +188,14 @@ class StatuslabelsController extends Controller
     public function getAssetCountByStatuslabel() : array
     {
         $this->authorize('view', Statuslabel::class);
-        $statuslabels = Statuslabel::withCount('assets')->get();
-        $total = Array();
+
+        if (Setting::getSettings()->show_archived_in_list == 0 ) {
+            $statuslabels = Statuslabel::withCount('assets')->where('archived','0')->get();
+        } else {
+            $statuslabels = Statuslabel::withCount('assets')->get();
+        }
+
+        $total = [];
 
         foreach ($statuslabels as $statuslabel) {
 
