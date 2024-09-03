@@ -21,9 +21,9 @@ class AssetCheckinRequest extends Request
      */
     public function rules()
     {
-        return [
+        'note'             => 'required|in:asset,',
 
-        ];
+        return $rules;
     }
 
     public function response(array $errors)
