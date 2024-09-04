@@ -56,10 +56,12 @@ class CreateAccessoriesTest extends TestCase
             'notes' => 'Some notes here',
         ];
 
-        $this->actingAs(User::factory()->createAccessories()->create())
+        $user = User::factory()->createAccessories()->create();
+
+        $this->actingAs($user)
             ->post(route('accessories.store'), array_merge($data, ['redirect_option' => 'index']))
             ->assertRedirect(route('accessories.index'));
 
-        $this->assertDatabaseHas('accessories', $data);
+        $this->assertDatabaseHas('accessories', array_merge($data, ['user_id' => $user->id]));
     }
 }
