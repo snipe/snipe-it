@@ -41,19 +41,19 @@ class CreateAccessoriesTest extends TestCase
         $supplier = Supplier::factory()->create();
 
         $data = [
-            'company_id' => $company->id,
-            'name' => 'My Accessory Name',
             'category_id' => $category->id,
-            'supplier_id' => $supplier->id,
-            'manufacturer_id' => $manufacturer->id,
+            'company_id' => $company->id,
             'location_id' => $location->id,
-            'model_number' => '12345',
-            'order_number' => '9876',
-            'purchase_date' => '2024-09-04',
-            'purchase_cost' => '99.98',
-            'qty' => '3',
+            'manufacturer_id' => $manufacturer->id,
             'min_amt' => '1',
+            'model_number' => '12345',
+            'name' => 'My Accessory Name',
             'notes' => 'Some notes here',
+            'order_number' => '9876',
+            'purchase_cost' => '99.98',
+            'purchase_date' => '2024-09-04',
+            'qty' => '3',
+            'supplier_id' => $supplier->id,
         ];
 
         $user = User::factory()->createAccessories()->create();
