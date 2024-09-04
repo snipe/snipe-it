@@ -158,8 +158,8 @@ class Label implements View
                                 // The end result of this will be in this format:
                                 // {labelOne} {valueOne} | {labelTwo} {valueTwo} | {labelThree} {valueThree}
                                 $previous['value'] = trim(implode(' | ', [
-                                    implode(' ', [$previous['label'], $previous['value']]),
-                                    implode(' ', [$current['label'], $current['value']]),
+                                    implode(' ', [$previous['label'], str_replace(['{', '}'], '', $previous['value'])]),
+                                    implode(' ', [$current['label'], str_replace(['{', '}'], '', $current['value'])]),
                                 ]));
 
                                 // We'll set the label to an empty string since we
