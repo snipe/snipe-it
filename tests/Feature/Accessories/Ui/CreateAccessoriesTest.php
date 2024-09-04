@@ -29,7 +29,15 @@ class CreateAccessoriesTest extends TestCase
 
     public function testValidDataRequiredToCreateAccessory()
     {
-        $this->markTestIncomplete();
+        $this->actingAs(User::factory()->createAccessories()->create())
+            ->post(route('accessories.store'), [
+                //
+            ])
+            ->assertSessionHasErrors([
+                'name',
+                'qty',
+                'category_id',
+            ]);
     }
 
     public function testCanCreateAccessory()
