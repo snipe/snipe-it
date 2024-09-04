@@ -14,7 +14,6 @@ window.$ = jQuery
 require('jquery-ui'); //should we export this to the window?
 jQuery.fn.uitooltip = jQuery.fn.tooltip;
 require('bootstrap-less');
-console.error("Jquery version is: " + jQuery().jquery)
 require('select2');
 require('admin-lte');
 require('tether');

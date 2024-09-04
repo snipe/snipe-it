@@ -72,6 +72,11 @@ mix
         "./resources/assets/js/snipeit.js",
       "./resources/assets/js/snipeit_modals.js",
       "./node_modules/canvas-confetti/dist/confetti.browser.js",
+        // The general direction we have been going is to pull these via require() directly
+        // But this runs in only one place, is only 24k, and doesn't break the sourcemaps
+        // (and it needs to run in 'immediate' mode, not in 'moar_scripts'), so let's just
+        // leave it here. It *could* be moved to confetti-js.blade.php, but I don't think
+        // it helps anything if we do that.
     ],
       "./public/js/dist/all.js"
   ).sourceMaps(true, 'source-map', 'source-map').version();
