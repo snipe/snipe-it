@@ -27,7 +27,6 @@ class AssetCheckoutRequest extends Request
             'assigned_location'     => 'required_without_all:assigned_user,assigned_asset',
             'status_id'             => 'exists:status_labels,id,deployable,1',
             'checkout_to_type'      => 'required|in:asset,location,user',
-//            'note'                  => 'required|in:asset,',
             'checkout_at' => [
                 'nullable',
                 'date',

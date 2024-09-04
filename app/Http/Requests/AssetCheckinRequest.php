@@ -14,18 +14,6 @@ class AssetCheckinRequest extends Request
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-//    public function rules()
-//    {
-//        'note' => 'required|in:asset,',
-//
-//        return $rules;
-//    }
-
     public function response(array $errors)
     {
         return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
