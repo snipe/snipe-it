@@ -116,6 +116,12 @@ class AssetCheckinController extends Controller
             $seat->update(['assigned_to' => null]);
         });
 
+        $settings = \App\Models\Setting::getSettings();
+
+        if($settings->require_checkinout_notes=="1" && (is_null($request->note))) {
+            return redirect()->to("hardware/$assetId/checkin")->with('error', trans('admin/hardware/message.update.no_note'));
+        }
+
         // Get all pending Acceptances for this asset and delete them
         $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
             [Asset::class],
