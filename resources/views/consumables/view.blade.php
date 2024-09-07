@@ -85,7 +85,7 @@
             <div class="row">
 
               <!-- Start button column -->
-              <div class="col-md-3 col-xs-12 col-sm-push-9">
+              <div class="col-md-3 col-xs-12 col-md-push-9">
 
                 @if ($consumable->image!='')
                   <div class="col-md-12 text-center" style="padding-bottom: 20px;">
@@ -151,7 +151,7 @@
 
               <!-- End button column -->
 
-              <div class="col-md-9 col-xs-12 col-sm-pull-3">
+              <div class="col-md-9 col-xs-12 col-md-pull-3">
 
                 <div class="row-new-striped" style="margin: 0px;">
 

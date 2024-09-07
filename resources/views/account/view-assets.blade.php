@@ -91,7 +91,7 @@
 
 
               <!-- Start button column -->
-              <div class="col-md-3 col-xs-12 col-sm-push-9">
+              <div class="col-md-3 col-xs-12 col-md-push-9">
 
 
 
@@ -146,7 +146,7 @@
 
               <!-- End button column -->
 
-              <div class="col-md-9 col-xs-12 col-sm-pull-3">
+              <div class="col-md-9 col-xs-12 col-md-pull-3">
 
                 <div class="row-new-striped">
 
