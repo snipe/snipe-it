@@ -538,7 +538,7 @@ Route::group(['middleware' => 'web'], function () {
 
 
 // Use the
-Route::group(['middleware' => 'health'], function () {
+Route::group(['middleware' => 'guest'], function () {
     Route::get(
         '/health',
         [HealthController::class, 'get']
