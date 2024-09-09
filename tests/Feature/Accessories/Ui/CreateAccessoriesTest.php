@@ -27,6 +27,13 @@ class CreateAccessoriesTest extends TestCase
             ->assertViewIs('accessories.edit');
     }
 
+    public function testRequiresPermissionToCreateAccessory()
+    {
+        $this->actingAs(User::factory()->create())
+            ->post(route('accessories.store'))
+            ->assertForbidden();
+    }
+
     public function testValidDataRequiredToCreateAccessory()
     {
         $this->actingAs(User::factory()->createAccessories()->create())
