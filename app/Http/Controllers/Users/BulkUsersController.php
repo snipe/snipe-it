@@ -118,6 +118,7 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('activated')
             ->conditionallyAddItem('start_date')
             ->conditionallyAddItem('end_date')
+            ->conditionallyAddItem('city')
             ->conditionallyAddItem('autoassign_licenses');
 
 
