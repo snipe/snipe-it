@@ -22,6 +22,13 @@ class CreateCompaniesTest extends TestCase
             ->assertViewIs('companies.edit');
     }
 
+    public function testRequiresPermissionToCreateCompany()
+    {
+        $this->actingAs(User::factory()->create())
+            ->post(route('companies.store'))
+            ->assertForbidden();
+    }
+
     public function testValidDataRequiredToCreateCompany()
     {
         $this->actingAs(User::factory()->createCompanies()->create())
