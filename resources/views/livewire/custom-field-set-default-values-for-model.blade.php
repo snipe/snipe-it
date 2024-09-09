@@ -43,7 +43,7 @@
                                                 {{-- https://laracasts.com/discuss/channels/livewire/livewire-and-bootstrap-datepicker?page=1&replyId=623122--}}
                                                 onchange="this.dispatchEvent(new InputEvent('input'))"
                                             >
-                                            <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><x-icon type="calendar" /></span>
                                         </div>
                                     </div>
 

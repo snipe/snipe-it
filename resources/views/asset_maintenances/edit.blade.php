@@ -63,7 +63,7 @@
           <div class="input-group col-md-3{{  (Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true" data-date-clear-btn="true">
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="start_date" value="{{ old('start_date', $item->start_date) }}">
-              <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+              <span class="input-group-addon"><x-icon type="calendar" /></span>
             </div>
             {!! $errors->first('start_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
@@ -78,7 +78,7 @@
           <div class="input-group col-md-3{{  (Helper::checkIfRequired($item, 'completion_date')) ? ' required' : '' }}">
             <div class="input-group date" data-date-clear-btn="true" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="completion_date" id="completion_date" value="{{ old('completion_date', $item->completion_date) }}">
-              <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+              <span class="input-group-addon"><x-icon type="calendar" /></span>
             </div>
             {!! $errors->first('completion_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
@@ -123,7 +123,7 @@
       </div> <!-- .box-body -->
 
       <div class="box-footer text-right">
-        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
     </form>

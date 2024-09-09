@@ -219,6 +219,8 @@ return [
     'webhook_integration_help'    => ':app 整合是選擇性的，但如果您希望使用它，則需要端點和頻道。要設定 :app 整合，您必須先在您的 :app 帳戶上<a href=":webhook_link" target="_new" rel="noopener">建立傳入的 webhook</a>。在儲存之前，點選 <strong>測試 :app 整合</strong> 按鈕確認您的設定是否正確。',
     'webhook_integration_help_button'    => '一旦您儲存了您的 :app 資訊，將會出現一個測試按鈕。',
     'webhook_test_help'           => '測試您的 :app 整合是否設定正確。您必須先儲存更新的 :app 設定。',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT 版本',
     'support_footer'            => '支援頁尾連結',
     'support_footer_help'       => '指定誰可以看到指向Snipe-IT支持信息和用戶手冊的鏈接',
@@ -380,5 +382,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

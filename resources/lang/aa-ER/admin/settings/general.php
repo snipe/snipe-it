@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'crwdns11403:0crwdne11403:0',
     'webhook_integration_help_button'    => 'crwdns11405:0crwdne11405:0',
     'webhook_test_help'           => 'crwdns11407:0crwdne11407:0',
+    'shortcuts_enabled'         => 'crwdns12654:0crwdne12654:0',
+    'shortcuts_help_text'       => 'crwdns12656:0crwdne12656:0',
     'snipe_version'  			=> 'crwdns1266:0crwdne1266:0',
     'support_footer'            => 'crwdns1991:0crwdne1991:0',
     'support_footer_help'       => 'crwdns1992:0crwdne1992:0',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'crwdns12590:0crwdne12590:0',
     'restore_default_avatar' => 'crwdns12592:0crwdne12592:0',
     'restore_default_avatar_help' => 'crwdns12594:0crwdne12594:0',
+    'due_checkin_days' => 'crwdns12680:0crwdne12680:0',
+    'due_checkin_days_help' => 'crwdns12682:0crwdne12682:0',
 
 ];

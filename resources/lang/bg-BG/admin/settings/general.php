@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => ':app интеграцията е по избор, въпреки че крайната цел и канала са задължителни, ако искате да я ползате. За да се конфигурира :app интеграцията трябва първо да <a href=":webhook_link" target="_new" rel="noopener"> създадете входяща webhook</a> във вашият :app акаунт. Кликнете на <strong>Тест :app интеграция</strong> бутона за да потвърдите, че всичко работи преди да запишете настройките. ',
     'webhook_integration_help_button'    => 'След като запишите вашата информация за :app, ще се пояави тест бутон.',
     'webhook_test_help'           => 'Тест за коректна конфигурация на :app интеграцията. НЕОБХОДИМО Е ПЪРВО ДА ЗАПИШЕТЕ :app НАСТРОЙКИТЕ.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT версия',
     'support_footer'            => 'Връзки към Snipe-it поддръжката във футъра',
     'support_footer_help'       => 'Указва визуализацията на връзки към поддръжката на Snipe-IT и потребителската документация',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

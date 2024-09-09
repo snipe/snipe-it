@@ -49,4 +49,5 @@ return [
     'kit_deleted'                       => 'تم حذف عدة بنجاح',
     'kit_model_updated'                 => 'تم تحديث النموذج بنجاح',
     'kit_model_detached'                => 'تم فصل النموذج بنجاح',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

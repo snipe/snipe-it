@@ -47,6 +47,7 @@ storage/private_uploads/users/*
 tests/_data/scenarios
 tests/_output/*
 tests/_support/_generated/*
+tests/coverage/*
 /npm-debug.log
 /storage/oauth-private.key
 /storage/oauth-public.key

@@ -637,6 +637,7 @@ class SettingsController extends Controller
         $setting->alert_threshold = $request->input('alert_threshold');
         $setting->audit_interval = $request->input('audit_interval');
         $setting->audit_warning_days = $request->input('audit_warning_days');
+        $setting->due_checkin_days = $request->input('due_checkin_days');
         $setting->show_alerts_in_menu = $request->input('show_alerts_in_menu', '0');
 
         if ($setting->save()) {
@@ -1203,7 +1204,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.0]
      */
-    public function postRestore($filename = null) : RedirectResponse
+    public function postRestore(Request $request, $filename = null): RedirectResponse
     {
 
         if (! config('app.lock_passwords')) {
@@ -1223,13 +1224,29 @@ class SettingsController extends Controller
 
                 Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
-                // run the restore command
-                Artisan::call('snipeit:restore',
-                [
+                $restore_params = [
                     '--force' => true,
                     '--no-progress' => true,
-                    'filename' => storage_path($path).'/'.$filename
-                ]);
+                    'filename' => storage_path($path) . '/' . $filename
+                ];
+
+                if ($request->input('clean')) {
+                    Log::debug("Attempting 'clean' - first, guessing prefix...");
+                    Artisan::call('snipeit:restore', [
+                        '--sanitize-guess-prefix' => true,
+                        'filename' => storage_path($path) . '/' . $filename
+                    ]);
+                    $guess_prefix_output = Artisan::output();
+                    Log::debug("Sanitize output is: $guess_prefix_output");
+                    list($prefix, $_output) = explode("\n", $guess_prefix_output);
+                    Log::debug("prefix is: '$prefix'");
+                    $restore_params['--sanitize-with-prefix'] = $prefix;
+                }
+
+                // run the restore command
+                Artisan::call('snipeit:restore',
+                    $restore_params
+                );
 
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();

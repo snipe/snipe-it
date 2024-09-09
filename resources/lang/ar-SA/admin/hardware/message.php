@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'تم حذف ملفك بنجاح',
         'file_delete_error'      => 'تعذر حذف الملف',
         'file_missing' => 'الملف المحدد مفقود',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الترويجي تحتوي على أحرف UTF-8 سيئة',
         'content_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الأول من المحتوى تحتوي على أحرف UTF-8 سيئة',
     ],

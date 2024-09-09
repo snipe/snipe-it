@@ -143,7 +143,7 @@
               </div>
               <div class="col-md-9 col-md-offset-3" id="encrypt_warning" style="display:none;">
                   <div class="callout callout-danger">
-                      <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
+                      <p><x-icon type="warning" /> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
                   </div>
               </div>
           @endif

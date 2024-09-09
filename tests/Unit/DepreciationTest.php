@@ -17,15 +17,13 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create();
 
         AssetModel::factory()
-                    ->mbp13Model()
                     ->count(5)
                     ->create(
                         [
                             'category_id' => Category::factory()->assetLaptopCategory()->create(),
                             'depreciation_id' => $depreciation->id               
                         ]);
-
-
+        
         $this->assertEquals(5, $depreciation->models->count());
     }
     public function testDepreciationAmount()

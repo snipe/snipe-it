@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Si, ripristina. Riconosco che il ripristino sovrascriverà tutti i dati al momento presenti nel database. Inoltre, tutti gli utenti verranno disconnessi (incluso te).',
         'restore_confirm'       => 'Sei sicuro di voler ripristinare il tuo database da :filename?'
     ],
+    'restore' => [
+        'success'               => 'Il backup del sistema è stato ripristinato. Effettua nuovamente il login.'
+    ],
     'purge' => [
         'error'     => 'Si è verificato un errore durante la pulizia. ',
         'validation_failed'     => 'La conferma dell\'eliminazione non è corretta. Digita "DELETE" nel box di conferma.',

@@ -202,6 +202,7 @@ class AssetModelsController extends Controller
         if ($model->image) {
             try {
                 Storage::disk('public')->delete('models/'.$model->image);
+                $model->update(['image' => null]);
             } catch (\Exception $e) {
                 Log::info($e);
             }
@@ -233,7 +234,7 @@ class AssetModelsController extends Controller
 
             if ($model->restore()) {
                 $logaction = new Actionlog();
-                $logaction->item_type = User::class;
+                $logaction->item_type = AssetModel::class;
                 $logaction->item_id = $model->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
                 $logaction->user_id = auth()->id();

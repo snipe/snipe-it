@@ -20,7 +20,7 @@
           <label for="first_name" class="col-md-3 control-label">{{ trans('general.first_name') }}
           </label>
           <div class="col-md-8 required">
-            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" />
+            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" required />
             {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -89,11 +89,20 @@
           </div>
         </div>
 
-        <div class="form-group{{ $errors->has('enable_sounds') ? ' has-error' : '' }}">
+        <div class="form-group">
           <div class="col-md-9 col-md-offset-3">
-            <label for="enable_sounds" class="form-control">
+            <label class="form-control">
               <input type="checkbox" name="enable_sounds" value="1" {{ old('enable_sounds', $user->enable_sounds) ? 'checked' : '' }}>
               {{ trans('account/general.enable_sounds') }}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <label class="form-control">
+              <input type="checkbox" name="enable_confetti" value="1" {{ old('enable_confetti', $user->enable_confetti) ? 'checked' : '' }}>
+              {{ trans('account/general.enable_confetti') }}
             </label>
           </div>
         </div>
@@ -165,7 +174,7 @@
       </div> <!-- .box-body -->
       <div class="text-right box-footer">
         <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
     {{ Form::close() }}

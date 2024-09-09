@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Rinkinys panaikintas sėkmingai',
     'kit_model_updated'                 => 'Modelis atnaujintas sėkmingai',
     'kit_model_detached'                => 'Modelis atskirtas sėkmingai',
+    'model_already_attached'            => 'Modelis jau pridėtas prie rinkinio',
 ];

@@ -3,6 +3,7 @@
 
         <div class="box-header">
                 <h2 class="box-title">
+                    <x-icon type="oauth"/>
                     {{ trans('admin/settings/general.oauth_clients') }}
                 </h2>
                 @if ($authorizationError)

@@ -602,7 +602,7 @@ class AssetsController extends Controller
                 if ($field->field_encrypted == '1') {
                     Log::debug('This model field is encrypted in this fieldset.');
 
-                    if (Gate::allows('admin')) {
+                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
 
                         // If input value is null, use custom field's default value
                         if (($field_val == null) && ($request->has('model_id') != '')) {
@@ -695,7 +695,7 @@ class AssetsController extends Controller
                             }
                         }
                         if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
+                            if (Gate::allows('assets.view.encrypted_custom_fields')) {
                                 $field_val = Crypt::encrypt($field_val);
                             } else {
                                 $problems_updating_encrypted_custom_fields = true;
@@ -928,7 +928,7 @@ class AssetsController extends Controller
             }
         }
 
-        if ($request->has('status_id')) {
+        if ($request->filled('status_id')) {
             $asset->status_id = $request->input('status_id');
         }
         
@@ -978,7 +978,7 @@ class AssetsController extends Controller
     public function checkinByTag(Request $request, $tag = null) : JsonResponse
     {
         $this->authorize('checkin', Asset::class);
-        if(null == $tag && null !== ($request->input('asset_tag'))) {
+        if (null == $tag && null !== ($request->input('asset_tag'))) {
             $tag = $request->input('asset_tag');
         }
         $asset = Asset::where('asset_tag', $tag)->first();

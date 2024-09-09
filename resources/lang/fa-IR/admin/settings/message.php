@@ -16,6 +16,9 @@ return [
         'restore_confirm'       => 'آیا مطمئن هستید که می خواهید پایگاه داده خود را از :filename بازیابی کنید؟
 '
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'در حین پاکسازی خطایی رخ داد. ',
         'validation_failed'     => 'تایید پاکسازی ناصحیح است. لطفا کلمه ی "حذف" را در جعبه ی تاییدیه تایپ کنید.',

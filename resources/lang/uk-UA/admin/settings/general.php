@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'Інтеграція :app необов’язкова, однак Endpoint та канал потрібні, якщо ви бажаєте її використовувати. Щоб налаштувати інтеграцію :app, потрібно спочатку <a href=":webhook_link" target="_new" rel="noopener">створити вхідний вебхук</a> у своєму обліковому записі :app. Натисніть кнопку <strong>Тест Інтеграції :app</strong>, щоб підтвердити правильність налаштувань перед збереженням. ',
     'webhook_integration_help_button'    => 'Як тільки ви зберегли свою інформацію :app , з\'явиться тестова кнопка.',
     'webhook_test_help'           => 'Перевірте, чи налаштована інтеграція :app коректно. ВИ ПОВИННІ ЗБЕРЕЖЕТЕ ВАШЕ ОНОВАНО :app SETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Версія Snipe-IT',
     'support_footer'            => 'Підтримка посилань в футері ',
     'support_footer_help'       => 'Вкажіть, хто бачить посилання на інформацію підтримки Snipe-IT та посібник користувача',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

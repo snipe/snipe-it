@@ -12,4 +12,6 @@ return array(
     'api_reference' => 'Molim vas konsultujte <a href="https://snipe-it.readme.io/reference" target="_blank">API podsetnik</a> da bi ste pronašli određene API krajnje tačke i dodatnu API dokumentaciju.',
     'profile_updated' => 'Nalog je uspešno izmenjen',
     'no_tokens' => 'Još uvek niste napravili nijedan lični token za pristup.',
+    'enable_sounds' => 'Omogući zvučne efekte',
+    'enable_confetti' => 'Omogući efekat konfeta',
 );

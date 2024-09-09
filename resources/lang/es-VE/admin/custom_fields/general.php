@@ -41,7 +41,7 @@ return [
     'about_custom_fields_title' => 'Acerca de campos personalizados',
     'about_custom_fields_text' => 'Los campos personalizados le permiten agregar atributos arbitrarios a los activos.',
     'add_field_to_fieldset' => 'Añadir campo al grupo de campos',
-    'make_optional' => 'Requerido - haga click para hacerlo opcional',
+    'make_optional' => 'Requerido - haga clic para hacerlo opcional',
     'make_required' => 'Opcional - haga click para hacerlo opcional',
     'reorder' => 'Reordenar',
     'db_field' => 'Campo en base de datos',

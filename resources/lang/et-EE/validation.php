@@ -31,7 +31,7 @@ return [
         'numeric' => 'The :attribute field must be between :min and :max.',
         'string' => 'The :attribute field must be between :min and :max characters.',
     ],
-    'boolean' => 'Atribuudiväljadele peab olema tõene või vale.',
+    'boolean' => 'Atribuudiväljadele :attribute peab olema tõene või vale.',
     'can' => 'The :attribute field contains an unauthorized value.',
     'confirmed' => 'The :attribute field confirmation does not match.',
     'contains' => 'The :attribute field is missing a required value.',
@@ -51,7 +51,7 @@ return [
     'doesnt_start_with' => 'The :attribute field must not start with one of the following: :values.',
     'email' => 'The :attribute field must be a valid email address.',
     'ends_with' => 'The :attribute field must end with one of the following: :values.',
-    'enum' => 'Valitud atribuut on kehtetu.',
+    'enum' => 'Valitud :attrubute on kehtetu.',
     'exists' => 'Valitud atribuut on kehtetu.',
     'extensions' => 'The :attribute field must have one of the following extensions: :values.',
     'file' => 'The :attribute field must be a file.',
@@ -125,6 +125,8 @@ return [
         'symbols' => 'The :attribute field must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
+    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+
     'present' => 'Atribuudiväli peab olema kohal.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
     'present_unless' => 'The :attribute field must be present unless :other is :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Teie praegune parool on vale',
         'dumbpwd'          => 'See parool on liiga levinud.',
         'statuslabel_type' => 'Peate valima kehtiva olekutüübi tüübi',
+        'custom_field_not_found'          => 'This field does not seem to exist, please double check your custom field names.',
+        'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

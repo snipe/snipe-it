@@ -75,13 +75,13 @@ class ConsumablePresenter extends Presenter
             ], [
                 'field' => 'qty',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'title' => trans('admin/components/general.total'),
                 'visible' => true,
             ], [
                 'field' => 'remaining',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'title' => trans('admin/components/general.remaining'),
                 'visible' => true,
             ], [

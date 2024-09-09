@@ -12,7 +12,7 @@ return [
     'edit'              => 'Editar usuario',
     'filetype_info'     => 'Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
     'history_user'      => 'Historial de :name',
-    'info'				=> 'Info',
+    'info'				=> 'Información',
     'restore_user'		=> 'Haga clic aquí para restaurarlos.',
     'last_login'        => 'Último acceso',
     'ldap_config_text'  => 'Los ajustes de configuración LDAP se pueden encontrar Admin > Configuración. La ubicación (opcional) seleccionada se establecerá para todos los usuarios importados.',

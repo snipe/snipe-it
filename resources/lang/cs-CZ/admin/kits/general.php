@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Sada byla úspěšně smazána',
     'kit_model_updated'                 => 'Model byl úspěšně aktualizován',
     'kit_model_detached'                => 'Model byl úspěšně odpojen',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

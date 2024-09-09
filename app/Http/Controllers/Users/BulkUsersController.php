@@ -30,7 +30,7 @@ class BulkUsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
      * @param Request $request
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Request $request)
@@ -116,6 +116,9 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('remote')
             ->conditionallyAddItem('ldap_import')
             ->conditionallyAddItem('activated')
+            ->conditionallyAddItem('start_date')
+            ->conditionallyAddItem('end_date')
+            ->conditionallyAddItem('city')
             ->conditionallyAddItem('autoassign_licenses');
 
 
@@ -146,7 +149,14 @@ class BulkUsersController extends Controller
             $this->update_array['company_id'] = null;
         }
 
-        
+        if ($request->input('null_start_date')=='1') {
+            $this->update_array['start_date'] = null;
+        }
+
+        if ($request->input('null_end_date')=='1') {
+            $this->update_array['end_date'] = null;
+        }
+
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }

@@ -221,6 +221,8 @@ return [
     'webhook_integration_help'    => 'Slackとの連携は任意ですが、利用する場合はエンドポイントとチャンネルが必要です。Slackとの連携を設定するには、まず、Slackに<a href=":webhook_link" target="_new" rel="noopener">Incoming Webhookを作成</a>する必要があります。<strong>Slack統合テスト</strong> ボタンをクリックし、設定が正しいことを確認してから保存してください。 ',
     'webhook_integration_help_button'    => ':app の設定を保存すると、テストボタンが表示されます。',
     'webhook_test_help'           => ':app の連携が正しく設定されているかどうかをテストします。:app の設定を最初に保存しなければなりません。',
+    'shortcuts_enabled'         => 'ショートカットを有効化',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT バージョン',
     'support_footer'            => 'フッターのリンクをサポートします。 ',
     'support_footer_help'       => 'Snipe-ITサポート情報とユーザーマニュアルへのリンクを確認する',
@@ -382,5 +384,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'チェックイン期限の警告',
+    'due_checkin_days_help' => 'アセットの期待されるチェックインの何日前に、「チェックイン期限」ページにリストされるべきですか?',
 
 ];

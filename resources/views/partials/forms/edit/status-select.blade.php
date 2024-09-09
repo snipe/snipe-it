@@ -9,8 +9,6 @@
                 <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Statuslabel::find($status_id)) ? \App\Models\Statuslabel::find($status_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_status') }}</option>
             @endif
 
         </select>

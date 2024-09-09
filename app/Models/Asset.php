@@ -1315,7 +1315,7 @@ class Asset extends Depreciable
 
     public function scopeDueForCheckin($query, $settings)
     {
-        $interval = $settings->audit_warning_days ?? 0;
+        $interval = $settings->due_checkin_days ?? 0;
         $today = Carbon::now();
         $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
 
@@ -1561,7 +1561,7 @@ class Asset extends Depreciable
             $leftJoin->on('assets_dept_users.id', '=', 'assets.assigned_to')
                 ->where('assets.assigned_type', '=', User::class);
         })->where(function ($query) use ($search) {
-                    $query->where('assets_dept_users.department_id', '=', $search);
+                    $query->whereIn('assets_dept_users.department_id', $search);
 
         })->withTrashed()->whereNull('assets.deleted_at'); //workaround for laravel bug
     }
@@ -1811,7 +1811,9 @@ class Asset extends Depreciable
     public function scopeInCategory($query, $category_id)
     {
         return $query->join('models as category_models', 'assets.model_id', '=', 'category_models.id')
-            ->join('categories', 'category_models.category_id', '=', 'categories.id')->where('category_models.category_id', '=', $category_id);
+            ->join('categories', 'category_models.category_id', '=', 'categories.id')
+            ->whereIn('category_models.category_id', (!is_array($category_id) ? explode(',',$category_id): $category_id));
+            //->whereIn('category_models.category_id', $category_id);
     }
 
     /**
@@ -1825,7 +1827,7 @@ class Asset extends Depreciable
     public function scopeByManufacturer($query, $manufacturer_id)
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->where('models.manufacturer_id', '=', $manufacturer_id);
+            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->whereIn('models.manufacturer_id', (!is_array($manufacturer_id) ? explode(',',$manufacturer_id): $manufacturer_id));
     }
 
 

@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Attention : </strong> Cet actif est marqué comme indéployable. Si ce statut a changé, merci de mettre à jour le statut d\'actif.',
     'does_not_exist' 	=> 'Ce bien n\'existe pas.',
     'does_not_exist_var'=> 'Actif avec le tag :asset_tag introuvable.',
     'no_tag' 	        => 'Aucune étiquette d\'actif fournie.',
@@ -51,13 +51,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Effectuer l\'importation',
         'error'                 => 'Certains éléments n\'ont pas été correctement importés.',
         'errorDetail'           => 'Les éléments suivants n\'ont pas été importés à cause d\'erreurs.',
         'success'               => 'Votre fichier a bien été importé',
         'file_delete_success'   => 'Votre fichier a été correctement supprimé',
         'file_delete_error'      => 'Le fichier n’a pas pu être supprimé',
         'file_missing' => 'Le fichier sélectionné est manquant',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la ligne d\'en-tête contiennent des caractères UTF-8 invalides',
         'content_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la première ligne de contenu contiennent des caractères UTF-8 invalides',
     ],

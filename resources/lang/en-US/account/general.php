@@ -13,4 +13,5 @@ return array(
     'profile_updated' => 'Account successfully updated',
     'no_tokens' => 'You have not created any personal access tokens.',
     'enable_sounds' => 'Enable sound effects',
+    'enable_confetti' => 'Enable confetti effects',
 );

@@ -218,6 +218,8 @@ return [
     'webhook_integration_help'    => 'Integracja z :app jest opcjonalna, jednak endpoint i kanał są wymagane, jeśli chcesz z niej korzystać. Aby skonfigurować integrację z aplikacją, musisz najpierw <a href=":webhook_link" target="_new" rel="noopener">utworzyć przychodzący webhook</a> na swoim koncie :App. Kliknij przycisk <strong>Test :app Integration</strong> , aby potwierdzić poprawność ustawień przed zapisaniem. ',
     'webhook_integration_help_button'    => 'Po zapisaniu informacji o :app pojawi się przycisk testowy.',
     'webhook_test_help'           => 'Sprawdź, czy integracja aplikacji jest poprawnie skonfigurowana. ZAPISZ SWOJE AKTUALIZOWANE :app USTAWIENIA.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Wersja Snipe-IT',
     'support_footer'            => 'Obsługa linków stopki ',
     'support_footer_help'       => 'Określ kto widzi linki do Snipe-IT Instrukcji Obsługi oraz Wsparcia',
@@ -379,5 +381,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

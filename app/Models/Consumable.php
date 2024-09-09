@@ -426,6 +426,20 @@ class Consumable extends SnipeModel
     }
 
     /**
+     * Query builder scope to order on remaining
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderRemaining($query, $order)
+    {
+        $order_by = 'consumables.qty - consumables_users_count ' . $order;
+        return $query->orderByRaw($order_by);
+    }
+
+    /**
      * Query builder scope to order on supplier
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance

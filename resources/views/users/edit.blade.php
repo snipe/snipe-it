@@ -66,7 +66,9 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <form class="form-horizontal" method="post" autocomplete="off" action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" enctype="multipart/form-data" id="userForm">
+      <form class="form-horizontal" method="post" autocomplete="off"
+            action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}"
+            enctype="multipart/form-data" id="userForm">
       {{csrf_field()}}
 
       @if($user->id)
@@ -131,7 +133,7 @@
                     @if (config('app.lock_passwords') && ($user->id))
                         <!-- disallow changing existing usernames on the demo -->
                         <div class="col-md-8 col-md-offset-3">
-                            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                            <p class="text-warning"><x-icon type="lock" /> {{ trans('general.feature_disabled') }}</p>
                         </div>
                     @endif
 
@@ -215,7 +217,7 @@
                                       {{ trans('admin/users/general.activated_help_text') }}
 
                                   </label>
-                                  <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                  <p class="text-warning"><x-icon type="lock" /> {{ trans('general.feature_disabled') }}</p>
 
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->
@@ -305,7 +307,7 @@
                           <!-- language -->
                           <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
                               <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
-                              <div class="col-md-9">
+                              <div class="col-md-6">
                                   {!! Form::locales('locale', old('locale', $user->locale), 'select2') !!}
                                   {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -451,6 +453,8 @@
                               <label class="col-md-3 control-label" for="country">{{ trans('general.country') }}</label>
                               <div class="col-md-6">
                                   {!! Form::countries('country', old('country', $user->country), 'col-md-12 select2') !!}
+
+                                  <p class="help-block">{{ trans('general.countries_manually_entered_help') }}</p>
                                   {!! $errors->first('country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
                           </div>

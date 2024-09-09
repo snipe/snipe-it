@@ -78,7 +78,7 @@
     "fakerphp/faker": "^1.16",
     "larastan/larastan": "^2.9",
     "mockery/mockery": "^1.4",
-    "nunomaduro/phpinsights": "^2.7",
+    "nunomaduro/phpinsights": "^2.11",
     "php-mock/php-mock-phpunit": "^2.10",
     "phpunit/phpunit": "^10.0",
     "squizlabs/php_codesniffer": "^3.5",
@@ -120,7 +120,9 @@
     ],
     "post-create-project-cmd": [
       "php artisan key:generate"
-    ]
+    ],
+    "coverage:herd:clover": "herd coverage vendor/bin/phpunit --coverage-clover tests/coverage/clover.xml",
+    "coverage:herd:html": "herd coverage vendor/bin/phpunit --coverage-html tests/coverage/html"
   },
   "config": {
     "preferred-install": "dist",
