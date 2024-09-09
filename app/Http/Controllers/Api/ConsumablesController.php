@@ -86,6 +86,9 @@ class ConsumablesController extends Controller
             case 'company':
                 $consumables = $consumables->OrderCompany($order);
                 break;
+            case 'remaining':
+                $consumables = $consumables->OrderRemaining($order);
+                break;
             case 'supplier':
                 $consumables = $consumables->OrderSupplier($order);
                 break;
