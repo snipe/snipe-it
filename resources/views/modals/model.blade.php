@@ -22,27 +22,12 @@
                     </div>
                 </div>
 
-                <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-manufacturer_id">{{ trans('general.manufacturer') }}:
-                        </label></div>
-                    <div class="col-md-8 col-xs-12">
-                        <select class="js-data-ajax" data-endpoint="manufacturers" name="manufacturer_id" style="width: 100%" id="modal-manufacturer_id"></select>
-                    </div>
-                </div>
 
-                <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-modelno">{{ trans('general.model_no') }}:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='text' name="model_number" id='modal-model_number' class="form-control"></div>
-                </div>
-
-                <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-fieldset_id">{{ trans('admin/models/general.fieldset') }}:</label></div>
-                    <div class="col-md-8 col-xs-12">{{ Form::select('fieldset_id', Helper::customFieldsetList(),old('fieldset_id'), array('class'=>'select2', 'id'=>'modal-fieldset_id', 'style'=>'width:350px')) }}</div>
-                </div>
+                @include('modals.partials.manufacturer-select')
+                @include('modals.partials.model-number')
+                @include('modals.partials.fieldset-select')
+            </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
-            <button type="button" class="btn btn-primary" id="modal-save">{{ trans('general.save') }}</button>
-        </div>
+       @include('modals.partials.footer')
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
