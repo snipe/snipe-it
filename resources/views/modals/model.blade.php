@@ -9,20 +9,8 @@
             <form action="{{ route('api.models.store') }}" onsubmit="return false">
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-                <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
-                        </label></div>
-                    <div class="col-md-8 col-xs-12 required"><input type='text' name="name" id='modal-name' class="form-control"></div>
-                </div>
-
-                <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-category_id">{{ trans('general.category') }}:</label></div>
-                    <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="categories/asset" name="category_id" style="width: 100%" id="modal-category_id"></select>
-                    </div>
-                </div>
-
-
+                @include('modals.partials.name')
+                @include('modals.partials.categories-select')
                 @include('modals.partials.manufacturer-select')
                 @include('modals.partials.model-number')
                 @include('modals.partials.fieldset-select')

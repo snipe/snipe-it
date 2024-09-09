@@ -95,10 +95,7 @@
                     
                 </form>
             </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ trans('button.cancel') }}</button>
-            <button type="button" class="btn btn-primary pull-right" id="modal-save">{{ trans('general.save') }}</button>
-        </div>
+       @include('modals.partials.footer')
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 
