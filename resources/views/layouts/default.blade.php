@@ -426,11 +426,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- sidebar menu: : style can be found in sidebar.less -->
-                    @if(\App\Helpers\Helper::determineLanguageDirection() === 'rtl')
-                        <ul class="sidebar-menu" data-widget="tree" style="margin-right:12px;">
-                    @else
-                        <ul class="sidebar-menu" data-widget="tree">
-                    @endif
+                    <ul class="sidebar-menu" data-widget="tree" style="margin-right: {{ \App\Helpers\Helper::determineLanguageDirection() === 'rtl' ? '12px' : '0px' }};">
                         @can('admin')
                             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!} class="firstnav">
                                 <a href="{{ route('home') }}">
