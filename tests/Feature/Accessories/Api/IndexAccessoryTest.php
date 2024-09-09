@@ -5,12 +5,12 @@ namespace Tests\Feature\Accessories\Api;
 use App\Models\User;
 use Tests\TestCase;
 
-class AccessoryStoreTest extends TestCase
+class IndexAccessoryTest extends TestCase
 {
-    public function testPermissionRequiredToStoreAccessory()
+    public function testPermissionRequiredToViewAccessoriesIndex()
     {
         $this->actingAsForApi(User::factory()->create())
-            ->postJson(route('api.accessories.store'))
+            ->getJson(route('api.accessories.index'))
             ->assertForbidden();
     }
 }

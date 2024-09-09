@@ -6,7 +6,7 @@ use App\Models\Accessory;
 use App\Models\User;
 use Tests\TestCase;
 
-class AccessoryDeleteTest extends TestCase
+class DeleteAccessoryTest extends TestCase
 {
     public function testPermissionRequiredToDeleteAccessory()
     {

@@ -6,14 +6,14 @@ use App\Models\Accessory;
 use App\Models\User;
 use Tests\TestCase;
 
-class AccessoryUpdateTest extends TestCase
+class ShowAccessoryTest extends TestCase
 {
-    public function testPermissionRequiredToUpdateAccessory()
+    public function testPermissionRequiredToShowAccessory()
     {
         $accessory = Accessory::factory()->create();
 
         $this->actingAsForApi(User::factory()->create())
-            ->patchJson(route('api.accessories.update', $accessory))
+            ->getJson(route('api.accessories.show', $accessory))
             ->assertForbidden();
     }
 }
