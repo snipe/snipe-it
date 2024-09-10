@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du diese Abschreibungsklasse löschen willst?',
+        'confirm'   => 'Bist du sicher, dass du diese Abschreibungsklasse löschen willst?',
         'error'   => 'Beim Löschen der Abschreibungsklasse ist ein Problem aufgetreten. Bitte versuche es erneut.',
         'success' => 'Die Abschreibungsklasse wurde erfolgreich gelöscht.'
     )

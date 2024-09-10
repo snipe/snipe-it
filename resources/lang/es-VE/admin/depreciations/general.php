@@ -6,9 +6,9 @@ return [
     'asset_depreciations'  					=> 'Depreciación de activos',
     'create'  					            => 'Crear depreciación',
     'depreciation_name'  					=> 'Nombre de depreciación',
-    'depreciation_min'                      => 'Valor del piso de la depreciación',
+    'depreciation_min'                      => 'Valor mínimo de depreciación',
     'number_of_months'  					=> 'Número de meses',
-    'update'  					            => 'Actualizar Depreciación',
+    'update'  					            => 'Actualizar depreciación',
     'depreciation_min'                      => 'Valor mínimo después de la depreciación',
     'no_depreciations_warning'               => '<strong>Advertencia: </strong>
                       No tiene ninguna depreciación configurada.

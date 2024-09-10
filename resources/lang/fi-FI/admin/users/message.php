@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Olet onnistuneesti hylännyt tämän laitteen.',
     'bulk_manager_warn'	        => 'Käyttäjät on onnistuneesti päivitetty, mutta esimies-merkintää ei tallennettu, koska valitsemasi esimies oli mukana käyttäjäluettelossa, eikä käyttäjä voi olla itsensä esimies. Valitse käyttäjät uudelleen, poislukien esimies.',
     'user_exists'               => 'Käyttäjä on jo luotu!',
-    'user_not_found'            => 'Käyttäjää ei löydy.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
     'user_has_no_assets_assigned' => 'Käyttäjälle ei tällä hetkellä ole määritetty omaisuutta.',
     'user_password_required'    => 'Salasana vaaditaan.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Haku LDAP-palvelimelta ei onnistunut ei voitu hakea. Tarkista LDAP-palvelimen määritys. <br>LDAP-palvelimen virhe:',
         'ldap_could_not_get_entries' => 'LDAP-palvelimelta ei palautunut kohteita. Tarkista LDAP-palvelimen määritys. <br>LDAP-palvelimen virhe:',
         'password_ldap' => 'Tätä salasanaa hallinnoi LDAP / Active Directory. Vaihda salasanasi IT-osastolla.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

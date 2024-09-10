@@ -43,11 +43,5 @@ return array(
         'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
-    'download' => [
-        'error'   => 'File(s) not downloaded. Please try again.',
-        'success' => 'File(s) successfully downloaded.',
-        'does_not_exist' => 'No file exists',
-        'no_match' => 'No matching record for that asset/file',
-    ],
 
 );

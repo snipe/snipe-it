@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Také odstranit tyto uživatele. Historie jejich majetku zůstane neporušená/dokud tvrvale nevymažete smazané záznamy v nastavení správce.',
     'bulk_checkin_delete_success' => 'Vybraní uživatelé byli odstraněni a jejich položky byly odebrány.',
     'bulk_checkin_success' => 'Položky vybraných uživatelů byly odebrány.',
-    'set_to_null'           => 'Odstranit hodnoty z aktiva|Odstranit hodnoty z :asset_count aktiv ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Odstranit hodnoty :field pro tohoto uživatele|Odstranit :field hodnoty pro všechny :user_count uživatele ',
     'na_no_purchase_date'   => 'N/A – neznámé datum nákupu',
     'assets_by_status'      => 'Majetek podle stavu',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Vyprší',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

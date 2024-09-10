@@ -31,6 +31,8 @@ return [
     'backups'					=> 'バックアップ',
     'backups_help'              => 'バックアップの作成、ダウンロード、および復元 ',
     'backups_restoring'         => 'バックアップから復元中',
+    'backups_clean' => '復元する前にバックアップされたデータベースをクリーンアップします',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'バックアップをアップロード',
     'backups_path'              => 'サーバー上のバックアップは <code>:path</code> に保存されています',
     'backups_restore_warning'   => '復元ボタンで <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 過去のバックアップから復元できます。(S3ファイルサーバーやDockerがサポートされません。)<br><br>ご利用中の <strong> :app_name のデータベース全体と全てのアップロードされたファイルがバックアップの内容で上書きされます。</strong>  ',

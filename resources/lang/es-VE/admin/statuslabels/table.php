@@ -15,5 +15,5 @@ return array(
     'show_in_nav'   => 'Mostrar en la barra lateral',
     'title'      	=> 'Etiquetas de estado',
     'undeployable'  => 'No utilizable',
-    'update'      	=> 'Actualizar Etiqueta de Estado',
+    'update'      	=> 'Actualizar la etiqueta de estado',
 );

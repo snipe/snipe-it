@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Dhiúltaigh tú an tsócmhainn seo go rathúil.',
     'bulk_manager_warn'	        => 'Rinneadh do chuid úsáideoirí a nuashonrú go rathúil, áfach, níor shábháil do iontráil bainisteora toisc go raibh an bainisteoir a roghnaigh tú chomh maith sa liosta úsáideora le bheith in eagar, agus b\'fhéidir nach mbainfeadh úsáideoirí a mbainisteoir féin. Roghnaigh d\'úsáideoirí arís, gan an bainisteoir a áireamh.',
     'user_exists'               => 'Úsáideoir ann cheana!',
-    'user_not_found'            => 'Níl an t-úsáideoir ann.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Is gá an réimse logála isteach',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Tá an focal faire ag teastáil.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Níorbh fhéidir an freastalaí LDAP a chuardach. Seiceáil do chumraíocht an fhreastalaí LDAP sa chomhad cumraíochta LDAP. <br>Error ó Freastalaí LDAP:',
         'ldap_could_not_get_entries' => 'Níorbh fhéidir iontrálacha a fháil ón fhreastalaí LDAP. Seiceáil do chumraíocht an fhreastalaí LDAP sa chomhad cumraíochta LDAP. <br>Error ó Freastalaí LDAP:',
         'password_ldap' => 'Bainistíonn LDAP / Active Directory an focal faire don chuntas seo. Téigh i dteagmháil le do roinn TF chun do phasfhocal a athrú.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

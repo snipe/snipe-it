@@ -125,7 +125,7 @@ return [
         'symbols' => ':attribute 字段必须至少包含一个符号。',
         'uncompromised' => '给定的 :attribute 字段出现在数据泄漏中。请选择一个不同的 :attribute 。',
     ],
-    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+    'percent'       => '当折旧类型为百分比时，折旧的最小值必须在0到100之间。',
 
     'present' => '：属性字段必须存在。',
     'present_if' => '当 :other 为 :value 时，:attribute 字段必须存在。',

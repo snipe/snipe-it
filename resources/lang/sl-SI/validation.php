@@ -229,7 +229,7 @@ return [
 
     'generic' => [
         'invalid_value_in_field' => 'Invalid value included in this field',
-        'required' => 'This field is required',
+        'required' => 'To polje je obvezno',
         'email' => 'Please enter a valid email address',
     ],
 

@@ -12,8 +12,8 @@ return array(
     'name'      	=> 'Nombre de estado',
     'pending'      	=> 'Pendiente',
     'status_type'   => 'Tipo de estado',
-    'show_in_nav'   => 'Mostrar en barra lateral',
+    'show_in_nav'   => 'Mostrar en la barra lateral',
     'title'      	=> 'Etiquetas de estado',
     'undeployable'  => 'No utilizable',
-    'update'      	=> 'Actualizar Etiqueta de Estado',
+    'update'      	=> 'Actualizar la etiqueta de estado',
 );

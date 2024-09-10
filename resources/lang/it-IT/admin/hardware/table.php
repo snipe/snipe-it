@@ -8,7 +8,7 @@ return [
     'book_value'  	=> 'Valore Attuale',
     'change' 		=> 'Dentro/Fuori',
     'checkout_date' => 'Data di estrazione',
-    'checkoutto' 	=> 'Estratto',
+    'checkoutto' 	=> 'Assegnato',
     'components_cost' => 'Costo Totale Componenti',
     'current_value' => 'Valore Attuale',
     'diff' 			=> 'Differenza',

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'คุณปฏิเสธสินทรัพย์นี้เรียบร้อยแล้ว',
     'bulk_manager_warn'	        => 'ผู้ใช้ของคุณได้รับการอัปเดตแล้วแม้ว่ารายการผู้จัดการจะไม่ได้รับการบันทึกเนื่องจากผู้จัดการที่คุณเลือกอยู่ในรายชื่อผู้ใช้ที่จะแก้ไขและผู้ใช้ต้องไม่เป็นผู้จัดการของตัวเอง โปรดเลือกผู้ใช้ของคุณอีกครั้งโดยไม่รวมผู้จัดการ',
     'user_exists'               => 'มีผู้ใช้งานนี้แล้ว',
-    'user_not_found'            => 'ไม่มีผู้ใช้',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'ต้องการชื่อผู้ใช้งาน',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'ต้องการรหัสผ่าน',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'ไม่สามารถค้นหา LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
         'ldap_could_not_get_entries' => 'ไม่สามารถดึงข้อมูลจาก LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
         'password_ldap' => 'รหัสผ่านสำหรับบัญชีนี้ได้รับการจัดการโดย LDAP / Active Directory โปรดติดต่อฝ่ายไอทีของคุณเพื่อเปลี่ยนรหัสผ่านของคุณ',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

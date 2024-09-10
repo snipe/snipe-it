@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Também exclua esses utilizadores. O seu histórico de ativos permanecerá intacto a menos que / até que purgue os registos apagados nas configurações do Administrador.',
     'bulk_checkin_delete_success' => 'Os utilizadores selecionados foram apagados e os seus itens foram entregues.',
     'bulk_checkin_success' => 'Os itens para os utilizadores selecionados foram recebidos.',
-    'set_to_null'           => 'Apagar valores para este artigo|Apagar valores para todos os :asset_count ativos ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Apagar os valores de :field para este utilizador|Apagar os valores de :field para todos :user_count utilizadores ',
     'na_no_purchase_date'   => 'N/D - Nenhuma data de compra fornecida',
     'assets_by_status'      => 'Artigos por Estado',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Expira a',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];
