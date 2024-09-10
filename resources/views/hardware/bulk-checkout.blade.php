@@ -85,7 +85,7 @@
 
                 </div> <!--./box-body-->
                 <div class="box-footer">
-                    <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+                    <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('general.back') }}</a>
                     <button type="submit" id="checkinout_button" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
                 </div>
             </div>
