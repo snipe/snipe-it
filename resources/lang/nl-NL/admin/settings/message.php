@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Weet je zeker dat je je database wilt herstellen met :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => 'Uw systeemback-up is hersteld. Log opnieuw in.'
     ],
     'purge' => [
         'error'     => 'Er is iets fout gegaan tijdens het opschonen.',

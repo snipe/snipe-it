@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Samt ta bort dessa användare. Deras tillgångshistorik kommer att förbli intakt om inte/tills du rensar bort borttagna poster i administratörsinställningarna.',
     'bulk_checkin_delete_success' => 'Dina valda användare har tagits bort och deras objekt har checkats in.',
     'bulk_checkin_success' => 'Objekten för de valda användarna har checkats in.',
-    'set_to_null'           => 'Ta bort värden för denna tillgång|Ta bort värden för alla :asset_count tillgångar ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Ta bort :field värden för denna användare|Ta bort :field värden för alla :user_count användare ',
     'na_no_purchase_date'   => 'N/A - Inget inköpsdatum angivet',
     'assets_by_status'      => 'Tillgångar efter status',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Utgår',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

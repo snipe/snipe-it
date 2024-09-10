@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Vyberte jazyk',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Angličtina, USA',
         'en-GB'=> 'Angličtina, UK',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zuluština',
     ],
 
-    'select_country' => 'Zvolte stát',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ostrov Ascension',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ekvádor',
         'EE'=>'Estonsko',
         'EG'=>'Egypt',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Španělsko',
         'ET'=>'Etiopie',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigérie',
         'NI'=>'Nikaragua',
         'NL'=>'Nizozemsko',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norsko',
         'NP'=>'Nepál',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Ruská federace',
         'RW'=>'Rwanda',
         'SA'=>'Saúdská Arábie',
-        'UK'=>'Skotsko',
+        'GB-SCT'=>'Skotsko',
         'SB'=>'Šalamounovy ostrovy',
         'SC'=>'Seychelles',
         'SS'=>'Jižní Súdán',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Americké Panenské ostrovy',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Ostrovy Wallis a Futuna',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

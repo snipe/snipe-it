@@ -13,17 +13,17 @@ return [
     |
     */
 
-    'accepted' => 'The :attribute field must be accepted.',
-    'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
-    'active_url' => 'The :attribute field must be a valid URL.',
-    'after' => 'The :attribute field must be a date after :date.',
-    'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
-    'alpha' => 'The :attribute field must only contain letters.',
-    'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
-    'alpha_num' => 'The :attribute field must only contain letters and numbers.',
-    'array' => 'The :attribute field must be an array.',
-    'ascii' => 'The :attribute field must only contain single-byte alphanumeric characters and symbols.',
-    'before' => 'The :attribute field must be a date before :date.',
+    'accepted' => 'Il campo :attribute deve essere accettato.',
+    'accepted_if' => 'Il campo :attribute deve essere accettato quando :other è :value.',
+    'active_url' => 'Il campo :attribute deve essere un URL valido.',
+    'after' => 'Il campo :attribute deve essere una data successiva a :date.',
+    'after_or_equal' => 'Il campo :attribute deve essere una data successiva o uguale a :date.',
+    'alpha' => 'Il campo :attribute deve contenere solo lettere.',
+    'alpha_dash' => 'Il campo :attribute deve contenere solo lettere, numeri, trattini o trattini bassi.',
+    'alpha_num' => 'Il campo :attribute deve contenere solo lettere e numeri.',
+    'array' => 'Il campo :attribute deve essere un array.',
+    'ascii' => 'Il campo :attribute deve contenere solo caratteri alfanumerici e simboli a byte singolo.',
+    'before' => 'Il campo :attribute deve essere una data precedente il :date.',
     'before_or_equal' => 'The :attribute field must be a date before or equal to :date.',
     'between' => [
         'array' => 'The :attribute field must have between :min and :max items.',
@@ -108,8 +108,8 @@ return [
         'numeric' => 'The :attribute field must be at least :min.',
         'string' => 'The :attribute field must be at least :min characters.',
     ],
-    'min_digits' => 'The :attribute field must have at least :min digits.',
-    'missing' => 'The :attribute field must be missing.',
+    'min_digits' => 'Il campo :attribute deve avere almeno :min cifre.',
+    'missing' => 'Il campo :attribute deve mancare.',
     'missing_if' => 'The :attribute field must be missing when :other is :value.',
     'missing_unless' => 'The :attribute field must be missing unless :other is :value.',
     'missing_with' => 'The :attribute field must be missing when :values is present.',
@@ -117,9 +117,9 @@ return [
     'multiple_of' => 'The :attribute field must be a multiple of :value.',
     'not_in' => ':attribute selezionato non è valido.',
     'not_regex' => 'The :attribute field format is invalid.',
-    'numeric' => 'The :attribute field must be a number.',
+    'numeric' => 'Il campo :attribute deve essere un numero.',
     'password' => [
-        'letters' => 'The :attribute field must contain at least one letter.',
+        'letters' => 'Il campo :attribute deve contenere almeno una lettera.',
         'mixed' => 'The :attribute field must contain at least one uppercase and one lowercase letter.',
         'numbers' => 'The :attribute field must contain at least one number.',
         'symbols' => 'The :attribute field must contain at least one symbol.',
@@ -169,7 +169,7 @@ return [
     'unique' => ':attribute è già stato preso.',
     'uploaded' => 'Non è stato possibile caricare :attribute.',
     'uppercase' => 'The :attribute field must be uppercase.',
-    'url' => 'The :attribute field must be a valid URL.',
+    'url' => 'Il campo :attribute deve essere un URL valido.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
@@ -229,8 +229,8 @@ return [
 
     'generic' => [
         'invalid_value_in_field' => 'Valore non valido incluso in questo campo',
-        'required' => 'This field is required',
-        'email' => 'Please enter a valid email address',
+        'required' => 'Questo campo è obbligatorio',
+        'email' => 'Inserire un indirizzo e-mail valido',
     ],
 
 

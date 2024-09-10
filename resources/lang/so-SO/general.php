@@ -418,7 +418,7 @@ return [
     'bulk_soft_delete'      =>'Sidoo kale jilicsan-tirtir isticmaalayaashan. Taariikhdooda hantiyeed way ahaan doontaa ilaa aad ka nadiifiso diiwaanada la tirtiray ee goobaha maamulka.',
     'bulk_checkin_delete_success' => 'Isticmaalayaasha aad dooratay waa la tirtiray oo alaabtooda waa la hubiyay.',
     'bulk_checkin_success' => 'Alaabta isticmaalayaasha la xushay waa la hubiyay',
-    'set_to_null'           => 'Tirtir qiyamka hantidan|Tirtir qiyamka dhammaan :asset_count hantida ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Tirtir :field qiyamka isticmaalaha|Tirtir :field qiimayaasha dhammaan :user_count isticmaalayaasha ',
     'na_no_purchase_date'   => 'N/A - Taariikhda iibsi lama bixin',
     'assets_by_status'      => 'Hantida xaalka',
@@ -558,8 +558,8 @@ return [
     'expires' => 'Dhacaya',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

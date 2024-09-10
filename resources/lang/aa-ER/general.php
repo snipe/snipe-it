@@ -418,7 +418,7 @@ return [
     'bulk_soft_delete'      =>'crwdns10524:0crwdne10524:0',
     'bulk_checkin_delete_success' => 'crwdns10526:0crwdne10526:0',
     'bulk_checkin_success' => 'crwdns10528:0crwdne10528:0',
-    'set_to_null'           => 'crwdns10538:0crwdne10538:0',
+    'set_to_null'           => 'crwdns12738:0crwdne12738:0',
     'set_users_field_to_null'  => 'crwdns11449:0crwdne11449:0',
     'na_no_purchase_date'   => 'crwdns10540:0crwdne10540:0',
     'assets_by_status'      => 'crwdns10542:0crwdne10542:0',
@@ -558,8 +558,8 @@ return [
     'expires' => 'crwdns12310:0crwdne12310:0',
     'map_fields'=> 'crwdns12572:0crwdne12572:0',
     'remaining_var' => 'crwdns12612:0crwdne12612:0',
-    'assets_in_var' => 'crwdns12688:0crwdne12688:0',
     'label' => 'crwdns12690:0crwdne12690:0',
     'import_asset_tag_exists' => 'crwdns12692:0crwdne12692:0',
+    'countries_manually_entered_help' => 'crwdns12702:0crwdne12702:0',
 
 ];

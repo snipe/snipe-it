@@ -11,7 +11,7 @@ return [
     'checkout'  				=> 'Asignar activo',
     'clone'  					=> 'Clonar activo',
     'deployable'  				=> 'Utilizable',
-    'deleted'  					=> 'Este activo ha sido borrado.',
+    'deleted'  					=> 'Este activo ha sido eliminado.',
     'delete_confirm'            => '¿Está seguro de que desea eliminar este activo?',
     'edit'  					=> 'Editar activo',
     'model_deleted'  			=> 'Este modelo de activo ha sido eliminado. Debe restaurar este modelo antes de poder restaurar el activo.',
@@ -36,7 +36,7 @@ return [
     'error_messages' => 'Mensajes de error:',
     'success_messages' => 'Mensajes de éxito:',
     'alert_details' => 'Por favor vea abajo para más detalles.',
-    'custom_export' => 'Exportación personalizada',
+    'custom_export' => 'Personalizar exportación',
     'mfg_warranty_lookup' => 'Búsqueda del estado de garantía para :manufacturer',
-    'user_department' => 'Departamento de Usuario',
+    'user_department' => 'Departamento del usuario',
 ];

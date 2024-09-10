@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Varmuuskopiot',
     'backups_help'              => 'Luo, lataa ja palauta varmuuskopiota ',
     'backups_restoring'         => 'Palauta varmuuskopiosta',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Lataa varmuuskopio',
     'backups_path'              => 'Varmuuskopiot ovat tallennettuna palvelimelle polulla <code>:path</code>',
     'backups_restore_warning'   => 'Käytä palautuspainiketta <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> palauttaaksesi aiemman varmuuskopion. (Tämä ei tällä hetkellä toimi S3 tallennustilan tai Dockerin kanssa.)<br><br><strong>Koko :app_name tietokantasi ja kaikki ladatut tiedostot korvataan kokonaan</strong> sillä, mitä on varmuuskopiotiedostossa.  ',

@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Piilota myös nämä käyttäjät. Heidän laitehistoria säilyy ennallaan ellet/kunnes puhdistat poistetut tietueet Admin Asetuksista.',
     'bulk_checkin_delete_success' => 'Valitut käyttäjät on poistettu ja heidän kohteet on palautettu.',
     'bulk_checkin_success' => 'Valittujen käyttäjien laitteet on palautettu.',
-    'set_to_null'           => 'Poista tämän laitteen arvot|Poista arvot kaikille :asset_count laitteille ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Poista tämän käyttäjän :field -arvot|Poista :field -arvot kaikilta : user_count käyttäjältä ',
     'na_no_purchase_date'   => 'N/A - ostopäivää ei annettu',
     'assets_by_status'      => 'Laitteet tilan mukaan',
@@ -559,8 +559,8 @@ return [
     'expires' => 'vanhenee',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

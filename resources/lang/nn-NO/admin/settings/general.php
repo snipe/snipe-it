@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Sikkerhetskopier',
     'backups_help'              => 'Opprette, laste ned og gjenopprette sikkerhetskopier ',
     'backups_restoring'         => 'Gjenoppretting fra sikkerhetskopi',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Last opp sikkerhetskopi',
     'backups_path'              => 'Sikkerhetskopier på tjeneren lagres i <code>:path</code>',
     'backups_restore_warning'   => 'Bruk gjenopprettingsknappen <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> for å gjenopprette fra en tidligere sikkerhetskopi. (Dette fungerer ikke med S3-fillagring eller Docker.)<br><br>Din <strong>hele :app_name databasen og eventuelle opplastede filer vil bli fullstendig erstattet</strong> av det som er i sikkerhetskopifilen.  ',

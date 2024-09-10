@@ -7,7 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Restituisci tutto / Elimina utente',
     'delete'  	                => 'Cancella',
     'edit'    	                => 'Modifica',
-    'clone'    	                => 'Clone',
+    'clone'    	                => 'Clona',
     'restore' 	                => 'Ripristina',
     'remove'                    => 'Rimuovi',
     'request'                   => 'Richiedi',
@@ -23,12 +23,12 @@ return [
     'append'                    => 'Aggiungi',
     'new'                       => 'Nuovo',
     'var' => [
-        'clone'     => 'Clone :item_type',
-        'edit'      => 'Edit :item_type',
-        'delete'    => 'Delete :item_type',
-        'restore'   => 'Restore :item_type',
-        'create'    => 'Create New :item_type',
-        'checkout'  => 'Checkout :item_type',
-        'checkin'   => 'Checkin :item_type',
+        'clone'     => 'Clona :item_type',
+        'edit'      => 'Modifica :item_type',
+        'delete'    => 'Elimina :item_type',
+        'restore'   => 'Ripristina :item_type',
+        'create'    => 'Crea Nuovo :item_type',
+        'checkout'  => 'Assegna :item_type',
+        'checkin'   => 'Restituisci :item_type',
     ]
 ];

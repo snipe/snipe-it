@@ -21813,9 +21813,6 @@ body {
   float: left;
   margin: 0;
 }
-.select2-selection__rendered needsclick {
-  color: red;
-}
 .select2-results__option {
   padding: 5px;
   -moz-user-select: none;
@@ -23285,9 +23282,6 @@ body {
   height: 35px !important;
   float: left;
   margin: 0;
-}
-.select2-selection__rendered needsclick {
-  color: red;
 }
 .select2-results__option {
   padding: 5px;
