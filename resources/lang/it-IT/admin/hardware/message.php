@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Attenzione: </strong> Questo Bene è stato marcato come non distribuibile. Se lo stato del Bene è cambiato si prega di aggiornarlo.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
     'does_not_exist_var'=> 'Bene con tag :asset_tag non trovato.',
     'no_tag' 	        => 'Nessun tag del Bene è stato fornito.',
@@ -51,7 +51,7 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Importa Processo',
         'error'                 => 'Alcuni elementi non sono stati importati correttamente.',
         'errorDetail'           => 'Gli articoli seguenti non sono stati importati correttamente a causa di errori.',
         'success'               => 'Il file è stato importato con successo',

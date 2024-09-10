@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Fjern også disse brukerne ved å fjerne deres eiendelshistorikk intakt/til du fjerner slettede poster i Admin-innstillingene.',
     'bulk_checkin_delete_success' => 'Dine valgte brukere er slettet og deres elementer har blitt sjekket inn.',
     'bulk_checkin_success' => 'Elementene for de valgte brukerne har blitt sjekket inn.',
-    'set_to_null'           => 'Slette verdier for denne eiendelen Slett verdier for alle :asset_count eiendeler ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Slett :field verdier for denne brukeren. Slett :field verdier for alle :user_count brukere ',
     'na_no_purchase_date'   => 'N/A - Ingen kjøpsdato oppgitt',
     'assets_by_status'      => 'Eiendeler etter status',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Utløper',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

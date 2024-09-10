@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Odmietnutie majetku bolo úspešné.',
     'bulk_manager_warn'	        => 'Používatelia boli úspešné aktualizovaný, avčak položka manažér nebola uložená, pretože zvolený manažér sa taktiež nachádzal v zoznam na úpravu a používatel nemôže byť sám sebe manazérom. Prosim zvoľte Vašich používateľov znovu s vynechaním manažéera.',
     'user_exists'               => 'Používateľ už existuje!',
-    'user_not_found'            => 'User does not exist.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Prihlasovacie meno je povinné',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Heslo je povinné.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nepodarilo sa vyhladať v rámci LDAP serveru. Prosím skontrolujte nastavenia LDAP serveru v Admin nastavenia > LDAP/AD a všetky lokality ktoré môžu mať nastavené OU. <br>Chyba LDAP serveru:',
         'ldap_could_not_get_entries' => 'Nepodarilo sa získať záznamy z LDAP servera. Prosím skontrolujte nastavenia LDAP serveru v Admin nastavenia > LDAP/AD a všetky lokality ktoré môžu mať nastavené OU. <br>Chyba LDAP serveru:',
         'password_ldap' => 'Heslo pre tento účet je spravované cez LDAP/Active Directory. Pre zmneu hesla prosím kontaktujte Vaše IT oddelenie. ',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

@@ -2,8 +2,8 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
-    'not_found' => 'That accessory was not found.',
+    'does_not_exist' => 'Додатокот [:id] не постои.',
+    'not_found' => 'Додатокот не е пронајден.',
     'assoc_users'	 => 'Овој додаток во моментов има :count ставки задолжени на корисници. Ве молиме проверете во додатоците и обидете се повторно. ',
 
     'create' => array(
@@ -25,10 +25,10 @@ return array(
      'checkout' => array(
         'error'   		=> 'Додатокот не беше задолжен, обидете се повторно',
         'success' 		=> 'Додатокот е задолжен.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Додатокот не е достапен за позајмување. Проверете ја достапната количина',
         'user_does_not_exist' => 'Тој корисник е неважечки. Обидете се повторно.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Во моментов е достапен само еден додаток од овој тип, а вие се обидувате да позајмите :checkout_qty. Ве молиме, прилагодете ја количината за позајмување или вкупната залиха на овој додаток и обидете се повторно. Има вкупно :number_currently_remaining достапни додатоци, а вие се обидувате да позајмите :checkout_qty. Ве молиме, прилагодете ја количината за позајмување или вкупната залиха на овој додаток и обидете се повторно.',
             ),
            
     ),

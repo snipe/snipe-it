@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Selecione um idioma',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Inglês, EUA',
         'en-GB'=> 'Inglês, Reino Unido',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Selecione um país',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ilha de Ascensão',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Equador',
         'EE'=>'Estónia',
         'EG'=>'Egito',
+        'GB-ENG'=>'England',
         'ER'=>'Eritreia',
         'ES'=>'Espanha',
         'ET'=>'Etiópia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigéria',
         'NI'=>'Nicarágua',
         'NL'=>'Países Baixos',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Noruega',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Federação Russa',
         'RW'=>'Ruanda',
         'SA'=>'Arábia Saudita',
-        'UK'=>'Escócia',
+        'GB-SCT'=>'Escócia',
         'SB'=>'Ilhas Salomão',
         'SC'=>'Seychelles',
         'SS'=>'Sudão do Sul',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Ilhas Virgens (E.U.A)',
         'VN'=>'Vietname',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Ilhas Wallis e Futuna',
         'WS'=>'Samoa',
         'YE'=>'Iémen',

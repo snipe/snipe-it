@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Jūs esat veiksmīgi atteicies no šī īpašuma.',
     'bulk_manager_warn'	        => 'Jūsu lietotāji ir veiksmīgi atjaunināti, taču jūsu pārvaldnieka ieraksts netika saglabāts, jo izvēlētā pārvaldnieks bija arī rediģējamo lietotāju sarakstā, un lietotāji, iespējams, nav viņu īpašnieks. Lūdzu, vēlreiz atlasiet savus lietotājus, izņemot pārvaldnieku.',
     'user_exists'               => 'Lietotājs jau eksistē!',
-    'user_not_found'            => 'Lietotājs neeksistē.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Ievades lauks ir nepieciešams',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Parole ir nepieciešama.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nevarēja meklēt LDAP serverī. Lūdzu, pārbaudiet LDAP servera konfigurāciju LDAP konfigurācijas failā. <br>Par LDAP servera kļūda:',
         'ldap_could_not_get_entries' => 'Nevarēja iegūt ierakstus no LDAP servera. Lūdzu, pārbaudiet LDAP servera konfigurāciju LDAP konfigurācijas failā. <br>Par LDAP servera kļūda:',
         'password_ldap' => 'Šī konta paroli pārvalda LDAP / Active Directory. Lai mainītu savu paroli, lūdzu, sazinieties ar IT nodaļu.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

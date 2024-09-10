@@ -7,7 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Skrá inn allt / Eyða notenda',
     'delete'  	                => 'Eyða',
     'edit'    	                => 'Breyta',
-    'clone'    	                => 'Clone',
+    'clone'    	                => 'Klóna',
     'restore' 	                => 'Endurheimta',
     'remove'                    => 'Fjarlægja',
     'request'                   => 'Óska eftir',

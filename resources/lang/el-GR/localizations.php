@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Επιλέξτε μια γλώσσα',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Αγγλικά, ΗΠΑ',
         'en-GB'=> 'Αγγλικά, Ηνωμένο Βασίλειο',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Επιλέξτε μια χώρα',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Νήσος Αναλήψεως',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Εσθονία',
         'EG'=>'Αίγυπτος',
+        'GB-ENG'=>'England',
         'ER'=>'Ερυθραία',
         'ES'=>'Ισπανία',
         'ET'=>'Ethiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Ολλανδία',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Νορβηγία',
         'NP'=>'Νεπάλ',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Ρωσική Ομοσπονδία',
         'RW'=>'Rwanda',
         'SA'=>'Σαουδική Αραβία',
-        'UK'=>'Σκωτία',
+        'GB-SCT'=>'Σκωτία',
         'SB'=>'Νήσοι Σολομώντος',
         'SC'=>'Seychelles',
         'SS'=>'Νότιο Σουδάν',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Παρθένες Νήσοι (Η.Π.Α.)',
         'VN'=>'Viet Nam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Νήσοι Ουώλλις Και Φουτούνα',
         'WS'=>'Samoa',
         'YE'=>'Υεμένη',

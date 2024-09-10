@@ -18,7 +18,7 @@ return [
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
     'send_password_link'        => 'Испрати врска за ресетирање на лозинка',
     'go'                        => 'Go',
-    'bulk_actions'              => 'Bulk Actions',
+    'bulk_actions'              => 'Масовни дејства',
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
     'new'                       => 'Ново',

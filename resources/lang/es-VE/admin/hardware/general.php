@@ -38,5 +38,5 @@ return [
     'alert_details' => 'Por favor vea abajo para más detalles.',
     'custom_export' => 'Personalizar exportación',
     'mfg_warranty_lookup' => 'Búsqueda del estado de garantía para :manufacturer',
-    'user_department' => 'Departamento de Usuario',
+    'user_department' => 'Departamento del usuario',
 ];

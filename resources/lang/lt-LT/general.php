@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Taip pat, panaikinti šiuos naudotojus. Jų turto istorija išliks nepakitusi, kol neišvalysite ištrintų įrašų administratoriaus nustatymuose.',
     'bulk_checkin_delete_success' => 'Jūsų pasirinkti naudotojai buvo panaikinti, o jų daiktai buvo paimti.',
     'bulk_checkin_success' => 'Nurodytų naudotojų daiktai buvo paimti.',
-    'set_to_null'           => 'Išvalyti šio turto reikšmes|Išvalyti visų :asset_count turto vienetų reikšmes ',
+    'set_to_null'           => 'Ištrinti šio pasirinkimo reikšmes|Ištrinti visų :selection_count pasirinkimų reikšmes ',
     'set_users_field_to_null'  => 'Išvalyti :field reikšmes šiam naudotojui|Išvalyti :field reikšmes visiems :user_count naudotojams ',
     'na_no_purchase_date'   => 'N/D - Nenurodyta įsigijimo data',
     'assets_by_status'      => 'Turtas pagal būseną',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Baigiasi',
     'map_fields'=> 'Susieti :item_type lauką',
     'remaining_var' => ':count liko',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Etiketė',
     'import_asset_tag_exists' => 'Turtas su inventoriniu numeriu :asset_tag jau yra ir atnaujinimo užklausa nebuvo pateikta. Jokie pakeitimai nebuvo atlikti.',
+    'countries_manually_entered_help' => 'Žvaigždute (*) pažymėtos reikšmės buvo įvestos rankiniu būdu ir neatitinka esamų ISO 3166 išskleidžiamojo sąrašo reikšmių',
 
 ];

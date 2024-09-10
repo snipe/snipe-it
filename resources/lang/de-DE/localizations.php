@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Sprache auswählen',
+    'select_language' => 'Wählen Sie eine Sprache',
     'languages' => [
         'en-US'=> 'Englisch, USA',
         'en-GB'=> 'Englisch, UK',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Land auswählen',
+    'select_country' => 'Wählen Sie ein Land',
     
     'countries' => [
         'AC'=>'Ascensionsinsel',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Estland',
         'EG'=>'Ägypten',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Spanien',
         'ET'=>'Äthiopien',
@@ -234,6 +235,7 @@ im Indischen Ozean',
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Niederlande',
+        'GB-NIR' => 'Nordirland',
         'NO'=>'Norwegen',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -261,7 +263,7 @@ im Indischen Ozean',
         'RU'=>'Russland',
         'RW'=>'Ruanda',
         'SA'=>'Saudi-Arabien',
-        'UK'=>'Schottland',
+        'GB-SCT'=>'Schottland',
         'SB'=>'Salomon-Inseln',
         'SC'=>'Seychellen',
         'SS'=>'Südsudan',
@@ -313,6 +315,7 @@ im Indischen Ozean',
         'VI'=>'Amerikanische Jungferninseln',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis und Futuna',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

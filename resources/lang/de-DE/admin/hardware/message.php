@@ -58,7 +58,7 @@ return [
         'file_delete_success'   => 'Die Datei wurde erfolgreich gelöscht',
         'file_delete_error'      => 'Die Datei konnte nicht gelöscht werden',
         'file_missing' => 'Die ausgewählte Datei fehlt',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => 'Die ausgewählte Datei wurde bereits gelöscht',
         'header_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der Kopfzeile enthalten fehlerhafte UTF-8 Zeichen',
         'content_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der ersten Zeile des Inhalts enthalten fehlerhafte UTF-8-Zeichen',
     ],

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Az eszközt sikeresen csökkentetted.',
     'bulk_manager_warn'	        => 'A felhasználók sikeresen frissültek, azonban a kezelői bejegyzést nem mentette el, mert a kiválasztott kezelő a szerkesztőben is szerepel a felhasználók listájában, és a felhasználók nem lehetnek saját kezelőik. Kérjük, ismét válassza ki a felhasználókat, kivéve a kezelőt.',
     'user_exists'               => 'Felhasználó már létezik!',
-    'user_not_found'            => 'Felhasználó nem létezik.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'A bejelentkezési mező kötelező',
     'user_has_no_assets_assigned' => 'A felhasználóhoz jelenleg nincs hozzárendelve eszköz.',
     'user_password_required'    => 'A jelszó szükséges.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nem sikerült keresni az LDAP kiszolgálót. Ellenőrizze az LDAP kiszolgáló konfigurációját az LDAP konfigurációs fájlban. <br>Az LDAP kiszolgáló hibája:',
         'ldap_could_not_get_entries' => 'Nem sikerült bejegyzéseket szerezni az LDAP kiszolgálóról. Ellenőrizze az LDAP kiszolgáló konfigurációját az LDAP konfigurációs fájlban. <br>Az LDAP kiszolgáló hibája:',
         'password_ldap' => 'A fiókhoz tartozó jelszót az LDAP / Active Directory kezeli. Kérjük, lépjen kapcsolatba informatikai részlegével a jelszó megváltoztatásához.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

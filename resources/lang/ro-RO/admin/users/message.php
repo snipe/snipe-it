@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Ați refuzat cu succes acest activ.',
     'bulk_manager_warn'	        => 'Utilizatorii dvs. au fost actualizați cu succes, cu toate acestea, intrarea managerului dvs. nu a fost salvată, deoarece managerul pe care l-ați selectat a fost, de asemenea, în lista de utilizatori care urmează să fie editat și este posibil ca utilizatorii să nu fie propriul manager. Selectați din nou utilizatorii dvs., cu excepția managerului.',
     'user_exists'               => 'Utilizatorul exista deja!',
-    'user_not_found'            => 'Utilizatorul nu exista.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Campul de login este necesar',
     'user_has_no_assets_assigned' => 'Nici un activ alocat utilizatorului în prezent.',
     'user_password_required'    => 'Este necesara parola.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Căutarea serverului LDAP nu a putut fi efectuată. Verificați configurația serverului LDAP în fișierul de configurare LDAP. <br>Error de la LDAP Server:',
         'ldap_could_not_get_entries' => 'Nu s-au putut obține intrări de pe serverul LDAP. Verificați configurația serverului LDAP în fișierul de configurare LDAP. <br>Error de la LDAP Server:',
         'password_ldap' => 'Parola pentru acest cont este gestionată de LDAP / Active Directory. Contactați departamentul IT pentru a vă schimba parola.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

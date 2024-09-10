@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'crwdns10560:0crwdne10560:0',
+    'select_language' => 'crwdns12746:0crwdne12746:0',
     'languages' => [
         'en-US'=> 'crwdns11932:0crwdne11932:0',
         'en-GB'=> 'crwdns10564:0crwdne10564:0',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'crwdns12020:0crwdne12020:0',
     ],
 
-    'select_country' => 'crwdns10672:0crwdne10672:0',
+    'select_country' => 'crwdns12748:0crwdne12748:0',
     
     'countries' => [
         'AC'=>'crwdns10674:0crwdne10674:0',
@@ -135,6 +135,7 @@ return [
         'EC'=>'crwdns10796:0crwdne10796:0',
         'EE'=>'crwdns10798:0crwdne10798:0',
         'EG'=>'crwdns10800:0crwdne10800:0',
+        'GB-ENG'=>'crwdns12704:0crwdne12704:0',
         'ER'=>'crwdns10802:0crwdne10802:0',
         'ES'=>'crwdns10804:0crwdne10804:0',
         'ET'=>'crwdns10806:0crwdne10806:0',
@@ -233,6 +234,7 @@ return [
         'NG'=>'crwdns10992:0crwdne10992:0',
         'NI'=>'crwdns10994:0crwdne10994:0',
         'NL'=>'crwdns10996:0crwdne10996:0',
+        'GB-NIR' => 'crwdns12706:0crwdne12706:0',
         'NO'=>'crwdns10998:0crwdne10998:0',
         'NP'=>'crwdns11000:0crwdne11000:0',
         'NR'=>'crwdns11002:0crwdne11002:0',
@@ -260,7 +262,7 @@ return [
         'RU'=>'crwdns11046:0crwdne11046:0',
         'RW'=>'crwdns11048:0crwdne11048:0',
         'SA'=>'crwdns11050:0crwdne11050:0',
-        'UK'=>'crwdns11052:0crwdne11052:0',
+        'GB-SCT'=>'crwdns12708:0crwdne12708:0',
         'SB'=>'crwdns11054:0crwdne11054:0',
         'SC'=>'crwdns11056:0crwdne11056:0',
         'SS'=>'crwdns11241:0crwdne11241:0',
@@ -312,6 +314,7 @@ return [
         'VI'=>'crwdns11148:0crwdne11148:0',
         'VN'=>'crwdns11150:0crwdne11150:0',
         'VU'=>'crwdns11152:0crwdne11152:0',
+        'GB-WLS' =>'crwdns12710:0crwdne12710:0',
         'WF'=>'crwdns11154:0crwdne11154:0',
         'WS'=>'crwdns11156:0crwdne11156:0',
         'YE'=>'crwdns11158:0crwdne11158:0',

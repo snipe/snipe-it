@@ -2,13 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Внимание: </strong> Этот актив в настоящее время помечен как не подлежащий установке. Если этот статус изменился, пожалуйста обновите статус актива.',
     'does_not_exist' 	=> 'Актив не существует.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Актив с тегом :asset_tag не найден.',
+    'no_tag' 	        => 'Тег актива не предоставлен.',
     'does_not_exist_or_not_requestable' => 'Этот актив не существует или не подлежит запросу.',
     'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'Дата следующего аудита этого актива (:next_audit_date) не может быть раньше последней даты аудита (:last_audit_date). Пожалуйста, обновите следующую дату аудита.',
 
     'create' => [
         'error'   		=> 'Актив не был создан, пожалуйста попробуйте снова. :(',
@@ -33,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Аудит активов не удался: :error ',
         'success' 		=> 'Аудит успешно выполнен.',
     ],
 
@@ -51,14 +51,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Процесс Импорта',
         'error'                 => 'Некоторые элементы не были импортированы корректно.',
         'errorDetail'           => 'Следующие элементы не были импортированы из за ошибок.',
         'success'               => 'Ваш файл был импортирован',
         'file_delete_success'   => 'Ваш файл был успешно удален',
         'file_delete_error'      => 'Невозможно удалить файл',
         'file_missing' => 'Выбранный файл отсутствует',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => 'Выбранный файл уже удален',
         'header_row_has_malformed_characters' => 'Один или несколько атрибутов в строке заголовка содержат неправильно сформированные символы UTF-8',
         'content_row_has_malformed_characters' => 'Один или несколько атрибутов в первой строке содержимого содержат неправильно сформированные символы UTF-8',
     ],

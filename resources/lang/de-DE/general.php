@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Die Benutzer auch "soft-löschen". Die Historie der Gegenstände bleibt erhalten, solange die markierten Datensätze nicht in den Admin-Einstellungen endgültig gelöscht werden.',
     'bulk_checkin_delete_success' => 'Die ausgewählten Benutzer wurden gelöscht und ihre Gegenstände wurden eingecheckt.',
     'bulk_checkin_success' => 'Die Gegenstände für die ausgewählten Benutzer wurden eingecheckt.',
-    'set_to_null'           => 'Werte für dieses Asset|Werte für alle :asset_count Assets löschen ',
+    'set_to_null'           => 'Werte für diese Auswahl löschen|Werte für alle :selection_count Auswahlen löschen ',
     'set_users_field_to_null'  => ':field Werte für diesen Benutzer löschen|:field Werte für alle :user_count Benutzer löschen ',
     'na_no_purchase_date'   => 'N/A - Kein Kaufdatum angegeben',
     'assets_by_status'      => 'Assets sortiert nach Status',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Ablaufdatum',
     'map_fields'=> ':item_type Feld zuordnen',
     'remaining_var' => ':count verbleibend',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
-    'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'import_asset_tag_exists' => 'Ein Asset mit dem Asset-Tag :asset_tag ist bereits vorhanden und es wurde keine Aktualisierung angefordert. Es wurden keine Änderungen vorgenommen.',
+    'countries_manually_entered_help' => 'Werte mit einem Sternchen (*) wurden manuell eingegeben und stimmen nicht mit vorhandenen Dropdown-Werten nach ISO 3166 überein',
 
 ];

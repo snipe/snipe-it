@@ -36,7 +36,7 @@ return [
     'error_messages' => 'Mensajes de error:',
     'success_messages' => 'Mensajes de éxito:',
     'alert_details' => 'Por favor, vea abajo para más detalles.',
-    'custom_export' => 'Exportación personalizada',
+    'custom_export' => 'Personalizar exportación',
     'mfg_warranty_lookup' => 'Búsqueda del estado de garantía para :manufacturer',
-    'user_department' => 'Departamento',
+    'user_department' => 'Departamento del usuario',
 ];

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Rydych wedi llwyddo I wrthod yr ased yma.',
     'bulk_manager_warn'	        => 'Mae eich defnyddwyr wedi diweddaru\'n llwyddiannus ond mae\'r blwch rheolwr heb newid gan fod y rheolwr yn y rhestr o defnyddwyr. Dewisiwch eto heb cynnwys y rheolwr.',
     'user_exists'               => 'Defnyddiwr yn bodoli yn barod!',
-    'user_not_found'            => 'Nid yw\'r defnyddiwr yn bodoli.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Mae angen llenwi\'r maes login',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Rhaid gosod cyfrinair.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Wedi methu cyraedd y server LDAP. Gwiriwch eich gosodiadau LDAP. <br>Error from LDAP Server:',
         'ldap_could_not_get_entries' => 'Wedi methu llwytho data trwy LDAP. Gwiriwch eich gosodiadau LDAP. <br>Error from LDAP Server:',
         'password_ldap' => 'Mae eich cyfrinair wedi\'i rheoli trwy LDAP/Active Directory. Cysylltwch a\'r Adran TGCh i\'w newid. ',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(
