@@ -3,12 +3,12 @@
 return array(
 
     'does_not_exist' => 'La posizione non esiste.',
-    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your models to no longer reference this location and try again. ',
+    'assoc_users'    => 'Non puoi eliminare questa Sede/Luogo perché è associata ad almeno un Bene o un Utente, o ha Beni assegnati, o è la Sede sotto la quale sono registrate altre Sedi. Aggiorna le altre voci in modo che non facciano più riferimento a questa Sede e poi riprova. ',
     'assoc_assets'	 => 'Questa posizione è associata ad almeno un prodotto e non può essere cancellata. Si prega di aggiornare i vostri prodotti di riferimento e riprovare. ',
     'assoc_child_loc'	 => 'Questa posizione è parente di almeno un\'altra posizione e non può essere cancellata. Si prega di aggiornare le vostre posizioni di riferimento e riprovare. ',
     'assigned_assets' => 'Beni Assegnati',
     'current_location' => 'Posizione attuale',
-    'open_map' => 'Open in :map_provider_icon Maps',
+    'open_map' => 'Apri con :map_provider_icon Maps',
 
 
     'create' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Location was not restored, please try again',
-        'success' => 'Location restored successfully.'
+        'error'   => 'La Posizione non è stata ripristinata, si prega di riprovare',
+        'success' => 'La Posizione è stata ripristinata con successo.'
     ),
 
     'delete' => array(

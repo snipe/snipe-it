@@ -8,7 +8,7 @@ return [
   'bulk_delete_warn'	=> 'Du bist im Begriff :asset_count Assets zu löschen.',
   'bulk_restore_warn'	=> 'Sie sind dabei, :asset_count Assets wiederherzustellen.',
     'bulk_update'		=> 'Massenaktualisierung von Assets',
-    'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Dir die Aktualisierung von mehreren Assets zugleich. Fülle die Felder aus, die Du ändern möchtest. Alle leeren Felder bleiben unverändert. ',
+    'bulk_update_help'	=> 'Diese Eingabemaske erlaubt dir die Aktualisierung von mehreren Assets zugleich. Fülle die Felder aus, die du ändern möchtest. Alle leeren Felder bleiben unverändert. ',
     'bulk_update_warn'	=> 'Du bearbeitest die Eigenschaften eines Assets.|Du bearbeitest die Eigenschaften von :asset_count Assets.',
     'bulk_update_with_custom_field' => 'Beachte, dass die Assets :asset_model_count verschiedene Arten von Modellen sind.',
     'bulk_update_model_prefix' => 'Auf Modellen', 

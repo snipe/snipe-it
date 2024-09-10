@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'شما با موفقیت این دارایی را به کاهش دادید.',
     'bulk_manager_warn'	        => 'کاربران شما با موفقیت به روز شده اند، با این حال مدیر ورود شما ذخیره نشد زیرا مدیر شما انتخاب شده بود نیز در لیست کاربر برای ویرایش، و کاربران ممکن است مدیر خود نیست. لطفا کاربران خود را دوباره انتخاب کنید، به غیر از مدیر.',
     'user_exists'               => 'کاربر "{0}" در حال حاضر وجود دارد.',
-    'user_not_found'            => 'کاربر وجود ندارد.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'فیلد ورود الزامی است.',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'کلمه عبور ضروری است.',
@@ -56,6 +56,7 @@ return array(
         'ldap_could_not_search' => 'جستجو در سرور LDPA انجام نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'ldap_could_not_get_entries' => 'مجوز از سرور LDPA گرفته نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'password_ldap' => 'رمز عبور این حساب توسط LDAP / Active Directory مدیریت می شود. برای تغییر رمز عبور خود، لطفا با بخش IT خود تماس بگیرید.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

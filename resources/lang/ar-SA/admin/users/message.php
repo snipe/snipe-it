@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'لقد رفضت هذا الأصل بنجاح.',
     'bulk_manager_warn'	        => 'تم تحديث المستخدمين بنجاح، ولكن لم يتم حفظ إدخال مديرك لأن المدير الذي حددته كان أيضا في قائمة المستخدمين التي سيتم تعديلها، وقد لا يكون المستخدمون مديرهم الخاص. يرجى تحديد المستخدمين مرة أخرى، باستثناء المدير.',
     'user_exists'               => 'المستخدم موجود مسبقاً!',
-    'user_not_found'            => 'المستخدم غير موجود.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'حقل تسجيل الدخول اجباري',
     'user_has_no_assets_assigned' => 'لا توجد أصول مخصصة حاليا للمستخدم.',
     'user_password_required'    => 'كلمة المرور اجبارية.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'تعذر البحث في خادم LDAP. الرجاء التحقق من الاعدادات الخاصة بخادم LDAP في ملف اعدادات LDAP. <br>الخطأ من خادم LDAP:',
         'ldap_could_not_get_entries' => 'تعذر الحصول على إدخالات من خادم LDAP. الرجاء التحقق من الاعدادات الخاصة بخادم LDAP في ملف اعدادات LDAP. <br>الخطأ من خادم LDAP:',
         'password_ldap' => 'تتم إدارة كلمة المرور لهذا الحساب بواسطة لداب / أكتيف ديركتوري. يرجى الاتصال بقسم تقنية المعلومات لتغيير كلمة المرور.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

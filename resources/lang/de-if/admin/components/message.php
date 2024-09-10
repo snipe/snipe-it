@@ -15,7 +15,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du diese Komponente löschen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du diese Komponente löschen möchtest?',
         'error'   => 'Es gab ein Problem beim Löschen der Firma. Bitte versuche es erneut.',
         'success' => 'Die Komponente wurde erfolgreich gelöscht.'
     ),

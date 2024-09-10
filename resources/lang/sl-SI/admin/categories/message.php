@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'Kategorija ni bila posodobljena, poskusite znova',
         'success' => 'Kategorija uspešno posodobljena.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Ne moreš spremeniti tipa kategorije po tem ko je bila kreirana',
     ),
 
     'delete' => array(

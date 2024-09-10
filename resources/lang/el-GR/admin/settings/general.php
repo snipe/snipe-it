@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Αντίγραφα Ασφαλείας',
     'backups_help'              => 'Δημιουργήστε, κατεβάστε και επαναφέρετε αντίγραφα ασφαλείας ',
     'backups_restoring'         => 'Επαναφορά από αντίγραφο ασφαλείας',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Μεταφόρτωση Αντιγράφου Ασφαλείας',
     'backups_path'              => 'Τα αντίγραφα ασφαλείας στο διακομιστή αποθηκεύονται στο <code>:path</code>',
     'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',

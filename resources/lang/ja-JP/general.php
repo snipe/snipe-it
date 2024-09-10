@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'また、これらのユーザーを論理削除します。管理設定で削除したレコードを削除するまで、資産履歴はそのまま残ります。',
     'bulk_checkin_delete_success' => '選択したユーザーが削除され、項目がチェックインされました。',
     'bulk_checkin_success' => '選択したユーザーの項目がチェックインされています。',
-    'set_to_null'           => 'このアセットの値を削除|全:asset_count個の資産を削除する ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'このユーザーの :field 値を削除|すべての :user_count ユーザーの :field 値を削除する ',
     'na_no_purchase_date'   => '該当なし - 購入日が指定されていません',
     'assets_by_status'      => 'ステータス別資産',
@@ -559,8 +559,8 @@ return [
     'expires' => '保証失効日',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'ラベル',
     'import_asset_tag_exists' => 'アセットタグ :asset_tag のアセットは既に存在し、アップデートは要求されませんでした。変更はありません。',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

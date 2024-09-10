@@ -2,10 +2,10 @@
 
 return [
     'custom_fields'		        => 'Полиња по желба',
-    'manage'                    => 'Manage',
+    'manage'                    => 'Управувај',
     'field'		                => 'Поле',
     'about_fieldsets_title'		=> 'За Fieldsets',
-    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'about_fieldsets_text'		=> 'Fildsets ви овозможуваат да создавате групи на прилагодени полиња што често се повторно користат за специфични типови на модели на средства.',
     'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Енкриптирајте ја вредноста на ова поле во базата на податоци',
     'encrypt_field_help'      => 'ПРЕДУПРЕДУВАЊЕ: Шифрирањето на поле прави полето да не може да се пребарува.',

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Uye wenqaba ngempumelelo le mali.',
     'bulk_manager_warn'	        => 'Abasebenzisi bakho babuyekezwe ngempumelelo, kodwa ukungena kwakho kwemenenja akulondoloziwe ngoba umphathi oyikhethile naye ohlwini lomsebenzisi oluzohlelwa, futhi abasebenzisi bangase bangabi umphathi wabo. Sicela ukhethe abasebenzisi bakho futhi, ngaphandle kwamenenja.',
     'user_exists'               => 'Umsebenzisi usuvele ukhona!',
-    'user_not_found'            => 'Umsebenzisi akakho.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Insimu yokungena ngemvume iyadingeka',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Iphasiwedi iyadingeka.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Ayikwazanga ukusesha isiphakeli se-LDAP. Sicela uhlole ukumisa kweseva yakho ye-LDAP kufayili ye-LDAP config. <br>Iphutha kusuka kwiseva ye-LDAP:',
         'ldap_could_not_get_entries' => 'Ayikwazanga ukungena okuvela kuseva ye-LDAP. Sicela uhlole ukumisa kweseva yakho ye-LDAP kufayili ye-LDAP config. <br>Iphutha kusuka kwiseva ye-LDAP:',
         'password_ldap' => 'Iphasiwedi yale akhawunti ilawulwa yi-LDAP / Active Directory. Sicela uxhumane nomnyango wakho we-IT ukushintsha iphasiwedi yakho.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

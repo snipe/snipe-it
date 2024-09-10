@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Jūs sėkmingai atsisakėte priimti šį turtą.',
     'bulk_manager_warn'	        => 'Jūsų naudotojai buvo sėkmingai atnaujinti, tačiau tiesioginio vadovo informacija nebuvo išsaugota, nes jūsų nurodytas tiesioginis vadovas taip pat buvo redaguojamų naudotojų sąraše. Naudotojas negali būti savo paties tiesioginiu vadovu, todėl dar kartą pasirinkite naudotojus, neįtraukdami tiesioginio vadovo.',
     'user_exists'               => 'Toks naudotojas jau yra!',
-    'user_not_found'            => 'Tokio naudotojo nėra.',
+    'user_not_found'            => 'Tokio naudotojo nėra arba jūs neturite teisės jo peržiūrėti.',
     'user_login_required'       => 'Prisijungimo laukas yra privalomas',
     'user_has_no_assets_assigned' => 'Naudotojui neišduotas joks turtas.',
     'user_password_required'    => 'Slaptažodis yra privalomas.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nepavyko paieška LDAP serveryje. Patikrinkite LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>LDAP serverio klaida:',
         'ldap_could_not_get_entries' => 'Nepavyko gauti įrašų iš LDAP serverio. Patikrinkite LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>LDAP serverio klaida:',
         'password_ldap' => 'Šios paskyros slaptažodį tvarko LDAP / Active Directory. Prašome susisiekti su savo IT skyriumi, kad pakeistumėte slaptažodį. ',
+        'multi_company_items_assigned' => 'Šiam naudotojui yra priskirti daiktai, paimkite juos prieš prieš keisdami įmonę.'
     ),
 
     'deletefile' => array(

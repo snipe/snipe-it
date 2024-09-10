@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Го одбивте основното средство.',
     'bulk_manager_warn'	        => 'Вашите корисници се ажурирани, но записот за менаџерот не е зачуван, бидејќи менаџерот што го избравте беше во листата на корисници што се ажурираа. Корисниците не може да бидат свој сопствен менаџер. Изберете ги корисниците повторно, со исклучок на менаџерот и пробајте пак.',
     'user_exists'               => 'Корисникот веќе постои!',
-    'user_not_found'            => 'Корисникот не постои.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Полето за корисничко име е задолжително',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Потребна е лозинка.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Не можам да го пребарам LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'ldap_could_not_get_entries' => 'Не можам да добијам записи од LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'password_ldap' => 'Лозинката за корисникот е управувана од LDAP/Active Directory. Ве молиме контактирајте го одделот за ИТ за да ја смените вашата лозинка. ',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

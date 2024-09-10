@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Yedekler',
     'backups_help'              => 'Yedekler oluşturun, indirin ve geri yükleyin ',
     'backups_restoring'         => 'Yedekten geri dön',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Yedeği yükle',
     'backups_path'              => 'Yedeklerin sunucuda saklanacağı yer <code>:path</code>',
     'backups_restore_warning'   => 'Geri yükleme düğmesini kullanın<small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small>Önceki bir yedeklemeden geri yüklemek için. (Bu şu anda S3 dosya depolama veya Docker ile çalışmamaktadır.)<br><br>Senin<strong>:app_name veritabanının tamamı ve yüklenen dosyalar tamamen değiştirilecek</strong>Yedekleme dosyasında ne olduğuna göre.  ',

@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'ជ្រើសរើសភាសា',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'អង់គ្លេស អាមេរិក',
         'en-GB'=> 'ភាសាអង់គ្លេស ចក្រភពអង់គ្លេស',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'ហ្សូលូ',
     ],
 
-    'select_country' => 'ជ្រើសរើសប្រទេសមួយ',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'កោះ Ascension',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Estonia',
         'EG'=>'Egypt',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Spain',
         'ET'=>'Ethiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Netherlands',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norway',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Russian Federation',
         'RW'=>'Rwanda',
         'SA'=>'Saudi Arabia',
-        'UK'=>'Scotland',
+        'GB-SCT'=>'Scotland',
         'SB'=>'Solomon Islands',
         'SC'=>'សីស្ហែល',
         'SS'=>'South Sudan',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Virgin Islands (U.S.)',
         'VN'=>'Viet Nam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis And Futuna Islands',
         'WS'=>'Samoa',
         'YE'=>'Yemen',

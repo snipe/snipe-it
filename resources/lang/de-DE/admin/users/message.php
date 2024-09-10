@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Sie haben diesen Gegenstand abgelehnt.',
     'bulk_manager_warn'	        => 'Benutzer erfolgreich geändert. Vorgesetzter sollte auch bearbeitet werden und konnte nicht angepasst werden, weil er sich nicht selbst als Vorgesetzter eingetragen haben kann. Bitte Benutzer ohne den Vorgesetzten nochmal bearbeiten.',
     'user_exists'               => 'Benutzer existiert bereits!',
-    'user_not_found'            => 'Benutzer existiert nicht.',
+    'user_not_found'            => 'Der Benutzer existiert nicht oder Sie sind nicht berechtigt, ihn anzuzeigen.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
     'user_has_no_assets_assigned' => 'Derzeit sind keine Assets dem Benutzer zugewiesen.',
     'user_password_required'    => 'Das Passswortfeld ist erforderlich.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Konnte LDAP Server nicht suchen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'ldap_could_not_get_entries' => 'Konnte keine Einträge vom LDAP Server abrufen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'password_ldap' => 'Das Passwort für diesen Account wird vom LDAP/Active Directory verwaltet. Bitte kontaktieren Sie Ihre IT-Abteilung, um Ihr Passwort zu ändern. ',
+        'multi_company_items_assigned' => 'Diesem Benutzer sind Artikel zugewiesen. Bitte checken Sie diese ein, bevor Sie das Unternehmen wechseln.'
     ),
 
     'deletefile' => array(

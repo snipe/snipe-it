@@ -35,7 +35,7 @@ return array(
     'updateuser' 			=> 'Benutzer aktualisieren',
     'username' 				=> 'Benutzername',
 	'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
-    'username_note' 		=> '(Dies wird nur für Active Directory Bindung verwendet, nicht für Login.)',
+    'username_note' 		=> '(Dies wird nur für die Active Directory-Bindung verwendet, nicht für die Anmeldung.)',
     'cloneuser'             => 'Benutzer kopieren',
     'viewusers' 			=> 'Benutzer anzeigen',
 );

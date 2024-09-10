@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Arī gandrīz-dzēsiet šos lietotājus. Viņu inventāra vēsture būs neskarta līdz Jūs iztīrīsiet dzēstos ierakstus Admin Iestatījumos.',
     'bulk_checkin_delete_success' => 'Jūsu atlasītie lietotāji ir dzēsti un ar tiem saistītais inventārs statusā Pieņemts.',
     'bulk_checkin_success' => 'Inventārs atlasītajiem lietotājiem ir ar statusu Pieņemts.',
-    'set_to_null'           => 'Dzēst šī inventāra vērtības|Dzēst vērtīibas visam :asset_count inventāram ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Dzēst lietotāja :field vērtības|Dzēst :field vērtīibas visiem :user_count lietotājiem ',
     'na_no_purchase_date'   => 'N/A - Iegādes datums nav norādīts',
     'assets_by_status'      => 'Inventārs pēc Statusa',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Beidzas',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

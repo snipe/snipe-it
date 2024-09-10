@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Säkerhetskopior',
     'backups_help'              => 'Skapa, ladda ner och återställ säkerhetskopior ',
     'backups_restoring'         => 'Återställ från säkerhetskopia',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Ladda upp säkerhetskopia',
     'backups_path'              => 'Säkerhetskopior på servern lagras i <code>:path</code>',
     'backups_restore_warning'   => 'Använd återställningsknappen <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> för att återställa från en tidigare säkerhetskopia. (Detta fungerar för närvarande inte med S3-fillagring eller Docker.)<br><br>Din <strong>hela :app_name databas och alla uppladdade filer kommer att helt ersättas</strong> av vad som finns i backupfilen.  ',

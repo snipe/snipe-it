@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Valitse kieli',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Englanti, Yhdysvallat',
         'en-GB'=> 'Englanti, UK',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Valitse maa',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ascension saari',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Eesti',
         'EG'=>'Egypti',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Espanja',
         'ET'=>'Etiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Alankomaat',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norja',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Venäjä',
         'RW'=>'Ruanda',
         'SA'=>'Saudi-Arabia',
-        'UK'=>'Skotlanti',
+        'GB-SCT'=>'Skotlanti',
         'SB'=>'Salomonsaaret',
         'SC'=>'Seychellit',
         'SS'=>'Etelä-Sudan',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Yhdysvaltain Neitsytsaaret',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis-ja Futunasaaret',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

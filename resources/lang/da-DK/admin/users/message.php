@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Du har afvist dette aktiv.',
     'bulk_manager_warn'	        => 'Dine brugere er blevet opdateret, men din administratorindgang blev ikke gemt, fordi den valgte leder også var på brugerlisten, der skulle redigeres, og brugerne er måske ikke deres egen administrator. Vælg venligst dine brugere igen, undtagen manager.',
     'user_exists'               => 'Bruger eksistere allerede!',
-    'user_not_found'            => 'Bruger eksisterer ikke.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Login-feltet er påkrævet',
     'user_has_no_assets_assigned' => 'Ingen aktiver i øjeblikket tildelt brugeren.',
     'user_password_required'    => 'Adgangskoden er påkrævet.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Kunne ikke søge på LDAP-serveren. Tjek venligst din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Error fra LDAP-server:',
         'ldap_could_not_get_entries' => 'Kunne ikke få poster fra LDAP-serveren. Tjek venligst din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Error fra LDAP-server:',
         'password_ldap' => 'Adgangskoden til denne konto administreres af LDAP / Active Directory. Kontakt din it-afdeling for at ændre dit kodeord.',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

@@ -2,7 +2,7 @@
 
 return [
     'about_assets_title'           => 'Über Assets',
-    'about_assets_text'            => 'Assets sind Gegenstände die durch eine Seriennummer oder einem Asset-Tag identifiziert werden. Meistens sind diese Gegenstände von höherem Wert, weshalb es Sinn ergibt diese spezifisch zu kennzeichnen.',
+    'about_assets_text'            => 'Assets sind Gegenstände die durch eine Seriennummer oder einem Asset-Tag identifiziert werden. Meistens sind diese Gegenstände von höherem Wert, weshalb es Sinn ergibt, diese spezifisch zu kennzeichnen.',
     'archived'  				=> 'Archiviert',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Assets herausgeben',
@@ -14,7 +14,7 @@ return [
     'deleted'  					=> 'Dieses Asset wurde gelöscht.',
     'delete_confirm'            => 'Bist du sicher, dass du dieses Asset löschen möchtest?',
     'edit'  					=> 'Asset bearbeiten',
-    'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Du musst das Modell wiederherstellen, bevor Du das Asset wiederherstellen kannst.',
+    'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Du musst das Modell wiederherstellen, bevor du das Asset wiederherstellen kannst.',
     'model_invalid'             => 'Das Modell für dieses Asset ist ungültig.',
     'model_invalid_fix'         => 'Das Asset muss aktualisiert und ein gültiges Asset-Modell verwendet werden, bevor versucht wird, es ein- oder auszuchecken oder es zu prüfen.',
     'requestable'               => 'Anforderbar',

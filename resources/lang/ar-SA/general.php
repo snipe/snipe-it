@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'أيضًا حذف هؤلاء المستخدمين. سيبقى سجل الأصول الخاص بهم سليماً ما لم/حتى تطهير السجلات المحذوفة في إعدادات المدير.',
     'bulk_checkin_delete_success' => 'تم حذف المستخدمين المحددين وتم تسجيل العناصر الخاصة بهم.',
     'bulk_checkin_success' => 'تم تسجيل الدخول إلى العناصر الخاصة بالمستخدمين المحددين.',
-    'set_to_null'           => 'حذف القيم لهذه الأصول<unk> حذف القيم لجميع الأصول :asset_count ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'حذف :field القيم لهذا المستخدم <unk> حذف :field القيم لجميع :user_count المستخدمين ',
     'na_no_purchase_date'   => 'N/A - لا يوجد تاريخ شراء',
     'assets_by_status'      => 'الأصول حسب الحالة',
@@ -559,8 +559,8 @@ return [
     'expires' => 'انتهاء الصلاحية',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];
