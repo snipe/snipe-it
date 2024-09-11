@@ -73,34 +73,28 @@ class EditAssetTest extends TestCase
         Event::fake([CheckoutableCheckedIn::class]);
 
         $user = User::factory()->create();
-        $location = Location::factory()->create();
         $deployable_status = Statuslabel::factory()->rtd()->create();
         $achived_status = Statuslabel::factory()->archived()->create();
-
         $asset = Asset::factory()->assignedToUser($user)->create(['status_id' => $deployable_status->id]);
-
         $this->assertTrue($asset->assignedTo->is($user));
 
         $currentTimestamp = now();
 
         $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
-            ->post(
-                route('hardware.update', ['hardware' => $asset->id]),
-                [
+            ->from(route('hardware.edit', $asset))
+            ->patch(route('hardware.update', $asset), [
                     'status_id' => $achived_status->id,
+                    'model_id' => $asset->model_id,
+                    'asset_tag' => $asset->asset_tag,
                 ],
-            );
+            )
+            ->assertStatus(302);
 
         $asset->refresh();
-        \Log::error('AssignedTo: '.$asset->refresh()->assignedTo);
-        \Log::error('Assigned_to: '.$asset->refresh()->assigned_to);
-        \Log::error('Assigned_type: '.$asset->refresh()->assigned_type);
-        $this->assertNull($asset->refresh()->assignedTo);
-        $this->assertNull($asset->refresh()->assigned_type);
-        $this->assertEquals($achived_status->id, $asset->refresh()->status_id);
+        $this->assertNull($asset->assigned_type);
+        $this->assertEquals($achived_status->id, $asset->status_id);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($currentTimestamp) {
-            // this could be better mocked but is ok for now.
             return Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp) < 2;
         }, 1);
     }
