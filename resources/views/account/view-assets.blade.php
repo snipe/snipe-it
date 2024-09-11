@@ -427,7 +427,7 @@
                           {{ trans('general.purchase_cost') }}
                         </th>
                       @endcan
-                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                      <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/form.eol_date') }}
                       </th>
                       <th class="col-md-2" data-switchable="true" data-visible="false">
