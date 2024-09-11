@@ -81,16 +81,19 @@ class EditAssetTest extends TestCase
         $currentTimestamp = now();
 
         $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
-            ->from(route('hardware.edit', $asset))
-            ->patch(route('hardware.update', $asset), [
+            ->from(route('hardware.edit', $asset->id))
+            ->put(route('hardware.update', $asset->id), [
                     'status_id' => $achived_status->id,
                     'model_id' => $asset->model_id,
-                    'asset_tag' => $asset->asset_tag,
+                    'asset_tags' => $asset->asset_tag,
                 ],
             )
             ->assertStatus(302);
+            //->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));;
 
-        $asset->refresh();
+        // $asset->refresh();
+        $asset = Asset::find($asset->id);
+        $this->assertNull($asset->assigned_to);
         $this->assertNull($asset->assigned_type);
         $this->assertEquals($achived_status->id, $asset->status_id);
 

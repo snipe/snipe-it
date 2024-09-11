@@ -331,14 +331,14 @@ class AssetsController extends Controller
         $asset->expected_checkin = $request->input('expected_checkin', null);
 
         // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->filled('requestable');
+        $asset->requestable = $request->filled('requestable', 0);
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
 
-        $status = Statuslabel::find($asset->status_id);
+        $status = Statuslabel::find($request->input('status_id'));
 
         // This is a non-deployable status label - we should check the asset back in.
-        if (($status && $status->getStatuslabelType() != 'deployable') && (is_null($target = $asset->assignedTo))) {
+        if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
 
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
