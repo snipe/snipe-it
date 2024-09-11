@@ -263,7 +263,7 @@
                         $("#assignto_selector").hide();
                         $("#selected_status_status").removeClass('text-success');
                         $("#selected_status_status").addClass('text-danger');
-                        $("#selected_status_status").html('<x-icon type="warning" /> {{ trans('admin/hardware/form.asset_not_deployable')}} ');
+                        $("#selected_status_status").html('<x-icon type="warning" /> {{ (($item->assignedTo) && ($item->deleted_at == '')) ? trans('admin/hardware/form.asset_not_deployable_checkin') : trans('admin/hardware/form.asset_not_deployable')  }} ');
                     }
                 }
             });

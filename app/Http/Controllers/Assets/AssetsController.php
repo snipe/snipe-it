@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
@@ -336,8 +337,14 @@ class AssetsController extends Controller
 
         $status = Statuslabel::find($asset->status_id);
 
-        if ($status && $status->archived) {
+        // This is a non-deployable status label - we should check the asset back in.
+        if (($status && $status->getStatuslabelType() != 'deployable') && (is_null($target = $asset->assignedTo))) {
+
+            $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
+            $asset->assigned_type = null;
+
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
         }
 
         if ($asset->assigned_to == '') {
