@@ -326,6 +326,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['customfields.delete' => '1']);
     }
 
+    public function deleteCustomFieldsets()
+    {
+        return $this->appendPermission(['customfields.delete' => '1']);
+    }
+
     private function appendPermission(array $permission)
     {
         return $this->state(function ($currentState) use ($permission) {
