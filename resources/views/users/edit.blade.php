@@ -86,22 +86,10 @@
             <div class="row">
               <div class="col-md-12">
                 <!-- First Name -->
-                <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" maxlength="191" />
-                    {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                  </div>
-                </div>
+                 @include('partials.forms.edit.name-first')
 
                 <!-- Last Name -->
-                <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" maxlength="191" />
-                    {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                  </div>
-                </div>
+                @include('partials.forms.edit.name-last')
 
                 <!-- Username -->
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
@@ -236,7 +224,6 @@
 
                           </div>
                   </div>
-
 
                   <!-- Email -->
                 <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
