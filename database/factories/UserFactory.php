@@ -246,11 +246,6 @@ class UserFactory extends Factory
         return $this->appendPermission(['components.view' => '1']);
     }
 
-    public function createCompanies()
-    {
-        return $this->appendPermission(['companies.create' => '1']);
-    }
-
     public function createComponents()
     {
         return $this->appendPermission(['components.create' => '1']);
@@ -274,6 +269,16 @@ class UserFactory extends Factory
     public function checkoutComponents()
     {
         return $this->appendPermission(['components.checkout' => '1']);
+    }
+
+    public function createCompanies()
+    {
+        return $this->appendPermission(['companies.create' => '1']);
+    }
+
+    public function deleteCompanies()
+    {
+        return $this->appendPermission(['companies.delete' => '1']);
     }
 
     public function viewUsers()
