@@ -411,12 +411,16 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_tag') }}
                       </th>
-                      <th class="col-md-2" data-switchable="true" data-visible="false">{{ trans('general.name') }}</th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.name') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_model') }}
                       </th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.serial') }}
+                      </th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.location') }}
                       </th>
                       <th class="col-md-2" data-switchable="true" data-visible="false">
                         {{ trans('admin/hardware/form.default_location') }}
@@ -475,6 +479,9 @@
                         </td>
                         <td>
                           {{ $asset->serial }}
+                        </td>
+                        <td>
+                          {{ ($asset->location) ? $asset->location->name : '' }}
                         </td>
                         <td>
                           {{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}
