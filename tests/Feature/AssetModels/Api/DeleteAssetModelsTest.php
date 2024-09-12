@@ -5,11 +5,10 @@ namespace Tests\Feature\AssetModels\Api;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\User;
-use Tests\Concerns\TestsMultipleFullCompanySupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteAssetModelsTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
+class DeleteAssetModelsTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
@@ -33,19 +32,12 @@ class DeleteAssetModelsTest extends TestCase implements TestsMultipleFullCompany
 
     public function testCannotDeleteAssetModelThatStillHasAssociatedAssets()
     {
-        $asset = Asset::factory()->create();
+        $assetModel = Asset::factory()->create()->model;
 
         $this->actingAsForApi(User::factory()->deleteAssetModels()->create())
-            ->deleteJson(route('api.models.destroy', $asset->model))
+            ->deleteJson(route('api.models.destroy', $assetModel))
             ->assertStatusMessageIs('error');
 
-        $this->assertFalse($asset->model->fresh()->trashed());
-    }
-
-    public function testAdheresToMultipleFullCompanySupportScoping()
-    {
-        // TODO: Implement testAdheresToMultipleFullCompanySupportScoping() method.
-
-        $this->markTestIncomplete();
+        $this->assertFalse($assetModel->fresh()->trashed());
     }
 }
