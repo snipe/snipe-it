@@ -9,7 +9,7 @@ use Tests\Concerns\TestsMultipleFullCompanySupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteAssetMaintenanceTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
+class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
