@@ -6,11 +6,12 @@ use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
 use Tests\Concerns\TestsMultipleFullCompanySupport;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteAccessoryTest extends TestCase implements TestsMultipleFullCompanySupport
+class DeleteAccessoryTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
 {
-    public function testPermissionRequiredToDeleteAccessory()
+    public function testRequiresPermission()
     {
         $accessory = Accessory::factory()->create();
 
