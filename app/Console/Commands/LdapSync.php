@@ -111,14 +111,21 @@ class LdapSync extends Command
             }
 
             /**
-             * If a filter has been specified, use that
+             * If a filter has been specified, use that, otherwise default to null
              */
             if ($this->option('filter') != '') {
-                $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
+                $filter = $this->option('filter');
             } else {
-                $results = Ldap::findLdapUsers($search_base);
+                $filter = null;
             }
-            
+
+            /**
+             * We only need to request the LDAP attributes that we process
+             */
+            $attributes = array_values(array_filter($ldap_map));
+
+            $results = Ldap::findLdapUsers($search_base, -1, $filter, $attributes);
+
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
