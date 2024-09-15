@@ -44,7 +44,7 @@
           </div>
           <div class="col-md-2 col-sm-12">
               <button class="add_field_button btn btn-default btn-sm">
-                  <i class="fas fa-plus"></i>
+                  <x-icon type="plus" />
               </button>
           </div>
       @endif
@@ -490,7 +490,7 @@
 				box_html += '<span id="asset_auto_tag_' + x + '-error" style="display:none; color:#a94442;" class="error"> :message</span>'
 				box_html += '</div>';
                 box_html += '<div class="col-md-2 col-sm-12">';
-                box_html += '<a href="#" class="remove_field btn btn-default btn-sm" id="remove_field_' + x +'"><i class="fas fa-minus"></i></a>';
+                box_html += '<a href="#" class="remove_field btn btn-default btn-sm" id="remove_field_' + x +'"><x-icon type="minus" /></a>';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</div>';
@@ -513,7 +513,6 @@
 
         $(wrapper).on("click",".remove_field", function(e){ //user clicks on remove text
             //console.log("#### remove tag ####");
-			
 			$(".add_field_button").removeAttr('disabled');
             $(".add_field_button").removeClass('disabled');
             e.preventDefault();
