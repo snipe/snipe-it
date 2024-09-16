@@ -9,7 +9,7 @@ use App\Models\User;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteManufacturerTest extends TestCase implements TestsPermissionsRequirement
+class DeleteManufacturersTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {

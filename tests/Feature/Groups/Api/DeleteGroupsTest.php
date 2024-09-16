@@ -7,7 +7,7 @@ use App\Models\User;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteGroupTest extends TestCase implements TestsPermissionsRequirement
+class DeleteGroupsTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {

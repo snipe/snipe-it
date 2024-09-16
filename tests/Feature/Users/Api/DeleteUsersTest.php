@@ -8,7 +8,7 @@ use App\Models\Location;
 use App\Models\User;
 use Tests\TestCase;
 
-class DeleteUserTest extends TestCase
+class DeleteUsersTest extends TestCase
 {
     public function testErrorReturnedViaApiIfUserDoesNotExist()
     {

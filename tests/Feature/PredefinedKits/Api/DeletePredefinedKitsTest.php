@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeletePredefinedKitTest extends TestCase implements TestsPermissionsRequirement
+class DeletePredefinedKitsTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {

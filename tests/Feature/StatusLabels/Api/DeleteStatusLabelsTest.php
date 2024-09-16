@@ -7,7 +7,7 @@ use App\Models\User;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteStatusLabelTest extends TestCase implements TestsPermissionsRequirement
+class DeleteStatusLabelsTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {

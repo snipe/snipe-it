@@ -8,7 +8,7 @@ use App\Models\User;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteSupplierTest extends TestCase implements TestsPermissionsRequirement
+class DeleteSuppliersTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {

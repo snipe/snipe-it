@@ -7,7 +7,7 @@ use App\Models\User;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteDepreciationTest extends TestCase implements TestsPermissionsRequirement
+class DeleteDepreciationsTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {

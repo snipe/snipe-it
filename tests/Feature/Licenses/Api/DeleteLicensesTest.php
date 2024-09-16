@@ -9,7 +9,7 @@ use Tests\Concerns\TestsMultipleFullCompanySupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteLicenseTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
+class DeleteLicensesTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
