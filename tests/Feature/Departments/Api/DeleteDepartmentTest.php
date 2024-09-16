@@ -32,6 +32,17 @@ class DeleteDepartmentTest extends TestCase implements TestsMultipleFullCompanyS
         $this->assertDatabaseMissing('departments', ['id' => $department->id]);
     }
 
+    public function testCannotDeleteDepartmentThatStillHasUsers()
+    {
+        $department = Department::factory()->hasUsers()->create();
+
+        $this->actingAsForApi(User::factory()->deleteDepartments()->create())
+            ->deleteJson(route('api.departments.destroy', $department))
+            ->assertStatusMessageIs('error');
+
+        $this->assertNotNull($department->fresh(), 'Department unexpectedly deleted');
+    }
+
     public function testAdheresToMultipleFullCompanySupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
