@@ -351,6 +351,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['manufacturers.delete' => '1']);
     }
 
+    public function deletePredefinedKits()
+    {
+        return $this->appendPermission(['kits.delete' => '1']);
+    }
+
     private function appendPermission(array $permission)
     {
         return $this->state(function ($currentState) use ($permission) {
