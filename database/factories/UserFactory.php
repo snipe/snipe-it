@@ -356,6 +356,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['kits.delete' => '1']);
     }
 
+    public function deleteStatusLabels()
+    {
+        return $this->appendPermission(['statuslabels.delete' => '1']);
+    }
+
     private function appendPermission(array $permission)
     {
         return $this->state(function ($currentState) use ($permission) {
