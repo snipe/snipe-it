@@ -651,8 +651,8 @@
             </a>
         </span>
       @else
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
-          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+          <a href="#"  class="btn btn-primary bg-purple btn-sm btn-social btn-block hidden-print" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+          <x-icon type="checkin" />
         </a>
       @endif
     @endcan
