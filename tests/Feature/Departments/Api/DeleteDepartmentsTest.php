@@ -5,11 +5,11 @@ namespace Tests\Feature\Departments\Api;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\User;
-use Tests\Concerns\TestsMultipleFullCompanySupport;
+use Tests\Concerns\TestsFullMultipleCompaniesSupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteDepartmentsTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
+class DeleteDepartmentsTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
@@ -22,7 +22,7 @@ class DeleteDepartmentsTest extends TestCase implements TestsMultipleFullCompany
         $this->assertDatabaseHas('departments', ['id' => $department->id]);
     }
 
-    public function testAdheresToMultipleFullCompanySupportScoping()
+    public function testAdheresToFullMultipleCompaniesSupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

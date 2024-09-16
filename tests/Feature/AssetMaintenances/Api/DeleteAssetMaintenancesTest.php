@@ -5,11 +5,11 @@ namespace Tests\Feature\AssetMaintenances\Api;
 use App\Models\AssetMaintenance;
 use App\Models\Company;
 use App\Models\User;
-use Tests\Concerns\TestsMultipleFullCompanySupport;
+use Tests\Concerns\TestsFullMultipleCompaniesSupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
+class DeleteAssetMaintenancesTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
@@ -22,7 +22,7 @@ class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullC
         $this->assertNotSoftDeleted($assetMaintenance);
     }
 
-    public function testAdheresToMultipleFullCompanySupportScoping()
+    public function testAdheresToFullMultipleCompaniesSupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

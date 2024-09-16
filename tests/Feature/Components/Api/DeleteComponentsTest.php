@@ -5,11 +5,11 @@ namespace Tests\Feature\Components\Api;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\User;
-use Tests\Concerns\TestsMultipleFullCompanySupport;
+use Tests\Concerns\TestsFullMultipleCompaniesSupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteComponentsTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
+class DeleteComponentsTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
@@ -22,7 +22,7 @@ class DeleteComponentsTest extends TestCase implements TestsMultipleFullCompanyS
         $this->assertNotSoftDeleted($component);
     }
 
-    public function testAdheresToMultipleFullCompanySupportScoping()
+    public function testAdheresToFullMultipleCompaniesSupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
