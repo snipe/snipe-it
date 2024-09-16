@@ -44,5 +44,11 @@ class DeleteCompaniesTest extends TestCase implements TestsPermissionsRequiremen
         $actor->deleteJson(route('api.companies.destroy', $companyWithConsumables))->assertStatusMessageIs('error');
         $actor->deleteJson(route('api.companies.destroy', $companyWithComponents))->assertStatusMessageIs('error');
         $actor->deleteJson(route('api.companies.destroy', $companyWithUsers))->assertStatusMessageIs('error');
+
+        $this->assertDatabaseHas('companies', ['id' => $companyWithAssets->id]);
+        $this->assertDatabaseHas('companies', ['id' => $companyWithAccessories->id]);
+        $this->assertDatabaseHas('companies', ['id' => $companyWithConsumables->id]);
+        $this->assertDatabaseHas('companies', ['id' => $companyWithComponents->id]);
+        $this->assertDatabaseHas('companies', ['id' => $companyWithUsers->id]);
     }
 }

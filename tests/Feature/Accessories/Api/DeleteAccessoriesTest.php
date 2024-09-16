@@ -28,7 +28,7 @@ class DeleteAccessoriesTest extends TestCase implements TestsMultipleFullCompany
             ->deleteJson(route('api.accessories.destroy', $accessory))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($accessory->fresh()->trashed());
+        $this->assertSoftDeleted($accessory);
     }
 
     public function testCannotDeleteAccessoryThatHasCheckouts()
@@ -39,7 +39,7 @@ class DeleteAccessoriesTest extends TestCase implements TestsMultipleFullCompany
             ->deleteJson(route('api.accessories.destroy', $accessory))
             ->assertStatusMessageIs('error');
 
-        $this->assertFalse($accessory->fresh()->trashed());
+        $this->assertNotSoftDeleted($accessory);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()
@@ -68,8 +68,8 @@ class DeleteAccessoriesTest extends TestCase implements TestsMultipleFullCompany
             ->deleteJson(route('api.accessories.destroy', $accessoryC))
             ->assertStatusMessageIs('success');
 
-        $this->assertNull($accessoryA->fresh()->deleted_at, 'Accessory unexpectedly deleted');
-        $this->assertNull($accessoryB->fresh()->deleted_at, 'Accessory unexpectedly deleted');
-        $this->assertNotNull($accessoryC->fresh()->deleted_at, 'Accessory was not deleted');
+        $this->assertNotSoftDeleted($accessoryA);
+        $this->assertNotSoftDeleted($accessoryB);
+        $this->assertSoftDeleted($accessoryC);
     }
 }

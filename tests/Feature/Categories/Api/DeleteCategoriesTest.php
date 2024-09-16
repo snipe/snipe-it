@@ -27,7 +27,7 @@ class DeleteCategoriesTest extends TestCase implements TestsPermissionsRequireme
             ->deleteJson(route('api.categories.destroy', $category))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($category->fresh()->trashed());
+        $this->assertSoftDeleted($category);
     }
 
     public function testCannotDeleteCategoryThatStillHasAssociatedItems()
@@ -39,6 +39,6 @@ class DeleteCategoriesTest extends TestCase implements TestsPermissionsRequireme
             ->deleteJson(route('api.categories.destroy', $category))
             ->assertStatusMessageIs('error');
 
-        $this->assertFalse($category->fresh()->trashed());
+        $this->assertNotSoftDeleted($category);
     }
 }

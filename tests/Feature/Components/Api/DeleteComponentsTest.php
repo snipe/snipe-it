@@ -28,7 +28,7 @@ class DeleteComponentsTest extends TestCase implements TestsMultipleFullCompanyS
             ->deleteJson(route('api.components.destroy', $component))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($component->fresh()->trashed());
+        $this->assertSoftDeleted($component);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()
@@ -57,8 +57,8 @@ class DeleteComponentsTest extends TestCase implements TestsMultipleFullCompanyS
             ->deleteJson(route('api.components.destroy', $componentC))
             ->assertStatusMessageIs('success');
 
-        $this->assertNull($componentA->fresh()->deleted_at, 'Component unexpectedly deleted');
-        $this->assertNull($componentB->fresh()->deleted_at, 'Component unexpectedly deleted');
-        $this->assertNotNull($componentC->fresh()->deleted_at, 'Component was not deleted');
+        $this->assertNotSoftDeleted($componentA);
+        $this->assertNotSoftDeleted($componentB);
+        $this->assertSoftDeleted($componentC);
     }
 }

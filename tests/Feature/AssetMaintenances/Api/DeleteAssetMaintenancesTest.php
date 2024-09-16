@@ -28,7 +28,7 @@ class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullC
             ->deleteJson(route('api.maintenances.destroy', $assetMaintenance))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($assetMaintenance->fresh()->trashed());
+        $this->assertSoftDeleted($assetMaintenance);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()
@@ -61,8 +61,8 @@ class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullC
             ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceC))
             ->assertStatusMessageIs('success');
 
-        $this->assertNull($assetMaintenanceA->fresh()->deleted_at, 'Asset Maintenance unexpectedly deleted');
-        $this->assertNull($assetMaintenanceB->fresh()->deleted_at, 'Asset Maintenance unexpectedly deleted');
-        $this->assertNotNull($assetMaintenanceC->fresh()->deleted_at, 'Asset Maintenance was not deleted');
+        $this->assertNotSoftDeleted($assetMaintenanceA);
+        $this->assertNotSoftDeleted($assetMaintenanceB);
+        $this->assertSoftDeleted($assetMaintenanceC);
     }
 }

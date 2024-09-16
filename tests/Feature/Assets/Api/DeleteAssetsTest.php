@@ -28,7 +28,7 @@ class DeleteAssetsTest extends TestCase implements TestsMultipleFullCompanySuppo
             ->deleteJson(route('api.assets.destroy', $asset))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($asset->fresh()->trashed());
+        $this->assertSoftDeleted($asset);
     }
 
     public function testCannotDeleteAssetThatIsCheckedOut()
@@ -62,8 +62,8 @@ class DeleteAssetsTest extends TestCase implements TestsMultipleFullCompanySuppo
             ->deleteJson(route('api.assets.destroy', $assetC))
             ->assertStatusMessageIs('success');
 
-        $this->assertNull($assetA->fresh()->deleted_at, 'Asset unexpectedly deleted');
-        $this->assertNull($assetB->fresh()->deleted_at, 'Asset unexpectedly deleted');
-        $this->assertNotNull($assetC->fresh()->deleted_at, 'Asset was not deleted');
+        $this->assertNotSoftDeleted($assetA);
+        $this->assertNotSoftDeleted($assetB);
+        $this->assertSoftDeleted($assetC);
     }
 }

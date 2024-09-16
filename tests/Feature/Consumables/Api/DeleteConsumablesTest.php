@@ -28,7 +28,7 @@ class DeleteConsumablesTest extends TestCase implements TestsMultipleFullCompany
             ->deleteJson(route('api.consumables.destroy', $consumable))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($consumable->fresh()->trashed());
+        $this->assertSoftDeleted($consumable);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()
@@ -57,8 +57,8 @@ class DeleteConsumablesTest extends TestCase implements TestsMultipleFullCompany
             ->deleteJson(route('api.consumables.destroy', $consumableC))
             ->assertStatusMessageIs('success');
 
-        $this->assertNull($consumableA->fresh()->deleted_at, 'Consumable unexpectedly deleted');
-        $this->assertNull($consumableB->fresh()->deleted_at, 'Consumable unexpectedly deleted');
-        $this->assertNotNull($consumableC->fresh()->deleted_at, 'Consumable was not deleted');
+        $this->assertNotSoftDeleted($consumableA);
+        $this->assertNotSoftDeleted($consumableB);
+        $this->assertSoftDeleted($consumableC);
     }
 }

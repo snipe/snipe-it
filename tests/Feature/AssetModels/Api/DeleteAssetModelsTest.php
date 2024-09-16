@@ -27,7 +27,7 @@ class DeleteAssetModelsTest extends TestCase implements TestsPermissionsRequirem
             ->deleteJson(route('api.models.destroy', $assetModel))
             ->assertStatusMessageIs('success');
 
-        $this->assertTrue($assetModel->fresh()->trashed());
+        $this->assertSoftDeleted($assetModel);
     }
 
     public function testCannotDeleteAssetModelThatStillHasAssociatedAssets()
@@ -38,6 +38,6 @@ class DeleteAssetModelsTest extends TestCase implements TestsPermissionsRequirem
             ->deleteJson(route('api.models.destroy', $assetModel))
             ->assertStatusMessageIs('error');
 
-        $this->assertFalse($assetModel->fresh()->trashed());
+        $this->assertNotSoftDeleted($assetModel);
     }
 }
