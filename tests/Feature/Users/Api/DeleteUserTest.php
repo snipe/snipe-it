@@ -10,8 +10,6 @@ use Tests\TestCase;
 
 class DeleteUserTest extends TestCase
 {
-
-
     public function testErrorReturnedViaApiIfUserDoesNotExist()
     {
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
@@ -32,7 +30,6 @@ class DeleteUserTest extends TestCase
             ->assertStatusMessageIs('error')
             ->json();
     }
-
 
     public function testDisallowUserDeletionViaApiIfStillManagingPeople()
     {
@@ -96,7 +93,6 @@ class DeleteUserTest extends TestCase
             ->json();
     }
 
-    
     public function testPermissionsForDeletingIfNotInSameCompanyAndNotSuperadmin()
     {
         $this->settings->enableMultipleFullCompanySupport();
@@ -150,6 +146,4 @@ class DeleteUserTest extends TestCase
             ->json();
 
     }
-
-
 }
