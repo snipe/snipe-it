@@ -4,11 +4,12 @@ namespace Tests\Feature\Accessories\Api;
 
 use App\Models\Accessory;
 use App\Models\User;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class ShowAccessoryTest extends TestCase
+class ShowAccessoryTest extends TestCase implements TestsPermissionsRequirement
 {
-    public function testPermissionRequiredToShowAccessory()
+    public function testRequiresPermission()
     {
         $accessory = Accessory::factory()->create();
 
