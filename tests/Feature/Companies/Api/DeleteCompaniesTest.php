@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Companies\Api;
 
-use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
 use Tests\Concerns\TestsPermissionsRequirement;
