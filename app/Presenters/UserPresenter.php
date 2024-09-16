@@ -189,6 +189,14 @@ class UserPresenter extends Presenter
                 'visible' => false,
             ],
             [
+                'field' => 'locale',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.language'),
+                'visible' => false,
+            ],
+            [
                 'field' => 'department',
                 'searchable' => true,
                 'sortable' => true,

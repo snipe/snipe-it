@@ -157,6 +157,10 @@ class BulkUsersController extends Controller
             $this->update_array['end_date'] = null;
         }
 
+        if ($request->input('null_locale')=='1') {
+            $this->update_array['locale'] = null;
+        }
+
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
