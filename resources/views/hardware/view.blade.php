@@ -1256,6 +1256,7 @@
                         </div> <!-- row -->
                     </div> <!-- /.tab-pane software -->
 
+
                     <div class="tab-pane fade" id="components">
                         <!-- checked out assets table -->
                         <div class="row{{($asset->components->count() > 0 ) ? '' : ' hidden-print'}}">
