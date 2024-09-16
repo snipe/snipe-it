@@ -28,7 +28,7 @@ class DeleteDepreciationTest extends TestCase implements TestsPermissionsRequire
             ->deleteJson(route('api.depreciations.destroy', $depreciation))
             ->assertStatusMessageIs('error');
 
-        $this->assertNotNull($depreciation->fresh(), 'Depreciation unexpectedly deleted');
+        $this->assertDatabaseHas('depreciations', ['id' => $depreciation->id]);
     }
 
     public function testCanDeleteDepreciation()
