@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
@@ -330,14 +331,21 @@ class AssetsController extends Controller
         $asset->expected_checkin = $request->input('expected_checkin', null);
 
         // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->filled('requestable');
+        $asset->requestable = $request->filled('requestable', 0);
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
 
-        $status = Statuslabel::find($asset->status_id);
+        $status = Statuslabel::find($request->input('status_id'));
 
-        if ($status && $status->archived) {
+        // This is a non-deployable status label - we should check the asset back in.
+        if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
+
+            $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
+            $asset->assigned_type = null;
+            $asset->accepted = null;
+
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
         }
 
         if ($asset->assigned_to == '') {
