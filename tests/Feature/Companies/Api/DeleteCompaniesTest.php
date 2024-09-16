@@ -16,6 +16,8 @@ class DeleteCompaniesTest extends TestCase implements TestsPermissionsRequiremen
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.companies.destroy', $company))
             ->assertForbidden();
+
+        $this->assertDatabaseHas('companies', ['id' => $company->id]);
     }
 
     public function testCannotDeleteCompanyThatHasAssociatedItems()

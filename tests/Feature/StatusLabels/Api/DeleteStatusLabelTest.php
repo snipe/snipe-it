@@ -16,6 +16,8 @@ class DeleteStatusLabelTest extends TestCase implements TestsPermissionsRequirem
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.statuslabels.destroy', $statusLabel))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($statusLabel);
     }
 
     public function testCannotDeleteStatusLabelWhileStillAssociatedToAssets()

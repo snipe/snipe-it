@@ -16,6 +16,8 @@ class DeleteGroupTest extends TestCase implements TestsPermissionsRequirement
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.groups.destroy', $group))
             ->assertForbidden();
+
+        $this->assertDatabaseHas('permission_groups', ['id' => $group->id]);
     }
 
     public function testCanDeleteGroup()

@@ -19,6 +19,8 @@ class DeleteCustomFieldsetsTest extends TestCase implements TestsPermissionsRequ
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.fieldsets.destroy', $customFieldset))
             ->assertForbidden();
+
+        $this->assertDatabaseHas('custom_fieldsets', ['id' => $customFieldset->id]);
     }
 
     public function testCannotDeleteCustomFieldsetWithAssociatedFields()

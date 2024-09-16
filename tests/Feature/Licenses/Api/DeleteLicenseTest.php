@@ -18,6 +18,8 @@ class DeleteLicenseTest extends TestCase implements TestsMultipleFullCompanySupp
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.licenses.destroy', $license))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($license);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()

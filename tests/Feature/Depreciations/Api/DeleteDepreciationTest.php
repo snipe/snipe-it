@@ -16,6 +16,8 @@ class DeleteDepreciationTest extends TestCase implements TestsPermissionsRequire
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.depreciations.destroy', $depreciation))
             ->assertForbidden();
+
+        $this->assertDatabaseHas('depreciations', ['id' => $depreciation->id]);
     }
 
     public function testCannotDeleteDepreciationThatHasAssociatedModels()

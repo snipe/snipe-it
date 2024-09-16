@@ -17,6 +17,8 @@ class DeleteAssetModelsTest extends TestCase implements TestsPermissionsRequirem
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.models.destroy', $assetModel))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($assetModel);
     }
 
     public function testCannotDeleteAssetModelThatStillHasAssociatedAssets()

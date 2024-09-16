@@ -17,6 +17,8 @@ class DeleteSupplierTest extends TestCase implements TestsPermissionsRequirement
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.suppliers.destroy', $supplier))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($supplier);
     }
 
     public function testCannotDeleteSupplierWithDataStillAssociated()

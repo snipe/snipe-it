@@ -18,6 +18,8 @@ class DeleteAccessoriesTest extends TestCase implements TestsMultipleFullCompany
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.accessories.destroy', $accessory))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($accessory);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()

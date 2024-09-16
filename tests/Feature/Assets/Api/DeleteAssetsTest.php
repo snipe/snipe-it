@@ -18,6 +18,8 @@ class DeleteAssetsTest extends TestCase implements TestsMultipleFullCompanySuppo
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.assets.destroy', $asset))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($asset);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()

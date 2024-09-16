@@ -18,6 +18,8 @@ class DeleteConsumablesTest extends TestCase implements TestsMultipleFullCompany
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.consumables.destroy', $consumable))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($consumable);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()

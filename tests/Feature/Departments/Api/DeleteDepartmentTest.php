@@ -18,6 +18,8 @@ class DeleteDepartmentTest extends TestCase implements TestsMultipleFullCompanyS
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.departments.destroy', $department))
             ->assertForbidden();
+
+        $this->assertDatabaseHas('departments', ['id' => $department->id]);
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()

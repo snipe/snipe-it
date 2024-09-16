@@ -17,6 +17,8 @@ class DeletePredefinedKitTest extends TestCase implements TestsPermissionsRequir
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.kits.destroy', $predefinedKit))
             ->assertForbidden();
+
+        $this->assertDatabaseHas('kits', ['id' => $predefinedKit->id]);
     }
 
     public function testCanDeletePredefinedKits()

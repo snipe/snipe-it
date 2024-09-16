@@ -17,6 +17,8 @@ class DeleteCategoriesTest extends TestCase implements TestsPermissionsRequireme
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.categories.destroy', $category))
             ->assertForbidden();
+
+        $this->assertNotSoftDeleted($category);
     }
 
     public function testCannotDeleteCategoryThatStillHasAssociatedItems()
