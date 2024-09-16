@@ -215,6 +215,8 @@ return [
     'no_results'			=> 'No Results.',
     'no'  					=> 'No',
     'notes'  				=> 'Notes',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
     'order_number'          => 'Order Number',
     'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Showing _MENU_ items',
