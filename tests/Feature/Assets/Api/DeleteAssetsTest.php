@@ -20,22 +20,6 @@ class DeleteAssetsTest extends TestCase implements TestsMultipleFullCompanySuppo
             ->assertForbidden();
     }
 
-    public function testCanDeleteAsset()
-    {
-        $asset = Asset::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteAssets()->create())
-            ->deleteJson(route('api.assets.destroy', $asset))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($asset);
-    }
-
-    public function testCannotDeleteAssetThatIsCheckedOut()
-    {
-        $this->markTestSkipped('This behavior is not functioning yet.');
-    }
-
     public function testAdheresToMultipleFullCompanySupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -65,5 +49,21 @@ class DeleteAssetsTest extends TestCase implements TestsMultipleFullCompanySuppo
         $this->assertNotSoftDeleted($assetA);
         $this->assertNotSoftDeleted($assetB);
         $this->assertSoftDeleted($assetC);
+    }
+
+    public function testCannotDeleteAssetThatIsCheckedOut()
+    {
+        $this->markTestSkipped('This behavior is not functioning yet.');
+    }
+
+    public function testCanDeleteAsset()
+    {
+        $asset = Asset::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteAssets()->create())
+            ->deleteJson(route('api.assets.destroy', $asset))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($asset);
     }
 }

@@ -19,17 +19,6 @@ class DeleteAssetModelsTest extends TestCase implements TestsPermissionsRequirem
             ->assertForbidden();
     }
 
-    public function testCanDeleteAssetModel()
-    {
-        $assetModel = AssetModel::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteAssetModels()->create())
-            ->deleteJson(route('api.models.destroy', $assetModel))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($assetModel);
-    }
-
     public function testCannotDeleteAssetModelThatStillHasAssociatedAssets()
     {
         $assetModel = Asset::factory()->create()->model;
@@ -39,5 +28,16 @@ class DeleteAssetModelsTest extends TestCase implements TestsPermissionsRequirem
             ->assertStatusMessageIs('error');
 
         $this->assertNotSoftDeleted($assetModel);
+    }
+
+    public function testCanDeleteAssetModel()
+    {
+        $assetModel = AssetModel::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteAssetModels()->create())
+            ->deleteJson(route('api.models.destroy', $assetModel))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($assetModel);
     }
 }

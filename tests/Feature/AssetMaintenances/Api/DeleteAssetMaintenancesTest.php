@@ -20,17 +20,6 @@ class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullC
             ->assertForbidden();
     }
 
-    public function testCanDeleteAssetMaintenance()
-    {
-        $assetMaintenance = AssetMaintenance::factory()->create();
-
-        $this->actingAsForApi(User::factory()->editAssets()->create())
-            ->deleteJson(route('api.maintenances.destroy', $assetMaintenance))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($assetMaintenance);
-    }
-
     public function testAdheresToMultipleFullCompanySupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -64,5 +53,16 @@ class DeleteAssetMaintenancesTest extends TestCase implements TestsMultipleFullC
         $this->assertNotSoftDeleted($assetMaintenanceA);
         $this->assertNotSoftDeleted($assetMaintenanceB);
         $this->assertSoftDeleted($assetMaintenanceC);
+    }
+
+    public function testCanDeleteAssetMaintenance()
+    {
+        $assetMaintenance = AssetMaintenance::factory()->create();
+
+        $this->actingAsForApi(User::factory()->editAssets()->create())
+            ->deleteJson(route('api.maintenances.destroy', $assetMaintenance))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($assetMaintenance);
     }
 }

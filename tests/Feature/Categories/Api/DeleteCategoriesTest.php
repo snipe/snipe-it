@@ -19,17 +19,6 @@ class DeleteCategoriesTest extends TestCase implements TestsPermissionsRequireme
             ->assertForbidden();
     }
 
-    public function testCanDeleteCategory()
-    {
-        $category = Category::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteCategories()->create())
-            ->deleteJson(route('api.categories.destroy', $category))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($category);
-    }
-
     public function testCannotDeleteCategoryThatStillHasAssociatedItems()
     {
         $asset = Asset::factory()->create();
@@ -40,5 +29,16 @@ class DeleteCategoriesTest extends TestCase implements TestsPermissionsRequireme
             ->assertStatusMessageIs('error');
 
         $this->assertNotSoftDeleted($category);
+    }
+
+    public function testCanDeleteCategory()
+    {
+        $category = Category::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteCategories()->create())
+            ->deleteJson(route('api.categories.destroy', $category))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($category);
     }
 }

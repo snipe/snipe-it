@@ -20,17 +20,6 @@ class DeleteComponentsTest extends TestCase implements TestsMultipleFullCompanyS
             ->assertForbidden();
     }
 
-    public function testCanDeleteComponents()
-    {
-        $component = Component::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteComponents()->create())
-            ->deleteJson(route('api.components.destroy', $component))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($component);
-    }
-
     public function testAdheresToMultipleFullCompanySupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -60,5 +49,16 @@ class DeleteComponentsTest extends TestCase implements TestsMultipleFullCompanyS
         $this->assertNotSoftDeleted($componentA);
         $this->assertNotSoftDeleted($componentB);
         $this->assertSoftDeleted($componentC);
+    }
+
+    public function testCanDeleteComponents()
+    {
+        $component = Component::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteComponents()->create())
+            ->deleteJson(route('api.components.destroy', $component))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($component);
     }
 }

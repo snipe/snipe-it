@@ -18,17 +18,6 @@ class DeleteCompaniesTest extends TestCase implements TestsPermissionsRequiremen
             ->assertForbidden();
     }
 
-    public function testCanDeleteCompany()
-    {
-        $company = Company::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteCompanies()->create())
-            ->deleteJson(route('api.companies.destroy', $company))
-            ->assertStatusMessageIs('success');
-
-        $this->assertDatabaseMissing('companies', ['id' => $company->id]);
-    }
-
     public function testCannotDeleteCompanyThatHasAssociatedItems()
     {
         $companyWithAssets = Company::factory()->hasAssets()->create();
@@ -50,5 +39,16 @@ class DeleteCompaniesTest extends TestCase implements TestsPermissionsRequiremen
         $this->assertDatabaseHas('companies', ['id' => $companyWithConsumables->id]);
         $this->assertDatabaseHas('companies', ['id' => $companyWithComponents->id]);
         $this->assertDatabaseHas('companies', ['id' => $companyWithUsers->id]);
+    }
+
+    public function testCanDeleteCompany()
+    {
+        $company = Company::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteCompanies()->create())
+            ->deleteJson(route('api.companies.destroy', $company))
+            ->assertStatusMessageIs('success');
+
+        $this->assertDatabaseMissing('companies', ['id' => $company->id]);
     }
 }

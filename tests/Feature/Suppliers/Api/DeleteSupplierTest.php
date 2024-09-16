@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Suppliers\Api;
 
-use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\Supplier;
 use App\Models\User;

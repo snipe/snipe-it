@@ -18,17 +18,6 @@ class DeleteDepreciationTest extends TestCase implements TestsPermissionsRequire
             ->assertForbidden();
     }
 
-    public function testCanDeleteDepreciation()
-    {
-        $depreciation = Depreciation::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteDepreciations()->create())
-            ->deleteJson(route('api.depreciations.destroy', $depreciation))
-            ->assertStatusMessageIs('success');
-
-        $this->assertDatabaseMissing('depreciations', ['id' => $depreciation->id]);
-    }
-
     public function testCannotDeleteDepreciationThatHasAssociatedModels()
     {
         $depreciation = Depreciation::factory()->hasModels()->create();
@@ -38,5 +27,16 @@ class DeleteDepreciationTest extends TestCase implements TestsPermissionsRequire
             ->assertStatusMessageIs('error');
 
         $this->assertNotNull($depreciation->fresh(), 'Depreciation unexpectedly deleted');
+    }
+
+    public function testCanDeleteDepreciation()
+    {
+        $depreciation = Depreciation::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteDepreciations()->create())
+            ->deleteJson(route('api.depreciations.destroy', $depreciation))
+            ->assertStatusMessageIs('success');
+
+        $this->assertDatabaseMissing('depreciations', ['id' => $depreciation->id]);
     }
 }

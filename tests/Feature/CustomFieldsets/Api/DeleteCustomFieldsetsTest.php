@@ -21,19 +21,6 @@ class DeleteCustomFieldsetsTest extends TestCase implements TestsPermissionsRequ
             ->assertForbidden();
     }
 
-    public function testCanDeleteCustomFieldsets()
-    {
-        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
-
-        $customFieldset = CustomFieldset::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteCustomFieldsets()->create())
-            ->deleteJson(route('api.fieldsets.destroy', $customFieldset))
-            ->assertStatusMessageIs('success');
-
-        $this->assertDatabaseMissing('custom_fieldsets', ['id' => $customFieldset->id]);
-    }
-
     public function testCannotDeleteCustomFieldsetWithAssociatedFields()
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
@@ -61,5 +48,18 @@ class DeleteCustomFieldsetsTest extends TestCase implements TestsPermissionsRequ
             ->assertStatusMessageIs('error');
 
         $this->assertDatabaseHas('custom_fieldsets', ['id' => $customFieldset->id]);
+    }
+
+    public function testCanDeleteCustomFieldsets()
+    {
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $customFieldset = CustomFieldset::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteCustomFieldsets()->create())
+            ->deleteJson(route('api.fieldsets.destroy', $customFieldset))
+            ->assertStatusMessageIs('success');
+
+        $this->assertDatabaseMissing('custom_fieldsets', ['id' => $customFieldset->id]);
     }
 }

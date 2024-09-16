@@ -20,28 +20,6 @@ class DeleteAccessoriesTest extends TestCase implements TestsMultipleFullCompany
             ->assertForbidden();
     }
 
-    public function testCanDeleteAccessory()
-    {
-        $accessory = Accessory::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteAccessories()->create())
-            ->deleteJson(route('api.accessories.destroy', $accessory))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($accessory);
-    }
-
-    public function testCannotDeleteAccessoryThatHasCheckouts()
-    {
-        $accessory = Accessory::factory()->checkedOutToUser()->create();
-
-        $this->actingAsForApi(User::factory()->deleteAccessories()->create())
-            ->deleteJson(route('api.accessories.destroy', $accessory))
-            ->assertStatusMessageIs('error');
-
-        $this->assertNotSoftDeleted($accessory);
-    }
-
     public function testAdheresToMultipleFullCompanySupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -71,5 +49,27 @@ class DeleteAccessoriesTest extends TestCase implements TestsMultipleFullCompany
         $this->assertNotSoftDeleted($accessoryA);
         $this->assertNotSoftDeleted($accessoryB);
         $this->assertSoftDeleted($accessoryC);
+    }
+
+    public function testCannotDeleteAccessoryThatHasCheckouts()
+    {
+        $accessory = Accessory::factory()->checkedOutToUser()->create();
+
+        $this->actingAsForApi(User::factory()->deleteAccessories()->create())
+            ->deleteJson(route('api.accessories.destroy', $accessory))
+            ->assertStatusMessageIs('error');
+
+        $this->assertNotSoftDeleted($accessory);
+    }
+
+    public function testCanDeleteAccessory()
+    {
+        $accessory = Accessory::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteAccessories()->create())
+            ->deleteJson(route('api.accessories.destroy', $accessory))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($accessory);
     }
 }

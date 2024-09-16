@@ -11,7 +11,6 @@ use Tests\TestCase;
 
 class DeleteDepartmentTest extends TestCase implements TestsMultipleFullCompanySupport, TestsPermissionsRequirement
 {
-
     public function testRequiresPermission()
     {
         $department = Department::factory()->create();
@@ -19,28 +18,6 @@ class DeleteDepartmentTest extends TestCase implements TestsMultipleFullCompanyS
         $this->actingAsForApi(User::factory()->create())
             ->deleteJson(route('api.departments.destroy', $department))
             ->assertForbidden();
-    }
-
-    public function testCanDeleteDepartment()
-    {
-        $department = Department::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteDepartments()->create())
-            ->deleteJson(route('api.departments.destroy', $department))
-            ->assertStatusMessageIs('success');
-
-        $this->assertDatabaseMissing('departments', ['id' => $department->id]);
-    }
-
-    public function testCannotDeleteDepartmentThatStillHasUsers()
-    {
-        $department = Department::factory()->hasUsers()->create();
-
-        $this->actingAsForApi(User::factory()->deleteDepartments()->create())
-            ->deleteJson(route('api.departments.destroy', $department))
-            ->assertStatusMessageIs('error');
-
-        $this->assertNotNull($department->fresh(), 'Department unexpectedly deleted');
     }
 
     public function testAdheresToMultipleFullCompanySupportScoping()
@@ -72,5 +49,27 @@ class DeleteDepartmentTest extends TestCase implements TestsMultipleFullCompanyS
         $this->assertNotNull($departmentA->fresh(), 'Department unexpectedly deleted');
         $this->assertNotNull($departmentB->fresh(), 'Department unexpectedly deleted');
         $this->assertNull($departmentC->fresh(), 'Department was not deleted');
+    }
+
+    public function testCannotDeleteDepartmentThatStillHasUsers()
+    {
+        $department = Department::factory()->hasUsers()->create();
+
+        $this->actingAsForApi(User::factory()->deleteDepartments()->create())
+            ->deleteJson(route('api.departments.destroy', $department))
+            ->assertStatusMessageIs('error');
+
+        $this->assertNotNull($department->fresh(), 'Department unexpectedly deleted');
+    }
+
+    public function testCanDeleteDepartment()
+    {
+        $department = Department::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteDepartments()->create())
+            ->deleteJson(route('api.departments.destroy', $department))
+            ->assertStatusMessageIs('success');
+
+        $this->assertDatabaseMissing('departments', ['id' => $department->id]);
     }
 }

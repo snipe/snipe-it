@@ -20,17 +20,6 @@ class DeleteConsumablesTest extends TestCase implements TestsMultipleFullCompany
             ->assertForbidden();
     }
 
-    public function testCanDeleteConsumables()
-    {
-        $consumable = Consumable::factory()->create();
-
-        $this->actingAsForApi(User::factory()->deleteConsumables()->create())
-            ->deleteJson(route('api.consumables.destroy', $consumable))
-            ->assertStatusMessageIs('success');
-
-        $this->assertSoftDeleted($consumable);
-    }
-
     public function testAdheresToMultipleFullCompanySupportScoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -60,5 +49,16 @@ class DeleteConsumablesTest extends TestCase implements TestsMultipleFullCompany
         $this->assertNotSoftDeleted($consumableA);
         $this->assertNotSoftDeleted($consumableB);
         $this->assertSoftDeleted($consumableC);
+    }
+
+    public function testCanDeleteConsumables()
+    {
+        $consumable = Consumable::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteConsumables()->create())
+            ->deleteJson(route('api.consumables.destroy', $consumable))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($consumable);
     }
 }
