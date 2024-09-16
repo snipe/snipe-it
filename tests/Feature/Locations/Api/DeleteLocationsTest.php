@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class DeleteLocationsTest extends TestCase
 {
-
     public function testErrorReturnedViaApiIfLocationDoesNotExist()
     {
         $this->actingAsForApi(User::factory()->superuser()->create())
@@ -90,4 +89,15 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
+    public function testCanDeleteLocation()
+    {
+        $location = Location::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteLocations()->create())
+            ->deleteJson(route('api.locations.destroy', $location->id))
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($location);
+    }
 }

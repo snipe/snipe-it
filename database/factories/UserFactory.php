@@ -311,6 +311,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['categories.delete' => '1']);
     }
 
+    public function deleteLocations()
+    {
+        return $this->appendPermission(['locations.delete' => '1']);
+    }
+
     public function canEditOwnLocation()
     {
         return $this->appendPermission(['self.edit_location' => '1']);
