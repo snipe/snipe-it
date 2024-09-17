@@ -201,10 +201,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::get('asset_tags', [SettingsController::class, 'getAssetTags'])->name('settings.asset_tags.index');
     Route::post('asset_tags', [SettingsController::class, 'postAssetTags'])->name('settings.asset_tags.save');
 
-    Route::get('barcodes', [SettingsController::class, 'getBarcodes'])->name('settings.barcodes.index');
-    Route::post('barcodes', [SettingsController::class, 'postBarcodes'])->name('settings.barcodes.save');
-
-    Route::get('labels', [SettingsController::class, 'getLabels', 'getBarcodes'])->name('settings.labels.index');
+    Route::get('labels', [SettingsController::class, 'getLabels'])->name('settings.labels.index');
     Route::post('labels', [SettingsController::class, 'postLabels'])->name('settings.labels.save');
 
     Route::get('ldap', [SettingsController::class, 'getLdapSettings'])->name('settings.ldap.index');
