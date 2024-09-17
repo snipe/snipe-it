@@ -139,64 +139,90 @@
                                 </div>
                             </div>
                         @endif
-                            <!-- 1D Barcode Type -->
-                            <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
-                                <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
-                                </div>
-                                <div class="col-md-7">
-                                    @php
-                                        $select1DValues = [
-                                            'C128'    => 'C128',
-                                            'C39'     => 'C39',
-                                            'EAN5'    => 'EAN5',
-                                            'EAN13'   => 'EAN13',
-                                            'UPCA'    => 'UPCA',
-                                            'UPCE'    => 'UPCE',
-                                             'none'    => trans('admin/settings/general.none'),
-                                        ];
-                                    @endphp
-                                    {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
-                                    {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                    <p class="help-block">
-                                        {{ trans('admin/settings/general.label2_1d_type_help') }}.
-                                        {!!
-                                            trans('admin/settings/general.help_default_will_use', [
-                                                'default' => trans('admin/settings/general.default'),
-                                                'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.alt_barcode_type'),
-                                            ])
-                                        !!}
-                                    </p>
-                                </div>
-                            </div>
+                @if($setting->label2_enable == 0)
+                    @if ($is_gd_installed)
+                    <!-- barcode -->
+                    <div class="form-group">
 
-                            <!-- 2D Barcode Type -->
-                            <div class="form-group{{ $errors->has('label2_2d_type') ? ' has-error' : '' }}">
-                                <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
+                        <div class="col-md-9 col-md-offset-3">
+                            <label class="form-control">
+                                {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
+                                {{ trans('admin/settings/general.display_alt_barcode') }}
+                            </label>
+                        </div>
+                    </div>
+                    @endif
+                @endif
+                                <!-- 1D Barcode Type -->
+                                <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        @php
+                                            $select1DValues = [
+                                                'C128'    => 'C128',
+                                                'C39'     => 'C39',
+                                                'EAN5'    => 'EAN5',
+                                                'EAN13'   => 'EAN13',
+                                                'UPCA'    => 'UPCA',
+                                                'UPCE'    => 'UPCE',
+                                                 'none'    => trans('admin/settings/general.none'),
+                                            ];
+                                        @endphp
+                                        {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
+                                        {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                        <p class="help-block">
+                                            {{ trans('admin/settings/general.label2_1d_type_help') }}.
+                                            {!!
+                                                trans('admin/settings/general.help_default_will_use', [
+                                                    'default' => trans('admin/settings/general.default'),
+                                                    'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.alt_barcode_type'),
+                                                ])
+                                            !!}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-md-7">
-                                    @php
-                                        $select2DValues = [
-                                            'QRCODE'     => 'QRCODE',
-                                            'DATAMATRIX' => 'DATAMATRIX',
-                                            'PDF417'     => 'PDF417',
-                                            'none'       => trans('admin/settings/general.none'),
-                                        ];
-                                    @endphp
-                                    {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
-                                    {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                    <p class="help-block">
-                                        {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
-                                        {!!
-                                            trans('admin/settings/general.help_default_will_use', [
-                                                'default' => trans('admin/settings/general.default'),
-                                                'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.barcode_type'),
-                                            ])
-                                        !!}
-                                    </p>
-                                </div>
+                @if($setting->label2_enable == 0)
+
+                        <!-- qr code -->
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('aria-label'=>'qr_code')) }}
+                                    {{ trans('admin/settings/general.display_qr') }}
+                                </label>
                             </div>
+                        </div>
+                    @endif
+                                <!-- 2D Barcode Type -->
+                                <div class="form-group{{ $errors->has('label2_2d_type') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        @php
+                                            $select2DValues = [
+                                                'QRCODE'     => 'QRCODE',
+                                                'DATAMATRIX' => 'DATAMATRIX',
+                                                'PDF417'     => 'PDF417',
+                                                'none'       => trans('admin/settings/general.none'),
+                                            ];
+                                        @endphp
+                                        {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
+                                        {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                        <p class="help-block">
+                                            {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
+                                            {!!
+                                                trans('admin/settings/general.help_default_will_use', [
+                                                    'default' => trans('admin/settings/general.default'),
+                                                    'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.barcode_type'),
+                                                ])
+                                            !!}
+                                        </p>
+                                    </div>
+                                </div>
+
                 @if($setting->label2_enable == 0)
                             <!-- QR Text -->
                             <div class="form-group{{ $errors->has('qr_text') ? ' has-error' : '' }}">
@@ -277,9 +303,6 @@
                             {{ Form::hidden('label2_template', old('label2_template', $setting->label2_template)) }}
                             {{ Form::hidden('label2_title', old('label2_title', $setting->label2_title)) }}
                             {{ Form::hidden('label2_asset_logo', old('label2_asset_logo', $setting->label2_asset_logo)) }}
-                            {{ Form::hidden('label2_1d_type', old('label2_1d_type', $setting->label2_1d_type)) }}
-                            {{ Form::hidden('label2_2d_type', old('label2_2d_type', $setting->label2_2d_type)) }}
-                            {{ Form::hidden('label2_2d_target', old('label2_2d_target', $setting->label2_2d_target)) }}
                             {{ Form::hidden('label2_fields', old('label2_fields', $setting->label2_fields)) }}
                         @endif
 

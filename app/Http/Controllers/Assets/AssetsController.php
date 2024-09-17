@@ -543,7 +543,7 @@ class AssetsController extends Controller
     {
         $settings = Setting::getSettings();
         if ($asset = Asset::withTrashed()->find($assetId)) {
-            $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
+            $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->label2_1d_type).'-'.str_slug($asset->asset_tag).'.png';
 
             if (isset($asset->id, $asset->asset_tag)) {
                 if (file_exists($barcode_file)) {
@@ -556,7 +556,7 @@ class AssetsController extends Controller
 
                     $barcode = new \Com\Tecnick\Barcode\Barcode();
                     try {
-                        $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, ($barcode_width < 300 ? $barcode_width : 300), 50);
+                        $barcode_obj = $barcode->getBarcodeObj($settings->label2_1d_type, $asset->asset_tag, ($barcode_width < 300 ? $barcode_width : 300), 50);
                         file_put_contents($barcode_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
