@@ -13,19 +13,14 @@ class ReportTemplate extends Model
     use HasFactory;
     use ValidatingTrait;
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
     protected $casts = [
         'options' => 'array',
     ];
 
     protected $fillable = [
-        'user_id',
         'name',
         'options',
+        'user_id',
     ];
 
     protected $rules = [
