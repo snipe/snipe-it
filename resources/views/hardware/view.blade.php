@@ -252,6 +252,15 @@
                                         {{ Form::close() }}
                                 </div>
 
+                                <!-- Add notes -->
+                                @can('update', \App\Models\Asset::class)
+                                    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+                                        <a href='{{ route('modal.show', 'add-note') }}?type=asset&id={{$asset->id}}' style="width: 100%" data-toggle="modal" data-target="#createModal" data-select='add-note_select_id' data-refresh="assetHistory" data-hasnopayload="true" class="btn btn-sm btn-primary btn-block btn-social hidden-print">
+                                            <x-icon type="" />
+                                            {{ trans('general.add_note') }}</a>
+                                    </div>
+                                @endcan
+
                                 @can('delete', $asset)
                                     <div class="col-md-12 hidden-print" style="padding-top: 30px; padding-bottom: 30px;">
                                         @if ($asset->deleted_at=='')
