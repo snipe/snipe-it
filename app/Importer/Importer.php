@@ -418,7 +418,7 @@ abstract class Importer
      */
     public function setUserId($user_id)
     {
-        $this->user_id = $user_id;
+        $this->created_by = $user_id;
 
         return $this;
     }

@@ -260,6 +260,18 @@ class Accessory extends SnipeModel
     }
 
     /**
+     * Establishes the accessory -> admin user relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v7.0.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+    /**
      * Checks whether or not the accessory has users
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

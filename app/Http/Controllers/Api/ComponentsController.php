@@ -47,7 +47,7 @@ class ComponentsController extends Controller
             ];
 
         $components = Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets', 'supplier');
+            ->with('company', 'location', 'category', 'assets', 'supplier', 'adminuser');
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -270,7 +270,7 @@ class ComponentsController extends Controller
                 'component_id' => $component->id,
                 'created_at' => Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
-                'user_id' => auth()->id(),
+                'created_by' => auth()->id(),
                 'asset_id' => $request->get('assigned_to'),
                 'note' => $request->get('note'),
             ]);

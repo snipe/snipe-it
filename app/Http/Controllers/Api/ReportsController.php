@@ -20,7 +20,7 @@ class ReportsController extends Controller
     {
         $this->authorize('reports.view');
 
-        $actionlogs = Actionlog::with('item', 'user', 'admin', 'target', 'location');
+        $actionlogs = Actionlog::with('item', 'user', 'adminuser', 'target', 'location');
 
         if ($request->filled('search')) {
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
@@ -48,8 +48,8 @@ class ReportsController extends Controller
             $actionlogs = $actionlogs->where('action_type', '=', $request->input('action_type'))->orderBy('created_at', 'desc');
         }
 
-        if ($request->filled('user_id')) {
-            $actionlogs = $actionlogs->where('user_id', '=', $request->input('user_id'));
+        if ($request->filled('created_by')) {
+            $actionlogs = $actionlogs->where('created_by', '=', $request->input('created_by'));
         }
 
         if ($request->filled('action_source')) {
@@ -68,7 +68,7 @@ class ReportsController extends Controller
             'id',
             'created_at',
             'target_id',
-            'user_id',
+            'created_by',
             'accept_signature',
             'action_type',
             'note',
@@ -86,7 +86,7 @@ class ReportsController extends Controller
         $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
 
         switch ($request->input('sort')) {
-            case 'admin':
+            case 'created_by':
                 $actionlogs->OrderAdmin($order);
                 break;
             default:

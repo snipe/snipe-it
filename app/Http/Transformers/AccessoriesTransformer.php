@@ -40,7 +40,10 @@ class AccessoriesTransformer
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
             'remaining_qty' => (int) $accessory->numRemaining(),
             'checkouts_count' =>  $accessory->checkouts_count,
-
+            'created_by' => ($accessory->adminuser) ? [
+                'id' => (int) $accessory->adminuser->id,
+                'name'=> e($accessory->adminuser->present()->fullName()),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 

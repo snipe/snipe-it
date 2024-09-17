@@ -58,7 +58,7 @@ class ComponentImporter extends ItemImporter
             if (isset($this->item['asset_tag']) && ($asset = Asset::where('asset_tag', $this->item['asset_tag'])->first())) {
                 $component->assets()->attach($component->id, [
                     'component_id' => $component->id,
-                    'user_id' => $this->user_id,
+                    'user_id' => $this->created_by,
                     'created_at' => date('Y-m-d H:i:s'),
                     'assigned_qty' => 1, // Only assign the first one to the asset
                     'asset_id' => $asset->id,

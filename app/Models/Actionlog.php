@@ -21,7 +21,7 @@ class Actionlog extends SnipeModel
 
     // This is to manually set the source (via setActionSource()) for determineActionSource()
     protected ?string $source = null;
-    protected $with = ['admin'];
+    protected $with = ['adminuser'];
 
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
@@ -32,7 +32,7 @@ class Actionlog extends SnipeModel
     protected $fillable = [
         'created_at',
         'item_type',
-        'user_id',
+        'created_by',
         'item_id',
         'action_type',
         'note',
@@ -52,7 +52,7 @@ class Actionlog extends SnipeModel
         'action_type',
         'note',
         'log_meta',
-        'user_id',
+        'created_by',
         'remote_ip',
         'user_agent',
         'action_source'
@@ -65,7 +65,7 @@ class Actionlog extends SnipeModel
      */
     protected $searchableRelations = [
         'company' => ['name'],
-        'admin' => ['first_name','last_name','username', 'email'],
+        'adminuser' => ['first_name','last_name','username', 'email'],
         'user'  => ['first_name','last_name','username', 'email'],
         'assets'  => ['asset_tag','name'],
     ];
@@ -198,9 +198,9 @@ class Actionlog extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(User::class, 'user_id')
+        return $this->belongsTo(User::class, 'created_by')
                     ->withTrashed();
     }
 
@@ -376,6 +376,6 @@ class Actionlog extends SnipeModel
 
     public function scopeOrderAdmin($query, $order)
     {
-        return $query->leftJoin('users as admin_sort', 'action_logs.user_id', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

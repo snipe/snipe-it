@@ -70,8 +70,8 @@ class LicensesController extends Controller
             $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
-        if ($request->filled('user_id')) {
-            $licenses->where('user_id', '=', $request->input('user_id'));
+        if ($request->filled('created_by')) {
+            $licenses->where('created_by', '=', $request->input('created_by'));
         }
 
         if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {

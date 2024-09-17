@@ -56,8 +56,9 @@ class AccessoriesController extends Controller
             ];
 
 
-        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'checkouts', 'location', 'supplier')
-                                ->withCount('checkouts as checkouts_count');
+        $accessories = Accessory::select('accessories.*')
+            ->with('category', 'company', 'manufacturer', 'checkouts', 'location', 'supplier', 'adminuser')
+            ->withCount('checkouts as checkouts_count');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -287,7 +288,7 @@ class AccessoriesController extends Controller
             AccessoryCheckout::create([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'user_id' => Auth::id(),
+                'created_by' => auth()->id(),
                 'assigned_to' => $target->id,
                 'assigned_type' => $target::class,
                 'note' => $request->input('note'),

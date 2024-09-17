@@ -81,7 +81,7 @@ class ConsumablesController extends Controller
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = $request->input('purchase_cost');
         $consumable->qty                    = $request->input('qty');
-        $consumable->user_id                = Auth::id();
+        $consumable->created_by                = Auth::id();
         $consumable->notes                  = $request->input('notes');
 
 
@@ -221,7 +221,7 @@ class ConsumablesController extends Controller
         $consumable = clone $consumable_to_close;
         $consumable->id = null;
         $consumable->image = null;
-        $consumable->user_id = null;
+        $consumable->created_by = null;
 
         return view('consumables/edit')->with('item', $consumable);
     }

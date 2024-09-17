@@ -29,17 +29,17 @@ class Category extends SnipeModel
     use SoftDeletes;
 
     protected $table = 'categories';
-    protected $hidden = ['user_id', 'deleted_at'];
+    protected $hidden = ['created_by', 'deleted_at'];
 
     protected $casts = [
-        'user_id'      => 'integer',
+        'created_by'      => 'integer',
     ];
 
     /**
      * Category validation rules
      */
     public $rules = [
-        'user_id' => 'numeric|nullable',
+        'created_by' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|two_column_unique_undeleted:category_type',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
@@ -70,7 +70,7 @@ class Category extends SnipeModel
         'name',
         'require_acceptance',
         'use_default_eula',
-        'user_id',
+        'created_by',
     ];
 
     use Searchable;

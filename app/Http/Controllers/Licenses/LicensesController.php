@@ -99,7 +99,7 @@ class LicensesController extends Controller
         $license->supplier_id       = $request->input('supplier_id');
         $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
-        $license->user_id           = Auth::id();
+        $license->created_by           = Auth::id();
         $license->min_amt           = $request->input('min_amt');
 
         session()->put(['redirect_option' => $request->get('redirect_option')]);

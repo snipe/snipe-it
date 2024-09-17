@@ -186,7 +186,7 @@ class AssetImporter extends ItemImporter
                     }
                 }
 
-                $asset->fresh()->checkOut($target, $this->user_id, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
+                $asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
             }
 
             return;

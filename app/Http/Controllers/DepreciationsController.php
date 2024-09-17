@@ -61,7 +61,7 @@ class DepreciationsController extends Controller
         // Depreciation data
         $depreciation->name = $request->input('name');
         $depreciation->months = $request->input('months');
-        $depreciation->user_id = Auth::id();
+        $depreciation->created_by = auth()->id();
 
         $request->validate([
             'depreciation_min' => [
