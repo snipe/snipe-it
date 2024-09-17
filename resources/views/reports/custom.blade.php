@@ -65,7 +65,7 @@
 
         <div class="box-body">
 
-            <div class="col-md-4">
+            <div class="col-md-4" id="included_fields_wrapper">
 
                 <label class="form-control">
                     <input type="checkbox" id="checkAll" checked="checked">
@@ -650,7 +650,7 @@
       });
 
       $("#checkAll").change(function () {
-        $("input:checkbox").prop('checked', $(this).prop("checked"));
+        $("#included_fields_wrapper input:checkbox").prop('checked', $(this).prop("checked"));
       });
 
       $("#savetemplateform").submit(function(e) {
