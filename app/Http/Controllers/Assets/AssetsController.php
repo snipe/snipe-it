@@ -508,7 +508,7 @@ class AssetsController extends Controller
         if ($settings->qr_code == '1') {
             $asset = Asset::withTrashed()->find($assetId);
             if ($asset) {
-                $size = Helper::barcodeDimensions($settings->barcode_type);
+                $size = Helper::barcodeDimensions($settings->label2_2d_type);
                 $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'.png';
 
                 if (isset($asset->id, $asset->asset_tag)) {
@@ -518,7 +518,7 @@ class AssetsController extends Controller
                         return response()->file($qr_file, $header);
                     } else {
                         $barcode = new \Com\Tecnick\Barcode\Barcode();
-                        $barcode_obj = $barcode->getBarcodeObj($settings->barcode_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
+                        $barcode_obj = $barcode->getBarcodeObj($settings->label2_2d_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
                         file_put_contents($qr_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');

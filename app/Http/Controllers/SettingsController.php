@@ -730,11 +730,7 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        $setting->qr_code = $request->input('qr_code', '0');
-        $setting->alt_barcode = $request->input('alt_barcode');
-        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
-        $setting->barcode_type = $request->input('barcode_type');
-        $setting->qr_text = $request->input('qr_text');
+
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -810,6 +806,12 @@ class SettingsController extends Controller
         $setting->labels_pageheight = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
 
+        //Barcodes
+        $setting->qr_code = $request->input('qr_code', '0');
+        //1D-Barcode
+        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
+        //QR-Code
+        $setting->qr_text = $request->input('qr_text');
 
 
 
