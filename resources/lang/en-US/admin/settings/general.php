@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',
-    'display_qr'                => 'Display 2D BarCode',
+    'display_qr'                => 'Display 2D Barcode',
     'display_alt_barcode'		=> 'Display 1D barcode',
     'email_logo'                => 'Email Logo',
     'barcode_type'				=> '2D Barcode Type',
