@@ -205,9 +205,11 @@
                                             $select2DValues = [
                                                 'QRCODE'     => 'QRCODE',
                                                 'DATAMATRIX' => 'DATAMATRIX',
-                                                'PDF417'     => 'PDF417',
                                                 'none'       => trans('admin/settings/general.none'),
                                             ];
+                                            if ($setting->label2_enable == 1) {
+                                                $select2DValues['PDF417'] = 'PDF417';
+                                            }
                                         @endphp
                                         {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
                                         {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
