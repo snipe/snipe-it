@@ -341,7 +341,7 @@
                     'fieldname' => 'by_dept_id[]',
                     'multiple' => 'true',
                     'hide_new' => 'true',
-                    'selected' => $template->selectValue('by_dept_id', \App\Models\Department::class),
+                    'selected' => $template->selectValues('by_dept_id', \App\Models\Department::class),
             ])
             @include ('partials.forms.edit.supplier-select', [
                     'translated_name' => trans('general.supplier'),
@@ -362,7 +362,7 @@
                     'fieldname' => 'by_manufacturer_id[]',
                     'multiple' => 'true',
                     'hide_new' => 'true',
-                    'selected' => $template->selectValue('by_manufacturer_id', \App\Models\Manufacturer::class),
+                    'selected' => $template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class),
             ])
             @include ('partials.forms.edit.category-select', [
                     'translated_name' => trans('general.category'),
@@ -370,7 +370,7 @@
                     'multiple' => 'true',
                     'hide_new' => 'true',
                     'category_type' => 'asset',
-                    'selected' => $template->selectValue('by_category_id', \App\Models\Category::class),
+                    'selected' => $template->selectValues('by_category_id', \App\Models\Category::class),
             ])
             @include ('partials.forms.edit.status-select', [
                     'translated_name' => trans('admin/hardware/form.status'),
