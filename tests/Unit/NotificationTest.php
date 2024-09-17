@@ -8,13 +8,10 @@ use App\Models\Category;
 use Carbon\Carbon;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class NotificationTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
     {
         $admin = User::factory()->superuser()->create();
@@ -35,5 +32,29 @@ class NotificationTest extends TestCase
         Notification::fake();
         $asset->checkOut($user, $admin->id);
         Notification::assertSentTo($user, CheckoutAssetNotification::class);
+    }
+    public function testDefaultEulaIsSentWhenSetInCategory()
+    {
+        Notification::fake();
+
+        $this->settings->setEula('My Custom EULA Text');
+
+        $user = User::factory()->create();
+
+        $category = Category::factory()->create([
+            'use_default_eula' => 1,
+            'eula_text' => 'EULA Text that should not be used',
+        ]);
+
+        $model = AssetModel::factory()->for($category)->create();
+        $asset = Asset::factory()->for($model, 'model')->create();
+
+        $asset->checkOut($user, User::factory()->superuser()->create()->id);
+
+        Notification::assertSentTo($user, CheckoutAssetNotification::class, function ($notification) {
+            $content = $notification->toMail()->render();
+
+            return str_contains($content, 'My Custom EULA Text') && !str_contains($content, 'EULA Text that should not be used');
+        });
     }
 }

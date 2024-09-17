@@ -135,18 +135,17 @@
 
           @if (!$field->id)
               <!-- Encrypted  -->
-              <div class="col-md-9 col-md-offset-3">
+              <div class="col-md-9 col-md-offset-3" id="encryption_section">
                   <label class="form-control">
-                      <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
+                      <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.encrypt_field') }}
                   </label>
               </div>
               <div class="col-md-9 col-md-offset-3" id="encrypt_warning" style="display:none;">
                   <div class="callout callout-danger">
-                      <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
+                      <p><x-icon type="warning" /> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
                   </div>
               </div>
-
           @endif
 
 
@@ -298,11 +297,16 @@
         }).change();
 
         // Only display the field element if the type is not text
+        // and don't display encryption option for checkbox or radio
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
                 if (($(this).attr("value")!="text") && ($(this).attr("value")!="textarea")){
                     $("#field_values_text").show();
+                if ($(this).attr("value") == "checkbox" || $(this).attr("value") == "radio") {
+                    $("#encryption_section").hide();
+                }
                 } else{
+                    $("#encryption_section").show();
                     $("#field_values_text").hide();
                 }
             });

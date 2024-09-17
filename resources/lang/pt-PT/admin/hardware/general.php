@@ -15,8 +15,8 @@ return [
     'delete_confirm'            => 'Tem a certeza de que pretende eliminar este equipamento?',
     'edit'  					=> 'Editar artigo',
     'model_deleted'  			=> 'Este modelo de artigo foi excluído. Deve restaurar o modelo antes de restaurar o artigo.',
-    'model_invalid'             => 'O modelo deste artigo é inválido.',
-    'model_invalid_fix'         => 'O artigo deve ser editado para corrigir isso antes de tentar recebe-lo ou entregá-lo.',
+    'model_invalid'             => 'This model for this asset is invalid.',
+    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'Solicitavel',
     'requested'				    => 'Requisitado',
     'not_requestable'           => 'Não solicitável',
@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Este artigo possui uma etiqueta de estado que não é implantável e não pode ser entregue no momento.',
     'view'  					=> 'Ver Artigo',
     'csv_error' => 'Tem um erro no ficheiro CSV:',
-    'import_text' => '
-    <p>
-    Carregar um CSV que contém o histórico de ativos. Os artigos e utilizadores DEVEM já existir no sistema, ou serão ignorados. Artigos para a importação de histórico corresponde com a etiqueta de artigo. Tentaremos encontrar um utilizador correspondente com base no nome de utilizador que fornecer, e nos critérios que selecionar abaixo. Se não selecionar nenhum critério abaixo, o sistema vai simplesmente tentar combinar com o formato de nome de utilizador configurado nas Configurações Gerais de Administração &gt;.
-    </p>
-
-    <p>campos incluídos no CSV devem corresponder aos cabeçalhos: <strong>Etiqueta de Artigo, Nome, Data de Entrega, Data de Receção</strong>. Quaisquer campos adicionais serão ignorados. </p>
-
-    <p>Data de  Entrega: em branco ou datas futuras de entrega irão entregar os artigos o utilizador associado. Excluindo a coluna Data de Receção criará uma data de receção com a data de hoje.</p>
+    'import_text' => '<p>Upload de um CSV que contém o histórico de ativos. Os ativos e usuários já existem no sistema, ou serão ignorados. Correspondência de mídias para o histórico de importação acontece com a tag de conteúdo. Tentaremos encontrar um usuário correspondente com base no nome de usuário que você fornece, e nos critérios que você selecionar abaixo. Se você não selecionar nenhum critério abaixo, ele simplesmente tentará combinar com o formato de nome de usuário configurado na <code>Administração &gt; Configurações Gerais</code>.</p><p>Campos incluídos no CSV devem corresponder aos cabeçalhos: <strong>Marcador de Ativo, Nome, Data de Finalização, Data de Entrada</strong>. Quaisquer campos adicionais serão ignorados. </p><p>Data de check-in: em branco ou em datas futuras de check-in fará check-in dos itens para o usuário associado. Excluindo a coluna Data de check-in criará uma data de check-in com a data de hoje.</p>
     ',
-    'csv_import_match_f-l' => 'Tente corresponder aos utilizadores pelo formato primeiro nome.último nome (fulano.sicrano)',
-    'csv_import_match_initial_last' => 'Tente combinar os utilizadores pelo formato primeira letra e sobrenome (fsicrano)',
-    'csv_import_match_first' => 'Tente combinar os utilizadores pelo formato de primeiro nome (fulano)',
-    'csv_import_match_email' => 'Tente combinar os utilizadores pelo endereço eletrónico como nome de utilizador',
-    'csv_import_match_username' => 'Tente corresponder aos utilizadores pelo nome de utilizador',
+    'csv_import_match_f-l' => 'Tente corresponder aos usuários por <strong>firstname.lastname</strong> (<code>jane.smith</code>) formato',
+    'csv_import_match_initial_last' => 'Tente coincidir com os usuários do formato <strong>primeiro sobrenome</strong> (<code>jsmith</code>)',
+    'csv_import_match_first' => 'Tente corresponder aos usuários pelo formato <strong>primeiro nome</strong> (<code>jane</code>)',
+    'csv_import_match_email' => 'Tentar corresponder usuários por <strong>email</strong> como nome de usuário',
+    'csv_import_match_username' => 'Tente corresponder aos usuários do nome <strong>nome de usuário</strong>',
     'error_messages' => 'Mensagens de erro:',
     'success_messages' => 'Mensagens de sucesso:',
     'alert_details' => 'Por favor, veja abaixo para detalhes.',

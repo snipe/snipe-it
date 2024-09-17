@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'அந்த புலம் இல்லை.',
         'already_added'   => 'புலம் ஏற்கனவே சேர்க்கப்பட்டது',
+        'none_selected'   => 'No field selected',
 
         'create' => array(
             'error'   => 'புலம் உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',

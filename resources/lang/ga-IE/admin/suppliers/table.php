@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Stáit',
     'suppliers'             => 'Soláthraithe',
     'update'                => 'Soláthróir Nuashonraithe',
-    'url'                   => 'URL',
     'view'                  => 'Féach ar an Soláthraí',
     'view_assets_for'       => 'Féach Sócmhainní le haghaidh',
     'zip'                   => 'Cód Poist',

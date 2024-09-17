@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Gebruiker bestaan ​​nie.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Die bate wat u met hierdie lisensie probeer assosieer, bestaan ​​nie.',
     'owner_doesnt_match_asset' => 'Die bate wat u met hierdie lisensie probeer assosieer, is in besit van ander as die persoon wat in die opdrag toegeken is.',
     'assoc_users'	 => 'Hierdie lisensie word tans na \'n gebruiker nagegaan en kan nie uitgevee word nie. Gaan asseblief die lisensie eers in, en probeer dan weer uitvee.',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Daar was \'n probleem om die lisensie te kontroleer. Probeer asseblief weer.',
         'success' => 'Die lisensie is suksesvol nagegaan',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

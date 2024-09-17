@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'כתובת אתר לתמיכה',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'עדכון היצרן',
-    'url'   				=> 'כתובת אתר',
 
 );

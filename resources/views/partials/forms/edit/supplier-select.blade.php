@@ -15,8 +15,6 @@
                 <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true" role="option">
                     {{ (\App\Models\Supplier::find($supplier_id)) ? \App\Models\Supplier::find($supplier_id)->name : '' }}
                 </option>
-            @else
-                <option value="" role="option">{{ trans('general.select_supplier') }}</option>
             @endif
         </select>
     </div>

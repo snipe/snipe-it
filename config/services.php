@@ -44,12 +44,6 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'baremetrics' => [
-        'enabled' => env('ENABLE_BMPAY', false),
-        'app_key'  => env('BMPAY_PUBLIC_KEY',  null),
-        'stripe_id'    => env('BMPAY_STRIPE_ID', null),
-    ],
-
     'google' => [
         'maps_api_key' => env('GOOGLE_MAPS_API'),
     ],

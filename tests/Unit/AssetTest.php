@@ -5,13 +5,11 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use Carbon\Carbon;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
+use App\Models\Setting;
 
 class AssetTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testAutoIncrement()
     {
         $this->settings->enableAutoIncrement();
@@ -23,6 +21,7 @@ class AssetTest extends TestCase
         $this->assertModelExists($b);
 
     }
+
     public function testAutoIncrementCollision()
     {
         $this->settings->enableAutoIncrement();
@@ -136,6 +135,38 @@ class AssetTest extends TestCase
         $this->assertModelExists($final);
         $this->assertEquals($final->asset_tag, $final_result);
     }
+
+    public function testAutoIncrementBIG()
+    {
+        $this->settings->enableAutoIncrement();
+
+        // we have to do this by hand to 'simulate' two web pages being open at the same time
+        $a = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset()]);
+        $b = Asset::factory()->make(['asset_tag' => 'ABCD' . (PHP_INT_MAX - 1)]);
+
+        $this->assertTrue($a->save());
+        $this->assertTrue($b->save());
+        $matches = [];
+        preg_match('/\d+/', $a->asset_tag, $matches);
+        $this->assertEquals(Setting::getSettings()->next_auto_tag_base, $matches[0] + 1, "Next auto increment number should be the last normally-saved one plus one, but isn't");
+    }
+
+    public function testAutoIncrementAlmostBIG()
+    {
+        // TODO: this looks pretty close to the one above, could we maybe squish them together?
+        $this->settings->enableAutoIncrement();
+
+        // we have to do this by hand to 'simulate' two web pages being open at the same time
+        $a = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset()]);
+        $b = Asset::factory()->make(['asset_tag' => 'ABCD' . (PHP_INT_MAX - 2)]);
+
+        $this->assertTrue($a->save());
+        $this->assertTrue($b->save());
+        $matches = [];
+        preg_match('/\d+/', $b->asset_tag, $matches); //this is *b*, not *a* - slight difference from above test
+        $this->assertEquals(Setting::getSettings()->next_auto_tag_base, $matches[0] + 1, "Next auto increment number should be the last normally-saved one plus one, but isn't");
+    }
+
 
     public function testWarrantyExpiresAttribute()
     {

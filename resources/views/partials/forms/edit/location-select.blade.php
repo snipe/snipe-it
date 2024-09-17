@@ -3,7 +3,7 @@
 
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7{{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}">
-        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('general.select_location') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
+        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('general.select_location') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' required ' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @isset($selected)
                 @foreach($selected as $location_id)
                     <option value="{{ $location_id }}" selected="selected" role="option" aria-selected="true"  role="option">
@@ -15,8 +15,6 @@
                 <option value="{{ $location_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_location') }}</option>
             @endif
         </select>
     </div>

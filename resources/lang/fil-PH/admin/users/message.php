@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Matagumpay mong hindi tinaggap ang asset na ito.',
     'bulk_manager_warn'	        => 'Ang iyong mga user ay matagumpay nang nai-update, subalit ang iyong manager entry ay hindi nai-save dahil ang manager na iyong pinili ay kabilang sa listahan ng user na kailangang i-edit, at ang mga user ay maaaring wala sa sarili nilang pamamahala. Mangyaring pumiling muli ng iyong user, hindi kasama ang manager.',
     'user_exists'               => 'Ang user ay umiiral na!',
-    'user_not_found'            => 'Ang gumagamit ay hindi umiiral.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Ang field ng login ay kinakailangan',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Ang password ay kinakailangan.',
@@ -37,10 +37,16 @@ return array(
         'update' => 'Mayroong isyu sa pag-update sa user. Mangyaring subukang muli.',
         'delete' => 'Mayroong isyu sa pag-delete ng user. Mangyaring subukang muli.',
         'delete_has_assets' => 'Ang user na ito any may mga aytem na nai-assign at hindi maaring i-delete.',
+        'delete_has_assets_var' => 'This user still has an asset assigned. Please check it in first.|This user still has :count assets assigned. Please check their assets in first.',
+        'delete_has_licenses_var' => 'This user still has a license seats assigned. Please check it in first.|This user still has :count license seats assigned. Please check them in first.',
+        'delete_has_accessories_var' => 'This user still has an accessory assigned. Please check it in first.|This user still has :count accessories assigned. Please check their assets in first.',
+        'delete_has_locations_var' => 'This user still manages a location. Please select another manager first.|This user still manages :count locations. Please select another manager first.',
+        'delete_has_users_var' => 'This user still manages another user. Please select another manager for that user first.|This user still manages :count users. Please select another manager for them first.',
         'unsuspend' => 'Mayroong isyu sa pagtanggal ng suspenso sa user. Mangyaring subukang muli.',
         'import'    => 'Mayroong isyu sa pag-import ng mga user. Mangyaring subukang muli.',
         'asset_already_accepted' => 'Ang asset na ito ay tinanggap na.',
         'accept_or_decline' => 'Dapat mong tanggapin o kaya tanggihan ang asset na ito.',
+        'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
         'incorrect_user_accepted' => 'Ang asset na tinangka mong tanggapin ay hindi nai-check out sa iyo.',
         'ldap_could_not_connect' => 'Hindi maka-konekta sa serber ng LDAP. Mangyaring surrin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>May error mula sa Serber ng LDAP:',
         'ldap_could_not_bind' => 'Hindi makapah-bind sa serber ng LDAP. Mangyaring suriin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>may error mula sa Serber ng LDAP: 
@@ -48,6 +54,7 @@ return array(
         'ldap_could_not_search' => 'Hindi makapaghanap ng serber ng LDAP. Mangyaring suriin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>may error mula sa Serber ng LDAP:',
         'ldap_could_not_get_entries' => 'Hindi makakuha ng entry mula sa serber ng LDAP. Mangyaring surrin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>May-error mula sa Serber ng LDAP:',
         'password_ldap' => 'Ang password sa account na ito ay pinamahalaan ng LDAP/Actibong Direktorya. Mangyaring komontak sa iyong IT department para baguhin ang iyong password. ',
+        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
     ),
 
     'deletefile' => array(

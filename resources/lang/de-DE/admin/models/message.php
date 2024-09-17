@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WARNUNG! Das Asset Modell für dieses Element ist ungültig oder fehlt!',
     'no_association_fix' => 'Dies wird Dinge auf seltsame und schreckliche Weise zerstören. Bearbeite dieses Asset jetzt, um ihm ein Modell zuzuordnen.',
     'assoc_users'	 => 'Dieses Modell ist zurzeit mit einem oder mehreren Assets verknüpft und kann nicht gelöscht werden. Bitte lösche die Assets und versuche dann erneut das Modell zu löschen. ',
-
+    'invalid_category_type' => 'Diese Kategorie muss eine Asset-Kategorie sein.',
 
     'create' => array(
         'error'   => 'Modell wurde nicht erstellt. Bitte versuch es noch einmal.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Es wurden keine Felder geändert, daher wurde nichts aktualisiert.',
         'success' 		=> 'Modell erfolgreich aktualisiert. |:model_count Modelle erfolgreich aktualisiert.',
-        'warn'          => 'Sie sind dabei, die Eigenschaften des folgenden Modells zu aktualisieren: |Sie sind dabei, die Eigenschaften der folgenden :model_count Modelle zu bearbeiten:',
+        'warn'          => 'Sie sind dabei, die Eigenschaften des folgenden Modells zu aktualisieren:| Sie sind dabei, die Eigenschaften der folgenden :model_count Modelle zu bearbeiten:',
 
     ),
 

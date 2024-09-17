@@ -57,16 +57,22 @@
                                     <fieldset>
 
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                            <label for="username"><i class="fas fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username')  }}</label>
+                                            <label for="username">
+                                                <x-icon type="user" />
+                                                {{ trans('admin/users/table.username')  }}
+                                            </label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" id="username" autocomplete="{{ (config('auth.login_autocomplete') === true) ? 'on' : 'off'  }}" autofocus>
                                             {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                            <label for="password"><i class="fa fa-key" aria-hidden="true"></i> {{ trans('admin/users/table.password')  }}</label>
+                                            <label for="password">
+                                                <x-icon type="password" />
+                                                {{ trans('admin/users/table.password')  }}
+                                            </label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" id="password" autocomplete="{{ (config('auth.login_autocomplete') === true) ? 'on' : 'off'  }}">
                                             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
-                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                        <div class="form-group">
                                             <label class="form-control">
                                                 <input name="remember" type="checkbox" value="1"> {{ trans('auth/general.remember_me')  }}
                                             </label>

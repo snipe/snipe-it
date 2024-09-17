@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Аксесуар успішно від\'єднано',
     'accessory_error'                   => 'Пакет вже прикріплений до комплекту',
     'accessory_deleted'                 => 'Видалення пройшло успішно',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'Аксесуара не існує',
     'checkout_success'                  => 'Успішне оформлення замовлення',
     'checkout_error'                    => 'Помилка оформлення замовлення',
     'kit_none'                          => 'Кіт не існує',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Набір було успішно видалено',
     'kit_model_updated'                 => 'Модель успішно оновлено',
     'kit_model_detached'                => 'Модель успішно від’єднано',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

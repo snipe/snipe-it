@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Hoiatus: </strong> See vahend on märgitud kui kasutuselevõtmatu. Kui see olek on muutunud, palun värskendage vahendi olekut.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Vahend puudub.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Seda vahendit ei eksisteeri või see ei ole taotletav.',
     'assoc_users'	 	=> 'Seda vara kontrollitakse kasutajale praegu ja seda ei saa kustutada. Esmalt kontrollige varast ja proovige seejärel uuesti kustutada.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Vahendit ei loodud, palun proovi uuesti. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Vara ei värskendatud, proovige uuesti',
         'success' 			=> 'Vara värskendati edukalt',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Pole ühtegi välju valitud, nii et midagi ei uuendatud.',
         'no_assets_selected'  =>  'Ühtegi vahendit ei valitud, muudatusi ei tehtud.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Varade auditi ebaõnnestus. Palun proovi uuesti.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Varakontrolli sisselogimisel.',
     ],
 
@@ -46,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Mõned üksused ei impordinud õigesti.',
         'errorDetail'           => 'Järgmisi punkte ei imporditud vigade tõttu.',
         'success'               => 'Teie fail on imporditud',
         'file_delete_success'   => 'Teie fail on edukalt kustutatud',
         'file_delete_error'      => 'Faili ei saanud kustutada',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

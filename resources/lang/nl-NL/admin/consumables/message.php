@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'Deze categorie moet een verbruik categorie zijn.',
     'does_not_exist' => 'Verbruiksartikel bestaat niet.',
 
     'create' => array(

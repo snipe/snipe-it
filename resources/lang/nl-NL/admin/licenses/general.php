@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Licentiegegevens',
     'license_seats'  			=> 'Licentie werkplekken',
     'seat'  					=> 'Werkplek',
+    'seat_count'  				=> 'Werkplek :count',
     'seats'  					=> 'Werkplekken',
     'software_licenses'  		=> 'Applicatie Licenties',
     'user'  					=> 'Gebruiker',
@@ -28,7 +29,7 @@ return array(
                 'disabled_tooltip'  => 'Dit is uitgeschakeld omdat er nog niets is uitgecheckt',
                 'disabled_tooltip_reassignable'  => 'Dit is uitgeschakeld omdat de licentie niet opnieuw toegewezen kan worden',
                 'success'           => 'Licentie met succes ingecheckt! | Alle licenties zijn met succes ingecheckt!',
-                'log_msg'           => 'Ingecheckt via bulklicentie-checkin in licentie GUI',
+                'log_msg'           => 'Ingecheckt via bulk licentiecontrole in licentie GUI',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Er zijn nog :remaining_count zitplaatsen over voor deze licentie met een minimale hoeveelheid van :min_amt. Misschien wilt u overwegen om meer zitplaatsen te kopen.',
+    'below_threshold_short' => 'Dit artikel ligt onder de minimum vereiste hoeveelheid.',
 );

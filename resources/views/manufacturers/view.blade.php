@@ -35,27 +35,24 @@
         <li class="active">
 
           <a href="#assets" data-toggle="tab">
-
             <span class="hidden-lg hidden-md">
               <i class="fas fa-barcode fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">
                 {{ trans('general.assets') }}
-                {!! (($manufacturer->assets) && ($manufacturer->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                {!! ($manufacturer->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
             </span>
-
           </a>
 
         </li>
         <li>
           <a href="#licenses" data-toggle="tab">
-
             <span class="hidden-lg hidden-md">
-              <i class="far fa-save fa-2x"></i>
+               <x-icon type="licenses" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">
               {{ trans('general.licenses') }}
-              {!! (($manufacturer->licenses) && ($manufacturer->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->licenses->count()).'</badge>' : '' !!}
+              {!! ($manufacturer->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->licenses->count()).'</badge>' : '' !!}
             </span>
 
           </a>
@@ -64,24 +61,23 @@
           <a href="#accessories" data-toggle="tab">
 
              <span class="hidden-lg hidden-md">
-              <i class="far fa-keyboard fa-2x"></i>
+              <x-icon type="accessories" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">
               {{ trans('general.accessories') }}
-              {!! (($manufacturer->accessories) && ($manufacturer->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->accessories->count()).'</badge>' : '' !!}
+              {!! ($manufacturer->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->accessories->count()).'</badge>' : '' !!}
             </span>
-
           </a>
         </li>
         <li>
           <a href="#consumables" data-toggle="tab">
 
              <span class="hidden-lg hidden-md">
-              <i class="fas fa-tint fa-2x"></i>
+               <x-icon type="consumables" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">
               {{ trans('general.consumables') }}
-              {!! (($manufacturer->consumables) && ($manufacturer->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->consumables->count()).'</badge>' : '' !!}
+              {!! ($manufacturer->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->consumables->count()).'</badge>' : '' !!}
             </span>
 
           </a>

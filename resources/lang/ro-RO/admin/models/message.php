@@ -7,7 +7,7 @@ return array(
     'no_association' => 'AVERTISMENT! Modelul de activ pentru acest articol este invalid sau lipsește!',
     'no_association_fix' => 'Acest lucru va strica lucrurile în moduri ciudate și oribile. Editează acest bun acum pentru a-l atribui un model.',
     'assoc_users'	 => 'Acest model este momentan asociat cu cel putin unul sau mai multe active si nu poate fi sters. Va rugam sa stergeti activul si dupa incercati iar. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Modelul nu a fost creat, incercati iar.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Nu au fost modificate câmpuri, deci nimic nu a fost actualizat.',
         'success' 		=> 'Modelul a fost actualizat cu succes. <unk> :model_count modele actualizate cu succes.',
-        'warn'          => 'Sunteți pe cale să actualizați proprietățile următorului model: w Sunteți pe cale să editați proprietățile următoarelor modele :model_count:',
+        'warn'          => 'Sunteți pe cale să actualizați proprietățile următorului model: Sunteți pe cale să editați proprietățile următoarelor modele :model_count:',
 
     ),
 

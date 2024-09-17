@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Aksesuar başarıyla çıkarıldı',
     'accessory_error'                   => 'Aksesuar zaten kite takılı',
     'accessory_deleted'                 => 'Silme başarılı oldu',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'Aksesuar mevcut değil',
     'checkout_success'                  => 'Teslim işlemi başarılı oldu',
     'checkout_error'                    => 'Teslim hatası',
     'kit_none'                          => 'Kit mevcut değil',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit başarıyla silindi',
     'kit_model_updated'                 => 'Model başarıyla güncellendi',
     'kit_model_detached'                => 'Model başarıyla ayrıldı',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

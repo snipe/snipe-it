@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Manufacturer;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Supplier;
 
@@ -89,6 +90,43 @@ class ConsumableFactory extends Factory
                 'qty' => 20,
                 'min_amt' => 2,
             ];
+        });
+    }
+
+    public function withoutItemsRemaining()
+    {
+        return $this->state(function () {
+            return [
+                'qty' => 1,
+            ];
+        })->afterCreating(function (Consumable $consumable) {
+            $user = User::factory()->create();
+
+            $consumable->users()->attach($consumable->id, [
+                'consumable_id' => $consumable->id,
+                'user_id' => $user->id,
+                'assigned_to' => $user->id,
+                'note' => '',
+            ]);
+        });
+    }
+
+    public function requiringAcceptance()
+    {
+        return $this->afterCreating(function (Consumable $consumable) {
+            $consumable->category->update(['require_acceptance' => 1]);
+        });
+    }
+
+    public function checkedOutToUser(User $user = null)
+    {
+        return $this->afterCreating(function (Consumable $consumable) use ($user) {
+            $consumable->users()->attach($consumable->id, [
+                'consumable_id' => $consumable->id,
+                'created_at' => Carbon::now(),
+                'user_id' => User::factory()->create()->id,
+                'assigned_to' => $user->id ?? User::factory()->create()->id,
+            ]);
         });
     }
 }

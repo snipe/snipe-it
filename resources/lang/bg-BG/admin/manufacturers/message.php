@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Променливите <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, и <code>{MODEL_NAME}</code> могат да бъдат използвани в URL, за да бъдат автоматично попълнени за активите - например https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Променливите <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, и <code>{MODEL_NAME}</code> могат да бъдат използвани в URL, за да бъдат автоматично попълнени за активите - например https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Несъществуващ производител.',
     'assoc_users'	 => 'Този производител е асоцииран с поне един от моделите и не може да бъде изтрит. Моля, променете връзките на моделите по отношение на този производител и опитайте отново. ',
 

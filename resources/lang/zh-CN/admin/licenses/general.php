@@ -14,6 +14,7 @@ return array(
     'info'  					=> '授权信息',
     'license_seats'  			=> '授权数量',
     'seat'  					=> '次数',
+    'seat_count'  				=> '席位数:count',
     'seats'  					=> '允许使用次数',
     'software_licenses'  		=> '软件许可证',
     'user'  					=> '用户',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => '归还所有席位',
-                'modal'             => '此操作将归还一个席位。| 此操作将归还此许可证的所有 :checkedout_seas_count 个座位。',
+                'modal'             => '此操作将归还一个席位。| 此操作将归还此许可的所有 :checkedout_seas_count 个席位。',
                 'enabled_tooltip'   => '从用户和资产中归还此许可证的所有席位',
                 'disabled_tooltip'  => '此功能已禁用，因为当前没有借出的席位',
                 'disabled_tooltip_reassignable'  => '此功能已禁用，因为许可证不可重新分配。',
                 'success'           => '许可证归还成功！| 所有许可证都已归还成功！',
-                'log_msg'           => '通过批量许可证签出在许可证GUI中签入',
+                'log_msg'           => '通过许可证GUI中的批量归还许可证进行归还',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => '此许可证仅剩:remaining_count个席位，且最小数量为:min_amt。你可能需要考虑购买更多座位。',
+    'below_threshold_short' => '该项低于最低要求数量。',
 );

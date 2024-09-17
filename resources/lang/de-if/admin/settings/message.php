@@ -12,7 +12,10 @@ return [
         'generated'             => 'Neue Backup Datei erfolgreich erstellt.',
         'file_not_found'        => 'Backup Datei konnte nicht gefunden werden.',
         'restore_warning'       => 'Ja, wiederherstellen. Ich bestätige, dass dies alle vorhandenen Daten überschreibt, die derzeit in der Datenbank vorhanden sind. Diese Aktion wird auch alle bestehenden Benutzer abmelden (einschließlich Dir).',
-        'restore_confirm'       => 'Bist Du sicher, dass Du Deine Datenbank aus :filename wiederherstellen möchten?'
+        'restore_confirm'       => 'Bist du sicher, dass du deine Datenbank aus :filename wiederherstellen möchten?'
+    ],
+    'restore' => [
+        'success'               => 'Ihr Systembackup wurde wiederhergestellt. Bitte melde dich erneut an.'
     ],
     'purge' => [
         'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',
@@ -23,7 +26,7 @@ return [
         'sending' => 'Test E-Mail wird gesendet...',
         'success' => 'Mail gesendet!',
         'error' => 'E-Mail konnte nicht gesendet werden.',
-        'additional' => 'Keine zusätzliche Fehlermeldung vorhanden. Überprüfe Deine E-Mail-Einstellungen und Dein App-Protokoll.'
+        'additional' => 'Keine zusätzliche Fehlermeldung vorhanden. Überprüfe deine E-Mail-Einstellungen und dein App-Protokoll.'
     ],
     'ldap' => [
         'testing' => 'Teste LDAP Verbindung, Binding & Abfrage ...',

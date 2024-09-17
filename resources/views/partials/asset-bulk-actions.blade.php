@@ -6,8 +6,9 @@
       'id' => (isset($id_formname)) ? $id_formname : 'assetsBulkForm',
  ]) }}
 
-    {{-- The 'id ASC' will only be used if the cookie is actually empty (like on first-use) --}}
-    <input name="sort" type="hidden" value="id ASC">
+    {{-- The sort and order will only be used if the cookie is actually empty (like on first-use) --}}
+    <input name="sort" type="hidden" value="assets.id">
+    <input name="order" type="hidden" value="asc">
     <label for="bulk_actions">
         <span class="sr-only">
             {{ trans('button.bulk_actions') }}
@@ -25,7 +26,7 @@
         @can('delete', \App\Models\Asset::class)
             <option value="delete">{{ trans('button.delete') }}</option>
         @endcan
-        <option value="labels" accesskey="l">{{ trans_choice('button.generate_labels', 2) }}</option>
+        <option value="labels" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=l" : ''}}>{{ trans_choice('button.generate_labels', 2) }}</option>
         @endif
     </select>
 

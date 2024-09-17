@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Umsebenzisi akakho.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Impahla ozama ukuyihlanganisa nale layisensi ayikho.',
     'owner_doesnt_match_asset' => 'Ifa ozama ukulihlobanisa nale layisensi linomunye umuntu ngaphandle komuntu okhethiwe ekudonsweni kokunikezelwa.',
     'assoc_users'	 => 'Leli layisensi okwamanje lihlolwe kumsebenzisi futhi alikwazi ukususwa. Sicela uhlole ilayisensi ekuqaleni, bese uzama ukususa futhi.',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Kube nenkinga yokuhlola ilayisense. Ngicela uzame futhi.',
         'success' => 'Ilayisensi yahlolwa ngokuphumelelayo',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

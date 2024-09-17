@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Kiadva',
     'asset_expected_checkin'    => 'Várható visszavétel dátuma',
     'date'                      => 'Dátum:',
+    'phone'                     => 'Helyszín telefonszáma',
     'signed_by_asset_auditor'   => 'Aláírva (Vagyonellenőr):',
     'signed_by_finance_auditor' => 'Aláírta (Pénzügyi könyvvizsgáló):',
     'signed_by_location_manager' => 'Aláírva (Helykezelő):',

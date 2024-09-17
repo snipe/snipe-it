@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Označení majetku',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Přiděleno',
     'book_value'  	=> 'Aktuální hodnota',
     'change' 		=> 'Příjem/Výdej',
     'checkout_date' => 'Datum vydání',

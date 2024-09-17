@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> '사용자',
     'checkout'   		=> '입/출',
+    'deleted_at'        => 'Deleted at',
     'id'      			=> '아이디',
     'license_email'   	=> '라이선스 메일주소',
     'license_name'   	=> '인증 대상',

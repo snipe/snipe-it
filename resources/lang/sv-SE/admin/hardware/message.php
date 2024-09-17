@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har markerats som omöjlig för närvarande. Om denna status har ändrats uppdaterar du tillgångsstatusen.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Tillgång existerar inte.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Den tillgången finns inte eller är inte önskvärd.',
     'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'Tillgången skapades inte, försök igen. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Tillgången var inte uppdaterad, försök igen',
         'success' 			=> 'Asset uppdaterad framgångsrikt.',
+        'encrypted_warning' => 'Tillgången uppdaterades framgångsrikt, men krypterade anpassade fält berodde inte på behörigheter',
         'nothing_updated'	=>  'Inga fält valdes, så ingenting uppdaterades.',
         'no_assets_selected'  =>  'Inga tillgångar valdes, så ingenting uppdaterades.',
+        'assets_do_not_exist_or_are_invalid' => 'Valda tillgångar kan inte uppdateras.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Inventeringen av tillgången misslyckades. Var god försök igen.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'Inventeringen av tillgången har loggats.',
     ],
 
@@ -46,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'Vissa objekt importerades inte korrekt.',
         'errorDetail'           => 'Följande objekt importerades inte på grund av fel.',
         'success'               => 'Din fil har importerats',
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
         'file_missing' => 'Den valda filen saknas',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
         'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
     ],

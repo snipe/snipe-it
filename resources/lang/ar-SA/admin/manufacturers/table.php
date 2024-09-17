@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'رابط الدعم التقني',
     'warranty_lookup_url'   => 'رابط البحث عن الضمان',
     'update'				=> 'تحديث الشركة المصنعة',
-    'url'   				=> 'الرابط',
 
 );

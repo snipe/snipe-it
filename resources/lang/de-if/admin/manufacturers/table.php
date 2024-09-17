@@ -2,7 +2,7 @@
 
 return array(
     'about_manufacturers_title'    => 'Über Hersteller',
-    'about_manufacturers_text'  => 'Hersteller sind die Firmen, die Deine Assets herstellen. Hier kannst Du wichtige Supportkontakte eintragen, die in den Assetdetails angezeigt werden.',
+    'about_manufacturers_text'  => 'Hersteller sind die Firmen, die deine Assets herstellen. Hier kannst du wichtige Support-Kontaktinformationen eintragen, die in den Asset-Details angezeigt werden.',
     'asset_manufacturers'	=> 'Asset Hersteller',
     'create'				=> 'Hersteller anlegen',
     'id'   					=> 'ID',
@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Support-URL',
     'warranty_lookup_url'   => 'Garantie-Verweis URL',
     'update'				=> 'Hersteller aktualisieren',
-    'url'   				=> 'URL',
 
 );

@@ -4,6 +4,159 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use ZipArchive;
+use Illuminate\Support\Facades\Log;
+
+class SQLStreamer {
+    private $input;
+    private $output;
+    // embed the prefix here?
+    public ?string $prefix;
+
+    private bool $reading_beginning_of_line = true;
+
+    public static $buffer_size = 1024 * 1024;  // use a 1MB buffer, ought to work fine for most cases?
+
+    public array $tablenames = [];
+    private bool $should_guess = false;
+    private bool $statement_is_permitted = false;
+
+    public function __construct($input, $output, string $prefix = null)
+    {
+        $this->input = $input;
+        $this->output = $output;
+        $this->prefix = $prefix;
+    }
+
+    public function parse_sql(string $line): string {
+        // take into account the 'start of line or not' setting as an instance variable?
+        // 'continuation' lines for a permitted statement are PERMITTED.
+        // remove *only* line-feeds & carriage-returns; helpful for regexes against lines from
+        // Windows dumps
+        $line = trim($line, "\r\n");
+        if($this->statement_is_permitted && $line[0] === ' ') {
+            return $line . "\n"; //re-add the newline
+        }
+
+        $table_regex = '`?([a-zA-Z0-9_]+)`?';
+        $allowed_statements = [
+            "/^(DROP TABLE (?:IF EXISTS )?)`$table_regex(.*)$/" => false,
+            "/^(CREATE TABLE )$table_regex(.*)$/" => true, //sets up 'continuation'
+            "/^(LOCK TABLES )$table_regex(.*)$/" => false,
+            "/^(INSERT INTO )$table_regex(.*)$/" => false,
+            "/^UNLOCK TABLES/" => false,
+            // "/^\\) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;/" => false, // FIXME not sure what to do here?
+            "/^\\)[a-zA-Z0-9_= ]*;$/" => false,
+            // ^^^^^^ that bit should *exit* the 'permitted' block
+            "/^\\(.*\\)[,;]$/" => false, //older MySQL dump style with one set of values per line
+            /* we *could* have made the ^INSERT INTO blah VALUES$ turn on the capturing state, and closed it with
+               a ^(blahblah);$ but it's cleaner to not have to manage the state machine. We're just going to
+               assume that (blahblah), or (blahblah); are values for INSERT and are always acceptable. */
+        ];
+
+        foreach($allowed_statements as $statement => $statechange) {
+//            $this->info("Checking regex: $statement...\n");
+            $matches = [];
+            if (preg_match($statement,$line,$matches)) {
+                $this->statement_is_permitted = $statechange;
+                // matches are: 1 => first part of the statement, 2 => tablename, 3 => rest of statement
+                // (with of course 0 being "the whole match")
+                if (@$matches[2]) {
+//                    print "Found a tablename! It's: ".$matches[2]."\n";
+                    if ($this->should_guess) {
+                        @$this->tablenames[$matches[2]] += 1;
+                        continue; //oh? FIXME
+                    } else {
+                        $cleaned_tablename = \DB::getTablePrefix().preg_replace('/^'.$this->prefix.'/','',$matches[2]);
+                        $line = preg_replace($statement,'$1`'.$cleaned_tablename.'`$3' , $line);
+                    }
+                } else {
+                    // no explicit tablename in this one, leave the line alone
+                }
+                //how do we *replace* the tablename?
+//                print "RETURNING LINE: $line";
+                return $line . "\n"; //re-add newline
+            }
+        }
+        // all that is not allowed is denied.
+        return "";
+    }
+
+    //this is used in exactly *TWO* places, and in both cases should return a prefix I think?
+    // first - if you do the --sanitize-only one (which is mostly for testing/development)
+    // next - when you run *without* a guessed prefix, this is run first to figure out the prefix
+    // I think we have to *duplicate* the call to be able to run it again?
+    public static function guess_prefix($input):string
+    {
+        $parser = new self($input, null);
+        $parser->should_guess = true;
+        $parser->line_aware_piping(); // <----- THIS is doing the heavy lifting!
+
+        $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to statics?
+        //can't use 'users' because the 'accessories_checkout' table?
+        // can't use 'assets' because 'ver1_components_assets'
+        foreach($check_tables as $check_table => $_ignore) {
+            foreach ($parser->tablenames as $tablename => $_count) {
+//                print "Comparing $tablename to $check_table\n";
+                if (str_ends_with($tablename,$check_table)) {
+//                    print "Found one!\n";
+                    $check_tables[$check_table] = substr($tablename,0,-strlen($check_table));
+                }
+            }
+        }
+        $guessed_prefix = null;
+        foreach ($check_tables as $clean_table => $prefix_guess) {
+            if(is_null($prefix_guess)) {
+                print("Couldn't find table $clean_table\n");
+                die();
+            }
+            if(is_null($guessed_prefix)) {
+                $guessed_prefix = $prefix_guess;
+            } else {
+                if ($guessed_prefix != $prefix_guess) {
+                    print("Prefix mismatch! Had guessed $guessed_prefix but got $prefix_guess\n");
+                    die();
+                }
+            }
+        }
+
+        return $guessed_prefix;
+
+    }
+
+    public function line_aware_piping(): int
+    {
+        $bytes_read = 0;
+        if (! $this->input) {
+            throw new \Exception("No Input available for line_aware_piping");
+        }
+
+        while (($buffer = fgets($this->input, SQLStreamer::$buffer_size)) !== false) {
+            $bytes_read += strlen($buffer);
+            if ($this->reading_beginning_of_line) {
+                // Log::debug("Buffer is: '$buffer'");
+                $cleaned_buffer = $this->parse_sql($buffer);
+                if ($this->output) {
+                    $bytes_written = fwrite($this->output, $cleaned_buffer);
+
+                    if ($bytes_written === false) {
+                        throw new \Exception("Unable to write to pipe");
+                    }
+                }
+            }
+            // if we got a newline at the end of this, then the _next_ read is the beginning of a line
+            if($buffer[strlen($buffer)-1] === "\n") {
+                $this->reading_beginning_of_line = true;
+            } else {
+                $this->reading_beginning_of_line = false;
+            }
+
+        }
+        return $bytes_read;
+
+    }
+}
+
+
 
 class RestoreFromBackup extends Command
 {
@@ -12,10 +165,14 @@ class RestoreFromBackup extends Command
      *
      * @var string
      */
+    // FIXME - , stripping prefixes and nonstandard SQL statements. Without --prefix, guess and return the correct prefix to strip
     protected $signature = 'snipeit:restore 
                                             {--force : Skip the danger prompt; assuming you enter "y"} 
                                             {filename : The zip file to be migrated}
-                                            {--no-progress : Don\'t show a progress bar}';
+                                            {--no-progress : Don\'t show a progress bar}
+                                            {--sanitize-guess-prefix : Guess and output the table-prefix needed to "sanitize" the SQL}
+                                            {--sanitize-with-prefix= : "Sanitize" the SQL, using the passed-in table prefix (can be learned from --sanitize-guess-prefix). Pass as just \'--sanitize-with-prefix=\' to use no prefix}
+                                            {--sql-stdout-only : ONLY "Sanitize" the SQL and print it to stdout - useful for debugging - probably requires --sanitize-with-prefix= }';
 
     /**
      * The console command description.
@@ -34,8 +191,6 @@ class RestoreFromBackup extends Command
         parent::__construct();
     }
 
-    public static $buffer_size = 1024 * 1024;  // use a 1MB buffer, ought to work fine for most cases?
-
     /**
      * Execute the console command.
      *
@@ -45,7 +200,7 @@ class RestoreFromBackup extends Command
     {
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
-            \Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
+            Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
             chdir(base_path()); // TODO - is this *safe* to change on a running script?!
         }
         //
@@ -55,7 +210,7 @@ class RestoreFromBackup extends Command
             return $this->error('Missing required filename');
         }
 
-        if (! $this->option('force') && ! $this->confirm('Are you sure you wish to restore from the given backup file? This can lead to MASSIVE DATA LOSS!')) {
+        if (! $this->option('force') && ! $this->option('sanitize-guess-prefix') && ! $this->confirm('Are you sure you wish to restore from the given backup file? This can lead to MASSIVE DATA LOSS!')) {
             return $this->error('Data loss not confirmed');
         }
 
@@ -151,18 +306,18 @@ class RestoreFromBackup extends Command
                 continue;
             }
             if (@pathinfo($raw_path, PATHINFO_EXTENSION) == 'sql') {
-                \Log::debug("Found a sql file!");
+                Log::debug("Found a sql file!");
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
                 continue;
             }
 
             foreach (array_merge($private_dirs, $public_dirs) as $dir) {
-                $last_pos = strrpos($raw_path, $dir.'/');
+                $last_pos = strrpos($raw_path, $dir . '/');
                 if ($last_pos !== false) {
                     //print("INTERESTING - last_pos is $last_pos when searching $raw_path for $dir - last_pos+strlen(\$dir) is: ".($last_pos+strlen($dir))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
                     //print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
-                    $interesting_files[$raw_path] = ['dest' =>$dir, 'index' => $i];
+                    $interesting_files[$raw_path] = ['dest' => $dir, 'index' => $i];
                     continue 2;
                     if ($last_pos + strlen($dir) + 1 == strlen($raw_path)) {
                         // we don't care about that; we just want files with the appropriate prefix
@@ -171,7 +326,7 @@ class RestoreFromBackup extends Command
                 }
             }
             $good_extensions = ['png', 'gif', 'jpg', 'svg', 'jpeg', 'doc', 'docx', 'pdf', 'txt',
-                                'zip', 'rar', 'xls', 'xlsx', 'lic', 'xml', 'rtf', 'webp', 'key', 'ico', ];
+                'zip', 'rar', 'xls', 'xlsx', 'lic', 'xml', 'rtf', 'webp', 'key', 'ico',];
             foreach (array_merge($private_files, $public_files) as $file) {
                 $has_wildcard = (strpos($file, '*') !== false);
                 if ($has_wildcard) {
@@ -180,8 +335,8 @@ class RestoreFromBackup extends Command
                 $last_pos = strrpos($raw_path, $file); // no trailing slash!
                 if ($last_pos !== false) {
                     $extension = strtolower(pathinfo($raw_path, PATHINFO_EXTENSION));
-                    if (! in_array($extension, $good_extensions)) {
-                        $this->warn('Potentially unsafe file '.$raw_path.' is being skipped');
+                    if (!in_array($extension, $good_extensions)) {
+                        $this->warn('Potentially unsafe file ' . $raw_path . ' is being skipped');
                         $boring_files[] = $raw_path;
                         continue 2;
                     }
@@ -196,7 +351,6 @@ class RestoreFromBackup extends Command
             }
             $boring_files[] = $raw_path; //if we've gotten to here and haven't continue'ed our way into the next iteration, we don't want this file
         } // end of pre-processing the ZIP file for-loop
-
         // print_r($interesting_files);exit(-1);
 
         if (count($sqlfiles) != 1) {
@@ -206,6 +360,26 @@ class RestoreFromBackup extends Command
         if (strpos($sqlfiles[0], 'db-dumps') === false) {
             //return $this->error("SQL backup file is missing 'db-dumps' component of full pathname: ".$sqlfiles[0]);
             //older Snipe-IT installs don't have the db-dumps subdirectory component
+        }
+
+        $sql_stat = $za->statIndex($sqlfile_indices[0]);
+        //$this->info("SQL Stat is: ".print_r($sql_stat,true));
+        $sql_contents = $za->getStream($sql_stat['name']); // maybe copy *THIS* thing?
+
+        // OKAY, now that we *found* the sql file if we're doing just the guess-prefix thing, we can do that *HERE* I think?
+        if ($this->option('sanitize-guess-prefix')) {
+            $prefix = SQLStreamer::guess_prefix($sql_contents);
+            $this->line($prefix);
+            return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitze your SQL.");
+        }
+
+        // If we're doing --sql-stdout-only, handle that now so we don't have to open pipes to mysql and all of that silliness
+        if ($this->option('sql-stdout-only')) {
+            $sql_importer = new SQLStreamer($sql_contents, STDOUT, $this->option('sanitize-with-prefix'));
+            $bytes_read = $sql_importer->line_aware_piping();
+            return $this->warn("$bytes_read total bytes read");
+            //TODO - it'd be nice to dump this message to STDERR so that STDOUT is just pure SQL,
+            // which would be good for redirecting to a file, and not having to trim the last line off of it
         }
 
         //how to invoke the restore?
@@ -228,6 +402,7 @@ class RestoreFromBackup extends Command
             return $this->error('Unable to invoke mysql via CLI');
         }
 
+        // I'm not sure about these?
         stream_set_blocking($pipes[1], false); // use non-blocking reads for stdout
         stream_set_blocking($pipes[2], false); // use non-blocking reads for stderr
 
@@ -238,9 +413,9 @@ class RestoreFromBackup extends Command
 
         //$sql_contents = fopen($sqlfiles[0], "r"); //NOPE! This isn't a real file yet, silly-billy!
 
-        $sql_stat = $za->statIndex($sqlfile_indices[0]);
-        //$this->info("SQL Stat is: ".print_r($sql_stat,true));
-        $sql_contents = $za->getStream($sql_stat['name']);
+        // FIXME - this feels like it wants to go somewhere else?
+        // and it doesn't seem 'right' - if you can't get a stream to the .sql file,
+        // why do we care what's happening with pipes and stdout and stderr?!
         if ($sql_contents === false) {
             $stdout = fgets($pipes[1]);
             $this->info($stdout);
@@ -249,29 +424,35 @@ class RestoreFromBackup extends Command
 
             return false;
         }
-        $bytes_read = 0;
 
         try {
-            while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
-                $bytes_read += strlen($buffer);
-                // \Log::debug("Buffer is: '$buffer'");
+            if ( $this->option('sanitize-with-prefix') === null) {
+                // "Legacy" direct-piping
+                $bytes_read = 0;
+                while (($buffer = fgets($sql_contents, SQLStreamer::$buffer_size)) !== false) {
+                    $bytes_read += strlen($buffer);
+                    // Log::debug("Buffer is: '$buffer'");
                     $bytes_written = fwrite($pipes[0], $buffer);
 
-                if ($bytes_written === false) {
-                    throw new Exception("Unable to write to pipe");
+                    if ($bytes_written === false) {
+                        throw new Exception("Unable to write to pipe");
+                    }
                 }
+            } else {
+                $sql_importer = new SQLStreamer($sql_contents, $pipes[0], $this->option('sanitize-with-prefix'));
+                $bytes_read = $sql_importer->line_aware_piping();
             }
         } catch (\Exception $e) {
-            \Log::error("Error during restore!!!! ".$e->getMessage());
+            Log::error("Error during restore!!!! ".$e->getMessage());
+            // FIXME - put these back and/or put them in the right places?!
             $err_out = fgets($pipes[1]);
             $err_err = fgets($pipes[2]);
-            \Log::error("Error OUTPUT: ".$err_out);
+            Log::error("Error OUTPUT: ".$err_out);
             $this->info($err_out);
-            \Log::error("Error ERROR : ".$err_err);
+            Log::error("Error ERROR : ".$err_err);
             $this->error($err_err);
             throw $e;
         }
-        
         if (!feof($sql_contents) || $bytes_read == 0) {
             return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
         }
@@ -302,8 +483,11 @@ class RestoreFromBackup extends Command
             $ugly_file_name = $za->statIndex($file_details['index'])['name'];
             $fp = $za->getStream($ugly_file_name);
             //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
+            if (!is_dir($file_details['dest'])) {
+                mkdir($file_details['dest'], 0755, true); //0755 is what Laravel uses, so we do that
+            }
             $migrated_file = fopen($file_details['dest'].'/'.basename($pretty_file_name), 'w');
-            while (($buffer = fgets($fp, self::$buffer_size)) !== false) {
+            while (($buffer = fgets($fp, SQLStreamer::$buffer_size)) !== false) {
                 fwrite($migrated_file, $buffer);
             }
             fclose($migrated_file);

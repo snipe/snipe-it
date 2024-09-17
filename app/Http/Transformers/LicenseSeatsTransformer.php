@@ -29,6 +29,7 @@ class LicenseSeatsTransformer
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
                 'name'=> e($seat->user->present()->fullName),
+                'email' => e($seat->user->email),
                 'department'=> ($seat->user->department) ?
                         [
                             'id' => (int) $seat->user->department->id,
@@ -50,7 +51,7 @@ class LicenseSeatsTransformer
         ];
 
         if ($seat_count != 0) {
-            $array['name'] = 'Seat '.$seat_count;
+            $array['name'] = trans('admin/licenses/general.seat_count', ['count' => $seat_count]);
         }
 
         $permissions_array['available_actions'] = [

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Check Alles In / Verwijder Gebruiker',
     'delete'  	                => 'Verwijder',
     'edit'    	                => 'Bewerk',
+    'clone'    	                => 'Dupliceren',
     'restore' 	                => 'Herstel',
     'remove'                    => 'Verwijder',
     'request'                   => 'Aanvraag',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Onderhoud toevoegen',
     'append'                    => 'Aanvullen',
     'new'                       => 'Nieuw',
+    'var' => [
+        'clone'     => 'Dupliceer :item_type',
+        'edit'      => ':item_type bewerken',
+        'delete'    => ':item_type verwijderen',
+        'restore'   => 'Herstel :item_type',
+        'create'    => 'Nieuw :item_type aanmaken',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Check-in :item_type',
+    ]
 ];

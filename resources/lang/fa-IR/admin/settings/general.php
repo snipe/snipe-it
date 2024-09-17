@@ -42,6 +42,8 @@ return [
 ',
     'backups_restoring'         => 'بازیابی از پشتیبان گیری
 ',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'نسخه پشتیبان را دانلود کنید',
     'backups_path'              => 'نسخه‌های پشتیبان روی سرور در <code>:path</code> ذخیره می‌شوند
 ',
@@ -68,6 +70,7 @@ return [
     'default_eula_text'			=> 'EULA پیش فرض',
     'default_language'			=> 'زبان پیش فرض',
     'default_eula_help_text'	=> 'همچنین می توانید  EULA های سفارشی به دسته های خاص دارایی مرتبط کنید.',
+    'acceptance_note'           => 'Add a note for your decision (Optional)',
     'display_asset_name'        => 'نمایش نام حساب',
     'display_checkout_date'     => 'نمایش تاریخ پرداخت',
     'display_eol'               => 'نمایش EOL در جدول',
@@ -93,11 +96,11 @@ return [
     'footer_text_help'          => 'این متن در فوتر سمت راست ظاهر می شود. پیوندها با استفاده از <a href="https://help.github.com/articles/github-flavored-markdown/">نشان‌گذاری طعم‌دار Github</a> مجاز هستند. شکستگی خطوط، هدرها، تصاویر و غیره ممکن است منجر به نتایج غیر قابل پیش بینی شود.
 ',
     'general_settings'			=> 'تنظیمات عمومی',
-    'general_settings_keywords' => 'پشتیبانی شرکت، امضا، پذیرش، قالب ایمیل، فرمت نام کاربری، تصاویر، در هر صفحه، تصویر کوچک، eula، tos، داشبورد، حریم خصوصی
-',
+    'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
     'general_settings_help'     => 'EULA پیش فرض و موارد دیگر
 ',
     'generate_backup'			=> 'تولید پشتیبان گیری',
+    'google_workspaces'         => 'Google Workspaces',
     'header_color'              => 'رنگ هدر',
     'info'                      => 'این تنظیمات به شما اجازه سفارشی کردن جنبه های خاصی از نصب و راه اندازی خود را می دهد.',
     'label_logo'                => 'لوگوی برچسب
@@ -119,8 +122,6 @@ return [
     'ldap_settings'             => 'تنظیمات LDAP',
     'ldap_client_tls_cert_help' => 'گواهی TLS سمت کلاینت و کلید برای اتصالات LDAP معمولاً فقط در پیکربندی‌های Google Workspace با « LDAP ایمن» مفید هستند. هر دو مورد نیاز است.
 ',
-     'ldap_client_tls_key'       => 'کلید TLS سمت مشتری LDAP
-',
     'ldap_location'             => 'LDAP Location',
 'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'یک نام کاربری و رمز عبور LDAP معتبر از DN پایه ای که در بالا مشخص کرده اید وارد کنید تا بررسی کنید که آیا ورود به سیستم LDAP شما به درستی پیکربندی شده است یا خیر. ابتدا باید تنظیمات LDAP به روز شده خود را ذخیره کنید.
@@ -130,7 +131,7 @@ return [
     'ldap_manager'              => 'مدیر LDAP
 ',
     'ldap_server'               => 'سرویس دهنده LDAP',
-    'ldap_server_help'          => 'این باید با ldap: // (برای رمزگذاری نشده یا TLS) یا ldaps: ((برای SSL)',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted) or ldaps:// (for TLS or SSL)',
     'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
     'ldap_server_cert_ignore'	=> 'اجازه می دهد به گواهی های بی اعتبار SSL',
     'ldap_server_cert_help'		=> 'اگر از یک امضای SSL شخصی معتبر استفاده می کنید این گزینه را فعال کنید.',
@@ -165,9 +166,8 @@ return [
 ',
     'license'                   => 'مجوز نرم افزار
 ',
-    'load_remote_text'          => 'اسکریپت از راه دور',
-    'load_remote_help_text'		=> 'این برنامه نصب می تواند اسکریپت ها را از دنیای خارج بارگذاری کند.
-',
+    'load_remote'               => 'Load Remote Avatars',
+    'load_remote_help_text'		=> 'Uncheck this box if your install cannot load scripts from the outside internet. This will prevent Snipe-IT from trying load avatars from Gravatar or other outside sources.',
     'login'                     => 'تلاش برای ورود
 ',
     'login_attempt'             => 'تلاش برای ورود
@@ -210,8 +210,7 @@ return [
     'optional'					=> 'اختیاری',
     'per_page'                  => 'نتایج در هر صفحه',
     'php'                       => 'نسخه php',
-    'php_info'                  => 'اطلاعات پی اچ پی
-',
+    'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
     'php_overview_keywords'     => 'phpinfo, system, info',
@@ -300,6 +299,7 @@ return [
     'integrations'               => 'Integrations',
     'slack'                     => 'Slack',
     'general_webhook'           => 'General Webhook',
+    'ms_teams'                  => 'Microsoft Teams',
     'webhook'                   => ':app',
     'webhook_presave'           => 'Test to Save',
     'webhook_title'               => 'Update Webhook Settings',
@@ -312,6 +312,8 @@ return [
     'webhook_integration_help'    => ':app integration is optional, however the endpoint and channel are required if you wish to use it. To configure :app integration, you must first <a href=":webhook_link" target="_new" rel="noopener">create an incoming webhook</a> on your :app account. Click on the <strong>Test :app Integration</strong> button to confirm your settings are correct before saving. ',
     'webhook_integration_help_button'    => 'Once you have saved your :app information, a test button will appear.',
     'webhook_test_help'           => 'Test whether your :app integration is configured correctly. YOU MUST SAVE YOUR UPDATED :app SETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'نسخه Snipe_IT',
     'support_footer'            => 'پشتیبانی از پیوندهای پاورقی
 ',
@@ -365,7 +367,7 @@ return [
     'two_factor_enrollment'        => 'ثبت نام دو عامل',
     'two_factor_enabled_text'        => 'فعال کردن دو عامل',
     'two_factor_reset'        => 'تنظیم مجدد دو راز فاکتور',
-    'two_factor_reset_help'        => 'این باعث می شود کاربر دوباره دستگاه خود را با Google Authenticator ثبت کند. این می تواند مفید باشد اگر دستگاه ثبت شده فعلی شما گم شده یا دزدیده شود.',
+    'two_factor_reset_help'        => 'This will force the user to enroll their device with their authenticator app again. This can be useful if their currently enrolled device is lost or stolen. ',
     'two_factor_reset_success'          => 'دستگاه دو عامل با موفقیت تنظیم مجدد',
     'two_factor_reset_error'          => 'تنظیم مجدد دستگاه دو عامل انجام نشد',
     'two_factor_enabled_warning'        => 'فعال کردن دو عامل اگر آن را در حال حاضر فعال نیست، بلافاصله شما را مجبور به تایید با یک دستگاه ثبت نام Google Auth. اگر کسی در حال حاضر ثبت نام نکند، می توانید دستگاه خود را ثبت نام کنید.',
@@ -394,10 +396,20 @@ return [
 ',
     'oauth_title' => 'تنظیمات API OAuth
 ',
+    'oauth_clients' => 'OAuth Clients',
     'oauth' => 'OAuth
 ',
     'oauth_help' => 'تنظیمات نقطه پایانی Oauth
 ',
+    'oauth_no_clients' => 'You have not created any OAuth clients yet.',
+    'oauth_secret' => 'Secret',
+    'oauth_authorized_apps' => 'Authorized Applications',
+    'oauth_redirect_url' => 'Redirect URL',
+    'oauth_name_help' => ' Something your users will recognize and trust.',
+    'oauth_scopes' => 'Scopes',
+    'oauth_callback_url' => 'Your application authorization callback URL.',
+    'create_client' => 'Create Client',
+    'no_scopes' => 'No scopes',
     'asset_tag_title' => 'تنظیمات برچسب دارایی را به روز کنید
 ',
     'barcode_title' => 'تنظیمات بارکد را به روز کنید
@@ -450,7 +462,6 @@ return [
 ',
     'labels_help' => 'اندازه برچسب &amp; تنظیمات
 ',
-    'purge' => 'پاکسازی',
     'purge_keywords' => 'برای همیشه حذف کنید
 ',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
@@ -511,5 +522,13 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'profile_edit'          => 'Edit Profile',
+    'profile_edit_help'          => 'Allow users to edit their own profiles.',
+    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
+    'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
+    'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

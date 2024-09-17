@@ -2,7 +2,7 @@
 
 return [
     'about_kits_title'                  => 'Über vordefinierte Kits',
-    'about_kits_text'                   => 'Mit vordefinierten Kits kannst Du schnell eine Sammlung von Elementen (Assets, Lizenzen, etc.) an einen Benutzer ausgeben. Dies kann hilfreich sein, wenn Ihr Onboarding-Prozess über viele Nutzer hinweg einheitlich ist und alle Nutzer die gleichen Artikel erhalten.',
+    'about_kits_text'                   => 'Mit vordefinierten Kits kannst du schnell eine Sammlung von Elementen (Assets, Lizenzen, etc.) an einen Benutzer ausgeben. Dies kann hilfreich sein, wenn dein Onboarding-Prozess über viele Nutzer hinweg einheitlich ist und alle Nutzer die gleichen Artikel erhalten.',
     'checkout'                          => 'Kit herausgeben ',
     'create_success'                    => 'Kit wurde erfolgreich erstellt.',
     'create'                            => 'Vordefiniertes Kit erstellen',
@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Zubehör wurde erfolgreich getrennt',
     'accessory_error'                   => 'Zubehör bereits an Kit angeschlossen',
     'accessory_deleted'                 => 'Löschen war erfolgreich',
-    'accessory_none'                    => 'Zubehör existiert nicht',
+    'accessory_none'                    => 'Das Zubehör existiert nicht',
     'checkout_success'                  => 'Herausgabe war erfolgreich',
     'checkout_error'                    => 'Herausgabe Fehler',
     'kit_none'                          => 'Kit existiert nicht',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit wurde erfolgreich gelöscht',
     'kit_model_updated'                 => 'Modell wurde erfolgreich aktualisiert',
     'kit_model_detached'                => 'Modell wurde erfolgreich gelöst',
+    'model_already_attached'            => 'Dieses Modell ist bereits einem Kit zugewiesen',
 ];

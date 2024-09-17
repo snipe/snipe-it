@@ -13,6 +13,9 @@
       {{ trans('general.create') }}
     </a>
     @endcan
+@can('view', \App\Models\License::class)
+    <a class="btn btn-default pull-right" href="{{ route('licenses.export') }}" style="margin-right: 5px;">{{ trans('general.export') }}</a>
+@endcan
 @stop
 
 {{-- Page content --}}

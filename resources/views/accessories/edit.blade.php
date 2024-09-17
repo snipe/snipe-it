@@ -4,6 +4,11 @@
     'helpPosition'  => 'right',
     'helpText' => trans('help.accessories'),
     'formAction' => (isset($item->id)) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
+    'index_route' => 'accessories.index',
+    'options' => [
+                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'accessories']),
+                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.accessory')]),
+               ]
 ])
 
 {{-- Page content --}}
@@ -18,7 +23,7 @@
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.order_number')
 @include ('partials.forms.edit.purchase_date')
-@include ('partials.forms.edit.purchase_cost')
+@include ('partials.forms.edit.purchase_cost', ['currency_type' => $item->location->currency ?? null])
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
 @include ('partials.forms.edit.notes')

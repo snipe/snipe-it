@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Информация за лиценз',
     'license_seats'  			=> 'Потребителски лицензи',
     'seat'  					=> 'Потребителски лиценз',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Потребителски лицензи',
     'software_licenses'  		=> 'Софтуерни лицензи',
     'user'  					=> 'Потребител',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Връщане на всички бройки',
-                'modal'             => 'Това ще заведе една бройка. | Това ще заведе всички :checkedout_seats_count бройки от този лиценз.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Вписване на всички бройки от този лиценз за потребителите и активите',
                 'disabled_tooltip'  => 'Това е забранено защото няма изписани бройки',
                 'disabled_tooltip_reassignable'  => 'Това е деактивирано, защото лиценза не може да се прехвърля',
                 'success'           => 'Лиценза е заведен успешно! | Всички лицензи са заведени успешно!',
-                'log_msg'           => 'Проверено чрез групово лиценз изписване в GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Има само :remaining_count лиценз(а) останали от този лиценз с минимално количество от :min_amt. Може да желаете да поръчате допълнително.',
+    'below_threshold_short' => 'Този артикул е под минималното необходимо количество.',
 );

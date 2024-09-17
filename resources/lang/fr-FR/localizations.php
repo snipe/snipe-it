@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Sélectionnez une langue',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Anglais, États-Unis',
         'en-GB'=> 'Anglais, Royaume-Uni',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Malais',
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongol',
-        'no-NO'=> 'Norvégien',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norvégien (Bokmål)',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Perse',
         'pl-PL'=> 'Polonais',
         'pt-PT'=> 'Portugais',
@@ -48,8 +50,9 @@ return [
         'ro-RO'=> 'Roumain',
         'ru-RU'=> 'Russe',
         'sr-CS' => 'Serbe (latin)',
-        'sk-SK'=> 'Slovak',
+        'sk-SK'=> 'Slovaque',
         'sl-SI'=> 'Slovène',
+        'so-SO'=> 'Somali',
         'es-ES'=> 'Espagnol',
         'es-CO'=> 'Espagnol, Colombie',
         'es-MX'=> 'Espagnol, Mexique',
@@ -65,7 +68,7 @@ return [
         'zu-ZA'=> 'Zoulou',
     ],
 
-    'select_country' => 'Sélectionnez un pays',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Île de l\'Ascension',
@@ -132,6 +135,7 @@ return [
         'EC'=>'Équateur',
         'EE'=>'Estonie',
         'EG'=>'Égypte',
+        'GB-ENG'=>'England',
         'ER'=>'Érythrée',
         'ES'=>'Espagne',
         'ET'=>'Éthiopie',
@@ -230,6 +234,7 @@ return [
         'NG'=>'Nigéria',
         'NI'=>'Nicaragua',
         'NL'=>'Pays-Bas',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norvège',
         'NP'=>'Népal',
         'NR'=>'Nauru',
@@ -257,7 +262,7 @@ return [
         'RU'=>'Fédération de Russie',
         'RW'=>'Rwanda',
         'SA'=>'Arabie Saoudite',
-        'UK'=>'Écosse',
+        'GB-SCT'=>'Écosse',
         'SB'=>'Îles Salomon',
         'SC'=>'Seychelles',
         'SS'=>'Soudan du Sud',
@@ -309,6 +314,7 @@ return [
         'VI'=>'Îles Vierges Américaines',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis-et-Futuna',
         'WS'=>'Samoa',
         'YE'=>'Yémen',

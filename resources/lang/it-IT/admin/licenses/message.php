@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Il database non esiste o non si dispone delle autorizzazioni per la connessione.',
-    'user_does_not_exist' => 'L\'utente non esiste.',
+    'user_does_not_exist' => 'L\'utente non esiste o non ha il permesso di visualizzarlo.',
     'asset_does_not_exist' 	=> 'Il bene che si sta cercando di associare a questa licenza non esiste.',
     'owner_doesnt_match_asset' => 'Il bene che si sta cercando di associare a questa licenza è di proprietà di una persona diversa dal soggetto selezionato nel menù a discesa.',
     'assoc_users'	 => 'Questo bene è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo. ',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'C\'è stato un problema nell\'estrazione della licenza. Riprova.',
         'success' => 'La licenza è stata estratta con successo',
         'not_enough_seats' => 'Non ci sono abbastanza copie della licenza disponibili per l\'assegnazione',
+        'mismatch' => 'Lo slot di licenza fornito non corrisponde alla licenza',
+        'unavailable' => 'Questo slot non è disponibile per l\'Assegnazione.',
     ),
 
     'checkin' => array(

@@ -11,7 +11,7 @@
 @endif
 
 
-@if ($message = Session::get('status'))
+@if ($message = session()->get('status'))
     <div class="col-md-12">
         <div class="alert alert-success fade in">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -23,7 +23,7 @@
 @endif
 
 
-@if ($message = Session::get('success'))
+@if ($message = session()->get('success'))
 <div class="col-md-12">
     <div class="alert alert-success fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -32,10 +32,11 @@
         {{ $message }}
     </div>
 </div>
+@include ('partials.confetti-js')
 @endif
 
 
-@if ($message = Session::get('success-unescaped'))
+@if ($message = session()->get('success-unescaped'))
     <div class="col-md-12">
         <div class="alert alert-success fade in">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -44,10 +45,11 @@
             {!!  $message !!}
         </div>
     </div>
+    @include ('partials.confetti-js')
 @endif
 
 
-@if ($assets = Session::get('assets'))
+@if ($assets = session()->get('assets'))
     @foreach ($assets as $asset)
         <div class="col-md-12">
             <div class="alert alert-info fade in">
@@ -62,9 +64,9 @@
                         <li><b>{{ trans('general.asset_name') }} </b> {{ $asset->model->name }}</li>
                     @endisset
                     <li><b>{{ trans('general.asset_tag') }}</b> {{ $asset->asset_tag }}</li>
-		    @isset ($asset->notes)
-		    <li><b>{{ trans('general.notes') }}</b> {{ $asset->notes }}</li>
-		    @endisset
+                    @isset ($asset->notes)
+                        <li><b>{{ trans('general.notes') }}</b> {{ $asset->notes }}</li>
+                    @endisset
                 </ul>
 
             </div>
@@ -73,7 +75,7 @@
 @endif
 
 
-@if ($consumables = Session::get('consumables'))
+@if ($consumables = session()->get('consumables'))
     @foreach ($consumables as $consumable)
         <div class="col-md-12">
             <div class="alert alert-info fade in">
@@ -87,7 +89,7 @@
 @endif
 
 
-@if ($accessories = Session::get('accessories'))
+@if ($accessories = session()->get('accessories'))
     @foreach ($accessories as $accessory)
         <div class="col-md-12">
             <div class="alert alert-info fade in">
@@ -101,7 +103,7 @@
 @endif
 
 
-@if ($message = Session::get('error'))
+@if ($message = session()->get('error'))
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -113,7 +115,7 @@
 @endif
 
 
-@if ($messages = Session::get('error_messages'))
+@if ($messages = session()->get('error_messages'))
 @foreach ($messages as $message)        
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
@@ -127,7 +129,7 @@
 @endif
 
 
-@if ($messages = Session::get('bulk_asset_errors'))
+@if ($messages = session()->get('bulk_asset_errors'))
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -146,7 +148,7 @@
 @endif
 
 
-@if ($message = Session::get('warning'))
+@if ($message = session()->get('warning'))
 <div class="col-md-12">
     <div class="alert alert-warning fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -158,7 +160,7 @@
 @endif
 
 
-@if ($message = Session::get('info'))
+@if ($message = session()->get('info'))
 <div class="col-md-12">
     <div class="alert alert-info fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>

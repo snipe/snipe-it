@@ -13,7 +13,7 @@ class Group extends SnipeModel
     protected $table = 'permission_groups';
 
     public $rules = [
-      'name' => 'required|min:2|max:255',
+        'name' => 'required|min:2|max:255|unique',
     ];
 
     protected $fillable = [
@@ -56,6 +56,18 @@ class Group extends SnipeModel
     public function users()
     {
         return $this->belongsToMany(\App\Models\User::class, 'users_groups');
+    }
+
+    /**
+     * Get the user that created the group
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function admin()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 
     /**

@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modelis',
+    'assigned_to'   => 'Piešķirts',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Iekšā ārā',
     'checkout_date' => 'Izrakstīšanās datums',
@@ -26,7 +27,7 @@ return [
     'monthly_depreciation' => 'Monthly Depreciation',
     'assigned_to'    => 'Piešķirts',
     'requesting_user' => 'Requesting User',
-    'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
+    'requested_date' => 'Pieprasīšanas datums',
+    'changed'       => 'Izmainīts',
     'icon' => 'Icon',
 ];

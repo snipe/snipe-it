@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'உரிமம் தகவல்',
     'license_seats'  			=> 'உரிமம் இருக்கைகள்',
     'seat'  					=> 'இருக்கை',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'இருக்கைகள்',
     'software_licenses'  		=> 'மென்பொருள் உரிமங்கள்',
     'user'  					=> 'பயனர்',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin All Seats',
-                'modal'             => 'This will action checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Checkin ALL seats for this license from both users and assets',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
                 'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => 'License successfully checked in! | All licenses were successfully checked in!',
-                'log_msg'           => 'Checked in via bulk license checkout in license GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'There are only :remaining_count seats left for this license with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
+    'below_threshold_short' => 'This item is below the minimum required quantity.',
 );

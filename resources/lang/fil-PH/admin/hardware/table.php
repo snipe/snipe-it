@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Ang Tag ng Asset',
     'asset_model'       => 'Ang Modelo',
+    'assigned_to'   => 'Nakatalaga Sa',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'Papasok/Palabas',
     'checkout_date' => 'Ang Petsa ng Pagcheck-out',

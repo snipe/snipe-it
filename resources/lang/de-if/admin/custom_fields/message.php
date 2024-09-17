@@ -5,6 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Dieses Feld existiert nicht.',
         'already_added'   => 'Feld wurde bereits hinzugefügt',
+        'none_selected'   => 'Kein Feld ausgewählt',
 
         'create' => array(
             'error'   => 'Feld wurde nicht erstellt. Bitte versuche es erneut.',
@@ -18,7 +19,7 @@ return array(
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Bist Du sicher, dass Du dieses Feld löschen möchtest?',
+            'confirm'   	=> 'Bist du sicher, dass du dieses Feld löschen möchtest?',
             'error'   => 'Beim Löschen des Felds ist ein Fehler aufgetreten. Bitte versuche es erneut.',
             'success' => 'Das Feld wurde erfolgreich gelöscht.',
             'in_use'   => 'Dieses Feld wird derzeit noch verwendet.',
@@ -41,7 +42,7 @@ return array(
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Bist Du sicher, dass Du diesen Feldsatz löschen möchten?',
+            'confirm'   	=> 'Bist du sicher, dass du diesen Feldsatz löschen möchten?',
             'error'   => 'Beim Löschen des Feldsatzes ist ein Fehler aufgetreten. Bitte versuche es erneut.',
             'success' => 'Der Feldsatz wurde erfolgreich gelöscht.',
             'in_use'   => 'Dieser Feldsatz wird derzeit noch verwendet.',

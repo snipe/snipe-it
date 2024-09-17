@@ -11,6 +11,6 @@ return [
     'allow' 	 			=> 'Dovoli',
     'deny' 	 				=> 'Zavrni',
     'permission'            => 'Permission',
-    'grant'                 => 'Grant',
+    'grant'                 => 'Omogoči',
     'no_permissions'        => 'This group has no permissions.'
 ];

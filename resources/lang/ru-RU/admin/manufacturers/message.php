@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Переменные <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, и <code>{MODEL_NAME}</code> может быть использован в вашем URL для автоматического заполнения значений при просмотре активов - например https://support. pple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Переменные <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, и <code>{MODEL_NAME}</code> может быть использован в вашем URL для автоматического заполнения значений при просмотре активов - например https://checkcoverage. pple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Производителя не существует.',
     'assoc_users'	 => 'Этот производитель сейчас связан с как минимум одной моделью и не может быть удален. Для удаления необходимо удалить связь модели с производителем. ',
 

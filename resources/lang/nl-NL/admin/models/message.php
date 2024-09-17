@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WAARSCHUWING! Het asset model voor dit item is ongeldig of ontbreekt!',
     'no_association_fix' => 'Dit maakt dingen kapot op rare en gruwelijke manieren. Bewerk dit product nu om het een model toe te wijzen.',
     'assoc_users'	 => 'Dit model is momenteel gekoppeld met één of meer assets en kan niet worden verwijderd. Verwijder de assets en probeer het opnieuw. ',
-
+    'invalid_category_type' => 'Deze categorie moet een asset categorie zijn.',
 
     'create' => array(
         'error'   => 'Model is niet aangemaakt, probeer het opnieuw.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Er was geen veld geselecteerd dus is er niks gewijzigd.',
         'success' 		=> 'Model met succes geüpdatet |:model_count modellen succesvol bijgewerkt.',
-        'warn'          => 'U staat op het punt om de eigenschappen van het volgende model te bewerken: |u staat op het punt de eigenschappen van de volgende :model_count modellen te bewerken:',
+        'warn'          => 'U staat op het punt om de eigenschappen van het volgende model bij te werken: u staat op het punt de eigenschappen van de volgende :model_count modellen te bewerken:',
 
     ),
 

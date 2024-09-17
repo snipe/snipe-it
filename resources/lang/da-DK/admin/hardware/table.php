@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Model',
+    'assigned_to'   => 'Tildelt',
     'book_value'  	=> 'Nuværende Værdi',
     'change' 		=> 'Ind ud',
     'checkout_date' => 'Checkout dato',

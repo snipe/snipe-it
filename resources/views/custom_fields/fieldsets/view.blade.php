@@ -77,7 +77,7 @@
                 @can('update', $custom_fieldset)
                 <form method="post" action="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}">
                   @csrf 
-                  <button type="submit" class="btn btn-sm btn-danger">{{ trans('button.remove') }}</button>
+                  <button type="submit" class="btn btn-sm btn-danger" data-tooltip="true" title="{{ trans('general.remove_customfield_association') }}"><i class="fa fa-minus icon-white" aria-hidden="true"></i></button>
                 </form>
                 @endcan
               </td>
@@ -90,35 +90,34 @@
               <td colspan="8">
                 {{ Form::open(['route' =>
                 ["fieldsets.associate",$custom_fieldset->id],
-                'class'=>'form-horizontal',
+                'class'=>'form-inline',
                 'id' => 'ordering']) }}
 
 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                   <label for="field_id" class="sr-only">
                     {{ trans('admin/custom-field/general.add_field_to_fieldset')}}
                   </label>
-                  {{ Form::select("field_id",$custom_fields_list,"",['aria-label'=>'field_id', 'class'=>'select2']) }}
+                  {{ Form::select("field_id",$custom_fields_list,"",['aria-label'=>'field_id', 'class'=>'select2', 'style' => 'min-width:400px;']) }}
 
                 </div>
 
-                <div class="form-group col-md-2" style="vertical-align: middle;">
-
-                  <label class="form-control">
-                    {{ Form::checkbox('required', 'on', old('required'), array('aria-label'=>'required')) }}
-                    {{ trans('admin/custom_fields/general.required') }}
-                  </label>
-
-                </div>
-                <div class="form-group col-md-2" style="display: none;">
-
-                  {{ Form::text('order', $maxid, array('class' => 'form-control col-sm-1 col-md-1', 'style'=> 'width: 80px; padding-;right: 10px;', 'aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
+                <div class="form-group" style="display: none;">
+                  {{ Form::text('order', $maxid, array('aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
                   <label for="order">{{ trans('admin/custom_fields/general.order') }}</label>
                 </div>
 
-                <div class="form-group col-md-3">
-                  <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
+                <div class="checkbox-inline">
+                    <label>
+                    {{ Form::checkbox('required', 'on', old('required')) }}
+                      <span style="padding-left: 10px;">{{ trans('admin/custom_fields/general.required') }}</span>
+                    </label>
                 </div>
+
+                <span style="padding-left: 10px;">
+                  <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
+                </span>
+
                 {{ Form::close() }}
 
               </td>

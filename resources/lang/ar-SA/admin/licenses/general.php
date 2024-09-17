@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'معلومات الترخيص',
     'license_seats'  			=> 'مقاعد الترخيص',
     'seat'  					=> 'مقعد',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'مقاعد',
     'software_licenses'  		=> 'تراخيص البرامج',
     'user'  					=> 'مستخدم',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'ادخل جميع المقاعد',
-                'modal'             => 'سيؤدي هذا إلى التدقيق في مقعد واحد. <unk> سيؤدي هذا الإجراء إلى التحقق من جميع مقاعد الـ :checkedout_seats_count لهذا الترخيص.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'تسجيل جميع مقاعد هذا الترخيص من كل من المستخدمين والأصول',
                 'disabled_tooltip'  => 'تم تعطيل هذا لأنه لا توجد مقاعد حاليا',
                 'disabled_tooltip_reassignable'  => 'هذا معطل لأن الترخيص غير قابل لإعادة التعيين',
                 'success'           => 'تم تسجيل الترخيص بنجاح! <unk> تم تسجيل جميع التراخيص بنجاح!',
-                'log_msg'           => 'تحقق عن طريق دفع الترخيص بالجملة في واجهة المستخدم المرخص',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'هناك فقط :remaining_count مقاعد متبقية لهذا الترخيص مع حد أدنى من :min_amt. قد ترغب في النظر في شراء المزيد من المقاعد.',
+    'below_threshold_short' => 'هذا العنصر أقل من الحد الأدنى للكمية المطلوبة.',
 );

@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'Категория должна быть категорией расходных материалов.',
     'does_not_exist' => 'Расходный материал не существует.',
 
     'create' => array(

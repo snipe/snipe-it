@@ -7,7 +7,7 @@ return array(
     'no_association' => 'ATENÇÃO! O modelo de ativo para este item é inválido ou está faltando!',
     'no_association_fix' => 'Isso quebrará as coisas de maneiras estranhas e horríveis. Edite este equipamento agora para atribuir um modelo a ele.',
     'assoc_users'	 => 'Este modelo está no momento associado com um ou mais ativos e não pode ser excluído. Exclua os ativos e então tente excluir novamente. ',
-
+    'invalid_category_type' => 'Esta categoria deve ser uma categoria de ativo.',
 
     'create' => array(
         'error'   => 'O modelo não foi criado, tente novamente.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Nenhum campo foi alterado, então nada foi atualizado.',
         'success' 		=> 'Modelo foi atualizado com sucesso. |:model_count modelos atualizados com sucesso.',
-        'warn'          => 'Você está prestes a atualizar os properies do seguinte modelo: |Você está prestes a editar as propriedades dos seguintes :model_count modelos:',
+        'warn'          => 'Você está prestes a atualizar as propriedades do seguinte modelo: Você está prestes a editar as propriedades dos seguintes :model_count models:',
 
     ),
 

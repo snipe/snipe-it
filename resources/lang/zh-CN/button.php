@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => '归还全部并删除用户',
     'delete'  	                => '刪除',
     'edit'    	                => '编辑',
+    'clone'    	                => '克隆...',
     'restore' 	                => '恢复',
     'remove'                    => '移除',
     'request'                   => '申请',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => '添加维护',
     'append'                    => '追加',
     'new'                       => '新建',
+    'var' => [
+        'clone'     => '克隆 :item_type',
+        'edit'      => '编辑 :item_type',
+        'delete'    => '删除 :item_type',
+        'restore'   => '恢复 :item_type',
+        'create'    => '创建新的 :item_type',
+        'checkout'  => '借出 :item_type',
+        'checkin'   => '归还 :item_type',
+    ]
 ];

@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Tjekket ud',
     'asset_expected_checkin'    => 'Forventet indtjekning',
     'date'                      => 'Dato:',
+    'phone'                     => 'Adresse Telefon',
     'signed_by_asset_auditor'   => 'Godkendt af (aktivkontrollant):',
     'signed_by_finance_auditor' => 'Godkendt af (finanskontrollant):',
     'signed_by_location_manager' => 'Godkendt af (Lokationsadministrator):',

@@ -66,7 +66,9 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <form class="form-horizontal" method="post" autocomplete="off" action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" enctype="multipart/form-data" id="userForm">
+      <form class="form-horizontal" method="post" autocomplete="off"
+            action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}"
+            enctype="multipart/form-data" id="userForm">
       {{csrf_field()}}
 
       @if($user->id)
@@ -123,7 +125,7 @@
                     @else
                         <!-- insert the old username so we don't break validation -->
                          {{ trans('general.managed_ldap') }}
-                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
+                          <input type="hidden" name="username" value="{{ old('username', $user->username) }}">
                     @endif
                   </div>
 
@@ -131,7 +133,7 @@
                     @if (config('app.lock_passwords') && ($user->id))
                         <!-- disallow changing existing usernames on the demo -->
                         <div class="col-md-8 col-md-offset-3">
-                            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                            <p class="text-warning"><x-icon type="lock" /> {{ trans('general.feature_disabled') }}</p>
                         </div>
                     @endif
 
@@ -215,7 +217,7 @@
                                       {{ trans('admin/users/general.activated_help_text') }}
 
                                   </label>
-                                  <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                  <p class="text-warning"><x-icon type="lock" /> {{ trans('general.feature_disabled') }}</p>
 
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->
@@ -246,7 +248,7 @@
                       name="email"
                       id="email"
                       maxlength="191"
-                      value="{{ Request::old('email', $user->email) }}"
+                      value="{{ old('email', $user->email) }}"
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
@@ -305,7 +307,7 @@
                           <!-- language -->
                           <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
                               <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
-                              <div class="col-md-9">
+                              <div class="col-md-6">
                                   {!! Form::locales('locale', old('locale', $user->locale), 'select2') !!}
                                   {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -322,7 +324,7 @@
                                           name="employee_num"
                                           maxlength="191"
                                           id="employee_num"
-                                          value="{{ Request::old('employee_num', $user->employee_num) }}"
+                                          value="{{ old('employee_num', $user->employee_num) }}"
                                   />
                                   {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -339,7 +341,7 @@
                                           maxlength="191"
                                           name="jobtitle"
                                           id="jobtitle"
-                                          value="{{ Request::old('jobtitle', $user->jobtitle) }}"
+                                          value="{{ old('jobtitle', $user->jobtitle) }}"
                                   />
                                   {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
@@ -449,8 +451,10 @@
                           <!-- Country -->
                           <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                               <label class="col-md-3 control-label" for="country">{{ trans('general.country') }}</label>
-                              <div class="col-md-9">
+                              <div class="col-md-6">
                                   {!! Form::countries('country', old('country', $user->country), 'col-md-12 select2') !!}
+
+                                  <p class="help-block">{{ trans('general.countries_manually_entered_help') }}</p>
                                   {!! $errors->first('country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
                           </div>
@@ -499,18 +503,21 @@
                                   </div>
                               @endif
 
-                              <!-- Reset Two Factor -->
-                              <div class="form-group">
-                                  <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
-                                      <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
-                                      <span id="two_factor_reseticon"></span>
-                                      <span id="two_factor_resetresult"></span>
-                                      <span id="two_factor_resetstatus"></span>
+                              @if ((Auth::user()->isSuperUser()) && ($user->two_factor_active_and_enrolled()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
+                                  <!-- Reset Two Factor -->
+                                  <div class="form-group">
+                                      <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                                          <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
+                                          <span id="two_factor_reseticon"></span>
+                                          <span id="two_factor_resetresult"></span>
+                                          <span id="two_factor_resetstatus"></span>
+                                      </div>
+                                      <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                                          <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                                      </div>
                                   </div>
-                                  <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
-                                      <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
-                                  </div>
-                              </div>
+                              @endif
+
                           @endif
 
                           <!-- Groups -->
@@ -593,9 +600,14 @@
             </table>
           </div><!-- /.tab-pane -->
         </div><!-- /.tab-content -->
-        <div class="box-footer text-right">
-          <button type="submit" accesskey="s" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
-        </div>
+          <x-redirect_submit_options
+                  index_route="users.index"
+                  :button_label="trans('general.save')"
+                  :options="[
+                        'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'users']),
+                        'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
+                        ]"
+          />
       </div><!-- nav-tabs-custom -->
     </form>
   </div> <!--/col-md-8-->
@@ -670,7 +682,7 @@ $(document).ready(function() {
         'bind': 'click',
         'passwordElement': '#password',
         'displayElement': '#generated-password',
-        'passwordLength': 16,
+        'passwordLength': {{ ($settings->pwd_secure_min + 5) }},
         'uppercase': true,
         'lowercase': true,
         'numbers':   true,
@@ -702,7 +714,7 @@ $(document).ready(function() {
         $("#two_factor_resetrow").removeClass('success');
         $("#two_factor_resetrow").removeClass('danger');
         $("#two_factor_resetstatus").html('');
-        $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i>');
+        $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i> ');
         $.ajax({
             url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
             type: 'POST',
@@ -715,13 +727,12 @@ $(document).ready(function() {
 
             success: function (data) {
                 $("#two_factor_reseticon").html('');
-                $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
+                $("#two_factor_resetstatus").html('<span class="text-success"><i class="fas fa-check"></i> ' + data.message + '</span>');
             },
 
             error: function (data) {
                 $("#two_factor_reseticon").html('');
-                $("#two_factor_reseticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
-                $('#two_factor_resetstatus').text(data.message);
+                $("#two_factor_resetstatus").html('<span class="text-danger"><i class="fas fa-exclamation-triangle text-danger"></i> ' + data.message + '</span>');
             }
 
 

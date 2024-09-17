@@ -9,7 +9,7 @@ use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class LdapSync extends Command
 {
@@ -88,18 +88,20 @@ class LdapSync extends Command
             /**
              * if a location ID has been specified, use that OU
              */
-            if ( $this->option('location_id') != '') {
+            if ( $this->option('location_id') ) {
 
                 foreach($this->option('location_id') as $location_id){
                     $location_ou = Location::where('id', '=', $location_id)->value('ldap_ou');
                     $search_base = $location_ou;
                     Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
                  }
+            }
 
             /**
-             * Otherwise if a manual base DN has been specified, use that
+             *  if a manual base DN has been specified, use that. Allow the Base DN to override
+             *  even if there's a location-based DN - if you picked it, you must have picked it for a reason.
              */
-            } elseif ($this->option('base_dn') != '') {
+            if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
                 Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             }
@@ -125,14 +127,14 @@ class LdapSync extends Command
 
         /* Determine which location to assign users to by default. */
         $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
-            if ($this->option('location') != '') {
-                if ($location = Location::where('name', '=', $this->option('location'))->first()) {
-                    Log::debug('Location name ' . $this->option('location') . ' passed');
-                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
-                }
+        if ($this->option('location') != '') {
+            if ($location = Location::where('name', '=', $this->option('location'))->first()) {
+                Log::debug('Location name ' . $this->option('location') . ' passed');
+                Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+            }
 
-            } elseif ($this->option('location_id') != '') {
-                foreach($this->option('location_id') as $location_id) {
+        } elseif ($this->option('location_id')) {
+            foreach($this->option('location_id') as $location_id) {
                 if ($location = Location::where('id', '=', $location_id)->first()) {
                     Log::debug('Location ID ' . $location_id . ' passed');
                     Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
@@ -249,6 +251,7 @@ class LdapSync extends Command
                     // Creating a new user.
                     $user = new User;
                     $user->password = $user->noPassword();
+                    $user->locale = app()->getLocale();
                     $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item['createorupdate'] = 'created';
                 }
@@ -296,7 +299,7 @@ class LdapSync extends Command
                         try {
                             $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
                         } catch (\Exception $e) {
-                            \Log::warning("Manager lookup caused an exception: " . $e->getMessage() . ". Falling back to direct username lookup");
+                            Log::warning("Manager lookup caused an exception: " . $e->getMessage() . ". Falling back to direct username lookup");
                             // Hail-mary for Okta manager 'shortnames' - will only work if
                             // Okta configuration is using full email-address-style usernames
                             $ldap_manager = [
@@ -388,7 +391,7 @@ class LdapSync extends Command
                         $user->location_id = $location->id;
                     }
                 }
-
+                $location = null;
                 $user->ldap_import = 1;
 
                 $errors = '';

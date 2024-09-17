@@ -7,7 +7,7 @@ return array(
     'no_association' => 'CẢNH BÁO! Model tài sản cho cho thiết bị này không hợp lệ hoặc bị thiếu!',
     'no_association_fix' => 'Điều này sẽ phá vỡ mọi thứ theo những cách kỳ lạ và khủng khiếp. Hãy chỉnh sửa tài sản này ngay bây giờ để gán cho nó một model.',
     'assoc_users'	 => 'Tài sản này hiện tại đang liên kết với ít nhất một hoặc nhiều tài sản và không thể xóa. Xin vui lòng xóa tài sản, và cố gắng thử lại lần nữa. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Kiểu tài sản chưa được tạo, xin thử lại.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Không có trường nào được thay đổi, vì vậy không có gì được cập nhật.',
         'success' 		=> 'Model đã được cập nhật thành công. |:model_count models đã được cập nhật thành công.',
-        'warn'          => 'Bạn sắp cập nhật các thuộc tính của model sau: |Bạn sắp chỉnh sửa các thuộc tính của các model :model_count sau:',
+        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
 
     ),
 

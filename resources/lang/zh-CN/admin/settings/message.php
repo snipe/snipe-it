@@ -14,6 +14,9 @@ return [
         'restore_warning'       => '是的，还原它。我确认这将覆盖当前数据库中的任何现有数据。 这也将注销您现有的所有用户 (包括您)。',
         'restore_confirm'       => '您确定要从 :filename还原您的数据库吗？'
     ],
+    'restore' => [
+        'success'               => '您的系统备份已恢复。请重新登录。'
+    ],
     'purge' => [
         'error'     => '清除过程中出现了错误。 ',
         'validation_failed'     => '你的清除确认不正确，请在输入框中输入“DELETE”。',

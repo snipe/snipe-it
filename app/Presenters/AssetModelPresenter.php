@@ -35,6 +35,7 @@ class AssetModelPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => false,
                 'visible' => true,
                 'title' => trans('general.name'),
                 'formatter' => 'modelsLinkFormatter',

@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Acuerdo de uso',
     'id'      					=> 'ID',
-    'parent'   					=> 'Padre',
+    'parent'   					=> 'Ubicación padre',
     'require_acceptance'      	=> 'Aceptación',
-    'title'      				=> 'Categoría de equipo',
+    'title'      				=> 'Nombre de la categoría del activo',
 
 );

@@ -4,8 +4,8 @@ return array(
 
     'id'                        => 'Identificación',
     'name'                      => 'Nombre de Departamento',
-    'manager'                   => 'Gerente',
+    'manager'                   => 'Supervisor',
     'location'                  => 'Ubicación',
     'create'                    => 'Crear departamento',
-    'update'                    => 'Actualizar Departamento',
+    'update'                    => 'Actualizar departamento',
     );

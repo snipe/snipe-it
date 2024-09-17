@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Samee Qaabka Hantida',
+    'created_at' 			=> 'Lagu sameeyay',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Qaabka No.',
+    'name'      			=> 'Magaca Modelka Hantida',
+    'numassets' 			=> 'Hantida',
+    'title'					=> 'Qaababka Hantida',
+    'update'				=> 'Cusbooneysii Qaabka Hantida',
+    'view'					=> 'Daawo Qaabka Hantida',
+    'update'				=> 'Cusbooneysii Qaabka Hantida',
+    'clone'				=> 'Qaabka Clone',
+    'edit'				=> 'Wax ka beddel Model',
 );

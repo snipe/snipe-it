@@ -14,6 +14,8 @@ return array(
         'success'               => 'U bent succesvol ingelogd.',
         'code_required'         => 'Tweestapsverificatie code is vereist.',
         'invalid_code'          => 'Tweestapsverificatie code is ongeldig.',
+        'enter_two_factor_code' => 'Voer je tweestaps verificatiecode in.',
+        'please_enroll'         => 'Registreer een apparaat voor twee-factor-authenticatie.',
     ),
 
     'signin' => array(

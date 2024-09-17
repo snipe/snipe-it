@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Isimo',
     'suppliers'             => 'Abahlinzeki',
     'update'                => 'Buyekeza Umphakeli',
-    'url'                   => 'I-URL',
     'view'                  => 'Buka umthengisi',
     'view_assets_for'       => 'Buka amafa',
     'zip'                   => 'I-Postal Code',

@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'Detaily prihlásenia nemôžu byť zmenené v tejto inštalácii.',
     'manager' 				=> 'Manažér',
     'managed_locations'     => 'Spravované lokality',
+    'managed_users'         => 'Managed Users',
     'name' 					=> 'Názov',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Poznámky',

@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Podrška URL-a',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Ažuriraj proizvođača',
-    'url'   				=> 'URL',
 
 );

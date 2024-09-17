@@ -6,11 +6,21 @@ use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-
+use NotificationChannels\GoogleChat\Card;
+use NotificationChannels\GoogleChat\Enums\Icon;
+use NotificationChannels\GoogleChat\Enums\ImageStyle;
+use NotificationChannels\GoogleChat\GoogleChatChannel;
+use NotificationChannels\GoogleChat\GoogleChatMessage;
+use NotificationChannels\GoogleChat\Section;
+use NotificationChannels\GoogleChat\Widgets\KeyValue;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
+use Illuminate\Support\Facades\Log;
 class CheckoutAssetNotification extends Notification
 {
     use Queueable;
@@ -52,9 +62,20 @@ class CheckoutAssetNotification extends Notification
     public function via()
     {
         $notifyBy = [];
+        if (Setting::getSettings()->webhook_selected == 'google' && Setting::getSettings()->webhook_endpoint) {
 
-        if ((Setting::getSettings()) && (Setting::getSettings()->webhook_endpoint != '')) {
-            \Log::debug('use webhook');
+            $notifyBy[] = GoogleChatChannel::class;
+        }
+
+        if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
+
+            $notifyBy[] = MicrosoftTeamsChannel::class;
+        }
+
+
+        if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
+
+            Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
 
@@ -117,6 +138,52 @@ class CheckoutAssetNotification extends Notification
                     ->content($note);
             });
     }
+    public function toMicrosoftTeams()
+    {
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        return MicrosoftTeamsMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->type('success')
+            ->title(trans('mail.Asset_Checkout_Notification'))
+            ->addStartGroupToSection('activityText')
+            ->fact(trans('mail.assigned_to'), $target->present()->name)
+            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
+            ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
+            ->fact(trans('mail.notes'), $note ?: '');
+
+
+    }
+public function toGoogleChat()
+    {
+        $target = $this->target;
+        $item = $this->item;
+        $note = $this->note;
+
+        return GoogleChatMessage::create()
+            ->to($this->settings->webhook_endpoint)
+            ->card(
+                Card::create()
+                    ->header(
+                        '<strong>'.trans('mail.Asset_Checkout_Notification').'</strong>' ?: '',
+                        htmlspecialchars_decode($item->present()->name) ?: '',
+                    )
+                    ->section(
+                        Section::create(
+                            KeyValue::create(
+                                trans('mail.assigned_to') ?: '',
+                                $target->present()->name ?: '',
+                                $note ?: '',
+                            )
+                                ->onClick(route('users.show', $target->id))
+                        )
+                    )
+            );
+
+    }
 
     /**
      * Get the mail representation of the notification.
@@ -142,6 +209,7 @@ class CheckoutAssetNotification extends Notification
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
+                'status'        => $this->item->assetstatus?->name,
                 'note'          => $this->note,
                 'target'        => $this->target,
                 'fields'        => $fields,

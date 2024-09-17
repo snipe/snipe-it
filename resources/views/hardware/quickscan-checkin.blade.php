@@ -33,14 +33,25 @@
                     <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
                         {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'checkin_tag')) }}
                         <div class="col-md-9">
-                            <div class="input-group date col-md-5" data-date-format="yyyy-mm-dd">
-                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ Request::old('asset_tag') }}">
+                            <div class="input-group col-md-11 required">
+                                <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}" required>
 
                             </div>
                             {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>
-    
+
+                    <!-- Status -->
+                    <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
+                        <label for="status_id" class="col-md-3 control-label">
+                            {{ trans('admin/hardware/form.status') }}
+                        </label>
+                        <div class="col-md-7">
+                            {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
+                            {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        </div>
+                    </div>
+
                     <!-- Locations -->
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
@@ -58,7 +69,7 @@
                 </div> <!--/.box-body-->
                 <div class="box-footer">
                     <a class="btn btn-link" href="{{ route('hardware.index') }}"> {{ trans('button.cancel') }}</a>
-                    <button type="submit" id="checkin_button" class="btn btn-success pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
+                    <button type="submit" id="checkin_button" class="btn btn-success pull-right"><x-icon type="checkmark" /> {{ trans('general.checkin') }}</button>
                 </div>
 
 
@@ -88,7 +99,7 @@
                         </tr>
                         <tr id="checkin-loader" style="display: none;">
                             <td colspan="3">
-                                <i class="fas fa-spinner spin" aria-hidden="true"></i> {{ trans('general.processing') }}...
+                                <x-icon type="spinner" />  {{ trans('general.processing') }}...
                             </td>
                         </tr>
                         </thead>
@@ -129,6 +140,12 @@
                 success : function (data) {
                     if (data.status == 'success') {
                         $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.payload.model + "</td><td>" + data.payload.model_number + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+
+                        @if ($user->enable_sounds)
+                        var audio = new Audio('{{ config('app.url') }}/sounds/success.mp3');
+                        audio.play()
+                        @endif
+
                         incrementOnSuccess();
                     } else {
                         handlecheckinFail(data);
@@ -148,6 +165,12 @@
         });
 
         function handlecheckinFail (data) {
+
+            @if ($user->enable_sounds)
+            var audio = new Audio('{{ config('app.url') }}/sounds/error.mp3');
+            audio.play()
+            @endif
+
             if (data.payload.asset_tag) {
                 var asset_tag = data.payload.asset_tag;
                 var model = data.payload.model;

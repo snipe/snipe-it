@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Wybierz język',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'angielski (USA)',
         'en-GB'=> 'angielski (UK)',
@@ -12,7 +12,7 @@ return [
         'bg-BG'=> 'bułgarski',
         'zh-CN'=> 'chiński uproszczony',
         'zh-TW'=> 'chiński tradycyjny',
-        'ca-ES' => 'Catalan',
+        'ca-ES' => 'kataloński',
         'hr-HR'=> 'chorwacki',
         'cs-CZ'=> 'czeski',
         'da-DK'=> 'duński',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'malajski',
         'mi-NZ'=> 'maoryski',
         'mn-MN'=> 'mongolski',
-        'no-NO'=> 'norweski',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norwegian Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'perski',
         'pl-PL'=> 'polski',
         'pt-PT'=> 'portugalski',
@@ -48,8 +50,9 @@ return [
         'ro-RO'=> 'rumuński',
         'ru-RU'=> 'rosyjski',
         'sr-CS' => 'serbski (łaciński)',
-        'sk-SK'=> 'Slovak',
+        'sk-SK'=> 'Słowacki',
         'sl-SI'=> 'słoweński',
+        'so-SO'=> 'Somali',
         'es-ES'=> 'hiszpański',
         'es-CO'=> 'hiszpański, Kolumbia',
         'es-MX'=> 'hiszpański, Meksyk',
@@ -65,7 +68,7 @@ return [
         'zu-ZA'=> 'zuluski',
     ],
 
-    'select_country' => 'Wybierz kraj',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Wyspa Wniebowstąpienia',
@@ -132,6 +135,7 @@ return [
         'EC'=>'Ekwador',
         'EE'=>'Estonia',
         'EG'=>'Egipt',
+        'GB-ENG'=>'England',
         'ER'=>'Erytrea',
         'ES'=>'Hiszpania',
         'ET'=>'Etiopia',
@@ -230,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nikaragua',
         'NL'=>'Holandia',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norwegia',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -257,7 +262,7 @@ return [
         'RU'=>'Federacja Rosyjska',
         'RW'=>'Rwanda',
         'SA'=>'Arabia Saudyjska',
-        'UK'=>'Szkocja',
+        'GB-SCT'=>'Szkocja',
         'SB'=>'Wyspy Salomona',
         'SC'=>'Seszele',
         'SS'=>'Sudan Południowy',
@@ -309,6 +314,7 @@ return [
         'VI'=>'Wyspy Dziewicze Stanów Zjednoczonych',
         'VN'=>'Wietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis i Futuna',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

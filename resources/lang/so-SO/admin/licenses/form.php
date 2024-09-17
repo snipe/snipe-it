@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'asset'             => 'Hantida',
+    'checkin'           => 'Is xaadiri',
+    'create'            => 'Samee shatiga',
+    'expiration'        => 'Taariikhda uu dhacayo',
+    'license_key'       => 'Furaha Alaabta',
+    'maintained'        => 'La ilaaliyo',
+    'name'              => 'Magaca Software',
+    'no_depreciation'   => 'Ha Qiimayn',
+    'purchase_order'    => 'Lambarka Dalabka Iibka',
+    'reassignable'      => 'Dib loo magacaabi karo',
+    'remaining_seats'   => 'Kuraasta hadhay',
+    'seats'             => 'Kuraasta',
+    'termination_date'  => 'Taariikhda Joojinta',
+    'to_email'          => 'Ruqsad u siisay iimaylka',
+    'to_name'           => 'Ruqsad u siisay Magaca',
+    'update'            => 'Cusbooneysii shatiga',
+    'checkout_help'     => 'Waa inaad ka hubisaa shatiga hantida qalabka ama qofka. Waad dooran kartaa labadaba, laakiin mulkiilaha hantidu waa inuu la mid yahay qofka aad ka hubinayso hantida.'
 );

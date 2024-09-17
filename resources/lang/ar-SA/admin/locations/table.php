@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'الاخراج',
     'asset_expected_checkin'    => 'تاريخ الادخال المتوقع',
     'date'                      => 'التاريخ:',
+    'phone'                     => 'هاتف الموقع',
     'signed_by_asset_auditor'   => 'موقعة من قبل (مراجع الأصل):',
     'signed_by_finance_auditor' => 'موقعة من قبل (مراجع الحسابات المالي):',
     'signed_by_location_manager' => 'توقيع بواسطة (مدير الموقع):',

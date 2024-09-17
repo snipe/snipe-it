@@ -1,19 +1,18 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'saml_login'                    => 'Login via SAML',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'ldap_reset_password'           => 'Please click here to reset your LDAP password',
-    'remember_me'                   => 'Remember Me',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
-    'google_login'                  => 'Or login with Google Workspace',
-    'google_login_failed'           => 'Google Login failed, please try again.',
-
+    'send_password_link'	        => 'Soo dir Linkiga Dib-u-dejinta Furaha',
+    'email_reset_password'			=> 'Dib-u-dejinta erayga sirta ah ee iimaylka',
+    'reset_password'			    => 'Dib u deji erayga sirta ah',
+    'saml_login'                    => 'Ku soo gal SAML',
+    'login'                         => 'Soo gal',
+    'login_prompt'                  => 'Fadlan Soo gal',
+    'forgot_password'               => 'Waxaan ilaaway erayga sirta ah',
+    'ldap_reset_password'           => 'Fadlan halkan guji si aad dib ugu dejiso eraygaaga sirta ah ee LDAP',
+    'remember_me'                   => 'I xasuuso',
+    'username_help_top'                 => 'Geli <strong>username</strong> si loogu diro iimaylka isku xidhka dib u habeynta erayga sirta ah.',
+    'username_help_bottom'          => 'Magacaaga isticmaale iyo ciwaanka iimaylka <em>waxa laga yaabaa in</em> isku mid noqdaan, laakiin ma noqon karaan, iyadoo ku xidhan qaabayntaada. Haddii aadan xasuusan karin magacaaga isticmaale, la xiriir maamulahaaga. <br><br><xoogan>Magacyada isticmaalayaasha aan lahayn ciwaanka iimaylka la xidhiidha iimaylka looma diri doono isku xidhka dib u dejinta erayga sirta ah.</strong> ',
+    'google_login'                  => 'Login with Google Workspace',
+    'google_login_failed'           => 'Google Login wuu fashilmay, fadlan isku day mar kale.',
 ];
 

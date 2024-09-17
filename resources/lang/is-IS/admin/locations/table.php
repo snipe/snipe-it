@@ -34,6 +34,7 @@ return [
     'asset_checked_out'         => 'Skráð út',
     'asset_expected_checkin'    => 'Áætluð skil',
     'date'                      => 'Dagsetning:',
+    'phone'                     => 'Símanúmer á staðsetningu',
     'signed_by_asset_auditor'   => 'Undirritað af (fulltrúa Tölvudeildar):',
     'signed_by_finance_auditor' => 'Undirritað af (fulltrúa fjármáladeildar):',
     'signed_by_location_manager' => 'Undirritað af (fulltrúa forstöðumanns):',

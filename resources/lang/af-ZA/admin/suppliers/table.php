@@ -19,7 +19,6 @@ return array(
     'state'                 => 'staat',
     'suppliers'             => 'Verskaffers',
     'update'                => 'Update Verskaffer',
-    'url'                   => 'URL',
     'view'                  => 'Kyk verskaffer',
     'view_assets_for'       => 'Bekyk bates vir',
     'zip'                   => 'Poskode',

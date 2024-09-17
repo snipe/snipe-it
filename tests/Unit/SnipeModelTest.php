@@ -2,13 +2,10 @@
 namespace Tests\Unit;
 
 use App\Models\SnipeModel;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class SnipeModelTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testSetsPurchaseDatesAppropriately()
     {
         $c = new SnipeModel;

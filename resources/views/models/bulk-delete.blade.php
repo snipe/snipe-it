@@ -35,7 +35,7 @@
 
                                 </td>
                                 <td class="col-md-1"><i class="fas fa-barcode" aria-hidden="true"></i></td>
-                                <td class="col-md-10">Name</td>
+                                <td class="col-md-10">{{ trans('general.name') }}</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@
 
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.delete') }}</button>
+                        <button type="submit" class="btn btn-success" id="submit-button"><x-icon type="checkmark" /> {{ trans('general.delete') }}</button>
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
             </form>

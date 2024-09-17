@@ -14,6 +14,7 @@ return array(
     'info'  					=> 'Informações da Licença',
     'license_seats'  			=> 'Compartilhamentos de Licença',
     'seat'  					=> 'Licença Compartilhada',
+    'seat_count'  				=> 'Seat :count',
     'seats'  					=> 'Licenças Compartilhadas',
     'software_licenses'  		=> 'Licenças de Software',
     'user'  					=> 'Usuário',
@@ -23,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin todas as vagas',
-                'modal'             => 'Esta ação irá realizar a verificação de uma única vaga. | Esta ação verificará todos os :checkedout_seats_count vagas para esta licença.',
+                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
                 'enabled_tooltip'   => 'Check-in de TODOS as vagas para esta licença de usuários e ativos',
                 'disabled_tooltip'  => 'Isto está desativado porque não há vagas desbloqueadas no momento',
                 'disabled_tooltip_reassignable'  => 'Isto está desativado porque a licença não é transferível',
                 'success'           => 'Licença desbloqueada com sucesso! | Todas as licenças foram verificadas com sucesso!',
-                'log_msg'           => 'Check-in feito através do checkout em massa da licença GUI',
+                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
             ],
 
             'checkout_all'              => [
@@ -45,4 +46,7 @@ return array(
 
             ],
     ],
+
+    'below_threshold' => 'Existem apenas :remaining_count lugares para esta licença com uma quantidade mínima de :min_amt. Você pode querer considerar a compra de mais lugares.',
+    'below_threshold_short' => 'Este item está abaixo da quantidade mínima necessária.',
 );

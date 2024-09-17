@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Stato',
     'suppliers'             => 'Fornitori',
     'update'                => 'Aggiorna Fornitore',
-    'url'                   => 'URL',
     'view'                  => 'Visualizza Fornitore',
     'view_assets_for'       => 'Visualizza beni per',
     'zip'                   => 'Codice Postale',

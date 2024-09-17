@@ -4,6 +4,7 @@ return array(
 
     'assigned_to'   	=> 'Nakatalaga Sa',
     'checkout'   		=> 'Papasok/Palabas',
+    'deleted_at'        => 'Deleted at',
     'id'      			=> 'Ang ID',
     'license_email'   	=> 'Ang Lisensya ng Email',
     'license_name'   	=> 'Ang Lisensya Para sa',

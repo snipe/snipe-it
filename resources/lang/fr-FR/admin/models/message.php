@@ -7,7 +7,7 @@ return array(
     'no_association' => 'ATTENTION ! Le modèle d\'actif pour cet objet est invalide ou manquant !',
     'no_association_fix' => 'Cela va casser les choses de manière bizarre et horrible. Modifiez cette ressource maintenant pour lui assigner un modèle.',
     'assoc_users'	 => 'Ce modèle est actuellement associé à au moins un actif et ne peut pas être supprimé. Veuillez supprimer les actifs associés et essayer à nouveau. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Le modèle n\'a pas été créé, veuillez essayer à nouveau.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Aucun champ n\'a été changé, donc rien n\'a été mis à jour.',
         'success' 		=> 'Modèle mis à jour avec succès. |:model_count modèles mis à jour avec succès.',
-        'warn'          => 'Vous êtes sur le point de mettre à jour les propriétés du modèle suivant : |Vous êtes sur le point de modifier les propriétés des :model_count modèles suivants :',
+        'warn'          => 'Vous êtes sur le point de mettre à jour les propriétés du modèle suivant :|Vous êtes sur le point de modifier les propriétés des modèles :model_count suivants :',
 
     ),
 

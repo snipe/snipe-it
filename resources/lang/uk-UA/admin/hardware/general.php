@@ -15,8 +15,8 @@ return [
     'delete_confirm'            => 'Ви впевнені, що хочете видалити цей медіафайл?',
     'edit'  					=> 'Редагувати актив',
     'model_deleted'  			=> 'Ця модель активів була видалена. Ви повинні відновити модель, перш ніж ви зможете відновити Ця модель.',
-    'model_invalid'             => 'Модель цього майна недійсна.',
-    'model_invalid_fix'         => 'Актив повинен бути відредагований, щоб виправити це, перш ніж намагатися перевірити його в або поза ним.',
+    'model_invalid'             => 'This model for this asset is invalid.',
+    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'Доступно для запиту',
     'requested'				    => 'Запрошено користувачем',
     'not_requestable'           => 'Ви не можете запросити',
@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> 'Цей медіафайл має марку стану, який не можна розгорнути, і цей час не може бути перевірений.',
     'view'  					=> 'Переглянути актив',
     'csv_error' => 'У вас є помилка у файлі CSV:',
-    'import_text' => '
-     <p>
-     Завантажте файл CSV, який містить історію активів. Активи та користувачі ПОВИННІ вже існувати в системі, інакше їх буде пропущено. Зіставлення активів для імпорту історії відбувається за тегом активу. Ми спробуємо знайти відповідного користувача на основі наданого вами імені користувача та критеріїв, які ви виберете нижче. Якщо ви не виберете жодного критерію нижче, ми просто спробуємо знайти співпадіння по формату імені користувача, який ви налаштували в розділі адміністратора &gt; Загальні налаштування.
-     </p>
-
-     <p>Поля, включені до CSV, мають відповідати заголовкам: <strong>Тег Активу, Ім\'я, Дата Видачі, Дата Повернення</strong>. Будь-які додаткові поля ігноруватимуться. </p>
-
-     <p>Дата Повернення: порожня або майбутня дата видачі призведе до видачі активів пов’язаному користувачеві. Якщо виключити стовпець "Дата Повернення", дата повернення буде мати сьогоднішню дату.</p>
+    'import_text' => '<p>Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the <code>Admin &gt; General Settings</code>.</p><p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p><p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
     ',
-    'csv_import_match_f-l' => 'Спробуйте співпадати з користувачами формату firstname.lastname (jane.smith)',
-    'csv_import_match_initial_last' => 'Спробуйте співставити користувачів з першим початковим ім\'ям (jsmith) форматі',
-    'csv_import_match_first' => 'Спробуйте співставити користувачів за першим ім\'ям (Жанр) форматі',
-    'csv_import_match_email' => 'Спробуйте співпадати з користувачами за електронною поштою',
-    'csv_import_match_username' => 'Спробуйте співпадати користувачам за ім\'ям користувача',
+    'csv_import_match_f-l' => 'Спробуйте відповідати користувачам формату <strong>firstname.lastname</strong> (<code>jane.smith</code>)',
+    'csv_import_match_initial_last' => 'Try to match users by <strong>first initial last name</strong> (<code>jsmith</code>) format',
+    'csv_import_match_first' => 'Try to match users by <strong>first name</strong> (<code>jane</code>) format',
+    'csv_import_match_email' => 'Спробуйте відповідати користувачам з <strong>email</strong> як ім\'я користувача',
+    'csv_import_match_username' => 'Try to match users by <strong>username</strong>',
     'error_messages' => 'Повідомлення про помилки:',
     'success_messages' => 'Повідомлення про успіх:',
     'alert_details' => 'Будь ласка, подивіться нижче для деталей.',

@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du dieses Zubehör löschen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du dieses Zubehör löschen möchtest?',
         'error'   => 'Beim Löschen dieses Zubehörs ist ein Problem aufgetreten. Bitte versuche es erneut.',
         'success' => 'Das Zubehör wurde erfolgreich gelöscht.'
     ),
@@ -26,7 +26,11 @@ return array(
         'error'   		=> 'Zubehör konnte nicht herausgegeben werden. Bitte versuche es erneut',
         'success' 		=> 'Zubehör erfolgreich herausgegeben.',
         'unavailable'   => 'Zubehör ist nicht verfügbar, um herausgegeben zu werden. Prüfe die verfügbare Menge',
-        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuche es erneut.'
+        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuche es erneut.',
+         'checkout_qty' => array(
+            'lte'  => 'Derzeit steht nur ein Zubehörteil dieses Typs zur Verfügung, und Sie versuchen, :checkout_qty auszuleihen. Bitte passen Sie entweder die Ausleihmenge oder den Gesamtbestand dieses Zubehörs an und versuchen Sie es erneut.|Es sind insgesamt :number_currently_remaining verfügbare Zubehörteile vorhanden, und Sie versuchen, :checkout_qty auszuleihen. Bitte passen Sie entweder die Ausleihmenge oder den Gesamtbestand dieses Zubehörs an und versuchen Sie es erneut.',
+            ),
+           
     ),
 
     'checkin' => array(

@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Variabelen <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, en <code>{MODEL_NAME}</code> kunnen worden gebruikt in je URL om deze waarden automatisch in te vullen bij het bekijken van assets - bijvoorbeeld https://support. pple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Variabelen <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, en <code>{MODEL_NAME}</code> kunnen worden gebruikt in je URL om deze waarden automatisch in te vullen bij het bekijken van assets - bijvoorbeeld https://checkcoverage. pple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Fabrikant bestaat niet.',
     'assoc_users'	 => 'Deze fabrikant is verbonden met 1 of meerdere modellen en kan hierdoor niet verwijderd worden. Controleer de modellen zodat er geen verbinding meer is met deze fabrikant en probeer opnieuw. ',
 

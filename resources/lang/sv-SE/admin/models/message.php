@@ -7,7 +7,7 @@ return array(
     'no_association' => 'VARNING! Modellen för detta objekt är ogiltigt eller saknas!',
     'no_association_fix' => 'Detta kommer att bryta saker på konstiga och hemska sätt. Redigera denna tillgång nu för att tilldela det en modell.',
     'assoc_users'	 => 'Denna modell är redan associerad med en eller flera tillgångar och kan inte tas bort. Ta bort tillgången och försök sedan igen. ',
-
+    'invalid_category_type' => 'This category must be an asset category.',
 
     'create' => array(
         'error'   => 'Modellen skapades inte, försök igen.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Inga fält ändrades, så ingenting uppdaterades.',
         'success' 		=> 'Modellen har uppdaterats. |:model_count modeller har uppdaterats.',
-        'warn'          => 'Du håller på att uppdatera egenskaperna för följande modell: | Du håller på att redigera egenskaperna för följande :model_count modeller:',
+        'warn'          => 'Du håller på att uppdatera egenskaperna för följande modell:|Du håller på att redigera egenskaperna för följande :model_count modeller:',
 
     ),
 

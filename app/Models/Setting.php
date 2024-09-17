@@ -9,7 +9,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Support\Facades\Log;
 
 
 /**
@@ -72,7 +74,10 @@ class Setting extends Model
           'login_remote_user_header_name'       => 'string|nullable',
           'thumbnail_max_h'                     => 'numeric|max:500|min:25',
           'pwd_secure_min'                      => 'numeric|required|min:8',
+          'alert_threshold'                     => 'numeric|nullable',
+          'alert_interval'                      => 'numeric|nullable',
           'audit_warning_days'                  => 'numeric|nullable',
+          'due_checkin_days'                      => 'numeric|nullable',
           'audit_interval'                      => 'numeric|nullable',
           'custom_forgot_pass_url'              => 'url|nullable',
           'privacy_policy_link'                 => 'nullable|url',
@@ -133,7 +138,7 @@ class Setting extends Model
 
             return $usercount > 0 && $settingsCount > 0;
         } catch (\Throwable $th) {
-            \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
+            Log::debug('User table and settings table DO NOT exist or DO NOT have records');
             // Catch the error if the tables dont exit
             return false;
         }
@@ -352,7 +357,6 @@ class Setting extends Model
             'ldap_client_tls_cert',
             'ldap_default_group',
             'ldap_dept',
-            'ldap_emp_num',
             'ldap_phone_field',
             'ldap_jobtitle',
             'ldap_manager',

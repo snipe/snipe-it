@@ -105,7 +105,7 @@ RUN \
       && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.cert" "/var/www/html/storage/ldap_client_tls.cert" \
       && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.key" "/var/www/html/storage/ldap_client_tls.key" \
       && chown docker "/var/lib/snipeit/keys/" \
-      && chown -h docker "/var/www/html/storage/" \
+      && chown -Rh docker "/var/www/html/storage/" \
       && chmod +x /var/www/html/artisan \
       && echo "Finished setting up application in /var/www/html"
 

@@ -2,11 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
-                       Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
+    'undeployable' 		=> '<strong>Attenzione: </strong> Questo Bene è stato marcato come non distribuibile. Se lo stato del Bene è cambiato si prega di aggiornarlo.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
+    'does_not_exist_var'=> 'Bene con tag :asset_tag non trovato.',
+    'no_tag' 	        => 'Nessun tag del Bene è stato fornito.',
     'does_not_exist_or_not_requestable' => 'Questo bene non esiste o non è disponibile.',
     'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
+    'warning_audit_date_mismatch' 	=> 'La prossima data d\'inventario di questo Bene (:next_audit_date) precede l\'ultima data d\'inventario (:last_audit_date). Si prega di aggiornare la prossima data d\'inventario.',
 
     'create' => [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
@@ -17,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'Il bene non è stato aggiornato, si prega di riprovare',
         'success' 			=> 'Bene aggiornato con successo.',
+        'encrypted_warning' => 'Asset aggiornato con successo, ma i campi personalizzati crittografati non sono dovuti ai permessi',
         'nothing_updated'	=>  'Non è stato selezionato nessun campo, nulla è stato aggiornato.',
         'no_assets_selected'  =>  'Nessun asset è stato selezionato, quindi niente è stato eliminato.',
+        'assets_do_not_exist_or_are_invalid' => 'Gli asset selezionati non possono essere aggiornati.',
     ],
 
     'restore' => [
@@ -29,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'L\'audit del patrimonio non è riuscito. Riprova.',
+        'error'   		=> 'Inventario del Bene non riuscito: :error ',
         'success' 		=> 'L\'audit di risorse si è registrato con successo.',
     ],
 
@@ -47,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Importa Processo',
         'error'                 => 'Alcuni elementi non sono stati importati correttamente.',
         'errorDetail'           => 'Gli articoli seguenti non sono stati importati correttamente a causa di errori.',
         'success'               => 'Il file è stato importato con successo',
         'file_delete_success'   => 'Il file è stato cancellato con successo',
         'file_delete_error'      => 'Impossibile eliminare il file',
         'file_missing' => 'File selezionato mancante',
+        'file_already_deleted' => 'Il file selezionato è già stato eliminato',
         'header_row_has_malformed_characters' => 'Uno o più attributi nella riga d\'intestazione contengono caratteri UTF-8 malformati',
         'content_row_has_malformed_characters' => 'Uno o più attributi nella prima riga del contenuto contengono caratteri UTF-8 malformati',
     ],

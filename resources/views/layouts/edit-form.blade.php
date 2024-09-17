@@ -46,7 +46,7 @@
                         @if (isset($topSubmit) && ($topSubmit=='true'))
                         <div class="col-md-3 text-right" style="padding-right: 10px;">
                             <button type="submit" class="btn btn-primary pull-right">
-                                <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                                <x-icon type="checkmark" />
                                 {{ trans('general.save') }}
                             </button>
                         </div>
@@ -66,7 +66,11 @@
                     <!-- CSRF Token -->
                     {{ csrf_field() }}
                     @yield('inputFields')
-                    @include('partials.forms.edit.submit')
+                        <x-redirect_submit_options
+                                :index_route="$index_route ?? null"
+                                :button_label="trans('general.save')"
+                                :options="$options ?? []"
+                        />
                 </div>
 
             </div> <!-- ./box-body -->

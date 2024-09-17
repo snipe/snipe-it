@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api;
-// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -496,12 +495,26 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.assets.show.byserial')
         ->where('any', '.*');
 
-        Route::get('audit/{audit}',
+        // LEGACY URL - Get assets that are due or overdue for audit
+        Route::get('audit/{status}',
         [
             Api\AssetsController::class, 
             'index'
         ]
         )->name('api.asset.to-audit');
+
+
+
+        // This gets the "due or overdue" API endpoints for audits and checkins
+        Route::get('{action}/{upcoming_status}',
+              [
+                  Api\AssetsController::class,
+                  'index'
+              ]
+        )->name('api.assets.list-upcoming')
+        ->where(['action' => 'audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
+
+
 
         Route::post('audit',
         [
@@ -530,23 +543,52 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
               'restore'
           ]
       )->name('api.assets.restore');
+        Route::post('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'store'
+          ]
+        )->name('api.assets.files.store');
 
+        Route::get('{asset_id}/files',
+          [
+              Api\AssetFilesController::class,
+              'list'
+          ]
+        )->name('api.assets.files.index');
+
+        Route::get('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'show'
+          ]
+        )->name('api.assets.files.show');
+
+        Route::delete('{asset_id}/file/{file_id}',
+          [
+              Api\AssetFilesController::class,
+              'destroy'
+          ]
+        )->name('api.assets.files.destroy');
       });
 
+    // pulling this out of resource route group to begin normalizing for route-model binding.
+    // this would probably keep working with the resource route group, but the general practice is for
+    // the model name to be the parameter - and i think it's a good differentiation in the code while we convert the others.
+    Route::patch('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.update');
+    Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
 
+    Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
 
-
-
-        Route::resource('hardware', 
+    Route::resource('hardware',
         Api\AssetsController::class,
         ['names' => [
                 'index' => 'api.assets.index',
                 'show' => 'api.assets.show',
-                'update' => 'api.assets.update',
                 'store' => 'api.assets.store',
                 'destroy' => 'api.assets.destroy',
             ],
-        'except' => ['create', 'edit'],
+            'except' => ['create', 'edit', 'update'],
         'parameters' => ['asset' => 'asset_id'],
         ]
         ); // end assets API routes
@@ -673,7 +715,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             Route::get('{location}/assets',
             [
                 Api\LocationsController::class, 
-                'getDataViewAssets'
+                'assets'
             ]
             )->name('api.locations.viewassets');
     
@@ -756,6 +798,33 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.models.restore');
 
+            Route::post('{model_id}/files',
+            [
+                Api\AssetModelFilesController::class,
+                'store'
+            ]
+            )->name('api.models.files.store');
+
+            Route::get('{model_id}/files',
+            [
+                Api\AssetModelFilesController::class,
+                'list'
+            ]
+            )->name('api.models.files.index');
+
+            Route::get('{model_id}/file/{file_id}',
+            [
+                Api\AssetModelFilesController::class,
+                'show'
+            ]
+            )->name('api.models.files.show');
+
+            Route::delete('{model_id}/file/{file_id}',
+            [
+                Api\AssetModelFilesController::class,
+                'destroy'
+            ]
+            )->name('api.models.files.destroy');
         }); 
     
         Route::resource('models', 
@@ -827,6 +896,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'listBackups'
                 ]
             )->name('api.settings.backups.index');
+
+            Route::get('backups/download/latest',
+                [
+                    Api\SettingsController::class,
+                    'downloadLatestBackup'
+                ]
+            )->name('api.settings.backups.latest');
 
             Route::get('backups/download/{file}',
                 [
@@ -1021,18 +1097,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.users.restore');
 
-        }); 
-    
+        });
+
         Route::resource('users', 
         Api\UsersController::class,
         ['names' => [
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
-                'update' => 'api.users.update',
                 'store' => 'api.users.store',
+                'update' => 'api.users.update',
                 'destroy' => 'api.users.destroy',
             ],
-        'except' => ['create', 'edit'],
+         'except' => ['create', 'edit'],
         'parameters' => ['user' => 'user_id'],
         ]
         ); // end users API routes

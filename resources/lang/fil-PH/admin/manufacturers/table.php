@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'Ang Suportang URL',
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'I-update ang Tagapagsagawa',
-    'url'   				=> 'Ang URL',
 
 );

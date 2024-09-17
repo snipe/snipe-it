@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Accessory;
 use App\Models\Actionlog;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AccessoryObserver
 {
@@ -38,6 +38,9 @@ class AccessoryObserver
         $logAction->item_id = $accessory->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        if($accessory->imported) {
+            $logAction->setActionSource('importer');
+        }
         $logAction->logaction('create');
     }
 

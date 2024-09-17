@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Bölge',
     'suppliers'             => 'Tedarikçiler',
     'update'                => 'Tedarikçiyi Güncelle',
-    'url'                   => 'URL',
     'view'                  => 'Tedarikçiyi Görüntüle',
     'view_assets_for'       => 'Demirbaşları görüntüle',
     'zip'                   => 'Posta kodu',

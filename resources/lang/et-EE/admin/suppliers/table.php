@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Maakond',
     'suppliers'             => 'Tarnijad',
     'update'                => 'Uuenda tarnijat',
-    'url'                   => 'URL',
     'view'                  => 'Vaata tarnijat',
     'view_assets_for'       => 'Vaata vahendeid',
     'zip'                   => 'Postiindeks',

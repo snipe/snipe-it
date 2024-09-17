@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Válasszon ki egy nyelvet',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Angol, Amerikai Egyesült Államok',
         'en-GB'=> 'Angol, Egyesült Királyság',
@@ -12,7 +12,7 @@ return [
         'bg-BG'=> 'Bolgár',
         'zh-CN'=> 'Egyszerűsített kínai',
         'zh-TW'=> 'Hagyományos kínai',
-        'ca-ES' => 'Catalan',
+        'ca-ES' => 'katalán',
         'hr-HR'=> 'Horvát',
         'cs-CZ'=> 'Cseh',
         'da-DK'=> 'Dán',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Maláj',
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongol',
-        'no-NO'=> 'Norvég',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norwegian Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Perzsa',
         'pl-PL'=> 'Lengyel',
         'pt-PT'=> 'Portugál',
@@ -48,8 +50,9 @@ return [
         'ro-RO'=> 'Román',
         'ru-RU'=> 'Orosz',
         'sr-CS' => 'Szerb (latin betűs)',
-        'sk-SK'=> 'Slovak',
+        'sk-SK'=> 'szlovák',
         'sl-SI'=> 'Szlovèn',
+        'so-SO'=> 'Szomáli',
         'es-ES'=> 'Spanyol',
         'es-CO'=> 'Spanyol, Kolumbia',
         'es-MX'=> 'Spanyol, Mexikó',
@@ -65,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Válasszon ki egy országot',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ascension-sziget',
@@ -132,6 +135,7 @@ return [
         'EC'=>'Ecuadori Köztársaság',
         'EE'=>'Észtország',
         'EG'=>'Egyiptom',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Spanyolország',
         'ET'=>'Etiópia',
@@ -230,6 +234,7 @@ return [
         'NG'=>'Nigéria',
         'NI'=>'Nicaraguai Köztársaság',
         'NL'=>'Hollandia',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norvégia',
         'NP'=>'Nepál',
         'NR'=>'Naurui Köztársaság',
@@ -257,7 +262,7 @@ return [
         'RU'=>'Oroszország',
         'RW'=>'Ruandai Köztársaság',
         'SA'=>'Szaúd-Arábia',
-        'UK'=>'Skócia',
+        'GB-SCT'=>'Skócia',
         'SB'=>'Salamon-szigetek',
         'SC'=>'Seychelle Köztársaság',
         'SS'=>'Dél-Szudán',
@@ -309,6 +314,7 @@ return [
         'VI'=>'Amerikai Virgin-szigetek',
         'VN'=>'Vietnám',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis-és Futuna-szigetek',
         'WS'=>'Szamoa',
         'YE'=>'Jemeni Köztársaság',

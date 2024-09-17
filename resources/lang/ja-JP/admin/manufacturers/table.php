@@ -12,6 +12,5 @@ return array(
     'support_url'   		=> 'サポート URL',
     'warranty_lookup_url'   => '保証書検索URL',
     'update'				=> '製造業者を更新',
-    'url'   				=> 'URL',
 
 );

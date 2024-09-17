@@ -2,10 +2,13 @@
 
 return [
 
-    'undeployable' 		=> '<strong> تحذير: </strong> تم تحديد الحالة لهذا الأصل بانه غير قابل للتوزيع حاليا. إذا تغيرت هذه الحالة، يرجى تحديث حالة الأصل.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'الأصل غير موجود.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'ذالك الأصل غير موجود أو غير قابل للطلب.',
     'assoc_users'	 	=> 'هذا الأصل مخرج حاليا لمستخدم ولا يمكن حذفه. يرجى التحقق من الأصل أولا، ثم حاول الحذف مرة أخرى. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
 
     'create' => [
         'error'   		=> 'لم يتم إنشاء الأصل، يرجى إعادة المحاولة. :(',
@@ -16,8 +19,10 @@ return [
     'update' => [
         'error'   			=> 'لم يتم تحديث الأصل، يرجى إعادة المحاولة',
         'success' 			=> 'تم تحديث الأصل بنجاح.',
+        'encrypted_warning' => 'تم تحديث الأصل بنجاح، ولكن الحقول المخصصة المشفرة لم تكن بسبب الأذونات',
         'nothing_updated'	=>  'لم يتم اختيار أي حقول، لذلك لم يتم تحديث أي شيء.',
         'no_assets_selected'  =>  'لم يتم اختيار أي أصول، لذلك لم يتم تحديث أي شيء.',
+        'assets_do_not_exist_or_are_invalid' => 'لا يمكن تحديث الأصول المحددة.',
     ],
 
     'restore' => [
@@ -28,7 +33,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'لم تنجح مراجعة الأصل. حاول مرة اخرى.',
+        'error'   		=> 'Asset audit unsuccessful: :error ',
         'success' 		=> 'تم تسجيل تدقيق الأصل بنجاح.',
     ],
 
@@ -46,12 +51,14 @@ return [
     ],
 
     'import' => [
+        'import_button'         => 'Process Import',
         'error'                 => 'لم يتم استيراد بعض العناصر بشكل صحيح.',
         'errorDetail'           => 'لم يتم استيراد العناصر التالية بسبب الأخطاء.',
         'success'               => 'تم استيراد الملف الخاص بك',
         'file_delete_success'   => 'تم حذف ملفك بنجاح',
         'file_delete_error'      => 'تعذر حذف الملف',
         'file_missing' => 'الملف المحدد مفقود',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الترويجي تحتوي على أحرف UTF-8 سيئة',
         'content_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الأول من المحتوى تحتوي على أحرف UTF-8 سيئة',
     ],

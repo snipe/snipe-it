@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'Níl an t-úsáideoir ann.',
+    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
     'asset_does_not_exist' 	=> 'Níl an tsócmhainn atá tú ag iarraidh a chomhcheangal leis an gceadúnas seo ann.',
     'owner_doesnt_match_asset' => 'Tá somet faoi úinéireacht an tsócmhainn atá tú ag iarraidh a chomhcheangal leis an gceadúnas seo seachas an duine a roghnaíodh sa sannadh chuig an mionsonraithe.',
     'assoc_users'	 => 'Seiceáiltear an ceadúnas seo faoi láthair d\'úsáideoir agus ní féidir é a scriosadh. Seiceáil an ceadúnas sa chéad uair, agus déan iarracht ansin scriosadh arís.',
@@ -44,6 +44,8 @@ return array(
         'error'   => 'Bhí ceist ann a sheiceáil amach an ceadúnas. Arís, le d\'thoil.',
         'success' => 'Rinneadh an ceadúnas a sheiceáil go rathúil',
         'not_enough_seats' => 'Not enough license seats available for checkout',
+        'mismatch' => 'The license seat provided does not match the license',
+        'unavailable' => 'This seat is not available for checkout.',
     ),
 
     'checkin' => array(

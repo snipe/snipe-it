@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
         'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Pri čiščenju je prišlo do napake. ',
         'validation_failed'     => 'Vaša potrditev čiščenja je napačna. V polje za potrditev vnesite besedo »DELETE«.',
@@ -28,19 +31,19 @@ return [
     'ldap' => [
         'testing' => 'Testing LDAP Connection, Binding & Query ...',
         '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
+        'error' => 'Nekaj je šlo narobe :(',
         'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing_authentication' => 'Testiranje LDAP Avtentikacije...',
+        'authentication_success' => 'Uporabnik se je uspešno avtoriziral z LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
+        'sending' => 'Pošiljanje :apikacija testirno sporočilo...',
+        'success' => 'Tvoj :ime_webhooka integracija deluje!',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
+        '500' => '500 strežniška napaka.',
         'error' => 'Something went wrong. :app responded with: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
+        'error_misc' => 'Nekaj je šlo narobe. :( ',
     ]
 ];

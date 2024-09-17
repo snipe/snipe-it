@@ -20,8 +20,6 @@
                 <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_department') }}</option>
             @endif
         </select>
     </div>

@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'அனைத்தையும் பெற்றுக்கொள் / பயனரை நீக்கு',
     'delete'  	                => 'அழி',
     'edit'    	                => 'தொகு',
+    'clone'    	                => 'Clone',
     'restore' 	                => 'மீட்டமை',
     'remove'                    => 'நீக்கு',
     'request'                   => 'வேண்டுகோள்',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'பராமரிப்பைச் சேர்',
     'append'                    => 'இணைக்கவும்',
     'new'                       => 'புதிய',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

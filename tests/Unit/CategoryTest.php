@@ -4,13 +4,10 @@ namespace Tests\Unit;
 use App\Models\Category;
 use App\Models\AssetModel;
 use App\Models\Asset;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testFailsEmptyValidation()
     {
         // An Asset requires a name, a qty, and a category_id.
@@ -23,7 +20,7 @@ class CategoryTest extends TestCase
          ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
-            $this->assertEquals($errors->get($field)[0], "The ${fieldTitle} field is required.");
+            $this->assertEquals($errors->get($field)[0], "The $fieldTitle field is required.");
         }
     }
 
@@ -33,7 +30,6 @@ class CategoryTest extends TestCase
 
        // Generate 5 models via factory
        $models =  AssetModel::factory()
-            ->mbp13Model()
             ->count(5)
             ->create(
                 [
@@ -60,34 +56,4 @@ class CategoryTest extends TestCase
         $this->assertCount(5, $category->models);
         $this->assertEquals(10, $category->itemCount());
     }
-
-
-    // public function testACategoryCanHaveAccessories()
-    // {
-    //     $category = Category::factory()->assetDesktopCategory()->create();
-    //     Accessory::factory()->count(5)->appleBtKeyboard()->create(
-    //         [
-    //             'category_id' => $category->id
-    //         ]
-    //     );
-
-    //     $this->assertCount(5, $category->accessories);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
-
-    // public function testACategoryCanHaveConsumables()
-    // {
-    //     $category = $this->createValidCategory('consumable-paper-category');
-    //     \App\Models\Consumable::factory()->count(5)->cardstock()->create(['category_id' => $category->id]);
-    //     $this->assertCount(5, $category->consumables);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
-
-    // public function testACategoryCanHaveComponents()
-    // {
-    //     $category = $this->createValidCategory('component-ram-category');
-    //     \App\Models\Component::factory()->count(5)->ramCrucial4()->create(['category_id' => $category->id]);
-    //     $this->assertCount(5, $category->components);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
 }

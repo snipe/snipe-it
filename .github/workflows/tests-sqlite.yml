@@ -31,7 +31,7 @@ jobs:
         id: composer-cache
         run: |
           echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -48,6 +48,9 @@ jobs:
 
       - name: Generate key
         run: php artisan key:generate
+
+      - name: Setup Passport
+        run: php artisan passport:keys
 
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache

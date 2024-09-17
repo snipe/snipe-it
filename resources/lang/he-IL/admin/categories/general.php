@@ -20,6 +20,6 @@ return array(
     'update'  							=> 'עדכון קטגוריה',
     'use_default_eula'					=> 'במקום זאת, השתמש ב- <a href="#" data-toggle="modal" data-target="#eulaModal"> ברירת המחדל הראשית EULA</a>.',
     'use_default_eula_disabled'			=> '<del> השתמש ב- EULA ברירת המחדל הראשוני במקום. </del> לא נקבעה ברירת המחדל הראשית של הסכם הרישיון למשתמש קצה. הוסף אחד בהגדרות.',
-    'use_default_eula_column'			=> 'Use default EULA',
+    'use_default_eula_column'			=> 'השתמש בהסכם רישיון למשתמש קצה (EULA) ברירת המחדל',
 
 );

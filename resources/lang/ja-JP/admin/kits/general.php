@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => '付属品は正常に取り外されました。',
     'accessory_error'                   => '付属品は既にキットに取り付けられています。',
     'accessory_deleted'                 => '削除に成功しました。',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => '付属品は存在しません',
     'checkout_success'                  => 'チェックアウトに成功しました',
     'checkout_error'                    => 'チェックアウトエラー',
     'kit_none'                          => 'キットが存在しません',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => '製品セットは正常に削除されました。',
     'kit_model_updated'                 => 'モデルが正常に更新されました。',
     'kit_model_detached'                => 'モデルは正常に切り離されました。',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

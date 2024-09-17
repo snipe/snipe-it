@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Stát',
     'suppliers'             => 'Dodavatelé',
     'update'                => 'Aktualizovat dodavatele',
-    'url'                   => 'URL',
     'view'                  => 'Zobrazit dodavatele',
     'view_assets_for'       => 'Zobrazit majetky pro',
     'zip'                   => 'PSČ',

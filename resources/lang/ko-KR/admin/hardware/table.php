@@ -4,6 +4,7 @@ return [
 
     'asset_tag'   	=> '자산 태그',
     'asset_model'       => '모델',
+    'assigned_to'   => '할당',
     'book_value'  	=> 'Current Value',
     'change' 		=> '입/출',
     'checkout_date' => '반출 일자',

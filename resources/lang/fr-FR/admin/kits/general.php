@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'L\'accessoire a bien été désaffecté',
     'accessory_error'                   => 'L\'accessoire est déjà affecté au kit',
     'accessory_deleted'                 => 'Suppression réussie',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'L\'accessoire n\'existe pas',
     'checkout_success'                  => 'Affectation réussie',
     'checkout_error'                    => 'Erreur lors de l\'affectation',
     'kit_none'                          => 'Le kit n\'existe pas',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Le kit a bien été supprimé',
     'kit_model_updated'                 => 'Le modèle a bien été mis à jour',
     'kit_model_detached'                => 'Le modèle a bien été désaffecté',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

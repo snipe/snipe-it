@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
+    'support_url_help' => 'Змінні <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code> і <code>{MODEL_NAME}</code> можна використовувати в URL-адресі для автоматичного заповнення цих значень під час перегляду ресурсів, наприклад https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Виробник не існує.',
     'assoc_users'	 => 'Цього виробника зараз пов\'язано принаймні з однією моделлю та не може бути видалений. Будь ласка, оновіть ваші моделі, щоб більше не посилатися на виробника та повторіть спробу. ',
 

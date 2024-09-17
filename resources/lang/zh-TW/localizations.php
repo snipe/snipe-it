@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => '選擇語言',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> '美式英語',
         'en-GB'=> '英式英語',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> '馬來語',
         'mi-NZ'=> '毛利語',
         'mn-MN'=> '蒙古語',
-        'no-NO'=> '挪威語',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norwegian Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> '波斯語',
         'pl-PL'=> '波蘭語',
         'pt-PT'=> '葡萄牙語',
@@ -50,6 +52,7 @@ return [
         'sr-CS' => '塞爾維亞語（拉丁文）',
         'sk-SK'=> 'Slovak',
         'sl-SI'=> '斯洛維尼亞語',
+        'so-SO'=> 'Somali',
         'es-ES'=> '西班牙語',
         'es-CO'=> '哥倫比亞西班牙語',
         'es-MX'=> '墨西哥西班牙語',
@@ -65,7 +68,7 @@ return [
         'zu-ZA'=> '祖魯語',
     ],
 
-    'select_country' => '選擇一個國家',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'阿森松島',
@@ -132,6 +135,7 @@ return [
         'EC'=>'厄瓜多',
         'EE'=>'愛沙尼亞',
         'EG'=>'埃及',
+        'GB-ENG'=>'England',
         'ER'=>'厄利垂亞',
         'ES'=>'西班牙',
         'ET'=>'衣索比亞',
@@ -230,6 +234,7 @@ return [
         'NG'=>'奈及利亞',
         'NI'=>'尼加拉瓜',
         'NL'=>'荷蘭',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'挪威',
         'NP'=>'尼泊爾',
         'NR'=>'諾魯',
@@ -257,7 +262,7 @@ return [
         'RU'=>'俄羅斯',
         'RW'=>'盧安達',
         'SA'=>'沙烏地阿拉伯',
-        'UK'=>'英國',
+        'GB-SCT'=>'英國',
         'SB'=>'索羅門群島',
         'SC'=>'塞席爾',
         'SS'=>'南蘇丹',
@@ -309,6 +314,7 @@ return [
         'VI'=>'美屬維京群島',
         'VN'=>'越南',
         'VU'=>'萬那杜',
+        'GB-WLS' =>'Wales',
         'WF'=>'瓦利斯和富圖納群島',
         'WS'=>'薩摩亞',
         'YE'=>'葉門',

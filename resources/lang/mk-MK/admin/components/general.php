@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Останува',
     'total' 			                 => 'Вкупно',
     'update'                            => 'Уреди компонента',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Количината што е вратена мора да биде еднаква или помала од :assigned_qty'
 );

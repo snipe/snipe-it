@@ -38,6 +38,16 @@ class UserFactory extends Factory
         ];
     }
 
+    public function deletedUser()
+    {
+        return $this->state(function () {
+            return [
+                'deleted_at' => $this->faker->dateTime(),
+            ];
+        });
+    }
+
+
     public function firstAdmin()
     {
         return $this->state(function () {
@@ -231,6 +241,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['components.view' => '1']);
     }
 
+    public function createCompanies()
+    {
+        return $this->appendPermission(['companies.create' => '1']);
+    }
+
     public function createComponents()
     {
         return $this->appendPermission(['components.create' => '1']);
@@ -286,6 +301,11 @@ class UserFactory extends Factory
         return $this->appendPermission(['reports.view' => '1']);
     }
 
+    public function canImport()
+    {
+        return $this->appendPermission(['import' => '1']);
+    }
+
     private function appendPermission(array $permission)
     {
         return $this->state(function ($currentState) use ($permission) {
@@ -298,5 +318,10 @@ class UserFactory extends Factory
                 ),
             ];
         });
+    }
+
+    public function deleted(): self
+    {
+        return $this->state(['deleted_at' => $this->faker->dateTime()]);
     }
 }

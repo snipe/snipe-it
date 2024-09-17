@@ -7,6 +7,7 @@ return [
     'checkin_and_delete'  	    => 'Skrá inn allt / Eyða notenda',
     'delete'  	                => 'Eyða',
     'edit'    	                => 'Breyta',
+    'clone'    	                => 'Klóna',
     'restore' 	                => 'Endurheimta',
     'remove'                    => 'Fjarlægja',
     'request'                   => 'Óska eftir',
@@ -21,4 +22,13 @@ return [
     'add_maintenance'           => 'Bæta við viðhaldi',
     'append'                    => 'Bæta við',
     'new'                       => 'Nýtt',
+    'var' => [
+        'clone'     => 'Clone :item_type',
+        'edit'      => 'Edit :item_type',
+        'delete'    => 'Delete :item_type',
+        'restore'   => 'Restore :item_type',
+        'create'    => 'Create New :item_type',
+        'checkout'  => 'Checkout :item_type',
+        'checkin'   => 'Checkin :item_type',
+    ]
 ];

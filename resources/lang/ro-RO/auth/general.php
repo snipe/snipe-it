@@ -12,8 +12,7 @@ return [
     'remember_me'                   => 'Amintește-ți de mine',
     'username_help_top'                 => 'Introdu <strong>numele tău de utilizator</strong> pentru a primi un e-mail cu link-ul de resetare a parolei.',
     'username_help_bottom'          => 'Numele de utilizator și adresa de e-mail <em>pot</em> pot sau nu să coincidă, în funcție de configurația dumneavoastră. Dacă nu vă amintiți numele de utilizator, contactați administratorul. <br><br><strong>Utilizatorilor fără o adresă de e-mail asociată nu li se va trimite prin e-mail link-ul de resetare a parolei.</strong> ',
-    'google_login'                  => 'Sau autentifică-te cu Google Workspace',
+    'google_login'                  => 'Autentificare cu Google Workspace',
     'google_login_failed'           => 'Autentificarea Google a eșuat, încercați din nou.',
-
 ];
 

@@ -14,7 +14,7 @@ return array(
         'success' => 'Abteilung wurde erfolgreich aktualisiert.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Bist Du sicher, dass Du diese Abteilung löschen möchtest?',
+        'confirm'   	=> 'Bist du sicher, dass du diese Abteilung löschen möchtest?',
         'error'   => 'Beim Löschen der Abteilung ist ein Fehler aufgetreten. Bitte versuche es erneut.',
         'success' => 'Die Abteilung wurde erfolgreich gelöscht.'
     )

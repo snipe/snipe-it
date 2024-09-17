@@ -6,6 +6,6 @@ return [
     'months'   => 'Mėnesiai',
     'term'   => 'Laikotarpis',
     'title'      => 'Pavadinimas ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Minimali vertė',
 
 ];

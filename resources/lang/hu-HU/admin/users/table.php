@@ -20,6 +20,7 @@ return array(
     'lock_passwords'		=> 'A bejelentkezési adatok nem módosíthatók ebben a telepítésben.',
     'manager' 				=> 'Felettes',
     'managed_locations'     => 'Kezelt helyek',
+    'managed_users'         => 'Kezelt Felhasználók',
     'name' 					=> 'Név',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
     'notes'                 => 'Megjegyzések',

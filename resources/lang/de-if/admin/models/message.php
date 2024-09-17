@@ -7,7 +7,7 @@ return array(
     'no_association' => 'WARNUNG! Das Asset Modell für dieses Element ist ungültig oder fehlt!',
     'no_association_fix' => 'Dies wird Dinge auf seltsame und schreckliche Weise zerstören. Bearbeite dieses Asset jetzt, um ihm ein Modell zuzuordnen.',
     'assoc_users'	 => 'Dieses Modell ist zur Zeit mit einem oder mehreren Assets verknüpft und kann nicht gelöscht werden. Bitte lösche die Assets und versuche dann erneut, das Modell zu löschen. ',
-
+    'invalid_category_type' => 'Diese Kategorie muss eine Asset-Kategorie sein.',
 
     'create' => array(
         'error'   => 'Modell wurde nicht erstellt. Bitte versuche es noch einmal.',
@@ -21,7 +21,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du dieses Asset-Modell entfernen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du dieses Asset-Modell entfernen möchtest?',
         'error'   => 'Beim Löschen des Modell ist ein Fehler aufgetreten. Bitte versuche es noch einmal.',
         'success' => 'Das Modell wurde erfolgreich gelöscht.'
     ),

@@ -34,6 +34,7 @@ class DepreciationReportPresenter extends Presenter
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
+                'switchable' => false,
                 "title" => trans('admin/hardware/form.name'),
                 "visible" => false,
             ], [
@@ -393,6 +394,6 @@ class DepreciationReportPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fas fa-barcode" aria-hidden="true"></i>';
+        return '<x-icon type="reports" class="text-orange" />';
     }
 }

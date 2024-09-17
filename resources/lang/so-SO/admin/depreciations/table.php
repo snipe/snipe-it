@@ -2,10 +2,10 @@
 
 return [
 
-    'id'      => 'ID',
-    'months'   => 'Months',
-    'term'   => 'Term',
-    'title'      => 'Name ',
-    'depreciation_min' => 'Floor Value',
+    'id'      => 'Aqoonsi',
+    'months'   => 'Bilo',
+    'term'   => 'Muddada',
+    'title'      => 'Magaca',
+    'depreciation_min' => 'Qiimaha Dabaqa',
 
 ];

@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Akcesoria zostały pomyślnie odłączone',
     'accessory_error'                   => 'Akcesoria są już dołączone do zestawu',
     'accessory_deleted'                 => 'Usuwanie zakończone powodzeniem',
-    'accessory_none'                    => 'The accessory does not exist',
+    'accessory_none'                    => 'Akcesorium nie istnieje',
     'checkout_success'                  => 'Wydanie powiodło się',
     'checkout_error'                    => 'Błąd wydania',
     'kit_none'                          => 'Zestaw nie istnieje',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Zestaw został pomyślnie usunięty',
     'kit_model_updated'                 => 'Model został pomyślnie zaktualizowany',
     'kit_model_detached'                => 'Model został pomyślnie odłączony',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

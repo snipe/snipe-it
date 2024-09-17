@@ -19,7 +19,6 @@ return array(
     'state'                 => 'Ang Estado',
     'suppliers'             => 'Ang mga Tagapagsuplay',
     'update'                => 'I-update ang Tagapagsuplay',
-    'url'                   => 'Ang URL',
     'view'                  => 'Tingnan ang Tagapagsuplay',
     'view_assets_for'       => 'Tingnan ang mga Asset para sa',
     'zip'                   => 'Ang Postal Code',

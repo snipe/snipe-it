@@ -2,12 +2,12 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Izbrisan model sredstva',
     'does_not_exist' => 'Model ne obstaja.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'OPOZORILO! Model sredstva za ta element je neveljaven ali manjka!',
+    'no_association_fix' => 'To bo zrušilo stvari na čudne in grozljive načine. Uredite to sredstvo zdaj in mu dodelite model.',
     'assoc_users'	 => 'Ta model je trenutno povezan z enim ali več sredstvi in ​​ga ni mogoče izbrisati. Prosimo, izbrišite sredstva in poskusite zbrisati znova. ',
-
+    'invalid_category_type' => 'Ta kategorija mora biti kategorija sredstva.',
 
     'create' => array(
         'error'   => 'Model ni bil ustvarjen, poskusite znova.',
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Polja niso bila spremenjena, nič ni posodobljeno.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Model je bil uspešno posodobljen. |:model_count modeli uspešno posodobljeni.',
+        'warn'          => 'Posodobili boste lastnosti naslednjega modela:|Urejali boste lastnosti naslednjega :model_count modeli:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Modeli niso bili izbrani, nič ni izbrisano.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Model izbrisan!|:success_count modeli izbrisani!',
         'success_partial' 	=> ': modeli so bili izbrisani, vendar: fail_count ni bilo mogoče izbrisati, ker so še vedno sredstva, povezana z njimi.'
     ),
 

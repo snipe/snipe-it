@@ -14,6 +14,9 @@ return [
         'restore_warning'       => 'Да, потвърди възстановяването. Това ще презапише цялата информация в датабазата и ще отпише всички вписани потребители включително вас.',
         'restore_confirm'       => 'Сигурни ли сте че искате да възстановите датабазата от :filename?'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => 'Възникна грешка при пречистване. ',
         'validation_failed'     => 'Потвърждението ви за пречистване не неправилно. Моля напишете думата "DELETE" в клетката за потвърждаване.',
@@ -35,12 +38,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'Изпращане :app тест съобщение...',
-        'success' => 'Your :webhook_name Integration works!',
+        'success' => 'Вашата :webhook_name интеграция работи!',
         'success_pt1' => 'Успешно! Проверете ',
         'success_pt2' => ' канал за вашето тестово съобщение и натиснете бутона SAVE за да запазите вашите настройки.',
         '500' => 'Грешка 500.',
         'error' => 'Възникна грешка. :app върна грешка: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error_redirect' => 'Грешка 301/302 :endpoint върна пренасочване. От съображения за сигурност, ние не отваряме пренасочванията. Моля ползвайте действителната крайна точка.',
         'error_misc' => 'Възникна грешка. :( ',
     ]
 ];
