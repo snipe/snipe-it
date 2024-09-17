@@ -769,8 +769,11 @@ class SettingsController extends Controller
      */
     public function getLabels() : View
     {
+        $is_gd_installed = extension_loaded('gd');
+
         return view('settings.labels')
             ->with('setting', Setting::getSettings())
+            ->with('is_gd_installed', $is_gd_installed)
             ->with('customFields', CustomField::where('field_encrypted', '=', 0)->get());
     }
 
