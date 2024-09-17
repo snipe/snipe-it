@@ -29,18 +29,18 @@
       @if  ($item->id)
           <!-- we are editing an existing asset,  there will be only one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-
-
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" required>
+          <input class="asset_tag form-control" type="text" name="asset_tags[1]" id="asset_tag_1" value="{{ old('asset_tag', $item->asset_tag) }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
-              {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+			  {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+			  <span id="asset_auto_tag_1-error" style="display:none; color:#a94442;" class="error"> :message</span>
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" required>
+              <input class="asset_tag form-control" type="text" name="asset_tags[1]" id="asset_tag_1" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
-              {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+			  {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+			  <span id="asset_auto_tag_1-error" style="display:none; color:#a94442;" class="error"> :message</span>
           </div>
           <div class="col-md-2 col-sm-12">
               <button class="add_field_button btn btn-default btn-sm">
@@ -290,43 +290,213 @@
     $(document).ready(function() {
 
         var max_fields      = 100; //maximum input boxes allowed
+		var max_value		= 100000000000; //maximum allowed value
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x               = 1; //initial text box count
+		var auto_increment_enabled = "{{ (($snipeSettings->auto_increment_assets=='1')) ? true : false }}";		
+		var auto_tag_prefix = "{{ $snipeSettings->auto_increment_prefix }}";
+		var auto_tag_sufix;
+		var asset_tag_value;
+		var auto_tag_counter = 0;
+		var tag_number
+		var auto_tag_expected_number;
+		const zeroPad 		= (num, places) => String(num).padStart(places, '0');
+		
+		// Asset Tag validation function - manage error
+		function asset_tag_valid(e){
+			e.preventDefault();
+			
+			//console.log("#### validation ####");
+			// remove whitespaces
+			$(this).val($(this).val().trim());
+			asset_tag = $(this);
+			
+			//console.log("#validation# asset_tag.val(): " + asset_tag.val());
+			if ((auto_increment_enabled == true) && (asset_tag.val().toUpperCase().startsWith(auto_tag_prefix.toUpperCase()))) {
+				asset_tag_value = asset_tag.val().substr(auto_tag_prefix.length);
+				asset_tag_value = parseInt(asset_tag_value.replace(/[^\d]/g, ''));
+			} else {
+				asset_tag_value = parseInt(asset_tag.val().replace(/[^\d]/g, ''));
+			}
+			//console.log("#validation# asset_tag_value: " + asset_tag_value);
 
+			// detect NaN
+			if (isNaN(asset_tag_value)) {
+				asset_tag_value = 0;
+				//console.log("#validation NAN# new asset_tag_value: " + asset_tag_value);
+			}
 
+			// remove errors before new validation
+			$("#asset_auto_tag_" + x + "-error").hide();
+			asset_tag.parent('div').removeClass('has-error');
+			asset_tag.removeClass('invalid');
+			
+			// asset tag value must be less then max_value
+			if (asset_tag_value >= max_value) {
+				$("#asset_auto_tag_" + x + "-error").show();
+				asset_tag.parent('div').addClass('has-error');
+				asset_tag.addClass('invalid');
+				error_msg = "{{ trans('general.asset_tag_error') }} <b>" + max_value + "</b>";
+				$("#asset_auto_tag_" + x + "-error").html(error_msg);
+				return;
+			}
+			
+			// validation if tag incremental is enabled and value start with tag prefix
+			if ((auto_increment_enabled == true) && (asset_tag.val().toUpperCase().startsWith(auto_tag_prefix.toUpperCase()))) {	
+				autoincrement_tag  = "{{ \App\Models\Asset::autoincrement_asset() }}".substr(auto_tag_prefix.length).replace(/[^\d]/g, '');
+				//console.log("#validation# autoincrement_tag: " + autoincrement_tag);
+				
+				// rebuild asset tag value with zaro padding
+				asset_tag.val(auto_tag_prefix + zeroPad(asset_tag_value,autoincrement_tag.length));
+				
+				// check if form is in edit or create mode
+				if ({{ $item->id ? 'true' : 'false' }}) {
+					//console.log("#validation# Item exist, EDIT mode");
+					
+					// value must be less then autoincrement number
+					if (asset_tag_value >= parseInt(autoincrement_tag)) {
+						//console.log("#validation error# asset_tag_value: " + asset_tag_value + " ; autoincrement_tag: " + parseInt(autoincrement_tag));
+						$("#asset_auto_tag_" + x + "-error").show();
+						asset_tag.parent('div').addClass('has-error');
+						asset_tag.addClass('invalid');
+						error_msg = "{{ trans('general.asset_tag_error') }} <b>" + auto_tag_prefix + autoincrement_tag + "</b>";
+						$("#asset_auto_tag_" + x + "-error").html(error_msg);
+						return;
+					}
+				} else {
+					//console.log("#validation# Item not exist, CREATE mode");
+					
+					// if first row when not created additional assets
+					if (auto_tag_counter == 0) {
+						auto_tag_counter = parseInt(autoincrement_tag);
+					}
+					
+					// validation if tag value has expected number
+					if (asset_tag_value != auto_tag_counter) {
+						//console.log("#validation error# asset_tag_value: " + asset_tag_value + " ; autoincrement_tag: " + parseInt(autoincrement_tag));
+						auto_tag_expected_number = auto_tag_prefix + zeroPad(parseInt(auto_tag_counter),autoincrement_tag.length);
+						$("#asset_auto_tag_" + x + "-error").show();
+						asset_tag.parent('div').addClass('has-error');
+						asset_tag.addClass('invalid');
+						error_msg = "{{ trans('general.asset_auto_tag_error') }} <b>" + auto_tag_expected_number + "</b>";
+						$("#asset_auto_tag_" + x + "-error").html(error_msg);
+						return;
+					}
+				}
+			}
+		};	
 
+		// Asset Tag validation on Submit form
+		$("#create-form").submit(function(){
+			if ($("#asset_tag_" + x).hasClass('invalid')) {
+				return false;
+			}
+		});
+		
+		// Asset Tag validation on change value
+		$(".asset_tag").on("change", asset_tag_valid);
+		
+		// Asset Tag validation on change value in wrapper sectopm
+		$(wrapper).on("change", ".asset_tag", asset_tag_valid);
 
         $(add_button).click(function(e){ //on add input button click
 
             e.preventDefault();
 
-            var auto_tag        = $("#asset_tag").val().replace(/[^\d]/g, '');
-            var box_html        = '';
-			const zeroPad 		= (num, places) => String(num).padStart(places, '0');
-
+			//console.log("#### add new tag ####");
             // Check that we haven't exceeded the max number of asset fields
-            if (x < max_fields) {
+			if (x < max_fields) {
 
-                if (auto_tag!='') {
-                     auto_tag = zeroPad(parseInt(auto_tag) + parseInt(x),auto_tag.length);
-                } else {
-                     auto_tag = '';
-                }
+				var box_html        = '';
+				asset_tag = $("#asset_tag_" + x);
+				
+				if ((auto_increment_enabled == true) && (asset_tag.val().toUpperCase().startsWith(auto_tag_prefix.toUpperCase()))) {
+					asset_tag_value = asset_tag.val().substr(auto_tag_prefix.length);
+					asset_tag_value = parseInt(asset_tag_value.replace(/[^\d]/g, ''));
+				} else {
+					asset_tag_value = parseInt(asset_tag.val().replace(/[^\d]/g, ''));
+				}
 
+				// detect NaN
+				if (isNaN(asset_tag_value)) {
+					asset_tag_value = 0;
+				}
+				
+				// asset tag value control
+				if (!(asset_tag.val()) || (asset_tag_value >= max_value)) {
+					$("#asset_tag_" + x).change();
+					$("#asset_tag_" + x).blur();
+					//console.log("#add error# asset_tag.val(): " + asset_tag.val() + " ; asset_tag_value: " + asset_tag_value);
+					return;
+				}
+
+				// Check if incremental asset tag number is enabled
+				if (auto_increment_enabled == true) {
+
+					autoincrement_tag  = "{{ \App\Models\Asset::autoincrement_asset() }}".substr(auto_tag_prefix.length).replace(/[^\d]/g, '');
+
+					if (auto_tag_counter == 0) {
+						auto_tag_counter = parseInt(autoincrement_tag);
+					}
+
+					tag_number = auto_tag_prefix + zeroPad(parseInt(auto_tag_counter),autoincrement_tag.length);
+
+					// Validation if asset tag number start with prefix
+					if (asset_tag.val().toUpperCase().startsWith(auto_tag_prefix.toUpperCase())) {
+						// Check if asset tag value has expected number
+						if (asset_tag_value != auto_tag_counter) {
+							$("#asset_tag_" + x).change();
+							//console.log("#add error# asset_tag_value: " + asset_tag_value + " ; auto_tag_counter: " + auto_tag_counter);
+							return;
+						} else {
+							auto_tag_counter++; //incremental only if valid tag number
+							tag_number = auto_tag_prefix + zeroPad(parseInt(auto_tag_counter),autoincrement_tag.length);
+						}
+					}
+				} else {
+					// autoincremental not enabled, user put tag manually
+					asset_tag_value = $("#asset_tag_1").val().replace(/[^\d]/g, '');
+					auto_tag_prefix = '';
+					auto_tag_sufix = '';
+					//console.log("#add manually# asset_tag_value: " + asset_tag_value);
+					
+					// if first tag contains number increment on the base row count (x)
+					if (isNaN(parseInt(asset_tag_value))) {
+						asset_tag_value = '';
+					} else {
+						asset_tag_value = zeroPad(parseInt(asset_tag_value) + x, asset_tag_value.length);
+						auto_tag_prefix = $("#asset_tag_1").val().replace(/\d.*/g, '');
+						auto_tag_sufix = $("#asset_tag_1").val().replace(/.*\d/g, '');	
+					}
+					//console.log("#add manually# auto_tag_prefix: " + auto_tag_prefix);
+					//console.log("#add manually# auto_tag_sufix: " + auto_tag_sufix);
+
+					tag_number = auto_tag_prefix + asset_tag_value + auto_tag_sufix;
+				}
+
+				// Lock current Asset Tag field when add new Asset Tag field
+				$("#asset_tag_" + x).prop( "readonly", true );
+				$("#remove_field_" + x).hide();
+				
                 x++; //text box increment
 
                 box_html += '<span class="fields_wrapper">';
-                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
+				box_html += '<!-- Asset Tag ' + x + ' -->';
+                box_html += '<div class="form-group{{ $errors->has('asset_tag') ? ' has-error' : '' }}">';
+				box_html += '<label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12 required">';
-                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" required>';
-                box_html += '</div>';
+                box_html += '<input type="text" class="asset_tag form-control" name="asset_tags[' + x + ']" id="asset_tag_' + x + '" value="' + tag_number +'" required>';
+				box_html += '<span id="asset_auto_tag_' + x + '-error" style="display:none; color:#a94442;" class="error"> :message</span>'
+				box_html += '</div>';
                 box_html += '<div class="col-md-2 col-sm-12">';
-                box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><x-icon type="minus" /></a>';
+                box_html += '<a href="#" class="remove_field btn btn-default btn-sm" id="remove_field_' + x +'"><x-icon type="minus" /></a>';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</div>';
-                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
+				box_html += '<!-- Serial ' + x + ' -->';
+                box_html += '<div class="form-group">';
+				box_html += '<label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12">';
                 box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
                 box_html += '</div>';
@@ -342,13 +512,24 @@
         });
 
         $(wrapper).on("click",".remove_field", function(e){ //user clicks on remove text
-            $(".add_field_button").removeAttr('disabled');
+            //console.log("#### remove tag ####");
+			$(".add_field_button").removeAttr('disabled');
             $(".add_field_button").removeClass('disabled');
             e.preventDefault();
-            //console.log(x);
+            //console.log("#remove# x: " + x);
 
             $(this).parent('div').parent('div').parent('span').remove();
-            x--;
+			x--;
+
+			asset_tag_value = $("#asset_tag_" + x).val();
+
+			if ((auto_increment_enabled == true) && (asset_tag_value.toUpperCase().startsWith(auto_tag_prefix.toUpperCase()))) {
+				auto_tag_counter--; // deincremental auto tag number
+			}
+
+			// Unlock Asset Tag field when last one removed
+			$("#asset_tag_" + x).prop( "readonly", false );
+			$("#remove_field_" + x).show();
         });
 
 
