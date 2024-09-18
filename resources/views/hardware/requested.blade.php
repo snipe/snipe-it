@@ -40,8 +40,8 @@
                     }'>
                 <thead>
                     <tr role="row">
-                        <th class="col-md-1">Image</th>
-                        <th class="col-md-2">Item Name</th>
+                        <th class="col-md-1">{{ trans('general.image') }}</th>
+                        <th class="col-md-2">{{ trans('general.name') }}</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/table.location') }}</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                         <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.requesting_user') }}</th>
