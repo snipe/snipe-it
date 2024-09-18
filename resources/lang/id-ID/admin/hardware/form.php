@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Perbarui hanya lokasi default',
     'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Status aset tersebut tidak dapat ditetapkan. Aset ini tidak dapat digunakan.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Status aset dapat ditetapkan. Aset ini dapat digunakan.',
     'processing_spinner' => 'Memproses... (Mungkin memerlukan sedikit waktu untuk file besar)',
     'optional_infos'  => 'Informasi Tambahan',

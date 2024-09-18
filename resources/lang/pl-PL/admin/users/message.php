@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nie udało się przeszukać serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
         'ldap_could_not_get_entries' => 'Nie udało się pobrać pozycji z serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
         'password_ldap' => 'Hasło dla tego konta jest zarządzane przez usługę LDAP, Active Directory. Skontaktuj się z działem IT, aby zmienić swoje hasło. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

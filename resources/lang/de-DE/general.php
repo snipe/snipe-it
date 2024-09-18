@@ -265,7 +265,7 @@ return [
     'select_date'			=> 'Wählen Sie ein Datum (JJJJ-MM-DD)',
     'select_statuslabel'	=> 'Status auswählen',
     'select_company'    	=> 'Firma auswählen',
-    'select_asset'    		=> 'Asset auswählen',
+    'select_asset'    		=> 'Wählen Sie ein Asset',
     'settings'				=> 'Einstellungen',
     'show_deleted'  		=> 'Gelöschte anzeigen',
     'show_current'  		=> 'Aktuelles anzeigen',

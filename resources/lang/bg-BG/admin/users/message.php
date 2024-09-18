@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Проблем при търсенето в LDAP сървъра. Моля прегледайте конфигурацията на LDAP.<br/>Грешка от LDAP сървъра: ',
         'ldap_could_not_get_entries' => 'Проблем при извличането на резултат от LDAP сървъра. Моля прегледайте конфигурацията на LDAP.<br/>Грешка от LDAP сървъра:',
         'password_ldap' => 'Паролата за този профил се управлява от LDAP / Active Directory. Моля, свържете се с вашия ИТ отдел, за да промените паролата си.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

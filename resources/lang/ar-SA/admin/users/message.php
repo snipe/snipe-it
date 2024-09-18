@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'تعذر البحث في خادم LDAP. الرجاء التحقق من الاعدادات الخاصة بخادم LDAP في ملف اعدادات LDAP. <br>الخطأ من خادم LDAP:',
         'ldap_could_not_get_entries' => 'تعذر الحصول على إدخالات من خادم LDAP. الرجاء التحقق من الاعدادات الخاصة بخادم LDAP في ملف اعدادات LDAP. <br>الخطأ من خادم LDAP:',
         'password_ldap' => 'تتم إدارة كلمة المرور لهذا الحساب بواسطة لداب / أكتيف ديركتوري. يرجى الاتصال بقسم تقنية المعلومات لتغيير كلمة المرور.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

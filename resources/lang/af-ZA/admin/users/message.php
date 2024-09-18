@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Kon nie die LDAP-bediener soek nie. Gaan asseblief die LDAP-bediener opstelling in die LDAP-konfigurasie lêer. <br>Error van LDAP-bediener:',
         'ldap_could_not_get_entries' => 'Kon nie inskrywings van die LDAP-bediener kry nie. Gaan asseblief die LDAP-bediener opstelling in die LDAP-konfigurasie lêer. <br>Error van LDAP-bediener:',
         'password_ldap' => 'Die wagwoord vir hierdie rekening word bestuur deur LDAP / Active Directory. Kontak asseblief u IT-afdeling om u wagwoord te verander.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

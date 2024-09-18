@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Det gick inte att söka på LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'ldap_could_not_get_entries' => 'Det gick inte att få poster från LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'password_ldap' => 'Lösenordet för det här kontot hanteras av LDAP / Active Directory. Vänligen kontakta din IT-avdelning för att ändra ditt lösenord.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Konnte LDAP Server nicht suchen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'ldap_could_not_get_entries' => 'Konnte keine Einträge vom LDAP Server abrufen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'password_ldap' => 'Das Passwort für diesen Account wird vom LDAP/Active Directory verwaltet. Bitte kontaktieren Sie Ihre IT-Abteilung, um Ihr Passwort zu ändern. ',
-        'multi_company_items_assigned' => 'Diesem Benutzer sind Artikel zugewiesen. Bitte checken Sie diese ein, bevor Sie das Unternehmen wechseln.'
+        'multi_company_items_assigned' => 'Diesem Benutzer sind Dinge zugewiesen, die zu einer anderen Firma gehören. Bitte checken Sie sie ein oder bearbeiten Sie Ihre Firma.'
     ),
 
     'deletefile' => array(

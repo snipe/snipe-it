@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'تحديث الموقع الافتراضي فقط',
     'asset_location_update_actual' => 'تحديث الموقع الفعلي فقط',
     'asset_not_deployable' => 'حالة الأصول هذه غير قابلة للنشر. لا يمكن التحقق من هذه الأصول.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'حالة تلك الأصول قابلة للنشر. هذا الأصل يمكن إخراجه.',
     'processing_spinner' => 'معالجة... (قد يستغرق هذا بعض الوقت على ملفات كبيرة)',
     'optional_infos'  => 'معلومات اختيارية',

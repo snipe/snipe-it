@@ -54,7 +54,7 @@ return array(
         'ldap_could_not_search' => 'Hindi makapaghanap ng serber ng LDAP. Mangyaring suriin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>may error mula sa Serber ng LDAP:',
         'ldap_could_not_get_entries' => 'Hindi makakuha ng entry mula sa serber ng LDAP. Mangyaring surrin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>May-error mula sa Serber ng LDAP:',
         'password_ldap' => 'Ang password sa account na ito ay pinamahalaan ng LDAP/Actibong Direktorya. Mangyaring komontak sa iyong IT department para baguhin ang iyong password. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(
