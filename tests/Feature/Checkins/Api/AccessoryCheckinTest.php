@@ -45,4 +45,17 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
         $this->assertEquals(1, $accessoryForCompanyB->fresh()->checkouts->count(), 'Accessory should not be checked in');
         $this->assertEquals(0, $anotherAccessoryForCompanyB->fresh()->checkouts->count(), 'Accessory should be checked in');
     }
+
+    public function testCanCheckinAccessory()
+    {
+        $accessory = Accessory::factory()->checkedOutToUser()->create();
+
+        $this->assertEquals(1, $accessory->checkouts->count());
+
+        $this->actingAsForApi(User::factory()->checkinAccessories()->create())
+            ->postJson(route('api.accessories.checkin', $accessory))
+            ->assertStatusMessageIs('success');
+
+        $this->assertEquals(0, $accessory->fresh()->checkouts->count(), 'Accessory should be checked in');
+    }
 }
