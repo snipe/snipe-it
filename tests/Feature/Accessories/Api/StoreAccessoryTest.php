@@ -4,6 +4,9 @@ namespace Tests\Feature\Accessories\Api;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Location;
+use App\Models\Manufacturer;
+use App\Models\Supplier;
 use App\Models\User;
 use Tests\Concerns\TestsFullMultipleCompaniesSupport;
 use Tests\Concerns\TestsPermissionsRequirement;
@@ -31,13 +34,13 @@ class StoreAccessoryTest extends TestCase implements TestsFullMultipleCompaniesS
         $this->actingAsForApi($userInCompanyA)
             ->postJson(route('api.accessories.store'), [
                 'category_id' => Category::factory()->forAccessories()->create()->id,
-                'name' => 'Accessory A',
+                'name' => 'My Awesome Accessory',
                 'qty' => 1,
                 'company_id' => $companyB->id,
             ])->assertStatusMessageIs('error');
 
         $this->assertDatabaseMissing('accessories', [
-            'name' => 'Accessory A',
+            'name' => 'My Awesome Accessory',
         ]);
     }
 
@@ -57,6 +60,39 @@ class StoreAccessoryTest extends TestCase implements TestsFullMultipleCompaniesS
 
     public function testCanStoreAccessory()
     {
-        $this->markTestIncomplete();
+        $category = Category::factory()->forAccessories()->create();
+        $company = Company::factory()->create();
+        $location = Location::factory()->create();
+        $manufacturer = Manufacturer::factory()->create();
+        $supplier = Supplier::factory()->create();
+
+        $this->actingAsForApi(User::factory()->createAccessories()->create())
+            ->postJson(route('api.accessories.store'), [
+                'name' => 'My Awesome Accessory',
+                'qty' => 2,
+                'order_number' => '12345',
+                'purchase_cost' => 100.00,
+                'purchase_date' => '2024-09-18',
+                'model_number' => '98765',
+                'category_id' => $category->id,
+                'company_id' => $company->id,
+                'location_id' => $location->id,
+                'manufacturer_id' => $manufacturer->id,
+                'supplier_id' => $supplier->id,
+            ])->assertStatusMessageIs('success');
+
+        $this->assertDatabaseHas('accessories', [
+            'name' => 'My Awesome Accessory',
+            'qty' => 2,
+            'order_number' => '12345',
+            'purchase_cost' => 100.00,
+            'purchase_date' => '2024-09-18',
+            'model_number' => '98765',
+            'category_id' => $category->id,
+            'company_id' => $company->id,
+            'location_id' => $location->id,
+            'manufacturer_id' => $manufacturer->id,
+            'supplier_id' => $supplier->id,
+        ]);
     }
 }
