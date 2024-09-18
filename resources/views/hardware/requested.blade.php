@@ -102,7 +102,13 @@
                             <td>
                                 {{ Form::open([
                                     'method' => 'POST',
-                                    'route' => ['account/request-item', $request->itemType(), $request->requestable->id, true, $request->requestingUser()->id],
+                                    'route' => [
+                                        'account/request-item',
+                                        $request->itemType(),
+                                        $request->requestable->id,
+                                        true,
+                                        $request->requestingUser()->id
+                                    ],
                                     ]) }}
                                     <button class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.cancel_request') }}">{{ trans('button.cancel') }}</button>
                                 {{ Form::close() }}
