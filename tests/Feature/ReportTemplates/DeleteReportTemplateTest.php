@@ -4,13 +4,10 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class DeleteReportTemplateTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testDeletingReportTemplateRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())

@@ -4,13 +4,10 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ShowReportTemplateTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testCanLoadCustomReportPage()
     {
         $this->actingAs(User::factory()->canViewReports()->create())

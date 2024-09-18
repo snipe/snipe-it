@@ -4,13 +4,10 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class CreateReportTemplateTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testSavingReportTemplateRequiresCorrectPermission()
     {
         $this->actingAs(User::factory()->create())

@@ -7,13 +7,10 @@ use App\Models\Location;
 use App\Models\ReportTemplate;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ReportTemplateTest extends TestCase
 {
-    use InteractsWithSettings;
-
     public function testSavedTemplatesAreScopedToTheUser()
     {
         // Given there is a saved template for one user
