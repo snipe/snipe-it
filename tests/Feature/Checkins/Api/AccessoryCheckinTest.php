@@ -58,4 +58,25 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
 
         $this->assertEquals(0, $accessory->fresh()->checkouts->count(), 'Accessory should be checked in');
     }
+
+    public function testCheckinIsLogged()
+    {
+        $user = User::factory()->create();
+        $actor = User::factory()->checkinAccessories()->create();
+
+        $accessory = Accessory::factory()->checkedOutToUser($user)->create();
+
+        $this->actingAsForApi($actor)
+            ->postJson(route('api.accessories.checkin', $accessory))
+            ->assertStatusMessageIs('success');
+
+        $this->assertDatabaseHas('action_logs', [
+            'user_id' => $actor->id,
+            'action_type' => 'checkin from',
+            'target_id' => $user->id,
+            'target_type' => User::class,
+            'item_id' => $accessory->id,
+            'item_type' => Accessory::class,
+        ]);
+    }
 }
