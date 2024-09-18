@@ -50,7 +50,7 @@ class CheckoutableListener
             foreach ($notifiables as $notifiable) {
                 if ($notifiable instanceof User && $notifiable->email != '') {
                     if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiables, $this->getCheckoutNotification($event, $acceptance));
+                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
                     }
                     else {
                         Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
@@ -63,7 +63,7 @@ class CheckoutableListener
                 // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
                 if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
                     Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckoutNotification($event));
+                        ->notify($this->getCheckoutNotification($event, $acceptance));
                 } else {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckoutNotification($event, $acceptance));
@@ -102,17 +102,17 @@ class CheckoutableListener
                 }
             }
         }
-        $acceptance = $this->getCheckoutAcceptance($event);
+
         $notifiables = $this->getNotifiables($event);
         // Send email notifications
         try {
             foreach ($notifiables as $notifiable) {
                 if ($notifiable instanceof User && $notifiable->email != '') {
                     if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiables, $this->getCheckoutNotification($event, $acceptance));
+                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
                     }
                     else {
-                        Notification::send($notifiable, $this->getCheckinNotification($event, $acceptance));
+                        Notification::send($notifiable, $this->getCheckinNotification($event));
                     }
                 }
             }
@@ -124,7 +124,7 @@ class CheckoutableListener
                         ->notify($this->getCheckinNotification($event));
                 } else {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckinNotification($event, $acceptance));
+                        ->notify($this->getCheckinNotification($event));
                 }
             }
 
