@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Kunne ikke søge på LDAP-serveren. Tjek venligst din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Error fra LDAP-server:',
         'ldap_could_not_get_entries' => 'Kunne ikke få poster fra LDAP-serveren. Tjek venligst din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Error fra LDAP-server:',
         'password_ldap' => 'Adgangskoden til denne konto administreres af LDAP / Active Directory. Kontakt din it-afdeling for at ændre dit kodeord.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

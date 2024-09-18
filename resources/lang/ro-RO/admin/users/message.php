@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Căutarea serverului LDAP nu a putut fi efectuată. Verificați configurația serverului LDAP în fișierul de configurare LDAP. <br>Error de la LDAP Server:',
         'ldap_could_not_get_entries' => 'Nu s-au putut obține intrări de pe serverul LDAP. Verificați configurația serverului LDAP în fișierul de configurare LDAP. <br>Error de la LDAP Server:',
         'password_ldap' => 'Parola pentru acest cont este gestionată de LDAP / Active Directory. Contactați departamentul IT pentru a vă schimba parola.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

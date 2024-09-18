@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'עדכן מיקום ברירת מחדל',
     'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'הנכס הזה לא זמין. לא ניתן לספק ללקוח.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'הנכס זמין. ניתן לשייך למיקום.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',

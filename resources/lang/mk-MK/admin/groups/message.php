@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Групата веќе постои!',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => 'ID на група :id не постои.',
     'group_name_required' => 'Полето за име е задолжително',
 
     'success' => array(

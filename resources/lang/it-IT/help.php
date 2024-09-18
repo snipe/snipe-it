@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Ulteriori Informazioni',
 
-    'audit_help' => 'Selezionando questa casella verranno modificati le posizioni dei beni. Non selezionandola, il luogo verrà semplicemente annotato nel log di controllo inventario.<br><br>Nota che se questo bene è assegnato, non modificherà la posizione della persona, bene o posizione a cui è assegnato.',
+    'audit_help' => 'Spuntando questa casella verrà modificata la Sede del Bene. Non spuntandola, la Sede verrà solo annotata nel registro di controllo inventario.<br><br>Nota bene: se questo Bene è già assegnato, non sarà modificata la Sede della persona, Bene o Sede a cui è assegnato.',
 
     'assets' => 'I Beni sono articolo tracciati da un numero di serie o da un\'etichetta. Sono oggetti di valore più elevato che è importante identificare in maniera specifica.',
 

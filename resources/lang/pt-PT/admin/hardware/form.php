@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Atualizar apenas a localização por defeito',
     'asset_location_update_actual' => 'Atualizar apenas a localização atual',
     'asset_not_deployable' => 'Este estado de artigo não é implementável. Este artigo não pode ser verificado.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Este estado é implementável. Este ativo pode ser entregue.',
     'processing_spinner' => 'A processar... (Isto pode levar algum tempo em ficheiros grandes)',
     'optional_infos'  => 'Informação opcional',

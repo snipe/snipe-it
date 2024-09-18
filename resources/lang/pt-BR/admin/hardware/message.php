@@ -2,12 +2,12 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Aviso:</strong> Este bem foi marcado como atualmente não implementável.                        Se este status mudou, por favor, atualize o status do bem.',
+    'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável. Se esta situação mudou, por favor, atualize a situação do ativo.',
     'does_not_exist' 	=> 'O ativo não existe.',
     'does_not_exist_var'=> 'Ativo com a etiqueta :asset_tag não encontrado.',
     'no_tag' 	        => 'Nenhuma etiqueta de ativo fornecida.',
     'does_not_exist_or_not_requestable' => 'Esse ativo não existe ou não pode ser solicitado.',
-    'assoc_users'	 	=> 'Este bem está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu bem para que não referencie mais este usuário e tente novamente. ',
+    'assoc_users'	 	=> 'Este ativo está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu ativo para que não referencie mais este usuário e tente novamente. ',
     'warning_audit_date_mismatch' 	=> 'A próxima data de auditoria deste ativo (:next_audit_date) é anterior à última data de auditoria (:last_audit_date). Por favor, atualize a próxima data de auditoria.',
 
     'create' => [

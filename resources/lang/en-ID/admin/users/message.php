@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Tidak dapat mencari peladen LDAP. Silahkan periksa konfigurasi peladen LDAP anda di berkas konfigurasi LDAP.<br>Kesalahan dari peladen LDAP:',
         'ldap_could_not_get_entries' => 'Tidak bisa mendapatkan entri dari peladen LDAP. Silakan periksa konfigurasi peladen LDAP Anda di berkas konfigurasi LDAP. <br> Kesalahan dari peladen LDAP:',
         'password_ldap' => 'Kata sandi untuk akun ini dikelola oleh LDAP/Direktori Aktif. Silakan hubungi departemen IT Anda untuk mengubah kata sandi Anda. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

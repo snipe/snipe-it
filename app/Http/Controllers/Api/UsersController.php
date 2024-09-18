@@ -206,6 +206,10 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
+        if ($request->filled('locale')) {
+            $users = $users->where('users.locale', '=', $request->input('locale'));
+        }
+
 
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
@@ -276,6 +280,7 @@ class UsersController extends Controller
                         'end_date',
                         'autoassign_licenses',
                         'website',
+                        'locale',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';

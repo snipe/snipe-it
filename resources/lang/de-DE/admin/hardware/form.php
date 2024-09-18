@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Nur den Standardort aktualisieren',
     'asset_location_update_actual' => 'Nur aktuellen Standort aktualisieren',
     'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
+    'asset_not_deployable_checkin' => 'Dieser Asset-Status ist nicht einsetzbar, da mit diesem das Asset eingecheckt wird.',
     'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
     'processing_spinner' => 'Verarbeitung... (Dies kann bei großen Dateien etwas Zeit in Anspruch nehmen)',
     'optional_infos'  => 'Optionale Informationen',

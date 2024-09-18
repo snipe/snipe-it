@@ -14,7 +14,7 @@ return array(
     'info'  					=> 'Informações da Licença',
     'license_seats'  			=> 'Compartilhamentos de Licença',
     'seat'  					=> 'Licença Compartilhada',
-    'seat_count'  				=> 'Seat :count',
+    'seat_count'  				=> 'Alocação :count',
     'seats'  					=> 'Licenças Compartilhadas',
     'software_licenses'  		=> 'Licenças de Software',
     'user'  					=> 'Usuário',
@@ -24,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Checkin todas as vagas',
-                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'Esta ação devolverá uma alocação. | Esta ação devolverá todos os :checkedout_seats_count alocações para esta licença.',
                 'enabled_tooltip'   => 'Check-in de TODOS as vagas para esta licença de usuários e ativos',
                 'disabled_tooltip'  => 'Isto está desativado porque não há vagas desbloqueadas no momento',
                 'disabled_tooltip_reassignable'  => 'Isto está desativado porque a licença não é transferível',
                 'success'           => 'Licença desbloqueada com sucesso! | Todas as licenças foram verificadas com sucesso!',
-                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
+                'log_msg'           => 'Devolvido via devolução em massa de licenças na interface gráfica de licença (GUI)',
             ],
 
             'checkout_all'              => [
@@ -41,7 +41,7 @@ return array(
                 'error_no_seats'    => 'Não há mais vagas para esta licença.',
                 'warn_not_enough_seats'    => ':count usuários foram atribuídos a esta licença, mas ficamos sem vagas de licença disponíveis.',
                 'warn_no_avail_users'    => 'Nada a ser feito. Não há usuários que ainda não tenham essa licença atribuída a eles.',
-                'log_msg'           => 'Check-out via check-out em massa de licença na GUI',
+                'log_msg'           => 'Disponibilizado via disponibilização em massa de licença na GUI',
 
 
             ],
