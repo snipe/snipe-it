@@ -40,6 +40,7 @@ $(function () {
       select = link.data("select");
       refreshSelector = link.data("refresh");
 
+      hasnopayload = link.data("hasnopayload");
 
       $('#createModal').load(link.attr('href'),function () {
 
