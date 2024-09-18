@@ -53,4 +53,18 @@ class IndexAccessoryTest extends TestCase implements TestsFullMultipleCompaniesS
             ->assertResponseContainsInRows($accessoryB)
             ->assertResponseContainsInRows($accessoryC);
     }
+
+    public function testCanGetAccessories()
+    {
+        $user = User::factory()->viewAccessories()->create();
+
+        $accessoryA = Accessory::factory()->create(['name' => 'Accessory A']);
+        $accessoryB = Accessory::factory()->create(['name' => 'Accessory B']);
+
+        $this->actingAsForApi($user)
+            ->getJson(route('api.accessories.index'))
+            ->assertOk()
+            ->assertResponseContainsInRows($accessoryA)
+            ->assertResponseContainsInRows($accessoryB);
+    }
 }
