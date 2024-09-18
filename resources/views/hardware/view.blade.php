@@ -1568,7 +1568,6 @@
         @include ('modals.upload-file', ['item_type' => 'asset', 'item_id' => $asset->id])
     @endcan
 @stop
-
             @section('moar_scripts')
                 <script>
 
