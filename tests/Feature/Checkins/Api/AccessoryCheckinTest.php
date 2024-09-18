@@ -22,21 +22,27 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
 
     public function testAdheresToFullMultipleCompaniesSupportScoping()
     {
-        $this->markTestIncomplete();
-
-        $this->withoutExceptionHandling();
-
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
+        $superUser = $companyA->users()->save(User::factory()->superuser()->make());
         $userInCompanyA = User::factory()->for($companyA)->checkinAccessories()->create();
         $accessoryForCompanyB = Accessory::factory()->for($companyB)->checkedOutToUser()->create();
+        $anotherAccessoryForCompanyB = Accessory::factory()->for($companyB)->checkedOutToUser()->create();
+
+        $this->assertEquals(1, $accessoryForCompanyB->checkouts->count());
+        $this->assertEquals(1, $anotherAccessoryForCompanyB->checkouts->count());
 
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAsForApi($userInCompanyA)
             ->postJson(route('api.accessories.checkin', $accessoryForCompanyB))
-            ->assertStatusMessageIs('error');
+            ->assertForbidden();
 
-        // @todo:
+        $this->actingAsForApi($superUser)
+            ->postJson(route('api.accessories.checkin', $anotherAccessoryForCompanyB))
+            ->assertStatusMessageIs('success');
+
+        $this->assertEquals(1, $accessoryForCompanyB->fresh()->checkouts->count(), 'Accessory should not be checked in');
+        $this->assertEquals(0, $anotherAccessoryForCompanyB->fresh()->checkouts->count(), 'Accessory should be checked in');
     }
 }
