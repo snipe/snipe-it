@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Ayikwazanga ukusesha isiphakeli se-LDAP. Sicela uhlole ukumisa kweseva yakho ye-LDAP kufayili ye-LDAP config. <br>Iphutha kusuka kwiseva ye-LDAP:',
         'ldap_could_not_get_entries' => 'Ayikwazanga ukungena okuvela kuseva ye-LDAP. Sicela uhlole ukumisa kweseva yakho ye-LDAP kufayili ye-LDAP config. <br>Iphutha kusuka kwiseva ye-LDAP:',
         'password_ldap' => 'Iphasiwedi yale akhawunti ilawulwa yi-LDAP / Active Directory. Sicela uxhumane nomnyango wakho we-IT ukushintsha iphasiwedi yakho.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

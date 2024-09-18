@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Mettre à jour uniquement l\'emplacement par défaut',
     'asset_location_update_actual' => 'Mettre à jour uniquement l\'emplacement actuel',
     'asset_not_deployable' => 'L\'actif n\'est pas déployable. L\'actif ne peut pas être affecté.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'L\'actif est déployable. L\'actif peut être affecté.',
     'processing_spinner' => 'Traitement... (Cela peut prendre un peu de temps sur les fichiers volumineux)',
     'optional_infos'  => 'Information facultative',

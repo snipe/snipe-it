@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP серверийг хайж чадахгүй байна. LDAP серверийн тохиргоог LDAP тохиргооны файлдаа шалгана уу. <br> LDAP серверийн алдаа:',
         'ldap_could_not_get_entries' => 'LDAP серверээс бичилтийг авч чадсангүй. LDAP серверийн тохиргоог LDAP тохиргооны файлдаа шалгана уу. <br> LDAP серверийн алдаа:',
         'password_ldap' => 'Энэ акаунтын нууц үгийг LDAP / Active Directory удирддаг. Нууц үгээ солихын тулд өөрийн IT хэлтэст хандана уу.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

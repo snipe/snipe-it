@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Tidak dapat mencari pelayan LDAP. Sila periksa konfigurasi pelayan LDAP anda dalam fail konfigurasi LDAP. <br>Error dari LDAP Server:',
         'ldap_could_not_get_entries' => 'Tidak dapat masuk dari pelayan LDAP. Sila periksa konfigurasi pelayan LDAP anda dalam fail konfigurasi LDAP. <br>Error dari LDAP Server:',
         'password_ldap' => 'Kata laluan untuk akaun ini diuruskan oleh LDAP / Active Directory. Sila hubungi jabatan IT anda untuk menukar kata laluan anda.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(
