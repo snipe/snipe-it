@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
@@ -16,6 +17,7 @@ use Watson\Validating\ValidatingTrait;
 class PredefinedKit extends SnipeModel
 {
     protected $presenter = \App\Presenters\PredefinedKitPresenter::class;
+    use HasFactory;
     use Presentable;
     protected $table = 'kits';
 
