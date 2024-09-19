@@ -196,7 +196,7 @@ class AssetMaintenancesController extends Controller
         if (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot delete a maintenance for that asset'));
         }
-        
+
         $assetMaintenance->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.delete.success')));
