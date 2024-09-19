@@ -597,17 +597,25 @@ class UsersController extends Controller
     public function printInventory($id)
     {
         $this->authorize('view', User::class);
-        if ($user = User::where('id', $id)->withTrashed()->first()) {
 
+        $user = User::where('id', $id)
+            ->with([
+                'assets',
+                'accessories',
+                'consumables',
+                'licenses',
+            ])
+            ->withTrashed()
+            ->first();
+
+        if ($user) {
             $this->authorize('view', $user);
-            $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-            $accessories = $user->accessories()->get();
-            $consumables = $user->consumables()->get();
 
-            return view('users/print')->with('assets', $assets)
-                ->with('licenses', $user->licenses()->get())
-                ->with('accessories', $accessories)
-                ->with('consumables', $consumables)
+            return view('users/print')
+                ->with('assets', $user->assets)
+                ->with('licenses', $user->licenses)
+                ->with('accessories', $user->accessories)
+                ->with('consumables', $user->consumables)
                 ->with('show_user', $user)
                 ->with('settings', Setting::getSettings());
         }
