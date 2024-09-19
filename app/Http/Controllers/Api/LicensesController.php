@@ -117,7 +117,7 @@ class LicensesController extends Controller
                 $licenses = $licenses->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
                 break;
             case 'created_by':
-                $licenses = $licenses->OrderCreatedBy($order);
+                $licenses = $licenses->OrderByCreatedBy($order);
                 break;
             default:
                 $allowed_columns =

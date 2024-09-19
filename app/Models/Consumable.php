@@ -451,4 +451,9 @@ class Consumable extends SnipeModel
     {
         return $query->leftJoin('suppliers', 'consumables.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as users_sort', 'consumables.created_by', '=', 'users_sort.id')->select('consumables.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
+    }
 }

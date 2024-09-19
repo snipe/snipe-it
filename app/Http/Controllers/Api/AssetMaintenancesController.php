@@ -97,6 +97,9 @@ class AssetMaintenancesController extends Controller
             case 'status_label':
                 $maintenances = $maintenances->OrderStatusName($order);
                 break;
+            case 'created_by':
+                $maintenances = $maintenances->OrderByCreatedBy($order);
+                break;
             default:
                 $maintenances = $maintenances->orderBy($sort, $order);
                 break;

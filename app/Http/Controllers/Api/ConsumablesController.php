@@ -92,6 +92,9 @@ class ConsumablesController extends Controller
             case 'supplier':
                 $consumables = $consumables->OrderSupplier($order);
                 break;
+            case 'created_by':
+                $consumables = $consumables->OrderByCreatedBy($order);
+                break;
             default:
                 // This array is what determines which fields should be allowed to be sorted on ON the table itself.
                 // These must match a column on the consumables table directly.
