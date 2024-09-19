@@ -52,7 +52,9 @@ class CategoriesController extends Controller
             'require_acceptance',
             'checkin_email',
             'image',
-            ])->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
+            ])
+            ->with('adminuser')
+            ->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
 
 
         /*
@@ -109,7 +111,7 @@ class CategoriesController extends Controller
         $limit = app('api_limit_value');
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort_override =  $request->input('sort');
-        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets_count';
 
         switch ($sort_override) {
             case 'created_by':
