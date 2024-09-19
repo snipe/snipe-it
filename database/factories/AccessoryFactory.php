@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Accessory;
-use App\Models\AccessoryCheckout;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Manufacturer;

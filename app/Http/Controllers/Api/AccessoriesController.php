@@ -192,9 +192,6 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
-        if (! Company::isCurrentUserHasAccess($accessory)) {
-            return ['total' => 0, 'rows' => []];
-        }
 
         $offset = request('offset', 0);
         $limit = request('limit', 50);
