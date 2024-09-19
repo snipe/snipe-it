@@ -310,4 +310,9 @@ class Component extends SnipeModel
     {
         return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'components.created_by', '=', 'admin_sort.id')->select('components.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
 }

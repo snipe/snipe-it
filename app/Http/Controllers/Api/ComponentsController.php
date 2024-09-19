@@ -98,6 +98,9 @@ class ComponentsController extends Controller
             case 'supplier':
                 $components = $components->OrderSupplier($order);
                 break;
+            case 'created_by':
+                $components = $components->OrderByCreatedBy($order);
+                break;
             default:
                 $components = $components->orderBy($column_sort, $order);
                 break;
