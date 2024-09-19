@@ -81,7 +81,6 @@ class License extends Depreciable
         'serial',
         'supplier_id',
         'termination_date',
-        'free_seat_count',
         'created_by',
         'min_amt',
     ];
