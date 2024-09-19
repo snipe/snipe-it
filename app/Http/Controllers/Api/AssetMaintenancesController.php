@@ -190,8 +190,13 @@ class AssetMaintenancesController extends Controller
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
+
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
+        if (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot delete a maintenance for that asset'));
+        }
+        
         $assetMaintenance->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.delete.success')));
