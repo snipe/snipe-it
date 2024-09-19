@@ -111,7 +111,10 @@ class AccessoriesController extends Controller
                 break;    
             case 'supplier':
                 $accessories = $accessories->OrderSupplier($order);
-                break;       
+                break;
+            case 'created_by':
+                $accessories = $accessories->OrderByCreatedByName($order);
+                break;
             default:
                 $accessories = $accessories->orderBy($column_sort, $order);
                 break;

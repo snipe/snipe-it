@@ -422,6 +422,16 @@ class Accessory extends SnipeModel
      * -----------------------------------------------
      **/
 
+
+    /**
+     * Query builder scope to order on created_by name
+     *
+     */
+    public function scopeOrderByCreatedByName($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'accessories.created_by', '=', 'admin_sort.id')->select('accessories.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
+
     /**
     * Query builder scope to order on company
     *

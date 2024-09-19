@@ -128,13 +128,6 @@ class AccessoryPresenter extends Presenter
                 'title' => trans('general.notes'),
                 'formatter' => 'notesFormatter'
             ], [
-                'field' => 'change',
-                'searchable' => false,
-                'sortable' => false,
-                'visible' => true,
-                'title' => trans('general.change'),
-                'formatter' => 'accessoriesInOutFormatter',
-            ], [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,
@@ -157,7 +150,14 @@ class AccessoryPresenter extends Presenter
                 'title' => trans('general.updated_at'),
                 'visible' => false,
                 'formatter' => 'dateDisplayFormatter',
-            ],[
+            ], [
+                'field' => 'change',
+                'searchable' => false,
+                'sortable' => false,
+                'visible' => true,
+                'title' => trans('general.change'),
+                'formatter' => 'accessoriesInOutFormatter',
+            ], [
                 'field' => 'actions',
                 'searchable' => false,
                 'sortable' => false,
