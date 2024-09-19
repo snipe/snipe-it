@@ -738,14 +738,9 @@ class License extends Depreciable
 
     /**
      * Query builder scope to order on the user that created it
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-    public function scopeOrderCreatedBy($query, $order)
+    public function scopeOrderByCreatedBy($query, $order)
     {
-        return $query->leftJoin('users as users_sort', 'licenses.created_by', '=', 'users_sort.id')->select('licenses.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
+        return $query->leftJoin('users as admin_sort', 'licenses.created_by', '=', 'admin_sort.id')->select('licenses.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }
