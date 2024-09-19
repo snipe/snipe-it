@@ -182,7 +182,7 @@ class LicensesController extends Controller
     public function show($id) : JsonResponse | array
     {
         $this->authorize('view', License::class);
-        $license = License::withCount('freeSeats')->findOrFail($id);
+        $license = License::withCount('freeSeats as free_seats_count')->findOrFail($id);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
 
         return (new LicensesTransformer)->transformLicense($license);
