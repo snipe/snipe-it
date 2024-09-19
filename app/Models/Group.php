@@ -82,6 +82,13 @@ class Group extends SnipeModel
         return json_decode($this->permissions, true);
     }
 
+    /**
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
+
+
     public function scopeOrderByCreatedBy($query, $order)
     {
         return $query->leftJoin('users as admin_sort', 'permission_groups.created_by', '=', 'admin_sort.id')->select('permission_groups.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
