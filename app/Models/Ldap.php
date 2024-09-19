@@ -93,63 +93,35 @@ class Ldap extends Model
     {
         $settings = Setting::getSettings();
         $connection = self::connectToLdap();
-        $ldap_username_field = $settings->ldap_username_field;
+        self::bindAdminToLdap($connection);
+
+        // FIND the user first, then attempt to log in as them using the appropriate attribute
         $baseDn = $settings->ldap_basedn;
-        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
-
-        if ($settings->is_ad == '1') {
-            // Check if they are using the userprincipalname for the username field.
-            // If they are, we can skip building the UPN to authenticate against AD
-            if ($ldap_username_field == 'userprincipalname') {
-                $userDn = $username;
-            } else {
-                // TODO - we no longer respect the "add AD Domain to username" checkbox, but it still exists in settings.
-                // We should probably just eliminate that checkbox to avoid confusion.
-                // We let it sit in the DB, unused, to facilitate people downgrading (if they decide to).
-                // Hopefully, in a later release, we can remove it from the settings.
-                // This logic instead just means that if we're using UPN, we don't append ad_domain, if we aren't, then we do.
-                // Hopefully that should handle all of our use cases, but if not we can backport our old logic.
-                $userDn = ($settings->ad_domain != '') ? $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
-            }
-        }
-
         $filterQuery = $settings->ldap_auth_filter_query.$username;
-        $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
-        $filterQuery = "({$filter}({$filterQuery}))";
-
-        Log::debug('Filter query: '.$filterQuery);
-
-        if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
-            if (! $ldapbind = self::bindAdminToLdap($connection)) {
-                /*
-                 * TODO PLEASE:
-                 *
-                 * this isn't very clear, so it's important to note: the $ldapbind value is never correctly returned - we never 'return true' from self::bindAdminToLdap() (the function
-                 * just "falls off the end" without ever explictly returning 'true')
-                 *
-                 * but it *does* have an interesting side-effect of checking for the LDAP password being incorrectly encrypted with the wrong APP_KEY, so I'm leaving it in for now.
-                 *
-                 * If it *did* correctly return 'true' on a succesful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
-                 *
-                 * Let's definitely fix this at the next refactor!!!!
-                 *
-                 */
-                Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
-                return false;
-            }
-        }
+        $filter = $settings->ldap_filter;
+        $filterQuery = "(& ({$filter}) ({$filterQuery}))";
 
         if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
             throw new Exception('Could not search LDAP: ');
         }
 
         if (! $entry = ldap_first_entry($connection, $results)) {
+            // Empty results -> no user matched query
+            \Log::debug("No user matched LDAP query");
+            return false;
+        }
+
+        if (! $userDn = ldap_get_dn($connection, $entry)) {
+            throw new Exception("Could not get ldap dn for entry");
+        }
+
+        if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
+            \Log::warning("LDAP bind did not succeed for $username with dn $userDn");
             return false;
         }
 
         if (! $user = ldap_get_attributes($connection, $entry)) {
-            return false;
+            throw new Exception("Could not user");
         }
 
         return array_change_key_case($user);
