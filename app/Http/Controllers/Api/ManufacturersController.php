@@ -25,11 +25,42 @@ class ManufacturersController extends Controller
     public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Manufacturer::class);
-        $allowed_columns = ['id', 'name', 'url', 'support_url', 'support_email', 'warranty_lookup_url', 'support_phone', 'created_at', 'updated_at', 'image', 'assets_count', 'consumables_count', 'components_count', 'licenses_count'];
+        $allowed_columns =  [
+            'id',
+            'name',
+            'url',
+            'support_url',
+            'support_email',
+            'warranty_lookup_url',
+            'support_phone',
+            'created_at',
+            'updated_at',
+            'image',
+            'assets_count',
+            'consumables_count',
+            'components_count',
+            'licenses_count'
+        ];
 
-        $manufacturers = Manufacturer::select(
-            ['id', 'name', 'url', 'support_url', 'warranty_lookup_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'deleted_at']
-        )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count');
+        $manufacturers = Manufacturer::select([
+                'id',
+                'name',
+                'url',
+                'support_url',
+                'warranty_lookup_url',
+                'support_email',
+                'support_phone',
+                'created_by',
+                'created_at',
+                'updated_at',
+                'image',
+                'deleted_at',
+            ])
+            ->with('adminuser')
+            ->withCount('assets as assets_count')
+            ->withCount('licenses as licenses_count')
+            ->withCount('consumables as consumables_count')
+            ->withCount('accessories as accessories_count');
 
         if ($request->input('deleted') == 'true') {
             $manufacturers->onlyTrashed();
@@ -66,10 +97,18 @@ class ManufacturersController extends Controller
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $manufacturers->count()) ? $manufacturers->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $manufacturers->orderBy($sort, $order);
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
+
+        switch ($sort_override) {
+            case 'created_by':
+                $manufacturers = $manufacturers->OrderByCreatedBy($order);
+                break;
+            default:
+                $manufacturers = $manufacturers->orderBy($column_sort, $order);
+                break;
+        }
 
         $total = $manufacturers->count();
         $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
