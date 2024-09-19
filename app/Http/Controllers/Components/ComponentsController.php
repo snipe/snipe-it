@@ -81,7 +81,7 @@ class ComponentsController extends Controller
         $component->purchase_date          = $request->input('purchase_date', null);
         $component->purchase_cost          = $request->input('purchase_cost', null);
         $component->qty                    = $request->input('qty');
-        $component->created_by                = Auth::id();
+        $component->created_by                = auth()->id();
         $component->notes                  = $request->input('notes');
 
         $component = $request->handleImages($component);

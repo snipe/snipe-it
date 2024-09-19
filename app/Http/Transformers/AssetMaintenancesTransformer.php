@@ -64,7 +64,10 @@ class AssetMaintenancesTransformer
             'start_date'         => Helper::getFormattedDateObject($assetmaintenance->start_date, 'date'),
             'asset_maintenance_time'          => $assetmaintenance->asset_maintenance_time,
             'completion_date'     => Helper::getFormattedDateObject($assetmaintenance->completion_date, 'date'),
-            'user_id'    => ($assetmaintenance->admin) ? ['id' => $assetmaintenance->admin->id, 'name'=> e($assetmaintenance->admin->getFullNameAttribute())] : null,
+            'user_id'    => ($assetmaintenance->adminuser) ? [
+                'id' => $assetmaintenance->adminuser->id,
+                'name'=> e($assetmaintenance->admin->getFullNameAttribute())
+            ] : null, // legacy to not change the shape of the API
             'created_by' => ($assetmaintenance->adminuser) ? [
                 'id' => (int) $assetmaintenance->adminuser->id,
                 'name'=> e($assetmaintenance->adminuser->present()->fullName()),

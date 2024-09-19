@@ -128,7 +128,7 @@ class AssetMaintenancesController extends Controller
         // create a new model instance
         $maintenance = new AssetMaintenance();
         $maintenance->fill($request->all());
-        $maintenance->created_by = Auth::id();
+        $maintenance->created_by = auth()->id();
 
         // Was the asset maintenance created?
         if ($maintenance->save()) {

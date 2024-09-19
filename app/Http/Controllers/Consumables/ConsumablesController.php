@@ -81,7 +81,7 @@ class ConsumablesController extends Controller
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = $request->input('purchase_cost');
         $consumable->qty                    = $request->input('qty');
-        $consumable->created_by                = Auth::id();
+        $consumable->created_by                = auth()->id();
         $consumable->notes                  = $request->input('notes');
 
 
