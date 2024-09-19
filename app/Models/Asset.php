@@ -1761,6 +1761,20 @@ class Asset extends Depreciable
 
 
     /**
+     * Query builder scope to order on created_by name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByCreatedByName($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'assets.created_by', '=', 'admin_sort.id')->select('assets.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
+
+
+    /**
     * Query builder scope to order on assigned user
     *
     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance

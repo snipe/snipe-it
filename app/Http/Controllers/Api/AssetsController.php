@@ -371,6 +371,9 @@ class AssetsController extends Controller
             case 'assigned_to':
                 $assets->OrderAssigned($order);
                 break;
+            case 'created_by':
+                $assets->OrderByCreatedByName($order);
+                break;
             default:
                 $assets->orderBy($column_sort, $order);
                 break;
