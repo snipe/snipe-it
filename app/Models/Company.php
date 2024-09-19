@@ -295,6 +295,12 @@ final class Company extends SnipeModel
 
     }
 
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
     /**
      * I legit do not know what this method does, but we can't remove it (yet).
      *
@@ -328,6 +334,15 @@ final class Company extends SnipeModel
 
             return $q;
         }
+    }
+
+
+    /**
+     * Query builder scope to order on the user that created it
+     */
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'companies.created_by', '=', 'admin_sort.id')->select('companies.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 
 }

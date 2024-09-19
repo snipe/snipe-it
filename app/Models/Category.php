@@ -228,6 +228,11 @@ class Category extends SnipeModel
         return $this->hasMany(\App\Models\AssetModel::class, 'category_id');
     }
 
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
     /**
      * Checks for a category-specific EULA, and if that doesn't exist,
      * checks for a settings level EULA
@@ -285,5 +290,10 @@ class Category extends SnipeModel
     public function scopeRequiresAcceptance($query)
     {
         return $query->where('require_acceptance', '=', true);
+    }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'categories.created_by', '=', 'admin_sort.id')->select('categories.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }
