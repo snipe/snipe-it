@@ -37,7 +37,7 @@ class LicensesTransformer
             'notes' => Helper::parseEscapedMarkedownInline($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
-            'free_seats_count' => (int) $license->free_seats_count,
+            'free_seats_count' => (int) $license->free_seat_count,
             'min_amt' => ($license->min_amt) ? (int) ($license->min_amt) : null,
             'license_name' =>  ($license->license_name) ? e($license->license_name) : null,
             'license_email' => ($license->license_email) ? e($license->license_email) : null,
@@ -52,7 +52,7 @@ class LicensesTransformer
             'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
             'deleted_at' => Helper::getFormattedDateObject($license->deleted_at, 'datetime'),
-            'user_can_checkout' => (bool) ($license->free_seats_count > 0),
+            'user_can_checkout' => (bool) ($license->free_seat_count > 0),
 
         ];
 
