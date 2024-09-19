@@ -59,8 +59,6 @@ class DepreciationsController extends Controller
         }
 
         $total = $depreciations->count();
-        $components = $depreciations->skip($offset)->take($limit)->get();
-
         $depreciations = $depreciations->skip($offset)->take($limit)->get();
 
         return (new DepreciationsTransformer)->transformDepreciations($depreciations, $total);
