@@ -61,4 +61,24 @@ class IndexAccessoryCheckoutsTest extends TestCase implements TestsFullMultipleC
             ->assertJsonPath('rows.0.assigned_to.id', $userA->id)
             ->assertJsonPath('rows.1.assigned_to.id', $userB->id);
     }
+
+    public function testCanGetAccessoryCheckoutsWithOffsetAndLimitInQueryString()
+    {
+        [$userA, $userB, $userC] = User::factory()->count(3)->create();
+
+        $accessory = Accessory::factory()->checkedOutToUsers([$userA, $userB, $userC])->create();
+
+        $actor = $this->actingAsForApi(User::factory()->viewAccessories()->create());
+
+        $actor->getJson(route('api.accessories.checkedout', ['accessory' => $accessory->id, 'limit' => 1]))
+            ->assertOk()
+            ->assertJsonPath('total', 3)
+            ->assertJsonPath('rows.0.assigned_to.id', $userA->id);
+
+        $actor->getJson(route('api.accessories.checkedout', ['accessory' => $accessory->id, 'limit' => 2, 'offset' => 1]))
+            ->assertOk()
+            ->assertJsonPath('total', 3)
+            ->assertJsonPath('rows.0.assigned_to.id', $userB->id)
+            ->assertJsonPath('rows.1.assigned_to.id', $userC->id);
+    }
 }
