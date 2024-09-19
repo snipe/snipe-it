@@ -220,7 +220,6 @@ class LicensesController extends Controller
      */
     public function destroy($id) : JsonResponse
     {
-        //
         $license = License::findOrFail($id);
         $this->authorize('delete', $license);
 

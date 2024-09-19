@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP 서버를 찾을 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'ldap_could_not_get_entries' => 'LDAP 서버 목록을 가져올 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'password_ldap' => '이 계정의 비밀번호는 LDAP/Active 디렉토리에 의해 관리됩니다. 비밀번호를 변경하려면 IT 부서에 문의하세요. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

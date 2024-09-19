@@ -5,7 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Poleto не постои.',
         'already_added'   => 'Полето веќе е додадено',
-        'none_selected'   => 'No field selected',
+        'none_selected'   => 'Нема избрани полиња',
 
         'create' => array(
             'error'   => 'Полето не е креирано, обидете се повторно.',
@@ -52,7 +52,7 @@ return array(
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error validating default fieldset values.',
+        'error' => 'Грешка при потврдување на основните вредности на групните полиња.',
 
     ),
 

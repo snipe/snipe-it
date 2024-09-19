@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Impossible de rechercher le serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
         'ldap_could_not_get_entries' => 'Impossible d\'obtenir les entrées du serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
         'password_ldap' => 'Le mot de passe de ce compte est géré par LDAP / Active Directory. Veuillez contacter votre service informatique pour changer votre mot de passe.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

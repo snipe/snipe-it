@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Δεν ήταν δυνατή η αναζήτηση στον διακομιστή LDAP. Ελέγξτε τη διαμόρφωση του διακομιστή LDAP στο αρχείο ρύθμισης LDAP. <br>Ερώτηση από διακομιστή LDAP:',
         'ldap_could_not_get_entries' => 'Δεν ήταν δυνατή η λήψη καταχωρήσεων από το διακομιστή LDAP. Ελέγξτε τη διαμόρφωση του διακομιστή LDAP στο αρχείο ρύθμισης LDAP. <br>Ερώτηση από διακομιστή LDAP:',
         'password_ldap' => 'Ο κωδικός πρόσβασης για αυτόν τον λογαριασμό γίνεται από το LDAP / Active Directory. Επικοινωνήστε με το τμήμα πληροφορικής σας για να αλλάξετε τον κωδικό πρόσβασής σας.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

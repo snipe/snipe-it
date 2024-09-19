@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'មិនអាចស្វែងរកម៉ាស៊ីនមេ LDAP បានទេ។ សូមពិនិត្យមើលការកំណត់រចនាសម្ព័ន្ធម៉ាស៊ីនមេ LDAP របស់អ្នកនៅក្នុងឯកសារកំណត់រចនាសម្ព័ន្ធ LDAP ។ <br>កំហុសពីម៉ាស៊ីនមេ LDAP៖',
         'ldap_could_not_get_entries' => 'មិនអាចទទួលបានធាតុពីម៉ាស៊ីនមេ LDAP ទេ។ សូមពិនិត្យមើលការកំណត់រចនាសម្ព័ន្ធម៉ាស៊ីនមេ LDAP របស់អ្នកនៅក្នុងឯកសារកំណត់រចនាសម្ព័ន្ធ LDAP ។ <br>កំហុសពីម៉ាស៊ីនមេ LDAP៖',
         'password_ldap' => 'ពាក្យសម្ងាត់សម្រាប់គណនីនេះត្រូវបានគ្រប់គ្រងដោយ LDAP/Active Directory។ សូមទាក់ទងផ្នែក IT របស់អ្នក ដើម្បីផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នក។ ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

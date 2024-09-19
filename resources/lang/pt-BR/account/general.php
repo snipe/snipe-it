@@ -13,6 +13,6 @@ return array(
     'api_reference' => 'Por favor, verifique as <a href="https://snipe-it.readme.io/reference" target="_blank"> referências da API</a> para encontrar endpoints específicos da API e documentação adicional da API.',
     'profile_updated' => 'Conta atualizada com sucesso',
     'no_tokens' => 'Você não criou nenhum token de acesso pessoal.',
-    'enable_sounds' => 'Enable sound effects',
-    'enable_confetti' => 'Enable confetti effects',
+    'enable_sounds' => 'Ativar efeitos de som',
+    'enable_confetti' => 'Habilitar efeitos de confete',
 );

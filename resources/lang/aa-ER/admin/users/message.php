@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'crwdns1415:0crwdne1415:0',
         'ldap_could_not_get_entries' => 'crwdns1416:0crwdne1416:0',
         'password_ldap' => 'crwdns1889:0crwdne1889:0',
-        'multi_company_items_assigned' => 'crwdns12742:0crwdne12742:0'
+        'multi_company_items_assigned' => 'crwdns12754:0crwdne12754:0'
     ),
 
     'deletefile' => array(
