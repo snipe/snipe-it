@@ -187,12 +187,15 @@ final class Company extends SnipeModel
      */
     public function isDeletable()
     {
+
         return Gate::allows('delete', $this)
-                && ($this->assets()->count() === 0)
-                && ($this->accessories()->count() === 0)
-                && ($this->consumables()->count() === 0)
-                && ($this->components()->count() === 0)
-                && ($this->users()->count() === 0);
+            && (($this->assets_count ?? $this->assets()->count()) === 0)
+            && (($this->accessories_count ?? $this->accessories()->count()) === 0)
+            && (($this->licenses_count ?? $this->licenses()->count()) === 0)
+            && (($this->components_count ?? $this->components()->count()) === 0)
+            && (($this->consumables_count ?? $this->consumables()->count()) === 0)
+            && (($this->accessories_count ?? $this->accessories()->count()) === 0)
+            && (($this->users_count ?? $this->users()->count()) === 0);
     }
 
     /**
