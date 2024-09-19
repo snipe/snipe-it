@@ -5,22 +5,23 @@ namespace App\Http\Transformers;
 use App\Helpers\Helper;
 use App\Models\Category;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoriesTransformer
 {
-    public function transformCategories(Collection $categorys, $total)
+    public function transformCategories(LengthAwarePaginator $paginator)
     {
         $array = [];
-        foreach ($categorys as $category) {
+        foreach ($paginator->items() as $category) {
             $array[] = self::transformCategory($category);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer)->transformDatatables($array, $paginator);
     }
 
-    public function transformCategory(Category $category = null)
+    public function transformCategory(Category $category = null) : ?array
+
     {
 
         // We only ever use item_count for categories in this transformer, so it makes sense to keep it
