@@ -255,20 +255,37 @@ class Accessory extends SnipeModel
      */
     public function checkouts()
     {
-        return $this->morphToMany(Accessory::class, 'assignedAccessories', 'accessories_checkout', 'assigned_to', null,);
+        // this is WEIRD - because we don't have a real concept in Laravel of a real polymorphic many-to-many
+        // relationship that will return all of the various things you've been checked-out-to, we have to re-introduce
+        // this interstitial class - this is the only place where you should need to access it, however. And the only
+        // way.
+        // If you're looking for just Users, or just accessories, use userAssignments or locationAssignments, respectively
+        return $this->hasMany(AccessoryCheckout::class);
     }
 
     public function locationAssignments()
     {
         //I don't nkow that we'll want this, but this is a thing we can do - find the locations that have been assigned this accessory
-        return $this->morphedByMany(Location::class, 'accessory_assignment');
+        return $this->morphedByMany(
+            Location::class,
+            'assigned', // weird, but we might need this to coerce the assigned_type
+            'accessories_checkout',
+            null, //'accessory_id', //CORRECT
+            'assigned_to', //CORRECT
+        );
 
     }
 
     public function userAssignments()
     {
-        //I don't nkow that we'll want this, but this is a thing we can do - find the locations that have been assigned this accessory
-        return $this->morphedByMany(User::class, 'accessory_assignment');
+        //I don't nkow that we'll want this, but this is a thing we can do - find the users that have been assigned this accessory
+        return $this->morphedByMany(
+            User::class,
+            'assigned', // weird, but we might need this to coerce the assigned_type
+            'accessories_checkout',
+            null, //'accessory_id', //CORRECT
+            'assigned_to', //CORRECT
+        );
 
     }
 
@@ -386,6 +403,7 @@ class Accessory extends SnipeModel
      */
     public function declinedCheckout(User $declinedBy, $signature)
     {
+        //FIXME - se shouldn't need to go with AccessoryCheckout
         if (is_null($accessory_checkout = AccessoryCheckout::userAssigned()->where('assigned_to', $declinedBy->id)->where('accessory_id', $this->id)->latest('created_at'))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));

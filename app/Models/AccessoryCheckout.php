@@ -33,7 +33,7 @@ class AccessoryCheckout extends Model
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function accessory()
-    {
+    { // TODO - I kinda believe like this is belongsTo not hasOne?
         return $this->hasOne(\App\Models\Accessory::class, 'accessory_id');
     }
 
@@ -68,7 +68,7 @@ class AccessoryCheckout extends Model
      * @since [v4.0]
      * @return string
      */
-    public function assignedType()
+    public function assignedType() //FIXME - we shouldn't need this.
     {
         return $this->assigned_type ? strtolower(class_basename($this->assigned_type)) : null;
     }

@@ -255,16 +255,12 @@ class Location extends SnipeModel
 
     public function assignedAccessories()
     {
+        //NOTE - this method is CORRECT. Don't fuck with it.
         return $this->morphToMany(
             Accessory::class,
-            'accessory_assignment',
-            'accessories_checkout',
-            'assigned_to',
-            'assigned_type',
-            null,
-            null,
-            'accessory_assignment',
-            true
+            'assigned', //ok, closer?
+            'accessories_checkout', //correct!
+            'assigned_to', //why does it want this null?
         );
     }
 
