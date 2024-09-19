@@ -48,6 +48,10 @@ class AssetMaintenancesController extends Controller
             $maintenances->where('asset_maintenances.supplier_id', '=', $request->input('supplier_id'));
         }
 
+        if ($request->filled('created_by')) {
+            $maintenances->where('asset_maintenances.created_by', '=', $request->input('created_by'));
+        }
+
         if ($request->filled('asset_maintenance_type')) {
             $maintenances->where('asset_maintenance_type', '=', $request->input('asset_maintenance_type'));
         }
@@ -96,9 +100,6 @@ class AssetMaintenancesController extends Controller
                 break;
             case 'status_label':
                 $maintenances = $maintenances->OrderStatusName($order);
-                break;
-            case 'created_by':
-                $maintenances = $maintenances->OrderByCreatedBy($order);
                 break;
             default:
                 $maintenances = $maintenances->orderBy($sort, $order);
