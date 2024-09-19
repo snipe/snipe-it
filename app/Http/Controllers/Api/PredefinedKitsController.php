@@ -24,7 +24,7 @@ class PredefinedKitsController extends Controller
     {
         $this->authorize('view', PredefinedKit::class);
 
-        $kits = PredefinedKit::query();
+        $kits = PredefinedKit::query()->with('adminuser');
 
         if ($request->filled('search')) {
             $kits = $kits->TextSearch($request->input('search'));
