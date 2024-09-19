@@ -94,7 +94,7 @@ class ItemImporter extends Importer
 
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
-        $this->item['user_id'] = $this->created_by;
+        $this->item['created_by'] = $this->created_by;
         $this->item['serial'] = $this->findCsvMatch($row, 'serial');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
