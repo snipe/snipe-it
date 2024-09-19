@@ -207,20 +207,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
     }
 
 
-    /**
-     * Query builder scope to order on admin user
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  string                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeOrderAdmin($query, $order)
-    {
-        return $query->leftJoin('users', 'asset_maintenances.user_id', '=', 'users.id')
-            ->orderBy('users.first_name', $order)
-            ->orderBy('users.last_name', $order);
-    }
 
     /**
      * Query builder scope to order on asset tag

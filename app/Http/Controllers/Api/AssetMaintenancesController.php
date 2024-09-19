@@ -80,7 +80,7 @@ class AssetMaintenancesController extends Controller
 
         switch ($sort) {
             case 'created_by':
-                $maintenances = $maintenances->OrderAdmin($order);
+                $maintenances = $maintenances->OrderByCreatedBy($order);
                 break;
             case 'supplier':
                 $maintenances = $maintenances->OrderBySupplier($order);

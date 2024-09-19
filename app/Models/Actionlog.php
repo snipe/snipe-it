@@ -374,7 +374,7 @@ class Actionlog extends SnipeModel
         $this->source = $source;
     }
 
-    public function scopeOrderAdmin($query, $order)
+    public function scopeOrderByCreatedBy($query, $order)
     {
         return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }

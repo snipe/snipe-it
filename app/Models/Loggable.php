@@ -232,7 +232,7 @@ trait Loggable
         $params = [
             'item' => $log->item,
             'filename' => $log->filename,
-            'admin' => $log->admin,
+            'admin' => $log->adminuser,
             'location' => ($location) ? $location->name : '',
             'note' => $note,
         ];

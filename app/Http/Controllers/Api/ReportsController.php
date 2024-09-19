@@ -87,7 +87,7 @@ class ReportsController extends Controller
 
         switch ($request->input('sort')) {
             case 'created_by':
-                $actionlogs->OrderAdmin($order);
+                $actionlogs->OrderByCreatedBy($order);
                 break;
             default:
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
