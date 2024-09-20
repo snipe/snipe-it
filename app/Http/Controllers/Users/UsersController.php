@@ -612,7 +612,7 @@ class UsersController extends Controller
             $this->authorize('view', $user);
 
             return view('users.print')
-                ->with('show_user', $user)
+                ->with('users', [$user])
                 ->with('settings', Setting::getSettings());
         }
 
