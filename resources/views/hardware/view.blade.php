@@ -657,6 +657,16 @@
                                         </div>
                                     </div>
 
+                                    <!-- requestable -->
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <strong>{{ trans('admin/hardware/general.requestable') }}</strong>
+                                        </div>
+                                        <div class="col-md-9">
+                                            {!! ($asset->requestable=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                                        </div>
+                                    </div>
+
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">

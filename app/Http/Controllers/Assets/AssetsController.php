@@ -329,9 +329,7 @@ class AssetsController extends Controller
         }
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
-
-        // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->filled('requestable', 0);
+        $asset->requestable = $request->input('requestable', 0);
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
 
