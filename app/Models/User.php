@@ -323,7 +323,14 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->hasMany(\App\Models\AssetMaintenance::class, 'user_id')->withTrashed();
     }
 
-    public function assignedAccessories()
+    /**
+     * Establishes the user -> accessories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @since [v2.0]
+     * @author A. Gianotto <snipe@snipe.net>
+     */
+    public function accessories()
     {
         // This model is *ALSO CORRECT* - please don't fuck with _it_ either.
         return $this->morphToMany(
@@ -331,20 +338,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             'assigned',
             'accessories_checkout',
             'assigned_to',
-        );
-    }
-
-    /**
-     * Establishes the user -> accessories relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v2.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function accessories() // FIXME - this is duplicated. And I think it might be wrong? And the name is confusing.
-    {
-        return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_checkout', 'assigned_to', 'accessory_id')
-            ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
+        )->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
     /**

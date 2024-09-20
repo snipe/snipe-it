@@ -260,8 +260,8 @@ class Location extends SnipeModel
             Accessory::class,
             'assigned', //ok, closer?
             'accessories_checkout', //correct!
-            'assigned_to', //why does it want this null?
-        );
+            'assigned_to',
+        ); //FIXME - need pivots and stuff?
     }
 
     public function setLdapOuAttribute($ldap_ou)
