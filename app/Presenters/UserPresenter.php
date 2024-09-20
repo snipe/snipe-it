@@ -361,6 +361,14 @@ class UserPresenter extends Presenter
                 'title' => trans('general.created_at'),
                 'visible' => false,
                 'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'updated_at',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.updated_at'),
+                'visible' => false,
+                'formatter' => 'dateDisplayFormatter',
             ],
             [
                 'field' => 'start_date',

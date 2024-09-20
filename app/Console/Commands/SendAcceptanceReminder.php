@@ -50,7 +50,7 @@ class SendAcceptanceReminder extends Command
                                                     $query->where('accepted_at', null)
                                                           ->where('declined_at', null);
                                                 })
-                                                ->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model', 'checkoutable.admin'])
+                                                ->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model', 'checkoutable.adminuser'])
                                                 ->get();
 
         $count = 0;

@@ -77,6 +77,6 @@ class CreateAccessoriesTest extends TestCase
             ->post(route('accessories.store'), array_merge($data, ['redirect_option' => 'index']))
             ->assertRedirect(route('accessories.index'));
 
-        $this->assertDatabaseHas('accessories', array_merge($data, ['user_id' => $user->id]));
+        $this->assertDatabaseHas('accessories', array_merge($data, ['created_by' => $user->id]));
     }
 }

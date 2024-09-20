@@ -82,7 +82,7 @@ class AssetSeeder extends Seeder
         return fn($sequence) => [
             'rtd_location_id' => $this->locationIds->random(),
             'supplier_id' => $this->supplierIds->random(),
-            'user_id' => $this->admin->id,
+            'created_by' => $this->admin->id,
         ];
     }
 }

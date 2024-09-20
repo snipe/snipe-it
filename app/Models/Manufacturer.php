@@ -74,10 +74,10 @@ class Manufacturer extends SnipeModel
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
-            && ($this->assets()->count() === 0)
-            && ($this->licenses()->count() === 0)
-            && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0)
+            && (($this->assets_count ?? $this->assets()->count()) === 0)
+            && (($this->licenses_count ?? $this->licenses()->count()) === 0)
+            && (($this->consumables_count ?? $this->consumables()->count()) === 0)
+            && (($this->accessories_count ?? $this->accessories()->count()) === 0)
             && ($this->deleted_at == '');
     }
 
@@ -104,5 +104,20 @@ class Manufacturer extends SnipeModel
     public function consumables()
     {
         return $this->hasMany(\App\Models\Consumable::class, 'manufacturer_id');
+    }
+
+
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
+    /**
+     * Query builder scope to order on the user that created it
+     */
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'manufacturers.created_by', '=', 'admin_sort.id')->select('manufacturers.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

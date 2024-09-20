@@ -121,7 +121,7 @@ class AssetsController extends Controller
         }
 
         $assets = Asset::select('assets.*')
-            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
+            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo', 'adminuser','model.depreciation',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
 
@@ -371,6 +371,9 @@ class AssetsController extends Controller
             case 'assigned_to':
                 $assets->OrderAssigned($order);
                 break;
+            case 'created_by':
+                $assets->OrderByCreatedByName($order);
+                break;
             default:
                 $numeric_sort = false;
 
@@ -590,7 +593,7 @@ class AssetsController extends Controller
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
         $asset->fill($request->validated());
-        $asset->user_id    = Auth::id();
+        $asset->created_by    = auth()->id();
 
         /**
         * this is here just legacy reasons. Api\AssetController

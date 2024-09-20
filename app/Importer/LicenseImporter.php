@@ -103,13 +103,13 @@ class LicenseImporter extends ItemImporter
 
                 if ($checkout_target) {
                     $targetLicense->assigned_to = $checkout_target->id;
-                    $targetLicense->user_id = Auth::id();
+                    $targetLicense->created_by = auth()->id();
                     if ($asset) {
                         $targetLicense->asset_id = $asset->id;
                     }
                     $targetLicense->save();
                 } elseif ($asset) {
-                    $targetLicense->user_id = Auth::id();
+                    $targetLicense->created_by = auth()->id();
                     $targetLicense->asset_id = $asset->id;
                     $targetLicense->save();
                 }

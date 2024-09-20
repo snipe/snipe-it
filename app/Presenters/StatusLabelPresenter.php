@@ -3,9 +3,9 @@
 namespace App\Presenters;
 
 /**
- * Class DepreciationPresenter
+ * Class StatusLabelPresenter
  */
-class DepreciationPresenter extends Presenter
+class StatusLabelPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
@@ -28,44 +28,54 @@ class DepreciationPresenter extends Presenter
                 'switchable' => false,
                 'title' => trans('general.name'),
                 'visible' => true,
-                'formatter' => 'depreciationsLinkFormatter',
-            ],
-
-            [
-                'field' => 'months',
-                'searchable' => true,
-                'sortable' => true,
-                'title' =>  trans('admin/depreciations/table.term'),
+                'formatter' => 'statuslabelsAssetLinkFormatter',
+            ],[
+                'field' => 'type',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('admin/statuslabels/table.status_type'),
                 'visible' => true,
-            ],
-
-            [
-                "field" => 'depreciation_min',
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('admin/depreciations/table.depreciation_min'),
-                "visible" => true,
-            ],
-            [
+                'formatter' => 'statusLabelTypeFormatter',
+            ], [
                 'field' => 'assets_count',
                 'searchable' => false,
                 'sortable' => true,
-                'title' =>  trans('general.assets'),
-                'visible' => true,
-            ],
-            [
-                'field' => 'models_count',
-                'searchable' => false,
-                'sortable' => true,
-                'title' =>  trans('general.asset_models'),
+                'switchable' => false,
+                'title' => trans('general.assets'),
                 'visible' => true,
             ], [
-                'field' => 'licenses_count',
+                'field' => 'color',
                 'searchable' => false,
                 'sortable' => true,
-                'title' =>  trans('general.licenses'),
+                'switchable' => true,
+                'title' => trans('admin/statuslabels/table.color'),
                 'visible' => true,
+                'formatter' => 'colorSqFormatter',
+            ],  [
+                'field' => 'show_in_nav',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/statuslabels/table.show_in_nav'),
+                'visible' => true,
+                'formatter' => 'trueFalseFormatter',
+            ], [
+                'field' => 'default_label',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/statuslabels/table.default_label'),
+                'visible' => true,
+                'formatter' => 'trueFalseFormatter',
             ],[
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.notes'),
+                'visible' => false,
+            ], [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,
@@ -94,11 +104,12 @@ class DepreciationPresenter extends Presenter
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
-                'visible' => true,
-                'formatter' => 'depreciationsActionsFormatter',
+                'formatter' => 'statuslabelsActionsFormatter',
             ],
         ];
 
         return json_encode($layout);
     }
+
+
 }
