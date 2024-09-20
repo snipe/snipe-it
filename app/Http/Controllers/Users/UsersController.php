@@ -611,11 +611,7 @@ class UsersController extends Controller
         if ($user) {
             $this->authorize('view', $user);
 
-            return view('users/print')
-                ->with('assets', $user->assets)
-                ->with('licenses', $user->licenses)
-                ->with('accessories', $user->accessories)
-                ->with('consumables', $user->consumables)
+            return view('users.print')
                 ->with('show_user', $user)
                 ->with('settings', Setting::getSettings());
         }

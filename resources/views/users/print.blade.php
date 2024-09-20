@@ -81,13 +81,13 @@
 
 </body>
 
-    @if ($assets->count() > 0)
+    @if ($show_user->assets->count() > 0)
         @php
             $counter = 1;
         @endphp
 
         <div id="assets-toolbar">
-            <h4>{{ trans_choice('general.countable.assets', $assets->count(), ['count' => $assets->count()]) }}
+            <h4>{{ trans_choice('general.countable.assets', $show_user->assets->count(), ['count' => $show_user->assets->count()]) }}
             </h4>
         </div>
 
@@ -119,7 +119,7 @@
                 <th data-field="signature" data-sortable="true" data-visible="true">{{ trans('general.signature') }}</th>
             </thead>
             <tbody>
-            @foreach ($assets as $asset)
+            @foreach ($show_user->assets as $asset)
                 @php
                     if ($asset->model->category->getEula()) $eulas[] = $asset->model->category->getEula()
                 @endphp
@@ -185,9 +185,10 @@
         </table>
     @endif
 
-    @if ($licenses->count() > 0)
+{{ $show_user->licenses->count() }}
+    @if ($show_user->licenses->count() > 0)
         <div id="licenses-toolbar">
-            <h4>{{ trans_choice('general.countable.licenses', $licenses->count(), ['count' => $licenses->count()]) }}</h4>
+            <h4>{{ trans_choice('general.countable.licenses', $show_user->licenses->count(), ['count' => $show_user->licenses->count()]) }}</h4>
         </div>
 
         <table
@@ -216,7 +217,7 @@
                 $lcounter = 1;
             @endphp
 
-            @foreach ($licenses as $license)
+            @foreach ($show_user->licenses as $license)
                 @php
                     if ($license->category->getEula()) $eulas[] = $license->category->getEula()
                 @endphp
@@ -240,9 +241,9 @@
     @endif
 
 
-    @if ($accessories->count() > 0)
+    @if ($show_user->accessories->count() > 0)
         <div id="accessories-toolbar">
-            <h4>{{ trans_choice('general.countable.accessories', $accessories->count(), ['count' => $accessories->count()]) }}</h4>
+            <h4>{{ trans_choice('general.countable.accessories', $show_user->accessories->count(), ['count' => $show_user->accessories->count()]) }}</h4>
         </div>
 
         <table
@@ -273,7 +274,7 @@
                 $acounter = 1;
             @endphp
 
-            @foreach ($accessories as $accessory)
+            @foreach ($show_user->accessories as $accessory)
                 @if ($accessory)
                     @php
                         if ($accessory->category->getEula()) $eulas[] = $accessory->category->getEula()
@@ -303,9 +304,9 @@
         </table>
     @endif
 
-    @if ($consumables->count() > 0)
+    @if ($show_user->consumables->count() > 0)
         <div id="consumables-toolbar">
-            <h4>{{ trans_choice('general.countable.consumables', $consumables->count(), ['count' => $consumables->count()]) }}</h4>
+            <h4>{{ trans_choice('general.countable.consumables', $show_user->consumables->count(), ['count' => $show_user->consumables->count()]) }}</h4>
         </div>
 
         <table
@@ -336,7 +337,7 @@
                 $ccounter = 1;
             @endphp
 
-            @foreach ($consumables as $consumable)
+            @foreach ($show_user->consumables as $consumable)
                 @if ($consumable)
                     @php
                         if ($consumable->category->getEula()) $eulas[] = $consumable->category->getEula()
