@@ -156,10 +156,11 @@
                                 <div class="col-md-12">
                                     <div class="callout callout-warning">
                                         <x-icon type="warning" />
-                                        {{ trans('admin/users/message.user_deleted_warning') }}
+                                        {{ trans('general.asset_deleted_warning') }}
                                     </div>
                                 </div>
                             @endif
+
                         <div class="info-stack-container">
                             <!-- Start button column -->
                             <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
