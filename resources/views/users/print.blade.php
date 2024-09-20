@@ -79,8 +79,6 @@
 </h3>
 <p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
 
-</body>
-
     @if ($show_user->assets->count() > 0)
         @php
             $counter = 1;
