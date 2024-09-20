@@ -25,7 +25,7 @@ class AssetSeeder extends Seeder
         $this->ensureLocationsSeeded();
         $this->ensureSuppliersSeeded();
 
-        $this->admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
+        $this->adminuser = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
         $this->locationIds = Location::all()->pluck('id');
         $this->supplierIds = Supplier::all()->pluck('id');
 
