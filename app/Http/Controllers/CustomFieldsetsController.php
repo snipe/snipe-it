@@ -90,7 +90,7 @@ class CustomFieldsetsController extends Controller
 
         $fieldset = new CustomFieldset([
                 'name' => $request->get('name'),
-                'user_id' => auth()->id(),
+                'created_by' => auth()->id(),
         ]);
 
         $validator = Validator::make($request->all(), $fieldset->rules);

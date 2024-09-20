@@ -135,6 +135,13 @@ class PredefinedKit extends SnipeModel
      */
     protected $searchableRelations = [];
 
+
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
     /**
      * Establishes the kits -> models relationship
      * @return \Illuminate\Database\Eloquent\Relations\Relation
@@ -181,4 +188,9 @@ class PredefinedKit extends SnipeModel
      * BEGIN QUERY SCOPES
      * -----------------------------------------------
      **/
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'kits.created_by', '=', 'admin_sort.id')->select('kits.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
 }

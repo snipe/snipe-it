@@ -92,6 +92,9 @@ class ConsumablesController extends Controller
             case 'supplier':
                 $consumables = $consumables->OrderSupplier($order);
                 break;
+            case 'created_by':
+                $consumables = $consumables->OrderByCreatedBy($order);
+                break;
             default:
                 // This array is what determines which fields should be allowed to be sorted on ON the table itself.
                 // These must match a column on the consumables table directly.
@@ -228,7 +231,8 @@ class ConsumablesController extends Controller
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
                 'note' => ($consumable_assignment->note) ? e($consumable_assignment->note) : null,
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null, // legacy, so we don't change the shape of the response
+                'created_by' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
             ];
         }
 
@@ -277,7 +281,7 @@ class ConsumablesController extends Controller
         $consumable->users()->attach($consumable->id,
                 [
                     'consumable_id' => $consumable->id,
-                    'user_id' => $user->id,
+                    'created_by' => $user->id,
                     'assigned_to' => $request->input('assigned_to'),
                     'note' => $request->input('note'),
                 ]

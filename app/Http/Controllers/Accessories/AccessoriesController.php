@@ -73,7 +73,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_date           = request('purchase_date');
         $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
-        $accessory->user_id                 = auth()->id();
+        $accessory->created_by              = auth()->id();
         $accessory->supplier_id             = request('supplier_id');
         $accessory->notes                   = request('notes');
 

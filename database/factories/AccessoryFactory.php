@@ -34,7 +34,7 @@ class AccessoryFactory extends Factory
                 $this->faker->randomElement(['Bluetooth', 'Wired']),
                 $this->faker->randomElement(['Keyboard', 'Wired'])
             ),
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'category_id' => Category::factory()->forAccessories(),
             'model_number' => $this->faker->numberBetween(1000000, 50000000),
             'location_id' => Location::factory(),
@@ -129,7 +129,7 @@ class AccessoryFactory extends Factory
             $accessory->checkouts()->create([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'user_id' => $user->id,
+                'created_by' => $user->id,
                 'assigned_to' => $user->id,
                 'assigned_type' => User::class,
                 'note' => '',
@@ -150,7 +150,7 @@ class AccessoryFactory extends Factory
             $accessory->checkouts()->create([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'user_id' => 1,
+                'created_by' => 1,
                 'assigned_to' => $user->id ?? User::factory()->create()->id,
                 'assigned_type' => User::class,
             ]);

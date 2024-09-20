@@ -36,7 +36,7 @@ class AssetModel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     protected $table = 'models';
-    protected $hidden = ['user_id', 'deleted_at'];
+    protected $hidden = ['created_by', 'deleted_at'];
     protected $presenter = AssetModelPresenter::class;
 
     // Declare the rules for the model validation
