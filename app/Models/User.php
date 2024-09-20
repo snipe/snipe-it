@@ -332,7 +332,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        // This model is *ALSO CORRECT* - please don't fuck with _it_ either.
         return $this->morphToMany(
             Accessory::class,
             'assigned',

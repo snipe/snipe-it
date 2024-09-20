@@ -403,7 +403,9 @@ class Accessory extends SnipeModel
      */
     public function declinedCheckout(User $declinedBy, $signature)
     {
-        //FIXME - se shouldn't need to go with AccessoryCheckout
+        // TODO - we shouldn't need to go with AccessoryCheckout, we should be able to do:
+        // $a->userAssignments()->where("assigned_to",$declinedBy->id)->latest
+        // (Also TODO) - I hate 'latest()' here, it feels sloppy and prone to subtle errors
         if (is_null($accessory_checkout = AccessoryCheckout::userAssigned()->where('assigned_to', $declinedBy->id)->where('accessory_id', $this->id)->latest('created_at'))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));

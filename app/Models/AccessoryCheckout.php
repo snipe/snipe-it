@@ -68,7 +68,7 @@ class AccessoryCheckout extends Model
      * @since [v4.0]
      * @return string
      */
-    public function assignedType() //FIXME - we shouldn't need this.
+    public function assignedType() //TODO - we shouldn't need this.
     {
         return $this->assigned_type ? strtolower(class_basename($this->assigned_type)) : null;
     }
@@ -84,11 +84,13 @@ class AccessoryCheckout extends Model
      */
     public function checkedOutToUser(): bool
     {
-      return $this->assignedType() === Asset::USER;
+        // TODO - this shouldn't be necessary
+        return $this->assignedType() === Asset::USER;
     }
 
     public function scopeUserAssigned(Builder $query): void
     {
+        // TODO - not necessary; we have re
         $query->where('assigned_type', '=', User::class);
     }
 
@@ -101,6 +103,7 @@ class AccessoryCheckout extends Model
      */
     public function advancedTextSearch(Builder $query, array $terms)
     {
+        //TODO - is this used?
 
         $userQuery = User::where(function ($query) use ($terms) {
             foreach ($terms as $term) {

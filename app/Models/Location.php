@@ -255,13 +255,12 @@ class Location extends SnipeModel
 
     public function assignedAccessories()
     {
-        //NOTE - this method is CORRECT. Don't fuck with it.
         return $this->morphToMany(
             Accessory::class,
             'assigned', //ok, closer?
             'accessories_checkout', //correct!
             'assigned_to',
-        ); //FIXME - need pivots and stuff?
+        )->withTrashed(); // TODO - do we need pivot values here? If so, consider: "->withPivot('id', 'created_at', 'note')"
     }
 
     public function setLdapOuAttribute($ldap_ou)
