@@ -375,7 +375,29 @@ class AssetsController extends Controller
                 $assets->OrderByCreatedByName($order);
                 break;
             default:
-                $assets->orderBy($column_sort, $order);
+                $numeric_sort = false;
+
+                // Search through the custom fields array to see if we're sorting on a custom field
+                if (array_search($column_sort, $all_custom_fields->pluck('db_column')->toArray()) !== false) {
+
+                    // Check to see if this is a numeric field type
+                    foreach ($all_custom_fields as $field) {
+                        if (($field->db_column == $sort_override) && ($field->format == 'NUMERIC')) {
+                            $numeric_sort = true;
+                            break;
+                        }
+                    }
+
+                    // This may not work for all databases, but it works for MySQL
+                    if ($numeric_sort) {
+                        $assets->orderByRaw($sort_override . ' * 1 ' . $order);
+                    } else {
+                        $assets->orderBy($sort_override, $order);
+                    }
+
+                } else {
+                    $assets->orderBy($column_sort, $order);
+                }
                 break;
         }
 
