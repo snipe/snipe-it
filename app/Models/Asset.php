@@ -709,7 +709,7 @@ class Asset extends Depreciable
     }
 
     /**
-     * Get action logs history for this asset
+     * Get user who created the item
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
