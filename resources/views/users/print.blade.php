@@ -185,7 +185,6 @@
         </table>
     @endif
 
-{{ $show_user->licenses->count() }}
     @if ($show_user->licenses->count() > 0)
         <div id="licenses-toolbar">
             <h4>{{ trans_choice('general.countable.licenses', $show_user->licenses->count(), ['count' => $show_user->licenses->count()]) }}</h4>
