@@ -617,7 +617,27 @@ class UsersController extends Controller
         }
 
         return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
+    }
 
+    public function printAllThings()
+    {
+        $this->authorize('view', User::class);
+
+        $users = User::query()
+            ->with([
+                'assets',
+                'accessories',
+                'consumables',
+                'licenses',
+            ])
+            ->withTrashed()
+            ->get();
+
+        // @todo: more authorization
+
+        return view('users.print')
+            ->with('users', $users)
+            ->with('settings', Setting::getSettings());
     }
 
     /**
