@@ -88,6 +88,7 @@ class BulkUsersController extends Controller
                         'assets.defaultLoc',
                         'assets.location',
                         'assets.model.category',
+                        'accessories.assetlog',
                         'accessories.category',
                         'accessories.manufacturer',
                         'consumables.assetlog',
