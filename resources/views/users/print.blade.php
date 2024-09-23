@@ -381,7 +381,7 @@
         </button>
     </div>
 
-    <table style="margin-top: 80px;" class="snipe-table">
+    <table style="margin-top: 80px;">
         <tr class="collapse" id="eula-row">
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
             <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
