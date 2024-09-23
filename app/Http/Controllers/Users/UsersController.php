@@ -625,10 +625,20 @@ class UsersController extends Controller
 
         $users = User::query()
             ->with([
-                'assets',
-                'accessories',
-                'consumables',
-                'licenses',
+                'assets.assetlog',
+                'assets.assignedAssets.assetlog',
+                'assets.assignedAssets.defaultLoc',
+                'assets.assignedAssets.location',
+                'assets.assignedAssets.model.category',
+                'assets.defaultLoc',
+                'assets.location',
+                'assets.model.category',
+                'accessories.category',
+                'accessories.manufacturer',
+                'consumables.assetlog',
+                'consumables.category',
+                'consumables.manufacturer',
+                'licenses.category',
             ])
             ->withTrashed()
             ->get();
