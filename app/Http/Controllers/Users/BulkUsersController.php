@@ -99,6 +99,8 @@ class BulkUsersController extends Controller
                     ->withTrashed()
                     ->findMany($request->input('ids'));
 
+                $users->each(fn($user) => $this->authorize('view', $user));
+
                 return view('users.print')
                     ->with('users', $users)
                     ->with('settings', Setting::getSettings());
