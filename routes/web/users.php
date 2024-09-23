@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Users;
 use App\Http\Controllers\Users\UserFilesController;
+use App\Http\Middleware\AssetCountForSidebar;
 use Illuminate\Support\Facades\Route;
 
 // User Management
@@ -104,7 +105,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     )->name('users.print');
 
-    Route::get('print-all-things', [Users\UsersController::class, 'printAllThings'])->name('users.print-all-things');
+    Route::get('print-all-things', [Users\UsersController::class, 'printAllThings'])
+        ->withoutMiddleware([AssetCountForSidebar::class])
+        ->name('users.print-all-things');
 
     Route::post(
         '{userId}/email',
