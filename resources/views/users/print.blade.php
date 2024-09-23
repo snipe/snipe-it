@@ -62,6 +62,16 @@
 </head>
 <body>
 
+{{-- If we are rendering multiple users we'll add the ability to show/hide EULAs for all of them at once via this button --}}
+@if (count($users) > 1)
+    <div class="pull-right">
+        <span>{{ trans('general.show_or_hide_eulas') }}</span>
+        <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target=".eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+            <i class="fa fa-eye-slash"></i>
+        </button>
+    </div>
+@endif
+
 @if ($snipeSettings->logo_print_assets=='1')
     @if ($snipeSettings->brand == '3')
 
@@ -80,7 +90,7 @@
     @endif
 @endif
 
-@foreach($users as $show_user)
+@foreach ($users as $show_user)
     <div id="start_of_user_section"> {{-- used for page breaks when printing --}}</div>
     <h3>
         {{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}
@@ -374,15 +384,18 @@
         </table>
     @endif
 
-    <p></p>
-    <div class="pull-right">
-        <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target="#eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
-            <i class="fa fa-eye-slash"></i>
-        </button>
-    </div>
+    {{-- This may have been render at the top of the page if we're rendering more than one user... --}}
+    @if (count($users) === 1)
+        <p></p>
+        <div class="pull-right">
+            <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target=".eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+                <i class="fa fa-eye-slash"></i>
+            </button>
+        </div>
+    @endif
 
     <table style="margin-top: 80px;">
-        <tr class="collapse" id="eula-row">
+        <tr class="collapse eula-row">
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
             <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
                 @php
