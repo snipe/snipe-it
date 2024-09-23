@@ -105,10 +105,6 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     )->name('users.print');
 
-    Route::get('print-all-things', [Users\UsersController::class, 'printAllThings'])
-        ->withoutMiddleware([AssetCountForSidebar::class])
-        ->name('users.print-all-things');
-
     Route::post(
         '{userId}/email',
         [
