@@ -95,7 +95,7 @@ class ConsumableCheckoutController extends Controller
         for($i = 0; $i < $quantity; $i++){
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
-            'user_id' => $admin_user->id,
+            'created_by' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
             'note' => $request->input('note'),
         ]);

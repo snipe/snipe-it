@@ -193,7 +193,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $actor->id,
+                'created_by' => $actor->id,
                 'note' => 'oh hi there',
             ])->count(),
             'Log entry either does not exist or there are more than expected'

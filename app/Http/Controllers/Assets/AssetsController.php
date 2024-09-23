@@ -133,7 +133,7 @@ class AssetsController extends Controller
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
             $asset->notes                   = $request->input('notes');
-            $asset->user_id                 = Auth::id();
+            $asset->created_by              = auth()->id();
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = request('purchase_cost');
@@ -329,9 +329,7 @@ class AssetsController extends Controller
         }
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
-
-        // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->filled('requestable', 0);
+        $asset->requestable = $request->input('requestable', 0);
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
 
@@ -747,7 +745,7 @@ class AssetsController extends Controller
                         Actionlog::firstOrCreate([
                             'item_id' => $asset->id,
                             'item_type' => Asset::class,
-                            'user_id' =>  auth()->id(),
+                            'created_by' =>  auth()->id(),
                             'note' => 'Checkout imported by '.auth()->user()->present()->fullName().' from history importer',
                             'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                             'target_type' => User::class,
@@ -775,7 +773,7 @@ class AssetsController extends Controller
                             Actionlog::firstOrCreate([
                                 'item_id' => $item[$asset_tag][$batch_counter]['asset_id'],
                                 'item_type' => Asset::class,
-                                'user_id' => auth()->id(),
+                                'created_by' => auth()->id(),
                                 'note' => 'Checkin imported by '.auth()->user()->present()->fullName().' from history importer',
                                 'target_id' => null,
                                 'created_at' => $checkin_date,

@@ -34,7 +34,7 @@ class ConsumableObserver
             $logAction->item_type = Consumable::class;
             $logAction->item_id = $consumable->id;
             $logAction->created_at = date('Y-m-d H:i:s');
-            $logAction->user_id = Auth::id();
+            $logAction->created_by = auth()->id();
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
         }
@@ -53,7 +53,7 @@ class ConsumableObserver
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         if($consumable->imported) {
             $logAction->setActionSource('importer');
         }
@@ -98,7 +98,7 @@ class ConsumableObserver
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('delete');
     }
 }

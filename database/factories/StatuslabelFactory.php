@@ -26,7 +26,7 @@ class StatuslabelFactory extends Factory
             'name'      => $this->faker->sentence(),
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'deleted_at' => null,
             'deployable' => 0,
             'pending' => 0,
