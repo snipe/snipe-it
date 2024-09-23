@@ -64,9 +64,9 @@
 
 {{-- If we are rendering multiple users we'll add the ability to show/hide EULAs for all of them at once via this button --}}
 @if (count($users) > 1)
-    <div class="pull-right">
+    <div class="pull-right hidden-print">
         <span>{{ trans('general.show_or_hide_eulas') }}</span>
-        <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target=".eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target=".eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
             <i class="fa fa-eye-slash"></i>
         </button>
     </div>
