@@ -37,6 +37,10 @@
             size: A4;
         }
 
+        #start_of_user_section {
+            break-before: page;
+        }
+
         .print-logo {
             max-height: 40px;
         }
@@ -77,6 +81,7 @@
 @endif
 
 @foreach($users as $show_user)
+    <div id="start_of_user_section"> {{-- used for page breaks when printing --}}</div>
     <h3>
         {{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}
         {{ ($show_user->employee_num!='') ? ' (#'.$show_user->employee_num.') ' : '' }}
