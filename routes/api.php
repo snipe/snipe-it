@@ -495,13 +495,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.assets.show.byserial')
         ->where('any', '.*');
 
-        // LEGACY URL - Get assets that are due or overdue for audit
-        Route::get('audit/{status}',
-        [
-            Api\AssetsController::class, 
-            'index'
-        ]
-        )->name('api.asset.to-audit');
 
 
 
@@ -512,7 +505,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                   'index'
               ]
         )->name('api.assets.list-upcoming')
-        ->where(['action' => 'audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
+        ->where(['action' => 'audit|audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
 
 
 

@@ -154,7 +154,8 @@ class AssetsController extends Controller
          * Handle due and overdue audits and checkin dates
          */
         switch ($action) {
-            case 'audits':
+            // Audit (singular) is left over from earlier legacy APIs
+            case ('audit' || 'audits'):
 
                 switch ($upcoming_status) {
                     case 'due':
