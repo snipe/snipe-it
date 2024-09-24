@@ -161,36 +161,28 @@ class AssetsController extends Controller
         switch ($action) {
             // Audit (singular) is left over from earlier legacy APIs
             case 'audits' :
-                \Log::error('audit/audits');
                 switch ($upcoming_status) {
                     case 'due':
-                        \Log::error('due');
                         $assets->DueForAudit($settings);
                         break;
                     case 'overdue':
-                        \Log::error('overdue');
                         $assets->OverdueForAudit();
                         break;
                     case 'due-or-overdue':
-                        \Log::error('due-or-overdue');
                         $assets->DueOrOverdueForAudit($settings);
                         break;
                 }
                 break;
 
             case 'checkins':
-                \Log::error('checkins');
                 switch ($upcoming_status) {
                     case 'due':
-                        \Log::error('due');
                         $assets->DueForCheckin($settings);
                         break;
                     case 'overdue':
-                        \Log::error('overdue');
                         $assets->OverdueForCheckin();
                         break;
                     case 'due-or-overdue':
-                        \Log::error('due-or-overdue');
                         $assets->DueOrOverdueForCheckin($settings);
                         break;
                 }
