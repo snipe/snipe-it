@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Users;
 use App\Http\Controllers\Users\UserFilesController;
-use App\Http\Middleware\AssetCountForSidebar;
 use Illuminate\Support\Facades\Route;
 
 // User Management
