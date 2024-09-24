@@ -356,7 +356,8 @@
         <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
-        <div class="container row row-striped" style="width:97%">
+        <div class="row" style="margin-right:4px;">
+        <div class="row row-new-striped">
 
           <!-- row -->
           <div class="row">
@@ -364,13 +365,13 @@
               <strong>{{ trans('admin/settings/general.snipe_version') }}:</strong>
             </div>
             <div class="col-md-4">
-            {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
+              {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
             </div>
 
             <div class="col-md-2">
               <strong>{{ trans('admin/settings/general.license') }}:</strong>
             </div>
-          <div class="col-md-4">
+            <div class="col-md-4">
               <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3</a>
            </div>
           </div>
@@ -434,12 +435,15 @@
             <div class="col-md-2">
               <strong>{{ trans('admin/settings/general.bs_table_storage') }}:</strong>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-4">
               {{ config('session.bs_table_storage') }}
             </div>
-
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+            </div>
           </div>
-
+        </div>
         </div>
           </div>
           <!--/ row -->
