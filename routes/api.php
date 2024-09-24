@@ -498,7 +498,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
 
 
-        // This gets the "due or overdue" API endpoints for audits and checkins
+        // This gets the "due or overdue" API endpoints for audit/audits and checkins
         Route::get('{action}/{upcoming_status}',
               [
                   Api\AssetsController::class,
