@@ -160,6 +160,7 @@
                                <p class="help-block">
                                {{ trans('admin/settings/general.unique_serial_help_text') }}
                                </p>
+
                            </div>
                        </div>
 
@@ -175,6 +176,24 @@
                                </label>
                                {!! $errors->first('shortcuts_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                <p class="help-block">{!!trans('admin/settings/general.shortcuts_help_text') !!}</p>
+                           </div>
+                       </div>
+
+                       <!-- required serial -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               <strong>{{ trans('admin/settings/general.required_serial') }}</strong>
+                           </div>
+                           <div class="col-md-9">
+                               <label class="form-control">
+                                   {{ Form::checkbox('required_serial', '1', Request::old('required_serial', $setting->required_serial),array('class' => 'minimal')) }}
+                                   {{ trans('general.yes') }}
+                                   {!! $errors->first('required_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                               </label>
+
+                               <p class="help-block">
+                                   {{ trans('admin/settings/general.require_serial_help_text') }}
+                               </p>
                            </div>
                        </div>
 

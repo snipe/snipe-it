@@ -14,6 +14,7 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
@@ -323,8 +324,19 @@ class SettingsController extends Controller
         }
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
-        $setting->unique_serial = $request->input('unique_serial', '0');
-        $setting->shortcuts_enabled = $request->input('shortcuts_enabled', '0');
+        if(!(Asset::select('serial')->groupBy('serial')->havingRaw('COUNT(*) > 1')->get()->count() > 0)){
+            $setting->unique_serial = $request->input('unique_serial');
+        }
+        else if($request->filled('unique_serial')){
+
+            return redirect()->route('settings.general.index')->with('error', trans('admin/settings/general.unique_serial_error', ['count' => Asset::select('serial')->groupBy('serial')->havingRaw('COUNT(*) > 1')->get()->count()]));
+        }
+        if(!(Asset::where('serial', '=', null)->count() > 0)) {
+            $setting->required_serial = $request->input('required_serial');
+        }
+        else if($request->filled('required_serial')) {
+            return redirect()->route('settings.general.index')->with('error', trans('admin/settings/general.required_serial_error', ['count' => Asset::where('serial', '=', null)->count()]));
+        }
         $setting->show_images_in_email = $request->input('show_images_in_email', '0');
         $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
         $setting->dashboard_message = $request->input('dashboard_message');

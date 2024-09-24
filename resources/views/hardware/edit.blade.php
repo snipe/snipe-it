@@ -50,8 +50,7 @@
       @endif
   </div>
 
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'old_val_name' => 'serials.1', 'translated_serial' => trans('admin/hardware/form.serial')])
-
+    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'old_val_name' => 'serials.1', 'translated_serial' => trans('admin/hardware/form.serial'), 'settings' => $settings])
     <div class="input_fields_wrap">
     </div>
 

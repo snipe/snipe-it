@@ -287,6 +287,8 @@ return [
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
     'unique_serial'                => 'Unique serial numbers',
+    'required_serial'   => 'Require Serial numbers',
+    'require_serial_help_text'                => 'Checking this box will enforce all assets to require a serial.',
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Length of asset tags, including zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
@@ -385,5 +387,8 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'required_serial_error' => 'All current assets must have a serial before you can select this option. There are currently :count Assets without serials.',
+    'unique_serial_error'   => 'All current assets must have a unique serial before you can select this option. There are currently :count Assets with duplicate or empty serials.',
+    'default_avatar' => 'Upload default avatar',
 
 ];
