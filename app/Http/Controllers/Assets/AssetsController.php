@@ -112,10 +112,10 @@ class AssetsController extends Controller
 
         $settings = Setting::getSettings();
 
-        $successes = 0;
-        $failures = 0;
+        $successes = [];
+        $failures = [];
         $serials = $request->input('serials');
-        $last_succesful_asset = null;
+        $asset = null;
 
         for ($a = 1; $a <= count($asset_tags); $a++) {
             $asset = new Asset();
@@ -202,33 +202,32 @@ class AssetsController extends Controller
                     $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
-                $last_succesful_asset = $asset;
-                $successes++;
+                $successes[] = "<a href='" . route('hardware.show', ['hardware' => $asset->id]) . "' style='color: white;'>" . e($asset->asset_tag) . "</a>";
 
             } else {
-                $failures++;
+                $failures[] = join(",", $asset->getErrors()->all());
             }
         }
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
 
-        if ($successes > 0) {
-            if ($failures > 0) {
+        if ($successes) {
+            if ($failures) {
                 //some succeeded, some failed
-                return redirect()->to(Helper::getRedirectOption($request, $last_succesful_asset->id, 'Assets'))
-                    ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['link' => route('hardware.show', ['hardware' => $last_succesful_asset->id]), 'id', 'tag' => e($last_succesful_asset->asset_tag)]))
-                    ->with('warning', trans_choice('admin/hardware/message.create.partial_failure', $failures));
+                return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets')) //FIXME - not tested
+                ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]))
+                    ->with('warning', trans_choice('admin/hardware/message.create.partial_failure', $failures, ['failures' => join("; ", $failures)]));
             } else {
-                if ($successes == 1) {
+                if (count($successes) == 1) {
                     //the most common case, keeping it so we don't have to make every use of that translation string be trans_choice'ed
                     //and re-translated
-                    return redirect()->to(Helper::getRedirectOption($request, $last_succesful_asset->id, 'Assets'))
-                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $last_succesful_asset->id]), 'id', 'tag' => e($last_succesful_asset->asset_tag)]));
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
                 } else {
                     //multi-success
-                    return redirect()->to(Helper::getRedirectOption($request, $last_succesful_asset->id, 'Assets'))
-                        ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['link' => route('hardware.show', ['hardware' => $last_succesful_asset->id]), 'id', 'tag' => e($last_succesful_asset->asset_tag)]));
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]));
                 }
             }
 
