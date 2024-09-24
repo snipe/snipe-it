@@ -930,9 +930,20 @@ class Asset extends Depreciable
      * */
     public function checkInvalidNextAuditDate()
     {
-        if (($this->last_audit_date) && ($this->next_audit_date) && ($this->last_audit_date > $this->next_audit_date)) {
+
+        // Deliberately parse the dates as Y-m-d (without H:i:s) to compare them
+        if ($this->last_audit_date) {
+            $last = Carbon::parse($this->last_audit_date)->format('Y-m-d');
+        }
+
+        if ($this->next_audit_date) {
+            $next = Carbon::parse($this->next_audit_date)->format('Y-m-d');
+        }
+
+        if ((isset($last) && (isset($next))) && ($last > $next)) {
             return true;
         }
+
         return false;
     }
 

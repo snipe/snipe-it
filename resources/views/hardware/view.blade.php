@@ -27,7 +27,7 @@
                         [
                             'warning' => trans('admin/hardware/message.warning_audit_date_mismatch',
                                     [
-                                        'last_audit_date' => Helper::getFormattedDateObject($asset->last_audit_date, 'date', false),
+                                        'last_audit_date' => Helper::getFormattedDateObject($asset->last_audit_date, 'datetime', false),
                                         'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date', false)
                                     ]
                                     )
@@ -493,7 +493,7 @@
                                             </div>
                                             <div class="col-md-9">
                                                 {!! $asset->checkInvalidNextAuditDate() ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
-                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }}
+                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'datetime', false) }}
                                                 @if ($audit_log->user)
                                                     (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
                                                 @endif
