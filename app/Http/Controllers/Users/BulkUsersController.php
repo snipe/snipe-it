@@ -13,6 +13,7 @@ use App\Models\Group;
 use App\Models\LicenseSeat;
 use App\Models\ConsumableAssignment;
 use App\Models\Consumable;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class BulkUsersController extends Controller
      */
     public function edit(Request $request)
     {
-        $this->authorize('update', User::class);
+        $this->authorize('view', User::class);
 
         // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
@@ -47,16 +48,18 @@ class BulkUsersController extends Controller
 
             // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
+                $this->authorize('update', User::class);
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
 
             // bulk delete, display the bulk delete confirmation form
             } elseif ($request->input('bulk_actions') == 'delete') {
+                $this->authorize('delete', User::class);
                 return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
 
             // merge, confirm they have at least 2 users selected and display the merge screen
             } elseif ($request->input('bulk_actions') == 'merge') {
-
+                $this->authorize('delete', User::class);
                 if (($request->filled('ids')) && (count($request->input('ids')) > 1)) {
                     return view('users/confirm-merge')->with('users', $users);
                 // Not enough users selected, send them back
@@ -76,6 +79,33 @@ class BulkUsersController extends Controller
                 }
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
 
+            } elseif ($request->input('bulk_actions') == 'print') {
+                $users = User::query()
+                    ->with([
+                        'assets.assetlog',
+                        'assets.assignedAssets.assetlog',
+                        'assets.assignedAssets.defaultLoc',
+                        'assets.assignedAssets.location',
+                        'assets.assignedAssets.model.category',
+                        'assets.defaultLoc',
+                        'assets.location',
+                        'assets.model.category',
+                        'accessories.assetlog',
+                        'accessories.category',
+                        'accessories.manufacturer',
+                        'consumables.assetlog',
+                        'consumables.category',
+                        'consumables.manufacturer',
+                        'licenses.category',
+                    ])
+                    ->withTrashed()
+                    ->findMany($request->input('ids'));
+
+                $users->each(fn($user) => $this->authorize('view', $user));
+
+                return view('users.print')
+                    ->with('users', $users)
+                    ->with('settings', Setting::getSettings());
             }
         }
 
