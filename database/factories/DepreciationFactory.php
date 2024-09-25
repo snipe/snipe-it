@@ -24,7 +24,7 @@ class DepreciationFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->catchPhrase(),
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'months' => 36,
         ];
     }

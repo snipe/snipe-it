@@ -14,7 +14,7 @@ return array(
     'info'  					=> 'Информация о лицензии',
     'license_seats'  			=> 'Лицензируемых мест',
     'seat'  					=> 'Место',
-    'seat_count'  				=> 'Seat :count',
+    'seat_count'  				=> 'Мест :count',
     'seats'  					=> 'Мест',
     'software_licenses'  		=> 'Лицензии ПО',
     'user'  					=> 'Пользователь',
@@ -24,12 +24,12 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Изъять все места',
-                'modal'             => 'This action will checkin one seat. | This action will checkin all :checkedout_seats_count seats for this license.',
+                'modal'             => 'Это действие вернёт одно место. | Это действие вернёт все :checkedout_seats_count места для этой лицензии.',
                 'enabled_tooltip'   => 'Освободить назначения ВСЕХ мест на эту лицензию как от пользователей, так и от активов',
                 'disabled_tooltip'  => 'Недоступно, т.к. в настоящее время нет выданных (назначенных) мест',
                 'disabled_tooltip_reassignable'  => 'Недоступно, т.к. Лицензия не переназначаема',
                 'success'           => 'Лицензия успешно получена! | Все лицензии были успешно получены!',
-                'log_msg'           => 'Checked in via bulk license checkin in license GUI',
+                'log_msg'           => 'Возвращено через массовый отзыв лицензий в GUI',
             ],
 
             'checkout_all'              => [

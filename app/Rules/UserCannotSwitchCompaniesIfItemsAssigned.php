@@ -16,8 +16,14 @@ class UserCannotSwitchCompaniesIfItemsAssigned implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $user = User::find(request()->route('user')->id);
-        if (($value) && ($user->allAssignedCount() > 0) && (Setting::getSettings()->full_multiple_companies_support)) {
-            $fail(trans('admin/users/message.error.multi_company_items_assigned'));
+
+        if (($value) && ($user->allAssignedCount() > 0) && (Setting::getSettings()->full_multiple_companies_support=='1')) {
+
+            // Check for assets with a different company_id than the selected company_id
+            $user_assets = $user->assets()->where('assets.company_id', '!=', $value)->count();
+            if ($user_assets > 0) {
+                $fail(trans('admin/users/message.error.multi_company_items_assigned'));
+            }
         }
     }
 }

@@ -31,6 +31,8 @@ return [
     'backups'					=> 'crwdns1331:0crwdne1331:0',
     'backups_help'              => 'crwdns6812:0crwdne6812:0',
     'backups_restoring'         => 'crwdns6325:0crwdne6325:0',
+    'backups_clean' => 'crwdns12712:0crwdne12712:0',
+    'backups_clean_helptext' => "crwdns12714:0crwdne12714:0",
     'backups_upload'            => 'crwdns6327:0crwdne6327:0',
     'backups_path'              => 'crwdns6329:0crwdne6329:0',
     'backups_restore_warning'   => 'crwdns11531:0crwdne11531:0',

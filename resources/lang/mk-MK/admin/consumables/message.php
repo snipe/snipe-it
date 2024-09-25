@@ -2,7 +2,7 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
+    'invalid_category_type' => 'Категоријата мора да биде категорија на потрошни материјали.',
     'does_not_exist' => 'Потрошниот материјал не постои.',
 
     'create' => array(
@@ -25,7 +25,7 @@ return array(
         'error'   		=> 'Потрошниот материјал не е задолжен, обидете се повторно',
         'success' 		=> 'Потрошниот материјал е успешно задолжен.',
         'user_does_not_exist' => 'Тој корисник е неважечки. Обидете се повторно.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Нема доволно потрошни материјали за ова позајмување. Ве молиме проверете ја преостанатата количина. ',
     ),
 
     'checkin' => array(

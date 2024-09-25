@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Gyengéden törölje ezeket a felhasználókat is. Az eszköztörténetük érintetlen marad, kivéve, ha/amíg nem törli a törölt rekordokat a Rendszergazdai beállításokban.',
     'bulk_checkin_delete_success' => 'A kiválasztott felhasználók törlésre, és a náluk levő eszközök visszavételre kerültek.',
     'bulk_checkin_success' => 'A kiválasztott felhasználókhoz tartozó eszközök visszavételre kerültek.',
-    'set_to_null'           => 'Az eszköz értékeinek törlése|Az összes :asset_count eszköz értékeinek törlése ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'A felhasználó :field értékeinek törlése|Az összes :user_count felhasználó :field értékeinek törlése ',
     'na_no_purchase_date'   => 'N/A - Nincs megadva a vásárlás dátuma',
     'assets_by_status'      => 'Eszközök státusz szerint',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Lejárat',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

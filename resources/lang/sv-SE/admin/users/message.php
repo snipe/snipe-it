@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Du har framgångsrikt nekat den här tillgången.',
     'bulk_manager_warn'	        => 'Dina användare har uppdaterats, men chefsfältet sparades inte eftersom den chef du valt även finns i användarlistan, en användare kanske inte ange sig själv som chef. Vänligen välj dina användare igen, med undantag av chefen.',
     'user_exists'               => 'Användaren existerar redan!',
-    'user_not_found'            => 'Användaren finns inte.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Inloggningsfältet krävs',
     'user_has_no_assets_assigned' => 'Inga tillgångar som för närvarande tilldelats användaren.',
     'user_password_required'    => 'Lösenordet krävs.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Det gick inte att söka på LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'ldap_could_not_get_entries' => 'Det gick inte att få poster från LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'password_ldap' => 'Lösenordet för det här kontot hanteras av LDAP / Active Directory. Vänligen kontakta din IT-avdelning för att ändra ditt lösenord.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

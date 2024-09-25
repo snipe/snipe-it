@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Actualizați doar locația implicită',
     'asset_location_update_actual' => 'Actualizează doar locația reală',
     'asset_not_deployable' => 'Activul este indisponibil și nu poate fi eliberat.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Activul e disponibil și poate fi eliberat.',
     'processing_spinner' => 'Procesare... (Ar putea dura puţin timp pe fişiere mari)',
     'optional_infos'  => 'Informații opționale',

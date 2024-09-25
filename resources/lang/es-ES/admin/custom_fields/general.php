@@ -37,7 +37,7 @@ return [
     'show_in_email'     => '¿Incluir el campo en los correos de asignación enviados al usuario? Los campos cifrados no se pueden incluir en los correos electrónicos',
     'show_in_email_short'     => 'Incluye en correos electrónicos.',
     'help_text' => 'Texto de ayuda',
-    'help_text_description' => 'Un texto opcional que aparecerá debajo de los campos del formulario cuando se edite un activo para proporcionar contexto adicional.',
+    'help_text_description' => 'Este es un texto opcional que aparecerá debajo de los campos del formulario cuando se edite un activo para proporcionar contexto adicional.',
     'about_custom_fields_title' => 'Acerca de los Campos Personalizados',
     'about_custom_fields_text' => 'Los campos personalizados le permiten añadir atributos arbitrarios a los activos.',
     'add_field_to_fieldset' => 'Añadir campo al grupo de campos',

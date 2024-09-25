@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\RedirectResponse;
 use \Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Session;
 
 
 /**
@@ -44,6 +45,8 @@ class DashboardController extends Controller
 
             return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
         } else {
+            Session::reflash();
+
             // Redirect to the profile page
             return redirect()->intended('account/view-assets');
         }

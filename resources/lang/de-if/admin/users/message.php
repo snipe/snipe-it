@@ -4,9 +4,9 @@ return array(
 
     'accepted'                  => 'Du hast den Gegenstand erfolgreich angenommen.',
     'declined'                  => 'Du hast diesen Gegenstand erfolgreich abgelehnt.',
-    'bulk_manager_warn'	        => 'Deine Benutzer wurden erfolgreich aktualisiert, aber Dein Manager-Eintrag wurde nicht gespeichert, da der Manager, den Du ausgewählt hast, auch in der zu bearbeitenden Liste war, und Benutzer dürfen nicht ihr eigener Manager sein. Bitte wähle Deine Benutzer erneut aus, ohne den Manager.',
+    'bulk_manager_warn'	        => 'Deine Benutzer wurden erfolgreich aktualisiert, aber dein Manager-Eintrag wurde nicht gespeichert, da der Manager, den du ausgewählt hast, auch in der zu bearbeitenden Liste war, und Benutzer dürfen nicht ihr eigener Manager sein. Bitte wähle deine Benutzer erneut aus, ohne diesen Manager.',
     'user_exists'               => 'Benutzer existiert bereits!',
-    'user_not_found'            => 'Benutzer existiert nicht.',
+    'user_not_found'            => 'Der Benutzer existiert nicht oder du bistnicht berechtigt, ihn anzuzeigen.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
     'user_has_no_assets_assigned' => 'Derzeit sind keine Assets dem Benutzer zugewiesen.',
     'user_password_required'    => 'Das Passswortfeld ist erforderlich.',
@@ -47,12 +47,13 @@ return array(
         'asset_already_accepted' => 'Dieses Asset wurde bereits akzeptiert.',
         'accept_or_decline' => 'Du musst diesen Gegenstand entweder annehmen oder ablehnen.',
         'cannot_delete_yourself' => 'Wir würden uns wirklich schlecht fühlen, wenn du dich selbst löschen würdest. Überlege es dir bitte noch einmal.',
-        'incorrect_user_accepted' => 'Das Asset, dass Du versuchst zu aktivieren, wurde nicht an Dich ausgebucht.',
+        'incorrect_user_accepted' => 'Das Asset, das du annehmen willst, wurde nicht an dich ausgecheckt.',
         'ldap_could_not_connect' => 'Konnte keine Verbindung zum LDAP Server herstellen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'ldap_could_not_bind' => 'Konnte keine Verbindung zum LDAP Server herstellen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server: ',
         'ldap_could_not_search' => 'Konnte LDAP Server nicht suchen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'ldap_could_not_get_entries' => 'Konnte keine Einträge vom LDAP Server abrufen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'password_ldap' => 'Das Passwort für diesen Account wird vom LDAP/Active Directory verwaltet. Bitte kontaktiere Deine IT-Abteilung, um Dein Passwort zu ändern. ',
+        'multi_company_items_assigned' => 'Diesem Benutzer sind Dinge zugewiesen, die zu einer anderen Firma gehören. Bitte checke sie ein oder bearbeite deine Firma.'
     ),
 
     'deletefile' => array(

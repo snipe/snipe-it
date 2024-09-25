@@ -21284,7 +21284,8 @@ a.accordion-header {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
+input:required,
+select:required {
   border-right: 6px solid orange;
 }
 .sidebar-menu {
@@ -21658,8 +21659,12 @@ a.link-danger:hover {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
-  border-right: 6px solid orange;
+input:required,
+select:required {
+  border-right: 4px solid orange;
+}
+select:required + .select2-container .select2-selection {
+  border-right: 4px solid orange;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -21812,9 +21817,6 @@ body {
   height: 35px !important;
   float: left;
   margin: 0;
-}
-.select2-selection__rendered needsclick {
-  color: red;
 }
 .select2-results__option {
   padding: 5px;
@@ -23131,8 +23133,12 @@ a.link-danger:hover {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
-  border-right: 6px solid orange;
+input:required,
+select:required {
+  border-right: 4px solid orange;
+}
+select:required + .select2-container .select2-selection {
+  border-right: 4px solid orange;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -23285,9 +23291,6 @@ body {
   height: 35px !important;
   float: left;
   margin: 0;
-}
-.select2-selection__rendered needsclick {
-  color: red;
 }
 .select2-results__option {
   padding: 5px;

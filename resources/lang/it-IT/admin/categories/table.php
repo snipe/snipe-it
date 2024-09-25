@@ -3,7 +3,7 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'parent'   					=> 'Padre',
+    'parent'   					=> 'Parte di',
     'require_acceptance'      	=> 'Accettazione',
     'title'      				=> 'Nome Categoria Bene',
 

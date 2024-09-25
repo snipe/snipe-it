@@ -24,11 +24,11 @@ return [
     'new'                       => 'Novo',
     'var' => [
         'clone'     => 'Clonar :item_type',
-        'edit'      => 'Edit :item_type',
-        'delete'    => 'Delete :item_type',
-        'restore'   => 'Restore :item_type',
+        'edit'      => 'Editar :item_type',
+        'delete'    => 'Excluir :item_type',
+        'restore'   => 'Restaurar :item_type',
         'create'    => 'Criar novo :item_type',
-        'checkout'  => 'Checkout :item_type',
-        'checkin'   => 'Checkin :item_type',
+        'checkout'  => 'Emprestar :item_type',
+        'checkin'   => 'Devolver :item_type',
     ]
 ];

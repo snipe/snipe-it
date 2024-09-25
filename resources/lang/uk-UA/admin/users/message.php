@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Ви успішно відхилили цей актив.',
     'bulk_manager_warn'	        => 'Ваші користувачі успішно оновлені, однак Ваш запис менеджера не було збережено, оскільки обраний вами менеджер також був у списку користувачів, для редагування, і користувачі можуть не бути їх власним керівником. Будь ласка, оберіть ваших користувачів знову, не маючи менеджера.',
     'user_exists'               => 'Користувач вже існує!',
-    'user_not_found'            => 'Користувач не існує.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Поле авторизації є обов\'язковим',
     'user_has_no_assets_assigned' => 'Немає медіафайлів в даний час призначених користувачеві.',
     'user_password_required'    => 'Пароль є обов\'язковим.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Не вдалося знайти сервер LDAP. Будь ласка, перевірте конфігурацію сервера LDAP в файлі конфігурації LDAP. <br>Помилка від LDAP Server:',
         'ldap_could_not_get_entries' => 'Не вдалося отримати записи з сервера LDAP. Перевірте конфігурацію сервера LDAP у файлі конфігурації LDAP. <br>Помилка сервера LDAP:',
         'password_ldap' => 'Пароль для цього облікового запису керується LDAP/Active Directory. Зверніться до свого ІТ-відділу, щоб змінити пароль. ',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Fjern også disse brugere. Deres asset historie vil forblive intakte medmindre/indtil du fjerner slettede poster i administratorindstillingerne.',
     'bulk_checkin_delete_success' => 'Dine valgte brugere er blevet slettet og deres emner er blevet tjekket ind.',
     'bulk_checkin_success' => 'Emnerne for de valgte brugere er blevet tjekket ind.',
-    'set_to_null'           => 'Slet værdier for dette aktiv|Slet værdier for alle :asset_count aktiver ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Slet :field værdier for denne bruger, Slet :field værdier for alle :user_count brugere ',
     'na_no_purchase_date'   => 'Ikke relevant - ingen købsdato angivet',
     'assets_by_status'      => 'Aktiver efter status',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Udløber',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

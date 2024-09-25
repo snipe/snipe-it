@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'De asemenea, soft-delete acesti utilizatori. Istoricul lor de active va ramane intact numai in cazul in care eliminati inregistrarile sterse din Setarile Administratorului.',
     'bulk_checkin_delete_success' => 'Utilizatorii selectați au fost șterși și elementele lor au fost verificate.',
     'bulk_checkin_success' => 'Elementele pentru utilizatorii selectați au fost verificate.',
-    'set_to_null'           => 'Ștergeți valorile pentru acest element / Ștergeți valorile pentru toate cele :asset_count active ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Ştergeţi :field values for this user<unk> Ştergeţi :field values for all :user_count users ',
     'na_no_purchase_date'   => 'N/A - Nicio dată de cumpărare furnizată',
     'assets_by_status'      => 'Bunuri după stare',
@@ -559,8 +559,8 @@ return [
     'expires' => 'expiră',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

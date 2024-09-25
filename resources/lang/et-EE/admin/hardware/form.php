@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Uuenda ainult vaikimisi asukohta',
     'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Selle vahendi olek ei luba seda väljastada.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Selle vahendi olek lubab seda väljastada.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Valikuline teave',

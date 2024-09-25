@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Та энэ хөрөнгийг амжилттай татгалзсан.',
     'bulk_manager_warn'	        => 'Таны хэрэглэгчид амжилттай шинэчлэгдсэн хэдий ч таны менежерийн оруулгыг хадгалсангүй, учир нь таны сонгосон менежер засварлах хэрэглэгчийн жагсаалт мөн хэрэглэгчид магадгүй өөрийн менежер биш байж болно. Менежерийг оруулалгүйгээр хэрэглэгчдийг дахин сонгоно уу.',
     'user_exists'               => 'Хэрэглэгч бүртгэгдсэн байна!',
-    'user_not_found'            => 'Хэрэглэгч байхгүй байна.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Нэвтрэх талбар шаардлагатай байна',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Нууц үг шаардагдана.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP серверийг хайж чадахгүй байна. LDAP серверийн тохиргоог LDAP тохиргооны файлдаа шалгана уу. <br> LDAP серверийн алдаа:',
         'ldap_could_not_get_entries' => 'LDAP серверээс бичилтийг авч чадсангүй. LDAP серверийн тохиргоог LDAP тохиргооны файлдаа шалгана уу. <br> LDAP серверийн алдаа:',
         'password_ldap' => 'Энэ акаунтын нууц үгийг LDAP / Active Directory удирддаг. Нууц үгээ солихын тулд өөрийн IT хэлтэст хандана уу.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

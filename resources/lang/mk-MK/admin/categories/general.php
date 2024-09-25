@@ -3,13 +3,13 @@
 return array(
     'asset_categories' 					=> 'Категории на основни средства',
     'category_name'  					=> 'Име на категорија',
-    'checkin_email'                     => 'Send email to user on checkin/checkout.',
-    'checkin_email_notification'        => 'This user will be sent an email on checkin/checkout.',
+    'checkin_email'                     => 'Испрати е-пошта до корисникот при позајмување/враќање.',
+    'checkin_email_notification'        => 'На корисникот ќе му биде испратена е-пошта при позајмување/враќање.',
     'clone'                             => 'Клонирај Категорија',
     'create'  							=> 'Креирај категорија',
     'edit'                              => 'Уреди категорија',
-    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
-    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
+    'email_will_be_sent_due_to_global_eula' => 'Е-пошта ќе биде испратена бидејќи се користи глобалниот EULA.',
+    'email_will_be_sent_due_to_category_eula' => 'Е-пошта ќе биде испратена бидејќи EULA се користи за оваа категорија.',
     'eula_text'							=> 'Категорија - Услови за користење',
     'eula_text_help'					=> 'Ова поле ви овозможува да ги прилагодите вашите Услови за користење за сите видови на средства. Ако имате само едни Услови за користење за сите ваши основни средства, можете да вклучите подолу да се користaт стандардните Услови за користење.',
     'name'                              => 'Име на категорија',
@@ -20,6 +20,6 @@ return array(
     'update'  							=> 'Уреди категорија',
     'use_default_eula'					=> 'Наместо ова, користете <a href="#" data-toggle="modal" data-target="#eulaModal">стандардни Услови за користење</a>.',
     'use_default_eula_disabled'			=> '<del>Наместо ова, користете стандардни Услови за користење.</del> Не се внесени стандардни Услови за користење. Ве молиме внесете ги во Поставки.',
-    'use_default_eula_column'			=> 'Use default EULA',
+    'use_default_eula_column'			=> 'Користи основна EULA',
 
 );

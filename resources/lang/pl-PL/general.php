@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Również miękkie usuwanie tych użytkowników. Ich historia zasobów pozostanie nieuszkodzona/dopóki nie usuniesz usuniętych rekordów w ustawieniach administratora.',
     'bulk_checkin_delete_success' => 'Wybrani użytkownicy zostali usunięci i ich zasoby zostały odebrane.',
     'bulk_checkin_success' => 'Elementy dla wybranych użytkowników zostały odebrane.',
-    'set_to_null'           => 'Usuń wartości dla tego zasobu|Usuń wartości dla wszystkich :asset_count aktywów ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Usuń :field wartości dla tego użytkownika|Usuń :field wartości dla wszystkich użytkowników :user_count ',
     'na_no_purchase_date'   => 'N/A - Nie podano daty zakupu',
     'assets_by_status'      => 'Zasoby wg statusu',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Wygasa',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

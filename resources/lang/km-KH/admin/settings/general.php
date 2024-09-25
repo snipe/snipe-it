@@ -31,6 +31,8 @@ return [
     'backups'					=> 'ការបម្រុងទុក',
     'backups_help'              => 'បង្កើត ទាញយក និងស្ដារការបម្រុងទុក ',
     'backups_restoring'         => 'ការស្ដារឡើងវិញពីការបម្រុងទុក',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'ផ្ទុកឡើងការបម្រុងទុក',
     'backups_path'              => 'ការបម្រុងទុកនៅលើម៉ាស៊ីនមេត្រូវបានរក្សាទុកក្នុង <code>:path</code>',
     'backups_restore_warning'   => 'ប្រើប៊ូតុងស្ដារ <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small> ដើម្បីស្តារពីការបម្រុងទុកពីមុន។ (បច្ចុប្បន្នវាមិនដំណើរការជាមួយការផ្ទុកឯកសារ S3 ឬ Docker ទេ។)<br><br>មូលដ្ឋានទិន្នន័យ <strong>ទាំងមូល :app_name របស់អ្នក និងឯកសារដែលបានផ្ទុកឡើងណាមួយនឹងត្រូវបានជំនួសទាំងស្រុង</strong> ដោយអ្វីដែលមាននៅក្នុងឯកសារបម្រុងទុក។  ',

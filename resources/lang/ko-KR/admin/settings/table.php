@@ -2,5 +2,5 @@
 
 return array(
     'created'   => '생성일',
-    'size' => 'Size',
+    'size' => '크기',
 );

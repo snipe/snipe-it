@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'デフォルトの場所のみ更新',
     'asset_location_update_actual' => '実際の場所のみ更新',
     'asset_not_deployable' => 'その資産ステータスは配備可能ではありません。この資産はチェックアウトできません。',
+    'asset_not_deployable_checkin' => 'その資産状態はデプロイできません。このステータスラベルを使用すると、資産をチェックインします。',
     'asset_deployable' => 'その資産ステータスは配備可能です。この資産はチェックアウトできます。',
     'processing_spinner' => '処理中です... (これは大きなファイルで少し時間がかかる可能性があります)',
     'optional_infos'  => 'オプション情報',

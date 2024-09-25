@@ -29,17 +29,17 @@ class Category extends SnipeModel
     use SoftDeletes;
 
     protected $table = 'categories';
-    protected $hidden = ['user_id', 'deleted_at'];
+    protected $hidden = ['created_by', 'deleted_at'];
 
     protected $casts = [
-        'user_id'      => 'integer',
+        'created_by'      => 'integer',
     ];
 
     /**
      * Category validation rules
      */
     public $rules = [
-        'user_id' => 'numeric|nullable',
+        'created_by' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|two_column_unique_undeleted:category_type',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
@@ -70,7 +70,7 @@ class Category extends SnipeModel
         'name',
         'require_acceptance',
         'use_default_eula',
-        'user_id',
+        'created_by',
     ];
 
     use Searchable;
@@ -228,6 +228,11 @@ class Category extends SnipeModel
         return $this->hasMany(\App\Models\AssetModel::class, 'category_id');
     }
 
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
     /**
      * Checks for a category-specific EULA, and if that doesn't exist,
      * checks for a settings level EULA
@@ -285,5 +290,10 @@ class Category extends SnipeModel
     public function scopeRequiresAcceptance($query)
     {
         return $query->where('require_acceptance', '=', true);
+    }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'categories.created_by', '=', 'admin_sort.id')->select('categories.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

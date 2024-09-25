@@ -422,7 +422,7 @@ class UpdateUserTest extends TestCase
         $this->assertTrue($user->refresh()->groups->contains($groupB));
     }
 
-    public function testMultiCompanyUserCannotBeMovedIfHasAsset()
+    public function testMultiCompanyUserCannotBeMovedIfHasAssetInDifferentCompany()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -434,7 +434,9 @@ class UpdateUserTest extends TestCase
         ]);
         $superUser = User::factory()->superuser()->create();
 
-        $asset = Asset::factory()->create();
+        $asset = Asset::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
 
         // no assets assigned, therefore success
         $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
@@ -452,6 +454,51 @@ class UpdateUserTest extends TestCase
         $asset->checkOut($user, $superUser);
 
         // asset assigned, therefore error
+        $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('error');
+
+        // same test but PUT
+        $this->actingAsForApi($superUser)->putJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'first_name' => 'Test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('error');
+    }
+
+    public function testMultiCompanyUserCanBeUpdatedIfHasAssetInSameCompany()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $companyA = Company::factory()->create();
+        $companyB = Company::factory()->create();
+
+        $user = User::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
+        $superUser = User::factory()->superuser()->create();
+
+        $asset = Asset::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
+
+        // no assets assigned from other company, therefore success
+        $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('success');
+
+        // same test but PUT
+        $this->actingAsForApi($superUser)->putJson(route('api.users.update', $user), [
+            'username'   => 'test',
+            'first_name' => 'Test',
+            'company_id' => $companyB->id,
+        ])->assertStatusMessageIs('success');
+
+        $asset->checkOut($user, $superUser);
+
+        // asset assigned from other company, therefore error
         $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
             'username'   => 'test',
             'company_id' => $companyB->id,
