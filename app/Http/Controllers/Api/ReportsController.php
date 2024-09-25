@@ -75,6 +75,7 @@ class ReportsController extends Controller
             'remote_ip',
             'user_agent',
             'action_source',
+            'action_date',
         ];
 
 
