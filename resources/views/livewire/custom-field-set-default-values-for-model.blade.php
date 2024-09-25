@@ -1,5 +1,4 @@
 <span>
-    @dump($errors)
     <div class="form-group{{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">
             {{ trans('admin/models/general.fieldset') }}
@@ -24,12 +23,9 @@
         @if ($this->fields)
 
                 @foreach ($this->fields as $field)
-                @if($errors->has($field->db_column_name()))
-                    "poop"
-                @endif
                     <div class="form-group" wire:key="field-{{ $field->id }}">
 
-                        <label class="col-md-3 control-label{{ $errors->has($field->name) ? ' has-error' : '' }}">{{ $field->name }}</label>
+                        <label class="col-md-3 control-label{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">{{ $field->name }}</label>
 
                         <div class="col-md-7">
 
@@ -128,10 +124,17 @@
                                         Unknown field element: {{ $field->element }}
                                     </span>
                                 @endif
+                                        <?php
+                                        $errormessage = $errors->first($field->db_column_name());
+                                        if ($errormessage) {
+                                            $errormessage = preg_replace('/ snipeit /', '', $errormessage);
+                                            print('<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> '.$errormessage.'</span>');
+                                        }
+                                        ?>
                         </div>
                     </div>
 
-                @endforeach
+            @endforeach
 
             @endif
 
