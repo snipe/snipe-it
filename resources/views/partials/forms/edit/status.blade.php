@@ -3,7 +3,7 @@
     <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
     <div class="col-md-7 col-sm-11{{  (Helper::checkIfRequired($item, 'status_id')) ? ' required' : '' }}">
         {{ Form::select('status_id', $statuslabel_list , old('status_id', $item->status_id), array('class'=>'select2 status_id', 'style'=>'width:100%','id'=>'status_select_id', 'aria-label'=>'status_id', 'required' => 'required')) }}
-        {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+        <x-form-error name="status_id" />
     </div>
     <div class="col-md-2 col-sm-2 text-left">
 

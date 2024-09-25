@@ -13,7 +13,7 @@
     <div class="form-group">
         <div class="col-md-9 col-md-offset-3">
             <img src="{{ Storage::disk('public')->url($image_path.e($item->{($fieldname ?? 'image')})) }}" class="img-responsive">
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            <x-form-error name="image_delete" />
         </div>
     </div>
 @endif
@@ -34,9 +34,8 @@
 
         <p class="help-block" id="uploadFile-status">{{ trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]) }} {{ $help_text ?? '' }}</p>
 
+        <x-form-error name="image" />
 
-
-        {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
     <div class="col-md-4 col-md-offset-3" aria-hidden="true">
         <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('general.alt_uploaded_image_thumbnail') }}">

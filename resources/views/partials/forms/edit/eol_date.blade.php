@@ -6,6 +6,6 @@
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="asset_eol_date" id="asset_eol_date" readonly value="{{  old('asset_eol_date', optional($item->asset_eol_date)->format('Y-m-d') ?? $item->asset_eol_date ?? '')  }}"  style="background-color:inherit" />
             <span class="input-group-addon"><x-icon type="calendar" /></span>
         </div>
-        {!! $errors->first('asset_eol_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+        <x-form-error name="asset_eol_date" />
     </div>
 </div>

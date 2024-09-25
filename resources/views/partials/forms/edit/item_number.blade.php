@@ -3,6 +3,6 @@
    <label for="item_no" class="col-md-3 control-label">{{ trans('admin/consumables/general.item_no') }}</label>
    <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'item_no')) ? ' required' : '' }}">
        <input class="form-control" type="text" name="item_no" id="item_no" value="{{ old('item_no', $item->item_no) }}" />
-       {!! $errors->first('item_no', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+       <x-form-error name="item_no" />
    </div>
 </div>

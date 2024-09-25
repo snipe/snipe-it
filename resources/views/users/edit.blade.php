@@ -66,7 +66,7 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-      <form class="form-horizontal" method="post" autocomplete="off"
+      <form class="form-horizontal" method="post" autocomplete="off" id="create-form"
             action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}"
             enctype="multipart/form-data" id="userForm">
       {{csrf_field()}}
@@ -89,8 +89,8 @@
                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" maxlength="191" />
-                    {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                    <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" maxlength="191" required="required" />
+                      <x-form-error name="first_name" />
                   </div>
                 </div>
 
@@ -99,7 +99,7 @@
                   <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" maxlength="191" />
-                    {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                      <x-form-error name="last_name" />
                   </div>
                 </div>
 
@@ -117,6 +117,7 @@
                         value="{{ old('username', $user->username) }}"
                         autocomplete="off"
                         maxlength="191"
+                        {{  (Helper::checkIfRequired($user, 'username')) ? ' required="required"' : '' }}
                         readonly
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
@@ -137,11 +138,7 @@
                         </div>
                     @endif
 
-                    @if ($errors->first('username'))
-                        <div class="col-md-8 col-md-offset-3">
-                            {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                        </div>
-                    @endif
+                    <x-form-error name="username" />
 
                 </div>
 
@@ -167,7 +164,7 @@
                       {{ trans('general.managed_ldap') }}
                     @endif
                     <span id="generated-password"></span>
-                    {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                        <x-form-error name="password" />
                   </div>
                   <div class="col-md-2">
                     @if ($user->ldap_import!='1')
@@ -200,7 +197,7 @@
                     @if (config('app.lock_passwords') && ($user->id))
                     <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                     @endif
-                    {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                      <x-form-error name="password_confirmation" />
                   </div>
                 </div>
                 @endif
@@ -244,7 +241,7 @@
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'email')) ? ' required' : '' }}">
                     <input
                       class="form-control"
-                      type="text"
+                      type="email"
                       name="email"
                       id="email"
                       maxlength="191"
@@ -254,9 +251,9 @@
                       readonly
                       onfocus="this.removeAttribute('readonly');">
                     @if (config('app.lock_passwords') && ($user->id))
-                    <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
+                        <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                     @endif
-                    {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                      <x-form-error name="email" />
                   </div>
                 </div>
 

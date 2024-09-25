@@ -7,7 +7,7 @@
            <input class="form-control" maxlength="5" type="text" name="qty" aria-label="qty" id="qty" value="{{ old('qty', $item->qty) }}" {!!  (Helper::checkIfRequired($item, 'qty')) ? ' required ' : '' !!}/>
        </div>
         <div class="col-md-12" style="padding-left:0px">
-       {!! $errors->first('qty', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+            <x-form-error name="qty" />
         </div>
    </div>
 </div>
