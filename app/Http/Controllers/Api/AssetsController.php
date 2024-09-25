@@ -56,6 +56,11 @@ class AssetsController extends Controller
     public function index(Request $request, $action = null, $upcoming_status = null) : JsonResponse | array
     {
 
+
+        // This handles the legacy audit endpoints :(
+        if ($action == 'audit') {
+            $action = 'audits';
+        }
         $filter_non_deprecable_assets = false;
 
         /**
@@ -154,8 +159,8 @@ class AssetsController extends Controller
          * Handle due and overdue audits and checkin dates
          */
         switch ($action) {
-            case 'audits':
-
+            // Audit (singular) is left over from earlier legacy APIs
+            case 'audits' :
                 switch ($upcoming_status) {
                     case 'due':
                         $assets->DueForAudit($settings);
