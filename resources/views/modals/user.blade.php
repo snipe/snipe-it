@@ -59,34 +59,36 @@
                             <div class="col-md-3 col-xs-12">
                                 <label class="control-label" for="modal-password">{{ trans('admin/users/table.password') }}:</label>
                             </div>
-                            <div class="col-md-8 col-xs-12 required"><input class="form-control"  type='password' name="password" id='modal-password' class="form-control">
+                            <div class="col-md-8 col-xs-12 required" style="margin-bottom:5px;">
+                                <input type='password' name="password" id='modal-password' class="form-control">
                                 <a href="#" class="left" id="modal-genPassword">Generate</a>
+                                <div id="modal-generated-password"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="dynamic-form-row">
                         <div class="form-group">
-                            <div class="col-md-3 col-xs-12">
+                            <div class="col-md-3 col-xs-12 ">
                                 <label class="control-label" for="modal-password_confirmation">{{ trans('admin/users/table.password_confirm') }}:</label>
                             </div>
-                        <div class="col-md-8 col-xs-12 required">
-                            <input class="form-control" type='password' name="password_confirmation" id='modal-password_confirmation' class="form-control">
-                            <div id="modal-generated-password"></div>
-                        </div>
-                    </div>
-                    </div>
-                    
+                            <div class="col-md-8 col-xs-12  required">
+                                <input class="form-control" type='password' name="password_confirmation" id='modal-password_confirmation'>
 
-                    
+                            </div>
+                         </div>
+                    </div>
+
 					<!-- Checkbox for activation new user, by default set for activated -->
 					<div class="dynamic-form-row">
-						<div class="col-md-offset-3 col-md-8 col-xs-12">
-                            <label class="form-control">
-						        <input type="checkbox" value="1" name="activated" id="modal-activated" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
-                                {{ trans('general.login_enabled') }}
-                            </label>
-						</div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12">
+                                <label class="form-control">
+                                    <input type="checkbox" value="1" name="activated" id="modal-activated" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
+                                    {{ trans('general.login_enabled') }}
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="dynamic-form-row">
                         @include('modals.partials.footer')
