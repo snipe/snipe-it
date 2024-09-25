@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Illuminate\Support\MessageBag;
 
 
 /**
@@ -29,6 +30,7 @@ use \Illuminate\Http\RedirectResponse;
  */
 class AssetModelsController extends Controller
 {
+    protected MessageBag $validatorErrors;
     /**
      * Returns a view that invokes the ajax tables which actually contains
      * the content for the accessories listing, which is generated in getDatatable.
@@ -158,7 +160,8 @@ class AssetModelsController extends Controller
 
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))) {
-                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                    //return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                    return redirect()->back()->withErrors($this->validatorErrors);
                 }
             }
 
@@ -484,6 +487,7 @@ class AssetModelsController extends Controller
         $validator = Validator::make($data, $rules);
 
         if($validator->fails()){
+            $this->validatorErrors = $validator->messages();
             return false;
         }
 

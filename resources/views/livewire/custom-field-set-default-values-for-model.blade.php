@@ -1,5 +1,4 @@
 <span>
-
     <div class="form-group{{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">
             {{ trans('admin/models/general.fieldset') }}
@@ -22,6 +21,10 @@
             @if ($this->fields)
 
                 @foreach ($this->fields as $field)
+                @dump($errors)
+                @if($errors->has($field->db_column_name()))
+                    "poop"
+                @endif
                     <div class="form-group" wire:key="field-{{ $field->id }}">
 
                         <label class="col-md-3 control-label{{ $errors->has($field->name) ? ' has-error' : '' }}">{{ $field->name }}</label>
