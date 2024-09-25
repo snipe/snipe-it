@@ -14,7 +14,8 @@ jobs:
       - uses: actions/stale@v9
         with:
           debug-only: true
-          operations-per-run: 100 # just while we're debugging
+          ascending: true
+          operations-per-run: 1000 # just while we're debugging
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           days-before-stale: 60
           days-before-close: 7
