@@ -11,6 +11,7 @@
         <div class="col-md-3">
             @if ($fieldset_id)
                 <label class="form-control">
+
                     {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
                     {{ trans('admin/models/general.add_default_values') }}
                 </label>
@@ -18,8 +19,9 @@
         </div>
     </div>
 
-    @if ($add_default_values || $errors->count() > 0)
-            @if ($this->fields)
+    @if ($add_default_values)
+
+        @if ($this->fields)
 
                 @foreach ($this->fields as $field)
                 @if($errors->has($field->db_column_name()))
