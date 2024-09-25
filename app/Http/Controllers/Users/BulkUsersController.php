@@ -13,6 +13,7 @@ use App\Models\Group;
 use App\Models\LicenseSeat;
 use App\Models\ConsumableAssignment;
 use App\Models\Consumable;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -76,6 +77,33 @@ class BulkUsersController extends Controller
                 }
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
 
+            } elseif ($request->input('bulk_actions') == 'print') {
+                $users = User::query()
+                    ->with([
+                        'assets.assetlog',
+                        'assets.assignedAssets.assetlog',
+                        'assets.assignedAssets.defaultLoc',
+                        'assets.assignedAssets.location',
+                        'assets.assignedAssets.model.category',
+                        'assets.defaultLoc',
+                        'assets.location',
+                        'assets.model.category',
+                        'accessories.assetlog',
+                        'accessories.category',
+                        'accessories.manufacturer',
+                        'consumables.assetlog',
+                        'consumables.category',
+                        'consumables.manufacturer',
+                        'licenses.category',
+                    ])
+                    ->withTrashed()
+                    ->findMany($request->input('ids'));
+
+                $users->each(fn($user) => $this->authorize('view', $user));
+
+                return view('users.print')
+                    ->with('users', $users)
+                    ->with('settings', Setting::getSettings());
             }
         }
 
