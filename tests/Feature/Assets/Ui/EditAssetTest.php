@@ -2,16 +2,20 @@
 
 namespace Tests\Feature\Assets\Ui;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\Location;
 use App\Models\StatusLabel;
 use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class EditAssetTest extends TestCase
 {
 
-    public function testPermissionRequiredToViewLicense()
+    public function testPermissionRequiredToViewAsset()
     {
         $asset = Asset::factory()->create();
         $this->actingAs(User::factory()->create())
@@ -62,6 +66,40 @@ class EditAssetTest extends TestCase
             ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
 
         $this->assertDatabaseHas('assets', ['asset_tag' => 'New Asset Tag']);
+    }
+
+    public function testNewCheckinIsLoggedIfStatusChangedToUndeployable()
+    {
+        Event::fake([CheckoutableCheckedIn::class]);
+
+        $user = User::factory()->create();
+        $deployable_status = Statuslabel::factory()->rtd()->create();
+        $achived_status = Statuslabel::factory()->archived()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create(['status_id' => $deployable_status->id]);
+        $this->assertTrue($asset->assignedTo->is($user));
+
+        $currentTimestamp = now();
+
+        $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
+            ->from(route('hardware.edit', $asset->id))
+            ->put(route('hardware.update', $asset->id), [
+                    'status_id' => $achived_status->id,
+                    'model_id' => $asset->model_id,
+                    'asset_tags' => $asset->asset_tag,
+                ],
+            )
+            ->assertStatus(302);
+            //->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));;
+
+        // $asset->refresh();
+        $asset = Asset::find($asset->id);
+        $this->assertNull($asset->assigned_to);
+        $this->assertNull($asset->assigned_type);
+        $this->assertEquals($achived_status->id, $asset->status_id);
+
+        Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($currentTimestamp) {
+            return Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp) < 2;
+        }, 1);
     }
 
 }

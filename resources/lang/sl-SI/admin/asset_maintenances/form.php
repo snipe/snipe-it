@@ -3,7 +3,7 @@
     return [
         'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Naslov',
-        'start_date'             => 'Start Date',
+        'start_date'             => 'Datum začetka',
         'completion_date'        => 'Completion Date',
         'cost'                   => 'Cena',
         'is_warranty'            => 'Izboljšanje garancije',

@@ -83,7 +83,7 @@ class UserObserver
             $logAction->target_type = User::class; // can we instead say $logAction->item = $asset ?
             $logAction->target_id = $user->id;
             $logAction->created_at = date('Y-m-d H:i:s');
-            $logAction->user_id = Auth::id();
+            $logAction->created_by = auth()->id();
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
         }
@@ -105,7 +105,7 @@ class UserObserver
         $logAction->item_type = User::class; // can we instead say $logAction->item = $asset ?
         $logAction->item_id = $user->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('create');
     }
 
@@ -123,7 +123,7 @@ class UserObserver
         $logAction->target_type = User::class; // can we instead say $logAction->item = $asset ?
         $logAction->target_id = $user->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('delete');
     }
 
@@ -141,7 +141,7 @@ class UserObserver
         $logAction->target_type = User::class; // can we instead say $logAction->item = $asset ?
         $logAction->target_id = $user->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('restore');
     }
 

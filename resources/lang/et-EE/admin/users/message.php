@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Oled selle vahendi tagasi lükanud.',
     'bulk_manager_warn'	        => 'Sinu kasutajad on edukalt muudetud, kuid sinu juhi-kirjet ei salvestatud sest juht, kelle valisid oli ka muudatavate kasutajate hulgas ning kasutaja ei või olla ise-enda juht. Palun vali oma kasutajad uuesti, jättes juhi kõrvale.',
     'user_exists'               => 'Kasutaja on juba olemas!',
-    'user_not_found'            => 'Kasutajat ei eksisteeri.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Login väli on kohustuslik',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Parooli väli on kohustuslik.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP-serverit ei õnnestunud otsida. Palun kontrollige oma LDAP-i serveri konfiguratsiooni LDAP-i konfiguratsioonifailis. <br>Viga LDAP serverist:',
         'ldap_could_not_get_entries' => 'LDAP-serverisse tehtud sissekandeid ei saanud. Palun kontrollige oma LDAP-i serveri konfiguratsiooni LDAP-i konfiguratsioonifailis. <br>Viga LDAP serverist:',
         'password_ldap' => 'Selle konto parooli haldab LDAP / Active Directory. Parooli muutmiseks võtke ühendust oma IT-osakonnaga.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

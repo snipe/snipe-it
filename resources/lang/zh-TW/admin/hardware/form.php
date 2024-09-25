@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => '只更新預設位置',
     'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => '該資產狀態無法部署。此資產無法被借出。',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => '該狀態可部署。此資產可以被借出。',
     'processing_spinner' => '處理中... (大型檔案可能需要一些時間)',
     'optional_infos'  => '選填資訊',

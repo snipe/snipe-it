@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Sicherungen',
     'backups_help'              => 'Backups erstellen, herunterladen und wiederherstellen ',
     'backups_restoring'         => 'Aus Backup wiederherstellen',
+    'backups_clean' => 'Bereinigen Sie die gesicherte Datenbank vor der Wiederherstellung',
+    'backups_clean_helptext' => "Dies kann nützlich sein, wenn Sie zwischen Datenbankversionen wechseln",
     'backups_upload'            => 'Backup hochladen',
     'backups_path'              => 'Sicherungen auf dem Server werden in <code>:path</code> gespeichert',
     'backups_restore_warning'   => 'Klicke den Wiederherstellungs-Knopf <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> um ein Backup wiederherzustellen. (Funktioniert derzeit nicht mit S3 Datenspeicher oder Docker.)<br><br><strong>Die gesamte :app_name Datenbank und alle hochgeladenen Dateien werden mit den Inhalten des Backups überschrieben.</strong>  ',

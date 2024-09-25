@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Copiile de rezervă',
     'backups_help'              => 'Creează, descarcă și restaurează copii de rezervă ',
     'backups_restoring'         => 'Restaurare din Backup',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Încărcare copie de rezervă',
     'backups_path'              => 'Copiile de rezervă de pe server sunt stocate în <code>:path</code>',
     'backups_restore_warning'   => 'Utilizaţi butonul de restaurare <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> pentru a restaura dintr-o copie de rezervă anterioară. (Acest lucru nu funcționează în prezent cu stocarea fișierului S3 sau cu Docker.<br><br>Întreaga bază de date <strong>cu :app_name şi orice fişiere încărcate vor fi înlocuite complet</strong> cu ce se află în fişierul de rezervă.  ',

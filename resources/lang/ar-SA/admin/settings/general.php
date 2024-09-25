@@ -31,6 +31,8 @@ return [
     'backups'					=> 'النسخ الإحتياطية',
     'backups_help'              => 'إنشاء وتنزيل واستعادة النسخ الاحتياطية ',
     'backups_restoring'         => 'استعادة من النسخة الاحتياطية',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'تحميل نسخة احتياطية',
     'backups_path'              => 'يتم تخزين النسخ الاحتياطي على الخادم في <code>:path</code>',
     'backups_restore_warning'   => 'استخدم زر الاستعادة <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> للاستعادة من نسخة احتياطية سابقة. (هذا لا يعمل حاليا مع وحدة تخزين الملفات S3 أو Docker.<br><br> <strong>الخاص بك قاعدة بيانات :app_name بأكملها وأي ملفات تم تحميلها سيتم استبدالها بالكامل</strong> بما هو موجود في ملف النسخ الاحتياطي.  ',

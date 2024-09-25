@@ -21,7 +21,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du dieses Asset-Modell entfernen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du dieses Asset-Modell entfernen möchtest?',
         'error'   => 'Beim Löschen des Modell ist ein Fehler aufgetreten. Bitte versuche es noch einmal.',
         'success' => 'Das Modell wurde erfolgreich gelöscht.'
     ),

@@ -130,7 +130,7 @@ class Component extends SnipeModel
      */
     public function assets()
     {
-        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id', 'note');
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'created_by', 'note');
     }
 
     /**
@@ -142,9 +142,9 @@ class Component extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 
     /**
@@ -309,5 +309,10 @@ class Component extends SnipeModel
     public function scopeOrderSupplier($query, $order)
     {
         return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'components.created_by', '=', 'admin_sort.id')->select('components.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

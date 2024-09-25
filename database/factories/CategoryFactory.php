@@ -29,7 +29,7 @@ class CategoryFactory extends Factory
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
         ];
     }
 

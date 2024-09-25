@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Sauvegardes',
     'backups_help'              => 'Créer, télécharger et restaurer des sauvegardes ',
     'backups_restoring'         => 'Restaurer à partir d\'une sauvegarde',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Téléverser la sauvegarde',
     'backups_path'              => 'Les sauvegardes sont stockées dans <code>:path</code> sur le serveur',
     'backups_restore_warning'   => 'Utilisez le bouton de restauration <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> pour restaurer à partir d\'une sauvegarde (cela ne fonctionne pas actuellement avec le stockage de fichiers S3 ou Docker).<br><br>Votre <strong>base de données :app_name tout entière et tous les fichiers téléchargés seront intégralement remplacés</strong> par ce qui se trouve dans le fichier de sauvegarde.  ',

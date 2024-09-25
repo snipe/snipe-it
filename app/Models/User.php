@@ -122,6 +122,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'jobtitle',
         'employee_num',
         'website',
+        'locale',
     ];
 
     /**

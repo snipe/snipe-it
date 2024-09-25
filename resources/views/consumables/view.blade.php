@@ -83,9 +83,9 @@
         <div class="tab-content">
           <div class="tab-pane active" id="details">
             <div class="row">
-
+              <div class="info-stack-container">
               <!-- Start button column -->
-              <div class="col-md-3 col-xs-12 col-sm-push-9">
+              <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
 
                 @if ($consumable->image!='')
                   <div class="col-md-12 text-center" style="padding-bottom: 20px;">
@@ -151,7 +151,7 @@
 
               <!-- End button column -->
 
-              <div class="col-md-9 col-xs-12 col-sm-pull-3">
+              <div class="col-md-9 col-xs-12 col-sm-pull-3 info-stack">
 
                 <div class="row-new-striped" style="margin: 0px;">
 
@@ -386,6 +386,7 @@
                   @endif
                 </div> <!--/end striped container-->
               </div> <!-- end col-md-9 -->
+              </div><!-- end info-stack-container -->
             </div> <!--/.row-->
           </div><!-- /.tab-pane -->
 

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'crwdns1345:0crwdne1345:0',
     'bulk_manager_warn'	        => 'crwdns1849:0crwdne1849:0',
     'user_exists'               => 'crwdns787:0crwdne787:0',
-    'user_not_found'            => 'crwdns11623:0crwdne11623:0',
+    'user_not_found'            => 'crwdns12744:0crwdne12744:0',
     'user_login_required'       => 'crwdns789:0crwdne789:0',
     'user_has_no_assets_assigned' => 'crwdns11868:0crwdne11868:0',
     'user_password_required'    => 'crwdns790:0crwdne790:0',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'crwdns1415:0crwdne1415:0',
         'ldap_could_not_get_entries' => 'crwdns1416:0crwdne1416:0',
         'password_ldap' => 'crwdns1889:0crwdne1889:0',
+        'multi_company_items_assigned' => 'crwdns12754:0crwdne12754:0'
     ),
 
     'deletefile' => array(

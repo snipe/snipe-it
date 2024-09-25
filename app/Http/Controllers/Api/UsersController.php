@@ -206,6 +206,10 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
+        if ($request->filled('locale')) {
+            $users = $users->where('users.locale', '=', $request->input('locale'));
+        }
+
 
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
@@ -276,6 +280,7 @@ class UsersController extends Controller
                         'end_date',
                         'autoassign_licenses',
                         'website',
+                        'locale',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
@@ -686,7 +691,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('2FA reset');
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
@@ -736,7 +741,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);

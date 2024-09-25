@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du dieses Zubehör löschen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du dieses Zubehör löschen möchtest?',
         'error'   => 'Beim Löschen dieses Zubehörs ist ein Problem aufgetreten. Bitte versuche es erneut.',
         'success' => 'Das Zubehör wurde erfolgreich gelöscht.'
     ),

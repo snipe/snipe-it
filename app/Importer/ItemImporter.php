@@ -94,7 +94,7 @@ class ItemImporter extends Importer
 
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
-        $this->item['user_id'] = $this->user_id;
+        $this->item['created_by'] = $this->created_by;
         $this->item['serial'] = $this->findCsvMatch($row, 'serial');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
@@ -301,7 +301,7 @@ class ItemImporter extends Importer
         $category = new Category();
         $category->name = $asset_category;
         $category->category_type = $item_type;
-        $category->user_id = $this->user_id;
+        $category->created_by = $this->created_by;
 
         if ($category->save()) {
             $this->log('Category '.$asset_category.' was created');
@@ -425,7 +425,7 @@ class ItemImporter extends Importer
         //Otherwise create a manufacturer.
         $manufacturer = new Manufacturer();
         $manufacturer->name = trim($item_manufacturer);
-        $manufacturer->user_id = $this->user_id;
+        $manufacturer->created_by = $this->created_by;
 
         if ($manufacturer->save()) {
             $this->log('Manufacturer '.$manufacturer->name.' was created');
@@ -466,7 +466,7 @@ class ItemImporter extends Importer
         $location->city = '';
         $location->state = '';
         $location->country = '';
-        $location->user_id = $this->user_id;
+        $location->created_by = $this->created_by;
 
         if ($location->save()) {
             $this->log('Location '.$asset_location.' was created');
@@ -502,7 +502,7 @@ class ItemImporter extends Importer
 
         $supplier = new Supplier();
         $supplier->name = $item_supplier;
-        $supplier->user_id = $this->user_id;
+        $supplier->created_by = $this->created_by;
 
         if ($supplier->save()) {
             $this->log('Supplier '.$item_supplier.' was created');

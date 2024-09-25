@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Backups',
     'backups_help'              => 'Opret, download og gendan sikkerhedskopier ',
     'backups_restoring'         => 'Gendanner fra sikkerhedskopi',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Upload Sikkerhedskopi',
     'backups_path'              => 'Sikkerhedskopier på serveren gemmes i <code>:path</code>',
     'backups_restore_warning'   => 'Brug gendannelsesknappen <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> til at gendanne fra en tidligere sikkerhedskopi. (Dette virker ikke i øjeblikket med S3 fillagring eller Docker.<br><br>Hele din <strong>:app_name database og eventuelle uploadede filer vil blive fuldstændig erstattet</strong> af, hvad der er i backup-filen.  ',
