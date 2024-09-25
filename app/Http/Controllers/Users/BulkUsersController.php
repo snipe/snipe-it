@@ -59,7 +59,7 @@ class BulkUsersController extends Controller
 
             // merge, confirm they have at least 2 users selected and display the merge screen
             } elseif ($request->input('bulk_actions') == 'merge') {
-                $this->authorize('update', User::class);
+                $this->authorize('delete', User::class);
                 if (($request->filled('ids')) && (count($request->input('ids')) > 1)) {
                     return view('users/confirm-merge')->with('users', $users);
                 // Not enough users selected, send them back
