@@ -52,7 +52,7 @@
                             <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">
                                 {{ trans('admin/hardware/table.icon') }}
                             </th>
-                            <th class="col-sm-3" data-searchable="false" data-sortable="true" data-field="action_date" data-formatter="dateDisplayFormatter">
+                            <th class="col-sm-3" data-searchable="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">
                                 {{ trans('general.date') }}
                             </th>
                             <th class="col-sm-2" data-searchable="true" data-sortable="true" data-field="created_by" data-formatter="usersLinkObjFormatter">
