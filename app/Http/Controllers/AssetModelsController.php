@@ -487,7 +487,6 @@ class AssetModelsController extends Controller
 
         if($validator->fails()){
             $this->validatorErrors = $validator->errors();
-            dump($this->validatorErrors);
             return false;
         }
 
