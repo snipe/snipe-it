@@ -2,6 +2,7 @@
 @php
     $class = $class ?? 'col-md-6';
     $style = $style ?? '';
+        $required = $required ?? '';
 @endphp
 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>

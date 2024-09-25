@@ -10,13 +10,13 @@
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
                 <div class="dynamic-form-row">
-                    @include('partials.forms.edit.name', ['item' => new \App\Models\Statuslabel(),'translated_name' => trans('admin/statuslabels/table.name')  ])
+                    @include('partials.forms.edit.name', ['required' => 'true', 'item' => new \App\Models\Statuslabel(),'translated_name' => trans('admin/statuslabels/table.name')  ])
                 </div>
 
                 <div class="dynamic-form-row">
                     <div class="col-md-3 col-xs-12"><label for="modal-type">{{ trans('admin/statuslabels/table.status_type') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12 required">{{ Form::select('type', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-type')) }}</div>
+                    <div class="col-md-8 col-xs-12">{{ Form::select('type', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-type', 'required',)) }}</div>
                 </div>
             </form>
         </div>

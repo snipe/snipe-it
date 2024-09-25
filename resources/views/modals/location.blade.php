@@ -9,7 +9,7 @@
             <form action="{{ route('api.locations.store') }}" onsubmit="return false">
                     <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-                @include('modals.partials.name')
+                @include('modals.partials.name', ['item' => new \App\Models\Location(), 'required' => 'true'])
 
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-city">{{ trans('general.city') }}:</label></div>

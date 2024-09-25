@@ -9,8 +9,8 @@
             <form action="{{ route('api.models.store') }}" onsubmit="return false">
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-                @include('modals.partials.name')
-                @include('modals.partials.categories-select')
+                @include('modals.partials.name', ['required' => 'true'])
+                @include('modals.partials.categories-select', ['required' => 'true'])
                 @include('modals.partials.manufacturer-select')
                 @include('modals.partials.model-number')
                 @include('modals.partials.fieldset-select')

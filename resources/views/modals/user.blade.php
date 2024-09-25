@@ -42,16 +42,16 @@
                         @include ('partials.forms.edit.location-profile-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
                     </div>
                     <div class="dynamic-form-row">
-                        @include('partials.forms.edit.name-first', ['class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
+                        @include('partials.forms.edit.name-first', [ 'required' => 'true', 'class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
                     </div>
                     <div class="dynamic-form-row">
-                    @include('partials.forms.edit.name-last', ['class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
+                    @include('partials.forms.edit.name-last', ['required' => 'true', 'class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
                     </div>
                     <div class="dynamic-form-row">
                         @include('partials.forms.edit.email')
                     </div>
                     <div class="dynamic-form-row">
-                        @include('partials.forms.edit.username')
+                        @include('partials.forms.edit.username', [ 'required' => 'true'])
                     </div>
 
                     <div class="dynamic-form-row">
@@ -59,8 +59,8 @@
                             <div class="col-md-3 col-xs-12">
                                 <label class="control-label" for="modal-password">{{ trans('admin/users/table.password') }}:</label>
                             </div>
-                            <div class="col-md-8 col-xs-12 required" style="margin-bottom:5px;">
-                                <input type='password' name="password" id='modal-password' class="form-control">
+                            <div class="col-md-8 col-xs-12 " style="margin-bottom:5px;">
+                                <input type='password' name="password" id='modal-password' class="form-control" required>
                                 <a href="#" class="left" id="modal-genPassword">Generate</a>
                                 <div id="modal-generated-password"></div>
                             </div>
@@ -72,8 +72,8 @@
                             <div class="col-md-3 col-xs-12 ">
                                 <label class="control-label" for="modal-password_confirmation">{{ trans('admin/users/table.password_confirm') }}:</label>
                             </div>
-                            <div class="col-md-8 col-xs-12  required">
-                                <input class="form-control" type='password' name="password_confirmation" id='modal-password_confirmation'>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" type='password' name="password_confirmation" id='modal-password_confirmation' required>
 
                             </div>
                          </div>
