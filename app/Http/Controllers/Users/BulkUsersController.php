@@ -36,7 +36,7 @@ class BulkUsersController extends Controller
      */
     public function edit(Request $request)
     {
-        $this->authorize('update', User::class);
+        $this->authorize('view', User::class);
 
         // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
@@ -48,16 +48,18 @@ class BulkUsersController extends Controller
 
             // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
+                $this->authorize('update', User::class);
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
 
             // bulk delete, display the bulk delete confirmation form
             } elseif ($request->input('bulk_actions') == 'delete') {
+                $this->authorize('delete', User::class);
                 return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
 
             // merge, confirm they have at least 2 users selected and display the merge screen
             } elseif ($request->input('bulk_actions') == 'merge') {
-
+                $this->authorize('delete', User::class);
                 if (($request->filled('ids')) && (count($request->input('ids')) > 1)) {
                     return view('users/confirm-merge')->with('users', $users);
                 // Not enough users selected, send them back
