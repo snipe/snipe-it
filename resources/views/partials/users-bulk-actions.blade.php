@@ -13,11 +13,11 @@
 
                     @can('update', \App\Models\User::class)
                         <option value="edit">{{ trans('general.bulk_edit') }}</option>
-                        <option value="merge">{!! trans('general.merge_users') !!}</option>
                     @endcan
 
                     @can('delete', \App\Models\User::class)
                         <option value="delete">{!! trans('general.bulk_checkin_delete') !!}</option>
+                        <option value="merge">{!! trans('general.merge_users') !!}</option>
                     @endcan
 
                     <option value="bulkpasswordreset">{{ trans('button.send_password_link') }}</option>
