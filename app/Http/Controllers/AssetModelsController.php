@@ -161,7 +161,7 @@ class AssetModelsController extends Controller
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))) {
                     //return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
-                    return redirect()->back()->withErrors($this->validatorErrors);
+                    return redirect()->back()->withInput()->withErrors($this->validatorErrors);
                 }
             }
 
@@ -487,7 +487,8 @@ class AssetModelsController extends Controller
         $validator = Validator::make($data, $rules);
 
         if($validator->fails()){
-            $this->validatorErrors = $validator->messages();
+            $this->validatorErrors = $validator->errors();
+            dump($this->validatorErrors);
             return false;
         }
 

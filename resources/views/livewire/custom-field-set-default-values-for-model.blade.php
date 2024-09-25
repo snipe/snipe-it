@@ -1,4 +1,5 @@
 <span>
+    @dump($errors)
     <div class="form-group{{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">
             {{ trans('admin/models/general.fieldset') }}
@@ -17,11 +18,10 @@
         </div>
     </div>
 
-    @if ($add_default_values)
+    @if ($add_default_values || $errors->count() > 0)
             @if ($this->fields)
 
                 @foreach ($this->fields as $field)
-                @dump($errors)
                 @if($errors->has($field->db_column_name()))
                     "poop"
                 @endif
