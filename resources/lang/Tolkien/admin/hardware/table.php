@@ -1,0 +1,32 @@
+<?php
+
+return [
+
+    'asset_tag'   	=> 'Teitha hen',
+    'asset_model'       => 'Ivneth',
+    'assigned_to'   => 'Bronnath',
+    'book_value'  	=> 'Hîr gweg',
+    'change' 		=> 'Min/Daur',
+    'checkout_date' => 'Lû checked out',
+    'checkoutto' 	=> 'Checked Out',
+    'components_cost' => 'Gweg ennas echedin',
+    'current_value' => 'Gweg ned dithen',
+    'diff' 			=> 'Haes',
+    'dl_csv' 		=> 'Othor CSV',
+    'eol' 			=> 'Cened Echuiv',
+    'id'      		=> 'ID',
+    'last_checkin_date' => 'Lû checked in ennas',
+    'location' 		=> 'Noss',
+    'purchase_cost'	=> 'Gweg',
+    'purchase_date'	=> 'Hanathren',
+    'serial'   		=> 'Nethren',
+    'status'   		=> 'Pened',
+    'title'      	=> 'Hen',
+    'image'		    => 'Ala i Golweg',
+    'days_without_acceptance' => 'Aran ú-hered bronneg',
+    'monthly_depreciation' => 'Thaur ned echuiv',
+    'requesting_user' => 'Bennenath User',
+    'requested_date' => 'Lû bennen',
+    'changed'       => 'Edhrannen',
+    'icon' => 'Thent',
+];
