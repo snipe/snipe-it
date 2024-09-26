@@ -52,6 +52,8 @@ mix
 mix
     .copy("./node_modules/@fortawesome/fontawesome-free/webfonts", "./public/css/webfonts")
 
+mix
+    .copy('resources/fonts', 'public/fonts');
 /**
  * Copy BS tables js file
  */

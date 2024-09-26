@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-@if(app()->getLocale() === 'sindarin')
-<html lang="{{ app()->getLocale() }}" class="tengwar-text">
+@if(app()->getLocale() === 'si-EL')
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="tengwar-text">
 @else
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
 dir="{{ Helper::determineLanguageDirection() }}">
-@else
+@endif
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
