@@ -19,9 +19,9 @@ return [
 
     'assets' => 'Assets sind Elemente, die mit Seriennummer oder einem Asset-Tag versehen sind. Sie sind meist höhere Werte, bei denen die Identifizierung eines bestimmten Gegenstands von Bedeutung ist.',
 
-    'categories' => 'Kategorien helfen Dir beim Organisieren von Assets. Beispielkategorien sind &quot;PCs&quot;, &quot;Laptops&quot;, &quot;Mobiltelefone&quot;, &quot;Tablets&quot; usw., jedoch kannst Du Kategorien nutzen, wie Du es für sinnvoll erachtest.',
+    'categories' => 'Kategorien helfen dir beim Organisieren von Assets. Beispielkategorien sind &quot;PCs&quot;, &quot;Laptops&quot;, &quot;Mobiltelefone&quot;, &quot;Tablets&quot; usw., jedoch kannst du Kategorien nutzen, wie du es für sinnvoll erachtest.',
 
-    'accessories' => 'Ein Zubehör ist alles, was Du an einen Benutzer ausgeben kannst, jedoch keine Seriennummer besitzt (oder es keinen Sinn macht diese zu verwalten). Zum Beispiel: Mäuse und Tastaturen.',
+    'accessories' => 'Ein Zubehör ist alles, was du an einen Benutzer ausgeben kannst, jedoch keine Seriennummer besitzt (oder es keinen Sinn macht diese zu verwalten). Zum Beispiel: Mäuse und Tastaturen.',
 
     'companies'     => 'Unternehmen können als einfaches Identifikationsfeld oder zur Begrenzung der Sichtbarkeit von Assets, Benutzer usw. verwendet werden, wenn die volle Unterstützung für Unternehmen in Ihren Admin-Einstellungen aktiviert ist.',
 

@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Резервні копії',
     'backups_help'              => 'Створення, завантаження і відновлення резервних копій ',
     'backups_restoring'         => 'Відновлення з резервної копії',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Завантажити резервну копію',
     'backups_path'              => 'Резервні копії на сервері зберігаються в <code>:path</code>',
     'backups_restore_warning'   => 'Скористайтеся кнопкою відновлення <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small> для відновлення з попередньої резервної копії. (Наразі це не працює зі сховищем файлів S3 або Docker.)<br><br>Ваша <strong>вся база даних :app_name і всі завантажені файли будуть повністю замінені</strong> файлом резервної копії.  ',

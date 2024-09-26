@@ -78,7 +78,7 @@ class AssetModelsController extends Controller
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
-        $model->user_id = Auth::id();
+        $model->created_by = auth()->id();
         $model->requestable = $request->has('requestable');
 
         if ($request->input('fieldset_id') != '') {
@@ -237,7 +237,7 @@ class AssetModelsController extends Controller
                 $logaction->item_type = AssetModel::class;
                 $logaction->item_id = $model->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
 

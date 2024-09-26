@@ -408,7 +408,7 @@ return [
     'checkout_tooltip' => 'Ελέγξτε αυτό το στοιχείο έξω',
     'checkin_tooltip' => 'Check this item in so that it is available for re-issue, re-imaging, etc',
     'checkout_user_tooltip' => 'Επιλέξτε αυτό το στοιχείο έξω σε ένα χρήστη',
-    'checkin_to_diff_location' => 'You can choose to check this asset in to a location other than this asset\'s default location of :default_location if one is set',
+    'checkin_to_diff_location' => 'Μπορείτε να επιλέξετε να ελέγξετε αυτό το στοιχείο σε μια τοποθεσία άλλη από την προεπιλεγμένη θέση αυτού του περιουσιακού στοιχείου του :default_location αν έχει οριστεί',
     'maintenance_mode'      => 'Η υπηρεσία δεν είναι προσωρινά διαθέσιμη για ενημερώσεις συστήματος. Παρακαλούμε ελέγξτε ξανά αργότερα.',
     'maintenance_mode_title' => 'Προσωρινά Μη Διαθέσιμο Σύστημα',
     'ldap_import'           => 'Ο κωδικός πρόσβασης χρήστη δεν πρέπει να γίνεται από το LDAP. (Αυτό σας επιτρέπει να στείλετε αιτήματα ξεχασμένων κωδικών.)',
@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Επίσης απαλή διαγραφή αυτών των χρηστών. Το ιστορικό των περιουσιακών στοιχείων τους θα παραμείνει άθικτο χωρίς / μέχρι να καθαρίσετε τις διαγραφές εγγραφών στις Ρυθμίσεις Διαχειριστή.',
     'bulk_checkin_delete_success' => 'Οι επιλεγμένοι χρήστες έχουν διαγραφεί και τα στοιχεία τους έχουν ελεγχθεί.',
     'bulk_checkin_success' => 'Τα στοιχεία για τους επιλεγμένους χρήστες έχουν ελεγχθεί.',
-    'set_to_null'           => 'Διαγραφή τιμών για αυτό το στοιχείο:asset_count στοιχείων ενεργητικού ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Διαγραφή τιμών :field για αυτόν τον χρήστη: Διαγραφή τιμών :field για όλους τους χρήστες :user_count ',
     'na_no_purchase_date'   => 'N/A - Δεν δόθηκε ημερομηνία αγοράς',
     'assets_by_status'      => 'Ενεργητικό ανά κατάσταση',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Λήξη',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

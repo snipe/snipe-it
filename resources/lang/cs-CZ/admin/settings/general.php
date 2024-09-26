@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Zálohy',
     'backups_help'              => 'Vytvořit, stáhnout a obnovit zálohy ',
     'backups_restoring'         => 'Obnovit ze zálohy',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Nahrát zálohu',
     'backups_path'              => 'Zálohy jsou uloženy v <code>:path</code>',
     'backups_restore_warning'   => 'Použijte tlačítko obnovení <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> pro obnovení z předchozí zálohy. (Toto v současné době nefunguje se S3 souborovým úložištěm nebo Docker.<br><br>Vaše <strong>celá databáze :app_name a všechny nahrané soubory budou zcela nahrazeny</strong> tím, co je v záložním souboru.  ',

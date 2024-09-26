@@ -58,7 +58,7 @@ return [
         'file_delete_success'   => '您的文件已成功删除',
         'file_delete_error'      => '该文件无法被删除',
         'file_missing' => '所选文件丢失',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => '选择的文件已被删除',
         'header_row_has_malformed_characters' => '标题行中的一个或多个属性包含格式错误的 UTF-8 字符',
         'content_row_has_malformed_characters' => '第一行内容中的一个或多个属性包含格式错误的 UTF-8 字符',
     ],

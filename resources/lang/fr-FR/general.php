@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Supprimer ces utilisateurs également. Leur historique de matériel restera intact jusqu\'à ce que vous les supprimiez définitivement depuis le panneau de configuration de l\'administrateur.',
     'bulk_checkin_delete_success' => 'Les utilisateurs sélectionnés ont été supprimés et leurs matériels ont été dissociés.',
     'bulk_checkin_success' => 'Les articles des utilisateurs sélectionnés ont été dissociés.',
-    'set_to_null'           => 'Supprimer des valeurs pour ce matériel|Supprimer des valeurs pour :asset_count matériels ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Supprimer les valeurs du champ :field pour cet·te utilisateur·trice|Supprimer les valeurs du champ :field pour les :user_count utilisateurs·trices ',
     'na_no_purchase_date'   => 'NC - Pas de date d\'achat renseignée',
     'assets_by_status'      => 'Matériels par statut',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Expire le',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count restant',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => '選擇語言',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> '美式英語',
         'en-GB'=> '英式英語',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> '祖魯語',
     ],
 
-    'select_country' => '選擇一個國家',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'阿森松島',
@@ -135,6 +135,7 @@ return [
         'EC'=>'厄瓜多',
         'EE'=>'愛沙尼亞',
         'EG'=>'埃及',
+        'GB-ENG'=>'England',
         'ER'=>'厄利垂亞',
         'ES'=>'西班牙',
         'ET'=>'衣索比亞',
@@ -233,6 +234,7 @@ return [
         'NG'=>'奈及利亞',
         'NI'=>'尼加拉瓜',
         'NL'=>'荷蘭',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'挪威',
         'NP'=>'尼泊爾',
         'NR'=>'諾魯',
@@ -260,7 +262,7 @@ return [
         'RU'=>'俄羅斯',
         'RW'=>'盧安達',
         'SA'=>'沙烏地阿拉伯',
-        'UK'=>'英國',
+        'GB-SCT'=>'英國',
         'SB'=>'索羅門群島',
         'SC'=>'塞席爾',
         'SS'=>'南蘇丹',
@@ -312,6 +314,7 @@ return [
         'VI'=>'美屬維京群島',
         'VN'=>'越南',
         'VU'=>'萬那杜',
+        'GB-WLS' =>'Wales',
         'WF'=>'瓦利斯和富圖納群島',
         'WS'=>'薩摩亞',
         'YE'=>'葉門',

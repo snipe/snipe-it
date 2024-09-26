@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Tem certeza que deseja restaurar seu banco de dados a partir de :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => 'Seu backup do sistema foi restaurado. Por favor, faça login novamente.'
     ],
     'purge' => [
         'error'     => 'Ocorreu um erro ao excluir os registros. ',

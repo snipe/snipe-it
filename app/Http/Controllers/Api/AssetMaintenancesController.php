@@ -34,7 +34,7 @@ class AssetMaintenancesController extends Controller
         $this->authorize('view', Asset::class);
 
         $maintenances = AssetMaintenance::select('asset_maintenances.*')
-            ->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company',  'asset.assetstatus', 'admin');
+            ->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company',  'asset.assetstatus', 'adminuser');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
@@ -46,6 +46,10 @@ class AssetMaintenancesController extends Controller
 
         if ($request->filled('supplier_id')) {
             $maintenances->where('asset_maintenances.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('created_by')) {
+            $maintenances->where('asset_maintenances.created_by', '=', $request->input('created_by'));
         }
 
         if ($request->filled('asset_maintenance_type')) {
@@ -69,7 +73,7 @@ class AssetMaintenancesController extends Controller
                                 'asset_tag',
                                 'asset_name',
                                 'serial',
-                                'user_id',
+                                'created_by',
                                 'supplier',
                                 'is_warranty',
                                 'status_label',
@@ -79,8 +83,8 @@ class AssetMaintenancesController extends Controller
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         switch ($sort) {
-            case 'user_id':
-                $maintenances = $maintenances->OrderAdmin($order);
+            case 'created_by':
+                $maintenances = $maintenances->OrderByCreatedBy($order);
                 break;
             case 'supplier':
                 $maintenances = $maintenances->OrderBySupplier($order);
@@ -124,7 +128,7 @@ class AssetMaintenancesController extends Controller
         // create a new model instance
         $maintenance = new AssetMaintenance();
         $maintenance->fill($request->all());
-        $maintenance->user_id = Auth::id();
+        $maintenance->created_by = auth()->id();
 
         // Was the asset maintenance created?
         if ($maintenance->save()) {
@@ -186,11 +190,8 @@ class AssetMaintenancesController extends Controller
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
-        $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
-        if (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot delete a maintenance for that asset'));
-        }
+        $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
         $assetMaintenance->delete();
 

@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'同時將這些使用者標記為已刪除。他們的資產歷史將保持完整，除非/直到您在管理設定中清除已刪除的記錄。',
     'bulk_checkin_delete_success' => '您選擇的使用者已被刪除，他們的項目已經歸還。',
     'bulk_checkin_success' => '已為選擇的使用者歸還項目。',
-    'set_to_null'           => '刪除此資產的值|刪除所有 :asset_count 資產的值 ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => '刪除此使用者的 :field 值|刪除所有 :user_count 使用者的 :field 值 ',
     'na_no_purchase_date'   => 'N/A - 未提供採購日期',
     'assets_by_status'      => '按狀態的資產',
@@ -559,8 +559,8 @@ return [
     'expires' => '過期',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

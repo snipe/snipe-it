@@ -2,10 +2,10 @@
 
 return [
 
-    'id'      => 'Identificación',
+    'id'      => 'ID',
     'months'   => 'Meses',
     'term'   => 'Duración',
     'title'      => 'Nombre ',
-    'depreciation_min' => 'Valor del piso',
+    'depreciation_min' => 'Valor mínimo',
 
 ];

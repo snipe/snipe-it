@@ -78,7 +78,7 @@ class AccessoryCheckoutController extends Controller
             AccessoryCheckout::create([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'user_id' => Auth::id(),
+                'created_by' => auth()->id(),
                 'assigned_to' => $target->id,
                 'assigned_type' => $target::class,
                 'note' => $request->input('note'),

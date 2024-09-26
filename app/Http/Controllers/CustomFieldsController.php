@@ -104,7 +104,7 @@ class CustomFieldsController extends Controller
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
             "show_in_requestable_list" => $request->get("show_in_requestable_list", 0),
-            "user_id" => Auth::id()
+            "user_id" => auth()->id()
         ]);
 
 
@@ -248,7 +248,7 @@ class CustomFieldsController extends Controller
         $field->name          = trim(e($request->get("name")));
         $field->element       = e($request->get("element"));
         $field->field_values  = $request->get("field_values");
-        $field->user_id       = Auth::id();
+        $field->created_by       = auth()->id();
         $field->help_text     = $request->get("help_text");
         $field->show_in_email = $show_in_email;
         $field->is_unique     = $request->get("is_unique", 0);

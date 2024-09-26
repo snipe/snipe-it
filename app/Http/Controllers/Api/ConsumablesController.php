@@ -86,8 +86,14 @@ class ConsumablesController extends Controller
             case 'company':
                 $consumables = $consumables->OrderCompany($order);
                 break;
+            case 'remaining':
+                $consumables = $consumables->OrderRemaining($order);
+                break;
             case 'supplier':
                 $consumables = $consumables->OrderSupplier($order);
+                break;
+            case 'created_by':
+                $consumables = $consumables->OrderByCreatedBy($order);
                 break;
             default:
                 // This array is what determines which fields should be allowed to be sorted on ON the table itself.
@@ -207,7 +213,7 @@ class ConsumablesController extends Controller
         $consumable = Consumable::with(['consumableAssignments'=> function ($query) {
             $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
         },
-        'consumableAssignments.admin'=> function ($query) {
+        'consumableAssignments.adminuser'=> function ($query) {
         },
         'consumableAssignments.user'=> function ($query) {
         },
@@ -225,7 +231,8 @@ class ConsumablesController extends Controller
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
                 'note' => ($consumable_assignment->note) ? e($consumable_assignment->note) : null,
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
+                'admin' => ($consumable_assignment->adminuser) ? $consumable_assignment->adminuser->present()->nameUrl() : null, // legacy, so we don't change the shape of the response
+                'created_by' => ($consumable_assignment->adminuser) ? $consumable_assignment->adminuser->present()->nameUrl() : null,
             ];
         }
 
@@ -274,7 +281,7 @@ class ConsumablesController extends Controller
         $consumable->users()->attach($consumable->id,
                 [
                     'consumable_id' => $consumable->id,
-                    'user_id' => $user->id,
+                    'created_by' => $user->id,
                     'assigned_to' => $request->input('assigned_to'),
                     'note' => $request->input('note'),
                 ]

@@ -56,6 +56,11 @@ class AssetsController extends Controller
     public function index(Request $request, $action = null, $upcoming_status = null) : JsonResponse | array
     {
 
+
+        // This handles the legacy audit endpoints :(
+        if ($action == 'audit') {
+            $action = 'audits';
+        }
         $filter_non_deprecable_assets = false;
 
         /**
@@ -121,7 +126,7 @@ class AssetsController extends Controller
         }
 
         $assets = Asset::select('assets.*')
-            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
+            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo', 'adminuser','model.depreciation',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
 
@@ -154,8 +159,8 @@ class AssetsController extends Controller
          * Handle due and overdue audits and checkin dates
          */
         switch ($action) {
-            case 'audits':
-
+            // Audit (singular) is left over from earlier legacy APIs
+            case 'audits' :
                 switch ($upcoming_status) {
                     case 'due':
                         $assets->DueForAudit($settings);
@@ -371,8 +376,33 @@ class AssetsController extends Controller
             case 'assigned_to':
                 $assets->OrderAssigned($order);
                 break;
+            case 'created_by':
+                $assets->OrderByCreatedByName($order);
+                break;
             default:
-                $assets->orderBy($column_sort, $order);
+                $numeric_sort = false;
+
+                // Search through the custom fields array to see if we're sorting on a custom field
+                if (array_search($column_sort, $all_custom_fields->pluck('db_column')->toArray()) !== false) {
+
+                    // Check to see if this is a numeric field type
+                    foreach ($all_custom_fields as $field) {
+                        if (($field->db_column == $sort_override) && ($field->format == 'NUMERIC')) {
+                            $numeric_sort = true;
+                            break;
+                        }
+                    }
+
+                    // This may not work for all databases, but it works for MySQL
+                    if ($numeric_sort) {
+                        $assets->orderByRaw($sort_override . ' * 1 ' . $order);
+                    } else {
+                        $assets->orderBy($sort_override, $order);
+                    }
+
+                } else {
+                    $assets->orderBy($column_sort, $order);
+                }
                 break;
         }
 
@@ -568,7 +598,7 @@ class AssetsController extends Controller
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
         $asset->fill($request->validated());
-        $asset->user_id    = Auth::id();
+        $asset->created_by    = auth()->id();
 
         /**
         * this is here just legacy reasons. Api\AssetController

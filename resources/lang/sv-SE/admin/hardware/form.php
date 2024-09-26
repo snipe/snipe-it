@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Uppdatera endast standardplats',
     'asset_location_update_actual' => 'Uppdatera endast faktisk plats',
     'asset_not_deployable' => 'Denna tillgångs status kan inte distribueras. Denna tillgång kan inte checkas ut.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Denna status är distribuerbar. Denna tillgång kan checkas ut.',
     'processing_spinner' => 'Bearbetar... (Detta kan ta lite tid på stora filer)',
     'optional_infos'  => 'Valfri information',

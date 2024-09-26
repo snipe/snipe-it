@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Също маркирай за изтриване потребителите. Историята на тяхните активи ще остане докато не изчистите изтритите записи през административните настройки.',
     'bulk_checkin_delete_success' => 'Избраните потребители бяха изтрити и техните активи вписани обратно.',
     'bulk_checkin_success' => 'Активите за избраните потребители бяха вписани обратно.',
-    'set_to_null'           => 'Изтрии стойнистите за този актив|Изтрии стойностите за всичките :asset_count актива ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Изтрий стойноста :field за този потребител|Изтрий стойността :field за всичките :user_count потребителя ',
     'na_no_purchase_date'   => 'N/A - Няма дата на закупуване',
     'assets_by_status'      => 'Статус на Активи',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Изтича',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => 'остават :count',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Hai rifiutato con successo questo prodotto.',
     'bulk_manager_warn'	        => 'I tuoi utenti sono stati aggiornati con successo, tuttavia la voce del gestore non è stata salvata perché il gestore selezionato è stato anche nell\'elenco utenti da modificare e gli utenti potrebbero non essere il proprio gestore. Seleziona nuovamente i tuoi utenti, esclusi il gestore.',
     'user_exists'               => 'Utente già esistente!',
-    'user_not_found'            => 'L\'utente non esiste.',
+    'user_not_found'            => 'L\'Utente non esiste, oppure non hai i permessi per visualizzarlo.',
     'user_login_required'       => 'È necessario il campo login',
     'user_has_no_assets_assigned' => 'Nessun bene assegnato all\'utente.',
     'user_password_required'    => 'È richiesta la password.',
@@ -40,7 +40,7 @@ return array(
         'delete_has_assets_var' => 'Questo utente ha ancora un Bene assegnato. Prima di procedere, si prega di farlo restituire.|Questo utente ha ancora :count Beni assegnati. Prima di procedere si prega di farglieli restituire.',
         'delete_has_licenses_var' => 'Questo utente ha ancora una licenza assegnata. Prima di procedere si prega di fargliela restituire|Questo utente ha ancora :count licenze assegnate. Prima di procedere si prega di fargliele restituire.',
         'delete_has_accessories_var' => 'Questo utente ha ancora un accessorio assegnato. Prima di procedere si prega di farglielo restituire|Questo utente ha ancora :count accessori assegnati. Prima di procedere si prega di farglieli restituire.',
-        'delete_has_locations_var' => 'Questo utente è ancora responsabile di una sede. Si prega di scegliere un altro responsabile prima di procedere.|Questo utente è ancora responsabile di :count sedi. Si prega di scegliere un altro responsabile prima di procedere.',
+        'delete_has_locations_var' => 'Questo utente è ancora responsabile di una Sede. Si prega di scegliere un altro responsabile prima di procedere.|Questo utente è ancora responsabile di :count Sedi. Si prega di scegliere un altro responsabile prima di procedere.',
         'delete_has_users_var' => 'Questo utente è ancora responsabile di un altro utente. Si prega di scegliere un altro responsabile prima di procedere.|Questo utente è ancora responsabile di :count utenti. Si prega di scegliere un altro responsabile prima di procedere.',
         'unsuspend' => 'C\'è stato un problema durante la riabilitazione dell\'utente. Riprova per favore.',
         'import'    => 'C\'è stato un problema durante l\'importazione degli utenti. Riprova per favore.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Impossibile trovare il server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_get_entries' => 'Impossibile ottenere voci dal server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'password_ldap' => 'La password per questo account è gestita da LDAP / Active Directory. Per cambiare la tua password, contatta il tuo reparto IT.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

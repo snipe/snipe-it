@@ -33,25 +33,25 @@ class LicenseSeeder extends Seeder
         License::factory()->count(1)->photoshop()->create([
             'category_id' => $categoryIds->random(),
             'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
 
         License::factory()->count(1)->acrobat()->create([
             'category_id' => $categoryIds->random(),
             'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
 
         License::factory()->count(1)->indesign()->create([
             'category_id' => $categoryIds->random(),
             'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
 
         License::factory()->count(1)->office()->create([
             'category_id' => $categoryIds->random(),
             'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
     }
 }

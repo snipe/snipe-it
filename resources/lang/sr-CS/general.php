@@ -419,7 +419,7 @@ return [
     'bulk_soft_delete'      =>'Privremeno obrišite ove korisnike. Njihova istorija imovine će ostati netaknuta osim/sve dok ne očistite izbrisane zapise u podešavanjima administratora.',
     'bulk_checkin_delete_success' => 'Vaši izabrani korisnici su izbrisani i njihove stavke su čekirane.',
     'bulk_checkin_success' => 'Stavke za izabrane korisnike su čekirane.',
-    'set_to_null'           => 'Obriši vrednosti ove imovine|Obriši vrednosti za svih :asset_count imovina ',
+    'set_to_null'           => 'Obriši vrednosti ovog izbora|Obriši vrednosti svih :selection_count izbora ',
     'set_users_field_to_null'  => 'Obriši :field vrednosti za ovog korisnika|Obriši :field vrednosti za svih :user_count korisnika ',
     'na_no_purchase_date'   => 'N/A - Nema datuma porudžbine',
     'assets_by_status'      => 'Imovina prema statusu',
@@ -559,8 +559,8 @@ return [
     'expires' => 'Ističe',
     'map_fields'=> 'Mapiraj polje :item_type',
     'remaining_var' => ':count preostalo',
-    'assets_in_var' => 'Imovina u :name :type',
     'label' => 'Oznaka',
     'import_asset_tag_exists' => 'Imovina sa oznakom imovine :asset_tag već postoji i izmena nije zatražena. Nijedna izmena nije izvršena.',
+    'countries_manually_entered_help' => 'Vrednosti sa zvezdicom (*) su ručno upisane i ne poklapaju se sa postojećim ISO 3166 vrednostima iz padajućeg menija',
 
 ];

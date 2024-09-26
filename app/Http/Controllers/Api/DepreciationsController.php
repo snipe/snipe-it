@@ -32,7 +32,8 @@ class DepreciationsController extends Controller
             'licenses_count',
         ];
 
-        $depreciations = Depreciation::select('id','name','months','depreciation_min','depreciation_type','user_id','created_at','updated_at')
+        $depreciations = Depreciation::select('id','name','months','depreciation_min','depreciation_type','created_at','updated_at', 'created_by')
+            ->with('adminuser')
             ->withCount('assets as assets_count')
             ->withCount('models as models_count')
             ->withCount('licenses as licenses_count');
@@ -44,10 +45,18 @@ class DepreciationsController extends Controller
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $depreciations->count()) ? $depreciations->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $depreciations->orderBy($sort, $order);
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
+
+        switch ($sort_override) {
+            case 'created_by':
+                $depreciations = $depreciations->OrderByCreatedBy($order);
+                break;
+            default:
+                $depreciations = $depreciations->orderBy($column_sort, $order);
+                break;
+        }
 
         $total = $depreciations->count();
         $depreciations = $depreciations->skip($offset)->take($limit)->get();

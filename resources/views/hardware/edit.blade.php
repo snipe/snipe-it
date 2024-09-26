@@ -263,7 +263,7 @@
                         $("#assignto_selector").hide();
                         $("#selected_status_status").removeClass('text-success');
                         $("#selected_status_status").addClass('text-danger');
-                        $("#selected_status_status").html('<x-icon type="warning" /> {{ trans('admin/hardware/form.asset_not_deployable')}} ');
+                        $("#selected_status_status").html('<x-icon type="warning" /> {{ (($item->assigned_to!='') && ($item->assigned_type!='') && ($item->deleted_at == '')) ? trans('admin/hardware/form.asset_not_deployable_checkin') : trans('admin/hardware/form.asset_not_deployable')  }} ');
                     }
                 }
             });
@@ -301,7 +301,7 @@
 
             e.preventDefault();
 
-            var auto_tag        = $("#asset_tag").val().replace(/[^\d]/g, '');
+            var auto_tag = $("#asset_tag").val().replace(/^{{ preg_quote(App\Models\Setting::getSettings()->auto_increment_prefix) }}/g, '');
             var box_html        = '';
 			const zeroPad 		= (num, places) => String(num).padStart(places, '0');
 
