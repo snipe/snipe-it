@@ -47,7 +47,7 @@ class LogListenerTest extends TestCase
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'note_added',
-            'user_id' => $noteAddedBy->id,
+            'created_by' => $noteAddedBy->id,
             'item_id' => $asset->id,
             'item_type' => Asset::class,
             'note' => 'My Cool Note!',
