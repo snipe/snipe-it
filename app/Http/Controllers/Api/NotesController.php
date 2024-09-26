@@ -22,10 +22,10 @@ class NotesController extends Controller
             ],
         ]);
 
-        $item = Asset::findOrFail($request->input("id"));
-        $this->authorize('update', $item);
         // This can be made dynamic by using $request->input('type') to determine which model type to add the note to.
         // For now, we are only placing this on Assets
+        $item = Asset::findOrFail($request->input("id"));
+        $this->authorize('update', $item);
 
         event(new NoteAdded($item, Auth::user(), $validated['note']));
 
