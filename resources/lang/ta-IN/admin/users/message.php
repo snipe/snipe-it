@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP சேவையகத்தை தேட முடியவில்லை. LDAP கட்டமைப்பு கோப்பில் உங்கள் LDAP சர்வர் கட்டமைப்பை சரிபார்க்கவும். <br> LDAP சேவையகத்திலிருந்து பிழை:',
         'ldap_could_not_get_entries' => 'LDAP சேவையகத்திலிருந்து உள்ளீடுகளை பெற முடியவில்லை. LDAP கட்டமைப்பு கோப்பில் உங்கள் LDAP சர்வர் கட்டமைப்பை சரிபார்க்கவும். <br> LDAP சேவையகத்திலிருந்து பிழை:',
         'password_ldap' => 'இந்த கணக்கிற்கான கடவுச்சொல் LDAP / Active Directory மூலம் நிர்வகிக்கப்படுகிறது. உங்கள் கடவுச்சொல்லை மாற்ற உங்கள் IT பிரிவை தொடர்பு கொள்ளவும்.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

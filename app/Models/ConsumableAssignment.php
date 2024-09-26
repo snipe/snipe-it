@@ -26,8 +26,8 @@ class ConsumableAssignment extends Model
         return $this->belongsTo(\App\Models\User::class, 'assigned_to');
     }
 
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 }

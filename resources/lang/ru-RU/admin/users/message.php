@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Не могу найти сервер LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
         'ldap_could_not_get_entries' => 'Не могу загрузить записи с сервера LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
         'password_ldap' => 'Пароль для этой учетной записи управляется LDAP/Active Directory. Пожалуйста, свяжитесь с департаментом ИТ, чтобы изменить свой пароль. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

@@ -73,7 +73,7 @@ return [
     'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
     'general_settings_help'     => 'Default EULA and more',
     'generate_backup'			=> '백업 생성',
-    'google_workspaces'         => 'Google Workspaces',
+    'google_workspaces'         => '구글 워크스페이스',
     'header_color'              => '머릿말 색상',
     'info'                      => '이 설정들은 설치본의 특정 분야를 설정하는 것입니다.',
     'label_logo'                => '라벨 로고',

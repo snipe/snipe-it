@@ -9,6 +9,7 @@ use App\Models\Setting;
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Facades\Gate;
+use App\Rules\AssetCannotBeCheckedOutToNondeployableStatus;
 
 class StoreAssetRequest extends ImageUploadRequest
 {
@@ -61,6 +62,7 @@ class StoreAssetRequest extends ImageUploadRequest
 
         return array_merge(
             $modelRules,
+            ['status_id' => [new AssetCannotBeCheckedOutToNondeployableStatus()]],
             parent::rules(),
         );
     }

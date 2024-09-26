@@ -30,7 +30,7 @@ class ConsumableFactory extends Factory
         return [
             'name' => $this->faker->words(3, true),
             'category_id' => Category::factory(),
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'item_no' => $this->faker->numberBetween(1000000, 50000000),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
@@ -104,7 +104,7 @@ class ConsumableFactory extends Factory
 
             $consumable->users()->attach($consumable->id, [
                 'consumable_id' => $consumable->id,
-                'user_id' => $user->id,
+                'created_by' => $user->id,
                 'assigned_to' => $user->id,
                 'note' => '',
             ]);
@@ -124,7 +124,7 @@ class ConsumableFactory extends Factory
             $consumable->users()->attach($consumable->id, [
                 'consumable_id' => $consumable->id,
                 'created_at' => Carbon::now(),
-                'user_id' => User::factory()->create()->id,
+                'created_by' => User::factory()->create()->id,
                 'assigned_to' => $user->id ?? User::factory()->create()->id,
             ]);
         });

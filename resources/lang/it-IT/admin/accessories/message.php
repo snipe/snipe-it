@@ -28,7 +28,7 @@ return array(
         'unavailable'   => 'Accessorio non disponibile per l\'assegnazione. Controlla la quantità disponibile',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Al momento c\'è solo un accessorio disponibile di questo tipo, ma si sta cercando di assegnarne :checkout_qty. Si prega di modificare la quantità da assegnare oppure la quantità totale in magazzino di questo accessorio e poi riprovare.|Ci sono :number_currently_remaining accessori disponibili in magazzino, ma si sta cercando di assegnarne :checkout_qty. Si prega di regolare la quantità da assegnare oppure la quantità totale in magazzino di questo accessorio e poi riprovare.',
             ),
            
     ),

@@ -16,22 +16,22 @@ class StatuslabelSeeder extends Seeder
 
         Statuslabel::factory()->rtd()->create([
             'name' => 'Ready to Deploy',
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
 
         Statuslabel::factory()->pending()->create([
             'name' => 'Pending',
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
 
         Statuslabel::factory()->archived()->create([
             'name' => 'Archived',
-            'user_id' => $admin->id,
+            'created_by' => $admin->id,
         ]);
 
-        Statuslabel::factory()->outForDiagnostics()->create(['user_id' => $admin->id]);
-        Statuslabel::factory()->outForRepair()->create(['user_id' => $admin->id]);
-        Statuslabel::factory()->broken()->create(['user_id' => $admin->id]);
-        Statuslabel::factory()->lost()->create(['user_id' => $admin->id]);
+        Statuslabel::factory()->outForDiagnostics()->create(['created_by' => $admin->id]);
+        Statuslabel::factory()->outForRepair()->create(['created_by' => $admin->id]);
+        Statuslabel::factory()->broken()->create(['created_by' => $admin->id]);
+        Statuslabel::factory()->lost()->create(['created_by' => $admin->id]);
     }
 }

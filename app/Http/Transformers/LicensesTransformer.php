@@ -61,7 +61,7 @@ class LicensesTransformer
             'checkin' => Gate::allows('checkin', License::class),
             'clone' => Gate::allows('create', License::class),
             'update' => Gate::allows('update', License::class),
-            'delete' => (Gate::allows('delete', License::class) && ($license->seats == $license->availCount()->count())) ? true : false,
+            'delete' => (Gate::allows('delete', License::class) && ($license->free_seats_count > 0)) ? true : false,
         ];
 
         $array += $permissions_array;

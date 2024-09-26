@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Haku LDAP-palvelimelta ei onnistunut ei voitu hakea. Tarkista LDAP-palvelimen määritys. <br>LDAP-palvelimen virhe:',
         'ldap_could_not_get_entries' => 'LDAP-palvelimelta ei palautunut kohteita. Tarkista LDAP-palvelimen määritys. <br>LDAP-palvelimen virhe:',
         'password_ldap' => 'Tätä salasanaa hallinnoi LDAP / Active Directory. Vaihda salasanasi IT-osastolla.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nije moguće pretražiti LDAP server. Proverite konfiguraciju LDAP servera. <br>Greška sa LDAP servera:',
         'ldap_could_not_get_entries' => 'Nije bilo moguće dobiti zapise sa LDAP servera. Proverite konfiguraciju LDAP servera. <br>Greška sa LDAP servera:',
         'password_ldap' => 'Lozinku za ovaj nalog kontroliše LDAP / Active Directory. Obratite se IT centru za promenu lozinke. ',
-        'multi_company_items_assigned' => 'Ovaj korisnim ima zaduženu imovinu. Razdužite je pre promene kompanije.'
+        'multi_company_items_assigned' => 'Ovaj korisnik poseduje zadužene stavke koje pripadaju drugoj kompaniji. Molim vas razdužite ih ili promenite njihovu kompaniju.'
     ),
 
     'deletefile' => array(

@@ -25,7 +25,7 @@ class DepartmentFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word() . ' Department',
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'location_id' => Location::factory(),
         ];
     }

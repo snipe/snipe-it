@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
@@ -16,6 +17,7 @@ use Watson\Validating\ValidatingTrait;
 class PredefinedKit extends SnipeModel
 {
     protected $presenter = \App\Presenters\PredefinedKitPresenter::class;
+    use HasFactory;
     use Presentable;
     protected $table = 'kits';
 
@@ -133,6 +135,13 @@ class PredefinedKit extends SnipeModel
      */
     protected $searchableRelations = [];
 
+
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
     /**
      * Establishes the kits -> models relationship
      * @return \Illuminate\Database\Eloquent\Relations\Relation
@@ -179,4 +188,9 @@ class PredefinedKit extends SnipeModel
      * BEGIN QUERY SCOPES
      * -----------------------------------------------
      **/
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'kits.created_by', '=', 'admin_sort.id')->select('kits.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
 }

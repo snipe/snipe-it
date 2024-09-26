@@ -284,6 +284,7 @@ return [
     'status_label'			=> 'Status Label',
     'status'    			=> 'Status',
     'accept_eula'           => 'Acceptance Agreement',
+    'show_or_hide_eulas' => 'Show/Hide EULAs',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
     'sure_to_delete'        => 'Are you sure you wish to delete',

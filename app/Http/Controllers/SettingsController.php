@@ -181,7 +181,7 @@ class SettingsController extends Controller
         $settings->brand = 1;
         $settings->locale = $request->input('locale', 'en-US');
         $settings->default_currency = $request->input('default_currency', 'USD');
-        $settings->user_id = 1;
+        $settings->created_by = 1;
         $settings->email_domain = $request->input('email_domain');
         $settings->email_format = $request->input('email_format');
         $settings->next_auto_tag_base = 1;
