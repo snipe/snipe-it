@@ -139,7 +139,7 @@
             <tbody>
             @foreach ($show_user->assets as $asset)
                 @php
-                    if ($asset->model->category->getEula()) $eulas[] = $asset->model->category->getEula()
+                    if (($asset->model->category) && ($asset->model->category->getEula())) $eulas[] = $asset->model->category->getEula()
                 @endphp
                 <tr>
                     <td>{{ $counter }}</td>
