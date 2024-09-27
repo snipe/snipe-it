@@ -262,55 +262,14 @@ $(function () {
 	$(".select2-hidden-accessible").on('select2:closing', function (e) {
 		var element = $(this);
 		var value = getSelect2Value(element);
+		var assetStatusType = element.data("asset-status-type");
 		var noForceAjax = false;
 		var isMouseUp = false;
 		if(e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
 		if(e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
 		
 		if(value && !noForceAjax && !isMouseUp) {
-			var endpoint = element.data("endpoint");
-			var assetStatusType = element.data("asset-status-type");
-			$.ajax({
-				url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
-				dataType: 'json',
-				headers: {
-					"X-Requested-With": 'XMLHttpRequest',
-					"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-				},
-			}).done(function(response) {
-				var currentlySelected = element.select2('data').map(function (x){ 
-                    return +x.id;
-                }).filter(function (x) {
-                    return x !== 0;
-                });
-				
-				// makes sure we're not selecting the same thing twice for multiples
-				var filteredResponse = response.results.filter(function(item) {
-					return currentlySelected.indexOf(+item.id) < 0;
-				});
-
-				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.results[0];
-				
-				if(first && first.id) {
-					first.selected = true;
-					
-					if($("option[value='" + first.id + "']", element).length < 1) {
-						var option = new Option(first.text, first.id, true, true);
-						element.append(option);
-					} else {
-						var isMultiple = element.attr("multiple") == "multiple";
-						element.val(isMultiple? element.val().concat(first.id) : element.val(first.id));
-					}
-					element.trigger('change');
-
-					element.trigger({
-						type: 'select2:select',
-						params: {
-							data: first
-						}
-					});
-				}
-			});
+            assetSearch($(this), value, assetStatusType);
 		}
 	});
 
@@ -597,3 +556,58 @@ document.addEventListener('livewire:init', () => {
         });
     });
 });
+
+/* Set of functions to query assets informations
+   Mainly used to update the select2 field content
+*/
+function assetSearch(element, string, assetStatusType){
+    var endpoint = element.data("endpoint");
+    $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + string + '&page=1' + (assetStatusType ? '&assetStatusType=' + assetStatusType : ''),
+        dataType: 'json',
+        headers: {
+            "X-Requested-With": 'XMLHttpRequest',
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        }
+    }).done(function (response) {
+        var currentlySelected = element.select2('data').map(function (x) {
+            return +x.id;
+        }).filter(function (x) {
+            return x !== 0;
+        });
+
+        // makes sure we're not selecting the same thing twice for multiples
+        var filteredResponse = response.results.filter(function (item) {
+            return currentlySelected.indexOf(+item.id) < 0;
+        });
+        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
+        if (first && first.id) {
+            first.selected = true;
+            if ($("option[value='" + first.id + "']", element).length < 1) {
+                var option = new Option(first.text, first.id, false, true);
+                element.append(option);
+            } else {
+                var isMultiple = element.attr("multiple") == "multiple";
+                element.val(isMultiple ? element.val().concat(first.id) : element.val(first.id));
+            }
+            element.trigger('change');
+            element.trigger({
+                type: 'select2:select',
+                params: {
+                    data: first
+                }
+            });
+        }
+    });
+}
+
+/* Make this function available into global scope */
+window.load_bulkassets = function (select_assets_id, assets){
+        // Add options to the select2 box
+        for(let k = 0; k < assets.length; k++){
+            var search_string = assets[k].asset_tag;
+            var element = $("#" + select_assets_id);
+            assetSearch(element, search_string, null);
+        }
+        return true;
+}

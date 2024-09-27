@@ -23,7 +23,8 @@ class SelectlistTransformer
         // Loop through the paginated collection to set the array values
         foreach ($select_items as $select_item) {
             $items_array[] = [
-                'id' => (int) $select_item->id,
+                'id' => $select_item->id,
+                'name' => ($select_item->asset_tag) ? $select_item->asset_tag : null,
                 'text' => ($select_item->use_text) ? $select_item->use_text : $select_item->name,
                 'image' => ($select_item->use_image) ? $select_item->use_image : null,
 

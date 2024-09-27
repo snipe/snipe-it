@@ -1422,7 +1422,7 @@ class Asset extends Depreciable
 
     public function scopeDeployed($query)
     {
-        return $query->where('assigned_to', '>', '0');
+        return $query->whereNotNull('assets.assigned_to');
     }
 
   /**

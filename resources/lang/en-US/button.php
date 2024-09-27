@@ -5,6 +5,8 @@ return [
     'add'    	                => 'Add New',
     'cancel'                    => 'Cancel',
     'checkin_and_delete'  	    => 'Checkin All / Delete User',
+    'checkin'                   => 'Checkin',
+    'checkout'                  => 'Checkout',
     'delete'  	                => 'Delete',
     'edit'    	                => 'Edit',
     'clone'    	                => 'Clone',

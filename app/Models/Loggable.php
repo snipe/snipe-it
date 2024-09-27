@@ -159,7 +159,8 @@ trait Loggable
             if ($key == 'action_date' && $value != $action_date) {
                 $changed[$key]['old'] = $value;
                 $changed[$key]['new'] = is_string($action_date) ? $action_date : $action_date->format('Y-m-d H:i:s');
-            } elseif ($value != $this->getAttributes()[$key]) {
+            // Make sure the key exists to prevent php error
+            } elseif (array_key_exists($key, $this->getAttributes()) && $value != $this->getAttributes()[$key]) {
                 $changed[$key]['old'] = $value;
                 $changed[$key]['new'] = $this->getAttributes()[$key];
             }

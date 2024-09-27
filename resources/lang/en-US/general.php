@@ -62,6 +62,7 @@ return [
     'checkin'  				=> 'Checkin',
     'checkin_from'  		=> 'Checkin from',
     'checkout'  			=> 'Checkout',
+    'checkout_status'		=> 'Checkout Status',
     'checkouts_count'       => 'Checkouts',
     'checkins_count'        => 'Checkins',
     'user_requests_count'   => 'Requests',
