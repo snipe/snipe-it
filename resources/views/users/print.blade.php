@@ -236,7 +236,7 @@
 
             @foreach ($show_user->licenses as $license)
                 @php
-                    if ($license->category->getEula()) $eulas[] = $license->category->getEula()
+                    if (($license->category) && ($license->category->getEula())) $eulas[] = $license->category->getEula()
                 @endphp
                 <tr>
                     <td>{{ $lcounter }}</td>
@@ -294,7 +294,7 @@
             @foreach ($show_user->accessories as $accessory)
                 @if ($accessory)
                     @php
-                        if ($accessory->category->getEula()) $eulas[] = $accessory->category->getEula()
+                        if (($accessory->category) && ($accessory->category->getEula())) $eulas[] = $accessory->category->getEula()
                     @endphp
                     <tr>
                         <td>{{ $acounter }}</td>
@@ -357,7 +357,7 @@
             @foreach ($show_user->consumables as $consumable)
                 @if ($consumable)
                     @php
-                        if ($consumable->category->getEula()) $eulas[] = $consumable->category->getEula()
+                        if (($consumable->category) && ($consumable->category->getEula())) $eulas[] = $consumable->category->getEula()
                     @endphp
                     <tr>
                         <td>{{ $ccounter }}</td>
