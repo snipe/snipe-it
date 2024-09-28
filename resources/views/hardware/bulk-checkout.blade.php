@@ -27,7 +27,18 @@
         <form class="form-horizontal" method="post" action="" autocomplete="off">
           {{ csrf_field() }}
 
-          <!-- Checkout selector -->
+            @include ('partials.forms.edit.asset-select', [
+           'translated_name' => trans('general.assets'),
+           'fieldname' => 'selected_assets[]',
+           'multiple' => true,
+           'required' => true,
+           'asset_status_type' => 'RTD',
+           'select_id' => 'assigned_assets_select',
+         ])
+
+
+
+            <!-- Checkout selector -->
           @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
           @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
@@ -74,13 +85,6 @@
             </div>
           </div>
 
-          @include ('partials.forms.edit.asset-select', [
-            'translated_name' => trans('general.assets'),
-            'fieldname' => 'selected_assets[]',
-            'multiple' => true,
-            'asset_status_type' => 'RTD',
-            'select_id' => 'assigned_assets_select',
-          ])
 
 
       </div> <!--./box-body-->

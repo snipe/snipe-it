@@ -30,7 +30,7 @@
   <div class="row">
 
     <!-- Language -->
-    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'default_language')) ? ' required' : '' }} {{$errors->has('default_language') ? 'error' : ''}}">
+    <div class="form-group col-lg-6{{$errors->has('default_language') ? ' error' : ''}}">
       <label for="locale">
         {{ trans('admin/settings/general.default_language') }}
       </label>
@@ -39,7 +39,7 @@
     </div>
 
     <!-- Currency -->
-    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\Setting::class, 'default_currency')) ? ' required' : '' }} {{$errors->has('default_currency') ? 'error' : ''}}">
+    <div class="form-group col-lg-6{{$errors->has('default_currency') ? ' error' : ''}}">
       {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
       {{ Form::text('default_currency', old('default_currency'), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
 
@@ -70,14 +70,14 @@
 
   <div class="row">
 
-    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'auto_increment_prefix')) ? ' required' : '' }} {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
+    <div class="form-group col-lg-6{{ $errors->has('auto_increment_prefix') ? ' error' : '' }}">
       {{ Form::label('auto_increment_prefix', trans('admin/settings/general.auto_increment_prefix')) }}
       {{ Form::text('auto_increment_prefix', old('auto_increment_prefix'), array('class' => 'form-control')) }}
 
       {!! $errors->first('auto_increment_prefix', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 
-    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'zerofill_count')) ? ' required' : '' }} {{ $errors->has('zerofill_count') ? 'error' : '' }}">
+    <div class="form-group col-lg-6{{ $errors->has('zerofill_count') ? ' error' : '' }}">
       {{ Form::label('zerofill_count', trans('admin/settings/general.zerofill_count')) }}
       {{ Form::text('zerofill_count', old('zerofill_count', 5), array('class' => 'form-control')) }}
 
