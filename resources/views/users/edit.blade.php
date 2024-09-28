@@ -150,7 +150,7 @@
                         maxlength="500"
                         autocomplete="off"
                         readonly
-                        {{  (Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}
+                        {{  ((Helper::checkIfRequired($user, 'password')) && (!$user->id)) ? ' required' : '' }}
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     @else
@@ -184,7 +184,7 @@
                     autocomplete="off"
                     aria-label="password_confirmation"
                     readonly
-                    {{  ((Helper::checkIfRequired($user, 'password_confirmation')) && (!$user->id)) ? ' required' : '' }}
+                    {{  (!$user->id) ? ' required' : '' }}
                     onfocus="this.removeAttribute('readonly');"
                     {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                     >
