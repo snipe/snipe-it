@@ -67,6 +67,7 @@ final class Company extends SnipeModel
         'phone',
         'fax',
         'email',
+        'created_by'
     ];
 
     private static function isFullMultipleCompanySupportEnabled()
@@ -186,12 +187,15 @@ final class Company extends SnipeModel
      */
     public function isDeletable()
     {
+
         return Gate::allows('delete', $this)
-                && ($this->assets()->count() === 0)
-                && ($this->accessories()->count() === 0)
-                && ($this->consumables()->count() === 0)
-                && ($this->components()->count() === 0)
-                && ($this->users()->count() === 0);
+            && (($this->assets_count ?? $this->assets()->count()) === 0)
+            && (($this->accessories_count ?? $this->accessories()->count()) === 0)
+            && (($this->licenses_count ?? $this->licenses()->count()) === 0)
+            && (($this->components_count ?? $this->components()->count()) === 0)
+            && (($this->consumables_count ?? $this->consumables()->count()) === 0)
+            && (($this->accessories_count ?? $this->accessories()->count()) === 0)
+            && (($this->users_count ?? $this->users()->count()) === 0);
     }
 
     /**
@@ -294,6 +298,12 @@ final class Company extends SnipeModel
 
     }
 
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
     /**
      * I legit do not know what this method does, but we can't remove it (yet).
      *
@@ -327,6 +337,15 @@ final class Company extends SnipeModel
 
             return $q;
         }
+    }
+
+
+    /**
+     * Query builder scope to order on the user that created it
+     */
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'companies.created_by', '=', 'admin_sort.id')->select('companies.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 
 }

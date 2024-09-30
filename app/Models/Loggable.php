@@ -37,7 +37,7 @@ trait Loggable
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
         if (auth()->user()) {
-            $log->user_id = auth()->id();
+            $log->created_by = auth()->id();
         }
 
         if (! isset($target)) {
@@ -149,7 +149,7 @@ trait Loggable
         }
 
         if (auth()->user()) {
-            $log->user_id = auth()->id();
+            $log->created_by = auth()->id();
         }
 
         $changed = [];
@@ -225,14 +225,14 @@ trait Loggable
         }
         $log->location_id = ($location_id) ? $location_id : null;
         $log->note = $note;
-        $log->user_id = auth()->id();
+        $log->created_by = auth()->id();
         $log->filename = $filename;
         $log->logaction('audit');
 
         $params = [
             'item' => $log->item,
             'filename' => $log->filename,
-            'admin' => $log->admin,
+            'admin' => $log->adminuser,
             'location' => ($location) ? $location->name : '',
             'note' => $note,
         ];
@@ -248,9 +248,9 @@ trait Loggable
      */
     public function logCreate($note = null)
     {
-        $user_id = -1;
+        $created_by = -1;
         if (auth()->user()) {
-            $user_id = auth()->id();
+            $created_by = auth()->id();
         }
         $log = new Actionlog;
         if (static::class == LicenseSeat::class) {
@@ -262,7 +262,7 @@ trait Loggable
         }
         $log->location_id = null;
         $log->note = $note;
-        $log->user_id = $user_id;
+        $log->created_by = $created_by;
         $log->logaction('create');
         $log->save();
 
@@ -284,7 +284,7 @@ trait Loggable
             $log->item_type = static::class;
             $log->item_id = $this->id;
         }
-        $log->user_id = auth()->id();
+        $log->created_by = auth()->id();
         $log->note = $note;
         $log->target_id = null;
         $log->created_at = date('Y-m-d H:i:s');

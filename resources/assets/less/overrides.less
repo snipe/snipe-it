@@ -156,10 +156,10 @@ a.accordion-header {
   height: 150px;
 }
 
-
 .select2-container {
   width: 100%;
 }
+
 .error input {
   color: #a94442;
   border: 2px solid #a94442 !important;
@@ -341,8 +341,11 @@ a.logo.no-hover a:hover {
 }
 
 
-.required {
-  border-right: 6px solid orange;
+input:required, select:required {
+  border-right: 5px solid orange;
+}
+select:required + .select2-container .select2-selection, select:required + .select2-container .select2-selection .select2-selection--multiple  {
+  border-right: 5px solid orange !important;
 }
 
 body {

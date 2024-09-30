@@ -30,7 +30,7 @@ class Asset extends Depreciable
 {
 
     protected $presenter = AssetPresenter::class;
-    protected $with = ['model', 'admin'];
+    protected $with = ['model', 'adminuser'];
 
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
@@ -108,7 +108,6 @@ class Asset extends Depreciable
         'expected_checkin'  => ['nullable', 'date'],
         'last_audit_date'   => ['nullable', 'date_format:Y-m-d H:i:s'],
         'next_audit_date'   => ['nullable', 'date'],
-        //'after:last_audit_date'],
         'location_id'       => ['nullable', 'exists:locations,id'],
         'rtd_location_id'   => ['nullable', 'exists:locations,id'],
         'purchase_date'     => ['nullable', 'date', 'date_format:Y-m-d'],
@@ -710,15 +709,15 @@ class Asset extends Depreciable
     }
 
     /**
-     * Get action logs history for this asset
+     * Get user who created the item
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 
 
@@ -931,9 +930,20 @@ class Asset extends Depreciable
      * */
     public function checkInvalidNextAuditDate()
     {
-        if (($this->last_audit_date) && ($this->next_audit_date) && ($this->last_audit_date > $this->next_audit_date)) {
+
+        // Deliberately parse the dates as Y-m-d (without H:i:s) to compare them
+        if ($this->last_audit_date) {
+            $last = Carbon::parse($this->last_audit_date)->format('Y-m-d');
+        }
+
+        if ($this->next_audit_date) {
+            $next = Carbon::parse($this->next_audit_date)->format('Y-m-d');
+        }
+
+        if ((isset($last) && (isset($next))) && ($last > $next)) {
             return true;
         }
+
         return false;
     }
 
@@ -1758,6 +1768,20 @@ class Asset extends Depreciable
     public function scopeOrderModelNumber($query, $order)
     {
         return $query->leftJoin('models as model_number_sort', 'assets.model_id', '=', 'model_number_sort.id')->orderBy('model_number_sort.model_number', $order);
+    }
+
+
+    /**
+     * Query builder scope to order on created_by name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByCreatedByName($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'assets.created_by', '=', 'admin_sort.id')->select('assets.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 
 

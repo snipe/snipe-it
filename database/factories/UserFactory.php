@@ -38,6 +38,7 @@ class UserFactory extends Factory
             'state' => $this->faker->stateAbbr(),
             'username' => $this->faker->unique()->username(),
             'zip' => $this->faker->postcode(),
+            'created_by' => 1,
         ];
     }
 

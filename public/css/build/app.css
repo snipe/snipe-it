@@ -312,7 +312,8 @@ a.accordion-header {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
+input:required,
+select:required {
   border-right: 6px solid orange;
 }
 .sidebar-menu {
@@ -686,8 +687,13 @@ a.link-danger:hover {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
-  border-right: 6px solid orange;
+input:required,
+select:required {
+  border-right: 5px solid orange;
+}
+select:required + .select2-container .select2-selection,
+select:required + .select2-container .select2-selection .select2-selection--multiple {
+  border-right: 5px solid orange !important;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

@@ -86,7 +86,7 @@ class ConsumableCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $consumable->id,
                 'item_type' => Consumable::class,
-                'user_id' => $actor->id,
+                'created_by' => $actor->id,
                 'note' => 'oh hi there',
             ])->count(),
             'Log entry either does not exist or there are more than expected'

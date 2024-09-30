@@ -109,7 +109,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->title = $request->input('title');
         $assetMaintenance->start_date = $request->input('start_date');
         $assetMaintenance->completion_date = $request->input('completion_date');
-        $assetMaintenance->user_id = Auth::id();
+        $assetMaintenance->created_by = auth()->id();
 
         if (($assetMaintenance->completion_date !== null)
             && ($assetMaintenance->start_date !== '')

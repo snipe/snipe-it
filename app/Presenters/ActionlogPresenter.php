@@ -7,7 +7,7 @@ namespace App\Presenters;
  */
 class ActionlogPresenter extends Presenter
 {
-    public function admin()
+    public function adminuser()
     {
         if ($user = $this->model->user) {
             if (empty($user->deleted_at)) {
