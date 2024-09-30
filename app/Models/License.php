@@ -72,7 +72,8 @@ class License extends Depreciable
         'category_id',
         'name',
         'notes',
-        'order_number',
+//        'order_number',
+        'order_id',
         'purchase_cost',
         'purchase_date',
         'purchase_order',
@@ -96,7 +97,7 @@ class License extends Depreciable
         'name',
         'serial',
         'notes',
-        'order_number',
+//        'order_number',
         'purchase_order',
         'purchase_cost',
         'purchase_date',
@@ -113,6 +114,7 @@ class License extends Depreciable
         'company'      => ['name'],
         'category'     => ['name'],
         'depreciation' => ['name'],
+        'order' => ['order_number']
     ];
     protected $appends = ['free_seat_count'];
 
@@ -327,6 +329,12 @@ class License extends Depreciable
     {
         return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
 
     /**
      * Determine whether the user should be emailed on checkin/checkout

@@ -117,7 +117,8 @@ class Asset extends Depreciable
         'asset_eol_date'    => ['nullable', 'date'],
         'eol_explicit'      => ['nullable', 'boolean'],
         'byod'              => ['nullable', 'boolean'],
-        'order_number'      => ['nullable', 'string', 'max:191'],
+//        'order_number'      => ['nullable', 'string', 'max:191'],
+        'order_id' => ['nullable', 'exists:orders,id'],
         'notes'             => ['nullable', 'string', 'max:65535'],
         'assigned_to'       => ['nullable', 'integer'],
         'requestable'       => ['nullable', 'boolean'],
@@ -142,7 +143,8 @@ class Asset extends Depreciable
         'model_id',
         'name',
         'notes',
-        'order_number',
+//        'order_number',
+        'order_id',
         'purchase_cost',
         'purchase_date',
         'rtd_location_id',
@@ -174,7 +176,7 @@ class Asset extends Depreciable
       'name',
       'asset_tag',
       'serial',
-      'order_number',
+//      'order_number', //FIXME?
       'purchase_cost',
       'notes',
       'created_at',
@@ -202,6 +204,7 @@ class Asset extends Depreciable
         'model'              => ['name', 'model_number', 'eol'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
+        'order' => ['order_number']
     ];
 
     // To properly set the expected checkin as Y-m-d
@@ -283,6 +286,11 @@ class Asset extends Depreciable
     public function company()
     {
         return $this->belongsTo(\App\Models\Company::class, 'company_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 
     /**
@@ -1521,6 +1529,8 @@ class Asset extends Depreciable
         })->leftJoin('assets as assigned_assets', function ($leftJoin) {
             $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
                 ->where('assets.assigned_type', '=', self::class);
+        })->leftJoin('orders', function ($leftJoin) {
+            $leftJoin->on('assets.order_id', '=', 'orders.id');
         })->where(function ($query) use ($search) {
             foreach ($search as $search) {
                 $query->whereHas('model', function ($query) use ($search) {
@@ -1547,10 +1557,11 @@ class Asset extends Depreciable
                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
-                })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
+                })->orWhere('orders.order_number', 'LIKE', '%' . $search . '%')
+                    ->orWhere('assets.name', 'LIKE', '%' . $search . '%')
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
+//                    ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
 
@@ -1620,7 +1631,9 @@ class Asset extends Depreciable
                 }
 
                 if ($fieldname == 'order_number') {
-                    $query->where('assets.order_number', 'LIKE', '%'.$search_val.'%');
+                    $query->whereHas('order', function ($query) use ($search_val) {
+                        $query->where('orders.order_number', 'LIKE', '%' . $search_val . '%');
+                    });
                 }
 
                 if ($fieldname == 'status_label') {

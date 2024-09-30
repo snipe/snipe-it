@@ -76,7 +76,8 @@ class Consumable extends SnipeModel
         'location_id',
         'manufacturer_id',
         'name',
-        'order_number',
+//        'order_number',
+        'order_id',
         'model_number',
         'purchase_cost',
         'purchase_date',
@@ -93,7 +94,7 @@ class Consumable extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no', 'model_number', 'notes'];
+    protected $searchableAttributes = ['name', 'purchase_cost', 'purchase_date', 'item_no', 'model_number', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -106,6 +107,7 @@ class Consumable extends SnipeModel
         'location'     => ['name'],
         'manufacturer' => ['name'],
         'supplier'     => ['name'],
+        'order' => ['order_number']
     ];
 
 
@@ -271,6 +273,10 @@ class Consumable extends SnipeModel
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 
     /**
      * Determine whether to send a checkin/checkout email based on
