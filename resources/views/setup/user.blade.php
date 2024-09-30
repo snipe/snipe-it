@@ -116,7 +116,7 @@
       <!-- last name -->
       <div class="form-group col-lg-6 required {{ $errors->has('last_name') ? 'error' : '' }}">
         {{ Form::label('last_name', trans('general.last_name')) }}
-        {{ Form::text('last_name', old('last_name'), array('class' => 'form-control','placeholder' => 'Smith', 'required' => true) }}
+        {{ Form::text('last_name', old('last_name'), array('class' => 'form-control','placeholder' => 'Smith', 'required' => true)) }}
         {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>
