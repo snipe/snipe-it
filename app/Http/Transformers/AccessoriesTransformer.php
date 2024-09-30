@@ -38,9 +38,12 @@ class AccessoriesTransformer
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
-            'remaining_qty' => (int) $accessory->numRemaining(),
+            'remaining_qty' => (int) ($accessory->qty - $accessory->checkouts_count),
             'checkouts_count' =>  $accessory->checkouts_count,
-
+            'created_by' => ($accessory->adminuser) ? [
+                'id' => (int) $accessory->adminuser->id,
+                'name'=> e($accessory->adminuser->present()->fullName()),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 
@@ -57,7 +60,7 @@ class AccessoriesTransformer
 
         $permissions_array['user_can_checkout'] = false;
 
-        if ($accessory->numRemaining() > 0) {
+        if (($accessory->qty - $accessory->checkouts_count) > 0) {
             $permissions_array['user_can_checkout'] = true;
         }
 

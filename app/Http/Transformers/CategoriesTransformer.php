@@ -62,6 +62,10 @@ class CategoriesTransformer
                 'consumables_count' => (int) $category->consumables_count,
                 'components_count' => (int) $category->components_count,
                 'licenses_count' => (int) $category->licenses_count,
+                'created_by' => ($category->adminuser) ? [
+                    'id' => (int) $category->adminuser->id,
+                    'name'=> e($category->adminuser->present()->fullName()),
+                ] : null,
                 'created_at' => Helper::getFormattedDateObject($category->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($category->updated_at, 'datetime'),
             ];

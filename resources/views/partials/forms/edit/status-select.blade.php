@@ -3,7 +3,7 @@
 
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
-    <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
+    <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="statuslabels" data-placeholder="{{ trans('general.select_statuslabel') }}" name="{{ $fieldname }}" style="width: 100%" id="status_select_id" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' required ' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @if ($status_id = old($fieldname,  (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">

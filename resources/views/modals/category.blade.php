@@ -11,19 +11,10 @@
                 {{ csrf_field() }}
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-                <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
-                        </label></div>
-                    <div class="col-md-8 col-xs-12 required">
-                        <input type='text' name='name' id='modal-name' class="form-control">
-                    </div>
-                </div>
+               @include('modals.partials.name')
                 <input type="hidden" name='category_type' id="modal-category_type" value="{{ request('category_type') }}" />
             </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
-            <button type="button" class="btn btn-primary" id="modal-save">{{ trans('general.save') }}</button>
-        </div>
+       @include('modals.partials.footer')
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

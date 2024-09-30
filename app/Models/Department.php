@@ -42,7 +42,7 @@ class Department extends SnipeModel
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'created_by',
         'name',
         'phone',
         'fax',

@@ -75,7 +75,7 @@ class LocationsController extends Controller
         $location->zip = $request->input('zip');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
-        $location->user_id = auth()->id();
+        $location->created_by = auth()->id();
         $location->phone = request('phone');
         $location->fax = request('fax');
 
@@ -278,7 +278,7 @@ class LocationsController extends Controller
                 $logaction->item_type = Location::class;
                 $logaction->item_id = $location->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
                 return redirect()->route('locations.index')->with('success', trans('admin/locations/message.restore.success'));

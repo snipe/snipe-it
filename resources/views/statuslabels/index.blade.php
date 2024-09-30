@@ -25,6 +25,7 @@
         <div class="table-responsive">
 
             <table
+                    data-columns="{{ \App\Presenters\StatusLabelPresenter::dataTableLayout() }}"
                     data-cookie-id-table="statuslabelsTable"
                     data-pagination="true"
                     data-id-table="statuslabelsTable"
@@ -44,19 +45,6 @@
                 "fileName": "export-statuslabels-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
-            <thead>
-              <tr>
-                <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-field="name" data-formatter="statuslabelsAssetLinkFormatter">{{ trans('admin/statuslabels/table.name') }}</th>
-                <th data-sortable="false" data-field="type" data-formatter="statusLabelTypeFormatter">{{ trans('admin/statuslabels/table.status_type') }}</th>
-                  <th data-sortable="true" data-field="assets_count">{{ trans('general.assets') }}</th>
-                <th data-sortable="true" data-field="color" data-formatter="colorSqFormatter">{{ trans('admin/statuslabels/table.color') }}</th>
-                <th class="text-center" data-sortable="true" data-field="show_in_nav" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.show_in_nav') }}</th>
-                  <th class="text-center" data-sortable="true" data-field="default_label" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.default_label') }}</th>
-                  <th data-sortable="true" data-field="notes" data-visible="false">{{ trans('general.notes') }}</th>
-                <th data-formatter="statuslabelsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
-              </tr>
-            </thead>
           </table>
         </div>
       </div>

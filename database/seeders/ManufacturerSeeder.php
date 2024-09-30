@@ -16,17 +16,17 @@ class ManufacturerSeeder extends Seeder
 
         $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
 
-        Manufacturer::factory()->count(1)->apple()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->microsoft()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->dell()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->asus()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->hp()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->lenovo()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->lg()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->polycom()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->adobe()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->avery()->create(['user_id' => $admin->id]);
-        Manufacturer::factory()->count(1)->crucial()->create(['user_id' => $admin->id]);
+        Manufacturer::factory()->count(1)->apple()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->microsoft()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->dell()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->asus()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->hp()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->lenovo()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->lg()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->polycom()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->adobe()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->avery()->create(['created_by' => $admin->id]);
+        Manufacturer::factory()->count(1)->crucial()->create(['created_by' => $admin->id]);
 
         $src = public_path('/img/demo/manufacturers/');
         $dst = 'manufacturers'.'/';
