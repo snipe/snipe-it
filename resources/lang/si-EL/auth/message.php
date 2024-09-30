@@ -36,12 +36,12 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Ú-narthannen ven têgiad an harnad i-thia lest, aphado ad.',
-        'success' => 'Mas ennas thia, han fannad thia lest echad sen e-lam.',
+        'success' => 'Le thangol ú-chenia.',
     ),
 
     'forgot-password-confirm' => array(
         'error'   => 'Ú-narthannen ven athrad i-thia lest lin, aphado ad.',
-        'success' => 'I-thia lest lin harnannen sír.',
+        'success' => 'Le thangol ú-chenia.',
     ),
 
 
