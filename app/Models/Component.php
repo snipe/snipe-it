@@ -30,14 +30,14 @@ class Component extends SnipeModel
      * Category validation rules
      */
     public $rules = [
-        'name'           => 'required|min:3|max:255',
+        'name'           => 'required|min:3|max:191',
         'qty'            => 'required|integer|min:1',
         'category_id'    => 'required|integer|exists:categories,id',
         'supplier_id'    => 'nullable|integer|exists:suppliers,id',
         'company_id'     => 'integer|nullable|exists:companies,id',
         'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
-        'purchase_cost'  => 'numeric|nullable|gte:0',
+        'purchase_cost'  => 'numeric|nullable|gte:0|max:9999999999999',
     ];
 
     /**
