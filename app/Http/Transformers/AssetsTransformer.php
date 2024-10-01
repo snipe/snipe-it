@@ -61,7 +61,7 @@ class AssetsTransformer
                 'name'=> e($asset->supplier->name),
             ] : null,
             'notes' => ($asset->notes) ? Helper::parseEscapedMarkedownInline($asset->notes) : null,
-            'order_number' => ($asset->order_number) ? e($asset->order_number) : null,
+            'order_number' => ($asset->order) ? e($asset->order->order_number) : null, //FIXME
             'company' => ($asset->company) ? [
                 'id' => (int) $asset->company->id,
                 'name'=> e($asset->company->name),

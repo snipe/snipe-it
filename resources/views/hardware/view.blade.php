@@ -804,7 +804,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if ($asset->order_number)
+                                        @if ($asset->order)
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <strong>
@@ -812,7 +812,8 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-9">
-                                                <a href="{{ route('hardware.index', ['order_number' => $asset->order_number]) }}">{{ $asset->order_number }}</a>
+                                                {{-- FIXME - we should probably route to the *ORDER* itself? --}}
+                                                <a href="{{ route('hardware.index', ['order_id' => $asset->order->id]) }}">{{ $asset->order->order_number }}</a>
                                             </div>
                                         </div>
                                     @endif

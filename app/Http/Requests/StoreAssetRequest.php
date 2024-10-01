@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Facades\Gate;
 use App\Rules\AssetCannotBeCheckedOutToNondeployableStatus;
+use Illuminate\Validation\Validator;
+
 
 class StoreAssetRequest extends ImageUploadRequest
 {
@@ -65,6 +67,15 @@ class StoreAssetRequest extends ImageUploadRequest
             ['status_id' => [new AssetCannotBeCheckedOutToNondeployableStatus()]],
             parent::rules(),
         );
+    }
+
+    public function after()
+    {
+        return [
+            function (Validator $validator) {
+                //do _something_ to create an 'order' if needed? FIXME
+            }
+        ];
     }
 
     private function parseLastAuditDate(): void

@@ -148,15 +148,7 @@
           @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
           <!-- Order Number -->
-          <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-            <label for="order_number" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.order') }}
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="order_number" id="order_number" value="{{ old('order_number') }}" />
-              {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
-          </div>
+          <x-order_number div_class="col-md-7"/>
 
           <!-- Warranty -->
           <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">

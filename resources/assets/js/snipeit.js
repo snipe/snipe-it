@@ -597,3 +597,22 @@ document.addEventListener('livewire:init', () => {
         });
     });
 });
+
+/**
+ * JS Helper for Select2 drop-down lists that handle orders.
+ *
+ * This populates the 'order_id' with -1, which is a 'sentinel' which should let us know that this is going to be
+ * a new order. It also populates a hidden field with the new order number so the back-end can create it if/when the
+ * form is submitted.
+ */
+$('.order-select').select2({
+    createTag: function (params) {
+        var order_number = $.trim(params.term)
+        var prefix = this.$element.data('create-new');
+        $('#' + this.$element[0].name + "_new_order").val(order_number)
+        return {
+            id: -1,
+            text: prefix + order_number
+        };
+    }
+})

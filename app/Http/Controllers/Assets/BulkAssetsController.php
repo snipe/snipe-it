@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\Order;
 use App\Models\Statuslabel;
 use App\Models\Setting;
 use App\View\Label;
@@ -66,7 +67,7 @@ class BulkAssetsController extends Controller
             'last_checkout',
             'notes',
             'expected_checkin',
-            'order_number',
+            'order_id',
             'image',
             'assigned_to',
             'created_at',
@@ -233,7 +234,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
             || ($request->filled('supplier_id'))
-            || ($request->filled('order_number'))
+            || ($request->filled('order_id'))
             || ($request->filled('warranty_months'))
             || ($request->filled('rtd_location_id'))
             || ($request->filled('requestable'))
@@ -263,7 +264,7 @@ class BulkAssetsController extends Controller
                 $this->conditionallyAddItem('name')
                     ->conditionallyAddItem('purchase_date')
                     ->conditionallyAddItem('expected_checkin')
-                    ->conditionallyAddItem('order_number')
+//                    ->conditionallyAddItem('order_id')
                     ->conditionallyAddItem('requestable')
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
@@ -271,6 +272,10 @@ class BulkAssetsController extends Controller
                     foreach ($custom_field_columns as $key => $custom_field_column) {
                         $this->conditionallyAddItem($custom_field_column); 
                    }
+
+                if ($request->filled('order_id')) {
+                    $this->update_array['order_id'] = Order::ensure($request, 'order_id');
+                }
 
                 if (!($asset->eol_explicit)) {
 					if ($request->filled('model_id')) {

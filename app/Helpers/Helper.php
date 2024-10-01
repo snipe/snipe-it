@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Helpers;
+
+use App\Http\Requests\Request;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -9,6 +11,7 @@ use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
+use App\Models\Order;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\License;

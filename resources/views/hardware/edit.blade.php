@@ -160,7 +160,9 @@
 
         <div id='order_details' class="col-md-12" style="display:none">
             <br>
-            @include ('partials.forms.edit.order_number')
+            {{--            @include ('partials.forms.edit.order_number')--}}
+            <x-order_number :value="$item->order_id"
+                            div_class="col-md-7 col-sm-12"/> {{-- div_class was: 'col-md-7 col-sm-12' --}}
             @include ('partials.forms.edit.purchase_date')
             @include ('partials.forms.edit.eol_date')
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])

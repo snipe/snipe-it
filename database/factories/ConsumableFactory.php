@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Manufacturer;
+use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,7 +33,7 @@ class ConsumableFactory extends Factory
             'category_id' => Category::factory(),
             'created_by' => User::factory()->superuser(),
             'item_no' => $this->faker->numberBetween(1000000, 50000000),
-            'order_number' => $this->faker->numberBetween(1000000, 50000000),
+            'order_id' => Order::factory(),
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
             'purchase_cost' => $this->faker->randomFloat(2, 1, 50),
             'qty' => $this->faker->numberBetween(5, 10),

@@ -19,9 +19,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $order_hash = [];
         foreach(self::$tables as $table_name) {
-            Schema::table($table_name, function (Blueprint $table) use ($table_name,$order_hash) {
+            Schema::table($table_name, function (Blueprint $table) use ($table_name) {
                 //
                 $table->integer('order_id')->nullable()->default(null)->after('order_number');
                 $table->renameColumn('order_number', 'deprecated_order_number');
