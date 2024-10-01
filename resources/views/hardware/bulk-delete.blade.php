@@ -51,8 +51,6 @@
                   {{ $asset->assigned_to }}
                   @if ($asset->assignedTo)
                   {{ $asset->assignedTo->present()->name()}}
-                    @else
-                    kflgjg
                   @endif
                 </td>
               </tr>
