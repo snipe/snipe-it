@@ -25,7 +25,6 @@ return [
     'image'		    => 'Delwedd Dyfais',
     'days_without_acceptance' => 'Diwrnodau Heb Derbyn',
     'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Wedi Neilltuo i',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Wedi newid',

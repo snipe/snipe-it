@@ -25,7 +25,6 @@ return [
     'image'		    => 'Toestelbeeld',
     'days_without_acceptance' => 'Dae sonder aanvaarding',
     'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Toevertrou aan',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',

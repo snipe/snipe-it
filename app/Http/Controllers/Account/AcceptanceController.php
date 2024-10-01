@@ -240,7 +240,7 @@ class AcceptanceController extends Controller
             try {
                 $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             } catch (\Exception $e) {
-                Log::error($e);
+                Log::warning($e);
             }
             event(new CheckoutAccepted($acceptance));
 

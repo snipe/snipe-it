@@ -25,7 +25,6 @@ return [
     'image'		    => 'Laitteen kuva',
     'days_without_acceptance' => 'Päiviä ilman hyväksymistä',
     'monthly_depreciation' => 'Kuukautinen poisto',
-    'assigned_to'    => 'Osoitettu',
     'requesting_user' => 'Pyytävä käyttäjä',
     'requested_date' => 'Pyynnön päivämäärä',
     'changed'       => 'Muutettu',
