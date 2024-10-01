@@ -183,7 +183,7 @@ class ViewAssetsController extends Controller
             try {
                 $settings->notify(new RequestAssetCancelation($data));
             } catch (\Exception $e) {
-                Log::error($e);
+                Log::warning($e);
             }
             return redirect()->route('requestable-assets')
                 ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
@@ -195,7 +195,7 @@ class ViewAssetsController extends Controller
         try {
             $settings->notify(new RequestAssetNotification($data));
         } catch (\Exception $e) {
-            Log::error($e);
+            Log::warning($e);
         }
 
         return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
