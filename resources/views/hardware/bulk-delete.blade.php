@@ -60,8 +60,12 @@
         </div><!-- /.box-body -->
 
         <div class="box-footer text-right">
-          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success" id="submit-button"><x-icon type="checkmark" /> {{ trans('button.delete') }}</button>
+          <a class="btn btn-link" href="{{ URL::previous() }}">
+            {{ trans('button.cancel') }}
+          </a>
+          <button type="submit" class="btn btn-success" id="submit-button">
+            <x-icon type="checkmark" /> {{ trans('button.delete') }}
+          </button>
         </div><!-- /.box-footer -->
       </div><!-- /.box -->
     </form>
