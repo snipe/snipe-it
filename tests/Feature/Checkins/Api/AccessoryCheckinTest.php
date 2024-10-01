@@ -14,9 +14,10 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
     public function testRequiresPermission()
     {
         $accessory = Accessory::factory()->checkedOutToUser()->create();
+        $accessoryCheckout = $accessory->checkouts->first();
 
         $this->actingAsForApi(User::factory()->create())
-            ->postJson(route('api.accessories.checkin', $accessory))
+            ->postJson(route('api.accessories.checkin', $accessoryCheckout))
             ->assertForbidden();
     }
 
@@ -35,11 +36,11 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAsForApi($userInCompanyA)
-            ->postJson(route('api.accessories.checkin', $accessoryForCompanyB))
+            ->postJson(route('api.accessories.checkin', $accessoryForCompanyB->checkouts->first()))
             ->assertForbidden();
 
         $this->actingAsForApi($superUser)
-            ->postJson(route('api.accessories.checkin', $anotherAccessoryForCompanyB))
+            ->postJson(route('api.accessories.checkin', $anotherAccessoryForCompanyB->checkouts->first()))
             ->assertStatusMessageIs('success');
 
         $this->assertEquals(1, $accessoryForCompanyB->fresh()->checkouts->count(), 'Accessory should not be checked in');
@@ -52,8 +53,10 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
 
         $this->assertEquals(1, $accessory->checkouts->count());
 
+        $accessoryCheckout = $accessory->checkouts->first();
+
         $this->actingAsForApi(User::factory()->checkinAccessories()->create())
-            ->postJson(route('api.accessories.checkin', $accessory))
+            ->postJson(route('api.accessories.checkin', $accessoryCheckout))
             ->assertStatusMessageIs('success');
 
         $this->assertEquals(0, $accessory->fresh()->checkouts->count(), 'Accessory should be checked in');
@@ -65,9 +68,10 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
         $actor = User::factory()->checkinAccessories()->create();
 
         $accessory = Accessory::factory()->checkedOutToUser($user)->create();
+        $accessoryCheckout = $accessory->checkouts->first();
 
         $this->actingAsForApi($actor)
-            ->postJson(route('api.accessories.checkin', $accessory))
+            ->postJson(route('api.accessories.checkin', $accessoryCheckout))
             ->assertStatusMessageIs('success');
 
         $this->assertDatabaseHas('action_logs', [
