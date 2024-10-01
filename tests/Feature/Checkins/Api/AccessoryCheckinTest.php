@@ -71,7 +71,7 @@ class AccessoryCheckinTest extends TestCase implements TestsFullMultipleCompanie
             ->assertStatusMessageIs('success');
 
         $this->assertDatabaseHas('action_logs', [
-            'user_id' => $actor->id,
+            'created_by' => $actor->id,
             'action_type' => 'checkin from',
             'target_id' => $user->id,
             'target_type' => User::class,
