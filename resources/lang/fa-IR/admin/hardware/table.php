@@ -30,8 +30,6 @@ return [
     'days_without_acceptance' => 'روز بدون پذیرش',
     'monthly_depreciation' => 'استهلاک ماهانه
 ',
-    'assigned_to'    => 'اختصاص یافته به
-',
     'requesting_user' => 'کاربر درخواست کننده
 ',
     'requested_date' => 'تاریخ درخواست',

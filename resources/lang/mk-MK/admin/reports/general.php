@@ -2,16 +2,16 @@
 
 return [
     'info'   => 'Изберете ги опциите за извештајот за основни средства.',
-    'deleted_user' => 'Deleted user',
-    'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request',
+    'deleted_user' => 'Избришан корисник',
+    'send_reminder' => 'Испрати потсетник',
+    'reminder_sent' => 'Потсетникот е испратен',
+    'acceptance_deleted' => 'Барањето за прифаќање избришано',
+    'acceptance_request' => 'Барање за прифаќање',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
+        'user_address' => 'Адреса на корисникот',
+        'user_city' => 'Град на корисникот',
+        'user_state' => 'Држава на корисникот',
+        'user_country' => 'Земја на корисникот',
+        'user_zip' => 'Поштенски број на корисникот'
     ]
 ];
