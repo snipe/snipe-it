@@ -28,11 +28,11 @@
           <table class="table table-striped table-condensed">
             <thead>
               <tr>
-                <td></td>
-                <td>{{ trans('admin/hardware/table.id') }}</td>
-                <td>{{ trans('general.asset_name') }}</td>
-                <td>{{ trans('admin/hardware/table.location')}}</td>
-                <td>{{ trans('admin/hardware/table.assigned_to') }}</td>
+                <th></th>
+                <th>{{ trans('admin/hardware/table.id') }}</th>
+                <th>{{ trans('general.asset_name') }}</th>
+                <th>{{ trans('admin/hardware/table.location')}}</th>
+                <th>{{ trans('admin/hardware/table.assigned_to') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -47,8 +47,12 @@
                   @endif
                 </td>
                 <td>
+
+                  {{ $asset->assigned_to }}
                   @if ($asset->assignedTo)
                   {{ $asset->assignedTo->present()->name()}}
+                    @else
+                    kflgjg
                   @endif
                 </td>
               </tr>
