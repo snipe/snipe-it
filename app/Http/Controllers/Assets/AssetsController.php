@@ -428,7 +428,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function destroy($assetId) : RedirectResponse
+    public function destroy(Request $request, $assetId) : RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -438,9 +438,17 @@ class AssetsController extends Controller
 
         $this->authorize('delete', $asset);
 
-        DB::table('assets')
-            ->where('id', $asset->id)
-            ->update(['assigned_to' => null]);
+        if ($asset->assignedTo) {
+
+            $target = $asset->assignedTo;
+            $checkin_at = date('Y-m-d H:i:s');
+            $originalValues = $asset->getRawOriginal();
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on delete', $checkin_at, $originalValues));
+            DB::table('assets')
+                ->where('id', $asset->id)
+                ->update(['assigned_to' => null]);
+        }
+
 
         if ($asset->image) {
             try {
