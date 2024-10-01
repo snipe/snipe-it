@@ -483,7 +483,12 @@ class AssetModelsController extends Controller
             $rules[$field] = $validation;
         }
 
-        $validator = Validator::make($data, $rules);
+        $attributes = [];
+        foreach ($model->fieldset->fields as $field) {
+            $attributes[$field->db_column] = trim(preg_replace('/_+|snipeit|\d+/', ' ', $field->db_column));
+        }
+
+        $validator = Validator::make($data, $rules)->setAttributeNames($attributes);
 
         if($validator->fails()){
             $this->validatorErrors = $validator->errors();
