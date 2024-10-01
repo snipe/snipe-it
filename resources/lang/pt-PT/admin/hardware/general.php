@@ -15,7 +15,7 @@ return [
     'delete_confirm'            => 'Tem a certeza de que pretende eliminar este equipamento?',
     'edit'  					=> 'Editar artigo',
     'model_deleted'  			=> 'Este modelo de artigo foi excluído. Deve restaurar o modelo antes de restaurar o artigo.',
-    'model_invalid'             => 'This model for this asset is invalid.',
+    'model_invalid'             => 'O modelo deste artigo é inválido.',
     'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
     'requestable'               => 'Solicitavel',
     'requested'				    => 'Requisitado',

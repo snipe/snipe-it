@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAPサーバーを検索できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
         'ldap_could_not_get_entries' => 'LDAPサーバーからエンティティを取得できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
         'password_ldap' => 'このアカウントのパスワードは、LDAPかアクティブディレクトリで管理されています。パスワードを変更するには管理者にお問い合わせください。 ',
-        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
+        'multi_company_items_assigned' => 'このユーザーには、別の会社に属するアイテムが割り当てられています。会社を確認するか、アイテムを編集してください。'
     ),
 
     'deletefile' => array(

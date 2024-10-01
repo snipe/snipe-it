@@ -25,7 +25,6 @@ return [
     'image'		    => 'Enhetsbild',
     'days_without_acceptance' => 'Dagar utan godkännande',
     'monthly_depreciation' => 'Månatlig avskrivning',
-    'assigned_to'    => 'Tilldelad till',
     'requesting_user' => 'Begär användare',
     'requested_date' => 'Begärt datum',
     'changed'       => 'Ändrad',
