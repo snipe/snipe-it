@@ -21,11 +21,12 @@ class AssetCheckinRequest extends Request
      */
     public function rules()
     {
-        $setting =
+        $settings = \App\Models\Setting::getSettings();
 
         $rules = [];
 
-            if($setting->require_checkinout_notes == '1') {
+            if($settings->require_checkinout_notes) {
+               // dd($settings->require_checkinout_notes);
             $rules['notes'] = 'required|string|nullable';
         }
         return $rules;
