@@ -129,8 +129,10 @@ abstract class Importer
         // However, for testing we also support passing a string directly
         if (is_file($file)) {
             $this->csv = Reader::createFromPath($file);
+            $this->csv->setDelimiter($this->delimiter);
         } else {
             $this->csv = Reader::createFromString($file);
+            $this->csv->setDelimiter($this->delimiter);
         }
         $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
     }
