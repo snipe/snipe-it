@@ -31,7 +31,8 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create([
             'depreciation_type' => 'amount',
             'depreciation_min' => 1000,
-            'months'=> 36,
+            'term_length'=> 36,
+            'term_type'=>'months',
         ]);
 
         $asset = Asset::factory()
@@ -55,7 +56,8 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create([
             'depreciation_type' => 'percent',
             'depreciation_min' => 50,
-            'months'=> 36,
+            'term_length'=> 36,
+            'term_type'=>'months',
         ]);
 
         $asset = Asset::factory()
