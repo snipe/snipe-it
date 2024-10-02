@@ -14,7 +14,13 @@ class DepreciationTest extends TestCase
 {
     public function testADepreciationHasModels()
     {
-        $depreciation = Depreciation::factory()->create();
+        $depreciation = Depreciation::factory()->create([
+            'depreciation_type' => 'percent',
+            'depreciation_min' => 50,
+            'term_length'=> 36,
+            'term_type'=>'months',
+        ]);
+
 
         AssetModel::factory()
                     ->count(5)
@@ -31,7 +37,8 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create([
             'depreciation_type' => 'amount',
             'depreciation_min' => 1000,
-            'months'=> 36,
+            'term_length'=> 36,
+            'term_type'=>'months',
         ]);
 
         $asset = Asset::factory()
@@ -55,7 +62,8 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create([
             'depreciation_type' => 'percent',
             'depreciation_min' => 50,
-            'months'=> 36,
+            'term_length'=> 36,
+            'term_type'=>'months',
         ]);
 
         $asset = Asset::factory()
@@ -78,7 +86,13 @@ class DepreciationTest extends TestCase
     public function testADepreciationHasLicenses()
     {
 
-        $depreciation = Depreciation::factory()->create();
+        $depreciation = Depreciation::factory()->create([
+            'depreciation_type' => 'amount',
+            'depreciation_min' => 50,
+            'term_length'=> 365,
+            'term_type'=>'days',
+        ]);
+
         License::factory()
                     ->count(5)
                     ->photoshop()
