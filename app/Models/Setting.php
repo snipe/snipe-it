@@ -99,6 +99,7 @@ class Setting extends Model
 
     protected $casts = [
         'label2_asset_logo' => 'boolean',
+        'require_checkinout_notes' => 'boolean',
     ];
 
     /**
