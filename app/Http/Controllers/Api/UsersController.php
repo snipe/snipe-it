@@ -382,7 +382,7 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        // 
+        //
         if ($request->filled('password')) {
             $user->password = bcrypt($request->get('password'));
         } else {
@@ -390,7 +390,7 @@ class UsersController extends Controller
         }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-        
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -418,7 +418,7 @@ class UsersController extends Controller
             $this->authorize('view', $user);
             return (new UsersTransformer)->transformUser($user);
         }
-        
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
 
     }
@@ -449,7 +449,7 @@ class UsersController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
             }
 
-            $user->fill($request->all());
+            $user->fill($request->only($user->getFillable()));
 
             if ($user->id == $request->input('manager_id')) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
@@ -604,7 +604,7 @@ class UsersController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
- 
+
 
     }
 
@@ -654,7 +654,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', License::class);
-        
+
         if ($user = User::where('id', $id)->withTrashed()->first()) {
             $this->authorize('update', $user);
             $licenses = $user->licenses()->get();
