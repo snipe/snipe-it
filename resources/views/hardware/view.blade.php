@@ -255,11 +255,16 @@
 
                                 @can('delete', $asset)
                                     <div class="col-md-12 hidden-print" style="padding-top: 30px; padding-bottom: 30px;">
+
                                         @if ($asset->deleted_at=='')
                                             <button class="btn btn-sm btn-block btn-danger btn-social delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">
 
                                                 <x-icon type="delete" />
-                                                {{ trans('general.delete') }}
+                                                @if ($asset->assignedTo)
+                                                    {{ trans('general.checkin_and_delete') }}
+                                                @else
+                                                    {{ trans('general.delete') }}
+                                                @endif
                                             </button>
                                             <span class="sr-only">{{ trans('general.delete') }}</span>
                                         @else

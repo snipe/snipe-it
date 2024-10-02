@@ -125,7 +125,7 @@ return [
         'symbols' => 'Il campo :attribute deve contenere almeno un simbolo.',
         'uncompromised' => 'Il valore :attribute fornito è comparso in un data leak. Si prega di scegliere un :attribute differente.',
     ],
-    'percent'       => 'La svalutazione minima deve essere tra 0 e 100 quando il tipo di svalutazione è Percentuale.',
+    'percent'       => 'Il deprezzamento minimo deve essere tra 0 e 100 quando il tipo di deprezzamento è Percentuale.',
 
     'present' => 'Il campo :attribute deve essere presente.',
     'present_if' => 'Il campo :attribute deve essere presente quando :other è :value.',

@@ -13,6 +13,7 @@ use App\Notifications\RequestAssetNotification;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use \Illuminate\Contracts\View\View;
+use Log;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -179,8 +180,11 @@ class ViewAssetsController extends Controller
             $asset->decrement('requests_counter', 1);
 
             $logaction->logaction('request canceled');
-            $settings->notify(new RequestAssetCancelation($data));
-
+            try {
+                $settings->notify(new RequestAssetCancelation($data));
+            } catch (\Exception $e) {
+                Log::warning($e);
+            }
             return redirect()->route('requestable-assets')
                 ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         }
@@ -188,7 +192,11 @@ class ViewAssetsController extends Controller
         $logaction->logaction('requested');
         $asset->request();
         $asset->increment('requests_counter', 1);
-        $settings->notify(new RequestAssetNotification($data));
+        try {
+            $settings->notify(new RequestAssetNotification($data));
+        } catch (\Exception $e) {
+            Log::warning($e);
+        }
 
         return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
     }

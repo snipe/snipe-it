@@ -780,9 +780,16 @@ class AssetsController extends Controller
         if ($asset = Asset::find($id)) {
             $this->authorize('delete', $asset);
 
-            DB::table('assets')
-                ->where('id', $asset->id)
-                ->update(['assigned_to' => null]);
+            if ($asset->assignedTo) {
+
+                $target = $asset->assignedTo;
+                $checkin_at = date('Y-m-d H:i:s');
+                $originalValues = $asset->getRawOriginal();
+                event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on delete', $checkin_at, $originalValues));
+                DB::table('assets')
+                    ->where('id', $asset->id)
+                    ->update(['assigned_to' => null]);
+            }
 
             $asset->delete();
 

@@ -82,7 +82,6 @@ class DepreciationReportTransformer
             $rate_of_depreciation = Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
         }
 
-
         if ($asset->assigned) {
             $checkout_target = $asset->assigned->name;
             if ($asset->checkedOutToUser()) {

@@ -67,6 +67,7 @@ return [
     'checkout'  			=> 'پرداخت',
     'checkouts_count'       => 'پرداخت',
     'checkins_count'        => 'پذیرش',
+    'checkin_and_delete'  	=> 'Checkin and Delete',
     'user_requests_count'   => 'درخواست ها',
     'city'  				=> 'شهر',
     'click_here'			=> 'اینجا کلیک کنید',
@@ -308,6 +309,7 @@ return [
     'status'    			=> 'وضعیت',
     'accept_eula'           => 'توافق نامه پذیرش
 ',
+    'show_or_hide_eulas' => 'Show/Hide EULAs',
     'supplier'              => 'تامین کننده',
     'suppliers'  			=> 'تامین کننده',
     'sure_to_delete'        => 'مطمئنید که میخواهید حذف شود',
