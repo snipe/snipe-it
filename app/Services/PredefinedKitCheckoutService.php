@@ -54,7 +54,7 @@ class PredefinedKitCheckoutService
                 $expected_checkin = $request->get('expected_checkin');
             }
 
-            $admin = Auth::user();
+            $admin = auth()->user();
 
             $note = e($request->get('note'));
 
@@ -157,7 +157,7 @@ class PredefinedKitCheckoutService
                 }
                 // licenses
                 foreach ($license_seats_to_add as $licenseSeat) {
-                    $licenseSeat->user_id = $admin->id;
+                    $licenseSeat->created_by = $admin->id;
                     $licenseSeat->assigned_to = $user->id;
                     if ($licenseSeat->save()) {
                         event(new CheckoutableCheckedOut($licenseSeat, $user, $admin, $note));

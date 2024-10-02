@@ -37,7 +37,6 @@
             data-pagination="true"
             data-id-table="manufacturersTable"
             data-search="true"
-            data-show-footer="true"
             data-side-pagination="server"
             data-show-columns="true"
             data-show-fullscreen="true"
@@ -46,7 +45,7 @@
             data-sort-order="asc"
             id="manufacturersTable"
             class="table table-striped snipe-table"
-            data-url="{{route('api.manufacturers.index', ['deleted' => e(Request::get('deleted')) ]) }}"
+            data-url="{{route('api.manufacturers.index', ['deleted' => (request('deleted')=='true') ? 'true' : 'false' ]) }}"
             data-export-options='{
               "fileName": "export-manufacturers-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]

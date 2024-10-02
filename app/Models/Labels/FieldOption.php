@@ -14,6 +14,25 @@ class FieldOption {
 
     public function getValue(Asset $asset) {
         $dataPath = collect(explode('.', $this->dataSource));
+
+        // assignedTo directly on the asset is a special case where
+        // we want to avoid returning the property directly
+        // and instead return the entity's presented name.
+        if ($dataPath[0] === 'assignedTo') {
+            if ($asset->relationLoaded('assignedTo')) {
+                // If the "assignedTo" relationship was eager loaded then the way to get the
+                // relationship changes from $asset->assignedTo to $asset->assigned.
+                return $asset->assigned ? $asset->assigned->present()->fullName() : null;
+            }
+
+            return $asset->assignedTo ? $asset->assignedTo->present()->fullName() : null;
+        }
+
+        // Handle Laravel's stupid Carbon datetime casting
+        if ($dataPath[0] === 'purchase_date') {
+            return $asset->purchase_date ? $asset->purchase_date->format('Y-m-d') : null;
+        }
+        
         return $dataPath->reduce(function ($myValue, $path) {
             try { return $myValue ? $myValue->{$path} : ${$myValue}; }
             catch (\Exception $e) { return $myValue; }

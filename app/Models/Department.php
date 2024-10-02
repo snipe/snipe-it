@@ -9,6 +9,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Department extends SnipeModel
 {
+    use CompanyableTrait;
     use HasFactory;
 
     /**
@@ -41,7 +42,7 @@ class Department extends SnipeModel
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'created_by',
         'name',
         'phone',
         'fax',

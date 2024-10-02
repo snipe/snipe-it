@@ -9,7 +9,7 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
-use Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LicenseSeatsController extends Controller
@@ -19,11 +19,10 @@ class LicenseSeatsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $licenseId
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $licenseId)
+    public function index(Request $request, $licenseId) : JsonResponse | array
     {
-        //
+
         if ($license = License::find($licenseId)) {
             $this->authorize('view', $license);
 
@@ -41,7 +40,7 @@ class LicenseSeatsController extends Controller
             $total = $seats->count();
 
             // Make sure the offset and limit are actually integers and do not exceed system limits
-            $offset = ($request->input('offset') > $seats->count()) ? $seats->count() : abs($request->input('offset'));
+            $offset = ($request->input('offset') > $seats->count()) ? $seats->count() : app('api_offset_value');
 
             if ($offset >= $total ){
                 $offset = 0;
@@ -64,11 +63,10 @@ class LicenseSeatsController extends Controller
      *
      * @param  int  $licenseId
      * @param  int  $seatId
-     * @return \Illuminate\Http\Response
      */
-    public function show($licenseId, $seatId)
+    public function show($licenseId, $seatId) : JsonResponse | array
     {
-        //
+
         $this->authorize('view', License::class);
         // sanity checks:
         // 1. does the license seat exist?
@@ -89,19 +87,18 @@ class LicenseSeatsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $licenseId
      * @param  int  $seatId
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $licenseId, $seatId)
+    public function update(Request $request, $licenseId, $seatId) : JsonResponse | array
     {
         $this->authorize('checkout', License::class);
 
-        // sanity checks:
-        // 1. does the license seat exist?
+
         if (! $licenseSeat = LicenseSeat::find($seatId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat not found'));
         }
-        // 2. does the seat belong to the specified license?
-        if (! $license = $licenseSeat->license()->first() || $license->id != intval($licenseId)) {
+
+        $license = $licenseSeat->license()->first();
+        if (!$license || $license->id != intval($licenseId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat does not belong to the specified license'));
         }
 
@@ -110,7 +107,7 @@ class LicenseSeatsController extends Controller
 
         // attempt to update the license seat
         $licenseSeat->fill($request->all());
-        $licenseSeat->user_id = Auth::user()->id;
+        $licenseSeat->created_by = auth()->id();
 
         // check if this update is a checkin operation
         // 1. are relevant fields touched at all?

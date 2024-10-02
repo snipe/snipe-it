@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Fornecedor excluído',
     'does_not_exist' => 'O fornecedor não existe.',
 
 

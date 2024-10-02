@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use Exception;
-use Crypt;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Check if a given ip is in a network
@@ -160,7 +160,7 @@ class LdapTroubleshooter extends Command
             $output[] = "-x";
             $output[] = "-b ".escapeshellarg($settings->ldap_basedn);
             $output[] = "-D ".escapeshellarg($settings->ldap_uname);
-            $output[] = "-w ".escapeshellarg(\Crypt::Decrypt($settings->ldap_pword));
+            $output[] = "-w ".escapeshellarg(Crypt::Decrypt($settings->ldap_pword));
             $output[] = escapeshellarg(parenthesized_filter($settings->ldap_filter));
             if($settings->ldap_tls) {
                 $this->line("# adding STARTTLS option");

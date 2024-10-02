@@ -7,6 +7,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use TCPDF;
 use TCPDF_STATIC;
+use TypeError;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Model for Labels.
@@ -22,6 +24,17 @@ abstract class Label
      * @return string
      */
     public abstract function getUnit();
+
+    /**
+     * Returns the PDF rotation.
+     * 0, 90, 180, 270
+     * 0 is a sane default. Override when necessary.
+     *
+     * @return int
+     */
+    public function getRotation() {
+        return 0;
+    }
 
     /**
      * Returns the label's width in getUnit() units
@@ -372,8 +385,8 @@ abstract class Label
         if (empty($value)) return;
         try {
             $pdf->write1DBarcode($value, $type, $x, $y, $width, $height, null, ['stretch'=>true]);
-        } catch (\Exception $e) {
-            \Log::error('The 1D barcode ' . $value . ' is not compliant with the barcode type '. $type);
+        } catch (\Exception|TypeError $e) {
+            Log::debug('The 1D barcode ' . $value . ' is not compliant with the barcode type '. $type);
         }
     }
 

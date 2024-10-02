@@ -30,15 +30,38 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#assets" data-toggle="tab">{{ trans('general.assets') }}</a></li>
-                    <li><a href="#licenses" data-toggle="tab">{{ trans('general.licenses') }}</a></li>
-                    <li><a href="#models" data-toggle="tab">{{ trans('general.asset_models') }}</a></li>
-                    </ul>
+                    <li class="active">
+                        <a href="#assets" data-toggle="tab">
+                            {{ trans('general.assets') }}
+
+                            {!! ($depreciation->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($depreciation->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#licenses" data-toggle="tab">
+                            {{ trans('general.licenses') }}
+
+                            {!! ($depreciation->licenses_count > 0 ) ? '<badge class="badge badge-secondary">'.number_format($depreciation->licenses_count).'</badge>' : '' !!}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#models" data-toggle="tab">
+                            {{ trans('general.asset_models') }}
+
+                            {!! ($depreciation->models_count > 0 ) ? '<badge class="badge badge-secondary">'.number_format($depreciation->models_count).'</badge>' : '' !!}
+                        </a>
+                    </li>
+                </ul>
 
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="assets">
 
+                        @include('partials.asset-bulk-actions', [
+                                'id_divname' => 'assetsBulkEditToolbar',
+                                'id_formname' => 'assetsBulkForm',
+                                'id_button' => 'assetEditButton'
+                                ])
 
                         <table
                                 data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
@@ -53,6 +76,10 @@
                                 data-show-refresh="true"
                                 data-sort-order="asc"
                                 data-sort-name="name"
+                                data-toolbar="#assetsBulkEditToolbar"
+                                data-bulk-button-id="#assetEditButton"
+                                data-bulk-form-id="#assetsBulkForm"
+                                data-click-to-select="true"
                                 class="table table-striped snipe-table"
                                 data-url="{{ route('api.assets.index',['depreciation_id'=> $depreciation->id]) }}"
                                 data-export-options='{
@@ -107,7 +134,7 @@
                                      'method' => 'POST',
                                      'route' => ['models.bulkedit.index'],
                                      'class' => 'form-inline',
-                                      'id' => 'bulkForm']
+                                     'id' => 'bulkForm']
                                       ) }}
                             <div class="col-md-12">
                                 <div id="toolbar">
@@ -116,7 +143,7 @@
                                         <option value="edit">{{ trans('general.bulk_edit') }}</option>
                                         <option value="delete">{{ trans('general.bulk_delete') }}</option>
                                     </select>
-                                    <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
+                                    <button class="btn btn-primary" id="AssetModelsBulkEditButton" disabled>{{ trans('button.go') }}</button>
                                 </div>
 
                                 <div class="table-responsive">
@@ -134,6 +161,9 @@
                                             data-show-refresh="true"
                                             data-sort-order="asc"
                                             data-sort-name="name"
+                                            data-bulk-button-id="#AssetModelsBulkEditButton"
+                                            data-bulk-form-id="#bulkForm"
+                                            data-click-to-select="true"
                                             class="table table-striped snipe-table"
                                             data-url="{{ route('api.models.index',['depreciation_id'=> $depreciation->id]) }}"
                                             data-export-options='{

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Components;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Component;
@@ -56,10 +57,11 @@ class ComponentCheckinController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request, $component_asset_id)
+    public function store(Request $request, $component_asset_id, $backto = null)
     {
         if ($component_assets = DB::table('components_assets')->find($component_asset_id)) {
             if (is_null($component = Component::find($component_assets->component_id))) {
+
                 return redirect()->route('components.index')->with('error',
                     trans('admin/components/message.not_found'));
             }
@@ -94,9 +96,11 @@ class ComponentCheckinController extends Controller
 
             $asset = Asset::find($component_assets->asset_id);
 
-            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note'), Carbon::now()));
+            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
 
-            return redirect()->route('components.index')->with('success',
+            session()->put(['redirect_option' => $request->get('redirect_option')]);
+
+            return redirect()->to(Helper::getRedirectOption($request, $component->id, 'Components'))->with('success',
                 trans('admin/components/message.checkin.success'));
         }
 

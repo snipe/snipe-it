@@ -29,7 +29,7 @@ class ActionlogFactory extends Factory
         return [
             'item_id' => Asset::factory(),
             'item_type' => Asset::class,
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'action_type' => 'uploaded',
         ];
     }
@@ -38,7 +38,7 @@ class ActionlogFactory extends Factory
     {
         return $this->state(function () {
             $target = User::inRandomOrder()->first();
-            $asset = Asset::RTD()->inRandomOrder()->first();
+            $asset = Asset::inRandomOrder()->RTD()->first();
 
             $asset->update(
                     [
@@ -92,7 +92,7 @@ class ActionlogFactory extends Factory
 
             $licenseSeat->update([
                 'assigned_to' => $target->id,
-                'user_id' => 1, // not ideal but works
+                'created_by' => 1, // not ideal but works
             ]);
 
             return [
@@ -102,6 +102,66 @@ class ActionlogFactory extends Factory
                 'item_type'  => License::class,
                 'target_id' => $target->id,
                 'target_type' => User::class,
+            ];
+        });
+    }
+
+    public function filesUploaded()
+    {
+        return $this->state(function () {
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'uploaded',
+                'item_type'  => User::class,
+                'filename'  => $this->faker->unixTime('now'),
+            ];
+        });
+    }
+
+    public function acceptedSignature()
+    {
+        return $this->state(function () {
+
+            $asset = Asset::factory()->create();
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'accepted',
+                'item_id' => $asset->id,
+                'item_type'  => Asset::class,
+                'target_type'  => User::class,
+                'accept_signature'  => $this->faker->unixTime('now'),
+            ];
+        });
+    }
+
+    public function acceptedEula()
+    {
+        return $this->state(function () {
+
+            $asset = Asset::factory()->create();
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'accepted',
+                'item_id' => $asset->id,
+                'item_type'  => Asset::class,
+                'target_type'  => User::class,
+                'filename'  => $this->faker->unixTime('now'),
+            ];
+        });
+    }
+
+    public function userUpdated()
+    {
+        return $this->state(function () {
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'update',
+                'target_type'  => User::class,
+                'item_type'  => User::class,
             ];
         });
     }

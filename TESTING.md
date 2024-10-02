@@ -20,7 +20,7 @@ APP_DEBUG=true
 APP_KEY=base64:glJpcM7BYwWiBggp3SQ/+NlRkqsBQMaGEOjemXqJzOU=
 APP_URL=http://localhost:8000
 APP_TIMEZONE='UTC'
-APP_LOCALE=en
+APP_LOCALE=en-US
 
 # --------------------------------------------
 # REQUIRED: DATABASE SETTINGS
@@ -45,8 +45,21 @@ DB_PASSWORD={}
 
 Now you are ready to run the entire test suite from your terminal:
 
-`php artisan test`
+```shell
+php artisan test
+````
 
 To run individual test files, you can pass the path to the test that you want to run:
 
-`php artisan test tests/Unit/AccessoryTest.php`
+```shell
+php artisan test tests/Unit/AccessoryTest.php
+```
+
+Some tests, like ones concerning LDAP, are marked with the `@group` annotation. Those groups can be run, or excluded, using the `--group` or `--exclude-group` flags:
+
+```shell
+php artisan test --group=ldap
+
+php artisan test --exclude-group=ldap
+```
+This can be helpful if a set of tests are failing because you don't have an extension, like LDAP, installed.

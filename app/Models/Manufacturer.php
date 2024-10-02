@@ -22,9 +22,9 @@ class Manufacturer extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = [
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,id,deleted_at,NULL',
-        'url'   => 'url|nullable',
+        'url'   => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
         'support_email'   => 'email|nullable',
-        'support_url'   => 'nullable|url',
+        'support_url'   => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
         'warranty_lookup_url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://'
     ];
 
@@ -74,10 +74,11 @@ class Manufacturer extends SnipeModel
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
-            && ($this->assets()->count() === 0)
-            && ($this->licenses()->count() === 0)
-            && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0);
+            && (($this->assets_count ?? $this->assets()->count()) === 0)
+            && (($this->licenses_count ?? $this->licenses()->count()) === 0)
+            && (($this->consumables_count ?? $this->consumables()->count()) === 0)
+            && (($this->accessories_count ?? $this->accessories()->count()) === 0)
+            && ($this->deleted_at == '');
     }
 
     public function assets()
@@ -103,5 +104,20 @@ class Manufacturer extends SnipeModel
     public function consumables()
     {
         return $this->hasMany(\App\Models\Consumable::class, 'manufacturer_id');
+    }
+
+
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
+    /**
+     * Query builder scope to order on the user that created it
+     */
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'manufacturers.created_by', '=', 'admin_sort.id')->select('manufacturers.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

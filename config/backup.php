@@ -36,6 +36,13 @@ return [
             'files' => [
 
                 /*
+                * This path is used to make directories in resulting zip-file relative
+                * Set to false to include complete absolute path
+                * Example: base_path()
+                */
+                'relative_path' => base_path(),
+
+                /*
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => $included_dirs,
@@ -114,12 +121,12 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => [env('MAIL_BACKUP_NOTIFICATION_DRIVER', null)],
         ],
 
         /*
@@ -130,6 +137,11 @@ return [
 
         'mail' => [
             'to' => env('MAIL_BACKUP_NOTIFICATION_ADDRESS', null),
+
+            'from' => [
+                'address' => env('MAIL_FROM_ADDR', 'hello@example.com'),
+                'name' => env('MAIL_FROM_NAME', 'Example'),
+            ],
         ],
 
         'slack' => [
@@ -144,6 +156,20 @@ return [
 
             'icon' => null,
 
+        ],
+
+        'discord' => [
+            'webhook_url' => '',
+
+            /*
+             * If this is an empty string, the name field on the webhook will be used.
+             */
+            'username' => '',
+
+            /*
+             * If this is an empty string, the avatar on the webhook will be used.
+             */
+            'avatar_url' => '',
         ],
     ],
 
@@ -210,5 +236,7 @@ return [
             'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
         ],
     ],
+
+    'sanitize_by_default' => env('DB_SANITIZE_BY_DEFAULT', false),
 
 ];

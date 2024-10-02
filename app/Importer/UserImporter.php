@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This is ONLY used for the User Import. When we are importing users
@@ -42,32 +43,33 @@ class UserImporter extends ItemImporter
     public function createUserIfNotExists(array $row)
     {
         // Pull the records from the CSV to determine their values
-        $this->item['id'] = $this->findCsvMatch($row, 'id');
-        $this->item['username'] = $this->findCsvMatch($row, 'username');
-        $this->item['first_name'] = $this->findCsvMatch($row, 'first_name');
-        $this->item['last_name'] = $this->findCsvMatch($row, 'last_name');
-        $this->item['email'] = $this->findCsvMatch($row, 'email');
-        $this->item['gravatar'] = $this->findCsvMatch($row, 'gravatar');
-        $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
-        $this->item['website'] = $this->findCsvMatch($row, 'website');
-        $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
-        $this->item['address'] = $this->findCsvMatch($row, 'address');
-        $this->item['city'] = $this->findCsvMatch($row, 'city');
-        $this->item['state'] = $this->findCsvMatch($row, 'state');
-        $this->item['country'] = $this->findCsvMatch($row, 'country');
-        $this->item['start_date'] = $this->findCsvMatch($row, 'start_date');
-        $this->item['end_date'] = $this->findCsvMatch($row, 'end_date');
-        $this->item['zip'] = $this->findCsvMatch($row, 'zip');
-        $this->item['activated'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
-        $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
-        $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
-        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
-        $this->item['remote'] =($this->fetchHumanBoolean($this->findCsvMatch($row, 'remote')) ==1 ) ? '1' : 0;
-        $this->item['vip'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'vip')) ==1 ) ? '1' : 0;
-        $this->item['autoassign_licenses'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'autoassign_licenses')) ==1 ) ? '1' : 0;
+        $this->item['id'] = trim($this->findCsvMatch($row, 'id'));
+        $this->item['username'] = trim($this->findCsvMatch($row, 'username'));
+        $this->item['first_name'] = trim($this->findCsvMatch($row, 'first_name'));
+        $this->item['last_name'] = trim($this->findCsvMatch($row, 'last_name'));
+        $this->item['email'] = trim($this->findCsvMatch($row, 'email'));
+        $this->item['gravatar'] = trim($this->findCsvMatch($row, 'gravatar'));
+        $this->item['phone'] = trim($this->findCsvMatch($row, 'phone_number'));
+        $this->item['website'] = trim($this->findCsvMatch($row, 'website'));
+        $this->item['jobtitle'] = trim($this->findCsvMatch($row, 'jobtitle'));
+        $this->item['address'] = trim($this->findCsvMatch($row, 'address'));
+        $this->item['city'] = trim($this->findCsvMatch($row, 'city'));
+        $this->item['state'] = trim($this->findCsvMatch($row, 'state'));
+        $this->item['country'] = trim($this->findCsvMatch($row, 'country'));
+        $this->item['start_date'] = trim($this->findCsvMatch($row, 'start_date'));
+        $this->item['end_date'] = trim($this->findCsvMatch($row, 'end_date'));
+        $this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
+        $this->item['activated'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'activated'))) == 1) ? '1' : 0;
+        $this->item['employee_num'] = trim($this->findCsvMatch($row, 'employee_num'));
+        $this->item['department_id'] = trim($this->createOrFetchDepartment(trim($this->findCsvMatch($row, 'department'))));
+        $this->item['manager_id'] = $this->fetchManager(trim($this->findCsvMatch($row, 'manager_first_name')), trim($this->findCsvMatch($row, 'manager_last_name')));
+        $this->item['remote'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'remote'))) == 1 ) ? '1' : 0;
+        $this->item['vip'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'vip'))) ==1 ) ? '1' : 0;
+        $this->item['autoassign_licenses'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'autoassign_licenses'))) ==1 ) ? '1' : 0;
 
+        $this->handleEmptyStringsForDates();
 
-        $user_department = $this->findCsvMatch($row, 'department');
+        $user_department = trim($this->findCsvMatch($row, 'department'));
         if ($this->shouldUpdateField($user_department)) {
             $this->item['department_id'] = $this->createOrFetchDepartment($user_department);
         }
@@ -88,7 +90,7 @@ class UserImporter extends ItemImporter
         if ($user) {
 
             if (! $this->updating) {
-                \Log::debug('A matching User '.$this->item['name'].' already exists.  ');
+                Log::debug('A matching User '.$this->item['name'].' already exists.  ');
                 return;
             }
             $this->log('Updating User');
@@ -100,7 +102,7 @@ class UserImporter extends ItemImporter
                 ->where('assigned_to', $user->id)
                 ->update(['location_id' => $user->location_id]);
             
-            // \Log::debug('UserImporter.php Updated User ' . print_r($user, true));
+            // Log::debug('UserImporter.php Updated User ' . print_r($user, true));
             return;
         }
 
@@ -163,7 +165,7 @@ class UserImporter extends ItemImporter
 
         $department = new department();
         $department->name = $department_name;
-        $department->user_id = $this->user_id;
+        $department->created_by = $this->created_by;
 
         if ($department->save()) {
             $this->log('department ' . $department_name . ' was created');
@@ -177,5 +179,23 @@ class UserImporter extends ItemImporter
     public function sendWelcome($send = true)
     {
         $this->send_welcome = $send;
+    }
+
+    /**
+     * Since the findCsvMatch() method will set '' for columns that are present but empty,
+     * we need to set those empty strings to null to avoid passing bad data to the database
+     * (ie ending up with 0000-00-00 instead of the intended null).
+     *
+     * @return void
+     */
+    private function handleEmptyStringsForDates(): void
+    {
+        if ($this->item['start_date'] === '') {
+            $this->item['start_date'] = null;
+        }
+
+        if ($this->item['end_date'] === '') {
+            $this->item['end_date'] = null;
+        }
     }
 }

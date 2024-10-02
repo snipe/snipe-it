@@ -55,7 +55,7 @@
 
   &.btn-primary, .btn-primary:link {
     background-color: var(--button-default);
-    border-color: var(--button-default);
+    border-color: #000000;
     color: #545454;
   }
 
@@ -355,8 +355,11 @@ input[type=text], input[type=search] {
 .skin-yellow-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
+.skin-yellow-dark .main-header .navbar .dropdown-menu li a:hover {
+  background-color: #000000;
+}
 tr th div.th-inner {
-  color:var(--text-main);
+  color: #FFFFFF;
 }
 .tab-content, .tab-pane {
   background-color: var(--back-main);
@@ -415,4 +418,7 @@ tr th div.th-inner {
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+.table > tbody > tr.warning > td{
+  background-color:var(--back-sub);
 }

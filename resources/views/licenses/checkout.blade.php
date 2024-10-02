@@ -21,21 +21,29 @@
 
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ $license->name }}</h2>
+                    <h2 class="box-title"> {{ $license->name }} ({{ trans('admin/licenses/message.seats_available', ['seat_count' => $license->availCount()->count()]) }})</h2>
                 </div>
                 <div class="box-body">
+
 
                     <!-- Asset name -->
                     <div class="form-group">
                         <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <p class="form-control-static">{{ $license->name }}</p>
+                        </div>
+                    </div>
+                    <!-- Category -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ trans('general.category') }}</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">{{ $license->category->name }}</p>
                         </div>
                     </div>
 
                     <!-- Serial -->
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>
+                        <label class="col-sm-3 control-label">{{ trans('admin/licenses/form.license_key') }}</label>
                         <div class="col-md-9">
                             <p class="form-control-static" style="word-wrap: break-word;">
                                 @can('viewKeys', $license)
@@ -47,18 +55,18 @@
                         </div>
                     </div>
 
-                    @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'false'])
+                    @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true'])
 
-                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_to', 'required'=>'true'])
+                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_to'])
 
                     @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/licenses/form.asset'), 'fieldname' => 'asset_id', 'style' => 'display:none;'])
 
 
                     <!-- Note -->
-                    <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+                    <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
                         <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
-                        <div class="col-md-7">
-                            <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
+                        <div class="col-md-8">
+                            <textarea class="col-md-6 form-control" id="notes" name="notes" style="width: 100%">{{ old('note') }}</textarea>
                             {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>
@@ -97,10 +105,15 @@
                     </div>
                 @endif
 
-                <div class="box-footer">
-                    <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
-                    <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
-                </div>
+                <x-redirect_submit_options
+                        index_route="licenses.index"
+                        :button_label="trans('general.checkout')"
+                        :options="[
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.licenses')]),
+                                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.license')]),
+                                'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
+                               ]"
+                />
             </div> <!-- /.box-->
         </form>
     </div> <!-- /.col-md-7-->

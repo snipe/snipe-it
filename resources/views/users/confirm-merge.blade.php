@@ -48,6 +48,7 @@
                                         <th class="col-md-3">{{ trans('general.name') }}</th>
                                         <th class="col-md-3">{{ trans('general.email') }}</th>
                                         <th class="col-md-3">{{ trans('general.username') }}</th>
+                                        <th class="col-md-3">{{ trans('general.employee_number') }}</th>
                                         <th class="col-md-3">{{ trans('general.groups') }}</th>
                                         <th class="col-md-1 text-right">
                                             <i class="fas fa-barcode fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
@@ -65,6 +66,10 @@
                                             <i class="fas fa-tint fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
                                             <span class="sr-only">{{ trans('general.consumables') }}</span>
                                         </th>
+                                        <th class="col-md-1 text-right">
+                                            <i class="fas fa-paperclip fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                                            <span class="sr-only">{{ trans('general.files') }}</span>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -80,6 +85,9 @@
                                             <td>
                                                 {{ $user->username }}
                                             </td>
+                                            <td>
+                                                {{ $user->employee_num }}
+                                            </td>
 
                                             <td>
                                                 @foreach ($user->groups as $group)
@@ -89,16 +97,19 @@
                                                 @endforeach
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->assets()->count())  }}
+                                                {{ number_format($user->assets->count())  }}
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->accessories()->count())  }}
+                                                {{ number_format($user->accessories->count())  }}
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->licenses()->count())  }}
+                                                {{ number_format($user->licenses->count())  }}
                                             </td>
                                             <td class="text-right">
-                                                {{ number_format($user->consumables()->count())  }}
+                                                {{ number_format($user->consumables->count())  }}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ number_format($user->uploads->count())  }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -110,7 +121,7 @@
                     </div> <!--/box-body-->
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled><x-icon type="checkmark" /> {{ trans('button.submit') }}</button>
                     </div><!-- /.box-footer -->
 
                     @foreach ($users as $user)

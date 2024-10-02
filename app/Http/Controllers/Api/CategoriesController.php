@@ -8,9 +8,9 @@ use App\Http\Transformers\CategoriesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
@@ -21,7 +21,7 @@ class CategoriesController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : array
     {
         $this->authorize('view', Category::class);
         $allowed_columns = [
@@ -43,6 +43,7 @@ class CategoriesController extends Controller
 
         $categories = Category::select([
             'id',
+            'created_by',
             'created_at',
             'updated_at',
             'name', 'category_type',
@@ -50,8 +51,10 @@ class CategoriesController extends Controller
             'eula_text',
             'require_acceptance',
             'checkin_email',
-            'image'
-            ])->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
+            'image',
+            ])
+            ->with('adminuser')
+            ->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
 
 
         /*
@@ -91,13 +94,33 @@ class CategoriesController extends Controller
             $categories->where('checkin_email', '=', $request->input('checkin_email'));
         }
 
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : abs($request->input('offset'));
-        $limit = app('api_limit_value');
+        if ($request->filled('created_by')) {
+            $categories->where('created_by', '=', $request->input('created_by'));
+        }
 
+        if ($request->filled('created_at')) {
+            $categories->where('created_at', '=', $request->input('created_at'));
+        }
+
+        if ($request->filled('updated_at')) {
+            $categories->where('updated_at', '=', $request->input('updated_at'));
+        }
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
-        $categories->orderBy($sort, $order);
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets_count';
+
+        switch ($sort_override) {
+            case 'created_by':
+                $categories = $categories->OrderByCreatedBy($order);
+                break;
+            default:
+                $categories = $categories->orderBy($column_sort, $order);
+                break;
+        }
 
         $total = $categories->count();
         $categories = $categories->skip($offset)->take($limit)->get();
@@ -115,7 +138,7 @@ class CategoriesController extends Controller
      * @param  \App\Http\Requests\ImageUploadRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Category::class);
         $category = new Category;
@@ -136,9 +159,8 @@ class CategoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('view', Category::class);
         $category = Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')->findOrFail($id);
@@ -156,7 +178,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Category::class);
         $category = Category::findOrFail($id);
@@ -164,7 +186,7 @@ class CategoriesController extends Controller
         // Don't allow the user to change the category_type once it's been created
         if (($request->filled('category_type')) && ($category->category_type != $request->input('category_type'))) {
             return response()->json(
-                Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.update.cannot_change_category_type'))
+                Helper::formatStandardApiResponse('error', null,  ['category_type' => trans('admin/categories/message.update.cannot_change_category_type')], 422)
             );
         }
         $category->fill($request->all());
@@ -185,7 +207,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Category::class);
         $category = Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')->findOrFail($id);
@@ -208,7 +230,7 @@ class CategoriesController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request, $category_type = 'asset')
+    public function selectlist(Request $request, $category_type = 'asset') : array
     {
         $this->authorize('view.selectlists');
         $categories = Category::select([

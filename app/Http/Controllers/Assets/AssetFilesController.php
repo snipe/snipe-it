@@ -4,26 +4,29 @@ namespace App\Http\Controllers\Assets;
 
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use Illuminate\Support\Facades\Response;
+use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
-use enshrined\svgSanitize\Sanitizer;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AssetFilesController extends Controller
 {
     /**
      * Upload a file to the server.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param AssetFileRequest $request
+     * @param UploadFileRequest $request
      * @param int $assetId
-     * @return Redirect
-     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *@since [v1.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function store(AssetFileRequest $request, $assetId = null)
+    public function store(UploadFileRequest $request, $assetId = null) : RedirectResponse
     {
         if (! $asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -37,30 +40,9 @@ class AssetFilesController extends Controller
             }
 
             foreach ($request->file('file') as $file) {
-
-                $extension = $file->getClientOriginalExtension();
-                $file_name = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-                // Check for SVG and sanitize it
-                if ($extension=='svg') {
-                    \Log::debug('This is an SVG');
-
-                        $sanitizer = new Sanitizer();
-                        $dirtySVG = file_get_contents($file->getRealPath());
-                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                        try {
-                            Storage::put('private_uploads/assets/'.$file_name, $cleanSVG);
-                        } catch (\Exception $e) {
-                            \Log::debug('Upload no workie :( ');
-                            \Log::debug($e);
-                        }
-                } else {
-                Storage::put('private_uploads/assets/'.$file_name, file_get_contents($file));
-                }
-               
+                $file_name = $request->handleFile('private_uploads/assets/','hardware-'.$asset->id, $file);
                 
-                $asset->logUpload($file_name, e($request->get('notes')));
+                $asset->logUpload($file_name, $request->get('notes'));
             }
 
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
@@ -76,23 +58,20 @@ class AssetFilesController extends Controller
      * @param  int $assetId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($assetId = null, $fileId = null)
+    public function show($assetId = null, $fileId = null) : View | RedirectResponse | Response | StreamedResponse | BinaryFileResponse
     {
         $asset = Asset::find($assetId);
         // the asset is valid
         if (isset($asset->id)) {
             $this->authorize('view', $asset);
 
-            if (! $log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $asset->id)->find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
 
             $file = 'private_uploads/assets/'.$log->filename;
-            \Log::debug('Checking for '.$file);
 
             if ($log->action_type == 'audit') {
                 $file = 'private_uploads/audits/'.$log->filename;
@@ -128,10 +107,8 @@ class AssetFilesController extends Controller
      * @param  int $assetId
      * @param  int $fileId
      * @since [v1.0]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($assetId = null, $fileId = null)
+    public function destroy($assetId = null, $fileId = null) : RedirectResponse
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);
@@ -154,7 +131,6 @@ class AssetFilesController extends Controller
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
-        // Redirect to the hardware management page
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
 }

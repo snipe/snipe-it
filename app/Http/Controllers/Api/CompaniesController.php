@@ -10,6 +10,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\JsonResponse;
 
 class CompaniesController extends Controller
 {
@@ -18,9 +19,8 @@ class CompaniesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Company::class);
 
@@ -40,7 +40,9 @@ class CompaniesController extends Controller
             'components_count',
         ];
 
-        $companies = Company::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
+        $companies = Company::withCount(['assets as assets_count'  => function ($query) {
+            $query->AssetsForShow();
+        }])->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
 
         if ($request->filled('search')) {
             $companies->TextSearch($request->input('search'));
@@ -54,17 +56,29 @@ class CompaniesController extends Controller
             $companies->where('email', '=', $request->input('email'));
         }
 
+        if ($request->filled('created_by')) {
+            $companies->where('created_by', '=', $request->input('created_by'));
+        }
+
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $companies->count()) ? $companies->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $companies->count()) ? $companies->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $companies->orderBy($sort, $order);
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
+
+        switch ($sort_override) {
+            case 'created_by':
+                $companies = $companies->OrderByCreatedBy($order);
+                break;
+            default:
+                $companies = $companies->orderBy($column_sort, $order);
+                break;
+        }
 
         $total = $companies->count();
+
         $companies = $companies->skip($offset)->take($limit)->get();
         return (new CompaniesTransformer)->transformCompanies($companies, $total);
 
@@ -77,9 +91,8 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Company::class);
         $company = new Company;
@@ -100,9 +113,8 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
@@ -118,9 +130,8 @@ class CompaniesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Company::class);
         $company = Company::findOrFail($id);
@@ -142,9 +153,8 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $this->authorize('delete', Company::class);
         $company = Company::findOrFail($id);
@@ -167,7 +177,7 @@ class CompaniesController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request) : array
     {
         $this->authorize('view.selectlists');
         $companies = Company::select([

@@ -12,7 +12,7 @@ return array(
     'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'വിഭാഗം EULA',
     'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
-    'name'                              => 'Category Name',
+    'name'                              => 'വിഭാഗത്തിന്റെ പേര്',
     'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',
     'required_acceptance'				=> 'This user will be emailed with a link to confirm acceptance of this item.',
     'required_eula'						=> 'This user will be emailed a copy of the EULA',

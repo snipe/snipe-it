@@ -37,7 +37,7 @@ return [
     'accessory_detached'                => 'Stavka je uspešno odvojena',
     'accessory_error'                   => 'Stavka je vezana za koplet',
     'accessory_deleted'                 => 'Brisanje je izvršeno uspešno',
-    'accessory_none'                    => 'Stavka ne postoji',
+    'accessory_none'                    => 'Pribor ne postoji',
     'checkout_success'                  => 'Razduženje je bilo uspešno',
     'checkout_error'                    => 'Greška u razduženju',
     'kit_none'                          => 'Komplet ne postoji',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Komplet je uspešno izbrisan',
     'kit_model_updated'                 => 'Model je uspešno ažuriran',
     'kit_model_detached'                => 'Model je uspešno odvojen',
+    'model_already_attached'            => 'Model je već povezan sa kompletom',
 ];

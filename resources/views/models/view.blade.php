@@ -41,9 +41,9 @@
                         <span class="hidden-lg hidden-md">
                           <i class="fas fa-barcode fa-2x"></i>
                         </span>
-                                    <span class="hidden-xs hidden-sm">
+                        <span class="hidden-xs hidden-sm">
                             {{ trans('general.assets') }}
-                                        {!! (($model->assets) && ($model->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($model->assets->count()).'</badge>' : '' !!}
+                            {!! ($model->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                         </span>
                     </a>
                 </li>
@@ -62,7 +62,7 @@
                 </li>
                 <li class="pull-right">
                     <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                        <i class="fas fa-paperclip" aria-hidden="true"></i>
+                        <x-icon type="paperclip" />
                         {{ trans('button.upload') }}
                     </a>
                 </li>
@@ -166,14 +166,14 @@
                                                     {{ $file->note }}
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td style="white-space: nowrap">
                                                 @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
                                                     <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-sm btn-default">
                                                         <i class="fas fa-download" aria-hidden="true"></i>
                                                     </a>
 
                                                     <a href="{{ route('show/modelfile', [$model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                        <x-icon type="external-link" />
                                                     </a>
 
                                                 @endif
@@ -236,6 +236,18 @@
                         </li>
                     @endif
 
+                    @if ($model->created_at)
+                        <li>{{ trans('general.created_at') }}:
+                            {{ Helper::getFormattedDateObject($model->created_at, 'datetime', false) }}
+                        </li>
+                    @endif
+
+                    @if ($model->min_amt)
+                        <li>{{ trans('general.min_amt') }}:
+                           {{$model->min_amt }}
+                        </li>
+                    @endif
+
                     @if ($model->manufacturer)
                         <li>
                             {{ trans('general.manufacturer') }}:
@@ -256,7 +268,7 @@
 
                         @if ($model->manufacturer->support_url)
                             <li>
-                                <i class="far fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
+                                <x-icon type="more-info" /> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
                             </li>
                         @endif
 
@@ -303,15 +315,10 @@
                     @if ($model->notes)
                         <li>
                             {{ trans('general.notes') }}:
-                            {{ $model->notes }}
+                            {!! nl2br(Helper::parseEscapedMarkedownInline($model->notes)) !!}
                         </li>
                     @endif
 
-
-
-                    @if  ($model->deleted_at!='')
-                        <li><br /><a href="{{ route('models.restore.store', $model->id) }}" class="btn-flat large info ">{{ trans('admin/models/general.restore') }}</a></li>
-                    @endif
                 </ul>
 
                 @if ($model->note)
@@ -325,29 +332,47 @@
         </div>
             @can('update', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/models/table.edit') }}</a>
+                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                    <x-icon type="edit" />
+                    {{ trans('admin/models/table.edit') }}
+                </a>
             </div>
             @endcan
 
             @can('create', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.clone.create', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('admin/models/table.clone') }}</a>
+                <a href="{{ route('models.clone.create', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-info btn-social hidden-print">
+                    <x-icon type="clone" />
+                    {{ trans('admin/models/table.clone') }}
+                </a>
             </div>
             @endcan
 
             @can('delete', \App\Models\AssetModel::class)
-                @if ($model->assets->count() > 0)
+                <div class="col-md-12" style="padding-top: 10px;">
 
-                    <div class="col-md-12" style="padding-bottom: 5px;">
-                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print disabled">{{ trans('general.delete') }}</a>
-                    </div>
-                @else
-
-                    <div class="col-md-12" style="padding-bottom: 10px;">
-                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('general.delete') }}</a>
-                    </div>
+                    @if ($model->deleted_at!='')
+                        <form method="POST" action="{{ route('models.restore.store', $model->id) }}">
+                            @csrf
+                            <button style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                                <x-icon type="restore" />
+                                {{ trans('button.restore') }}
+                            </button>
+                        </form>
+                    @elseif ($model->assets()->count() > 0)
+                        <button class="btn btn-block btn-sm btn-danger btn-social hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">
+                            <x-icon type="delete" />
+                            {{ trans('general.delete') }}
+                        </button>
+                    @else
+                        <button class="btn btn-block btn-sm btn-danger btn-social delete-asset" data-toggle="modal" title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $model->name]) }}" data-target="#dataConfirmModal" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}">
+                            <x-icon type="delete" />
+                            {{ trans('general.delete') }}
+                        </button>
+                </div>
                 @endif
            @endcan
+
         </div>
 </div> <!-- /.row -->
 
@@ -357,6 +382,16 @@
 @stop
 
 @section('moar_scripts')
+
+        <script>
+            $('#dataConfirmModal').on('show.bs.modal', function (event) {
+                var content = $(event.relatedTarget).data('content');
+                var title = $(event.relatedTarget).data('title');
+                $(this).find(".modal-body").text(content);
+                $(this).find(".modal-header").text(title);
+            });
+        </script>
+
     @include ('partials.bootstrap-table', ['exportFile' => 'manufacturer' . $model->name . '-export', 'search' => false])
 
 @stop

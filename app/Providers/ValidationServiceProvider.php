@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\CustomField;
 use App\Models\Department;
-use DB;
+use App\Models\Setting;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\Rule;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This service provider handles a few custom validation rules.
@@ -45,30 +46,94 @@ class ValidationServiceProvider extends ServiceProvider
             return $validator->passes();
         });
 
-        // Unique only if undeleted
-        // This works around the use case where multiple deleted items have the same unique attribute.
-        // (I think this is a bug in Laravel's validator?)
+
+        /**
+         * Unique only if undeleted.
+         *
+         * This works around the use case where multiple deleted items have the same unique attribute.
+         * (I think this is a bug in Laravel's validator?)
+         *
+         * $attribute is the FIELDNAME you're checking against
+         * $value is the VALUE of the item you're checking against the existing values in the fieldname
+         * $parameters[0] is the TABLE NAME you're querying
+         * $parameters[1] is the ID of the item you're querying - this makes it work on saving, checkout, etc,
+         *   since it defaults to 0 if there is no item created yet (new item), but populates the ID if editing
+         *
+         * The UniqueUndeletedTrait prefills these parameters, so you can just use
+         * `unique_undeleted:table,fieldname` in your rules out of the box
+         */
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters)) {
-                $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
+
+                // This is a bit of a shim, but serial doesn't have any other rules around it other than that it's nullable
+                if (($parameters[0]=='assets') && ($attribute == 'serial') && (Setting::getSettings()->unique_serial != '1')) {
+                    return true;
+                }
+
+                $count = DB::table($parameters[0])
+                    ->select('id')
+                    ->where($attribute, '=', $value)
+                    ->whereNull('deleted_at')
+                    ->where('id', '!=', $parameters[1])->count();
+
+                return $count < 1;
+            }
+        });
+        
+        /**
+         * Unique if undeleted for two columns
+         *
+         * Same as unique_undeleted but taking the combination of two columns as unique constrain.
+         * This uses the Validator::replacer('two_column_unique_undeleted') below for nicer translations.
+         *
+         * $parameters[0] - the name of the first table we're looking at
+         * $parameters[1] - the ID (this will be 0 on new creations)
+         * $parameters[2] - the name of the second field we're looking at
+         * $parameters[3] - the value that the request is passing for the second table we're
+         *                  checking for uniqueness across
+         *
+         */
+        Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+
+            if (count($parameters)) {
+                
+                $count = DB::table($parameters[0])
+                    ->select('id')
+                    ->where($attribute, '=', $value)
+                    ->where('id', '!=', $parameters[1]);
+
+                if ($parameters[3]!='') {
+                    $count = $count->where($parameters[2], $parameters[3]);
+                }
+
+                $count = $count->whereNull('deleted_at')
+                    ->count();
 
                 return $count < 1;
             }
         });
 
-        // Unique if undeleted for two columns
-            // Same as unique_undeleted but taking the combination of two columns as unique constrain.
-            Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-                if (count($parameters)) {
-                    $count = DB::table($parameters[0])
-                             ->select('id')->where($attribute, '=', $value)
-                             ->whereNull('deleted_at')
-                             ->where('id', '!=', $parameters[1])
-                             ->where($parameters[2], $parameters[3])->count();
 
-                    return $count < 1;
-                }
-            });
+        /**
+         * This is the validator replace static method that allows us to pass the $parameters of the table names
+         * into the translation string in validation.two_column_unique_undeleted for two_column_unique_undeleted
+         * validation messages.
+         *
+         * This is invoked automatically by Validator::extend('two_column_unique_undeleted') above and
+         * produces a translation like: "The name value must be unique across categories and category type."
+         *
+         * The $parameters passed coincide with the ones the two_column_unique_undeleted custom validator above
+         * uses, so $parameter[0] is the first table and so $parameter[2] is the second table.
+         */
+        Validator::replacer('two_column_unique_undeleted', function($message, $attribute, $rule, $parameters) {
+            $message = str_replace(':table1', $parameters[0], $message);
+            $message = str_replace(':table2', $parameters[2], $message);
+
+            // Change underscores to spaces for a friendlier display
+            $message = str_replace('_', ' ', $message);
+            return $message;
+        });
+
 
         // Prevent circular references
         //
@@ -218,7 +283,24 @@ class ValidationServiceProvider extends ServiceProvider
 
         Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator) {
             $data = $validator->getData();
-            if ((array_key_exists('location_id', $data) && $data['location_id'] != null) && (array_key_exists('company_id', $data) && $data['company_id'] != null)) {
+
+            if (
+                array_key_exists('location_id', $data) && $data['location_id'] !== null &&
+                array_key_exists('company_id', $data) && $data['company_id'] !== null
+            ) {
+                //for updating existing departments
+                if(array_key_exists('id', $data) && $data['id'] !== null){
+                    $count = Department::where('name', $data['name'])
+                        ->where('location_id', $data['location_id'])
+                        ->where('company_id', $data['company_id'])
+                        ->whereNotNull('company_id')
+                        ->whereNotNull('location_id')
+                        ->where('id', '!=', $data['id'])
+                        ->count('name');
+
+                    return $count < 1;
+                }else // for entering in new departments
+                {
                 $count = Department::where('name', $data['name'])
                     ->where('location_id', $data['location_id'])
                     ->where('company_id', $data['company_id'])
@@ -228,9 +310,47 @@ class ValidationServiceProvider extends ServiceProvider
 
                 return $count < 1;
             }
+        }
             else {
                 return true;
+        }
+        });
+
+        Validator::extend('not_array', function ($attribute, $value, $parameters, $validator) {
+            return !is_array($value);
+        });
+
+        // This is only used in Models/CustomFieldset.php - it does automatic validation for checkboxes by making sure
+        // that the submitted values actually exist in the options.
+        Validator::extend('checkboxes', function ($attribute, $value, $parameters, $validator){
+            $field = CustomField::where('db_column', $attribute)->first();
+            $options = $field->formatFieldValuesAsArray();
+
+            if(is_array($value)) {
+                $invalid = array_diff($value, $options);
+                if(count($invalid) > 0) {
+                    return false;
+                }
             }
+
+            // for legacy, allows users to submit a comma separated string of options
+            elseif(!is_array($value)) {
+                $exploded = array_map('trim', explode(',', $value));
+                $invalid = array_diff($exploded, $options);
+                if(count($invalid) > 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        // Validates that a radio button option exists
+        Validator::extend('radio_buttons', function ($attribute, $value) {
+            $field = CustomField::where('db_column', $attribute)->first();
+            $options = $field->formatFieldValuesAsArray();
+
+            return in_array($value, $options);
         });
     }
 

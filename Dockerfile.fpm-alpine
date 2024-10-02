@@ -97,7 +97,7 @@ RUN set -eux; \
 VOLUME [ "/var/lib/snipeit" ]
 
 COPY --chown=www-data:www-data docker/docker-secrets.env /var/www/html/.env
-COPY --chmod=655 docker/docker-entrypoint.sh /usr/local/bin/docker-snipeit-entrypoint
+COPY --chmod=655 docker/startup_alpine_fpm.sh /startup.sh
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
-ENTRYPOINT [ "/usr/local/bin/docker-snipeit-entrypoint" ]
-CMD [ "/usr/local/bin/docker-php-entrypoint", "php-fpm" ]
+ENTRYPOINT [ "/startup.sh" ]
+CMD [ "/startup.sh", "php-fpm" ]

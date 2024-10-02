@@ -3,6 +3,7 @@
 return [
 
     'does_not_exist' => '状态标签不存在',
+    'deleted_label' => '已删除的状态标签',
     'assoc_assets'	 => '删除失败，该状态标签已与其它资产关联。请先更新资产以取消关联，然后重试。 ',
 
     'create' => [

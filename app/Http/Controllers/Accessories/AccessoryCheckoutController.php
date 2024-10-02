@@ -3,46 +3,56 @@
 namespace App\Http\Controllers\Accessories;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Helpers\Helper;
+use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccessoryCheckoutRequest;
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
+use \Illuminate\Contracts\View\View;
+use \Illuminate\Http\RedirectResponse;
 
 class AccessoryCheckoutController extends Controller
 {
+
+    use CheckInOutRequest;
+
     /**
      * Return the form to checkout an Accessory to a user.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param  int $accessoryId
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param  int $id
      */
-    public function create($accessoryId)
+    public function create($id) : View | RedirectResponse
     {
-        // Check if the accessory exists
-        if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
-            // Redirect to the accessory management page with error
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
-        }
 
-        // Make sure there is at least one available to checkout
-        if ($accessory->numRemaining() <= 0){
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
-        }
-        
-        if ($accessory->category) {
+        if ($accessory = Accessory::withCount('checkouts as checkouts_count')->find($id)) {
+
             $this->authorize('checkout', $accessory);
 
-            // Get the dropdown of users and then pass it to the checkout view
-            return view('accessories/checkout', compact('accessory'));
+            if ($accessory->category) {
+                // Make sure there is at least one available to checkout
+                if ($accessory->numRemaining() <= 0){
+                    return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
+                }
+
+                // Return the checkout view
+                return view('accessories/checkout', compact('accessory'));
+            }
+
+            // Invalid category
+            return redirect()->route('accessories.edit', ['accessory' => $accessory->id])
+                ->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.accessory')]));
+
         }
 
-        return redirect()->back()->with('error', 'The category type for this accessory is not valid. Edit the accessory and select a valid accessory category.');
+        // Not found
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
+
     }
 
     /**
@@ -53,46 +63,38 @@ class AccessoryCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
-     * @param  int $accessoryId
-     * @return Redirect
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param  Accessory $accessory
      */
-    public function store(Request $request, $accessoryId)
+    public function store(AccessoryCheckoutRequest $request, Accessory $accessory) : RedirectResponse
     {
-        // Check if the accessory exists
-        if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
-            // Redirect to the accessory management page with error
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.user_not_found'));
-        }
-
+        
         $this->authorize('checkout', $accessory);
 
-        if (!$user = User::find($request->input('assigned_to'))) {
-            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
+        $target = $this->determineCheckoutTarget();
+        
+        $accessory->checkout_qty = $request->input('checkout_qty', 1);
+        
+        for ($i = 0; $i < $accessory->checkout_qty; $i++) {
+            AccessoryCheckout::create([
+                'accessory_id' => $accessory->id,
+                'created_at' => Carbon::now(),
+                'created_by' => auth()->id(),
+                'assigned_to' => $target->id,
+                'assigned_type' => $target::class,
+                'note' => $request->input('note'),
+            ]);
         }
+        event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
 
-        // Make sure there is at least one available to checkout
-        if ($accessory->numRemaining() <= 0){
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
-        }
+        // Set this as user since we only allow checkout to user for this item type
+        $request->request->add(['checkout_to_type' => request('checkout_to_type')]);
+        $request->request->add(['assigned_user' => $target->id]);
 
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
-        // Update the accessory data
-        $accessory->assigned_to = e($request->input('assigned_to'));
-
-        $accessory->users()->attach($accessory->id, [
-            'accessory_id' => $accessory->id,
-            'created_at' => Carbon::now(),
-            'user_id' => Auth::id(),
-            'assigned_to' => $request->get('assigned_to'),
-            'note' => $request->input('note'),
-        ]);
-
-        DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
-
-        event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new accessory page
-        return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));
+        return redirect()->to(Helper::getRedirectOption($request, $accessory->id, 'Accessories'))
+            ->with('success', trans('admin/accessories/message.checkout.success'));
     }
 }

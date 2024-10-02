@@ -11,7 +11,7 @@ Form::macro('locales', function ($name = 'locale', $selected = null, $class = nu
 
     $idclause = (!is_null($id)) ? $id : '';
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:100%"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_language').'</option>';
 
     // Pull the autoglossonym array from the localizations translation file
@@ -32,12 +32,27 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
 
     $idclause = (!is_null($id)) ? $id : '';
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'">';
+    // Pull the autoglossonym array from the localizations translation file
+    $countries_array = trans('localizations.countries');
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%" '.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_country').'" data-allow-clear="true" data-tags="true">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_country').'</option>';
 
-    // Pull the autoglossonym array from the localizations translation file
-    foreach (trans('localizations.countries') as $abbr => $country) {
-        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected) == strtoupper($abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+    foreach ($countries_array as $abbr => $country) {
+
+        // We have to handle it this way to handle deprecation warnings since you can't strtoupper on null
+        if ($abbr!='') {
+            $abbr = strtoupper($abbr);
+        }
+
+        // Loop through the countries configured in the localization file
+        $select .= '<option value="' . $abbr . '" role="option" ' . (($selected == $abbr) ? ' selected="selected" aria-selected="true"' : ' aria-selected="false"') . '>' . $country . '</option> ';
+
+    }
+
+    // If the country value doesn't exist in the array, add it as a new option and select it so we don't drop that data
+    if (!array_key_exists($selected, $countries_array)) {
+        $select .= '<option value="' . $selected . '" selected="selected" role="option" aria-selected="true">' . $selected .' *</option> ';
     }
 
     $select .= '</select>';
@@ -78,8 +93,9 @@ Form::macro('time_display_format', function ($name = 'time_display_format', $sel
         'H:i',
     ];
 
+    $datetime = date("y-m-d").' 14:00:00';
     foreach ($formats as $format) {
-        $time_display_formats[$format] = Carbon::now()->format($format);
+        $time_display_formats[$format] = Carbon::parse($datetime)->format($format);
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px" aria-label="'.$name.'">';
     foreach ($time_display_formats as $format => $time_display_format) {
@@ -184,6 +200,7 @@ Form::macro('username_format', function ($name = 'username_format', $selected = 
         'lastname_firstinitial' => trans('general.lastname_firstinitial'),
         'firstnamelastname' => trans('general.firstnamelastname'),
         'firstnamelastinitial' => trans('general.firstnamelastinitial'),
+        'lastname.firstname' => trans('general.lastnamefirstname'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';

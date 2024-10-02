@@ -14,6 +14,9 @@ return [
         'restore_warning'       => '是的，還原它。我了解這將覆蓋資料庫中目前的任何現有數據。這也會登出所有目前使用者(包括您)。',
         'restore_confirm'       => '請您確認是否要從 :filename 還原資料庫？'
     ],
+    'restore' => [
+        'success'               => 'Your system backup has been restored. Please log in again.'
+    ],
     'purge' => [
         'error'     => '清除過程中發生錯誤。',
         'validation_failed'     => '你的清除確認不正確，請在文字輸入欄位輸入＂DELETE＂。',
@@ -35,10 +38,12 @@ return [
     ],
     'webhook' => [
         'sending' => '正在傳送 :app 測試訊息...',
+        'success' => 'Your :webhook_name Integration works!',
         'success_pt1' => '成功！請檢查 ',
         'success_pt2' => ' 頻道中的測試訊息，並確定在下面點選儲存以儲存你的設定。',
         '500' => '500 伺服器錯誤。',
         'error' => '發生了一些錯誤。:app 回應：:error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => '發生了一些錯誤。 :( ',
     ]
 ];

@@ -29,7 +29,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-wrench" aria-hidden="true"></i>
+                        <x-icon type="general-settings"/>
                         {{ trans('admin/settings/general.general_settings') }}
                     </h2>
                 </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-md-9">
                             <label class="form-control">
-                                {{ Form::checkbox('require_accept_signature', '1', Request::old('require_accept_signature', $setting->require_accept_signature)) }}
+                                {{ Form::checkbox('require_accept_signature', '1', old('require_accept_signature', $setting->require_accept_signature)) }}
                                 {{ trans('general.yes') }}
                             </label>
                             {!! $errors->first('require_accept_signature', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -80,7 +80,7 @@
                             {{ Form::label('email_domain', trans('general.email_domain')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::text('email_domain', Request::old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                            {{ Form::text('email_domain', old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
                             <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
                             {!! $errors->first('email_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
@@ -113,6 +113,22 @@
                         </div>
                     </div>
 
+                       <!-- user profile edit checkbox -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               <label>
+                                   {{ trans('admin/settings/general.profile_edit') }}
+                               </label>
+                           </div>
+                           <div class="col-md-8">
+                               <label class="form-control">
+                                   <input type="checkbox" value="1" name="profile_edit" {{ (old('profile_edit', $setting->profile_edit)) == '1' ? ' checked="checked"' : '' }} aria-label="profile_edit">
+                                   {{ trans('admin/settings/general.profile_edit_help') }}
+                               </label>
+
+                           </div>
+                       </div>
+
                        <!-- Load images in emails -->
                        <div class="form-group {{ $errors->has('show_images_in_email') ? 'error' : '' }}">
                            <div class="col-md-3">
@@ -128,6 +144,7 @@
                            </div>
                        </div>
 
+
                        <!-- unique serial -->
                        <div class="form-group">
                            <div class="col-md-3">
@@ -135,13 +152,29 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                                   {{ Form::checkbox('unique_serial', '1', Request::old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
+                                   {{ Form::checkbox('unique_serial', '1', old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
                                    {{ trans('general.yes') }}
+                                   {!! $errors->first('unique_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                </label>
-                               {!! $errors->first('unique_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+
                                <p class="help-block">
                                {{ trans('admin/settings/general.unique_serial_help_text') }}
                                </p>
+                           </div>
+                       </div>
+
+                       <!-- Shortcuts enable -->
+                       <div class="form-group {{ $errors->has('shortcuts_enabled') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               <strong> {{ trans('admin/settings/general.shortcuts_enabled') }}</strong>
+                           </div>
+                           <div class="col-md-9">
+                               <label class="form-control">
+                                   <input type="checkbox" name="shortcuts_enabled" value="1" {{ old('shortcuts_enabled', $setting->shortcuts_enabled) ? 'checked' : '' }}>
+                                   {{ trans('general.yes') }}
+                               </label>
+                               {!! $errors->first('shortcuts_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                               <p class="help-block">{!!trans('admin/settings/general.shortcuts_help_text') !!}</p>
                            </div>
                        </div>
 
@@ -163,7 +196,7 @@
                            {{ Form::label('thumbnail_max_h', trans('admin/settings/general.thumbnail_max_h')) }}
                        </div>
                        <div class="col-md-9">
-                           {{ Form::text('thumbnail_max_h', Request::old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                           {{ Form::text('thumbnail_max_h', old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                            <p class="help-block">{{ trans('admin/settings/general.thumbnail_max_h_help') }}</p>
                            {!! $errors->first('thumbnail_max_h', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                        </div>
@@ -273,7 +306,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                               {{ Form::checkbox('show_assigned_assets', '1', Request::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
+                               {{ Form::checkbox('show_assigned_assets', '1', old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                </label>
                                <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
@@ -311,7 +344,7 @@
                            <div class="col-md-9">
                                {{ Form::select('dash_chart_type', array(
                                    'name' => 'Status Label Name',
-                                   'type' => 'Status Label Type'), Request::old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                                   'type' => 'Status Label Type'), old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
 
@@ -326,7 +359,7 @@
                                     'default' => 'Linear (default)', 
                                     'half_1' => 'Half-year convention, always applied', 
                                     'half_2' => 'Half-year convention, applied with condition', 
-                                ), Request::old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                                ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
                        <!-- /.form-group -->
@@ -338,9 +371,9 @@
                            </div>
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))
-                                   {{ Form::text('privacy_policy_link', Request::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
+                                   {{ Form::text('privacy_policy_link', old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
                                @else
-                                   {{ Form::text('privacy_policy_link', Request::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
+                                   {{ Form::text('privacy_policy_link', old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
 
                                @endif
 
@@ -362,7 +395,7 @@
                     <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                 </div>
                 <div class="text-right col-md-6">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                 </div>
 
             </div>
@@ -370,7 +403,7 @@
 
         </div> <!-- /box -->
     </div> <!-- /.col-md-8-->
-    </div> <!-- /.row-->
+
 
     {{ Form::close() }}
 

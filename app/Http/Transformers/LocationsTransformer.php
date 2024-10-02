@@ -65,6 +65,9 @@ class LocationsTransformer
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Location::class) ? true : false,
                 'delete' => $location->isDeletable(),
+                'bulk_selectable' => [
+                    'delete' => $location->isDeletable()
+                ],
                 'clone' => (Gate::allows('create', Location::class) && ($location->deleted_at == '')),
             ];
 

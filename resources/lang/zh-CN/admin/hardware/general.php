@@ -16,7 +16,7 @@ return [
     'edit'  					=> '编辑资产',
     'model_deleted'  			=> '这个资源模型已被删除。您必须先还原模型才能还原素材。',
     'model_invalid'             => '此资产的型号无效。',
-    'model_invalid_fix'         => '在尝试归还或借出资产之前，应编辑资产以更正此问题。',
+    'model_invalid_fix'         => '在尝试借出、归还或盘点之前，必须使用有效的资产型号更新资产。',
     'requestable'               => '可申领',
     'requested'				    => '已申请',
     'not_requestable'           => '不可申领',
@@ -27,20 +27,13 @@ return [
     'undeployable_tooltip'  	=> '此资产的状态标签为不可部署，此时无法借出。',
     'view'  					=> '查看资产',
     'csv_error' => '您的CSV文件中有一个错误：',
-    'import_text' => '
-<p>
-    上传一个包含资产历史的CSV文件。“资产”和“用户”必须已存在于系统中，否则将被跳过。历史导入的匹配资产是针对资产标签进行的。我们将尝试根据您提供的用户名以及您在下面选择的条件找到匹配的用户。如果您未选择以下任何条件，它只会尝试匹配您在“管理”&gt; “常规设置”中配置的用户名格式。
-    </p>
-
-    <p>CSV 文件中包含的字段必须与以下标题匹配：<strong>资产标签、姓名、借出日期、归还日期</strong>。任何其他字段都将被忽略。 </p>
-
-    <p>归还日期：空白或未来的归还日期会将物品借出给关联的用户。不包含“归还日期”列，将创建一个今天日期的归还日期</p>
+    'import_text' => '<p>上传一个包含资产历史的CSV文件。“资产”和“用户”必须已存在于系统中，否则将被跳过。历史导入的匹配资产是针对资产标签进行的。我们将尝试根据您提供的用户名以及您在下面选择的条件找到匹配的用户。如果您未选择以下任何条件，它只会尝试匹配您在<code>“管理”&gt; “一般设置”</code>中配置的用户名格式。</p><p>CSV 文件中包含的字段必须与以下标题匹配：<strong>资产标签、姓名、借出日期、归还日期</strong>。任何附加字段都将被忽略。</p><p>归还日期：空白或未来的归还日期会将物品借出给关联的用户。不包含“归还日期”列，将创建一个今天日期的归还日期</p>
     ',
-    'csv_import_match_f-l' => '尝试按“名、姓 (jane.smith)” 格式匹配用户',
-    'csv_import_match_initial_last' => '尝试按“名首字母、姓 (jsmith)” 格式匹配用户',
-    'csv_import_match_first' => '尝试按“名 (jane)” 格式匹配用户',
-    'csv_import_match_email' => '尝试按“电子邮件”匹配用户作为用户名',
-    'csv_import_match_username' => '尝试按用户名匹配用户',
+    'csv_import_match_f-l' => '尝试按<strong>名、姓</strong> (<code>jane.smith</code>)” 格式匹配用户',
+    'csv_import_match_initial_last' => '尝试按<strong>名首字母、姓 </strong>(<code>jsmith</code>)” 格式匹配用户',
+    'csv_import_match_first' => '尝试按<strong>名 </strong>(<code>jane</code>) 格式匹配用户',
+    'csv_import_match_email' => '尝试按<strong>电子邮件</strong>匹配用户作为用户名',
+    'csv_import_match_username' => '尝试按<strong>用户名</strong>匹配用户',
     'error_messages' => '错误信息：',
     'success_messages' => '成功信息：',
     'alert_details' => '请参阅下面的详细信息。',

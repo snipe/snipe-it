@@ -209,7 +209,9 @@
                     array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
                 },
 
-                get valueString() { return this.toString(this.fields); },
+                get valueString() {
+                    return this.getCombinedString(this.fields);
+                },
                 onTest: function(a) {
                     console.log('test', a);
                 },
@@ -229,7 +231,7 @@
                                 })
                         }));
                 },
-                toString: function(fields) {
+                getCombinedString: function (fields) {
                     return fields
                         .map(field => field.options
                             .map(option => option.label + '=' + option.datasource)
@@ -259,13 +261,18 @@
         <h1 class="l2fd-title" style="grid-area: fields-title">Fields</h1>
         <div class="l2fd-list" style="grid-area: fields-list">
             <template x-for="(field, index) in fields">
-                <div 
-                    x-bind:key="'field-' + index" 
+                <div
+                    x-data="{
+                                template: '{{ $template }}'
+                            }"
+                    x-bind:key="'field-' + index"
                     x-bind:class="{
                         'l2fd-listitem': true,
                         'selected': selectedField === field
                     }"
-                    x-on:click="selectedField = field" >
+                    x-bind:style="index < 4 && template === 'DefaultLabel' ? 'background-color:#EEEEEE;' : 'background-color:#FFF;'"
+                    x-on:click="selectedField = field"
+                    >
                     <label><span x-text="index+1"></span>: <span x-text="getFieldLabel(field)"></span></label>
                 </div>
             </template>
@@ -304,7 +311,58 @@
                         <label style="grid-area: label-title">Label</label>
                         <input style="grid-area: label-field" x-model="option.label" />
                         <label style="grid-area: source-title">DataSource</label>
-                        <input style="grid-area: source-field" x-model="option.datasource" />
+                        <select style="grid-area: source-field" x-model="option.datasource">
+                            <optgroup label="Asset">
+                                <option value="" disabled>{{ trans('general.select_datasource') }}</option>
+                                <option value="asset_tag">{{trans('admin/hardware/table.asset_tag')}}</option>
+                                <option value="name">{{trans('admin/hardware/form.name')}}</option>
+                                <option value="serial">{{trans('admin/hardware/table.serial')}}</option>
+                                <option value="asset_eol_date">{{trans('admin/hardware/form.eol_date')}}</option>
+                                <option value="order_number">{{trans('admin/hardware/form.order')}}</option>
+                                <option value="purchase_date">{{trans('admin/hardware/table.purchase_date')}}</option>
+                                <option value="assignedTo">{{trans('admin/hardware/table.assigned_to')}}</option>
+                                <option value="last_audit_date">{{trans('general.last_audit')}}</option>
+                                <option value="next_audit_date">{{trans('general.next_audit_date')}}</option>
+                            </optgroup>
+                            <optgroup label="Asset Model">
+                                <option value="model.name">{{trans('admin/models/table.name')}}</option>
+                                <option value="model.model_number">{{trans('admin/models/table.modelnumber')}}</option>
+                            </optgroup>
+                            <optgroup label="Manufacturer">
+                                <option value="model.manufacturer.name">{{trans('admin/hardware/form.manufacturer')}}</option>
+                                <option value="model.manufacturer.support_email">{{trans('admin/manufacturers/table.support_email')}}</option>
+                                <option value="model.manufacturer.support_phone">{{trans('admin/manufacturers/table.support_phone')}}</option>
+                                <option value="model.manufacturer.support_url">{{trans('general.url')}}</option>
+                            </optgroup>
+                            <optgroup label="Category">
+                                <option value="model.category.name">{{trans('admin/categories/general.category_name')}}</option>
+                            </optgroup>
+                            <optgroup label="Status">
+                                <option value="assetstatus.name">{{trans('admin/statuslabels/table.name')}}</option>
+                            </optgroup>
+                            <optgroup label="Supplier">
+                                <option value="supplier.name">{{trans('admin/suppliers/table.name')}}</option>
+                            </optgroup>
+                            <optgroup label="Default Location">
+                                <option value="defaultLoc.name">{{trans('admin/hardware/form.default_location')}}</option>
+                                <option value="defaultLoc.phone">{{trans('admin/hardware/form.default_location_phone')}}</option>
+                            </optgroup>
+                            <optgroup label="Location">
+                                <option value="location.name">{{trans('admin/locations/table.name')}}</option>
+                                <option value="location.phone">{{trans('admin/locations/table.phone')}}</option>
+                            </optgroup>
+                            <optgroup label="Company">
+                                <option value="company.email">{{trans('admin/companies/table.email')}}</option>
+                                <option value="company.name">{{trans('admin/companies/table.name')}}</option>
+                                <option value="company.phone">{{trans('admin/companies/table.phone')}}</option>
+                            </optgroup>
+                            <optgroup label="Custom Fields">
+                                @foreach($customFields as $customField)
+
+                                    <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
+                                @endforeach
+                            </optgroup>
+                        </select>
                     </div>
                 </template>
             </template>

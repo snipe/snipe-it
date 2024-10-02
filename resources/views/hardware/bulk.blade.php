@@ -19,51 +19,74 @@
 
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
-    <div class="callout callout-warning">
-      <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
-        @if (count($models) > 0)
-            {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }} 
-        @endif 
-    </div>
+
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
       {{ csrf_field() }}
 
       <div class="box box-default">
         <div class="box-body">
+
+          <div class="callout callout-warning">
+            <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
+
+            @if (count($models) > 0)
+              {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }}
+            @endif
+          </div>
+
+          <!-- Name -->
+          <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+            <label for="name" class="col-md-3 control-label">
+              {{ trans('admin/hardware/form.name') }}
+            </label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" maxlength="100" style="width:100%">
+              {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true">
+                <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-5">
+              <label class="form-control">
+                {{ Form::checkbox('null_name', '1', false) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
+              </label>
+            </div>
+          </div>
+
+
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
             <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
-                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
               </div>
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_purchase_date', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets),['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
-
           </div>
+
           <!-- Expected Checkin Date -->
           <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
              <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
              <div class="col-md-4">
                   <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                       <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
-                      <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                      <span class="input-group-addon"><x-icon type="calendar" /></span>
                  </div>
 
                  {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
              </div>
               <div class="col-md-5">
                 <label class="form-control">
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['checked' => 'false']) }}
-                  {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                  {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
+                  {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
                 </label>
               </div>
           </div>
@@ -76,6 +99,7 @@
             </label>
             <div class="col-md-7">
               {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'status_id')) }}
+              <p class="help-block">{{ trans('general.status_compatibility') }}</p>
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -92,9 +116,13 @@
                   {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
+              <label class="form-control">
+                {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                {{ trans('admin/hardware/form.asset_location_update_default') }}
+              </label>
                 <label class="form-control">
-                  {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
-                  {{ trans('admin/hardware/form.asset_location_update_default') }}
+                  {{ Form::radio('update_real_loc', '2', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                  {{ trans('admin/hardware/form.asset_location_update_actual') }}
                 </label>
 
             </div>
@@ -150,17 +178,22 @@
             <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date') }}">
-                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
               </div>
 
               {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true">
                 <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+
+
             </div>
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_next_audit_date', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
+            </div>
+            <div class="col-md-8 col-md-offset-3">
+              <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
             </div>
           </div>
 
@@ -185,15 +218,15 @@
             </div>
           </div>
 
-            @include("models/custom_fields_form_bulk_edit",["models" => $models])
-      
-          @foreach ($assets as $key => $value)
-            <input type="hidden" name="ids[{{ $value }}]" value="1">
+          @include("models/custom_fields_form_bulk_edit",["models" => $models])
+
+          @foreach($assets as $asset)
+            <input type="hidden" name="ids[]" value="{{ $asset }}">
           @endforeach
         </div> <!--/.box-body-->
 
         <div class="text-right box-footer">
-          <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
         </div>
       </div> <!--/.box.box-default-->
     </form>

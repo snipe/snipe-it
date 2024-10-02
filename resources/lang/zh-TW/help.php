@@ -30,5 +30,6 @@ return [
     'consumables'   => '消耗品是指任何購買後會隨著時間的推移將被用完的東西。 例如，印表機墨水或影印紙。',
 
     'depreciations' => '您可以設定資產折舊以根據直線折舊法對資產進行折舊。',
-
+    
+    'empty_file'    => 'The importer detects that this file is empty.'
 ];

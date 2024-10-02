@@ -2,6 +2,7 @@
 
 return array(
 
+    'invalid_category_type' => 'A categoria deve ser uma categoria de consumível.',
     'does_not_exist' => 'O consumível não existe.',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
 
      'checkout' => array(
         'error'   		=> 'Consumível não foi verificado, por favor tente novamente',
-        'success' 		=> 'Realizada a verificação do consumível com êxito.',
+        'success' 		=> 'Realizada a saída do consumível com êxito.',
         'user_does_not_exist' => 'Esse usuário é inválido. Por favor, tente novamente.',
          'unavailable'      => 'Não há consumíveis suficientes para este checkout. Por favor, verifique a quantidade restante. ',
     ),

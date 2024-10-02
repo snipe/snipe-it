@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Restante',
     'total' 			                => 'Total',
     'update'                            => 'Atualizar um suprimento',
+    'inventory_warning'                 => 'O inventário deste consumível está abaixo da quantidade mínima de :min_count',
 );

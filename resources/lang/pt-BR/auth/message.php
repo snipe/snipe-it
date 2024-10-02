@@ -14,6 +14,8 @@ return array(
         'success'               => 'Você logou na sua conta com sucesso.',
         'code_required'         => 'O código de dois fatores é obrigatório.',
         'invalid_code'          => 'O código de dois fatores é inválido.',
+        'enter_two_factor_code' => 'Por favor, digite seu código de autenticação de dois fatores.',
+        'please_enroll'         => 'Por favor, registre um dispositivo na autenticação de dois fatores.',
     ),
 
     'signin' => array(

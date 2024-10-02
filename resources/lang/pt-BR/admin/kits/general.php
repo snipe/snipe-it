@@ -12,7 +12,7 @@ return [
     'none_models'                       => 'Não há ativos disponíveis o suficiente para :model fazer atribuição. :qty são necessários. ',
     'none_licenses'                     => 'Não há licenças suficientes para :model fazer atribuição. :qty são necessários. ',
     'none_consumables'                  => 'Não há quantidade de consumíveis suficientes para :model fazer atribuição. :qty são necessários. ',
-    'none_accessory'                    => 'Não há unidades disponíveis de :accessory para check-out. :qty são necessários. ',
+    'none_accessory'                    => 'Não há unidades disponíveis de :accessory para saída. :qty são necessários. ',
     'append_accessory'                  => 'Anexar acessório',
     'update_appended_accessory'         => 'Atualização de acessório anexado',
     'append_consumable'                 => 'Anexar consumível',
@@ -39,7 +39,7 @@ return [
     'accessory_deleted'                 => 'Excluído com sucesso',
     'accessory_none'                    => 'Este acessório não existe',
     'checkout_success'                  => 'Checkout feito com sucesso',
-    'checkout_error'                    => 'Erro no check-out',
+    'checkout_error'                    => 'Erro na disponibilização',
     'kit_none'                          => 'Kit não existe',
     'kit_created'                       => 'Kit foi criado com sucesso',
     'kit_updated'                       => 'Kit foi atualizado com sucesso',
@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit foi excluído com sucesso',
     'kit_model_updated'                 => 'Modelo foi atualizado com sucesso',
     'kit_model_detached'                => 'Modelo foi desanexado com sucesso',
+    'model_already_attached'            => 'O modelo já está anexado ao kit',
 ];

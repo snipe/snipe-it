@@ -36,7 +36,7 @@
 
             <!-- Serial -->
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
+                <label class="col-sm-2 control-label">{{ trans('admin/licenses/form.license_key') }}</label>
                 <div class="col-md-6">
                     <p class="form-control-static">
                         @can('viewKeys', $licenseSeat->license)
@@ -49,17 +49,21 @@
             </div>
 
             <!-- Note -->
-            <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+            <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                 <div class="col-md-7">
-                    <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $licenseSeat->note) }}</textarea>
-                    {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    <textarea class="col-md-6 form-control" id="notes" name="notes"></textarea>
+                    {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                 </div>
             </div>
-                        <div class="box-footer">
-                            <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
-                            <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
-                        </div>
+                        <x-redirect_submit_options
+                                index_route="licenses.index"
+                                :button_label="trans('general.checkin')"
+                                :options="[
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.licenses')]),
+                                'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.license')]),
+                               ]"
+                        />
                     </div> <!-- /.box-->
             </form>
         </div> <!-- /.col-md-7-->

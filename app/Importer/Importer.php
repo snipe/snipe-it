@@ -6,11 +6,13 @@ use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
+use Illuminate\Support\Facades\Log;
 
 abstract class Importer
 {
@@ -19,22 +21,76 @@ abstract class Importer
      * Id of User performing import
      * @var
      */
-    protected $user_id;
+    
+    protected $created_by;
     /**
      * Are we updating items in the import
      * @var bool
      */
+
     protected $updating;
+
     /**
      * Default Map of item fields->csv names
      *
-     * This has been moved into Livewire/Importer.php to be more granular.
-     * @todo - remove references to this property since we don't use it anymore.
+     * This has been moved into app/Http/Livewire/Importer.php to be more granular.
+     * This private variable is ONLY used for the cli-importer.
      *
+     * @todo - find a way to make this less duplicative
      * @var array
      */
     private $defaultFieldMap = [
-
+        'asset_tag' => 'asset tag',
+        'activated' => 'activated',
+        'category' => 'category',
+        'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
+        'checkout_location' => 'checkout location',
+        'company' => 'company',
+        'item_name' => 'item name',
+        'item_number' => 'item number',
+        'image' => 'image',
+        'expiration_date' => 'expiration date',
+        'location' => 'location',
+        'notes' => 'notes',
+        'license_email' => 'licensed to email',
+        'license_name' => 'licensed to name',
+        'maintained' => 'maintained',
+        'manufacturer' => 'manufacturer',
+        'asset_model' => 'model name',
+        'model_number' => 'model number',
+        'order_number' => 'order number',
+        'purchase_cost' => 'purchase cost',
+        'purchase_date' => 'purchase date',
+        'purchase_order' => 'purchase order',
+        'qty' => 'quantity',
+        'reassignable' => 'reassignable',
+        'requestable' => 'requestable',
+        'seats' => 'seats',
+        'serial' => 'serial number',
+        'status' => 'status',
+        'supplier' => 'supplier',
+        'termination_date' => 'termination date',
+        'warranty_months' => 'warranty',
+        'full_name' => 'full name',
+        'email' => 'email',
+        'username' => 'username',
+        'address' => 'address',
+        'address2' => 'address2',
+        'city' => 'city',
+        'state' => 'state',
+        'country' => 'country',
+        'zip' => 'zip',
+        'jobtitle' => 'job title',
+        'employee_num' => 'employee number',
+        'phone_number' => 'phone number',
+        'first_name' => 'first name',
+        'last_name' => 'last name',
+        'department' => 'department',
+        'manager_name' => 'manager full name',
+        'manager_username' => 'manager username',
+        'min_amt' => 'minimum quantity',
+        'remote' => 'remote',
+        'vip' => 'vip',
     ];
     /**
      * Map of item fields->csv names
@@ -225,6 +281,13 @@ abstract class Importer
         }
     }
 
+    protected function addErrorToBag($item, $field,  $error_message)
+    {
+        if ($this->errorCallback) {
+            call_user_func($this->errorCallback, $item, $field, [$field => [$error_message]]);
+        }
+    }
+
     /**
      * Finds the user matching given data, or creates a new one if there is no match.
      * This is NOT used by the User Import, only for Asset/Accessory/etc where
@@ -269,9 +332,9 @@ abstract class Importer
         // If the full name and username is empty, bail out--we need this to extract first name (at the very least)
         if ((empty($user_array['username'])) && (empty($user_array['full_name'])) && (empty($user_array['first_name']))) {
             $this->log('Insufficient user data provided (Full name, first name or username is required) - skipping user creation.');
-            \Log::debug('User array: ');
-            \Log::debug(print_r($user_array, true));
-            \Log::debug(print_r($row, true));
+            Log::debug('User array: ');
+            Log::debug(print_r($user_array, true));
+            Log::debug(print_r($row, true));
             return false;
         }
 
@@ -281,9 +344,11 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
+        // Get some variables for $user_formatted_array in case we need them later
+        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
+
         if (empty($user_array['first_name'])) {
             // Get some fields for first name and last name based off of full name
-            $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
             $user_array['first_name'] = $user_formatted_array['first_name'];
             $user_array['last_name'] = $user_formatted_array['last_name'];
         }
@@ -317,7 +382,7 @@ abstract class Importer
         $user->activated = 1;
         $user->password = $this->tempPassword;
 
-        \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
+        Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
@@ -330,7 +395,7 @@ abstract class Importer
     }
 
     /**
-     * Matches a user by user_id if user_name provided is a number
+     * Matches a user by created_by if user_name provided is a number
      * @param  string $user_name users full name from csv
      * @return User           User Matching ID
      */
@@ -347,13 +412,13 @@ abstract class Importer
     /**
      * Sets the Id of User performing import.
      *
-     * @param mixed $user_id the user id
+     * @param mixed $created_by the user id
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setUserId($created_by)
     {
-        $this->user_id = $user_id;
+        $this->created_by = $created_by;
 
         return $this;
     }
@@ -492,6 +557,37 @@ abstract class Importer
         }
         $this->log('No matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
 
+        return null;
+    }
+
+    /**
+     * Parse a date or return null
+     *
+     * @author A. Gianotto
+     * @since 7.0.0
+     * @param $field
+     * @param $format
+     * @return string|null
+
+     */
+    public function parseOrNullDate($field, $format = 'date') {
+
+        $date_format = 'Y-m-d';
+
+        if ($format == 'datetime') {
+            $date_format = 'Y-m-d H:i:s';
+        }
+
+        if (array_key_exists($field, $this->item) && $this->item[$field] != '') {
+
+            try {
+                $value = CarbonImmutable::parse($this->item[$field])->format($date_format);
+                return $value;
+            } catch (\Exception $e) {
+                $this->log('Unable to parse date: ' . $this->item[$field]);
+                return null;
+            }
+        }
         return null;
     }
 }

@@ -4,28 +4,26 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\License;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use enshrined\svgSanitize\Sanitizer;
+use Illuminate\Support\Facades\Log;
 
 class LicenseFilesController extends Controller
 {
     /**
      * Validates and stores files associated with a license.
      *
-     * @todo Switch to using the AssetFileRequest form request validator.
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @param AssetFileRequest $request
+     * @param UploadFileRequest $request
      * @param int $licenseId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @todo Switch to using the AssetFileRequest form request validator.
      */
-    public function store(AssetFileRequest $request, $licenseId = null)
+    public function store(UploadFileRequest $request, $licenseId = null)
     {
         $license = License::find($licenseId);
 
@@ -38,30 +36,7 @@ class LicenseFilesController extends Controller
                 }
 
                 foreach ($request->file('file') as $file) {
-
-                    $extension = $file->getClientOriginalExtension();
-                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-
-                        // Check for SVG and sanitize it
-                        if ($extension == 'svg') {
-                            \Log::debug('This is an SVG');
-                            \Log::debug($file_name);
-
-                                $sanitizer = new Sanitizer();
-                                $dirtySVG = file_get_contents($file->getRealPath());
-                                $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                                try {
-                                    Storage::put('private_uploads/licenses/'.$file_name, $cleanSVG);
-                                } catch (\Exception $e) {
-                                    \Log::debug('Upload no workie :( ');
-                                    \Log::debug($e);
-                                }
-
-                        } else {
-                            Storage::put('private_uploads/licenses/'.$file_name, file_get_contents($file));
-                        }
+                    $file_name = $request->handleFile('private_uploads/licenses/','license-'.$license->id, $file);
 
                     //Log the upload to the log
                     $license->logUpload($file_name, e($request->input('notes')));
@@ -102,7 +77,7 @@ class LicenseFilesController extends Controller
                     try {
                         Storage::delete('licenses/'.$log->filename);
                     } catch (\Exception $e) {
-                        \Log::debug($e);
+                        Log::debug($e);
                     }
                 }
                 
@@ -137,7 +112,7 @@ class LicenseFilesController extends Controller
             $this->authorize('view', $license);
             $this->authorize('licenses.files', $license);
 
-            if (! $log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $license->id)->find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
@@ -145,8 +120,8 @@ class LicenseFilesController extends Controller
             $file = 'private_uploads/licenses/'.$log->filename;
 
             if (Storage::missing($file)) {
-                \Log::debug('NOT EXISTS for '.$file);
-                \Log::debug('NOT EXISTS URL should be '.Storage::url($file));
+                Log::debug('NOT EXISTS for '.$file);
+                Log::debug('NOT EXISTS URL should be '.Storage::url($file));
 
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');

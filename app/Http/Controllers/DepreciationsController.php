@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Depreciation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\RedirectResponse;
+use \Illuminate\Contracts\View\View;
 /**
  * This controller handles all actions related to Depreciations for
  * the Snipe-IT Asset Management application.
@@ -21,14 +22,10 @@ class DepreciationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @see DepreciationsController::getDatatable() method that generates the JSON response
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index()
+    public function index() : View
     {
         $this->authorize('view', Depreciation::class);
-
-        // Show the page
         return view('depreciations/index');
     }
 
@@ -38,10 +35,8 @@ class DepreciationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @see DepreciationsController::postCreate()
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create() : View
     {
         $this->authorize('create', Depreciation::class);
 
@@ -56,10 +51,8 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::postCreate()
      * @since [v1.0]
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $this->authorize('create', Depreciation::class);
 
@@ -69,7 +62,21 @@ class DepreciationsController extends Controller
         $depreciation->name = $request->input('name');
         $depreciation->term_length = $request->input('term_length');
         $depreciation->term_type = $request->input('term_type');
-        $depreciation->user_id = Auth::id();
+        $depreciation->created_by = auth()->id();
+
+        $request->validate([
+            'depreciation_min' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
+                        $fail(trans('validation.percent'));
+                    }
+                },
+            ],
+            'depreciation_type' => 'required|in:amount,percent',
+        ]);
+        $depreciation->depreciation_type = $request->input('depreciation_type');
         $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
@@ -88,10 +95,8 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::postEdit()
      * @param int $depreciationId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($depreciationId = null)
+    public function edit($depreciationId = null) : RedirectResponse | View
     {
         // Check if the depreciation exists
         if (is_null($item = Depreciation::find($depreciationId))) {
@@ -111,11 +116,9 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::getEdit()
      * @param Request $request
      * @param int $depreciationId
-     * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, $depreciationId = null)
+    public function update(Request $request, $depreciationId = null) : RedirectResponse
     {
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
@@ -129,6 +132,19 @@ class DepreciationsController extends Controller
         $depreciation->name             = $request->input('name');
         $depreciation->term_length      = $request->input('term_length');
         $depreciation->term_type        = $request->input('term_type');
+        $request->validate([
+            'depreciation_min' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('depreciation_type') == 'percent' && ($value < 0 || $value > 100)) {
+                        $fail(trans('validation.percent'));
+                    }
+                },
+            ],
+            'depreciation_type' => 'required|in:amount,percent',
+        ]);
+        $depreciation->depreciation_type = $request->input('depreciation_type');
         $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
@@ -148,10 +164,8 @@ class DepreciationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @since [v1.0]
      * @param int $depreciationId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($depreciationId)
+    public function destroy($depreciationId) : RedirectResponse
     {
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::withCount('models as models_count')->find($depreciationId))) {
@@ -177,18 +191,23 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::postEdit()
      * @param int $depreciationId
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($id)
+    public function show($id) : View | RedirectResponse
     {
-        if (is_null($depreciation = Depreciation::find($id))) {
-            // Redirect to the blogs management page
-            return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
-        }
+        $depreciation = Depreciation::withCount('assets as assets_count')
+            ->withCount('models as models_count')
+            ->withCount('licenses as licenses_count')
+            ->find($id);
 
         $this->authorize('view', $depreciation);
 
-        return view('depreciations/view', compact('depreciation'));
+        if ($depreciation) {
+            return view('depreciations/view', compact('depreciation'));
+
+        }
+
+        return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
+
+
     }
 }

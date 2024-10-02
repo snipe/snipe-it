@@ -23,8 +23,8 @@ class DepreciationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->catchPhrase(),
-            'user_id' => User::factory()->superuser(),
+            'name' => $this->faker->unique()->catchPhrase(),
+            'created_by' => User::factory()->superuser(),
             'term_length' => 36,
             'term_type' => 0,
         ];

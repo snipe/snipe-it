@@ -1,0 +1,96 @@
+<?php
+
+return [
+
+    'undeployable' 		=> '<strong>Uyarı: </strong> Bu demirbaş dağıtılamaz durumdadır. Eğer bu durum değişti ise demirbaş durumunu değiştiriniz.',
+    'does_not_exist' 	=> 'Demirbaş mevcut değil.',
+    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_or_not_requestable' => 'Bu varlık mevcut değil veya talep edilebilir değil.',
+    'assoc_users'	 	=> 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
+    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+
+    'create' => [
+        'error'   		=> 'Demirbaş oluşturulamadı, lütfen tekrar deneyin. ',
+        'success' 		=> 'Demirbaş oluşturuldu.',
+        'success_linked' => 'Etiketli ürün :etiket oluşturuldu. <strong><a href=":link" style="color: white;">Görmek için tıklayın.</a></strong>.',
+    ],
+
+    'update' => [
+        'error'   			=> 'Demirbaş güncellenemedi, lütfen tekrar deneyin',
+        'success' 			=> 'Demirbaş güncellendi.',
+        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
+        'nothing_updated'	=>  'Hiçbir alan seçilmedi, dolayısıyla hiç bir alan güncellenmedi.',
+        'no_assets_selected'  =>  'Hiçbir varlık seçilmedi, bu nedenle hiçbir şey güncellenmedi.',
+        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
+    ],
+
+    'restore' => [
+        'error'   		=> 'Demirbaş geri getirilemedi, lütfen tekrar deneyin',
+        'success' 		=> 'Demirbaş geri getirildi.',
+        'bulk_success' 		=> 'Varlık başarı ile geri yüklendi.',
+        'nothing_updated'   => 'Herhangi bir varlık seçili olmadığı için hiçbirşey geri yüklenmedi.', 
+    ],
+
+    'audit' => [
+        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'success' 		=> 'Varlık denetimi başarıyla günlüğe kaydedildi.',
+    ],
+
+
+    'deletefile' => [
+        'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
+        'success' => 'Dosya silindi.',
+    ],
+
+    'upload' => [
+        'error'   => 'Dosya(lar) yüklenemedi. Lütfen tekrar deneyin.',
+        'success' => 'Dosya(lar) yüklendi.',
+        'nofiles' => 'Yükleme için herhangi bir dosya seçmediniz veya karşıya yüklemeye çalıştığınız dosya çok büyük',
+        'invalidfiles' => 'Bir ya da daha fazla dosya izin verilen boyuttan daha büyük ya da izin verilmeyen bir dosya tipi seçtiniz. Lütfen dosya boyutu ve tipini kontrol ediniz.',
+    ],
+
+    'import' => [
+        'import_button'         => 'İçeri aktarma işlemi',
+        'error'                 => 'Bazı öğeler doğru şekilde içe aktarılamadı.',
+        'errorDetail'           => 'Aşağıdaki öğeler hatalar nedeniyle alınamadı.',
+        'success'               => 'Dosyanızı içe aktarıldı',
+        'file_delete_success'   => 'Dosyanız başarıyla silindi',
+        'file_delete_error'      => 'Dosya silenemedi',
+        'file_missing' => 'Seçilen dosya bulunamıyor',
+        'file_already_deleted' => 'The file selected was already deleted',
+        'header_row_has_malformed_characters' => 'Başlık bilgisindeki bir veya daha fazla öznitelik, hatalı UTF-8 karakterleri içeriyor',
+        'content_row_has_malformed_characters' => 'Başlıktaki ilk satırda bir veya daha fazla öznitelik, hatalı biçimlendirilmiş UTF-8 karakterleri içeriyor',
+    ],
+
+
+    'delete' => [
+        'confirm'   	=> 'Demirbaşı silmek istediğinize emin misiniz?',
+        'error'   		=> 'Demirbaş silinirken bir problem oluştu. Lütfen tekrar deneyin.',
+        'nothing_updated'   => 'Herhangi bir varlık seçilmediği için silinemedi.',
+        'success' 		=> 'Demirbaş silindi.',
+    ],
+
+    'checkout' => [
+        'error'   		=> 'Demirbaş çıkışı yapılamadı. Lütfen tekrar deneyin',
+        'success' 		=> 'Demirbaş çıkışı yapıldı.',
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+        'not_available' => 'Bu varlık için atama yapılamaz!',
+        'no_assets_selected' => 'Listeden en az bir varlık seçmelisiniz',
+    ],
+
+    'checkin' => [
+        'error'   		=> 'Demirbaş girişi yapılamadı. Lütfen tekrar deneyin',
+        'success' 		=> 'Demirbaş girişi yapıldı.',
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+        'already_checked_in'  => 'Bu varlık zaten atanmış.',
+
+    ],
+
+    'requests' => [
+        'error'   		=> 'Varlık talep edilmemiş, lütfen tekrar deneyin',
+        'success' 		=> 'Varlık talep edildi.',
+        'canceled'      => 'Varlık talebi reddedildi',
+    ],
+
+];

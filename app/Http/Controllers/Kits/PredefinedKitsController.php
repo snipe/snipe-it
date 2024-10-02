@@ -47,7 +47,7 @@ class PredefinedKitsController extends Controller
      * Validate and process the new Predefined Kit data.
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ImageUploadRequest $request)
     {
@@ -55,6 +55,7 @@ class PredefinedKitsController extends Controller
         // Create a new Predefined Kit
         $kit = new PredefinedKit;
         $kit->name = $request->input('name');
+        $kit->created_by = auth()->id();
 
         if (! $kit->save()) {
             return redirect()->back()->withInput()->withErrors($kit->getErrors());
@@ -73,7 +74,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @since [v1.0]
      * @param int $kit_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($kit_id = null)
     {
@@ -95,7 +96,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @since [v1.0]
      * @param int $kit_id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ImageUploadRequest $request, $kit_id = null)
     {
@@ -122,7 +123,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @since [v1.0]
      * @param int $kit_id
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($kit_id)
     {
@@ -150,7 +151,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @since [v1.0]
      * @param int $modelId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($kit_id = null)
     {
@@ -162,7 +163,7 @@ class PredefinedKitsController extends Controller
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function editModel($kit_id, $model_id)
     {
@@ -184,7 +185,7 @@ class PredefinedKitsController extends Controller
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $modelId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function updateModel(Request $request, $kit_id, $model_id)
     {
@@ -214,7 +215,7 @@ class PredefinedKitsController extends Controller
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $modelId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function detachModel($kit_id, $model_id)
     {
@@ -237,7 +238,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $license_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function editLicense($kit_id, $license_id)
     {
@@ -262,7 +263,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $license_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function updateLicense(Request $request, $kit_id, $license_id)
     {
@@ -293,7 +294,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $license_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function detachLicense($kit_id, $license_id)
     {
@@ -316,7 +317,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $accessoryId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function editAccessory($kit_id, $accessory_id)
     {
@@ -341,7 +342,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $accessory_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function updateAccessory(Request $request, $kit_id, $accessory_id)
     {
@@ -371,7 +372,7 @@ class PredefinedKitsController extends Controller
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $accessory_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function detachAccessory($kit_id, $accessory_id)
     {
@@ -394,7 +395,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $consumable_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function editConsumable($kit_id, $consumable_id)
     {
@@ -419,7 +420,7 @@ class PredefinedKitsController extends Controller
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
      * @param int $consumableId
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function updateConsumable(Request $request, $kit_id, $consumable_id)
     {
@@ -449,7 +450,7 @@ class PredefinedKitsController extends Controller
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $consumable_id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function detachConsumable($kit_id, $consumable_id)
     {

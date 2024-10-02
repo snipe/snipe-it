@@ -7,7 +7,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 
 class ResetPasswordController extends Controller
 {
@@ -66,7 +66,7 @@ class ResetPasswordController extends Controller
         $credentials =  $request->only('email', 'token');
 
         if (is_null($this->broker()->getUser($credentials))) {
-            \Log::debug('Password reset form FAILED - this token is not valid.');
+            Log::debug('Password reset form FAILED - this token is not valid.');
             return redirect()->route('password.request')->with('error', trans('passwords.token'));
         }
 
@@ -87,12 +87,12 @@ class ResetPasswordController extends Controller
             'password.not_in' => trans('validation.disallow_same_pwd_as_user_fields'),
         ];
 
-        $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
+        $request->validate($this->rules());
 
-        \Log::debug('Checking if '.$request->input('username').' exists');
+        Log::debug('Checking if '.$request->input('username').' exists');
         // Check to see if the user even exists - we'll treat the response the same to prevent user sniffing
         if ($user = User::where('username', '=', $request->input('username'))->where('activated', '1')->whereNotNull('email')->first()) {
-            \Log::debug($user->username.' exists');
+            Log::debug($user->username.' exists');
 
 
             // handle the password validation rules set by the admin settings
@@ -112,17 +112,17 @@ class ResetPasswordController extends Controller
 
             // Check if the password reset above actually worked
             if ($response == \Password::PASSWORD_RESET) {
-                \Log::debug('Password reset for '.$user->username.' worked');
+                Log::debug('Password reset for '.$user->username.' worked');
                 return redirect()->guest('login')->with('success', trans('passwords.reset'));
             }
 
-            \Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
+            Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
             return redirect()->back()->withInput($request->only('email'))->with('success', trans('passwords.reset'));
 
         }
 
 
-        \Log::debug('Password reset for '.$request->input('username').' FAILED - user does not exist or does not have an email address - but make it look like it succeeded');
+        Log::debug('Password reset for '.$request->input('username').' FAILED - user does not exist or does not have an email address - but make it look like it succeeded');
         return redirect()->guest('login')->with('success', trans('passwords.reset'));
 
     }

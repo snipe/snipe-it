@@ -6,12 +6,11 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-use App\Models\Company;
 use App\Models\Department;
-use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\JsonResponse;
 
 class DepartmentsController extends Controller
 {
@@ -20,14 +19,13 @@ class DepartmentsController extends Controller
      *
      * @author [Godfrey Martinez] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Department::class);
         $allowed_columns = ['id', 'name', 'image', 'users_count'];
 
-        $departments = Company::scopeCompanyables(Department::select(
+        $departments = Department::select(
             'departments.id',
             'departments.name',
             'departments.phone',
@@ -37,8 +35,8 @@ class DepartmentsController extends Controller
             'departments.manager_id',
             'departments.created_at',
             'departments.updated_at',
-            'departments.image'),
-             "company_id", "departments")->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
+            'departments.image'
+        )->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
@@ -61,7 +59,7 @@ class DepartmentsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -91,16 +89,15 @@ class DepartmentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(ImageUploadRequest $request)
+    public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
         $department = $request->handleImages($department);
 
-        $department->user_id = Auth::user()->id;
+        $department->created_by = auth()->id();
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
 
         if ($department->save()) {
@@ -116,13 +113,11 @@ class DepartmentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) : array
     {
         $this->authorize('view', Department::class);
         $department = Department::findOrFail($id);
-
         return (new DepartmentsTransformer)->transformDepartment($department);
     }
 
@@ -133,9 +128,8 @@ class DepartmentsController extends Controller
      * @since [v5.0]
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(ImageUploadRequest $request, $id)
+    public function update(ImageUploadRequest $request, $id) : JsonResponse
     {
         $this->authorize('update', Department::class);
         $department = Department::findOrFail($id);
@@ -156,9 +150,8 @@ class DepartmentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $locationId
      * @since [v4.0]
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id) : JsonResponse
     {
         $department = Department::findOrFail($id);
 
@@ -180,7 +173,7 @@ class DepartmentsController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request) : array
     {
 
         $this->authorize('view.selectlists');

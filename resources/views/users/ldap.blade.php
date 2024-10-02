@@ -29,7 +29,7 @@
             
             <div class="col-md-12">
                <!-- Location -->
-              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
+              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id[]', 'multiple' => true])
             </div>
           </div>
 

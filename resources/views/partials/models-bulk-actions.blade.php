@@ -6,7 +6,7 @@
               'id' => 'modelsBulkForm']) }}
 
     @if (request('status')!='deleted')
-        @can('delete', \App\Models\User::class)
+        @can('delete', \App\Models\AssetModel::class)
             <div id="models-toolbar">
                 <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
                 <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">

@@ -130,7 +130,7 @@ class Component extends SnipeModel
      */
     public function assets()
     {
-        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id', 'note');
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'created_by', 'note');
     }
 
     /**
@@ -142,9 +142,9 @@ class Component extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 
     /**
@@ -205,7 +205,11 @@ class Component extends SnipeModel
     public function numCheckedOut()
     {
         $checkedout = 0;
-        foreach ($this->assets as $checkout) {
+
+        // In case there are elements checked out to assets that belong to a different company
+        // than this asset and full multiple company support is on we'll remove the global scope,
+        // so they are included in the count.
+        foreach ($this->assets()->withoutGlobalScope(new CompanyableScope)->get() as $checkout) {
             $checkedout += $checkout->pivot->assigned_qty;
         }
 
@@ -223,6 +227,37 @@ class Component extends SnipeModel
     {
         return $this->qty - $this->numCheckedOut();
     }
+
+
+    /**
+     * -----------------------------------------------
+     * BEGIN MUTATORS
+     * -----------------------------------------------
+     **/
+
+    /**
+     * This sets a value for qty if no value is given. The database does not allow this
+     * field to be null, and in the other areas of the code, we set a default, but the importer
+     * does not.
+     *
+     * This simply checks that there is a value for quantity, and if there isn't, set it to 0.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v6.3.4
+     * @param $value
+     * @return void
+     */
+    public function setQtyAttribute($value)
+    {
+        $this->attributes['qty'] = (!$value) ? 0 : intval($value);
+    }
+
+    /**
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
+
 
     /**
      * Query builder scope to order on company
@@ -274,5 +309,10 @@ class Component extends SnipeModel
     public function scopeOrderSupplier($query, $order)
     {
         return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'components.created_by', '=', 'admin_sort.id')->select('components.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }
