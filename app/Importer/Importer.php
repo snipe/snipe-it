@@ -164,6 +164,7 @@ abstract class Importer
 
                 $this->log('------------- Action Summary ----------------');
             }
+            Model::reguard();
         });
     }
 
