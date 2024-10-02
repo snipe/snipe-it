@@ -128,7 +128,7 @@ class Depreciable extends SnipeModel
         }
         else {
             // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
-            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->months)), 2);
+            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->term_length)), 2);
 
         }
 

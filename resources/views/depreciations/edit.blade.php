@@ -20,11 +20,10 @@
         <div class="col-md-7" style="padding-left:0px;">
             <input class="form-control" type="text" name="term_length" id="term_length" value="{{ Request::old('term_length', $item->term_length) }}" style="width: 80px;display:inline-block;"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'term_length')) ? ' data-validation="required" required' : '' !!} />
             {!! $errors->first('term_length', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
-                <select class="select2" name="term_type" id="term_type" value="{{ Request::old('term_type', $item->term_type) }}"style="width:130px;display:inline-block;">
-                    <option value="months" @if ($item->term_type == old($item->term_type,  (isset($item)) ? 'selected="selected"' : ''))@endif>Months</option>
-                    <option value="days" @if ($item->term_type == old($item->term_type,  (isset($item)) ? 'selected="selected"' : ''))@endif>Days</option>
-
-                </select>
+            <select class="form-control select2" name="term_type" id="term_type" data-minimum-results-for-search="Infinity" style="width:130px;display:inline-block;">
+                <option value="months" @if (old('term_type', $item->term_type) == 'months') selected="selected" @endif>Months</option>
+                <option value="days" @if (old('term_type', $item->term_type) == 'days') selected="selected" @endif>Days</option>
+            </select>
 
         </div>
     </div>
