@@ -45,7 +45,7 @@ class AccessoryCheckout extends Model
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function user()
-    {
+    { // This needs fixing
         return $this->hasOne(\App\Models\User::class, 'user_id');
     }
 
@@ -58,7 +58,7 @@ class AccessoryCheckout extends Model
      */
     public function assignedTo()
     {
-        return $this->morphTo('assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphTo('assigned' /* this? */, 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**

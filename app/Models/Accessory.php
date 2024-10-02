@@ -255,8 +255,7 @@ class Accessory extends SnipeModel
      */
     public function checkouts()
     {
-        return $this->hasMany(\App\Models\AccessoryCheckout::class, 'accessory_id')
-            ->with('assignedTo');
+        return $this->hasMany(\App\Models\AccessoryCheckout::class, 'accessory_id'); // TODO - is that right, is that what I want?
     }
 
     /**
