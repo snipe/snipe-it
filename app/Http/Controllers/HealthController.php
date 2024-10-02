@@ -39,7 +39,7 @@ class HealthController extends BaseController
         } catch (\Exception $e) {
             \Log::error('Could not connect to database');
             return response()->json([
-                'status' => 'Could not connect to database',
+                'status' => 'database connection failed',
             ], 500);
 
         }
