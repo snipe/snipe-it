@@ -673,7 +673,7 @@
                               {{ trans('admin/users/general.two_factor_active') }}
                             </div>
                             <div class="col-md-9">
-                                @if ($user->two_factor_active()) == '1')
+                                @if ($user->two_factor_active() == '1')
                                     <x-icon type="checkmark" class="fa-fw text-success" />
                                     {{ trans('general.yes') }}
                                 @else
@@ -690,7 +690,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                                @if ($user->two_factor_active_and_enrolled()) == '1')
+                                @if ($user->two_factor_active_and_enrolled() == '1')
                                 <x-icon type="checkmark" class="fa-fw text-success" />
                                 {{ trans('general.yes') }}
                                 @else
