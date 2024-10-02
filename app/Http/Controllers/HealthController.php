@@ -44,7 +44,7 @@ class HealthController extends BaseController
 
         }
 
-        die();
+
 
     }
 }
