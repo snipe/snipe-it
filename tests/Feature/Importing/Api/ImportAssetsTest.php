@@ -89,60 +89,60 @@ class ImportAssetsTest extends ImportDataTestCase
 
         $this->assertCount(2, $activityLogs);
 
-        $this->assertEquals($activityLogs[0]->action_type, 'checkout');
-        $this->assertEquals($activityLogs[0]->item_type, Asset::class);
-        $this->assertEquals($activityLogs[0]->target_id, $assignee->id);
-        $this->assertEquals($activityLogs[0]->target_type, User::class);
-        $this->assertEquals($activityLogs[0]->note, 'Checkout from CSV Importer');
+        $this->assertEquals('checkout', $activityLogs[0]->action_type);
+        $this->assertEquals(Asset::class, $activityLogs[0]->item_type);
+        $this->assertEquals($assignee->id, $activityLogs[0]->target_id);
+        $this->assertEquals(User::class, $activityLogs[0]->target_type);
+        $this->assertEquals('Checkout from CSV Importer', $activityLogs[0]->note);
 
-        $this->assertEquals($activityLogs[1]->action_type, 'create');
+        $this->assertEquals('create', $activityLogs[1]->action_type);
         $this->assertNull($activityLogs[1]->target_id);
-        $this->assertEquals($activityLogs[1]->item_type, Asset::class);
+        $this->assertEquals(Asset::class, $activityLogs[1]->item_type);
         $this->assertNull($activityLogs[1]->note);
         $this->assertNull($activityLogs[1]->target_type);
 
-        $this->assertEquals("{$assignee->first_name} {$assignee->last_name}", $row['assigneeFullName']);
-        $this->assertEquals($assignee->email, $row['assigneeEmail']);
-        $this->assertEquals($assignee->username, $row['assigneeUsername']);
+        $this->assertEquals($row['assigneeFullName'], "{$assignee->first_name} {$assignee->last_name}");
+        $this->assertEquals($row['assigneeEmail'], $assignee->email);
+        $this->assertEquals($row['assigneeUsername'], $assignee->username);
 
-        $this->assertEquals($newAsset->model->category->name, $row['category']);
-        $this->assertEquals($newAsset->model->manufacturer->name, $row['manufacturerName']);
-        $this->assertEquals($newAsset->name, $row['itemName']);
-        $this->assertEquals($newAsset->asset_tag, $row['tag']);
-        $this->assertEquals($newAsset->model->name, $row['model']);
-        $this->assertEquals($newAsset->model->model_number, $row['modelNumber']);
-        $this->assertEquals($newAsset->purchase_date->toDateString(), $row['purchaseDate']);
+        $this->assertEquals($row['category'], $newAsset->model->category->name);
+        $this->assertEquals($row['manufacturerName'], $newAsset->model->manufacturer->name);
+        $this->assertEquals($row['itemName'], $newAsset->name);
+        $this->assertEquals($row['tag'], $newAsset->asset_tag);
+        $this->assertEquals($row['model'], $newAsset->model->name);
+        $this->assertEquals($row['modelNumber'], $newAsset->model->model_number);
+        $this->assertEquals($row['purchaseDate'], $newAsset->purchase_date->toDateString());
         $this->assertNull($newAsset->asset_eol_date);
         $this->assertEquals(0, $newAsset->eol_explicit);
         $this->assertEquals($newAsset->location_id, $newAsset->rtd_location_id);
-        $this->assertEquals($newAsset->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['purchaseCost'], $newAsset->purchase_cost);
         $this->assertNull($newAsset->order_number);
-        $this->assertEquals($newAsset->image, '');
+        $this->assertEquals('', $newAsset->image);
         $this->assertNull($newAsset->user_id);
-        $this->assertEquals($newAsset->physical, 1);
-        $this->assertEquals($newAsset->assetStatus->name, $row['status']);
-        $this->assertEquals($newAsset->archived, 0);
-        $this->assertEquals($newAsset->warranty_months, $row['warrantyInMonths']);
+        $this->assertEquals(1, $newAsset->physical);
+        $this->assertEquals($row['status'], $newAsset->assetStatus->name);
+        $this->assertEquals(0, $newAsset->archived);
+        $this->assertEquals($row['warrantyInMonths'], $newAsset->warranty_months);
         $this->assertNull($newAsset->deprecate);
-        $this->assertEquals($newAsset->supplier->name, $row['supplierName']);
-        $this->assertEquals($newAsset->requestable, 0);
-        $this->assertEquals($newAsset->defaultLoc->name, $row['location']);
-        $this->assertEquals($newAsset->accepted, null);
-        $this->assertEquals(Carbon::parse($newAsset->last_checkout)->toDateString(), now()->toDateString());
-        $this->assertEquals($newAsset->last_checkin, 0);
-        $this->assertEquals($newAsset->expected_checkin, 0);
-        $this->assertEquals($newAsset->company->name, $row['companyName']);
-        $this->assertEquals($newAsset->assigned_type, User::class);
+        $this->assertEquals($row['supplierName'], $newAsset->supplier->name);
+        $this->assertEquals(0, $newAsset->requestable);
+        $this->assertEquals($row['location'], $newAsset->defaultLoc->name);
+        $this->assertEquals(null, $newAsset->accepted);
+        $this->assertEquals(now()->toDateString(), Carbon::parse($newAsset->last_checkout)->toDateString());
+        $this->assertEquals(0, $newAsset->last_checkin);
+        $this->assertEquals(0, $newAsset->expected_checkin);
+        $this->assertEquals($row['companyName'], $newAsset->company->name);
+        $this->assertEquals(User::class, $newAsset->assigned_type);
         $this->assertNull($newAsset->last_audit_date);
         $this->assertNull($newAsset->next_audit_date);
-        $this->assertEquals($newAsset->location->name, $row['location']);
-        $this->assertEquals($newAsset->checkin_counter, 0);
-        $this->assertEquals($newAsset->checkout_counter, 1);
-        $this->assertEquals($newAsset->requests_counter, 0);
-        $this->assertEquals($newAsset->byod, 0);
+        $this->assertEquals($row['location'], $newAsset->location->name);
+        $this->assertEquals(0, $newAsset->checkin_counter);
+        $this->assertEquals(1, $newAsset->checkout_counter);
+        $this->assertEquals(0, $newAsset->requests_counter);
+        $this->assertEquals(0, $newAsset->byod);
 
         //Notes is never read.
-        //$this->assertEquals($asset->notes, $row['notes']);
+        // $this->assertEquals($row['notes'], $newAsset->notes);
 
         Notification::assertSentTo($assignee, CheckoutAssetNotification::class);
     }
@@ -309,7 +309,7 @@ class ImportAssetsTest extends ImportDataTestCase
             ->where('serial', $importFileBuilder->firstRow()['serialNumber'])
             ->sole();
 
-        $this->assertEquals($newAsset->assetStatus->name, 'Ready to Deploy');
+        $this->assertEquals('Ready to Deploy', $newAsset->assetStatus->name);
         $this->assertNull($newAsset->purchase_date);
         $this->assertNull($newAsset->purchase_cost);
     }
@@ -331,8 +331,8 @@ class ImportAssetsTest extends ImportDataTestCase
             ->where('serial', $importFileBuilder->firstRow()['serialNumber'])
             ->sole();
 
-        $this->assertEquals($newAsset->warranty_months, 3);
-        $this->assertEquals($newAsset->purchase_date->toDateString(), '2022-10-10');
+        $this->assertEquals(3, $newAsset->warranty_months);
+        $this->assertEquals('2022-10-10', $newAsset->purchase_date->toDateString());
     }
 
     #[Test]
@@ -406,33 +406,33 @@ class ImportAssetsTest extends ImportDataTestCase
             'last_checkout', 'requestable', 'updated_at', 'checkout_counter', 'assigned_type'
         ];
 
-        $this->assertEquals("{$assignee->first_name} {$assignee->last_name}", $row['assigneeFullName']);
-        $this->assertEquals($assignee->email, $row['assigneeEmail']);
-        $this->assertEquals($assignee->username, $row['assigneeUsername']);
+        $this->assertEquals($row['assigneeFullName'], "{$assignee->first_name} {$assignee->last_name}");
+        $this->assertEquals($row['assigneeEmail'], $assignee->email);
+        $this->assertEquals($row['assigneeUsername'], $assignee->username);
 
-        $this->assertEquals($updatedAsset->model->category->name, $row['category']);
-        $this->assertEquals($updatedAsset->model->manufacturer->name, $row['manufacturerName']);
-        $this->assertEquals($updatedAsset->name, $row['itemName']);
-        $this->assertEquals($updatedAsset->asset_tag, $row['tag']);
-        $this->assertEquals($updatedAsset->model->name, $row['model']);
-        $this->assertEquals($updatedAsset->model->model_number, $row['modelNumber']);
-        $this->assertEquals($updatedAsset->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedAsset->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($updatedAsset->assetStatus->name, $row['status']);
-        $this->assertEquals($updatedAsset->warranty_months, $row['warrantyInMonths']);
-        $this->assertEquals($updatedAsset->supplier->name, $row['supplierName']);
-        $this->assertEquals($updatedAsset->defaultLoc->name, $row['location']);
-        $this->assertEquals($updatedAsset->company->name, $row['companyName']);
-        $this->assertEquals($updatedAsset->location->name, $row['location']);
-        $this->assertEquals($updatedAsset->checkout_counter, 1);
-        $this->assertEquals($updatedAsset->assigned_type, user::class);
+        $this->assertEquals($row['category'], $updatedAsset->model->category->name);
+        $this->assertEquals($row['manufacturerName'], $updatedAsset->model->manufacturer->name);
+        $this->assertEquals($row['itemName'], $updatedAsset->name);
+        $this->assertEquals($row['tag'], $updatedAsset->asset_tag);
+        $this->assertEquals($row['model'], $updatedAsset->model->name);
+        $this->assertEquals($row['modelNumber'], $updatedAsset->model->model_number);
+        $this->assertEquals($row['purchaseDate'], $updatedAsset->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedAsset->purchase_cost);
+        $this->assertEquals($row['status'], $updatedAsset->assetStatus->name);
+        $this->assertEquals($row['warrantyInMonths'], $updatedAsset->warranty_months);
+        $this->assertEquals($row['supplierName'], $updatedAsset->supplier->name);
+        $this->assertEquals($row['location'], $updatedAsset->defaultLoc->name);
+        $this->assertEquals($row['companyName'], $updatedAsset->company->name);
+        $this->assertEquals($row['location'], $updatedAsset->location->name);
+        $this->assertEquals(1, $updatedAsset->checkout_counter);
+        $this->assertEquals(user::class, $updatedAsset->assigned_type);
 
         //RequestAble is always updated regardless of initial value.
-        //$this->assertEquals($updatedAsset->requestable, $asset->requestable);
+        // $this->assertEquals($asset->requestable, $updatedAsset->requestable);
 
         $this->assertEquals(
-            Arr::except($updatedAsset->attributesToArray(), $updatedAttributes),
             Arr::except($asset->attributesToArray(), $updatedAttributes),
+            Arr::except($updatedAsset->attributesToArray(), $updatedAttributes),
         );
     }
 
@@ -497,45 +497,45 @@ class ImportAssetsTest extends ImportDataTestCase
 
         $assignee = User::query()->find($asset->assigned_to, ['id', 'first_name', 'last_name', 'email', 'username']);
 
-        $this->assertEquals("{$assignee->first_name} {$assignee->last_name}", $row['warrantyInMonths']);
-        $this->assertEquals($assignee->email, $row['tag']);
-        $this->assertEquals($assignee->username, $row['location']);
+        $this->assertEquals($row['warrantyInMonths'], "{$assignee->first_name} {$assignee->last_name}");
+        $this->assertEquals($row['tag'], $assignee->email);
+        $this->assertEquals($row['location'], $assignee->username);
 
-        $this->assertEquals($asset->model->category->name, $row['modelNumber']);
-        $this->assertEquals($asset->model->manufacturer->name, $row['assigneeEmail']);
-        $this->assertEquals($asset->name, $row['model']);
-        $this->assertEquals($asset->asset_tag, $row['serialNumber']);
-        $this->assertEquals($asset->model->name, $row['purchaseCost']);
-        $this->assertEquals($asset->model->model_number, $row['itemName']);
-        $this->assertEquals($asset->purchase_date->toDateString(), $row['supplierName']);
-        $this->assertEquals($asset->purchase_cost, $row['companyName']);
-        $this->assertEquals($asset->assetStatus->name, $row['manufacturerName']);
-        $this->assertEquals($asset->warranty_months, $row['status']);
-        $this->assertEquals($asset->supplier->name, $row['assigneeFullName']);
-        $this->assertEquals($asset->defaultLoc->name, $row['category']);
-        $this->assertEquals($asset->company->name, $row['purchaseDate']);
-        $this->assertEquals($asset->location->name, $row['category']);
-        $this->assertEquals($asset->notes, $row['notes']);
+        $this->assertEquals($row['modelNumber'], $asset->model->category->name);
+        $this->assertEquals($row['assigneeEmail'], $asset->model->manufacturer->name);
+        $this->assertEquals($row['model'], $asset->name);
+        $this->assertEquals($row['serialNumber'], $asset->asset_tag);
+        $this->assertEquals($row['purchaseCost'], $asset->model->name);
+        $this->assertEquals($row['itemName'], $asset->model->model_number);
+        $this->assertEquals($row['supplierName'], $asset->purchase_date->toDateString());
+        $this->assertEquals($row['companyName'], $asset->purchase_cost);
+        $this->assertEquals($row['manufacturerName'], $asset->assetStatus->name);
+        $this->assertEquals($row['status'], $asset->warranty_months);
+        $this->assertEquals($row['assigneeFullName'], $asset->supplier->name);
+        $this->assertEquals($row['category'], $asset->defaultLoc->name);
+        $this->assertEquals($row['purchaseDate'], $asset->company->name);
+        $this->assertEquals($row['category'], $asset->location->name);
+        $this->assertEquals($row['notes'], $asset->notes);
         $this->assertNull($asset->asset_eol_date);
         $this->assertEquals(0, $asset->eol_explicit);
         $this->assertNull($asset->order_number);
-        $this->assertEquals($asset->image, '');
+        $this->assertEquals('', $asset->image);
         $this->assertNull($asset->user_id);
-        $this->assertEquals($asset->physical, 1);
-        $this->assertEquals($asset->archived, 0);
+        $this->assertEquals(1, $asset->physical);
+        $this->assertEquals(0, $asset->archived);
         $this->assertNull($asset->deprecate);
-        $this->assertEquals($asset->requestable, 0);
-        $this->assertEquals($asset->accepted, null);
-        $this->assertEquals(Carbon::parse($asset->last_checkout)->toDateString(), now()->toDateString());
-        $this->assertEquals($asset->last_checkin, 0);
-        $this->assertEquals($asset->expected_checkin, 0);
-        $this->assertEquals($asset->assigned_type, User::class);
+        $this->assertEquals(0, $asset->requestable);
+        $this->assertEquals(null, $asset->accepted);
+        $this->assertEquals(now()->toDateString(), Carbon::parse($asset->last_checkout)->toDateString());
+        $this->assertEquals(0, $asset->last_checkin);
+        $this->assertEquals(0, $asset->expected_checkin);
+        $this->assertEquals(User::class, $asset->assigned_type);
         $this->assertNull($asset->last_audit_date);
         $this->assertNull($asset->next_audit_date);
-        $this->assertEquals($asset->checkin_counter, 0);
-        $this->assertEquals($asset->checkout_counter, 1);
-        $this->assertEquals($asset->requests_counter, 0);
-        $this->assertEquals($asset->byod, 0);
+        $this->assertEquals(0, $asset->checkin_counter);
+        $this->assertEquals(1, $asset->checkout_counter);
+        $this->assertEquals(0, $asset->requests_counter);
+        $this->assertEquals(0, $asset->byod);
     }
 
     #[Test]
@@ -565,7 +565,7 @@ class ImportAssetsTest extends ImportDataTestCase
 
         $newAsset = Asset::query()->where('serial', $importFileBuilder->firstRow()['serialNumber'])->sole();
 
-        $this->assertEquals($newAsset->getAttribute($customField->db_column), $macAddress);
+        $this->assertEquals($macAddress, $newAsset->getAttribute($customField->db_column));
     }
 
     #[Test]

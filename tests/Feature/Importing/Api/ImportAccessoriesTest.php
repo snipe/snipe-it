@@ -81,23 +81,23 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->where('item_id', $newAccessory->id)
             ->sole();
 
-        $this->assertEquals($activityLog->action_type, 'create');
-        $this->assertEquals($activityLog->action_source, 'importer');
-        $this->assertEquals($activityLog->company_id, $newAccessory->company->id);
+        $this->assertEquals('create', $activityLog->action_type);
+        $this->assertEquals('importer', $activityLog->action_source);
+        $this->assertEquals($newAccessory->company->id, $activityLog->company_id);
 
-        $this->assertEquals($newAccessory->name, $row['itemName']);
-        $this->assertEquals($newAccessory->qty, $row['quantity']);
-        $this->assertEquals($newAccessory->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newAccessory->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($newAccessory->order_number, $row['orderNumber']);
-        $this->assertEquals($newAccessory->notes, $row['notes']);
-        $this->assertEquals($newAccessory->category->name, $row['category']);
-        $this->assertEquals($newAccessory->category->category_type, 'accessory');
-        $this->assertEquals($newAccessory->manufacturer->name, $row['manufacturerName']);
-        $this->assertEquals($newAccessory->supplier->name, $row['supplierName']);
-        $this->assertEquals($newAccessory->location->name, $row['location']);
-        $this->assertEquals($newAccessory->company->name, $row['companyName']);
-        $this->assertEquals($newAccessory->model_number, $row['modelNumber']);
+        $this->assertEquals($row['itemName'], $newAccessory->name);
+        $this->assertEquals($row['quantity'], $newAccessory->qty);
+        $this->assertEquals($row['purchaseDate'], $newAccessory->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newAccessory->purchase_cost);
+        $this->assertEquals($row['orderNumber'], $newAccessory->order_number);
+        $this->assertEquals($row['notes'], $newAccessory->notes);
+        $this->assertEquals($row['category'], $newAccessory->category->name);
+        $this->assertEquals('accessory', $newAccessory->category->category_type);
+        $this->assertEquals($row['manufacturerName'], $newAccessory->manufacturer->name);
+        $this->assertEquals($row['supplierName'], $newAccessory->supplier->name);
+        $this->assertEquals($row['location'], $newAccessory->location->name);
+        $this->assertEquals($row['companyName'], $newAccessory->company->name);
+        $this->assertEquals($row['modelNumber'], $newAccessory->model_number);
         $this->assertFalse($newAccessory->requestable);
         $this->assertNull($newAccessory->min_amt);
         $this->assertNull($newAccessory->user_id);
@@ -131,7 +131,7 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->where('name', $importFileBuilder->firstRow()['itemName'])
             ->sole(['purchase_date']);
 
-        $this->assertEquals($accessory->purchase_date->toDateString(), '2022-10-10');
+        $this->assertEquals('2022-10-10', $accessory->purchase_date->toDateString());
     }
 
     #[Test]
@@ -165,7 +165,7 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->get(['name']);
 
         $this->assertCount(1, $probablyNewAccessories);
-        $this->assertEquals($probablyNewAccessories->first()->name, $accessory->name);
+        $this->assertEquals($accessory->name, $probablyNewAccessories->first()->name);
     }
 
     #[Test]
@@ -292,23 +292,23 @@ class ImportAccessoriesTest extends ImportDataTestCase
             'location_id', 'model_number', 'updated_at'
         ];
 
-        $this->assertEquals($updatedAccessory->name, $row['itemName']);
+        $this->assertEquals($row['itemName'], $updatedAccessory->name);
         $this->assertEquals($row['companyName'], $updatedAccessory->company->name);
-        $this->assertEquals($updatedAccessory->qty, $row['quantity']);
-        $this->assertEquals($updatedAccessory->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedAccessory->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($updatedAccessory->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedAccessory->notes, $row['notes']);
-        $this->assertEquals($updatedAccessory->category->name, $row['category']);
-        $this->assertEquals($updatedAccessory->category->category_type, 'accessory');
-        $this->assertEquals($updatedAccessory->manufacturer->name, $row['manufacturerName']);
-        $this->assertEquals($updatedAccessory->supplier->name, $row['supplierName']);
-        $this->assertEquals($updatedAccessory->location->name, $row['location']);
-        $this->assertEquals($updatedAccessory->model_number, $row['modelNumber']);
+        $this->assertEquals($row['quantity'], $updatedAccessory->qty);
+        $this->assertEquals($row['purchaseDate'], $updatedAccessory->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedAccessory->purchase_cost);
+        $this->assertEquals($row['orderNumber'], $updatedAccessory->order_number);
+        $this->assertEquals($row['notes'], $updatedAccessory->notes);
+        $this->assertEquals($row['category'], $updatedAccessory->category->name);
+        $this->assertEquals('accessory', $updatedAccessory->category->category_type);
+        $this->assertEquals($row['manufacturerName'], $updatedAccessory->manufacturer->name);
+        $this->assertEquals($row['supplierName'], $updatedAccessory->supplier->name);
+        $this->assertEquals($row['location'], $updatedAccessory->location->name);
+        $this->assertEquals($row['modelNumber'], $updatedAccessory->model_number);
 
         $this->assertEquals(
-            Arr::except($updatedAccessory->attributesToArray(), $updatedAttributes),
             Arr::except($accessory->attributesToArray(), $updatedAttributes),
+            Arr::except($updatedAccessory->attributesToArray(), $updatedAttributes),
         );
     }
 
@@ -362,7 +362,7 @@ class ImportAccessoriesTest extends ImportDataTestCase
         $updatedAccessory = clone $accessory;
         $updatedAccessory->refresh();
 
-        $this->assertEquals($updatedAccessory->toArray(), $accessory->toArray());
+        $this->assertEquals($accessory->toArray(), $updatedAccessory->toArray());
     }
 
     #[Test]
@@ -412,15 +412,15 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->where('name', $row['modelNumber'])
             ->sole();
 
-        $this->assertEquals($newAccessory->name, $row['modelNumber']);
-        $this->assertEquals($newAccessory->model_number, $row['itemName']);
-        $this->assertEquals($newAccessory->qty, $row['quantity']);
-        $this->assertEquals($newAccessory->purchase_date->toDateString(), $row['notes']);
-        $this->assertEquals($newAccessory->purchase_cost, $row['location']);
-        $this->assertEquals($newAccessory->order_number, $row['companyName']);
-        $this->assertEquals($newAccessory->notes, $row['purchaseDate']);
-        $this->assertEquals($newAccessory->category->name, $row['manufacturerName']);
-        $this->assertEquals($newAccessory->manufacturer->name, $row['category']);
-        $this->assertEquals($newAccessory->location->name, $row['purchaseCost']);
+        $this->assertEquals($row['modelNumber'], $newAccessory->name);
+        $this->assertEquals($row['itemName'], $newAccessory->model_number);
+        $this->assertEquals($row['quantity'], $newAccessory->qty);
+        $this->assertEquals($row['notes'], $newAccessory->purchase_date->toDateString());
+        $this->assertEquals($row['location'], $newAccessory->purchase_cost);
+        $this->assertEquals($row['companyName'], $newAccessory->order_number);
+        $this->assertEquals($row['purchaseDate'], $newAccessory->notes);
+        $this->assertEquals($row['manufacturerName'], $newAccessory->category->name);
+        $this->assertEquals($row['category'], $newAccessory->manufacturer->name);
+        $this->assertEquals($row['purchaseCost'], $newAccessory->location->name);
     }
 }

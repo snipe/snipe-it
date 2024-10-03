@@ -79,22 +79,22 @@ class ImportConsumablesTest extends ImportDataTestCase
             ->where('item_id', $newConsumable->id)
             ->sole();
 
-        $this->assertEquals($activityLog->action_type, 'create');
-        $this->assertEquals($activityLog->action_source, 'importer');
-        $this->assertEquals($activityLog->company_id, $newConsumable->company->id);
+        $this->assertEquals('create', $activityLog->action_type);
+        $this->assertEquals('importer', $activityLog->action_source);
+        $this->assertEquals($newConsumable->company->id, $activityLog->company_id);
 
-        $this->assertEquals($newConsumable->name, $row['itemName']);
-        $this->assertEquals($newConsumable->category->name, $row['category']);
-        $this->assertEquals($newConsumable->location->name, $row['location']);
-        $this->assertEquals($newConsumable->company->name, $row['companyName']);
+        $this->assertEquals($row['itemName'], $newConsumable->name);
+        $this->assertEquals($row['category'], $newConsumable->category->name);
+        $this->assertEquals($row['location'], $newConsumable->location->name);
+        $this->assertEquals($row['companyName'], $newConsumable->company->name);
         $this->assertNull($newConsumable->supplier_id);
         $this->assertFalse($newConsumable->requestable);
         $this->assertNull($newConsumable->image);
-        $this->assertEquals($newConsumable->order_number, $row['orderNumber']);
-        $this->assertEquals($newConsumable->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newConsumable->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['orderNumber'], $newConsumable->order_number);
+        $this->assertEquals($row['purchaseDate'], $newConsumable->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newConsumable->purchase_cost);
         $this->assertNull($newConsumable->min_amt);
-        $this->assertEquals($newConsumable->model_number, '');
+        $this->assertEquals('', $newConsumable->model_number);
         $this->assertNull($newConsumable->item_number);
         $this->assertNull($newConsumable->manufacturer_id);
         $this->assertNull($newConsumable->notes);
@@ -229,13 +229,13 @@ class ImportConsumablesTest extends ImportDataTestCase
             ->where('name', $importFileBuilder->firstRow()['itemName'])
             ->sole();
 
-        $this->assertEquals($updatedConsumable->name, $row['itemName']);
-        $this->assertEquals($updatedConsumable->category->name, $row['category']);
-        $this->assertEquals($updatedConsumable->location->name, $row['location']);
-        $this->assertEquals($updatedConsumable->company->name, $row['companyName']);
-        $this->assertEquals($updatedConsumable->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedConsumable->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedConsumable->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['itemName'], $updatedConsumable->name);
+        $this->assertEquals($row['category'], $updatedConsumable->category->name);
+        $this->assertEquals($row['location'], $updatedConsumable->location->name);
+        $this->assertEquals($row['companyName'], $updatedConsumable->company->name);
+        $this->assertEquals($row['orderNumber'], $updatedConsumable->order_number);
+        $this->assertEquals($row['purchaseDate'], $updatedConsumable->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedConsumable->purchase_cost);
 
         $this->assertEquals($consumable->supplier_id, $updatedConsumable->supplier_id);
         $this->assertEquals($consumable->requestable, $updatedConsumable->requestable);
@@ -289,19 +289,19 @@ class ImportConsumablesTest extends ImportDataTestCase
             ->where('name', $importFileBuilder->firstRow()['quantity'])
             ->sole();
 
-        $this->assertEquals($newConsumable->category->name, $row['supplier']);
-        $this->assertEquals($newConsumable->location->name, $row['purchaseCost']);
-        $this->assertEquals($newConsumable->company->name, $row['purchaseDate']);
-        $this->assertEquals($newConsumable->qty, $row['companyName']);
-        $this->assertEquals($newConsumable->name, $row['quantity']);
+        $this->assertEquals($row['supplier'], $newConsumable->category->name);
+        $this->assertEquals($row['purchaseCost'], $newConsumable->location->name);
+        $this->assertEquals($row['purchaseDate'], $newConsumable->company->name);
+        $this->assertEquals($row['companyName'], $newConsumable->qty);
+        $this->assertEquals($row['quantity'], $newConsumable->name);
         $this->assertNull($newConsumable->supplier_id);
         $this->assertFalse($newConsumable->requestable);
         $this->assertNull($newConsumable->image);
-        $this->assertEquals($newConsumable->order_number, $row['orderNumber']);
-        $this->assertEquals($newConsumable->purchase_date->toDateString(), $row['itemName']);
-        $this->assertEquals($newConsumable->purchase_cost, $row['location']);
+        $this->assertEquals($row['orderNumber'], $newConsumable->order_number);
+        $this->assertEquals($row['itemName'], $newConsumable->purchase_date->toDateString());
+        $this->assertEquals($row['location'], $newConsumable->purchase_cost);
         $this->assertNull($newConsumable->min_amt);
-        $this->assertEquals($newConsumable->model_number, '');
+        $this->assertEquals('', $newConsumable->model_number);
         $this->assertNull($newConsumable->item_number);
         $this->assertNull($newConsumable->manufacturer_id);
         $this->assertNull($newConsumable->notes);

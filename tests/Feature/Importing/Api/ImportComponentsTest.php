@@ -79,21 +79,21 @@ class ImportComponentsTest extends ImportDataTestCase
             ->where('item_id', $newComponent->id)
             ->sole();
 
-        $this->assertEquals($activityLog->action_type, 'create');
-        $this->assertEquals($activityLog->action_source, 'importer');
-        $this->assertEquals($activityLog->company_id, $newComponent->company->id);
+        $this->assertEquals('create', $activityLog->action_type);
+        $this->assertEquals('importer', $activityLog->action_source);
+        $this->assertEquals($newComponent->company->id, $activityLog->company_id);
 
-        $this->assertEquals($newComponent->name, $row['itemName']);
-        $this->assertEquals($newComponent->company->name, $row['companyName']);
-        $this->assertEquals($newComponent->category->name, $row['category']);
-        $this->assertEquals($newComponent->location->name, $row['location']);
+        $this->assertEquals($row['itemName'], $newComponent->name);
+        $this->assertEquals($row['companyName'], $newComponent->company->name);
+        $this->assertEquals($row['category'], $newComponent->category->name);
+        $this->assertEquals($row['location'], $newComponent->location->name);
         $this->assertNull($newComponent->supplier_id);
-        $this->assertEquals($newComponent->qty, $row['quantity']);
-        $this->assertEquals($newComponent->order_number, $row['orderNumber']);
-        $this->assertEquals($newComponent->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newComponent->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['quantity'], $newComponent->qty);
+        $this->assertEquals($row['orderNumber'], $newComponent->order_number);
+        $this->assertEquals($row['purchaseDate'], $newComponent->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newComponent->purchase_cost);
         $this->assertNull($newComponent->min_amt);
-        $this->assertEquals($newComponent->serial, $row['serialNumber']);
+        $this->assertEquals($row['serialNumber'], $newComponent->serial);
         $this->assertNull($newComponent->image);
         $this->assertNull($newComponent->notes);
     }
@@ -239,18 +239,18 @@ class ImportComponentsTest extends ImportDataTestCase
             ->where('serial', $row['serialNumber'])
             ->sole();
 
-        $this->assertEquals($updatedComponent->name, $row['itemName']);
-        $this->assertEquals($updatedComponent->category->name, $row['category']);
-        $this->assertEquals($updatedComponent->location->name, $row['location']);
-        $this->assertEquals($updatedComponent->supplier_id, $component->supplier_id);
-        $this->assertEquals($updatedComponent->qty, $row['quantity']);
-        $this->assertEquals($updatedComponent->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedComponent->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedComponent->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($updatedComponent->min_amt, $component->min_amt);
-        $this->assertEquals($updatedComponent->serial, $row['serialNumber']);
-        $this->assertEquals($updatedComponent->image, $component->image);
-        $this->assertEquals($updatedComponent->notes, $component->notes);
+        $this->assertEquals($row['itemName'], $updatedComponent->name);
+        $this->assertEquals($row['category'], $updatedComponent->category->name);
+        $this->assertEquals($row['location'], $updatedComponent->location->name);
+        $this->assertEquals($component->supplier_id, $updatedComponent->supplier_id);
+        $this->assertEquals($row['quantity'], $updatedComponent->qty);
+        $this->assertEquals($row['orderNumber'], $updatedComponent->order_number);
+        $this->assertEquals($row['purchaseDate'], $updatedComponent->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedComponent->purchase_cost);
+        $this->assertEquals($component->min_amt, $updatedComponent->min_amt);
+        $this->assertEquals($row['serialNumber'], $updatedComponent->serial);
+        $this->assertEquals($component->image, $updatedComponent->image);
+        $this->assertEquals($component->notes, $updatedComponent->notes);
     }
 
     #[Test]
@@ -294,14 +294,14 @@ class ImportComponentsTest extends ImportDataTestCase
             ->where('serial', $importFileBuilder->firstRow()['category'])
             ->sole();
 
-        $this->assertEquals($newComponent->name, $row['quantity']);
-        $this->assertEquals($newComponent->category->name, $row['purchaseCost']);
-        $this->assertEquals($newComponent->location->name, $row['serialNumber']);
+        $this->assertEquals($row['quantity'], $newComponent->name);
+        $this->assertEquals($row['purchaseCost'], $newComponent->category->name);
+        $this->assertEquals($row['serialNumber'], $newComponent->location->name);
         $this->assertNull($newComponent->supplier_id);
-        $this->assertEquals($newComponent->qty, $row['companyName']);
-        $this->assertEquals($newComponent->order_number, $row['orderNumber']);
-        $this->assertEquals($newComponent->purchase_date->toDateString(), $row['itemName']);
-        $this->assertEquals($newComponent->purchase_cost, $row['location']);
+        $this->assertEquals($row['companyName'], $newComponent->qty);
+        $this->assertEquals($row['orderNumber'], $newComponent->order_number);
+        $this->assertEquals($row['itemName'], $newComponent->purchase_date->toDateString());
+        $this->assertEquals($row['location'], $newComponent->purchase_cost);
         $this->assertNull($newComponent->min_amt);
         $this->assertNull($newComponent->image);
         $this->assertNull($newComponent->notes);

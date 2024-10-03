@@ -79,22 +79,22 @@ class ImportLicenseTest extends ImportDataTestCase
 
         $this->assertCount(2, $activityLogs);
 
-        $this->assertEquals($newLicense->name, $row['licenseName']);
-        $this->assertEquals($newLicense->serial, $row['serialNumber']);
-        $this->assertEquals($newLicense->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newLicense->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($newLicense->order_number, $row['orderNumber']);
-        $this->assertEquals($newLicense->seats, $row['seats']);
-        $this->assertEquals($newLicense->notes, $row['notes']);
-        $this->assertEquals($newLicense->license_name, $row['licensedToName']);
-        $this->assertEquals($newLicense->license_email, $row['licensedToEmail']);
-        $this->assertEquals($newLicense->supplier->name, $row['supplierName']);
-        $this->assertEquals($newLicense->company->name, $row['companyName']);
-        $this->assertEquals($newLicense->category->name, $row['category']);
-        $this->assertEquals($newLicense->expiration_date->toDateString(), $row['expirationDate']);
-        $this->assertEquals($newLicense->maintained, $row['isMaintained'] === 'TRUE');
-        $this->assertEquals($newLicense->reassignable, $row['isReassignAble'] === 'TRUE');
-        $this->assertEquals($newLicense->purchase_order, '');
+        $this->assertEquals($row['licenseName'], $newLicense->name);
+        $this->assertEquals($row['serialNumber'], $newLicense->serial);
+        $this->assertEquals($row['purchaseDate'], $newLicense->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newLicense->purchase_cost);
+        $this->assertEquals($row['orderNumber'], $newLicense->order_number);
+        $this->assertEquals($row['seats'], $newLicense->seats);
+        $this->assertEquals($row['notes'], $newLicense->notes);
+        $this->assertEquals($row['licensedToName'], $newLicense->license_name);
+        $this->assertEquals($row['licensedToEmail'], $newLicense->license_email);
+        $this->assertEquals($row['supplierName'], $newLicense->supplier->name);
+        $this->assertEquals($row['companyName'], $newLicense->company->name);
+        $this->assertEquals($row['category'], $newLicense->category->name);
+        $this->assertEquals($row['expirationDate'], $newLicense->expiration_date->toDateString());
+        $this->assertEquals($row['isMaintained'] === 'TRUE', $newLicense->maintained);
+        $this->assertEquals($row['isReassignAble'] === 'TRUE', $newLicense->reassignable);
+        $this->assertEquals('', $newLicense->purchase_order);
         $this->assertNull($newLicense->depreciation_id);
         $this->assertNull($newLicense->termination_date);
         $this->assertNull($newLicense->deprecate);
@@ -155,7 +155,7 @@ class ImportLicenseTest extends ImportDataTestCase
             ->where('serial', $importFileBuilder->firstRow()['serialNumber'])
             ->sole();
 
-        $this->assertEquals($newLicense->expiration_date->toDateString(), '2022-10-10');
+        $this->assertEquals('2022-10-10', $newLicense->expiration_date->toDateString());
     }
 
     #[Test]
@@ -259,26 +259,26 @@ class ImportLicenseTest extends ImportDataTestCase
             ->where('serial', $row['serialNumber'])
             ->sole();
 
-        $this->assertEquals($updatedLicense->name, $row['licenseName']);
-        $this->assertEquals($updatedLicense->serial, $row['serialNumber']);
-        $this->assertEquals($updatedLicense->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedLicense->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($updatedLicense->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedLicense->seats, $row['seats']);
-        $this->assertEquals($updatedLicense->notes, $row['notes']);
-        $this->assertEquals($updatedLicense->license_name, $row['licensedToName']);
-        $this->assertEquals($updatedLicense->license_email, $row['licensedToEmail']);
-        $this->assertEquals($updatedLicense->supplier->name, $row['supplierName']);
-        $this->assertEquals($updatedLicense->company->name, $row['companyName']);
-        $this->assertEquals($updatedLicense->category->name, $row['category']);
-        $this->assertEquals($updatedLicense->expiration_date->toDateString(), $row['expirationDate']);
-        $this->assertEquals($updatedLicense->maintained, $row['isMaintained'] === 'TRUE');
-        $this->assertEquals($updatedLicense->reassignable, $row['isReassignAble'] === 'TRUE');
-        $this->assertEquals($updatedLicense->purchase_order, $license->purchase_order);
-        $this->assertEquals($updatedLicense->depreciation_id, $license->depreciation_id);
-        $this->assertEquals($updatedLicense->termination_date, $license->termination_date);
-        $this->assertEquals($updatedLicense->deprecate, $license->deprecate);
-        $this->assertEquals($updatedLicense->min_amt, $license->min_amt);
+        $this->assertEquals($row['licenseName'], $updatedLicense->name);
+        $this->assertEquals($row['serialNumber'], $updatedLicense->serial);
+        $this->assertEquals($row['purchaseDate'], $updatedLicense->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedLicense->purchase_cost);
+        $this->assertEquals($row['orderNumber'], $updatedLicense->order_number);
+        $this->assertEquals($row['seats'], $updatedLicense->seats);
+        $this->assertEquals($row['notes'], $updatedLicense->notes);
+        $this->assertEquals($row['licensedToName'], $updatedLicense->license_name);
+        $this->assertEquals($row['licensedToEmail'], $updatedLicense->license_email);
+        $this->assertEquals($row['supplierName'], $updatedLicense->supplier->name);
+        $this->assertEquals($row['companyName'], $updatedLicense->company->name);
+        $this->assertEquals($row['category'], $updatedLicense->category->name);
+        $this->assertEquals($row['expirationDate'], $updatedLicense->expiration_date->toDateString());
+        $this->assertEquals($row['isMaintained'] === 'TRUE', $updatedLicense->maintained);
+        $this->assertEquals($row['isReassignAble'] === 'TRUE', $updatedLicense->reassignable);
+        $this->assertEquals($license->purchase_order, $updatedLicense->purchase_order);
+        $this->assertEquals($license->depreciation_id, $updatedLicense->depreciation_id);
+        $this->assertEquals($license->termination_date, $updatedLicense->termination_date);
+        $this->assertEquals($license->deprecate, $updatedLicense->deprecate);
+        $this->assertEquals($license->min_amt, $updatedLicense->min_amt);
     }
 
     #[Test]
@@ -336,22 +336,22 @@ class ImportLicenseTest extends ImportDataTestCase
             ->where('serial', $row['companyName'])
             ->sole();
 
-        $this->assertEquals($newLicense->name, $row['licenseName']);
-        $this->assertEquals($newLicense->serial, $row['companyName']);
-        $this->assertEquals($newLicense->purchase_date->toDateString(), $row['isMaintained']);
-        $this->assertEquals($newLicense->purchase_cost, $row['isReassignAble']);
-        $this->assertEquals($newLicense->order_number, $row['licensedToName']);
-        $this->assertEquals($newLicense->seats, $row['expirationDate']);
-        $this->assertEquals($newLicense->notes, $row['licensedToEmail']);
-        $this->assertEquals($newLicense->license_name, $row['seats']);
-        $this->assertEquals($newLicense->license_email, $row['serialNumber']);
-        $this->assertEquals($newLicense->supplier->name, $row['category']);
-        $this->assertEquals($newLicense->company->name, $row['notes']);
-        $this->assertEquals($newLicense->category->name, $row['manufacturerName']);
-        $this->assertEquals($newLicense->expiration_date->toDateString(), $row['orderNumber']);
-        $this->assertEquals($newLicense->maintained, $row['purchaseCost'] === 'TRUE');
-        $this->assertEquals($newLicense->reassignable, $row['purchaseDate'] === 'TRUE');
-        $this->assertEquals($newLicense->purchase_order, '');
+        $this->assertEquals($row['licenseName'], $newLicense->name);
+        $this->assertEquals($row['companyName'], $newLicense->serial);
+        $this->assertEquals($row['isMaintained'], $newLicense->purchase_date->toDateString());
+        $this->assertEquals($row['isReassignAble'], $newLicense->purchase_cost);
+        $this->assertEquals($row['licensedToName'], $newLicense->order_number);
+        $this->assertEquals($row['expirationDate'], $newLicense->seats);
+        $this->assertEquals($row['licensedToEmail'], $newLicense->notes);
+        $this->assertEquals($row['seats'], $newLicense->license_name);
+        $this->assertEquals($row['serialNumber'], $newLicense->license_email);
+        $this->assertEquals($row['category'], $newLicense->supplier->name);
+        $this->assertEquals($row['notes'], $newLicense->company->name);
+        $this->assertEquals($row['manufacturerName'], $newLicense->category->name);
+        $this->assertEquals($row['orderNumber'], $newLicense->expiration_date->toDateString());
+        $this->assertEquals($row['purchaseCost'] === 'TRUE', $newLicense->maintained);
+        $this->assertEquals($row['purchaseDate'] === 'TRUE', $newLicense->reassignable);
+        $this->assertEquals('', $newLicense->purchase_order);
         $this->assertNull($newLicense->depreciation_id);
         $this->assertNull($newLicense->termination_date);
         $this->assertNull($newLicense->deprecate);
