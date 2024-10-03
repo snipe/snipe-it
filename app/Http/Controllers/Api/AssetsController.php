@@ -395,7 +395,7 @@ class AssetsController extends Controller
 
                     // This may not work for all databases, but it works for MySQL
                     if ($numeric_sort) {
-                        $assets->orderByRaw($sort_override . ' * 1 ' . $order);
+                        $assets->orderByRaw(DB::getTablePrefix() . 'assets.' . $sort_override . ' * 1 ' . $order);
                     } else {
                         $assets->orderBy($sort_override, $order);
                     }
