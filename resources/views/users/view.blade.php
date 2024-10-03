@@ -177,8 +177,6 @@
               <div class="col-md-12 text-center">
                 <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">  
                </div>
-               
-          
 
               @can('update', $user)
                 <div class="col-md-12">
