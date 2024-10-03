@@ -15,10 +15,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Concerns\TestsPermissionsRequirement;
+use Tests\Support\Importing\CleansUpImportFiles;
 use Tests\Support\Importing\LicensesImportFileBuilder as ImportFileBuilder;
 
 class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse

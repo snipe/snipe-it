@@ -22,9 +22,11 @@ use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\Support\Importing\AssetsImportFileBuilder as ImportFileBuilder;
+use Tests\Support\Importing\CleansUpImportFiles;
 
 class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse

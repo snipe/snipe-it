@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Concerns\TestsPermissionsRequirement;
+use Tests\Support\Importing\CleansUpImportFiles;
 use Tests\Support\Importing\ConsumablesImportFileBuilder as ImportFileBuilder;
 
 class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse

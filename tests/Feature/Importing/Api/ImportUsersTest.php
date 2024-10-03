@@ -7,6 +7,7 @@ use App\Models\Import;
 use App\Models\Location;
 use App\Models\User;
 use Database\Factories\AssetFactory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Database\Factories\UserFactory;
 use Database\Factories\ImportFactory;
@@ -18,10 +19,12 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Concerns\TestsPermissionsRequirement;
+use Tests\Support\Importing\CleansUpImportFiles;
 use Tests\Support\Importing\UsersImportFileBuilder as ImportFileBuilder;
 
 class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse
