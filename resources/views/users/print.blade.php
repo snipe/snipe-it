@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    @if (count($users) === 1)
+    @if ((isset($users) && count($users) === 1))
         <title>{{ trans('general.assigned_to', ['name' => $users[0]->present()->fullName()]) }} - {{ date('Y-m-d H:i', time()) }}</title>
     @else
         <title>{{ trans('admin/users/general.print_assigned') }} - {{ date('Y-m-d H:i', time()) }}</title>
