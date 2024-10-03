@@ -952,7 +952,7 @@ h4 {
 }
 .row-new-striped {
   vertical-align: top;
-  padding: 2px;
+  padding: 3px;
   display: table;
   width: 100%;
   word-wrap: break-word;
@@ -966,14 +966,14 @@ h4 {
 .row-new-striped > .row:nth-of-type(even) {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
-  line-height: 1.6;
+  line-height: 1.9;
   display: table-row;
 }
 .row-new-striped > .row:nth-of-type(odd) {
   background-color: #F8F8F8;
   border-top: 1px solid #dddddd;
   display: table-row;
-  line-height: 1.6;
+  line-height: 1.9;
   padding: 2px;
 }
 .row-new-striped div {
