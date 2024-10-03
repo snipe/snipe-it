@@ -4,6 +4,7 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActionLog;
 use App\Models\Component;
+use App\Models\Import;
 use App\Models\User;
 use Database\Factories\ComponentFactory;
 use Illuminate\Support\Str;
@@ -41,9 +42,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
     #[Test]
     public function userWithImportAssetsPermissionCanImportComponents(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->component()->create();
+        $import = Import::factory()->component()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -55,9 +56,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -103,9 +104,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -113,16 +114,16 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
     #[Test]
     public function willNotCreateNewComponentWhenComponentWithNameAndSerialNumberExists(): void
     {
-        $component = ComponentFactory::new()->create();
+        $component = Component::factory()->create();
 
         $importFileBuilder = ImportFileBuilder::times(4)->replace([
             'itemName'     => $component->name,
             'serialNumber' => $component->serial
         ]);
 
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewComponents = Component::query()
@@ -138,9 +139,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
     public function willNotCreateNewCompanyWhenCompanyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newComponents = Component::query()
@@ -154,9 +155,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
     public function willNotCreateNewLocationWhenLocationExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newComponents = Component::query()
@@ -170,9 +171,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => $this->faker->company]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newComponents = Component::query()
@@ -190,9 +191,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
             ->forget(['quantity']);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -219,16 +220,16 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
     #[Test]
     public function updateComponentFromImport(): void
     {
-        $component = ComponentFactory::new()->create();
+        $component = Component::factory()->create();
         $importFileBuilder = ImportFileBuilder::new([
             'itemName'     => $component->name,
             'serialNumber' => $component->serial
         ]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedComponent = Component::query()
@@ -267,9 +268,9 @@ class ImportComponentsTest extends ImportDataTestCase implements TestsPermission
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,

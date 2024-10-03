@@ -5,6 +5,7 @@ namespace Tests\Feature\Importing\Api;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Company;
+use App\Models\Import;
 use App\Models\User;
 use Database\Factories\AccessoryFactory;
 use Database\Factories\CompanyFactory;
@@ -43,9 +44,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function userWithImportAccessoryPermissionCanImportAccessories(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->accessory()->create();
+        $import = Import::factory()->accessory()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -55,9 +56,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     {
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -108,9 +109,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -119,9 +120,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function willFormatDate(): void
     {
         $importFileBuilder = ImportFileBuilder::new(['purchaseDate' => '2022/10/10']);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $accessory = Accessory::query()
@@ -135,9 +136,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => Str::random()]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -150,11 +151,11 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function willNotCreateNewAccessoryWhenAccessoryWithNameExists(): void
     {
-        $accessory = AccessoryFactory::new()->create(['name' => Str::random()]);
+        $accessory = Accessory::factory()->create(['name' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::times(2)->replace(['itemName' => $accessory->name]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewAccessories = Accessory::query()
@@ -169,9 +170,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewCompanyWhenCompanyAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -185,9 +186,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewLocationWhenLocationAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -201,9 +202,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewManufacturerWhenManufacturerAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['manufacturerName' => $this->faker->company]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -217,9 +218,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewSupplierWhenSupplierAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['supplierName' => $this->faker->company]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -233,9 +234,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function whenColumnsAreMissingInImportFile(): void
     {
         $importFileBuilder = ImportFileBuilder::new()->forget(['minimumAmount', 'purchaseCost', 'purchaseDate']);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessory = Accessory::query()
@@ -251,9 +252,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     public function whenRequiredColumnsAreMissingInImportFile(): void
     {
         $importFileBuilder = ImportFileBuilder::new()->forget(['itemName', 'quantity', 'category']);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
             ->assertExactJson([
@@ -274,12 +275,12 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function updateAccessoryFromImport(): void
     {
-        $accessory = AccessoryFactory::new()->create(['name' => Str::random()])->refresh();
+        $accessory = Accessory::factory()->create(['name' => Str::random()])->refresh();
         $importFileBuilder = ImportFileBuilder::new(['itemName' => $accessory->name]);
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedAccessory = Accessory::query()->find($accessory->id);
@@ -312,7 +313,7 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function whenImportFileContainsEmptyValues(): void
     {
-        $accessory = AccessoryFactory::new()->create(['name' => Str::random()]);
+        $accessory = Accessory::factory()->create(['name' => Str::random()]);
         $accessory->refresh();
 
         $importFileBuilder = ImportFileBuilder::new([
@@ -332,9 +333,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
             'modelNumber'      => ''
         ]);
 
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
             ->assertExactJson([
@@ -352,7 +353,7 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
 
         $importFileBuilder->replace(['itemName' => $accessory->name]);
 
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
@@ -382,9 +383,9 @@ class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissio
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse([
             'import' => $import->id,
             'column-mappings' => [

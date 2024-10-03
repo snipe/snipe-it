@@ -3,6 +3,7 @@
 namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActivityLog;
+use App\Models\Import;
 use App\Models\License;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -40,9 +41,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     #[Test]
     public function userWithImportAssetsPermissionCanImportLicenses(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->license()->create();
+        $import = Import::factory()->license()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -52,9 +53,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     {
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -106,9 +107,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -116,16 +117,16 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     #[Test]
     public function willNotCreateNewLicenseWhenNameAndSerialNumberAlreadyExist(): void
     {
-        $license = LicenseFactory::new()->create();
+        $license = License::factory()->create();
 
         $importFileBuilder = ImportFileBuilder::times(4)->replace([
             'itemName'     => $license->name,
             'serialNumber' => $license->serial
         ]);
 
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewLicenses = License::query()
@@ -143,9 +144,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
             'expirationDate' => '2022/10/10'
         ]);
 
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newLicense = License::query()
@@ -159,9 +160,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     public function willNotCreateNewCompanyWhenCompanyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newLicenses = License::query()
@@ -175,9 +176,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     public function willNotCreateNewManufacturerWhenManufacturerExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['manufacturerName' => Str::random()]);
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newLicenses = License::query()
@@ -191,9 +192,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => $this->faker->company]);
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newLicenses = License::query()
@@ -211,9 +212,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
             ->forget(['seats']);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -239,16 +240,16 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
     #[Test]
     public function updateLicenseFromImport(): void
     {
-        $license = LicenseFactory::new()->create();
+        $license = License::factory()->create();
         $importFileBuilder = ImportFileBuilder::new([
             'licenseName'  => $license->name,
             'serialNumber' => $license->serial
         ]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedLicense = License::query()
@@ -302,9 +303,9 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,

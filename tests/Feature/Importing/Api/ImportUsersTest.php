@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Importing\Api;
 
+use App\Models\Asset;
+use App\Models\Import;
 use App\Models\Location;
 use App\Models\User;
 use Database\Factories\AssetFactory;
@@ -42,9 +44,9 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     #[Test]
     public function userWithImportAssetsPermissionCanImportUsers(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->users()->create();
+        $import = Import::factory()->users()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -56,9 +58,9 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'send-welcome' => 1])
             ->assertOk()
             ->assertExactJson([
@@ -125,9 +127,9 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -135,11 +137,11 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     #[Test]
     public function willNotCreateNewUserWhenUserWithUserNameAlreadyExist(): void
     {
-        $user = UserFactory::new()->create(['username' => Str::random()]);
+        $user = User::factory()->create(['username' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['username' => $user->username]);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewUsers = User::query()
@@ -154,9 +156,9 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     {
         $importFileBuilder = ImportFileBuilder::new()->forget('username');
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newUser = User::query()
@@ -171,12 +173,12 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     #[Test]
     public function willUpdateLocationOfAllAssetsAssignedToUser(): void
     {
-        $user = UserFactory::new()->create(['username' => Str::random()]);
-        $assetsAssignedToUser = AssetFactory::new()->create(['assigned_to' => $user->id, 'assigned_type' => User::class]);
+        $user = User::factory()->create(['username' => Str::random()]);
+        $assetsAssignedToUser = Asset::factory()->create(['assigned_to' => $user->id, 'assigned_type' => User::class]);
         $importFileBuilder = ImportFileBuilder::new(['username' => $user->username]);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $userLocation = Location::query()->where('name', $importFileBuilder->firstRow()['location'])->sole(['id']);
@@ -191,9 +193,9 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     public function whenRequiredColumnsAreMissingInImportFile(): void
     {
         $importFileBuilder = ImportFileBuilder::new(['firstName' => ''])->forget(['username']);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -219,13 +221,13 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     #[Test]
     public function updateUserFromImport(): void
     {
-        $user = UserFactory::new()->create(['username' => Str::random()])->refresh();
+        $user = User::factory()->create(['username' => Str::random()])->refresh();
         $importFileBuilder = ImportFileBuilder::new(['username'  => $user->username]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedUser = User::query()->with(['company', 'location'])->find($user->id);
@@ -267,9 +269,9 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,

@@ -5,6 +5,7 @@ namespace Tests\Feature\Importing\Api;
 use App\Models\Actionlog as ActionLog;
 use App\Models\Asset;
 use App\Models\CustomField;
+use App\Models\Import;
 use App\Models\User;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
@@ -46,9 +47,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function userWithImportAssetsPermissionCanImportAssets(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->asset()->create();
+        $import = Import::factory()->asset()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -60,9 +61,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -151,9 +152,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -161,11 +162,11 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function willNotCreateNewAssetWhenAssetWithSameTagAlreadyExists(): void
     {
-        $asset = AssetFactory::new()->create(['asset_tag' => $this->faker->uuid]);
+        $asset = Asset::factory()->create(['asset_tag' => $this->faker->uuid]);
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['tag' => $asset->asset_tag]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
             ->assertExactJson([
@@ -191,9 +192,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     public function willNotCreateNewCompanyWhenCompanyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAssets = Asset::query()
@@ -207,9 +208,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     public function willNotCreateNewLocationWhenLocationExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAssets = Asset::query()
@@ -223,9 +224,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     public function willNotCreateNewSupplierWhenSupplierExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['supplierName' => $this->faker->company]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAssets = Asset::query()
@@ -239,9 +240,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     public function willNotCreateNewManufacturerWhenManufacturerExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['manufacturerName' => $this->faker->company]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAssets = Asset::query()
@@ -256,9 +257,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     public function willNotCreateCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => $this->faker->company]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAssets = Asset::query()
@@ -273,9 +274,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     public function willNotCreateNewAssetModelWhenAssetModelExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['model' => Str::random()]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAssets = Asset::query()
@@ -295,9 +296,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             'status'
         ]);
 
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAsset = Asset::query()
@@ -318,9 +319,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             'purchaseDate'    => '2022/10/10'
         ]);
 
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAsset = Asset::query()
@@ -339,9 +340,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             ->replace(['model' => '']);
 
         $rows = $importFileBuilder->all();
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
             ->assertJson([
@@ -381,12 +382,12 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function updateAssetFromImport(): void
     {
-        $asset = AssetFactory::new()->create()->refresh();
+        $asset = Asset::factory()->create()->refresh();
         $importFileBuilder = ImportFileBuilder::times(1)->replace(['tag' => $asset->asset_tag]);
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedAsset = Asset::query()
@@ -458,9 +459,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,
@@ -546,7 +547,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $customField = CustomField::query()->where('name', 'Mac Address')->firstOrNew();
 
         if (!$customField->exists) {
-            $customField = CustomFieldFactory::new()->macAddress()->create(['db_column' => '_snipeit_mac_address_1']);
+            $customField = CustomField::factory()->macAddress()->create(['db_column' => '_snipeit_mac_address_1']);
         }
 
         if ($customField->field_encrypted) {
@@ -554,9 +555,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             $customField->save();
         }
 
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAsset = Asset::query()->where('serial', $importFileBuilder->firstRow()['serialNumber'])->sole();
@@ -576,7 +577,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $customField = CustomField::query()->where('name', 'Mac Address')->firstOrNew();
 
         if (!$customField->exists) {
-            $customField = CustomFieldFactory::new()->macAddress()->create();
+            $customField = CustomField::factory()->macAddress()->create();
         }
 
         if (!$customField->field_encrypted) {
@@ -584,9 +585,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             $customField->save();
         }
 
-        $import = ImportFactory::new()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $asset = Asset::query()->where('serial', $importFileBuilder->firstRow()['serialNumber'])->sole();

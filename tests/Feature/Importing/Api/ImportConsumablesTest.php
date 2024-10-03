@@ -4,6 +4,7 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActivityLog;
 use App\Models\Consumable;
+use App\Models\Import;
 use App\Models\User;
 use Database\Factories\ConsumableFactory;
 use Illuminate\Support\Str;
@@ -41,9 +42,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function userWithImportAssetsPermissionCanImportConsumables(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->consumable()->create();
+        $import = Import::factory()->consumable()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -55,9 +56,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -105,9 +106,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -115,11 +116,11 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function willNotCreateNewConsumableWhenConsumableNameAlreadyExist(): void
     {
-        $consumable = ConsumableFactory::new()->create(['name' => Str::random()]);
+        $consumable = Consumable::factory()->create(['name' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::new(['itemName' => $consumable->name]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewConsumables = Consumable::query()
@@ -134,9 +135,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewCompanyWhenCompanyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newConsumables = Consumable::query()
@@ -150,9 +151,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewLocationWhenLocationExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newConsumables = Consumable::query()
@@ -166,9 +167,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => Str::random()]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newConsumables = Consumable::query()
@@ -184,9 +185,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
         $importFileBuilder = ImportFileBuilder::new(['category' => ''])->forget(['quantity', 'name']);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -212,13 +213,13 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function updateConsumableFromImport(): void
     {
-        $consumable = ConsumableFactory::new()->create(['name' => Str::random()]);
+        $consumable = Consumable::factory()->create(['name' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::new(['itemName' => $consumable->name]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedConsumable = Consumable::query()
@@ -262,9 +263,9 @@ class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissio
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,
