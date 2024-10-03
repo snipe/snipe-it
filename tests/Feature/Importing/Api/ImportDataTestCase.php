@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Importing\Api;
 
-use Tests\TestCase;
 use Illuminate\Testing\TestResponse;
+use Tests\TestCase;
 
 abstract class ImportDataTestCase extends TestCase
 {
