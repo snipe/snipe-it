@@ -295,16 +295,23 @@
                         @else
 
                             <form class="form-horizontal">
+                                <fieldset>
+                                    <legend style="border: 0px; font-size: 15px;">Select Delimiter:</legend>
+                                    <label class="form-control">
+                                        <input type="radio" name="delimiter" id="delimiter" value="comma" wire:model.live="delimiter">
+                                        Comma
+                                    </label>
 
-                                <label class="form-control">
-                                    <input type="radio" name="delimiter" id="delimiter" value="comma" wire:model.live="delimiter">
-                                    Comma
-                                </label>
+                                    <label class="form-control">
+                                        <input type="radio" name="delimiter" id="delimiter" value="semicolon" wire:model.live="delimiter">
+                                        Semicolon
+                                    </label>
 
-                                <label class="form-control">
-                                    <input type="radio" name="delimiter" id="delimiter" value="semicolon" wire:model.live="delimiter">
-                                    Semicolon
-                                </label>
+                                    <label class="form-control">
+                                        <input type="radio" name="delimiter" id="delimiter" value="pipe" wire:model.live="delimiter">
+                                        Pipe
+                                    </label>
+                                </fieldset>
 
                                 <span class="btn btn-primary fileinput-button">
                                     <span>

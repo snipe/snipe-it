@@ -66,7 +66,6 @@ class ImportController extends Controller
                 }
                 $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
                 $reader->setDelimiter(request('delimiter', ','));
-                
                 try {
                     $import->header_row = $reader->fetchOne(0);
                 } catch (JsonEncodingException $e) {

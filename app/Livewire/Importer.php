@@ -40,7 +40,7 @@ class Importer extends Component
     public $consumables_fields;
     public $components_fields;
     public $aliases_fields;
-    public $delimiter = 'comma';
+    public $delimiter;
 
     protected $rules = [
         'files.*.file_path' => 'required|string',
@@ -49,7 +49,7 @@ class Importer extends Component
         'headerRow' => 'array',
         'typeOfImport' => 'string',
         'field_map' => 'array',
-        'delimiter' => 'in:comma,semicolon',
+        'delimiter' => 'in:comma,semicolon,pipe',
     ];
 
     /**
