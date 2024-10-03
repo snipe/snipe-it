@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\Support\Importing\UsersImportFileBuilder as ImportFileBuilder;
 
-class ImportUsersTest extends ImportDataTestCase
+class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
     use WithFaker;
 
@@ -31,14 +32,9 @@ class ImportUsersTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportUsers(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }

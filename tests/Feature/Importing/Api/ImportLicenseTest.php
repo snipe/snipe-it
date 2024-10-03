@@ -4,6 +4,7 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActivityLog;
 use App\Models\License;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Database\Factories\UserFactory;
 use Database\Factories\ImportFactory;
@@ -12,9 +13,10 @@ use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\Support\Importing\LicensesImportFileBuilder as ImportFileBuilder;
 
-class ImportLicenseTest extends ImportDataTestCase
+class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
     use WithFaker;
 
@@ -28,14 +30,9 @@ class ImportLicenseTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportLicenses(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }

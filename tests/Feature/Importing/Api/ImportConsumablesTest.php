@@ -4,6 +4,7 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActivityLog;
 use App\Models\Consumable;
+use App\Models\User;
 use Database\Factories\ConsumableFactory;
 use Illuminate\Support\Str;
 use Database\Factories\UserFactory;
@@ -13,9 +14,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\Support\Importing\ConsumablesImportFileBuilder as ImportFileBuilder;
 
-class ImportConsumablesTest extends ImportDataTestCase
+class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
     use WithFaker;
 
@@ -29,14 +31,9 @@ class ImportConsumablesTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportConsumables(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
