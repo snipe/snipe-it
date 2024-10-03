@@ -41,7 +41,7 @@ class ImportFactory extends Factory
             $fileBuilder = Importing\AccessoriesImportFileBuilder::new();
 
             $attributes['name'] = "{$attributes['name']} Accessories";
-            $attributes['import_type'] = 'Accessories';
+            $attributes['import_type'] = 'accessory';
             $attributes['header_row'] = $fileBuilder->toCsv()[0];
             $attributes['first_row'] = $fileBuilder->firstRow();
 
