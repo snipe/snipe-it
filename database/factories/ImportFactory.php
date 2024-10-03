@@ -76,7 +76,7 @@ class ImportFactory extends Factory
     public function component()
     {
         return $this->state(function (array $attributes) {
-            $fileBuilder = Importing\ComponentsImportFileBuilder::times();
+            $fileBuilder = Importing\ComponentsImportFileBuilder::new();
 
             $attributes['name'] = "{$attributes['name']} Components";
             $attributes['import_type'] = 'component';
