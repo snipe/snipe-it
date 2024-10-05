@@ -75,4 +75,40 @@ class Depreciation extends SnipeModel
     {
         return $this->hasMany(\App\Models\License::class, 'depreciation_id');
     }
+
+    /**
+     * Establishes the depreciation -> assets relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v5.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assets()
+    {
+        return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'depreciation_id', 'model_id');
+    }
+
+    /**
+     * Get the user that created the depreciation
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v7.0.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+
+    /**
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'depreciations.created_by', '=', 'admin_sort.id')->select('depreciations.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
 }

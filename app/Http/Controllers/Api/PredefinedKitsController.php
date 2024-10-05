@@ -23,9 +23,8 @@ class PredefinedKitsController extends Controller
     public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', PredefinedKit::class);
-        $allowed_columns = ['id', 'name'];
 
-        $kits = PredefinedKit::query();
+        $kits = PredefinedKit::query()->with('adminuser');
 
         if ($request->filled('search')) {
             $kits = $kits->TextSearch($request->input('search'));
@@ -36,8 +35,25 @@ class PredefinedKitsController extends Controller
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'desc' ? 'desc' : 'asc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'name';
-        $kits->orderBy($sort, $order);
+
+        switch ($request->input('sort')) {
+            case 'created_by':
+                $kits = $kits->OrderByCreatedBy($order);
+                break;
+            default:
+                // This array is what determines which fields should be allowed to be sorted on ON the table itself.
+                // These must match a column on the consumables table directly.
+                $allowed_columns = [
+                    'id',
+                    'name',
+                    'created_at',
+                    'updated_at',
+                ];
+
+                $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+                $kits = $kits->orderBy($sort, $order);
+                break;
+        }
 
         $total = $kits->count();
         $kits = $kits->skip($offset)->take($limit)->get();

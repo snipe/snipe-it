@@ -15,11 +15,11 @@ return [
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'
     ],
     'restore' => [
-        'success'               => 'Su copia de respaldo del sistema ha sido restaurada. Por favor, inicie sesión nuevamente.'
+        'success'               => 'Se ha restaurado la copia de seguridad de su sistema. Por favor, vuelva a iniciar sesión.'
     ],
     'purge' => [
         'error'     => 'Ha ocurrido un error mientras se realizaba el purgado. ',
-        'validation_failed'     => 'Su confirmación de purga es incorrecta. Por favor, escriba la palabra "Borrar" en el cuadro de confirmación.',
+        'validation_failed'     => 'Su confirmación de purga es incorrecta. Por favor, escriba la palabra "DELETE" en el cuadro de confirmación.',
         'success'               => 'Registros eliminados correctamente purgados.',
     ],
     'mail' => [
@@ -38,7 +38,7 @@ return [
     ],
     'webhook' => [
         'sending' => 'Enviando mensaje de prueba a :app...',
-        'success' => '¡Su Integración :webhook_name funciona!',
+        'success' => '¡Su integración :webhook_name funciona!',
         'success_pt1' => '¡Éxito! Compruebe el ',
         'success_pt2' => ' canal para su mensaje de prueba, y asegúrese de hacer clic en GUARDAR abajo para guardar su configuración.',
         '500' => 'Error 500 del servidor.',

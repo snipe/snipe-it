@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit a fost șters cu succes',
     'kit_model_updated'                 => 'Modelul a fost actualizat cu succes',
     'kit_model_detached'                => 'Modelul a fost detașat cu succes',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

@@ -157,7 +157,7 @@ return [
     'starts_with' => 'El campo :attribute debe iniciar con uno de los siguientes: :values.',
     'string'               => 'El atributo: debe ser una cadena.',
     'two_column_unique_undeleted' => ':attribute debe ser único a través de :table1 y :table2. ',
-    'unique_undeleted'     => 'El :atrribute debe ser único.',
+    'unique_undeleted'     => 'El :attribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
     'not_array'            => ':attribute no puede ser una matriz.',
     'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el nombre de usuario.',

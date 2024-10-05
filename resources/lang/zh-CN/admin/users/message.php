@@ -6,7 +6,7 @@ return array(
     'declined'                  => '你已拒绝此项资产。',
     'bulk_manager_warn'	        => '您的用户已成功更新，但是您的经理条目未保存，因为您选择的经理也在要编辑的用户列表中，用户可能不是自己的经理。请再次选择您的用户，不包括经理。',
     'user_exists'               => '用户已经存在!',
-    'user_not_found'            => '用户不存在。',
+    'user_not_found'            => '用户不存在或您没有权限查看。',
     'user_login_required'       => '登陆字段是必须的',
     'user_has_no_assets_assigned' => '目前没有分配给用户的资产。',
     'user_password_required'    => '密码为必填项',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => '查询LDAP服务器失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_get_entries' => '从LDAP服务器获取信息条目失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'password_ldap' => '此帐户的密码由LDAP / Active Directory管理。请联系您的IT部门更改您的密码。',
+        'multi_company_items_assigned' => '该用户分配的物品属于另一家公司。请归还它们或编辑它们的公司。'
     ),
 
     'deletefile' => array(

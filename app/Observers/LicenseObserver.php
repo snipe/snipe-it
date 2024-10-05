@@ -20,7 +20,7 @@ class LicenseObserver
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('update');
     }
 
@@ -37,7 +37,7 @@ class LicenseObserver
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         if($license->imported) {
             $logAction->setActionSource('importer');
         }
@@ -56,7 +56,7 @@ class LicenseObserver
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('delete');
     }
 }

@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Cópias de segurança',
     'backups_help'              => 'Criar, baixar e restaurar cópias de segurança ',
     'backups_restoring'         => 'Restaurar da cópia de segurança',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Carregar cópia de segurança',
     'backups_path'              => 'As cópia de segurança no servidor são guardadas em <code>:path</code>',
     'backups_restore_warning'   => 'Use o botão de restaurar <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> para restaurar de uma cópia de segurança anterior. (Isto não funciona actualmente com armazenamento de ficheiro S3 ou Docker)<br><br>A sua <strong>inteira :app_name base de dados e algum ficheiro enviado irá ser apagado</strong> pelo que está no ficheiro da cópia de segurança.  ',
@@ -381,5 +383,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'Quantos dias antes do esperado check-in de um ativo deve ser listado na página "Due for checkin"?',
 
 ];

@@ -25,9 +25,8 @@ return [
     'image'		    => 'Ierīces attēls',
     'days_without_acceptance' => 'Dienas bez pieņemšanas',
     'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Piešķirts',
     'requesting_user' => 'Requesting User',
-    'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
+    'requested_date' => 'Pieprasīšanas datums',
+    'changed'       => 'Izmainīts',
     'icon' => 'Icon',
 ];

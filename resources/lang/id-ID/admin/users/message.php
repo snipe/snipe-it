@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Anda sukses menolak aset ini.',
     'bulk_manager_warn'	        => 'Pengguna Anda telah berhasil diperbarui, namun entri pengelola Anda tidak disimpan karena manajer yang Anda pilih juga ada dalam daftar pengguna untuk diedit, dan pengguna mungkin bukan manajer mereka sendiri. Silakan pilih pengguna Anda lagi, tidak termasuk manajernya.',
     'user_exists'               => 'Pengguna sudah ada!',
-    'user_not_found'            => 'Pengguna tidak ada.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Kolom login wajib di-isi',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Kata sandi wajib di-isi.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Gagal mencari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'ldap_could_not_get_entries' => 'Gagal menerima catatan dari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'password_ldap' => 'Kata sandi untuk akun ini dikelola oleh LDAP / Active Directory. Silakan menghubungi departemen TI Anda untuk mengganti kata sandi Anda.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

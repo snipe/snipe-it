@@ -4,7 +4,7 @@ return [
     'about_assets_title'           => 'Informazioni sugli asset',
     'about_assets_text'            => 'Gli asset sono elementi tracciati con il numero di serie o il tag di asset. Tendono ad essere oggetti di valore più elevato dove identificare un elemento specifico.',
     'archived'  				=> 'Archiviato',
-    'asset'  					=> 'Asset',
+    'asset'  					=> 'Bene',
     'bulk_checkout'             => 'Ritiro Asset',
     'bulk_checkin'              => 'Check-in Bene',
     'checkin'  					=> 'Ingresso Asset',

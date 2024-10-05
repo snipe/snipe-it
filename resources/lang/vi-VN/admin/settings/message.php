@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Đã xảy ra lỗi trong khi xóa.',

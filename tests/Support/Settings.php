@@ -121,6 +121,10 @@ class Settings
             'ldap_basedn' => 'CN=Users,DC=ad,DC=example,Dc=com'
         ]);
     }
+    public function setEula($text = 'Default EULA text')
+    {
+        return $this->update(['default_eula_text' => $text]);
+    }
 
     /**
      * @param array $attributes Attributes to modify in the application's settings.

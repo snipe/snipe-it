@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Uspješno ste odbili ovaj materijal.',
     'bulk_manager_warn'	        => 'Vaši su korisnici uspješno ažurirani, ali vaš unos upravitelja nije spremljen jer je upravitelj koji ste odabrali također bio na popisu korisnika koji se uređuje, a korisnici možda nisu vlastiti upravitelj. Ponovno odaberite svoje korisnike, isključujući upravitelja.',
     'user_exists'               => 'Korisnik već postoji!',
-    'user_not_found'            => 'Korisnik ne postoji.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Potrebno je polje za prijavu',
     'user_has_no_assets_assigned' => 'Niti jedno sredstvo trenutno nije dodjeljeno korisniku.',
     'user_password_required'    => 'Zaporka je potrebna.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nije moguće pretražiti LDAP poslužitelj. Provjerite konfiguraciju LDAP poslužitelja u LDAP konfiguracijskoj datoteci. <br>Preku s LDAP poslužitelja:',
         'ldap_could_not_get_entries' => 'Nije bilo moguće dobiti unose s LDAP poslužitelja. Provjerite konfiguraciju LDAP poslužitelja u LDAP konfiguracijskoj datoteci. <br>Preku s LDAP poslužitelja:',
         'password_ldap' => 'Lozinku za ovaj račun upravlja LDAP / Active Directory. Obratite se IT odjelu za promjenu zaporke.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

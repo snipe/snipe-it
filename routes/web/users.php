@@ -145,10 +145,12 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     )->name('users/bulkeditsave');
 
-
+    // pulling this out of the resource because I need route model binding in the request
+    Route::match(['put', 'patch'], '/{user}', [Users\UsersController::class, 'update'])->name('users.update');
 });
 
 Route::resource('users', Users\UsersController::class, [
     'middleware' => ['auth'],
     'parameters' => ['user' => 'user_id'],
+    'except' => ['update']
 ]);

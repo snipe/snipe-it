@@ -14,7 +14,7 @@
     @endif
 
     {{-- Show images in email!  --}}
-    @if (($snipeSettings->show_images_in_email=='1') && ($snipeSettings->email_logo!='') && $snipeSettings->brand != '1'))
+    @if (($snipeSettings->show_images_in_email=='1') && ($snipeSettings->email_logo!='') && ($snipeSettings->brand != '1'))
 
         {{-- $snipeSettings->brand = 1 = Text  --}}
         {{-- $snipeSettings->brand = 2 = Logo  --}}

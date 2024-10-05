@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Набір було успішно видалено',
     'kit_model_updated'                 => 'Модель успішно оновлено',
     'kit_model_detached'                => 'Модель успішно від’єднано',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

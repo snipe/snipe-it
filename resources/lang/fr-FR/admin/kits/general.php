@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Le kit a bien été supprimé',
     'kit_model_updated'                 => 'Le modèle a bien été mis à jour',
     'kit_model_detached'                => 'Le modèle a bien été désaffecté',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

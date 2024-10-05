@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Kopie zapasowe',
     'backups_help'              => 'Utwórz, pobieraj i przywracaj kopie zapasowe ',
     'backups_restoring'         => 'Przywróć z kopii zapasowej',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Prześlij kopię zapasową',
     'backups_path'              => 'Kopie zapasowe na serwerze są przechowywane w <code>:path</code>',
     'backups_restore_warning'   => 'Użyj przycisku przywracania <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> aby przywrócić z poprzedniej kopii zapasowej. (To nie działa obecnie z pamięcią plików S3 lub Docker.<br><br>Twoja baza danych <strong>cała :app_name i wszystkie przesłane pliki zostaną całkowicie zastąpione</strong> przez to, co znajduje się w pliku kopii zapasowej.  ',
@@ -381,5 +383,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

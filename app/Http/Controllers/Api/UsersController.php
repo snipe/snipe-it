@@ -206,6 +206,10 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
+        if ($request->filled('locale')) {
+            $users = $users->where('users.locale', '=', $request->input('locale'));
+        }
+
 
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
@@ -276,6 +280,7 @@ class UsersController extends Controller
                         'end_date',
                         'autoassign_licenses',
                         'website',
+                        'locale',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
@@ -427,12 +432,9 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
-    public function update(SaveUserRequest $request, $id) : JsonResponse
+    public function update(SaveUserRequest $request, User $user): JsonResponse
     {
         $this->authorize('update', User::class);
-
-        if ($user = User::find($id)) {
-
 
             $this->authorize('update', $user);
 
@@ -443,11 +445,9 @@ class UsersController extends Controller
              *
              */
 
-
-            if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+        if ((($user->id == 1) || ($user->id == 2)) && (config('app.lock_passwords'))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
             }
-
 
             $user->fill($request->all());
 
@@ -473,16 +473,13 @@ class UsersController extends Controller
                 $user->permissions = $permissions_array;
             }
 
-
             // Update the location of any assets checked out to this user
             Asset::where('assigned_type', User::class)
                 ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
-
             app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
             if ($user->save()) {
-
                 // Check if the request has groups passed and has a value, AND that the user us a superuser
                 if (($request->has('groups')) && (auth()->user()->isSuperUser())) {
 
@@ -496,18 +493,10 @@ class UsersController extends Controller
 
                     // Sync the groups since the user is a superuser and the groups pass validation
                     $user->groups()->sync($request->input('groups'));
-
-
                 }
-
                 return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
             }
-
             return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
-        }
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
-
     }
 
     /**
@@ -702,7 +691,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('2FA reset');
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
@@ -752,7 +741,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);

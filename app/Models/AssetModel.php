@@ -36,7 +36,6 @@ class AssetModel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     protected $table = 'models';
-    protected $hidden = ['user_id', 'deleted_at'];
     protected $presenter = AssetModelPresenter::class;
 
     // Declare the rules for the model validation
@@ -69,7 +68,6 @@ class AssetModel extends SnipeModel
         'model_number',
         'name',
         'notes',
-        'user_id',
     ];
 
     use Searchable;
@@ -79,7 +77,12 @@ class AssetModel extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'model_number', 'notes', 'eol'];
+    protected $searchableAttributes = [
+        'name',
+        'model_number',
+        'notes',
+        'eol'
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -219,6 +222,18 @@ class AssetModel extends SnipeModel
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Get user who created the item
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
     }
 
 

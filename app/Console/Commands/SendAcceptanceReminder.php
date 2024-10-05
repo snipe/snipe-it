@@ -47,7 +47,8 @@ class SendAcceptanceReminder extends Command
     {
         $pending = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')
                                                 ->whereHas('checkoutable', function($query) {
-                                                    $query->where('archived', 0);
+                                                    $query->where('accepted_at', null)
+                                                          ->where('declined_at', null);
                                                 })
                                                 ->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model', 'checkoutable.adminuser'])
                                                 ->get();

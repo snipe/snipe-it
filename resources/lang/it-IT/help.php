@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Ulteriori Informazioni',
 
-    'audit_help' => 'Selezionando questa casella verranno modificati le posizioni dei beni. Non selezionandola, il luogo verrà semplicemente annotato nel log di controllo inventario.<br><br>Nota che se questo bene è assegnato, non modificherà la posizione della persona, bene o posizione a cui è assegnato.',
+    'audit_help' => 'Spuntando questa casella verrà modificata la Sede del Bene. Non spuntandola, la Sede verrà solo annotata nel registro di controllo inventario.<br><br>Nota bene: se questo Bene è già assegnato, non sarà modificata la Sede della persona, Bene o Sede a cui è assegnato.',
 
     'assets' => 'I Beni sono articolo tracciati da un numero di serie o da un\'etichetta. Sono oggetti di valore più elevato che è importante identificare in maniera specifica.',
 
@@ -29,7 +29,7 @@ return [
 
     'consumables'   => 'I Consumabili sono qualsiasi cosa acquistata che si esaurisce col passare del tempo. Per esempio l\'inchiostro per stampanti o la carta per fotocopiatrici.',
 
-    'depreciations' => 'Puoi impostare la svalutazione dei Beni, per svalutare un Bene con criterio di calcolo lineare.',
+    'depreciations' => 'Puoi impostare i deprezzamenti dei Beni, per deprezzarli con criterio di calcolo lineare.',
     
     'empty_file'    => 'Il processo di Import rileva che questo file è vuoto.'
 ];

@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Sicherungen',
     'backups_help'              => 'Backups erstellen, herunterladen und wiederherstellen ',
     'backups_restoring'         => 'Aus Backup wiederherstellen',
+    'backups_clean' => 'Bereinigen Sie die gesicherte Datenbank vor der Wiederherstellung',
+    'backups_clean_helptext' => "Dies kann nützlich sein, wenn Sie zwischen Datenbankversionen wechseln",
     'backups_upload'            => 'Backup hochladen',
     'backups_path'              => 'Sicherungen auf dem Server werden in <code>:path</code> gespeichert',
     'backups_restore_warning'   => 'Klicke den Wiederherstellungs-Knopf <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> um ein Backup wiederherzustellen. (Funktioniert derzeit nicht mit S3 Datenspeicher oder Docker.)<br><br><strong>Die gesamte :app_name Datenbank und alle hochgeladenen Dateien werden mit den Inhalten des Backups überschrieben.</strong>  ',
@@ -381,5 +383,7 @@ return [
     'default_avatar_help' => 'Dieses Bild wird als Profilbild angezeigt, wenn ein Benutzer kein Profilbild festgelegt hat.',
     'restore_default_avatar' => '<a href=":default_avatar" data-toggle="lightbox" data-type="image">Ursprünglichen Standard-Avatar des Systems</a> wiederherstellen',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Zum Einchecken fällig Warnung',
+    'due_checkin_days_help' => 'Wie viele Tage vor dem voraussichtlichen Check-in eines Vermögenswerts soll dieser auf der Seite „Zur Eincheckzeit fällig“ aufgeführt werden?',
 
 ];

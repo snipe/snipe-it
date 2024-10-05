@@ -2,9 +2,9 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável". Se este estado mudou, por favor atualize o estado do artigo.',
     'does_not_exist' 	=> 'Artigo não existente.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
+    'does_not_exist_var'=> 'Ativo com a tag :asset_tag não encontrado.',
     'no_tag' 	        => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Esse artigo não existe ou não é solicitável.',
     'assoc_users'	 	=> 'Este artigo está correntemente alocado a um utilizador e não pode ser removido. Por favor devolva o artigo e de seguida tente remover novamente. ',
@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Ficheiro eliminado com sucesso',
         'file_delete_error'      => 'Não foi possível eliminar o ficheiro',
         'file_missing' => 'Ficheiro selecionado está a faltar',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Um ou mais atributos na linha do cabeçalho contém caracteres UTF-8 mal formados',
         'content_row_has_malformed_characters' => 'Um ou mais atributos na primeira linha de conteúdo contém caracteres UTF-8 mal formados',
     ],

@@ -55,6 +55,7 @@ class PredefinedKitsController extends Controller
         // Create a new Predefined Kit
         $kit = new PredefinedKit;
         $kit->name = $request->input('name');
+        $kit->created_by = auth()->id();
 
         if (! $kit->save()) {
             return redirect()->back()->withInput()->withErrors($kit->getErrors());

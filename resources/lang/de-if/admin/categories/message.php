@@ -18,7 +18,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du diese Kategorie löschen willst?',
+        'confirm'   => 'Bist Du sicher, dass du diese Kategorie löschen willst?',
         'error'   => 'Beim löschen der Kategorie ist ein Problem aufgetreten. Bitte versuche es erneut.',
         'success' => 'Die Kategorie wurde erfolgreich gelöscht.'
     )

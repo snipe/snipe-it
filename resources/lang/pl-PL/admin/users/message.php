@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Pomyślnie odrzuciłeś ten składnik aktywów.',
     'bulk_manager_warn'	        => 'Użytkownicy zostały pomyślnie zaktualizowane, jednak Twój wpis manager nie został zapisany, bo dyrektor wybrano był również na liście użytkowników do edycji i użytkowników nie może być ich Menedżer. Wybierz użytkowników, z wyjątkiem Menedżera.',
     'user_exists'               => 'Użytkownik już istnieje!',
-    'user_not_found'            => 'Użytkownik nie istnieje.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Pole login jest wymagane',
     'user_has_no_assets_assigned' => 'Brak aktywów aktualnie przypisanych do użytkownika.',
     'user_password_required'    => 'Pole hasło jest wymagane.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nie udało się przeszukać serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
         'ldap_could_not_get_entries' => 'Nie udało się pobrać pozycji z serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
         'password_ldap' => 'Hasło dla tego konta jest zarządzane przez usługę LDAP, Active Directory. Skontaktuj się z działem IT, aby zmienić swoje hasło. ',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

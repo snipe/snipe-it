@@ -50,7 +50,7 @@ class Consumable extends SnipeModel
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|max:99999|nullable',
-        'purchase_cost'   => 'numeric|nullable|gte:0',
+        'purchase_cost'   => 'numeric|nullable|gte:0|max:9999999999999',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
     ];
 
@@ -154,9 +154,9 @@ class Consumable extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     /**
@@ -256,7 +256,7 @@ class Consumable extends SnipeModel
      */
     public function users() : Relation
     {
-        return $this->belongsToMany(User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('created_by')->withTrashed()->withTimestamps();
     }
 
     /**
@@ -426,6 +426,20 @@ class Consumable extends SnipeModel
     }
 
     /**
+     * Query builder scope to order on remaining
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderRemaining($query, $order)
+    {
+        $order_by = 'consumables.qty - consumables_users_count ' . $order;
+        return $query->orderByRaw($order_by);
+    }
+
+    /**
      * Query builder scope to order on supplier
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -436,5 +450,10 @@ class Consumable extends SnipeModel
     public function scopeOrderSupplier($query, $order)
     {
         return $query->leftJoin('suppliers', 'consumables.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as users_sort', 'consumables.created_by', '=', 'users_sort.id')->select('consumables.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
     }
 }

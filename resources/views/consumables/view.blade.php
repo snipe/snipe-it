@@ -38,7 +38,7 @@
             <li>
               <a href="#checkedout" data-toggle="tab">
                 <span class="hidden-lg hidden-md">
-                <i class="fas fa-users fa-2x" aria-hidden="true"></i>
+                <x-icon type="users" class="fa-2x" />
                 </span>
                     <span class="hidden-xs hidden-sm">{{ trans('general.assigned') }}
                       {!! ($consumable->users_consumables > 0 ) ? '<badge class="badge badge-secondary">'.number_format($consumable->users_consumables).'</badge>' : '' !!}
@@ -74,7 +74,7 @@
             @can('update', $consumable)
               <li class="pull-right">
                 <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                  <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+                  <x-icon type="paperclip" /> {{ trans('button.upload') }}
                 </a>
               </li>
             @endcan
@@ -83,9 +83,9 @@
         <div class="tab-content">
           <div class="tab-pane active" id="details">
             <div class="row">
-
+              <div class="info-stack-container">
               <!-- Start button column -->
-              <div class="col-md-3 col-xs-12 col-sm-push-9">
+              <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
 
                 @if ($consumable->image!='')
                   <div class="col-md-12 text-center" style="padding-bottom: 20px;">
@@ -97,39 +97,51 @@
                 
                 @can('update', $consumable)
                   <div class="col-md-12">
-                    <a href="{{ route('consumables.edit', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.edit') }}</a>
+                    <a href="{{ route('consumables.edit', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-social btn-warning hidden-print">
+                      <x-icon type="edit" />
+                      {{ trans('button.edit') }}
+                    </a>
                   </div>
                 @endcan
 
-                  @can('create', Consumable::class)
+                  @can('checkout', $consumable)
+                    @if ($consumable->numRemaining() > 0)
+                      <div class="col-md-12">
+                        <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:5px;" class="btn btn-sm btn-block bg-maroon btn-social hidden-print">
+                          <x-icon type="checkout" />
+                          {{ trans('general.checkout') }}
+                        </a>
+                      </div>
+                    @else
+                      <div class="col-md-12">
+                        <button style="margin-bottom:10px;" class="btn btn-block bg-maroon btn-sm btn-social hidden-print disabled">
+                          <x-icon type="checkout" />
+                          {{ trans('general.checkout') }}
+                        </button>
+                      </div>
+                    @endif
+                  @endif
+
+
+                @can('create', Consumable::class)
 
                     <div class="col-md-12">
-                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}</a>
+                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-info btn-social hidden-print">
+                        <x-icon type="clone" />
+                        {{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}
+                      </a>
                     </div>
 
                   @endcan
 
-                  @can('checkout', $consumable)
-                    @if ($consumable->numRemaining() > 0)
-                        <div class="col-md-12">
-                            <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:5px;" class="btn btn-sm btn-block btn-primary hidden-print">
-                              {{ trans('general.checkout') }}
-                            </a>
-                        </div>
-                    @else
-                        <div class="col-md-12">
-                          <button style="margin-bottom:10px;" class="btn btn-block btn-primary btn-sm disabled">
-                            {{ trans('general.checkout') }}
-                          </button>
-                        </div>
-                    @endif
-                @endif
 
 
                   @can('delete', $consumable)
                     <div class="col-md-12" style="padding-top: 10px; padding-bottom: 20px">
                       @if ($consumable->deleted_at=='')
-                        <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                        <button class="btn btn-sm btn-block btn-danger btn-social hidden-print delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">
+                          <x-icon type="delete" />
+                          {{ trans('general.delete') }}
                         </button>
                         <span class="sr-only">{{ trans('general.delete') }}</span>
                       @endif
@@ -139,7 +151,7 @@
 
               <!-- End button column -->
 
-              <div class="col-md-9 col-xs-12 col-sm-pull-3">
+              <div class="col-md-9 col-xs-12 col-sm-pull-3 info-stack">
 
                 <div class="row-new-striped" style="margin: 0px;">
 
@@ -374,6 +386,7 @@
                   @endif
                 </div> <!--/end striped container-->
               </div> <!-- end col-md-9 -->
+              </div><!-- end info-stack-container -->
             </div> <!--/.row-->
           </div><!-- /.tab-pane -->
 
@@ -487,7 +500,7 @@
                                 </a>
 
                                 <a href="{{ route('show.consumablefile', [$consumable->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                  <i class="fa fa-external-link" aria-hidden="true"></i>
+                                  <x-icon type="external-link" />
                                 </a>
                               @endif
                             </td>

@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Sadece varsayılan konumu güncelle',
     'asset_location_update_actual' => 'Sadece geçerli konumu güncelle',
     'asset_not_deployable' => 'Bu demirbaş dağıtılabilir durumda değil. Çıkışı yapılamaz.',
+    'asset_not_deployable_checkin' => 'Varlık bu durumdayken dağıtılamaz. Bu durum etiketini kullanmak varlığı giriş yaptıracaktır.',
     'asset_deployable' => 'Bu demirbaş dağıtılabilir durumda. Çıkışı yapılabilir.',
     'processing_spinner' => 'İşleniyor... (Büyük dosyalarda bu işlem biraz zaman alabilir)',
     'optional_infos'  => 'Opsiyonel Bilgi',

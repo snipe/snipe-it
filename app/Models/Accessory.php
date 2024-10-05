@@ -62,7 +62,7 @@ class Accessory extends SnipeModel
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
-        'purchase_cost'     => 'numeric|nullable|gte:0',
+        'purchase_cost'     => 'numeric|nullable|gte:0|max:9999999999999',
         'purchase_date'     => 'date_format:Y-m-d|nullable',
     ];
 
@@ -260,6 +260,18 @@ class Accessory extends SnipeModel
     }
 
     /**
+     * Establishes the accessory -> admin user relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v7.0.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
+    /**
      * Checks whether or not the accessory has users
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -409,6 +421,16 @@ class Accessory extends SnipeModel
      * BEGIN QUERY SCOPES
      * -----------------------------------------------
      **/
+
+
+    /**
+     * Query builder scope to order on created_by name
+     *
+     */
+    public function scopeOrderByCreatedByName($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'accessories.created_by', '=', 'admin_sort.id')->select('accessories.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
 
     /**
     * Query builder scope to order on company

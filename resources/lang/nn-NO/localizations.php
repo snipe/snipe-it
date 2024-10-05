@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Velg et språk',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Engelsk, USA',
         'en-GB'=> 'Engelsk, Storbritannia',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Velg et land',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ascension Island',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Estland',
         'EG'=>'Egypt',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Spania',
         'ET'=>'Etiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Nederland',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norge',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Russland',
         'RW'=>'Rwanda',
         'SA'=>'Saudi-Arabia',
-        'UK'=>'Skottland',
+        'GB-SCT'=>'Skottland',
         'SB'=>'Salomonøyene',
         'SC'=>'Seychellene',
         'SS'=>'Sør-Sudan',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Jomfruøyene, (USA)',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis- og Futunaøyene',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

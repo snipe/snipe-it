@@ -13,5 +13,5 @@ return array(
     'profile_updated' => 'Nalog je uspešno izmenjen',
     'no_tokens' => 'Još uvek niste napravili nijedan lični token za pristup.',
     'enable_sounds' => 'Omogući zvučne efekte',
-    'enable_confetti' => 'Enable confetti effects',
+    'enable_confetti' => 'Omogući efekat konfeta',
 );

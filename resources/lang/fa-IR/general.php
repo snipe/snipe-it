@@ -67,6 +67,7 @@ return [
     'checkout'  			=> 'پرداخت',
     'checkouts_count'       => 'پرداخت',
     'checkins_count'        => 'پذیرش',
+    'checkin_and_delete'  	=> 'Checkin and Delete',
     'user_requests_count'   => 'درخواست ها',
     'city'  				=> 'شهر',
     'click_here'			=> 'اینجا کلیک کنید',
@@ -80,7 +81,7 @@ return [
     'consumables'			=> 'اقلام قابل مصرف',
     'country'  				=> 'كشور',
     'could_not_restore'     => 'Error restoring :item_type: :error',
-    'not_deleted'           => 'The :item_type is not deleted, so it cannot be restored',
+    'not_deleted'           => 'The :item_type was not deleted and therefore cannot be restored',
     'create'				=> 'ایجاد مورد جدید',
     'created'               => 'مورد ایجاد شده',
     'created_asset'			=> 'دارایی ایجاد شده',
@@ -104,7 +105,7 @@ return [
     'debug_warning_text'    => 'این برنامه در حالت تولید با استفاده از اشکال زدایی فعال است. این می تواند اطلاعات حساس را در صورت درخواست شما برای جهان خارج در دسترس قرار دهد. با تنظیم مقداری <code>APP_DEBUG</code> در <code>.env</code> فایل خود را به <code>false</code> غیرفعال کنید.',
     'delete'  				=> 'حذف',
     'delete_confirm'  		=> 'آیا اطمینان دارید که می خواهید این را حذف نمایید؟',
-    'delete_confirm_no_undo' => 'Are you sure you wish to delete :item? This cannot be undone.',
+    'delete_confirm_no_undo' => 'Are you sure, you wish to delete :item? This cannot be undone.',
     'deleted'  				=> 'حذف شد',
     'delete_seats'  		=> 'صندلی ها حذف شده
 ',
@@ -170,7 +171,7 @@ return [
     'image_upload'         	=> 'آپلود تصویر',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. The maximum size allowed is :size.|Accepted filetypes are :types. The maximum upload size allowed is :size.',
     'filetypes_size_help'   => 'The maximum upload size allowed is :size.',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, svg, and avif. The maximum upload size allowed is :size.',
+    'image_filetypes_help'  => 'Accepted Filetypes are jpg, webp, png, gif, svg, and avif. The maximum upload size allowed is :size.',
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'واردات',
     'import_this_file'      => 'Map fields and process this file',
@@ -308,6 +309,7 @@ return [
     'status'    			=> 'وضعیت',
     'accept_eula'           => 'توافق نامه پذیرش
 ',
+    'show_or_hide_eulas' => 'Show/Hide EULAs',
     'supplier'              => 'تامین کننده',
     'suppliers'  			=> 'تامین کننده',
     'sure_to_delete'        => 'مطمئنید که میخواهید حذف شود',
@@ -386,7 +388,7 @@ return [
     'setup_config_check'    => 'بررسی پیکربندی
 ',
     'setup_create_database' => 'Create database tables',
-    'setup_create_admin'    => 'Create admin user',
+    'setup_create_admin'    => 'Create an admin user',
     'setup_done'            => 'تمام شده!
 ',
     'bulk_edit_about_to'    => 'شما در حال ویرایش موارد زیر هستید:
@@ -502,14 +504,14 @@ return [
 ',
     'bulk_checkin_success' => 'موارد برای کاربران انتخاب شده بررسی شده است.
 ',
-    'set_to_null'           => 'Delete values for this asset|Delete values for all :asset_count assets ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Delete :field values for this user|Delete :field values for all :user_count users ',
     'na_no_purchase_date'   => 'N/A - No purchase date provided',
     'assets_by_status'      => 'Assets by Status',
     'assets_by_status_type'      => 'Assets by Status Type',
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
     'hello_name'            => 'سلام , :name!',
-    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
+    'unaccepted_profile_warning'   => 'You have one item requiring acceptance. Click here to accept or decline it | You have :count items requiring acceptance. Click here to accept or decline them',
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
@@ -645,5 +647,8 @@ return [
     'expires' => 'منقضی می شود',
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
+    'label' => 'Label',
+    'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
 
 ];

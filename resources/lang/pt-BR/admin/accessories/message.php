@@ -25,10 +25,10 @@ return array(
      'checkout' => array(
         'error'   		=> 'O acessório não foi alocado, por favor tente novamente',
         'success' 		=> 'Acessório alocado com sucesso.',
-        'unavailable'   => 'Acessório não está disponível para check-out. Verifique a quantidade disponível',
+        'unavailable'   => 'Acessório não está disponível para saída. Verifique a quantidade disponível',
         'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Atualmente há apenas um acessório disponível deste tipo, e você está tentando conferir :checkout_qty. Por favor, ajuste a quantidade do check-out ou o estoque total deste acessório e tente novamente. Existem :number_currently_remaining total accessoris disponíveis, e você está tentando conferir :checkout_qty. Por favor, ajuste a quantidade do check-out ou o estoque total deste acessório e tente novamente.',
             ),
            
     ),

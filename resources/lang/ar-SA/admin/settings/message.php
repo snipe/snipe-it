@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'هل أنت متأكد من رغبتك في استعادة قاعدة البيانات الخاصة بك من :filename؟'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'حدث خطأ أثناء التطهير.',

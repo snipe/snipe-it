@@ -25,7 +25,6 @@ return [
     'image'		    => 'Изображение на устройството',
     'days_without_acceptance' => 'Дни без да е предаден',
     'monthly_depreciation' => 'Месечна Амортизация',
-    'assigned_to'    => 'Възложени на',
     'requesting_user' => 'Изискан от',
     'requested_date' => 'Дата на заявката',
     'changed'       => 'Променен',

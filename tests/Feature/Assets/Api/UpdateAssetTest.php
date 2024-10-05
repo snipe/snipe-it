@@ -103,6 +103,102 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals('2023-09-03 00:00:00', $updatedAsset->last_audit_date);
     }
 
+    public function testUpdatesPeriodAsCommaSeparatorForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'EUR',
+            'digit_separator' => '1.234,56',
+        ]);
+
+        $original_asset = Asset::factory()->create();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->patchJson(route('api.assets.update', $original_asset->id), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API also accepts string for comma separated values
+                'purchase_cost' => '1.112,34',
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(1112.34, $asset->purchase_cost);
+    }
+
+    public function testUpdatesFloatForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'EUR',
+            'digit_separator' => '1.234,56',
+        ]);
+
+        $original_asset = Asset::factory()->create();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->patchJson(route('api.assets.update', $original_asset->id), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API also accepts string for comma separated values
+                'purchase_cost' => 12.34,
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(12.34, $asset->purchase_cost);
+    }
+
+    public function testUpdatesUSDecimalForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'EUR',
+            'digit_separator' => '1,234.56',
+        ]);
+
+        $original_asset = Asset::factory()->create();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->patchJson(route('api.assets.update', $original_asset->id), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API also accepts string for comma separated values
+                'purchase_cost' => '5412.34', //NOTE - you cannot use thousands-separator here!!!!
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(5412.34, $asset->purchase_cost);
+    }
+
+    public function testUpdatesFloatUSDecimalForPurchaseCost()
+    {
+        $this->settings->set([
+            'default_currency' => 'EUR',
+            'digit_separator' => '1,234.56',
+        ]);
+
+        $original_asset = Asset::factory()->create();
+
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->patchJson(route('api.assets.update', $original_asset->id), [
+                'asset_tag' => 'random-string',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->create()->id,
+                // API also accepts string for comma separated values
+                'purchase_cost' => 12.34,
+            ])
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response['payload']['id']);
+
+        $this->assertEquals(12.34, $asset->purchase_cost);
+    }
+
     public function testAssetEolDateIsCalculatedIfPurchaseDateUpdated()
     {
         $asset = Asset::factory()->laptopMbp()->noPurchaseOrEolDate()->create();
@@ -438,7 +534,7 @@ class UpdateAssetTest extends TestCase
             'company_id' => $companyB->id,
         ]);
         $asset = Asset::factory()->create([
-            'user_id'    => $userA->id,
+            'created_by'    => $userA->id,
             'company_id' => $companyA->id,
         ]);
 

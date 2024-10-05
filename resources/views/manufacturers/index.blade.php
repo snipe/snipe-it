@@ -37,7 +37,6 @@
             data-pagination="true"
             data-id-table="manufacturersTable"
             data-search="true"
-            data-show-footer="true"
             data-side-pagination="server"
             data-show-columns="true"
             data-show-fullscreen="true"

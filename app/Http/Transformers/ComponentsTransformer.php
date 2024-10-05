@@ -47,6 +47,10 @@ class ComponentsTransformer
                 'name' => e($component->company->name),
             ] : null,
             'notes' => ($component->notes) ? Helper::parseEscapedMarkedownInline($component->notes) : null,
+            'created_by' => ($component->adminuser) ? [
+                'id' => (int) $component->adminuser->id,
+                'name'=> e($component->adminuser->present()->fullName()),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
             'user_can_checkout' =>  ($component->numRemaining() > 0) ? 1 : 0,

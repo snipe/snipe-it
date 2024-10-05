@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Atsarginės kopijos',
     'backups_help'              => 'Kurti, atsisiųsti ir atkurti atsargines kopijas ',
     'backups_restoring'         => 'Atkurti iš atsarginės kopijos',
+    'backups_clean' => 'Išvalyti išsaugotą duomenų bazę prieš atkūrimą',
+    'backups_clean_helptext' => "Tai gali būti naudinga, jei keičiate duomenų bazės versiją",
     'backups_upload'            => 'Įkelti atsarginę kopiją',
     'backups_path'              => 'Atsarginės kopijos serveryje saugomos <code>:path</code>',
     'backups_restore_warning'   => 'Naudokite atkūrimo mygtuką <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small>, jei norite atkurti iš ankstesnės atsarginės kopijos. (Šiuo metu tai neveikia naudojant S3 failų saugyklą arba „Docker“.)<br><br>Jūsų <strong>visa :app_name duomenų bazė ir visi įkelti failai bus visiškai pakeisti</strong> tuo, kas yra atsarginės kopijos faile.  ',
@@ -381,5 +383,7 @@ return [
     'default_avatar_help' => 'Jei naudotojas neturi profilio nuotraukos, šis atvaizdas bus rodomas jo profilyje.',
     'restore_default_avatar' => 'Atkurti <a href=":default_avatar" data-toggle="lightbox" data-type="image">pradinį sistemos numatytąjį avatarą</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Įspėjimas, kad reikia paimti',
+    'due_checkin_days_help' => 'Likus kiek dienų iki numatomo turto paėmimo, jis turėtų būti rodomas puslapyje „Laukia paėmimo“?',
 
 ];

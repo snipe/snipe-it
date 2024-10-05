@@ -44,8 +44,8 @@ return array(
         'error'   => 'Er was een probleem met het uitchecken van deze licentie. Probeer het opnieuw.',
         'success' => 'De licentie is met succes uitgecheckt',
         'not_enough_seats' => 'Niet genoeg licentieplaatsen beschikbaar voor de kassa',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'mismatch' => 'De opgegeven licentie werkplek komt niet overeen met de licentie',
+        'unavailable' => 'Deze licentie is niet beschikbaar voor uitchecken.',
     ),
 
     'checkin' => array(

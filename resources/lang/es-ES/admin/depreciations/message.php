@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Clase de amortización inexistente.',
+    'does_not_exist' => 'La clase de depreciación no existe.',
     'assoc_users'	 => 'Esta depreciación está actualmente asociada con uno o más modelos y no puede ser eliminada. Por favor, elimine los modelos y luego intente borrarlas de nuevo. ',
 
 

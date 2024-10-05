@@ -33,7 +33,7 @@
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-date-clear-btn="true">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ old('checkout_at') }}">
-                          <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
+                          <span class="input-group-addon"><x-icon type="calendar" /></span>
                       </div>
                       {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
                   </div>
@@ -47,7 +47,7 @@
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-start-date="0d">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
-                          <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
+                          <span class="input-group-addon"><x-icon type="calendar" /></span>
                       </div>
                       {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
                   </div>
@@ -68,7 +68,7 @@
       </div> <!--./box-body-->
       <div class="box-footer">
         <a class="btn btn-link" href="{{ route('kits.index') }}"> {{ trans('button.cancel') }}</a>
-        <button type="submit" class="btn btn-success pull-right"><i class="fas fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+        <button type="submit" class="btn btn-success pull-right"><x-icon type="checkmark" /> {{ trans('general.checkout') }}</button>
       </div>
     </div>
       </form>
