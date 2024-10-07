@@ -21,7 +21,11 @@ return [
     | to have a conventional place to find your various credentials.
     |
     */
-
+    'azure' => [
+        'client_id' => env('AZURE_CLIENT_ID'),
+        'tenant_id' => env('AZURE_TENANT_ID'),
+        'redirect' => env('AZURE_REDIRECT_URI'),
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

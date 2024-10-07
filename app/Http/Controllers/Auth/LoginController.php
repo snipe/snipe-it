@@ -12,11 +12,15 @@ use Com\Tecnick\Barcode\Barcode;
 use Google2FA;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Redirect;
 
 /**
@@ -33,6 +37,9 @@ class LoginController extends Controller
     // This tells the auth controller to use username instead of email address
     protected $username = 'username';
 
+    protected $clientId;
+    protected $tenantId;
+    protected $redirectUri;
     /**
      * Where to redirect users after login / registration.
      *
@@ -58,6 +65,10 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
         $this->saml = $saml;
+
+        $this->clientId = config('services.azure.client_id');
+        $this->tenantId = config('services.azure.tenant_id');
+        $this->redirectUri = config('services.azure.redirect');
     }
 
     public function showLoginForm(Request $request)
@@ -257,7 +268,75 @@ class LoginController extends Controller
             }
         }
     }
+    /**
+     * Account sign in with azure.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirectToAzure()
+    {
+        $state = '12345';
+        $nonce = Str::random(20);
 
+        // Store state and nonce in session for validation
+        session(['azure_state' => $state, 'azure_nonce' => $nonce]);
+
+        $loginUrl = "https://login.microsoftonline.com/{$this->tenantId}/oauth2/v2.0/authorize"
+            . "?client_id=" . urlencode($this->clientId)
+            . "&response_type=token"
+            . "&redirect_uri=" .urlencode($this->redirectUri.'/login/azure/callback')
+            . "&response_mode=form_post"
+            . "&scope=" . urlencode('user.read openid profile email')
+            . "&state=" . urlencode($state)
+            . "&nonce=" . urlencode($nonce)
+            . "&prompt=select_account";
+
+        return redirect($loginUrl);
+    }
+    /**
+     * Azure sign in callback.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleAzureCallback(Request $request)
+    {
+        // if ($request->state !== session('azure_state')) {
+        //     return redirect()->route('login')->with('error', 'Invalid state parameter');
+        // }
+
+        $accessToken = $request->access_token;
+
+        if (!$accessToken) {
+            return redirect()->route('login')->with('error', 'Access token not received');
+        }
+
+        // Fetch user info from Microsoft Graph
+        $response = Http::withToken($accessToken)->get('https://graph.microsoft.com/oidc/userinfo');
+
+        if ($response->failed()) {
+            return redirect()->route('login')->with('error', 'Failed to fetch user info');
+        }
+
+        $userInfo = $response->json();
+
+        // Find or create user
+        // Find user
+        $user = User::where('email', $userInfo['email'])->first();
+        // $user = User::firstOrCreate(
+        //     ['email' => $userInfo['email']],
+        //     [
+        //         'name' => $userInfo['name'] ?? 'Azure AD User',
+        //         'password' => bcrypt(Str::random(16)),
+        //     ]
+        // );
+ 
+        if ($user) {
+            Auth::login($user);
+            return redirect()->route('home')->with('success', trans('auth/message.signin.success'));
+        } else {
+            return redirect()->route('login')->with('error', 'No account found for this email address');
+        }
+    }
     /**
      * Account sign in form processing.
      *
@@ -265,6 +344,22 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        // captcha v2 hidden validation
+        $request->validate([
+            'g-recaptcha-response' => 'required',
+        ]);
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('recaptcha.secret_key'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+        $body = $response->json();
+        if (!$body || !isset($body['success']) || $body['success'] !== true) {
+            Log::warning('reCAPTCHA verification failed', ['response' => $body]);
+            throw ValidationException::withMessages([
+                'captcha' => 'reCAPTCHA verification failed. Please try again.',
+            ]);
+        }
 
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
