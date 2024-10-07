@@ -26,7 +26,10 @@
                 <div class="box-body">
                     <div class="alert alert-warning">
 
-                        <i class="fa fa-warning info" aria-hidden="true"></i> <strong>{{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</strong>
+                        <i class="fa fa-warning info" aria-hidden="true"></i>
+                        <strong>
+                            {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}
+                        </strong>
                     </div>
 
                     <div class="errors-table">
@@ -59,41 +62,19 @@
        </div>
 @endif
 
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="box">
                     <div class="box-body">
                         <div class="row">
-
-                            <div class="col-md-12">
-
-                                @if($progress != -1)
-                                    <div class="col-md-10 col-sm-5 col-xs-12" style="height: 35px;" id='progress-container'>
-                                        <div class="progress progress-striped-active" style="height: 100%;">
-                                            <div id='progress-bar' class="progress-bar {{ $progress_bar_class }}" role="progressbar" style="width: {{ $progress }}%">
-                                                <h4 id="progress-text">{!! $progress_message  !!}</h4>
-                                            </div>
+                            @if($progress != -1)
+                                <div class="col-md-12" style="height: 35px;" id='progress-container'>
+                                    <div class="progress progress-striped-active" style="height: 100%;">
+                                        <div id='progress-bar' class="progress-bar {{ $progress_bar_class }}" role="progressbar" style="width: {{ $progress }}%">
+                                            <h4 id="progress-text">{!! $progress_message  !!}</h4>
                                         </div>
                                     </div>
-                                @endif
-
-                                <div class="col-md-4 col-sm-5 col-xs-12 text-right pull-right">
-
-                                    <!-- The fileinput-button span is used to style the file input field as button -->
-                                    @if (!config('app.lock_passwords'))
-                                        <span class="btn btn-primary fileinput-button">
-                                        <span>{{ trans('button.select_file') }}</span>
-                                         <!-- The file input field used as target for the file upload widget -->
-                                        <label for="files[]"><span class="sr-only">{{ trans('admin/importer/general.select_file') }}</span></label>
-                                        <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv" aria-label="files[]">
-                                        </span>
-                                    @endif
-
                                 </div>
-
-                            </div>
-
-
-
+                            @endif
                         </div>
                         <div class="row">
                             <div class="col-md-12 table-responsive" style="padding-top: 30px;">
@@ -288,13 +269,75 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <h2>{{ trans('general.importing') }}</h2>
-                <p>{!!   trans('general.importing_help') !!}</p>
+            <div class="col-md-4">
+
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">
+                            <x-icon type="import"/>
+                            {{ trans('general.importing') }}
+                        </h2>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div><!-- /.box-header -->
+
+                    <div class="box-body">
+
+                        <p>{!!   trans('general.importing_help') !!}</p>
+
+                        @if (config('app.lock_passwords')===true)
+                            <p class="alert alert-warning">
+                                <i class="fas fa-lock">
+
+                                </i>
+                                {{ trans('general.feature_disabled') }}
+                            </p>
+                        @else
+
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <legend style="border: 0px; font-size: 15px;">Select Delimiter:</legend>
+                                    <label class="form-control">
+                                        <input type="radio" name="delimiter" id="delimiter" value="comma" wire:model.live="delimiter">
+                                        Comma
+                                    </label>
+
+                                    <label class="form-control">
+                                        <input type="radio" name="delimiter" id="delimiter" value="semicolon" wire:model.live="delimiter">
+                                        Semicolon
+                                    </label>
+
+                                    <label class="form-control">
+                                        <input type="radio" name="delimiter" id="delimiter" value="pipe" wire:model.live="delimiter">
+                                        Pipe
+                                    </label>
+                                </fieldset>
+
+                                <span class="btn btn-primary fileinput-button">
+                                    <span>
+                                        <x-icon type="paperclip" />
+                                        {{ trans('button.select_file') }}
+                                    </span>
+                                    <!-- The file input field used as target for the file upload widget -->
+                                    <label for="files[]">
+                                        <span class="sr-only">{{ trans('admin/importer/general.select_file') }}
+                                        </span>
+                                    </label>
+                                    <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index').'?delimiter='.$delimiter }}" accept="text/csv" aria-label="files[]" data-maxsize="{{ Helper::file_upload_max_size() }}" aria-hidden="true">
+                                </span>
+                            </form>
+
+                            <p class="help-block">{{ trans_choice('general.filetypes_accepted_help', 1, ['size' => Helper::file_upload_max_size_readable(), 'types' => 'csv']) }}</p>
+
+
+                        @endif
+                    </div>
+                </div>
+
             </div>
 
         </div>
-</div>
+
 @script
     <script>
 

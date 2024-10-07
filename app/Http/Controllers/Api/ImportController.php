@@ -65,7 +65,7 @@ class ImportController extends Controller
                     ini_set('auto_detect_line_endings', '1');
                 }
                 $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
-
+                $reader->setDelimiter(request('delimiter', ','));
                 try {
                     $import->header_row = $reader->fetchOne(0);
                 } catch (JsonEncodingException $e) {
@@ -133,6 +133,7 @@ class ImportController extends Controller
                 }
 
                 $import->filesize = filesize($path.'/'.$file_name);
+                $import->delimiter = request('delimiter');
                 
                 $import->save();
                 $results[] = $import;
