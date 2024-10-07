@@ -670,8 +670,6 @@ class AssetsController extends Controller
             }
 
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
-
-            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -711,50 +709,50 @@ class AssetsController extends Controller
 
         $asset = $request->handleImages($asset);
         $model = $asset->model;
-            
-            // Update custom fields
-            $problems_updating_encrypted_custom_fields = false;
-            if (($model) && (isset($model->fieldset))) {
-                foreach ($model->fieldset->fields as $field) {
-                    $field_val = $request->input($field->db_column, null);
 
-                    if ($request->has($field->db_column)) {
-                        if ($field->element == 'checkbox') {
-                            if(is_array($field_val)) {
-                                $field_val = implode(',', $field_val);
-                            }
+        // Update custom fields
+        $problems_updating_encrypted_custom_fields = false;
+        if (($model) && (isset($model->fieldset))) {
+            foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column, null);
+
+                if ($request->has($field->db_column)) {
+                    if ($field->element == 'checkbox') {
+                        if (is_array($field_val)) {
+                            $field_val = implode(',', $field_val);
                         }
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                                $field_val = Crypt::encrypt($field_val);
-                            } else {
-                                $problems_updating_encrypted_custom_fields = true;
-                                continue;
-                            }
-                        }
-                        $asset->{$field->db_column} = $field_val;
                     }
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            $field_val = Crypt::encrypt($field_val);
+                        } else {
+                            $problems_updating_encrypted_custom_fields = true;
+                            continue;
+                        }
+                    }
+                    $asset->{$field->db_column} = $field_val;
                 }
             }
-            if ($asset->save()) {
-                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
-                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                    $location = $target->location_id;
+        }
+        if ($asset->save()) {
+            if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
+                $location = $target->location_id;
+            } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
+                $location = $target->location_id;
 
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
-                        ->update(['location_id' => $target->location_id]);
-                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                    $location = $target->id;
-                }
+                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
+                    ->update(['location_id' => $target->location_id]);
+            } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
+                $location = $target->id;
+            }
 
-                if (isset($target)) {
-                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-                }
+            if (isset($target)) {
+                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+            }
 
-                if ($asset->image) {
-                    $asset->image = $asset->getImageUrl();
-                }
+            if ($asset->image) {
+                $asset->image = $asset->getImageUrl();
+            }
 
             if ($problems_updating_encrypted_custom_fields) {
                 return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
