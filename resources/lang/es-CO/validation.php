@@ -125,6 +125,8 @@ return [
         'symbols' => 'El campo :attribute debe contener al menos un símbolo.',
         'uncompromised' => 'El valor de :attribute ha aparecido en una fuga de datos. Por favor, seleccione un valor diferente para :attribute.',
     ],
+    'percent'       => 'El mínimo de amortización debe estar entre 0 y 100 cuando el tipo de amortización es porcentual.',
+
     'present' => 'El campo: atributo debe estar presente.',
     'present_if' => 'El campo :attribute debe estar presente cuando :other sea :value.',
     'present_unless' => 'El campo :attribute debe estar presente a menos que :other sea :value.',
@@ -155,7 +157,7 @@ return [
     'starts_with' => 'El campo :attribute debe iniciar con uno de los siguientes: :values.',
     'string'               => 'El atributo: debe ser una cadena.',
     'two_column_unique_undeleted' => ':attribute debe ser único a través de :table1 y :table2. ',
-    'unique_undeleted'     => 'El :atrribute debe ser único.',
+    'unique_undeleted'     => 'El :attribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
     'not_array'            => ':attribute no puede ser una matriz.',
     'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el nombre de usuario.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Su contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
         'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido.',
+        'custom_field_not_found'          => 'Este campo parece que no existe, por favor, compruebe los nombres de sus campos personalizados.',
+        'custom_field_not_found_on_model' => 'Este campo parece existir, pero no está disponible en este conjunto de campos para el modelo de activo.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

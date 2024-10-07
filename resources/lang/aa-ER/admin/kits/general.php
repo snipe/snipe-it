@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'crwdns6659:0crwdne6659:0',
     'kit_model_updated'                 => 'crwdns6661:0crwdne6661:0',
     'kit_model_detached'                => 'crwdns6663:0crwdne6663:0',
+    'model_already_attached'            => 'crwdns12684:0crwdne12684:0',
 ];

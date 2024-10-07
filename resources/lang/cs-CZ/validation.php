@@ -13,21 +13,21 @@ return [
     |
     */
 
-    'accepted' => 'The :attribute field must be accepted.',
-    'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
-    'active_url' => 'The :attribute field must be a valid URL.',
-    'after' => 'The :attribute field must be a date after :date.',
-    'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
-    'alpha' => 'The :attribute field must only contain letters.',
-    'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',
-    'alpha_num' => 'The :attribute field must only contain letters and numbers.',
+    'accepted' => 'Je potřeba potvrdit :attribute.',
+    'accepted_if' => 'Položka :attribute je vyžadována, když :other je :value.',
+    'active_url' => ':attribute není platnou URL.',
+    'after' => ':attribute nemůže být později než :date.',
+    'after_or_equal' => 'Atribut musí mít datum následující nebo rovné :date.',
+    'alpha' => ':attribute může obsahovat pouze písmena.',
+    'alpha_dash' => ':attribute může obsahovat pouze písmena, čísla, a pomlčky.',
+    'alpha_num' => ':attribute může obsahovat pouze písmena a čísla.',
     'array' => 'The :attribute field must be an array.',
     'ascii' => 'The :attribute field must only contain single-byte alphanumeric characters and symbols.',
     'before' => 'The :attribute field must be a date before :date.',
     'before_or_equal' => 'The :attribute field must be a date before or equal to :date.',
     'between' => [
-        'array' => 'The :attribute field must have between :min and :max items.',
-        'file' => 'The :attribute field must be between :min and :max kilobytes.',
+        'array' => ':attribute musí být mezi hodnotami :min a :max.',
+        'file' => ':attribute musí být větší než :min a menší než :max kilobytů.',
         'numeric' => 'The :attribute field must be between :min and :max.',
         'string' => 'The :attribute field must be between :min and :max characters.',
     ],
@@ -125,6 +125,8 @@ return [
         'symbols' => 'The :attribute field must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
+    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+
     'present' => 'Pole atributu musí být přítomno.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
     'present_unless' => 'The :attribute field must be present unless :other is :value.',
@@ -167,7 +169,7 @@ return [
     'unique' => ':attribute byl již vybrán.',
     'uploaded' => 'Atribut: se nepodařilo nahrát.',
     'uppercase' => 'The :attribute field must be uppercase.',
-    'url' => 'The :attribute field must be a valid URL.',
+    'url' => ':attribute není platnou URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Vaše současné heslo je nesprávné',
         'dumbpwd'          => 'Toto heslo je příliš běžné.',
         'statuslabel_type' => 'Musíte vybrat platný typ štítku stavu',
+        'custom_field_not_found'          => 'This field does not seem to exist, please double check your custom field names.',
+        'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

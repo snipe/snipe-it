@@ -78,7 +78,7 @@ class AssetModelsController extends Controller
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
-        $model->user_id = Auth::id();
+        $model->created_by = auth()->id();
         $model->requestable = $request->has('requestable');
 
         if ($request->input('fieldset_id') != '') {
@@ -151,17 +151,17 @@ class AssetModelsController extends Controller
         $model->notes = $request->input('notes');
         $model->requestable = $request->input('requestable', '0');
 
-        $this->removeCustomFieldsDefaultValues($model);
-
         $model->fieldset_id = $request->input('fieldset_id');
 
-        if ($this->shouldAddDefaultValues($request->input())) {
-            if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
-                return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
-            }
-        }
-
         if ($model->save()) {
+            $this->removeCustomFieldsDefaultValues($model);
+
+            if ($this->shouldAddDefaultValues($request->input())) {
+                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))) {
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                }
+            }
+
             if ($model->wasChanged('eol')) {
                     if ($model->eol > 0) {
                         $newEol = $model->eol; 
@@ -202,6 +202,7 @@ class AssetModelsController extends Controller
         if ($model->image) {
             try {
                 Storage::disk('public')->delete('models/'.$model->image);
+                $model->update(['image' => null]);
             } catch (\Exception $e) {
                 Log::info($e);
             }
@@ -233,10 +234,10 @@ class AssetModelsController extends Controller
 
             if ($model->restore()) {
                 $logaction = new Actionlog();
-                $logaction->item_type = User::class;
+                $logaction->item_type = AssetModel::class;
                 $logaction->item_id = $model->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
 

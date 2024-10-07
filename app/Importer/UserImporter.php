@@ -165,7 +165,7 @@ class UserImporter extends ItemImporter
 
         $department = new department();
         $department->name = $department_name;
-        $department->user_id = $this->user_id;
+        $department->created_by = $this->created_by;
 
         if ($department->save()) {
             $this->log('department ' . $department_name . ' was created');

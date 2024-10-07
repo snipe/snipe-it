@@ -25,7 +25,6 @@ return [
     'image'		    => 'Įrenginio atvaizdas',
     'days_without_acceptance' => 'Dienų skaičius laukiant patvirtinimo',
     'monthly_depreciation' => 'Mėnesinis nusidėvėjimas',
-    'assigned_to'    => 'Išduota',
     'requesting_user' => 'Prašantis asmuo',
     'requested_date' => 'Prašymo data',
     'changed'       => 'Keista',

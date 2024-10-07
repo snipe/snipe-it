@@ -140,7 +140,7 @@ class DepreciationReportPresenter extends Presenter
             ], [
                 "field" => "book_value",
                 "searchable" => true,
-                "sortable" => true,
+                "sortable" => false,
                 "visible" => true,
                 "title" => trans('admin/hardware/table.book_value'),
                 "footerFormatter" => 'sumFormatter',
@@ -394,6 +394,6 @@ class DepreciationReportPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fas fa-barcode" aria-hidden="true"></i>';
+        return '<x-icon type="reports" class="text-orange" />';
     }
 }

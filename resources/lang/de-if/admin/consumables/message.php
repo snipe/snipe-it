@@ -16,7 +16,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du dieses Verbrauchsmaterial löschen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du dieses Verbrauchsmaterial löschen möchtest?',
         'error'   => 'Es gab ein Problem beim Löschen des Verbrauchsmaterials. Bitte versuche es erneut.',
         'success' => 'Das Verbrauchsmaterial wurde erfolgreich gelöscht.'
     ),

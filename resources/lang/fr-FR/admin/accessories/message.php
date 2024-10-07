@@ -28,7 +28,7 @@ return array(
         'unavailable'   => 'L\'accessoire n\'est pas disponible à l\'affectation. Vérifiez la quantité disponible',
         'user_does_not_exist' => 'Cet utilisateur est inexistant. Veuillez réessayer.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Il n\'y a actuellement qu\'un seul accessoire de ce type disponible, et vous essayez d\'en attribuer :checkout_qty. Veuillez ajuster la quantité attribuée ou le stock total de cet accessoire et réessayer.|Il n\'y a actuellement que :number_currently_remaining accessoire(s) disponible(s) de ce type, et vous essayez d\'en attribuer :checkout_qty. Veuillez ajuster la quantité attribuée ou le stock total de cet accessoire et réessayer.',
             ),
            
     ),

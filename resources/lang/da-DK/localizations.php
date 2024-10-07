@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Vælg et sprog',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Engelsk (US)',
         'en-GB'=> 'Engelsk (UK)',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Malaysisk',
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongolsk',
-        'no-NO'=> 'Norsk',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norwegian Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Persisk',
         'pl-PL'=> 'Polsk',
         'pt-PT'=> 'Portugisisk',
@@ -66,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Vælg et land',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ascension Island',
@@ -133,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Estland',
         'EG'=>'Egypten',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Spanien',
         'ET'=>'Etiopien',
@@ -231,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Holland',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norge',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -258,7 +262,7 @@ return [
         'RU'=>'Rusland (Den Russiske Føderation)',
         'RW'=>'Rwanda',
         'SA'=>'Saudi-Arabien',
-        'UK'=>'Skotland',
+        'GB-SCT'=>'Skotland',
         'SB'=>'Salomonøerne',
         'SC'=>'Seychellerne',
         'SS'=>'Sydsudan',
@@ -310,6 +314,7 @@ return [
         'VI'=>'Jomfruøerne (USA)',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis- og Futunaøerne',
         'WS'=>'Samoa',
         'YE'=>'Yemen',

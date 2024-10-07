@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Резервні копії',
     'backups_help'              => 'Створення, завантаження і відновлення резервних копій ',
     'backups_restoring'         => 'Відновлення з резервної копії',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Завантажити резервну копію',
     'backups_path'              => 'Резервні копії на сервері зберігаються в <code>:path</code>',
     'backups_restore_warning'   => 'Скористайтеся кнопкою відновлення <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small> для відновлення з попередньої резервної копії. (Наразі це не працює зі сховищем файлів S3 або Docker.)<br><br>Ваша <strong>вся база даних :app_name і всі завантажені файли будуть повністю замінені</strong> файлом резервної копії.  ',
@@ -218,6 +220,8 @@ return [
     'webhook_integration_help'    => 'Інтеграція :app необов’язкова, однак Endpoint та канал потрібні, якщо ви бажаєте її використовувати. Щоб налаштувати інтеграцію :app, потрібно спочатку <a href=":webhook_link" target="_new" rel="noopener">створити вхідний вебхук</a> у своєму обліковому записі :app. Натисніть кнопку <strong>Тест Інтеграції :app</strong>, щоб підтвердити правильність налаштувань перед збереженням. ',
     'webhook_integration_help_button'    => 'Як тільки ви зберегли свою інформацію :app , з\'явиться тестова кнопка.',
     'webhook_test_help'           => 'Перевірте, чи налаштована інтеграція :app коректно. ВИ ПОВИННІ ЗБЕРЕЖЕТЕ ВАШЕ ОНОВАНО :app SETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Версія Snipe-IT',
     'support_footer'            => 'Підтримка посилань в футері ',
     'support_footer_help'       => 'Вкажіть, хто бачить посилання на інформацію підтримки Snipe-IT та посібник користувача',
@@ -379,5 +383,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

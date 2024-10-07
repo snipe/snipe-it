@@ -108,7 +108,7 @@ class ComponentFactory extends Factory
             $component->assets()->attach($component->id, [
                 'component_id' => $component->id,
                 'created_at' => Carbon::now(),
-                'user_id' => 1,
+                'created_by' => 1,
                 'asset_id' => $asset->id ?? Asset::factory()->create()->id,
             ]);
         });

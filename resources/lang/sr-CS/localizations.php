@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Izaberi jezik',
+    'select_language' => 'Izaberite jezik',
     'languages' => [
         'en-US'=> 'Engleski, SAD',
         'en-GB'=> 'Engleski, UK',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Malajski',
         'mi-NZ'=> 'Maorski',
         'mn-MN'=> 'Mongolski',
-        'no-NO'=> 'Norveški',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norveški Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Persijski',
         'pl-PL'=> 'Poljski',
         'pt-PT'=> 'Portugalski',
@@ -133,6 +135,7 @@ return [
         'EC'=>'Ekvador',
         'EE'=>'Estonija',
         'EG'=>'Egipat',
+        'GB-ENG'=>'Engleska',
         'ER'=>'Eritreja',
         'ES'=>'Španija',
         'ET'=>'Etiopija',
@@ -231,6 +234,7 @@ return [
         'NG'=>'Nigerija',
         'NI'=>'Nikaragva',
         'NL'=>'Holandija',
+        'GB-NIR' => 'Severna Irska',
         'NO'=>'Norveška',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -258,7 +262,7 @@ return [
         'RU'=>'Rusija',
         'RW'=>'Ruanda',
         'SA'=>'Južna Arabija',
-        'UK'=>'Škotska',
+        'GB-SCT'=>'Škotska',
         'SB'=>'Solomonska ostrva',
         'SC'=>'Sejšeli',
         'SS'=>'Južni Sudan',
@@ -310,6 +314,7 @@ return [
         'VI'=>'Devičanska ostrva (SAD)',
         'VN'=>'Vijetnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Vels',
         'WF'=>'Ostrva Valis i Futuna',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

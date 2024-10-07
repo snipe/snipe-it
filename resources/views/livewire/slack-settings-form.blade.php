@@ -153,7 +153,7 @@
 
 
                         <button type="submit" {{$isDisabled}} class="btn btn-primary"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
-                        <i class="fas fa-check icon-white" aria-hidden="true"></i> {{ $save_button }}</button>
+                        <x-icon type="checkmark" /> {{ $save_button }}</button>
 
                     </div> <!-- /.col-md-12 -->
                 </div><!--box-footer-->

@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Säkerhetskopior',
     'backups_help'              => 'Skapa, ladda ner och återställ säkerhetskopior ',
     'backups_restoring'         => 'Återställ från säkerhetskopia',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Ladda upp säkerhetskopia',
     'backups_path'              => 'Säkerhetskopior på servern lagras i <code>:path</code>',
     'backups_restore_warning'   => 'Använd återställningsknappen <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> för att återställa från en tidigare säkerhetskopia. (Detta fungerar för närvarande inte med S3-fillagring eller Docker.)<br><br>Din <strong>hela :app_name databas och alla uppladdade filer kommer att helt ersättas</strong> av vad som finns i backupfilen.  ',
@@ -218,6 +220,8 @@ return [
     'webhook_integration_help'    => ':app integration är frivilligt, men slutpunkt och kanal krävs om du vill använda den. För att konfigurera :app integration, måste du först <a href=":webhook_link" target="_new" rel="noopener">skapa en inkommande webhook</a> på ditt :app konto. Klicka på <strong>Test :app Integration</strong> -knappen för att bekräfta att dina inställningar är korrekta innan du sparar. ',
     'webhook_integration_help_button'    => 'När du har sparat information om :app visas en testknapp.',
     'webhook_test_help'           => 'Testa om din :app integration är korrekt konfigurerad. DU MÅSTE SPARA DIN UPPDATERAD :app INSTÄLLNINGAR FÖRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT-versionen',
     'support_footer'            => 'Stöd länkar i sidfot ',
     'support_footer_help'       => 'Ange vem som kan se länkarna till Snipe-IT Support info och användarmanual',
@@ -379,5 +383,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

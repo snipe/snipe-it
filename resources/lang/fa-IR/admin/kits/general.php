@@ -85,4 +85,5 @@ return [
 ',
     'kit_model_updated'                 => 'کاربر با موفقیت به روز شد',
     'kit_model_detached'                => 'کاربر با موفقیت حذف شد',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

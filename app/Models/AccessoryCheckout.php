@@ -22,7 +22,7 @@ class AccessoryCheckout extends Model
 {
     use Searchable;
 
-    protected $fillable = ['user_id', 'accessory_id', 'assigned_to', 'assigned_type', 'note'];
+    protected $fillable = ['created_by', 'accessory_id', 'assigned_to', 'assigned_type', 'note'];
     protected $table = 'accessories_checkout';
 
     /**

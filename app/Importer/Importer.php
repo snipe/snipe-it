@@ -22,7 +22,7 @@ abstract class Importer
      * @var
      */
     
-    protected $user_id;
+    protected $created_by;
     /**
      * Are we updating items in the import
      * @var bool
@@ -281,6 +281,13 @@ abstract class Importer
         }
     }
 
+    protected function addErrorToBag($item, $field,  $error_message)
+    {
+        if ($this->errorCallback) {
+            call_user_func($this->errorCallback, $item, $field, [$field => [$error_message]]);
+        }
+    }
+
     /**
      * Finds the user matching given data, or creates a new one if there is no match.
      * This is NOT used by the User Import, only for Asset/Accessory/etc where
@@ -388,7 +395,7 @@ abstract class Importer
     }
 
     /**
-     * Matches a user by user_id if user_name provided is a number
+     * Matches a user by created_by if user_name provided is a number
      * @param  string $user_name users full name from csv
      * @return User           User Matching ID
      */
@@ -405,13 +412,13 @@ abstract class Importer
     /**
      * Sets the Id of User performing import.
      *
-     * @param mixed $user_id the user id
+     * @param mixed $created_by the user id
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setUserId($created_by)
     {
-        $this->user_id = $user_id;
+        $this->created_by = $created_by;
 
         return $this;
     }

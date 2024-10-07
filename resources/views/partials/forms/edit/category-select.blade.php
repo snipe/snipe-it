@@ -3,14 +3,12 @@
 
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
-    <div class="col-md-7{{  (isset($item) && (Helper::checkIfRequired($item, $fieldname))) ? ' required' : '' }}">
+    <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="categories/{{ (isset($category_type)) ? $category_type : 'assets' }}" data-placeholder="{{ trans('general.select_category') }}" name="{{ $fieldname }}" style="width: 100%" id="category_select_id" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' required ' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @if ($category_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $category_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Category::find($category_id)) ? \App\Models\Category::find($category_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_category') }}</option>
             @endif
 
         </select>

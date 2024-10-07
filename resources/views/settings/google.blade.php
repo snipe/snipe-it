@@ -27,7 +27,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa-brands fa-google"></i> {{ trans('admin/settings/general.google_login') }}
+                        <x-icon type="google"/>
+                        {{ trans('admin/settings/general.google_login') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -104,7 +105,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords')===true) ? ' disabled': '' }}><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords')===true) ? ' disabled': '' }}><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

@@ -25,7 +25,7 @@ class AssetSeeder extends Seeder
         $this->ensureLocationsSeeded();
         $this->ensureSuppliersSeeded();
 
-        $this->admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
+        $this->adminuser = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
         $this->locationIds = Location::all()->pluck('id');
         $this->supplierIds = Supplier::all()->pluck('id');
 
@@ -82,7 +82,7 @@ class AssetSeeder extends Seeder
         return fn($sequence) => [
             'rtd_location_id' => $this->locationIds->random(),
             'supplier_id' => $this->supplierIds->random(),
-            'user_id' => $this->admin->id,
+            'created_by' => $this->adminuser->id,
         ];
     }
 }

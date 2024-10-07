@@ -283,9 +283,10 @@ class Ldap extends Model
      * @param $base_dn
      * @param $count
      * @param $filter
+     * @param $attributes
      * @return array|bool
      */
-    public static function findLdapUsers($base_dn = null, $count = -1, $filter = null)
+    public static function findLdapUsers($base_dn = null, $count = -1, $filter = null, $attributes = [])
     {
         $ldapconn = self::connectToLdap();
         self::bindAdminToLdap($ldapconn);
@@ -319,7 +320,7 @@ class Ldap extends Model
             //if($count == -1) { //count is -1 means we have to employ paging to query the entire directory
                 $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $count == -1||$count>$page_size ? $page_size : $count, 'cookie' => $cookie]]];
             //}
-            $search_results = ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size */ -1, -1, LDAP_DEREF_NEVER, $ldap_controls); // TODO - I hate the @, and I hate that we get a full page even if we ask for 10 records. Can we use an ldap_control?
+            $search_results = ldap_search($ldapconn, $base_dn, $filter, $attributes, 0, /* $page_size */ -1, -1, LDAP_DEREF_NEVER, $ldap_controls); // TODO - I hate the @, and I hate that we get a full page even if we ask for 10 records. Can we use an ldap_control?
             Log::debug("LDAP search executed successfully.");
             if (! $search_results) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // TODO this is never called in any routed context - only from the Artisan command. So this redirect will never work.
@@ -340,7 +341,7 @@ class Ldap extends Model
                 $cookie = '';
             }
             // Empty cookie means last page
-        
+
             // Get results from page
             $results = ldap_get_entries($ldapconn, $search_results);
             if (! $results) {

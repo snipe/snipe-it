@@ -54,19 +54,23 @@ class LdapSync extends Command
 
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
         ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
-        $ldap_result_username = Setting::getSettings()->ldap_username_field;
-        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
-        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
-        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
-        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
-        $ldap_result_email = Setting::getSettings()->ldap_email;
-        $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
-        $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
-        $ldap_result_country = Setting::getSettings()->ldap_country;
-        $ldap_result_location = Setting::getSettings()->ldap_location;
-        $ldap_result_company = Setting::getSettings()->ldap_company;
-        $ldap_result_dept = Setting::getSettings()->ldap_dept;
-        $ldap_result_manager = Setting::getSettings()->ldap_manager;
+
+        $ldap_map = [
+            "username" => Setting::getSettings()->ldap_username_field,
+            "last_name" => Setting::getSettings()->ldap_lname_field,
+            "first_name" => Setting::getSettings()->ldap_fname_field,
+            "active_flag" => Setting::getSettings()->ldap_active_flag,
+            "emp_num" => Setting::getSettings()->ldap_emp_num,
+            "email" => Setting::getSettings()->ldap_email,
+            "phone" => Setting::getSettings()->ldap_phone_field,
+            "jobtitle" => Setting::getSettings()->ldap_jobtitle,
+            "country" => Setting::getSettings()->ldap_country,
+            "company" => Setting::getSettings()->ldap_company,
+            "location" => Setting::getSettings()->ldap_location,
+            "dept" => Setting::getSettings()->ldap_dept,
+            "manager" => Setting::getSettings()->ldap_manager,
+        ];
+
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
         $search_base = Setting::getSettings()->ldap_base_dn;
 
@@ -109,14 +113,21 @@ class LdapSync extends Command
             }
 
             /**
-             * If a filter has been specified, use that
+             * If a filter has been specified, use that, otherwise default to null
              */
             if ($this->option('filter') != '') {
-                $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
+                $filter = $this->option('filter');
             } else {
-                $results = Ldap::findLdapUsers($search_base);
+                $filter = null;
             }
-            
+
+            /**
+             * We only need to request the LDAP attributes that we process
+             */
+            $attributes = array_values(array_filter($ldap_map));
+
+            $results = Ldap::findLdapUsers($search_base, -1, $filter, $attributes);
+
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
@@ -185,17 +196,17 @@ class LdapSync extends Command
                 }
                 $usernames = [];
                 for ($i = 0; $i < $location_users['count']; $i++) {
-                    if (array_key_exists($ldap_result_username, $location_users[$i])) {
+                    if (array_key_exists($ldap_map["username"], $location_users[$i])) {
                         $location_users[$i]['ldap_location_override'] = true;
                         $location_users[$i]['location_id'] = $ldap_loc['id'];
-                        $usernames[] = $location_users[$i][$ldap_result_username][0];
+                        $usernames[] = $location_users[$i][$ldap_map["username"]][0];
                     }
                 }
 
                 // Delete located users from the general group.
                 foreach ($results as $key => $generic_entry) {
-                    if ((is_array($generic_entry)) && (array_key_exists($ldap_result_username, $generic_entry))) {
-                        if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
+                    if ((is_array($generic_entry)) && (array_key_exists($ldap_map["username"], $generic_entry))) {
+                        if (in_array($generic_entry[$ldap_map["username"]][0], $usernames)) {
                             unset($results[$key]);
                         }
                     }
@@ -221,28 +232,28 @@ class LdapSync extends Command
 
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
-                $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
-                $item['employee_number'] = $results[$i][$ldap_result_emp_num][0] ?? '';
-                $item['lastname'] = $results[$i][$ldap_result_last_name][0] ?? '';
-                $item['firstname'] = $results[$i][$ldap_result_first_name][0] ?? '';
-                $item['email'] = $results[$i][$ldap_result_email][0] ?? '';
+                $item['username'] = $results[$i][$ldap_map["username"]][0] ?? '';
+                $item['employee_number'] = $results[$i][$ldap_map["emp_num"]][0] ?? '';
+                $item['lastname'] = $results[$i][$ldap_map["last_name"]][0] ?? '';
+                $item['firstname'] = $results[$i][$ldap_map["first_name"]][0] ?? '';
+                $item['email'] = $results[$i][$ldap_map["email"]][0] ?? '';
                 $item['ldap_location_override'] = $results[$i]['ldap_location_override'] ?? '';
                 $item['location_id'] = $results[$i]['location_id'] ?? '';
-                $item['telephone'] = $results[$i][$ldap_result_phone][0] ?? '';
-                $item['jobtitle'] = $results[$i][$ldap_result_jobtitle][0] ?? '';
-                $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
-                $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
-                $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
-                $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
-                $item['company'] = $results[$i][$ldap_result_company][0] ?? '';
+                $item['telephone'] = $results[$i][$ldap_map["phone"]][0] ?? '';
+                $item['jobtitle'] = $results[$i][$ldap_map["jobtitle"]][0] ?? '';
+                $item['country'] = $results[$i][$ldap_map["country"]][0] ?? '';
+                $item['department'] = $results[$i][$ldap_map["dept"]][0] ?? '';
+                $item['manager'] = $results[$i][$ldap_map["manager"]][0] ?? '';
+                $item['location'] = $results[$i][$ldap_map["location"]][0] ?? '';
+                $item['company'] = $results[$i][$ldap_map["company"]][0] ?? '';
 
                 // ONLY if you are using the "ldap_location" option *AND* you have an actual result
-                if ($ldap_result_location && $item['location']) {
+                if ($ldap_map["location"] && $item['location']) {
                         $location = Location::firstOrCreate([
                                 'name' => $item['location'],
                         ]);
                 }
-                if ($ldap_result_company && $item['company']) {
+                if ($ldap_map["company"] && $item['company']) {
                     $company = Company::firstOrCreate([
                         'name' => $item['company'],
                     ]);
@@ -265,41 +276,41 @@ class LdapSync extends Command
                 }
 
             //If a sync option is not filled in on the LDAP settings don't populate the user field
-            if($ldap_result_username  != null){
+            if($ldap_map["username"]  != null){
                 $user->username = $item['username'];
             }
-            if($ldap_result_last_name != null){
+            if($ldap_map["last_name"] != null){
                 $user->last_name = $item['lastname'];
             }
-            if($ldap_result_first_name != null){
+            if($ldap_map["first_name"] != null){
                 $user->first_name = $item['firstname'];
             }
-            if($ldap_result_emp_num  != null){
+            if($ldap_map["emp_num"]  != null){
                 $user->employee_num = e($item['employee_number']);
             }
-            if($ldap_result_email != null){
+            if($ldap_map["email"] != null){
                 $user->email = $item['email'];
             }
-            if($ldap_result_phone != null){
+            if($ldap_map["phone"] != null){
                 $user->phone = $item['telephone'];
             }
-            if($ldap_result_jobtitle != null){
+            if($ldap_map["jobtitle"] != null){
                 $user->jobtitle = $item['jobtitle'];
             }
-            if($ldap_result_country != null){
+            if($ldap_map["country"] != null){
                 $user->country = $item['country'];
             }
-            if($ldap_result_dept  != null){
+            if($ldap_map["dept"]  != null){
                 $user->department_id = $department->id;
             }
-            if($ldap_result_location != null){
+            if($ldap_map["location"] != null){
                 $user->location_id = $location ? $location->id : null;
             }
-            if($ldap_result_company != null){
+            if($ldap_map["company"] != null){
                 $user->company_id = $company ? $company->id : null;
             }
 
-            if($ldap_result_manager != null){
+            if($ldap_map["manager"] != null){
                 if($item['manager'] != null) {
                     // Check Cache first
                     if (isset($manager_cache[$item['manager']])) {
@@ -316,7 +327,7 @@ class LdapSync extends Command
                             $ldap_manager = [
                                 "count" => 1,
                                 0 => [
-                                    $ldap_result_username => [$item['manager']]
+                                    $ldap_map["username"] => [$item['manager']]
                                 ]
                             ];
                         }
@@ -325,7 +336,7 @@ class LdapSync extends Command
 
                             // Get the Manager's username
                             // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
-                            $ldapManagerUsername = $ldap_manager[0][$ldap_result_username][0];
+                            $ldapManagerUsername = $ldap_manager[0][$ldap_map["username"]][0];
 
                             // Get User from Manager username.
                             $ldap_manager = User::where('username', $ldapManagerUsername)->first();
@@ -342,10 +353,10 @@ class LdapSync extends Command
             }
 
                 // Sync activated state for Active Directory.
-                if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....
+                if ( !empty($ldap_map["active_flag"])) { // IF we have an 'active' flag set....
                     // ....then *most* things that are truthy will activate the user. Anything falsey will deactivate them.
                     // (Specifically, we don't handle a value of '0.0' correctly)
-                    $raw_value = @$results[$i][$ldap_result_active_flag][0];
+                    $raw_value = @$results[$i][$ldap_map["active_flag"]][0];
                     $filter_var = filter_var($raw_value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
                     $boolean_cast = (bool)$raw_value;
 

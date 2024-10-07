@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Sarja poistettu',
     'kit_model_updated'                 => 'Malli päivitettiin onnistuneesti',
     'kit_model_detached'                => 'Malli poistettu',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

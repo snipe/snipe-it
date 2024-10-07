@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-bell"></i> {{ trans('admin/settings/general.alerts') }}
+                        <x-icon type="bell"/> {{ trans('admin/settings/general.alerts') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -139,14 +139,29 @@
                             <div class="input-group col-md-2">
                                 {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                {!! $errors->first('audit_warning_days', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                <p class="help-block">{{ trans('admin/settings/general.audit_warning_days_help') }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Due for checkin days -->
+                        <div class="form-group {{ $errors->has('due_checkin_days') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('due_checkin_days', trans('admin/settings/general.due_checkin_days')) }}
+                            </div>
+                            <div class="input-group col-md-2">
+                                {{ Form::text('due_checkin_days', old('due_checkin_days', $setting->due_checkin_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                <span class="input-group-addon">{{ trans('general.days') }}</span>
 
 
 
 
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                {!! $errors->first('audit_warning_days', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                <p class="help-block">{{ trans('admin/settings/general.audit_warning_days_help') }}</p>
+                                {!! $errors->first('due_checkin_days', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                <p class="help-block">{{ trans('admin/settings/general.due_checkin_days_help') }}</p>
                             </div>
                         </div>
 
@@ -158,7 +173,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

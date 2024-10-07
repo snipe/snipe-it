@@ -13,7 +13,7 @@ return array(
     'groupnotes'			=> 'Pasirinkite grupę, kurią norite priskirti naudotojui ir nepamirškite, kad naudotojas gauna jam priskirtos grupės prieigos teises. Norėdami panaikinti grupių pasirinkimą, naudokite Ctrl + spustelėjimas (arba cmd + spustelėjimas, jei naudojate MacOS).',
     'id'         			=> 'Id',
     'inherit'  				=> 'Paveldėti',
-    'job' 					=> 'Pozicija',
+    'job' 					=> 'Pareigos',
     'last_login'  			=> 'Paskutinis prisijungimas',
     'last_name'  			=> 'Pavardė',
     'location'  			=> 'Vieta',

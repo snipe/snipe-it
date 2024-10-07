@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Jūsų failas buvo sėkmingai ištrintas',
         'file_delete_error'      => 'Šio failo ištrinti nepavyko',
         'file_missing' => 'Pažymėtas failas nerastas',
+        'file_already_deleted' => 'Pasirinktas failas jau buvo panaikintas',
         'header_row_has_malformed_characters' => 'Vienas ar keli antraštinės eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
         'content_row_has_malformed_characters' => 'Vienas ar keli pirmosios eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
     ],

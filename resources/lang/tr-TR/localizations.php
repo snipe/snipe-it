@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Bir dil seçin',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'İngilizce, US',
         'en-GB'=> 'İngilizce, UK',
@@ -40,7 +40,9 @@ return [
         'ms-MY'=> 'Malayca',
         'mi-NZ'=> 'Maori Dili',
         'mn-MN'=> 'Moğolca',
-        'no-NO'=> 'Norveç dili',
+        //'no-NO'=> 'Norwegian',
+        'nb-NO'=> 'Norwegian Bokmål',
+        //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Farsça',
         'pl-PL'=> 'Polonyaca',
         'pt-PT'=> 'Portekizce',
@@ -66,7 +68,7 @@ return [
         'zu-ZA'=> 'Zuluca',
     ],
 
-    'select_country' => 'Ülke seçin',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ascension Adası',
@@ -133,6 +135,7 @@ return [
         'EC'=>'Ekvador',
         'EE'=>'Estonya',
         'EG'=>'Mısır',
+        'GB-ENG'=>'England',
         'ER'=>'Eritre',
         'ES'=>'İspanya',
         'ET'=>'Etiyopya',
@@ -231,6 +234,7 @@ return [
         'NG'=>'Nijerya',
         'NI'=>'Nikaragua',
         'NL'=>'Hollanda',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norveç',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -258,7 +262,7 @@ return [
         'RU'=>'Rusya Federasyonu',
         'RW'=>'Ruanda',
         'SA'=>'Suudi Arabistan',
-        'UK'=>'İskoçya',
+        'GB-SCT'=>'İskoçya',
         'SB'=>'Solomon Adaları',
         'SC'=>'Seyşel Adaları',
         'SS'=>'Güney Sudan',
@@ -310,6 +314,7 @@ return [
         'VI'=>'Virgin Adaları (Abd)',
         'VN'=>'Vietnam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis ve Futuna Adaları',
         'WS'=>'Samoa',
         'YE'=>'Yemen',

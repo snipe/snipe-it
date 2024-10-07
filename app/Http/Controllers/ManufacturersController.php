@@ -61,7 +61,7 @@ class ManufacturersController extends Controller
         $this->authorize('create', Manufacturer::class);
         $manufacturer = new Manufacturer;
         $manufacturer->name = $request->input('name');
-        $manufacturer->user_id = Auth::id();
+        $manufacturer->created_by = auth()->id();
         $manufacturer->url = $request->input('url');
         $manufacturer->support_url = $request->input('support_url');
         $manufacturer->warranty_lookup_url = $request->input('warranty_lookup_url');
@@ -219,7 +219,7 @@ class ManufacturersController extends Controller
                 $logaction->item_type = Manufacturer::class;
                 $logaction->item_id = $manufacturer->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index

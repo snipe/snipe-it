@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'ยังไม่ได้ปรับปรุงหมวดหมู่ กรุณาลองอีกครั้ง',
         'success' => 'ปรับปรุงหมวดหมู่เรียบร้อยแล้ว.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'คุณไม่สามารถเปลี่ยนประเภทหมวดหมู่ได้เมื่อสร้างแล้ว',
     ),
 
     'delete' => array(

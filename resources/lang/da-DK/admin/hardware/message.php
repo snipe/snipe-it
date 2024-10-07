@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => 'Din fil er blevet slettet korrekt',
         'file_delete_error'      => 'Filen kunne ikke slettes',
         'file_missing' => 'Den valgte fil mangler',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'En eller flere attributter i overskriftsrækken indeholder misdannede UTF-8 tegn',
         'content_row_has_malformed_characters' => 'En eller flere attributter i den første række indhold indeholder misdannede UTF-8 tegn',
     ],

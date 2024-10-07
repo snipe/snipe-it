@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Komplet uspešno izbrisan',
     'kit_model_updated'                 => 'Model was successfully updated',
     'kit_model_detached'                => 'Model was successfully detached',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

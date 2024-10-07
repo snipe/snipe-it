@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit başarıyla silindi',
     'kit_model_updated'                 => 'Model başarıyla güncellendi',
     'kit_model_detached'                => 'Model başarıyla ayrıldı',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

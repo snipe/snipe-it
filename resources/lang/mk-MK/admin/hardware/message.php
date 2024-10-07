@@ -2,38 +2,38 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Warning: </strong> Ова средство е обележано како моментално нераспоредливо. Ако овој статус е променет, ажурирајте го статусот на средството.',
     'does_not_exist' 	=> 'Основното средство не постои.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_var'=> 'Средство со ознака :asset_tag не е пронајдено.',
+    'no_tag' 	        => 'Не е обезбедена ознака за средството.',
+    'does_not_exist_or_not_requestable' => 'Тоа средство не постои или не е побараливо.',
     'assoc_users'	 	=> 'Ова средство е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да го избришете. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'Следниот датум на ревизија на ова средство (:next_audit_date) е пред последниот датум на ревизија (:last_audit_date). Ажурирајте го следниот датум на ревизија.',
 
     'create' => [
         'error'   		=> 'Основното средство не е креирано, обидете се повторно. :(',
         'success' 		=> 'Основното средство е успешно креирано. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'Средство со ознака :tag беше создадено успешно. <strong><a href=":link" style="color: white;">Кликнете овде за да видите</a></strong>.',
     ],
 
     'update' => [
         'error'   			=> 'Основното средство не е ажурирано, обидете се повторно',
         'success' 			=> 'Основното средство е успешно ажурирано.',
-        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
+        'encrypted_warning' => 'Средството успешно се ажурираше, но не беа енкиптираните полиња поради овластувањата',
         'nothing_updated'	=>  'Не беа избрани полиња, затоа ништо не беше ажурирано.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
-        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
+        'no_assets_selected'  =>  'Не беа избрани средства, така што ништо не се ажурираше.',
+        'assets_do_not_exist_or_are_invalid' => 'Избраните средства не можат да се ажурираат.',
     ],
 
     'restore' => [
         'error'   		=> 'Основното средство не е вратено, обидете се повторно',
         'success' 		=> 'Основното средство е успешно вратено.',
         'bulk_success' 		=> 'Основното средство е успешно вратено.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Не беа избрани средства, така што ништо не беше обновено.', 
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Ревизија на средства неуспешна: :error ',
         'success' 		=> 'Ревизијата на основни средства е логирана.',
     ],
 
@@ -51,15 +51,16 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Направи увоз',
         'error'                 => 'Некои ставки не се увезоа правилно.',
         'errorDetail'           => 'Следниве елементи не се увезени поради грешки.',
         'success'               => 'Вашата датотека е увезена',
         'file_delete_success'   => 'Вашата датотека е избришана',
         'file_delete_error'      => 'Датотеката не можеше да се избрише',
-        'file_missing' => 'The file selected is missing',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Избраната датотека недостасува',
+        'file_already_deleted' => 'Избраната датотека е веќе избришана',
+        'header_row_has_malformed_characters' => 'Еден или повеќе атрибути во заглавието се содржат неправилни UTF-8 карактери',
+        'content_row_has_malformed_characters' => 'Еден или повеќе атрибути во првиот ред на содржина содржат неправилноUTF-8 карактери',
     ],
 
 

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'இந்த சொத்து வெற்றிகரமாக நிராகரித்தது.',
     'bulk_manager_warn'	        => 'உங்கள் பயனர் வெற்றிகரமாக புதுப்பிக்கப்பட்டிருந்தாலும், உங்கள் மேலாளர் நுழைவு சேமிக்கப்படவில்லை, ஏனெனில் நீங்கள் தேர்ந்தெடுத்த மேலாளர் பயனர் பட்டியலில் திருத்தப்பட வேண்டும், மேலும் பயனர்கள் தங்கள் மேலாளராக இருக்கலாம். மேலாளரைத் தவிர்த்து உங்கள் பயனர்களை மீண்டும் தேர்ந்தெடுக்கவும்.',
     'user_exists'               => 'பயனர் ஏற்கனவே உள்ளது!',
-    'user_not_found'            => 'பயனர் இல்லை.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'உள்நுழைவுத் துறை தேவைப்படுகிறது',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'கடவுச்சொல் தேவை.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP சேவையகத்தை தேட முடியவில்லை. LDAP கட்டமைப்பு கோப்பில் உங்கள் LDAP சர்வர் கட்டமைப்பை சரிபார்க்கவும். <br> LDAP சேவையகத்திலிருந்து பிழை:',
         'ldap_could_not_get_entries' => 'LDAP சேவையகத்திலிருந்து உள்ளீடுகளை பெற முடியவில்லை. LDAP கட்டமைப்பு கோப்பில் உங்கள் LDAP சர்வர் கட்டமைப்பை சரிபார்க்கவும். <br> LDAP சேவையகத்திலிருந்து பிழை:',
         'password_ldap' => 'இந்த கணக்கிற்கான கடவுச்சொல் LDAP / Active Directory மூலம் நிர்வகிக்கப்படுகிறது. உங்கள் கடவுச்சொல்லை மாற்ற உங்கள் IT பிரிவை தொடர்பு கொள்ளவும்.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

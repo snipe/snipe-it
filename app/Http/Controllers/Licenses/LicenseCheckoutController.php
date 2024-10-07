@@ -77,7 +77,7 @@ class LicenseCheckoutController extends Controller
         $this->authorize('checkout', $license);
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
-        $licenseSeat->user_id = Auth::id();
+        $licenseSeat->created_by = auth()->id();
         $licenseSeat->notes = $request->input('notes');
         
 

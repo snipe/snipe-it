@@ -12,4 +12,6 @@ return array(
     'api_reference' => 'Моля, проверете <a href="https://snipe-it.readme.io/reference" target="_blank">справката за API</a>, за да намерите конкретни API крайни точки и допълнителна API документация.',
     'profile_updated' => 'Акаунтът е актуализиран успешно',
     'no_tokens' => 'You have not created any personal access tokens.',
+    'enable_sounds' => 'Enable sound effects',
+    'enable_confetti' => 'Enable confetti effects',
 );

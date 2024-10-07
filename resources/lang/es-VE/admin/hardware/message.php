@@ -7,7 +7,7 @@ return [
     'does_not_exist_var'=> 'Activo con placa :asset_tag no encontrado.',
     'no_tag' 	        => 'No se ha proporcionado ninguna placa de activo.',
     'does_not_exist_or_not_requestable' => 'Ese activo no existe o no es solicitable.',
-    'assoc_users'	 	=> 'Actualmente este activo está asignado a un usuario y no puede ser eliminado. Por favor, primero devuelva o recupere el activo y vuelva a intentarlo. ',
+    'assoc_users'	 	=> 'Actualmente este activo está asignado a un usuario y no puede ser eliminado. Por favor, primero ingrese el activo y vuelva a intentarlo. ',
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
     'create' => [
@@ -18,29 +18,29 @@ return [
 
     'update' => [
         'error'   			=> 'El activo no pudo ser actualizado, por favor inténtelo de nuevo',
-        'success' 			=> 'Activo actualizado con éxito.',
+        'success' 			=> 'Equipo actualizado correctamente.',
         'encrypted_warning' => 'El activo se actualizó correctamente, pero los campos personalizados cifrados no lo hicieron debido a los permisos',
-        'nothing_updated'	=>  'Ningún campo fue seleccionado, así que nada se actualizó.',
+        'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que no se actualizó nada.',
         'no_assets_selected'  =>  'Ningún activo fue seleccionado, por lo que no se actualizó nada.',
         'assets_do_not_exist_or_are_invalid' => 'Los activos seleccionados no se pueden actualizar.',
     ],
 
     'restore' => [
         'error'   		=> 'El activo no fue restaurado, por favor inténtelo nuevamente',
-        'success' 		=> 'Activo restaurado correctamente.',
-        'bulk_success' 		=> 'Activo restaurado correctamente.',
+        'success' 		=> 'Activo restaurado exitosamente.',
+        'bulk_success' 		=> 'Activo restaurado exitosamente.',
         'nothing_updated'   => 'No se seleccionaron activos, por lo que no se restauró nada.', 
     ],
 
     'audit' => [
         'error'   		=> 'Auditoría de activos fallida: :error ',
-        'success' 		=> 'Audoría de activo registrada con éxito.',
+        'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
 
 
     'deletefile' => [
         'error'   => 'Archivo no eliminado. Por favor inténtelo nuevamente.',
-        'success' => 'Archivo borrado con éxito.',
+        'success' => 'Archivo eliminado correctamente.',
     ],
 
     'upload' => [
@@ -51,15 +51,16 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Proceso para importar',
+        'import_button'         => 'Importar',
         'error'                 => 'Algunos de los elementos no se importaron correctamente.',
         'errorDetail'           => 'Lo siguientes elementos no se importaron debido a errores.',
         'success'               => 'Su archivo ha sido importado',
         'file_delete_success'   => 'Su archivo se ha eliminado correctamente',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
         'file_missing' => 'Falta el archivo seleccionado',
+        'file_already_deleted' => 'El archivo seleccionado ya fue eliminado',
         'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',
-        'content_row_has_malformed_characters' => 'Uno o más atributos en la primera fila de contenido contienen caracteres UTF-8 mal formados',
+        'content_row_has_malformed_characters' => 'Uno o más atributos en la primera fila contienen caracteres UTF-8 mal formados',
     ],
 
 

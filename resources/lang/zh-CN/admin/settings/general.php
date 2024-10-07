@@ -31,6 +31,8 @@ return [
     'backups'					=> '备份',
     'backups_help'              => '创建、下载、恢复备份 ',
     'backups_restoring'         => '从备份中还原',
+    'backups_clean' => '恢复前清理备份数据库',
+    'backups_clean_helptext' => "如果您数据库版本发生变化，这可能是有用的",
     'backups_upload'            => '上传备份',
     'backups_path'              => '服务器上的备份存储在 <code>:path</code>',
     'backups_restore_warning'   => '使用恢复按钮 <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 从上次备份恢复。 (目前无法使用 S3 文件存储或 Docker容器。)<br><br>您的 <strong>完整的 :app_name 数据库和任何上传的文件将被备份文件中的内容完全替换</strong>  ',
@@ -218,6 +220,8 @@ return [
     'webhook_integration_help'    => ':app 集成是为可选项，但如果您想要使用它，则需要endpoint和channel。 要配置 :app 集成，您必须先<a href=":webhook_link" target="_new" rel="noopener">在您的 :app 账户上创建传入的 webhook</a> 。 在保存之前请点击 <strong>测试 :app 集成</strong> 按钮确认您的设置是否正确。 ',
     'webhook_integration_help_button'    => '一旦您保存了您的 :app 信息，测试按钮将会出现。',
     'webhook_test_help'           => '测试您的 :app 集成配置是否正确。您必须保存您更新的 :app 设置',
+    'shortcuts_enabled'         => '启用快捷键',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT version',
     'support_footer'            => '支持页脚链接 ',
     'support_footer_help'       => '指定谁可以看到指向Snipe-IT支持信息和用户手册的链接',
@@ -379,5 +383,7 @@ return [
     'default_avatar_help' => '如果用户没有个人资料照片，此图像将作为个人资料显示。',
     'restore_default_avatar' => '恢复 <a href=":default_avatar" data-toggle="lightbox" data-type="image">原始系统默认头像</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => '到期归还警告',
+    'due_checkin_days_help' => '资产应在预计归还多少天前列入“到期归还”页面中？',
 
 ];

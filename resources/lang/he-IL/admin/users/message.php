@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'דחיית את הנכס הזה בהצלחה.',
     'bulk_manager_warn'	        => 'המשתמשים שלך עודכנו בהצלחה, אך רשומת המנהל שלך לא נשמרה מפני שהמנהל שבחרת נבחר גם ברשימת המשתמשים כדי לערוך, והמשתמשים לא יכולים להיות המנהל שלהם. בחר שוב את המשתמשים שלך, למעט המנהל.',
     'user_exists'               => 'משתמש כבר קיים!',
-    'user_not_found'            => 'משתמש לא קיים.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'יש להזין את שדה הכניסה',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'נדרשת הסיסמה.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'לא ניתן לחפש בשרת LDAP. בדוק את תצורת שרת LDAP בקובץ תצורת LDAP. <br> שגיאה משרת LDAP:',
         'ldap_could_not_get_entries' => 'לא ניתן לקבל רשומות משרת LDAP. בדוק את תצורת שרת LDAP בקובץ תצורת LDAP. <br> שגיאה משרת LDAP:',
         'password_ldap' => 'הסיסמה עבור חשבון זה מנוהלת על ידי LDAP / Active Directory. צור קשר עם מחלקת ה- IT כדי לשנות את הסיסמה שלך.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

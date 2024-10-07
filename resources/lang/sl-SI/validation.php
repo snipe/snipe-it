@@ -125,6 +125,8 @@ return [
         'symbols' => 'The :attribute field must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
+    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+
     'present' => 'Polje atribut mora biti prisotno.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
     'present_unless' => 'The :attribute field must be present unless :other is :value.',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => 'Vaše trenutno geslo je napačno',
         'dumbpwd'          => 'To geslo je preveč pogosto.',
         'statuslabel_type' => 'Izbrati morate veljavn status oznake',
+        'custom_field_not_found'          => 'This field does not seem to exist, please double check your custom field names.',
+        'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
@@ -225,7 +229,7 @@ return [
 
     'generic' => [
         'invalid_value_in_field' => 'Invalid value included in this field',
-        'required' => 'This field is required',
+        'required' => 'To polje je obvezno',
         'email' => 'Please enter a valid email address',
     ],
 

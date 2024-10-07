@@ -58,6 +58,7 @@ return [
         'file_delete_success'   => '您的檔案已成功刪除。',
         'file_delete_error'      => '您的檔案無法被刪除。',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => '標頭列中的一個或多個屬性包含異常的 UTF-8 字元',
         'content_row_has_malformed_characters' => '內容的第一列中的一個或多個屬性包含異常的 UTF-8 字元',
     ],

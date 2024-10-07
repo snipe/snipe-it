@@ -31,6 +31,8 @@ return [
     'backups'					=> 'ការបម្រុងទុក',
     'backups_help'              => 'បង្កើត ទាញយក និងស្ដារការបម្រុងទុក ',
     'backups_restoring'         => 'ការស្ដារឡើងវិញពីការបម្រុងទុក',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'ផ្ទុកឡើងការបម្រុងទុក',
     'backups_path'              => 'ការបម្រុងទុកនៅលើម៉ាស៊ីនមេត្រូវបានរក្សាទុកក្នុង <code>:path</code>',
     'backups_restore_warning'   => 'ប្រើប៊ូតុងស្ដារ <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small> ដើម្បីស្តារពីការបម្រុងទុកពីមុន។ (បច្ចុប្បន្នវាមិនដំណើរការជាមួយការផ្ទុកឯកសារ S3 ឬ Docker ទេ។)<br><br>មូលដ្ឋានទិន្នន័យ <strong>ទាំងមូល :app_name របស់អ្នក និងឯកសារដែលបានផ្ទុកឡើងណាមួយនឹងត្រូវបានជំនួសទាំងស្រុង</strong> ដោយអ្វីដែលមាននៅក្នុងឯកសារបម្រុងទុក។  ',
@@ -218,6 +220,8 @@ return [
     'webhook_integration_help'    => ':app integration is optional, however the endpoint and channel are required if you wish to use it. To configure :app integration, you must first <a href=":webhook_link" target="_new" rel="noopener">create an incoming webhook</a> on your :app account. Click on the <strong>Test :app Integration</strong> button to confirm your settings are correct before saving. ',
     'webhook_integration_help_button'    => 'Once you have saved your :app information, a test button will appear.',
     'webhook_test_help'           => 'Test whether your :app integration is configured correctly. YOU MUST SAVE YOUR UPDATED :app SETTINGS FIRST.',
+    'shortcuts_enabled'         => 'Enable Shortcuts',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT version',
     'support_footer'            => 'Support Footer Links ',
     'support_footer_help'       => 'Specify who sees the links to the Snipe-IT Support info and Users Manual',
@@ -379,5 +383,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
 
 ];

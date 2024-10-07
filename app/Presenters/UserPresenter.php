@@ -189,6 +189,14 @@ class UserPresenter extends Presenter
                 'visible' => false,
             ],
             [
+                'field' => 'locale',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.language'),
+                'visible' => false,
+            ],
+            [
                 'field' => 'department',
                 'searchable' => true,
                 'sortable' => true,
@@ -353,6 +361,14 @@ class UserPresenter extends Presenter
                 'title' => trans('general.created_at'),
                 'visible' => false,
                 'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'updated_at',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.updated_at'),
+                'visible' => false,
+                'formatter' => 'dateDisplayFormatter',
             ],
             [
                 'field' => 'start_date',
@@ -492,6 +508,6 @@ class UserPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fas fa-user" aria-hidden="true"></i>';
+        return '<x-icon type="user"/>';
     }
 }

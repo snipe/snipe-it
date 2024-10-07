@@ -31,6 +31,8 @@ return [
     'backups'					=> 'バックアップ',
     'backups_help'              => 'バックアップの作成、ダウンロード、および復元 ',
     'backups_restoring'         => 'バックアップから復元中',
+    'backups_clean' => '復元する前にバックアップされたデータベースをクリーンアップします',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'バックアップをアップロード',
     'backups_path'              => 'サーバー上のバックアップは <code>:path</code> に保存されています',
     'backups_restore_warning'   => '復元ボタンで <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 過去のバックアップから復元できます。(S3ファイルサーバーやDockerがサポートされません。)<br><br>ご利用中の <strong> :app_name のデータベース全体と全てのアップロードされたファイルがバックアップの内容で上書きされます。</strong>  ',
@@ -221,6 +223,8 @@ return [
     'webhook_integration_help'    => 'Slackとの連携は任意ですが、利用する場合はエンドポイントとチャンネルが必要です。Slackとの連携を設定するには、まず、Slackに<a href=":webhook_link" target="_new" rel="noopener">Incoming Webhookを作成</a>する必要があります。<strong>Slack統合テスト</strong> ボタンをクリックし、設定が正しいことを確認してから保存してください。 ',
     'webhook_integration_help_button'    => ':app の設定を保存すると、テストボタンが表示されます。',
     'webhook_test_help'           => ':app の連携が正しく設定されているかどうかをテストします。:app の設定を最初に保存しなければなりません。',
+    'shortcuts_enabled'         => 'ショートカットを有効化',
+    'shortcuts_help_text'       => '<strong>Windows</strong>: Alt + Access key, <strong>Mac</strong>: Control + Option + Access key',
     'snipe_version'  			=> 'Snipe-IT バージョン',
     'support_footer'            => 'フッターのリンクをサポートします。 ',
     'support_footer_help'       => 'Snipe-ITサポート情報とユーザーマニュアルへのリンクを確認する',
@@ -382,5 +386,7 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'チェックイン期限の警告',
+    'due_checkin_days_help' => 'アセットの期待されるチェックインの何日前に、「チェックイン期限」ページにリストされるべきですか?',
 
 ];

@@ -60,7 +60,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-sitemap"></i> {{ trans('admin/settings/general.ldap_ad') }}
+                        <x-icon type="ldap"/>
+                        {{ trans('admin/settings/general.ldap_ad') }}
                     </h4>
                 </div>
                 <div class="box-body">
@@ -607,7 +608,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

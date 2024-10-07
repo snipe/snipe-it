@@ -50,7 +50,7 @@
                                         {{ $asset->model->name }}
                                     @else
                                         <span class="text-danger text-bold">
-                                              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                              <x-icon type="warning" />
                                               {{ trans('admin/hardware/general.model_invalid')}}
                                         </span>
 
@@ -89,12 +89,12 @@
 
                         @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
-                        @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
+                        @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user'])
 
                         <!-- We have to pass unselect here so that we don't default to the asset that's being checked out. We want that asset to be pre-selected everywhere else. -->
-                        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
+                        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;'])
 
-                        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
+                        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;'])
 
 
 
@@ -109,8 +109,8 @@
                                     <input type="text" class="form-control"
                                            placeholder="{{ trans('general.select_date') }}" name="checkout_at"
                                            id="checkout_at" value="{{ old('checkout_at', date('Y-m-d')) }}">
-                                    <span class="input-group-addon"><i class="fas fa-calendar"
-                                                                       aria-hidden="true"></i></span>
+                                    <span class="input-group-addon">
+                                        <x-icon type="calendar" /></span>
                                 </div>
                                 {!! $errors->first('checkout_at', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
@@ -128,8 +128,9 @@
                                     <input type="text" class="form-control"
                                            placeholder="{{ trans('general.select_date') }}" name="expected_checkin"
                                            id="expected_checkin" value="{{ old('expected_checkin') }}">
-                                    <span class="input-group-addon"><i class="fas fa-calendar"
-                                                                       aria-hidden="true"></i></span>
+                                    <span class="input-group-addon">
+                                        <x-icon type="calendar" />
+                                    </span>
                                 </div>
                                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
@@ -153,13 +154,13 @@
                                     <div class="callout callout-info">
 
                                         @if ($asset->requireAcceptance())
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
+                                            <x-icon type="email" />
                                             {{ trans('admin/categories/general.required_acceptance') }}
                                             <br>
                                         @endif
 
                                         @if ($asset->getEula())
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
+                                            <x-icon type="email" />
                                             {{ trans('admin/categories/general.required_eula') }}
                                             <br>
                                         @endif
@@ -180,7 +181,7 @@
                             :button_label="trans('general.checkout')"
                             :disabled_select="!$asset->model"
                             :options="[
-                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
+                                'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.assets')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
                                 'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
 

@@ -25,7 +25,6 @@ return [
     'image'		    => 'Enhedsbillede',
     'days_without_acceptance' => 'Dage uden accept',
     'monthly_depreciation' => 'Månedlig afskrivning',
-    'assigned_to'    => 'Tildelt',
     'requesting_user' => 'Anmoder Om Bruger',
     'requested_date' => 'Anmodningsdato',
     'changed'       => 'Ændret',

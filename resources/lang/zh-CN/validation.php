@@ -125,6 +125,8 @@ return [
         'symbols' => ':attribute 字段必须至少包含一个符号。',
         'uncompromised' => '给定的 :attribute 字段出现在数据泄漏中。请选择一个不同的 :attribute 。',
     ],
+    'percent'       => '当折旧类型为百分比时，折旧的最小值必须在0到100之间。',
+
     'present' => '：属性字段必须存在。',
     'present_if' => '当 :other 为 :value 时，:attribute 字段必须存在。',
     'present_unless' => ':attribute 字段必须存在，除非 :other 是 :value 。',
@@ -188,6 +190,8 @@ return [
         'hashed_pass'      => '您当前的密码不正确',
         'dumbpwd'          => '那个密码太常见了。',
         'statuslabel_type' => '您必须选择有效的状态标签类型',
+        'custom_field_not_found'          => '此字段似乎不存在，请重新检查您的自定义字段名称。',
+        'custom_field_not_found_on_model' => '此字段似乎存在，但在此资产型号的字段集上不可用。',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP

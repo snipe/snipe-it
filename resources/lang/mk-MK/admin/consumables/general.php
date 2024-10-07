@@ -8,5 +8,5 @@ return array(
     'remaining' 			            => 'Останува',
     'total' 			                => 'Вкупно',
     'update'                            => 'Ажурирај потрошен материјал',
-    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
+    'inventory_warning'                 => 'Залихата на оваа потрошна стока е под минималната количина од :min_count',
 );
