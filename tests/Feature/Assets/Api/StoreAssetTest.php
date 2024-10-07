@@ -162,6 +162,71 @@ class StoreAssetTest extends TestCase
         $this->assertNotNull($response->json('messages.status_id'));
     }
 
+    public function testSaveWithAssignedToChecksOut()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => '1235',
+                'assigned_to' => $user->id,
+                'assigned_type' => User::class,
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $asset = Asset::find($response->json()['payload']['id']);
+        $this->assertEquals($user->id, $asset->assigned_to);
+        $this->assertEquals('Asset created successfully. :)', $response->json('messages'));
+    }
+
+
+    public function testSaveWithNoAssignedTypeReturnsValidationError()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => '1235',
+                'assigned_to' => '1',
+//                'assigned_type' => User::class, //deliberately omit assigned_type
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+        $this->assertNotNull($response->json('messages.assigned_type'));
+    }
+
+    public function testSaveWithBadAssignedTypeReturnsValidationError()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag'     => '1235',
+                'assigned_to'   => '1',
+                'assigned_type' => 'nonsense_string', //deliberately bad assigned_type
+                'model_id'      => AssetModel::factory()->create()->id,
+                'status_id'     => Statuslabel::factory()->readyToDeploy()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+        $this->assertNotNull($response->json('messages.assigned_type'));
+    }
+
+    public function testSaveWithAssignedTypeAndNoAssignedToReturnsValidationError()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag'     => '1235',
+                //'assigned_to'   => '1', //deliberately omit assigned_to
+                'assigned_type' => User::class,
+                'model_id'      => AssetModel::factory()->create()->id,
+                'status_id'     => Statuslabel::factory()->readyToDeploy()->create()->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+        $this->assertNotNull($response->json('messages.assigned_to'));
+    }
+
     public function testSaveWithPendingStatusWithoutUserIsSuccessful()
     {
         $response = $this->actingAsForApi(User::factory()->superuser()->create())

@@ -4,6 +4,7 @@ namespace Tests\Unit;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Setting;
@@ -188,5 +189,14 @@ class AssetTest extends TestCase
         $this->assertEquals(Carbon::createFromDate(2017, 1, 1)->format('Y-m-d'), $asset->purchase_date->format('Y-m-d'));
         $this->assertEquals(Carbon::createFromDate(2019, 1, 1)->format('Y-m-d'), $asset->warranty_expires->format('Y-m-d'));
 
+    }
+
+    public function testAssignedTypeWithoutAssignTo()
+    {
+        $user = User::factory()->create();
+        $asset = Asset::factory()->create([
+            'assigned_to' => $user->id
+        ]);
+        $this->assertModelMissing($asset);
     }
 }
