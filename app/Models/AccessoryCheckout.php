@@ -34,7 +34,7 @@ class AccessoryCheckout extends Model
      */
     public function accessory()
     {
-        return $this->hasOne(\App\Models\Accessory::class, 'accessory_id');
+        return $this->hasOne(\App\Models\Accessory::class, 'id', 'accessory_id');
     }
 
     /**
@@ -46,7 +46,7 @@ class AccessoryCheckout extends Model
      */
     public function user()
     {
-        return $this->hasOne(\App\Models\User::class, 'user_id');
+        return $this->hasOne(\App\Models\User::class, 'id','user_id');
     }
 
     /**

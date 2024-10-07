@@ -846,13 +846,14 @@ class Helper
     { if(Setting::getSettings()->full_multiple_companies_support == 1) {
 
             $accessories = AccessoryCheckout::with('accessory', 'user')
-                ->join('users', 'accessories_users.assigned_to', '=', 'users.id')
+                ->join('users', 'accessories_checkout.assigned_to', '=', 'users.id')
                 ->whereHas('accessory', function ($query) {
                     $query->where(function ($query) {
                         $query->WhereColumn('accessories.company_id', '!=', 'users.company_id');
                     });
                 })
                 ->get();
+//            dd($accessories);
 
             $assets = Asset::with('assignedTo', 'company', 'model')
                 ->whereHasMorph(
@@ -894,8 +895,8 @@ class Helper
                 $items_array[$all_count]['id'] = $accessory->accessory->id;
                 $items_array[$all_count]['name'] = $accessory->accessory->name;
                 $items_array[$all_count]['company'] = $accessory->accessory->company->name;
-                $items_array[$all_count]['user'] = $accessory->user->present()->fullName;
-                $items_array[$all_count]['user_company'] = $accessory->user->company->name;
+                $items_array[$all_count]['user'] = $accessory->assignedto->present()->fullName;
+                $items_array[$all_count]['user_company'] = $accessory->assignedto->company->name;
                 $items_array[$all_count]['type'] = 'accessories';
 
                 $all_count++;
