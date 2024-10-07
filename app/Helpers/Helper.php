@@ -853,7 +853,6 @@ class Helper
                     });
                 })
                 ->get();
-//            dd($accessories);
 
             $assets = Asset::with('assignedTo', 'company', 'model')
                 ->whereHasMorph(
