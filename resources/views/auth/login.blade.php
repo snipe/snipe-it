@@ -4,7 +4,7 @@
 {{-- Page content --}}
 @section('content')
 
-    <form role="form" action="{{ url('/login') }}" method="POST" autocomplete="{{ (config('auth.login_autocomplete') === true) ? 'on' : 'off'  }}">
+    <form role="form" id="login-form" action="{{ url('/login') }}" method="POST" autocomplete="{{ (config('auth.login_autocomplete') === true) ? 'on' : 'off'  }}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 
@@ -94,7 +94,16 @@
                             @if (config('app.require_saml'))
                                 <a class="btn btn-primary btn-block" href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
                             @else
-                                <button class="btn btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
+                                {{-- <button class="btn btn-primary btn-block">{{ trans('auth/general.login')  }}</button> --}}
+                                <button class="g-recaptcha btn btn-primary btn-block" 
+                                data-sitekey="{{ config('recaptcha.site_key') }}"
+                                data-callback='onSubmit'
+                                data-action='submit'>{{ trans('auth/general.login')  }}</button>
+                                <a href="{{ route('login.azure') }}" class="btn btn-primary" style="margin-top: 3px; width: 100%; background-color: white;color: black; outline: gray; border: solid 1px #c8c3c3; display:flex; justify-content:center; align-items:center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48" style="margin-inline:2px">
+                                        <path fill="#ff5722" d="M6 6H22V22H6z" transform="rotate(-180 14 14)"></path><path fill="#4caf50" d="M26 6H42V22H26z" transform="rotate(-180 34 14)"></path><path fill="#ffc107" d="M26 26H42V42H26z" transform="rotate(-180 34 34)"></path><path fill="#03a9f4" d="M6 26H22V42H6z" transform="rotate(-180 14 34)"></path>
+                                        </svg>Login with Microsoft
+                                </a>
                             @endif
 
                             @if ($snipeSettings->custom_forgot_pass_url)
@@ -119,3 +128,12 @@
     </form>
 
 @stop
+
+@push('js')
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+function onSubmit(token) {
+    document.getElementById("login-form").submit();
+}
+</script>
+@endpush
