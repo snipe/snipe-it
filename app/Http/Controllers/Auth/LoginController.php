@@ -345,22 +345,23 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         // captcha v2 hidden validation
-        $request->validate([
-            'g-recaptcha-response' => 'required',
-        ]);
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('recaptcha.secret_key'),
-            'response' => $request->input('g-recaptcha-response'),
-            'remoteip' => $request->ip(),
-        ]);
-        $body = $response->json();
-        if (!$body || !isset($body['success']) || $body['success'] !== true) {
-            Log::warning('reCAPTCHA verification failed', ['response' => $body]);
-            throw ValidationException::withMessages([
-                'captcha' => 'reCAPTCHA verification failed. Please try again.',
+        if (config('recaptcha.secret_key')){
+            $request->validate([
+                'g-recaptcha-response' => 'required',
             ]);
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => config('recaptcha.secret_key'),
+                'response' => $request->input('g-recaptcha-response'),
+                'remoteip' => $request->ip(),
+            ]);
+            $body = $response->json();
+            if (!$body || !isset($body['success']) || $body['success'] !== true) {
+                Log::warning('reCAPTCHA verification failed', ['response' => $body]);
+                throw ValidationException::withMessages([
+                    'captcha' => 'reCAPTCHA verification failed. Please try again.',
+                ]);
+            }
         }
-
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
             Log::debug('require SAML is enabled in the .env - return a 403');
