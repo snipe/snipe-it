@@ -120,6 +120,7 @@ class Asset extends Depreciable
         'order_number'      => ['nullable', 'string', 'max:191'],
         'notes'             => ['nullable', 'string', 'max:65535'],
         'assigned_to'       => ['nullable', 'integer'],
+        'assigned_type' => ['nullable', 'required_with:assigned_to'],
         'requestable'       => ['nullable', 'boolean'],
         'assigned_user'     => ['nullable', 'exists:users,id,deleted_at,NULL'],
         'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL'],
