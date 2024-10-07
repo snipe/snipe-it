@@ -36,11 +36,7 @@
         @page {
             size: A4;
         }
-
-        #start_of_user_section {
-            break-before: page;
-        }
-
+        
         .print-logo {
             max-height: 40px;
         }
@@ -51,13 +47,6 @@
         }
     </style>
 
-    <script nonce="{{ csrf_token() }}">
-        window.snipeit = {
-            settings: {
-                "per_page": 50
-            }
-        };
-    </script>
 
 </head>
 <body>
