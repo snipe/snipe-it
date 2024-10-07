@@ -41,7 +41,7 @@ class ImportFactory extends Factory
             $fileBuilder = Importing\AccessoriesImportFileBuilder::new();
 
             $attributes['name'] = "{$attributes['name']} Accessories";
-            $attributes['import_type'] = 'Accessories';
+            $attributes['import_type'] = 'accessory';
             $attributes['header_row'] = $fileBuilder->toCsv()[0];
             $attributes['first_row'] = $fileBuilder->firstRow();
 
@@ -76,7 +76,7 @@ class ImportFactory extends Factory
     public function component()
     {
         return $this->state(function (array $attributes) {
-            $fileBuilder = Importing\ComponentsImportFileBuilder::times();
+            $fileBuilder = Importing\ComponentsImportFileBuilder::new();
 
             $attributes['name'] = "{$attributes['name']} Components";
             $attributes['import_type'] = 'component';

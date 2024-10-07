@@ -4,19 +4,20 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActivityLog;
 use App\Models\Consumable;
-use Database\Factories\ConsumableFactory;
-use Illuminate\Support\Str;
-use Database\Factories\UserFactory;
-use Database\Factories\ImportFactory;
-use PHPUnit\Framework\Attributes\Test;
+use App\Models\Import;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Concerns\TestsPermissionsRequirement;
+use Tests\Support\Importing\CleansUpImportFiles;
 use Tests\Support\Importing\ConsumablesImportFileBuilder as ImportFileBuilder;
 
-class ImportConsumablesTest extends ImportDataTestCase
+class ImportConsumablesTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse
@@ -29,14 +30,9 @@ class ImportConsumablesTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportConsumables(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
@@ -44,9 +40,9 @@ class ImportConsumablesTest extends ImportDataTestCase
     #[Test]
     public function userWithImportAssetsPermissionCanImportConsumables(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->consumable()->create();
+        $import = Import::factory()->consumable()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -58,9 +54,9 @@ class ImportConsumablesTest extends ImportDataTestCase
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -79,22 +75,22 @@ class ImportConsumablesTest extends ImportDataTestCase
             ->where('item_id', $newConsumable->id)
             ->sole();
 
-        $this->assertEquals($activityLog->action_type, 'create');
-        $this->assertEquals($activityLog->action_source, 'importer');
-        $this->assertEquals($activityLog->company_id, $newConsumable->company->id);
+        $this->assertEquals('create', $activityLog->action_type);
+        $this->assertEquals('importer', $activityLog->action_source);
+        $this->assertEquals($newConsumable->company->id, $activityLog->company_id);
 
-        $this->assertEquals($newConsumable->name, $row['itemName']);
-        $this->assertEquals($newConsumable->category->name, $row['category']);
-        $this->assertEquals($newConsumable->location->name, $row['location']);
-        $this->assertEquals($newConsumable->company->name, $row['companyName']);
+        $this->assertEquals($row['itemName'], $newConsumable->name);
+        $this->assertEquals($row['category'], $newConsumable->category->name);
+        $this->assertEquals($row['location'], $newConsumable->location->name);
+        $this->assertEquals($row['companyName'], $newConsumable->company->name);
         $this->assertNull($newConsumable->supplier_id);
         $this->assertFalse($newConsumable->requestable);
         $this->assertNull($newConsumable->image);
-        $this->assertEquals($newConsumable->order_number, $row['orderNumber']);
-        $this->assertEquals($newConsumable->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newConsumable->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['orderNumber'], $newConsumable->order_number);
+        $this->assertEquals($row['purchaseDate'], $newConsumable->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newConsumable->purchase_cost);
         $this->assertNull($newConsumable->min_amt);
-        $this->assertEquals($newConsumable->model_number, '');
+        $this->assertEquals('', $newConsumable->model_number);
         $this->assertNull($newConsumable->item_number);
         $this->assertNull($newConsumable->manufacturer_id);
         $this->assertNull($newConsumable->notes);
@@ -108,9 +104,9 @@ class ImportConsumablesTest extends ImportDataTestCase
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -118,11 +114,11 @@ class ImportConsumablesTest extends ImportDataTestCase
     #[Test]
     public function willNotCreateNewConsumableWhenConsumableNameAlreadyExist(): void
     {
-        $consumable = ConsumableFactory::new()->create(['name' => Str::random()]);
+        $consumable = Consumable::factory()->create(['name' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::new(['itemName' => $consumable->name]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewConsumables = Consumable::query()
@@ -137,9 +133,9 @@ class ImportConsumablesTest extends ImportDataTestCase
     public function willNotCreateNewCompanyWhenCompanyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newConsumables = Consumable::query()
@@ -153,9 +149,9 @@ class ImportConsumablesTest extends ImportDataTestCase
     public function willNotCreateNewLocationWhenLocationExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newConsumables = Consumable::query()
@@ -169,9 +165,9 @@ class ImportConsumablesTest extends ImportDataTestCase
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => Str::random()]);
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newConsumables = Consumable::query()
@@ -187,9 +183,9 @@ class ImportConsumablesTest extends ImportDataTestCase
         $importFileBuilder = ImportFileBuilder::new(['category' => ''])->forget(['quantity', 'name']);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -215,13 +211,13 @@ class ImportConsumablesTest extends ImportDataTestCase
     #[Test]
     public function updateConsumableFromImport(): void
     {
-        $consumable = ConsumableFactory::new()->create(['name' => Str::random()]);
+        $consumable = Consumable::factory()->create(['name' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::new(['itemName' => $consumable->name]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedConsumable = Consumable::query()
@@ -229,13 +225,13 @@ class ImportConsumablesTest extends ImportDataTestCase
             ->where('name', $importFileBuilder->firstRow()['itemName'])
             ->sole();
 
-        $this->assertEquals($updatedConsumable->name, $row['itemName']);
-        $this->assertEquals($updatedConsumable->category->name, $row['category']);
-        $this->assertEquals($updatedConsumable->location->name, $row['location']);
-        $this->assertEquals($updatedConsumable->company->name, $row['companyName']);
-        $this->assertEquals($updatedConsumable->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedConsumable->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedConsumable->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['itemName'], $updatedConsumable->name);
+        $this->assertEquals($row['category'], $updatedConsumable->category->name);
+        $this->assertEquals($row['location'], $updatedConsumable->location->name);
+        $this->assertEquals($row['companyName'], $updatedConsumable->company->name);
+        $this->assertEquals($row['orderNumber'], $updatedConsumable->order_number);
+        $this->assertEquals($row['purchaseDate'], $updatedConsumable->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedConsumable->purchase_cost);
 
         $this->assertEquals($consumable->supplier_id, $updatedConsumable->supplier_id);
         $this->assertEquals($consumable->requestable, $updatedConsumable->requestable);
@@ -265,9 +261,9 @@ class ImportConsumablesTest extends ImportDataTestCase
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $import = ImportFactory::new()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->consumable()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,
@@ -289,19 +285,19 @@ class ImportConsumablesTest extends ImportDataTestCase
             ->where('name', $importFileBuilder->firstRow()['quantity'])
             ->sole();
 
-        $this->assertEquals($newConsumable->category->name, $row['supplier']);
-        $this->assertEquals($newConsumable->location->name, $row['purchaseCost']);
-        $this->assertEquals($newConsumable->company->name, $row['purchaseDate']);
-        $this->assertEquals($newConsumable->qty, $row['companyName']);
-        $this->assertEquals($newConsumable->name, $row['quantity']);
+        $this->assertEquals($row['supplier'], $newConsumable->category->name);
+        $this->assertEquals($row['purchaseCost'], $newConsumable->location->name);
+        $this->assertEquals($row['purchaseDate'], $newConsumable->company->name);
+        $this->assertEquals($row['companyName'], $newConsumable->qty);
+        $this->assertEquals($row['quantity'], $newConsumable->name);
         $this->assertNull($newConsumable->supplier_id);
         $this->assertFalse($newConsumable->requestable);
         $this->assertNull($newConsumable->image);
-        $this->assertEquals($newConsumable->order_number, $row['orderNumber']);
-        $this->assertEquals($newConsumable->purchase_date->toDateString(), $row['itemName']);
-        $this->assertEquals($newConsumable->purchase_cost, $row['location']);
+        $this->assertEquals($row['orderNumber'], $newConsumable->order_number);
+        $this->assertEquals($row['itemName'], $newConsumable->purchase_date->toDateString());
+        $this->assertEquals($row['location'], $newConsumable->purchase_cost);
         $this->assertNull($newConsumable->min_amt);
-        $this->assertEquals($newConsumable->model_number, '');
+        $this->assertEquals('', $newConsumable->model_number);
         $this->assertNull($newConsumable->item_number);
         $this->assertNull($newConsumable->manufacturer_id);
         $this->assertNull($newConsumable->notes);

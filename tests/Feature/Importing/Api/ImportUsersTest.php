@@ -2,23 +2,24 @@
 
 namespace Tests\Feature\Importing\Api;
 
+use App\Models\Asset;
+use App\Models\Import;
 use App\Models\Location;
 use App\Models\User;
-use Database\Factories\AssetFactory;
-use Illuminate\Support\Str;
-use Database\Factories\UserFactory;
-use Database\Factories\ImportFactory;
-use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Concerns\TestsPermissionsRequirement;
+use Tests\Support\Importing\CleansUpImportFiles;
 use Tests\Support\Importing\UsersImportFileBuilder as ImportFileBuilder;
 
-class ImportUsersTest extends ImportDataTestCase
+class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse
@@ -31,14 +32,9 @@ class ImportUsersTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportUsers(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
@@ -46,9 +42,9 @@ class ImportUsersTest extends ImportDataTestCase
     #[Test]
     public function userWithImportAssetsPermissionCanImportUsers(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->users()->create();
+        $import = Import::factory()->users()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -60,9 +56,9 @@ class ImportUsersTest extends ImportDataTestCase
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'send-welcome' => 1])
             ->assertOk()
             ->assertExactJson([
@@ -78,21 +74,21 @@ class ImportUsersTest extends ImportDataTestCase
 
         Notification::assertNothingSent();
 
-        $this->assertEquals($newUser->email, $row['email']);
-        $this->assertEquals($newUser->first_name, $row['firstName']);
-        $this->assertEquals($newUser->last_name, $row['lastName']);
-        $this->assertEquals($newUser->employee_num, $row['employeeNumber']);
-        $this->assertEquals($newUser->company->name, $row['companyName']);
-        $this->assertEquals($newUser->location->name, $row['location']);
-        $this->assertEquals($newUser->phone, $row['phoneNumber']);
-        $this->assertEquals($newUser->jobtitle, $row['position']);
+        $this->assertEquals($row['email'], $newUser->email);
+        $this->assertEquals($row['firstName'], $newUser->first_name);
+        $this->assertEquals($row['lastName'], $newUser->last_name);
+        $this->assertEquals($row['employeeNumber'], $newUser->employee_num);
+        $this->assertEquals($row['companyName'], $newUser->company->name);
+        $this->assertEquals($row['location'], $newUser->location->name);
+        $this->assertEquals($row['phoneNumber'], $newUser->phone);
+        $this->assertEquals($row['position'], $newUser->jobtitle);
         $this->assertTrue(Hash::isHashed($newUser->password));
-        $this->assertEquals($newUser->website, '');
-        $this->assertEquals($newUser->country, '');
-        $this->assertEquals($newUser->address, '');
-        $this->assertEquals($newUser->city, '');
-        $this->assertEquals($newUser->state, '');
-        $this->assertEquals($newUser->zip, '');
+        $this->assertEquals('', $newUser->website);
+        $this->assertEquals('', $newUser->country);
+        $this->assertEquals('', $newUser->address);
+        $this->assertEquals('', $newUser->city);
+        $this->assertEquals('', $newUser->state);
+        $this->assertEquals('', $newUser->zip);
         $this->assertNull($newUser->permissions);
         $this->assertNull($newUser->avatar);
         $this->assertNull($newUser->notes);
@@ -100,15 +96,15 @@ class ImportUsersTest extends ImportDataTestCase
         $this->assertNull($newUser->department_id);
         $this->assertNull($newUser->two_factor_secret);
         $this->assertNull($newUser->idap_import);
-        $this->assertEquals($newUser->locale, 'en-US');
-        $this->assertEquals($newUser->show_in_list, 1);
-        $this->assertEquals($newUser->two_factor_enrolled, 0);
-        $this->assertEquals($newUser->two_factor_optin, 0);
-        $this->assertEquals($newUser->remote, 0);
-        $this->assertEquals($newUser->autoassign_licenses, 0);
-        $this->assertEquals($newUser->vip, 0);
-        $this->assertEquals($newUser->enable_sounds, 0);
-        $this->assertEquals($newUser->enable_confetti, 0);
+        $this->assertEquals('en-US', $newUser->locale);
+        $this->assertEquals(1, $newUser->show_in_list);
+        $this->assertEquals(0, $newUser->two_factor_enrolled);
+        $this->assertEquals(0, $newUser->two_factor_optin);
+        $this->assertEquals(0, $newUser->remote);
+        $this->assertEquals(0, $newUser->autoassign_licenses);
+        $this->assertEquals(0, $newUser->vip);
+        $this->assertEquals(0, $newUser->enable_sounds);
+        $this->assertEquals(0, $newUser->enable_confetti);
         $this->assertNull($newUser->created_by);
         $this->assertNull($newUser->start_date);
         $this->assertNull($newUser->end_date);
@@ -118,7 +114,7 @@ class ImportUsersTest extends ImportDataTestCase
         $this->assertNull($newUser->last_login);
         $this->assertNull($newUser->persist_code);
         $this->assertNull($newUser->reset_password_code);
-        $this->assertEquals($newUser->activated, 0);
+        $this->assertEquals(0, $newUser->activated);
     }
 
     #[Test]
@@ -129,9 +125,9 @@ class ImportUsersTest extends ImportDataTestCase
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -139,11 +135,11 @@ class ImportUsersTest extends ImportDataTestCase
     #[Test]
     public function willNotCreateNewUserWhenUserWithUserNameAlreadyExist(): void
     {
-        $user = UserFactory::new()->create(['username' => Str::random()]);
+        $user = User::factory()->create(['username' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['username' => $user->username]);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewUsers = User::query()
@@ -158,9 +154,9 @@ class ImportUsersTest extends ImportDataTestCase
     {
         $importFileBuilder = ImportFileBuilder::new()->forget('username');
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newUser = User::query()
@@ -169,25 +165,25 @@ class ImportUsersTest extends ImportDataTestCase
 
         $generatedUsername = User::generateFormattedNameFromFullName("{$row['firstName']} {$row['lastName']}")['username'];
 
-        $this->assertEquals($newUser->username, $generatedUsername);
+        $this->assertEquals($generatedUsername, $newUser->username);
     }
 
     #[Test]
     public function willUpdateLocationOfAllAssetsAssignedToUser(): void
     {
-        $user = UserFactory::new()->create(['username' => Str::random()]);
-        $assetsAssignedToUser = AssetFactory::new()->create(['assigned_to' => $user->id, 'assigned_type' => User::class]);
+        $user = User::factory()->create(['username' => Str::random()]);
+        $assetsAssignedToUser = Asset::factory()->create(['assigned_to' => $user->id, 'assigned_type' => User::class]);
         $importFileBuilder = ImportFileBuilder::new(['username' => $user->username]);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $userLocation = Location::query()->where('name', $importFileBuilder->firstRow()['location'])->sole(['id']);
 
         $this->assertEquals(
-            $assetsAssignedToUser->refresh()->location_id,
-            $userLocation->id
+            $userLocation->id,
+            $assetsAssignedToUser->refresh()->location_id
         );
     }
 
@@ -195,9 +191,9 @@ class ImportUsersTest extends ImportDataTestCase
     public function whenRequiredColumnsAreMissingInImportFile(): void
     {
         $importFileBuilder = ImportFileBuilder::new(['firstName' => ''])->forget(['username']);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -223,13 +219,13 @@ class ImportUsersTest extends ImportDataTestCase
     #[Test]
     public function updateUserFromImport(): void
     {
-        $user = UserFactory::new()->create(['username' => Str::random()])->refresh();
+        $user = User::factory()->create(['username' => Str::random()])->refresh();
         $importFileBuilder = ImportFileBuilder::new(['username'  => $user->username]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedUser = User::query()->with(['company', 'location'])->find($user->id);
@@ -238,19 +234,19 @@ class ImportUsersTest extends ImportDataTestCase
             'location_id', 'company_id', 'updated_at', 'phone', 'jobtitle'
         ];
 
-        $this->assertEquals($updatedUser->email, $row['email']);
-        $this->assertEquals($updatedUser->first_name, $row['firstName']);
-        $this->assertEquals($updatedUser->last_name, $row['lastName']);
-        $this->assertEquals($updatedUser->employee_num, $row['employeeNumber']);
-        $this->assertEquals($updatedUser->company->name, $row['companyName']);
-        $this->assertEquals($updatedUser->location->name, $row['location']);
-        $this->assertEquals($updatedUser->phone, $row['phoneNumber']);
-        $this->assertEquals($updatedUser->jobtitle, $row['position']);
+        $this->assertEquals($row['email'], $updatedUser->email);
+        $this->assertEquals($row['firstName'], $updatedUser->first_name);
+        $this->assertEquals($row['lastName'], $updatedUser->last_name);
+        $this->assertEquals($row['employeeNumber'], $updatedUser->employee_num);
+        $this->assertEquals($row['companyName'], $updatedUser->company->name);
+        $this->assertEquals($row['location'], $updatedUser->location->name);
+        $this->assertEquals($row['phoneNumber'], $updatedUser->phone);
+        $this->assertEquals($row['position'], $updatedUser->jobtitle);
         $this->assertTrue(Hash::isHashed($updatedUser->password));
 
         $this->assertEquals(
-            Arr::except($updatedUser->attributesToArray(), $updatedAttributes),
             Arr::except($user->attributesToArray(), $updatedAttributes),
+            Arr::except($updatedUser->attributesToArray(), $updatedAttributes),
         );
     }
 
@@ -271,9 +267,9 @@ class ImportUsersTest extends ImportDataTestCase
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->users()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,
@@ -295,21 +291,21 @@ class ImportUsersTest extends ImportDataTestCase
             ->where('username', $row['companyName'])
             ->sole();
 
-        $this->assertEquals($newUser->email, $row['position']);
-        $this->assertEquals($newUser->first_name, $row['location']);
-        $this->assertEquals($newUser->last_name, $row['lastName']);
-        $this->assertEquals($newUser->jobtitle, $row['email']);
-        $this->assertEquals($newUser->employee_num, $row['phoneNumber']);
-        $this->assertEquals($newUser->company->name, $row['username']);
-        $this->assertEquals($newUser->location->name, $row['firstName']);
-        $this->assertEquals($newUser->phone, $row['employeeNumber']);
+        $this->assertEquals($row['position'], $newUser->email);
+        $this->assertEquals($row['location'], $newUser->first_name);
+        $this->assertEquals($row['lastName'], $newUser->last_name);
+        $this->assertEquals($row['email'], $newUser->jobtitle);
+        $this->assertEquals($row['phoneNumber'], $newUser->employee_num);
+        $this->assertEquals($row['username'], $newUser->company->name);
+        $this->assertEquals($row['firstName'], $newUser->location->name);
+        $this->assertEquals($row['employeeNumber'], $newUser->phone);
         $this->assertTrue(Hash::isHashed($newUser->password));
-        $this->assertEquals($newUser->website, '');
-        $this->assertEquals($newUser->country, '');
-        $this->assertEquals($newUser->address, '');
-        $this->assertEquals($newUser->city, '');
-        $this->assertEquals($newUser->state, '');
-        $this->assertEquals($newUser->zip, '');
+        $this->assertEquals('', $newUser->website);
+        $this->assertEquals('', $newUser->country);
+        $this->assertEquals('', $newUser->address);
+        $this->assertEquals('', $newUser->city);
+        $this->assertEquals('', $newUser->state);
+        $this->assertEquals('', $newUser->zip);
         $this->assertNull($newUser->permissions);
         $this->assertNull($newUser->avatar);
         $this->assertNull($newUser->notes);
@@ -317,15 +313,15 @@ class ImportUsersTest extends ImportDataTestCase
         $this->assertNull($newUser->department_id);
         $this->assertNull($newUser->two_factor_secret);
         $this->assertNull($newUser->idap_import);
-        $this->assertEquals($newUser->locale, 'en-US');
-        $this->assertEquals($newUser->show_in_list, 1);
-        $this->assertEquals($newUser->two_factor_enrolled, 0);
-        $this->assertEquals($newUser->two_factor_optin, 0);
-        $this->assertEquals($newUser->remote, 0);
-        $this->assertEquals($newUser->autoassign_licenses, 0);
-        $this->assertEquals($newUser->vip, 0);
-        $this->assertEquals($newUser->enable_sounds, 0);
-        $this->assertEquals($newUser->enable_confetti, 0);
+        $this->assertEquals('en-US', $newUser->locale);
+        $this->assertEquals(1, $newUser->show_in_list);
+        $this->assertEquals(0, $newUser->two_factor_enrolled);
+        $this->assertEquals(0, $newUser->two_factor_optin);
+        $this->assertEquals(0, $newUser->remote);
+        $this->assertEquals(0, $newUser->autoassign_licenses);
+        $this->assertEquals(0, $newUser->vip);
+        $this->assertEquals(0, $newUser->enable_sounds);
+        $this->assertEquals(0, $newUser->enable_confetti);
         $this->assertNull($newUser->created_by);
         $this->assertNull($newUser->start_date);
         $this->assertNull($newUser->end_date);
@@ -335,6 +331,6 @@ class ImportUsersTest extends ImportDataTestCase
         $this->assertNull($newUser->last_login);
         $this->assertNull($newUser->persist_code);
         $this->assertNull($newUser->reset_password_code);
-        $this->assertEquals($newUser->activated, 0);
+        $this->assertEquals(0, $newUser->activated);
     }
 }

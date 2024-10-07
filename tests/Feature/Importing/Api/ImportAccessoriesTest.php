@@ -4,21 +4,20 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Accessory;
 use App\Models\Actionlog;
-use App\Models\Company;
-use Database\Factories\AccessoryFactory;
-use Database\Factories\CompanyFactory;
+use App\Models\Import;
+use App\Models\User;
 use Illuminate\Support\Str;
-use Database\Factories\UserFactory;
-use Database\Factories\ImportFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 use Illuminate\Testing\TestResponse;
-use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\Support\Importing\AccessoriesImportFileBuilder as ImportFileBuilder;
+use Tests\Support\Importing\CleansUpImportFiles;
 
-class ImportAccessoriesTest extends ImportDataTestCase
+class ImportAccessoriesTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse
@@ -31,14 +30,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportAccessories(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
@@ -46,9 +40,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     #[Test]
     public function userWithImportAccessoryPermissionCanImportAccessories(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->accessory()->create();
+        $import = Import::factory()->accessory()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -58,9 +52,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     {
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -81,23 +75,23 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->where('item_id', $newAccessory->id)
             ->sole();
 
-        $this->assertEquals($activityLog->action_type, 'create');
-        $this->assertEquals($activityLog->action_source, 'importer');
-        $this->assertEquals($activityLog->company_id, $newAccessory->company->id);
+        $this->assertEquals('create', $activityLog->action_type);
+        $this->assertEquals('importer', $activityLog->action_source);
+        $this->assertEquals($newAccessory->company->id, $activityLog->company_id);
 
-        $this->assertEquals($newAccessory->name, $row['itemName']);
-        $this->assertEquals($newAccessory->qty, $row['quantity']);
-        $this->assertEquals($newAccessory->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newAccessory->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($newAccessory->order_number, $row['orderNumber']);
-        $this->assertEquals($newAccessory->notes, $row['notes']);
-        $this->assertEquals($newAccessory->category->name, $row['category']);
-        $this->assertEquals($newAccessory->category->category_type, 'accessory');
-        $this->assertEquals($newAccessory->manufacturer->name, $row['manufacturerName']);
-        $this->assertEquals($newAccessory->supplier->name, $row['supplierName']);
-        $this->assertEquals($newAccessory->location->name, $row['location']);
-        $this->assertEquals($newAccessory->company->name, $row['companyName']);
-        $this->assertEquals($newAccessory->model_number, $row['modelNumber']);
+        $this->assertEquals($row['itemName'], $newAccessory->name);
+        $this->assertEquals($row['quantity'], $newAccessory->qty);
+        $this->assertEquals($row['purchaseDate'], $newAccessory->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newAccessory->purchase_cost);
+        $this->assertEquals($row['orderNumber'], $newAccessory->order_number);
+        $this->assertEquals($row['notes'], $newAccessory->notes);
+        $this->assertEquals($row['category'], $newAccessory->category->name);
+        $this->assertEquals('accessory', $newAccessory->category->category_type);
+        $this->assertEquals($row['manufacturerName'], $newAccessory->manufacturer->name);
+        $this->assertEquals($row['supplierName'], $newAccessory->supplier->name);
+        $this->assertEquals($row['location'], $newAccessory->location->name);
+        $this->assertEquals($row['companyName'], $newAccessory->company->name);
+        $this->assertEquals($row['modelNumber'], $newAccessory->model_number);
         $this->assertFalse($newAccessory->requestable);
         $this->assertNull($newAccessory->min_amt);
         $this->assertNull($newAccessory->user_id);
@@ -111,9 +105,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -122,25 +116,25 @@ class ImportAccessoriesTest extends ImportDataTestCase
     public function willFormatDate(): void
     {
         $importFileBuilder = ImportFileBuilder::new(['purchaseDate' => '2022/10/10']);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $accessory = Accessory::query()
             ->where('name', $importFileBuilder->firstRow()['itemName'])
             ->sole(['purchase_date']);
 
-        $this->assertEquals($accessory->purchase_date->toDateString(), '2022-10-10');
+        $this->assertEquals('2022-10-10', $accessory->purchase_date->toDateString());
     }
 
     #[Test]
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => Str::random()]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -153,11 +147,11 @@ class ImportAccessoriesTest extends ImportDataTestCase
     #[Test]
     public function willNotCreateNewAccessoryWhenAccessoryWithNameExists(): void
     {
-        $accessory = AccessoryFactory::new()->create(['name' => Str::random()]);
+        $accessory = Accessory::factory()->create(['name' => Str::random()]);
         $importFileBuilder = ImportFileBuilder::times(2)->replace(['itemName' => $accessory->name]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewAccessories = Accessory::query()
@@ -165,16 +159,16 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->get(['name']);
 
         $this->assertCount(1, $probablyNewAccessories);
-        $this->assertEquals($probablyNewAccessories->first()->name, $accessory->name);
+        $this->assertEquals($accessory->name, $probablyNewAccessories->first()->name);
     }
 
     #[Test]
     public function willNotCreateNewCompanyWhenCompanyAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -188,9 +182,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     public function willNotCreateNewLocationWhenLocationAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -204,9 +198,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     public function willNotCreateNewManufacturerWhenManufacturerAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['manufacturerName' => $this->faker->company]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -220,9 +214,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     public function willNotCreateNewSupplierWhenSupplierAlreadyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['supplierName' => $this->faker->company]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessories = Accessory::query()
@@ -236,9 +230,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     public function whenColumnsAreMissingInImportFile(): void
     {
         $importFileBuilder = ImportFileBuilder::new()->forget(['minimumAmount', 'purchaseCost', 'purchaseDate']);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newAccessory = Accessory::query()
@@ -254,9 +248,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
     public function whenRequiredColumnsAreMissingInImportFile(): void
     {
         $importFileBuilder = ImportFileBuilder::new()->forget(['itemName', 'quantity', 'category']);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
             ->assertExactJson([
@@ -277,12 +271,12 @@ class ImportAccessoriesTest extends ImportDataTestCase
     #[Test]
     public function updateAccessoryFromImport(): void
     {
-        $accessory = AccessoryFactory::new()->create(['name' => Str::random()])->refresh();
+        $accessory = Accessory::factory()->create(['name' => Str::random()])->refresh();
         $importFileBuilder = ImportFileBuilder::new(['itemName' => $accessory->name]);
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedAccessory = Accessory::query()->find($accessory->id);
@@ -292,30 +286,30 @@ class ImportAccessoriesTest extends ImportDataTestCase
             'location_id', 'model_number', 'updated_at'
         ];
 
-        $this->assertEquals($updatedAccessory->name, $row['itemName']);
+        $this->assertEquals($row['itemName'], $updatedAccessory->name);
         $this->assertEquals($row['companyName'], $updatedAccessory->company->name);
-        $this->assertEquals($updatedAccessory->qty, $row['quantity']);
-        $this->assertEquals($updatedAccessory->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedAccessory->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($updatedAccessory->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedAccessory->notes, $row['notes']);
-        $this->assertEquals($updatedAccessory->category->name, $row['category']);
-        $this->assertEquals($updatedAccessory->category->category_type, 'accessory');
-        $this->assertEquals($updatedAccessory->manufacturer->name, $row['manufacturerName']);
-        $this->assertEquals($updatedAccessory->supplier->name, $row['supplierName']);
-        $this->assertEquals($updatedAccessory->location->name, $row['location']);
-        $this->assertEquals($updatedAccessory->model_number, $row['modelNumber']);
+        $this->assertEquals($row['quantity'], $updatedAccessory->qty);
+        $this->assertEquals($row['purchaseDate'], $updatedAccessory->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedAccessory->purchase_cost);
+        $this->assertEquals($row['orderNumber'], $updatedAccessory->order_number);
+        $this->assertEquals($row['notes'], $updatedAccessory->notes);
+        $this->assertEquals($row['category'], $updatedAccessory->category->name);
+        $this->assertEquals('accessory', $updatedAccessory->category->category_type);
+        $this->assertEquals($row['manufacturerName'], $updatedAccessory->manufacturer->name);
+        $this->assertEquals($row['supplierName'], $updatedAccessory->supplier->name);
+        $this->assertEquals($row['location'], $updatedAccessory->location->name);
+        $this->assertEquals($row['modelNumber'], $updatedAccessory->model_number);
 
         $this->assertEquals(
-            Arr::except($updatedAccessory->attributesToArray(), $updatedAttributes),
             Arr::except($accessory->attributesToArray(), $updatedAttributes),
+            Arr::except($updatedAccessory->attributesToArray(), $updatedAttributes),
         );
     }
 
     #[Test]
     public function whenImportFileContainsEmptyValues(): void
     {
-        $accessory = AccessoryFactory::new()->create(['name' => Str::random()]);
+        $accessory = Accessory::factory()->create(['name' => Str::random()]);
         $accessory->refresh();
 
         $importFileBuilder = ImportFileBuilder::new([
@@ -335,9 +329,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
             'modelNumber'      => ''
         ]);
 
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
             ->assertExactJson([
@@ -355,14 +349,14 @@ class ImportAccessoriesTest extends ImportDataTestCase
 
         $importFileBuilder->replace(['itemName' => $accessory->name]);
 
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedAccessory = clone $accessory;
         $updatedAccessory->refresh();
 
-        $this->assertEquals($updatedAccessory->toArray(), $accessory->toArray());
+        $this->assertEquals($accessory->toArray(), $updatedAccessory->toArray());
     }
 
     #[Test]
@@ -385,9 +379,9 @@ class ImportAccessoriesTest extends ImportDataTestCase
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->accessory()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse([
             'import' => $import->id,
             'column-mappings' => [
@@ -412,15 +406,15 @@ class ImportAccessoriesTest extends ImportDataTestCase
             ->where('name', $row['modelNumber'])
             ->sole();
 
-        $this->assertEquals($newAccessory->name, $row['modelNumber']);
-        $this->assertEquals($newAccessory->model_number, $row['itemName']);
-        $this->assertEquals($newAccessory->qty, $row['quantity']);
-        $this->assertEquals($newAccessory->purchase_date->toDateString(), $row['notes']);
-        $this->assertEquals($newAccessory->purchase_cost, $row['location']);
-        $this->assertEquals($newAccessory->order_number, $row['companyName']);
-        $this->assertEquals($newAccessory->notes, $row['purchaseDate']);
-        $this->assertEquals($newAccessory->category->name, $row['manufacturerName']);
-        $this->assertEquals($newAccessory->manufacturer->name, $row['category']);
-        $this->assertEquals($newAccessory->location->name, $row['purchaseCost']);
+        $this->assertEquals($row['modelNumber'], $newAccessory->name);
+        $this->assertEquals($row['itemName'], $newAccessory->model_number);
+        $this->assertEquals($row['quantity'], $newAccessory->qty);
+        $this->assertEquals($row['notes'], $newAccessory->purchase_date->toDateString());
+        $this->assertEquals($row['location'], $newAccessory->purchase_cost);
+        $this->assertEquals($row['companyName'], $newAccessory->order_number);
+        $this->assertEquals($row['purchaseDate'], $newAccessory->notes);
+        $this->assertEquals($row['manufacturerName'], $newAccessory->category->name);
+        $this->assertEquals($row['category'], $newAccessory->manufacturer->name);
+        $this->assertEquals($row['purchaseCost'], $newAccessory->location->name);
     }
 }

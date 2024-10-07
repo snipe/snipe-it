@@ -4,19 +4,20 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Actionlog as ActionLog;
 use App\Models\Component;
-use Database\Factories\ComponentFactory;
-use Illuminate\Support\Str;
-use Database\Factories\UserFactory;
-use Database\Factories\ImportFactory;
-use PHPUnit\Framework\Attributes\Test;
+use App\Models\Import;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\Concerns\TestsPermissionsRequirement;
+use Tests\Support\Importing\CleansUpImportFiles;
 use Tests\Support\Importing\ComponentsImportFileBuilder as ImportFileBuilder;
 
-class ImportComponentsTest extends ImportDataTestCase
+class ImportComponentsTest extends ImportDataTestCase implements TestsPermissionsRequirement
 {
+    use CleansUpImportFiles;
     use WithFaker;
 
     protected function importFileResponse(array $parameters = []): TestResponse
@@ -29,14 +30,9 @@ class ImportComponentsTest extends ImportDataTestCase
     }
 
     #[Test]
-    #[DataProvider('permissionsTestData')]
-    public function onlyUserWithPermissionCanImportComponents(array|string $permissions): void
+    public function testRequiresPermission()
     {
-        $permissions = collect((array) $permissions)
-            ->map(fn (string $permission) => [$permission => '1'])
-            ->toJson();
-
-        $this->actingAsForApi(UserFactory::new()->create(['permissions' => $permissions]));
+        $this->actingAsForApi(User::factory()->create());
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
@@ -44,9 +40,9 @@ class ImportComponentsTest extends ImportDataTestCase
     #[Test]
     public function userWithImportAssetsPermissionCanImportComponents(): void
     {
-        $this->actingAsForApi(UserFactory::new()->canImport()->create());
+        $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = ImportFactory::new()->component()->create();
+        $import = Import::factory()->component()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -58,9 +54,9 @@ class ImportComponentsTest extends ImportDataTestCase
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])
             ->assertOk()
             ->assertExactJson([
@@ -79,21 +75,21 @@ class ImportComponentsTest extends ImportDataTestCase
             ->where('item_id', $newComponent->id)
             ->sole();
 
-        $this->assertEquals($activityLog->action_type, 'create');
-        $this->assertEquals($activityLog->action_source, 'importer');
-        $this->assertEquals($activityLog->company_id, $newComponent->company->id);
+        $this->assertEquals('create', $activityLog->action_type);
+        $this->assertEquals('importer', $activityLog->action_source);
+        $this->assertEquals($newComponent->company->id, $activityLog->company_id);
 
-        $this->assertEquals($newComponent->name, $row['itemName']);
-        $this->assertEquals($newComponent->company->name, $row['companyName']);
-        $this->assertEquals($newComponent->category->name, $row['category']);
-        $this->assertEquals($newComponent->location->name, $row['location']);
+        $this->assertEquals($row['itemName'], $newComponent->name);
+        $this->assertEquals($row['companyName'], $newComponent->company->name);
+        $this->assertEquals($row['category'], $newComponent->category->name);
+        $this->assertEquals($row['location'], $newComponent->location->name);
         $this->assertNull($newComponent->supplier_id);
-        $this->assertEquals($newComponent->qty, $row['quantity']);
-        $this->assertEquals($newComponent->order_number, $row['orderNumber']);
-        $this->assertEquals($newComponent->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($newComponent->purchase_cost, $row['purchaseCost']);
+        $this->assertEquals($row['quantity'], $newComponent->qty);
+        $this->assertEquals($row['orderNumber'], $newComponent->order_number);
+        $this->assertEquals($row['purchaseDate'], $newComponent->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $newComponent->purchase_cost);
         $this->assertNull($newComponent->min_amt);
-        $this->assertEquals($newComponent->serial, $row['serialNumber']);
+        $this->assertEquals($row['serialNumber'], $newComponent->serial);
         $this->assertNull($newComponent->image);
         $this->assertNull($newComponent->notes);
     }
@@ -106,9 +102,9 @@ class ImportComponentsTest extends ImportDataTestCase
 
         $importFileBuilder = new ImportFileBuilder([$row]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -116,16 +112,16 @@ class ImportComponentsTest extends ImportDataTestCase
     #[Test]
     public function willNotCreateNewComponentWhenComponentWithNameAndSerialNumberExists(): void
     {
-        $component = ComponentFactory::new()->create();
+        $component = Component::factory()->create();
 
         $importFileBuilder = ImportFileBuilder::times(4)->replace([
             'itemName'     => $component->name,
             'serialNumber' => $component->serial
         ]);
 
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $probablyNewComponents = Component::query()
@@ -141,9 +137,9 @@ class ImportComponentsTest extends ImportDataTestCase
     public function willNotCreateNewCompanyWhenCompanyExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['companyName' => Str::random()]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newComponents = Component::query()
@@ -157,9 +153,9 @@ class ImportComponentsTest extends ImportDataTestCase
     public function willNotCreateNewLocationWhenLocationExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['location' => Str::random()]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newComponents = Component::query()
@@ -173,9 +169,9 @@ class ImportComponentsTest extends ImportDataTestCase
     public function willNotCreateNewCategoryWhenCategoryExists(): void
     {
         $importFileBuilder = ImportFileBuilder::times(4)->replace(['category' => $this->faker->company]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id])->assertOk();
 
         $newComponents = Component::query()
@@ -193,9 +189,9 @@ class ImportComponentsTest extends ImportDataTestCase
             ->forget(['quantity']);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse(['import' => $import->id])
             ->assertInternalServerError()
@@ -222,16 +218,16 @@ class ImportComponentsTest extends ImportDataTestCase
     #[Test]
     public function updateComponentFromImport(): void
     {
-        $component = ComponentFactory::new()->create();
+        $component = Component::factory()->create();
         $importFileBuilder = ImportFileBuilder::new([
             'itemName'     => $component->name,
             'serialNumber' => $component->serial
         ]);
 
         $row = $importFileBuilder->firstRow();
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedComponent = Component::query()
@@ -239,18 +235,18 @@ class ImportComponentsTest extends ImportDataTestCase
             ->where('serial', $row['serialNumber'])
             ->sole();
 
-        $this->assertEquals($updatedComponent->name, $row['itemName']);
-        $this->assertEquals($updatedComponent->category->name, $row['category']);
-        $this->assertEquals($updatedComponent->location->name, $row['location']);
-        $this->assertEquals($updatedComponent->supplier_id, $component->supplier_id);
-        $this->assertEquals($updatedComponent->qty, $row['quantity']);
-        $this->assertEquals($updatedComponent->order_number, $row['orderNumber']);
-        $this->assertEquals($updatedComponent->purchase_date->toDateString(), $row['purchaseDate']);
-        $this->assertEquals($updatedComponent->purchase_cost, $row['purchaseCost']);
-        $this->assertEquals($updatedComponent->min_amt, $component->min_amt);
-        $this->assertEquals($updatedComponent->serial, $row['serialNumber']);
-        $this->assertEquals($updatedComponent->image, $component->image);
-        $this->assertEquals($updatedComponent->notes, $component->notes);
+        $this->assertEquals($row['itemName'], $updatedComponent->name);
+        $this->assertEquals($row['category'], $updatedComponent->category->name);
+        $this->assertEquals($row['location'], $updatedComponent->location->name);
+        $this->assertEquals($component->supplier_id, $updatedComponent->supplier_id);
+        $this->assertEquals($row['quantity'], $updatedComponent->qty);
+        $this->assertEquals($row['orderNumber'], $updatedComponent->order_number);
+        $this->assertEquals($row['purchaseDate'], $updatedComponent->purchase_date->toDateString());
+        $this->assertEquals($row['purchaseCost'], $updatedComponent->purchase_cost);
+        $this->assertEquals($component->min_amt, $updatedComponent->min_amt);
+        $this->assertEquals($row['serialNumber'], $updatedComponent->serial);
+        $this->assertEquals($component->image, $updatedComponent->image);
+        $this->assertEquals($component->notes, $updatedComponent->notes);
     }
 
     #[Test]
@@ -270,9 +266,9 @@ class ImportComponentsTest extends ImportDataTestCase
         ];
 
         $importFileBuilder = new ImportFileBuilder([$row]);
-        $import = ImportFactory::new()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
+        $import = Import::factory()->component()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
-        $this->actingAsForApi(UserFactory::new()->superuser()->create());
+        $this->actingAsForApi(User::factory()->superuser()->create());
 
         $this->importFileResponse([
             'import' => $import->id,
@@ -294,14 +290,14 @@ class ImportComponentsTest extends ImportDataTestCase
             ->where('serial', $importFileBuilder->firstRow()['category'])
             ->sole();
 
-        $this->assertEquals($newComponent->name, $row['quantity']);
-        $this->assertEquals($newComponent->category->name, $row['purchaseCost']);
-        $this->assertEquals($newComponent->location->name, $row['serialNumber']);
+        $this->assertEquals($row['quantity'], $newComponent->name);
+        $this->assertEquals($row['purchaseCost'], $newComponent->category->name);
+        $this->assertEquals($row['serialNumber'], $newComponent->location->name);
         $this->assertNull($newComponent->supplier_id);
-        $this->assertEquals($newComponent->qty, $row['companyName']);
-        $this->assertEquals($newComponent->order_number, $row['orderNumber']);
-        $this->assertEquals($newComponent->purchase_date->toDateString(), $row['itemName']);
-        $this->assertEquals($newComponent->purchase_cost, $row['location']);
+        $this->assertEquals($row['companyName'], $newComponent->qty);
+        $this->assertEquals($row['orderNumber'], $newComponent->order_number);
+        $this->assertEquals($row['itemName'], $newComponent->purchase_date->toDateString());
+        $this->assertEquals($row['location'], $newComponent->purchase_cost);
         $this->assertNull($newComponent->min_amt);
         $this->assertNull($newComponent->image);
         $this->assertNull($newComponent->notes);
