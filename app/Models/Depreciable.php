@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Carbon\Carbon;
 
 class Depreciable extends SnipeModel
 {
@@ -42,7 +43,7 @@ class Depreciable extends SnipeModel
             return $this->purchase_cost;
         }
 
-        if ($this->get_depreciation()->months <= 0) {
+        if ($this->get_depreciation()->term_length <= 0) {
             return $this->purchase_cost;
         }
         $depreciation = 0;
@@ -62,19 +63,60 @@ class Depreciable extends SnipeModel
 
         return $depreciation;
     }
+    /**
+     * @return float|int
+     */
+    public function getDailyDepreciationValue() {
+
+        if ($this->purchase_date) {
+            $purchased = new Carbon($this->purchase_date);
+            $now = Carbon::now();
+            $days_gone_by = $purchased->diffInDays($now);
+
+        } else {
+            return null;
+        }
+
+        $depreciation_per_day= $this->purchase_cost/$this->get_depreciation()->term_length;
+
+        if($days_gone_by >= $this->get_depreciation()->term_length) {
+
+            if (!$this->get_depreciation()->depreciation_min == null) {
+                $current_value = $this->get_depreciation()->depreciation_min;
+            }
+
+            else{
+                $current_value = 0;
+            }
+        }
+        else {
+            $current_value = $this->purchase_cost-($depreciation_per_day * $days_gone_by);
+            if($current_value < $this->get_depreciation()->depreciation_min)
+            {
+                $current_value = $this->get_depreciation()->depreciation_min;
+            }
+        }
+        return $current_value;
+}
 
     /**
      * @return float|int
      */
     public function getLinearDepreciatedValue() // TODO - for testing it might be nice to have an optional $relative_to param here, defaulted to 'now'
     {
-        if (($this->get_depreciation()) && ($this->purchase_date)) {
+
+        if ($this->get_depreciation()->term_type == 'days'){
+            return $this->getDailyDepreciationValue();
+        }
+
+        if ($this->purchase_date) {
+
             $months_passed = ($this->purchase_date->diff(now())->m)+($this->purchase_date->diff(now())->y*12);
         } else {
             return null;
         }
 
-        if ($months_passed >= $this->get_depreciation()->months){
+        if ($months_passed >= $this->get_depreciation()->term_length){
             //if there is a floor use it
             if($this->get_depreciation()->depreciation_min) {
 
@@ -86,7 +128,7 @@ class Depreciable extends SnipeModel
         }
         else {
             // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
-            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->months)), 2);
+            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->term_length)), 2);
 
         }
 
@@ -95,7 +137,7 @@ class Depreciable extends SnipeModel
 
     public function getMonthlyDepreciation(){
 
-        return ($this->purchase_cost-$this->calculateDepreciation())/$this->get_depreciation()->months;
+        return ($this->purchase_cost-$this->calculateDepreciation())/$this->get_depreciation()->term_length;
 
     }
 
@@ -111,7 +153,7 @@ class Depreciable extends SnipeModel
         $currentYear = $this->get_fiscal_year($current_date);
         $purchaseYear = $this->get_fiscal_year($purchase_date);
         $yearsPast = $currentYear - $purchaseYear;
-        $deprecationYears = ceil($this->get_depreciation()->months / 12);
+        $deprecationYears = ceil($this->get_depreciation()->term_length / 12);
         if ($onlyHalfFirstYear) {
             $yearsPast -= 0.5;
         } elseif (! $this->is_first_half_of_year($purchase_date)) {
@@ -179,12 +221,20 @@ class Depreciable extends SnipeModel
         if (($this->purchase_date) && ($this->get_depreciation())) {
             $date = date_create($this->purchase_date);
 
-            return date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months.' months'));//date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
+            if ($this->get_depreciation()->term_type == 'days') {
+                date_add($date, date_interval_create_from_date_string($this->get_depreciation()->term_length . 'days'));
+
+                return $date; //date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
+            } else {
+                date_add($date, date_interval_create_from_date_string($this->get_depreciation()->term_length . ' months'));
+
+                return $date; //date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
+            }
         }
-
         return null;
-
     }
+
+
 
     // it's necessary for unit tests
     protected function getDateTime($time = null)
