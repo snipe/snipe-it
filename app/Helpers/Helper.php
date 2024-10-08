@@ -859,12 +859,10 @@ class Helper
                     'assignedTo',
                     [Asset::class, User::class],
                     function (Builder $query, $type) {
-                        $tableName = (new $type)->getTable();
-
                         if ($type === Asset::class) {
                             // If checked out to Asset, we are making an alias for the assigned_asset.
                             // we use the assigned_to to join on the assigned_asset ID
-                            $query->join('assets' . ' as ' . 'assigned_asset', function ($join)  {
+                            $query->join('assets as assigned_asset', function ($join)  {
                                 $join->on('assets.assigned_to', '=', 'assigned_asset.id');
                             })
                             // continue with company_id check for an Asset.
@@ -872,7 +870,7 @@ class Helper
                                 ->whereColumn('assets.id', '!=', 'assigned_asset.id');
                         } else {
                             // For users, we do not need an alias
-                            $query->whereColumn('assets.company_id', '!=', $tableName . '.company_id');
+                            $query->whereColumn('assets.company_id', '!=',   'users.company_id');
                         }
                     }
                 )->get();
