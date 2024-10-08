@@ -862,9 +862,10 @@ class Helper
                         if ($type === Asset::class) {
                             // If checked out to Asset, we are making an alias for the assigned_asset.
                             // we use the assigned_to to join on the assigned_asset ID
-                            $query->join('assets as assigned_asset', function ($join)  {
-                                $join->on('assets.assigned_to', '=', 'assigned_asset.id');
-                            })
+                            $query->select('assets.*')
+                                  ->join('assets as assigned_asset', function ($join)  {
+                                     $join->on('assets.assigned_to', '=', 'assigned_asset.id');
+                                 })
                             // continue with company_id check for an Asset.
                                 ->whereColumn('assets.company_id', '!=', 'assigned_asset.company_id')
                                 ->whereColumn('assets.id', '!=', 'assigned_asset.id');
