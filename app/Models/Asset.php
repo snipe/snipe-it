@@ -506,7 +506,7 @@ class Asset extends Depreciable
      */
     public function assignedTo()
     {
-        return $this->morphTo('assigned', 'assigned_type', 'assigned_to','id')->withTrashed();
+        return $this->morphTo('assigned', 'assigned_type', 'assigned_to','id',)->withTrashed();
     }
 
     /**

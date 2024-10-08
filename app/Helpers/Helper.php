@@ -876,7 +876,6 @@ class Helper
                         }
                     }
                 )->get();
-
             $licenses = LicenseSeat::with('license', 'user')
                 ->join('users', 'license_seats.assigned_to', '=', 'users.id')
                 ->whereHas('license', function ($query) {
