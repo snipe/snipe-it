@@ -43,7 +43,7 @@
     @endif
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form']) }}
+    <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -314,7 +314,10 @@
                                 {{ Form::text('ldap_lname_field', old('ldap_lname_field', $setting->ldap_lname_field), ['class' => 'form-control','placeholder' => trans('general.example') .'sn', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_lname_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning">
+                                        <i class="fas fa-lock" aria-hidden="true"></i>
+                                        {{ trans('general.feature_disabled') }}
+                                    </p>
                                 @endif
                             </div>
                         </div>
