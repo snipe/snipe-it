@@ -17,6 +17,7 @@ use App\Events\ItemAccepted;
 use App\Events\ItemDeclined;
 use App\Events\LicenseCheckedIn;
 use App\Events\LicenseCheckedOut;
+use App\Events\NoteAdded;
 use App\Models\Actionlog;
 use App\Models\User;
 use App\Models\LicenseSeat;
@@ -128,6 +129,23 @@ class LogListener
 
     }
 
+
+    /**
+     * Note is added to action log
+     *
+     */
+    public function onNoteAdded(NoteAdded $event)
+    {
+        $logaction = new Actionlog();
+        $logaction->item_id = $event->itemNoteAddedOn->id;
+        $logaction->item_type = get_class($event->itemNoteAddedOn);
+        $logaction->note = $event->note; //this is the received alphanumeric text from the box
+        $logaction->created_by = $event->noteAddedBy->id;
+        $logaction->action_type = 'note_added';
+        $logaction->save();
+    }
+
+
     /**
      * Register the listeners for the subscriber.
      *
@@ -141,6 +159,7 @@ class LogListener
             'CheckoutAccepted',
             'CheckoutDeclined',
             'UserMerged',
+            'NoteAdded',
         ];
 
         foreach ($list as $event) {
