@@ -43,7 +43,7 @@
     @endif
 
 
-    <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
+    <form method="POST"  action="{{ route('settings.ldap.save') }}" autocomplete="off" class="form-horizontal" role="form" id="create-form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
