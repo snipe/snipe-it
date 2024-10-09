@@ -27,11 +27,12 @@ class StoreLdapSettings extends FormRequest
             'ldap_username_field' => 'not_in:sAMAccountName|required_if:ldap_enabled,1',
             'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
             'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
-            'ldap_server' => 'nullable|required_if:ldap_enabled,1',
+            'ldap_server' => 'nullable|required_if:ldap_enabled,1|starts_with:ldap://,ldaps://',
             'ldap_uname' => 'nullable|required_if:ldap_enabled,1',
             'ldap_pword' => 'nullable|required_if:ldap_enabled,1',
             'ldap_basedn' => 'nullable|required_if:ldap_enabled,1',
             'ldap_fname_field' => 'nullable|required_if:ldap_enabled,1',
+            'custom_forgot_pass_url' => 'nullable|url',
         ];
     }
 
