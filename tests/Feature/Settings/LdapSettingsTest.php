@@ -20,7 +20,7 @@ class LdapSettingsTest extends TestCase
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->post(route('settings.ldap.save', [
                 'ldap_enabled' => 1,
-                'ldap_username_field' => 'samaccountName',
+                'ldap_username_field' => 'samaccountname',
                 'ldap_filter' => 'uid=',
             ]))
             ->assertStatus(302)
@@ -30,14 +30,14 @@ class LdapSettingsTest extends TestCase
         $this->followRedirects($response)->assertSee('alert-success');
     }
 
-    public function testLdapSettingsAreValidate()
+    public function testLdapSettingsAreValidatedCorrectly()
     {
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.ldap.index'))
             ->post(route('settings.ldap.save', [
                 'ldap_enabled' => 1,
                 'ldap_username_field' => 'sAMAccountName',
-                'ldap_filter' => '',
+                'ldap_filter' => 'uid=',
             ]))
             ->assertStatus(302)
             ->assertRedirect(route('settings.ldap.index'))
