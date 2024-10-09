@@ -278,20 +278,6 @@ class SettingsController extends Controller
         return view('settings/index', compact('settings'));
     }
 
-    /**
-     * Return the admin settings page.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     */
-    public function getEdit() : View
-
-    {
-        $setting = Setting::getSettings();
-
-        return view('settings/general', compact('setting'));
-    }
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -875,6 +861,7 @@ class SettingsController extends Controller
      */
     public function postLdapSettings(StoreLdapSettings $request) : RedirectResponse
     {
+        \Log::error('Controller loaded');
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
