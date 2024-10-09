@@ -340,7 +340,11 @@
                             </div>
                             <div class="col-md-8">
                                 <input type="text" name="ldap_fname_field" id="ldap_fname_field" value="{{  old('ldap_fname_field', $setting->ldap_fname_field) }}" class="form-control" placeholder="{{ trans('general.example') .'givenname'  }}" {{ $setting->demoMode }}>
-                                {!! $errors->first('ldap_fname_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @error('ldap_fname_field')
+                                    <span class="alert-msg" aria-hidden="true">
+                                        {{ $message }}
+                                    </span>
+                                @enderror                                
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
@@ -355,7 +359,11 @@
                             <div class="col-md-8">
 
                                 <input type="text" name="ldap_auth_filter_query" id="ldap_auth_filter_query" value="{{  old('ldap_auth_filter_query', $setting->ldap_auth_filter_query) }}" class="form-control" placeholder="{{ trans('general.example') .'uid='  }}" {{ $setting->demoMode }}>
-                                {!! $errors->first('ldap_auth_filter_query', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @error('ldap_auth_filter_query')
+                                    <span class="alert-msg" aria-hidden="true">
+                                        {!! $message !!}
+                                    </span>
+                                @enderror
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
