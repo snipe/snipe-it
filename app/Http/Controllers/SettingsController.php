@@ -846,11 +846,11 @@ class SettingsController extends Controller
      *
      * @since [v4.0]
      */
-    public function getLdapSettings(StoreLdapSettings $request) : View
+    public function getLdapSettings() : View
     {
         $setting = Setting::getSettings();
         $groups = Group::pluck('name', 'id');
-        return view('settings.ldap', compact('setting', 'groups'))->withErrors($setting->getErrors());
+        return view('settings.ldap', compact('setting', 'groups'));
     }
 
     /**
@@ -861,7 +861,6 @@ class SettingsController extends Controller
      */
     public function postLdapSettings(StoreLdapSettings $request) : RedirectResponse
     {
-        \Log::error('Controller loaded');
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
