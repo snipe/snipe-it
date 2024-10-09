@@ -868,6 +868,7 @@
                 $("#ldap_server").prop('required',false);
                 $("#ldap_auth_filter_query").prop('required',false);
                 $("#ldap_filter").prop('required',false);
+                $("#ldap_username_field").prop('required',false);
                 $("#ldap_uname").prop('required',false);
                 $("#ldap_pword").prop('required',false);
                 $("#ldap_basedn").prop('required',false);
@@ -881,13 +882,14 @@
                     $("#ldap_auth_filter_query").prop('required',true);
                     $("#ldap_filter").prop('required',true);
                     $("#ldap_uname").prop('required',true);
+                    $("#ldap_username_field").prop('required',true);
                     $("#ldap_pword").prop('required',true);
                     $("#ldap_basedn").prop('required',true);
                 } else {
                     $("#ldap_server").prop('required',false);
                     $("#ldap_auth_filter_query").prop('required',false);
                     $("#ldap_filter").prop('required',false);
-                    $("#ldap_uname").prop('required',false);
+                    $("#ldap_username_field").prop('required',false);
                     $("#ldap_pword").prop('required',false);
                     $("#ldap_basedn").prop('required',false);
                     $("#ldap_fname_field").prop('required',false);
