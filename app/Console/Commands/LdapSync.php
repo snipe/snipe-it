@@ -320,22 +320,29 @@ class LdapSync extends Command
                                 ]
                             ];
                         }
-
+                        
+                        $add_manager_to_cache = true;
                         if ($ldap_manager["count"] > 0) {
+                            try {
+                                // Get the Manager's username
+                                // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
+                                $ldapManagerUsername = $ldap_manager[0][$ldap_map["username"]][0];
 
-                            // Get the Manager's username
-                            // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
-                            $ldapManagerUsername = $ldap_manager[0][$ldap_map["username"]][0];
+                                // Get User from Manager username.
+                                $ldap_manager = User::where('username', $ldapManagerUsername)->first();
 
-                            // Get User from Manager username.
-                            $ldap_manager = User::where('username', $ldapManagerUsername)->first();
-
-                            if ($ldap_manager && isset($ldap_manager->id)) {
-                                // Link user to manager id.
-                                $user->manager_id = $ldap_manager->id;
+                                if ($ldap_manager && isset($ldap_manager->id)) {
+                                    // Link user to manager id.
+                                    $user->manager_id = $ldap_manager->id;
+                                }
+                            } catch (\Exception $e) {
+                                $add_manager_to_cache = false;
+                                \Log::warning('Handling ldap manager ' . $item['manager'] . ' caused an exception: ' . $e->getMessage() . '. Continuing synchronization.');
                             }
                         }
-                        $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+                        if ($add_manager_to_cache) {
+                            $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+                        }
 
                     }
                 }
