@@ -34,6 +34,8 @@
            'required' => true,
            'asset_status_type' => 'RTD',
            'select_id' => 'assigned_assets_select',
+           'asset_selector_div_id' => 'assets_to_checkout_div',
+           'asset_ids' => old('selected_assets')
          ])
 
 
@@ -42,7 +44,7 @@
           @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
           @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user'])
-          @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;'])
+            @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'asset_selector_div_id' => 'assigned_asset', 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;'])
           @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;'])
 
           <!-- Checkout/Checkin Date -->
