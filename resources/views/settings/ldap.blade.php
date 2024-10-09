@@ -342,7 +342,8 @@
                                 {{ Form::label('ldap_auth_filter_query', trans('admin/settings/general.ldap_auth_filter_query')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_auth_filter_query', old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), ['class' => 'form-control','placeholder' => trans('general.example') .'uid=', $setting->demoMode]) }}
+
+                                <input type="text" name="ldap_auth_filter_query" id="ldap_auth_filter_query" value="{{  old('ldap_auth_filter_query', $setting->ldap_auth_filter_query) }}" class="form-control" placeholder="{{ trans('general.example') .'uid='  }}" {{ $setting->demoMode }}>
                                 {!! $errors->first('ldap_auth_filter_query', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
