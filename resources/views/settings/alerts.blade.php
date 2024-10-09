@@ -21,7 +21,7 @@
     </style>
 
 
-    <form method="POST" action="{{ route('settings.alerts') }}" autocomplete="off" class="form-horizontal" role="form" id="create-form">
+    <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
 
     <!-- CSRF Token -->
    {{ csrf_field() }}
@@ -121,7 +121,7 @@
                                 {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -136,7 +136,7 @@
                                 {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -151,7 +151,7 @@
                                 {{ Form::label('due_checkin_days', trans('admin/settings/general.due_checkin_days')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('due_checkin_days', old('due_checkin_days', $setting->due_checkin_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('due_checkin_days', old('due_checkin_days', $setting->due_checkin_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
