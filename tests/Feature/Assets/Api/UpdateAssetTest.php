@@ -491,8 +491,8 @@ class UpdateAssetTest extends TestCase
 
         $response = $this->actingAsForApi($user)
             ->patchJson(route('api.assets.update', $asset->id), [
-                //'assigned_to'   => $assigned_user->id,
-                'assigned_type' => User::class //deliberately bad assigned_type
+                //'assigned_to'   => $assigned_user->id, // deliberately omit assigned_to
+                'assigned_type' => User::class
             ])
             ->assertOk()
             ->assertStatusMessageIs('error');
