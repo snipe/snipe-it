@@ -23,6 +23,7 @@ return [
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
         'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
+        'no_note'           => 'Note field is empty',
     ],
 
     'restore' => [
@@ -77,6 +78,7 @@ return [
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'not_available' => 'That asset is not available for checkout!',
         'no_assets_selected' => 'You must select at least one asset from the list',
+
     ],
 
     'checkin' => [
