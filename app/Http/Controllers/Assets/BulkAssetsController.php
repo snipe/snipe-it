@@ -52,6 +52,10 @@ class BulkAssetsController extends Controller
         }
 
         $asset_ids = $request->input('ids');
+        if ($request->input('bulk_actions') === 'checkout') {
+            $request->session()->flashInput(['selected_assets' => $asset_ids]);
+            return redirect()->route('hardware.bulkcheckout.show');
+        }
 
         // Figure out where we need to send the user after the update is complete, and store that in the session
         $bulk_back_url = request()->headers->get('referer');
@@ -580,8 +584,9 @@ class BulkAssetsController extends Controller
 
                     if ($target->location_id != '') {
                         $asset->location_id = $target->location_id;
-                        $asset->unsetEventDispatcher();
-                        $asset->save();
+                        $asset::withoutEvents(function () use ($asset) { // TODO - I don't know why this is being saved without events
+                            $asset->save();
+                        });
                     }
 
                     if ($error) {
@@ -592,10 +597,10 @@ class BulkAssetsController extends Controller
 
             if (! $errors) {
                 // Redirect to the new asset page
-                return redirect()->to('hardware')->with('success', trans('admin/hardware/message.checkout.success'));
+                return redirect()->to('hardware')->with('success', trans_choice('admin/hardware/message.multi-checkout.success', $asset_ids));
             }
             // Redirect to the asset management page with error
-            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $asset_ids))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
         }

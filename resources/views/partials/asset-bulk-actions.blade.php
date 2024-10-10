@@ -16,17 +16,20 @@
     </label>
     <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="min-width: 350px;">
         @if((isset($status)) && ($status == 'Deleted'))
-        @can('delete', \App\Models\Asset::class)
-            <option value="restore">{{trans('button.restore')}}</option> 
-        @endcan
+            @can('delete', \App\Models\Asset::class)
+                <option value="restore">{{trans('button.restore')}}</option>
+            @endcan
         @else
-        @can('update', \App\Models\Asset::class)
-            <option value="edit">{{ trans('button.edit') }}</option>
-        @endcan
-        @can('delete', \App\Models\Asset::class)
-            <option value="delete">{{ trans('button.delete') }}</option>
-        @endcan
-        <option value="labels" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=l" : ''}}>{{ trans_choice('button.generate_labels', 2) }}</option>
+            @can('update', \App\Models\Asset::class)
+                <option value="edit">{{ trans('button.edit') }}</option>
+            @endcan
+            @can('checkout', \App\Models\Asset::class)
+                <option value="checkout">{{ trans('general.bulk_checkout') }}</option>
+            @endcan
+            @can('delete', \App\Models\Asset::class)
+                <option value="delete">{{ trans('button.delete') }}</option>
+            @endcan
+            <option value="labels" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=l" : ''}}>{{ trans_choice('button.generate_labels', 2) }}</option>
         @endif
     </select>
 
