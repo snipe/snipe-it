@@ -373,8 +373,11 @@
         </table>
     @endif
 
+    @php
+        if (!empty($eulas)) $eulas = array_unique($eulas);
+    @endphp
     {{-- This may have been render at the top of the page if we're rendering more than one user... --}}
-    @if (count($users) === 1)
+    @if (count($users) === 1 && !empty($eulas))
         <p></p>
         <div class="pull-right">
             <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target=".eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
@@ -384,19 +387,16 @@
     @endif
 
     <table style="margin-top: 80px;">
+        @if (!empty($eulas))
         <tr class="collapse eula-row">
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
             <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
-                @php
-                    if (!empty($eulas)) $eulas = array_unique($eulas);
-                @endphp
-                @if (!empty($eulas))
-                    @foreach ($eulas as $key => $eula)
-                        {!! $eula !!}
-                    @endforeach
-                @endif
+                @foreach ($eulas as $key => $eula)
+                    {!! $eula !!}
+                @endforeach
             </td>
         </tr>
+        @endif
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('general.signed_off_by') }}:</td>
             <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>
