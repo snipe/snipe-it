@@ -514,8 +514,8 @@ Route::group(['middleware' => 'web'], function () {
      // Socialite Google login
     Route::get('google', 'App\Http\Controllers\GoogleAuthController@redirectToGoogle')->name('google.redirect');
     Route::get('google/callback', 'App\Http\Controllers\GoogleAuthController@handleGoogleCallback')->name('google.callback');
-
-
+    Route::get('login/azure', [LoginController::class, 'redirectToAzure'])->name('login.azure');
+    Route::post('login/azure/callback', [LoginController::class, 'handleAzureCallback']);
     Route::get(
         '/',
         [
