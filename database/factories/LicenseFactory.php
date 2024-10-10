@@ -4,6 +4,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\License;
 use App\Models\Manufacturer;
+use App\Models\Order;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,7 +33,7 @@ class LicenseFactory extends Factory
             'notes'   => 'Created by DB seeder',
             'seats' => $this->faker->numberBetween(1, 10),
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
-            'order_number' => $this->faker->numberBetween(1000000, 50000000),
+            'order_id' => Order::factory(),
             'expiration_date' => $this->faker->dateTimeBetween('now', '+3 years', date_default_timezone_get())->format('Y-m-d H:i:s'),
             'reassignable' => $this->faker->boolean(),
             'termination_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d H:i:s'),

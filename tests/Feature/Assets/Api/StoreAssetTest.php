@@ -45,7 +45,7 @@ class StoreAssetTest extends TestCase
                 'model_id' => $model->id,
                 'name' => 'A New Asset',
                 'notes' => 'Some notes',
-                'order_number' => '5678',
+                'order_number' => '5678', //yes, this *is* order_number
                 'purchase_cost' => '123.45',
                 'purchase_date' => '2023-09-02',
                 'requestable' => true,
@@ -72,7 +72,7 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->model->is($model));
         $this->assertEquals('A New Asset', $asset->name);
         $this->assertEquals('Some notes', $asset->notes);
-        $this->assertEquals('5678', $asset->order_number);
+        $this->assertEquals('5678', $asset->order->order_number);
         $this->assertEquals('123.45', $asset->purchase_cost);
         $this->assertTrue($asset->purchase_date->is('2023-09-02'));
         $this->assertEquals('1', $asset->requestable);

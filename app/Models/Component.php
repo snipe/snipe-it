@@ -64,7 +64,8 @@ class Component extends SnipeModel
         'purchase_cost',
         'purchase_date',
         'min_amt',
-        'order_number',
+//        'order_number',
+        'order_id',
         'qty',
         'serial',
         'notes',
@@ -77,7 +78,7 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
+    protected $searchableAttributes = ['name', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -89,6 +90,7 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'supplier'     => ['name'],
+        'order' => ['order_number']
     ];
 
 
@@ -181,6 +183,11 @@ class Component extends SnipeModel
     public function supplier()
     {
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 
     /**
