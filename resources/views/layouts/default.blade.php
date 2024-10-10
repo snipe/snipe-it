@@ -268,19 +268,24 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('admin')
                                 @if ($snipeSettings->show_alerts_in_menu=='1')
                                     <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); ?>
+                                    <?php $alert_items = Helper::checkLowInventory(); $company_items = Helper::checkUserCompanyAssets();?>
 
                                     <li class="dropdown tasks-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <x-icon type="alerts" />
                                             <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                            @if (count($alert_items))
-                                                <span class="label label-danger">{{ count($alert_items) }}</span>
+                                            @if (count($alert_items) || count($company_items))
+                                                <span class="label label-danger">{{ count($alert_items) + count($company_items) }}</span>
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
-                                            <li>
+                                            @if(!empty($alert_items))
+                                                <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
+                                            @endif
+                                            @if(empty($alert_items) && empty($company_items))
+                                                <li class="header">{{ trans('general.notifications_clear') }}</li>
+                                            @endif
+                                                <li>
                                                 <!-- inner menu: contains the actual data -->
                                                 <ul class="menu">
 
@@ -311,6 +316,32 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                             {{-- <li class="footer">
                                               <a href="#">{{ trans('general.tasks_view_all') }}</a>
                                             </li> --}}
+                                            @if(!empty($company_items))
+                                            <li class="header">{{ trans('general.company_check', array('count' => count($company_items))) }}</li>
+                                            @endif
+                                            <li>
+                                                <!-- inner menu: contains the actual data -->
+                                                <ul class="menu">
+
+                                                    @for($i = 0; count($company_items) > $i; $i++)
+
+                                                        <li><!-- Task item -->
+                                                            <a href="{{route($company_items[$i]['type'].'.show', $company_items[$i]['id'])}}">
+                                                               <div style="white-space: nowrap; overflow: hidden;"> <h2 class="task_menu">{{$company_items[$i]['company'].": ".$company_items[$i]['name']}}
+                                                                    <div style="clear:both;">
+                                                                    <small>{{trans('general.assigned_to', array('name' => $company_items[$i]['user'])) }}</small>
+                                                                    </div>
+                                                                    <div style="clear:both;">
+                                                                        <small  class="pull-left">({{$company_items[$i]['user_company']}}) </small>
+                                                                    </div>
+                                                                </h2>
+                                                               </div>
+                                                            </a>
+                                                        </li>
+                                                        <!-- end task item -->
+                                                    @endfor
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endcan
