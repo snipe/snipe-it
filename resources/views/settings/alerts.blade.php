@@ -21,9 +21,10 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.alerts.save') }}" autocomplete="off" class="form-horizontal" role="form" id="create-form">
+
     <!-- CSRF Token -->
-    {{csrf_field()}}
+   {{ csrf_field() }}
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -68,11 +69,9 @@
                                 {{ Form::label('alert_email', trans('admin/settings/general.alert_email')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('alert_email', old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                <input type="text" name="alert_email" value="{{ old('alert_email', $setting->alert_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
                                 {!! $errors->first('alert_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
-
                                 <p class="help-block">{{ trans('admin/settings/general.alert_email_help') }}</p>
-
 
                             </div>
                         </div>
@@ -84,7 +83,7 @@
                                 {{ Form::label('admin_cc_email', trans('admin/settings/general.admin_cc_email')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('admin_cc_email', old('admin_cc_email', $setting->admin_cc_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                <input type="text" name="admin_cc_email" value="{{ old('admin_cc_email', $setting->admin_cc_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
                                 {!! $errors->first('admin_cc_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
                                 <p class="help-block">{{ trans('admin/settings/general.admin_cc_email_help') }}</p>
@@ -122,7 +121,7 @@
                                 {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -137,7 +136,7 @@
                                 {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -152,12 +151,8 @@
                                 {{ Form::label('due_checkin_days', trans('admin/settings/general.due_checkin_days')) }}
                             </div>
                             <div class="input-group col-md-2">
-                                {{ Form::text('due_checkin_days', old('due_checkin_days', $setting->due_checkin_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('due_checkin_days', old('due_checkin_days', $setting->due_checkin_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
-
-
-
-
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 {!! $errors->first('due_checkin_days', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
