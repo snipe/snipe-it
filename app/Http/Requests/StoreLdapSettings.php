@@ -22,7 +22,6 @@ class StoreLdapSettings extends FormRequest
      */
     public function rules(): array
     {
-        \Log::error('boop');
         return [
             'ldap_username_field' => 'not_in:sAMAccountName|required_if:ldap_enabled,1',
             'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
