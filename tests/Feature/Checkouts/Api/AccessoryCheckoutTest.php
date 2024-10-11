@@ -7,11 +7,12 @@ use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class AccessoryCheckoutTest extends TestCase
+class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirement
 {
-    public function testCheckingOutAccessoryRequiresCorrectPermission()
+    public function testRequiresPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()))
