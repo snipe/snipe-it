@@ -598,7 +598,6 @@ class AssetsController extends Controller
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
         $asset->fill($request->validated());
-        $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
         $asset->created_by    = auth()->id();
 
         /**
