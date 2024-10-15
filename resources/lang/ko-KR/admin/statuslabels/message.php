@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => '상태 꼬리표가 존재하지 않습니다.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => '삭제된 상태 꼬리표',
     'assoc_assets'	 => '이 상태 꼬리표는 하나 이상의 자산과 연결되어 있어서 삭제할 수 없습니다. 이 상태를 참조하지 않게 자산을 수정하고 다시 시도해 주세요. ',
 
     'create' => [

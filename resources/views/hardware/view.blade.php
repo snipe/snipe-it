@@ -27,7 +27,7 @@
                         [
                             'warning' => trans('admin/hardware/message.warning_audit_date_mismatch',
                                     [
-                                        'last_audit_date' => Helper::getFormattedDateObject($asset->last_audit_date, 'date', false),
+                                        'last_audit_date' => Helper::getFormattedDateObject($asset->last_audit_date, 'datetime', false),
                                         'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date', false)
                                     ]
                                     )
@@ -156,10 +156,11 @@
                                 <div class="col-md-12">
                                     <div class="callout callout-warning">
                                         <x-icon type="warning" />
-                                        {{ trans('admin/users/message.user_deleted_warning') }}
+                                        {{ trans('general.asset_deleted_warning') }}
                                     </div>
                                 </div>
                             @endif
+
                         <div class="info-stack-container">
                             <!-- Start button column -->
                             <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
@@ -254,11 +255,16 @@
 
                                 @can('delete', $asset)
                                     <div class="col-md-12 hidden-print" style="padding-top: 30px; padding-bottom: 30px;">
+
                                         @if ($asset->deleted_at=='')
                                             <button class="btn btn-sm btn-block btn-danger btn-social delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">
 
                                                 <x-icon type="delete" />
-                                                {{ trans('general.delete') }}
+                                                @if ($asset->assignedTo)
+                                                    {{ trans('general.checkin_and_delete') }}
+                                                @else
+                                                    {{ trans('general.delete') }}
+                                                @endif
                                             </button>
                                             <span class="sr-only">{{ trans('general.delete') }}</span>
                                         @else
@@ -492,7 +498,7 @@
                                             </div>
                                             <div class="col-md-9">
                                                 {!! $asset->checkInvalidNextAuditDate() ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
-                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }}
+                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'datetime', false) }}
                                                 @if ($audit_log->user)
                                                     (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
                                                 @endif
@@ -654,6 +660,16 @@
                                         </div>
                                         <div class="col-md-9">
                                             {!! ($asset->byod=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                                        </div>
+                                    </div>
+
+                                    <!-- requestable -->
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <strong>{{ trans('admin/hardware/general.requestable') }}</strong>
+                                        </div>
+                                        <div class="col-md-9">
+                                            {!! ($asset->requestable=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                                         </div>
                                     </div>
 

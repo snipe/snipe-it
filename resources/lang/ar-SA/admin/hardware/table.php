@@ -25,7 +25,6 @@ return [
     'image'		    => 'صورة الجهاز',
     'days_without_acceptance' => 'أيام بدون قبول',
     'monthly_depreciation' => 'الإهلاك الشهري',
-    'assigned_to'    => 'تعيين إلى',
     'requesting_user' => 'طلب المستخدم',
     'requested_date' => 'تاريخ الطلب',
     'changed'       => 'تغيرت',

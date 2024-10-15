@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Update alleen standaard locatie',
     'asset_location_update_actual' => 'Alleen actuele locatie bijwerken',
     'asset_not_deployable' => 'Deze Asset status is niet uitgeefbaar. Dit Asset kan niet uitgegeven worden.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Deze status is uitgeefbaar. Dit Asset kan uitgegeven worden.',
     'processing_spinner' => 'Verwerken... (Dit kan enige tijd duren bij grote bestanden)',
     'optional_infos'  => 'Optionele informatie',

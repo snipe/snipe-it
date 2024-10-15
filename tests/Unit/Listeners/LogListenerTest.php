@@ -16,7 +16,7 @@ class LogListenerTest extends TestCase
         $checkedOutTo = User::factory()->create();
         $checkedOutBy = User::factory()->create();
 
-        // Simply to ensure `user_id` is set in the action log
+        // Simply to ensure `created_by` is set in the action log
         $this->actingAs($checkedOutBy);
 
         (new LogListener())->onCheckoutableCheckedOut(new CheckoutableCheckedOut(
@@ -28,7 +28,7 @@ class LogListenerTest extends TestCase
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkout',
-            'user_id' => $checkedOutBy->id,
+            'created_by' => $checkedOutBy->id,
             'target_id' => $checkedOutTo->id,
             'target_type' => User::class,
             'item_id' => $asset->id,

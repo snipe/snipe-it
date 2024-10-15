@@ -48,6 +48,8 @@ class AssetModelsController extends Controller
                 'assets_count',
                 'category',
                 'fieldset',
+                'deleted_at',
+                'updated_at',
             ];
 
         $assetmodels = AssetModel::select([
@@ -67,7 +69,7 @@ class AssetModelsController extends Controller
             'models.deleted_at',
             'models.updated_at',
          ])
-            ->with('category', 'depreciation', 'manufacturer', 'fieldset.fields.defaultValues')
+            ->with('category', 'depreciation', 'manufacturer', 'fieldset.fields.defaultValues','adminuser')
             ->withCount('assets as assets_count');
 
         if ($request->input('status')=='deleted') {

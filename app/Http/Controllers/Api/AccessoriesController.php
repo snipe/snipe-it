@@ -56,8 +56,9 @@ class AccessoriesController extends Controller
             ];
 
 
-        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'checkouts', 'location', 'supplier')
-                                ->withCount('checkouts as checkouts_count');
+        $accessories = Accessory::select('accessories.*')
+            ->with('category', 'company', 'manufacturer', 'checkouts', 'location', 'supplier', 'adminuser')
+            ->withCount('checkouts as checkouts_count');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -110,7 +111,10 @@ class AccessoriesController extends Controller
                 break;    
             case 'supplier':
                 $accessories = $accessories->OrderSupplier($order);
-                break;       
+                break;
+            case 'created_by':
+                $accessories = $accessories->OrderByCreatedByName($order);
+                break;
             default:
                 $accessories = $accessories->orderBy($column_sort, $order);
                 break;
@@ -133,7 +137,6 @@ class AccessoriesController extends Controller
      */
     public function store(StoreAccessoryRequest $request)
     {
-        $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
         $accessory->fill($request->all());
         $accessory = $request->handleImages($accessory);
@@ -193,9 +196,6 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
-        if (! Company::isCurrentUserHasAccess($accessory)) {
-            return ['total' => 0, 'rows' => []];
-        }
 
         $offset = request('offset', 0);
         $limit = request('limit', 50);
@@ -287,7 +287,7 @@ class AccessoriesController extends Controller
             AccessoryCheckout::create([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'user_id' => Auth::id(),
+                'created_by' => auth()->id(),
                 'assigned_to' => $target->id,
                 'assigned_type' => $target::class,
                 'note' => $request->input('note'),
@@ -321,21 +321,13 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_checkout->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessory_checkout->assigned_to), $request->input('note'));
+        $accessory->logCheckin(User::find($accessory_checkout->assigned_to), $request->input('note'));
 
         // Was the accessory updated?
         if ($accessory_checkout->delete()) {
             if (! is_null($accessory_checkout->assigned_to)) {
                 $user = User::find($accessory_checkout->assigned_to);
             }
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = $user->first_name;
-            $data['last_name'] = $user->last_name;
-            $data['item_name'] = $accessory->name;
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = '';
-            $data['note'] = $logaction->note;
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
         }

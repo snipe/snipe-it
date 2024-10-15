@@ -42,13 +42,14 @@ class UsersController extends Controller
 
         $users = User::select([
             'users.activated',
-            'users.created_by',
             'users.address',
             'users.avatar',
             'users.city',
             'users.company_id',
             'users.country',
+            'users.created_by',
             'users.created_at',
+            'users.updated_at',
             'users.deleted_at',
             'users.department_id',
             'users.email',
@@ -67,7 +68,6 @@ class UsersController extends Controller
             'users.state',
             'users.two_factor_enrolled',
             'users.two_factor_optin',
-            'users.updated_at',
             'users.username',
             'users.zip',
             'users.remote',
@@ -255,6 +255,7 @@ class UsersController extends Controller
                         'groups',
                         'activated',
                         'created_at',
+                        'updated_at',
                         'two_factor_enrolled',
                         'two_factor_optin',
                         'last_login',
@@ -691,7 +692,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('2FA reset');
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
@@ -741,7 +742,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);

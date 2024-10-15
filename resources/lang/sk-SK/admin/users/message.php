@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nepodarilo sa vyhladať v rámci LDAP serveru. Prosím skontrolujte nastavenia LDAP serveru v Admin nastavenia > LDAP/AD a všetky lokality ktoré môžu mať nastavené OU. <br>Chyba LDAP serveru:',
         'ldap_could_not_get_entries' => 'Nepodarilo sa získať záznamy z LDAP servera. Prosím skontrolujte nastavenia LDAP serveru v Admin nastavenia > LDAP/AD a všetky lokality ktoré môžu mať nastavené OU. <br>Chyba LDAP serveru:',
         'password_ldap' => 'Heslo pre tento účet je spravované cez LDAP/Active Directory. Pre zmneu hesla prosím kontaktujte Vaše IT oddelenie. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

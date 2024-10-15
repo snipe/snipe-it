@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Ma baadhi karin server-ka LDAP Fadlan ka hubi server-kaaga LDAP ee ku jira faylka habaynta LDAP. <br>Khalad ka yimid Server LDAP:',
         'ldap_could_not_get_entries' => 'Waa lagu xidhi kari waayay serfarka LDAP Fadlan ka hubi server-kaaga LDAP ee ku jira faylka habaynta LDAP. Khalad ka yimid Server LDAP:',
         'password_ldap' => 'Furaha koontada waxaa maamula LDAP/Hagaha Firfircoon. Fadlan la xidhiidh waaxda IT-ga si aad u bedesho eraygaaga sirta ah. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

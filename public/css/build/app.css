@@ -312,7 +312,8 @@ a.accordion-header {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
+input:required,
+select:required {
   border-right: 6px solid orange;
 }
 .sidebar-menu {
@@ -686,8 +687,13 @@ a.link-danger:hover {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
-.required {
-  border-right: 6px solid orange;
+input:required,
+select:required {
+  border-right: 5px solid orange;
+}
+select:required + .select2-container .select2-selection,
+select:required + .select2-container .select2-selection .select2-selection--multiple {
+  border-right: 5px solid orange !important;
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -936,20 +942,21 @@ h4 {
   background-color: #f9f9f9;
   border-top: 1px solid #dddddd;
   display: table-cell;
+  word-wrap: break-word;
 }
 .row-striped .row:nth-of-type(even) div {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
   display: table-cell;
+  word-wrap: break-word;
 }
 .row-new-striped {
   vertical-align: top;
-  line-height: 2.6;
-  padding: 0px;
-  margin-left: 20px;
+  padding: 3px;
   display: table;
   width: 100%;
-  padding-right: 20px;
+  word-wrap: break-word;
+  table-layout: fixed;
 }
 /**
 *  NEW STRIPING
@@ -959,20 +966,25 @@ h4 {
 .row-new-striped > .row:nth-of-type(even) {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
+  line-height: 1.9;
   display: table-row;
 }
 .row-new-striped > .row:nth-of-type(odd) {
   background-color: #F8F8F8;
   border-top: 1px solid #dddddd;
   display: table-row;
+  line-height: 1.9;
+  padding: 2px;
 }
 .row-new-striped div {
   display: table-cell;
   border-top: 1px solid #dddddd;
+  padding: 6px;
 }
 .row-new-striped div {
   display: table-cell;
   border-top: 1px solid #dddddd;
+  padding: 6px;
 }
 .row-new-striped div[class^="col"]:first-child {
   font-weight: bold;

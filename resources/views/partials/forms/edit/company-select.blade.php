@@ -20,7 +20,7 @@
     <!-- full company support is enabled or this user is a superadmin -->
     <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
-        <div class="col-md-7">
+        <div class="col-md-8">
             <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select"{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
                 @isset ($selected)
                     @foreach ($selected as $company_id)

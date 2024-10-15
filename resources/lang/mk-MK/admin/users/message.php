@@ -6,17 +6,17 @@ return array(
     'declined'                  => 'Го одбивте основното средство.',
     'bulk_manager_warn'	        => 'Вашите корисници се ажурирани, но записот за менаџерот не е зачуван, бидејќи менаџерот што го избравте беше во листата на корисници што се ажурираа. Корисниците не може да бидат свој сопствен менаџер. Изберете ги корисниците повторно, со исклучок на менаџерот и пробајте пак.',
     'user_exists'               => 'Корисникот веќе постои!',
-    'user_not_found'            => 'User does not exist or you do not have permission view them.',
+    'user_not_found'            => 'Корисникот не постои или немате дозвола да го видите.',
     'user_login_required'       => 'Полето за корисничко име е задолжително',
-    'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
+    'user_has_no_assets_assigned' => 'Моментално нема средства доделени на корисникот.',
     'user_password_required'    => 'Потребна е лозинка.',
     'insufficient_permissions'  => 'Недоволни дозволи.',
     'user_deleted_warning'      => 'Овој корисник е избришан. Ќе мора да го вратите за да го ажурирате или да му доделите нови основни средства.',
     'ldap_not_configured'        => 'Интеграција со LDAP не е конфигурирана.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'log_record_not_found'        => 'A matching log record for this user could not be found.',
+    'password_resets_sent'      => 'На избраниот корисник кој е активиран и има валидна адреса на е-пошта испратен е линк за обнова на лозинката.',
+    'password_reset_sent'       => 'Линк за обнова на лозинка е испратен на :email!',
+    'user_has_no_email'         => 'Корисникот нема адреса на е-пошта во неговиот профил.',
+    'log_record_not_found'        => 'Не можеше да се најде соодветен запис од дневникот за овој корисник.',
 
 
     'success' => array(
@@ -37,23 +37,23 @@ return array(
         'update' => 'Имаше проблем со ажурирање на корисникот. Обидете се повторно.',
         'delete' => 'Имаше проблем со бришење на корисникот. Обидете се повторно.',
         'delete_has_assets' => 'Корисникот има задолжени ставки и не може да биде избришан.',
-        'delete_has_assets_var' => 'This user still has an asset assigned. Please check it in first.|This user still has :count assets assigned. Please check their assets in first.',
-        'delete_has_licenses_var' => 'This user still has a license seats assigned. Please check it in first.|This user still has :count license seats assigned. Please check them in first.',
-        'delete_has_accessories_var' => 'This user still has an accessory assigned. Please check it in first.|This user still has :count accessories assigned. Please check their assets in first.',
-        'delete_has_locations_var' => 'This user still manages a location. Please select another manager first.|This user still manages :count locations. Please select another manager first.',
-        'delete_has_users_var' => 'This user still manages another user. Please select another manager for that user first.|This user still manages :count users. Please select another manager for them first.',
+        'delete_has_assets_var' => 'Овој корисник сè уште има доделено додатоци. Ве молиме прво проверете.|Овој корисник има :count додатоци. Ве молиме прво проверете.',
+        'delete_has_licenses_var' => 'Овој корисник сè уште има доделено лиценци. Ве молиме прво проверете.|Овој корисник има :count лиценци. Ве молиме прво проверете.',
+        'delete_has_accessories_var' => 'Овој корисник сè уште има доделено додатоци. Ве молиме прво проверете.|Овој корисник има :count доделени додатоци. Ве молиме прво проверете.',
+        'delete_has_locations_var' => 'Овој корисник сè уште управува со локацијата. Ве молиме прво изберете друг менаџер.|Овој корисник управува со :count локации. Ве молиме прво изберете друг менаџер.',
+        'delete_has_users_var' => 'Овој корисник сè уште управува со друг корисник. Ве молиме прво изберете друг менаџер за тој корисник.|Овој корисник управува со :count корисници. Ве молиме прво за него изберете друг менаџер.',
         'unsuspend' => 'Имаше проблем со отстранување на привременото блокирање. Обидете се повторно.',
         'import'    => 'Имаше проблем со увозот на корисници. Обидете се повторно.',
         'asset_already_accepted' => 'Ова основно средство веќе е прифатено.',
         'accept_or_decline' => 'Мора да го прифатите или одбиете основното средство.',
-        'cannot_delete_yourself' => 'We would feel really bad if you deleted yourself, please reconsider.',
+        'cannot_delete_yourself' => 'Ќе се чувствуваме навистина лошо ако се избришите самиот себе, ве молиме размислете.',
         'incorrect_user_accepted' => 'Средството што се обидовте да го прифатите не е задожено на Вас.',
         'ldap_could_not_connect' => 'Не можам да се поврзам со LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'ldap_could_not_bind' => 'Не можам да се поврзам со LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот: ',
         'ldap_could_not_search' => 'Не можам да го пребарам LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'ldap_could_not_get_entries' => 'Не можам да добијам записи од LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'password_ldap' => 'Лозинката за корисникот е управувана од LDAP/Active Directory. Ве молиме контактирајте го одделот за ИТ за да ја смените вашата лозинка. ',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'Овој корисник има доделени ставки кои припаѓаат на друга компанија. Ве молиме проверете ги или уредете ја нивната компанија.'
     ),
 
     'deletefile' => array(
@@ -69,7 +69,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Корисникот нема внесено е-пошта.',
+        'success' => 'Корисникот е известен за неговиот тековен инвентар.'
     )
 );

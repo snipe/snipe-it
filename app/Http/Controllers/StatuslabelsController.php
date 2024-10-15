@@ -69,7 +69,7 @@ class StatuslabelsController extends Controller
 
         // Save the Statuslabel data
         $statusLabel->name = $request->input('name');
-        $statusLabel->user_id = Auth::id();
+        $statusLabel->created_by = auth()->id();
         $statusLabel->notes = $request->input('notes');
         $statusLabel->deployable = $statusType['deployable'];
         $statusLabel->pending = $statusType['pending'];

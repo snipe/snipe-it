@@ -29,7 +29,7 @@ class ActionlogFactory extends Factory
         return [
             'item_id' => Asset::factory(),
             'item_type' => Asset::class,
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'action_type' => 'uploaded',
         ];
     }
@@ -92,7 +92,7 @@ class ActionlogFactory extends Factory
 
             $licenseSeat->update([
                 'assigned_to' => $target->id,
-                'user_id' => 1, // not ideal but works
+                'created_by' => 1, // not ideal but works
             ]);
 
             return [

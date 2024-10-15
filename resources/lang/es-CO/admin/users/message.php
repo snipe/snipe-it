@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'No se pudo buscar en el servidor LDAP. Por favor, compruebe la configuración del servidor LDAP en el archivo de configuración LDAP. <br>Error del servidor LDAP:',
         'ldap_could_not_get_entries' => 'No se han podido obtener entradas del servidor LDAP. Por favor, compruebe la configuración del servidor LDAP en el archivo de configuración LDAP. <br>Error del servidor LDAP:',
         'password_ldap' => 'La contraseña para esta cuenta es administrada por LDAP / Active Directory. Póngase en contacto con su departamento de TI para cambiar su contraseña. ',
-        'multi_company_items_assigned' => 'Este usuario tiene elementos asignados, por favor, realice el ingreso de estos elementos antes de cambiarlo de compañía.'
+        'multi_company_items_assigned' => 'Este usuario tiene elementos asignados que pertenecen a una empresa diferente. Por favor, ingréselos o edite su empresa.'
     ),
 
     'deletefile' => array(

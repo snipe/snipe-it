@@ -31,7 +31,7 @@
             <x-icon type="assets" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->withoutTrashed()->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -177,8 +177,6 @@
               <div class="col-md-12 text-center">
                 <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">  
                </div>
-               
-          
 
               @can('update', $user)
                 <div class="col-md-12">
@@ -673,7 +671,7 @@
                               {{ trans('admin/users/general.two_factor_active') }}
                             </div>
                             <div class="col-md-9">
-                                @if ($user->two_factor_active()) == '1')
+                                @if ($user->two_factor_active())
                                     <x-icon type="checkmark" class="fa-fw text-success" />
                                     {{ trans('general.yes') }}
                                 @else
@@ -690,7 +688,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                                @if ($user->two_factor_active_and_enrolled()) == '1')
+                                @if ($user->two_factor_active_and_enrolled())
                                 <x-icon type="checkmark" class="fa-fw text-success" />
                                 {{ trans('general.yes') }}
                                 @else

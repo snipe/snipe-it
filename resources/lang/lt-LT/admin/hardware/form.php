@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Atnaujinti tik numatytąją vietą',
     'asset_location_update_actual' => 'Atnaujinti tik faktinę vietą',
     'asset_not_deployable' => 'Turto būsena netinkama išdavimui, todėl šis turtas negali būti išduotas.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Turto būsena tinkama išdavimui, todėl šis turtas gali būti išduotas.',
     'processing_spinner' => 'Apdorojama... (Dideliems failams gali šiek tiek užtrukti)',
     'optional_infos'  => 'Papildoma informacija',

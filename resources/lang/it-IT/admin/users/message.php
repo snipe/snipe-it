@@ -40,7 +40,7 @@ return array(
         'delete_has_assets_var' => 'Questo utente ha ancora un Bene assegnato. Prima di procedere, si prega di farlo restituire.|Questo utente ha ancora :count Beni assegnati. Prima di procedere si prega di farglieli restituire.',
         'delete_has_licenses_var' => 'Questo utente ha ancora una licenza assegnata. Prima di procedere si prega di fargliela restituire|Questo utente ha ancora :count licenze assegnate. Prima di procedere si prega di fargliele restituire.',
         'delete_has_accessories_var' => 'Questo utente ha ancora un accessorio assegnato. Prima di procedere si prega di farglielo restituire|Questo utente ha ancora :count accessori assegnati. Prima di procedere si prega di farglieli restituire.',
-        'delete_has_locations_var' => 'Questo utente è ancora responsabile di una sede. Si prega di scegliere un altro responsabile prima di procedere.|Questo utente è ancora responsabile di :count sedi. Si prega di scegliere un altro responsabile prima di procedere.',
+        'delete_has_locations_var' => 'Questo utente è ancora responsabile di una Sede. Si prega di scegliere un altro responsabile prima di procedere.|Questo utente è ancora responsabile di :count Sedi. Si prega di scegliere un altro responsabile prima di procedere.',
         'delete_has_users_var' => 'Questo utente è ancora responsabile di un altro utente. Si prega di scegliere un altro responsabile prima di procedere.|Questo utente è ancora responsabile di :count utenti. Si prega di scegliere un altro responsabile prima di procedere.',
         'unsuspend' => 'C\'è stato un problema durante la riabilitazione dell\'utente. Riprova per favore.',
         'import'    => 'C\'è stato un problema durante l\'importazione degli utenti. Riprova per favore.',
@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Impossibile trovare il server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_get_entries' => 'Impossibile ottenere voci dal server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'password_ldap' => 'La password per questo account è gestita da LDAP / Active Directory. Per cambiare la tua password, contatta il tuo reparto IT.',
-        'multi_company_items_assigned' => 'Questo utente ha delle cose assegnate, prima di cambiare azienda le deve restituire.'
+        'multi_company_items_assigned' => 'A questo utente sono assegnati oggetti appartenenti a un\'altra azienda. Si prega di farli restituire o modificarne l\'azienda.'
     ),
 
     'deletefile' => array(

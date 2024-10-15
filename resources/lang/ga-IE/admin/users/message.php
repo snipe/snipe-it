@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Níorbh fhéidir an freastalaí LDAP a chuardach. Seiceáil do chumraíocht an fhreastalaí LDAP sa chomhad cumraíochta LDAP. <br>Error ó Freastalaí LDAP:',
         'ldap_could_not_get_entries' => 'Níorbh fhéidir iontrálacha a fháil ón fhreastalaí LDAP. Seiceáil do chumraíocht an fhreastalaí LDAP sa chomhad cumraíochta LDAP. <br>Error ó Freastalaí LDAP:',
         'password_ldap' => 'Bainistíonn LDAP / Active Directory an focal faire don chuntas seo. Téigh i dteagmháil le do roinn TF chun do phasfhocal a athrú.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

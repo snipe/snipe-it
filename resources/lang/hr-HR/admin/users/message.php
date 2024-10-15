@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nije moguće pretražiti LDAP poslužitelj. Provjerite konfiguraciju LDAP poslužitelja u LDAP konfiguracijskoj datoteci. <br>Preku s LDAP poslužitelja:',
         'ldap_could_not_get_entries' => 'Nije bilo moguće dobiti unose s LDAP poslužitelja. Provjerite konfiguraciju LDAP poslužitelja u LDAP konfiguracijskoj datoteci. <br>Preku s LDAP poslužitelja:',
         'password_ldap' => 'Lozinku za ovaj račun upravlja LDAP / Active Directory. Obratite se IT odjelu za promjenu zaporke.',
-        'multi_company_items_assigned' => 'This user has items assigned, please check them in before moving companies.'
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

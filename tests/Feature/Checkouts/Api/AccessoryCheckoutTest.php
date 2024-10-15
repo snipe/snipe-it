@@ -7,11 +7,12 @@ use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Notification;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class AccessoryCheckoutTest extends TestCase
+class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirement
 {
-    public function testCheckingOutAccessoryRequiresCorrectPermission()
+    public function testRequiresPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()))
@@ -85,7 +86,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $admin->id,
+                'created_by' => $admin->id,
             ])->count(),'Log entry either does not exist or there are more than expected'
         );
     }
@@ -118,7 +119,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $admin->id,
+                'created_by' => $admin->id,
             ])->count(),
             'Log entry either does not exist or there are more than expected'
         );
@@ -180,7 +181,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $actor->id,
+                'created_by' => $actor->id,
                 'note' => 'oh hi there',
             ])->count(),
             'Log entry either does not exist or there are more than expected'

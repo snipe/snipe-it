@@ -7,15 +7,15 @@ return array(
     'account_not_activated'  => 'Оваа корисничка сметка не е активирана.',
     'account_suspended'      => 'Оваа корисничка сметка е привремено блокирана.',
     'account_banned'         => 'Оваа корисничка сметка е блокирана.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Премногу неуспешни обиди за најава. Обидете се повторно за :minutes минути.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
+        'already_enrolled'      => 'Вашиот уред е веќе запишан.',
         'success'               => 'Успешно сте најавени.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'code_required'         => 'Дво-факторски код е задолжителен.',
+        'invalid_code'          => 'Дво-факторскиот код е невалиден.',
+        'enter_two_factor_code' => 'Ве молиме внесете дво-факторски код за автентификација.',
+        'please_enroll'         => 'Ве молиме запишете уред во двофакторна автентикација.',
     ),
 
     'signin' => array(
@@ -24,8 +24,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Имаше проблем при обидот да ве одјавиме, обидете се повторно.',
+        'success' => 'Успешно сте одјавени.',
     ),
 
     'signup' => array(
@@ -35,7 +35,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Имаше проблем при обидот да се добие кодот за ресетирање не лозинка, обидете се повторно.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Ако таа адреса на Е-пошта постои во нашиот систем, испратена ви е Е-пошта за обнова на лозинката.',
     ),
 
     'forgot-password-confirm' => array(
