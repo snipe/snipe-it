@@ -98,20 +98,52 @@
             },
             formatNoMatches: function () {
                 return '{{ trans('table.no_matching_records') }}';
-            }
+            },
+            {{--onDrop: function (table, row) {--}}
+            {{--    var rows = table.tBodies[0].rows;--}}
+            {{--    var debugStr = "Row dropped was " + row.id + ". New order: ";--}}
+            {{--    for (var i = 0; i < rows.length; i++) {--}}
+            {{--        debugStr += rows[i].id + " ";--}}
+            {{--    }--}}
+            {{--    --}}
+            {{--    $.ajax({--}}
+            {{--        url: '{{ route('api.reorder') }}',--}}
+            {{--        type: 'POST',--}}
+            {{--        data: {--}}
+            {{--            ids: rows.map(function (row) {--}}
+            {{--                return row.id;--}}
+            {{--            })--}}
+            {{--},--}}
 
             });
 
         });
 
         $(function () {
-            $('.snipe-table').on('reorder-row.bs.table', function (e, data){
-                alert('close')
+            var debugStr = '';
+            $('.snipe-table').on('reorder-row.bs.table', function (e, data, row){
+                console.log('All Data:');
+                console.log(data);
+                console.log('Dragged Row Data:');
+                console.dir(row);
+                console.log('E:');
+                console.dir(e);
+                for (var i = 0; i < data.length; i++) {
+                    debugStr += data[i].id + " ";
+                }
+                alert('re-order ID: ' + row.id + ' to ' + debugStr);
             });
         });
     });
 
 
+    // function onReorderDrop (rows, row) {
+    //     var rows = table.tBodies[0].rows;
+    //     var debugStr = "Row dropped was " + row.id + ". New order: ";
+    //     for (var i = 0; i < rows.length; i++) {
+    //         debugStr += rows[i].id + " ";
+    //     }
+    // }
 
 
 
