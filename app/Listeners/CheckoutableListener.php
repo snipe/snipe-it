@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Mail\CheckoutAssetMail;
+use App\Mail\CheckinAssetMail;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
@@ -14,7 +15,6 @@ use App\Models\Recipients\AdminRecipient;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
-use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
@@ -46,7 +46,7 @@ class CheckoutableListener
          * Make a checkout acceptance and attach it in the notification
          */
         $acceptance = $this->getCheckoutAcceptance($event);
-        $notifiable = $this->getNotifiables($event);
+        $notifiable = $this->getNotifiable($event);
         $mailable = (new CheckoutAssetMail(
             $event->checkoutable,
             $event->checkedOutTo,
@@ -57,11 +57,11 @@ class CheckoutableListener
 
         // Send email notifications
         try {
-                if  (! $event->checkedOutTo->locale){
+                if  (!$event->checkedOutTo->locale){
                     $mailable->locale($event->checkedOutTo->locale);
                 }
                 Mail::to($notifiable)->send($mailable);
-
+                \Log::info('Sending email, Locale: ' .($event->checkedOutTo->locale ?? 'default'));
                 // Send Webhook notification
                 if ($this->shouldSendWebhookNotification()) {
                 // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
@@ -107,19 +107,22 @@ class CheckoutableListener
             }
         }
 
-        $notifiables = $this->getNotifiables($event);
+        $notifiable = $this->getNotifiable($event);
+        $mailable = (new CheckInAssetMail(
+            $event->checkoutable,
+            $event->checkedOutTo,
+            $event->checkedOutBy,
+            $event->note,
+            null,
+        ));
+
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                    else {
-                        Notification::send($notifiable, $this->getCheckinNotification($event));
-                    }
-                }
+            if  (!$event->checkedOutTo->locale){
+                $mailable->locale($event->checkedOutTo->locale);
             }
+            Mail::to($notifiable)->send($mailable);
+            \Log::info('Sending email, Locale: ' .$event->checkedOutTo->locale);
             // Send Webhook notification
             if ($this->shouldSendWebhookNotification()) {
                 // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
@@ -168,25 +171,26 @@ class CheckoutableListener
      * @param  Event $event
      * @return Collection
      */
-    private function getNotifiables($event)
+    private function getNotifiable($event)
     {
-        $notifiables = collect();
+        $notifiable = collect();
 
         /**
          * Notify who checked out the item as long as the model can route notifications
          */
         if (method_exists($event->checkedOutTo, 'routeNotificationFor')) {
-            $notifiables->push($event->checkedOutTo);
+            $notifiable->push($event->checkedOutTo);
         }
 
         /**
          * Notify Admin users if the settings is activated
          */
         if ((Setting::getSettings()) && (Setting::getSettings()->admin_cc_email != '')) {
-            $notifiables->push(new AdminRecipient());
+            $adminRecipient= new AdminRecipient;
+            $notifiable->push($adminRecipient->getEmail());
         }
 
-        return $notifiables;       
+        return new $notifiable;
     }
 
     /**
