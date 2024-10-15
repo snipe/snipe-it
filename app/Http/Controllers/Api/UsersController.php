@@ -255,6 +255,7 @@ class UsersController extends Controller
                         'groups',
                         'activated',
                         'created_at',
+                        'updated_at',
                         'two_factor_enrolled',
                         'two_factor_optin',
                         'last_login',
