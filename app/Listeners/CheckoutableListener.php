@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Mail\CheckoutAssetMail;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
@@ -20,6 +21,7 @@ use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -44,23 +46,24 @@ class CheckoutableListener
          * Make a checkout acceptance and attach it in the notification
          */
         $acceptance = $this->getCheckoutAcceptance($event);
-        $notifiables = $this->getNotifiables($event);
+        $notifiable = $this->getNotifiables($event);
+        $mailable = (new CheckoutAssetMail(
+            $event->checkoutable,
+            $event->checkedOutTo,
+            $event->checkedOutBy,
+            $acceptance,
+            $event->note
+        ));
 
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                    else {
-                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
+                if  (! $event->checkedOutTo->locale){
+                    $mailable->locale($event->checkedOutTo->locale);
                 }
-            }
+                Mail::to($notifiable)->send($mailable);
 
-            // Send Webhook notification
-            if ($this->shouldSendWebhookNotification()) {
+                // Send Webhook notification
+                if ($this->shouldSendWebhookNotification()) {
                 // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
                 if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
                     Notification::route('slack', Setting::getSettings()->webhook_endpoint)
