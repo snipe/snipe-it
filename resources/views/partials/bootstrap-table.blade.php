@@ -103,6 +103,12 @@
             });
 
         });
+
+        $(function () {
+            $('.snipe-table').on('reorder-row.bs.table', function (e, data){
+                alert('close')
+            });
+        });
     });
 
 

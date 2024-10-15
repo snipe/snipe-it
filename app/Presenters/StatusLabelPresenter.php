@@ -21,7 +21,18 @@ class StatusLabelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.id'),
                 'visible' => false,
-            ], [
+            ],
+
+            [
+                'field' => 'display_order',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('admin/custom_fields/general.reorder'),
+                'visible' => true,
+                'class' => 'sr-only',
+            ],
+            [
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,

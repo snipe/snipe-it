@@ -24,6 +24,7 @@
       <div class="box-body">
         <div class="table-responsive">
 
+
             <table
                     data-columns="{{ \App\Presenters\StatusLabelPresenter::dataTableLayout() }}"
                     data-cookie-id-table="statuslabelsTable"
@@ -36,6 +37,8 @@
                     data-show-export="true"
                     data-show-fullscreen="true"
                     data-show-refresh="true"
+                    data-use-row-attr-func="true"
+                    data-reorderable-rows="true"
                     data-sort-order="asc"
                     data-sort-name="name"
                     id="statuslabelsTable"
