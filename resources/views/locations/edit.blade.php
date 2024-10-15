@@ -25,9 +25,15 @@
     <label for="currency" class="col-md-3 control-label">
         {{ trans('admin/locations/table.currency') }}
     </label>
-    <div class="col-md-9">
-        {{ Form::text('currency', old('currency', $item->currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;', 'aria-label'=>'currency', 'required' => (Helper::checkIfRequired($item, 'currency')) ? true : '')) }}
-        {!! $errors->first('currency', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+    <div class="col-md-7">
+        <input class="form-control" style="width:100px" type="text" name="currency" aria-label="currency" id="currency" value="{{ old('currency', $item->currency) }}"{!!  (Helper::checkIfRequired($item, 'currency')) ? ' required' : '' !!} maxlength="3" />
+        @error('currency')
+        <span class="alert-msg">
+            <x-icon type="x" />
+            {{ $message }}
+        </span>
+        @enderror
+
     </div>
 </div>
 
@@ -40,8 +46,13 @@
             {{ trans('admin/locations/table.ldap_ou') }}
         </label>
         <div class="col-md-7">
-            {{ Form::text('ldap_ou', old('ldap_ou', $item->ldap_ou), array('class' => 'form-control', 'required' => (Helper::checkIfRequired($item, 'ldap_ou')) ? true : '')) }}
-            {!! $errors->first('ldap_ou', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+            <input class="form-control" type="text" name="ldap_ou" aria-label="ldap_ou" id="ldap_ou" value="{{ old('ldap_ou', $item->ldap_ou) }}"{!!  (Helper::checkIfRequired($item, 'ldap_ou')) ? ' required' : '' !!} maxlength="191" />
+            @error('ldap_ou')
+            <span class="alert-msg">
+                <x-icon type="x" />
+                {{ $message }}
+        </span>
+            @enderror
         </div>
     </div>
 @endif
