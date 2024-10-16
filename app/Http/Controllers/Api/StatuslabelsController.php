@@ -95,7 +95,8 @@ class StatuslabelsController extends Controller
         $request->except('deployable', 'pending', 'archived');
 
         if (! $request->filled('type')) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]), 500);
+
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]));
         }
 
         $statuslabel = new Statuslabel;
