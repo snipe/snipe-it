@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Watson\Validating\ValidationException;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
@@ -380,9 +379,6 @@ class Asset extends Depreciable
 
             return true;
         }
-        $validator = $this->makeValidator($this->getRules());
-
-        throw new ValidationException($validator, $this);
 
         return false;
     }

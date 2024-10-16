@@ -115,5 +115,12 @@
 
 @section('moar_scripts')
 @include('partials/assets-assigned')
+<script nonce="{{ csrf_token() }}">
+    $(function () {
+        //if there's already a user selected, make sure their checked-out assets show up
+        // (if there isn't one, it won't do anything)
+        $('#assigned_user').change();
+    });
+</script>
 
 @stop

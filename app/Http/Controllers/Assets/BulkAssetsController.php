@@ -575,22 +575,24 @@ class BulkAssetsController extends Controller
             }
 
             $errors = [];
-            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids, $request) {
+            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $asset_ids, $request) { //NOTE: $errors is passsed by reference!
                 foreach ($asset_ids as $asset_id) {
                     $asset = Asset::findOrFail($asset_id);
                     $this->authorize('checkout', $asset);
 
-                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
+                    $checkout_success = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
 
+                    //TODO - I think this logic is duplicated in the checkOut method?
                     if ($target->location_id != '') {
                         $asset->location_id = $target->location_id;
-                        $asset::withoutEvents(function () use ($asset) { // TODO - I don't know why this is being saved without events
+                        // TODO - I don't know why this is being saved without events
+                        $asset::withoutEvents(function () use ($asset) {
                             $asset->save();
                         });
                     }
 
-                    if ($error) {
-                        array_merge_recursive($errors, $asset->getErrors()->toArray());
+                    if (!$checkout_success) {
+                        $errors = array_merge_recursive($errors, $asset->getErrors()->toArray());
                     }
                 }
             });
@@ -600,7 +602,7 @@ class BulkAssetsController extends Controller
                 return redirect()->to('hardware')->with('success', trans_choice('admin/hardware/message.multi-checkout.success', $asset_ids));
             }
             // Redirect to the asset management page with error
-            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $asset_ids))->withErrors($errors);
+            return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $asset_ids))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
         }
