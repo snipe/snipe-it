@@ -32,28 +32,7 @@ class CheckoutAssetNotification extends Notification
      */
     public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-        $this->item = $asset;
-        $this->admin = $checkedOutBy;
-        $this->note = $note;
-        $this->target = $checkedOutTo;
-        $this->acceptance = $acceptance;
-
-        $this->settings = Setting::getSettings();
-
-        $this->last_checkout = '';
-        $this->expected_checkin = '';
-
-        if ($this->item->last_checkout) {
-            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
-                false);
-        }
-
-        if ($this->item->expected_checkin) {
-            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
-                false);
-        }
     }
-
     /**
      * Get the notification's delivery channels.
      *
