@@ -529,7 +529,7 @@ class StoreAssetTest extends TestCase
         $asset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($asset->adminuser->is($user));
-        $this->assertTrue($asset->checkedOutToLocation());
+        $this->assertEquals($asset->assigned_type, Location::class);
         $this->assertTrue($asset->location->is($location));
     }
 
@@ -555,7 +555,7 @@ class StoreAssetTest extends TestCase
         $apiAsset = Asset::find($response['payload']['id']);
 
         $this->assertTrue($apiAsset->adminuser->is($user));
-        $this->assertTrue($apiAsset->checkedOutToAsset());
+        $this->assertEquals($apiAsset->assigned_type, Asset::class);
         // I think this makes sense, but open to a sanity check
         $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));
     }
