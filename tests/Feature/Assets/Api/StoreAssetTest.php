@@ -10,8 +10,10 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Generator;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class StoreAssetTest extends TestCase
@@ -23,51 +25,60 @@ class StoreAssetTest extends TestCase
             ->assertForbidden();
     }
 
+    public static function userProvider(): Generator
+    {
+        yield 'User in a company' => [
+            function () {
+                $jedi = Company::factory()->create();
+                $sith = Company::factory()->create();
+                $luke = User::factory()->for($jedi)->createAssets()->create();
+
+                return [
+                    'actor' => $luke,
+                    'company_attempting_to_associate' => $sith,
+                    'assertions' => function ($asset) use ($jedi) {
+                        self::assertEquals($jedi->id, $asset->company_id);
+                    },
+                ];
+            }
+        ];
+
+        yield 'User without a company' => [
+            function () {
+                $userInNoCompany = User::factory()->createAssets()->create(['company_id' => null]);
+
+                return [
+                    'actor' => $userInNoCompany,
+                    'company_attempting_to_associate' => Company::factory()->create(),
+                    'assertions' => function ($asset) {
+                        self::assertNull($asset->company_id);
+                    },
+                ];
+            }
+        ];
+    }
+
     /**
      * @link https://github.com/snipe/snipe-it/issues/15654
      */
-    public function testAdheresToFullMultipleCompaniesSupportScoping()
+    #[DataProvider('userProvider')]
+    public function testAdheresToFullMultipleCompaniesSupportScoping($data)
     {
-        [$companyA, $companyB] = Company::factory()->count(2)->create();
-        $model = AssetModel::factory()->create();
-        $status = Statuslabel::factory()->readyToDeploy()->create();
-
-        $userInNoCompany = User::factory()
-            ->createAssets()
-            ->create(['company_id' => null]);
-
-        $userInCompanyA = User::factory()
-            ->for($companyA)
-            ->createAssets()
-            ->create();
-
-        $this->assertNull($userInNoCompany->company_id);
-        $this->assertEquals($companyA->id, $userInCompanyA->company_id);
+        ['actor' => $actor, 'company_attempting_to_associate' => $company, 'assertions' => $assertions] = $data();
 
         $this->settings->enableMultipleFullCompanySupport();
 
-        $responseForUserWithNoCompany = $this->actingAsForApi($userInNoCompany)
+        $response = $this->actingAsForApi($actor)
             ->postJson(route('api.assets.store'), [
                 'asset_tag' => 'random_string',
-                'company_id' => $companyB->id,
-                'model_id' => $model->id,
-                'status_id' => $status->id,
+                'company_id' => $company->id,
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
             ]);
 
-        $responseForUserInCompanyA = $this->actingAsForApi($userInCompanyA)
-            ->postJson(route('api.assets.store'), [
-                'asset_tag' => 'another_string',
-                'company_id' => $companyB->id,
-                'model_id' => $model->id,
-                'status_id' => $status->id,
-            ]);
+        $asset = Asset::withoutGlobalScopes()->findOrFail($response['payload']['id']);
 
-        $assetForUserWithNoCompany = Asset::withoutGlobalScopes()->find($responseForUserWithNoCompany['payload']['id']);
-        $assetForUserInCompanyA = Asset::withoutGlobalScopes()->find($responseForUserInCompanyA['payload']['id']);
-
-        // company_id should be the company_id of the user that performed the action
-        $this->assertNull($assetForUserWithNoCompany->company_id);
-        $this->assertEquals($userInCompanyA->company_id, $assetForUserInCompanyA->company_id);
+        $assertions($asset);
     }
 
     public function testAllAssetAttributesAreStored()
