@@ -26,6 +26,15 @@ class StorageHelper
         }
     }
 
+
+    /**
+     * This determines the file types that should be allowed inline and checks their fileinfo extension
+     *
+     * @author <A. Gianotto> [<snipe@snipe.net]>
+     * @since v7.0.14
+     * @param $file_with_path
+     * @return bool
+     */
     public static function allowSafeInline($file_with_path) {
 
         $allowed_inline = [
