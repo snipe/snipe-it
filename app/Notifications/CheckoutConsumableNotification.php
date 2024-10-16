@@ -6,6 +6,7 @@ use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -61,36 +62,36 @@ class CheckoutConsumableNotification extends Notification
         }
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            $notifyBy[] = 'slack';
+            $notifyBy[] = SlackWebhookChannel::class;
         }
 
-        /**
-         * Only send notifications to users that have email addresses
-         */
-        if ($this->target instanceof User && $this->target->email != '') {
-
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
-            if ($this->item->requireAcceptance()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if the item has a EULA, since the user should always receive it
-             */
-            if ($this->item->getEula()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if an email should be sent at checkin/checkout
-             */
-            if ((method_exists($this->item, 'checkin_email')) && ($this->item->checkin_email())) {
-                $notifyBy[1] = 'mail';
-            }
-        }
+//        /**
+//         * Only send notifications to users that have email addresses
+//         */
+//        if ($this->target instanceof User && $this->target->email != '') {
+//
+//            /**
+//             * Send an email if the asset requires acceptance,
+//             * so the user can accept or decline the asset
+//             */
+//            if ($this->item->requireAcceptance()) {
+//                $notifyBy[1] = 'mail';
+//            }
+//
+//            /**
+//             * Send an email if the item has a EULA, since the user should always receive it
+//             */
+//            if ($this->item->getEula()) {
+//                $notifyBy[1] = 'mail';
+//            }
+//
+//            /**
+//             * Send an email if an email should be sent at checkin/checkout
+//             */
+//            if ((method_exists($this->item, 'checkin_email')) && ($this->item->checkin_email())) {
+//                $notifyBy[1] = 'mail';
+//            }
+//        }
 
         return $notifyBy;
     }
@@ -164,31 +165,5 @@ class CheckoutConsumableNotification extends Notification
                     )
             );
 
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail()
-    {
-        Log::debug($this->item->getImageUrl());
-        $eula = $this->item->getEula();
-        $req_accept = $this->item->requireAcceptance();
-
-        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
-
-        return (new MailMessage)->markdown('notifications.markdown.checkout-consumable',
-            [
-                'item'          => $this->item,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
-                'eula'          => $eula,
-                'req_accept'    => $req_accept,
-                'accept_url'    => $accept_url,
-            ])
-            ->subject(trans('mail.Confirm_consumable_delivery'));
     }
 }

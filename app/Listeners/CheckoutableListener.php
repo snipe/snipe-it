@@ -8,6 +8,7 @@ use App\Mail\CheckinLicenseMail;
 use App\Mail\CheckoutAccessoryMail;
 use App\Mail\CheckoutAssetMail;
 use App\Mail\CheckinAssetMail;
+use App\Mail\CheckoutConsumableMail;
 use App\Mail\CheckoutLicenseMail;
 use App\Models\Accessory;
 use App\Models\Asset;
@@ -210,20 +211,21 @@ class CheckoutableListener
     {
         $notificationClass = null;
 
-        switch (true) {
-            case $event->checkoutable instanceof Accessory:
+        switch (get_class($event->checkoutable)) {
+            case Accessory::class:
                 $notificationClass = CheckoutAccessoryNotification::class;
                 break;
-            case $event->checkoutable instanceof Asset:
+            case Asset::class:
                 $notificationClass = CheckoutAssetNotification::class;
                 break;
-            case $event->checkoutable instanceof Consumable:
+            case Consumable::class:
                 $notificationClass = CheckoutConsumableNotification::class;
                 break;
-            case $event->checkoutable instanceof LicenseSeat:
+            case LicenseSeat::class:
                 $notificationClass = CheckoutLicenseSeatNotification::class;
                 break;
         }
+
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
     }
@@ -232,7 +234,7 @@ class CheckoutableListener
             Accessory::class => CheckoutAccessoryMail::class,
             Asset::class => CheckoutAssetMail::class,
             LicenseSeat::class => CheckoutLicenseMail::class,
-//            Consumable::class =>
+            Consumable::class => CheckoutConsumableMail::class,
         ];
         $mailable= $lookup[get_class($event->checkoutable)];
 
@@ -244,8 +246,8 @@ class CheckoutableListener
             Accessory::class => CheckinAccessoryMail::class,
             Asset::class => CheckinAssetMail::class,
             LicenseSeat::class => CheckinLicenseMail::class,
-//            Consumable::class =>
         ];
+
         $mailable= $lookup[get_class($event->checkoutable)];
 
         return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);

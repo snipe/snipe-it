@@ -6,6 +6,7 @@ use App\Models\Accessory;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -55,7 +56,7 @@ class CheckinAccessoryNotification extends Notification
         }
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            $notifyBy[] = 'slack';
+            $notifyBy[] = SlackWebhookChannel::class;
         }
 
         return $notifyBy;
