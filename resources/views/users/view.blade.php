@@ -995,7 +995,6 @@
 
                   <thead>
                     <tr>
-                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.icon')}}</th>
                         <th data-visible="true" data-field="type" data-sortable="true">{{trans('general.file_type')}}</th>
                         <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
                         <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
@@ -1012,9 +1011,6 @@
                             <td>
                                 <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true" data-tooltip="true" data-title="{{ pathinfo('private_uploads/users/'.$file->filename, PATHINFO_EXTENSION) }}"></i>
                                 <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
-                            </td>
-                            <td>
-                                {{ pathinfo('private_uploads/users/'.$file->filename, PATHINFO_EXTENSION) }}
                             </td>
                             <td>
                                 @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
