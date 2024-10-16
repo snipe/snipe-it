@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Exception;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -32,6 +33,23 @@ class CheckoutAssetNotification extends Notification
      */
     public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
+        $this->settings = Setting::getSettings();
+        $this->item = $asset;
+        $this->admin = $checkedOutBy;
+        $this->note = $note;
+        $this->target = $checkedOutTo;
+        $this->last_checkout = '';
+        $this->expected_checkin = '';
+
+        if ($this->item->last_checkout) {
+            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
+                false);
+        }
+
+        if ($this->item->expected_checkin) {
+            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
+                false);
+        }
     }
     /**
      * Get the notification's delivery channels.
@@ -41,61 +59,34 @@ class CheckoutAssetNotification extends Notification
     public function via()
     {
         $notifyBy = [];
-        if (Setting::getSettings()->webhook_selected == 'google' && Setting::getSettings()->webhook_endpoint) {
+
+        if (Setting::getSettings()->webhook_selected === 'google' && Setting::getSettings()->webhook_endpoint) {
 
             $notifyBy[] = GoogleChatChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
+        if (Setting::getSettings()->webhook_selected === 'microsoft' && Setting::getSettings()->webhook_endpoint) {
 
             $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
 
-        if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
+        if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general' ) {
 
             Log::debug('use webhook');
-            $notifyBy[] = 'slack';
-        }
-
-        /**
-         * Only send notifications to users that have email addresses
-         */
-        if ($this->target instanceof User && $this->target->email != '') {
-
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
-            if ($this->item->requireAcceptance()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if the item has a EULA, since the user should always receive it
-             */
-            if ($this->item->getEula()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if an email should be sent at checkin/checkout
-             */
-            if ($this->item->checkin_email()) {
-                $notifyBy[1] = 'mail';
-            }
+            $notifyBy[] = SlackWebhookChannel::class;
         }
 
         return $notifyBy;
     }
 
-    public function toSlack()
+    public function toSlack() :SlackMessage
     {
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $botname = ($this->settings->webhook_botname) ?: 'Snipe-Bot';
         $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
 
         $fields = [
@@ -103,7 +94,7 @@ class CheckoutAssetNotification extends Notification
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
 
-        if (($this->expected_checkin) && ($this->expected_checkin != '')) {
+        if (($this->expected_checkin) && ($this->expected_checkin !== '')) {
             $fields['Expected Checkin'] = $this->expected_checkin;
         }
 

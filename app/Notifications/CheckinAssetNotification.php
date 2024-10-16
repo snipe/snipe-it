@@ -50,7 +50,6 @@ class CheckinAssetNotification extends Notification
      */
     public function via()
     {
-        $notifyBy = [];
         if (Setting::getSettings()->webhook_selected == 'google' && Setting::getSettings()->webhook_endpoint) {
 
             $notifyBy[] = GoogleChatChannel::class;
@@ -64,14 +63,14 @@ class CheckinAssetNotification extends Notification
             Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
-
-        /**
-         * Only send checkin notifications to users if the category
-         * has the corresponding checkbox checked.
-         */
-        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
-            $notifyBy[] = 'mail';
-        }
+dd($notifyBy);
+//        /**
+//         * Only send checkin notifications to users if the category
+//         * has the corresponding checkbox checked.
+//         */
+//        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
+//            $notifyBy[] = 'mail';
+//        }
 
         return $notifyBy;
     }
