@@ -2,6 +2,7 @@
 
 namespace App\Actions\CheckoutRequests;
 
+use App\Helpers\Helper;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
@@ -9,12 +10,15 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Illuminate\Log;
 
 class CreateCheckoutRequest
 {
     use AsAction;
+
+    public string $status;
 
     public function handle($assetId)
     {
@@ -22,12 +26,12 @@ class CreateCheckoutRequest
 
         // Check if the asset exists and is requestable
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
-            return redirect()->route('requestable-assets')
-                ->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
+            $this->status = 'doesNotExist';
+            return false;
         }
         if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('requestable-assets')
-                ->with('error', trans('general.insufficient_permissions'));
+            $this->status = 'accessDenied';
+            return false;
         }
 
         $data['item'] = $asset;
@@ -57,8 +61,8 @@ class CreateCheckoutRequest
             } catch (\Exception $e) {
                 Log::warning($e);
             }
-            return redirect()->route('requestable-assets')
-                ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+            $this->status = 'cancelled';
+            return true;
         }
 
         $logaction->logaction('requested');
@@ -67,9 +71,28 @@ class CreateCheckoutRequest
         try {
             $settings->notify(new RequestAssetNotification($data));
         } catch (\Exception $e) {
-            Log::warning($e);
+            \Log::warning($e);
         }
 
-        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        return true;
+    }
+
+    public function jsonResponse(): JsonResponse
+    {
+        return match ($this->status) {
+            'doesNotExist' => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist_or_not_requestable'))),
+            'accessDenied' => response()->json(Helper::formatStandardApiResponse('error', null, trans('general.insufficient_permissions'))),
+            default => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.request_successfully_created'))),
+        };
+    }
+
+    public function htmlResponse(): RedirectResponse
+    {
+        return match ($this->status) {
+            'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
+            'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
+            'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
+            default => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
+        };
     }
 }

@@ -145,7 +145,11 @@ class ViewAssetsController extends Controller
      */
     public function getRequestAsset($assetId = null): void
     {
-        CreateCheckoutRequest::run($assetId);
+        $request = CreateCheckoutRequest::run($assetId);
+
+        if (!$request) {
+            \Log::debug('problem');
+        }
     }
 
     public function getRequestedAssets() : View
