@@ -132,15 +132,19 @@ class UserFilesController extends Controller
                 $file = 'private_uploads/users/'.$log->filename;
 
 
-                if ((request('inline') == 'true') && (StorageHelper::allowSafeInline($file) === false)) {
 
-                    // Display the file as text is not allowed for security reasons
+                if (request('inline') == 'true') {
+
                     $headers = [
                         'Content-Disposition' => 'inline',
-                        'Content-Type' => 'text/plain',
                     ];
-                    return Storage::download($file, $log->filename, $headers);
 
+                    // This is NOT allowed as inline - force it to be displayed as text
+                    if (StorageHelper::allowSafeInline($file) === false) {
+                        array_push($headers, ['Content-Type' => 'text/plain']);
+                    }
+
+                    return Storage::download($file, $log->filename, $headers);
                 }
 
                 return Storage::download($file);
