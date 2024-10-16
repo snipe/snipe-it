@@ -63,34 +63,6 @@ class CheckoutLicenseSeatNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-        /**
-         * Only send notifications to users that have email addresses
-         */
-        if ($this->target instanceof User && $this->target->email != '') {
-
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
-            if ($this->item->requireAcceptance()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if the item has a EULA, since the user should always receive it
-             */
-            if ($this->item->getEula()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if an email should be sent at checkin/checkout
-             */
-            if ($this->item->checkin_email()) {
-                $notifyBy[1] = 'mail';
-            }
-        }
-
         return $notifyBy;
     }
 

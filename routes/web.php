@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
      * Locations
      */
     Route::get('/test-email', function() {
-        $item = Accessory::find(1); // Load some test data
+        $item = LicenseSeat::find(1); // Load some test data
         $admin = User::find(1);
         $target = User::find(2);
         $acceptance = null; // Simulate acceptance data
@@ -68,10 +69,11 @@ Route::group(['middleware' => 'auth'], function () {
             $fields = $item->model->fieldset->fields;
         }
 
-        return new \App\Mail\CheckinAccessoryMail(
+        return new \App\Mail\CheckoutLicenseMail(
             $item,
             $admin,
             $target,
+            $acceptance,
             $note);
     });
 

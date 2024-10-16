@@ -7,6 +7,7 @@ use App\Mail\CheckinAccessoryMail;
 use App\Mail\CheckoutAccessoryMail;
 use App\Mail\CheckoutAssetMail;
 use App\Mail\CheckinAssetMail;
+use App\Mail\CheckoutLicenseMail;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
@@ -229,8 +230,8 @@ class CheckoutableListener
         $lookup = [
             Accessory::class => CheckoutAccessoryMail::class,
             Asset::class => CheckoutAssetMail::class,
+            LicenseSeat::class => CheckoutLicenseMail::class,
 //            Consumable::class =>
-//            LicenseSeat::class =>
         ];
         $mailable= $lookup[get_class($event->checkoutable)];
 
