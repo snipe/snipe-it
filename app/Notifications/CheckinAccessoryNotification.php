@@ -58,19 +58,6 @@ class CheckinAccessoryNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-//        /**
-//         * Only send notifications to users that have email addresses
-//         */
-//        if ($this->target instanceof User && $this->target->email != '') {
-//            Log::debug('The target is a user');
-//
-//            if ($this->item->checkin_email()) {
-//                $notifyBy[] = 'mail';
-//            }
-//        }
-//
-//        Log::debug('checkin_email on this category is '.$this->item->checkin_email());
-
         return $notifyBy;
     }
 
@@ -142,24 +129,4 @@ class CheckinAccessoryNotification extends Notification
             );
 
     }
-
-//    /**
-//     * Get the mail representation of the notification.
-//     *
-//     * @param  mixed  $notifiable
-//     * @return \Illuminate\Notifications\Messages\MailMessage
-//     */
-//    public function toMail()
-//    {
-//        Log::debug('to email called');
-//
-//        return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
-//            [
-//                'item'          => $this->item,
-//                'admin'         => $this->admin,
-//                'note'          => $this->note,
-//                'target'        => $this->target,
-//            ])
-//            ->subject(trans('mail.Accessory_Checkin_Notification'));
-//    }
 }

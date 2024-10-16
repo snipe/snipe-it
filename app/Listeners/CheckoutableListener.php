@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Mail\CheckinAccessoryMail;
+use App\Mail\CheckinLicenseMail;
 use App\Mail\CheckoutAccessoryMail;
 use App\Mail\CheckoutAssetMail;
 use App\Mail\CheckinAssetMail;
@@ -242,8 +243,8 @@ class CheckoutableListener
         $lookup = [
             Accessory::class => CheckinAccessoryMail::class,
             Asset::class => CheckinAssetMail::class,
+            LicenseSeat::class => CheckinLicenseMail::class,
 //            Consumable::class =>
-//            LicenseSeat::class =>
         ];
         $mailable= $lookup[get_class($event->checkoutable)];
 
