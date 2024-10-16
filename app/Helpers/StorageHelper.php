@@ -25,4 +25,25 @@ class StorageHelper
                 return Storage::disk($disk)->download($filename);
         }
     }
+
+    public static function allowSafeInline($file_with_path) {
+
+        $allowed_inline = [
+            'pdf',
+            'svg',
+            'jpg',
+            'gif',
+            'svg',
+            'avif',
+            'webp',
+            'png',
+        ];
+
+        if (in_array(pathinfo($file_with_path, PATHINFO_EXTENSION), $allowed_inline)) {
+            return true;
+        }
+
+        return false;
+
+    }
 }
