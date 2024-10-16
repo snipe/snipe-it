@@ -16,10 +16,9 @@ use App\Models\CheckoutAcceptance;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
-use App\Models\Recipients\AdminRecipient;
 use App\Models\Setting;
-use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
+use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
@@ -51,7 +50,7 @@ class CheckoutableListener
          * Make a checkout acceptance and attach it in the notification
          */
         $acceptance = $this->getCheckoutAcceptance($event);
-        $notifiable = $this->getNotifiable($event);
+        $notifiable = $event->checkedOutTo;
         $mailable = $this->getCheckoutMailType($event, $acceptance);
         // Send email notifications
         try {
@@ -99,7 +98,7 @@ class CheckoutableListener
             }
         }
 
-        $notifiable = $this->getNotifiable($event);
+        $notifiable = $event->checkedInBy;
         $mailable =  $this->getCheckinMailType($event);
 
         // Send email notifications
@@ -142,34 +141,6 @@ class CheckoutableListener
         $acceptance->save();
 
         return $acceptance;      
-    }
-
-    /**
-     * Gets the entities to be notified of the passed event
-     * 
-     * @param  Event $event
-     * @return Collection
-     */
-    private function getNotifiable($event)
-    {
-        $notifiable = collect();
-
-        /**
-         * Notify who checked out the item as long as the model can route notifications
-         */
-        if (method_exists($event->checkedOutTo, 'routeNotificationFor')) {
-            $notifiable->push($event->checkedOutTo);
-        }
-
-        /**
-         * Notify Admin users if the settings is activated
-         */
-        if ((Setting::getSettings()) && (Setting::getSettings()->admin_cc_email != '')) {
-            $adminRecipient= new AdminRecipient;
-            $notifiable->push($adminRecipient->getEmail());
-        }
-
-        return new $notifiable;
     }
 
     /**
