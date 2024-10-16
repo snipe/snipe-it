@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAssetRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
@@ -331,7 +332,7 @@ class AssetsController extends Controller
             $assets->where('assets.byod', '=', $request->input('byod'));
         }
 
-        if ($request->filled('order_number')) {
+        if ($request->filled('order_number')) { //FIXME - no such field exists anymore
             $assets->where('assets.order_number', '=', strval($request->get('order_number')));
         }
 
@@ -665,8 +666,15 @@ class AssetsController extends Controller
                 $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
 
+            if ($request->input('order_number') != '') {
+                \Log::error("Order number we should be associating is: " . $request->get('order_number'));
+                $asset->order()->associate(Order::firstOrCreate(['order_number' => $request->input('order_number')]));
+                \Log::error("And the order id of the asset is now: " . $asset->order_id);
+                $asset->save();
+            }
+
             if ($asset->image) {
-                $asset->image = $asset->getImageUrl();
+                $asset->image = $asset->getImageUrl(); //also doesn't do anything? well, it passes along the $asset, so maybe that's something
             }
 
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
@@ -745,15 +753,28 @@ class AssetsController extends Controller
                     Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
                         ->update(['location_id' => $target->location_id]);
                 } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                    $location = $target->id;
+                    $location = $target->id; //does *this* do anything?
                 }
+                //all of this $location stuff - I'm not sure it does anything?
+                //ah, I *suspect* that the real heavy lifting here is being done by the checkOut method itself.
+                // all of this $location stuff is pointless.
 
                 if (isset($target)) {
+                    //NOTE: this checkOut method has a _side-effect_ of saving the asset.
                     $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
                 }
 
+                if ($request->has('order_number')) {
+                    if ($request->input('order_number') != '') {
+                        $asset->order()->associate(Order::firstOrCreate(['order_number' => $request->input('order_number')]));
+                    } else {
+                        $asset->order()->dissociate();
+                    }
+                    $asset->save();
+                }
+
                 if ($asset->image) {
-                    $asset->image = $asset->getImageUrl();
+                    $asset->image = $asset->getImageUrl(); //TODO - does this do anything? The asset *is* passed along in the response, so maybe there?
                 }
 
             if ($problems_updating_encrypted_custom_fields) {

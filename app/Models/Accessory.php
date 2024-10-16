@@ -38,7 +38,7 @@ class Accessory extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date', 'notes'];
+    protected $searchableAttributes = ['name', 'model_number', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -51,6 +51,7 @@ class Accessory extends SnipeModel
         'manufacturer' => ['name'],
         'supplier'     => ['name'],
         'location'     => ['name'],
+        'order' => ['order_number']
     ];
 
     /**
@@ -129,6 +130,11 @@ class Accessory extends SnipeModel
     public function supplier()
     {
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 
 

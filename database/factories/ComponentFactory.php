@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\Location;
+use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -36,7 +37,7 @@ class ComponentFactory extends Factory
             'location_id' => Location::factory(),
             'serial'   => $this->faker->uuid(),
             'qty' => $this->faker->numberBetween(3, 10),
-            'order_number' => $this->faker->numberBetween(1000000, 50000000),
+            'order_id' => Order::factory(),
             'purchase_date' => $this->faker->dateTime()->format('Y-m-d'),
             'purchase_cost' => $this->faker->randomFloat(2),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),

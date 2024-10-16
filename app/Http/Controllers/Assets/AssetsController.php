@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
+use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -131,7 +132,7 @@ class AssetsController extends Controller
 
             $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
             $asset->model_id                = $request->input('model_id');
-            $asset->order_number            = $request->input('order_number');
+            $asset->order_id = Order::ensure($request, 'order_id');
             $asset->notes                   = $request->input('notes');
             $asset->created_by              = auth()->id();
             $asset->status_id               = request('status_id');
@@ -372,7 +373,7 @@ class AssetsController extends Controller
         $asset->name = $request->input('name');
         $asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $asset->model_id = $request->input('model_id');
-        $asset->order_number = $request->input('order_number');
+        $asset->order_id = Order::ensure($request, 'order_id');
 
         $asset_tags = $request->input('asset_tags');
         $asset->asset_tag = $request->input('asset_tags');
