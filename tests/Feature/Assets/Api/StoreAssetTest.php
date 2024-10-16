@@ -56,6 +56,21 @@ class StoreAssetTest extends TestCase
                 ];
             }
         ];
+
+        yield 'Super-User assigning across companies' => [
+            function () {
+                $superUser = User::factory()->superuser()->create();
+                $company = Company::factory()->create();
+
+                return [
+                    'actor' => $superUser,
+                    'company_attempting_to_associate' => $company,
+                    'assertions' => function ($asset) use ($company) {
+                        self::assertEquals($asset->company_id, $company->id);
+                    },
+                ];
+            }
+        ];
     }
 
     /**
