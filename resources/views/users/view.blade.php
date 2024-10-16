@@ -1009,13 +1009,17 @@
                     @foreach ($user->uploads as $file)
                         <tr>
                             <td>
-                                <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true" data-tooltip="true" data-title="{{ pathinfo('private_uploads/users/'.$file->filename, PATHINFO_EXTENSION) }}"></i>
-                                <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
+                                @if (Storage::exists('private_uploads/users/'.$file->filename))
+                                    <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true" data-tooltip="true" data-title="{{ pathinfo('private_uploads/users/'.$file->filename, PATHINFO_EXTENSION) }}"></i>
+                                    <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
+                                @endif
                             </td>
                             <td>
                                 @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
                                    @if (Helper::checkUploadIsImage($file->get_src('users')))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image">
+                                            <img src="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;">
+                                        </a>
                                     @else
                                         {{ trans('general.preview_not_available') }}
                                     @endif
@@ -1044,7 +1048,7 @@
                                             <span class="sr-only">{{ trans('general.download') }}</span>
                                         </a>
 
-                                        <a href="{{ \App\Helpers\StorageHelper::allowSafeInline('private_uploads/users/'.$file->filename) ? route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) : '#' }}" class="btn btn-sm btn-default{{ \App\Helpers\StorageHelper::allowSafeInline('private_uploads/users/'.$file->filename) ? '' : ' disabled' }}" target="_blank">
+                                        <a href="{{ StorageHelper::allowSafeInline('private_uploads/users/'.$file->filename) ? route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) : '#' }}" class="btn btn-sm btn-default{{ StorageHelper::allowSafeInline('private_uploads/users/'.$file->filename) ? '' : ' disabled' }}" target="_blank">
                                             <x-icon type="external-link" />
                                         </a>
                                     @endif
