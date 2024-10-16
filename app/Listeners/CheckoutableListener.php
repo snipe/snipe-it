@@ -64,15 +64,9 @@ class CheckoutableListener
                 Log::info('Sending email, Locale: ' .($event->checkedOutTo->locale ?? 'default'));
 //                 Send Webhook notification
                 if ($this->shouldSendWebhookNotification()) {
-                // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
-                if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
-                    Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckoutNotification($event, $acceptance));
-                } else {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckoutNotification($event, $acceptance));
                 }
-            }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
@@ -111,7 +105,7 @@ class CheckoutableListener
         $mailable = (new CheckInAssetMail(
             $event->checkoutable,
             $event->checkedOutTo,
-            $event->checkedOutBy,
+            $event->checkedInBy,
             $event->note,
         ));
 

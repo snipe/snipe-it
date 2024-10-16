@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
             $fields = $item->model->fieldset->fields;
         }
 
-        return new \App\Mail\CheckoutAssetMail(
+        return new \App\Mail\CheckinAssetMail(
             $item,
             $admin,
             $target,

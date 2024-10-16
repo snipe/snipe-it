@@ -63,7 +63,7 @@ class CheckinAssetNotification extends Notification
             Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
-dd($notifyBy);
+
 //        /**
 //         * Only send checkin notifications to users if the category
 //         * has the corresponding checkbox checked.
@@ -141,35 +141,5 @@ dd($notifyBy);
                         )
                     )
             );
-
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail()
-    {
-        $fields = [];
-
-        // Check if the item has custom fields associated with it
-        if (($this->item->model) && ($this->item->model->fieldset)) {
-            $fields = $this->item->model->fieldset->fields;
-        }
-
-        $message = (new MailMessage)->markdown('notifications.markdown.checkin-asset',
-            [
-                'item'          => $this->item,
-                'status'        => $this->item->assetstatus?->name,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
-                'fields'        => $fields,
-                'expected_checkin'  => $this->expected_checkin,
-            ])
-            ->subject(trans('mail.Asset_Checkin_Notification'));
-
-        return $message;
     }
 }
