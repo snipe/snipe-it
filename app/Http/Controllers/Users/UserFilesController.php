@@ -113,6 +113,9 @@ class UserFilesController extends Controller
     public function show($userId = null, $fileId = null)
     {
 
+
+
+
         if (empty($fileId)) {
             return redirect()->route('users.show')->with('error', 'Invalid file request');
         }
@@ -126,15 +129,21 @@ class UserFilesController extends Controller
 
             if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
 
-                // Display the file inline
-                if (request('inline') == 'true') {
+                $file = 'private_uploads/users/'.$log->filename;
+
+
+                if ((request('inline') == 'true') && (StorageHelper::allowSafeInline($file) === false)) {
+
+                    // Display the file as text is not allowed for security reasons
                     $headers = [
                         'Content-Disposition' => 'inline',
+                        'Content-Type' => 'text/plain',
                     ];
-                    return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
+                    return Storage::download($file, $log->filename, $headers);
+
                 }
 
-                return Storage::download('private_uploads/users/'.$log->filename);
+                return Storage::download($file);
             }
 
             return redirect()->route('users.index')->with('error',  trans('admin/users/message.log_record_not_found'));
