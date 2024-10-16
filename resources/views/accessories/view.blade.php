@@ -301,7 +301,7 @@
                   {{ trans('general.notes') }}
               </strong>
           </div>
-          <div class="col-md-9">
+          <div class="col-md-9" style="word-wrap: break-word;">
               {!! nl2br(Helper::parseEscapedMarkedownInline($accessory->notes)) !!}
           </div>
        </div>

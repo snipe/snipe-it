@@ -117,12 +117,6 @@ class AssetMaintenancesPresenter extends Presenter
                 'title' => trans('admin/asset_maintenances/form.cost'),
                 'class' => 'text-right',
             ], [
-                'field' => 'user_id',
-                'searchable' => true,
-                'sortable' => true,
-                'title' => trans('general.admin'),
-                'formatter' => 'usersLinkObjFormatter',
-            ], [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,

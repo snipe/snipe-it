@@ -7,6 +7,11 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Http\Requests\StoreLdapSettings;
+use App\Http\Requests\StoreLocalizationSettings;
+use App\Http\Requests\StoreNotificationSettings;
+use App\Http\Requests\StoreLabelSettings;
+use App\Http\Requests\StoreSecuritySettings;
 use App\Models\CustomField;
 use App\Models\Group;
 use App\Models\Setting;
@@ -273,20 +278,6 @@ class SettingsController extends Controller
         return view('settings/index', compact('settings'));
     }
 
-    /**
-     * Return the admin settings page.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     */
-    public function getEdit() : View
-
-    {
-        $setting = Setting::getSettings();
-
-        return view('settings/general', compact('setting'));
-    }
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -488,7 +479,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      */
-    public function postSecurity(Request $request) : RedirectResponse
+    public function postSecurity(StoreSecuritySettings $request) : RedirectResponse
     {
         $this->validate($request, [
             'pwd_secure_complexity' => 'array',
@@ -558,7 +549,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      */
-    public function postLocalization(Request $request) : RedirectResponse
+    public function postLocalization(StoreLocalizationSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -601,7 +592,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      */
-    public function postAlerts(Request $request) : RedirectResponse
+    public function postAlerts(StoreNotificationSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -782,7 +773,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      */
-    public function postLabels(Request $request) : RedirectResponse
+    public function postLabels(StoreLabelSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -861,26 +852,7 @@ class SettingsController extends Controller
     {
         $setting = Setting::getSettings();
         $groups = Group::pluck('name', 'id');
-
-
-        /**
-         * This validator is only temporary (famous last words.) - @snipe
-         */
-        $messages = [
-            'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
-            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
-            'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
-        ];
-
-        $validator = Validator::make($setting->toArray(), [
-            'ldap_username_field' => 'not_in:sAMAccountName',
-            'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
-            'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
-        ],  $messages);
-
-
-
-        return view('settings.ldap', compact('setting', 'groups'))->withErrors($validator);
+        return view('settings.ldap', compact('setting', 'groups'));
     }
 
     /**
@@ -889,7 +861,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      */
-    public function postLdapSettings(Request $request) : RedirectResponse
+    public function postLdapSettings(StoreLdapSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
