@@ -57,27 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Locations
      */
-    Route::get('/test-email', function() {
-        $item = LicenseSeat::find(1); // Load some test data
-        $admin = User::find(1);
-        $target = User::find(2);
-        $acceptance = null; // Simulate acceptance data
-        $note = 'Test note';
-
-        $fields = [];
-        if (($item->model) && ($item->model->fieldset)) {
-            $fields = $item->model->fieldset->fields;
-        }
-
-        return new \App\Mail\CheckoutLicenseMail(
-            $item,
-            $admin,
-            $target,
-            $acceptance,
-            $note);
-    });
-
-
     Route::group(['prefix' => 'locations', 'middleware' => ['auth']], function () {
 
         Route::post(
