@@ -27,7 +27,7 @@ class StoreAssetTest extends TestCase
 
     public static function userProvider(): Generator
     {
-        yield 'User in a company' => [
+        yield "User in a company should result in user's company_id being used" => [
             function () {
                 $jedi = Company::factory()->create();
                 $sith = Company::factory()->create();
@@ -43,7 +43,7 @@ class StoreAssetTest extends TestCase
             }
         ];
 
-        yield 'User without a company' => [
+        yield "User without a company should result in asset's company_id being null" => [
             function () {
                 $userInNoCompany = User::factory()->createAssets()->create(['company_id' => null]);
 
@@ -57,7 +57,7 @@ class StoreAssetTest extends TestCase
             }
         ];
 
-        yield 'Super-User assigning across companies' => [
+        yield "Super-User assigning across companies should result in asset's company_id being set to what was provided" => [
             function () {
                 $superUser = User::factory()->superuser()->create();
                 $company = Company::factory()->create();
