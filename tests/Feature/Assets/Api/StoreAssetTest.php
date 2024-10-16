@@ -23,6 +23,53 @@ class StoreAssetTest extends TestCase
             ->assertForbidden();
     }
 
+    /**
+     * @link https://github.com/snipe/snipe-it/issues/15654
+     */
+    public function testAdheresToFullMultipleCompaniesSupportScoping()
+    {
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->readyToDeploy()->create();
+
+        $userInNoCompany = User::factory()
+            ->createAssets()
+            ->create(['company_id' => null]);
+
+        $userInCompanyA = User::factory()
+            ->for($companyA)
+            ->createAssets()
+            ->create();
+
+        $this->assertNull($userInNoCompany->company_id);
+        $this->assertEquals($companyA->id, $userInCompanyA->company_id);
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $responseForUserWithNoCompany = $this->actingAsForApi($userInNoCompany)
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'random_string',
+                'company_id' => $companyB->id,
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+            ]);
+
+        $responseForUserInCompanyA = $this->actingAsForApi($userInCompanyA)
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'another_string',
+                'company_id' => $companyB->id,
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+            ]);
+
+        $assetForUserWithNoCompany = Asset::withoutGlobalScopes()->find($responseForUserWithNoCompany['payload']['id']);
+        $assetForUserInCompanyA = Asset::withoutGlobalScopes()->find($responseForUserInCompanyA['payload']['id']);
+
+        // company_id should be the company_id of the user that performed the action
+        $this->assertNull($assetForUserWithNoCompany->company_id);
+        $this->assertEquals($userInCompanyA->company_id, $assetForUserInCompanyA->company_id);
+    }
+
     public function testAllAssetAttributesAreStored()
     {
         $company = Company::factory()->create();
