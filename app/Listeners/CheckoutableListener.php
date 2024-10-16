@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Mail\CheckinAccessoryMail;
+use App\Mail\CheckoutAccessoryMail;
 use App\Mail\CheckoutAssetMail;
 use App\Mail\CheckinAssetMail;
 use App\Models\Accessory;
@@ -47,14 +49,7 @@ class CheckoutableListener
          */
         $acceptance = $this->getCheckoutAcceptance($event);
         $notifiable = $this->getNotifiable($event);
-        $mailable = (new CheckoutAssetMail(
-            $event->checkoutable,
-            $event->checkedOutTo,
-            $event->checkedOutBy,
-            $event->note,
-            $acceptance,
-        ));
-
+        $mailable = $this->getCheckoutMailType($event, $acceptance);
         // Send email notifications
         try {
                 if  (!$event->checkedOutTo->locale){
@@ -102,12 +97,7 @@ class CheckoutableListener
         }
 
         $notifiable = $this->getNotifiable($event);
-        $mailable = (new CheckInAssetMail(
-            $event->checkoutable,
-            $event->checkedOutTo,
-            $event->checkedInBy,
-            $event->note,
-        ));
+        $mailable =  $this->getCheckinMailType($event);
 
         // Send email notifications
         try {
@@ -233,8 +223,31 @@ class CheckoutableListener
                 break;
         }
 
-
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
+    }
+    private function getCheckoutMailType($event, $acceptance){
+        $lookup = [
+            Accessory::class => CheckoutAccessoryMail::class,
+            Asset::class => CheckoutAssetMail::class,
+//            Consumable::class =>
+//            LicenseSeat::class =>
+        ];
+        $mailable= $lookup[get_class($event->checkoutable)];
+
+        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $event->note, $acceptance);
+
+    }
+    private function getCheckinMailType($event){
+        $lookup = [
+            Accessory::class => CheckinAccessoryMail::class,
+            Asset::class => CheckinAssetMail::class,
+//            Consumable::class =>
+//            LicenseSeat::class =>
+        ];
+        $mailable= $lookup[get_class($event->checkoutable)];
+
+        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
+
     }
 
     /**
