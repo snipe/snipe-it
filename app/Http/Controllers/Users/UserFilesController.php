@@ -7,9 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 
@@ -116,6 +113,9 @@ class UserFilesController extends Controller
     public function show($userId = null, $fileId = null)
     {
 
+
+
+
         if (empty($fileId)) {
             return redirect()->route('users.show')->with('error', 'Invalid file request');
         }
@@ -129,15 +129,25 @@ class UserFilesController extends Controller
 
             if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
 
-                // Display the file inline
+                $file = 'private_uploads/users/'.$log->filename;
+
+
+
                 if (request('inline') == 'true') {
+
                     $headers = [
                         'Content-Disposition' => 'inline',
                     ];
-                    return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
+
+                    // This is NOT allowed as inline - force it to be displayed as text
+                    if (StorageHelper::allowSafeInline($file) === false) {
+                        array_push($headers, ['Content-Type' => 'text/plain']);
+                    }
+
+                    return Storage::download($file, $log->filename, $headers);
                 }
 
-                return Storage::download('private_uploads/users/'.$log->filename);
+                return Storage::download($file);
             }
 
             return redirect()->route('users.index')->with('error',  trans('admin/users/message.log_record_not_found'));

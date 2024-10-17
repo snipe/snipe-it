@@ -25,4 +25,35 @@ class StorageHelper
                 return Storage::disk($disk)->download($filename);
         }
     }
+
+
+    /**
+     * This determines the file types that should be allowed inline and checks their fileinfo extension
+     * to determine that they are safe to display inline.
+     *
+     * @author <A. Gianotto> [<snipe@snipe.net]>
+     * @since v7.0.14
+     * @param $file_with_path
+     * @return bool
+     */
+    public static function allowSafeInline($file_with_path) {
+
+        $allowed_inline = [
+            'pdf',
+            'svg',
+            'jpg',
+            'gif',
+            'svg',
+            'avif',
+            'webp',
+            'png',
+        ];
+
+        if (in_array(pathinfo($file_with_path, PATHINFO_EXTENSION), $allowed_inline)) {
+            return true;
+        }
+
+        return false;
+
+    }
 }
