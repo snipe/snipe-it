@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Notifications\Email;
 
+use App\Mail\CheckinAssetMail;
+use Illuminate\Support\Facades\Mail;
 use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
@@ -22,6 +24,8 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
     public function testCheckInEmailSentToUserIfSettingEnabled()
     {
+        Mail::fake();
+
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
@@ -29,16 +33,16 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
         $this->fireCheckInEvent($asset, $user);
 
-        Notification::assertSentTo(
-            $user,
-            function (CheckinAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            },
-        );
+        Mail::assertSent(CheckinAssetMail::class, function($mail) use ($user, $asset) {
+                return $mail->hasTo($user->email) && $mail->event->checkoutable->id === $asset->id;
+        });
+
     }
 
     public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
+        Mail::fake();
+
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
@@ -46,10 +50,8 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
         $this->fireCheckInEvent($asset, $user);
 
-        Notification::assertNotSentTo(
-            $user,
-            function (CheckinAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
+        Mail::assertNotSent(CheckinAssetMail::class, function($mail) use ($user, $asset) {
+                return $mail->hasTo($user->email) && $mail->event->checkoutable->id === $asset->id;
             }
         );
     }

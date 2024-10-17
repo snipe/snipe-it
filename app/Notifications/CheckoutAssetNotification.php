@@ -9,7 +9,6 @@ use App\Models\User;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Channels\SlackWebhookChannel;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\GoogleChat\Card;
@@ -154,12 +153,4 @@ public function toGoogleChat()
             );
 
     }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-
 }

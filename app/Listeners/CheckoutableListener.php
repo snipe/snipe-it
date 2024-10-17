@@ -57,8 +57,21 @@ class CheckoutableListener
                 if  (!$event->checkedOutTo->locale){
                     $mailable->locale($event->checkedOutTo->locale);
                 }
+
+        /**
+         * Send an email if any of the following conditions are met:
+         * 1. The asset requires acceptance
+         * 2. The item has a EULA
+         * 3. The item should send an email at check-in/check-out
+         */
+
+            if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
+                (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+
                 Mail::to($notifiable)->send($mailable);
                 Log::info('Sending email, Locale: ' .($event->checkedOutTo->locale ?? 'default'));
+            }
+
 //                 Send Webhook notification
                 if ($this->shouldSendWebhookNotification()) {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
