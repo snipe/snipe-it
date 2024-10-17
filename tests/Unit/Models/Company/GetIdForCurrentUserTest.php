@@ -4,8 +4,10 @@ namespace Tests\Unit\Models\Company;
 
 use App\Models\Company;
 use App\Models\User;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
+#[Group('focus')]
 class GetIdForCurrentUserTest extends TestCase
 {
     public function testReturnsProvidedValueWhenFullCompanySupportDisabled()
@@ -32,11 +34,11 @@ class GetIdForCurrentUserTest extends TestCase
         $this->assertEquals(2000, Company::getIdForCurrentUser(1000));
     }
 
-    public function testReturnsProvidedValueForNonSuperUserWithoutCompanyIdWhenFullCompanySupportEnabled()
+    public function testReturnsNullForNonSuperUserWithoutCompanyIdWhenFullCompanySupportEnabled()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAs(User::factory()->create(['company_id' => null]));
-        $this->assertEquals(1000, Company::getIdForCurrentUser(1000));
+        $this->assertNull(Company::getIdForCurrentUser(1000));
     }
 }
