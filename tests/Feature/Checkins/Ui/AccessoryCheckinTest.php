@@ -3,10 +3,12 @@
 namespace Tests\Feature\Checkins\Ui;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Mail\CheckoutAccessoryMail;
 use App\Models\Accessory;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -40,7 +42,7 @@ class AccessoryCheckinTest extends TestCase
 
     public function testEmailSentToUserIfSettingEnabled()
     {
-        Notification::fake();
+        Mail::fake();
 
         $user = User::factory()->create();
         $accessory = Accessory::factory()->checkedOutToUser($user)->create();
@@ -54,17 +56,14 @@ class AccessoryCheckinTest extends TestCase
             '',
         ));
 
-        Notification::assertSentTo(
-            [$user],
-            function (CheckinAccessoryNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            },
-        );
+        Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($accessory, $user) {
+            return $mail->hasTo($user) && $mail->contains($accessory);
+        });
     }
 
     public function testEmailNotSentToUserIfSettingDisabled()
     {
-        Notification::fake();
+        Mail::fake();
 
         $user = User::factory()->create();
         $accessory = Accessory::factory()->checkedOutToUser($user)->create();
@@ -78,11 +77,8 @@ class AccessoryCheckinTest extends TestCase
             '',
         ));
 
-        Notification::assertNotSentTo(
-            [$user],
-            function (CheckinAccessoryNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            },
-        );
+        Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($accessory, $user) {
+            return $mail->hasTo($user) && $mail->contains($accessory);
+        });
     }
 }

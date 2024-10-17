@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Checkouts\Ui;
 
+use App\Mail\CheckoutConsumableMail;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Component;
@@ -64,7 +65,7 @@ class ConsumableCheckoutTest extends TestCase
                 'assigned_to' => $user->id,
             ]);
 
-        Mail::assertSent(CheckoutConsumableNotification::class, function ($mail) use ($consumable, $user) {
+        Mail::assertSent(CheckoutConsumableMail::class, function ($mail) use ($consumable, $user) {
             return $mail->hasTo($user) && $mail->consumables->contains($consumable);
         });
     }
