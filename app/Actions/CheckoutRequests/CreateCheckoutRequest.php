@@ -30,12 +30,10 @@ class CreateCheckoutRequest
 
         // Check if the asset exists and is requestable
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
-            $this->status = 'doesNotExist';
-            return false;
+            return $this->status = 'doesNotExist';
         }
         if (!Company::isCurrentUserHasAccess($asset)) {
-            $this->status = 'accessDenied';
-            return false;
+            return $this->status = 'accessDenied';
         }
 
         $data['item'] = $asset;
@@ -65,8 +63,7 @@ class CreateCheckoutRequest
             } catch (\Exception $e) {
                 \Log::warning($e);
             }
-            $this->status = 'cancelled';
-            return true;
+            return $this->status = 'cancelled';
         }
 
         $logaction->logaction('requested');
@@ -78,6 +75,8 @@ class CreateCheckoutRequest
             \Log::warning($e);
         }
         dump('handle end');
+
+        return $this->status = 'success';
     }
 
     public function asController($assetId)
@@ -87,25 +86,25 @@ class CreateCheckoutRequest
         //return $asset;
     }
 
-    public function jsonResponse(): JsonResponse
-    {
-        dump('json');
-        return match ($this->status) {
-            'doesNotExist' => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist_or_not_requestable'))),
-            'accessDenied' => response()->json(Helper::formatStandardApiResponse('error', null, trans('general.insufficient_permissions'))),
-            default => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.request_successfully_created'))),
-        };
-    }
+    //public function jsonResponse(): JsonResponse
+    //{
+    //    dump('json');
+    //    return match ($this->status) {
+    //        'doesNotExist' => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist_or_not_requestable'))),
+    //        'accessDenied' => response()->json(Helper::formatStandardApiResponse('error', null, trans('general.insufficient_permissions'))),
+    //        default => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.request_successfully_created'))),
+    //    };
+    //}
 
-    public function htmlResponse(): RedirectResponse
-    {
-        dump('redirects');
-        return match ($this->status) {
-            dump('redirects'),
-            'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
-            'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
-            'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
-            default => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
-        };
-    }
+    //public function htmlResponse(): RedirectResponse
+    //{
+    //    dump('redirects');
+    //    return match ($this->status) {
+    //        dump('redirects'),
+    //        'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
+    //        'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
+    //        'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
+    //        default => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
+    //    };
+    //}
 }

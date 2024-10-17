@@ -143,9 +143,17 @@ class ViewAssetsController extends Controller
      * Process a specific requested asset
      * @param null $assetId
      */
-    public function getRequestAsset($assetId = null): void
+    public function getRequestAsset($assetId = null): RedirectResponse
     {
-        CreateCheckoutRequest::run($assetId);
+        $status = CreateCheckoutRequest::run($assetId);
+
+        return match ($status) {
+            'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
+            'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
+            'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
+            'success' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
+            default => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
+        };
     }
 
     public function getRequestedAssets() : View
