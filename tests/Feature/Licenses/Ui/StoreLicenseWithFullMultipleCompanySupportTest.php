@@ -14,7 +14,7 @@ class StoreLicenseWithFullMultipleCompanySupportTest extends TestCase
     use ProvidesDataForFullMultipleCompanySupportTesting;
 
     #[Group('focus')]
-    #[DataProvider('userProvider')]
+    #[DataProvider('dataForFullMultipleCompanySupportTesting')]
     public function testAdheresToFullMultipleCompaniesSupportScoping($data)
     {
         ['actor' => $actor, 'company_attempting_to_associate' => $company, 'assertions' => $assertions] = $data();

@@ -18,7 +18,7 @@ class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
      * @link https://github.com/snipe/snipe-it/issues/15654
      */
     #[Group('focus')]
-    #[DataProvider('userProvider')]
+    #[DataProvider('dataForFullMultipleCompanySupportTesting')]
     public function testAdheresToFullMultipleCompaniesSupportScoping($data)
     {
         ['actor' => $actor, 'company_attempting_to_associate' => $company, 'assertions' => $assertions] = $data();

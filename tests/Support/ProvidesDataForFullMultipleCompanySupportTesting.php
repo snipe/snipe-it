@@ -8,7 +8,7 @@ use Generator;
 
 trait ProvidesDataForFullMultipleCompanySupportTesting
 {
-    public static function userProvider(): Generator
+    public static function dataForFullMultipleCompanySupportTesting(): Generator
     {
         yield "User in a company should result in user's company_id being used" => [
             function () {
