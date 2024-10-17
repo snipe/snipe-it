@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CheckoutRequests\CreateCheckoutRequest;
+use App\Actions\CheckoutRequests\CreateCheckoutRequestNew;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -143,9 +144,10 @@ class ViewAssetsController extends Controller
      * Process a specific requested asset
      * @param null $assetId
      */
-    public function getRequestAsset($assetId = null): RedirectResponse
+    public function getRequestAsset(CreateCheckoutRequestNew $checkoutRequestNew, $assetId = null): RedirectResponse
     {
-        $status = CreateCheckoutRequest::run($assetId);
+        $status = CreateCheckoutRequestNew::run($assetId);
+        //$status = $checkoutRequestNew->run($assetId);
 
         return match ($status) {
             'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
