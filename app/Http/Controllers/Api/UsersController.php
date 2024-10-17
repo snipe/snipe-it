@@ -14,6 +14,7 @@ use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Accessory;
+use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
@@ -371,6 +372,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $user->created_by = auth()->id();
 
         if ($request->has('permissions')) {
@@ -451,6 +453,10 @@ class UsersController extends Controller
             }
 
             $user->fill($request->all());
+
+            if ($request->filled('company_id')) {
+                $user->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+            }
 
             if ($user->id == $request->input('manager_id')) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
