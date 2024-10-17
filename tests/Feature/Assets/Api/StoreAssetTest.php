@@ -59,7 +59,7 @@ class StoreAssetTest extends TestCase
 
         yield "Super-User assigning across companies should result in asset's company_id being set to what was provided" => [
             function () {
-                $superUser = User::factory()->superuser()->create();
+                $superUser = User::factory()->superuser()->create(['company_id' => null]);
                 $company = Company::factory()->create();
 
                 return [
