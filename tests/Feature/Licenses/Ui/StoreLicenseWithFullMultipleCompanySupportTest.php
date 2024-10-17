@@ -1,16 +1,15 @@
 <?php
 
-namespace Tests\Feature\Assets\Ui;
+namespace Tests\Feature\Licenses\Ui;
 
-use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Statuslabel;
+use App\Models\Category;
+use App\Models\License;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\ProvidesDataForFullMultipleCompanySupportTesting;
 use Tests\TestCase;
 
-class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
+class StoreLicenseWithFullMultipleCompanySupportTest extends TestCase
 {
     use ProvidesDataForFullMultipleCompanySupportTesting;
 
@@ -23,15 +22,15 @@ class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAs($actor)
-            ->post(route('hardware.store'), [
-                'asset_tags' => ['1' => '1234'],
-                'model_id' => AssetModel::factory()->create()->id,
-                'status_id' => Statuslabel::factory()->create()->id,
+            ->post(route('licenses.store'), [
+                'name' => 'My Cool License',
+                'seats' => '1',
+                'category_id' => Category::factory()->forLicenses()->create()->id,
                 'company_id' => $company->id,
             ]);
 
-        $asset = Asset::where('asset_tag', '1234')->sole();
+        $license = License::where('name', 'My Cool License')->sole();
 
-        $assertions($asset);
+        $assertions($license);
     }
 }

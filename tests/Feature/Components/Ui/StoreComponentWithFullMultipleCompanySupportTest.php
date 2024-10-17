@@ -1,16 +1,15 @@
 <?php
 
-namespace Tests\Feature\Assets\Ui;
+namespace Tests\Feature\Components\Ui;
 
-use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Statuslabel;
+use App\Models\Category;
+use App\Models\Component;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\ProvidesDataForFullMultipleCompanySupportTesting;
 use Tests\TestCase;
 
-class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
+class StoreComponentWithFullMultipleCompanySupportTest extends TestCase
 {
     use ProvidesDataForFullMultipleCompanySupportTesting;
 
@@ -23,15 +22,15 @@ class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAs($actor)
-            ->post(route('hardware.store'), [
-                'asset_tags' => ['1' => '1234'],
-                'model_id' => AssetModel::factory()->create()->id,
-                'status_id' => Statuslabel::factory()->create()->id,
+            ->post(route('components.store'), [
+                'name' => 'My Cool Component',
+                'qty' => '1',
+                'category_id' => Category::factory()->create()->id,
                 'company_id' => $company->id,
             ]);
 
-        $asset = Asset::where('asset_tag', '1234')->sole();
+        $component = Component::where('name', 'My Cool Component')->sole();
 
-        $assertions($asset);
+        $assertions($component);
     }
 }
