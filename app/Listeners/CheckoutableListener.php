@@ -17,6 +17,7 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
 use App\Models\Setting;
+use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
@@ -64,13 +65,14 @@ class CheckoutableListener
          * 2. The item has a EULA
          * 3. The item should send an email at check-in/check-out
          */
-
+        if ($notifiable instanceof User && $notifiable->email != '') {
             if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                 (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
 
                 Mail::to($notifiable)->send($mailable);
-                Log::info('Sending email, Locale: ' .($event->checkedOutTo->locale ?? 'default'));
+                Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
             }
+        }
 
 //                 Send Webhook notification
                 if ($this->shouldSendWebhookNotification()) {
