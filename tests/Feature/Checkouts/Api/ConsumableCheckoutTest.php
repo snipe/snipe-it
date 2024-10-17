@@ -64,7 +64,7 @@ class ConsumableCheckoutTest extends TestCase
                 'assigned_to' => $user->id,
             ]);
 
-        Mail::assertSentTo($user, CheckoutConsumableMail::class);
+        Mail::assertSent($user, CheckoutConsumableMail::class);
     }
 
     public function testActionLogCreatedUponCheckout()

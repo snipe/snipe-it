@@ -66,7 +66,7 @@ class ConsumableCheckoutTest extends TestCase
             ]);
 
         Mail::assertNotSent(CheckoutConsumableMail::class, function ($mail) use ($consumable, $user) {
-            return $mail->hasTo($user->email) && $mail->consumable->is($consumable);
+            return $mail->hasTo($user->email) && $mail->viewData['consumable']->is($consumable);
         });
     }
 
