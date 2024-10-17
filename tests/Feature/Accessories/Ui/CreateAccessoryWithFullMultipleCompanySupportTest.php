@@ -5,7 +5,6 @@ namespace Tests\Feature\Accessories\Ui;
 use App\Models\Accessory;
 use App\Models\Category;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\ProvidesDataForFullMultipleCompanySupportTesting;
 use Tests\TestCase;
 
@@ -13,7 +12,6 @@ class CreateAccessoryWithFullMultipleCompanySupportTest extends TestCase
 {
     use ProvidesDataForFullMultipleCompanySupportTesting;
 
-    #[Group('focus')]
     #[DataProvider('dataForFullMultipleCompanySupportTesting')]
     public function testAdheresToFullMultipleCompaniesSupportScoping($data)
     {

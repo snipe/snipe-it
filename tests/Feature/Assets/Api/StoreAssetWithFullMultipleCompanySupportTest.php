@@ -6,7 +6,6 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Statuslabel;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\ProvidesDataForFullMultipleCompanySupportTesting;
 use Tests\TestCase;
 
@@ -17,7 +16,6 @@ class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
     /**
      * @link https://github.com/snipe/snipe-it/issues/15654
      */
-    #[Group('focus')]
     #[DataProvider('dataForFullMultipleCompanySupportTesting')]
     public function testAdheresToFullMultipleCompaniesSupportScoping($data)
     {

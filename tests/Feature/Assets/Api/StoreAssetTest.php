@@ -12,7 +12,6 @@ use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
-use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
 class StoreAssetTest extends TestCase
@@ -564,7 +563,6 @@ class StoreAssetTest extends TestCase
     /**
      * @link https://app.shortcut.com/grokability/story/24475
      */
-    #[Group('focus')]
     public function testCompanyIdNeedsToBeInteger()
     {
         $this->actingAsForApi(User::factory()->createAssets()->create())

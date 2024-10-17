@@ -4,10 +4,8 @@ namespace Tests\Unit\Models\Company;
 
 use App\Models\Company;
 use App\Models\User;
-use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
-#[Group('focus')]
 class GetIdForCurrentUserTest extends TestCase
 {
     public function testReturnsProvidedValueWhenFullCompanySupportDisabled()

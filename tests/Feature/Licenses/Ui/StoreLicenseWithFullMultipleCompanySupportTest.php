@@ -5,7 +5,6 @@ namespace Tests\Feature\Licenses\Ui;
 use App\Models\Category;
 use App\Models\License;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\ProvidesDataForFullMultipleCompanySupportTesting;
 use Tests\TestCase;
 
@@ -13,7 +12,6 @@ class StoreLicenseWithFullMultipleCompanySupportTest extends TestCase
 {
     use ProvidesDataForFullMultipleCompanySupportTesting;
 
-    #[Group('focus')]
     #[DataProvider('dataForFullMultipleCompanySupportTesting')]
     public function testAdheresToFullMultipleCompaniesSupportScoping($data)
     {
