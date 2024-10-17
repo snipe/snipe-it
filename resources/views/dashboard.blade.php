@@ -34,7 +34,7 @@
     <div class="dashboard small-box bg-teal">
       <div class="inner">
         <h3>{{ number_format(\App\Models\Asset::AssetsForShow()->count()) }}</h3>
-        <p>{{ strtolower(trans('general.assets')) }}</p>
+        <p>{{ trans('general.assets') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
           <x-icon type="assets" />
@@ -54,7 +54,7 @@
     <div class="dashboard small-box bg-maroon">
       <div class="inner">
         <h3>{{ number_format($counts['license']) }}</h3>
-        <p>{{ strtolower(trans('general.licenses')) }}</p>
+        <p>{{ trans('general.licenses') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
           <x-icon type="licenses" />
@@ -75,7 +75,7 @@
     <div class="dashboard small-box bg-orange">
       <div class="inner">
         <h3> {{ number_format($counts['accessory']) }}</h3>
-        <p>{{ strtolower(trans('general.accessories')) }}</p>
+        <p>{{ trans('general.accessories') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
           <x-icon type="accessories" />
@@ -96,7 +96,7 @@
     <div class="dashboard small-box bg-purple">
       <div class="inner">
         <h3> {{ number_format($counts['consumable']) }}</h3>
-        <p>{{ strtolower(trans('general.consumables')) }}</p>
+        <p>{{ trans('general.consumables') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
           <x-icon type="consumables" />
@@ -115,7 +115,7 @@
    <div class="dashboard small-box bg-yellow">
      <div class="inner">
        <h3>{{ number_format($counts['component']) }}</h3>
-       <p>{{ strtolower(trans('general.components')) }}</p>
+       <p>{{ trans('general.components') }}</p>
      </div>
      <div class="icon" aria-hidden="true">
          <x-icon type="components" />
@@ -135,7 +135,7 @@
    <div class="dashboard small-box bg-light-blue">
      <div class="inner">
        <h3>{{ number_format($counts['user']) }}</h3>
-       <p>{{ strtolower(trans('general.people')) }}</p>
+       <p>{{ trans('general.people') }}</p>
      </div>
      <div class="icon" aria-hidden="true">
          <x-icon type="users" />
