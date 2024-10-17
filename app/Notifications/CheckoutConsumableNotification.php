@@ -6,6 +6,7 @@ use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -61,7 +62,7 @@ class CheckoutConsumableNotification extends Notification
         }
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            $notifyBy[] = 'slack';
+            $notifyBy[] = SlackWebhookChannel::class;
         }
 
         /**
@@ -164,31 +165,5 @@ class CheckoutConsumableNotification extends Notification
                     )
             );
 
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail()
-    {
-        Log::debug($this->item->getImageUrl());
-        $eula = $this->item->getEula();
-        $req_accept = $this->item->requireAcceptance();
-
-        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
-
-        return (new MailMessage)->markdown('notifications.markdown.checkout-consumable',
-            [
-                'item'          => $this->item,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
-                'eula'          => $eula,
-                'req_accept'    => $req_accept,
-                'accept_url'    => $accept_url,
-            ])
-            ->subject(trans('mail.Confirm_consumable_delivery'));
     }
 }

@@ -338,4 +338,5 @@ class AcceptanceController extends Controller
         return redirect()->to('account/accept')->with('success', $return_msg);
 
     }
+
 }
