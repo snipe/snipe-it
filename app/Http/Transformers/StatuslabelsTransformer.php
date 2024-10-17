@@ -23,6 +23,7 @@ class StatuslabelsTransformer
     {
         $array = [
             'id' => (int) $statuslabel->id,
+            'reorder_icon' => '<i class="fas fa-ellipsis-v"></i>',
             'name' => e($statuslabel->name),
             'type' => $statuslabel->getStatuslabelType(),
             'color' => ($statuslabel->color) ? e($statuslabel->color) : null,

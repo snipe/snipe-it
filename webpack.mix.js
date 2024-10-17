@@ -103,6 +103,7 @@ mix
     [
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
+        "./node_modules/bootstrap-table/dist/extensions/reorder-rows/bootstrap-table-reorder-rows.css",
      "./resources/assets/css/dragtable.css",
     ],
     "public/css/dist/bootstrap-table.css"
@@ -148,8 +149,10 @@ mix
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
             './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
+            './node_modules/bootstrap-table/dist/extensions/reorder-rows/bootstrap-table-reorder-rows.js',
             './node_modules/bootstrap-table/dist/extensions/addrbar/bootstrap-table-addrbar.js',
             './resources/assets/js/extensions/jquery.base64.js',
+            "./node_modules/tablednd/dist/jquery.tablednd.js",
             './node_modules/tableexport.jquery.plugin/tableExport.min.js',
             './node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.umd.min.js',
             './resources/assets/js/FileSaver.min.js',
