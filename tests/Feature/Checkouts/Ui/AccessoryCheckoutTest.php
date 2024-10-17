@@ -170,8 +170,8 @@ class AccessoryCheckoutTest extends TestCase
                 'checkout_to_type' => 'user',
             ]);
 
-        Mail::assertNotSent(CheckoutAccessoryMail::class, function ($mail) use ($accessory, $user) {
-            return $mail->hasTo($user->email) && $mail->viewData['accessory']->is($accessory);
+        Mail::assertNotSent(CheckoutAccessoryMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
         });
     }
 
