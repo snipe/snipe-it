@@ -171,7 +171,7 @@ class AccessoryCheckoutTest extends TestCase
             ]);
 
         Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($accessory, $user) {
-            return $mail->hasTo($user) && $mail->contains($accessory);
+            return $mail->hasTo($user->email) && $mail->accessory->is($accessory);
         });
     }
 

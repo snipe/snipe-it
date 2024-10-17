@@ -19,7 +19,7 @@ class EmailNotificationsUponCheckinTest extends TestCase
     {
         parent::setUp();
 
-        Notification::fake();
+        Mail::fake();
     }
 
     public function testCheckInEmailSentToUserIfSettingEnabled()

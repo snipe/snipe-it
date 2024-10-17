@@ -140,7 +140,9 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         //Notes is never read.
         // $this->assertEquals($row['notes'], $newAsset->notes);
 
-        Mail::assertSent($assignee, CheckoutAssetMail::class);
+        Mail::assertSent(CheckoutAssetMail::class, function ($mail) use ($assignee) {
+            return $mail->hasTo($assignee->email);
+        });
     }
 
     #[Test]
