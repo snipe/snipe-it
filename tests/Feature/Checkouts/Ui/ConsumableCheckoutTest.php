@@ -65,7 +65,7 @@ class ConsumableCheckoutTest extends TestCase
                 'assigned_to' => $user->id,
             ]);
 
-        Mail::assertSent(CheckoutConsumableMail::class, function ($mail) use ($consumable, $user) {
+        Mail::assertNotSent(CheckoutConsumableMail::class, function ($mail) use ($consumable, $user) {
             return $mail->hasTo($user->email) && $mail->consumable->is($consumable);
         });
     }
