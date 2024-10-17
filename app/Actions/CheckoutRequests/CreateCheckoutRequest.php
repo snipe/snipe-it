@@ -13,15 +13,19 @@ use App\Notifications\RequestAssetNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Lorisleiva\Actions\Concerns\AsController;
+use Lorisleiva\Actions\Concerns\WithAttributes;
 
 class CreateCheckoutRequest
 {
     use AsAction;
+    use WithAttributes;
 
-    public string $status;
+    public string $status = '';
 
     public function handle($assetId)
     {
+        dump($assetId);
         $user = auth()->user();
 
         // Check if the asset exists and is requestable
@@ -59,7 +63,7 @@ class CreateCheckoutRequest
             try {
                 $settings->notify(new RequestAssetCancelation($data));
             } catch (\Exception $e) {
-                Log::warning($e);
+                \Log::warning($e);
             }
             $this->status = 'cancelled';
             return true;
@@ -73,12 +77,19 @@ class CreateCheckoutRequest
         } catch (\Exception $e) {
             \Log::warning($e);
         }
+        dump('handle end');
+    }
 
-        return true;
+    public function asController($assetId)
+    {
+        dump('asController');
+        $asset = $this->handle($assetId);
+        //return $asset;
     }
 
     public function jsonResponse(): JsonResponse
     {
+        dump('json');
         return match ($this->status) {
             'doesNotExist' => response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist_or_not_requestable'))),
             'accessDenied' => response()->json(Helper::formatStandardApiResponse('error', null, trans('general.insufficient_permissions'))),
@@ -88,7 +99,9 @@ class CreateCheckoutRequest
 
     public function htmlResponse(): RedirectResponse
     {
+        dump('redirects');
         return match ($this->status) {
+            dump('redirects'),
             'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
             'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
             'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
