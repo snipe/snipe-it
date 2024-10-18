@@ -58,4 +58,4 @@ jobs:
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
           DB_CONNECTION: sqlite_testing
-        run: php artisan test --parallel
+        run: php artisan test
