@@ -21,7 +21,6 @@ abstract class Importer
      * Id of User performing import
      * @var
      */
-    
     protected $created_by;
     /**
      * Are we updating items in the import
@@ -149,17 +148,23 @@ abstract class Importer
     {
         $headerRow = $this->csv->fetchOne();
         $this->csv->setHeaderOffset(0); //explicitly sets the CSV document header record
-        $results = $this->normalizeInputArray($this->csv->getRecords($headerRow));
 
         $this->populateCustomFields($headerRow);
 
-        DB::transaction(function () use (&$results) {
+        DB::transaction(function () use ($headerRow) {
+            $importedItemsCount = 0;
             Model::unguard();
-            $resultsCount = count($results);
-            foreach ($results as $row) {
+
+            foreach ($this->csv->getRecords($headerRow) as $row) {
+                //Lowercase header values to ensure we're comparing values properly.
+                $row = array_change_key_case($row, CASE_LOWER);
+
                 $this->handle($row);
+
+                $importedItemsCount++;
+
                 if ($this->progressCallback) {
-                    call_user_func($this->progressCallback, $resultsCount);
+                    call_user_func($this->progressCallback, $importedItemsCount);
                 }
 
                 $this->log('------------- Action Summary ----------------');
@@ -235,22 +240,6 @@ abstract class Importer
         }
         // Otherwise no custom key, return original.
         return $key;
-    }
-
-    /**
-     * Used to lowercase header values to ensure we're comparing values properly.
-     *
-     * @param $results
-     * @return array
-     */
-    public function normalizeInputArray($results)
-    {
-        $newArray = [];
-        foreach ($results as $index => $arrayToNormalize) {
-            $newArray[$index] = array_change_key_case($arrayToNormalize);
-        }
-
-        return $newArray;
     }
 
     /**
