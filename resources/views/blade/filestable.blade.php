@@ -9,9 +9,9 @@
 <!-- begin non-ajaxed file listing table -->
 <div class="table-responsive">
     <table
-            data-cookie-id-table="{{ $object }}UploadsTable"
-            data-id-table="{{ $object }}UploadsTable"
-            id="{{ $object }}UploadsTable"
+            data-cookie-id-table="{{ str_slug($object->name) }}UploadsTable"
+            data-id-table="{{ str_slug($object->name) }}UploadsTable"
+            id="{{ str_slug($object->name) }}}UploadsTable"
             data-search="true"
             data-pagination="true"
             data-side-pagination="client"
@@ -76,8 +76,9 @@
                     @endif
                 </td>
                 <td>
+
                     @if (($file->filename) && (Storage::exists($filepath.$file->filename)))
-                        @if (Helper::checkUploadIsImage($file->get_src($object)))
+                        @if (Helper::checkUploadIsImage($file->get_src(str_plural(strtolower(class_basename(get_class($object)))))))
                             <a href="{{ route($showfile_routename, [$object->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image">
                                 <img src="{{ route($showfile_routename, [$object->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;">
                             </a>
@@ -88,6 +89,7 @@
                         <x-icon type="x" class="text-danger" />
                         {{ trans('general.file_not_found') }}
                     @endif
+
                 </td>
                 <td>
                     {{ $file->filename }}
