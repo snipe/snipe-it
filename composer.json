@@ -50,7 +50,6 @@
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^3.5",
-    "lorisleiva/laravel-actions": "^2.8",
     "neitanod/forceutf8": "^2.0",
     "nesbot/carbon": "^2.32",
     "nunomaduro/collision": "^7.0",
@@ -85,8 +84,7 @@
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4",
-    "vimeo/psalm": "^5.13",
-    "wulfheart/laravel-actions-ide-helper": "^0.8.0"
+    "vimeo/psalm": "^5.13"
   },
   "extra": {
     "laravel": {

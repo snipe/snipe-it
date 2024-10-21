@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CheckoutRequests\CreateCheckoutRequest;
-use App\Actions\CheckoutRequests\CreateCheckoutRequestNew;
+use App\Exceptions\AssetNotRequestable;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -11,9 +11,11 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use \Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -144,19 +146,38 @@ class ViewAssetsController extends Controller
      * Process a specific requested asset
      * @param null $assetId
      */
-    public function getRequestAsset(CreateCheckoutRequestNew $checkoutRequestNew, $assetId = null): RedirectResponse
+    public function getRequestAsset(Asset $asset): RedirectResponse
     {
-        $status = CreateCheckoutRequestNew::run($assetId);
-        //$status = $checkoutRequestNew->run($assetId);
+        try {
+            CreateCheckoutRequest::run($asset, auth()->user());
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        } catch (AssetNotRequestable $e) {
+            return redirect()->back()->with('error', 'poop');
+        } catch (AuthorizationException $e) {
+            return redirect()->back()->with('error', trans('admin/hardware/message.requests.error'));
+        } catch (\Exception $e) {
+            report($e);
+            return redirect()->back()->with('error', 'generic error message');
+        }
 
-        return match ($status) {
-            'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
-            'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
-            'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
-            'success' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
-            default => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
-        };
+
+        //$status = CreateCheckoutRequest::run($asset, auth()->user());
+        //
+        //return match ($status) {
+        //    'doesNotExist' => redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable')),
+        //    'accessDenied' => redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions')),
+        //    'cancelled' => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled')),
+        //    default => redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success')),
+        //};
     }
+
+    //public function destroy(Asset $asset): RedirectResponse
+    //{
+    //    try {
+    //        CancelCheckoutRequest($asset, auth()->user());
+    //    }
+    //}
+
 
     public function getRequestedAssets() : View
     {
