@@ -124,7 +124,8 @@ class ConsumablesFilesController extends Controller
                     return redirect()->route('consumables.show', ['consumable' => $consumable])->with('error',  trans('general.file_not_found'));
                 }
             }
-            // todo
+            // The log record doesn't exist somehow
+            return redirect()->route('consumables.show', ['consumable' => $consumable])->with('error',  trans('general.log_record_not_found'));
 
         }
 

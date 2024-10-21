@@ -129,7 +129,7 @@ class ComponentsFilesController extends Controller
                     return redirect()->route('components.show', ['component' => $component])->with('error',  trans('general.file_not_found'));
                 }
             }
-            // todo
+            return redirect()->route('components.show', ['component' => $component])->with('error',  trans('general.log_record_not_found'));
 
         }
 

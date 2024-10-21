@@ -122,7 +122,8 @@ class LicenseFilesController extends Controller
                 }
             }
 
-           // todo
+            // The log record doesn't exist somehow
+            return redirect()->route('licenses.show', ['licenses' => $license])->with('error',  trans('general.log_record_not_found'));
 
         }
 

@@ -125,7 +125,7 @@ class AccessoriesFilesController extends Controller
                 }
             }
 
-            // todo
+            return redirect()->route('accessories.show', ['accessory' => $accessory])->with('error',  trans('general.log_record_not_found'));
 
         }
 

@@ -132,7 +132,9 @@ class UserFilesController extends Controller
                 }
             }
 
-            // todo
+            // The log record doesn't exist somehow
+            return redirect()->route('users.show', ['user' => $user])->with('error',  trans('general.log_record_not_found'));
+
 
             return redirect()->back()->with('error',  trans('general.file_not_found'));
         }

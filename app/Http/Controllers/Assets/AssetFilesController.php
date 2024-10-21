@@ -80,9 +80,10 @@ class AssetFilesController extends Controller
 
             }
 
-            return redirect()->back()->with('error',  trans('general.file_not_found_redirect'));
-
+            return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.log_record_not_found'));
         }
+
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
 
     }
 
