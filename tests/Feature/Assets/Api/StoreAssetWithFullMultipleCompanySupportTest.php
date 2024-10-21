@@ -35,4 +35,24 @@ class StoreAssetWithFullMultipleCompanySupportTest extends TestCase
 
         $assertions($asset);
     }
+
+    #[DataProvider('dataForFullMultipleCompanySupportTesting')]
+    public function testHandlesCompanyIdBeingString($data)
+    {
+        ['actor' => $actor, 'company_attempting_to_associate' => $company, 'assertions' => $assertions] = $data();
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $response = $this->actingAsForApi($actor)
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => 'random_string',
+                'company_id' => (string) $company->id,
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
+            ]);
+
+        $asset = Asset::withoutGlobalScopes()->findOrFail($response['payload']['id']);
+
+        $assertions($asset);
+    }
 }
