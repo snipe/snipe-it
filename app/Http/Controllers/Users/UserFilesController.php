@@ -114,43 +114,27 @@ class UserFilesController extends Controller
     {
 
 
-
-
         if (empty($fileId)) {
             return redirect()->route('users.show')->with('error', 'Invalid file request');
         }
 
-        $user = User::find($userId);
-
-        // the license is valid
-        if (isset($user->id)) {
+        if ($user = User::find($userId)) {
 
             $this->authorize('view', $user);
 
             if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
-
                 $file = 'private_uploads/users/'.$log->filename;
 
-
-
-                if (request('inline') == 'true') {
-
-                    $headers = [
-                        'Content-Disposition' => 'inline',
-                    ];
-
-                    // This is NOT allowed as inline - force it to be displayed as text
-                    if (StorageHelper::allowSafeInline($file) === false) {
-                        array_push($headers, ['Content-Type' => 'text/plain']);
-                    }
-
-                    return Storage::download($file, $log->filename, $headers);
+                try {
+                    return StorageHelper::showOrDownloadFile($file, $log->filename);
+                } catch (\Exception $e) {
+                    return redirect()->route('users.show', ['user' => $user])->with('error',  trans('general.file_not_found'));
                 }
-
-                return Storage::download($file);
             }
 
-            return redirect()->route('users.index')->with('error',  trans('admin/users/message.log_record_not_found'));
+            // todo
+
+            return redirect()->back()->with('error',  trans('general.file_not_found'));
         }
 
         // Redirect to the user management page if the user doesn't exist
