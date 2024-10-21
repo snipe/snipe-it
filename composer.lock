@@ -191,16 +191,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.323.4",
+            "version": "3.324.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e66ee025b1d169fad3c784934f56648d3eec11ae"
+                "reference": "5b824a9b8015a38f18c53b023975c0f63c7bd3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e66ee025b1d169fad3c784934f56648d3eec11ae",
-                "reference": "e66ee025b1d169fad3c784934f56648d3eec11ae",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5b824a9b8015a38f18c53b023975c0f63c7bd3dc",
+                "reference": "5b824a9b8015a38f18c53b023975c0f63c7bd3dc",
                 "shasum": ""
             },
             "require": {
@@ -283,9 +283,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.323.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.324.1"
             },
-            "time": "2024-10-09T18:10:22+00:00"
+            "time": "2024-10-11T18:22:01+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -924,16 +924,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.9.1",
+            "version": "3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "d7dc08f98cba352b2bab5d32c5e58f7e745c11a7"
+                "reference": "61446f07fcb522414d6cfd8b1c3e5f9e18c579ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d7dc08f98cba352b2bab5d32c5e58f7e745c11a7",
-                "reference": "d7dc08f98cba352b2bab5d32c5e58f7e745c11a7",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/61446f07fcb522414d6cfd8b1c3e5f9e18c579ba",
+                "reference": "61446f07fcb522414d6cfd8b1c3e5f9e18c579ba",
                 "shasum": ""
             },
             "require": {
@@ -949,7 +949,7 @@
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "1.12.0",
+                "phpstan/phpstan": "1.12.6",
                 "phpstan/phpstan-strict-rules": "^1.6",
                 "phpunit/phpunit": "9.6.20",
                 "psalm/plugin-phpunit": "0.18.4",
@@ -1017,7 +1017,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.9.1"
+                "source": "https://github.com/doctrine/dbal/tree/3.9.3"
             },
             "funding": [
                 {
@@ -1033,7 +1033,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-01T13:49:23+00:00"
+            "time": "2024-10-10T17:56:43+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -4461,16 +4461,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.9",
+            "version": "v3.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "d04a229058afa76116d0e39209943a8ea3a7f888"
+                "reference": "774092003edb2670615ef09f3a9fbdd335d6d0d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/d04a229058afa76116d0e39209943a8ea3a7f888",
-                "reference": "d04a229058afa76116d0e39209943a8ea3a7f888",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/774092003edb2670615ef09f3a9fbdd335d6d0d7",
+                "reference": "774092003edb2670615ef09f3a9fbdd335d6d0d7",
                 "shasum": ""
             },
             "require": {
@@ -4525,7 +4525,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.9"
+                "source": "https://github.com/livewire/livewire/tree/v3.5.10"
             },
             "funding": [
                 {
@@ -4533,7 +4533,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-01T12:40:06+00:00"
+            "time": "2024-10-10T20:03:38+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -6296,16 +6296,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.32.0",
+            "version": "1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "6ca22b154efdd9e3c68c56f5d94670920a1c19a4"
+                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6ca22b154efdd9e3c68c56f5d94670920a1c19a4",
-                "reference": "6ca22b154efdd9e3c68c56f5d94670920a1c19a4",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/82a311fd3690fb2bf7b64d5c98f912b3dd746140",
+                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140",
                 "shasum": ""
             },
             "require": {
@@ -6337,9 +6337,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.32.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.33.0"
             },
-            "time": "2024-09-26T07:23:32+00:00"
+            "time": "2024-10-13T11:25:22+00:00"
         },
         {
             "name": "pragmarx/google2fa",
@@ -16657,6 +16657,6 @@
         "ext-mbstring": "*",
         "ext-pdo": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

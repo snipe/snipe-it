@@ -44,6 +44,87 @@ class ReportsController extends Controller
     }
 
     /**
+     * Displays Assets/Hardware report
+     *
+     * @author [P. Vamshi Seshasayan] [<vamshiseshasayan@gmail.com>]
+     * @since [v7.0.13]
+     */
+    public function getAssetReport() : View
+    {
+        $this->authorize('reports.view');
+        $data = Asset::select('assets.*')
+            ->with('assetstatus', 'company', 'assignedTo', 
+                'model.category', 'model.manufacturer', 'model.fieldset')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('model_id')
+            ->get();
+
+        return view('reports/assets', compact('data'));
+    }
+
+    public function getCountByStatusType($type, $column, $value){
+        $assets = Asset::select('assets.*')
+            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo', 'adminuser','model.depreciation',
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier')
+            ->where($column, $value);
+        $count=0;
+        switch ($type) { 
+            case 'Deleted':
+                $assets->onlyTrashed();
+                break;
+            case 'Pending':
+                $count = $assets->join('status_labels AS status_alias', function ($join) {
+                    $join->on('status_alias.id', '=', 'assets.status_id')
+                        ->where('status_alias.deployable', '=', 0)
+                        ->where('status_alias.pending', '=', 1)
+                        ->where('status_alias.archived', '=', 0);
+                })->count();
+                break;
+            case 'RTD':
+                $count = $assets->whereNull('assets.assigned_to')
+                    ->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.deployable', '=', 1)
+                            ->where('status_alias.pending', '=', 0)
+                            ->where('status_alias.archived', '=', 0);
+                    })->count();;
+                break;
+            case 'Undeployable':
+                $count = $assets->Undeployable()->count();
+                break;
+            case 'Archived':
+                $assets->join('status_labels AS status_alias', function ($join) {
+                    $join->on('status_alias.id', '=', 'assets.status_id')
+                        ->where('status_alias.deployable', '=', 0)
+                        ->where('status_alias.pending', '=', 0)
+                        ->where('status_alias.archived', '=', 1);
+                });
+                break;
+            case 'Requestable':
+                $count = $assets->where('assets.requestable', '=', 1)
+                    ->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.deployable', '=', 1)
+                            ->where('status_alias.pending', '=', 0)
+                            ->where('status_alias.archived', '=', 0);
+                    });
+
+                break;
+            case 'Deployed':
+                // more sad, horrible workarounds for laravel bugs when doing full text searches
+                $count = $assets->whereNotNull('assets.assigned_to')->count();
+                //var_dump($assets->whereNotNull('assets.assigned_to')->count());
+                break;
+            case 'byod':
+                // This is kind of redundant, since we already check for byod=1 above, but this keeps the
+                // sidebar nav links a little less chaotic
+                $assets->where('assets.byod', '=', '1');
+                break;
+        }
+        return $count;
+    }
+
+    /**
     * Returns a view that displays the accessories report.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]

@@ -343,6 +343,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('reports/assets', 
+        [ReportsController::class, 'getAssetReport'])->name('reports/assets');
+
+
     Route::get('reports/audit', 
         [ReportsController::class, 'audit']
     )->name('reports.audit');
