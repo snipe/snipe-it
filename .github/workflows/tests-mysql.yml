@@ -76,4 +76,4 @@ jobs:
           DB_DATABASE: snipeit
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
           DB_USERNAME: root
-        run: php artisan test --parallel
+        run: php artisan test

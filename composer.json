@@ -74,7 +74,6 @@
     "ext-exif": "*"
   },
   "require-dev": {
-    "brianium/paratest": "^7.0",
     "fakerphp/faker": "^1.16",
     "larastan/larastan": "^2.9",
     "mockery/mockery": "^1.4",
