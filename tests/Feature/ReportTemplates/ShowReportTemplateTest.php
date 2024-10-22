@@ -40,4 +40,14 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
                 return $templatePassedToView->is($reportTemplate);
             }]);
     }
+
+    public function testCannotLoadAnotherUsersSavedReportTemplate()
+    {
+        $reportTemplate = ReportTemplate::factory()->create();
+
+        $this->actingAs(User::factory()->canViewReports()->create())
+            ->get(route('report-templates.show', $reportTemplate))
+            ->assertRedirect(route('reports/custom'));
+
+    }
 }
