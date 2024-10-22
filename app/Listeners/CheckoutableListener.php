@@ -112,7 +112,7 @@ class CheckoutableListener
             }
         }
 
-        $notifiable = $event->checkedInBy;
+        $notifiable = $event->checkedOutTo;
         $mailable =  $this->getCheckinMailType($event);
         // Send email notifications
         try {

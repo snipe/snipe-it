@@ -55,9 +55,9 @@ class AccessoryCheckinTest extends TestCase
             User::factory()->checkinAccessories()->create(),
             '',
         ));
-
-        Mail::assertSent(CheckinAccessoryMail::class, function ($mail) use ( $user) {
+        Mail::assertSent(CheckinAccessoryMail::class, function (CheckinAccessoryMail $mail) use ( $accessory, $user) {
             return $mail->hasTo($user->email);
+
         });
     }
 
@@ -68,7 +68,11 @@ class AccessoryCheckinTest extends TestCase
         $user = User::factory()->create();
         $accessory = Accessory::factory()->checkedOutToUser($user)->create();
 
-        $accessory->category->update(['checkin_email' => false]);
+        $accessory->category->update([
+             'checkin_email' => false,
+             'require_acceptance' => false,
+             'eula_text' => null
+        ]);
 
         event(new CheckoutableCheckedIn(
             $accessory,
@@ -77,8 +81,8 @@ class AccessoryCheckinTest extends TestCase
             '',
         ));
 
-        Mail::assertNotSent(CheckinAccessoryMail::class, function ($mail) use ($accessory, $user) {
-            return $mail->hasTo($user) && $mail->contains($accessory);
+        Mail::assertNotSent(CheckinAccessoryMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
         });
     }
 }
