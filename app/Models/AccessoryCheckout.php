@@ -84,7 +84,7 @@ class AccessoryCheckout extends Model
      */
     public function checkedOutToUser(): bool
     {
-      return $this->assignedType() === Asset::USER;
+        return $this->assignedType() === Asset::USER; //ARGH - delete me
     }
 
     public function scopeUserAssigned(Builder $query): void

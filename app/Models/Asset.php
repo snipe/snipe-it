@@ -35,8 +35,13 @@ class Asset extends Depreciable
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
-    public const LOCATION = 'location';
-    public const ASSET = 'asset';
+    /*
+     * When trying to find the effective 'location' of an asset -
+     * When you have an asset, assigned to another asset, assigned to another...how many of those assets do we
+     * recursively iterate before we give up, when trying to find the 'real' location?
+     */
+
+    const MAX_ASSET_ITERATIONS_FOR_LOCATION = 10;
     public const USER = 'user';
 
     use Acceptable;
@@ -484,17 +489,7 @@ class Asset extends Depreciable
      */
     public function checkedOutToUser(): bool
     {
-      return $this->assignedType() === self::USER;
-    }
-
-    public function checkedOutToLocation(): bool
-    {
-      return $this->assignedType() === self::LOCATION;
-    }
-
-    public function checkedOutToAsset(): bool
-    {
-      return $this->assignedType() === self::ASSET;
+        return $this->assigned_type === User::class;
     }
 
     /**
@@ -535,51 +530,36 @@ class Asset extends Depreciable
      */
     public function assetLoc($iterations = 1, $first_asset = null)
     {
-        if (! empty($this->assignedType())) {
-            if ($this->assignedType() == self::ASSET) {
-                if (! $first_asset) {
+        if (empty($this->assigned_type)) {
+            return $this->defaultLoc;
+        }
+        switch ($this->assigned_type) {
+            case Asset::class:
+                if (!$first_asset) {
                     $first_asset = $this;
                 }
-                if ($iterations > 10) {
-                    throw new \Exception('Asset assignment Loop for Asset ID: '.$first_asset->id);
+                if ($iterations > self::MAX_ASSET_ITERATIONS_FOR_LOCATION) {
+                    throw new \Exception('Asset assignment Loop for Asset ID: ' . $first_asset->id);
                 }
                 $assigned_to = self::find($this->assigned_to); //have to do this this way because otherwise it errors
                 if ($assigned_to) {
                     return $assigned_to->assetLoc($iterations + 1, $first_asset);
                 } // Recurse until we have a final location
-            }
-            if ($this->assignedType() == self::LOCATION) {
+                break;
+            case Location::class:
                 if ($this->assignedTo) {
                     return $this->assignedTo;
                 }
-
-            }
-            if ($this->assignedType() == self::USER) {
+                break;
+            case User::class:
                 if (($this->assignedTo) && $this->assignedTo->userLoc) {
                     return $this->assignedTo->userLoc;
                 }
                 //this makes no sense
                 return $this->defaultLoc;
-
-            }
-
         }
-        return $this->defaultLoc;
+        return null; //otherwise return null
     }
-
-    /**
-     * Gets the lowercased name of the type of target the asset is assigned to
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
-     * @return string
-     */
-    public function assignedType()
-    {
-        return $this->assigned_type ? strtolower(class_basename($this->assigned_type)) : null;
-    }
-
-
 
     /**
      * This is annoying, but because we don't say "assets" in our route names, we have to make an exception here
