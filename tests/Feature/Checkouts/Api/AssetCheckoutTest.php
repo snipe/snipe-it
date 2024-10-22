@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Checkouts\Api;
 
+use Illuminate\Support\Facades\Mail;
+use Notification;
 use PHPUnit\Framework\Attributes\DataProvider;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
@@ -23,11 +25,18 @@ class AssetCheckoutTest extends TestCase
 
     public function testCheckoutRequest()
     {
-        $asset = Asset::factory()->create();
+        Notification::fake();
+        $requestable = Asset::factory()->requestable()->create();
+        $nonRequestable = Asset::factory()->nonrequestable()->create();
 
         $this->actingAsForApi(User::factory()->create())
-            ->post(route('api.assets.requests.store', $asset->id))
-            ->assertOk();
+            ->post(route('api.assets.requests.store', $requestable->id))
+            ->assertStatusMessageIs('success');
+
+        $this->actingAsForApi(User::factory()->create())
+            ->post(route('api.assets.requests.store', $nonRequestable->id))
+            ->assertStatusMessageIs('error');
+
     }
 
     public function testCheckingOutAssetRequiresCorrectPermission()

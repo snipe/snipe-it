@@ -12,10 +12,10 @@ use Illuminate\Http\JsonResponse;
 
 class CheckoutRequest extends Controller
 {
-    public function store(CheckoutRequestRequest $request, Asset $asset): JsonResponse
+    public function store(Asset $asset): JsonResponse
     {
         try {
-            CreateCheckoutRequest::run($asset, $request->validated()['user_id']);
+            CreateCheckoutRequest::run($asset, auth()->user());
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.requests.success')));
         } catch (AssetNotRequestable $e) {
             return response()->json(Helper::formatStandardApiResponse('error', 'Asset is not requestable'));

@@ -347,12 +347,24 @@ class AssetFactory extends Factory
 
     public function requestable()
     {
-        return $this->state(['requestable' => true]);
+        $id = Statuslabel::factory()->create([
+            'archived'   => false,
+            'deployable' => true,
+            'pending'    => true,
+        ])->id;
+        //return $this->state(['requestable' => true]);
+        return $this->state(['status_id' => $id]);
     }
 
     public function nonrequestable()
     {
-        return $this->state(['requestable' => false]);
+        $id = Statuslabel::factory()->create([
+            'archived'   => true,
+            'deployable' => false,
+            'pending'    => false,
+        ])->id;
+        //return $this->state(['requestable' => false]);
+        return $this->state(['status_id' => $id]);
     }
 
     public function noPurchaseOrEolDate()
