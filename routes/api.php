@@ -40,6 +40,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.requested');
 
+        Route::post('request/{asset}', [Api\CheckoutRequest::class, 'store'])->name('api.assets.requests.store');
+
         Route::get('requestable/hardware',
             [
                 Api\AssetsController::class, 

@@ -3,6 +3,7 @@
 namespace App\Actions\CheckoutRequests;
 
 use App\Exceptions\AssetNotRequestable;
+use App\Exceptions\ThereIsNoUser;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
@@ -11,7 +12,6 @@ use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CreateCheckoutRequest
 {
@@ -21,7 +21,7 @@ class CreateCheckoutRequest
      */
     public static function run(Asset $asset, User $user): string
     {
-        // Check if asset is requestable
+        //throw new \Exception();
         if (is_null(Asset::RequestableAssets()->find($asset->id))) {
             throw new AssetNotRequestable($asset);
         }
@@ -46,6 +46,7 @@ class CreateCheckoutRequest
         $logaction->target_type = User::class;
 
         // If it's already requested, cancel the request.
+        // this is going into another action class
         if ($asset->isRequestedBy(auth()->user())) {
             $asset->cancelRequest();
             $asset->decrement('requests_counter', 1);
@@ -68,7 +69,12 @@ class CreateCheckoutRequest
             \Log::warning($e);
         }
 
-        return $asset;
+        return true; // or $asset, or whatever
+    }
+
+    public function doSomethingElse()
+    {
+
     }
 
 

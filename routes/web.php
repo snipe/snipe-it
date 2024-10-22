@@ -305,7 +305,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     )->name('requestable-assets');
     Route::post(
         'request-asset/{asset}',
-        [ViewAssetsController::class, 'getRequestAsset']
+        [ViewAssetsController::class, 'store']
     )->name('account/request-asset');
 
     Route::post(

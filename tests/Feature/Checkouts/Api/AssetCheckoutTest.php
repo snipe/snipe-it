@@ -21,6 +21,15 @@ class AssetCheckoutTest extends TestCase
         Event::fake([CheckoutableCheckedOut::class]);
     }
 
+    public function testCheckoutRequest()
+    {
+        $asset = Asset::factory()->create();
+
+        $this->actingAsForApi(User::factory()->create())
+            ->post(route('api.assets.requests.store', $asset->id))
+            ->assertOk();
+    }
+
     public function testCheckingOutAssetRequiresCorrectPermission()
     {
         $this->actingAsForApi(User::factory()->create())
