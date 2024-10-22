@@ -1432,10 +1432,10 @@ var require_module_cjs = __commonJS({
       });
     }
     function cleanupElement(el) {
-      if (el._x_cleanups) {
-        while (el._x_cleanups.length)
-          el._x_cleanups.pop()();
-      }
+      var _a, _b;
+      (_a = el._x_effects) == null ? void 0 : _a.forEach(dequeueJob);
+      while ((_b = el._x_cleanups) == null ? void 0 : _b.length)
+        el._x_cleanups.pop()();
     }
     var observer = new MutationObserver(onMutate);
     var currentlyObserving = false;
@@ -1673,26 +1673,22 @@ var require_module_cjs = __commonJS({
       magics[name] = callback;
     }
     function injectMagics(obj, el) {
+      let memoizedUtilities = getUtilities(el);
       Object.entries(magics).forEach(([name, callback]) => {
-        let memoizedUtilities = null;
-        function getUtilities() {
-          if (memoizedUtilities) {
-            return memoizedUtilities;
-          } else {
-            let [utilities, cleanup] = getElementBoundUtilities(el);
-            memoizedUtilities = { interceptor, ...utilities };
-            onElRemoved(el, cleanup);
-            return memoizedUtilities;
-          }
-        }
         Object.defineProperty(obj, `$${name}`, {
           get() {
-            return callback(el, getUtilities());
+            return callback(el, memoizedUtilities);
           },
           enumerable: false
         });
       });
       return obj;
+    }
+    function getUtilities(el) {
+      let [utilities, cleanup] = getElementBoundUtilities(el);
+      let utils = { interceptor, ...utilities };
+      onElRemoved(el, cleanup);
+      return utils;
     }
     function tryCatch(el, expression, callback, ...args) {
       try {
@@ -2067,8 +2063,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     function destroyTree(root, walker = walk) {
       walker(root, (el) => {
-        cleanupAttributes(el);
         cleanupElement(el);
+        cleanupAttributes(el);
       });
     }
     function warnAboutMissingPlugins() {
@@ -2648,34 +2644,37 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       return rawValue ? Boolean(rawValue) : null;
     }
+    var booleanAttributes = /* @__PURE__ */ new Set([
+      "allowfullscreen",
+      "async",
+      "autofocus",
+      "autoplay",
+      "checked",
+      "controls",
+      "default",
+      "defer",
+      "disabled",
+      "formnovalidate",
+      "inert",
+      "ismap",
+      "itemscope",
+      "loop",
+      "multiple",
+      "muted",
+      "nomodule",
+      "novalidate",
+      "open",
+      "playsinline",
+      "readonly",
+      "required",
+      "reversed",
+      "selected",
+      "shadowrootclonable",
+      "shadowrootdelegatesfocus",
+      "shadowrootserializable"
+    ]);
     function isBooleanAttr(attrName) {
-      const booleanAttributes = [
-        "disabled",
-        "checked",
-        "required",
-        "readonly",
-        "open",
-        "selected",
-        "autofocus",
-        "itemscope",
-        "multiple",
-        "novalidate",
-        "allowfullscreen",
-        "allowpaymentrequest",
-        "formnovalidate",
-        "autoplay",
-        "controls",
-        "loop",
-        "muted",
-        "playsinline",
-        "default",
-        "ismap",
-        "reversed",
-        "async",
-        "defer",
-        "nomodule"
-      ];
-      return booleanAttributes.includes(attrName);
+      return booleanAttributes.has(attrName);
     }
     function attributeShouldntBePreservedIfFalsy(name) {
       return !["aria-pressed", "aria-checked", "aria-expanded", "aria-selected"].includes(name);
@@ -2776,10 +2775,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return stores[name];
       }
       stores[name] = value;
+      initInterceptors(stores[name]);
       if (typeof value === "object" && value !== null && value.hasOwnProperty("init") && typeof value.init === "function") {
         stores[name].init();
       }
-      initInterceptors(stores[name]);
     }
     function getStores() {
       return stores;
@@ -3070,7 +3069,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           placeInDom(el._x_teleport, target2, modifiers);
         });
       };
-      cleanup(() => clone2.remove());
+      cleanup(() => mutateDom(() => {
+        clone2.remove();
+        destroyTree(clone2);
+      }));
     });
     var teleportContainerDuringClone = document.createElement("div");
     function getTarget(expression) {
@@ -3558,7 +3560,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       el._x_lookup = {};
       effect3(() => loop(el, iteratorNames, evaluateItems, evaluateKey));
       cleanup(() => {
-        Object.values(el._x_lookup).forEach((el2) => el2.remove());
+        Object.values(el._x_lookup).forEach((el2) => mutateDom(() => {
+          destroyTree(el2);
+          el2.remove();
+        }));
         delete el._x_prevKeys;
         delete el._x_lookup;
       });
@@ -3627,11 +3632,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
         for (let i = 0; i < removes.length; i++) {
           let key = removes[i];
-          if (!!lookup[key]._x_effects) {
-            lookup[key]._x_effects.forEach(dequeueJob);
-          }
-          lookup[key].remove();
-          lookup[key] = null;
+          if (!(key in lookup))
+            continue;
+          mutateDom(() => {
+            destroyTree(lookup[key]);
+            lookup[key].remove();
+          });
           delete lookup[key];
         }
         for (let i = 0; i < moves.length; i++) {
@@ -3752,12 +3758,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         });
         el._x_currentIfEl = clone2;
         el._x_undoIf = () => {
-          walk(clone2, (node) => {
-            if (!!node._x_effects) {
-              node._x_effects.forEach(dequeueJob);
-            }
+          mutateDom(() => {
+            destroyTree(clone2);
+            clone2.remove();
           });
-          clone2.remove();
           delete el._x_currentIfEl;
         };
         return clone2;
@@ -3812,9 +3816,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 });
 
-// ../alpine/packages/collapse/dist/module.cjs.js
+// ../../../../usr/local/lib/node_modules/@alpinejs/collapse/dist/module.cjs.js
 var require_module_cjs2 = __commonJS({
-  "../alpine/packages/collapse/dist/module.cjs.js"(exports, module) {
+  "../../../../usr/local/lib/node_modules/@alpinejs/collapse/dist/module.cjs.js"(exports, module) {
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -3887,7 +3891,7 @@ var require_module_cjs2 = __commonJS({
               start: { height: current + "px" },
               end: { height: full + "px" }
             }, () => el._x_isShown = true, () => {
-              if (Math.abs(el.getBoundingClientRect().height - full) < 1) {
+              if (el.getBoundingClientRect().height == full) {
                 el.style.overflow = null;
               }
             });
@@ -3933,9 +3937,9 @@ var require_module_cjs2 = __commonJS({
   }
 });
 
-// ../alpine/packages/focus/dist/module.cjs.js
+// ../../../../usr/local/lib/node_modules/@alpinejs/focus/dist/module.cjs.js
 var require_module_cjs3 = __commonJS({
-  "../alpine/packages/focus/dist/module.cjs.js"(exports, module) {
+  "../../../../usr/local/lib/node_modules/@alpinejs/focus/dist/module.cjs.js"(exports, module) {
     var __create2 = Object.create;
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -4935,9 +4939,9 @@ var require_module_cjs3 = __commonJS({
   }
 });
 
-// ../alpine/packages/persist/dist/module.cjs.js
+// ../../../../usr/local/lib/node_modules/@alpinejs/persist/dist/module.cjs.js
 var require_module_cjs4 = __commonJS({
-  "../alpine/packages/persist/dist/module.cjs.js"(exports, module) {
+  "../../../../usr/local/lib/node_modules/@alpinejs/persist/dist/module.cjs.js"(exports, module) {
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -5024,9 +5028,9 @@ var require_module_cjs4 = __commonJS({
   }
 });
 
-// ../alpine/packages/intersect/dist/module.cjs.js
+// ../../../../usr/local/lib/node_modules/@alpinejs/intersect/dist/module.cjs.js
 var require_module_cjs5 = __commonJS({
-  "../alpine/packages/intersect/dist/module.cjs.js"(exports, module) {
+  "../../../../usr/local/lib/node_modules/@alpinejs/intersect/dist/module.cjs.js"(exports, module) {
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -5106,8 +5110,80 @@ var require_module_cjs5 = __commonJS({
   }
 });
 
-// ../alpine/packages/anchor/dist/module.cjs.js
+// node_modules/@alpinejs/resize/dist/module.cjs.js
 var require_module_cjs6 = __commonJS({
+  "node_modules/@alpinejs/resize/dist/module.cjs.js"(exports, module) {
+    var __defProp2 = Object.defineProperty;
+    var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames2 = Object.getOwnPropertyNames;
+    var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+    var __export = (target, all2) => {
+      for (var name in all2)
+        __defProp2(target, name, { get: all2[name], enumerable: true });
+    };
+    var __copyProps2 = (to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames2(from))
+          if (!__hasOwnProp2.call(to, key) && key !== except)
+            __defProp2(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+      }
+      return to;
+    };
+    var __toCommonJS = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
+    var module_exports = {};
+    __export(module_exports, {
+      default: () => module_default,
+      resize: () => src_default
+    });
+    module.exports = __toCommonJS(module_exports);
+    function src_default(Alpine19) {
+      Alpine19.directive("resize", Alpine19.skipDuringClone((el, { value, expression, modifiers }, { evaluateLater, cleanup }) => {
+        let evaluator = evaluateLater(expression);
+        let evaluate = (width, height) => {
+          evaluator(() => {
+          }, { scope: { "$width": width, "$height": height } });
+        };
+        let off = modifiers.includes("document") ? onDocumentResize(evaluate) : onElResize(el, evaluate);
+        cleanup(() => off());
+      }));
+    }
+    function onElResize(el, callback) {
+      let observer = new ResizeObserver((entries) => {
+        let [width, height] = dimensions(entries);
+        callback(width, height);
+      });
+      observer.observe(el);
+      return () => observer.disconnect();
+    }
+    var documentResizeObserver;
+    var documentResizeObserverCallbacks = /* @__PURE__ */ new Set();
+    function onDocumentResize(callback) {
+      documentResizeObserverCallbacks.add(callback);
+      if (!documentResizeObserver) {
+        documentResizeObserver = new ResizeObserver((entries) => {
+          let [width, height] = dimensions(entries);
+          documentResizeObserverCallbacks.forEach((i) => i(width, height));
+        });
+        documentResizeObserver.observe(document.documentElement);
+      }
+      return () => {
+        documentResizeObserverCallbacks.delete(callback);
+      };
+    }
+    function dimensions(entries) {
+      let width, height;
+      for (let entry of entries) {
+        width = entry.borderBoxSize[0].inlineSize;
+        height = entry.borderBoxSize[0].blockSize;
+      }
+      return [width, height];
+    }
+    var module_default = src_default;
+  }
+});
+
+// ../alpine/packages/anchor/dist/module.cjs.js
+var require_module_cjs7 = __commonJS({
   "../alpine/packages/anchor/dist/module.cjs.js"(exports, module) {
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -6645,7 +6721,7 @@ var require_nprogress = __commonJS({
 });
 
 // ../alpine/packages/morph/dist/module.cjs.js
-var require_module_cjs7 = __commonJS({
+var require_module_cjs8 = __commonJS({
   "../alpine/packages/morph/dist/module.cjs.js"(exports, module) {
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -6744,6 +6820,8 @@ var require_module_cjs7 = __commonJS({
         let toAttributes = Array.from(to.attributes);
         for (let i = domAttributes.length - 1; i >= 0; i--) {
           let name = domAttributes[i].name;
+          if (name === "style")
+            continue;
           if (!to.hasAttribute(name)) {
             from2.removeAttribute(name);
           }
@@ -6751,6 +6829,8 @@ var require_module_cjs7 = __commonJS({
         for (let i = toAttributes.length - 1; i >= 0; i--) {
           let name = toAttributes[i].name;
           let value = toAttributes[i].value;
+          if (name === "style")
+            continue;
           if (from2.getAttribute(name) !== value) {
             from2.setAttribute(name, value);
           }
@@ -7006,9 +7086,9 @@ var require_module_cjs7 = __commonJS({
   }
 });
 
-// ../alpine/packages/mask/dist/module.cjs.js
-var require_module_cjs8 = __commonJS({
-  "../alpine/packages/mask/dist/module.cjs.js"(exports, module) {
+// ../../../../usr/local/lib/node_modules/@alpinejs/mask/dist/module.cjs.js
+var require_module_cjs9 = __commonJS({
+  "../../../../usr/local/lib/node_modules/@alpinejs/mask/dist/module.cjs.js"(exports, module) {
     var __defProp2 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -8509,7 +8589,8 @@ var import_collapse = __toESM(require_module_cjs2());
 var import_focus = __toESM(require_module_cjs3());
 var import_persist2 = __toESM(require_module_cjs4());
 var import_intersect = __toESM(require_module_cjs5());
-var import_anchor = __toESM(require_module_cjs6());
+var import_resize = __toESM(require_module_cjs6());
+var import_anchor = __toESM(require_module_cjs7());
 
 // js/plugins/navigate/history.js
 var Snapshot = class {
@@ -8660,7 +8741,7 @@ function extractDestinationFromLink(linkEl) {
   return createUrlObjectFromString(linkEl.getAttribute("href"));
 }
 function createUrlObjectFromString(urlString) {
-  return new URL(urlString, document.baseURI);
+  return urlString !== null && new URL(urlString, document.baseURI);
 }
 function getUriStringFromUrlObject(urlObject) {
   return urlObject.pathname + urlObject.search + urlObject.hash;
@@ -8782,8 +8863,10 @@ function restoreScrollPositionOrScrollToTop() {
     }
   };
   queueMicrotask(() => {
-    scroll(document.body);
-    document.querySelectorAll(["[x-navigate\\:scroll]", "[wire\\:scroll]"]).forEach(scroll);
+    queueMicrotask(() => {
+      scroll(document.body);
+      document.querySelectorAll(["[x-navigate\\:scroll]", "[wire\\:scroll]"]).forEach(scroll);
+    });
   });
 }
 
@@ -9087,12 +9170,16 @@ function navigate_default(Alpine19) {
     let shouldPrefetchOnHover = modifiers.includes("hover");
     shouldPrefetchOnHover && whenThisLinkIsHoveredFor(el, 60, () => {
       let destination = extractDestinationFromLink(el);
+      if (!destination)
+        return;
       prefetchHtml(destination, (html, finalDestination) => {
         storeThePrefetchedHtmlForWhenALinkIsClicked(html, destination, finalDestination);
       });
     });
     whenThisLinkIsPressed(el, (whenItIsReleased) => {
       let destination = extractDestinationFromLink(el);
+      if (!destination)
+        return;
       prefetchHtml(destination, (html, finalDestination) => {
         storeThePrefetchedHtmlForWhenALinkIsClicked(html, destination, finalDestination);
       });
@@ -9441,8 +9528,8 @@ function fromQueryString(search) {
 }
 
 // js/lifecycle.js
-var import_morph = __toESM(require_module_cjs7());
-var import_mask = __toESM(require_module_cjs8());
+var import_morph = __toESM(require_module_cjs8());
+var import_mask = __toESM(require_module_cjs9());
 var import_alpinejs5 = __toESM(require_module_cjs());
 function start() {
   setTimeout(() => ensureLivewireScriptIsntMisplaced());
@@ -9451,6 +9538,7 @@ function start() {
   import_alpinejs5.default.plugin(import_morph.default);
   import_alpinejs5.default.plugin(history2);
   import_alpinejs5.default.plugin(import_intersect.default);
+  import_alpinejs5.default.plugin(import_resize.default);
   import_alpinejs5.default.plugin(import_collapse.default);
   import_alpinejs5.default.plugin(import_anchor.default);
   import_alpinejs5.default.plugin(import_focus.default);

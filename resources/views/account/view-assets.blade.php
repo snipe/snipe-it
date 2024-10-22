@@ -144,7 +144,8 @@
                         </button>
                       </form>
                     @else
-                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">
+                      <button style="width: 100%;" class="btn btn-sm btn-primary btn-social btn-block hidden-print disabled" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">
+                        <x-icon type="email" class="fa-fw" />
                         {{ trans('admin/users/general.email_assigned') }}
                       </button>
                     @endif

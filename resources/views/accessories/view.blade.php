@@ -194,7 +194,6 @@
                                         @foreach ($accessory->uploads as $file)
                                             <tr>
                                                 <td>
-                                                    <x-icon type="paperclip" class="fa-2x" />
                                                     <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
                                                     <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
 

@@ -31,7 +31,7 @@
             <x-icon type="assets" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->withoutTrashed()->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
