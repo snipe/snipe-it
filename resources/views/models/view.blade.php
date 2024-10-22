@@ -107,99 +107,11 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            @if ($model->uploads->count() > 0)
-                                <table
-                                        class="table table-striped snipe-table"
-                                        id="modelFileHistory"
-                                        data-pagination="true"
-                                        data-id-table="modelFileHistory"
-                                        data-search="true"
-                                        data-side-pagination="client"
-                                        data-sortable="true"
-                                        data-show-columns="true"
-                                        data-show-fullscreen="true"
-                                        data-show-refresh="true"
-                                        data-sort-order="desc"
-                                        data-sort-name="created_at"
-                                        data-show-export="true"
-                                        data-export-options='{
-                         "fileName": "export-asset-{{ $model->id }}-files",
-                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                       }'
-                                        data-cookie-id-table="assetFileHistory">
-                                    <thead>
-                                    <tr>
-                                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    @foreach ($model->uploads as $file)
-                                        <tr>
-                                            <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
-                                            <td>
-                                                @if ((Storage::exists('private_uploads/assetmodels/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('assetmodels'))))
-                                                    <a href="{{ route('show/modelfile', ['modelID' => $model->id, 'fileId' => $file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}">
-                                                        <img src="{{ route('show/modelfile', ['modelID' => $model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
-                                                    </a>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if (Storage::exists('private_uploads/assetmodels/'.$file->filename))
-                                                    {{ $file->filename }}
-                                                @else
-                                                    <del>{{ $file->filename }}</del>
-                                                @endif
-                                            </td>
-                                            <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '' }}">
-                                                {{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) : '' }}
-                                            </td>
-                                            <td>
-                                                @if ($file->note)
-                                                    {{ $file->note }}
-                                                @endif
-                                            </td>
-                                            <td style="white-space: nowrap">
-                                                @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
-                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                                        <i class="fas fa-download" aria-hidden="true"></i>
-                                                    </a>
-
-                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                        <x-icon type="external-link" />
-                                                    </a>
-
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($file->created_at)
-                                                    {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @can('update', \App\Models\AssetModel::class)
-                                                    <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$model->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fas fa-trash icon-white" aria-hidden="true"></i></a>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-
-                            @else
-
-                                <div class="alert alert-info alert-block">
-                                    <i class="fas fa-info-circle"></i>
-                                    {{ trans('general.no_results') }}
-                                </div>
-                            @endif
+                            <x-filestable
+                                    filepath="private_uploads/assetmodels/"
+                                    showfile_routename="show/modelfile"
+                                    deletefile_routename="delete/modelfile"
+                                    :object="$model" />
 
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->

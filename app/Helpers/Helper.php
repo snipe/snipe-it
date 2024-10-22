@@ -1123,6 +1123,7 @@ class Helper
             'png'   => 'far fa-image',
             'webp'   => 'far fa-image',
             'avif'   => 'far fa-image',
+            'svg' => 'fas fa-vector-square',
             // word
             'doc'   => 'far fa-file-word',
             'docx'   => 'far fa-file-word',
@@ -1135,7 +1136,7 @@ class Helper
             //Text
             'txt'   => 'far fa-file-alt',
             'rtf'   => 'far fa-file-alt',
-            'xml'   => 'far fa-file-alt',
+            'xml'   => 'fas fa-code',
             // Misc
             'pdf'   => 'far fa-file-pdf',
             'lic'   => 'far fa-save',
@@ -1148,41 +1149,7 @@ class Helper
         return 'far fa-file';
     }
 
-    public static function show_file_inline($filename)
-    {
-        $extension = substr(strrchr($filename, '.'), 1);
 
-        if ($extension) {
-            switch ($extension) {
-                case 'jpg':
-                case 'jpeg':
-                case 'gif':
-                case 'png':
-                case 'webp':
-                case 'avif':
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Generate a random encrypted password.
-     *
-     * @author Wes Hulette <jwhulette@gmail.com>
-     *
-     * @since 5.0.0
-     *
-     * @return string
-     */
-    public static function generateEncyrptedPassword(): string
-    {
-        return bcrypt(self::generateUnencryptedPassword());
-    }
 
     /**
      * Get a random unencrypted password.
