@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Asset;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
@@ -418,6 +419,8 @@ class LdapSync extends Command
                 if ($item['createorupdate'] === 'created' && $ldap_default_group) {
                     $user->groups()->attach($ldap_default_group);
                 }
+                //updates assets location based on user's location
+                Asset::where('assigned_to', '=', $user->id)->update(['location_id' => $user->location_id]);
 
             } else {
                 foreach ($user->getErrors()->getMessages() as $key => $err) {
