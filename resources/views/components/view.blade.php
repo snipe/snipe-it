@@ -161,7 +161,7 @@
   <div class="col-md-3">
     @if ($component->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-        <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox">
+        <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox" data-type="image">
           <img src="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" class="img-responsive img-thumbnail" alt="{{ $component->name }}"></a>
       </div>
 
