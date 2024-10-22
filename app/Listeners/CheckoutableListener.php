@@ -68,6 +68,7 @@ class CheckoutableListener
             if ($notifiable instanceof User && $notifiable->email != '') {
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+
                 Mail::to($notifiable)->send($mailable);
                 Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
             }

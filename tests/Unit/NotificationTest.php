@@ -33,7 +33,9 @@ class NotificationTest extends TestCase
 
         Mail::fake();
         $asset->checkOut($user, $admin->id);
-        Mail::assertSent($user, CheckoutAssetMail::class);
+        Mail::assertSent(CheckoutAssetMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
     public function testDefaultEulaIsSentWhenSetInCategory()
     {

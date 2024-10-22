@@ -14,7 +14,6 @@ trait AssertsAgainstSlackNotifications
             new AnonymousNotifiable,
             $notificationClass,
             function ($notification, $channels, $notifiable) {
-                dd($notification);
                 return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
             }
         );

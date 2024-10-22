@@ -159,7 +159,7 @@ class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirem
                 'checkout_to_type' => 'user',
             ]);
 
-        Mail::assertNotSent(CheckoutAccessoryMail::class, function ($mail) use ($user) {
+        Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email);
         });
     }
