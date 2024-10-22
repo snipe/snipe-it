@@ -79,6 +79,11 @@ return [
         'no_assets_selected' => 'You must select at least one asset from the list',
     ],
 
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+    ],
+
     'checkin' => [
         'error'   		=> 'Asset was not checked in, please try again',
         'success' 		=> 'Asset checked in successfully.',

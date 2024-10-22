@@ -161,7 +161,6 @@
                                         showfile_routename="show.accessoryfile"
                                         deletefile_routename="delete/accessoryfile"
                                         :object="$accessory" />
-
                                 </div>
                             </div>
                         </div> <!-- /.tab-pane -->
