@@ -160,7 +160,6 @@ class ActionlogsTransformer
                 [
                     'url' => $file_url,
                     'filename' => $actionlog->filename,
-                    'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [
