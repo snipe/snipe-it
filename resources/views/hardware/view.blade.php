@@ -168,7 +168,7 @@
                                 <div class="col-md-12 text-center">
                                     @if (($asset->image) || (($asset->model) && ($asset->model->image!='')))
                                         <div class="text-center col-md-12" style="padding-bottom: 15px;">
-                                            <a href="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" data-toggle="lightbox">
+                                            <a href="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" data-toggle="lightbox" data-type="image">
                                                 <img src="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
                                             </a>
                                         </div>
