@@ -154,6 +154,7 @@
 
                     @can('accessories.files', $accessory)
                         <div class="tab-pane" id="files">
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <x-filestable
