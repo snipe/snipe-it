@@ -96,7 +96,7 @@ class StatuslabelsController extends Controller
 
         if (! $request->filled('type')) {
 
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => [trans('admin/statuslabels/message.require_status_label')]]));
         }
 
         $statuslabel = new Statuslabel;

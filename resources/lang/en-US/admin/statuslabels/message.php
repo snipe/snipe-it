@@ -5,7 +5,7 @@ return [
     'does_not_exist' => 'Status Label does not exist.',
     'deleted_label' => 'Deleted Status Label',
     'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
-
+    'require_status_label' => 'Status label type is required.',
     'create' => [
         'error'   => 'Status Label was not created, please try again.',
         'success' => 'Status Label created successfully.',
