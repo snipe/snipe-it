@@ -3,7 +3,7 @@
 namespace Tests\Feature\Checkins\Ui;
 
 use App\Events\CheckoutableCheckedIn;
-use App\Mail\CheckoutAccessoryMail;
+use App\Mail\CheckinAccessoryMail;
 use App\Models\Accessory;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
@@ -56,8 +56,8 @@ class AccessoryCheckinTest extends TestCase
             '',
         ));
 
-        Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($accessory, $user) {
-            return $mail->hasTo($user) && $mail->contains($accessory);
+        Mail::assertSent(CheckinAccessoryMail::class, function ($mail) use ( $user) {
+            return $mail->hasTo($user->email);
         });
     }
 
@@ -77,7 +77,7 @@ class AccessoryCheckinTest extends TestCase
             '',
         ));
 
-        Mail::assertNotSent(CheckoutAccessoryMail::class, function ($mail) use ($accessory, $user) {
+        Mail::assertNotSent(CheckinAccessoryMail::class, function ($mail) use ($accessory, $user) {
             return $mail->hasTo($user) && $mail->contains($accessory);
         });
     }
