@@ -177,3 +177,6 @@ Route::resource('hardware',
 Route::get('ht/{any?}',
     [AssetsController::class, 'getAssetByTag']
 )->where('any', '.*')->name('ht/assetTag');
+Route::get('qr/{any?}',
+    [AssetsController::class, 'getAssetTag']
+)->where('any', '.*')->name('assetTag');

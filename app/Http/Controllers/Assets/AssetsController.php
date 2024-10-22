@@ -505,6 +505,29 @@ class AssetsController extends Controller
 
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
+    /**
+     * Searches the assets table by asset tag, and redirects if it finds one
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getAssetTag(Request $request, $tag=null) : RedirectResponse
+    {
+        $tag = $tag ? $tag : $request->get('assetTag');
+
+        // Search for an exact and unique asset tag match
+        $assets = Asset::where('asset_tag', '=', $tag);
+
+        // If not a unique result, redirect to the index view
+        if ($assets->count() != 1) {
+            return redirect()->route('hardware.index')
+                ->with('search', $tag)
+                ->with('warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
+        }
+
+        return $assets->first()->asset_tag;
+    }
 
 
     /**
