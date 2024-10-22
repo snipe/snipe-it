@@ -4,11 +4,12 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class CreateReportTemplateTest extends TestCase
+class CreateReportTemplateTest extends TestCase implements TestsPermissionsRequirement
 {
-    public function testSavingReportTemplateRequiresCorrectPermission()
+    public function testRequiresPermission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('report-templates.store'))

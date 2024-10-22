@@ -4,11 +4,12 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteReportTemplateTest extends TestCase
+class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequirement
 {
-    public function testDeletingReportTemplateRequiresCorrectPermission()
+    public function testRequiresPermission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('report-templates.destroy', 1))

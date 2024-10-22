@@ -4,10 +4,18 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class ShowReportTemplateTest extends TestCase
+class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequirement
 {
+    public function testRequiresPermission()
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('reports/custom'))
+            ->assertForbidden();
+    }
+
     public function testCanLoadCustomReportPage()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
