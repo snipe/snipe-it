@@ -16,6 +16,7 @@ use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ReportTemplatesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
@@ -379,6 +380,14 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
+
+    Route::prefix('reports/templates')->name('report-templates')->group(function () {
+        Route::post('/', [ReportTemplatesController::class, 'store'])->name('.store');
+        Route::get('/{reportId}', [ReportTemplatesController::class, 'show'])->name('.show');
+        Route::get('/{reportId}/edit', [ReportTemplatesController::class, 'edit'])->name('.edit');
+        Route::post('/{reportId}', [ReportTemplatesController::class, 'update'])->name('.update');
+        Route::delete('/{reportId}', [ReportTemplatesController::class, 'destroy'])->name('.destroy');
+    });
 
     Route::get(
         'reports/activity',
