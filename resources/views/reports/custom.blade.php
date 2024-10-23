@@ -477,13 +477,20 @@
             </div>
 
               <!-- EoL Date -->
-              <div class="form-group asset_eol_date-range">
+              <div class="form-group asset_eol_date-range {{ ($errors->has('asset_eol_date_start') || $errors->has('asset_eol_date_end')) ? ' has-error' : '' }}">
                   <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
                   <div class="input-daterange input-group col-md-6" id="datepicker">
                       <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start" value="{{ $template->textValue('asset_eol_date_start') }}">
                       <span class="input-group-addon">to</span>
                       <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end" value="{{ $template->textValue('asset_eol_date_end') }}">
                   </div>
+
+                  @if ($errors->has('asset_eol_date_start') || $errors->has('asset_eol_date_end'))
+                      <div class="col-md-9 col-lg-offset-3">
+                          {!! $errors->first('asset_eol_date_start', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                          {!! $errors->first('asset_eol_date_end', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                      </div>
+                  @endif
               </div>
 
               <!-- Last Audit Date -->
