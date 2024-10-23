@@ -101,7 +101,11 @@ class AssetsController extends Controller
     public function store(StoreAssetRequest $request): RedirectResponse
     {
         try {
-            StoreAssetAction::run($request->validated());
+            DB::beginTransaction();
+            foreach ($request->input('asset_tags') as $key => $tag) {
+                StoreAssetAction::run($request->validated(), $key);
+            }
+            DB::commit();
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
