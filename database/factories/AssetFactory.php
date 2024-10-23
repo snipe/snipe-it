@@ -352,8 +352,7 @@ class AssetFactory extends Factory
             'deployable' => true,
             'pending'    => true,
         ])->id;
-        //return $this->state(['requestable' => true]);
-        return $this->state(['status_id' => $id]);
+        return $this->state(['status_id' => $id, 'requestable' => true]);
     }
 
     public function nonrequestable()
@@ -363,8 +362,7 @@ class AssetFactory extends Factory
             'deployable' => false,
             'pending'    => false,
         ])->id;
-        //return $this->state(['requestable' => false]);
-        return $this->state(['status_id' => $id]);
+        return $this->state(['status_id' => $id, 'requestable' => false]);
     }
 
     public function noPurchaseOrEolDate()

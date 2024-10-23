@@ -21,7 +21,6 @@ class CreateCheckoutRequest
      */
     public static function run(Asset $asset, User $user): string
     {
-        //throw new \Exception();
         if (is_null(Asset::RequestableAssets()->find($asset->id))) {
             throw new AssetNotRequestable($asset);
         }
@@ -34,33 +33,16 @@ class CreateCheckoutRequest
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
-        $logaction = new Actionlog();
-        $logaction->item_id = $data['asset_id'] = $asset->id;
-        $logaction->item_type = $data['item_type'] = Asset::class;
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
-
-        if ($user->location_id) {
-            $logaction->location_id = $user->location_id;
-        }
-        $logaction->target_id = $data['user_id'] = auth()->id();
-        $logaction->target_type = User::class;
-
-        // If it's already requested, cancel the request.
-        // this is going into another action class
-        if ($asset->isRequestedBy(auth()->user())) {
-            $asset->cancelRequest();
-            $asset->decrement('requests_counter', 1);
-
-            $logaction->logaction('request canceled');
-            try {
-                $settings->notify(new RequestAssetCancelation($data));
-            } catch (\Exception $e) {
-                \Log::warning($e);
-            }
-            return $status = 'cancelled';
-        }
-
+        $logaction = Actionlog::create([
+            'target_id'   => $data['asset_id'] = $asset->id,
+            'item_type'   => $data['item_type'] = Asset::class,
+            'created_at'  => $data['requested_date'] = date('Y-m-d H:i:s'),
+            'user_id'     => $data['user_id'] = auth()->id(),
+            'target_type' => User::class,
+            'location_id' => $user->location_id ?? null,
+        ]);
         $logaction->logaction('requested');
+
         $asset->request();
         $asset->increment('requests_counter', 1);
         try {

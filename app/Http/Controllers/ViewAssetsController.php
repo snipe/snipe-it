@@ -83,7 +83,7 @@ class ViewAssetsController extends Controller
         return view('account/requestable-assets', compact('assets', 'models'));
     }
 
-    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null) : RedirectResponse
+    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null): RedirectResponse
     {
         $item = null;
         $fullItemType = 'App\\Models\\'.studly_case($itemType);

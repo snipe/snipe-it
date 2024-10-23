@@ -294,24 +294,18 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('api', [ProfileController::class, 'api'])->name('user.api');
 
     // View Assets
-    Route::get('view-assets', [ViewAssetsController::class, 'getIndex'])->name('view-assets');
+    Route::get('view-assets', [ViewAssetsController::class, 'index'])->name('view-assets');
 
     Route::get('requested', [ViewAssetsController::class, 'getRequestedAssets'])->name('account.requested');
 
     // Profile
-    Route::get(
-        'requestable-assets',
-        [ViewAssetsController::class, 'getRequestableIndex']
-    )->name('requestable-assets');
-    Route::post(
-        'request-asset/{asset}',
-        [ViewAssetsController::class, 'store']
-    )->name('account/request-asset');
+    Route::get('requestable-assets', [ViewAssetsController::class, 'getRequestableIndex'])->name('requestable-assets');
 
-    Route::post(
-        'request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}',
-        [ViewAssetsController::class, 'getRequestItem']
-    )->name('account/request-item');
+    Route::post('request-asset/{asset}', [ViewAssetsController::class, 'store'])
+        ->name('account/request-asset');
+
+    Route::post('request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}', [ViewAssetsController::class, 'getRequestItem'])
+        ->name('account/request-item');
 
     // Account Dashboard
     Route::get('/', [ViewAssetsController::class, 'getIndex'])->name('account');
