@@ -560,6 +560,9 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->assignedAssets()->find($response['payload']['id'])->is($apiAsset));
     }
 
+    /**
+     * @link https://app.shortcut.com/grokability/story/24475
+     */
     public function testCompanyIdNeedsToBeInteger()
     {
         $this->actingAsForApi(User::factory()->createAssets()->create())

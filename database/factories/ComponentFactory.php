@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
+use App\Models\Manufacturer;
 use App\Models\Consumable;
 use App\Models\Location;
 use App\Models\User;
@@ -41,7 +42,9 @@ class ComponentFactory extends Factory
             'purchase_cost' => $this->faker->randomFloat(2),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
             'company_id' => Company::factory(),
+            'manufacturer_id' => $this->faker->numberBetween(1, 5),
             'supplier_id' => Supplier::factory(),
+            'model_number' => $this->faker->numberBetween(1000000, 50000000),
         ];
     }
 

@@ -279,7 +279,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
+                                            <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
                                             <li>
                                                 <!-- inner menu: contains the actual data -->
                                                 <ul class="menu">
@@ -287,7 +287,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                                     @for($i = 0; count($alert_items) > $i; $i++)
 
                                                         <li><!-- Task item -->
-                                                            <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
+                                                            <a href="{{ route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
                                                                 <h2 class="task_menu">{{ $alert_items[$i]['name'] }}
                                                                     <small class="pull-right">
                                                                         {{ $alert_items[$i]['remaining'] }} {{ trans('general.remaining') }}
