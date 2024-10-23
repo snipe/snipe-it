@@ -480,9 +480,9 @@
               <div class="form-group asset_eol_date-range">
                   <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
                   <div class="input-daterange input-group col-md-6" id="datepicker">
-                      <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start">
+                      <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start" value="{{ $template->textValue('asset_eol_date_start') }}">
                       <span class="input-group-addon">to</span>
-                      <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end">
+                      <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end" value="{{ $template->textValue('asset_eol_date_end') }}">
                   </div>
               </div>
 
