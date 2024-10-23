@@ -124,7 +124,7 @@
 
                 <label class="form-control">
                     {{ Form::checkbox('eol', '1', $template->checkmarkValue('eol')) }}
-                    {{ trans('admin/hardware/table.eol') }}
+                    {{ trans('admin/hardware/form.eol_date') }}
                 </label>
 
                 <label class="form-control">
