@@ -94,11 +94,6 @@ class StatuslabelsController extends Controller
         $this->authorize('create', Statuslabel::class);
         $request->except('deployable', 'pending', 'archived');
 
-        if (! $request->filled('type')) {
-
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => [trans('admin/statuslabels/message.require_status_label')]]));
-        }
-
         $statuslabel = new Statuslabel;
         $statuslabel->fill($request->all());
 
