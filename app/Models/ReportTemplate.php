@@ -18,9 +18,9 @@ class ReportTemplate extends Model
     ];
 
     protected $fillable = [
+        'created_by',
         'name',
         'options',
-        'user_id',
     ];
 
     protected $rules = [
@@ -35,7 +35,7 @@ class ReportTemplate extends Model
         // Scope to current user
         static::addGlobalScope('current_user', function (Builder $builder) {
             if (auth()->check()) {
-                $builder->where('user_id', auth()->id());
+                $builder->where('created_by', auth()->id());
             }
         });
     }
@@ -44,9 +44,9 @@ class ReportTemplate extends Model
      * Establishes the report template -> creator relationship.
      *
      */
-    public function user(): BelongsTo
+    public function creator(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     /**

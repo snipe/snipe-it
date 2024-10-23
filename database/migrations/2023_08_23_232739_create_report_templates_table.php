@@ -15,11 +15,11 @@ class CreateReportTemplatesTable extends Migration
     {
         Schema::create('report_templates', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            $table->integer('created_by')->nullable();
             $table->string('name');
             $table->json('options');
             $table->timestamps();
-            $table->index('user_id');
+            $table->index('created_by');
         });
     }
 

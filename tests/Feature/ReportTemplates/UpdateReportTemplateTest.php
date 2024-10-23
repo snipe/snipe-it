@@ -28,7 +28,7 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
     {
         $user = User::factory()->canViewReports()->create();
 
-        $reportTemplate = ReportTemplate::factory()->for($user)->create([
+        $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create([
             'options' => [
                 'id' => 1,
                 'category' => 1,

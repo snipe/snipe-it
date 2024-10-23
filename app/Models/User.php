@@ -367,7 +367,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function reportTemplates(): HasMany
     {
-        return $this->hasMany(ReportTemplate::class);
+        return $this->hasMany(ReportTemplate::class, 'created_by');
     }
 
     /**

@@ -32,7 +32,7 @@ class EditReportTemplateTest extends TestCase implements TestsPermissionsRequire
     public function testCanLoadEditReportTemplatePage()
     {
         $user = User::factory()->canViewReports()->create();
-        $reportTemplate = ReportTemplate::factory()->for($user)->create();
+        $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create();
 
         $this->actingAs($user)
             ->get(route('report-templates.edit', $reportTemplate))

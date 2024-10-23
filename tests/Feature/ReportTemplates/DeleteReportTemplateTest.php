@@ -35,7 +35,7 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
     public function testCanDeleteAReportTemplate()
     {
         $user = User::factory()->canViewReports()->create();
-        $reportTemplate = ReportTemplate::factory()->for($user)->create();
+        $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create();
 
         $this->actingAs($user)
             ->delete(route('report-templates.destroy', $reportTemplate))
