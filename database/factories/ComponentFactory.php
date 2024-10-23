@@ -42,7 +42,7 @@ class ComponentFactory extends Factory
             'purchase_cost' => $this->faker->randomFloat(2),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
             'company_id' => Company::factory(),
-            'manufacturer_id' => $this->faker->numberBetween(1, 5),
+            'manufacturer_id' => Manufacturer::factory(),
             'supplier_id' => Supplier::factory(),
             'model_number' => $this->faker->numberBetween(1000000, 50000000),
         ];
