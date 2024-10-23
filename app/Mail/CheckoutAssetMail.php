@@ -52,19 +52,10 @@ class CheckoutAssetMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = null;
-        $cc = [];
-
-        if (!empty(Setting::getSettings()->alert_email)) {
-            $from = new Address(Setting::getSettings()->alert_email);
-        }
-        if (!empty(Setting::getSettings()->admin_cc_email)) {
-            $cc[] = new Address(Setting::getSettings()->admin_cc_email);
-        }
+        $from = new Address(env('MAIL_FROM_ADDR'));
 
         return new Envelope(
-            from: $from ?? new Address('default@example.com', 'Default Sender'),
-            cc: $cc,
+            from: $from,
             subject: trans('mail.Asset_Checkout_Notification'),
         );
     }
@@ -106,37 +97,6 @@ class CheckoutAssetMail extends Mailable
             ],
         );
     }
-//    public function build()
-//    {
-//        $this->item->load('assetstatus');
-//        $eula = method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
-//        $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
-//        $fields = [];
-//
-//        // Check if the item has custom fields associated with it
-//        if (($this->item->model) && ($this->item->model->fieldset)) {
-//            $fields = $this->item->model->fieldset->fields;
-//        }
-//
-//        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
-//
-//        return $this
-//            ->subject('Asset Checkout Notification')
-//            ->markdown('notifications.markdown.checkout-asset')
-//            ->with([
-//                'item'          => $this->item,
-//                'admin'         => $this->admin,
-//                'status'        => $this->item->assetstatus?->name,
-//                'note'          => $this->note,
-//                'target'        => $this->target,
-//                'fields'        => $fields,
-//                'eula'          => $eula,
-//                'req_accept'    => $req_accept,
-//                'accept_url'    => $accept_url,
-//                'last_checkout' => $this->last_checkout,
-//                'expected_checkin'  => $this->expected_checkin,
-//            ]);
-//    }
 
     /**
      * Get the attachments for the message.

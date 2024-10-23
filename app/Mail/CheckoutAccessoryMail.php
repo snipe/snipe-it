@@ -37,18 +37,10 @@ class CheckoutAccessoryMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = null;
-        $cc = [];
+        $from = new Address(env('MAIL_FROM_ADDR'));
 
-        if (!empty(Setting::getSettings()->alert_email)) {
-            $from = new Address(Setting::getSettings()->alert_email);
-        }
-        if (!empty(Setting::getSettings()->admin_cc_email)) {
-            $cc[] = new Address(Setting::getSettings()->admin_cc_email);
-        }
         return new Envelope(
-            from: $from ?? new Address('default@example.com', 'Default Sender'),
-            cc: $cc,
+            from: $from,
             subject: (trans('mail.Accessory_Checkout_Notification')),
         );
     }

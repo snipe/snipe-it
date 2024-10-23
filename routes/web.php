@@ -24,6 +24,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
+use App\Models\Asset;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -549,3 +551,22 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
+Route::get('/test-email', function() {
+    $item = Asset::find(1); // Load some test data
+    $admin = User::find(1);
+    $target = User::find(2);
+    $acceptance = null; // Simulate acceptance data
+    $note = 'Test note';
+
+    $fields = [];
+    if (($item->model) && ($item->model->fieldset)) {
+        $fields = $item->model->fieldset->fields;
+    }
+
+    return new \App\Mail\CheckoutAssetMail(
+        $item,
+        $admin,
+        $target,
+        $acceptance,
+        $note);
+});

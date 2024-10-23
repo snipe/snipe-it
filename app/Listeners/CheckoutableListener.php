@@ -50,7 +50,13 @@ class CheckoutableListener
         /**
          * Make a checkout acceptance and attach it in the notification
          */
+        $settings = Setting::getSettings();
         $acceptance = $this->getCheckoutAcceptance($event);
+        $emailsArray = $settings->alert_email;
+        $adminCcEmail = $settings->admin_cc_email;
+        $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
+        $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        $ccEmails = array_merge($alertsEmailsArray, $adminCcEmailsArray);
         $notifiable = $event->checkedOutTo;
         $mailable = $this->getCheckoutMailType($event, $acceptance);
         // Send email notifications
@@ -68,8 +74,7 @@ class CheckoutableListener
             if ($notifiable instanceof User && $notifiable->email != '') {
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
-
-                Mail::to($notifiable)->send($mailable);
+                Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                 Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
             }
         }
@@ -112,7 +117,12 @@ class CheckoutableListener
                 }
             }
         }
-
+        $settings = Setting::getSettings();
+        $emailsArray = $settings->alert_email;
+        $adminCcEmail = $settings->admin_cc_email;
+        $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
+        $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        $ccEmails = array_merge($alertsEmailsArray, $adminCcEmailsArray);
         $notifiable = $event->checkedOutTo;
         $mailable =  $this->getCheckinMailType($event);
         // Send email notifications
@@ -130,7 +140,7 @@ class CheckoutableListener
             if ($notifiable instanceof User && $notifiable->email != '') {
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
-                    Mail::to($notifiable)->send($mailable);
+                    Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                     Log::info('Sending email, Locale: ' . $event->checkedOutTo->locale);
                 }
             }
