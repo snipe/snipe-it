@@ -24,6 +24,8 @@ class ReportTemplate extends Model
     ];
 
     protected $rules = [
+        // @todo: this should probably be unique for each user so people don't get errors trying to use a name someone else already used...
+        // @todo: but enabling shared reports in the future would mean we would have name collisions then...
         'name' => 'required|unique:report_templates,name',
         'options' => 'array',
     ];
