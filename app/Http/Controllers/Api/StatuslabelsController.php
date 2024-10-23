@@ -111,7 +111,7 @@ class StatuslabelsController extends Controller
         $statuslabel->default_label     =  $request->input('default_label', 0);
 
 
-        if ($statuslabel->save()) {
+        if ($statuslabel->validate() && $statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
