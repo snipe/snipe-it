@@ -165,7 +165,7 @@ class ViewAssetsController extends Controller
     public function destroy(Asset $asset): RedirectResponse
     {
         CancelCheckoutRequest::run($asset, auth()->user());
-        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
     }
 
 
