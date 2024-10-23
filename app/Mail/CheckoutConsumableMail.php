@@ -28,6 +28,7 @@ class CheckoutConsumableMail extends Mailable
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
+        $this->qty = $consumable->checkout_qty;
 
         $this->settings = Setting::getSettings();
     }
@@ -50,7 +51,7 @@ class CheckoutConsumableMail extends Mailable
      */
     public function content(): Content
     {
-        Log::debug($this->item->getImageUrl());
+
         $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
@@ -66,6 +67,7 @@ class CheckoutConsumableMail extends Mailable
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
                 'accept_url'    => $accept_url,
+                'qty'           => $this->qty,
             ]
         );
     }
