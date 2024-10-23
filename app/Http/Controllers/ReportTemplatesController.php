@@ -47,6 +47,8 @@ class ReportTemplatesController extends Controller
 
     public function edit($reportId): View
     {
+        $this->authorize('reports.view');
+
         return view('reports/custom', [
             'customfields' => CustomField::get(),
             'template' => ReportTemplate::findOrFail($reportId),

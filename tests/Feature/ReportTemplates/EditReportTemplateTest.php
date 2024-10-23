@@ -11,8 +11,6 @@ class EditReportTemplateTest extends TestCase implements TestsPermissionsRequire
 {
     public function testRequiresPermission()
     {
-        $this->markTestIncomplete('Returning 404 instead of 403...');
-
         $this->actingAs(User::factory()->create())
             ->get(route('report-templates.edit', ReportTemplate::factory()->create()))
             ->assertForbidden();
