@@ -129,9 +129,10 @@ class Label implements View
                             case 'hardware_id':
                             default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
                         }
+
                         $assetData->put('barcode2d', (object)[
                             'type' => $barcode2DType,
-                            'content' => $barcode2DTarget,
+                            'content' => basename($barcode2DTarget),
                         ]);
                     }
                 }

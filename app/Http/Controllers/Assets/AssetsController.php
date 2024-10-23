@@ -514,7 +514,7 @@ class AssetsController extends Controller
      */
     public function getAssetTag(Request $request, $tag=null) : RedirectResponse
     {
-        $tag = $tag ? $tag : $request->get('assetTag');
+        $tag = $tag ?: $request->get('assetTag');
 
         // Search for an exact and unique asset tag match
         $assets = Asset::where('asset_tag', '=', $tag);
