@@ -52,7 +52,7 @@ class CheckoutAssetMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(env('MAIL_FROM_ADDR'));
+        $from = new Address(env('MAIL_FROM_ADDR', 'service@snipe-it.io'));
 
         return new Envelope(
             from: $from,
