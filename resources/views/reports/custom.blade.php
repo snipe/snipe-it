@@ -7,8 +7,19 @@
 @stop
 
 @section('header_right')
-<a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
-  {{ trans('general.back') }}</a>
+    @if (request()->routeIs('report-templates.edit'))
+        <a href="{{ route('report-templates.show', $template) }}" class="btn btn-primary pull-right">
+            {{ trans('general.back') }}
+        </a>
+    @elseif(request()->routeIs('report-templates.show'))
+        <a href="{{ route('reports/custom') }}" class="btn btn-primary pull-right">
+            {{ trans('general.back') }}
+        </a>
+    @else
+        <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
+            {{ trans('general.back') }}
+        </a>
+    @endif
 @stop
 
 
