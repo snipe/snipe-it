@@ -33,14 +33,13 @@ class CreateCheckoutRequest
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
-        $logaction = Actionlog::create([
-            'target_id'   => $data['asset_id'] = $asset->id,
-            'item_type'   => $data['item_type'] = Asset::class,
-            'created_at'  => $data['requested_date'] = date('Y-m-d H:i:s'),
-            'user_id'     => $data['user_id'] = auth()->id(),
-            'target_type' => User::class,
-            'location_id' => $user->location_id ?? null,
-        ]);
+        $logaction = new Actionlog();
+        $logaction->item_id = $data['asset_id'] = $asset->id;
+        $logaction->item_type = $data['item_type'] = Asset::class;
+        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
+        $logaction->target_id = $data['user_id'] = auth()->id();
+        $logaction->target_type = User::class;
+        $logaction->location_id = $user->location_id ?? null;
         $logaction->logaction('requested');
 
         $asset->request();
