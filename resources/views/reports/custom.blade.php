@@ -578,7 +578,7 @@
     <div class="col-md-2">
         @if (! request()->routeIs('report-templates.edit'))
             <div class="form-group">
-                <label for="saved_report_select">{{ trans('admin/reports/general.saved_templates') }}</label>
+                <label for="saved_report_select">{{ trans('admin/reports/general.open_saved_template') }}</label>
                 <select
                     id="saved_report_select"
                     class="form-control select2"

@@ -15,6 +15,7 @@ return [
         'user_zip' => 'User Zip'
     ],
     'saved_templates' => 'Saved Templates',
+    'open_saved_template' => 'Open Saved Template',
     'save_template' =>  'Save Template',
     'select_a_template' => 'Select a Template',
     'apply_template' => 'Apply Template',
