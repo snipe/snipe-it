@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Actions\Assets\StoreAssetAction;
 use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\StoreAssetRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
@@ -96,12 +98,19 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      */
-    public function store(ImageUploadRequest $request) : RedirectResponse
+    public function store(StoreAssetRequest $request): RedirectResponse
     {
-        $this->authorize(Asset::class);
-
+        try {
+            StoreAssetAction::run($request->validated());
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
         // There are a lot more rules to add here but prevents
         // errors around `asset_tags` not being present below.
+
+        // so do we want to foreach over the action, or convert the api's asset tags to an array as well
+        // so we can just easily add it to the action?
+        // (obviously then this would move up to the request)
         $this->validate($request, ['asset_tags' => ['required', 'array']]);
 
         // Handle asset tags - there could be one, or potentially many.
