@@ -52,10 +52,17 @@ class CheckoutableListener
          */
         $settings = Setting::getSettings();
         $acceptance = $this->getCheckoutAcceptance($event);
-        $emailsArray = $settings->alert_email;
-        $adminCcEmail = $settings->admin_cc_email;
-        $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
-        $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        $alertsEmailsArray = [];
+        $adminCcEmailsArray = [];
+
+        if($settings->alert_email !== '') {
+            $emailsArray = $settings->alert_email;
+            $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
+        }
+        if($settings->admin_cc_email !== '') {
+            $adminCcEmail = $settings->admin_cc_email;
+            $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        }
         $ccEmails = array_merge($alertsEmailsArray, $adminCcEmailsArray);
         $notifiable = $event->checkedOutTo;
         $mailable = $this->getCheckoutMailType($event, $acceptance);
@@ -118,13 +125,22 @@ class CheckoutableListener
             }
         }
         $settings = Setting::getSettings();
-        $emailsArray = $settings->alert_email;
-        $adminCcEmail = $settings->admin_cc_email;
-        $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
-        $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        $alertsEmailsArray = [];
+        $adminCcEmailsArray = [];
+
+        if($settings->alert_email !== '') {
+            $emailsArray = $settings->alert_email;
+            $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
+        }
+        if($settings->admin_cc_email !== '') {
+            $adminCcEmail = $settings->admin_cc_email;
+            $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        }
         $ccEmails = array_merge($alertsEmailsArray, $adminCcEmailsArray);
+
         $notifiable = $event->checkedOutTo;
         $mailable =  $this->getCheckinMailType($event);
+
         // Send email notifications
         try {
             if  (!$event->checkedOutTo->locale){
