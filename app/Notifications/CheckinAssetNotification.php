@@ -64,14 +64,6 @@ class CheckinAssetNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-//        /**
-//         * Only send checkin notifications to users if the category
-//         * has the corresponding checkbox checked.
-//         */
-//        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
-//            $notifyBy[] = 'mail';
-//        }
-
         return $notifyBy;
     }
 
