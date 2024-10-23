@@ -47,7 +47,7 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
 
         $this->actingAs(User::factory()->canViewReports()->create())
             ->get(route('report-templates.show', $reportTemplate))
+            ->assertSessionHas('error')
             ->assertRedirect(route('reports/custom'));
-
     }
 }
