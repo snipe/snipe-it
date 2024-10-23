@@ -602,7 +602,15 @@
                     <input type="hidden" id="savetemplateform" name="options">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name">{{ trans('admin/reports/general.template_name') }}</label>
-                        <input class="form-control" placeholder="" name="name" type="text" id="name" value="{{ $template->name }}">
+                        <input
+                            class="form-control"
+                            placeholder=""
+                            name="name"
+                            type="text"
+                            id="name"
+                            value="{{ $template->name }}"
+                            required
+                        >
                         {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                     </div>
                     <button class="btn btn-primary" style="width: 100%">
