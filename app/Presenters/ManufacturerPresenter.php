@@ -124,8 +124,15 @@ class ManufacturerPresenter extends Presenter
                 'title' => trans('general.accessories'),
                 'visible' => true,
                 'class' => 'css-accessory',
-            ],
-            [
+            ], [
+                'field' => 'components_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.components'),
+                'visible' => true,
+                'class' => 'css-component',
+            ], [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,
