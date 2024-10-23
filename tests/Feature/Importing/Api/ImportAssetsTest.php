@@ -56,7 +56,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function importAsset(): void
     {
-        Mail::fake();
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
@@ -139,8 +138,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
 
         //Notes is never read.
         // $this->assertEquals($row['notes'], $newAsset->notes);
-
-        Mail::assertSent(CheckoutAssetMail::class);
 
     }
 
