@@ -364,7 +364,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     /**
      * Establishes the user -> reportTemplates relationship
      *
-     * @since [v6.2.4]
      */
     public function reportTemplates(): HasMany
     {

@@ -43,7 +43,6 @@ class ReportTemplate extends Model
     /**
      * Establishes the report template -> creator relationship.
      *
-     * @since [v6.2.4]
      */
     public function user(): BelongsTo
     {
@@ -56,7 +55,6 @@ class ReportTemplate extends Model
      * @param string $fieldName
      * @param string $fallbackValue The value to return if the report template is not saved yet.
      *
-     * @since [v6.2.4]
      */
     public function checkmarkValue(string $fieldName, string $fallbackValue = '1'): string
     {
@@ -79,7 +77,6 @@ class ReportTemplate extends Model
      * @param string $value The value to check against.
      * @param bool $isDefault Whether the radio input being checked is the default.
      *
-     * @since [v6.2.4]
      */
     public function radioValue(string $fieldName, string $value, bool $isDefault = false): bool
     {
@@ -108,7 +105,6 @@ class ReportTemplate extends Model
      *
      * @return mixed|null
      *
-     * @since [v6.2.4]
      */
     public function selectValue(string $fieldName, string $model = null)
     {
@@ -146,7 +142,6 @@ class ReportTemplate extends Model
      *
      * @return iterable
      *
-     * @since [v6.2.4]
      */
     public function selectValues(string $fieldName, string $model = null): iterable
     {
@@ -178,7 +173,6 @@ class ReportTemplate extends Model
      *
      * @return string
      *
-     * @since [v6.2.4]
      */
     public function textValue(string $fieldName): string
     {
