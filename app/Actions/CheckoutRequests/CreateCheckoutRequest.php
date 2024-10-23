@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Auth\Access\AuthorizationException;
+use Log;
 
 class CreateCheckoutRequest
 {
@@ -47,16 +48,9 @@ class CreateCheckoutRequest
         try {
             $settings->notify(new RequestAssetNotification($data));
         } catch (\Exception $e) {
-            \Log::warning($e);
+            Log::warning($e);
         }
 
-        return true; // or $asset, or whatever
+        return true;
     }
-
-    public function doSomethingElse()
-    {
-
-    }
-
-
 }

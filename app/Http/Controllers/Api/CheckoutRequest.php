@@ -30,7 +30,12 @@ class CheckoutRequest extends Controller
 
     public function destroy(Asset $asset): JsonResponse
     {
-        CancelCheckoutRequest::run($asset, auth()->user());
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.requests.canceled')));
+        try {
+            CancelCheckoutRequest::run($asset, auth()->user());
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.requests.canceled')));
+        } catch (\Exception $e) {
+            report($e);
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()));
+        }
     }
 }
