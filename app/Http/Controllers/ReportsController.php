@@ -404,6 +404,7 @@ class ReportsController extends Controller
         // Set the report's input values if we were redirected back with
         // validation errors so the report is populated as expected.
         if ($request->old()) {
+            $template->name = $request->old('name');
             $template->options = $request->old();
         }
 
