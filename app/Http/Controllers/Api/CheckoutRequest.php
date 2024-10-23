@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\CheckoutRequests\CancelCheckoutRequest;
 use App\Actions\CheckoutRequests\CreateCheckoutRequest;
 use App\Exceptions\AssetNotRequestable;
 use App\Helpers\Helper;
@@ -25,5 +26,11 @@ class CheckoutRequest extends Controller
             report($e);
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Something terrible has gone wrong and we\'re not sure if we can help - may god have mercy on your soul. Contact your admin :)'));
         }
+    }
+
+    public function destroy(Asset $asset): JsonResponse
+    {
+        CancelCheckoutRequest::run($asset, auth()->user());
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.requests.canceled')));
     }
 }
