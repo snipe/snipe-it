@@ -36,6 +36,7 @@ class ManufacturersTransformer
                 'licenses_count' => (int) $manufacturer->licenses_count,
                 'consumables_count' => (int) $manufacturer->consumables_count,
                 'accessories_count' => (int) $manufacturer->accessories_count,
+                'components_count' => (int) $manufacturer->components_count,
                 'created_by' => ($manufacturer->adminuser) ? [
                     'id' => (int) $manufacturer->adminuser->id,
                     'name'=> e($manufacturer->adminuser->present()->fullName()),
