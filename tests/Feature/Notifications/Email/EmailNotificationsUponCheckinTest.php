@@ -46,7 +46,11 @@ class EmailNotificationsUponCheckinTest extends TestCase
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
-        $asset->model->category->update(['checkin_email' => false]);
+        $asset->model->category->update([
+            'checkin_email' => false,
+            'eula_text' => null,
+            'require_acceptance' => false,
+        ]);
 
         $this->fireCheckInEvent($asset, $user);
 
