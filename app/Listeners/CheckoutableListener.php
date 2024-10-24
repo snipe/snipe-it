@@ -55,10 +55,6 @@ class CheckoutableListener
         $alertsEmailsArray = [];
         $adminCcEmailsArray = [];
 
-        if($settings->alert_email !== '') {
-            $emailsArray = $settings->alert_email;
-            $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
-        }
         if($settings->admin_cc_email !== '') {
             $adminCcEmail = $settings->admin_cc_email;
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
@@ -128,10 +124,6 @@ class CheckoutableListener
         $alertsEmailsArray = [];
         $adminCcEmailsArray = [];
 
-        if($settings->alert_email !== '') {
-            $emailsArray = $settings->alert_email;
-            $alertsEmailsArray = array_map('trim', explode(',', $emailsArray));
-        }
         if($settings->admin_cc_email !== '') {
             $adminCcEmail = $settings->admin_cc_email;
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
