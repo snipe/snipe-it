@@ -104,17 +104,15 @@ class CheckinAccessoryNotification extends Notification
         $item = $this->item;
         $note = $this->note;
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->addStartGroupToSection('activityTitle')
-            ->title(trans('Accessory_Checkin_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-            ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
-            ->fact(trans('mail.Accessory_Checkin_Notification')." by ", $admin->present()->fullName())
-            ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-            ->fact(trans('mail.notes'), $note ?: '');
+        $message = trans('mail.Accessory_Checkin_Notification');
+        $details = [
+            trans('mail.accessory_name') => htmlspecialchars_decode($item->present()->name),
+            trans('mail.checked_into') => $item->location->name ? $item->location->name : '',
+            trans('mail.Accessory_Checkin_Notification'). ' by' => $admin->present()->fullName(),
+            trans('admin/consumables/general.remaining')=> $item->numRemaining(),
+            trans('mail.notes') => $note ?: '',
+        ];
+        return  array($message, $details);
     }
     public function toGoogleChat()
     {

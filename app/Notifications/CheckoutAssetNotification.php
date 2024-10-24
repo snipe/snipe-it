@@ -21,6 +21,9 @@ use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Support\Facades\Log;
+use Osama\LaravelTeamsNotification\Logging\TeamsLoggingChannel;
+use Osama\LaravelTeamsNotification\TeamsNotification;
+
 class CheckoutAssetNotification extends Notification
 {
     use Queueable;
@@ -69,7 +72,7 @@ class CheckoutAssetNotification extends Notification
 
         if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
 
-            $notifyBy[] = MicrosoftTeamsChannel::class;
+            $notifyBy[] = TeamsNotification::class;
         }
 
 
@@ -138,24 +141,21 @@ class CheckoutAssetNotification extends Notification
                     ->content($note);
             });
     }
-    public function toMicrosoftTeams()
+    public function toMicrosoftTeams() : array
     {
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->title(trans('mail.Asset_Checkout_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(trans('mail.assigned_to'), $target->present()->name)
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
-            ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
-            ->fact(trans('mail.notes'), $note ?: '');
-
-
+        $message = trans('mail.Asset_Checkout_Notification');
+        $details = [
+            trans('mail.assigned_to') => $target->present()->name,
+            trans('mail.asset') => htmlspecialchars_decode($item->present()->name),
+            trans('mail.Asset_Checkout_Notification'). ' by' => $admin->present()->fullName(),
+            trans('mail.notes') => $note ?: '',
+        ];
+       return  array($message, $details);
     }
 public function toGoogleChat()
     {

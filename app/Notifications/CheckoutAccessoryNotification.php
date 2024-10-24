@@ -120,20 +120,17 @@ class CheckoutAccessoryNotification extends Notification
         $item = $this->item;
         $note = $this->note;
 
-            return MicrosoftTeamsMessage::create()
-                ->to($this->settings->webhook_endpoint)
-                ->type('success')
-                ->addStartGroupToSection('activityTitle')
-                ->title(trans('mail.Accessory_Checkout_Notification'))
-                ->addStartGroupToSection('activityText')
-                ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-                ->fact(trans('mail.assigned_to'), $target->present()->name)
-                ->fact(trans('general.qty'), $this->checkout_qty)
-                ->fact(trans('mail.checkedout_from'), $item->location->name ? $item->location->name : '')
-                ->fact(trans('mail.Accessory_Checkout_Notification') . " by ", $admin->present()->fullName())
-                ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-                ->fact(trans('mail.notes'), $note ?: '');
-
+        $message = trans('mail.Accessory_Checkout_Notification');
+        $details = [
+            trans('mail.assigned_to') => $target->present()->name,
+            trans('mail.accessory_name') => htmlspecialchars_decode($item->present()->name),
+            trans('general.qty') => $this->checkout_qty,
+            trans('mail.checkedout_from') => $item->location->name ? $item->location->name : '',
+            trans('mail.Accessory_Checkout_Notification'). ' by' => $admin->present()->fullName(),
+            trans('admin/consumables/general.remaining')=> $item->numRemaining(),
+            trans('mail.notes') => $note ?: '',
+        ];
+        return  array($message, $details);
     }
     public function toGoogleChat()
     {
