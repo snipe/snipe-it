@@ -53,14 +53,6 @@ class CheckoutAccessoryMail extends Mailable
         Log::debug($this->item->getImageUrl());
         $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
-
-        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
-
-        // Check if the item has custom fields associated with it
-        if (($this->item->model) && ($this->item->model->fieldset)) {
-            $fields = $this->item->model->fieldset->fields;
-        }
-
         $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
 
         return new Content(
