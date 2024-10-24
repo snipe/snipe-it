@@ -21,6 +21,8 @@ use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Support\Facades\Log;
+use Osama\LaravelTeamsNotification\TeamsNotification;
+
 class CheckoutAssetNotification extends Notification
 {
     use Queueable;
@@ -69,7 +71,7 @@ class CheckoutAssetNotification extends Notification
 
         if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
 
-            $notifyBy[] = MicrosoftTeamsChannel::class;
+            $notifyBy[] = TeamsNotification::class;
         }
 
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5341bc5be02b3c33e28e46e06dd99f29",
+    "content-hash": "6eb153ab8627da9552bc84de32665f0f",
     "packages": [
         {
             "name": "alek13/slack",
@@ -2622,63 +2622,6 @@
                 "source": "https://github.com/laravel-notification-channels/google-chat/tree/3.2.0"
             },
             "time": "2024-03-19T06:42:00+00:00"
-        },
-        {
-            "name": "laravel-notification-channels/microsoft-teams",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-notification-channels/microsoft-teams.git",
-                "reference": "41d054c5f603ca10951144a87eb8e9652307ce1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-notification-channels/microsoft-teams/zipball/41d054c5f603ca10951144a87eb8e9652307ce1b",
-                "reference": "41d054c5f603ca10951144a87eb8e9652307ce1b",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3 || ^7.0",
-                "illuminate/notifications": "~5.5 || ~6.0 || ~7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/support": "~5.5 || ~6.0 || ~7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.2.3",
-                "phpunit/phpunit": "^8.0 || ^9.5 || ^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NotificationChannels\\MicrosoftTeams\\MicrosoftTeamsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NotificationChannels\\MicrosoftTeams\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tobias Madner",
-                    "email": "tobias.madner@gmx.at",
-                    "homepage": "https://www.pinpoll.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A Laravel Notification Channel for Microsoft Teams",
-            "homepage": "https://github.com/laravel-notification-channels/microsoft-teams",
-            "support": {
-                "issues": "https://github.com/laravel-notification-channels/microsoft-teams/issues",
-                "source": "https://github.com/laravel-notification-channels/microsoft-teams/tree/1.2.0"
-            },
-            "time": "2024-03-11T15:07:16+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5571,6 +5514,71 @@
                 }
             ],
             "time": "2024-05-30T15:14:26+00:00"
+        },
+        {
+            "name": "osa-eg/laravel-teams-notification",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/osa-eg/laravel-teams-notification.git",
+                "reference": "76173689930aca92b5174a3b102e705279192c0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/osa-eg/laravel-teams-notification/zipball/76173689930aca92b5174a3b102e705279192c0f",
+                "reference": "76173689930aca92b5174a3b102e705279192c0f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=6.5",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "monolog/monolog": ">=1.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Osama\\LaravelTeamsNotification\\LaravelTeamsNotificationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Osama\\LaravelTeamsNotification\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Osama Saad",
+                    "email": "osaad96eg@gmail.com"
+                }
+            ],
+            "description": "A Laravel package to send notifications to Microsoft Teams",
+            "keywords": [
+                "Teams",
+                "adaptive-card",
+                "laravel",
+                "logging",
+                "microsoft-teams-workflow",
+                "notification",
+                "teams-connector",
+                "teams-webhock",
+                "teams-workflow",
+                "teams_logging"
+            ],
+            "support": {
+                "issues": "https://github.com/osa-eg/laravel-teams-notification/issues",
+                "source": "https://github.com/osa-eg/laravel-teams-notification/tree/v2.1.2"
+            },
+            "time": "2024-09-23T05:24:48+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -16504,5 +16512,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

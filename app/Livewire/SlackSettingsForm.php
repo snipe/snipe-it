@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use App\Models\Setting;
 use App\Helpers\Helper;
-
+use Osama\LaravelTeamsNotification\TeamsNotification;
 class SlackSettingsForm extends Component
 {
     public $webhook_endpoint;
@@ -236,20 +236,14 @@ class SlackSettingsForm extends Component
     }
     public function msTeamTestWebhook(){
 
-     $payload =
-        [
-            "@type" => "MessageCard",
-            "@context" => "http://schema.org/extensions",
-            "summary" => trans('mail.snipe_webhook_summary'),
-            "title" => trans('mail.snipe_webhook_test'),
-            "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
-        ];
-
          try {
-         $response = Http::withHeaders([
-             'content-type' => 'applications/json',
-         ])->post($this->webhook_endpoint,
-            $payload)->throw();
+             $notification = new TeamsNotification($this->webhook_endpoint);
+             $message = trans('general.webhook_test_msg', ['app' => $this->webhook_name]);
+             $notification->success()->sendMessage($message);
+
+             $response = Http::withHeaders([
+                 'content-type' => 'applications/json',
+             ])->post($this->webhook_endpoint);
 
          if(($response->getStatusCode() == 302)||($response->getStatusCode() == 301)){
              return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
