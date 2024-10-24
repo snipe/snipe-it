@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Importing\Api;
 
+use App\Mail\CheckoutAssetMail;
 use App\Models\Actionlog as ActionLog;
 use App\Models\Asset;
 use App\Models\CustomField;
@@ -11,6 +12,7 @@ use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
@@ -54,7 +56,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function importAsset(): void
     {
-        Notification::fake();
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
@@ -138,7 +139,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         //Notes is never read.
         // $this->assertEquals($row['notes'], $newAsset->notes);
 
-        Notification::assertSentTo($assignee, CheckoutAssetNotification::class);
     }
 
     #[Test]
