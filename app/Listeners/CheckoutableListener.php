@@ -49,16 +49,16 @@ class CheckoutableListener
 
         // Send email notifications
         try {
-//            foreach ($notifiables as $notifiable) {
-//                if ($notifiable instanceof User && $notifiable->email != '') {
-//                    if (! $event->checkedOutTo->locale){
-//                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-//                    }
-//                    else {
-//                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-//                    }
-//                }
-//            }
+            foreach ($notifiables as $notifiable) {
+                if ($notifiable instanceof User && $notifiable->email != '') {
+                    if (! $event->checkedOutTo->locale){
+                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+                    }
+                    else {
+                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+                    }
+                }
+            }
 
             // Send Webhook notification
             if ($this->shouldSendWebhookNotification()) {
@@ -116,23 +116,30 @@ class CheckoutableListener
         $notifiables = $this->getNotifiables($event);
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                    else {
-                        Notification::send($notifiable, $this->getCheckinNotification($event));
-                    }
-                }
-            }
+//            foreach ($notifiables as $notifiable) {
+//                if ($notifiable instanceof User && $notifiable->email != '') {
+//                    if (! $event->checkedOutTo->locale){
+//                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+//                    }
+//                    else {
+//                        Notification::send($notifiable, $this->getCheckinNotification($event));
+//                    }
+//                }
+//            }
             // Send Webhook notification
             if ($this->shouldSendWebhookNotification()) {
                 // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
                 if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
                     Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckinNotification($event));
-                } else {
+                }  // Handling Microsoft Teams notification
+                else if (Setting::getSettings()->webhook_selected === 'microsoft') {
+
+                    $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
+                    $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                    $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                }
+                else {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckinNotification($event));
                 }
