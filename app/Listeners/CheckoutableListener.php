@@ -49,16 +49,16 @@ class CheckoutableListener
 
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                    else {
-                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                }
-            }
+//            foreach ($notifiables as $notifiable) {
+//                if ($notifiable instanceof User && $notifiable->email != '') {
+//                    if (! $event->checkedOutTo->locale){
+//                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+//                    }
+//                    else {
+//                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+//                    }
+//                }
+//            }
 
             // Send Webhook notification
             if ($this->shouldSendWebhookNotification()) {
