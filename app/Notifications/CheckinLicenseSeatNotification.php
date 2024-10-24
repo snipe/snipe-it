@@ -110,17 +110,16 @@ class CheckinLicenseSeatNotification extends Notification
         $item = $this->item;
         $note = $this->note;
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->addStartGroupToSection('activityTitle')
-            ->title(trans('mail.License_Checkin_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
-            ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'CLI tool')
-            ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
-            ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
-            ->fact(trans('mail.notes'), $note ?: '');
+        $message = trans('mail.License_Checkin_Notification');
+        $details = [
+            trans('mail.checkedin_from')=> $target->present()->fullName(),
+            trans('mail.license_for') => htmlspecialchars_decode($item->present()->name),
+            trans('mail.License_Checkin_Notification')." by " => $admin->present()->fullName() ?: 'CLI tool',
+            trans('admin/consumables/general.remaining') => $item->availCount()->count(),
+            trans('mail.notes') => $note ?: '',
+        ];
+
+        return  array($message, $details);
     }
     public function toGoogleChat()
     {
