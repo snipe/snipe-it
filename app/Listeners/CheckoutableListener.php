@@ -23,6 +23,7 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Osama\LaravelTeamsNotification\TeamsNotification;
 
 class CheckoutableListener
 {
@@ -48,16 +49,16 @@ class CheckoutableListener
 
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                    else {
-                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                }
-            }
+//            foreach ($notifiables as $notifiable) {
+//                if ($notifiable instanceof User && $notifiable->email != '') {
+//                    if (! $event->checkedOutTo->locale){
+//                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+//                    }
+//                    else {
+//                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+//                    }
+//                }
+//            }
 
             // Send Webhook notification
             if ($this->shouldSendWebhookNotification()) {
@@ -65,7 +66,15 @@ class CheckoutableListener
                 if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
                     Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckoutNotification($event, $acceptance));
-                } else {
+                }
+                // Handling Microsoft Teams notification
+                else if (Setting::getSettings()->webhook_selected === 'microsoft') {
+
+                    $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
+                    $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                    $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                }
+                else {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckoutNotification($event, $acceptance));
                 }

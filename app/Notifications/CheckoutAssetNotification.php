@@ -21,6 +21,7 @@ use NotificationChannels\GoogleChat\Widgets\KeyValue;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Support\Facades\Log;
+use Osama\LaravelTeamsNotification\Logging\TeamsLoggingChannel;
 use Osama\LaravelTeamsNotification\TeamsNotification;
 
 class CheckoutAssetNotification extends Notification
@@ -147,15 +148,24 @@ class CheckoutAssetNotification extends Notification
         $item = $this->item;
         $note = $this->note;
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->title(trans('mail.Asset_Checkout_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(trans('mail.assigned_to'), $target->present()->name)
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
-            ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
-            ->fact(trans('mail.notes'), $note ?: '');
+        $notification = new TeamsNotification($this->settings->webhook_channel);
+        $message = trans('mail.Asset_Checkout_Notification');
+        $details = [
+            trans('mail.assigned_to') => $target->present()->name,
+            htmlspecialchars_decode($item->present()->name) => '',
+            trans('mail.Asset_Checkout_Notification'). ' by' => $admin->present()->fullName(),
+            trans('mail.notes') => $note ?: '',
+        ];
+       return  array($message, $details);
+//        return MicrosoftTeamsMessage::create()
+//            ->to($this->settings->webhook_endpoint)
+//            ->type('success')
+//            ->title()
+//            ->addStartGroupToSection('activityText')
+//            ->fact(trans('mail.assigned_to'), $target->present()->name)
+//            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
+//            ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
+//            ->fact(trans('mail.notes'), $note ?: '');
 
 
     }
