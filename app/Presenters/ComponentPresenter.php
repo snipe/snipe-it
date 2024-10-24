@@ -66,8 +66,20 @@ class ComponentPresenter extends Presenter
                 'title' => trans('general.supplier'),
                 'visible' => false,
                 'formatter' => 'suppliersLinkObjFormatter',
-            ],
-            [
+            ], [
+                'field' => 'model_number',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('admin/models/table.modelnumber'),
+            ], [
+                'field' => 'manufacturer',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.manufacturer'),
+                'visible' => false,
+                'formatter' => 'manufacturersLinkObjFormatter',
+            ], [
                 'field' => 'qty',
                 'searchable' => false,
                 'sortable' => true,

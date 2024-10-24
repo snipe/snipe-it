@@ -81,6 +81,12 @@ class CustomFieldSetDefaultValuesForModel extends Component
     {
         $this->fields->each(function ($field) {
             $this->selectedValues[$field->db_column] = $this->getSelectedValueForField($field);
+
+            // if the element is a checkbox and the value was just sent to null, make it
+            // an array since Livewire can't bind to non-array values for checkboxes.
+            if ($field->element === 'checkbox' && is_null($this->selectedValues[$field->db_column])) {
+                $this->selectedValues[$field->db_column] = [];
+            }
         });
     }
 

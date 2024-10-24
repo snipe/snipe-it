@@ -89,7 +89,7 @@
 
                 @if ($consumable->image!='')
                   <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-                    <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox">
+                    <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox" data-type="image">
                       <img src="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
                   </div>
                 @endif

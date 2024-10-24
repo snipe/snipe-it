@@ -38,6 +38,7 @@ class CheckoutConsumableNotification extends Notification
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
+        $this->qty = $consumable->checkout_qty;
 
         $this->settings = Setting::getSettings();
     }
@@ -173,7 +174,6 @@ class CheckoutConsumableNotification extends Notification
      */
     public function toMail()
     {
-        Log::debug($this->item->getImageUrl());
         $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
@@ -188,6 +188,7 @@ class CheckoutConsumableNotification extends Notification
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
                 'accept_url'    => $accept_url,
+                'qty'           => $this->qty,
             ])
             ->subject(trans('mail.Confirm_consumable_delivery'));
     }
