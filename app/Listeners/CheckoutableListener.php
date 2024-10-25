@@ -52,14 +52,13 @@ class CheckoutableListener
          */
         $settings = Setting::getSettings();
         $acceptance = $this->getCheckoutAcceptance($event);
-        $alertsEmailsArray = [];
         $adminCcEmailsArray = [];
 
         if($settings->admin_cc_email !== '') {
             $adminCcEmail = $settings->admin_cc_email;
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
         }
-        $ccEmails = array_filter(array_merge($alertsEmailsArray, $adminCcEmailsArray));
+        $ccEmails = array_filter($adminCcEmailsArray);
         $notifiable = $event->checkedOutTo;
         $mailable = $this->getCheckoutMailType($event, $acceptance);
         // Send email notifications
@@ -121,14 +120,13 @@ class CheckoutableListener
             }
         }
         $settings = Setting::getSettings();
-        $alertsEmailsArray = [];
         $adminCcEmailsArray = [];
 
         if($settings->admin_cc_email !== '') {
             $adminCcEmail = $settings->admin_cc_email;
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
         }
-        $ccEmails = array_filter(array_merge($alertsEmailsArray, $adminCcEmailsArray));
+        $ccEmails = array_filter($adminCcEmailsArray);
         $notifiable = $event->checkedOutTo;
         $mailable =  $this->getCheckinMailType($event);
 
