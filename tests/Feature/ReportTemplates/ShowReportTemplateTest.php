@@ -4,9 +4,11 @@ namespace Tests\Feature\ReportTemplates;
 
 use App\Models\ReportTemplate;
 use App\Models\User;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
+#[Group('custom-reporting')]
 class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()

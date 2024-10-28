@@ -7,8 +7,10 @@ use App\Models\Location;
 use App\Models\ReportTemplate;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
+#[Group('custom-reporting')]
 class ReportTemplateTest extends TestCase
 {
     public function testSavedTemplatesAreScopedToTheUser()

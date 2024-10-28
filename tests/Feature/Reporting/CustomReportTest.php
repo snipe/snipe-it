@@ -9,9 +9,11 @@ use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use League\Csv\Reader;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
+#[Group('custom-reporting')]
 class CustomReportTest extends TestCase implements TestsPermissionsRequirement
 {
     protected function setUp(): void
