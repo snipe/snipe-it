@@ -15,7 +15,14 @@
 <div><!-- livewire div - do not remove -->
     <form class="form-horizontal" role="form" wire:submit="submit">
         {{csrf_field()}}
-
+        @if (session()->has('warning'))
+            <div class="alert alert-warning">
+                {!! session('warning') !!}
+                @php
+                    session()->forget('warning'); // Clear the session flash immediately
+                @endphp
+            </div>
+        @endif
         <div class="row">
 
             <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">

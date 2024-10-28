@@ -268,17 +268,20 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('admin')
                                 @if ($snipeSettings->show_alerts_in_menu=='1')
                                     <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); ?>
+                                    <?php $alert_items = Helper::checkLowInventory(); $deprecations = Helper::deprecationCheck()?>
 
                                     <li class="dropdown tasks-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <x-icon type="alerts" />
                                             <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                            @if (count($alert_items))
-                                                <span class="label label-danger">{{ count($alert_items) }}</span>
+                                            @if (count($alert_items) || count($deprecations))
+                                                <span class="label label-danger">{{ count($alert_items) + count($deprecations) }}</span>
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
+                                            @if($snipeSettings->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check'])
+                                            <li class="header alert-warning">{!! $deprecations['ms_teams_deprecated']['message'] !!}</li>
+                                            @endif
                                             <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
                                             <li>
                                                 <!-- inner menu: contains the actual data -->

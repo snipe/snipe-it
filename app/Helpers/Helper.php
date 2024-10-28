@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Session;
 
@@ -707,6 +708,23 @@ class Helper
         }
 
         return $randomString;
+    }
+    /**
+     * A method to be used to handle deprecations and giving notifications, currently handling MS Teams. more can be added when needed.
+     *
+     *
+     * @author [Godfrey Martinez]
+     * @since [v7.0.14]
+     * @return array
+     */
+    public static function deprecationCheck(){
+        $deprecations = [
+            'ms_teams_deprecated' => array(
+            'check' => Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows'),
+            'message' => 'The Microsoft Teams webhook URL being used will be deprecated Jan 31st, 2025. <a class="btn btn-primary" href="' . route('settings.slack.index') . '">Change your webhook URL</a>'),
+        ];
+
+        return $deprecations;
     }
 
     /**
