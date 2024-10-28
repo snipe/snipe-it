@@ -18,18 +18,21 @@ class StatuslabelSeeder extends Seeder
             'name' => 'Ready to Deploy',
             'created_by' => $admin->id,
             'status_type' => 'deployable',
+            'legacy_deployable' => 1,
         ]);
 
         Statuslabel::factory()->pending()->create([
             'name' => 'Pending',
             'created_by' => $admin->id,
             'status_type' => 'pending',
+            'legacy_pending' => 1,
         ]);
 
         Statuslabel::factory()->archived()->create([
             'name' => 'Archived',
             'created_by' => $admin->id,
             'status_type' => 'archived',
+            'legacy_archived' => 1,
         ]);
 
         Statuslabel::factory()->outForDiagnostics()->pending()->create(['created_by' => $admin->id]);

@@ -32,7 +32,8 @@ class StatuslabelsController extends Controller
             'assets_count',
             'color',
             'notes',
-            'default_label'
+            'default_label',
+            'status_type',
         ];
 
         $statuslabels = Statuslabel::with('adminuser')->withCount('assets as assets_count');

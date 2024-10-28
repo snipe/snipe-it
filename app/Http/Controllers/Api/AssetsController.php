@@ -61,7 +61,7 @@ class AssetsController extends Controller
         if ($action == 'audit') {
             $action = 'audits';
         }
-        $filter_non_deprecable_assets = false;
+        $filter_non_depreciable_assets = false;
 
         /**
          * This looks MAD janky (and it is), but the AssetsController@index does a LOT of heavy lifting throughout the 
@@ -75,7 +75,7 @@ class AssetsController extends Controller
          * which would have been far worse of a mess. *sad face*  - snipe (Sept 1, 2021)
          */
         if (Route::currentRouteName()=='api.depreciation-report.index') {
-            $filter_non_deprecable_assets = true;
+            $filter_non_depreciable_assets = true;
             $transformer = 'App\Http\Transformers\DepreciationReportTransformer';
             $this->authorize('reports.view');
         } else {
@@ -130,9 +130,9 @@ class AssetsController extends Controller
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
 
-        if ($filter_non_deprecable_assets) {
-            $non_deprecable_models = AssetModel::select('id')->whereNotNull('depreciation_id')->get();
-            $assets->InModelList($non_deprecable_models->toArray());
+        if ($filter_non_depreciable_assets) {
+            $non_depreciable_models = AssetModel::select('id')->whereNotNull('depreciation_id')->get();
+            $assets->InModelList($non_depreciable_models->toArray());
         }
 
 
@@ -231,7 +231,6 @@ class AssetsController extends Controller
                         $join->on('status_alias.id', '=', 'assets.status_id')
                             ->where('status_alias.status_type', '=', 'deployable');
                     });
-
                 break;
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
@@ -248,7 +247,7 @@ class AssetsController extends Controller
                     // terrible workaround for complex-query Laravel bug in fulltext
                     $assets->join('status_labels AS status_alias', function ($join) {
                         $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.status_type', '=', 'archived');
+                            ->where('status_alias.status_type', '!=', 'archived');
                     });
 
                     // If there is a status ID, don't take show_archived_in_list into consideration
@@ -257,6 +256,7 @@ class AssetsController extends Controller
                         $join->on('status_alias.id', '=', 'assets.status_id');
                     });
                 }
+                break;
 
         }
 

@@ -30,9 +30,9 @@ class StatusLabelPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'statuslabelsAssetLinkFormatter',
             ],[
-                'field' => 'type',
-                'searchable' => false,
-                'sortable' => false,
+                'field' => 'status_type',
+                'searchable' => true,
+                'sortable' => true,
                 'switchable' => false,
                 'title' => trans('admin/statuslabels/table.status_type'),
                 'visible' => true,

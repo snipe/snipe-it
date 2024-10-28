@@ -13,25 +13,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('status_labels', function (Blueprint $table) {
-            $table->string('status_type')->after('name')->nullable()->default('deployable');
-        });
 
-        DB::table('status_labels')->where('pending', 1)->update(['status_type' => 'pending']);
-        DB::table('status_labels')->where('archived', 1)->update(['status_type' => 'archived']);
-        DB::table('status_labels')->where('deployable', 1)->update(['status_type' => 'deployable']);
+        if (!Schema::hasColumn('status_labels', 'status_type')) {
 
-        Schema::table('status_labels', function (Blueprint $table) {
-            $table->renameColumn('deployable', 'legacy_deployable');
-        });
+            Schema::table('status_labels', function (Blueprint $table) {
+                $table->string('status_type')->after('name')->default('deployable');
+            });
 
-        Schema::table('status_labels', function (Blueprint $table) {
-            $table->renameColumn('pending', 'legacy_pending');
-        });
+            DB::table('status_labels')->where('pending', 1)->update(['status_type' => 'pending']);
+            DB::table('status_labels')->where('archived', 1)->update(['status_type' => 'archived']);
+            DB::table('status_labels')->where('deployable', 1)->update(['status_type' => 'deployable']);
 
-        Schema::table('status_labels', function (Blueprint $table) {
-            $table->renameColumn('archived', 'legacy_archived');
-        });
+            Schema::table('status_labels', function (Blueprint $table) {
+                $table->renameColumn('deployable', 'legacy_deployable');
+            });
+
+            Schema::table('status_labels', function (Blueprint $table) {
+                $table->renameColumn('pending', 'legacy_pending');
+            });
+
+            Schema::table('status_labels', function (Blueprint $table) {
+                $table->renameColumn('archived', 'legacy_archived');
+            });
+        }
+
 
 
     }
@@ -41,8 +46,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('status_labels', function (Blueprint $table) {
-            $table->dropColumn('status_type');
+
+        if (Schema::hasColumn('status_labels', 'status_type')) {
+
+            Schema::table('status_labels', function (Blueprint $table) {
+                $table->dropColumn('status_type');
+            });
 
             Schema::table('status_labels', function (Blueprint $table) {
                 $table->renameColumn('legacy_deployable', 'deployable');
@@ -55,8 +64,8 @@ return new class extends Migration
             Schema::table('status_labels', function (Blueprint $table) {
                 $table->renameColumn('legacy_archived', 'archived');
             });
+        }
 
 
-        });
     }
 };

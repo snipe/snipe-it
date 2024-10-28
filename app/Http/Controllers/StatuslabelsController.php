@@ -47,7 +47,7 @@ class StatuslabelsController extends Controller
 
         return view('statuslabels/edit')
             ->with('item', new Statuslabel)
-            ->with('statuslabel_types', Helper::statusTypeList());
+            ->with('status_types', Helper::statusTypeList());
     }
 
     /**
@@ -60,12 +60,6 @@ class StatuslabelsController extends Controller
         $this->authorize('create', Statuslabel::class);
         // create a new model instance
         $statusLabel = new Statuslabel();
-
-        if ($request->missing('statuslabel_types')) {
-            return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
-        }
-
-        $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('statuslabel_types'));
 
         // Save the Statuslabel data
         $statusLabel->name = $request->input('name');
@@ -98,11 +92,7 @@ class StatuslabelsController extends Controller
             return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
-        $use_statuslabel_type = $item->status_type;
-
-        $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')];
-
-        return view('statuslabels/edit', compact('item', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
+        return view('statuslabels/edit', compact('item'))->with('status_types', Helper::statusTypeList());;
     }
 
     /**
@@ -119,17 +109,10 @@ class StatuslabelsController extends Controller
             return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
-        if (! $request->filled('statuslabel_types')) {
-            return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
-        }
-
         // Update the Statuslabel data
-        $statustype = Statuslabel::getStatuslabelTypesForDB($request->input('statuslabel_types'));
         $statuslabel->name = $request->input('name');
         $statuslabel->notes = $request->input('notes');
-        $statuslabel->deployable = $statustype['deployable'];
-        $statuslabel->pending = $statustype['pending'];
-        $statuslabel->archived = $statustype['archived'];
+        $statuslabel->status_type =  $request->input('status_type');
         $statuslabel->color = $request->input('color');
         $statuslabel->show_in_nav = $request->input('show_in_nav', 0);
         $statuslabel->default_label = $request->input('default_label', 0);

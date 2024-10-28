@@ -301,9 +301,9 @@ class Asset extends Depreciable
         // This asset is not currently assigned to anyone and is not deleted...
         if ((! $this->assigned_to) && (! $this->deleted_at)) {
 
-            // The asset status is not archived and is deployable
-            if (($this->assetstatus) && ($this->assetstatus->archived == '0')
-                && ($this->assetstatus->deployable == '1'))
+            // The asset is not archived and the status is deployable
+            if (($this->assetstatus) && ($this->archived == '0')
+                && ($this->assetstatus->status_type == 'deployable'))
             {
                 return true;
 
@@ -1208,7 +1208,7 @@ class Asset extends Depreciable
     public function scopeUndeployable($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->whereNot('status_type', 'deployable');
+            $query->where('status_type', '!=', 'deployable');
         });
     }
 
@@ -1223,7 +1223,7 @@ class Asset extends Depreciable
     public function scopeNotArchived($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->whereNot('status_label', 'archived');
+            $query->where('status_label', '!=', 'archived');
         });
     }
 
@@ -1432,7 +1432,7 @@ class Asset extends Depreciable
         return Company::scopeCompanyables($query->where($table.'.requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
             $query->where(function ($query) {
-                $query->whereNot('status_type', 'archived'); // you definitely can't request something that's archived
+                $query->where('status_type', '!=', 'archived'); // you definitely can't request something that's archived
             }); // we've decided that even though an asset may be 'pending', you can still request it
         });
     }
