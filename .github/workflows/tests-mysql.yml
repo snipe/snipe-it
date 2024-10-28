@@ -77,3 +77,7 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
           DB_USERNAME: root
         run: php artisan test
+
+      - name: Test failure
+        if: ${{ failure() }}
+        run: docker exec "$PROJECT_NAME-php-fpm" cat storage/logs/laravel.log
