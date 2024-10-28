@@ -11,6 +11,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use NotificationChannels\GoogleChat\Card;
 use NotificationChannels\GoogleChat\Enums\Icon;
 use NotificationChannels\GoogleChat\Enums\ImageStyle;
@@ -147,6 +148,18 @@ class CheckoutAssetNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+
+        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
+            return MicrosoftTeamsMessage::create()
+                ->to($this->settings->webhook_endpoint)
+                ->type('success')
+                ->title(trans('mail.Asset_Checkout_Notification'))
+                ->addStartGroupToSection('activityText')
+                ->fact(trans('mail.assigned_to'), $target->present()->name)
+                ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
+                ->fact(trans('mail.Asset_Checkout_Notification') . " by ", $admin->present()->fullName())
+                ->fact(trans('mail.notes'), $note ?: '');
+        }
 
         $message = trans('mail.Asset_Checkout_Notification');
         $details = [

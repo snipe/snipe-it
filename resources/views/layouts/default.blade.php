@@ -279,8 +279,12 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
-                                            @if($snipeSettings->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check'])
-                                            <li class="header alert-warning">{!! $deprecations['ms_teams_deprecated']['message'] !!}</li>
+                                            @if($deprecations)
+                                                @foreach ($deprecations as $key => $deprecation)
+                                                    @if ($deprecation['check'])
+                                                        <li class="header alert-warning">{!! $deprecation['message'] !!}</li>
+                                                    @endif
+                                                @endforeach
                                             @endif
                                             <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
                                             <li>

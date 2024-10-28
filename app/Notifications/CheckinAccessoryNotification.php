@@ -9,6 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use NotificationChannels\GoogleChat\Card;
 use NotificationChannels\GoogleChat\GoogleChatChannel;
 use NotificationChannels\GoogleChat\GoogleChatMessage;
@@ -103,6 +104,7 @@ class CheckinAccessoryNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {}
 
         $message = trans('mail.Accessory_Checkin_Notification');
         $details = [
