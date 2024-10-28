@@ -6,6 +6,7 @@ use App\Models\CustomField;
 use App\Models\ReportTemplate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ReportTemplatesController extends Controller
 {
@@ -13,7 +14,8 @@ class ReportTemplatesController extends Controller
     {
         $this->authorize('reports.view');
 
-        $request->validate((new ReportTemplate)->getRules());
+        // Ignore "options" rules since data does not come in under that key...
+        $request->validate(Arr::except((new ReportTemplate)->getRules(), 'options'));
 
         $report = $request->user()->reportTemplates()->create([
             'name' => $request->get('name'),

@@ -31,6 +31,7 @@ class ReportTemplate extends Model
             'unique:report_templates,name',
         ],
         'options' => [
+            'required',
             'array',
         ],
     ];
