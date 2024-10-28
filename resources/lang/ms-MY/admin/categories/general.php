@@ -8,7 +8,7 @@ return array(
     'clone'                             => 'Klon Kategori',
     'create'  							=> 'Cipta Kategori',
     'edit'                              => 'Kemaskini Kategori',
-    'email_will_be_sent_due_to_global_eula' => '.',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
     'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Kategori EULA',
     'eula_text_help'					=> 'Bidang ini membolehkan anda menyesuaikan EULA anda untuk jenis aset tertentu. Jika anda hanya mempunyai satu EULA untuk semua aset anda, anda boleh menyemak kotak di bawah untuk menggunakan lalai utama.',

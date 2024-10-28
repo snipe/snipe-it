@@ -14,6 +14,8 @@ return [
         'error'   		=> 'crwdns742:0crwdne742:0',
         'success' 		=> 'crwdns743:0crwdne743:0',
         'success_linked' => 'crwdns11882:0crwdne11882:0',
+        'multi_success_linked' => 'crwdns12776:0crwdne12776:0',
+        'partial_failure' => 'crwdns12778:0crwdne12778:0',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'crwdns751:0crwdne751:0',
         'not_available' => 'crwdns1691:0crwdne1691:0',
         'no_assets_selected' => 'crwdns1965:0crwdne1965:0',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'crwdns12768:0crwdne12768:0',
+        'success' => 'crwdns12770:0crwdne12770:0',
     ],
 
     'checkin' => [

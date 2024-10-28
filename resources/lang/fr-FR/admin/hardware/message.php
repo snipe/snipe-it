@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Ce bien n\'a pas été créé, veuillez réessayer. :(',
         'success' 		=> 'Bien créé correctement. :)',
         'success_linked' => 'L\'actif avec le tag :tag a été créé avec succès. <strong><a href=":link" style="color: white;">Cliquez ici pour voir</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
         'not_available' => 'Ce bien n\'est pas disponible pour être sorti!',
         'no_assets_selected' => 'Vous devez sélectionner au moins un élément de la liste',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [
