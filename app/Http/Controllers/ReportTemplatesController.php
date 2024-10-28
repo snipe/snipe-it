@@ -21,6 +21,8 @@ class ReportTemplatesController extends Controller
             'options' => $request->except(['_token', 'name']),
         ]);
 
+        session()->flash('success', trans('admin/reports/message.create.success'));
+
         return redirect()->route('report-templates.show', $report->id);
     }
 
@@ -69,6 +71,8 @@ class ReportTemplatesController extends Controller
         $reportTemplate->options = $request->except(['_token', 'name']);
         $reportTemplate->save();
 
+        session()->flash('success', trans('admin/reports/message.update.success'));
+
         return redirect()->route('report-templates.show', $reportTemplate->id);
     }
 
@@ -86,6 +90,6 @@ class ReportTemplatesController extends Controller
         $reportTemplate->delete();
 
         return redirect()->route('reports/custom')
-            ->with('success', trans('admin/reports/message.delete.delete_confirm'));
+            ->with('success', trans('admin/reports/message.delete.success'));
     }
 }
