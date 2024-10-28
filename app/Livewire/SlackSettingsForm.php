@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Models\Setting;
 use App\Helpers\Helper;
@@ -19,6 +20,7 @@ class SlackSettingsForm extends Component
     public $webhook_placeholder;
     public $webhook_icon;
     public $webhook_selected;
+    public $teams_webhook_deprecated;
     public array $webhook_text;
 
     public Setting $setting;
@@ -235,15 +237,33 @@ class SlackSettingsForm extends Component
         }
     }
     public function msTeamTestWebhook(){
+        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
+        try {
 
-         try {
-             $notification = new TeamsNotification($this->webhook_endpoint);
-             $message = trans('general.webhook_test_msg', ['app' => $this->webhook_name]);
-             $notification->success()->sendMessage($message);
+            if($this->teams_webhook_deprecated){
+                //will use the deprecated webhook format
+                $payload =
+                    [
+                        "@type" => "MessageCard",
+                        "@context" => "http://schema.org/extensions",
+                        "summary" => trans('mail.snipe_webhook_summary'),
+                        "title" => trans('mail.snipe_webhook_test'),
+                        "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
+                    ];
+                $response = Http::withHeaders([
+                    'content-type' => 'applications/json',
+                ])->post($this->webhook_endpoint,
+                    $payload)->throw();
+            }
+             else {
+                 $notification = new TeamsNotification($this->webhook_endpoint);
+                 $message = trans('general.webhook_test_msg', ['app' => $this->webhook_name]);
+                 $notification->success()->sendMessage($message);
 
-             $response = Http::withHeaders([
-                 'content-type' => 'applications/json',
-             ])->post($this->webhook_endpoint);
+                 $response = Http::withHeaders([
+                     'content-type' => 'applications/json',
+                 ])->post($this->webhook_endpoint);
+             }
 
          if(($response->getStatusCode() == 302)||($response->getStatusCode() == 301)){
              return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
