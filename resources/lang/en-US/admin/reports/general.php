@@ -22,4 +22,5 @@ return [
     'generate_template' => 'Generate Template',
     'apply_and_generate' => 'Apply and Generate',
     'template_name' => 'Enter Template Name',
+    'update_template' => 'Update Template',
 ];

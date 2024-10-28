@@ -42,9 +42,9 @@
             <div class="box-header with-border">
                 <h2 class="box-title">
                     @if (request()->routeIs('report-templates.edit'))
-                        Updating: {{ $template->name }}
+                        {{ trans('general.updating_item', ['item' => $template->name]) }}
                     @elseif(request()->routeIs('report-templates.show'))
-                        Saved Template: {{ $template->name }}
+                        {{ $template->name }}
                     @else
                         {{ trans('general.customize_report') }}
                     @endif
@@ -55,7 +55,7 @@
                         href="{{ route('report-templates.edit', $template) }}"
                         class="btn btn-sm btn-warning"
                         data-tooltip="true"
-                        title="Update"
+                        title="{{ trans('admin/reports/general.update_template') }}"
                     >
                         <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                         <span class="sr-only">{{ trans('general.update') }}</span>
