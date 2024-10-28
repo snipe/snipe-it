@@ -9,7 +9,7 @@ use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
 #[Group('custom-reporting')]
-class CreateReportTemplateTest extends TestCase implements TestsPermissionsRequirement
+class StoreReportTemplateTest extends TestCase implements TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
