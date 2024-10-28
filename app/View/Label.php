@@ -124,9 +124,16 @@ class Label implements View
                         $barcode2DType;
                     if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
                         switch ($settings->label2_2d_target) {
-                            case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
+                            case 'ht_tag': 
+                                $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); 
+                                break;
+                            case 'plain_asset_tag': 
+                                $barcode2DTarget = $asset->asset_tag; 
+                                break;
                             case 'hardware_id':
-                            default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
+                            default: 
+                                $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); 
+                                break;
                         }
                         $assetData->put('barcode2d', (object)[
                             'type' => $barcode2DType,
