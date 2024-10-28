@@ -1146,9 +1146,7 @@ class Asset extends Depreciable
     public function scopePending($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->where('deployable', '=', 0)
-                ->where('pending', '=', 1)
-                ->where('archived', '=', 0);
+            $query->where('status_label', '=', 'deployable');
         });
     }
 
@@ -1195,9 +1193,7 @@ class Asset extends Depreciable
     {
         return $query->whereNull('assets.assigned_to')
                    ->whereHas('assetstatus', function ($query) {
-                       $query->where('deployable', '=', 1)
-                             ->where('pending', '=', 0)
-                             ->where('archived', '=', 0);
+                       $query->where('status_type', '=', 'deployable');
                    });
     }
 
@@ -1212,9 +1208,7 @@ class Asset extends Depreciable
     public function scopeUndeployable($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->where('deployable', '=', 0)
-                ->where('pending', '=', 0)
-                ->where('archived', '=', 0);
+            $query->whereNot('status_type', 'deployable');
         });
     }
 
@@ -1229,7 +1223,7 @@ class Asset extends Depreciable
     public function scopeNotArchived($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->where('archived', '=', 0);
+            $query->whereNot('status_label', 'archived');
         });
     }
 
@@ -1406,9 +1400,7 @@ class Asset extends Depreciable
     public function scopeArchived($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->where('deployable', '=', 0)
-                ->where('pending', '=', 0)
-                ->where('archived', '=', 1);
+            $query->where('status_type', '=', 'archived');
         });
     }
 
@@ -1440,9 +1432,8 @@ class Asset extends Depreciable
         return Company::scopeCompanyables($query->where($table.'.requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
             $query->where(function ($query) {
-                $query->where('deployable', '=', 1)
-                      ->where('archived', '=', 0); // you definitely can't request something that's archived
-            })->orWhere('pending', '=', 1); // we've decided that even though an asset may be 'pending', you can still request it
+                $query->whereNot('status_type', 'archived'); // you definitely can't request something that's archived
+            }); // we've decided that even though an asset may be 'pending', you can still request it
         });
     }
 

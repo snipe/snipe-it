@@ -311,7 +311,7 @@ class DepreciationReportPresenter extends Presenter
         if ($this->model->assigned) {
             return 'deployed';
         }
-        return $this->model->assetstatus->getStatuslabelType();
+        return $this->model->assetstatus->status_type;
     }
 
     /**

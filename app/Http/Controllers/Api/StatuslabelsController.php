@@ -49,13 +49,12 @@ class StatuslabelsController extends Controller
         // if a status_type is passed, filter by that
         if ($request->filled('status_type')) {
             if (strtolower($request->input('status_type')) == 'pending') {
-                $statuslabels = $statuslabels->Pending();
-            } elseif (strtolower($request->input('status_type')) == 'archived') {
-                $statuslabels = $statuslabels->Archived();
-            } elseif (strtolower($request->input('status_type')) == 'deployable') {
-                $statuslabels = $statuslabels->Deployable();
+                $statuslabels->where('status_type', '=', 'pending');
+            } elseif (strtolower($request->input('status_type')) == 'archived') $statuslabels->where('status_type', '=', 'archived');
+            elseif (strtolower($request->input('status_type')) == 'deployable') {
+                $statuslabels->where('status_type', '=', 'deployable');
             } elseif (strtolower($request->input('status_type')) == 'undeployable') {
-                $statuslabels = $statuslabels->Undeployable();
+                $statuslabels->whereNot('status_type', 'deployable');
             }
         }
 
@@ -92,20 +91,11 @@ class StatuslabelsController extends Controller
     public function store(Request $request) : JsonResponse
     {
         $this->authorize('create', Statuslabel::class);
-        $request->except('deployable', 'pending', 'archived');
 
-        if (! $request->filled('type')) {
-
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]));
-        }
 
         $statuslabel = new Statuslabel;
         $statuslabel->fill($request->all());
-
-        $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('type'));
-        $statuslabel->deployable = $statusType['deployable'];
-        $statuslabel->pending = $statusType['pending'];
-        $statuslabel->archived = $statusType['archived'];
+        $statuslabel->status_type       =  $request->input('status_type');
         $statuslabel->color             =  $request->input('color');
         $statuslabel->show_in_nav       =  $request->input('show_in_nav', 0);
         $statuslabel->default_label     =  $request->input('default_label', 0);
@@ -146,20 +136,12 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('update', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
-        
-        $request->except('deployable', 'pending', 'archived');
 
-
-        if (! $request->filled('type')) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
-        }
 
         $statuslabel->fill($request->all());
 
         $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('type'));
-        $statuslabel->deployable = $statusType['deployable'];
-        $statuslabel->pending = $statusType['pending'];
-        $statuslabel->archived = $statusType['archived'];
+        $statuslabel->status_type    =  $request->input('status_type');
         $statuslabel->color             =  $request->input('color');
         $statuslabel->show_in_nav       =  $request->input('show_in_nav', 0);
         $statuslabel->default_label     =  $request->input('default_label', 0);
@@ -207,7 +189,7 @@ class StatuslabelsController extends Controller
         $this->authorize('view', Statuslabel::class);
 
         if (Setting::getSettings()->show_archived_in_list == 0 ) {
-            $statuslabels = Statuslabel::withCount('assets')->where('archived','0')->get();
+            $statuslabels = Statuslabel::withCount('assets')->whereNot('status_type','archived')->get();
         } else {
             $statuslabels = Statuslabel::withCount('assets')->get();
         }
@@ -301,7 +283,7 @@ class StatuslabelsController extends Controller
     public function checkIfDeployable($id) : string
     {
         $statuslabel = Statuslabel::findOrFail($id);
-        if ($statuslabel->getStatuslabelType() == 'deployable') {
+        if ($statuslabel->status_type == 'deployable') {
             return '1';
         }
 
@@ -319,22 +301,22 @@ class StatuslabelsController extends Controller
     {
 
         $this->authorize('view.selectlists');
-        $statuslabels = Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc');
+        $statuslabels = Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('status_type', 'desc');
 
         if ($request->filled('search')) {
             $statuslabels = $statuslabels->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 
         if ($request->filled('deployable')) {
-            $statuslabels = $statuslabels->where('deployable', '=', '1');
+            $statuslabels = $statuslabels->where('status_type', '=', 'deployable');
         }
 
         if ($request->filled('pending')) {
-            $statuslabels = $statuslabels->where('pending', '=', '1');
+            $statuslabels = $statuslabels->where('status_type', '=', 'pending');
         }
 
         if ($request->filled('archived')) {
-            $statuslabels = $statuslabels->where('archived', '=', '1');
+            $statuslabels = $statuslabels->where('status_type', '=', 'archived');
         }
 
         $statuslabels = $statuslabels->orderBy('name', 'ASC')->paginate(50);

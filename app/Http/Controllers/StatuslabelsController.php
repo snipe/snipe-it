@@ -71,9 +71,7 @@ class StatuslabelsController extends Controller
         $statusLabel->name = $request->input('name');
         $statusLabel->created_by = auth()->id();
         $statusLabel->notes = $request->input('notes');
-        $statusLabel->deployable = $statusType['deployable'];
-        $statusLabel->pending = $statusType['pending'];
-        $statusLabel->archived = $statusType['archived'];
+        $statusLabel->status_type = $request->input('status_type');
         $statusLabel->color = $request->input('color');
         $statusLabel->show_in_nav = $request->input('show_in_nav', 0);
         $statusLabel->default_label = $request->input('default_label', 0);
@@ -100,7 +98,7 @@ class StatuslabelsController extends Controller
             return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
-        $use_statuslabel_type = $item->getStatuslabelType();
+        $use_statuslabel_type = $item->status_type;
 
         $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')];
 

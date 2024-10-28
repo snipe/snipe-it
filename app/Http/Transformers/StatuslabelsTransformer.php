@@ -24,7 +24,8 @@ class StatuslabelsTransformer
         $array = [
             'id' => (int) $statuslabel->id,
             'name' => e($statuslabel->name),
-            'type' => $statuslabel->getStatuslabelType(),
+            'type' => $statuslabel->status_type, // legacy - to be removed in later versions
+            'status_type' => $statuslabel->status_type,
             'color' => ($statuslabel->color) ? e($statuslabel->color) : null,
             'show_in_nav' => ($statuslabel->show_in_nav == '1') ? true : false,
             'default_label' => ($statuslabel->default_label == '1') ? true : false,

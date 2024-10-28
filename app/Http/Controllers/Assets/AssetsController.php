@@ -352,7 +352,7 @@ class AssetsController extends Controller
         $status = Statuslabel::find($request->input('status_id'));
 
         // This is a non-deployable status label - we should check the asset back in.
-        if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
+        if (($status && $status->status_type != 'deployable') && ($target = $asset->assignedTo)) {
 
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;

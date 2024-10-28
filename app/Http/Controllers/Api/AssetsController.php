@@ -206,18 +206,14 @@ class AssetsController extends Controller
             case 'Pending':
                 $assets->join('status_labels AS status_alias', function ($join) {
                     $join->on('status_alias.id', '=', 'assets.status_id')
-                        ->where('status_alias.deployable', '=', 0)
-                        ->where('status_alias.pending', '=', 1)
-                        ->where('status_alias.archived', '=', 0);
+                        ->where('status_alias.status_type', '=', 'pending');
                 });
                 break;
             case 'RTD':
                 $assets->whereNull('assets.assigned_to')
                     ->join('status_labels AS status_alias', function ($join) {
                         $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.deployable', '=', 1)
-                            ->where('status_alias.pending', '=', 0)
-                            ->where('status_alias.archived', '=', 0);
+                            ->where('status_alias.status_type', '=', 'deployable');
                     });
                 break;
             case 'Undeployable':
@@ -226,18 +222,14 @@ class AssetsController extends Controller
             case 'Archived':
                 $assets->join('status_labels AS status_alias', function ($join) {
                     $join->on('status_alias.id', '=', 'assets.status_id')
-                        ->where('status_alias.deployable', '=', 0)
-                        ->where('status_alias.pending', '=', 0)
-                        ->where('status_alias.archived', '=', 1);
+                        ->where('status_alias.status_type', '=', 'archived');
                 });
                 break;
             case 'Requestable':
                 $assets->where('assets.requestable', '=', 1)
                     ->join('status_labels AS status_alias', function ($join) {
                         $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.deployable', '=', 1)
-                            ->where('status_alias.pending', '=', 0)
-                            ->where('status_alias.archived', '=', 0);
+                            ->where('status_alias.status_type', '=', 'deployable');
                     });
 
                 break;
@@ -256,7 +248,7 @@ class AssetsController extends Controller
                     // terrible workaround for complex-query Laravel bug in fulltext
                     $assets->join('status_labels AS status_alias', function ($join) {
                         $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.archived', '=', 0);
+                            ->where('status_alias.status_type', '=', 'archived');
                     });
 
                     // If there is a status ID, don't take show_archived_in_list into consideration
@@ -574,8 +566,8 @@ class AssetsController extends Controller
             }
 
 
-            if ($asset->assetstatus->getStatuslabelType() == 'pending') {
-                $asset->use_text .= '('.$asset->assetstatus->getStatuslabelType().')';
+            if ($asset->assetstatus->status_label == 'pending') {
+                $asset->use_text .= '('.$asset->assetstatus->status_label.')';
             }
 
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;

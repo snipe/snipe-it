@@ -13,9 +13,23 @@ class AssetIndexTest extends TestCase
 {
     public function testAssetApiIndexReturnsExpectedAssets()
     {
-        Asset::factory()->count(3)->create();
+        $this->withoutExceptionHandling();
 
-        $this->actingAsForApi(User::factory()->superuser()->create())
+        if ($assets = Asset::factory()->count(3)->make()) {
+            //dd($assets);
+
+            foreach ($assets as $asset) {
+                \Log::error($asset->asset_tag);
+                \Log::error($asset->assetstatus->name);
+                \Log::error($asset->assetstatus->status_type);
+            }
+        } else {
+            \Log::error('No created');
+        }
+
+
+
+        $response  = $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(
                 route('api.assets.index', [
                     'sort' => 'name',
@@ -29,6 +43,7 @@ class AssetIndexTest extends TestCase
                 'rows',
             ])
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
+         \Log::error($response);
     }
 
     public function testAssetApiIndexReturnsDisplayUpcomingAuditsDue()

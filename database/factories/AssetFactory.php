@@ -34,7 +34,8 @@ class AssetFactory extends Factory
             'rtd_location_id' => Location::factory(),
             'serial' => $this->faker->uuid(),
             'status_id' => function () {
-                return Statuslabel::where('name', 'Ready to Deploy')->first() ?? Statuslabel::factory()->rtd()->create(['name' => 'Ready to Deploy']);
+                // $status = Statuslabel::factory()->create(); dd($status) ;
+                return Statuslabel::where('status_type', 'deployable')->first() ?? Statuslabel::factory()->create(['name' => 'Ready to Deploy', 'status_type' => 'deployable'])->id;
             },
             'created_by' => User::factory()->superuser(),
             'asset_tag' => $this->faker->unixTime('now'),

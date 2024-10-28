@@ -39,7 +39,7 @@ class AssetMaintenancesTransformer
             'status_label' => ($assetmaintenance->asset->assetstatus) ? [
                 'id' => (int) $assetmaintenance->asset->assetstatus->id,
                 'name'=> e($assetmaintenance->asset->assetstatus->name),
-                'status_type'=> e($assetmaintenance->asset->assetstatus->getStatuslabelType()),
+                'status_type'=> e($assetmaintenance->asset->assetstatus->status_type),
                 'status_meta' => e($assetmaintenance->asset->present()->statusMeta),
             ] : null,
             'company' => (($assetmaintenance->asset) && ($assetmaintenance->asset->company)) ? [

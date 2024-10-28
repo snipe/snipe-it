@@ -40,7 +40,7 @@ class AssetCannotBeCheckedOutToNondeployableStatus implements DataAwareRule, Val
         // Check to see if any of the assign-ish fields are set
         if ((isset($this->data['assigned_to'])) || (isset($this->data['assigned_user'])) || (isset($this->data['assigned_location']))  || (isset($this->data['assigned_asset'])) || (isset($this->data['assigned_type']))) {
 
-            if (($value) && ($label = Statuslabel::find($value)) && ($label->getStatuslabelType()!='deployable')) {
+            if (($value) && ($label = Statuslabel::find($value)) && ($label->status_type!='deployable')) {
                 $fail(trans('admin/hardware/form.asset_not_deployable'));
             }
 

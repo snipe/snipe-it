@@ -23,17 +23,16 @@ class Statuslabel extends SnipeModel
     protected $rules = [
         'name'  => 'required|string|unique_undeleted',
         'notes'   => 'string|nullable',
-        'deployable' => 'required',
-        'pending' => 'required',
-        'archived' => 'required',
+        'status_type' => 'required|in:deployable,pending,archived',
     ];
 
     protected $fillable = [
-        'archived',
-        'deployable',
+        'status_type',
         'name',
         'notes',
-        'pending',
+        'color',
+        'show_in_nav',
+        'default_label',
     ];
 
     use Searchable;
@@ -76,54 +75,6 @@ class Statuslabel extends SnipeModel
      * @since [v1.0]
      * @return string
      */
-    public function getStatuslabelType()
-    {
-        if (($this->pending == '1') && ($this->archived == '0') && ($this->deployable == '0')) {
-            return 'pending';
-        } elseif (($this->pending == '0') && ($this->archived == '1') && ($this->deployable == '0')) {
-            return 'archived';
-        } elseif (($this->pending == '0') && ($this->archived == '0') && ($this->deployable == '0')) {
-            return 'undeployable';
-        }
-
-        return 'deployable';
-    }
-
-    /**
-     * Query builder scope to for pending status types
-     *
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-    public function scopePending()
-    {
-        return $this->where('pending', '=', 1)
-                    ->where('archived', '=', 0)
-                    ->where('deployable', '=', 0);
-    }
-
-    /**
-     * Query builder scope for archived status types
-     *
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-    public function scopeArchived()
-    {
-        return $this->where('pending', '=', 0)
-            ->where('archived', '=', 1)
-            ->where('deployable', '=', 0);
-    }
-
-    /**
-     * Query builder scope for deployable status types
-     *
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-    public function scopeDeployable()
-    {
-        return $this->where('pending', '=', 0)
-            ->where('archived', '=', 0)
-            ->where('deployable', '=', 1);
-    }
 
     /**
      * Query builder scope for undeployable status types
@@ -132,40 +83,10 @@ class Statuslabel extends SnipeModel
      */
     public function scopeUndeployable()
     {
-        return $this->where('pending', '=', 0)
-            ->where('archived', '=', 0)
-            ->where('deployable', '=', 0);
+        return $this->whereNot('status_type', '=', 'deployable');
     }
 
-    /**
-     * Helper function to determine type attributes
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v1.0]
-     * @return string
-     */
-    public static function getStatuslabelTypesForDB($type)
-    {
-        $statustype['pending'] = 0;
-        $statustype['deployable'] = 0;
-        $statustype['archived'] = 0;
 
-        if ($type == 'pending') {
-            $statustype['pending'] = 1;
-            $statustype['deployable'] = 0;
-            $statustype['archived'] = 0;
-        } elseif ($type == 'deployable') {
-            $statustype['pending'] = 0;
-            $statustype['deployable'] = 1;
-            $statustype['archived'] = 0;
-        } elseif ($type == 'archived') {
-            $statustype['pending'] = 0;
-            $statustype['deployable'] = 0;
-            $statustype['archived'] = 1;
-        }
-
-        return $statustype;
-    }
 
     public function scopeOrderByCreatedBy($query, $order)
     {

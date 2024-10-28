@@ -28,9 +28,7 @@ class StatuslabelFactory extends Factory
             'updated_at' => $this->faker->dateTime(),
             'created_by' => User::factory()->superuser(),
             'deleted_at' => null,
-            'deployable' => 0,
-            'pending' => 0,
-            'archived' => 0,
+            'status_type' => 'deployable',
             'notes' => '',
         ];
     }
@@ -40,7 +38,7 @@ class StatuslabelFactory extends Factory
         return $this->state(function () {
             return [
                 'notes' => $this->faker->sentence(),
-                'deployable' => 1,
+                'status_type' => 'deployable',
                 'default_label' => 1,
             ];
         });
@@ -56,7 +54,7 @@ class StatuslabelFactory extends Factory
         return $this->state(function () {
             return [
                 'notes' => $this->faker->sentence(),
-                'pending' => 1,
+                'status_type' => 'pending',
                 'default_label' => 1,
             ];
         });
@@ -67,8 +65,8 @@ class StatuslabelFactory extends Factory
         return $this->state(function () {
             return [
                 'notes' => 'These assets are permanently undeployable',
-                'archived' => 1,
                 'default_label' => 0,
+                'status_type' => 'archived',
             ];
         });
     }
@@ -79,6 +77,7 @@ class StatuslabelFactory extends Factory
             return [
                 'name' => 'Out for Diagnostics',
                 'default_label' => 0,
+                'status_type' => 'pending',
             ];
         });
     }
@@ -89,6 +88,7 @@ class StatuslabelFactory extends Factory
             return [
                 'name'      => 'Out for Repair',
                 'default_label' => 0,
+                'status_type' => 'pending',
             ];
         });
     }
@@ -99,6 +99,7 @@ class StatuslabelFactory extends Factory
             return [
                 'name'      => 'Broken - Not Fixable',
                 'default_label' => 0,
+                'status_type' => 'archived',
             ];
         });
     }
@@ -109,6 +110,7 @@ class StatuslabelFactory extends Factory
             return [
                 'name'      => 'Lost/Stolen',
                 'default_label' => 0,
+                'status_type' => 'archived',
             ];
         });
     }

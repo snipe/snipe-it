@@ -18,8 +18,8 @@ class AssetImporter extends ItemImporter
 
         $this->defaultStatusLabelId = Statuslabel::first()->id;
         
-        if (!is_null(Statuslabel::deployable()->first())) {
-            $this->defaultStatusLabelId = Statuslabel::deployable()->first()->id;
+        if (!is_null(Statuslabel::where('status_type', 'deployable')->first())) {
+            $this->defaultStatusLabelId = Statuslabel::where('status_type', 'deployable')->first()->id;
         }
     }
 

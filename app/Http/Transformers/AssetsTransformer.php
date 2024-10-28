@@ -8,7 +8,6 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class AssetsTransformer
 {
@@ -45,8 +44,8 @@ class AssetsTransformer
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
                 'name'=> e($asset->assetstatus->name),
-                'status_type'=> e($asset->assetstatus->getStatuslabelType()),
-                'status_meta' => e($asset->present()->statusMeta),
+                'status_type'=> e($asset->assetstatus->status_type),
+                'status_meta' => e($asset->assetstatus->status_type),
             ] : null,
             'category' => (($asset->model) && ($asset->model->category)) ? [
                 'id' => (int) $asset->model->category->id,
