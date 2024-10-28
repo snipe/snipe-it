@@ -18,8 +18,6 @@ class EditReportTemplateTest extends TestCase implements TestsPermissionsRequire
 
     public function testCannotLoadEditPageForAnotherUsersReportTemplate()
     {
-        $this->markTestIncomplete('Returns 404...');
-
         $user = User::factory()->canViewReports()->create();
         $reportTemplate = ReportTemplate::factory()->create();
 

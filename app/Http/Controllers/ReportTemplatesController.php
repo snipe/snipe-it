@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomField;
 use App\Models\ReportTemplate;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -47,13 +46,20 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function edit($reportId): View
+    public function edit($reportId)
     {
         $this->authorize('reports.view');
 
+        $reportTemplate = ReportTemplate::find($reportId);
+
+        if (!$reportTemplate) {
+            return redirect()->route('reports/custom')
+                ->with('error', trans('admin/reports/message.no_report_permission'));
+        }
+
         return view('reports/custom', [
             'customfields' => CustomField::get(),
-            'template' => ReportTemplate::findOrFail($reportId),
+            'template' => $reportTemplate,
         ]);
     }
 
