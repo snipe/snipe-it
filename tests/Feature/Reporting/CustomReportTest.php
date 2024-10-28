@@ -4,13 +4,15 @@ namespace Tests\Feature\Reporting;
 
 use App\Models\Asset;
 use App\Models\Company;
+use App\Models\ReportTemplate;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use League\Csv\Reader;
 use PHPUnit\Framework\Assert;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class CustomReportTest extends TestCase
+class CustomReportTest extends TestCase implements TestsPermissionsRequirement
 {
     protected function setUp(): void
     {
@@ -41,6 +43,26 @@ class CustomReportTest extends TestCase
                 return $this;
             }
         );
+    }
+
+    public function testRequiresPermission()
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('reports/custom'))
+            ->assertForbidden();
+    }
+
+    public function testCanLoadCustomReportPage()
+    {
+        $this->actingAs(User::factory()->canViewReports()->create())
+            ->get(route('reports/custom'))
+            ->assertOk()
+            ->assertViewHas([
+                'template' => function (ReportTemplate $template) {
+                    // the view should have an empty report by default
+                    return $template->exists() === false;
+                }
+            ]);
     }
 
     public function testCustomAssetReport()

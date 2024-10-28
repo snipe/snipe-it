@@ -12,14 +12,14 @@ class CreateReportTemplateTest extends TestCase implements TestsPermissionsRequi
     public function testRequiresPermission()
     {
         $this->actingAs(User::factory()->create())
-            ->post(route('report-templates.store'))
+            ->post($this->getRoute())
             ->assertForbidden();
     }
 
     public function testSavingReportTemplateRequiresValidFields()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
-            ->post(route('report-templates.store'), [
+            ->post($this->getRoute(), [
                 'name' => '',
             ])
             ->assertSessionHasErrors('name');
@@ -31,7 +31,7 @@ class CreateReportTemplateTest extends TestCase implements TestsPermissionsRequi
             // start on the custom report page
             ->from(route('reports/custom'))
             ->followingRedirects()
-            ->post(route('report-templates.store'), [
+            ->post($this->getRoute(), [
                 'name' => '',
                 // set some values to ensure they are still present
                 // when returning to the custom report page.
@@ -46,7 +46,7 @@ class CreateReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $user = User::factory()->canViewReports()->create();
 
         $this->actingAs($user)
-            ->post(route('report-templates.store'), [
+            ->post($this->getRoute(), [
                 'name' => 'My Awesome Template',
                 'company' => '1',
                 'by_company_id' => ['1', '2'],
@@ -60,5 +60,10 @@ class CreateReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $this->assertNotNull($template);
         $this->assertEquals('1', $template->options['company']);
         $this->assertEquals(['1', '2'], $template->options['by_company_id']);
+    }
+
+    private function getRoute(): string
+    {
+        return route('report-templates.store');
     }
 }

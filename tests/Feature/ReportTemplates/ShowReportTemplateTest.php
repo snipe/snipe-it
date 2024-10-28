@@ -12,19 +12,8 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
     public function testRequiresPermission()
     {
         $this->actingAs(User::factory()->create())
-            ->get(route('reports/custom'))
+            ->get($this->getRoute(ReportTemplate::factory()->create()))
             ->assertForbidden();
-    }
-
-    public function testCanLoadCustomReportPage()
-    {
-        $this->actingAs(User::factory()->canViewReports()->create())
-            ->get(route('reports/custom'))
-            ->assertOk()
-            ->assertViewHas(['template' => function (ReportTemplate $template) {
-                // the view should have an empty report by default
-                return $template->exists() === false;
-            }]);
     }
 
     public function testCanLoadASavedReportTemplate()
@@ -34,7 +23,7 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
         $user->reportTemplates()->save($reportTemplate);
 
         $this->actingAs($user)
-            ->get(route('report-templates.show', $reportTemplate))
+            ->get($this->getRoute($reportTemplate))
             ->assertOk()
             ->assertViewHas(['template' => function (ReportTemplate $templatePassedToView) use ($reportTemplate) {
                 return $templatePassedToView->is($reportTemplate);
@@ -46,8 +35,13 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
         $reportTemplate = ReportTemplate::factory()->create();
 
         $this->actingAs(User::factory()->canViewReports()->create())
-            ->get(route('report-templates.show', $reportTemplate))
+            ->get($this->getRoute($reportTemplate))
             ->assertSessionHas('error')
             ->assertRedirect(route('reports/custom'));
+    }
+
+    private function getRoute(ReportTemplate $reportTemplate): string
+    {
+        return route('report-templates.show', $reportTemplate);
     }
 }
