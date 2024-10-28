@@ -710,7 +710,7 @@ class Helper
         return $randomString;
     }
     /**
-     * A method to be used to handle deprecations and giving notifications, currently handling MS Teams. more can be added when needed.
+     * A method to be used to handle deprecations notifications, currently handling MS Teams. more can be added when needed.
      *
      *
      * @author [Godfrey Martinez]
