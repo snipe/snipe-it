@@ -14,6 +14,8 @@ return [
         'error'   		=> '자산이 생성되지 않았습니다. 다시 시도해 주세요. :(',
         'success' 		=> '자산이 생성되었습니다. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
         'not_available' => '그 자산은 반출 할 수 없습니다!',
         'no_assets_selected' => '목록에서 자산을 하나 이상 선택해야 합니다.',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

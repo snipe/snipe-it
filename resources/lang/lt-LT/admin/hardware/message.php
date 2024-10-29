@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Turto sukurti nepavyko, bandykite dar kartą.',
         'success' 		=> 'Turtas sukurtas sėkmingai.',
         'success_linked' => 'Turtas su žyma :tag sukurtas sėkmingai. <strong><a href=":link" style="color: white;">Spustelėkite čia, kad peržiūrėtumėte</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.',
         'not_available' => 'Šis turtas negali būti išduodamas!',
         'no_assets_selected' => 'Turite pasirinkti bent vieną turto vienetą iš sąrašo',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Turtas nebuvo išduotas, bandykite dar kartą|Turtas nebuvo išduotas, bandykite dar kartą',
+        'success' => 'Turtas išduotas sėkmingai.|Turtas išduotas sėkmingai.',
     ],
 
     'checkin' => [

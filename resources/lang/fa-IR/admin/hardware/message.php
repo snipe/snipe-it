@@ -15,6 +15,8 @@ return [
         'error'   		=> 'دارایی ساخته نشده است، لطفا دوباره تلاش کنید.',
         'success' 		=> 'دارایی موفقیت ایجاد شده است. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -79,6 +81,11 @@ return [
         'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.',
         'not_available' => 'این دارایی برای پرداخت در دسترس نیست!',
         'no_assets_selected' => 'شما حداقل باید یک دارایی از لیست انتخاب کنید',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

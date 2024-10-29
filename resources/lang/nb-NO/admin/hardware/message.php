@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Eiendelen ble ikke opprettet, prøv igjen :(',
         'success' 		=> 'Eiendelen ble opprettet :)',
         'success_linked' => 'Eiendelen med taggen :tag ble opprettet. <strong><a href=":link" style="color: white;">Klikk her for å vise</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.',
         'not_available' => 'Den eiendelen er ikke tilgjengelig til å sjekkes ut!',
         'no_assets_selected' => 'Du må velge minst én enhet fra listen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

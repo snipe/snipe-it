@@ -6,7 +6,7 @@ return [
     'does_not_exist' 	=> 'El activo no existe.',
     'does_not_exist_var'=> 'Activo con placa :asset_tag no encontrado.',
     'no_tag' 	        => 'No se ha proporcionado ninguna placa de activo.',
-    'does_not_exist_or_not_requestable' => 'Ese activo no existe o no es solicitable.',
+    'does_not_exist_or_not_requestable' => 'Ese activo no existe o no puede ser solicitado.',
     'assoc_users'	 	=> 'Actualmente este activo está asignado a un usuario y no puede ser eliminado. Por favor, primero ingrese el activo y vuelva a intentarlo. ',
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
 
@@ -14,6 +14,8 @@ return [
         'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Activo creado con éxito. :)',
         'success_linked' => 'Activo con placa :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
+        'multi_success_linked' => 'Activo con etiqueta :links fue creado exitosamente.|:count activos fueron creados correctamente. :links.',
+        'partial_failure' => 'No se ha podido crear un activo: Motivo: :failures|No se pudieron crear :count activos. Motivos: :failures',
     ],
 
     'update' => [
@@ -68,7 +70,7 @@ return [
         'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Hubo un problema al eliminar el activo. Por favor, inténtelo de nuevo.',
         'nothing_updated'   => 'Ningún activo se seleccionó, así que nada fue borrado.',
-        'success' 		=> 'El activo fue borrado con éxito.',
+        'success' 		=> 'El activo se ha eliminado correctamente.',
     ],
 
     'checkout' => [
@@ -76,7 +78,12 @@ return [
         'success' 		=> 'Equipo asignado correctamente.',
         'user_does_not_exist' => 'Este usuario no es correcto. Por favor, inténtelo de nuevo.',
         'not_available' => '¡Ese equipo no está disponible para ser asignado!',
-        'no_assets_selected' => 'Debes seleccionar al menos un activo de la lista',
+        'no_assets_selected' => 'Debe seleccionar al menos un elemento de la lista',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'El activo no fue asignado, por favor, intente nuevamente|Los activos no fueron asignados, por favor, intente nuevamente',
+        'success' => 'El activo fue asignado correctamente|Los activos fueron asignados correctamente.',
     ],
 
     'checkin' => [

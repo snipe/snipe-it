@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Imovina, resurs nije kreiran, pokušajte ponovo. :(',
         'success' 		=> 'Imovina, resurs uspešno kreiran. :)',
         'success_linked' => 'Imovina sa oznakom :tag je uspešno napravljena. <strong><a href=":link" style="color: white;">Kliknite ovde za pregled</a></strong>.',
+        'multi_success_linked' => 'Imovina sa oznakom :links je uspešno dodata.|:count imovine je uspešno dodato. :links.',
+        'partial_failure' => 'Imovina nije mogla biti dodata. Razlog: :failures|:count imovine nisu mogle biti dodate. Razlozi: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušajte ponovo.',
         'not_available' => 'That asset is not available for checkout!',
         'no_assets_selected' => 'Morate odabrati barem jednu imovinu s popisa',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Imovina nije zadužena, molim vas pokušajte ponovo|Imovine nisu zadužene, molim vas pokušajte ponovo',
+        'success' => 'Imovina je uspešno zadužena.|Imovine su uspešno zadužene.',
     ],
 
     'checkin' => [

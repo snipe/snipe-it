@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Nepavyko paieška LDAP serveryje. Patikrinkite LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>LDAP serverio klaida:',
         'ldap_could_not_get_entries' => 'Nepavyko gauti įrašų iš LDAP serverio. Patikrinkite LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>LDAP serverio klaida:',
         'password_ldap' => 'Šios paskyros slaptažodį tvarko LDAP / Active Directory. Prašome susisiekti su savo IT skyriumi, kad pakeistumėte slaptažodį. ',
-        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
+        'multi_company_items_assigned' => 'Šiam naudotojui yra priskirti daiktai, priklausantys kitai įmonei. Paimkite juos arba pakeiskite jų įmonę.'
     ),
 
     'deletefile' => array(
