@@ -43,7 +43,7 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
             ->delete($this->getRoute($reportTemplate))
             ->assertRedirect(route('reports/custom'));
 
-        $this->assertSoftDeleted($reportTemplate);
+        $this->assertModelMissing($reportTemplate);
     }
 
     private function getRoute(ReportTemplate $reportTemplate): string
