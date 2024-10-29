@@ -130,6 +130,9 @@ class Label implements View
                             case 'plain_asset_tag': 
                                 $barcode2DTarget = $asset->asset_tag; 
                                 break;
+                            case 'plain_serial_number': 
+                                $barcode2DTarget = $asset->serial; 
+                                break;
                             case 'hardware_id':
                             default: 
                                 $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); 
