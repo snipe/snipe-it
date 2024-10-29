@@ -594,7 +594,6 @@
                     id="saved_report_select"
                     class="form-control select2"
                     data-placeholder="{{ trans('admin/reports/general.select_a_template') }}"
-                    data-allow-clear="true"
                 >
                     <option></option>
                     @foreach($report_templates as $savedTemplate)
@@ -711,9 +710,6 @@
       $('#saved_report_select')
           .on('select2:select', function (event) {
               window.location.href = '/reports/templates/' + event.params.data.id;
-          })
-          .on('select2:clearing', function (event) {
-              window.location.href = '{{ route('reports/custom') }}';
           });
 
       $('#dataConfirmModal').on('show.bs.modal', function (event) {
