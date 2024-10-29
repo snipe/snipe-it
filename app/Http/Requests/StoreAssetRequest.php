@@ -37,12 +37,12 @@ class StoreAssetRequest extends ImageUploadRequest
         $this->parseLastAuditDate();
 
         // maybe do something like this?
-        if (!is_array($this->asset_tag)) {
-            $this->asset_tag = [$this->asset_tag];
-        }
-        if (!is_array($this->serial)) {
-            $this->serial = [$this->serial];
-        }
+        //if (!is_array($this->asset_tag)) {
+        //    $this->asset_tag = [$this->asset_tag];
+        //}
+        //if (!is_array($this->serial)) {
+        //    $this->serial = [$this->serial];
+        //}
 
         $this->merge([
             'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Assets;
 
 use App\Actions\Assets\StoreAssetAction;
 use App\Events\CheckoutableCheckedIn;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
@@ -101,16 +102,50 @@ class AssetsController extends Controller
     public function store(StoreAssetRequest $request): RedirectResponse
     {
         try {
-            DB::beginTransaction();
-            foreach ($request->input('asset_tags') as $key => $tag) {
-                StoreAssetAction::run($request->validated(), $key);
+
+            $asset_tags = $request->input('asset_tags');
+            $serials = $request->input('serials');
+            $custom_fields = $request->collect()->filter(function ($value, $key) {
+                return starts_with($key, '_snipeit_');
+            });
+            //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
+            foreach ($asset_tags as $key => $asset_tag) {
+                StoreAssetAction::run(
+                    $request->validated('model_id'),
+                    $request->validated('status_id'),
+                    $request->validated('name'),
+                    $serials[$key],
+                    $request->validated('company_id'),
+                    $asset_tag,
+                    $request->validated('order_number'),
+                    $request->validated('notes'),
+                    $request->validated('user_id'),
+                    $request->validated('warranty_months'),
+                    $request->validated('purchase_cost'),
+                    $request->validated('asset_eol_date'),
+                    $request->validated('purchase_date'),
+                    $request->validated('assigned_to'),
+                    $request->validated('supplier_id'),
+                    $request->validated('requestable'),
+                    $request->validated('rtd_location_id'),
+                    $request->validated('location_id'),
+                    $request->validated('files'),
+                    $request->validated('byod'),
+                    $request->validated('assigned_user'),
+                    $request->validated('assigned_asset'),
+                    $request->validated('assigned_location'),
+                    $custom_fields,
+                    $request, //this is just for the handleImages method...
+                );
             }
-            DB::commit();
+            //});
+            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.create.success'));
+        } catch (CheckoutNotAllowed $e) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
         } catch (\Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return redirect()->back()->withInput()->withErrors($asset);
         }
-        // There are a lot more rules to add here but prevents
-        // errors around `asset_tags` not being present below.
+
 
         // so do we want to foreach over the action, or convert the api's asset tags to an array as well
         // so we can just easily add it to the action?
@@ -167,6 +202,7 @@ class AssetsController extends Controller
             }
 
             // Create the image (if one was chosen.)
+            //this one's interesting...
             if ($request->has('image')) {
                 $asset = $request->handleImages($asset);
             }
@@ -221,11 +257,8 @@ class AssetsController extends Controller
 
 
         if ($success) {
-
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
-               
-      
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());

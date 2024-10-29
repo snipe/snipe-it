@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Assets\StoreAssetAction;
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
@@ -594,6 +595,41 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetRequest $request): JsonResponse
     {
+        $asset_tags = $request->input('asset_tags');
+        $serials = $request->input('serials');
+        $custom_fields = $request->collect()->filter(function ($value, $key) {
+            return starts_with($key, '_snipeit_');
+        });
+
+        StoreAssetAction::run(
+            $request->validated('model_id'),
+            $request->validated('status_id'),
+            $request->validated('name'),
+            $serials[$key],
+            $request->validated('company_id'),
+            $asset_tag,
+            $request->validated('order_number'),
+            $request->validated('notes'),
+            $request->validated('user_id'),
+            $request->validated('warranty_months'),
+            $request->validated('purchase_cost'),
+            $request->validated('asset_eol_date'),
+            $request->validated('purchase_date'),
+            $request->validated('assigned_to'),
+            $request->validated('supplier_id'),
+            $request->validated('requestable'),
+            $request->validated('rtd_location_id'),
+            $request->validated('location_id'),
+            $request->validated('files'),
+            $request->validated('byod'),
+            $request->validated('assigned_user'),
+            $request->validated('assigned_asset'),
+            $request->validated('assigned_location'),
+            $custom_fields,
+            $request,
+        );
+
+
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
