@@ -207,7 +207,7 @@
                                     {{ Form::select('label2_2d_target', [
                                         'hardware_id'       =>  '/hardware/{id} ('.trans('admin/settings/general.default').')', 
                                         'ht_tag'            =>  '/ht/{asset_tag}', 
-                                        'plain_asset_tag'   =>  trans('admin/settings/general.asset_tag'),
+                                        'plain_asset_tag'   =>  trans('general.asset_tag'),
                                         ], old('label2_2d_target', $setting->label2_2d_target), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_target' ]) }}
                                     {!! $errors->first('label2_2d_target', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
