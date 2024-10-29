@@ -83,6 +83,7 @@ class ReportTemplateTest extends TestCase
         $this->assertEquals('', $template->textValue('non_existent_key'));
 
         $this->assertEquals('', (new ReportTemplate)->textValue('is_a_text_field'));
+        $this->assertEquals('my fallback', (new ReportTemplate)->textValue('non_existent_key', 'my fallback'));
     }
 
     public function testParsingRadioValue()

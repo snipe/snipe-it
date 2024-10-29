@@ -175,17 +175,17 @@ class ReportTemplate extends Model
     /**
      * Get the value of a text field for the given field name.
      *
-     * @param string $fieldName
+     * @param  string  $fieldName
+     * @param  string|null  $fallbackValue
      *
      * @return string
-     *
      */
-    public function textValue(string $fieldName): string
+    public function textValue(string $fieldName, string|null $fallbackValue = ''): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.
         if (is_null($this->id)) {
-            return '';
+            return (string) $fallbackValue;
         }
 
         // Return the field's value if it exists

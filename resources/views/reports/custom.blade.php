@@ -395,7 +395,7 @@
             <div class="form-group">
               <label for="by_order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
               <div class="col-md-7">
-                <input class="form-control" type="text" name="by_order_number" value="{{ $template->textValue('by_order_number') }}" aria-label="by_order_number">
+                <input class="form-control" type="text" name="by_order_number" value="{{ $template->textValue('by_order_number', old('by_order_number')) }}" aria-label="by_order_number">
               </div>
             </div>
 
@@ -403,9 +403,9 @@
             <div class="form-group purchase-range{{ ($errors->has('purchase_start') || $errors->has('purchase_end')) ? ' has-error' : '' }}">
               <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }}</label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
-                  <input type="text" class="form-control" name="purchase_start" aria-label="purchase_start" value="{{ $template->textValue('purchase_start') }}">
+                  <input type="text" class="form-control" name="purchase_start" aria-label="purchase_start" value="{{ $template->textValue('purchase_start', old('purchase_start')) }}">
                   <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                  <input type="text" class="form-control" name="purchase_end" aria-label="purchase_end" value="{{ $template->textValue('purchase_end') }}">
+                  <input type="text" class="form-control" name="purchase_end" aria-label="purchase_end" value="{{ $template->textValue('purchase_end', old('purchase_end')) }}">
               </div>
 
                 @if ($errors->has('purchase_start') || $errors->has('purchase_end'))
@@ -421,9 +421,9 @@
             <div class="form-group purchase-range{{ ($errors->has('created_start') || $errors->has('created_end')) ? ' has-error' : '' }}">
               <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} </label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
-                  <input type="text" class="form-control" name="created_start" aria-label="created_start" value="{{ $template->textValue('created_start') }}">
+                  <input type="text" class="form-control" name="created_start" aria-label="created_start" value="{{ $template->textValue('created_start', old('created_start')) }}">
                   <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                  <input type="text" class="form-control" name="created_end" aria-label="created_end" value="{{ $template->textValue('created_end') }}">
+                  <input type="text" class="form-control" name="created_end" aria-label="created_end" value="{{ $template->textValue('created_end', old('created_end')) }}">
               </div>
 
                 @if ($errors->has('created_start') || $errors->has('created_end'))
@@ -438,9 +438,9 @@
           <div class="form-group checkout-range{{ ($errors->has('checkout_date_start') || $errors->has('checkout_date_end')) ? ' has-error' : '' }}">
               <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} </label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
-                  <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start" value="{{ $template->textValue('checkout_date_start') }}">
+                  <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start" value="{{ $template->textValue('checkout_date_start', old('checkout_date_start')) }}">
                   <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                  <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end" value="{{ $template->textValue('checkout_date_end') }}">
+                  <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end" value="{{ $template->textValue('checkout_date_end', old('checkout_date_end')) }}">
               </div>
 
               @if ($errors->has('checkout_date_start') || $errors->has('checkout_date_end'))
@@ -456,9 +456,9 @@
           <div class="form-group checkin-range{{ ($errors->has('checkin_date_start') || $errors->has('checkin_date_end')) ? ' has-error' : '' }}">
               <label for="checkin_date" class="col-md-3 control-label">{{ trans('admin/hardware/table.last_checkin_date') }}</label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
-                  <input type="text" class="form-control" name="checkin_date_start" aria-label="checkin_date_start" value="{{ $template->textValue('checkin_date_start') }}">
+                  <input type="text" class="form-control" name="checkin_date_start" aria-label="checkin_date_start" value="{{ $template->textValue('checkin_date_start', old('checkin_date_start')) }}">
                   <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                  <input type="text" class="form-control" name="checkin_date_end" aria-label="checkin_date_end" value="{{ $template->textValue('checkin_date_end') }}">
+                  <input type="text" class="form-control" name="checkin_date_end" aria-label="checkin_date_end" value="{{ $template->textValue('checkin_date_end', old('checkin_date_end')) }}">
               </div>
 
               @if ($errors->has('checkin_date_start') || $errors->has('checkin_date_end'))
@@ -473,9 +473,9 @@
             <div class="form-group expected_checkin-range{{ ($errors->has('expected_checkin_start') || $errors->has('expected_checkin_end')) ? ' has-error' : '' }}">
               <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
               <div class="input-daterange input-group col-md-7" id="datepicker">
-                  <input type="text" class="form-control" name="expected_checkin_start" aria-label="expected_checkin_start" value="{{ $template->textValue('expected_checkin_start') }}">
+                  <input type="text" class="form-control" name="expected_checkin_start" aria-label="expected_checkin_start" value="{{ $template->textValue('expected_checkin_start', old('expected_checkin_start')) }}">
                   <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                  <input type="text" class="form-control" name="expected_checkin_end" aria-label="expected_checkin_end" value="{{ $template->textValue('expected_checkin_end') }}">
+                  <input type="text" class="form-control" name="expected_checkin_end" aria-label="expected_checkin_end" value="{{ $template->textValue('expected_checkin_end', old('expected_checkin_end')) }}">
               </div>
 
                 @if ($errors->has('expected_checkin_start') || $errors->has('expected_checkin_end'))
@@ -491,9 +491,9 @@
               <div class="form-group asset_eol_date-range {{ ($errors->has('asset_eol_date_start') || $errors->has('asset_eol_date_end')) ? ' has-error' : '' }}">
                   <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
                   <div class="input-daterange input-group col-md-7" id="datepicker">
-                      <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start" value="{{ $template->textValue('asset_eol_date_start') }}">
+                      <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start" value="{{ $template->textValue('asset_eol_date_start', old('asset_eol_date_start')) }}">
                       <span class="input-group-addon">to</span>
-                      <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end" value="{{ $template->textValue('asset_eol_date_end') }}">
+                      <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end" value="{{ $template->textValue('asset_eol_date_end', old('asset_eol_date_end')) }}">
                   </div>
 
                   @if ($errors->has('asset_eol_date_start') || $errors->has('asset_eol_date_end'))
@@ -508,9 +508,9 @@
               <div class="form-group last_audit-range{{ ($errors->has('last_audit_start') || $errors->has('last_audit_end')) ? ' has-error' : '' }}">
                   <label for="last_audit_start" class="col-md-3 control-label">{{ trans('general.last_audit') }}</label>
                   <div class="input-daterange input-group col-md-7" id="datepicker">
-                      <input type="text" class="form-control" name="last_audit_start" aria-label="last_audit_start" value="{{ $template->textValue('last_audit_start') }}">
+                      <input type="text" class="form-control" name="last_audit_start" aria-label="last_audit_start" value="{{ $template->textValue('last_audit_start', old('last_audit_start')) }}">
                       <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                      <input type="text" class="form-control" name="last_audit_end" aria-label="last_audit_end" value="{{ $template->textValue('last_audit_end') }}">
+                      <input type="text" class="form-control" name="last_audit_end" aria-label="last_audit_end" value="{{ $template->textValue('last_audit_end', old('last_audit_end')) }}">
                   </div>
 
                   @if ($errors->has('last_audit_start') || $errors->has('last_audit_end'))
@@ -525,9 +525,9 @@
               <div class="form-group next_audit-range{{ ($errors->has('next_audit_start') || $errors->has('next_audit_end')) ? ' has-error' : '' }}">
                   <label for="next_audit_start" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
                   <div class="input-daterange input-group col-md-7" id="datepicker">
-                      <input type="text" class="form-control" name="next_audit_start" aria-label="next_audit_start" value="{{ $template->textValue('next_audit_start') }}">
+                      <input type="text" class="form-control" name="next_audit_start" aria-label="next_audit_start" value="{{ $template->textValue('next_audit_start', old('next_audit_start')) }}">
                       <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
-                      <input type="text" class="form-control" name="next_audit_end" aria-label="next_audit_end" value="{{ $template->textValue('next_audit_end') }}">
+                      <input type="text" class="form-control" name="next_audit_end" aria-label="next_audit_end" value="{{ $template->textValue('next_audit_end', old('next_audit_end')) }}">
                   </div>
 
                   @if ($errors->has('next_audit_start') || $errors->has('next_audit_end'))
