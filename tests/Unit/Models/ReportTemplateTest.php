@@ -225,14 +225,4 @@ class ReportTemplateTest extends TestCase
             $templateWithModelIdsInArray->selectValue('array_of_model_ids', Department::class)
         );
     }
-
-    public function testOldValuesStillWorkAfterTheseChanges()
-    {
-        $this->markTestIncomplete();
-
-        // Another marker that won't actually be a test case:
-        // We need to make sure that any behavior involving using "old" input.
-        // I explicitly removed the old()s from the "deleted_assets" radio buttons.
-        // The "x-selects" partials still include them, but I haven't tested them yet.
-    }
 }
