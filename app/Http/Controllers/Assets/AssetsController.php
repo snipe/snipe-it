@@ -8,7 +8,7 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
-use App\Http\Requests\StoreAssetRequest;
+use App\Http\Requests\Assets\StoreAssetRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
@@ -107,6 +107,7 @@ class AssetsController extends Controller
             $custom_fields = $request->collect()->filter(function ($value, $key) {
                 return starts_with($key, '_snipeit_');
             });
+            
             //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
             foreach ($asset_tags as $key => $asset_tag) {
                 $asset = StoreAssetAction::run(

@@ -2,7 +2,6 @@
 
 namespace App\Actions\Assets;
 
-use App\Actions\BaseAction;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -16,7 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\MessageBag;
 
-class StoreAssetAction extends BaseAction
+class StoreAssetAction
 {
     /**
      * @throws CheckoutNotAllowed
@@ -46,7 +45,7 @@ class StoreAssetAction extends BaseAction
         $assigned_asset = null,
         $assigned_location = null,
         $custom_fields = null,
-        $request = null, //temp for handleImages
+        $request = null, //temp for handleImages - i'd like to see that moved to a helper or something - or maybe just invoked at the extended request level so that it doesn't need to be done in the action?
         $next_audit_date = null,
     )
     {

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Assets;
 
+use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\Traits\MayContainCustomFields;
 use App\Models\Asset;
 use App\Models\Setting;
