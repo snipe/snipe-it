@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Osama\LaravelTeamsNotification\TeamsNotification;
 
 class CheckoutableListener
 {
@@ -80,11 +81,16 @@ class CheckoutableListener
                 Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
             }
         }
-
 //                 Send Webhook notification
                 if ($this->shouldSendWebhookNotification()) {
-                    Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckoutNotification($event, $acceptance));
+                    if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                        $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
+                        $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                        $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                    } else {
+                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                            ->notify($this->getCheckoutNotification($event, $acceptance));
+                    }
                 }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout notification: " . $e->getMessage());

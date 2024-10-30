@@ -717,7 +717,7 @@ class Helper
      * @since [v7.0.14]
      * @return array
      */
-    public static function deprecationCheck(){
+    public static function deprecationCheck()  : array {
         // The check and message that the user is still using the deprecated version
         $deprecations = [
             'ms_teams_deprecated' => array(
