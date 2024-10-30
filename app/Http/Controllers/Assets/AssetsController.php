@@ -102,7 +102,6 @@ class AssetsController extends Controller
     public function store(StoreAssetRequest $request): RedirectResponse
     {
         try {
-
             $asset_tags = $request->input('asset_tags');
             $serials = $request->input('serials');
             $custom_fields = $request->collect()->filter(function ($value, $key) {
@@ -110,7 +109,7 @@ class AssetsController extends Controller
             });
             //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
             foreach ($asset_tags as $key => $asset_tag) {
-                StoreAssetAction::run(
+                $asset = StoreAssetAction::run(
                     $request->validated('model_id'),
                     $request->validated('status_id'),
                     $request->validated('name'),
@@ -139,129 +138,16 @@ class AssetsController extends Controller
                 );
             }
             //});
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.create.success'));
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
         } catch (CheckoutNotAllowed $e) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors($asset);
+            return redirect()->back()->with('error', trans('admin/hardware/message.create.error'));
         }
-
-
-        // so do we want to foreach over the action, or convert the api's asset tags to an array as well
-        // so we can just easily add it to the action?
         // (obviously then this would move up to the request)
         $this->validate($request, ['asset_tags' => ['required', 'array']]);
-
-        // Handle asset tags - there could be one, or potentially many.
-        // This is only necessary on create, not update, since bulk editing is handled
-        // differently
-        $asset_tags = $request->input('asset_tags');
-
-        $settings = Setting::getSettings();
-
-        $success = false;
-        $serials = $request->input('serials');
-
-        for ($a = 1; $a <= count($asset_tags); $a++) {
-            $asset = new Asset();
-            $asset->model()->associate(AssetModel::find($request->input('model_id')));
-            $asset->name = $request->input('name');
-
-            // Check for a corresponding serial
-            if (($serials) && (array_key_exists($a, $serials))) {
-                $asset->serial = $serials[$a];
-            }
-
-            if (($asset_tags) && (array_key_exists($a, $asset_tags))) {
-                $asset->asset_tag = $asset_tags[$a];
-            }
-
-            $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
-            $asset->model_id                = $request->input('model_id');
-            $asset->order_number            = $request->input('order_number');
-            $asset->notes                   = $request->input('notes');
-            $asset->created_by              = auth()->id();
-            $asset->status_id               = request('status_id');
-            $asset->warranty_months         = request('warranty_months', null);
-            $asset->purchase_cost           = request('purchase_cost');
-            $asset->purchase_date           = request('purchase_date', null);
-            $asset->asset_eol_date          = request('asset_eol_date', null);
-            $asset->assigned_to             = request('assigned_to', null);
-            $asset->supplier_id             = request('supplier_id', null);
-            $asset->requestable             = request('requestable', 0);
-            $asset->rtd_location_id         = request('rtd_location_id', null);
-            $asset->byod                    = request('byod', 0);
-
-            if (! empty($settings->audit_interval)) {
-                $asset->next_audit_date = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
-            }
-
-            // Set location_id to rtd_location_id ONLY if the asset isn't being checked out
-            if (!request('assigned_user') && !request('assigned_asset') && !request('assigned_location')) {
-                $asset->location_id = $request->input('rtd_location_id', null);
-            }
-
-            // Create the image (if one was chosen.)
-            //this one's interesting...
-            if ($request->has('image')) {
-                $asset = $request->handleImages($asset);
-            }
-
-            // Update custom fields in the database.
-            // Validation for these fields is handled through the AssetRequest form request
-            $model = AssetModel::find($request->get('model_id'));
-
-            if (($model) && ($model->fieldset)) {
-                foreach ($model->fieldset->fields as $field) {
-                    if ($field->field_encrypted == '1') {
-                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                            if (is_array($request->input($field->db_column))) {
-                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                            } else {
-                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                            }
-                        }
-                    } else {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
-                        }
-                    }
-                }
-            }
-
-            // Validate the asset before saving
-            if ($asset->isValid() && $asset->save()) {
-                if (request('assigned_user')) {
-                    $target = User::find(request('assigned_user'));
-                    $location = $target->location_id;
-                } elseif (request('assigned_asset')) {
-                    $target = Asset::find(request('assigned_asset'));
-                    $location = $target->location_id;
-                } elseif (request('assigned_location')) {
-                    $target = Location::find(request('assigned_location'));
-                    $location = $target->id;
-                }
-
-                if (isset($target)) {
-                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
-                }
-
-                $success = true;
-                
-            }
-        }
-
-        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
-
-
-        if ($success) {
-            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
-                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
-        }
-
-        return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
 

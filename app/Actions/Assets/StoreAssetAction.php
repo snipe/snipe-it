@@ -13,10 +13,14 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\MessageBag;
 
 class StoreAssetAction extends BaseAction
 {
+    /**
+     * @throws CheckoutNotAllowed
+     */
     public static function run(
         $model_id,//gonna make these two optional for now... we can either make them required here or use the spread operator when calling...
         $status_id,//
@@ -80,13 +84,19 @@ class StoreAssetAction extends BaseAction
             $asset->location_id = $rtd_location_id;
         }
 
+        //api only
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
+        }
+
         if ($request->has('image')) {
             $asset = $request->handleImages($asset);
         }
 
         $model = AssetModel::find($model_id);
 
-        if (($model) && ($model->fieldset)) {
+        // added instanceof, was only in api before
+        if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('assets.view.encrypted_custom_fields')) {
@@ -106,9 +116,46 @@ class StoreAssetAction extends BaseAction
             }
         }
 
+        // this is the api's custom fieldset logic, is there a real difference???????
+        //if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
+        //    foreach ($model->fieldset->fields as $field) {
+        //
+        //        // Set the field value based on what was sent in the request
+        //        $field_val = $request->input($field->db_column, null);
+        //
+        //        // If input value is null, use custom field's default value
+        //        if ($field_val == null) {
+        //            Log::debug('Field value for '.$field->db_column.' is null');
+        //            $field_val = $field->defaultValue($request->get('model_id'));
+        //            Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
+        //        }
+        //
+        //        // if the field is set to encrypted, make sure we encrypt the value
+        //        if ($field->field_encrypted == '1') {
+        //            Log::debug('This model field is encrypted in this fieldset.');
+        //
+        //            if (Gate::allows('assets.view.encrypted_custom_fields')) {
+        //
+        //                // If input value is null, use custom field's default value
+        //                if (($field_val == null) && ($request->has('model_id') != '')) {
+        //                    $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
+        //                } else {
+        //                    $field_val = Crypt::encrypt($request->input($field->db_column));
+        //                }
+        //            }
+        //        }
+        //        if ($field->element == 'checkbox') {
+        //            if (is_array($field_val)) {
+        //                $field_val = implode(',', $field_val);
+        //            }
+        //        }
+        //    }
+
+
         if ($asset->isValid() && $asset->save()) {
             if (request('assigned_user')) {
                 $target = User::find(request('assigned_user'));
+                // the api doesn't have these location-y bits - good reason?
                 $location = $target->location_id;
             } elseif (request('assigned_asset')) {
                 $target = Asset::find(request('assigned_asset'));
@@ -121,6 +168,12 @@ class StoreAssetAction extends BaseAction
             if (isset($target)) {
                 $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
             }
+
+            //this was in api and not gui
+            if ($asset->image) {
+                $asset->image = $asset->getImageUrl();
+            }
+
         }
 
         if ($asset->save()) {
