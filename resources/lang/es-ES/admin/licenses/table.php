@@ -2,7 +2,7 @@
 
 return array(
 
-    'assigned_to'   	=> 'Asignada a',
+    'assigned_to'   	=> 'Asignado a',
     'checkout'   		=> 'Entrada/Salida',
     'deleted_at'        => 'Eliminado el',
     'id'      			=> 'ID',
@@ -12,7 +12,7 @@ return array(
     'purchased'   		=> 'Comprado',
     'seats'   			=> 'Total de licencias',
     'hardware'   		=> 'Hardware',
-    'serial'   			=> 'N. Serie',
-    'title'      		=> 'Categoría de equipo',
+    'serial'   			=> 'Número de serie',
+    'title'      		=> 'Licencia',
 
 );

@@ -173,6 +173,7 @@ return [
     'ulid' => 'Il campo :attribute deve essere un ULID valido.',
     'uuid' => 'Il campo :attribute deve essere un UUID valido.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -194,7 +195,7 @@ return [
         'custom_field_not_found_on_model' => 'Sembra che questo campo esista, ma non è disponibile tra i campi di questo Modello di Bene.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => ':attribute deve essere in formato AAAA-MM-GG',
         'last_audit_date.date_format'   =>  ':attribute deve essere in formato AAAA-MM-GG hh:mm:ss',
@@ -206,6 +207,13 @@ return [
         'checkboxes'           => ':attribute contiene opzioni non valide.',
         'radio_buttons'        => ':attribute non è valido.',
         'invalid_value_in_field' => 'Valore non valido incluso in questo campo',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (grafìa mista) non va bene. Dovresti piuttosto usare <code>samaccountname</code> (minuscolo).'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => 'Probabilmente <code>uid=samaccountname</code> non è un filtro di l\'autenticazione valido. Forse è meglio <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'Questo valore probabilmente non dovrebbe stare tra parentesi.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

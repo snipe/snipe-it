@@ -388,5 +388,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'チェックイン期限の警告',
     'due_checkin_days_help' => 'アセットの期待されるチェックインの何日前に、「チェックイン期限」ページにリストされるべきですか?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

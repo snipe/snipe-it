@@ -62,7 +62,7 @@ return [
     'login' => 'Prisijungti:',
     'login_first_admin' => 'Prisijunkite prie savo naujojo „Snipe-IT“ diegimo naudodami žemiau pateiktus prisijungimo duomenis:',
     'low_inventory_alert' => 'Yra :count daiktas, kurio atsargos yra mažesnės (arba greitais bus mažesnės) nei numatytos minimalios atsargos.|Yra :count daiktai (-ų), kurių atsargos yra mažesnės (arba greitais bus mažesnės) nei numatytos minimalios atsargos.',
-    'min_QTY' => 'Min. kiekis',
+    'min_QTY' => 'Mažiausias kiekis',
     'name' => 'Pavadinimas',
     'new_item_checked' => 'Jums buvo priskirtas naujas daiktas, išsami informacija pateikta žemiau.',
     'notes' => 'Pastabos',

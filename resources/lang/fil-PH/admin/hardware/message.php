@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Ang asset ay hindi naisagawa, mangyaring subukang muli. :(',
         'success' 		=> 'Ang asset ay matagumpay na naisagawa. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.',
         'not_available' => 'Ang asset ay hindi pwedeng mai-checkout!',
         'no_assets_selected' => 'Dapat kang pumili ng kahit isang asset mula sa listahan',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

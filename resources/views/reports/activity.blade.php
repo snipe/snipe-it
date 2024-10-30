@@ -64,7 +64,7 @@
                             <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">
                                 {{ trans('general.file_name') }}
                             </th>
-                            <th class="col-sm-1" data-field="type" data-formatter="itemTypeFormatter">
+                            <th class="col-sm-1" data-field="item_type" data-searchable="true" data-formatter="itemTypeFormatter">
                                 {{ trans('general.type') }}
                             </th>
                             <th class="col-sm-3" data-field="item.serial" data-visible="false">

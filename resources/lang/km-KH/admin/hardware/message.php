@@ -14,6 +14,8 @@ return [
         'error'   		=> 'ទ្រព្យសកម្មមិនត្រូវបានបង្កើតទេ សូមព្យាយាមម្តងទៀត។ :(',
         'success' 		=> 'ទ្រព្យសកម្មត្រូវបានបង្កើតដោយជោគជ័យ។ :)',
         'success_linked' => 'ទ្រព្យសកម្មជាមួយស្លាក៖ ស្លាកត្រូវបានបង្កើតដោយជោគជ័យ។ <strong><a href=":link" style="color: white;">ចុចទីនេះដើម្បីមើល</a></strong>។',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'អ្នកប្រើប្រាស់នោះមិនត្រឹមត្រូវទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
         'not_available' => 'ទ្រព្យ​សកម្ម​នោះ​មិន​អាច​ checkout បាន​ទេ!',
         'no_assets_selected' => 'អ្នកត្រូវតែជ្រើសរើសយ៉ាងហោចណាស់ទ្រព្យសកម្មមួយពីបញ្ជី',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [
