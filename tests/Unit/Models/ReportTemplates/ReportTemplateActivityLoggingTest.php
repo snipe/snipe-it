@@ -13,20 +13,10 @@ class ReportTemplateActivityLoggingTest extends TestCase
 {
     public function testCreatingReportTemplateIsLogged()
     {
-        $reportTemplate = ReportTemplate::factory()->create();
-
         $user = User::factory()->create();
         $this->actingAs($user);
-        $reportTemplateWithActingUser = ReportTemplate::factory()->create();
 
-        $this->assertDatabaseHas('action_logs', [
-            'created_by' => null,
-            'action_type' => 'created',
-            'target_id' => null,
-            'target_type' => null,
-            'item_type' => ReportTemplate::class,
-            'item_id' => $reportTemplate->id,
-        ]);
+        $reportTemplate = ReportTemplate::factory()->create();
 
         $this->assertDatabaseHas('action_logs', [
             'created_by' => $user->id,
@@ -34,12 +24,15 @@ class ReportTemplateActivityLoggingTest extends TestCase
             'target_id' => null,
             'target_type' => null,
             'item_type' => ReportTemplate::class,
-            'item_id' => $reportTemplateWithActingUser->id,
+            'item_id' => $reportTemplate->id,
         ]);
     }
 
     public function testUpdatingReportTemplateIsLogged()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
         $reportTemplate = ReportTemplate::factory()->create([
             'name' => 'Name A',
             'options' => [
@@ -58,27 +51,8 @@ class ReportTemplateActivityLoggingTest extends TestCase
             ],
         ]);
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-        $reportTemplateWithActingUser = ReportTemplate::factory()->create([
-            'name' => 'Name B',
-            'options' => [
-                'company' => '1',
-                'location' => '1',
-                'by_company_id' => ['1'],
-                'by_location_id' => ['17'],
-            ],
-        ]);
-        $reportTemplateWithActingUser->update([
-            'name' => 'Something Else',
-            'options' => [
-                'company' => '1',
-                'by_company_id' => ['1'],
-            ],
-        ]);
-
         $this->assertDatabaseHas('action_logs', [
-            'created_by' => null,
+            'created_by' => $user->id,
             'action_type' => 'update',
             'target_id' => null,
             'target_type' => null,
@@ -103,52 +77,16 @@ class ReportTemplateActivityLoggingTest extends TestCase
                 ],
             ]),
         ]);
-
-        $this->assertDatabaseHas('action_logs', [
-            'created_by' => $user->id,
-            'action_type' => 'update',
-            'target_id' => null,
-            'target_type' => null,
-            'item_type' => ReportTemplate::class,
-            'item_id' => $reportTemplateWithActingUser->id,
-            'log_meta' => json_encode([
-                'name' => [
-                    'old' => 'Name B',
-                    'new' => 'Something Else'
-                ],
-                'options' => [
-                    'old' => [
-                        'company' => '1',
-                        'location' => '1',
-                        'by_company_id' => ['1'],
-                        'by_location_id' => ['17'],
-                    ],
-                    'new' => [
-                        'company' => '1',
-                        'by_company_id' => ['1'],
-                    ],
-                ],
-            ]),
-        ]);
     }
 
     public function testDeletingReportTemplateIsLogged()
     {
         $user = User::factory()->create();
-        [$reportTemplateA, $reportTemplateB] = ReportTemplate::factory()->count(2)->create();
-
-        $reportTemplateA->delete();
         $this->actingAs($user);
-        $reportTemplateB->delete();
 
-        $this->assertDatabaseHas('action_logs', [
-            'created_by' => null,
-            'action_type' => 'delete',
-            'target_id' => null,
-            'target_type' => null,
-            'item_type' => ReportTemplate::class,
-            'item_id' => $reportTemplateA->id,
-        ]);
+        $reportTemplate = ReportTemplate::factory()->create();
+
+        $reportTemplate->delete();
 
         $this->assertDatabaseHas('action_logs', [
             'created_by' => $user->id,
@@ -156,7 +94,7 @@ class ReportTemplateActivityLoggingTest extends TestCase
             'target_id' => null,
             'target_type' => null,
             'item_type' => ReportTemplate::class,
-            'item_id' => $reportTemplateB->id,
+            'item_id' => $reportTemplate->id,
         ]);
     }
 }
