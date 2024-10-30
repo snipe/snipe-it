@@ -163,6 +163,8 @@ Route::group(
 
     });
 
+Route::delete('/hardware/{asset}', [AssetsController::class, 'destroy'])->name('hardware.destroy');
+
 Route::resource('hardware', 
         AssetsController::class, 
         [
@@ -172,6 +174,7 @@ Route::resource('hardware',
                     'show' => 'view',
                 ],
         ],
+            'except' => ['destroy'],
 ]);
 
 Route::get('ht/{any?}',

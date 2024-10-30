@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Assets\DestroyAssetAction;
 use App\Actions\Assets\StoreAssetAction;
 use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\CheckoutNotAllowed;
@@ -735,30 +736,18 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v4.0]
      */
-    public function destroy($id) : JsonResponse
+    public function destroy(Asset $asset): JsonResponse
     {
-        $this->authorize('delete', Asset::class);
-
-        if ($asset = Asset::find($id)) {
-            $this->authorize('delete', $asset);
-
-            if ($asset->assignedTo) {
-
-                $target = $asset->assignedTo;
-                $checkin_at = date('Y-m-d H:i:s');
-                $originalValues = $asset->getRawOriginal();
-                event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on delete', $checkin_at, $originalValues));
-                DB::table('assets')
-                    ->where('id', $asset->id)
-                    ->update(['assigned_to' => null]);
-            }
-
-            $asset->delete();
-
+        //this is probably wrong
+        //$this->authorize('delete', Asset::class);
+        $this->authorize('delete', $asset);
+        try {
+            DestroyAssetAction::run($asset);
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
+        } catch (\Exception $e) {
+            report($e);
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'something went wrong: '));
         }
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
     

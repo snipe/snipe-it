@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Actions\Assets\DestroyAssetAction;
 use App\Actions\Assets\StoreAssetAction;
 use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Assets\DestroyAssetRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\Assets\StoreAssetRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -107,7 +110,7 @@ class AssetsController extends Controller
             $custom_fields = $request->collect()->filter(function ($value, $key) {
                 return starts_with($key, '_snipeit_');
             });
-            
+
             //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
             foreach ($asset_tags as $key => $asset_tag) {
                 $asset = StoreAssetAction::run(
@@ -360,39 +363,16 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function destroy(Request $request, $assetId) : RedirectResponse
+    public function destroy(Asset $asset): RedirectResponse
     {
-        // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
-
         $this->authorize('delete', $asset);
-
-        if ($asset->assignedTo) {
-
-            $target = $asset->assignedTo;
-            $checkin_at = date('Y-m-d H:i:s');
-            $originalValues = $asset->getRawOriginal();
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on delete', $checkin_at, $originalValues));
-            DB::table('assets')
-                ->where('id', $asset->id)
-                ->update(['assigned_to' => null]);
+        try {
+            DestroyAssetAction::run($asset);
+            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
+        } catch (\Exception $e) {
+            report($e);
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
-
-
-        if ($asset->image) {
-            try {
-                Storage::disk('public')->delete('assets'.'/'.$asset->image);
-            } catch (\Exception $e) {
-                Log::debug($e);
-            }
-        }
-
-        $asset->delete();
-
-        return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
     }
 
     /**

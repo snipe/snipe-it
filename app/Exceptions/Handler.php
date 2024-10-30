@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
@@ -72,6 +73,14 @@ class Handler extends ExceptionHandler
         if ($e instanceof JsonException) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid JSON'), 422);
         }
+
+        //if ($e instanceof ModelNotFoundException) {
+        //    $class = get_class($e);
+        //    match($class) {
+        //
+        //    };
+        //    return redirect()->route()->with('error', trans('general.model_not_found', ['model' => $e]));
+        //}
 
         // Handle SCIM exceptions
         if ($e instanceof SCIMException) {
